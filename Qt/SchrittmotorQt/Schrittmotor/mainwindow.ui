@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>721</width>
+    <height>691</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Plottersteuerung</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/images/plotter.png</normaloff>:/images/plotter.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QPushButton" name="buttonOK">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>590</y>
+      <width>98</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="CPlotterDC" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>0</y>
+      <width>421</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>Zeigt die Plotgrafik an</string>
+    </property>
+    <property name="statusTip">
+     <string comment="testdraw" extracomment="zeichnet dinge"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonPlot">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>300</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Startet das Plotten der Zeichnung</string>
+    </property>
+    <property name="statusTip">
+     <string extracomment="Plottet die Grafik"/>
+    </property>
+    <property name="text">
+     <string>Plotten</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonDrill">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Startet das Bohren der Platine</string>
+    </property>
+    <property name="text">
+     <string>Bohren</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonForward">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>230</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Papier einziehen</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/forward.png</normaloff>:/images/forward.png</iconset>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonCalibratePen">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>330</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Startet die automatische Kalibrierung des Stiftes</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="text">
+     <string>Stift kalibrieren</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonStop">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>330</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Not Stopp für alle Motoren</string>
+    </property>
+    <property name="text">
+     <string>Not Stopp</string>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/stop.png</normaloff>:/images/stop.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonBackward">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>290</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Papier ausfahren</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/backward.png</normaloff>:/images/backward.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonLeft">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>260</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Stift nach links</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/left.png</normaloff>:/images/left.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonRight">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>260</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Stift nach rechts</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/right.png</normaloff>:/images/right.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSetUpEndPos">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>230</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Obere Endpositon des Stiftes</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/upper_end_pos.png</normaloff>:/images/upper_end_pos.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSetDownEndPos">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>260</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Zeichenposition des Stiftes</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/lower_end_pos.png</normaloff>:/images/lower_end_pos.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSetDrillEndPos">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>290</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Untere Endposition des Bohrers</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/drill_end_pos.png</normaloff>:/images/drill_end_pos.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonPenUp">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>230</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Stift anheben</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonPenDown">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>290</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Stift absenken</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinHorizontalDelay">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>90</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Endverzögerung</string>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinVerticalDelay">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>120</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Endverzögerung</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinDrillDelay">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>150</y>
+      <width>91</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Bohrverzögerung</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinManualDelayHorizontal">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>180</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Horizontale Verzögerung manuell</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Horizontal:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Vertikal:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bohren:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Manuell:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>261</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Schrittmotorverzögerung</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSort">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>590</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Sortieren / Optimieren der Zeichenbefehle</string>
+    </property>
+    <property name="text">
+     <string>Sortieren</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomIn">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>0</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Ansicht vergrößern</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/ZoomIn.png</normaloff>:/images/ZoomIn.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomOut">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>30</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Ansicht verkleinern</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/ZoomOut.png</normaloff>:/images/ZoomOut.png</iconset>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkUsePath">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>201</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zeichenpfade benutzen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSetPosition">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>260</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Start position setzen</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/set_pos.png</normaloff>:/images/set_pos.png</iconset>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_unit5">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>90</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> [ms]</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_unit4">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>120</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> [ms]</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_unit3">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>150</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> [ms]</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_unit1">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>180</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> [ms]</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="checkSavePosition">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>260</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Stiftposition speichern oder anfahren</string>
+    </property>
+    <property name="text">
+     <string>S/P</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinHorizontalStartDelay">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>90</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Anfangsverzögerung</string>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinVerticalStartDelay">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>120</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Anfangsverzögerung</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSetAsStartPosition">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>261</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Als Startposition setzen</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkIsDrillPoint">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>460</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Selektierten Bohrpunkt anzeigen, setzen oder löschen</string>
+    </property>
+    <property name="text">
+     <string>Bohrpunkt</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonClearAllDrillPoints">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>261</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Alle Bohrpunkte setzen / löschen</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEditRotation">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>0</y>
+      <width>41</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Drehung nach dem Laden:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_unit2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>0</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>°</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spinManualDelayVertical">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>180</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Vertikale Verzögerung manuell</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkSimulate">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Bohren und Plotten nur simulieren</string>
+    </property>
+    <property name="text">
+     <string>Nur simulieren</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectPreviousCmd">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>460</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Voriges Zeichenelement wählen</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/left.png</normaloff>:/images/left.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonSelectNextCmd">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>460</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Nächstes Zeichenelement wählen</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/right.png</normaloff>:/images/right.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonDisplayAllDrawCommands">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>261</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Alle Zeichenelemente anzeigen</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkAutoDrillpoints">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>460</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Bohrpunkt beim Lesen automatisch ermitteln</string>
+    </property>
+    <property name="text">
+     <string>automatisch</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="labelCommandInfo">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>487</y>
+      <width>281</width>
+      <height>101</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>721</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPlottersteuerung">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="actionLoadFile"/>
+    <addaction name="actionSaveFile"/>
+    <addaction name="actionFileExit"/>
+   </widget>
+   <widget class="QMenu" name="menuOptionen">
+    <property name="title">
+     <string>Einstellungen</string>
+    </property>
+    <addaction name="actionOptionsSettings"/>
+    <addaction name="actionPortTest"/>
+    <addaction name="actionG_Code_Dialog"/>
+   </widget>
+   <addaction name="menuPlottersteuerung"/>
+   <addaction name="menuOptionen"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionLoadFile">
+   <property name="text">
+    <string>Datei laden..</string>
+   </property>
+   <property name="toolTip">
+    <string>PostScript Datei laden</string>
+   </property>
+   <property name="statusTip">
+    <string>Lädt eine Postscriptdatei</string>
+   </property>
+  </action>
+  <action name="actionOptionsSettings">
+   <property name="text">
+    <string>Erweitert...</string>
+   </property>
+  </action>
+  <action name="actionFileExit">
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="actionSaveFile">
+   <property name="text">
+    <string>Datei speichern...</string>
+   </property>
+   <property name="statusTip">
+    <string>Lädt eine HPGL Datei</string>
+   </property>
+  </action>
+  <action name="actionPortTest">
+   <property name="text">
+    <string>Port test...</string>
+   </property>
+  </action>
+  <action name="actionG_Code_Dialog">
+   <property name="text">
+    <string>Code Test Dialog...</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CPlotterDC</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">PlotterDC.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>spinHorizontalDelay</tabstop>
+  <tabstop>spinVerticalDelay</tabstop>
+  <tabstop>spinDrillDelay</tabstop>
+  <tabstop>spinManualDelayHorizontal</tabstop>
+  <tabstop>buttonSort</tabstop>
+  <tabstop>buttonDrill</tabstop>
+  <tabstop>buttonPlot</tabstop>
+  <tabstop>buttonCalibratePen</tabstop>
+  <tabstop>buttonForward</tabstop>
+  <tabstop>buttonRight</tabstop>
+  <tabstop>buttonBackward</tabstop>
+  <tabstop>buttonLeft</tabstop>
+  <tabstop>buttonSetUpEndPos</tabstop>
+  <tabstop>buttonSetDownEndPos</tabstop>
+  <tabstop>buttonSetDrillEndPos</tabstop>
+  <tabstop>buttonPenUp</tabstop>
+  <tabstop>buttonPenDown</tabstop>
+  <tabstop>buttonStop</tabstop>
+  <tabstop>zoomIn</tabstop>
+  <tabstop>zoomOut</tabstop>
+  <tabstop>buttonOK</tabstop>
+  <tabstop>graphicsView</tabstop>
+ </tabstops>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>triggerQAction(QAction*)</slot>
+ </slots>
+</ui>
