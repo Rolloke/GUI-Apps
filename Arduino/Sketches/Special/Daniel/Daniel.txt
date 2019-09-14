@@ -1,0 +1,228 @@
+#include <SPI.h>
+#include <texttools.h>
+
+
+// Pin    Nano    Mega  Farbe
+// SCK    13      52    gelb
+// MISO   12      50    nc 
+// MOSI   11      51    orange
+// SS     10      53    braun
+
+#define IOEXP_NOOP        0
+
+#define DEBUG_OUT 1
+
+#ifdef DEBUG_OUT
+bool      gDebugOut = false;
+#define DEBUG_PRINT(X) if (gDebugOut) Serial.print(X);
+#define DEBUG_PRINTLN(X) if (gDebugOut) Serial.println(X);
+#define SERIAL_INIT(X) Serial.begin(X);
+#else
+#define DEBUG_PRINT //
+#define DEBUG_PRINTLN //
+#define SERIAL_INIT //
+#endif
+
+
+int g_ms_per_byte = 2;
+const char* gKeywords[] = 
+{
+  "PIN",      // 0
+};
+
+enum eKeys
+{
+  Pin     = 0,//  0
+  LastKey
+};
+
+void setup() 
+{
+  pinMode(SS, OUTPUT);
+  digitalWrite(SS, HIGH);
+  // put your setup code here, to run once:
+  SPI.setDataMode(SPI_MODE0);
+  SPI.setClockDivider(SPI_CLOCK_DIV8);
+  SPI.setBitOrder(MSBFIRST);
+  SPI.begin();
+  SERIAL_INIT(115200);
+  initMAX7301();
+  
+}
+
+void loop()
+{
+#ifdef DEBUG_OUT
+  String fSentence = read_from_serial();
+  check_sentence(fSentence);
+#else
+
+#endif
+}
+
+
+
+void write32(uint16_t aD1_data, uint16_t aD2_data)
+{
+  digitalWrite(SCK, LOW);
+  digitalWrite(SS, LOW);
+  delay(10);
+  SPI.transfer16(aD1_data);
+  SPI.transfer16(aD2_data);
+  delay(10);
+  digitalWrite(SS, HIGH);
+  digitalWrite(SCK, LOW);
+}
+
+
+void writeCommand(uint8_t aCmd, uint8_t aData, uint8_t aDevice)
+{
+  uint16_t fProg = (aCmd << 8) | aData;
+  if (aDevice == 2)
+  {
+    DEBUG_PRINT("D2: ADDR:");
+    DEBUG_PRINT(aCmd);
+    DEBUG_PRINT(" :");
+    DEBUG_PRINTLN(aData);
+    write32(fProg, IOEXP_NOOP);
+  }
+  else
+  {
+    DEBUG_PRINT("D1: ADDR:");
+    DEBUG_PRINT(aCmd);
+    DEBUG_PRINT(" :");
+    DEBUG_PRINTLN(aData);
+    write32(IOEXP_NOOP, fProg);
+  }
+
+}
+
+void initMAX7301()
+{
+  const uint16_t IOExp_Initdata[] =
+  {  
+    0x0000,   // D1 NOOP (zu Synchronisationszwecken nach Reset)
+    0x0000,   // D2 NOOP (zu Synchronisationszwecken nach Reset)
+    0x0401,   // D1 Disable Shutdown Mode
+    0x0401,   // D2 Disable Shutdown Mode
+    0x0955,   // D1 Config P[ 7.. 4] = 0b0101.0101
+    0x0955,   // D2 Config P[ 7.. 4] = 0b1111.1111
+    0x0A55,   // D1 Config P[11.. 8] = 0b1001.0101
+    0x0A55,   // D2 Config P[11.. 8] = 0b1111.1111
+    0x0B55,   // D1 Config P[15..12] = 0b1010.1010
+    0x0B55,   // D2 Config P[15..12] = 0b1111.1111
+    0x0C55,   // D1 Config P[19..16] = 0b0110.1110
+    0x0C55,   // D2 Config P[19..16] = 0b0111.1101
+    0x0D55,   // D1 Config P[23..20] = 0b1001.0101
+    0x0D55,   // D2 Config P[23..20] = 0b0101.0101
+    0x0E55,   // D1 Config P[27..24] = 0b1010.1010
+    0x0E55,   // D2 Config P[27..24] = 0b0110.0111
+    0x0F55,   // D1 Config P[31..28] = 0b0110.1010
+    0x0F55,   // D2 Config P[31..28] = 0b0101.1101
+    0x44FF,   // D1 Write  P[11.. 4] = 0b0110.0110
+    0x44FF,   // D2 Write  P[11.. 4] = 0b0000.0000
+    0x4CFF,   // D1 Write  P[19..12] = 0b0000.0000
+    0x4CFF,   // D2 Write  P[19..12] = 0b0001.0000
+    0x54FF,   // D1 Write  P[27..20] = 0b0000.0000
+    0x54FF,   // D2 Write  P[27..20] = 0b0000.0000
+    0x5CFF,   // D1 Write  P[31..28] = 0b0000.0000
+    0x5CFF    // D2 Write  P[31..28] = 0b0000.0000
+  };
+  int Size = sizeof(IOExp_Initdata) / sizeof(uint16_t);
+  for (int i=0; i<Size; i+=2)
+  {
+    write32(IOExp_Initdata[i], IOExp_Initdata[i+1]);
+  }
+}
+
+#ifdef DEBUG_OUT
+const char* read_from_serial()
+{
+  static const uint16_t gBufferLen = 128;
+  static char gBuffer[gBufferLen];
+  static int  gBufferPos = 0;
+  static int  gLastTime = 0;
+  unsigned int fNow = millis();
+  while (Serial.available())
+  {
+    char fChar = Serial.read();
+    gBuffer[gBufferPos++] = fChar;
+    gLastTime = fNow;
+    switch (fChar)
+    {
+      case '\n':
+      gBuffer[gBufferPos-1] = 0;
+      gBufferPos = 0;
+      return &gBuffer[0];
+    }
+  }
+  if (gBufferPos > 0 && (fNow - gLastTime) > g_ms_per_byte)
+  {
+      gBuffer[gBufferPos] = 0;
+      gBufferPos = 0;
+      return &gBuffer[0];
+  }
+  return "";
+}
+
+void check_sentence(String& fString)
+{
+  // post sentence like "pin:8:0:1" to switch on pin 8 on device 1
+  // post sentence like "pin:8:1:2" to switch off pin 8 on device 2
+  if (fString.length())
+  {
+    fString.toUpperCase();
+
+    DEBUG_PRINT("received: ");
+    DEBUG_PRINTLN(fString);
+
+    const int fMaxArray = 5;
+    int fKey, fNo, fPos = 0, fStartPos = 0;
+    int fKeys[fMaxArray] = { 0 };
+    int fNumbers[fMaxArray] = { 0 };
+    
+    for (int fIndex =0; fPos != -1 && fIndex < fMaxArray; fIndex++)
+    {
+      fPos = fString.indexOf(':', fStartPos);
+
+      DEBUG_PRINT("StartPos ");
+      DEBUG_PRINT(fStartPos);
+      DEBUG_PRINT(", Pos ");
+      DEBUG_PRINT(fPos);
+
+      if (fPos > 0)
+      {
+        fKey = findKey(fString.substring(fStartPos, fPos), gKeywords, fNo);
+        fStartPos = fPos+1;
+      }
+      else 
+      {
+        fKey = findKey(fString.substring(fStartPos), gKeywords, fNo);
+      }
+      fKeys[fIndex]    = fKey;
+      fNumbers[fIndex] = fNo;
+
+      DEBUG_PRINT(", Index ");
+      DEBUG_PRINT(fIndex);
+      DEBUG_PRINT(", Key ");
+      DEBUG_PRINT(fKeys[fIndex]);
+      DEBUG_PRINT(", No ");
+      DEBUG_PRINTLN(fNumbers[fIndex]);
+    }
+    switch (fKeys[0])
+    {
+      case Pin:
+      {
+        int fAddress = fNumbers[1] + 0x24;
+        int fOn      = fNumbers[2];
+        int fDevice  = fNumbers[3];
+        writeCommand(fAddress, fOn, fDevice);
+      }
+      break;
+    }
+  }
+}
+#endif
+
+
+

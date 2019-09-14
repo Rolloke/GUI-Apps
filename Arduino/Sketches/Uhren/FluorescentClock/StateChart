@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmi.version="1.2" timestamp="2018-05-01T20:17:31" xmlns:UML="http://schema.omg.org/spec/UML/1.3" verified="false">
+ <XMI.header>
+  <XMI.documentation>
+   <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
+   <XMI.exporterVersion>1.6.9</XMI.exporterVersion>
+   <XMI.exporterEncoding>UnicodeUTF8</XMI.exporterEncoding>
+  </XMI.documentation>
+  <XMI.metamodel href="UML.xml" xmi.version="1.3" xmi.name="UML"/>
+ </XMI.header>
+ <XMI.content>
+  <UML:Model xmi.id="m1" name="UML Model" isAbstract="false" isRoot="false" isSpecification="false" isLeaf="false">
+   <UML:Namespace.ownedElement>
+    <UML:Stereotype xmi.id="folder" name="folder" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+    <UML:Stereotype xmi.id="datatype" name="datatype" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+    <UML:Model xmi.id="Logical View" name="Logical View" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+     <UML:Namespace.ownedElement>
+      <UML:Package xmi.id="Datatypes" name="Datatypes" stereotype="folder" isAbstract="false" namespace="Logical View" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+       <UML:Namespace.ownedElement>
+        <UML:DataType xmi.id="n6Db0W0fLGI3" name="int" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="r5w11bTxTBKs" name="char" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="oThOPDFCHRnI" name="bool" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="xlvJ1BMtGHsI" name="float" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="qJDKVYCJzrgP" name="double" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="2vZKKNcI6XZ8" name="short" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="jtzxArFz9RJe" name="long" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="zTvwIbLKXtep" name="unsigned int" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="GE7KkgSTYRQg" name="unsigned short" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="HefQ5w42Nxyf" name="unsigned long" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+        <UML:DataType xmi.id="ZIy4BatPp1jZ" name="string" stereotype="datatype" isAbstract="false" namespace="Datatypes" isRoot="false" isSpecification="false" isLeaf="false" visibility="public"/>
+       </UML:Namespace.ownedElement>
+      </UML:Package>
+     </UML:Namespace.ownedElement>
+     <XMI.extension xmi.extender="umbrello">
+      <diagrams>
+       <diagram showattribassocs="1" textcolor="#000000" snapgrid="0" name="class diagram" showatts="1" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" canvaswidth="0" showopsig="1" snapcsgrid="0" linewidth="0" showpubliconly="0" zoom="100" canvasheight="0" backgroundcolor="#ffffff" documentation="" xmi.id="wukPOf9payYr" fillcolor="#ffff00" localid="-1" showattsig="1" griddotcolor="#d3d3d3" showgrid="0" showstereotype="1" snapx="25" type="1" showscope="1" showops="1" showpackage="1" isopen="0" linecolor="#ff0000" snapy="25">
+        <widgets/>
+        <messages/>
+        <associations/>
+       </diagram>
+       <diagram showattribassocs="1" textcolor="#000000" snapgrid="0" name="ClockSettings" showatts="1" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" canvaswidth="1874.16" showopsig="1" snapcsgrid="0" linewidth="0" showpubliconly="0" zoom="114,9999999999999" canvasheight="1475.86" backgroundcolor="#ffffff" documentation="" xmi.id="fC0DbOss2XI5" fillcolor="#ffff00" localid="-1" showattsig="1" griddotcolor="#d3d3d3" showgrid="0" showstereotype="1" snapx="25" type="5" showscope="1" showops="1" showpackage="1" isopen="1" linecolor="#ff0000" snapy="25">
+        <widgets>
+         <statewidget height="10" textcolor="#000000" y="-458" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="State" linewidth="0" x="-1083" isinstance="0" documentation="" xmi.id="1mwqlfNPpNaR" fillcolor="#ffff00" statetype="0" localid="UK7pG4VpMRtX" width="10" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-400" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="Display Time" linewidth="0" x="-1014" isinstance="0" documentation="" xmi.id="zkxLBqsBbo1M" fillcolor="#ffff00" statetype="1" localid="mSJm0aqSsvH8" width="97" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-271" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="Display Date" linewidth="0" x="-1016" isinstance="0" documentation="" xmi.id="a5CS0SZ0AWJK" fillcolor="#ffff00" statetype="1" localid="SNlHkKiUm0Fm" width="96" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="38" textcolor="#000000" y="-387.949" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Time" linewidth="0" x="-673.773" isinstance="0" documentation="" xmi.id="ts7jqnJ68LAU" fillcolor="#ffff00" statetype="1" localid="RwJcQcujmPdj" width="156" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-305" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Alarm" linewidth="0" x="-680" isinstance="0" documentation="" xmi.id="GHbspZwzQitf" fillcolor="#ffff00" statetype="1" localid="W99eSK75HW1E" width="75" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-226" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Alarm Mode" linewidth="0" x="-696" isinstance="0" documentation="" xmi.id="tXfd66puc40c" fillcolor="#ffff00" statetype="1" localid="T2Grl9WpeJAu" width="116" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-156" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Alarm Day" linewidth="0" x="-692" isinstance="0" documentation="" xmi.id="VzW8Gf29ChmG" fillcolor="#ffff00" statetype="1" localid="JJqpCy8dyOUh" width="105" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-85" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Alarm Melody" linewidth="0" x="-704" isinstance="0" documentation="" xmi.id="hqGgCjLhispw" fillcolor="#ffff00" statetype="1" localid="lZBLe9vvSlkd" width="128" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-21" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Timer" linewidth="0" x="-679" isinstance="0" documentation="" xmi.id="IUujDeMtSaXe" fillcolor="#ffff00" statetype="1" localid="Xq5jVq0FN9Yz" width="74" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-380" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Date" linewidth="0" x="-443.478" isinstance="0" documentation="" xmi.id="WjBgGkpXXdpE" fillcolor="#ffff00" statetype="1" localid="Gxuv8Yi7tatY" width="154" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+         <statewidget height="26" textcolor="#000000" y="-369.565" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" usesdiagramusefillcolor="0" statename="set Year" linewidth="0" x="-220" isinstance="0" documentation="" xmi.id="rMKkuBJOvS29" fillcolor="#ffff00" statetype="1" localid="0ftWVCQl7KeD" width="66" showstereotype="1" usesdiagramfillcolor="0" linecolor="#ff0000">
+          <Activities/>
+         </statewidget>
+        </widgets>
+        <messages/>
+        <associations>
+         <assocwidget widgetaid="1mwqlfNPpNaR" textcolor="none" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="240" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="none" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="zkxLBqsBbo1M" totalcounta="2" usesdiagramfillcolor="63" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-448" startx="-1073"/>
+           <endpoint endy="-400" endx="-1014"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget widgetaid="zkxLBqsBbo1M" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-374" startx="-992"/>
+           <endpoint endy="-271" endx="-992"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-343" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-1126" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="IM44MHpwMzNL" fillcolor="none" localid="LCVuyUEOryga" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="zkxLBqsBbo1M" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="ts7jqnJ68LAU" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-374" startx="-917"/>
+           <endpoint endy="-374" endx="-673.773"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-391" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-882" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="AsowFPf9Flq3" fillcolor="none" localid="dzPxzkGOeZy4" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="a5CS0SZ0AWJK" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="zkxLBqsBbo1M" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-271" startx="-956.5"/>
+           <endpoint endy="-374" endx="-956.5"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-356.818" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-977.94" text="Button Mode released" posttext="" isinstance="0" xmi.id="UjHVYZciiZYP" fillcolor="none" localid="O3KVnRdW7a82" width="140" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="ts7jqnJ68LAU" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="GHbspZwzQitf" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-349.949" startx="-635.49"/>
+           <endpoint endy="-305" endx="-635.49"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-340.935" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-633.043" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="qWF62GKGWt8J" fillcolor="none" localid="6XmLGcPmlYRC" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="GHbspZwzQitf" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="tXfd66puc40c" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-301.85" startx="-638"/>
+           <endpoint endy="-226" endx="-638"/>
+           <point x="-638" y="-301.85"/>
+           <point x="-638" y="-227.15"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-268" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-634" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="nveA4CAKe43q" fillcolor="none" localid="HsKzi9tFxzxR" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="tXfd66puc40c" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="VzW8Gf29ChmG" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-200" startx="-639"/>
+           <endpoint endy="-156" endx="-639"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-188.5" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-634.5" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="D6493zaouEzy" fillcolor="none" localid="hNj9yGmF66Dp" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="VzW8Gf29ChmG" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="hqGgCjLhispw" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-130" startx="-639"/>
+           <endpoint endy="-85" endx="-639"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-120.719" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-633.707" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="oirum2hz7k8A" fillcolor="none" localid="O7H19Kroiawe" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="hqGgCjLhispw" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="IUujDeMtSaXe" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Polyline">
+           <startpoint starty="-59" startx="-639"/>
+           <endpoint endy="-21" endx="-639"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-53.5" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-639" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="A9xshrUVZLNL" fillcolor="none" localid="jizeuwaH1rI8" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="GHbspZwzQitf" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-298.505" startx="-680"/>
+           <endpoint endy="-271" endx="-920"/>
+           <point x="-682.009" y="-298.505"/>
+           <point x="-880.151" y="-304.726"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-283.926" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-821.567" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="319KZKLX5reQ" fillcolor="none" localid="xvcdS90q9snT" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="tXfd66puc40c" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-214.443" startx="-696"/>
+           <endpoint endy="-245" endx="-920"/>
+           <point x="-834.422" y="-212.575"/>
+           <point x="-912.525" y="-238.777"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-212.575" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-834.422" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="VdheTS6WTFo3" fillcolor="none" localid="YjFt7Yn2ROdr" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="VzW8Gf29ChmG" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-144.423" startx="-692.628"/>
+           <endpoint endy="-245" endx="-976.402"/>
+           <point x="-904.921" y="-149.046"/>
+           <point x="-976.402" y="-190.109"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-146.573" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-829.449" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="pA0EYb61Eneh" fillcolor="none" localid="a8adzC3VtIPy" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="hqGgCjLhispw" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-72.2605" startx="-704"/>
+           <endpoint endy="-245" endx="-987.804"/>
+           <point x="-836.944" y="-72.2605"/>
+           <point x="-987.804" y="-143.633"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-72.2605" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-836.944" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="SDdLU0JHAHVh" fillcolor="none" localid="GkBhz0iX8IA7" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="IUujDeMtSaXe" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="5" startx="-679"/>
+           <endpoint endy="-245" endx="-1000.69"/>
+           <point x="-933.248" y="24.3318"/>
+           <point x="-1000.69" y="-84.3957"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="10.7356" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-819.228" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="vzZ3Fk8ivl1N" fillcolor="none" localid="sZi4LMlb4xG4" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="ts7jqnJ68LAU" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="a5CS0SZ0AWJK" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-365.974" startx="-673.773"/>
+           <endpoint endy="-271" endx="-931.273"/>
+           <point x="-816.635" y="-365.974"/>
+           <point x="-931.273" y="-321.061"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-349.774" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-805.411" text="Button Mode delayed" posttext="" isinstance="0" xmi.id="zmY7Ng7pNOJu" fillcolor="none" localid="Q2sxMDGiGYB3" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="IUujDeMtSaXe" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="GHbspZwzQitf" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-2.6087" startx="-605"/>
+           <endpoint endy="-296.522" endx="-605"/>
+           <point x="-381.739" y="-2.6087"/>
+           <point x="-383.478" y="-296.522"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-174.51" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-417.424" text="Button Mode pressed" posttext="" isinstance="0" xmi.id="z8yfOSd0fDep" fillcolor="none" localid="0EkvykHh1tZZ" width="136" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="ts7jqnJ68LAU" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="WjBgGkpXXdpE" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-387.949" startx="-517.773"/>
+           <endpoint endy="-380" endx="-441.739"/>
+           <point x="-506.087" y="-411.304"/>
+           <point x="-441.739" y="-411.304"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-432.261" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-541.93" text="Button DateTime released" posttext="" isinstance="0" xmi.id="yOL3ixHZJZIB" fillcolor="none" localid="AphiSUuR9lxc" width="166" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="WjBgGkpXXdpE" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="rMKkuBJOvS29" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-380" startx="-289.478"/>
+           <endpoint endy="-369.565" endx="-220"/>
+           <point x="-277.391" y="-408.696"/>
+           <point x="-232.174" y="-406.957"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-427.043" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-322.565" text="Button DateTime released" posttext="" isinstance="0" xmi.id="vkH2WCfSayVJ" fillcolor="none" localid="lZXe1alCNQsq" width="166" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+         <assocwidget widgetaid="rMKkuBJOvS29" textcolor="#000000" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" seqnum="" roleBdoc="" usesdiagramusefillcolor="0" totalcountb="2" linewidth="0" visibilityA="0" changeabilityA="900" indexb="1" documentation="" fillcolor="#ffff00" visibilityB="0" changeabilityB="900" indexa="1" type="514" widgetbid="ts7jqnJ68LAU" totalcounta="2" usesdiagramfillcolor="0" linecolor="#ff0000" roleAdoc="">
+          <linepath layout="Spline">
+           <startpoint starty="-343.565" startx="-220"/>
+           <endpoint endy="-349.949" endx="-517.773"/>
+           <point x="-279.408" y="-313.297"/>
+           <point x="-445.408" y="-313.297"/>
+          </linepath>
+          <floatingtext height="18" textcolor="none" y="-313.297" pretext="" usefillcolor="1" font="Sans Serif,9,-1,5,50,0,0,0,0,0" role="703" usesdiagramusefillcolor="1" linewidth="0" x="-445.408" text="Button DateTime released" posttext="" isinstance="0" xmi.id="SOrqpjeiTtkz" fillcolor="none" localid="wkqDI6N1fudh" width="166" showstereotype="1" usesdiagramfillcolor="1" linecolor="#ff0000"/>
+         </assocwidget>
+        </associations>
+       </diagram>
+      </diagrams>
+     </XMI.extension>
+    </UML:Model>
+    <UML:Model xmi.id="Use Case View" name="Use Case View" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+     <UML:Namespace.ownedElement/>
+    </UML:Model>
+    <UML:Model xmi.id="Component View" name="Component View" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+     <UML:Namespace.ownedElement/>
+    </UML:Model>
+    <UML:Model xmi.id="Deployment View" name="Deployment View" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+     <UML:Namespace.ownedElement/>
+    </UML:Model>
+    <UML:Model xmi.id="Entity Relationship Model" name="Entity Relationship Model" isAbstract="false" namespace="m1" isRoot="false" isSpecification="false" isLeaf="false" visibility="public">
+     <UML:Namespace.ownedElement/>
+    </UML:Model>
+   </UML:Namespace.ownedElement>
+  </UML:Model>
+ </XMI.content>
+ <XMI.extensions xmi.extender="umbrello">
+  <docsettings uniqueid="SOrqpjeiTtkz" documentation="" viewid="fC0DbOss2XI5"/>
+  <listview>
+   <listitem id="Views" type="800" open="1">
+    <listitem id="Component View" type="821" open="1"/>
+    <listitem id="Deployment View" type="827" open="1"/>
+    <listitem id="Entity Relationship Model" type="836" open="1"/>
+    <listitem id="Logical View" type="801" open="1">
+     <listitem id="wukPOf9payYr" label="class diagram" type="807" open="0"/>
+     <listitem id="fC0DbOss2XI5" label="ClockSettings" type="808" open="0"/>
+     <listitem id="Datatypes" type="830" open="0">
+      <listitem id="oThOPDFCHRnI" type="829" open="1"/>
+      <listitem id="r5w11bTxTBKs" type="829" open="1"/>
+      <listitem id="qJDKVYCJzrgP" type="829" open="1"/>
+      <listitem id="xlvJ1BMtGHsI" type="829" open="1"/>
+      <listitem id="n6Db0W0fLGI3" type="829" open="1"/>
+      <listitem id="jtzxArFz9RJe" type="829" open="1"/>
+      <listitem id="2vZKKNcI6XZ8" type="829" open="1"/>
+      <listitem id="ZIy4BatPp1jZ" type="829" open="1"/>
+      <listitem id="zTvwIbLKXtep" type="829" open="1"/>
+      <listitem id="HefQ5w42Nxyf" type="829" open="1"/>
+      <listitem id="GE7KkgSTYRQg" type="829" open="1"/>
+     </listitem>
+    </listitem>
+    <listitem id="Use Case View" type="802" open="1"/>
+   </listitem>
+  </listview>
+  <codegeneration>
+   <codegenerator language="C++"/>
+  </codegeneration>
+ </XMI.extensions>
+</XMI>
