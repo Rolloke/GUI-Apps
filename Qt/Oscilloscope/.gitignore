@@ -1,0 +1,8 @@
+application_build/
+build-test-Desktop-Debug/
+CVS/
+portaudio/
+Qt5-Debug/
+Qt5-Release/
+x86_64bit_Debug/
+x86_64bit_Release/
