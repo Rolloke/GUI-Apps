@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/circle_black.svg</file>
+        <file>resource/circle_green.svg</file>
+        <file>resource/circle_red.svg</file>
+        <file>resource/rising_edge.svg</file>
+        <file>resource/falling_edge.svg</file>
+        <file>resource/circle_blue.svg</file>
+        <file>resource/circle_grey.svg</file>
+        <file>resource/circle_orange.svg</file>
+        <file>resource/circle_purple.svg</file>
+        <file>resource/circle_yellow.svg</file>
+        <file>resource/Oscilloscope.ico</file>
+        <file>resource/Oscilloscope.svg</file>
+    </qresource>
+</RCC>

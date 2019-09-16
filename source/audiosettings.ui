@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Settings</class>
+ <widget class="QDialog" name="Settings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>303</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Audio Settings</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <widget class="QPushButton" name="btnApply">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>360</y>
+     <width>91</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Apply</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnOk">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>360</y>
+     <width>91</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelLastErrorText">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>390</y>
+     <width>281</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Displays error codes or success of initialization</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>301</width>
+     <height>351</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabInput">
+    <attribute name="title">
+     <string>Input</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBoxSource">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>301</width>
+       <height>321</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Source</string>
+     </property>
+     <widget class="QRadioButton" name="radioModeSimulation">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>101</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Activates simulation of a scope signal</string>
+      </property>
+      <property name="text">
+       <string>Simulation</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioModeAudioInput">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>80</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Activates scope signal via soundcard</string>
+      </property>
+      <property name="text">
+       <string>Sound card</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelInputDeviceName">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>281</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>shows the device name</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::RichText</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtBufferSize">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>290</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Enter total sample buffer length for scope view</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelBufferSize">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Bufferlength [s]:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboChannels">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>140</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Choose the number of channels</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sampleformat</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSampleFrequency">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Samplefrequency [Hz]</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtLatency">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>230</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Enter the desired latency</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtSampleSize">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>260</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Enter delivered sample length to update scope view</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboDeviceID">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>110</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the audio device</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDevices">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Device ID</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelChannels">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Channels</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSampleSize">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Samplelength [ms]</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboSampleFrequency">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>170</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the sample frequency or try an appropriate frequency</string>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboFormats">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>200</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the sample format</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelLatency">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Latency [ms]</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabOutput">
+    <attribute name="title">
+     <string>Output</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBoxDestination">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>301</width>
+       <height>311</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Destination</string>
+     </property>
+     <widget class="QLabel" name="labelOutputDeviceName">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>281</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>shows the device name</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::RichText</enum>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkShowFGinScope">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>271</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Show Function Generator
+Output in Scope</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboDeviceID_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>140</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the audio device</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelDevices_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Device ID</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboChannels_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>170</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Choose the number of channels</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelChannels_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Channels</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboSampleFrequency_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>200</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the sample frequency or try an appropriate frequency</string>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSampleFrequency_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Samplefrequency [Hz]</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboFormats_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>230</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Select the sample format</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sampleformat</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtLatency_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>260</y>
+        <width>113</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Enter the desired latency</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelLatency_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Latency [ms]</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
