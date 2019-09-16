@@ -86,6 +86,14 @@ private Q_SLOTS:
 
     void on_bntSendFile_clicked();
 
+    void on_btnF1_pressed();
+
+    void on_btnF1_released();
+
+    void on_btnF2_pressed();
+
+    void on_btnF2_released();
+
 private:
     Ui::MainWindow *ui;
     QAbstractItemModel* mListModel;

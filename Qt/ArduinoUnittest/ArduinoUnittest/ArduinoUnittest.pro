@@ -39,21 +39,7 @@ HEADERS  += mainwindow.h \
             Stream.h \
             Wire.h
 
-ARDUINO_PATH = ../../../Arduino/Sketches/ConfigurableDelayTimer
-# Aduino Project Files
-INCLUDEPATH += $${ARDUINO_PATH}
-HEADERS += $${ARDUINO_PATH}/Input.h
-HEADERS += $${ARDUINO_PATH}/Output.h
-SOURCES += configurabledelaytimerino.cpp
-DISTFILES += $${ARDUINO_PATH}/ConfigurableDelayTimer.ino
-SOURCES += $${ARDUINO_PATH}/Input.cpp
-SOURCES += $${ARDUINO_PATH}/Output.cpp
-
-# Libraries
-LIBRARY1 = /opt/arduino-1.8.9/libraries/TextTools/src
-INCLUDEPATH += $${LIBRARY1}
-SOURCES += $${LIBRARY1}/texttools.cpp
-HEADERS += $${LIBRARY1}/texttools.h
-
-
 FORMS    += mainwindow.ui
+
+ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.9/libraries
+ARDUINO_LOCAL_LIBRARY_PATH = /home/rolf/Projekte/Arduino/libraries

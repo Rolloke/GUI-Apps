@@ -40,6 +40,15 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="toolTip">
+         <string>Shows Pins of Arduino</string>
+        </property>
+        <property name="cornerButtonEnabled">
+         <bool>true</bool>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </item>
       <item>
@@ -48,69 +57,40 @@
          <enum>QLayout::SetMinimumSize</enum>
         </property>
         <item>
+         <widget class="QLabel" name="label">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>120</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Connect the buttons of a row below to arduino pins in the edit field on the right.
+Buttons in a row are separated by ':'.
+More than one pin number per button is separated by ','.
+Positive pin number means button pressed = 1.
+Negative pin number means button pressed = 0.</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="1">
-           <widget class="QPushButton" name="btnUp">
+          <item row="2" column="3">
+           <widget class="QLineEdit" name="editClearDownF2">
             <property name="maximumSize">
              <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Up</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QLineEdit" name="editEscUp">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
+              <width>100</width>
               <height>16777215</height>
              </size>
             </property>
             <property name="toolTip">
-             <string>Enter Pin Numbers for Buttons ESC:Up</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="btnEnter">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Enter</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLineEdit" name="editRightEnterLeft">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Enter Pin Numbers for Buttons Right:Enter:Left</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="btnLeft">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Left</string>
+             <string>Arduino pin numbers for buttons Clear:Down:F2</string>
             </property>
            </widget>
           </item>
@@ -122,26 +102,16 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string/>
+            </property>
             <property name="text">
              <string>Right</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="btnDown">
-            <property name="maximumSize">
-             <size>
-              <width>60</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Down</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QLineEdit" name="editClearDown">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btnUp">
             <property name="maximumSize">
              <size>
               <width>60</width>
@@ -149,7 +119,23 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>Enter Pin Numbers for Button Down</string>
+             <string/>
+            </property>
+            <property name="text">
+             <string>Up</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="editRightEnterLeft">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Arduino pin numbers for buttons Right:Enter:Left</string>
             </property>
            </widget>
           </item>
@@ -161,8 +147,27 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string/>
+            </property>
             <property name="text">
              <string>ESC</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="btnLeft">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Left</string>
             </property>
            </widget>
           </item>
@@ -174,8 +179,88 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string/>
+            </property>
             <property name="text">
              <string>Clear</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="btnEnter">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Enter</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="btnDown">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Down</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="editEscUpF1">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Arduino pin numbers for buttons ESC:Up:F1.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="btnF1">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>F1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="btnF2">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>F2</string>
             </property>
            </widget>
           </item>
