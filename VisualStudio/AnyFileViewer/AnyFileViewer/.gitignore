@@ -1,0 +1,6 @@
+Debug/
+Release/
+ipch/
+x64/
+AnyFileViewer.vcxproj.filters
+AnyFileViewer.vcxproj.user

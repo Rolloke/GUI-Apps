@@ -1,0 +1,753 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\AnyFileViewer.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AnyFileViewer.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDR_TREE_IMAGES         BITMAP                  "res\\TreeImages.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_EDIT_CLEAR
+    BUTTON      ID_EDIT_INSERT_REPEAT
+    BUTTON      ID_EDIT_INSERT_INLINE_ATTR
+    SEPARATOR
+    BUTTON      ID_FORMAT_SAME_ENDIANESS
+    BUTTON      ID_FORMAT_DIFFERENT_ENDIANESS
+    SEPARATOR
+    BUTTON      ID_DEFAULT_HELP
+END
+
+IDR_TREE_IMAGES TOOLBAR 16, 15
+BEGIN
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      65535
+    SEPARATOR
+    BUTTON      65535
+    BUTTON      65535
+    BUTTON      ID_BUTTON32853
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu...",                     ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "S&chließen",                  ID_FILE_NEW
+        MENUITEM "&Speichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM "Auswahl Speichern...",        ID_FILE_SAVE_SELECTION
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "&Kopieren (Excelformat)",     ID_EDIT_COPY_EXCEL
+        MENUITEM "&Einfügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "Alles L&öschen",              ID_EDIT_CLEAR_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Wiederholung einfügen",      ID_EDIT_INSERT_REPEAT
+        MENUITEM "In Line Attribut einfügen",   ID_EDIT_INSERT_INLINE_ATTR
+        MENUITEM "&Faktor Attribut einfügen",   ID_EDIT_INSERT_FACTOR_ATTR
+        MENUITEM SEPARATOR
+        MENUITEM "&Suchen...",                  ID_EDIT_FIND
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "&Hauptansichtleiste",         ID_VIEW_DLG_TOOL_BAR
+        MENUITEM "&Datentypansichtleiste",      ID_VIEW_FORMAT_TOOL_BAR
+        MENUITEM "S&uchleiste",                 ID_VIEW_SEARCH_TOOL_BAR
+        MENUITEM "Status&leiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Hintereinander",             ID_VIEW_CONCATENATED
+        MENUITEM "&Gleiche Startposition",      ID_VIEW_SAME_STARTPOS
+        MENUITEM SEPARATOR
+        POPUP "Strukturansicht"
+        BEGIN
+            MENUITEM "Dateistruktur",               ID_TREEVIEW_FILE_STRUCTURE
+            MENUITEM "Dateiinhalt",                 ID_TREEVIEW_FILE_CONTENT
+            MENUITEM "Struktur inline",             ID_TREEVIEW_INLINE_STRUCTURE
+        END
+        MENUITEM "Aktualisieren",               ID_VIEW_UPDATE
+    END
+    POPUP "&Format"
+    BEGIN
+        MENUITEM "&Speichern",                  ID_FORMAT_SAVE
+        MENUITEM "&Laden",                      ID_FORMAT_LOAD
+        MENUITEM "&Bearbeiten",                 ID_FORMAT_EDIT
+        MENUITEM "&Alle",                       ID_FORMAT_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Gleiche Endianess",          ID_FORMAT_SAME_ENDIANESS
+        MENUITEM "&Andere Endianess",           ID_FORMAT_DIFFERENT_ENDIANESS
+        MENUITEM SEPARATOR
+        MENUITEM "&Konvertieren...",            ID_FORMAT_CONVERT_DLG
+    END
+    POPUP "Einstellungen"
+    BEGIN
+        MENUITEM "&Registry",                   ID_SETTINGS_REGISTRY
+        MENUITEM "&Dateityp registrieren.",     ID_SETTINGS_REGISTER_FILE_TYPE
+        MENUITEM "Darstellung...",              ID_OPTIONS_REPRESENTATION
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "Hilfe&themen",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&Info über AnyFileViewer...", ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT_TREE_ITEM MENU
+BEGIN
+    POPUP "context_structure"
+    BEGIN
+        MENUITEM "&Laden",                      ID_FORMAT_LOAD
+        MENUITEM "&Speichern",                  ID_FORMAT_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "&Einfügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "&Wiederholung einfügen",      ID_EDIT_INSERT_REPEAT
+        MENUITEM "In Line Attribut einfügen",   ID_EDIT_INSERT_INLINE_ATTR
+        MENUITEM "&Faktor Attribut einfügen",   ID_EDIT_INSERT_FACTOR_ATTR
+        MENUITEM SEPARATOR
+        MENUITEM "Dateiinhalt anzeigen",        ID_TREEVIEW_FILE_CONTENT
+    END
+    POPUP "context_content"
+    BEGIN
+        MENUITEM "&Laden",                      ID_FORMAT_LOAD
+        MENUITEM "&Speichern",                  ID_FORMAT_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "&Einfügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "&Kopieren (Excelformat)",     ID_EDIT_COPY_EXCEL
+        MENUITEM SEPARATOR
+        MENUITEM "Darstellung...",              ID_OPTIONS_REPRESENTATION
+        MENUITEM SEPARATOR
+        MENUITEM "Aktualisieren\tF5",           ID_VIEW_UPDATE
+        MENUITEM "Struktur inline",             ID_TREEVIEW_INLINE_STRUCTURE
+        MENUITEM "Dateistruktur anzeigen",      ID_TREEVIEW_FILE_STRUCTURE
+    END
+    POPUP "content_format"
+    BEGIN
+        MENUITEM "&Laden",                      ID_FORMAT_LOAD
+        MENUITEM "&Speichern",                  ID_FORMAT_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "Aktualisieren\tF5",           ID_VIEW_UPDATE
+        MENUITEM "&Bearbeiten",                 ID_FORMAT_EDIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    VK_LEFT,        ID_ACCEL_LEFT,          VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_ACCEL_RIGHT,         VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CLEAR,          VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          ID_EDIT_FIND,           VIRTKEY, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F2,          ID_FORMAT_EDIT,         VIRTKEY, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F4,          IDC_BTN_RE_STEP_BY,     VIRTKEY, SHIFT, NOINVERT
+    VK_F4,          IDC_BTN_STEP_BY,        VIRTKEY, NOINVERT
+    VK_F5,          ID_VIEW_UPDATE,         VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 251, 102
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About AnyFileViewer"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "AnyFileViewer Version 1.2 Beta",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) Rolf Kary-Ehlers 2007-2016",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,194,7,50,16,WS_GROUP
+END
+
+IDD_MAINFRAME DIALOGEX 0, 0, 359, 16
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Datentyp:",IDC_STATIC,5,3,40,8
+    COMBOBOX        IDC_COMBO_DATA_TYPE,45,1,70,165,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Spalten:",IDC_STATIC,120,3,30,8
+    EDITTEXT        IDC_EDT_COLUMNS,150,1,20,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN_COLUMNS,"msctls_updown32",UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,170,1,10,12
+    LTEXT           "Offset:",IDC_STATIC,185,3,25,8
+    EDITTEXT        IDC_EDT_OFFSET,212,1,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    COMBOBOX        IDC_COMBO_FORMATFILES,246,1,108,151,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_FORMAT_VIEW DIALOGEX 0, 0, 275, 16
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Einfügen:",IDC_BTN_INSERT,5,2,40,12
+    EDITTEXT        IDC_EDT_NAME_INSERT,50,2,50,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_DATA_TYPE_INSERT,105,1,70,165,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDT_WIDTH_INSERT,175,1,20,12,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "",IDC_SPIN_WIDTH_INSERT,"msctls_updown32",UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_DISABLED,195,2,11,12
+    COMBOBOX        IDC_COMBO_INSERT_POSITION,210,1,60,165,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_SEARCH_DLG DIALOGEX 0, 0, 193, 16
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDT_GOTO_POSITION,45,2,40,12,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Gehe zu",IDC_BTN_GOTO_POSITION,5,2,40,12
+    EDITTEXT        IDC_EDT_STEP_BY,149,2,40,12,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "Vor",IDC_BTN_STEP_BY,90,2,30,12
+    PUSHBUTTON      "Zurück",IDC_BTN_RE_STEP_BY,120,2,30,12
+END
+
+IDD_FORMAT_CONVERT DIALOGEX 0, 0, 400, 79
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Format Konverter"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_FORMAT1,5,6,67,164,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_FORMAT2,5,60,67,163,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_FORMAT1,78,5,317,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FORMAT2,78,59,317,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FORMAT_HEX,78,22,317,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FORMAT_BINARY,78,41,317,14,ES_AUTOHSCROLL
+    LTEXT           "Hexadezimal",IDC_STATIC,5,25,67,8
+    LTEXT           "Binär",IDC_STATIC,5,44,67,8
+END
+
+IDD_NEW_DOC DIALOGEX 0, 0, 130, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Neues Dokument"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Größe:",IDC_STATIC,4,8,29,8
+    EDITTEXT        IDC_EDT_DOC_SIZE,43,5,81,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,29,50,14
+    PUSHBUTTON      "Ok",IDOK,75,29,50,14
+END
+
+IDD_REPRESENTATION DIALOGEX 0, 0, 291, 169
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Zwischenablageformat"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,234,7,50,15
+    PUSHBUTTON      "Abbrechen",IDCANCEL,234,41,50,15
+    EDITTEXT        IDC_EDT_FLOAT_FORMAT,59,23,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_DOUBLE_FORMAT,59,41,30,14,ES_AUTOHSCROLL
+    LTEXT           "Float",IDC_STATIC,15,26,17,8
+    LTEXT           "Double",IDC_STATIC,15,44,23,8
+    GROUPBOX        "Zahlenformat",IDC_STATIC,7,7,215,54
+    COMBOBOX        IDC_COMBO_LOCALE,135,41,61,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Separator",IDC_STATIC,7,65,277,40
+    CONTROL         "LF",IDC_CK_SEP_LF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,85,23,10
+    CONTROL         "CR",IDC_CK_SEP_CR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,85,25,10
+    CONTROL         "TAB",IDC_CK_SEP_TAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,80,85,29,10
+    CONTROL         "Komma",IDC_CK_SEP_COMMA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,122,85,39,10
+    CONTROL         "Semikolon",IDC_CK_SEP_SEMICOLON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,165,85,47,10
+    GROUPBOX        "Beschreibung",IDC_STATIC,7,109,215,44
+    CONTROL         "Variablenname",IDC_CK_DESC_NAME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,127,63,10
+    CONTROL         "Variablentyp",IDC_CK_DESC_TYPE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,105,127,56,10
+    LTEXT           "Lokalisierung",IDC_STATIC,136,26,42,8
+    EDITTEXT        IDC_EDT_SEP_EXTRA,249,83,26,14,ES_AUTOHSCROLL
+    LTEXT           "Extra:",IDC_STATIC,220,86,21,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,0,1
+ PRODUCTVERSION 1,2,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704e4"
+        BEGIN
+            VALUE "Comments", "Programmiert von Rolf Kary-Ehlers"
+            VALUE "CompanyName", "KESoft"
+            VALUE "Copyright (C) 2007", "(c) KESoft. Alle Rechte vorbehalten."
+            VALUE "FileDescription", "Any file viewer, Binärdateibetrachter"
+            VALUE "FileVersion", "1.2.0.1"
+            VALUE "InternalName", "AnyFileViewer.exe"
+            VALUE "OriginalFilename", "AnyFileViewer.exe"
+            VALUE "ProductName", "AnyFileViewer"
+            VALUE "ProductVersion", "1.2.0.1 Beta"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 244
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 95
+    END
+
+    IDD_MAINFRAME, DIALOG
+    BEGIN
+    END
+
+    IDD_FORMAT_VIEW, DIALOG
+    BEGIN
+    END
+
+    IDD_SEARCH_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_FORMAT_CONVERT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 72
+        VERTGUIDE, 78
+        VERTGUIDE, 395
+        BOTTOMMARGIN, 78
+        HORZGUIDE, 12
+        HORZGUIDE, 29
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+    END
+
+    IDD_NEW_DOC, DIALOG
+    BEGIN
+        HORZGUIDE, 12
+        HORZGUIDE, 36
+    END
+
+    IDD_REPRESENTATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 284
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 162
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 90
+        HORZGUIDE, 132
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_FORMAT_VIEW DLGINIT
+BEGIN
+    IDC_COMBO_INSERT_POSITION, 0x403, 4, 0
+0x6f56, 0x0072, 
+    IDC_COMBO_INSERT_POSITION, 0x403, 7, 0
+0x6948, 0x746e, 0x7265, "\000" 
+    IDC_COMBO_INSERT_POSITION, 0x403, 9, 0
+0x6c61, 0x2073, 0x694b, 0x646e, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_REPRESENTATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "AnyFileViewer\n\nAnyFileViewer\nAnyFileViewer Files (*.*)\n.*\nAnyFileViewer.Document\nAnyFileViewer.Document"
+    IDS_FORMATS             "Datentyp"
+    IDS_VALUES              "Wert"
+    IDS_CONTENT             "Inhalt"
+    IDS_POSITION            "Position"
+    IDS_ROW                 "Zeile"
+    IDS_COLUMN              "Spalte"
+    IDS_ASCII               "ASCII"
+    IDS_NAME                "Name"
+    IDS_FORMAT_FILE_DLG     "Format Datei (*.fmt)|*.fmt|"
+    IDS_POSITION_INT        "#########"
+    IDS_ROW_INT             "#########"
+    IDS_COLUMN_INT          "##"
+    IDD_MAINFRAME           "Hauptliste"
+    IDD_FORMAT_VIEW         "Formatliste"
+    IDD_SEARCH_DLG          "Navigieren"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "AnyFileViewer"
+    AFX_IDS_IDLEMESSAGE     "Drücken Sie F1, um die Hilfe anzuzeigen."
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt aus, für das die Hilfe angezeigt werden soll."
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Schließt das offene Dokument.\nSchließen"
+    ID_FILE_OPEN            "Öffnet ein vorhandenes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter einem neuem Namen.\nSpeichern unter"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-, Versions- und Copyrightinformationen an.\nInfo"
+    ID_APP_EXIT             "Beendet die Anwendung und fordert zum Speichern der Dokumente auf.\nBeenden"
+    ID_HELP_INDEX           "Öffnet die Hilfefunktion.\nHilfethemen"
+    ID_HELP_FINDER          "Listet die Hilfethemen auf.\nHilfethemen"
+    ID_HELP_USING           "Zeigt Anweisungen zum Verwenden der Hilfe an.\nHilfe"
+    ID_CONTEXT_HELP         "Zeigt Hilfe zu Schaltflächen, Menüs und Fenstern an.\nHilfe"
+    ID_HELP                 "Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet das Dokument."
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterbereich.\nNächster Bereich"
+    ID_PREV_PANE            "Wechselt zum vorherigen Fensterbereich.\nVorheriger Bereich"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Bereiche.\nTeilen"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Auswahl.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Auswahl in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Überträgt die Auswahl in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht nach einem Muster in der Datei.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt den letzten Vorgang.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt den angegebenen Text.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles auswählen"
+    ID_EDIT_UNDO            "Macht den letzten Vorgang rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt den zuletzt rückgängig gemachten Vorgang.\nWiederherstellen"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste"
+    ID_VIEW_AUTOARRANGE     "Symbole am Raster ausrichten."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Minimiert das Fenster."
+    AFX_IDS_SCMAXIMIZE      "Maximiert das Fenster."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zum Speichern des Dokuments auf."
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt die ursprüngliche Fenstergröße wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Taskliste."
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_SMALLICON       "Zeigt Elemente mit kleinen Symbolen an.\nKleine Symbole"
+    ID_VIEW_LARGEICON       "Zeigt Elemente mit großen Symbolen an.\nGroße Symbole"
+    ID_VIEW_LIST            "Zeigt Elemente als Liste an.\nListe"
+    ID_VIEW_DETAILS         "Zeigt Informationen über jedes Element im Fenster an.\nDetails"
+    ID_VIEW_LINEUP          "Richtet Symbole am Raster aus."
+    ID_VIEW_BYNAME          "Sortiert die Symbole alphabetisch."
+END
+
+STRINGTABLE
+BEGIN
+    ID_FORMAT_SAVE          "Speichert die Liste der Datentypen in einer Textdatei"
+    ID_FORMAT_LOAD          "Lädt eine  Liste von Datentypen aus einer Textdatei"
+    ID_FORMAT_EDIT          "Bearbeitet den Wert des Datentyps in der Liste"
+    ID_VIEW_SEARCH_TOOL_BAR "Blendet die Suchleiste ein bzw. aus.\nSuchleiste"
+    ID_VIEW_FORMAT_TOOL_BAR "Blendet die Datentyansichtleiste ein bzw. aus.\nDatentypansichtleiste"
+    ID_VIEW_DLG_TOOL_BAR    "Blendet die Hauptansichtleiste ein bzw. aus.\nHauptansichtleiste"
+END
+
+STRINGTABLE
+BEGIN
+    IDC_COMBO_DATA_TYPE     "Wählen Sie den Datentyp, der in der Hauptliste angezeigt wird\nDatentyp der Hauptliste"
+    IDC_COMBO_DATA_TYPE_INSERT 
+                            "Wählen Sie den Datentyp, der in die Liste eingefügt werden soll.\nNeuer Datentyp"
+    IDC_EDT_COLUMNS         "Anzahl der Spalten, die in der Hauptliste angezeigt werden.\nAnzahl der Spalten"
+    IDC_EDT_WIDTH_INSERT    "Länge des Datentyps in BYTES bzw. Textlänge.\nLänge in Bytes"
+    IDC_EDT_OFFSET          "Offset vom Dateianfang in Bytes mit dem die Anzeige des gewählten Datentyps in der Hauptliste beginnt.\nOffset vom Dateianfang"
+    IDC_BTN_INSERT          "Fügt einen neuen Datentyp in die Datentypliste ein\nDatentyp einfügen"
+    IDC_EDT_NAME_INSERT     "Geben Sie hier den Namen für den Datentyp ein\nName des Datentyps"
+END
+
+STRINGTABLE
+BEGIN
+    IDC_EDT_GOTO_POSITION   "Geben Sie die gewünschte Position im Dokument ein\nPosition"
+    IDC_BTN_GOTO_POSITION   "Springt zur gewünschten Position im Dokument\nGehe zu"
+    IDC_EDT_STEP_BY         "Geben Sie die Schrittweite, um die im Dokument gesprungen wird ein.\nSchrittweite."
+    IDC_BTN_STEP_BY         "Springt um die gewünschte Schrittweite\nSpringen"
+    IDC_COMBO_FORMATFILES   "Lädt Datentypstrukturen aus einer Datei.\nDatentypstruktur laden"
+    IDC_COMBO_INSERT_POSITION 
+                            "Definiert die Einfügeposition in der Srukturansicht.\nEinfügeposition"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MAIN_TOOL_BAR       "Werkzeugleiste"
+    IDS_FORMAT_ALL          "Alle Formate"
+    IDS_UNICODE_SEARCH      "Unicode"
+    IDS_STRUCTURE_FILE_DLG  "XML Sruktur Datei (*.xml)|*.xml|"
+    IDS_ERROR_NO_COUNTER_AVAILABLE 
+                            "Name der Zählvariablen wurde nicht gefunden"
+    IDS_ERROR_DOUBLE_COUNTER_ENTRY 
+                            "Name der Zählvariablen wurde schon verwendet."
+    IDS_MESSAGE             "Meldung"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SETTINGS_REGISTRY    "Speichert die Einstelllungen in der Registry. Standard ist ini-Datei."
+    ID_SETTINGS_REGISTER_FILE_TYPE 
+                            "Registriert den Dateityp .* für Öffnen mit AnyFileViewer"
+    ID_FORMAT_SAME_ENDIANESS 
+                            "Datenformat für Dateien mit gleicher Endianess\nGleiche Endianess"
+    ID_FORMAT_DIFFERENT_ENDIANESS 
+                            "Datenformat für Dateienmit anderer Endianess\nAndere Endianess"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FORMAT_CONVERT_DLG   "Ruft einen Dialog zum konvertieren von Datentypen auf."
+    ID_VIEW_SAME_STARTPOS   "Zeigt jedes Datenformat in der Formatliste von der gleichen Startposition"
+    ID_VIEW_CONCATENATED    "Zeigt die Daten der Formatliste hintereinander an"
+    ID_FORMAT_ALL           "Lädt alle Datenformate in die Formatliste und schaltet auf gleiche Startposition um"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_INSERT_REPEAT   "Fügt das Attribut Wiederholung in ein Strukturelement ein\nWiederholungsattribut Einfügen"
+    ID_SEPARATOR_COMMA      "Fügt das Trennzeichen Komma zwischen Datenwerten ein\nTrennzeichen Komma"
+    ID_SEPARATOR_SEMICOLON  "Fügt das Trennzeichen Semikolon zwischen Datenwerten ein\nTrennzeichen Semikolon"
+    ID_SEPARATOR_CR         "Fügt das Trennzeichen Wagenrucklauf zwischen Datenwerten ein\nTrennzeichen Wagenrücklauf"
+    ID_SEPARATOR_LF         "Fügt das Trennzeichen Zeilenvorschub zwischen Datenwerten ein\nTrennzeichen Zeilenvorschub"
+    ID_SEPARATOR_TAB        "Fügt das Trennzeichen Tabulator zwischen Datenwerten ein\nTrennzeichen Tabulator"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_COPY_TYPE       "Fügt den Namen des Datetyps zu dem kopierten Wert"
+    ID_EDIT_COPY_NAME       "gt den Namen desWertes zu dem kopierten Wert"
+    ID_VIEW_UPDATE          "Aktualisiert den aktiven View"
+    ID_TREEVIEW_INLINE_STRUCTURE 
+                            "Zeigt Strukturen mit dem Attribut Inline in einer Zeile an"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#include "res\AnyFileViewer.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

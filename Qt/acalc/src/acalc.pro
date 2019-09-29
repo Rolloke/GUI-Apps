@@ -9,6 +9,8 @@ QT       += core
 QT       -= gui
 QMAKE_CXXFLAGS += -std=c++14
 
+CONFIG += c++14
+
 TARGET = acalc
 CONFIG   += console
 CONFIG   -= app_bundle

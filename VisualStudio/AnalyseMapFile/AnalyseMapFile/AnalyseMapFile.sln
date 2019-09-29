@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnalyseMapFile", "AnalyseMapFile.vcproj", "{65DD5064-F7A9-46D2-9C49-E18D8A3CD839}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/AnalyseMapFile\u0022,\u0020JCQCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {FE436AE0-B057-4199-9B11-067A21DCB7B8}
+		SccProjectUniqueName1 = AnalyseMapFile.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{65DD5064-F7A9-46D2-9C49-E18D8A3CD839}.Debug.ActiveCfg = Debug|Win32
+		{65DD5064-F7A9-46D2-9C49-E18D8A3CD839}.Debug.Build.0 = Debug|Win32
+		{65DD5064-F7A9-46D2-9C49-E18D8A3CD839}.Release.ActiveCfg = Release|Win32
+		{65DD5064-F7A9-46D2-9C49-E18D8A3CD839}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
