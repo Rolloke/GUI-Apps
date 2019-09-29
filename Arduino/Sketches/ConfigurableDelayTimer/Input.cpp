@@ -17,7 +17,7 @@ mDelay_ms(0),
 mTime(0),
 mConnection(0)
 {
-  
+
 }
 
 void InputPin::tick(unsigned long aNow)
