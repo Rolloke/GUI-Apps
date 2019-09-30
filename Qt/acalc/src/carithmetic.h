@@ -1,8 +1,11 @@
 #ifndef CARITHMETIC_H
 #define CARITHMETIC_H
 
+#ifndef M_PI
+#define _USE_MATH_DEFINES
+#endif
+#include <math.h>
 
-#include <cmath>
 #include <complex>
 #include <memory>
 #include <map>
