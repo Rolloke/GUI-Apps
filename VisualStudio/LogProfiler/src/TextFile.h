@@ -9,8 +9,8 @@
 class TextFile : public ITextInterface
 {
 public:
-	TextFile(LPCSTR aFileName);
-	~TextFile();
+    TextFile(LPCSTR aFileName);
+    ~TextFile();
 
     size_t getLines() const;
     bool   getLineText(uint32_t aLineNo, std::string& aLine) const;
@@ -18,8 +18,8 @@ public:
 
 private:
     LPCSTR mFileName;
-	std::string mText;
-	std::vector<size_t> mLineStart;
+    std::string mText;
+    std::vector<size_t> mLineStart;
     std::string mLineFeed;
 };
 

@@ -46,14 +46,14 @@ public :
             ::SetFocus(::GetDlgItem(_hSelf, IDC_BTN_GET_TIME));
     };
 
-	void setParent(HWND parent2set){
-		_hParent = parent2set;
-	};
+    void setParent(HWND parent2set){
+        _hParent = parent2set;
+    };
 
-	void openTimeStampResults();
+    void openTimeStampResults();
 
 protected :
-	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
 private :
 
@@ -69,7 +69,7 @@ private :
     INT_PTR OnBtnDeleteBookmarks();
     INT_PTR OnBtnDeleteCurrentBookmark();
     INT_PTR OnBtnHelp();
-	INT_PTR OnSelectFolder();
+    INT_PTR OnSelectFolder();
     INT_PTR OnStopAllThreads();
     INT_PTR OnSyncronizeFolder();
     INT_PTR OnSyncronizeOpenFiles();

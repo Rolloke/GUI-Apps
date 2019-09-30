@@ -38,12 +38,12 @@ public :
         }
     };
 
-	void setParent(HWND parent2set){
-		_hParent = parent2set;
-	};
+    void setParent(HWND parent2set){
+        _hParent = parent2set;
+    };
 
 protected :
-	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
 private :
 

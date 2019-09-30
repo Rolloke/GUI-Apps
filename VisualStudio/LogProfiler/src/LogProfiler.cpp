@@ -49,43 +49,43 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*
 
 extern "C" __declspec(dllexport) void setInfo(NppData notpadPlusData)
 {
-	nppData = notpadPlusData;
-	commandMenuInit();
+    nppData = notpadPlusData;
+    commandMenuInit();
 }
 
 extern "C" __declspec(dllexport) const TCHAR * getName()
 {
-	return NPP_PLUGIN_NAME;
+    return NPP_PLUGIN_NAME;
 }
 
 extern "C" __declspec(dllexport) FuncItem * getFuncsArray(int *nbF)
 {
-	*nbF = NoOfFunctions;
-	return funcItem;
+    *nbF = NoOfFunctions;
+    return funcItem;
 }
 
 
 extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 {
-	switch (notifyCode->nmhdr.code) 
-	{
-		case NPPN_SHUTDOWN:
-		{
-			commandMenuCleanUp();
-		}
-		break;
+    switch (notifyCode->nmhdr.code) 
+    {
+        case NPPN_SHUTDOWN:
+        {
+            commandMenuCleanUp();
+        }
+        break;
 
-		case SCN_CHARADDED:
-		{
-			//LangType docType;
-			//::SendMessage(nppData._nppHandle, NPPM_GETCURRENTLANGTYPE, 0, (LPARAM)&docType);
-			//bool isDocTypeHTML = (docType == L_HTML || docType == L_XML || docType == L_PHP);
-		}
-		break;
+        case SCN_CHARADDED:
+        {
+            //LangType docType;
+            //::SendMessage(nppData._nppHandle, NPPM_GETCURRENTLANGTYPE, 0, (LPARAM)&docType);
+            //bool isDocTypeHTML = (docType == L_HTML || docType == L_XML || docType == L_PHP);
+        }
+        break;
 
-		default:
-			return;
-	}
+        default:
+            return;
+    }
 }
 
 
@@ -97,12 +97,12 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 extern "C" __declspec(dllexport) LRESULT messageProc(UINT /*Message*/, WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
     /*
-	if (Message == WM_MOVE)
-	{
-		::MessageBox(NULL, "move", "", MB_OK);
-	}
+    if (Message == WM_MOVE)
+    {
+        ::MessageBox(NULL, "move", "", MB_OK);
+    }
 */
-	return TRUE;
+    return TRUE;
 }
 
 #ifdef UNICODE
