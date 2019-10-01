@@ -101,6 +101,9 @@ MainWindow::MainWindow(QWidget *parent)
         ++fRow;
     }
 
+
+
+
     ui->tableView->setColumnWidth(ePinIndex,  30);
     ui->tableView->setColumnWidth(ePinNo   ,  85);
     ui->tableView->setColumnWidth(ePinType , 100);

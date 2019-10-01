@@ -45,10 +45,10 @@ void triggerButtonsTime(uint8_t, uint8_t);
 // array with buttons: Bit 1, 2
 uint8_t gButtonPins[2] = { static_cast<uint8_t>(HourBtn),  static_cast<uint8_t>(MinuteBtn) };
 // constructor with arguments
-Button gButtonTime(gButtonPins, sizeof(gButtonPins), triggerButtonsTime, HIGH);
+Button gButtonTime(gButtonPins, sizeof(gButtonPins), triggerButtonsTime, ButtonOnState);
 
-Button gButtonMode(ModeBtn , triggerButton, HIGH);
-Button gButtonAlarm(AlarmBtn, triggerButton, HIGH);
+Button gButtonMode(ModeBtn , triggerButton, ButtonOnState);
+Button gButtonAlarm(AlarmBtn, triggerButton, ButtonOnState);
 
 
 //#define TEST_PERIPHERY
@@ -122,6 +122,9 @@ void setup()
   pinMode(dimLED, OUTPUT);
   digitalWrite(dimLED, 0);
   
+  gSettings.setTonePin(toneOutput);
+  gSettings.setBlinkMode(SettingStates::Inactive);
+
 #ifdef SOFTWARE_SERIAL
   Serial.begin(115200);
   //while (!Serial)
@@ -401,20 +404,17 @@ void calibrateVU()
 #endif
 
 #ifdef LCD_PRINT
+void print2Decimals(int aNumber)
+{
+    if (aNumber >= 0)
+    {
+        if (aNumber < 10) gLCD.print("0");
+        gLCD.print(aNumber);
+    }
+}
+
 void PrintLCD_Time()
 {
-    gLCD.setCursor(0, 0);
-//    gLCD.print("                ");
-//    gLCD.setCursor(0, 0);
-    if (gSettings.getHours()  <10) gLCD.print("0");
-    gLCD.print(gSettings.getHours());
-    gLCD.print(":");
-    if (gSettings.getMinutes()<10) gLCD.print("0");
-    gLCD.print(gSettings.getMinutes());
-    gLCD.print(":");
-    if (gSettings.getSeconds()<10) gLCD.print("0");
-    gLCD.print(gSettings.getSeconds());
-
     if (mOldState != gSettings.getState())
     {
       gLCD.setCursor(0, 1);
@@ -454,7 +454,16 @@ void PrintLCD_Time()
       }
 
       mOldState = gSettings.getState();
+      gLCD.setCursor(0, 0);
+      gLCD.print("                ");
     }
+
+    gLCD.setCursor(0, 0);
+    print2Decimals(gSettings.getHours());
+    gLCD.print(":");
+    print2Decimals(gSettings.getMinutes());
+    gLCD.print(":");
+    print2Decimals(gSettings.getSeconds());
 }
 #endif
 
