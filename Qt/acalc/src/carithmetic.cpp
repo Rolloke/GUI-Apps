@@ -1,11 +1,11 @@
 #include "carithmetic.h"
 
-//#include "math.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <cstring>
 #include <stdio.h>
 #include <iostream>
+
 
 //////////////////////////////////////////////////////////////////////
 // Konstruktion/Destruktion
