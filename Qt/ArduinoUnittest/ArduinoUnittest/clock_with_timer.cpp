@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <unittest.h>
 
-#include "../../../Arduino/Sketches/Uhren/BinaerAnalogUhr/binaer_analog_uhr/binaer_analog_uhr.ino"
+#include "../../../Arduino/Sketches/Uhren/ClockWithTimers/clockwithtimers/clockwithtimers.ino"
 
 void doTest()
 {

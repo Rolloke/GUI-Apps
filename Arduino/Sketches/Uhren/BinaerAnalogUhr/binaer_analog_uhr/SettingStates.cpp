@@ -261,7 +261,7 @@ void SettingStates::beep()
 
 void SettingStates::printTime(const char* aText)
 {
-#ifdef SOFTWARE_SERIAL 
+#ifdef SOFTWARE_SERIAL
   Serial.print(aText);
   Serial.print(mTime.Day);
   Serial.print(":");

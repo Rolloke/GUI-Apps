@@ -430,7 +430,8 @@ void MainWindow::on_bntSendFile_clicked()
                 {
                     sendSerialText(fLine);
                 }
-            } while (fOK);
+            }
+            while (fOK);
         }
 
     }

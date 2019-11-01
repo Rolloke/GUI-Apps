@@ -6,10 +6,15 @@
 #include <Time.h>
 #include <TimeAlarms.h>
 
+#define EN 1
+#define DE 2
+#define LANGUAGE DE
+
+
 class SettingStates
 {
 public:
-  enum state  { Time, Date, Timer, Timers=4, SetTime=Timer+Timers+1, StoreTime, SetDate, SetYear, SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
+  enum state  { Time, Date, Timer, Timers=4, SetTime=Timer+Timers+1, SetDate, SetYear, StoreTime, SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
                 LastState     = Timer+Timers,
                 FirstSetState = SetAlarm,
                 LastSetState  = SetAlarmDay };
@@ -93,7 +98,6 @@ private:
   AlarmId  mAlarmID;
   AlarmId  mTimerID[Timers];
   time_t   mTimerStartTime[Timers];
-  bool     mTimerActive[Timers];
   OnTick_t mTimerFunction;
   OnTick_t mAlarmFunction;
   String   mTimerName;

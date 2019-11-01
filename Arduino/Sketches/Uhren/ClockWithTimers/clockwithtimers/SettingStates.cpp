@@ -4,9 +4,9 @@
 #include <button.h>
 
 
-
 #define TICK_INTERVAL_MS     500
 #define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
+
 
 // \brief constructor
 SettingStates::SettingStates()
@@ -103,8 +103,7 @@ void SettingStates::onTrigger()
                         handleSetTimeState();
       break;
     case StoreTime:
-      RTC.set(makeTime(mTime));
-      mTimeChanged = false;
+      if (getButtonState(Mode) == Button::released) mState = Time;
       break;
     case SetAlarm:      handleSetAlarmState();     break;
     case SetAlarmMode:  handleSetAlarmModeState(); break;
@@ -127,11 +126,13 @@ String SettingStates::getStateName()
 {
   switch (mState)
   {
+#if LANGUAGE == EN
     case Time:          return "Time";
     case Date:          return "Date";
     case SetTime:       return "Set Time";
     case SetDate:       return "Set Date";
     case SetYear:       return "Set Year";
+    case StoreTime:     return "Store Time";
     case SetAlarm:      return "Set Alarm";
     case SetAlarmMode:  return "Set AlarmMode";
     case SetAlarmDay:   return "Set AlarmDay";
@@ -144,6 +145,26 @@ String SettingStates::getStateName()
       }
       else return "invalid";
   }
+#else
+  case Time:          return "Uhrzeit";
+  case Date:          return "Datum";
+  case SetTime:       return "Uhrzeit stellen";
+  case SetDate:       return "Datum stellen";
+  case SetYear:       return "Jahr stellen";
+  case StoreTime:     return "Speichern";
+  case SetAlarm:      return "Alarm stellen";
+  case SetAlarmMode:  return "Alarm Modus";
+  case SetAlarmDay:   return "Alarm Tag";
+  case SetAlarmMelody:return "Alarm Melodie";
+  default:
+    if (isTimerState())
+    {
+        mTimerName = "Timer " + String(getTimerIndex()+1);
+        return mTimerName;
+    }
+    else return "invalid";
+}
+#endif
 }
 
 uint8_t SettingStates::getState()
@@ -192,7 +213,8 @@ int SettingStates::getSeconds()
   {
     case Time: return second();
     case Date: return year();
-    case SetTime: case SetDate: case SetYear: return 0;
+    case SetYear: return tmYearToCalendar(mTime.Year);
+    case SetTime: case SetDate: return 0;
     default:
       if (isTimerState())
       {
@@ -260,13 +282,20 @@ void SettingStates::handleStateChanged()
 {
   if (mState == SetTime)
   {
-     if (!RTC.read(mTime))
-     {
-       mTime.Hour    = 0;
-       mTime.Minute  = 0;
-       mTime.Month   = 1;
-       mTime.Day     = 1;
-     }
+      if (RTC.chipPresent())
+      {
+         if (!RTC.read(mTime))
+         {
+           mTime.Hour    = 0;
+           mTime.Minute  = 0;
+           mTime.Month   = 1;
+           mTime.Day     = 1;
+         }
+      }
+      else
+      {
+          breakTime(now(), mTime);
+      }
   }
   if (mState == SetAlarm)
   {
@@ -313,10 +342,10 @@ void SettingStates::handleTimerState()
 
 void SettingStates::handleModeInSetTimeStates()
 {
-  if (getButtonState(Mode) == Button::pressed)
+  if (getButtonState(Mode) == Button::released)
   {
     mState = (state) (mState + 1);
-    if (mState >= SetYear)
+    if (mState > SetYear)
     {
         mState = SetTime;
     }
@@ -326,6 +355,12 @@ void SettingStates::handleModeInSetTimeStates()
       if (mTimeChanged)
       {
           mState = StoreTime;
+          if (RTC.chipPresent())
+          {
+            RTC.set(makeTime(mTime));
+          }
+          setTime(mTime.Hour, mTime.Minute, mTime.Second, mTime.Day, mTime.Month, tmYearToY2k(mTime.Year));
+          mTimeChanged = false;
       }
       else
       {
@@ -336,7 +371,7 @@ void SettingStates::handleModeInSetTimeStates()
 
 void SettingStates::handleModeInSetAlarmStates()
 {
-  if (getButtonState(Mode) == Button::pressed)
+  if (getButtonState(Mode) == Button::released)
   {
     mState = (state) (mState + 1);
     if (mAlarmMode == Weekly && mState == SetAlarmDay)
@@ -356,7 +391,7 @@ void SettingStates::handleModeInSetAlarmStates()
 
 void SettingStates::handleModeInTimeStates()
 {
-    if (getButtonState(Mode) == Button::pressed)
+    if (getButtonState(Mode) == Button::released)
     {
         mState = static_cast<state>(mState + 1);
         if (mState == (Timer+Timers))
@@ -378,11 +413,17 @@ void SettingStates::handleHourMinute()
     }
     else if ( isButtonPressed(Minute))
     {
-      ++mTime.Minute;
+      if (++mTime.Minute == 60)
+      {
+          mTime.Minute = 0;
+      }
     }
     else if ( isButtonPressed(Hour) )
     {
-      ++mTime.Hour;
+      if (++mTime.Hour == 24)
+      {
+          mTime.Hour = 0;
+      }
     }
 } 
 
@@ -391,25 +432,32 @@ void SettingStates::handleMonthDay()
 {
     if ( isButtonPressed(Hour) && isButtonPressed(Minute))
     {
-      mTime.Month = mTime.Day = 0;
+      mTime.Month = mTime.Day = 1;
     }
     else if ( isButtonPressed(Minute))
     {
-      ++mTime.Day;
+      if (++mTime.Day == 32)
+      {
+          mTime.Day = 1;
+      }
+
     }
     else if ( isButtonPressed(Hour) )
     {
-      ++mTime.Month;
+      if (++mTime.Month == 13)
+      {
+          mTime.Month = 1;
+      }
     }
 } 
 
 void SettingStates::handleYear()
 {
-    if ( isButtonPressed(Plus) && tmYearToY2k(mTime.Year) < 63)
+    if ( isButtonPressed(Plus) && mTime.Year < 255)
     {
       ++mTime.Year;
     }
-    else if ( isButtonPressed(Minus) && tmYearToY2k(mTime.Year) > 0 )
+    else if ( isButtonPressed(Minus) && mTime.Year > 0 )
     {
       --mTime.Year;
     }
@@ -438,7 +486,6 @@ void SettingStates::handleActivateTimer()
       mTimerID[getTimerIndex()] = Alarm.timerOnce(mTime.Hour, mTime.Minute, 0, mTimerFunction);
       Alarm.enable(mTimerID[getTimerIndex()]);
       mTimerStartTime[getTimerIndex()] = now();
-      mTimerActive[getTimerIndex()] = true;
     }
   } 
 }
@@ -458,16 +505,17 @@ int SettingStates::onTimerAlarm()
     {
         return Timers;
     }
+    return -1;
 }
 
 void SettingStates::stopTimer(int aIndex)
 {
-  time_t fDiff     = Alarm.read(mTimerID[aIndex]);
+  time_t fDiff = now() - mTimerStartTime[aIndex];
   mTime.Hour       = hour(fDiff);
   mTime.Minute     = minute(fDiff);
   mTime.Second     = second(fDiff);
-  Alarm.disable(mTimerID[aIndex]);
-  mTimerActive[getTimerIndex()] = false;
+  Alarm.free(mTimerID[aIndex]);
+  mTimerID[aIndex] = dtINVALID_ALARM_ID;
 }
 
 int SettingStates::getTimerIndex()
@@ -482,7 +530,7 @@ bool SettingStates::isTimerState()
 
 bool SettingStates::isTimerActive()
 {
-    return isTimerState() && mTimerID[getTimerIndex()] != dtINVALID_ALARM_ID && mTimerActive[getTimerIndex()];
+    return isTimerState() && mTimerID[getTimerIndex()] != dtINVALID_ALARM_ID;
 }
 
 bool SettingStates::isAlarmActive()

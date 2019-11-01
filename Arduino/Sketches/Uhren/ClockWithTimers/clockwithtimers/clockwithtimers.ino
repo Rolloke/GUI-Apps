@@ -127,16 +127,15 @@ void setup()
   }
   
 
-  gModeButton.setDelay(4000);
+  gModeButton.setDelay(3000);
   //gModeButton.setRepeat(2000);
   gHourMinuteButton.setDelay(1000);
-  gHourMinuteButton.setRepeat(500);
+  gHourMinuteButton.setRepeat(250);
 
 
   gSettings.setTimerFunction(&onTimerAlarm);
   gSettings.setAlarmFunction(&onTimerAlarm);
   LCD_BEGIN
-          gMelody.startMelody();
 }
 
 
@@ -280,11 +279,39 @@ void PrintLCD_Time()
         switch (gSettings.getState())
         {
         case SettingStates::Time:
-        case SettingStates::Date:
-        case SettingStates::SetTime:
         case SettingStates::SetAlarm:
           fPrintTime = true;
           break;
+        case SettingStates::Date:
+#if LANGUAGE == EN
+                LCD_PRINT(monthShortStr(month()));
+                LCD_PRINT(",");
+                LCD_PRINT(day());
+#else
+            print2Decimals(gSettings.getMinutes());
+            LCD_PRINT(":");
+            print2Decimals(gSettings.getHours());
+#endif
+            break;
+        case SettingStates::SetTime:
+            print2Decimals(gSettings.getHours());
+            LCD_PRINT(":");
+            print2Decimals(gSettings.getMinutes());
+            break;
+        case SettingStates::SetDate:
+#if LANGUAGE == EN
+            print2Decimals(gSettings.getHours());
+            LCD_PRINT(":");
+            print2Decimals(gSettings.getMinutes());
+#else
+            print2Decimals(gSettings.getMinutes());
+            LCD_PRINT(":");
+            print2Decimals(gSettings.getHours());
+            break;
+#endif
+        case SettingStates::SetYear:
+            print2Decimals(gSettings.getSeconds());
+            break;
         case SettingStates::SetAlarmMode:
           LCD_PRINT("Mode: ");
           LCD_PRINT(gSettings.getMinutes());

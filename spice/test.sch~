@@ -1,0 +1,26 @@
+v 20130925 2
+C 44100 50900 1 0 0 aop-std-1.sym
+{
+T 45150 51050 5 10 0 0 0 0 1
+device=AOP-Standard
+T 44800 51000 5 10 1 1 0 0 1
+refdes=U?
+T 45150 51650 5 10 0 0 0 0 1
+footprint=DIP8
+T 45150 51250 5 10 0 0 0 0 1
+symversion=0.1
+}
+C 44100 49200 1 0 0 aop-std-1.sym
+{
+T 45150 49350 5 10 0 0 0 0 1
+device=AOP-Standard
+T 44800 49300 5 10 1 1 0 0 1
+refdes=U?
+T 45150 49950 5 10 0 0 0 0 1
+footprint=DIP8
+T 45150 49550 5 10 0 0 0 0 1
+symversion=0.1
+}
+C 44400 52500 1 0 0 9V-plus-1.sym
+C 44400 48300 1 0 0 9V-minus-1.sym
+C 43100 48800 1 0 0 gnd-1.sym

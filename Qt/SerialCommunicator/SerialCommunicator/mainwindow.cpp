@@ -111,9 +111,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     fSettings.beginGroup(config::sGroupMisc);
     LOAD_IP(fSettings, ui->ckReceive, setChecked, isChecked, toBool);
+    on_ckReceive_clicked(ui->ckReceive->isChecked());
     LOAD_IP(fSettings, ui->ckReportSent, setChecked, isChecked, toBool);
     LOAD_IP(fSettings, ui->ckTriggerText, setChecked, isChecked, toBool);
-    on_ckReceive_clicked(ui->ckReceive->isChecked());
+    LOAD_IP(fSettings, ui->ckHexBinary, setChecked, isChecked, toBool);
 
     int size = fSettings.beginReadArray(config::sMiscCommand);
     for (int i = 0; i < size; ++i)
@@ -190,6 +191,7 @@ MainWindow::~MainWindow()
     STORE_IP(fSettings, ui->ckReceive, isChecked);
     STORE_IP(fSettings, ui->ckReportSent, isChecked);
     STORE_IP(fSettings, ui->ckTriggerText, isChecked);
+    STORE_IP(fSettings, ui->ckHexBinary, isChecked);
 
     fSettings.beginWriteArray(config::sMiscCommand);
     int fCount = ui->comboSendCmd->count();
@@ -339,7 +341,7 @@ void MainWindow::on_btnReceive_clicked()
                 QString fString;
                 for (auto &fByte : fArray)
                 {
-                    fString += QString("%1").arg(fByte, 2, 16);
+                    fString += QString("%1").arg(static_cast<ushort>(fByte), static_cast<int>(2), static_cast<int>(16));
                 }
                 ui->lineReceive->append(fString);
             }
