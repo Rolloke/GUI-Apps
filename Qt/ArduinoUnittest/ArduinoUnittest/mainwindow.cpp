@@ -25,11 +25,12 @@
 #define LOAD_NP(SETTING, ITEM, SET, GET, CONVERT)  ITEM.SET(SETTING.value(getSettingsName(#ITEM), ITEM.GET()).CONVERT())
 #define LOAD_STR(SETTING, ITEM, CONVERT)           ITEM=SETTING.value(getSettingsName(#ITEM), ITEM).CONVERT()
 
+
 QString getSettingsName(const QString& aItemName);
 
 enum eTable
 {
-    ePinIndex, ePinNo, ePinType, eValue, eLast
+    ePinIndex, ePinNo, ePinType, eValue, eLast, eRange=eLast
 };
 
 SerialInterface Serial;
@@ -42,8 +43,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , mFirstAnalogPin(0)
     , mLiquidCrystal(0)
+    , mLogicAnalyser(this)
 {
     ui->setupUi(this);
+
+    connect(&mLogicAnalyser, SIGNAL(record(bool)), this, SLOT(on_Record(bool)));
+    connect(&mLogicAnalyser, SIGNAL(isshown(bool)), this, SLOT(on_ShowLogicAnalyser(bool)));
+    mLogicAnalyser.millis = &MainWindow::elapsed;
 
     QSettings fSettings("config.ini", QSettings::NativeFormat);
 
@@ -98,11 +104,9 @@ MainWindow::MainWindow(QWidget *parent)
         mListModel->setData(mListModel->index(fRow, ePinNo, QModelIndex()), fPin);
         mListModel->setData(mListModel->index(fRow, ePinType, QModelIndex()), "");
         mListModel->setData(mListModel->index(fRow, eValue, QModelIndex()), "0");
+        mListModel->setData(mListModel->index(fRow, eRange, QModelIndex()), "1");
         ++fRow;
     }
-
-
-
 
     ui->tableView->setColumnWidth(ePinIndex,  30);
     ui->tableView->setColumnWidth(ePinNo   ,  85);
@@ -212,11 +216,22 @@ void MainWindow::updateLiquidCrystal()
     }
 }
 
-int  MainWindow::getPinValue(int aPin)
+int  MainWindow::getPinValue(int aPin, int aRange)
 {
     if (aPin >= 0 && aPin < mListModel->rowCount())
     {
-        return mListModel->data(mListModel->index(aPin, eValue, QModelIndex())).toInt();
+        if (aRange != 1)
+        {
+            mListModel->setData(mListModel->index(aPin, eRange, QModelIndex()), QString::number(aRange));
+        }
+        int fValue = mListModel->data(mListModel->index(aPin, eValue, QModelIndex())).toInt();
+        if (mLogicAnalyser.isRecording() && isPinSelected(aPin))
+        {
+            QString fPinName = mListModel->data(mListModel->index(aPin, ePinNo, QModelIndex())).toString();
+            mLogicAnalyser.setValue(fPinName.toStdString(), millis(),
+                                    aRange != 1 ? static_cast<float>(fValue) / static_cast<float>(aRange) : fValue);
+        }
+        return fValue;
     }
     else
     {
@@ -226,16 +241,82 @@ int  MainWindow::getPinValue(int aPin)
     return -1;
 }
 
-void MainWindow::setPinValue(int aPin, int aValue)
+void MainWindow::setPinValue(int aPin, int aValue, int aRange)
 {
     if (aPin >= 0 && aPin < mListModel->rowCount())
     {
+        if (aRange != 1)
+        {
+            mListModel->setData(mListModel->index(aPin, eRange, QModelIndex()), QString::number(aRange));
+        }
+        if (mLogicAnalyser.isRecording() && isPinSelected(aPin))
+        {
+            QString fPinName = mListModel->data(mListModel->index(aPin, ePinNo, QModelIndex())).toString();
+            mLogicAnalyser.setValue(fPinName.toStdString(), millis(),
+                                    aRange != 1 ? static_cast<float>(aValue) / static_cast<float>(aRange) : aValue);
+        }
         mListModel->setData(mListModel->index(aPin, eValue, QModelIndex()), QString::number(aValue));
     }
     else
     {
         printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
     }
+}
+
+void MainWindow::on_Record(bool aRecord)
+{
+    if (aRecord)
+    {
+        QList<int> fPinList;
+        QModelIndexList indexes = ui->tableView->selectionModel()->selection().indexes();
+        if (indexes.count())
+        {
+            for (auto &findex : indexes)
+            {
+                fPinList.append(findex.row());
+            }
+        }
+        else
+        {
+            for (int i=0; i<mListModel->rowCount(); ++i)
+            {
+                fPinList.append(i);
+            }
+        }
+
+        for (auto &fPin : fPinList)
+        {
+            QString fPinName = mListModel->data(mListModel->index(fPin, ePinNo, QModelIndex())).toString();
+            int fValue = mListModel->data(mListModel->index(fPin, eValue, QModelIndex())).toInt();
+            int fRange  = mListModel->data(mListModel->index(fPin, eRange, QModelIndex())).toInt();
+            mLogicAnalyser.setValue(fPinName.toStdString(), millis(),
+                                    fRange != 1 ? static_cast<float>(fValue) / static_cast<float>(fRange) : fValue);
+        }
+    }
+}
+
+void MainWindow::on_ShowLogicAnalyser(bool aShow)
+{
+    ui->btnLogicAnalyzer->setChecked(aShow);
+}
+
+
+
+bool MainWindow::isPinSelected(int aPin)
+{
+    QModelIndexList indexes = ui->tableView->selectionModel()->selection().indexes();
+    if (indexes.count())
+    {
+        if (std::find_if(indexes.begin(), indexes.end(), [aPin] (QModelIndexList::const_reference aR) { return aR.row() == aPin; } ) != indexes.end())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 void MainWindow::pinMode(int aPin, int aType)
@@ -292,7 +373,7 @@ int  MainWindow::analogRead(int aPin)
 {
     if (gmThis)
     {
-        return gmThis->getPinValue(aPin);
+        return gmThis->getPinValue(aPin, 1024);
     }
     return 0;
 }
@@ -301,7 +382,7 @@ void MainWindow::analogWrite(int aPin, int aValue)
 {
     if (gmThis)
     {
-        gmThis->setPinValue(aPin, aValue);
+        gmThis->setPinValue(aPin, aValue, 256);
     }
     else
     {
@@ -433,9 +514,7 @@ void MainWindow::on_bntSendFile_clicked()
             }
             while (fOK);
         }
-
     }
-
 }
 
 void MainWindow::on_btnClearText_clicked()
@@ -618,3 +697,14 @@ QString getSettingsName(const QString& aItemName)
     else return aItemName;
 }
 
+void MainWindow::on_btnLogicAnalyzer_clicked(bool checked)
+{
+    if (checked)
+    {
+        mLogicAnalyser.show();
+    }
+    else
+    {
+        mLogicAnalyser.hide();
+    }
+}

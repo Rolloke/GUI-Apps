@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <sstream>
+#include <logic_analyser.h>
 
 class QAbstractItemModel;
 class QModelIndex;
@@ -45,8 +46,9 @@ public:
 
 
     void setLiquidCrystal(LiquidCrystal* aLCD);
-    int  getPinValue(int aPin);
-    void setPinValue(int aPin, int aValue);
+    int  getPinValue(int aPin, int aRange=1);
+    void setPinValue(int aPin, int aValue, int aRange=1);
+    bool isPinSelected(int aPin);
 
 private:
     void digitalWrite(const std::vector<int>& aPins, int aValue);
@@ -63,6 +65,8 @@ public Q_SLOTS:
     void on_Loop();
 
     void on_OneSecond();
+    void on_Record(bool );
+    void on_ShowLogicAnalyser(bool );
 
 private Q_SLOTS:
     void on_btnDoTest_clicked();
@@ -83,16 +87,12 @@ private Q_SLOTS:
     void on_btnDown_released();
     void on_btnLeft_pressed();
     void on_btnLeft_released();
-
     void on_bntSendFile_clicked();
-
     void on_btnF1_pressed();
-
     void on_btnF1_released();
-
     void on_btnF2_pressed();
-
     void on_btnF2_released();
+    void on_btnLogicAnalyzer_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -100,6 +100,7 @@ private:
     int  mFirstAnalogPin;
     QTime* mArduinoTime;
     LiquidCrystal* mLiquidCrystal;
+    LogicAnalyser  mLogicAnalyser;
 
     static MainWindow* gmThis;
     static tPinAccess gmStaticPinAccess;

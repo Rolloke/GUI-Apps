@@ -24,7 +24,10 @@ SOURCES += main.cpp \
            Print.cpp \
            LiquidCrystal.cpp \
            Stream.cpp \
-           Wire.cpp
+           Wire.cpp \
+           logic_analyser.cpp \
+           logicview.cpp \
+           logger.cpp
 
 HEADERS  += mainwindow.h \
             Arduino.h \
@@ -37,9 +40,13 @@ HEADERS  += mainwindow.h \
             Printable.h \
             LiquidCrystal.h \
             Stream.h \
-            Wire.h
+            Wire.h \
+            logic_analyser.h \
+            logicview.h \
+            logger.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    logic_analyser.ui
 
 ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.9/libraries
 ARDUINO_LOCAL_LIBRARY_PATH = /home/rolf/Projekte/Arduino/libraries

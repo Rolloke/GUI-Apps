@@ -17,7 +17,7 @@ SOURCES += clock_with_timer.cpp
 SOURCES += $${ARDUINO_PATH}/clockwithtimers.ino
 SOURCES += $${ARDUINO_PATH}/SettingStates.cpp
 
-# Libraries
+# Arduino Libraries
 LIBRARY1 = $${ARDUINO_LOCAL_LIBRARY_PATH}/Button/src
 INCLUDEPATH += $${LIBRARY1}
 SOURCES += $${LIBRARY1}/button.cpp
