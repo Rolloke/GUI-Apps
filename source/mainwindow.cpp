@@ -845,6 +845,7 @@ void MainWindow::hideLabels()
     {
         fLabel->setVisible(false);
     }
+    mCurrentLabel = 0;
 }
 
 
