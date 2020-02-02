@@ -51,7 +51,7 @@ void LogicView::determineRange(const PinMap& aPins)
         range.setLeft(fMin->second.begin()->first);
         range.setRight(fMax->second.rbegin()->first);
         float fEnhance = range.width() * 0.05;
-        range.setLeft(range.left()   - fEnhance);
+        range.setLeft(range.left());//   - fEnhance);
         if (mCurrentRecordTime)
         {
             range.setRight(*mCurrentRecordTime);
@@ -102,7 +102,6 @@ const float fOffset = 0.1f;
 
 void LogicView::drawLogicCurves(const PinMap& aPins)
 {
-
     scene()->clear();
 
     float       fLevel  = 0.0f;
@@ -160,6 +159,29 @@ void LogicView::mousePressEvent ( QMouseEvent * event )
     mSelectionStartPoint = event->pos();
 }
 
+void LogicView::wheelEvent(QWheelEvent *event)
+{
+    if (mSelectedRange)
+    {
+        const float fDeltaM = 140;
+        float fFactor = 0;
+        if (event->delta() > 0)
+        {
+            fFactor = event->delta() / fDeltaM;
+        }
+        else
+        {
+            fFactor = -fDeltaM / event->delta();
+        }
+        QPointF fAngleDelta = mapToScene(event->pos());
+        QRectF& fRect = *mSelectedRange;
+        float fNewHalfWidth = fRect.width() * fFactor * 0.5;
+        fRect.setLeft(fAngleDelta.x() - fNewHalfWidth);
+        fRect.setRight(fAngleDelta.x() + fNewHalfWidth);
+        Q_EMIT sendUpdate();
+    }
+}
+
 void LogicView::mouseReleaseEvent ( QMouseEvent * event )
 {
     QGraphicsView::mouseReleaseEvent(event);
@@ -182,7 +204,7 @@ void LogicView::mouseReleaseEvent ( QMouseEvent * event )
             if (fSelection.width() > 3 && fSelection.height() > 3)
             {
                 QRectF fSceneRect(mapToScene(fSelection.topLeft()), mapToScene(fSelection.bottomRight()));
-                QString fString = "Width: " + QString::number(fSceneRect.width() * 0.001) + " s, Height: " + QString::number(fSceneRect.height()) + " V";
+                QString fString = "Width: " + QString::number(fSceneRect.width() * 0.001) + " s, Height: " + QString::number(fSceneRect.height() / fHeight) + " V";
                 Q_EMIT(setStatusText(fString));
             }
             else
