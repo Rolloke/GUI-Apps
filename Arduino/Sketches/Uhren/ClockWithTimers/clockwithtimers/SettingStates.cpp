@@ -378,7 +378,7 @@ void SettingStates::handleModeInSetAlarmStates()
     {
       mState = (state) (mState + 1);
     }
-    if (mState >= LastSetState)
+    if (mState > LastSetState)
     {
         mState = SetAlarm;
     }

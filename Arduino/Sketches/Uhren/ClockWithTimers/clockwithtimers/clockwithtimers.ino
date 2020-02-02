@@ -126,7 +126,9 @@ void setup()
     setSyncProvider(RTC.get);
   }
   
-
+  gModeButton.setDeBounce(10);
+  gAlarmButton.setDeBounce(10);
+  gHourMinuteButton.setDeBounce(10);
   gModeButton.setDelay(3000);
   //gModeButton.setRepeat(2000);
   gHourMinuteButton.setDelay(1000);
@@ -313,11 +315,19 @@ void PrintLCD_Time()
             print2Decimals(gSettings.getSeconds());
             break;
         case SettingStates::SetAlarmMode:
+#if LANGUAGE == EN
           LCD_PRINT("Mode: ");
+#else
+          LCD_PRINT("Modus: ");
+#endif
           LCD_PRINT(gSettings.getMinutes());
           break;
         case SettingStates::SetAlarmDay:
-          LCD_PRINT("Day: ");
+#if LANGUAGE == EN
+          LCD_PRINT(dayStr(gSettings.getMinutes()));
+#else
+          LCD_PRINT("Wochentag: ");
+#endif
           LCD_PRINT(gSettings.getMinutes());
           break;
         case SettingStates::SetAlarmMelody:
