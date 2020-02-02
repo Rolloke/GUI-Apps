@@ -17,6 +17,7 @@ gbr/
 *.plt
 *.prn
 *.b#*
+*.s#*
 *.gif
 *.png
 *.docx
@@ -25,4 +26,5 @@ gbr/
 *.scr
 *.pro
 *.hpglx
+*.ods
 
