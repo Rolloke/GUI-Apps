@@ -524,7 +524,7 @@ void PostscriptInterpreter::parseProlog(const std::string& aLine)
         }
         else
         {
-            std::map< std::string, eNames >::const_iterator it = mNameMap.begin();
+            auto it = mNameMap.begin();
             for (; it != mNameMap.end(); ++it)
             {
                 if (it->second == rotate)

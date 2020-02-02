@@ -61,6 +61,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->mSendPos = boost::bind(&MainWindow::statusPosition, this, _1, _2);
 
+    connect(ui->graphicsView, SIGNAL(send_zoom_in()), this, SLOT(on_zoomIn_clicked()));
+    connect(ui->graphicsView, SIGNAL(send_zoom_out()), this, SLOT(on_zoomOut_clicked()));
+
     mPS_Interpreter.setPlotterDC(ui->graphicsView);
     mHPGL_Interpreter.setPlotterDC(ui->graphicsView);
     mGCodeInterpreter.setPlotterDC(ui->graphicsView);

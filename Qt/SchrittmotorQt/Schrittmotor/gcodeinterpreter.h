@@ -1,16 +1,18 @@
 #ifndef GCODEINTERPRETER_H
 #define GCODEINTERPRETER_H
 
+#include "defines.h"
+#include "matrix.h"
+
 #include <string>
 #include <map>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/container/flat_map.hpp>
 #include <QRect>
 
-#include "defines.h"
-#include "matrix.h"
 
 
 class CPlotterDC;
@@ -18,7 +20,7 @@ class PointF;
 
 class GCodeInterpreter
 {
-    typedef std::map<std::string, FLOAT> float_id_map;
+    typedef boost::container::flat_map<std::string, FLOAT> float_id_map;
 public:
     GCodeInterpreter();
     void setPlotterDC(CPlotterDC*aDC) { mDC = aDC; }

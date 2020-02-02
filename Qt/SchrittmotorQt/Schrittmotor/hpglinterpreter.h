@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include "defines.h"
+#include "matrix.h"
+
 #include <vector>
 #include <string>
 #include <exception>
@@ -10,10 +13,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/container/flat_map.hpp>
 #include <QRect>
 
-#include "defines.h"
-#include "matrix.h"
 
 
 class CPlotterDC;
@@ -41,7 +43,7 @@ private:
     void parseHPGL(const std::string& aLine);
 
     size_t decodeNumbers(const std::string& aString,const std::string&aSeparator, std::vector<FLOAT>& aNumbers);
-    typedef std::map< std::string, eNames>      name_map;
+    typedef boost::container::flat_map< std::string, eNames>      name_map;
 
     CPlotterDC *mDC;
     boost::function< void (const std::string& ) > mParse;
