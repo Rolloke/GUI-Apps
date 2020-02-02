@@ -14,13 +14,10 @@
 #define TICK_INTERVAL_MS     500
 #define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
 
-// \brief constructor with parameters
-// \param led1 - led6 define 6 LED pins for common anode pins via resistor to display bit 0 to 5 of seconsd, minutes and hours
-// \param commonPin1 - commonPin3 define 3 pins for common cathode of the leds for seconds, minutes and hours
-// \param commonLevel HIGH defines common cathode, LOW defines common anode
-SettingStates::SettingStates(uint8_t aTonePin)
-: mTonePin(aTonePin)
-, mModeBlink(0)
+// \brief constructor
+SettingStates::SettingStates()
+: mTonePin(0)
+, mModeBlink(Active)
 , mModeLight(0)
 , mLastTickTime(0)
 , mSetTimeSelect(Time)
@@ -54,6 +51,15 @@ void SettingStates::setTimerFunction(OnTick_t aF)
   mTimerFunction = aF;
 }
 
+void SettingStates::setTonePin(uint8_t aPin)
+{
+    mTonePin = aPin;
+}
+void SettingStates::setBlinkMode(uint8_t aMode)
+{
+    mModeBlink = aMode;
+}
+
 void SettingStates::triggerButton(button aButton, uint8_t aState)
 {
   switch (aButton)
@@ -73,8 +79,11 @@ void SettingStates::tick(unsigned long fNow)
   {
     mLastTickTime = fNow + TICK_INTERVAL_MS;
     
-    ++mModeBlink;
-    if (mModeLight > 0)
+    if (mModeBlink & Active)
+    {
+        mModeBlink ^= LED_Bit;
+    }
+    if (mModeLight > Inactive)
     {
      --mModeLight;
     }
@@ -195,7 +204,7 @@ int SettingStates::getSeconds()
     }
     break;
     case SetTime:
-    if (mModeBlink & 1)    return 0;
+    if (mModeBlink & LED_Bit) return 0;
     switch (mSetTimeSelect)
 	  {
        case SetHourMinute: return 1;
@@ -203,8 +212,9 @@ int SettingStates::getSeconds()
        case SetYear:       return 7;
        default:            return 0;
     } break;
+    case Date:             return year();
     default:
-    if (mModeBlink & 1) return 0;
+    if (mModeBlink & LED_Bit) return 0;
     else                return bit(mState - FirstSetState);
   }
   return 0;
@@ -251,7 +261,7 @@ void SettingStates::beep()
 
 void SettingStates::printTime(const char* aText)
 {
-#ifdef SOFTWARE_SERIAL 
+#ifdef SOFTWARE_SERIAL
   Serial.print(aText);
   Serial.print(mTime.Day);
   Serial.print(":");

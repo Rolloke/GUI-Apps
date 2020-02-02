@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CPlotterDC_H
+#define CPlotterDC_H
 
 #include <list>
 #include <map>
@@ -8,6 +9,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QString>
+#include <QObject>
 
 #include "boost/function.hpp"
 #include "boost/optional.hpp"
@@ -31,6 +33,7 @@ struct FD
 
 class CPlotterDC : public QGraphicsView
 {
+    Q_OBJECT
 public:
     class DrawCommand
     {
@@ -168,6 +171,13 @@ public:
     void   SetLineJoin(int aLineJoin);
     void   SetLineCap(int aLineCap);
 
+signals:
+    void send_zoom_out();
+    void send_zoom_in();
+
+public slots:
+    void test();
+
 protected:
     virtual void	mousePressEvent ( QMouseEvent * event );
     virtual void	mouseMoveEvent( QMouseEvent * event );
@@ -212,3 +222,5 @@ private:
     boost::optional<unsigned long> mCombineID;
     bool mAutoDetermineDrillpoints;
 };
+
+#endif // CPlotterDC_H

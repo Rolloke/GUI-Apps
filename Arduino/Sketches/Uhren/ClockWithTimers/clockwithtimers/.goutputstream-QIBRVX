@@ -1,0 +1,147 @@
+#include "SettingStates.h"
+#include <Arduino.h>
+#include <SoftwareSerial.h>
+
+//extern SoftwareSerial mySerial;
+
+// \brief constructor with parameters
+// \param led1 - led6 define 6 LED pins for common anode pins via resistor to display bit 0 to 5 of seconsd, minutes and hours
+// \param commonPin1 - commonPin3 define 3 pins for common cathode of the leds for seconds, minutes and hours
+// \param commonLevel HIGH defines common cathode, LOW defines common anode
+SettingStates::SettingStates( uint8_t aBtnMode, uint8_t aBtnHour, uint8_t aBtnMinute, uint8_t aBtnAlarm  ):
+  mState(Time)
+, mModeCount(0)
+, mModeSwitchToSettings(8)
+, mModeSwitchToDate(6)
+, mModeSwitchStates(2)
+
+{
+  mButtonPin[Mode]           = aBtnMode;
+  mButtonPin[HourPlus]       = aBtnHour;
+  mButtonPin[MinuteMinus]    = aBtnMinute;
+  mButtonPin[AlarmStartStop] = aBtnAlarm;
+  for (uint8_t i=0; i<buttons; ++i)
+  {
+    pinMode(mButtonPin[i], INPUT);
+    mButtonState[i] = LOW;
+  }
+}
+
+void SettingStates::tick()
+{
+  readButtons();
+  checkMode();
+  state fOldState(mState);
+  switch (mState)
+  {
+    case Time:      handleTimeState(); break;
+    case Date:      handleDateState(); break;
+    case SetAlarm1: handleSetAlarm1State(); break;
+    case SetAlarm2: handleSetAlarm2State(); break;
+    case SetAlarm3: handleSetAlarm3State(); break;
+    case Timer:     handleTimerState(); break;
+    case SetDimmer: handleSetDimmerState(); break;
+  }
+  if (fOldState != mState)
+  {
+    Serial.print("new state is:");
+    Serial.println(mState);
+  }
+}
+
+SettingStates::state SettingStates::getState()
+{
+  return mState;
+}
+
+uint8_t SettingStates::getStateBits()
+{
+  
+  return bit(mState - 1);
+}
+
+bool SettingStates::isPressed(button aBtn)
+{
+  return mButtonState[aBtn];
+}
+
+void SettingStates::readButtons()
+{
+  for (int i=0; i<buttons; ++i)
+  {
+    mButtonState[i] = digitalRead(mButtonPin[i]);
+  }
+}
+
+void SettingStates::checkMode()
+{
+  if (isPressed(Mode))
+  {
+    ++mModeCount;
+  }
+  else
+  {
+    mModeCount = 0;
+  }
+}
+
+void SettingStates::handleTimeState()
+{
+  if (isPressed(Mode))
+  {
+    mState = Date;
+  }
+}
+
+void SettingStates::handleDateState()
+{
+  if (!isPressed(Mode))
+  {
+    mState = Time;
+  }
+  if (mModeCount == mModeSwitchToSettings)
+  {
+    mState = SetAlarm1;
+    mModeCount = 0;
+  }
+}
+
+void SettingStates::handleModeInSetStates()
+{
+  if (mModeCount == mModeSwitchStates)
+  {
+    mState =  (mState == SetDimmer) ? SetAlarm1  : (state) (mState + 1);
+  }
+  if (mModeCount == mModeSwitchToDate)
+  {
+    mState = Date;
+    mModeCount = 0;
+  }
+}
+
+void SettingStates::handleSetAlarm1State()
+{
+  handleModeInSetStates();
+}
+
+void SettingStates::handleSetAlarm2State()
+{
+  handleModeInSetStates();
+}
+
+void SettingStates::handleSetAlarm3State()
+{
+  handleModeInSetStates();
+}
+
+void SettingStates::handleTimerState()
+{
+  handleModeInSetStates();
+}
+
+void SettingStates::handleSetDimmerState()
+{
+  handleModeInSetStates();
+}
+
+

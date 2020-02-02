@@ -19,7 +19,8 @@ public:
   void startMelody();
   void stopMelody();
   bool isPlaying();
-  
+  void setTones(Tone* aTones);
+
 private:
   Melody();
   void setupPins();

@@ -201,6 +201,9 @@ File:</string>
          <layout class="QVBoxLayout" name="verticalLayoutResponse">
           <item>
            <widget class="QCheckBox" name="ckHexBinary">
+            <property name="toolTip">
+             <string>Text output is formatted in Hex for binary serial input</string>
+            </property>
             <property name="text">
              <string>Hex binary</string>
             </property>
@@ -208,6 +211,9 @@ File:</string>
           </item>
           <item>
            <widget class="QCheckBox" name="ckTriggerText">
+            <property name="toolTip">
+             <string>Sends a text line, triggered by serial input from device</string>
+            </property>
             <property name="text">
              <string>Trigger
 TextLine</string>

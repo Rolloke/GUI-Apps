@@ -365,6 +365,19 @@ Negative pin number means button pressed = 0.</string>
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="btnLogicAnalyzer">
+          <property name="text">
+           <string>Logik Analyse</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout"/>
+        </item>
        </layout>
       </item>
      </layout>

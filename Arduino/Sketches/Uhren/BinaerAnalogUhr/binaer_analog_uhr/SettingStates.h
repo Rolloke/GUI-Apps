@@ -14,10 +14,13 @@ public:
   enum button { Mode=0, Hour=1, Minute=2, AlarmBtn=3, buttons=4, Plus=Hour, Minus=Minute, Start=AlarmBtn, Stop=AlarmBtn, DateTime = AlarmBtn, ClearAll=10};
   enum alarm_mode  { Once, Daily, Weekly, FirstAlarmMode=Once, LastAlarmMode=Weekly }; 
   enum set_time    { SetHourMinute, SetMonthDay, SetYear };
-  SettingStates(uint8_t aTonePin=0 );
+  enum consts      { Inactive = 1, Active = 0x80, LED_Bit = 1};
+  SettingStates();
 
   void setAlarmFunction(OnTick_t aF);
   void setTimerFunction(OnTick_t aF);
+  void setTonePin(uint8_t aPin);
+  void setBlinkMode(uint8_t aMode);
   
   bool    isButtonPressed(button aBtn);
   uint8_t getButtonState(button aBtn);
@@ -40,7 +43,6 @@ public:
   void printTime(const char* aText);
   
 private:
-  SettingStates();
   bool readButtons();
   void playAlarm();
   void beep();
@@ -64,7 +66,7 @@ private:
   
   uint8_t mButtonState[buttons];
   uint8_t mTonePin;
-  uint8_t mModeBlink;
+  int8_t  mModeBlink;
   int8_t  mModeLight;
   unsigned long mLastTickTime;
   uint8_t mSetTimeSelect;

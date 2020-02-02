@@ -10,7 +10,6 @@ include (ArduinoUnittest.pro)
 ARDUINO_PATH = ../../../Arduino/Sketches/Uhren/BinaerAnalogUhr/binaer_analog_uhr
 INCLUDEPATH += $${ARDUINO_PATH}
 HEADERS += $${ARDUINO_PATH}/BinaryClockMux.h
-HEADERS += $${ARDUINO_PATH}/Melody.h
 HEADERS += $${ARDUINO_PATH}/SettingStates.h
 HEADERS += $${ARDUINO_PATH}/big_ben.h
 HEADERS += $${ARDUINO_PATH}/die_maus.h
@@ -20,9 +19,8 @@ HEADERS += $${ARDUINO_PATH}/piep.h
 HEADERS += $${ARDUINO_PATH}/SevenTone.h
 
 SOURCES += binaer_analog_uhr.cpp
-DISTFILES += $${ARDUINO_PATH}/binaer_analog_uhr.ino
+SOURCES += $${ARDUINO_PATH}/binaer_analog_uhr.ino
 SOURCES += $${ARDUINO_PATH}/BinaryClockMux.cpp
-SOURCES += $${ARDUINO_PATH}/Melody.cpp
 SOURCES += $${ARDUINO_PATH}/SettingStates.cpp
 
 # Libraries
@@ -47,3 +45,7 @@ INCLUDEPATH += $${LIBRARY4}
 SOURCES += $${LIBRARY4}/DS1307RTC.cpp
 HEADERS += $${LIBRARY4}/DS1307RTC.h
 
+LIBRARY5 = $${ARDUINO_LOCAL_LIBRARY_PATH}/Melody/src
+INCLUDEPATH += $${LIBRARY5}
+SOURCES += $${LIBRARY5}/Melody.cpp
+HEADERS += $${LIBRARY5}/Melody.h

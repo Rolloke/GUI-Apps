@@ -12,6 +12,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/container/flat_map.hpp>
 #include <QRect>
 
 
@@ -133,7 +134,7 @@ private:
         void insertContent(const std::string& aContent);
         virtual void draw(CPlotterDC* aDC, FLOAT anAngle=InvalidAngle) const;
 
-        typedef std::map<std::string, std::shared_ptr<Arithmetic>> tVariableExpressions;
+        typedef boost::container::flat_map<std::string, std::shared_ptr<Arithmetic>> tVariableExpressions;
         class Primitive
         {
         public:
@@ -200,9 +201,9 @@ private:
         Digit mY;
     };
 
-    typedef std::map< std::string, std::shared_ptr<ApertureDefine>> aperture_define_map;
-    typedef std::map< std::string, std::shared_ptr<ApertureDefine>> aperture_macro_map;
-    typedef std::map< std::string, Command> cmd_map;
+    typedef boost::container::flat_map< std::string, std::shared_ptr<ApertureDefine>> aperture_define_map;
+    typedef boost::container::flat_map< std::string, std::shared_ptr<ApertureDefine>> aperture_macro_map;
+    typedef boost::container::flat_map<std::string, Command> cmd_map;
 
     void        clear();
     QString     parseGbr(const std::string& aLine);

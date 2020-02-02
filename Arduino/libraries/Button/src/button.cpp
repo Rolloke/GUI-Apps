@@ -6,7 +6,7 @@ Button::Button(uint8_t aPin, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
   triggerEvent(anEventFnc)
 , mRepeat_ms(0)
 , mDelay_ms(0)
-, mDeBounce_ms(100)
+, mDeBounce_ms(50)
 , mTime(0)
 , mState(released)
 , mPin(aPin)
@@ -29,7 +29,7 @@ Button::Button(uint8_t* aPins, uint8_t aNoOfPins, fTriggerFunc anEventFnc, uint8
   triggerEvent(anEventFnc)
 , mRepeat_ms(0)
 , mDelay_ms(0)
-, mDeBounce_ms(100)
+, mDeBounce_ms(50)
 , mTime(0)
 , mState(released)
 , mPin(0)
@@ -132,7 +132,9 @@ void Button::tick(unsigned long fNow)
   }
   else
   {
-    if (mState >= fired && mPin != 0)
+    if ((   (mDelay_ms  > 0 && mState == delayed)
+         || (mDelay_ms == 0 && mState == fired )
+        ) && mPin != 0)
     {
       (*triggerEvent)(released, mPin);
     }

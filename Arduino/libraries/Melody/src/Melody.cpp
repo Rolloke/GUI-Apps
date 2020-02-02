@@ -55,6 +55,11 @@ void Melody::tick(unsigned long fNow_ms)
   }
 }
 
+void Melody::setTones(Tone* aTones)
+{
+    mpTones = aTones;
+}
+
 void Melody::startMelody()
 {
   mCurrent_ms = 0;

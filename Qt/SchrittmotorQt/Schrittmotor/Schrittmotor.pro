@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += multimedia
 QT += core gui
 QT += xml
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 #CONFIG(release):
 QMAKE_CXXFLAGS += -O3
 

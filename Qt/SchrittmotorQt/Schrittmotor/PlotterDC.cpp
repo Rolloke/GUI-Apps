@@ -243,6 +243,11 @@ CPlotterDC::~CPlotterDC()
 {
 }
 
+void CPlotterDC::test()
+{
+
+}
+
 void  CPlotterDC::clearDrawCommands()
 {
     mDrawCommands.clear();
@@ -400,7 +405,14 @@ void CPlotterDC::mouseReleaseEvent ( QMouseEvent * event )
 
 void CPlotterDC::wheelEvent(QWheelEvent *event)
 {
-
+    if (event->delta() > 0)
+    {
+        emit send_zoom_in();
+    }
+    else if (event->delta() < 0)
+    {
+        emit send_zoom_out();
+    }
 }
 
 void CPlotterDC::getCurrentPoint(FLOAT& x, FLOAT& y) const
