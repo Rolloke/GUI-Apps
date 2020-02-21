@@ -126,6 +126,7 @@ private:
     void removeIgnoreMapLevel(int aLevel);
     void insertSourceTree(const QDir& fSource, int fItem);
     QString getItemFilePath(QTreeWidgetItem* item);
+    void updateTreeItemStatus(QTreeWidgetItem * aItem);
 
     void     initContextMenuActions();
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="", const QString& aToolTip="");
