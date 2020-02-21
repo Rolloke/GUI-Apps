@@ -36,9 +36,6 @@ using namespace std;
 
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
 
-// TODO: Änderungen bestätigen (commiten)
-// git commit -m "Beschreibungstext"
-
 
 #define INT(n) static_cast<int>(n)
 
@@ -443,6 +440,14 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
 
             if (fIsDir.toBool())
             {
+                if (   mCurrentTask == Work::ApplyGitCommand
+                    && (   (ui->ckRegardCheckboxes->isChecked() && aParentItem->checkState(INT(Column::FileName)) == Qt::Checked)
+                        || !ui->ckRegardCheckboxes->isChecked()))
+                {
+                    fResult = applyGitCmd(fSource, mGitCommand, fResultStr);
+                    ui->textBrowser->insertPlainText(fResultStr + QChar::LineFeed);
+                    return false;
+                }
                 int fCountOk = 0;
                 for (int fChildItem=0; fChildItem < aParentItem->childCount(); ++fChildItem)
                 {
@@ -480,8 +485,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     {
                         case Work::ApplyGitCommand:
                             fResult = applyGitCmd(fSource, mGitCommand, fResultStr);
-                            ui->textBrowser->insertPlainText(fResultStr);
-                            TRACE(Logger::notice, fResultStr.toStdString().c_str());
+                            ui->textBrowser->insertPlainText(fResultStr + QChar::LineFeed);
                             break;
                         case Work::ShowAllFiles:
                             aParentItem->setHidden(false);
@@ -900,14 +904,13 @@ void MainWindow::on_btnStoreText_clicked()
 void MainWindow::initContextMenuActions()
 {
     // TODO: create the necessary actions, slots and enumerations for recognition
-    connect(createAction(git::Cmd::Add           , tr("Add to git")     , Cmd::getCommand(Cmd::Add))           , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(createAction(git::Cmd::ShowStatus    , tr("Show status")    , Cmd::getCommand(Cmd::ShowStatus))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(createAction(git::Cmd::ShowDifference, tr("Show difference"), Cmd::getCommand(Cmd::ShowDifference)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(createAction(git::Cmd::Add            , tr("Add to git")       , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(createAction(git::Cmd::ShowStatus     , tr("Show status")      , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(createAction(git::Cmd::ShowDifference , tr("Show difference")  , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(createAction(git::Cmd::ShowShortStatus, tr("Show short status"), Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
     connect(createAction(git::Cmd::Remove         , tr("Remove from git...")), SIGNAL(triggered()), this, SLOT(on_remove_from_git()));
-    connect(createAction(git::Cmd::ShowShortStatus, tr("Show short status")),  SIGNAL(triggered()), this, SLOT(on_show_short_status()));
-
-    connect(createAction(git::Cmd::Commit, tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
+    connect(createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
 }
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
@@ -939,6 +942,7 @@ void  MainWindow::performGitCmd(const QString& aCommand)
         QString fFilePath = getItemFilePath(mContextMenuItem->parent());
         iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuItem);
         mCurrentTask = Work::None;
+        updateTreeItemStatus(mContextMenuItem);
     }
 }
 
@@ -970,6 +974,7 @@ void  MainWindow::on_remove_from_git()
         || fResult == QMessageBox::YesToAll)
     {
         performGitCmd(Cmd::getCommand(Cmd::Remove));
+        updateTreeItemStatus(mContextMenuItem);
     }
 }
 
@@ -1000,6 +1005,72 @@ void MainWindow::on_show_short_status()
 void MainWindow::on_custom_command()
 {
     QAction *act = qobject_cast<QAction *>(sender());
-    performGitCmd(act->statusTip());
+//    QString fMessageBoxText = act->toolTip();
+//    if (fMessageBoxText.size())
+//    {
+//        QStringList fTextList = fMessageBoxText.split(";");
+//        QMessageBox fSaveRequest;
+//        Type fType(static_cast<Type::eType>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+//        switch (fTextList.size())
+//        {
+//            case 1:
+//                fSaveRequest.setText(tr(fTextList[0].toStdString().c_str()).arg(fType.is(Type::File)? tr("file"): tr("folder content")));
+//                fSaveRequest.setInformativeText(mContextMenuItem->text(INT(Column::FileName)));
+//                break;
+//            case 2:
+//                fSaveRequest.setText(tr(fTextList[0].toStdString().c_str()).arg(fType.is(Type::File)? tr("file"): tr("folder content")));
+//                fSaveRequest.setInformativeText(tr(fTextList[1].toStdString().c_str()).arg(mContextMenuItem->text(INT(Column::FileName))));
+//                break;
+//        }
+//        fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
+//        fSaveRequest.setDefaultButton(QMessageBox::Yes);
+
+//        auto fResult = fSaveRequest.exec();
+//        if (   fResult == QMessageBox::Yes
+//            || fResult == QMessageBox::YesToAll)
+//        {
+//            performGitCmd(act->statusTip());
+//        }
+//    }
+//    else
+    {
+        performGitCmd(act->statusTip());
+    }
+
+    if (act->data().isValid())
+    {
+        switch (act->data().toUInt())
+        {
+            case 1:
+                updateTreeItemStatus(mContextMenuItem);
+                break;
+        }
+    }
 }
 
+
+void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
+{
+    QFileInfo fFileInfo(getItemFilePath(aItem));
+
+    QDir fParent(fFileInfo.absolutePath());
+    while (!QDir(fParent.absolutePath() + QDir::separator() + Folder::GitRepository).exists())
+    {
+        fParent.cdUp();
+    };
+
+    QString fRepositoryPath = fParent.absolutePath();
+    QString fResultString;
+    QString fCommandString = tr(Cmd::getCommand(Cmd::GetStatusAll).toStdString().c_str()).arg(fRepositoryPath);
+    fCommandString.append(" ");
+    fCommandString.append(fFileInfo.absoluteFilePath());
+
+    applyGitCmd(fRepositoryPath, fCommandString, fResultString);
+
+    stringt2typemap fCheckMap;
+    parseGitStatus(fRepositoryPath, fResultString, fCheckMap);
+
+    QString fSourcePath = fFileInfo.absolutePath();
+    iterateCheckItems(aItem, fCheckMap, true, &fSourcePath);
+
+}
