@@ -1,5 +1,7 @@
-spice/
+# liste der verborgenen Sachen
+spice/ # spice ordner verbergen
 Kikad/
 portaudio/
 own_drivers/
+CVS/ # CVS natürlich auch
 
