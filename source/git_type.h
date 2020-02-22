@@ -21,12 +21,18 @@ struct Cmd
         Remove,
         Add,
         Commit,
-
         MoveOrRename,
+
         Push,
         /// hint: add commands here
         CustomCommand=100
     };
+    enum eCustom
+    {
+        DoNothing,
+        UpdateItemStatus
+    };
+
     static const QString& getCommand(eCmd);
 private:
     static int2stringmap mCommandMap;
@@ -45,11 +51,13 @@ struct Type
         GitDeleted  = 0x0020,
         GitAdded    = 0x0040,
         GitUnknown  = 0x0080,
+        GitRenamed  = 0x0100,
         GitIgnore   = 0x1000,
         GitFolder   = 0x2000|Folder,
         Repository  = 0x4000,
         Checked     = 0x8000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitUnknown
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitUnknown|GitRenamed,
+        FileType    =File|Folder
     };
 
     Type(uint aType = None, int aLevel = 0)

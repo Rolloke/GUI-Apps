@@ -104,13 +104,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="ckRegardCheckboxes">
-            <property name="text">
-             <string>regard check boxes</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
