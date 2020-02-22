@@ -34,24 +34,17 @@ Q_SIGNALS:
 private Q_SLOTS:
     void on_btnCancel_clicked();
     void on_btnAddSourceFolder_clicked();
-    void on_btnUpdateSearch_clicked();
+    void on_btnUpdateStatus_clicked();
     void on_editBlacklist_textEdited(const QString &arg1);
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_ckHideParent_clicked(bool checked);
+    void on_ckHideEmptyParent_clicked(bool checked);
     void on_btnStoreText_clicked();
     void textBrowserChanged();
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
-
     void on_git_commit();
-    void on_remove_from_git();
-    void on_show_difference();
-    void on_show_status();
-    void on_show_short_status();
     void on_custom_command();
-
     void on_btnCloseText_clicked();
-
     void on_comboShowItems_currentIndexChanged(int index);
 
 private:
@@ -60,14 +53,15 @@ private:
     {
         None,
         ApplyGitCommand,
+        RemoveGitStatus,
         ShowAllFiles,
         ShowAllGitActions,
         ShowModified,
         ShowDeleted,
         ShowAdded,
         ShowUnknown,
-        // todo: more git items
-        // out of sync...
+        // TODO: more git items
+        // show out of sync...
         Last
     };
 
@@ -129,7 +123,7 @@ private:
     void updateTreeItemStatus(QTreeWidgetItem * aItem);
 
     void     initContextMenuActions();
-    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="", const QString& aToolTip="");
+    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="", const QString& aToolTip="None");
     void     performGitCmd(const QString& aCommand);
     QAction* getAction(git::Cmd::eCmd aCmd);
 
