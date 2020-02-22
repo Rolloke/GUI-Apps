@@ -98,9 +98,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="ckHideParent">
+           <widget class="QCheckBox" name="ckHideEmptyParent">
             <property name="text">
-             <string>hide parent</string>
+             <string>hide empty parent</string>
             </property>
            </widget>
           </item>
@@ -269,7 +269,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnUpdateSearch">
+         <widget class="QPushButton" name="btnUpdateStatus">
           <property name="minimumSize">
            <size>
             <width>160</width>
