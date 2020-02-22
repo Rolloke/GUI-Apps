@@ -21,6 +21,9 @@ struct Cmd
         Remove,
         Add,
         Commit,
+
+        MoveOrRename,
+        Push,
         /// hint: add commands here
         CustomCommand=100
     };
