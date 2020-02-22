@@ -1,0 +1,73 @@
+diff --git a/Qt/GitView/source/git_type.cpp b/Qt/GitView/source/git_type.cpp
+index e69de29..816ab2d 100644
+--- a/Qt/GitView/source/git_type.cpp
++++ b/Qt/GitView/source/git_type.cpp
+@@ -0,0 +1,68 @@
++
++#include "git_type.h"
++
++namespace git
++{
++
++namespace cmd
++{
++    const char GetStatus[] = "git -C %1 status -sb";
++}
++
++namespace Folder
++{
++    const char GitIgnoreFile[] = ".gitignore";
++    const char GitRepository[] = ".git";
++    const char FolderUp[]      = "..";
++    const char FolderSelf[]    = ".";
++}
++
++void Type::add(eType aType)
++{
++    mType = static_cast<eType>(mType|aType);
++}
++
++void Type::remove(eType aType)
++{
++    mType = static_cast<eType>(mType&~aType);
++}
++
++bool Type::is(eType aType)
++{
++    return (mType & aType) != None;
++}
++
++const char* Type::name(eType aType)
++{
++    switch (aType)
++    {
++    case Deleted:    return "Del";
++    case Modified:   return "Mod";
++    case AddNew:     return "Add";
++    case Unknown:    return "Unknown";
++    case Repository: return "Repository";
++    case File:       return "File";
++    case Folder:     return "Folder";
++    case Hidden:     return "Hidden";
++    case WildCard:   return "WildCard";
++    case None:       return "None";
++    case GitFolder:  return "git folder";
++    case Checked:    return "Checked";
++    case GitIgnore:  return "git ignore";
++    }
++    return "";
++}
++
++Type::eType Type::translate(const QString& fIdentifier)
++{
++    int fType = None;
++    if (fIdentifier.contains('D'))  fType |= Deleted;
++    if (fIdentifier.contains('M'))  fType |= Modified;
++    if (fIdentifier.contains('A'))  fType |= AddNew;
++    if (fIdentifier.contains("??")) fType |= Unknown;
++    if (fIdentifier.contains("##")) fType |= Repository;
++    return static_cast<eType>(fType);
++}
++
++
++}
