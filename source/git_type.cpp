@@ -15,6 +15,10 @@ Cmd::Cmd()
     mCommandMap[Remove]          = "git rm --cached %1";
     mCommandMap[Add]             = "git add %1";
     mCommandMap[Commit]          = "git commit -m \"%1\" %2";
+
+    mCommandMap[MoveOrRename]    = "git mv %1 %2";
+    mCommandMap[Push]            = "git push %1";
+
 }
 
 const QString& Cmd::getCommand(eCmd aCmd)
