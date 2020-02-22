@@ -15,8 +15,8 @@ Cmd::Cmd()
     mCommandMap[Remove]          = "git rm --cached %1";
     mCommandMap[Add]             = "git add %1";
     mCommandMap[Commit]          = "git commit -m \"%1\" %2";
+    mCommandMap[MoveOrRename]    = "git -C %1 mv %2 %3";
 
-    mCommandMap[MoveOrRename]    = "git mv %1 %2";
     mCommandMap[Push]            = "git push %1";
 
 }
@@ -51,6 +51,7 @@ bool Type::is(eType aType)
     return (mType & aType) != None;
 }
 
+#define RETURN_NAME(NAME) case NAME: return #NAME;
 const char* Type::name(eType aType)
 {
     switch (aType)
@@ -59,16 +60,18 @@ const char* Type::name(eType aType)
         case GitModified:return "Mod";
         case GitAdded:   return "Add";
         case GitUnknown: return "Unknown";
-        case AllGitActions: return "AllGitActions";
-        case Repository: return "Repository";
-        case File:       return "File";
-        case Folder:     return "Folder";
-        case Hidden:     return "Hidden";
-        case WildCard:   return "WildCard";
-        case None:       return "None";
+        case GitRenamed: return "Renamed";
         case GitFolder:  return "git folder";
-        case Checked:    return "Checked";
         case GitIgnore:  return "git ignore";
+        RETURN_NAME(AllGitActions)
+        RETURN_NAME(Repository)
+        RETURN_NAME(File)
+        RETURN_NAME(Folder)
+        RETURN_NAME(Hidden)
+        RETURN_NAME(WildCard)
+        RETURN_NAME(None)
+        RETURN_NAME(Checked)
+        RETURN_NAME(FileType)
     }
     return "";
 }
@@ -79,6 +82,7 @@ Type::eType Type::translate(const QString& fIdentifier)
     if (fIdentifier.contains('D'))  fType |= GitDeleted;
     if (fIdentifier.contains('M'))  fType |= GitModified;
     if (fIdentifier.contains('A'))  fType |= GitAdded;
+    if (fIdentifier.contains('R'))  fType |= GitRenamed;
     if (fIdentifier.contains("??")) fType |= GitUnknown;
     if (fIdentifier.contains("##")) fType |= Repository;
     return static_cast<eType>(fType);

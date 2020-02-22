@@ -42,10 +42,12 @@ private Q_SLOTS:
     void on_btnStoreText_clicked();
     void textBrowserChanged();
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
-    void on_git_commit();
-    void on_custom_command();
-    void on_btnCloseText_clicked();
     void on_comboShowItems_currentIndexChanged(int index);
+    void on_btnCloseText_clicked();
+
+    void on_git_commit();
+    void on_git_move_rename();
+    void on_custom_command();
 
 private:
 
@@ -53,7 +55,6 @@ private:
     {
         None,
         ApplyGitCommand,
-        RemoveGitStatus,
         ShowAllFiles,
         ShowAllGitActions,
         ShowModified,
@@ -123,9 +124,11 @@ private:
     void updateTreeItemStatus(QTreeWidgetItem * aItem);
 
     void     initContextMenuActions();
-    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="", const QString& aToolTip="None");
+    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
     void     performGitCmd(const QString& aCommand);
     QAction* getAction(git::Cmd::eCmd aCmd);
+    void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
+    void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
     Ui::MainWindow *ui;
     QString     mDestination;
