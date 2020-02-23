@@ -11,7 +11,7 @@ Cmd::Cmd()
     mCommandMap[GetStatusAll]    = "git -C %1 status -sb";
     mCommandMap[ShowStatus]      = "git status %1";
     mCommandMap[ShowShortStatus] = "git status -sb %1";
-    mCommandMap[ShowDifference]  = "git diff %1";
+    mCommandMap[ShowDifference]  = "git difftool --no-prompt %1"; //    mCommandMap[ShowDifference]  = "git diff %1";
     mCommandMap[Remove]          = "git rm --cached %1";
     mCommandMap[Add]             = "git add %1";
     mCommandMap[Commit]          = "git commit -m \"%1\" %2";
@@ -56,9 +56,9 @@ const char* Type::name(eType aType)
 {
     switch (aType)
     {
-        case GitDeleted: return "Del";
-        case GitModified:return "Mod";
-        case GitAdded:   return "Add";
+        case GitDeleted: return "Deleted";
+        case GitModified:return "Modified";
+        case GitAdded:   return "Added";
         case GitUnknown: return "Unknown";
         case GitRenamed: return "Renamed";
         case GitFolder:  return "git folder";
