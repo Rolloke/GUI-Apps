@@ -47,8 +47,6 @@ using namespace std;
 // TODO entfernte im Treview einfügen
 
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
-// TODO: umbenennen oder verschieben
-// git mv
 
 // TODO: 1.4.10.2 Zweig erstellen
 
