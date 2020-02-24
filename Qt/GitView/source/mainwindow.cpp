@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "helper.h"
 #include "logger.h"
+#include "commitmessage.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -62,9 +63,17 @@ const QString sGroupPaths("Paths");
 const QString sSourcePath("Source");
 const QString sUncheckedPath("Unchecked");
 const QString sGroupLogging("Logging");
+const QString sGroupGitCommands("GitCommands");
+const QString sCommands("Commands");
+const QString sCommand("Command");
+const QString sID("ID");
+const QString sName("Name");
+const QString sCustomMessageBoxText("MessageBoxText");
+const QString sCustomCommandPostAction("PostAction");
 } // namespace config
 
-const QString sNoCustomCommandMemue("None");
+
+const QString sNoCustomCommandMessageBox("None");
 
 
 using namespace git;
@@ -169,7 +178,31 @@ MainWindow::~MainWindow()
         fSettings.setValue(config::sSourcePath, fItem->text(INT(Column::FileName)));
     }
     fSettings.endArray();
+    fSettings.endGroup();
 
+    fSettings.beginGroup(config::sGroupGitCommands);
+    fSettings.beginWriteArray(config::sCommands);
+    {
+        int fIndex = 0;
+        int fCommandID = git::Cmd::CustomCommand;
+        tActionMap::const_iterator fItem;
+        while ((fItem = mActionList.find(fCommandID)) != mActionList.end())
+        {
+            const QAction* fAction = fItem->second;
+            QString fCommand = fAction->statusTip();
+            if (fCommand.size())
+            {
+                fSettings.setArrayIndex(fIndex++);
+                fSettings.setValue(config::sID, fItem->first);
+                fSettings.setValue(config::sName, fAction->text());
+                fSettings.setValue(config::sCommand, fCommand);
+                fSettings.setValue(config::sCustomMessageBoxText, fAction->toolTip());
+                fSettings.setValue(config::sCustomCommandPostAction, fAction->data());
+            }
+            ++fCommandID;
+        }
+    }
+    fSettings.endArray();
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupLogging);
@@ -190,7 +223,7 @@ QAction * MainWindow::createAction(git::Cmd::eCmd aCmd, const QString& aName, co
     QAction *fNewAction = new QAction(aName, this);
     mActionList[aCmd] = fNewAction;
     fNewAction->setStatusTip(aGitCommand);
-    fNewAction->setToolTip(sNoCustomCommandMemue);
+    fNewAction->setToolTip(sNoCustomCommandMessageBox);
     return fNewAction;
 }
 
@@ -954,6 +987,18 @@ void MainWindow::initContextMenuActions()
     setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
 
     connect(createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
+
+//    connect(createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+//    setCustomCommandMessageBoxText(fID, fMessageBoxText);
+//    setCustomCommandPostAction(fID, fPostAction);
+
+    //    Commands\1\Command=git rm --cached %1
+    //    Commands\1\ID=4
+    //    Commands\1\MessageBoxText="Remove %1 from git repository;Do you want to remove \"%1\"?"
+    //    Commands\1\Name=Remove from git...
+    //    Commands\1\PostAction=1
+    //    Commands\size=1
+
 }
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
@@ -970,6 +1015,7 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     menu.addAction(getAction(git::Cmd::ShowStatus));
     menu.addAction(getAction(git::Cmd::Commit));
     menu.addAction(getAction(git::Cmd::MoveOrRename));
+
 
     QPoint pt(pos);
     menu.exec( ui->treeSource->mapToGlobal(pos) );
@@ -990,16 +1036,18 @@ void  MainWindow::performGitCmd(const QString& aCommand)
 
 void  MainWindow::on_git_commit()
 {
-    bool ok;
-    QString text = QInputDialog::getText(this,
-                   tr("Commit"),
-                   tr("Enter a description for your commit."),
-                   QLineEdit::Normal, "", &ok);
+    CommitMessage fCommitMsg;
 
-    if (ok && !text.isEmpty())
+    if (fCommitMsg.exec() == QDialog::Accepted)
     {
-        QString fCommand = tr(Cmd::getCommand(Cmd::Commit).toStdString().c_str()).arg(text).arg("%1");
-        performGitCmd(fCommand);
+        QString fMessageText = fCommitMsg.getMessageText();
+        std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
+        QString fCommitCommand = tr(fCommand.c_str()).arg(fMessageText).arg("%1");
+        if (fCommitMsg.getAutoStage())
+        {
+            performGitCmd(Cmd::getCommand(Cmd::Add));
+        }
+        performGitCmd(fCommitCommand);
         updateTreeItemStatus(mContextMenuItem);
     }
 }
@@ -1034,7 +1082,7 @@ void MainWindow::on_custom_command()
 {
     QAction *act = qobject_cast<QAction *>(sender());
     QString fMessageBoxText = act->toolTip();
-    if (fMessageBoxText != sNoCustomCommandMemue)
+    if (fMessageBoxText != sNoCustomCommandMessageBox)
     {
         QStringList fTextList = fMessageBoxText.split(";");
         QMessageBox fSaveRequest;
@@ -1054,7 +1102,7 @@ void MainWindow::on_custom_command()
                 break;
         }
         fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-        fSaveRequest.setDefaultButton(QMessageBox::Yes);
+        fSaveRequest.setDefaultButton(  fType.is(Type::File) ? QMessageBox::Yes : QMessageBox::YesToAll);
 
         auto fResult = fSaveRequest.exec();
         if (   fResult == QMessageBox::Yes
