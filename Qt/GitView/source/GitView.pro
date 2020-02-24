@@ -19,12 +19,15 @@ SOURCES += main.cpp\
     helper.cpp \
     logger.cpp \
     workerthreadconnector.cpp \
-    git_type.cpp
+    git_type.cpp \
+    commitmessage.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
     logger.h \
     workerthreadconnector.h \
-    git_type.h
+    git_type.h \
+    commitmessage.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    commitmessage.ui
