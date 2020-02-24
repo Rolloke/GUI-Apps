@@ -24,8 +24,8 @@ struct Cmd
         MoveOrRename,
 
         Push,
-        /// hint: add commands here
-        CustomCommand=100
+        /// hint: add custom commands here
+        CustomCommand=20
     };
     enum eCustom
     {
