@@ -95,6 +95,7 @@ private:
         GitDeleted,
         GitUnknown
     };
+    typedef boost::container::flat_map<int, QAction*> tActionMap;
 
     void keyPressEvent(QKeyEvent *);
 
@@ -142,7 +143,7 @@ private:
     QTime       mStartTime;
     git::stringt2typemap mIgnoreMap;
     QTreeWidgetItem* mContextMenuItem;
-    boost::container::flat_map<int, QAction*> mActionList;
+    tActionMap  mActionList;
 };
 
 #endif // MAINWINDOW_H
