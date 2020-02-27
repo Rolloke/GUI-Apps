@@ -2,13 +2,23 @@
 #define GIT_TYPE_H
 
 #include <boost/container/flat_map.hpp>
+#include <map>
+
 #include <QString>
+
+#ifdef NDEBUG
+#define MAP_TYPE 0
+#else
+#define MAP_TYPE 1
+#endif
 
 namespace git
 {
-
+#if MAP_TYPE == 0
 typedef boost::container::flat_map<int, QString> int2stringmap;
-
+#elif MAP_TYPE == 1
+typedef std::map<int, QString> int2stringmap;
+#endif
 struct Cmd
 {
     Cmd();
@@ -18,10 +28,12 @@ struct Cmd
         ShowStatus,
         ShowShortStatus,
         ShowDifference,
+        CallDiffTool,
         Remove,
         Add,
         Commit,
         MoveOrRename,
+        Restore,
 
         Push,
         /// hint: add custom commands here
@@ -66,7 +78,7 @@ struct Type
 
     void add(eType aType);
     void remove(eType aType);
-    bool is(eType aType);
+    bool is(eType aType) const;
 
     static const char* name(eType aType);
     static eType       translate(const QString& fIdentifier);
@@ -83,7 +95,11 @@ extern const char FolderUp[];
 extern const char FolderSelf[];
 }
 
+#if MAP_TYPE == 0
 typedef boost::container::flat_map<std::string, Type> stringt2typemap;
+#elif MAP_TYPE == 1
+typedef std::map<std::string, Type> stringt2typemap;
+#endif
 
 }
 

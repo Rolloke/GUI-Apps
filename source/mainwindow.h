@@ -55,6 +55,7 @@ private:
     {
         None,
         ApplyGitCommand,
+        InsertPathFromCommandString,
         ShowAllFiles,
         ShowAllGitActions,
         ShowModified,
@@ -95,7 +96,11 @@ private:
         GitDeleted,
         GitUnknown
     };
+#if MAP_TYPE == 0
     typedef boost::container::flat_map<int, QAction*> tActionMap;
+#elif MAP_TYPE == 1
+    typedef std::map<int, QAction*> tActionMap;
+#endif
 
     void keyPressEvent(QKeyEvent *);
 
@@ -132,7 +137,6 @@ private:
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
     Ui::MainWindow *ui;
-    QString     mDestination;
     QString     mGitCommand;
     QStringList mBlackList;
     Work        mCurrentTask;
@@ -143,7 +147,7 @@ private:
     QTime       mStartTime;
     git::stringt2typemap mIgnoreMap;
     QTreeWidgetItem* mContextMenuItem;
-    tActionMap  mActionList;
+    tActionMap   mActionList;
 };
 
 #endif // MAINWINDOW_H

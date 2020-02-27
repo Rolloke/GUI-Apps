@@ -46,6 +46,7 @@ using namespace std;
 // TODO: Datei(en) oder Verzeichnis(se) entfernen
 // git rm --cached file/wildcard/directory
 // TODO entfernte im Treview einfügen
+// TODO git status (Zugehörigkeit) einer Date erkennen
 
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
 
@@ -299,6 +300,19 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 
     insertItem(fSourceDir, *ui->treeSource);
 
+    for (const auto& fItem : fCheckMap)
+    {
+        if (fItem.second.is(Type::GitDeleted))
+        {
+            mGitCommand = fItem.first.c_str();
+            mCurrentTask = Work::InsertPathFromCommandString;
+            QString fFilePath = "";
+            iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(aItem));
+            mGitCommand.clear();
+            mCurrentTask = Work::None;
+        }
+    }
+
     iterateCheckItems(ui->treeSource->topLevelItem(aItem), fCheckMap, true);
 }
 
@@ -326,6 +340,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         {
             fParent.cdUp();
             addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
+            if (fParent.isRoot()) break;
         };
 
         fTopLevelItem = true;
@@ -522,6 +537,23 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 }
                 switch (mCurrentTask)
                 {
+                    case Work::InsertPathFromCommandString:
+                    {
+                        int fIndex = mGitCommand.indexOf(fSource);
+                        if (fIndex != -1)
+                        {
+                            TRACE(Logger::notice, "Found dir: %s: %d", fFileName.toStdString().c_str(), fCountOk);
+                            if (fCountOk == 0)
+                            {
+                                QStringList fChild;
+                                fChild.append(mGitCommand.mid(fSource.size() + 1));
+                                aParentItem->addChild(new QTreeWidgetItem(fChild));
+                            }
+                            return 1;
+                        }
+                        return 0;
+                    }
+                    break;
                     case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowModified:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
@@ -815,7 +847,6 @@ void MainWindow::messageBackup(bool aStart)
     if (aStart)
     {
         mStartTime.start();
-        Logger::openLogFile((mDestination + QDir::separator() + "Backup.log").toStdString());
         QDateTime fNow = QDateTime::currentDateTime();
         TRACE(Logger::notice, "Backup date: %s", fNow.toString().toStdString().c_str());
         TRACE(Logger::notice, "Backup host: %s", QSysInfo::machineHostName().toStdString().c_str());
@@ -974,6 +1005,7 @@ void MainWindow::initContextMenuActions()
     // TODO: create the necessary actions, slots and enumerations for recognition
     connect(createAction(git::Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     connect(createAction(git::Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(createAction(git::Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     connect(createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
     connect(createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
@@ -982,6 +1014,11 @@ void MainWindow::initContextMenuActions()
     connect(createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
+
+    connect(createAction(git::Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
+    setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
+
 
     connect(createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
     setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
@@ -1011,10 +1048,12 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     menu.addAction(getAction(git::Cmd::Add));
     menu.addAction(getAction(git::Cmd::Remove));
     menu.addAction(getAction(git::Cmd::ShowDifference));
+    menu.addAction(getAction(git::Cmd::CallDiffTool));
     menu.addAction(getAction(git::Cmd::ShowShortStatus));
     menu.addAction(getAction(git::Cmd::ShowStatus));
     menu.addAction(getAction(git::Cmd::Commit));
     menu.addAction(getAction(git::Cmd::MoveOrRename));
+    menu.addAction(getAction(git::Cmd::Restore));
 
 
     QPoint pt(pos);
@@ -1030,6 +1069,7 @@ void  MainWindow::performGitCmd(const QString& aCommand)
         mCurrentTask = Work::ApplyGitCommand;
         QString fFilePath = getItemFilePath(mContextMenuItem->parent());
         iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuItem);
+        mGitCommand.clear();
         mCurrentTask = Work::None;
     }
 }
