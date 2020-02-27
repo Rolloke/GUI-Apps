@@ -11,11 +11,13 @@ Cmd::Cmd()
     mCommandMap[GetStatusAll]    = "git -C %1 status -sb";
     mCommandMap[ShowStatus]      = "git status %1";
     mCommandMap[ShowShortStatus] = "git status -sb %1";
-    mCommandMap[ShowDifference]  = "git difftool --no-prompt %1"; //    mCommandMap[ShowDifference]  = "git diff %1";
+    mCommandMap[CallDiffTool]    = "git difftool --no-prompt %1";
+    mCommandMap[ShowDifference]  = "git diff %1";
     mCommandMap[Remove]          = "git rm --cached %1";
     mCommandMap[Add]             = "git add %1";
     mCommandMap[Commit]          = "git commit -m \"%1\" %2";
     mCommandMap[MoveOrRename]    = "git -C %1 mv %2 %3";
+    mCommandMap[Restore]         = "git checkout %1";
 
     mCommandMap[Push]            = "git push %1";
 
@@ -46,7 +48,7 @@ void Type::remove(eType aType)
     mType = static_cast<eType>(mType&~aType);
 }
 
-bool Type::is(eType aType)
+bool Type::is(eType aType) const
 {
     return (mType & aType) != None;
 }

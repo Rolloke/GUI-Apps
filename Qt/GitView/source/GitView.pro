@@ -8,7 +8,11 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
+QMAKE_CFLAGS += -std=c++17
+
+#DEFINES += NDEBUG
+
 
 TARGET = GitView
 TEMPLATE = app
