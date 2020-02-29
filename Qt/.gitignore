@@ -3,4 +3,4 @@ ConsoleCpp/
 MenuTest/
 *.user
 build/
-
+*.aps
