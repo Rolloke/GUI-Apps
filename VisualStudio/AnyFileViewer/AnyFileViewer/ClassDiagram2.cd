@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="8.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAABAABAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>AnyFileViewer.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnyFileViewerApp" Collapsed="true">
+    <Position X="6" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgCAggAFNCAQIMIDAMpCRIFBEzSgBgUUIAWJAABAA6E=</HashCode>
+      <FileName>AnyFileViewer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnyFileViewerDoc" Collapsed="true">
+    <Position X="8.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AwICABAAEAAAAhChCAAAgAAAACAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnyFileViewerTreeView" Collapsed="true">
+    <Position X="6" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QEYhASEBECAAAAiFWBGAiCBEgzKoIAMAAQjkAAkLgCA=</HashCode>
+      <FileName>AnyFileViewerTreeView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAnyFileViewerView" Collapsed="true">
+    <Position X="6" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gEAhAiAEAAECAAgAGFAIkCEAgCAAAAAAQNhAIinZgIA=</HashCode>
+      <FileName>AnyFileViewerView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayAscii" Collapsed="true">
+    <Position X="1.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAASAAACAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayBinary" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.656" Y="1.184" />
+        <Point X="3.656" Y="4.875" />
+        <Point X="3.75" Y="4.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayChar" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.812" />
+        <Point X="1.5" Y="1.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAgAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayDouble" Collapsed="true">
+    <Position X="3.75" Y="6" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.656" Y="1.184" />
+        <Point X="3.656" Y="6.312" />
+        <Point X="3.75" Y="6.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayFloat" Collapsed="true">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.506" Y="1.184" />
+        <Point X="3.506" Y="5.625" />
+        <Point X="3.573" Y="5.625" Type="JumpStart" />
+        <Point X="3.74" Y="5.625" Type="JumpEnd" />
+        <Point X="3.75" Y="5.625" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayHEX16" Collapsed="true">
+    <Position X="1.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayHEX2" Collapsed="true">
+    <Position X="1.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayHEX4" Collapsed="true">
+    <Position X="1.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayHEX8" Collapsed="true">
+    <Position X="1.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayLong" Collapsed="true">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayLongLong" Collapsed="true">
+    <Position X="1.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayShort" Collapsed="true">
+    <Position X="1.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAACAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayType" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAACAAAAAAARAAASAAAACAAQCAACEAIAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayUChar" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.185" />
+        <Point X="3.45" Y="1.185" />
+        <Point X="3.45" Y="1.812" />
+        <Point X="3.573" Y="1.812" Type="JumpStart" />
+        <Point X="3.74" Y="1.812" Type="JumpEnd" />
+        <Point X="3.75" Y="1.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayULong" Collapsed="true">
+    <Position X="3.75" Y="3" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.854" Y="1.184" />
+        <Point X="3.854" Y="3.375" />
+        <Point X="3.75" Y="3.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAEA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayULongLong" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.75" />
+    <InheritanceLine Type="CDisplayType" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.185" />
+        <Point X="3.374" Y="1.185" />
+        <Point X="3.374" Y="4.125" />
+        <Point X="3.423" Y="4.125" Type="JumpStart" />
+        <Point X="3.74" Y="4.125" Type="JumpEnd" />
+        <Point X="3.75" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEACAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayUnicode" Collapsed="true">
+    <Position X="3.75" Y="7.5" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.45" Y="1.184" />
+        <Point X="3.45" Y="7.812" />
+        <Point X="3.75" Y="7.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAQAAACAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDisplayUShort" Collapsed="true">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <InheritanceLine Type="CDisplayType" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.184" />
+        <Point X="3.456" Y="1.184" />
+        <Point X="3.456" Y="2.625" />
+        <Point X="3.573" Y="2.625" Type="JumpStart" />
+        <Point X="3.74" Y="2.625" Type="JumpEnd" />
+        <Point X="3.75" Y="2.625" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DisplayType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFindReplaceDialogEx" Collapsed="true">
+    <Position X="10.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAIAAAKAAAACAA=</HashCode>
+      <FileName>AnyFileViewerView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFormatConvertDlg" Collapsed="true">
+    <Position X="10.75" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACEBAAAAIRAAABAAAAAIAIAAgAAAQAJEABAAAAA=</HashCode>
+      <FileName>FormatConvertDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFormatView" Collapsed="true">
+    <Position X="6" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gEABEAAAEAEAEAEBGAEAgAEogCCAAQICAQqBAAEZECE=</HashCode>
+      <FileName>FormatView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFormatViewDlgBar" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEBAAEAAAEAAAAAAAAAAAEAAEAAAgAAAAAAAA=</HashCode>
+      <FileName>FormatViewDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHint" Collapsed="true">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAAIAABACAAAAAAAEAAAEAAAAAAAA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CItemStructureHint" Collapsed="true">
+    <Position X="14" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAABAAAA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainDlgBar" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADBAAAAAAAAAAAAgAAAAAAAAAAAAAAABAAAQAAAIA=</HashCode>
+      <FileName>MainDlgBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainFrame" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABaJQhgIBQAQwAiAEA2AAAgKoBIhBAQEAGhIgAAJA=</HashCode>
+      <FileName>MainFrm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMessageHint" Collapsed="true">
+    <Position X="12.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAgA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMessageView" Collapsed="true">
+    <Position X="6" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAgAQAgCAgAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>MessageView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMoveFindDlgBar" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAAAABAAAAAAAAAAAAAAAIAIAAAAAAAAAg=</HashCode>
+      <FileName>MoveFindDlgBar.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNewDocDlg" Collapsed="true">
+    <Position X="8.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAACQAAAAAAAAQBAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>NewDocDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRepresentationDlg" Collapsed="true">
+    <Position X="13" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAACAAAAAAABhAAAACAFSQBAEAAAAEAAAQAAE=</HashCode>
+      <FileName>RepresentationDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStructureItem" Collapsed="true">
+    <Position X="16.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAABAQAAAAAAAAAIAAAgBAAAAAA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTreeCtrlEx" Collapsed="true">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAgCRAQAAAAQAAAAQAAAgAEABIIAAAACIAAAAAAACA=</HashCode>
+      <FileName>TreeCtrlEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomizedFileDialog" Collapsed="true">
+    <Position X="13" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAwAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>customizedFileDialog.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CXFile" Collapsed="true">
+    <Position X="15.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAgAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>AnyFileViewerDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CXmlDocumentWrapper" Collapsed="true">
+    <Position X="15.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAoAIggAACAAAACAAAIAAAAAACAAABA=</HashCode>
+      <FileName>XmlNodeWrapper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CXmlNodeListWrapper" Collapsed="true">
+    <Position X="15.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAgAAAACAAAAAABAgAAAQAAAAAAAAAAAAgAIEAAAA=</HashCode>
+      <FileName>XmlNodeWrapper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CXmlNodeWrapper" Collapsed="true">
+    <Position X="15.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAIADAAIAgAEoMNAIhAQAQAEAQAQAAIQAQhAGAAAAg=</HashCode>
+      <FileName>XmlNodeWrapper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tree_item_iterator" Collapsed="true">
+    <Position X="10" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQCAAACAAQAEAAQAAEAAAAAAAAAAgAADAAAA=</HashCode>
+      <FileName>tree_item_iterator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
