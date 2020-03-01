@@ -5,6 +5,7 @@
 #include <map>
 
 #include <QString>
+#include <QVector>
 
 #ifdef NDEBUG
 #define MAP_TYPE 0
@@ -34,7 +35,7 @@ struct Cmd
         Commit,
         MoveOrRename,
         Restore,
-
+        History,
         Push,
         /// hint: add custom commands here
         CustomCommand=20
@@ -42,7 +43,8 @@ struct Cmd
     enum eCustom
     {
         DoNothing,
-        UpdateItemStatus
+        UpdateItemStatus,
+        ParseHistoryText
     };
 
     static const QString& getCommand(eCmd);
@@ -94,6 +96,48 @@ extern const char GitRepository[];
 extern const char FolderUp[];
 extern const char FolderSelf[];
 }
+
+struct HistoryEntry
+{
+    enum Entry
+    {
+        CommitHash,
+        TreeHash,
+        ParentHash,
+        Subject,
+        Author,
+        AuthoEmail,
+        AuthorDate,
+        Committer,
+        CommitterEmail,
+        CommitterDate,
+        NoOfEntries
+    };
+    static const char* name(Entry aEntry);
+    static void parse(const QString& aText, QVector<QStringList>& aList);
+
+};
+
+
+
+//%H  Commit hash                 // 0
+//%h  Abbreviated commit hash
+//%T  Tree hash                   // 1
+//%t  Abbreviated tree hash
+//%P  Parent hashes               // 2
+//%p  Abbreviated parent hashes
+//%s  Subject                     // 3
+//%an Author name                 // 4
+//%ae Author email                // 5
+//%ad Author date                 // 6
+//    (format respects the --date=option)
+//%ar Author date, relative
+//%cn Committer name              // 7
+//%ce Committer email             // 8
+//%cd Committer date              // 9
+//%cr Committer date, relative
+
+
 
 #if MAP_TYPE == 0
 typedef boost::container::flat_map<std::string, Type> stringt2typemap;

@@ -34,7 +34,7 @@
    </property>
    <layout class="QVBoxLayout" name="topLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
       <property name="spacing">
        <number>2</number>
       </property>
@@ -168,6 +168,28 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="btnHideHistory">
+            <property name="minimumSize">
+             <size>
+              <width>70</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>History</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="btnCloseText">
             <property name="minimumSize">
              <size>
@@ -211,14 +233,45 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextBrowser" name="textBrowser">
-          <property name="undoRedoEnabled">
-           <bool>true</bool>
+         <layout class="QHBoxLayout" name="horizontalLayoutHistoryAndText">
+          <property name="spacing">
+           <number>2</number>
           </property>
-          <property name="readOnly">
-           <bool>false</bool>
+          <property name="leftMargin">
+           <number>0</number>
           </property>
-         </widget>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTreeWidget" name="treeHistory">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>History</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="textBrowser">
+            <property name="undoRedoEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="readOnly">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
