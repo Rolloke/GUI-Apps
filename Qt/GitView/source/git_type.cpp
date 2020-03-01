@@ -90,36 +90,5 @@ Type::eType Type::translate(const QString& fIdentifier)
     return static_cast<eType>(fType);
 }
 
-void HistoryEntry::parse(const QString& aText, QVector<QStringList>& aList)
-{
-    const QString fLineSeparator  = "<tr>";
-    const QString fEntrySeparator = "<td>";
-
-    QStringList fLines = aText.split(fLineSeparator);
-    for (auto& fLine: fLines)
-    {
-        aList.append(fLine.split(fEntrySeparator));
-    }
-}
-
-const char* HistoryEntry::name(Entry aEntry)
-{
-    switch (aEntry)
-    {
-        case CommitHash:     return "Commit hash:";
-        case TreeHash:       return "Tree hash:";
-        case ParentHash:     return "Parent hash:";
-        case Subject:        return "Subject:";
-        case Author:         return "Author";
-        case AuthoEmail:     return "Author Email:";
-        case AuthorDate:     return "Author date:";
-        case Committer:      return "Committer:";
-        case CommitterEmail: return "Committer email:";
-        case CommitterDate:  return "Committer date:";
-        case NoOfEntries:    return "None";
-    }
-    return "Unknown";
-}
-
 
 }
