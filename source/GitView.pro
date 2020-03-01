@@ -24,14 +24,16 @@ SOURCES += main.cpp\
     logger.cpp \
     workerthreadconnector.cpp \
     git_type.cpp \
-    commitmessage.cpp
+    commitmessage.cpp \
+    history.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
     logger.h \
     workerthreadconnector.h \
     git_type.h \
-    commitmessage.h
+    commitmessage.h \
+    history.h
 
 FORMS    += mainwindow.ui \
     commitmessage.ui

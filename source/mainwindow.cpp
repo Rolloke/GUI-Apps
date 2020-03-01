@@ -3,6 +3,7 @@
 #include "helper.h"
 #include "logger.h"
 #include "commitmessage.h"
+#include "history.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -15,6 +16,7 @@
 #include <QMenu>
 
 #include <boost/bind.hpp>
+
 
 using namespace std;
 
@@ -53,8 +55,7 @@ using namespace std;
 // TODO: 1.4.10.2 Zweig erstellen
 
 
-#define INT(n) static_cast<int>(n)
-
+#define INT(n) static_cast<qint32>(n)
 
 namespace config
 {
@@ -1200,7 +1201,7 @@ void MainWindow::on_custom_command()
             case git::Cmd::ParseHistoryText:
             {
                 QVector<QStringList> fList;
-                git::HistoryEntry::parse(ui->textBrowser->toPlainText(), fList);
+                git::History::parse(ui->textBrowser->toPlainText(), fList);
                 ui->textBrowser->setPlainText("");
 
                 QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
@@ -1214,13 +1215,13 @@ void MainWindow::on_custom_command()
                 int fTLI = ui->treeHistory->topLevelItemCount()-1;
                 for (auto fItem: fList)
                 {
-                    if (fItem.count() >= HistoryEntry::NoOfEntries)
+                    if (fItem.count() >= INT(History::Entry::NoOfEntries))
                     {
                         QTreeWidgetItem* fNewItem = new QTreeWidgetItem();
                         ui->treeHistory->topLevelItem(fTLI)->addChild(fNewItem);
-                        fNewItem->setText(0, fItem[HistoryEntry::CommitterDate]);
-                        fNewItem->setText(1, fItem[HistoryEntry::Author]);
-                        for (int fRole=0; fRole<HistoryEntry::NoOfEntries; ++fRole)
+                        fNewItem->setText(0, fItem[INT(History::Entry::CommitterDate)]);
+                        fNewItem->setText(1, fItem[INT(History::Entry::Author)]);
+                        for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
                         {
                             fNewItem->setData(1, fRole, QVariant(fItem[fRole]));
                         }
@@ -1272,9 +1273,9 @@ void MainWindow::on_btnHideHistory_clicked(bool checked)
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* column */)
 {
     QString fText;
-    for (int fRole=HistoryEntry::CommitHash; fRole<HistoryEntry::NoOfEntries; ++fRole)
+    for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
     {
-        fText.append(HistoryEntry::name(static_cast<HistoryEntry::Entry>(fRole)));
+        fText.append(History::name(static_cast<History::Entry>(fRole)));
         fText.append(QChar::LineFeed);
         fText.append(aItem->data(1, fRole).toString());
         fText.append(QChar::LineFeed);
