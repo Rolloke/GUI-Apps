@@ -1025,11 +1025,13 @@ void MainWindow::initContextMenuActions()
     setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
     setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
 
-
     connect(createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
     setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
 
     connect(createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
+
+    connect(createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
+    connect(createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
 
 //    connect(createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 //    setCustomCommandMessageBoxText(fID, fMessageBoxText);
@@ -1068,29 +1070,35 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
-    QModelIndexList fSelectedIndexes = ui->treeHistory->selectionModel()->selectedIndexes();
-    QTreeWidgetItem* fSelectedItem = ui->treeHistory->itemAt( pos );
-    QTreeWidgetItem* fParentItem = fSelectedItem->parent();
-    if (fParentItem)
+    QTreeWidgetItem* fSelectedHistoryItem = ui->treeHistory->itemAt(pos);
+    if (fSelectedHistoryItem)
     {
-        mContextMenuItem = reinterpret_cast<QTreeWidgetItem*>(fParentItem->data(1, 0).toLongLong());
-        if (mContextMenuItem)
+        QModelIndexList fSelectedHistoryIndexes = ui->treeHistory->selectionModel()->selectedIndexes();
+        QTreeWidgetItem* fParentHistoryItem = fSelectedHistoryItem->parent();
+        if (fParentHistoryItem)
         {
-            mHistoryHashItems.clear();
-//            for (auto fIndex : fSelectedIndexes)
-//            {
-//                QTreeWidgetItem* fItem = ui->treeHistory->itemFromIndex(fIndex);
-//                if (fItem && fItem->parent() == fParentItem)
-//                {
-//                    mHistoryHashItems.append(fItem->data(1, HistoryEntry::CommitHash).toString());
-//                    mHistoryHashItems.append(" ");
-//                }
-//            }
+            QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+            mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Data), INT(History::Role::ContextMenuItem)).toModelIndex());
+            if (mContextMenuItem)
+            {
+                mHistoryHashItems.clear();
+                for (auto fIndex : fSelectedHistoryIndexes)
+                {
+                    QTreeWidgetHook* fHistoryHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeHistory);
+                    QTreeWidgetItem* fItem = fHistoryHook->itemFromIndex(fIndex);
+                    if (fItem && fItem->parent() == fParentHistoryItem)
+                    {
+                        mHistoryHashItems.append(fItem->data(INT(History::Column::Data), INT(History::Entry::CommitHash)).toString());
+                        mHistoryHashItems.append(" ");
+                    }
+                }
 
-            QMenu menu(this);
-            menu.addAction(getAction(git::Cmd::CallDiffTool));
-            menu.exec( ui->treeHistory->mapToGlobal(pos) );
-            mContextMenuItem = nullptr;
+                QMenu menu(this);
+                menu.addAction(getAction(git::Cmd::CallHistoryDiffTool));
+                menu.addAction(getAction(git::Cmd::ShowHistoryDifference));
+                menu.exec( ui->treeHistory->mapToGlobal(pos) );
+                mContextMenuItem = nullptr;
+            }
         }
     }
 }
@@ -1155,8 +1163,9 @@ void MainWindow::on_git_move_rename()
 
 void MainWindow::on_custom_command()
 {
-    QAction *act = qobject_cast<QAction *>(sender());
-    QString fMessageBoxText = act->toolTip();
+    QAction *fAction = qobject_cast<QAction *>(sender());
+    QString fMessageBoxText = fAction->toolTip();
+
     if (fMessageBoxText != sNoCustomCommandMessageBox)
     {
         QStringList fTextList = fMessageBoxText.split(";");
@@ -1176,62 +1185,71 @@ void MainWindow::on_custom_command()
                 fSaveRequest.setInformativeText(tr(fTextList[1].toStdString().c_str()).arg(fFileName));
                 break;
         }
+
         fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
         fSaveRequest.setDefaultButton(  fType.is(Type::File) ? QMessageBox::Yes : QMessageBox::YesToAll);
 
         auto fResult = fSaveRequest.exec();
-        if (   fResult == QMessageBox::Yes
-            || fResult == QMessageBox::YesToAll)
+        if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
         {
-            performGitCmd(act->statusTip());
+            performGitCmd(fAction->statusTip());
         }
     }
     else
     {
-        performGitCmd(act->statusTip());
+        performGitCmd(fAction->statusTip());
     }
 
-    if (act->data().isValid())
+    if (fAction->data().isValid())
     {
-        switch (act->data().toUInt())
+        switch (fAction->data().toUInt())
         {
             case git::Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
                 break;
             case git::Cmd::ParseHistoryText:
-            {
-                QVector<QStringList> fList;
-                git::History::parse(ui->textBrowser->toPlainText(), fList);
-                ui->textBrowser->setPlainText("");
-
-                QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
-                QTreeWidgetItem* fNewItem = new QTreeWidgetItem(QStringList(fFileName));
-                ui->treeHistory->addTopLevelItem(fNewItem);
-
-                fNewItem->setData(1, 0, QVariant(reinterpret_cast<qlonglong>(mContextMenuItem)));
-
-                ui->treeHistory->setVisible(true);
-                ui->btnHideHistory->setChecked(true);
-                int fTLI = ui->treeHistory->topLevelItemCount()-1;
-                for (auto fItem: fList)
-                {
-                    if (fItem.count() >= INT(History::Entry::NoOfEntries))
-                    {
-                        QTreeWidgetItem* fNewItem = new QTreeWidgetItem();
-                        ui->treeHistory->topLevelItem(fTLI)->addChild(fNewItem);
-                        fNewItem->setText(0, fItem[INT(History::Entry::CommitterDate)]);
-                        fNewItem->setText(1, fItem[INT(History::Entry::Author)]);
-                        for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
-                        {
-                            fNewItem->setData(1, fRole, QVariant(fItem[fRole]));
-                        }
-                    }
-                }
-            }   break;
+                parseGitLogHistoryText();
+                break;
         }
     }
 }
 
+void MainWindow::on_git_history_diff_command()
+{
+    QAction *fAction = qobject_cast<QAction *>(sender());
+    performGitCmd(tr(fAction->statusTip().toStdString().c_str()).arg(mHistoryHashItems).arg("%1"));
+}
+
+void MainWindow::parseGitLogHistoryText()
+{
+    QVector<QStringList> fList;
+    git::History::parse(ui->textBrowser->toPlainText(), fList);
+    ui->textBrowser->setPlainText("");
+
+    QString fFileName = mContextMenuItem->text(INT(History::Column::Text));
+    QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(fFileName));
+    ui->treeHistory->addTopLevelItem(fNewHistoryItem);
+    QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+    fNewHistoryItem->setData(INT(History::Column::Data), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
+
+    ui->treeHistory->setVisible(true);
+    ui->btnHideHistory->setChecked(true);
+    int fTLI = ui->treeHistory->topLevelItemCount()-1;
+    for (auto fItem: fList)
+    {
+        if (fItem.count() >= INT(History::Entry::NoOfEntries))
+        {
+            fNewHistoryItem = new QTreeWidgetItem();
+            ui->treeHistory->topLevelItem(fTLI)->addChild(fNewHistoryItem);
+            fNewHistoryItem->setText(INT(History::Column::Text), fItem[INT(History::Entry::CommitterDate)]);
+            fNewHistoryItem->setText(INT(History::Column::Data), fItem[INT(History::Entry::Author)]);
+            for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
+            {
+                fNewHistoryItem->setData(1, fRole, QVariant(fItem[fRole]));
+            }
+        }
+    }
+}
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 {
@@ -1273,11 +1291,11 @@ void MainWindow::on_btnHideHistory_clicked(bool checked)
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* column */)
 {
     QString fText;
-    for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
+    for (int fRole=INT(History::Entry::Subject); fRole < INT(History::Entry::NoOfEntries); ++fRole)
     {
         fText.append(History::name(static_cast<History::Entry>(fRole)));
         fText.append(QChar::LineFeed);
-        fText.append(aItem->data(1, fRole).toString());
+        fText.append(aItem->data(INT(History::Column::Data), fRole).toString());
         fText.append(QChar::LineFeed);
     }
     ui->textBrowser->setPlainText(fText);

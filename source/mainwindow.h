@@ -50,6 +50,7 @@ private Q_SLOTS:
 
     void on_git_commit();
     void on_git_move_rename();
+    void on_git_history_diff_command();
     void on_custom_command();
 
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
@@ -140,6 +141,8 @@ private:
     QAction* getAction(git::Cmd::eCmd aCmd);
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
+
+    void parseGitLogHistoryText();
 
     Ui::MainWindow*     ui;
     QString             mGitCommand;

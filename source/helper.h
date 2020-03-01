@@ -24,6 +24,15 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 
 int execute(const QString& command, QString& aResultText);
 
+class QTreeWidgetHook: public QTreeWidget
+{
+public:
+    QTreeWidgetHook();
 
+    QModelIndex indexFromItem(QTreeWidgetItem *item, int column = 0) const;
+    QTreeWidgetItem *itemFromIndex(const QModelIndex &index) const;
+
+private:
+};
 
 #endif // HELPER_H

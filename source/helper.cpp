@@ -99,3 +99,18 @@ int execute(const QString& command, QString& aResultText)
     return fResult;
 
 }
+
+QTreeWidgetHook::QTreeWidgetHook()
+{
+
+}
+
+QModelIndex QTreeWidgetHook::indexFromItem(QTreeWidgetItem *item, int column) const
+{
+    return QTreeWidget::indexFromItem(item, column);
+}
+
+QTreeWidgetItem * QTreeWidgetHook::itemFromIndex(const QModelIndex &index) const
+{
+    return QTreeWidget::itemFromIndex(index);
+}

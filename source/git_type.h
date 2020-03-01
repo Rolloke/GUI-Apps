@@ -36,6 +36,8 @@ struct Cmd
         Restore,
         History,
         Push,
+        ShowHistoryDifference,
+        CallHistoryDiffTool,
         /// hint: add custom commands here
         CustomCommand=20
     };
