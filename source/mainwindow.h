@@ -36,24 +36,25 @@ private Q_SLOTS:
     void on_btnAddSourceFolder_clicked();
     void on_btnUpdateStatus_clicked();
     void on_editBlacklist_textEdited(const QString &arg1);
-    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
-    void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_ckHideEmptyParent_clicked(bool checked);
+
     void on_btnStoreText_clicked();
     void textBrowserChanged();
-    void on_treeSource_customContextMenuRequested(const QPoint &pos);
-    void on_comboShowItems_currentIndexChanged(int index);
     void on_btnCloseText_clicked();
+
+    void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeSource_customContextMenuRequested(const QPoint &pos);
+    void on_ckHideEmptyParent_clicked(bool checked);
+    void on_comboShowItems_currentIndexChanged(int index);
 
     void on_btnHideHistory_clicked(bool checked);
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_git_commit();
     void on_git_move_rename();
     void on_git_history_diff_command();
     void on_custom_command();
 
-    void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
 private:
 
@@ -114,13 +115,12 @@ private:
 
     quint64 insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem=0);
     bool iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
-    bool iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, bool aSet = false, const QString* aSourceDir=0);
+    bool iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, const QString* aSourceDir=0);
+    void insertSourceTree(const QDir& fSource, int fItem);
     quint64 sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
 
     void selectSourceFolder();
     QDir initDir(const QString& aDirPath, int aFilter=0);
-    bool applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
-    void parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
 
     void updateControls();
 
@@ -131,18 +131,20 @@ private:
 
     void addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
     void removeIgnoreMapLevel(int aLevel);
-    void insertSourceTree(const QDir& fSource, int fItem);
     QString getItemFilePath(QTreeWidgetItem* item);
     void updateTreeItemStatus(QTreeWidgetItem * aItem);
 
-    void     initContextMenuActions();
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
-    void     performGitCmd(const QString& aCommand);
+    void     initContextMenuActions();
     QAction* getAction(git::Cmd::eCmd aCmd);
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
-    void parseGitLogHistoryText();
+    void     performGitCmd(const QString& aCommand);
+    bool     applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+
+    void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
+    void     parseGitLogHistoryText();
 
     Ui::MainWindow*     ui;
     QString             mGitCommand;
