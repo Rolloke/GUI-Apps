@@ -45,9 +45,14 @@ private Q_SLOTS:
     void on_comboShowItems_currentIndexChanged(int index);
     void on_btnCloseText_clicked();
 
+    void on_btnHideHistory_clicked(bool checked);
+    void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
+
     void on_git_commit();
     void on_git_move_rename();
     void on_custom_command();
+
+    void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
 private:
 
@@ -136,18 +141,21 @@ private:
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
-    Ui::MainWindow *ui;
-    QString     mGitCommand;
-    QStringList mBlackList;
-    Work        mCurrentTask;
+    Ui::MainWindow*     ui;
+    QString             mGitCommand;
+    WorkerThreadConnector mWorker;
+    Work                mCurrentTask;
+    QString             mConfigFileName;
+    git::stringt2typemap mIgnoreMap;
+    QTreeWidgetItem*    mContextMenuItem;
+    tActionMap          mActionList;
+    QString             mHistoryHashItems;
+
+    // possibly obsolete
+    QTime       mStartTime;
     qlonglong   mBytesCopied;
     qlonglong   mBytesToCopy;
-    WorkerThreadConnector mWorker;
-    QString     mConfigFileName;
-    QTime       mStartTime;
-    git::stringt2typemap mIgnoreMap;
-    QTreeWidgetItem* mContextMenuItem;
-    tActionMap   mActionList;
+    QStringList mBlackList;
 };
 
 #endif // MAINWINDOW_H

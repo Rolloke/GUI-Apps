@@ -46,7 +46,7 @@ using namespace std;
 // TODO: Datei(en) oder Verzeichnis(se) entfernen
 // git rm --cached file/wildcard/directory
 // TODO entfernte im Treview einfügen
-// TODO git status (Zugehörigkeit) einer Date erkennen
+// TODO git status (Zugehörigkeit) einer Datei erkennen
 
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
 
@@ -82,11 +82,11 @@ using namespace git;
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , mWorker(this)
     , mCurrentTask(Work::None)
+    , mConfigFileName(aConfigName)
     , mBytesCopied(0)
     , mBytesToCopy(0)
-    , mWorker(this)
-    , mConfigFileName(aConfigName)
 {
 
     ui->setupUi(this);
@@ -100,14 +100,14 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mIgnoreMap[Folder::FolderUp]      = Type(Type::Folder);
     mIgnoreMap[Folder::GitRepository] = Type(Type::GitFolder);
 
-    ui->treeSource->header()->resizeSection(INT(Column::FileName), 100);
+//    ui->treeSource->header()->resizeSection(INT(Column::FileName), 100);
     //QHeaderView::Stretch
     //QHeaderView::ResizeToContents
 //    ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
 //    ui->treeSource->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::ResizeToContents);
 //    ui->treeSource->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::ResizeToContents);
 //    ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Fixed);
-//    ui->treeSource->header()->resizeSection(INT(Column::State), 100);
+//    ui->treeSource->header()->resizeSection(INT(Column::FileName), 100);
     //    ui->treeSource->header()->resizeSections(QHeaderView::ResizeToContents);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -135,6 +135,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     mBlackList = ui->editBlacklist->text().split(";");
     fSettings.beginGroup(config::sGroupPaths);
+    ui->treeHistory->setVisible(false);
 
     int fItemCount = fSettings.beginReadArray(config::sSourcePath);
     for (int fItem = 0; fItem < fItemCount; ++fItem)
@@ -148,6 +149,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
     initContextMenuActions();
 
@@ -1011,6 +1013,9 @@ void MainWindow::initContextMenuActions()
     connect(createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
 
+    connect(createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
+
     connect(createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
@@ -1054,17 +1059,46 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     menu.addAction(getAction(git::Cmd::Commit));
     menu.addAction(getAction(git::Cmd::MoveOrRename));
     menu.addAction(getAction(git::Cmd::Restore));
+    menu.addAction(getAction(git::Cmd::History));
 
-
-    QPoint pt(pos);
     menu.exec( ui->treeSource->mapToGlobal(pos) );
     mContextMenuItem = nullptr;
+}
+
+void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
+{
+    QModelIndexList fSelectedIndexes = ui->treeHistory->selectionModel()->selectedIndexes();
+    QTreeWidgetItem* fSelectedItem = ui->treeHistory->itemAt( pos );
+    QTreeWidgetItem* fParentItem = fSelectedItem->parent();
+    if (fParentItem)
+    {
+        mContextMenuItem = reinterpret_cast<QTreeWidgetItem*>(fParentItem->data(1, 0).toLongLong());
+        if (mContextMenuItem)
+        {
+            mHistoryHashItems.clear();
+//            for (auto fIndex : fSelectedIndexes)
+//            {
+//                QTreeWidgetItem* fItem = ui->treeHistory->itemFromIndex(fIndex);
+//                if (fItem && fItem->parent() == fParentItem)
+//                {
+//                    mHistoryHashItems.append(fItem->data(1, HistoryEntry::CommitHash).toString());
+//                    mHistoryHashItems.append(" ");
+//                }
+//            }
+
+            QMenu menu(this);
+            menu.addAction(getAction(git::Cmd::CallDiffTool));
+            menu.exec( ui->treeHistory->mapToGlobal(pos) );
+            mContextMenuItem = nullptr;
+        }
+    }
 }
 
 void  MainWindow::performGitCmd(const QString& aCommand)
 {
     if (mContextMenuItem)
     {
+        on_btnCloseText_clicked();
         mGitCommand = aCommand;
         mCurrentTask = Work::ApplyGitCommand;
         QString fFilePath = getItemFilePath(mContextMenuItem->parent());
@@ -1163,6 +1197,36 @@ void MainWindow::on_custom_command()
             case git::Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
                 break;
+            case git::Cmd::ParseHistoryText:
+            {
+                QVector<QStringList> fList;
+                git::HistoryEntry::parse(ui->textBrowser->toPlainText(), fList);
+                ui->textBrowser->setPlainText("");
+
+                QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
+                QTreeWidgetItem* fNewItem = new QTreeWidgetItem(QStringList(fFileName));
+                ui->treeHistory->addTopLevelItem(fNewItem);
+
+                fNewItem->setData(1, 0, QVariant(reinterpret_cast<qlonglong>(mContextMenuItem)));
+
+                ui->treeHistory->setVisible(true);
+                ui->btnHideHistory->setChecked(true);
+                int fTLI = ui->treeHistory->topLevelItemCount()-1;
+                for (auto fItem: fList)
+                {
+                    if (fItem.count() >= HistoryEntry::NoOfEntries)
+                    {
+                        QTreeWidgetItem* fNewItem = new QTreeWidgetItem();
+                        ui->treeHistory->topLevelItem(fTLI)->addChild(fNewItem);
+                        fNewItem->setText(0, fItem[HistoryEntry::CommitterDate]);
+                        fNewItem->setText(1, fItem[HistoryEntry::Author]);
+                        for (int fRole=0; fRole<HistoryEntry::NoOfEntries; ++fRole)
+                        {
+                            fNewItem->setData(1, fRole, QVariant(fItem[fRole]));
+                        }
+                    }
+                }
+            }   break;
         }
     }
 }
@@ -1199,3 +1263,22 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
         iterateCheckItems(aItem, fCheckMap, true, &fSourcePath);
     }
 }
+
+void MainWindow::on_btnHideHistory_clicked(bool checked)
+{
+    ui->treeHistory->setVisible(checked);
+}
+
+void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* column */)
+{
+    QString fText;
+    for (int fRole=HistoryEntry::CommitHash; fRole<HistoryEntry::NoOfEntries; ++fRole)
+    {
+        fText.append(HistoryEntry::name(static_cast<HistoryEntry::Entry>(fRole)));
+        fText.append(QChar::LineFeed);
+        fText.append(aItem->data(1, fRole).toString());
+        fText.append(QChar::LineFeed);
+    }
+    ui->textBrowser->setPlainText(fText);
+}
+
