@@ -20,7 +20,8 @@ Cmd::Cmd()
     mCommandMap[Restore]         = "git checkout %1";
     mCommandMap[History]         = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
     mCommandMap[Push]            = "git push %1";
-
+    mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
+    mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
 }
 
 const QString& Cmd::getCommand(eCmd aCmd)

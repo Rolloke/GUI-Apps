@@ -27,6 +27,16 @@ namespace git
 
 struct History
 {
+    enum class Column
+    {
+        Text,
+        Data
+    };
+    enum class Role
+    {
+        ContextMenuItem
+    };
+
     enum class Entry
     {
         CommitHash,
@@ -41,6 +51,7 @@ struct History
         CommitterDate,
         NoOfEntries
     };
+
     static const char* name(Entry aEntry);
     static void parse(const QString& aText, QVector<QStringList>& aList);
 
