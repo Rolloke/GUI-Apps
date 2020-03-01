@@ -35,7 +35,6 @@ private Q_SLOTS:
     void on_btnCancel_clicked();
     void on_btnAddSourceFolder_clicked();
     void on_btnUpdateStatus_clicked();
-    void on_editBlacklist_textEdited(const QString &arg1);
 
     void on_btnStoreText_clicked();
     void textBrowserChanged();
@@ -49,11 +48,13 @@ private Q_SLOTS:
     void on_btnHideHistory_clicked(bool checked);
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
+    void on_btnClearHistory_clicked();
 
     void on_git_commit();
     void on_git_move_rename();
     void on_git_history_diff_command();
     void on_custom_command();
+
 
 
 private:
@@ -122,12 +123,8 @@ private:
     void selectSourceFolder();
     QDir initDir(const QString& aDirPath, int aFilter=0);
 
-    void updateControls();
-
     void handleWorker(int);
     void handleMessage(int, QVariant);
-    void messageBackup(bool);
-    void messageUpdateBytes(qlonglong);
 
     void addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
     void removeIgnoreMapLevel(int aLevel);
@@ -156,11 +153,6 @@ private:
     tActionMap          mActionList;
     QString             mHistoryHashItems;
 
-    // possibly obsolete
-    QTime       mStartTime;
-    qlonglong   mBytesCopied;
-    qlonglong   mBytesToCopy;
-    QStringList mBlackList;
 };
 
 #endif // MAINWINDOW_H

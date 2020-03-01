@@ -86,8 +86,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mWorker(this)
     , mCurrentTask(Work::None)
     , mConfigFileName(aConfigName)
-    , mBytesCopied(0)
-    , mBytesToCopy(0)
 {
 
     ui->setupUi(this);
@@ -113,7 +111,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
-    LOAD_PTR(fSettings, ui->editBlacklist, setText, text, toString);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
@@ -134,7 +131,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Logger::setSeverity(fSeverityValue, true);
     fSettings.endGroup();
 
-    mBlackList = ui->editBlacklist->text().split(";");
     fSettings.beginGroup(config::sGroupPaths);
     ui->treeHistory->setVisible(false);
 
@@ -153,15 +149,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
     initContextMenuActions();
-
-    updateControls();
 }
 
 MainWindow::~MainWindow()
 {
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
-    STORE_PTR(fSettings, ui->editBlacklist, text);
     STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
     STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
     STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
@@ -234,17 +227,6 @@ QString MainWindow::getConfigName() const
 #endif
 }
 
-void MainWindow::updateControls()
-{
-    bool fSourceActionEnabled = false;
-    if (ui->treeSource->topLevelItemCount())
-    {
-        fSourceActionEnabled = true;
-    }
-
-    ui->ckHideEmptyParent->setEnabled(fSourceActionEnabled);
-}
-
 void MainWindow::keyPressEvent(QKeyEvent *aKey)
 {
     if (aKey->key() == Qt::Key_Delete)
@@ -252,7 +234,6 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
         if (ui->treeSource->hasFocus())
         {
             deleteSelectedTreeWidgetItem(*ui->treeSource);
-            updateControls();
         }
     }
 }
@@ -319,19 +300,6 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
             if (fFound->second.is(Type::File)   && fFileInfo.isFile()) continue;
             if (fFound->second.is(Type::Folder) && fFileInfo.isDir())  continue;
         }
-
-        bool isInBlackList = false;
-        for (auto fBlackListItem : mBlackList)
-        {
-            QRegExp fRegEx(fBlackListItem);
-            fRegEx.setPatternSyntax(QRegExp::Wildcard);
-            if (fRegEx.exactMatch(fFileInfo.fileName()))
-            {
-                isInBlackList = true;
-                break;
-            }
-        }
-        if (isInBlackList) continue;
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
@@ -695,8 +663,10 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 void MainWindow::selectSourceFolder()
 {
     QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
-    insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
-    updateControls();
+    if (fSourcePath.size() > 1)
+    {
+        insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
+    }
 }
 
 void MainWindow::handleWorker(int aWork)
@@ -717,56 +687,8 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     switch(static_cast<Work>(aMsg))
     {
-        case Work::ApplyGitCommand:  messageBackup(aData.toBool()); break;
-        default:
-            switch(static_cast<Message>(aMsg))
-            {
-                case Message::UpdateBytes: messageUpdateBytes(aData.toLongLong()); break;
-                default:
-                    Logger::printDebug(Logger::error, "handleWorker(%d) Id is unknown: %s", aMsg, aData.typeName());
-                    break;
-            }
-            break;
+        default:  break;
     }
-}
-
-void MainWindow::messageBackup(bool aStart)
-{
-    if (aStart)
-    {
-        mStartTime.start();
-        QDateTime fNow = QDateTime::currentDateTime();
-        TRACE(Logger::notice, "Backup date: %s", fNow.toString().toStdString().c_str());
-        TRACE(Logger::notice, "Backup host: %s", QSysInfo::machineHostName().toStdString().c_str());
-        mBytesCopied = 0;
-        mBytesToCopy = 0;
-        for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
-        {
-            mBytesToCopy += sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
-        }
-    }
-    else
-    {
-        double fPredictedTime_s = mStartTime.elapsed() * 0.001;
-        int    fPredictedtime_m = static_cast<int>(fPredictedTime_s / 60.0);
-        QString fPredictedTime = QString::asprintf("%02d:%02d",fPredictedtime_m, static_cast<int>(fPredictedTime_s) - 60 * fPredictedtime_m);
-        TRACE(Logger::notice, "Bytes copied: %d of %d", mBytesCopied, mBytesToCopy);
-        Logger::closeLogFile();
-        ui->statusBar->showMessage("Finished Backup in " + fPredictedTime + " min");
-
-    }
-}
-
-void MainWindow::messageUpdateBytes(qlonglong aBytes)
-{
-    double fElapsed_s = 0.001 * mStartTime.elapsed();
-    mBytesCopied += aBytes;
-    double fPredictedTime_s = static_cast<double>(mBytesToCopy - mBytesCopied) / (static_cast<double>(mBytesCopied) / fElapsed_s);
-    int    fPredictedtime_m = static_cast<int>(fPredictedTime_s / 60.0);
-    QString fPredictedTime = QString::asprintf("%02d:%02d", fPredictedtime_m, static_cast<int>(fPredictedTime_s) - 60 * fPredictedtime_m);
-    QString fPercent = QString::number(100.0 * mBytesCopied / mBytesToCopy, 'f', 1);
-    ui->statusBar->showMessage("Bytes copied: " + formatFileSize(mBytesCopied) + " of " + formatFileSize(mBytesToCopy) + ": "
-                               + fPercent + "%" + ", estimated duration: " + fPredictedTime + "min");
 }
 
 void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, stringt2typemap& aFiles)
@@ -873,11 +795,6 @@ void MainWindow::on_btnUpdateStatus_clicked()
     ui->statusBar->showMessage("Total selected bytes: " + formatFileSize(fSize));
 }
 
-void MainWindow::on_editBlacklist_textEdited(const QString &aList)
-{
-    mBlackList = aList.split(";");
-}
-
 void MainWindow::on_btnStoreText_clicked()
 {
     QString fFileName = ui->labelFilePath->text();
@@ -942,23 +859,25 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 {
     mContextMenuItem = ui->treeSource->itemAt( pos );
+    if (mContextMenuItem)
+    {
+        Type fType(static_cast<Type::eType>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
 
-    Type fType(static_cast<Type::eType>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        QMenu menu(this);
+        menu.addAction(getAction(git::Cmd::Add));
+        menu.addAction(getAction(git::Cmd::Remove));
+        menu.addAction(getAction(git::Cmd::ShowDifference));
+        menu.addAction(getAction(git::Cmd::CallDiffTool));
+        menu.addAction(getAction(git::Cmd::ShowShortStatus));
+        menu.addAction(getAction(git::Cmd::ShowStatus));
+        menu.addAction(getAction(git::Cmd::Commit));
+        menu.addAction(getAction(git::Cmd::MoveOrRename));
+        menu.addAction(getAction(git::Cmd::Restore));
+        menu.addAction(getAction(git::Cmd::History));
 
-    QMenu menu(this);
-    menu.addAction(getAction(git::Cmd::Add));
-    menu.addAction(getAction(git::Cmd::Remove));
-    menu.addAction(getAction(git::Cmd::ShowDifference));
-    menu.addAction(getAction(git::Cmd::CallDiffTool));
-    menu.addAction(getAction(git::Cmd::ShowShortStatus));
-    menu.addAction(getAction(git::Cmd::ShowStatus));
-    menu.addAction(getAction(git::Cmd::Commit));
-    menu.addAction(getAction(git::Cmd::MoveOrRename));
-    menu.addAction(getAction(git::Cmd::Restore));
-    menu.addAction(getAction(git::Cmd::History));
-
-    menu.exec( ui->treeSource->mapToGlobal(pos) );
-    mContextMenuItem = nullptr;
+        menu.exec( ui->treeSource->mapToGlobal(pos) );
+        mContextMenuItem = nullptr;
+    }
 }
 
 void MainWindow::on_ckHideEmptyParent_clicked(bool )
@@ -1171,6 +1090,11 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 }
 
+void MainWindow::on_btnClearHistory_clicked()
+{
+    ui->treeHistory->clear();
+}
+
 void  MainWindow::on_git_commit()
 {
     CommitMessage fCommitMsg;
@@ -1273,3 +1197,4 @@ void MainWindow::on_git_history_diff_command()
     QAction *fAction = qobject_cast<QAction *>(sender());
     performGitCmd(tr(fAction->statusTip().toStdString().c_str()).arg(mHistoryHashItems).arg("%1"));
 }
+
