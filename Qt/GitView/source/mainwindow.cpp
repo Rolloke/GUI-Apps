@@ -99,15 +99,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mIgnoreMap[Folder::FolderUp]      = Type(Type::Folder);
     mIgnoreMap[Folder::GitRepository] = Type(Type::GitFolder);
 
-//    ui->treeSource->header()->resizeSection(INT(Column::FileName), 100);
-    //QHeaderView::Stretch
-    //QHeaderView::ResizeToContents
-//    ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
-//    ui->treeSource->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::ResizeToContents);
-//    ui->treeSource->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::ResizeToContents);
-//    ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Fixed);
-//    ui->treeSource->header()->resizeSection(INT(Column::FileName), 100);
-    //    ui->treeSource->header()->resizeSections(QHeaderView::ResizeToContents);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Interactive);
+    ui->treeSource->header()->setStretchLastSection(false);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
@@ -237,7 +233,6 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
         }
     }
 }
-
 
 quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
 {
@@ -395,7 +390,8 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         return 0;
                     }
                     break;
-                    case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowModified:
+                    case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown:
+                    case Work::ShowModified: case Work::ShowAllGitActions:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
                         {

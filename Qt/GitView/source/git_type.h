@@ -71,8 +71,8 @@ struct Type
         GitFolder   = 0x2000|Folder,
         Repository  = 0x4000,
         Checked     = 0x8000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitUnknown|GitRenamed,
-        FileType    =File|Folder
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnknown,
+        FileType    =File|Folder|Hidden
     };
 
     Type(uint aType = None, int aLevel = 0)

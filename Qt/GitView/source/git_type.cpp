@@ -86,7 +86,7 @@ Type::eType Type::translate(const QString& fIdentifier)
     if (fIdentifier.contains('M'))  fType |= GitModified;
     if (fIdentifier.contains('A'))  fType |= GitAdded;
     if (fIdentifier.contains('R'))  fType |= GitRenamed;
-    if (fIdentifier.contains("??")) fType |= GitUnknown;
+    if (fIdentifier.contains("?"))  fType |= GitUnknown;
     if (fIdentifier.contains("##")) fType |= Repository;
     return static_cast<eType>(fType);
 }
