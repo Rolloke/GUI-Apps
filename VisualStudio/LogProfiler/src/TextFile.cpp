@@ -4,20 +4,20 @@
 
 TextFile::TextFile(LPCSTR aFileName) : mFileName (aFileName)
 {
-	FILE *fp = fopen((const char*)aFileName, "rt" );
-	fpos_t fSize = 0;
-	if (fp)
-	{
-		fseek(fp, 0, SEEK_END);
-		fgetpos(fp, &fSize);
-		fseek(fp, 0, SEEK_SET);
-	}
-	if (fSize)
-	{
-		size_t fFileSize = static_cast<size_t>(fSize);
-		mText.resize(fFileSize);
-		if (fread(&mText[0], 1, fFileSize, fp) > 0)
-		{
+    FILE *fp = fopen((const char*)aFileName, "rt" );
+    fpos_t fSize = 0;
+    if (fp)
+    {
+        fseek(fp, 0, SEEK_END);
+        fgetpos(fp, &fSize);
+        fseek(fp, 0, SEEK_SET);
+    }
+    if (fSize)
+    {
+        size_t fFileSize = static_cast<size_t>(fSize);
+        mText.resize(fFileSize);
+        if (fread(&mText[0], 1, fFileSize, fp) > 0)
+        {
             bool fNL = mText.find("\n") != std::string::npos;
             bool fCR = mText.find("\r") != std::string::npos;
             if (fNL && fCR) mLineFeed = "\r\n";
@@ -33,14 +33,14 @@ TextFile::TextFile(LPCSTR aFileName) : mFileName (aFileName)
                 mLineStart.push_back(fPos);
             }
             mLineStart.push_back(fFileSize + mLineFeed.size());
-		}
-		fclose(fp);
-	}
-	else
-	{
-		DWORD dwError = GetLastError();
-		printf("Error: %d\n", dwError);
-	}
+        }
+        fclose(fp);
+    }
+    else
+    {
+        DWORD dwError = GetLastError();
+        printf("Error: %d\n", dwError);
+    }
 }
 
 TextFile::~TextFile()

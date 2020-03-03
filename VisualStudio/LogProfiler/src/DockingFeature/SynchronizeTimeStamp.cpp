@@ -39,9 +39,9 @@ namespace
     const TCHAR keySelectLine[]   = TEXT("SelectLine");
     const TCHAR keyBookmarkLine[] = TEXT("BookmarkLine");
     const TCHAR keyMarker[]       = TEXT("Marker");
-    const TCHAR keyUseThreads[]   = TEXT("UseThread");
-    const TCHAR keyLineLimit[]    = TEXT("LineLimit");
-    const TCHAR keySearchInSubFolders[] = TEXT("SearchInSubFolders");
+    const TCHAR keyUseThreads[]          = TEXT("UseThread");
+    const TCHAR keyLineLimit[]           = TEXT("LineLimit");
+    const TCHAR keySearchInSubFolders[]  = TEXT("SearchInSubFolders");
     const TCHAR keyMaxSearchDifference[] = TEXT("MaxSearchDifference");
 }
 
@@ -69,13 +69,13 @@ SynchronizeTimeStamps::~SynchronizeTimeStamps()
 
 INT_PTR CALLBACK SynchronizeTimeStamps::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch (message) 
-	{
+    switch (message) 
+    {
     case WM_INITDIALOG: return OnInitDialog();
-	case WM_COMMAND : 
-	{
-		switch (LOWORD(wParam))
-		{
+    case WM_COMMAND : 
+    {
+        switch (LOWORD(wParam))
+        {
         case IDC_BTN_GET_TIME:           return StartThread(IDC_BTN_GET_TIME); //return OnGetTime();
         case IDC_BTN_FIND_TIME:          return StartThread(IDC_BTN_FIND_TIME); //return OnFindTime();
         case IDC_BTN_SYNCHRONIZE:        return StartThread(IDC_BTN_SYNCHRONIZE);        //return OnSyncronizeOpenFiles();
@@ -89,16 +89,16 @@ INT_PTR CALLBACK SynchronizeTimeStamps::run_dlgProc(UINT message, WPARAM wParam,
         case IDC_BTN_DELETE_BOOKMARKS: return OnBtnDeleteBookmarks();
         case IDC_BTN_DELETE_CURRENT_BOOKMARK: return OnBtnDeleteCurrentBookmark();
         case IDC_BTN_HELP: return OnBtnHelp();
-		case IDC_BTN_SELECT_FOLDER: return OnSelectFolder();
+        case IDC_BTN_SELECT_FOLDER: return OnSelectFolder();
         case IDC_BTN_STOP_ALL: return OnStopAllThreads();
-		case IDC_EDT_BOOKMARK:
+        case IDC_EDT_BOOKMARK:
             if (HIWORD(wParam) == EN_CHANGE)
             {
                 mMarker = getDlgItemInt(IDC_EDT_BOOKMARK);
             }
             return 1;
         }
-		return FALSE;
+        return FALSE;
     }break;
     case WM_NOTIFY: return OnWmNotify((UINT)wParam, (NMHDR*)lParam);
     case WM_HELP: return OnWmHelp((HELPINFO*)lParam);
@@ -106,8 +106,8 @@ INT_PTR CALLBACK SynchronizeTimeStamps::run_dlgProc(UINT message, WPARAM wParam,
     case WM_REMOVE_THRÈAD: return OnRemoveThread((UINT)wParam);
         
 
-	default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
-	}
+    default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
+    }
 }
 
 INT_PTR SynchronizeTimeStamps::OnSyncronizeFolder()
@@ -135,13 +135,13 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
     mTestParser.reset(new TimeParser);
 
     TCHAR* szPredefinedTimeFormat[] = 
-	{
+    {
         _T("[%a %b %e %H:%M:%S %Y]"),
         _T("[%d.%m.%Y-%H:%M:%S]"),
         _T("[%d.%m.%Y-%H:%M:%S.%i]"),
         _T("[%m/%d/%Y %H:%M:%S.%i %X %x]"),
         _T("%Y-%m-%dT%H:%M:%S.%i%x+%x:%x")
-	};
+    };
     const int fPredefinedFormats = lengthof(szPredefinedTimeFormat);
     int fTimeFormats = ::GetPrivateProfileInt(sectionName, keyFormats, 0, getIniFilePath());
     TCHAR szTimeFormatKey[256], szTimeFormat[256];
@@ -158,9 +158,9 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
         sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_INSERTITEM, i, (LPARAM)&fItem);
         std::string fTimeFormat;
 #ifdef UNICODE
-		convertToMBCS(szTimeFormat, fTimeFormat);
+        convertToMBCS(szTimeFormat, fTimeFormat);
 #else
-		fTimeFormat = szTimeFormat;
+        fTimeFormat = szTimeFormat;
 #endif 
 
         mParserToFormatMap[fTimeFormat].reset(new TimeParser());
@@ -214,7 +214,7 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
         addToolTip(nID);
     }
   
-	SetDlgItemTextA(_hSelf, IDC_EDT_WILDCARD, "*.*");
+    SetDlgItemTextA(_hSelf, IDC_EDT_WILDCARD, "*.*");
     
     //determine Messages for:
      // - open file
@@ -357,9 +357,9 @@ INT_PTR SynchronizeTimeStamps::OnBtnHelp()
 {
     std::string  fPath;
 #ifdef UNICODE
-	convertToMBCS(_modulePath, fPath);
+    convertToMBCS(_modulePath, fPath);
 #else
-	fPath = _modulePath;
+    fPath = _modulePath;
 #endif // UNICODE
 
     fPath = "explorer " + fPath; 
@@ -740,34 +740,34 @@ INT_PTR SynchronizeTimeStamps::OnSelectFolder()
         SetDlgItemText(_hSelf, IDC_EDT_FOLDER, fileNameStr.c_str());
     }
 #endif
-	return TRUE;
+    return TRUE;
 }
 
 
 void SynchronizeTimeStamps::openTimeStampResults()
 {
-	if (mTimeStampResults == NULL)
-	{
-		mTimeStampResults = new SynchronizeTimeResults();
-		mTimeStampResults->init(_hInst, nppData._nppHandle);
-	}
-	if (!mTimeStampResults->isCreated())
-	{
-		tTbData	data = { 0 };
-		mTimeStampResults->create(&data);
+    if (mTimeStampResults == NULL)
+    {
+        mTimeStampResults = new SynchronizeTimeResults();
+        mTimeStampResults->init(_hInst, nppData._nppHandle);
+    }
+    if (!mTimeStampResults->isCreated())
+    {
+        tTbData    data = { 0 };
+        mTimeStampResults->create(&data);
 
-		// define the default docking behaviour
-		data.uMask = DWS_DF_CONT_BOTTOM;
+        // define the default docking behaviour
+        data.uMask = DWS_DF_CONT_BOTTOM;
 
-		data.pszModuleName = mTimeStampResults->getPluginFileName();
-		_tcscat(data.pszName, _T(" Find Results"));
+        data.pszModuleName = mTimeStampResults->getPluginFileName();
+        _tcscat(data.pszName, _T(" Find Results"));
 
-		// the dlgDlg should be the index of funcItem where the current function pointer is
-		// in this case is DOCKABLE_DEMO_INDEX
-		data.dlgID = DisplayLogProfiler + 1;
-		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
-	}
-	mTimeStampResults->display();
+        // the dlgDlg should be the index of funcItem where the current function pointer is
+        // in this case is DOCKABLE_DEMO_INDEX
+        data.dlgID = DisplayLogProfiler + 1;
+        ::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+    }
+    mTimeStampResults->display();
 }
 //
 // [%a %b %e %H:%M:%S %Y]
