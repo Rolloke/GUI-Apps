@@ -55,36 +55,39 @@ private:
 
 struct Type
 {
-    enum eType
+    enum TypeFlags
     {
         None        = 0,
-        File        = 0x0001,
-        Folder      = 0x0002,
-        Hidden      = 0x0004,
-        WildCard    = 0x0008,
-        GitModified = 0x0010,
-        GitDeleted  = 0x0020,
-        GitAdded    = 0x0040,
-        GitUnknown  = 0x0080,
-        GitRenamed  = 0x0100,
-        GitIgnore   = 0x1000,
-        GitFolder   = 0x2000|Folder,
-        Repository  = 0x4000,
-        Checked     = 0x8000,
+        File        = 0x00001,
+        Folder      = 0x00002,
+        SymLink     = 0x00004,
+        WildCard    = 0x00008,
+        GitModified = 0x00010,
+        GitDeleted  = 0x00020,
+        GitAdded    = 0x00040,
+        GitUnknown  = 0x00080,
+        GitRenamed  = 0x00100,
+        GitIgnore   = 0x01000,
+        GitFolder   = 0x02000|Folder,
+        Repository  = 0x04000,
+        Checked     = 0x08000,
+        Hidden      = 0x10000,
+        Executeable = 0x20000,
         AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnknown,
-        FileType    =File|Folder|Hidden
+        FileType    =File|Folder|SymLink,
+        FileFlag    =Hidden|Executeable
     };
 
     Type(uint aType = None, int aLevel = 0)
       : mType(aType)
       , mLevel(aLevel) {}
 
-    void add(eType aType);
-    void remove(eType aType);
-    bool is(eType aType) const;
+    void add(TypeFlags aType);
+    void remove(TypeFlags aType);
+    bool is(TypeFlags aType) const;
 
-    static const char* name(eType aType);
-    static eType       translate(const QString& fIdentifier);
+    static const char* name(TypeFlags aType);
+    static TypeFlags   translate(const QString& fIdentifier);
 
     uint mType;
     int mLevel;

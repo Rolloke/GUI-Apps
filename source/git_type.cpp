@@ -39,23 +39,23 @@ namespace Folder
     const char FolderSelf[]    = ".";
 }
 
-void Type::add(eType aType)
+void Type::add(TypeFlags aType)
 {
-    mType = static_cast<eType>(mType|aType);
+    mType = static_cast<TypeFlags>(mType|aType);
 }
 
-void Type::remove(eType aType)
+void Type::remove(TypeFlags aType)
 {
-    mType = static_cast<eType>(mType&~aType);
+    mType = static_cast<TypeFlags>(mType&~aType);
 }
 
-bool Type::is(eType aType) const
+bool Type::is(TypeFlags aType) const
 {
     return (mType & aType) != None;
 }
 
-#define RETURN_NAME(NAME) case NAME: return #NAME;
-const char* Type::name(eType aType)
+#define RETURN_NAME(NAME) case NAME: return #NAME
+const char* Type::name(TypeFlags aType)
 {
     switch (aType)
     {
@@ -66,20 +66,23 @@ const char* Type::name(eType aType)
         case GitRenamed: return "Renamed";
         case GitFolder:  return "git folder";
         case GitIgnore:  return "git ignore";
-        RETURN_NAME(AllGitActions)
-        RETURN_NAME(Repository)
-        RETURN_NAME(File)
-        RETURN_NAME(Folder)
-        RETURN_NAME(Hidden)
-        RETURN_NAME(WildCard)
-        RETURN_NAME(None)
-        RETURN_NAME(Checked)
-        RETURN_NAME(FileType)
+        case SymLink:    return "symbolic link";
+        case FileType:   return "file types (group)";
+        case FileFlag:   return "file flags (group)";
+        RETURN_NAME(AllGitActions);
+        RETURN_NAME(Repository);
+        RETURN_NAME(File);
+        RETURN_NAME(Folder);
+        RETURN_NAME(Hidden);
+        RETURN_NAME(WildCard);
+        RETURN_NAME(None);
+        RETURN_NAME(Checked);
+        RETURN_NAME(Executeable);
     }
     return "";
 }
 
-Type::eType Type::translate(const QString& fIdentifier)
+Type::TypeFlags Type::translate(const QString& fIdentifier)
 {
     int fType = None;
     if (fIdentifier.contains('D'))  fType |= GitDeleted;
@@ -88,7 +91,7 @@ Type::eType Type::translate(const QString& fIdentifier)
     if (fIdentifier.contains('R'))  fType |= GitRenamed;
     if (fIdentifier.contains("?"))  fType |= GitUnknown;
     if (fIdentifier.contains("##")) fType |= Repository;
-    return static_cast<eType>(fType);
+    return static_cast<TypeFlags>(fType);
 }
 
 
