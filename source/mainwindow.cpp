@@ -1028,8 +1028,11 @@ void  MainWindow::performGitCmd(const QString& aCommand)
 bool MainWindow::applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
 {
     QString fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
-    int fResult = execute(fCommand, aResultStr);
-    aResultStr = fCommand + getLineFeed() + aResultStr;
+    QString fResultStr;
+    int fResult = execute(fCommand, fResultStr);
+    aResultStr = fCommand;
+    aResultStr.append(getLineFeed());
+    aResultStr.append(fResultStr);
     return fResult == 0;
 }
 
