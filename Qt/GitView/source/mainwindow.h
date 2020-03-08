@@ -123,6 +123,9 @@ private:
     void selectSourceFolder();
     QDir initDir(const QString& aDirPath, int aFilter=0);
 
+    const QString& getLineFeed() const;
+    void           setLineFeed(const QString& aLF=mNativeLineFeed);
+
     void handleWorker(int);
     void handleMessage(int, QVariant);
 
@@ -152,6 +155,8 @@ private:
     QTreeWidgetItem*    mContextMenuItem;
     tActionMap          mActionList;
     QString             mHistoryHashItems;
+    QString             mLineFeed;
+    static const QString mNativeLineFeed;
 
 };
 
