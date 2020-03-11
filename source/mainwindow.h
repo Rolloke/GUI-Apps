@@ -129,8 +129,9 @@ private:
     void handleWorker(int);
     void handleMessage(int, QVariant);
 
-    void addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
-    void removeIgnoreMapLevel(int aLevel);
+    void    addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
+    void    removeIgnoreMapLevel(int aLevel);
+    bool    ignoreFile(const QFileInfo& aFileInfo);
     QString getItemFilePath(QTreeWidgetItem* item);
     void updateTreeItemStatus(QTreeWidgetItem * aItem);
 

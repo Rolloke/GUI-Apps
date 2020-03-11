@@ -75,6 +75,8 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(Folder);
         RETURN_NAME(Hidden);
         RETURN_NAME(WildCard);
+        RETURN_NAME(RegExp);
+        RETURN_NAME(Negation);
         RETURN_NAME(None);
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);
