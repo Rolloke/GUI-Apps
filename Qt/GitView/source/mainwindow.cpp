@@ -45,9 +45,6 @@ using namespace std;
 // TODO: Änderungen vom Remote Repository abholen
 // git fetch pi@RaspiLAN:git.repository
 
-// TODO: Datei(en) oder Verzeichnis(se) entfernen
-// git rm --cached file/wildcard/directory
-// TODO entfernte im Treview einfügen
 // TODO git status (Zugehörigkeit) einer Datei erkennen
 
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
@@ -241,6 +238,52 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
     }
 }
 
+bool MainWindow::ignoreFile(const QFileInfo& aFileInfo)
+{
+    auto fFound = mIgnoreMap.find(aFileInfo.fileName().toStdString());
+    if (fFound == mIgnoreMap.end())
+    {
+        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
+        {
+            if (fItem->second.is(Type::WildCard)||fItem->second.is(Type::RegExp))
+            {
+                QRegExp fRegEx(fItem->first.c_str());
+                fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
+                if (fRegEx.exactMatch(aFileInfo.fileName()))
+                {
+                    fFound = fItem;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (fFound != mIgnoreMap.end())
+    {
+        bool fNegationFound = false;
+        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
+        {
+            if (fItem->second.is(Type::Negation))
+            {
+                if (aFileInfo.fileName().indexOf(fItem->first.c_str()) != -1)
+                {
+                    // TODO: fix this negation
+                    fNegationFound = true;
+                    break;
+                }
+            }
+        }
+        if (!fNegationFound)
+        {
+            if (fFound->second.is(Type::File)   && aFileInfo.isFile()) return true;
+            if (fFound->second.is(Type::Folder) && aFileInfo.isDir() ) return true;
+        }
+    }
+
+    return false;
+}
+
+
 quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
@@ -279,29 +322,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 
         const QFileInfo& fFileInfo = fIterator.fileInfo();
 
-        auto fFound = mIgnoreMap.find(fFileInfo.fileName().toStdString());
-        if (fFound == mIgnoreMap.end())
-        {
-            for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
-            {
-                if (fItem->second.is(Type::WildCard))
-                {
-                    QRegExp fRegEx(fItem->first.c_str());
-                    fRegEx.setPatternSyntax(QRegExp::Wildcard);
-                    if (fRegEx.exactMatch(fFileInfo.fileName()))
-                    {
-                        fFound = fItem;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (fFound != mIgnoreMap.end())
-        {
-            if (fFound->second.is(Type::File)   && fFileInfo.isFile()) continue;
-            if (fFound->second.is(Type::Folder) && fFileInfo.isDir())  continue;
-        }
+        if (ignoreFile(fFileInfo)) continue;
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
@@ -540,17 +561,29 @@ void MainWindow::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vecto
         {
             QString fLine = file.readLine();
             fLine.remove(getLineFeed());
-            int fCommentIndex = fLine.indexOf('#');
-            if (fCommentIndex != -1)
+            int fIndex = fLine.indexOf('#');
+            if (fIndex != -1)
             {
-                fLine.remove(fCommentIndex,fLine.size()-fCommentIndex);
+                fLine.remove(fIndex,fLine.size()-fIndex);
                 fLine = fLine.trimmed();
             }
             Type fType(fLine.contains('/') ? Type::Folder : Type::File, fMapLevel);
             if (fLine.contains('*')) fType.add(Type::WildCard);
             if (fLine.contains('?')) fType.add(Type::WildCard);
+            if (fLine.contains('[') && fLine.contains(']')) fType.add(Type::RegExp);
+            if (fLine.contains('!')) fType.add(Type::Negation);
             fLine.remove(QChar::CarriageReturn);
-            fLine.remove('/');
+            fIndex = fLine.lastIndexOf('/');
+            if (fIndex != -1 && fIndex == fLine.size() - 1)
+            {
+                fLine.remove(fIndex, 1);
+            }
+            fIndex = fLine.indexOf('!');
+            if (fIndex == 0)
+            {
+                fLine.remove(fIndex, 1);
+            }
+
             if (fLine.size())
             {
                 if (mIgnoreMap.count(fLine.toStdString()))
