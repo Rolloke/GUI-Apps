@@ -12,6 +12,7 @@
 #include <QSemaphore>
 #include <QTime>
 #include <map>
+#include <boost/optional.hpp>
 
 
 namespace Ui
@@ -54,8 +55,6 @@ private Q_SLOTS:
     void on_git_move_rename();
     void on_git_history_diff_command();
     void on_custom_command();
-
-
 
 private:
 
@@ -110,30 +109,30 @@ private:
     typedef std::map<int, QAction*> tActionMap;
 #endif
 
-    void keyPressEvent(QKeyEvent *);
+    void     keyPressEvent(QKeyEvent *);
 
-    QString getConfigName() const;
+    QString  getConfigName() const;
 
-    quint64 insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem=0);
-    bool iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
-    bool iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, const QString* aSourceDir=0);
-    void insertSourceTree(const QDir& fSource, int fItem);
-    quint64 sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
+    quint64  insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem=0);
+    bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
+    bool     iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, const QString* aSourceDir=0);
+    void     insertSourceTree(const QDir& fSource, int fItem);
+    quint64  sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
 
-    void selectSourceFolder();
-    QDir initDir(const QString& aDirPath, int aFilter=0);
+    void     selectSourceFolder();
+    QDir     initDir(const QString& aDirPath, int aFilter=0);
 
     const QString& getLineFeed() const;
     void           setLineFeed(const QString& aLF=mNativeLineFeed);
 
-    void handleWorker(int);
-    void handleMessage(int, QVariant);
+    void     handleWorker(int);
+    void     handleMessage(int, QVariant);
 
-    void    addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
-    void    removeIgnoreMapLevel(int aLevel);
-    bool    ignoreFile(const QFileInfo& aFileInfo);
-    QString getItemFilePath(QTreeWidgetItem* item);
-    void updateTreeItemStatus(QTreeWidgetItem * aItem);
+    void     addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
+    void     removeIgnoreMapLevel(int aLevel);
+    bool     ignoreFile(const QFileInfo& aFileInfo);
+    QString  getItemFilePath(QTreeWidgetItem* item);
+    void     updateTreeItemStatus(QTreeWidgetItem * aItem);
 
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
     void     initContextMenuActions();
@@ -157,6 +156,7 @@ private:
     tActionMap          mActionList;
     QString             mHistoryHashItems;
     QString             mLineFeed;
+    boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
     static const QString mNativeLineFeed;
 
 };

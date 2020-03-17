@@ -56,6 +56,16 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STR(fSettings, mCopyCommand, toString);
     fSettings.endGroup();
 
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::Interactive);
+    ui->treeSource->header()->setStretchLastSection(false);
+
+    ui->treeBackup->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
+    ui->treeBackup->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::Interactive);
+    ui->treeBackup->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::Interactive);
+    ui->treeBackup->header()->setStretchLastSection(false);
+
     mBlackList = ui->editBlacklist->text().split(";");
 
     fSettings.beginGroup(config::sGroupPaths);

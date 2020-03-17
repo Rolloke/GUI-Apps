@@ -30,7 +30,7 @@ struct History
     enum class Column
     {
         Text,
-        Data
+        Commit
     };
     enum class Role
     {
