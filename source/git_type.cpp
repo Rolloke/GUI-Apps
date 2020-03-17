@@ -77,6 +77,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(WildCard);
         RETURN_NAME(RegExp);
         RETURN_NAME(Negation);
+        RETURN_NAME(ContainingNegation);
         RETURN_NAME(None);
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);

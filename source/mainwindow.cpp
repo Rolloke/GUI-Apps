@@ -238,52 +238,6 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
     }
 }
 
-bool MainWindow::ignoreFile(const QFileInfo& aFileInfo)
-{
-    auto fFound = mIgnoreMap.find(aFileInfo.fileName().toStdString());
-    if (fFound == mIgnoreMap.end())
-    {
-        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
-        {
-            if (fItem->second.is(Type::WildCard)||fItem->second.is(Type::RegExp))
-            {
-                QRegExp fRegEx(fItem->first.c_str());
-                fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
-                if (fRegEx.exactMatch(aFileInfo.fileName()))
-                {
-                    fFound = fItem;
-                    break;
-                }
-            }
-        }
-    }
-
-    if (fFound != mIgnoreMap.end())
-    {
-        bool fNegationFound = false;
-        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
-        {
-            if (fItem->second.is(Type::Negation))
-            {
-                if (aFileInfo.fileName().indexOf(fItem->first.c_str()) != -1)
-                {
-                    // TODO: fix this negation
-                    fNegationFound = true;
-                    break;
-                }
-            }
-        }
-        if (!fNegationFound)
-        {
-            if (fFound->second.is(Type::File)   && aFileInfo.isFile()) return true;
-            if (fFound->second.is(Type::Folder) && aFileInfo.isDir() ) return true;
-        }
-    }
-
-    return false;
-}
-
-
 quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
@@ -359,8 +313,10 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
             fSizeOfFiles += fFileInfo.size();
             fItem->setData(INT(Column::Size), Qt::SizeHintRole, QVariant(fFileInfo.size()));
         }
+        mIgnoreContainingNegation.reset();
     }
     while (fIterator.hasNext());
+
 
     for (auto fMapLevel : fMapLevels)
     {
@@ -601,7 +557,20 @@ void MainWindow::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vecto
         }
         while (!file.atEnd());
     }
-
+    for (const auto& fItem : mIgnoreMap)
+    {
+        if (fItem.second.is(Type::Negation))
+        {
+            for (auto& fSearchItem : mIgnoreMap)
+            {
+                if (   fItem.first.find(fSearchItem.first) != std::string::npos
+                    && fItem.first != fSearchItem.first)
+                {
+                     fSearchItem.second.add(Type::ContainingNegation);
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::removeIgnoreMapLevel(int aMapLevel)
@@ -622,6 +591,56 @@ void MainWindow::removeIgnoreMapLevel(int aMapLevel)
             else break;
         }
     }
+}
+
+bool MainWindow::ignoreFile(const QFileInfo& aFileInfo)
+{
+    const std::string& fFileName = aFileInfo.fileName().toStdString();
+    const std::string& fFilePath = aFileInfo.filePath().toStdString();
+
+    auto fFound = mIgnoreMap.find(fFileName);
+    if (fFound == mIgnoreMap.end())
+    {
+        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
+        {
+            if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
+            {
+                QRegExp fRegEx(fItem->first.c_str());
+                fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
+                if (fRegEx.exactMatch(fFileName.c_str()))
+                {
+                    fFound = fItem;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (mIgnoreContainingNegation)
+    {
+        if (fFound != mIgnoreMap.end() && fFound->second.is(Type::Negation))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        if (fFound != mIgnoreMap.end())
+        {
+            if (fFound->second.is(Type::ContainingNegation))
+            {
+                mIgnoreContainingNegation = *fFound;
+                return false;
+            }
+            if (fFound->second.is(Type::File)   && aFileInfo.isFile()) return true;
+            if (fFound->second.is(Type::Folder) && aFileInfo.isDir() ) return true;
+        }
+    }
+    return false;
 }
 
 void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
@@ -791,7 +810,7 @@ void MainWindow::parseGitLogHistoryText()
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(fFileName));
     ui->treeHistory->addTopLevelItem(fNewHistoryItem);
     QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-    fNewHistoryItem->setData(INT(History::Column::Data), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
+    fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
 
     ui->treeHistory->setVisible(true);
     ui->btnHideHistory->setChecked(true);
@@ -805,10 +824,10 @@ void MainWindow::parseGitLogHistoryText()
             fNewHistoryItem = new QTreeWidgetItem();
             ui->treeHistory->topLevelItem(fTLI)->addChild(fNewHistoryItem);
             fNewHistoryItem->setText(INT(History::Column::Text), fItem[INT(History::Entry::CommitterDate)]);
-            fNewHistoryItem->setText(INT(History::Column::Data), fItem[INT(History::Entry::Author)]);
+            fNewHistoryItem->setText(INT(History::Column::Commit), fItem[INT(History::Entry::Author)]);
             for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
             {
-                fNewHistoryItem->setData(INT(History::Column::Data), fRole, QVariant(fItem[fRole]));
+                fNewHistoryItem->setData(INT(History::Column::Commit), fRole, QVariant(fItem[fRole]));
             }
         }
     }
@@ -1106,18 +1125,38 @@ void MainWindow::on_btnHideHistory_clicked(bool checked)
     ui->treeHistory->setVisible(checked);
 }
 
-void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* column */)
+void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
 {
     QString fText;
-    for (int fRole=INT(History::Entry::Subject); fRole < INT(History::Entry::NoOfEntries); ++fRole)
-    {
-        fText.append(History::name(static_cast<History::Entry>(fRole)));
-        fText.append(getLineFeed());
-        fText.append(aItem->data(INT(History::Column::Data), fRole).toString());
-        fText.append(getLineFeed());
-    }
+//    if (aColumn == INT(History::Column::Text))
+//    {
+        for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
+        {
+            fText.append(History::name(static_cast<History::Entry>(fRole)));
+            fText.append(getLineFeed());
+            fText.append(aItem->data(INT(History::Column::Commit), fRole).toString());
+            fText.append(getLineFeed());
+        }
+//    }
+//    else
+//    {
+//        QString fGitCmd = "git show ";
+//        fGitCmd.append(aItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+//        QString fResultStr;
+//        int fResult = execute(fGitCmd, fResultStr);
+//        fText = fGitCmd;
+//        fText.append(getLineFeed());
+//        fText.append(fResultStr);
+
+//        if (fResult)
+//        {
+//            fText.append(getLineFeed());
+//            fText.append(tr("Result failure no: %1").arg(fResult));
+//        }
+//    }
     ui->textBrowser->setPlainText(fText);
 }
+
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
@@ -1129,17 +1168,17 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         if (fParentHistoryItem)
         {
             QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-            mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Data), INT(History::Role::ContextMenuItem)).toModelIndex());
+            mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem)).toModelIndex());
             if (mContextMenuItem)
             {
                 mHistoryHashItems.clear();
-                for (auto fIndex : fSelectedHistoryIndexes)
+                for (auto fIndex = fSelectedHistoryIndexes.rbegin(); fIndex != fSelectedHistoryIndexes.rend(); ++fIndex)
                 {
                     QTreeWidgetHook* fHistoryHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeHistory);
-                    QTreeWidgetItem* fItem = fHistoryHook->itemFromIndex(fIndex);
+                    QTreeWidgetItem* fItem = fHistoryHook->itemFromIndex(*fIndex);
                     if (fItem && fItem->parent() == fParentHistoryItem)
                     {
-                        mHistoryHashItems.append(fItem->data(INT(History::Column::Data), INT(History::Entry::CommitHash)).toString());
+                        mHistoryHashItems.append(fItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
                         mHistoryHashItems.append(" ");
                     }
                 }
@@ -1261,4 +1300,5 @@ void MainWindow::on_git_history_diff_command()
     QAction *fAction = qobject_cast<QAction *>(sender());
     performGitCmd(tr(fAction->statusTip().toStdString().c_str()).arg(mHistoryHashItems).arg("%1"));
 }
+
 
