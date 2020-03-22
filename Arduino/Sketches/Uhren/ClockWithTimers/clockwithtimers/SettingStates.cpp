@@ -7,6 +7,11 @@
 #define TICK_INTERVAL_MS     500
 #define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
 
+// TODO: start and stop timer with alarm button
+// BUG: time is resetted, when alarm is suspended
+// BUG: timer is changed during time settings
+// TODO: switch to alarm timer, when alarm is reached and show, that this alarm is now activated
+
 
 // \brief constructor
 SettingStates::SettingStates()
@@ -17,6 +22,7 @@ SettingStates::SettingStates()
 , mAlarmMelody(0)
 , mAlarmActive(false)
 , mTimeChanged(false)
+, mDisplayChanged(true)
 , mState(Time)
 , mAlarmMode(Daily)
 , mAlarmID(dtINVALID_ALARM_ID)
@@ -64,6 +70,7 @@ void SettingStates::triggerButton(button aButton, uint8_t aState)
       mButtonState[Mode] = mButtonState[Hour] = mButtonState[Minute] = mButtonState[AlarmBtn] = aState;
       break;
     default:
+      mDisplayChanged = true;
       mButtonState[aButton] = aState;
       break;
   }
@@ -75,6 +82,8 @@ void SettingStates::tick(unsigned long fNow)
   {
     mLastTickTime = fNow + TICK_INTERVAL_MS;
     onTrigger();
+    mDisplayChanged = true;
+
     if (mModeBlink & Active)
     {
         mModeBlink ^= LED_Bit;
@@ -282,21 +291,25 @@ void SettingStates::handleStateChanged()
 {
   if (mState == SetTime)
   {
-      if (RTC.chipPresent())
+      if (! mTimeChanged)
       {
-         if (!RTC.read(mTime))
-         {
-           mTime.Hour    = 0;
-           mTime.Minute  = 0;
-           mTime.Month   = 1;
-           mTime.Day     = 1;
-         }
-      }
-      else
-      {
-          breakTime(now(), mTime);
+          if (RTC.chipPresent())
+          {
+             if (!RTC.read(mTime))
+             {
+               mTime.Hour    = 0;
+               mTime.Minute  = 0;
+               mTime.Month   = 1;
+               mTime.Day     = 1;
+             }
+          }
+          else
+          {
+              breakTime(now(), mTime);
+          }
       }
   }
+
   if (mState == SetAlarm)
   {
     time_t fTime = Alarm.read(mAlarmID);
@@ -311,7 +324,8 @@ void SettingStates::handleStateChanged()
       RTC.read(mTime);
     }
   }
-  if (mState == Timer)
+
+  if (isTimerState())
   {
     time_t fTime = Alarm.read(mTimerID[getTimerIndex()]);
     if (fTime != dtINVALID_TIME)
@@ -319,6 +333,12 @@ void SettingStates::handleStateChanged()
       mTime.Hour   = hour(fTime);
       mTime.Minute = minute(fTime);
       mTime.Second = second(fTime);
+    }
+    else
+    {
+        mTime.Hour   = 0;
+        mTime.Minute = 0;
+        mTime.Second = 0;
     }
   }
 
@@ -510,10 +530,11 @@ int SettingStates::onTimerAlarm()
 
 void SettingStates::stopTimer(int aIndex)
 {
-  time_t fDiff = now() - mTimerStartTime[aIndex];
-  mTime.Hour       = hour(fDiff);
-  mTime.Minute     = minute(fDiff);
-  mTime.Second     = second(fDiff);
+  time_t fTime = Alarm.read(mTimerID[aIndex]);
+  mTimerStartTime[aIndex] = fTime;
+  mTime.Hour       = hour(fTime);
+  mTime.Minute     = minute(fTime);
+  mTime.Second     = second(fTime);
   Alarm.free(mTimerID[aIndex]);
   mTimerID[aIndex] = dtINVALID_ALARM_ID;
 }
@@ -538,6 +559,13 @@ bool SettingStates::isAlarmActive()
     return mAlarmActive;
 }
 
+bool SettingStates::hasDisplayChanged()
+{
+    bool fChanged = mDisplayChanged;
+    mDisplayChanged = false;
+    return fChanged;
+}
+
 void SettingStates::handleActivateAlarm()
 {
   if (isButtonPressed(AlarmBtn))
@@ -558,6 +586,8 @@ void SettingStates::handleActivateAlarm()
          mAlarmID = Alarm.alarmRepeat(mTime.Hour, mTime.Minute, 0, mAlarmFunction); 
          break;
       }
+      // bug: fix alarm functionality
+      mAlarmActive = Alarm.isAlarm(mAlarmID);
     }
     else
     {

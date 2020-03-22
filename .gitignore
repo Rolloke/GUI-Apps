@@ -6,3 +6,5 @@ own_drivers/
 CVS/
 *.aps
 *.user.*
+#Qt/
+#!Qt/Widgets/

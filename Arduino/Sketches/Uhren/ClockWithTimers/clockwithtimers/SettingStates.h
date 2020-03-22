@@ -41,6 +41,7 @@ public:
   bool isTimerActive();
   bool isTimerState();
   bool isAlarmActive();
+  bool hasDisplayChanged();
 
   int  onTimerAlarm();
 
@@ -92,6 +93,7 @@ private:
   uint8_t mAlarmMelody;
   bool    mAlarmActive;
   bool    mTimeChanged;
+  bool    mDisplayChanged;
   tmElements_t mTime;
   state        mState;
   alarm_mode   mAlarmMode;
