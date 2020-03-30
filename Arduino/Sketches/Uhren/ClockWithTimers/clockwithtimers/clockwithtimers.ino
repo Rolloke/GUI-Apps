@@ -1,11 +1,8 @@
 
 /*
-  Fluorecent Display Clock
+  LCD Clock
  
- Shows clock time on a fluorescent display
- 
- The circuit:
- ClockMux device with 6 pins
+ Shows clock time on an LCD Display
  * 4 buttons for settings
  * 1 alarm tone output
  created 2015
@@ -13,7 +10,6 @@
  
  */
 
-#include "ClockMux.h"
 #include "SettingStates.h"
 
 
@@ -32,6 +28,11 @@
 
 #define TICK_INTERVAL_MS 500
 
+// TODO: Taster besorgen für Layout
+// TODO: Lautsprecher besorgen für Layout
+// TODO: Timer Baustein besorgen [Optional]
+// TODO: LED: Hintergrundbeleuchtung implementieren
+// TODO: Contrast implemenieren
 
 void PrintLCD_Time();
 
@@ -91,10 +92,23 @@ Tone gTones4[] =
 
 Tone gTones5[] =
 {
+    { NOTE_C7, 1, 8},
+    { 0, 1, 8},
+    { NOTE_C7, 1, 8},
+    { 0, 1, 8},
+    { NOTE_C7, 1, 8},
+    { 0, 1, 8},
+    { NOTE_C7, 1, 8},
+    { 0, 2, 1},
+    { 0, 0, 0}
+};
+
+Tone gTones6[] =
+{
   #include "big_ben.h"
 };
 
-Melody gMelody(toneOutput, gTones5, 20, 1000);
+Melody gMelody(toneOutput, gTones6, 20, 1000);
 
 #define countof(X) sizeof(X) / sizeof(X[0])
 
@@ -203,11 +217,27 @@ void PrintLCD_Time()
     LCD_PRINT_AT(0, 0, "                ");
     LCD_PRINT_AT(0, 0, gSettings.getStateName());
 
-    if (    gSettings.isTimerActive()
-        || (   gSettings.getState() == SettingStates::SetAlarm
-            && gSettings.isAlarmActive()))
+    if (   (gSettings.isTimerState()                        && gSettings.isTimerActive())
+        || (gSettings.getState() == SettingStates::SetAlarm && gSettings.isAlarmActive()))
     {
         LCD_PRINT(": *")
+    }
+
+    if (gSettings.getState() == SettingStates::Time)
+    {
+        LCD_PRINT(": ");
+        for (int i=0; i<SettingStates::Timers; ++i)
+        {
+            if (gSettings.isTimerActive(i))
+            {
+                LCD_PRINT("*");
+                LCD_PRINT((i+1));
+            }
+            else
+            {
+                LCD_PRINT("  ");
+            }
+        }
     }
 
     LCD_PRINT_AT(0, 1, "                ")
@@ -224,6 +254,8 @@ void PrintLCD_Time()
             LCD_PRINT(monthShortStr(month()));
             LCD_PRINT(",");
             LCD_PRINT(day());
+            LCD_PRINT(" ");
+            print2Decimals(gSettings.getSeconds());
 #else
         print2Decimals(gSettings.getMinutes());
         LCD_PRINT(":");
@@ -246,8 +278,8 @@ void PrintLCD_Time()
         print2Decimals(gSettings.getMinutes());
         LCD_PRINT(":");
         print2Decimals(gSettings.getHours());
-        break;
 #endif
+        break;
     case SettingStates::SetYear:
         print2Decimals(gSettings.getSeconds());
         break;
@@ -271,7 +303,6 @@ void PrintLCD_Time()
       default:break;
       }
 #endif
-
       break;
     case SettingStates::SetAlarmDay:
 #if LANGUAGE == EN
@@ -279,21 +310,23 @@ void PrintLCD_Time()
 #else
       switch (gSettings.getMinutes())
       {
-      case 0: LCD_PRINT("?"); break;
-      case 1: LCD_PRINT("Sonntag"); break;
-      case 2: LCD_PRINT("Montag"); break;
-      case 3: LCD_PRINT("Dienstag"); break;
-      case 4: LCD_PRINT("Mittwoch"); break;
-      case 5: LCD_PRINT("Donnerstag"); break;
-      case 6: LCD_PRINT("Freitag"); break;
-      case 7: LCD_PRINT("Sonnabend"); break;
+      case dowSunday:    LCD_PRINT("Sonntag"); break;
+      case dowMonday:    LCD_PRINT("Montag"); break;
+      case dowTuesday:   LCD_PRINT("Dienstag"); break;
+      case dowWednesday: LCD_PRINT("Mittwoch"); break;
+      case dowThursday:  LCD_PRINT("Donnerstag"); break;
+      case dowFriday:    LCD_PRINT("Freitag"); break;
+      case dowSaturday:  LCD_PRINT("Sonnabend"); break;
+      default: break;
       }
 
 
 #endif
       break;
     case SettingStates::SetAlarmMelody:
-      LCD_PRINT("Melody: ");
+    case SettingStates::SetContrast:
+    case SettingStates::SetLightLow:
+    case SettingStates::SetLightHigh:
       LCD_PRINT(gSettings.getMinutes());
       break;
     default:
@@ -320,6 +353,7 @@ void onTimerAlarm()
     case 2: gMelody.setTones(gTones3); break;
     case 3: gMelody.setTones(gTones4); break;
     case 4: gMelody.setTones(gTones5); break;
+    case SettingStates::Timers: gMelody.setTones(gTones6); break;
     }
     gMelody.startMelody();
 }

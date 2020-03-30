@@ -8,20 +8,20 @@
 
 #define EN 1
 #define DE 2
-#define LANGUAGE DE
+#define LANGUAGE EN
 
 
 class SettingStates
 {
 public:
-  enum state  { Time, Date, Timer, Timers=4, SetTime=Timer+Timers+1, SetDate, SetYear, StoreTime, SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
-                LastState     = Timer+Timers,
-                FirstSetState = SetAlarm,
-                LastSetState  = SetAlarmDay };
+  enum state  { Time, Date, Timer, Timers=5, SetTime=Timer+Timers+1, SetDate, SetYear, SetContrast, SetLightLow, SetLightHigh, StoreTime,
+                SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
+                LastState          = Timer+Timers,
+                LastSettingsState  = SetLightHigh,
+                LastSetAlarmState  = SetAlarmDay };
   // Mo, Mi, Ho, Al -> mode, minute, hour, alarm
   enum button { Mode=0, Hour=1, Minute=2, AlarmBtn=3, buttons=4, Plus=Hour, Minus=Minute, Start=AlarmBtn, Stop=AlarmBtn, DateTime = AlarmBtn, ClearAll=10};
   enum alarm_mode  { Once, Daily, Weekly, FirstAlarmMode=Once, LastAlarmMode=Weekly }; 
-  //enum set_time    { SetHourMinute, SetMonthDay, SetYear };
   enum consts      { Inactive = 1, Active = 0x80, LED_Bit = 1, Disabled=0xff};
   SettingStates();
 
@@ -38,7 +38,7 @@ public:
   bool isLightOn();
   bool isLED_DisplayOn();
   bool isAnalogDisplayOn();
-  bool isTimerActive();
+  bool isTimerActive(int aIndex = -1);
   bool isTimerState();
   bool isAlarmActive();
   bool hasDisplayChanged();
@@ -49,8 +49,11 @@ public:
   int getMinutes();
   int getHours();
   int getAlarmMelody();
+  int getContrast();
+  int getLightLow();
+  int getLoghtHigh();
 
-  void stopTimer(int aIndex);
+  void stopTimer(int aIndex, time_t aTimerStartTime=dtINVALID_TIME);
   void triggerButton(button aButton, uint8_t aState);
   void onTrigger();
   void tick(unsigned long fNow);
@@ -70,10 +73,13 @@ private:
   void handleActivateAlarm();
   int  getTimerIndex();
 
-  void handleSetTimeState();
+  void handleSettingsState();
   void handleHourMinute();
   void handleMonthDay();
   void handleYear();
+  void handleContrast();
+  void handleLightLow();
+  void handleLightHigh();
 
   void handleSetAlarmState(); 
   void handleSetAlarmModeState(); 
@@ -89,6 +95,9 @@ private:
   uint8_t mTonePin;
   int8_t  mModeBlink;
   int8_t  mModeLight;
+  uint8_t mContrast;
+  uint8_t mLightLow;
+  uint8_t mLightHigh;
   unsigned long mLastTickTime;
   uint8_t mAlarmMelody;
   bool    mAlarmActive;
