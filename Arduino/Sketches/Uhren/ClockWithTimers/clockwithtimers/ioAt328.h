@@ -1,6 +1,7 @@
 
 const int toneOutput      =  4;
 const int dimLED          =  10;
+const int contrastPin     =  11;
 
 #ifdef LCD_PRINT
 #include <LiquidCrystal.h>

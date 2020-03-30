@@ -263,7 +263,7 @@ int SettingStates::getLightLow()
     return mLightLow;
 }
 
-int SettingStates::getLoghtHigh()
+int SettingStates::getLightHigh()
 {
     return mLightHigh;
 }

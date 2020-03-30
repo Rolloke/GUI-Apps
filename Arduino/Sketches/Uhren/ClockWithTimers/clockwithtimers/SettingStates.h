@@ -51,7 +51,7 @@ public:
   int getAlarmMelody();
   int getContrast();
   int getLightLow();
-  int getLoghtHigh();
+  int getLightHigh();
 
   void stopTimer(int aIndex, time_t aTimerStartTime=dtINVALID_TIME);
   void triggerButton(button aButton, uint8_t aState);

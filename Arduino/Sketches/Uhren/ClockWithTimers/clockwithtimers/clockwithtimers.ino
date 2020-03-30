@@ -31,8 +31,7 @@
 // TODO: Taster besorgen für Layout
 // TODO: Lautsprecher besorgen für Layout
 // TODO: Timer Baustein besorgen [Optional]
-// TODO: LED: Hintergrundbeleuchtung implementieren
-// TODO: Contrast implemenieren
+// TODO: Test LCD Display with ioMega2560.h and atmega
 
 void PrintLCD_Time();
 
@@ -92,6 +91,8 @@ Tone gTones4[] =
 
 Tone gTones5[] =
 {
+    { NOTE_C7, 1, 8},
+    { 0, 1, 8},
     { NOTE_C7, 1, 8},
     { 0, 1, 8},
     { NOTE_C7, 1, 8},
@@ -164,7 +165,8 @@ void loop()
   
   if (gSettings.hasDisplayChanged())
   {
-    digitalWrite(dimLED, gSettings.isLightOn());
+    analogWrite(dimLED, gSettings.isLightOn() ? gSettings.getLightHigh() : gSettings.getLightLow());
+    analogWrite(contrastPin, gSettings.getContrast());
 
     // display
     PrintLCD_Time();
