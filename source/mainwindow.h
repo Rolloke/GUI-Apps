@@ -76,7 +76,7 @@ private:
 
     enum class Message
     {
-        UpdateBytes = Work::Last,
+        UpdateBytes = static_cast<int>(Work::Last),
         InsertTreeItem
     };
 
