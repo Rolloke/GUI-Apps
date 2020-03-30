@@ -8,7 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
+
+QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 TARGET = ArduinoUnittest
 TEMPLATE = app
