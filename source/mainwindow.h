@@ -55,6 +55,10 @@ private Q_SLOTS:
     void on_git_move_rename();
     void on_git_history_diff_command();
     void on_custom_command();
+    void on_expand_tree_items();
+    void on_collapse_tree_items();
+
+    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
 
 private:
 
@@ -91,7 +95,8 @@ private:
     {
         isDirectory = Qt::UserRole,
         DateTime,
-        Filter
+        Filter,
+        GitFolder
     };
 
     enum class ComboShowItems
@@ -136,6 +141,7 @@ private:
 
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
     void     initContextMenuActions();
+    void     initActionIcons();
     QAction* getAction(git::Cmd::eCmd aCmd);
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
