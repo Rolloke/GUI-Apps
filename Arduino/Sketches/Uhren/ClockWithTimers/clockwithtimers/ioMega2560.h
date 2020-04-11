@@ -8,7 +8,7 @@ SettingStates  gSettings;
 #ifdef LCD_PRINTER
 #include <LiquidCrystal.h>
 //                rs,e, 0, 1, 2, 3
-LiquidCrystal LCD(7, 6, 5, 4, 3, 2);
+LiquidCrystal LCD(50, 48, 32, 34, 36, 38, 40, 42, 44, 46);
 #endif
 
 const int gModeBtnPin   = 22;

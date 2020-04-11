@@ -1,5 +1,4 @@
 
-#define LCD_PRINTER 1
 
 #ifdef LCD_PRINTER
 
@@ -50,4 +49,3 @@
 //  Use two extra PWM pins for:
 //   - contrast: 0-1 V
 //   - LED Backlight: 
-

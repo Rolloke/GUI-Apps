@@ -20,10 +20,12 @@
 #include <button.h>
 #include <Melody.h>
 
+#define LCD_PRINTER 1
+
 #include "LCD_print.h"
 
-//#include "ioMega2560.h"  // pins for test with at mega 2560
-#include "ioAt328.h"   // pins for at mega 328
+#include "ioMega2560.h"  // pins for test with at mega 2560
+//#include "ioAt328.h"   // pins for at mega 328
 
 
 #define TICK_INTERVAL_MS 500
