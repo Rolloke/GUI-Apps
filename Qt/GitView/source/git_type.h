@@ -38,8 +38,10 @@ struct Cmd
         Push,
         ShowHistoryDifference,
         CallHistoryDiffTool,
+        ExpandTreeItems,
+        CollapseTreeItems,
         /// hint: add custom commands here
-        CustomCommand=20
+        CustomCommand=50
     };
     enum eCustom
     {

@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/24X24/preferences-system-privacy.png</file>
+        <file>resource/24X24/preferences-desktop-accessibility.png</file>
+        <file>resource/24X24/open-menu.png</file>
+        <file>resource/24X24/mail-attachment.png</file>
+        <file>resource/24X24/list-remove.png</file>
+        <file>resource/24X24/list-add.png</file>
+        <file>resource/24X24/gnome-mime-text.png</file>
+        <file>resource/24X24/emblem-default.png</file>
+        <file>resource/24X24/edit-find.png</file>
+        <file>resource/24X24/edit-cut.png</file>
+        <file>resource/24X24/edit-clear.png</file>
+        <file>resource/24X24/document-open-recent.png</file>
+        <file>resource/24X24/application-x-addon.png</file>
+        <file>resource/24X24/help-faq.png</file>
+        <file>resource/24X24/dialog-question.png</file>
+        <file>resource/24X24/junction.svg</file>
+        <file>resource/24X24/object-flip-horizontal.png</file>
+        <file>resource/24X24/view-sort-descending.png</file>
+        <file>resource/24X24/view-sort-ascending.png</file>
+        <file>resource/24X24/view-refresh.png</file>
+        <file>resource/24X24/user-trash.png</file>
+        <file>resource/24X24/svn-update.svg</file>
+        <file>resource/24X24/svn-commit.svg</file>
+        <file>resource/24X24/object-rotate-right.png</file>
+        <file>resource/24X24/object-rotate-left.png</file>
+        <file>resource/24X24/object-flip-vertical.png</file>
+        <file>resource/24X24/media-record.png</file>
+        <file>resource/24X24/emblem-shared.png</file>
+        <file>resource/24X24/edit-undo-rtl.png</file>
+        <file>resource/24X24/edit-undo.png</file>
+        <file>resource/24X24/edit-redo-rtl.png</file>
+        <file>resource/24X24/edit-redo.png</file>
+        <file>resource/24X24/edit-delete.png</file>
+        <file>resource/24X24/edit-copy.png</file>
+        <file>resource/24X24/document-revert.png</file>
+        <file>resource/24X24/distribute-graph-directed.svg</file>
+        <file>resource/24X24/code-class.svg</file>
+    </qresource>
+</RCC>

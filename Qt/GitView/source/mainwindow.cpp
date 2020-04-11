@@ -14,9 +14,11 @@
 #include <QKeyEvent>
 #include <QSysInfo>
 #include <QMenu>
+#include <QToolBar>
 
 #include <boost/bind.hpp>
 
+#define RELATIVE_GIT_PATH 1
 
 using namespace std;
 
@@ -40,17 +42,16 @@ using namespace std;
 // git push pi@RaspiLAN:git.repository
 
 // TODO: Änderungen vom Remote Repository abfragen
-// git ?
+// git fetch
 
 // TODO: Änderungen vom Remote Repository abholen
 // git fetch pi@RaspiLAN:git.repository
 
 // TODO git status (Zugehörigkeit) einer Datei erkennen
-
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
-
 // TODO: 1.4.10.2 Zweig erstellen
 
+// TODO: Expand tree all je nach focus
 
 #define INT(n) static_cast<qint32>(n)
 
@@ -89,9 +90,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mWorker(this)
     , mCurrentTask(Work::None)
     , mConfigFileName(aConfigName)
+    , mContextMenuItem(nullptr)
     , mLineFeed(mNativeLineFeed)
 {
-
     ui->setupUi(this);
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
@@ -149,6 +150,24 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
     initContextMenuActions();
+    initActionIcons();
+
+    QToolBar*pTB = new QToolBar();
+    pTB->addAction(getAction(git::Cmd::Add));
+    pTB->addAction(getAction(git::Cmd::Remove));
+    pTB->addAction(getAction(git::Cmd::Restore));
+    pTB->addAction(getAction(git::Cmd::ShowDifference));
+    pTB->addAction(getAction(git::Cmd::CallDiffTool));
+
+    ui->verticalLayoutSettings1->addWidget(pTB);
+
+    pTB = new QToolBar();
+    pTB->addAction(getAction(git::Cmd::History));
+    pTB->addAction(getAction(git::Cmd::ShowStatus));
+    pTB->addAction(getAction(git::Cmd::ShowShortStatus));
+    pTB->addAction(getAction(git::Cmd::ExpandTreeItems));
+    pTB->addAction(getAction(git::Cmd::CollapseTreeItems));
+    ui->verticalLayoutHistory->addWidget(pTB);
 }
 
 MainWindow::~MainWindow()
@@ -189,12 +208,16 @@ MainWindow::~MainWindow()
             QString fCommand = fAction->statusTip();
             if (fCommand.size())
             {
+                QVariantList fList = fAction->data().toList();
                 fSettings.setArrayIndex(fIndex++);
                 fSettings.setValue(config::sID, fItem->first);
                 fSettings.setValue(config::sName, fAction->text());
                 fSettings.setValue(config::sCommand, fCommand);
-                fSettings.setValue(config::sCustomMessageBoxText, fAction->toolTip());
-                fSettings.setValue(config::sCustomCommandPostAction, fAction->data());
+                fSettings.setValue(config::sCustomMessageBoxText, fList[0].toString());
+                if (fList.size() > 1)
+                {
+                    fSettings.setValue(config::sCustomCommandPostAction, fList[1].toUInt());
+                }
             }
             ++fCommandID;
         }
@@ -263,7 +286,12 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
             addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
             if (fParent.isRoot()) break;
         };
-
+#if RELATIVE_GIT_PATH ==1
+        if (!fParent.isRoot())
+        {
+            aParentItem->setData(INT(Column::FileName), INT(Role::GitFolder), QVariant(fParent.absolutePath()));
+        }
+#endif
         fTopLevelItem = true;
     }
 
@@ -655,18 +683,19 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 
     insertItem(fSourceDir, *ui->treeSource);
 
-    for (const auto& fItem : fCheckMap)
-    {
-        if (fItem.second.is(Type::GitDeleted))
-        {
-            mGitCommand = fItem.first.c_str();
-            mCurrentTask = Work::InsertPathFromCommandString;
-            QString fFilePath = "";
-            iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(aItem));
-            mGitCommand.clear();
-            mCurrentTask = Work::None;
-        }
-    }
+    // TODO fix deleted items
+//    for (const auto& fItem : fCheckMap)
+//    {
+//        if (fItem.second.is(Type::GitDeleted))
+//        {
+//            mGitCommand = fItem.first.c_str();
+//            mCurrentTask = Work::InsertPathFromCommandString;
+//            QString fFilePath = "";
+//            iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(aItem));
+//            mGitCommand.clear();
+//            mCurrentTask = Work::None;
+//        }
+//    }
 
     iterateCheckItems(ui->treeSource->topLevelItem(aItem), fCheckMap);
 }
@@ -844,7 +873,14 @@ QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
             aTreeItem = aTreeItem->parent();
             if (aTreeItem)
             {
-                fFileName = aTreeItem->text(INT(Column::FileName)) + QDir::separator() + fFileName;
+                if (aTreeItem->data(INT(Column::FileName), INT(Role::GitFolder)).isValid())
+                {
+                    QDir::setCurrent(aTreeItem->text(INT(Column::FileName)));
+                }
+                else
+                {
+                    fFileName = aTreeItem->text(INT(Column::FileName)) + QDir::separator() + fFileName;
+                }
             }
         }
     }
@@ -920,6 +956,12 @@ void MainWindow::on_btnCloseText_clicked()
     ui->labelFilePath->setText("");
 }
 
+void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */)
+{
+    mContextMenuItem = item;
+}
+
+
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
     on_btnCloseText_clicked();
@@ -955,7 +997,6 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         menu.addAction(getAction(git::Cmd::History));
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
-        mContextMenuItem = nullptr;
     }
 }
 
@@ -996,7 +1037,10 @@ QAction * MainWindow::createAction(git::Cmd::eCmd aCmd, const QString& aName, co
     QAction *fNewAction = new QAction(aName, this);
     mActionList[aCmd] = fNewAction;
     fNewAction->setStatusTip(aGitCommand);
-    fNewAction->setToolTip(sNoCustomCommandMessageBox);
+    fNewAction->setToolTip(aName);
+    QVariantList fList;
+    fList.append(QVariant(sNoCustomCommandMessageBox));
+    fNewAction->setData(fList);
     return fNewAction;
 }
 
@@ -1030,6 +1074,9 @@ void MainWindow::initContextMenuActions()
     connect(createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
     connect(createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
 
+    connect(createAction(git::Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
+    connect(createAction(git::Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
+
 //    connect(createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 //    setCustomCommandMessageBoxText(fID, fMessageBoxText);
 //    setCustomCommandPostAction(fID, fPostAction);
@@ -1041,6 +1088,32 @@ void MainWindow::initContextMenuActions()
     //    Commands\1\PostAction=1
     //    Commands\size=1
 
+}
+
+void MainWindow::initActionIcons()
+{
+    std::map<git::Cmd::eCmd, std::string> fActionIcons;
+    fActionIcons[git::Cmd::Add]                     = ":/resource/24X24/list-add.png";
+    fActionIcons[git::Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
+    fActionIcons[git::Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
+    fActionIcons[git::Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
+    fActionIcons[git::Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
+    fActionIcons[git::Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
+//    fActionIcons[git::Cmd::GetStatusAll]            = "";
+    fActionIcons[git::Cmd::Remove]                  = "://resource/24X24/list-remove.png";
+//    fActionIcons[git::Cmd::Commit]                  = "";
+//    fActionIcons[git::Cmd::MoveOrRename]            = "";
+    fActionIcons[git::Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
+//    fActionIcons[git::Cmd::Push]                    = "";
+    fActionIcons[git::Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
+    fActionIcons[git::Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
+
+    fActionIcons[git::Cmd::ExpandTreeItems]         = "://resource/24X24/svn-update.svg";
+    fActionIcons[git::Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
+    for (const auto& fIconPath: fActionIcons )
+    {
+        getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));
+    }
 }
 
 QAction* MainWindow::getAction(git::Cmd::eCmd aCmd)
@@ -1055,12 +1128,25 @@ QAction* MainWindow::getAction(git::Cmd::eCmd aCmd)
 
 void  MainWindow::setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText)
 {
-    getAction(aCmd)->setToolTip(aText);
+    QAction* fAction = getAction(aCmd);
+    QVariantList fVariantList = fAction->data().toList();
+    fVariantList[0] = QVariant(aText);
+    fAction->setData(fVariantList);
 }
 
 void  MainWindow::setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction)
 {
-    getAction(aCmd)->setData(aAction);
+    QAction* fAction = getAction(aCmd);
+    QVariantList fVariantList = fAction->data().toList();
+    if (fVariantList.size() > 1)
+    {
+        fVariantList[1] = QVariant(aAction);
+    }
+    else
+    {
+        fVariantList.append(QVariant(aAction));
+    }
+    fAction->setData(fVariantList);
 }
 
 void  MainWindow::performGitCmd(const QString& aCommand)
@@ -1168,6 +1254,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         if (fParentHistoryItem)
         {
             QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+            QTreeWidgetItem*fOld = mContextMenuItem;
             mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem)).toModelIndex());
             if (mContextMenuItem)
             {
@@ -1187,7 +1274,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 menu.addAction(getAction(git::Cmd::CallHistoryDiffTool));
                 menu.addAction(getAction(git::Cmd::ShowHistoryDifference));
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
-                mContextMenuItem = nullptr;
+                mContextMenuItem = fOld;
             }
         }
     }
@@ -1245,7 +1332,8 @@ void MainWindow::on_git_move_rename()
 void MainWindow::on_custom_command()
 {
     QAction *fAction = qobject_cast<QAction *>(sender());
-    QString fMessageBoxText = fAction->toolTip();
+    QVariantList fVariantList = fAction->data().toList();
+    QString fMessageBoxText = fVariantList[0].toString();
 
     if (fMessageBoxText != sNoCustomCommandMessageBox)
     {
@@ -1281,9 +1369,9 @@ void MainWindow::on_custom_command()
         performGitCmd(fAction->statusTip());
     }
 
-    if (fAction->data().isValid())
+    if (fVariantList.size() > 1)
     {
-        switch (fAction->data().toUInt())
+        switch (fVariantList[1].toUInt())
         {
             case git::Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
@@ -1302,3 +1390,12 @@ void MainWindow::on_git_history_diff_command()
 }
 
 
+void MainWindow::on_expand_tree_items()
+{
+    ui->treeSource->expandAll();
+}
+
+void MainWindow::on_collapse_tree_items()
+{
+    ui->treeSource->collapseAll();
+}

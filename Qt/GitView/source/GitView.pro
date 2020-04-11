@@ -38,3 +38,5 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     commitmessage.ui
+
+RESOURCES += resource.qrc

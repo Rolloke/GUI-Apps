@@ -322,7 +322,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayoutPreparation">
+       <layout class="QVBoxLayout" name="verticalLayoutHistory">
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
@@ -358,7 +358,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayoutSettings1">
+       <layout class="QVBoxLayout" name="verticalLayoutSettings1">
         <item>
          <widget class="QCheckBox" name="ckDirectories">
           <property name="text">
@@ -382,7 +382,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayoutSettings1">
+       <layout class="QVBoxLayout" name="verticalLayoutSettings2">
         <item>
          <widget class="QCheckBox" name="ckHiddenFiles">
           <property name="minimumSize">
