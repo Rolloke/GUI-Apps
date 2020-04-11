@@ -6,6 +6,7 @@
 #include <QAudioDeviceInfo>
 #include <qendian.h>
 #include <string.h>
+#include <cmath>
 
 namespace
 {
