@@ -41,6 +41,7 @@ private Q_SLOTS:
     void textBrowserChanged();
     void on_btnCloseText_clicked();
 
+    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
     void on_ckHideEmptyParent_clicked(bool checked);
@@ -58,7 +59,6 @@ private Q_SLOTS:
     void on_expand_tree_items();
     void on_collapse_tree_items();
 
-    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
 
 private:
 
@@ -138,6 +138,7 @@ private:
     bool     ignoreFile(const QFileInfo& aFileInfo);
     QString  getItemFilePath(QTreeWidgetItem* item);
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
+    void     getSelectedTreeItem();
 
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
     void     initContextMenuActions();
