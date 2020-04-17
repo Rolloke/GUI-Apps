@@ -51,7 +51,6 @@ using namespace std;
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
 // TODO: 1.4.10.2 Zweig erstellen
 
-// TODO: Expand tree all je nach focus
 
 #define INT(n) static_cast<qint32>(n)
 
@@ -956,12 +955,6 @@ void MainWindow::on_btnCloseText_clicked()
     ui->labelFilePath->setText("");
 }
 
-void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */)
-{
-    mContextMenuItem = item;
-}
-
-
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
     on_btnCloseText_clicked();
@@ -982,7 +975,7 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     mContextMenuItem = ui->treeSource->itemAt( pos );
     if (mContextMenuItem)
     {
-        Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
 
         QMenu menu(this);
         menu.addAction(getAction(git::Cmd::Add));
@@ -997,6 +990,7 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         menu.addAction(getAction(git::Cmd::History));
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
+        mContextMenuItem = nullptr;
     }
 }
 
@@ -1050,6 +1044,7 @@ void MainWindow::initContextMenuActions()
     connect(createAction(git::Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     connect(createAction(git::Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     connect(createAction(git::Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    getAction(git::Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     connect(createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
     connect(createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
@@ -1147,6 +1142,23 @@ void  MainWindow::setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction)
         fVariantList.append(QVariant(aAction));
     }
     fAction->setData(fVariantList);
+}
+
+void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
+{
+    mContextMenuItem = item;
+}
+
+void MainWindow::getSelectedTreeItem()
+{
+    if (! mContextMenuItem)
+    {
+        auto fSelected = ui->treeSource->selectedItems();
+        if (fSelected.size())
+        {
+            mContextMenuItem = fSelected.at(0);
+        }
+    }
 }
 
 void  MainWindow::performGitCmd(const QString& aCommand)
@@ -1254,7 +1266,6 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         if (fParentHistoryItem)
         {
             QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-            QTreeWidgetItem*fOld = mContextMenuItem;
             mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem)).toModelIndex());
             if (mContextMenuItem)
             {
@@ -1274,7 +1285,6 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 menu.addAction(getAction(git::Cmd::CallHistoryDiffTool));
                 menu.addAction(getAction(git::Cmd::ShowHistoryDifference));
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
-                mContextMenuItem = fOld;
             }
         }
     }
@@ -1291,6 +1301,7 @@ void  MainWindow::on_git_commit()
 
     if (fCommitMsg.exec() == QDialog::Accepted)
     {
+        getSelectedTreeItem();
         QString fMessageText = fCommitMsg.getMessageText();
         std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
         QString fCommitCommand = tr(fCommand.c_str()).arg(fMessageText).arg("%1");
@@ -1300,51 +1311,60 @@ void  MainWindow::on_git_commit()
         }
         performGitCmd(fCommitCommand);
         updateTreeItemStatus(mContextMenuItem);
+        mContextMenuItem = nullptr;
     }
 }
 
 void MainWindow::on_git_move_rename()
 {
-    bool    fOk;
-    Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
-    QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-    QString fOldName      = mContextMenuItem->text(INT(Column::FileName));
-    QString fNewName      = QInputDialog::getText(this,
-                   tr("Move or rename %1").arg(fFileTypeName),
-                   tr("Enter a new name or destination for \"%1\".").arg(fOldName),
-                   QLineEdit::Normal, "", &fOk);
-
-    if (fOk && !fNewName.isEmpty())
+    getSelectedTreeItem();
+    if (mContextMenuItem)
     {
-        QFileInfo   fPath(getItemFilePath(mContextMenuItem));
-        std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
-        QString     fCommand   = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
-        QString fResultStr;
-        int fResult = execute(fCommand, fResultStr);
-        if (fResult == 0)
+        bool    fOk;
+        Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
+        QString fOldName      = mContextMenuItem->text(INT(Column::FileName));
+        QString fNewName      = QInputDialog::getText(this,
+                       tr("Move or rename %1").arg(fFileTypeName),
+                       tr("Enter a new name or destination for \"%1\".").arg(fOldName),
+                       QLineEdit::Normal, "", &fOk);
+
+        if (fOk && !fNewName.isEmpty())
         {
-            mContextMenuItem->setText(INT(Column::FileName), fNewName);
-            updateTreeItemStatus(mContextMenuItem);
+            QFileInfo   fPath(getItemFilePath(mContextMenuItem));
+            std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
+            QString     fCommand   = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
+            QString fResultStr;
+            int fResult = execute(fCommand, fResultStr);
+            if (fResult == 0)
+            {
+                mContextMenuItem->setText(INT(Column::FileName), fNewName);
+                updateTreeItemStatus(mContextMenuItem);
+            }
         }
+        mContextMenuItem = nullptr;
     }
 }
 
 void MainWindow::on_custom_command()
 {
-    QAction *fAction = qobject_cast<QAction *>(sender());
-    QVariantList fVariantList = fAction->data().toList();
-    QString fMessageBoxText = fVariantList[0].toString();
-
-    if (fMessageBoxText != sNoCustomCommandMessageBox)
+    getSelectedTreeItem();
+    if (mContextMenuItem)
     {
-        QStringList fTextList = fMessageBoxText.split(";");
-        QMessageBox fSaveRequest;
-        Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
-        QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-        QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
-        std::string fText1   = fTextList[0].toStdString().c_str();
-        switch (fTextList.size())
+        QAction *fAction = qobject_cast<QAction *>(sender());
+        QVariantList fVariantList = fAction->data().toList();
+        QString fMessageBoxText = fVariantList[0].toString();
+
+        if (fMessageBoxText != sNoCustomCommandMessageBox)
         {
+            QStringList fTextList = fMessageBoxText.split(";");
+            QMessageBox fSaveRequest;
+            Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+            QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
+            QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
+            std::string fText1   = fTextList[0].toStdString().c_str();
+            switch (fTextList.size())
+            {
             case 1:
                 fSaveRequest.setText(tr(fText1.c_str()).arg(fFileTypeName));
                 fSaveRequest.setInformativeText(fFileName);
@@ -1353,33 +1373,35 @@ void MainWindow::on_custom_command()
                 fSaveRequest.setText(tr(fText1.c_str()).arg(fFileTypeName));
                 fSaveRequest.setInformativeText(tr(fTextList[1].toStdString().c_str()).arg(fFileName));
                 break;
+            }
+
+            fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
+            fSaveRequest.setDefaultButton(  fType.is(Type::File) ? QMessageBox::Yes : QMessageBox::YesToAll);
+
+            auto fResult = fSaveRequest.exec();
+            if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
+            {
+                performGitCmd(fAction->statusTip());
+            }
         }
-
-        fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-        fSaveRequest.setDefaultButton(  fType.is(Type::File) ? QMessageBox::Yes : QMessageBox::YesToAll);
-
-        auto fResult = fSaveRequest.exec();
-        if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
+        else
         {
             performGitCmd(fAction->statusTip());
         }
-    }
-    else
-    {
-        performGitCmd(fAction->statusTip());
-    }
 
-    if (fVariantList.size() > 1)
-    {
-        switch (fVariantList[1].toUInt())
+        if (fVariantList.size() > 1)
         {
+            switch (fVariantList[1].toUInt())
+            {
             case git::Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
                 break;
             case git::Cmd::ParseHistoryText:
                 parseGitLogHistoryText();
                 break;
+            }
         }
+        mContextMenuItem = nullptr;
     }
 }
 
@@ -1392,10 +1414,24 @@ void MainWindow::on_git_history_diff_command()
 
 void MainWindow::on_expand_tree_items()
 {
-    ui->treeSource->expandAll();
+    if (ui->treeHistory->hasFocus())
+    {
+        ui->treeHistory->expandAll();
+    }
+    if (ui->treeSource->hasFocus())
+    {
+        ui->treeSource->expandAll();
+    }
 }
 
 void MainWindow::on_collapse_tree_items()
 {
-    ui->treeSource->collapseAll();
+    if (ui->treeHistory->hasFocus())
+    {
+        ui->treeHistory->collapseAll();
+    }
+    if (ui->treeSource->hasFocus())
+    {
+        ui->treeSource->collapseAll();
+    }
 }
