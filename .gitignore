@@ -7,5 +7,6 @@ CVS/
 *.aps
 *.user.*
 OpenDDS/
+*.geany
 #Qt/
 #!Qt/Widgets/
