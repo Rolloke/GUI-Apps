@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     workerthreadconnector.cpp \
     git_type.cpp \
     commitmessage.cpp \
-    history.cpp
+    history.cpp \
+    actions.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     workerthreadconnector.h \
     git_type.h \
     commitmessage.h \
-    history.h
+    history.h \
+    actions.h
 
 FORMS    += mainwindow.ui \
     commitmessage.ui

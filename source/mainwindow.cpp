@@ -51,11 +51,6 @@ using namespace std;
 // TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
 // TODO: 1.4.10.2 Zweig erstellen
 
-
-// TODO: set action variant by index and identify be enums
-
-#define INT(n) static_cast<qint32>(n)
-
 namespace config
 {
 const QString sGroupFilter("Filter");
@@ -78,7 +73,6 @@ const QString sModified("Modified");
 } // namespace config
 
 
-const QString sNoCustomCommandMessageBox("None");
 
 #ifdef __linux__
 const QString MainWindow::mNativeLineFeed = "\n";
@@ -94,6 +88,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , ui(new Ui::MainWindow)
     , mWorker(this)
     , mCurrentTask(Work::None)
+    , mActions(this)
     , mConfigFileName(aConfigName)
     , mContextMenuItem(nullptr)
     , mLineFeed(mNativeLineFeed)
@@ -155,23 +150,23 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
     initContextMenuActions();
-    initActionIcons();
+    mActions.initActionIcons();
 
     QToolBar*pTB = new QToolBar();
-    pTB->addAction(getAction(git::Cmd::Add));
-    pTB->addAction(getAction(git::Cmd::Remove));
-    pTB->addAction(getAction(git::Cmd::Restore));
-    pTB->addAction(getAction(git::Cmd::ShowDifference));
-    pTB->addAction(getAction(git::Cmd::CallDiffTool));
+    pTB->addAction(mActions.getAction(git::Cmd::Add));
+    pTB->addAction(mActions.getAction(git::Cmd::Remove));
+    pTB->addAction(mActions.getAction(git::Cmd::Restore));
+    pTB->addAction(mActions.getAction(git::Cmd::ShowDifference));
+    pTB->addAction(mActions.getAction(git::Cmd::CallDiffTool));
 
     ui->horizontalLayoutTool->addWidget(pTB);
 
     pTB = new QToolBar();
-    pTB->addAction(getAction(git::Cmd::History));
-    pTB->addAction(getAction(git::Cmd::ShowStatus));
-    pTB->addAction(getAction(git::Cmd::ShowShortStatus));
-    pTB->addAction(getAction(git::Cmd::ExpandTreeItems));
-    pTB->addAction(getAction(git::Cmd::CollapseTreeItems));
+    pTB->addAction(mActions.getAction(git::Cmd::History));
+    pTB->addAction(mActions.getAction(git::Cmd::ShowStatus));
+    pTB->addAction(mActions.getAction(git::Cmd::ShowShortStatus));
+    pTB->addAction(mActions.getAction(git::Cmd::ExpandTreeItems));
+    pTB->addAction(mActions.getAction(git::Cmd::CollapseTreeItems));
     ui->horizontalLayoutTool->addWidget(pTB);
 }
 
@@ -205,27 +200,25 @@ MainWindow::~MainWindow()
     fSettings.beginWriteArray(config::sCommands);
     {
         int fIndex = 0;
-        tActionMap::const_iterator fItem;
-        for (auto fItem : mActionList)
+
+        for (auto fItem : mActions.getList())
         {
-            if (fItem.first >= git::Cmd::FirstGitCommand && fItem.first <= git::Cmd::LastGitCommand)
+            if (   fItem.first >= git::Cmd::FirstGitCommand
+                && fItem.first <= git::Cmd::LastGitCommand
+                && mActions.isModified(static_cast<git::Cmd::eCmd>(fItem.first)))
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
                 if (fCommand.size())
                 {
-                    QVariantList fList = fAction->data().toList();
                     fSettings.setArrayIndex(fIndex++);
                     fSettings.setValue(config::sID, fItem.first);
                     fSettings.setValue(config::sName, fAction->text());
                     fSettings.setValue(config::sCommand, fCommand);
-                    fSettings.setValue(config::sCustomMessageBoxText, fList[0].toString());
-                    if (fList.size() > 1)
-                    {
-                        fSettings.setValue(config::sCustomCommandPostAction, fList[1].toUInt());
-                    }
                     fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
-                    fSettings.setValue(config::sIconPath, fAction->icon().name());
+                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(static_cast<git::Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(static_cast<git::Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sIconPath, mActions.getIconPath(static_cast<git::Cmd::eCmd>(fItem.first)));
                 }
             }
         }
@@ -239,10 +232,6 @@ MainWindow::~MainWindow()
 
     fSettings.endGroup();
 
-    for (auto& fAction : mActionList)
-    {
-        delete fAction.second;
-    }
     delete ui;
 }
 
@@ -418,7 +407,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         return 0;
                     }
                     break;
-                    case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown:
+                    case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowStaged: case Work::ShowUnMerged:
                     case Work::ShowModified: case Work::ShowAllGitActions:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
@@ -474,6 +463,14 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             break;
                         case Work::ShowUnknown:
                             fResult = fType.is(Type::GitUnTracked);
+                            aParentItem->setHidden(!fResult); // true means visible
+                            break;
+                        case Work::ShowUnMerged:
+                            fResult = fType.is(Type::GitUnmerged);
+                            aParentItem->setHidden(!fResult); // true means visible
+                            break;
+                        case Work::ShowStaged:
+                            fResult = fType.is(Type::GitStaged);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
 
@@ -994,16 +991,16 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
 
         QMenu menu(this);
-        menu.addAction(getAction(git::Cmd::Add));
-        menu.addAction(getAction(git::Cmd::Remove));
-        menu.addAction(getAction(git::Cmd::ShowDifference));
-        menu.addAction(getAction(git::Cmd::CallDiffTool));
-        menu.addAction(getAction(git::Cmd::ShowShortStatus));
-        menu.addAction(getAction(git::Cmd::ShowStatus));
-        menu.addAction(getAction(git::Cmd::Commit));
-        menu.addAction(getAction(git::Cmd::MoveOrRename));
-        menu.addAction(getAction(git::Cmd::Restore));
-        menu.addAction(getAction(git::Cmd::History));
+        menu.addAction(mActions.getAction(git::Cmd::Add));
+        menu.addAction(mActions.getAction(git::Cmd::Remove));
+        menu.addAction(mActions.getAction(git::Cmd::ShowDifference));
+        menu.addAction(mActions.getAction(git::Cmd::CallDiffTool));
+        menu.addAction(mActions.getAction(git::Cmd::ShowShortStatus));
+        menu.addAction(mActions.getAction(git::Cmd::ShowStatus));
+        menu.addAction(mActions.getAction(git::Cmd::Commit));
+        menu.addAction(mActions.getAction(git::Cmd::MoveOrRename));
+        menu.addAction(mActions.getAction(git::Cmd::Restore));
+        menu.addAction(mActions.getAction(git::Cmd::History));
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
         mContextMenuItem = nullptr;
@@ -1039,130 +1036,17 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
         case ComboShowItems::GitUnknown:
             handleWorker(INT(Work::ShowUnknown));
             break;
+        case ComboShowItems::Gitstaged:
+            handleWorker(INT(Work::ShowStaged));
+            break;
+        case ComboShowItems::GitUnmerged:
+            handleWorker(INT(Work::ShowUnMerged));
+            break;
     }
 }
 
-QAction * MainWindow::createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand)
-{
-    QAction *fNewAction = new QAction(aName, this);
-    mActionList[aCmd] = fNewAction;
-    fNewAction->setStatusTip(aGitCommand);
-    fNewAction->setToolTip(aName);
-    QVariantList fList;
-    fList.append(QVariant(sNoCustomCommandMessageBox));
-    fNewAction->setData(fList);
-    return fNewAction;
-}
 
-void MainWindow::initContextMenuActions()
-{
-    // TODO: create the necessary actions, slots and enumerations for recognition
-    connect(createAction(git::Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(createAction(git::Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(createAction(git::Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    getAction(git::Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
-    connect(createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
-    connect(createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
-    getAction(git::Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
-
-    connect(createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
-    getAction(git::Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
-
-    connect(createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
-    setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
-    getAction(git::Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
-
-    connect(createAction(git::Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
-    setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
-    getAction(git::Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
-
-    connect(createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
-    setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
-
-    connect(createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
-
-    connect(createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
-    connect(createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
-
-    connect(createAction(git::Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
-    connect(createAction(git::Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
-
-//    connect(createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
-//    setCustomCommandMessageBoxText(fID, fMessageBoxText);
-//    setCustomCommandPostAction(fID, fPostAction);
-
-    //    Commands\1\Command=git rm --cached %1
-    //    Commands\1\ID=4
-    //    Commands\1\MessageBoxText="Remove %1 from git repository;Do you want to remove \"%1\"?"
-    //    Commands\1\Name=Remove from git...
-    //    Commands\1\PostAction=1
-    //    Commands\size=1
-
-}
-
-void MainWindow::initActionIcons()
-{
-    std::map<git::Cmd::eCmd, std::string> fActionIcons;
-    fActionIcons[git::Cmd::Add]                     = ":/resource/24X24/list-add.png";
-    fActionIcons[git::Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[git::Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
-    fActionIcons[git::Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
-    fActionIcons[git::Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
-    fActionIcons[git::Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
-//    fActionIcons[git::Cmd::GetStatusAll]            = "";
-    fActionIcons[git::Cmd::Remove]                  = "://resource/24X24/list-remove.png";
-//    fActionIcons[git::Cmd::Commit]                  = "";
-//    fActionIcons[git::Cmd::MoveOrRename]            = "";
-    fActionIcons[git::Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
-//    fActionIcons[git::Cmd::Push]                    = "";
-    fActionIcons[git::Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[git::Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
-
-    fActionIcons[git::Cmd::ExpandTreeItems]         = "://resource/24X24/svn-update.svg";
-    fActionIcons[git::Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
-    for (const auto& fIconPath: fActionIcons )
-    {
-        getAction(fIconPath.first)->setIcon(QIcon::fromTheme("resource", QIcon(fIconPath.second.c_str())));
-    }
-}
-
-QAction* MainWindow::getAction(git::Cmd::eCmd aCmd)
-{
-    auto fItem = mActionList.find(aCmd);
-    if (fItem != mActionList.end())
-    {
-        return fItem->second;
-    }
-    return 0;
-}
-
-void  MainWindow::setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText)
-{
-    QAction* fAction = getAction(aCmd);
-    QVariantList fVariantList = fAction->data().toList();
-    fVariantList[0] = QVariant(aText);
-    fAction->setData(fVariantList);
-}
-
-void  MainWindow::setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction)
-{
-    QAction* fAction = getAction(aCmd);
-    QVariantList fVariantList = fAction->data().toList();
-    if (fVariantList.size() > 1)
-    {
-        fVariantList[1] = QVariant(aAction);
-    }
-    else
-    {
-        fVariantList.append(QVariant(aAction));
-    }
-    fAction->setData(fVariantList);
-}
 
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
@@ -1273,6 +1157,57 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
     ui->textBrowser->setPlainText(fText);
 }
 
+void MainWindow::initContextMenuActions()
+{
+    // TODO: create the necessary actions, slots and enumerations for recognition
+    connect(mActions.createAction(git::Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(git::Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(git::Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.getAction(git::Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
+    connect(mActions.createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+
+    connect(mActions.createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
+    mActions.getAction(git::Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
+
+    connect(mActions.createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
+    mActions.getAction(git::Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
+
+    connect(mActions.createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
+    mActions.setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
+    mActions.getAction(git::Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
+
+    connect(mActions.createAction(git::Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
+    mActions.setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
+    mActions.getAction(git::Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
+
+    connect(mActions.createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
+    mActions.setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
+
+    connect(mActions.createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
+
+    connect(mActions.createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
+    connect(mActions.createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
+
+    connect(mActions.createAction(git::Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
+    connect(mActions.createAction(git::Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
+
+//    connect(mActions.createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+//    mActions.setCustomCommandMessageBoxText(fID, fMessageBoxText);
+//    mActions.setCustomCommandPostAction(fID, fPostAction);
+
+    //    Commands\1\Command=git rm --cached %1
+    //    Commands\1\ID=4
+    //    Commands\1\MessageBoxText="Remove %1 from git repository;Do you want to remove \"%1\"?"
+    //    Commands\1\Name=Remove from git...
+    //    Commands\1\PostAction=1
+    //    Commands\size=1
+
+}
+
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
@@ -1300,8 +1235,8 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 }
 
                 QMenu menu(this);
-                menu.addAction(getAction(git::Cmd::CallHistoryDiffTool));
-                menu.addAction(getAction(git::Cmd::ShowHistoryDifference));
+                menu.addAction(mActions.getAction(git::Cmd::CallHistoryDiffTool));
+                menu.addAction(mActions.getAction(git::Cmd::ShowHistoryDifference));
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
             }
         }
@@ -1373,7 +1308,7 @@ void MainWindow::on_custom_command()
         QVariantList fVariantList = fAction->data().toList();
         QString fMessageBoxText = fVariantList[0].toString();
 
-        if (fMessageBoxText != sNoCustomCommandMessageBox)
+        if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
         {
             QStringList fTextList = fMessageBoxText.split(";");
             QMessageBox fSaveRequest;

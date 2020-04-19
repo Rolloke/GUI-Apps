@@ -107,6 +107,16 @@
               <string>Show unknown</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>Show staged</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show unmerged</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
