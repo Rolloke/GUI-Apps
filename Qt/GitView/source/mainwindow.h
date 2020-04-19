@@ -3,6 +3,7 @@
 
 #include "workerthreadconnector.h"
 #include "git_type.h"
+#include "actions.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -73,6 +74,8 @@ private:
         ShowDeleted,
         ShowAdded,
         ShowUnknown,
+        ShowStaged,
+        ShowUnMerged,
         // TODO: more git items
         // show out of sync...
         Last
@@ -106,13 +109,10 @@ private:
         GitModified,
         GitAdded,
         GitDeleted,
-        GitUnknown
+        GitUnknown,
+        Gitstaged,
+        GitUnmerged
     };
-#if MAP_TYPE == 0
-    typedef boost::container::flat_map<int, QAction*> tActionMap;
-#elif MAP_TYPE == 1
-    typedef std::map<int, QAction*> tActionMap;
-#endif
 
     void     keyPressEvent(QKeyEvent *);
 
@@ -140,12 +140,7 @@ private:
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
 
-    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aCommand="");
     void     initContextMenuActions();
-    void     initActionIcons();
-    QAction* getAction(git::Cmd::eCmd aCmd);
-    void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
-    void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
     void     performGitCmd(const QString& aCommand);
     QString  applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
@@ -153,18 +148,18 @@ private:
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
 
-    Ui::MainWindow*     ui;
-    QString             mGitCommand;
+    Ui::MainWindow*       ui;
+    QString               mGitCommand;
     WorkerThreadConnector mWorker;
-    Work                mCurrentTask;
-    QString             mConfigFileName;
-    git::stringt2typemap mIgnoreMap;
-    QTreeWidgetItem*    mContextMenuItem;
-    tActionMap          mActionList;
-    QString             mHistoryHashItems;
-    QString             mLineFeed;
+    Work                  mCurrentTask;
+    ActionList            mActions;
+    QString               mConfigFileName;
+    git::stringt2typemap  mIgnoreMap;
+    QTreeWidgetItem*      mContextMenuItem;
+    QString               mHistoryHashItems;
+    QString               mLineFeed;
     boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
-    static const QString mNativeLineFeed;
+    static const QString  mNativeLineFeed;
 };
 
 #endif // MAINWINDOW_H

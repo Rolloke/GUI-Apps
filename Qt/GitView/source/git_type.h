@@ -12,6 +12,8 @@
 #define MAP_TYPE 1
 #endif
 
+#define INT(n) static_cast<qint32>(n)
+
 namespace git
 {
 #if MAP_TYPE == 0
@@ -90,9 +92,9 @@ struct Type
         Negation            = 0x200000,
         RegExp              = 0x400000,
         ContainingNegation  = 0x800000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked,
-        FileType    =File|Folder|SymLink,
-        FileFlag    =Hidden|Executeable
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged,
+        FileType      = File|Folder|SymLink,
+        FileFlag      = Hidden|Executeable
     };
 
     Type(uint aType = None, int aLevel = 0)
