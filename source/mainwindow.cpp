@@ -52,6 +52,8 @@ using namespace std;
 // TODO: 1.4.10.2 Zweig erstellen
 
 
+// TODO: set action variant by index and identify be enums
+
 #define INT(n) static_cast<qint32>(n)
 
 namespace config
@@ -69,6 +71,10 @@ const QString sID("ID");
 const QString sName("Name");
 const QString sCustomMessageBoxText("MessageBoxText");
 const QString sCustomCommandPostAction("PostAction");
+const QString sIconPath("IconPath");
+const QString sShortcut("Shortcut");
+const QString sModified("Modified");
+
 } // namespace config
 
 
@@ -158,7 +164,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     pTB->addAction(getAction(git::Cmd::ShowDifference));
     pTB->addAction(getAction(git::Cmd::CallDiffTool));
 
-    ui->verticalLayoutSettings1->addWidget(pTB);
+    ui->horizontalLayoutTool->addWidget(pTB);
 
     pTB = new QToolBar();
     pTB->addAction(getAction(git::Cmd::History));
@@ -166,7 +172,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     pTB->addAction(getAction(git::Cmd::ShowShortStatus));
     pTB->addAction(getAction(git::Cmd::ExpandTreeItems));
     pTB->addAction(getAction(git::Cmd::CollapseTreeItems));
-    ui->verticalLayoutHistory->addWidget(pTB);
+    ui->horizontalLayoutTool->addWidget(pTB);
 }
 
 MainWindow::~MainWindow()
@@ -199,26 +205,29 @@ MainWindow::~MainWindow()
     fSettings.beginWriteArray(config::sCommands);
     {
         int fIndex = 0;
-        int fCommandID = git::Cmd::CustomCommand;
         tActionMap::const_iterator fItem;
-        while ((fItem = mActionList.find(fCommandID)) != mActionList.end())
+        for (auto fItem : mActionList)
         {
-            const QAction* fAction = fItem->second;
-            QString fCommand = fAction->statusTip();
-            if (fCommand.size())
+            if (fItem.first >= git::Cmd::FirstGitCommand && fItem.first <= git::Cmd::LastGitCommand)
             {
-                QVariantList fList = fAction->data().toList();
-                fSettings.setArrayIndex(fIndex++);
-                fSettings.setValue(config::sID, fItem->first);
-                fSettings.setValue(config::sName, fAction->text());
-                fSettings.setValue(config::sCommand, fCommand);
-                fSettings.setValue(config::sCustomMessageBoxText, fList[0].toString());
-                if (fList.size() > 1)
+                const QAction* fAction = fItem.second;
+                QString fCommand = fAction->statusTip();
+                if (fCommand.size())
                 {
-                    fSettings.setValue(config::sCustomCommandPostAction, fList[1].toUInt());
+                    QVariantList fList = fAction->data().toList();
+                    fSettings.setArrayIndex(fIndex++);
+                    fSettings.setValue(config::sID, fItem.first);
+                    fSettings.setValue(config::sName, fAction->text());
+                    fSettings.setValue(config::sCommand, fCommand);
+                    fSettings.setValue(config::sCustomMessageBoxText, fList[0].toString());
+                    if (fList.size() > 1)
+                    {
+                        fSettings.setValue(config::sCustomCommandPostAction, fList[1].toUInt());
+                    }
+                    fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
+                    fSettings.setValue(config::sIconPath, fAction->icon().name());
                 }
             }
-            ++fCommandID;
         }
     }
     fSettings.endArray();
@@ -380,8 +389,8 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 if (   mCurrentTask == Work::ApplyGitCommand
                     && aParentItem->checkState(INT(Column::FileName)) == Qt::Checked)
                 {
-                    fResult = applyGitCmd(fSource, mGitCommand, fResultStr);
-                    ui->textBrowser->insertPlainText(fResultStr + getLineFeed());
+                    QString fCmd = applyGitCmd(fSource, mGitCommand, fResultStr);
+                    ui->textBrowser->insertPlainText(fCmd + getLineFeed() + fResultStr + getLineFeed());
                     return false;
                 }
                 int fCountOk = 0;
@@ -438,9 +447,11 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     switch (mCurrentTask)
                     {
                         case Work::ApplyGitCommand:
-                            fResult = applyGitCmd(fSource, mGitCommand, fResultStr);
-                            ui->textBrowser->insertPlainText(fResultStr + getLineFeed());
-                            break;
+                        {
+                            QString fCmd = applyGitCmd(fSource, mGitCommand, fResultStr);
+                            ui->textBrowser->insertPlainText(fCmd + getLineFeed() + fResultStr + getLineFeed());
+                            fResult = fCmd.size() != 0;
+                        }   break;
                         case Work::ShowAllFiles:
                             aParentItem->setHidden(false);
                             fResult = true;
@@ -462,7 +473,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
                         case Work::ShowUnknown:
-                            fResult = fType.is(Type::GitUnknown);
+                            fResult = fType.is(Type::GitUnTracked);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
 
@@ -502,11 +513,16 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
             const QString fSep = "|";
             QString fState = fSep;
 
-            if (fFoundType->second.is(Type::GitAdded   )) fState += Type::name(Type::GitAdded)    + fSep;
-            if (fFoundType->second.is(Type::GitDeleted )) fState += Type::name(Type::GitDeleted)  + fSep;
-            if (fFoundType->second.is(Type::GitModified)) fState += Type::name(Type::GitModified) + fSep;
-            if (fFoundType->second.is(Type::GitUnknown )) fState += Type::name(Type::GitUnknown)  + fSep;
-            if (fFoundType->second.is(Type::GitRenamed )) fState += Type::name(Type::GitRenamed)  + fSep;
+            if (fFoundType->second.is(Type::GitAdded   ))  fState += Type::name(Type::GitAdded)     + fSep;
+            if (fFoundType->second.is(Type::GitDeleted ))  fState += Type::name(Type::GitDeleted)   + fSep;
+            if (fFoundType->second.is(Type::GitModified))  fState += Type::name(Type::GitModified)  + fSep;
+            if (fFoundType->second.is(Type::GitUnTracked)) fState += Type::name(Type::GitUnTracked) + fSep;
+            if (fFoundType->second.is(Type::GitRenamed ))  fState += Type::name(Type::GitRenamed)   + fSep;
+            if (fFoundType->second.is(Type::GitStaged  ))  fState += Type::name(Type::GitStaged)    + fSep;
+            if (fFoundType->second.is(Type::GitUnmerged))  fState += Type::name(Type::GitUnmerged)  + fSep;
+            if (fFoundType->second.is(Type::GitLocal   ))  fState += Type::name(Type::GitLocal)     + fSep;
+            if (fFoundType->second.is(Type::GitRemote  ))  fState += Type::name(Type::GitRemote)    + fSep;
+            if (fFoundType->second.is(Type::GitBoth    ))  fState += Type::name(Type::GitBoth)      + fSep;
             aParentItem->setText(INT(Column::State), fState);
             Type fType(aParentItem->data(INT(Column::State), INT(Role::Filter)).toUInt());
             fType.add(static_cast<Type::TypeFlags>(fFoundType->second.mType));
@@ -678,23 +694,23 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     ui->textBrowser->setText(fResultString);
     ui->labelFilePath->setText("");
     stringt2typemap fCheckMap;
-    parseGitStatus(fSourceDir.path(), fResultString, fCheckMap);
+    parseGitStatus(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
 
     insertItem(fSourceDir, *ui->treeSource);
 
-    // TODO fix deleted items
-//    for (const auto& fItem : fCheckMap)
-//    {
-//        if (fItem.second.is(Type::GitDeleted))
-//        {
-//            mGitCommand = fItem.first.c_str();
-//            mCurrentTask = Work::InsertPathFromCommandString;
-//            QString fFilePath = "";
-//            iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(aItem));
-//            mGitCommand.clear();
-//            mCurrentTask = Work::None;
-//        }
-//    }
+    // TODO: in review
+    for (const auto& fItem : fCheckMap)
+    {
+        if (fItem.second.is(Type::GitDeleted))
+        {
+            mGitCommand = fItem.first.c_str();
+            mCurrentTask = Work::InsertPathFromCommandString;
+            QString fFilePath = "";
+            iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(aItem));
+            mGitCommand.clear();
+            mCurrentTask = Work::None;
+        }
+    }
 
     iterateCheckItems(ui->treeSource->topLevelItem(aItem), fCheckMap);
 }
@@ -802,13 +818,13 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
 
     for (QString fLine : fLines)
     {
-        fLine = fLine.trimmed();
-        auto fParts = fLine.split(QChar::Space);
+        const int fStateSize = 2;
+        QString fState = fLine.left(fStateSize);
+        auto fRelativePath = fLine.mid(fStateSize).trimmed();
 
-        if (fParts.size() > 1)
+        if (fRelativePath.size())
         {
-            auto fRelativePath = fParts[fParts.size()-1].trimmed();
-            Type fType(Type::translate(fParts[0]));
+            Type fType(Type::translate(fState));
 
             if (fType.is(Type::Repository))
             {
@@ -816,14 +832,14 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             }
             else
             {
-                QString fFullPath = fSource + QDir::separator() + fRelativePath;
+                QString fFullPath = fSource + QDir(fRelativePath).path();
                 QFileInfo fFileInfo(fFullPath);
                 if (fFileInfo.isFile())   fType.add(Type::File);
                 if (fFileInfo.isDir())    fType.add(Type::Folder);
                 aFiles[fFullPath.toStdString()] = fType;
             }
 
-            TRACE(Logger::trace, "%s: %s: %x", fParts[0].toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.mType);
+            TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.mType);
         }
     }
 }
@@ -1049,17 +1065,21 @@ void MainWindow::initContextMenuActions()
 
     connect(createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
+    getAction(git::Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
 
     connect(createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
+    getAction(git::Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
 
     connect(createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
+    getAction(git::Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
 
     connect(createAction(git::Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
     setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
+    getAction(git::Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
 
     connect(createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
     setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
@@ -1107,7 +1127,7 @@ void MainWindow::initActionIcons()
     fActionIcons[git::Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
     for (const auto& fIconPath: fActionIcons )
     {
-        getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));
+        getAction(fIconPath.first)->setIcon(QIcon::fromTheme("resource", QIcon(fIconPath.second.c_str())));
     }
 }
 
@@ -1175,20 +1195,17 @@ void  MainWindow::performGitCmd(const QString& aCommand)
     }
 }
 
-bool MainWindow::applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
+QString MainWindow::applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
 {
     QString fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
-    QString fResultStr;
-    int fResult = execute(fCommand, fResultStr);
-    aResultStr = fCommand;
-    aResultStr.append(getLineFeed());
-    aResultStr.append(fResultStr);
-    return fResult == 0;
+    int fResult = execute(fCommand, aResultStr);
+    return fResult == 0 ? fCommand : "";
 }
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 {
     QFileInfo fFileInfo(getItemFilePath(aItem));
+//test
 
     QDir fParent;
     if (fFileInfo.isDir()) fParent.setPath(fFileInfo.absoluteFilePath());
@@ -1211,7 +1228,8 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
         applyGitCmd(fRepositoryPath, fCommandString, fResultString);
 
         stringt2typemap fCheckMap;
-        parseGitStatus(fRepositoryPath, fResultString, fCheckMap);
+
+        parseGitStatus(fRepositoryPath + QDir::separator(), fResultString, fCheckMap);
 
         QString fSourcePath = fFileInfo.absolutePath();
         iterateCheckItems(aItem, fCheckMap, &fSourcePath);

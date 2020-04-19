@@ -138,12 +138,12 @@
           </column>
           <column>
            <property name="text">
-            <string>Size</string>
+            <string>State</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>State</string>
+            <string>Size</string>
            </property>
           </column>
          </widget>
@@ -273,153 +273,154 @@
     <item>
      <layout class="QHBoxLayout" name="layoutButtons">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayoutCopy">
-        <item>
-         <widget class="QPushButton" name="btnAddSourceFolder">
-          <property name="text">
-           <string>Add Source Folder</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnUpdateStatus">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Update Status</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnCancel">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Cancel</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayoutHistory">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetDefaultConstraint</enum>
+       <widget class="QPushButton" name="btnAddSourceFolder">
+        <property name="text">
+         <string>Add Source Folder</string>
         </property>
-        <item>
-         <widget class="QPushButton" name="btnHideHistory">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Show History Tree</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnClearHistory">
-          <property name="text">
-           <string>Clear History Tree</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayoutSettings1">
-        <item>
-         <widget class="QCheckBox" name="ckDirectories">
-          <property name="text">
-           <string>Directories</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckFiles">
-          <property name="text">
-           <string>Files</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="btnUpdateStatus">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Update Status</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayoutSettings2">
-        <item>
-         <widget class="QCheckBox" name="ckHiddenFiles">
-          <property name="minimumSize">
-           <size>
-            <width>160</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Hidden Files</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckSystemFiles">
-          <property name="text">
-           <string>System Files</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckSymbolicLinks">
-          <property name="text">
-           <string>Symbolic Links</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="btnCancel">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnHideHistory">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Show History Tree</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnClearHistory">
+        <property name="text">
+         <string>Clear History Tree</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutTool"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutFlags">
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>File Flags:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckSystemFiles">
+        <property name="text">
+         <string>System Files</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckHiddenFiles">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Hidden Files</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckSymbolicLinks">
+        <property name="text">
+         <string>Symbolic Links</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckDirectories">
+        <property name="text">
+         <string>Directories</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckFiles">
+        <property name="text">
+         <string>Files</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

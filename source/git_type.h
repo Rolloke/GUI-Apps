@@ -38,10 +38,15 @@ struct Cmd
         Push,
         ShowHistoryDifference,
         CallHistoryDiffTool,
-        ExpandTreeItems,
-        CollapseTreeItems,
         /// hint: add custom commands here
-        CustomCommand=50
+        CustomCommand=50,
+
+        NonGitCommands = 1000,
+        /// hint: add non git commands here
+        ExpandTreeItems = NonGitCommands,
+        CollapseTreeItems,
+        FirstGitCommand = GetStatusAll,
+        LastGitCommand  = NonGitCommands-1
     };
     enum eCustom
     {
@@ -65,12 +70,16 @@ struct Type
         File                = 0x000001,
         Folder              = 0x000002,
         SymLink             = 0x000004,
-        //Reserved          = 0x000008,
+        GitStaged           = 0x000008,
         GitModified         = 0x000010,
         GitDeleted          = 0x000020,
         GitAdded            = 0x000040,
-        GitUnknown          = 0x000080,
+        GitUnTracked        = 0x000080,
         GitRenamed          = 0x000100,
+        GitUnmerged         = 0x000200,
+        GitLocal            = 0x000400,
+        GitRemote           = 0x000800,
+        GitBoth             = GitLocal|GitRemote,
         GitIgnore           = 0x001000,
         GitFolder           = 0x002000|Folder,
         Repository          = 0x004000,
@@ -81,7 +90,7 @@ struct Type
         Negation            = 0x200000,
         RegExp              = 0x400000,
         ContainingNegation  = 0x800000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnknown,
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked,
         FileType    =File|Folder|SymLink,
         FileFlag    =Hidden|Executeable
     };

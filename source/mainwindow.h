@@ -88,8 +88,8 @@ private:
     {
         FileName,
         DateTime,
-        Size,
-        State
+        State,
+        Size
     };
     enum class Role
     {
@@ -148,7 +148,7 @@ private:
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
 
     void     performGitCmd(const QString& aCommand);
-    bool     applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+    QString  applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
@@ -165,7 +165,6 @@ private:
     QString             mLineFeed;
     boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
     static const QString mNativeLineFeed;
-
 };
 
 #endif // MAINWINDOW_H

@@ -59,16 +59,21 @@ const char* Type::name(TypeFlags aType)
 {
     switch (aType)
     {
-        case GitDeleted: return "Deleted";
-        case GitModified:return "Modified";
-        case GitAdded:   return "Added";
-        case GitUnknown: return "Unknown";
-        case GitRenamed: return "Renamed";
-        case GitFolder:  return "git folder";
-        case GitIgnore:  return "git ignore";
-        case SymLink:    return "symbolic link";
-        case FileType:   return "file types (group)";
-        case FileFlag:   return "file flags (group)";
+        case GitStaged:    return "Staged";
+        case GitDeleted:   return "Deleted";
+        case GitModified:  return "Modified";
+        case GitAdded:     return "Added";
+        case GitUnTracked: return "Untracked";
+        case GitRenamed:   return "Renamed";
+        case GitUnmerged:  return "Unmerged";
+        case GitLocal:     return "Local";
+        case GitRemote:    return "Remote";
+        case GitBoth:      return "Both";
+        case GitFolder:    return "git folder";
+        case GitIgnore:    return "git ignore";
+        case SymLink:      return "symbolic link";
+        case FileType:     return "file types (group)";
+        case FileFlag:     return "file flags (group)";
         RETURN_NAME(AllGitActions);
         RETURN_NAME(Repository);
         RETURN_NAME(File);
@@ -89,10 +94,20 @@ Type::TypeFlags Type::translate(const QString& fIdentifier)
 {
     int fType = None;
     if (fIdentifier.contains('D'))  fType |= GitDeleted;
-    if (fIdentifier.contains('M'))  fType |= GitModified;
-    if (fIdentifier.contains('A'))  fType |= GitAdded;
-    if (fIdentifier.contains('R'))  fType |= GitRenamed;
-    if (fIdentifier.contains("?"))  fType |= GitUnknown;
+    if      (fIdentifier[1]=='M')   fType |= GitModified;
+    else if (fIdentifier[0]=='M')   fType |= GitModified|GitStaged;
+    if      (fIdentifier[1]=='A')   fType |= GitAdded;
+    else if (fIdentifier[0]=='A')   fType |= GitAdded|GitStaged;
+    if      (fIdentifier[1]=='R')   fType |= GitRenamed;
+    else if (fIdentifier[0]=='R')   fType |= GitRenamed|GitStaged;
+    if      (fIdentifier=="DD")     fType |= GitUnmerged|GitBoth;   // unmerged, both deleted
+    else if (fIdentifier=="AU")     fType |= GitUnmerged|GitLocal;  // unmerged, added by us
+    else if (fIdentifier=="UD")     fType |= GitUnmerged|GitRemote; // unmerged, deleted by them
+    else if (fIdentifier=="UA")     fType |= GitUnmerged|GitRemote; // unmerged, added by them
+    else if (fIdentifier=="DU")     fType |= GitUnmerged|GitLocal;  // unmerged, deleted by us
+    else if (fIdentifier=="AA")     fType |= GitUnmerged|GitBoth;   // unmerged, both added
+    else if (fIdentifier=="UU")     fType |= GitUnmerged|GitBoth;   // unmerged, both modified
+    if (fIdentifier.contains("?"))  fType |= GitUnTracked;
     if (fIdentifier.contains("##")) fType |= Repository;
     return static_cast<TypeFlags>(fType);
 }
