@@ -110,6 +110,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Interactive);
     ui->treeSource->header()->setStretchLastSection(false);
 
+
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
@@ -154,19 +155,27 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     QToolBar*pTB = new QToolBar();
     pTB->addAction(mActions.getAction(git::Cmd::Add));
-    pTB->addAction(mActions.getAction(git::Cmd::Remove));
+    pTB->addAction(mActions.getAction(git::Cmd::Unstage));
     pTB->addAction(mActions.getAction(git::Cmd::Restore));
+    pTB->addAction(mActions.getAction(git::Cmd::MoveOrRename));
+    pTB->addAction(mActions.getAction(git::Cmd::Remove));
     pTB->addAction(mActions.getAction(git::Cmd::ShowDifference));
     pTB->addAction(mActions.getAction(git::Cmd::CallDiffTool));
-
-    ui->horizontalLayoutTool->addWidget(pTB);
-
-    pTB = new QToolBar();
     pTB->addAction(mActions.getAction(git::Cmd::History));
     pTB->addAction(mActions.getAction(git::Cmd::ShowStatus));
     pTB->addAction(mActions.getAction(git::Cmd::ShowShortStatus));
+    ui->horizontalLayoutTool->addWidget(pTB);
+
+    pTB = new QToolBar();
+    pTB->addAction(mActions.getAction(git::Cmd::AddGitSourceFolder));
+    pTB->addAction(mActions.getAction(git::Cmd::UpdateGitStatus));
+    pTB->addAction(mActions.getAction(git::Cmd::ShowHideHistoryTree));
+    pTB->addAction(mActions.getAction(git::Cmd::ClearHistory));
     pTB->addAction(mActions.getAction(git::Cmd::ExpandTreeItems));
     pTB->addAction(mActions.getAction(git::Cmd::CollapseTreeItems));
+    pTB->addSeparator();
+    pTB->addAction(mActions.getAction(git::Cmd::Commit));
+    pTB->addAction(mActions.getAction(git::Cmd::Push));
     ui->horizontalLayoutTool->addWidget(pTB);
 }
 
@@ -187,17 +196,20 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupPaths);
     fSettings.beginWriteArray(config::sSourcePath);
+
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
         fSettings.setArrayIndex(i);
         QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
         fSettings.setValue(config::sSourcePath, fItem->text(INT(Column::FileName)));
     }
+
     fSettings.endArray();
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
     fSettings.beginWriteArray(config::sCommands);
+
     {
         int fIndex = 0;
 
@@ -223,6 +235,7 @@ MainWindow::~MainWindow()
             }
         }
     }
+
     fSettings.endArray();
     fSettings.endGroup();
 
@@ -854,7 +867,8 @@ void MainWindow::parseGitLogHistoryText()
     fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
 
     ui->treeHistory->setVisible(true);
-    ui->btnHideHistory->setChecked(true);
+    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setChecked(true);
+
     const int fTLI = ui->treeHistory->topLevelItemCount()-1;
     int fListCount = 0;
     for (auto fItem: fList)
@@ -913,13 +927,22 @@ void MainWindow::on_btnAddSourceFolder_clicked()
 
 void MainWindow::on_btnUpdateStatus_clicked()
 {
-    qint64 fSize = 0;
+    std::vector<QString> fSourceDirs;
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
+        fSourceDirs.push_back(ui->treeSource->topLevelItem(i)->text(INT(Column::FileName)));
+    }
+    ui->treeSource->clear();
+
+    qint64 fSize = 0;
+    for (uint i = 0; i < fSourceDirs.size(); ++i)
+    {
+        insertSourceTree(fSourceDirs[i], i);
         fSize += sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
     }
 
     ui->statusBar->showMessage("Total selected bytes: " + formatFileSize(fSize));
+
 }
 
 void MainWindow::on_btnStoreText_clicked()
@@ -992,6 +1015,7 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 
         QMenu menu(this);
         menu.addAction(mActions.getAction(git::Cmd::Add));
+        menu.addAction(mActions.getAction(git::Cmd::Unstage));
         menu.addAction(mActions.getAction(git::Cmd::Remove));
         menu.addAction(mActions.getAction(git::Cmd::ShowDifference));
         menu.addAction(mActions.getAction(git::Cmd::CallDiffTool));
@@ -1004,6 +1028,16 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
         mContextMenuItem = nullptr;
+    }
+    else
+    {
+        QMenu menu(this);
+        menu.addAction(mActions.getAction(git::Cmd::AddGitSourceFolder));
+        menu.addAction(mActions.getAction(git::Cmd::UpdateGitStatus));
+        menu.addAction(mActions.getAction(git::Cmd::ExpandTreeItems));
+        menu.addAction(mActions.getAction(git::Cmd::CollapseTreeItems));
+
+        menu.exec( ui->treeSource->mapToGlobal(pos) );
     }
 }
 
@@ -1123,6 +1157,7 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 void MainWindow::on_btnHideHistory_clicked(bool checked)
 {
     ui->treeHistory->setVisible(checked);
+    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setChecked(checked);
 }
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
@@ -1166,9 +1201,13 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(git::Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     connect(mActions.createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
-    connect(mActions.createAction(git::Cmd::Add            , tr("Add to git")        , Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(git::Cmd::Add            , tr("Add to git (stage)")        , Cmd::getCommand(Cmd::Add))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     mActions.setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
     mActions.getAction(git::Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
+
+    connect(mActions.createAction(git::Cmd::Unstage        , tr("Reset file (unstage)")      , Cmd::getCommand(Cmd::Unstage)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(git::Cmd::Unstage, git::Cmd::UpdateItemStatus);
+    mActions.getAction(git::Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
 
     connect(mActions.createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     mActions.setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
@@ -1187,13 +1226,23 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
     mActions.setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
 
+    connect(mActions.createAction(git::Cmd::Push           , tr("Push")        , Cmd::getCommand(Cmd::Push))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+
     connect(mActions.createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
+    mActions.getAction(git::Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
 
     connect(mActions.createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
     connect(mActions.createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
 
     connect(mActions.createAction(git::Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
     connect(mActions.createAction(git::Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
+
+    connect(mActions.createAction(git::Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(on_btnAddSourceFolder_clicked()));
+    connect(mActions.createAction(git::Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(on_btnUpdateStatus_clicked()));
+
+    connect(mActions.createAction(git::Cmd::ShowHideHistoryTree  , tr("Show/Hide history tree"), tr("Shows or hides history tree")) , SIGNAL(toggled(bool)), this, SLOT(on_btnHideHistory_clicked(bool)));
+    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setCheckable(true);
+    connect(mActions.createAction(git::Cmd::ClearHistory         , tr("Clear history tree items"), tr("Cleas all history tree entries")), SIGNAL(triggered()), this, SLOT(on_btnClearHistory_clicked()));
 
 //    connect(mActions.createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 //    mActions.setCustomCommandMessageBoxText(fID, fMessageBoxText);
@@ -1237,6 +1286,9 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 QMenu menu(this);
                 menu.addAction(mActions.getAction(git::Cmd::CallHistoryDiffTool));
                 menu.addAction(mActions.getAction(git::Cmd::ShowHistoryDifference));
+                menu.addAction(mActions.getAction(git::Cmd::ShowHideHistoryTree));
+                menu.addAction(mActions.getAction(git::Cmd::ClearHistory));
+
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
             }
         }
@@ -1371,9 +1423,13 @@ void MainWindow::on_expand_tree_items()
     {
         ui->treeHistory->expandAll();
     }
-    if (ui->treeSource->hasFocus())
+    else if (ui->treeSource->hasFocus())
     {
         ui->treeSource->expandAll();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Select tree view to set focus");
     }
 }
 
@@ -1383,8 +1439,12 @@ void MainWindow::on_collapse_tree_items()
     {
         ui->treeHistory->collapseAll();
     }
-    if (ui->treeSource->hasFocus())
+    else if (ui->treeSource->hasFocus())
     {
         ui->treeSource->collapseAll();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Select tree view to set focus");
     }
 }

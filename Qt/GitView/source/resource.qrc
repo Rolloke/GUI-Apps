@@ -37,5 +37,18 @@
         <file>resource/24X24/document-revert.png</file>
         <file>resource/24X24/distribute-graph-directed.svg</file>
         <file>resource/24X24/code-class.svg</file>
+        <file>resource/24X24/folder.png</file>
+        <file>resource/24X24/folder-open.png</file>
+        <file>resource/24X24/user-idle.png</file>
+        <file>resource/24X24/user-busy.png</file>
+        <file>resource/24X24/user-away.png</file>
+        <file>resource/24X24/user-available.png</file>
+        <file>resource/24X24/trophy-bronze.png</file>
+        <file>resource/24X24/emblem-system.png</file>
+        <file>resource/24X24/emblem-generic.png</file>
+        <file>resource/24X24/user-invisible.png</file>
+        <file>resource/24X24/format-text-bold.png</file>
+        <file>resource/24X24/format-text-direction-rtl.png</file>
+        <file>resource/24X24/format-text-direction-ltr.png</file>
     </qresource>
 </RCC>
