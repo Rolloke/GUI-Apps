@@ -36,22 +36,26 @@ void ActionList::initActionIcons()
 {
     std::map<git::Cmd::eCmd, std::string> fActionIcons;
     fActionIcons[git::Cmd::Add]                     = ":/resource/24X24/list-add.png";
+    fActionIcons[git::Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
     fActionIcons[git::Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[git::Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
     fActionIcons[git::Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
     fActionIcons[git::Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
     fActionIcons[git::Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
-//    fActionIcons[git::Cmd::GetStatusAll]            = "";
-    fActionIcons[git::Cmd::Remove]                  = "://resource/24X24/list-remove.png";
-//    fActionIcons[git::Cmd::Commit]                  = "";
-//    fActionIcons[git::Cmd::MoveOrRename]            = "";
+    fActionIcons[git::Cmd::Remove]                  = "://resource/24X24/user-trash.png";
+    fActionIcons[git::Cmd::Commit]                  = "://resource/24X24/user-invisible.png";
+    fActionIcons[git::Cmd::MoveOrRename]            = "://resource/24X24/format-text-direction-ltr.png";
     fActionIcons[git::Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
-//    fActionIcons[git::Cmd::Push]                    = "";
+    fActionIcons[git::Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
     fActionIcons[git::Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[git::Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 
     fActionIcons[git::Cmd::ExpandTreeItems]         = "://resource/24X24/svn-update.svg";
     fActionIcons[git::Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
+    fActionIcons[git::Cmd::AddGitSourceFolder]      = "://resource/24X24/folder-open.png";
+    fActionIcons[git::Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
+    fActionIcons[git::Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
+    fActionIcons[git::Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
     for (const auto& fIconPath: fActionIcons )
     {
         getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));

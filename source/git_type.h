@@ -33,6 +33,7 @@ struct Cmd
         CallDiffTool,
         Remove,
         Add,
+        Unstage,
         Commit,
         MoveOrRename,
         Restore,
@@ -47,6 +48,10 @@ struct Cmd
         /// hint: add non git commands here
         ExpandTreeItems = NonGitCommands,
         CollapseTreeItems,
+        AddGitSourceFolder,
+        UpdateGitStatus,
+        ShowHideHistoryTree,
+        ClearHistory,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1
     };
