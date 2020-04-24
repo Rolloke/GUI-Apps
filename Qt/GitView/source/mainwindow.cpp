@@ -153,30 +153,25 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     initContextMenuActions();
     mActions.initActionIcons();
 
-    QToolBar*pTB = new QToolBar();
-    pTB->addAction(mActions.getAction(git::Cmd::Add));
-    pTB->addAction(mActions.getAction(git::Cmd::Unstage));
-    pTB->addAction(mActions.getAction(git::Cmd::Restore));
-    pTB->addAction(mActions.getAction(git::Cmd::MoveOrRename));
-    pTB->addAction(mActions.getAction(git::Cmd::Remove));
-    pTB->addAction(mActions.getAction(git::Cmd::ShowDifference));
-    pTB->addAction(mActions.getAction(git::Cmd::CallDiffTool));
-    pTB->addAction(mActions.getAction(git::Cmd::History));
-    pTB->addAction(mActions.getAction(git::Cmd::ShowStatus));
-    pTB->addAction(mActions.getAction(git::Cmd::ShowShortStatus));
-    ui->horizontalLayoutTool->addWidget(pTB);
+    for (auto fToolbar : Cmd::mToolbars)
+    {
+        QToolBar*pTB = new QToolBar();
 
-    pTB = new QToolBar();
-    pTB->addAction(mActions.getAction(git::Cmd::AddGitSourceFolder));
-    pTB->addAction(mActions.getAction(git::Cmd::UpdateGitStatus));
-    pTB->addAction(mActions.getAction(git::Cmd::ShowHideHistoryTree));
-    pTB->addAction(mActions.getAction(git::Cmd::ClearHistory));
-    pTB->addAction(mActions.getAction(git::Cmd::ExpandTreeItems));
-    pTB->addAction(mActions.getAction(git::Cmd::CollapseTreeItems));
-    pTB->addSeparator();
-    pTB->addAction(mActions.getAction(git::Cmd::Commit));
-    pTB->addAction(mActions.getAction(git::Cmd::Push));
-    ui->horizontalLayoutTool->addWidget(pTB);
+        for (auto fCmd : fToolbar)
+        {
+            if (fCmd == git::Cmd::Separator)
+            {
+                pTB->addSeparator();
+            }
+            else
+            {
+                pTB->addAction(mActions.getAction(fCmd));
+            }
+        }
+
+        ui->horizontalLayoutTool->addWidget(pTB);
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -1012,19 +1007,19 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     if (mContextMenuItem)
     {
         //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
-
         QMenu menu(this);
-        menu.addAction(mActions.getAction(git::Cmd::Add));
-        menu.addAction(mActions.getAction(git::Cmd::Unstage));
-        menu.addAction(mActions.getAction(git::Cmd::Remove));
-        menu.addAction(mActions.getAction(git::Cmd::ShowDifference));
-        menu.addAction(mActions.getAction(git::Cmd::CallDiffTool));
-        menu.addAction(mActions.getAction(git::Cmd::ShowShortStatus));
-        menu.addAction(mActions.getAction(git::Cmd::ShowStatus));
-        menu.addAction(mActions.getAction(git::Cmd::Commit));
-        menu.addAction(mActions.getAction(git::Cmd::MoveOrRename));
-        menu.addAction(mActions.getAction(git::Cmd::Restore));
-        menu.addAction(mActions.getAction(git::Cmd::History));
+
+        for (auto fCmd : git::Cmd::mContextMenuSourceTree)
+        {
+            if (fCmd == git::Cmd::Separator)
+            {
+                menu.addSeparator();
+            }
+            else
+            {
+                menu.addAction(mActions.getAction(fCmd));
+            }
+        }
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
         mContextMenuItem = nullptr;
@@ -1032,10 +1027,17 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     else
     {
         QMenu menu(this);
-        menu.addAction(mActions.getAction(git::Cmd::AddGitSourceFolder));
-        menu.addAction(mActions.getAction(git::Cmd::UpdateGitStatus));
-        menu.addAction(mActions.getAction(git::Cmd::ExpandTreeItems));
-        menu.addAction(mActions.getAction(git::Cmd::CollapseTreeItems));
+        for (auto fCmd : git::Cmd::mContextMenuEmptySourceTree)
+        {
+            if (fCmd == git::Cmd::Separator)
+            {
+                menu.addSeparator();
+            }
+            else
+            {
+                menu.addAction(mActions.getAction(fCmd));
+            }
+        }
 
         menu.exec( ui->treeSource->mapToGlobal(pos) );
     }
@@ -1194,55 +1196,59 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
 
 void MainWindow::initContextMenuActions()
 {
+    using namespace git;
+
     // TODO: create the necessary actions, slots and enumerations for recognition
-    connect(mActions.createAction(git::Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(mActions.createAction(git::Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    connect(mActions.createAction(git::Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.getAction(git::Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
-    connect(mActions.createAction(git::Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
+    connect(mActions.createAction(Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
-    connect(mActions.createAction(git::Cmd::Add            , tr("Add to git (stage)")        , Cmd::getCommand(Cmd::Add))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.setCustomCommandPostAction(git::Cmd::Add, git::Cmd::UpdateItemStatus);
-    mActions.getAction(git::Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
+    connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)")        , Cmd::getCommand(Cmd::Add))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
+    mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
 
-    connect(mActions.createAction(git::Cmd::Unstage        , tr("Reset file (unstage)")      , Cmd::getCommand(Cmd::Unstage)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.setCustomCommandPostAction(git::Cmd::Unstage, git::Cmd::UpdateItemStatus);
-    mActions.getAction(git::Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
+    connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)")      , Cmd::getCommand(Cmd::Unstage)), SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
+    mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
 
-    connect(mActions.createAction(git::Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.setCustomCommandPostAction(git::Cmd::History, git::Cmd::ParseHistoryText);
-    mActions.getAction(git::Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
+    connect(mActions.createAction(Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::History, Cmd::ParseHistoryText);
+    mActions.getAction(Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
 
-    connect(mActions.createAction(git::Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.setCustomCommandMessageBoxText(git::Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
-    mActions.setCustomCommandPostAction(git::Cmd::Remove, git::Cmd::UpdateItemStatus);
-    mActions.getAction(git::Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
+    connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
+    mActions.setCustomCommandPostAction(Cmd::Remove, Cmd::UpdateItemStatus);
+    mActions.getAction(Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
 
-    connect(mActions.createAction(git::Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
-    mActions.setCustomCommandMessageBoxText(git::Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
-    mActions.setCustomCommandPostAction(git::Cmd::Restore, git::Cmd::UpdateItemStatus);
-    mActions.getAction(git::Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
+    connect(mActions.createAction(Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
+    mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
+    mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
 
-    connect(mActions.createAction(git::Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
-    mActions.setCustomCommandPostAction(git::Cmd::Commit, git::Cmd::UpdateItemStatus);
+    connect(mActions.createAction(Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(on_git_commit()));
+    mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
 
-    connect(mActions.createAction(git::Cmd::Push           , tr("Push")        , Cmd::getCommand(Cmd::Push))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
+    connect(mActions.createAction(Cmd::Push           , tr("Push")        , Cmd::getCommand(Cmd::Push))    , SIGNAL(triggered()), this, SLOT(on_custom_command()));
 
-    connect(mActions.createAction(git::Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
-    mActions.getAction(git::Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
+    connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(on_git_move_rename()));
+    mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
 
-    connect(mActions.createAction(git::Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
-    connect(mActions.createAction(git::Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
+    connect(mActions.createAction(Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
+    connect(mActions.createAction(Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(on_git_history_diff_command()));
 
-    connect(mActions.createAction(git::Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
-    connect(mActions.createAction(git::Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
+    connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(on_expand_tree_items()));
+    connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(on_collapse_tree_items()));
 
-    connect(mActions.createAction(git::Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(on_btnAddSourceFolder_clicked()));
-    connect(mActions.createAction(git::Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(on_btnUpdateStatus_clicked()));
+    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(on_btnAddSourceFolder_clicked()));
+    connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(on_btnUpdateStatus_clicked()));
 
-    connect(mActions.createAction(git::Cmd::ShowHideHistoryTree  , tr("Show/Hide history tree"), tr("Shows or hides history tree")) , SIGNAL(toggled(bool)), this, SLOT(on_btnHideHistory_clicked(bool)));
-    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setCheckable(true);
-    connect(mActions.createAction(git::Cmd::ClearHistory         , tr("Clear history tree items"), tr("Cleas all history tree entries")), SIGNAL(triggered()), this, SLOT(on_btnClearHistory_clicked()));
+    connect(mActions.createAction(Cmd::ShowHideHistoryTree  , tr("Show/Hide history tree"), tr("Shows or hides history tree")) , SIGNAL(toggled(bool)), this, SLOT(on_btnHideHistory_clicked(bool)));
+    mActions.getAction(Cmd::ShowHideHistoryTree)->setCheckable(true);
+    connect(mActions.createAction(Cmd::ClearHistory         , tr("Clear history tree items"), tr("Cleas all history tree entries")), SIGNAL(triggered()), this, SLOT(on_btnClearHistory_clicked()));
+
+
 
 //    connect(mActions.createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
 //    mActions.setCustomCommandMessageBoxText(fID, fMessageBoxText);
@@ -1284,10 +1290,18 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 }
 
                 QMenu menu(this);
-                menu.addAction(mActions.getAction(git::Cmd::CallHistoryDiffTool));
-                menu.addAction(mActions.getAction(git::Cmd::ShowHistoryDifference));
-                menu.addAction(mActions.getAction(git::Cmd::ShowHideHistoryTree));
-                menu.addAction(mActions.getAction(git::Cmd::ClearHistory));
+
+                for (auto fCmd : git::Cmd::mContextMenuHistoryTree)
+                {
+                    if (fCmd == git::Cmd::Separator)
+                    {
+                        menu.addSeparator();
+                    }
+                    else
+                    {
+                        menu.addAction(mActions.getAction(fCmd));
+                    }
+                }
 
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
             }
