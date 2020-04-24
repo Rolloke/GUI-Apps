@@ -5,6 +5,10 @@ namespace git
 {
 
 int2stringmap Cmd::mCommandMap;
+std::vector<Cmd::eCmd> Cmd::mContextMenuSourceTree;
+std::vector<Cmd::eCmd> Cmd::mContextMenuEmptySourceTree;
+std::vector<Cmd::eCmd> Cmd::mContextMenuHistoryTree;
+std::vector<std::vector<Cmd::eCmd>> Cmd::mToolbars;
 
 Cmd::Cmd()
 {
@@ -23,6 +27,15 @@ Cmd::Cmd()
     mCommandMap[Push]            = "git push";
     mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
     mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
+
+    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
+    mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
+
+    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
+
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
+
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push });
 }
 
 const QString& Cmd::getCommand(eCmd aCmd)
