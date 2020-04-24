@@ -3,6 +3,7 @@
 
 #include <boost/container/flat_map.hpp>
 #include <map>
+#include <vector>
 
 #include <QString>
 
@@ -46,7 +47,8 @@ struct Cmd
 
         NonGitCommands = 1000,
         /// hint: add non git commands here
-        ExpandTreeItems = NonGitCommands,
+        Separator = NonGitCommands,
+        ExpandTreeItems,
         CollapseTreeItems,
         AddGitSourceFolder,
         UpdateGitStatus,
@@ -54,6 +56,7 @@ struct Cmd
         ClearHistory,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1
+
     };
     enum eCustom
     {
@@ -63,6 +66,12 @@ struct Cmd
     };
 
     static const QString& getCommand(eCmd);
+
+    static std::vector<eCmd> mContextMenuSourceTree;
+    static std::vector<eCmd> mContextMenuEmptySourceTree;
+    static std::vector<eCmd> mContextMenuHistoryTree;
+    static std::vector<std::vector<eCmd>> mToolbars;
+
 private:
     static int2stringmap mCommandMap;
 };
