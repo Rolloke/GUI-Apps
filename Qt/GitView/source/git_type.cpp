@@ -34,7 +34,6 @@ Cmd::Cmd()
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
-
     mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push });
 }
 
