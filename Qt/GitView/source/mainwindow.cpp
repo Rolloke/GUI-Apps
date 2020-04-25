@@ -21,6 +21,7 @@
 #define RELATIVE_GIT_PATH 1
 
 using namespace std;
+using namespace git;
 
 
 // TODO: Eintragene Remote Repositories inkl. URLs ausgeben:
@@ -79,9 +80,6 @@ const QString MainWindow::mNativeLineFeed = "\n";
 #else
 const QString MainWindow::mNativeLineFeed = "\r\n";
 #endif
-
-
-using namespace git;
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
@@ -159,7 +157,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
         for (auto fCmd : fToolbar)
         {
-            if (fCmd == git::Cmd::Separator)
+            if (fCmd == Cmd::Separator)
             {
                 pTB->addSeparator();
             }
@@ -210,9 +208,9 @@ MainWindow::~MainWindow()
 
         for (auto fItem : mActions.getList())
         {
-            if (   fItem.first >= git::Cmd::FirstGitCommand
-                && fItem.first <= git::Cmd::LastGitCommand
-                && mActions.isModified(static_cast<git::Cmd::eCmd>(fItem.first)))
+            if (   fItem.first >= Cmd::FirstGitCommand
+                && fItem.first <= Cmd::LastGitCommand
+                && mActions.isModified(static_cast<Cmd::eCmd>(fItem.first)))
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
@@ -223,9 +221,9 @@ MainWindow::~MainWindow()
                     fSettings.setValue(config::sName, fAction->text());
                     fSettings.setValue(config::sCommand, fCommand);
                     fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
-                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(static_cast<git::Cmd::eCmd>(fItem.first)));
-                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(static_cast<git::Cmd::eCmd>(fItem.first)));
-                    fSettings.setValue(config::sIconPath, mActions.getIconPath(static_cast<git::Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(static_cast<Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sIconPath, mActions.getIconPath(static_cast<Cmd::eCmd>(fItem.first)));
                 }
             }
         }
@@ -837,7 +835,7 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             }
             else
             {
-                QString fFullPath = fSource + QDir(fRelativePath).path();
+                QString fFullPath = fSource + QDir::toNativeSeparators(fRelativePath);
                 QFileInfo fFileInfo(fFullPath);
                 if (fFileInfo.isFile())   fType.add(Type::File);
                 if (fFileInfo.isDir())    fType.add(Type::Folder);
@@ -852,7 +850,7 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
 void MainWindow::parseGitLogHistoryText()
 {
     QVector<QStringList> fList;
-    git::History::parse(ui->textBrowser->toPlainText(), fList);
+    History::parse(ui->textBrowser->toPlainText(), fList);
     ui->textBrowser->setPlainText("");
 
     QString fFileName = getItemFilePath(mContextMenuItem);
@@ -862,7 +860,7 @@ void MainWindow::parseGitLogHistoryText()
     fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
 
     ui->treeHistory->setVisible(true);
-    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setChecked(true);
+    mActions.getAction(Cmd::ShowHideHistoryTree)->setChecked(true);
 
     const int fTLI = ui->treeHistory->topLevelItemCount()-1;
     int fListCount = 0;
@@ -1001,6 +999,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     }
 }
 
+
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 {
     mContextMenuItem = ui->treeSource->itemAt( pos );
@@ -1008,37 +1007,14 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     {
         //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
         QMenu menu(this);
-
-        for (auto fCmd : git::Cmd::mContextMenuSourceTree)
-        {
-            if (fCmd == git::Cmd::Separator)
-            {
-                menu.addSeparator();
-            }
-            else
-            {
-                menu.addAction(mActions.getAction(fCmd));
-            }
-        }
-
+        mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
         mContextMenuItem = nullptr;
     }
     else
     {
         QMenu menu(this);
-        for (auto fCmd : git::Cmd::mContextMenuEmptySourceTree)
-        {
-            if (fCmd == git::Cmd::Separator)
-            {
-                menu.addSeparator();
-            }
-            else
-            {
-                menu.addAction(mActions.getAction(fCmd));
-            }
-        }
-
+        mActions.fillContextMenue(menu, Cmd::mContextMenuEmptySourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
     }
 }
@@ -1159,7 +1135,7 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 void MainWindow::on_btnHideHistory_clicked(bool checked)
 {
     ui->treeHistory->setVisible(checked);
-    mActions.getAction(git::Cmd::ShowHideHistoryTree)->setChecked(checked);
+    mActions.getAction(Cmd::ShowHideHistoryTree)->setChecked(checked);
 }
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
@@ -1196,8 +1172,6 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
 
 void MainWindow::initContextMenuActions()
 {
-    using namespace git;
-
     // TODO: create the necessary actions, slots and enumerations for recognition
     connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(on_custom_command()));
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(on_custom_command()));
@@ -1290,19 +1264,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                 }
 
                 QMenu menu(this);
-
-                for (auto fCmd : git::Cmd::mContextMenuHistoryTree)
-                {
-                    if (fCmd == git::Cmd::Separator)
-                    {
-                        menu.addSeparator();
-                    }
-                    else
-                    {
-                        menu.addAction(mActions.getAction(fCmd));
-                    }
-                }
-
+                mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
                 menu.exec( ui->treeHistory->mapToGlobal(pos) );
             }
         }
@@ -1412,10 +1374,10 @@ void MainWindow::on_custom_command()
         {
             switch (fVariantList[1].toUInt())
             {
-            case git::Cmd::UpdateItemStatus:
+            case Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
                 break;
-            case git::Cmd::ParseHistoryText:
+            case Cmd::ParseHistoryText:
                 parseGitLogHistoryText();
                 break;
             }
