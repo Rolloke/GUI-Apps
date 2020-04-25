@@ -34,6 +34,7 @@ public:
     void     setModified(git::Cmd::eCmd aCmd, bool aMod);
     bool     isModified(git::Cmd::eCmd aCmd);
 
+    void     fillContextMenue(QMenu& aMenu, const std::vector<git::Cmd::eCmd>& aItems);
     const tActionMap getList() { return mActionList; }
 
     static const QString sNoCustomCommandMessageBox;

@@ -1,5 +1,9 @@
 #include "actions.h"
 
+#include <QMenu>
+
+using namespace git;
+
 const QString ActionList::sNoCustomCommandMessageBox = "None";
 
 ActionList::ActionList(QObject* aParent): mParent(aParent)
@@ -15,7 +19,7 @@ ActionList::~ActionList()
     }
 }
 
-QAction * ActionList::createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand)
+QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand)
 {
     QAction *fNewAction = new QAction(aName, mParent);
     mActionList[aCmd] = fNewAction;
@@ -34,36 +38,52 @@ QAction * ActionList::createAction(git::Cmd::eCmd aCmd, const QString& aName, co
 
 void ActionList::initActionIcons()
 {
-    std::map<git::Cmd::eCmd, std::string> fActionIcons;
-    fActionIcons[git::Cmd::Add]                     = ":/resource/24X24/list-add.png";
-    fActionIcons[git::Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
-    fActionIcons[git::Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[git::Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
-    fActionIcons[git::Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
-    fActionIcons[git::Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
-    fActionIcons[git::Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
-    fActionIcons[git::Cmd::Remove]                  = "://resource/24X24/user-trash.png";
-    fActionIcons[git::Cmd::Commit]                  = "://resource/24X24/user-invisible.png";
-    fActionIcons[git::Cmd::MoveOrRename]            = "://resource/24X24/format-text-direction-ltr.png";
-    fActionIcons[git::Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
-    fActionIcons[git::Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
-    fActionIcons[git::Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[git::Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
+    std::map<Cmd::eCmd, std::string> fActionIcons;
+    fActionIcons[Cmd::Add]                     = ":/resource/24X24/list-add.png";
+    fActionIcons[Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
+    fActionIcons[Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
+    fActionIcons[Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
+    fActionIcons[Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
+    fActionIcons[Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
+    fActionIcons[Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
+    fActionIcons[Cmd::Remove]                  = "://resource/24X24/user-trash.png";
+    fActionIcons[Cmd::Commit]                  = "://resource/24X24/user-invisible.png";
+    fActionIcons[Cmd::MoveOrRename]            = "://resource/24X24/format-text-direction-ltr.png";
+    fActionIcons[Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
+    fActionIcons[Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
+    fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
+    fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 
-    fActionIcons[git::Cmd::ExpandTreeItems]         = "://resource/24X24/svn-update.svg";
-    fActionIcons[git::Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
-    fActionIcons[git::Cmd::AddGitSourceFolder]      = "://resource/24X24/folder-open.png";
-    fActionIcons[git::Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
-    fActionIcons[git::Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
-    fActionIcons[git::Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
+    fActionIcons[Cmd::ExpandTreeItems]         = "://resource/24X24/svn-update.svg";
+    fActionIcons[Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
+    fActionIcons[Cmd::AddGitSourceFolder]      = "://resource/24X24/folder-open.png";
+    fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
+    fActionIcons[Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
+    fActionIcons[Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
     for (const auto& fIconPath: fActionIcons )
     {
         getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));
-        setIconPath(static_cast<git::Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
+        setIconPath(static_cast<Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
     }
 }
 
-QAction* ActionList::getAction(git::Cmd::eCmd aCmd)
+void ActionList::fillContextMenue(QMenu& aMenu, const std::vector<Cmd::eCmd>& aItems)
+{
+    for (auto fCmd : aItems)
+    {
+        if (fCmd == Cmd::Separator)
+        {
+            aMenu.addSeparator();
+        }
+        else
+        {
+            aMenu.addAction(getAction(fCmd));
+        }
+    }
+}
+
+
+QAction* ActionList::getAction(Cmd::eCmd aCmd)
 {
     auto fItem = mActionList.find(aCmd);
     if (fItem != mActionList.end())
@@ -73,7 +93,7 @@ QAction* ActionList::getAction(git::Cmd::eCmd aCmd)
     return 0;
 }
 
-void  ActionList::setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText)
+void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd aCmd, const QString& aText)
 {
     QAction* fAction = getAction(aCmd);
     QVariantList fVariantList = fAction->data().toList();
@@ -81,7 +101,7 @@ void  ActionList::setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QStr
     fAction->setData(fVariantList);
 }
 
-QString ActionList::getCustomCommandMessageBoxText(git::Cmd::eCmd aCmd)
+QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd aCmd)
 {
     QVariant fVariant = getDataVariant(aCmd, Data::MsgBoxText);
     if (fVariant.isValid())
@@ -92,12 +112,12 @@ QString ActionList::getCustomCommandMessageBoxText(git::Cmd::eCmd aCmd)
 }
 
 
-void  ActionList::setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction)
+void  ActionList::setCustomCommandPostAction(Cmd::eCmd aCmd, uint aAction)
 {
     setDataVariant(aCmd, Data::Action, QVariant(aAction));
 }
 
-uint ActionList::getCustomCommandPostAction(git::Cmd::eCmd aCmd)
+uint ActionList::getCustomCommandPostAction(Cmd::eCmd aCmd)
 {
     QVariant fVariant = getDataVariant(aCmd, Data::Action);
     if (fVariant.isValid())
@@ -107,12 +127,12 @@ uint ActionList::getCustomCommandPostAction(git::Cmd::eCmd aCmd)
     return 0;
 }
 
-void ActionList::setIconPath(git::Cmd::eCmd aCmd, const QString& aPath)
+void ActionList::setIconPath(Cmd::eCmd aCmd, const QString& aPath)
 {
     setDataVariant(aCmd, Data::IconPath, QVariant(aPath));
 }
 
-QString ActionList::getIconPath(git::Cmd::eCmd aCmd)
+QString ActionList::getIconPath(Cmd::eCmd aCmd)
 {
     QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
     if (fVariant.isValid())
@@ -122,12 +142,12 @@ QString ActionList::getIconPath(git::Cmd::eCmd aCmd)
     return "";
 }
 
-void ActionList::setModified(git::Cmd::eCmd aCmd, bool aMod)
+void ActionList::setModified(Cmd::eCmd aCmd, bool aMod)
 {
     setDataVariant(aCmd, Data::Modified, QVariant(aMod));
 }
 
-bool ActionList::isModified(git::Cmd::eCmd aCmd)
+bool ActionList::isModified(Cmd::eCmd aCmd)
 {
     QVariant fVariant = getDataVariant(aCmd, Data::Modified);
     if (fVariant.isValid())
@@ -137,7 +157,7 @@ bool ActionList::isModified(git::Cmd::eCmd aCmd)
     return false;
 }
 
-void ActionList::setDataVariant(git::Cmd::eCmd aCmd, ActionList::Data aData, const QVariant& aVariant)
+void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data aData, const QVariant& aVariant)
 {
     QAction* fAction = getAction(aCmd);
     QVariantList fVariantList = fAction->data().toList();
@@ -149,7 +169,7 @@ void ActionList::setDataVariant(git::Cmd::eCmd aCmd, ActionList::Data aData, con
     fAction->setData(fVariantList);
 }
 
-QVariant ActionList::getDataVariant(git::Cmd::eCmd aCmd, Data aData)
+QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data aData)
 {
     QAction* fAction = getAction(aCmd);
     QVariantList fVariantList = fAction->data().toList();
