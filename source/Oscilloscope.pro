@@ -20,6 +20,9 @@ QMAKE_CXXFLAGS += -msse2
 
 QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_SSE2
 
+QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+
 DEFINES +=__SSE2__
 
 # define trigger processing:
