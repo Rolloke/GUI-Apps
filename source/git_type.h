@@ -54,6 +54,7 @@ struct Cmd
         UpdateGitStatus,
         ShowHideHistoryTree,
         ClearHistory,
+        CustomGitActionSettings,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1
 
@@ -66,6 +67,9 @@ struct Cmd
     };
 
     static const QString& getCommand(eCmd);
+
+    static QString toString(const std::vector<Cmd::eCmd>& aItems);
+    static std::vector<Cmd::eCmd> fromString(const QString& aString);
 
     static std::vector<eCmd> mContextMenuSourceTree;
     static std::vector<eCmd> mContextMenuEmptySourceTree;

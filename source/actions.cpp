@@ -1,6 +1,8 @@
 #include "actions.h"
 
+#include <QAction>
 #include <QMenu>
+#include <QToolBar>
 
 using namespace git;
 
@@ -60,10 +62,28 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
     fActionIcons[Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
     fActionIcons[Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
+    fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-desktop-accessibility.png";
     for (const auto& fIconPath: fActionIcons )
     {
         getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));
         setIconPath(static_cast<Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
+    }
+}
+
+
+
+void ActionList::fillToolbar(QToolBar& aToolbar, const std::vector<git::Cmd::eCmd>& aItems)
+{
+    for (auto fCmd : aItems)
+    {
+        if (fCmd == Cmd::Separator)
+        {
+            aToolbar.addSeparator();
+        }
+        else
+        {
+            aToolbar.addAction(getAction(fCmd));
+        }
     }
 }
 
@@ -90,7 +110,7 @@ QAction* ActionList::getAction(Cmd::eCmd aCmd)
     {
         return fItem->second;
     }
-    return 0;
+    return nullptr;
 }
 
 void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd aCmd, const QString& aText)

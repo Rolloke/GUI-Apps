@@ -34,31 +34,34 @@ Q_SIGNALS:
     void doWork(int );
 
 private Q_SLOTS:
-    void on_btnCancel_clicked();
-    void on_btnAddSourceFolder_clicked();
-    void on_btnUpdateStatus_clicked();
+    void cancelCurrentWorkTask();
+    void addGitSourceFolder();
+    void updateGitStatus();
+    void textBrowserChanged();
 
     void on_btnStoreText_clicked();
-    void textBrowserChanged();
     void on_btnCloseText_clicked();
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
+
     void on_ckHideEmptyParent_clicked(bool checked);
     void on_comboShowItems_currentIndexChanged(int index);
 
-    void on_btnHideHistory_clicked(bool checked);
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
-    void on_btnClearHistory_clicked();
 
-    void on_git_commit();
-    void on_git_move_rename();
-    void on_git_history_diff_command();
-    void on_custom_command();
-    void on_expand_tree_items();
-    void on_collapse_tree_items();
+    void showOrHideHistory(bool checked);
+    void clearHistoryTree();
+    void performCustomGitActionSettings();
+
+    void call_git_commit();
+    void call_git_move_rename();
+    void call_git_history_diff_command();
+    void perform_custom_command();
+    void expand_tree_items();
+    void collapse_tree_items();
 
 
 private:

@@ -2,8 +2,12 @@
 #define ACTIONS_H
 #include "git_type.h"
 
-#include <QAction>
 #include <QString>
+#include <QVariant>
+
+class QToolBar;
+class QAction;
+class QMenu;
 
 
 class ActionList
@@ -34,6 +38,7 @@ public:
     void     setModified(git::Cmd::eCmd aCmd, bool aMod);
     bool     isModified(git::Cmd::eCmd aCmd);
 
+    void     fillToolbar(QToolBar& aMenu, const std::vector<git::Cmd::eCmd>& aItems);
     void     fillContextMenue(QMenu& aMenu, const std::vector<git::Cmd::eCmd>& aItems);
     const tActionMap getList() { return mActionList; }
 
