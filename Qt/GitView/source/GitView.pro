@@ -15,8 +15,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GitView
 TEMPLATE = app
 
-QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
-QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 
 SOURCES += main.cpp\
@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     git_type.cpp \
     commitmessage.cpp \
     history.cpp \
-    actions.cpp
+    actions.cpp \
+    customgitactions.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -36,9 +37,11 @@ HEADERS  += mainwindow.h \
     git_type.h \
     commitmessage.h \
     history.h \
-    actions.h
+    actions.h \
+    customgitactions.h
 
 FORMS    += mainwindow.ui \
-    commitmessage.ui
+    commitmessage.ui \
+    customgitactions.ui
 
 RESOURCES += resource.qrc

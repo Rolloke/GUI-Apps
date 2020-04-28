@@ -1,6 +1,6 @@
 
 #include "git_type.h"
-
+#include <QStringList>
 namespace git
 {
 
@@ -34,8 +34,34 @@ Cmd::Cmd()
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
-    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push });
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push });
+    // TODO: CustomGitActionSettings
 }
+
+
+QString  Cmd::toString(const std::vector<Cmd::eCmd>& aItems)
+{
+    QString fString = "|";
+    for (auto fItem: aItems)
+    {
+        fString += QString::number(fItem);
+        fString += "|";
+    }
+    return fString;
+}
+
+std::vector<Cmd::eCmd> Cmd::fromString(const QString& aString)
+{
+    QStringList fStrings = aString.split('|');
+    std::vector<Cmd::eCmd> fItems;
+    for (auto fItem: fStrings)
+    {
+        if (fItem.size() == 0) continue;
+        fItems.push_back(static_cast<Cmd::eCmd>(fItem.toInt()));
+    }
+    return fItems;
+}
+
 
 const QString& Cmd::getCommand(eCmd aCmd)
 {

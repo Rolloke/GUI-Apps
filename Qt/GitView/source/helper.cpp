@@ -13,11 +13,14 @@
 
 QString getSettingsName(const QString& aItemName)
 {
-    QRegExp fRegEx("([A-Z][A-Za-z]+)");
+    QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {
-        return fRegEx.capturedTexts()[0];
+        QString fTemp = fRegEx.capturedTexts()[0];
+        fTemp = fTemp.replace(":", "_");
+        fTemp = fTemp.replace("[", "_");
+        return fTemp;
     }
     else return aItemName;
 }

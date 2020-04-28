@@ -50,5 +50,6 @@
         <file>resource/24X24/format-text-bold.png</file>
         <file>resource/24X24/format-text-direction-rtl.png</file>
         <file>resource/24X24/format-text-direction-ltr.png</file>
+        <file>resource/24X24/preferences-system.png</file>
     </qresource>
 </RCC>

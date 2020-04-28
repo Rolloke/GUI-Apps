@@ -208,7 +208,7 @@ bool Logger::openStream(const std::string& aTitle, std::ofstream& aStream)
     if (aStream.is_open())
     {
         fOpen = true;
-        aStream << "title=" << aTitle << std::endl;
+        aStream << "title=" << aTitle.c_str() << std::endl;
     }
     return fOpen;
 }
