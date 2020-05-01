@@ -38,6 +38,26 @@ QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const Q
 }
 
 
+void ActionList::deleteAction(git::Cmd::eCmd aCmd)
+{
+    if (mActionList.count(aCmd))
+    {
+        delete mActionList[aCmd];
+        mActionList.erase(aCmd);
+    }
+}
+
+git::Cmd::eCmd ActionList::getNextCustomID()
+{
+    for (int fNewCmd = Cmd::CustomCommand; fNewCmd < Cmd::NonGitCommands; ++fNewCmd)
+    {
+        if (mActionList.count(fNewCmd)) continue;
+        return static_cast<Cmd::eCmd>(fNewCmd);
+    }
+    return Cmd::Invalid;
+}
+
+
 void ActionList::initActionIcons()
 {
     std::map<Cmd::eCmd, std::string> fActionIcons;
@@ -65,14 +85,13 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-desktop-accessibility.png";
     for (const auto& fIconPath: fActionIcons )
     {
-        getAction(fIconPath.first)->setIcon(QIcon(fIconPath.second.c_str()));
         setIconPath(static_cast<Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
     }
 }
 
 
 
-void ActionList::fillToolbar(QToolBar& aToolbar, const std::vector<git::Cmd::eCmd>& aItems)
+void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems)
 {
     for (auto fCmd : aItems)
     {
@@ -87,7 +106,7 @@ void ActionList::fillToolbar(QToolBar& aToolbar, const std::vector<git::Cmd::eCm
     }
 }
 
-void ActionList::fillContextMenue(QMenu& aMenu, const std::vector<Cmd::eCmd>& aItems)
+void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems)
 {
     for (auto fCmd : aItems)
     {
@@ -149,6 +168,11 @@ uint ActionList::getCustomCommandPostAction(Cmd::eCmd aCmd)
 
 void ActionList::setIconPath(Cmd::eCmd aCmd, const QString& aPath)
 {
+    QAction* fAction = getAction(aCmd);
+    if (fAction)
+    {
+        fAction->setIcon(QIcon(aPath));
+    }
     setDataVariant(aCmd, Data::IconPath, QVariant(aPath));
 }
 
@@ -162,19 +186,22 @@ QString ActionList::getIconPath(Cmd::eCmd aCmd)
     return "";
 }
 
-void ActionList::setModified(Cmd::eCmd aCmd, bool aMod)
+void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, bool aSet)
 {
-    setDataVariant(aCmd, Data::Modified, QVariant(aMod));
+    uint fFlags = getFlags(aCmd);
+    if (aSet) fFlags |=  aFlag;
+    else      fFlags &= ~aFlag;
+    setDataVariant(aCmd, Data::Flags, QVariant(fFlags));
 }
 
-bool ActionList::isModified(Cmd::eCmd aCmd)
+uint ActionList::getFlags(Cmd::eCmd aCmd)
 {
-    QVariant fVariant = getDataVariant(aCmd, Data::Modified);
+    QVariant fVariant = getDataVariant(aCmd, Data::Flags);
     if (fVariant.isValid())
     {
-        return fVariant.toBool();
+        return fVariant.toUInt();
     }
-    return false;
+    return 0;
 }
 
 void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data aData, const QVariant& aVariant)

@@ -104,6 +104,7 @@ void Logger::setSeverity(std::uint32_t aFlag, bool aSet)
 {
     if (aSet)
     {
+        aFlag &= ~to_file;
         mSeverity |= aFlag;
     }
     else

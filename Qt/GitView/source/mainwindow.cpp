@@ -68,6 +68,7 @@ const QString sID("ID");
 const QString sName("Name");
 const QString sCustomMessageBoxText("MessageBoxText");
 const QString sCustomCommandPostAction("PostAction");
+const QString sFlags("Flags");
 const QString sIconPath("IconPath");
 const QString sShortcut("Shortcut");
 const QString sModified("Modified");
@@ -109,6 +110,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Interactive);
     ui->treeSource->header()->setStretchLastSection(false);
 
+    ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    ui->treeHistory->setVisible(false);
+    ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
@@ -127,13 +132,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.beginGroup(config::sGroupLogging);
     QString fSeverity;
     LOAD_STR(fSettings, fSeverity, toString);
-    std::uint32_t fSeverityValue = fSeverity.toInt(0, 2);
+    std::uint32_t fSeverityValue = fSeverity.toLong(0, 2);
     Logger::setSeverity(0xffff, false);
     Logger::setSeverity(fSeverityValue, true);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
-    ui->treeHistory->setVisible(false);
 
     int fItemCount = fSettings.beginReadArray(config::sSourcePath);
     for (int fItem = 0; fItem < fItemCount; ++fItem)
@@ -154,13 +158,36 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
 
+    initContextMenuActions();
+
+    fItemCount = fSettings.beginReadArray(config::sCommands);
+    for (int fItem = 0; fItem < fItemCount; ++fItem)
+    {
+        fSettings.setArrayIndex(fItem);
+        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
+        auto* fAction = mActions.getAction(fCmd);
+        if (!fAction)
+        {
+            fAction = mActions.createAction(fCmd, "new", "git");
+        }
+        fAction->setText(fSettings.value(config::sName).toString());
+        fAction->setStatusTip(fSettings.value(config::sCommand).toString());
+        fAction->setIcon(QIcon(fSettings.value(config::sIconPath).toString()));
+        fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
+        uint fFlags = fSettings.value(config::sFlags).toUInt();
+        if (fFlags & ActionList::Custom)
+        {
+            connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+        }
+        mActions.setFlags(fCmd, fFlags);
+        mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
+        mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+    }
+    fSettings.endArray();
     fSettings.endGroup();
 
-    ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    initContextMenuActions();
     mActions.initActionIcons();
+
 
     for (auto fToolbar : Cmd::mToolbars)
     {
@@ -169,6 +196,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         ui->horizontalLayoutTool->addWidget(pTB);
     }
 
+    TRACE(Logger::info, "%s Started", windowTitle());
 }
 
 MainWindow::~MainWindow()
@@ -214,9 +242,10 @@ MainWindow::~MainWindow()
 
         for (auto fItem : mActions.getList())
         {
-            if (   fItem.first >= Cmd::FirstGitCommand
-                && fItem.first <= Cmd::LastGitCommand
-                && mActions.isModified(static_cast<Cmd::eCmd>(fItem.first)))
+            Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
+
+            if (   fItem.first >= Cmd::FirstGitCommand && fItem.first <= Cmd::LastGitCommand
+                && mActions.getFlags(fCmd) & ActionList::Modified)
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
@@ -227,9 +256,10 @@ MainWindow::~MainWindow()
                     fSettings.setValue(config::sName, fAction->text());
                     fSettings.setValue(config::sCommand, fCommand);
                     fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
-                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(fItem.first)));
-                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(static_cast<Cmd::eCmd>(fItem.first)));
-                    fSettings.setValue(config::sIconPath, mActions.getIconPath(static_cast<Cmd::eCmd>(fItem.first)));
+                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
+                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
+                    fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
+                    fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
                 }
             }
         }
@@ -239,7 +269,9 @@ MainWindow::~MainWindow()
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupLogging);
-    QString fSeverity = QString::number(Logger::getSeverity(), 2);
+    QString fSeverHlp = "_fsc____acewnidt";
+    STORE_STR(fSettings, fSeverHlp);
+    QString fSeverity = QString::number(Logger::getSeverity()|Logger::highest, 2);
     STORE_STR(fSettings, fSeverity);
 
     fSettings.endGroup();
@@ -1230,20 +1262,16 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
 
-
-//    connect(mActions.createAction(fID, fName, fCommand), SIGNAL(triggered()), this, SLOT(on_custom_command()));
-//    mActions.setCustomCommandMessageBoxText(fID, fMessageBoxText);
-//    mActions.setCustomCommandPostAction(fID, fPostAction);
-
-    //    Commands\1\Command=git rm --cached %1
-    //    Commands\1\ID=4
-    //    Commands\1\MessageBoxText="Remove %1 from git repository;Do you want to remove \"%1\"?"
-    //    Commands\1\Name=Remove from git...
-    //    Commands\1\PostAction=1
-    //    Commands\size=1
-
+    for (auto fAction : mActions.getList())
+    {
+        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::BuiltIn);
+    }
 }
 
+void MainWindow::initCustomAction(QAction* fAction)
+{
+    connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+}
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
@@ -1286,6 +1314,7 @@ void MainWindow::clearHistoryTree()
 void MainWindow::performCustomGitActionSettings()
 {
     CustomGitActions fCustomGitActions(mActions);
+    connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     fCustomGitActions.exec();
 }
 

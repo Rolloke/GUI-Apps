@@ -62,7 +62,8 @@ private Q_SLOTS:
     void perform_custom_command();
     void expand_tree_items();
     void collapse_tree_items();
-
+public Q_SLOTS:
+    void initCustomAction(QAction* fAction);
 
 private:
 
