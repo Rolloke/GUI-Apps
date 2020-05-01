@@ -22,6 +22,8 @@ typedef boost::container::flat_map<int, QString> int2stringmap;
 #elif MAP_TYPE == 1
 typedef std::map<int, QString> int2stringmap;
 #endif
+
+
 struct Cmd
 {
     Cmd();
@@ -56,7 +58,8 @@ struct Cmd
         ClearHistory,
         CustomGitActionSettings,
         FirstGitCommand = GetStatusAll,
-        LastGitCommand  = NonGitCommands-1
+        LastGitCommand  = NonGitCommands-1,
+        Invalid = -1
 
     };
     enum eCustom
@@ -66,15 +69,17 @@ struct Cmd
         ParseHistoryText
     };
 
+    typedef std::vector<eCmd> tVector;
+
     static const QString& getCommand(eCmd);
 
-    static QString toString(const std::vector<Cmd::eCmd>& aItems);
-    static std::vector<Cmd::eCmd> fromString(const QString& aString);
+    static QString toString(const tVector& aItems);
+    static tVector fromString(const QString& aString);
 
-    static std::vector<eCmd> mContextMenuSourceTree;
-    static std::vector<eCmd> mContextMenuEmptySourceTree;
-    static std::vector<eCmd> mContextMenuHistoryTree;
-    static std::vector<std::vector<eCmd>> mToolbars;
+    static tVector mContextMenuSourceTree;
+    static tVector mContextMenuEmptySourceTree;
+    static tVector mContextMenuHistoryTree;
+    static std::vector<tVector> mToolbars;
 
 private:
     static int2stringmap mCommandMap;

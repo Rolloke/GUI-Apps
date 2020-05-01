@@ -51,5 +51,10 @@
         <file>resource/24X24/format-text-direction-rtl.png</file>
         <file>resource/24X24/format-text-direction-ltr.png</file>
         <file>resource/24X24/preferences-system.png</file>
+        <file>resource/24X24/window-close.png</file>
+        <file>resource/24X24/go-up.png</file>
+        <file>resource/24X24/go-previous.png</file>
+        <file>resource/24X24/go-next.png</file>
+        <file>resource/24X24/go-down.png</file>
     </qresource>
 </RCC>

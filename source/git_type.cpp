@@ -5,10 +5,10 @@ namespace git
 {
 
 int2stringmap Cmd::mCommandMap;
-std::vector<Cmd::eCmd> Cmd::mContextMenuSourceTree;
-std::vector<Cmd::eCmd> Cmd::mContextMenuEmptySourceTree;
-std::vector<Cmd::eCmd> Cmd::mContextMenuHistoryTree;
-std::vector<std::vector<Cmd::eCmd>> Cmd::mToolbars;
+Cmd::tVector Cmd::mContextMenuSourceTree;
+Cmd::tVector Cmd::mContextMenuEmptySourceTree;
+Cmd::tVector Cmd::mContextMenuHistoryTree;
+std::vector<Cmd::tVector> Cmd::mToolbars;
 
 Cmd::Cmd()
 {
@@ -39,7 +39,7 @@ Cmd::Cmd()
 }
 
 
-QString  Cmd::toString(const std::vector<Cmd::eCmd>& aItems)
+QString  Cmd::toString(const tVector& aItems)
 {
     QString fString = "|";
     for (auto fItem: aItems)
@@ -50,10 +50,10 @@ QString  Cmd::toString(const std::vector<Cmd::eCmd>& aItems)
     return fString;
 }
 
-std::vector<Cmd::eCmd> Cmd::fromString(const QString& aString)
+Cmd::tVector Cmd::fromString(const QString& aString)
 {
     QStringList fStrings = aString.split('|');
-    std::vector<Cmd::eCmd> fItems;
+    tVector fItems;
     for (auto fItem: fStrings)
     {
         if (fItem.size() == 0) continue;
