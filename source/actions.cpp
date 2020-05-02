@@ -82,7 +82,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
     fActionIcons[Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
     fActionIcons[Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
-    fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-desktop-accessibility.png";
+    fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-system.png";
     for (const auto& fIconPath: fActionIcons )
     {
         setIconPath(static_cast<Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
@@ -177,6 +177,21 @@ void ActionList::setIconPath(Cmd::eCmd aCmd, const QString& aPath)
 }
 
 QString ActionList::getIconPath(Cmd::eCmd aCmd)
+{
+    QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
+    if (fVariant.isValid())
+    {
+        return fVariant.toString();
+    }
+    return "";
+}
+
+void ActionList::setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn)
+{
+    setDataVariant(aCmd, Data::StagedCmdAddOn, QVariant(aCmdAddOn));
+}
+
+QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd)
 {
     QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
     if (fVariant.isValid())

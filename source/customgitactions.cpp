@@ -45,6 +45,10 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     {
         insertCmdAction(fItem, fRow);
     }
+    mListModelActions->insertRows(fRow, 1, QModelIndex());
+    mListModelActions->setData(mListModelActions->index(fRow, INT(ActionsTable::ID))  , git::Cmd::Separator, Qt::DisplayRole);
+    mListModelActions->setData(mListModelActions->index(fRow, INT(ActionsTable::Name)), "-- Separator --", Qt::EditRole);
+
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, INT(ActionsTable::ID)), QItemSelectionModel::SelectCurrent);
 
@@ -54,7 +58,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->tableViewVarious->setColumnWidth(0, fWidth);
 
     enableButtons(0);
-    initListIcons();
+    on_comboBoxVarious_currentIndexChanged(INT(VariousIndex::Icons));
 }
 
 CustomGitActions::~CustomGitActions()
@@ -73,29 +77,31 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
         {
             if (aRow == -1) aRow = mListModelActions->rowCount();
             mListModelActions->insertRows(aRow, 1, QModelIndex());
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::ID)), aItem.first, Qt::DisplayRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Command)), fCommand, Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Name)), fAction->text(), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Shortcut)), fAction->shortcut().toString(), Qt::EditRole);
+            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::ID))        , aItem.first, Qt::DisplayRole);
+            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Command))   , fCommand, Qt::EditRole);
+            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Name))      , fAction->toolTip(), Qt::EditRole);
+            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Shortcut))  , fAction->shortcut().toString(), Qt::EditRole);
             mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::MsgBoxText)), mActionList.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
             mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::PostAction)), mActionList.getCustomCommandPostAction(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Icon)), QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
+            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Icon))      , QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
             ++aRow;
         }
     }
 }
 
-void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int index)
+void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
 {
     const std::vector<QString> fHeader = { tr(""), tr("Context Menu Source"), tr("Context Menu Empty Source"), tr("Context Menu History"), tr("Toolbar 1"), tr("Toolbar 2") };
-    switch (static_cast<VariousIndex>(index))
+    switch (static_cast<VariousIndex>(aIndex))
     {
         case VariousIndex::Icons:
             initListIcons();
+            ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
             break;
         case VariousIndex::MenuSrcTree: case VariousIndex::MenuEmptySrcTree: case VariousIndex::MenuHistoryTree:
         case VariousIndex::Toolbar1: case VariousIndex::Toolbar2:
-            initMenuList(getCmdVector(static_cast<VariousIndex>(index)), fHeader[index]);
+            ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(fHeader[aIndex]));
+            initMenuList(getCmdVector(static_cast<VariousIndex>(aIndex)), fHeader[aIndex]);
             break;
         default:
             break;
@@ -155,7 +161,7 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                     fFlag = ActionList::Modified;
                    break;
                 case ActionsTable::Name:
-                    fAction->setText(fText);
+                    fAction->setToolTip(fText);
                     fFlag = ActionList::Modified;
                    break;
                 case ActionsTable::PostAction:

@@ -49,8 +49,9 @@ using namespace git;
 // TODO: Änderungen vom Remote Repository abholen
 // git fetch pi@RaspiLAN:git.repository
 
-// TODO git status (Zugehörigkeit) einer Datei erkennen
-// TODO: Datei(en) oder Verzeichnis(se) Änderungen auschecken
+// TODO: CustomGitActionSettings bugfixing icon path to store is wrong
+
+// TODO: branch handling
 // TODO: 1.4.10.2 Zweig erstellen
 
 namespace config
@@ -159,6 +160,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
 
     initContextMenuActions();
+    mActions.initActionIcons();
 
     fItemCount = fSettings.beginReadArray(config::sCommands);
     for (int fItem = 0; fItem < fItemCount; ++fItem)
@@ -171,8 +173,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             fAction = mActions.createAction(fCmd, "new", "git");
         }
         fAction->setText(fSettings.value(config::sName).toString());
+        fAction->setToolTip(fSettings.value(config::sName).toString());
         fAction->setStatusTip(fSettings.value(config::sCommand).toString());
-        fAction->setIcon(QIcon(fSettings.value(config::sIconPath).toString()));
         fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
         uint fFlags = fSettings.value(config::sFlags).toUInt();
         if (fFlags & ActionList::Custom)
@@ -180,13 +182,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
         }
         mActions.setFlags(fCmd, fFlags);
+        mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
         mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
         mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
     }
     fSettings.endArray();
     fSettings.endGroup();
-
-    mActions.initActionIcons();
 
 
     for (auto fToolbar : Cmd::mToolbars)
@@ -253,7 +254,7 @@ MainWindow::~MainWindow()
                 {
                     fSettings.setArrayIndex(fIndex++);
                     fSettings.setValue(config::sID, fItem.first);
-                    fSettings.setValue(config::sName, fAction->text());
+                    fSettings.setValue(config::sName, fAction->toolTip());
                     fSettings.setValue(config::sCommand, fCommand);
                     fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
                     fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
@@ -1180,7 +1181,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
 {
     QString fText;
 //    if (aColumn == INT(History::Column::Text))
-//    {
+    {
         for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
         {
             fText.append(History::name(static_cast<History::Entry>(fRole)));
@@ -1188,7 +1189,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
             fText.append(aItem->data(INT(History::Column::Commit), fRole).toString());
             fText.append(getLineFeed());
         }
-//    }
+    }
 //    else
 //    {
 //        QString fGitCmd = "git show ";
@@ -1210,18 +1211,19 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
 
 void MainWindow::initContextMenuActions()
 {
-    // TODO: create the necessary actions, slots and enumerations for recognition
     connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
+    mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
     connect(mActions.createAction(Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
-    connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)")        , Cmd::getCommand(Cmd::Add))    , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
 
-    connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)")      , Cmd::getCommand(Cmd::Unstage)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
 
@@ -1376,7 +1378,15 @@ void MainWindow::perform_custom_command()
     {
         QAction *fAction = qobject_cast<QAction *>(sender());
         QVariantList fVariantList = fAction->data().toList();
-        QString fMessageBoxText = fVariantList[0].toString();
+        QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
+        QString fGitCommand = fAction->statusTip();
+        QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
+        Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+
+        if (fStagedCmdAddOn.size())
+        {
+            fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fType.is(Type::GitStaged) ? fStagedCmdAddOn : "%1");
+        }
 
         if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
         {
@@ -1404,17 +1414,17 @@ void MainWindow::perform_custom_command()
             auto fResult = fSaveRequest.exec();
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
             {
-                performGitCmd(fAction->statusTip());
+                performGitCmd(fGitCommand);
             }
         }
         else
         {
-            performGitCmd(fAction->statusTip());
+            performGitCmd(fGitCommand);
         }
 
         if (fVariantList.size() > 1)
         {
-            switch (fVariantList[1].toUInt())
+            switch (fVariantList[INT(ActionList::Data::Action)].toUInt())
             {
             case Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuItem);
@@ -1441,13 +1451,9 @@ void MainWindow::expand_tree_items()
     {
         ui->treeHistory->expandAll();
     }
-    else if (ui->treeSource->hasFocus())
-    {
-        ui->treeSource->expandAll();
-    }
     else
     {
-        ui->statusBar->showMessage("Select tree view to set focus");
+        ui->treeSource->expandAll();
     }
 }
 
@@ -1457,12 +1463,8 @@ void MainWindow::collapse_tree_items()
     {
         ui->treeHistory->collapseAll();
     }
-    else if (ui->treeSource->hasFocus())
-    {
-        ui->treeSource->collapseAll();
-    }
     else
     {
-        ui->statusBar->showMessage("Select tree view to set focus");
+        ui->treeSource->collapseAll();
     }
 }

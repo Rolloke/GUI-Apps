@@ -12,9 +12,9 @@ class QMenu;
 
 class ActionList
 {
-    enum class Data { MsgBoxText, Action, IconPath, Flags, ListSize };
 
 public:
+    enum class Data { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, ListSize };
 
 #if MAP_TYPE == 0
     typedef boost::container::flat_map<int, QAction*> tActionMap;
@@ -39,6 +39,8 @@ public:
     QString  getIconPath(git::Cmd::eCmd aCmd);
     void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, bool aSet = true);
     uint     getFlags(git::Cmd::eCmd aCmd);
+    void     setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
+    QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd);
 
     void     initActionIcons();
     git::Cmd::eCmd getNextCustomID();
