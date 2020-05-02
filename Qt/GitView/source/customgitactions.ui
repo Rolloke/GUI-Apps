@@ -6,209 +6,252 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>905</width>
-    <height>443</height>
+    <width>906</width>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Settings for custom git actions</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>710</x>
-     <y>400</y>
-     <width>181</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableViewActions">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>621</width>
-     <height>371</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableViewVarious">
-   <property name="geometry">
-    <rect>
-     <x>695</x>
-     <y>50</y>
-     <width>201</width>
-     <height>331</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBoxVarious">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>10</y>
-     <width>201</width>
-     <height>33</height>
-    </rect>
-   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <property name="text">
-     <string>Icons</string>
-    </property>
+    <widget class="QTableView" name="tableViewActions">
+     <property name="cornerButtonEnabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+    </widget>
    </item>
    <item>
-    <property name="text">
-     <string>Menu Source Tree</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnToLeft">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/go-previous.png</normaloff>:/resource/24X24/go-previous.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnToRight">
+       <property name="toolTip">
+        <string>Add command to menue or toolbar</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/go-next.png</normaloff>:/resource/24X24/go-next.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnMoveUp">
+       <property name="toolTip">
+        <string>Move selected menue or toolbar item</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/go-up.png</normaloff>:/resource/24X24/go-up.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnMoveDown">
+       <property name="toolTip">
+        <string>Move selected menue or toolbar item</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/go-down.png</normaloff>:/resource/24X24/go-down.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="toolTip">
+        <string>Add curstom git command entry</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/list-add.png</normaloff>:/resource/24X24/list-add.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnDelete">
+       <property name="toolTip">
+        <string>remove custom git command</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/list-remove.png</normaloff>:/resource/24X24/list-remove.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <property name="text">
-     <string>Menu Empty Source Tree</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QComboBox" name="comboBoxVarious">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>Icons</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Menu Source Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Menu Empty Source Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Menu History Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Toolbar 1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Toolbar 2</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableView" name="tableViewVarious">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item>
-    <property name="text">
-     <string>Menu History Tree</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Toolbar 1</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Toolbar 2</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QPushButton" name="btnToLeft">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>80</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/go-previous.png</normaloff>:/resource/24X24/go-previous.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnToRight">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>110</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Add command to menue or toolbar</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/go-next.png</normaloff>:/resource/24X24/go-next.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnMoveUp">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>180</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Move selected menue or toolbar item</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/go-up.png</normaloff>:/resource/24X24/go-up.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnMoveDown">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>210</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Move selected menue or toolbar item</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/go-down.png</normaloff>:/resource/24X24/go-down.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnAdd">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>290</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>Add curstom git command entry</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/list-add.png</normaloff>:/resource/24X24/list-add.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnDelete">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>320</y>
-     <width>51</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string>remove custom git command</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/resource/24X24/list-remove.png</normaloff>:/resource/24X24/list-remove.png</iconset>
-   </property>
-  </widget>
+  </layout>
  </widget>
  <resources>
   <include location="resource.qrc"/>
