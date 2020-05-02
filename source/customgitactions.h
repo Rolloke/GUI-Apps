@@ -19,7 +19,7 @@ class CustomGitActions : public QDialog
 
     enum class ActionsTable
     {
-        ID, Command, Name, Shortcut, MsgBoxText, PostAction, Icon, Last
+        ID, Icon, Command, Name, Shortcut, PostAction, MsgBoxText, Last
     };
 
     enum class VariousIndex

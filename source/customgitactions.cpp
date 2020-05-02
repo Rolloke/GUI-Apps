@@ -19,8 +19,8 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->setupUi(this);
 
 
-    QStringList      fColumnName  = { tr("ID"), tr("Command"), tr("Name"), tr("Shortcut"), tr("Message box text"), tr("PA"), tr("Icon")};
-    std::vector<int> fColumnWidth = {     42  ,       140    ,     140   ,        65     ,          140          ,    42   ,      42   };
+    QStringList      fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"), tr("PA"), tr("Message box text")};
+    std::vector<int> fColumnWidth = {     42  ,      42   ,       150    ,     150   ,        65     ,    42   ,          150          };
 
     mListModelActions = new QStandardItemModel(0, INT(ActionsTable::Last), this);
     connect(mListModelActions, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(on_ActionTableListItemChanged(QStandardItem*)));
@@ -29,8 +29,8 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
 
     int fWidth = ui->tableViewActions->rect().width();
     int fItemWidth = 0;
-    std::for_each(fColumnWidth.begin(), fColumnWidth.end(), [&fItemWidth](int fItem ) { fItemWidth+= fItem; });
-    fColumnWidth[INT(ActionsTable::MsgBoxText)] = fWidth - (fItemWidth - fColumnWidth[INT(ActionsTable::MsgBoxText)] + 40);
+    std::for_each(fColumnWidth.begin(), fColumnWidth.end()-1, [&fItemWidth](int fItem ) { fItemWidth+= fItem; });
+    fColumnWidth[INT(ActionsTable::MsgBoxText)] = 70 + fWidth - fItemWidth;
 
     for (int fColumn = 0; fColumn<INT(ActionsTable::Last); ++fColumn)
     {
@@ -68,8 +68,7 @@ CustomGitActions::~CustomGitActions()
 
 void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow)
 {
-    if (   aItem.first >= Cmd::FirstGitCommand
-        && aItem.first <= Cmd::LastGitCommand)
+//    if (   aItem.first >= Cmd::FirstGitCommand && aItem.first <= Cmd::LastGitCommand)
     {
         const QAction* fAction = aItem.second;
         QString fCommand = fAction->statusTip();
@@ -305,7 +304,7 @@ void CustomGitActions::on_btnDelete_clicked()
 {
     int fRow = ui->tableViewActions->selectionModel()->currentIndex().row();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, INT(ActionsTable::ID))).toInt());
-    if (! (mActionList.getFlags(fCmd) & ActionList::BuiltIn))
+    if (fCmd != Cmd::Separator && !(mActionList.getFlags(fCmd) & ActionList::BuiltIn))
     {
         mListModelActions->removeRow(fRow);
         mActionList.deleteAction(fCmd);
