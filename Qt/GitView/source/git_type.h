@@ -85,8 +85,6 @@ private:
     static int2stringmap mCommandMap;
 };
 
-// TODO: change
-
 struct Type
 {
     enum TypeFlags

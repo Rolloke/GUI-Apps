@@ -99,7 +99,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string>Apply selected icon in right view to selected command entry in left view</string>
+    <string/>
    </property>
    <property name="text">
     <string/>

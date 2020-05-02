@@ -35,7 +35,6 @@ Cmd::Cmd()
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
     mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push });
-    // TODO: CustomGitActionSettings
 }
 
 
