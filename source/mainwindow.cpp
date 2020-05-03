@@ -856,7 +856,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
 
 void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, stringt2typemap& aFiles)
 {
-    auto fLines = aStatus.split(getLineFeed());
+    auto fLines = aStatus.split("\n");
 
     for (QString fLine : fLines)
     {
@@ -1003,8 +1003,8 @@ void MainWindow::on_btnCloseText_clicked()
     if (ui->btnStoreText->isEnabled() && ui->labelFilePath->text().length() > 0)
     {
         QMessageBox fSaveRequest;
-        fSaveRequest.setText("The document has been modified.");
-        fSaveRequest.setInformativeText("Do you want to save your changes?");
+        fSaveRequest.setText(tr("The document has been modified."));
+        fSaveRequest.setInformativeText(tr("Do you want to save your changes?"));
         fSaveRequest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         fSaveRequest.setDefaultButton(QMessageBox::Save);
         switch (fSaveRequest.exec())
