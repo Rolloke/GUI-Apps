@@ -117,7 +117,7 @@
      <item>
       <widget class="QPushButton" name="btnDelete">
        <property name="toolTip">
-        <string>remove custom git command</string>
+        <string>Remove custom git command</string>
        </property>
        <property name="text">
         <string/>

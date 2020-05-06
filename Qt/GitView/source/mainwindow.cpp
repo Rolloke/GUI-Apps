@@ -245,8 +245,7 @@ MainWindow::~MainWindow()
         {
             Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
 
-            if (   fItem.first >= Cmd::FirstGitCommand && fItem.first <= Cmd::LastGitCommand
-                && mActions.getFlags(fCmd) & ActionList::Modified)
+            if (mActions.getFlags(fCmd) & ActionList::Modified)
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
@@ -1326,17 +1325,23 @@ void  MainWindow::call_git_commit()
 
     if (fCommitMsg.exec() == QDialog::Accepted)
     {
-        getSelectedTreeItem();
         QString fMessageText = fCommitMsg.getMessageText();
         std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
         QString fCommitCommand = tr(fCommand.c_str()).arg(fMessageText).arg("%1");
         if (fCommitMsg.getAutoStage())
         {
+            getSelectedTreeItem();
             performGitCmd(Cmd::getCommand(Cmd::Add));
+            performGitCmd(fCommitCommand);
+            updateTreeItemStatus(mContextMenuItem);
+            mContextMenuItem = nullptr;
         }
-        performGitCmd(fCommitCommand);
-        updateTreeItemStatus(mContextMenuItem);
-        mContextMenuItem = nullptr;
+        else
+        {
+            QString fResultStr;
+            execute(fCommitCommand, fResultStr);
+            ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
+        }
     }
 }
 
@@ -1373,13 +1378,19 @@ void MainWindow::call_git_move_rename()
 
 void MainWindow::perform_custom_command()
 {
+    QAction *fAction = qobject_cast<QAction *>(sender());
+    QString fGitCommand = fAction->statusTip();
     getSelectedTreeItem();
-    if (mContextMenuItem)
+    if (!fGitCommand.contains("%1"))
     {
-        QAction *fAction = qobject_cast<QAction *>(sender());
+        QString fResultStr;
+        execute(fGitCommand, fResultStr);
+        ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
+    }
+    else if (mContextMenuItem)
+    {
         QVariantList fVariantList = fAction->data().toList();
         QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
-        QString fGitCommand = fAction->statusTip();
         QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
         Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
 
@@ -1422,17 +1433,14 @@ void MainWindow::perform_custom_command()
             performGitCmd(fGitCommand);
         }
 
-        if (fVariantList.size() > 1)
+        switch (fVariantList[INT(ActionList::Data::Action)].toUInt())
         {
-            switch (fVariantList[INT(ActionList::Data::Action)].toUInt())
-            {
-            case Cmd::UpdateItemStatus:
-                updateTreeItemStatus(mContextMenuItem);
-                break;
-            case Cmd::ParseHistoryText:
-                parseGitLogHistoryText();
-                break;
-            }
+        case Cmd::UpdateItemStatus:
+            updateTreeItemStatus(mContextMenuItem);
+            break;
+        case Cmd::ParseHistoryText:
+            parseGitLogHistoryText();
+            break;
         }
         mContextMenuItem = nullptr;
     }

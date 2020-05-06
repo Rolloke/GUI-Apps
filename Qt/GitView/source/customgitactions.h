@@ -5,6 +5,7 @@
 #include "actions.h"
 
 #include <QDialog>
+#include <QStandardItemModel>
 
 namespace Ui {
 class CustomGitActions;
@@ -16,11 +17,6 @@ class QStandardItem;
 class CustomGitActions : public QDialog
 {
     Q_OBJECT
-
-    enum class ActionsTable
-    {
-        ID, Icon, Command, Name, Shortcut, PostAction, MsgBoxText, Last
-    };
 
     enum class VariousIndex
     {
@@ -51,6 +47,7 @@ private Q_SLOTS:
     void on_tableViewActions_clicked(const QModelIndex &index);
     void on_tableViewVarious_clicked(const QModelIndex &index);
     void enableButtons(std::uint32_t aBtnFlag);
+    void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
 
 private:
     void initListIcons();
@@ -63,6 +60,27 @@ private:
     QAbstractItemModel* mListModelActions;
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
+};
+
+enum class ActionsTable
+{
+    ID, Icon, Command, Name, Shortcut, MsgBoxText, Last
+};
+
+class ActionItemModel : public QStandardItemModel
+{
+public:
+    ActionItemModel(int rows, int columns, QObject *parent = Q_NULLPTR);
+
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+};
+
+class VariousItemModel : public QStandardItemModel
+{
+public:
+    VariousItemModel(int rows, int columns, QObject *parent = Q_NULLPTR);
+
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
 };
 
 #endif // CUSTOMGITACTIONS_H
