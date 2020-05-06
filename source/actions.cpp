@@ -222,23 +222,29 @@ uint ActionList::getFlags(Cmd::eCmd aCmd)
 void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data aData, const QVariant& aVariant)
 {
     QAction* fAction = getAction(aCmd);
-    QVariantList fVariantList = fAction->data().toList();
-    int fData = INT(aData);
-    if (fData >= 0 && fData < INT(Data::ListSize))
+    if (fAction)
     {
-        fVariantList[fData] = aVariant;
+        QVariantList fVariantList = fAction->data().toList();
+        int fData = INT(aData);
+        if (fData >= 0 && fData < INT(Data::ListSize))
+        {
+            fVariantList[fData] = aVariant;
+        }
+        fAction->setData(fVariantList);
     }
-    fAction->setData(fVariantList);
 }
 
 QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data aData)
 {
     QAction* fAction = getAction(aCmd);
-    QVariantList fVariantList = fAction->data().toList();
-    int fData = INT(aData);
-    if (fData >= 0 && fData < INT(Data::ListSize))
+    if (fAction)
     {
-        return fVariantList[fData];
+        QVariantList fVariantList = fAction->data().toList();
+        int fData = INT(aData);
+        if (fData >= 0 && fData < INT(Data::ListSize))
+        {
+            return fVariantList[fData];
+        }
     }
     return QVariant();
 }

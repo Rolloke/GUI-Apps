@@ -5,6 +5,7 @@
 
 #include <QStandardItemModel>
 #include <QDir>
+#include <QMenu>
 
 using namespace git;
 
@@ -19,22 +20,23 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->setupUi(this);
 
 
-    QStringList      fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"), tr("PA"), tr("Message box text")};
-    std::vector<int> fColumnWidth = {     42  ,      42   ,       150    ,     150   ,        65     ,    42   ,          150          };
+    QStringList      fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"),  tr("Message box text")};
+    std::vector<int> fColumnWidth = {     42  ,      42   ,       200    ,     200   ,        65     ,           200          };
 
-    mListModelActions = new QStandardItemModel(0, INT(ActionsTable::Last), this);
+    mListModelActions = new ActionItemModel(0, INT(ActionsTable::Last), this);
     connect(mListModelActions, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(on_ActionTableListItemChanged(QStandardItem*)));
 
     ui->tableViewActions->setModel(mListModelActions);
+    ui->tableViewActions->setContextMenuPolicy(Qt::CustomContextMenu);
 
     int fWidth = ui->tableViewActions->rect().width();
     int fItemWidth = 0;
     std::for_each(fColumnWidth.begin(), fColumnWidth.end()-1, [&fItemWidth](int fItem ) { fItemWidth+= fItem; });
-    fColumnWidth[INT(ActionsTable::MsgBoxText)] = 70 + fWidth - fItemWidth;
+    fColumnWidth[INT(ActionsTable::MsgBoxText)] = fWidth - fItemWidth;
 
     for (int fColumn = 0; fColumn<INT(ActionsTable::Last); ++fColumn)
     {
-        mListModelActions->setHeaderData(fColumn, Qt::Horizontal, fColumnName[fColumn]);
+        mListModelActions->setHeaderData(fColumn, Qt::Horizontal, fColumnName[fColumn], Qt::DisplayRole);
         ui->tableViewActions->setColumnWidth(fColumn            , fColumnWidth[fColumn]);
     }
 
@@ -48,12 +50,13 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     mListModelActions->insertRows(fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, INT(ActionsTable::ID))  , git::Cmd::Separator, Qt::DisplayRole);
     mListModelActions->setData(mListModelActions->index(fRow, INT(ActionsTable::Name)), "-- Separator --", Qt::EditRole);
+    mListModelActions->flags(mListModelActions->index(fRow, INT(ActionsTable::Name))) &= ~Qt::ItemIsEditable;
 
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, INT(ActionsTable::ID)), QItemSelectionModel::SelectCurrent);
 
     fWidth = ui->tableViewVarious->rect().width();
-    mListModelVarious = new QStandardItemModel(0, 1, this);
+    mListModelVarious = new VariousItemModel(0, 1, this);
     ui->tableViewVarious->setModel(mListModelVarious);
     ui->tableViewVarious->setColumnWidth(0, fWidth);
 
@@ -68,23 +71,19 @@ CustomGitActions::~CustomGitActions()
 
 void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow)
 {
-//    if (   aItem.first >= Cmd::FirstGitCommand && aItem.first <= Cmd::LastGitCommand)
+    const QAction* fAction = aItem.second;
+    QString fCommand = fAction->statusTip();
+    if (fCommand.size())
     {
-        const QAction* fAction = aItem.second;
-        QString fCommand = fAction->statusTip();
-        if (fCommand.size())
-        {
-            if (aRow == -1) aRow = mListModelActions->rowCount();
-            mListModelActions->insertRows(aRow, 1, QModelIndex());
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::ID))        , aItem.first, Qt::DisplayRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Command))   , fCommand, Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Name))      , fAction->toolTip(), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Shortcut))  , fAction->shortcut().toString(), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::MsgBoxText)), mActionList.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::PostAction)), mActionList.getCustomCommandPostAction(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
-            mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Icon))      , QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
-            ++aRow;
-        }
+        if (aRow == -1) aRow = mListModelActions->rowCount();
+        mListModelActions->insertRows(aRow, 1, QModelIndex());
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::ID))        , aItem.first, Qt::DisplayRole);
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Command))   , fCommand, Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Name))      , fAction->toolTip(), Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Shortcut))  , fAction->shortcut().toString(), Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::MsgBoxText)), mActionList.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, INT(ActionsTable::Icon))      , QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
+        ++aRow;
     }
 }
 
@@ -163,10 +162,6 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                     fAction->setToolTip(fText);
                     fFlag = ActionList::Modified;
                    break;
-                case ActionsTable::PostAction:
-                    mActionList.setCustomCommandPostAction(fCmd, fText.toInt());
-                    fFlag = ActionList::Modified;
-                   break;
                 case ActionsTable::Shortcut:
                     fAction->setShortcut(QKeySequence(fText));
                     fFlag = ActionList::Modified;
@@ -215,7 +210,7 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
         if (fAction)
         {
-            mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), fAction->text(), Qt::EditRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), fAction->toolTip(), Qt::EditRole);
         }
         else
         {
@@ -230,8 +225,8 @@ void CustomGitActions::on_btnToLeft_clicked()
 {
     if (ui->comboBoxVarious->currentIndex() == INT(VariousIndex::Icons))
     {
-        int fIconRow   = ui->tableViewVarious->selectionModel()->currentIndex().row();
-        int fActionRow = ui->tableViewActions->selectionModel()->currentIndex().row();
+        int fIconRow   = ui->tableViewVarious->currentIndex().row();
+        int fActionRow = ui->tableViewActions->currentIndex().row();
         Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, INT(ActionsTable::ID))).toInt());
         QString fIconPath = mListModelVarious->data(mListModelVarious->index(fIconRow, 0), Qt::UserRole).toString();
         if (fIconPath.size())
@@ -242,7 +237,7 @@ void CustomGitActions::on_btnToLeft_clicked()
     }
     else
     {
-        int fIconRow   = ui->tableViewVarious->selectionModel()->currentIndex().row();
+        int fIconRow     = ui->tableViewVarious->currentIndex().row();
         auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
         fCmdVector.erase(fCmdVector.begin()+fIconRow);
         int fSelected = fCmdVector.size()-1;
@@ -254,7 +249,7 @@ void CustomGitActions::on_btnToLeft_clicked()
 
 void CustomGitActions::on_btnToRight_clicked()
 {
-    int fActionRow = ui->tableViewActions->selectionModel()->currentIndex().row();
+    int fActionRow = ui->tableViewActions->currentIndex().row();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, 0)).toInt());
     auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
@@ -266,7 +261,7 @@ void CustomGitActions::on_btnToRight_clicked()
 
 void CustomGitActions::on_btnMoveUp_clicked()
 {
-    int fRow      = ui->tableViewVarious->selectionModel()->currentIndex().row();
+    int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow-1;
     auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
@@ -277,7 +272,7 @@ void CustomGitActions::on_btnMoveUp_clicked()
 
 void CustomGitActions::on_btnMoveDown_clicked()
 {
-    int fRow      = ui->tableViewVarious->selectionModel()->currentIndex().row();
+    int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow+1;
     auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
@@ -302,7 +297,7 @@ void CustomGitActions::on_btnAdd_clicked()
 
 void CustomGitActions::on_btnDelete_clicked()
 {
-    int fRow = ui->tableViewActions->selectionModel()->currentIndex().row();
+    int fRow = ui->tableViewActions->currentIndex().row();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, INT(ActionsTable::ID))).toInt());
     if (fCmd != Cmd::Separator && !(mActionList.getFlags(fCmd) & ActionList::BuiltIn))
     {
@@ -362,4 +357,83 @@ void CustomGitActions::enableButtons(std::uint32_t aBtnFlag)
     ui->btnMoveDown->setEnabled((aBtnFlag&Btn::Down)   != 0);
     ui->btnToRight->setEnabled( (aBtnFlag&Btn::Right)  != 0);
     ui->btnToLeft->setEnabled(  (aBtnFlag&Btn::Left)   != 0);
+}
+
+void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu fMenu(this);
+
+    int fRow = ui->tableViewActions->currentIndex().row();
+    Cmd::eCmd fCmd   = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, INT(ActionsTable::ID))).toInt());
+
+    fMenu.addAction(mActionList.getAction(fCmd));
+
+    uint fPostAction = mActionList.getCustomCommandPostAction(fCmd);
+    QAction* fA_PostAction = 0;
+    if (fPostAction == 0 || fPostAction == 1)
+    {
+        fA_PostAction = fMenu.addAction(tr("Update item status after git command"));
+        fA_PostAction->setCheckable(true);
+        fA_PostAction->setChecked(fPostAction == Cmd::UpdateItemStatus);
+    }
+
+    uint fFlags      = mActionList.getFlags(fCmd);
+    QAction* fA_Modified = nullptr;
+    if (fFlags & ActionList::BuiltIn && fFlags & ActionList::Modified)
+    {
+         fA_Modified = fMenu.addAction(tr("Reset modifications"));
+         fA_Modified->setCheckable(true);
+         fA_Modified->setChecked(fFlags & ActionList::Modified);
+    }
+
+    fMenu.addAction(tr("Cancel"));
+
+    QAction* fSelected = fMenu.exec(mapToGlobal(pos));
+    if (fSelected)
+    {
+        if (fA_PostAction == fSelected)
+        {
+            mActionList.setCustomCommandPostAction(fCmd, fA_PostAction->isChecked() ? 1 : 0);
+            mActionList.setFlags(fCmd, ActionList::Modified, true);
+        }
+        if (fA_Modified == fSelected)
+        {
+            mActionList.setFlags(fCmd, ActionList::Modified, fA_Modified->isChecked());
+        }
+    }
+}
+
+ActionItemModel::ActionItemModel(int rows, int columns, QObject *parent) :
+    QStandardItemModel(rows, columns, parent)
+{
+}
+
+Qt::ItemFlags ActionItemModel::flags(const QModelIndex &index) const
+{
+    Qt::ItemFlags fFlags = QStandardItemModel::flags(index);
+    if (index.row() == rowCount() - 1)
+    {
+        fFlags &= ~Qt::ItemIsEditable;
+    }
+    switch (static_cast<ActionsTable>(index.column()))
+    {
+        case ActionsTable::ID:
+        case ActionsTable::Icon:
+            fFlags &= ~Qt::ItemIsEditable;
+            break;
+        default:break;
+    }
+    return  fFlags;
+}
+
+VariousItemModel::VariousItemModel(int rows, int columns, QObject *parent) :
+    QStandardItemModel(rows, columns, parent)
+{
+}
+
+Qt::ItemFlags VariousItemModel::flags(const QModelIndex &index) const
+{
+    Qt::ItemFlags fFlags = QStandardItemModel::flags(index);
+    fFlags &= ~Qt::ItemIsEditable;
+    return  fFlags;
 }
