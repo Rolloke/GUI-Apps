@@ -1349,12 +1349,14 @@ void  MainWindow::call_git_commit()
     {
         QString fMessageText = fCommitMsg.getMessageText();
         std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
-        QString fCommitCommand = tr(fCommand.c_str()).arg(fMessageText).arg("%1");
+        QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuItem)).arg(fMessageText);
         if (fCommitMsg.getAutoStage())
         {
             getSelectedTreeItem();
             performGitCmd(Cmd::getCommand(Cmd::Add));
-            performGitCmd(fCommitCommand);
+            QString fResultStr;
+            execute(fCommitCommand, fResultStr);
+            ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
             updateTreeItemStatus(mContextMenuItem);
             mContextMenuItem = nullptr;
         }
