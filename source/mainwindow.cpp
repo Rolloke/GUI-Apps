@@ -944,6 +944,23 @@ QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
     return fFileName;
 }
 
+QString MainWindow::getItemTopDirPath(QTreeWidgetItem* aItem)
+{
+    while (aItem && ui->treeSource->indexOfTopLevelItem(aItem) == -1)
+    {
+        aItem = aItem->parent();
+    }
+    if (aItem)
+    {
+        return aItem->text(INT(Column::FileName));
+    }
+    else if (ui->treeSource->topLevelItemCount())
+    {
+        return ui->treeSource->topLevelItem(0)->text(INT(Column::FileName));
+    }
+    return "";
+}
+
 // SLOTS
 
 void MainWindow::cancelCurrentWorkTask()
@@ -1139,7 +1156,6 @@ QString MainWindow::applyGitCmd(const QString& fSource, const QString& fGitCmd, 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 {
     QFileInfo fFileInfo(getItemFilePath(aItem));
-//test
 
     QDir fParent;
     if (fFileInfo.isDir()) fParent.setPath(fFileInfo.absoluteFilePath());
@@ -1210,13 +1226,16 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColu
 
 void MainWindow::initContextMenuActions()
 {
-    connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
+
+    connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
+    mActions.setCustomCommandPostAction(Cmd::ShowShortStatus, Cmd::UpdateItemStatus);
 
     connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
@@ -1243,7 +1262,10 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Commit         , tr("Commit...")), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
 
-    connect(mActions.createAction(Cmd::Push           , tr("Push")        , Cmd::getCommand(Cmd::Push))    , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Push           , tr("Push")        , Cmd::getCommand(Cmd::Push))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Pull           , tr("Push")        , Cmd::getCommand(Cmd::Pull))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::BranchList     , tr("List Branch") , Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
 
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename...")), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
@@ -1380,16 +1402,17 @@ void MainWindow::perform_custom_command()
 {
     QAction *fAction = qobject_cast<QAction *>(sender());
     QString fGitCommand = fAction->statusTip();
+    QVariantList fVariantList = fAction->data().toList();
     getSelectedTreeItem();
-    if (!fGitCommand.contains("%1"))
+    if (fGitCommand.contains("-C %1"))
     {
         QString fResultStr;
+        fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuItem));
         execute(fGitCommand, fResultStr);
         ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
     }
     else if (mContextMenuItem)
     {
-        QVariantList fVariantList = fAction->data().toList();
         QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
         QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
         Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
