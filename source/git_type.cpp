@@ -20,7 +20,7 @@ Cmd::Cmd()
     mCommandMap[Remove]          = "git rm --cached %1";
     mCommandMap[Add]             = "git add %1";
     mCommandMap[Unstage]         = "git reset HEAD %1";
-    mCommandMap[Commit]          = "git commit -m \"%1\" %2";
+    mCommandMap[Commit]          = "git -C %1 commit -m \"%2\"";
     mCommandMap[MoveOrRename]    = "git -C %1 mv %2 %3";
     mCommandMap[Restore]         = "git checkout %1";
     mCommandMap[History]         = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
