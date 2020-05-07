@@ -24,9 +24,11 @@ Cmd::Cmd()
     mCommandMap[MoveOrRename]    = "git -C %1 mv %2 %3";
     mCommandMap[Restore]         = "git checkout %1";
     mCommandMap[History]         = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
-    mCommandMap[Push]            = "git push";
-    mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
-    mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
+    mCommandMap[Push]            = "git -C %1 push";
+    mCommandMap[Pull]            = "git -C %1 push";
+    mCommandMap[BranchList]      = "git -C %1 branch -l";
+    mCommandMap[CallHistoryDiffTool]   = "git difftool %1 --no-prompt %2";
+    mCommandMap[ShowHistoryDifference] = "git diff %1 %2";
 
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};

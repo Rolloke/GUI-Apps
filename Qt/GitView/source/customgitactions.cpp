@@ -160,6 +160,7 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                    break;
                 case ActionsTable::Name:
                     fAction->setToolTip(fText);
+                    fAction->setText(fText);
                     fFlag = ActionList::Modified;
                    break;
                 case ActionsTable::Shortcut:
@@ -408,20 +409,25 @@ ActionItemModel::ActionItemModel(int rows, int columns, QObject *parent) :
 {
 }
 
-Qt::ItemFlags ActionItemModel::flags(const QModelIndex &index) const
+Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
 {
-    Qt::ItemFlags fFlags = QStandardItemModel::flags(index);
-    if (index.row() == rowCount() - 1)
+    Qt::ItemFlags fFlags = QStandardItemModel::flags(aIndex);
+
+    Cmd::eCmd fCmd   = static_cast<Cmd::eCmd>(data(index(aIndex.row(), INT(ActionsTable::ID))).toInt());
+    if (fCmd == Cmd::Separator)
     {
         fFlags &= ~Qt::ItemIsEditable;
     }
-    switch (static_cast<ActionsTable>(index.column()))
+    else
     {
-        case ActionsTable::ID:
-        case ActionsTable::Icon:
-            fFlags &= ~Qt::ItemIsEditable;
-            break;
-        default:break;
+        switch (static_cast<ActionsTable>(aIndex.column()))
+        {
+            case ActionsTable::ID:
+            case ActionsTable::Icon:
+                fFlags &= ~Qt::ItemIsEditable;
+                break;
+            default:break;
+        }
     }
     return  fFlags;
 }

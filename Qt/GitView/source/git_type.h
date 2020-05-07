@@ -42,6 +42,8 @@ struct Cmd
         Restore,
         History,
         Push,
+        Pull,
+        BranchList,
         ShowHistoryDifference,
         CallHistoryDiffTool,
         /// hint: add custom commands here
@@ -66,7 +68,8 @@ struct Cmd
     {
         DoNothing,
         UpdateItemStatus,
-        ParseHistoryText
+        ParseHistoryText,
+        ParseBranchListText,
     };
 
     typedef std::vector<eCmd> tVector;

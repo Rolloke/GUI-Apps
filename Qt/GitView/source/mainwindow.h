@@ -141,6 +141,7 @@ private:
     void     removeIgnoreMapLevel(int aLevel);
     bool     ignoreFile(const QFileInfo& aFileInfo);
     QString  getItemFilePath(QTreeWidgetItem* item);
+    QString  getItemTopDirPath(QTreeWidgetItem* item);
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
 
