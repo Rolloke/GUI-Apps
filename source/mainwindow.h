@@ -52,6 +52,8 @@ private Q_SLOTS:
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
+    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+
     void showOrHideHistory(bool checked);
     void clearHistoryTree();
     void performCustomGitActionSettings();
@@ -62,6 +64,7 @@ private Q_SLOTS:
     void perform_custom_command();
     void expand_tree_items();
     void collapse_tree_items();
+
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
 
@@ -147,11 +150,12 @@ private:
 
     void     initContextMenuActions();
 
-    void     performGitCmd(const QString& aCommand);
-    QString  applyGitCmd(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+    void     applyGitCommandToFileTree(const QString& aCommand);
+    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
+    void     parseBranchListText();
 
     Ui::MainWindow*       ui;
     QString               mGitCommand;

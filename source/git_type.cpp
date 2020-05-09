@@ -25,7 +25,7 @@ Cmd::Cmd()
     mCommandMap[Restore]         = "git checkout %1";
     mCommandMap[History]         = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
     mCommandMap[Push]            = "git -C %1 push";
-    mCommandMap[Pull]            = "git -C %1 push";
+    mCommandMap[Pull]            = "git -C %1 pull";
     mCommandMap[BranchList]      = "git -C %1 branch -l";
     mCommandMap[CallHistoryDiffTool]   = "git difftool %1 --no-prompt %2";
     mCommandMap[ShowHistoryDifference] = "git diff %1 %2";
@@ -36,7 +36,7 @@ Cmd::Cmd()
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
-    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Separator, CustomGitActionSettings });
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, Separator, BranchList, CustomGitActionSettings });
 }
 
 
