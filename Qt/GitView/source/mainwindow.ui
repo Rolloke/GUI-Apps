@@ -78,7 +78,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>33</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -190,6 +190,19 @@
            <number>0</number>
           </property>
           <item>
+           <widget class="QLabel" name="labelHeader">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>File/Text:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="labelFilePath">
             <property name="text">
              <string/>
@@ -204,13 +217,13 @@
             <property name="minimumSize">
              <size>
               <width>70</width>
-              <height>33</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>70</width>
-              <height>33</height>
+              <height>25</height>
              </size>
             </property>
             <property name="text">
@@ -226,13 +239,13 @@
             <property name="minimumSize">
              <size>
               <width>70</width>
-              <height>33</height>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>70</width>
-              <height>33</height>
+              <height>25</height>
              </size>
             </property>
             <property name="text">
@@ -263,16 +276,50 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QTreeWidget" name="treeHistory">
-            <property name="selectionMode">
-             <enum>QAbstractItemView::ExtendedSelection</enum>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="spacing">
+             <number>0</number>
             </property>
-            <column>
-             <property name="text">
-              <string>History</string>
-             </property>
-            </column>
-           </widget>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QTreeWidget" name="treeHistory">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>History</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="treeBranches">
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>Branch</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QTextBrowser" name="textBrowser">

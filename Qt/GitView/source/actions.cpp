@@ -73,6 +73,8 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::MoveOrRename]            = "://resource/24X24/format-text-direction-ltr.png";
     fActionIcons[Cmd::Restore]                 = "://resource/24X24/edit-redo-rtl.png";
     fActionIcons[Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
+    fActionIcons[Cmd::Pull]                    = "://resource/24X24/view-sort-ascending.png";
+    fActionIcons[Cmd::BranchList]              = "://resource/24X24/open-menu.png";
     fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 

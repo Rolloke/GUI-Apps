@@ -39,7 +39,7 @@ struct Cmd
         Unstage,
         Commit,
         MoveOrRename,
-        Restore,
+        Checkout,
         History,
         Push,
         Pull,
@@ -61,8 +61,8 @@ struct Cmd
         CustomGitActionSettings,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
-        Invalid = -1
-
+        Invalid = -1,
+        Restore = Checkout
     };
     enum eCustom
     {
