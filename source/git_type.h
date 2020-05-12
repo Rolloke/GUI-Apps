@@ -44,6 +44,8 @@ struct Cmd
         Push,
         Pull,
         BranchList,
+        BranchDelete,
+        Show,
         ShowHistoryDifference,
         CallHistoryDiffTool,
         /// hint: add custom commands here
@@ -59,6 +61,7 @@ struct Cmd
         ShowHideHistoryTree,
         ClearHistory,
         CustomGitActionSettings,
+        DeleteSelectedTreeEntry,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
@@ -82,6 +85,7 @@ struct Cmd
     static tVector mContextMenuSourceTree;
     static tVector mContextMenuEmptySourceTree;
     static tVector mContextMenuHistoryTree;
+    static tVector mContextMenuBranchTree;
     static std::vector<tVector> mToolbars;
 
 private:
@@ -128,6 +132,7 @@ struct Type
     void add(TypeFlags aType);
     void remove(TypeFlags aType);
     bool is(TypeFlags aType) const;
+    QString getStates();
 
     static const char* name(TypeFlags aType);
     static TypeFlags   translate(const QString& fIdentifier);

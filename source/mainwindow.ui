@@ -308,7 +308,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeWidget" name="treeBranches">
+             <widget class="QBranchTreeWidget" name="treeBranches">
               <property name="sortingEnabled">
                <bool>true</bool>
               </property>
@@ -425,6 +425,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QBranchTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qbranchtreewidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -28,32 +28,32 @@ public:
 
     ~ActionList();
 
-    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand="");
+    QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand="", QObject*aParent=nullptr);
     void     deleteAction(git::Cmd::eCmd aCmd);
-    QAction* getAction(git::Cmd::eCmd aCmd);
+    QAction* getAction(git::Cmd::eCmd aCmd) const ;
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
-    QString  getCustomCommandMessageBoxText(git::Cmd::eCmd aCmd);
+    QString  getCustomCommandMessageBoxText(git::Cmd::eCmd aCmd) const ;
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);
-    uint     getCustomCommandPostAction(git::Cmd::eCmd aCmd);
+    uint     getCustomCommandPostAction(git::Cmd::eCmd aCmd) const;
     void     setIconPath(git::Cmd::eCmd aCmd, const QString& aPath);
-    QString  getIconPath(git::Cmd::eCmd aCmd);
+    QString  getIconPath(git::Cmd::eCmd aCmd) const;
     void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, bool aSet = true);
-    uint     getFlags(git::Cmd::eCmd aCmd);
+    uint     getFlags(git::Cmd::eCmd aCmd) const;
     void     setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
-    QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd);
+    QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd) const;
 
     void     initActionIcons();
-    git::Cmd::eCmd getNextCustomID();
+    git::Cmd::eCmd getNextCustomID() const;
 
-    void     fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);
-    void     fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems);
+    void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems) const;
+    void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
     const tActionMap getList() { return mActionList; }
 
     static const QString sNoCustomCommandMessageBox;
 
 private:
     void setDataVariant(git::Cmd::eCmd aCmd, Data aData, const QVariant& aVariant);
-    QVariant getDataVariant(git::Cmd::eCmd aCmd, Data aData);
+    QVariant getDataVariant(git::Cmd::eCmd aCmd, Data aData) const;
 
     tActionMap mActionList;
     QObject*   mParent;

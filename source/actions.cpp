@@ -21,9 +21,13 @@ ActionList::~ActionList()
     }
 }
 
-QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand)
+QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand, QObject*aParent)
 {
-    QAction *fNewAction = new QAction(aName, mParent);
+    if (aParent == nullptr)
+    {
+        aParent = mParent;
+    }
+    QAction *fNewAction = new QAction(aName, aParent);
     mActionList[aCmd] = fNewAction;
     fNewAction->setStatusTip(aGitCommand);
     fNewAction->setToolTip(aName);
@@ -47,7 +51,7 @@ void ActionList::deleteAction(git::Cmd::eCmd aCmd)
     }
 }
 
-git::Cmd::eCmd ActionList::getNextCustomID()
+git::Cmd::eCmd ActionList::getNextCustomID() const
 {
     for (int fNewCmd = Cmd::CustomCommand; fNewCmd < Cmd::NonGitCommands; ++fNewCmd)
     {
@@ -75,6 +79,8 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
     fActionIcons[Cmd::Pull]                    = "://resource/24X24/view-sort-ascending.png";
     fActionIcons[Cmd::BranchList]              = "://resource/24X24/open-menu.png";
+    fActionIcons[Cmd::BranchDelete]            = "://resource/24X24/edit-delete.png";
+    fActionIcons[Cmd::Show]                    = "://resource/24X24/edit-find.png";
     fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 
@@ -84,6 +90,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
     fActionIcons[Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
     fActionIcons[Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
+    fActionIcons[Cmd::DeleteSelectedTreeEntry] = "://resource/24X24/edit-delete.png";
     fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-system.png";
     for (const auto& fIconPath: fActionIcons )
     {
@@ -93,7 +100,7 @@ void ActionList::initActionIcons()
 
 
 
-void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems)
+void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) const
 {
     for (auto fCmd : aItems)
     {
@@ -108,7 +115,7 @@ void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems)
     }
 }
 
-void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems)
+void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems) const
 {
     for (auto fCmd : aItems)
     {
@@ -124,7 +131,7 @@ void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems)
 }
 
 
-QAction* ActionList::getAction(Cmd::eCmd aCmd)
+QAction* ActionList::getAction(Cmd::eCmd aCmd) const
 {
     auto fItem = mActionList.find(aCmd);
     if (fItem != mActionList.end())
@@ -142,7 +149,7 @@ void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd aCmd, const QString& 
     fAction->setData(fVariantList);
 }
 
-QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd aCmd)
+QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd aCmd) const
 {
     QVariant fVariant = getDataVariant(aCmd, Data::MsgBoxText);
     if (fVariant.isValid())
@@ -158,7 +165,7 @@ void  ActionList::setCustomCommandPostAction(Cmd::eCmd aCmd, uint aAction)
     setDataVariant(aCmd, Data::Action, QVariant(aAction));
 }
 
-uint ActionList::getCustomCommandPostAction(Cmd::eCmd aCmd)
+uint ActionList::getCustomCommandPostAction(Cmd::eCmd aCmd) const
 {
     QVariant fVariant = getDataVariant(aCmd, Data::Action);
     if (fVariant.isValid())
@@ -178,7 +185,7 @@ void ActionList::setIconPath(Cmd::eCmd aCmd, const QString& aPath)
     setDataVariant(aCmd, Data::IconPath, QVariant(aPath));
 }
 
-QString ActionList::getIconPath(Cmd::eCmd aCmd)
+QString ActionList::getIconPath(Cmd::eCmd aCmd) const
 {
     QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
     if (fVariant.isValid())
@@ -193,7 +200,7 @@ void ActionList::setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn
     setDataVariant(aCmd, Data::StagedCmdAddOn, QVariant(aCmdAddOn));
 }
 
-QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd)
+QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd) const
 {
     QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
     if (fVariant.isValid())
@@ -211,7 +218,7 @@ void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, bool aSet)
     setDataVariant(aCmd, Data::Flags, QVariant(fFlags));
 }
 
-uint ActionList::getFlags(Cmd::eCmd aCmd)
+uint ActionList::getFlags(Cmd::eCmd aCmd) const
 {
     QVariant fVariant = getDataVariant(aCmd, Data::Flags);
     if (fVariant.isValid())
@@ -236,7 +243,7 @@ void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data aData, const QV
     }
 }
 
-QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data aData)
+QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data aData) const
 {
     QAction* fAction = getAction(aCmd);
     if (fAction)

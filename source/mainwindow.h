@@ -26,6 +26,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    friend class QBranchTreeWidget;
 public:
     explicit MainWindow(const QString& aConfigName, QWidget *parent = 0);
     ~MainWindow();
@@ -51,8 +52,7 @@ private Q_SLOTS:
 
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
-
-    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+    void deleteSelectedTreeEntry();
 
     void showOrHideHistory(bool checked);
     void clearHistoryTree();
@@ -61,9 +61,13 @@ private Q_SLOTS:
     void call_git_commit();
     void call_git_move_rename();
     void call_git_history_diff_command();
+    void call_git_branch_command();
     void perform_custom_command();
     void expand_tree_items();
     void collapse_tree_items();
+
+
+    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -155,7 +159,6 @@ private:
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
-    void     parseBranchListText();
 
     Ui::MainWindow*       ui;
     QString               mGitCommand;
@@ -164,7 +167,7 @@ private:
     ActionList            mActions;
     QString               mConfigFileName;
     git::stringt2typemap  mIgnoreMap;
-    QTreeWidgetItem*      mContextMenuItem;
+    QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QString               mHistoryHashItems;
     QString               mLineFeed;
     boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
