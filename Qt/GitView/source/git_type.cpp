@@ -8,6 +8,7 @@ int2stringmap Cmd::mCommandMap;
 Cmd::tVector Cmd::mContextMenuSourceTree;
 Cmd::tVector Cmd::mContextMenuEmptySourceTree;
 Cmd::tVector Cmd::mContextMenuHistoryTree;
+Cmd::tVector Cmd::mContextMenuBranchTree;
 std::vector<Cmd::tVector> Cmd::mToolbars;
 
 Cmd::Cmd()
@@ -27,6 +28,8 @@ Cmd::Cmd()
     mCommandMap[Push]            = "git -C %1 push";
     mCommandMap[Pull]            = "git -C %1 pull";
     mCommandMap[BranchList]      = "git -C %1 branch -l";
+    mCommandMap[BranchDelete]    = "git -C branch --delete --force %1";
+    mCommandMap[Show]            = "git show %1";
     mCommandMap[CallHistoryDiffTool]   = "git difftool %1 --no-prompt %2";
     mCommandMap[ShowHistoryDifference] = "git diff %1 %2";
 
@@ -34,9 +37,10 @@ Cmd::Cmd()
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
+    mContextMenuBranchTree      = { BranchList, BranchDelete, Show, Separator, ShowHideHistoryTree, ClearHistory };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
-    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, Separator, BranchList, CustomGitActionSettings });
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, Separator, BranchList, CustomGitActionSettings, DeleteSelectedTreeEntry});
 }
 
 
@@ -92,6 +96,23 @@ void Type::remove(TypeFlags aType)
 bool Type::is(TypeFlags aType) const
 {
     return (mType & aType) != None;
+}
+
+QString Type::getStates()
+{
+    const QString fSep = "|";
+    QString fState = fSep;
+    if (is(GitAdded   ))  fState += name(GitAdded)     + fSep;
+    if (is(GitDeleted ))  fState += name(GitDeleted)   + fSep;
+    if (is(GitModified))  fState += name(GitModified)  + fSep;
+    if (is(GitUnTracked)) fState += name(GitUnTracked) + fSep;
+    if (is(GitRenamed ))  fState += name(GitRenamed)   + fSep;
+    if (is(GitStaged  ))  fState += name(GitStaged)    + fSep;
+    if (is(GitUnmerged))  fState += name(GitUnmerged)  + fSep;
+    if (is(GitLocal   ))  fState += name(GitLocal)     + fSep;
+    if (is(GitRemote  ))  fState += name(GitRemote)    + fSep;
+    if (is(GitBoth    ))  fState += name(GitBoth)      + fSep;
+    return fState;
 }
 
 #define RETURN_NAME(NAME) case NAME: return #NAME

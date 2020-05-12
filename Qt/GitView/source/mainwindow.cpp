@@ -4,6 +4,7 @@
 #include "logger.h"
 #include "commitmessage.h"
 #include "history.h"
+#include "qbranchtreewidget.h"
 #include "customgitactions.h"
 
 #include <QDateTime>
@@ -91,7 +92,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mCurrentTask(Work::None)
     , mActions(this)
     , mConfigFileName(aConfigName)
-    , mContextMenuItem(nullptr)
+    , mContextMenuSourceTreeItem(nullptr)
     , mLineFeed(mNativeLineFeed)
 {
     ui->setupUi(this);
@@ -117,8 +118,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setVisible(false);
     ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    ui->treeBranches->setVisible(false);
-    ui->treeBranches->setContextMenuPolicy(Qt::CustomContextMenu);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
@@ -555,19 +554,7 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
         if (fFoundType != aPathMap.end())
         {
             aParentItem->setCheckState(INT(Column::FileName), Qt::Checked);
-            const QString fSep = "|";
-            QString fState = fSep;
-
-            if (fFoundType->second.is(Type::GitAdded   ))  fState += Type::name(Type::GitAdded)     + fSep;
-            if (fFoundType->second.is(Type::GitDeleted ))  fState += Type::name(Type::GitDeleted)   + fSep;
-            if (fFoundType->second.is(Type::GitModified))  fState += Type::name(Type::GitModified)  + fSep;
-            if (fFoundType->second.is(Type::GitUnTracked)) fState += Type::name(Type::GitUnTracked) + fSep;
-            if (fFoundType->second.is(Type::GitRenamed ))  fState += Type::name(Type::GitRenamed)   + fSep;
-            if (fFoundType->second.is(Type::GitStaged  ))  fState += Type::name(Type::GitStaged)    + fSep;
-            if (fFoundType->second.is(Type::GitUnmerged))  fState += Type::name(Type::GitUnmerged)  + fSep;
-            if (fFoundType->second.is(Type::GitLocal   ))  fState += Type::name(Type::GitLocal)     + fSep;
-            if (fFoundType->second.is(Type::GitRemote  ))  fState += Type::name(Type::GitRemote)    + fSep;
-            if (fFoundType->second.is(Type::GitBoth    ))  fState += Type::name(Type::GitBoth)      + fSep;
+            QString fState = fFoundType->second.getStates();
             aParentItem->setText(INT(Column::State), fState);
             Type fType(aParentItem->data(INT(Column::State), INT(Role::Filter)).toUInt());
             fType.add(static_cast<Type::TypeFlags>(fFoundType->second.mType));
@@ -895,11 +882,11 @@ void MainWindow::parseGitLogHistoryText()
     History::parse(ui->textBrowser->toPlainText(), fList);
     ui->textBrowser->setPlainText("");
 
-    QString fFileName = getItemFilePath(mContextMenuItem);
+    QString fFileName = getItemFilePath(mContextMenuSourceTreeItem);
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(fFileName));
     ui->treeHistory->addTopLevelItem(fNewHistoryItem);
     QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-    fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuItem)));
+    fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuSourceTreeItem)));
 
     ui->treeHistory->setVisible(true);
     mActions.getAction(Cmd::ShowHideHistoryTree)->setChecked(true);
@@ -923,30 +910,6 @@ void MainWindow::parseGitLogHistoryText()
     }
 }
 
-void MainWindow::parseBranchListText()
-{
-    QString fBranchText = ui->textBrowser->toPlainText();
-    ui->textBrowser->setPlainText("");
-    QStringList fLines = fBranchText.split("\n");
-
-    ui->treeBranches->setVisible(true);
-    int fTLI = -1;
-    for (auto fLine : fLines)
-    {
-        if (fTLI == -1)
-        {
-            QTreeWidgetItem* fNewBranchItem = new QTreeWidgetItem(QStringList(fLine));
-            ui->treeBranches->addTopLevelItem(fNewBranchItem);
-            fTLI = ui->treeBranches->topLevelItemCount()-1;
-        }
-        else
-        {
-            QTreeWidgetItem* fNewBranchItem = new QTreeWidgetItem();
-            ui->treeBranches->topLevelItem(fTLI)->addChild(fNewBranchItem);
-            fNewBranchItem->setText(INT(History::Column::Text), fLine);
-        }
-    }
-}
 
 QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
 {
@@ -1086,14 +1049,14 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 {
-    mContextMenuItem = ui->treeSource->itemAt( pos );
-    if (mContextMenuItem)
+    mContextMenuSourceTreeItem = ui->treeSource->itemAt( pos );
+    if (mContextMenuSourceTreeItem)
     {
         //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
-        mContextMenuItem = nullptr;
+        mContextMenuSourceTreeItem = nullptr;
     }
     else
     {
@@ -1146,30 +1109,30 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
 
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
-    mContextMenuItem = item;
+    mContextMenuSourceTreeItem = item;
 }
 
 void MainWindow::getSelectedTreeItem()
 {
-    if (! mContextMenuItem)
+    if (! mContextMenuSourceTreeItem)
     {
         auto fSelected = ui->treeSource->selectedItems();
         if (fSelected.size())
         {
-            mContextMenuItem = fSelected.at(0);
+            mContextMenuSourceTreeItem = fSelected.at(0);
         }
     }
 }
 
 void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
 {
-    if (mContextMenuItem)
+    if (mContextMenuSourceTreeItem)
     {
         on_btnCloseText_clicked();
         mGitCommand = aCommand;
         mCurrentTask = Work::ApplyGitCommand;
-        QString fFilePath = getItemFilePath(mContextMenuItem->parent());
-        iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuItem);
+        QString fFilePath = getItemFilePath(mContextMenuSourceTreeItem->parent());
+        iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuSourceTreeItem);
         mGitCommand.clear();
         mCurrentTask = Work::None;
     }
@@ -1315,6 +1278,9 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::BranchList     , tr("List Branches"), Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
 
+    connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::Show           , tr("Show Branch/Stash/Tag"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
 
@@ -1329,9 +1295,11 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::ShowHideHistoryTree  , tr("Show/Hide history or branch tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideHistory(bool)));
     mActions.getAction(Cmd::ShowHideHistoryTree)->setCheckable(true);
-    connect(mActions.createAction(Cmd::ClearHistory         , tr("Clear history tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearHistoryTree()));
+    connect(mActions.createAction(Cmd::ClearHistory         , tr("Clear history tree items"), tr("Clears all history or branch tree entries"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(clearHistoryTree()));
 
-    connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
+    connect(mActions.createAction(Cmd::DeleteSelectedTreeEntry, tr("Delete tree entry"), tr("Deletes a selected delete able tree entry")), SIGNAL(triggered()), this, SLOT(deleteSelectedTreeEntry()));
+
+    connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
 
     for (auto fAction : mActions.getList())
     {
@@ -1354,8 +1322,8 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         if (fParentHistoryItem)
         {
             QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-            mContextMenuItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem)).toModelIndex());
-            if (mContextMenuItem)
+            mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem)).toModelIndex());
+            if (mContextMenuSourceTreeItem)
             {
                 mHistoryHashItems.clear();
                 for (auto fIndex = fSelectedHistoryIndexes.rbegin(); fIndex != fSelectedHistoryIndexes.rend(); ++fIndex)
@@ -1377,10 +1345,11 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 }
 
-void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
+void MainWindow::deleteSelectedTreeEntry()
 {
 
 }
+
 
 
 void MainWindow::clearHistoryTree()
@@ -1411,7 +1380,7 @@ void  MainWindow::call_git_commit()
         on_btnCloseText_clicked();
         QString fMessageText = fCommitMsg.getMessageText();
         std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
-        QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuItem)).arg(fMessageText);
+        QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fMessageText);
         if (fCommitMsg.getAutoStage())
         {
             getSelectedTreeItem();
@@ -1419,15 +1388,15 @@ void  MainWindow::call_git_commit()
             QString fResultStr;
             execute(fCommitCommand, fResultStr);
             ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
-            updateTreeItemStatus(mContextMenuItem);
-            mContextMenuItem = nullptr;
+            updateTreeItemStatus(mContextMenuSourceTreeItem);
+            mContextMenuSourceTreeItem = nullptr;
         }
         else
         {
             QString fResultStr;
             execute(fCommitCommand, fResultStr);
             ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
-            updateTreeItemStatus(mContextMenuItem);
+            updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
     }
 }
@@ -1435,12 +1404,12 @@ void  MainWindow::call_git_commit()
 void MainWindow::call_git_move_rename()
 {
     getSelectedTreeItem();
-    if (mContextMenuItem)
+    if (mContextMenuSourceTreeItem)
     {
         bool    fOk;
-        Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
         QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-        QString fOldName      = mContextMenuItem->text(INT(Column::FileName));
+        QString fOldName      = mContextMenuSourceTreeItem->text(INT(Column::FileName));
         QString fNewName      = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
                        tr("Enter a new name or destination for \"%1\".").arg(fOldName),
@@ -1448,18 +1417,18 @@ void MainWindow::call_git_move_rename()
 
         if (fOk && !fNewName.isEmpty())
         {
-            QFileInfo   fPath(getItemFilePath(mContextMenuItem));
+            QFileInfo   fPath(getItemFilePath(mContextMenuSourceTreeItem));
             std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
             QString     fCommand   = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
             QString fResultStr;
             int fResult = execute(fCommand, fResultStr);
             if (fResult == 0)
             {
-                mContextMenuItem->setText(INT(Column::FileName), fNewName);
-                updateTreeItemStatus(mContextMenuItem);
+                mContextMenuSourceTreeItem->setText(INT(Column::FileName), fNewName);
+                updateTreeItemStatus(mContextMenuSourceTreeItem);
             }
         }
-        mContextMenuItem = nullptr;
+        mContextMenuSourceTreeItem = nullptr;
     }
 }
 
@@ -1473,15 +1442,15 @@ void MainWindow::perform_custom_command()
     {
         on_btnCloseText_clicked();
         QString fResultStr;
-        fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuItem));
+        fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem));
         execute(fGitCommand, fResultStr);
         ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
     }
-    else if (mContextMenuItem)
+    else if (mContextMenuSourceTreeItem)
     {
         QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
         QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
-        Type    fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
 
         if (fStagedCmdAddOn.size())
         {
@@ -1490,11 +1459,12 @@ void MainWindow::perform_custom_command()
 
         if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
         {
+            // TODO: put in sub function for usage in other parts
             QStringList fTextList = fMessageBoxText.split(";");
             QMessageBox fSaveRequest;
-            Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+            Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
             QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-            QString fFileName     = mContextMenuItem->text(INT(Column::FileName));
+            QString fFileName     = mContextMenuSourceTreeItem->text(INT(Column::FileName));
             std::string fText1   = fTextList[0].toStdString().c_str();
             switch (fTextList.size())
             {
@@ -1526,22 +1496,45 @@ void MainWindow::perform_custom_command()
     switch (fVariantList[INT(ActionList::Data::Action)].toUInt())
     {
         case Cmd::UpdateItemStatus:
-            updateTreeItemStatus(mContextMenuItem);
+            updateTreeItemStatus(mContextMenuSourceTreeItem);
             break;
         case Cmd::ParseHistoryText:
             parseGitLogHistoryText();
             break;
         case Cmd::ParseBranchListText:
-            parseBranchListText();
+            ui->treeBranches->parseBranchListText(ui->textBrowser->toPlainText());
+            ui->textBrowser->setPlainText("");
             break;
     }
-    mContextMenuItem = nullptr;
+    mContextMenuSourceTreeItem = nullptr;
 }
 
 void MainWindow::call_git_history_diff_command()
 {
     QAction *fAction = qobject_cast<QAction *>(sender());
     applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg(mHistoryHashItems).arg("%1"));
+}
+
+void MainWindow::call_git_branch_command()
+{
+    QAction *fAction = qobject_cast<QAction *>(sender());
+    QString fGitCommand = fAction->statusTip();
+    QVariantList fVariantList = fAction->data().toList();
+    QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
+
+    on_btnCloseText_clicked();
+    QString fResultStr;
+    QString mBranchItem = ui->treeBranches->getBranchItem();
+    if (mBranchItem.size())
+    {
+        fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(mBranchItem);
+        mBranchItem.clear();
+    }
+
+    execute(fGitCommand, fResultStr);
+    ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
+
+//    applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg().arg("%1"));
 }
 
 
@@ -1577,3 +1570,8 @@ void MainWindow::collapse_tree_items()
     }
 }
 
+
+void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
+{
+    ui->treeBranches->on_customContextMenuRequested(*this, pos);
+}
