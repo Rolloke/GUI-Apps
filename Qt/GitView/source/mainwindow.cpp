@@ -1157,6 +1157,7 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
     {
         fParent.cdUp();
         if (fParent.isRoot()) break;
+        if (!fParent.exists()) break;
     };
 
     if (!fParent.isRoot())
