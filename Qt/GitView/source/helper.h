@@ -26,6 +26,9 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 
 int execute(const QString& command, QString& aResultText);
 
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
+
+
 class QTreeWidgetHook: public QTreeWidget
 {
 public:

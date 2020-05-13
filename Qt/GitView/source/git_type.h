@@ -43,11 +43,15 @@ struct Cmd
         History,
         Push,
         Pull,
-        BranchList,
-        BranchDelete,
         Show,
         ShowHistoryDifference,
         CallHistoryDiffTool,
+        BranchList,
+        BranchDelete,
+        BranchShow,
+        BranchListRemote,
+        BranchListMerged,
+        BranchListNotMerged,
         /// hint: add custom commands here
         CustomCommand=50,
 
@@ -58,10 +62,10 @@ struct Cmd
         CollapseTreeItems,
         AddGitSourceFolder,
         UpdateGitStatus,
-        ShowHideHistoryTree,
-        ClearHistory,
+        ShowHideTree,
+        ClearTreeItems,
         CustomGitActionSettings,
-        DeleteSelectedTreeEntry,
+        DeleteSelectedTreeItem,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
@@ -133,6 +137,7 @@ struct Type
     void remove(TypeFlags aType);
     bool is(TypeFlags aType) const;
     QString getStates();
+    QString type_name();
 
     static const char* name(TypeFlags aType);
     static TypeFlags   translate(const QString& fIdentifier);

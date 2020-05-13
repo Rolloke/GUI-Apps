@@ -79,7 +79,11 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::Push]                    = "://resource/24X24/view-sort-descending.png";
     fActionIcons[Cmd::Pull]                    = "://resource/24X24/view-sort-ascending.png";
     fActionIcons[Cmd::BranchList]              = "://resource/24X24/open-menu.png";
+    fActionIcons[Cmd::BranchListRemote]        = "://resource/24X24/open-menu.png";
+    fActionIcons[Cmd::BranchListMerged]        = "://resource/24X24/open-menu.png";
+    fActionIcons[Cmd::BranchListNotMerged]     = "://resource/24X24/open-menu.png";
     fActionIcons[Cmd::BranchDelete]            = "://resource/24X24/edit-delete.png";
+    fActionIcons[Cmd::BranchShow]              = "://resource/24X24/preferences-system-privacy.png";
     fActionIcons[Cmd::Show]                    = "://resource/24X24/edit-find.png";
     fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
@@ -88,9 +92,9 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::CollapseTreeItems]       = "://resource/24X24/svn-commit.svg";
     fActionIcons[Cmd::AddGitSourceFolder]      = "://resource/24X24/folder-open.png";
     fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
-    fActionIcons[Cmd::ShowHideHistoryTree]     = "://resource/24X24/code-class.svg";
-    fActionIcons[Cmd::ClearHistory]            = "://resource/24X24/edit-clear.png";
-    fActionIcons[Cmd::DeleteSelectedTreeEntry] = "://resource/24X24/edit-delete.png";
+    fActionIcons[Cmd::ShowHideTree]     = "://resource/24X24/code-class.svg";
+    fActionIcons[Cmd::ClearTreeItems]            = "://resource/24X24/edit-clear.png";
+    fActionIcons[Cmd::DeleteSelectedTreeItem] = "://resource/24X24/edit-delete.png";
     fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-system.png";
     for (const auto& fIconPath: fActionIcons )
     {

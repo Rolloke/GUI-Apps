@@ -13,34 +13,38 @@ std::vector<Cmd::tVector> Cmd::mToolbars;
 
 Cmd::Cmd()
 {
-    mCommandMap[GetStatusAll]    = "git -C %1 status -sb";
-    mCommandMap[ShowStatus]      = "git status %1";
-    mCommandMap[ShowShortStatus] = "git status -sb %1";
-    mCommandMap[CallDiffTool]    = "git difftool --no-prompt %1";
-    mCommandMap[ShowDifference]  = "git diff %1";
-    mCommandMap[Remove]          = "git rm --cached %1";
-    mCommandMap[Add]             = "git add %1";
-    mCommandMap[Unstage]         = "git reset HEAD %1";
-    mCommandMap[Commit]          = "git -C %1 commit -m \"%2\"";
-    mCommandMap[MoveOrRename]    = "git -C %1 mv %2 %3";
-    mCommandMap[Restore]         = "git checkout %1";
-    mCommandMap[History]         = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
-    mCommandMap[Push]            = "git -C %1 push";
-    mCommandMap[Pull]            = "git -C %1 pull";
-    mCommandMap[BranchList]      = "git -C %1 branch -l";
-    mCommandMap[BranchDelete]    = "git -C branch --delete --force %1";
-    mCommandMap[Show]            = "git show %1";
-    mCommandMap[CallHistoryDiffTool]   = "git difftool %1 --no-prompt %2";
-    mCommandMap[ShowHistoryDifference] = "git diff %1 %2";
+    mCommandMap[GetStatusAll]           = "git -C %1 status -sb";
+    mCommandMap[ShowStatus]             = "git status %1";
+    mCommandMap[ShowShortStatus]        = "git status -sb %1";
+    mCommandMap[CallDiffTool]           = "git difftool --no-prompt %1";
+    mCommandMap[ShowDifference]         = "git diff %1";
+    mCommandMap[Remove]                 = "git rm --cached %1";
+    mCommandMap[Add]                    = "git add %1";
+    mCommandMap[Unstage]                = "git reset HEAD %1";
+    mCommandMap[Commit]                 = "git -C %1 commit -m \"%2\"";
+    mCommandMap[MoveOrRename]           = "git -C %1 mv %2 %3";
+    mCommandMap[Restore]                = "git checkout %1";
+    mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
+    mCommandMap[Push]                   = "git -C %1 push";
+    mCommandMap[Pull]                   = "git -C %1 pull";
+    mCommandMap[BranchList]             = "git -C %1 branch -l";
+    mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
+    mCommandMap[BranchShow]             = "git -C %1 show-branch --delete --force %2";
+    mCommandMap[BranchListRemote]       = "git -C %1 branch -lr";
+    mCommandMap[BranchListMerged]       = "git -C %1 branch --merged";
+    mCommandMap[BranchListNotMerged]    = "git -C %1 branch --no-merged";
+    mCommandMap[Show]                   = "git show %1";
+    mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
+    mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
 
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
-    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideHistoryTree, ClearHistory };
-    mContextMenuBranchTree      = { BranchList, BranchDelete, Show, Separator, ShowHideHistoryTree, ClearHistory };
+    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideTree, ClearTreeItems, DeleteSelectedTreeItem };
+    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, BranchDelete, BranchShow, Show, Separator, ShowHideTree, ClearTreeItems, DeleteSelectedTreeItem };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference , CallDiffTool, History, ShowStatus, ShowShortStatus });
-    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideHistoryTree, ClearHistory, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, Separator, BranchList, CustomGitActionSettings, DeleteSelectedTreeEntry});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, History, Separator, ShowStatus, ShowShortStatus, BranchList});
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, CustomGitActionSettings});
 }
 
 
@@ -149,6 +153,11 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(Executeable);
     }
     return "";
+}
+
+QString Type::type_name()
+{
+    return Type::name(static_cast<Type::TypeFlags>(Type::FileType&mType));
 }
 
 Type::TypeFlags Type::translate(const QString& fIdentifier)

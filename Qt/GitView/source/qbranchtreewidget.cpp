@@ -1,6 +1,6 @@
 #include "qbranchtreewidget.h"
 #include "git_type.h"
-#include "mainwindow.h"
+#include "actions.h"
 #include <QMenu>
 
 using namespace git;
@@ -39,7 +39,7 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
     }
 }
 
-void QBranchTreeWidget::on_customContextMenuRequested(const MainWindow& aMain, const QPoint &pos)
+void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)
 {
     QTreeWidgetItem* fSelectedBranchItem = itemAt(pos);
     if (fSelectedBranchItem)
@@ -55,9 +55,8 @@ void QBranchTreeWidget::on_customContextMenuRequested(const MainWindow& aMain, c
     }
 
     QMenu menu(this);
-    aMain.mActions.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
+    aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
     menu.exec(mapToGlobal(pos) );
-
 }
 
 QString QBranchTreeWidget::getBranchItem()

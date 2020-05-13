@@ -159,6 +159,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
 
@@ -236,6 +237,7 @@ MainWindow::~MainWindow()
     STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
 
@@ -889,7 +891,7 @@ void MainWindow::parseGitLogHistoryText()
     fNewHistoryItem->setData(INT(History::Column::Commit), INT(History::Role::ContextMenuItem), QVariant(fSourceHook->indexFromItem(mContextMenuSourceTreeItem)));
 
     ui->treeHistory->setVisible(true);
-    mActions.getAction(Cmd::ShowHideHistoryTree)->setChecked(true);
+    mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
 
     const int fTLI = ui->treeHistory->topLevelItemCount()-1;
     int fListCount = 0;
@@ -1201,7 +1203,7 @@ void MainWindow::showOrHideHistory(bool checked)
         ui->treeHistory->setVisible(checked);
         ui->treeBranches->setVisible(checked);
     }
-    mActions.getAction(Cmd::ShowHideHistoryTree)->setChecked(checked);
+    mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 }
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
@@ -1276,11 +1278,19 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::Push           , tr("Push")         , Cmd::getCommand(Cmd::Push))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::Pull           , tr("Pull")         , Cmd::getCommand(Cmd::Pull))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+
     connect(mActions.createAction(Cmd::BranchList     , tr("List Branches"), Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
+    connect(mActions.createAction(Cmd::BranchListRemote, tr("List remote Branches"), Cmd::getCommand(Cmd::BranchListRemote)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::BranchListRemote, Cmd::ParseBranchListText);
+    connect(mActions.createAction(Cmd::BranchListMerged, tr("List merged Branches"), Cmd::getCommand(Cmd::BranchListMerged)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::BranchListMerged, Cmd::ParseBranchListText);
+    connect(mActions.createAction(Cmd::BranchListNotMerged, tr("List not merged Branches"), Cmd::getCommand(Cmd::BranchListNotMerged)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::BranchListNotMerged, Cmd::ParseBranchListText);
 
     connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    connect(mActions.createAction(Cmd::Show           , tr("Show Branch/Stash/Tag"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, "Delete %1 from git;Do you want to delete \"%1\"?");
+    connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
 
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
@@ -1291,14 +1301,14 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
 
-    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
+    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("Adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
 
-    connect(mActions.createAction(Cmd::ShowHideHistoryTree  , tr("Show/Hide history or branch tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideHistory(bool)));
-    mActions.getAction(Cmd::ShowHideHistoryTree)->setCheckable(true);
-    connect(mActions.createAction(Cmd::ClearHistory         , tr("Clear history tree items"), tr("Clears all history or branch tree entries"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(clearHistoryTree()));
+    connect(mActions.createAction(Cmd::ShowHideTree  , tr("Show/Hide tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideHistory(bool)));
+    mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
+    connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(clearHistoryTree()));
 
-    connect(mActions.createAction(Cmd::DeleteSelectedTreeEntry, tr("Delete tree entry"), tr("Deletes a selected delete able tree entry")), SIGNAL(triggered()), this, SLOT(deleteSelectedTreeEntry()));
+    connect(mActions.createAction(Cmd::DeleteSelectedTreeItem, tr("Delete tree entry"), tr("Deletes a selected deleteable tree entry")), SIGNAL(triggered()), this, SLOT(deleteSelectedTreeEntry()));
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
 
@@ -1460,29 +1470,7 @@ void MainWindow::perform_custom_command()
 
         if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
         {
-            // TODO: put in sub function for usage in other parts
-            QStringList fTextList = fMessageBoxText.split(";");
-            QMessageBox fSaveRequest;
-            Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
-            QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-            QString fFileName     = mContextMenuSourceTreeItem->text(INT(Column::FileName));
-            std::string fText1   = fTextList[0].toStdString().c_str();
-            switch (fTextList.size())
-            {
-            case 1:
-                fSaveRequest.setText(tr(fText1.c_str()).arg(fFileTypeName));
-                fSaveRequest.setInformativeText(fFileName);
-                break;
-            case 2:
-                fSaveRequest.setText(tr(fText1.c_str()).arg(fFileTypeName));
-                fSaveRequest.setInformativeText(tr(fTextList[1].toStdString().c_str()).arg(fFileName));
-                break;
-            }
-
-            fSaveRequest.setStandardButtons(fType.is(Type::File) ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-            fSaveRequest.setDefaultButton(  fType.is(Type::File) ? QMessageBox::Yes : QMessageBox::YesToAll);
-
-            auto fResult = fSaveRequest.exec();
+            auto fResult = callMessageBox(fMessageBoxText, fType.type_name(), mContextMenuSourceTreeItem->text(INT(Column::FileName)), fType.is(Type::File));
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
             {
                 applyGitCommandToFileTree(fGitCommand);
@@ -1522,19 +1510,32 @@ void MainWindow::call_git_branch_command()
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
     QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
-
-    on_btnCloseText_clicked();
-    QString fResultStr;
-    QString mBranchItem = ui->treeBranches->getBranchItem();
-    if (mBranchItem.size())
+    int fResult = QMessageBox::Yes;
+    if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
-        fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(mBranchItem);
-        mBranchItem.clear();
+        fResult = callMessageBox(fMessageBoxText, "branch", ui->treeBranches->getBranchItem());
     }
 
-    execute(fGitCommand, fResultStr);
-    ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
+    if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
+    {
+        on_btnCloseText_clicked();
+        QString fResultStr;
+        QString mBranchItem = ui->treeBranches->getBranchItem();
+        if (mBranchItem.size())
+        {
+            fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(mBranchItem);
+            mBranchItem.clear();
+        }
 
+        execute(fGitCommand, fResultStr);
+        ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
+    }
+
+    switch (fVariantList[INT(ActionList::Data::Action)].toUInt())
+    {
+        case Cmd::UpdateItemStatus:
+            break;
+    }
 //    applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg().arg("%1"));
 }
 
@@ -1574,5 +1575,5 @@ void MainWindow::collapse_tree_items()
 
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
-    ui->treeBranches->on_customContextMenuRequested(*this, pos);
+    ui->treeBranches->on_customContextMenuRequested(mActions, pos);
 }

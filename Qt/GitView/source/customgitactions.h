@@ -20,7 +20,7 @@ class CustomGitActions : public QDialog
 
     enum class VariousIndex
     {
-        Icons, MenuSrcTree, MenuEmptySrcTree, MenuHistoryTree, Toolbar1, Toolbar2, FirstCmds=MenuSrcTree, LastCmds=Toolbar2
+        Icons, MenuSrcTree, MenuEmptySrcTree, MenuHistoryTree, MenuBranchTree, Toolbar1, Toolbar2, FirstCmds=MenuSrcTree, LastCmds=Toolbar2
     };
 
     struct Btn {enum e
