@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QDir>
+#include <QMessageBox>
 #include <fstream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
@@ -54,7 +55,7 @@ QString formatFileSize(quint64 aSize)
             QString fThousands = QString::number(static_cast<quint64>((aSize & (fIt->first-1))) >> (fExp - fKiloExponent));
             while (fThousands.size() < fThousandDigit) fThousands = "0" + fThousands;
             fNumber = QString::number(static_cast<quint64>(aSize >> fExp)) + "."
-                    + fThousands + " " + fIt->second;
+                      + fThousands + " " + fIt->second;
             return fNumber;
         }
         fExp -= fKiloExponent;
@@ -100,7 +101,30 @@ int execute(const QString& command, QString& aResultText)
     }
 
     return fResult;
+}
 
+int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, const QString& aFileName, bool aIsFile)
+{
+    QStringList fTextList = aMessageBoxText.split(";");
+    QMessageBox fRequestMessage;
+
+    std::string fText1   = fTextList[0].toStdString().c_str();
+    switch (fTextList.size())
+    {
+        case 1:
+            fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
+            fRequestMessage.setInformativeText(aFileName);
+            break;
+        case 2:
+            fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
+            fRequestMessage.setInformativeText(QObject::tr(fTextList[1].toStdString().c_str()).arg(aFileName));
+            break;
+    }
+
+    fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
+    fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
+
+    return fRequestMessage.exec();
 }
 
 QTreeWidgetHook::QTreeWidgetHook()

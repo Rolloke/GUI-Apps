@@ -3,7 +3,7 @@
 
 #include <QTreeWidget>
 
-class MainWindow;
+class ActionList;
 
 class QBranchTreeWidget : public QTreeWidget
 {
@@ -19,9 +19,9 @@ public:
 
     QString getBranchItem();
 
-    void     parseBranchListText(const QString& aBranchText);
+    void parseBranchListText(const QString& aBranchText);
 
-    void on_customContextMenuRequested(const MainWindow& aMain, const QPoint &pos);
+    void on_customContextMenuRequested(const ActionList& aMain, const QPoint &pos);
 
 Q_SIGNALS:
 

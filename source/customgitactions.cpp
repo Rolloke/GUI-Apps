@@ -111,23 +111,13 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousIndex aIndex)
     static Cmd::tVector fDummy;
     switch (aIndex)
     {
-        case VariousIndex::MenuSrcTree:
-            return Cmd::mContextMenuSourceTree;
-            break;
-        case VariousIndex::MenuEmptySrcTree:
-            return Cmd::mContextMenuEmptySourceTree;
-            break;
-        case VariousIndex::MenuHistoryTree:
-            return Cmd::mContextMenuHistoryTree;
-            break;
-        case VariousIndex::Toolbar1:
-            return Cmd::mToolbars[0];
-            break;
-        case VariousIndex::Toolbar2:
-            return Cmd::mToolbars[1];
-            break;
-        default:
-            break;
+        case VariousIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
+        case VariousIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
+        case VariousIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
+        case VariousIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
+        case VariousIndex::Toolbar1:            return Cmd::mToolbars[0];
+        case VariousIndex::Toolbar2:            return Cmd::mToolbars[1];
+        default: break;
     }
     return fDummy;
 }
