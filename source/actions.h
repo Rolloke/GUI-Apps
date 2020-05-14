@@ -22,7 +22,7 @@ public:
     typedef std::map<int, QAction*> tActionMap;
 #endif
 
-    enum  { BuiltIn = 1,  Modified = 2, Custom=4 };
+    enum  { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8 };
 
     explicit ActionList(QObject* aParent);
 

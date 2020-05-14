@@ -180,6 +180,11 @@
        </item>
        <item>
         <property name="text">
+         <string>Menu Branch Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Toolbar 1</string>
         </property>
        </item>

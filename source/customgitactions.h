@@ -20,8 +20,24 @@ class CustomGitActions : public QDialog
 
     enum class VariousIndex
     {
-        Icons, MenuSrcTree, MenuEmptySrcTree, MenuHistoryTree, MenuBranchTree, Toolbar1, Toolbar2, FirstCmds=MenuSrcTree, LastCmds=Toolbar2
+        Icons,
+        MenuSrcTree,
+        MenuEmptySrcTree,
+        MenuHistoryTree,
+        MenuBranchTree,
+        Toolbar1,
+        Toolbar2,
+        FirstCmds=MenuSrcTree, LastCmds=Toolbar2
     };
+    const std::vector<QString> fHeader =
+    {
+        tr("Icons"),
+        tr("Context Menu Source"),
+        tr("Context Menu Empty Source"),
+        tr("Context Menu History"),
+        tr("Context Menu Branch"),
+        tr("Toolbar 1"),
+        tr("Toolbar 2") };
 
     struct Btn {enum e
     {

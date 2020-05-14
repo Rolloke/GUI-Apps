@@ -89,14 +89,13 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
 
 void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
 {
-    const std::vector<QString> fHeader = { tr(""), tr("Context Menu Source"), tr("Context Menu Empty Source"), tr("Context Menu History"), tr("Toolbar 1"), tr("Toolbar 2") };
     switch (static_cast<VariousIndex>(aIndex))
     {
         case VariousIndex::Icons:
             initListIcons();
             ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
             break;
-        case VariousIndex::MenuSrcTree: case VariousIndex::MenuEmptySrcTree: case VariousIndex::MenuHistoryTree:
+        case VariousIndex::MenuSrcTree: case VariousIndex::MenuEmptySrcTree: case VariousIndex::MenuHistoryTree: case VariousIndex::MenuBranchTree:
         case VariousIndex::Toolbar1: case VariousIndex::Toolbar2:
             ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(fHeader[aIndex]));
             initMenuList(getCmdVector(static_cast<VariousIndex>(aIndex)), fHeader[aIndex]);
@@ -377,6 +376,14 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
          fA_Modified->setChecked(fFlags & ActionList::Modified);
     }
 
+    QAction* fA_BranchCmd = nullptr;
+    if (fFlags & ActionList::Custom)
+    {
+         fA_BranchCmd = fMenu.addAction(tr("Branch command"));
+         fA_BranchCmd->setCheckable(true);
+         fA_BranchCmd->setChecked(fFlags & ActionList::Branch);
+    }
+
     fMenu.addAction(tr("Cancel"));
 
     QAction* fSelected = fMenu.exec(mapToGlobal(pos));
@@ -390,6 +397,10 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         if (fA_Modified == fSelected)
         {
             mActionList.setFlags(fCmd, ActionList::Modified, fA_Modified->isChecked());
+        }
+        if (fA_BranchCmd == fSelected)
+        {
+            mActionList.setFlags(fCmd, ActionList::Branch, fA_BranchCmd->isChecked());
         }
     }
 }
