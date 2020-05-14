@@ -52,6 +52,7 @@ struct Cmd
         BranchListRemote,
         BranchListMerged,
         BranchListNotMerged,
+        BranchCheckout,
         /// hint: add custom commands here
         CustomCommand=50,
 
@@ -71,7 +72,7 @@ struct Cmd
         Invalid = -1,
         Restore = Checkout
     };
-    enum eCustom
+    enum ePostAction
     {
         DoNothing,
         UpdateItemStatus,
