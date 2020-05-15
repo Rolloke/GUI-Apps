@@ -28,6 +28,7 @@ int execute(const QString& command, QString& aResultText);
 
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
 
+#define isBetween(VAL, MIN, MAX) (VAL >= MIN && VAL <= MAX)
 
 class QTreeWidgetHook: public QTreeWidget
 {

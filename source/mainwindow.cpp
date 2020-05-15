@@ -1266,7 +1266,6 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     mActions.setCustomCommandPostAction(Cmd::Remove, Cmd::UpdateItemStatus);
-    mActions.getAction(Cmd::Remove)->setShortcut(QKeySequence(Qt::Key_Delete));
 
     connect(mActions.createAction(Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
@@ -1564,6 +1563,9 @@ void MainWindow::call_git_branch_command()
             case Cmd::ParseBranchListText:
                 ui->treeBranches->parseBranchListText(fResultStr);
                 ui->textBrowser->setPlainText("");
+                break;
+            case Cmd::ParseHistoryText:
+                parseGitLogHistoryText();
                 break;
         }
     }

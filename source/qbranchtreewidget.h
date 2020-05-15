@@ -25,8 +25,9 @@ public:
 
 Q_SIGNALS:
 
-private Q_SLOTS:
+public Q_SLOTS:
 
+   void clear();
 
 private:
     QTreeWidgetItem* mSelectedBranchItem;
