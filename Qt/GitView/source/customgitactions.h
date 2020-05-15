@@ -18,7 +18,7 @@ class CustomGitActions : public QDialog
 {
     Q_OBJECT
 
-    enum class VariousIndex
+    enum class VariousListIndex
     {
         Icons,
         MenuSrcTree,
@@ -27,9 +27,10 @@ class CustomGitActions : public QDialog
         MenuBranchTree,
         Toolbar1,
         Toolbar2,
-        FirstCmds=MenuSrcTree, LastCmds=Toolbar2
+        FirstCmds=MenuSrcTree,
+        LastCmds=Toolbar2
     };
-    const std::vector<QString> fHeader =
+    const std::vector<QString> mVariousListHeader =
     {
         tr("Icons"),
         tr("Context Menu Source"),
@@ -69,7 +70,7 @@ private:
     void initListIcons();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
-    git::Cmd::tVector& getCmdVector(VariousIndex aIndex);
+    git::Cmd::tVector& getCmdVector(VariousListIndex aIndex);
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;

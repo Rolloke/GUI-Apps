@@ -2,10 +2,12 @@
 #include "ui_customgitactions.h"
 #include "actions.h"
 #include "logger.h"
+#include "helper.h"
 
 #include <QStandardItemModel>
 #include <QDir>
 #include <QMenu>
+#include <QActionGroup>
 
 using namespace git;
 
@@ -61,7 +63,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->tableViewVarious->setColumnWidth(0, fWidth);
 
     enableButtons(0);
-    on_comboBoxVarious_currentIndexChanged(INT(VariousIndex::Icons));
+    on_comboBoxVarious_currentIndexChanged(INT(VariousListIndex::Icons));
 }
 
 CustomGitActions::~CustomGitActions()
@@ -89,33 +91,32 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
 
 void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
 {
-    switch (static_cast<VariousIndex>(aIndex))
+    switch (static_cast<VariousListIndex>(aIndex))
     {
-        case VariousIndex::Icons:
+        case VariousListIndex::Icons:
             initListIcons();
             ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
-            break;
-        case VariousIndex::MenuSrcTree: case VariousIndex::MenuEmptySrcTree: case VariousIndex::MenuHistoryTree: case VariousIndex::MenuBranchTree:
-        case VariousIndex::Toolbar1: case VariousIndex::Toolbar2:
-            ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(fHeader[aIndex]));
-            initMenuList(getCmdVector(static_cast<VariousIndex>(aIndex)), fHeader[aIndex]);
-            break;
+        break;
         default:
-            break;
+        if (isBetween(aIndex, 0, mVariousListHeader[aIndex].size()))
+        {
+            ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(mVariousListHeader[aIndex]));
+            initMenuList(getCmdVector(static_cast<VariousListIndex>(aIndex)), mVariousListHeader[aIndex]);
+        }   break;
     }
 }
 
-Cmd::tVector& CustomGitActions::getCmdVector(VariousIndex aIndex)
+Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex aIndex)
 {
     static Cmd::tVector fDummy;
     switch (aIndex)
     {
-        case VariousIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
-        case VariousIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
-        case VariousIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
-        case VariousIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
-        case VariousIndex::Toolbar1:            return Cmd::mToolbars[0];
-        case VariousIndex::Toolbar2:            return Cmd::mToolbars[1];
+        case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
+        case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
+        case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
+        case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
+        case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
+        case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
         default: break;
     }
     return fDummy;
@@ -165,7 +166,6 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
     }
 }
 
-
 void CustomGitActions::initListIcons()
 {
     mInitialize = true;
@@ -213,7 +213,7 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
 
 void CustomGitActions::on_btnToLeft_clicked()
 {
-    if (ui->comboBoxVarious->currentIndex() == INT(VariousIndex::Icons))
+    if (ui->comboBoxVarious->currentIndex() == INT(VariousListIndex::Icons))
     {
         int fIconRow   = ui->tableViewVarious->currentIndex().row();
         int fActionRow = ui->tableViewActions->currentIndex().row();
@@ -228,7 +228,7 @@ void CustomGitActions::on_btnToLeft_clicked()
     else
     {
         int fIconRow     = ui->tableViewVarious->currentIndex().row();
-        auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
+        auto& fCmdVector = getCmdVector(static_cast<VariousListIndex>(ui->comboBoxVarious->currentIndex()));
         fCmdVector.erase(fCmdVector.begin()+fIconRow);
         int fSelected = fCmdVector.size()-1;
         on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
@@ -241,7 +241,7 @@ void CustomGitActions::on_btnToRight_clicked()
 {
     int fActionRow = ui->tableViewActions->currentIndex().row();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, 0)).toInt());
-    auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex>(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
     int fSelected = fCmdVector.size()-1;
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
@@ -253,7 +253,7 @@ void CustomGitActions::on_btnMoveUp_clicked()
 {
     int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow-1;
-    auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex>(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fMovedRow, 0), QItemSelectionModel::Select);
@@ -264,7 +264,7 @@ void CustomGitActions::on_btnMoveDown_clicked()
 {
     int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow+1;
-    auto& fCmdVector = getCmdVector(static_cast<VariousIndex>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex>(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fMovedRow, 0), QItemSelectionModel::Select);
@@ -293,9 +293,9 @@ void CustomGitActions::on_btnDelete_clicked()
     {
         mListModelActions->removeRow(fRow);
         mActionList.deleteAction(fCmd);
-        for (int i = INT(VariousIndex::FirstCmds); i < INT(VariousIndex::Toolbar2); ++i)
+        for (int i = INT(VariousListIndex::FirstCmds); i < INT(VariousListIndex::Toolbar2); ++i)
         {
-            auto& fVector = getCmdVector(static_cast<VariousIndex>(i));
+            auto& fVector = getCmdVector(static_cast<VariousListIndex>(i));
             auto fFound = std::find_if(fVector.begin(), fVector.end(), [fCmd](Cmd::eCmd fI) {return fI == fCmd;});
             if (fFound != fVector.end() )
             {
@@ -313,7 +313,7 @@ void CustomGitActions::on_btnDelete_clicked()
 
 void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index */)
 {
-    if (ui->comboBoxVarious->currentIndex() == INT(VariousIndex::Icons))
+    if (ui->comboBoxVarious->currentIndex() == INT(VariousListIndex::Icons))
     {
         enableButtons(Btn::Add|Btn::Delete);
     }
@@ -326,7 +326,7 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 {
     ui->btnAdd->setEnabled(false);
-    if (ui->comboBoxVarious->currentIndex() == INT(VariousIndex::Icons))
+    if (ui->comboBoxVarious->currentIndex() == INT(VariousListIndex::Icons))
     {
         enableButtons(Btn::Left);
     }
@@ -357,15 +357,24 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     Cmd::eCmd fCmd   = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, INT(ActionsTable::ID))).toInt());
 
     fMenu.addAction(mActionList.getAction(fCmd));
+    fMenu.addSeparator();
 
-    uint fPostAction = mActionList.getCustomCommandPostAction(fCmd);
-    QAction* fA_PostAction = 0;
-    if (fPostAction == 0 || fPostAction == 1)
+    int fPostAction = mActionList.getCustomCommandPostAction(fCmd);
+    QActionGroup fPostActionGroup(this);
+    fPostActionGroup.setExclusive(true);
+    fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::DoNothing)));
+    fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::UpdateItemStatus)));
+    fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::ParseHistoryText)));
+    fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::ParseBranchListText)));
+    for (auto*fItem : fPostActionGroup.actions())
     {
-        fA_PostAction = fMenu.addAction(tr("Update item status after git command"));
-        fA_PostAction->setCheckable(true);
-        fA_PostAction->setChecked(fPostAction == Cmd::UpdateItemStatus);
+        fItem->setCheckable(true);
     }
+    if (isBetween(fPostAction, 0, fPostActionGroup.actions().size()))
+    {
+        fPostActionGroup.actions().at(fPostAction)->setChecked(true);
+    }
+    fMenu.addSeparator();
 
     uint fFlags      = mActionList.getFlags(fCmd);
     QAction* fA_Modified = nullptr;
@@ -389,9 +398,10 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     QAction* fSelected = fMenu.exec(mapToGlobal(pos));
     if (fSelected)
     {
-        if (fA_PostAction == fSelected)
+        int fIndex =  fPostActionGroup.actions().indexOf(fSelected);
+        if (fIndex != -1)
         {
-            mActionList.setCustomCommandPostAction(fCmd, fA_PostAction->isChecked() ? 1 : 0);
+            mActionList.setCustomCommandPostAction(fCmd, fIndex);
             mActionList.setFlags(fCmd, ActionList::Modified, true);
         }
         if (fA_Modified == fSelected)

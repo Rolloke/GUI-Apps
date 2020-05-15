@@ -60,7 +60,8 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
 QString QBranchTreeWidget::getBranchItem()
 {
-    return (mSelectedBranchItem && indexOfTopLevelItem(mSelectedBranchItem) == -1) ? mSelectedBranchItem->text(INT(Column::Text)) : "";
+    QString fItem = (mSelectedBranchItem && indexOfTopLevelItem(mSelectedBranchItem) == -1) ? mSelectedBranchItem->text(INT(Column::Text)) : "";
+    return fItem.remove(0, 2);
 }
 
 QString QBranchTreeWidget::getBranchTopItem()
@@ -86,4 +87,11 @@ void QBranchTreeWidget::deleteSelected()
         }
         fItem = fItem->parent();
     }
+    mSelectedBranchItem = nullptr;
+}
+
+void QBranchTreeWidget::clear()
+{
+    QTreeWidget::clear();
+    mSelectedBranchItem = nullptr;
 }

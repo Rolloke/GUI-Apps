@@ -1,6 +1,8 @@
 
 #include "git_type.h"
 #include <QStringList>
+#include <QObject>
+
 namespace git
 {
 
@@ -24,18 +26,18 @@ Cmd::Cmd()
     mCommandMap[Commit]                 = "git -C %1 commit -m \"%2\"";
     mCommandMap[MoveOrRename]           = "git -C %1 mv %2 %3";
     mCommandMap[Restore]                = "git checkout %1";
-    mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%s<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
+    mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1";
     mCommandMap[Push]                   = "git -C %1 push";
     mCommandMap[Pull]                   = "git -C %1 pull";
     mCommandMap[Show]                   = "git show %1";
     mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
     mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
-    mCommandMap[BranchList]             = "git -C %1 branch -l";
+    mCommandMap[BranchList]             = "git -C %1 branch --list";
     mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
     mCommandMap[BranchShow]             = "git -C %1 show-branch %2";
-    mCommandMap[BranchListRemote]       = "git -C %1 branch -l -r";
-    mCommandMap[BranchListMerged]       = "git -C %1 branch -l --merged";
-    mCommandMap[BranchListNotMerged]    = "git -C %1 branch -l --no-merged";
+    mCommandMap[BranchListRemote]       = "git -C %1 branch --list --remotes";
+    mCommandMap[BranchListMerged]       = "git -C %1 branch --list --merged";
+    mCommandMap[BranchListNotMerged]    = "git -C %1 branch --list --no-merged";
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
 
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
@@ -49,6 +51,19 @@ Cmd::Cmd()
 }
 
 
+QString Cmd::toString(const ePostAction anAction)
+{
+    switch (anAction)
+    {
+    case DoNothing:             return QObject::tr("Do Nothing");
+    case UpdateItemStatus:      return QObject::tr("Update Item Status");
+    case ParseHistoryText:      return QObject::tr("Parse History List Text");
+    case ParseBranchListText:   return QObject::tr("Parse Branch List Text");
+    default:
+        break;
+    }
+}
+
 QString  Cmd::toString(const tVector& aItems)
 {
     QString fString = "|";
@@ -59,6 +74,7 @@ QString  Cmd::toString(const tVector& aItems)
     }
     return fString;
 }
+
 
 Cmd::tVector Cmd::fromString(const QString& aString)
 {

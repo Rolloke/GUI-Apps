@@ -84,6 +84,7 @@ struct Cmd
 
     static const QString& getCommand(eCmd);
 
+    static QString toString(const ePostAction anAction);
     static QString toString(const tVector& aItems);
     static tVector fromString(const QString& aString);
 
