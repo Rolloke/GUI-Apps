@@ -22,7 +22,7 @@ const char* History::name(History::Entry aEntry)
         case Entry::CommitHash:     return "Commit hash:";
         case Entry::TreeHash:       return "Tree hash:";
         case Entry::ParentHash:     return "Parent hash:";
-        case Entry::Subject:        return "Subject:";
+        case Entry::SubjectAndBody: return "Description:";
         case Entry::Author:         return "Author:";
         case Entry::AuthoEmail:     return "Author Email:";
         case Entry::AuthorDate:     return "Author date:";
