@@ -903,7 +903,7 @@ void MainWindow::parseGitLogHistoryText()
             fNewHistoryItem = new QTreeWidgetItem();
             ui->treeHistory->topLevelItem(fTLI)->addChild(fNewHistoryItem);
             fNewHistoryItem->setText(INT(History::Column::Text), fItem[INT(History::Entry::CommitterDate)]);
-            fNewHistoryItem->setText(INT(History::Column::Commit), fItem[INT(History::Entry::Author)]);
+            fNewHistoryItem->setText(INT(History::Column::Author), fItem[INT(History::Entry::Author)]);
             for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
             {
                 fNewHistoryItem->setData(INT(History::Column::Commit), fRole, QVariant(fItem[fRole]));
@@ -1332,6 +1332,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     QTreeWidgetItem* fSelectedHistoryItem = ui->treeHistory->itemAt(pos);
     if (fSelectedHistoryItem)
     {
+        int fColumns = ui->treeHistory->header()->count();
         QModelIndexList fSelectedHistoryIndexes = ui->treeHistory->selectionModel()->selectedIndexes();
         QTreeWidgetItem* fParentHistoryItem = fSelectedHistoryItem->parent();
         if (fParentHistoryItem)
@@ -1341,7 +1342,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
             if (mContextMenuSourceTreeItem)
             {
                 mHistoryHashItems.clear();
-                for (auto fIndex = fSelectedHistoryIndexes.rbegin(); fIndex != fSelectedHistoryIndexes.rend(); ++fIndex)
+                for (auto fIndex = fSelectedHistoryIndexes.rbegin(); fIndex != fSelectedHistoryIndexes.rend(); fIndex += fColumns)
                 {
                     QTreeWidgetHook* fHistoryHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeHistory);
                     QTreeWidgetItem* fItem = fHistoryHook->itemFromIndex(*fIndex);
@@ -1574,33 +1575,27 @@ void MainWindow::call_git_branch_command()
 
 void MainWindow::expand_tree_items()
 {
-    if (ui->treeHistory->hasFocus())
-    {
-        ui->treeHistory->expandAll();
-    }
-    else if (ui->treeBranches->hasFocus())
-    {
-        ui->treeBranches->expandAll();
-    }
-    else
-    {
-        ui->treeSource->expandAll();
-    }
+    focusedTreeWidget()->expandAll();
 }
 
 void MainWindow::collapse_tree_items()
 {
+    focusedTreeWidget()->collapseAll();
+}
+
+QTreeWidget* MainWindow::focusedTreeWidget()
+{
     if (ui->treeHistory->hasFocus())
     {
-        ui->treeHistory->collapseAll();
+        return ui->treeHistory;
     }
     else if (ui->treeBranches->hasFocus())
     {
-        ui->treeBranches->collapseAll();
+        return ui->treeBranches;
     }
     else
     {
-        ui->treeSource->collapseAll();
+        return ui->treeSource;
     }
 }
 

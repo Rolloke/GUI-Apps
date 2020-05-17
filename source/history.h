@@ -14,7 +14,8 @@ namespace git
 //%t  Abbreviated tree hash
 //%P  Parent hashes               // 2
 //%p  Abbreviated parent hashes
-//%s  Subject                     // 3
+//%s  Subject
+//%B  Subject and Body            // 3
 //%an Author name                 // 4
 //%ae Author email                // 5
 //%ad Author date                 // 6
@@ -30,6 +31,7 @@ struct History
     enum class Column
     {
         Text,
+        Author,
         Commit
     };
     enum class Role
@@ -42,14 +44,15 @@ struct History
         CommitHash,
         TreeHash,
         ParentHash,
-        Subject,
+        SubjectAndBody,
         Author,
         AuthoEmail,
         AuthorDate,
         Committer,
         CommitterEmail,
         CommitterDate,
-        NoOfEntries
+        NoOfEntries,
+        ContextMenuItem=NoOfEntries
     };
 
     static const char* name(Entry aEntry);

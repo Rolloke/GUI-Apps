@@ -62,6 +62,7 @@ QString Cmd::toString(const ePostAction anAction)
     default:
         break;
     }
+    return "";
 }
 
 QString  Cmd::toString(const tVector& aItems)

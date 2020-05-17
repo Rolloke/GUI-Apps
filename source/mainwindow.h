@@ -159,6 +159,7 @@ private:
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
+    QTreeWidget* focusedTreeWidget();
 
     Ui::MainWindow*       ui;
     QString               mGitCommand;

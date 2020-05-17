@@ -305,6 +305,11 @@
                 <string>History</string>
                </property>
               </column>
+              <column>
+               <property name="text">
+                <string>Author</string>
+               </property>
+              </column>
              </widget>
             </item>
             <item>
