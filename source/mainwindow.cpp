@@ -26,12 +26,6 @@ using namespace std;
 using namespace git;
 
 
-// TODO: Eintragene Remote Repositories inkl. URLs ausgeben:
-// git remote -v
-// Beispiel:
-// Raspi	pi@RaspiLAN:git.repository (fetch)
-// Raspi	pi@RaspiLAN:git.repository (push)
-// TODO: die Remote Namen Speichern
 
 // Kapitel 1.4.12.2 Entfernte Referenzen anpassen
 // TODO:  Entferntes Repository hinzufügen:
@@ -40,19 +34,6 @@ using namespace git;
 // git remote remove < Name >
 // URL korrigieren:
 // git remote set - url < Name > <URL >
-
-// TODO: Änderungen auf Remote Repository übertragen
-// git push pi@RaspiLAN:git.repository
-
-// TODO: Änderungen vom Remote Repository abfragen
-// git fetch
-
-// TODO: Änderungen vom Remote Repository abholen
-// git fetch pi@RaspiLAN:git.repository
-
-// TODO: CustomGitActionSettings bugfixing icon path to store is wrong
-
-// TODO: branch handling
 // TODO: 1.4.10.2 Zweig erstellen
 
 namespace config
@@ -115,8 +96,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
 
+    // TODO: treeHistory as own class?
     ui->treeHistory->setVisible(false);
     ui->treeHistory->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeHistory->header()->setSectionResizeMode(INT(History::Column::Text), QHeaderView::Stretch);
+    ui->treeHistory->header()->setStretchLastSection(false);
 
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -143,6 +127,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupPaths);
 
+    // NOTE: Remote Repositories nötig
+    QString fCommand = "git remote -v";
+    QString fResultStr;
+    execute(fCommand, fResultStr);
+    apendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
+
     int fItemCount = fSettings.beginReadArray(config::sSourcePath);
     for (int fItem = 0; fItem < fItemCount; ++fItem)
     {
@@ -150,6 +140,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(config::sSourcePath+"/"+config::sGroupFilter).toInt());
         insertSourceTree(fSourceDir, fItem);
     }
+
+    ui->labelFilePath->setText("");
+
     fSettings.endArray();
 
     fSettings.endGroup();
@@ -302,7 +295,16 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
     {
         if (ui->treeSource->hasFocus())
         {
-            deleteSelectedTreeWidgetItem(*ui->treeSource);
+            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource);
+            mContextMenuSourceTreeItem = nullptr;
+        }
+        if (ui->treeBranches->hasFocus())
+        {
+            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeBranches);
+        }
+        if (ui->treeHistory->hasFocus())
+        {
+            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeHistory);
         }
     }
 }
@@ -428,7 +430,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     && aParentItem->checkState(INT(Column::FileName)) == Qt::Checked)
                 {
                     QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                    ui->textBrowser->insertPlainText(fCmd + getLineFeed() + fResultStr + getLineFeed());
+                    apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed());
                     return false;
                 }
                 int fCountOk = 0;
@@ -487,7 +489,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         case Work::ApplyGitCommand:
                         {
                             QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                            ui->textBrowser->insertPlainText(fCmd + getLineFeed() + fResultStr + getLineFeed());
+                            apendTextToBrowser(fCmd + getLineFeed() + fResultStr);
                             fResult = fCmd.size() != 0;
                         }   break;
                         case Work::ShowAllFiles:
@@ -725,14 +727,13 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     QString fResultString;
     applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::GetStatusAll), fResultString);
 
-    ui->textBrowser->setText(fResultString);
-    ui->labelFilePath->setText("");
+    apendTextToBrowser(fResultString);
     stringt2typemap fCheckMap;
     parseGitStatus(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
 
     insertItem(fSourceDir, *ui->treeSource);
 
-    // TODO: in review
+    // TODO: bug: are all deleted items shown?
     for (const auto& fItem : fCheckMap)
     {
         if (fItem.second.is(Type::GitDeleted))
@@ -822,6 +823,13 @@ void  MainWindow::setLineFeed(const QString& aLF)
 {
     mLineFeed = aLF;
 }
+
+void MainWindow::apendTextToBrowser(const QString& aText)
+{
+    ui->textBrowser->insertPlainText(aText + getLineFeed());
+    ui->textBrowser->textCursor().setPosition(QTextCursor::End);
+}
+
 
 
 void MainWindow::handleWorker(int aWork)
@@ -1200,8 +1208,16 @@ void MainWindow::showOrHideHistory(bool checked)
     }
     else
     {
-        ui->treeHistory->setVisible(checked);
-        ui->treeBranches->setVisible(checked);
+        QTreeWidget* fFocused = focusedTreeWidget(false);
+        if (fFocused)
+        {
+            fFocused->setVisible(checked);
+        }
+        else
+        {
+            ui->treeHistory->setVisible(checked);
+            ui->treeBranches->setVisible(checked);
+        }
     }
     mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 }
@@ -1312,8 +1328,6 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(clearHistoryTree()));
 
-    connect(mActions.createAction(Cmd::DeleteSelectedTreeItem, tr("Delete tree entry"), tr("Deletes a selected deleteable tree entry")), SIGNAL(triggered()), this, SLOT(deleteSelectedTreeEntry()));
-
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars"), ui->treeHistory), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
 
     for (auto fAction : mActions.getList())
@@ -1361,14 +1375,6 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 }
 
-void MainWindow::deleteSelectedTreeEntry()
-{
-    if (ui->treeBranches->hasFocus())
-    {
-        ui->treeBranches->deleteSelected();
-    }
-}
-
 void MainWindow::clearHistoryTree()
 {
     if (ui->treeHistory->isVisible())
@@ -1397,7 +1403,7 @@ void  MainWindow::call_git_commit()
             applyGitCommandToFileTree(Cmd::getCommand(Cmd::Add));
             QString fResultStr;
             execute(fCommitCommand, fResultStr);
-            ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
+            apendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
             mContextMenuSourceTreeItem = nullptr;
         }
@@ -1405,7 +1411,7 @@ void  MainWindow::call_git_commit()
         {
             QString fResultStr;
             execute(fCommitCommand, fResultStr);
-            ui->textBrowser->insertPlainText(fCommitCommand + getLineFeed() + fResultStr + getLineFeed());
+            apendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
     }
@@ -1461,7 +1467,7 @@ void MainWindow::perform_custom_command()
             QString fResultStr;
             fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem));
             execute(fGitCommand, fResultStr);
-            ui->textBrowser->insertPlainText(fGitCommand + getLineFeed() + fResultStr + getLineFeed());
+            apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
         }
         else if (mContextMenuSourceTreeItem)
         {
@@ -1542,13 +1548,13 @@ void MainWindow::call_git_branch_command()
         fResult = execute(fGitCommand, fResultStr);
         if (fResult == 0)
         {
-            fResultStr = fGitCommand + getLineFeed() + fResultStr + getLineFeed();
+            fResultStr = fGitCommand + getLineFeed() + fResultStr;
         }
         else
         {
             fResultStr = tr("result of command \"%1\" is %2:%3%4").arg(fGitCommand).arg(fResult).arg(getLineFeed()).arg(fResultStr);
         }
-        ui->textBrowser->insertPlainText(fResultStr);
+        apendTextToBrowser(fResultStr);
     }
 
     if (fResult == 0)
@@ -1564,8 +1570,11 @@ void MainWindow::call_git_branch_command()
             case Cmd::ParseBranchListText:
                 ui->treeBranches->parseBranchListText(fResultStr);
                 ui->textBrowser->setPlainText("");
+                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
                 break;
             case Cmd::ParseHistoryText:
+                // TODO: ParseHistoryText does not work properly enough
+                // Items cannot be diffed in every case
                 parseGitLogHistoryText();
                 break;
         }
@@ -1583,7 +1592,7 @@ void MainWindow::collapse_tree_items()
     focusedTreeWidget()->collapseAll();
 }
 
-QTreeWidget* MainWindow::focusedTreeWidget()
+QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 {
     if (ui->treeHistory->hasFocus())
     {
@@ -1593,10 +1602,11 @@ QTreeWidget* MainWindow::focusedTreeWidget()
     {
         return ui->treeBranches;
     }
-    else
+    else if (aAlsoSource)
     {
         return ui->treeSource;
     }
+    return nullptr;
 }
 
 void MainWindow::performCustomGitActionSettings()

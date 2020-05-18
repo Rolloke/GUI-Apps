@@ -95,7 +95,6 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::UpdateGitStatus]         = "://resource/24X24/view-refresh.png";
     fActionIcons[Cmd::ShowHideTree]            = "://resource/24X24/code-class.svg";
     fActionIcons[Cmd::ClearTreeItems]          = "://resource/24X24/edit-clear.png";
-    fActionIcons[Cmd::DeleteSelectedTreeItem]  = "://resource/24X24/edit-delete.png";
     fActionIcons[Cmd::CustomGitActionSettings] = "://resource/24X24/preferences-system.png";
     for (const auto& fIconPath: fActionIcons )
     {
