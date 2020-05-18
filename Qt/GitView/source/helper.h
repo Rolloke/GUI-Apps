@@ -21,6 +21,7 @@ QString getSettingsName(const QString& aItemName);
 
 QString formatFileSize(quint64 aSize);
 
+void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 

@@ -63,6 +63,25 @@ QString formatFileSize(quint64 aSize)
     return QString::number(aSize) + " B";
 }
 
+void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
+{
+    for (auto fSelected : aTree.selectedItems())
+    {
+        while (aTree.indexOfTopLevelItem(fSelected) == -1)
+        {
+            fSelected = fSelected->parent();
+        }
+        if (fSelected)
+        {
+            if (callMessageBox("Delete %1 entry;%1", "Tree", fSelected->text(0), true) == QMessageBox::Yes)
+            {
+                aTree.removeItemWidget(fSelected, 0);
+                delete fSelected;
+            }
+        }
+    }
+}
+
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     for (auto fSelected : aTree.selectedItems())

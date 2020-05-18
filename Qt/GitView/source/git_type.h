@@ -66,7 +66,6 @@ struct Cmd
         ShowHideTree,
         ClearTreeItems,
         CustomGitActionSettings,
-        DeleteSelectedTreeItem,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,

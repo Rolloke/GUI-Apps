@@ -52,7 +52,6 @@ private Q_SLOTS:
 
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
-    void deleteSelectedTreeEntry();
 
     void showOrHideHistory(bool checked);
     void clearHistoryTree();
@@ -141,6 +140,8 @@ private:
     const QString& getLineFeed() const;
     void           setLineFeed(const QString& aLF=mNativeLineFeed);
 
+    void     apendTextToBrowser(const QString& aText);
+
     void     handleWorker(int);
     void     handleMessage(int, QVariant);
 
@@ -159,7 +160,7 @@ private:
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     void     parseGitLogHistoryText();
-    QTreeWidget* focusedTreeWidget();
+    QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     Ui::MainWindow*       ui;
     QString               mGitCommand;
