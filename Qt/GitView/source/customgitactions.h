@@ -38,7 +38,14 @@ class CustomGitActions : public QDialog
         tr("Context Menu History"),
         tr("Context Menu Branch"),
         tr("Toolbar 1"),
-        tr("Toolbar 2") };
+        tr("Toolbar 2")
+    };
+    enum class VariousHeader
+    {
+        Icon,
+        Name,
+        Size
+    };
 
     struct Btn {enum e
     {
@@ -48,6 +55,9 @@ class CustomGitActions : public QDialog
 public:
     explicit CustomGitActions(ActionList& aList, QWidget *parent = 0);
     ~CustomGitActions();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 Q_SIGNALS:
     void initCustomAction(QAction* fAction);
