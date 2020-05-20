@@ -22,8 +22,8 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->setupUi(this);
 
 
-    QStringList      fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"),  tr("Message box text")};
-    std::vector<int> fColumnWidth = {     42  ,      42   ,       200    ,     200   ,        65     ,           200          };
+    QStringList        fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"),  tr("Message box text")};
+
 
     mListModelActions = new ActionItemModel(0, INT(ActionsTable::Last), this);
     connect(mListModelActions, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(on_ActionTableListItemChanged(QStandardItem*)));
@@ -31,15 +31,9 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     ui->tableViewActions->setModel(mListModelActions);
     ui->tableViewActions->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    int fWidth = ui->tableViewActions->rect().width();
-    int fItemWidth = 0;
-    std::for_each(fColumnWidth.begin(), fColumnWidth.end()-1, [&fItemWidth](int fItem ) { fItemWidth+= fItem; });
-    fColumnWidth[INT(ActionsTable::MsgBoxText)] = fWidth - fItemWidth;
-
     for (int fColumn = 0; fColumn<INT(ActionsTable::Last); ++fColumn)
     {
         mListModelActions->setHeaderData(fColumn, Qt::Horizontal, fColumnName[fColumn], Qt::DisplayRole);
-        ui->tableViewActions->setColumnWidth(fColumn            , fColumnWidth[fColumn]);
     }
 
 
@@ -57,10 +51,11 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, INT(ActionsTable::ID)), QItemSelectionModel::SelectCurrent);
 
-    fWidth = ui->tableViewVarious->rect().width();
-    mListModelVarious = new VariousItemModel(0, 1, this);
+    int fWidth = ui->tableViewVarious->rect().width();
+    mListModelVarious = new VariousItemModel(0, INT(VariousHeader::Size), this);
     ui->tableViewVarious->setModel(mListModelVarious);
-    ui->tableViewVarious->setColumnWidth(0, fWidth);
+    ui->tableViewVarious->setColumnWidth(INT(VariousHeader::Icon), INT(0.2  * fWidth));
+    ui->tableViewVarious->setColumnWidth(INT(VariousHeader::Name), INT(0.75 * fWidth));
 
     enableButtons(0);
     on_comboBoxVarious_currentIndexChanged(INT(VariousListIndex::Icons));
@@ -69,6 +64,22 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
 CustomGitActions::~CustomGitActions()
 {
     delete ui;
+}
+
+
+void CustomGitActions::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    std::vector<float> fColumnWidth = {  0.055, 0.055, 0.25, 0.25, 0.1, 0.25 };
+    int fWidth = ui->tableViewActions->rect().width();
+    float fItemWidth = 0;
+    std::for_each(fColumnWidth.begin(), fColumnWidth.end()-1, [&fItemWidth](float fItem ) { fItemWidth += fItem; });
+    fColumnWidth[INT(ActionsTable::Last)-1] = 1.0 - fItemWidth;
+
+    for (int fColumn = 0; fColumn<INT(ActionsTable::Last); ++fColumn)
+    {
+        ui->tableViewActions->setColumnWidth(fColumn            , INT(fColumnWidth[fColumn]*fWidth));
+    }
 }
 
 void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow)
@@ -169,7 +180,8 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
 void CustomGitActions::initListIcons()
 {
     mInitialize = true;
-    mListModelVarious->setHeaderData(0, Qt::Horizontal, tr("Icons"));
+    mListModelVarious->setHeaderData(INT(VariousHeader::Icon), Qt::Horizontal, tr("Icons"));
+    mListModelVarious->setHeaderData(INT(VariousHeader::Name), Qt::Horizontal, tr("Name"));
     mListModelVarious->removeRows(0, mListModelVarious->rowCount());
     QString fPath = ":/resource/24X24/";
     QDir fResources(fPath);
@@ -179,8 +191,9 @@ void CustomGitActions::initListIcons()
     for (const auto& fItem : fList)
     {
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
-        mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), QIcon(fPath + fItem), Qt::DecorationRole);
-        mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), QVariant(fPath + fItem), Qt::UserRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Icon), QModelIndex()), QIcon(fPath + fItem), Qt::DecorationRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Icon), QModelIndex()), QVariant(fPath + fItem), Qt::UserRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Name), QModelIndex()), fItem, Qt::EditRole);
         ++fRow;
     }
     mInitialize = false;
@@ -189,7 +202,8 @@ void CustomGitActions::initListIcons()
 void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& aHeader)
 {
     mInitialize = true;
-    mListModelVarious->setHeaderData(0, Qt::Horizontal, aHeader);
+    mListModelVarious->setHeaderData(INT(VariousHeader::Icon), Qt::Horizontal, tr("Icon"));
+    mListModelVarious->setHeaderData(INT(VariousHeader::Name), Qt::Horizontal, aHeader);
     mListModelVarious->removeRows(0, mListModelVarious->rowCount());
 
     int fRow = 0;
@@ -200,11 +214,12 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
         if (fAction)
         {
-            mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), fAction->toolTip(), Qt::EditRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Icon), QModelIndex()), fAction->icon(), Qt::DecorationRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Name), QModelIndex()), fAction->toolTip(), Qt::EditRole);
         }
         else
         {
-            mListModelVarious->setData(mListModelVarious->index(fRow, 0, QModelIndex()), tr("-- Separator --"), Qt::EditRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, INT(VariousHeader::Name), QModelIndex()), tr("-- Separator --"), Qt::EditRole);
         }
         ++fRow;
     }
@@ -218,7 +233,7 @@ void CustomGitActions::on_btnToLeft_clicked()
         int fIconRow   = ui->tableViewVarious->currentIndex().row();
         int fActionRow = ui->tableViewActions->currentIndex().row();
         Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, INT(ActionsTable::ID))).toInt());
-        QString fIconPath = mListModelVarious->data(mListModelVarious->index(fIconRow, 0), Qt::UserRole).toString();
+        QString fIconPath = mListModelVarious->data(mListModelVarious->index(fIconRow, INT(VariousHeader::Icon)), Qt::UserRole).toString();
         if (fIconPath.size())
         {
             mListModelActions->setData(mListModelActions->index(fActionRow, INT(ActionsTable::Icon)), QIcon(fIconPath), Qt::DecorationRole);
@@ -240,7 +255,7 @@ void CustomGitActions::on_btnToLeft_clicked()
 void CustomGitActions::on_btnToRight_clicked()
 {
     int fActionRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, 0)).toInt());
+    Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, INT(ActionsTable::ID))).toInt());
     auto& fCmdVector = getCmdVector(static_cast<VariousListIndex>(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
     int fSelected = fCmdVector.size()-1;
