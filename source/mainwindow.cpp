@@ -63,11 +63,6 @@ const QString sModified("Modified");
 
 
 
-#ifdef __linux__
-const QString MainWindow::mNativeLineFeed = "\n";
-#else
-const QString MainWindow::mNativeLineFeed = "\r\n";
-#endif
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
@@ -77,7 +72,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mActions(this)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
-    , mLineFeed(mNativeLineFeed)
 {
     ui->setupUi(this);
 
@@ -85,10 +79,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QObject::connect(this, SIGNAL(doWork(int)), &mWorker, SLOT(doWork(int)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
-
-    mIgnoreMap[Folder::FolderSelf]    = Type(Type::Folder);
-    mIgnoreMap[Folder::FolderUp]      = Type(Type::Folder);
-    mIgnoreMap[Folder::GitRepository] = Type(Type::GitFolder);
 
     ui->treeSource->header()->setSortIndicator(INT(Column::FileName), Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
@@ -328,7 +318,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         while (!QDir(fParent.absolutePath() + QDir::separator() + Folder::GitRepository).exists())
         {
             fParent.cdUp();
-            addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
+            mGitIgnore.addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
             if (fParent.isRoot()) break;
         };
 #if RELATIVE_GIT_PATH ==1
@@ -340,7 +330,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         fTopLevelItem = true;
     }
 
-    addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
+    mGitIgnore.addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
 
     quint64 fSizeOfFiles = 0;
     do
@@ -349,7 +339,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 
         const QFileInfo& fFileInfo = fIterator.fileInfo();
 
-        if (ignoreFile(fFileInfo)) continue;
+        if (mGitIgnore.ignoreFile(fFileInfo)) continue;
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
@@ -386,14 +376,14 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
             fSizeOfFiles += fFileInfo.size();
             fItem->setData(INT(Column::Size), Qt::SizeHintRole, QVariant(fFileInfo.size()));
         }
-        mIgnoreContainingNegation.reset();
+        //mIgnoreContainingNegation.reset();
     }
     while (fIterator.hasNext());
 
 
     for (auto fMapLevel : fMapLevels)
     {
-        removeIgnoreMapLevel(fMapLevel);
+        mGitIgnore.removeIgnoreMapLevel(fMapLevel);
     }
 
     if (fTopLevelItem)
@@ -577,149 +567,6 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
     return false;
 }
 
-// TODO: move gitignore functions and member into own class
-void MainWindow::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels)
-{
-    QFile file(aParentDir.filePath(Folder::GitIgnoreFile));
-
-    if (file.open(QIODevice::ReadOnly))
-    {
-        int fMapLevel = std::max_element(mIgnoreMap.begin(), mIgnoreMap.end(), [] (stringt2typemap::const_reference fE1, stringt2typemap::const_reference fE2)
-        {
-            return fE1.second.mLevel < fE2.second.mLevel;
-        })->second.mLevel + 1;
-
-        aMapLevels.push_back(fMapLevel);
-        do
-        {
-            QString fLine = file.readLine();
-            fLine.remove(getLineFeed());
-            int fIndex = fLine.indexOf('#');
-            if (fIndex != -1)
-            {
-                fLine.remove(fIndex,fLine.size()-fIndex);
-                fLine = fLine.trimmed();
-            }
-            Type fType(fLine.contains('/') ? Type::Folder : Type::File, fMapLevel);
-            if (fLine.contains('*')) fType.add(Type::WildCard);
-            if (fLine.contains('?')) fType.add(Type::WildCard);
-            if (fLine.contains('[') && fLine.contains(']')) fType.add(Type::RegExp);
-            if (fLine.contains('!')) fType.add(Type::Negation);
-            fLine.remove(QChar::CarriageReturn);
-            fIndex = fLine.lastIndexOf('/');
-            if (fIndex != -1 && fIndex == fLine.size() - 1)
-            {
-                fLine.remove(fIndex, 1);
-            }
-            fIndex = fLine.indexOf('!');
-            if (fIndex == 0)
-            {
-                fLine.remove(fIndex, 1);
-            }
-
-            if (fLine.size())
-            {
-                if (mIgnoreMap.count(fLine.toStdString()))
-                {
-                    auto fMessage = QObject::tr("\"%1\" not inserted from %2").arg(fLine).arg(file.fileName());
-                    TRACE(Logger::warning, fMessage.toStdString().c_str() );
-                }
-                else
-                {
-                    auto fMessage = QObject::tr("\"%1\" inserted from %2").arg(fLine).arg(file.fileName());
-                    TRACE(Logger::debug, fMessage.toStdString().c_str() );
-                    mIgnoreMap[fLine.toStdString()] = fType;
-                }
-            }
-        }
-        while (!file.atEnd());
-    }
-    for (const auto& fItem : mIgnoreMap)
-    {
-        if (fItem.second.is(Type::Negation))
-        {
-            for (auto& fSearchItem : mIgnoreMap)
-            {
-                if (   fItem.first.find(fSearchItem.first) != std::string::npos
-                    && fItem.first != fSearchItem.first)
-                {
-                     fSearchItem.second.add(Type::ContainingNegation);
-                }
-            }
-        }
-    }
-}
-
-void MainWindow::removeIgnoreMapLevel(int aMapLevel)
-{
-    if (aMapLevel)
-    {
-        for (;;)
-        {
-            auto fElem = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [aMapLevel](stringt2typemap::const_reference fE)
-            {
-                 return fE.second.mLevel==aMapLevel;
-            });
-
-            if (fElem != mIgnoreMap.end())
-            {
-                mIgnoreMap.erase(fElem);
-            }
-            else break;
-        }
-    }
-}
-
-bool MainWindow::ignoreFile(const QFileInfo& aFileInfo)
-{
-    const std::string& fFileName = aFileInfo.fileName().toStdString();
-    const std::string& fFilePath = aFileInfo.filePath().toStdString();
-
-    auto fFound = mIgnoreMap.find(fFileName);
-    if (fFound == mIgnoreMap.end())
-    {
-        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
-        {
-            if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
-            {
-                QRegExp fRegEx(fItem->first.c_str());
-                fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
-                if (fRegEx.exactMatch(fFileName.c_str()))
-                {
-                    fFound = fItem;
-                    break;
-                }
-            }
-        }
-    }
-
-    if (mIgnoreContainingNegation)
-    {
-        if (fFound != mIgnoreMap.end() && fFound->second.is(Type::Negation))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-    else
-    {
-        if (fFound != mIgnoreMap.end())
-        {
-            if (fFound->second.is(Type::ContainingNegation))
-            {
-                mIgnoreContainingNegation = *fFound;
-                return false;
-            }
-            if (fFound->second.is(Type::File)   && aFileInfo.isFile()) return true;
-            if (fFound->second.is(Type::Folder) && aFileInfo.isDir() ) return true;
-        }
-    }
-    return false;
-}
-
 void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 {
     QString fResultString;
@@ -812,18 +659,9 @@ void MainWindow::selectSourceFolder()
     }
 }
 
-const QString& MainWindow::getLineFeed() const
-{
-    return mLineFeed;
-}
-
-void  MainWindow::setLineFeed(const QString& aLF)
-{
-    mLineFeed = aLF;
-}
-
 void MainWindow::apendTextToBrowser(const QString& aText)
 {
+    on_btnCloseText_clicked();
     ui->textBrowser->insertPlainText(aText + getLineFeed());
     ui->textBrowser->textCursor().setPosition(QTextCursor::End);
 }
@@ -1075,9 +913,6 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
     }
 }
 
-
-
-
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
     mContextMenuSourceTreeItem = item;
@@ -1183,36 +1018,10 @@ void MainWindow::showOrHideTrees(bool checked)
     mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 }
 
-void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
+void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
-    QString fText;
-//    if (aColumn == INT(History::Column::Text))
-    {
-        for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
-        {
-            fText.append(History::name(static_cast<History::Entry>(fRole)));
-            fText.append(getLineFeed());
-            fText.append(aItem->data(INT(History::Column::Commit), fRole).toString());
-            fText.append(getLineFeed());
-        }
-    }
-//    else
-//    {
-//        QString fGitCmd = "git show ";
-//        fGitCmd.append(aItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
-//        QString fResultStr;
-//        int fResult = execute(fGitCmd, fResultStr);
-//        fText = fGitCmd;
-//        fText.append(getLineFeed());
-//        fText.append(fResultStr);
-
-//        if (fResult)
-//        {
-//            fText.append(getLineFeed());
-//            fText.append(tr("Result failure no: %1").arg(fResult));
-//        }
-//    }
-    ui->textBrowser->setPlainText(fText);
+    on_btnCloseText_clicked();
+    ui->textBrowser->setPlainText(ui->treeHistory->itemClicked(aItem, aColumn));
 }
 
 void MainWindow::initContextMenuActions()

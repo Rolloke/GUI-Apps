@@ -10,9 +10,10 @@ class QHistoryTreeWidget : public QTreeWidget
 public:
     QHistoryTreeWidget(QWidget *parent = 0);
 
-    void           parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName);
-    QVariant       customContextMenuRequested(const QPoint &pos);
-    const QString& getSelectedHistoryHashItems();
+    void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName);
+    QVariant        customContextMenuRequested(const QPoint &pos);
+    const QString&  getSelectedHistoryHashItems();
+    QString         itemClicked(QTreeWidgetItem *aItem, int aColumn);
 
 Q_SIGNALS:
 

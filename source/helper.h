@@ -17,6 +17,10 @@
 #define LOAD_STR(SETTING, ITEM, CONVERT)            ITEM=SETTING.value(getSettingsName(#ITEM), ITEM).CONVERT()
 #define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(getSettingsName(#ITEM), QVariant(FUNC_IN(ITEM))).CONVERT());
 
+#define INT(n) static_cast<qint32>(n)
+#define isBetween(VAL, MIN, MAX) (VAL >= MIN && VAL <= MAX)
+
+
 QString getSettingsName(const QString& aItemName);
 
 QString formatFileSize(quint64 aSize);
@@ -30,7 +34,8 @@ int execute(const QString& command, QString& aResultText);
 
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
 
-#define isBetween(VAL, MIN, MAX) (VAL >= MIN && VAL <= MAX)
+const char* getLineFeed();
+
 
 class QTreeWidgetHook: public QTreeWidget
 {

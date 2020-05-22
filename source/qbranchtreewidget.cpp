@@ -1,7 +1,7 @@
 #include "qbranchtreewidget.h"
-#include "git_type.h"
 #include "actions.h"
 #include "helper.h"
+
 #include <QMenu>
 
 using namespace git;
