@@ -290,7 +290,7 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="QTreeWidget" name="treeHistory">
+             <widget class="QHistoryTreeWidget" name="treeHistory">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -435,6 +435,11 @@
    <class>QBranchTreeWidget</class>
    <extends>QTreeWidget</extends>
    <header location="global">qbranchtreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QHistoryTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qhistorytreewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

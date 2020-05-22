@@ -1,12 +1,13 @@
 #include "qbranchtreewidget.h"
 #include "git_type.h"
 #include "actions.h"
+#include "helper.h"
 #include <QMenu>
 
 using namespace git;
 
 QBranchTreeWidget::QBranchTreeWidget(QWidget *parent) : QTreeWidget(parent)
-, mSelectedBranchItem(nullptr)
+, mSelectedItem(nullptr)
 {
     setVisible(false);
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -20,38 +21,38 @@ QBranchTreeWidget::~QBranchTreeWidget()
 void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
 {
     QStringList fLines = aBranchText.split("\n");
-    mSelectedBranchItem = nullptr;
+    mSelectedItem = nullptr;
     setVisible(true);
     for (auto fLine : fLines)
     {
-        if (mSelectedBranchItem == nullptr)
+        if (mSelectedItem == nullptr)
         {
             auto fFoundItem = findItems(fLine, Qt::MatchFixedString|Qt::MatchCaseSensitive, INT(Column::Text));
             for (const auto& fItem : fFoundItem)
             {
-                auto*fRemoved =takeTopLevelItem(indexOfTopLevelItem(fItem));
+                auto*fRemoved = takeTopLevelItem(indexOfTopLevelItem(fItem));
                 delete fRemoved;
             }
-            mSelectedBranchItem = new QTreeWidgetItem(QStringList(fLine));
-            addTopLevelItem(mSelectedBranchItem);
+            mSelectedItem = new QTreeWidgetItem(QStringList(fLine));
+            addTopLevelItem(mSelectedItem);
         }
         else if (fLine.size())
         {
             QTreeWidgetItem* fNewBranchItem = new QTreeWidgetItem();
-            mSelectedBranchItem->addChild(fNewBranchItem);
+            mSelectedItem->addChild(fNewBranchItem);
             fNewBranchItem->setText(INT(Column::Text), fLine);
         }
     }
-    if (mSelectedBranchItem)
+    if (mSelectedItem)
     {
-        expandItem(mSelectedBranchItem);
+        expandItem(mSelectedItem);
     }
-    mSelectedBranchItem = nullptr;
+    mSelectedItem = nullptr;
 }
 
 void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)
 {
-    mSelectedBranchItem = itemAt(pos);
+    mSelectedItem = itemAt(pos);
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
@@ -60,23 +61,19 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
 QString QBranchTreeWidget::getBranchItem()
 {
-    QString fItem = (mSelectedBranchItem && indexOfTopLevelItem(mSelectedBranchItem) == -1) ? mSelectedBranchItem->text(INT(Column::Text)) : "";
+    QString fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(INT(Column::Text)) : "";
     return fItem.remove(0, 2);
 }
 
-QString QBranchTreeWidget::getBranchTopItem()
+QString QBranchTreeWidget::getBranchTopItemText()
 {
-    QTreeWidgetItem*fItem = mSelectedBranchItem;
-    while (fItem && indexOfTopLevelItem(fItem) == -1)
-    {
-        fItem = fItem->parent();
-    }
+    QTreeWidgetItem* fItem = getTopLevelItem(*this, mSelectedItem);
     return (fItem) ? fItem->text(INT(Column::Text)) : "";
 }
 
-void QBranchTreeWidget::deleteSelected()
+void QBranchTreeWidget::deleteSelectedItem()
 {
-    QTreeWidgetItem*fItem = mSelectedBranchItem;
+    QTreeWidgetItem*fItem = mSelectedItem;
     while (fItem)
     {
         int fIndex = indexOfTopLevelItem(fItem);
@@ -87,11 +84,21 @@ void QBranchTreeWidget::deleteSelected()
         }
         fItem = fItem->parent();
     }
-    mSelectedBranchItem = nullptr;
+    mSelectedItem = nullptr;
 }
 
 void QBranchTreeWidget::clear()
 {
     QTreeWidget::clear();
-    mSelectedBranchItem = nullptr;
+    mSelectedItem = nullptr;
+}
+
+QModelIndex QBranchTreeWidget::indexFromSelectedItem() const
+{
+    return QTreeWidget::indexFromItem(mSelectedItem, INT(Column::Text));
+}
+
+QTreeWidgetItem * QBranchTreeWidget::itemFromIndex(const QModelIndex &index) const
+{
+    return QTreeWidget::itemFromIndex(index);
 }

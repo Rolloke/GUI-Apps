@@ -78,7 +78,7 @@ void CustomGitActions::resizeEvent(QResizeEvent *event)
 
     for (int fColumn = 0; fColumn<INT(ActionsTable::Last); ++fColumn)
     {
-        ui->tableViewActions->setColumnWidth(fColumn            , INT(fColumnWidth[fColumn]*fWidth));
+        ui->tableViewActions->setColumnWidth(fColumn, INT(fColumnWidth[fColumn]*fWidth));
     }
 }
 
