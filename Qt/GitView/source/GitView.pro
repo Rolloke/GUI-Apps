@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     history.cpp \
     actions.cpp \
     customgitactions.cpp \
-    qbranchtreewidget.cpp
+    qbranchtreewidget.cpp \
+    qhistorytreewidget.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -40,7 +41,8 @@ HEADERS  += mainwindow.h \
     history.h \
     actions.h \
     customgitactions.h \
-    qbranchtreewidget.h
+    qbranchtreewidget.h \
+    qhistorytreewidget.h
 
 FORMS    += mainwindow.ui \
     commitmessage.ui \

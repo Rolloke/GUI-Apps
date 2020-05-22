@@ -17,11 +17,14 @@ public:
     QBranchTreeWidget(QWidget *parent = 0);
     ~QBranchTreeWidget();
 
-    QString getBranchTopItem();
+    QString getBranchTopItemText();
     QString getBranchItem();
     void parseBranchListText(const QString& aBranchText);
-    void on_customContextMenuRequested(const ActionList& aMain, const QPoint &pos);
-    void deleteSelected();
+    void on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
+    void deleteSelectedItem();
+
+    QModelIndex indexFromSelectedItem() const;
+    QTreeWidgetItem * itemFromIndex(const QModelIndex &index) const;
 
 Q_SIGNALS:
 
@@ -30,7 +33,7 @@ public Q_SLOTS:
    void clear();
 
 private:
-    QTreeWidgetItem* mSelectedBranchItem;
+    QTreeWidgetItem* mSelectedItem;
 };
 
 #endif // BRANCH_H

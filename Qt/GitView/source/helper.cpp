@@ -67,10 +67,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     for (auto fSelected : aTree.selectedItems())
     {
-        while (aTree.indexOfTopLevelItem(fSelected) == -1)
-        {
-            fSelected = fSelected->parent();
-        }
+        fSelected = getTopLevelItem(aTree, fSelected);
         if (fSelected)
         {
             if (callMessageBox("Delete %1 entry;%1", "Tree", fSelected->text(0), true) == QMessageBox::Yes)
@@ -99,6 +96,15 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree)
     {
         aTree.takeTopLevelItem((i));
     }
+}
+
+QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem)
+{
+    while (aItem && aTree.indexOfTopLevelItem(aItem) == -1)
+    {
+        aItem = aItem->parent();
+    }
+    return aItem;
 }
 
 int execute(const QString& command, QString& aResultText)

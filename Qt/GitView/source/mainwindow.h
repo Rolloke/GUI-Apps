@@ -53,8 +53,9 @@ private Q_SLOTS:
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
-    void showOrHideHistory(bool checked);
-    void clearHistoryTree();
+    void showOrHideTrees(bool checked);
+    void clearTrees();
+
     void performCustomGitActionSettings();
 
     void call_git_commit();
@@ -159,7 +160,6 @@ private:
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
-    void     parseGitLogHistoryText();
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     Ui::MainWindow*       ui;
@@ -170,7 +170,6 @@ private:
     QString               mConfigFileName;
     git::stringt2typemap  mIgnoreMap;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
-    QString               mHistoryHashItems;
     QString               mLineFeed;
     boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
     static const QString  mNativeLineFeed;
