@@ -1,7 +1,6 @@
 #ifndef CUSTOMGITACTIONS_H
 #define CUSTOMGITACTIONS_H
 
-#include "git_type.h"
 #include "actions.h"
 
 #include <QDialog>

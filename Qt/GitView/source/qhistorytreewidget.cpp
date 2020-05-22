@@ -1,7 +1,7 @@
 #include "qhistorytreewidget.h"
 #include <QHeaderView>
 #include <QMenu>
-#include "git_type.h"
+#include "helper.h"
 #include "history.h"
 
 using namespace git;
@@ -78,6 +78,38 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
         }
     }
     return fItemData;
+}
+
+QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int /* aColumn */)
+{
+    QString fText;
+//    if (aColumn == INT(History::Column::Text))
+    {
+        for (int fRole=INT(History::Entry::CommitHash); fRole < INT(History::Entry::NoOfEntries); ++fRole)
+        {
+            fText.append(History::name(static_cast<History::Entry>(fRole)));
+            fText.append(getLineFeed());
+            fText.append(aItem->data(INT(History::Column::Commit), fRole).toString());
+            fText.append(getLineFeed());
+        }
+    }
+//    else
+//    {
+//        QString fGitCmd = "git show ";
+//        fGitCmd.append(aItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+//        QString fResultStr;
+//        int fResult = execute(fGitCmd, fResultStr);
+//        fText = fGitCmd;
+//        fText.append(getLineFeed());
+//        fText.append(fResultStr);
+
+//        if (fResult)
+//        {
+//            fText.append(getLineFeed());
+//            fText.append(tr("Result failure no: %1").arg(fResult));
+//        }
+//    }
+    return fText;
 }
 
 const QString& QHistoryTreeWidget::getSelectedHistoryHashItems()

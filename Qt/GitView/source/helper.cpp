@@ -152,6 +152,16 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
     return fRequestMessage.exec();
 }
 
+const char* getLineFeed()
+{
+#ifdef __linux__
+    return  "\n";
+#else
+    return "\r\n";
+#endif
+}
+
+
 QTreeWidgetHook::QTreeWidgetHook()
 {
 

@@ -13,8 +13,6 @@
 #define MAP_TYPE 1
 #endif
 
-#define INT(n) static_cast<qint32>(n)
-
 namespace git
 {
 #if MAP_TYPE == 0

@@ -1,4 +1,5 @@
 #include "actions.h"
+#include "helper.h"
 
 #include <QAction>
 #include <QMenu>

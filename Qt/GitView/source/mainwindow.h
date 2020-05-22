@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include "workerthreadconnector.h"
-#include "git_type.h"
 #include "actions.h"
+#include "gitignore.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -12,8 +12,6 @@
 #include <QTreeWidgetItem>
 #include <QSemaphore>
 #include <QTime>
-#include <map>
-#include <boost/optional.hpp>
 
 
 namespace Ui
@@ -138,17 +136,11 @@ private:
     void     selectSourceFolder();
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
-    const QString& getLineFeed() const;
-    void           setLineFeed(const QString& aLF=mNativeLineFeed);
-
     void     apendTextToBrowser(const QString& aText);
 
     void     handleWorker(int);
     void     handleMessage(int, QVariant);
 
-    void     addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
-    void     removeIgnoreMapLevel(int aLevel);
-    bool     ignoreFile(const QFileInfo& aFileInfo);
     QString  getItemFilePath(QTreeWidgetItem* item);
     QString  getItemTopDirPath(QTreeWidgetItem* item);
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
@@ -168,11 +160,8 @@ private:
     Work                  mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
-    git::stringt2typemap  mIgnoreMap;
+    GitIgnore             mGitIgnore;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
-    QString               mLineFeed;
-    boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
-    static const QString  mNativeLineFeed;
 };
 
 #endif // MAINWINDOW_H
