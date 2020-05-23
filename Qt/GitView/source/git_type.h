@@ -13,6 +13,8 @@
 #define MAP_TYPE 1
 #endif
 
+class QFileInfo;
+
 namespace git
 {
 #if MAP_TYPE == 0
@@ -64,6 +66,7 @@ struct Cmd
         ShowHideTree,
         ClearTreeItems,
         CustomGitActionSettings,
+        InsertHashFileNames,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
@@ -119,6 +122,7 @@ struct Type
         Checked             = 0x008000,
         Hidden              = 0x010000,
         Executeable         = 0x020000,
+        Branch              = 0x040000,
         WildCard            = 0x100000,
         Negation            = 0x200000,
         RegExp              = 0x400000,
@@ -139,7 +143,9 @@ struct Type
     QString type_name();
 
     static const char* name(TypeFlags aType);
-    static TypeFlags   translate(const QString& fIdentifier);
+
+    void translate(const QString& fIdentifier);
+    void translate(const QFileInfo& fInfo);
 
     uint mType;
     int mLevel;

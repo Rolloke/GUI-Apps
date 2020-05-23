@@ -98,6 +98,17 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree)
     }
 }
 
+int getItemLevel(QTreeWidgetItem* aItem)
+{
+    int fLevel = 1;
+    while (aItem)
+    {
+        aItem = aItem->parent();
+        --fLevel;
+    }
+    return -fLevel;
+}
+
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem)
 {
     while (aItem && aTree.indexOfTopLevelItem(aItem) == -1)
