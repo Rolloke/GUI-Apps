@@ -7,23 +7,36 @@ class QHistoryTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
+    enum class Level
+    {
+        Top,
+        Log,
+        File
+    };
+
 public:
     QHistoryTreeWidget(QWidget *parent = 0);
 
-    void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName);
+    void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType);
     QVariant        customContextMenuRequested(const QPoint &pos);
-    const QString&  getSelectedHistoryHashItems();
     QString         itemClicked(QTreeWidgetItem *aItem, int aColumn);
+
+    const QString&  getSelectedHistoryHashItems();
+    const QString&  getSelectedHistoryFile();
+    bool            isSelectionDiffable();
+    bool            isSelectionFileDiffable();
 
 Q_SIGNALS:
 
 public Q_SLOTS:
     void clear();
+    void insertFileNames();
 
 protected:
 
 private:
 
+    QString mHistoryFile;
     QString mHistoryHashItems;
 };
 

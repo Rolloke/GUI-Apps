@@ -2,6 +2,7 @@
 #include "git_type.h"
 #include <QStringList>
 #include <QObject>
+#include <QFileInfo>
 
 namespace git
 {
@@ -178,26 +179,35 @@ QString Type::type_name()
     return Type::name(static_cast<Type::TypeFlags>(Type::FileType&mType));
 }
 
-Type::TypeFlags Type::translate(const QString& fIdentifier)
+void Type::translate(const QString& fIdentifier)
 {
-    int fType = None;
-    if (fIdentifier.contains('D'))  fType |= GitDeleted;
-    if      (fIdentifier[1]=='M')   fType |= GitModified;
-    else if (fIdentifier[0]=='M')   fType |= GitModified|GitStaged;
-    if      (fIdentifier[1]=='A')   fType |= GitAdded;
-    else if (fIdentifier[0]=='A')   fType |= GitAdded|GitStaged;
-    if      (fIdentifier[1]=='R')   fType |= GitRenamed;
-    else if (fIdentifier[0]=='R')   fType |= GitRenamed|GitStaged;
-    if      (fIdentifier=="DD")     fType |= GitUnmerged|GitBoth;   // unmerged, both deleted
-    else if (fIdentifier=="AU")     fType |= GitUnmerged|GitLocal;  // unmerged, added by us
-    else if (fIdentifier=="UD")     fType |= GitUnmerged|GitRemote; // unmerged, deleted by them
-    else if (fIdentifier=="UA")     fType |= GitUnmerged|GitRemote; // unmerged, added by them
-    else if (fIdentifier=="DU")     fType |= GitUnmerged|GitLocal;  // unmerged, deleted by us
-    else if (fIdentifier=="AA")     fType |= GitUnmerged|GitBoth;   // unmerged, both added
-    else if (fIdentifier=="UU")     fType |= GitUnmerged|GitBoth;   // unmerged, both modified
-    if (fIdentifier.contains("?"))  fType |= GitUnTracked;
-    if (fIdentifier.contains("##")) fType |= Repository;
-    return static_cast<TypeFlags>(fType);
+
+    if (fIdentifier.contains('D'))  add(GitDeleted);
+    if      (fIdentifier[1]=='M')   add(GitModified);
+    else if (fIdentifier[0]=='M')   add(static_cast<TypeFlags>(GitModified|GitStaged));
+    if      (fIdentifier[1]=='A')   add(GitAdded);
+    else if (fIdentifier[0]=='A')   add(static_cast<TypeFlags>(GitAdded|GitStaged));
+    if      (fIdentifier[1]=='R')   add(GitRenamed);
+    else if (fIdentifier[0]=='R')   add(static_cast<TypeFlags>(GitRenamed|GitStaged));
+    if      (fIdentifier=="DD")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both deleted
+    else if (fIdentifier=="AU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, added by us
+    else if (fIdentifier=="UD")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, deleted by them
+    else if (fIdentifier=="UA")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, added by them
+    else if (fIdentifier=="DU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, deleted by us
+    else if (fIdentifier=="AA")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both added
+    else if (fIdentifier=="UU")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both modified
+    if (fIdentifier.contains("?"))  add(GitUnTracked);
+    if (fIdentifier.contains("##")) add(Repository);
+
+}
+
+void Type::translate(const QFileInfo& fInfo)
+{
+    if (fInfo.isFile())       add(File);
+    if (fInfo.isDir())        add(Folder);
+    if (fInfo.isHidden())     add(Hidden);
+    if (fInfo.isExecutable()) add(Executeable);
+    if (fInfo.isSymLink())    add(SymLink);
 }
 
 

@@ -354,11 +354,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         fItem->setData(INT(Column::DateTime), INT(Role::DateTime), QVariant(fFileInfo.lastModified()));
 
         Type fType;
-        if (fFileInfo.isFile())       fType.add(Type::File);
-        if (fFileInfo.isDir())        fType.add(Type::Folder);
-        if (fFileInfo.isHidden())     fType.add(Type::Hidden);
-        if (fFileInfo.isExecutable()) fType.add(Type::Executeable);
-        if (fFileInfo.isSymLink())    fType.add(Type::SymLink);
+        fType.translate(fFileInfo);
 
         fItem->setData(INT(Column::State), INT(Role::Filter), QVariant(fType.mType));
 
@@ -702,7 +698,8 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
 
         if (fRelativePath.size())
         {
-            Type fType(Type::translate(fState));
+            Type fType;
+            fType.translate(fState);
 
             if (fType.is(Type::Repository))
             {
@@ -712,8 +709,7 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             {
                 QString fFullPath = fSource + QDir::toNativeSeparators(fRelativePath);
                 QFileInfo fFileInfo(fFullPath);
-                if (fFileInfo.isFile())   fType.add(Type::File);
-                if (fFileInfo.isDir())    fType.add(Type::Folder);
+                fType.translate(fFileInfo);
                 aFiles[fFullPath.toStdString()] = fType;
             }
 
@@ -762,8 +758,6 @@ QString MainWindow::getItemTopDirPath(QTreeWidgetItem* aItem)
     return "";
 }
 
-// SLOTS
-
 void MainWindow::cancelCurrentWorkTask()
 {
     mCurrentTask = Work::None;
@@ -793,6 +787,8 @@ void MainWindow::updateGitStatus()
     ui->statusBar->showMessage("Total selected bytes: " + formatFileSize(fSize));
 
 }
+
+// SLOTS
 
 void MainWindow::on_btnStoreText_clicked()
 {
@@ -1100,6 +1096,9 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
 
+    connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
+
+
     for (auto fAction : mActions.getList())
     {
         mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::BuiltIn);
@@ -1130,9 +1129,22 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 
     QMenu menu(this);
+    if (!ui->treeHistory->isSelectionDiffable())
+    {
+        mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(false);
+        mActions.getAction(Cmd::ShowHistoryDifference)->setEnabled(false);
+    }
+    if (!ui->treeHistory->isSelectionFileDiffable())
+    {
+        mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(false);
+    }
+
     mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
     menu.exec(ui->treeHistory->mapToGlobal(pos));
 
+    mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(true);
+    mActions.getAction(Cmd::ShowHistoryDifference)->setEnabled(true);
+    mContextMenuSourceTreeItem = nullptr;
 }
 
 void MainWindow::clearTrees()
@@ -1220,6 +1232,7 @@ void MainWindow::perform_custom_command()
     }
     else
     {
+        Type    fType;
         getSelectedTreeItem();
         if (fGitCommand.contains("-C %1"))
         {
@@ -1233,7 +1246,7 @@ void MainWindow::perform_custom_command()
         {
             QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
             QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
-            Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+            fType.mType = mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt();
 
             if (fStagedCmdAddOn.size())
             {
@@ -1260,7 +1273,7 @@ void MainWindow::perform_custom_command()
             case Cmd::ParseHistoryText:
             {
                 QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-                ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), getItemFilePath(mContextMenuSourceTreeItem));
+                ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), getItemFilePath(mContextMenuSourceTreeItem), fType.mType);
                 ui->textBrowser->setPlainText("");
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
             }   break;
@@ -1272,6 +1285,7 @@ void MainWindow::perform_custom_command()
 void MainWindow::call_git_history_diff_command()
 {
     const QString &fHistoryHashItems = ui->treeHistory->getSelectedHistoryHashItems();
+    const QString &fHistoryFile      = ui->treeHistory->getSelectedHistoryFile();
     QAction       *fAction           = qobject_cast<QAction *>(sender());
 
     if (mContextMenuSourceTreeItem)
@@ -1280,7 +1294,7 @@ void MainWindow::call_git_history_diff_command()
     }
     else
     {
-        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("");
+        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg(fHistoryFile);
         QString fResult;
         int fError = execute(fCmd, fResult);
         if (!fError)
@@ -1354,7 +1368,7 @@ void MainWindow::call_git_branch_command()
             case Cmd::ParseHistoryText:
                 // TODO: ParseHistoryText does not work properly enough
                 // Items cannot be diffed in every case
-                ui->treeHistory->parseGitLogHistoryText(fResultStr, QVariant(), ui->treeBranches->getBranchItem());
+                ui->treeHistory->parseGitLogHistoryText(fResultStr, QVariant(), ui->treeBranches->getBranchItem(), Type::Branch);
                 ui->textBrowser->setPlainText("");
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
                 break;
@@ -1401,3 +1415,4 @@ void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
 }
+

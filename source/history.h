@@ -52,7 +52,10 @@ struct History
         CommitterEmail,
         CommitterDate,
         NoOfEntries,
-        ContextMenuItem=NoOfEntries
+        ContextMenuItem=NoOfEntries,
+        NoOfFiles,
+        Type,
+        GitDiffCommand
     };
 
     static const char* name(Entry aEntry);

@@ -51,6 +51,8 @@ private Q_SLOTS:
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
+    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+
     void showOrHideTrees(bool checked);
     void clearTrees();
 
@@ -65,7 +67,7 @@ private Q_SLOTS:
     void collapse_tree_items();
 
 
-    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
