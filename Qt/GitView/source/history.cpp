@@ -29,7 +29,10 @@ const char* History::name(History::Entry aEntry)
         case Entry::Committer:      return "Committer:";
         case Entry::CommitterEmail: return "Committer email:";
         case Entry::CommitterDate:  return "Committer date:";
-        case Entry::NoOfEntries:    return "None";
+        case Entry::NoOfEntries:    return "Number of entries";
+        case Entry::NoOfFiles:      return "Number of files:";
+        case Entry::Type:           return "Type";
+        case Entry::GitDiffCommand: return "git diff command";
     }
     return "Unknown";
 }
