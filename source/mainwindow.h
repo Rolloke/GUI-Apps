@@ -52,6 +52,7 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+    void on_gitview_about();
 
     void showOrHideTrees(bool checked);
     void clearTrees();

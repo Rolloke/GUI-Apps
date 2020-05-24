@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     customgitactions.cpp \
     qbranchtreewidget.cpp \
     qhistorytreewidget.cpp \
-    gitignore.cpp
+    gitignore.cpp \
+    aboutdlg.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -44,10 +45,12 @@ HEADERS  += mainwindow.h \
     customgitactions.h \
     qbranchtreewidget.h \
     qhistorytreewidget.h \
-    gitignore.h
+    gitignore.h \
+    aboutdlg.h
 
 FORMS    += mainwindow.ui \
     commitmessage.ui \
-    customgitactions.ui
+    customgitactions.ui \
+    aboutdlg.ui
 
 RESOURCES += resource.qrc
