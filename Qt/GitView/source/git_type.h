@@ -67,6 +67,7 @@ struct Cmd
         ClearTreeItems,
         CustomGitActionSettings,
         InsertHashFileNames,
+        About,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,

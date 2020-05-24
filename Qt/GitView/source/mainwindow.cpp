@@ -6,6 +6,7 @@
 #include "history.h"
 #include "qbranchtreewidget.h"
 #include "customgitactions.h"
+#include "aboutdlg.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -1093,8 +1094,8 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearTrees()));
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
-
     connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
+    connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(on_gitview_about()));
 
 
     for (auto fAction : mActions.getList())
@@ -1410,5 +1411,11 @@ void MainWindow::performCustomGitActionSettings()
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
+}
+
+void MainWindow::on_gitview_about()
+{
+    AboutDlg dlg(this);
+    dlg.exec();
 }
 

@@ -98,6 +98,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::ClearTreeItems]          = ":/resource/24X24/edit-clear.png";
     fActionIcons[Cmd::CustomGitActionSettings] = ":/resource/24X24/preferences-system.png";
     fActionIcons[Cmd::InsertHashFileNames]     = ":/resource/24X24/object-rotate-right.png";
+    fActionIcons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
 
     for (const auto& fIconPath: fActionIcons )
     {
