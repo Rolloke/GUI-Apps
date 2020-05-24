@@ -162,6 +162,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(Repository);
         RETURN_NAME(File);
         RETURN_NAME(Folder);
+        RETURN_NAME(Branch);
         RETURN_NAME(Hidden);
         RETURN_NAME(WildCard);
         RETURN_NAME(RegExp);

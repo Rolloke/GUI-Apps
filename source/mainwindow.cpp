@@ -36,8 +36,6 @@ using namespace git;
 // git remote set - url < Name > <URL >
 // TODO: 1.4.10.2 Zweig erstellen
 
-// TODO: remove filename, if textbrowser content is changed by git command
-
 
 namespace config
 {
@@ -1366,8 +1364,6 @@ void MainWindow::call_git_branch_command()
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
                 break;
             case Cmd::ParseHistoryText:
-                // TODO: ParseHistoryText does not work properly enough
-                // Items cannot be diffed in every case
                 ui->treeHistory->parseGitLogHistoryText(fResultStr, QVariant(), ui->treeBranches->getBranchItem(), Type::Branch);
                 ui->textBrowser->setPlainText("");
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
