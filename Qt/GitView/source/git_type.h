@@ -53,6 +53,7 @@ struct Cmd
         BranchListMerged,
         BranchListNotMerged,
         BranchCheckout,
+        BranchHistory,
         /// hint: add custom commands here
         CustomCommand=50,
 

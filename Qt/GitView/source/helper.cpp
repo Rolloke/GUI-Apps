@@ -65,7 +65,8 @@ QString formatFileSize(quint64 aSize)
 
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
-    for (auto fSelected : aTree.selectedItems())
+    auto fList = aTree.selectedItems();
+    for (auto fSelected : fList)
     {
         fSelected = getTopLevelItem(aTree, fSelected);
         if (fSelected)
@@ -81,7 +82,8 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
-    for (auto fSelected : aTree.selectedItems())
+    auto fList = aTree.selectedItems();
+    for (const auto& fSelected : fList)
     {
         auto fParent = fSelected->parent();
         if (fParent == 0) aTree.removeItemWidget(fSelected, 0);

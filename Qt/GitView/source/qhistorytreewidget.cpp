@@ -36,7 +36,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
 
     const int fTLI = topLevelItemCount()-1;
     int fListCount = 0;
-    for (auto fItem: fList)
+    for (const auto& fItem : fList)
     {
         if (++fListCount == 1) continue; // ignore first item
         if (fItem.count() >= INT(History::Entry::NoOfEntries))
@@ -163,7 +163,7 @@ QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )
 void QHistoryTreeWidget::insertFileNames()
 {
     auto fSelected = selectedItems();
-    for (auto fItem : fSelected)
+    for (const auto& fItem : fSelected)
     {
         QTreeWidgetItem* fParent = getTopLevelItem(*this, fItem);
         int fCount = fParent->childCount();
@@ -196,7 +196,7 @@ void QHistoryTreeWidget::insertFileNames()
                 fChildItem->setData(INT(History::Column::Commit), INT(History::Entry::GitDiffCommand), fGitCmd);
 
                 auto fFiles = fResultStr.split("\n");
-                for (auto fFile : fFiles)
+                for (const auto& fFile : fFiles)
                 {
                     fChildItem->addChild(new QTreeWidgetItem({fFile}));
                 }

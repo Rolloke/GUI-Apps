@@ -86,6 +86,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::BranchDelete]            = ":/resource/24X24/edit-delete.png";
     fActionIcons[Cmd::BranchShow]              = ":/resource/24X24/preferences-system-privacy.png";
     fActionIcons[Cmd::BranchCheckout]          = ":/resource/24X24/emblem-default.png";
+    fActionIcons[Cmd::BranchHistory]           = ":/resource/24X24/document-open-recent.png";
     fActionIcons[Cmd::Show]                    = ":/resource/24X24/edit-find.png";
     fActionIcons[Cmd::ShowHistoryDifference]   = ":resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
@@ -110,7 +111,7 @@ void ActionList::initActionIcons()
 
 void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) const
 {
-    for (auto fCmd : aItems)
+    for (const auto& fCmd : aItems)
     {
         if (fCmd == Cmd::Separator)
         {
@@ -125,7 +126,7 @@ void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) con
 
 void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems) const
 {
-    for (auto fCmd : aItems)
+    for (const auto& fCmd : aItems)
     {
         if (fCmd == Cmd::Separator)
         {

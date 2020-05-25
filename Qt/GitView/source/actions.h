@@ -47,7 +47,7 @@ public:
 
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems) const;
     void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
-    const tActionMap getList() { return mActionList; }
+    const tActionMap& getList() const { return mActionList; }
 
     static const QString sNoCustomCommandMessageBox;
 

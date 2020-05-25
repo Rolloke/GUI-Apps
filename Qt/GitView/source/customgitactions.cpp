@@ -39,7 +39,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
 
     mInitialize = true;
     int fRow = 0;
-    for (const auto fItem : mActionList.getList())
+    for (const auto& fItem : mActionList.getList())
     {
         insertCmdAction(fItem, fRow);
     }
@@ -207,7 +207,7 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
     mListModelVarious->removeRows(0, mListModelVarious->rowCount());
 
     int fRow = 0;
-    for (auto fCmd: aItems)
+    for (const auto& fCmd: aItems)
     {
         const QAction* fAction = mActionList.getAction(fCmd);
 
@@ -381,7 +381,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::UpdateItemStatus)));
     fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::ParseHistoryText)));
     fMenu.addAction(fPostActionGroup.addAction(Cmd::toString(Cmd::ParseBranchListText)));
-    for (auto*fItem : fPostActionGroup.actions())
+    for (auto& fItem : fPostActionGroup.actions())
     {
         fItem->setCheckable(true);
     }

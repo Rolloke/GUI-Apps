@@ -173,7 +173,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
 
-    for (auto fToolbar : Cmd::mToolbars)
+    for (const auto& fToolbar : Cmd::mToolbars)
     {
         QToolBar*pTB = new QToolBar();
         mActions.fillToolbar(*pTB, fToolbar);
@@ -225,7 +225,7 @@ MainWindow::~MainWindow()
     {
         int fIndex = 0;
 
-        for (auto fItem : mActions.getList())
+        for (const auto& fItem : mActions.getList())
         {
             Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
 
@@ -376,7 +376,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
     while (fIterator.hasNext());
 
 
-    for (auto fMapLevel : fMapLevels)
+    for (const auto& fMapLevel : fMapLevels)
     {
         mGitIgnore.removeIgnoreMapLevel(fMapLevel);
     }
@@ -1077,6 +1077,10 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, "Checkout %1;Do you want to set \"%1\" active?");
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
 
+    connect(mActions.createAction(Cmd::BranchHistory, tr("History Branch"), Cmd::getCommand(Cmd::BranchHistory)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    mActions.setCustomCommandPostAction(Cmd::BranchHistory, Cmd::ParseHistoryText);
+    connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
 
@@ -1098,7 +1102,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(on_gitview_about()));
 
 
-    for (auto fAction : mActions.getList())
+    for (const auto& fAction : mActions.getList())
     {
         mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::BuiltIn);
     }
@@ -1289,11 +1293,19 @@ void MainWindow::call_git_history_diff_command()
 
     if (mContextMenuSourceTreeItem)
     {
-        applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("%1"));
+        applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1"));
     }
     else
     {
-        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg(fHistoryFile);
+        QString fCmd;
+        if (fHistoryFile.size())
+        {
+            fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg(fHistoryFile);
+        }
+        else
+        {
+            fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("");
+        }
         QString fResult;
         int fError = execute(fCmd, fResult);
         if (!fError)

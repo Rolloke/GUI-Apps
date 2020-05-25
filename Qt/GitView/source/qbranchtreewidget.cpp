@@ -23,7 +23,7 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
     QStringList fLines = aBranchText.split("\n");
     mSelectedItem = nullptr;
     setVisible(true);
-    for (auto fLine : fLines)
+    for (const auto& fLine : fLines)
     {
         if (mSelectedItem == nullptr)
         {
