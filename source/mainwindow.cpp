@@ -1116,22 +1116,42 @@ void MainWindow::initCustomAction(QAction* fAction)
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
     QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
+    mContextMenuSourceTreeItem = nullptr;
+    QActionGroup fPostActionGroup(this);
+    fPostActionGroup.setExclusive(false);
     if (fItemData.isValid())
     {
         switch (fItemData.type())
         {
-        case QVariant::ModelIndex:
-        {
-            QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-            mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
-        }   break;
-        default:
-            mContextMenuSourceTreeItem = nullptr;
-            break;
+            case QVariant::ModelIndex:
+            {
+                QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+                mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
+            }   break;
+            case QVariant::Map:
+            {
+                auto fMap = fItemData.toMap();
+                for (auto fMapItem = fMap.begin(); fMapItem != fMap.end(); ++fMapItem)
+                {
+                    QAction* fAction = fPostActionGroup.addAction(fMapItem.key());
+                    fAction->setCheckable(true);
+                    fAction->setChecked(fMapItem.value().toBool());
+                }
+                fPostActionGroup.addAction("Enable all");
+                fPostActionGroup.addAction("Disable all");
+            }   break;
+            default:
+                break;
         }
     }
 
     QMenu menu(this);
+    QMenu*fAuthorsMenu = nullptr;
+    if (fPostActionGroup.actions().size())
+    {
+        fAuthorsMenu = menu.addMenu("Authors");
+        fAuthorsMenu->addActions(fPostActionGroup.actions());
+    }
     if (!ui->treeHistory->isSelectionDiffable())
     {
         mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(false);
@@ -1143,7 +1163,12 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 
     mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
-    menu.exec(ui->treeHistory->mapToGlobal(pos));
+    QAction* fAction = menu.exec(ui->treeHistory->mapToGlobal(pos));
+    if (fAction && fAuthorsMenu)
+    {
+        int fIndex = fAuthorsMenu->actions().indexOf(fAction);
+        ui->treeHistory->checkAuthorsIndex(fIndex, fAction->isChecked());
+    }
 
     mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(true);
     mActions.getAction(Cmd::ShowHistoryDifference)->setEnabled(true);

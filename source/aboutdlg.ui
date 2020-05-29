@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>492</width>
     <height>300</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
     <rect>
      <x>120</x>
      <y>200</y>
-     <width>261</width>
+     <width>361</width>
      <height>20</height>
     </rect>
    </property>
@@ -57,7 +57,7 @@
     <rect>
      <x>120</x>
      <y>220</y>
-     <width>261</width>
+     <width>361</width>
      <height>16</height>
     </rect>
    </property>
@@ -83,7 +83,7 @@
     <rect>
      <x>120</x>
      <y>240</y>
-     <width>261</width>
+     <width>361</width>
      <height>17</height>
     </rect>
    </property>
@@ -96,7 +96,7 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>381</width>
+     <width>471</width>
      <height>61</height>
     </rect>
    </property>
@@ -162,12 +162,15 @@
     <rect>
      <x>10</x>
      <y>140</y>
-     <width>371</width>
+     <width>471</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>The program is provided AS IS with NO WARRANTY OF ANY KIND</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="labelEmail">
@@ -188,7 +191,7 @@
     <rect>
      <x>120</x>
      <y>260</y>
-     <width>261</width>
+     <width>361</width>
      <height>17</height>
     </rect>
    </property>
@@ -207,12 +210,15 @@
     <rect>
      <x>13</x>
      <y>90</y>
-     <width>371</width>
+     <width>471</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>Viewer for git repositories. Based on Qt 5.6 with c++ 14</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -223,7 +229,7 @@
     <rect>
      <x>120</x>
      <y>180</y>
-     <width>261</width>
+     <width>361</width>
      <height>20</height>
     </rect>
    </property>

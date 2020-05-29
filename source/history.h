@@ -36,7 +36,8 @@ struct History
     };
     enum class Role
     {
-        ContextMenuItem
+        ContextMenuItem,
+        VisibleAuthors
     };
 
     enum class Entry
