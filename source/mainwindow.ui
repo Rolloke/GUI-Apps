@@ -13,8 +13,21 @@
   <property name="windowTitle">
    <string>Git View</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="Git" resource="resource.qrc">
+    <normaloff>:/resource/logo@2x.png</normaloff>:/resource/logo@2x.png</iconset>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>98</width>
+    <height>92</height>
+   </size>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
   </property>
   <property name="dockOptions">
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
@@ -442,6 +455,8 @@
    <header location="global">qhistorytreewidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

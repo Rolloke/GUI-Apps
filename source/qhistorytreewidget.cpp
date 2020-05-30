@@ -61,7 +61,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
 void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
 {
     auto fSelected = selectionModel()->selectedIndexes();
-    if (fSelected.count())
+    if (aIndex >= 0 && fSelected.count())
     {
         QTreeWidgetItem* fItem = itemFromIndex(fSelected.first());
         if (fItem && getItemLevel(fItem) == INT(Level::Top))
@@ -84,7 +84,17 @@ void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
                     }
                 }
                 fItem->setData(INT(History::Column::Commit), INT(History::Role::VisibleAuthors), QVariant(fMap));
-                // TODO: set checked authors visible and unchecked hidden
+
+                int fCount = fItem->childCount();
+                for (int fChild=0; fChild<fCount; ++fChild)
+                {
+                    auto fChildItem = fItem->child(fChild);
+                    auto fBoolItem = fMap.find(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::Author)).toString());
+                    if (fBoolItem != fMap.end())
+                    {
+                        fChildItem->setHidden(!fBoolItem.value().toBool());
+                    }
+                }
             }
         }
     }
@@ -223,7 +233,7 @@ void QHistoryTreeWidget::insertFileNames()
 void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
 {
     auto fChildItem    = fParent->child(fChild);
-    if (fChildItem && getItemLevel(fParent) == INT(Level::Top))
+    if (fChildItem && !fChildItem->isHidden())
     {
         Type fType(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::Type)).toUInt());
         if (!fChildItem->childCount() && !fType.is(Type::File))

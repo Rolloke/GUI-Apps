@@ -125,7 +125,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>20</x>
      <y>30</y>
      <width>41</width>
      <height>41</height>
@@ -135,8 +135,8 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>:/resource/Oscilloscope.svg</normaloff>:/resource/Oscilloscope.svg</iconset>
+    <iconset resource="resource.qrc">
+     <normaloff>:/resource/logo@2x.png</normaloff>:/resource/logo@2x.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -251,6 +251,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

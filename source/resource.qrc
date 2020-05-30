@@ -57,5 +57,6 @@
         <file>resource/24X24/go-next.png</file>
         <file>resource/24X24/go-down.png</file>
         <file>resource/24X24/dialog-information.png</file>
+        <file>resource/logo@2x.png</file>
     </qresource>
 </RCC>
