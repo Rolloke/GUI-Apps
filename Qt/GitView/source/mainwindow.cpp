@@ -73,6 +73,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mContextMenuSourceTreeItem(nullptr)
 {
     ui->setupUi(this);
+    setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
     QObject::connect(this, SIGNAL(doWork(int)), &mWorker, SLOT(doWork(int)));
@@ -1099,7 +1100,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
-    connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(on_gitview_about()));
+    connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(gitview_about()));
 
 
     for (const auto& fAction : mActions.getList())
@@ -1450,7 +1451,7 @@ void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
 }
 
-void MainWindow::on_gitview_about()
+void MainWindow::gitview_about()
 {
     AboutDlg dlg(this);
     dlg.exec();
