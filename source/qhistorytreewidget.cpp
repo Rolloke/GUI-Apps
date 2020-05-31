@@ -110,7 +110,6 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
     QTreeWidgetItem* fSelectedHistoryItem = itemAt(pos);
     if (fSelectedHistoryItem)
     {
-        int fColumns = header()->count();
         QModelIndexList fSelectedIndexes = selectionModel()->selectedIndexes();
 
         switch (static_cast<Level>(getItemLevel(fSelectedHistoryItem)))
@@ -125,8 +124,12 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 if (fParentHistoryItem)
                 {
                     fItemData = fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem));
-
-                    for (auto fIndex = fSelectedIndexes.rbegin(); fIndex != fSelectedIndexes.rend(); fIndex += fColumns)
+                    Type fType(fSelectedHistoryItem->data(INT(History::Column::Commit), INT(History::Entry::Type)).toUInt());
+                    if (fType.is(Type::File))
+                    {
+                        mHistoryFile = fParentHistoryItem->data(INT(History::Column::Text), Qt::DisplayRole).toString();
+                    }
+                    for (auto fIndex = fSelectedIndexes.rbegin(); fIndex != fSelectedIndexes.rend(); ++fIndex)
                     {
                         QTreeWidgetItem* fItem = itemFromIndex(*fIndex);
                         if (fItem && fItem->parent() == fParentHistoryItem)

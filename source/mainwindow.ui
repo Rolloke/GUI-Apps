@@ -313,6 +313,9 @@
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
               <column>
                <property name="text">
                 <string>History</string>
@@ -327,6 +330,12 @@
             </item>
             <item>
              <widget class="QBranchTreeWidget" name="treeBranches">
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
               <property name="sortingEnabled">
                <bool>true</bool>
               </property>
