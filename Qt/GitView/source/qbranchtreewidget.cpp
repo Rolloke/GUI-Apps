@@ -61,8 +61,21 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
 QString QBranchTreeWidget::getBranchItem()
 {
-    QString fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(INT(Column::Text)) : "";
-    return fItem.remove(0, 2);
+    QString fItem;
+    auto fSelectedList = selectedItems();
+    if (fSelectedList.size() == 2)
+    {
+        for (auto fSelectedItem : fSelectedList)
+        {
+            fItem += fSelectedItem->text(INT(Column::Text)).remove(0, 2);
+            fItem += " ";
+        }
+    }
+    else
+    {
+         fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(INT(Column::Text)).remove(0, 2) : "";
+    }
+    return fItem;
 }
 
 QString QBranchTreeWidget::getBranchTopItemText()

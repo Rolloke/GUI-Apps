@@ -1347,18 +1347,18 @@ void MainWindow::call_git_branch_command()
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
     QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
+    QString fBranchItem = ui->treeBranches->getBranchItem();
 
     int fResult = QMessageBox::Yes;
     if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
-        fResult = callMessageBox(fMessageBoxText, "branch", ui->treeBranches->getBranchItem());
+        fResult = callMessageBox(fMessageBoxText, "branch", fBranchItem);
     }
 
     QString fResultStr;
     if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
     {
         on_btnCloseText_clicked();
-        QString fBranchItem = ui->treeBranches->getBranchItem();
         if (fGitCommand.contains("-C %1"))
         {
             if (fGitCommand.contains("%2") && fBranchItem.size())
@@ -1403,7 +1403,7 @@ void MainWindow::call_git_branch_command()
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
                 break;
             case Cmd::ParseHistoryText:
-                ui->treeHistory->parseGitLogHistoryText(fResultStr, QVariant(), ui->treeBranches->getBranchItem(), Type::Branch);
+                ui->treeHistory->parseGitLogHistoryText(fResultStr, QVariant(), fBranchItem, Type::Branch);
                 ui->textBrowser->setPlainText("");
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
                 break;
