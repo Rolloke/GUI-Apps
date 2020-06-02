@@ -26,6 +26,8 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
 {
     QVector<QStringList> fList;
     History::parse(fText, fList);
+    // TODO: parse diffs between branches (files)
+    // TODO: Find commits of a branch diff
 
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(aFileName));
     addTopLevelItem(fNewHistoryItem);
