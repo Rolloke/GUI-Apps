@@ -35,7 +35,6 @@ using namespace git;
 // git remote remove < Name >
 // URL korrigieren:
 // git remote set - url < Name > <URL >
-// TODO: 1.4.10.2 Zweig erstellen
 
 
 namespace config
@@ -1011,6 +1010,8 @@ void MainWindow::showOrHideTrees(bool checked)
             ui->treeBranches->setVisible(checked);
         }
     }
+    ui->horizontalLayout->setStretch(0, 1);
+    ui->horizontalLayout->setStretch(1, checked ? 2 : 1);
     mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 }
 
