@@ -29,7 +29,7 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
     {
         if (mSelectedItem == nullptr)
         {
-            auto fFoundItem = findItems(fLine, Qt::MatchFixedString|Qt::MatchCaseSensitive, INT(Column::Text));
+            auto fFoundItem = findItems(fLine, Qt::MatchFixedString|Qt::MatchCaseSensitive, Column::Text);
             for (const auto& fItem : fFoundItem)
             {
                 auto*fRemoved = takeTopLevelItem(indexOfTopLevelItem(fItem));
@@ -42,7 +42,7 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
         {
             QTreeWidgetItem* fNewBranchItem = new QTreeWidgetItem();
             mSelectedItem->addChild(fNewBranchItem);
-            fNewBranchItem->setText(INT(Column::Text), fLine);
+            fNewBranchItem->setText(Column::Text, fLine);
         }
     }
     if (mSelectedItem)
@@ -69,13 +69,13 @@ QString QBranchTreeWidget::getBranchItem()
     {
         for (auto fSelectedItem : fSelectedList)
         {
-            fItem += fSelectedItem->text(INT(Column::Text)).remove(0, 2);
+            fItem += fSelectedItem->text(Column::Text).remove(0, 2);
             fItem += " ";
         }
     }
     else
     {
-         fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(INT(Column::Text)).remove(0, 2) : "";
+         fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(Column::Text).remove(0, 2) : "";
     }
     return fItem;
 }
@@ -83,7 +83,7 @@ QString QBranchTreeWidget::getBranchItem()
 QString QBranchTreeWidget::getBranchTopItemText()
 {
     QTreeWidgetItem* fItem = getTopLevelItem(*this, mSelectedItem);
-    return (fItem) ? fItem->text(INT(Column::Text)) : "";
+    return (fItem) ? fItem->text(Column::Text) : "";
 }
 
 void QBranchTreeWidget::deleteSelectedItem()
@@ -110,7 +110,7 @@ void QBranchTreeWidget::clear()
 
 QModelIndex QBranchTreeWidget::indexFromSelectedItem() const
 {
-    return QTreeWidget::indexFromItem(mSelectedItem, INT(Column::Text));
+    return QTreeWidget::indexFromItem(mSelectedItem, Column::Text);
 }
 
 QTreeWidgetItem * QBranchTreeWidget::itemFromIndex(const QModelIndex &index) const

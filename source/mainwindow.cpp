@@ -79,11 +79,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
-    ui->treeSource->header()->setSortIndicator(INT(Column::FileName), Qt::AscendingOrder);
-    ui->treeSource->header()->setSectionResizeMode(INT(Column::FileName), QHeaderView::Stretch);
-    ui->treeSource->header()->setSectionResizeMode(INT(Column::DateTime), QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(INT(Column::Size)    , QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(INT(Column::State)   , QHeaderView::Interactive);
+    ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
+    ui->treeSource->header()->setSectionResizeMode(Column::FileName, QHeaderView::Stretch);
+    ui->treeSource->header()->setSectionResizeMode(Column::DateTime, QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(Column::Size    , QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(Column::State   , QHeaderView::Interactive);
     ui->treeSource->header()->setStretchLastSection(false);
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -205,7 +205,7 @@ MainWindow::~MainWindow()
     {
         fSettings.setArrayIndex(i);
         QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
-        fSettings.setValue(config::sSourcePath, fItem->text(INT(Column::FileName)));
+        fSettings.setValue(config::sSourcePath, fItem->text(Column::FileName));
     }
 
     fSettings.endArray();
@@ -308,9 +308,9 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         fStrings.append(aParentDir.absolutePath());
         aParentItem = new QTreeWidgetItem(fStrings);
         aParentItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|aParentItem->flags());
-        aParentItem->setCheckState(INT(Column::FileName), Qt::Checked);
-        aParentItem->setData(INT(Column::FileName), INT(Role::isDirectory), QVariant(true));
-        aParentItem->setData(INT(Column::FileName), INT(Role::Filter), QVariant(INT(aParentDir.filter())));
+        aParentItem->setCheckState(Column::FileName, Qt::Checked);
+        aParentItem->setData(Column::FileName, Role::isDirectory, QVariant(true));
+        aParentItem->setData(Column::FileName, Role::Filter, QVariant(INT(aParentDir.filter())));
 
         aTree.addTopLevelItem(aParentItem);
         QDir fParent = aParentDir;
@@ -323,7 +323,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 #if RELATIVE_GIT_PATH ==1
         if (!fParent.isRoot())
         {
-            aParentItem->setData(INT(Column::FileName), INT(Role::GitFolder), QVariant(fParent.absolutePath()));
+            aParentItem->setData(Column::FileName, Role::GitFolder, QVariant(fParent.absolutePath()));
         }
 #endif
         fTopLevelItem = true;
@@ -348,28 +348,28 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 
         QTreeWidgetItem* fItem = new QTreeWidgetItem(aParentItem, fColumns);
         fItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|fItem->flags());
-        fItem->setCheckState(INT(Column::FileName), Qt::Checked);
-        fItem->setData(INT(Column::FileName), INT(Role::isDirectory), QVariant(fFileInfo.isDir()));
-        fItem->setData(INT(Column::DateTime), INT(Role::DateTime), QVariant(fFileInfo.lastModified()));
+        fItem->setCheckState(Column::FileName, Qt::Checked);
+        fItem->setData(Column::FileName, Role::isDirectory, QVariant(fFileInfo.isDir()));
+        fItem->setData(Column::DateTime, Role::DateTime, QVariant(fFileInfo.lastModified()));
 
         Type fType;
         fType.translate(fFileInfo);
 
-        fItem->setData(INT(Column::State), INT(Role::Filter), QVariant(fType.mType));
+        fItem->setData(Column::State, Role::Filter, QVariant(fType.mType));
 
         if (fFileInfo.isDir())
         {
             QDir fSubDir(fFileInfo.absoluteFilePath());
             fSubDir.setFilter(aParentDir.filter());
             quint64 fSizeOfSubFolderFiles = insertItem(fSubDir, aTree, fItem);
-            fItem->setText(INT(Column::Size), formatFileSize(fSizeOfSubFolderFiles));
+            fItem->setText(Column::Size, formatFileSize(fSizeOfSubFolderFiles));
             fSizeOfFiles += fSizeOfSubFolderFiles;
-            fItem->setData(INT(Column::Size), Qt::SizeHintRole, QVariant(fSizeOfSubFolderFiles));
+            fItem->setData(Column::Size, Qt::SizeHintRole, QVariant(fSizeOfSubFolderFiles));
         }
         else
         {
             fSizeOfFiles += fFileInfo.size();
-            fItem->setData(INT(Column::Size), Qt::SizeHintRole, QVariant(fFileInfo.size()));
+            fItem->setData(Column::Size, Qt::SizeHintRole, QVariant(fFileInfo.size()));
         }
         //mIgnoreContainingNegation.reset();
     }
@@ -383,7 +383,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 
     if (fTopLevelItem)
     {
-        aParentItem->setText(INT(Column::Size), formatFileSize(fSizeOfFiles));
+        aParentItem->setText(Column::Size, formatFileSize(fSizeOfFiles));
     }
     return fSizeOfFiles;
 }
@@ -393,11 +393,11 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
     bool fResult  = false;
     if (aParentItem)
     {
-        if (   aParentItem->checkState(INT(Column::FileName)) == Qt::Checked
-            || aParentItem->checkState(INT(Column::FileName)) == Qt::PartiallyChecked)
+        if (   aParentItem->checkState(Column::FileName) == Qt::Checked
+            || aParentItem->checkState(Column::FileName) == Qt::PartiallyChecked)
         {
-            const QVariant& fIsDir = aParentItem->data(INT(Column::FileName), INT(Role::isDirectory));
-            QString fFileName = aParentItem->text(INT(Column::FileName));
+            const QVariant& fIsDir = aParentItem->data(Column::FileName, Role::isDirectory);
+            QString fFileName = aParentItem->text(Column::FileName);
             QString fSource;
             QString fResultStr;
             if (!fFileName.startsWith(QDir::separator()))
@@ -409,7 +409,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             if (fIsDir.toBool())
             {
                 if (   mCurrentTask == Work::ApplyGitCommand
-                    && aParentItem->checkState(INT(Column::FileName)) == Qt::Checked)
+                    && aParentItem->checkState(Column::FileName) == Qt::Checked)
                 {
                     QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
                     apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed());
@@ -462,7 +462,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             }
             else
             {
-                QVariant fVariant = aParentItem->data(INT(Column::State), INT(Role::Filter));
+                QVariant fVariant = aParentItem->data(Column::State, Role::Filter);
                 if (fVariant.isValid())
                 {
                     Type fType(fVariant.toUInt());
@@ -514,7 +514,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
         }
         else
         {
-            TRACE(Logger::info, "Not copying unselected file %s", aParentItem->text(INT(Column::FileName)).toStdString().c_str());
+            TRACE(Logger::info, "Not copying unselected file %s", aParentItem->text(Column::FileName).toStdString().c_str());
             fResult = true; // this is not an error
         }
     }
@@ -534,25 +534,25 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 {
     if (aParentItem)
     {
-        QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(INT(Column::FileName)) : aParentItem->text(INT(Column::FileName));
+        QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
 
         auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
         {
-            aParentItem->setCheckState(INT(Column::FileName), Qt::Checked);
+            aParentItem->setCheckState(Column::FileName, Qt::Checked);
             QString fState = fFoundType->second.getStates();
-            aParentItem->setText(INT(Column::State), fState);
-            Type fType(aParentItem->data(INT(Column::State), INT(Role::Filter)).toUInt());
+            aParentItem->setText(Column::State, fState);
+            Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
             fType.add(static_cast<Type::TypeFlags>(fFoundType->second.mType));
-            aParentItem->setData(INT(Column::State), INT(Role::Filter), QVariant(fType.mType));
+            aParentItem->setData(Column::State, Role::Filter, QVariant(fType.mType));
             TRACE(Logger::info, "set state %s, %x of %s", fState.toStdString().c_str(), fFoundType->second.mType, fSourcePath.toStdString().c_str());
         }
         else
         {
-            Type fType(aParentItem->data(INT(Column::State), INT(Role::Filter)).toUInt());
+            Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
             fType.remove(Type::AllGitActions);
-            aParentItem->setData(INT(Column::State), INT(Role::Filter), QVariant(fType.mType));
-            aParentItem->setText(INT(Column::State), "");
+            aParentItem->setData(Column::State, Role::Filter, QVariant(fType.mType));
+            aParentItem->setText(Column::State, "");
         }
         for (int fChild = 0; fChild < aParentItem->childCount(); ++fChild)
         {
@@ -597,16 +597,16 @@ quint64 MainWindow::sizeOfCheckedItems(QTreeWidgetItem* aParentItem)
     if (aParentItem)
     {
         bool fIterate = false;
-        switch (aParentItem->checkState(INT(Column::FileName)))
+        switch (aParentItem->checkState(Column::FileName))
         {
             case Qt::Unchecked: return fSize;
             case Qt::PartiallyChecked:
                 fIterate = true;
                 break;
             case  Qt::Checked:
-                if (!aParentItem->data(INT(Column::FileName), INT(Role::isDirectory)).toBool())
+                if (!aParentItem->data(Column::FileName, Role::isDirectory).toBool())
                 {
-                    fSize = aParentItem->data(INT(Column::Size), Qt::SizeHintRole).toLongLong();
+                    fSize = aParentItem->data(Column::Size, Qt::SizeHintRole).toLongLong();
                 }
                 fIterate = true;
                 break;
@@ -666,8 +666,8 @@ void MainWindow::apendTextToBrowser(const QString& aText)
 void MainWindow::handleWorker(int aWork)
 {
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
-    mCurrentTask = static_cast<Work>(aWork);
-    switch(static_cast<Work>(aWork))
+    mCurrentTask = static_cast<Work::e>(aWork);
+    switch(static_cast<Work::e>(aWork))
     {
         default:
             iterateTreeItems(*ui->treeSource);
@@ -679,7 +679,7 @@ void MainWindow::handleWorker(int aWork)
 void MainWindow::handleMessage(int aMsg, QVariant aData)
 {
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
-    switch(static_cast<Work>(aMsg))
+    switch(static_cast<Work::e>(aMsg))
     {
         default:  break;
     }
@@ -723,19 +723,19 @@ QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
     QString fFileName;
     if (aTreeItem)
     {
-        fFileName = aTreeItem->text(INT(Column::FileName));
+        fFileName = aTreeItem->text(Column::FileName);
         while (aTreeItem)
         {
             aTreeItem = aTreeItem->parent();
             if (aTreeItem)
             {
-                if (aTreeItem->data(INT(Column::FileName), INT(Role::GitFolder)).isValid())
+                if (aTreeItem->data(Column::FileName, Role::GitFolder).isValid())
                 {
-                    QDir::setCurrent(aTreeItem->text(INT(Column::FileName)));
+                    QDir::setCurrent(aTreeItem->text(Column::FileName));
                 }
                 else
                 {
-                    fFileName = aTreeItem->text(INT(Column::FileName)) + QDir::separator() + fFileName;
+                    fFileName = aTreeItem->text(Column::FileName) + QDir::separator() + fFileName;
                 }
             }
         }
@@ -748,11 +748,11 @@ QString MainWindow::getItemTopDirPath(QTreeWidgetItem* aItem)
     aItem = getTopLevelItem(*ui->treeSource, aItem);
     if (aItem)
     {
-        return aItem->text(INT(Column::FileName));
+        return aItem->text(Column::FileName);
     }
     else if (ui->treeSource->topLevelItemCount())
     {
-        return ui->treeSource->topLevelItem(0)->text(INT(Column::FileName));
+        return ui->treeSource->topLevelItem(0)->text(Column::FileName);
     }
     return "";
 }
@@ -772,7 +772,7 @@ void MainWindow::updateGitStatus()
     std::vector<QString> fSourceDirs;
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
-        fSourceDirs.push_back(ui->treeSource->topLevelItem(i)->text(INT(Column::FileName)));
+        fSourceDirs.push_back(ui->treeSource->topLevelItem(i)->text(Column::FileName));
     }
     ui->treeSource->clear();
 
@@ -856,7 +856,7 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     mContextMenuSourceTreeItem = ui->treeSource->itemAt( pos );
     if (mContextMenuSourceTreeItem)
     {
-        //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(Column::State, Role::Filter).toUInt()));
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
@@ -873,8 +873,8 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 void MainWindow::on_ckHideEmptyParent_clicked(bool )
 {
     on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
-//        Q_EMIT doWork(INT(Work::ShowAll));
-//        handleWorker(INT(Work::ShowAll));
+//        Q_EMIT doWork(Work::ShowAll);
+//        handleWorker(Work::ShowAll);
 }
 
 void MainWindow::on_comboShowItems_currentIndexChanged(int index)
@@ -882,28 +882,28 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
     switch (static_cast<ComboShowItems>(index))
     {
         case ComboShowItems::AllFiles:
-            handleWorker(INT(Work::ShowAllFiles));
+            handleWorker(Work::ShowAllFiles);
             break;
         case ComboShowItems::AllGitActions:
-            handleWorker(INT(Work::ShowAllGitActions));
+            handleWorker(Work::ShowAllGitActions);
             break;
         case ComboShowItems::GitModified:
-            handleWorker(INT(Work::ShowModified));
+            handleWorker(Work::ShowModified);
             break;
         case ComboShowItems::GitAdded:
-            handleWorker(INT(Work::ShowAdded));
+            handleWorker(Work::ShowAdded);
             break;
         case ComboShowItems::GitDeleted:
-            handleWorker(INT(Work::ShowDeleted));
+            handleWorker(Work::ShowDeleted);
             break;
         case ComboShowItems::GitUnknown:
-            handleWorker(INT(Work::ShowUnknown));
+            handleWorker(Work::ShowUnknown);
             break;
         case ComboShowItems::Gitstaged:
-            handleWorker(INT(Work::ShowStaged));
+            handleWorker(Work::ShowStaged);
             break;
         case ComboShowItems::GitUnmerged:
-            handleWorker(INT(Work::ShowUnMerged));
+            handleWorker(Work::ShowUnMerged);
             break;
     }
 }
@@ -1225,9 +1225,9 @@ void MainWindow::call_git_move_rename()
     if (mContextMenuSourceTreeItem)
     {
         bool    fOk;
-        Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt()));
+        Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
         QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-        QString fOldName      = mContextMenuSourceTreeItem->text(INT(Column::FileName));
+        QString fOldName      = mContextMenuSourceTreeItem->text(Column::FileName);
         QString fNewName      = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
                        tr("Enter a new name or destination for \"%1\".").arg(fOldName),
@@ -1242,7 +1242,7 @@ void MainWindow::call_git_move_rename()
             int fResult = execute(fCommand, fResultStr);
             if (fResult == 0)
             {
-                mContextMenuSourceTreeItem->setText(INT(Column::FileName), fNewName);
+                mContextMenuSourceTreeItem->setText(Column::FileName, fNewName);
                 updateTreeItemStatus(mContextMenuSourceTreeItem);
             }
         }
@@ -1276,7 +1276,7 @@ void MainWindow::perform_custom_command()
         {
             QString fMessageBoxText = fVariantList[INT(ActionList::Data::MsgBoxText)].toString();
             QString fStagedCmdAddOn = fVariantList[INT(ActionList::Data::StagedCmdAddOn)].toString();
-            fType.mType = mContextMenuSourceTreeItem->data(INT(Column::State), INT(Role::Filter)).toUInt();
+            fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
 
             if (fStagedCmdAddOn.size())
             {
@@ -1286,7 +1286,7 @@ void MainWindow::perform_custom_command()
             int fResult = QMessageBox::Yes;
             if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
             {
-                fResult = callMessageBox(fMessageBoxText, fType.type_name(), mContextMenuSourceTreeItem->text(INT(Column::FileName)), fType.is(Type::File));
+                fResult = callMessageBox(fMessageBoxText, fType.type_name(), mContextMenuSourceTreeItem->text(Column::FileName), fType.is(Type::File));
             }
 
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)

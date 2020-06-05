@@ -7,12 +7,12 @@ class QHistoryTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
-    enum class Level
+    struct Level { enum e
     {
         Top,
         Log,
         File
-    };
+    }; };
 
 public:
     QHistoryTreeWidget(QWidget *parent = 0);

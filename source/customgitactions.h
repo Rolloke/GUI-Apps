@@ -17,7 +17,7 @@ class CustomGitActions : public QDialog
 {
     Q_OBJECT
 
-    enum class VariousListIndex
+    struct VariousListIndex { enum e
     {
         Icons,
         MenuSrcTree,
@@ -28,15 +28,15 @@ class CustomGitActions : public QDialog
         Toolbar2,
         FirstCmds=MenuSrcTree,
         LastCmds=Toolbar2
-    };
+    };};
     std::vector<double> mActionListColumnWidth;
 
-    enum class VariousHeader
+    struct VariousHeader { enum e
     {
         Icon,
         Name,
         Size
-    };
+    };};
 
     struct Btn {enum e
     {
@@ -71,8 +71,8 @@ private:
     void initListIcons();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
-    git::Cmd::tVector& getCmdVector(VariousListIndex aIndex);
-    QString getVariousListHeader(VariousListIndex aIndex);
+    git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
+    QString getVariousListHeader(VariousListIndex::e aIndex);
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
@@ -81,10 +81,10 @@ private:
     bool mInitialize;
 };
 
-enum class ActionsTable
+struct ActionsTable { enum e
 {
     ID, Icon, Command, Name, Shortcut, MsgBoxText, Last
-};
+}; };
 
 class ActionItemModel : public QStandardItemModel
 {
