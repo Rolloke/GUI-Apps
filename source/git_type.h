@@ -54,9 +54,9 @@ struct Cmd
         BranchListNotMerged,
         BranchCheckout,
         BranchHistory,
-        /// hint: add custom commands here
+        /// hint: add further git commands here
         CustomCommand=50,
-
+        /// hint: this range is reserved for custom git commands
         NonGitCommands = 1000,
         /// hint: add non git commands here
         Separator = NonGitCommands,

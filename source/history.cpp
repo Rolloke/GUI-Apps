@@ -37,4 +37,9 @@ const char* History::name(History::Entry aEntry)
     return "Unknown";
 }
 
+int History::role(History::Entry aEntry)
+{
+    return static_cast<int>(aEntry) + 1;
+}
+
 }

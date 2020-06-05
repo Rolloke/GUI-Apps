@@ -39,8 +39,13 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
 
     const int fTLI = topLevelItemCount()-1;
     int fListCount = 0;
-    for (const auto& fItem : fList)
+    for (auto& fItem : fList)
     {
+        int fLF = fItem[0].indexOf('\n');
+        if (fLF != -1)
+        {
+            fItem[0] = fItem[0].mid(fLF+1);
+        }
         if (++fListCount == 1) continue; // ignore first item
         if (fItem.count() >= INT(History::Entry::NoOfEntries))
         {
@@ -51,9 +56,9 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
             fAuthors[fItem[INT(History::Entry::Author)]] = true;
             for (int fRole=0; fRole < INT(History::Entry::NoOfEntries); ++fRole)
             {
-                fNewHistoryLogItem->setData(INT(History::Column::Commit), fRole, QVariant(fItem[fRole]));
+                fNewHistoryLogItem->setData(INT(History::Column::Commit), History::role(static_cast<History::Entry>(fRole)), QVariant(fItem[fRole]));
             }
-            fNewHistoryLogItem->setData(INT(History::Column::Commit), INT(History::Entry::Type), QVariant(aType));
+            fNewHistoryLogItem->setData(INT(History::Column::Commit), History::role(History::Entry::Type), QVariant(aType));
         }
     }
 
@@ -91,7 +96,7 @@ void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
                 for (int fChild=0; fChild<fCount; ++fChild)
                 {
                     auto fChildItem = fItem->child(fChild);
-                    auto fBoolItem = fMap.find(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::Author)).toString());
+                    auto fBoolItem = fMap.find(fChildItem->data(INT(History::Column::Commit), History::role(History::Entry::Author)).toString());
                     if (fBoolItem != fMap.end())
                     {
                         fChildItem->setHidden(!fBoolItem.value().toBool());
@@ -126,7 +131,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 if (fParentHistoryItem)
                 {
                     fItemData = fParentHistoryItem->data(INT(History::Column::Commit), INT(History::Role::ContextMenuItem));
-                    Type fType(fSelectedHistoryItem->data(INT(History::Column::Commit), INT(History::Entry::Type)).toUInt());
+                    Type fType(fSelectedHistoryItem->data(INT(History::Column::Commit), History::role(History::Entry::Type)).toUInt());
                     if (fType.is(Type::File))
                     {
                         mHistoryFile = fParentHistoryItem->data(INT(History::Column::Text), Qt::DisplayRole).toString();
@@ -136,7 +141,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                         QTreeWidgetItem* fItem = itemFromIndex(*fIndex);
                         if (fItem && fItem->parent() == fParentHistoryItem)
                         {
-                            mHistoryHashItems.append(fItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+                            mHistoryHashItems.append(fItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
                             mHistoryHashItems.append(" ");
                         }
                     }
@@ -150,17 +155,18 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 QTreeWidgetItem* fTopItem = fHistoryLogItem->parent();
 
                 int fIndex = fTopItem->indexOfChild(fHistoryLogItem);
-                if (fIndex == 0)
+                auto fNextItem = fTopItem->child(fIndex+1);
+                if (fNextItem)
                 {
-                    mHistoryHashItems.append(fHistoryLogItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
-                }
-                else if (fIndex > 0)
-                {
-                    mHistoryHashItems.append(fHistoryLogItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+                    mHistoryHashItems.append(fNextItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
                     mHistoryHashItems.append(" ");
-                    fHistoryLogItem = fTopItem->child(fIndex-1);
-                    mHistoryHashItems.append(fHistoryLogItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+                    mHistoryHashItems.append(fHistoryLogItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
                 }
+                else
+                {
+                    mHistoryHashItems.append(fHistoryLogItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
+                }
+
             }   break;
         }
     }
@@ -179,10 +185,10 @@ QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )
             {
                 fText.append(History::name(static_cast<History::Entry>(fRole)));
                 fText.append(getLineFeed());
-                fText.append(aItem->data(INT(History::Column::Commit), fRole).toString());
+                fText.append(aItem->data(INT(History::Column::Commit), History::role(static_cast<History::Entry>(fRole))).toString());
                 fText.append(getLineFeed());
             }
-            auto fNoOfFiles = aItem->data(INT(History::Column::Commit), INT(History::Entry::NoOfFiles));
+            auto fNoOfFiles = aItem->data(INT(History::Column::Commit), History::role(History::Entry::NoOfFiles));
             if (fNoOfFiles.isValid())
             {
                 fText.append(tr("Files: %1").arg(fNoOfFiles.toInt()));
@@ -192,7 +198,7 @@ QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )
         else
         {
             QString fGitCmd = "git show ";
-            fGitCmd.append(aItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+            fGitCmd.append(aItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
             QString fResultStr;
             int fResult = execute(fGitCmd, fResultStr);
             fText = fGitCmd;
@@ -240,22 +246,21 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
     auto fChildItem    = fParent->child(fChild);
     if (fChildItem && !fChildItem->isHidden())
     {
-        Type fType(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::Type)).toUInt());
+        Type fType(fChildItem->data(INT(History::Column::Commit), History::role(History::Entry::Type)).toUInt());
         if (!fChildItem->childCount() && !fType.is(Type::File))
         {
-            int fPrevious = fChild - 1;
-            auto fPreviousItem = fParent->child(fPrevious);
+            auto fNextItem = fParent->child(fChild + 1);
             QString fGitCmd;
-            if (fPreviousItem)
+            if (fNextItem)
             {
                 fGitCmd = tr("git diff --name-only %1 %2").
-                          arg(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString()).
-                          arg(fPreviousItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+                          arg(fNextItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString()).
+                          arg(fChildItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
             }
             else
             {
                 fGitCmd = tr("git diff --name-only %1").
-                          arg(fChildItem->data(INT(History::Column::Commit), INT(History::Entry::CommitHash)).toString());
+                          arg(fChildItem->data(INT(History::Column::Commit), History::role(History::Entry::CommitHash)).toString());
             }
 
             // TODO: validate, if this is correct
@@ -270,14 +275,14 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
             if (!fError)
             {
                 fGitCmd = fGitCmd.replace("--name-only", "%1");
-                fChildItem->setData(INT(History::Column::Commit), INT(History::Entry::GitDiffCommand), fGitCmd);
+                fChildItem->setData(INT(History::Column::Commit), History::role(History::Entry::GitDiffCommand), fGitCmd);
 
                 auto fFiles = fResultStr.split("\n");
                 for (const auto& fFile : fFiles)
                 {
                     fChildItem->addChild(new QTreeWidgetItem({fFile}));
                 }
-                fChildItem->setData(INT(History::Column::Commit), INT(History::Entry::NoOfFiles), fFiles.count());
+                fChildItem->setData(INT(History::Column::Commit), History::role(History::Entry::NoOfFiles), fFiles.count());
             }
         }
     }
