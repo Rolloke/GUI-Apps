@@ -34,7 +34,7 @@ QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const Q
     fNewAction->setToolTip(aName);
     QVariantList fList;
     fList.append(QVariant(sNoCustomCommandMessageBox));
-    for (int i = INT(Data::Action); i<INT(Data::ListSize); ++i)
+    for (int i = Data::Action; i<Data::ListSize; ++i)
     {
         fList.append(QVariant());
     }
@@ -154,7 +154,7 @@ void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd aCmd, const QString& 
 {
     QAction* fAction = getAction(aCmd);
     QVariantList fVariantList = fAction->data().toList();
-    fVariantList[INT(Data::MsgBoxText)] = QVariant(aText);
+    fVariantList[Data::MsgBoxText] = QVariant(aText);
     fAction->setData(fVariantList);
 }
 
@@ -237,31 +237,29 @@ uint ActionList::getFlags(Cmd::eCmd aCmd) const
     return 0;
 }
 
-void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data aData, const QVariant& aVariant)
+void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data::e aData, const QVariant& aVariant)
 {
     QAction* fAction = getAction(aCmd);
     if (fAction)
     {
         QVariantList fVariantList = fAction->data().toList();
-        int fData = INT(aData);
-        if (fData >= 0 && fData < INT(Data::ListSize))
+        if (aData >= 0 && aData < Data::ListSize)
         {
-            fVariantList[fData] = aVariant;
+            fVariantList[aData] = aVariant;
         }
         fAction->setData(fVariantList);
     }
 }
 
-QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data aData) const
+QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data::e aData) const
 {
     QAction* fAction = getAction(aCmd);
     if (fAction)
     {
         QVariantList fVariantList = fAction->data().toList();
-        int fData = INT(aData);
-        if (fData >= 0 && fData < INT(Data::ListSize))
+        if (aData >= 0 && aData < Data::ListSize)
         {
-            return fVariantList[fData];
+            return fVariantList[aData];
         }
     }
     return QVariant();

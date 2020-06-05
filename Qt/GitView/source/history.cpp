@@ -15,7 +15,7 @@ void History::parse(const QString& aText, QVector<QStringList>& aList)
     }
 }
 
-const char* History::name(History::Entry aEntry)
+const char* History::name(History::Entry::e aEntry)
 {
     switch (aEntry)
     {
@@ -37,7 +37,7 @@ const char* History::name(History::Entry aEntry)
     return "Unknown";
 }
 
-int History::role(History::Entry aEntry)
+int History::role(History::Entry::e aEntry)
 {
     return static_cast<int>(aEntry) + 1;
 }

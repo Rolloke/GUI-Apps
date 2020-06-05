@@ -75,7 +75,7 @@ public Q_SLOTS:
 
 private:
 
-    enum class Work
+    struct Work { enum e
     {
         None,
         ApplyGitCommand,
@@ -91,7 +91,7 @@ private:
         // TODO: more git items
         // show out of sync...
         Last
-    };
+    }; };
 
     enum class Message
     {
@@ -99,20 +99,20 @@ private:
         InsertTreeItem
     };
 
-    enum class Column
+    struct Column { enum e
     {
         FileName,
         DateTime,
         State,
         Size
-    };
-    enum class Role
+    }; };
+    struct Role { enum e
     {
         isDirectory = Qt::UserRole,
         DateTime,
         Filter,
         GitFolder
-    };
+    }; };
 
     enum class ComboShowItems
     {
@@ -160,7 +160,7 @@ private:
     Ui::MainWindow*       ui;
     QString               mGitCommand;
     WorkerThreadConnector mWorker;
-    Work                  mCurrentTask;
+    Work::e               mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
     GitIgnore             mGitIgnore;

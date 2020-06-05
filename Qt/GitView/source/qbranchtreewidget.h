@@ -9,10 +9,10 @@ class QBranchTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
-    enum class Column
+    struct Column { enum e
     {
         Text
-    };
+    }; };
 public:
     QBranchTreeWidget(QWidget *parent = 0);
     ~QBranchTreeWidget();

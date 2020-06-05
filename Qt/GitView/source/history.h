@@ -28,19 +28,20 @@ namespace git
 
 struct History
 {
-    enum class Column
+    struct Column { enum e
     {
         Text,
         Author,
         Commit
-    };
-    enum class Role
+    }; };
+
+    struct Role { enum e
     {
         ContextMenuItem,
         VisibleAuthors
-    };
+    }; };
 
-    enum class Entry
+    struct Entry { enum e
     {
         CommitHash,
         TreeHash,
@@ -57,10 +58,10 @@ struct History
         NoOfFiles,
         Type,
         GitDiffCommand
-    };
+    }; };
 
-    static int role(Entry aEntry);
-    static const char* name(Entry aEntry);
+    static int role(Entry::e aEntry);
+    static const char* name(Entry::e aEntry);
     static void parse(const QString& aText, QVector<QStringList>& aList);
 
 };

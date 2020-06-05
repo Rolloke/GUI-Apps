@@ -14,7 +14,7 @@ class ActionList
 {
 
 public:
-    enum class Data { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, ListSize };
+    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, ListSize }; };
 
 #if MAP_TYPE == 0
     typedef boost::container::flat_map<int, QAction*> tActionMap;
@@ -52,8 +52,8 @@ public:
     static const QString sNoCustomCommandMessageBox;
 
 private:
-    void setDataVariant(git::Cmd::eCmd aCmd, Data aData, const QVariant& aVariant);
-    QVariant getDataVariant(git::Cmd::eCmd aCmd, Data aData) const;
+    void setDataVariant(git::Cmd::eCmd aCmd, Data::e aData, const QVariant& aVariant);
+    QVariant getDataVariant(git::Cmd::eCmd aCmd, Data::e aData) const;
 
     tActionMap mActionList;
     QObject*   mParent;
