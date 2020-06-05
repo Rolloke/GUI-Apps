@@ -59,6 +59,7 @@ struct History
         GitDiffCommand
     };
 
+    static int role(Entry aEntry);
     static const char* name(Entry aEntry);
     static void parse(const QString& aText, QVector<QStringList>& aList);
 
