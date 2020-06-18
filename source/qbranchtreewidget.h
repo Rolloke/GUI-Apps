@@ -9,17 +9,16 @@ class QBranchTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
-    struct Column { enum e
-    {
-        Text
-    }; };
+    struct Column { enum e { Text }; };
+    struct Role   { enum e { GitRootPath = 1 }; };
 public:
     QBranchTreeWidget(QWidget *parent = 0);
     ~QBranchTreeWidget();
 
     QString getBranchTopItemText();
-    QString getBranchItem();
-    void parseBranchListText(const QString& aBranchText);
+    QString getSelectedBranchGitRootPath();
+    QString getSelectedBranch();
+    void parseBranchListText(const QString& aBranchText, const QString& aGitRootPath);
     void on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
     void deleteSelectedItem();
 
