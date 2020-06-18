@@ -113,6 +113,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
     QVariant fItemData;
     mHistoryHashItems.clear();
     mHistoryFile.clear();
+    mSelectedTopLevelItemType = 0;
 
     QTreeWidgetItem* fSelectedHistoryItem = itemAt(pos);
     if (fSelectedHistoryItem)
@@ -124,6 +125,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
             case Level::Top:
             {
                 fItemData = fSelectedHistoryItem->data(History::Column::Commit, History::Role::VisibleAuthors);
+                mSelectedTopLevelItemType = fSelectedHistoryItem->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt();
             }   break;
             case Level::Log:
             {
@@ -132,6 +134,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 {
                     fItemData = fParentHistoryItem->data(History::Column::Commit, History::Role::ContextMenuItem);
                     Type fType(fSelectedHistoryItem->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
+                    mSelectedTopLevelItemType = fType.mType;
                     if (fType.is(Type::File))
                     {
                         mHistoryFile = fParentHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();
@@ -149,13 +152,15 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
             }   break;
             case Level::File:
             {
-                mHistoryFile = fSelectedHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();
-
+                QTreeWidgetItem* fTopLevelItem   = getTopLevelItem(*this, fSelectedHistoryItem);
+                mHistoryFile                     = fSelectedHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();
+                fItemData                        = fTopLevelItem->data(History::Column::Commit, History::Role::ContextMenuItem);
                 QTreeWidgetItem* fHistoryLogItem = fSelectedHistoryItem->parent();
-                QTreeWidgetItem* fTopItem = fHistoryLogItem->parent();
+                QTreeWidgetItem* fLogItemParent  = fHistoryLogItem->parent();
+                mSelectedTopLevelItemType        = fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt();
 
-                int fIndex = fTopItem->indexOfChild(fHistoryLogItem);
-                auto fNextItem = fTopItem->child(fIndex+1);
+                int fIndex = fLogItemParent->indexOfChild(fHistoryLogItem);
+                auto fNextItem = fLogItemParent->child(fIndex+1);
                 if (fNextItem)
                 {
                     mHistoryHashItems.append(fNextItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
@@ -166,6 +171,7 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 {
                     mHistoryHashItems.append(fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
                 }
+
 
             }   break;
         }
@@ -296,6 +302,11 @@ const QString& QHistoryTreeWidget::getSelectedHistoryHashItems()
 const QString& QHistoryTreeWidget::getSelectedHistoryFile()
 {
     return mHistoryFile;
+}
+
+uint QHistoryTreeWidget::getSelectedTopLevelType()
+{
+    return mSelectedTopLevelItemType;
 }
 
 bool QHistoryTreeWidget::isSelectionDiffable()

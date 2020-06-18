@@ -19,8 +19,8 @@ Cmd::Cmd()
     mCommandMap[GetStatusAll]           = "git -C %1 status -sb";
     mCommandMap[ShowStatus]             = "git status %1";
     mCommandMap[ShowShortStatus]        = "git status -sb %1";
-    mCommandMap[CallDiffTool]           = "git difftool --no-prompt -- %1";
-    mCommandMap[ShowDifference]         = "git diff -- %1";
+    mCommandMap[CallDiffTool]           = "git difftool --no-prompt %1";
+    mCommandMap[ShowDifference]         = "git diff %1";
     mCommandMap[Remove]                 = "git rm --cached %1";
     mCommandMap[Add]                    = "git add %1";
     mCommandMap[Unstage]                = "git reset HEAD %1";

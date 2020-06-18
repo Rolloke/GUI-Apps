@@ -24,6 +24,7 @@ public:
 
     const QString&  getSelectedHistoryHashItems();
     const QString&  getSelectedHistoryFile();
+    uint            getSelectedTopLevelType();
     bool            isSelectionDiffable();
     bool            isSelectionFileDiffable();
 
@@ -40,6 +41,7 @@ private:
 
     QString mHistoryFile;
     QString mHistoryHashItems;
+    uint    mSelectedTopLevelItemType;
 };
 
 #endif // QHISTORYTREEWIDGET_H

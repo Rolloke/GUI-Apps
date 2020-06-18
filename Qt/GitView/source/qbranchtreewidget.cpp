@@ -20,14 +20,14 @@ QBranchTreeWidget::~QBranchTreeWidget()
 
 }
 
-void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
+void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QString& aGitRootPath)
 {
     QStringList fLines = aBranchText.split("\n");
-    mSelectedItem = nullptr;
+    QTreeWidgetItem* fNewBranchItem = nullptr;
     setVisible(true);
     for (const auto& fLine : fLines)
     {
-        if (mSelectedItem == nullptr)
+        if (fNewBranchItem == nullptr)
         {
             auto fFoundItem = findItems(fLine, Qt::MatchFixedString|Qt::MatchCaseSensitive, Column::Text);
             for (const auto& fItem : fFoundItem)
@@ -35,21 +35,21 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText)
                 auto*fRemoved = takeTopLevelItem(indexOfTopLevelItem(fItem));
                 delete fRemoved;
             }
-            mSelectedItem = new QTreeWidgetItem(QStringList(fLine));
-            addTopLevelItem(mSelectedItem);
+            fNewBranchItem = new QTreeWidgetItem(QStringList(fLine));
+            addTopLevelItem(fNewBranchItem);
+            fNewBranchItem->setData(Column::Text, Role::GitRootPath, QVariant(aGitRootPath));
         }
         else if (fLine.size())
         {
-            QTreeWidgetItem* fNewBranchItem = new QTreeWidgetItem();
-            mSelectedItem->addChild(fNewBranchItem);
-            fNewBranchItem->setText(Column::Text, fLine);
+            QTreeWidgetItem* fNewChildItem = new QTreeWidgetItem();
+            fNewBranchItem->addChild(fNewChildItem);
+            fNewChildItem->setText(Column::Text, fLine);
         }
     }
-    if (mSelectedItem)
+    if (fNewBranchItem)
     {
-        expandItem(mSelectedItem);
+        expandItem(fNewBranchItem);
     }
-    mSelectedItem = nullptr;
 }
 
 void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)
@@ -61,7 +61,7 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     menu.exec(mapToGlobal(pos) );
 }
 
-QString QBranchTreeWidget::getBranchItem()
+QString QBranchTreeWidget::getSelectedBranch()
 {
     QString fItem;
     auto fSelectedList = selectedItems();
@@ -84,6 +84,12 @@ QString QBranchTreeWidget::getBranchTopItemText()
 {
     QTreeWidgetItem* fItem = getTopLevelItem(*this, mSelectedItem);
     return (fItem) ? fItem->text(Column::Text) : "";
+}
+
+QString QBranchTreeWidget::getSelectedBranchGitRootPath()
+{
+    QTreeWidgetItem* fItem = getTopLevelItem(*this, mSelectedItem);
+    return (fItem) ? fItem->data(Column::Text, Role::GitRootPath).toString() : "";
 }
 
 void QBranchTreeWidget::deleteSelectedItem()
