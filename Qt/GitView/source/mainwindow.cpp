@@ -369,6 +369,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         else
         {
             fSizeOfFiles += fFileInfo.size();
+            fItem->setText(Column::Size, formatFileSize(fFileInfo.size()));
             fItem->setData(Column::Size, Qt::SizeHintRole, QVariant(fFileInfo.size()));
         }
         //mIgnoreContainingNegation.reset();
@@ -1327,7 +1328,25 @@ void MainWindow::call_git_history_diff_command()
     }
     if (mContextMenuSourceTreeItem)
     {
-        applyGitCommandToFileTree(tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1"));
+        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1");
+        if (fHistoryFile.size())
+        {
+            fCmd = tr(fCmd.toStdString().c_str()).arg(fHistoryFile);
+            QString fResult;
+            int fError = execute(fCmd, fResult);
+            if (fError)
+            {
+                apendTextToBrowser(fCmd + getLineFeed() + tr("Error occurred: %1").arg(fError));
+            }
+            else
+            {
+                apendTextToBrowser(fCmd + getLineFeed() + fResult);
+            }
+        }
+        else
+        {
+            applyGitCommandToFileTree(fCmd);
+        }
     }
     else
     {
