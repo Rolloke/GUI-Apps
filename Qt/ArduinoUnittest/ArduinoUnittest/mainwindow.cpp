@@ -5,6 +5,8 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
+#include <iostream>
+
 #include <QVector>
 #include <QString>
 #include <QSettings>
@@ -16,6 +18,7 @@
 #include <QAbstractItemModel>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QMutexLocker>
 
 #define STORE_PTR(SETTING, ITEM, FUNC) SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
@@ -44,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     , mFirstAnalogPin(0)
     , mLiquidCrystal(0)
     , mLogicAnalyser(this)
+    , mUseWorkerThread(true)
 {
     ui->setupUi(this);
 
@@ -70,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     LOAD_PTR(fSettings, ui->btnF1, setText, text, toString);
     LOAD_PTR(fSettings, ui->btnF2, setText, text, toString);
     LOAD_STR(fSettings, fArduinoName, toString);
+    LOAD_STR(fSettings, mUseWorkerThread, toBool);
 
 
     mListModel = new QStandardItemModel(0, eLast, this);
@@ -121,6 +126,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    {
+        QMutexLocker fLock(&mPinMutex);
+        gmStaticPinAccess.clear();
+    }
+    if (mWorker)
+    {
+        mWorker->stop();
+        mWorker->wait();
+    }
     QSettings fSettings("config.ini", QSettings::NativeFormat);
     STORE_PTR(fSettings, ui->editEscUpF1, text);
     STORE_PTR(fSettings, ui->editRightEnterLeft, text);
@@ -137,6 +151,7 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->btnF2, text);
     QString fArduinoName = windowTitle();
     STORE_STR(fSettings, fArduinoName);
+    STORE_STR(fSettings, mUseWorkerThread);
 
     delete mArduinoTime;
     delete ui;
@@ -162,24 +177,44 @@ int  MainWindow::elapsed()
     return 0;
 }
 
-void MainWindow::on_Setup()
+void MainWindow::setPins()
 {
+    QMutexLocker fLock(&mPinMutex);
     for (auto fPA : gmStaticPinAccess)
     {
-        switch (fPA[0])
-        {
-        case ePinMode:     pinMode(fPA[1], fPA[2]); break;
-        case eSetPinValue: setPinValue(fPA[1], fPA[2]); break;
-        case eTone:        tone(fPA[1], fPA[2], fPA[3]); break;
-        }
+        setPin(fPA);
     }
+    gmStaticPinAccess.clear();
+}
 
+
+void MainWindow::on_Setup()
+{
+    setPins();
     mArduinoTime->start();
     setup();
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(on_Loop()));
-    timer->start(10);
+    if (mUseWorkerThread)
+    {
+        mWorker.reset(new ArduinoWorker(this));
+    }
+
+    QTimer *timer;
+    if (mWorker)
+    {
+        connect(mWorker.get(), SIGNAL(updateLiquidCrystal()), this, SLOT(updateLiquidCrystal()));
+        mWorker->setLoopFunction(boost::bind(&MainWindow::on_Loop, this));
+        mWorker->start();
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(setPins()));
+        timer->start(1);
+    }
+    else
+    {
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(on_Loop()));
+        timer->start(10);
+    }
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(on_OneSecond()));
@@ -189,7 +224,10 @@ void MainWindow::on_Setup()
 void MainWindow::on_Loop()
 {
     loop();
-    updateLiquidCrystal();
+    if (!mWorker)
+    {
+        updateLiquidCrystal();
+    }
 }
 
 void MainWindow::on_OneSecond()
@@ -245,23 +283,44 @@ void MainWindow::setPinValue(int aPin, int aValue, int aRange)
 {
     if (aPin >= 0 && aPin < mListModel->rowCount())
     {
-        if (aRange != 1)
+        if (mWorker && mWorker->runningInCurrentThread())
         {
-            mListModel->setData(mListModel->index(aPin, eRange, QModelIndex()), QString::number(aRange));
+            QMutexLocker fLock(&mPinMutex);
+            gmStaticPinAccess.push_back({ eSetPinValue, aPin, aValue, aRange });
         }
-        if (mLogicAnalyser.isRecording() && isPinSelected(aPin))
+        else
         {
-            QString fPinName = mListModel->data(mListModel->index(aPin, ePinNo, QModelIndex())).toString();
-            mLogicAnalyser.setValue(fPinName.toStdString(), millis(),
-                                    aRange != 1 ? static_cast<float>(aValue) / static_cast<float>(aRange) : aValue);
+            if (aRange != 1)
+            {
+                mListModel->setData(mListModel->index(aPin, eRange, QModelIndex()), QString::number(aRange));
+            }
+            mListModel->setData(mListModel->index(aPin, eValue, QModelIndex()), QString::number(aValue));
+
+            if (mLogicAnalyser.isRecording() && isPinSelected(aPin))
+            {
+                QString fPinName = mListModel->data(mListModel->index(aPin, ePinNo, QModelIndex())).toString();
+                mLogicAnalyser.setValue(fPinName.toStdString(), millis(),
+                                        aRange != 1 ? static_cast<float>(aValue) / static_cast<float>(aRange) : aValue);
+            }
         }
-        mListModel->setData(mListModel->index(aPin, eValue, QModelIndex()), QString::number(aValue));
     }
     else
     {
         printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
     }
 }
+
+void MainWindow::setPin(const std::vector< int >& aSet )
+{
+    switch (aSet[0])
+    {
+    case ePinMode:     pinMode(aSet[1], aSet[2]); break;
+    case eSetPinValue: setPinValue(aSet[1], aSet[2], aSet[3]); break;
+    case eTone:        tone(aSet[1], aSet[2], aSet[3]); break;
+    }
+
+}
+
 
 void MainWindow::on_Record(bool aRecord)
 {
@@ -319,23 +378,32 @@ bool MainWindow::isPinSelected(int aPin)
     return true;
 }
 
+// TODO: use vector for thread delegation
+// std::vector<int> fFunction = { ePinMode, aPin, aType };
 void MainWindow::pinMode(int aPin, int aType)
 {
     if (gmThis)
     {
-        if (aPin >= 0 && aPin < gmThis->mListModel->rowCount())
+        if (gmThis->mWorker && gmThis->mWorker->runningInCurrentThread())
         {
-            gmThis->mListModel->setData(gmThis->mListModel->index(aPin, ePinType, QModelIndex()), nameof_pintype(aType));
+            QMutexLocker fLock(&gmThis->mPinMutex);
+            gmStaticPinAccess.push_back({ ePinMode, aPin, aType });
         }
         else
         {
-            gmThis->printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
+            if (aPin >= 0 && aPin < gmThis->mListModel->rowCount())
+            {
+                gmThis->mListModel->setData(gmThis->mListModel->index(aPin, ePinType, QModelIndex()), nameof_pintype(aType));
+            }
+            else
+            {
+                gmThis->printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
+            }
         }
     }
     else
     {
-        std::vector<int> fFunction = { ePinMode, aPin, aType };
-        gmStaticPinAccess.push_back(fFunction);
+        gmStaticPinAccess.push_back({ ePinMode, aPin, aType });
     }
 }
 
@@ -356,8 +424,7 @@ void MainWindow::digitalWrite(int aPin, int aValue)
     }
     else
     {
-        std::vector<int> fFunction = { eSetPinValue, aPin, aValue };
-        gmStaticPinAccess.push_back(fFunction);
+        gmStaticPinAccess.push_back({ eSetPinValue, aPin, aValue, 1});
     }
 }
 
@@ -386,8 +453,7 @@ void MainWindow::analogWrite(int aPin, int aValue)
     }
     else
     {
-        std::vector<int> fFunction = { eSetPinValue, aPin, aValue };
-        gmStaticPinAccess.push_back(fFunction);
+        gmStaticPinAccess.push_back({ eSetPinValue, aPin, aValue, 256 });
     }
 }
 
@@ -457,8 +523,7 @@ void MainWindow::tone(int aPin, int aFrequency, int aLength)
     }
     else
     {
-        std::vector<int> fFunction = { eTone, aPin, aFrequency, aLength };
-        gmStaticPinAccess.push_back(fFunction);
+        gmStaticPinAccess.push_back( { eTone, aPin, aFrequency, aLength });
     }
 }
 

@@ -2,8 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <sstream>
+#include <QMutex>
 #include <logic_analyser.h>
+#include <arduinoworker.h>
+
+#include <sstream>
+#include <memory>
 
 class QAbstractItemModel;
 class QModelIndex;
@@ -23,6 +27,7 @@ class MainWindow : public QMainWindow
     {
         ePinMode, eSetPinValue, eTone
     };
+
     typedef std::vector< std::vector< int > > tPinAccess;
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -49,12 +54,13 @@ public:
     int  getPinValue(int aPin, int aRange=1);
     void setPinValue(int aPin, int aValue, int aRange=1);
     bool isPinSelected(int aPin);
+    void setPin(const std::vector< int >& aSet );
 
 private:
     void digitalWrite(const std::vector<int>& aPins, int aValue);
 
     std::vector<int>  getButtonPin(const QLineEdit& aLineEdit, int aNo, int& aValue) const;
-    void updateLiquidCrystal();
+
 
 
 public Q_SLOTS:
@@ -67,6 +73,8 @@ public Q_SLOTS:
     void on_OneSecond();
     void on_Record(bool );
     void on_ShowLogicAnalyser(bool );
+    void updateLiquidCrystal();
+    void setPins();
 
 private Q_SLOTS:
     void on_btnDoTest_clicked();
@@ -101,9 +109,12 @@ private:
     QTime* mArduinoTime;
     LiquidCrystal* mLiquidCrystal;
     LogicAnalyser  mLogicAnalyser;
+    std::unique_ptr<ArduinoWorker>  mWorker;
+    bool mUseWorkerThread;
 
     static MainWindow* gmThis;
     static tPinAccess gmStaticPinAccess;
+    QMutex mPinMutex;
 };
 
 #endif // MAINWINDOW_H

@@ -8,7 +8,7 @@ class PinCommon
 public:
     PinCommon();
     struct Type { enum eType { Unknown, Binary, Analog, Switch, Tone, Interrupt, Last }; };
-    struct Edge { enum eEdge {Unknown, Change, Rising, Falling, High, Low, Last}; };
+    struct Edge { enum eEdge { Unknown, Change, Rising, Falling, High, Low, Last}; };
 
     int mIndex;
 

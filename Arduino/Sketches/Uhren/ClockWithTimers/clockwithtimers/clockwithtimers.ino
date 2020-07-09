@@ -24,16 +24,12 @@
 
 #include "LCD_print.h"
 
-#include "ioMega2560.h"  // pins for test with at mega 2560
-//#include "ioAt328.h"   // pins for at mega 328
+//#include "ioMega2560.h"  // pins for test with at mega 2560
+#include "ioAt328.h"   // pins for at mega 328
 
 
 #define TICK_INTERVAL_MS 500
 
-// TODO: Taster besorgen für Layout
-// TODO: Lautsprecher besorgen für Layout
-// TODO: Timer Baustein besorgen [Optional]
-// TODO: Test LCD Display with ioMega2560.h and atmega
 
 void PrintLCD_Time();
 
@@ -60,9 +56,9 @@ Tone gTones1[] =
 Tone gTones2[] =
 {
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 2, 1},
+    { SILENCE, 2, 1},
     { 0, 0, 0}
 };
 
@@ -70,39 +66,39 @@ Tone gTones2[] =
 Tone gTones3[] =
 {
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 2, 1},
+    { SILENCE, 2, 1},
     { 0, 0, 0}
 };
 
 Tone gTones4[] =
 {
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 2, 1},
+    { SILENCE, 2, 1},
     { 0, 0, 0}
 };
 
 Tone gTones5[] =
 {
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 1, 8},
+    { SILENCE, 1, 8},
     { NOTE_C7, 1, 8},
-    { 0, 2, 1},
+    { SILENCE, 2, 1},
     { 0, 0, 0}
 };
 

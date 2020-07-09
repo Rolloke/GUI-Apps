@@ -10,6 +10,14 @@
 #include <memory>
 #include <map>
 
+//#define ARCUS_COMPLEX
+
+#if __has_cpp_attribute(fallthrough)
+  #define CPP17_FALLTHROUGH        [[fallthrough]];
+#else
+  #define CPP17_FALLTHROUGH
+#endif
+
 #define  IDE_AR_OK               0 // Gleichung ist ok
 #define  IDE_AR_BRACE            1 // Klammerfehler
 #define  IDE_AR_OUTOFRANGE       2 // Zahlenbereich verlassen

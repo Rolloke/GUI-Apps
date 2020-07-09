@@ -30,7 +30,8 @@ SOURCES += main.cpp \
            Wire.cpp \
            logic_analyser.cpp \
            logicview.cpp \
-           logger.cpp
+           logger.cpp \
+           arduinoworker.cpp
 
 HEADERS  += mainwindow.h \
             Arduino.h \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
             Wire.h \
             logic_analyser.h \
             logicview.h \
-            logger.h
+            logger.h \
+            arduinoworker.h
 
 FORMS    += mainwindow.ui \
     logic_analyser.ui

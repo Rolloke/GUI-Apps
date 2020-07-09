@@ -215,7 +215,7 @@ int SettingStates::getMinutes()
     case SetAlarmMode:      return mAlarmMode;
     case SetAlarmDay:       return mTime.Wday;
     case SetAlarmMelody:    return mAlarmMelody;
-    case SetContrast:       return mContrast;
+    case SetContrast:       return 255 - mContrast;
     case SetLightLow:       return mLightLow;
     case SetLightHigh:      return mLightHigh;
     default:
@@ -282,7 +282,7 @@ uint8_t SettingStates::getButtonState(button aBtn)
 
 bool SettingStates::isLightOn()
 {
-    return mModeLight > 0;
+    return mModeLight > Inactive;
 }
 
 bool SettingStates::isLED_DisplayOn()

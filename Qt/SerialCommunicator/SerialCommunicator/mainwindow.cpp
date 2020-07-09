@@ -333,7 +333,7 @@ void MainWindow::on_btnReceive_clicked()
 {
     if (mPort.isOpen())
     {
-        QByteArray fArray = mPort.read(256);
+        QByteArray fArray = mPort.read(1024);
         if (fArray.size() > 0)
         {
             if (ui->ckHexBinary->isChecked())
@@ -649,7 +649,7 @@ void MainWindow::initializeConfigurationPage()
     if (mPins.size() == 0)
     {
         //                       Name       , No, Input, Output, Analog, PWM,   Tone, Binary, Interrup
-#       if 0
+#       if 1
         mPins.push_back(PinType("BNC Port 1", 14, true,  true,   true,   false, false, true,  false));
         mPins.push_back(PinType("BNC Port 2", 15, true,  true,   true,   false, false, true,  false));
         mPins.push_back(PinType("BNC Port 3", 16, true,  true,   true,   false, false, true,  false));
@@ -932,7 +932,24 @@ void MainWindow::on_checkReportValue_clicked(bool aReport)
 void MainWindow::updateOutputControls()
 {
     PinCommon::Type::eType fType = mOutputPins[mSelectedInputPin].mPinType;
-    ui->spinOutputValue->setRange(-1, fType == PinCommon::Type::Binary ? 1 : 255);
+    int fMin = -1;
+    int fMax = 0;
+    switch (fType)
+    {
+    case PinCommon::Type::Interrupt: case PinCommon::Type::Binary: case PinCommon::Type::Switch:
+        fMin = 0;  fMax =   1;
+        break;
+    case PinCommon::Type::Analog:
+        fMin = 0;  fMax = 255;
+        break;
+    case PinCommon::Type::Tone:
+        fMin = 31; fMax = 65535;
+        break;
+    default:
+        break;
+    }
+
+    ui->spinOutputValue->setRange(fMin, fMax);
 }
 
 void MainWindow::on_comboOutputNo_currentIndexChanged(int index)
