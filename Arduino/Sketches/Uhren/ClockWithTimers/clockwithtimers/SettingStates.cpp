@@ -7,7 +7,6 @@
 #define TICK_INTERVAL_MS     500
 #define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
 
-
 // \brief constructor
 SettingStates::SettingStates()
     : mTonePin(0)
@@ -21,6 +20,7 @@ SettingStates::SettingStates()
     , mAlarmActive(false)
     , mTimeChanged(false)
     , mDisplayChanged(true)
+    , mRTC(false)
     , mState(Time)
     , mAlarmMode(Daily)
     , mAlarmID(dtINVALID_ALARM_ID)
@@ -135,26 +135,31 @@ String SettingStates::getStateName()
     switch (mState)
     {
 #if LANGUAGE == EN
-    case Time:          return "Time";
-    case Date:          return "Date";
-    case SetTime:       return "Set Time";
-    case SetDate:       return "Set Date";
-    case SetYear:       return "Set Year";
-    case SetContrast:   return "Set Contrast";
-    case SetLightLow:   return "Set Light dimmed";
-    case SetLightHigh:  return "Set Light on";
-    case StoreTime:     return "Store Time";
-    case SetAlarm:      return "Set Alarm";
-    case SetAlarmMode:  return "Set AlarmMode";
-    case SetAlarmDay:   return "Set AlarmDay";
-    case SetAlarmMelody:return "Set AlarmMelody";
+    case Time:          return F("Time");
+    case Date:          return F("Date");
+    case SetTime:       return F("Set Time");
+    case SetDate:       return F("Set Date");
+    case SetYear:       return F("Set Year");
+    case SetContrast:   return F("Set Contrast");
+    case SetLightLow:   return F("Set Light dimmed");
+    case SetLightHigh:  return F("Set Light on");
+    case StoreTime:
+    {
+        String fTxt = F("Store Time");
+        if (mRTC) fTxt += F(" to RTC");
+        return fTxt;
+    }
+    case SetAlarm:      return F("Set Alarm");
+    case SetAlarmMode:  return F("Set AlarmMode");
+    case SetAlarmDay:   return F("Set AlarmDay");
+    case SetAlarmMelody:return F("Set AlarmMelody");
     default:
         if (isTimerState())
         {
-            mTimerName = "Timer " + String(getTimerIndex()+1);
+            mTimerName = String(F("Timer ")) + String(getTimerIndex()+1);
             return mTimerName;
         }
-        else return "invalid";
+        else return F("invalid");
     }
 #else
     case Time:          return "Uhrzeit";
@@ -165,7 +170,12 @@ String SettingStates::getStateName()
     case SetContrast:   return "Kontrast";
     case SetLightLow:   return "Licht dunkel";
     case SetLightHigh:  return "Light hell";
-    case StoreTime:     return "Speichern";
+    case StoreTime:
+    {
+        String fTxt = F("Speichern");
+        if (mRTC) fTxt += F(" nach RTC");
+        return fTxt;
+    }
     case SetAlarm:      return "Alarm stellen";
     case SetAlarmMode:  return "Alarm Modus";
     case SetAlarmDay:   return "Alarm Tag";
@@ -319,7 +329,11 @@ void SettingStates::handleStateChanged()
         {
             if (RTC.chipPresent())
             {
-                if (!RTC.read(mTime))
+                if (RTC.read(mTime))
+                {
+                    mRTC = true;
+                }
+                else
                 {
                     mTime.Hour    = 0;
                     mTime.Minute  = 0;
@@ -410,10 +424,7 @@ void SettingStates::handleModeInSetTimeStates()
         if (mTimeChanged)
         {
             mState = StoreTime;
-            if (RTC.chipPresent())
-            {
-                RTC.set(makeTime(mTime));
-            }
+            mRTC = RTC.write(mTime);
             setTime(mTime.Hour, mTime.Minute, mTime.Second, mTime.Day, mTime.Month, tmYearToY2k(mTime.Year));
             mTimeChanged = false;
         }

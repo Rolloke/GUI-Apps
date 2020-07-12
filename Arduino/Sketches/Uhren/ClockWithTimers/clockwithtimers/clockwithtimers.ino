@@ -31,6 +31,9 @@
 #define TICK_INTERVAL_MS 500
 
 
+String gLine1;
+String gLine2;
+
 void PrintLCD_Time();
 
 void triggerModeButton(uint8_t, uint8_t);
@@ -113,28 +116,6 @@ Melody gMelody(toneOutput, gTones6, 20, 1000);
 
 void setup() 
 {
-  if (RTC.chipPresent())
-  {
-    tmElements_t fTime;
-    if (!RTC.read(fTime))
-    {
-      int Hour, Min, Sec;
-  
-      sscanf(__TIME__, "%d:%d:%d", &Hour, &Min, &Sec);
-      fTime.Hour = Hour;
-      fTime.Minute = Min;
-      fTime.Second = Sec;
-  
-      sscanf(__DATE__, "%d.%d.%d", &Hour, &Min, &Sec);
-      fTime.Day   = 1;
-      fTime.Month = 1;
-      fTime.Year  = CalendarYrToTm(2016);
-      fTime.Wday  = 1;
-      
-      RTC.write(fTime);
-    }
-    setSyncProvider(RTC.get);
-  }
   
   gModeButton.setDeBounce(10);
   gAlarmButton.setDeBounce(10);
@@ -147,7 +128,21 @@ void setup()
 
   gSettings.setTimerFunction(&onTimerAlarm);
   gSettings.setAlarmFunction(&onTimerAlarm);
+
   LCD_BEGIN
+
+  tmElements_t fTime;
+  if (RTC.read(fTime))
+  {
+      LCD_PRINT_AT(0, 0, F("got time from RTC"));
+      delay(1000);
+  }
+
+  if (RTC.chipPresent())
+  {
+    setSyncProvider(RTC.get);
+  }
+
 }
 
 
@@ -202,6 +197,13 @@ void triggerAlarmButton(uint8_t aState, uint8_t )
       gSettings.triggerButton(SettingStates::ClearAll, Button::none);
     }
 }
+void fillString(String& aStr, int aLen)
+{
+    while (aStr.length() < aLen)
+    {
+        aStr += " ";
+    }
+}
 
 void print2Decimals(int aNumber)
 {
@@ -212,15 +214,24 @@ void print2Decimals(int aNumber)
     }
 }
 
+void print2Decimals(String& aStr, int aNumber)
+{
+    if (aNumber >= 0)
+    {
+        if (aNumber < 10) aStr += "0";
+        aStr += String(aNumber);
+    }
+}
+
 void PrintLCD_Time()
 {
-    LCD_PRINT_AT(0, 0, "                ");
-    LCD_PRINT_AT(0, 0, gSettings.getStateName());
+    String fLine1;
+    fLine1 = gSettings.getStateName();
 
     if (   (gSettings.isTimerState()                        && gSettings.isTimerActive())
         || (gSettings.getState() == SettingStates::SetAlarm && gSettings.isAlarmActive()))
     {
-        LCD_PRINT(": *")
+        fLine1 += ": *";
     }
 
     if (gSettings.getState() == SettingStates::Time)
@@ -230,18 +241,23 @@ void PrintLCD_Time()
         {
             if (gSettings.isTimerActive(i))
             {
-                LCD_PRINT("*");
-                LCD_PRINT((i+1));
+                fLine1 += "*";
+                fLine1 += String(i+1);
             }
             else
             {
-                LCD_PRINT("  ");
+                fLine1 += "  ";
             }
         }
     }
+    fillString(fLine1, LCD_XDIM);
+    if (fLine1 != gLine1)
+    {
+        LCD_PRINT_AT(0, 0, fLine1);
+        gLine1 = fLine1;
+    }
 
-    LCD_PRINT_AT(0, 1, "                ")
-    LCD_SETCURSOR(0, 1);
+    String fLine2;
     bool fPrintTime = false;
     switch (gSettings.getState())
     {
@@ -251,72 +267,72 @@ void PrintLCD_Time()
       break;
     case SettingStates::Date:
 #if LANGUAGE == EN
-            LCD_PRINT(monthShortStr(month()));
-            LCD_PRINT(",");
-            LCD_PRINT(day());
-            LCD_PRINT(" ");
-            print2Decimals(gSettings.getSeconds());
+            fLine2 += monthShortStr(month());
+            fLine2 += ",";
+            fLine2 += String(day());
+            fLine2 += ",";
+            print2Decimals(fLine2, gSettings.getSeconds());
 #else
-        print2Decimals(gSettings.getMinutes());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getHours());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getSeconds());
+            print2Decimals(fLine2, gSettings.getMinutes());
+            fLine2 += ":";
+            print2Decimals(fLine2, gSettings.getHours());
+            fLine2 += ":";
+            print2Decimals(fLine2, gSettings.getSeconds());
 #endif
         break;
     case SettingStates::SetTime:
-        print2Decimals(gSettings.getHours());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getMinutes());
+        print2Decimals(fLine2, gSettings.getHours());
+        fLine2 += ":";
+        print2Decimals(fLine2, gSettings.getMinutes());
         break;
     case SettingStates::SetDate:
 #if LANGUAGE == EN
-        print2Decimals(gSettings.getHours());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getMinutes());
+        print2Decimals(fLine2, gSettings.getHours());
+        fLine2 += ":";
+        print2Decimals(fLine2, gSettings.getMinutes());
 #else
-        print2Decimals(gSettings.getMinutes());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getHours());
+        print2Decimals(fLine2, gSettings.getMinutes());
+        fLine2 += ":";
+        print2Decimals(fLine2, gSettings.getHours());
 #endif
         break;
     case SettingStates::SetYear:
-        print2Decimals(gSettings.getSeconds());
+        print2Decimals(fLine2, gSettings.getSeconds());
         break;
     case SettingStates::SetAlarmMode:
 #if LANGUAGE == EN
-      LCD_PRINT("Mode: ");
+      fLine2 += "Mode: ";
       switch (gSettings.getMinutes())
       {
-      case SettingStates::Once:   LCD_PRINT("Once");   break;
-      case SettingStates::Daily:  LCD_PRINT("Daily");  break;
-      case SettingStates::Weekly: LCD_PRINT("Weekly"); break;
+      case SettingStates::Once:   fLine2 += "Once";   break;
+      case SettingStates::Daily:  fLine2 += "Daily";  break;
+      case SettingStates::Weekly: fLine2 += "Weekly"; break;
       default:break;
       }
 #else
-      LCD_PRINT("Modus: ");
+      fLine2 += "Modus: ";
       switch (gSettings.getMinutes())
       {
-      case SettingStates::Once:   LCD_PRINT("einmal");     break;
-      case SettingStates::Daily:  LCD_PRINT("täglich");    break;
-      case SettingStates::Weekly: LCD_PRINT("wöchentlich");break;
+      case SettingStates::Once:   fLine2 += "einmal";     break;
+      case SettingStates::Daily:  fLine2 += "täglich";    break;
+      case SettingStates::Weekly: fLine2 += "wöchentlich";break;
       default:break;
       }
 #endif
       break;
     case SettingStates::SetAlarmDay:
 #if LANGUAGE == EN
-      LCD_PRINT(dayStr(gSettings.getMinutes()));
+      fLine2 += (dayStr(gSettings.getMinutes()));
 #else
       switch (gSettings.getMinutes())
       {
-      case dowSunday:    LCD_PRINT("Sonntag"); break;
-      case dowMonday:    LCD_PRINT("Montag"); break;
-      case dowTuesday:   LCD_PRINT("Dienstag"); break;
-      case dowWednesday: LCD_PRINT("Mittwoch"); break;
-      case dowThursday:  LCD_PRINT("Donnerstag"); break;
-      case dowFriday:    LCD_PRINT("Freitag"); break;
-      case dowSaturday:  LCD_PRINT("Sonnabend"); break;
+      case dowSunday:    fLine2 += "Sonntag"; break;
+      case dowMonday:    fLine2 += "Montag"; break;
+      case dowTuesday:   fLine2 += "Dienstag"; break;
+      case dowWednesday: fLine2 += "Mittwoch"; break;
+      case dowThursday:  fLine2 += "Donnerstag"; break;
+      case dowFriday:    fLine2 += "Freitag"; break;
+      case dowSaturday:  fLine2 += "Sonnabend"; break;
       default: break;
       }
 
@@ -327,20 +343,26 @@ void PrintLCD_Time()
     case SettingStates::SetContrast:
     case SettingStates::SetLightLow:
     case SettingStates::SetLightHigh:
-      LCD_PRINT(gSettings.getMinutes());
+      fLine2 += String(gSettings.getMinutes());
       break;
     default:
       fPrintTime = gSettings.isTimerState();
     }
     if (fPrintTime)
     {
-        print2Decimals(gSettings.getHours());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getMinutes());
-        LCD_PRINT(":");
-        print2Decimals(gSettings.getSeconds());
+        print2Decimals(fLine2, gSettings.getHours());
+        fLine2 += (":");
+        print2Decimals(fLine2, gSettings.getMinutes());
+        fLine2 += (":");
+        print2Decimals(fLine2, gSettings.getSeconds());
     }
 
+    fillString(fLine2, LCD_XDIM);
+    if (fLine2 != gLine2)
+    {
+        LCD_PRINT_AT(0, 1, fLine2);
+        gLine2 = fLine2;
+    }
 }
 
 void onTimerAlarm()

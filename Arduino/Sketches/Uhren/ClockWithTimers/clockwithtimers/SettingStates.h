@@ -103,6 +103,7 @@ private:
   bool    mAlarmActive;
   bool    mTimeChanged;
   bool    mDisplayChanged;
+  bool    mRTC;
   tmElements_t mTime;
   state        mState;
   alarm_mode   mAlarmMode;
