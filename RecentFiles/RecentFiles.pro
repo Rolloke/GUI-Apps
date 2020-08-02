@@ -4,14 +4,15 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 QT += xml
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = RecentFiles
 TEMPLATE = app
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 
 SOURCES += main.cpp\
         mainwindow.cpp
