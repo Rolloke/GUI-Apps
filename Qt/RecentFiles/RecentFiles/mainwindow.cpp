@@ -239,7 +239,7 @@ void MainWindow::on_pushButtonDeleteSelected_clicked()
 
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 {
-    QString fFile = "gnome-open \"" + mListModel->data(mListModel->index(index.row(), ePath)).toString() + "/" +
+    QString fFile = "xdg-open \"" + mListModel->data(mListModel->index(index.row(), ePath)).toString() + "/" +
             mListModel->data(mListModel->index(index.row(), eFile)).toString() + "\"";
 
     QUrl fUrl(fFile);

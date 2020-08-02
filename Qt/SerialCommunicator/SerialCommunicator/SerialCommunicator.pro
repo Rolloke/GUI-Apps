@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 TARGET = SerialCommunicator
 TEMPLATE = app

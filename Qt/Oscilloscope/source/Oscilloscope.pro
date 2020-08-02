@@ -15,15 +15,19 @@ greaterThan(QT_MAJOR_VERSION, 4):TARGET = OscilloscopeQt5
 
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 QMAKE_CXXFLAGS += -msse2
+QMAKE_CXXFLAGS += -mavx
 
 QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_SSE2
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 DEFINES +=__SSE2__
+DEFINES +=__AVX__
+
 
 # define trigger processing:
 # 1: processing depending on buffer update flag
@@ -118,14 +122,14 @@ FORMS    += mainwindow.ui \
     aboutdlg.ui
 
 
-INCLUDEPATH += /home/rolf/Projekte
-DEPENDPATH += /home/rolf/Projekte
+#INCLUDEPATH += /home/rolf/Projekte
+#DEPENDPATH += /home/rolf/Projekte
 
-INCLUDEPATH += /usr/include
-DEPENDPATH += /usr/include
+#INCLUDEPATH += /usr/include
+#DEPENDPATH += /usr/include
 
-INCLUDEPATH += /usr/lib/i386-linux-gnu
-DEPENDPATH += /usr/lib/i386-linux-gnu
+#INCLUDEPATH += /usr/lib/i386-linux-gnu
+#DEPENDPATH += /usr/lib/i386-linux-gnu
 
 
 #unix:!macx:!symbian: LIBS += -L/usr/lib/ -lportaudio
