@@ -65,47 +65,6 @@ namespace{
         }
     }
 #endif
-#ifdef __AVX__
-    union u8Floats
-    {
-        __m256 mSSE;
-        float  mF[sizeof(__m256)/sizeof(float)];
-    };
-
-    void convertBufferSSEFloat256bit(size_t aStartPos, size_t aSize, int aStartChannel, int aChannels, const Channel* aCP, const void *aInputBuffer, std::vector< std::vector<double> >&aOutputBuffer)
-    {
-        int fItems = aSize*aChannels;
-        int fStopChannel = aStartChannel + aChannels;
-        const float *fBuffer = static_cast<const float*>(aInputBuffer);
-
-        u8Floats fMultiplier;
-        u8Floats fAdder;
-        u8Floats fResult;
-        const int fMaxIndex = sizeof(__m256)/sizeof(float);
-
-        for (int fIndex= 0, fC = aStartChannel; fIndex<fMaxIndex; ++fIndex, ++fC)
-        {
-            if (fC == fStopChannel) fC = aStartChannel;
-            fMultiplier.mF[fIndex] = aCP[fC].getAudioInputScale() * aCP[fC].getAudioScale();
-            fAdder.mF[fIndex]      = aCP[fC].getAudioInputOffset();
-        }
-
-        for (int i=0; i<fItems; ++aStartPos, i+=fMaxIndex)
-        {
-            __m256 *fInput = (__m256 *)&fBuffer[i];
-            fResult.mSSE = _mm256_mul_ps(_mm256_add_ps(*fInput, fAdder.mSSE), fMultiplier.mSSE);
-            for (int fIndex= 0, fC = aStartChannel; fIndex<fMaxIndex; ++fIndex, ++fC)
-            {
-                if (fC == fStopChannel)
-                {
-                    ++aStartPos;
-                    fC = aStartChannel;
-                }
-                aOutputBuffer[fC][aStartPos] = fResult.mF[fIndex];
-            }
-        }
-    }
-#endif
 
 #if (_USE_QT_AUDIO != 1)
     void convertBufferInt24(size_t aStartPos, size_t aSize, std::uint32_t aStartChannel, std::uint32_t aChannels, const Channel* aCP, const void *aInputBuffer, std::vector< std::vector<double> >&aOutputBuffer)
@@ -424,7 +383,7 @@ void QAudioRecord::initQtAudio()
             if (bUseSSEFloat)
             {
     #ifdef __AVX__
-                mConvert = &convertBufferSSEFloat256bit;
+                mConvert = &sse::convertBufferFloat256bit;
     #elif __SSE2__
                 mConvert = &sse::convertBufferFloat128bit;
     #endif

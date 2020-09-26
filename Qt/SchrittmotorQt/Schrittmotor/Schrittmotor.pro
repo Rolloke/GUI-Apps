@@ -66,8 +66,8 @@ FORMS    += mainwindow.ui \
 #else:symbian: LIBS += -lboost_serialization
 #else:unix: LIBS += -L/usr/lib/ -lboost_serialization
 
-INCLUDEPATH += $$PWD/../../../../../../usr/include
-DEPENDPATH += $$PWD/../../../../../../usr/include
+#INCLUDEPATH += $$PWD/../../../../../../usr/include
+#DEPENDPATH += $$PWD/../../../../../../usr/include
 
 #win32:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/lib/release/boost_serialization.lib
 #else:win32:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../usr/lib/debug/boost_serialization.lib

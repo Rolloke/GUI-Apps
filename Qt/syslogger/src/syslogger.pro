@@ -12,6 +12,8 @@ TARGET = syslogger
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -Wno-unused-function
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 SOURCES += main.cpp\
         receiverthread.cpp\
