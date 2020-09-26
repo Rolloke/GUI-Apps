@@ -649,7 +649,7 @@ void MainWindow::initializeConfigurationPage()
     if (mPins.size() == 0)
     {
         //                       Name       , No, Input, Output, Analog, PWM,   Tone, Binary, Interrup
-#       if 1
+#       if 0
         mPins.push_back(PinType("BNC Port 1", 14, true,  true,   true,   false, false, true,  false));
         mPins.push_back(PinType("BNC Port 2", 15, true,  true,   true,   false, false, true,  false));
         mPins.push_back(PinType("BNC Port 3", 16, true,  true,   true,   false, false, true,  false));

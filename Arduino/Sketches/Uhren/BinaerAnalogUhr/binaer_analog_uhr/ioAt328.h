@@ -19,7 +19,11 @@ BinaryClockMux gTimeDisplay( 13,  12,  8,  7, 6, 5,  2,  1,  0);
 //                       Mode, Hour, Minute, Alarm
 SettingStates  gSettings;
 
+#ifdef ArduinoEmulator
+#define SOFTWARE_SERIAL
 #define LCD_PRINT
+#endif
+
 #ifdef LCD_PRINT
 #include <LiquidCrystal.h>
 LiquidCrystal LCD(13, 12, 8, 7, 6, 5);
@@ -27,7 +31,6 @@ LiquidCrystal LCD(13, 12, 8, 7, 6, 5);
 #endif
 
 
-#define SOFTWARE_SERIAL
 /*
 Digital Pin 0  (PCINT15,RXD)      (RX)  H
 Digital Pin 1  (PCINT17,TXD)      (TX)  M
@@ -51,6 +54,3 @@ Analog PIN  3  (PCINT11)                T3
 Analog PIN  4  (PCINT12,SDA)            Time SDA
 Analog PIN  5  (PCINT13,SCL)            Time SCL
 */
-
-
-

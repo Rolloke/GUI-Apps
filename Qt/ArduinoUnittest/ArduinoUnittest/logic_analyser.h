@@ -40,7 +40,7 @@ public Q_SLOTS:
 private Q_SLOTS:
     void on_btnClear_clicked();
     void on_btnRecord_clicked(bool checked);
-
+    void on_ckAutoUpdate_clicked(bool checked);
 
 private:
     void updateVerticalLayoutItems();

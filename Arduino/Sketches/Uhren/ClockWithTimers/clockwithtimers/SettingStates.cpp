@@ -2,6 +2,10 @@
 #include <Arduino.h>
 #include <DS1307RTC.h>
 #include <button.h>
+#include <TimeAlarms.h>
+#include <EEPROM.h>
+
+const char  gEEPROMid[] = "USBCal";
 
 
 #define TICK_INTERVAL_MS     500
@@ -10,20 +14,25 @@
 // \brief constructor
 SettingStates::SettingStates()
     : mTonePin(0)
+    , mVddPulsePin(0)
+    , mMeasureCurrentInPin(0)
     , mModeBlink(Active)
     , mModeLight(0)
     , mContrast(128)
     , mLightLow(64)
     , mLightHigh(200)
-    , mLastTickTime(0)
     , mAlarmMelody(0)
+    , mLanguage(EN)
+    , mLastTickTime(0)
     , mAlarmActive(false)
     , mTimeChanged(false)
     , mDisplayChanged(true)
     , mRTC(false)
+    , mCalibrateCurrent(false)
     , mState(Time)
     , mAlarmMode(Daily)
     , mAlarmID(dtINVALID_ALARM_ID)
+    , mCalibrateCurrentValue(10230)
     , mTimerFunction(0)
     , mAlarmFunction(0)
 {
@@ -38,6 +47,24 @@ SettingStates::SettingStates()
     {
         mTimerID[i]        = dtINVALID_ALARM_ID;
         mTimerStartTime[i] = dtINVALID_TIME;
+    }
+
+    int i, len = strlen(gEEPROMid);
+
+    for (i=0; i<len; ++i)
+    {
+      char fByte = EEPROM.read(i);
+      if (fByte != gEEPROMid[i]) break;
+    }
+
+    if (i==len)
+    {
+        len = sizeof(mCalibrateCurrentValue);
+        char *fBlock = (char*) &mCalibrateCurrentValue;
+        for (int j=0; j<len; ++j, ++i)
+        {
+          fBlock[j] = EEPROM.read(i);
+        }
     }
 }
 
@@ -55,6 +82,15 @@ void SettingStates::setTonePin(uint8_t aPin)
 {
     mTonePin = aPin;
 }
+
+void SettingStates::setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin)
+{
+    mVddPulsePin = aVddPin;
+    pinMode(mVddPulsePin, OUTPUT);
+    mMeasureCurrentInPin = aAnalogInPin;
+    pinMode(mMeasureCurrentInPin, INPUT);
+}
+
 void SettingStates::setBlinkMode(uint8_t aMode)
 {
     mModeBlink = aMode;
@@ -104,15 +140,16 @@ void SettingStates::onTrigger()
 
     switch (mState)
     {
-    case Time:          handleTimeState();         break;
-    case Date:          handleDateState();         break;
+    case Time:          handleTimeState();            break;
+    case Date:          handleDateState();            break;
+    case MeasureCurrent:handleMeasureCurrrentState(); break;
     case StoreTime:
         if (getButtonState(Mode) == Button::released) mState = Time;
         break;
-    case SetAlarm:      handleSetAlarmState();     break;
-    case SetAlarmMode:  handleSetAlarmModeState(); break;
-    case SetAlarmDay:   handleSetAlarmDayState();  break;
-    case SetAlarmMelody:handleSetAlarmMelody();    break;
+    case SetAlarm:      handleSetAlarmState();        break;
+    case SetAlarmMode:  handleSetAlarmModeState();    break;
+    case SetAlarmDay:   handleSetAlarmDayState();     break;
+    case SetAlarmMelody:handleSetAlarmMelody();       break;
     default:
         if (isTimerState())
         {
@@ -126,74 +163,142 @@ void SettingStates::onTrigger()
     }
     if (fOldState != mState)
     {
+        handleExitState(fOldState);
+        handleEnterState(mState);
         handleStateChanged();
     }
 }
 
 String SettingStates::getStateName()
 {
-    switch (mState)
+    if (getLanguage()== EN)
     {
-#if LANGUAGE == EN
-    case Time:          return F("Time");
-    case Date:          return F("Date");
-    case SetTime:       return F("Set Time");
-    case SetDate:       return F("Set Date");
-    case SetYear:       return F("Set Year");
-    case SetContrast:   return F("Set Contrast");
-    case SetLightLow:   return F("Set Light dimmed");
-    case SetLightHigh:  return F("Set Light on");
-    case StoreTime:
-    {
-        String fTxt = F("Store Time");
-        if (mRTC) fTxt += F(" to RTC");
-        return fTxt;
-    }
-    case SetAlarm:      return F("Set Alarm");
-    case SetAlarmMode:  return F("Set AlarmMode");
-    case SetAlarmDay:   return F("Set AlarmDay");
-    case SetAlarmMelody:return F("Set AlarmMelody");
-    default:
-        if (isTimerState())
+        switch (mState)
         {
-            mTimerName = String(F("Timer ")) + String(getTimerIndex()+1);
-            return mTimerName;
-        }
-        else return F("invalid");
-    }
-#else
-    case Time:          return "Uhrzeit";
-    case Date:          return "Datum";
-    case SetTime:       return "Uhrzeit stellen";
-    case SetDate:       return "Datum stellen";
-    case SetYear:       return "Jahr stellen";
-    case SetContrast:   return "Kontrast";
-    case SetLightLow:   return "Licht dunkel";
-    case SetLightHigh:  return "Light hell";
-    case StoreTime:
-    {
-        String fTxt = F("Speichern");
-        if (mRTC) fTxt += F(" nach RTC");
-        return fTxt;
-    }
-    case SetAlarm:      return "Alarm stellen";
-    case SetAlarmMode:  return "Alarm Modus";
-    case SetAlarmDay:   return "Alarm Tag";
-    case SetAlarmMelody:return "Alarm Melodie";
-    default:
-        if (isTimerState())
+        case Time:          return F("Time");
+        case Date:          return F("Date");
+        case MeasureCurrent:return F("USB-Current");
+        case SetTime:       return F("Set Time");
+        case SetDate:       return F("Set Date");
+        case SetYear:       return F("Set Year");
+        case SetContrast:   return F("Set Contrast");
+        case SetLightLow:   return F("Set Light dimmed");
+        case SetLightHigh:  return F("Set Light on");
+        case StoreTime:
         {
-            mTimerName = "Timer " + String(getTimerIndex()+1);
-            return mTimerName;
+            String fTxt = F("Store Time");
+            if (mRTC) fTxt += F(" to RTC");
+            return fTxt;
         }
-        else return "invalid";
+        case SetAlarm:      return F("Set Alarm");
+        case SetAlarmMode:  return F("Set AlarmMode");
+        case SetAlarmDay:   return F("Set AlarmDay");
+        case SetAlarmMelody:return F("Set AlarmMelody");
+        case SetLanguage:   return F("Language English");
+        default:
+            if (isTimerState())
+            {
+                mTimerName = String(F("Timer ")) + String(getTimerIndex()+1);
+                return mTimerName;
+            }
+            else return F("invalid");
+        }
     }
-#endif
+    else
+    {
+        switch (mState)
+        {
+        case Time:          return F("Uhrzeit");
+        case Date:          return F("Datum");
+        case MeasureCurrent:return F("USB-Strom");
+        case SetTime:       return F("Uhrzeit stellen");
+        case SetDate:       return F("Datum stellen");
+        case SetYear:       return F("Jahr stellen");
+        case SetContrast:   return F("Kontrast");
+        case SetLightLow:   return F("Licht dunkel");
+        case SetLightHigh:  return F("Light hell");
+        case StoreTime:
+        {
+            String fTxt = F("Speichern");
+            if (mRTC) fTxt += F(" nach RTC");
+            return fTxt;
+        }
+        case SetAlarm:      return F("Alarm stellen");
+        case SetAlarmMode:  return F("Alarm Modus");
+        case SetAlarmDay:   return F("Alarm Tag");
+        case SetAlarmMelody:return F("Alarm Melodie");
+        case SetLanguage:   return F("Sprache deutsch");
+        default:
+            if (isTimerState())
+            {
+                mTimerName = String(F("Timer ")) + String(getTimerIndex()+1);
+                return mTimerName;
+            }
+            else return F("Invalide");
+        }
+    }
+}
+
+String SettingStates::getAlarmModeName()
+{
+    String fName;
+    if (getLanguage()== EN)
+    {
+        fName = F("Mode: ");
+        switch (getMinutes())
+        {
+        case SettingStates::Once:   fName += F("Once");   break;
+        case SettingStates::Daily:  fName += F("Daily");  break;
+        case SettingStates::Weekly: fName += F("Weekly"); break;
+        default:break;
+        }
+    }
+    else
+    {
+        fName += "Modus: ";
+        switch (getMinutes())
+        {
+        case SettingStates::Once:   fName += F("einmal");     break;
+        case SettingStates::Daily:  fName += F("täglich");    break;
+        case SettingStates::Weekly: fName += F("wöchentlich");break;
+        default:break;
+        }
+    }
+    return fName;
+}
+
+String SettingStates::getAlarmDayName()
+{
+    String fName;
+    if (getLanguage()== EN)
+    {
+        fName = (dayStr(getMinutes()));
+    }
+    else
+    {
+        switch (getMinutes())
+        {
+        case dowSunday:    fName = F("Sonntag"); break;
+        case dowMonday:    fName = F("Montag"); break;
+        case dowTuesday:   fName = F("Dienstag"); break;
+        case dowWednesday: fName = F("Mittwoch"); break;
+        case dowThursday:  fName = F("Donnerstag"); break;
+        case dowFriday:    fName = F("Freitag"); break;
+        case dowSaturday:  fName = F("Sonnabend"); break;
+        default: break;
+        }
+    }
+    return fName;
 }
 
 uint8_t SettingStates::getState()
 {
     return mState;
+}
+
+uint8_t SettingStates::getLanguage()
+{
+    return mLanguage;
 }
 
 int SettingStates::getHours()
@@ -220,7 +325,7 @@ int SettingStates::getMinutes()
     case Date:              return day();
     case SetTime:           return mTime.Minute;
     case SetDate:           return mTime.Day;
-    case SetYear:           return tmYearToY2k(mTime.Year);
+    case SetYear:           return tmYearToCalendar(mTime.Year);
     case SetAlarm:          return mTime.Minute;
     case SetAlarmMode:      return mAlarmMode;
     case SetAlarmDay:       return mTime.Wday;
@@ -278,6 +383,12 @@ int SettingStates::getLightHigh()
     return mLightHigh;
 }
 
+float SettingStates::getUSBCurrentValue() const
+{
+    float fFactor = 10230.0 / mCalibrateCurrentValue;
+    return (((float)mReadCurrentValue) * fFactor);
+}
+
 
 bool SettingStates::isButtonPressed(button aBtn)
 {
@@ -320,6 +431,39 @@ void SettingStates::playAlarm()
         mAlarmFunction();
     }
 }
+void SettingStates::handleEnterState(state aState)
+{
+    if (aState == MeasureCurrent)
+    {
+        tone(mVddPulsePin, 5000);
+    }
+}
+
+void SettingStates::handleExitState(state aState)
+{
+    if (aState == MeasureCurrent)
+    {
+        noTone(mVddPulsePin);
+        if (mCalibrateCurrent)
+        {
+            int i, len = strlen(gEEPROMid);
+            for (i=0; i<len; ++i)
+            {
+              EEPROM.write(i, gEEPROMid[i]);
+            }
+            if (i==len)
+            {
+                len = sizeof(mCalibrateCurrentValue);
+                char *fBlock = (char*) &mCalibrateCurrentValue;
+                for (int j=0; j<len; ++j, ++i)
+                {
+                    EEPROM.write(i, fBlock[j]);
+                }
+            }
+            mCalibrateCurrent = false;
+        }
+    }
+}
 
 void SettingStates::handleStateChanged()
 {
@@ -335,10 +479,7 @@ void SettingStates::handleStateChanged()
                 }
                 else
                 {
-                    mTime.Hour    = 0;
-                    mTime.Minute  = 0;
-                    mTime.Month   = 1;
-                    mTime.Day     = 1;
+                    breakTime(now(), mTime);
                 }
             }
             else
@@ -358,7 +499,7 @@ void SettingStates::handleStateChanged()
             case dtExplicitAlarm: mAlarmMode = Once;   break;
             case dtDailyAlarm:    mAlarmMode = Daily;  break;
             case dtWeeklyAlarm:   mAlarmMode = Weekly; break;
-//          case dtTimer: break;
+                //          case dtTimer: break;
             default: break;
             }
             mTime.Hour   = hour(fTime);
@@ -403,6 +544,31 @@ void SettingStates::handleDateState()
     handleModeInTimeStates();
 }
 
+void SettingStates::handleMeasureCurrrentState()
+{
+    handleModeInTimeStates();
+    if (mCalibrateCurrent)
+    {
+        if (isButtonPressed(Plus))
+        {
+            mCalibrateCurrentValue ++;
+            if (getButtonState(Plus)&Button::repeated)
+            {
+                mCalibrateCurrentValue += 50;
+            }
+        }
+        else if (isButtonPressed(Minus))
+        {
+            mCalibrateCurrentValue --;
+            if (getButtonState(Minus)&Button::repeated)
+            {
+                mCalibrateCurrentValue -= 50;
+            }
+        }
+    }
+    mReadCurrentValue = analogRead(mMeasureCurrentInPin);
+}
+
 void SettingStates::handleTimerState()
 {
     handleActivateTimer();
@@ -425,7 +591,7 @@ void SettingStates::handleModeInSetTimeStates()
         {
             mState = StoreTime;
             mRTC = RTC.write(mTime);
-            setTime(mTime.Hour, mTime.Minute, mTime.Second, mTime.Day, mTime.Month, tmYearToY2k(mTime.Year));
+            setTime(mTime.Hour, mTime.Minute, mTime.Second, mTime.Day, mTime.Month, tmYearToCalendar(mTime.Year));
             mTimeChanged = false;
         }
         else
@@ -460,14 +626,25 @@ void SettingStates::handleModeInTimeStates()
     if (getButtonState(Mode) == Button::released)
     {
         mState = static_cast<state>(mState + 1);
-        if (mState == (Timer+Timers))
+        if (mState > LastState)
         {
             mState = Time;
         }
     }
     else if (getButtonState(Mode) == Button::delayed)
     {
-        mState = SetTime;
+        if (mState == MeasureCurrent)
+        {
+            mCalibrateCurrent = !mCalibrateCurrent;
+        }
+        else
+        {
+            mState = SetTime;
+            if (!RTC.read(mTime))
+            {
+                breakTime(now(), mTime);
+            }
+        }
     }
 }
 
@@ -524,52 +701,45 @@ void SettingStates::handleMonthDay()
 
 void SettingStates::handleYear()
 {
-    if ( isButtonPressed(Plus) && mTime.Year < 255)
+    if (handleSetPlusMinus(mTime.Year, 0, 255))
     {
-        ++mTime.Year;
-        mTimeChanged = true;
-    }
-    else if ( isButtonPressed(Minus) && mTime.Year > 0 )
-    {
-        --mTime.Year;
         mTimeChanged = true;
     }
 } 
 
 void SettingStates::handleContrast()
 {
-    if ( isButtonPressed(Plus) && mContrast < 255)
-    {
-        ++mContrast;
-    }
-    else if ( isButtonPressed(Minus) && mContrast > 0 )
-    {
-        --mContrast;
-    }
+    handleSetPlusMinus(mContrast, 0, 255);
 }
 
 void SettingStates::handleLightLow()
 {
-    if ( isButtonPressed(Plus) && mLightLow < 255)
-    {
-        ++mLightLow;
-    }
-    else if ( isButtonPressed(Minus) && mLightLow > 0 )
-    {
-        --mLightLow;
-    }
+    handleSetPlusMinus(mLightLow, 0, 255);
 }
 
 void SettingStates::handleLightHigh()
 {
-    if ( isButtonPressed(Plus) && mLightHigh < 255)
+    handleSetPlusMinus(mLightHigh, 0, 255);
+}
+
+void SettingStates::handleLanguage()
+{
+    handleSetPlusMinus(mLanguage, EN, DE);
+}
+
+bool SettingStates::handleSetPlusMinus(uint8_t& aVar, uint8_t aMin, uint8_t aMax)
+{
+    if ( isButtonPressed(Plus) && aVar < aMax)
     {
-        ++mLightHigh;
+        ++aVar;
+        return true;
     }
-    else if ( isButtonPressed(Minus) && mLightHigh > 0 )
+    else if ( isButtonPressed(Minus) && aVar > aMin )
     {
-        --mLightHigh;
+        --aVar;
+        return true;
     }
+    return false;
 }
 
 void SettingStates::handleActivateTimer()
@@ -587,14 +757,14 @@ void SettingStates::handleActivateTimer()
             stopTimer(fIndex);
         }
         // Hint could be nice but does not work like it is implemented
-//        else if (isButtonPressed(Plus))
-//        {
-//            Alarm.enable(mTimerID[fIndex]);
-//        }
-//        else if (isButtonPressed(Minus))
-//        {
-//            Alarm.disable(mTimerID[fIndex]);
-//        }
+        //        else if (isButtonPressed(Plus))
+        //        {
+        //            Alarm.enable(mTimerID[fIndex]);
+        //        }
+        //        else if (isButtonPressed(Minus))
+        //        {
+        //            Alarm.disable(mTimerID[fIndex]);
+        //        }
     }
     else
     {
@@ -681,6 +851,11 @@ bool SettingStates::isAlarmActive()
     return mAlarmActive;
 }
 
+bool SettingStates::isCalibrating()
+{
+    return mCalibrateCurrent;
+}
+
 bool SettingStates::hasDisplayChanged()
 {
     bool fChanged = mDisplayChanged;
@@ -729,6 +904,8 @@ void SettingStates::handleSettingsState()
     case SetContrast:  handleContrast();  break;
     case SetLightLow:  handleLightLow();  break;
     case SetLightHigh: handleLightHigh(); break;
+    case SetLanguage:  handleLanguage();  break;
+
     default: break;
     }
     if (isButtonPressed(DateTime))
@@ -747,13 +924,10 @@ void SettingStates::handleSetAlarmState()
 void SettingStates::handleSetAlarmModeState()
 {
     handleModeInSetAlarmStates();
-    if (isButtonPressed(Plus) && mAlarmMode != LastAlarmMode)
+    uint8_t fAlarmMode = mAlarmMode;
+    if (handleSetPlusMinus(fAlarmMode, FirstAlarmMode, LastAlarmMode))
     {
-        mAlarmMode = (alarm_mode) (mAlarmMode + 1);
-    }
-    if (isButtonPressed(Minus)&& mAlarmMode != FirstAlarmMode)
-    {
-        mAlarmMode = (alarm_mode) (mAlarmMode - 1);
+        mAlarmMode = (alarm_mode)fAlarmMode;
     }
     handleActivateAlarm();
 }
@@ -761,14 +935,7 @@ void SettingStates::handleSetAlarmModeState()
 void SettingStates::handleSetAlarmDayState()
 {
     handleModeInSetAlarmStates();
-    if (isButtonPressed(Plus)  && mTime.Wday < dowSaturday)
-    {
-        mTime.Wday++;
-    }
-    if (isButtonPressed(Minus) && mTime.Wday > dowSunday)
-    {
-        mTime.Wday--;
-    }
+    handleSetPlusMinus(mTime.Wday, dowSunday, dowSaturday);
     handleActivateAlarm();
 }
 
@@ -776,14 +943,8 @@ void SettingStates::handleSetAlarmDayState()
 void SettingStates::handleSetAlarmMelody()
 {
     handleModeInSetAlarmStates();
-    if (isButtonPressed(Plus) && mAlarmMelody < 3)
+    if (handleSetPlusMinus(mAlarmMelody, 0, 3))
     {
-        ++mAlarmMelody;
-        playAlarm();
-    }
-    else if (isButtonPressed(Minus) && mAlarmMelody > 0)
-    {
-        --mAlarmMelody;
         playAlarm();
     }
 }

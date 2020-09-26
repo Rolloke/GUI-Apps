@@ -113,6 +113,6 @@ void BinaryClockMux::setBinaryPinStates(uint8_t aBits)
 void BinaryClockMux::showLEDs(uint8_t aType, bool aOn, unsigned long aNow)
 {
   digitalWrite(mCommonLEDPins[aType], aOn ? !mCommonLevel : mCommonLevel);
-  mNextChange = aNow + aOn ? mCommonPinsTime[aType] : 1;
+  mNextChange = aNow + (aOn ? mCommonPinsTime[aType] : 0);
 }
 

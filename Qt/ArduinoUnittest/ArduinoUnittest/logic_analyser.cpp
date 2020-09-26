@@ -88,14 +88,33 @@ void LogicAnalyser::on_btnRecord_clicked(bool checked)
 {
     if (checked)
     {
-        mUpdateTimerID = startTimer(1000);
+        on_ckAutoUpdate_clicked(ui->ckAutoUpdate->isChecked());
     }
     else
     {
-        killTimer(mUpdateTimerID);
+        on_ckAutoUpdate_clicked(false);
         on_btnUpdate_clicked();
     }
     Q_EMIT(record(checked));
+}
+
+void LogicAnalyser::on_ckAutoUpdate_clicked(bool checked)
+{
+    if (checked)
+    {
+        if (!mUpdateTimerID)
+        {
+            mUpdateTimerID = startTimer(1000);
+        }
+    }
+    else
+    {
+        if (mUpdateTimerID)
+        {
+            killTimer(mUpdateTimerID);
+            mUpdateTimerID = 0;
+        }
+    }
 }
 
 void LogicAnalyser::updateVerticalLayoutItems()
@@ -134,4 +153,5 @@ void LogicAnalyser::on_btnUpdate_clicked()
     ui->graphicsViewLogicCurves->determineRange(*mPinMap);
     ui->graphicsViewLogicCurves->drawLogicCurves(*mPinMap);
 }
+
 

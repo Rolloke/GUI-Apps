@@ -1,9 +1,12 @@
 #include <WString.h>
 #include <serialinterface.h>
 #include <mainwindow.h>
+#include <cmath>
 
 #ifndef ADRDUINO_H_INCLUDED
 #define ADRDUINO_H_INCLUDED
+
+#define ArduinoEmulator 1
 
 #define ARDUINO 100
 typedef void (*InterrupFunction)();
@@ -136,5 +139,6 @@ void bitWrite(long& aValue, long aBit, bool aSet);
 void bitSet(long& aValue, long aBit);
 void bitClear(long& aValue, long aBit);
 long bit(long aBit);
+
 
 #endif

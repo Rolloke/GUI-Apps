@@ -113,7 +113,7 @@ uint8_t  mapMinutes(uint8_t aMinutes);
 void playTimerAlarm();
 void playAlarm();
 
-void setup() 
+void setup()
 {
   pinMode(analogMinute, OUTPUT);
   analogWrite(analogMinute, 0);
@@ -144,7 +144,7 @@ void setup()
 #ifdef TEST_PERIPHERY
   testPeriphery();
 #endif
-  gTimeDisplay.setCommonDisplayTimes(5,5,5);
+  gTimeDisplay.setCommonDisplayTimes(3,3,3);
 
   tmElements_t fTime;
   if (!RTC.read(fTime) && RTC.chipPresent())
@@ -166,13 +166,14 @@ void setup()
   // initialize IOs
   setSyncProvider(RTC.get);
 
+  gButtonTime.setDeBounce(10);
   gButtonTime.setDelay(1000); // after delay
   gButtonTime.setRepeat(250); // set repeat interval for hour minute setting
 
+  gButtonMode.setDeBounce(10);
   gButtonMode.setDelay(5000); // set delayed trigger for mode change
   
-//  gAlarmMelody = &gAlarmMelody3;
-//  gAlarmMelody->startMelody();
+  gButtonAlarm.setDeBounce(10);
 }
 
 #ifdef CALIBRATE_VU
@@ -226,11 +227,6 @@ calibrateVU();
     PrintLCD_Time();
 #endif
 
-#ifdef SOFTWARE_SERIAL
-
- //gSettings.printTime("time:");
-
-#endif
   }
 #endif
 }
@@ -248,11 +244,13 @@ void triggerButton(uint8_t aState, uint8_t aButtonNo)
     gSettings.triggerButton(SettingStates::AlarmBtn, aState);
     fTrigger = true;
   }
+#if 0
 #ifdef SOFTWARE_SERIAL
    Serial.print("Button:");
    Serial.print(aButtonNo);
    Serial.print(":state:");
    Serial.println(aState);
+#endif
 #endif
   if (fTrigger)
   {

@@ -55,6 +55,7 @@ private:
   void handleSetAlarmDayState(); 
   void handleSetAlarmMelody(); 
   void handleTimerState(); 
+  bool handleSetPlusMinus(uint8_t& aVar, uint8_t aMin, uint8_t aMax);
 
   void handleHourMinute();
   void handleMonthDay();
@@ -71,7 +72,7 @@ private:
   unsigned long mLastTickTime;
   uint8_t mSetTimeSelect;
   uint8_t mAlarmMelody;
-  bool    mAlarmActive;
+  time_t  mAlarmStartTime;
   bool    mTimeChanged;
   tmElements_t mTime;
   state        mState;
