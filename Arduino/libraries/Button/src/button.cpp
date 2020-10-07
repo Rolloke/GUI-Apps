@@ -3,156 +3,156 @@
 
 
 Button::Button(uint8_t aPin, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
-  triggerEvent(anEventFnc)
-, mRepeat_ms(0)
-, mDelay_ms(0)
-, mDeBounce_ms(50)
-, mTime(0)
-, mState(released)
-, mPin(aPin)
-, mPins(0)
-, mNoOfPins(0)
-, mHighLevel(aHighlevel)
+    triggerEvent(anEventFnc)
+  , mRepeat_ms(0)
+  , mDelay_ms(0)
+  , mDeBounce_ms(50)
+  , mTime(0)
+  , mState(released)
+  , mPin(aPin)
+  , mPins(0)
+  , mNoOfPins(0)
+  , mHighLevel(aHighlevel)
 {
-  if (mHighLevel == HIGH)
-  {
-     pinMode(mPin, INPUT);
-  }
-  else
-  {
-    pinMode(mPin, INPUT_PULLUP);
-    digitalWrite(mPin, HIGH);
-  }
-}
-
-Button::Button(uint8_t* aPins, uint8_t aNoOfPins, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
-  triggerEvent(anEventFnc)
-, mRepeat_ms(0)
-, mDelay_ms(0)
-, mDeBounce_ms(50)
-, mTime(0)
-, mState(released)
-, mPin(0)
-, mPins(aPins)
-, mNoOfPins(aNoOfPins)
-, mHighLevel(aHighlevel)
-{
-  for (uint8_t fPin=0; fPin<aNoOfPins; ++fPin)
-  {
     if (mHighLevel == HIGH)
     {
-      pinMode(mPins[fPin], INPUT);
+        pinMode(mPin, INPUT);
     }
     else
     {
-      pinMode(mPins[fPin], INPUT_PULLUP);
-      digitalWrite(mPins[fPin], HIGH);
+        pinMode(mPin, INPUT_PULLUP);
+        digitalWrite(mPin, HIGH);
     }
-  }
+}
+
+Button::Button(uint8_t* aPins, uint8_t aNoOfPins, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
+    triggerEvent(anEventFnc)
+  , mRepeat_ms(0)
+  , mDelay_ms(0)
+  , mDeBounce_ms(50)
+  , mTime(0)
+  , mState(released)
+  , mPin(0)
+  , mPins(aPins)
+  , mNoOfPins(aNoOfPins)
+  , mHighLevel(aHighlevel)
+{
+    for (uint8_t fPin=0; fPin<aNoOfPins; ++fPin)
+    {
+        if (mHighLevel == HIGH)
+        {
+            pinMode(mPins[fPin], INPUT);
+        }
+        else
+        {
+            pinMode(mPins[fPin], INPUT_PULLUP);
+            digitalWrite(mPins[fPin], HIGH);
+        }
+    }
 }
 
 void Button::setRepeat(int aRepeat_ms)
 {
-  mRepeat_ms = aRepeat_ms;
+    mRepeat_ms = aRepeat_ms;
 }
 
 void Button::setDelay(int aDelay_ms)
 {
-  mDelay_ms = aDelay_ms;
+    mDelay_ms = aDelay_ms;
 }
 
 void Button::setDeBounce(int aDeBounce_ms)
 {
-  mDeBounce_ms = aDeBounce_ms;
+    mDeBounce_ms = aDeBounce_ms;
 }
 
 bool Button::isPressed()
 {
-  if (mPins)
-  {
-    mPin = 0;
-    for (int i=0; i< mNoOfPins; ++i)
+    if (mPins)
     {
-      if (digitalRead(mPins[i]) == mHighLevel)
-      {
-        mPin |= (1 << i);
-      }
+        mPin = 0;
+        for (int i=0; i< mNoOfPins; ++i)
+        {
+            if (digitalRead(mPins[i]) == mHighLevel)
+            {
+                mPin |= (1 << i);
+            }
+        }
+        return mPin != 0;
     }
-    return mPin != 0;
-  }
-  else
-  {
-    return digitalRead(mPin) == mHighLevel;
-  }
+    else
+    {
+        return digitalRead(mPin) == mHighLevel;
+    }
 }
 
 void Button::tick(unsigned long fNow)
 {
-  if (isPressed())
-  {
-    switch (mState)
+    if (isPressed())
     {
-      case released:
-        mTime = fNow + mDeBounce_ms;
-        mState = pressed;
-        break;
-      case pressed:
-        if (fNow >= mTime)
+        switch (mState)
         {
-          (*triggerEvent)(mState, mPin);
-          mState = fired;
-          if (mDelay_ms > 0)
-          {
-            mTime = fNow + mDelay_ms;
-            mState = delayed;
-          }
+        case released:
+            mTime = fNow + mDeBounce_ms;
+            mState = pressed;
+            break;
+        case pressed:
+            if (fNow >= mTime)
+            {
+                (*triggerEvent)(mState, mPin);
+                mState = fired;
+                if (mDelay_ms > 0)
+                {
+                    mTime = fNow + mDelay_ms;
+                    mState = delayed;
+                }
+            }
+            break;
+        case delayed:
+            if (fNow >= mTime)
+            {
+                (*triggerEvent)(mState, mPin);
+                mState = fired;
+                if (mRepeat_ms > 0)
+                {
+                    mTime = fNow + mRepeat_ms;
+                    mState = repeated;
+                }
+            }
+            break;
+        case repeated:
+            if (fNow >= mTime)
+            {
+                (*triggerEvent)(mState, mPin);
+                mTime = fNow + mRepeat_ms;
+            }
+            break;
+        default: break;
         }
-        break;
-      case delayed: 
-        if (fNow >= mTime)
-        {
-          (*triggerEvent)(mState, mPin);
-          mState = fired;
-          if (mRepeat_ms > 0)
-          {
-            mTime = fNow + mRepeat_ms;
-            mState = repeated;
-          }
-        }
-        break;
-      case repeated:
-        if (fNow >= mTime)
-        {
-          (*triggerEvent)(mState, mPin);
-          mTime = fNow + mRepeat_ms;
-        }
-        break;
-	  default: break;
     }
-  }
-  else
-  {
-    if ((   (mDelay_ms  > 0 && mState == delayed)
-         || (mDelay_ms == 0 && mState == fired )
-        ) && mPin != 0)
+    else
     {
-      (*triggerEvent)(released, mPin);
+        if ((   (mDelay_ms  > 0 && mState == delayed)
+                || (mDelay_ms == 0 && mState == fired )
+                ) && mPin != 0)
+        {
+            (*triggerEvent)(released, mPin);
+        }
+        mState = released;
     }
-    mState = released;
-  }
 }
 
 const char* Button::nameOf(Button::eState aState)
 {
     switch (aState)
     {
-      case none: return "none"; 
-      case released: return "released"; 
-      case pressed: return "pressed"; 
-      case fired: return "fired"; 
-      case delayed: return "delayed"; 
-      case repeated: return "repeated"; 
-    } 
-	return "unknown";
+    case none: return "none";
+    case released: return "released";
+    case pressed: return "pressed";
+    case fired: return "fired";
+    case delayed: return "delayed";
+    case repeated: return "repeated";
+    }
+    return "unknown";
 }
 

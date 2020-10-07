@@ -5,36 +5,36 @@
 
 typedef struct 
 {
-  uint16_t mTone;
-  uint8_t  mCnt;
-  uint8_t  mDiv;
+    uint16_t mTone;
+    uint8_t  mCnt;
+    uint8_t  mDiv;
 } Tone;
 
 class Melody
 {
 public:
-  Melody( uint8_t outputPin, Tone* pTones, uint8_t repeats, unsigned long tone_ms);
+    Melody( uint8_t outputPin, Tone* pTones, uint8_t repeats, unsigned long tone_ms);
 
-  void tick(unsigned long fNow_ms);
-  void startMelody();
-  void stopMelody();
-  bool isPlaying();
-  void setTones(Tone* aTones);
+    void tick(unsigned long fNow_ms);
+    void startMelody();
+    void stopMelody();
+    bool isPlaying();
+    void setTones(Tone* aTones);
 
 private:
-  Melody();
-  void setupPins();
-  
-  uint8_t mOutputPin;
-  uint8_t mRepeats;
-  uint8_t mCurrentRepeat;
-  Tone   *mpTones;
-  uint8_t mCurrentTone;
-  uint8_t mToneOn;
-  unsigned long mTone_ms;
-  unsigned long mLast_ms;
-  unsigned long mCurrent_ms;
-  unsigned long mNextTime_ms;
+    Melody();
+    void setupPins();
+
+    uint8_t mOutputPin;
+    uint8_t mRepeats;
+    uint8_t mCurrentRepeat;
+    Tone   *mpTones;
+    uint16_t mCurrentTone;
+    uint8_t mToneOn;
+    uint16_t mTone_ms;
+    unsigned long mLast_ms;
+    unsigned long mCurrent_ms;
+    unsigned long mNextTime_ms;
 };
 
 #define SILENCE  0

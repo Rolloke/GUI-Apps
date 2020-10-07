@@ -8,7 +8,7 @@ const int analogHour      =  11;                  // the pwm pin for hour pointe
 const int toneOutput      =  4;
 const int dimLED          =  10;
 
-const int ButtonOnState   = LOW;
+const int ButtonOnState   = HIGH;
 const int ModeBtn         = A0;
 const int HourBtn         = A1;
 const int MinuteBtn       = A2;

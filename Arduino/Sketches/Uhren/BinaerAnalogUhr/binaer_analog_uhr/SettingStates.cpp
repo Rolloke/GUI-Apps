@@ -4,7 +4,7 @@
 #include <DS1307RTC.h>
 #include <button.h>
 
-// TODO: test setting of the time
+
 
 
 #ifdef SOFTWARE_SERIAL
@@ -12,7 +12,7 @@
 #endif
 
 #define TICK_INTERVAL_MS     500
-#define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
+#define LIGHT_ON_TIME        51   // 51 * TICK_INTERVAL_MS is 25 Seconds
 
 // \brief constructor
 SettingStates::SettingStates()
@@ -24,6 +24,7 @@ SettingStates::SettingStates()
     , mAlarmMelody(0)
     , mAlarmStartTime(dtINVALID_TIME)
     , mTimeChanged(false)
+    , mDisplayChanged(true)
     , mState(Time)
     , mAlarmMode(Daily)
     , mAlarmID(dtINVALID_ALARM_ID)
@@ -69,6 +70,7 @@ void SettingStates::triggerButton(button aButton, uint8_t aState)
         break;
     default:
         mButtonState[aButton] = aState;
+        mDisplayChanged = true;
         break;
     }
 }
@@ -79,13 +81,20 @@ void SettingStates::tick(unsigned long fNow)
     {
         mLastTickTime = fNow + TICK_INTERVAL_MS;
 
+        mDisplayChanged = true;
         if (mModeBlink & Active)
         {
             mModeBlink ^= LED_Bit;
         }
-        if (mModeLight > Inactive)
+        if (mModeLight > 0)
         {
             --mModeLight;
+        }
+
+        if (mState == StoreTime && (++mModeBlink & COUNTER_BITS) > 5)
+        {
+             mModeBlink &= ~COUNTER_BITS;
+             mState = Time;
         }
 
         if (mState == Timer && mTimerID != dtINVALID_ALARM_ID)
@@ -111,11 +120,11 @@ void SettingStates::tick(unsigned long fNow)
             // Hint could be nice but does not work like it is implemented
             //        else if (isButtonPressed(Plus))
             //        {
-            //            Alarm.enable(mTimerID[fIndex]);
+            //            Alarm.enable(mTimerID);
             //        }
             //        else if (isButtonPressed(Minus))
             //        {
-            //            Alarm.disable(mTimerID[fIndex]);
+            //            Alarm.disable(mTimerID);
             //        }
         }
         else
@@ -162,6 +171,7 @@ void SettingStates::onTrigger()
     case SetAlarmDay:   handleSetAlarmDayState();  break;
     case SetAlarmMelody:handleSetAlarmMelody();    break;
     case Timer:         handleTimerState();        break;
+    case StoreTime: break;
     }
     if (fOldState != mState)
     {
@@ -188,6 +198,7 @@ const char* SettingStates::getStateName()
     case SetAlarmDay:   return "SetAlarmDay";
     case SetAlarmMelody:return "SetAlarmMelody";
     case Timer:         return "Timer";
+    case StoreTime:     return "Store Time";
     default:            return "invalid";
     }
 }
@@ -255,7 +266,8 @@ int SettingStates::getSeconds()
         }
         break;
     case SetTime:
-        if (mModeBlink & LED_Bit) return 0;
+        if (mModeBlink & LED_Bit)
+            return 0;
         switch (mSetTimeSelect)
         {
         case SetHourMinute: return 1;
@@ -263,10 +275,11 @@ int SettingStates::getSeconds()
         case SetYear:       return 7;
         default:            return 0;
         } break;
+    case StoreTime:
+        return (mModeBlink & LED_Bit)? 0 : 0x3f;
     case Date:              return year();
     default:
-        if (mModeBlink & LED_Bit) return 0;
-        else                return bit(mState - FirstSetState);
+        return (mModeBlink & LED_Bit) ? 0 : bit(mState - FirstSetState);
     }
     return 0;
 }
@@ -281,15 +294,21 @@ bool SettingStates::isButtonPressed(button aBtn)
     return (mButtonState[aBtn] & (Button::pressed | Button::delayed | Button::repeated)) != 0;
 }
 
+bool SettingStates::isButtonReleased(button aBtn)
+{
+    return (mButtonState[aBtn] & (Button::released)) != 0;
+}
+
 uint8_t SettingStates::getButtonState(button aBtn)
 {
     return mButtonState[aBtn];
 }
 
 
-bool SettingStates::isLightOn()
+uint8_t SettingStates::isLightOn()
 {
-    return mModeLight > 0;
+    const int fFactor = 255 / LIGHT_ON_TIME;
+    return mModeLight * fFactor;
 }
 
 bool SettingStates::isLED_DisplayOn()
@@ -301,6 +320,14 @@ bool SettingStates::isAnalogDisplayOn()
 {
     return true;
 }
+
+bool SettingStates::hasDisplayChanged()
+{
+    bool fDisplayChanged = mDisplayChanged;
+    mDisplayChanged = 0;
+    return fDisplayChanged;
+}
+
 
 void SettingStates::beep()
 {
@@ -418,7 +445,7 @@ void SettingStates::handleStateChanged(state aOldState)
 
 void SettingStates::handleTimeState()
 {
-    if (isButtonPressed(Mode))
+    if (isButtonReleased(Mode))
     {
         mState = Date;
     }
@@ -430,7 +457,7 @@ void SettingStates::handleTimeState()
 
 void SettingStates::handleDateState()
 {
-    if (getButtonState(Mode) == Button::pressed)
+    if (isButtonReleased(Mode))
     {
         mState = Time;
     }
@@ -443,7 +470,7 @@ void SettingStates::handleDateState()
 
 void SettingStates::handleModeInSetStates()
 {
-    if (getButtonState(Mode) == Button::pressed)
+    if (mState != StoreTime && isButtonReleased(Mode))
     {
         mState =  (mState == Last) ? SetAlarm  : (state) (mState + 1);
         if (mAlarmMode == Weekly && mState == SetAlarmDay)
@@ -453,7 +480,7 @@ void SettingStates::handleModeInSetStates()
     }
     if (getButtonState(Mode) == Button::delayed)
     {
-        mState = Time;
+        mState = StoreTime;
     }
 }
 
@@ -510,8 +537,14 @@ void SettingStates::handleMonthDay()
 
 void SettingStates::handleYear()
 {
-    if (handleSetPlusMinus(mTime.Year, 0, 255))
+    if (tmYearToY2k(mTime.Year) < 0)
     {
+        mTime.Year = y2kYearToTm(0);
+    }
+    uint8_t fYear = tmYearToY2k(mTime.Year);
+    if (handleSetPlusMinus(fYear, 0, 200))
+    {
+        mTime.Year = y2kYearToTm(fYear);
         mTimeChanged = true;
     }
 } 

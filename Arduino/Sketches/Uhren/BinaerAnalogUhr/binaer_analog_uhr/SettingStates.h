@@ -9,12 +9,12 @@
 class SettingStates
 {
 public:
-  enum state  { Time, Date, SetTime, SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody, Timer, Last = Timer, FirstSetState = SetTime }; 
+  enum state  { Time, Date, SetTime, SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody, Timer, StoreTime, Last = Timer, FirstSetState = SetTime };
   // Mo, Mi, Ho, Al -> mode, minute, hour, alarm
   enum button { Mode=0, Hour=1, Minute=2, AlarmBtn=3, buttons=4, Plus=Hour, Minus=Minute, Start=AlarmBtn, Stop=AlarmBtn, DateTime = AlarmBtn, ClearAll=10};
   enum alarm_mode  { Once, Daily, Weekly, FirstAlarmMode=Once, LastAlarmMode=Weekly }; 
   enum set_time    { SetHourMinute, SetMonthDay, SetYear };
-  enum consts      { Inactive = 1, Active = 0x80, LED_Bit = 1};
+  enum consts      { Active = 0x80, LED_Bit = 0x40, COUNTER_BITS=0x3f};
   SettingStates();
 
   void setAlarmFunction(OnTick_t aF);
@@ -23,14 +23,16 @@ public:
   void setBlinkMode(uint8_t aMode);
   
   bool    isButtonPressed(button aBtn);
+  bool    isButtonReleased(button aBtn);
   uint8_t getButtonState(button aBtn);
   const char* getStateName();
   uint8_t getState();
 
-  bool isLightOn();
+  uint8_t isLightOn();
   bool isLED_DisplayOn();
   bool isAnalogDisplayOn();
-  
+  bool hasDisplayChanged();
+
   int getSeconds();
   int getMinutes();
   int getHours();
@@ -74,6 +76,7 @@ private:
   uint8_t mAlarmMelody;
   time_t  mAlarmStartTime;
   bool    mTimeChanged;
+  bool    mDisplayChanged;
   tmElements_t mTime;
   state        mState;
   alarm_mode   mAlarmMode;
