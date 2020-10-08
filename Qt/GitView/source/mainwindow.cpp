@@ -785,7 +785,7 @@ void MainWindow::updateGitStatus()
     }
 
     ui->statusBar->showMessage("Total selected bytes: " + formatFileSize(fSize));
-
+    on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
 }
 
 // SLOTS
