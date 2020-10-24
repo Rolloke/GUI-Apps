@@ -40,6 +40,7 @@ void triggerModeButton(uint8_t, uint8_t);
 void triggerHourMinutButton(uint8_t, uint8_t);
 void triggerAlarmButton(uint8_t, uint8_t);
 void onTimerAlarm();
+void onAlarm();
 
 
 //#define TEST_PERIPHERY
@@ -110,6 +111,24 @@ Tone gTones6[] =
     #include "big_ben.h"
 };
 
+Tone gTones7[] =
+{
+    { NOTE_C7, 1, 16},
+    { SILENCE, 1, 16},
+    { NOTE_A6, 1, 16},
+    { SILENCE, 2, 1},
+    { 0, 0, 0}
+};
+
+Tone gTones8[] =
+{
+    { NOTE_A6, 1, 16},
+    { SILENCE, 1, 16},
+    { NOTE_C7, 1, 16},
+    { SILENCE, 2, 1},
+    { 0, 0, 0}
+};
+
 Melody gMelody(toneOutput, gTones6, 20, 1000);
 
 #define countof(X) sizeof(X) / sizeof(X[0])
@@ -120,14 +139,14 @@ void setup()
     gAlarmButton.setDeBounce(10);
     gHourMinuteButton.setDeBounce(10);
     gModeButton.setDelay(3000);
-    //gModeButton.setRepeat(2000);
     gHourMinuteButton.setDelay(1000);
     gHourMinuteButton.setRepeat(250);
 
 
     gSettings.setTimerFunction(&onTimerAlarm);
-    gSettings.setAlarmFunction(&onTimerAlarm);
+    gSettings.setAlarmFunction(&onAlarm);
     gSettings.setMeasureCurrentPins(vddPulsePin, measureCurrentPin);
+    gSettings.setMeasureTemperaturePin(measureTemperturePin);
 
     LCD_BEGIN
 
@@ -157,7 +176,7 @@ void loop()
 
     if (gSettings.hasDisplayChanged())
     {
-        analogWrite(dimLED, gSettings.isLightOn() ? gSettings.getLightHigh() : gSettings.getLightLow());
+        analogWrite(dimLED, gSettings.isLightOn());
         analogWrite(contrastPin, gSettings.getContrast());
 
         // display
@@ -232,9 +251,12 @@ void PrintLCD_Time()
     {
         fLine1 += ": *";
     }
-    if (gSettings.isCalibrating())
+    switch (gSettings.isCalibrating())
     {
-        fLine1 += " cal";
+    case SettingStates::CalibrateCurrent:
+    case SettingStates::CalibrateTemperature: fLine1 += F(" <->"); break;
+    case SettingStates::SetUpperTemperature:  fLine1 += F(" -->"); break;
+    case SettingStates::SetLowerTemperature:  fLine1 += F(" <--"); break;
     }
 
     if (gSettings.getState() == SettingStates::Time)
@@ -308,14 +330,24 @@ void PrintLCD_Time()
         break;
     case SettingStates::MeasureCurrent:
     {
-        float fValue = gSettings.getUSBCurrentValue();
+        const float fValue = gSettings.getUSBCurrentValue();
         fLine2 += String(fValue, (unsigned char)1);
         fLine2 += " mA";
+    }    break;
+    case SettingStates::MeasureTemperature:
+    {
+        const float fValue = gSettings.getTemperatureValue();
+        fLine2 += String(fValue, (unsigned char)1);
+        const char c = 0xDF;  // ° character for LCD
+        fLine2 += " ";
+        fLine2 += c;
+        fLine2 += "C";
     }    break;
     case SettingStates::SetAlarmMelody:
     case SettingStates::SetContrast:
     case SettingStates::SetLightLow:
     case SettingStates::SetLightHigh:
+    case SettingStates::SetOnLightTime:
         fLine2 += String(gSettings.getMinutes());
         break;
     default:
@@ -325,9 +357,9 @@ void PrintLCD_Time()
     if (fPrintTime)
     {
         print2Decimals(fLine2, gSettings.getHours());
-        fLine2 += (":");
+        fLine2 += F(":");
         print2Decimals(fLine2, gSettings.getMinutes());
-        fLine2 += (":");
+        fLine2 += F(":");
         print2Decimals(fLine2, gSettings.getSeconds());
     }
 
@@ -349,7 +381,34 @@ void onTimerAlarm()
     case 2: gMelody.setTones(gTones3); break;
     case 3: gMelody.setTones(gTones4); break;
     case 4: gMelody.setTones(gTones5); break;
-    case SettingStates::Timers: gMelody.setTones(gTones6); break;
     }
     gMelody.startMelody();
+}
+
+void onAlarm()
+{
+    gMelody.stopMelody();
+    if (gSettings.onTimerAlarm() == SettingStates::Timers)
+    {
+        gMelody.setTones(gTones6);
+    }
+    else
+    {
+        int8_t fAlarm = gSettings.getTemperatureAlarmActive();
+        if (fAlarm > 0)
+        {
+            gMelody.setTones(gTones8);
+        }
+        else if (fAlarm < 0)
+        {
+            gMelody.setTones(gTones7);
+        }
+        else
+        {
+            return;
+        }
+    }
+    gMelody.startMelody();
+
+
 }

@@ -5,36 +5,43 @@
 #include <TimeAlarms.h>
 #include <EEPROM.h>
 
-const char  gEEPROMid[] = "USBCal";
+const char  gEEPROMid[]        = "ClockVar1.2";
+const float gAnalogCalibration = SettingStates::MaxAnalogValue * 10.0f;
 
 
 #define TICK_INTERVAL_MS     500
-#define LIGHT_ON_TIME        10   // 10 * TICK_INTERVAL_MS is 5 Seconds
 
 // \brief constructor
 SettingStates::SettingStates()
     : mTonePin(0)
     , mVddPulsePin(0)
     , mMeasureCurrentInPin(0)
+    , mMeasureTemperatureInPin(0)
     , mModeBlink(Active)
     , mModeLight(0)
-    , mContrast(128)
-    , mLightLow(64)
-    , mLightHigh(200)
     , mAlarmMelody(0)
-    , mLanguage(EN)
     , mLastTickTime(0)
     , mAlarmActive(false)
+    , mTemperatureAlarmActive(0)
     , mTimeChanged(false)
+    , mSettingsChanged(false)
     , mDisplayChanged(true)
     , mRTC(false)
-    , mCalibrateCurrent(false)
+    , mCalibration(Off)
     , mState(Time)
     , mAlarmMode(Daily)
     , mAlarmID(dtINVALID_ALARM_ID)
-    , mCalibrateCurrentValue(10230)
     , mTimerFunction(0)
     , mAlarmFunction(0)
+    , mCalibrateCurrentValue(MaxAnalogValue*10)
+    , mCalibrateTemperatureValue(MaxAnalogValue*10)
+    , mLowerTemperatureTreshold(0)
+    , mUpperTemperatureTreshold(100)
+    , mContrast(128)
+    , mLightLow(64)
+    , mLightHigh(200)
+    , mLanguage(EN)
+    , mLightOnTime(50)
 {
     mTime.Second = 1;
     mTime.Minute = 1;
@@ -53,17 +60,17 @@ SettingStates::SettingStates()
 
     for (i=0; i<len; ++i)
     {
-      char fByte = EEPROM.read(i);
-      if (fByte != gEEPROMid[i]) break;
+        char fByte = EEPROM.read(i);
+        if (fByte != gEEPROMid[i]) break;
     }
 
     if (i==len)
     {
-        len = sizeof(mCalibrateCurrentValue);
+        len = getEEPROMsize();
         char *fBlock = (char*) &mCalibrateCurrentValue;
         for (int j=0; j<len; ++j, ++i)
         {
-          fBlock[j] = EEPROM.read(i);
+            fBlock[j] = EEPROM.read(i);
         }
     }
 }
@@ -89,6 +96,12 @@ void SettingStates::setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin)
     pinMode(mVddPulsePin, OUTPUT);
     mMeasureCurrentInPin = aAnalogInPin;
     pinMode(mMeasureCurrentInPin, INPUT);
+}
+
+void SettingStates::setMeasureTemperaturePin(uint8_t aAnalogInPin)
+{
+    mMeasureTemperatureInPin = aAnalogInPin;
+    pinMode(mMeasureTemperatureInPin, INPUT);
 }
 
 void SettingStates::setBlinkMode(uint8_t aMode)
@@ -118,11 +131,43 @@ void SettingStates::tick(unsigned long fNow)
         onTrigger();
         mDisplayChanged = true;
 
+        if (mMeasureTemperatureInPin && mCalibration == Off)
+        {
+            const float fTemperature = getTemperatureValue();
+            if (fTemperature != -100)
+            {
+                if (fTemperature > mUpperTemperatureTreshold)
+                {
+                    if (!mTemperatureAlarmActive)
+                    {
+                        mState = MeasureTemperature;
+                        mTemperatureAlarmActive = +1;
+                        playAlarm();
+                    }
+                }
+                else if (fTemperature < mLowerTemperatureTreshold)
+                {
+                    if (!mTemperatureAlarmActive)
+                    {
+                        mState = MeasureTemperature;
+                        mTemperatureAlarmActive = -1;
+                        playAlarm();
+                    }
+                }
+                else if (mTemperatureAlarmActive != 0)
+                {
+                    mState = Time;
+                    mTemperatureAlarmActive = 0;
+                    playAlarm();
+                }
+            }
+        }
+
         if (mModeBlink & Active)
         {
             mModeBlink ^= LED_Bit;
         }
-        if (mModeLight > Inactive)
+        if (mModeLight > 0)
         {
             --mModeLight;
         }
@@ -135,21 +180,22 @@ void SettingStates::onTrigger()
     state fOldState(mState);
     if (isButtonPressed(Mode) || isButtonPressed(Hour) || isButtonPressed(Minute) || isButtonPressed(AlarmBtn))
     {
-        mModeLight = LIGHT_ON_TIME;
+        mModeLight = mLightOnTime;
     }
 
     switch (mState)
     {
-    case Time:          handleTimeState();            break;
-    case Date:          handleDateState();            break;
-    case MeasureCurrent:handleMeasureCurrrentState(); break;
+    case Time:               handleTimeState();               break;
+    case Date:               handleDateState();               break;
+    case MeasureCurrent:     handleMeasureCurrrentState();    break;
+    case MeasureTemperature: handleMeasureTemperatureState(); break;
     case StoreTime:
         if (getButtonState(Mode) == Button::released) mState = Time;
         break;
-    case SetAlarm:      handleSetAlarmState();        break;
-    case SetAlarmMode:  handleSetAlarmModeState();    break;
-    case SetAlarmDay:   handleSetAlarmDayState();     break;
-    case SetAlarmMelody:handleSetAlarmMelody();       break;
+    case SetAlarm:           handleSetAlarmState();           break;
+    case SetAlarmMode:       handleSetAlarmModeState();       break;
+    case SetAlarmDay:        handleSetAlarmDayState();        break;
+    case SetAlarmMelody:     handleSetAlarmMelody();          break;
     default:
         if (isTimerState())
         {
@@ -178,15 +224,17 @@ String SettingStates::getStateName()
         case Time:          return F("Time");
         case Date:          return F("Date");
         case MeasureCurrent:return F("USB-Current");
+        case MeasureTemperature:return F("Temperature");
         case SetTime:       return F("Set Time");
         case SetDate:       return F("Set Date");
         case SetYear:       return F("Set Year");
         case SetContrast:   return F("Set Contrast");
-        case SetLightLow:   return F("Set Light dimmed");
-        case SetLightHigh:  return F("Set Light on");
+        case SetLightLow:   return F("Lightness dimmed");
+        case SetLightHigh:  return F("Lightness on");
+        case SetOnLightTime:  return F("Light on Time");
         case StoreTime:
         {
-            String fTxt = F("Store Time");
+            String fTxt = F("Store");
             if (mRTC) fTxt += F(" to RTC");
             return fTxt;
         }
@@ -211,16 +259,18 @@ String SettingStates::getStateName()
         case Time:          return F("Uhrzeit");
         case Date:          return F("Datum");
         case MeasureCurrent:return F("USB-Strom");
+        case MeasureTemperature:return F("Temperatur");
         case SetTime:       return F("Uhrzeit stellen");
         case SetDate:       return F("Datum stellen");
         case SetYear:       return F("Jahr stellen");
         case SetContrast:   return F("Kontrast");
         case SetLightLow:   return F("Licht dunkel");
-        case SetLightHigh:  return F("Light hell");
+        case SetLightHigh:  return F("Licht hell");
+        case SetOnLightTime:  return F("Licht hell Zeit");
         case StoreTime:
         {
             String fTxt = F("Speichern");
-            if (mRTC) fTxt += F(" nach RTC");
+            if (mRTC) fTxt += F(" in RTC");
             return fTxt;
         }
         case SetAlarm:      return F("Alarm stellen");
@@ -239,7 +289,7 @@ String SettingStates::getStateName()
     }
 }
 
-String SettingStates::getAlarmModeName()
+String SettingStates::getAlarmModeName()  const
 {
     String fName;
     if (getLanguage()== EN)
@@ -267,7 +317,7 @@ String SettingStates::getAlarmModeName()
     return fName;
 }
 
-String SettingStates::getAlarmDayName()
+String SettingStates::getAlarmDayName() const
 {
     String fName;
     if (getLanguage()== EN)
@@ -291,17 +341,17 @@ String SettingStates::getAlarmDayName()
     return fName;
 }
 
-uint8_t SettingStates::getState()
+uint8_t SettingStates::getState() const
 {
     return mState;
 }
 
-uint8_t SettingStates::getLanguage()
+uint8_t SettingStates::getLanguage() const
 {
     return mLanguage;
 }
 
-int SettingStates::getHours()
+int SettingStates::getHours() const
 {
     switch(mState)
     {
@@ -317,7 +367,7 @@ int SettingStates::getHours()
     }
 }
 
-int SettingStates::getMinutes()
+int SettingStates::getMinutes() const
 {
     switch(mState)
     {
@@ -333,13 +383,14 @@ int SettingStates::getMinutes()
     case SetContrast:       return 255 - mContrast;
     case SetLightLow:       return mLightLow;
     case SetLightHigh:      return mLightHigh;
+    case SetOnLightTime:    return mLightOnTime;
     default:
         if(isTimerState())    return mTime.Minute;
         else return minute();
     }
 }
 
-int SettingStates::getSeconds()
+int SettingStates::getSeconds() const
 {
     switch(mState)
     {
@@ -363,55 +414,102 @@ int SettingStates::getSeconds()
     return 0;
 }
 
-int SettingStates::getAlarmMelody()
+int SettingStates::getAlarmMelody() const
 {
     return mAlarmMelody;
 }
 
-int SettingStates::getContrast()
+int SettingStates::getContrast() const
 {
     return mContrast;
 }
 
-int SettingStates::getLightLow()
-{
-    return mLightLow;
-}
-
-int SettingStates::getLightHigh()
-{
-    return mLightHigh;
-}
-
 float SettingStates::getUSBCurrentValue() const
 {
-    float fFactor = 10230.0 / mCalibrateCurrentValue;
-    return (((float)mReadCurrentValue) * fFactor);
+    const float fFactor = gAnalogCalibration / mCalibrateCurrentValue;
+    return (((float)mReadAnalogValue) * fFactor);
+}
+
+float SettingStates::getTemperatureValue() const
+{
+
+    const int16_t fValueTable[] =
+    {  // values for temperatures in °C in 5 °C steps
+         30,  41, // -40
+         55,  73, // -30
+         96, 123, // -20
+        157, 196, // -10
+        240, 289, //   0
+        342, 398, //  10
+        455, 512, //  20
+        567, 619, //  30
+        668, 712, //  40
+        752, 788, //  50
+        819, 847, //  60
+        870, 891, //  70
+        909, 924, //  80
+        937, 948, //  90
+        958, 966, // 100
+        973, 980, // 110
+        985, 989, // 120
+    };
+    if (mCalibration == SetLowerTemperature)
+    {
+        return mLowerTemperatureTreshold;
+    }
+    else if (mCalibration == SetUpperTemperature)
+    {
+        return mUpperTemperatureTreshold;
+    }
+    else
+    {
+        const float fValue = analogRead(mMeasureTemperatureInPin) * gAnalogCalibration / mCalibrateTemperatureValue;
+        if (fValue >= fValueTable[0])
+        {
+            const int fSize = sizeof(fValueTable) / sizeof(int16_t);
+            for (int i=1; i<fSize; ++i)
+            {
+                if (fValueTable[i] >= fValue)
+                {
+                    const float aFromLow = fValueTable[i-1];
+                    const float aFromHigh= fValueTable[i  ];
+                    const float aToLow = (i-1) * 5 - 40;
+                    return (fValue - aFromLow) * 5.0f / (aFromHigh - aFromLow) + aToLow;
+                }
+            }
+        }
+    }
+    return -100;
 }
 
 
-bool SettingStates::isButtonPressed(button aBtn)
+int8_t SettingStates::getTemperatureAlarmActive() const
+{
+    return mTemperatureAlarmActive;
+}
+
+bool SettingStates::isButtonPressed(button aBtn) const
 {
     return (mButtonState[aBtn] & (Button::pressed | Button::delayed | Button::repeated)) != 0;
 }
 
-uint8_t SettingStates::getButtonState(button aBtn)
+uint8_t SettingStates::getButtonState(button aBtn) const
 {
     return mButtonState[aBtn];
 }
 
 
-bool SettingStates::isLightOn()
+uint8_t SettingStates::isLightOn() const
 {
-    return mModeLight > Inactive;
+    return map(mModeLight, 0, mLightOnTime, mLightLow, mLightHigh);
 }
 
-bool SettingStates::isLED_DisplayOn()
+bool SettingStates::isLED_DisplayOn() const
 {
     return true;
 }
 
-bool SettingStates::isAnalogDisplayOn()
+bool SettingStates::isAnalogDisplayOn() const
 {
     return true;
 }
@@ -441,26 +539,14 @@ void SettingStates::handleEnterState(state aState)
 
 void SettingStates::handleExitState(state aState)
 {
-    if (aState == MeasureCurrent)
+    if (aState == MeasureCurrent || aState == MeasureTemperature)
     {
-        noTone(mVddPulsePin);
-        if (mCalibrateCurrent)
+        if (mVddPulsePin) noTone(mVddPulsePin);
+
+        if (mCalibration != Off)
         {
-            int i, len = strlen(gEEPROMid);
-            for (i=0; i<len; ++i)
-            {
-              EEPROM.write(i, gEEPROMid[i]);
-            }
-            if (i==len)
-            {
-                len = sizeof(mCalibrateCurrentValue);
-                char *fBlock = (char*) &mCalibrateCurrentValue;
-                for (int j=0; j<len; ++j, ++i)
-                {
-                    EEPROM.write(i, fBlock[j]);
-                }
-            }
-            mCalibrateCurrent = false;
+            storeToEEPROM();
+            mCalibration = Off;
         }
     }
 }
@@ -547,26 +633,22 @@ void SettingStates::handleDateState()
 void SettingStates::handleMeasureCurrrentState()
 {
     handleModeInTimeStates();
-    if (mCalibrateCurrent)
+    if (mCalibration == CalibrateCurrent)
     {
-        if (isButtonPressed(Plus))
-        {
-            mCalibrateCurrentValue ++;
-            if (getButtonState(Plus)&Button::repeated)
-            {
-                mCalibrateCurrentValue += 50;
-            }
-        }
-        else if (isButtonPressed(Minus))
-        {
-            mCalibrateCurrentValue --;
-            if (getButtonState(Minus)&Button::repeated)
-            {
-                mCalibrateCurrentValue -= 50;
-            }
-        }
+        handleCalibration(mCalibrateCurrentValue);
     }
-    mReadCurrentValue = analogRead(mMeasureCurrentInPin);
+    mReadAnalogValue = analogRead(mMeasureCurrentInPin);
+}
+
+void SettingStates::handleMeasureTemperatureState()
+{
+    handleModeInTimeStates();
+    switch(mCalibration)
+    {
+    case CalibrateTemperature:handleCalibration(mCalibrateTemperatureValue); break;
+    case SetLowerTemperature: handleSetPlusMinus(mLowerTemperatureTreshold, MinTemperature, mUpperTemperatureTreshold); break;
+    case SetUpperTemperature: handleSetPlusMinus(mUpperTemperatureTreshold, mLowerTemperatureTreshold, MaxTemperature ); break;
+    }
 }
 
 void SettingStates::handleTimerState()
@@ -598,6 +680,10 @@ void SettingStates::handleModeInSetTimeStates()
         {
             mState = Time;
         }
+        if (mSettingsChanged)
+        {
+            storeToEEPROM();
+        }
     }
 }
 
@@ -625,17 +711,34 @@ void SettingStates::handleModeInTimeStates()
 {
     if (getButtonState(Mode) == Button::released)
     {
-        mState = static_cast<state>(mState + 1);
-        if (mState > LastState)
+        do
         {
-            mState = Time;
+            mState = static_cast<state>(mState + 1);
+
+            if (mState > LastState)
+            {
+                mState = Time;
+            }
         }
+        while (!stateAvailable());
     }
     else if (getButtonState(Mode) == Button::delayed)
     {
-        if (mState == MeasureCurrent)
+        if (mState == MeasureTemperature)
         {
-            mCalibrateCurrent = !mCalibrateCurrent;
+            switch (mCalibration)
+            {
+            case Off:                  mCalibration = SetLowerTemperature;  break;
+            case SetLowerTemperature:  mCalibration = SetUpperTemperature;  break;
+            case SetUpperTemperature:  mCalibration = CalibrateTemperature; break;
+            case CalibrateTemperature: mCalibration = SetLowerTemperature;  break;
+            default:
+                break;
+            }
+        }
+        else if (mState == MeasureCurrent)
+        {
+            mCalibration = CalibrateCurrent;
         }
         else
         {
@@ -709,22 +812,42 @@ void SettingStates::handleYear()
 
 void SettingStates::handleContrast()
 {
-    handleSetPlusMinus(mContrast, 0, 255);
+    if (handleSetPlusMinus(mContrast, 0, 255))
+    {
+        mSettingsChanged = true;
+    }
 }
 
 void SettingStates::handleLightLow()
 {
-    handleSetPlusMinus(mLightLow, 0, 255);
+    if (handleSetPlusMinus(mLightLow, 0, 255))
+    {
+        mSettingsChanged = true;
+    }
 }
 
 void SettingStates::handleLightHigh()
 {
-    handleSetPlusMinus(mLightHigh, 0, 255);
+    if (handleSetPlusMinus(mLightHigh, 0, 255))
+    {
+        mSettingsChanged = true;
+    }
 }
 
 void SettingStates::handleLanguage()
 {
-    handleSetPlusMinus(mLanguage, EN, DE);
+    if (handleSetPlusMinus(mLanguage, EN, DE))
+    {
+        mSettingsChanged = true;
+    }
+}
+
+void SettingStates::handleLightOnTime()
+{
+    if (handleSetPlusMinus(mLightOnTime, 5, 100))
+    {
+        mSettingsChanged = true;
+    }
 }
 
 bool SettingStates::handleSetPlusMinus(uint8_t& aVar, uint8_t aMin, uint8_t aMax)
@@ -737,6 +860,44 @@ bool SettingStates::handleSetPlusMinus(uint8_t& aVar, uint8_t aMin, uint8_t aMax
     else if ( isButtonPressed(Minus) && aVar > aMin )
     {
         --aVar;
+        return true;
+    }
+    return false;
+}
+
+bool SettingStates::handleSetPlusMinus(int16_t& aVar, int16_t aMin, int16_t aMax)
+{
+    if ( isButtonPressed(Plus) && aVar < aMax)
+    {
+        ++aVar;
+        return true;
+    }
+    else if ( isButtonPressed(Minus) && aVar > aMin )
+    {
+        --aVar;
+        return true;
+    }
+    return false;
+}
+
+bool SettingStates::handleCalibration(long& aVar)
+{
+    if (isButtonPressed(Plus))
+    {
+        aVar++;
+        if (getButtonState(Plus)&Button::repeated)
+        {
+            aVar += 50;
+        }
+        return true;
+    }
+    else if (isButtonPressed(Minus))
+    {
+        aVar--;
+        if (getButtonState(Minus)&Button::repeated)
+        {
+            aVar -= 50;
+        }
         return true;
     }
     return false;
@@ -782,19 +943,22 @@ void SettingStates::handleActivateTimer()
 int SettingStates::onTimerAlarm()
 {
     AlarmID_t fID = Alarm.getTriggeredAlarmId();
-    for (int i=0; i<Timers; ++i)
+    if (fID != dtINVALID_ALARM_ID)
     {
-        if (fID == mTimerID[i])
+        for (int i=0; i<Timers; ++i)
         {
-            time_t fTime = now() - mTimerStartTime[i];
-            stopTimer(i, fTime);
-            mState = (state)(Timer + i);
-            return i;
+            if (fID == mTimerID[i])
+            {
+                time_t fTime = now() - mTimerStartTime[i];
+                stopTimer(i, fTime);
+                mState = (state)(Timer + i);
+                return i;
+            }
         }
-    }
-    if (mAlarmID == fID)
-    {
-        return Timers;
+        if (mAlarmID == fID)
+        {
+            return Timers;
+        }
     }
     return -1;
 }
@@ -826,17 +990,40 @@ void SettingStates::stopTimer(int aIndex, time_t aTimerStartTime)
     mTimerID[aIndex] = dtINVALID_ALARM_ID;
 }
 
-int SettingStates::getTimerIndex()
+int SettingStates::getTimerIndex()  const
 {
     return mState - Timer;
 }
 
-bool SettingStates::isTimerState()
+int SettingStates::getEEPROMsize() const
+{
+    return 2 * sizeof(long) + 2 * sizeof(int16_t) + 5 * sizeof(uint8_t);
+}
+
+void SettingStates::storeToEEPROM() const
+{
+    int i, len = strlen(gEEPROMid);
+    for (i=0; i<len; ++i)
+    {
+        EEPROM.write(i, gEEPROMid[i]);
+    }
+    if (i==len)
+    {
+        len = getEEPROMsize();
+        char *fBlock = (char*) &mCalibrateCurrentValue;
+        for (int j=0; j<len; ++j, ++i)
+        {
+            EEPROM.write(i, fBlock[j]);
+        }
+    }
+}
+
+bool SettingStates::isTimerState() const
 {
     return mState >= Timer && mState < (Timer+Timers);
 }
 
-bool SettingStates::isTimerActive(int aIndex)
+bool SettingStates::isTimerActive(int aIndex) const
 {
     if (aIndex == -1) aIndex = getTimerIndex();
     if (aIndex >= 0 && aIndex < Timers)
@@ -846,15 +1033,26 @@ bool SettingStates::isTimerActive(int aIndex)
     return false;
 }
 
-bool SettingStates::isAlarmActive()
+bool SettingStates::isAlarmActive() const
 {
     return mAlarmActive;
 }
 
-bool SettingStates::isCalibrating()
+uint8_t SettingStates::isCalibrating() const
 {
-    return mCalibrateCurrent;
+    return mCalibration;
 }
+
+bool SettingStates::stateAvailable() const
+{
+    switch (mState)
+    {
+    case MeasureCurrent:     return mMeasureCurrentInPin     != 0 && analogRead(mMeasureCurrentInPin) != 0;
+    case MeasureTemperature: return mMeasureTemperatureInPin != 0 && analogRead(mMeasureTemperatureInPin) != 0;
+    default: return true;
+    }
+}
+
 
 bool SettingStates::hasDisplayChanged()
 {
@@ -898,13 +1096,14 @@ void SettingStates::handleSettingsState()
 
     switch (mState)
     {
-    case SetTime:      handleHourMinute();break;
-    case SetDate:      handleMonthDay();  break;
-    case SetYear:      handleYear();      break;
-    case SetContrast:  handleContrast();  break;
-    case SetLightLow:  handleLightLow();  break;
-    case SetLightHigh: handleLightHigh(); break;
-    case SetLanguage:  handleLanguage();  break;
+    case SetTime:        handleHourMinute();  break;
+    case SetDate:        handleMonthDay();    break;
+    case SetYear:        handleYear();        break;
+    case SetContrast:    handleContrast();    break;
+    case SetLightLow:    handleLightLow();    break;
+    case SetLightHigh:   handleLightHigh();   break;
+    case SetOnLightTime: handleLightOnTime(); break;
+    case SetLanguage:    handleLanguage();    break;
 
     default: break;
     }
