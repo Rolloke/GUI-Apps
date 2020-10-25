@@ -32,10 +32,10 @@ using namespace git;
 // TODO:  Entferntes Repository hinzufügen:
 // git remote add < Name > <URL >
 // Referenz entfernen:
-// git remote remove < Name >
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
+// TODO: merge command implementieren
 
 namespace config
 {
@@ -577,7 +577,7 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     // TODO: bug: are all deleted items shown?
     for (const auto& fItem : fCheckMap)
     {
-        if (fItem.second.is(Type::GitDeleted))
+        if (fItem.second.is(Type::GitDeleted) || fItem.second.is(Type::GitMovedFrom))
         {
             mGitCommand = fItem.first.c_str();
             mCurrentTask = Work::InsertPathFromCommandString;
@@ -708,6 +708,21 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             else
             {
                 QString fFullPath = fSource + QDir::toNativeSeparators(fRelativePath);
+                if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
+                {
+                    auto fPaths = fRelativePath.split(" -> ");
+                    if (fPaths.size() > 1)
+                    {
+                        fFullPath = fSource + QDir::toNativeSeparators(fPaths[1]);
+                        QFileInfo fFileInfo(fFullPath);
+                        fType.translate(fFileInfo);
+                        Type fDestinationType = fType;
+                        fDestinationType.add(Type::GitMovedTo);
+                        aFiles[fFullPath.toStdString()] = fDestinationType;
+                        fType.add(Type::GitMovedFrom);
+                        fFullPath = fSource + QDir::toNativeSeparators(fPaths[0]);
+                    }
+                }
                 QFileInfo fFileInfo(fFullPath);
                 fType.translate(fFileInfo);
                 aFiles[fFullPath.toStdString()] = fType;
@@ -1225,26 +1240,47 @@ void MainWindow::call_git_move_rename()
     getSelectedTreeItem();
     if (mContextMenuSourceTreeItem)
     {
-        bool    fOk;
-        Type    fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
-        QString fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-        QString fOldName      = mContextMenuSourceTreeItem->text(Column::FileName);
-        QString fNewName      = QInputDialog::getText(this,
+        bool      fOk;
+        Type      fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
+        QString   fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
+        QFileInfo fPath(getItemFilePath(mContextMenuSourceTreeItem));
+        QString   fOldName      = mContextMenuSourceTreeItem->text(Column::FileName);
+        QString   fNewName      = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
-                       tr("Enter a new name or destination for \"%1\".").arg(fOldName),
-                       QLineEdit::Normal, "", &fOk);
+                       tr("Enter a new name or destination for \"./%1\".\n"
+                          "To move the %3 insert the destination path before.\n"
+                          "To rename just modify the name.").arg(fPath.filePath()).arg(fFileTypeName),
+                       QLineEdit::Normal, fOldName, &fOk);
 
         if (fOk && !fNewName.isEmpty())
         {
-            QFileInfo   fPath(getItemFilePath(mContextMenuSourceTreeItem));
             std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
-            QString     fCommand   = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
+            QString     fCommand;
+            bool        fMoved = false;
+            if (fNewName.contains("/"))
+            {
+                fMoved   = true;
+                fOldName = fPath.filePath();
+                fCommand = tr(fFormatCmd.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fOldName).arg(fNewName);
+            }
+            else
+            {
+                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
+            }
+
             QString fResultStr;
             int fResult = execute(fCommand, fResultStr);
             if (fResult == 0)
             {
-                mContextMenuSourceTreeItem->setText(Column::FileName, fNewName);
-                updateTreeItemStatus(mContextMenuSourceTreeItem);
+                if (fMoved)
+                {
+                    mActions.getAction(Cmd::UpdateGitStatus)->trigger();
+                }
+                else
+                {
+                    mContextMenuSourceTreeItem->setText(Column::FileName, fNewName);
+                    updateTreeItemStatus(mContextMenuSourceTreeItem);
+                }
             }
         }
         mContextMenuSourceTreeItem = nullptr;

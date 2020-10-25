@@ -126,16 +126,18 @@ QString Type::getStates()
 {
     const QString fSep = "|";
     QString fState = fSep;
-    if (is(GitAdded   ))  fState += name(GitAdded)     + fSep;
-    if (is(GitDeleted ))  fState += name(GitDeleted)   + fSep;
-    if (is(GitModified))  fState += name(GitModified)  + fSep;
-    if (is(GitUnTracked)) fState += name(GitUnTracked) + fSep;
-    if (is(GitRenamed ))  fState += name(GitRenamed)   + fSep;
-    if (is(GitStaged  ))  fState += name(GitStaged)    + fSep;
-    if (is(GitUnmerged))  fState += name(GitUnmerged)  + fSep;
-    if (is(GitLocal   ))  fState += name(GitLocal)     + fSep;
-    if (is(GitRemote  ))  fState += name(GitRemote)    + fSep;
-    if (is(GitBoth    ))  fState += name(GitBoth)      + fSep;
+    if (is(GitAdded    ))  fState += name(GitAdded)     + fSep;
+    if (is(GitDeleted  ))  fState += name(GitDeleted)   + fSep;
+    if (is(GitModified ))  fState += name(GitModified)  + fSep;
+    if (is(GitUnTracked))  fState += name(GitUnTracked) + fSep;
+    if (is(GitStaged   ))  fState += name(GitStaged)    + fSep;
+    if (is(GitUnmerged ))  fState += name(GitUnmerged)  + fSep;
+    if (is(GitLocal    ))  fState += name(GitLocal)     + fSep;
+    if (is(GitRemote   ))  fState += name(GitRemote)    + fSep;
+    if (is(GitBoth     ))  fState += name(GitBoth)      + fSep;
+    if      (is(GitMovedFrom))  fState += name(GitMovedFrom) + fSep;
+    else if (is(GitMovedTo  ))  fState += name(GitMovedTo)   + fSep;
+    else if (is(GitRenamed  ))  fState += name(GitRenamed)   + fSep;
     return fState;
 }
 
@@ -156,6 +158,8 @@ const char* Type::name(TypeFlags aType)
         case GitBoth:      return "Both";
         case GitFolder:    return "git folder";
         case GitIgnore:    return "git ignore";
+        case GitMovedFrom: return "MovedFrom";
+        case GitMovedTo:   return "MovedTo";
         case SymLink:      return "symbolic link";
         case FileType:     return "file types (group)";
         case FileFlag:     return "file flags (group)";
