@@ -47,7 +47,7 @@ QString formatFileSize(quint64 aSize)
     }
 
     quint64 fExp = fTeraExponent;
-    for (map<quint64, QString>::reverse_iterator fIt = fMap.rbegin(); fIt != fMap.rend(); ++fIt)
+    for (auto fIt = fMap.rbegin(); fIt != fMap.rend(); ++fIt)
     {
         if (aSize > fIt->first)
         {
