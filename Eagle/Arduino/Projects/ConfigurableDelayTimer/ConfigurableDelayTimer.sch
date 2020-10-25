@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7283,10 +7283,10 @@ R2 3 2 {val-val*var/100}
 <part name="S1" library="switch-omron" library_urn="urn:adsk.eagle:library:377" deviceset="40-XX" device="" package3d_urn="urn:adsk.eagle:package:27483/1"/>
 <part name="S2" library="switch-omron" library_urn="urn:adsk.eagle:library:377" deviceset="40-XX" device="" package3d_urn="urn:adsk.eagle:package:27483/1"/>
 <part name="S3" library="switch-omron" library_urn="urn:adsk.eagle:library:377" deviceset="40-XX" device="" package3d_urn="urn:adsk.eagle:package:27483/1"/>
-<part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
-<part name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
-<part name="LED3" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
-<part name="LED4" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
+<part name="LED3~" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
+<part name="LED8" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
+<part name="LED12" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
+<part name="LED13" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/7" package3d_urn="urn:adsk.eagle:package:23493/2" value="1k2"/>
 <part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/7" package3d_urn="urn:adsk.eagle:package:23493/2" value="1k2"/>
 <part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/7" package3d_urn="urn:adsk.eagle:package:23493/2" value="1k2"/>
@@ -7330,19 +7330,19 @@ R2 3 2 {val-val*var/100}
 <attribute name="NAME" x="49.53" y="58.42" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="52.07" y="64.135" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LED1" gate="G$1" x="53.34" y="86.36" smashed="yes">
+<instance part="LED3~" gate="G$1" x="53.34" y="86.36" smashed="yes">
 <attribute name="NAME" x="56.896" y="81.788" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="59.055" y="81.788" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LED2" gate="G$1" x="60.96" y="86.36" smashed="yes">
+<instance part="LED8" gate="G$1" x="60.96" y="86.36" smashed="yes">
 <attribute name="NAME" x="64.516" y="81.788" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="66.675" y="81.788" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LED3" gate="G$1" x="68.58" y="86.36" smashed="yes">
+<instance part="LED12" gate="G$1" x="68.58" y="86.36" smashed="yes">
 <attribute name="NAME" x="72.136" y="81.788" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="74.295" y="81.788" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="LED4" gate="G$1" x="76.2" y="86.36" smashed="yes">
+<instance part="LED13" gate="G$1" x="76.2" y="86.36" smashed="yes">
 <attribute name="NAME" x="79.756" y="81.788" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="81.915" y="81.788" size="1.778" layer="96" rot="R90"/>
 </instance>
@@ -7462,16 +7462,16 @@ R2 3 2 {val-val*var/100}
 <wire x1="78.74" y1="53.34" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="LED1" gate="G$1" pin="C"/>
+<pinref part="LED3~" gate="G$1" pin="C"/>
 <wire x1="53.34" y1="81.28" x2="53.34" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="78.74" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="G$1" pin="C"/>
+<pinref part="LED8" gate="G$1" pin="C"/>
 <wire x1="60.96" y1="78.74" x2="60.96" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="LED3" gate="G$1" pin="C"/>
+<pinref part="LED12" gate="G$1" pin="C"/>
 <wire x1="60.96" y1="78.74" x2="68.58" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="78.74" x2="68.58" y2="81.28" width="0.1524" layer="91"/>
 <junction x="60.96" y="78.74"/>
-<pinref part="LED4" gate="G$1" pin="C"/>
+<pinref part="LED13" gate="G$1" pin="C"/>
 <wire x1="68.58" y1="78.74" x2="76.2" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="78.74" x2="76.2" y2="81.28" width="0.1524" layer="91"/>
 <junction x="68.58" y="78.74"/>
@@ -7712,28 +7712,28 @@ R2 3 2 {val-val*var/100}
 <net name="N$1" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
-<pinref part="LED1" gate="G$1" pin="A"/>
+<pinref part="LED3~" gate="G$1" pin="A"/>
 <wire x1="53.34" y1="91.44" x2="53.34" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
-<pinref part="LED2" gate="G$1" pin="A"/>
+<pinref part="LED8" gate="G$1" pin="A"/>
 <wire x1="60.96" y1="91.44" x2="60.96" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="1"/>
-<pinref part="LED3" gate="G$1" pin="A"/>
+<pinref part="LED12" gate="G$1" pin="A"/>
 <wire x1="68.58" y1="91.44" x2="68.58" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
-<pinref part="LED4" gate="G$1" pin="A"/>
+<pinref part="LED13" gate="G$1" pin="A"/>
 <wire x1="76.2" y1="91.44" x2="76.2" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
