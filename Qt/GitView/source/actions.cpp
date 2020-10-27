@@ -38,6 +38,7 @@ QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const Q
     {
         fList.append(QVariant());
     }
+    fList[ActionList::Data::Cmd] = QVariant(aCmd);
     fNewAction->setData(fList);
     return fNewAction;
 }

@@ -153,6 +153,7 @@ struct Type
 
     uint mType;
     int mLevel;
+    static bool mShort;
 };
 
 namespace Folder
