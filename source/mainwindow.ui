@@ -144,8 +144,27 @@
           </item>
           <item>
            <widget class="QCheckBox" name="ckHideEmptyParent">
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="text">
-             <string>hide empty parent</string>
+             <string>Hide empty Parent</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="ckShortState">
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Short State</string>
             </property>
            </widget>
           </item>

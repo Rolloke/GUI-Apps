@@ -107,6 +107,8 @@ namespace Folder
     const char FolderSelf[]    = ".";
 }
 
+bool Type::mShort = true;
+
 void Type::add(TypeFlags aType)
 {
     mType = static_cast<TypeFlags>(mType|aType);
@@ -146,23 +148,23 @@ const char* Type::name(TypeFlags aType)
 {
     switch (aType)
     {
-        case GitStaged:    return "Staged";
-        case GitDeleted:   return "Deleted";
-        case GitModified:  return "Modified";
-        case GitAdded:     return "Added";
-        case GitUnTracked: return "Untracked";
-        case GitRenamed:   return "Renamed";
-        case GitUnmerged:  return "Unmerged";
-        case GitLocal:     return "Local";
-        case GitRemote:    return "Remote";
-        case GitBoth:      return "Both";
-        case GitFolder:    return "git folder";
-        case GitIgnore:    return "git ignore";
-        case GitMovedFrom: return "MovedFrom";
-        case GitMovedTo:   return "MovedTo";
-        case SymLink:      return "symbolic link";
-        case FileType:     return "file types (group)";
-        case FileFlag:     return "file flags (group)";
+        case GitStaged:    return mShort ? "Stg" : "Staged";
+        case GitDeleted:   return mShort ? "Del" : "Deleted";
+        case GitModified:  return mShort ? "Mod" : "Modified";
+        case GitAdded:     return mShort ? "Add" : "Added";
+        case GitUnTracked: return mShort ? "UTk" : "Untracked";
+        case GitRenamed:   return mShort ? "Ren" : "Renamed";
+        case GitUnmerged:  return mShort ? "UMg" : "Unmerged";
+        case GitLocal:     return mShort ? "Loc" : "Local";
+        case GitRemote:    return mShort ? "Rem" : "Remote";
+        case GitBoth:      return mShort ? "Bot" : "Both";
+        case GitFolder:    return mShort ? "GFd" : "git folder";
+        case GitIgnore:    return mShort ? "GIg" : "git ignore";
+        case GitMovedFrom: return mShort ? "MvF" : "MovedFrom";
+        case GitMovedTo:   return mShort ? "MvT" : "MovedTo";
+        case SymLink:      return mShort ? "SyL" : "symbolic link";
+        case FileType:     return mShort ? "FTy" : "file types (group)";
+        case FileFlag:     return mShort ? "FFg" : "file flags (group)";
         RETURN_NAME(AllGitActions);
         RETURN_NAME(Repository);
         RETURN_NAME(File);

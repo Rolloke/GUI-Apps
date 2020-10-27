@@ -14,7 +14,7 @@ class ActionList
 {
 
 public:
-    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, ListSize }; };
+    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, ListSize }; };
 
 #if MAP_TYPE == 0
     typedef boost::container::flat_map<int, QAction*> tActionMap;

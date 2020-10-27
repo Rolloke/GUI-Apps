@@ -36,6 +36,12 @@ using namespace git;
 // git remote set - url < Name > <URL >
 
 // TODO: merge command implementieren
+// git merge --abort
+// git merge --continue
+// git mergetool
+// git pull
+// git merge -s <resolve|recursive<ours|theirs|patience>> obsolete
+// git log --merge -p <path>
 
 namespace config
 {
@@ -56,7 +62,6 @@ const QString sFlags("Flags");
 const QString sIconPath("IconPath");
 const QString sShortcut("Shortcut");
 const QString sModified("Modified");
-
 } // namespace config
 
 
@@ -100,6 +105,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupView);
     LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
+    LOAD_STR(fSettings, Type::mShort, toBool);
+    ui->ckShortState->setChecked(Type::mShort);
     fSettings.endGroup();
 
 
@@ -196,6 +203,7 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupView);
     STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
+    STORE_STR(fSettings,  Type::mShort);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
@@ -219,6 +227,7 @@ MainWindow::~MainWindow()
     STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
+
 
     fSettings.beginWriteArray(config::sCommands);
 
@@ -889,8 +898,19 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 void MainWindow::on_ckHideEmptyParent_clicked(bool )
 {
     on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
-//        Q_EMIT doWork(Work::ShowAll);
-//        handleWorker(Work::ShowAll);
+}
+
+void MainWindow::on_ckShortState_clicked(bool checked)
+{
+    Type::mShort = checked;
+    for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
+    {
+        QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
+        for (int j=0; j<fItem->childCount(); ++j)
+        {
+            updateTreeItemStatus(fItem->child(j));
+        }
+    }
 }
 
 void MainWindow::on_comboShowItems_currentIndexChanged(int index)
@@ -1292,6 +1312,16 @@ void MainWindow::perform_custom_command()
     QAction *fAction = qobject_cast<QAction *>(sender());
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
+    if (ui->treeHistory->hasFocus())
+    {
+        switch (fVariantList[ActionList::Data::Cmd].toUInt())
+        {
+            case git::Cmd::CallDiffTool:
+                // TODO: change the sender of this command
+                //mActions.getAction(Cmd::CallHistoryDiffTool)->trigger();
+                return;
+        }
+    }
 
     if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
     {
