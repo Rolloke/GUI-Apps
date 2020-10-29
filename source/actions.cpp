@@ -89,7 +89,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::BranchCheckout]          = ":/resource/24X24/emblem-default.png";
     fActionIcons[Cmd::BranchHistory]           = ":/resource/24X24/document-open-recent.png";
     fActionIcons[Cmd::Show]                    = ":/resource/24X24/edit-find.png";
-    fActionIcons[Cmd::ShowHistoryDifference]   = ":resource/24X24/object-flip-horizontal.png";
+    fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 
     fActionIcons[Cmd::ExpandTreeItems]         = ":/resource/24X24/svn-update.svg";
@@ -108,7 +108,40 @@ void ActionList::initActionIcons()
     }
 }
 
+void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const
+{
+    for (const auto& fCmd : aItems)
+    {
+        if (fCmd != Cmd::Separator)
+        {
+            bool fEnabled = true;
+            auto fTypeEnabled    = getFlags(fCmd, Data::TypeFlagEnable);
+            auto fTypeDisabled   = getFlags(fCmd, Data::TypeFlagDisable);
+            auto fTypeNotEnabled = fTypeEnabled & fTypeDisabled;
 
+            if (aType.mType & Type::File)
+            {
+                if (fTypeNotEnabled)
+                {
+                    fEnabled = (aType.mType & fTypeNotEnabled) != 0;
+                }
+                else
+                {
+                    if (fTypeEnabled  && (aType.mType & fTypeEnabled) == 0)
+                    {
+                        fEnabled = false;
+                    }
+                    if (fTypeDisabled && (aType.mType & fTypeDisabled) != 0)
+                    {
+                        fEnabled = false;
+                    }
+                }
+            }
+            getAction(fCmd)->setEnabled(fEnabled);
+        }
+    }
+
+}
 
 void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) const
 {
@@ -220,23 +253,24 @@ QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd) const
     return "";
 }
 
-void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, bool aSet)
+void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, bool aSet, Data::e aData)
 {
-    uint fFlags = getFlags(aCmd);
+    uint fFlags = getFlags(aCmd, aData);
     if (aSet) fFlags |=  aFlag;
     else      fFlags &= ~aFlag;
-    setDataVariant(aCmd, Data::Flags, QVariant(fFlags));
+    setDataVariant(aCmd, aData, QVariant(fFlags));
 }
 
-uint ActionList::getFlags(Cmd::eCmd aCmd) const
+uint ActionList::getFlags(Cmd::eCmd aCmd, Data::e aData) const
 {
-    QVariant fVariant = getDataVariant(aCmd, Data::Flags);
-    if (fVariant.isValid())
+    QVariant fVariant = getDataVariant(aCmd, aData);
+    if (fVariant.isValid() && fVariant.canConvert<uint>())
     {
         return fVariant.toUInt();
     }
     return 0;
 }
+
 
 void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data::e aData, const QVariant& aVariant)
 {

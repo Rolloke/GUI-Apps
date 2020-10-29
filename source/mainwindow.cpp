@@ -228,9 +228,7 @@ MainWindow::~MainWindow()
     STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
 
-
     fSettings.beginWriteArray(config::sCommands);
-
     {
         int fIndex = 0;
 
@@ -641,11 +639,11 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
     }
     else
     {
-        if (ui->ckFiles)          fFilter |= QDir::Files;
-        if (ui->ckDirectories)    fFilter |= QDir::Dirs;
-        if (ui->ckHiddenFiles)    fFilter |= QDir::Hidden;
-        if (ui->ckSystemFiles)    fFilter |= QDir::System;
-        if (!ui->ckSymbolicLinks) fFilter |= QDir::NoSymLinks;
+        if (ui->ckFiles->isChecked())          fFilter |= QDir::Files;
+        if (ui->ckDirectories->isChecked())    fFilter |= QDir::Dirs;
+        if (ui->ckHiddenFiles->isChecked())    fFilter |= QDir::Hidden;
+        if (ui->ckSystemFiles->isChecked())    fFilter |= QDir::System;
+        if (!ui->ckSymbolicLinks->isChecked()) fFilter |= QDir::NoSymLinks;
     }
 
     QDir fDir;
@@ -804,7 +802,7 @@ void MainWindow::updateGitStatus()
     qint64 fSize = 0;
     for (uint i = 0; i < fSourceDirs.size(); ++i)
     {
-        insertSourceTree(fSourceDirs[i], i);
+        insertSourceTree(initDir(fSourceDirs[i]), i);
         fSize += sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
     }
 
@@ -881,7 +879,6 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
     mContextMenuSourceTreeItem = ui->treeSource->itemAt( pos );
     if (mContextMenuSourceTreeItem)
     {
-        //Type fType(static_cast<Type::TypeFlags>(mContextMenuItem->data(Column::State, Role::Filter).toUInt()));
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
@@ -947,6 +944,8 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
     mContextMenuSourceTreeItem = item;
+    Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
+    mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
 }
 
 void MainWindow::getSelectedTreeItem()
@@ -1061,9 +1060,11 @@ void MainWindow::initContextMenuActions()
 {
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
+    mActions.setFlags(Cmd::ShowDifference, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
+    mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
 
     connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1073,10 +1074,14 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
+    mActions.setFlags(Cmd::Add, Type::GitStaged, true, ActionList::Data::TypeFlagDisable);
+    mActions.setFlags(Cmd::Add, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::Add, Type::GitUnTracked, true, ActionList::Data::TypeFlagEnable);
 
     connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
+    mActions.setFlags(Cmd::Unstage, Type::GitStaged, true, ActionList::Data::TypeFlagEnable);
 
     connect(mActions.createAction(Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::History, Cmd::ParseHistoryText);
@@ -1090,6 +1095,8 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandMessageBoxText(Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
+    mActions.setFlags(Cmd::Restore, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::Restore, Type::GitModified, true, ActionList::Data::TypeFlagDisable);
 
     connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);

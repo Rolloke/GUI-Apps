@@ -16,6 +16,9 @@
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QTableView" name="tableViewActions">
+     <property name="toolTip">
+      <string>Shows git commands</string>
+     </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
@@ -158,6 +161,10 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Select icons
+Contextmenu entries or Toolbar entries</string>
+       </property>
        <item>
         <property name="text">
          <string>Icons</string>
@@ -214,6 +221,9 @@
          <width>220</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Shows icons and menu entries</string>
        </property>
        <property name="cornerButtonEnabled">
         <bool>false</bool>
