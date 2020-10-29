@@ -14,7 +14,7 @@ class ActionList
 {
 
 public:
-    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, ListSize }; };
+    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, TypeFlagEnable, TypeFlagDisable, ListSize }; };
 
 #if MAP_TYPE == 0
     typedef boost::container::flat_map<int, QAction*> tActionMap;
@@ -37,14 +37,15 @@ public:
     uint     getCustomCommandPostAction(git::Cmd::eCmd aCmd) const;
     void     setIconPath(git::Cmd::eCmd aCmd, const QString& aPath);
     QString  getIconPath(git::Cmd::eCmd aCmd) const;
-    void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, bool aSet = true);
-    uint     getFlags(git::Cmd::eCmd aCmd) const;
+    void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, bool aSet = true, Data::e aData=Data::Flags);
+    uint     getFlags(git::Cmd::eCmd aCmd, Data::e aData=Data::Flags) const;
     void     setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
     QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd) const;
 
     void     initActionIcons();
     git::Cmd::eCmd getNextCustomID() const;
 
+    void enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const;
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems) const;
     void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
     const tActionMap& getList() const { return mActionList; }
