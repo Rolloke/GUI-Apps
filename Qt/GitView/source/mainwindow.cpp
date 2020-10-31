@@ -1059,12 +1059,18 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 void MainWindow::initContextMenuActions()
 {
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+
+    connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
+    mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, true, ActionList::Data::TypeFlagEnable);
 
     connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1319,16 +1325,6 @@ void MainWindow::perform_custom_command()
     QAction *fAction = qobject_cast<QAction *>(sender());
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
-    if (ui->treeHistory->hasFocus())
-    {
-        switch (fVariantList[ActionList::Data::Cmd].toUInt())
-        {
-            case git::Cmd::CallDiffTool:
-                // TODO: change the sender of this command
-                //mActions.getAction(Cmd::CallHistoryDiffTool)->trigger();
-                return;
-        }
-    }
 
     if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
     {

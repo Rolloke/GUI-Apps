@@ -20,6 +20,7 @@ Cmd::Cmd()
     mCommandMap[ShowStatus]             = "git status %1";
     mCommandMap[ShowShortStatus]        = "git status -sb %1";
     mCommandMap[CallDiffTool]           = "git difftool --no-prompt %1";
+    mCommandMap[CallMergeTool]          = "git mergetool --no-prompt %1";
     mCommandMap[ShowDifference]         = "git diff %1";
     mCommandMap[Remove]                 = "git rm --cached %1";
     mCommandMap[Add]                    = "git add %1";
@@ -42,13 +43,13 @@ Cmd::Cmd()
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
 
-    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
+    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
     mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, CustomGitActionSettings});
 }
 
