@@ -18,6 +18,7 @@ TEMPLATE = app
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
+win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -54,3 +55,4 @@ FORMS    += mainwindow.ui \
     aboutdlg.ui
 
 RESOURCES += resource.qrc
+
