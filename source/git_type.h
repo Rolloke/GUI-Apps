@@ -54,6 +54,7 @@ struct Cmd
         BranchListNotMerged,
         BranchCheckout,
         BranchHistory,
+        CallMergeTool,
         /// hint: add further git commands here
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands

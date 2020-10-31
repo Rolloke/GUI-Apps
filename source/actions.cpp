@@ -71,6 +71,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
     fActionIcons[Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
     fActionIcons[Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
+    fActionIcons[Cmd::CallMergeTool]           = ":/resource/24X24/application-x-addon.png";
     fActionIcons[Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
     fActionIcons[Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
     fActionIcons[Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
