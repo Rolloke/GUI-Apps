@@ -59,7 +59,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
         if (isSeverityActive(to_syslog))
         {
             va_start (args, format);
-            std::string fFormat = QString::number((u_int64_t)QThread::currentThreadId()).toStdString();
+            std::string fFormat = QString::number((std::uint64_t)QThread::currentThreadId()).toStdString();
             fFormat += format;
             format = fFormat.c_str();
 

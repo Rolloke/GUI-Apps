@@ -3,7 +3,7 @@
 
 #include <QPen>
 #include <QString>
-#include "boost/function.hpp"
+#include <boost/function.hpp>
 #include "main.h"
 
 #include "Average.h"

@@ -122,8 +122,8 @@ FORMS    += mainwindow.ui \
     aboutdlg.ui
 
 
-#INCLUDEPATH += /home/rolf/Projekte
-#DEPENDPATH += /home/rolf/Projekte
+
+win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 #INCLUDEPATH += /usr/include
 #DEPENDPATH += /usr/include
