@@ -4,6 +4,7 @@
 #include "logger.h"
 #include "helper.h"
 
+#include <assert.h>
 #include <QStandardItemModel>
 #include <QDir>
 #include <QMenu>

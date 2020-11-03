@@ -12,20 +12,24 @@
 
 using namespace std;
 
-std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::to_syslog | Logger::highest;
+std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
-FILE* Logger::mFile = NULL;
-
-#ifdef __linux__
 string Logger::mLogdir("/tmp");
-#endif
+Logger::tLogfunction Logger::mLogFunction;
 
 #ifdef WIN32
-string Logger::mLogdir("/tmp");
 namespace
 {
 HANDLE hEventLog = nullptr;
 }
+
+void convertToUnicode(const std::string& aSource, std::wstring& aDest)
+{
+    aDest.resize(aSource.size());
+    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()));
+    aDest.resize(wcslen(aDest.c_str()));
+}
+
 #endif
 
 Logger::Logger(const char* fName)
@@ -36,7 +40,14 @@ Logger::Logger(const char* fName)
     openlog(fName, fFlags, LOG_USER);
 #endif
 #ifdef WIN32
+#ifdef UNICODE
+	std::wstring fNameW;
+	convertToUnicode(fName, fNameW);
+	hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
+#else
     hEventLog = OpenEventLogA(nullptr, fName);
+#endif
+
 #endif
 }
 
@@ -48,10 +59,6 @@ Logger::~Logger()
 #ifdef WIN32
     CloseEventLog(hEventLog);
 #endif
-    if (mFile)
-    {
-        fclose(mFile);
-    }
 }
 
 void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
@@ -66,36 +73,45 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             va_end (args);
             fflush(stdout);
         }
-        if (isSeverityActive(to_file))
+		bool fToSyslog   = isSeverityActive(to_syslog);
+		const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
+
+        char fMessage[2048]="";
+		if (fToSyslog || fToFunction)
         {
+			std::string fFormat;// = QString::number((uint64_t)QThread::currentThreadId()).toStdString();
             va_start (args, format);
-            vfprintf(mFile, format, args);
+			fFormat += format;
+			format = fFormat.c_str();
+            vsprintf(fMessage, format, args);
             va_end (args);
-#ifdef __linux__
-            fprintf(mFile, "\n");
-#endif
-#ifdef WIN32
-            fprintf(mFile, "\r\n");
-#endif
-            fflush(mFile);
         }
-        if (isSeverityActive(to_syslog))
+
+		if (fToFunction)
+		{
+			mLogFunction(fMessage);
+			fToSyslog = false;
+		}
+
+		if (fToSyslog)
         {
-            va_start (args, format);
 #ifdef __linux__
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
 #endif
 #ifdef WIN32
-            char fMessage[1024];
-            vsprintf_s(fMessage, sizeof(fMessage), format, args);
             std::uint16_t fCategory;
             std::uint32_t fEventID;
             std::uint16_t fType = convertSeverityToEventLog(aSeverity, fCategory, fEventID);
-            std::uint32_t fDatasize = strlen(fMessage);
-            LPCSTR fString[1] = {static_cast<LPCSTR>(&fMessage[0])};
-            ReportEventA(hEventLog, fType, fCategory,fEventID, nullptr, 1, fDatasize, fString, nullptr);
+#ifdef UNICODE
+			std::wstring fMessageW;
+			convertToUnicode(fMessage, fMessageW);
+			LPWSTR  fString[2] = { (LPWSTR)fMessageW.c_str(), NULL };
+			ReportEventW(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCWSTR*)fString, nullptr);
+#else
+			LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
+			ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
-            va_end (args);
+#endif
         }
     }
 }
@@ -104,7 +120,6 @@ void Logger::setSeverity(std::uint32_t aFlag, bool aSet)
 {
     if (aSet)
     {
-        aFlag &= ~to_file;
         mSeverity |= aFlag;
     }
     else
@@ -123,6 +138,10 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
     return (aSeverity & mSeverity) != 0;
 }
 
+void Logger::setLogFunction(const tLogfunction& aLogFunc)
+{
+	mLogFunction = aLogFunc;
+}
 
 #ifdef __linux__
 int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
@@ -213,19 +232,3 @@ bool Logger::openStream(const std::string& aTitle, std::ofstream& aStream)
     }
     return fOpen;
 }
-
-bool Logger::openLogFile(const string &aLogFileName)
-{
-    mFile = fopen(aLogFileName.c_str(), "a+t");
-    setSeverity(to_file, mFile != NULL);
-    return mFile != NULL;
-}
-
-void Logger::closeLogFile()
-{
-     fclose(mFile);
-     setSeverity(to_file, false);
-     mFile = NULL;
-}
-
-

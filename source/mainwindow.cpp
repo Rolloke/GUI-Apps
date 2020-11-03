@@ -262,7 +262,7 @@ MainWindow::~MainWindow()
     fSettings.beginGroup(config::sGroupLogging);
     QString fSeverHlp = "_fsc____acewnidt";
     STORE_STR(fSettings, fSeverHlp);
-    QString fSeverity = QString::number(Logger::getSeverity()|Logger::highest, 2);
+    QString fSeverity = QString::number(Logger::getSeverity(), 2);
     STORE_STR(fSettings, fSeverity);
 
     fSettings.endGroup();
