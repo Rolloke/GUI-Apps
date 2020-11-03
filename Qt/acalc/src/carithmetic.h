@@ -10,7 +10,7 @@
 #include <memory>
 #include <map>
 
-//#define ARCUS_COMPLEX
+#define ARCUS_COMPLEX
 
 #if __has_cpp_attribute(fallthrough)
   #define CPP17_FALLTHROUGH        [[fallthrough]];

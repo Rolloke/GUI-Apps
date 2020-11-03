@@ -7,13 +7,38 @@
 #endif
 #include <stdarg.h>
 #include "logger.h"
-#include <QThread>
 
 using namespace std;
 
-std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::info | Logger::to_syslog;
+std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
 string Logger::mLogdir("/tmp");
+Logger::tLogfunction Logger::mLogFunction;
+
+#ifndef UNICODE
+void   convertToUnicode(const std::string& aSource, std::string& aDest)
+{
+        aDest = aSource;
+}
+void convertToMBCS(const std::string& aSource, std::string& aDest)
+{
+        aDest = aSource;
+}
+#endif
+
+void convertToUnicode(const std::string& aSource, std::wstring& aDest)
+{
+    aDest.resize(aSource.size());
+    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()));
+    aDest.resize(wcslen(aDest.c_str()));
+}
+
+void convertToMBCS(const std::wstring& aSource, std::string& aDest)
+{
+    aDest.resize(aSource.size() * 2);
+    ::WideCharToMultiByte(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()), NULL, NULL);
+    aDest.resize(strlen(aDest.c_str()));
+}
 
 #ifdef WIN32
 namespace
@@ -30,7 +55,14 @@ Logger::Logger(const char* fName)
     openlog(fName, fFlags, LOG_USER);
 #endif
 #ifdef WIN32
-    hEventLog = OpenEventLogA(nullptr, fName);
+#ifdef UNICODE
+	std::wstring fNameW;
+	convertToUnicode(fName, fNameW);
+	hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
+#else
+	hEventLog = OpenEventLogA(nullptr, fName);
+#endif 
+
 #endif
 }
 
@@ -56,27 +88,43 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             va_end (args);
             fflush(stdout);
         }
-        if (isSeverityActive(to_syslog))
-        {
-            va_start (args, format);
-            std::string fFormat = QString::number((std::uint64_t)QThread::currentThreadId()).toStdString();
-            fFormat += format;
-            format = fFormat.c_str();
+		bool fToSyslog   = isSeverityActive(to_syslog);
+		const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
+        const size_t fSize = 1024;
+        char fMessage[fSize] {0};
+		if (fToSyslog || fToFunction)
+		{
+			va_start(args, format);
+            vsprintf_s(fMessage, fSize, format, args);
+            va_end (args);
+        }
 
+
+		if (fToFunction)
+		{
+			mLogFunction(fMessage);
+			fToSyslog = false;
+		}
+
+		if (fToSyslog)
+		{
 #ifdef __linux__
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
 #endif
 #ifdef WIN32
-            char fMessage[1024];
-            vsprintf_s(fMessage, sizeof(fMessage), format, args);
             std::uint16_t fCategory;
             std::uint32_t fEventID;
             std::uint16_t fType = convertSeverityToEventLog(aSeverity, fCategory, fEventID);
-            std::uint32_t fDatasize = strlen(fMessage);
-            LPCSTR fString[1] = {static_cast<LPCSTR>(&fMessage[0])};
-            ReportEventA(hEventLog, fType, fCategory,fEventID, nullptr, 1, fDatasize, fString, nullptr);
+#ifdef UNICODE
+			std::wstring fMessageW;
+			convertToUnicode(fMessage, fMessageW);
+			LPWSTR  fString[2] = { (LPWSTR)fMessageW.c_str(), NULL };
+			ReportEventW(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCWSTR*)fString, nullptr);
+#else
+			LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
+			ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
-            va_end (args);
+#endif
         }
     }
 }
@@ -103,6 +151,10 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
     return (aSeverity & mSeverity) != 0;
 }
 
+void Logger::setLogFunction(const tLogfunction& aLogFunc)
+{
+	mLogFunction = aLogFunc;
+}
 
 #ifdef __linux__
 int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
@@ -189,7 +241,7 @@ bool Logger::openStream(const std::string& aTitle, std::ofstream& aStream)
     if (aStream.is_open())
     {
         fOpen = true;
-        aStream << "title=" << aTitle << std::endl;
+        aStream << "title=" << aTitle.c_str() << std::endl;
     }
     return fOpen;
 }

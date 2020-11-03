@@ -23,6 +23,7 @@
 #include "..\SearchLine.h"
 #include "..\PluginDefinition.h"
 #include "..\EnumFiles.h"
+#include "..\logger.h"
 
 #pragma warning( push )  
 #pragma warning(disable: 4091)
@@ -39,13 +40,12 @@ namespace
     const TCHAR keySelectLine[]   = TEXT("SelectLine");
     const TCHAR keyBookmarkLine[] = TEXT("BookmarkLine");
     const TCHAR keyMarker[]       = TEXT("Marker");
-    const TCHAR keyUseThreads[]          = TEXT("UseThread");
-    const TCHAR keyLineLimit[]           = TEXT("LineLimit");
-    const TCHAR keySearchInSubFolders[]  = TEXT("SearchInSubFolders");
+    const TCHAR keyUseThreads[]   = TEXT("UseThread");
+    const TCHAR keyLineLimit[]    = TEXT("LineLimit");
+    const TCHAR keySearchInSubFolders[] = TEXT("SearchInSubFolders");
     const TCHAR keyMaxSearchDifference[] = TEXT("MaxSearchDifference");
 }
 
-#define WM_REMOVE_THRÈAD (WM_USER + 1)
 
 SynchronizeTimeStamps::SynchronizeTimeStamps() 
     : DockingDlgInterface(IDD_SYNCHRONIZE_TIMESTAMPS) 
@@ -56,7 +56,7 @@ SynchronizeTimeStamps::SynchronizeTimeStamps()
     , mUseThreads(TRUE)
     , mLineLimit(128)
     , mSearchInSubFolders(TRUE)
-    , mMaxSearchDifference_ms(3600000)
+    , mMaxSearchDifference_us(3600000000)
     , mActiveFile(NULL)
     , mTimeStampResults(NULL)
 {
@@ -69,17 +69,24 @@ SynchronizeTimeStamps::~SynchronizeTimeStamps()
 
 INT_PTR CALLBACK SynchronizeTimeStamps::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message) 
-    {
+	switch (message) 
+	{
     case WM_INITDIALOG: return OnInitDialog();
-    case WM_COMMAND : 
-    {
-        switch (LOWORD(wParam))
-        {
+	case WM_COMMAND : 
+	{
+		switch (LOWORD(wParam))
+		{
         case IDC_BTN_GET_TIME:           return StartThread(IDC_BTN_GET_TIME); //return OnGetTime();
         case IDC_BTN_FIND_TIME:          return StartThread(IDC_BTN_FIND_TIME); //return OnFindTime();
-        case IDC_BTN_SYNCHRONIZE:        return StartThread(IDC_BTN_SYNCHRONIZE);        //return OnSyncronizeOpenFiles();
-        case IDC_BTN_SYNCHRONIZE_FOLDER: return StartThread(IDC_BTN_SYNCHRONIZE_FOLDER); // return OnSyncronizeFolder();
+		case IDC_BTN_DIFF_TIME:          
+			openTimeStampResults();
+			return StartThread(IDC_BTN_DIFF_TIME); //return OnDiffTime();
+		case IDC_BTN_SYNCHRONIZE:
+			openTimeStampResults();
+			return StartThread(IDC_BTN_SYNCHRONIZE);        //return OnSyncronizeOpenFiles();
+        case IDC_BTN_SYNCHRONIZE_FOLDER:
+			openTimeStampResults();
+			return StartThread(IDC_BTN_SYNCHRONIZE_FOLDER); // return OnSyncronizeFolder();
         case IDC_BTN_INSERT: return OnInsertFormat();
         case IDC_BTN_DELETE: return OnDeleteFormat();
         case IDC_CK_SELECT_LINE: return OnCkSelectLine();
@@ -89,25 +96,24 @@ INT_PTR CALLBACK SynchronizeTimeStamps::run_dlgProc(UINT message, WPARAM wParam,
         case IDC_BTN_DELETE_BOOKMARKS: return OnBtnDeleteBookmarks();
         case IDC_BTN_DELETE_CURRENT_BOOKMARK: return OnBtnDeleteCurrentBookmark();
         case IDC_BTN_HELP: return OnBtnHelp();
-        case IDC_BTN_SELECT_FOLDER: return OnSelectFolder();
+		case IDC_BTN_SELECT_FOLDER: return OnSelectFolder();
         case IDC_BTN_STOP_ALL: return OnStopAllThreads();
-        case IDC_EDT_BOOKMARK:
+		case IDC_EDT_BOOKMARK:
             if (HIWORD(wParam) == EN_CHANGE)
             {
                 mMarker = getDlgItemInt(IDC_EDT_BOOKMARK);
             }
             return 1;
         }
-        return FALSE;
+		return FALSE;
     }break;
     case WM_NOTIFY: return OnWmNotify((UINT)wParam, (NMHDR*)lParam);
     case WM_HELP: return OnWmHelp((HELPINFO*)lParam);
     case WM_DESTROY: return OnWmDestroy();
-    case WM_REMOVE_THRÈAD: return OnRemoveThread((UINT)wParam);
         
 
-    default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
-    }
+	default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
+	}
 }
 
 INT_PTR SynchronizeTimeStamps::OnSyncronizeFolder()
@@ -122,46 +128,54 @@ INT_PTR SynchronizeTimeStamps::OnSyncronizeOpenFiles()
 
 INT_PTR SynchronizeTimeStamps::OnInitDialog()
 {
-    RECT rc;
+	TRACE(Logger::info, "SynchronizeTimeStamps::OnInitDialog()");
+	RECT rc;
     GetClientRect(getDlgItem(IDC_LIST_TIME_FORMAT), &rc);
-    int fDateCx = 40;
+    INT_PTR fDateCx = 40;
     std::string sText = "Supported time formats";
-    LVCOLUMNA fLvc1 = { LVCF_WIDTH | LVCF_TEXT, 0, rc.right-rc.left - fDateCx, &sText[0], (int)sText.size(), 0, 0, 0, 10, 0, 0  };
+	LVCOLUMNA fLvc1 = { 0 };
+	fLvc1.mask = LVCF_WIDTH | LVCF_TEXT;
+	fLvc1.cx = static_cast<int>(static_cast<INT_PTR>(rc.right - rc.left) - fDateCx);
+	fLvc1.pszText = &sText[0];
+	fLvc1.cchTextMax = static_cast<int>(sText.size());
+	fLvc1.cxMin = 10;
+//		= { , 0, , &sText[0], (int)sText.size(), 0, 0, 0, 10, 0, 0  };
     sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_INSERTCOLUMNA, 0, (LPARAM)&fLvc1);
     sText = "Date";
-    LVCOLUMNA fLvc2 = { LVCF_WIDTH | LVCF_TEXT, 0, fDateCx, &sText[0], (int)sText.size(), 1, 0, 0, 10, 0, 0 };
-    sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_INSERTCOLUMNA, 1, (LPARAM)&fLvc2);
+    LVCOLUMNA fLvc2 = { 0 };
+	fLvc2.mask = LVCF_WIDTH | LVCF_TEXT;
+	fLvc2.cx = static_cast<int>(fDateCx);
+	fLvc2.pszText = &sText[0];
+	fLvc2.cchTextMax = static_cast<int>(sText.size());
+	fLvc2.cxMin = 10;
+	sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_INSERTCOLUMNA, 1, (LPARAM)&fLvc2);
 
     mTestParser.reset(new TimeParser);
 
     TCHAR* szPredefinedTimeFormat[] = 
-    {
+	{
         _T("[%a %b %e %H:%M:%S %Y]"),
         _T("[%d.%m.%Y-%H:%M:%S]"),
         _T("[%d.%m.%Y-%H:%M:%S.%i]"),
         _T("[%m/%d/%Y %H:%M:%S.%i %X %x]"),
         _T("%Y-%m-%dT%H:%M:%S.%i%x+%x:%x")
-    };
-    const int fPredefinedFormats = lengthof(szPredefinedTimeFormat);
-    int fTimeFormats = ::GetPrivateProfileInt(sectionName, keyFormats, 0, getIniFilePath());
+	};
+    const size_t fPredefinedFormats = lengthof(szPredefinedTimeFormat);
+	size_t fTimeFormats = ::GetPrivateProfileInt(sectionName, keyFormats, 0, getIniFilePath());
     TCHAR szTimeFormatKey[256], szTimeFormat[256];
     if (fTimeFormats == 0)
     {
         fTimeFormats = fPredefinedFormats;
     }
-    for (int i = 0; i < fTimeFormats; ++i)
+    for (size_t i = 0; i < fTimeFormats; ++i)
     {
         wsprintf(szTimeFormatKey, keyFormat, i+1);
         memset(szTimeFormat, 0, sizeof(szTimeFormat));
         GetPrivateProfileString(sectionName, szTimeFormatKey, i<fPredefinedFormats ? szPredefinedTimeFormat[i] : _T(""), szTimeFormat, lengthof(szTimeFormat), getIniFilePath());
-        LVITEM fItem = { LVIF_TEXT, i, 0, 0, 0, &szTimeFormat[0], (int)_tcslen(szTimeFormat), 0, 0, 0 };
+        LVITEM fItem = { LVIF_TEXT, static_cast<int>(i), 0, 0, 0, &szTimeFormat[0], static_cast<int>(_tcslen(szTimeFormat)), 0, 0, 0 };
         sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_INSERTITEM, i, (LPARAM)&fItem);
         std::string fTimeFormat;
-#ifdef UNICODE
-        convertToMBCS(szTimeFormat, fTimeFormat);
-#else
-        fTimeFormat = szTimeFormat;
-#endif 
+		convertToMBCS(szTimeFormat, fTimeFormat);
 
         mParserToFormatMap[fTimeFormat].reset(new TimeParser());
         mParserToFormatMap[fTimeFormat]->setFormatString(fTimeFormat);
@@ -181,18 +195,21 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
     mLineLimit = ::GetPrivateProfileInt(sectionName, keyLineLimit, mLineLimit, getIniFilePath());
     mSearchInSubFolders = ::GetPrivateProfileInt(sectionName, keySearchInSubFolders, mSearchInSubFolders, getIniFilePath());
     sendDlgItemMsg(IDC_CK_SEARCH_IN_SUBFOLDERS, BM_SETCHECK, mSearchInSubFolders ? BST_CHECKED : BST_UNCHECKED);
-    GetPrivateProfileString(sectionName, keyMaxSearchDifference, _T("03:00:00"), szTimeFormat, lengthof(szTimeFormat), getIniFilePath());
+    GetPrivateProfileString(sectionName, keyMaxSearchDifference, _T("1:00:00"), szTimeFormat, lengthof(szTimeFormat), getIniFilePath());
     long fHour, fMinute, fSecond;
-    int fScanResult = _stscanf(szTimeFormat, _T("%02d:%02d:%02d"), &fHour, &fMinute, &fSecond);
+    INT_PTR fScanResult = _stscanf(szTimeFormat, _T("%02d:%02d:%02d"), &fHour, &fMinute, &fSecond);
     if (fScanResult == 3)
     {
         SYSTEMTIME fST = { 0, 1, 0, 0, static_cast<WORD>(fHour), static_cast<WORD>(fMinute), static_cast<WORD>(fSecond), 0 };
         mTestParser->setSystemTime(fST);
-        mMaxSearchDifference_ms = mTestParser->calculateTime();
+        mMaxSearchDifference_us = mTestParser->calculateTime();
     }
 
+	setDlgItemInt(IDC_TXT_MILLISECONDS, 0);
+	setDlgItemInt(IDC_TXT_MICROSECONDS_PART, 0);
+
     ScintillaWnd fwndSC(getScintillaWindowHandle(), TRUE);
-    int i = 0;
+    INT_PTR i = 0;
     COLORREF fForegound = RGB(255, 0, 0);
     fwndSC.defineMarker(i++, SC_MARK_CIRCLE, fForegound);
     fwndSC.defineMarker(i++, SC_MARK_ROUNDRECT, fForegound);
@@ -214,7 +231,7 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
         addToolTip(nID);
     }
   
-    SetDlgItemTextA(_hSelf, IDC_EDT_WILDCARD, "*.*");
+	SetDlgItemTextA(_hSelf, IDC_EDT_WILDCARD, "*.*");
     
     //determine Messages for:
      // - open file
@@ -225,14 +242,14 @@ INT_PTR SynchronizeTimeStamps::OnInitDialog()
 INT_PTR SynchronizeTimeStamps::OnWmDestroy()
 {
     OnStopAllThreads();
-    int fTimeFormats = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETITEMCOUNT);
+    INT_PTR fTimeFormats = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETITEMCOUNT);
     TCHAR szFormatKey[64], szTimeFormat[256];
     wsprintf(szFormatKey, _T("%d"), fTimeFormats);
     ::WritePrivateProfileString(sectionName, keyFormats, szFormatKey, getIniFilePath());
-    for (int i = 1; i <= fTimeFormats; ++i)
+    for (INT_PTR i = 1; i <= fTimeFormats; ++i)
     {
         wsprintf(szFormatKey, keyFormat, i);
-        LVITEM fItem = { LVIF_TEXT, i-1, 0, 0, 0, &szTimeFormat[0], (int)lengthof(szTimeFormat), 0, 0, 0 };
+        LVITEM fItem = { LVIF_TEXT, static_cast<int>(i-1), 0, 0, 0, &szTimeFormat[0], static_cast<int>(lengthof(szTimeFormat)), 0, 0, 0 };
         sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETITEM, 0, (LPARAM)&fItem);
         wsprintf(szFormatKey, keyFormat, i);
         WritePrivateProfileString(sectionName, szFormatKey, szTimeFormat, getIniFilePath());
@@ -249,7 +266,7 @@ INT_PTR SynchronizeTimeStamps::OnWmDestroy()
     ::WritePrivateProfileString(sectionName, keyLineLimit, szFormatKey, getIniFilePath());
     wsprintf(szFormatKey, _T("%d"), mSearchInSubFolders);
     ::WritePrivateProfileString(sectionName, keySearchInSubFolders, szFormatKey, getIniFilePath());
-    SYSTEMTIME fDifference = TimeParser::calcSystemTime(mMaxSearchDifference_ms);
+    SYSTEMTIME fDifference = TimeParser::calcSystemTime(mMaxSearchDifference_us);
     wsprintf(szFormatKey, _T("%02d:%02d:%02d"), fDifference.wHour, fDifference.wMinute, fDifference.wSecond);
     ::WritePrivateProfileString(sectionName, keyMaxSearchDifference, szFormatKey, getIniFilePath());
 
@@ -270,11 +287,11 @@ INT_PTR SynchronizeTimeStamps::OnWmNotify(UINT , NMHDR* pNmHdr)
     case NM_DBLCLK:
         if (pNmHdr->idFrom == IDC_LIST_TIME_FORMAT)
         {
-            int fSelected = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETSELECTIONMARK);
+			INT_PTR fSelected = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETSELECTIONMARK);
             if (fSelected != -1)
             {
                 char fTimeFormat[256];
-                LVITEMA fItem = { LVIF_TEXT, fSelected, 0, 0, 0, &fTimeFormat[0], lengthof(fTimeFormat), 0, 0, 0 };
+                LVITEMA fItem = { LVIF_TEXT, static_cast<int>(fSelected), 0, 0, 0, &fTimeFormat[0], static_cast<int>(lengthof(fTimeFormat)), 0, 0, 0 };
                 sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETITEMA, 0, (LPARAM)&fItem);
                 SetDlgItemTextA(_hSelf, IDC_EDT_TIME_FORMAT, fTimeFormat);
             }
@@ -311,11 +328,11 @@ INT_PTR SynchronizeTimeStamps::OnInsertFormat()
 INT_PTR SynchronizeTimeStamps::OnDeleteFormat()
 {
     AutoMutex fM(&mMutex);
-    int fSelected = ListView_GetSelectionMark(getDlgItem(IDC_LIST_TIME_FORMAT));
+    INT_PTR fSelected = ListView_GetSelectionMark(getDlgItem(IDC_LIST_TIME_FORMAT));
     if (fSelected != -1)
     {
         char fTimeFormat[256];
-        LVITEMA fItem = { LVIF_TEXT, fSelected, 0, 0, 0, &fTimeFormat[0], lengthof(fTimeFormat), 0, 0, 0 };
+        LVITEMA fItem = { LVIF_TEXT, static_cast<int>(fSelected), 0, 0, 0, &fTimeFormat[0], static_cast<int>(lengthof(fTimeFormat)), 0, 0, 0 };
         sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_GETITEMA, 0, (LPARAM)&fItem);
         ParserToFormatMap::iterator fIt = mParserToFormatMap.find(fTimeFormat);
         if (fIt != mParserToFormatMap.end())
@@ -331,13 +348,13 @@ INT_PTR SynchronizeTimeStamps::OnDeleteFormat()
 
 INT_PTR SynchronizeTimeStamps::OnCkSelectLine()
 {
-    mSelectFoundLine = sendDlgItemMsg(IDC_CK_SELECT_LINE, BM_GETCHECK);
+    mSelectFoundLine = sendDlgItemMsg(IDC_CK_SELECT_LINE, BM_GETCHECK) != 0;
     return TRUE;
 }
 
 INT_PTR SynchronizeTimeStamps::OnCkBookmarkLine()
 {
-    mBookmarkFoundLine = sendDlgItemMsg(IDC_CK_BOOKMARK_LINE, BM_GETCHECK);
+    mBookmarkFoundLine = sendDlgItemMsg(IDC_CK_BOOKMARK_LINE, BM_GETCHECK) != 0;
     return TRUE;
 }
 
@@ -356,11 +373,7 @@ INT_PTR SynchronizeTimeStamps::OnBtnPreviousBookmark()
 INT_PTR SynchronizeTimeStamps::OnBtnHelp()
 {
     std::string  fPath;
-#ifdef UNICODE
-    convertToMBCS(_modulePath, fPath);
-#else
-    fPath = _modulePath;
-#endif // UNICODE
+	convertToMBCS(_modulePath, fPath);
 
     fPath = "explorer " + fPath; 
     fPath += "\\doc\\LogProfiler\\info.html";
@@ -368,22 +381,22 @@ INT_PTR SynchronizeTimeStamps::OnBtnHelp()
     return TRUE;
 }
 
-INT_PTR SynchronizeTimeStamps::OnBtnDeleteBookmarks()
+LRESULT SynchronizeTimeStamps::OnBtnDeleteBookmarks()
 {
     ScintillaWnd(getScintillaWindowHandle()).setMarker(mMarker, FALSE);
     return TRUE;
 }
 
-INT_PTR SynchronizeTimeStamps::OnBtnDeleteCurrentBookmark()
+LRESULT SynchronizeTimeStamps::OnBtnDeleteCurrentBookmark()
 {
     ScintillaWnd(getScintillaWindowHandle()).setMarker(mMarker, FALSE, getCurrentLine());
     return TRUE;
 }
 
-int SynchronizeTimeStamps::getCurrentLine() const
+LRESULT SynchronizeTimeStamps::getCurrentLine() const
 {
-    ScintillaWnd fWnd(getScintillaWindowHandle(), TRUE);
-    int fPos = fWnd.sendMessage(SCI_GETCURRENTPOS);
+    ScintillaWnd fWnd(getScintillaWindowHandle(), FALSE);
+	INT_PTR fPos = fWnd.sendMessage(SCI_GETCURRENTPOS);
     return fWnd.sendMessage(SCI_LINEFROMPOSITION, fPos);
 }
 
@@ -419,10 +432,10 @@ TimeParser* SynchronizeTimeStamps::findDocParser()
     }
     if (pTI)
     {
-        int fLines = 10;
+        uint32_t fLines = 10;
         std::string fText;
 
-        for (int fLine=0; fLine < fLines; ++fLine)
+        for (uint32_t fLine=0; fLine < fLines; ++fLine)
         {
             if (pTI->getLineText(fLine, fText))
             {
@@ -443,7 +456,7 @@ TimeParser* SynchronizeTimeStamps::findDocParser()
                         mParserToFileMap[fPathFileName] = fParserIt->second;
                         mLastFoundParser = fParserIt;
                         LVFINDINFOA fFI = { LVFI_STRING, fParserIt->first.c_str(), 0, {0,0}, 0 };
-                        int fFound = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_FINDITEMA, 0, (LPARAM)&fFI);
+                        INT_PTR fFound = sendDlgItemMsg(IDC_LIST_TIME_FORMAT, LVM_FINDITEMA, 0, (LPARAM)&fFI);
                         ListView_SetSelectionMark(getDlgItem(IDC_LIST_TIME_FORMAT), fFound);
                         ListView_SetItemState(getDlgItem(IDC_LIST_TIME_FORMAT), fFound, LVIS_FOCUSED | LVIS_SELECTED, 0x000F);
 
@@ -453,6 +466,17 @@ TimeParser* SynchronizeTimeStamps::findDocParser()
             }
         }
     }
+	if (mActiveFile)
+	{
+		TRACE(Logger::to_function, "No parser found for %s", mActiveFile->getFileName());
+	}
+	else
+	{
+		std::string fPath;
+		getCurrentPathFileName(fPath);
+		TRACE(Logger::to_function, "No parser found for %s", fPath.c_str());
+	}
+
     return NULL;
 }
 
@@ -469,7 +493,9 @@ INT_PTR SynchronizeTimeStamps::StartThread(UINT nID)
         DWORD fThreadID;
         HANDLE hThread = CreateThread(NULL, 0, ThreadProc, this, 0, &fThreadID);
 
+        mMutex.lock();
         mThreads[fThreadID] = hThread;
+        mMutex.unlock();
 
         EnableWindow(getDlgItem(IDC_BTN_STOP_ALL), TRUE);
     }
@@ -491,6 +517,7 @@ DWORD WINAPI SynchronizeTimeStamps::ThreadProc(LPVOID lpParameter)
 
 DWORD WINAPI SynchronizeTimeStamps::ThreadProc()
 {
+    UINT fThreadID = GetCurrentThreadId();
     UINT  fID = 0;
     {
         AutoMutex fM(&mMutex);
@@ -501,28 +528,25 @@ DWORD WINAPI SynchronizeTimeStamps::ThreadProc()
     DWORD fResult = 0;
     switch (fID)
     {
-    case IDC_BTN_GET_TIME:           fResult = OnGetTime(); break;
-    case IDC_BTN_FIND_TIME:          fResult = OnFindTime(); break;
-    case IDC_BTN_SYNCHRONIZE:        fResult = OnSyncronizeOpenFiles(); break;
-    case IDC_BTN_SYNCHRONIZE_FOLDER: fResult = OnSyncronizeFolder();    break;
+    case IDC_BTN_GET_TIME:           fResult = static_cast<DWORD>(OnGetTime()); break;
+    case IDC_BTN_FIND_TIME:          fResult = static_cast<DWORD>(OnFindTime()); break;
+	case IDC_BTN_DIFF_TIME:          fResult = static_cast<DWORD>(OnDiffTime()); break;
+	case IDC_BTN_SYNCHRONIZE:        fResult = static_cast<DWORD>(OnSyncronizeOpenFiles()); break;
+    case IDC_BTN_SYNCHRONIZE_FOLDER: fResult = static_cast<DWORD>(OnSyncronizeFolder());    break;
     }
 
     EnableWindow(getDlgItem(IDC_BTN_STOP_ALL), FALSE);
-
-    PostMessage(_hSelf, WM_REMOVE_THRÈAD, GetCurrentThreadId(), 0);
+    {
+        AutoMutex fM(&mMutex);
+        ThreadHandleMap::iterator fThreadParam = mThreads.find(fThreadID);
+        if (fThreadParam != mThreads.end())
+        {
+            CloseHandle(fThreadParam->second);
+            mThreads.erase(fThreadParam);
+        }
+    }
 
     return fResult;
-}
-
-INT_PTR SynchronizeTimeStamps::OnRemoveThread(UINT aID)
-{
-    auto fThreadParam = mThreads.find(aID);
-    if (fThreadParam != mThreads.end())
-    {
-        CloseHandle(fThreadParam->second);
-        mThreads.erase(fThreadParam);
-    }
-    return TRUE;
 }
 
 INT_PTR SynchronizeTimeStamps::OnStopAllThreads()
@@ -531,7 +555,6 @@ INT_PTR SynchronizeTimeStamps::OnStopAllThreads()
     for (auto fThread : mThreads)
     {
         TerminateThread(fThread.second, (DWORD) -1);
-        CloseHandle(fThread.second);
     }
     return TRUE;
 }
@@ -548,9 +571,9 @@ void  SynchronizeTimeStamps::removeDocParser(TimeParser* aParser)
     }
 }
 
-int  SynchronizeTimeStamps::findLineOfTimeValue(int64_t aTimeValue)
+INT_PTR  SynchronizeTimeStamps::findLineOfTimeValue(int64_t aTimeValue)
 {
-    int fResultLine = -1;
+    INT_PTR fResultLine = -1;
     HWND curScintilla = getScintillaWindowHandle();
     if (curScintilla)
     {
@@ -580,6 +603,7 @@ SYSTEMTIME  SynchronizeTimeStamps::getCtrlTime()
 
     SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_GETSYSTEMTIME, GDT_VALID, (LPARAM)&fTime);
     SendDlgItemMessageA(_hSelf, IDC_DATE, DTM_GETSYSTEMTIME, GDT_VALID, (LPARAM)&fDate);
+
     fTime.wDay = fDate.wDay;
     fTime.wDayOfWeek = fDate.wDayOfWeek;
     fTime.wMonth = fDate.wMonth;
@@ -593,10 +617,10 @@ INT_PTR SynchronizeTimeStamps::OnFindTime()
     TimeParser* fParser = getCurrentParser();
     if (fParser)
     {
-        fParser->setSystemTime(getCtrlTime());
+        fParser->setSystemTime(getCtrlTime(), static_cast<WORD>(getDlgItemInt(IDC_TXT_MICROSECONDS_PART)));
 
         ScintillaWnd fWnd(getScintillaWindowHandle(), TRUE);
-        int fLine = findLineOfTimeValue(fParser->calculateTime());
+        INT_PTR fLine = findLineOfTimeValue(fParser->calculateTime());
         if (fLine >= 0)
         {
             if (mSelectFoundLine)
@@ -613,6 +637,21 @@ INT_PTR SynchronizeTimeStamps::OnFindTime()
     return TRUE;
 }
 
+tstring toTime(const SYSTEMTIME& fST, WORD fMicrosecondPart)
+{
+	TCHAR szText[MAX_PATH];
+	if (fMicrosecondPart)
+	{
+		int fMicroseconds = fST.wMilliseconds * 1000 + fMicrosecondPart;
+		_stprintf(szText, _T("[%02d:%02d:%02d.%06d, %02d.%02d.%04d]"), fST.wHour, fST.wMinute, fST.wSecond, fMicroseconds, fST.wDay, fST.wMonth, fST.wYear);
+	}
+	else
+	{
+		_stprintf(szText, _T("[%02d:%02d:%02d.%03d, %02d.%02d.%04d]"), fST.wHour, fST.wMinute, fST.wSecond, fST.wMilliseconds, fST.wDay, fST.wMonth, fST.wYear);
+	}
+	return szText;
+}
+
 INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
 {
     TimeParser* fParser = getCurrentParser();
@@ -620,10 +659,9 @@ INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
     if (fParser)
     {
         SYSTEMTIME fST = getCtrlTime();
-        fParser->setSystemTime(fST);
+		auto fMicrosecondPart = static_cast<WORD>(getDlgItemInt(IDC_TXT_MICROSECONDS_PART));
+        fParser->setSystemTime(fST, fMicrosecondPart);
         int64_t fTime = fParser->calculateTime();
-
-        openTimeStampResults();
 
         std::vector<std::string> fFiles;
         if (bFolder)
@@ -636,11 +674,12 @@ INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
         }
 
         CTreeView fTree(mTimeStampResults->getDlgItem(IDC_TREE_FINDRESULTS));
-        TCHAR szText[MAX_PATH];
-        _stprintf(szText, _T("[%02d:%02d:%02d.%03d, %02d.%02d.%04d]"), fST.wHour, fST.wMinute, fST.wSecond, fST.wMilliseconds, fST.wDay, fST.wMonth, fST.wYear);
 
+		TCHAR szText[2048];
+
+		tstring fTimeString = toTime(fST, fMicrosecondPart);
         mMutex.lock();
-        HTREEITEM fTimeItem = fTree.insertTo(0, szText, SynchronizeTimeResults::TimeEntry);
+        HTREEITEM fTimeItem = fTree.insertTo(0, const_cast<TCHAR*>(fTimeString.c_str()), SynchronizeTimeResults::TimeEntry);
         mMutex.unlock();
 
         tstring fTstring1, fTstring2;
@@ -656,29 +695,24 @@ INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
                     mActiveFile = &fFile;
                     fParser = getCurrentParser();
                     mActiveFile = 0;
-                }
+                } 
                 
                 SearchLine fSearch(fFile, fParser);
-                int fLine = fSearch.searchLine(fTime);
+                size_t fLine = fSearch.searchLine(fTime);
                 if (fLine != -1)
                 {
-                    fFile.getLineText(fLine, fLineText);
-                    int64_t fDifference_ms = fSearch.getDifference();
-                    SYSTEMTIME fDifference = TimeParser::calcSystemTime(fDifference_ms);
-                    if (fDifference_ms > mMaxSearchDifference_ms) continue;
-#ifdef UNICODE
+                    fFile.getLineText(static_cast<uint32_t>(fLine), fLineText);
+                    int64_t fDifference_us = fSearch.getDifference();
+                    if (fDifference_us > mMaxSearchDifference_us) continue;
+					SYSTEMTIME fDifference = TimeParser::calcSystemTime(fDifference_us);
                     convertToUnicode(fFiles[i], fTstring1);
                     convertToUnicode(fLineText, fTstring2);
-#else
-                    fTstring1 = fFiles[i];
-                    fTstring2 = fLineText;
-#endif // UNICODE
                     {
                         AutoMutex fM(&mMutex);
                         HTREEITEM fFileItem = fTree.insertTo(fTimeItem, &fTstring1[0], SynchronizeTimeResults::FilenameEntry);
-                        _stprintf(szText, _T("Line %d: %s"), fLine + 1, fTstring2.c_str());
+                        _stprintf(szText, _T("Line %d: %s"), static_cast<int>(fLine + 1), fTstring2.c_str());
                         fTree.insertTo(fFileItem, szText, SynchronizeTimeResults::LineNoEntry);
-                        _stprintf(szText, _T("Difference: %02d:%02d:%02d.%03d"), 
+                        _stprintf(szText, _T("Difference: %02d:%02d:%02d.%06d"), 
                             fDifference.wHour, fDifference.wMinute, fDifference.wSecond, fDifference.wMilliseconds);
                         fTree.insertTo(fFileItem, szText, SynchronizeTimeResults::TimeDifference);
                     }
@@ -686,6 +720,7 @@ INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
             }
         }
         fTree.expandItems(TVE_EXPAND, fTimeItem);
+		::UpdateWindow(fTree.handle());
     }
     return TRUE;
 }
@@ -697,6 +732,15 @@ void SynchronizeTimeStamps::getFolderFiles(std::vector<std::string>& aFiles)
     mSearchInSubFolders = sendDlgItemMsg(IDC_CK_SEARCH_IN_SUBFOLDERS, BM_GETCHECK) == BST_CHECKED;
     getDlgItemText(IDC_EDT_FOLDER, fPath);
     getDlgItemText(IDC_EDT_WILDCARD, fWildcard);
+	if (fPath.empty())
+	{
+		getCurrentPathFileName(fPath);
+		int fLastBackslash =  static_cast<int>(fPath.rfind('\\'));
+		if (fLastBackslash != -1)
+		{
+			fPath = fPath.substr(0, fLastBackslash);
+		}
+	}
     EnumFiles fEnum(fPath, fWildcard, mSearchInSubFolders != 0);
     fEnum.enumFiles(aFiles);
 }
@@ -740,48 +784,49 @@ INT_PTR SynchronizeTimeStamps::OnSelectFolder()
         SetDlgItemText(_hSelf, IDC_EDT_FOLDER, fileNameStr.c_str());
     }
 #endif
-    return TRUE;
+	return TRUE;
 }
 
 
 void SynchronizeTimeStamps::openTimeStampResults()
 {
-    if (mTimeStampResults == NULL)
-    {
-        mTimeStampResults = new SynchronizeTimeResults();
-        mTimeStampResults->init(_hInst, nppData._nppHandle);
-    }
-    if (!mTimeStampResults->isCreated())
-    {
-        tTbData    data = { 0 };
-        mTimeStampResults->create(&data);
+	if (mTimeStampResults == NULL)
+	{
+		mTimeStampResults = new SynchronizeTimeResults();
+		mTimeStampResults->init(_hInst, nppData._nppHandle);
+	}
+	if (!mTimeStampResults->isCreated())
+	{
+		tTbData	data = { 0 };
+		mTimeStampResults->create(&data);
 
-        // define the default docking behaviour
-        data.uMask = DWS_DF_CONT_BOTTOM;
+		// define the default docking behaviour
+		data.uMask = DWS_DF_CONT_BOTTOM;
 
-        data.pszModuleName = mTimeStampResults->getPluginFileName();
-        _tcscat(data.pszName, _T(" Find Results"));
+		data.pszModuleName = mTimeStampResults->getPluginFileName();
+		_tcscat(data.pszName, _T(" Find Results"));
 
-        // the dlgDlg should be the index of funcItem where the current function pointer is
-        // in this case is DOCKABLE_DEMO_INDEX
-        data.dlgID = DisplayLogProfiler + 1;
-        ::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
-    }
-    mTimeStampResults->display();
+		// the dlgDlg should be the index of funcItem where the current function pointer is
+		// in this case is DOCKABLE_DEMO_INDEX
+		data.dlgID = DisplayLogProfiler + 1;
+		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	}
+	mTimeStampResults->display();
+	Sleep(100);
 }
 //
 // [%a %b %e %H:%M:%S %Y]
 // 
 INT_PTR SynchronizeTimeStamps::OnGetTime()
 {
-    std::string fTextLine;
+	std::string fTextLine;
     std::string fTimeFormatString;
     SYSTEMTIME fST;
     TimeParser* fParser = mTestParser.get();
-    int fLine = getCurrentLine();
-    setDlgItemInt(IDC_TXT_LINE, fLine + 1);
+    LRESULT fLine = getCurrentLine();
+    setDlgItemInt(IDC_TXT_LINE, static_cast<UINT>(fLine + 1));
     ScintillaWnd fWnd(getScintillaWindowHandle(), TRUE);
-    fWnd.getLineText(fLine, fTextLine);
+    fWnd.getLineText(static_cast<UINT>(fLine), fTextLine);
     getDlgItemText(IDC_EDT_TIME_FORMAT, fTimeFormatString);
 
     BOOL fFormatSet = FALSE;
@@ -800,21 +845,117 @@ INT_PTR SynchronizeTimeStamps::OnGetTime()
         BOOL fResult = fParser->parseTimeString(fTextLine);
         if (fResult)
         {
-            fParser->getSystemTime(fST);
+			WORD wMicroSecondPart = 0;
+            fParser->getSystemTime(fST, wMicroSecondPart);
+			if (!fParser->hasDate())
+			{
+				SYSTEMTIME fDate;
+				SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_GETSYSTEMTIME, 0, (LPARAM)&fDate);
+				fST.wYear  = fDate.wYear;
+				fST.wMonth = fDate.wMonth;
+				fST.wDay   = fDate.wDay;
+			}
+			if (fST.wYear == 0)
+			{
+				SYSTEMTIME fDate;
+				SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_GETSYSTEMTIME, 0, (LPARAM)&fDate);
+				fST.wYear = fDate.wYear;
+			}
+
             SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_SETSYSTEMTIME, GDT_VALID, (LPARAM)&fST);
             SendDlgItemMessageA(_hSelf, IDC_DATE, DTM_SETSYSTEMTIME, GDT_VALID, (LPARAM)&fST);
             setDlgItemInt(IDC_TXT_MILLISECONDS, fST.wMilliseconds);
-        }
+			setDlgItemInt(IDC_TXT_MICROSECONDS_PART, wMicroSecondPart);
+		}
         else
         {
+			TRACE(Logger::warning, "Could not parse %s", fTextLine.c_str());
             SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_GETSYSTEMTIME, 0, (LPARAM)&fST);
             fST.wHour   = 0;
             fST.wMinute = 0;
             fST.wSecond = 0;
             SendDlgItemMessageA(_hSelf, IDC_TIME, DTM_SETSYSTEMTIME, GDT_VALID, (LPARAM)&fST);
             setDlgItemInt(IDC_TXT_MILLISECONDS, 0);
-        }
+			setDlgItemInt(IDC_TXT_MICROSECONDS_PART, 0);
+		}
     }
     return TRUE;
+}
+
+INT_PTR SynchronizeTimeStamps::OnDiffTime()
+{
+	BOOL fTranslated { false };
+	LRESULT fStoredLine   = getDlgItemInt(IDC_TXT_LINE, FALSE, &fTranslated) - 1;
+	LRESULT fSelectedLine = getCurrentLine();
+	if (fTranslated && 	fStoredLine >= 0 && fSelectedLine != fStoredLine)
+	{
+		TimeParser* fParser = getCurrentParser();
+
+		if (fParser)
+		{
+			SYSTEMTIME fST = getCtrlTime();
+			fParser->setSystemTime(fST, static_cast<WORD>(getDlgItemInt(IDC_TXT_MICROSECONDS_PART)));
+			int64_t fStoredTime = fParser->calculateTime();
+			if (OnGetTime())
+			{
+				fST = getCtrlTime();
+				fParser->setSystemTime(fST, static_cast<WORD>(getDlgItemInt(IDC_TXT_MICROSECONDS_PART)));
+				int64_t fSelectedTime = fParser->calculateTime();
+				fSelectedLine = getCurrentLine();
+				if (fSelectedLine != fStoredLine)
+				{
+					// calculate difference
+					int64_t fDifference;
+					if (fStoredTime > fSelectedTime)
+					{
+						fDifference = fStoredTime - fSelectedTime;
+					}
+					else
+					{
+						fDifference = fSelectedTime - fStoredTime;
+					}
+
+					// convert difference to timestring
+					WORD fMicrosecondPart = 0;
+					fST = TimeParser::calcSystemTime(fDifference, &fMicrosecondPart);
+					tstring fTimeString = _T("Measured difference: ");
+					fTimeString += toTime(fST, fMicrosecondPart);
+
+					// get current file
+					ScintillaWnd fWnd(getScintillaWindowHandle(), TRUE);
+					std::string fPathFileName;
+					tstring fTFileString, fTStoredLineString, fTSelectedLineString;
+					getCurrentPathFileName(fPathFileName);
+					convertToUnicode(fPathFileName, fTFileString);
+
+					std::string fLineText;
+					fWnd.getLineText(static_cast<uint32_t>(fStoredLine), fLineText);
+					convertToUnicode(fLineText, fTStoredLineString);
+					fWnd.getLineText(static_cast<uint32_t>(fSelectedLine), fLineText);
+					convertToUnicode(fLineText, fTSelectedLineString);
+
+					CTreeView fTree(mTimeStampResults->getDlgItem(IDC_TREE_FINDRESULTS));
+					HTREEITEM fTimeItem;
+					{
+						TCHAR szText[2048];
+						AutoMutex fM(&mMutex);
+						fTimeItem = fTree.insertTo(0, const_cast<TCHAR*>(fTimeString.c_str()), SynchronizeTimeResults::TimeEntry);
+						HTREEITEM fFileItem = fTree.insertTo(fTimeItem, &fTFileString[0], SynchronizeTimeResults::FilenameEntry);
+						_stprintf(szText, _T("Line %d: %s"), static_cast<int>(fStoredLine + 1), fTStoredLineString.c_str());
+						fTree.insertTo(fFileItem, szText, SynchronizeTimeResults::LineNoEntry);
+						_stprintf(szText, _T("Line %d: %s"), static_cast<int>(fSelectedLine + 1), fTSelectedLineString.c_str());
+						fTree.insertTo(fFileItem, szText, SynchronizeTimeResults::LineNoEntry);
+					}
+					fTree.expandItems(TVE_EXPAND, fTimeItem);
+					::UpdateWindow(fTree.handle());
+				}
+			}
+		}
+	}
+	else
+	{
+		TRACE(Logger::to_function, "Calculate time difference between lines failed due to selected %d to stored %d line", fSelectedLine, fStoredLine);
+	}
+	return TRUE;
 }
 

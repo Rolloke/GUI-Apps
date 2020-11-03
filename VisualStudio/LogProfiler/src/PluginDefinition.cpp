@@ -37,9 +37,9 @@ namespace
 SynchronizeTimeStamps gSynchronizeTimeStamps;
 
 #ifdef UNICODE 
-    #define generic_itoa _itow
+	#define generic_itoa _itow
 #else
-    #define generic_itoa itoa
+	#define generic_itoa itoa
 #endif
 
 
@@ -88,9 +88,9 @@ LRESULT ScintillaWnd::sendMessage(UINT aMsg, WPARAM wParam, LPARAM aParam) const
 // It will be called while plugin loading   
 void pluginInit(HANDLE hModule)
 {
-    // Initialize dockable LogProfiler dialog
+	// Initialize dockable LogProfiler dialog
     gInstance = (HINSTANCE)hModule;
-    gSynchronizeTimeStamps.init((HINSTANCE)hModule, NULL);
+	gSynchronizeTimeStamps.init((HINSTANCE)hModule, NULL);
 }
 
 //
@@ -106,42 +106,42 @@ void pluginCleanUp()
 // You should fill your plugins commands here
 void commandMenuInit()
 {
-    //
-    // Firstly we get the parameters from your plugin config file (if any)
-    //
+	//
+	// Firstly we get the parameters from your plugin config file (if any)
+	//
 
-    // get path of plugin configuration
-    ::SendMessage(nppData._nppHandle, NPPM_GETPLUGINSCONFIGDIR, MAX_PATH, (LPARAM)iniFilePath);
+	// get path of plugin configuration
+	::SendMessage(nppData._nppHandle, NPPM_GETPLUGINSCONFIGDIR, MAX_PATH, (LPARAM)iniFilePath);
 
-    // if config path doesn't exist, we create it
-    if (PathFileExists(iniFilePath) == FALSE)
-    {
-        ::CreateDirectory(iniFilePath, NULL);
-    }
+	// if config path doesn't exist, we create it
+	if (PathFileExists(iniFilePath) == FALSE)
+	{
+		::CreateDirectory(iniFilePath, NULL);
+	}
 
-    // make your plugin config file full file path name
-    PathAppend(iniFilePath, configFileName);
+	// make your plugin config file full file path name
+	PathAppend(iniFilePath, configFileName);
 
-    // get the parameter value from plugin config
-    //    doCloseTag = (::GetPrivateProfileInt(sectionName, keyName, 0, iniFilePath) != 0);
+	// get the parameter value from plugin config
+    //	doCloseTag = (::GetPrivateProfileInt(sectionName, keyName, 0, iniFilePath) != 0);
 
     //--------------------------------------------//
     //-- STEP 3. CUSTOMIZE YOUR PLUGIN COMMANDS --//
     //--------------------------------------------//
     // with function :
-    // setCommand(int index,                      // zero based number to indicate the order of command
+    // setCommand(INT_PTR index,                      // zero based number to indicate the order of command
     //            TCHAR *commandName,             // the command name that you want to see in plugin menu
     //            PFUNCPLUGINCMD functionPointer, // the symbol of function (function pointer) associated with this command. The body should be defined below. See Step 4.
     //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
     setCommand(About, TEXT("About"), AboutLogProfiler, NULL, false);
-    // Here you insert a separator
-    setCommand(Separator1, TEXT("---"), NULL, NULL, false);
+	// Here you insert a separator
+	setCommand(Separator1, TEXT("---"), NULL, NULL, false);
 
-    setCommand(DisplayLogProfiler, TEXT("Display Log Profiler"), displayLogProfiler, NULL, false);
+	setCommand(DisplayLogProfiler, TEXT("Display Log Profiler"), displayLogProfiler, NULL, false);
 
-    setCommand(DisplayProfilerResults, TEXT("Display Profiler Results"), displayProfilerResults, NULL, false);
+	setCommand(DisplayProfilerResults, TEXT("Display Profiler Results"), displayProfilerResults, NULL, false);
 }
 
 void AboutLogProfiler()
@@ -155,7 +155,7 @@ void AboutLogProfiler()
 //
 void commandMenuCleanUp()
 {
-    // Don't forget to deallocate your shortcut here
+	// Don't forget to deallocate your shortcut here
 
 }
 
@@ -188,17 +188,28 @@ TCHAR* getIniFilePath()
     return iniFilePath;
 }
 
+#ifndef UNICODE
+void   convertToUnicode(const std::string& aSource, std::string& aDest)
+{
+	aDest = aSource;
+}
+void convertToMBCS(const std::string& aSource, std::string& aDest)
+{
+	aDest = aSource;
+}
+#endif
+
 void convertToUnicode(const std::string& aSource, std::wstring& aDest)
 {
     aDest.resize(aSource.size());
-    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), aSource.size(), &aDest[0], aDest.size());
+    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()));
     aDest.resize(wcslen(aDest.c_str()));
 }
 
 void convertToMBCS(const std::wstring& aSource, std::string& aDest)
 {
     aDest.resize(aSource.size() * 2);
-    ::WideCharToMultiByte(CP_ACP, 0, aSource.c_str(), aSource.size(), &aDest[0], aDest.size(), NULL, NULL);
+    ::WideCharToMultiByte(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()), NULL, NULL);
     aDest.resize(strlen(aDest.c_str()));
 }
 
@@ -223,8 +234,8 @@ bool ScintillaWnd::getLineText(uint32_t aLine, std::string& aLineText) const
     {
         Sci_TextRange fTextRange;
 
-        fTextRange.chrg.cpMin = sendMessage(SCI_POSITIONFROMLINE, aLine);
-        int fLineLength = sendMessage(SCI_LINELENGTH, aLine);
+        fTextRange.chrg.cpMin = static_cast<long>(sendMessage(SCI_POSITIONFROMLINE, aLine));
+        long fLineLength = static_cast<long>(sendMessage(SCI_LINELENGTH, aLine));
         fTextRange.chrg.cpMax = fTextRange.chrg.cpMin + fLineLength;
         aLineText.resize(fLineLength + 1);
         fTextRange.lpstrText = &aLineText[0];
@@ -233,18 +244,18 @@ bool ScintillaWnd::getLineText(uint32_t aLine, std::string& aLineText) const
     return false;
 }
 
-BOOL ScintillaWnd::selectLine(int aLine)
+BOOL ScintillaWnd::selectLine(INT_PTR aLine)
 {
     if (aLine >= 0 )
     {
-        int fPos = sendMessage(SCI_POSITIONFROMLINE, aLine);
-        int fLineLength = sendMessage(SCI_LINELENGTH, aLine);
+        INT_PTR fPos = sendMessage(SCI_POSITIONFROMLINE, aLine);
+        INT_PTR fLineLength = sendMessage(SCI_LINELENGTH, aLine);
         return sendMessage(SCI_SETSEL, fPos, fPos + fLineLength - 1) >= 0;
     }
     return FALSE;
 }
 
-BOOL ScintillaWnd::defineMarker(int aMarker, int aSymbol, COLORREF aForeground, COLORREF aBackground)
+BOOL ScintillaWnd::defineMarker(INT_PTR aMarker, INT_PTR aSymbol, COLORREF aForeground, COLORREF aBackground)
 {
     if (aForeground != -1)
     {
@@ -257,7 +268,7 @@ BOOL ScintillaWnd::defineMarker(int aMarker, int aSymbol, COLORREF aForeground, 
     return sendMessage(SCI_MARKERDEFINE, aMarker, aSymbol) >= 0;
 }
 
-BOOL ScintillaWnd::setMarker(int aMarker, BOOL aSet, int aLine)
+BOOL ScintillaWnd::setMarker(INT_PTR aMarker, BOOL aSet, INT_PTR aLine)
 {
     if (aLine >= 0)
     {
@@ -275,9 +286,9 @@ BOOL ScintillaWnd::setMarker(int aMarker, BOOL aSet, int aLine)
     }
 }
 
-BOOL ScintillaWnd::gotoMarker(int aMarker, BOOL aPrevious)
+BOOL ScintillaWnd::gotoMarker(INT_PTR aMarker, BOOL aPrevious)
 {
-    int fLine = sendMessage(SCI_LINEFROMPOSITION, sendMessage(SCI_GETCURRENTPOS));
+    INT_PTR fLine = sendMessage(SCI_LINEFROMPOSITION, sendMessage(SCI_GETCURRENTPOS));
     if (aPrevious) fLine--;
     else           fLine++;
     uint32_t fMarkerMask = aMarker == -1 ? 0xffff : 1 << aMarker;
@@ -289,7 +300,7 @@ BOOL ScintillaWnd::gotoMarker(int aMarker, BOOL aPrevious)
     return FALSE;
 }
 
-BOOL ScintillaWnd::gotoLine(int aLine)
+BOOL ScintillaWnd::gotoLine(INT_PTR aLine)
 {
     if (aLine >= 0)
     {
@@ -310,52 +321,52 @@ void  ScintillaWnd::setReadOnly(BOOL bReadOnly)
 }
 
 
-int countOpenFiles(int aFlag)
+INT_PTR countOpenFiles(INT_PTR aFlag)
 {
-    return (int)::SendMessage(nppData._nppHandle, NPPM_GETNBOPENFILES, aFlag, 0);
+    return ::SendMessage(nppData._nppHandle, NPPM_GETNBOPENFILES, aFlag, 0);
 }
 
-int getOpenFiles(std::vector<std::string>* aFiles, std::vector<std::wstring>* aFilesU, int aFlag)
+INT_PTR getOpenFiles(std::vector<std::string>* aFiles, std::vector<std::wstring>* aFilesU, INT_PTR aFlag)
 {
-    int fFiles = countOpenFiles(aFlag);
+    INT_PTR fFiles = countOpenFiles(aFlag);
     TCHAR **fileNames = (TCHAR **)new TCHAR*[fFiles];
 
-    for (int i = 0; i < fFiles; ++i)
+    for (INT_PTR i = 0; i < fFiles; ++i)
     {
         fileNames[i] = new TCHAR[MAX_PATH];
     }
 
     if (::SendMessage(nppData._nppHandle, NPPM_GETOPENFILENAMES, (WPARAM)fileNames, (LPARAM)fFiles))
     {
-        for (int i = 0; i < fFiles; ++i)
+        for (INT_PTR i = 0; i < fFiles; ++i)
         {
 #ifdef UNICODE
-            if (aFiles)
-            {
-                std::string fFileName;
-                convertToMBCS(fileNames[i], fFileName);
-                aFiles->push_back(fFileName);
-            }
-            if (aFilesU)
-            {
-                aFilesU->push_back(fileNames[i]);
-            }
+			if (aFiles)
+			{
+				std::string fFileName;
+				convertToMBCS(fileNames[i], fFileName);
+				aFiles->push_back(fFileName);
+			}
+			if (aFilesU)
+			{
+				aFilesU->push_back(fileNames[i]);
+			}
 #else
-            if (aFiles)
-            {
-                aFiles->push_back(fileNames[i]);
-            }
-            if (aFilesU)
-            {
-                std::wstring fFileName;
-                convertToUnicode(fileNames[i], fFileName);
-                aFilesU->push_back(fFileName);
-            }
+			if (aFiles)
+			{
+				aFiles->push_back(fileNames[i]);
+			}
+			if (aFilesU)
+			{
+				std::wstring fFileName;
+				convertToUnicode(fileNames[i], fFileName);
+				aFilesU->push_back(fFileName);
+			}
 #endif 
         }
     }
 
-    for (int i = 0; i < fFiles; ++i)
+    for (INT_PTR i = 0; i < fFiles; ++i)
     {
         delete[] fileNames[i];
     }
@@ -375,12 +386,7 @@ void   getCurrentPathFileName(std::string& aPathFileName)
 {
     TCHAR path[MAX_PATH];
     ::SendMessage(nppData._nppHandle, NPPM_GETFULLCURRENTPATH, MAX_PATH, (LPARAM)path);
-    
-#ifdef UNICODE
-    convertToMBCS(path, aPathFileName);
-#else
-    aPathFileName = path;
-#endif
+	convertToMBCS(path, aPathFileName);
 }
 
 
@@ -392,28 +398,28 @@ void   getCurrentPathFileName(std::string& aPathFileName)
 // - please see DemoDlg.h and DemoDlg.cpp to have more informations.
 void displayLogProfiler()
 {
-    gSynchronizeTimeStamps.setParent(nppData._nppHandle);
-    tTbData    data = {0};
+	gSynchronizeTimeStamps.setParent(nppData._nppHandle);
+	tTbData	data = {0};
 
-    if (!gSynchronizeTimeStamps.isCreated())
-    {
-        gSynchronizeTimeStamps.create(&data);
+	if (!gSynchronizeTimeStamps.isCreated())
+	{
+		gSynchronizeTimeStamps.create(&data);
 
-        // define the default docking behaviour
-        data.uMask = DWS_DF_CONT_RIGHT;
+		// define the default docking behaviour
+		data.uMask = DWS_DF_CONT_RIGHT;
 
-        data.pszModuleName = gSynchronizeTimeStamps.getPluginFileName();
+		data.pszModuleName = gSynchronizeTimeStamps.getPluginFileName();
 
-        // the dlgDlg should be the index of funcItem where the current function pointer is
-        // in this case is DOCKABLE_DEMO_INDEX
-        data.dlgID = DisplayLogProfiler;
-        ::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
-    }
-    gSynchronizeTimeStamps.display();
+		// the dlgDlg should be the index of funcItem where the current function pointer is
+		// in this case is DOCKABLE_DEMO_INDEX
+		data.dlgID = DisplayLogProfiler;
+		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	}
+	gSynchronizeTimeStamps.display();
 }
 
 
 void displayProfilerResults()
 {
-    gSynchronizeTimeStamps.openTimeStampResults();
+	gSynchronizeTimeStamps.openTimeStampResults();
 }

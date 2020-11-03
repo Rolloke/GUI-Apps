@@ -47,14 +47,14 @@ public :
     virtual ~StaticDialog();
 
     virtual void create(int dialogID, bool isRTL = false);
-    int doModal(int dialogID);
+	INT_PTR doModal(int dialogID);
 
     virtual bool isCreated() const
     {
-        return (_hSelf != NULL);
-    };
+		return (_hSelf != NULL);
+	};
 
-    void goToCenter();
+	void goToCenter();
     void destroy();
     HWND getDlgItem(int aID);
 
@@ -68,11 +68,11 @@ protected :
     BOOL addToolTip(UINT aID, TCHAR* aText=0);
 
     RECT _rc;
-    static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+	static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 
     void alignWith(HWND handle, HWND handle2Align, PosAlign pos, POINT & point);
-    HGLOBAL makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplate);
+	HGLOBAL makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplate);
 private:
     HWND mHwndTip;
     std::vector<tstring> mHelpStrings;
@@ -113,7 +113,9 @@ public:
     HTREEITEM getItem(DWORD aGet = TVGN_CARET, HTREEITEM parent = TVI_ROOT);
 
     void      getItemText(HTREEITEM parent, tstring& aText, int &aImage);
+	void      getItemImage(HTREEITEM parent, int& aImage);
     BOOL      deleteItem(HTREEITEM parent = TVI_ROOT);
+	HWND      handle();
 private:
     HWND        mHwnd;
 };

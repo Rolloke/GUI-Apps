@@ -1,4 +1,7 @@
-#include "./DockingFeature/DockingDlgInterface.h"
+#ifndef FINDER_H
+#define FINDER_H
+
+#include "DockingFeature/DockingDlgInterface.h"
 #include "PluginInterface.h"
 #include <string>
 #include <vector>
@@ -92,3 +95,5 @@ private:
 	static FoundInfo EmptyFoundInfo;
 	static SearchResultMarking EmptySearchResultMarking;
 };
+
+#endif // FINDER_H

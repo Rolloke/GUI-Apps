@@ -21,7 +21,7 @@ public Q_SLOTS:
     void operate(int aInt);
 
 private:
-    boost::function< void (int) > mWorkerFunction;
+    std::function< void (int) > mWorkerFunction;
 };
 
 

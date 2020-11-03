@@ -46,30 +46,31 @@ public :
             ::SetFocus(::GetDlgItem(_hSelf, IDC_BTN_GET_TIME));
     };
 
-    void setParent(HWND parent2set){
-        _hParent = parent2set;
-    };
+	void setParent(HWND parent2set){
+		_hParent = parent2set;
+	};
 
-    void openTimeStampResults();
+	void openTimeStampResults();
 
 protected :
-    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
+	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
 private :
 
     INT_PTR OnInitDialog();
     INT_PTR OnGetTime();
     INT_PTR OnFindTime();
-    INT_PTR OnInsertFormat();
+	INT_PTR OnDiffTime();
+	INT_PTR OnInsertFormat();
     INT_PTR OnDeleteFormat();
     INT_PTR OnCkSelectLine();
     INT_PTR OnCkBookmarkLine();
     INT_PTR OnBtnNextBookmark();
     INT_PTR OnBtnPreviousBookmark();
-    INT_PTR OnBtnDeleteBookmarks();
-    INT_PTR OnBtnDeleteCurrentBookmark();
+	LRESULT OnBtnDeleteBookmarks();
+	LRESULT OnBtnDeleteCurrentBookmark();
     INT_PTR OnBtnHelp();
-    INT_PTR OnSelectFolder();
+	INT_PTR OnSelectFolder();
     INT_PTR OnStopAllThreads();
     INT_PTR OnSyncronizeFolder();
     INT_PTR OnSyncronizeOpenFiles();
@@ -83,11 +84,10 @@ private :
     INT_PTR OnWmNotify(UINT aID, NMHDR* pNmHdr);
     INT_PTR OnWmDestroy();
     INT_PTR OnWmHelp(HELPINFO* aHelp);
-    INT_PTR OnRemoveThread(UINT aID);
 
 
-    int  getCurrentLine() const;
-    int  findLineOfTimeValue(int64_t aTimeValue);
+	LRESULT  getCurrentLine() const;
+    INT_PTR  findLineOfTimeValue(int64_t aTimeValue);
     TimeParser* getCurrentParser();
     TimeParser* findDocParser();
     void        removeDocParser(TimeParser* aParser);
@@ -106,7 +106,7 @@ private :
     BOOL              mUseThreads;
     int               mLineLimit;
     BOOL              mSearchInSubFolders;
-    int64_t           mMaxSearchDifference_ms;
+    int64_t           mMaxSearchDifference_us;
 
     TextFile*                   mActiveFile;
     ParserToFormatMap::iterator mLastFoundParser;

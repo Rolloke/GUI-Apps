@@ -198,7 +198,7 @@ void CArithmetic::deleteAll()
 
 CArithmetic::tVarMap& CArithmetic::getVarMap()
 {
-    if (not mVarMap)
+    if (! mVarMap)
     {
         mVarMap = std::make_shared<tVarMap>();
     }
@@ -526,11 +526,11 @@ std::complex<double> CArithmetic::calc(const tArithmaNode& aNode)
             throw (int)IDE_AR_OUTOFRANGE;
 
 #ifdef ARCUS_COMPLEX
-        case  IDO_AR_ATAN  : return std::complex<double>(0.5*Logn((1.0+fB) / (1.0-fB))*gm_AngleFrom, 0);
+        case  IDO_AR_ATAN  : return (0.5*Logn((1.0+fB) / (1.0-fB)))*gm_AngleFrom;
             throw (int)IDE_AR_OUTOFRANGE;
-        case  IDO_AR_ASIN  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return casin(fB)*gm_AngleFrom;
+        case  IDO_AR_ASIN  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return asin(fB)*gm_AngleFrom;
             throw (int)IDE_AR_OUTOFRANGE;
-        case  IDO_AR_ACOS  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return cacos(fB)*gm_AngleFrom;
+        case  IDO_AR_ACOS  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return acos(fB)*gm_AngleFrom;
             throw (int)IDE_AR_OUTOFRANGE;
 #endif
         default:
@@ -595,17 +595,17 @@ std::complex<double> CArithmetic::calc(const tArithmaNode& aNode)
         case  IDO_AR_BESS1 :
         {
             int n = (int)round(fA.real());
-            if      (n==0) return std::complex<double>(j0(fB.real()), 0);
-            else if (n==1) return std::complex<double>(j1(fB.real()), 0);
-            else if (n>=2) return std::complex<double>(jn(n, fB.real()), 0);
+            if      (n==0) return std::complex<double>(_j0(fB.real()), 0);
+            else if (n==1) return std::complex<double>(_j1(fB.real()), 0);
+            else if (n>=2) return std::complex<double>(_jn(n, fB.real()), 0);
             throw (int)IDE_AR_OUTOFRANGE;
         }
         case  IDO_AR_BESS2 :
         {
             int n = (int)round(fA.real());
-            if      (n==0) return std::complex<double>(y0(fB.real()), 0);
-            else if (n==1) return std::complex<double>(y1(fB.real()), 0);
-            else if (n>=2) return std::complex<double>(yn(n, fB.real()), 0);
+            if      (n==0) return std::complex<double>(_y0(fB.real()), 0);
+            else if (n==1) return std::complex<double>(_y1(fB.real()), 0);
+            else if (n>=2) return std::complex<double>(_yn(n, fB.real()), 0);
             throw (int)IDE_AR_OUTOFRANGE;
         }
 #endif
@@ -613,8 +613,8 @@ std::complex<double> CArithmetic::calc(const tArithmaNode& aNode)
         case IDO_AR_COMPLEX:    return std::complex<double>(fA.real(), fB.real());
         case IDO_AR_COMPLEX_AP: return ComplexAP(fA.real(), fB.real()*gm_AngleTo);
         case IDO_AR_PHASE:      case IDO_AR_IMAG: return std::complex<double>(0, 0);
-        case IDO_AR_MIN:        return std::complex<double>(std::min(fA.real(), fB.real()), 0);
-        case IDO_AR_MAX:        return std::complex<double>(std::max(fA.real(), fB.real()), 0);
+        case IDO_AR_MIN:        return std::complex<double>(fmin(fA.real(), fB.real()), 0);
+        case IDO_AR_MAX:        return std::complex<double>(fmax(fA.real(), fB.real()), 0);
         }
     }
     return 1;

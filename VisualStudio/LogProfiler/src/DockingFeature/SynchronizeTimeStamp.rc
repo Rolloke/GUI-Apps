@@ -1,67 +1,60 @@
-/*
-this file is part of notepad++
-Copyright (C)2003 Don HO ( donho@altern.org )
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either
-version 2 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-*/
-
-#include <windows.h>
+// Microsoft Visual C++ generated resource script.
+//
 #include "resource.h"
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
 
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
 
-IDD_SYNCHRONIZE_TIMESTAMPS DIALOGEX 26, 41, 119, 136
-STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SYNCHRONIZE_TIMESTAMPS DIALOGEX 26, 41, 129, 437
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
 CAPTION "Logfile Time Stamp Profiler"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    PUSHBUTTON      "Get Time", IDC_BTN_GET_TIME, 4, 1, 58, 14
-    PUSHBUTTON      "Find Time", IDC_BTN_FIND_TIME, 68, 1, 58, 14
-    LTEXT           "Date: ", IDC_STATIC, 8, 21, 24, 8
-    CONTROL         "", IDC_DATE, "SysDateTimePick32", DTS_RIGHTALIGN | DTS_APPCANPARSE | WS_TABSTOP, 36, 18, 52, 15
-    LTEXT           "Line:", IDC_STATIC, 94, 17, 26, 8
-    LTEXT           "", IDC_TXT_LINE, 95, 25, 25, 8
-    LTEXT           "Time:", IDC_STATIC, 8, 39, 24, 8
-    CONTROL         "", IDC_TIME, "SysDateTimePick32", DTS_RIGHTALIGN | DTS_UPDOWN | DTS_APPCANPARSE | WS_TABSTOP | 0x8, 35, 36, 54, 15
-    EDITTEXT        IDC_TXT_MILLISECONDS, 90, 38, 20, 12, ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "ms", IDC_STATIC, 113, 39, 12, 8
-    GROUPBOX        "Mark found time stamps by", IDC_STATIC, 4, 56, 121, 67
-    CONTROL         "Line Selection", IDC_CK_SELECT_LINE, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 8, 66, 71, 10
-    CONTROL         "Line Bookmark", IDC_CK_BOOKMARK_LINE, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 8, 77, 67, 10
-    EDITTEXT        IDC_EDT_BOOKMARK, 92, 70, 17, 14, ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "", IDC_SPIN_BOOKMARK, "msctls_updown32", UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 110, 70, 11, 14
-    PUSHBUTTON      "Previous", IDC_BTN_PREVIOUS_BOOKMARK, 8, 88, 54, 14
-    PUSHBUTTON      "Next", IDC_BTN_NEXT_BOOKMARK, 68, 88, 54, 14
-    PUSHBUTTON      "Delete All", IDC_BTN_DELETE_BOOKMARKS, 8, 104, 54, 14
-    PUSHBUTTON      "Delete Current", IDC_BTN_DELETE_CURRENT_BOOKMARK, 68, 104, 54, 14
-    LTEXT           "Test Time Format with 'Get Time'", IDC_STATIC, 4, 124, 121, 8
-    EDITTEXT        IDC_EDT_TIME_FORMAT, 4, 133, 121, 14, ES_AUTOHSCROLL
-    PUSHBUTTON      "Insert", IDC_BTN_INSERT, 4, 149, 58, 14
-    PUSHBUTTON      "Delete", IDC_BTN_DELETE, 68, 149, 58, 14
-    CONTROL         "", IDC_LIST_TIME_FORMAT, "SysListView32", LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP, 4, 165, 121, 76
-    PUSHBUTTON      "Help", IDC_BTN_HELP, 4, 243, 58, 14
-    PUSHBUTTON      "Stop All", IDC_BTN_STOP_ALL, 67, 243, 58, 14, WS_DISABLED
-    PUSHBUTTON      "Synchronize all open Documents", IDC_BTN_SYNCHRONIZE, 4, 259, 122, 14
-    LTEXT           "Enter Folder with Files to synchronize", IDC_STATIC, 4, 275, 122, 8
-    EDITTEXT        IDC_EDT_FOLDER, 4, 285, 111, 14, ES_AUTOHSCROLL
-    PUSHBUTTON      ">>", IDC_BTN_SELECT_FOLDER, 115, 285, 12, 14
-    CONTROL         "Search in subfolders", IDC_CK_SEARCH_IN_SUBFOLDERS,
-    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 4, 302, 122, 10
-    LTEXT           "Wildcard (*.*):", IDC_STATIC, 4, 316, 58, 8
-    EDITTEXT        IDC_EDT_WILDCARD, 68, 314, 58, 14, ES_AUTOHSCROLL
-    PUSHBUTTON      "Synchronize Folder Files", IDC_BTN_SYNCHRONIZE_FOLDER, 4, 330, 122, 14
+    LTEXT           "Time:", IDC_STATIC, 5, 4, 24, 8
+    PUSHBUTTON      "Get",IDC_BTN_GET_TIME,34,1,41,14
+    PUSHBUTTON      "Find",IDC_BTN_FIND_TIME,85,1,40,14
+    CONTROL         "",IDC_DATE,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_APPCANPARSE | WS_TABSTOP,5,18,52,15
+    CONTROL         "",IDC_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | DTS_APPCANPARSE | WS_TABSTOP | 0x8,71,18,54,15
+    EDITTEXT        IDC_TXT_MILLISECONDS,58,34,23,12,ES_AUTOHSCROLL | ES_NUMBER
+	LTEXT           "ms", IDC_STATIC, 85, 35, 12, 8
+	EDITTEXT        IDC_TXT_MICROSECONDS_PART, 101, 34, 23, 12, ES_AUTOHSCROLL | ES_NUMBER
+	PUSHBUTTON      "Diff to ", IDC_BTN_DIFF_TIME, 5, 49, 47, 14
+	LTEXT           "Line:", IDC_STATIC, 59, 52, 26, 8
+	LTEXT           "", IDC_TXT_LINE, 100, 52, 25, 8
+    GROUPBOX        "Mark found time stamps by",IDC_STATIC,4,66,121,67
+    CONTROL         "Line Selection",IDC_CK_SELECT_LINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,76,71,10
+    CONTROL         "Line Bookmark",IDC_CK_BOOKMARK_LINE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,87,67,10
+    EDITTEXT        IDC_EDT_BOOKMARK,92,80,17,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_SPIN_BOOKMARK,"msctls_updown32",UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,80,11,14
+    PUSHBUTTON      "Previous",IDC_BTN_PREVIOUS_BOOKMARK,8,98,54,14
+    PUSHBUTTON      "Next",IDC_BTN_NEXT_BOOKMARK,68,98,54,14
+    PUSHBUTTON      "Delete All",IDC_BTN_DELETE_BOOKMARKS,8,114,54,14
+    PUSHBUTTON      "Delete Current",IDC_BTN_DELETE_CURRENT_BOOKMARK,68,114,54,14
+    LTEXT           "Test Time Format with 'Get Time'",IDC_STATIC,4,134,121,8
+    EDITTEXT        IDC_EDT_TIME_FORMAT,4,143,121,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Insert",IDC_BTN_INSERT,4,159,58,14
+    PUSHBUTTON      "Delete",IDC_BTN_DELETE,68,159,58,14
+    CONTROL         "",IDC_LIST_TIME_FORMAT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,4,175,121,76
+    PUSHBUTTON      "Help",IDC_BTN_HELP,4,253,58,14
+    PUSHBUTTON      "Stop All",IDC_BTN_STOP_ALL,67,253,58,14,WS_DISABLED
+    PUSHBUTTON      "Synchronize all open Documents",IDC_BTN_SYNCHRONIZE,4,269,122,14
+    LTEXT           "Enter Folder with Files to synchronize",IDC_STATIC,4,285,122,8
+    EDITTEXT        IDC_EDT_FOLDER,4,295,111,14,ES_AUTOHSCROLL
+    PUSHBUTTON      ">>",IDC_BTN_SELECT_FOLDER,117,295,12,14
+    CONTROL         "Search in subfolders",IDC_CK_SEARCH_IN_SUBFOLDERS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,4,312,122,10
+    LTEXT           "Wildcard (*.*):",IDC_STATIC,5,328,58,8
+    EDITTEXT        IDC_EDT_WILDCARD,68,324,58,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Synchronize Folder Files",IDC_BTN_SYNCHRONIZE_FOLDER,4,340,122,14
 END
 
 IDD_TIME_STAMP_FIND_RESULTS DIALOGEX 26, 41, 119, 136
@@ -70,50 +63,131 @@ EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
 CAPTION "Logfile Time Stamp Profiler"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    PUSHBUTTON      "Clear All", IDC_BTN_CLEAR, 5, 5, 60, 14
-    PUSHBUTTON      "Delete Entry", IDC_BTN_DELETE_ENTRY, 5, 26, 60, 14
-    CONTROL         "", IDC_TREE_FINDRESULTS, "SysTreeView32", WS_BORDER | WS_HSCROLL | WS_TABSTOP | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 70, 5, 100, 100
+    PUSHBUTTON      "Clear All",IDC_BTN_CLEAR,5,5,60,14
+    PUSHBUTTON      "Delete Entry",IDC_BTN_DELETE_ENTRY,5,26,60,14
+    CONTROL         "",IDC_TREE_FINDRESULTS,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_HSCROLL | WS_TABSTOP,70,5,100,100
 END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU| WS_VISIBLE
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "About Log Profiler"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    LTEXT           "LogProfiler, Version 1.0", IDC_STATIC, 42, 14, 114, 8, SS_NOPREFIX
-    LTEXT           "Copyright (C) 2017 RKE-Soft", IDC_STATIC, 42, 26, 114, 8
-    DEFPUSHBUTTON   "OK", IDOK, 113, 41, 50, 14, WS_GROUP
+    LTEXT           "LogProfiler, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2017 RKE-Soft",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+    "windows.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_SYNCHRONIZE_TIMESTAMPS, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SYNCHRONIZE_TIMESTAMPS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDC_TIME                "According time"
+    IDC_BTN_GET_TIME        "Determines the according time of text line of cursor position in the log file"
+    IDC_DATE                "According date"
+    IDC_BTN_FIND_TIME       "Searches the line with the nearest according time in the log file"
+    IDC_BTN_SYNCHRONIZE     "Find Time in all open Documents"
+    IDC_LIST_TIME_FORMAT    "List of valid time format strings"
+    IDC_EDT_TIME_FORMAT     "Insert a new time format string (see Help)"
+    IDC_BTN_INSERT          "Insert the valid time format string"
+    IDC_BTN_DELETE          "Deletes a selected time format string from the list"
+    IDC_CK_SELECT_LINE      "Selects the found line"
+    IDC_CK_BOOKMARK_LINE    "Sets a Bookmark for the found line"
 END
 
 STRINGTABLE
 BEGIN
-    IDC_EDT_TIME_FORMAT         "Insert a new time format string (see Help)"
-    IDC_BTN_GET_TIME            "Determines the according time of text line of cursor position in the log file"
-    IDC_BTN_FIND_TIME           "Searches the line with the nearest according time in the log file"
-    IDC_DATE                    "According date"
-    IDC_TXT_LINE                "According line"
-    IDC_TIME                    "According time"
-    IDC_TXT_MILLISECONDS        "According milliseconds"
-    IDC_CK_SELECT_LINE          "Selects the found line"
-    IDC_CK_BOOKMARK_LINE        "Sets a Bookmark for the found line"
-    IDC_EDT_BOOKMARK            "Select annother Bookmark image (0,..,15)"
-    IDC_SPIN_BOOKMARK           "Select annother Bookmark image (0,..,15)"
-    IDC_BTN_NEXT_BOOKMARK       "Navigate to next Bookmark"
-    IDC_BTN_PREVIOUS_BOOKMARK   "Navigate to previous Bookmark"
-    IDC_BTN_DELETE_BOOKMARKS    "Delete all Bookmarks"
-    IDC_BTN_DELETE_CURRENT_BOOKMARK "Delete Bookmark in selected line"
-    IDC_BTN_INSERT              "Insert the valid time format string"
-    IDC_BTN_DELETE              "Deletes a selected time format string from the list"
-    IDC_LIST_TIME_FORMAT        "List of valid time format strings"
-    IDC_BTN_HELP                "Shows help"
-    IDC_BTN_SYNCHRONIZE         "Find Time in all open Documents"
-    IDC_EDT_FOLDER                "Enter the Folder to search in"
-    IDC_BTN_SELECT_FOLDER        "Select the Folder..."
-    IDC_EDT_WILDCARD            "Enter a Wildcard "
-    IDC_BTN_SYNCHRONIZE_FOLDER    "Synchronize Time Stamps in Files of given Folder"
+    IDC_BTN_NEXT_BOOKMARK   "Navigate to next Bookmark"
+    IDC_BTN_PREVIOUS_BOOKMARK "Navigate to previous Bookmark"
+    IDC_BTN_DELETE_BOOKMARKS "Delete all Bookmarks"
+    IDC_EDT_BOOKMARK        "Select annother Bookmark image (0,..,15)"
+    IDC_SPIN_BOOKMARK       "Select annother Bookmark image (0,..,15)"
+    IDC_TXT_LINE            "According line"
+    IDC_TXT_MILLISECONDS    "According milliseconds"
+	IDC_TXT_MICROSECONDS_PART "According microseconds part"
+    IDC_BTN_HELP            "Shows help"
+    IDC_EDT_FOLDER          "Enter the Folder to search in. Leave empty to search in folder of current file."
+    IDC_BTN_SELECT_FOLDER   "Select the Folder..."
+    IDC_EDT_WILDCARD        "Enter a Wildcard "
+    IDC_BTN_SYNCHRONIZE_FOLDER 
+                            "Synchronize Time Stamps in Files of given Folder"
     IDC_CK_SEARCH_IN_SUBFOLDERS "Search in all Subfolders"
-    IDC_BTN_STOP_ALL            "Stops all running Threads"
-    IDC_BTN_CLEAR               "Clears all Search Results"
-    IDC_BTN_DELETE_ENTRY        "Deletes selected Entry"
-    IDC_TREE_FINDRESULTS        "Shows all Profiler search Results"
+    IDC_BTN_STOP_ALL        "Stops all running Threads"
+    IDC_BTN_DELETE_CURRENT_BOOKMARK "Delete Bookmark in selected line"
+	IDC_BTN_DIFF_TIME       "Determines the time difference betweeen selected and displayed line. Press Button 'Get' first to select the displayed line."
+	IDC_TREE_FINDRESULTS    "Shows all Profiler search Results"
+	IDC_BTN_CLEAR           "Clears all Search Results"
+	IDC_BTN_DELETE_ENTRY    "Deletes selected Entry"
 END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

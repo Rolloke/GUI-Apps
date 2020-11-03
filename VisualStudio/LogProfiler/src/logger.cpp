@@ -6,13 +6,13 @@
 #include <windows.h>
 #endif
 #include <stdarg.h>
-#include <stdio.h>
 #include "logger.h"
+#include "PluginDefinition.h"
 
 
 using namespace std;
 
-std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::info | Logger::to_syslog | Logger::to_function;
+std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
 string Logger::mLogdir("/tmp");
 Logger::tLogfunction Logger::mLogFunction;
@@ -22,14 +22,6 @@ namespace
 {
 HANDLE hEventLog = nullptr;
 }
-
-void convertToUnicode(const std::string& aSource, std::wstring& aDest)
-{
-    aDest.resize(aSource.size());
-    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()));
-    aDest.resize(wcslen(aDest.c_str()));
-}
-
 #endif
 
 Logger::Logger(const char* fName)
@@ -45,8 +37,8 @@ Logger::Logger(const char* fName)
 	convertToUnicode(fName, fNameW);
 	hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
 #else
-    hEventLog = OpenEventLogA(nullptr, fName);
-#endif
+	hEventLog = OpenEventLogA(nullptr, fName);
+#endif 
 
 #endif
 }
@@ -76,16 +68,15 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 		bool fToSyslog   = isSeverityActive(to_syslog);
 		const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
 
-        char fMessage[2048]="";
+		char fMessage[2048];
 		if (fToSyslog || fToFunction)
-        {
+		{
 			std::string fFormat;// = QString::number((uint64_t)QThread::currentThreadId()).toStdString();
-            va_start (args, format);
+			va_start(args, format);
 			fFormat += format;
 			format = fFormat.c_str();
-            vsprintf(fMessage, format, args);
-            va_end (args);
-        }
+			vsprintf_s(fMessage, sizeof(fMessage), format, args);
+		}
 
 		if (fToFunction)
 		{
@@ -94,7 +85,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 		}
 
 		if (fToSyslog)
-        {
+		{
 #ifdef __linux__
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
 #endif
@@ -112,6 +103,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 			ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
 #endif
+            va_end (args);
         }
     }
 }

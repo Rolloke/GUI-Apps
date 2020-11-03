@@ -32,7 +32,7 @@ const char* PinCommon::name_of (PinCommon::Type::eType aType)
 PinCommon::Type::eType PinCommon::type_name(const char* aName)
 {
     static std::map<std::string, int> fMap;
-    if (not fMap.size())
+    if (! fMap.size())
     {
         for (int fType = Type::Unknown; fType < Type::Last; ++fType)
         {
@@ -64,7 +64,7 @@ const char* PinCommon::name_of (PinCommon::Edge::eEdge aEdge)
 PinCommon::Edge::eEdge PinCommon::edge_name(const char* aName)
 {
     static std::map<std::string, int> fMap;
-    if (not fMap.size())
+    if (! fMap.size())
     {
         for (int fType = Edge::Unknown; fType < Edge::Last; ++fType)
         {

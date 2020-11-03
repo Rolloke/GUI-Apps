@@ -25,9 +25,11 @@
 class SynchronizeTimeResults : public DockingDlgInterface
 {
 public :
-    enum eIcon { TimeEntry, FilenameEntry, LineNoEntry, TimeDifference };
+    enum eIcon { TimeEntry, FilenameEntry, LineNoEntry, TimeDifference, LogHead, LogEntry };
     SynchronizeTimeResults();
     ~SynchronizeTimeResults();
+
+	void printLogText(const std::string& aText);
 
     virtual void display(bool toShow = true) const
     {
@@ -38,12 +40,12 @@ public :
         }
     };
 
-    void setParent(HWND parent2set){
-        _hParent = parent2set;
-    };
+	void setParent(HWND parent2set){
+		_hParent = parent2set;
+	};
 
 protected :
-    virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
+	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
 private :
 

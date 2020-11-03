@@ -18,15 +18,18 @@
 
 #include "SynchronizeTimeResults.h"
 #include "..\PluginDefinition.h"
-
+#include "..\logger.h"
+#include <time.h>
 extern NppData nppData;
 
-
+Logger gLogger("LogProfiler");
 
 SynchronizeTimeResults::SynchronizeTimeResults() 
     : DockingDlgInterface(IDD_TIME_STAMP_FIND_RESULTS)
 {
-
+	time_t fTime = time(0);
+	struct tm * fTM = localtime(&fTime);
+	fTM->tm_hour = 0;
 }
 
 SynchronizeTimeResults::~SynchronizeTimeResults()
@@ -35,19 +38,19 @@ SynchronizeTimeResults::~SynchronizeTimeResults()
 
 INT_PTR CALLBACK SynchronizeTimeResults::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message) 
-    {
+	switch (message) 
+	{
     case WM_INITDIALOG: return OnInitDialog();
-    case WM_COMMAND : 
-    {
-        switch (LOWORD(wParam))
-        {
+	case WM_COMMAND : 
+	{
+		switch (LOWORD(wParam))
+		{
         case IDC_BTN_CLEAR: return OnBtnClear();
         case IDC_BTN_DELETE_ENTRY: return OnBtnDeleteEntry();
         case IDC_TREE_FINDRESULTS:
             default: break;
         }
-        return FALSE;
+		return FALSE;
     }break;
     case WM_SIZE:
     {
@@ -59,18 +62,47 @@ INT_PTR CALLBACK SynchronizeTimeResults::run_dlgProc(UINT message, WPARAM wParam
         return TRUE;
     }
     case WM_NOTIFY: return OnWmNotify((UINT)wParam, (NMHDR*)lParam);
-    default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
-    }
+	default: return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
+	}
 }
 
 INT_PTR SynchronizeTimeResults::OnInitDialog()
 {
+	Logger::setLogFunction(std::bind(&SynchronizeTimeResults::printLogText, this, std::placeholders::_1));
     enableToolTip();
-    for (UINT nID = IDC_TREE_FINDRESULTS; nID <= IDC_LAST_IDD_TIME_STAMP_FIND_RESULTS; ++nID)
+    for (UINT nID = IDD_SYNCHRONIZE_TIMESTAMPS; nID <= IDC_LAST_IDD_SYNCHRONIZE_TIMESTAMPS; ++nID)
     {
         addToolTip(nID);
     }
-    return TRUE;
+	for (UINT nID = IDD_TIME_STAMP_FIND_RESULTS; nID <= IDC_LAST_IDD_SYNCHRONIZE_TIMESTAMPS; ++nID)
+	{
+		addToolTip(nID);
+	}
+	return TRUE;
+}
+
+void SynchronizeTimeResults::printLogText(const std::string& aText)
+{
+	CTreeView fTree(getDlgItem(IDC_TREE_FINDRESULTS));
+	HTREEITEM fItem = fTree.getItem(TVGN_CHILD);
+	const tstring fLogEntry = _T("Logging");
+	while (fItem)
+	{
+		int fImage;
+		fTree.getItemImage(fItem, fImage);
+		if (fImage == LogHead) break;
+		fItem = fTree.getItem(TVGN_NEXT, fItem);
+	}
+	if (fItem == NULL)
+	{
+		fItem = fTree.insertTo(0, (TCHAR*)fLogEntry.c_str(), LogHead);
+	}
+	if (fItem)
+	{
+		tstring fText;
+		convertToUnicode(aText, fText);
+		fTree.insertTo(fItem, (TCHAR*)fText.c_str(), LogEntry);
+	}
 }
 
 
@@ -85,13 +117,13 @@ INT_PTR SynchronizeTimeResults::OnWmNotify(UINT , NMHDR* pNmHdr)
             CTreeView fTree(getDlgItem(IDC_TREE_FINDRESULTS));
             HTREEITEM hSelected = fTree.getItem();
             tstring fText;
-            std::wstring fFileName;
+			std::wstring fFileName;
             int fImage;
             fTree.getItemText(hSelected, fText, fImage);
 #ifdef UNICODE
-            fFileName = fText;
+			fFileName = fText;
 #else
-            convertToUnicode(fText, fFileName);
+			convertToUnicode(fText, fFileName);
 #endif // UNICODE
             switch (fImage)
             {
@@ -105,11 +137,11 @@ INT_PTR SynchronizeTimeResults::OnWmNotify(UINT , NMHDR* pNmHdr)
                 swscanf(fFileName.c_str(), L"Line %d", &fLine);
                 fTree.getItemText(fTree.getItem(TVGN_PARENT, hSelected), fText, fImage);
 #ifdef UNICODE
-                fFileName = fText;
+				fFileName = fText;
 #else
-                convertToUnicode(fText, fFileName);
+				convertToUnicode(fText, fFileName);
 #endif // UNICODE
-                openPathFileName(fFileName);
+				openPathFileName(fFileName);
                 ScintillaWnd fWnd(getScintillaWindowHandle());
                 fWnd.gotoLine(fLine-1);
             }   break;

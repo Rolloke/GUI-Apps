@@ -6,6 +6,7 @@
  */
 
 #include "TimeParser.h"
+#include "logger.h"
 #include <iostream>
 #include <sstream>
 
@@ -130,7 +131,7 @@ BOOL TimeParser::setFormatString(const std::string& aFormat)
 {
     BOOL fReturn = FALSE;
     std::string fRegExString = ".*"; // starts with any character
-    int fSize = aFormat.size();
+	size_t fSize = aFormat.size();
     BOOL fAdded = FALSE;
     mGroupID.clear();
     for (int i=0; i<fSize; ++i)
@@ -184,7 +185,7 @@ BOOL TimeParser::parseTimeString(const std::string& aTime)
         {
             mHour += 12;
         }
-        if (mYear % 4 == 0)
+        if (mYear != 0 && (mYear % 4) == 0)
         {
             mLeapYearDay = 1;
         }
@@ -196,7 +197,7 @@ BOOL TimeParser::parseTimeString(const std::string& aTime)
     return fReturn;
 }
 
-BOOL TimeParser::getSystemTime(SYSTEMTIME& aTime) const
+BOOL TimeParser::getSystemTime(SYSTEMTIME& aTime, WORD& aMicroSecondPart) const
 {
     aTime.wDay       = static_cast<WORD>(mDayOfMonth);
     aTime.wDayOfWeek = static_cast<WORD>(mDayOfWeek);
@@ -206,19 +207,21 @@ BOOL TimeParser::getSystemTime(SYSTEMTIME& aTime) const
     aTime.wMinute    = static_cast<WORD>(mMinute);
     aTime.wSecond    = static_cast<WORD>(mSecond);
     aTime.wMilliseconds = static_cast<WORD>(mMicroseconds / mMillitoMicroseconds);
+	aMicroSecondPart = mMicroseconds % mMillitoMicroseconds;
+
     return TRUE;
 }
 
-BOOL TimeParser::setSystemTime(const SYSTEMTIME& aTime) 
+BOOL TimeParser::setSystemTime(const SYSTEMTIME& aTime, WORD aMicroSecondPart) 
 {
-    mDayOfMonth = aTime.wDay;
-    mDayOfWeek  = aTime.wDayOfWeek;
-    mMonth      = aTime.wMonth;
-    mYear       = aTime.wYear;
-    mHour       = aTime.wHour;
-    mMinute     = aTime.wMinute;
-    mSecond     = aTime.wSecond;
-    mMicroseconds= aTime.wMilliseconds * mMillitoMicroseconds;
+    mDayOfMonth   = aTime.wDay;
+    mDayOfWeek    = aTime.wDayOfWeek;
+    mMonth        = aTime.wMonth;
+    mYear         = aTime.wYear;
+    mHour         = aTime.wHour;
+    mMinute       = aTime.wMinute;
+    mSecond       = aTime.wSecond;
+    mMicroseconds = aTime.wMilliseconds * mMillitoMicroseconds + aMicroSecondPart;
     return TRUE;
 }
 
@@ -251,8 +254,9 @@ BOOL TimeParser::convertItem(int aItem, const std::string& aParam)
         }
         else
         {
+			TRACE(Logger::to_function, "TimeParser::convertItem failed at %c, %s", mGroupID[aItem],  aParam.c_str());
             fReturn = FALSE;
-        }
+        } 
     }   break;  // Seconds since 1970-01-01 00:00:00 +0000 (UTC).
     case 'u': mDayOfWeek = atoi(aParam.c_str());        break;  // ISO 8601 weekday as number with Monday as 1 (1-7)
     case 'w': mDayOfWeek = atoi(aParam.c_str()) + 1;    break;  // Weekday as a decimal number with Sunday as 0 (0-6)
@@ -269,7 +273,10 @@ BOOL TimeParser::convertItem(int aItem, const std::string& aParam)
     case 'y': mYear = atoi(aParam.c_str()) + 2000;      break;  // Year, last two digits (00-99)
     case 'Y': mYear = atoi(aParam.c_str());             break;  // Year 2001
     case 'z': mHourTimzoneOffset = atoi(aParam.c_str()) / 100; break;// ISO 8601 offset from UTC in timezone (1 minute=1, 1 hour=100)
-    default: fReturn = FALSE; break;
+    default:
+		TRACE(Logger::to_function, "TimeParser::convertItem failed at %c, %s", mGroupID[aItem], aParam.c_str());
+		fReturn = FALSE; 
+		break;
     }
     return fReturn;
 }
@@ -279,7 +286,7 @@ int64_t TimeParser::calculateTime() const
     // number range integer:   2 ^ 63                                 = 9223372036854775808 
     // Microseconds per year: 1000000 * 60 * 60 * 24 * 366            = 31622400000000
     // Maximum number of years:  9223372036854775808 / 31622400000000 = 291672
-    const int64_t fMicroseconds         = 1000;
+    const int64_t fMicroseconds         = 1000000;
     const int64_t fMicroSecondsOfMinute =   60 * fMicroseconds;
     const int64_t fMicroSecondsOfHour   =   60 * fMicroSecondsOfMinute;
     const int64_t fMicroSecondsOfDay    =   24 * fMicroSecondsOfHour;
@@ -287,18 +294,29 @@ int64_t TimeParser::calculateTime() const
     return mYear * fMicroSecondsOfYear + getDayOfYear() * fMicroSecondsOfDay + mHour * fMicroSecondsOfHour + mMinute * fMicroSecondsOfMinute + mSecond * fMicroseconds + mMicroseconds;
 }
 
-SYSTEMTIME TimeParser::calcSystemTime(int64_t aTime)
+SYSTEMTIME TimeParser::calcSystemTime(int64_t aTime, WORD* aMicrosecondPart)
 {
+    const int fMicroSecondsPerSecond = 1000000;
+    const int fSecondsPerMinute = 60;
+    const int fMinutesPerHour   = 60;
+    const int fHoursPerDay      = 24;
+    const int fDaysPerYear      = 366;
     SYSTEMTIME fST = { 0 };
-    fST.wMilliseconds = static_cast<WORD>(aTime % 1000000);
-    aTime /= 1000;
-    fST.wSecond = static_cast<WORD>(aTime % 60);
-    aTime /= 60;
-    fST.wMinute = static_cast<WORD>(aTime % 60);
-    aTime /= 60;
-    fST.wHour   = static_cast<WORD>(aTime % 24);
-    aTime /= 24;
-    fST.wDay    = static_cast<WORD>(aTime % 366);
+	DWORD fMicroSeconds = static_cast<WORD>(aTime % fMicroSecondsPerSecond);
+	fST.wMilliseconds = static_cast<WORD>(fMicroSeconds / 1000);
+	fMicroSeconds %= 1000;
+	if (aMicrosecondPart)
+	{
+		*aMicrosecondPart = static_cast<WORD>(fMicroSeconds);
+	}
+    aTime /= fMicroSecondsPerSecond;
+    fST.wSecond = static_cast<WORD>(aTime % fSecondsPerMinute);
+    aTime /= fSecondsPerMinute;
+    fST.wMinute = static_cast<WORD>(aTime % fMinutesPerHour);
+    aTime /= fMinutesPerHour;
+    fST.wHour   = static_cast<WORD>(aTime % fHoursPerDay);
+    aTime /= fHoursPerDay;
+    fST.wDay    = static_cast<WORD>(aTime % fDaysPerYear);
     return fST;
 }
 
@@ -331,7 +349,15 @@ int TimeParser::getDayOfYear() const
 
     switch (mMonth)
     {
-    case  0: return (mWeekOfYear - 1) * 7 + mDayOfWeek;
+     case  0: 
+       if (mWeekOfYear > 0)
+        {
+            return (mWeekOfYear - 1) * 7 + mDayOfWeek;
+        }
+        else
+        {
+            return mDayOfYear;
+        }
     case  1: return mDayOfMonth;
     case  2: return fOffsetJan + mDayOfMonth;
     case  3: return fOffsetFeb + mDayOfMonth + mLeapYearDay;
@@ -345,7 +371,8 @@ int TimeParser::getDayOfYear() const
     case 11: return fOffsetOkt + mDayOfMonth + mLeapYearDay;
     case 12: return fOffsetNov + mDayOfMonth + mLeapYearDay;
     }
-    return 0;
+	TRACE(Logger::warning, "TimeParser::getDayOfYear failed (m:%d, dom %d), (woy: %d, dow: %d), doy: %d", mMonth, mDayOfMonth, mWeekOfYear, mDayOfWeek, mDayOfYear);
+	return 0;
 }
 
 int TimeParser::convertMonth(const char*aStr)
@@ -355,7 +382,8 @@ int TimeParser::convertMonth(const char*aStr)
     {
         return fIt->second;
     }
-    return 0;
+	TRACE(Logger::warning, "TimeParser::convertMonth failed: %s", aStr);
+	return 0;
 }
 
 int TimeParser::convertDayOfWeek(const char*aStr)
@@ -365,7 +393,8 @@ int TimeParser::convertDayOfWeek(const char*aStr)
     {
         return fIt->second;
     }
-    return 0;
+	TRACE(Logger::warning, "TimeParser::convertDayOfWeek failed: %s", aStr);
+	return 0;
 }
 
 BOOL TimeParser::hasDate() const

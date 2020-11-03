@@ -3,6 +3,7 @@
 #include "TimeParser.h"
 #include "PluginDefinition.h"
 #include "TextInterface.h"
+#include "logger.h"
 
 SearchLine::SearchLine(const ITextInterface& aTextIF, TimeParser* aParser)
     : mTextIF(aTextIF)
@@ -21,28 +22,39 @@ int SearchLine::searchLine(int64_t aTime)
 {
     if (mParser)
     {
-        size_t fLines = mTextIF.getLines();
+		size_t fLines = mTextIF.getLines();
         mMaxRecursion = static_cast<int>(log2(static_cast<double>(fLines))*1.5 + 0.5);
-        int64_t fStartTime, fEndtime;
-        if (getTimeOfLine(0, fStartTime) && fStartTime > aTime)
-        {
-            return -1;
-        }
-        if (getTimeOfLine(fLines - 1, fEndtime) && fEndtime < aTime)
-        {
-            return -1;
-        }
-        return search(0, fLines, aTime);
+		int64_t fStartTime { 0 };
+		int64_t fEndtime   { 0 };
+
+		if (getTimeOfLine(0, fStartTime) && getTimeOfLine(fLines - 1, fEndtime) )
+		{
+			if (fStartTime < fEndtime) // should be a sorted file
+			{
+				if (fStartTime < aTime || fEndtime > aTime)
+				{
+					TRACE(Logger::to_function, "Not in File time");
+					return -1; 
+				}
+			}
+		}
+        int fLine = search(0, fLines, aTime);
+		if (fLine == -1 && fLines < 5000) // linear search is slow, lines are limited
+		{
+			TRACE(Logger::to_function, "Searching linear through %ld", fLines);
+			return search_linear(fLines, aTime);
+		}
+		return fLine;
     }
     return -1;
 }
 
-int SearchLine::search(int aStart, int aEnd, int64_t aTime)
+int SearchLine::search(size_t aStart, size_t aEnd, int64_t aTime)
 {
     if (   aEnd - aStart > 1            // limit distance
         && mRecursion < mMaxRecursion)  // limit recursion 
     {
-        int fLine = (aStart + aEnd) / 2;
+		int fLine = static_cast<int>((aStart + aEnd) / 2);
         int64_t fTimeOfLine = 0;
         int fTemp = fLine;
         BOOL bReverse = FALSE;
@@ -57,7 +69,8 @@ int SearchLine::search(int aStart, int aEnd, int64_t aTime)
                 }
                 else
                 {
-                    return -1;
+					TRACE(Logger::to_function, "No time entry found");
+					return -1;
                 }
             }
             else        //  find a time line up
@@ -94,8 +107,37 @@ int SearchLine::search(int aStart, int aEnd, int64_t aTime)
     }
     else
     {   // return the line with the smallest time distance
-        return mDifference.size() > 0 ? mDifference.begin()->second : -1;
+		int fLine = mDifference.size() > 0 ? mDifference.begin()->second : -1;
+		TRACE(Logger::to_function, "Recursive search stopped, recursion steps %d, distance %d, fLine", mRecursion, aEnd - aStart, fLine);
+		return fLine;
     }
+}
+
+int SearchLine::search_linear(size_t aLines, int64_t aTime)
+{
+	using namespace std;
+	int fBestLine = -1;
+	int64_t fBestDifference = static_cast<uint64_t>(1) << 63;
+
+	for (size_t fLine=0; fLine < aLines; ++fLine)
+	{
+		int64_t fTimeOfLine = 0;
+
+		if (getTimeOfLine(fLine, fTimeOfLine))
+		{
+			int64_t fDifference = abs(fTimeOfLine - aTime);
+			if (fDifference < fBestDifference)
+			{
+				fBestDifference = fDifference;
+				fBestLine = static_cast<int>(fLine);
+			}
+			if (fBestDifference == 0)
+			{
+				break;
+			}
+		}
+	}
+	return fBestLine;
 }
 
 int64_t SearchLine::getDifference()
@@ -103,12 +145,12 @@ int64_t SearchLine::getDifference()
     return mDifference.size() > 0 ? mDifference.begin()->first : -1;
 }
 
-BOOL SearchLine::getTimeOfLine(int aLine, int64_t & aTime)
+BOOL SearchLine::getTimeOfLine(size_t aLine, int64_t & aTime)
 {
     BOOL fReturn = FALSE;
     std::string fLineText;
 
-    if (mTextIF.getLineText(aLine, fLineText))
+    if (mTextIF.getLineText(static_cast<uint32_t>(aLine), fLineText))
     {
         if (mParser->parseTimeString(fLineText))
         {

@@ -20,7 +20,12 @@
 
 //
 // All difinitions of plugin interface
+// Help: https://npp-user-manual.org/docs/plugin-communication
 //
+// TODO:
+// NPPM_MODELESSDIALOG
+// NPPM_DESTROYSCINTILLAHANDLE
+// NPPM_SETSTATUSBAR
 #include "PluginInterface.h"
 #include "TextInterface.h"
 #include <string>
@@ -53,7 +58,7 @@ public:
     \param aLine requested line
     \return (TRUE, FALSE)
     */
-    BOOL selectLine(int aLine);
+    BOOL selectLine(INT_PTR aLine);
 
     /*!
     \brief sets a maker for the text line in given scintilla window
@@ -65,7 +70,7 @@ public:
     SC_MARK_FULLRECT)
     \return (TRUE, FALSE)
     */
-    BOOL defineMarker(int aMarker, int aSymbol = SC_MARK_CIRCLE, COLORREF aForeground = -1, COLORREF aBackground = -1);
+    BOOL defineMarker(INT_PTR aMarker, INT_PTR aSymbol = SC_MARK_CIRCLE, COLORREF aForeground = -1, COLORREF aBackground = -1);
 
     /*!
     \brief sets a maker for the text line in given scintilla window
@@ -75,7 +80,7 @@ public:
     \param aLine requested line
     \return (TRUE, FALSE)
     */
-    BOOL setMarker(int aMarker, BOOL aSet = TRUE, int aLine = -1);
+    BOOL setMarker(INT_PTR aMarker, BOOL aSet = TRUE, INT_PTR aLine = -1);
 
     /*!
     \brief sets a maker for the text line in given scintilla window
@@ -84,7 +89,7 @@ public:
     \param aMarker Marker number
     \return (TRUE, FALSE)
     */
-    BOOL gotoMarker(int aMarker, BOOL aPrevious);
+    BOOL gotoMarker(INT_PTR aMarker, BOOL aPrevious);
 
     /*!
     \brief ensures visiblity of text line in given scintilla window
@@ -92,7 +97,7 @@ public:
     \param aLine requested line
     \return (TRUE, FALSE)
     */
-    BOOL gotoLine(int aLine);
+    BOOL gotoLine(INT_PTR aLine);
 
     void addText(const std::string& aText);
     void setReadOnly(BOOL bReadOnly);
@@ -129,6 +134,12 @@ enum MemuItems
     \brief retrieves the inifile path and filename
 */
 TCHAR* getIniFilePath();
+
+
+#ifndef UNICODE
+void   convertToUnicode(const std::string& aSource, std::string& aDest);
+void   convertToMBCS(const std::string& aSource, std::string& aDest);
+#endif
 
 /*!
     \brief conversion from MBCS toUnicode and vice versa
@@ -175,7 +186,7 @@ HWND  getScintillaWindowHandle();
 \brief retrieves the number of all files
 \param aFlag (ALL_OPEN_FILES, PRIMARY_VIEW, SECOND_VIEW)
 */
-int    countOpenFiles(int aFlag = ALL_OPEN_FILES);
+INT_PTR    countOpenFiles(INT_PTR aFlag = ALL_OPEN_FILES);
 
 /*!
 \brief retrieves the active scintilla window
@@ -183,7 +194,7 @@ int    countOpenFiles(int aFlag = ALL_OPEN_FILES);
 \param aFilesU result vector with filenames in Unicode
 \param aFlag (ALL_OPEN_FILES, PRIMARY_VIEW, SECOND_VIEW)
 */
-int    getOpenFiles(std::vector<std::string>* aFiles, std::vector<std::wstring>* aFilesU=NULL, int aFlag = ALL_OPEN_FILES);
+INT_PTR    getOpenFiles(std::vector<std::string>* aFiles, std::vector<std::wstring>* aFilesU=NULL, INT_PTR aFlag = ALL_OPEN_FILES);
 
 void   getCurrentPathFileName(std::string& aPathFileName);
 
