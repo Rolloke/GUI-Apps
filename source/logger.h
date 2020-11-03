@@ -4,12 +4,13 @@
 #include <map>
 #include <fstream>
 #include <vector>
-
+#include <functional>
 
 
 class Logger
 {
 public:
+	typedef std::function<void(const std::string&)> tLogfunction;
     Logger(const char* fName);
     ~Logger();
     enum eSeverity {
@@ -23,13 +24,15 @@ public:
         alert      = 0x0080,
         emergency  = 0x0100,
         to_console = 0x1000,
-        to_syslog  = 0x2000
-    };
+        to_syslog  = 0x2000,
+		to_function = 0x4000
+	};
 
     static void setSeverity(std::uint32_t aFlag, bool aSet);
     static std::uint32_t getSeverity();
     static bool isSeverityActive(eSeverity aSeverity);
     static void printDebug (eSeverity aSeverity, const char * format, ... );
+	static void setLogFunction(const tLogfunction& aFunc);
     template <class Type >
     static void printCurve(const std::vector<Type>& fX, const std::vector<Type>& fY, const std::string& aTitle)
     {
@@ -55,6 +58,7 @@ private:
     static std::uint32_t mSeverity;
     static std::map<std::string, int> mCurveColor;
     static std::string mLogdir;
+	static tLogfunction mLogFunction;
 };
 
 //#ifndef NDEBUG
