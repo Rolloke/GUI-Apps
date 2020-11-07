@@ -406,6 +406,50 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     {
         fPostActionGroup.actions().at(fPostAction)->setChecked(true);
     }
+
+    ulong fEnableFlag  = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagEnable);
+    ulong fDisableFlag = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagDisable);
+
+    std::vector<Type::TypeFlags> fGitStatusArray =
+    {
+        Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
+        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote
+    };
+
+    fMenu.addSeparator();
+
+    QMenu* fEnableMenu = fMenu.addMenu("Enable for git status set");
+    QActionGroup fGitStatusEnableGroup(this);
+    fGitStatusEnableGroup.setExclusive(false);
+
+    QMenu* fDisableMenu = fMenu.addMenu("Disable for git status set");
+    QActionGroup fGitStatusDisableGroup(this);
+    fGitStatusDisableGroup.setExclusive(false);
+
+    QMenu* fEnableNotMenu = fMenu.addMenu("Enable for git status not set");
+    QActionGroup fGitStatusEnableNotGroup(this);
+    fGitStatusEnableNotGroup.setExclusive(false);
+
+    for (auto fGitStatus : fGitStatusArray)
+    {
+        bool fEnabled  = fEnableFlag  & fGitStatus;
+        bool fDisabled = fDisableFlag & fGitStatus;
+        QAction* fAction = fGitStatusEnableGroup.addAction(Type::name(fGitStatus));
+        fEnableMenu->addAction(fAction);
+        fAction->setCheckable(true);
+        fAction->setChecked(fEnabled && !fDisabled);
+
+        fAction = fGitStatusDisableGroup.addAction(Type::name(fGitStatus));
+        fDisableMenu->addAction(fAction);
+        fAction->setCheckable(true);
+        fAction->setChecked(!fEnabled && fDisabled);
+
+        fAction = fGitStatusEnableNotGroup.addAction(Type::name(fGitStatus));
+        fEnableNotMenu->addAction(fAction);
+        fAction->setCheckable(true);
+        fAction->setChecked(fEnabled && fDisabled);
+    }
+
     fMenu.addSeparator();
 
     uint fFlags      = mActionList.getFlags(fCmd);
@@ -424,6 +468,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
          fA_BranchCmd->setCheckable(true);
          fA_BranchCmd->setChecked(fFlags & ActionList::Branch);
     }
+    fMenu.addSeparator();
 
     fMenu.addAction(tr("Cancel"));
 
@@ -434,15 +479,31 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         if (fIndex != -1)
         {
             mActionList.setCustomCommandPostAction(fCmd, fIndex);
-            mActionList.setFlags(fCmd, ActionList::Modified, true);
+            mActionList.setFlags(fCmd, ActionList::Modified, Flag::set);
+        }
+        fIndex = fGitStatusEnableGroup.actions().indexOf(fSelected);
+        if (fIndex != -1)
+        {
+            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
+        }
+        fIndex = fGitStatusDisableGroup.actions().indexOf(fSelected);
+        if (fIndex != -1)
+        {
+            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
+        }
+        fIndex = fGitStatusEnableNotGroup.actions().indexOf(fSelected);
+        if (fIndex != -1)
+        {
+            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
+            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
         }
         if (fA_Modified == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Modified, fA_Modified->isChecked());
+            mActionList.setFlags(fCmd, ActionList::Modified, fA_Modified->isChecked() ? Flag::set : Flag::remove);
         }
         if (fA_BranchCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Branch, fA_BranchCmd->isChecked());
+            mActionList.setFlags(fCmd, ActionList::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
         }
     }
 }

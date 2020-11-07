@@ -59,6 +59,8 @@ const QString sName("Name");
 const QString sCustomMessageBoxText("MessageBoxText");
 const QString sCustomCommandPostAction("PostAction");
 const QString sFlags("Flags");
+const QString sFlagsEnabled("FlagsEnabled");
+const QString sFlagsDisabled("FlagsDisabled");
 const QString sIconPath("IconPath");
 const QString sShortcut("Shortcut");
 const QString sModified("Modified");
@@ -171,7 +173,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         {
             connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
         }
-        mActions.setFlags(fCmd, fFlags);
+        mActions.setFlags(fCmd, fFlags, Flag::replace);
+        mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
+        mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
         mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
         mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
         mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
@@ -250,6 +254,8 @@ MainWindow::~MainWindow()
                     fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
                     fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
                     fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
+                    fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
+                    fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
                     fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
                 }
             }
@@ -974,9 +980,19 @@ void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
     }
 }
 
+//"%12"
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
 {
-    QString fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
+    QString fCommand;
+    auto fPos = fGitCmd.indexOf(QRegExp("%[0-9]+"));
+    if (fPos != -1)
+    {
+        fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
+    }
+    else
+    {
+        fCommand = fGitCmd;
+    }
     int fResult = execute(fCommand, aResultStr);
     return fResult == 0 ? fCommand : "";
 }
@@ -1061,16 +1077,16 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
-    mActions.setFlags(Cmd::ShowDifference, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::ShowDifference, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
-    mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
-    mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1080,14 +1096,14 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
-    mActions.setFlags(Cmd::Add, Type::GitStaged, true, ActionList::Data::TypeFlagDisable);
-    mActions.setFlags(Cmd::Add, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
-    mActions.setFlags(Cmd::Add, Type::GitUnTracked, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::Add, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
+    mActions.setFlags(Cmd::Add, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::Add, Type::GitUnTracked, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
-    mActions.setFlags(Cmd::Unstage, Type::GitStaged, true, ActionList::Data::TypeFlagEnable);
+    mActions.setFlags(Cmd::Unstage, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::History, Cmd::ParseHistoryText);
@@ -1101,8 +1117,8 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandMessageBoxText(Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
-    mActions.setFlags(Cmd::Restore, Type::GitModified, true, ActionList::Data::TypeFlagEnable);
-    mActions.setFlags(Cmd::Restore, Type::GitModified, true, ActionList::Data::TypeFlagDisable);
+    mActions.setFlags(Cmd::Restore, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::Restore, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
 
     connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);

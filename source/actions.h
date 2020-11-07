@@ -10,11 +10,13 @@ class QAction;
 class QMenu;
 
 
+enum class Flag { remove, set, replace };
+
 class ActionList
 {
 
 public:
-    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, TypeFlagEnable, TypeFlagDisable, ListSize }; };
+    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
 
     typedef std::map<int, QAction*> tActionMap;
 
@@ -33,7 +35,7 @@ public:
     uint     getCustomCommandPostAction(git::Cmd::eCmd aCmd) const;
     void     setIconPath(git::Cmd::eCmd aCmd, const QString& aPath);
     QString  getIconPath(git::Cmd::eCmd aCmd) const;
-    void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, bool aSet = true, Data::e aData=Data::Flags);
+    void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, Flag aSet = Flag::set, Data::e aData=Data::Flags);
     uint     getFlags(git::Cmd::eCmd aCmd, Data::e aData=Data::Flags) const;
     void     setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
     QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd) const;
