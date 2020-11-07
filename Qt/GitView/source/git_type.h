@@ -12,7 +12,6 @@ namespace git
 {
 typedef std::map<int, QString> int2stringmap;
 
-
 struct Cmd
 {
     Cmd();

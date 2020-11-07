@@ -1,5 +1,6 @@
 #include "actions.h"
 #include "helper.h"
+#include "logger.h"
 
 #include <QAction>
 #include <QMenu>
@@ -116,23 +117,31 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::T
         if (fCmd != Cmd::Separator)
         {
             bool fEnabled = true;
-            auto fTypeEnabled    = getFlags(fCmd, Data::TypeFlagEnable);
-            auto fTypeDisabled   = getFlags(fCmd, Data::TypeFlagDisable);
-            auto fTypeNotEnabled = fTypeEnabled & fTypeDisabled;
-
+            // TODO: validate
+            auto fStatusEnabled    = getFlags(fCmd, Data::StatusFlagEnable);
+            auto fStatusDisabled   = getFlags(fCmd, Data::StatusFlagDisable);
+            auto fStatusNotEnabled = fStatusEnabled & fStatusDisabled;
+            if (   Logger::isSeverityActive(Logger::trace)
+                && (fStatusEnabled  || fStatusDisabled || fStatusNotEnabled))
+            {
+                Logger::printDebug(Logger::trace, "%s: e:%d|%d, d:%d|%d, ne:%d|%d", getAction(fCmd)->text().toStdString().c_str(),
+                                   INT(fStatusEnabled), aType.is(static_cast<Type::TypeFlags>(fStatusEnabled)),
+                                   INT(fStatusDisabled), aType.is(static_cast<Type::TypeFlags>(fStatusDisabled)),
+                                   INT(fStatusNotEnabled), aType.is(static_cast<Type::TypeFlags>(fStatusNotEnabled)));
+            }
             if (aType.mType & Type::File)
             {
-                if (fTypeNotEnabled)
+                if (fStatusNotEnabled)
                 {
-                    fEnabled = (aType.mType & fTypeNotEnabled) != 0;
+                    fEnabled = (aType.mType & fStatusNotEnabled) != 0;
                 }
                 else
                 {
-                    if (fTypeEnabled  && (aType.mType & fTypeEnabled) == 0)
+                    if (fStatusEnabled  && (aType.mType & fStatusEnabled) == 0)
                     {
                         fEnabled = false;
                     }
-                    if (fTypeDisabled && (aType.mType & fTypeDisabled) != 0)
+                    else if (fStatusDisabled && (aType.mType & fStatusDisabled) != 0)
                     {
                         fEnabled = false;
                     }
@@ -254,11 +263,16 @@ QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd) const
     return "";
 }
 
-void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, bool aSet, Data::e aData)
+void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, Flag aSet, Data::e aData)
 {
     uint fFlags = getFlags(aCmd, aData);
-    if (aSet) fFlags |=  aFlag;
-    else      fFlags &= ~aFlag;
+    switch (aSet)
+    {
+        case Flag::remove:  fFlags &= ~aFlag; break;
+        case Flag::set:     fFlags |=  aFlag; break;
+        case Flag::replace: fFlags  =  aFlag; break;
+    }
+
     setDataVariant(aCmd, aData, QVariant(fFlags));
 }
 
