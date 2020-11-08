@@ -117,7 +117,6 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::T
         if (fCmd != Cmd::Separator)
         {
             bool fEnabled = true;
-            // TODO: validate
             auto fStatusEnabled    = getFlags(fCmd, Data::StatusFlagEnable);
             auto fStatusDisabled   = getFlags(fCmd, Data::StatusFlagDisable);
             auto fStatusNotEnabled = fStatusEnabled & fStatusDisabled;
