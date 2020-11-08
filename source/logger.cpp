@@ -6,25 +6,22 @@
 #include <windows.h>
 #endif
 #include <stdarg.h>
+#include <stdio.h>
 #include "logger.h"
+
 
 using namespace std;
 
-std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::info | Logger::to_syslog | Logger::to_function;
+std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
 string Logger::mLogdir("/tmp");
 Logger::tLogfunction Logger::mLogFunction;
 
-#ifndef UNICODE
-void   convertToUnicode(const std::string& aSource, std::string& aDest)
+#ifdef WIN32
+namespace
 {
-        aDest = aSource;
+HANDLE hEventLog = nullptr;
 }
-void convertToMBCS(const std::string& aSource, std::string& aDest)
-{
-        aDest = aSource;
-}
-#endif
 
 void convertToUnicode(const std::string& aSource, std::wstring& aDest)
 {
@@ -33,18 +30,6 @@ void convertToUnicode(const std::string& aSource, std::wstring& aDest)
     aDest.resize(wcslen(aDest.c_str()));
 }
 
-void convertToMBCS(const std::wstring& aSource, std::string& aDest)
-{
-    aDest.resize(aSource.size() * 2);
-    ::WideCharToMultiByte(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()), NULL, NULL);
-    aDest.resize(strlen(aDest.c_str()));
-}
-
-#ifdef WIN32
-namespace
-{
-HANDLE hEventLog = nullptr;
-}
 #endif
 
 Logger::Logger(const char* fName)
@@ -56,12 +41,12 @@ Logger::Logger(const char* fName)
 #endif
 #ifdef WIN32
 #ifdef UNICODE
-	std::wstring fNameW;
-	convertToUnicode(fName, fNameW);
-	hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
+    std::wstring fNameW;
+    convertToUnicode(fName, fNameW);
+    hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
 #else
-	hEventLog = OpenEventLogA(nullptr, fName);
-#endif 
+    hEventLog = OpenEventLogA(nullptr, fName);
+#endif
 
 #endif
 }
@@ -80,49 +65,54 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 {
     if (isSeverityActive(aSeverity))
     {
-        va_list args;
-        if (isSeverityActive(to_console))
+        const bool fToSyslog   = isSeverityActive(to_syslog);
+        const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
+        const bool fToConsole  = isSeverityActive(to_console);
+
+        if (fToConsole)
         {
+            va_list args;
             va_start (args, format);
             vprintf (format, args);
             va_end (args);
             fflush(stdout);
         }
-		bool fToSyslog   = isSeverityActive(to_syslog);
-		const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
-        const size_t fSize = 1024;
-        char fMessage[fSize] {0};
-		if (fToSyslog || fToFunction)
-		{
-			va_start(args, format);
-            vsprintf_s(fMessage, fSize, format, args);
+
+        if (fToFunction)
+        {
+            char fMessage[2048]="";
+            va_list args;
+            va_start (args, format);
+            vsprintf(fMessage, format, args);
             va_end (args);
+            mLogFunction(fMessage);
         }
 
-
-		if (fToFunction)
-		{
-			mLogFunction(fMessage);
-			fToSyslog = false;
-		}
-
-		if (fToSyslog)
-		{
+        if (fToSyslog)
+        {
 #ifdef __linux__
+            va_list args;
+            va_start (args, format);
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
+            va_end (args);
 #endif
 #ifdef WIN32
+            char fMessage[2048]="";
+            va_list args;
+            va_start (args, format);
+            vsprintf(fMessage, format, args);
+            va_end (args);
             std::uint16_t fCategory;
             std::uint32_t fEventID;
             std::uint16_t fType = convertSeverityToEventLog(aSeverity, fCategory, fEventID);
 #ifdef UNICODE
-			std::wstring fMessageW;
-			convertToUnicode(fMessage, fMessageW);
-			LPWSTR  fString[2] = { (LPWSTR)fMessageW.c_str(), NULL };
-			ReportEventW(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCWSTR*)fString, nullptr);
+            std::wstring fMessageW;
+            convertToUnicode(fMessage, fMessageW);
+            LPWSTR  fString[2] = { (LPWSTR)fMessageW.c_str(), NULL };
+            ReportEventW(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCWSTR*)fString, nullptr);
 #else
-			LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
-			ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
+            LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
+            ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
 #endif
         }
@@ -153,7 +143,7 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
 
 void Logger::setLogFunction(const tLogfunction& aLogFunc)
 {
-	mLogFunction = aLogFunc;
+    mLogFunction = aLogFunc;
 }
 
 #ifdef __linux__
