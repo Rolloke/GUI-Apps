@@ -21,7 +21,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
+    logger.cpp \
     pintype.cpp \
     inputpin.cpp \
     outputpin.cpp \
@@ -30,6 +31,7 @@ SOURCES += main.cpp\
 lessThan(QT_MAJOR_VERSION, 5): SOURCES += serialport.cpp
 
 HEADERS  += mainwindow.h \
+    logger.h \
     pintype.h \
     inputpin.h \
     outputpin.h \

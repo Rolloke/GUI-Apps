@@ -1,6 +1,11 @@
 #ifndef Melody_h
 #define Melody_h
 
+/*
+ * Melody.h - library for playing melodies
+ * The library plays the tones of a melody asynchronously controled by
+ * repeatedly calling the tick(..) function within the function loop().
+ */
 #include <inttypes.h>
 
 typedef struct 

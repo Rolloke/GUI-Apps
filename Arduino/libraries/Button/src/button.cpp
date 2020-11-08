@@ -1,7 +1,11 @@
 #include "button.h"
 #include <Arduino.h>
 
-
+// @brief constructor with arguments
+// @param aPin Arduino pin number
+// @param anEventFnc function triggered by button events
+// @param aHighlevel high level for pin (LOW, HIGH)
+// @hint  LOW is default and initializes an input with internal pullup
 Button::Button(uint8_t aPin, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
     triggerEvent(anEventFnc)
   , mRepeat_ms(0)
@@ -25,6 +29,12 @@ Button::Button(uint8_t aPin, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
     }
 }
 
+// @brief constructor with arguments
+// @param aPin array with Arduino pin numbers
+// @param aNoOfPins size of the array with pin numbers
+// @param anEventFnc function triggered by button events
+// @param aHighlevel high level for pin (LOW, HIGH)
+// @hint  LOW is default and initializes an input with internal pullup
 Button::Button(uint8_t* aPins, uint8_t aNoOfPins, fTriggerFunc anEventFnc, uint8_t aHighlevel) :
     triggerEvent(anEventFnc)
   , mRepeat_ms(0)
@@ -51,41 +61,29 @@ Button::Button(uint8_t* aPins, uint8_t aNoOfPins, fTriggerFunc anEventFnc, uint8
     }
 }
 
+// @brief sets repetition trigger time for a pressed button
+// @param aRepeat_ms repetition time
 void Button::setRepeat(int aRepeat_ms)
 {
     mRepeat_ms = aRepeat_ms;
 }
 
+// @brief sets delay time for repetion trigger for a pressed button
+// @param aDelay_ms delay time before repeated trigger
 void Button::setDelay(int aDelay_ms)
 {
     mDelay_ms = aDelay_ms;
 }
 
+// @brief sets a delay time to debounce a connected switch
+// @param aDeBounce_ms debounce delay time
 void Button::setDeBounce(int aDeBounce_ms)
 {
     mDeBounce_ms = aDeBounce_ms;
 }
 
-bool Button::isPressed()
-{
-    if (mPins)
-    {
-        mPin = 0;
-        for (int i=0; i< mNoOfPins; ++i)
-        {
-            if (digitalRead(mPins[i]) == mHighLevel)
-            {
-                mPin |= (1 << i);
-            }
-        }
-        return mPin != 0;
-    }
-    else
-    {
-        return digitalRead(mPin) == mHighLevel;
-    }
-}
-
+// \brief controlles trigger events of a button
+// fNow current time determined by millis()
 void Button::tick(unsigned long fNow)
 {
     if (isPressed())
@@ -139,6 +137,26 @@ void Button::tick(unsigned long fNow)
             (*triggerEvent)(released, mPin);
         }
         mState = released;
+    }
+}
+
+bool Button::isPressed()
+{
+    if (mPins)
+    {
+        mPin = 0;
+        for (int i=0; i< mNoOfPins; ++i)
+        {
+            if (digitalRead(mPins[i]) == mHighLevel)
+            {
+                mPin |= (1 << i);
+            }
+        }
+        return mPin != 0;
+    }
+    else
+    {
+        return digitalRead(mPin) == mHighLevel;
     }
 }
 

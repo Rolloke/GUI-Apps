@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "logger.h"
 
 #if QT_VERSION >= 0x050000
 #include <QSerialPortInfo>
@@ -59,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings fSettings(QDir::homePath() + config::sFilename, QSettings::IniFormat);
     fSettings.beginGroup(config::sGroupFilter);
 
+    TRACE(Logger::info, "Hello");
 #if QT_VERSION >= 0x050000
     QString fName;
     QList<QSerialPortInfo> fPorts = QSerialPortInfo::availablePorts();

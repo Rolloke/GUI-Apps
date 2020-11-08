@@ -1,4 +1,5 @@
-#include "melody.h"
+
+#include "Melody.h"
 
 // big ben
 Tone gTones[] =

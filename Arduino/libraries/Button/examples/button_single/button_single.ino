@@ -35,9 +35,8 @@ void triggerButton(uint8_t aState, uint8_t aButtonNo)
 {
   // for debugging purpose use the serial monitor of the arduino IDE
   Serial.print("trigger: ");
-  Serial.print(Button::nameOf(aState));
+  Serial.print(Button::nameOf(static_cast<Button::eState>(aState)));
   // the button number is equal to the pin number
   Serial.print(", Button No: ");
   Serial.println(aButtonNo);
 }
-

@@ -1,10 +1,19 @@
 #ifndef Button_h
 #define Button_h
 
+
+/*
+ * button.h - library for a button triggering events controled by
+ * repeatedly calling the tick(..) function within the function loop().
+ */
+
 #include <inttypes.h>
 
 
-typedef void (*fTriggerFunc)(uint8_t, uint8_t );
+// @brief signature of the trigger function
+// @param aState state of the pressed button, see enum eState 
+// @param aPin number of the pin or bit mask with set bits acording to the array position
+typedef void (*fTriggerFunc)(uint8_t aState, uint8_t aPin);
 
 class Button
 {

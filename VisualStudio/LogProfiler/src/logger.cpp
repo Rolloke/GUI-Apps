@@ -11,6 +11,8 @@
 
 
 using namespace std;
+// this is a test
+
 
 std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
