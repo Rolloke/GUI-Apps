@@ -32,7 +32,7 @@ void triggerButton(uint8_t aState, uint8_t aButtonNo)
 {
   // for debugging purpose use the serial monitor of the arduino IDE
   Serial.print("trigger: ");
-  Serial.print(Button::nameOf(aState));
+  Serial.print(Button::nameOf(static_cast<Button::eState>(aState)));
   // the button number is identified by the bit that is set
   // bit 1 for pin  8 -> aButtonNo: 1
   // bit 2 for pin  9 -> aButtonNo: 2
@@ -40,4 +40,3 @@ void triggerButton(uint8_t aState, uint8_t aButtonNo)
   Serial.print(", Button No: ");
   Serial.println(aButtonNo);
 }
-

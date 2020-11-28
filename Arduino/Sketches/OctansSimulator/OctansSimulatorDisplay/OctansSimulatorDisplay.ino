@@ -49,7 +49,8 @@ enum eKeys
   Protocol,
   Settings,
   Value,
-  Simulate
+  Simulate,
+  Interval
 };
 
 
@@ -73,6 +74,8 @@ bool  gInvalid = true;
 
 ItemValue<uint16_t>  gSimulate(gData.mSimulate, 0, 1);
 
+ItemValue<uint16_t>  gInterval(gData.mInterval, 5, 10000);
+
 const char * gBaudrate[] = { "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200"};
 ItemSelect gBaudrateItem(gBaudrate);
 
@@ -83,105 +86,109 @@ enum eProtocol
     Tss1,
     SSV,
 };
-
 const char * gProtocol[] = { "Off", "PASHR", "TSS1", "SSV"};
 ItemSelect gProtocolItem(gProtocol);
+
 enum eSettings
 {
     Store,
     Clear
 };
-
 const char * gSettings[] = { "Store", "Clear"};
 ItemSelect gSettingsItem(gSettings);
 
+const char * sValue    = "Value:";
+const char * sMin      = "Min:";
+const char * sMax      = "Max:";
+const char * sAccuracy = "Accuracy:";
+const char * sInterval = "Interval:";
 namespace ItemMenuHeading
 {
-    ItemValue<float> gValue(gData.mHeading.mValue, 0, 360);
-    ItemValue<float>  gMin(gData.mHeading.mMin, -45, 0);
-    ItemValue<float>  gMax(gData.mHeading.mMax, 0, 45);
-    ItemValue<float>  gAccuracy(gData.mHeading.mAccuracy, 0, 10);
-    ItemValue<uint16_t>  gInterval(gData.mHeading.mInterval, 0, 65535);
+    ItemValue<float>    gValue(   gData.mHeading.mValue   ,   0, 360);
+    ItemValue<float>    gMin(     gData.mHeading.mMin     , -45, 0);
+    ItemValue<float>    gMax(     gData.mHeading.mMax     ,   0, 45);
+    ItemValue<float>    gAccuracy(gData.mHeading.mAccuracy,   0, 10);
+    ItemValue<uint16_t> gInterval(gData.mHeading.mInterval,   0, 65535);
 
     MenuItem gSimulator[] =
     {
-        MenuItem("Value:", &gValue, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Min:", &gMin, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Max:", &gMax, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Accuracy:", &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Interval:", &gInterval, Value, 5) 
+        MenuItem(sValue,    &gValue   , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMin,      &gMin     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMax,      &gMax     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sAccuracy, &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sInterval, &gInterval, Value, 5)
     };
 }
 
 namespace ItemMenuHeave
 {
-    ItemValue<float>  gValue(gData.mHeave.mValue, -30, 30);
-    ItemValue<float>  gMin(gData.mHeave.mMin, -10, 0);
-    ItemValue<float>  gMax(gData.mHeave.mMax, 0, 10);
-    ItemValue<float>  gAccuracy(gData.mHeave.mAccuracy, 0, 10);
-    ItemValue<uint16_t>  gInterval(gData.mHeave.mInterval, 0, 65535);
+    ItemValue<float>    gValue(   gData.mHeave.mValue   , -30, 30);
+    ItemValue<float>    gMin(     gData.mHeave.mMin     , -10, 0);
+    ItemValue<float>    gMax(     gData.mHeave.mMax     ,   0, 10);
+    ItemValue<float>    gAccuracy(gData.mHeave.mAccuracy,   0, 10);
+    ItemValue<uint16_t> gInterval(gData.mHeave.mInterval,   0, 65535);
 
     MenuItem gSimulator[] =
     {
-        MenuItem("Value:", &gValue, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Min:", &gMin, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Max:", &gMax, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Accuracy:", &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Interval:", &gInterval, Value, 5)
+        MenuItem(sValue,    &gValue   , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMin,      &gMin     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMax,      &gMax     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sAccuracy, &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sInterval, &gInterval, Value, 5)
     };
 }
 
 namespace ItemMenuRoll
 {
-    ItemValue<float>  gValue(gData.mRoll.mValue, -90, 90);
-    ItemValue<float>  gMin(gData.mRoll.mMin, -45, 0);
-    ItemValue<float>  gMax(gData.mRoll.mMax, 0, 45);
-    ItemValue<float>  gAccuracy(gData.mRoll.mAccuracy, 0, 10);
-    ItemValue<uint16_t>  gInterval(gData.mRoll.mInterval, 0, 65535);
+    ItemValue<float>    gValue(   gData.mRoll.mValue   , -90, 90);
+    ItemValue<float>    gMin(     gData.mRoll.mMin     , -45, 0);
+    ItemValue<float>    gMax(     gData.mRoll.mMax     ,   0, 45);
+    ItemValue<float>    gAccuracy(gData.mRoll.mAccuracy,   0, 10);
+    ItemValue<uint16_t> gInterval(gData.mRoll.mInterval,   0, 65535);
 
     MenuItem gSimulator[] =
     {
-        MenuItem("Value:", &gValue, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Min:", &gMin, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Max:", &gMax, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Accuracy:", &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Interval:", &gInterval, Value, 5)
+        MenuItem(sValue,    &gValue   , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMin,      &gMin     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMax,      &gMax     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sAccuracy, &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sInterval, &gInterval, Value, 5)
     };
 }
 
 namespace ItemMenuPitch
 {
-    ItemValue<float>  gValue(gData.mPitch.mValue, -90, 90);
-    ItemValue<float>  gMin(gData.mPitch.mMin, -45, 0);
-    ItemValue<float>  gMax(gData.mPitch.mMax, 0, 45);
-    ItemValue<float>  gAccuracy(gData.mPitch.mAccuracy, 0, 10);
-    ItemValue<uint16_t>  gInterval(gData.mPitch.mInterval, 0, 65535);
+    ItemValue<float>    gValue(   gData.mPitch.mValue   , -90, 90);
+    ItemValue<float>    gMin(     gData.mPitch.mMin     , -45, 0);
+    ItemValue<float>    gMax(     gData.mPitch.mMax     ,   0, 45);
+    ItemValue<float>    gAccuracy(gData.mPitch.mAccuracy,   0, 10);
+    ItemValue<uint16_t> gInterval(gData.mPitch.mInterval,   0, 65535);
 
     MenuItem gSimulator[] =
     {
-        MenuItem("Value:", &gValue, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Min:", &gMin, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Max:", &gMax, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Accuracy:", &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Interval:", &gInterval, Value, 5)
+        MenuItem(sValue,    &gValue   , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMin,      &gMin     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMax,      &gMax     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sAccuracy, &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sInterval, &gInterval, Value, 5)
     };
 }
 
 namespace ItemMenuSSV
 {
-    ItemValue<float>  gValue(gData.mSSV.mValue, 1200, 1800);
-    ItemValue<float>  gMin(gData.mSSV.mMin, -200, 0);
-    ItemValue<float>  gMax(gData.mSSV.mMax, 0, 200);
-    ItemValue<float>  gAccuracy(gData.mSSV.mAccuracy, 0, 10);
-    ItemValue<uint16_t>  gInterval(gData.mSSV.mInterval, 0, 65535);
+    ItemValue<float>    gValue(   gData.mSSV.mValue   , 1200, 1800);
+    ItemValue<float>    gMin(     gData.mSSV.mMin     , -200, 0);
+    ItemValue<float>    gMax(     gData.mSSV.mMax     , 0, 200);
+    ItemValue<float>    gAccuracy(gData.mSSV.mAccuracy, 0, 10);
+    ItemValue<uint16_t> gInterval(gData.mSSV.mInterval, 0, 65535);
 
     MenuItem gSimulator[] =
     {
-        MenuItem("Value:", &gValue, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Min:", &gMin, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Max:", &gMax, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Accuracy:", &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
-        MenuItem("Interval:", &gInterval, Value, 5)
+        MenuItem(sValue,    &gValue   , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMin,      &gMin     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sMax,      &gMax     , Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sAccuracy, &gAccuracy, Value, 2, MenuItem::float_val|MenuItem::limit_turn),
+        MenuItem(sInterval, &gInterval, Value, 5)
     };
 }
 
@@ -189,6 +196,7 @@ namespace ItemMenuSSV
 MenuItem gMainMenu[] =
 {
     MenuItem("Simulate:" , &gSimulate, Simulate, 1, MenuItem::limit_turn),
+    MenuItem(sInterval   , &gInterval, Interval, 5),
     MenuItem("Baudrate:" , &gBaudrateItem, Baudrate, length_of(gBaudrate),  MenuItem::no_cursor|MenuItem::limit_turn),
     MenuItem("Protocol:" , &gProtocolItem, Protocol, length_of(gProtocol),  MenuItem::no_cursor|MenuItem::limit_turn),
     MenuItem("Settings:" , &gSettingsItem, Settings, length_of(gSettings)),
@@ -204,7 +212,7 @@ MenuItem gMenu("Settings...", gMainMenu, length_of(gMainMenu));
 void notifyMenu(uint8_t aDir, uint8_t aID);
 // Button implementation
 void triggerButton(uint8_t aState, uint8_t aID);
-uint8_t gButtonPins[3] = { BTN_BIT2, BTN_BIT1, BTN_BIT0 };
+uint8_t gButtonPins[3] = { BTN_BIT0, BTN_BIT1, BTN_BIT2 };
 //struct btn { enum eBtn { left, right, up, down, escape, enter, count }; };
 Button gButtons(gButtonPins, sizeof(gButtonPins), triggerButton);
 
@@ -457,6 +465,7 @@ void triggerButton(uint8_t aState, uint8_t aPin)
 void displayMenuItem()
 {
     int fCursor = 0;
+    // TODO: set strings and replace, when changed
     String fString = gMenu.getText(&fCursor);
     LCD.setCursor(0, 1);
     LCD.print("                    ");
