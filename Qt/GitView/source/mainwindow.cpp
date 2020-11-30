@@ -548,7 +548,8 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 {
     if (aParentItem)
     {
-        QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+//        QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+        QString fSourcePath = aSourceDir ? *aSourceDir + "/" + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
 
         auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
@@ -739,6 +740,7 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
                 QFileInfo fFileInfo(fFullPath);
                 fType.translate(fFileInfo);
                 aFiles[fFullPath.toStdString()] = fType;
+                aFiles[fFileInfo.filePath().toStdString()] = fType;
             }
 
             TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.mType);

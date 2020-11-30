@@ -1,3 +1,4 @@
 vs.proj/
 x64/
 AnyFileViewer.VC.db
+*.user

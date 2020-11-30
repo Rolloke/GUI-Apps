@@ -15,6 +15,9 @@ public:
     DWORD setSpinCount(DWORD aCount);
 
 private:
+    Mutex(const Mutex& ) = delete;
+	Mutex& operator (const Mutex&) = delete;
+	
     CRITICAL_SECTION mCS;
 };
 
