@@ -739,7 +739,6 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
                 }
                 QFileInfo fFileInfo(fFullPath);
                 fType.translate(fFileInfo);
-                aFiles[fFullPath.toStdString()] = fType;
                 aFiles[fFileInfo.filePath().toStdString()] = fType;
             }
 
