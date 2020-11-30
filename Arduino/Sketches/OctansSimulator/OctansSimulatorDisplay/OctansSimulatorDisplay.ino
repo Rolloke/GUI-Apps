@@ -240,6 +240,7 @@ void notifyMenu(uint8_t aDir, uint8_t aID)
         {
             EEPROM.write(0, 0);
         }
+        break;
     default:
         break;
     }

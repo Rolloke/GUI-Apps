@@ -11,12 +11,13 @@
 
 #include <inttypes.h>
 
-#define  BTN_LEFT    1
-#define  BTN_RIGHT   2
-#define  BTN_UP      3
-#define  BTN_DOWN    4
+#define  BTN_F1      1
+#define  BTN_ENTER   2
+#define  BTN_DOWN    3
+#define  BTN_LEFT    4
 #define  BTN_ESCAPE  5
-#define  BTN_ENTER   6
+#define  BTN_RIGHT   6
+#define  BTN_UP      7
 
 void displayMenuItem();
 void displayAll();
@@ -52,10 +53,9 @@ MenuItem gMainMenu[] =
 MenuItem gMenu("Settings...", gMainMenu, length_of(gMainMenu));
 
 // Button implementation
-void triggerButton(uint8_t aState, uint8_t aID);
+void    triggerButton(uint8_t aState, uint8_t aID);
 uint8_t gButtonPins[3] = { 12, 11, 10 };
-//struct btn { enum eBtn { left, right, up, down, escape, enter, count }; };
-Button gButtons(gButtonPins, sizeof(gButtonPins), triggerButton);
+Button  gButtons(gButtonPins, sizeof(gButtonPins), triggerButton);
 
 void setup()
 {
@@ -140,17 +140,9 @@ void displayMenuItem()
 
 void displayAll()
 {
-    String fString = "Wave Generator";
+    String fString = "Menu Example";
     LCD.setCursor(0, 0);
     LCD.print(fString);
 
-//    fString = MenuFunctionWaveForm(MenuItem::dir::text, 0);
-//    LCD_PRINT_LINE(LEFT, 1, fString, fString.length());
-
-//    fString = MenuFunctionFrequency(MenuItem::dir::text, 0) + " Hz";
-//    LCD_PRINT_LINE(LEFT, 2, fString, fString.length());
-
     displayMenuItem();
 }
-
-

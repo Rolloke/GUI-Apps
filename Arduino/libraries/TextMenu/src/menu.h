@@ -16,7 +16,14 @@ union Subfunction
 
 #define length_of(X) sizeof(X) / sizeof(X[0])
 
-typedef void (*pFunction)(uint8_t aDir, uint8_t aID);
+/// @brief notification function pointer type definition
+/// @param aDirOrIndex identifies the pressed button or a list index
+///        - the pressed button for a command (MenuItem::dir::to)
+///        - list index for ItemSelect()
+/// @param aID an identifier for
+///        - a command
+///        - a list, where an entry is selected
+typedef void (*pFunction)(uint8_t aDirOrIndex, uint8_t aID);
 
 class MenuItem
 {
@@ -43,13 +50,50 @@ public:
         item_edit  = 0x80
     };
 
+    /// @brief Creates a menue entry containing a submenue
+    /// @param aText title of the submenue item
+    /// @param aSub pointer to a MenuItem defining a submenu
+    /// @param aLength number of submenue items
     MenuItem(const char*aText, MenuItem* aSub, int8_t aLength);
+
+    /// @brief Creates a menue entry containing a editable entry
+    /// @param aText title of the submenue item
+    /// @param aItemEdit may be a item derived ItemEditBase
+    ///        - ItemValue<type> type may be an integral or floating point value
+    ///        - ItemSelect a list of values of type (char **)
+    /// @param [aID] an identifier passed to notification function
+    ///        - identify a specific command
+    ///        - identify the selection of a list item
+    /// @param [aLength] number of list items
+    /// @note  - is used for ItemSelect array length
+    /// @param aFlag flags defining behaviour
+    ///        - editable   makes item editable
+    ///        - command    defines command item
+    ///        - limit_turn turn over min or max value editing values or stepping through lists
+    ///        - float_val  floating point value item specifying edit behaviour
+    ///        - no_cursor  dont show cursor editing value
     MenuItem(const char*aText, ItemEditBase* aItemEdit=0, uint8_t aID=0, int8_t aLength=0, uint8_t aFlag=0);
 
+    /// @brief retrieves the text of a selected menu item
+    /// @param aCursorPos delivers the cursor position, when editig a value
+    /// @return text of the menuitem or the value selected
     String getText(int* aCursorPos = 0) const;
-    String getPath() const;
-    void pressBtn(MenuItem::dir::to aDir, MenuItem* aParent=0);
 
+    /// @brief retrieves the path from root menu to the sub item or leaf
+    /// @return path of menu
+    String getPath() const;
+
+    /// @brief presses a button to control the menu item or subitem selection or editing
+    /// @param aDir button defining actions navigating through the menu or editing a value
+    ///        - left, right: selection of items and navigation
+    ///        - up, down: navigation and editing values
+    ///        - enter: start editing, enter changed value and stop editing
+    ///        - escape: stop editing with no changes, go up in submenu
+    /// @note aParent do not use this argument
+    ///       - this argument is filled internally
+    void   pressBtn(MenuItem::dir::to aDir, MenuItem* aParent=0);
+
+    /// @brief sets a notification function for commands or list item selection
     static void setNotificationFunction(pFunction aNotificationFunction);
 
 private:
@@ -99,8 +143,18 @@ protected:
 class ItemSelect : public ItemEditBase
 {
 public:
+    /// @brief Creates an object for a list of text items
+    /// @param aItems an array of character strings
+    /// @note the lenght of this array is determined by length_of()
+    ///       - this is used by aLength argument within constructor MenuItem
     ItemSelect(const char** aItems);
+
+    /// @brief selects list item by index
+    /// @param aIndex index of the item
     void select(int aIndex);
+
+    /// @brief selects list item by text
+    /// @param aName name of the item to be selected
     void select(const char* aName);
 
 protected:
@@ -115,6 +169,10 @@ template <class Type>
 class ItemValue : public ItemEditBase
 {
 public:
+    /// @brief Creates an edit object for an editable variable
+    /// @param a Variable of integral or floating point type
+    /// @param aMin minimum value
+    /// @param aMax maximum value
     ItemValue(Type& aValue, Type aMin, Type aMax) : mValue(aValue), mMin(aMin), mMax(aMax)
     {  }
 protected:
@@ -128,7 +186,7 @@ protected:
         }
         else
         {
-            while (fIndex++) fIncrement *= 0.1;
+            while (fIndex++) fIncrement /= 10;
         }
 
         return fIncrement;
@@ -146,7 +204,7 @@ protected:
           case MenuItem::dir::down      : mValue -= getIncrement(); break;
           case MenuItem::dir::left      : --mMenuItem->mIndex;      break;
           case MenuItem::dir::right     : ++mMenuItem->mIndex;      break;
-          case MenuItem::dir::text      : return String(mValue);
+          case MenuItem::dir::text      : return String(mValue);    break;
         }
         mMenuItem->mIndex = limitValue(getIndex(),
                                        static_cast<int8_t>(isFlagSet(MenuItem::float_val) ? -2 : 0),
