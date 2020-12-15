@@ -6,7 +6,7 @@
 #include <QDialog>
 
 class Channel;
-class TriggerParameter;
+struct TriggerParameter;
 class CombineCurves;
 class QStandardItemModel;
 class QStandardItem;

@@ -2,8 +2,10 @@
 #ifdef __linux__
  #include <syslog.h>
 #endif
+
 #ifdef WIN32
-#include <windows.h>
+//#define USE_WINDOWS_LOG
+//#include <windows.h>
 #endif
 #include <stdarg.h>
 #include <stdio.h>
@@ -17,7 +19,7 @@ map<std::string, int> Logger::mCurveColor;
 string Logger::mLogdir("/tmp");
 Logger::tLogfunction Logger::mLogFunction;
 
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
 namespace
 {
 HANDLE hEventLog = nullptr;
@@ -39,7 +41,7 @@ Logger::Logger(const char* fName)
     // Open syslog
     openlog(fName, fFlags, LOG_USER);
 #endif
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
 #ifdef UNICODE
     std::wstring fNameW;
     convertToUnicode(fName, fNameW);
@@ -56,7 +58,7 @@ Logger::~Logger()
 #ifdef __linux__
     closelog();
 #endif
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
     CloseEventLog(hEventLog);
 #endif
 }
@@ -66,7 +68,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
     if (isSeverityActive(aSeverity))
     {
         const bool fToSyslog   = isSeverityActive(to_syslog);
-        const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
+        const bool fToFunction = (mLogFunction && (mSeverity&to_function) != 0);
         const bool fToConsole  = isSeverityActive(to_console);
 
         if (fToConsole)
@@ -83,7 +85,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             char fMessage[2048]="";
             va_list args;
             va_start (args, format);
-            vsprintf(fMessage, format, args);
+            vsprintf_s(fMessage, sizeof (fMessage), format, args);
             va_end (args);
             mLogFunction(fMessage);
         }
@@ -96,7 +98,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
             va_end (args);
 #endif
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
             char fMessage[2048]="";
             va_list args;
             va_start (args, format);
@@ -143,6 +145,14 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
 
 void Logger::setLogFunction(const tLogfunction& aLogFunc)
 {
+    if (aLogFunc)
+    {
+        mSeverity |= to_function;
+    }
+    else
+    {
+        mSeverity &= ~to_function;
+    }
     mLogFunction = aLogFunc;
 }
 
@@ -167,7 +177,7 @@ int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
 
     return fSyslogPrio;
 }
-#elif WIN32
+#elif USE_WINDOWS_LOG
 std::uint16_t Logger::convertSeverityToEventLog(const std::uint32_t aSeverity, std::uint16_t& aCategory, std::uint32_t& aEvtID)
 {
     std::uint16_t fEventType = EVENTLOG_SUCCESS;

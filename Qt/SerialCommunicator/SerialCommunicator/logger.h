@@ -25,9 +25,8 @@ public:
         emergency  = 0x0100,
         to_console = 0x1000,
         to_syslog  = 0x2000,
-        to_function = 0x4000,
-        highest     = 0x8000
-    };
+		to_function = 0x4000
+	};
 
     static void setSeverity(std::uint32_t aFlag, bool aSet);
     static std::uint32_t getSeverity();

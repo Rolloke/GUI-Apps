@@ -191,7 +191,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         ui->horizontalLayoutTool->addWidget(pTB);
     }
 
-    TRACE(Logger::info, "%s Started", windowTitle());
+    TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
 MainWindow::~MainWindow()
@@ -721,20 +721,20 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             }
             else
             {
-                QString fFullPath = fSource + QDir::toNativeSeparators(fRelativePath);
+                QString fFullPath = fSource + fRelativePath;
                 if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
                 {
                     auto fPaths = fRelativePath.split(" -> ");
                     if (fPaths.size() > 1)
                     {
-                        fFullPath = fSource + QDir::toNativeSeparators(fPaths[1]);
+                        fFullPath = fSource + fPaths[1];
                         QFileInfo fFileInfo(fFullPath);
                         fType.translate(fFileInfo);
                         Type fDestinationType = fType;
                         fDestinationType.add(Type::GitMovedTo);
                         aFiles[fFullPath.toStdString()] = fDestinationType;
                         fType.add(Type::GitMovedFrom);
-                        fFullPath = fSource + QDir::toNativeSeparators(fPaths[0]);
+                        fFullPath = fSource + fPaths[0];
                     }
                 }
                 QFileInfo fFileInfo(fFullPath);

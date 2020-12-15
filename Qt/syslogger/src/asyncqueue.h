@@ -5,18 +5,17 @@
 #include <QQueue>
 #include <QMutex>
 
-#include <stdint.h>
-#include <limits>
+#include <cstdint>
 
 template<class T> class AsyncQueue
 {
 private:
     QQueue<T>       mQueue;
     QMutex          mMutex;
-    int32_t    mMaxSize;
+    std::int32_t    mMaxSize;
 
 public:
-    AsyncQueue(uint32_t aMax = std::numeric_limits<int32_t>::max() )
+    AsyncQueue(std::uint32_t aMax = std::numeric_limits<std::int32_t>::max() )
     : mMaxSize(aMax)
     {
     }
@@ -26,10 +25,10 @@ public:
         clean();
     }
 
-    uint32_t count()
+    std::uint32_t count()
     {
         mMutex.lock();
-        uint32_t fCount = mQueue.count();
+        std::uint32_t fCount = mQueue.count();
         mMutex.unlock();
         return fCount;
     }
@@ -37,7 +36,7 @@ public:
     bool isFull()
     {
         mMutex.lock();
-        int32_t fCount = mQueue.count();
+        std::int32_t fCount = mQueue.count();
         mMutex.unlock();
         return fCount > mMaxSize;
     }

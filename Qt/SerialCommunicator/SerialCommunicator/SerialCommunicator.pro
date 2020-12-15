@@ -10,11 +10,11 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++14
-QMAKE_CXXFLAGS += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS += -std=c++14
+unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
-QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
-QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 TARGET = SerialCommunicator
 TEMPLATE = app
