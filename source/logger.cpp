@@ -85,7 +85,11 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             char fMessage[2048]="";
             va_list args;
             va_start (args, format);
+#ifdef __linux__
+            vsnprintf(fMessage, sizeof (fMessage), format, args);
+#else
             vsprintf_s(fMessage, sizeof (fMessage), format, args);
+#endif
             va_end (args);
             mLogFunction(fMessage);
         }
