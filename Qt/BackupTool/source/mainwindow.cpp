@@ -553,12 +553,24 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     }
 }
 
+void MainWindow::loggingFuncton(const std::string & aText)
+{
+    if (mLogFile.isOpen())
+    {
+        mLogFile.write(aText.c_str(), aText.size());
+        mLogFile.write("\r\n", 2);
+    }
+}
+
 void MainWindow::messageBackup(bool aStart)
 {
     if (aStart)
     {
         mStartTime.start();
-        Logger::openLogFile((mDestination + QDir::separator() + "Backup.log").toStdString());
+
+        mLogFile.setFileName(mDestination + QDir::separator() + "Backup.log");
+        mLogFile.open(QFile::WriteOnly);
+        Logger::setLogFunction(boost::bind(&MainWindow::loggingFuncton, this, _1));
         QDateTime fNow = QDateTime::currentDateTime();
         TRACE(Logger::notice, "Backup date: %s", fNow.toString().toStdString().c_str());
         TRACE(Logger::notice, "Backup host: %s", QSysInfo::machineHostName().toStdString().c_str());
@@ -575,7 +587,7 @@ void MainWindow::messageBackup(bool aStart)
         int    fPredictedtime_m = static_cast<int>(fPredictedTime_s / 60.0);
         QString fPredictedTime = QString::asprintf("%02d:%02d",fPredictedtime_m, static_cast<int>(fPredictedTime_s) - 60 * fPredictedtime_m);
         TRACE(Logger::notice, "Bytes copied: %d of %d", mBytesCopied, mBytesToCopy);
-        Logger::closeLogFile();
+        mLogFile.close();
         ui->statusBar->showMessage("Finished Backup in " + fPredictedTime + " min");
         deleteAllTreeWidgetItem(*ui->treeBackup);
         insertItem(initDir(mDestination), *ui->treeBackup);

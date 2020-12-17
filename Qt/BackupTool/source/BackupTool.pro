@@ -8,7 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
+
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 TARGET = BackupTool
 TEMPLATE = app
@@ -26,3 +29,5 @@ HEADERS  += mainwindow.h \
     workerthreadconnector.h
 
 FORMS    += mainwindow.ui
+
+win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0

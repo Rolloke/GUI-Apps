@@ -12,8 +12,10 @@ TARGET = syslogger
 TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++14
-QMAKE_CXXFLAGS += -Wno-unused-function
-QMAKE_CXXFLAGS += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS += -Wno-unused-function
+unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 SOURCES += main.cpp\
         receiverthread.cpp\

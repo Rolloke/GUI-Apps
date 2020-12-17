@@ -56,7 +56,7 @@ private:
 
     enum class Message
     {
-        UpdateBytes = Work::Last,
+        UpdateBytes = static_cast<int>(Work::Last),
         InsertTreeItem
     };
 
@@ -94,6 +94,7 @@ private:
     void messageBackup(bool);
     void messageRestore(bool);
     void messageUpdateBytes(qlonglong);
+    void loggingFuncton(const std::string&);
 
     Ui::MainWindow *ui;
     QString     mDestination;
@@ -106,6 +107,7 @@ private:
     QTime       mStartTime;
     QString     mCopyCommand;
     bool        mCloseAfterWork;
+    QFile       mLogFile;
 };
 
 #endif // MAINWINDOW_H

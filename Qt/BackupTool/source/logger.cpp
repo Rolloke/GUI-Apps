@@ -2,8 +2,10 @@
 #ifdef __linux__
  #include <syslog.h>
 #endif
+
 #ifdef WIN32
-#include <windows.h>
+//#define USE_WINDOWS_LOG
+//#include <windows.h>
 #endif
 #include <stdarg.h>
 #include <stdio.h>
@@ -12,20 +14,24 @@
 
 using namespace std;
 
-std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice| Logger::to_syslog;
+std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
-FILE* Logger::mFile = NULL;
-
-#ifdef __linux__
 string Logger::mLogdir("/tmp");
-#endif
+Logger::tLogfunction Logger::mLogFunction;
 
-#ifdef WIN32
-string Logger::mLogdir("/tmp");
+#ifdef USE_WINDOWS_LOG
 namespace
 {
 HANDLE hEventLog = nullptr;
 }
+
+void convertToUnicode(const std::string& aSource, std::wstring& aDest)
+{
+    aDest.resize(aSource.size());
+    ::MultiByteToWideChar(CP_ACP, 0, aSource.c_str(), static_cast<int>(aSource.size()), &aDest[0], static_cast<int>(aDest.size()));
+    aDest.resize(wcslen(aDest.c_str()));
+}
+
 #endif
 
 Logger::Logger(const char* fName)
@@ -35,8 +41,15 @@ Logger::Logger(const char* fName)
     // Open syslog
     openlog(fName, fFlags, LOG_USER);
 #endif
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
+#ifdef UNICODE
+    std::wstring fNameW;
+    convertToUnicode(fName, fNameW);
+    hEventLog = OpenEventLogW(nullptr, fNameW.c_str());
+#else
     hEventLog = OpenEventLogA(nullptr, fName);
+#endif
+
 #endif
 }
 
@@ -45,57 +58,69 @@ Logger::~Logger()
 #ifdef __linux__
     closelog();
 #endif
-#ifdef WIN32
+#ifdef USE_WINDOWS_LOG
     CloseEventLog(hEventLog);
 #endif
-    if (mFile)
-    {
-        fclose(mFile);
-    }
 }
 
 void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 {
     if (isSeverityActive(aSeverity))
     {
-        va_list args;
-        if (isSeverityActive(to_console))
+        const bool fToSyslog   = isSeverityActive(to_syslog);
+        const bool fToFunction = (mLogFunction && (mSeverity&to_function) != 0);
+        const bool fToConsole  = isSeverityActive(to_console);
+
+        if (fToConsole)
         {
+            va_list args;
             va_start (args, format);
             vprintf (format, args);
             va_end (args);
             fflush(stdout);
         }
-        if (isSeverityActive(to_file))
+
+        if (fToFunction)
         {
+            char fMessage[2048]="";
+            va_list args;
             va_start (args, format);
-            vfprintf(mFile, format, args);
+#ifdef __linux__
+            vsnprintf(fMessage, sizeof (fMessage), format, args);
+#else
+            vsprintf_s(fMessage, sizeof (fMessage), format, args);
+#endif
             va_end (args);
-#ifdef __linux__
-            fprintf(mFile, "\n");
-#endif
-#ifdef WIN32
-            fprintf(mFile, "\r\n");
-#endif
-            fflush(mFile);
+            mLogFunction(fMessage);
         }
-        if (isSeverityActive(to_syslog))
+
+        if (fToSyslog)
         {
-            va_start (args, format);
 #ifdef __linux__
+            va_list args;
+            va_start (args, format);
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
+            va_end (args);
 #endif
-#ifdef WIN32
-            char fMessage[1024];
-            vsprintf_s(fMessage, sizeof(fMessage), format, args);
+#ifdef USE_WINDOWS_LOG
+            char fMessage[2048]="";
+            va_list args;
+            va_start (args, format);
+            vsprintf(fMessage, format, args);
+            va_end (args);
             std::uint16_t fCategory;
             std::uint32_t fEventID;
             std::uint16_t fType = convertSeverityToEventLog(aSeverity, fCategory, fEventID);
-            std::uint32_t fDatasize = strlen(fMessage);
-            LPCSTR fString[1] = {static_cast<LPCSTR>(&fMessage[0])};
-            ReportEventA(hEventLog, fType, fCategory,fEventID, nullptr, 1, fDatasize, fString, nullptr);
+#ifdef UNICODE
+            std::wstring fMessageW;
+            convertToUnicode(fMessage, fMessageW);
+            LPWSTR  fString[2] = { (LPWSTR)fMessageW.c_str(), NULL };
+            ReportEventW(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCWSTR*)fString, nullptr);
+#else
+            LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
+            ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
-            va_end (args);
+#endif
         }
     }
 }
@@ -122,6 +147,18 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
     return (aSeverity & mSeverity) != 0;
 }
 
+void Logger::setLogFunction(const tLogfunction& aLogFunc)
+{
+    if (aLogFunc)
+    {
+        mSeverity |= to_function;
+    }
+    else
+    {
+        mSeverity &= ~to_function;
+    }
+    mLogFunction = aLogFunc;
+}
 
 #ifdef __linux__
 int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
@@ -144,7 +181,7 @@ int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
 
     return fSyslogPrio;
 }
-#elif WIN32
+#elif USE_WINDOWS_LOG
 std::uint16_t Logger::convertSeverityToEventLog(const std::uint32_t aSeverity, std::uint16_t& aCategory, std::uint32_t& aEvtID)
 {
     std::uint16_t fEventType = EVENTLOG_SUCCESS;
@@ -208,23 +245,7 @@ bool Logger::openStream(const std::string& aTitle, std::ofstream& aStream)
     if (aStream.is_open())
     {
         fOpen = true;
-        aStream << "title=" << aTitle << std::endl;
+        aStream << "title=" << aTitle.c_str() << std::endl;
     }
     return fOpen;
 }
-
-bool Logger::openLogFile(const string &aLogFileName)
-{
-    mFile = fopen(aLogFileName.c_str(), "a+t");
-    setSeverity(to_file, mFile != NULL);
-    return mFile != NULL;
-}
-
-void Logger::closeLogFile()
-{
-     fclose(mFile);
-     setSeverity(to_file, false);
-     mFile = NULL;
-}
-
-

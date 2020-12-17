@@ -68,7 +68,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
     if (isSeverityActive(aSeverity))
     {
         const bool fToSyslog   = isSeverityActive(to_syslog);
-        const bool fToFunction = (mLogFunction.operator bool() && (aSeverity&to_function) != 0);
+        const bool fToFunction = (mLogFunction && (mSeverity&to_function) != 0);
         const bool fToConsole  = isSeverityActive(to_console);
 
         if (fToConsole)
@@ -85,7 +85,11 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             char fMessage[2048]="";
             va_list args;
             va_start (args, format);
-            vsprintf(fMessage, format, args);
+#ifdef __linux__
+            vsnprintf(fMessage, sizeof (fMessage), format, args);
+#else
+            vsprintf_s(fMessage, sizeof (fMessage), format, args);
+#endif
             va_end (args);
             mLogFunction(fMessage);
         }
@@ -145,6 +149,14 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
 
 void Logger::setLogFunction(const tLogfunction& aLogFunc)
 {
+    if (aLogFunc)
+    {
+        mSeverity |= to_function;
+    }
+    else
+    {
+        mSeverity &= ~to_function;
+    }
     mLogFunction = aLogFunc;
 }
 

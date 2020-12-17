@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QFileInfo fFile(argv[0]);
     QString fTitle = fFile.baseName();
     Logger fLogger(fTitle.toStdString().c_str());
-    fLogger.openLogFile(fTitle.toStdString());
+    //fLogger.setLogFunction();
 
     QApplication fApp(argc, argv);
     QCommandLineParser fCmdLine;

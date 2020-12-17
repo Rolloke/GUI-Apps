@@ -11,13 +11,13 @@
 #include <QProgressDialog>
 #include <QPainter>
 #include <QStyledItemDelegate>
+#include <QNetworkInterface>
 
 #include <string>
-#include <boost/bind.hpp>
 
 
-const std::string gProjectRevision = "$ProjectRevision: Last Checkpoint: 1.9 $";
-const std::string gArticleCode     = "Article Code: 08 146 0040";
+const std::string gProjectRevision = "1.01";
+const std::string gArticleCode     = "";
 
 
 namespace
@@ -32,7 +32,7 @@ namespace
         };
     };
 
-    SysLogVersion::Type checkSysLogVersion(uint32_t aVersionStrLength)
+    SysLogVersion::Type checkSysLogVersion(std::uint32_t aVersionStrLength)
     {
         SysLogVersion::Type fType = SysLogVersion::RFC5424;
         if(aVersionStrLength == 3)
@@ -58,7 +58,7 @@ namespace
     }
 
 
-    std::string convertSeverityNumberToString(uint32_t aSevertyNumber)
+    std::string convertSeverityNumberToString(std::uint32_t aSevertyNumber)
     {
         switch(aSevertyNumber)
         {
@@ -76,7 +76,7 @@ namespace
 
 
 
-    QColor convertSeverityNumberToBackgroundColor(uint32_t aSevertyNumber)
+    QColor convertSeverityNumberToBackgroundColor(std::uint32_t aSevertyNumber)
     {
         switch(aSevertyNumber)
         {
@@ -92,7 +92,7 @@ namespace
         }
     }
 
-    QColor convertSeverityNumberToForegroundColor(uint32_t aSevertyNumber)
+    QColor convertSeverityNumberToForegroundColor(std::uint32_t aSevertyNumber)
     {
         switch(aSevertyNumber)
         {
@@ -108,7 +108,7 @@ namespace
         }
     }
 
-    QString convertSeverityNumberToQStyleSheetString(uint32_t aSevertyNumber)
+    QString convertSeverityNumberToQStyleSheetString(std::uint32_t aSevertyNumber)
     {
         switch(aSevertyNumber)
         {
@@ -126,7 +126,7 @@ namespace
 
 
 
-    std::string convertFacilityNumberToString(uint32_t aSevertyNumber)
+    std::string convertFacilityNumberToString(std::uint32_t aSevertyNumber)
     {
         switch(aSevertyNumber)
         {
@@ -174,7 +174,7 @@ ItemList::ItemList(QObject *aParent)
 }
 
 
-int ItemList::rowCount(const QModelIndex & /*parent*/) const
+int ItemList::rowCount(const QModelIndex &) const
 { 
     return 8; 
 }
@@ -277,7 +277,7 @@ public:
 
 
 
-        //QStyle* fStyle = QApplication::style();
+//        QStyle* fStyle = QApplication::style();
         QRect fTextRect = option.rect;
         fTextRect.setLeft(fTextRect.left() + 2);
 
@@ -285,7 +285,7 @@ public:
         painter->setPen(fTextColor.value<QColor>());
 
         fText = elidedText(painter->fontMetrics(), fTextRect.width(), Qt::ElideRight, fText);
-    painter->drawText(fTextRect, fText, option.displayAlignment);
+        painter->drawText(fTextRect, fText, option.displayAlignment);
 
     }
 };
@@ -293,18 +293,18 @@ public:
 
 
 SysLoggerWidget::SysLoggerWidget()
-: QWidget()
-, mCounter(0)
-, mStop(false)
-, mRestoreFilter(false)
-, mRestoreHighlighter(false)
+    : QWidget()
+    , mCounter(0)
+    , mStop(false)
+    , mRestoreFilter(false)
+    , mRestoreHighlighter(false)
+    , mAutoScrollDirection(AutoScrollDirection::Undefined)
 {
     setupUi(this);
 
     setMouseTracking(true);
 
-    //setWindowTitle(windowTitle() + "  (" + gProjectRevision.c_str() + " ; " + gArticleCode.c_str() + ")");
-    setWindowTitle(windowTitle());
+    setWindowTitle(windowTitle() + "  (" + gProjectRevision.c_str() + " ; " + gArticleCode.c_str() + ")");
 
 
     mFilterSettings.resize(10);
@@ -324,13 +324,13 @@ SysLoggerWidget::SysLoggerWidget()
 
     mFileLoggingModel = new QStandardItemModel(0, 10, this);
     mFileLoggingProxyModel.resize(10);
-    for(int32_t i=0; i < 10; ++i)
+    for(std::int32_t i=0; i < 10; ++i)
     {
         mFileLoggingProxyModel[i] = new QSortFilterProxyModel;
         mFileLoggingProxyModel[i]->setFilterKeyColumn(i-1);
     }
     mFileLoggingProxyModel[0]->setSourceModel(mFileLoggingModel);  
-    for(uint32_t i=0; i < 9; ++i)
+    for(std::uint32_t i=0; i < 9; ++i)
     {
         mFileLoggingProxyModel[i+1]->setSourceModel(mFileLoggingProxyModel[i]);
     }  
@@ -338,13 +338,13 @@ SysLoggerWidget::SysLoggerWidget()
 
     mFindLoggingModel = new QStandardItemModel(0, 10, this);
     mFindLoggingProxyModel.resize(10);
-    for(int32_t i=0; i < 10; ++i)
+    for(std::int32_t i=0; i < 10; ++i)
     {
         mFindLoggingProxyModel[i] = new QSortFilterProxyModel;
         mFindLoggingProxyModel[i]->setFilterKeyColumn(i-1);
     }
     mFindLoggingProxyModel[0]->setSourceModel(mFindLoggingModel);  
-    for(uint32_t i=0; i < 9; ++i)
+    for(std::uint32_t i=0; i < 9; ++i)
     {
         mFindLoggingProxyModel[i+1]->setSourceModel(mFindLoggingProxyModel[i]);
     }  
@@ -352,7 +352,7 @@ SysLoggerWidget::SysLoggerWidget()
 
     mModel = new QStandardItemModel(0, 9, this);
     mModel->setHeaderData(0, Qt::Horizontal, QObject::tr("Counter"));
-    mModel->setHeaderData(1, Qt::Horizontal, QObject::tr("Date/Time UTC"));
+    mModel->setHeaderData(1, Qt::Horizontal, QObject::tr("Date/Time"));
     mModel->setHeaderData(2, Qt::Horizontal, QObject::tr("Facility"));
     mModel->setHeaderData(3, Qt::Horizontal, QObject::tr("Severity"));
     mModel->setHeaderData(4, Qt::Horizontal, QObject::tr("Host Name"));
@@ -363,14 +363,14 @@ SysLoggerWidget::SysLoggerWidget()
 
 
     mProxyModel.resize(10);
-    for(uint32_t i=0; i < 10; ++i)
+    for(std::uint32_t i=0; i < 10; ++i)
     {
         mProxyModel[i] = new QSortFilterProxyModel;
         mProxyModel[i]->setFilterKeyColumn(i-1);
     }
 
     mProxyModel[0]->setSourceModel(mModel);  
-    for(uint32_t i=0; i < 9; ++i)
+    for(std::uint32_t i=0; i < 9; ++i)
     {
         mProxyModel[i+1]->setSourceModel(mProxyModel[i]);
     }  
@@ -390,7 +390,7 @@ SysLoggerWidget::SysLoggerWidget()
 
 
     QHeaderView *verticalHeader = mLogTableView->verticalHeader();
-    //verticalHeader->setSectionResizeMode(QHeaderView::Fixed);
+    verticalHeader->setSectionResizeMode(QHeaderView::Fixed);
     verticalHeader->setDefaultSectionSize(fontMetrics().height() +4 );
 
 
@@ -412,6 +412,16 @@ SysLoggerWidget::SysLoggerWidget()
     mLogTableView->sortByColumn(0);
 
     loadPersistentData();
+
+
+    QString fIpRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
+
+    QRegExp fIpRegex("^" + fIpRange
+        + "\\." + fIpRange
+        + "\\." + fIpRange
+        + "\\." + fIpRange + "$");
+    QRegExpValidator* fIpValidator = new QRegExpValidator(fIpRegex, this);
+    mLineEditAddress->setValidator(fIpValidator);
 
 
     mReceiverThread = new ReceiverThread(this);
@@ -489,10 +499,15 @@ void SysLoggerWidget::initSocket()
 
     connect(mFileLoggingIsActiveCheckBox, SIGNAL(stateChanged(int)),
             this, SLOT(fileLogging_StateChanged(int)));
+    
+    connect(mComboBoxProtocol, SIGNAL(currentIndexChanged(int)),
+        this, SLOT(protocolChanged(int)));
 
-    connect(mUDPPortSpinBox, SIGNAL(valueChanged(int)),
-            this, SLOT(UDPPortChanged(int)));
+    connect(mSpinBoxPort, SIGNAL(valueChanged(int)),
+            this, SLOT(portChanged(int)));
 
+    connect(mLineEditAddress, SIGNAL(textChanged(const QString&)),
+        this, SLOT(addressChanged(const QString&)));
 
     connect(mLogTableView, SIGNAL(customContextMenuRequested(const QPoint&)), 
             this, SLOT(popUpContextMenu(const QPoint&)));
@@ -535,10 +550,10 @@ void SysLoggerWidget::initSocket()
 
     connect(mCaseSensitveHighlighterCheckBox, SIGNAL(toggled(bool)),
             this, SLOT(highlighterPatternChanged()));
-
-    connect(mCustomcheckBox, SIGNAL(toggled(bool)),
-            this, SLOT(customHiglightingFlagChanged()));
-
+            
+    connect(mUsedHighlighterComboBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(usedHighlighterChanged(int)));
+    
 
 }
 
@@ -548,12 +563,11 @@ void SysLoggerWidget::initSocket()
 
 void SysLoggerWidget::readPendingDatagrams()
 {
-
     QByteArray fDatagram;
 
 
     bool fCanRead = true;
-    for(uint32_t i=0; (i < 50)&&(fCanRead); ++i)
+    for(std::uint32_t i=0; (i < 50)&&(fCanRead); ++i)
     {
         fCanRead = mReceiverThread->mDatagramQueue.pull(fDatagram, 10);
         if(fCanRead)
@@ -598,7 +612,7 @@ void SysLoggerWidget::stop_clicked(bool aFlag)
 void SysLoggerWidget::filterColumnChanged()
 {
     mRestoreFilter = true;
-    int32_t fIndex = mFilterColumnComboBox->currentIndex();
+    std::int32_t fIndex = mFilterColumnComboBox->currentIndex();
     mHideCheckBox->setEnabled(fIndex > 0);
     mFilterPatternComboBox->setEditText(mFilterSettings[fIndex].mPattern);
     mFilterSyntaxComboBox->setCurrentIndex(mFilterSettings[fIndex].mSyntax);
@@ -620,7 +634,7 @@ void SysLoggerWidget::filterRegExpChanged()
 
         QString fPattern = mFilterPatternComboBox->currentText();
         QRegExp fRegExp(fPattern, fCaseSensitivity, syntax);
-        int32_t fIndex = mFilterColumnComboBox->currentIndex();
+        std::int32_t fIndex = mFilterColumnComboBox->currentIndex();
         mFilterSettings[fIndex].mPattern = fPattern;
         mFilterSettings[fIndex].mCaseSensitive = fCaseSensitivity;
         mFilterSettings[fIndex].mHide = fHide;
@@ -665,7 +679,7 @@ void SysLoggerWidget::filterRegExpChanged()
         }
         else
         {
-            for(uint32_t i=1; i < 10; ++i)
+            for(std::uint32_t i=1; i < 10; ++i)
             {
                 QFont fFont;
                 if(!mFilterSettings[0].mPattern.isEmpty())
@@ -706,8 +720,8 @@ void SysLoggerWidget::fileLogging_StateChanged(int aState)
         mCurrentFileName = fFileName.toStdString();
       
         mCurrentFileCounter = 0;
-        std::string fFile = mCurrentFileName + QString("_%1.log").arg(mCurrentFileCounter, 4, 10, QLatin1Char('0')).toStdString();
-        mFileStream.open(fFile.c_str(),
+
+        mFileStream.open(mCurrentFileName + QString("_%1.log").arg(mCurrentFileCounter, 4, 10, QLatin1Char('0')).toStdString(),
                          std::ios::binary | std::ios::in | std::ios::out | std::ios::trunc);  
     }
     else
@@ -717,10 +731,57 @@ void SysLoggerWidget::fileLogging_StateChanged(int aState)
 
 }
 
-void SysLoggerWidget::UDPPortChanged(int aUDPPortNumber)
+void SysLoggerWidget::protocolChanged(int aProtoType)
 {
-    mReceiverThread->changeUDPPort(aUDPPortNumber);
+    ProtocolTypes::Type fProtocol = static_cast<ProtocolTypes::Type>(aProtoType);
+    if(fProtocol == ProtocolTypes::UDP)
+    {
+        mLineEditAddress->setEnabled(false);
+        mLineEditAddress->setText("0.0.0.0");
+    }
+    else if (fProtocol == ProtocolTypes::TCP)
+    {
+        mLineEditAddress->setEnabled(false);
+        QList<QHostAddress> fList = QNetworkInterface::allAddresses();
+
+        QHostAddress fAddress;
+        for (int nIter = 0; nIter < fList.count(); nIter++)
+        {
+            if (!fList[nIter].isLoopback())
+            {
+                if (fList[nIter].protocol() == QAbstractSocket::IPv4Protocol)
+                {
+                    fAddress = fList[nIter];
+                    break;
+                }
+            }
+        }
+
+        mLineEditAddress->setText(fAddress.toString());
+    }
+    else
+    {
+        mLineEditAddress->setEnabled(true);
+        mLineEditAddress->setText(mReceiverThread->getAddress().toString());
+        
+    }
+    mReceiverThread->changeProtocol(fProtocol);
 }
+
+void SysLoggerWidget::addressChanged(const QString& aAddress)
+{
+    if(mLineEditAddress->isEnabled())
+    {
+        mReceiverThread->changeAddress(QHostAddress(aAddress));
+    }
+}
+
+void SysLoggerWidget::portChanged(int aPort)
+{
+    mReceiverThread->changePort(aPort);
+}
+
+
 
 
 void SysLoggerWidget::popUpContextMenu(const QPoint& aPos)
@@ -737,12 +798,12 @@ void SysLoggerWidget::copySelectedLinesToClipboard()
    
     QString fClipboardText;
 
-    for(int i=0; i < fList.size(); ++i)
+    for(auto i=0; i < fList.size(); ++i)
     {
         QModelIndex& fModelIndex = fList[i];
 
         QStringList fStringList = fModelIndex.data().toStringList();
-        for(int j=0; j < fStringList.size(); ++j)
+        for(auto j=0; j < fStringList.size(); ++j)
         {
             fClipboardText += fStringList[j] + " "; 
         }
@@ -771,8 +832,8 @@ namespace
 {
     void parseSyslogLine(
         const QString& aText,
-        uint32_t& aSeverityNumber,
-        uint32_t& aFacilityNumber,
+        std::uint32_t& aSeverityNumber, 
+        std::uint32_t& aFacilityNumber,
         QString&       aDateTimeString,
         QString&       aHostNameString,
         QString&       aAppNameString,
@@ -782,9 +843,9 @@ namespace
         QString&       aMessageString
         )
     {
-    std::vector<uint32_t> fStartOfSysLogPart;
+    std::vector<std::uint32_t> fStartOfSysLogPart;
     fStartOfSysLogPart.push_back(0);
-    uint32_t fIndex = 0;
+    std::uint32_t fIndex = 0;
     while((fIndex = aText.indexOf(" ", fIndex+1)) > 0 && (fStartOfSysLogPart.size()) < 8)
     {
         fStartOfSysLogPart.push_back(fIndex+1);
@@ -792,11 +853,11 @@ namespace
 
 
     QString fFacilityPlusSeverityString = aText.mid(fStartOfSysLogPart[0]+1, (aText.indexOf(">")-1));
-    int32_t fMsgStart = aText.indexOf(">")+1;
-    int32_t fVersionStringLength = fStartOfSysLogPart[1]-fMsgStart-1;
+    std::int32_t fMsgStart = aText.indexOf(">")+1;
+    std::int32_t fVersionStringLength = fStartOfSysLogPart[1]-fMsgStart-1;
     QString fVersionString = aText.mid(fMsgStart, fStartOfSysLogPart[1]-fStartOfSysLogPart[0]);
 
-    uint32_t fFacilityPlusSeverityNumber =  fFacilityPlusSeverityString.toUInt();
+    std::uint32_t fFacilityPlusSeverityNumber =  fFacilityPlusSeverityString.toUInt();
     aSeverityNumber = fFacilityPlusSeverityNumber % 8;
     aFacilityNumber = fFacilityPlusSeverityNumber / 8;
 
@@ -812,7 +873,7 @@ namespace
         {
             aStructuredDataString = aText.mid(fStartOfSysLogPart[6], fStartOfSysLogPart[7]-fStartOfSysLogPart[6]);
 
-            int32_t fLineBreakIndex = aText.indexOf("\n", fStartOfSysLogPart[7]);
+            std::int32_t fLineBreakIndex = aText.indexOf("\n", fStartOfSysLogPart[7]);
             if(fLineBreakIndex >=0)
             {
                 aMessageString = aText.mid(fStartOfSysLogPart[7], fLineBreakIndex-fStartOfSysLogPart[7]);
@@ -829,7 +890,7 @@ namespace
     } 
     else
     {
-        uint32_t fOffset = 0;
+        std::uint32_t fOffset = 0;
         if(aText.at(fMsgStart).isSpace())
         {
             ++fMsgStart; 
@@ -855,7 +916,7 @@ namespace
         aDateTimeString = aText.mid(fMsgStart, fStartOfSysLogPart[3+fOffset]-fMsgStart);
         aHostNameString = aText.mid(fStartOfSysLogPart[3+fOffset], fStartOfSysLogPart[4+fOffset]-fStartOfSysLogPart[3+fOffset]);
 
-        int32_t fLineBreakIndex = aText.indexOf("\n", fStartOfSysLogPart[4+fOffset]);
+        std::int32_t fLineBreakIndex = aText.indexOf("\n", fStartOfSysLogPart[4+fOffset]);
         if(fLineBreakIndex >=0)
         {
             aMessageString = aText.mid(fStartOfSysLogPart[4+fOffset], fLineBreakIndex-fStartOfSysLogPart[4+fOffset]);
@@ -867,13 +928,13 @@ namespace
 
         
         //Optional Tag field
-        int32_t fTagMessageLimiter = 0;
+        std::int32_t fTagMessageLimiter = 0;
         if((fTagMessageLimiter = aMessageString.indexOf(":", 1)) > 0)
         {
             QString fTagString = aMessageString.mid(0, fTagMessageLimiter);
             
-            int32_t fStartPID = fTagString.indexOf("[", 1);
-            int32_t fStopPID = fTagString.indexOf("]", 1);
+            std::int32_t fStartPID = fTagString.indexOf("[", 1);
+            std::int32_t fStopPID = fTagString.indexOf("]", 1);
             if(fStartPID > 0 && fStopPID > 0)
             {
                 aAppNameString = fTagString.mid(0, fStartPID);
@@ -903,13 +964,15 @@ namespace
     }
 }
 
+
+
 void SysLoggerWidget::processTheDatagram(QByteArray& aDatagram)
 {
     QString fText = aDatagram.data();
 
 
-    uint32_t fSeverityNumber;
-    uint32_t fFacilityNumber;
+    std::uint32_t fSeverityNumber;
+    std::uint32_t fFacilityNumber;
     QString fDateTimeString;
     QString fHostNameString;
     QString fAppNameString;
@@ -923,8 +986,8 @@ void SysLoggerWidget::processTheDatagram(QByteArray& aDatagram)
 
 
 
+        
     QList<QStandardItem*> fItemList;
-
 
     fItemList.append(new QStandardItem(QString("%1").arg(mCounter, 9, 10, QLatin1Char('0'))));   //Counter
     fItemList.append(new QStandardItem(fDateTimeString));   //Date/Time
@@ -939,21 +1002,29 @@ void SysLoggerWidget::processTheDatagram(QByteArray& aDatagram)
     QColor fBColor;
     QColor fFColor;
 
-    if(mCustomcheckBox->isChecked())
+    if (mUsedHighlighterComboBox->currentIndex() == 0)
+    {
+        fBColor = convertSeverityNumberToBackgroundColor(fSeverityNumber);
+        fFColor = convertSeverityNumberToForegroundColor(fSeverityNumber);
+    }
+    else if(mUsedHighlighterComboBox->currentIndex() == 1)
     {
         fBColor = convertSeverityNumberToBackgroundColor(9); //Use default layout 
         fFColor = convertSeverityNumberToForegroundColor(9); //Use default layout 
         
-        updateOneLineCostumHighlighting(fBColor, fFColor, 0,
-            [fItemList](int /*aRow*/, int aCol){ return fItemList[aCol]; } );
+        updateOneLineCostumHighlighting(fBColor, fFColor, 0, 
+            [fItemList](int , int aCol){ return fItemList[aCol]; }, true );
     }
     else
     {
         fBColor = convertSeverityNumberToBackgroundColor(fSeverityNumber);
         fFColor = convertSeverityNumberToForegroundColor(fSeverityNumber);
+
+        updateOneLineCostumHighlighting(fBColor, fFColor, 0,
+            [fItemList](int , int aCol) { return fItemList[aCol]; }, false);
     }
 
-    for(int32_t i=0; i < fItemList.size(); ++i)
+    for(std::int32_t i=0; i < fItemList.size(); ++i)
     {
         fItemList[i]->setBackground(QBrush(fBColor));
         fItemList[i]->setForeground(QBrush(fFColor));
@@ -1006,17 +1077,17 @@ void SysLoggerWidget::processTheDatagram(QByteArray& aDatagram)
 
         if((!fFilterFlag) || (mFileLoggingProxyModel[mFileLoggingProxyModel.size()-1]->hasChildren()))
         {
-            uint32_t fCurrentPos = mFileStream.tellg();
+            std::uint32_t fCurrentPos = mFileStream.tellg();
             mFileStream.seekg (0, mFileStream.end);
-            uint32_t fLength = mFileStream.tellg();
+            std::uint32_t fLength = mFileStream.tellg();
             mFileStream.seekg (fCurrentPos, mFileStream.beg);
 
-            static const uint32_t fMaxSizeOfFile = 100*1024*1024;
+            static const std::uint32_t fMaxSizeOfFile = 100*1024*1024;
             if(fLength > fMaxSizeOfFile)
             {
                 mFileStream.close();
                 ++mCurrentFileCounter;
-                mFileStream.open((mCurrentFileName + QString("_%1.log").arg(mCurrentFileCounter, 4, 10, QLatin1Char('0')).toStdString()).c_str(),
+                mFileStream.open(mCurrentFileName + QString("_%1.log").arg(mCurrentFileCounter, 4, 10, QLatin1Char('0')).toStdString(),
                         std::ios::binary | std::ios::in | std::ios::out | std::ios::trunc);  
             }
 
@@ -1041,16 +1112,33 @@ void SysLoggerWidget::savePersitentData()
     fFileStream.open("persistent.dat", std::ios::binary | std::ios::out );
     if(fFileStream.is_open())
     {
-        auto fIter= mFilterSettings.begin();
-        for(;fIter != mFilterSettings.end();++fIter)
         {
-            uint32_t fPatternSize = (*fIter).mPattern.length()+1;
-            fFileStream.write(reinterpret_cast<char*>(&fPatternSize), sizeof(uint32_t));
-            fFileStream.write((*fIter).mPattern.toStdString().c_str(), fPatternSize);
-            fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(uint32_t));
-            fFileStream.write(reinterpret_cast<char*>(&(*fIter).mHide), sizeof(uint32_t));
-            fFileStream.write(reinterpret_cast<char*>(&(*fIter).mSyntax), sizeof(uint32_t));
+            auto fIter = mFilterSettings.begin();
+            for (; fIter != mFilterSettings.end(); ++fIter)
+            {
+                std::uint32_t fPatternSize = (*fIter).mPattern.length() + 1;
+                fFileStream.write(reinterpret_cast<char*>(&fPatternSize), sizeof(std::uint32_t));
+                fFileStream.write((*fIter).mPattern.toStdString().c_str(), fPatternSize);
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mHide), sizeof(std::uint32_t));
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mSyntax), sizeof(std::uint32_t));
+            }
         }
+
+        {
+            auto fIter = mHighlighterSettings.begin();
+            for (; fIter != mHighlighterSettings.end(); ++fIter)
+            {
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mInvert), sizeof(std::uint32_t));
+
+                std::uint32_t fPatternSize = (*fIter).mPattern.length() + 1;
+                fFileStream.write(reinterpret_cast<char*>(&fPatternSize), sizeof(std::uint32_t));
+                fFileStream.write((*fIter).mPattern.toStdString().c_str(), fPatternSize);
+            }
+        }
+
+        fFileStream.write(reinterpret_cast<char*>(&mAutoScrollDirection), sizeof(std::uint32_t));
 
         fFileStream.close();
     }
@@ -1062,25 +1150,45 @@ void SysLoggerWidget::loadPersistentData()
 {
     std::fstream fFileStream;
     fFileStream.open("persistent.dat", std::ios::binary | std::ios::in );
-    if(fFileStream.is_open())
+    if (fFileStream.is_open())
     {
-        auto fIter= mFilterSettings.begin();
-        for(;fIter != mFilterSettings.end(); ++fIter)
         {
-            uint32_t fPatternSize = 0;
-            fFileStream.read(reinterpret_cast<char*>(&fPatternSize), sizeof(uint32_t));
-            std::vector<char> fBuffer(fPatternSize);
-            fFileStream.read(reinterpret_cast<char*>(fBuffer.data()), fPatternSize);
-            (*fIter).mPattern = &fBuffer[0];
-            fFileStream.read((char*)(&(*fIter).mCaseSensitive), sizeof(uint32_t));
-            fFileStream.read((char*)(&(*fIter).mHide), sizeof(uint32_t));
-            fFileStream.read((char*)(&(*fIter).mSyntax), sizeof(uint32_t));
+            auto fIter = mFilterSettings.begin();
+            for (; fIter != mFilterSettings.end(); ++fIter)
+            {
+                std::uint32_t fPatternSize = 0;
+                fFileStream.read(reinterpret_cast<char*>(&fPatternSize), sizeof(std::uint32_t));
+                std::vector<char> fBuffer(fPatternSize);
+                fFileStream.read(reinterpret_cast<char*>(fBuffer.data()), fPatternSize);
+                (*fIter).mPattern = &fBuffer[0];
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mHide), sizeof(std::uint32_t));
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mSyntax), sizeof(std::uint32_t));
+            }
         }
+
+        {
+            auto fIter = mHighlighterSettings.begin();
+            for (; fIter != mHighlighterSettings.end(); ++fIter)
+            {
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mInvert), sizeof(std::uint32_t));
+
+                std::uint32_t fPatternSize = 0;
+                fFileStream.read(reinterpret_cast<char*>(&fPatternSize), sizeof(std::uint32_t));
+                std::vector<char> fBuffer(fPatternSize);
+                fFileStream.read(reinterpret_cast<char*>(fBuffer.data()), fPatternSize);
+                (*fIter).mPattern = &fBuffer[0];
+            }
+        }
+
+        fFileStream.read(reinterpret_cast<char*>(&mAutoScrollDirection), sizeof(std::uint32_t));
+    
         fFileStream.close();
     }
 
 
-    for(uint32_t i=0; i< 10; ++i)
+    for(std::uint32_t i=0; i< 10; ++i)
     {
         const FilterSettings fSettings = mFilterSettings[i];
         bool fHide = fSettings.mHide;
@@ -1124,6 +1232,16 @@ void SysLoggerWidget::loadPersistentData()
     filterColumnChanged();
     filterRegExpChanged();
 
+    highlighterChanged(0);
+
+
+
+    mToTopToolButton->setChecked(mAutoScrollDirection == AutoScrollDirection::ToTop);
+    mToBottomToolButton->setChecked(mAutoScrollDirection == AutoScrollDirection::ToBottom);
+
+    toTopToggled(mAutoScrollDirection == AutoScrollDirection::ToTop);
+    toBottomToggled(mAutoScrollDirection == AutoScrollDirection::ToBottom);
+
 }
 
 
@@ -1140,7 +1258,7 @@ void SysLoggerWidget::loadPlaybackFile_clicked(bool)
             mPlaybackFileStream.close();
         }
 
-        mPlaybackFileStream.open(fFileName.toStdString().c_str(), std::ios::binary | std::ios::in );
+        mPlaybackFileStream.open(fFileName.toStdString(), std::ios::binary | std::ios::in );  
 
         if(mPlaybackFileStream.is_open())
         {
@@ -1159,7 +1277,7 @@ void SysLoggerWidget::loadPlaybackFile_clicked(bool)
 
 
 
-            int64_t fCurrentPos = mPlaybackFileStream.tellg();
+            std::int64_t fCurrentPos = mPlaybackFileStream.tellg();
             mPlaybackFileStream.seekg (0, mPlaybackFileStream.end);
             mPlaybackFileSize = mPlaybackFileStream.tellg();
             mPlaybackFileStream.seekg (fCurrentPos, mFileStream.beg);
@@ -1182,7 +1300,7 @@ void SysLoggerWidget::loadPlaybackFile_clicked(bool)
                 mPlaybackFileStream.read(&fBuffer[0], fReadBufferSize);
                 
                 fLength -= fReadBufferSize;
-                for(uint64_t i=0; i < fReadBufferSize; ++i)
+                for(std::uint64_t i=0; i < fReadBufferSize; ++i)
                 {
                     if(fBuffer[i] == '\n')
                     {
@@ -1206,7 +1324,7 @@ void SysLoggerWidget::loadPlaybackFile_clicked(bool)
 void SysLoggerWidget::clearPlaybackFile_clicked(bool)
 {
     mPlaybackProgressSlider->setRange(0, 99);
-    mPlaybackProgressSlider->setValue(0);
+     mPlaybackProgressSlider->setValue(0);
     mPlaybackFileNameLineEdit->setText("");
     mPlaybackProgressLabel->setText("[0[0;0]0]");
     mPlaybackFileStream.close();
@@ -1231,12 +1349,12 @@ void SysLoggerWidget::updatePlaybackContent(int aValueChange)
    
 
         // Find the Correct Start Line
-        int32_t fLineCounter = 0;
-        int32_t fCurrentLine = mPlaybackProgressSlider->value()+aValueChange;
+        std::int32_t fLineCounter = 0;
+        std::int32_t fCurrentLine = mPlaybackProgressSlider->value()+aValueChange;
 
         size_t fLength = mPlaybackFileSize;
-        static const int32_t fBufferSize = 4096;
-        static const int32_t fMaxLineLength = 512;
+        static const std::int32_t fBufferSize = 4096;
+        static const std::int32_t fMaxLineLength = 512;
         char fBuffer[fBufferSize];
 
         while(mPlaybackFileStream.good() && fLength > 0 && (fLineCounter<fCurrentLine))
@@ -1251,7 +1369,7 @@ void SysLoggerWidget::updatePlaybackContent(int aValueChange)
 
                 mPlaybackFileStream.read(&fBuffer[0], fReadBufferSize);             
                 fLength -= fReadBufferSize;
-                for(uint64_t i=0; i < fReadBufferSize; ++i)
+                for(std::uint64_t i=0; i < fReadBufferSize; ++i)
                 {
                     if(fBuffer[i] == '\n')
                     {
@@ -1269,7 +1387,7 @@ void SysLoggerWidget::updatePlaybackContent(int aValueChange)
 
         //Read data 
         /*
-        uint32_t fNumberOfReadLines = mOutputLengthSpinBox->value();
+        std::uint32_t fNumberOfReadLines = mOutputLengthSpinBox->value();
         while((mPlaybackFileStream.good()) && (fNumberOfReadLines > 0))
         {
             std::getline(mPlaybackFileStream, fTmpLine);
@@ -1286,12 +1404,12 @@ void SysLoggerWidget::updatePlaybackContent(int aValueChange)
         
         fLength = mPlaybackFileSize-mPlaybackFileStream.tellg();
         size_t fFileJumpBack = 0;
-        uint32_t fNumberOfReadLines = mOutputLengthSpinBox->value();
+        std::uint32_t fNumberOfReadLines = mOutputLengthSpinBox->value();
         while((mPlaybackFileStream.good()) && (fLength > 0) && (fNumberOfReadLines > 0))
         {
             size_t fFilePos = mPlaybackFileStream.tellg(); 
             mPlaybackFileStream.seekg (fFilePos-fFileJumpBack, mPlaybackFileStream.beg);
-            int32_t fReadBufferSize = fBufferSize;
+            std::int32_t fReadBufferSize = fBufferSize;
             if(fLength < fBufferSize)
             {
                 fReadBufferSize = fLength;
@@ -1300,14 +1418,14 @@ void SysLoggerWidget::updatePlaybackContent(int aValueChange)
             fLength -= fReadBufferSize;
             size_t fStartIndex = 0;
             size_t fEndIndex = 0;
-            for(int64_t i=0; (i < fReadBufferSize) && (fNumberOfReadLines > 0); ++i)
+            for(std::int64_t i=0; (i < fReadBufferSize) && (fNumberOfReadLines > 0); ++i)
             {
                 if(fBuffer[i] == '\n')
                 {
                     fEndIndex = i;
                     mCounter = fLineCounter++;
-                    QByteArray fBA(&fBuffer[fStartIndex], fEndIndex-fStartIndex+1);
-                    processTheDatagram(fBA);
+                    auto byte_array = QByteArray(&fBuffer[fStartIndex], fEndIndex-fStartIndex+1);
+                    processTheDatagram(byte_array);
                     fStartIndex = fEndIndex+1;
                     --fNumberOfReadLines;
                 }    
@@ -1328,10 +1446,10 @@ void SysLoggerWidget::updatePlaybackStatus()
 {
     if(mPlaybackFileStream.is_open())
     {
-        uint32_t fLineCounter = mPlaybackProgressSlider->value();
+        std::uint32_t fLineCounter = mPlaybackProgressSlider->value();
 
-        uint32_t fStartLine = fLineCounter;
-        uint32_t fEndLine = fLineCounter+(mOutputLengthSpinBox->value()-1);
+        std::uint32_t fStartLine = fLineCounter;
+        std::uint32_t fEndLine = fLineCounter+(mOutputLengthSpinBox->value()-1);
         if(fEndLine > mPlaybackNumberOfLines)
         {
             fEndLine = mPlaybackNumberOfLines-1;
@@ -1373,7 +1491,7 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
 
 
         bool fFindLine = false;
-        uint64_t fSearchedLineNumber = 0;
+        std::uint64_t fSearchedLineNumber = 0;
 
 
         mModel->removeRows(0, mModel->rowCount());
@@ -1385,12 +1503,12 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
         std::string fTmpLine;
    
         // Find the Correct Start Line
-        int32_t fLineCounter = 0;
-        int32_t fCurrentLine = mPlaybackProgressSlider->value()+1;
+        std::int32_t fLineCounter = 0;
+        std::int32_t fCurrentLine = mPlaybackProgressSlider->value()+1;
 
         size_t fLength = mPlaybackFileSize;
-        static const int32_t fBufferSize = 4096;
-        static const int32_t fMaxLineLength = 512;
+        static const std::int32_t fBufferSize = 4096;
+        static const std::int32_t fMaxLineLength = 512;
         char fBuffer[fBufferSize];
 
         while(mPlaybackFileStream.good() && fLength > 0 && (fLineCounter<fCurrentLine))
@@ -1405,7 +1523,7 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
 
                 mPlaybackFileStream.read(&fBuffer[0], fReadBufferSize);             
                 fLength -= fReadBufferSize;
-                for(uint64_t i=0; i < fReadBufferSize; ++i)
+                for(std::uint64_t i=0; i < fReadBufferSize; ++i)
                 {
                     if(fBuffer[i] == '\n')
                     {
@@ -1422,13 +1540,13 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
      
         fLength = mPlaybackFileSize-mPlaybackFileStream.tellg();
         size_t fFileJumpBack = 0;
-        uint32_t fNumberOfProcessedLines = fCurrentLine;
-        uint32_t fNumberOfReadLines = mPlaybackNumberOfLines-fCurrentLine;
+        std::uint32_t fNumberOfProcessedLines = fCurrentLine;
+        std::uint32_t fNumberOfReadLines = mPlaybackNumberOfLines-fCurrentLine;
         while((!fProgress.wasCanceled())&&(!fFindLine)&&(mPlaybackFileStream.good()) && (fLength > 0) && (fNumberOfReadLines > 0))
         {
             size_t fFilePos = mPlaybackFileStream.tellg(); 
             mPlaybackFileStream.seekg (fFilePos-fFileJumpBack, mPlaybackFileStream.beg);
-            int32_t fReadBufferSize = fBufferSize;
+            std::int32_t fReadBufferSize = fBufferSize;
             if(fLength < fBufferSize)
             {
                 fReadBufferSize = fLength;
@@ -1437,7 +1555,7 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
             fLength -= fReadBufferSize;
             size_t fStartIndex = 0;
             size_t fEndIndex = 0;
-            for(int64_t i=0; (!fProgress.wasCanceled()) && (!fFindLine) && (i < fReadBufferSize) && (fNumberOfReadLines > 0); ++i)
+            for(std::int64_t i=0; (!fProgress.wasCanceled()) && (!fFindLine) && (i < fReadBufferSize) && (fNumberOfReadLines > 0); ++i)
             {
                 if(fBuffer[i] == '\n')
                 {
@@ -1447,8 +1565,8 @@ void  SysLoggerWidget::findNextMatchingFilterPattern()
                     QString fText = QByteArray(&fBuffer[fStartIndex], fEndIndex-fStartIndex+1).data();
 
 //--------------------
-                    uint32_t fSeverityNumber;
-                    uint32_t fFacilityNumber;
+                    std::uint32_t fSeverityNumber;
+                    std::uint32_t fFacilityNumber;
                     QString fDateTimeString;
                     QString fHostNameString;
                     QString fAppNameString;
@@ -1529,55 +1647,32 @@ void SysLoggerWidget::highlighterPatternChanged()
         mHighlighterSettings[fCurrentIndex].mCaseSensitive = 
             mCaseSensitveHighlighterCheckBox->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
-        if(mCustomcheckBox->isChecked())
+        if((mUsedHighlighterComboBox->currentIndex() != 0))
         {
-            updateCostumHighlighting();
+            if (mUsedHighlighterComboBox->currentIndex() == 2)
+            {
+                updateDefaultHighlighting();
+            }
+            updateCostumHighlighting((mUsedHighlighterComboBox->currentIndex() == 1) );
         }
     }
 }
 
 
-void SysLoggerWidget::customHiglightingFlagChanged()
+void SysLoggerWidget::usedHighlighterChanged(int )
 {
-    if(mCustomcheckBox->isChecked())
+    if(mUsedHighlighterComboBox->currentIndex() == 0)
     {
-        updateCostumHighlighting();       
+        updateDefaultHighlighting();
+    }
+    else if(mUsedHighlighterComboBox->currentIndex() == 1)
+    {
+        updateCostumHighlighting(true);       
     }
     else
     {
-        std::vector<QString>  fServityStringVector =  createSevertyStringVector();
-
-
-        QColor fDefaultBColor = convertSeverityNumberToBackgroundColor(9); //Use default layout
-        QColor fDefaultFColor = convertSeverityNumberToForegroundColor(9); //Use default layout
-
-        for(int row=0; row < mModel->rowCount(); ++row)
-        {
-            QColor fBColor = fDefaultBColor; 
-            QColor fFColor = fDefaultFColor; 
-
-            for(size_t fHighlighterIdx = 0; fHighlighterIdx < fServityStringVector.size(); ++fHighlighterIdx) 
-            {
-                int col = 3;
-             
-                QStandardItem* fItem = mModel->item(row, col);
-                QString fItemText = fItem->text();
-
-                if(fItemText.indexOf(fServityStringVector[fHighlighterIdx]) >= 0)
-                {
-                    fBColor = convertSeverityNumberToBackgroundColor(fHighlighterIdx); //Use default layout
-                    fFColor = convertSeverityNumberToForegroundColor(fHighlighterIdx); //Use default layout
-                    break;
-                }      
-            }
-            for(int col=0; col < mModel->columnCount(); ++col)
-            {
-                QStandardItem* fItem = mModel->item(row, col);
-
-                fItem->setBackground(QBrush(fBColor));
-                fItem->setForeground(QBrush(fFColor));   
-            }
-        }
+        updateDefaultHighlighting();
+        updateCostumHighlighting(false);
     }
 }
 
@@ -1600,15 +1695,15 @@ void SysLoggerWidget::resetHighlighting()
 
 
 
-void SysLoggerWidget::updateOneLineCostumHighlighting(QColor& aBColor, QColor& aFColor, int aRow, boost::function<QStandardItem*(int, int)> aItemFunc)
+void SysLoggerWidget::updateOneLineCostumHighlighting(QColor& aBColor, QColor& aFColor, int aRow, std::function<QStandardItem*(int, int)> aItemFunc, bool aReplace)
 {
     QColor fDefaultBColor = convertSeverityNumberToBackgroundColor(9); //Use default layout
     QColor fDefaultFColor = convertSeverityNumberToForegroundColor(9); //Use default layout
 
-    QColor fBColor = fDefaultBColor; 
-    QColor fFColor = fDefaultFColor; 
-    QColor fBLastColor = fDefaultBColor; 
-    QColor fFLastColor = fDefaultFColor; 
+    QColor fBColor = (aReplace) ? fDefaultBColor : aBColor; 
+    QColor fFColor = (aReplace) ? fDefaultFColor : aFColor;
+    QColor fBLastColor = (aReplace) ? fDefaultBColor : aBColor;
+    QColor fFLastColor = (aReplace) ? fDefaultFColor : aFColor;
 
     for(size_t fHighlighterIdx = 0; fHighlighterIdx < mHighlighterSettings.size(); ++fHighlighterIdx) 
     {
@@ -1653,7 +1748,43 @@ void SysLoggerWidget::updateOneLineCostumHighlighting(QColor& aBColor, QColor& a
 }
 
 
-void SysLoggerWidget::updateCostumHighlighting()
+void SysLoggerWidget::updateDefaultHighlighting()
+{
+    std::vector<QString>  fServityStringVector = createSevertyStringVector();
+
+    QColor fDefaultBColor = convertSeverityNumberToBackgroundColor(9); //Use default layout
+    QColor fDefaultFColor = convertSeverityNumberToForegroundColor(9); //Use default layout
+
+    for (int row = 0; row < mModel->rowCount(); ++row)
+    {
+        QColor fBColor = fDefaultBColor;
+        QColor fFColor = fDefaultFColor;
+
+        for (size_t fHighlighterIdx = 0; fHighlighterIdx < fServityStringVector.size(); ++fHighlighterIdx)
+        {
+            int col = 3;
+
+            QStandardItem* fItem = mModel->item(row, col);
+            QString fItemText = fItem->text();
+
+            if (fItemText.indexOf(fServityStringVector[fHighlighterIdx]) >= 0)
+            {
+                fBColor = convertSeverityNumberToBackgroundColor(fHighlighterIdx); //Use default layout
+                fFColor = convertSeverityNumberToForegroundColor(fHighlighterIdx); //Use default layout
+                break;
+            }
+        }
+        for (int col = 0; col < mModel->columnCount(); ++col)
+        {
+            QStandardItem* fItem = mModel->item(row, col);
+
+            fItem->setBackground(QBrush(fBColor));
+            fItem->setForeground(QBrush(fFColor));
+        }
+    }
+}
+
+void SysLoggerWidget::updateCostumHighlighting(bool aReplace)
 {
     QColor fDefaultBColor = convertSeverityNumberToBackgroundColor(9); //Use default layout
     QColor fDefaultFColor = convertSeverityNumberToForegroundColor(9); //Use default layout
@@ -1662,7 +1793,14 @@ void SysLoggerWidget::updateCostumHighlighting()
 
     for(int row=0; row < mModel->rowCount(); ++row)
     {
-        updateOneLineCostumHighlighting(fBColor, fFColor, row, [this](int aRow, int aCol){ return mModel->item(aRow, aCol); });
+        if (!aReplace)
+        {
+            QStandardItem* fItem = mModel->item(row, 0);
+            fBColor = fItem->background().color();
+            fFColor = fItem->foreground().color();
+        }
+
+        updateOneLineCostumHighlighting(fBColor, fFColor, row, [this](int aRow, int aCol){ return mModel->item(aRow, aCol); }, aReplace);
 
         for(int col=0; col < mModel->columnCount(); ++col)
         {
@@ -1681,6 +1819,14 @@ void SysLoggerWidget::toTopToggled(bool aChecked)
     {
         mToBottomToolButton->setChecked(false);
         mLogTableView->scrollToTop();
+
+        mLogTableView->horizontalHeader()->setSortIndicator(0, Qt::DescendingOrder);
+
+        mAutoScrollDirection = AutoScrollDirection::ToTop;
+    }
+    else if (!mToBottomToolButton->isChecked())
+    {
+        mAutoScrollDirection = AutoScrollDirection::Undefined;
     }
 }
     
@@ -1690,6 +1836,14 @@ void SysLoggerWidget::toBottomToggled(bool aChecked)
     {
         mToTopToolButton->setChecked(false);
         mLogTableView->scrollToBottom();
+
+        mLogTableView->horizontalHeader()->setSortIndicator(0, Qt::AscendingOrder);
+
+        mAutoScrollDirection = AutoScrollDirection::ToBottom;
+    }
+    else if (!mToTopToolButton->isChecked())
+    {
+            mAutoScrollDirection = AutoScrollDirection::Undefined;
     }
 }
 

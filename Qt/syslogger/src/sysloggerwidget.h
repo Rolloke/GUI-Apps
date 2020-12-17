@@ -12,11 +12,11 @@
 #include <QTimer>
 
 #include <fstream>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
-#include <boost/function.hpp>
+#include <functional>
 
-
+#include <cstdint>
 
 
 
@@ -102,8 +102,8 @@ private:
     std::fstream            mFileStream;
 
     std::string             mCurrentFileName;
-    uint32_t           mCurrentFileCounter;
-    uint32_t           mCounter;
+    std::uint32_t           mCurrentFileCounter;
+    std::uint32_t           mCounter;
 
     bool                    mStop;
 
@@ -117,12 +117,21 @@ private:
 
 
     std::fstream            mPlaybackFileStream;
-    uint64_t           mPlaybackFileSize;
-    uint64_t           mPlaybackNumberOfLines;
-    uint64_t           mPlaybackFilePos;
+    std::uint64_t           mPlaybackFileSize;
+    std::uint64_t           mPlaybackNumberOfLines;
+    std::uint64_t           mPlaybackFilePos;
 
+    struct AutoScrollDirection
+    {
+        enum Type
+        {
+            Undefined,
+            ToTop,
+            ToBottom
+        };
+    };
 
-
+    AutoScrollDirection::Type mAutoScrollDirection;
 
 public:
     SysLoggerWidget();
@@ -138,7 +147,9 @@ public Q_SLOTS:
     void filterColumnChanged();
     void filterRegExpChanged();
     void fileLogging_StateChanged(int);
-    void UDPPortChanged(int);
+    void protocolChanged(int);
+    void portChanged(int);
+    void addressChanged(const QString&);
     void popUpContextMenu(const QPoint&);
     void copySelectedLinesToClipboard();
     void selectAll();
@@ -158,7 +169,7 @@ public Q_SLOTS:
     void highlighterChanged(int);
     void highlighterPatternChanged();
 
-    void customHiglightingFlagChanged();
+    void usedHighlighterChanged(int);
 
     void toTopToggled(bool);
     void toBottomToggled(bool);
@@ -170,8 +181,9 @@ private:
 
     void resetHighlighting();
 
-    void updateOneLineCostumHighlighting(QColor& aBColor, QColor& aFColor, int aRow, boost::function<QStandardItem*(int, int)> aItemFunc);
-    void updateCostumHighlighting();
+    void updateOneLineCostumHighlighting(QColor&, QColor&, int, std::function<QStandardItem*(int, int)>, bool);
+    void updateDefaultHighlighting();
+    void updateCostumHighlighting(bool);
 
 };
 
