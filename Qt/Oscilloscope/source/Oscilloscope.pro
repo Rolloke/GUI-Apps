@@ -20,10 +20,10 @@ unix:QMAKE_CXXFLAGS += -msse2
 #unix:QMAKE_CXXFLAGS += -mavx
 
 QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_SSE2
-QMAKE_CXXFLAGS += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
-QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
-QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 DEFINES +=__SSE2__
 #unix:DEFINES +=__AVX__
