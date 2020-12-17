@@ -18,8 +18,6 @@
 #include <QPointer>
 
 
-//#define TRIGGER_PROCESSING 2
-
 namespace Ui
 {
     class MainWindow;

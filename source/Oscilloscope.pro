@@ -17,7 +17,7 @@ TEMPLATE = app
 
 QMAKE_CXXFLAGS += -std=c++17
 QMAKE_CXXFLAGS += -msse2
-QMAKE_CXXFLAGS += -mavx
+#QMAKE_CXXFLAGS += -mavx
 
 QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_SSE2
 QMAKE_CXXFLAGS += -Wno-deprecated-copy
@@ -26,12 +26,13 @@ QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 DEFINES +=__SSE2__
-DEFINES +=__AVX__
+#DEFINES +=__AVX__
 
 
 # define trigger processing:
 # 1: processing depending on buffer update flag
 # 2: find all trigger points and take the latest trigger point with enough display poinds behind it
+#    note: processing 2 is not stable
 DEFINES += TRIGGER_PROCESSING=1
 
 # use Qt Audio instead of portaudio

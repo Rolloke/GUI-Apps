@@ -948,8 +948,8 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
             {
                 Channel& fChannel = mChannel[c];
                 const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(c));
-                circlevector<double>::const_circlevector_iterator start = fValues.begin(fStartPosition);
-                circlevector<double>::const_circlevector_iterator stop  = fValues.begin(fStartPosition + mAudioInput.getBufferSize() * fBuffers);
+                auto start = fValues.begin(fStartPosition);
+                auto stop  = fValues.begin(fStartPosition + mAudioInput.getBufferSize() * fBuffers);
                 double fMin = *min_element(start, stop);
                 double fMax = *max_element(start, stop);
                 fChannel.setMinMaxValue(fMin, fMax);
@@ -1156,8 +1156,8 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
                 const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(mTrigger.mActiveChannel));
                 double fSum = 0;
                 double fSquareSum = 0;
-                circlevector<double>::const_circlevector_iterator fValue = fValues.begin(fFoundEdge);
-                circlevector<double>::const_circlevector_iterator fEnd   = fValues.begin(fFoundEdge+fSteps);
+                auto fValue = fValues.begin(fFoundEdge);
+                auto fEnd   = fValues.begin(fFoundEdge+fSteps);
 
                 for (; fValue != fEnd; ++fValue)
                 {
@@ -1883,8 +1883,8 @@ void MainWindow::determineAutomaticTime()
 
         double fTime = (fSteps + fTriggerTimeOffset1 - fTriggerTimeOffset2 - 1.0) * ui->graphicsViewScope->getTimeStep();
 
-        mAvgTime.AddValue(fTime);
-        fTime = mAvgTime.GetAverage();
+        mAvgTime.addValue(fTime);
+        fTime = mAvgTime.getAverage();
 
         if (mScopeSettings.isVisible())
         {
