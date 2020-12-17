@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = syslogger
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CXXFLAGS += -Wno-unused-function
 unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined

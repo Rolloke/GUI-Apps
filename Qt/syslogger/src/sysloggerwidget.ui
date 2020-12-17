@@ -381,7 +381,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="mTab_FileLogging">
           <attribute name="title">
@@ -444,7 +444,7 @@
               <number>65535</number>
              </property>
              <property name="value">
-              <number>514</number>
+              <number>58514</number>
              </property>
             </widget>
            </item>
