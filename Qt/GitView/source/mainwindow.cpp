@@ -408,7 +408,8 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
     if (aParentItem)
     {
         if (   aParentItem->checkState(Column::FileName) == Qt::Checked
-            || aParentItem->checkState(Column::FileName) == Qt::PartiallyChecked)
+            || aParentItem->checkState(Column::FileName) == Qt::PartiallyChecked
+            || mCurrentTask == Work::InsertPathFromCommandString)
         {
             const QVariant& fIsDir = aParentItem->data(Column::FileName, Role::isDirectory);
             QString fFileName = aParentItem->text(Column::FileName);
@@ -588,7 +589,6 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 
     insertItem(fSourceDir, *ui->treeSource);
 
-    // TODO: bug: are all deleted items shown?
     for (const auto& fItem : fCheckMap)
     {
         if (fItem.second.is(Type::GitDeleted) || fItem.second.is(Type::GitMovedFrom))

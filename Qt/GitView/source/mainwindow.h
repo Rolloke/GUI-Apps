@@ -86,7 +86,7 @@ private:
         ShowUnknown,
         ShowStaged,
         ShowUnMerged,
-        // TODO: more git items
+        // NOTE: further git items are added here
         // show out of sync...
         Last
     }; };
