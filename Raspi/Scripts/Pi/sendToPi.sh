@@ -1,15 +1,20 @@
 #!/bin/sh
 
-USER=$1
+USER=pi
 PI_ADDRESS=192.168.2.148
-SOURCE=$2
-DESTINATION=$3
+SOURCE=$1
+DESTINATION=$2
 
-if [ -z $1 ] 
-then
+if [ -z $3 ]; then
+   echo "user is $USER"
+else
+   USER=$3
+fi
 
-   echo "usage: send2pi piuser sourcefile destination"
-   echo "RaspberryPi address :"
+if [ -z $1 ]; then
+
+   echo "usage: send2pi sourcefile destination [piuser] [address]"
+   echo "default RaspberryPi address :$PI_ADDRESS"
 
 else
 
