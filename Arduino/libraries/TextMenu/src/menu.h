@@ -1,6 +1,18 @@
 #ifndef MENU_H
 #define MENU_H
 
+/// implements a menue displayed in an LCD or other text displays
+///
+/// each menue can contain submenues or editable subitems
+/// the menue is controlled by buttons (left, right, up, down, enter, escape)
+/// editable subitems can be:
+/// - floating point or integral values
+/// - selectable list items
+/// Implementation see example SimpleMenu1 and SimpleMenue2
+/// author: Rolf Kary-Ehlers
+/// date  : 05.03.2018
+/// e-mail: rolf-kary-ehlers@t-online.de
+
 #include <inttypes.h>
 #include <Arduino.h>
 
@@ -25,6 +37,14 @@ union Subfunction
 ///        - a list, where an entry is selected
 typedef void (*pFunction)(uint8_t aDirOrIndex, uint8_t aID);
 
+/// @brief fills the string with spaces for given length
+/// @param aStr string to fill
+/// @param aLen lenght to fill
+/// @param behind where to fill
+///        - true concat spaces at end
+///        - false insert spaces at begin
+void fillStringWithSpaces(String& aStr, unsigned int aLen, bool behind=true);
+
 class MenuItem
 {
     friend class ItemSelect;
@@ -39,15 +59,15 @@ public:
 
     enum eFlags : uint8_t
     {
-        submenu    = 0x01,
-        edit       = 0x02,
-        flagmask   = 0xFC,
-        editable   = 0x04,
-        command    = 0x08,
-        limit_turn = 0x10,
-        float_val  = 0x20,
-        no_cursor  = 0x40,
-        item_edit  = 0x80
+        active_submenu = 0x01,
+        edit           = 0x02,
+        flagmask       = 0xFC,
+        editable       = 0x04,
+        command        = 0x08,
+        limit_turn     = 0x10,
+        float_value    = 0x20,
+        no_cursor      = 0x40,
+        item_edit      = 0x80
     };
 
     /// @brief Creates a menue entry containing a submenue
@@ -63,7 +83,7 @@ public:
     ///        - ItemSelect a list of values of type (char **)
     /// @param [aID] an identifier passed to notification function
     ///        - identify a specific command
-    ///        - identify the selection of a list item
+    ///        - identify the list
     /// @param [aLength] number of list items
     /// @note  - is used for ItemSelect array length
     /// @param aFlag flags defining behaviour
@@ -87,8 +107,8 @@ public:
     /// @param aDir button defining actions navigating through the menu or editing a value
     ///        - left, right: selection of items and navigation
     ///        - up, down: navigation and editing values
-    ///        - enter: start editing, enter changed value and stop editing
-    ///        - escape: stop editing with no changes, go up in submenu
+    ///        - enter: start editing or enter submenue, enter changed value and stop editing
+    ///        - escape: stop editing with no changes, go up from submenu
     /// @note aParent do not use this argument
     ///       - this argument is filled internally
     void   pressBtn(MenuItem::dir::to aDir, MenuItem* aParent=0);
@@ -99,6 +119,7 @@ public:
 private:
     bool isFlagSet(eFlags aFlag) const;
     void setFlag(eFlags aFlag, bool aSet);
+    bool isSubmenu();
 
     const char*   mText;
     Subfunction   mSubFunction;
@@ -197,17 +218,22 @@ protected:
         static Type fOldValue=0;
         switch (aDir)
         {
-          case MenuItem::dir::begin_edit: fOldValue = mValue;       break;
-          case MenuItem::dir::escape    : mValue    = fOldValue;    break;
-          case MenuItem::dir::enter     : notify(aDir);             break;
-          case MenuItem::dir::up        : mValue += getIncrement(); break;
-          case MenuItem::dir::down      : mValue -= getIncrement(); break;
-          case MenuItem::dir::left      : --mMenuItem->mIndex;      break;
-          case MenuItem::dir::right     : ++mMenuItem->mIndex;      break;
-          case MenuItem::dir::text      : return String(mValue);    break;
+        case MenuItem::dir::begin_edit: fOldValue = mValue;       break;
+        case MenuItem::dir::escape    : mValue    = fOldValue;    break;
+        case MenuItem::dir::enter     : notify(aDir);             break;
+        case MenuItem::dir::up        : mValue += getIncrement(); break;
+        case MenuItem::dir::down      : mValue -= getIncrement(); break;
+        case MenuItem::dir::left      : --mMenuItem->mIndex;      break;
+        case MenuItem::dir::right     : ++mMenuItem->mIndex;      break;
+        case MenuItem::dir::text      :
+        {
+            String fString (mValue);
+            fillStringWithSpaces(fString, mMenuItem->mLength, false);
+            return fString;
+        }   break;
         }
         mMenuItem->mIndex = limitValue(getIndex(),
-                                       static_cast<int8_t>(isFlagSet(MenuItem::float_val) ? -2 : 0),
+                                       static_cast<int8_t>(isFlagSet(MenuItem::float_value) ? -2 : 0),
                                        static_cast<int8_t>(getLength()-1), false);
         mValue = limitValue(mValue, mMin, mMax, mMenuItem->isFlagSet(MenuItem::limit_turn));
 
@@ -218,5 +244,6 @@ protected:
     Type  mMin;
     Type  mMax;
 };
+
 
 #endif // MENU_H

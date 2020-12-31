@@ -11,7 +11,6 @@ MenuItem::MenuItem(const char*aText, MenuItem* aSub, int8_t aLength)
 , mFlag(0)
 {
     mSubFunction.mSubMenu = aSub;
-    if (aText == 0) mFlag = submenu;
 }
 
 MenuItem::MenuItem(const char*aText, ItemEditBase* aEdit, uint8_t aID, int8_t aLength, uint8_t aFlag)
@@ -37,7 +36,7 @@ MenuItem::MenuItem(const char*aText, ItemEditBase* aEdit, uint8_t aID, int8_t aL
 String MenuItem::getPath() const
 {
     String fString;
-    if (isFlagSet(submenu))
+    if (isFlagSet(active_submenu))
     {
         fString = String(mText) + "/" + mSubFunction.mSubMenu[mIndex].getPath();
     }
@@ -46,7 +45,7 @@ String MenuItem::getPath() const
 
 String MenuItem::getText(int* aCursorPos) const
 {
-    if (isFlagSet(submenu))
+    if (isFlagSet(active_submenu))
     {
         return mSubFunction.mSubMenu[mIndex].getText(aCursorPos);
     }
@@ -72,7 +71,7 @@ String MenuItem::getText(int* aCursorPos) const
                     }
                     else if (mIndex < 0)
                     {
-                        *aCursorPos -= (mIndex)-1;
+                        *aCursorPos -= (mIndex-1);
                     }
                 }
             }
@@ -85,15 +84,15 @@ String MenuItem::getText(int* aCursorPos) const
 
 void MenuItem::pressBtn(MenuItem::dir::to aDir, MenuItem* aParent)
 {
-    if (aDir == MenuItem::dir::enter)
+    if (isFlagSet(active_submenu))
     {
-        if (isFlagSet(submenu))
+        mSubFunction.mSubMenu[mIndex].pressBtn(aDir, this);
+    }
+    else if (aDir == MenuItem::dir::enter)
+    {
+        if (isSubmenu() && !isFlagSet(active_submenu))
         {
-            mSubFunction.mSubMenu[mIndex].pressBtn(aDir);
-        }
-        else if (!isFlagSet(item_edit) && mSubFunction.mSubMenu && !isFlagSet(submenu))
-        {
-            setFlag(submenu, true);
+            setFlag(active_submenu, true);
         }
         else if (isFlagSet(item_edit))
         {
@@ -112,10 +111,6 @@ void MenuItem::pressBtn(MenuItem::dir::to aDir, MenuItem* aParent)
         {
             mNotify(aDir, mIndex);
         }
-    }
-    else if (isFlagSet(submenu))
-    {
-        mSubFunction.mSubMenu[mIndex].pressBtn(aDir, this);
     }
     else if (isFlagSet(edit))
     {
@@ -139,15 +134,15 @@ void MenuItem::pressBtn(MenuItem::dir::to aDir, MenuItem* aParent)
             break;
         case MenuItem::dir::up:
         case MenuItem::dir::escape:
-            if (aParent && aParent->isFlagSet(submenu) && aParent->mText)
+            if (aParent->isFlagSet(active_submenu) && aParent->mText)
             {
-                aParent->setFlag(submenu, false);
+                aParent->setFlag(active_submenu, false);
             }
             break;
         case MenuItem::dir::down:
-            if (mSubFunction.mSubMenu && !isFlagSet(submenu))
+            if (isSubmenu() && !isFlagSet(active_submenu))
             {
-                setFlag(submenu, true);
+                setFlag(active_submenu, true);
             }
             break;
         default:
@@ -159,6 +154,11 @@ void MenuItem::pressBtn(MenuItem::dir::to aDir, MenuItem* aParent)
 bool MenuItem::isFlagSet(eFlags aFlag) const
 {
     return (mFlag & aFlag) != 0;
+}
+
+bool MenuItem::isSubmenu()
+{
+    return !isFlagSet(item_edit) && mSubFunction.mSubMenu;
 }
 
 void MenuItem::setFlag(eFlags aFlag, bool aSet)
@@ -280,5 +280,14 @@ void ItemSelect::init(MenuItem *aMenuItem, uint8_t aID)
     if (mItems && getLength() == 0)
     {
         for (mMenuItem->mLength=0; mItems[mMenuItem->mLength] != 0; ++mMenuItem->mLength);
+    }
+}
+
+void fillStringWithSpaces(String& aStr, unsigned int aLen, bool behind)
+{
+    while (aStr.length() < aLen)
+    {
+        if (behind) aStr += " ";
+        else        aStr = " " + aStr;
     }
 }
