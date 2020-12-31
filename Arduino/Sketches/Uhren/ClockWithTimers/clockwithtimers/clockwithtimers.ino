@@ -215,7 +215,7 @@ void triggerAlarmButton(uint8_t aState, uint8_t )
         gSettings.triggerButton(SettingStates::ClearAll, Button::none);
     }
 }
-void fillString(String& aStr, unsigned int aLen)
+void fillStringWithSpaces(String& aStr, unsigned int aLen)
 {
     while (aStr.length() < aLen)
     {
@@ -275,7 +275,7 @@ void PrintLCD_Time()
             }
         }
     }
-    fillString(fLine1, LCD_XDIM);
+    fillStringWithSpaces(fLine1, LCD_XDIM);
     if (fLine1 != gLine1)
     {
         LCD_PRINT_AT(0, 0, fLine1);
@@ -363,7 +363,7 @@ void PrintLCD_Time()
         print2Decimals(fLine2, gSettings.getSeconds());
     }
 
-    fillString(fLine2, LCD_XDIM);
+    fillStringWithSpaces(fLine2, LCD_XDIM);
     if (fLine2 != gLine2)
     {
         LCD_PRINT_AT(0, 1, fLine2);

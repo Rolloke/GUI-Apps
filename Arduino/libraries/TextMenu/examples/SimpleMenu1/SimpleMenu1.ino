@@ -1,23 +1,23 @@
+/// Sample for usage of library menu
+/// Available classes in this library:
+/// - MenuItem a menu that may contain submenues or editable values, selectable lists or simple commands
+/// - ItemSelect a list item selector
+/// - ItemValue a template class for editing floating point or integral values
 
 
 #include <menu.h>
 
-#include <button.h>
-#include <LiquidCrystal.h>
+/// additional used libraries:
+#include <button.h>         // implementation of a simple debounced button
+#include <LiquidCrystal.h>  // implementation of an LCD control class
 
 // LCD display
-  LiquidCrystal LCD(3, 4, 5, 6, 7, 8);
+LiquidCrystal LCD(3, 4, 5, 6, 7, 8);
 
+#define LCD_XDIM 16
+#define LCD_YDIM 2
 
 #include <inttypes.h>
-
-#define  BTN_F1      1
-#define  BTN_ENTER   2
-#define  BTN_DOWN    3
-#define  BTN_LEFT    4
-#define  BTN_ESCAPE  5
-#define  BTN_RIGHT   6
-#define  BTN_UP      7
 
 void displayMenuItem();
 void displayAll();
@@ -46,39 +46,55 @@ MenuItem gMainMenu[] =
 {
     MenuItem("Item:", &gEditTest, eItem, 6, MenuItem::no_cursor|MenuItem::limit_turn),
     MenuItem("Long:", &gEditLong, eLongValue, 3),
-    MenuItem("Double:", &gEditDouble, eLongValue, 3, MenuItem::float_val|MenuItem::limit_turn),
+    MenuItem("Double:", &gEditDouble, eLongValue, 3, MenuItem::float_value|MenuItem::limit_turn),
     MenuItem("Command", (ItemEditBase*)0, eCommand)
 };
 
 MenuItem gMenu("Settings...", gMainMenu, length_of(gMainMenu));
 
-// Button implementation
+// Button implementation for input pins with internal pullup
+// definition of button pin numbers for each button connected to a pin
+#define  BTN_ENTER   9
+#define  BTN_DOWN    10
+#define  BTN_LEFT    11
+#define  BTN_ESCAPE  12
+#define  BTN_RIGHT   13
+#define  BTN_UP      14
+
 void    triggerButton(uint8_t aState, uint8_t aID);
-uint8_t gButtonPins[3] = { 12, 11, 10 };
-Button  gButtons(gButtonPins, sizeof(gButtonPins), triggerButton);
+Button  gButton1(BTN_UP, triggerButton);
+Button  gButton2(BTN_DOWN, triggerButton);
+Button  gButton3(BTN_LEFT, triggerButton);
+Button  gButton4(BTN_RIGHT, triggerButton);
+Button  gButton5(BTN_ENTER, triggerButton);
+Button  gButton6(BTN_ESCAPE, triggerButton);
+Button* gButtons[] = { &gButton1, &gButton2, &gButton3, &gButton4, &gButton5, &gButton6 };
+const int gButtonCount = length_of(gButtons);
 
 void setup()
 {
-//  MenuItem::setNotificationFunction(notifyMenu);
-  LCD.begin(16, 4);
+  MenuItem::setNotificationFunction(notifyMenu);
+  LCD.begin(LCD_XDIM, LCD_YDIM);
   LCD.clear();
 
-  gButtons.setDelay(1000);
-  gButtons.setRepeat(250);
+  for (int i; i<gButtonCount; ++i)
+  {
+    gButtons[i]->setDeBounce(50);
+    gButtons[i]->setDelay(1000);
+    gButtons[i]->setRepeat(250);
+  }
 
   Serial.begin(115200);
+
+  displayMenuItem();
 }
 
-bool gInvalid = true;
 void loop()
 {
   unsigned long fNow = millis();
-  gButtons.tick(fNow);
-
-  if (gInvalid)
+  for (int i; i<gButtonCount; ++i)
   {
-    displayAll();
-    gInvalid = false;
+    gButtons[i]->tick(fNow);
   }
 }
 
@@ -118,31 +134,38 @@ void triggerButton(uint8_t aState, uint8_t aPin)
   }
 }
 
+String fLine0;
+String fLine1;
 
 void displayMenuItem()
 {
-  int fCursor = 0;
-  String fString = gMenu.getText(&fCursor);
-  LCD.setCursor(0, 3);
-  LCD.print("                ");
-  LCD.setCursor(0, 3);
-  LCD.print(fString);
-  if (fCursor)
-  {
-      LCD.setCursor(fCursor, 3);
-      LCD.cursor();
-  }
-  else
-  {
-      LCD.noCursor();
-  }
-}
+    int fCursor = 0;
+    String fString = gMenu.getText(&fCursor);
+    fillStringWithSpaces(fString, LCD_XDIM);
+    if (fLine1 != fString)
+    {
+        LCD.setCursor(0, 1);
+        LCD.print(fString);
+        fLine1 = fString;
+    }
 
-void displayAll()
-{
-    String fString = "Menu Example";
-    LCD.setCursor(0, 0);
-    LCD.print(fString);
+    fString = gMenu.getPath();
+    fString.replace("...", "");
+    fillStringWithSpaces(fString, LCD_XDIM);
+    if (fLine0 != fString)
+    {
+        LCD.setCursor(0, 0);
+        LCD.print(fString);
+        fLine0 = fString;
+    }
 
-    displayMenuItem();
+    if (fCursor)
+    {
+        LCD.setCursor(fCursor, 1);
+        LCD.cursor();
+    }
+    else
+    {
+        LCD.noCursor();
+    }
 }
