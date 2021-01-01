@@ -12,7 +12,8 @@ ItemValue KEYWORD1 ItemValue
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-getText KEYWORD2 
+getText KEYWORD2
+getPath KEYWORD2  
 pressBtn KEYWORD2
 setNotificationFunction KEYWORD2
 
