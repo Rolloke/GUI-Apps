@@ -22,35 +22,47 @@ LiquidCrystal LCD(3, 4, 5, 6, 7, 8);
 void displayMenuItem();
 void displayAll();
 
-long gLongValue = 123;
+long   gLongValue   = 123;
 double gDoubleValue = 123;
 
-void notifyMenu(uint8_t aDir, uint8_t aID);
+void notifyMenu(uint8_t aDirOrIndex, uint8_t aID);
 
 // Menu implementation
-const char * test[] = { "item1", "item2", "item3", "item4", "item5", "item6", 0 };
-ItemSelect gEditTest(test);
-ItemValue<long>  gEditLong(gLongValue, 100, 200);
+const char * listitems[] = { "item0", "item1", "item2", "item3", "item4", "item5" };
+ItemSelect         gSelectListItem(listitems);
+ItemValue<long>    gEditLong(gLongValue, 100, 200);
 ItemValue<double>  gEditDouble(gDoubleValue, -10, 1200);
 
 enum eIDs
 {
-    eItem,
+    eListItem,
     eLongValue,
     eDoubleValue,
     eCommand
 };
 
+const char* nameof(eIDs id)
+{
+    switch(id)
+    {
+    case eListItem:    return "ListItem";
+    case eLongValue:   return "LongValue";
+    case eDoubleValue: return "DoubleValue";
+    case eCommand:     return "Command";
+    default: return "unknown";
+    }
+
+}
 
 MenuItem gMainMenu[] =
 {
-    MenuItem("Item:", &gEditTest, eItem, 6, MenuItem::no_cursor|MenuItem::limit_turn),
-    MenuItem("Long:", &gEditLong, eLongValue, 3),
-    MenuItem("Double:", &gEditDouble, eLongValue, 3, MenuItem::float_value|MenuItem::limit_turn),
+    MenuItem("Item:"  , &gSelectListItem, eListItem, length_of(listitems), MenuItem::no_cursor|MenuItem::limit_turn),
+    MenuItem("Long:"  , &gEditLong      , eLongValue, 3),
+    MenuItem("Double:", &gEditDouble    , eDoubleValue, 3, MenuItem::float_value|MenuItem::limit_turn),
     MenuItem("Command", (ItemEditBase*)0, eCommand)
 };
 
-MenuItem gMenu("Settings...", gMainMenu, length_of(gMainMenu));
+MenuItem gMenu("SimpleMenu1...", gMainMenu, length_of(gMainMenu));
 
 // Button implementation for input pins with internal pullup
 // definition of button pin numbers for each button connected to a pin
@@ -77,7 +89,7 @@ void setup()
   LCD.begin(LCD_XDIM, LCD_YDIM);
   LCD.clear();
 
-  for (int i; i<gButtonCount; ++i)
+  for (int i=0; i<gButtonCount; ++i)
   {
     gButtons[i]->setDeBounce(50);
     gButtons[i]->setDelay(1000);
@@ -92,18 +104,26 @@ void setup()
 void loop()
 {
   unsigned long fNow = millis();
-  for (int i; i<gButtonCount; ++i)
+  for (int i=0; i<gButtonCount; ++i)
   {
     gButtons[i]->tick(fNow);
   }
 }
 
 
-void notifyMenu(uint8_t aDir, uint8_t aID)
+void notifyMenu(uint8_t aDirOrIndex, uint8_t aID)
 {
     Serial.print("notifyMenu(");
-    Serial.print((int)aDir);
-    Serial.print((int)aID);
+    if (aID != eListItem)
+    {
+        Serial.print(MenuItem::dir::nameof(static_cast<MenuItem::dir::to>(aDirOrIndex)));
+    }
+    else
+    {
+        Serial.print((int)aDirOrIndex);
+    }
+    Serial.print(", ");
+    Serial.print(nameof(static_cast<eIDs>(aID)));
     Serial.println(")");
 }
 

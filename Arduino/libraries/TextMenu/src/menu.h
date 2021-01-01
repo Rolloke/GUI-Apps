@@ -3,11 +3,17 @@
 
 /// implements a menue displayed in an LCD or other text displays
 ///
+/// the menu text is retrieved by two functions:
+/// - MenuItem::getText(): item text
+/// - MenuItem::getPath(): path to item including all submenues
 /// each menue can contain submenues or editable subitems
 /// the menue is controlled by buttons (left, right, up, down, enter, escape)
+/// - MenuItem::pressBtn()
 /// editable subitems can be:
 /// - floating point or integral values
 /// - selectable list items
+/// change notifications for commands or item selection is retrived by a registered function:
+/// - MenuItem::setNotificationFunction()
 /// Implementation see example SimpleMenu1 and SimpleMenue2
 /// author: Rolf Kary-Ehlers
 /// date  : 05.03.2018
@@ -35,6 +41,7 @@ union Subfunction
 /// @param aID an identifier for
 ///        - a command
 ///        - a list, where an entry is selected
+///        - a value edited
 typedef void (*pFunction)(uint8_t aDirOrIndex, uint8_t aID);
 
 /// @brief fills the string with spaces for given length
@@ -55,6 +62,7 @@ public:
     struct dir
     {
       enum to {unknown, left, right, up, down, enter, escape, begin_edit, text };
+      static const char* nameof(to);
     };
 
     enum eFlags : uint8_t
@@ -81,9 +89,10 @@ public:
     /// @param aItemEdit may be a item derived ItemEditBase
     ///        - ItemValue<type> type may be an integral or floating point value
     ///        - ItemSelect a list of values of type (char **)
-    /// @param [aID] an identifier passed to notification function
-    ///        - identify a specific command
-    ///        - identify the list
+    /// @param [aID] an identifier passed to notification function:
+    ///        - command id
+    ///        - list id
+    ///        - value id
     /// @param [aLength] number of list items
     /// @note  - is used for ItemSelect array length
     /// @param aFlag flags defining behaviour

@@ -199,25 +199,24 @@ MenuItem gSimulator[] =
 
 MenuItem gMainMenu[] =
 {
-    MenuItem("Simulate:" , &gSimulate, Simulate, 1, MenuItem::no_cursor|MenuItem::limit_turn),
-    MenuItem(sInterval   , &gInterval, Interval, 5),
-    MenuItem("Baudrate:" , &gBaudrateItem, Baudrate, length_of(gBaudrate), MenuItem::no_cursor|MenuItem::limit_turn),
     MenuItem("Protocol:" , &gProtocolItem, Protocol, length_of(gProtocol), MenuItem::no_cursor|MenuItem::limit_turn),
-    MenuItem("Settings:" , &gSettingsItem, Settings, length_of(gSettings), MenuItem::no_cursor|MenuItem::limit_turn),
     MenuItem("Heave..."  , ItemMenuHeave::gSimulator, length_of(ItemMenuHeading::gSimulator)),
     MenuItem("Roll..."   , ItemMenuRoll::gSimulator, length_of(ItemMenuHeading::gSimulator)),
     MenuItem("Pitch..."  , ItemMenuPitch::gSimulator, length_of(ItemMenuHeading::gSimulator)),
     MenuItem("Heading...", ItemMenuHeading::gSimulator, length_of(ItemMenuHeading::gSimulator)),
-    MenuItem("SSV..."    , ItemMenuSSV::gSimulator, length_of(ItemMenuHeading::gSimulator))
+    MenuItem("SSV..."    , ItemMenuSSV::gSimulator, length_of(ItemMenuHeading::gSimulator)),
+    MenuItem("Baudrate:" , &gBaudrateItem, Baudrate, length_of(gBaudrate), MenuItem::no_cursor|MenuItem::limit_turn),
+    MenuItem(sInterval   , &gInterval, Interval, 5),
+    MenuItem("Simulate:" , &gSimulate, Simulate, 1, MenuItem::no_cursor|MenuItem::limit_turn),
+    MenuItem("Settings:" , &gSettingsItem, Settings, length_of(gSettings), MenuItem::no_cursor|MenuItem::limit_turn)
 };
 
-MenuItem gMenu("Settings...", gMainMenu, length_of(gMainMenu));
+MenuItem gMenu(0, gMainMenu, length_of(gMainMenu));
 
 void notifyMenu(uint8_t aDir, uint8_t aID);
 // Button implementation
 void triggerButton(uint8_t aState, uint8_t aID);
 uint8_t gButtonPins[3] = { BTN_BIT0, BTN_BIT1, BTN_BIT2 };
-//struct btn { enum eBtn { left, right, up, down, escape, enter, count }; };
 Button gButtons(gButtonPins, sizeof(gButtonPins), triggerButton);
 
 
@@ -483,7 +482,15 @@ void displayMenuItem()
     }
 
     fString = gMenu.getPath();
-    fString = fString.replace("...", "");
+    if (fString.length())
+    {
+        fString = fString.replace("...", "");
+    }
+    else
+    {
+        fString  = (gData.mSimulate) ? "Simulate:" : "Measure:";
+        fString += gProtocol[gData.mProtocoll];
+    }
     fillStringWithSpaces(fString, LCD_XDIM);
     if (fLine0 != fString)
     {
@@ -503,7 +510,3 @@ void displayMenuItem()
     }
 }
 
-void displayAll()
-{
-
-}

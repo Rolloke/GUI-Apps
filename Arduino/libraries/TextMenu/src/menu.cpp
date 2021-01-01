@@ -4,6 +4,23 @@
 
 pFunction MenuItem::mNotify = 0;
 
+const char* MenuItem::dir::nameof(MenuItem::dir::to aDir)
+{
+    switch (aDir)
+    {
+    case dir::enter:      return "enter";
+    case dir::begin_edit: return "begin_edit";
+    case dir::down:       return "down";
+    case dir::escape:     return "escape";
+    case dir::left:       return "left";
+    case dir::right:      return "right";
+    case dir::text:       return "text";
+    case dir::unknown:    return "unknown";
+    case dir::up:         return "up";
+    default:              return "invalid";
+    }
+}
+
 MenuItem::MenuItem(const char*aText, MenuItem* aSub, int8_t aLength)
 : mText(aText)
 , mLength(aLength)
@@ -11,6 +28,7 @@ MenuItem::MenuItem(const char*aText, MenuItem* aSub, int8_t aLength)
 , mFlag(0)
 {
     mSubFunction.mSubMenu = aSub;
+    if (aText == 0) mFlag = active_submenu;
 }
 
 MenuItem::MenuItem(const char*aText, ItemEditBase* aEdit, uint8_t aID, int8_t aLength, uint8_t aFlag)
@@ -20,7 +38,7 @@ MenuItem::MenuItem(const char*aText, ItemEditBase* aEdit, uint8_t aID, int8_t aL
 , mFlag(aFlag)
 {
     mSubFunction.mItem = aEdit;
-    setFlag(item_edit, true);
+    setFlag(item_edit, aEdit != 0);
     if (mSubFunction.mItem)
     {
         setFlag(editable, true);
@@ -38,7 +56,8 @@ String MenuItem::getPath() const
     String fString;
     if (isFlagSet(active_submenu))
     {
-        fString = String(mText) + "/" + mSubFunction.mSubMenu[mIndex].getPath();
+        if (mText) fString += String(mText) + "/";
+        fString += mSubFunction.mSubMenu[mIndex].getPath();
     }
     return fString;
 }
