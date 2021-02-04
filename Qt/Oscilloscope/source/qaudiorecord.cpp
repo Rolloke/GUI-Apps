@@ -495,7 +495,7 @@ void QAudioRecord::runQtAudio()
     if (!mStarting)
     {
         mLastError = "Audio Input Device Closed properly";
-        TRACE(Logger::error, mLastError.toStdString().c_str());
+        TRACE(Logger::notice, mLastError.toStdString().c_str());
     }
 }
 
