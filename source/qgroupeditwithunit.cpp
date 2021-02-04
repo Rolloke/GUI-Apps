@@ -158,11 +158,18 @@ bool   QGroupEditWithUnit::value(double aValue)
 void QGroupEditWithUnit::updateUnit()
 {
     Q_EMIT send_prefix(mPrefix.getPrefix());
-    if (mUnit.size() == 0)
+    if (mUnitLabel)
     {
-        mUnit = mUnitLabel->text();
+        if (mUnit.size() == 0)
+        {
+            mUnit = mUnitLabel->text();
+        }
+        mUnitLabel->setText(mPrefix.getPrefixName()+mUnit);
     }
-    mUnitLabel->setText(mPrefix.getPrefixName()+mUnit);
+    else
+    {
+        TRACE(Logger::warning, "Unit label not set of %s", title().toStdString().c_str());
+    }
 }
 
 void QGroupEditWithUnit::on_editingFinished()

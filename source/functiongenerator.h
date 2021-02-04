@@ -2,6 +2,7 @@
 #define FUNCTIONGENERATOR_H
 
 #include <QDialog>
+#include <memory>
 class GenerateFunction;
 class QDomDocument;
 class QDomElement;
@@ -79,15 +80,17 @@ private:
     void updateChannelParameter();
     void getChannelParameter();
     quint32 getPeriodSamples();
+    quint32  getActiveChannel() const;
+    void getActiveChannelRange(quint32&start, quint32&end);
 
     double calcPulseWidthRectangleFromPercent(double aPercent);
     void   saveChannel(QDomDocument& aDoc, QDomElement& aDE, GenerateFunction& aChannel);
     void   loadChannel(const QDomNode& aDE, GenerateFunction& aChannel);
 
     Ui::FunctionGenerator *ui;
-    int                 mChannels;
-    int                 mChannel;
-    GenerateFunction*   mFunction;
+    quint32             mChannel;
+    quint32             mMasterChannel;
+    std::vector<std::shared_ptr<GenerateFunction>>  mFunction;
     Burst               mBurstType;
     qint32              mBurstCycles;
 };

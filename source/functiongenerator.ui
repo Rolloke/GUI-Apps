@@ -851,10 +851,10 @@
      <widget class="QComboBox" name="comboHighPassType">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>30</y>
-        <width>101</width>
-        <height>21</height>
+        <x>60</x>
+        <y>28</y>
+        <width>120</width>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -899,10 +899,10 @@
      <widget class="QComboBox" name="comboHighPassOrder">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>60</y>
-        <width>101</width>
-        <height>21</height>
+        <x>60</x>
+        <y>58</y>
+        <width>120</width>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -1003,10 +1003,10 @@
      <widget class="QComboBox" name="comboLowPassType">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>30</y>
-        <width>101</width>
-        <height>21</height>
+        <x>60</x>
+        <y>28</y>
+        <width>120</width>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -1051,10 +1051,10 @@
      <widget class="QComboBox" name="comboLowPassOrder">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>60</y>
-        <width>101</width>
-        <height>21</height>
+        <x>60</x>
+        <y>58</y>
+        <width>120</width>
+        <height>25</height>
        </rect>
       </property>
      </widget>
@@ -1116,7 +1116,7 @@
       <property name="geometry">
        <rect>
         <x>140</x>
-        <y>90</y>
+        <y>86</y>
         <width>31</width>
         <height>20</height>
        </rect>
@@ -1256,8 +1256,8 @@
     <rect>
      <x>210</x>
      <y>270</y>
-     <width>51</width>
-     <height>21</height>
+     <width>55</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -1265,7 +1265,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>270</y>
+     <y>273</y>
      <width>47</width>
      <height>16</height>
     </rect>
