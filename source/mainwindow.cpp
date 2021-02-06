@@ -950,8 +950,20 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
                 const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(c));
                 auto start = fValues.begin(fStartPosition);
                 auto stop  = fValues.begin(fStartPosition + mAudioInput.getBufferSize() * fBuffers);
+
+#if _MSVC_STL_VERSION >= 141
+
+                double fMin = *start;
+                double fMax = fMin;
+                for (;start != stop; ++start)
+                {
+                    fMin = min(fMin, *start);
+                    fMax = max(fMax, *start);
+                }
+#else
                 double fMin = *min_element(start, stop);
                 double fMax = *max_element(start, stop);
+#endif
                 fChannel.setMinMaxValue(fMin, fMax);
                 if (mScopeSettings.isVisible() && c == mTrigger.mActiveChannel)
                 {
