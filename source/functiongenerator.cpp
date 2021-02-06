@@ -26,8 +26,8 @@ namespace
 
 FunctionGenerator::FunctionGenerator(QWidget *parent) : QDialog(parent)
   , ui(new Ui::FunctionGenerator)
-  , mChannels(0)
   , mChannel(0)
+  , mMasterChannel(0)
   , mFunction(0)
   , mBurstType(Burst::Off)
   , mBurstCycles(-1)
@@ -76,26 +76,27 @@ FunctionGenerator::FunctionGenerator(QWidget *parent) : QDialog(parent)
 FunctionGenerator::~FunctionGenerator()
 {
     delete ui;
-    delete[] mFunction;
 }
 
 void FunctionGenerator::setChannels(int aChannels)
 {
-    delete[] mFunction;
-    mFunction = new GenerateFunction[aChannels];
-    mChannels = aChannels;
+    mFunction.clear();
+    mFunction.resize(aChannels);
     ui->comboChannel->clear();
-    for (int i=1; i<=aChannels; ++i)
+    int i = 0;
+    for (auto& function : mFunction)
     {
-        ui->comboChannel->addItem(QString::number(i));
+        function = std::make_shared<GenerateFunction>();
+        ui->comboChannel->addItem(QString::number(++i));
     }
+    ui->comboChannel->addItem(tr("All"));
 }
 
 void FunctionGenerator::setBuffer(int aChannel, std::vector<float>* aBuffer)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[aChannel].setBuffer(aBuffer);
+        mFunction[aChannel]->setBuffer(aBuffer);
     }
 }
 
@@ -137,13 +138,33 @@ void FunctionGenerator::updateBurstParameters()
     ui->groupBurst->value(mBurstCycles);
 }
 
+quint32 FunctionGenerator::getActiveChannel() const
+{
+    return mChannel == mFunction.size() ? mMasterChannel: mChannel;
+}
+
+void FunctionGenerator::getActiveChannelRange(quint32 &start, quint32 &end)
+{
+    if (mChannel == mFunction.size())
+    {
+        start=0;
+        end = mChannel;
+    }
+    else
+    {
+        start = mChannel;
+        end   = mChannel+1;
+    }
+}
+
 void FunctionGenerator::updateNoiseFilterParameters()
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        if (mFunction[mChannel].useNoiseFilter())
+        const auto &activeFunction = mFunction[getActiveChannel()];
+        if (activeFunction->useNoiseFilter())
         {
-            if (mFunction[mChannel].getNoiseFilter().getLowPassType() == FilterFunctions::Pink)
+            if (activeFunction->getNoiseFilter().getLowPassType() == FilterFunctions::Pink)
             {
                 ui->groupHighPass->hide();
                 ui->groupLowPassCutOff->show();
@@ -154,7 +175,7 @@ void FunctionGenerator::updateNoiseFilterParameters()
             else
             {
                 ui->groupHighPass->show();
-                if (mFunction[mChannel].getNoiseFilter().getHighPassType() == FilterFunctions::ButterworthVariableQ)
+                if (activeFunction->getNoiseFilter().getHighPassType() == FilterFunctions::ButterworthVariableQ)
                 {
                     ui->groupHighPassQ->show();
                 }
@@ -166,7 +187,7 @@ void FunctionGenerator::updateNoiseFilterParameters()
                 ui->groupLowPassQ->show();
                 ui->comboLowPassOrder->show();
                 ui->comboLowPassType->show();
-                if (mFunction[mChannel].getNoiseFilter().getLowPassType() == FilterFunctions::ButterworthVariableQ)
+                if (activeFunction->getNoiseFilter().getLowPassType() == FilterFunctions::ButterworthVariableQ)
                 {
                     ui->groupLowPassQ->show();
                 }
@@ -186,39 +207,40 @@ void FunctionGenerator::updateNoiseFilterParameters()
 
 void FunctionGenerator::updateChannelParameter()
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        ui->groupFrequencySine->value(mFunction[mChannel].getFrequency1());
-        ui->groupStartPhaseSine->value(mFunction[mChannel].getStartPhase());
-        ui->groupFrequencySine2->value(mFunction[mChannel].getFrequency2());
-        ui->groupSweepInterval->value(mFunction[mChannel].getSweepInterval());
-        ui->groupAmplitudeSine->value(mFunction[mChannel].getAmplitudeSine());
+        const auto &activeFunction = mFunction[getActiveChannel()];
+        ui->groupFrequencySine->value(activeFunction->getFrequency1());
+        ui->groupStartPhaseSine->value(activeFunction->getStartPhase());
+        ui->groupFrequencySine2->value(activeFunction->getFrequency2());
+        ui->groupSweepInterval->value(activeFunction->getSweepInterval());
+        ui->groupAmplitudeSine->value(activeFunction->getAmplitudeSine());
 
-        ui->groupFrequencyRectangle->value(mFunction[mChannel].getFrequencyRectangle());
+        ui->groupFrequencyRectangle->value(activeFunction->getFrequencyRectangle());
         ui->groupFrequencyRectangle->on_editingFinished();
-        ui->groupWidthPercentRectangle->value(mFunction[mChannel].getPulsewidthFactorRectangle());
-        ui->groupHighLevelRectangle->value(mFunction[mChannel].getHighLevelRectangle());
-        ui->groupLowLevelRectangle->value(mFunction[mChannel].getLowLevelRectangle());
+        ui->groupWidthPercentRectangle->value(activeFunction->getPulsewidthFactorRectangle());
+        ui->groupHighLevelRectangle->value(activeFunction->getHighLevelRectangle());
+        ui->groupLowLevelRectangle->value(activeFunction->getLowLevelRectangle());
 
-        ui->groupFrequencyTriangle->value(mFunction[mChannel].getFrequencyTriangle());
+        ui->groupFrequencyTriangle->value(activeFunction->getFrequencyTriangle());
         ui->groupFrequencyTriangle->on_editingFinished();
-        ui->groupWidthPercentTriangle->value(mFunction[mChannel].getPulsewidthFactorTriangle());
-        ui->groupHighLevelTriangle->value(mFunction[mChannel].getHighLevelTriangle());
-        ui->groupLowLevelTriangle->value(mFunction[mChannel].getLowLevelTriangle());
+        ui->groupWidthPercentTriangle->value(activeFunction->getPulsewidthFactorTriangle());
+        ui->groupHighLevelTriangle->value(activeFunction->getHighLevelTriangle());
+        ui->groupLowLevelTriangle->value(activeFunction->getLowLevelTriangle());
 
-        ui->groupNoiseInterval->value(mFunction[mChannel].getNoiseInterval());
-        ui->checkNoiseFitered->setChecked(mFunction[mChannel].useNoiseFilter());
+        ui->groupNoiseInterval->value(activeFunction->getNoiseInterval());
+        ui->checkNoiseFitered->setChecked(activeFunction->useNoiseFilter());
 
-        ui->comboHighPassOrder->setCurrentIndex(mFunction->getNoiseFilter().getHighPassOrder());
-        ui->comboHighPassType->setCurrentIndex(mFunction->getNoiseFilter().getHighPassType());
-        ui->groupHighPassCutOff->value(mFunction->getNoiseFilter().getHighPassCutOff());
-        ui->groupHighPassQ->value(mFunction->getNoiseFilter().getHighPassQ());
+        ui->comboHighPassOrder->setCurrentIndex(activeFunction->getNoiseFilter().getHighPassOrder());
+        ui->comboHighPassType->setCurrentIndex(activeFunction->getNoiseFilter().getHighPassType());
+        ui->groupHighPassCutOff->value(activeFunction->getNoiseFilter().getHighPassCutOff());
+        ui->groupHighPassQ->value(activeFunction->getNoiseFilter().getHighPassQ());
 
-        ui->checkPinkNoise->setChecked(mFunction->getNoiseFilter().getLowPassType() == FilterFunctions::Pink);
-        ui->comboLowPassType->setCurrentIndex(mFunction->getNoiseFilter().getLowPassType());
-        ui->comboLowPassOrder->setCurrentIndex(mFunction->getNoiseFilter().getLowPassOrder());
-        ui->groupLowPassCutOff->value(mFunction->getNoiseFilter().getLowPassCutOff());
-        ui->groupLowPassQ->value(mFunction->getNoiseFilter().getLowPassQ());
+        ui->checkPinkNoise->setChecked(activeFunction->getNoiseFilter().getLowPassType() == FilterFunctions::Pink);
+        ui->comboLowPassType->setCurrentIndex(activeFunction->getNoiseFilter().getLowPassType());
+        ui->comboLowPassOrder->setCurrentIndex(activeFunction->getNoiseFilter().getLowPassOrder());
+        ui->groupLowPassCutOff->value(activeFunction->getNoiseFilter().getLowPassCutOff());
+        ui->groupLowPassQ->value(activeFunction->getNoiseFilter().getLowPassQ());
 
         updateFunctionType();
         updateNoiseFilterParameters();
@@ -227,16 +249,17 @@ void FunctionGenerator::updateChannelParameter()
 
 void FunctionGenerator::updateFunctionType()
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        ui->groupWaveform->setCurrentIndex(mFunction[mChannel].getType());
+        const auto &activeFunction = mFunction[getActiveChannel()];
+        ui->groupWaveform->setCurrentIndex(activeFunction->getType());
         bool fSine(false);
         bool fSweep(false);
         bool fRectangle(false);
         bool fTriangle(false);
         bool fNoise(false);
         bool fBurst(false);
-        switch (mFunction[mChannel].getType())
+        switch (activeFunction->getType())
         {
         case GenerateFunction::silent:                           break;
         case GenerateFunction::sine:      fSine      = fBurst = true; break;
@@ -257,54 +280,62 @@ void FunctionGenerator::updateFunctionType()
 
 void FunctionGenerator::getChannelParameter()
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setFrequency1(ui->groupFrequencySine->value());
-        mFunction[mChannel].setFrequency2(ui->groupFrequencySine2->value());
-        mFunction[mChannel].setStartPhase(ui->groupStartPhaseSine->value());
-        mFunction[mChannel].setSweepInterval(ui->groupSweepInterval->value());
-        mFunction[mChannel].setAmplitudeSine(ui->groupAmplitudeSine->value());
-
-        mFunction[mChannel].setFrequencyRectangle(ui->groupFrequencyRectangle->value());
-        mFunction[mChannel].setPulsewidthFactorRectangle(ui->groupWidthPercentRectangle->value());
-        mFunction[mChannel].setHighLevelRectangle(ui->groupHighLevelRectangle->value());
-        mFunction[mChannel].setLowLevelRectangle(ui->groupLowLevelRectangle->value());
-
-        mFunction[mChannel].setFrequencyTriangle(ui->groupFrequencyTriangle->value());
-        mFunction[mChannel].setPulsewidthFactorTriangle(ui->groupWidthPercentTriangle->value());
-        mFunction[mChannel].setHighLevelTriangle(ui->groupHighLevelTriangle->value());
-        mFunction[mChannel].setLowLevelTriangle(ui->groupLowLevelTriangle->value());
-
-        mFunction[mChannel].setNoiseInterval(ui->groupNoiseInterval->value());
-        mFunction[mChannel].useNoiseFilter(ui->checkNoiseFitered->isChecked());
-
-        mFunction[mChannel].getNoiseFilter().setHighPassType(static_cast<FilterFunctions::eType>(ui->comboHighPassType->currentIndex()));
-        mFunction[mChannel].getNoiseFilter().setHighPassOrder(static_cast<FilterFunctions::eOrder>(ui->comboHighPassOrder->currentIndex()));
-        mFunction[mChannel].getNoiseFilter().setHighPassCutOff(ui->groupHighPassCutOff->value());
-        mFunction[mChannel].getNoiseFilter().setHighPassQ(ui->groupHighPassQ->value());
-
-        if (ui->checkPinkNoise->isChecked())
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
         {
-            mFunction[mChannel].getNoiseFilter().setLowPassType(FilterFunctions::Pink);
-        }
-        else
-        {
-            mFunction[mChannel].getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(ui->comboLowPassType->currentIndex()));
-        }
+            const auto &activeFunction = mFunction[i];
 
-        mFunction[mChannel].getNoiseFilter().setLowPassOrder(static_cast<FilterFunctions::eOrder>(ui->comboLowPassOrder->currentIndex()));
-        mFunction[mChannel].getNoiseFilter().setLowPassCutOff(ui->groupLowPassCutOff->value());
-        mFunction[mChannel].getNoiseFilter().setLowPassQ(ui->groupHighPassQ->value());
+            activeFunction->setFrequency1(ui->groupFrequencySine->value());
+            activeFunction->setFrequency2(ui->groupFrequencySine2->value());
+            activeFunction->setStartPhase(ui->groupStartPhaseSine->value());
+            activeFunction->setSweepInterval(ui->groupSweepInterval->value());
+            activeFunction->setAmplitudeSine(ui->groupAmplitudeSine->value());
+
+            activeFunction->setFrequencyRectangle(ui->groupFrequencyRectangle->value());
+            activeFunction->setPulsewidthFactorRectangle(ui->groupWidthPercentRectangle->value());
+            activeFunction->setHighLevelRectangle(ui->groupHighLevelRectangle->value());
+            activeFunction->setLowLevelRectangle(ui->groupLowLevelRectangle->value());
+
+            activeFunction->setFrequencyTriangle(ui->groupFrequencyTriangle->value());
+            activeFunction->setPulsewidthFactorTriangle(ui->groupWidthPercentTriangle->value());
+            activeFunction->setHighLevelTriangle(ui->groupHighLevelTriangle->value());
+            activeFunction->setLowLevelTriangle(ui->groupLowLevelTriangle->value());
+
+            activeFunction->setNoiseInterval(ui->groupNoiseInterval->value());
+            activeFunction->useNoiseFilter(ui->checkNoiseFitered->isChecked());
+
+            activeFunction->getNoiseFilter().setHighPassType(static_cast<FilterFunctions::eType>(ui->comboHighPassType->currentIndex()));
+            activeFunction->getNoiseFilter().setHighPassOrder(static_cast<FilterFunctions::eOrder>(ui->comboHighPassOrder->currentIndex()));
+            activeFunction->getNoiseFilter().setHighPassCutOff(ui->groupHighPassCutOff->value());
+            activeFunction->getNoiseFilter().setHighPassQ(ui->groupHighPassQ->value());
+
+            if (ui->checkPinkNoise->isChecked())
+            {
+                activeFunction->getNoiseFilter().setLowPassType(FilterFunctions::Pink);
+            }
+            else
+            {
+                activeFunction->getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(ui->comboLowPassType->currentIndex()));
+            }
+
+            activeFunction->getNoiseFilter().setLowPassOrder(static_cast<FilterFunctions::eOrder>(ui->comboLowPassOrder->currentIndex()));
+            activeFunction->getNoiseFilter().setLowPassCutOff(ui->groupLowPassCutOff->value());
+            activeFunction->getNoiseFilter().setLowPassQ(ui->groupHighPassQ->value());
+        }
     }
 }
 
 void FunctionGenerator::saveParameter(QDomDocument& aDoc, QDomElement&aDE)
 {
-    for (int fC=0; fC<mChannels; ++fC)
+    for (quint32 fC=0; fC<mFunction.size(); ++fC)
     {
         QDomElement fChannel = aDoc.createElement(s::sChannel+QString::number(fC+1));
         aDE.appendChild(fChannel);
-        saveChannel(aDoc, fChannel, mFunction[fC]);
+        saveChannel(aDoc, fChannel, *mFunction[fC]);
     }
 }
 
@@ -357,9 +388,9 @@ void  FunctionGenerator::saveChannel(QDomDocument& aDoc, QDomElement& aDE, Gener
 
 void FunctionGenerator::loadParameter(const QDomNode& aDE)
 {
-    for (int fC=0; fC<mChannels; ++fC)
+    for (quint32 fC=0; fC<mFunction.size(); ++fC)
     {
-        loadChannel(findElement(aDE, s::sChannel+QString::number(fC+1)), mFunction[fC]);
+        loadChannel(findElement(aDE, s::sChannel+QString::number(fC+1)), *mFunction[fC]);
     }
 }
 
@@ -409,11 +440,19 @@ double FunctionGenerator::calcPulseWidthRectangleFromPercent(double aPercent)
 
 void FunctionGenerator::on_comboChannel_currentIndexChanged(int index)
 {
-    if (mChannel != index && index != -1)
+    if (index != -1 && mChannel != static_cast<quint32>(index))
     {
-        getChannelParameter();
-        mChannel = index;
-        updateChannelParameter();
+        if (static_cast<quint32>(index) < mFunction.size())
+        {
+            getChannelParameter();
+            mMasterChannel = mChannel = index;
+            updateChannelParameter();
+        }
+        else
+        {
+            mChannel = index;
+            getChannelParameter();
+        }
     }
 }
 
@@ -422,9 +461,9 @@ void FunctionGenerator::on_btnStartAudio_clicked(bool checked)
     if (checked)
     {
         getChannelParameter();
-        for (int i=0; i< mChannels; ++i)
+        for (auto& function : mFunction)
         {
-            mFunction[i].calculate();
+            function->calculate();
         }
     }
     Q_EMIT start_stream(checked, mBurstCycles);
@@ -451,17 +490,18 @@ void FunctionGenerator::on_btnApply_clicked()
 
 quint32 FunctionGenerator::getPeriodSamples()
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
         double fFrequency = 0;
-        switch (mFunction[mChannel].getType())
+        const auto &activeFunction = mFunction[getActiveChannel()];
+        switch (activeFunction->getType())
         {
         case GenerateFunction::noise: default: case GenerateFunction::silent:
             break;
-        case GenerateFunction::sine:       fFrequency = mFunction[mChannel].getFrequency1(); break;
-        case GenerateFunction::rectangle:  fFrequency = mFunction[mChannel].getFrequencyRectangle(); break;
-        case GenerateFunction::triangle:   fFrequency = mFunction[mChannel].getFrequencyTriangle(); break;
-        case GenerateFunction::sine_sweep: return mFunction[mChannel].getSweepInterval() * GenerateFunction::getSampleFrequency();
+        case GenerateFunction::sine:       fFrequency = activeFunction->getFrequency1(); break;
+        case GenerateFunction::rectangle:  fFrequency = activeFunction->getFrequencyRectangle(); break;
+        case GenerateFunction::triangle:   fFrequency = activeFunction->getFrequencyTriangle(); break;
+        case GenerateFunction::sine_sweep: return activeFunction->getSweepInterval() * GenerateFunction::getSampleFrequency();
         }
         if (fFrequency > 0)
         {
@@ -527,68 +567,110 @@ void FunctionGenerator::currentTabPagesChanged(int index)
 
 void FunctionGenerator::on_groupWaveform_clicked(int index)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setType(index);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(index);
+        }
         updateFunctionType();
     }
 }
 
 void FunctionGenerator::on_checkSineActive_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
         GenerateFunction::eType fType = ui->checkSineSweepActive->isChecked() ? GenerateFunction::sine_sweep : GenerateFunction::sine;
-        mFunction[mChannel].setType(checked ? fType : GenerateFunction::silent);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(checked ? fType : GenerateFunction::silent);
+        }
         updateFunctionType();
     }
 }
 
 void FunctionGenerator::on_checkRectangleActive_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setType(checked ? GenerateFunction::rectangle : GenerateFunction::silent);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(checked ? GenerateFunction::rectangle : GenerateFunction::silent);
+        }
         updateFunctionType();
     }
 }
 
 void FunctionGenerator::on_checkTriangleActive_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setType(checked ? GenerateFunction::triangle : GenerateFunction::silent);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(checked ? GenerateFunction::triangle : GenerateFunction::silent);
+        }
         updateFunctionType();
     }
 }
 
 void FunctionGenerator::on_checkNoiseActive_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setType(checked ? GenerateFunction::noise: GenerateFunction::silent);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(checked ? GenerateFunction::noise: GenerateFunction::silent);
+        }
         updateFunctionType();
     }
 }
 
 void FunctionGenerator::on_checkSineSweepActive_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].setType(checked ? GenerateFunction::sine_sweep: GenerateFunction::silent);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->setType(checked ? GenerateFunction::sine_sweep: GenerateFunction::silent);
+        }
         if (checked)
         {
             ui->checkSineActive->setChecked(true);
         }
-        ui->groupWaveform->setCurrentIndex(mFunction[mChannel].getType());
+        ui->groupWaveform->setCurrentIndex(mFunction[getActiveChannel()]->getType());
     }
 }
 
 void FunctionGenerator::on_checkNoiseFitered_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].useNoiseFilter(checked);
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->useNoiseFilter(checked);
+        }
         updateNoiseFilterParameters();
     }
 }
@@ -596,33 +678,51 @@ void FunctionGenerator::on_checkNoiseFitered_clicked(bool checked)
 
 void FunctionGenerator::on_comboLowPassType_currentIndexChanged(int index)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(index));
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(index));
+        }
         updateNoiseFilterParameters();
     }
 }
 
 void FunctionGenerator::on_comboHighPassType_currentIndexChanged(int index)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        mFunction[mChannel].getNoiseFilter().setHighPassType(static_cast<FilterFunctions::eType>(index));
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
+        {
+            mFunction[i]->getNoiseFilter().setHighPassType(static_cast<FilterFunctions::eType>(index));
+        }
         updateNoiseFilterParameters();
     }
 }
 
 void FunctionGenerator::on_checkPinkNoise_clicked(bool checked)
 {
-    if (mFunction)
+    if (!mFunction.empty())
     {
-        if (checked)
+        quint32 start {0};
+        quint32 end   {0};
+        getActiveChannelRange(start, end);
+        for (quint32 i=start; i<end; ++i)
         {
-            mFunction[mChannel].getNoiseFilter().setLowPassType(FilterFunctions::Pink);
-        }
-        else
-        {
-            mFunction[mChannel].getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(ui->comboLowPassType->currentIndex()));
+            if (checked)
+            {
+                mFunction[i]->getNoiseFilter().setLowPassType(FilterFunctions::Pink);
+            }
+            else
+            {
+                mFunction[i]->getNoiseFilter().setLowPassType(static_cast<FilterFunctions::eType>(ui->comboLowPassType->currentIndex()));
+            }
         }
         updateNoiseFilterParameters();
     }
