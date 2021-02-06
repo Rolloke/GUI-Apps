@@ -12,6 +12,7 @@ public:
     typedef typename std::vector<T> circlevector_type;
     /// iterator
     typedef typename circlevector_type::iterator iterator;
+    typedef typename circlevector_type::size_type size_type;
     /// iterator to iterate through all matrix elements
     class circlevector_iterator : public iterator
     {
@@ -107,7 +108,7 @@ public:
     {
     public:
         /// constructors
-        const_circlevector_iterator() :_Begin(0), _End(0)  {}
+        const_circlevector_iterator() :_Begin({}), _End({})  {}
         const_circlevector_iterator(const_iterator aPtr): const_iterator(aPtr) {}
         const_circlevector_iterator(const_iterator aPtr, const_iterator aBegin, const_iterator aEnd): const_iterator(aPtr)
         , _Begin(aBegin), _End(aEnd) {}
@@ -122,39 +123,34 @@ public:
         /// preincrement
         const_circlevector_iterator& operator++()
         {
+#if _MSVC_STL_VERSION >= 141
+            int fDistance =  std::distance(const_iterator(*this), _End);
+            if (fDistance > 1)
+            {
+                const_iterator::operator++();
+            }
+            else
+            {
+                TRACE(Logger::trace, "operator++() overflow\n");
+                *this = _Begin;
+            }
+#else
             if (const_iterator::operator++() == _End)
             {
                 TRACE(Logger::trace, "operator++() overflow\n");
                 *this = _Begin;
             }
+#endif
             return (*this);
         }
 
-        const_circlevector_iterator& operator+=(ssize_t aStep)
+        const_circlevector_iterator& operator+=(int aStep)
         {
             *this = const_circlevector_iterator(*this + aStep, _Begin, _End);
             return *this;
-//            const_iterator fIt = const_iterator(*this) + aStep;
-//            if (fIt >= _End)
-//            {
-//                int fDistance =  std::distance(_End, fIt);
-//                TRACE(Logger::trace, "operator+=(%d) overflow, new index: %d\n", aStep, fDistance);
-//                *this = const_circlevector_iterator(_Begin + fDistance, _Begin, _End);
-//            }
-//            else if (fIt < _Begin)
-//            {
-//                int fDistance =  std::distance(_Begin, fIt);
-//                TRACE(Logger::trace, "operator+=(%d) overflow, new index: %d\n", aStep, fDistance);
-//                *this = const_circlevector_iterator(_End+fDistance, _Begin, _End);
-//            }
-//            else
-//            {
-//                *this = const_circlevector_iterator(fIt, _Begin, _End);
-//            }
-//            return *this;
         }
 
-        const_circlevector_iterator operator+(ssize_t aStep)
+        const_circlevector_iterator operator+(int aStep)
         {
             const_iterator fIt = const_iterator(*this) + aStep;
             if (fIt >= _End)
@@ -183,11 +179,25 @@ public:
         /// predecrement
         const_circlevector_iterator& operator--()
         {
+#if _MSVC_STL_VERSION >= 141
+            int fDistance =  std::distance(_Begin, const_iterator(*this));
+            if (fDistance > 1)
+            {
+                const_iterator::operator--();
+            }
+            else
+            {
+                TRACE(Logger::trace, "operator++() overflow\n");
+                *this = const_circlevector_iterator(_End-1, _Begin, _End);
+            }
+
+#else
             if (const_iterator::operator--() < _Begin)
             {
                 TRACE(Logger::trace, "operator--() overflow\n");
                 *this = const_circlevector_iterator(_End-1, _Begin, _End);
             }
+#endif
             return (*this);
         }
     private:

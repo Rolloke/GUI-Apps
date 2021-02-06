@@ -1,6 +1,9 @@
 
 #include "FFT.h"
+#include "main.h"
+
 #include <cmath>
+
 
 namespace
 {
