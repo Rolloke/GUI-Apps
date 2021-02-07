@@ -111,6 +111,7 @@ private:
     bool searchForEdgeCrossingTriggerLevel(int aChannel, int aStartPoint, int &aIndexEdge, bool aTriggerEdgeRising, void (*aModify)(Trigger &), double *aOffset=NULL, int* aBuffersize=0);
     bool isDisplayTriggered();
     void determineAutomaticLevel(int aC);
+    void determineMinMaxLevel(int start_pos, int stop_pos);
     void onAudioInputSettings();
     void handleBufferChanged(int aStartPosition);
 
