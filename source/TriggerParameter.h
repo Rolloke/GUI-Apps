@@ -76,6 +76,7 @@ struct TriggerParameter
     bool                 mDelayActive;
     double               mDelay;
 
+    int                  mSingleTriggerDelayBuffersFix;
     int                  mSingleTriggerDelayBuffers;
     int                  mSingleTriggerPos;
     double               mSingleTriggerOffset;

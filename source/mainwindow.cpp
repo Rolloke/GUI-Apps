@@ -29,7 +29,6 @@ QAudioInit gAudio;
 #endif
 
 
-
 MainWindow::MainWindow(QApplication& aApp, QWidget *parent) :
     QMainWindow(parent)
   , ui(new Ui::MainWindow)
@@ -888,21 +887,65 @@ void MainWindow::handleBufferChanged(int aStartPosition)
     {
         if (mTrigger.mSingleTriggerDelayBuffers > 0)
         {
-            ui->ledTriggerArmed->setChecked(true);
-            --mTrigger.mSingleTriggerDelayBuffers;
-            mScopeViewInvalid = 1;
+            if (--mTrigger.mSingleTriggerDelayBuffers == 0)
+            {
+                mScopeViewInvalid = 1;
+            }
         }
         else if (searchForEdgeCrossingTriggerLevel(mTrigger.mActiveChannel, aStartPosition, mTrigger.mSingleTriggerPos, mTrigger.mEdgeRising, &Trigger::forward, &mTrigger.mSingleTriggerOffset))
         {
             mTrigger.mSingleTriggerDelayBuffers = fBuffersDelay+1;
+            mTrigger.mSingleTriggerDelayBuffersFix = mTrigger.mSingleTriggerDelayBuffers;
             ui->ledTriggerArmed->setChecked(false);
             ui->ledTriggered->setChecked(true);
+
+            initHoldOffTime(mTrigger.mSingleTriggerPos);
+            initHoldOffEvents(mTrigger.mSingleTriggerPos);
+
+            if (mTrigger.mDelayActive)
+            {
+                mTrigger.mSingleTriggerPos -= mAudioInput.getSampleFrequency() * mTrigger.mDelay;
+            }
         }
     }
     else
     {
         ui->ledTriggerArmed->setChecked(true);
         mScopeViewInvalid = 1;
+    }
+}
+void MainWindow::determineMinMaxLevel(int start_pos, int stop_pos)
+{
+    for (int c=0; c < mCombineCurves.getMathChannelIndex(); ++c)
+    {
+        Channel& fChannel = mChannel[c];
+        const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(c));
+        auto start = fValues.begin(start_pos);
+        auto stop  = fValues.begin(stop_pos);
+
+#if _MSVC_STL_VERSION >= 141
+
+        double fMin = *start;
+        double fMax = fMin;
+        for (;start != stop; ++start)
+        {
+            fMin = min(fMin, *start);
+            fMax = max(fMax, *start);
+        }
+#elif __cplusplus >= 201103
+        auto   element = std::minmax_element(start, stop);
+        double fMin = *element.first;
+        double fMax = *element.second;
+#else
+        double fMin = *min_element(start, stop);
+        double fMax = *max_element(start, stop);
+#endif
+        fChannel.setMinMaxValue(fMin, fMax);
+        if (mScopeSettings.isVisible() && c == mTrigger.mActiveChannel)
+        {
+            mScopeSettings.setValue(fMin, ScopeSettings::measured_min);
+            mScopeSettings.setValue(fMax, ScopeSettings::measured_max);
+        }
     }
 }
 
@@ -944,33 +987,7 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
                       count_if(mBufferUpdate.begin(), mBufferUpdate.end(), bind2nd(equal_to<int>(), 0)));
             }
 
-            for (int c=0; c < mCombineCurves.getMathChannelIndex(); ++c)
-            {
-                Channel& fChannel = mChannel[c];
-                const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(c));
-                auto start = fValues.begin(fStartPosition);
-                auto stop  = fValues.begin(fStartPosition + mAudioInput.getBufferSize() * fBuffers);
-
-#if _MSVC_STL_VERSION >= 141
-
-                double fMin = *start;
-                double fMax = fMin;
-                for (;start != stop; ++start)
-                {
-                    fMin = min(fMin, *start);
-                    fMax = max(fMax, *start);
-                }
-#else
-                double fMin = *min_element(start, stop);
-                double fMax = *max_element(start, stop);
-#endif
-                fChannel.setMinMaxValue(fMin, fMax);
-                if (mScopeSettings.isVisible() && c == mTrigger.mActiveChannel)
-                {
-                    mScopeSettings.setValue(fMin, ScopeSettings::measured_min);
-                    mScopeSettings.setValue(fMax, ScopeSettings::measured_max);
-                }
-            }
+            determineMinMaxLevel(fStartPosition, fStartPosition + mAudioInput.getBufferSize() * fBuffers);
             if (mCalibrationDlg.isVisible())
             {
                 mCalibrationDlg.updateParameters();
@@ -1024,10 +1041,16 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
         else if (mTrigger.mType == TriggerType::Single && mTrigger.mSingleTriggerDelayBuffers == 0)
         {
             mAudioInput.suspend();
+            fSearchStart       = mTrigger.mSingleTriggerPos;
+            fTriggerTimeOffset = mTrigger.mSingleTriggerOffset;
+            determineMinMaxLevel(fSearchStart, fSearchStart + mAudioInput.getBufferSize() * mTrigger.mSingleTriggerDelayBuffersFix);
+            determineAutomaticTime(fSearchStart, fTriggerTimeOffset);
+
             mTrigger.mType = TriggerType::Stop;
             ui->groupTrigger->setCurrentIndex(mTrigger.mType);
-            mLastBufferPosition = fSearchStart       = mTrigger.mSingleTriggerPos;
-            mLastTriggerOffset  = fTriggerTimeOffset = mTrigger.mSingleTriggerOffset;
+
+            mLastBufferPosition = fSearchStart;
+            mLastTriggerOffset  = fTriggerTimeOffset;
         }
         else if (mTrigger.mType == TriggerType::Manual)
         {
