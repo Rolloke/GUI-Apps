@@ -1044,7 +1044,7 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
             fSearchStart       = mTrigger.mSingleTriggerPos;
             fTriggerTimeOffset = mTrigger.mSingleTriggerOffset;
             determineMinMaxLevel(fSearchStart, fSearchStart + mAudioInput.getBufferSize() * mTrigger.mSingleTriggerDelayBuffersFix);
-            determineAutomaticTime(fSearchStart, fTriggerTimeOffset);
+            determineAutomaticTime(fSearchStart, fTriggerTimeOffset, false);
 
             mTrigger.mType = TriggerType::Stop;
             ui->groupTrigger->setCurrentIndex(mTrigger.mType);
@@ -1153,15 +1153,17 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
     }
 }
 
-void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOffset)
+void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOffset, bool search_backward)
 {
     if (mAutoTimeDetermination || mScopeSettings.isVisible())
     {
         double fTriggerTimeOffset2 = 0;
         int    fFoundEdge          = 0;
-        if (searchForEdgeCrossingTriggerLevel(mTrigger.mActiveChannel, fSearchStart-1, fFoundEdge, !mTrigger.mEdgeRising, &Trigger::backward, &fTriggerTimeOffset2))
+        auto*  trigger_search = search_backward ? &Trigger::backward : &Trigger::forward;
+        if (searchForEdgeCrossingTriggerLevel(mTrigger.mActiveChannel, fSearchStart + search_backward ? -1 : 1, fFoundEdge,
+                                              !mTrigger.mEdgeRising, trigger_search, &fTriggerTimeOffset2))
         {
-            int fSteps = fSearchStart - fFoundEdge;
+            int fSteps = search_backward ? fSearchStart - fFoundEdge : fFoundEdge - fSearchStart;
             if (fSteps < 0)
             {
                 fSteps = fSearchStart + (mAudioInput.getValues(0).size() - fFoundEdge);
@@ -1176,9 +1178,10 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
             {
                 fSearchStart = fFoundEdge;
                 fTriggerTimeOffset = fTriggerTimeOffset2;
-                if (searchForEdgeCrossingTriggerLevel(mScopeSettings.getPhaseChannel(), fSearchStart-1, fFoundEdge, !mTrigger.mEdgeRising, &Trigger::backward, &fTriggerTimeOffset2))
+                if (searchForEdgeCrossingTriggerLevel(mScopeSettings.getPhaseChannel(), fSearchStart + search_backward ? -1 : 1, fFoundEdge,
+                                                      !mTrigger.mEdgeRising, trigger_search, &fTriggerTimeOffset2))
                 {
-                    int fPhaseOffset = fSearchStart - fFoundEdge;
+                    int fPhaseOffset = search_backward ? fSearchStart - fFoundEdge : fFoundEdge - fSearchStart;
                     if (fPhaseOffset < fSteps)
                     {
                         double fPhaseOffsetTime = (fPhaseOffset + fTriggerTimeOffset - fTriggerTimeOffset2 - 1.0) * ui->graphicsViewScope->getTimeStep();

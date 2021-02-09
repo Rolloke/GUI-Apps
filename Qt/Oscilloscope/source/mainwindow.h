@@ -116,7 +116,7 @@ private:
     void handleBufferChanged(int aStartPosition);
 
 #if TRIGGER_PROCESSING == 1
-    void determineAutomaticTime(int aSearchStart, double aTriggerTimeOffset);
+    void determineAutomaticTime(int aSearchStart, double aTriggerTimeOffset, bool backward=true);
 
     void initHoldOffTime(int aSearchStart);
     int  checkHoldOffTime();

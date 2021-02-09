@@ -28,7 +28,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 DEFINES +=__SSE2__
 #unix:DEFINES +=__AVX__
 
-unix:DEFINES +=__cplusplus=201703L
+#unix:DEFINES +=__cplusplus=201703L
 # define trigger processing:
 # 1: processing depending on buffer update flag
 # 2: find all trigger points and take the latest trigger point with enough display poinds behind it
