@@ -35,33 +35,67 @@ public:
         /// preincrement
         circlevector_iterator& operator++()
         {
+#if _MSVC_STL_VERSION >= 141
+            int fDistance =  std::distance(const_iterator(*this), _End);
+            if (fDistance > 1)
+            {
+                iterator::operator++();
+            }
+            else
+            {
+                TRACE(Logger::trace, "operator++() overflow\n");
+                *this = _Begin;
+            }
+#else
             if (iterator::operator++() == _End)
             {
                 *this = _Begin;
             }
+#endif
             return (*this);
         }
 
-        circlevector_iterator& operator+=(size_t aPos)
+        circlevector_iterator& operator+=(int aStep)
         {
-            iterator fIt = iterator(*this) + aPos;
-            if (fIt >= _End)
-            {
-                int fDistance =  std::distance(_End, fIt);
-                *this = circlevector_iterator(_Begin+fDistance, _Begin, _End);
-            }
-            else if (fIt < _Begin)
-            {
-                int fDistance =  std::distance(fIt, _Begin);
-                *this = circlevector_iterator(_End-fDistance, _Begin, _End);
-            }
-            else
-            {
-                *this = circlevector_iterator(fIt, _Begin, _End);
-            }
+            *this = circlevector_iterator(*this + aStep, _Begin, _End);
             return *this;
         }
 
+        circlevector_iterator operator+(int aStep)
+        {
+#if _MSVC_STL_VERSION >= 141
+            iterator fIt = iterator(*this);
+            if (aStep > 0)
+            {
+                int fDistance =  std::distance(fIt, _End);
+                fIt = (aStep > fDistance) ? _Begin + (aStep - fDistance) :
+                                            fIt + aStep;
+            }
+            else
+            {
+                int fDistance =  std::distance(fIt, _Begin);
+                fIt = (aStep < fDistance) ? _Begin + (std::distance(_Begin, _End) + (aStep - fDistance)) :
+                                            fIt + aStep;
+            }
+            return circlevector_iterator(fIt, _Begin, _End);
+#else
+            iterator fIt = iterator(*this) + aStep;
+            if (fIt >= _End)
+            {
+                int fDistance =  std::distance(_End, fIt);
+                return circlevector_iterator(_Begin + fDistance, _Begin, _End);
+            }
+            else if (fIt < _Begin)
+            {
+                int fDistance =  std::distance(_Begin, fIt);
+                return circlevector_iterator(_End + fDistance, _Begin, _End);
+            }
+            else
+            {
+                return circlevector_iterator(fIt, _Begin, _End);
+            }
+#endif
+        }
         /// postdecrement
         circlevector_iterator operator--(int)
         {
@@ -72,10 +106,24 @@ public:
         /// predecrement
         circlevector_iterator& operator--()
         {
+#if _MSVC_STL_VERSION >= 141
+            int fDistance =  std::distance(_Begin, const_iterator(*this));
+            if (fDistance > 1)
+            {
+                iterator::operator--();
+            }
+            else
+            {
+                TRACE(Logger::trace, "operator++() overflow\n");
+                *this = circlevector_iterator(_End-1, _Begin, _End);
+            }
+
+#else
             if (iterator::operator--() < _Begin)
             {
                 *this = _End-1;
             }
+#endif
             return (*this);
         }
     private:
@@ -152,6 +200,22 @@ public:
 
         const_circlevector_iterator operator+(int aStep)
         {
+#if _MSVC_STL_VERSION >= 141
+            const_iterator fIt = const_iterator(*this);
+            if (aStep > 0)
+            {
+                int fDistance =  std::distance(fIt, _End);
+                fIt = (aStep > fDistance) ? _Begin + (aStep - fDistance) :
+                                            fIt + aStep;
+            }
+            else
+            {
+                int fDistance =  std::distance(fIt, _Begin);
+                fIt = (aStep < fDistance) ? _Begin + (std::distance(_Begin, _End) + (aStep - fDistance)) :
+                                            fIt + aStep;
+            }
+            return const_circlevector_iterator(fIt, _Begin, _End);
+#else
             const_iterator fIt = const_iterator(*this) + aStep;
             if (fIt >= _End)
             {
@@ -167,6 +231,7 @@ public:
             {
                 return const_circlevector_iterator(fIt, _Begin, _End);
             }
+#endif
         }
 
         /// postdecrement
