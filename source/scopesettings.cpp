@@ -84,6 +84,9 @@ ScopeSettings::ScopeSettings(QWidget *parent, std::vector<Channel>& aChannelPara
     ui->valueMeasuredPhase->initUnit();
     ui->valueMeasuredPhase->getPrefix().setPrefixChange(UnitPrefix::no_change);
     ui->valueMeasuredPhase->value(0);
+    ui->valueMeasuredTimeOffset->initUnit();
+    ui->valueMeasuredTimeOffset->getPrefix().setPrefixChange(UnitPrefix::auto_change);
+    ui->valueMeasuredTimeOffset->value(0);
 
     MainWindow* fMain = dynamic_cast<MainWindow*>(parentWidget());
     if (fMain)
@@ -651,6 +654,9 @@ void ScopeSettings::setValue(double aValue, int aReceiveType)
         break;
     case measured_phase:
         ui->valueMeasuredPhase->value(aValue);
+        break;
+    case measured_time_offset:
+        ui->valueMeasuredTimeOffset->value(aValue);
         break;
     default:
         break;

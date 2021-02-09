@@ -1185,6 +1185,7 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
                     if (fPhaseOffset < fSteps)
                     {
                         double fPhaseOffsetTime = (fPhaseOffset + fTriggerTimeOffset - fTriggerTimeOffset2 - 1.0) * ui->graphicsViewScope->getTimeStep();
+                        mScopeSettings.setValue(fPhaseOffsetTime, ScopeSettings::measured_time_offset);
                         double fPhase = fPhaseOffsetTime / fTime * 360;
                         mScopeSettings.setValue(fPhase, ScopeSettings::measured_phase);
                     }
