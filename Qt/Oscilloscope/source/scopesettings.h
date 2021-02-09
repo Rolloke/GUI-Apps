@@ -28,7 +28,8 @@ public:
         calculated_rms,
         measured_min,
         measured_max,
-        measured_phase
+        measured_phase,
+        measured_time_offset
     };
 
     enum eChannelListColumn

@@ -1214,6 +1214,32 @@
       <string>V</string>
      </property>
     </widget>
+    <widget class="QDoubleLableWithUnit" name="valueMeasuredTimeOffset">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>190</y>
+       <width>81</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>s</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelMeasuredTimeOffset">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>141</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Time Difference</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Math">
     <property name="toolTip">
