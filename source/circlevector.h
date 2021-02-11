@@ -44,12 +44,12 @@ public:
             else
             {
                 TRACE(Logger::trace, "operator++() overflow\n");
-                *this = _Begin;
+                *this =  circlevector_iterator(_Begin, _Begin, _End);;
             }
 #else
             if (iterator::operator++() == _End)
             {
-                *this = _Begin;
+                *this =  circlevector_iterator(_Begin, _Begin, _End);;
             }
 #endif
             return (*this);
@@ -68,14 +68,14 @@ public:
             if (aStep > 0)
             {
                 int fDistance =  std::distance(fIt, _End);
-                fIt = (aStep > fDistance) ? _Begin + (aStep - fDistance) :
-                                            fIt + aStep;
+                fIt = (aStep < fDistance) ? fIt + aStep:
+                                            _Begin + (aStep - fDistance);
             }
             else
             {
                 int fDistance =  std::distance(fIt, _Begin);
-                fIt = (aStep < fDistance) ? _Begin + (std::distance(_Begin, _End) + (aStep - fDistance)) :
-                                            fIt + aStep;
+                fIt = (aStep > fDistance) ? fIt + aStep:
+                                            _Begin + (std::distance(_Begin, _End) + (aStep - fDistance));
             }
             return circlevector_iterator(fIt, _Begin, _End);
 #else
@@ -180,13 +180,13 @@ public:
             else
             {
                 TRACE(Logger::trace, "operator++() overflow\n");
-                *this = _Begin;
+                *this = const_circlevector_iterator(_Begin, _Begin, _End);
             }
 #else
             if (const_iterator::operator++() == _End)
             {
                 TRACE(Logger::trace, "operator++() overflow\n");
-                *this = _Begin;
+                *this = const_circlevector_iterator(_Begin, _Begin, _End);
             }
 #endif
             return (*this);
@@ -205,14 +205,14 @@ public:
             if (aStep > 0)
             {
                 int fDistance =  std::distance(fIt, _End);
-                fIt = (aStep > fDistance) ? _Begin + (aStep - fDistance) :
-                                            fIt + aStep;
+                fIt = (aStep < fDistance) ? fIt + aStep :
+                                            _Begin + (aStep - fDistance);
             }
             else
             {
                 int fDistance =  std::distance(fIt, _Begin);
-                fIt = (aStep < fDistance) ? _Begin + (std::distance(_Begin, _End) + (aStep - fDistance)) :
-                                            fIt + aStep;
+                fIt = (aStep > fDistance) ? fIt + aStep:
+                                            _Begin + (std::distance(_Begin, _End) + (aStep - fDistance));
             }
             return const_circlevector_iterator(fIt, _Begin, _End);
 #else

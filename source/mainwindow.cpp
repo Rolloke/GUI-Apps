@@ -1159,8 +1159,9 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
     {
         double fTriggerTimeOffset2 = 0;
         int    fFoundEdge          = 0;
+        const int startoffset = search_backward ? -1 : 1;
         auto*  trigger_search = search_backward ? &Trigger::backward : &Trigger::forward;
-        if (searchForEdgeCrossingTriggerLevel(mTrigger.mActiveChannel, fSearchStart + search_backward ? -1 : 1, fFoundEdge,
+        if (searchForEdgeCrossingTriggerLevel(mTrigger.mActiveChannel, fSearchStart + startoffset, fFoundEdge,
                                               !mTrigger.mEdgeRising, trigger_search, &fTriggerTimeOffset2))
         {
             int fSteps = search_backward ? fSearchStart - fFoundEdge : fFoundEdge - fSearchStart;
@@ -1178,7 +1179,7 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
             {
                 fSearchStart = fFoundEdge;
                 fTriggerTimeOffset = fTriggerTimeOffset2;
-                if (searchForEdgeCrossingTriggerLevel(mScopeSettings.getPhaseChannel(), fSearchStart + search_backward ? -1 : 1, fFoundEdge,
+                if (searchForEdgeCrossingTriggerLevel(mScopeSettings.getPhaseChannel(), fSearchStart + startoffset, fFoundEdge,
                                                       !mTrigger.mEdgeRising, trigger_search, &fTriggerTimeOffset2))
                 {
                     int fPhaseOffset = search_backward ? fSearchStart - fFoundEdge : fFoundEdge - fSearchStart;
