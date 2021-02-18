@@ -14,16 +14,17 @@
 class SettingStates
 {
 public:
-    enum state  { Time, Date, Timer, Timers=5, MeasureTemperature=Timer+Timers, MeasureCurrent, SetTime, SetDate, SetYear, SetContrast, SetLightLow, SetLightHigh, SetOnLightTime, SetLanguage, StoreTime,
+    enum state  { Time, Date, Timer, Timers=4, MeasureTemperature=Timer+Timers, MeasureVoltage, MeasureCurrent, MeasurePower, SetTime, SetDate, SetYear, SetContrast, SetLightLow, SetLightHigh, SetOnLightTime, SetLanguage, StoreTime,
                   SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
-                  LastState          = MeasureCurrent,
+                  LastState          = MeasurePower,
                   LastSettingsState  = SetLanguage,
                   LastSetAlarmState  = SetAlarmDay };
     // Mo, Mi, Ho, Al -> mode, minute, hour, alarm
     enum button { Mode=0, Hour=1, Minute=2, AlarmBtn=3, buttons=4, Plus=Hour, Minus=Minute, Start=AlarmBtn, Stop=AlarmBtn, DateTime = AlarmBtn, ClearAll=10};
     enum alarm_mode  { Once, Daily, Weekly, FirstAlarmMode=Once, LastAlarmMode=Weekly };
-    enum consts      { Active = 0x80, LED_Bit = 0x40, COUNTER_BITS=0x3f, Disabled=0xff, MinTemperature=-40, MaxTemperature=125, MaxAnalogValue = 1023};
-    enum calibrate   { Off, CalibrateCurrent, CalibrateTemperature, SetLowerTemperature, SetUpperTemperature};
+    enum consts      { Active = 0x80, LED_Bit = 0x40, COUNTER_BITS=0x3f, Disabled=0xff, MinTemperature=-40, MaxTemperature=125, MaxAnalogValue = 1023,
+                       MeasureVoltageActive=1, MeasureCurrentActive=2};
+    enum calibrate   { Off, CalibrateCurrent, CalibrateTemperature, SetLowerTemperature, SetUpperTemperature, CalibrateVoltage, ResetCalibrationValue, DisableMeasurement};
     SettingStates();
 
     void setAlarmFunction(OnTick_t aF);
@@ -32,6 +33,7 @@ public:
     void setBlinkMode(uint8_t aMode);
     void setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin);
     void setMeasureTemperaturePin(uint8_t aAnalogInPin);
+    void setMeasureVoltagePin(uint8_t aAnalogInPin);
 
     bool    isButtonPressed(button aBtn) const;
     uint8_t getButtonState(button aBtn) const;
@@ -59,6 +61,7 @@ public:
     int getAlarmMelody() const;
     int getContrast() const;
     float getUSBCurrentValue() const;
+    float getUSBVoltageValue() const;
     float getTemperatureValue() const;
     int8_t  getTemperatureAlarmActive() const;
 
@@ -84,6 +87,7 @@ private:
     void handleTimerState();
     void handleMeasureCurrrentState();
     void handleMeasureTemperatureState();
+    void handleMeasureVoltageState();
 
     void handleActivateTimer();
     void handleActivateAlarm();
@@ -116,10 +120,12 @@ private:
     uint8_t mVddPulsePin;
     uint8_t mMeasureCurrentInPin;
     uint8_t mMeasureTemperatureInPin;
+    uint8_t mMeasureVoltageInPin;
     int8_t  mModeBlink;
     int8_t  mModeLight;
     uint8_t mAlarmMelody;
-    uint16_t mReadAnalogValue;
+    uint16_t mReadAnalogCurrent;
+    uint16_t mReadAnalogVoltage;
     unsigned long mLastTickTime;
     bool    mAlarmActive;
     int8_t  mTemperatureAlarmActive;
@@ -140,6 +146,7 @@ private:
     // stored in EEPROM
     long     mCalibrateCurrentValue;
     long     mCalibrateTemperatureValue;
+    long     mCalibrateVoltageValue;
     int16_t  mLowerTemperatureTreshold;
     int16_t  mUpperTemperatureTreshold;
     uint8_t  mContrast;
@@ -147,6 +154,7 @@ private:
     uint8_t  mLightHigh;
     uint8_t  mLanguage;
     uint8_t  mLightOnTime;
+    uint8_t  mActiveFlag;
     // end
 };
 

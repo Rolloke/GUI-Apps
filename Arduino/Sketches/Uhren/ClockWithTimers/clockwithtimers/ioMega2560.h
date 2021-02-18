@@ -3,6 +3,10 @@ const int toneOutput      =   9;
 const int dimLED          =   8;
 const int contrastPin     =  10;
 
+const int measureCurrentPin = A0;
+const int measureTemperturePin = A1;
+const int measureVoltagePin = A3;
+
 SettingStates  gSettings;
 
 #ifdef LCD_PRINTER

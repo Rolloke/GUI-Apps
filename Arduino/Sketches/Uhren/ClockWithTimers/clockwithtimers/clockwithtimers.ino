@@ -147,6 +147,7 @@ void setup()
     gSettings.setAlarmFunction(&onAlarm);
     gSettings.setMeasureCurrentPins(vddPulsePin, measureCurrentPin);
     gSettings.setMeasureTemperaturePin(measureTemperturePin);
+    gSettings.setMeasureVoltagePin(measureVoltagePin);
 
     LCD_BEGIN
 
@@ -254,9 +255,13 @@ void PrintLCD_Time()
     switch (gSettings.isCalibrating())
     {
     case SettingStates::CalibrateCurrent:
+    case SettingStates::CalibrateVoltage:
     case SettingStates::CalibrateTemperature: fLine1 += F(" <->"); break;
     case SettingStates::SetUpperTemperature:  fLine1 += F(" -->"); break;
     case SettingStates::SetLowerTemperature:  fLine1 += F(" <--"); break;
+    case SettingStates::ResetCalibrationValue:fLine1 += F(" ->R"); break;
+    case SettingStates::DisableMeasurement:   fLine1 += F(" ->D"); break;
+
     }
 
     if (gSettings.getState() == SettingStates::Time)
@@ -333,6 +338,19 @@ void PrintLCD_Time()
         const float fValue = gSettings.getUSBCurrentValue();
         fLine2 += String(fValue, (unsigned char)1);
         fLine2 += " mA";
+    }    break;
+    case SettingStates::MeasureVoltage:
+    {
+        const float fValue = gSettings.getUSBVoltageValue();
+        fLine2 += String(fValue, (unsigned char)1);
+        fLine2 += " V";
+    }    break;
+    case SettingStates::MeasurePower:
+    {
+        const float fVoltageValue = gSettings.getUSBVoltageValue();
+        const float fCurrentValue = gSettings.getUSBCurrentValue()*0.001;
+        fLine2 += String(fVoltageValue*fCurrentValue, (unsigned char)1);
+        fLine2 += " W";
     }    break;
     case SettingStates::MeasureTemperature:
     {
