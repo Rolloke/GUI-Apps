@@ -16,7 +16,7 @@ public:
 
 private:
     Mutex(const Mutex& ) = delete;
-	Mutex& operator (const Mutex&) = delete;
+	Mutex& operator =(const Mutex&) = delete;
 	
     CRITICAL_SECTION mCS;
 };

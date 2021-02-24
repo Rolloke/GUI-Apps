@@ -1,0 +1,47 @@
+﻿  AboutDlg.cpp
+  logger.cpp
+e:\projects\visualstudio\logprofiler\src\logger.cpp(82): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1469): note: Siehe Deklaration von "vsprintf"
+e:\projects\visualstudio\logprofiler\src\logger.cpp(99): error C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1469): note: Siehe Deklaration von "vsprintf"
+  LogProfiler.cpp
+  SearchLine.cpp
+e:\projects\visualstudio\logprofiler\src\searchline.cpp(66): warning C4018: ">": Konflikt zwischen "signed" und "unsigned"
+e:\projects\visualstudio\logprofiler\src\searchline.cpp(78): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  EnumFiles.cpp
+e:\projects\visualstudio\logprofiler\src\enumfiles.cpp(48): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(90): note: Siehe Deklaration von "strcat"
+  Mutex.cpp
+  TextFile.cpp
+e:\projects\visualstudio\logprofiler\src\textfile.cpp(7): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: Siehe Deklaration von "fopen"
+  PluginDefinition.cpp
+  TimeParser.cpp
+e:\projects\visualstudio\logprofiler\src\timeparser.cpp(137): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  StaticDialog.cpp
+e:\projects\visualstudio\logprofiler\src\dockingfeature\staticdialog.cpp(97): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1774): note: Siehe Deklaration von "sprintf"
+  SynchronizeTimeResults.cpp
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimeresults.cpp(31): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: Siehe Deklaration von "localtime"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimeresults.cpp(137): error C4996: 'swscanf': This function or variable may be unsafe. Consider using swscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(2039): note: Siehe Deklaration von "swscanf"
+  SynchronizeTimeStamp.cpp
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(182): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstring.h(123): note: Siehe Deklaration von "wcscpy"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(200): error C4996: 'swscanf': This function or variable may be unsafe. Consider using swscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(2039): note: Siehe Deklaration von "swscanf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(646): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(650): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(713): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(715): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(807): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstring.h(100): note: Siehe Deklaration von "wcscat"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(944): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"
+e:\projects\visualstudio\logprofiler\src\dockingfeature\synchronizetimestamp.cpp(946): error C4996: '_swprintf': This function or variable may be unsafe. Consider using swprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\corecrt_wstdio.h(1446): note: Siehe Deklaration von "_swprintf"

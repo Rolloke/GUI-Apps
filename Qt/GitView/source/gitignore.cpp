@@ -76,7 +76,8 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 if (   fItem.first.find(fSearchItem.first) != std::string::npos
                     && fItem.first != fSearchItem.first)
                 {
-                     fSearchItem.second.add(Type::ContainingNegation);
+                    // TODO: implement negation, but first understand how it works
+//                    fSearchItem.second.add(Type::ContainingNegation);
                 }
             }
         }
@@ -106,7 +107,7 @@ void GitIgnore::removeIgnoreMapLevel(int aMapLevel)
 bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 {
     const std::string& fFileName = aFileInfo.fileName().toStdString();
-    const std::string& fFilePath = aFileInfo.filePath().toStdString();
+//    const std::string& fFilePath = aFileInfo.filePath().toStdString();
 
     auto fFound = mIgnoreMap.find(fFileName);
     if (fFound == mIgnoreMap.end())

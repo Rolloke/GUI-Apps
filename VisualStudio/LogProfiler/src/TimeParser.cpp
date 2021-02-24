@@ -302,7 +302,7 @@ SYSTEMTIME TimeParser::calcSystemTime(int64_t aTime, WORD* aMicrosecondPart)
     const int fHoursPerDay      = 24;
     const int fDaysPerYear      = 366;
     SYSTEMTIME fST = { 0 };
-	DWORD fMicroSeconds = static_cast<WORD>(aTime % fMicroSecondsPerSecond);
+	DWORD fMicroSeconds = static_cast<DWORD>(aTime % fMicroSecondsPerSecond);
 	fST.wMilliseconds = static_cast<WORD>(fMicroSeconds / 1000);
 	fMicroSeconds %= 1000;
 	if (aMicrosecondPart)

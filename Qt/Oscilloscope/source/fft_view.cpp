@@ -445,3 +445,11 @@ void FFT_View::mouseReleaseEvent ( QMouseEvent * event )
     UpdateViewEvent fUpdate;
     Q_EMIT sendEvent(&fUpdate);
 }
+
+void FFT_View::resizeEvent(QResizeEvent* event)
+{
+    if (event->oldSize() != event->size())
+    {
+        updateFrequencyDivision();
+    }
+}
