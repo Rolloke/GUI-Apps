@@ -4,8 +4,9 @@ const int dimLED          =  9;
 const int contrastPin     =  5;
 const int vddPulsePin     =  3;
 
-const int measureCurrentPin = 14;
-const int measureTemperturePin = 15;
+const int measureCurrentPin = A0;
+const int measureTemperturePin = A1;
+const int measureVoltagePin = A3;
 
 #ifdef LCD_PRINT
 #include <LiquidCrystal.h>

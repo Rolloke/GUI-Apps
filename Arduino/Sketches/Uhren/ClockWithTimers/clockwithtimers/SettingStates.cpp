@@ -5,7 +5,7 @@
 #include <TimeAlarms.h>
 #include <EEPROM.h>
 
-const char  gEEPROMid[]        = "ClockVar1.2";
+const char  gEEPROMid[]        = "ClockVar1.4";
 const float gAnalogCalibration = SettingStates::MaxAnalogValue * 10.0f;
 
 
@@ -17,9 +17,12 @@ SettingStates::SettingStates()
     , mVddPulsePin(0)
     , mMeasureCurrentInPin(0)
     , mMeasureTemperatureInPin(0)
+    , mMeasureVoltageInPin(0)
     , mModeBlink(Active)
     , mModeLight(0)
     , mAlarmMelody(0)
+    , mReadAnalogCurrent(0)
+    , mReadAnalogVoltage(0)
     , mLastTickTime(0)
     , mAlarmActive(false)
     , mTemperatureAlarmActive(0)
@@ -35,6 +38,7 @@ SettingStates::SettingStates()
     , mAlarmFunction(0)
     , mCalibrateCurrentValue(MaxAnalogValue*10)
     , mCalibrateTemperatureValue(MaxAnalogValue*10)
+    , mCalibrateVoltageValue(MaxAnalogValue*10)
     , mLowerTemperatureTreshold(0)
     , mUpperTemperatureTreshold(100)
     , mContrast(128)
@@ -42,6 +46,7 @@ SettingStates::SettingStates()
     , mLightHigh(200)
     , mLanguage(EN)
     , mLightOnTime(50)
+    , mActiveFlag(MeasureCurrentActive|MeasureVoltageActive)
 {
     mTime.Second = 1;
     mTime.Minute = 1;
@@ -102,6 +107,12 @@ void SettingStates::setMeasureTemperaturePin(uint8_t aAnalogInPin)
 {
     mMeasureTemperatureInPin = aAnalogInPin;
     pinMode(mMeasureTemperatureInPin, INPUT);
+}
+
+void SettingStates::setMeasureVoltagePin(uint8_t aAnalogInPin)
+{
+    mMeasureVoltageInPin = aAnalogInPin;
+    pinMode(mMeasureVoltageInPin, INPUT);
 }
 
 void SettingStates::setBlinkMode(uint8_t aMode)
@@ -189,6 +200,11 @@ void SettingStates::onTrigger()
     case Date:               handleDateState();               break;
     case MeasureCurrent:     handleMeasureCurrrentState();    break;
     case MeasureTemperature: handleMeasureTemperatureState(); break;
+    case MeasureVoltage:     handleMeasureVoltageState();     break;
+    case MeasurePower:
+        handleMeasureVoltageState();
+        handleMeasureCurrrentState();
+        break;
     case StoreTime:
         if (getButtonState(Mode) == Button::released) mState = Time;
         break;
@@ -225,6 +241,8 @@ String SettingStates::getStateName()
         case Date:          return F("Date");
         case MeasureCurrent:return F("USB-Current");
         case MeasureTemperature:return F("Temperature");
+        case MeasureVoltage:return F("USB-Voltage");
+        case MeasurePower:  return F("USB-Power");
         case SetTime:       return F("Set Time");
         case SetDate:       return F("Set Date");
         case SetYear:       return F("Set Year");
@@ -260,6 +278,8 @@ String SettingStates::getStateName()
         case Date:          return F("Datum");
         case MeasureCurrent:return F("USB-Strom");
         case MeasureTemperature:return F("Temperatur");
+        case MeasureVoltage:return F("USB-Spannung");
+        case MeasurePower:  return F("USB-Leistung");
         case SetTime:       return F("Uhrzeit stellen");
         case SetDate:       return F("Datum stellen");
         case SetYear:       return F("Jahr stellen");
@@ -427,7 +447,13 @@ int SettingStates::getContrast() const
 float SettingStates::getUSBCurrentValue() const
 {
     const float fFactor = gAnalogCalibration / mCalibrateCurrentValue;
-    return (((float)mReadAnalogValue) * fFactor);
+    return (((float)mReadAnalogCurrent) * fFactor);
+}
+
+float SettingStates::getUSBVoltageValue() const
+{
+    const float fFactor = gAnalogCalibration * 0.01 / mCalibrateVoltageValue;
+    return (((float)mReadAnalogVoltage) * fFactor);
 }
 
 float SettingStates::getTemperatureValue() const
@@ -435,49 +461,49 @@ float SettingStates::getTemperatureValue() const
 
     const int16_t fValueTable[] =
     {  // values for temperatures in °C in 5 °C steps
-         30,  41, // -40
-         55,  73, // -30
-         96, 123, // -20
-        157, 196, // -10
-        240, 289, //   0
-        342, 398, //  10
-        455, 512, //  20
-        567, 619, //  30
-        668, 712, //  40
-        752, 788, //  50
-        819, 847, //  60
-        870, 891, //  70
-        909, 924, //  80
-        937, 948, //  90
-        958, 966, // 100
-        973, 980, // 110
-        985, 989, // 120
+         31,   43, // -40
+         59,   79, // -30
+        104,  135, // -20
+        172,  215, // -10
+        264,  319, //   0
+        377,  439, //  10
+        502,  565, //  20
+        626,  684, //  30
+        737,  787, //  40
+        831,  871, //  50
+        905,  936, //  60
+        962,  985, //  70
+       1005, 1021, //  80
+       1036, 1048, //  90
+       1059, 1068, // 100
+       1076, 1083, // 110
+       1089, 1094, // 120
     };
-    if (mCalibration == SetLowerTemperature)
+
+    switch (mCalibration)
     {
-        return mLowerTemperatureTreshold;
-    }
-    else if (mCalibration == SetUpperTemperature)
-    {
-        return mUpperTemperatureTreshold;
-    }
-    else
-    {
-        const float fValue = analogRead(mMeasureTemperatureInPin) * gAnalogCalibration / mCalibrateTemperatureValue;
-        if (fValue >= fValueTable[0])
+    case SetLowerTemperature: return mLowerTemperatureTreshold;
+    case SetUpperTemperature: return mUpperTemperatureTreshold;
+    case ResetCalibrationValue:    return 0;
+    case CalibrateTemperature:
         {
-            const int fSize = sizeof(fValueTable) / sizeof(int16_t);
-            for (int i=1; i<fSize; ++i)
+            const float fValue = analogRead(mMeasureTemperatureInPin) * gAnalogCalibration / mCalibrateTemperatureValue;
+            if (fValue >= fValueTable[0])
             {
-                if (fValueTable[i] >= fValue)
+                const int fSize = sizeof(fValueTable) / sizeof(int16_t);
+                for (int i=1; i<fSize; ++i)
                 {
-                    const float aFromLow = fValueTable[i-1];
-                    const float aFromHigh= fValueTable[i  ];
-                    const float aToLow = (i-1) * 5 - 40;
-                    return (fValue - aFromLow) * 5.0f / (aFromHigh - aFromLow) + aToLow;
+                    if (fValueTable[i] >= fValue)
+                    {
+                        const float aFromLow = fValueTable[i-1];
+                        const float aFromHigh= fValueTable[i  ];
+                        const float aToLow = (i-1) * 5 - 40;
+                        return (fValue - aFromLow) * 5.0f / (aFromHigh - aFromLow) + aToLow;
+                    }
                 }
             }
         }
+        break;
     }
     return -100;
 }
@@ -531,7 +557,7 @@ void SettingStates::playAlarm()
 }
 void SettingStates::handleEnterState(state aState)
 {
-    if (aState == MeasureCurrent)
+    if (mVddPulsePin && (aState == MeasureCurrent || aState == MeasurePower))
     {
         tone(mVddPulsePin, 5000);
     }
@@ -539,7 +565,7 @@ void SettingStates::handleEnterState(state aState)
 
 void SettingStates::handleExitState(state aState)
 {
-    if (aState == MeasureCurrent || aState == MeasureTemperature)
+    if (aState == MeasureCurrent || aState == MeasureTemperature || aState == MeasureVoltage || aState == MeasurePower)
     {
         if (mVddPulsePin) noTone(mVddPulsePin);
 
@@ -633,11 +659,34 @@ void SettingStates::handleDateState()
 void SettingStates::handleMeasureCurrrentState()
 {
     handleModeInTimeStates();
-    if (mCalibration == CalibrateCurrent)
+    switch (mCalibration)
     {
-        handleCalibration(mCalibrateCurrentValue);
+    case CalibrateCurrent: handleCalibration(mCalibrateCurrentValue); break;
+    case ResetCalibrationValue:
+        if (getButtonState(Stop) == Button::released)
+        {
+            mCalibrateCurrentValue = MaxAnalogValue*10;
+        }
+        break;
+    case DisableMeasurement:
+        if (getButtonState(Plus) == Button::released)
+        {
+            mActiveFlag |= MeasureCurrentActive;
+        }
+        if (getButtonState(Minus) == Button::released)
+        {
+            mActiveFlag &= ~MeasureCurrentActive;
+        }
+        break;
     }
-    mReadAnalogValue = analogRead(mMeasureCurrentInPin);
+    if (mActiveFlag & MeasureCurrentActive)
+    {
+        mReadAnalogCurrent = analogRead(mMeasureCurrentInPin);
+    }
+    else
+    {
+        mReadAnalogCurrent = 0;
+    }
 }
 
 void SettingStates::handleMeasureTemperatureState()
@@ -648,6 +697,45 @@ void SettingStates::handleMeasureTemperatureState()
     case CalibrateTemperature:handleCalibration(mCalibrateTemperatureValue); break;
     case SetLowerTemperature: handleSetPlusMinus(mLowerTemperatureTreshold, MinTemperature, mUpperTemperatureTreshold); break;
     case SetUpperTemperature: handleSetPlusMinus(mUpperTemperatureTreshold, mLowerTemperatureTreshold, MaxTemperature ); break;
+    case ResetCalibrationValue:
+        if (getButtonState(Stop) == Button::released)
+        {
+            mCalibrateTemperatureValue = MaxAnalogValue*10;
+        }
+        break;
+    }
+}
+
+void SettingStates::handleMeasureVoltageState()
+{
+    handleModeInTimeStates();
+    switch (mCalibration)
+    {
+    case CalibrateVoltage: handleCalibration(mCalibrateVoltageValue); break;
+    case ResetCalibrationValue:
+        if (getButtonState(Stop) == Button::released)
+        {
+            mCalibrateVoltageValue = MaxAnalogValue*10;
+        }
+        break;
+    case DisableMeasurement:
+        if (getButtonState(Plus) == Button::released)
+        {
+            mActiveFlag |= MeasureVoltageActive;
+        }
+        if (getButtonState(Minus) == Button::released)
+        {
+            mActiveFlag &= ~MeasureVoltageActive;
+        }
+        break;
+    }
+    if (mActiveFlag & MeasureVoltageActive)
+    {
+        mReadAnalogVoltage = analogRead(mMeasureVoltageInPin);
+    }
+    else
+    {
+        mReadAnalogVoltage = 0;
     }
 }
 
@@ -728,17 +816,34 @@ void SettingStates::handleModeInTimeStates()
         {
             switch (mCalibration)
             {
-            case Off:                  mCalibration = SetLowerTemperature;  break;
-            case SetLowerTemperature:  mCalibration = SetUpperTemperature;  break;
-            case SetUpperTemperature:  mCalibration = CalibrateTemperature; break;
-            case CalibrateTemperature: mCalibration = SetLowerTemperature;  break;
+            case Off:                   mCalibration = SetLowerTemperature;  break;
+            case SetLowerTemperature:   mCalibration = SetUpperTemperature;  break;
+            case SetUpperTemperature:   mCalibration = CalibrateTemperature; break;
+            case CalibrateTemperature:  mCalibration = ResetCalibrationValue;     break;
+            case ResetCalibrationValue: mCalibration = SetLowerTemperature;  break;
             default:
                 break;
             }
         }
         else if (mState == MeasureCurrent)
         {
-            mCalibration = CalibrateCurrent;
+            switch (mCalibration)
+            {
+            case Off:                   mCalibration = CalibrateCurrent; break;
+            case CalibrateCurrent:      mCalibration = ResetCalibrationValue; break;
+            case ResetCalibrationValue: mCalibration = DisableMeasurement; break;
+            case DisableMeasurement:    mCalibration = Off; break;
+            }
+        }
+        else if (mState == MeasureVoltage)
+        {
+            switch (mCalibration)
+            {
+            case Off:                   mCalibration = CalibrateVoltage; break;
+            case CalibrateVoltage:      mCalibration = ResetCalibrationValue; break;
+            case ResetCalibrationValue: mCalibration = DisableMeasurement; break;
+            case DisableMeasurement:    mCalibration = Off; break;
+            }
         }
         else
         {
@@ -1047,8 +1152,10 @@ bool SettingStates::stateAvailable() const
 {
     switch (mState)
     {
-    case MeasureCurrent:     return mMeasureCurrentInPin     != 0 && analogRead(mMeasureCurrentInPin) != 0;
+    case MeasureCurrent:     return (mActiveFlag & MeasureCurrentActive) != 0 && analogRead(mMeasureCurrentInPin) != 0;
     case MeasureTemperature: return mMeasureTemperatureInPin != 0 && analogRead(mMeasureTemperatureInPin) != 0;
+    case MeasureVoltage:     return (mActiveFlag & MeasureVoltageActive) != 0;
+    case MeasurePower:       return (mActiveFlag & MeasureCurrentActive) != 0 && (mActiveFlag & MeasureVoltageActive) != 0 && analogRead(mMeasureCurrentInPin) != 0;
     default: return true;
     }
 }
