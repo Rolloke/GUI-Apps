@@ -46,6 +46,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0">
         <item>
          <widget class="QLabel" name="labelVertical">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
@@ -83,6 +89,12 @@ Channel</string>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QLabel" name="labelLevel">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="text">
            <string>Level
 / Div</string>
@@ -94,6 +106,12 @@ Channel</string>
         </item>
         <item>
          <widget class="QLabel" name="labelOffset">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
           <property name="text">
            <string>Offset</string>
           </property>
@@ -143,6 +161,12 @@ Channel</string>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QDoubleLableWithUnit" name="labelLevelValue">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
              <string>V</string>
             </property>
@@ -153,6 +177,12 @@ Channel</string>
           </item>
           <item>
            <widget class="QLabel" name="labelOffsetValue">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
              <string>1</string>
             </property>
@@ -165,6 +195,12 @@ Channel</string>
         </item>
         <item>
          <widget class="QCheckBox" name="checkChannelVisible">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
           <property name="toolTip">
            <string>Hide or show current channel</string>
           </property>
@@ -180,6 +216,12 @@ Channel</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
           </property>
           <property name="toolTip">
            <string>Set auto level detection for current channel</string>
@@ -245,6 +287,12 @@ Channel</string>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
         </property>
         <property name="text">
          <string>Trigger
@@ -401,6 +449,12 @@ Channel</string>
         </item>
         <item>
          <widget class="QSlider" name="vslideTriggerLevel">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>160</height>
+           </size>
+          </property>
           <property name="toolTip">
            <string>Adjust trigger level</string>
           </property>
@@ -416,6 +470,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QDoubleLableWithUnit" name="labelTriggerLevelValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>V</string>
         </property>
@@ -439,6 +499,19 @@ Channel</string>
          <bool>false</bool>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item>
        <widget class="QRadioButtonGroup" name="groupTrigger">
@@ -677,6 +750,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QLabel" name="labelTime">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="text">
          <string>Time / Div</string>
         </property>
@@ -700,6 +779,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QDoubleLableWithUnit" name="labelTimeValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>s</string>
         </property>
@@ -710,6 +795,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QLabel" name="labelTriggerPosition">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="text">
          <string>Position</string>
         </property>
@@ -733,6 +824,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QDoubleLableWithUnit" name="labelTimePositionValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="text">
          <string>s</string>
         </property>
@@ -743,6 +840,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QCheckBox" name="pushAutoTime">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Set auto time detection</string>
         </property>
@@ -758,6 +861,19 @@ Channel</string>
        </widget>
       </item>
       <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="Line" name="line">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -766,6 +882,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QCheckBox" name="checkShowZoom">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Show zoomed view</string>
         </property>
@@ -779,6 +901,12 @@ Channel</string>
       </item>
       <item>
        <widget class="QCheckBox" name="checkShowFFT">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Show FFT view</string>
         </property>
@@ -805,6 +933,12 @@ Channel</string>
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Set logarithmic FFT view</string>
         </property>
@@ -823,7 +957,7 @@ Channel</string>
      <x>0</x>
      <y>0</y>
      <width>692</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOscilloscope">

@@ -4,6 +4,8 @@
 #include <vector>
 #include "main.h"
 
+// NOTE _MSVC_STL_VERSION >= 141 has certain security functions regarding iterators compared to end()
+
 template<class T>
 class circlevector : public std::vector<T>
 {
@@ -74,7 +76,7 @@ public:
             else
             {
                 int fDistance =  std::distance(fIt, _Begin);
-                fIt = (aStep > fDistance) ? fIt + aStep:
+                fIt = (aStep >= fDistance) ? fIt + aStep:
                                             _Begin + (std::distance(_Begin, _End) + (aStep - fDistance));
             }
             return circlevector_iterator(fIt, _Begin, _End);
@@ -108,7 +110,7 @@ public:
         {
 #if _MSVC_STL_VERSION >= 141
             int fDistance =  std::distance(_Begin, const_iterator(*this));
-            if (fDistance > 1)
+            if (fDistance >= 1)
             {
                 iterator::operator--();
             }
@@ -211,7 +213,7 @@ public:
             else
             {
                 int fDistance =  std::distance(fIt, _Begin);
-                fIt = (aStep > fDistance) ? fIt + aStep:
+                fIt = (aStep >= fDistance) ? fIt + aStep:
                                             _Begin + (std::distance(_Begin, _End) + (aStep - fDistance));
             }
             return const_circlevector_iterator(fIt, _Begin, _End);
@@ -246,7 +248,7 @@ public:
         {
 #if _MSVC_STL_VERSION >= 141
             int fDistance =  std::distance(_Begin, const_iterator(*this));
-            if (fDistance > 1)
+            if (fDistance >= 1)
             {
                 const_iterator::operator--();
             }

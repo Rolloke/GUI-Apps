@@ -21,6 +21,8 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 
+// NOTE _MSVC_STL_VERSION >= 141 has certain security functions regarding iterators compared to end()
+
 using namespace std;
 #define _USE_WORKERTHREAD_FOR_AUDIOBUFFER
 
@@ -954,7 +956,7 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
     TRACE(Logger::trace, "onRedrawScopeView(%d)\n", aNewBuffer);
     if (mAudioInput.isRunning() && mAudioInput.isValid())
     {
-        // TODO! why double called
+        // TODO why double called
         // ui->graphicsViewScope->setTimePerDivision(mTimePerDivision[ui->hslideTime->value()]);
         if (ui->labelTimePositionValue->isInvalid())
         {
@@ -1191,6 +1193,7 @@ void MainWindow::determineAutomaticTime(int fSearchStart, double fTriggerTimeOff
                         mScopeSettings.setValue(fPhase, ScopeSettings::measured_phase);
                     }
                 }
+                // TODO: validate measured values for backward an forward search
                 mScopeSettings.setValue(fTime, ScopeSettings::measured_period);
 
                 const circlevector<double>& fValues = static_cast<const circlevector<double>&>(mAudioInput.getValues(mTrigger.mActiveChannel));

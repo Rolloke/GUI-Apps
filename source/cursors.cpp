@@ -30,6 +30,7 @@ double Cursors::getCursor(eCursor aCursor) const
 void Cursors::setVerticalVisible(bool aVisible)
 {
     mVerticalVisible = aVisible;
+    Q_EMIT update(vertical_1, mID);
 }
 
 bool Cursors::isVerticalVisible() const
@@ -40,6 +41,7 @@ bool Cursors::isVerticalVisible() const
 void Cursors::setHorizontalVisible(bool aVisible)
 {
     mHorizontalVisible = aVisible;
+    Q_EMIT update(horizontal_1, mID);
 }
 
 bool Cursors::isHorizontalVisible() const

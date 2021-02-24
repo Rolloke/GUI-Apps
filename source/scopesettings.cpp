@@ -281,6 +281,8 @@ void ScopeSettings::on_ckVertical_clicked(bool checked)
         mCursors[fView]->setVerticalVisible(checked);
         mCursors[fView]->setHorizontalVisible(!checked);
     }
+    update_cursor(Cursors::vertical_1, mActiveViewCursor);
+    update_cursor(Cursors::vertical_2, mActiveViewCursor);
 }
 
 void ScopeSettings::on_ckHorizontal_clicked(bool checked)
@@ -297,6 +299,8 @@ void ScopeSettings::on_ckHorizontal_clicked(bool checked)
         mCursors[fView]->setHorizontalVisible(checked);
         mCursors[fView]->setVerticalVisible(!checked);
     }
+    update_cursor(Cursors::horizontal_1, mActiveViewCursor);
+    update_cursor(Cursors::horizontal_2, mActiveViewCursor);
 }
 
 void ScopeSettings::on_ckSyncCursors_clicked(bool checked)
