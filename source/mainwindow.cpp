@@ -1169,6 +1169,8 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
     connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(gitview_about()));
 
+    connect(mActions.createAction(Cmd::Delete, tr("Delete..."), tr("Delete file or folder")), SIGNAL(triggered()), this, SLOT(deleteFileOrFolder()));
+
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1586,3 +1588,23 @@ void MainWindow::gitview_about()
     dlg.exec();
 }
 
+void MainWindow::deleteFileOrFolder()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
+        QString fPath         = mContextMenuSourceTreeItem->text(0);
+        Type fType;
+        fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
+        if (callMessageBox("Delete %1", fType.type_name(), fPath) == QMessageBox::Yes)
+        {
+            QFile::remove(fTopItemPath + "/" + fPath);
+            QTreeWidgetItem *parent = mContextMenuSourceTreeItem->parent();
+            if (parent)
+            {
+                parent->removeChild(mContextMenuSourceTreeItem);
+            }
+            mContextMenuSourceTreeItem = 0;
+        }
+    }
+}

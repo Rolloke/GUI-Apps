@@ -8,10 +8,10 @@ namespace git
 {
 
 int2stringmap Cmd::mCommandMap;
-Cmd::tVector Cmd::mContextMenuSourceTree;
-Cmd::tVector Cmd::mContextMenuEmptySourceTree;
-Cmd::tVector Cmd::mContextMenuHistoryTree;
-Cmd::tVector Cmd::mContextMenuBranchTree;
+Cmd::tVector  Cmd::mContextMenuSourceTree;
+Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
+Cmd::tVector  Cmd::mContextMenuHistoryTree;
+Cmd::tVector  Cmd::mContextMenuBranchTree;
 std::vector<Cmd::tVector> Cmd::mToolbars;
 
 Cmd::Cmd()
@@ -43,7 +43,7 @@ Cmd::Cmd()
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
 
-    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, MoveOrRename, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
+    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
     mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideTree, ClearTreeItems };
@@ -129,15 +129,15 @@ QString Type::getStates()
 {
     const QString fSep = "|";
     QString fState = fSep;
-    if (is(GitAdded    ))  fState += name(GitAdded)     + fSep;
-    if (is(GitDeleted  ))  fState += name(GitDeleted)   + fSep;
-    if (is(GitModified ))  fState += name(GitModified)  + fSep;
-    if (is(GitUnTracked))  fState += name(GitUnTracked) + fSep;
-    if (is(GitStaged   ))  fState += name(GitStaged)    + fSep;
-    if (is(GitUnmerged ))  fState += name(GitUnmerged)  + fSep;
-    if (is(GitLocal    ))  fState += name(GitLocal)     + fSep;
-    if (is(GitRemote   ))  fState += name(GitRemote)    + fSep;
-    if (is(GitBoth     ))  fState += name(GitBoth)      + fSep;
+    if (     is(GitAdded    ))  fState += name(GitAdded)     + fSep;
+    if (     is(GitDeleted  ))  fState += name(GitDeleted)   + fSep;
+    if (     is(GitModified ))  fState += name(GitModified)  + fSep;
+    if (     is(GitUnTracked))  fState += name(GitUnTracked) + fSep;
+    if (     is(GitStaged   ))  fState += name(GitStaged)    + fSep;
+    if (     is(GitUnmerged ))  fState += name(GitUnmerged)  + fSep;
+    if (     is(GitLocal    ))  fState += name(GitLocal)     + fSep;
+    if (     is(GitRemote   ))  fState += name(GitRemote)    + fSep;
+    if (     is(GitBoth     ))  fState += name(GitBoth)      + fSep;
     if      (is(GitMovedFrom))  fState += name(GitMovedFrom) + fSep;
     else if (is(GitMovedTo  ))  fState += name(GitMovedTo)   + fSep;
     else if (is(GitRenamed  ))  fState += name(GitRenamed)   + fSep;

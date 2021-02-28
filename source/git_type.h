@@ -58,6 +58,7 @@ struct Cmd
         CustomGitActionSettings,
         InsertHashFileNames,
         About,
+        Delete,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
