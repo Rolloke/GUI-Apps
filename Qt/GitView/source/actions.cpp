@@ -77,6 +77,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
     fActionIcons[Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
     fActionIcons[Cmd::Remove]                  = ":/resource/24X24/user-trash.png";
+    fActionIcons[Cmd::Delete]                  = ":/resource/24X24/edit-delete.png";
     fActionIcons[Cmd::Commit]                  = ":/resource/24X24/user-invisible.png";
     fActionIcons[Cmd::MoveOrRename]            = ":/resource/24X24/format-text-direction-ltr.png";
     fActionIcons[Cmd::Restore]                 = ":/resource/24X24/edit-redo-rtl.png";

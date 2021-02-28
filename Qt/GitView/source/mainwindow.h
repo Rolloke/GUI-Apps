@@ -34,7 +34,6 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void cancelCurrentWorkTask();
-    void addGitSourceFolder();
     void updateGitStatus();
     void textBrowserChanged();
 
@@ -53,7 +52,6 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
-    void gitview_about();
 
     void showOrHideTrees(bool checked);
     void clearTrees();
@@ -67,6 +65,9 @@ private Q_SLOTS:
     void perform_custom_command();
     void expand_tree_items();
     void collapse_tree_items();
+    void addGitSourceFolder();
+    void gitview_about();
+    void deleteFileOrFolder();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);

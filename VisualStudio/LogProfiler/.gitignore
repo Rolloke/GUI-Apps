@@ -4,3 +4,4 @@ AnyFileViewer.VC.db
 *.user
 .vs
 Debug/
+Release/

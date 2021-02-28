@@ -598,7 +598,7 @@ int MainWindow::getFirstAnalogPin()
     {
         return gmThis->mFirstAnalogPin;
     }
-    return 15;
+    return 14;
 }
 
 
