@@ -30,6 +30,14 @@
 
 #define TICK_INTERVAL_MS 500
 
+#if LanguageSelection == SELECT
+ #define SELECT_ENGLISH if (gSettings.getLanguage()== EN)
+ #define SELECT_GERMAN  else
+
+#else
+ #define SELECT_ENGLISH
+ #define SELECT_GERMAN
+#endif
 
 String gLine1;
 String gLine2;
@@ -50,6 +58,7 @@ uint8_t gHMPins[2] = {static_cast<uint8_t>(gHourBtnPin), static_cast<uint8_t>(gM
 Button gHourMinuteButton(gHMPins, 2, triggerHourMinutButton);
 OnTick_t gTimerFunctions[SettingStates::Timers];
 
+
 Tone gTones1[] =
 {
     { NOTE_C7, 1, 8},
@@ -57,6 +66,7 @@ Tone gTones1[] =
     { 0, 0, 0}
 };
 
+#if NO_OF_TONES >= 2
 Tone gTones2[] =
 {
     { NOTE_C7, 1, 16},
@@ -65,8 +75,9 @@ Tone gTones2[] =
     { SILENCE, 2, 1},
     { 0, 0, 0}
 };
+#endif
 
-
+#if NO_OF_TONES >= 3
 Tone gTones3[] =
 {
     { NOTE_C7, 1, 16},
@@ -77,7 +88,9 @@ Tone gTones3[] =
     { SILENCE, 2, 1},
     { 0, 0, 0}
 };
+#endif
 
+#if NO_OF_TONES >= 4
 Tone gTones4[] =
 {
     { NOTE_C7, 1, 16},
@@ -90,7 +103,9 @@ Tone gTones4[] =
     { SILENCE, 2, 1},
     { 0, 0, 0}
 };
+#endif
 
+#if NO_OF_TONES >= 5
 Tone gTones5[] =
 {
     { NOTE_C7, 1, 16},
@@ -105,6 +120,7 @@ Tone gTones5[] =
     { SILENCE, 2, 1},
     { 0, 0, 0}
 };
+#endif
 
 Tone gTones6[] =
 {
@@ -138,7 +154,7 @@ void setup()
     gModeButton.setDeBounce(10);
     gAlarmButton.setDeBounce(10);
     gHourMinuteButton.setDeBounce(10);
-    gModeButton.setDelay(3000);
+    gModeButton.setDelay(2000);
     gHourMinuteButton.setDelay(1000);
     gHourMinuteButton.setRepeat(250);
 
@@ -259,9 +275,8 @@ void PrintLCD_Time()
     case SettingStates::CalibrateTemperature: fLine1 += F(" <->"); break;
     case SettingStates::SetUpperTemperature:  fLine1 += F(" -->"); break;
     case SettingStates::SetLowerTemperature:  fLine1 += F(" <--"); break;
-    case SettingStates::ResetCalibrationValue:fLine1 += F(" ->R"); break;
-    case SettingStates::DisableMeasurement:   fLine1 += F(" ->D"); break;
-
+    case SettingStates::ResetCalibrationValue:fLine1 += F(" =>R"); break;
+    case SettingStates::ResetWorkValue:       fLine1 += F(" =>0"); break;
     }
 
     if (gSettings.getState() == SettingStates::Time)
@@ -297,7 +312,8 @@ void PrintLCD_Time()
         fPrintTime = true;
         break;
     case SettingStates::Date:
-        if (gSettings.getLanguage() == EN)
+#if LanguageSelection == EN || LanguageSelection == SELECT
+    SELECT_ENGLISH
         {
             fLine2 += monthShortStr(month());
             fLine2 += ",";
@@ -305,7 +321,10 @@ void PrintLCD_Time()
             fLine2 += ",";
             print2Decimals(fLine2, gSettings.getSeconds());
         }
-        else // deutsch
+#endif
+
+#if LanguageSelection == DE || LanguageSelection == SELECT
+    SELECT_GERMAN
         {
             print2Decimals(fLine2, gSettings.getMinutes());
             fLine2 += ":";
@@ -313,6 +332,7 @@ void PrintLCD_Time()
             fLine2 += ":";
             print2Decimals(fLine2, gSettings.getSeconds());
         }
+#endif
         break;
     case SettingStates::SetTime:
         print2Decimals(fLine2, gSettings.getHours());
@@ -333,34 +353,44 @@ void PrintLCD_Time()
     case SettingStates::SetAlarmDay:
         fLine2 += gSettings.getAlarmDayName();
         break;
+    case SettingStates::SetMeasurementsActive:
+        fLine2 += gSettings.getActiveMeasurements();
+        break;
     case SettingStates::MeasureCurrent:
-    {
-        const float fValue = gSettings.getUSBCurrentValue();
-        fLine2 += String(fValue, (unsigned char)1);
+        fLine2 += String(gSettings.getUSBCurrentValue_mA(), (unsigned char)1);
         fLine2 += " mA";
-    }    break;
+        break;
     case SettingStates::MeasureVoltage:
-    {
-        const float fValue = gSettings.getUSBVoltageValue();
-        fLine2 += String(fValue, (unsigned char)1);
+        fLine2 += String(gSettings.getUSBVoltageValue_V(), (unsigned char)1);
         fLine2 += " V";
-    }    break;
+        break;
+#if MeasureElectricPower == 1
     case SettingStates::MeasurePower:
     {
-        const float fVoltageValue = gSettings.getUSBVoltageValue();
-        const float fCurrentValue = gSettings.getUSBCurrentValue()*0.001;
-        fLine2 += String(fVoltageValue*fCurrentValue, (unsigned char)1);
-        fLine2 += " W";
-    }    break;
+        fLine2 += String(gSettings.getUSBPowerValue_W(), (unsigned char)1);
+        fLine2 += " W, ";
+#if MeasureElectricWork ==1
+        float value = gSettings.getUSBWorkValue_Ws();
+        if (value > 3600)
+        {
+            value /= 3600;
+            fLine2 += String(value, (unsigned char)1);
+            fLine2 += " Wh";
+        }
+        else
+        {
+            fLine2 += String(value, (unsigned char)1);
+            fLine2 += " Ws";
+        }
+#endif
+    }   break;
+#endif
     case SettingStates::MeasureTemperature:
-    {
-        const float fValue = gSettings.getTemperatureValue();
-        fLine2 += String(fValue, (unsigned char)1);
-        const char c = 0xDF;  // ° character for LCD
+        fLine2 += String(gSettings.getTemperatureValue(), (unsigned char)1);
         fLine2 += " ";
-        fLine2 += c;
+        fLine2 += SettingStates::degreeC;
         fLine2 += "C";
-    }    break;
+        break;
     case SettingStates::SetAlarmMelody:
     case SettingStates::SetContrast:
     case SettingStates::SetLightLow:
@@ -395,10 +425,18 @@ void onTimerAlarm()
     switch (gSettings.onTimerAlarm())
     {
     case 0: gMelody.setTones(gTones1); break;
+#if NO_OF_TONES >= 2
     case 1: gMelody.setTones(gTones2); break;
+#endif
+#if NO_OF_TONES >= 3
     case 2: gMelody.setTones(gTones3); break;
+#endif
+#if NO_OF_TONES >= 4
     case 3: gMelody.setTones(gTones4); break;
+#endif
+#if NO_OF_TONES >= 5
     case 4: gMelody.setTones(gTones5); break;
+#endif
     }
     gMelody.startMelody();
 }

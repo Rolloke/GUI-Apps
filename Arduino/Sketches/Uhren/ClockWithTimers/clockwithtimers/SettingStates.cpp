@@ -5,8 +5,17 @@
 #include <TimeAlarms.h>
 #include <EEPROM.h>
 
-const char  gEEPROMid[]        = "ClockVar1.4";
+const char  gEEPROMid[]        = "ClockVar1.6";
 const float gAnalogCalibration = SettingStates::MaxAnalogValue * 10.0f;
+
+#if LanguageSelection == SELECT
+ #define SELECT_ENGLISH if (getLanguage()== EN)
+ #define SELECT_GERMAN  else
+
+#else
+ #define SELECT_ENGLISH
+ #define SELECT_GERMAN
+#endif
 
 
 #define TICK_INTERVAL_MS     500
@@ -23,6 +32,9 @@ SettingStates::SettingStates()
     , mAlarmMelody(0)
     , mReadAnalogCurrent(0)
     , mReadAnalogVoltage(0)
+    #if MeasureElectricWork ==1
+    , mUSB_Work(0)
+    #endif
     , mLastTickTime(0)
     , mAlarmActive(false)
     , mTemperatureAlarmActive(0)
@@ -46,7 +58,7 @@ SettingStates::SettingStates()
     , mLightHigh(200)
     , mLanguage(EN)
     , mLightOnTime(50)
-    , mActiveFlag(MeasureCurrentActive|MeasureVoltageActive)
+    , mActiveFlag(MeasureCurrentActive|MeasureVoltageActive|MeasureTemperatureActive)
 {
     mTime.Second = 1;
     mTime.Minute = 1;
@@ -194,17 +206,20 @@ void SettingStates::onTrigger()
         mModeLight = mLightOnTime;
     }
 
+
     switch (mState)
     {
     case Time:               handleTimeState();               break;
     case Date:               handleDateState();               break;
-    case MeasureCurrent:     handleMeasureCurrrentState();    break;
     case MeasureTemperature: handleMeasureTemperatureState(); break;
-    case MeasureVoltage:     handleMeasureVoltageState();     break;
+    case MeasureCurrent:     handleMeasureCurrrentState();    break;
+    case MeasureVoltage:
+#if MeasureElectricPower
     case MeasurePower:
         handleMeasureVoltageState();
         handleMeasureCurrrentState();
         break;
+#endif
     case StoreTime:
         if (getButtonState(Mode) == Button::released) mState = Time;
         break;
@@ -233,7 +248,8 @@ void SettingStates::onTrigger()
 
 String SettingStates::getStateName()
 {
-    if (getLanguage()== EN)
+#if LanguageSelection == EN || LanguageSelection == SELECT
+    SELECT_ENGLISH
     {
         switch (mState)
         {
@@ -242,7 +258,9 @@ String SettingStates::getStateName()
         case MeasureCurrent:return F("USB-Current");
         case MeasureTemperature:return F("Temperature");
         case MeasureVoltage:return F("USB-Voltage");
+#if MeasureElectricPower == 1
         case MeasurePower:  return F("USB-Power");
+#endif
         case SetTime:       return F("Set Time");
         case SetDate:       return F("Set Date");
         case SetYear:       return F("Set Year");
@@ -260,7 +278,10 @@ String SettingStates::getStateName()
         case SetAlarmMode:  return F("Set AlarmMode");
         case SetAlarmDay:   return F("Set AlarmDay");
         case SetAlarmMelody:return F("Set AlarmMelody");
+#if LanguageSelection == SELECT
         case SetLanguage:   return F("Language English");
+#endif
+        case SetMeasurementsActive:return F("Measurements");
         default:
             if (isTimerState())
             {
@@ -270,7 +291,10 @@ String SettingStates::getStateName()
             else return F("invalid");
         }
     }
-    else
+#endif
+
+#if LanguageSelection == DE || LanguageSelection == SELECT
+    SELECT_GERMAN
     {
         switch (mState)
         {
@@ -279,7 +303,9 @@ String SettingStates::getStateName()
         case MeasureCurrent:return F("USB-Strom");
         case MeasureTemperature:return F("Temperatur");
         case MeasureVoltage:return F("USB-Spannung");
+#if MeasureElectricPower == 1
         case MeasurePower:  return F("USB-Leistung");
+#endif
         case SetTime:       return F("Uhrzeit stellen");
         case SetDate:       return F("Datum stellen");
         case SetYear:       return F("Jahr stellen");
@@ -297,7 +323,10 @@ String SettingStates::getStateName()
         case SetAlarmMode:  return F("Alarm Modus");
         case SetAlarmDay:   return F("Alarm Tag");
         case SetAlarmMelody:return F("Alarm Melodie");
+#if LanguageSelection == SELECT
         case SetLanguage:   return F("Sprache deutsch");
+#endif
+        case SetMeasurementsActive:return F("Messungen");
         default:
             if (isTimerState())
             {
@@ -307,12 +336,14 @@ String SettingStates::getStateName()
             else return F("Invalide");
         }
     }
+#endif
 }
 
 String SettingStates::getAlarmModeName()  const
 {
     String fName;
-    if (getLanguage()== EN)
+#if LanguageSelection == EN || LanguageSelection == SELECT
+    SELECT_ENGLISH
     {
         fName = F("Mode: ");
         switch (getMinutes())
@@ -323,28 +354,36 @@ String SettingStates::getAlarmModeName()  const
         default:break;
         }
     }
-    else
+#endif
+
+#if LanguageSelection == DE || LanguageSelection == SELECT
+    SELECT_GERMAN
     {
         fName += "Modus: ";
         switch (getMinutes())
         {
         case SettingStates::Once:   fName += F("einmal");     break;
-        case SettingStates::Daily:  fName += F("täglich");    break;
-        case SettingStates::Weekly: fName += F("wöchentlich");break;
+        case SettingStates::Daily:  fName += F("taeglich");    break;
+        case SettingStates::Weekly: fName += F("woechentlich");break;
         default:break;
         }
     }
+#endif
     return fName;
 }
 
 String SettingStates::getAlarmDayName() const
 {
     String fName;
-    if (getLanguage()== EN)
+#if LanguageSelection == EN || LanguageSelection == SELECT
+    SELECT_ENGLISH
     {
         fName = (dayStr(getMinutes()));
     }
-    else
+#endif
+
+#if LanguageSelection == DE || LanguageSelection == SELECT
+    SELECT_GERMAN
     {
         switch (getMinutes())
         {
@@ -358,7 +397,21 @@ String SettingStates::getAlarmDayName() const
         default: break;
         }
     }
+#endif
     return fName;
+}
+
+String SettingStates::getActiveMeasurements() const
+{
+    String measurement ="|";
+    if (mActiveFlag&MeasureTemperatureActive)
+    {
+        measurement += degreeC;
+        measurement += F("C|");
+    }
+    if (mActiveFlag&MeasureVoltageActive) measurement += F("V|");
+    if (mActiveFlag&MeasureCurrentActive) measurement += F("C|");
+    return measurement;
 }
 
 uint8_t SettingStates::getState() const
@@ -366,10 +419,12 @@ uint8_t SettingStates::getState() const
     return mState;
 }
 
+#if LanguageSelection == SELECT
 uint8_t SettingStates::getLanguage() const
 {
     return mLanguage;
 }
+#endif
 
 int SettingStates::getHours() const
 {
@@ -444,61 +499,93 @@ int SettingStates::getContrast() const
     return mContrast;
 }
 
-float SettingStates::getUSBCurrentValue() const
+float SettingStates::getUSBCurrentValue_mA() const
 {
     const float fFactor = gAnalogCalibration / mCalibrateCurrentValue;
     return (((float)mReadAnalogCurrent) * fFactor);
 }
 
-float SettingStates::getUSBVoltageValue() const
+float SettingStates::getUSBVoltageValue_V() const
 {
     const float fFactor = gAnalogCalibration * 0.01 / mCalibrateVoltageValue;
     return (((float)mReadAnalogVoltage) * fFactor);
 }
 
+float SettingStates::getUSBPowerValue_W() const
+{
+    return getUSBVoltageValue_V() * getUSBCurrentValue_mA() * 0.001;
+}
+
+#if MeasureElectricWork ==1
+float SettingStates::getUSBWorkValue_Ws() const
+{
+    return mUSB_Work;
+}
+#endif
+
 float SettingStates::getTemperatureValue() const
 {
 
     const int16_t fValueTable[] =
-    {  // values for temperatures in °C in 5 °C steps
-         31,   43, // -40
-         59,   79, // -30
-        104,  135, // -20
-        172,  215, // -10
-        264,  319, //   0
-        377,  439, //  10
-        502,  565, //  20
-        626,  684, //  30
-        737,  787, //  40
-        831,  871, //  50
-        905,  936, //  60
-        962,  985, //  70
-       1005, 1021, //  80
-       1036, 1048, //  90
-       1059, 1068, // 100
-       1076, 1083, // 110
-       1089, 1094, // 120
+    {  // values for temperatures in °C in 5 °C steps from -40
+       1022,
+       1022,
+       1022,
+       1022,
+       1022,
+       1006,
+       998,
+       953,
+       902,
+       845,
+       784,
+       720,
+       654,
+       589,
+       525,
+       465,
+       409,
+       357,
+       311,
+       270,
+       234,
+       202,
+       175,
+       151,
+       130,
+       113,
+       98,
+       85,
+       74,
+       64,
+       56,
+       49,
+       43,
+       38
     };
 
     switch (mCalibration)
     {
     case SetLowerTemperature: return mLowerTemperatureTreshold;
     case SetUpperTemperature: return mUpperTemperatureTreshold;
-    case ResetCalibrationValue:    return 0;
+    case ResetCalibrationValue:
     case CalibrateTemperature:
+    default:
         {
-            const float fValue = analogRead(mMeasureTemperatureInPin) * gAnalogCalibration / mCalibrateTemperatureValue;
-            if (fValue >= fValueTable[0])
+            int16_t fValue = analogRead(mMeasureTemperatureInPin);
+            const int fEnd = sizeof(fValueTable) / sizeof(int16_t) - 1;
+            if (fValue <= fValueTable[0])
             {
-                const int fSize = sizeof(fValueTable) / sizeof(int16_t);
-                for (int i=1; i<fSize; ++i)
+                for (int i=fEnd-1; i>0; --i)
                 {
                     if (fValueTable[i] >= fValue)
                     {
-                        const float aFromLow = fValueTable[i-1];
-                        const float aFromHigh= fValueTable[i  ];
-                        const float aToLow = (i-1) * 5 - 40;
-                        return (fValue - aFromLow) * 5.0f / (aFromHigh - aFromLow) + aToLow;
+                        const int16_t aFromLow = fValueTable[i];
+                        const int16_t aFromHigh= fValueTable[i+1];
+                        const int16_t aToLow = (i-1) * 5 - 40;
+                        float fTemperature = (fValue - aFromLow) * 5.0f / (aFromHigh - aFromLow) + aToLow;
+                        //return fValue;
+                        return fTemperature * gAnalogCalibration / mCalibrateTemperatureValue;
                     }
                 }
             }
@@ -530,6 +617,7 @@ uint8_t SettingStates::isLightOn() const
     return map(mModeLight, 0, mLightOnTime, mLightLow, mLightHigh);
 }
 
+#if AlarmButtonModeForUSB == 1
 bool SettingStates::isLED_DisplayOn() const
 {
     return true;
@@ -539,7 +627,6 @@ bool SettingStates::isAnalogDisplayOn() const
 {
     return true;
 }
-
 void SettingStates::beep()
 {
     int ftime_ms = 50;
@@ -547,6 +634,7 @@ void SettingStates::beep()
     delay(ftime_ms);
     noTone(mTonePin);
 }
+#endif
 
 void SettingStates::playAlarm()
 {
@@ -557,7 +645,12 @@ void SettingStates::playAlarm()
 }
 void SettingStates::handleEnterState(state aState)
 {
-    if (mVddPulsePin && (aState == MeasureCurrent || aState == MeasurePower))
+    if (   ((mActiveFlag & MeasureCurrentActive) != 0 && analogRead(mMeasureCurrentInPin) != 0)
+        || aState == MeasureCurrent
+#if MeasureElectricPower == 1
+        || aState == MeasurePower
+#endif
+        || aState == MeasureVoltage)
     {
         tone(mVddPulsePin, 5000);
     }
@@ -565,9 +658,13 @@ void SettingStates::handleEnterState(state aState)
 
 void SettingStates::handleExitState(state aState)
 {
-    if (aState == MeasureCurrent || aState == MeasureTemperature || aState == MeasureVoltage || aState == MeasurePower)
+    if (aState == MeasureCurrent || aState == MeasureTemperature || aState == MeasureVoltage
+#if MeasureElectricPower == 1
+        || aState == MeasurePower
+#endif
+            )
     {
-        if (mVddPulsePin) noTone(mVddPulsePin);
+        noTone(mVddPulsePin);
 
         if (mCalibration != Off)
         {
@@ -656,38 +753,6 @@ void SettingStates::handleDateState()
     handleModeInTimeStates();
 }
 
-void SettingStates::handleMeasureCurrrentState()
-{
-    handleModeInTimeStates();
-    switch (mCalibration)
-    {
-    case CalibrateCurrent: handleCalibration(mCalibrateCurrentValue); break;
-    case ResetCalibrationValue:
-        if (getButtonState(Stop) == Button::released)
-        {
-            mCalibrateCurrentValue = MaxAnalogValue*10;
-        }
-        break;
-    case DisableMeasurement:
-        if (getButtonState(Plus) == Button::released)
-        {
-            mActiveFlag |= MeasureCurrentActive;
-        }
-        if (getButtonState(Minus) == Button::released)
-        {
-            mActiveFlag &= ~MeasureCurrentActive;
-        }
-        break;
-    }
-    if (mActiveFlag & MeasureCurrentActive)
-    {
-        mReadAnalogCurrent = analogRead(mMeasureCurrentInPin);
-    }
-    else
-    {
-        mReadAnalogCurrent = 0;
-    }
-}
 
 void SettingStates::handleMeasureTemperatureState()
 {
@@ -698,7 +763,7 @@ void SettingStates::handleMeasureTemperatureState()
     case SetLowerTemperature: handleSetPlusMinus(mLowerTemperatureTreshold, MinTemperature, mUpperTemperatureTreshold); break;
     case SetUpperTemperature: handleSetPlusMinus(mUpperTemperatureTreshold, mLowerTemperatureTreshold, MaxTemperature ); break;
     case ResetCalibrationValue:
-        if (getButtonState(Stop) == Button::released)
+        if (getButtonState(AlarmBtn) == Button::released)
         {
             mCalibrateTemperatureValue = MaxAnalogValue*10;
         }
@@ -706,26 +771,51 @@ void SettingStates::handleMeasureTemperatureState()
     }
 }
 
-void SettingStates::handleMeasureVoltageState()
+void SettingStates::handleMeasureCurrrentState()
 {
     handleModeInTimeStates();
     switch (mCalibration)
     {
-    case CalibrateVoltage: handleCalibration(mCalibrateVoltageValue); break;
+    case CalibrateCurrent: handleCalibration(mCalibrateCurrentValue); break;
     case ResetCalibrationValue:
-        if (getButtonState(Stop) == Button::released)
+        if (getButtonState(AlarmBtn) == Button::released)
         {
-            mCalibrateVoltageValue = MaxAnalogValue*10;
+            mCalibrateCurrentValue = MaxAnalogValue*10;
         }
         break;
-    case DisableMeasurement:
-        if (getButtonState(Plus) == Button::released)
+#if MeasureElectricWork ==1
+    case ResetWorkValue:
+        if (getButtonState(AlarmBtn) == Button::released)
         {
-            mActiveFlag |= MeasureVoltageActive;
+            mUSB_Work = 0;
+            mCalibration = Off;
         }
-        if (getButtonState(Minus) == Button::released)
+        break;
+#endif
+    }
+    if (mActiveFlag & MeasureCurrentActive)
+    {
+        mReadAnalogCurrent = analogRead(mMeasureCurrentInPin);
+#if MeasureElectricWork ==1
+        float work = getUSBPowerValue_W() * TICK_INTERVAL_MS * 0.001;
+        mUSB_Work += work;
+#endif
+    }
+    else
+    {
+        mReadAnalogCurrent = 0;
+    }
+}
+
+void SettingStates::handleMeasureVoltageState()
+{
+    switch (mCalibration)
+    {
+    case CalibrateVoltage: handleCalibration(mCalibrateVoltageValue); break;
+    case ResetCalibrationValue:
+        if (getButtonState(AlarmBtn) == Button::released)
         {
-            mActiveFlag &= ~MeasureVoltageActive;
+            mCalibrateVoltageValue = MaxAnalogValue*10;
         }
         break;
     }
@@ -808,7 +898,7 @@ void SettingStates::handleModeInTimeStates()
                 mState = Time;
             }
         }
-        while (!stateAvailable());
+        while (!isStateAvailable());
     }
     else if (getButtonState(Mode) == Button::delayed)
     {
@@ -816,35 +906,30 @@ void SettingStates::handleModeInTimeStates()
         {
             switch (mCalibration)
             {
-            case Off:                   mCalibration = SetLowerTemperature;  break;
-            case SetLowerTemperature:   mCalibration = SetUpperTemperature;  break;
-            case SetUpperTemperature:   mCalibration = CalibrateTemperature; break;
-            case CalibrateTemperature:  mCalibration = ResetCalibrationValue;     break;
-            case ResetCalibrationValue: mCalibration = SetLowerTemperature;  break;
+            case Off:                   mCalibration = SetLowerTemperature;   break;
+            case SetLowerTemperature:   mCalibration = SetUpperTemperature;   break;
+            case SetUpperTemperature:   mCalibration = CalibrateTemperature;  break;
+            case CalibrateTemperature:  mCalibration = ResetCalibrationValue; break;
+            case ResetCalibrationValue: mCalibration = SetLowerTemperature;   break;
             default:
                 break;
             }
         }
-        else if (mState == MeasureCurrent)
+        else if (mState == MeasureCurrent || mState == MeasureVoltage)
         {
             switch (mCalibration)
             {
-            case Off:                   mCalibration = CalibrateCurrent; break;
-            case CalibrateCurrent:      mCalibration = ResetCalibrationValue; break;
-            case ResetCalibrationValue: mCalibration = DisableMeasurement; break;
-            case DisableMeasurement:    mCalibration = Off; break;
-            }
-        }
-        else if (mState == MeasureVoltage)
-        {
-            switch (mCalibration)
-            {
-            case Off:                   mCalibration = CalibrateVoltage; break;
+            case Off:                   mCalibration = mState == MeasureCurrent ? CalibrateCurrent : CalibrateVoltage; break;
+            case CalibrateCurrent:      // fall through
             case CalibrateVoltage:      mCalibration = ResetCalibrationValue; break;
-            case ResetCalibrationValue: mCalibration = DisableMeasurement; break;
-            case DisableMeasurement:    mCalibration = Off; break;
             }
         }
+#if MeasureElectricPower == 1
+        else if (mState == MeasurePower)
+        {
+            mCalibration = ResetWorkValue;
+        }
+#endif
         else
         {
             mState = SetTime;
@@ -854,6 +939,23 @@ void SettingStates::handleModeInTimeStates()
             }
         }
     }
+#if AlarmButtonModeForUSB == 1
+    else if (isMeasurementState()
+             && getButtonState(AlarmBtn) == Button::released
+             && (mCalibration & (ResetWorkValue|ResetCalibrationValue)) == 0)
+    {
+        do
+        {
+            mState = (state) (mState + 1);
+            if (mState > LastMeasurementState)
+            {
+                mState = MeasureVoltage;
+                mButtonState[AlarmBtn] = Button::none;
+            }
+        }
+        while (!isStateAvailable());
+    }
+#endif
 }
 
 void SettingStates::handleHourMinute()
@@ -939,9 +1041,19 @@ void SettingStates::handleLightHigh()
     }
 }
 
+#if LanguageSelection == SELECT
 void SettingStates::handleLanguage()
 {
     if (handleSetPlusMinus(mLanguage, EN, DE))
+    {
+        mSettingsChanged = true;
+    }
+}
+#endif
+
+void SettingStates::handleSetMeasurementActive()
+{
+    if (handleSetPlusMinus(mActiveFlag, 0, (MeasureCurrentActive|MeasureTemperatureActive|MeasureVoltageActive)))
     {
         mSettingsChanged = true;
     }
@@ -1102,7 +1214,9 @@ int SettingStates::getTimerIndex()  const
 
 int SettingStates::getEEPROMsize() const
 {
-    return 2 * sizeof(long) + 2 * sizeof(int16_t) + 5 * sizeof(uint8_t);
+    //int size = (char*)&mLastEEPROMMemoryMarker - (char*)&mCalibrateCurrentValue;
+    int size = sizeof(long) * 3 + sizeof(int16_t) * 2 + sizeof(uint8_t) * 6;
+    return size;
 }
 
 void SettingStates::storeToEEPROM() const
@@ -1148,18 +1262,40 @@ uint8_t SettingStates::isCalibrating() const
     return mCalibration;
 }
 
-bool SettingStates::stateAvailable() const
+bool SettingStates::isStateAvailable() const
 {
     switch (mState)
     {
-    case MeasureCurrent:     return (mActiveFlag & MeasureCurrentActive) != 0 && analogRead(mMeasureCurrentInPin) != 0;
-    case MeasureTemperature: return mMeasureTemperatureInPin != 0 && analogRead(mMeasureTemperatureInPin) != 0;
-    case MeasureVoltage:     return (mActiveFlag & MeasureVoltageActive) != 0;
-    case MeasurePower:       return (mActiveFlag & MeasureCurrentActive) != 0 && (mActiveFlag & MeasureVoltageActive) != 0 && analogRead(mMeasureCurrentInPin) != 0;
+    case MeasureCurrent:     return isMeasurementActive() && analogRead(mMeasureCurrentInPin) != 0;
+    case MeasureTemperature: return isMeasurementActive() && analogRead(mMeasureTemperatureInPin) != 1023;
+    case MeasureVoltage:     return isMeasurementActive();
+#if MeasureElectricPower == 1
+    case MeasurePower:       return isMeasurementActive() && analogRead(mMeasureCurrentInPin) != 0;
+#endif
     default: return true;
     }
 }
 
+bool SettingStates::isMeasurementActive() const
+{
+    switch (mState)
+    {
+    case MeasureCurrent:     return (mActiveFlag & MeasureCurrentActive) != 0;
+    case MeasureTemperature: return (mActiveFlag & MeasureTemperatureActive) != 0;
+    case MeasureVoltage:     return (mActiveFlag & MeasureVoltageActive) != 0;
+#if MeasureElectricPower == 1
+    case MeasurePower:       return (mActiveFlag & MeasureCurrentActive) != 0 && (mActiveFlag & MeasureVoltageActive) != 0;
+#endif
+    default: return true;
+    }
+}
+
+#if AlarmButtonModeForUSB == 1
+bool SettingStates::isMeasurementState() const
+{
+    return mState >= FirstMeasurementState && mState <= LastMeasurementState;
+}
+#endif
 
 bool SettingStates::hasDisplayChanged()
 {
@@ -1203,14 +1339,17 @@ void SettingStates::handleSettingsState()
 
     switch (mState)
     {
-    case SetTime:        handleHourMinute();  break;
-    case SetDate:        handleMonthDay();    break;
-    case SetYear:        handleYear();        break;
-    case SetContrast:    handleContrast();    break;
-    case SetLightLow:    handleLightLow();    break;
-    case SetLightHigh:   handleLightHigh();   break;
-    case SetOnLightTime: handleLightOnTime(); break;
-    case SetLanguage:    handleLanguage();    break;
+    case SetTime:               handleHourMinute();  break;
+    case SetDate:               handleMonthDay();    break;
+    case SetYear:               handleYear();        break;
+    case SetContrast:           handleContrast();    break;
+    case SetLightLow:           handleLightLow();    break;
+    case SetLightHigh:          handleLightHigh();   break;
+    case SetOnLightTime:        handleLightOnTime(); break;
+#if LanguageSelection == SELECT
+    case SetLanguage:           handleLanguage();    break;
+#endif
+    case SetMeasurementsActive: handleSetMeasurementActive();  break;
 
     default: break;
     }
