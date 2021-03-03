@@ -9,20 +9,14 @@
 
 #define NO_OF_TONES 4
 
-#define AlarmButtonModeForUSB 0
-
-
-// TODO: test to disable functionalities
-
 #define SELECT 0    // select language EN or DE
 #define EN     1    // only english
 #define DE     2    // only german
 
-#define LanguageSelection EN
+#define LanguageSelection SELECT
 #define MeasureElectricPower 1
-#define MeasureElectricWork 0
-
-// TODO reduce floating point operations to minimum
+#define MeasureElectricWork 1
+#define AlarmButtonModeForUSB 1
 
 class SettingStates
 {
@@ -92,6 +86,9 @@ public:
     uint8_t isCalibrating() const;
     bool    isStateAvailable() const;
     bool    isMeasurementActive() const;
+    bool    isMeasurementState(state) const;
+    bool    isVDDenabled() const;
+    bool    enableVDD(bool on);
 
     int     onTimerAlarm();
     int     getSeconds() const;
@@ -117,9 +114,10 @@ public:
 private:
     bool readButtons();
     void playAlarm();
+    int  getEEPROMsize() const;
+    void storeToEEPROM() const;
 
 #if AlarmButtonModeForUSB == 1
-    bool isMeasurementState() const;
     void beep();
 #endif
 
@@ -140,8 +138,6 @@ private:
     void handleActivateTimer();
     void handleActivateAlarm();
     int  getTimerIndex() const;
-    int  getEEPROMsize() const;
-    void storeToEEPROM() const;
 
     void handleSettingsState();
     void handleHourMinute();
@@ -196,6 +192,7 @@ private:
     OnTick_t mTimerFunction;
     OnTick_t mAlarmFunction;
     String   mTimerName;
+    bool     mVDDswitchedOn;
     // stored in EEPROM
     long     mCalibrateCurrentValue;
     long     mCalibrateTemperatureValue;

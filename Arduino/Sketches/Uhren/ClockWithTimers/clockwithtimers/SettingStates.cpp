@@ -48,6 +48,7 @@ SettingStates::SettingStates()
     , mAlarmID(dtINVALID_ALARM_ID)
     , mTimerFunction(0)
     , mAlarmFunction(0)
+    , mVDDswitchedOn(false)
     , mCalibrateCurrentValue(MaxAnalogValue*10)
     , mCalibrateTemperatureValue(MaxAnalogValue*10)
     , mCalibrateVoltageValue(MaxAnalogValue*10)
@@ -525,7 +526,6 @@ float SettingStates::getUSBWorkValue_Ws() const
 
 float SettingStates::getTemperatureValue() const
 {
-
     const int16_t fValueTable[] =
     {  // values for temperatures in °C in 5 °C steps from -40
        1022,
@@ -643,28 +643,21 @@ void SettingStates::playAlarm()
         mAlarmFunction();
     }
 }
-void SettingStates::handleEnterState(state aState)
+void SettingStates::handleEnterState(state new_state)
 {
-    if (   ((mActiveFlag & MeasureCurrentActive) != 0 && analogRead(mMeasureCurrentInPin) != 0)
-        || aState == MeasureCurrent
-#if MeasureElectricPower == 1
-        || aState == MeasurePower
-#endif
-        || aState == MeasureVoltage)
+    if (isMeasurementState(new_state)
+        && ((mActiveFlag & MeasureCurrentActive) != 0
+        && analogRead(mMeasureCurrentInPin) != 0) )
     {
-        tone(mVddPulsePin, 5000);
+        mVDDswitchedOn = enableVDD(true);
     }
 }
 
-void SettingStates::handleExitState(state aState)
+void SettingStates::handleExitState(state old_state)
 {
-    if (aState == MeasureCurrent || aState == MeasureTemperature || aState == MeasureVoltage
-#if MeasureElectricPower == 1
-        || aState == MeasurePower
-#endif
-            )
+    if ( isMeasurementState(old_state) && !isMeasurementState(mState))
     {
-        noTone(mVddPulsePin);
+        mVDDswitchedOn = enableVDD(false);
 
         if (mCalibration != Off)
         {
@@ -940,7 +933,7 @@ void SettingStates::handleModeInTimeStates()
         }
     }
 #if AlarmButtonModeForUSB == 1
-    else if (isMeasurementState()
+    else if (isMeasurementState(mState)
              && getButtonState(AlarmBtn) == Button::released
              && (mCalibration & (ResetWorkValue|ResetCalibrationValue)) == 0)
     {
@@ -949,7 +942,7 @@ void SettingStates::handleModeInTimeStates()
             mState = (state) (mState + 1);
             if (mState > LastMeasurementState)
             {
-                mState = MeasureVoltage;
+                mState = FirstMeasurementState;
                 mButtonState[AlarmBtn] = Button::none;
             }
         }
@@ -1290,10 +1283,32 @@ bool SettingStates::isMeasurementActive() const
     }
 }
 
-#if AlarmButtonModeForUSB == 1
-bool SettingStates::isMeasurementState() const
+bool SettingStates::isVDDenabled() const
 {
-    return mState >= FirstMeasurementState && mState <= LastMeasurementState;
+    return mVDDswitchedOn;
+}
+
+bool SettingStates::enableVDD(bool on)
+{
+    if (mVddPulsePin)
+    {
+        if (on)
+        {
+            tone(mVddPulsePin, 5000);
+        }
+        else
+        {
+            noTone(mVddPulsePin);
+        }
+        return on;
+    }
+    return false;
+}
+
+#if AlarmButtonModeForUSB == 1
+bool SettingStates::isMeasurementState(state test_state) const
+{
+    return test_state >= FirstMeasurementState && test_state <= LastMeasurementState;
 }
 #endif
 

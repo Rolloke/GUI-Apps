@@ -158,7 +158,6 @@ void setup()
     gHourMinuteButton.setDelay(1000);
     gHourMinuteButton.setRepeat(250);
 
-
     gSettings.setTimerFunction(&onTimerAlarm);
     gSettings.setAlarmFunction(&onAlarm);
     gSettings.setMeasureCurrentPins(vddPulsePin, measureCurrentPin);
@@ -224,6 +223,7 @@ void triggerAlarmButton(uint8_t aState, uint8_t )
     if (gMelody.isPlaying())
     {
         gMelody.stopMelody();
+        gSettings.enableVDD(gSettings.isVDDenabled());
     }
     else
     {
@@ -438,6 +438,7 @@ void onTimerAlarm()
     case 4: gMelody.setTones(gTones5); break;
 #endif
     }
+    gSettings.enableVDD(false);
     gMelody.startMelody();
 }
 
@@ -464,7 +465,6 @@ void onAlarm()
             return;
         }
     }
+    gSettings.enableVDD(false);
     gMelody.startMelody();
-
-
 }
