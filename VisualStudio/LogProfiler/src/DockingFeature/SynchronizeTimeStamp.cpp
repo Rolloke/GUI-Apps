@@ -579,7 +579,7 @@ INT_PTR  SynchronizeTimeStamps::findLineOfTimeValue(int64_t aTimeValue)
     {
         ScintillaWnd fWnd(curScintilla, TRUE);
         SearchLine fSearch(fWnd, getCurrentParser());
-        fResultLine = fSearch.searchLine(aTimeValue);
+        fResultLine = static_cast<INT_PTR>(fSearch.searchLine(aTimeValue));
     }
     return fResultLine;
 }
@@ -698,7 +698,7 @@ INT_PTR SynchronizeTimeStamps::OnSynchronize(BOOL bFolder)
                 } 
                 
                 SearchLine fSearch(fFile, fParser);
-                size_t fLine = fSearch.searchLine(fTime);
+				int64_t fLine = fSearch.searchLine(fTime);
                 if (fLine != -1)
                 {
                     fFile.getLineText(static_cast<uint32_t>(fLine), fLineText);

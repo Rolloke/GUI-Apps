@@ -18,7 +18,7 @@ SearchLine::~SearchLine()
 {
 }
 
-int SearchLine::searchLine(int64_t aTime)
+int64_t SearchLine::searchLine(int64_t aTime)
 {
     if (mParser)
     {
@@ -38,7 +38,7 @@ int SearchLine::searchLine(int64_t aTime)
 				}
 			}
 		}
-        int fLine = search(0, fLines, aTime);
+		int64_t fLine = search(0, fLines, aTime);
 		if (fLine == -1 && fLines < 5000) // linear search is slow, lines are limited
 		{
 			TRACE(Logger::to_function, "Searching linear through %ld", fLines);
@@ -49,21 +49,21 @@ int SearchLine::searchLine(int64_t aTime)
     return -1;
 }
 
-int SearchLine::search(size_t aStart, size_t aEnd, int64_t aTime)
+int64_t SearchLine::search(size_t aStart, size_t aEnd, int64_t aTime)
 {
     if (   aEnd - aStart > 1            // limit distance
         && mRecursion < mMaxRecursion)  // limit recursion 
     {
-		int fLine = static_cast<int>((aStart + aEnd) / 2);
+		int64_t fLine = static_cast<int64_t>((aStart + aEnd) / 2);
         int64_t fTimeOfLine = 0;
-        int fTemp = fLine;
+		int64_t fTemp = fLine;
         BOOL bReverse = FALSE;
         ++mRecursion;   
-        while (getTimeOfLine(fLine, fTimeOfLine) == FALSE)
+        while (getTimeOfLine(static_cast<size_t>(fLine), fTimeOfLine) == FALSE)
         {    
             if (bReverse) // find a time line down
             {
-                if (fLine > aStart)
+                if (fLine > static_cast<int64_t>(aStart))
                 {
                     fLine--;
                 }
@@ -75,7 +75,7 @@ int SearchLine::search(size_t aStart, size_t aEnd, int64_t aTime)
             }
             else        //  find a time line up
             {
-                if (fLine < aEnd)
+                if (fLine < static_cast<int64_t>(aEnd))
                 {
                     fLine++;
                 }
@@ -98,22 +98,22 @@ int SearchLine::search(size_t aStart, size_t aEnd, int64_t aTime)
 
         if (fDifference > 0)
         {
-            return search(aStart, fLine, aTime);
+            return search(aStart, static_cast<size_t>(fLine), aTime);
         }
         else
         {
-            return search(fLine, aEnd, aTime);
+            return search(static_cast<size_t>(fLine), aEnd, aTime);
         }
     }
     else
     {   // return the line with the smallest time distance
-		int fLine = mDifference.size() > 0 ? mDifference.begin()->second : -1;
+		int64_t fLine = mDifference.size() > 0 ? mDifference.begin()->second : -1;
 		TRACE(Logger::to_function, "Recursive search stopped, recursion steps %d, distance %d, fLine", mRecursion, aEnd - aStart, fLine);
 		return fLine;
     }
 }
 
-int SearchLine::search_linear(size_t aLines, int64_t aTime)
+int64_t SearchLine::search_linear(size_t aLines, int64_t aTime)
 {
 	using namespace std;
 	int fBestLine = -1;

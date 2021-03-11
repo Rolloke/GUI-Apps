@@ -7,16 +7,28 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogProfiler", "src\LogProfi
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Unicode|x64 = Debug_Unicode|x64
+		Debug_Unicode|x86 = Debug_Unicode|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release_Unicode|x64 = Release_Unicode|x64
+		Release_Unicode|x86 = Release_Unicode|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug_Unicode|x64.ActiveCfg = Debug_Unicode|x64
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug_Unicode|x64.Build.0 = Debug_Unicode|x64
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug_Unicode|x86.ActiveCfg = Debug_Unicode|Win32
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug_Unicode|x86.Build.0 = Debug_Unicode|Win32
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug|x64.ActiveCfg = Debug|x64
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug|x64.Build.0 = Debug|x64
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug|x86.ActiveCfg = Debug|Win32
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Debug|x86.Build.0 = Debug|Win32
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release_Unicode|x64.ActiveCfg = Release_Unicode|x64
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release_Unicode|x64.Build.0 = Release_Unicode|x64
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release_Unicode|x86.ActiveCfg = Release_Unicode|Win32
+		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release_Unicode|x86.Build.0 = Release_Unicode|Win32
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release|x64.ActiveCfg = Release|x64
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release|x64.Build.0 = Release|x64
 		{BB39939C-31BD-4E9B-A0C8-5A6EC9D9E999}.Release|x86.ActiveCfg = Release|Win32

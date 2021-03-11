@@ -134,10 +134,10 @@ BOOL TimeParser::setFormatString(const std::string& aFormat)
 	size_t fSize = aFormat.size();
     BOOL fAdded = FALSE;
     mGroupID.clear();
-    for (int i=0; i<fSize; ++i)
+    for (int64_t i=0; i< static_cast<int64_t>(fSize); ++i)
     {
         fAdded = FALSE;
-        str_str_map::iterator fExpression = mRegExMap.find(aFormat.substr(i, 1));
+        str_str_map::iterator fExpression = mRegExMap.find(aFormat.substr(static_cast<size_t>(i), 1));
         if (fExpression != mRegExMap.end())
         {
             fRegExString += fExpression->second;
@@ -145,7 +145,7 @@ BOOL TimeParser::setFormatString(const std::string& aFormat)
         }
         else
         {
-            fExpression = mRegExMap.find(aFormat.substr(i, 2));
+            fExpression = mRegExMap.find(aFormat.substr(static_cast<size_t>(i), 2));
             if (fExpression != mRegExMap.end())
             {
                 fRegExString += fExpression->second;
@@ -157,7 +157,7 @@ BOOL TimeParser::setFormatString(const std::string& aFormat)
         }
         if (!fAdded)
         {
-            fRegExString += aFormat.substr(i, 1);
+            fRegExString += aFormat.substr(static_cast<size_t>(i), 1);
         }
     }
     if (!hasDate())
@@ -371,7 +371,7 @@ int TimeParser::getDayOfYear() const
     case 11: return fOffsetOkt + mDayOfMonth + mLeapYearDay;
     case 12: return fOffsetNov + mDayOfMonth + mLeapYearDay;
     }
-	TRACE(Logger::warning, "TimeParser::getDayOfYear failed (m:%d, dom %d), (woy: %d, dow: %d), doy: %d", mMonth, mDayOfMonth, mWeekOfYear, mDayOfWeek, mDayOfYear);
+	TRACE(Logger::to_function, "TimeParser::getDayOfYear failed (m:%d, dom %d), (woy: %d, dow: %d), doy: %d", mMonth, mDayOfMonth, mWeekOfYear, mDayOfWeek, mDayOfYear);
 	return 0;
 }
 
@@ -382,7 +382,7 @@ int TimeParser::convertMonth(const char*aStr)
     {
         return fIt->second;
     }
-	TRACE(Logger::warning, "TimeParser::convertMonth failed: %s", aStr);
+	TRACE(Logger::to_function, "TimeParser::convertMonth failed: %s", aStr);
 	return 0;
 }
 
@@ -393,7 +393,7 @@ int TimeParser::convertDayOfWeek(const char*aStr)
     {
         return fIt->second;
     }
-	TRACE(Logger::warning, "TimeParser::convertDayOfWeek failed: %s", aStr);
+	TRACE(Logger::to_function, "TimeParser::convertDayOfWeek failed: %s", aStr);
 	return 0;
 }
 

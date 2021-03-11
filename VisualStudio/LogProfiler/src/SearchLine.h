@@ -23,7 +23,7 @@ public:
 	\param aTime the search time in us
 	\return the line, -1 if error occurred (int)
 	*/
-	int searchLine(int64_t aTime);
+	int64_t searchLine(int64_t aTime);
 	/*!
 	\brief retrieves the difference of the time of the line to the search time
 	\param aTime the search time
@@ -32,14 +32,14 @@ public:
 	int64_t getDifference();
 
 private:
-	int search(size_t aStart, size_t aEnd, int64_t aTime);
-	int search_linear(size_t aLines, int64_t aTime);
+	int64_t search(size_t aStart, size_t aEnd, int64_t aTime);
+	int64_t search_linear(size_t aLines, int64_t aTime);
 
     BOOL getTimeOfLine(size_t aLine, int64_t & aTime);
 
     const ITextInterface&  mTextIF;
     TimeParser*  mParser;
-    std::map<int64_t, int> mDifference;
+    std::map<int64_t, int64_t> mDifference;
     int          mMaxRecursion;
     int          mRecursion;
 };

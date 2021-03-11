@@ -1,0 +1,17 @@
+﻿  AboutDlg.cpp
+  logger.cpp
+  LogProfiler.cpp
+  SearchLine.cpp
+  EnumFiles.cpp
+  Mutex.cpp
+  TextFile.cpp
+  PluginDefinition.cpp
+  TimeParser.cpp
+  StaticDialog.cpp
+  SynchronizeTimeResults.cpp
+  SynchronizeTimeStamp.cpp
+     Bibliothek "E:\Projects\VisualStudio\LogProfiler\Release_Unicode\LogProfiler.lib" und Objekt "E:\Projects\VisualStudio\LogProfiler\Release_Unicode\LogProfiler.exp" werden erstellt.
+  Code wird generiert.
+  All 2142 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  LogProfiler.vcxproj -> E:\Projects\VisualStudio\LogProfiler\Release_Unicode\LogProfiler.dll
