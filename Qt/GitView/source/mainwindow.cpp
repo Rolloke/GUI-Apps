@@ -1593,18 +1593,28 @@ void MainWindow::deleteFileOrFolder()
     if (mContextMenuSourceTreeItem)
     {
         QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
-        QString fPath         = mContextMenuSourceTreeItem->text(0);
+        QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
         Type fType;
         fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
-        if (callMessageBox("Delete %1", fType.type_name(), fPath) == QMessageBox::Yes)
+        if (callMessageBox("Delete %1", fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
-            QFile::remove(fTopItemPath + "/" + fPath);
-            QTreeWidgetItem *parent = mContextMenuSourceTreeItem->parent();
-            if (parent)
+            bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
+            if (result)
             {
-                parent->removeChild(mContextMenuSourceTreeItem);
+                if (fType.is(Type::AllGitActions))
+                {
+                    updateTreeItemStatus(mContextMenuSourceTreeItem);
+                }
+                else
+                {
+                    QTreeWidgetItem *parent = mContextMenuSourceTreeItem->parent();
+                    if (parent)
+                    {
+                        parent->removeChild(mContextMenuSourceTreeItem);
+                    }
+                    mContextMenuSourceTreeItem = 0;
+                }
             }
-            mContextMenuSourceTreeItem = 0;
         }
     }
 }
