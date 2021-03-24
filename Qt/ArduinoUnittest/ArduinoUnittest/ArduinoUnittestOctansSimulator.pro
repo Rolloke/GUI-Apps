@@ -6,12 +6,15 @@
 
 include (ArduinoUnittest.pro)
 
+EMULATED=1
+DEFINES += EMULATED
+
 # Aduino Project Files
 SKETCH_NAME = OctansSimulatorDisplay
 ARDUINO_PATH = ../../../Arduino/Sketches/OctansSimulator/$${SKETCH_NAME}
 INCLUDEPATH += $${ARDUINO_PATH}
 SOURCES += OctansSimulatorino.cpp
-DISTFILES += $${ARDUINO_PATH}/$${SKETCH_NAME}.ino
+SOURCES += $${ARDUINO_PATH}/$${SKETCH_NAME}.ino
 
 
 # Libraries
@@ -36,4 +39,11 @@ LIBRARY4 = $${ARDUINO_LOCAL_LIBRARY_PATH}/TextMenu/src
 INCLUDEPATH += $${LIBRARY4}
 SOURCES += $${LIBRARY4}/menu.cpp
 HEADERS += $${LIBRARY4}/menu.h
+
+#LIBRARY5 = $${ARDUINO_LOCAL_LIBRARY_PATH}/MPU6050
+#INCLUDEPATH += $${LIBRARY5}
+#SOURCES += $${LIBRARY5}/MPU6050.cpp
+#HEADERS += $${LIBRARY5}/MPU6050.h
+#HEADERS += $${LIBRARY5}/helper_3dmath.h
+#HEADERS += $${LIBRARY5}/MPU6050_6Axis_MotionApps20.h
 
