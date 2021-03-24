@@ -2,6 +2,7 @@
 const int toneOutput      =   9;
 const int dimLED          =   8;
 const int contrastPin     =  10;
+const int vddPulsePin     =  13; 
 
 const int measureCurrentPin = A0;
 const int measureTemperturePin = A1;

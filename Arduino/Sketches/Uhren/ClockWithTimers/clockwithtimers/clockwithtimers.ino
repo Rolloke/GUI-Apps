@@ -232,6 +232,7 @@ void triggerAlarmButton(uint8_t aState, uint8_t )
         gSettings.triggerButton(SettingStates::ClearAll, Button::none);
     }
 }
+
 void fillStringWithSpaces(String& aStr, unsigned int aLen)
 {
     while (aStr.length() < aLen)
@@ -281,7 +282,6 @@ void PrintLCD_Time()
 
     if (gSettings.getState() == SettingStates::Time)
     {
-        LCD_PRINT(": ");
         for (int i=0; i<SettingStates::Timers; ++i)
         {
             if (gSettings.isTimerActive(i))
@@ -368,19 +368,19 @@ void PrintLCD_Time()
     case SettingStates::MeasurePower:
     {
         fLine2 += String(gSettings.getUSBPowerValue_W(), (unsigned char)1);
-        fLine2 += " W, ";
+        fLine2 += " W ";
 #if MeasureElectricWork ==1
         float value = gSettings.getUSBWorkValue_Ws();
         if (value > 3600)
         {
             value /= 3600;
             fLine2 += String(value, (unsigned char)1);
-            fLine2 += " Wh";
+            fLine2 += ", Wh";
         }
         else
         {
             fLine2 += String(value, (unsigned char)1);
-            fLine2 += " Ws";
+            fLine2 += ", Ws";
         }
 #endif
     }   break;
