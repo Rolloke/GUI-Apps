@@ -108,7 +108,8 @@ MainWindow::MainWindow(QWidget *parent)
         mListModel->setData(mListModel->index(fRow, ePinIndex, QModelIndex()), QString::number(fRow));
         mListModel->setData(mListModel->index(fRow, ePinNo, QModelIndex()), fPin);
         mListModel->setData(mListModel->index(fRow, ePinType, QModelIndex()), "");
-        mListModel->setData(mListModel->index(fRow, eValue, QModelIndex()), "0");
+        QString fValue = fSettings.value(fPin, "0").toString();
+        mListModel->setData(mListModel->index(fRow, eValue, QModelIndex()), fValue);
         mListModel->setData(mListModel->index(fRow, eRange, QModelIndex()), "1");
         ++fRow;
     }

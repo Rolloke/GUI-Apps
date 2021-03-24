@@ -17,7 +17,6 @@ TARGET = ArduinoUnittest
 TEMPLATE = app
 
 
-
 SOURCES += main.cpp \
            mainwindow.cpp \
            Arduino.cpp \
@@ -51,7 +50,7 @@ HEADERS  += mainwindow.h \
             arduinoworker.h
 
 FORMS    += mainwindow.ui \
-    logic_analyser.ui
+            logic_analyser.ui
 
-ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.9/libraries
+ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.12/libraries
 ARDUINO_LOCAL_LIBRARY_PATH = /home/rolf/Projekte/Arduino/libraries
