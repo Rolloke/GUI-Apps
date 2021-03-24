@@ -1,0 +1,110 @@
+PID   USER     TIME  COMMAND
+    1 root      0:01 /usr/lib/systemd/systemd
+    2 root      0:00 [kthreadd]
+    3 root      0:00 [rcu_gp]
+    4 root      0:00 [rcu_par_gp]
+    8 root      0:00 [mm_percpu_wq]
+    9 root      0:00 [ksoftirqd/0]
+   10 root      0:00 [rcu_sched]
+   11 root      0:00 [rcu_bh]
+   12 root      0:00 [migration/0]
+   13 root      0:00 [cpuhp/0]
+   14 root      0:00 [cpuhp/1]
+   15 root      0:00 [migration/1]
+   16 root      0:00 [ksoftirqd/1]
+   19 root      0:00 [cpuhp/2]
+   20 root      0:00 [migration/2]
+   21 root      0:00 [ksoftirqd/2]
+   24 root      0:00 [cpuhp/3]
+   25 root      0:00 [migration/3]
+   26 root      0:00 [ksoftirqd/3]
+   28 root      0:00 [kworker/3:0H-ev]
+   29 root      0:00 [kdevtmpfs]
+   30 root      0:00 [netns]
+   31 root      0:00 [kworker/0:1-eve]
+   32 root      0:00 [kworker/1:1-mm_]
+   34 root      0:00 [oom_reaper]
+   35 root      0:00 [writeback]
+   36 root      0:00 [kcompactd0]
+   37 root      0:00 [crypto]
+   38 root      0:00 [kblockd]
+   39 root      0:00 [kworker/3:1-mm_]
+   40 root      0:00 [watchdogd]
+   41 root      0:00 [rpciod]
+   42 root      0:00 [kworker/u9:0-hc]
+   43 root      0:00 [xprtiod]
+   48 root      0:00 [kswapd0]
+   49 root      0:00 [nfsiod]
+   50 root      0:00 [cifsiod]
+   51 root      0:00 [cifsoplockd]
+   80 root      0:00 [iscsi_eh]
+   81 root      0:00 [kworker/u8:1-ev]
+   83 root      0:00 [DWC Notificatio]
+   84 root      0:00 [uas]
+   85 root      0:00 [vchiq-slot/0]
+   86 root      0:00 [vchiq-recy/0]
+   87 root      0:00 [vchiq-sync/0]
+   88 root      0:00 [vchiq-keep/0]
+   89 root      0:00 [SMIO]
+   90 root      0:00 [SMIO]
+   91 root      0:00 [ipv6_addrconf]
+   93 root      0:00 [irq/35-brcmstb_]
+   94 root      0:00 [irq/36-mmc1]
+   95 root      0:00 [kworker/2:3-eve]
+   96 root      0:00 [irq/36-mmc0]
+   98 root      0:00 [v3d_bin]
+   99 root      0:00 [v3d_render]
+  100 root      0:00 [v3d_tfu]
+  101 root      0:00 [v3d_csd]
+  102 root      0:00 [v3d_cache_clean]
+  128 root      0:00 [mmc_complete]
+  129 root      0:00 [kworker/2:1H-ev]
+  130 root      0:00 [kworker/0:1H-mm]
+  132 root      0:00 [kworker/1:1H-kb]
+  133 root      0:00 [kworker/1:2H-kb]
+  134 root      0:00 [kworker/2:2H-kb]
+  137 root      0:00 [kworker/3:2H-kb]
+  139 root      0:00 [kworker/0:2H-kb]
+  148 root      0:00 [loop0]
+  150 root      0:00 [jbd2/mmcblk0p2-]
+  151 root      0:00 [ext4-rsv-conver]
+  204 root      0:00 [kworker/0:2-mm_]
+  215 root      0:00 /usr/lib/systemd/systemd-journald
+  230 root      0:00 /usr/bin/rpcbind -f
+  262 root      0:00 /usr/lib/systemd/systemd-udevd
+  268 root      0:00 /usr/bin/pulseaudio --system --disallow-exit --exit-idle-time=-1 --disable-shm
+  271 root      0:00 /usr/sbin/eventlircd -f --evmap=/etc/eventlircd.d --socket=/run/lirc/lircd
+  274 dbus      0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+  281 root      0:00 /usr/sbin/connman-vpnd -n
+  294 root      0:00 /usr/lib/systemd/systemd-logind
+  303 root      0:00 /sbin/crond -f -S
+  328 root      0:00 /usr/sbin/sshd -D
+  337 root      0:00 [cfg80211]
+  341 root      0:00 [kworker/1:2-mem]
+  342 root      0:00 [brcmf_wq/mmc1:0]
+  345 root      0:00 [brcmf_wdog/mmc1]
+  353 root      0:00 [mmal-vchiq]
+  361 root      0:00 [mmal-vchiq]
+  369 root      0:00 [mmal-vchiq]
+  399 root      0:00 /usr/sbin/connmand -nr --config=/etc/connman/main.conf
+  404 avahi     0:00 avahi-daemon: running [RaspiKodi.local]
+  415 root      0:00 /usr/bin/wpa_supplicant -u
+  416 root      0:00 [kworker/u8:3-ev]
+  418 root      0:00 /usr/sbin/nmbd
+  420 root      0:00 /usr/sbin/smbd
+  426 root      0:01 {gpio-shutdown.s} /bin/bash /storage/.config/gpio-shutdown.sh
+  427 root      0:00 {smbd-notifyd} /usr/sbin/smbd
+  429 root      0:00 {cleanupd} /usr/sbin/smbd
+  435 root      0:00 {kodi.sh} /bin/sh /usr/lib/kodi/kodi.sh --standalone -fs
+  436 root      0:00 {lpqd} /usr/sbin/smbd
+  440 root      3:36 /usr/lib/kodi/kodi.bin --standalone -fs
+  627 root      0:00 [kworker/u9:1-hc]
+  629 root      0:00 /usr/bin/hciattach /dev/serial1 bcm43xx 3000000 flow -
+  631 root      0:00 /usr/lib/bluetooth/bluetoothd
+ 2403 root      0:00 [kworker/2:0-mm_]
+ 2503 root      0:00 [kworker/3:0]
+ 3571 root      0:00 sshd: root@pts/0
+ 3601 root      0:00 -sh
+ 3707 root      0:00 [kworker/2:1-mm_]
+ 4019 root      0:00 sleep 1
+ 4020 root      0:00 ps

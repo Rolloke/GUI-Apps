@@ -1,0 +1,18 @@
+/storage/.kodi/userdata:
+drwxr-xr-x    3 root     root          1024 Mar 20 20:01 Database
+-rw-r--r--    1 root     root           144 Jul 11  2020 PartyMode.xsp
+-rw-r--r--    1 root     root           602 Apr 11  2019 RssFeeds.xml
+drwxr-xr-x    2 root     root          1024 Apr 11  2019 Savestates
+drwxr-xr-x   19 root     root          1024 Apr 11  2019 Thumbnails
+drwxr-xr-x   25 root     root          1024 Dec 19 17:29 addon_data
+-rw-r--r--    1 root     root           162 Dec 21 21:42 advancedsettings.xml
+-rw-r--r--    1 root     root         16312 Mar 20 19:58 favourites.xml
+-rw-r--r--    1 root     root         39175 Mar 20 20:01 guisettings.xml
+drwxr-xr-x    2 root     root          1024 Apr 11  2019 keymaps
+drwxr-xr-x    2 root     root          1024 Apr 11  2019 library
+drwxr-xr-x    2 root     root          1024 Nov  3  2019 peripheral_data
+drwxr-xr-x    5 root     root          1024 Apr 11  2019 playlists
+-rw-r--r--    1 root     root           960 Mar 20 20:01 profiles.xml
+-rw-r--r--    1 root     root          1362 Dec 20 18:50 sources.xml
+-rw-r--r--    1 root     root           256 Mar 20 19:38 upnpserver.xml
+
