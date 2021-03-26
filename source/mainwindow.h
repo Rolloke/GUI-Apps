@@ -138,7 +138,7 @@ private:
     void     selectSourceFolder();
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
-    void     apendTextToBrowser(const QString& aText);
+    void     apendTextToBrowser(const QString& aText, bool append=false);
 
     void     handleWorker(int);
     void     handleMessage(int, QVariant);

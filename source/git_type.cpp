@@ -22,7 +22,7 @@ Cmd::Cmd()
     mCommandMap[CallDiffTool]           = "git difftool --no-prompt %1";
     mCommandMap[CallMergeTool]          = "git mergetool --no-prompt %1";
     mCommandMap[ShowDifference]         = "git diff %1";
-    mCommandMap[Remove]                 = "git rm --cached %1";
+    mCommandMap[Remove]                 = "git rm -r %1";
     mCommandMap[Add]                    = "git add %1";
     mCommandMap[Unstage]                = "git reset HEAD %1";
     mCommandMap[Commit]                 = "git -C %1 commit -m \"%2\"";
