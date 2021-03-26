@@ -427,7 +427,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     && aParentItem->checkState(Column::FileName) == Qt::Checked)
                 {
                     QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                    apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed());
+                    apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
                     return false;
                 }
                 int fCountOk = 0;
@@ -486,7 +486,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         case Work::ApplyGitCommand:
                         {
                             QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                            apendTextToBrowser(fCmd + getLineFeed() + fResultStr);
+                            apendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
                             fResult = fCmd.size() != 0;
                         }   break;
                         case Work::ShowAllFiles:
@@ -583,7 +583,10 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     QString fResultString;
     applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::GetStatusAll), fResultString);
 
-    apendTextToBrowser(fResultString);
+    apendTextToBrowser("Repository: "+fSourceDir.path(), aItem == 0 ? false : true);
+    apendTextToBrowser(fResultString, true);
+    apendTextToBrowser("", true);
+
     stringt2typemap fCheckMap;
     parseGitStatus(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
 
@@ -669,9 +672,12 @@ void MainWindow::selectSourceFolder()
     }
 }
 
-void MainWindow::apendTextToBrowser(const QString& aText)
+void MainWindow::apendTextToBrowser(const QString& aText, bool append)
 {
-    on_btnCloseText_clicked();
+    if (!append)
+    {
+        on_btnCloseText_clicked();
+    }
     ui->textBrowser->insertPlainText(aText + getLineFeed());
     ui->textBrowser->textCursor().setPosition(QTextCursor::End);
 }
