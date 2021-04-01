@@ -4,6 +4,7 @@
 #include "workerthreadconnector.h"
 #include "actions.h"
 #include "gitignore.h"
+#include "highlighter.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -164,6 +165,7 @@ private:
     QString               mConfigFileName;
     GitIgnore             mGitIgnore;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
+    QSharedPointer<Highlighter> mHighlighter;
 };
 
 #endif // MAINWINDOW_H

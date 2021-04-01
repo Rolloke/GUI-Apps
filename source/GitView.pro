@@ -15,6 +15,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GitView
 TEMPLATE = app
 
+CONFIG += c++17
+unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
@@ -33,7 +35,8 @@ SOURCES += main.cpp\
     qbranchtreewidget.cpp \
     qhistorytreewidget.cpp \
     gitignore.cpp \
-    aboutdlg.cpp
+    aboutdlg.cpp \
+    highlighter.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -47,7 +50,8 @@ HEADERS  += mainwindow.h \
     qbranchtreewidget.h \
     qhistorytreewidget.h \
     gitignore.h \
-    aboutdlg.h
+    aboutdlg.h \
+    highlighter.h
 
 FORMS    += mainwindow.ui \
     commitmessage.ui \
