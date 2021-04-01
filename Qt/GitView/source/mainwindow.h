@@ -157,6 +157,11 @@ private:
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
+#ifdef DOCKED_VIEWS
+    void createDockWindows();
+    QToolBar* mLastInserted;
+#endif
+
     Ui::MainWindow*       ui;
     QString               mGitCommand;
     WorkerThreadConnector mWorker;
@@ -166,6 +171,7 @@ private:
     GitIgnore             mGitIgnore;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<Highlighter> mHighlighter;
+    QString               mFontName;
 };
 
 #endif // MAINWINDOW_H
