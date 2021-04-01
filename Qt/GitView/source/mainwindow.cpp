@@ -35,12 +35,17 @@ using namespace git;
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
+// TODO: difftool bzw. mergetool auswählen
+// - automatisch mit Dateiendung
+// - manuell über Menue
+
 // TODO: merge command implementieren
 // git merge --abort
 // git merge --continue
 // git mergetool
 // git pull
-// git merge -s <resolve|recursive<ours|theirs|patience>> obsolete
+// git merge -s <resolve|recursive <ours|theirs|patience> > obsolete
+//           --stat
 // git log --merge -p <path>
 
 namespace config
@@ -86,6 +91,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
+    mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
+
     ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(Column::DateTime, QHeaderView::Interactive);
@@ -109,6 +116,15 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, Type::mShort, toBool);
     ui->ckShortState->setChecked(Type::mShort);
+    {
+        QString fFontName ("Courier");
+        LOAD_STR(fSettings, fFontName, toString);
+        QFont font;
+        font.setFamily(fFontName);
+        font.setFixedPitch(true);
+        font.setPointSize(10);
+        ui->textBrowser->setFont(font);
+    }
     fSettings.endGroup();
 
 
@@ -208,6 +224,8 @@ MainWindow::~MainWindow()
     fSettings.beginGroup(config::sGroupView);
     STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
     STORE_STR(fSettings,  Type::mShort);
+    QString fFontName = ui->textBrowser->font().family();
+    STORE_STR(fSettings, fFontName);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
@@ -549,8 +567,8 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 {
     if (aParentItem)
     {
-//        QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
-        QString fSourcePath = aSourceDir ? *aSourceDir + "/" + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+//      QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+        QString fSourcePath = aSourceDir ? *aSourceDir + "/"               + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
 
         auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
@@ -1083,24 +1101,24 @@ void MainWindow::initContextMenuActions()
 {
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
-    mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached %1");
+    mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
-    mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached %1");
+    mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::ShowStatus     , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
-    connect(mActions.createAction(Cmd::ShowShortStatus, tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::ShowShortStatus , tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowShortStatus, Cmd::UpdateItemStatus);
 
-    connect(mActions.createAction(Cmd::Add            , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Add             , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
     mActions.setFlags(Cmd::Add, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
@@ -1371,12 +1389,15 @@ void MainWindow::perform_custom_command()
         {
             QString fMessageBoxText = fVariantList[ActionList::Data::MsgBoxText].toString();
             QString fStagedCmdAddOn = fVariantList[ActionList::Data::StagedCmdAddOn].toString();
+            QString fOption;
             fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
 
-            if (fStagedCmdAddOn.size())
+            if (fStagedCmdAddOn.size() && fType.is(Type::GitStaged))
             {
-                fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fType.is(Type::GitStaged) ? fStagedCmdAddOn : "%1");
+                fOption += fStagedCmdAddOn;
             }
+
+            fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fOption).arg("%1");
 
             int fResult = QMessageBox::Yes;
             if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
@@ -1388,6 +1409,11 @@ void MainWindow::perform_custom_command()
             {
                 applyGitCommandToFileTree(fGitCommand);
             }
+        }
+        else
+        {
+            QString fOption;
+            fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fOption).arg("");
         }
 
         switch (fVariantList[ActionList::Data::Action].toUInt())
