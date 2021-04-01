@@ -13,6 +13,9 @@ Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
 Cmd::tVector  Cmd::mContextMenuHistoryTree;
 Cmd::tVector  Cmd::mContextMenuBranchTree;
 std::vector<Cmd::tVector> Cmd::mToolbars;
+#ifdef DOCKED_VIEWS
+std::vector<QString> Cmd::mToolbarNames;
+#endif
 
 Cmd::Cmd()
 {
@@ -51,6 +54,10 @@ Cmd::Cmd()
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
     mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, CustomGitActionSettings});
+#ifdef DOCKED_VIEWS
+    mToolbarNames.push_back("git commands");
+    mToolbarNames.push_back("tools");
+#endif
 }
 
 

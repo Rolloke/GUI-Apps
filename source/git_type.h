@@ -6,6 +6,8 @@
 
 #include <QString>
 
+#define DOCKED_VIEWS 1
+
 class QFileInfo;
 
 namespace git
@@ -85,6 +87,9 @@ struct Cmd
     static tVector mContextMenuHistoryTree;
     static tVector mContextMenuBranchTree;
     static std::vector<tVector> mToolbars;
+#ifdef DOCKED_VIEWS
+    static std::vector<QString> mToolbarNames;
+#endif
 
 private:
     static int2stringmap mCommandMap;
