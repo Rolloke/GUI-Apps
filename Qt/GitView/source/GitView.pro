@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
+QT += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,7 +24,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     helper.cpp \
     logger.cpp \
     workerthreadconnector.cpp \
@@ -36,7 +37,8 @@ SOURCES += main.cpp\
     qhistorytreewidget.cpp \
     gitignore.cpp \
     aboutdlg.cpp \
-    highlighter.cpp
+    highlighter.cpp \
+    xml_functions.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -51,7 +53,9 @@ HEADERS  += mainwindow.h \
     qhistorytreewidget.h \
     gitignore.h \
     aboutdlg.h \
-    highlighter.h
+    highlighter.h \
+    xml_functions.h
+
 
 FORMS    += mainwindow.ui \
     commitmessage.ui \
