@@ -158,8 +158,7 @@ private:
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
 #ifdef DOCKED_VIEWS
-    void createDockWindows();
-    QToolBar* mLastInserted;
+    void     createDockWindows();
 #endif
 
     Ui::MainWindow*       ui;

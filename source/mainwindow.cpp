@@ -119,21 +119,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
     fSettings.endGroup();
 
-    fSettings.beginGroup(config::sGroupView);
-    LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
-    LOAD_STR(fSettings, Type::mShort, toBool);
-    ui->ckShortState->setChecked(Type::mShort);
-    {
-        LOAD_STR(fSettings, mFontName, toString);
-        QFont font;
-        font.setFamily(mFontName);
-        font.setFixedPitch(true);
-        font.setPointSize(10);
-        ui->textBrowser->setFont(font);
-    }
-    fSettings.endGroup();
-
-
     fSettings.beginGroup(config::sGroupLogging);
     QString fSeverity;
     LOAD_STR(fSettings, fSeverity, toString);
@@ -211,6 +196,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         const auto& fToolbar = Cmd::mToolbars[i];
         QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
         mActions.fillToolbar(*pTB, fToolbar);
+        pTB->setObjectName(Cmd::mToolbarNames[i]);
         pTB->setIconSize(QSize(24,24));
         addToolBar(Qt::TopToolBarArea, pTB);
         if (i==0) insertToolBarBreak(pTB);
@@ -223,6 +209,34 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         ui->horizontalLayoutTool->addWidget(pTB);
     }
 #endif
+
+    fSettings.beginGroup(config::sGroupView);
+    LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
+    LOAD_STR(fSettings, Type::mShort, toBool);
+    ui->ckShortState->setChecked(Type::mShort);
+    {
+        LOAD_STR(fSettings, mFontName, toString);
+        QFont font;
+        font.setFamily(mFontName);
+        font.setFixedPitch(true);
+        font.setPointSize(10);
+        ui->textBrowser->setFont(font);
+    }
+    QByteArray fWindowGeometry;
+    LOAD_STR(fSettings, fWindowGeometry, toByteArray);
+    QByteArray fWindowState;
+    LOAD_STR(fSettings, fWindowState, toByteArray);
+    fSettings.endGroup();
+
+    if (fWindowGeometry.size())
+    {
+        restoreGeometry(fWindowGeometry);
+    }
+    if (fWindowState.size())
+    {
+        restoreState(fWindowState);
+    }
+
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
@@ -243,6 +257,10 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
     STORE_STR(fSettings,  Type::mShort);
     STORE_STR(fSettings, mFontName);
+    auto fWindowGeometry = saveGeometry();
+    STORE_STR(fSettings, fWindowGeometry);
+    auto fWindowState = saveState();
+    STORE_STR(fSettings, fWindowState);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
@@ -314,172 +332,91 @@ MainWindow::~MainWindow()
 #ifdef DOCKED_VIEWS
 void MainWindow::createDockWindows()
 {
-    auto* MainWindow = this;
-    if (MainWindow->objectName().isEmpty())
-    {
-        MainWindow->setObjectName(QStringLiteral("MainWindow"));
-    }
+    // initialize widgets from forms user interface
+    ui->setupUi(this);
 
-    // TODO: size of widgets and position
-    MainWindow->resize(1023, 552);
-    QIcon icon;
-    QString iconThemeName = QStringLiteral("Git");
-    if (QIcon::hasThemeIcon(iconThemeName))
-    {
-        icon = QIcon::fromTheme(iconThemeName);
-    }
-    else
-    {
-        icon.addFile(QStringLiteral(":/resource/logo@2x.png"), QSize(), QIcon::Normal, QIcon::Off);
-    }
-    MainWindow->setWindowIcon(icon);
-    MainWindow->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
-    MainWindow->setIconSize(QSize(98, 92));
-    MainWindow->setDocumentMode(false);
-    MainWindow->setDockOptions(QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks);
-
-    ui->actionSelect_source_folder = new QAction(MainWindow);
-    ui->actionSelect_source_folder->setObjectName(QStringLiteral("actionSelect_source_folder"));
-    ui->actionSelect_Destination = new QAction(MainWindow);
-    ui->actionSelect_Destination->setObjectName(QStringLiteral("actionSelect_Destination"));
+    // then redirect user interface widgets to docked layout
+    // - first remove the widgets from layout items
+    // - add widgets
+    //   - to central widget
+    //   - to dock widgets
+    //   - to toolbars
+    // NOTE: reguard future items, if any
 
     // git files view as central widget
-    ui->treeSource = new QTreeWidget(MainWindow);
-    ui->treeSource->setObjectName(QStringLiteral("treeSource"));
-    ui->treeSource->setSortingEnabled(true);
-    ui->treeSource->setColumnCount(4);
+    ui->verticalLayoutForTreeView->removeWidget(ui->treeSource);
     setCentralWidget(ui->treeSource);
 
     QDockWidget* dock;
     // text browser
-    ui->textBrowser = new QTextBrowser(MainWindow);
-    ui->textBrowser->setObjectName(QStringLiteral("textBrowser"));
-    ui->textBrowser->setUndoRedoEnabled(true);
-    ui->textBrowser->setReadOnly(false);
-    dock = new QDockWidget(tr("Editor/Viewer"), this);
+    dock = new QDockWidget(tr("Text Editor / Viewer"), this);
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("textbrowser");
+    ui->horizontalLayoutHistoryAndText->removeWidget(ui->textBrowser);
     dock->setWidget(ui->textBrowser);
     addDockWidget(Qt::RightDockWidgetArea, dock);
 
-
     QDockWidget *first_tab;
-
     // history tree
-    ui->treeHistory = new QHistoryTreeWidget(MainWindow);
-    ui->treeHistory->setObjectName(QStringLiteral("treeHistory"));
-    ui->treeHistory->setMinimumSize(QSize(0, 0));
-    ui->treeHistory->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    ui->treeHistory->setSelectionBehavior(QAbstractItemView::SelectItems);
     dock = new QDockWidget(tr("History View"), this);
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("historyview");
+    ui->verticalLayout->removeWidget(ui->treeHistory);
     dock->setWidget(ui->treeHistory);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     first_tab = dock;
 
     // branch tree
-    ui->treeBranches = new QBranchTreeWidget(MainWindow);
-    ui->treeBranches->setObjectName(QStringLiteral("treeBranches"));
-    ui->treeBranches->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    ui->treeBranches->setSelectionBehavior(QAbstractItemView::SelectItems);
-    ui->treeBranches->setSortingEnabled(true);
     dock = new QDockWidget(tr("Branch View"), this);
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("branchview");
+    ui->verticalLayout->removeWidget(ui->treeBranches);
     dock->setWidget(ui->treeBranches);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     tabifyDockWidget(first_tab, dock);
 
+    QLayoutItem *layoutItem {nullptr};
+    QToolBar* pTB {nullptr};
+    pTB = new QToolBar(tr("Git File View States"));
+    pTB->setObjectName("fileviewtoolbar");
+    while ((layoutItem = ui->horizontalLayoutForTreeViewHead->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::TopToolBarArea, pTB);
 
-    QToolBar*pTB;
+    pTB = new QToolBar(tr("Text Editor / Viewer Control"));
+    pTB->setObjectName("textviewtoolbar");
+    while ((layoutItem = ui->horizontalLayoutForTextBrowserHead->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::TopToolBarArea, pTB);
 
-    pTB = new QToolBar(tr("Flags"));
-    ui->label = new QLabel(MainWindow);
-    ui->label->setObjectName(QStringLiteral("label"));
-    pTB->addWidget(ui->label);
-
-    ui->ckSystemFiles = new QCheckBox(MainWindow);
-    ui->ckSystemFiles->setObjectName(QStringLiteral("ckSystemFiles"));
-    ui->ckSystemFiles->setCheckable(true);
-    ui->ckSystemFiles->setChecked(true);
-    pTB->addWidget(ui->ckSystemFiles);
-
-    ui->ckHiddenFiles = new QCheckBox(MainWindow);
-    ui->ckHiddenFiles->setObjectName(QStringLiteral("ckHiddenFiles"));
-    ui->ckHiddenFiles->setMinimumSize(QSize(160, 0));
-    ui->ckHiddenFiles->setChecked(true);
-    pTB->addWidget(ui->ckHiddenFiles);
-
-    ui->ckSymbolicLinks = new QCheckBox(MainWindow);
-    ui->ckSymbolicLinks->setObjectName(QStringLiteral("ckSymbolicLinks"));
-    pTB->addWidget(ui->ckSymbolicLinks);
-
-    ui->ckDirectories = new QCheckBox(MainWindow);
-    ui->ckDirectories->setObjectName(QStringLiteral("ckDirectories"));
-    ui->ckDirectories->setChecked(true);
-    pTB->addWidget(ui->ckDirectories);
-
-    ui->ckFiles = new QCheckBox(MainWindow);
-    ui->ckFiles->setObjectName(QStringLiteral("ckFiles"));
-    ui->ckFiles->setChecked(true);
-    pTB->addWidget(ui->ckFiles);
-
+    pTB = new QToolBar(tr("File Flags"));
+    pTB->setObjectName("fileflagtoolbar");
+    while ((layoutItem = ui->horizontalLayoutFlags->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
     addToolBar(Qt::BottomToolBarArea, pTB);
 
-
-    pTB = new QToolBar(tr("Git files view"));
-
-    ui->comboShowItems = new QComboBox(MainWindow);
-    ui->comboShowItems->setObjectName(QStringLiteral("comboShowItems"));
-    ui->comboShowItems->setMinimumSize(QSize(0, 25));
-    ui->comboShowItems->setMaximumSize(QSize(16777215, 33));
-    pTB->addWidget(ui->comboShowItems);
-
-    ui->ckHideEmptyParent = new QCheckBox(MainWindow);
-    ui->ckHideEmptyParent->setObjectName(QStringLiteral("ui->ckHideEmptyParent"));
-    ui->ckHideEmptyParent->setMaximumSize(QSize(150, 16777215));
-    pTB->addWidget(ui->ckHideEmptyParent);
-
-    ui->ckShortState = new QCheckBox(MainWindow);
-    ui->ckShortState->setObjectName(QStringLiteral("ckShortState"));
-    ui->ckShortState->setMaximumSize(QSize(120, 16777215));
-    pTB->addWidget(ui->ckShortState);
-
-    addToolBar(Qt::TopToolBarArea, pTB);
-
-    pTB = new QToolBar(tr("Other tools"));
-
-    ui->labelHeader = new QLabel(MainWindow);
-    ui->labelHeader->setObjectName(QStringLiteral("labelHeader"));
-    ui->labelHeader->setMaximumSize(QSize(60, 16777215));
-    pTB->addWidget(ui->labelHeader);
-
-    ui->labelFilePath = new QLabel(MainWindow);
-    ui->labelFilePath->setObjectName(QStringLiteral("labelFilePath"));
-    ui->labelFilePath->setWordWrap(true);
-    ui->labelFilePath->setMinimumSize(QSize(150, 25));
-    pTB->addWidget(ui->labelFilePath);
-
-    ui->btnCloseText = new QPushButton(MainWindow);
-    ui->btnCloseText->setObjectName(QStringLiteral("btnCloseText"));
-    ui->btnCloseText->setMinimumSize(QSize(70, 25));
-    ui->btnCloseText->setMaximumSize(QSize(70, 25));
-    pTB->addWidget(ui->btnCloseText);
-
-    ui->btnStoreText = new QPushButton(MainWindow);
-    ui->btnStoreText->setObjectName(QStringLiteral("btnStoreText"));
-    ui->btnStoreText->setEnabled(false);
-    ui->btnStoreText->setMinimumSize(QSize(70, 25));
-    ui->btnStoreText->setMaximumSize(QSize(70, 25));
-    pTB->addWidget(ui->btnStoreText);
-
-    addToolBar(Qt::TopToolBarArea, pTB);
-
-    ui->statusBar = new QStatusBar(MainWindow);
-    ui->statusBar->setObjectName(QStringLiteral("statusBar"));
-    MainWindow->setStatusBar(ui->statusBar);
-
-    ui->retranslateUi(MainWindow);
-
-    QMetaObject::connectSlotsByName(MainWindow);
+    // - remove obsolete layout
+    // NOTE: reguard future layout items, if any
+    delete ui->topLayout;
+    ui->topLayout = nullptr;
+    ui->horizontalLayout = nullptr;
+    ui->horizontalLayoutFlags = nullptr;
+    ui->horizontalLayoutForTextBrowserHead = nullptr;
+    ui->horizontalLayoutForTreeViewHead = nullptr;
+    ui->horizontalLayoutHistoryAndText  = nullptr;
+    ui->horizontalLayoutTool = nullptr;
+    ui->verticalLayout = nullptr;
+    ui->verticalLayoutForTextBrowser = nullptr;
+    ui->verticalLayoutForTreeView = nullptr;
 }
 #endif
 
@@ -1278,9 +1215,9 @@ void MainWindow::showOrHideTrees(bool checked)
 #ifndef DOCKED_VIEWS
     ui->horizontalLayout->setStretch(0, 1);
     ui->horizontalLayout->setStretch(1, checked ? 2 : 1);
+    mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 #endif
 
-    mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
 }
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
@@ -1377,8 +1314,10 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("Adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
 
+#ifndef DOCKED_VIEWS
     connect(mActions.createAction(Cmd::ShowHideTree  , tr("Show/Hide tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideTrees(bool)));
     mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
+#endif
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearTrees()));
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
@@ -1618,7 +1557,9 @@ void MainWindow::perform_custom_command()
                 QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
                 ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), getItemFilePath(mContextMenuSourceTreeItem), fType.mType);
                 ui->textBrowser->setPlainText("");
+#ifndef DOCKED_VIEWS
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
+#endif
             }   break;
         }
         mContextMenuSourceTreeItem = nullptr;
@@ -1752,7 +1693,9 @@ void MainWindow::call_git_branch_command()
             case Cmd::ParseBranchListText:
                 ui->treeBranches->parseBranchListText(fResultStr, fTopItemPath);
                 ui->textBrowser->setPlainText(fGitCommand);
+#ifndef DOCKED_VIEWS
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
+#endif
                 break;
             case Cmd::ParseHistoryText:
             {
@@ -1760,7 +1703,9 @@ void MainWindow::call_git_branch_command()
                 QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
                 ui->treeHistory->parseGitLogHistoryText(fResultStr, fItems.size() ? QVariant(fSourceHook->indexFromItem(fItems[0])) : QVariant(fBranchGitRootPath), fBranchItem, Type::Branch);
                 ui->textBrowser->setPlainText(fGitCommand);
+#ifndef DOCKED_VIEWS
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
+#endif
             }    break;
         }
     }

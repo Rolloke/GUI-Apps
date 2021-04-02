@@ -90,7 +90,7 @@
            <widget class="QComboBox" name="comboShowItems">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>150</width>
               <height>25</height>
              </size>
             </property>
@@ -248,6 +248,15 @@
           </item>
           <item>
            <widget class="QLabel" name="labelFilePath">
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>shows filename of opened file</string>
+            </property>
             <property name="text">
              <string/>
             </property>
