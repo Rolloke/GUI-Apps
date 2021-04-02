@@ -834,6 +834,7 @@ void MainWindow::handleWorker(int aWork)
     mCurrentTask = static_cast<Work::e>(aWork);
     switch(static_cast<Work::e>(aWork))
     {
+    case Work::None: break;
         default:
             iterateTreeItems(*ui->treeSource);
             break;
@@ -846,6 +847,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     switch(static_cast<Work::e>(aMsg))
     {
+    case Work::None: break;
         default:  break;
     }
 }

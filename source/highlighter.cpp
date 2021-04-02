@@ -49,14 +49,93 @@
 ****************************************************************************/
 
 #include "highlighter.h"
+#include "xml_functions.h"
+#include <QtXml/QDomDocument>
+
+const QString Highlighter::mDefault {"default"};
 
 Highlighter::Highlighter(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
-    HighlightingRule rule;
+    mCurrentLanguage = "";
+    load_default_language();
+    load_language("cpp");
+}
 
-    keywordFormat.setForeground(Qt::darkBlue);
-    keywordFormat.setFontWeight(QFont::Bold);
+void Highlighter::load_language(QString aLanguage)
+{
+    QString file_name {"./langs.model.xml"};
+    QDomDocument fDoc(file_name);
+    QFile file(file_name);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        fDoc.setContent(&file);
+        file.close();
+    }
+
+    auto language_node = findElement(fDoc.firstChild(), "Language#name=" + aLanguage, true);
+    if (!language_node.isNull())
+    {
+        HighlightingRule rule;
+        Language language;
+
+        QString extensions   = getValue(language_node.attributes().namedItem("ext"), QString(""), true);
+        if (extensions.size())
+        {
+            auto list = extensions.split(" ");
+            for (auto& entry : list)
+            {
+                mExtensionToLanguage[entry] = aLanguage;
+            }
+        }
+        QString commentLine  = getValue(language_node.attributes().namedItem("commentLine"), QString(""), true);
+        if (commentLine.size())
+        {
+            language.singleLineCommentFormat.setForeground(Qt::red);
+            commentLine += "[^\n]*";
+            rule.pattern = QRegularExpression(commentLine);
+            rule.format = language.singleLineCommentFormat;
+            language.highlightingRules.append(rule);
+        }
+        QString commentStart = getValue(language_node.attributes().namedItem("commentStart"), QString(""), true);
+        if (commentStart.size())
+        {
+            language.commentStartExpression = QRegularExpression(commentStart);
+        }
+        QString commentEnd   = getValue(language_node.attributes().namedItem("commentEnd"), QString(""), true);
+        if (commentEnd.size())
+        {
+            language.commentStartExpression = QRegularExpression(commentEnd);
+        }
+        for(QDomNode n = language_node.firstChild(); !n.isNull(); n = n.nextSibling())
+        {
+            QString name = getValue(n.attributes().namedItem("name"), QString(""), true);
+            if (name.size())
+            {
+                language.keywordFormat.setForeground(Qt::darkBlue);
+                language.keywordFormat.setFontWeight(QFont::Bold);
+                QString keys = getValue(n, QString(""));
+                auto list = keys.split(" ");
+                for (auto& entry : list)
+                {
+                    QString pattern = tr("\\b%1\\b").arg(entry);
+                    rule.pattern = QRegularExpression(pattern);
+                    rule.format = language.keywordFormat;
+                    language.highlightingRules.append(rule);
+                }
+            }
+        }
+        mLanguages[aLanguage] = language;
+    }
+}
+
+void Highlighter::load_default_language()
+{
+    HighlightingRule rule;
+    Language language;
+
+    language.keywordFormat.setForeground(Qt::darkBlue);
+    language.keywordFormat.setFontWeight(QFont::Bold);
     const QString keywordPatterns[] =
     {
         QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
@@ -70,46 +149,69 @@ Highlighter::Highlighter(QTextDocument *parent)
         QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
         QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
         QStringLiteral("\\bfor\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("\\bdo\\b"),
-        QStringLiteral("\\bswitch\\b"), QStringLiteral("\\bcase\\b"), QStringLiteral("\\bif\\b")
+        QStringLiteral("\\bswitch\\b"), QStringLiteral("\\bcase\\b"), QStringLiteral("\\bif\\b"),
+        QStringLiteral("\\bauto\\b"), QStringLiteral("\\belse\\b"), QStringLiteral("\\bstatic_cast\\b"),
+        QStringLiteral("\\bdynamic_cast\\b"), QStringLiteral("\\breinterpret_cast\\b"), QStringLiteral("\\bstatic_assert\\b"),
+        QStringLiteral("\\busing\\b")
     };
+
     for (const QString &pattern : keywordPatterns)
     {
         rule.pattern = QRegularExpression(pattern);
-        rule.format = keywordFormat;
-        highlightingRules.append(rule);
+        rule.format = language.keywordFormat;
+        language.highlightingRules.append(rule);
     }
 
-    classFormat.setFontWeight(QFont::Bold);
-    classFormat.setForeground(Qt::darkMagenta);
+    language.classFormat.setFontWeight(QFont::Bold);
+    language.classFormat.setForeground(Qt::darkMagenta);
     rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+    rule.format = language.classFormat;
+    language.highlightingRules.append(rule);
 
-    singleLineCommentFormat.setForeground(Qt::red);
+    language.singleLineCommentFormat.setForeground(Qt::red);
     rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
-    rule.format = singleLineCommentFormat;
-    highlightingRules.append(rule);
+    rule.format = language.singleLineCommentFormat;
+    language.highlightingRules.append(rule);
 
-    multiLineCommentFormat.setForeground(Qt::red);
+    language.multiLineCommentFormat.setForeground(Qt::red);
 
-    quotationFormat.setForeground(Qt::darkGreen);
+    language.quotationFormat.setForeground(Qt::darkGreen);
     rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    rule.format = language.quotationFormat;
+    language.highlightingRules.append(rule);
 
-    functionFormat.setFontItalic(true);
-    functionFormat.setForeground(Qt::blue);
+    language.preprocessorFormat.setFontWeight(QFont::Bold);
+    language.preprocessorFormat.setForeground(Qt::darkGreen);
+    rule.pattern = QRegularExpression(QStringLiteral("#.*"));
+    rule.format = language.preprocessorFormat;
+    language.highlightingRules.append(rule);
+
+    language.functionFormat.setFontItalic(true);
+    language.functionFormat.setForeground(Qt::blue);
     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
-    rule.format = functionFormat;
-    highlightingRules.append(rule);
+    rule.format = language.functionFormat;
+    language.highlightingRules.append(rule);
 
-    commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
-    commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
+    language.commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
+    language.commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
+
+    mLanguages[mDefault] = language;
+}
+
+const Highlighter::Language& Highlighter::get_language()
+{
+    const auto found_language = mLanguages.find(mCurrentLanguage);
+    if (found_language != mLanguages.end())
+    {
+        return found_language.value();
+    }
+    return mLanguages[mDefault];
 }
 
 void Highlighter::highlightBlock(const QString &text)
 {
-    for (const HighlightingRule &rule : highlightingRules)
+    const Language& language = get_language();
+    for (const HighlightingRule &rule : language.highlightingRules)
     {
         QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
         while (matchIterator.hasNext())
@@ -124,12 +226,12 @@ void Highlighter::highlightBlock(const QString &text)
     int startIndex = 0;
     if (previousBlockState() != 1)
     {
-        startIndex = text.indexOf(commentStartExpression);
+        startIndex = text.indexOf(language.commentStartExpression);
     }
 
     while (startIndex >= 0)
     {
-        QRegularExpressionMatch match = commentEndExpression.match(text, startIndex);
+        QRegularExpressionMatch match = language.commentEndExpression.match(text, startIndex);
         int endIndex = match.capturedStart();
         int commentLength = 0;
         if (endIndex == -1)
@@ -141,8 +243,8 @@ void Highlighter::highlightBlock(const QString &text)
         {
             commentLength = endIndex - startIndex + match.capturedLength();
         }
-        setFormat(startIndex, commentLength, multiLineCommentFormat);
-        startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
+        setFormat(startIndex, commentLength, language.multiLineCommentFormat);
+        startIndex = text.indexOf(language.commentStartExpression, startIndex + commentLength);
     }
 }
 

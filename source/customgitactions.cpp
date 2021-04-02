@@ -262,7 +262,7 @@ void CustomGitActions::on_btnToLeft_clicked()
         int fIconRow     = ui->tableViewVarious->currentIndex().row();
         auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
         fCmdVector.erase(fCmdVector.begin()+fIconRow);
-        int fSelected = fCmdVector.size()-1;
+        int fSelected = static_cast<int>(fCmdVector.size()-1);
         on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
         ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fSelected, ActionsTable::ID), QItemSelectionModel::Select);
         on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
@@ -275,7 +275,7 @@ void CustomGitActions::on_btnToRight_clicked()
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, ActionsTable::ID)).toInt());
     auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
-    int fSelected = fCmdVector.size()-1;
+    int fSelected = static_cast<int>(fCmdVector.size()-1);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fSelected, 0), QItemSelectionModel::Select);
     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
@@ -334,7 +334,7 @@ void CustomGitActions::on_btnDelete_clicked()
                 if (i == ui->comboBoxVarious->currentIndex())
                 {
                     on_comboBoxVarious_currentIndexChanged(i);
-                    ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fVector.size()-1, ActionsTable::ID), QItemSelectionModel::Select);
+                    ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(static_cast<int>(fVector.size()-1), ActionsTable::ID), QItemSelectionModel::Select);
                     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
                 }
             }

@@ -75,17 +75,32 @@ private:
         QRegularExpression pattern;
         QTextCharFormat format;
     };
-    QVector<HighlightingRule> highlightingRules;
+    struct Language
+    {
+        QVector<HighlightingRule> highlightingRules;
 
-    QRegularExpression commentStartExpression;
-    QRegularExpression commentEndExpression;
+        QRegularExpression commentStartExpression;
+        QRegularExpression commentEndExpression;
 
-    QTextCharFormat keywordFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
-    QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
+        QTextCharFormat keywordFormat;
+        QTextCharFormat classFormat;
+        QTextCharFormat singleLineCommentFormat;
+        QTextCharFormat multiLineCommentFormat;
+        QTextCharFormat quotationFormat;
+        QTextCharFormat functionFormat;
+        QTextCharFormat preprocessorFormat;
+    };
+
+
+    void load_language(QString fLanguage);
+    void load_default_language();
+    const Language& get_language();
+
+
+    QMap<QString, Language> mLanguages;
+    QMap<QString, QString> mExtensionToLanguage;
+    QString mCurrentLanguage;
+    static const QString mDefault;
 };
 
 #endif // HIGHLIGHTER_H
