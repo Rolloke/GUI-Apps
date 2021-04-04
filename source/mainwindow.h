@@ -54,7 +54,9 @@ private Q_SLOTS:
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
+#ifndef DOCKED_VIEWS
     void showOrHideTrees(bool checked);
+#endif
     void clearTrees();
 
     void performCustomGitActionSettings();
@@ -159,6 +161,7 @@ private:
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
+    void     showDockedWidget(QWidget* widget);
 #endif
 
     Ui::MainWindow*       ui;

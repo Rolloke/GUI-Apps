@@ -58,14 +58,41 @@
 QT_BEGIN_NAMESPACE
 class QTextDocument;
 class QDomDocument;
+class QSettings;
 QT_END_NAMESPACE
 
 
 class Highlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
-
+private:
+    struct HighlightingRule
+    {
+        QRegularExpression pattern;
+        QTextCharFormat format;
+    };
 public:
+    struct Language
+    {
+        static void load(QSettings&);
+        static void store(QSettings&);
+        static QString to_string(const QTextCharFormat&);
+        static void convert(QTextCharFormat&, const QString&);
+        enum { keyword_formats=8 };
+        QVector<HighlightingRule> highlightingRules;
+
+        QRegularExpression commentStartExpression;
+        QRegularExpression commentEndExpression;
+
+        static QTextCharFormat mKeywordFormat[keyword_formats];
+        static QTextCharFormat mNumbersFormat;
+        static QTextCharFormat mSingleLineCommentFormat;
+        static QTextCharFormat mMultiLineCommentFormat;
+        static QTextCharFormat mQuotationFormat;
+        static QTextCharFormat mFunctionFormat;
+        static QTextCharFormat mPreprocessorFormat;
+    };
+
     Highlighter(QTextDocument *parent = 0);
 
     void setExtension(const QString& ext);
@@ -74,28 +101,6 @@ protected:
     void highlightBlock(const QString &text) override;
 
 private:
-    struct HighlightingRule
-    {
-        QRegularExpression pattern;
-        QTextCharFormat format;
-    };
-    struct Language
-    {
-        Language();
-        enum { keyword_formats=8 };
-        QVector<HighlightingRule> highlightingRules;
-
-        QRegularExpression commentStartExpression;
-        QRegularExpression commentEndExpression;
-
-        QTextCharFormat keywordFormat[keyword_formats];
-        QTextCharFormat numbersFormat;
-        QTextCharFormat singleLineCommentFormat;
-        QTextCharFormat multiLineCommentFormat;
-        QTextCharFormat quotationFormat;
-        QTextCharFormat functionFormat;
-        QTextCharFormat preprocessorFormat;
-    };
 
 
     void load_language_list();
