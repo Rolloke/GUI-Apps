@@ -57,7 +57,9 @@
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
+class QDomDocument;
 QT_END_NAMESPACE
+
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -65,6 +67,8 @@ class Highlighter : public QSyntaxHighlighter
 
 public:
     Highlighter(QTextDocument *parent = 0);
+
+    void setExtension(const QString& ext);
 
 protected:
     void highlightBlock(const QString &text) override;
@@ -77,13 +81,15 @@ private:
     };
     struct Language
     {
+        Language();
+        enum { keyword_formats=8 };
         QVector<HighlightingRule> highlightingRules;
 
         QRegularExpression commentStartExpression;
         QRegularExpression commentEndExpression;
 
-        QTextCharFormat keywordFormat;
-        QTextCharFormat classFormat;
+        QTextCharFormat keywordFormat[keyword_formats];
+        QTextCharFormat numbersFormat;
         QTextCharFormat singleLineCommentFormat;
         QTextCharFormat multiLineCommentFormat;
         QTextCharFormat quotationFormat;
@@ -92,13 +98,16 @@ private:
     };
 
 
+    void load_language_list();
     void load_language(QString fLanguage);
     void load_default_language();
     const Language& get_language();
 
 
-    QMap<QString, Language> mLanguages;
-    QMap<QString, QString> mExtensionToLanguage;
+    static QMap<QString, Language> mLanguages;
+    static QMap<QString, QString>  mExtensionToLanguage;
+    static QSharedPointer<QDomDocument> mDoc;
+
     QString mCurrentLanguage;
     static const QString mDefault;
 };

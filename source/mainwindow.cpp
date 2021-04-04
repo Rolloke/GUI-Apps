@@ -822,6 +822,7 @@ void MainWindow::apendTextToBrowser(const QString& aText, bool append)
     {
         on_btnCloseText_clicked();
     }
+    mHighlighter->setExtension("");
     ui->textBrowser->insertPlainText(aText + getLineFeed());
     ui->textBrowser->textCursor().setPosition(QTextCursor::End);
 }
@@ -1026,7 +1027,10 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     QFile file(fFileName);
     if (file.open(QIODevice::ReadOnly))
     {
+        QFileInfo file_info(fFileName);
         ui->labelFilePath->setText(fFileName);
+        mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
+        mHighlighter->setExtension(file_info.suffix());
         ui->textBrowser->setText(file.readAll());
         ui->btnStoreText->setEnabled(false);
     }
@@ -1225,6 +1229,7 @@ void MainWindow::showOrHideTrees(bool checked)
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
     on_btnCloseText_clicked();
+    mHighlighter->setExtension("");
     ui->textBrowser->setPlainText(ui->treeHistory->itemClicked(aItem, aColumn));
 }
 
@@ -1694,6 +1699,7 @@ void MainWindow::call_git_branch_command()
                 break;
             case Cmd::ParseBranchListText:
                 ui->treeBranches->parseBranchListText(fResultStr, fTopItemPath);
+                mHighlighter->setExtension("");
                 ui->textBrowser->setPlainText(fGitCommand);
 #ifndef DOCKED_VIEWS
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
@@ -1704,6 +1710,7 @@ void MainWindow::call_git_branch_command()
                 auto fItems = ui->treeSource->findItems(fBranchGitRootPath, Qt::MatchExactly);
                 QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
                 ui->treeHistory->parseGitLogHistoryText(fResultStr, fItems.size() ? QVariant(fSourceHook->indexFromItem(fItems[0])) : QVariant(fBranchGitRootPath), fBranchItem, Type::Branch);
+                mHighlighter->setExtension("");
                 ui->textBrowser->setPlainText(fGitCommand);
 #ifndef DOCKED_VIEWS
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
