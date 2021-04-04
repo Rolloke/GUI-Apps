@@ -92,11 +92,14 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #endif
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
+    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
     QObject::connect(this, SIGNAL(doWork(int)), &mWorker, SLOT(doWork(int)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+
+    Highlighter::Language::load(fSettings);
 
     mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
 
@@ -110,7 +113,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
 
 
-    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
@@ -252,6 +254,8 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->ckFiles, isChecked);
     STORE_PTR(fSettings, ui->ckDirectories, isChecked);
     fSettings.endGroup();
+
+    Highlighter::Language::store(fSettings);
 
     fSettings.beginGroup(config::sGroupView);
     STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
@@ -418,6 +422,20 @@ void MainWindow::createDockWindows()
     ui->verticalLayoutForTextBrowser = nullptr;
     ui->verticalLayoutForTreeView = nullptr;
 }
+
+void MainWindow::showDockedWidget(QWidget* widget)
+{
+    QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
+    if (parent)
+    {
+        if (!parent->isVisible())
+        {
+            parent->setVisible(true);
+        }
+        parent->raise();
+    }
+}
+
 #endif
 
 QString MainWindow::getConfigName() const
@@ -825,6 +843,9 @@ void MainWindow::apendTextToBrowser(const QString& aText, bool append)
     mHighlighter->setExtension("");
     ui->textBrowser->insertPlainText(aText + getLineFeed());
     ui->textBrowser->textCursor().setPosition(QTextCursor::End);
+#ifdef DOCKED_VIEWS
+        showDockedWidget(ui->textBrowser);
+#endif
 }
 
 
@@ -1033,6 +1054,9 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         mHighlighter->setExtension(file_info.suffix());
         ui->textBrowser->setText(file.readAll());
         ui->btnStoreText->setEnabled(false);
+#ifdef DOCKED_VIEWS
+        showDockedWidget(ui->textBrowser);
+#endif
     }
 }
 
@@ -1188,6 +1212,7 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
     }
 }
 
+#ifndef DOCKED_VIEWS
 void MainWindow::showOrHideTrees(bool checked)
 {
     if (checked)
@@ -1218,19 +1243,21 @@ void MainWindow::showOrHideTrees(bool checked)
             ui->treeBranches->setVisible(checked);
         }
     }
-#ifndef DOCKED_VIEWS
+
     ui->horizontalLayout->setStretch(0, 1);
     ui->horizontalLayout->setStretch(1, checked ? 2 : 1);
     mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
-#endif
-
 }
+#endif
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
     on_btnCloseText_clicked();
     mHighlighter->setExtension("");
     ui->textBrowser->setPlainText(ui->treeHistory->itemClicked(aItem, aColumn));
+#ifdef DOCKED_VIEWS
+    showDockedWidget(ui->textBrowser);
+#endif
 }
 
 void MainWindow::initContextMenuActions()
@@ -1409,13 +1436,10 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::clearTrees()
 {
-    if (ui->treeHistory->isVisible())
+    QTreeWidget * tree = focusedTreeWidget(false);
+    if (tree)
     {
-        ui->treeHistory->clear();
-    }
-    if (ui->treeBranches->isVisible())
-    {
-        ui->treeBranches->clear();
+        tree->clear();
     }
 }
 
@@ -1564,7 +1588,9 @@ void MainWindow::perform_custom_command()
                 QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
                 ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), getItemFilePath(mContextMenuSourceTreeItem), fType.mType);
                 ui->textBrowser->setPlainText("");
-#ifndef DOCKED_VIEWS
+#ifdef DOCKED_VIEWS
+                showDockedWidget(ui->treeHistory);
+#else
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
 #endif
             }   break;
@@ -1691,20 +1717,32 @@ void MainWindow::call_git_branch_command()
         switch (fVariantList[ActionList::Data::Action].toUInt())
         {
             case Cmd::UpdateItemStatus:
+            {
                 fResultStr.clear();
                 fGitCommand  = ui->treeBranches->getBranchTopItemText();
                 fTopItemPath = ui->treeBranches->getSelectedBranchGitRootPath();
                 execute(fGitCommand, fResultStr);
-                ui->treeBranches->parseBranchListText(fGitCommand + getLineFeed() + fResultStr + getLineFeed(), fTopItemPath);
-                break;
+                QString fParseText = fGitCommand + getLineFeed() + fResultStr + getLineFeed();
+                ui->treeBranches->parseBranchListText(fParseText, fTopItemPath);
+                mHighlighter->setExtension("");
+                ui->textBrowser->setPlainText(fParseText);
+#ifdef DOCKED_VIEWS
+                showDockedWidget(ui->treeBranches);
+#else
+                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
+#endif
+            }   break;
             case Cmd::ParseBranchListText:
+            {
                 ui->treeBranches->parseBranchListText(fResultStr, fTopItemPath);
                 mHighlighter->setExtension("");
                 ui->textBrowser->setPlainText(fGitCommand);
-#ifndef DOCKED_VIEWS
+#ifdef DOCKED_VIEWS
+                showDockedWidget(ui->treeBranches);
+#else
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
 #endif
-                break;
+            }    break;
             case Cmd::ParseHistoryText:
             {
                 auto fItems = ui->treeSource->findItems(fBranchGitRootPath, Qt::MatchExactly);
@@ -1712,7 +1750,9 @@ void MainWindow::call_git_branch_command()
                 ui->treeHistory->parseGitLogHistoryText(fResultStr, fItems.size() ? QVariant(fSourceHook->indexFromItem(fItems[0])) : QVariant(fBranchGitRootPath), fBranchItem, Type::Branch);
                 mHighlighter->setExtension("");
                 ui->textBrowser->setPlainText(fGitCommand);
-#ifndef DOCKED_VIEWS
+#ifdef DOCKED_VIEWS
+                showDockedWidget(ui->treeHistory);
+#else
                 mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
 #endif
             }    break;

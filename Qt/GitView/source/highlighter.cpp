@@ -50,54 +50,151 @@
 
 #include "highlighter.h"
 #include "xml_functions.h"
+#include "helper.h"
+
 #include <QtXml/QDomDocument>
+#include <QSettings>
+#include <QDir>
 
 const QString Highlighter::mDefault {"git"};
 QMap<QString, Highlighter::Language> Highlighter::mLanguages;
 QMap<QString, QString>  Highlighter::mExtensionToLanguage;
 QSharedPointer<QDomDocument> Highlighter::mDoc;
 
+QTextCharFormat Highlighter::Language::mKeywordFormat[Highlighter::Language::keyword_formats];
+QTextCharFormat Highlighter::Language::mNumbersFormat;
+QTextCharFormat Highlighter::Language::mSingleLineCommentFormat;
+QTextCharFormat Highlighter::Language::mMultiLineCommentFormat;
+QTextCharFormat Highlighter::Language::mQuotationFormat;
+QTextCharFormat Highlighter::Language::mFunctionFormat;
+QTextCharFormat Highlighter::Language::mPreprocessorFormat;
 
-Highlighter::Language::Language()
+
+#define LOAD_FORMAT(SETTINGS, ITEM) Highlighter::Language::convert(ITEM, SETTINGS.value(getSettingsName(#ITEM)).toString());
+
+
+
+void Highlighter::Language::load(QSettings& fSettings)
 {
-    singleLineCommentFormat.setForeground(Qt::red);
-    multiLineCommentFormat.setForeground(Qt::red);
+    mSingleLineCommentFormat.setForeground(Qt::red);
+    mMultiLineCommentFormat.setForeground(Qt::red);
 
-    keywordFormat[0].setForeground(Qt::darkBlue);
-    keywordFormat[0].setFontWeight(QFont::Medium);
+    mKeywordFormat[0].setForeground(Qt::darkBlue);
+    mKeywordFormat[0].setFontWeight(QFont::Medium);
 
-    keywordFormat[1].setForeground(Qt::darkCyan);
-    keywordFormat[1].setFontWeight(QFont::Medium);
+    mKeywordFormat[1].setForeground(Qt::darkCyan);
+    mKeywordFormat[1].setFontWeight(QFont::Medium);
 
-    keywordFormat[2].setForeground(Qt::darkGreen);
-    keywordFormat[2].setFontWeight(QFont::Medium);
+    mKeywordFormat[2].setForeground(Qt::darkGreen);
+    mKeywordFormat[2].setFontWeight(QFont::Medium);
 
-    keywordFormat[3].setForeground(Qt::darkYellow);
-    keywordFormat[3].setFontWeight(QFont::Medium);
+    mKeywordFormat[3].setForeground(Qt::darkYellow);
+    mKeywordFormat[3].setFontWeight(QFont::Medium);
 
-    keywordFormat[4].setForeground(Qt::darkBlue);
-    keywordFormat[4].setFontWeight(QFont::Bold);
+    mKeywordFormat[4].setForeground(Qt::darkBlue);
+    mKeywordFormat[4].setFontWeight(QFont::Bold);
 
-    keywordFormat[5].setForeground(Qt::darkCyan);
-    keywordFormat[5].setFontWeight(QFont::Bold);
+    mKeywordFormat[5].setForeground(Qt::darkCyan);
+    mKeywordFormat[5].setFontWeight(QFont::Bold);
 
-    keywordFormat[6].setForeground(Qt::darkYellow);
-    keywordFormat[6].setFontWeight(QFont::Bold);
+    mKeywordFormat[6].setForeground(Qt::darkYellow);
+    mKeywordFormat[6].setFontWeight(QFont::Bold);
 
-    keywordFormat[7].setForeground(Qt::darkGreen);
-    keywordFormat[7].setFontWeight(QFont::Bold);
+    mKeywordFormat[7].setForeground(Qt::darkGreen);
+    mKeywordFormat[7].setFontWeight(QFont::Bold);
+
+    mNumbersFormat.setFontWeight(QFont::Medium);
+    mNumbersFormat.setForeground(Qt::blue);
+
+    mQuotationFormat.setForeground(Qt::darkGreen);
+
+    mPreprocessorFormat.setFontWeight(QFont::Bold);
+    mPreprocessorFormat.setForeground(Qt::darkGreen);
+
+    mFunctionFormat.setFontItalic(true);
+    mFunctionFormat.setForeground(Qt::blue);
+
+    fSettings.beginGroup("Highlighter");
+    LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
+    LOAD_FORMAT(fSettings, mMultiLineCommentFormat);
+    LOAD_FORMAT(fSettings, mKeywordFormat[0]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[1]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[2]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[3]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[4]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[5]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[6]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[7]);
+    LOAD_FORMAT(fSettings, mFunctionFormat);
+    LOAD_FORMAT(fSettings, mNumbersFormat);
+    LOAD_FORMAT(fSettings, mPreprocessorFormat);
+    LOAD_FORMAT(fSettings, mQuotationFormat);
+    fSettings.endGroup();
+}
 
 
-    numbersFormat.setFontWeight(QFont::Medium);
-    numbersFormat.setForeground(Qt::blue);
+void Highlighter::Language::store( QSettings& fSettings)
+{
+    fSettings.beginGroup("Highlighter");
+    STORE_STRF(fSettings, mSingleLineCommentFormat, Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mMultiLineCommentFormat, Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[0], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[1], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[2], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[3], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[4], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[5], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[6], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[7], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mFunctionFormat, Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mNumbersFormat, Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mPreprocessorFormat, Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mQuotationFormat, Highlighter::Language::to_string);
+    fSettings.endGroup();
+}
 
-    quotationFormat.setForeground(Qt::darkGreen);
+QString weight_name(int weight)
+{
+    switch (weight)
+    {
+        case QFont::Thin:       return "Thin"; break;
+        case QFont::ExtraLight: return "ExtraLight"; break;
+        case QFont::Light:      return "Light"; break;
+        case QFont::Normal:     return "Normal"; break;
+        case QFont::Medium:     return "Medium"; break;
+        case QFont::DemiBold:   return "DemiBold"; break;
+        case QFont::Bold:       return "Bold"; break;
+        case QFont::ExtraBold:  return "ExtraBold"; break;
+        case QFont::Black:      return "Black"; break;
+        default: return "";  break;
+    }
+}
 
-    preprocessorFormat.setFontWeight(QFont::Bold);
-    preprocessorFormat.setForeground(Qt::darkGreen);
+QString Highlighter::Language::to_string(const QTextCharFormat & format)
+{
+    return tr("%1,%2,%3").arg(format.foreground().color().name()).arg(weight_name(format.fontWeight())).arg(format.fontItalic());
+}
 
-    functionFormat.setFontItalic(true);
-    functionFormat.setForeground(Qt::blue);
+void Highlighter::Language::convert(QTextCharFormat& format, const QString& string)
+{
+    if (string.size())
+    {
+        auto string_list = string.split(',');
+        if (string_list.count() == 3)
+        {
+            format.setForeground(QBrush(QColor(string_list[0])));
+            if (string_list[1] == weight_name(QFont::Thin)) format.setFontWeight(QFont::Thin);
+            else if (string_list[1] == weight_name(QFont::ExtraLight)) format.setFontWeight(QFont::ExtraLight);
+            else if (string_list[1] == weight_name(QFont::Light)) format.setFontWeight(QFont::Light);
+            else if (string_list[1] == weight_name(QFont::Normal)) format.setFontWeight(QFont::Normal);
+            else if (string_list[1] == weight_name(QFont::Medium)) format.setFontWeight(QFont::Medium);
+            else if (string_list[1] == weight_name(QFont::DemiBold)) format.setFontWeight(QFont::DemiBold);
+            else if (string_list[1] == weight_name(QFont::Bold)) format.setFontWeight(QFont::Bold);
+            else if (string_list[1] == weight_name(QFont::ExtraBold)) format.setFontWeight(QFont::ExtraBold);
+            else if (string_list[1] == weight_name(QFont::Black)) format.setFontWeight(QFont::Black);
+            format.setFontItalic(string_list[2].toInt());
+        }
+    }
 }
 
 Highlighter::Highlighter(QTextDocument *parent)
@@ -105,7 +202,10 @@ Highlighter::Highlighter(QTextDocument *parent)
 {
     if (!mDoc)
     {
-        QString file_name {"./langs.model.xml"};
+        QString file_name {"langs.model.xml"};
+#ifdef __linux__
+        file_name = QDir::homePath() + "/.config/" + file_name;
+#endif
         QFile file(file_name);
         if (file.open(QIODevice::ReadOnly))
         {
@@ -175,7 +275,7 @@ void Highlighter::load_language(QString language_name)
             {
                 commentLine += "[^\n]*";
                 rule.pattern = QRegularExpression(commentLine);
-                rule.format = language.singleLineCommentFormat;
+                rule.format = language.mSingleLineCommentFormat;
                 language.highlightingRules.append(rule);
             }
             QString commentStart = getValue(language_node.attributes().namedItem("commentStart"), QString(""), true);
@@ -190,7 +290,7 @@ void Highlighter::load_language(QString language_name)
             }
 
             rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-            rule.format = language.quotationFormat;
+            rule.format = language.mQuotationFormat;
             language.highlightingRules.append(rule);
 
             int k=0;
@@ -203,19 +303,19 @@ void Highlighter::load_language(QString language_name)
                     if (name == "function")
                     {
                         rule.pattern = QRegularExpression(keys);
-                        rule.format = language.functionFormat;
+                        rule.format = language.mFunctionFormat;
                         language.highlightingRules.append(rule);
                     }
                     else if (name == "preprocessor")
                     {
                         rule.pattern = QRegularExpression(keys);
-                        rule.format = language.preprocessorFormat;
+                        rule.format = language.mPreprocessorFormat;
                         language.highlightingRules.append(rule);
                     }
                     else if (name == "numbers")
                     {
                         rule.pattern = QRegularExpression(keys);
-                        rule.format = language.numbersFormat;
+                        rule.format = language.mNumbersFormat;
                         language.highlightingRules.append(rule);
                     }
                     else
@@ -226,7 +326,7 @@ void Highlighter::load_language(QString language_name)
                         }
                         QString pattern = tr("\\b(?:%1)\\b").arg(keys);
                         rule.pattern = QRegularExpression(pattern);
-                        rule.format = language.keywordFormat[k];
+                        rule.format = language.mKeywordFormat[k];
                         language.highlightingRules.append(rule);
                         if (k < Language::keyword_formats) ++k;
                     }
@@ -243,23 +343,27 @@ void Highlighter::load_default_language()
     Language language;
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b[0-9\\+\\-\\.]+\\b"));
-    rule.format = language.numbersFormat;
+    rule.format = language.mNumbersFormat;
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("#.*"));
-    rule.format = language.singleLineCommentFormat;
+    rule.format = language.mSingleLineCommentFormat;
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-    rule.format = language.quotationFormat;
+    rule.format = language.mQuotationFormat;
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:git|add|status|difftool|mergetool|diff|rm|reset|commit|mv|checkout|log|push|pull|show|branch)\\b"));
-    rule.format = language.keywordFormat[0];
+    rule.format = language.mKeywordFormat[0];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:D|M|A|R|DD|AU|UD|UA|DU|AA|UU|\\?)\\b"));
-    rule.format = language.keywordFormat[1];
+    rule.format = language.mKeywordFormat[1];
+    language.highlightingRules.append(rule);
+
+    rule.pattern = QRegularExpression(QStringLiteral("-[\\w]+|--[\\w]+"));
+    rule.format = language.mKeywordFormat[2];
     language.highlightingRules.append(rule);
 
     mLanguages[mDefault] = language;
@@ -314,7 +418,7 @@ void Highlighter::highlightBlock(const QString &text)
             }
             if (commentLength)
             {
-                setFormat(startIndex, commentLength, language.multiLineCommentFormat);
+                setFormat(startIndex, commentLength, language.mMultiLineCommentFormat);
                 startIndex = text.indexOf(language.commentStartExpression, startIndex + commentLength);
             }
             else
