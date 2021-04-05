@@ -77,6 +77,7 @@ const QString sModified("Modified");
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
+    , mDockedWidgetMinMaxButtons(true)
     , ui(new Ui::MainWindow)
     , mWorker(this)
     , mCurrentTask(Work::None)
@@ -85,10 +86,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
 {
+    ui->setupUi(this);
 #ifdef DOCKED_VIEWS
     createDockWindows();
-#else
-    ui->setupUi(this);
 #endif
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
@@ -224,11 +224,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         font.setPointSize(10);
         ui->textBrowser->setFont(font);
     }
+
+#ifdef DOCKED_VIEWS
     QByteArray fWindowGeometry;
     LOAD_STR(fSettings, fWindowGeometry, toByteArray);
     QByteArray fWindowState;
     LOAD_STR(fSettings, fWindowState, toByteArray);
-    fSettings.endGroup();
+    LOAD_STR(fSettings, mDockedWidgetMinMaxButtons, toBool);
 
     if (fWindowGeometry.size())
     {
@@ -238,7 +240,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         restoreState(fWindowState);
     }
+#endif
 
+    fSettings.endGroup();
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
@@ -265,6 +269,7 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, fWindowGeometry);
     auto fWindowState = saveState();
     STORE_STR(fSettings, fWindowState);
+    STORE_STR(fSettings, mDockedWidgetMinMaxButtons);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
@@ -336,10 +341,8 @@ MainWindow::~MainWindow()
 #ifdef DOCKED_VIEWS
 void MainWindow::createDockWindows()
 {
-    // initialize widgets from forms user interface
-    ui->setupUi(this);
-
-    // then redirect user interface widgets to docked layout
+    // use initialized widgets from forms user interface
+    // and redirect user interface widgets to docked layout
     // - first remove the widgets from layout items
     // - add widgets
     //   - to central widget
@@ -359,6 +362,7 @@ void MainWindow::createDockWindows()
     ui->horizontalLayoutHistoryAndText->removeWidget(ui->textBrowser);
     dock->setWidget(ui->textBrowser);
     addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
 
     QDockWidget *first_tab;
     // history tree
@@ -368,6 +372,7 @@ void MainWindow::createDockWindows()
     ui->verticalLayout->removeWidget(ui->treeHistory);
     dock->setWidget(ui->treeHistory);
     addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     first_tab = dock;
 
     // branch tree
@@ -377,6 +382,7 @@ void MainWindow::createDockWindows()
     ui->verticalLayout->removeWidget(ui->treeBranches);
     dock->setWidget(ui->treeBranches);
     addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
     QLayoutItem *layoutItem {nullptr};
@@ -433,6 +439,38 @@ void MainWindow::showDockedWidget(QWidget* widget)
             parent->setVisible(true);
         }
         parent->raise();
+    }
+}
+
+void MainWindow::dockWidget_topLevelChanged(bool)
+{
+    QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
+    if (dw && mDockedWidgetMinMaxButtons)
+    {
+        static Qt::WindowFlags oldDocWidgetFlags = 0;
+        if (dw->isFloating())
+        {
+            auto customized = Qt::CustomizeWindowHint |
+                              Qt::Window | Qt::WindowMinimizeButtonHint |
+                              Qt::WindowMaximizeButtonHint |
+                              Qt::WindowCloseButtonHint;
+
+            dw->setWindowFlags(customized);
+
+            auto old_flags = dw->windowFlags();
+            old_flags &= ~customized;
+
+            if (!oldDocWidgetFlags)
+            {
+                oldDocWidgetFlags = old_flags;
+            }
+            dw->show();
+        }
+        else
+        {
+            dw->setWindowFlags(oldDocWidgetFlags);
+            dw->show();
+        }
     }
 }
 
@@ -1359,6 +1397,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(gitview_about()));
 
     connect(mActions.createAction(Cmd::Delete, tr("Delete..."), tr("Delete file or folder")), SIGNAL(triggered()), this, SLOT(deleteFileOrFolder()));
+    connect(mActions.createAction(Cmd::SelectTextBrowserLanguage, tr("Select Language..."), tr("Select language for text highlighting")), SIGNAL(triggered()), this, SLOT(selectTextBrowserLanguage()));
 
 
     for (const auto& fAction : mActions.getList())
@@ -1834,5 +1873,32 @@ void MainWindow::deleteFileOrFolder()
                 }
             }
         }
+    }
+}
+
+void MainWindow::selectTextBrowserLanguage()
+{
+    auto* object = sender();
+    QWidget* widget = dynamic_cast<QWidget*>(object->parent());
+
+    QMenu menu(this);
+    auto language_list = Highlighter::getLanguages();
+    for (auto& language : language_list)
+    {
+        auto* action = menu.addAction(language);
+        if (language == mHighlighter->currentLanguage())
+        {
+            action->setCheckable(true);
+            action->setChecked(true);
+        }
+    }
+
+    QPoint point = rect().center();
+    auto selection = menu.exec(point);
+
+    int index = menu.actions().indexOf(selection);
+    if (index != -1)
+    {
+        mHighlighter->setLanguage(language_list[index]);
     }
 }

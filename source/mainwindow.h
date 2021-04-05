@@ -54,7 +54,9 @@ private Q_SLOTS:
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
-#ifndef DOCKED_VIEWS
+#ifdef DOCKED_VIEWS
+    void dockWidget_topLevelChanged(bool);
+#else
     void showOrHideTrees(bool checked);
 #endif
     void clearTrees();
@@ -71,6 +73,7 @@ private Q_SLOTS:
     void addGitSourceFolder();
     void gitview_about();
     void deleteFileOrFolder();
+    void selectTextBrowserLanguage();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -162,6 +165,7 @@ private:
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
     void     showDockedWidget(QWidget* widget);
+    bool     mDockedWidgetMinMaxButtons;
 #endif
 
     Ui::MainWindow*       ui;

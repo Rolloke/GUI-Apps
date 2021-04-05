@@ -104,6 +104,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::CustomGitActionSettings] = ":/resource/24X24/preferences-system.png";
     fActionIcons[Cmd::InsertHashFileNames]     = ":/resource/24X24/object-rotate-right.png";
     fActionIcons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
+    fActionIcons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
 
     for (const auto& fIconPath: fActionIcons )
     {
@@ -163,7 +164,11 @@ void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) con
         }
         else
         {
-            aToolbar.addAction(getAction(fCmd));
+            auto * action = getAction(fCmd);
+            if (action)
+            {
+                aToolbar.addAction(action);
+            }
         }
     }
 }

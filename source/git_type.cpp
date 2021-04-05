@@ -49,11 +49,11 @@ Cmd::Cmd()
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
-    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, Separator, ShowHideTree, ClearTreeItems };
+    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
-    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, Separator, Commit, Push, Pull, CustomGitActionSettings});
+    mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, Separator, Commit, Push, Pull, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
     mToolbarNames.push_back("Git Commands");
     mToolbarNames.push_back("Control Commands");

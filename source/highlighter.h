@@ -96,6 +96,9 @@ public:
     Highlighter(QTextDocument *parent = 0);
 
     void setExtension(const QString& ext);
+    void setLanguage(const QString& language);
+    const QString& currentLanguage() const;
+    static QStringList& getLanguages();
 
 protected:
     void highlightBlock(const QString &text) override;
@@ -112,6 +115,7 @@ private:
     static QMap<QString, Language> mLanguages;
     static QMap<QString, QString>  mExtensionToLanguage;
     static QSharedPointer<QDomDocument> mDoc;
+    static QStringList mLanguageNames;
 
     QString mCurrentLanguage;
     static const QString mDefault;
