@@ -60,6 +60,7 @@ const QString Highlighter::mDefault {"git"};
 QMap<QString, Highlighter::Language> Highlighter::mLanguages;
 QMap<QString, QString>  Highlighter::mExtensionToLanguage;
 QSharedPointer<QDomDocument> Highlighter::mDoc;
+QStringList Highlighter::mLanguageNames;
 
 QTextCharFormat Highlighter::Language::mKeywordFormat[Highlighter::Language::keyword_formats];
 QTextCharFormat Highlighter::Language::mNumbersFormat;
@@ -237,6 +238,18 @@ void Highlighter::setExtension(const QString& ext)
     }
 }
 
+void Highlighter::setLanguage(const QString &language)
+{
+    mCurrentLanguage = language;
+    load_language(mCurrentLanguage);
+    rehighlight();
+}
+
+const QString& Highlighter::currentLanguage() const
+{
+    return mCurrentLanguage;
+}
+
 void Highlighter::load_language_list()
 {
     if (mDoc)
@@ -256,10 +269,21 @@ void Highlighter::load_language_list()
                         mExtensionToLanguage[entry] = name;
                     }
                 }
+                else
+                {
+                    mExtensionToLanguage[name] = name;
+                }
+                mLanguageNames.push_back(name);
             }
         }
     }
 }
+
+QStringList& Highlighter::getLanguages()
+{
+    return mLanguageNames;
+}
+
 void Highlighter::load_language(QString language_name)
 {
     if (mDoc)

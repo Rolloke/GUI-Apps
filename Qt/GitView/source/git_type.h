@@ -61,6 +61,7 @@ struct Cmd
         InsertHashFileNames,
         About,
         Delete,
+        SelectTextBrowserLanguage,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
