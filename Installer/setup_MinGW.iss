@@ -53,6 +53,7 @@ Source: "{#QtPluginFolder}/iconengines/qsvgicon.dll"; DestDir: "{app}/plugins/ic
 Source: "{#QtPluginFolder}/imageformats/qico.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/platforms/qwindows.dll"; DestDir: "{app}/plugins/platforms"; Flags: ignoreversion
 Source: "./qt.conf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "langs.model.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
