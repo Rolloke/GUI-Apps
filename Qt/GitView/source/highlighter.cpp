@@ -218,16 +218,20 @@ Highlighter::Highlighter(QTextDocument *parent)
         load_default_language();
         load_language_list();
     }
-    mCurrentLanguage = "";
+    mCurrentLanguage = mDefault;
 }
 
 void Highlighter::setExtension(const QString& ext)
 {
-    if (ext.size() == 0)
+    if (ext.count() > 0)
     {
         mCurrentLanguage = ext;
     }
-    auto language = mExtensionToLanguage.find(ext);
+    else
+    {
+        mCurrentLanguage = mDefault;
+    }
+    auto language = mExtensionToLanguage.find(mCurrentLanguage);
     if (language != mExtensionToLanguage.end())
     {
         mCurrentLanguage = language.value();
@@ -261,7 +265,7 @@ void Highlighter::load_language_list()
             {
                 QString name       = getValue(n.attributes().namedItem("name"), QString(""), true);
                 QString extensions = getValue(n.attributes().namedItem("ext"), QString(""), true);
-                if (extensions.size())
+                if (extensions.count())
                 {
                     auto list = extensions.split(" ");
                     for (auto& entry : list)
@@ -269,11 +273,11 @@ void Highlighter::load_language_list()
                         mExtensionToLanguage[entry] = name;
                     }
                 }
-                else
+                if (name.count())
                 {
                     mExtensionToLanguage[name] = name;
+                    mLanguageNames.push_back(name);
                 }
-                mLanguageNames.push_back(name);
             }
         }
     }
@@ -390,6 +394,7 @@ void Highlighter::load_default_language()
     rule.format = language.mKeywordFormat[2];
     language.highlightingRules.append(rule);
 
+    mLanguageNames.push_back(mDefault);
     mLanguages[mDefault] = language;
 }
 

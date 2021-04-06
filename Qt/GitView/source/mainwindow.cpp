@@ -1878,9 +1878,6 @@ void MainWindow::deleteFileOrFolder()
 
 void MainWindow::selectTextBrowserLanguage()
 {
-    auto* object = sender();
-    QWidget* widget = dynamic_cast<QWidget*>(object->parent());
-
     QMenu menu(this);
     auto language_list = Highlighter::getLanguages();
     for (auto& language : language_list)
@@ -1893,12 +1890,14 @@ void MainWindow::selectTextBrowserLanguage()
         }
     }
 
-    QPoint point = rect().center();
-    auto selection = menu.exec(point);
+    QPoint point = ui->textBrowser->rect().center();
+    auto* selection = menu.exec(ui->textBrowser->mapToGlobal(point));
 
     int index = menu.actions().indexOf(selection);
     if (index != -1)
     {
+        bool enabled = ui->btnStoreText->isEnabled();
         mHighlighter->setLanguage(language_list[index]);
+        ui->btnStoreText->setEnabled(enabled);
     }
 }

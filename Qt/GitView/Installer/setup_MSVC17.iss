@@ -9,7 +9,7 @@
 #define QtDllFolder "C:\Qt\5.9.9\msvc2017_64\bin"
 #define QtPluginFolder "C:\Qt\5.9.9\msvc2017_64\plugins"
 #define VisualStudio17="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE"
-
+                    
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
