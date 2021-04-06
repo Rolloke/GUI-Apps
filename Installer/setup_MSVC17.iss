@@ -8,6 +8,7 @@
 #define BuildFolder "..\build\Oscilloscope-Desktop_Qt_5_9_9_MSVC2017_64bit-Release\release"
 #define QtDllFolder "C:\Qt\5.9.9\msvc2017_64\bin"
 #define QtPluginFolder "C:\Qt\5.9.9\msvc2017_64\plugins"
+#define VisualStudio17="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -27,6 +28,7 @@ Compression=lzma
 SolidCompression=yes
 
 
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
@@ -40,9 +42,13 @@ Source: "{#QtDllFolder}/Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Multimedia.dll"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "{#QtDllFolder}/Qt5SerialBus.dll"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "{#QtDllFolder}/Qt5SerialPort.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#QtDllFolder}/Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\api-ms-win-crt-runtime-l1-1-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/audio/qtaudio_windows.dll"; DestDir: "{app}/plugins/audio"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/iconengines/qsvgicon.dll"; DestDir: "{app}/plugins/iconengines"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qico.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
