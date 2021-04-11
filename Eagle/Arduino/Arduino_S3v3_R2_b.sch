@@ -15406,7 +15406,7 @@ grid 5.45 mm, vertical</description>
 <label x="264.16" y="111.76" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="A4" class="0">
+<net name="A4(SDA)" class="0">
 <segment>
 <wire x1="257.175" y1="115.57" x2="217.805" y2="115.57" width="0.1524" layer="91"/>
 <wire x1="217.805" y1="115.57" x2="217.805" y2="113.03" width="0.1524" layer="91"/>
@@ -15416,7 +15416,7 @@ grid 5.45 mm, vertical</description>
 <label x="264.16" y="114.3" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="A5" class="0">
+<net name="A5(SCL)" class="0">
 <segment>
 <wire x1="202.565" y1="115.57" x2="215.265" y2="115.57" width="0.1524" layer="91"/>
 <wire x1="215.265" y1="115.57" x2="215.265" y2="118.11" width="0.1524" layer="91"/>

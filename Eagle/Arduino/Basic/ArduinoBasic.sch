@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.0.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7159,12 +7159,27 @@ W = angled&lt;p&gt;
 <plain>
 </plain>
 <instances>
-<instance part="U$1" gate="G$1" x="40.64" y="58.42"/>
-<instance part="C1" gate="G$1" x="-2.54" y="58.42"/>
-<instance part="C2" gate="G$1" x="12.7" y="58.42"/>
-<instance part="Q2" gate="G$1" x="5.08" y="53.34"/>
-<instance part="SV1" gate="1" x="40.64" y="91.44" rot="R180"/>
-<instance part="R1" gate="G$1" x="20.32" y="68.58" rot="R90"/>
+<instance part="U$1" gate="G$1" x="40.64" y="58.42" smashed="yes"/>
+<instance part="C1" gate="G$1" x="-2.54" y="58.42" smashed="yes">
+<attribute name="NAME" x="-1.016" y="58.801" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-1.016" y="53.721" size="1.778" layer="96"/>
+</instance>
+<instance part="C2" gate="G$1" x="12.7" y="58.42" smashed="yes">
+<attribute name="NAME" x="14.224" y="58.801" size="1.778" layer="95"/>
+<attribute name="VALUE" x="14.224" y="53.721" size="1.778" layer="96"/>
+</instance>
+<instance part="Q2" gate="G$1" x="5.08" y="53.34" smashed="yes">
+<attribute name="NAME" x="7.62" y="54.356" size="1.778" layer="95"/>
+<attribute name="VALUE" x="7.62" y="50.8" size="1.778" layer="96"/>
+</instance>
+<instance part="SV1" gate="1" x="40.64" y="91.44" smashed="yes" rot="R180">
+<attribute name="VALUE" x="44.45" y="99.06" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="44.45" y="85.598" size="1.778" layer="95" rot="R180"/>
+</instance>
+<instance part="R1" gate="G$1" x="20.32" y="68.58" smashed="yes" rot="R90">
+<attribute name="NAME" x="18.8214" y="64.77" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="23.622" y="64.77" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
