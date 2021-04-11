@@ -85,6 +85,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
+    , mFromHistoryContextMenu(false)
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -1296,6 +1297,17 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
+    mActions.enableItemsByType(Cmd::mContextMenuHistoryTree, Type::None);
+    if (!ui->treeHistory->isSelectionDiffable())
+    {
+        mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
+        mActions.getAction(Cmd::ShowDifference)->setEnabled(false);
+    }
+    if (!ui->treeHistory->isSelectionFileDiffable())
+    {
+        mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
+    }
+
 }
 
 void MainWindow::initContextMenuActions()
@@ -1377,9 +1389,6 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
 
-    connect(mActions.createAction(Cmd::ShowHistoryDifference, tr("Show difference")  , Cmd::getCommand(Cmd::ShowHistoryDifference)), SIGNAL(triggered()), this, SLOT(call_git_history_diff_command()));
-    connect(mActions.createAction(Cmd::CallHistoryDiffTool  , tr("Call diff tool..."), Cmd::getCommand(Cmd::CallHistoryDiffTool))  , SIGNAL(triggered()), this, SLOT(call_git_history_diff_command()));
-
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
 
@@ -1450,26 +1459,17 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         fAuthorsMenu = menu.addMenu("Authors");
         fAuthorsMenu->addActions(fPostActionGroup.actions());
     }
-    if (!ui->treeHistory->isSelectionDiffable())
-    {
-        mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(false);
-        mActions.getAction(Cmd::ShowHistoryDifference)->setEnabled(false);
-    }
-    if (!ui->treeHistory->isSelectionFileDiffable())
-    {
-        mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(false);
-    }
 
     mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
+    mFromHistoryContextMenu = true;
     QAction* fAction = menu.exec(ui->treeHistory->mapToGlobal(pos));
+    mFromHistoryContextMenu = false;
     if (fAction && fAuthorsMenu)
     {
         int fIndex = fAuthorsMenu->actions().indexOf(fAction);
         ui->treeHistory->checkAuthorsIndex(fIndex, fAction->isChecked());
     }
 
-    mActions.getAction(Cmd::CallHistoryDiffTool)->setEnabled(true);
-    mActions.getAction(Cmd::ShowHistoryDifference)->setEnabled(true);
     mContextMenuSourceTreeItem = nullptr;
 }
 
@@ -1570,7 +1570,15 @@ void MainWindow::perform_custom_command()
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
 
-    if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
+    if (ui->treeHistory->hasFocus())
+    {
+        if (mFromHistoryContextMenu == false)
+        {
+            ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
+        }
+        call_git_history_diff_command();
+    }
+    else if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
     {
         call_git_branch_command();
     }

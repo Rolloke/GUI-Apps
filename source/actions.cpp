@@ -92,8 +92,6 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::BranchCheckout]          = ":/resource/24X24/emblem-default.png";
     fActionIcons[Cmd::BranchHistory]           = ":/resource/24X24/document-open-recent.png";
     fActionIcons[Cmd::Show]                    = ":/resource/24X24/edit-find.png";
-    fActionIcons[Cmd::ShowHistoryDifference]   = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[Cmd::CallHistoryDiffTool]     = ":/resource/24X24/distribute-graph-directed.svg";
 
     fActionIcons[Cmd::ExpandTreeItems]         = ":/resource/24X24/svn-update.svg";
     fActionIcons[Cmd::CollapseTreeItems]       = ":/resource/24X24/svn-commit.svg";
@@ -148,7 +146,11 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::T
                     }
                 }
             }
-            getAction(fCmd)->setEnabled(fEnabled);
+            auto action = getAction(fCmd);
+            if (action)
+            {
+                action->setEnabled(fEnabled);
+            }
         }
     }
 
