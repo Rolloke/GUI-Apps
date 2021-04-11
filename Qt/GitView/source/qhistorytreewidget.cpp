@@ -26,8 +26,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
 {
     QVector<QStringList> fList;
     History::parse(fText, fList);
-    // TODO: parse diffs between branches (files)
-    // TODO: Find commits of a branch diff
+    // TODO: validate parse diffs between branches (files)
 
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(aFileName));
     addTopLevelItem(fNewHistoryItem);
@@ -107,15 +106,12 @@ void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
     }
 }
 
-
-QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
+QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem)
 {
     QVariant fItemData;
     mHistoryHashItems.clear();
     mHistoryFile.clear();
     mSelectedTopLevelItemType = 0;
-
-    QTreeWidgetItem* fSelectedHistoryItem = itemAt(pos);
     if (fSelectedHistoryItem)
     {
         QModelIndexList fSelectedIndexes = selectionModel()->selectedIndexes();
@@ -171,12 +167,15 @@ QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
                 {
                     mHistoryHashItems.append(fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
                 }
-
-
             }   break;
         }
     }
     return fItemData;
+}
+
+QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
+{
+    return determineHistoryHashItems(itemAt(pos));
 }
 
 QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )

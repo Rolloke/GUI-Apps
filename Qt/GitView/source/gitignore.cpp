@@ -33,17 +33,24 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 fLine.remove(fIndex,fLine.size()-fIndex);
                 fLine = fLine.trimmed();
             }
-            Type fType(fLine.contains('/') ? Type::Folder : Type::File, fMapLevel);
+            fLine.remove(QChar::CarriageReturn);
+            fLine.remove(QChar::LineFeed);
+            Type fType(Type::None, fMapLevel);
+            fIndex = fLine.lastIndexOf('/');
+            if (fIndex != -1 && fIndex == fLine.size() - 1)
+            {
+                fType.add(Type::Folder);
+                fLine.remove(fIndex, 1);
+            }
+            else
+            {
+                fType.add(Type::File);
+            }
             if (fLine.contains('*')) fType.add(Type::WildCard);
             if (fLine.contains('?')) fType.add(Type::WildCard);
             if (fLine.contains('[') && fLine.contains(']')) fType.add(Type::RegExp);
             if (fLine.contains('!')) fType.add(Type::Negation);
-            fLine.remove(QChar::CarriageReturn);
-            fIndex = fLine.lastIndexOf('/');
-            if (fIndex != -1 && fIndex == fLine.size() - 1)
-            {
-                fLine.remove(fIndex, 1);
-            }
+
             fIndex = fLine.indexOf('!');
             if (fIndex == 0)
             {
