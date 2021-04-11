@@ -35,8 +35,7 @@ Cmd::Cmd()
     mCommandMap[Push]                   = "git -C %1 push";
     mCommandMap[Pull]                   = "git -C %1 pull";
     mCommandMap[Show]                   = "git show %1 %2";
-    mCommandMap[ShowHistoryDifference]  = "git diff %1 %2";
-    mCommandMap[CallHistoryDiffTool]    = "git difftool %1 --no-prompt %2";
+
     mCommandMap[BranchList]             = "git -C %1 branch --list";
     mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
     mCommandMap[BranchShow]             = "git -C %1 show-branch %2";
@@ -49,7 +48,7 @@ Cmd::Cmd()
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
-    mContextMenuHistoryTree     = { CallHistoryDiffTool, ShowHistoryDifference, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
+    mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
