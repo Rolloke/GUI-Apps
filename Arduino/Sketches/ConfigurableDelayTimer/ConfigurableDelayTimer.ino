@@ -474,8 +474,8 @@ void check_sentence(String& fString)
          "-BINARY: DIO\n"
          "-ANALOG: Input A0-A7 or Output PWM\n"
          "-SWITCH: Switch to ground with internal pullup resistor\n"
-         "-OUTPUT[n]:?/INVERT/TOGGLE/DELAY:ms/PULSE:ms/VALUE:0-4096,?/REPEAT:m\n"
-         "-INPUT[n]:?/EDGE:CHANGE|RISING|FALLING|LOW|HIGH/THRESHOLD:0-/VALUE:?/\n"
+         "-OUTPUT[n]:?/INVERT/TOGGLE/DELAY:ms/PULSE:ms/VALUE:0-255,?/REPEAT:m\n"
+         "-INPUT[n]:?/EDGE:CHANGE|RISING|FALLING|LOW|HIGH/THRESHOLD:0-4095/VALUE:?/\n"
          " + CONNECT:OUTPUT[m]/REPORT/\n"
          " + PULSE:ms/DELAY:ms/REPEAT:ms\n"));
 #endif
