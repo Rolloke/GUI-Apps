@@ -135,7 +135,7 @@ int execute(const QString& command, QString& aResultText)
 
     if (!fTemp.remove(fTemp.path()))
     {
-        TRACE(Logger::error, "FanControl", "Could not delete temporary file %s", fTempResultFileNameAndPath.toStdString().c_str());
+        TRACE(Logger::error, "GitView", "Could not delete temporary file %s", fTempResultFileNameAndPath.toStdString().c_str());
     }
 
     return fResult;
