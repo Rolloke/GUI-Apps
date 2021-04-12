@@ -685,6 +685,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     {
                         case Work::ApplyGitCommand:
                         {
+                            fSource = "\"" + fSource + "\"";
                             QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
                             apendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
                             fResult = fCmd.size() != 0;
@@ -1532,15 +1533,17 @@ void MainWindow::call_git_move_rename()
             std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
             QString     fCommand;
             bool        fMoved = false;
-            if (fNewName.contains("/"))
+            QString fNewGitName = "\"" + fNewName + "\"";
+            if (fNewGitName.contains("/"))
             {
                 fMoved   = true;
-                fOldName = fPath.filePath();
-                fCommand = tr(fFormatCmd.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fOldName).arg(fNewName);
+                fOldName = "\"" + fPath.filePath() + "\"";
+                fCommand = tr(fFormatCmd.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fOldName).arg(fNewGitName);
             }
             else
             {
-                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewName);
+                fOldName = "\"" + fOldName + "\"";
+                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewGitName);
             }
 
             QString fResultStr;
@@ -1658,6 +1661,7 @@ void MainWindow::call_git_history_diff_command()
         QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1");
         if (fHistoryFile.size())
         {
+            QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";
             fCmd = tr(fCmd.toStdString().c_str()).arg(fHistoryFile);
             QString fResult;
             int fError = execute(fCmd, fResult);
