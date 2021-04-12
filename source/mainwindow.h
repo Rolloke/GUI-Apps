@@ -178,7 +178,6 @@ private:
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<Highlighter> mHighlighter;
     QString               mFontName;
-    bool                  mFromHistoryContextMenu;
 };
 
 #endif // MAINWINDOW_H

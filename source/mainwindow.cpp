@@ -85,7 +85,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
-    , mFromHistoryContextMenu(false)
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -1297,6 +1296,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
+    ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
     mActions.enableItemsByType(Cmd::mContextMenuHistoryTree, Type::None);
     if (!ui->treeHistory->isSelectionDiffable())
     {
@@ -1461,9 +1461,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     }
 
     mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
-    mFromHistoryContextMenu = true;
     QAction* fAction = menu.exec(ui->treeHistory->mapToGlobal(pos));
-    mFromHistoryContextMenu = false;
     if (fAction && fAuthorsMenu)
     {
         int fIndex = fAuthorsMenu->actions().indexOf(fAction);
@@ -1572,10 +1570,6 @@ void MainWindow::perform_custom_command()
 
     if (ui->treeHistory->hasFocus())
     {
-        if (mFromHistoryContextMenu == false)
-        {
-            ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
-        }
         call_git_history_diff_command();
     }
     else if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
