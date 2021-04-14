@@ -77,8 +77,8 @@ QTextCharFormat Highlighter::Language::mPreprocessorFormat;
 
 void Highlighter::Language::load(QSettings& fSettings)
 {
-    mSingleLineCommentFormat.setForeground(Qt::red);
-    mMultiLineCommentFormat.setForeground(Qt::red);
+    mSingleLineCommentFormat.setForeground(Qt::darkCyan);
+    mMultiLineCommentFormat.setForeground(Qt::darkCyan);
 
     mKeywordFormat[0].setForeground(Qt::darkBlue);
     mKeywordFormat[0].setFontWeight(QFont::Medium);
@@ -92,20 +92,20 @@ void Highlighter::Language::load(QSettings& fSettings)
     mKeywordFormat[3].setForeground(Qt::darkYellow);
     mKeywordFormat[3].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[4].setForeground(Qt::darkBlue);
-    mKeywordFormat[4].setFontWeight(QFont::Bold);
+    mKeywordFormat[4].setForeground(Qt::magenta);
+    mKeywordFormat[4].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[5].setForeground(Qt::darkCyan);
-    mKeywordFormat[5].setFontWeight(QFont::Bold);
+    mKeywordFormat[5].setForeground(Qt::darkMagenta);
+    mKeywordFormat[5].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[6].setForeground(Qt::darkYellow);
-    mKeywordFormat[6].setFontWeight(QFont::Bold);
+    mKeywordFormat[6].setForeground(Qt::cyan);
+    mKeywordFormat[6].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[7].setForeground(Qt::darkGreen);
-    mKeywordFormat[7].setFontWeight(QFont::Bold);
+    mKeywordFormat[7].setForeground(Qt::green);
+    mKeywordFormat[7].setFontWeight(QFont::Medium);
 
-    mNumbersFormat.setFontWeight(QFont::Medium);
     mNumbersFormat.setForeground(Qt::blue);
+    mNumbersFormat.setFontWeight(QFont::Medium);
 
     mQuotationFormat.setForeground(Qt::darkGreen);
 
@@ -298,29 +298,6 @@ void Highlighter::load_language(QString language_name)
             HighlightingRule rule;
             Language language;
 
-            QString commentLine  = getValue(language_node.attributes().namedItem("commentLine"), QString(""), true);
-            if (commentLine.size())
-            {
-                commentLine += "[^\n]*";
-                rule.pattern = QRegularExpression(commentLine);
-                rule.format = language.mSingleLineCommentFormat;
-                language.highlightingRules.append(rule);
-            }
-            QString commentStart = getValue(language_node.attributes().namedItem("commentStart"), QString(""), true);
-            if (commentStart.size())
-            {
-                language.commentStartExpression = QRegularExpression(commentStart);
-            }
-            QString commentEnd   = getValue(language_node.attributes().namedItem("commentEnd"), QString(""), true);
-            if (commentEnd.size())
-            {
-                language.commentEndExpression = QRegularExpression(commentEnd);
-            }
-
-            rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-            rule.format = language.mQuotationFormat;
-            language.highlightingRules.append(rule);
-
             int k=0;
             for(QDomNode n = language_node.firstChild(); !n.isNull(); n = n.nextSibling())
             {
@@ -360,6 +337,30 @@ void Highlighter::load_language(QString language_name)
                     }
                 }
             }
+
+            QString commentLine  = getValue(language_node.attributes().namedItem("commentLine"), QString(""), true);
+            if (commentLine.size())
+            {
+                commentLine += "[^\n]*";
+                rule.pattern = QRegularExpression(commentLine);
+                rule.format = language.mSingleLineCommentFormat;
+                language.highlightingRules.append(rule);
+            }
+            QString commentStart = getValue(language_node.attributes().namedItem("commentStart"), QString(""), true);
+            if (commentStart.size())
+            {
+                language.commentStartExpression = QRegularExpression(commentStart);
+            }
+            QString commentEnd   = getValue(language_node.attributes().namedItem("commentEnd"), QString(""), true);
+            if (commentEnd.size())
+            {
+                language.commentEndExpression = QRegularExpression(commentEnd);
+            }
+
+            rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+            rule.format = language.mQuotationFormat;
+            language.highlightingRules.append(rule);
+
             mLanguages[language_name] = language;
         }
     }
@@ -392,6 +393,14 @@ void Highlighter::load_default_language()
 
     rule.pattern = QRegularExpression(QStringLiteral("-[\\w]+|--[\\w]+"));
     rule.format = language.mKeywordFormat[2];
+    language.highlightingRules.append(rule);
+
+    rule.pattern = QRegularExpression(QStringLiteral("^[\\+].*"));
+    rule.format = language.mKeywordFormat[3];
+    language.highlightingRules.append(rule);
+
+    rule.pattern = QRegularExpression(QStringLiteral("^[-].*"));
+    rule.format = language.mKeywordFormat[4];
     language.highlightingRules.append(rule);
 
     mLanguageNames.push_back(mDefault);

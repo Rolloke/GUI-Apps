@@ -268,10 +268,15 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
                           arg(fChildItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
 
-            // TODO: validate, if this is correct
+
             if (fType.is(Type::Branch))
+            { // TODO: validate, if this is correct also for branch
+                fGitCmd += " -- ";
+                fGitCmd += fParent->text(History::Column::Text);
+            }
+            else
             {
-                fGitCmd += " ";
+                fGitCmd += " -- ";
                 fGitCmd += fParent->text(History::Column::Text);
             }
 

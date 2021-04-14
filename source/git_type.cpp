@@ -31,7 +31,7 @@ Cmd::Cmd()
     mCommandMap[Commit]                 = "git -C %1 commit -m \"%2\"";
     mCommandMap[MoveOrRename]           = "git -C %1 mv %2 %3";
     mCommandMap[Restore]                = "git checkout %1 %2";
-    mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1 %2";
+    mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1 -- %2";
     mCommandMap[Push]                   = "git -C %1 push";
     mCommandMap[Pull]                   = "git -C %1 pull";
     mCommandMap[Show]                   = "git show %1 %2";
