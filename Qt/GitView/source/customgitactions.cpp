@@ -170,20 +170,20 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                    break;
                 case ActionsTable::Command:
                     fAction->setStatusTip(fText);
-                    fFlag = ActionList::Modified;
+                    fFlag = ActionList::Command::Modified;
                    break;
                 case ActionsTable::MsgBoxText:
                     mActionList.setCustomCommandMessageBoxText(fCmd, fText);
-                    fFlag = ActionList::Modified;
+                    fFlag = ActionList::Command::Modified;
                    break;
                 case ActionsTable::Name:
                     fAction->setToolTip(fText);
                     fAction->setText(fText);
-                    fFlag = ActionList::Modified;
+                    fFlag = ActionList::Command::Modified;
                    break;
                 case ActionsTable::Shortcut:
                     fAction->setShortcut(QKeySequence(fText));
-                    fFlag = ActionList::Modified;
+                    fFlag = ActionList::Command::Modified;
                    break;
             }
             if (fFlag)
@@ -312,7 +312,7 @@ void CustomGitActions::on_btnAdd_clicked()
         int fRow = -1;
         mActionList.setIconPath(fCmd, "://resource/24X24/window-close.png");
         insertCmdAction(*mActionList.getList().find(fCmd), fRow);
-        mActionList.setFlags(fCmd, ActionList::Custom);
+        mActionList.setFlags(fCmd, ActionList::Command::Custom);
         Q_EMIT(initCustomAction(fAction));
     }
 }
@@ -321,7 +321,7 @@ void CustomGitActions::on_btnDelete_clicked()
 {
     int fRow = ui->tableViewActions->currentIndex().row();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, ActionsTable::ID)).toInt());
-    if (fCmd != Cmd::Separator && !(mActionList.getFlags(fCmd) & ActionList::BuiltIn))
+    if (fCmd != Cmd::Separator && !(mActionList.getFlags(fCmd) & ActionList::Command::BuiltIn))
     {
         mListModelActions->removeRow(fRow);
         mActionList.deleteAction(fCmd);
@@ -454,19 +454,23 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 
     uint fFlags      = mActionList.getFlags(fCmd);
     QAction* fA_Modified = nullptr;
-    if (fFlags & ActionList::BuiltIn && fFlags & ActionList::Modified)
+    if (fFlags & ActionList::Command::BuiltIn && fFlags & ActionList::Command::Modified)
     {
          fA_Modified = fMenu.addAction(tr("Reset modifications"));
-         fA_Modified->setCheckable(true);
-         fA_Modified->setChecked(fFlags & ActionList::Modified);
+//         fA_Modified->setCheckable(true);
+//         fA_Modified->setChecked(fFlags & ActionList::Command::Modified);
     }
 
     QAction* fA_BranchCmd = nullptr;
-    if (fFlags & ActionList::Custom)
+    QAction* fA_HistoryCmd = nullptr;
+    if (fFlags & ActionList::Command::Custom)
     {
          fA_BranchCmd = fMenu.addAction(tr("Branch command"));
          fA_BranchCmd->setCheckable(true);
-         fA_BranchCmd->setChecked(fFlags & ActionList::Branch);
+         fA_BranchCmd->setChecked(fFlags & ActionList::Command::Branch);
+         fA_HistoryCmd = fMenu.addAction(tr("History command"));
+         fA_HistoryCmd->setCheckable(true);
+         fA_HistoryCmd->setChecked(fFlags & ActionList::Command::History);
     }
     fMenu.addSeparator();
 
@@ -479,7 +483,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         if (fIndex != -1)
         {
             mActionList.setCustomCommandPostAction(fCmd, fIndex);
-            mActionList.setFlags(fCmd, ActionList::Modified, Flag::set);
+            mActionList.setFlags(fCmd, ActionList::Command::Modified, Flag::set);
         }
         fIndex = fGitStatusEnableGroup.actions().indexOf(fSelected);
         if (fIndex != -1)
@@ -499,11 +503,15 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         }
         if (fA_Modified == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Modified, fA_Modified->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(fCmd, ActionList::Command::Modified, fA_Modified->isChecked() ? Flag::set : Flag::remove);
         }
         if (fA_BranchCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(fCmd, ActionList::Command::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
+        }
+        if (fA_HistoryCmd == fSelected)
+        {
+            mActionList.setFlags(fCmd, ActionList::Command::History, fA_HistoryCmd->isChecked() ? Flag::set : Flag::remove);
         }
     }
 }

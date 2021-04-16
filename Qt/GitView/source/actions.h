@@ -16,11 +16,11 @@ class ActionList
 {
 
 public:
-    struct Data { enum e  { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
+    struct Data { enum e { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
 
     typedef std::map<int, QAction*> tActionMap;
 
-    enum  { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8 };
+    struct Command  { enum e { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8, History=16 }; };
 
     explicit ActionList(QObject* aParent);
 
