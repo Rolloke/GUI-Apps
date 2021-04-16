@@ -178,7 +178,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         fAction->setStatusTip(fSettings.value(config::sCommand).toString());
         fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
         uint fFlags = fSettings.value(config::sFlags).toUInt();
-        if (fFlags & ActionList::Custom)
+        if (fFlags & ActionList::Command::Custom)
         {
             connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
         }
@@ -302,7 +302,7 @@ MainWindow::~MainWindow()
         {
             Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
 
-            if (mActions.getFlags(fCmd) & ActionList::Modified)
+            if (mActions.getFlags(fCmd) & ActionList::Command::Modified)
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
@@ -1297,7 +1297,13 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
-    ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
+    auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
+    if (fItemData.type() == QVariant::ModelIndex)
+    {
+        QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+        mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
+    };
+
     mActions.enableItemsByType(Cmd::mContextMenuHistoryTree, Type::None);
     if (!ui->treeHistory->isSelectionDiffable())
     {
@@ -1308,7 +1314,6 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
     {
         mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
     }
-
 }
 
 void MainWindow::initContextMenuActions()
@@ -1317,11 +1322,13 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::ShowDifference, ActionList::Command::History, Flag::set);
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::CallDiffTool, ActionList::Command::History, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
@@ -1412,7 +1419,7 @@ void MainWindow::initContextMenuActions()
 
     for (const auto& fAction : mActions.getList())
     {
-        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::BuiltIn);
+        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Command::BuiltIn);
     }
 }
 
@@ -1570,12 +1577,13 @@ void MainWindow::perform_custom_command()
     QAction *fAction = qobject_cast<QAction *>(sender());
     QString fGitCommand = fAction->statusTip();
     QVariantList fVariantList = fAction->data().toList();
+    uint command_flags = fVariantList[ActionList::Data::Flags].toUInt();
 
-    if (ui->treeHistory->hasFocus())
+    if      (command_flags & ActionList::Command::History && ui->treeHistory->hasFocus())
     {
         call_git_history_diff_command();
     }
-    else if (fVariantList[ActionList::Data::Flags].toUInt() & ActionList::Branch)
+    else if (command_flags & ActionList::Command::Branch)
     {
         call_git_branch_command();
     }
