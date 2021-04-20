@@ -74,6 +74,8 @@ private Q_SLOTS:
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
+    void on_btnFindNext_clicked();
+    void on_btnFindPrevious_clicked();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -161,6 +163,8 @@ private:
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
+
+    void     find_function(bool forward);
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

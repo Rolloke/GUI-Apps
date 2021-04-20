@@ -112,7 +112,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
 
-
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
@@ -178,7 +177,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         fAction->setStatusTip(fSettings.value(config::sCommand).toString());
         fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
         uint fFlags = fSettings.value(config::sFlags).toUInt();
-        if (fFlags & ActionList::Command::Custom)
+        if (fFlags & ActionList::Flags::Custom)
         {
             connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
         }
@@ -302,7 +301,7 @@ MainWindow::~MainWindow()
         {
             Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
 
-            if (mActions.getFlags(fCmd) & ActionList::Command::Modified)
+            if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
             {
                 const QAction* fAction = fItem.second;
                 QString fCommand = fAction->statusTip();
@@ -408,6 +407,15 @@ void MainWindow::createDockWindows()
     pTB = new QToolBar(tr("File Flags"));
     pTB->setObjectName("fileflagtoolbar");
     while ((layoutItem = ui->horizontalLayoutFlags->takeAt(0)) != 0)
+    {
+        pTB->addWidget(layoutItem->widget());
+        delete layoutItem;
+    }
+    addToolBar(Qt::BottomToolBarArea, pTB);
+
+    pTB = new QToolBar(tr("Find"));
+    pTB->setObjectName("findtoolbar");
+    while ((layoutItem = ui->horizontalLayoutFind->takeAt(0)) != 0)
     {
         pTB->addWidget(layoutItem->widget());
         delete layoutItem;
@@ -1322,17 +1330,25 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
     mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::ShowDifference, ActionList::Command::History, Flag::set);
+    mActions.setFlags(Cmd::ShowDifference, ActionList::Flags::History, Flag::set);
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::CallDiffTool, ActionList::Command::History, Flag::set);
+    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::History, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::MergeAbort, tr("Abort Merge") , Cmd::getCommand(Cmd::MergeAbort)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::MergeAbort, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::MergeContinue, tr("Continue Merge") , Cmd::getCommand(Cmd::MergeContinue)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::MergeContinue, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::MergeStrategyOurs, tr("Merge Ours") , Cmd::getCommand(Cmd::MergeStrategyOurs)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::MergeStrategyOurs, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::MergeStrategyTheirs, tr("Merge Theirs") , Cmd::getCommand(Cmd::MergeStrategyTheirs)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::MergeStrategyTheirs, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1419,7 +1435,7 @@ void MainWindow::initContextMenuActions()
 
     for (const auto& fAction : mActions.getList())
     {
-        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Command::BuiltIn);
+        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Flags::BuiltIn);
     }
 }
 
@@ -1579,11 +1595,11 @@ void MainWindow::perform_custom_command()
     QVariantList fVariantList = fAction->data().toList();
     uint command_flags = fVariantList[ActionList::Data::Flags].toUInt();
 
-    if      (command_flags & ActionList::Command::History && ui->treeHistory->hasFocus())
+    if      (command_flags & ActionList::Flags::History && ui->treeHistory->hasFocus())
     {
         call_git_history_diff_command();
     }
-    else if (command_flags & ActionList::Command::Branch)
+    else if (command_flags & ActionList::Flags::Branch)
     {
         call_git_branch_command();
     }
@@ -1915,3 +1931,66 @@ void MainWindow::selectTextBrowserLanguage()
         ui->btnStoreText->setEnabled(enabled);
     }
 }
+
+void MainWindow::on_btnFindNext_clicked()
+{
+    find_function(true);
+}
+
+void MainWindow::on_btnFindPrevious_clicked()
+{
+    find_function(false);
+}
+
+void MainWindow::find_function(bool forward)
+{
+    Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
+    int                 find_flag   = forward ? 0 : QTextDocument::FindBackward;
+
+    if (ui->ckFindCaseSensitive->isChecked())
+    {
+        reg_ex_case = Qt::CaseSensitive;
+        find_flag |= QTextDocument::FindCaseSensitively;
+    }
+    if (ui->ckFindWholeWord->isChecked())
+    {
+        find_flag |= QTextDocument::FindWholeWords;
+    }
+
+    bool found_text = false;
+    if (ui->ckFindRegEx->isChecked())
+    {
+        found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
+    }
+    else
+    {
+        found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
+    }
+    if (found_text)
+    {
+        showDockedWidget(ui->textBrowser);
+        ui->textBrowser->setFocus();
+    }
+
+    //    int                 tree_match_flag = 0;
+        //            MatchExactly = 0,
+        //            MatchContains = 1,
+        //            MatchStartsWith = 2,
+        //            MatchEndsWith = 3,
+        //            MatchRegExp = 4,
+        //            MatchWildcard = 5,
+        //            MatchFixedString = 8,
+        //            MatchCaseSensitive = 16,
+        //            MatchWrap = 32,
+        //            MatchRecursive = 64
+//        QTreeWidget* tree = focusedTreeWidget();
+//        if (tree)
+//        {
+//            auto found_item = tree->findItems(ui->edtFindText->text(), static_cast<Qt::MatchFlag>(tree_match_flag));
+//            if (found_item.size())
+//            {
+//                tree->setItemSelected(found_item[0], true);
+//            }
+//        }
+}
+
