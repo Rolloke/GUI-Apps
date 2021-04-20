@@ -383,11 +383,11 @@ void Highlighter::load_default_language()
     rule.format = language.mQuotationFormat;
     language.highlightingRules.append(rule);
 
-    rule.pattern = QRegularExpression(QStringLiteral("\\b(?:git|add|status|difftool|mergetool|diff|rm|reset|commit|mv|checkout|log|push|pull|show|branch)\\b"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b(?:git|config|help|bugreport|init|clone|add|status|diff|commit|notes|restore|reset|rm|mv|branch|checkout|switch|merge|mergetool|log|stash|tag|worktree|fetch|pull|push|remote|submodule|show|log|diff|difftool|range-diff|shortlog|describe|apply|cherry-pick|diff|rebase|revert)\\b"));
     rule.format = language.mKeywordFormat[0];
     language.highlightingRules.append(rule);
 
-    rule.pattern = QRegularExpression(QStringLiteral("\\b(?:D|M|A|R|DD|AU|UD|UA|DU|AA|UU|\\?)\\b"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b(?:D|M|A|R|DD|AU|UD|UA|DU|AA|UU|MM|\\?|\\?\\?)\\b"));
     rule.format = language.mKeywordFormat[1];
     language.highlightingRules.append(rule);
 
@@ -399,8 +399,16 @@ void Highlighter::load_default_language()
     rule.format = language.mKeywordFormat[3];
     language.highlightingRules.append(rule);
 
+    rule.pattern = QRegularExpression(QStringLiteral("\\?"));
+    rule.format = language.mKeywordFormat[3];
+    language.highlightingRules.append(rule);
+
     rule.pattern = QRegularExpression(QStringLiteral("^[-].*"));
     rule.format = language.mKeywordFormat[4];
+    language.highlightingRules.append(rule);
+
+    rule.pattern = QRegularExpression(QStringLiteral("\\b(?:clean|gc|fsck|reflog|filter-branch|instaweb|archive|bundle|daemon|update-server-info|cat-file|check-ignore|checkout-index|commit-tree|count-objects|diff-index|for-each-ref|hash-object|ls-files|ls-tree|merge-base|read-tree|rev-list|rev-parse|show-ref|symbolic-ref|update-index|update-ref|verify-pack|write-tree)\\b"));
+    rule.format = language.mKeywordFormat[5];
     language.highlightingRules.append(rule);
 
     mLanguageNames.push_back(mDefault);

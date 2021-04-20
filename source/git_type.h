@@ -34,8 +34,8 @@ struct Cmd
         Push,
         Pull,
         Show,
-        UnusedAndFree1,
-        UnusedAndFree2,
+        MergeAbort,
+        MergeContinue,
         BranchList,
         BranchDelete,
         BranchShow,
@@ -45,6 +45,9 @@ struct Cmd
         BranchCheckout,
         BranchHistory,
         CallMergeTool,
+        MergeStrategyOurs,
+        MergeStrategyTheirs,
+
         /// hint: add further git commands here
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
