@@ -181,7 +181,8 @@ int Logger::convertSeverityToSyslogPriority(const std::uint32_t aSeverity)
 
     return fSyslogPrio;
 }
-#elif USE_WINDOWS_LOG
+#endif
+#ifdef USE_WINDOWS_LOG
 std::uint16_t Logger::convertSeverityToEventLog(const std::uint32_t aSeverity, std::uint16_t& aCategory, std::uint32_t& aEvtID)
 {
     std::uint16_t fEventType = EVENTLOG_SUCCESS;

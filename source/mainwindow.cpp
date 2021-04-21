@@ -516,6 +516,12 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
     }
 }
 
+bool MainWindow::event(QEvent* evt)
+{
+    int type = evt->type();
+    return QMainWindow::event(evt);
+}
+
 quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
@@ -1864,6 +1870,11 @@ void MainWindow::performCustomGitActionSettings()
     fCustomGitActions.exec();
 }
 
+void MainWindow::on_treeBranches_itemClicked(QTreeWidgetItem * /* item */, int /* column */)
+{
+
+}
+
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
@@ -1993,4 +2004,5 @@ void MainWindow::find_function(bool forward)
 //            }
 //        }
 }
+
 

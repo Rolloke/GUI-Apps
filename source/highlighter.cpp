@@ -301,11 +301,11 @@ void Highlighter::load_language(QString language_name)
             int k=0;
             for(QDomNode n = language_node.firstChild(); !n.isNull(); n = n.nextSibling())
             {
-                QString name = getValue(n.attributes().namedItem("name"), QString(""), true);
+                const QString& name = getValue(n.attributes().namedItem("name"), QString(""), true);
                 if (name.size())
                 {
                     QString keys = getValue(n, QString(""));
-                    if (name == "function")
+                    if (name == "function" || name == "section")
                     {
                         rule.pattern = QRegularExpression(keys);
                         rule.format = language.mFunctionFormat;

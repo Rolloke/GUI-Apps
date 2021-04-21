@@ -29,7 +29,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
     assert(mActionListColumnWidth.size() == ActionsTable::Last);
 
     double fItemWidth = 0;
-    std::for_each(mActionListColumnWidth.begin(), mActionListColumnWidth.end()-1, [&fItemWidth](float fItem ) { fItemWidth += fItem; });
+    std::for_each(mActionListColumnWidth.begin(), mActionListColumnWidth.end()-1, [&fItemWidth](double fItem ) { fItemWidth += fItem; });
     mActionListColumnWidth.back() = 1.0 - fItemWidth;
 
     mListModelActions = new ActionItemModel(0, ActionsTable::Last, this);

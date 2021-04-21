@@ -53,6 +53,7 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+    void on_treeBranches_itemClicked(QTreeWidgetItem *item, int column);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -76,6 +77,7 @@ private Q_SLOTS:
     void selectTextBrowserLanguage();
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
+
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -133,7 +135,8 @@ private:
         GitUnmerged
     };
 
-    void     keyPressEvent(QKeyEvent *);
+    void     keyPressEvent(QKeyEvent *) override;
+    bool     event(QEvent*) override;
 
     QString  getConfigName() const;
 
