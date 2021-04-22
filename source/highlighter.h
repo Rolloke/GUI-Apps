@@ -98,7 +98,7 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     const QString& currentLanguage() const;
-    static QStringList& getLanguages();
+    static const QStringList& getLanguages();
 
 protected:
     void highlightBlock(const QString &text) override;

@@ -281,9 +281,10 @@ void Highlighter::load_language_list()
             }
         }
     }
+    mLanguageNames.sort();
 }
 
-QStringList& Highlighter::getLanguages()
+const QStringList& Highlighter::getLanguages()
 {
     return mLanguageNames;
 }

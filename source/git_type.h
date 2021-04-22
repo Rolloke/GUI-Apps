@@ -142,8 +142,8 @@ struct Type
     void add(TypeFlags aType);
     void remove(TypeFlags aType);
     bool is(TypeFlags aType) const;
-    QString getStates();
-    QString type_name();
+    QString getStates() const;
+    QString type_name() const;
 
     static const char* name(TypeFlags aType);
 

@@ -511,9 +511,19 @@ File content opened with double click</string>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayoutFind">
       <item>
-       <widget class="QLabel" name="txtFind">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Find:</string>
+         <string>Find in </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboFindBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
         </property>
        </widget>
       </item>

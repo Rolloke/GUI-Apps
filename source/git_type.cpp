@@ -135,7 +135,7 @@ bool Type::is(TypeFlags aType) const
     return (mType & aType) != None;
 }
 
-QString Type::getStates()
+QString Type::getStates() const
 {
     const QString fSep = "|";
     QString fState = fSep;
@@ -193,7 +193,7 @@ const char* Type::name(TypeFlags aType)
     return "";
 }
 
-QString Type::type_name()
+QString Type::type_name() const
 {
     return Type::name(static_cast<Type::TypeFlags>(Type::FileType&mType));
 }
