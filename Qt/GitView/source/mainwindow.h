@@ -53,7 +53,8 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
-    void on_treeBranches_itemClicked(QTreeWidgetItem *item, int column);
+    void on_btnFindNext_clicked();
+    void on_btnFindPrevious_clicked();
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -75,8 +76,6 @@ private Q_SLOTS:
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
-    void on_btnFindNext_clicked();
-    void on_btnFindPrevious_clicked();
 
 
 public Q_SLOTS:
@@ -97,6 +96,7 @@ private:
         ShowUnknown,
         ShowStaged,
         ShowUnMerged,
+        ShowSelected,
         // NOTE: further git items are added here
         // show out of sync...
         Last
@@ -134,9 +134,15 @@ private:
         Gitstaged,
         GitUnmerged
     };
+    enum class FindView
+    {
+        Text,
+        Source,
+        History,
+        Branch
+    };
 
     void     keyPressEvent(QKeyEvent *) override;
-    bool     event(QEvent*) override;
 
     QString  getConfigName() const;
 

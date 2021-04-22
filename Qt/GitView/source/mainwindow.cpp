@@ -58,6 +58,7 @@ const QString sSourcePath("Source");
 const QString sUncheckedPath("Unchecked");
 const QString sGroupLogging("Logging");
 const QString sGroupGitCommands("GitCommands");
+const QString sGroupFind("Find");
 const QString sCommands("Commands");
 const QString sCommand("Command");
 const QString sID("ID");
@@ -112,12 +113,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
 
+
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
+    fSettings.endGroup();
+
+    fSettings.beginGroup(config::sGroupFind);
+    LOAD_PTR(fSettings, ui->ckFindCaseSensitive, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->comboFindBox, setCurrentIndex, currentIndex, toInt);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupLogging);
@@ -131,7 +140,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.beginGroup(config::sGroupPaths);
 
     // NOTE: Remote Repositories nötig
-    QString fCommand = "git remote -v";
+    const QString fCommand = "git remote -v";
     QString fResultStr;
     execute(fCommand, fResultStr);
     apendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
@@ -258,6 +267,13 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->ckDirectories, isChecked);
     fSettings.endGroup();
 
+    fSettings.beginGroup(config::sGroupFind);
+    STORE_PTR(fSettings, ui->ckFindCaseSensitive, isChecked);
+    STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
+    STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
+    STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
+    fSettings.endGroup();
+
     Highlighter::Language::store(fSettings);
 
     fSettings.beginGroup(config::sGroupView);
@@ -299,7 +315,7 @@ MainWindow::~MainWindow()
 
         for (const auto& fItem : mActions.getList())
         {
-            Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
+            const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
 
             if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
             {
@@ -355,7 +371,9 @@ void MainWindow::createDockWindows()
 
     QDockWidget* dock;
     // text browser
-    dock = new QDockWidget(tr("Text Editor / Viewer"), this);
+    dock = new QDockWidget(tr("Text Editor"), this);
+    ui->comboFindBox->addItem(dock->windowTitle());
+    ui->comboFindBox->addItem("Source View");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("textbrowser");
     ui->horizontalLayoutHistoryAndText->removeWidget(ui->textBrowser);
@@ -366,6 +384,7 @@ void MainWindow::createDockWindows()
     QDockWidget *first_tab;
     // history tree
     dock = new QDockWidget(tr("History View"), this);
+    ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("historyview");
     ui->verticalLayout->removeWidget(ui->treeHistory);
@@ -376,6 +395,7 @@ void MainWindow::createDockWindows()
 
     // branch tree
     dock = new QDockWidget(tr("Branch View"), this);
+    ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("branchview");
     ui->verticalLayout->removeWidget(ui->treeBranches);
@@ -428,6 +448,7 @@ void MainWindow::createDockWindows()
     ui->topLayout = nullptr;
     ui->horizontalLayout = nullptr;
     ui->horizontalLayoutFlags = nullptr;
+    ui->horizontalLayoutFind = nullptr;
     ui->horizontalLayoutForTextBrowserHead = nullptr;
     ui->horizontalLayoutForTreeViewHead = nullptr;
     ui->horizontalLayoutHistoryAndText  = nullptr;
@@ -514,12 +535,6 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
             deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeHistory);
         }
     }
-}
-
-bool MainWindow::event(QEvent* evt)
-{
-    int type = evt->type();
-    return QMainWindow::event(evt);
 }
 
 quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
@@ -640,7 +655,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 if (   mCurrentTask == Work::ApplyGitCommand
                     && aParentItem->checkState(Column::FileName) == Qt::Checked)
                 {
-                    QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
+                    const QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
                     apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
                     return false;
                 }
@@ -654,7 +669,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 {
                     case Work::InsertPathFromCommandString:
                     {
-                        int fIndex = mGitCommand.indexOf(fSource);
+                        const int fIndex = mGitCommand.indexOf(fSource);
                         if (fIndex != -1)
                         {
                             TRACE(Logger::notice, "Found dir: %s: %d", fFileName.toStdString().c_str(), fCountOk);
@@ -670,7 +685,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     }
                     break;
                     case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowStaged: case Work::ShowUnMerged:
-                    case Work::ShowModified: case Work::ShowAllGitActions:
+                    case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
                         {
@@ -691,10 +706,10 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             }
             else
             {
-                QVariant fVariant = aParentItem->data(Column::State, Role::Filter);
+                const QVariant fVariant = aParentItem->data(Column::State, Role::Filter);
                 if (fVariant.isValid())
                 {
-                    Type fType(fVariant.toUInt());
+                    const Type fType(fVariant.toUInt());
                     switch (mCurrentTask)
                     {
                         case Work::ApplyGitCommand:
@@ -736,6 +751,11 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             fResult = fType.is(Type::GitStaged);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
+                        case Work::ShowSelected:
+                            fResult = 0;
+                            //! TODO: find selected items of parent
+                            aParentItem->setHidden(!fResult); // true means visible
+                            break;
 
                         default: return false;
                     }
@@ -753,7 +773,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
         fResult = true;
         for (int fIndex = 0; fIndex < aSourceTree.topLevelItemCount(); ++fIndex)
         {
-            QString fSourceDir("");
+            const QString fSourceDir("");
             fResult &= iterateTreeItems(aSourceTree, &fSourceDir, aSourceTree.topLevelItem(fIndex));
         }
     }
@@ -764,14 +784,13 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 {
     if (aParentItem)
     {
-//      QString fSourcePath = aSourceDir ? *aSourceDir + QDir::separator() + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
-        QString fSourcePath = aSourceDir ? *aSourceDir + "/"               + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+        const QString fSourcePath = aSourceDir ? *aSourceDir + "/" + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
 
-        auto fFoundType = aPathMap.find(fSourcePath.toStdString());
+        const auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
         {
             aParentItem->setCheckState(Column::FileName, Qt::Checked);
-            QString fState = fFoundType->second.getStates();
+            const QString fState = fFoundType->second.getStates();
             aParentItem->setText(Column::State, fState);
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
             fType.add(static_cast<Type::TypeFlags>(fFoundType->second.mType));
@@ -880,7 +899,7 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::selectSourceFolder()
 {
-    QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
+    const QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
     if (fSourcePath.size() > 1)
     {
         insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
@@ -929,13 +948,13 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
 
 void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, stringt2typemap& aFiles)
 {
-    auto fLines = aStatus.split("\n");
+    const auto fLines = aStatus.split("\n");
 
     for (QString fLine : fLines)
     {
-        const int fStateSize = 2;
-        QString fState = fLine.left(fStateSize);
-        auto fRelativePath = fLine.mid(fStateSize).trimmed();
+        const int     fStateSize = 2;
+        const QString fState = fLine.left(fStateSize);
+        const auto    fRelativePath = fLine.mid(fStateSize).trimmed();
 
         if (fRelativePath.size())
         {
@@ -1056,7 +1075,7 @@ void MainWindow::on_btnStoreText_clicked()
     QFile file(fFileName);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
-        std::string fString = ui->textBrowser->toPlainText().toStdString();
+        const std::string fString = ui->textBrowser->toPlainText().toStdString();
         file.write(fString.c_str(), fString.size());
         ui->btnStoreText->setEnabled(false);
     }
@@ -1096,12 +1115,12 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 {
     on_btnCloseText_clicked();
 
-    QString fFileName = getItemFilePath(item);
+    const QString fFileName = getItemFilePath(item);
 
     QFile file(fFileName);
     if (file.open(QIODevice::ReadOnly))
     {
-        QFileInfo file_info(fFileName);
+        const QFileInfo file_info(fFileName);
         ui->labelFilePath->setText(fFileName);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
         mHighlighter->setExtension(file_info.suffix());
@@ -1142,7 +1161,7 @@ void MainWindow::on_ckShortState_clicked(bool checked)
     Type::mShort = checked;
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
-        QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
+        const QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
         for (int j=0; j<fItem->childCount(); ++j)
         {
             updateTreeItemStatus(fItem->child(j));
@@ -1184,7 +1203,7 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
     mContextMenuSourceTreeItem = item;
-    Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
+    const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
     mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
 }
 
@@ -1192,7 +1211,7 @@ void MainWindow::getSelectedTreeItem()
 {
     if (! mContextMenuSourceTreeItem)
     {
-        auto fSelected = ui->treeSource->selectedItems();
+        const auto fSelected = ui->treeSource->selectedItems();
         if (fSelected.size())
         {
             mContextMenuSourceTreeItem = fSelected.at(0);
@@ -1227,13 +1246,13 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     {
         fCommand = fGitCmd;
     }
-    int fResult = execute(fCommand, aResultStr);
+    const int fResult = execute(fCommand, aResultStr);
     return fResult == 0 ? fCommand : "";
 }
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 {
-    QFileInfo fFileInfo(getItemFilePath(aItem));
+    const QFileInfo fFileInfo(getItemFilePath(aItem));
 
     QDir fParent;
     if (fFileInfo.isDir()) fParent.setPath(fFileInfo.absoluteFilePath());
@@ -1248,19 +1267,19 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 
     if (!fParent.isRoot())
     {
-        QString fRepositoryPath = fParent.absolutePath();
-        QString fResultString;
+        const QString fRepositoryPath = fParent.absolutePath();
         QString fCommandString = tr(Cmd::getCommand(Cmd::GetStatusAll).toStdString().c_str()).arg(fRepositoryPath);
         fCommandString.append(" ");
         fCommandString.append(fFileInfo.absoluteFilePath());
 
+        QString fResultString;
         applyGitCommandToFilePath(fRepositoryPath, fCommandString, fResultString);
 
         stringt2typemap fCheckMap;
 
         parseGitStatus(fRepositoryPath + QDir::separator(), fResultString, fCheckMap);
 
-        QString fSourcePath = fFileInfo.absolutePath();
+        const QString fSourcePath = fFileInfo.absolutePath();
         iterateCheckItems(aItem, fCheckMap, &fSourcePath);
     }
 }
@@ -1311,7 +1330,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
-    auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
+    const auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
     if (fItemData.type() == QVariant::ModelIndex)
     {
         QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
@@ -1452,7 +1471,7 @@ void MainWindow::initCustomAction(QAction* fAction)
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
-    QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
+    const QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
     mContextMenuSourceTreeItem = nullptr;
     QActionGroup fPostActionGroup(this);
     fPostActionGroup.setExclusive(false);
@@ -1517,9 +1536,9 @@ void  MainWindow::call_git_commit()
     if (fCommitMsg.exec() == QDialog::Accepted)
     {
         on_btnCloseText_clicked();
-        QString fMessageText = fCommitMsg.getMessageText();
-        std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
-        QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fMessageText);
+        const QString fMessageText = fCommitMsg.getMessageText();
+        const std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
+        const QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fMessageText);
         if (fCommitMsg.getAutoStage())
         {
             getSelectedTreeItem();
@@ -1545,12 +1564,13 @@ void MainWindow::call_git_move_rename()
     getSelectedTreeItem();
     if (mContextMenuSourceTreeItem)
     {
-        bool      fOk;
-        Type      fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
-        QString   fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
-        QFileInfo fPath(getItemFilePath(mContextMenuSourceTreeItem));
-        QString   fOldName      = mContextMenuSourceTreeItem->text(Column::FileName);
-        QString   fNewName      = QInputDialog::getText(this,
+        bool      fOk {false};
+        const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
+        const QString   fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.mType));
+        const QFileInfo fPath(getItemFilePath(mContextMenuSourceTreeItem));
+
+        QString       fOldName = mContextMenuSourceTreeItem->text(Column::FileName);
+        const QString fNewName = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
                        tr("Enter a new name or destination for \"./%1\".\n"
                           "To move the %3 insert the destination path before.\n"
@@ -1559,10 +1579,10 @@ void MainWindow::call_git_move_rename()
 
         if (fOk && !fNewName.isEmpty())
         {
-            std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
+            const std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
+            const QString fNewGitName = "\"" + fNewName + "\"";
             QString     fCommand;
             bool        fMoved = false;
-            QString fNewGitName = "\"" + fNewName + "\"";
             if (fNewGitName.contains("/"))
             {
                 fMoved   = true;
@@ -1596,10 +1616,11 @@ void MainWindow::call_git_move_rename()
 
 void MainWindow::perform_custom_command()
 {
-    QAction *fAction = qobject_cast<QAction *>(sender());
+    const QAction     *fAction       = qobject_cast<QAction *>(sender());
+    const QVariantList fVariantList  = fAction->data().toList();
+    const uint         command_flags = fVariantList[ActionList::Data::Flags].toUInt();
+
     QString fGitCommand = fAction->statusTip();
-    QVariantList fVariantList = fAction->data().toList();
-    uint command_flags = fVariantList[ActionList::Data::Flags].toUInt();
 
     if      (command_flags & ActionList::Flags::History && ui->treeHistory->hasFocus())
     {
@@ -1677,8 +1698,8 @@ void MainWindow::call_git_history_diff_command()
 {
     const QString &fHistoryHashItems = ui->treeHistory->getSelectedHistoryHashItems();
     const QString &fHistoryFile      = ui->treeHistory->getSelectedHistoryFile();
-    QAction       *fAction           = qobject_cast<QAction *>(sender());
-    Type           fType(ui->treeHistory->getSelectedTopLevelType());
+    const QAction *fAction           = qobject_cast<QAction *>(sender());
+    const Type    fType(ui->treeHistory->getSelectedTopLevelType());
 
     QString fPath;
     if (fType.is(Type::Branch) && mContextMenuSourceTreeItem)
@@ -1691,8 +1712,8 @@ void MainWindow::call_git_history_diff_command()
         QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1");
         if (fHistoryFile.size())
         {
-            QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";
-            fCmd = tr(fCmd.toStdString().c_str()).arg(fHistoryFile);
+            const QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";
+            fCmd = tr(fCmd.toStdString().c_str()).arg(fQuotedHistoryFile);
             QString fResult;
             int fError = execute(fCmd, fResult);
             if (fError)
@@ -1742,12 +1763,12 @@ void MainWindow::call_git_history_diff_command()
 void MainWindow::call_git_branch_command()
 {
     const QAction*fAction            = qobject_cast<QAction *>(sender());
-    QString       fGitCommand        = fAction->statusTip();
-    QVariantList  fVariantList       = fAction->data().toList();
-    QString       fTopItemPath       = getItemTopDirPath(mContextMenuSourceTreeItem);
+    const QVariantList  fVariantList = fAction->data().toList();
     const QString fMessageBoxText    = fVariantList[ActionList::Data::MsgBoxText].toString();
     const QString fBranchItem        = ui->treeBranches->getSelectedBranch();
     const QString fBranchGitRootPath = ui->treeBranches->getSelectedBranchGitRootPath();
+    QString       fGitCommand        = fAction->statusTip();
+    QString       fTopItemPath       = getItemTopDirPath(mContextMenuSourceTreeItem);
 
     int fResult = QMessageBox::Yes;
     if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
@@ -1870,11 +1891,6 @@ void MainWindow::performCustomGitActionSettings()
     fCustomGitActions.exec();
 }
 
-void MainWindow::on_treeBranches_itemClicked(QTreeWidgetItem * /* item */, int /* column */)
-{
-
-}
-
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
@@ -1890,13 +1906,12 @@ void MainWindow::deleteFileOrFolder()
 {
     if (mContextMenuSourceTreeItem)
     {
-        QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
-        QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
-        Type fType;
-        fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
+        const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
+        const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
+        const Type fType {mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()};
         if (callMessageBox("Delete %1", fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
-            bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
+            const bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
             if (result)
             {
                 if (fType.is(Type::AllGitActions))
@@ -1920,10 +1935,26 @@ void MainWindow::deleteFileOrFolder()
 void MainWindow::selectTextBrowserLanguage()
 {
     QMenu menu(this);
-    auto language_list = Highlighter::getLanguages();
-    for (auto& language : language_list)
+    const auto& language_list = Highlighter::getLanguages();
+    QMap<char, QMenu*> start_char_map;
+    QList<QAction*> actionlist;
+    for (const QString& language : language_list)
     {
-        auto* action = menu.addAction(language);
+        char start_char = toupper(language.toStdString()[0]);
+        auto entry = start_char_map.find(start_char);
+        QMenu* submenu = nullptr;
+        if (entry != start_char_map.end())
+        {
+            submenu = entry.value();
+        }
+        else
+        {
+            submenu = new QMenu(tr("%1").arg(start_char));
+            menu.addMenu(submenu);
+            start_char_map[start_char] = submenu;
+        }
+        auto* action = submenu->addAction(language);
+        actionlist.append(action);
         if (language == mHighlighter->currentLanguage())
         {
             action->setCheckable(true);
@@ -1931,10 +1962,10 @@ void MainWindow::selectTextBrowserLanguage()
         }
     }
 
-    QPoint point = ui->textBrowser->rect().center();
+    const QPoint point = ui->textBrowser->rect().topLeft();
     auto* selection = menu.exec(ui->textBrowser->mapToGlobal(point));
 
-    int index = menu.actions().indexOf(selection);
+    const int index = actionlist.indexOf(selection);
     if (index != -1)
     {
         bool enabled = ui->btnStoreText->isEnabled();
@@ -1955,54 +1986,93 @@ void MainWindow::on_btnFindPrevious_clicked()
 
 void MainWindow::find_function(bool forward)
 {
-    Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
-    int                 find_flag   = forward ? 0 : QTextDocument::FindBackward;
+    if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
+    {
+        Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
+        int                 find_flag   = forward ? 0 : QTextDocument::FindBackward;
 
-    if (ui->ckFindCaseSensitive->isChecked())
-    {
-        reg_ex_case = Qt::CaseSensitive;
-        find_flag |= QTextDocument::FindCaseSensitively;
-    }
-    if (ui->ckFindWholeWord->isChecked())
-    {
-        find_flag |= QTextDocument::FindWholeWords;
-    }
+        if (ui->ckFindCaseSensitive->isChecked())
+        {
+            reg_ex_case = Qt::CaseSensitive;
+            find_flag |= QTextDocument::FindCaseSensitively;
+        }
+        if (ui->ckFindWholeWord->isChecked())
+        {
+            find_flag |= QTextDocument::FindWholeWords;
+        }
 
-    bool found_text = false;
-    if (ui->ckFindRegEx->isChecked())
-    {
-        found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
+        bool found_text = false;
+        if (ui->ckFindRegEx->isChecked())
+        {
+            found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
+        }
+        else
+        {
+            found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
+        }
+        if (found_text)
+        {
+            showDockedWidget(ui->textBrowser);
+        }
     }
     else
     {
-        found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
-    }
-    if (found_text)
-    {
-        showDockedWidget(ui->textBrowser);
-        ui->textBrowser->setFocus();
-    }
+        QTreeWidget *tree_view {nullptr};
+        switch (static_cast<FindView>(ui->comboFindBox->currentIndex()))
+        {
+            case FindView::Source:  tree_view = ui->treeSource; break;
+            case FindView::History: tree_view = ui->treeHistory; break;
+            case FindView::Branch:  tree_view = ui->treeBranches; break;
+            case FindView::Text: break;
+        }
 
-    //    int                 tree_match_flag = 0;
-        //            MatchExactly = 0,
-        //            MatchContains = 1,
-        //            MatchStartsWith = 2,
-        //            MatchEndsWith = 3,
-        //            MatchRegExp = 4,
-        //            MatchWildcard = 5,
-        //            MatchFixedString = 8,
-        //            MatchCaseSensitive = 16,
-        //            MatchWrap = 32,
-        //            MatchRecursive = 64
-//        QTreeWidget* tree = focusedTreeWidget();
-//        if (tree)
-//        {
-//            auto found_item = tree->findItems(ui->edtFindText->text(), static_cast<Qt::MatchFlag>(tree_match_flag));
-//            if (found_item.size())
-//            {
-//                tree->setItemSelected(found_item[0], true);
-//            }
-//        }
+        if (tree_view)
+        {
+            const auto& text_to_find    = ui->edtFindText->text();
+            int  tree_match_flag = Qt::MatchExactly;
+
+            if (!ui->ckFindWholeWord->isChecked())
+            {
+                tree_match_flag = Qt::MatchContains;
+            }
+            if (ui->ckFindRegEx->isChecked())
+            {
+                tree_match_flag = Qt::MatchRegExp;
+            }
+            else if (text_to_find.contains('*') || text_to_find.contains('?'))
+            {
+                tree_match_flag = Qt::MatchWildcard;
+            }
+
+            if (ui->ckFindCaseSensitive->isChecked())
+            {
+                tree_match_flag |= Qt::MatchCaseSensitive;
+            }
+            tree_match_flag |= Qt::MatchRecursive;
+
+            //! NOTE: also possible flags
+            //  MatchStartsWith = 2,
+            //  MatchEndsWith = 3,
+            //  MatchFixedString = 8,
+            //  MatchWrap = 32,
+
+            const auto found_items = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
+            if (found_items.size())
+            {
+                for (auto item : found_items)
+                {
+                    tree_view->setItemSelected(item, true);
+                    auto* parent = item->parent();
+                    while (parent)
+                    {
+                        tree_view->setItemExpanded(parent, true);
+                        parent = parent->parent();
+                    }
+                }
+                showDockedWidget(tree_view);
+            }
+        }
+    }
 }
 
 
