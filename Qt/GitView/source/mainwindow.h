@@ -132,7 +132,8 @@ private:
         GitDeleted,
         GitUnknown,
         Gitstaged,
-        GitUnmerged
+        GitUnmerged,
+        GitSelected
     };
     enum class FindView
     {

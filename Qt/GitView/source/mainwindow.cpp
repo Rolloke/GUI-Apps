@@ -752,8 +752,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
                         case Work::ShowSelected:
-                            fResult = 0;
-                            //! TODO: find selected items of parent
+                            fResult = aParentItem->isSelected();
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
 
@@ -1124,6 +1123,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         ui->labelFilePath->setText(fFileName);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
         mHighlighter->setExtension(file_info.suffix());
+        ui->labelLanguage->setText("L: " + mHighlighter->currentLanguage());
         ui->textBrowser->setText(file.readAll());
         ui->btnStoreText->setEnabled(false);
 #ifdef DOCKED_VIEWS
@@ -1196,6 +1196,9 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
             break;
         case ComboShowItems::GitUnmerged:
             handleWorker(Work::ShowUnMerged);
+            break;
+        case ComboShowItems::GitSelected:
+            handleWorker(Work::ShowSelected);
             break;
     }
 }
