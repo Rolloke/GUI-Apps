@@ -42,7 +42,7 @@ Cmd::Cmd()
 
     mCommandMap[BranchList]             = "git -C %1 branch --list";
     mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
-    mCommandMap[BranchShow]             = "git -C %1 show-branch %2";
+    mCommandMap[BranchShow]             = "git -C %1 show %2";
     mCommandMap[BranchListRemote]       = "git -C %1 branch --list --remotes";
     mCommandMap[BranchListMerged]       = "git -C %1 branch --list --merged";
     mCommandMap[BranchListNotMerged]    = "git -C %1 branch --list --no-merged";
