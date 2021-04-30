@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     gitignore.cpp \
     aboutdlg.cpp \
     highlighter.cpp \
-    xml_functions.cpp
+    xml_functions.cpp \
+    mergedialog.cpp \
+    qradiobuttongroup.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -54,13 +56,16 @@ HEADERS  += mainwindow.h \
     gitignore.h \
     aboutdlg.h \
     highlighter.h \
-    xml_functions.h
+    xml_functions.h \
+    mergedialog.h \
+    qradiobuttongroup.h
 
 
 FORMS    += mainwindow.ui \
     commitmessage.ui \
     customgitactions.ui \
-    aboutdlg.ui
+    aboutdlg.ui \
+    mergedialog.ui
 
 RESOURCES += resource.qrc
 

@@ -31,6 +31,11 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem);
 int getItemLevel(QTreeWidgetItem* aItem);
 
+enum error
+{
+    ErrorNumberInErrno = -1,
+    NoError = 0
+};
 
 int execute(const QString& command, QString& aResultText);
 
