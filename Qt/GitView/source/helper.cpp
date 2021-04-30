@@ -124,13 +124,28 @@ int execute(const QString& command, QString& aResultText)
 {
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
     QString fTempResultFileNameAndPath = fTemp.path();
-    auto fResult = system((command + " > " + fTempResultFileNameAndPath).toStdString().c_str());
+    QString system_cmd = command + " > " + fTempResultFileNameAndPath;
+    auto fResult = system(system_cmd.toStdString().c_str());
+
+    if (fResult != NoError)
+    {
+        system_cmd = command + " 2>> " + fTempResultFileNameAndPath;
+        system(system_cmd.toStdString().c_str());
+    }
 
     std::ostringstream fStringStream;
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
     fStringStream << fFile.rdbuf();
     std::string fStreamString = fStringStream.str();
     boost::algorithm::trim_right(fStreamString);
+    if (fResult != 0)
+    {
+        fStringStream << "Error occurred executing command: " << fResult;
+        if (fResult == ErrorNumberInErrno)
+        {
+            fStringStream << "Error number : " << errno;
+        }
+    }
     aResultText = fStreamString.c_str();
 
     if (!fTemp.remove(fTemp.path()))

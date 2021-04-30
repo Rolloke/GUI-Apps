@@ -34,8 +34,8 @@ struct Cmd
         Push,
         Pull,
         Show,
-        MergeAbort,
-        MergeContinue,
+        Unused1,
+        Unused2,
         BranchList,
         BranchDelete,
         BranchShow,
@@ -45,8 +45,6 @@ struct Cmd
         BranchCheckout,
         BranchHistory,
         CallMergeTool,
-        MergeStrategyOurs,
-        MergeStrategyTheirs,
 
         /// hint: add further git commands here
         CustomCommand=50,
@@ -65,6 +63,7 @@ struct Cmd
         About,
         Delete,
         SelectTextBrowserLanguage,
+        InvokeGitMergeDialog,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,

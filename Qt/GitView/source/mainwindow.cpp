@@ -7,6 +7,7 @@
 #include "qbranchtreewidget.h"
 #include "customgitactions.h"
 #include "aboutdlg.h"
+#include "mergedialog.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -36,18 +37,14 @@ using namespace git;
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
-// TODO: difftool bzw. mergetool auswählen
-// - automatisch mit Dateiendung
-// - manuell über Menue
-
-// TODO: merge command implementieren
+// TODO: merge command mit Dialog implementieren
 // git merge --abort
 // git merge --continue
-// git mergetool
-// git pull
 // git merge -s <resolve|recursive <ours|theirs|patience> > obsolete
-//           --stat
+// git mergetool
+// Preview anzeigen ...
 // git log --merge -p <path>
+// TODO
 
 namespace config
 {
@@ -138,6 +135,24 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
+
+    QString result_string;
+    int result = execute("git difftool --tool-help", result_string);
+    if (result == NoError)
+    {
+        auto result_list = result_string.split("\n");
+        for (int i=1; i<result_list.size(); ++i)
+        {
+            if (result_list[i].size())
+            {
+                ui->comboDiffTool->addItem(result_list[i].trimmed());
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 
     // NOTE: Remote Repositories nötig
     const QString fCommand = "git remote -v";
@@ -896,15 +911,6 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 }
 
 
-void MainWindow::selectSourceFolder()
-{
-    const QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
-    if (fSourcePath.size() > 1)
-    {
-        insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
-    }
-}
-
 void MainWindow::apendTextToBrowser(const QString& aText, bool append)
 {
     if (!append)
@@ -1039,7 +1045,11 @@ void MainWindow::cancelCurrentWorkTask()
 
 void MainWindow::addGitSourceFolder()
 {
-    selectSourceFolder();
+    const QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
+    if (fSourcePath.size() > 1)
+    {
+        insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
+    }
 }
 
 void MainWindow::updateGitStatus()
@@ -1141,7 +1151,6 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         menu.exec( ui->treeSource->mapToGlobal(pos) );
-        mContextMenuSourceTreeItem = nullptr;
     }
     else
     {
@@ -1208,6 +1217,10 @@ void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column 
     mContextMenuSourceTreeItem = item;
     const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
     mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
+    if (mMergeDialog)
+    {
+        mMergeDialog->mGitFilePath = getItemFilePath(mContextMenuSourceTreeItem);
+    }
 }
 
 void MainWindow::getSelectedTreeItem()
@@ -1249,8 +1262,8 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     {
         fCommand = fGitCmd;
     }
-    const int fResult = execute(fCommand, aResultStr);
-    return fResult == 0 ? fCommand : "";
+    execute(fCommand, aResultStr);
+    return fCommand;
 }
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
@@ -1365,18 +1378,14 @@ void MainWindow::initContextMenuActions()
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::History, Flag::set);
+    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::MergeAbort, tr("Abort Merge") , Cmd::getCommand(Cmd::MergeAbort)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::MergeAbort, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::MergeContinue, tr("Continue Merge") , Cmd::getCommand(Cmd::MergeContinue)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::MergeContinue, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::MergeStrategyOurs, tr("Merge Ours") , Cmd::getCommand(Cmd::MergeStrategyOurs)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::MergeStrategyOurs, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::MergeStrategyTheirs, tr("Merge Theirs") , Cmd::getCommand(Cmd::MergeStrategyTheirs)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::MergeStrategyTheirs, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
+
+//    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1475,7 +1484,7 @@ void MainWindow::initCustomAction(QAction* fAction)
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
     const QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
-    mContextMenuSourceTreeItem = nullptr;
+    auto * old_item = mContextMenuSourceTreeItem;
     QActionGroup fPostActionGroup(this);
     fPostActionGroup.setExclusive(false);
     if (fItemData.isValid())
@@ -1520,7 +1529,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
         ui->treeHistory->checkAuthorsIndex(fIndex, fAction->isChecked());
     }
 
-    mContextMenuSourceTreeItem = nullptr;
+    mContextMenuSourceTreeItem = old_item;
 }
 
 void MainWindow::clearTrees()
@@ -1550,7 +1559,6 @@ void  MainWindow::call_git_commit()
             execute(fCommitCommand, fResultStr);
             apendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
-            mContextMenuSourceTreeItem = nullptr;
         }
         else
         {
@@ -1627,6 +1635,7 @@ void MainWindow::perform_custom_command()
 
     if      (command_flags & ActionList::Flags::History && ui->treeHistory->hasFocus())
     {
+        getSelectedTreeItem();
         call_git_history_diff_command();
     }
     else if (command_flags & ActionList::Flags::Branch)
@@ -1655,6 +1664,11 @@ void MainWindow::perform_custom_command()
             if (fStagedCmdAddOn.size() && fType.is(Type::GitStaged))
             {
                 fOption += fStagedCmdAddOn;
+            }
+            if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
+            {
+                fOption += "--tool=";
+                fOption += ui->comboDiffTool->currentText();
             }
 
             fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fOption).arg("%1");
@@ -1693,7 +1707,6 @@ void MainWindow::perform_custom_command()
 #endif
             }   break;
         }
-        mContextMenuSourceTreeItem = nullptr;
     }
 }
 
@@ -1718,15 +1731,8 @@ void MainWindow::call_git_history_diff_command()
             const QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";
             fCmd = tr(fCmd.toStdString().c_str()).arg(fQuotedHistoryFile);
             QString fResult;
-            int fError = execute(fCmd, fResult);
-            if (fError)
-            {
-                apendTextToBrowser(fCmd + getLineFeed() + tr("Error occurred: %1").arg(fError));
-            }
-            else
-            {
-                apendTextToBrowser(fCmd + getLineFeed() + fResult);
-            }
+            execute(fCmd, fResult);
+            apendTextToBrowser(fCmd + getLineFeed() + fResult);
         }
         else
         {
@@ -1751,15 +1757,8 @@ void MainWindow::call_git_history_diff_command()
             fCmd = tr(fFormatString.toStdString().c_str()).arg(fHistoryHashItems).arg("");
         }
         QString fResult;
-        int fError = execute(fCmd, fResult);
-        if (fError)
-        {
-            apendTextToBrowser(fCmd + getLineFeed() + tr("Error occurred: %1").arg(fError));
-        }
-        else
-        {
-            apendTextToBrowser(fCmd + getLineFeed() + fResult);
-        }
+        execute(fCmd, fResult);
+        apendTextToBrowser(fCmd + getLineFeed() + fResult);
     }
 }
 
@@ -1799,15 +1798,8 @@ void MainWindow::call_git_branch_command()
             fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fBranchItem);
         }
 
-        fResult = execute(fGitCommand, fResultStr);
-        if (fResult == 0)
-        {
-            fResultStr = fGitCommand + getLineFeed() + fResultStr;
-        }
-        else
-        {
-            fResultStr = tr("result of command \"%1\" is %2:%3%4").arg(fGitCommand).arg(fResult).arg(getLineFeed()).arg(fResultStr);
-        }
+        execute(fGitCommand, fResultStr);
+        fResultStr = fGitCommand + getLineFeed() + fResultStr;
         apendTextToBrowser(fResultStr);
     }
 
@@ -1894,6 +1886,18 @@ void MainWindow::performCustomGitActionSettings()
     fCustomGitActions.exec();
 }
 
+void MainWindow::invoke_git_merge_dialog()
+{
+    if (!mMergeDialog)
+    {
+        mMergeDialog.reset(new MergeDialog(this));
+        connect(mMergeDialog->getAction(), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    }
+
+    mMergeDialog->mGitFilePath = getItemFilePath(mContextMenuSourceTreeItem);
+    mMergeDialog->show();
+}
+
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
@@ -1911,13 +1915,13 @@ void MainWindow::deleteFileOrFolder()
     {
         const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
         const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
-        const Type fType {mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()};
+        const Type fType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
         if (callMessageBox("Delete %1", fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
             const bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
             if (result)
             {
-                if (fType.is(Type::AllGitActions))
+                if (fType.is(Type::AllGitActions) && !fType.is(Type::GitUnTracked))
                 {
                     updateTreeItemStatus(mContextMenuSourceTreeItem);
                 }
@@ -2079,3 +2083,12 @@ void MainWindow::find_function(bool forward)
 }
 
 
+
+void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    if (   mContextMenuSourceTreeItem
+        && mContextMenuSourceTreeItem == previous)
+    {
+        mContextMenuSourceTreeItem = 0;
+    }
+}

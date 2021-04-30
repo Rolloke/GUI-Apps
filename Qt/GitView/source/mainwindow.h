@@ -20,6 +20,7 @@ namespace Ui
 class MainWindow;
 }
 
+class MergeDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -63,20 +64,21 @@ private Q_SLOTS:
 #endif
     void clearTrees();
 
-    void performCustomGitActionSettings();
-
-    void call_git_commit();
-    void call_git_move_rename();
+    void perform_custom_command();
     void call_git_history_diff_command();
     void call_git_branch_command();
-    void perform_custom_command();
+
+    void invoke_git_merge_dialog();
+    void performCustomGitActionSettings();
+    void call_git_commit();
+    void call_git_move_rename();
     void expand_tree_items();
     void collapse_tree_items();
     void addGitSourceFolder();
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
-
+    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -153,7 +155,6 @@ private:
     void     insertSourceTree(const QDir& fSource, int fItem);
     quint64  sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
 
-    void     selectSourceFolder();
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
     void     apendTextToBrowser(const QString& aText, bool append=false);
@@ -191,6 +192,7 @@ private:
     GitIgnore             mGitIgnore;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<Highlighter> mHighlighter;
+    QSharedPointer<MergeDialog> mMergeDialog;
     QString               mFontName;
 };
 

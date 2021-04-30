@@ -57,6 +57,12 @@
 #include <QDir>
 
 const QString Highlighter::mDefault {"git"};
+
+namespace
+{
+    const QString groupHighlighter {"Highlighter"};
+}
+
 QMap<QString, Highlighter::Language> Highlighter::mLanguages;
 QMap<QString, QString>  Highlighter::mExtensionToLanguage;
 QSharedPointer<QDomDocument> Highlighter::mDoc;
@@ -115,7 +121,7 @@ void Highlighter::Language::load(QSettings& fSettings)
     mFunctionFormat.setFontItalic(true);
     mFunctionFormat.setForeground(Qt::blue);
 
-    fSettings.beginGroup("Highlighter");
+    fSettings.beginGroup(groupHighlighter);
     LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
     LOAD_FORMAT(fSettings, mMultiLineCommentFormat);
     LOAD_FORMAT(fSettings, mKeywordFormat[0]);
@@ -136,7 +142,7 @@ void Highlighter::Language::load(QSettings& fSettings)
 
 void Highlighter::Language::store( QSettings& fSettings)
 {
-    fSettings.beginGroup("Highlighter");
+    fSettings.beginGroup(groupHighlighter);
     STORE_STRF(fSettings, mSingleLineCommentFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mMultiLineCommentFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[0], Highlighter::Language::to_string);

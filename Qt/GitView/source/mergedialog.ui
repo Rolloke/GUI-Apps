@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MergeDialog</class>
+ <widget class="QDialog" name="MergeDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>257</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Merge</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>50</y>
+     <width>151</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Merge</string>
+   </property>
+   <widget class="QPushButton" name="bntMergeAbort">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Abort</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnMergeContinue">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Continue</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnMergePreview">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Preview</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboGitMergeTool">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Automatic</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Default Tool</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="btnMergeNow">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Merge</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QRadioButtonGroup" name="groupBoxMergeStrategy">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>141</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Merge Options</string>
+   </property>
+   <widget class="QRadioButton" name="radioMergeOurs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ours</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMergeTheirs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Theirs</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMergePatience">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Patience</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMergeMinimal">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Minimal</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMergeHistogram">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Histogram</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioMergeMeyers">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>129</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Meyers</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="labelFile">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>File:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="textFileName">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>10</y>
+     <width>281</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QRadioButtonGroup</class>
+   <extends>QGroupBox</extends>
+   <header location="global">qradiobuttongroup.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

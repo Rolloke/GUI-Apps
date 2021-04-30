@@ -151,6 +151,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="ckHideEmptyParent">
             <property name="maximumSize">
              <size>
@@ -162,7 +169,7 @@
              <string>Hides parent tree item, if it does not contain entries</string>
             </property>
             <property name="text">
-             <string>Hide empty Parent</string>
+             <string>Hide empty Parent  </string>
             </property>
            </widget>
           </item>
@@ -178,8 +185,30 @@
              <string>Show short git status</string>
             </property>
             <property name="text">
-             <string>Short State</string>
+             <string>Short State  </string>
             </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelDiffTool">
+            <property name="text">
+             <string>Diff tool:  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboDiffTool">
+            <property name="toolTip">
+             <string>Select diff or merge tool</string>
+            </property>
+            <property name="currentText">
+             <string>Default</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -188,6 +217,9 @@
          <widget class="QTreeWidget" name="treeSource">
           <property name="toolTip">
            <string>Show file and folder tree of git folder</string>
+          </property>
+          <property name="statusTip">
+           <string>Select Diff or Merge Tool</string>
           </property>
           <property name="sortingEnabled">
            <bool>true</bool>
@@ -247,7 +279,7 @@
              </size>
             </property>
             <property name="text">
-             <string>File/Text:</string>
+             <string>File/Text:  </string>
             </property>
            </widget>
           </item>
@@ -260,7 +292,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>shows filename of opened file</string>
+             <string>Shows filename of opened file</string>
             </property>
             <property name="text">
              <string/>
@@ -324,6 +356,9 @@
               <width>100</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="toolTip">
+             <string>Shows language for hilighting</string>
             </property>
             <property name="text">
              <string> L:</string>
@@ -543,10 +578,16 @@ File content opened with double click</string>
           <height>25</height>
          </size>
         </property>
+        <property name="toolTip">
+         <string>Select View for search function</string>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btnFindPrevious">
+        <property name="toolTip">
+         <string>Search backward</string>
+        </property>
         <property name="text">
          <string>Previous</string>
         </property>
@@ -554,16 +595,26 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QPushButton" name="btnFindNext">
+        <property name="toolTip">
+         <string>Search forward</string>
+        </property>
         <property name="text">
          <string>Next</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="edtFindText"/>
+       <widget class="QLineEdit" name="edtFindText">
+        <property name="toolTip">
+         <string>Enter search expression or words</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="ckFindCaseSensitive">
+        <property name="toolTip">
+         <string>Search case sensitive</string>
+        </property>
         <property name="text">
          <string>Case Sensitive</string>
         </property>
@@ -571,6 +622,9 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QCheckBox" name="ckFindWholeWord">
+        <property name="toolTip">
+         <string>Search whole words</string>
+        </property>
         <property name="text">
          <string>Whole Word</string>
         </property>
@@ -578,6 +632,9 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QCheckBox" name="ckFindRegEx">
+        <property name="toolTip">
+         <string>Search with regular expression</string>
+        </property>
         <property name="text">
          <string>Regular Expression</string>
         </property>
