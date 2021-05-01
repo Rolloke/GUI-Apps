@@ -1385,7 +1385,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
 
-//    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
+    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1608,7 +1608,7 @@ void MainWindow::call_git_move_rename()
 
             QString fResultStr;
             int fResult = execute(fCommand, fResultStr);
-            if (fResult == 0)
+            if (fResult == NoError)
             {
                 if (fMoved)
                 {

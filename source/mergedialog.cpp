@@ -98,7 +98,7 @@ MergeDialog::~MergeDialog()
 
 void MergeDialog::on_btnMergePreview_clicked()
 {
-    setCommand(tr("git log %1").arg(getMergeCommand()));
+    setCommand(tr("git log -- %1").arg(getMergeCommand()));
 }
 
 void MergeDialog::on_bntMergeAbort_clicked()
