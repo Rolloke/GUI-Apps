@@ -69,6 +69,7 @@ private Q_SLOTS:
     void call_git_branch_command();
 
     void invoke_git_merge_dialog();
+    void invoke_highlighter_dialog();
     void performCustomGitActionSettings();
     void call_git_commit();
     void call_git_move_rename();

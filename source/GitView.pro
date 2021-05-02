@@ -24,6 +24,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
+    highlighterdialog.cpp \
     mainwindow.cpp \
     helper.cpp \
     logger.cpp \
@@ -44,6 +45,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     helper.h \
+    highlighterdialog.h \
     logger.h \
     workerthreadconnector.h \
     git_type.h \
@@ -65,6 +67,7 @@ FORMS    += mainwindow.ui \
     commitmessage.ui \
     customgitactions.ui \
     aboutdlg.ui \
+    highlighterdialog.ui \
     mergedialog.ui
 
 RESOURCES += resource.qrc

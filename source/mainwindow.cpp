@@ -1386,6 +1386,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
 
     connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
+    connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font")) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1898,6 +1899,11 @@ void MainWindow::invoke_git_merge_dialog()
     mMergeDialog->show();
 }
 
+void MainWindow::invoke_highlighter_dialog()
+{
+    Highlighter::Language::invokeHighlighterDlg();
+}
+
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
@@ -2084,7 +2090,7 @@ void MainWindow::find_function(bool forward)
 
 
 
-void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current */, QTreeWidgetItem *previous)
 {
     if (   mContextMenuSourceTreeItem
         && mContextMenuSourceTreeItem == previous)

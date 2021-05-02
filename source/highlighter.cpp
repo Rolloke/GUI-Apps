@@ -51,6 +51,7 @@
 #include "highlighter.h"
 #include "xml_functions.h"
 #include "helper.h"
+#include "highlighterdialog.h"
 
 #include <QtXml/QDomDocument>
 #include <QSettings>
@@ -68,7 +69,7 @@ QMap<QString, QString>  Highlighter::mExtensionToLanguage;
 QSharedPointer<QDomDocument> Highlighter::mDoc;
 QStringList Highlighter::mLanguageNames;
 
-QTextCharFormat Highlighter::Language::mKeywordFormat[Highlighter::Language::keyword_formats];
+QTextCharFormat Highlighter::Language::mKeywordFormat[Highlighter::keyword_formats];
 QTextCharFormat Highlighter::Language::mNumbersFormat;
 QTextCharFormat Highlighter::Language::mSingleLineCommentFormat;
 QTextCharFormat Highlighter::Language::mMultiLineCommentFormat;
@@ -76,39 +77,46 @@ QTextCharFormat Highlighter::Language::mQuotationFormat;
 QTextCharFormat Highlighter::Language::mFunctionFormat;
 QTextCharFormat Highlighter::Language::mPreprocessorFormat;
 
+QMap<QString, int>  Highlighter::mKeywordMap;
+
 
 #define LOAD_FORMAT(SETTINGS, ITEM) Highlighter::Language::convert(ITEM, SETTINGS.value(getSettingsName(#ITEM)).toString());
 
-
+#define ADD_MAP_ENTRY(MAP, X) { MAP[#X] = X; }
+#define ADD_FRIENDLY_NAME_MAP_ENTRY(MAP, X) { MAP[getSettingsName(#X)] = X; }
+#define SET_FRIENDLY_NAME_MAP_ITEM(MAP, X) { X = MAP[getSettingsName(#X)]; }
 
 void Highlighter::Language::load(QSettings& fSettings)
 {
     mSingleLineCommentFormat.setForeground(Qt::darkCyan);
     mMultiLineCommentFormat.setForeground(Qt::darkCyan);
 
-    mKeywordFormat[0].setForeground(Qt::darkBlue);
-    mKeywordFormat[0].setFontWeight(QFont::Medium);
+    mKeywordFormat[instre1].setForeground(Qt::darkBlue);
+    mKeywordFormat[instre1].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[1].setForeground(Qt::darkCyan);
-    mKeywordFormat[1].setFontWeight(QFont::Medium);
+    mKeywordFormat[instre2].setForeground(Qt::darkCyan);
+    mKeywordFormat[instre2].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[2].setForeground(Qt::darkGreen);
-    mKeywordFormat[2].setFontWeight(QFont::Medium);
+    mKeywordFormat[type1].setForeground(Qt::darkGreen);
+    mKeywordFormat[type1].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[3].setForeground(Qt::darkYellow);
-    mKeywordFormat[3].setFontWeight(QFont::Medium);
+    mKeywordFormat[type2].setForeground(Qt::darkYellow);
+    mKeywordFormat[type2].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[4].setForeground(Qt::magenta);
-    mKeywordFormat[4].setFontWeight(QFont::Medium);
+    mKeywordFormat[type3].setForeground(Qt::magenta);
+    mKeywordFormat[type3].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[5].setForeground(Qt::darkMagenta);
-    mKeywordFormat[5].setFontWeight(QFont::Medium);
+    mKeywordFormat[type4].setForeground(Qt::darkMagenta);
+    mKeywordFormat[type4].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[6].setForeground(Qt::cyan);
-    mKeywordFormat[6].setFontWeight(QFont::Medium);
+    mKeywordFormat[type5].setForeground(Qt::cyan);
+    mKeywordFormat[type5].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[7].setForeground(Qt::green);
-    mKeywordFormat[7].setFontWeight(QFont::Medium);
+    mKeywordFormat[type6].setForeground(Qt::green);
+    mKeywordFormat[type6].setFontWeight(QFont::Medium);
+
+    mKeywordFormat[type7].setForeground(Qt::darkGray);
+    mKeywordFormat[type7].setFontWeight(QFont::Medium);
 
     mNumbersFormat.setForeground(Qt::blue);
     mNumbersFormat.setFontWeight(QFont::Medium);
@@ -121,17 +129,28 @@ void Highlighter::Language::load(QSettings& fSettings)
     mFunctionFormat.setFontItalic(true);
     mFunctionFormat.setForeground(Qt::blue);
 
+    ADD_MAP_ENTRY(mKeywordMap, instre1);
+    ADD_MAP_ENTRY(mKeywordMap, instre2);
+    ADD_MAP_ENTRY(mKeywordMap, type1);
+    ADD_MAP_ENTRY(mKeywordMap, type2);
+    ADD_MAP_ENTRY(mKeywordMap, type3);
+    ADD_MAP_ENTRY(mKeywordMap, type4);
+    ADD_MAP_ENTRY(mKeywordMap, type5);
+    ADD_MAP_ENTRY(mKeywordMap, type6);
+    ADD_MAP_ENTRY(mKeywordMap, type7);
+
     fSettings.beginGroup(groupHighlighter);
     LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
     LOAD_FORMAT(fSettings, mMultiLineCommentFormat);
-    LOAD_FORMAT(fSettings, mKeywordFormat[0]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[1]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[2]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[3]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[4]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[5]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[6]);
-    LOAD_FORMAT(fSettings, mKeywordFormat[7]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[instre1]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[instre2]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type1]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type2]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type3]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type4]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type5]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type6]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[type7]);
     LOAD_FORMAT(fSettings, mFunctionFormat);
     LOAD_FORMAT(fSettings, mNumbersFormat);
     LOAD_FORMAT(fSettings, mPreprocessorFormat);
@@ -145,14 +164,15 @@ void Highlighter::Language::store( QSettings& fSettings)
     fSettings.beginGroup(groupHighlighter);
     STORE_STRF(fSettings, mSingleLineCommentFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mMultiLineCommentFormat, Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[0], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[1], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[2], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[3], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[4], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[5], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[6], Highlighter::Language::to_string);
-    STORE_STRF(fSettings, mKeywordFormat[7], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[instre1], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[instre2], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type1], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type2], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type3], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type4], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type5], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type6], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[type7], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mFunctionFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mNumbersFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mPreprocessorFormat, Highlighter::Language::to_string);
@@ -295,6 +315,51 @@ const QStringList& Highlighter::getLanguages()
     return mLanguageNames;
 }
 
+TextCharFormatMap  Highlighter::Language::getHighlightFormats()
+{
+    QMap<QString, QTextCharFormat> list;
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mNumbersFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mSingleLineCommentFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mMultiLineCommentFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mQuotationFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mFunctionFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mPreprocessorFormat);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[instre1]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[instre2]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type1]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type2]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type3]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type4]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type5]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type6]);
+    ADD_FRIENDLY_NAME_MAP_ENTRY(list, mKeywordFormat[type7]);
+    return list;
+}
+
+void Highlighter::Language::invokeHighlighterDlg()
+{
+    HighlighterDialog dlg(nullptr, getHighlightFormats());
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        const auto list = dlg.getTextFormatMap();
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mNumbersFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mSingleLineCommentFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mMultiLineCommentFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mQuotationFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mFunctionFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mPreprocessorFormat);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[instre1]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[instre2]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type1]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type2]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type3]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type4]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type5]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type6]);
+        SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type7]);
+    }
+}
+
 void Highlighter::load_language(QString language_name)
 {
     if (mDoc)
@@ -332,6 +397,11 @@ void Highlighter::load_language(QString language_name)
                     }
                     else
                     {
+                        auto key_map_item = mKeywordMap.find(name);
+                        if (key_map_item != mKeywordMap.end())
+                        {
+                            k = key_map_item.value();
+                        }
                         for (auto& character : keys)
                         {
                             if (character == ' ') character = '|';
@@ -340,7 +410,7 @@ void Highlighter::load_language(QString language_name)
                         rule.pattern = QRegularExpression(pattern);
                         rule.format = language.mKeywordFormat[k];
                         language.highlightingRules.append(rule);
-                        if (k < Language::keyword_formats) ++k;
+                        if (k < keyword_formats) ++k;
                     }
                 }
             }
@@ -391,31 +461,31 @@ void Highlighter::load_default_language()
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:git|config|help|bugreport|init|clone|add|status|diff|commit|notes|restore|reset|rm|mv|branch|checkout|switch|merge|mergetool|log|stash|tag|worktree|fetch|pull|push|remote|submodule|show|log|diff|difftool|range-diff|shortlog|describe|apply|cherry-pick|diff|rebase|revert)\\b"));
-    rule.format = language.mKeywordFormat[0];
+    rule.format = language.mKeywordFormat[instre1];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:D|M|A|R|DD|AU|UD|UA|DU|AA|UU|MM|\\?|\\?\\?)\\b"));
-    rule.format = language.mKeywordFormat[1];
+    rule.format = language.mKeywordFormat[instre2];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("-[\\w]+|--[\\w]+"));
-    rule.format = language.mKeywordFormat[2];
+    rule.format = language.mKeywordFormat[type1];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("^[\\+].*"));
-    rule.format = language.mKeywordFormat[3];
+    rule.format = language.mKeywordFormat[type2];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\?"));
-    rule.format = language.mKeywordFormat[3];
+    rule.format = language.mKeywordFormat[type2];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("^[-].*"));
-    rule.format = language.mKeywordFormat[4];
+    rule.format = language.mKeywordFormat[type3];
     language.highlightingRules.append(rule);
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:clean|gc|fsck|reflog|filter-branch|instaweb|archive|bundle|daemon|update-server-info|cat-file|check-ignore|checkout-index|commit-tree|count-objects|diff-index|for-each-ref|hash-object|ls-files|ls-tree|merge-base|read-tree|rev-list|rev-parse|show-ref|symbolic-ref|update-index|update-ref|verify-pack|write-tree)\\b"));
-    rule.format = language.mKeywordFormat[5];
+    rule.format = language.mKeywordFormat[type4];
     language.highlightingRules.append(rule);
 
     mLanguageNames.push_back(mDefault);
