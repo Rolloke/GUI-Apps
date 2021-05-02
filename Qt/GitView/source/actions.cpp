@@ -104,6 +104,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::InsertHashFileNames]     = ":/resource/24X24/object-rotate-right.png";
     fActionIcons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
     fActionIcons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
+    fActionIcons[Cmd::InvokeHighlighterDialog] = ":/resource/24X24/emblem-system.png";
 
     for (const auto& fIconPath: fActionIcons )
     {

@@ -54,6 +54,8 @@
 #include <QSyntaxHighlighter>
 #include <QTextCharFormat>
 #include <QRegularExpression>
+#include <string>
+#include <map>
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -61,6 +63,9 @@ class QDomDocument;
 class QSettings;
 QT_END_NAMESPACE
 
+typedef QMap<QString, QTextCharFormat> TextCharFormatMap;
+
+QString weight_name(int weight);
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -72,13 +77,29 @@ private:
         QTextCharFormat format;
     };
 public:
+    enum
+    {
+        instre1,
+        instre2,
+        type1,
+        type2,
+        type3,
+        type4,
+        type5,
+        type6,
+        type7,
+        keyword_formats
+    };
+
     struct Language
     {
         static void load(QSettings&);
         static void store(QSettings&);
         static QString to_string(const QTextCharFormat&);
         static void convert(QTextCharFormat&, const QString&);
-        enum { keyword_formats=8 };
+        static TextCharFormatMap getHighlightFormats();
+        static void invokeHighlighterDlg();
+
         QVector<HighlightingRule> highlightingRules;
 
         QRegularExpression commentStartExpression;
@@ -100,6 +121,7 @@ public:
     const QString& currentLanguage() const;
     static const QStringList& getLanguages();
 
+
 protected:
     void highlightBlock(const QString &text) override;
 
@@ -119,6 +141,7 @@ private:
 
     QString mCurrentLanguage;
     static const QString mDefault;
+    static QMap<QString, int>  mKeywordMap;
 };
 
 #endif // HIGHLIGHTER_H

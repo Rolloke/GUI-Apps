@@ -64,6 +64,7 @@ struct Cmd
         Delete,
         SelectTextBrowserLanguage,
         InvokeGitMergeDialog,
+        InvokeHighlighterDialog,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,
