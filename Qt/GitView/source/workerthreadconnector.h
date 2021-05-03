@@ -21,7 +21,7 @@ public Q_SLOTS:
     void operate(int aInt);
 
 private:
-    std::function< void (int) > mWorkerFunction;
+    std::function< QVariant (int) > mWorkerFunction;
 };
 
 
@@ -33,7 +33,7 @@ public:
     virtual ~WorkerThreadConnector();
 
     void sendMessage(int, QVariant);
-    void setWorkerFunction(const boost::function< void (int) >& aFunc);
+    void setWorkerFunction(const boost::function< QVariant (int) >& aFunc);
     void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
 
 public Q_SLOTS:

@@ -110,7 +110,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
 
-
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
@@ -135,24 +134,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
-
-    QString result_string;
-    int result = execute("git difftool --tool-help", result_string);
-    if (result == NoError)
-    {
-        auto result_list = result_string.split("\n");
-        for (int i=1; i<result_list.size(); ++i)
-        {
-            if (result_list[i].size())
-            {
-                ui->comboDiffTool->addItem(result_list[i].trimmed());
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
 
     // NOTE: Remote Repositories nötig
     const QString fCommand = "git remote -v";
@@ -214,6 +195,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     }
     fSettings.endArray();
     fSettings.endGroup();
+
+    mWorker.doWork(Work::DetermineDiffTools);
 
 #ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
@@ -927,18 +910,25 @@ void MainWindow::apendTextToBrowser(const QString& aText, bool append)
 
 
 
-void MainWindow::handleWorker(int aWork)
+QVariant MainWindow::handleWorker(int aWork)
 {
+    QVariant work_result;
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
-    mCurrentTask = static_cast<Work::e>(aWork);
     switch(static_cast<Work::e>(aWork))
     {
-    case Work::None: break;
+    case Work::DetermineDiffTools:
+    {
+        QString result_string;
+        int result = execute("git difftool --tool-help", result_string);
+        if (result == NoError)
+        {
+            work_result.setValue(result_string);
+        }
+     } break;
         default:
-            iterateTreeItems(*ui->treeSource);
             break;
     }
-    mCurrentTask = Work::None;
+    return work_result;
 }
 
 void MainWindow::handleMessage(int aMsg, QVariant aData)
@@ -946,7 +936,22 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     switch(static_cast<Work::e>(aMsg))
     {
-    case Work::None: break;
+    case Work::DetermineDiffTools:
+    if (aData.isValid() && aData.type() == QVariant::String)
+    {
+        auto result_list = aData.toString().split("\n");
+        for (int i=1; i<result_list.size(); ++i)
+        {
+            if (result_list[i].size())
+            {
+                ui->comboDiffTool->addItem(result_list[i].trimmed());
+            }
+            else
+            {
+                break;
+            }
+        }
+     } break;
         default:  break;
     }
 }
@@ -1182,34 +1187,18 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
 {
     switch (static_cast<ComboShowItems>(index))
     {
-        case ComboShowItems::AllFiles:
-            handleWorker(Work::ShowAllFiles);
-            break;
-        case ComboShowItems::AllGitActions:
-            handleWorker(Work::ShowAllGitActions);
-            break;
-        case ComboShowItems::GitModified:
-            handleWorker(Work::ShowModified);
-            break;
-        case ComboShowItems::GitAdded:
-            handleWorker(Work::ShowAdded);
-            break;
-        case ComboShowItems::GitDeleted:
-            handleWorker(Work::ShowDeleted);
-            break;
-        case ComboShowItems::GitUnknown:
-            handleWorker(Work::ShowUnknown);
-            break;
-        case ComboShowItems::Gitstaged:
-            handleWorker(Work::ShowStaged);
-            break;
-        case ComboShowItems::GitUnmerged:
-            handleWorker(Work::ShowUnMerged);
-            break;
-        case ComboShowItems::GitSelected:
-            handleWorker(Work::ShowSelected);
-            break;
+        case ComboShowItems::AllFiles:      mCurrentTask = Work::ShowAllFiles;      break;
+        case ComboShowItems::AllGitActions: mCurrentTask = Work::ShowAllGitActions; break;
+        case ComboShowItems::GitModified:   mCurrentTask = Work::ShowModified;      break;
+        case ComboShowItems::GitAdded:      mCurrentTask = Work::ShowAdded;         break;
+        case ComboShowItems::GitDeleted:    mCurrentTask = Work::ShowDeleted;       break;
+        case ComboShowItems::GitUnknown:    mCurrentTask = Work::ShowUnknown;       break;
+        case ComboShowItems::Gitstaged:     mCurrentTask = Work::ShowStaged;        break;
+        case ComboShowItems::GitUnmerged:   mCurrentTask = Work::ShowUnMerged;      break;
+        case ComboShowItems::GitSelected:   mCurrentTask = Work::ShowSelected;      break;
     }
+    iterateTreeItems(*ui->treeSource);
+    mCurrentTask = Work::None;
 }
 
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
