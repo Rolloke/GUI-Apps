@@ -102,6 +102,7 @@ private:
         ShowSelected,
         // NOTE: further git items are added here
         // show out of sync...
+        DetermineDiffTools,
         Last
     }; };
 
@@ -160,7 +161,7 @@ private:
 
     void     apendTextToBrowser(const QString& aText, bool append=false);
 
-    void     handleWorker(int);
+    QVariant handleWorker(int);
     void     handleMessage(int, QVariant);
 
     QString  getItemFilePath(QTreeWidgetItem* item);

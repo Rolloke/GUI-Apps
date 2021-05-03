@@ -8,10 +8,9 @@ void Worker::operate(int aWorkID)
 {
     if (mWorkerFunction)
     {
-        Q_EMIT sendMessage(aWorkID, QVariant(true));
         QThread::msleep(1);
-        mWorkerFunction(aWorkID);
-        Q_EMIT sendMessage(aWorkID, QVariant(false));
+        QVariant result = mWorkerFunction(aWorkID);
+        Q_EMIT sendMessage(aWorkID, result);
     }
 }
 
@@ -36,7 +35,7 @@ WorkerThreadConnector::~WorkerThreadConnector()
 }
 
 
-void WorkerThreadConnector::setWorkerFunction(const boost::function< void (int) >& aFunc)
+void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (int) >& aFunc)
 {
     if (mWorker)
     {
