@@ -4,12 +4,12 @@ Worker::Worker()
 {
 }
 
-void Worker::operate(int aWorkID)
+void Worker::operate(int aWorkID, QVariant data)
 {
     if (mWorkerFunction)
     {
         QThread::msleep(1);
-        QVariant result = mWorkerFunction(aWorkID);
+        QVariant result = mWorkerFunction(aWorkID, data);
         Q_EMIT sendMessage(aWorkID, result);
     }
 }
@@ -20,7 +20,7 @@ WorkerThreadConnector::WorkerThreadConnector(QObject*aParent):
     Worker*fWorker = new Worker;
     fWorker->moveToThread(&mWorkerThread);
     connect(&mWorkerThread, SIGNAL(finished()), fWorker, SLOT(deleteLater()));
-    connect(this, SIGNAL(operate(int)), fWorker, SLOT(operate(int)));
+    connect(this, SIGNAL(operate(int, QVariant)), fWorker, SLOT(operate(int, QVariant)));
     connect(fWorker, SIGNAL(sendMessage(int,QVariant)), this, SLOT(receiveMessage(int,QVariant)));
 
     mWorker = fWorker;
@@ -35,7 +35,7 @@ WorkerThreadConnector::~WorkerThreadConnector()
 }
 
 
-void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (int) >& aFunc)
+void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc)
 {
     if (mWorker)
     {
@@ -43,9 +43,9 @@ void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (i
     }
 }
 
-void WorkerThreadConnector::doWork(int aWorkID)
+void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
 {
-    Q_EMIT operate(aWorkID);
+    Q_EMIT operate(aWorkID, data);
 }
 
 

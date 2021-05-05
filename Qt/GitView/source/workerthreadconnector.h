@@ -18,10 +18,10 @@ Q_SIGNALS:
     void sendMessage(int, QVariant);
 
 public Q_SLOTS:
-    void operate(int aInt);
+    void operate(int aInt, QVariant);
 
 private:
-    std::function< QVariant (int) > mWorkerFunction;
+    std::function< QVariant (int, QVariant) > mWorkerFunction;
 };
 
 
@@ -33,20 +33,20 @@ public:
     virtual ~WorkerThreadConnector();
 
     void sendMessage(int, QVariant);
-    void setWorkerFunction(const boost::function< QVariant (int) >& aFunc);
+    void setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc);
     void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
 
 public Q_SLOTS:
-    void doWork(int );
+    void doWork(int, const QVariant&);
     void receiveMessage(int, QVariant);
 
 Q_SIGNALS:
-    void operate(int );
+    void operate(int, QVariant);
 
 private:
     Worker* mWorker;
     QThread mWorkerThread;
-    boost::function< void (int, QVariant) > mMessageFunction;
+    boost::function< void (int, const QVariant&) > mMessageFunction;
 };
 
 #endif // WORKERTHREADCONNECTOR_H
