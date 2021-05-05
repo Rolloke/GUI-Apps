@@ -153,7 +153,7 @@
           <item>
            <widget class="QLabel" name="label_space1">
             <property name="text">
-             <string> </string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -198,6 +198,12 @@
           </item>
           <item>
            <widget class="QComboBox" name="comboDiffTool">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Select diff or merge tool</string>
             </property>
@@ -619,7 +625,7 @@ File content opened with double click</string>
       <item>
        <widget class="QLabel" name="label_space2">
         <property name="text">
-         <string>  </string>
+         <string/>
         </property>
        </widget>
       </item>

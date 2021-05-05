@@ -93,7 +93,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
-    QObject::connect(this, SIGNAL(doWork(int)), &mWorker, SLOT(doWork(int)));
+    QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
@@ -940,32 +940,32 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     switch(static_cast<Work::e>(aMsg))
     {
-    case Work::ApplyGitCommand:
-    if (aData.isValid() && aData.type() == QVariant::String)
-    {
-        auto result_list = aData.toString().split("\n");
-        int count_empty_lines = 0;
-        for (int i=1; i<result_list.size(); ++i)
-        {
-            if (result_list[i].size() > 1) // text with two tabs marks an entry
+        case Work::ApplyGitCommand:
+            if (aData.isValid() && aData.type() == QVariant::String)
             {
-                if (result_list[i][0] == '\t' && result_list[i][1] == '\t')
+                auto result_list = aData.toString().split("\n");
+                for (auto&entry : result_list)
                 {
-                    result_list[i] = result_list[i].trimmed();
-                    int pos = result_list[i].indexOf(".");
-                    if (pos != -1)
+                    if (entry.size() > 1) // text with two tabs marks an entry
                     {
-                        result_list[i] = result_list[i].left(pos);
+                        if (entry[0] == '\t' && entry[1] == '\t')
+                        {
+                            entry = entry.trimmed();
+                            int pos = entry.indexOf(".");
+                            if (pos != -1)
+                            {
+                                entry = entry.left(pos);
+                            }
+                            ui->comboDiffTool->addItem(entry);
+                        }
                     }
-                    ui->comboDiffTool->addItem(result_list[i]);
+                    if (entry.contains("not currently available"))
+                    {
+                        break;
+                    }
                 }
             }
-            else if (++count_empty_lines > 1) // an empty line marks a section
-            {
-                break;
-            }
-        }
-     } break;
+            break;
         default:  break;
     }
 }
@@ -1885,7 +1885,12 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 
 void MainWindow::performCustomGitActionSettings()
 {
-    CustomGitActions fCustomGitActions(mActions);
+    QStringList merge_tools;
+    for (int i=1; i<ui->comboDiffTool->count(); ++i)
+    {
+        merge_tools.append(ui->comboDiffTool->itemText(i));
+    }
+    CustomGitActions fCustomGitActions(mActions, merge_tools);
     connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     fCustomGitActions.exec();
 }

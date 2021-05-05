@@ -32,7 +32,7 @@ public:
     ~MainWindow();
 
 Q_SIGNALS:
-    void doWork(int );
+    void doWork(int, QVariant);
 
 private Q_SLOTS:
     void cancelCurrentWorkTask();

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Settings for custom git actions</string>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QTableView" name="tableViewActions">
@@ -198,6 +201,11 @@ Contextmenu entries or Toolbar entries</string>
        <item>
         <property name="text">
          <string>Toolbar 2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Diff or Merge Tool</string>
         </property>
        </item>
       </widget>

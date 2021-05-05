@@ -145,7 +145,7 @@ int execute(const QString& command, QString& aResultText, bool hide)
     if (fResult != NoError)
     {
         system_cmd = command + " 2>> " + fTempResultFileNameAndPath;
-        system(system_cmd.toStdString().c_str());
+        fResult = system(system_cmd.toStdString().c_str());
     }
 #endif
 
