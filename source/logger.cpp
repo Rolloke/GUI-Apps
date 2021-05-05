@@ -4,15 +4,19 @@
 #endif
 
 #ifdef WIN32
+
 //#define USE_WINDOWS_LOG
-//#include <windows.h>
+#define USE_OUTPUT_DEBUG_STRING 1
+#include <windows.h>
+
 #endif
 #include <stdarg.h>
 #include <stdio.h>
 #include "logger.h"
 
-
 using namespace std;
+
+
 
 std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::notice | Logger::info | Logger::to_syslog | Logger::to_function;
 map<std::string, int> Logger::mCurveColor;
@@ -100,6 +104,14 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             va_list args;
             va_start (args, format);
             vsyslog(convertSeverityToSyslogPriority(aSeverity), format, args);
+            va_end (args);
+#endif
+#ifdef USE_OUTPUT_DEBUG_STRING
+            char fMessage[2048]="";
+            va_list args;
+            va_start (args, format);
+            vsprintf_s(fMessage, sizeof (fMessage), format, args);
+            OutputDebugStringA(fMessage);
             va_end (args);
 #endif
 #ifdef USE_WINDOWS_LOG

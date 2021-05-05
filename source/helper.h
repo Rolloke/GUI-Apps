@@ -37,7 +37,7 @@ enum error
     NoError = 0
 };
 
-int execute(const QString& command, QString& aResultText);
+int execute(const QString& command, QString& aResultText, bool hide=false);
 
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
 

@@ -12,6 +12,13 @@
 
 #include <map>
 
+#ifndef __linux__
+//#define USE_ShellExecute 1
+#include <windows.h>
+
+#include <shellapi.h>
+#endif
+
 QString getSettingsName(const QString& aItemName)
 {
     QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
@@ -120,25 +127,34 @@ QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem)
     return aItem;
 }
 
-int execute(const QString& command, QString& aResultText)
+int execute(const QString& command, QString& aResultText, bool hide)
 {
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
     QString fTempResultFileNameAndPath = fTemp.path();
     QString system_cmd = command + " > " + fTempResultFileNameAndPath;
+
+#ifdef USE_ShellExecute
+    system_cmd = "/C " + system_cmd;
+    int instance = reinterpret_cast<std::uint64_t>(ShellExecuteA(0, "open", "cmd.exe", system_cmd.toStdString().c_str(), 0, hide ? SW_HIDE: SW_SHOWNORMAL));
+    TRACE(Logger::error, "GitView", "Execute result %d", instance);
+    int fResult = NoError;
+#else
     auto fResult = system(system_cmd.toStdString().c_str());
+    hide = !hide;  /// NOTE: just to prevent warning
 
     if (fResult != NoError)
     {
         system_cmd = command + " 2>> " + fTempResultFileNameAndPath;
         system(system_cmd.toStdString().c_str());
     }
+#endif
 
     std::ostringstream fStringStream;
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
     fStringStream << fFile.rdbuf();
     std::string fStreamString = fStringStream.str();
     boost::algorithm::trim_right(fStreamString);
-    if (fResult != 0)
+    if (fResult != NoError)
     {
         fStringStream << "Error occurred executing command: " << fResult;
         if (fResult == ErrorNumberInErrno)
@@ -150,7 +166,7 @@ int execute(const QString& command, QString& aResultText)
 
     if (!fTemp.remove(fTemp.path()))
     {
-        TRACE(Logger::error, "GitView", "Could not delete temporary file %s", fTempResultFileNameAndPath.toStdString().c_str());
+        TRACE(Logger::error, "Could not delete temporary file %s", fTempResultFileNameAndPath.toStdString().c_str());
     }
 
     return fResult;
