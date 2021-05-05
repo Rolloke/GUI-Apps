@@ -6,6 +6,7 @@
 #include <QDialog>
 #include <QStandardItemModel>
 
+
 namespace Ui {
 class CustomGitActions;
 }
@@ -26,6 +27,7 @@ class CustomGitActions : public QDialog
         MenuBranchTree,
         Toolbar1,
         Toolbar2,
+        MergeTool,
         FirstCmds=MenuSrcTree,
         LastCmds=Toolbar2
     };};
@@ -44,7 +46,7 @@ class CustomGitActions : public QDialog
     }; };
 
 public:
-    explicit CustomGitActions(ActionList& aList, QWidget *parent = 0);
+    explicit CustomGitActions(ActionList& aList, QStringList&aMergeTools, QWidget *parent = 0);
     ~CustomGitActions();
 
 protected:
@@ -69,6 +71,7 @@ private Q_SLOTS:
 
 private:
     void initListIcons();
+    void initListMergeTool();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
@@ -76,6 +79,7 @@ private:
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
+    QStringList& mMergeTools;
     QAbstractItemModel* mListModelActions;
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;

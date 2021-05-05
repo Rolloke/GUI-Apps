@@ -9,13 +9,15 @@
 #include <QDir>
 #include <QMenu>
 #include <QActionGroup>
+#include <QComboBox>
 
 using namespace git;
 
-CustomGitActions::CustomGitActions(ActionList& aList, QWidget *parent) :
+CustomGitActions::CustomGitActions(ActionList& aList, QStringList&aMergeTools, QWidget *parent) :
     QDialog(parent)
 ,   ui(new Ui::CustomGitActions)
 ,   mActionList(aList)
+,   mMergeTools(aMergeTools)
 ,   mListModelActions(nullptr)
 ,   mListModelVarious(nullptr)
 ,   mInitialize(false)
@@ -110,6 +112,9 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
             initListIcons();
             ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
         break;
+        case VariousListIndex::MergeTool:
+            initListMergeTool();
+            break;
         default:
         if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
         {
@@ -146,6 +151,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
         case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
         case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
         case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
+        case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
     }
     return "";
 }
@@ -212,6 +218,21 @@ void CustomGitActions::initListIcons()
         mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QVariant(fPath + fItem), Qt::UserRole);
         mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), fItem, Qt::EditRole);
         ++fRow;
+    }
+    mInitialize = false;
+}
+
+void CustomGitActions::initListMergeTool()
+{
+    mInitialize = true;
+    mListModelVarious->setHeaderData(VariousHeader::Icon, Qt::Horizontal, tr("Active"));
+    mListModelVarious->setHeaderData(VariousHeader::Name, Qt::Horizontal, tr("Tools"));
+    mListModelVarious->removeRows(0, mListModelVarious->rowCount());
+    int fRow = 0;
+    for (const auto& name: mMergeTools)
+    {
+        mListModelVarious->insertRows(fRow, 1, QModelIndex());
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), name, Qt::EditRole);
     }
     mInitialize = false;
 }
@@ -361,6 +382,10 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
     if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons)
     {
         enableButtons(Btn::Left);
+    }
+    else if (ui->comboBoxVarious->currentIndex() == VariousListIndex::MergeTool)
+    {
+        enableButtons(0);
     }
     else
     {
