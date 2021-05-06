@@ -163,6 +163,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMD, Cmd::toStringMD, toString);
 
     initContextMenuActions();
     mActions.initActionIcons();
@@ -195,7 +196,18 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     }
     fSettings.endArray();
     fSettings.endGroup();
-    if (ui->treeSource->topLevelItemCount())
+
+    if (mMergeTools.size())
+    {
+        for (auto item=mMergeTools.begin(); item != mMergeTools.end(); ++item)
+        {
+            if (item.value())
+            {
+                ui->comboDiffTool->addItem(item.key());
+            }
+        }
+    }
+    else if (ui->treeSource->topLevelItemCount())
     {
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
         mWorker.doWork(Work::ApplyGitCommand, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
@@ -309,6 +321,7 @@ MainWindow::~MainWindow()
     STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
+    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMD);
 
     fSettings.beginWriteArray(config::sCommands);
     {
@@ -913,17 +926,17 @@ void MainWindow::apendTextToBrowser(const QString& aText, bool append)
 
 
 
-QVariant MainWindow::handleWorker(int aWork, const QVariant& data)
+QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
 {
     QVariant work_result;
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
     switch(static_cast<Work::e>(aWork))
     {
     case Work::ApplyGitCommand:
-        if (data.isValid() && data.type() == QVariant::String)
+        if (aData.isValid() && aData.type() == QVariant::String)
     {
         QString result_string;
-        int result = execute(data.toString().toStdString().c_str(), result_string, true);
+        int result = execute(aData.toString().toStdString().c_str(), result_string, true);
         if (result == NoError)
         {
             work_result.setValue(result_string);
@@ -956,7 +969,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
                             {
                                 entry = entry.left(pos);
                             }
-                            ui->comboDiffTool->addItem(entry);
+                            mMergeTools[entry] = true;
                         }
                     }
                     if (entry.contains("not currently available"))
@@ -964,6 +977,11 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
                         break;
                     }
                 }
+                for (auto entry = mMergeTools.begin(); entry != mMergeTools.end(); ++entry)
+                {
+                    ui->comboDiffTool->addItem(entry.key());
+                }
+
             }
             break;
         default:  break;
@@ -1885,12 +1903,7 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 
 void MainWindow::performCustomGitActionSettings()
 {
-    QStringList merge_tools;
-    for (int i=1; i<ui->comboDiffTool->count(); ++i)
-    {
-        merge_tools.append(ui->comboDiffTool->itemText(i));
-    }
-    CustomGitActions fCustomGitActions(mActions, merge_tools);
+    CustomGitActions fCustomGitActions(mActions, mMergeTools);
     connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     fCustomGitActions.exec();
 }
