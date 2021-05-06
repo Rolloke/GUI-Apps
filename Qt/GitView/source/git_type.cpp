@@ -98,6 +98,34 @@ Cmd::tVector Cmd::fromString(const QString& aString)
     return fItems;
 }
 
+QString  Cmd::toStringMD(const string2bool_map &aItems)
+{
+    QString fString = "|";
+    for ( auto fItem = aItems.begin(); fItem != aItems.end(); ++fItem)
+    {
+        fString += fItem.key();
+        fString += "|";
+        fString += fItem.value() ? "true" : "false";
+        fString += "|";
+    }
+    if (fString.size() == 1)
+    {
+        fString.clear();
+    }
+    return fString;
+}
+
+
+string2bool_map Cmd::fromStringMD(const QString& aString)
+{
+    QStringList fStrings = aString.split('|');
+    string2bool_map fItems;
+    for (int i=1; i<fStrings.size()-1; i+=2)
+    {
+        fItems[fStrings[i]] = fStrings[i+1] == "true";
+    }
+    return fItems;
+}
 
 const QString& Cmd::getCommand(eCmd aCmd)
 {

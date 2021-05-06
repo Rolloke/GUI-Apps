@@ -13,7 +13,7 @@
 
 using namespace git;
 
-CustomGitActions::CustomGitActions(ActionList& aList, QStringList&aMergeTools, QWidget *parent) :
+CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
     QDialog(parent)
 ,   ui(new Ui::CustomGitActions)
 ,   mActionList(aList)
@@ -229,10 +229,12 @@ void CustomGitActions::initListMergeTool()
     mListModelVarious->setHeaderData(VariousHeader::Name, Qt::Horizontal, tr("Tools"));
     mListModelVarious->removeRows(0, mListModelVarious->rowCount());
     int fRow = 0;
-    for (const auto& name: mMergeTools)
+    for (auto name = mMergeTools.begin(); name != mMergeTools.end(); ++name)
     {
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), name, Qt::EditRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QVariant(name.value()), Qt::CheckStateRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), name.key(), Qt::EditRole);
+        ++fRow;
     }
     mInitialize = false;
 }
@@ -386,6 +388,11 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
     else if (ui->comboBoxVarious->currentIndex() == VariousListIndex::MergeTool)
     {
         enableButtons(0);
+        if (index.column() == 0 && index.row() >= 0 && index.row() < mMergeTools.size())
+        {
+            mListModelVarious->setData(index, QVariant(!mListModelVarious->data(index, Qt::CheckStateRole).toBool()), Qt::CheckStateRole);
+            (mMergeTools.begin() + index.row()).value() = mListModelVarious->data(index, Qt::CheckStateRole).toBool();
+        }
     }
     else
     {

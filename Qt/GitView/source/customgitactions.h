@@ -46,7 +46,7 @@ class CustomGitActions : public QDialog
     }; };
 
 public:
-    explicit CustomGitActions(ActionList& aList, QStringList&aMergeTools, QWidget *parent = 0);
+    explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent = 0);
     ~CustomGitActions();
 
 protected:
@@ -79,7 +79,7 @@ private:
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
-    QStringList& mMergeTools;
+    string2bool_map& mMergeTools;
     QAbstractItemModel* mListModelActions;
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;

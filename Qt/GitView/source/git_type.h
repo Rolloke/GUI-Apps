@@ -1,7 +1,7 @@
 #ifndef GIT_TYPE_H
 #define GIT_TYPE_H
 
-#include <map>
+#include <QMap>
 #include <vector>
 
 #include <QString>
@@ -9,6 +9,7 @@
 #define DOCKED_VIEWS 1
 
 class QFileInfo;
+typedef QMap<QString, bool> string2bool_map;
 
 namespace git
 {
@@ -85,6 +86,8 @@ struct Cmd
     static QString toString(const ePostAction anAction);
     static QString toString(const tVector& aItems);
     static tVector fromString(const QString& aString);
+    static QString toStringMD(const string2bool_map& aItems);
+    static string2bool_map fromStringMD(const QString& aString);
 
     static tVector mContextMenuSourceTree;
     static tVector mContextMenuEmptySourceTree;

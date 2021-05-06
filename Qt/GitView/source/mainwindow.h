@@ -22,6 +22,8 @@ class MainWindow;
 
 class MergeDialog;
 
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -195,6 +197,7 @@ private:
     QSharedPointer<Highlighter> mHighlighter;
     QSharedPointer<MergeDialog> mMergeDialog;
     QString               mFontName;
+    string2bool_map       mMergeTools;
 };
 
 #endif // MAINWINDOW_H
