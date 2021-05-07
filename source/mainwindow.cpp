@@ -163,7 +163,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
     LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMD, Cmd::toStringMD, toString);
+    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
 
     initContextMenuActions();
     mActions.initActionIcons();
@@ -197,21 +197,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endArray();
     fSettings.endGroup();
 
-    if (mMergeTools.size())
-    {
-        for (auto item=mMergeTools.begin(); item != mMergeTools.end(); ++item)
-        {
-            if (item.value())
-            {
-                ui->comboDiffTool->addItem(item.key());
-            }
-        }
-    }
-    else if (ui->treeSource->topLevelItemCount())
-    {
-        QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
-        mWorker.doWork(Work::ApplyGitCommand, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
-    }
+    initMergeTools();
 
 #ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
@@ -321,7 +307,7 @@ MainWindow::~MainWindow()
     STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
     STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
-    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMD);
+    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
 
     fSettings.beginWriteArray(config::sCommands);
     {
@@ -830,7 +816,7 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     QString fResultString;
     applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::GetStatusAll), fResultString);
 
-    apendTextToBrowser("Repository: "+fSourceDir.path(), aItem == 0 ? false : true);
+    apendTextToBrowser(tr("Repository: ")+fSourceDir.path(), aItem == 0 ? false : true);
     apendTextToBrowser(fResultString, true);
     apendTextToBrowser("", true);
 
@@ -1082,7 +1068,7 @@ void MainWindow::cancelCurrentWorkTask()
 
 void MainWindow::addGitSourceFolder()
 {
-    const QString fSourcePath = QFileDialog::getExistingDirectory(this, "Select SourceFiles");
+    const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select SourceFiles"));
     if (fSourcePath.size() > 1)
     {
         insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
@@ -1105,7 +1091,7 @@ void MainWindow::updateGitStatus()
         fSize += sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
     }
 
-    ui->statusBar->showMessage("Total selected bytes: " + formatFileSize(fSize));
+    ui->statusBar->showMessage(tr("Total selected bytes: ") + formatFileSize(fSize));
     on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
 }
 
@@ -1435,7 +1421,7 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandPostAction(Cmd::Remove, Cmd::UpdateItemStatus);
 
     connect(mActions.createAction(Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::Restore, "Restore changes;Do you want to restore changes in file \"%1\"?");
+    mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore changes;Do you want to restore changes in file \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
     mActions.setFlags(Cmd::Restore, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1458,11 +1444,11 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandPostAction(Cmd::BranchListNotMerged, Cmd::ParseBranchListText);
 
     connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, "Delete %1 from git;Do you want to delete \"%1\"?");
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, tr("Delete %1 from git;Do you want to delete \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::BranchDelete, Cmd::UpdateItemStatus);
 
     connect(mActions.createAction(Cmd::BranchCheckout, tr("Checkout Branch"), Cmd::getCommand(Cmd::BranchCheckout)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, "Checkout %1;Do you want to set \"%1\" active?");
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?"));
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
 
     connect(mActions.createAction(Cmd::BranchHistory, tr("History Branch"), Cmd::getCommand(Cmd::BranchHistory)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
@@ -1503,6 +1489,31 @@ void MainWindow::initCustomAction(QAction* fAction)
     connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 }
 
+void MainWindow::initMergeTools()
+{
+    if (mMergeTools.size())
+    {
+        if (ui->comboDiffTool->count() > 1)
+        {
+            QString first_entry = ui->comboDiffTool->itemText(0);
+            ui->comboDiffTool->clear();
+            ui->comboDiffTool->addItem(first_entry);
+        }
+        for (auto item=mMergeTools.begin(); item != mMergeTools.end(); ++item)
+        {
+            if (item.value())
+            {
+                ui->comboDiffTool->addItem(item.key());
+            }
+        }
+    }
+    else if (ui->treeSource->topLevelItemCount())
+    {
+        QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
+        mWorker.doWork(Work::ApplyGitCommand, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
+    }
+}
+
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
     const QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
@@ -1527,8 +1538,8 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
                     fAction->setCheckable(true);
                     fAction->setChecked(fMapItem.value().toBool());
                 }
-                fPostActionGroup.addAction("Enable all");
-                fPostActionGroup.addAction("Disable all");
+                fPostActionGroup.addAction(tr("Enable all"));
+                fPostActionGroup.addAction(tr("Disable all"));
             }   break;
             default:
                 break;
@@ -1539,7 +1550,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
     QMenu*fAuthorsMenu = nullptr;
     if (fPostActionGroup.actions().size())
     {
-        fAuthorsMenu = menu.addMenu("Authors");
+        fAuthorsMenu = menu.addMenu(tr("Authors"));
         fAuthorsMenu->addActions(fPostActionGroup.actions());
     }
 
@@ -1905,7 +1916,13 @@ void MainWindow::performCustomGitActionSettings()
 {
     CustomGitActions fCustomGitActions(mActions, mMergeTools);
     connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
-    fCustomGitActions.exec();
+    if (fCustomGitActions.exec() == QDialog::Accepted)
+    {
+        if (fCustomGitActions.isMergeToolsChanged())
+        {
+            initMergeTools();
+        }
+    }
 }
 
 void MainWindow::invoke_git_merge_dialog()
@@ -1943,7 +1960,7 @@ void MainWindow::deleteFileOrFolder()
         const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
         const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
         const Type fType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
-        if (callMessageBox("Delete %1", fType.type_name(), fItemPath) == QMessageBox::Yes)
+        if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
             const bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
             if (result)

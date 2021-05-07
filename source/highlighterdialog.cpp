@@ -21,11 +21,13 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
         auto* color_btn = new QPushButton(item.key(), this);
 
         color_btn->setFont(item.value().font());
-        color_btn->setStyleSheet(tr("QPushButton {background-color: #FFFFFF; color: %1;}").arg(item.value().foreground().color().name()));
+        color_btn->setStyleSheet(tr("QPushButton {background-color: %1; color: %2;}")
+                                 .arg(QWidget::palette().color(QPalette::Base).name())
+                                 .arg(item.value().foreground().color().name()));
         connect(color_btn, SIGNAL(clicked(bool)), this, SLOT(on_color_btn_clicked(bool)));
         ui->color_buttons->addWidget(color_btn);
 
-        auto* cursive_check_btn = new QCheckBox("italic");
+        auto* cursive_check_btn = new QCheckBox(tr("italic"));
         connect(cursive_check_btn, SIGNAL(clicked(bool)), this, SLOT(on_italic_btn_clicked(bool)));
         cursive_check_btn->setChecked(item.value().font().italic());
         ui->italic_buttons->addWidget(cursive_check_btn);

@@ -54,8 +54,8 @@ Cmd::Cmd()
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About});
     mToolbars.push_back({ AddGitSourceFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, Separator, Commit, Push, Pull, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
-    mToolbarNames.push_back("Git Commands");
-    mToolbarNames.push_back("Control Commands");
+    mToolbarNames.push_back(QObject::tr("Git Commands"));
+    mToolbarNames.push_back(QObject::tr("Control Commands"));
 #endif
 }
 
@@ -98,7 +98,7 @@ Cmd::tVector Cmd::fromString(const QString& aString)
     return fItems;
 }
 
-QString  Cmd::toStringMD(const string2bool_map &aItems)
+QString  Cmd::toStringMT(const string2bool_map &aItems)
 {
     QString fString = "|";
     for ( auto fItem = aItems.begin(); fItem != aItems.end(); ++fItem)
@@ -116,7 +116,7 @@ QString  Cmd::toStringMD(const string2bool_map &aItems)
 }
 
 
-string2bool_map Cmd::fromStringMD(const QString& aString)
+string2bool_map Cmd::fromStringMT(const QString& aString)
 {
     QStringList fStrings = aString.split('|');
     string2bool_map fItems;

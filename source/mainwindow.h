@@ -171,6 +171,7 @@ private:
     void     getSelectedTreeItem();
 
     void     initContextMenuActions();
+    void     initMergeTools();
 
     void     applyGitCommandToFileTree(const QString& aCommand);
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
