@@ -5,7 +5,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
-
+#include <QBitArray>
 
 namespace Ui {
 class CustomGitActions;
@@ -48,6 +48,7 @@ class CustomGitActions : public QDialog
 public:
     explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent = 0);
     ~CustomGitActions();
+    bool isMergeToolsChanged();
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -74,6 +75,7 @@ private:
     void initListMergeTool();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
+    const QString& iconCheck(bool check);
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
     QString getVariousListHeader(VariousListIndex::e aIndex);
 
@@ -83,6 +85,7 @@ private:
     QAbstractItemModel* mListModelActions;
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
+    QBitArray mMergeToolsState;
 };
 
 struct ActionsTable { enum e

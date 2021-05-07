@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     QApplication fApp(argc, argv);
     QCommandLineParser fCmdLine;
-    fCmdLine.addOption({{"c", cmdline::Config}, "Alternative Config file name.", "filename"});
+    fCmdLine.addOption({{"c", cmdline::Config}, QObject::tr("Alternative Config file name."), "filename"});
     fCmdLine.parse(fApp.arguments());
 
     MainWindow fWindow(fCmdLine.value(cmdline::Config));

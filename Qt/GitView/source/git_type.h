@@ -86,8 +86,8 @@ struct Cmd
     static QString toString(const ePostAction anAction);
     static QString toString(const tVector& aItems);
     static tVector fromString(const QString& aString);
-    static QString toStringMD(const string2bool_map& aItems);
-    static string2bool_map fromStringMD(const QString& aString);
+    static QString toStringMT(const string2bool_map& aItems);
+    static string2bool_map fromStringMT(const QString& aString);
 
     static tVector mContextMenuSourceTree;
     static tVector mContextMenuEmptySourceTree;

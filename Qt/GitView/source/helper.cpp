@@ -78,7 +78,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
         fSelected = getTopLevelItem(aTree, fSelected);
         if (fSelected)
         {
-            if (callMessageBox("Delete %1 entry;%1", "Tree", fSelected->text(0), true) == QMessageBox::Yes)
+            if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), fSelected->text(0), true) == QMessageBox::Yes)
             {
                 aTree.removeItemWidget(fSelected, 0);
                 delete fSelected;
@@ -156,10 +156,10 @@ int execute(const QString& command, QString& aResultText, bool hide)
     boost::algorithm::trim_right(fStreamString);
     if (fResult != NoError)
     {
-        fStringStream << "Error occurred executing command: " << fResult;
+        fStringStream << QObject::tr("Error occurred executing command: ").toStdString() << fResult;
         if (fResult == ErrorNumberInErrno)
         {
-            fStringStream << "Error number : " << errno;
+            fStringStream << QObject::tr("Error number : ").toStdString() << errno;
         }
     }
     aResultText = fStreamString.c_str();

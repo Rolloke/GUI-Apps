@@ -21,8 +21,13 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 ,   mListModelActions(nullptr)
 ,   mListModelVarious(nullptr)
 ,   mInitialize(false)
+,   mMergeToolsState(aMergeTools.size())
 {
     ui->setupUi(this);
+    for (int i=0; i<mMergeTools.size(); ++i)
+    {
+        mMergeToolsState.setBit(i, (mMergeTools.begin() + i).value());
+    }
 
     QStringList fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"), tr("Message box text")};
     mActionListColumnWidth   = {  0.055  ,    0.055  ,      0.25    ,    0.25   ,      0.1      ,        0.25           };
@@ -67,6 +72,19 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     enableButtons(0);
     on_comboBoxVarious_currentIndexChanged(VariousListIndex::Icons);
 }
+
+bool CustomGitActions::isMergeToolsChanged()
+{
+    for (int i=0; i<mMergeTools.size(); ++i)
+    {
+        if (mMergeToolsState.at(i) != (mMergeTools.begin() + i).value())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 CustomGitActions::~CustomGitActions()
 {
@@ -222,6 +240,13 @@ void CustomGitActions::initListIcons()
     mInitialize = false;
 }
 
+const QString& CustomGitActions::iconCheck(bool check)
+{
+    static const QString enabled  { ":/resource/24X24/emblem-default.png" };
+    static const QString disabled { ":/resource/24X24/edit-delete.png"    };
+    return check ? enabled : disabled;
+}
+
 void CustomGitActions::initListMergeTool()
 {
     mInitialize = true;
@@ -232,7 +257,7 @@ void CustomGitActions::initListMergeTool()
     for (auto name = mMergeTools.begin(); name != mMergeTools.end(); ++name)
     {
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QVariant(name.value()), Qt::CheckStateRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(iconCheck(name.value())), Qt::DecorationRole);
         mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), name.key(), Qt::EditRole);
         ++fRow;
     }
@@ -329,7 +354,7 @@ void CustomGitActions::on_btnMoveDown_clicked()
 void CustomGitActions::on_btnAdd_clicked()
 {
     auto  fCmd    = mActionList.getNextCustomID();
-    auto* fAction = mActionList.createAction(fCmd, "command name", "git ");
+    auto* fAction = mActionList.createAction(fCmd, tr("command name"), "git ");
     if (fAction)
     {
         int fRow = -1;
@@ -390,8 +415,9 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
         enableButtons(0);
         if (index.column() == 0 && index.row() >= 0 && index.row() < mMergeTools.size())
         {
-            mListModelVarious->setData(index, QVariant(!mListModelVarious->data(index, Qt::CheckStateRole).toBool()), Qt::CheckStateRole);
-            (mMergeTools.begin() + index.row()).value() = mListModelVarious->data(index, Qt::CheckStateRole).toBool();
+            auto currentItem = mMergeTools.begin() + index.row();
+            currentItem.value() = !currentItem.value();
+            mListModelVarious->setData(index, QIcon(iconCheck(currentItem.value())), Qt::DecorationRole);
         }
     }
     else
@@ -450,15 +476,15 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 
     fMenu.addSeparator();
 
-    QMenu* fEnableMenu = fMenu.addMenu("Enable for git status set");
+    QMenu* fEnableMenu = fMenu.addMenu(tr("Enable for git status set"));
     QActionGroup fGitStatusEnableGroup(this);
     fGitStatusEnableGroup.setExclusive(false);
 
-    QMenu* fDisableMenu = fMenu.addMenu("Disable for git status set");
+    QMenu* fDisableMenu = fMenu.addMenu(tr("Disable for git status set"));
     QActionGroup fGitStatusDisableGroup(this);
     fGitStatusDisableGroup.setExclusive(false);
 
-    QMenu* fEnableNotMenu = fMenu.addMenu("Enable for git status not set");
+    QMenu* fEnableNotMenu = fMenu.addMenu(tr("Enable for git status not set"));
     QActionGroup fGitStatusEnableNotGroup(this);
     fGitStatusEnableNotGroup.setExclusive(false);
 
