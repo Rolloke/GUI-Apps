@@ -18,7 +18,7 @@ echo "0" > /sys/class/gpio/gpio$GPIOPIN/value
 
 while [ true ] ; do
    TEMPERATURE=$(vcgencmd measure_temp)
-   TEMP=$( echo "$TEMPERATURE" | sed -n 's/.*\([0-9][0-9]\).*/\1/p' )
+   TEMP=$( echo "$TEMPERATURE" | sed -n 's/.*\([0-9]\{1,3\}\).*/\1/p' )
    # echo "temperature is $TEMP"
    if [ $FAN_ON -eq 0 ] && [ $TEMP -gt $(($TEMP_FOR_FAN+$THRESHOLD)) ] ; then
         # echo "switch on fan"
