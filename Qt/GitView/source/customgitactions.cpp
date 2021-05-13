@@ -129,16 +129,17 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
         case VariousListIndex::Icons:
             initListIcons();
             ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
-        break;
+            break;
         case VariousListIndex::MergeTool:
             initListMergeTool();
             break;
         default:
-        if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
-        {
-            ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
-            initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
-        }   break;
+            if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
+            {
+                ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
+                initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
+            }
+            break;
     }
 }
 
@@ -519,16 +520,23 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 //         fA_Modified->setChecked(fFlags & ActionList::Command::Modified);
     }
 
-    QAction* fA_BranchCmd = nullptr;
+    QAction* fA_BranchCmd  = nullptr;
     QAction* fA_HistoryCmd = nullptr;
+    QAction* fA_ThreadCmd  = nullptr;
     if (fFlags & ActionList::Flags::Custom)
     {
          fA_BranchCmd = fMenu.addAction(tr("Branch command"));
          fA_BranchCmd->setCheckable(true);
          fA_BranchCmd->setChecked(fFlags & ActionList::Flags::Branch);
+         fA_BranchCmd->setToolTip(tr("Called in branch view context"));
          fA_HistoryCmd = fMenu.addAction(tr("History command"));
          fA_HistoryCmd->setCheckable(true);
          fA_HistoryCmd->setChecked(fFlags & ActionList::Flags::History);
+         fA_HistoryCmd->setToolTip(tr("Called in history view context"));
+         fA_ThreadCmd = fMenu.addAction(tr("Invoke command unattached"));
+         fA_ThreadCmd->setCheckable(true);
+         fA_ThreadCmd->setChecked(fFlags & ActionList::Flags::CallInThread);
+         fA_ThreadCmd->setToolTip(tr("Called without waiting for command"));
     }
     fMenu.addSeparator();
 
@@ -567,9 +575,9 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {
             mActionList.setFlags(fCmd, ActionList::Flags::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
         }
-        if (fA_HistoryCmd == fSelected)
+        if (fA_ThreadCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::History, fA_HistoryCmd->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(fCmd, ActionList::Flags::CallInThread, fA_ThreadCmd->isChecked() ? Flag::set : Flag::remove);
         }
     }
 }

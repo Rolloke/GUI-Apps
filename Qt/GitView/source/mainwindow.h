@@ -91,6 +91,7 @@ private:
     struct Work { enum e
     {
         None,
+        DetermineGitMergeTools,
         ApplyGitCommand,
         InsertPathFromCommandString,
         ShowAllFiles,
@@ -164,6 +165,8 @@ private:
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
+
+    bool     handleInThread();
 
     QString  getItemFilePath(QTreeWidgetItem* item);
     QString  getItemTopDirPath(QTreeWidgetItem* item);

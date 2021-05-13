@@ -1,6 +1,6 @@
 #include "workerthreadconnector.h"
 
-Worker::Worker()
+Worker::Worker(): mIsBusy(false)
 {
 }
 
@@ -8,9 +8,11 @@ void Worker::operate(int aWorkID, QVariant data)
 {
     if (mWorkerFunction)
     {
+        mIsBusy = true;
         QThread::msleep(1);
         QVariant result = mWorkerFunction(aWorkID, data);
         Q_EMIT sendMessage(aWorkID, result);
+        mIsBusy = false;
     }
 }
 
@@ -46,6 +48,11 @@ void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (i
 void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
 {
     Q_EMIT operate(aWorkID, data);
+}
+
+bool WorkerThreadConnector::isBusy()
+{
+    return mWorker->isBusy();
 }
 
 

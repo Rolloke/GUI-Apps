@@ -79,8 +79,6 @@ QString MergeDialog::getMergeCommand()
             case Strategy::Minimal:   command += "-s recursive -Xdiff-algorithm=minimal ";   break;
             case Strategy::Histogram: command += "-s recursive -Xdiff-algorithm=histogram "; break;
             case Strategy::Myers:     command += "-s recursive -Xdiff-algorithm=myers ";     break;
-            default:
-                break;
         }
         command += "%1 %2";
     }

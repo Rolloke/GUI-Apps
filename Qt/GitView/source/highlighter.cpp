@@ -193,8 +193,8 @@ QString weight_name(int weight)
         case QFont::Bold:       return "Bold"; break;
         case QFont::ExtraBold:  return "ExtraBold"; break;
         case QFont::Black:      return "Black"; break;
-        default: return "";  break;
     }
+    return "";
 }
 
 QString Highlighter::Language::to_string(const QTextCharFormat & format)

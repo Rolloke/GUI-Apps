@@ -13,6 +13,8 @@ class Worker : public QObject
 public:
     Worker();
     friend class WorkerThreadConnector;
+    bool isBusy() { return mIsBusy; }
+
 
 Q_SIGNALS:
     void sendMessage(int, QVariant);
@@ -22,6 +24,7 @@ public Q_SLOTS:
 
 private:
     std::function< QVariant (int, QVariant) > mWorkerFunction;
+    volatile bool mIsBusy;
 };
 
 
@@ -35,6 +38,7 @@ public:
     void sendMessage(int, QVariant);
     void setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc);
     void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
+    bool isBusy();
 
 public Q_SLOTS:
     void doWork(int, const QVariant&);
