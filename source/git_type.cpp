@@ -68,8 +68,6 @@ QString Cmd::toString(const ePostAction anAction)
     case UpdateItemStatus:      return QObject::tr("Update Item Status");
     case ParseHistoryText:      return QObject::tr("Parse History List Text");
     case ParseBranchListText:   return QObject::tr("Parse Branch List Text");
-    default:
-        break;
     }
     return "";
 }

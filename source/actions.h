@@ -17,7 +17,7 @@ class ActionList
 
 public:
     struct Data   { enum e { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
-    struct Flags  { enum e { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8, History=16, DiffOrMergeTool=32 }; };
+    struct Flags  { enum e { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8, History=16, DiffOrMergeTool=32, CallInThread=64}; };
 
     typedef std::map<int, QAction*> tActionMap;
 

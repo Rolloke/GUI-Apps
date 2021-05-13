@@ -44,7 +44,9 @@ using namespace git;
 // git mergetool
 // Preview anzeigen ...
 // git log --merge -p <path>
-// TODO
+
+// TODO: Aufruf von externen Tools über WorkerThread -> ActionList::Flags::CallInThread;
+
 
 namespace config
 {
@@ -701,7 +703,10 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         aParentItem->setHidden(false);
                         fResult = true;
                         break;
-                    default: break;
+                    case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::DetermineGitMergeTools:
+                        /// NOTE: not handled here
+                        break;
+
                 }
             }
             else
@@ -755,8 +760,10 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             fResult = aParentItem->isSelected();
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
-
-                        default: return false;
+                        case Work::None: case Work::Last: case Work::DetermineGitMergeTools:
+                        case Work::InsertPathFromCommandString:
+                            /// NOTE: not handled here
+                            return false;
                     }
                 }
             }
@@ -918,16 +925,18 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
     switch(static_cast<Work::e>(aWork))
     {
-    case Work::ApplyGitCommand:
-        if (aData.isValid() && aData.type() == QVariant::String)
-    {
-        QString result_string;
-        int result = execute(aData.toString().toStdString().c_str(), result_string, true);
-        if (result == NoError)
-        {
-            work_result.setValue(result_string);
-        }
-     } break;
+        case Work::DetermineGitMergeTools:
+        case Work::ApplyGitCommand:
+            if (aData.isValid() && aData.type() == QVariant::String)
+            {
+                QString result_string;
+                int result = execute(aData.toString().toStdString().c_str(), result_string, true);
+                if (result == NoError)
+                {
+                    work_result.setValue(result_string);
+                }
+            }
+            break;
         default:
             break;
     }
@@ -939,7 +948,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     switch(static_cast<Work::e>(aMsg))
     {
-        case Work::ApplyGitCommand:
+        case Work::DetermineGitMergeTools:
             if (aData.isValid() && aData.type() == QVariant::String)
             {
                 auto result_list = aData.toString().split("\n");
@@ -970,6 +979,11 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
 
             }
             break;
+        case Work::ApplyGitCommand:
+            if (aData.isValid() && aData.type() == QVariant::String)
+            {
+                apendTextToBrowser(aData.toString());
+            } break;
         default:  break;
     }
 }
@@ -982,13 +996,16 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
     {
         const int     fStateSize = 2;
         const QString fState = fLine.left(fStateSize);
-        const auto    fRelativePath = fLine.mid(fStateSize).trimmed();
+        auto          fRelativePath = fLine.mid(fStateSize).trimmed();
 
         if (fRelativePath.size())
         {
             Type fType;
             fType.translate(fState);
-
+            while (fRelativePath.indexOf('"') != -1)
+            {
+                fRelativePath = fRelativePath.remove('"');
+            }
             if (fType.is(Type::Repository))
             {
                 aFiles[fRelativePath.toStdString()] = fType;
@@ -1269,7 +1286,14 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     {
         fCommand = fGitCmd;
     }
-    execute(fCommand, aResultStr);
+    if (handleInThread() && !mWorker.isBusy())
+    {
+        mWorker.doWork(Work::ApplyGitCommand, QVariant(fCommand));
+    }
+    else
+    {
+        execute(fCommand, aResultStr);
+    }
     return fCommand;
 }
 
@@ -1384,13 +1408,12 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::History, Flag::set);
-    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
+    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::CallInThread, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool, Flag::set);
+    mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::CallInThread, Flag::set);
 
     connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
     connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font")) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
@@ -1510,7 +1533,7 @@ void MainWindow::initMergeTools()
     else if (ui->treeSource->topLevelItemCount())
     {
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
-        mWorker.doWork(Work::ApplyGitCommand, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
+        mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
     }
 }
 
@@ -1656,6 +1679,16 @@ void MainWindow::call_git_move_rename()
         }
         mContextMenuSourceTreeItem = nullptr;
     }
+}
+
+bool MainWindow::handleInThread()
+{
+    const QAction *fAction = qobject_cast<QAction *>(sender());
+    if (fAction)
+    {
+        return (fAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::CallInThread) != 0;
+    }
+    return false;
 }
 
 void MainWindow::perform_custom_command()
