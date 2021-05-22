@@ -58,6 +58,7 @@
 #include <QDir>
 
 const QString Highlighter::mDefault {"git"};
+tUpdatefunction Highlighter::mUpdateFunction;
 
 namespace
 {
@@ -243,21 +244,17 @@ Highlighter::Highlighter(QTextDocument *parent)
 
         load_default_language();
         load_language_list();
+        if (mUpdateFunction)
+        {
+            mUpdateFunction(mDefault);
+        }
     }
     mCurrentLanguage = mDefault;
 }
 
 void Highlighter::setExtension(const QString& ext)
 {
-    if (ext.count() > 0)
-    {
-        mCurrentLanguage = ext;
-    }
-    else
-    {
-        mCurrentLanguage = mDefault;
-    }
-    auto language = mExtensionToLanguage.find(mCurrentLanguage);
+    auto language = mExtensionToLanguage.find(ext);
     if (language != mExtensionToLanguage.end())
     {
         mCurrentLanguage = language.value();
@@ -266,11 +263,27 @@ void Highlighter::setExtension(const QString& ext)
             load_language(mCurrentLanguage);
         }
     }
+    else
+    {
+        mCurrentLanguage = mDefault;
+        if (mLanguages.count(mCurrentLanguage) == 0)
+        {
+            load_language(mCurrentLanguage);
+        }
+    }
+    if (mUpdateFunction)
+    {
+        mUpdateFunction(mCurrentLanguage);
+    }
 }
 
 void Highlighter::setLanguage(const QString &language)
 {
     mCurrentLanguage = language;
+    if (mUpdateFunction)
+    {
+        mUpdateFunction(language);
+    }
     load_language(mCurrentLanguage);
     rehighlight();
 }
@@ -278,6 +291,11 @@ void Highlighter::setLanguage(const QString &language)
 const QString& Highlighter::currentLanguage() const
 {
     return mCurrentLanguage;
+}
+
+void Highlighter::setUpdateFunction(const tUpdatefunction & updatefunction)
+{
+    mUpdateFunction = updatefunction;
 }
 
 void Highlighter::load_language_list()

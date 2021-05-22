@@ -101,6 +101,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     Highlighter::Language::load(fSettings);
 
+    Highlighter::setUpdateFunction(boost::bind(&MainWindow::updateSelectedLanguage, this, _1));
     mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
 
     ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
@@ -1173,7 +1174,6 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         ui->labelFilePath->setText(fFileName);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
         mHighlighter->setExtension(file_info.suffix());
-        ui->labelLanguage->setText("L: " + mHighlighter->currentLanguage());
         ui->textBrowser->setText(file.readAll());
         ui->btnStoreText->setEnabled(false);
 #ifdef DOCKED_VIEWS
@@ -1182,6 +1182,11 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     }
 }
 
+
+void MainWindow::updateSelectedLanguage(const QString& language)
+{
+    ui->labelLanguage->setText(tr(" Type: ") + language);
+}
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
 {

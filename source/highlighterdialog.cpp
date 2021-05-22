@@ -24,16 +24,16 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
         color_btn->setStyleSheet(tr("QPushButton {background-color: %1; color: %2;}")
                                  .arg(QWidget::palette().color(QPalette::Base).name())
                                  .arg(item.value().foreground().color().name()));
-        connect(color_btn, SIGNAL(clicked(bool)), this, SLOT(on_color_btn_clicked(bool)));
+        connect(color_btn, SIGNAL(clicked()), this, SLOT(color_btn_clicked()));
         ui->color_buttons->addWidget(color_btn);
 
-        auto* cursive_check_btn = new QCheckBox(tr("italic"));
-        connect(cursive_check_btn, SIGNAL(clicked(bool)), this, SLOT(on_italic_btn_clicked(bool)));
-        cursive_check_btn->setChecked(item.value().font().italic());
-        ui->italic_buttons->addWidget(cursive_check_btn);
+        auto* italic_check_btn = new QCheckBox(tr("italic"));
+        connect(italic_check_btn, SIGNAL(clicked(bool)), this, SLOT(italic_btn_clicked(bool)));
+        italic_check_btn->setChecked(item.value().font().italic());
+        ui->italic_buttons->addWidget(italic_check_btn);
 
         auto* weight_box = new QComboBox(this);
-        connect(weight_box, SIGNAL(currentIndexChanged(int)), this, SLOT(on_weigth_index_changed(int)));
+        connect(weight_box, SIGNAL(currentIndexChanged(int)), this, SLOT(weigth_index_changed(int)));
         weight_box->addItem(weight_name(QFont::Thin)      , QVariant(QFont::Thin));
         weight_box->addItem(weight_name(QFont::ExtraLight), QVariant(QFont::ExtraLight));
         weight_box->addItem(weight_name(QFont::Light)     , QVariant(QFont::Light));
@@ -46,7 +46,7 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
 
         for (int i=0;i<weight_box->count(); ++i)
         {
-            if (weight_box->itemData(i).toInt() ==item.value().font().weight())
+            if (weight_box->itemData(i).toInt() == item.value().font().weight())
             {
                 weight_box->setCurrentIndex(i);
                 break;
@@ -61,7 +61,7 @@ HighlighterDialog::~HighlighterDialog()
     delete ui;
 }
 
-void HighlighterDialog::on_color_btn_clicked(bool /* checked */)
+void HighlighterDialog::color_btn_clicked()
 {
     auto *button = dynamic_cast<QWidget*>(sender());
     QColorDialog dlg;
@@ -84,7 +84,7 @@ void HighlighterDialog::on_color_btn_clicked(bool /* checked */)
     }
 }
 
-void HighlighterDialog::on_italic_btn_clicked(bool checked)
+void HighlighterDialog::italic_btn_clicked(bool checked)
 {
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };
@@ -101,7 +101,7 @@ void HighlighterDialog::on_italic_btn_clicked(bool checked)
     }
 }
 
-void HighlighterDialog::on_weigth_index_changed(int weight_index)
+void HighlighterDialog::weigth_index_changed(int weight_index)
 {
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };

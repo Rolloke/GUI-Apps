@@ -20,9 +20,9 @@ public:
     const TextCharFormatMap& getTextFormatMap() { return mList; }
 
 private slots:
-    void on_color_btn_clicked(bool checked);
-    void on_italic_btn_clicked(bool checked);
-    void on_weigth_index_changed(int weight);
+    void color_btn_clicked();
+    void italic_btn_clicked(bool checked);
+    void weigth_index_changed(int weight);
     void on_btnOK_clicked();
 
 private:
