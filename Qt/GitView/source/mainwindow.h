@@ -173,6 +173,7 @@ private:
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
 
+    void     updateSelectedLanguage(const QString&);
     void     initContextMenuActions();
     void     initMergeTools();
 

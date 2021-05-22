@@ -56,6 +56,7 @@
 #include <QRegularExpression>
 #include <string>
 #include <map>
+#include <boost/function.hpp>
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -64,6 +65,7 @@ class QSettings;
 QT_END_NAMESPACE
 
 typedef QMap<QString, QTextCharFormat> TextCharFormatMap;
+typedef boost::function<void(const QString&)> tUpdatefunction;
 
 QString weight_name(int weight);
 
@@ -119,6 +121,7 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     const QString& currentLanguage() const;
+    static void setUpdateFunction(const tUpdatefunction& );
     static const QStringList& getLanguages();
 
 
@@ -140,6 +143,7 @@ private:
     static QStringList mLanguageNames;
 
     QString mCurrentLanguage;
+    static tUpdatefunction mUpdateFunction;
     static const QString mDefault;
     static QMap<QString, int>  mKeywordMap;
 };
