@@ -72,3 +72,4 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += resource.qrc
 
+TRANSLATIONS    = GitView_de.ts
