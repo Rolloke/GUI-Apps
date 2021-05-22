@@ -276,7 +276,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     <message>
         <location filename="customgitactions.cpp" line="358"/>
         <source>command name</source>
-        <translation>Kommandoname</translation>
+        <translation>Kommando Name</translation>
     </message>
     <message>
         <location filename="customgitactions.cpp" line="480"/>
@@ -380,7 +380,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <source>Git View</source>
-        <translation>Git Betrachter</translation>
+        <translation>Git View</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
@@ -435,12 +435,12 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     <message>
         <location filename="mainwindow.ui" line="169"/>
         <source>Hides parent tree item, if it does not contain entries</source>
-        <translation>Versteckt leere Zweige der Baumansicht</translation>
+        <translation>Versteckt leere Knoten der Baumansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="172"/>
         <source>Hide empty Parent  </source>
-        <translation>Leere Zweige verstecken</translation>
+        <translation>Leerknoten verstecken</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="185"/>
@@ -573,7 +573,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.ui" line="493"/>
         <source>File Flags:</source>
-        <translation>Dateieigenschaften:</translation>
+        <translation>Eigenschaften von Dateien:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="500"/>
@@ -713,7 +713,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="400"/>
         <source>Branch View</source>
-        <translation>Quellcodezweigansicht</translation>
+        <translation>Zweigansicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="412"/>
@@ -768,7 +768,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1188"/>
         <source> Type: </source>
-        <translation> Type:</translation>
+        <translation> Typ:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1406"/>
@@ -788,7 +788,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1423"/>
         <source>Merge file...</source>
-        <translation>Führe Dateien zusammen...</translation>
+        <translation>Führe Datei zusammen...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1423"/>
@@ -818,12 +818,12 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1431"/>
         <source>Add to git (stage)</source>
-        <translation>Zu git hinzufügen </translation>
+        <translation>Zu git hinzufügen (stagen)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1438"/>
         <source>Reset file (unstage)</source>
-        <translation>Aus git entfernen</translation>
+        <translation>Aus git entfernen (unstage)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1443"/>
@@ -853,12 +853,12 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1461"/>
         <source>Push</source>
-        <translation>Push</translation>
+        <translation>Hochladen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1462"/>
         <source>Pull</source>
-        <translation>Pull</translation>
+        <translation>Herunerladen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1463"/>
@@ -1048,7 +1048,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1581"/>
         <source>Authors</source>
-        <translation>Authoren</translation>
+        <translation>Autoren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1646"/>
@@ -1251,7 +1251,8 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
         <translation>Fehlernummer:</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="20"/>
+        <location filename="main.cpp" line="22"/>
+        <location filename="main.cpp" line="23"/>
         <source>Alternative Config file name.</source>
         <translation>Alternativer Konfigurationsdateiname.</translation>
     </message>
