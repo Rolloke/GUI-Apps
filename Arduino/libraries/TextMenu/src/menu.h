@@ -8,7 +8,7 @@
 /// - MenuItem::getPath(): path to item including all submenues
 /// each menue can contain submenues or editable subitems
 /// the menue is controlled by buttons (left, right, up, down, enter, escape)
-/// - MenuItem::pressBtn()
+/// - MenuItem::pressBtn(button)
 /// editable subitems can be:
 /// - floating point or integral values
 /// - selectable list items
