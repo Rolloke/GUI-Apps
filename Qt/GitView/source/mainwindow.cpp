@@ -1869,7 +1869,7 @@ void MainWindow::call_git_branch_command()
             fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(fBranchItem);
         }
 
-        execute(fGitCommand, fResultStr);
+        fResult = execute(fGitCommand, fResultStr);
         fResultStr = fGitCommand + getLineFeed() + fResultStr;
         apendTextToBrowser(fResultStr);
     }

@@ -225,7 +225,7 @@
            <string>Show file and folder tree of git folder</string>
           </property>
           <property name="statusTip">
-           <string>Select Diff or Merge Tool</string>
+           <string>Git repository view</string>
           </property>
           <property name="sortingEnabled">
            <bool>true</bool>
@@ -418,6 +418,9 @@
               <property name="toolTip">
                <string>Shows git history of files or folders</string>
               </property>
+              <property name="statusTip">
+               <string>Git history view</string>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
@@ -440,6 +443,9 @@
              <widget class="QBranchTreeWidget" name="treeBranches">
               <property name="toolTip">
                <string>Shows git branches</string>
+              </property>
+              <property name="statusTip">
+               <string>Git branch view</string>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -464,6 +470,9 @@
             <property name="toolTip">
              <string>Shows git command results or
 File content opened with double click</string>
+            </property>
+            <property name="statusTip">
+             <string>Text view and editor</string>
             </property>
             <property name="undoRedoEnabled">
              <bool>true</bool>
