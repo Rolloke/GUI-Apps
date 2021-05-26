@@ -663,7 +663,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.ui" line="635"/>
         <source>Search case sensitive</source>
-        <translation type="unfinished">Beachte Groß- und Kleinschreibung</translation>
+        <translation>Beachte Groß- und Kleinschreibung</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="638"/>
@@ -1033,7 +1033,7 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
     <message>
         <location filename="mainwindow.cpp" line="1541"/>
         <source>git -C %1 difftool --tool-help</source>
-        <translation type="unfinished">git -C %1 difftool --tool-help</translation>
+        <translation>git -C %1 difftool --tool-help</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1569"/>
