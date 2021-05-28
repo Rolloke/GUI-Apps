@@ -259,9 +259,13 @@ sError Arithmetic::setExpression(const char *aExpression)
         case ')' : fBinaryOperator->brace--;
             break;
         case '(' : fBinaryOperator->brace++;
+            CPP17_FALLTHROUGH
         case '^' :            fLevel++;                     // Level = 5
+            CPP17_FALLTHROUGH
         case '/' : case '%' : fLevel++;                     // Level = 4
+            CPP17_FALLTHROUGH
         case '*' : case '&' : fLevel++;                     // Level = 3
+            CPP17_FALLTHROUGH
         case '-' :
             if (   fChar == '-'
                 && (fLastChar=='e' || fLastChar == 'E'))
@@ -272,6 +276,7 @@ sError Arithmetic::setExpression(const char *aExpression)
             else
             {
                 fLevel++;                                   // Level = 2   // Achtung nachträglich geändert !
+                CPP17_FALLTHROUGH
             }
         case '+' : case '|' : case '!' :                    // Level = 1   // Testen
         case '>' : case '<' : case '=' :
@@ -284,6 +289,7 @@ sError Arithmetic::setExpression(const char *aExpression)
             else
             {
                 fLevel++;                                   // Level = 2   // Achtung nachträglich geändert !
+                CPP17_FALLTHROUGH
             }
         case ',' :
             if (fChar == ',')
@@ -294,6 +300,7 @@ sError Arithmetic::setExpression(const char *aExpression)
                     return sError(fGs-1, fGs);
                 }
             }
+            CPP17_FALLTHROUGH
         case  0  :
             if (fV)                                         // Wenn Variablen-, Funktions- oder Zahlenstring gefüllt ist
             {
@@ -512,11 +519,15 @@ std::complex<double> Arithmetic::calc(const tArithmaNode& aNode)
         case IDO_AR_ATANH:      if (fB!=std::complex<double>(1, 0)) return Atanh(fB);
             throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_TAN:        if ((-355 <= fB.imag()) && (fB.imag() <= 355)) return tan(fB);
+            throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_TANH:       if ((-355 <= fB.real()) && (fB.real() <= 355)) return tanh(fB);
             throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_SIN:        if ((-710 <= fB.imag()) && (fB.imag() <= 710)) return sin(fB);
+            throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_COS:        if ((-710 <= fB.imag()) && (fB.imag() <= 710)) return cos(fB);
+            throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_SINH:       if ((-710 <= fB.real()) && (fB.real() <= 710)) return sinh(fB);
+            throw (int)IDE_AR_OUTOFRANGE;
         case IDO_AR_COSH:       if ((-710 <= fB.real()) && (fB.real() <= 710)) return cosh(fB);
             throw (int)IDE_AR_OUTOFRANGE;
 
@@ -545,6 +556,7 @@ std::complex<double> Arithmetic::calc(const tArithmaNode& aNode)
         case '>': return std::complex<double>((fA.real() >  fB.real()) ? 1 : 0, 0);
         case '=': return std::complex<double>((fA.real() == fB.real()) ? 1 : 0, 0);
         case '/': if (fB.real() != 0) return std::complex<double>(fA.real() / fB.real(), 0);
+            throw (int)IDE_AR_ZERO;
         case '%': if (fB.real() != 0) return std::complex<double>(fmod(fA.real(), fB.real()), 0);
             throw (int)IDE_AR_ZERO;
             break;
@@ -559,10 +571,12 @@ std::complex<double> Arithmetic::calc(const tArithmaNode& aNode)
 
         case  IDO_AR_ATAN  : return std::complex<double>(atan(fB.real())*gm_AngleFrom, 0);
         case  IDO_AR_ASIN  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return std::complex<double>(asin(fB.real())*gm_AngleFrom, 0);
+            throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_ACOS  : if ((-1 <= fB.real()) && (fB.real() <= 1)) return std::complex<double>(acos(fB.real())*gm_AngleFrom, 0);
             throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_TANH  : return std::complex<double>(tanh(fB.real()), 0);
         case  IDO_AR_SINH  : if ((-710 <= fB.real()) && (fB.real() <= 710)) return std::complex<double>(sinh(fB.real()), 0);
+            throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_COSH  : if ((-710 <= fB.real()) && (fB.real() <= 710)) return std::complex<double>(cosh(fB.real()), 0);
             throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_ATANH : return std::complex<double>(atanh(fB.real()), 0); break;
@@ -575,11 +589,12 @@ std::complex<double> Arithmetic::calc(const tArithmaNode& aNode)
         case  IDO_AR_ROUND : return std::complex<double>(round(fB.real()), 0);
 
         case  IDO_AR_SQRT  : if      (fB.real() >= 0) return std::complex<double>(sqrt(fB.real()), 0);
-            else                    return std::complex<double>(0, sqrt(-fB.real()));
+                             else                     return std::complex<double>(0, sqrt(-fB.real()));
         case  IDO_AR_LOG   : if      (fB.real() >  0) return std::complex<double>(log(fB.real()), 0);
-            else if (fB.real() <  0) return Logn(fB);
+                             else if (fB.real() <  0) return Logn(fB);
+            throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_LOG10 : if      (fB.real() >  0) return std::complex<double>(log10(fB.real()), 0);
-            else if (fB.real() <  0) return Logb(complex<double>(10, 0), fB);
+                             else if (fB.real() <  0) return Logb(complex<double>(10, 0), fB);
             throw (int)IDE_AR_OUTOFRANGE;
         case  IDO_AR_LOGB  : return Logb(fA, fB);
         case  IDO_AR_ATAN2 : return std::complex<double>(atan2(fA.real(),fB.real())*gm_AngleFrom, 0);

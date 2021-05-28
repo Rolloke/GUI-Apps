@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-greaterThan(QT_MAJOR_VERSION, 4): QT += multimedia
 
 QT += core gui
 QT += xml
@@ -13,6 +12,9 @@ QT += xml
 QMAKE_CXXFLAGS += -std=c++17
 #CONFIG(release):
 QMAKE_CXXFLAGS += -O3
+
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
 TARGET = Schrittmotor
 TEMPLATE = app

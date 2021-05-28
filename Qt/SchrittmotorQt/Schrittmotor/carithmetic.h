@@ -69,6 +69,12 @@
 #define  IDO_AR_MIN        158
 #define  IDO_AR_MAX        159
 
+#if __has_cpp_attribute(fallthrough)
+  #define CPP17_FALLTHROUGH        [[fallthrough]];
+#else
+  #define CPP17_FALLTHROUGH
+#endif
+
 struct SArithmaNode;
 struct SVarNode;
 

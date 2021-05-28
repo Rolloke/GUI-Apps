@@ -622,15 +622,15 @@ void PlotterDriver::OnCalibratePen()
     // save end position
     const FLOAT fZscale = mTransformation[zdir][zdir];
     TRACE(Logger::info,"zscale: %f, %d\n", fZscale, mPositionZ);
-    int nSteps = round (mPenOffsets[to_paper] * SCALE_FACTOR * fZscale);
+    int nSteps = round_fast (mPenOffsets[to_paper] * SCALE_FACTOR * fZscale);
     TRACE(Logger::info,"%d steps for %f mm \n", nSteps, mPenOffsets[to_paper]);
     mDownEndPosition = mPositionZ + nSteps;
     mPort.setPenPos(stepper::Pen_down, mDownEndPosition);
-    nSteps = round (mPenOffsets[to_plate] * SCALE_FACTOR * fZscale);
+    nSteps = round_fast (mPenOffsets[to_plate] * SCALE_FACTOR * fZscale);
     TRACE(Logger::info,"%d steps for %f mm \n", nSteps, mPenOffsets[to_plate]);
     mDrillEndPosition = mPositionZ + nSteps;
     mPort.setPenPos(stepper::Pen_drill, mDrillEndPosition);
-    nSteps = round (mPenOffsets[to_moving_pos] * SCALE_FACTOR * fZscale);
+    nSteps = round_fast (mPenOffsets[to_moving_pos] * SCALE_FACTOR * fZscale);
     TRACE(Logger::info,"%d steps for %f mm \n", nSteps, mPenOffsets[to_moving_pos]);
     mUpEndPosition    = mPositionZ + nSteps;
     mPort.setPenPos(stepper::Pen_up, mUpEndPosition);
@@ -784,8 +784,8 @@ void PlotterDriver::OnPlotCommands()
 
 void  PlotterDriver::transform_point(FLOAT aXin, FLOAT aYin, int &aXout, int& aYout)
 {
-    aXout = round(aXin * mTransformation[0][0] + aYin * mTransformation[0][1] + mTransformation[0][2]);
-    aYout = round(aXin * mTransformation[1][0] + aYin * mTransformation[1][1] + mTransformation[1][2]);
+    aXout = round_fast(aXin * mTransformation[0][0] + aYin * mTransformation[0][1] + mTransformation[0][2]);
+    aYout = round_fast(aXin * mTransformation[1][0] + aYin * mTransformation[1][1] + mTransformation[1][2]);
 }
 
 void PlotterDriver::sendStep()
@@ -1179,8 +1179,22 @@ void  PlotterDriver::Sleep(float aMS)
     }
     else
     {
-       // sleep works only in debug mode with QT5
-       usleep(static_cast<unsigned long>(aMS*1000));
+        // sleep works only in debug mode with QT5
+//        std::this_thread::yield();
+//        std::this_thread::sleep_for (std::chrono::microseconds(static_cast<long>(aMS*1000)));
+//        std::this_thread::yield();
+//        struct timespec deadline;
+//        deadline.tv_sec = 0;
+//        deadline.tv_nsec = aMS * 1000000;
+//        clock_nanosleep(CLOCK_REALTIME, 0, &deadline, NULL);
+//        if (mUseLptDriver)
+//        {
+//          mPort.usleep(static_cast<long>(aMS*1000));
+//        }
+//        else
+        {
+          QThread::usleep(static_cast<unsigned long>(aMS*1000));
+        }
     }
 }
 

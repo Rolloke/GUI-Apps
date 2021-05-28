@@ -1,7 +1,7 @@
 #pragma once
 
 typedef unsigned short USHORT;
-#include "/home/rolf/Projekte/own_drivers/LptPortStepperDriver/lpt_stepper.h"
+#include "/home/rolfke/Projekte/own_drivers/LptPortStepperDriver/lpt_stepper.h"
 #include <ieee1284.h>
 
 struct DataBit
@@ -87,6 +87,8 @@ public:
     void moveToPenPos(stepper::ePenPos aPenPos);
 
     long getPosition(stepper::eDirection aDir);
+
+    void usleep(unsigned long time_us);
 
 private:
     bool  OpenDriver(unsigned short aAdr);

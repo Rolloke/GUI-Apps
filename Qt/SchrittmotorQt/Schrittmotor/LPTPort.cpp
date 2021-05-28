@@ -466,3 +466,8 @@ void LPTPort::moveToPenPos(stepper::ePenPos aPenPos)
     Ioctl(LPT_STEPPER_IOCT_MOVE_TO_PEN_POS, aPenPos);
 }
 
+void LPTPort::usleep(unsigned long time_us)
+{
+    ioctl(mFile, LPT_STEPPER_IOCT_MICRO_DELAY, time_us);
+}
+

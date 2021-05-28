@@ -18,7 +18,7 @@
 #include "matrix.h"
 #include "pointf.h"
 
-int round(float f);
+int round_fast(float f);
 //int round(double f);
 
 class QDomDocument;

@@ -182,7 +182,7 @@ const FLOAT zoomFactor = 1.2f;
 const FLOAT zoomMax    = 100000.0f;
 const FLOAT zoomMin    = 1.0f;
 
-int round(float f)
+int round_fast(float f)
 {
     float korr = (f >= 0) ? 0.5f : -0.5f;
     return static_cast<int>(f + korr);
@@ -591,7 +591,7 @@ void  CPlotterDC::updatePenWidth(DrawCommand& aDrawCmd)
     if (hasVariablePenWidth() && positions >= 2)
     {
         FLOAT fFactor = mDrawingWidth / mPenWidth;
-        int fRoundFactor = round(fFactor);
+        int fRoundFactor = round_fast(fFactor);
         if (fRoundFactor>1)
         {
             FLOAT fOffset = (mDrawingWidth - mPenWidth) * 0.5f;
@@ -1645,7 +1645,7 @@ CPlotterDC::DrawCommand::DrawCommand(FLOAT aX, FLOAT aY, eCommand aType) : mType
 QPoint CPlotterDC::DrawCommand::getPoint(int ap) const
 {
     QPointF pt = getPointF(ap);
-    return QPoint(round(pt.x()), round(pt.y()));
+    return QPoint(round_fast(pt.x()), round_fast(pt.y()));
 }
 
 QPointF CPlotterDC::DrawCommand::getPointF(int ap) const
