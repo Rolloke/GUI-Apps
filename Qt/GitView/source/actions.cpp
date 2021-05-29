@@ -84,6 +84,9 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::Restore]                 = ":/resource/24X24/edit-redo-rtl.png";
     fActionIcons[Cmd::Push]                    = ":/resource/24X24/view-sort-descending.png";
     fActionIcons[Cmd::Pull]                    = ":/resource/24X24/view-sort-ascending.png";
+    fActionIcons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
+    fActionIcons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
+    fActionIcons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
     fActionIcons[Cmd::BranchList]              = ":/resource/24X24/open-menu.png";
     fActionIcons[Cmd::BranchListRemote]        = ":/resource/24X24/open-menu.png";
     fActionIcons[Cmd::BranchListMerged]        = ":/resource/24X24/open-menu.png";
