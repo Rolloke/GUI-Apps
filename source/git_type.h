@@ -35,8 +35,8 @@ struct Cmd
         Push,
         Pull,
         Show,
-        Unused1,
-        Unused2,
+        Stash,
+        StashPop,
         BranchList,
         BranchDelete,
         BranchShow,
@@ -46,6 +46,7 @@ struct Cmd
         BranchCheckout,
         BranchHistory,
         CallMergeTool,
+        StashShow,
 
         /// hint: add further git commands here
         CustomCommand=50,

@@ -200,7 +200,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endArray();
     fSettings.endGroup();
 
-    initMergeTools();
+    initMergeTools(true);
 
 #ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
@@ -914,7 +914,7 @@ void MainWindow::apendTextToBrowser(const QString& aText, bool append)
     ui->textBrowser->insertPlainText(aText + getLineFeed());
     ui->textBrowser->textCursor().setPosition(QTextCursor::End);
 #ifdef DOCKED_VIEWS
-        showDockedWidget(ui->textBrowser);
+    showDockedWidget(ui->textBrowser);
 #endif
 }
 
@@ -952,6 +952,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
         case Work::DetermineGitMergeTools:
             if (aData.isValid() && aData.type() == QVariant::String)
             {
+                bool new_item_added = false;
                 auto result_list = aData.toString().split("\n");
                 for (auto&entry : result_list)
                 {
@@ -965,7 +966,11 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
                             {
                                 entry = entry.left(pos);
                             }
-                            mMergeTools[entry] = true;
+                            if (!mMergeTools.contains(entry))
+                            {
+                                mMergeTools[entry] = true;
+                                new_item_added = true;
+                            }
                         }
                     }
                     if (entry.contains("not currently available"))
@@ -973,11 +978,10 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
                         break;
                     }
                 }
-                for (auto entry = mMergeTools.begin(); entry != mMergeTools.end(); ++entry)
+                if (new_item_added)
                 {
-                    ui->comboDiffTool->addItem(entry.key());
+                    initMergeTools();
                 }
-
             }
             break;
         case Work::ApplyGitCommand:
@@ -1459,8 +1463,15 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
 
     connect(mActions.createAction(Cmd::Push           , tr("Push"), Cmd::getCommand(Cmd::Push)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
     connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::Pull, ActionList::Flags::CallInThread, Flag::set);
     connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+
+    connect(mActions.createAction(Cmd::Stash          , tr("Stash"),      Cmd::getCommand(Cmd::Stash))    , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::Stash, "Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
+    connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),  Cmd::getCommand(Cmd::StashPop)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::StashShow      , tr("Stash show"), Cmd::getCommand(Cmd::StashShow)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
     connect(mActions.createAction(Cmd::BranchList     , tr("List Branches"), Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
@@ -1517,7 +1528,7 @@ void MainWindow::initCustomAction(QAction* fAction)
     connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 }
 
-void MainWindow::initMergeTools()
+void MainWindow::initMergeTools(bool read_new_items)
 {
     if (mMergeTools.size())
     {
@@ -1535,7 +1546,7 @@ void MainWindow::initMergeTools()
             }
         }
     }
-    else if (ui->treeSource->topLevelItemCount())
+    if (read_new_items && ui->treeSource->topLevelItemCount())
     {
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
         mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
@@ -1717,17 +1728,28 @@ void MainWindow::perform_custom_command()
     {
         Type    fType;
         getSelectedTreeItem();
+
+        QString fMessageBoxText = fVariantList[ActionList::Data::MsgBoxText].toString();
+
         if (fGitCommand.contains("-C %1"))
         {
             on_btnCloseText_clicked();
             QString fResultStr;
             fGitCommand = tr(fGitCommand.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem));
-            execute(fGitCommand, fResultStr);
-            apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
+            int fResult = QMessageBox::Yes;
+            if (fMessageBoxText != ActionList::sNoCustomCommandMessageBox)
+            {
+                fResult = callMessageBox(fMessageBoxText, "", getItemTopDirPath(mContextMenuSourceTreeItem), false);
+            }
+
+            if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
+            {
+                execute(fGitCommand, fResultStr);
+                apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
+            }
         }
         else if (mContextMenuSourceTreeItem)
         {
-            QString fMessageBoxText = fVariantList[ActionList::Data::MsgBoxText].toString();
             QString fStagedCmdAddOn = fVariantList[ActionList::Data::StagedCmdAddOn].toString();
             QString fOption;
             fType.mType = mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt();
@@ -2014,7 +2036,6 @@ void MainWindow::deleteFileOrFolder()
                     {
                         parent->removeChild(mContextMenuSourceTreeItem);
                     }
-                    mContextMenuSourceTreeItem = 0;
                 }
             }
         }

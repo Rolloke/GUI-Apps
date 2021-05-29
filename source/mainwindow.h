@@ -58,6 +58,7 @@ private Q_SLOTS:
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
+    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -81,7 +82,6 @@ private Q_SLOTS:
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
-    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -175,7 +175,7 @@ private:
 
     void     updateSelectedLanguage(const QString&);
     void     initContextMenuActions();
-    void     initMergeTools();
+    void     initMergeTools(bool read_new_items = false);
 
     void     applyGitCommandToFileTree(const QString& aCommand);
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
