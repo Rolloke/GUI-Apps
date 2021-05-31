@@ -67,6 +67,7 @@ struct Cmd
         SelectTextBrowserLanguage,
         InvokeGitMergeDialog,
         InvokeHighlighterDialog,
+        KillBackgroundThread,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = NonGitCommands-1,
         Invalid = -1,

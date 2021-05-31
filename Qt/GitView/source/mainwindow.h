@@ -47,6 +47,7 @@ private Q_SLOTS:
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
+    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
     void on_ckHideEmptyParent_clicked(bool checked);
     void on_ckShortState_clicked(bool checked);
@@ -56,9 +57,9 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
-    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -82,6 +83,7 @@ private Q_SLOTS:
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
+    void killBackgroundThread();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -203,6 +205,7 @@ private:
     QSharedPointer<MergeDialog> mMergeDialog;
     QString               mFontName;
     string2bool_map       mMergeTools;
+    std::vector<QToolBar*> mToolBars;
 };
 
 #endif // MAINWINDOW_H

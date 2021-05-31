@@ -22,13 +22,15 @@ int main(int argc, char *argv[])
     QCommandLineParser cmd_line;
     cmd_line.addOption({{"c", cmdline::Config}, QObject::tr("Alternative Config file name."), "filename"});
 //    cmd_line.addOption({{"l", cmdline::Log2file}, QObject::tr("Alternative Config file name."), "log2file"});
+
     // For debugging purpose: --lang=../../source/GitView_de.qm
     cmd_line.addOption({{"lang", cmdline::Language}, QObject::tr("Alternative Config file name."), "language"});
     cmd_line.parse(fApp.arguments());
-    if (cmd_line.value(cmdline::Log2file).toInt())
-    {
-        //fLogger.openLogFile(fTitle.toStdString());
-    }
+
+//    if (cmd_line.value(cmdline::Log2file).toInt())
+//    {
+//        fLogger.openLogFile(fTitle.toStdString());
+//    }
 
     QTranslator translator;
     bool loaded = translator.load(QLocale(), QLatin1String(fTitle.toStdString().c_str()), QLatin1String("_"), QLatin1String(":/i18n"));
