@@ -108,6 +108,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
     fActionIcons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
     fActionIcons[Cmd::InvokeHighlighterDialog] = ":/resource/24X24/emblem-system.png";
+    fActionIcons[Cmd::KillBackgroundThread]    = ":/resource/24X24/media-record.png";
 
     for (const auto& fIconPath: fActionIcons )
     {

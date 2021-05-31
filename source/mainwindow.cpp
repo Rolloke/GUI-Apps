@@ -207,6 +207,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         const auto& fToolbar = Cmd::mToolbars[i];
         QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
+        mToolBars.push_back(pTB);
         mActions.fillToolbar(*pTB, fToolbar);
         pTB->setObjectName(Cmd::mToolbarNames[i]);
         pTB->setIconSize(QSize(24,24));
@@ -947,6 +948,8 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
 void MainWindow::handleMessage(int aMsg, QVariant aData)
 {
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
+    mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
+
     switch(static_cast<Work::e>(aMsg))
     {
         case Work::DetermineGitMergeTools:
@@ -1297,6 +1300,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     }
     if (handleInThread() && !mWorker.isBusy())
     {
+        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         mWorker.doWork(Work::ApplyGitCommand, QVariant(fCommand));
     }
     else
@@ -1516,6 +1520,8 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Delete, tr("Delete..."), tr("Delete file or folder")), SIGNAL(triggered()), this, SLOT(deleteFileOrFolder()));
     connect(mActions.createAction(Cmd::SelectTextBrowserLanguage, tr("Select Language..."), tr("Select language for text highlighting")), SIGNAL(triggered()), this, SLOT(selectTextBrowserLanguage()));
 
+    connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Kill Background Activity"), tr("Kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
+    mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(false);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1548,6 +1554,7 @@ void MainWindow::initMergeTools(bool read_new_items)
     }
     if (read_new_items && ui->treeSource->topLevelItemCount())
     {
+        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
         mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
     }
@@ -1744,8 +1751,16 @@ void MainWindow::perform_custom_command()
 
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
             {
-                execute(fGitCommand, fResultStr);
-                apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
+                if (handleInThread() && !mWorker.isBusy())
+                {
+                    mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
+                    mWorker.doWork(Work::ApplyGitCommand, QVariant(fGitCommand));
+                }
+                else
+                {
+                    execute(fGitCommand, fResultStr);
+                    apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
+                }
             }
         }
         else if (mContextMenuSourceTreeItem)
@@ -1983,6 +1998,11 @@ void MainWindow::performCustomGitActionSettings()
             initMergeTools();
         }
     }
+    for (unsigned int i=0; i<mToolBars.size(); ++i)
+    {
+        mToolBars[i]->clear();
+        mActions.fillToolbar(*mToolBars[i], Cmd::mToolbars[i]);
+    }
 }
 
 void MainWindow::invoke_git_merge_dialog()
@@ -2082,6 +2102,11 @@ void MainWindow::selectTextBrowserLanguage()
         mHighlighter->setLanguage(language_list[index]);
         ui->btnStoreText->setEnabled(enabled);
     }
+}
+
+void MainWindow::killBackgroundThread()
+{
+	// TODO: kill activity somehow
 }
 
 void MainWindow::on_btnFindNext_clicked()

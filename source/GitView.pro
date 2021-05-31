@@ -73,3 +73,5 @@ FORMS    += mainwindow.ui \
 RESOURCES += resource.qrc
 
 TRANSLATIONS    = GitView_de.ts
+
+RC_ICONS = :/resource/logo@2x.ico
