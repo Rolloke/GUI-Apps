@@ -2106,7 +2106,21 @@ void MainWindow::selectTextBrowserLanguage()
 
 void MainWindow::killBackgroundThread()
 {
-	// TODO: kill activity somehow
+    QString pids;
+    execute("pidof git", pids, true);
+    QStringList pidlist = pids.split(" ");
+    if (pidlist.size())
+    {
+        int result = callMessageBox(tr("Do you really whant to kill the processes \"%1\"?"), pids, "", pidlist.size() == 1);
+        if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+        {
+            for (const QString &pid : pidlist)
+            {
+                std::string cmd = "kill " + pid.toStdString();
+                system(cmd.c_str());
+            }
+        }
+    }
 }
 
 void MainWindow::on_btnFindNext_clicked()
