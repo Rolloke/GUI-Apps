@@ -78,6 +78,7 @@ private:
     const QString& iconCheck(bool check);
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
     QString getVariousListHeader(VariousListIndex::e aIndex);
+    void set_tooltip(QAction*, const QString&);
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
