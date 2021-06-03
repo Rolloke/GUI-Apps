@@ -1429,7 +1429,9 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::CallInThread, Flag::set);
 
     connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
+    mActions.setFlags(Cmd::InvokeGitMergeDialog, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font")) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
+    mActions.setFlags(Cmd::InvokeHighlighterDialog, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -1465,6 +1467,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
+    mActions.setFlags(Cmd::Commit, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::Push           , tr("Push"), Cmd::getCommand(Cmd::Push)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
@@ -1479,49 +1482,73 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::BranchList     , tr("List Branches"), Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
+    mActions.setFlags(Cmd::BranchList, ActionList::Flags::NotVariableGitCmd, Flag::set);
     connect(mActions.createAction(Cmd::BranchListRemote, tr("List remote Branches"), Cmd::getCommand(Cmd::BranchListRemote)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListRemote, Cmd::ParseBranchListText);
+    mActions.setFlags(Cmd::BranchListRemote, ActionList::Flags::NotVariableGitCmd, Flag::set);
     connect(mActions.createAction(Cmd::BranchListMerged, tr("List merged Branches"), Cmd::getCommand(Cmd::BranchListMerged)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListMerged, Cmd::ParseBranchListText);
+    mActions.setFlags(Cmd::BranchListMerged, ActionList::Flags::NotVariableGitCmd, Flag::set);
     connect(mActions.createAction(Cmd::BranchListNotMerged, tr("List not merged Branches"), Cmd::getCommand(Cmd::BranchListNotMerged)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListNotMerged, Cmd::ParseBranchListText);
+    mActions.setFlags(Cmd::BranchListNotMerged, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, tr("Delete %1 from git;Do you want to delete \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::BranchDelete, Cmd::UpdateItemStatus);
+    mActions.setFlags(Cmd::BranchDelete, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::BranchCheckout, tr("Checkout Branch"), Cmd::getCommand(Cmd::BranchCheckout)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?"));
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
+    mActions.setFlags(Cmd::BranchCheckout, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::BranchHistory, tr("History Branch"), Cmd::getCommand(Cmd::BranchHistory)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchHistory, Cmd::ParseHistoryText);
+    mActions.setFlags(Cmd::BranchHistory, ActionList::Flags::NotVariableGitCmd, Flag::set);
     connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    mActions.setFlags(Cmd::BranchShow, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
+    mActions.setFlags(Cmd::MoveOrRename, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
+    mActions.setFlags(Cmd::ExpandTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.getAction(Cmd::ExpandTreeItems)->setShortcut(QKeySequence(Qt::Key_F3));
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
+    mActions.setFlags(Cmd::CollapseTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
 
-    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder"), tr("Adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
+    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
+    mActions.setFlags(Cmd::AddGitSourceFolder, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
+    mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.getAction(Cmd::UpdateGitStatus)->setShortcut(QKeySequence(Qt::Key_F5));
 
 #ifndef DOCKED_VIEWS
     connect(mActions.createAction(Cmd::ShowHideTree  , tr("Show/Hide tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideTrees(bool)));
     mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
+    mActions.setFlags(Cmd::BranchListNotMerged, ActionList::Flags::FunctionCmd, Flag::set);
 #endif
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearTrees()));
+    mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
+    mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
+    mActions.setFlags(Cmd::InsertHashFileNames, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::About, tr("About..."), tr("Information about GitView")), SIGNAL(triggered()), this, SLOT(gitview_about()));
+    mActions.setFlags(Cmd::About, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::Delete, tr("Delete..."), tr("Delete file or folder")), SIGNAL(triggered()), this, SLOT(deleteFileOrFolder()));
+    mActions.setFlags(Cmd::Delete, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::SelectTextBrowserLanguage, tr("Select Language..."), tr("Select language for text highlighting")), SIGNAL(triggered()), this, SLOT(selectTextBrowserLanguage()));
+    mActions.setFlags(Cmd::SelectTextBrowserLanguage, ActionList::Flags::FunctionCmd, Flag::set);
 
-    connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Kill Background Activity"), tr("Kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
+    connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Kill Background Activity..."), tr("Kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(false);
+    mActions.setFlags(Cmd::KillBackgroundThread, ActionList::Flags::FunctionCmd, Flag::set);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1989,7 +2016,7 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 
 void MainWindow::performCustomGitActionSettings()
 {
-    CustomGitActions fCustomGitActions(mActions, mMergeTools);
+    CustomGitActions fCustomGitActions(mActions, mMergeTools, this);
     connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     if (fCustomGitActions.exec() == QDialog::Accepted)
     {
