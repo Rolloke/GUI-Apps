@@ -67,4 +67,7 @@ private:
 //#define TRACE //
 //#endif
 
+
+#define UNUSED(x) (void)(x)
+
 #endif // LOGGER_H

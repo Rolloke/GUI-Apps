@@ -10,6 +10,7 @@
 #include <QMenu>
 #include <QActionGroup>
 #include <QComboBox>
+#include <QScrollBar>
 
 using namespace git;
 
@@ -29,7 +30,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
         mMergeToolsState.setBit(i, (mMergeTools.begin() + i).value());
     }
 
-    QStringList fColumnName  = { tr("ID"), tr("Icon"), tr("Command"), tr("Name"), tr("Shortcut"), tr("Message box text")};
+    QStringList fColumnName  = { tr("ID"), tr("Icon"), tr("Command or status text"), tr("Name"), tr("Shortcut"), tr("Message box text")};
     mActionListColumnWidth   = {  0.055  ,    0.055  ,      0.25    ,    0.25   ,      0.1      ,        0.25           };
 
     assert(fColumnName.size()            == ActionsTable::Last);
@@ -63,7 +64,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, ActionsTable::ID), QItemSelectionModel::SelectCurrent);
 
-    int fWidth = ui->tableViewVarious->rect().width();
+    int fWidth = ui->tableViewVarious->rect().width()-6;
     mListModelVarious = new VariousItemModel(0, VariousHeader::Size, this);
     ui->tableViewVarious->setModel(mListModelVarious);
     ui->tableViewVarious->setColumnWidth(VariousHeader::Icon, INT(0.2  * fWidth));
@@ -95,7 +96,8 @@ CustomGitActions::~CustomGitActions()
 void CustomGitActions::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
-    int fWidth = ui->tableViewActions->rect().width();
+    const int vertical_width = ui->tableViewActions->verticalScrollBar()->sizeHint().width();
+    int fWidth = ui->tableViewActions->rect().width() - vertical_width;
 
     for (int fColumn = 0; fColumn<ActionsTable::Last; ++fColumn)
     {
@@ -306,6 +308,7 @@ void CustomGitActions::on_btnToLeft_clicked()
         {
             mListModelActions->setData(mListModelActions->index(fActionRow, ActionsTable::Icon), QIcon(fIconPath), Qt::DecorationRole);
             mActionList.setIconPath(fCmd, fIconPath);
+            mActionList.setFlags(fCmd, ActionList::Flags::Modified, Flag::set);
         }
     }
     else
@@ -543,7 +546,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     if (fFlags & ActionList::Flags::BuiltIn && fFlags & ActionList::Flags::Modified)
     {
          fA_Modified = fMenu.addAction(tr("Reset modifications"));
-         set_tooltip(fA_Modified, tr("After program restart all modifications are removed"));
+         set_tooltip(fA_Modified, tr("After program restart all modifications of this command are removed"));
     }
 
     bool custom_enabled = (fFlags & ActionList::Flags::Custom);
@@ -651,7 +654,6 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
     }
     else
     {
-
         switch (static_cast<ActionsTable::e>(aIndex.column()))
         {
             case ActionsTable::ID:
