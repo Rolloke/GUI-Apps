@@ -45,7 +45,6 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
-// TODO: Aufruf von externen Tools über WorkerThread -> ActionList::Flags::CallInThread;
 
 
 namespace config
@@ -138,7 +137,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupPaths);
 
-    // NOTE: Remote Repositories noetig
+    // NOTE: Remote Repositories necessary
     const QString fCommand = "git remote -v";
     QString fResultStr;
     execute(fCommand, fResultStr);
@@ -1435,7 +1434,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::CallInThread, Flag::set);
 
-    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
+    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file (experimental, not working)")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
     mActions.setFlags(Cmd::InvokeGitMergeDialog, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font")) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
     mActions.setFlags(Cmd::InvokeHighlighterDialog, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1536,7 +1535,7 @@ void MainWindow::initContextMenuActions()
 #ifndef DOCKED_VIEWS
     connect(mActions.createAction(Cmd::ShowHideTree  , tr("Show/Hide tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideTrees(bool)));
     mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
-    mActions.setFlags(Cmd::BranchListNotMerged, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::ShowHideTree, ActionList::Flags::FunctionCmd, Flag::set);
 #endif
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearTrees()));
     mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2145,13 +2144,16 @@ void MainWindow::killBackgroundThread()
     QStringList pidlist = pids.split(" ");
     if (pidlist.size())
     {
-        int result = callMessageBox(tr("Do you really whant to kill the processes \"%1\"?"), pids, "", pidlist.size() == 1);
+        int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
         if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
         {
             for (const QString &pid : pidlist)
             {
                 std::string cmd = "kill " + pid.toStdString();
-                system(cmd.c_str());
+                QString result;
+                execute(cmd.c_str(), result, true);
+                cmd += '\n';
+                apendTextToBrowser(cmd.c_str() + result, true);
             }
         }
     }
@@ -2232,7 +2234,7 @@ void MainWindow::find_function(bool forward)
                 tree_match_flag |= Qt::MatchCaseSensitive;
             }
             tree_match_flag |= Qt::MatchRecursive;
-
+            /// TODO: navigate selected found items with previous and next button
             //! NOTE: also possible flags
             //  MatchStartsWith = 2,
             //  MatchEndsWith = 3,

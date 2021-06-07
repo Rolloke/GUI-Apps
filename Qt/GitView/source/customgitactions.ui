@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>CustomGitActions</class>
  <widget class="QDialog" name="CustomGitActions">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,14 +16,65 @@
   <property name="windowTitle">
    <string>Settings for custom git actions</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/resource/24X24/preferences-system.png</normaloff>:/resource/24X24/preferences-system.png</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QTableView" name="tableViewActions">
      <property name="toolTip">
-      <string>Shows git commands</string>
+      <string>&lt;html&gt;
+  &lt;head/&gt;
+  &lt;body&gt;&lt;h4&gt;Displays application commands that can be edited here.&lt;/h4&gt;&lt;ul&gt;
+      &lt;li&gt;Add a new custom command with the '+' button
+          &lt;ul&gt;
+                &lt;li&gt;git -C %1 &amp;lt;command&amp;gt; %2
+                &lt;ul&gt;
+                   &lt;li&gt;%1 represents the git repository&lt;/li&gt;
+                   &lt;li&gt;%2 [optional] may represent the the selected file or folder&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;/li&gt;
+                &lt;li&gt;git &amp;lt;command&amp;gt; %1  %2
+                &lt;ul&gt;
+                   &lt;li&gt;%1 is used for command options depending on case
+                  &lt;ul&gt;
+                     &lt;li&gt;--staged for diff of staged file&lt;/li&gt;
+                     &lt;li&gt;--tool=&amp;lt;diff-tool&amp;gt;&lt;/li&gt;
+                   &lt;/ul&gt;
+                  &lt;/li&gt;
+                   &lt;li&gt;%2 [optional] may represents the the selected file or folder&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;/li&gt;
+            &lt;/ul&gt;&lt;/li&gt;
+      &lt;li&gt;Remove selected custom command with '-' button&lt;/li&gt;
+      &lt;li&gt;Assign a selected command to toolbar or context menu in right view with '--&amp;gt;' button&lt;/li&gt;
+      &lt;li&gt;Edit commands (custom or built in) by double click on table entry
+          &lt;ul&gt;
+              &lt;li&gt;all 'git' commands may be edited due to parameters or options&lt;/li&gt;
+              &lt;li&gt;all names may be edited (the name should represent the commands functionality)&lt;/li&gt;
+              &lt;li&gt;all shortcuts may be edited&lt;/li&gt;
+              &lt;li&gt;A message box text may be edited or added
+                &lt;ul&gt;
+                   &lt;li&gt;'None' or empty defines that no message box is invoked&lt;/li&gt;
+                   &lt;li&gt;The message box is invoked before execution of the git command&lt;/li&gt;
+                   &lt;li&gt;&lt;b&gt;Format: &lt;/b&gt;Heading [%1];Question [%1]&lt;/li&gt;
+                   &lt;li&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;
+               &lt;/ul&gt;
+              &lt;/li&gt;
+       &lt;/ul&gt;
+     &lt;/li&gt;
+     &lt;li&gt;&lt;b&gt;Note:&lt;/b&gt;The correct functionality may be lost by editing&lt;br&gt;
+             however this can be repaired by 'reset modifications' in context menu&lt;/li&gt;
+     &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</string>
      </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
@@ -123,7 +177,7 @@
      <item>
       <widget class="QPushButton" name="btnDelete">
        <property name="toolTip">
-        <string>Remove custom git command</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove selected custom git command&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string/>
@@ -231,7 +285,37 @@ Contextmenu entries or Toolbar entries</string>
         </size>
        </property>
        <property name="toolTip">
-        <string>Shows icons and menu entries</string>
+        <string>&lt;html&gt;
+  &lt;head/&gt;
+  &lt;body&gt;&lt;h4&gt;Displays application elements and controls.&lt;/h4&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Select items in combo box above
+          &lt;ul&gt;
+                &lt;li&gt;Icons&lt;/li&gt;
+                &lt;li&gt;Context menues&lt;/li&gt;
+                &lt;li&gt;Toolbars&lt;/li&gt;
+                &lt;li&gt;Merge tools&lt;/li&gt;
+          &lt;ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Application Icons
+          &lt;ul&gt;
+                &lt;li&gt;Assign a selected icon to a command selected  in left view with '&amp;lt;--' button&lt;/li&gt;
+          &lt;ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Context menus and toolbars
+          &lt;ul&gt;
+                &lt;li&gt;Remove a selected action with '&amp;lt;--' button&lt;/li&gt;
+                &lt;li&gt;Move a selected action with up and down buttons&lt;/li&gt;
+          &lt;ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Merge tools
+          &lt;ul&gt;
+                &lt;li&gt;Enable or disable tool by left click on icon&lt;/li&gt;
+          &lt;ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</string>
        </property>
        <property name="cornerButtonEnabled">
         <bool>false</bool>

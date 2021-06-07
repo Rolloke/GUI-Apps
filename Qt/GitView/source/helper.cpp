@@ -140,7 +140,8 @@ int execute(const QString& command, QString& aResultText, bool hide)
     int fResult = NoError;
 #else
     auto fResult = system(system_cmd.toStdString().c_str());
-    hide = !hide;  /// NOTE: just to prevent warning
+
+    UNUSED(hide);
 
     if (fResult != NoError)
     {
