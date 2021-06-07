@@ -76,7 +76,7 @@
  */
 
 #include "Arduino.h"
-#include "Stepper.h"
+#include "StepperX.h"
 
 /*
  * two-wire constructor.
