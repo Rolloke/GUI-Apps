@@ -1049,10 +1049,12 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
 
 QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
 {
-    QString fFileName;
+    QString file_name;
     if (aTreeItem)
     {
-        fFileName = aTreeItem->text(Column::FileName);
+        file_name = aTreeItem->text(Column::FileName);
+        bool is_folder = aTreeItem->data(Column::FileName, Role::GitFolder).isValid();
+        bool current_dir_set = false;
         while (aTreeItem)
         {
             aTreeItem = aTreeItem->parent();
@@ -1061,15 +1063,20 @@ QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
                 if (aTreeItem->data(Column::FileName, Role::GitFolder).isValid())
                 {
                     QDir::setCurrent(aTreeItem->text(Column::FileName));
+                    current_dir_set = true;
                 }
                 else
                 {
-                    fFileName = aTreeItem->text(Column::FileName) + QDir::separator() + fFileName;
+                    file_name = aTreeItem->text(Column::FileName) + QDir::separator() + file_name;
                 }
             }
         }
+        if (!current_dir_set && is_folder)
+        {
+            QDir::setCurrent(file_name);
+        }
     }
-    return fFileName;
+    return file_name;
 }
 
 QString MainWindow::getItemTopDirPath(QTreeWidgetItem* aItem)
