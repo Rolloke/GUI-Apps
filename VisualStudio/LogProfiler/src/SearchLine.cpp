@@ -22,12 +22,22 @@ int64_t SearchLine::searchLine(int64_t aTime)
 {
     if (mParser)
     {
-		size_t fLines = mTextIF.getLines();
+		const size_t fLines = mTextIF.getLines();
+		const size_t max_test_lines = 10;
         mMaxRecursion = static_cast<int>(log2(static_cast<double>(fLines))*1.5 + 0.5);
 		int64_t fStartTime { 0 };
 		int64_t fEndtime   { 0 };
-
-		if (getTimeOfLine(0, fStartTime) && getTimeOfLine(fLines - 1, fEndtime) )
+		bool found_start = false;
+		for (size_t fStart = 0; !found_start && fStart < max_test_lines; ++fStart)
+		{
+			found_start = getTimeOfLine(fStart, fStartTime);
+		}
+		bool found_end = false;
+		for (size_t fEnd = fLines - 1; !found_end && fEnd >= fLines - max_test_lines; --fEnd)
+		{
+			found_end = getTimeOfLine(fEnd, fEndtime);
+		}
+		if (found_start && found_end)
 		{
 			if (fStartTime < fEndtime) // should be a sorted file
 			{
@@ -137,6 +147,7 @@ int64_t SearchLine::search_linear(size_t aLines, int64_t aTime)
 			}
 		}
 	}
+	mDifference[fBestDifference] = fBestLine;
 	return fBestLine;
 }
 
