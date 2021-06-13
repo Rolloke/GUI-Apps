@@ -84,6 +84,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
+    , mTreeFindFlags(-1)
+    , mFoundTreeItem(0)
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -2234,26 +2236,73 @@ void MainWindow::find_function(bool forward)
                 tree_match_flag |= Qt::MatchCaseSensitive;
             }
             tree_match_flag |= Qt::MatchRecursive;
-            /// TODO: navigate selected found items with previous and next button
+
             //! NOTE: also possible flags
             //  MatchStartsWith = 2,
             //  MatchEndsWith = 3,
             //  MatchFixedString = 8,
             //  MatchWrap = 32,
 
-            const auto found_items = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
-            if (found_items.size())
+            QList<QTreeWidgetItem *> found_items;
+            if     (tree_match_flag != mTreeFindFlags
+                || ui->edtFindText->isModified())
             {
+                found_items = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
                 for (auto item : found_items)
                 {
                     tree_view->setItemSelected(item, true);
-                    auto* parent = item->parent();
-                    while (parent)
+                }
+                mTreeFindFlags = tree_match_flag;
+                ui->edtFindText->setModified(false);
+                mFoundTreeItem = 0;
+            }
+            else
+            {
+                found_items = tree_view->selectedItems();
+                if (forward)
+                {
+                    if (++mFoundTreeItem >= found_items.size())
                     {
-                        tree_view->setItemExpanded(parent, true);
-                        parent = parent->parent();
+                        mFoundTreeItem = 0;
                     }
                 }
+                else
+                {
+                    if (++mFoundTreeItem <= 0 )
+                    {
+                        mFoundTreeItem = found_items.size() -1;
+                    }
+                }
+            }
+            if (found_items.size())
+            {
+                int i=0;
+                for (auto item : found_items)
+                {
+                    if (i == mFoundTreeItem)
+                    {
+                        auto* parent = item->parent();
+                        while (parent)
+                        {
+                            tree_view->setItemExpanded(parent, true);
+                            parent = parent->parent();
+                        }
+                        break;
+                        // TODO: make visible
+                    }
+                    ++i;
+                }
+
+//                for (auto item : found_items)
+//                {
+//                    tree_view->setItemSelected(item, true);
+//                    auto* parent = item->parent();
+//                    while (parent)
+//                    {
+//                        tree_view->setItemExpanded(parent, true);
+//                        parent = parent->parent();
+//                    }
+//                }
                 showDockedWidget(tree_view);
             }
         }
