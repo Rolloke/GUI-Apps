@@ -206,6 +206,8 @@ private:
     QString               mFontName;
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
+    int                   mTreeFindFlags;
+    int                   mFoundTreeItem;
 };
 
 #endif // MAINWINDOW_H
