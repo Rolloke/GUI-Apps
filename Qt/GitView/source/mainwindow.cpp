@@ -45,6 +45,7 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
+// TODO: Name -> Repository View
 
 
 namespace config
@@ -72,6 +73,12 @@ const QString sModified("Modified");
 } // namespace config
 
 
+MainWindow::tree_find_properties::tree_find_properties() :
+     mFlags(-1), mIndex(0)
+{
+
+}
+
 
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
@@ -84,8 +91,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
-    , mTreeFindFlags(-1)
-    , mFoundTreeItem(0)
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -373,12 +378,13 @@ void MainWindow::createDockWindows()
     // git files view as central widget
     ui->verticalLayoutForTreeView->removeWidget(ui->treeSource);
     setCentralWidget(ui->treeSource);
+    ui->treeSource->setObjectName("sourceview");
 
     QDockWidget* dock;
     // text browser
     dock = new QDockWidget(tr("Text Editor"), this);
     ui->comboFindBox->addItem(dock->windowTitle());
-    ui->comboFindBox->addItem("Source View");
+    ui->comboFindBox->addItem("Repository View");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("textbrowser");
     ui->horizontalLayoutHistoryAndText->removeWidget(ui->textBrowser);
@@ -2215,6 +2221,7 @@ void MainWindow::find_function(bool forward)
 
         if (tree_view)
         {
+            tree_find_properties& property = mTreeFindProperties[tree_view->objectName()];
             const auto& text_to_find    = ui->edtFindText->text();
             int  tree_match_flag = Qt::MatchExactly;
 
@@ -2243,34 +2250,29 @@ void MainWindow::find_function(bool forward)
             //  MatchFixedString = 8,
             //  MatchWrap = 32,
 
-            QList<QTreeWidgetItem *> found_items;
-            if     (tree_match_flag != mTreeFindFlags
-                || ui->edtFindText->isModified())
+            auto& found_items = property.mItems;
+
+            if (tree_match_flag != property.mFlags || ui->edtFindText->isModified())
             {
-                found_items = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
-                for (auto item : found_items)
-                {
-                    tree_view->setItemSelected(item, true);
-                }
-                mTreeFindFlags = tree_match_flag;
+                found_items     = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
+                property.mFlags = tree_match_flag;
+                property.mIndex = 0;
                 ui->edtFindText->setModified(false);
-                mFoundTreeItem = 0;
             }
             else
             {
-                found_items = tree_view->selectedItems();
                 if (forward)
                 {
-                    if (++mFoundTreeItem >= found_items.size())
+                    if (++property.mIndex >= found_items.size())
                     {
-                        mFoundTreeItem = 0;
+                        property.mIndex = 0;
                     }
                 }
                 else
                 {
-                    if (++mFoundTreeItem <= 0 )
+                    if (--property.mIndex <= 0 )
                     {
-                        mFoundTreeItem = found_items.size() -1;
+                        property.mIndex = found_items.size() -1;
                     }
                 }
             }
@@ -2279,7 +2281,8 @@ void MainWindow::find_function(bool forward)
                 int i=0;
                 for (auto item : found_items)
                 {
-                    if (i == mFoundTreeItem)
+                    tree_view->setItemSelected(item, i == property.mIndex);
+                    if (i == property.mIndex)
                     {
                         auto* parent = item->parent();
                         while (parent)
@@ -2287,22 +2290,10 @@ void MainWindow::find_function(bool forward)
                             tree_view->setItemExpanded(parent, true);
                             parent = parent->parent();
                         }
-                        break;
-                        // TODO: make visible
+                        tree_view->scrollToItem(item);
                     }
                     ++i;
                 }
-
-//                for (auto item : found_items)
-//                {
-//                    tree_view->setItemSelected(item, true);
-//                    auto* parent = item->parent();
-//                    while (parent)
-//                    {
-//                        tree_view->setItemExpanded(parent, true);
-//                        parent = parent->parent();
-//                    }
-//                }
                 showDockedWidget(tree_view);
             }
         }
