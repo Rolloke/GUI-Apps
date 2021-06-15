@@ -206,8 +206,15 @@ private:
     QString               mFontName;
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
-    int                   mTreeFindFlags;
-    int                   mFoundTreeItem;
+    struct tree_find_properties
+    {
+        tree_find_properties();
+        int                   mFlags;
+        int                   mIndex;
+        QList<QTreeWidgetItem *> mItems;
+    };
+
+    QMap <QString, tree_find_properties> mTreeFindProperties;
 };
 
 #endif // MAINWINDOW_H

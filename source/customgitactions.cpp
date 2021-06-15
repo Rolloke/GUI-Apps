@@ -486,10 +486,12 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     {
         fItem->setCheckable(true);
     }
+
     if (isBetween(fPostAction, 0, fPostActionGroup.actions().size()))
     {
         fPostActionGroup.actions().at(fPostAction)->setChecked(true);
     }
+    std::vector<int> parse_action { Cmd::ParseHistoryText, Cmd::ParseBranchListText};
 
     ulong fEnableFlag  = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagEnable);
     ulong fDisableFlag = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagDisable);
@@ -576,6 +578,11 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         fMenu.removeAction(fParseBranch);
         fMenu.removeAction(fA_BranchCmd);
         fMenu.removeAction(fA_HistoryCmd);
+        fMenu.removeAction(fA_ThreadCmd);
+    }
+    /// NOTE: a parsed command cannot be processed asynchronously
+    if (std::find(parse_action.begin(), parse_action.end(), fPostAction) != parse_action.end())
+    {
         fMenu.removeAction(fA_ThreadCmd);
     }
 

@@ -222,7 +222,7 @@
         <item>
          <widget class="QTreeWidget" name="treeSource">
           <property name="toolTip">
-           <string>Show file and folder tree of git folder</string>
+           <string>Show file and folder tree of git repositories</string>
           </property>
           <property name="statusTip">
            <string>Git repository view</string>
