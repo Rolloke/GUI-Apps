@@ -4,6 +4,7 @@
 #include "helper.h"
 #include "history.h"
 #include "git_type.h"
+#include "logger.h"
 
 using namespace git;
 
@@ -293,6 +294,10 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
                     fChildItem->addChild(new QTreeWidgetItem({fFile}));
                 }
                 fChildItem->setData(History::Column::Commit, History::role(History::Entry::NoOfFiles), fFiles.count());
+            }
+            else
+            {
+                TRACE(Logger::to_browser, tr("error inserting filenames:\n%1\n%2\nerror number: %d").arg(fGitCmd).arg(fResultStr).toStdString().c_str(), fError);
             }
         }
     }

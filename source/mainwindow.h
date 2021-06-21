@@ -163,7 +163,7 @@ private:
 
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
-    void     apendTextToBrowser(const QString& aText, bool append=false);
+    void     appendTextToBrowser(const QString& aText, bool append=false);
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);

@@ -22,6 +22,7 @@ std::uint32_t Logger::mSeverity = Logger::error | Logger::warning | Logger::noti
 map<std::string, int> Logger::mCurveColor;
 string Logger::mLogdir("/tmp");
 Logger::tLogfunction Logger::mLogFunction;
+Logger::tLogfunction Logger::mTxt2BrowserFunction;
 
 #ifdef USE_WINDOWS_LOG
 namespace
@@ -73,6 +74,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
     {
         const bool fToSyslog   = isSeverityActive(to_syslog);
         const bool fToFunction = (mLogFunction && (mSeverity&to_function) != 0);
+        const bool fToBrowserFunction = ((aSeverity&to_browser) != 0 && mTxt2BrowserFunction);
         const bool fToConsole  = isSeverityActive(to_console);
 
         if (fToConsole)
@@ -96,6 +98,20 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 #endif
             va_end (args);
             mLogFunction(fMessage);
+        }
+
+        if (fToBrowserFunction)
+        {
+            char fMessage[2048]="";
+            va_list args;
+            va_start (args, format);
+#ifdef __linux__
+            vsnprintf(fMessage, sizeof (fMessage), format, args);
+#else
+            vsprintf_s(fMessage, sizeof (fMessage), format, args);
+#endif
+            va_end (args);
+            mTxt2BrowserFunction(fMessage);
         }
 
         if (fToSyslog)
@@ -161,15 +177,14 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
 
 void Logger::setLogFunction(const tLogfunction& aLogFunc)
 {
-    if (aLogFunc)
-    {
-        mSeverity |= to_function;
-    }
-    else
-    {
-        mSeverity &= ~to_function;
-    }
+    setSeverity(to_function, static_cast<bool>(aLogFunc));
     mLogFunction = aLogFunc;
+}
+
+void Logger::setTextToBrowserFunction(const tLogfunction &aFunc)
+{
+    setSeverity(to_browser, static_cast<bool>(aFunc));
+    mTxt2BrowserFunction = aFunc;
 }
 
 #ifdef __linux__

@@ -43,6 +43,7 @@ private:
     QString mHistoryFile;
     QString mHistoryHashItems;
     uint    mSelectedTopLevelItemType;
+
 };
 
 #endif // QHISTORYTREEWIDGET_H

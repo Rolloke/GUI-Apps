@@ -463,67 +463,67 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation>Parse Ergebnis für die Zweigansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="516"/>
+        <location filename="customgitactions.cpp" line="518"/>
         <source>Enable for git status set</source>
         <translation>Für git Status aktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="517"/>
+        <location filename="customgitactions.cpp" line="519"/>
         <source>Disable for git status set</source>
         <translation>Für git Status deaktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="518"/>
+        <location filename="customgitactions.cpp" line="520"/>
         <source>Enable for git status not set</source>
         <translation>Für inaktiven git Status aktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="528"/>
+        <location filename="customgitactions.cpp" line="530"/>
         <source>Enable command if this git status is set</source>
         <translation>Aktiviere das Kommando für diesen git Status</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="534"/>
+        <location filename="customgitactions.cpp" line="536"/>
         <source>Disable command if this git status is set</source>
         <translation>Deaktiviere das Kommando für diesen git Status</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="540"/>
+        <location filename="customgitactions.cpp" line="542"/>
         <source>Enable command if this git status is not set</source>
         <translation>Aktiviere das Kommando, wenn dieser git Status nicht gesetzt ist</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="548"/>
+        <location filename="customgitactions.cpp" line="550"/>
         <source>Reset modifications</source>
         <translation>Änderungen verwerfen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="549"/>
+        <location filename="customgitactions.cpp" line="551"/>
         <source>After program restart all modifications of this command are removed</source>
         <translation>Nach Neustart des Programms sind die Modifikationen dieses Kommandos entfernt</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="553"/>
+        <location filename="customgitactions.cpp" line="555"/>
         <source>Branch command</source>
         <translation>Quellcodezweig Kommando</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="557"/>
+        <location filename="customgitactions.cpp" line="559"/>
         <source>The git command is called in branch view context</source>
         <translation>Dieses git Kommando wird im Kontext der Zweigansicht aufgerufen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="563"/>
+        <location filename="customgitactions.cpp" line="565"/>
         <source>The git command is called in history view context</source>
         <translation>Dieses git Kommando wird im Kontext der Historienansicht aufgerufen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="568"/>
+        <location filename="customgitactions.cpp" line="570"/>
         <source>The git command is called without blocking the program</source>
         <translation>Dieses git Kommando aufgerufen, ohne das Program zu blockieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="582"/>
+        <location filename="customgitactions.cpp" line="589"/>
         <source>Don&apos;t change command</source>
         <translation>Kommando nicht ändern</translation>
     </message>
@@ -532,7 +532,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Wird in Quellcodezweigansicht angewendet</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="559"/>
+        <location filename="customgitactions.cpp" line="561"/>
         <source>History command</source>
         <translation>Historienkommando</translation>
     </message>
@@ -541,7 +541,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Wird in Historienansicht angewendet</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="565"/>
+        <location filename="customgitactions.cpp" line="567"/>
         <source>Invoke command unattached</source>
         <translation>Rufe Kommando indirekt auf</translation>
     </message>
@@ -550,7 +550,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Aufrufen ohne zu blockieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="582"/>
+        <location filename="customgitactions.cpp" line="589"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -692,7 +692,8 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="225"/>
-        <source>Show file and folder tree of git folder</source>
+        <source>Show file and folder tree of git repositories</source>
+        <oldsource>Show file and folder tree of git folder</oldsource>
         <translation>Zeigt Datei bzw. Ordner Baumansicht für git Repository</translation>
     </message>
     <message>
@@ -942,92 +943,92 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
         <translation>Wähle Ziel...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="398"/>
         <source>Text Editor</source>
         <translation>Texteditor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="391"/>
+        <location filename="mainwindow.cpp" line="410"/>
         <source>History View</source>
         <translation>Historienansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="402"/>
+        <location filename="mainwindow.cpp" line="421"/>
         <source>Branch View</source>
         <translation>Zweigansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="414"/>
+        <location filename="mainwindow.cpp" line="433"/>
         <source>Git File View States</source>
         <translation>Git Textansichtwerkzeuge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="423"/>
+        <location filename="mainwindow.cpp" line="442"/>
         <source>Text Editor / Viewer Control</source>
         <translation>Test-editor / ansicht Werkzeuge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="432"/>
+        <location filename="mainwindow.cpp" line="451"/>
         <source>File Flags</source>
         <translation>Dateieigenschaften</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="441"/>
+        <location filename="mainwindow.cpp" line="460"/>
         <source>Find</source>
         <translation>Suche</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="829"/>
+        <location filename="mainwindow.cpp" line="848"/>
         <source>Repository: </source>
         <translation>Repository: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1104"/>
+        <location filename="mainwindow.cpp" line="1123"/>
         <source>Select SourceFiles</source>
         <translation>Wähle git Repository</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1127"/>
+        <location filename="mainwindow.cpp" line="1146"/>
         <source>Total selected bytes: </source>
         <translation>Gesamt ausgewählte Bytes: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1138"/>
+        <location filename="mainwindow.cpp" line="1157"/>
         <source>Save content of text editor</source>
         <translation>Speichere Inhalt der Textansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1159"/>
+        <location filename="mainwindow.cpp" line="1178"/>
         <source>The document has been modified.</source>
         <translation>Die Textdatei wurde geändert.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1160"/>
+        <location filename="mainwindow.cpp" line="1179"/>
         <source>Do you want to save your changes?</source>
         <translation>Möchten Sie die Änderungen speichern?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1203"/>
+        <location filename="mainwindow.cpp" line="1222"/>
         <source> Type: </source>
         <translation> Typ: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1422"/>
+        <location filename="mainwindow.cpp" line="1441"/>
         <source>Show difference</source>
         <translation>Zeige Unterschiede an</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1428"/>
+        <location filename="mainwindow.cpp" line="1447"/>
         <source>Call diff tool...</source>
         <translation>Zeige Unterschiede extern an...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1434"/>
+        <location filename="mainwindow.cpp" line="1453"/>
         <source>Call merge tool...</source>
         <translation>Rufe Zusammenführungswerkzeug auf...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1439"/>
+        <location filename="mainwindow.cpp" line="1458"/>
         <source>Merge file...</source>
         <translation>Führe Datei zusammen...</translation>
     </message>
@@ -1036,172 +1037,172 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
         <translation type="vanished">Führe Änderungen der ausgewählten Datei zusammen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1439"/>
+        <location filename="mainwindow.cpp" line="1458"/>
         <source>Merge selected file (experimental, not working)</source>
         <translation>Führe gewählte Datei zusammen (experimentell)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1441"/>
+        <location filename="mainwindow.cpp" line="1460"/>
         <source>Edit Highlighting...</source>
         <translation>Bearbeite Texthervorhebung...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1441"/>
+        <location filename="mainwindow.cpp" line="1460"/>
         <source>Edit highlighting color and font</source>
         <translation>Bearbeitet Farbe und Schrift der Hervorhebung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1444"/>
+        <location filename="mainwindow.cpp" line="1463"/>
         <source>Show status</source>
         <translation>Aktualisiere git Status</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1446"/>
+        <location filename="mainwindow.cpp" line="1465"/>
         <source>Show short status</source>
         <translation>Aktualisiere Kurzstatus</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1449"/>
+        <location filename="mainwindow.cpp" line="1468"/>
         <source>Add to git (stage)</source>
         <translation>Zu git hinzufügen (stagen)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1456"/>
+        <location filename="mainwindow.cpp" line="1475"/>
         <source>Reset file (unstage)</source>
         <translation>Aus git entfernen (unstage)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1461"/>
+        <location filename="mainwindow.cpp" line="1480"/>
         <source>Show History</source>
         <translation>Historie anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1465"/>
+        <location filename="mainwindow.cpp" line="1484"/>
         <source>Remove from git...</source>
         <translation>Aus git enfernen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1469"/>
+        <location filename="mainwindow.cpp" line="1488"/>
         <source>Restore changes...</source>
         <translation>Änderungen rückgangig machen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1470"/>
+        <location filename="mainwindow.cpp" line="1489"/>
         <source>Restore changes;Do you want to restore changes in file &quot;%1&quot;?</source>
         <translation>Änderungen rückgängig;Möchten Sie die Änderungen in der Datei &quot;%1&quot; verwerfen?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1476"/>
+        <location filename="mainwindow.cpp" line="1495"/>
         <source>Commit...</source>
         <translation>Committen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1480"/>
+        <location filename="mainwindow.cpp" line="1499"/>
         <source>Push</source>
         <translation>Hochladen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1482"/>
+        <location filename="mainwindow.cpp" line="1501"/>
         <source>Pull</source>
         <translation>Herunerladen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1484"/>
+        <location filename="mainwindow.cpp" line="1503"/>
         <source>Show</source>
         <translation>Anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1486"/>
+        <location filename="mainwindow.cpp" line="1505"/>
         <source>Stash</source>
         <translation>In git Speicher verschieben</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1488"/>
+        <location filename="mainwindow.cpp" line="1507"/>
         <source>Stash pop</source>
         <translation>Aus git Speicher holen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1489"/>
+        <location filename="mainwindow.cpp" line="1508"/>
         <source>Stash show</source>
         <translation>git Speicher anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1491"/>
+        <location filename="mainwindow.cpp" line="1510"/>
         <source>List Branches</source>
         <translation>Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1494"/>
+        <location filename="mainwindow.cpp" line="1513"/>
         <source>List remote Branches</source>
         <translation>Entfernte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1497"/>
+        <location filename="mainwindow.cpp" line="1516"/>
         <source>List merged Branches</source>
         <translation>Zusammengeführte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1500"/>
+        <location filename="mainwindow.cpp" line="1519"/>
         <source>List not merged Branches</source>
         <translation>Nicht zusammengeführte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1504"/>
+        <location filename="mainwindow.cpp" line="1523"/>
         <source>Delete Branch</source>
         <translation>Zweig löschen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1505"/>
+        <location filename="mainwindow.cpp" line="1524"/>
         <source>Delete %1 from git;Do you want to delete &quot;%1&quot;?</source>
         <translation>Lösche %1 aus git;Möchten sie &quot;%1&quot; aus git entfernen?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1509"/>
+        <location filename="mainwindow.cpp" line="1528"/>
         <source>Checkout Branch</source>
         <translation>Zweig auschecken</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1510"/>
+        <location filename="mainwindow.cpp" line="1529"/>
         <source>Checkout %1;Do you want to set &quot;%1&quot; active?</source>
         <translation>Auschecken von %1;Möchten Sie den Zweig &quot;%1&quot; aktivieren?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1514"/>
+        <location filename="mainwindow.cpp" line="1533"/>
         <source>History Branch</source>
         <translation>Historie des Zweiges</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1517"/>
+        <location filename="mainwindow.cpp" line="1536"/>
         <source>Show Branch</source>
         <translation>Zweig anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1520"/>
+        <location filename="mainwindow.cpp" line="1539"/>
         <source>Move / Rename...</source>
         <translation>Verschieben / Umbenennen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1543"/>
         <source>Expand Tree Items</source>
         <translation>Baumansicht aufklappen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1543"/>
         <source>Expands all tree item of focused tree</source>
         <translation>Klappt alle Zweige der Baumansicht auf</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1527"/>
+        <location filename="mainwindow.cpp" line="1546"/>
         <source>Collapse Tree Items</source>
         <translation>Zweige zuklappen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1527"/>
+        <location filename="mainwindow.cpp" line="1546"/>
         <source>Collapses all tree item of focused tree</source>
         <translation>Klappt alle Zweige der Baumansicht zusammen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2149"/>
+        <location filename="mainwindow.cpp" line="2168"/>
         <source>Do you really whant to kill the git processes &quot;%1&quot;?</source>
         <translation>Möchten Sie die Prozesse &quot;%1&quot; wirklich abbbrechen?</translation>
     </message>
@@ -1210,132 +1211,132 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
         <translation type="vanished">Füge git Repository hinzu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1531"/>
+        <location filename="mainwindow.cpp" line="1550"/>
         <source>Adds a git source folder to the source treeview</source>
         <translation>Fügt ein git Repository hinzu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1531"/>
+        <location filename="mainwindow.cpp" line="1550"/>
         <source>Add git source folder...</source>
         <translation>git Repository hinzufügen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1552"/>
         <source>Update git status</source>
         <translation>git Status aktualisieren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1552"/>
         <source>Updates the git status of the selected source folder</source>
         <translation>Aktualisiert den git Status des ausgewählten Eintrags</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1538"/>
+        <location filename="mainwindow.cpp" line="1557"/>
         <source>Show/Hide tree</source>
         <translation>Show/Hide tree</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1538"/>
+        <location filename="mainwindow.cpp" line="1557"/>
         <source>Shows or hides history or branches tree</source>
         <translation>Shows or hides history or branches tree</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
+        <location filename="mainwindow.cpp" line="1561"/>
         <source>Clear tree items</source>
         <translation>Löscht alle Einträge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
+        <location filename="mainwindow.cpp" line="1561"/>
         <source>Clears all history or branch tree entries</source>
         <translation>Löscht alle Einträge der Baumansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1564"/>
         <source>Customize git actions...</source>
         <translation>Benutzer Kommandos bearbeiten...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1564"/>
         <source>Edit custom git actions, menues and toolbars</source>
         <translation>Bearbeitet git Kommandos, Menüeintrage und Werkzeugleisteneinträge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1547"/>
+        <location filename="mainwindow.cpp" line="1566"/>
         <source>Insert File Name List</source>
         <translation>Für Dateinameliste ein</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1547"/>
+        <location filename="mainwindow.cpp" line="1566"/>
         <source>Inserts file names that differ from previous hash</source>
         <translation>Fügt Dateinamen ein, die von dem vorzustand abweichen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1549"/>
+        <location filename="mainwindow.cpp" line="1568"/>
         <source>About...</source>
         <translation>Über...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1549"/>
+        <location filename="mainwindow.cpp" line="1568"/>
         <source>Information about GitView</source>
         <translation>Über GitView</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1552"/>
+        <location filename="mainwindow.cpp" line="1571"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1552"/>
+        <location filename="mainwindow.cpp" line="1571"/>
         <source>Delete file or folder</source>
         <translation>Lösche Datei bzw. Ordner</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1554"/>
+        <location filename="mainwindow.cpp" line="1573"/>
         <source>Select Language...</source>
         <translation>Wähle Sprache...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1554"/>
+        <location filename="mainwindow.cpp" line="1573"/>
         <source>Select language for text highlighting</source>
         <translation>Wähle Sprache für Texthervorhebung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1557"/>
+        <location filename="mainwindow.cpp" line="1576"/>
         <source>Kill Background Activity...</source>
         <translation>Hintergrundaktivität abbrechen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1557"/>
+        <location filename="mainwindow.cpp" line="1576"/>
         <source>Kill git action running in background</source>
         <translation>git Kommando abbrechen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1594"/>
+        <location filename="mainwindow.cpp" line="1613"/>
         <source>git -C %1 difftool --tool-help</source>
         <translation>git -C %1 difftool --tool-help</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1622"/>
+        <location filename="mainwindow.cpp" line="1641"/>
         <source>Enable all</source>
         <translation>Alle anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1623"/>
+        <location filename="mainwindow.cpp" line="1642"/>
         <source>Disable all</source>
         <translation>Keinen anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1634"/>
+        <location filename="mainwindow.cpp" line="1653"/>
         <source>Authors</source>
         <translation>Autoren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1699"/>
+        <location filename="mainwindow.cpp" line="1718"/>
         <source>Move or rename %1</source>
         <translation>Verschieben bzw. umbenennen %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1700"/>
+        <location filename="mainwindow.cpp" line="1719"/>
         <source>Enter a new name or destination for &quot;./%1&quot;.
 To move the %3 insert the destination path before.
 To rename just modify the name.</source>
@@ -1344,17 +1345,17 @@ Zum Verschieben von %3 muss der Zielort vor dem Namen eingegeben werden.
 Zum Umbenennen muss nur der Name geändert werden.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1891"/>
+        <location filename="mainwindow.cpp" line="1910"/>
         <source>git -C %1 </source>
         <translation>git -C %1 </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2078"/>
+        <location filename="mainwindow.cpp" line="2097"/>
         <source>Delete %1</source>
         <translation>Lösche %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2117"/>
+        <location filename="mainwindow.cpp" line="2136"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
@@ -1531,9 +1532,14 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="23"/>
-        <location filename="main.cpp" line="27"/>
+        <location filename="main.cpp" line="24"/>
         <source>Alternative Config file name.</source>
         <translation>Alternativer Konfigurationsdateiname.</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="27"/>
+        <source>Language.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
