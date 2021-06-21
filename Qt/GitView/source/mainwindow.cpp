@@ -161,7 +161,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     const QString fCommand = "git remote -v";
     QString fResultStr;
     execute(fCommand, fResultStr);
-    apendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
+    appendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
 
     int fItemCount = fSettings.beginReadArray(config::sSourcePath);
     for (int fItem = 0; fItem < fItemCount; ++fItem)
@@ -274,6 +274,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.endGroup();
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
+
+    auto text2browser = [this](const std::string&text){ appendTextToBrowser(text.c_str()); };
+    Logger::setTextToBrowserFunction(text2browser);
 }
 
 MainWindow::~MainWindow()
@@ -680,7 +683,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     && aParentItem->checkState(Column::FileName) == Qt::Checked)
                 {
                     const QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                    apendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
+                    appendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
                     return false;
                 }
                 int fCountOk = 0;
@@ -743,7 +746,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         {
                             fSource = "\"" + fSource + "\"";
                             QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                            apendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
+                            appendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
                             fResult = fCmd.size() != 0;
                         }   break;
                         case Work::ShowAllFiles:
@@ -845,9 +848,9 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
     QString fResultString;
     applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::GetStatusAll), fResultString);
 
-    apendTextToBrowser(tr("Repository: ")+fSourceDir.path(), aItem == 0 ? false : true);
-    apendTextToBrowser(fResultString, true);
-    apendTextToBrowser("", true);
+    appendTextToBrowser(tr("Repository: ")+fSourceDir.path(), aItem == 0 ? false : true);
+    appendTextToBrowser(fResultString, true);
+    appendTextToBrowser("", true);
 
     stringt2typemap fCheckMap;
     parseGitStatus(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
@@ -925,7 +928,7 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 }
 
 
-void MainWindow::apendTextToBrowser(const QString& aText, bool append)
+void MainWindow::appendTextToBrowser(const QString& aText, bool append)
 {
     if (!append)
     {
@@ -1010,7 +1013,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
         case Work::ApplyGitCommand:
             if (aData.isValid() && aData.type() == QVariant::String)
             {
-                apendTextToBrowser(aData.toString());
+                appendTextToBrowser(aData.toString());
             } break;
         default:  break;
     }
@@ -1332,7 +1335,11 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     }
     else
     {
-        execute(fCommand, aResultStr);
+        int result = execute(fCommand, aResultStr);
+        if (result != NoError)
+        {
+            aResultStr += tr("\nError %1 occurred").arg(result);
+        }
     }
     return fCommand;
 }
@@ -1413,7 +1420,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
     on_btnCloseText_clicked();
     mHighlighter->setExtension("");
-    ui->textBrowser->setPlainText(ui->treeHistory->itemClicked(aItem, aColumn));
+    appendTextToBrowser(ui->treeHistory->itemClicked(aItem, aColumn));
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
@@ -1689,15 +1696,23 @@ void  MainWindow::call_git_commit()
             getSelectedTreeItem();
             applyGitCommandToFileTree(Cmd::getCommand(Cmd::Add));
             QString fResultStr;
-            execute(fCommitCommand, fResultStr);
-            apendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
+            int result = execute(fCommitCommand, fResultStr);
+            if (result != NoError)
+            {
+                fResultStr += tr("\nError %1 occurred").arg(result);
+            }
+            appendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
         else
         {
             QString fResultStr;
-            execute(fCommitCommand, fResultStr);
-            apendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
+            int result = execute(fCommitCommand, fResultStr);
+            if (result != NoError)
+            {
+                fResultStr += tr("\nError %1 occurred").arg(result);
+            }
+            appendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
     }
@@ -1752,6 +1767,10 @@ void MainWindow::call_git_move_rename()
                     mContextMenuSourceTreeItem->setText(Column::FileName, fNewName);
                     updateTreeItemStatus(mContextMenuSourceTreeItem);
                 }
+            }
+            else
+            {
+                appendTextToBrowser(fCommand + fResultStr + tr("\nError %1 occurred").arg(fResult));
             }
         }
         mContextMenuSourceTreeItem = nullptr;
@@ -1812,8 +1831,12 @@ void MainWindow::perform_custom_command()
                 }
                 else
                 {
-                    execute(fGitCommand, fResultStr);
-                    apendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
+                    int result = execute(fGitCommand, fResultStr);
+                    if (result != NoError)
+                    {
+                        fResultStr += tr("\nError %1 occurred").arg(result);
+                    }
+                    appendTextToBrowser(fGitCommand + getLineFeed() + fResultStr);
                 }
             }
         }
@@ -1893,8 +1916,12 @@ void MainWindow::call_git_history_diff_command()
             const QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";
             fCmd = tr(fCmd.toStdString().c_str()).arg(fQuotedHistoryFile);
             QString fResult;
-            execute(fCmd, fResult);
-            apendTextToBrowser(fCmd + getLineFeed() + fResult);
+            int result = execute(fCmd, fResult);
+            if (result != NoError)
+            {
+                fResult += tr("\nError %1 occurred").arg(result);
+            }
+            appendTextToBrowser(fCmd + getLineFeed() + fResult);
         }
         else
         {
@@ -1919,8 +1946,12 @@ void MainWindow::call_git_history_diff_command()
             fCmd = tr(fFormatString.toStdString().c_str()).arg(fHistoryHashItems).arg("");
         }
         QString fResult;
-        execute(fCmd, fResult);
-        apendTextToBrowser(fCmd + getLineFeed() + fResult);
+        int result = execute(fCmd, fResult);
+        if (result != NoError)
+        {
+            fResult += tr("\nError %1 occurred").arg(result);
+        }
+        appendTextToBrowser(fCmd + getLineFeed() + fResult);
     }
 }
 
@@ -1962,10 +1993,10 @@ void MainWindow::call_git_branch_command()
 
         fResult = execute(fGitCommand, fResultStr);
         fResultStr = fGitCommand + getLineFeed() + fResultStr;
-        apendTextToBrowser(fResultStr);
+        appendTextToBrowser(fResultStr);
     }
 
-    if (fResult == 0)
+    if (fResult == NoError)
     {
         switch (fVariantList[ActionList::Data::Action].toUInt())
         {
@@ -1974,7 +2005,11 @@ void MainWindow::call_git_branch_command()
                 fResultStr.clear();
                 fGitCommand  = ui->treeBranches->getBranchTopItemText();
                 fTopItemPath = ui->treeBranches->getSelectedBranchGitRootPath();
-                execute(fGitCommand, fResultStr);
+                int result = execute(fGitCommand, fResultStr);
+                if (result != NoError)
+                {
+                    fResultStr += tr("\nError %1 occurred").arg(result);
+                }
                 QString fParseText = fGitCommand + getLineFeed() + fResultStr + getLineFeed();
                 ui->treeBranches->parseBranchListText(fParseText, fTopItemPath);
                 mHighlighter->setExtension("");
@@ -2010,6 +2045,10 @@ void MainWindow::call_git_branch_command()
 #endif
             }    break;
         }
+    }
+    else
+    {
+        appendTextToBrowser(fGitCommand + tr("Error %1 occurred").arg(fResult));
     }
 }
 
@@ -2174,7 +2213,7 @@ void MainWindow::killBackgroundThread()
                 QString result;
                 execute(cmd.c_str(), result, true);
                 cmd += '\n';
-                apendTextToBrowser(cmd.c_str() + result, true);
+                appendTextToBrowser(cmd.c_str() + result, true);
             }
         }
     }
