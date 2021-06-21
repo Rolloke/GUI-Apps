@@ -45,7 +45,6 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
-// TODO: Name -> Repository View
 
 
 namespace config
@@ -99,6 +98,17 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
+    static const QString style_sheet_treeview_lines =
+            "QTreeView::branch:has-siblings:!adjoins-item {"
+            "    border-image: url(://resource/24X24/stylesheet-vline.png) 0; }"
+            "QTreeView::branch:has-siblings:adjoins-item {"
+            "    border-image: url(://resource/24X24/stylesheet-branch-more.png) 0; }"
+            "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
+            "    border-image: url(://resource/24X24/stylesheet-branch-end.png) 0; }"
+            "QTreeView::branch:has-children:!has-siblings:closed,"
+            "QTreeView::branch:closed:has-children:has-siblings { border-image: none; image: url(://resource/24X24/stylesheet-branch-closed.png); }"
+            "QTreeView::branch:open:has-children:!has-siblings,"
+            "QTreeView::branch:open:has-children:has-siblings  { border-image: none; image: url(://resource/24X24/stylesheet-branch-open.png); }";
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
     QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
@@ -118,6 +128,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->header()->setStretchLastSection(false);
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeSource->setStyleSheet(style_sheet_treeview_lines);
+    ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
+    ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
 
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
