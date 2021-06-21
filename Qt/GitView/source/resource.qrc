@@ -60,5 +60,10 @@
         <file>resource/logo@2x.png</file>
         <file>resource/logo@2x.ico</file>
         <file>resource/24X24/text-x-adasrc.svg</file>
+        <file>resource/24X24/stylesheet-vline.png</file>
+        <file>resource/24X24/stylesheet-branch-more.png</file>
+        <file>resource/24X24/stylesheet-branch-end.png</file>
+        <file>resource/24X24/stylesheet-branch-closed.png</file>
+        <file>resource/24X24/stylesheet-branch-open.png</file>
     </qresource>
 </RCC>
