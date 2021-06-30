@@ -10,7 +10,13 @@ namespace cmdline
     const QString Log2file    = "log2file";
     const QString Language    = "language";
 }
-
+/*
+app = QApplication(sys.argv)
+file = QFile(":/dark.qss")
+file.open(QFile.ReadOnly | QFile.Text)
+stream = QTextStream(file)
+app.setStyleSheet(stream.readAll())
+ */
 int main(int argc, char *argv[])
 {
     QFileInfo fFile(argv[0]);

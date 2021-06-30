@@ -25,12 +25,10 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
                                  .arg(QWidget::palette().color(QPalette::Base).name())
                                  .arg(item.value().foreground().color().name()));
         connect(color_btn, SIGNAL(clicked()), this, SLOT(color_btn_clicked()));
-        ui->color_buttons->addWidget(color_btn);
 
         auto* italic_check_btn = new QCheckBox(tr("italic"));
         connect(italic_check_btn, SIGNAL(clicked(bool)), this, SLOT(italic_btn_clicked(bool)));
         italic_check_btn->setChecked(item.value().font().italic());
-        ui->italic_buttons->addWidget(italic_check_btn);
 
         auto* weight_box = new QComboBox(this);
         connect(weight_box, SIGNAL(currentIndexChanged(int)), this, SLOT(weigth_index_changed(int)));
@@ -52,7 +50,12 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
                 break;
             }
         }
+        int height = weight_box->size().height()+2;
+        color_btn->setMinimumHeight(height);
+        italic_check_btn->setMinimumHeight(height);
+        ui->color_buttons->addWidget(color_btn);
         ui->weight_boxes->addWidget(weight_box);
+        ui->italic_buttons->addWidget(italic_check_btn);
     }
 }
 
