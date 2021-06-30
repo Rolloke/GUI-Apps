@@ -45,7 +45,8 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
-
+// TODO: display graphic files jpg, pgn, svg
+// TODO: show stash difference of single files
 
 namespace config
 {
@@ -106,9 +107,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
             "    border-image: url(://resource/24X24/stylesheet-branch-end.png) 0; }"
             "QTreeView::branch:has-children:!has-siblings:closed,"
-            "QTreeView::branch:closed:has-children:has-siblings { border-image: none; image: url(://resource/24X24/stylesheet-branch-closed.png); }"
+            "QTreeView::branch:closed:has-children:has-siblings { "
+            "    border-image: none; image: url(://resource/24X24/stylesheet-branch-closed.png); }"
             "QTreeView::branch:open:has-children:!has-siblings,"
-            "QTreeView::branch:open:has-children:has-siblings  { border-image: none; image: url(://resource/24X24/stylesheet-branch-open.png); }";
+            "QTreeView::branch:open:has-children:has-siblings  { "
+            "    border-image: none; image: url(://resource/24X24/stylesheet-branch-open.png); }";
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
     QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));

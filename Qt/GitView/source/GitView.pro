@@ -74,4 +74,4 @@ RESOURCES += resource.qrc
 
 TRANSLATIONS    = GitView_de.ts
 
-RC_ICONS = :/resource/logo@2x.ico
+#RC_ICONS = :/resource/logo@2x.ico

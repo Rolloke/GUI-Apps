@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset theme="Git" resource="resource.qrc">
-    <normaloff>:/resource/logo@2x.png</normaloff>:/resource/logo@2x.png</iconset>
+    <normaloff>:/resource/logo@2x.ico</normaloff>:/resource/logo@2x.ico</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
