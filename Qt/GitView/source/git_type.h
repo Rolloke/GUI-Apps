@@ -135,7 +135,8 @@ struct Type
         ContainingNegation  = 0x0800000,
         GitMovedFrom        = 0x1000000,
         GitMovedTo          = 0x2000000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo,
+        GitStashed          = 0x4000000,
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo|GitStashed,
         FileType      = File|Folder|SymLink,
         FileFlag      = Hidden|Executeable
     };

@@ -173,6 +173,8 @@ QString Type::getStates() const
     if (     is(GitLocal    ))  fState += name(GitLocal)     + fSep;
     if (     is(GitRemote   ))  fState += name(GitRemote)    + fSep;
     if (     is(GitBoth     ))  fState += name(GitBoth)      + fSep;
+    if (     is(GitStashed  ))  fState += name(GitStashed)   + fSep;
+
     if      (is(GitMovedFrom))  fState += name(GitMovedFrom) + fSep;
     else if (is(GitMovedTo  ))  fState += name(GitMovedTo)   + fSep;
     else if (is(GitRenamed  ))  fState += name(GitRenamed)   + fSep;
@@ -198,6 +200,7 @@ const char* Type::name(TypeFlags aType)
         case GitIgnore:    return mShort ? "GIg" : "git ignore";
         case GitMovedFrom: return mShort ? "MvF" : "MovedFrom";
         case GitMovedTo:   return mShort ? "MvT" : "MovedTo";
+        case GitStashed:   return mShort ? "Sts" : "Stashed";
         case SymLink:      return mShort ? "SyL" : "symbolic link";
         case FileType:     return mShort ? "FTy" : "file types (group)";
         case FileFlag:     return mShort ? "FFg" : "file flags (group)";

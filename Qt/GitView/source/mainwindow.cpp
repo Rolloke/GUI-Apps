@@ -715,7 +715,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     }
                     break;
                     case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowStaged: case Work::ShowUnMerged:
-                    case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected:
+                    case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected: case Work::ShowStashed:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
                         {
@@ -782,6 +782,10 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             break;
                         case Work::ShowStaged:
                             fResult = fType.is(Type::GitStaged);
+                            aParentItem->setHidden(!fResult); // true means visible
+                            break;
+                        case Work::ShowStashed:
+                            fResult = fType.is(Type::GitStashed);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
                         case Work::ShowSelected:
@@ -857,6 +861,9 @@ void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 
     stringt2typemap fCheckMap;
     parseGitStatus(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
+
+    applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::StashShow), fResultString);
+    parseGitStash(fSourceDir.path() +  QDir::separator(), fResultString, fCheckMap);
 
     insertItem(fSourceDir, *ui->treeSource);
 
@@ -1022,7 +1029,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     }
 }
 
-void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, stringt2typemap& aFiles)
+void MainWindow::parseGitStatus(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
 {
     const auto fLines = aStatus.split("\n");
 
@@ -1046,20 +1053,20 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
             }
             else
             {
-                QString fFullPath = fSource + fRelativePath;
+                QString fFullPath = aSource + fRelativePath;
                 if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
                 {
                     auto fPaths = fRelativePath.split(" -> ");
                     if (fPaths.size() > 1)
                     {
-                        fFullPath = fSource + fPaths[1];
+                        fFullPath = aSource + fPaths[1];
                         QFileInfo fFileInfo(fFullPath);
                         fType.translate(fFileInfo);
                         Type fDestinationType = fType;
                         fDestinationType.add(Type::GitMovedTo);
                         aFiles[fFullPath.toStdString()] = fDestinationType;
                         fType.add(Type::GitMovedFrom);
-                        fFullPath = fSource + fPaths[0];
+                        fFullPath = aSource + fPaths[0];
                     }
                 }
                 QFileInfo fFileInfo(fFullPath);
@@ -1072,6 +1079,41 @@ void MainWindow::parseGitStatus(const QString& fSource, const QString& aStatus, 
     }
 }
 
+void MainWindow::parseGitStash(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
+{
+    const auto lines = aStatus.split("\n");
+
+    for (QString line : lines)
+    {
+        QString relative_path;
+        int position = line.indexOf('|');
+        if (position != -1)
+        {
+            relative_path = line.left(position).trimmed();
+        }
+        else
+        {
+            relative_path = line.trimmed();
+        }
+        QString full_path = aSource + relative_path;
+        QFileInfo file_info(full_path);
+        if (file_info.exists())
+        {
+            Type type;
+            auto file_path = file_info.filePath().toStdString();
+            if (aFiles.count(file_path))
+            {
+                type = aFiles[file_path];
+            }
+            else
+            {
+                type.translate(file_info);
+            }
+            type.add(Type::GitStashed);
+            aFiles[file_path] = type;
+        }
+    }
+}
 
 QString MainWindow::getItemFilePath(QTreeWidgetItem* aTreeItem)
 {
@@ -1276,6 +1318,7 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
         case ComboShowItems::Gitstaged:     mCurrentTask = Work::ShowStaged;        break;
         case ComboShowItems::GitUnmerged:   mCurrentTask = Work::ShowUnMerged;      break;
         case ComboShowItems::GitSelected:   mCurrentTask = Work::ShowSelected;      break;
+        case ComboShowItems::GitStashed:    mCurrentTask = Work::ShowStashed;       break;
     }
     iterateTreeItems(*ui->treeSource);
     mCurrentTask = Work::None;
