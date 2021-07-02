@@ -105,6 +105,7 @@ private:
         ShowStaged,
         ShowUnMerged,
         ShowSelected,
+        ShowStashed,
         // NOTE: further git items are added here
         // show out of sync...
         Last
@@ -141,7 +142,8 @@ private:
         GitUnknown,
         Gitstaged,
         GitUnmerged,
-        GitSelected
+        GitSelected,
+        GitStashed
     };
     enum class FindView
     {
@@ -183,6 +185,7 @@ private:
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
+    void     parseGitStash(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     void     find_function(bool forward);
