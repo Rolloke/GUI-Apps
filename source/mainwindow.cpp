@@ -46,7 +46,20 @@ using namespace git;
 // git log --merge -p <path>
 
 // TODO: display graphic files jpg, pgn, svg
+
 // TODO: show stash difference of single files
+// > git stash list
+// stash@{0}: WIP on master: 924f420 show stashed files in repository tree
+// > git show stash@{0}
+// commit 14206bae46ae44e641b458435895eb22b2262aad (refs/stash)
+// Merge: 924f420 ca100e5
+// Author: Rolf (Werkstatt) <rolf-kary-ehlers@t-online.de>
+// Date:   Mon Jul 5 21:04:38 2021 +0200
+//   WIP on master: 924f420 show stashed files in repository tree
+// > git stash show stash@{0}
+// Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp  |  32 +-
+// > git difftool 14206bae46ae44e641b458435895eb22b2262aad Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp
+
 
 namespace config
 {
@@ -473,7 +486,7 @@ void MainWindow::createDockWindows()
     addToolBar(Qt::BottomToolBarArea, pTB);
 
     // - remove obsolete layout
-    // NOTE: reguard future layout items, if any
+    // NOTE: regard future layout items, if any
     delete ui->topLayout;
     ui->topLayout = nullptr;
     ui->horizontalLayout = nullptr;
@@ -1418,6 +1431,9 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
         stringt2typemap fCheckMap;
 
         parseGitStatus(fRepositoryPath + QDir::separator(), fResultString, fCheckMap);
+
+        applyGitCommandToFilePath(fRepositoryPath, Cmd::getCommand(Cmd::StashShow), fResultString);
+        parseGitStash(fRepositoryPath +  QDir::separator(), fResultString, fCheckMap);
 
         const QString fSourcePath = fFileInfo.absolutePath();
         iterateCheckItems(aItem, fCheckMap, &fSourcePath);
