@@ -20,6 +20,7 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QDockWidget>
+#include <QGraphicsPixmapItem>
 
 #include <boost/bind.hpp>
 
@@ -45,7 +46,7 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
-// TODO: display graphic files jpg, pgn, svg
+// TODO: display svg
 
 // TODO: show stash difference of single files
 // > git stash list
@@ -136,6 +137,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::setUpdateFunction(boost::bind(&MainWindow::updateSelectedLanguage, this, _1));
     mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
 
+    ui->graphicsView->setScene(new QGraphicsScene ());
+
     ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(Column::DateTime, QHeaderView::Interactive);
@@ -186,6 +189,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(config::sSourcePath+"/"+config::sGroupFilter).toInt());
         insertSourceTree(fSourceDir, fItem);
     }
+
 
     ui->labelFilePath->setText("");
 
@@ -286,6 +290,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         restoreState(fWindowState);
     }
+    showDockedWidget(ui->textBrowser);
 #endif
 
     fSettings.endGroup();
@@ -419,8 +424,17 @@ void MainWindow::createDockWindows()
     ui->comboFindBox->addItem("Repository View");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("textbrowser");
-    ui->horizontalLayoutHistoryAndText->removeWidget(ui->textBrowser);
+    ui->verticalLayout_2->removeWidget(ui->textBrowser);
     dock->setWidget(ui->textBrowser);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+
+    // graphics view
+    dock = new QDockWidget(tr("Graphics View"), this);
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("graphicsviewer");
+    ui->verticalLayout_2->removeWidget(ui->graphicsView);
+    dock->setWidget(ui->graphicsView);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
 
@@ -497,6 +511,7 @@ void MainWindow::createDockWindows()
     ui->horizontalLayoutHistoryAndText  = nullptr;
     ui->horizontalLayoutTool = nullptr;
     ui->verticalLayout = nullptr;
+    ui->verticalLayout_2 = nullptr;
     ui->verticalLayoutForTextBrowser = nullptr;
     ui->verticalLayoutForTreeView = nullptr;
 }
@@ -1261,14 +1276,37 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     on_btnCloseText_clicked();
 
     const QString fFileName = getItemFilePath(item);
+    const QFileInfo file_info(fFileName);
+    const QString   file_extension = file_info.suffix().toLower();
+
+    QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
+
+    if (graphic_formats.contains(file_extension))
+    {
+        QImage image(fFileName);
+
+        if(!image.isNull())
+        {
+            auto scene = ui->graphicsView->scene();
+            if (scene)
+            {
+                scene->clear();
+                auto item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
+                scene->addItem(item);
+#ifdef DOCKED_VIEWS
+                showDockedWidget(ui->graphicsView);
+#endif
+                return;
+            }
+        }
+    }
 
     QFile file(fFileName);
     if (file.open(QIODevice::ReadOnly))
     {
-        const QFileInfo file_info(fFileName);
         ui->labelFilePath->setText(fFileName);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
-        mHighlighter->setExtension(file_info.suffix());
+        mHighlighter->setExtension(file_extension);
         ui->textBrowser->setText(file.readAll());
         ui->btnStoreText->setEnabled(false);
 #ifdef DOCKED_VIEWS
