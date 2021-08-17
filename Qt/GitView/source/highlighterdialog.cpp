@@ -15,6 +15,7 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
   , mList(text_format_map)
 {
     ui->setupUi(this);
+    int height = 0;
 
     for (auto item = mList.begin(); item != mList.end(); ++item)
     {
@@ -50,9 +51,17 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
                 break;
             }
         }
-        int height = weight_box->size().height()+2;
+        if (height == 0)
+        {
+            std::vector<int> heights;
+            heights.push_back(weight_box->size().height());
+            heights.push_back(color_btn->size().height());
+            height = *std::max_element(heights.begin(), heights.end());
+        }
+
         color_btn->setMinimumHeight(height);
         italic_check_btn->setMinimumHeight(height);
+        weight_box->setMinimumHeight(height);
         ui->color_buttons->addWidget(color_btn);
         ui->weight_boxes->addWidget(weight_box);
         ui->italic_buttons->addWidget(italic_check_btn);
@@ -70,9 +79,9 @@ void HighlighterDialog::color_btn_clicked()
     QColorDialog dlg;
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->color_buttons->indexOf(button);
-    if (index >= 0 && index < mList.size())
+    if (index > 0 && index <= mList.size())
     {
-        auto item = mList.begin() + index;
+        auto item = mList.begin() + index - 1;
         text_char_format = &item.value();
     }
 
@@ -92,9 +101,9 @@ void HighlighterDialog::italic_btn_clicked(bool checked)
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->italic_buttons->indexOf(button);
-    if (index >= 0 && index < mList.size())
+    if (index > 0 && index <= mList.size())
     {
-        auto item = mList.begin() + index;
+        auto item = mList.begin() + index  - 1;
         text_char_format = &item.value();
     }
     if (text_char_format)
@@ -109,19 +118,19 @@ void HighlighterDialog::weigth_index_changed(int weight_index)
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->weight_boxes->indexOf(button);
-    if (index >= 0 && index < mList.size())
+    if (index > 0 && index <= mList.size())
     {
-        auto item = mList.begin() + index;
+        auto item = mList.begin() + index - 1;
         text_char_format = &item.value();
     }
     if (text_char_format)
     {
-        auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(0)->widget());
+        auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(index)->widget());
         if (weight_box)
         {
             text_char_format->setFontWeight(weight_box->itemData(weight_index).toInt());
-            ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
         }
+        ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
     }
 }
 
