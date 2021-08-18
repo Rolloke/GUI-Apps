@@ -21,6 +21,11 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
+
+#ifdef QT_SVG_LIB
+#include <QGraphicsSvgItem>
+#endif
 
 #include <boost/bind.hpp>
 
@@ -122,10 +127,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "    border-image: url(://resource/24X24/stylesheet-branch-end.png) 0; }"
             "QTreeView::branch:has-children:!has-siblings:closed,"
             "QTreeView::branch:closed:has-children:has-siblings { "
-            "    border-image: none; image: url(://resource/24X24/stylesheet-branch-closed.png); }"
+            "    border-image: none; image: url(:/resource/24X24/folder.png); }"
             "QTreeView::branch:open:has-children:!has-siblings,"
             "QTreeView::branch:open:has-children:has-siblings  { "
-            "    border-image: none; image: url(://resource/24X24/stylesheet-branch-open.png); }";
+            "    border-image: none; image: url(:/resource/24X24/folder-open.png); }";
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
     QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
@@ -1299,6 +1304,7 @@ void MainWindow::on_btnCloseText_clicked()
     ui->textBrowser->setText("");
     ui->btnStoreText->setEnabled(false);
     ui->labelFilePath->setText("");
+    ui->graphicsView->scene()->clear();
 }
 
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
@@ -1310,6 +1316,10 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     const QString   file_extension = file_info.suffix().toLower();
 
     QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
+
+#ifdef QT_SVG_LIB
+    auto svg_image = new QGraphicsSvgItem(fFileName);
+#endif
 
     if (graphic_formats.contains(file_extension))
     {
