@@ -189,6 +189,8 @@ private:
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     void     find_function(bool forward);
+    bool     getShowTypeResult(const git::Type& fType);
+
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

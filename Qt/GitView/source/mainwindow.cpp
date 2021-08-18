@@ -710,6 +710,13 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
 
             if (fIsDir.toBool())
             {
+                Type fType;
+                const QVariant fVariant = aParentItem->data(Column::State, Role::Filter);
+                if (fVariant.isValid())
+                {
+                    fType = Type(fVariant.toUInt());
+                }
+
                 if (   mCurrentTask == Work::ApplyGitCommand
                     && aParentItem->checkState(Column::FileName) == Qt::Checked)
                 {
@@ -747,7 +754,11 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     {
                         if (ui->ckHideEmptyParent->isChecked())
                         {
+                            fResult = getShowTypeResult(fType);
+                            if (fResult == false)
+                            {
                             fResult = fCountOk != 0;
+                            }
                             aParentItem->setHidden(!fResult); // true means visible
                         }
                         else
@@ -784,36 +795,9 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             aParentItem->setHidden(false);
                             fResult = true;
                             break;
-                        case Work::ShowAllGitActions:
-                            fResult = fType.is(Type::AllGitActions);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowAdded:
-                            fResult = fType.is(Type::GitAdded);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowDeleted:
-                            fResult = fType.is(Type::GitDeleted);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowModified:
-                            fResult = fType.is(Type::GitModified);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowUnknown:
-                            fResult = fType.is(Type::GitUnTracked);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowUnMerged:
-                            fResult = fType.is(Type::GitUnmerged);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowStaged:
-                            fResult = fType.is(Type::GitStaged);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowStashed:
-                            fResult = fType.is(Type::GitStashed);
+                        case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
+                        case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged: case Work::ShowStashed:
+                            fResult = getShowTypeResult(fType);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
                         case Work::ShowSelected:
@@ -842,6 +826,43 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             const QString fSourceDir("");
             fResult &= iterateTreeItems(aSourceTree, &fSourceDir, aSourceTree.topLevelItem(fIndex));
         }
+    }
+    return fResult;
+}
+
+bool MainWindow::getShowTypeResult(const Type& fType)
+{
+    bool fResult = false;
+    switch(mCurrentTask)
+    {
+    case Work::ShowAllGitActions:
+        fResult = fType.is(Type::AllGitActions);
+        break;
+    case Work::ShowAdded:
+        fResult = fType.is(Type::GitAdded);
+        break;
+    case Work::ShowDeleted:
+        fResult = fType.is(Type::GitDeleted);
+        break;
+    case Work::ShowModified:
+        fResult = fType.is(Type::GitModified);
+        break;
+    case Work::ShowUnknown:
+        fResult = fType.is(Type::GitUnTracked);
+        break;
+    case Work::ShowUnMerged:
+        fResult = fType.is(Type::GitUnmerged);
+        break;
+    case Work::ShowStaged:
+        fResult = fType.is(Type::GitStaged);
+        break;
+    case Work::ShowStashed:
+        fResult = fType.is(Type::GitStashed);
+        break;
+        case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::DetermineGitMergeTools:
+        case Work::ShowAllFiles: case Work::InsertPathFromCommandString: case Work::ShowSelected:
+            /// NOTE: not handled here
+            break;
     }
     return fResult;
 }
@@ -880,6 +901,7 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 
 void MainWindow::insertSourceTree(const QDir& fSourceDir, int aItem)
 {
+    mGitIgnore.clear();
     QString fResultString;
     applyGitCommandToFilePath(fSourceDir.path(), Cmd::getCommand(Cmd::GetStatusAll), fResultString);
 
@@ -1099,7 +1121,15 @@ void MainWindow::parseGitStatus(const QString& aSource, const QString& aStatus, 
                 }
                 QFileInfo fFileInfo(fFullPath);
                 fType.translate(fFileInfo);
-                aFiles[fFileInfo.filePath().toStdString()] = fType;
+                auto file_path = fFileInfo.filePath().toStdString();
+                if (fType.is(Type::Folder))
+                {
+                    if (file_path.back() == '/')
+                    {
+                        file_path.resize(file_path.size()-1);
+                    }
+                }
+                aFiles[file_path] = fType;
             }
 
             TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.mType);
@@ -1291,8 +1321,8 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
             if (scene)
             {
                 scene->clear();
-                auto item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-                scene->addItem(item);
+                auto image_item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
+                scene->addItem(image_item);
 #ifdef DOCKED_VIEWS
                 showDockedWidget(ui->graphicsView);
 #endif
@@ -2310,10 +2340,10 @@ void MainWindow::killBackgroundThread()
             for (const QString &pid : pidlist)
             {
                 std::string cmd = "kill " + pid.toStdString();
-                QString result;
-                execute(cmd.c_str(), result, true);
+                QString cmd_result;
+                execute(cmd.c_str(), cmd_result, true);
                 cmd += '\n';
-                appendTextToBrowser(cmd.c_str() + result, true);
+                appendTextToBrowser(cmd.c_str() + cmd_result, true);
             }
         }
     }
