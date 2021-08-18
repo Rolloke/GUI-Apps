@@ -6,13 +6,26 @@ using namespace git;
 
 GitIgnore::GitIgnore()
 {
+    init();
+}
+
+void GitIgnore::init()
+{
     mIgnoreMap[Folder::FolderSelf]    = Type(Type::Folder);
     mIgnoreMap[Folder::FolderUp]      = Type(Type::Folder);
     mIgnoreMap[Folder::GitRepository] = Type(Type::GitFolder);
+    m_negation_is_completely_ignored = false;
+}
+
+void GitIgnore::clear()
+{
+    mIgnoreMap.clear();
+    init();
 }
 
 void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels)
 {
+    if (m_negation_is_completely_ignored) return;
     QFile file(aParentDir.filePath(Folder::GitIgnoreFile));
 
     if (file.open(QIODevice::ReadOnly))
@@ -85,6 +98,10 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 {
                     // TODO: implement negation, but first understand how it works
 //                    fSearchItem.second.add(Type::ContainingNegation);
+
+                    clear();
+                    m_negation_is_completely_ignored = true;
+                    break;
                 }
             }
         }

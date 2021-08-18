@@ -16,10 +16,13 @@ public:
     void     addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
     void     removeIgnoreMapLevel(int aLevel);
     bool     ignoreFile(const QFileInfo& aFileInfo);
+    void     clear();
 
 private:
+    void     init();
     git::stringt2typemap  mIgnoreMap;
     boost::optional<git::stringt2typemap::const_reference> mIgnoreContainingNegation;
+    bool m_negation_is_completely_ignored {false};
 };
 
 #endif // GITIGNORE_H
