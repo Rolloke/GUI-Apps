@@ -21,7 +21,6 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QGraphicsPixmapItem>
-#include <QGraphicsItem>
 
 #ifdef QT_SVG_LIB
 #include <QGraphicsSvgItem>
@@ -1318,7 +1317,16 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
 
 #ifdef QT_SVG_LIB
-    auto svg_image = new QGraphicsSvgItem(fFileName);
+    if (file_extension == "svg")
+    {
+        auto svg_image = new QGraphicsSvgItem(fFileName);
+        int type =svg_image->type();
+        if (type)
+        {
+            addItem2graphicsView(svg_image);
+            return;
+        }
+    }
 #endif
 
     if (graphic_formats.contains(file_extension))
@@ -1327,17 +1335,8 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 
         if(!image.isNull())
         {
-            auto scene = ui->graphicsView->scene();
-            if (scene)
-            {
-                scene->clear();
-                auto image_item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-                scene->addItem(image_item);
-#ifdef DOCKED_VIEWS
-                showDockedWidget(ui->graphicsView);
-#endif
-                return;
-            }
+            addItem2graphicsView(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
+            return;
         }
     }
 
@@ -1355,6 +1354,18 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     }
 }
 
+void MainWindow::addItem2graphicsView(QGraphicsItem*item)
+{
+    auto scene = ui->graphicsView->scene();
+    if (scene)
+    {
+        scene->addItem(item);
+#ifdef DOCKED_VIEWS
+        showDockedWidget(ui->graphicsView);
+#endif
+    }
+
+}
 
 void MainWindow::updateSelectedLanguage(const QString& language)
 {
