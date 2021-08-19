@@ -21,6 +21,7 @@ class MainWindow;
 }
 
 class MergeDialog;
+class QGraphicsItem;
 
 
 
@@ -190,6 +191,7 @@ private:
 
     void     find_function(bool forward);
     bool     getShowTypeResult(const git::Type& fType);
+    void     addItem2graphicsView(QGraphicsItem*);
 
 
 #ifdef DOCKED_VIEWS
