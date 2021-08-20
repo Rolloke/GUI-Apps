@@ -160,7 +160,7 @@ bool Type::is(TypeFlags aType) const
     return (mType & aType) != None;
 }
 
-QString Type::getStates() const
+QString Type::getStates(bool extended) const
 {
     const QString fSep = "|";
     QString fState = fSep;
@@ -178,6 +178,22 @@ QString Type::getStates() const
     if      (is(GitMovedFrom))  fState += name(GitMovedFrom) + fSep;
     else if (is(GitMovedTo  ))  fState += name(GitMovedTo)   + fSep;
     else if (is(GitRenamed  ))  fState += name(GitRenamed)   + fSep;
+
+    if (extended)
+    {
+        if      (is(SymLink))     fState += name(SymLink)   + fSep;
+        else if (is(Repository))  fState += name(Repository)   + fSep;
+        else if (is(File))        fState += name(File)   + fSep;
+        else if (is(Folder))      fState += name(Folder)   + fSep;
+        else if (is(Branch))      fState += name(Branch)   + fSep;
+        else if (is(Hidden))      fState += name(Hidden)   + fSep;
+        else if (is(WildCard))    fState += name(WildCard)   + fSep;
+        else if (is(RegExp))      fState += name(RegExp)   + fSep;
+        else if (is(Negation))    fState += name(Negation)   + fSep;
+        else if (is(FolderForNavigation))  fState += name(FolderForNavigation)   + fSep;
+        else if (is(Checked))     fState += name(Checked)   + fSep;
+        else if (is(Executeable)) fState += name(Executeable)   + fSep;
+    }
     return fState;
 }
 
@@ -213,7 +229,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(WildCard);
         RETURN_NAME(RegExp);
         RETURN_NAME(Negation);
-        RETURN_NAME(ContainingNegation);
+        RETURN_NAME(FolderForNavigation);
         RETURN_NAME(None);
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);
