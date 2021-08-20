@@ -11,10 +11,9 @@ GitIgnore::GitIgnore()
 
 void GitIgnore::init()
 {
-    mIgnoreMap[Folder::FolderSelf]    = Type(Type::Folder);
-    mIgnoreMap[Folder::FolderUp]      = Type(Type::Folder);
-    mIgnoreMap[Folder::GitRepository] = Type(Type::GitFolder);
-    m_negation_is_completely_ignored = false;
+    mIgnoreMap.push_back(string2typepair(Folder::FolderSelf, Type(Type::Folder|Type::FolderForNavigation)));
+    mIgnoreMap.push_back(string2typepair(Folder::FolderUp, Type(Type::Folder|Type::FolderForNavigation)));
+    mIgnoreMap.push_back(string2typepair(Folder::GitRepository, Type(Type::GitFolder)));
 }
 
 void GitIgnore::clear()
@@ -25,14 +24,13 @@ void GitIgnore::clear()
 
 void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels)
 {
-    if (m_negation_is_completely_ignored) return;
     QFile file(aParentDir.filePath(Folder::GitIgnoreFile));
 
     if (file.open(QIODevice::ReadOnly))
     {
         int fMapLevel = std::max_element(mIgnoreMap.begin(), mIgnoreMap.end(), [] (stringt2typemap::const_reference fE1, stringt2typemap::const_reference fE2)
         {
-            return fE1.second.mLevel < fE2.second.mLevel;
+                return fE1.second.mLevel < fE2.second.mLevel;
         })->second.mLevel + 1;
 
         aMapLevels.push_back(fMapLevel);
@@ -72,39 +70,32 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
 
             if (fLine.size())
             {
-                if (mIgnoreMap.count(fLine.toStdString()))
+                //! TODO: are double entries git conform
+                //! take flags into account
+                /*
+                auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [fLine](stringt2type_vector::const_reference it)
+                {
+                    return fLine.toStdString() == it.first;
+                });
+                if (item != mIgnoreMap.end())
                 {
                     auto fMessage = QObject::tr("\"%1\" not inserted from %2").arg(fLine).arg(file.fileName());
                     TRACE(Logger::warning, fMessage.toStdString().c_str() );
                 }
                 else
+*/
                 {
-                    auto fMessage = QObject::tr("\"%1\" inserted from %2").arg(fLine).arg(file.fileName());
-                    TRACE(Logger::debug, fMessage.toStdString().c_str() );
-                    mIgnoreMap[fLine.toStdString()] = fType;
+                    if (Logger::isSeverityActive(Logger::debug))
+                    {
+                        auto fMessage = QObject::tr("\"%1\" inserted from %2").arg(fLine).arg(file.fileName());
+                        TRACE(Logger::debug, fMessage.toStdString().c_str() );
+                    }
+                    auto pair = std::pair<const std::string, Type>(fLine.toStdString(), fType);
+                    mIgnoreMap.push_back(pair);
                 }
             }
         }
         while (!file.atEnd());
-    }
-    for (const auto& fItem : mIgnoreMap)
-    {
-        if (fItem.second.is(Type::Negation))
-        {
-            for (auto& fSearchItem : mIgnoreMap)
-            {
-                if (   fItem.first.find(fSearchItem.first) != std::string::npos
-                    && fItem.first != fSearchItem.first)
-                {
-                    // TODO: implement negation, but first understand how it works
-//                    fSearchItem.second.add(Type::ContainingNegation);
-
-                    clear();
-                    m_negation_is_completely_ignored = true;
-                    break;
-                }
-            }
-        }
     }
 }
 
@@ -116,7 +107,7 @@ void GitIgnore::removeIgnoreMapLevel(int aMapLevel)
         {
             auto fElem = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [aMapLevel](stringt2typemap::const_reference fE)
             {
-                 return fE.second.mLevel==aMapLevel;
+                return fE.second.mLevel==aMapLevel;
             });
 
             if (fElem != mIgnoreMap.end())
@@ -131,50 +122,54 @@ void GitIgnore::removeIgnoreMapLevel(int aMapLevel)
 bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 {
     const std::string& fFileName = aFileInfo.fileName().toStdString();
-//    const std::string& fFilePath = aFileInfo.filePath().toStdString();
-
-    auto fFound = mIgnoreMap.find(fFileName);
-    if (fFound == mIgnoreMap.end())
+    stringt2type_vector ignored_entries;
+    for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
     {
-        for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
+        if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
         {
-            if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
+            QRegExp fRegEx(fItem->first.c_str());
+            fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
+            if (fRegEx.exactMatch(fFileName.c_str()))
             {
-                QRegExp fRegEx(fItem->first.c_str());
-                fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
-                if (fRegEx.exactMatch(fFileName.c_str()))
-                {
-                    fFound = fItem;
-                    break;
-                }
+                ignored_entries.push_back(*fItem);
             }
         }
+        else if (fItem->first == fFileName)
+        {
+            ignored_entries.push_back(*fItem);
+        }
+    }
+    if (   ignored_entries.size() > 2
+        && Logger::isSeverityActive(Logger::debug))
+    {
+        std::string str;
+        for (const auto& entry : ignored_entries)
+        {
+            str += entry.first;
+            str += " -> ";
+            str += entry.second.getStates(true).toStdString();
+            str += ", ";
+        }
+        TRACE(Logger::debug, "ignored_entries: %d: %s", ignored_entries.size(), str.c_str());
     }
 
-    if (mIgnoreContainingNegation)
+    if (ignored_entries.size() == 1)
     {
-        if (fFound != mIgnoreMap.end() && fFound->second.is(Type::Negation))
-        {
-            return false;
-        }
-        else
+        return !ignored_entries[0].second.is(Type::Negation);
+    }
+    else if (ignored_entries.size() > 1)
+    {
+        if (ignored_entries[0].second.is(Type::FolderForNavigation))
         {
             return true;
         }
-    }
-    else
-    {
-        if (fFound != mIgnoreMap.end())
+        if (ignored_entries.back().second.is(Type::Negation))
         {
-            if (fFound->second.is(Type::ContainingNegation))
-            {
-                mIgnoreContainingNegation = *fFound;
-                return false;
-            }
-            if (fFound->second.is(Type::File)   && aFileInfo.isFile()) return true;
-            if (fFound->second.is(Type::Folder) && aFileInfo.isDir() ) return true;
+            return false;
         }
+        return true;
     }
+
     return false;
 }
 

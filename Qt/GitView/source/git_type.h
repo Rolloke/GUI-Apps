@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <vector>
+#include <unordered_map>
 
 #include <QString>
 
@@ -132,7 +133,7 @@ struct Type
         WildCard            = 0x0100000,
         Negation            = 0x0200000,
         RegExp              = 0x0400000,
-        ContainingNegation  = 0x0800000,
+        FolderForNavigation = 0x0800000,
         GitMovedFrom        = 0x1000000,
         GitMovedTo          = 0x2000000,
         GitStashed          = 0x4000000,
@@ -148,7 +149,7 @@ struct Type
     void add(TypeFlags aType);
     void remove(TypeFlags aType);
     bool is(TypeFlags aType) const;
-    QString getStates() const;
+    QString getStates(bool extended=false) const;
     QString type_name() const;
 
     static const char* name(TypeFlags aType);
@@ -172,6 +173,9 @@ extern const char FolderSelf[];
 
 
 typedef std::map<std::string, Type> stringt2typemap;
+typedef std::unordered_map<std::string, Type> stringt2type_umap;
+typedef std::pair<std::string, Type> string2typepair;
+typedef std::vector< string2typepair > stringt2type_vector;
 
 }
 
