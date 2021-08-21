@@ -131,7 +131,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
                 {
                     fItemData = fParentHistoryItem->data(History::Column::Commit, History::Role::ContextMenuItem);
                     Type fType(fSelectedHistoryItem->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
-                    mSelectedTopLevelItemType = fType.mType;
+                    mSelectedTopLevelItemType = fType.type();
                     if (fType.is(Type::File))
                     {
                         mHistoryFile = fParentHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();

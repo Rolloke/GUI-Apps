@@ -86,6 +86,10 @@ private Q_SLOTS:
     void selectTextBrowserLanguage();
     void killBackgroundThread();
 
+    void on_btnFindAll_clicked();
+
+    void on_comboFindBox_currentIndexChanged(int index);
+
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
 
@@ -189,7 +193,8 @@ private:
     void     parseGitStash(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
-    void     find_function(bool forward);
+    enum find { forward, backward, all };
+    void     find_function(find forward);
     bool     getShowTypeResult(const git::Type& fType);
     void     addItem2graphicsView(QGraphicsItem*);
 

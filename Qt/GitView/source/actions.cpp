@@ -134,19 +134,19 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::T
                                    INT(fStatusDisabled), aType.is(static_cast<Type::TypeFlags>(fStatusDisabled)),
                                    INT(fStatusNotEnabled), aType.is(static_cast<Type::TypeFlags>(fStatusNotEnabled)));
             }
-            if (aType.mType & Type::File)
+            if (aType.type() & Type::File)
             {
                 if (fStatusNotEnabled)
                 {
-                    fEnabled = (aType.mType & fStatusNotEnabled) != 0;
+                    fEnabled = (aType.type() & fStatusNotEnabled) != 0;
                 }
                 else
                 {
-                    if (fStatusEnabled  && (aType.mType & fStatusEnabled) == 0)
+                    if (fStatusEnabled  && (aType.type() & fStatusEnabled) == 0)
                     {
                         fEnabled = false;
                     }
-                    else if (fStatusDisabled && (aType.mType & fStatusDisabled) != 0)
+                    else if (fStatusDisabled && (aType.type() & fStatusDisabled) != 0)
                     {
                         fEnabled = false;
                     }

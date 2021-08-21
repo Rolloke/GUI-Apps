@@ -30,8 +30,8 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
     {
         int fMapLevel = std::max_element(mIgnoreMap.begin(), mIgnoreMap.end(), [] (stringt2typemap::const_reference fE1, stringt2typemap::const_reference fE2)
         {
-                return fE1.second.mLevel < fE2.second.mLevel;
-        })->second.mLevel + 1;
+            return fE1.second.level() < fE2.second.level();
+        })->second.level() + 1;
 
         aMapLevels.push_back(fMapLevel);
         do
@@ -72,10 +72,10 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
             {
                 //! TODO: are double entries git conform
                 //! take flags into account
-                /*
-                auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [fLine](stringt2type_vector::const_reference it)
+
+                auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&fLine, &fType](stringt2type_vector::const_reference it)
                 {
-                    return fLine.toStdString() == it.first;
+                    return fLine.toStdString() == it.first && fType.type() == it.second.type();
                 });
                 if (item != mIgnoreMap.end())
                 {
@@ -83,7 +83,6 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                     TRACE(Logger::warning, fMessage.toStdString().c_str() );
                 }
                 else
-*/
                 {
                     if (Logger::isSeverityActive(Logger::debug))
                     {
@@ -99,7 +98,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
     }
 }
 
-void GitIgnore::removeIgnoreMapLevel(int aMapLevel)
+void GitIgnore::removeIgnoreMapLevel(uint aMapLevel)
 {
     if (aMapLevel)
     {
@@ -107,7 +106,7 @@ void GitIgnore::removeIgnoreMapLevel(int aMapLevel)
         {
             auto fElem = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [aMapLevel](stringt2typemap::const_reference fE)
             {
-                return fE.second.mLevel==aMapLevel;
+                return fE.second.level() == aMapLevel;
             });
 
             if (fElem != mIgnoreMap.end())

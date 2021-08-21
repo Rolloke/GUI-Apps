@@ -14,7 +14,7 @@ public:
     GitIgnore();
 
     void     addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels);
-    void     removeIgnoreMapLevel(int aLevel);
+    void     removeIgnoreMapLevel(uint aLevel);
     bool     ignoreFile(const QFileInfo& aFileInfo);
     void     clear();
 

@@ -148,7 +148,10 @@ struct Type
 
     void add(TypeFlags aType);
     void remove(TypeFlags aType);
+    void setType(uint aType);
     bool is(TypeFlags aType) const;
+    uint type() const;
+    uint level() const;
     QString getStates(bool extended=false) const;
     QString type_name() const;
 
@@ -156,9 +159,10 @@ struct Type
 
     void translate(const QString& fIdentifier);
     void translate(const QFileInfo& fInfo);
-
+private:
     uint mType;
     int mLevel;
+public:
     static bool mShort;
 };
 
