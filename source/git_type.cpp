@@ -160,6 +160,21 @@ bool Type::is(TypeFlags aType) const
     return (mType & aType) != None;
 }
 
+uint Type::type() const
+{
+    return mType;
+}
+
+void Type::setType(uint aType)
+{
+    mType = aType;
+}
+
+uint Type::level() const
+{
+    return mLevel;
+}
+
 QString Type::getStates(bool extended) const
 {
     const QString fSep = "|";
@@ -181,18 +196,18 @@ QString Type::getStates(bool extended) const
 
     if (extended)
     {
-        if      (is(SymLink))     fState += name(SymLink)   + fSep;
-        else if (is(Repository))  fState += name(Repository)   + fSep;
-        else if (is(File))        fState += name(File)   + fSep;
-        else if (is(Folder))      fState += name(Folder)   + fSep;
-        else if (is(Branch))      fState += name(Branch)   + fSep;
-        else if (is(Hidden))      fState += name(Hidden)   + fSep;
-        else if (is(WildCard))    fState += name(WildCard)   + fSep;
-        else if (is(RegExp))      fState += name(RegExp)   + fSep;
-        else if (is(Negation))    fState += name(Negation)   + fSep;
-        else if (is(FolderForNavigation))  fState += name(FolderForNavigation)   + fSep;
-        else if (is(Checked))     fState += name(Checked)   + fSep;
-        else if (is(Executeable)) fState += name(Executeable)   + fSep;
+        if      (is(SymLink))     fState += name(SymLink)     + fSep;
+        else if (is(Repository))  fState += name(Repository)  + fSep;
+        else if (is(File))        fState += name(File)        + fSep;
+        else if (is(Folder))      fState += name(Folder)      + fSep;
+        else if (is(Branch))      fState += name(Branch)      + fSep;
+        else if (is(Hidden))      fState += name(Hidden)      + fSep;
+        else if (is(WildCard))    fState += name(WildCard)    + fSep;
+        else if (is(RegExp))      fState += name(RegExp)      + fSep;
+        else if (is(Negation))    fState += name(Negation)    + fSep;
+        else if (is(FolderForNavigation))  fState += name(FolderForNavigation) + fSep;
+        else if (is(Checked))     fState += name(Checked)     + fSep;
+        else if (is(Executeable)) fState += name(Executeable) + fSep;
     }
     return fState;
 }
@@ -242,25 +257,24 @@ QString Type::type_name() const
     return Type::name(static_cast<Type::TypeFlags>(Type::FileType&mType));
 }
 
-void Type::translate(const QString& fIdentifier)
+void Type::translate(const QString& git_identifier)
 {
-
-    if (fIdentifier.contains('D'))  add(GitDeleted);
-    if      (fIdentifier[1]=='M')   add(GitModified);
-    else if (fIdentifier[0]=='M')   add(static_cast<TypeFlags>(GitModified|GitStaged));
-    if      (fIdentifier[1]=='A')   add(GitAdded);
-    else if (fIdentifier[0]=='A')   add(static_cast<TypeFlags>(GitAdded|GitStaged));
-    if      (fIdentifier[1]=='R')   add(GitRenamed);
-    else if (fIdentifier[0]=='R')   add(static_cast<TypeFlags>(GitRenamed|GitStaged));
-    if      (fIdentifier=="DD")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both deleted
-    else if (fIdentifier=="AU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, added by us
-    else if (fIdentifier=="UD")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, deleted by them
-    else if (fIdentifier=="UA")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, added by them
-    else if (fIdentifier=="DU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, deleted by us
-    else if (fIdentifier=="AA")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both added
-    else if (fIdentifier=="UU")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both modified
-    if (fIdentifier.contains("?"))  add(GitUnTracked);
-    if (fIdentifier.contains("##")) add(Repository);
+    if (git_identifier.contains('D'))  add(GitDeleted);
+    if      (git_identifier[1]=='M')   add(GitModified);
+    else if (git_identifier[0]=='M')   add(static_cast<TypeFlags>(GitModified|GitStaged));
+    if      (git_identifier[1]=='A')   add(GitAdded);
+    else if (git_identifier[0]=='A')   add(static_cast<TypeFlags>(GitAdded|GitStaged));
+    if      (git_identifier[1]=='R')   add(GitRenamed);
+    else if (git_identifier[0]=='R')   add(static_cast<TypeFlags>(GitRenamed|GitStaged));
+    if      (git_identifier=="DD")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both deleted
+    else if (git_identifier=="AU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, added by us
+    else if (git_identifier=="UD")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, deleted by them
+    else if (git_identifier=="UA")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, added by them
+    else if (git_identifier=="DU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, deleted by us
+    else if (git_identifier=="AA")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both added
+    else if (git_identifier=="UU")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both modified
+    if (git_identifier.contains("?"))  add(GitUnTracked);
+    if (git_identifier.contains("##")) add(Repository);
 
 }
 
