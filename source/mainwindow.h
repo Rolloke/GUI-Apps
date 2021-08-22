@@ -61,6 +61,8 @@ private Q_SLOTS:
 
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
+    void on_btnFindAll_clicked();
+    void on_comboFindBox_currentIndexChanged(int index);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -81,14 +83,13 @@ private Q_SLOTS:
     void expand_tree_items();
     void collapse_tree_items();
     void addGitSourceFolder();
+    void removeGitSourceFolder();
     void gitview_about();
     void deleteFileOrFolder();
     void selectTextBrowserLanguage();
     void killBackgroundThread();
-
-    void on_btnFindAll_clicked();
-
-    void on_comboFindBox_currentIndexChanged(int index);
+    void copyFileName();
+    void copyFilePath();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -193,10 +194,13 @@ private:
     void     parseGitStash(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
-    enum find { forward, backward, all };
+    enum class find { forward, backward, all };
     void     find_function(find forward);
     bool     getShowTypeResult(const git::Type& fType);
     void     addItem2graphicsView(QGraphicsItem*);
+
+    enum class copy_cmd { name, path, file };
+    void     copy_file(copy_cmd command);
 
 
 #ifdef DOCKED_VIEWS

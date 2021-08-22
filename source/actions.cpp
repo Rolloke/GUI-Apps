@@ -109,6 +109,10 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
     fActionIcons[Cmd::InvokeHighlighterDialog] = ":/resource/24X24/emblem-system.png";
     fActionIcons[Cmd::KillBackgroundThread]    = ":/resource/24X24/media-record.png";
+    fActionIcons[Cmd::CopyFileName]            = ":/resource/24X24/edit-copy.png";
+    fActionIcons[Cmd::CopyFilePath]            = ":/resource/24X24/edit-copy.png";
+    fActionIcons[Cmd::RemoveGitFolder]         = ":/resource/24X24/user-busy.png";
+
 
     for (const auto& fIconPath: fActionIcons )
     {

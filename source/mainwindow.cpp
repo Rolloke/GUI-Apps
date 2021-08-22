@@ -21,6 +21,8 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QGraphicsPixmapItem>
+#include <QClipboard>
+#include <QMimeData>
 
 #ifdef QT_SVG_LIB
 #include <QGraphicsSvgItem>
@@ -424,6 +426,7 @@ void MainWindow::createDockWindows()
 
     QDockWidget* dock;
     // text browser
+    QDockWidget *first_tab;
     dock = new QDockWidget(tr("Text Editor"), this);
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem("Repository View");
@@ -433,6 +436,7 @@ void MainWindow::createDockWindows()
     dock->setWidget(ui->textBrowser);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    first_tab = dock;
 
     // graphics view
     dock = new QDockWidget(tr("Graphics View"), this);
@@ -442,8 +446,8 @@ void MainWindow::createDockWindows()
     dock->setWidget(ui->graphicsView);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    tabifyDockWidget(first_tab, dock);
 
-    QDockWidget *first_tab;
     // history tree
     dock = new QDockWidget(tr("History View"), this);
     ui->comboFindBox->addItem(dock->windowTitle());
@@ -1238,6 +1242,12 @@ void MainWindow::addGitSourceFolder()
     }
 }
 
+void MainWindow::removeGitSourceFolder()
+{
+    deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource);
+    mContextMenuSourceTreeItem = nullptr;
+}
+
 void MainWindow::updateGitStatus()
 {
     std::vector<QString> fSourceDirs;
@@ -1706,8 +1716,10 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CollapseTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
 
-    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Adds a git source folder to the source treeview")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
+    connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Add a git source folder to repository view")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     mActions.setFlags(Cmd::AddGitSourceFolder, ActionList::Flags::FunctionCmd, Flag::set);
+    connect(mActions.createAction(Cmd::RemoveGitFolder, tr("Remove git folder"), tr("Remove a git source folder from repository view")), SIGNAL(triggered()), this, SLOT(removeGitSourceFolder()));
+    mActions.setFlags(Cmd::RemoveGitFolder, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::UpdateGitStatus)->setShortcut(QKeySequence(Qt::Key_F5));
@@ -1735,6 +1747,12 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Kill Background Activity..."), tr("Kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(false);
     mActions.setFlags(Cmd::KillBackgroundThread, ActionList::Flags::FunctionCmd, Flag::set);
+
+    connect(mActions.createAction(Cmd::CopyFileName, tr("Copy file name"), tr("Copy file name to clipboard")), SIGNAL(triggered()), this, SLOT(copyFileName()));
+    mActions.getAction(Cmd::CopyFileName)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_C));
+    mActions.setFlags(Cmd::CopyFileName, ActionList::Flags::FunctionCmd, Flag::set);
+    connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file path"), tr("Copy file path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
+    mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -2378,17 +2396,17 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 
 void MainWindow::on_btnFindNext_clicked()
 {
-    find_function(forward);
+    find_function(find::forward);
 }
 
 void MainWindow::on_btnFindPrevious_clicked()
 {
-    find_function(backward);
+    find_function(find::backward);
 }
 
 void MainWindow::on_btnFindAll_clicked()
 {
-    find_function(all);
+    find_function(find::all);
 }
 
 void MainWindow::find_function(find find_item)
@@ -2396,7 +2414,7 @@ void MainWindow::find_function(find find_item)
     if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
     {
         Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
-        int                 find_flag   = find_item == forward ? 0 : QTextDocument::FindBackward;
+        int                 find_flag   = find_item == find::forward ? 0 : QTextDocument::FindBackward;
 
         if (ui->ckFindCaseSensitive->isChecked())
         {
@@ -2475,7 +2493,7 @@ void MainWindow::find_function(find find_item)
             }
             else
             {
-                if (find_item == forward)
+                if (find_item == find::forward)
                 {
                     if (++property.mIndex >= found_items.size())
                     {
@@ -2490,7 +2508,7 @@ void MainWindow::find_function(find find_item)
                     }
                 }
             }
-            if (find_item == all)
+            if (find_item == find::all)
             {
                 for (auto item : found_items)
                 {
@@ -2524,7 +2542,62 @@ void MainWindow::find_function(find find_item)
     }
 }
 
+void MainWindow::copyFileName()
+{
+    copy_file(copy_cmd::name);
+}
 
+void MainWindow::copyFilePath()
+{
+    copy_file(copy_cmd::path);
+}
+
+void MainWindow::copy_file(copy_cmd command)
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
+        const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
+        QFileInfo fileInfo;
+        if (fItemPath.contains(fTopItemPath))
+        {
+            fileInfo = fItemPath;
+        }
+        else
+        {
+            fileInfo = fTopItemPath + QDir::separator() + fItemPath;
+        }
+        QClipboard *clipboard = QApplication::clipboard();
+        if (command == copy_cmd::name)
+        {
+            clipboard->setText(fileInfo.fileName());
+        }
+        else if (command == copy_cmd::path)
+        {
+            clipboard->setText(fileInfo.filePath());
+        }
+        else
+        {
+            // TODO! does not work properly
+            QMimeData* mime_data = new QMimeData();
+            // Copy path of file
+            mime_data->setText(fileInfo.filePath());
+            // Copy file
+            mime_data->setUrls({QUrl::fromLocalFile(fileInfo.filePath())});
+            // Copy file (gnome)
+            int dropEffect = 5; // 2 for cut and 5 for copy
+            QByteArray data;
+            QDataStream stream(&data, QIODevice::WriteOnly);
+            stream.setByteOrder(QDataStream::LittleEndian);
+            stream << dropEffect;
+            mime_data->setData("Preferred DropEffect", data);
+//            QByteArray gnomeFormat = QByteArray("copy\n").append(QUrl::fromLocalFile(fileInfo.filePath()).toEncoded());
+//            mime_data->setData("x-special/gnome-copied-files", gnomeFormat);
+            // Set the mimedata
+            clipboard->setMimeData(mime_data);
+        }
+    }
+}
 
 void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current */, QTreeWidgetItem *previous)
 {
@@ -2534,3 +2607,4 @@ void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current *
         mContextMenuSourceTreeItem = 0;
     }
 }
+

@@ -17,7 +17,15 @@ class ActionList
 
 public:
     struct Data   { enum e { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
-    struct Flags  { enum e { BuiltIn = 1,  Modified = 2, Custom=4, Branch=8, History=16, DiffOrMergeTool=32, CallInThread=64, NotVariableGitCmd=128, FunctionCmd=256}; };
+    struct Flags  { enum e { BuiltIn = 1,           /// built in command
+                             Modified = 2,          /// modified built in command
+                             Custom=4,              /// custom created command
+                             Branch=8,              /// command for branch view
+                             History=16,            /// command for history view
+                             DiffOrMergeTool=32,    /// indicates diff or mergetool is used by git command
+                             CallInThread=64,       /// indicates that git command is called within thread context
+                             NotVariableGitCmd=128, /// indicates that the command is not a modifiable git command
+                             FunctionCmd=256}; };   /// command invokes a special destinct function
 
     typedef std::map<int, QAction*> tActionMap;
 
