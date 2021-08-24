@@ -220,6 +220,7 @@ private:
     QSharedPointer<Highlighter> mHighlighter;
     QSharedPointer<MergeDialog> mMergeDialog;
     QString               mFontName;
+    QString               mFileCopyMimeType;
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
     struct tree_find_properties

@@ -70,9 +70,6 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
 
             if (fLine.size())
             {
-                //! TODO: are double entries git conform
-                //! take flags into account
-
                 auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&fLine, &fType](stringt2type_vector::const_reference it)
                 {
                     return fLine.toStdString() == it.first && fType.type() == it.second.type();
@@ -162,9 +159,16 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
         {
             return true;
         }
-        if (ignored_entries.back().second.is(Type::Negation))
+        for (auto entry = ignored_entries.begin()+1; entry != ignored_entries.end(); ++entry)
         {
-            return false;
+            if (entry->second.is(Type::Negation))
+            {
+                if (Logger::isSeverityActive(Logger::debug))
+                {
+                    TRACE(Logger::debug, "!ignored_entry: %d: %s", std::distance(ignored_entries.begin(), entry), entry->first.c_str());
+                }
+                return false;
+            }
         }
         return true;
     }

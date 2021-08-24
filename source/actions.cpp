@@ -111,7 +111,7 @@ void ActionList::initActionIcons()
     fActionIcons[Cmd::KillBackgroundThread]    = ":/resource/24X24/media-record.png";
     fActionIcons[Cmd::CopyFileName]            = ":/resource/24X24/edit-copy.png";
     fActionIcons[Cmd::CopyFilePath]            = ":/resource/24X24/edit-copy.png";
-    fActionIcons[Cmd::RemoveGitFolder]         = ":/resource/24X24/user-busy.png";
+    fActionIcons[Cmd::RemoveGitFolder]         = ":/resource/24X24/folder.png";
 
 
     for (const auto& fIconPath: fActionIcons )
