@@ -52,8 +52,6 @@ using namespace git;
 // Preview anzeigen ...
 // git log --merge -p <path>
 
-// TODO: display svg
-
 // TODO: show stash difference of single files
 // > git stash list
 // stash@{0}: WIP on master: 924f420 show stashed files in repository tree
@@ -111,6 +109,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
+    , mFileCopyMimeType("x-special/mate-copied-files")
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -281,6 +280,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         font.setPointSize(10);
         ui->textBrowser->setFont(font);
     }
+    LOAD_STR(fSettings, mFileCopyMimeType, toString);
+
 
 #ifdef DOCKED_VIEWS
     QByteArray fWindowGeometry;
@@ -333,6 +334,7 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
     STORE_STR(fSettings,  Type::mShort);
     STORE_STR(fSettings, mFontName);
+    STORE_STR(fSettings, mFileCopyMimeType);
     auto fWindowGeometry = saveGeometry();
     STORE_STR(fSettings, fWindowGeometry);
     auto fWindowState = saveState();
@@ -1718,9 +1720,10 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Add a git source folder to repository view")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     mActions.setFlags(Cmd::AddGitSourceFolder, ActionList::Flags::FunctionCmd, Flag::set);
-    connect(mActions.createAction(Cmd::RemoveGitFolder, tr("Remove git folder"), tr("Remove a git source folder from repository view")), SIGNAL(triggered()), this, SLOT(removeGitSourceFolder()));
+    connect(mActions.createAction(Cmd::RemoveGitFolder, tr("Remove git source folder"), tr("Remove a git source folder from repository view")), SIGNAL(triggered()), this, SLOT(removeGitSourceFolder()));
     mActions.setFlags(Cmd::RemoveGitFolder, ActionList::Flags::FunctionCmd, Flag::set);
-    connect(mActions.createAction(Cmd::UpdateGitStatus      , tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
+
+    connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::UpdateGitStatus)->setShortcut(QKeySequence(Qt::Key_F5));
 
@@ -2549,7 +2552,7 @@ void MainWindow::copyFileName()
 
 void MainWindow::copyFilePath()
 {
-    copy_file(copy_cmd::path);
+    copy_file(copy_cmd::file);
 }
 
 void MainWindow::copy_file(copy_cmd command)
@@ -2568,6 +2571,21 @@ void MainWindow::copy_file(copy_cmd command)
             fileInfo = fTopItemPath + QDir::separator() + fItemPath;
         }
         QClipboard *clipboard = QApplication::clipboard();
+#if 0
+        auto testData = clipboard->mimeData();
+        if (testData)
+        {
+            auto text = testData->text();
+            auto urls = testData->urls();
+            auto formats = testData->formats();
+            auto data = testData->data("");
+            for (auto format : formats)
+            {
+                data = testData->data(format);
+            }
+            int f = 0;
+        }
+#endif
         if (command == copy_cmd::name)
         {
             clipboard->setText(fileInfo.fileName());
@@ -2576,23 +2594,26 @@ void MainWindow::copy_file(copy_cmd command)
         {
             clipboard->setText(fileInfo.filePath());
         }
-        else
+        else // file
         {
             // TODO! does not work properly
             QMimeData* mime_data = new QMimeData();
             // Copy path of file
             mime_data->setText(fileInfo.filePath());
             // Copy file
-            mime_data->setUrls({QUrl::fromLocalFile(fileInfo.filePath())});
+            auto url = QUrl::fromLocalFile(fileInfo.filePath());
+            mime_data->setUrls({ url });
             // Copy file (gnome)
+#if 0
             int dropEffect = 5; // 2 for cut and 5 for copy
             QByteArray data;
             QDataStream stream(&data, QIODevice::WriteOnly);
             stream.setByteOrder(QDataStream::LittleEndian);
             stream << dropEffect;
             mime_data->setData("Preferred DropEffect", data);
-//            QByteArray gnomeFormat = QByteArray("copy\n").append(QUrl::fromLocalFile(fileInfo.filePath()).toEncoded());
-//            mime_data->setData("x-special/gnome-copied-files", gnomeFormat);
+#endif
+            QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
+            mime_data->setData(mFileCopyMimeType, copied_files);
             // Set the mimedata
             clipboard->setMimeData(mime_data);
         }
