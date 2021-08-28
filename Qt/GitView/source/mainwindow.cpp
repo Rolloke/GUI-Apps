@@ -1752,9 +1752,8 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::KillBackgroundThread, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::CopyFileName, tr("Copy file name"), tr("Copy file name to clipboard")), SIGNAL(triggered()), this, SLOT(copyFileName()));
-    mActions.getAction(Cmd::CopyFileName)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_C));
     mActions.setFlags(Cmd::CopyFileName, ActionList::Flags::FunctionCmd, Flag::set);
-    connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file path"), tr("Copy file path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
+    connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file and path"), tr("Copy file or folder and path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
     mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
 
     for (const auto& fAction : mActions.getList())
@@ -2547,15 +2546,15 @@ void MainWindow::find_function(find find_item)
 
 void MainWindow::copyFileName()
 {
-    copy_file(copy_cmd::name);
+    copy_file(copy::name);
 }
 
 void MainWindow::copyFilePath()
 {
-    copy_file(copy_cmd::file);
+    copy_file(copy::file);
 }
 
-void MainWindow::copy_file(copy_cmd command)
+void MainWindow::copy_file(copy command)
 {
     if (mContextMenuSourceTreeItem)
     {
@@ -2586,32 +2585,23 @@ void MainWindow::copy_file(copy_cmd command)
             int f = 0;
         }
 #endif
-        if (command == copy_cmd::name)
+        if (command == copy::name)
         {
             clipboard->setText(fileInfo.fileName());
         }
-        else if (command == copy_cmd::path)
+        else if (command == copy::path)
         {
             clipboard->setText(fileInfo.filePath());
         }
-        else // file
+        else // copy::file
         {
-            // TODO! does not work properly
             QMimeData* mime_data = new QMimeData();
             // Copy path of file
             mime_data->setText(fileInfo.filePath());
             // Copy file
             auto url = QUrl::fromLocalFile(fileInfo.filePath());
             mime_data->setUrls({ url });
-            // Copy file (gnome)
-#if 0
-            int dropEffect = 5; // 2 for cut and 5 for copy
-            QByteArray data;
-            QDataStream stream(&data, QIODevice::WriteOnly);
-            stream.setByteOrder(QDataStream::LittleEndian);
-            stream << dropEffect;
-            mime_data->setData("Preferred DropEffect", data);
-#endif
+            // Copy file (mFileCopyMimeType may be edited in ini-file)
             QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
             mime_data->setData(mFileCopyMimeType, copied_files);
             // Set the mimedata

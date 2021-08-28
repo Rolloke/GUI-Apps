@@ -2,12 +2,59 @@
 <!DOCTYPE html>
 <head>
    <title>Drucker Server</title>
-   <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-   <!-- Optional theme -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-   <!-- Latest compiled and minified JavaScript -->
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+   <script>
+    setInterval(function() { 
+      window.location.replace('/');
+      }, 5000);
+   </script>
+
+   <style>
+   <!--
+@media screen and (orientation:portrait) {
+  body {
+    background:#200000;
+    width:100%;
+    margin: 0; 
+    padding: 0;
+    font-family:"brandon-grotesque";
+    color:#fff;
+    font-size: 2.5em;
+    font-family:Arial,sans-serif;
+  }
+}
+@media screen and (orientation:landscape) {
+  body {
+    background:#002000;
+    height:100%;
+    margin: 0; 
+    padding: 0;
+    font-family:"brandon-grotesque";
+    color:#fff;
+    font-size: 1.5em;
+    font-family:Arial,sans-serif;
+  }
+}
+table th { 
+  text-align: left;
+}
+table {
+  margin: 1 1 1em;
+  table-layout: auto;
+  max-width: 100%;
+}
+button { 
+  padding: .4em .8em; 
+  background: #5a9900 linear-gradient(#8db243, #5a9900); 
+  border: thin solid green;
+  border-radius: 0 .4em .4em; 
+  box-shadow: 0 .2em .4em gray; 
+  color: white;
+  text-shadow: 0 -.05em .05em #333; 
+  font-size: 100%; 
+  line-height: 1.5;
+}
+-->
+    </style>
 </head>
 
 <body>
@@ -18,21 +65,19 @@
    <tr><td><h4>{{ pins[pin].name }}
    {% if pins[pin].state == true %}
       &nbsp;&nbsp;</h4></td><div class="row"><div class="col-md-2">
-      <td><a href="/{{pin}}/off" class="btn btn-block btn-lg btn-default" role="button">Ausschalten</a></td><td>{{ pins[pin].display_off }}</td></tr></div></div>
+      <td>
+       <form action="/{{pin}}/off" id="update"><button type="submit">Ausschalten</button></form>
+      </td>
+      <td>{{ pins[pin].display_off }}</td></tr></div></div>
    {% else %}
       &nbsp;&nbsp;</h4></td><div class="row"><div class="col-md-2">
-      <td><a href="/{{pin}}/on" class="btn btn-block btn-lg btn-primary" role="button">Einschalten</a></td><td></td></tr></div></div>
+      <td>
+       <form action="/{{pin}}/on" id="update"><button type="submit">Einschalten</button></form>
+      </td><td></td></tr></div></div>
    {% endif %}
-   <form action="/{{pin}}/off" id="update">
-    <button type="submit">Off</button>
-   </form>
-
    {% endfor %}
    </table>
-   <form action="main.html" id="update">
-    <button type="submit">Update</button>
-   </form>
-
+   <!-- <form action="/" id="update"><button type="submit">Aktualisieren</button></form> -->
 </body>
 </html>
 

@@ -57,6 +57,8 @@ def action(changePin, action):
       pins[changePin]['display_off'] = display_off
       pins[changePin]['switch_off']  = switch_off_time
       message = "Turned " + deviceName + " on."
+      start_new_thread(check_time, (changePin,))
+
    if action == "off":
       pins[changePin]['display_off'] = ''
       GPIO.output(changePin, GPIO.LOW)
@@ -74,35 +76,35 @@ def action(changePin, action):
 
    return render_template('main.html', **templateData)
 
-def check_time():
+def check_time(pin):
 
+   #print( 'entering thread for pin: ', pin ) 
    while True:
 
       time.sleep(5)
       
       now = datetime.datetime.now()
       output = now.strftime("%H:%M:%S") 
-      print( 'checking at ', output ) 
+      # print( 'checking at ', output ) 
 
-      for pin in pins:
-         if pins[pin]['switch_off'] is None:
-            print( 'No switch of time for: ', pin )
-            continue
-
-         else:
+      if pins[pin]['switch_off'] is None:
+         print( 'No switch of time for: ', pin )
+         break
+      else:
+         # print( 'pin off: ', pins[pin]['display_off'] )
+         if now > pins[pin]['switch_off']:
+            GPIO.output(pin, GPIO.LOW)
             print( 'pin off: ', pins[pin]['display_off'] )
-            if now > pins[pin]['switch_off']:
-               GPIO.output(pin, GPIO.LOW)
-               pins[pin]['switch_off'] = None
-#               templateData =  { 'pins' : pins  }
-#               render_template('main.html', **templateData)
-  
+            pins[pin]['switch_off'] = None
+            break
 
+   #print( 'leaving thread for pin: ', pin )
+#   templateData =  { 'pins' : pins  }
+#   return render_template('main.html', **templateData)
    return 0
 
 if __name__ == "__main__":
 
-   start_new_thread(check_time, ())
    app.run(host='0.0.0.0', port=8080, debug=False)
    
 
