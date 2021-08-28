@@ -199,8 +199,8 @@ private:
     bool     getShowTypeResult(const git::Type& fType);
     void     addItem2graphicsView(QGraphicsItem*);
 
-    enum class copy_cmd { name, path, file };
-    void     copy_file(copy_cmd command);
+    enum class copy { name, path, file };
+    void     copy_file(copy command);
 
 
 #ifdef DOCKED_VIEWS
