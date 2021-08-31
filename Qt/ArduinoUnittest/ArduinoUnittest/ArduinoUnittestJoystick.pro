@@ -12,7 +12,7 @@ ARDUINO_PATH = ../../../Arduino/Sketches/Joystick
 INCLUDEPATH += $${ARDUINO_PATH}
 #HEADERS += $${ARDUINO_PATH}/ioAt328.h
 SOURCES += Joystickino.cpp
-#SOURCES += $${ARDUINO_PATH}/Joystick.ino
+DISTFILES += $${ARDUINO_PATH}/Joystick.ino
 
 # Arduino Libraries
 LIBRARY1 = $${ARDUINO_LOCAL_LIBRARY_PATH}/Button/src

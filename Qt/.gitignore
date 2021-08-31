@@ -4,3 +4,4 @@ MenuTest/
 *.user
 build*/
 *.aps
+*.qm

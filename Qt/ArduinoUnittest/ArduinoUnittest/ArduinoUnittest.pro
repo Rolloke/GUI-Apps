@@ -53,4 +53,4 @@ FORMS    += mainwindow.ui \
             logic_analyser.ui
 
 ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.12/libraries
-ARDUINO_LOCAL_LIBRARY_PATH = /home/rolf/Projekte/Arduino/libraries
+ARDUINO_LOCAL_LIBRARY_PATH = /home/rolfke/Projekte/Arduino/libraries
