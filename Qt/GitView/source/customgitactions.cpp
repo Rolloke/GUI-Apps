@@ -359,7 +359,7 @@ void CustomGitActions::on_btnMoveDown_clicked()
 
 void CustomGitActions::on_btnAdd_clicked()
 {
-    auto  fCmd    = mActionList.getNextCustomID();
+    auto  fCmd    = mActionList.createNewID(Cmd::CustomCommand);
     auto* fAction = mActionList.createAction(fCmd, tr("command name"), "git ");
     if (fAction)
     {

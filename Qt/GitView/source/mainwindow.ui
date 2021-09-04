@@ -317,13 +317,13 @@
            <widget class="QPushButton" name="btnCloseText">
             <property name="minimumSize">
              <size>
-              <width>70</width>
+              <width>60</width>
               <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>60</width>
               <height>25</height>
              </size>
             </property>
@@ -342,13 +342,13 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>70</width>
+              <width>60</width>
               <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>60</width>
               <height>25</height>
              </size>
             </property>
@@ -602,6 +602,16 @@ File content opened with double click</string>
         </property>
         <property name="checked">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckRenderGraphicFile">
+        <property name="toolTip">
+         <string>Render Graphic File</string>
+        </property>
+        <property name="text">
+         <string>Render</string>
         </property>
        </widget>
       </item>

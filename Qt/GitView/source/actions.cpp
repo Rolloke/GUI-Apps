@@ -10,56 +10,56 @@ using namespace git;
 
 const QString ActionList::sNoCustomCommandMessageBox = "None";
 
-ActionList::ActionList(QObject* aParent): mParent(aParent)
+ActionList::ActionList(QObject* parent): mParent(parent)
 {
 
 }
 
 ActionList::~ActionList()
 {
-    for (auto& fAction : mActionList)
+    for (auto& action : mActionList)
     {
-        delete fAction.second;
+        delete action.second;
     }
 }
 
-QAction * ActionList::createAction(Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand, QObject*aParent)
+QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QString& git_command, QObject* parent)
 {
-    if (aParent == nullptr)
+    if (parent == nullptr)
     {
-        aParent = mParent;
+        parent = mParent;
     }
-    QAction *fNewAction = new QAction(aName, aParent);
-    mActionList[aCmd] = fNewAction;
-    fNewAction->setStatusTip(aGitCommand);
-    fNewAction->setToolTip(aName);
+    QAction *new_action = new QAction(name, parent);
+    mActionList[cmd] = new_action;
+    new_action->setStatusTip(git_command);
+    new_action->setToolTip(name);
     QVariantList fList;
     fList.append(QVariant(sNoCustomCommandMessageBox));
     for (int i = Data::Action; i<Data::ListSize; ++i)
     {
         fList.append(QVariant());
     }
-    fList[ActionList::Data::Cmd] = QVariant(aCmd);
-    fNewAction->setData(fList);
-    return fNewAction;
+    fList[ActionList::Data::Cmd] = QVariant(cmd);
+    new_action->setData(fList);
+    return new_action;
 }
 
 
-void ActionList::deleteAction(git::Cmd::eCmd aCmd)
+void ActionList::deleteAction(git::Cmd::eCmd cmd)
 {
-    if (mActionList.count(aCmd))
+    if (mActionList.count(cmd))
     {
-        delete mActionList[aCmd];
-        mActionList.erase(aCmd);
+        delete mActionList[cmd];
+        mActionList.erase(cmd);
     }
 }
 
-git::Cmd::eCmd ActionList::getNextCustomID() const
+git::Cmd::eCmd ActionList::createNewID(git::Cmd::eCmd new_cmd) const
 {
-    for (int fNewCmd = Cmd::CustomCommand; fNewCmd < Cmd::NonGitCommands; ++fNewCmd)
+    for (; new_cmd < Cmd::NonGitCommands; ++new_cmd)
     {
-        if (mActionList.count(fNewCmd)) continue;
-        return static_cast<Cmd::eCmd>(fNewCmd);
+        if (mActionList.count(new_cmd)) continue;
+        return static_cast<Cmd::eCmd>(new_cmd);
     }
     return Cmd::Invalid;
 }
@@ -67,235 +67,235 @@ git::Cmd::eCmd ActionList::getNextCustomID() const
 
 void ActionList::initActionIcons()
 {
-    std::map<Cmd::eCmd, std::string> fActionIcons;
-    fActionIcons[Cmd::Add]                     = ":/resource/24X24/list-add.png";
-    fActionIcons[Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
-    fActionIcons[Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
-    fActionIcons[Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
-    fActionIcons[Cmd::CallMergeTool]           = ":/resource/24X24/application-x-addon.png";
-    fActionIcons[Cmd::InvokeGitMergeDialog]    = ":/resource/24X24/application-x-addon.png";
-    fActionIcons[Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
-    fActionIcons[Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
-    fActionIcons[Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
-    fActionIcons[Cmd::Remove]                  = ":/resource/24X24/user-trash.png";
-    fActionIcons[Cmd::Delete]                  = ":/resource/24X24/edit-delete.png";
-    fActionIcons[Cmd::Commit]                  = ":/resource/24X24/user-invisible.png";
-    fActionIcons[Cmd::MoveOrRename]            = ":/resource/24X24/format-text-direction-ltr.png";
-    fActionIcons[Cmd::Restore]                 = ":/resource/24X24/edit-redo-rtl.png";
-    fActionIcons[Cmd::Push]                    = ":/resource/24X24/view-sort-descending.png";
-    fActionIcons[Cmd::Pull]                    = ":/resource/24X24/view-sort-ascending.png";
-    fActionIcons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
-    fActionIcons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
-    fActionIcons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
-    fActionIcons[Cmd::BranchList]              = ":/resource/24X24/open-menu.png";
-    fActionIcons[Cmd::BranchListRemote]        = ":/resource/24X24/open-menu.png";
-    fActionIcons[Cmd::BranchListMerged]        = ":/resource/24X24/open-menu.png";
-    fActionIcons[Cmd::BranchListNotMerged]     = ":/resource/24X24/open-menu.png";
-    fActionIcons[Cmd::BranchDelete]            = ":/resource/24X24/edit-delete.png";
-    fActionIcons[Cmd::BranchShow]              = ":/resource/24X24/preferences-system-privacy.png";
-    fActionIcons[Cmd::BranchCheckout]          = ":/resource/24X24/emblem-default.png";
-    fActionIcons[Cmd::BranchHistory]           = ":/resource/24X24/document-open-recent.png";
-    fActionIcons[Cmd::Show]                    = ":/resource/24X24/edit-find.png";
+    std::map<Cmd::eCmd, std::string> action_icons;
+    action_icons[Cmd::Add]                     = ":/resource/24X24/list-add.png";
+    action_icons[Cmd::Unstage]                 = ":/resource/24X24/list-remove.png";
+    action_icons[Cmd::ShowDifference]          = ":/resource/24X24/object-flip-horizontal.png";
+    action_icons[Cmd::CallDiffTool]            = ":/resource/24X24/distribute-graph-directed.svg";
+    action_icons[Cmd::CallMergeTool]           = ":/resource/24X24/application-x-addon.png";
+    action_icons[Cmd::InvokeGitMergeDialog]    = ":/resource/24X24/application-x-addon.png";
+    action_icons[Cmd::History]                 = ":/resource/24X24/document-open-recent.png";
+    action_icons[Cmd::ShowStatus]              = ":/resource/24X24/help-faq.png";
+    action_icons[Cmd::ShowShortStatus]         = ":/resource/24X24/dialog-question.png";
+    action_icons[Cmd::Remove]                  = ":/resource/24X24/user-trash.png";
+    action_icons[Cmd::Delete]                  = ":/resource/24X24/edit-delete.png";
+    action_icons[Cmd::Commit]                  = ":/resource/24X24/user-invisible.png";
+    action_icons[Cmd::MoveOrRename]            = ":/resource/24X24/format-text-direction-ltr.png";
+    action_icons[Cmd::Restore]                 = ":/resource/24X24/edit-redo-rtl.png";
+    action_icons[Cmd::Push]                    = ":/resource/24X24/view-sort-descending.png";
+    action_icons[Cmd::Pull]                    = ":/resource/24X24/view-sort-ascending.png";
+    action_icons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
+    action_icons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
+    action_icons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
+    action_icons[Cmd::BranchList]              = ":/resource/24X24/open-menu.png";
+    action_icons[Cmd::BranchListRemote]        = ":/resource/24X24/open-menu.png";
+    action_icons[Cmd::BranchListMerged]        = ":/resource/24X24/open-menu.png";
+    action_icons[Cmd::BranchListNotMerged]     = ":/resource/24X24/open-menu.png";
+    action_icons[Cmd::BranchDelete]            = ":/resource/24X24/edit-delete.png";
+    action_icons[Cmd::BranchShow]              = ":/resource/24X24/preferences-system-privacy.png";
+    action_icons[Cmd::BranchCheckout]          = ":/resource/24X24/emblem-default.png";
+    action_icons[Cmd::BranchHistory]           = ":/resource/24X24/document-open-recent.png";
+    action_icons[Cmd::Show]                    = ":/resource/24X24/edit-find.png";
 
-    fActionIcons[Cmd::ExpandTreeItems]         = ":/resource/24X24/svn-update.svg";
-    fActionIcons[Cmd::CollapseTreeItems]       = ":/resource/24X24/svn-commit.svg";
-    fActionIcons[Cmd::AddGitSourceFolder]      = ":/resource/24X24/folder-open.png";
-    fActionIcons[Cmd::UpdateGitStatus]         = ":/resource/24X24/view-refresh.png";
-    fActionIcons[Cmd::ShowHideTree]            = ":/resource/24X24/code-class.svg";
-    fActionIcons[Cmd::ClearTreeItems]          = ":/resource/24X24/edit-clear.png";
-    fActionIcons[Cmd::CustomGitActionSettings] = ":/resource/24X24/preferences-system.png";
-    fActionIcons[Cmd::InsertHashFileNames]     = ":/resource/24X24/object-rotate-right.png";
-    fActionIcons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
-    fActionIcons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
-    fActionIcons[Cmd::InvokeHighlighterDialog] = ":/resource/24X24/emblem-system.png";
-    fActionIcons[Cmd::KillBackgroundThread]    = ":/resource/24X24/media-record.png";
-    fActionIcons[Cmd::CopyFileName]            = ":/resource/24X24/edit-copy.png";
-    fActionIcons[Cmd::CopyFilePath]            = ":/resource/24X24/edit-copy.png";
-    fActionIcons[Cmd::RemoveGitFolder]         = ":/resource/24X24/folder.png";
+    action_icons[Cmd::ExpandTreeItems]         = ":/resource/24X24/svn-update.svg";
+    action_icons[Cmd::CollapseTreeItems]       = ":/resource/24X24/svn-commit.svg";
+    action_icons[Cmd::AddGitSourceFolder]      = ":/resource/24X24/folder-open.png";
+    action_icons[Cmd::UpdateGitStatus]         = ":/resource/24X24/view-refresh.png";
+    action_icons[Cmd::ShowHideTree]            = ":/resource/24X24/code-class.svg";
+    action_icons[Cmd::ClearTreeItems]          = ":/resource/24X24/edit-clear.png";
+    action_icons[Cmd::CustomGitActionSettings] = ":/resource/24X24/preferences-system.png";
+    action_icons[Cmd::InsertHashFileNames]     = ":/resource/24X24/object-rotate-right.png";
+    action_icons[Cmd::About]                   = ":/resource/24X24/dialog-information.png";
+    action_icons[Cmd::SelectTextBrowserLanguage]= ":/resource/24X24/text-x-adasrc.svg";
+    action_icons[Cmd::InvokeHighlighterDialog] = ":/resource/24X24/emblem-system.png";
+    action_icons[Cmd::KillBackgroundThread]    = ":/resource/24X24/media-record.png";
+    action_icons[Cmd::CopyFileName]            = ":/resource/24X24/edit-copy.png";
+    action_icons[Cmd::CopyFilePath]            = ":/resource/24X24/edit-copy.png";
+    action_icons[Cmd::RemoveGitFolder]         = ":/resource/24X24/folder.png";
 
 
-    for (const auto& fIconPath: fActionIcons )
+    for (const auto& icon_path: action_icons )
     {
-        setIconPath(static_cast<Cmd::eCmd>(fIconPath.first), fIconPath.second.c_str());
+        setIconPath(static_cast<Cmd::eCmd>(icon_path.first), icon_path.second.c_str());
     }
 }
 
-void ActionList::enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const
+void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Type& type) const
 {
-    for (const auto& fCmd : aItems)
+    for (const auto& cmd : items)
     {
-        if (fCmd != Cmd::Separator)
+        if (cmd != Cmd::Separator)
         {
-            bool fEnabled = true;
-            auto fStatusEnabled    = getFlags(fCmd, Data::StatusFlagEnable);
-            auto fStatusDisabled   = getFlags(fCmd, Data::StatusFlagDisable);
-            auto fStatusNotEnabled = fStatusEnabled & fStatusDisabled;
+            bool enabled = true;
+            auto status_enabled     = getFlags(cmd, Data::StatusFlagEnable);
+            auto status_disabled    = getFlags(cmd, Data::StatusFlagDisable);
+            auto status_not_enabled = status_enabled & status_disabled;
             if (   Logger::isSeverityActive(Logger::trace)
-                && (fStatusEnabled  || fStatusDisabled || fStatusNotEnabled))
+                && (status_enabled  || status_disabled || status_not_enabled))
             {
-                Logger::printDebug(Logger::trace, "%s: e:%d|%d, d:%d|%d, ne:%d|%d", getAction(fCmd)->text().toStdString().c_str(),
-                                   INT(fStatusEnabled), aType.is(static_cast<Type::TypeFlags>(fStatusEnabled)),
-                                   INT(fStatusDisabled), aType.is(static_cast<Type::TypeFlags>(fStatusDisabled)),
-                                   INT(fStatusNotEnabled), aType.is(static_cast<Type::TypeFlags>(fStatusNotEnabled)));
+                Logger::printDebug(Logger::trace, "%s: e:%d|%d, d:%d|%d, ne:%d|%d", getAction(cmd)->text().toStdString().c_str(),
+                                   INT(status_enabled), type.is(static_cast<Type::TypeFlags>(status_enabled)),
+                                   INT(status_disabled), type.is(static_cast<Type::TypeFlags>(status_disabled)),
+                                   INT(status_not_enabled), type.is(static_cast<Type::TypeFlags>(status_not_enabled)));
             }
-            if (aType.type() & Type::File)
+            if (type.type() & Type::File)
             {
-                if (fStatusNotEnabled)
+                if (status_not_enabled)
                 {
-                    fEnabled = (aType.type() & fStatusNotEnabled) != 0;
+                    enabled = (type.type() & status_not_enabled) != 0;
                 }
                 else
                 {
-                    if (fStatusEnabled  && (aType.type() & fStatusEnabled) == 0)
+                    if (status_enabled  && (type.type() & status_enabled) == 0)
                     {
-                        fEnabled = false;
+                        enabled = false;
                     }
-                    else if (fStatusDisabled && (aType.type() & fStatusDisabled) != 0)
+                    else if (status_disabled && (type.type() & status_disabled) != 0)
                     {
-                        fEnabled = false;
+                        enabled = false;
                     }
                 }
             }
-            auto action = getAction(fCmd);
+            auto action = getAction(cmd);
             if (action)
             {
-                action->setEnabled(fEnabled);
+                action->setEnabled(enabled);
             }
         }
     }
 
 }
 
-void ActionList::fillToolbar(QToolBar& aToolbar, const Cmd::tVector& aItems) const
+void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items) const
 {
-    for (const auto& fCmd : aItems)
+    for (const auto& cmd : items)
     {
-        if (fCmd == Cmd::Separator)
+        if (cmd == Cmd::Separator)
         {
-            aToolbar.addSeparator();
+            tool_bar.addSeparator();
         }
         else
         {
-            auto * action = getAction(fCmd);
+            auto * action = getAction(cmd);
             if (action)
             {
-                aToolbar.addAction(action);
+                tool_bar.addAction(action);
             }
         }
     }
 }
 
-void ActionList::fillContextMenue(QMenu& aMenu, const Cmd::tVector& aItems) const
+void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items) const
 {
-    for (const auto& fCmd : aItems)
+    for (const auto& cmd : items)
     {
-        if (fCmd == Cmd::Separator)
+        if (cmd == Cmd::Separator)
         {
-            aMenu.addSeparator();
+            menu.addSeparator();
         }
         else
         {
-            aMenu.addAction(getAction(fCmd));
+            menu.addAction(getAction(cmd));
         }
     }
 }
 
 
-QAction* ActionList::getAction(Cmd::eCmd aCmd) const
+QAction* ActionList::getAction(Cmd::eCmd cmd) const
 {
-    auto fItem = mActionList.find(aCmd);
-    if (fItem != mActionList.end())
+    auto item = mActionList.find(cmd);
+    if (item != mActionList.end())
     {
-        return fItem->second;
+        return item->second;
     }
     return nullptr;
 }
 
-void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd aCmd, const QString& aText)
+void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd cmd, const QString& text)
 {
-    QAction* fAction = getAction(aCmd);
-    QVariantList fVariantList = fAction->data().toList();
-    fVariantList[Data::MsgBoxText] = QVariant(aText);
-    fAction->setData(fVariantList);
+    QAction* action = getAction(cmd);
+    QVariantList variant_list = action->data().toList();
+    variant_list[Data::MsgBoxText] = QVariant(text);
+    action->setData(variant_list);
 }
 
-QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd aCmd) const
+QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd cmd) const
 {
-    QVariant fVariant = getDataVariant(aCmd, Data::MsgBoxText);
-    if (fVariant.isValid())
+    QVariant variant = getDataVariant(cmd, Data::MsgBoxText);
+    if (variant.isValid())
     {
-        return fVariant.toString();
+        return variant.toString();
     }
     return "";
 }
 
 
-void  ActionList::setCustomCommandPostAction(Cmd::eCmd aCmd, uint aAction)
+void  ActionList::setCustomCommandPostAction(Cmd::eCmd cmd, uint action)
 {
-    setDataVariant(aCmd, Data::Action, QVariant(aAction));
+    setDataVariant(cmd, Data::Action, QVariant(action));
 }
 
-uint ActionList::getCustomCommandPostAction(Cmd::eCmd aCmd) const
+uint ActionList::getCustomCommandPostAction(Cmd::eCmd cmd) const
 {
-    QVariant fVariant = getDataVariant(aCmd, Data::Action);
-    if (fVariant.isValid())
+    QVariant variant = getDataVariant(cmd, Data::Action);
+    if (variant.isValid())
     {
-        return fVariant.toUInt();
+        return variant.toUInt();
     }
     return 0;
 }
 
-void ActionList::setIconPath(Cmd::eCmd aCmd, const QString& aPath)
+void ActionList::setIconPath(Cmd::eCmd cmd, const QString& path)
 {
-    QAction* fAction = getAction(aCmd);
-    if (fAction)
+    QAction* action = getAction(cmd);
+    if (action)
     {
-        fAction->setIcon(QIcon(aPath));
+        action->setIcon(QIcon(path));
     }
-    setDataVariant(aCmd, Data::IconPath, QVariant(aPath));
+    setDataVariant(cmd, Data::IconPath, QVariant(path));
 }
 
-QString ActionList::getIconPath(Cmd::eCmd aCmd) const
+QString ActionList::getIconPath(Cmd::eCmd cmd) const
 {
-    QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
-    if (fVariant.isValid())
+    QVariant variant = getDataVariant(cmd, Data::IconPath);
+    if (variant.isValid())
     {
-        return fVariant.toString();
-    }
-    return "";
-}
-
-void ActionList::setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn)
-{
-    setDataVariant(aCmd, Data::StagedCmdAddOn, QVariant(aCmdAddOn));
-}
-
-QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd aCmd) const
-{
-    QVariant fVariant = getDataVariant(aCmd, Data::IconPath);
-    if (fVariant.isValid())
-    {
-        return fVariant.toString();
+        return variant.toString();
     }
     return "";
 }
 
-void ActionList::setFlags(Cmd::eCmd aCmd, uint aFlag, Flag aSet, Data::e aData)
+void ActionList::setStagedCmdAddOn(git::Cmd::eCmd cmd, const QString& cmd_add_on)
 {
-    uint fFlags = getFlags(aCmd, aData);
-    switch (aSet)
-    {
-        case Flag::remove:  fFlags &= ~aFlag; break;
-        case Flag::set:     fFlags |=  aFlag; break;
-        case Flag::replace: fFlags  =  aFlag; break;
-    }
-
-    setDataVariant(aCmd, aData, QVariant(fFlags));
+    setDataVariant(cmd, Data::StagedCmdAddOn, QVariant(cmd_add_on));
 }
 
-uint ActionList::getFlags(Cmd::eCmd aCmd, Data::e aData) const
+QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd cmd) const
 {
-    QVariant fVariant = getDataVariant(aCmd, aData);
+    QVariant variant = getDataVariant(cmd, Data::IconPath);
+    if (variant.isValid())
+    {
+        return variant.toString();
+    }
+    return "";
+}
+
+void ActionList::setFlags(Cmd::eCmd cmd, uint flag, Flag set, Data::e data)
+{
+    uint fFlags = getFlags(cmd, data);
+    switch (set)
+    {
+        case Flag::remove:  fFlags &= ~flag; break;
+        case Flag::set:     fFlags |=  flag; break;
+        case Flag::replace: fFlags  =  flag; break;
+    }
+
+    setDataVariant(cmd, data, QVariant(fFlags));
+}
+
+uint ActionList::getFlags(Cmd::eCmd cmd, Data::e data) const
+{
+    QVariant fVariant = getDataVariant(cmd, data);
     if (fVariant.isValid() && fVariant.canConvert<uint>())
     {
         return fVariant.toUInt();
@@ -304,29 +304,29 @@ uint ActionList::getFlags(Cmd::eCmd aCmd, Data::e aData) const
 }
 
 
-void ActionList::setDataVariant(Cmd::eCmd aCmd, ActionList::Data::e aData, const QVariant& aVariant)
+void ActionList::setDataVariant(Cmd::eCmd cmd, ActionList::Data::e data, const QVariant& variant)
 {
-    QAction* fAction = getAction(aCmd);
+    QAction* fAction = getAction(cmd);
     if (fAction)
     {
         QVariantList fVariantList = fAction->data().toList();
-        if (aData >= 0 && aData < Data::ListSize)
+        if (data >= 0 && data < Data::ListSize)
         {
-            fVariantList[aData] = aVariant;
+            fVariantList[data] = variant;
         }
         fAction->setData(fVariantList);
     }
 }
 
-QVariant ActionList::getDataVariant(Cmd::eCmd aCmd, Data::e aData) const
+QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
 {
-    QAction* fAction = getAction(aCmd);
+    QAction* fAction = getAction(cmd);
     if (fAction)
     {
         QVariantList fVariantList = fAction->data().toList();
-        if (aData >= 0 && aData < Data::ListSize)
+        if (data >= 0 && data < Data::ListSize)
         {
-            return fVariantList[aData];
+            return fVariantList[data];
         }
     }
     return QVariant();

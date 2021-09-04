@@ -17,6 +17,11 @@ std::vector<Cmd::tVector> Cmd::mToolbars;
 std::vector<QString> Cmd::mToolbarNames;
 #endif
 
+void operator++(Cmd::eCmd& cmd)
+{
+    cmd = static_cast<Cmd::eCmd>(cmd + 1);
+}
+
 Cmd::Cmd()
 {
     mCommandMap[GetStatusAll]           = "git -C %1 status -sb";

@@ -27,7 +27,7 @@ public:
                              NotVariableGitCmd=128, /// indicates that the command is not a modifiable git command
                              FunctionCmd=256}; };   /// command invokes a special destinct function
 
-    typedef std::map<int, QAction*> tActionMap;
+    typedef std::map<git::Cmd::eCmd, QAction*> tActionMap;
 
     explicit ActionList(QObject* aParent);
 
@@ -48,7 +48,7 @@ public:
     QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd) const;
 
     void     initActionIcons();
-    git::Cmd::eCmd getNextCustomID() const;
+    git::Cmd::eCmd createNewID(git::Cmd::eCmd fNewCmd) const;
 
     void enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const;
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems) const;

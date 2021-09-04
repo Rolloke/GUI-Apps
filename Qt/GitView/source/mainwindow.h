@@ -22,7 +22,7 @@ class MainWindow;
 
 class MergeDialog;
 class QGraphicsItem;
-
+class QCheckBox;
 
 
 class MainWindow : public QMainWindow
@@ -202,6 +202,7 @@ private:
     enum class copy { name, path, file };
     void     copy_file(copy command);
 
+    void     createAutoCmd(QCheckBox*);
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
