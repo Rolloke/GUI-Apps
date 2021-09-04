@@ -1326,33 +1326,33 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     const QString fFileName = getItemFilePath(item);
     const QFileInfo file_info(fFileName);
     const QString   file_extension = file_info.suffix().toLower();
-
-    QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
-
-#ifdef QT_SVG_LIB
-    if (file_extension == "svg")
+    if (ui->ckRenderGraphicFile->isChecked())
     {
-        auto svg_image = new QGraphicsSvgItem(fFileName);
-        int type =svg_image->type();
-        if (type)
+        const QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
+#ifdef QT_SVG_LIB
+        if (file_extension == "svg")
         {
-            addItem2graphicsView(svg_image);
-            return;
+            auto svg_image = new QGraphicsSvgItem(fFileName);
+            int type =svg_image->type();
+            if (type)
+            {
+                addItem2graphicsView(svg_image);
+                return;
+            }
         }
-    }
 #endif
 
-    if (graphic_formats.contains(file_extension))
-    {
-        QImage image(fFileName);
-
-        if(!image.isNull())
+        if (graphic_formats.contains(file_extension))
         {
-            addItem2graphicsView(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
-            return;
+            QImage image(fFileName);
+
+            if(!image.isNull())
+            {
+                addItem2graphicsView(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
+                return;
+            }
         }
     }
-
     QFile file(fFileName);
     if (file.open(QIODevice::ReadOnly))
     {
@@ -1756,10 +1756,33 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file and path"), tr("Copy file or folder and path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
     mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
 
+    createAutoCmd(ui->ckDirectories);
+    createAutoCmd(ui->ckFiles);
+    createAutoCmd(ui->ckHiddenFiles);
+    createAutoCmd(ui->ckShortState);
+    createAutoCmd(ui->ckSymbolicLinks);
+    createAutoCmd(ui->ckSystemFiles);
+    createAutoCmd(ui->ckRenderGraphicFile);
+    createAutoCmd(ui->ckHideEmptyParent);
+    createAutoCmd(ui->ckFindCaseSensitive);
+    createAutoCmd(ui->ckFindRegEx);
+    createAutoCmd(ui->ckFindWholeWord);
+
     for (const auto& fAction : mActions.getList())
     {
         mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Flags::BuiltIn);
     }
+}
+
+void MainWindow::createAutoCmd(QCheckBox *checkbox)
+{
+    auto comand_id = mActions.createNewID(Cmd::AutoCommand);
+    QAction* action = mActions.createAction(comand_id, checkbox->text(), checkbox->toolTip());
+    action->setCheckable(true);
+    connect(action, SIGNAL(triggered(bool)), checkbox, SLOT(setChecked(bool)));
+    connect(checkbox, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+    mActions.setIconPath(comand_id, ":/resource/24X24/window-close.png");
+    mActions.setFlags(comand_id, ActionList::Flags::FunctionCmd);
 }
 
 void MainWindow::initCustomAction(QAction* fAction)

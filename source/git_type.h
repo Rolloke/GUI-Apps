@@ -52,6 +52,8 @@ struct Cmd
         /// hint: add further git commands here
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
+        AutoCommand=500,
+        /// hint: this range is reserved for automatically created commands
         NonGitCommands = 1000,
         /// hint: add non git commands here
         Separator = NonGitCommands,
@@ -73,7 +75,8 @@ struct Cmd
         CopyFilePath,
         RemoveGitFolder,
         FirstGitCommand = GetStatusAll,
-        LastGitCommand  = NonGitCommands-1,
+        LastGitCommand  = AutoCommand-1,
+        LastAutoCommand = NonGitCommands-1,
         Invalid = -1,
         Restore = Checkout
     };
@@ -107,6 +110,8 @@ struct Cmd
 private:
     static int2stringmap mCommandMap;
 };
+
+void operator++(git::Cmd::eCmd& cmd);
 
 struct Type
 {
