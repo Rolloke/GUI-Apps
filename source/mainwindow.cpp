@@ -65,6 +65,11 @@ using namespace git;
 // Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp  |  32 +-
 // > git difftool 14206bae46ae44e641b458435895eb22b2262aad Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp
 
+// TODO: show branch graphically
+// TODO: checkout commit for branch, folder or file also from history
+// TODO: show date, description and author in history view
+// TODO: use diff-tool for history diffs
+// TODO: diff branches: git diff branch1...branch2
 
 namespace config
 {
@@ -162,6 +167,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupFind);
@@ -319,6 +325,7 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
     STORE_PTR(fSettings, ui->ckFiles, isChecked);
     STORE_PTR(fSettings, ui->ckDirectories, isChecked);
+    STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupFind);
@@ -1323,17 +1330,18 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 {
     on_btnCloseText_clicked();
 
-    const QString fFileName = getItemFilePath(item);
-    const QFileInfo file_info(fFileName);
-    const QString   file_extension = file_info.suffix().toLower();
+    const QString   file_name      = getItemFilePath(item);
+    const QFileInfo file_info(file_name);
+    QString         file_extension = file_info.suffix().toLower();
+
     if (ui->ckRenderGraphicFile->isChecked())
     {
         const QStringList graphic_formats = {"bmp", "gif", "jpg", "jpeg", "png", "pbm", "pgm", "ppm", "xbm", "xpm" };
 #ifdef QT_SVG_LIB
         if (file_extension == "svg")
         {
-            auto svg_image = new QGraphicsSvgItem(fFileName);
-            int type =svg_image->type();
+            auto svg_image = new QGraphicsSvgItem(file_name);
+            int type = svg_image->type();
             if (type)
             {
                 addItem2graphicsView(svg_image);
@@ -1344,7 +1352,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 
         if (graphic_formats.contains(file_extension))
         {
-            QImage image(fFileName);
+            QImage image(file_name);
 
             if(!image.isNull())
             {
@@ -1353,13 +1361,25 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
             }
         }
     }
-    QFile file(fFileName);
+
+    QFile file(file_name);
     if (file.open(QIODevice::ReadOnly))
     {
-        ui->labelFilePath->setText(fFileName);
+        ui->labelFilePath->setText(file_name);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
+        if (file_extension == "txt" && file_name.contains("CMakeLists.txt"))
+        {
+            file_extension = "cmake";
+        }
         mHighlighter->setExtension(file_extension);
-        ui->textBrowser->setText(file.readAll());
+        if (ui->ckRenderGraphicFile->isChecked())
+        {
+            ui->textBrowser->setText(file.readAll());
+        }
+        else
+        {
+            ui->textBrowser->setPlainText(file.readAll());
+        }
         ui->btnStoreText->setEnabled(false);
 #ifdef DOCKED_VIEWS
         showDockedWidget(ui->textBrowser);
@@ -1779,6 +1799,7 @@ void MainWindow::createAutoCmd(QCheckBox *checkbox)
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
     QAction* action = mActions.createAction(comand_id, checkbox->text(), checkbox->toolTip());
     action->setCheckable(true);
+    if (checkbox->isChecked()) action->setChecked(true);
     connect(action, SIGNAL(triggered(bool)), checkbox, SLOT(setChecked(bool)));
     connect(checkbox, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
     mActions.setIconPath(comand_id, ":/resource/24X24/window-close.png");

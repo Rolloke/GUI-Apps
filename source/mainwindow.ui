@@ -608,7 +608,7 @@ File content opened with double click</string>
       <item>
        <widget class="QCheckBox" name="ckRenderGraphicFile">
         <property name="toolTip">
-         <string>Render Graphic File</string>
+         <string>Render Graphics or HTML File</string>
         </property>
         <property name="text">
          <string>Render</string>
