@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QVariant>
+#include <QPointer>
 
 class QToolBar;
 class QAction;
@@ -27,7 +28,7 @@ public:
                              NotVariableGitCmd=128, /// indicates that the command is not a modifiable git command
                              FunctionCmd=256}; };   /// command invokes a special destinct function
 
-    typedef std::map<git::Cmd::eCmd, QAction*> tActionMap;
+    typedef std::map<git::Cmd::eCmd,  QPointer<QAction>> tActionMap;
 
     explicit ActionList(QObject* aParent);
 

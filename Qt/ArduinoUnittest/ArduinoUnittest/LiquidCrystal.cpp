@@ -273,6 +273,9 @@ void LiquidCrystal::updateBlinkState()
     }
     if (mCursor)
     {
+#if 1
+        mCursorChar = mCursorChar != 0 ? 0 : 1;
+#else
         if (mCursorChar)
         {
             mText[mRowCursor][mColumnCursor] = mCursorChar;
@@ -284,5 +287,6 @@ void LiquidCrystal::updateBlinkState()
             mText[mRowCursor][mColumnCursor] = ' ';
         }
         mChanged = true;
+#endif
     }
 }

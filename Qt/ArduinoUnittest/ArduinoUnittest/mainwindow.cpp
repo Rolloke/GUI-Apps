@@ -241,17 +241,33 @@ void MainWindow::on_OneSecond()
 
 void MainWindow::updateLiquidCrystal()
 {
-    if (mLiquidCrystal && mLiquidCrystal->isChanged())
+    if (mLiquidCrystal)
     {
-        QString fText;
-        for (int fLine = 0; fLine < mLiquidCrystal->getLines(); ++fLine)
+        if (mLiquidCrystal->isChanged())
         {
-            fText += QString("[") + mLiquidCrystal->getDisplayTextLine(fLine).c_str() + QString("]\n");
+            QString fText;
+            for (int fLine = 0; fLine < mLiquidCrystal->getLines(); ++fLine)
+            {
+                fText += QString("[") + mLiquidCrystal->getDisplayTextLine(fLine).c_str() + QString("]\n");
+            }
+            ui->textLCD_Sim->setText(fText);
+            mLiquidCrystal->setUnchanged();
         }
-        ui->textLCD_Sim->setText(fText);
         uint8_t fRow, fCol;
-        mLiquidCrystal->getCursor(fRow, fCol);
-        mLiquidCrystal->setUnchanged();
+        if (mLiquidCrystal->getCursor(fRow, fCol))
+        {
+            QTextCursor cursor;
+            if (mLiquidCrystal->getCursorState())
+            {
+                int pos = fRow * (mLiquidCrystal->getDisplayTextLine(0).size() + 2) + fCol + 1;
+                cursor.setPosition(pos);
+            }
+            else
+            {
+                cursor.clearSelection();
+            }
+            ui->textLCD_Sim->setTextCursor(cursor);
+        }
     }
 }
 
@@ -274,7 +290,7 @@ int  MainWindow::getPinValue(int aPin, int aRange)
     }
     else
     {
-        printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
+        //printToSeriaDisplay("Wrong pin number: " + QString::number(aPin) + "\n");
     }
 
     return -1;

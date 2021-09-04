@@ -17,10 +17,6 @@ ActionList::ActionList(QObject* parent): mParent(parent)
 
 ActionList::~ActionList()
 {
-    for (auto& action : mActionList)
-    {
-        delete action.second;
-    }
 }
 
 QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QString& git_command, QObject* parent)
@@ -49,7 +45,6 @@ void ActionList::deleteAction(git::Cmd::eCmd cmd)
 {
     if (mActionList.count(cmd))
     {
-        delete mActionList[cmd];
         mActionList.erase(cmd);
     }
 }

@@ -15,6 +15,10 @@ ARDUINO_PATH = ../../../Arduino/Sketches/OctansSimulator/$${SKETCH_NAME}
 INCLUDEPATH += $${ARDUINO_PATH}
 SOURCES += OctansSimulatorino.cpp
 SOURCES += $${ARDUINO_PATH}/$${SKETCH_NAME}.ino
+SOURCES += $${ARDUINO_PATH}/MPU6050_control.cpp
+HEADERS += $${ARDUINO_PATH}/MPU6050_control.h
+SOURCES += $${ARDUINO_PATH}/OctansSimulatorMenu.cpp
+HEADERS += $${ARDUINO_PATH}/OctansSimulatorMenu.h
 
 
 # Libraries

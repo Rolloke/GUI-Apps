@@ -65,5 +65,41 @@
         <file>resource/24X24/stylesheet-branch-end.png</file>
         <file>resource/24X24/stylesheet-branch-closed.png</file>
         <file>resource/24X24/stylesheet-branch-open.png</file>
+        <file>resource/24X24/accessories-dictionary.png</file>
+        <file>resource/24X24/applications-development.png</file>
+        <file>resource/24X24/applications-engineering.png</file>
+        <file>resource/24X24/applications-graphics.png</file>
+        <file>resource/24X24/applications-office.png</file>
+        <file>resource/24X24/applications-other.png</file>
+        <file>resource/24X24/applications-science.png</file>
+        <file>resource/24X24/appointment-soon.png</file>
+        <file>resource/24X24/dialog-error.png</file>
+        <file>resource/24X24/dialog-warning.png</file>
+        <file>resource/24X24/document-new.png</file>
+        <file>resource/24X24/document-save.png</file>
+        <file>resource/24X24/emblem-favorite.png</file>
+        <file>resource/24X24/emblem-important.png</file>
+        <file>resource/24X24/emblem-new.png</file>
+        <file>resource/24X24/emblem-package.png</file>
+        <file>resource/24X24/emblem-photos.png</file>
+        <file>resource/24X24/emblem-urgent.png</file>
+        <file>resource/24X24/gnome-app-install-star.png</file>
+        <file>resource/24X24/go-bottom.png</file>
+        <file>resource/24X24/go-home.png</file>
+        <file>resource/24X24/go-jump.png</file>
+        <file>resource/24X24/go-last.png</file>
+        <file>resource/24X24/go-last-rtl.png</file>
+        <file>resource/24X24/go-top.png</file>
+        <file>resource/24X24/help-about.png</file>
+        <file>resource/24X24/help-contents.png</file>
+        <file>resource/24X24/image-svg+xml.png</file>
+        <file>resource/24X24/mail-signed-verified.png</file>
+        <file>resource/24X24/mate.png</file>
+        <file>resource/24X24/media-playlist-shuffle.png</file>
+        <file>resource/24X24/non-starred.png</file>
+        <file>resource/24X24/preferences-desktop-locale.png</file>
+        <file>resource/24X24/text-x-log.png</file>
+        <file>resource/24X24/text-x-patch.png</file>
+        <file>resource/24X24/view-fullscreen.png</file>
     </qresource>
 </RCC>

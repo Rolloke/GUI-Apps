@@ -90,6 +90,8 @@ public:
   void setUnchanged();
   void updateBlinkState();
   bool getCursor(uint8_t& aRow, uint8_t &aCol);
+  bool getBlinkState() { return mBlinkState; }
+  bool getCursorState(){ return mCursorChar; }
 
 
   using Print::write;
