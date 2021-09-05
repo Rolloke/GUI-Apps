@@ -12,8 +12,6 @@ QHistoryTreeWidget::QHistoryTreeWidget(QWidget *parent): QTreeWidget(parent)
 {
     setVisible(false);
     setContextMenuPolicy(Qt::CustomContextMenu);
-    header()->setSectionResizeMode(History::Column::Text, QHeaderView::Stretch);
-    header()->setStretchLastSection(false);
 }
 
 
@@ -25,6 +23,13 @@ void QHistoryTreeWidget::clear()
 
 void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType)
 {
+    if (!mInitialized)
+    {
+        header()->setSectionResizeMode(History::Column::CommitDate, QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(History::Column::Description, QHeaderView::Stretch);
+        header()->setStretchLastSection(false);
+        mInitialized = true;
+    }
     QVector<QStringList> fList;
     History::parse(fText, fList);
     // TODO: validate parse diffs between branches (files)
@@ -51,7 +56,8 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
         {
             QTreeWidgetItem* fNewHistoryLogItem = new QTreeWidgetItem();
             topLevelItem(fTLI)->addChild(fNewHistoryLogItem);
-            fNewHistoryLogItem->setText(History::Column::Text, fItem[History::Entry::CommitterDate]);
+            fNewHistoryLogItem->setText(History::Column::CommitDate, fItem[History::Entry::CommitterDate]);
+            fNewHistoryLogItem->setText(History::Column::Description, fItem[History::Entry::SubjectAndBody].split("\n")[0]);
             fNewHistoryLogItem->setText(History::Column::Author, fItem[History::Entry::Author]);
             fAuthors[fItem[History::Entry::Author]] = true;
             for (int fRole=0; fRole < History::Entry::NoOfEntries; ++fRole)
@@ -134,7 +140,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
                     mSelectedTopLevelItemType = fType.type();
                     if (fType.is(Type::File))
                     {
-                        mHistoryFile = fParentHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();
+                        mHistoryFile = fParentHistoryItem->data(History::Column::CommitDate, Qt::DisplayRole).toString();
                     }
                     for (auto fIndex = fSelectedIndexes.rbegin(); fIndex != fSelectedIndexes.rend(); ++fIndex)
                     {
@@ -150,7 +156,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
             case Level::File:
             {
                 QTreeWidgetItem* fTopLevelItem   = getTopLevelItem(*this, fSelectedHistoryItem);
-                mHistoryFile                     = fSelectedHistoryItem->data(History::Column::Text, Qt::DisplayRole).toString();
+                mHistoryFile                     = fSelectedHistoryItem->data(History::Column::CommitDate, Qt::DisplayRole).toString();
                 fItemData                        = fTopLevelItem->data(History::Column::Commit, History::Role::ContextMenuItem);
                 QTreeWidgetItem* fHistoryLogItem = fSelectedHistoryItem->parent();
                 QTreeWidgetItem* fLogItemParent  = fHistoryLogItem->parent();
@@ -185,7 +191,7 @@ QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )
     int fLevel = getItemLevel(aItem);
     if (fLevel == Level::Log)
     {
-        if (aColumn == History::Column::Text)
+        if (aColumn == History::Column::CommitDate)
         {
             for (int fRole=History::Entry::CommitHash; fRole < History::Entry::NoOfEntries; ++fRole)
             {
@@ -273,12 +279,12 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
             if (fType.is(Type::Branch))
             {   // TODO: validate, if this is correct also for branch
                 fGitCmd += " -- ";
-                fGitCmd += fParent->text(History::Column::Text);
+                fGitCmd += fParent->text(History::Column::CommitDate);
             }
             else
             {
                 fGitCmd += " -- ";
-                fGitCmd += fParent->text(History::Column::Text);
+                fGitCmd += fParent->text(History::Column::CommitDate);
             }
 
             QString fResultStr;
