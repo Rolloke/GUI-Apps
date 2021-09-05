@@ -67,8 +67,6 @@ using namespace git;
 
 // TODO: show branch graphically
 // TODO: checkout commit for branch, folder or file also from history
-// TODO: show date, description and author in history view
-// TODO: use diff-tool for history diffs
 // TODO: diff branches: git diff branch1...branch2
 
 namespace config
@@ -2117,6 +2115,8 @@ void MainWindow::call_git_history_diff_command()
     const QString &fHistoryFile      = ui->treeHistory->getSelectedHistoryFile();
     const QAction *fAction           = qobject_cast<QAction *>(sender());
     const Type    fType(ui->treeHistory->getSelectedTopLevelType());
+    const QVariantList fVariantList  = fAction->data().toList();
+    const uint    command_flags = fVariantList[ActionList::Data::Flags].toUInt();
 
     QString fPath;
     if (fType.is(Type::Branch) && mContextMenuSourceTreeItem)
@@ -2126,7 +2126,12 @@ void MainWindow::call_git_history_diff_command()
     }
     if (mContextMenuSourceTreeItem)
     {
-        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems).arg("-- %1");
+        QString tool_cmd;
+        if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
+        {
+            tool_cmd = " --tool=" + ui->comboDiffTool->currentText();
+        }
+        QString fCmd = tr(fAction->statusTip().toStdString().c_str()).arg(fHistoryHashItems + tool_cmd).arg("-- %1");
         if (fHistoryFile.size())
         {
             const QString fQuotedHistoryFile = "\"" + fHistoryFile + "\"";

@@ -30,7 +30,8 @@ struct History
 {
     struct Column { enum e
     {
-        Text,
+        CommitDate,
+        Description,
         Author,
         Commit
     }; };

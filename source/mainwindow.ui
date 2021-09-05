@@ -439,6 +439,11 @@
               </column>
               <column>
                <property name="text">
+                <string>Description</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
                 <string>Author</string>
                </property>
               </column>

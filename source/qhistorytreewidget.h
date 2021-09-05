@@ -42,7 +42,8 @@ private:
 
     QString mHistoryFile;
     QString mHistoryHashItems;
-    uint    mSelectedTopLevelItemType;
+    uint    mSelectedTopLevelItemType { 0 };
+    bool    mInitialized { false };
 
 };
 
