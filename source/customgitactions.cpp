@@ -156,6 +156,7 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
         case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
         case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
         case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
+        case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
         case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
         case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
         default: break;
@@ -172,6 +173,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
         case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
         case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
         case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
+        case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
         case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
         case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
         case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
@@ -564,6 +566,12 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     fA_HistoryCmd->setEnabled(custom_enabled);
     set_tooltip(fA_HistoryCmd, tr("The git command is called in history view context"));
 
+    QAction* fA_StashCmd = fMenu.addAction(tr("Stash command"));
+    fA_StashCmd->setCheckable(true);
+    fA_StashCmd->setChecked(fFlags & ActionList::Flags::Stash);
+    fA_StashCmd->setEnabled(custom_enabled);
+    set_tooltip(fA_StashCmd, tr("The git command is called in stash view context"));
+
     QAction* fA_ThreadCmd  = fMenu.addAction(tr("Invoke command unattached"));
     fA_ThreadCmd->setCheckable(true);
     fA_ThreadCmd->setChecked(fFlags & ActionList::Flags::CallInThread);
@@ -624,6 +632,11 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         if (fA_BranchCmd == fSelected)
         {
             mActionList.setFlags(fCmd, ActionList::Flags::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
+            modified = true;
+        }
+        if (fA_StashCmd == fSelected)
+        {
+            mActionList.setFlags(fCmd, ActionList::Flags::Stash, fA_StashCmd->isChecked() ? Flag::set : Flag::remove);
             modified = true;
         }
         if (fA_ThreadCmd == fSelected)

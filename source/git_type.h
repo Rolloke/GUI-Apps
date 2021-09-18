@@ -48,6 +48,9 @@ struct Cmd
         BranchHistory,
         CallMergeTool,
         StashShow,
+        StashList,
+        StashClear,
+        StashDrop,
 
         /// hint: add further git commands here
         CustomCommand=50,
@@ -86,6 +89,7 @@ struct Cmd
         UpdateItemStatus,
         ParseHistoryText,
         ParseBranchListText,
+        ParseStashListText,
     };
 
     typedef std::vector<eCmd> tVector;
@@ -102,6 +106,7 @@ struct Cmd
     static tVector mContextMenuEmptySourceTree;
     static tVector mContextMenuHistoryTree;
     static tVector mContextMenuBranchTree;
+    static tVector mContextMenuStashTree;
     static std::vector<tVector> mToolbars;
 #ifdef DOCKED_VIEWS
     static std::vector<QString> mToolbarNames;

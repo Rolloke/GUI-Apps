@@ -59,6 +59,9 @@ private Q_SLOTS:
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
+    void on_treeStash_customContextMenuRequested(const QPoint &pos);
+    void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
     void on_btnFindAll_clicked();
@@ -74,6 +77,8 @@ private Q_SLOTS:
     void perform_custom_command();
     void call_git_history_diff_command();
     void call_git_branch_command();
+    void call_git_stash_command();
+    int  call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
 
     void invoke_git_merge_dialog();
     void invoke_highlighter_dialog();
@@ -191,7 +196,6 @@ private:
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
     void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
-    void     parseGitStash(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     enum class find { forward, backward, all };
@@ -202,7 +206,7 @@ private:
     enum class copy { name, path, file };
     void     copy_file(copy command);
 
-    void     createAutoCmd(QCheckBox*);
+    void     createAutoCmd(QCheckBox*, std::string icon_path="");
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

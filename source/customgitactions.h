@@ -25,6 +25,7 @@ class CustomGitActions : public QDialog
         MenuEmptySrcTree,
         MenuHistoryTree,
         MenuBranchTree,
+        MenuStashTree,
         Toolbar1,
         Toolbar2,
         MergeTool,

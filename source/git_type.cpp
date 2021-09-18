@@ -12,6 +12,7 @@ Cmd::tVector  Cmd::mContextMenuSourceTree;
 Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
 Cmd::tVector  Cmd::mContextMenuHistoryTree;
 Cmd::tVector  Cmd::mContextMenuBranchTree;
+Cmd::tVector  Cmd::mContextMenuStashTree;
 std::vector<Cmd::tVector> Cmd::mToolbars;
 #ifdef DOCKED_VIEWS
 std::vector<QString> Cmd::mToolbarNames;
@@ -39,9 +40,12 @@ Cmd::Cmd()
     mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1 -- %2";
     mCommandMap[Push]                   = "git -C %1 push";
     mCommandMap[Pull]                   = "git -C %1 pull";
-    mCommandMap[Stash]                  = "git -C %1 stash";
+    mCommandMap[Stash]                  = "git -C %1 stash %1";
     mCommandMap[StashPop]               = "git -C %1 stash pop";
     mCommandMap[StashShow]              = "git -C %1 stash show";
+    mCommandMap[StashList]              = "git -C %1 stash list";
+    mCommandMap[StashClear]             = "git -C %1 stash clear";
+    mCommandMap[StashDrop]              = "git -C %1 stash drop %2";
     mCommandMap[Show]                   = "git show %1 %2";
 
     mCommandMap[BranchList]             = "git -C %1 branch --list";
@@ -58,8 +62,9 @@ Cmd::Cmd()
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
+    mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashDrop, StashClear, Separator, ShowHideTree, ClearTreeItems };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, StashList, About, KillBackgroundThread});
     mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, Separator, Commit, Push, Pull, Separator, Stash, StashShow, StashPop, Separator, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
     mToolbarNames.push_back(QObject::tr("Git Commands"));
@@ -76,6 +81,7 @@ QString Cmd::toString(const ePostAction anAction)
     case UpdateItemStatus:      return QObject::tr("Update Item Status");
     case ParseHistoryText:      return QObject::tr("Parse History List Text");
     case ParseBranchListText:   return QObject::tr("Parse Branch List Text");
+    case ParseStashListText:    return QObject::tr("Parse Stash List Text");
     }
     return "";
 }
@@ -182,39 +188,39 @@ uint Type::level() const
 
 QString Type::getStates(bool extended) const
 {
-    const QString fSep = "|";
-    QString fState = fSep;
-    if (     is(GitAdded    ))  fState += name(GitAdded)     + fSep;
-    if (     is(GitDeleted  ))  fState += name(GitDeleted)   + fSep;
-    if (     is(GitModified ))  fState += name(GitModified)  + fSep;
-    if (     is(GitUnTracked))  fState += name(GitUnTracked) + fSep;
-    if (     is(GitStaged   ))  fState += name(GitStaged)    + fSep;
-    if (     is(GitUnmerged ))  fState += name(GitUnmerged)  + fSep;
-    if (     is(GitLocal    ))  fState += name(GitLocal)     + fSep;
-    if (     is(GitRemote   ))  fState += name(GitRemote)    + fSep;
-    if (     is(GitBoth     ))  fState += name(GitBoth)      + fSep;
-    if (     is(GitStashed  ))  fState += name(GitStashed)   + fSep;
+    const QString sep = "|";
+    QString states = sep;
+    if (     is(GitAdded    ))  states += name(GitAdded)     + sep;
+    if (     is(GitDeleted  ))  states += name(GitDeleted)   + sep;
+    if (     is(GitModified ))  states += name(GitModified)  + sep;
+    if (     is(GitUnTracked))  states += name(GitUnTracked) + sep;
+    if (     is(GitStaged   ))  states += name(GitStaged)    + sep;
+    if (     is(GitUnmerged ))  states += name(GitUnmerged)  + sep;
+    if (     is(GitLocal    ))  states += name(GitLocal)     + sep;
+    if (     is(GitRemote   ))  states += name(GitRemote)    + sep;
+    if (     is(GitBoth     ))  states += name(GitBoth)      + sep;
+    if (     is(GitStashed  ))  states += name(GitStashed)   + sep;
 
-    if      (is(GitMovedFrom))  fState += name(GitMovedFrom) + fSep;
-    else if (is(GitMovedTo  ))  fState += name(GitMovedTo)   + fSep;
-    else if (is(GitRenamed  ))  fState += name(GitRenamed)   + fSep;
+    if      (is(GitMovedFrom))  states += name(GitMovedFrom) + sep;
+    else if (is(GitMovedTo  ))  states += name(GitMovedTo)   + sep;
+    else if (is(GitRenamed  ))  states += name(GitRenamed)   + sep;
 
     if (extended)
     {
-        if      (is(SymLink))     fState += name(SymLink)     + fSep;
-        else if (is(Repository))  fState += name(Repository)  + fSep;
-        else if (is(File))        fState += name(File)        + fSep;
-        else if (is(Folder))      fState += name(Folder)      + fSep;
-        else if (is(Branch))      fState += name(Branch)      + fSep;
-        else if (is(Hidden))      fState += name(Hidden)      + fSep;
-        else if (is(WildCard))    fState += name(WildCard)    + fSep;
-        else if (is(RegExp))      fState += name(RegExp)      + fSep;
-        else if (is(Negation))    fState += name(Negation)    + fSep;
-        else if (is(FolderForNavigation))  fState += name(FolderForNavigation) + fSep;
-        else if (is(Checked))     fState += name(Checked)     + fSep;
-        else if (is(Executeable)) fState += name(Executeable) + fSep;
+        if      (is(SymLink))     states += name(SymLink)     + sep;
+        else if (is(Repository))  states += name(Repository)  + sep;
+        else if (is(File))        states += name(File)        + sep;
+        else if (is(Folder))      states += name(Folder)      + sep;
+        else if (is(Branch))      states += name(Branch)      + sep;
+        else if (is(Hidden))      states += name(Hidden)      + sep;
+        else if (is(WildCard))    states += name(WildCard)    + sep;
+        else if (is(RegExp))      states += name(RegExp)      + sep;
+        else if (is(Negation))    states += name(Negation)    + sep;
+        else if (is(FolderForNavigation))  states += name(FolderForNavigation) + sep;
+        else if (is(Checked))     states += name(Checked)     + sep;
+        else if (is(Executeable)) states += name(Executeable) + sep;
     }
-    return fState;
+    return states;
 }
 
 #define RETURN_NAME(NAME) case NAME: return #NAME

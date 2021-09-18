@@ -249,6 +249,11 @@ Contextmenu entries or Toolbar entries</string>
        </item>
        <item>
         <property name="text">
+         <string>Menu Stash Tree</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Toolbar 1</string>
         </property>
        </item>
