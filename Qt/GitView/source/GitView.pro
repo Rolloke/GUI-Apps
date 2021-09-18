@@ -37,6 +37,7 @@ SOURCES += main.cpp\
     customgitactions.cpp \
     qbranchtreewidget.cpp \
     qhistorytreewidget.cpp \
+    qstashtreewidget.cpp \
     gitignore.cpp \
     aboutdlg.cpp \
     highlighter.cpp \
@@ -56,6 +57,7 @@ HEADERS  += mainwindow.h \
     customgitactions.h \
     qbranchtreewidget.h \
     qhistorytreewidget.h \
+    qstashtreewidget.h \
     gitignore.h \
     aboutdlg.h \
     highlighter.h \

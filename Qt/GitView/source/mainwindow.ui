@@ -450,6 +450,38 @@
              </widget>
             </item>
             <item>
+             <widget class="QStashTreeWidget" name="treeStash">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Shows git stashed of files or folders</string>
+              </property>
+              <property name="statusTip">
+               <string>Git stash view</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>Stash</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Description</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
              <widget class="QBranchTreeWidget" name="treeBranches">
               <property name="toolTip">
                <string>Shows git branches</string>
@@ -613,10 +645,13 @@ File content opened with double click</string>
       <item>
        <widget class="QCheckBox" name="ckRenderGraphicFile">
         <property name="toolTip">
-         <string>Render Graphics or HTML File</string>
+         <string>Render graphics or HTML file in Graphics View</string>
         </property>
         <property name="text">
-         <string>Render</string>
+         <string>Render File</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -754,6 +789,11 @@ File content opened with double click</string>
    <class>QHistoryTreeWidget</class>
    <extends>QTreeWidget</extends>
    <header location="global">qhistorytreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QStashTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qstashtreewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
