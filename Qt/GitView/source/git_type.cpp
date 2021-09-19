@@ -40,13 +40,14 @@ Cmd::Cmd()
     mCommandMap[History]                = "git log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %1 -- %2";
     mCommandMap[Push]                   = "git -C %1 push";
     mCommandMap[Pull]                   = "git -C %1 pull";
-    mCommandMap[Stash]                  = "git -C %1 stash %1";
-    mCommandMap[StashPop]               = "git -C %1 stash pop";
+    mCommandMap[Stash]                  = "git -C %1 stash push";
+    mCommandMap[StashPop]               = "git -C %1 stash pop %2";
     mCommandMap[StashShow]              = "git -C %1 stash show";
     mCommandMap[StashList]              = "git -C %1 stash list";
     mCommandMap[StashClear]             = "git -C %1 stash clear";
     mCommandMap[StashDrop]              = "git -C %1 stash drop %2";
     mCommandMap[Show]                   = "git show %1 %2";
+    mCommandMap[Fetch]                  = "git -C %1 fetch";
 
     mCommandMap[BranchList]             = "git -C %1 branch --list";
     mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
@@ -57,15 +58,15 @@ Cmd::Cmd()
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
 
-    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, Separator, ExpandTreeItems, CollapseTreeItems  };
+    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, History, StashShow, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashDrop, StashClear, Separator, ShowHideTree, ClearTreeItems };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, Separator, ShowStatus, ShowShortStatus, BranchList, StashList, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, Separator, Commit, Push, Pull, Separator, Stash, StashShow, StashPop, Separator, CustomGitActionSettings});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, StashPop, Separator, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
     mToolbarNames.push_back(QObject::tr("Git Commands"));
     mToolbarNames.push_back(QObject::tr("Control Commands"));

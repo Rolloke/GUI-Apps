@@ -8,26 +8,8 @@
 #include "logger.h"
 
 using namespace git;
-// TODO: show stash difference of single files
-// > git stash list
-// stash@{0}: WIP on master: 924f420 show stashed files in repository tree
-// > git show stash@{0}
-// commit 14206bae46ae44e641b458435895eb22b2262aad (refs/stash)
-// Merge: 924f420 ca100e5
-// Author: Rolf (Werkstatt) <rolf-kary-ehlers@t-online.de>
-// Date:   Mon Jul 5 21:04:38 2021 +0200
-//   WIP on master: 924f420 show stashed files in repository tree
-// > git stash show stash@{0}
-// Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp  |  32 +-
-// > git difftool 14206bae46ae44e641b458435895eb22b2262aad Qt/ArduinoUnittest/ArduinoUnittest/mainwindow.cpp
 
 // TODO: doubleclick on stashed item selects item in repository view
-
-// applyGitCommandToFilePath(source_dir.path(), Cmd::getCommand(Cmd::StashShow), result_string);
-// parseGitStash(source_dir.path() +  QDir::separator(), result_string, check_map);
-
-//// TODO: stash
-//applyGitCommandToFilePath(source_dir.path(), "git stash list", result_string);
 
 QStashTreeWidget::QStashTreeWidget(QWidget *parent): QTreeWidget(parent)
 {
@@ -44,6 +26,14 @@ void QStashTreeWidget::clear()
 
 bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QString& git_root_path)
 {
+    if (!mInitialized)
+    {
+        header()->setSectionResizeMode(Column::Text, QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(Column::Description, QHeaderView::Stretch);
+        //header()->setStretchLastSection(false);
+        mInitialized = true;
+    }
+
     QStringList result_lines = branch_text.split('\n');
     int line_index = 0;
     bool items_inserted {false};

@@ -79,6 +79,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::Restore]                 = ":/resource/24X24/edit-redo-rtl.png";
     action_icons[Cmd::Push]                    = ":/resource/24X24/view-sort-descending.png";
     action_icons[Cmd::Pull]                    = ":/resource/24X24/view-sort-ascending.png";
+    action_icons[Cmd::Fetch]                   = ":/resource/24X24/go-jump.png";
     action_icons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
     action_icons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
     action_icons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
