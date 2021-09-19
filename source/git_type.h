@@ -51,6 +51,7 @@ struct Cmd
         StashList,
         StashClear,
         StashDrop,
+        Fetch,
 
         /// hint: add further git commands here
         CustomCommand=50,

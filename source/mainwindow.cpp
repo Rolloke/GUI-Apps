@@ -1664,16 +1664,18 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
     connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Pull, ActionList::Flags::CallInThread, Flag::set);
+    connect(mActions.createAction(Cmd::Fetch          , tr("Fetch"), Cmd::getCommand(Cmd::Fetch)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::Fetch, ActionList::Flags::CallInThread, Flag::set);
     connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
     connect(mActions.createAction(Cmd::Stash          , tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Stash, "Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
+    connect(mActions.createAction(Cmd::StashShow      , tr("Show stash"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::StashClear     , tr("Stash clear"), Cmd::getCommand(Cmd::StashClear)), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashClear, "Remove all stash entries;Do you whant to remove all stash entries of repository:\n\"%1\"?");
-    connect(mActions.createAction(Cmd::StashShow      , tr("Stash show"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     connect(mActions.createAction(Cmd::StashList      , tr("List stashes"),Cmd::getCommand(Cmd::StashList)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandPostAction(Cmd::StashList, Cmd::ParseStashListText);
 
