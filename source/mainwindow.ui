@@ -539,7 +539,10 @@ File content opened with double click</string>
              </widget>
             </item>
             <item>
-             <widget class="QGraphicsView" name="graphicsView">
+             <widget class="graphics_view" name="graphicsView">
+              <property name="contextMenuPolicy">
+               <enum>Qt::CustomContextMenu</enum>
+              </property>
               <property name="toolTip">
                <string>Shows graphics file content opened with double click</string>
               </property>
@@ -794,6 +797,11 @@ File content opened with double click</string>
    <class>QStashTreeWidget</class>
    <extends>QTreeWidget</extends>
    <header location="global">qstashtreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>graphics_view</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">graphics_view.h</header>
   </customwidget>
  </customwidgets>
  <resources>

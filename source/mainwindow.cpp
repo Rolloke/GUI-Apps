@@ -122,8 +122,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::setUpdateFunction(boost::bind(&MainWindow::updateSelectedLanguage, this, _1));
     mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
 
-    ui->graphicsView->setScene(new QGraphicsScene ());
-
     ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(Column::DateTime, QHeaderView::Interactive);
@@ -1004,7 +1002,7 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append)
     }
     mHighlighter->setExtension("");
     ui->textBrowser->insertPlainText(aText + getLineFeed());
-    ui->textBrowser->textCursor().setPosition(QTextCursor::End);
+    ui->textBrowser->textCursor().movePosition(QTextCursor::End);
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif
@@ -1346,15 +1344,10 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 
 void MainWindow::addItem2graphicsView(QGraphicsItem*item)
 {
-    auto scene = ui->graphicsView->scene();
-    if (scene)
-    {
-        scene->addItem(item);
+    ui->graphicsView->addItem2graphicsView(item);
 #ifdef DOCKED_VIEWS
-        showDockedWidget(ui->graphicsView);
+   showDockedWidget(ui->graphicsView);
 #endif
-    }
-
 }
 
 void MainWindow::updateSelectedLanguage(const QString& language)
@@ -1756,6 +1749,15 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CopyFileName, ActionList::Flags::FunctionCmd, Flag::set);
     connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file and path"), tr("Copy file or folder and path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
     mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
+
+    connect(mActions.createAction(Cmd::ZoomIn, tr("Zoom in"), tr("Zoom in (make larger)")), SIGNAL(triggered()), ui->graphicsView, SLOT(zoomIn()));
+    mActions.setFlags(Cmd::ZoomIn, ActionList::Flags::FunctionCmd, Flag::set);
+    connect(mActions.createAction(Cmd::ZoomOut, tr("Zoom out"), tr("Zoom out (make smaller)")), SIGNAL(triggered()), ui->graphicsView, SLOT(zoomOut()));
+    mActions.setFlags(Cmd::ZoomOut, ActionList::Flags::FunctionCmd, Flag::set);
+    connect(mActions.createAction(Cmd::FitInView, tr("Fit in View"), tr("Fits Item in View, when opened")), SIGNAL(triggered(bool)), ui->graphicsView, SLOT(fit_inView(bool)));
+    mActions.setFlags(Cmd::FitInView, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.getAction(Cmd::FitInView)->setCheckable(true);
+
 
     createAutoCmd(ui->ckDirectories);
     createAutoCmd(ui->ckFiles);
@@ -2431,6 +2433,11 @@ void MainWindow::on_treeStash_customContextMenuRequested(const QPoint &pos)
     ui->treeStash->on_customContextMenuRequested(mActions, pos);
 }
 
+void MainWindow::on_graphicsView_customContextMenuRequested(const QPoint &pos)
+{
+    ui->graphicsView->on_customContextMenuRequested(mActions, pos);
+}
+
 void MainWindow::gitview_about()
 {
     AboutDlg dlg(this);
@@ -2768,4 +2775,6 @@ void MainWindow::on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTree
 {
     ui->treeStash->on_currentItemChanged(current, previous);
 }
+
+
 

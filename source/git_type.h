@@ -52,6 +52,9 @@ struct Cmd
         StashClear,
         StashDrop,
         Fetch,
+        ZoomIn,
+        ZoomOut,
+        FitInView,
 
         /// hint: add further git commands here
         CustomCommand=50,
@@ -108,6 +111,7 @@ struct Cmd
     static tVector mContextMenuHistoryTree;
     static tVector mContextMenuBranchTree;
     static tVector mContextMenuStashTree;
+    static tVector mContextMenuGraphicsView;
     static std::vector<tVector> mToolbars;
 #ifdef DOCKED_VIEWS
     static std::vector<QString> mToolbarNames;

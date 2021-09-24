@@ -62,6 +62,8 @@ private Q_SLOTS:
     void on_treeStash_customContextMenuRequested(const QPoint &pos);
     void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
+    void on_graphicsView_customContextMenuRequested(const QPoint &pos);
+
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
     void on_btnFindAll_clicked();

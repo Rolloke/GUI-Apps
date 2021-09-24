@@ -71,6 +71,10 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->tableViewVarious->setColumnWidth(VariousHeader::Name, INT(0.75 * fWidth));
 
     enableButtons(0);
+    for (int i=0; i< VariousListIndex::Size; ++i)
+    {
+        ui->comboBoxVarious->addItem(getVariousListHeader(static_cast<VariousListIndex::e>(i)));
+    }
     on_comboBoxVarious_currentIndexChanged(VariousListIndex::Icons);
 }
 
@@ -154,12 +158,16 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     {
         case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
         case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
+        case VariousListIndex::MenuGraphicView:     return Cmd::mContextMenuGraphicsView;
         case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
         case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
         case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
         case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
         case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
-        default: break;
+        case VariousListIndex::Size:
+        case VariousListIndex::MergeTool:
+        case VariousListIndex::Icons:
+        break;
     }
     return fDummy;
 }
@@ -171,12 +179,14 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
         case VariousListIndex::Icons:               return tr("Icons");
         case VariousListIndex::MenuSrcTree:         return tr("Context Menu Source");
         case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
+        case VariousListIndex::MenuGraphicView:     return tr("Context Menu Graphics View");
         case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
         case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
         case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
         case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
         case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
         case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
+        case VariousListIndex::Size: break;
     }
     return "";
 }

@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     highlighter.cpp \
     xml_functions.cpp \
     mergedialog.cpp \
-    qradiobuttongroup.cpp
+    qradiobuttongroup.cpp \
+    graphics_view.cpp
 
 HEADERS  += mainwindow.h \
     helper.h \
@@ -63,7 +64,8 @@ HEADERS  += mainwindow.h \
     highlighter.h \
     xml_functions.h \
     mergedialog.h \
-    qradiobuttongroup.h
+    qradiobuttongroup.h \
+    graphics_view.h
 
 
 FORMS    += mainwindow.ui \
