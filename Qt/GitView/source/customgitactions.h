@@ -23,12 +23,14 @@ class CustomGitActions : public QDialog
         Icons,
         MenuSrcTree,
         MenuEmptySrcTree,
+        MenuGraphicView,
         MenuHistoryTree,
         MenuBranchTree,
         MenuStashTree,
         Toolbar1,
         Toolbar2,
         MergeTool,
+        Size,
         FirstCmds=MenuSrcTree,
         LastCmds=Toolbar2
     };};

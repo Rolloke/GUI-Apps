@@ -13,6 +13,7 @@ Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
 Cmd::tVector  Cmd::mContextMenuHistoryTree;
 Cmd::tVector  Cmd::mContextMenuBranchTree;
 Cmd::tVector  Cmd::mContextMenuStashTree;
+Cmd::tVector  Cmd::mContextMenuGraphicsView;
 std::vector<Cmd::tVector> Cmd::mToolbars;
 #ifdef DOCKED_VIEWS
 std::vector<QString> Cmd::mToolbarNames;
@@ -64,6 +65,7 @@ Cmd::Cmd()
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashDrop, StashClear, Separator, ShowHideTree, ClearTreeItems };
+    mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
     mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, StashPop, Separator, CustomGitActionSettings});

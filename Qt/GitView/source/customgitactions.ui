@@ -222,51 +222,6 @@
         <string>Select icons
 Contextmenu entries or Toolbar entries</string>
        </property>
-       <item>
-        <property name="text">
-         <string>Icons</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Menu Source Tree</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Menu Empty Source Tree</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Menu History Tree</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Menu Branch Tree</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Menu Stash Tree</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Toolbar 1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Toolbar 2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Diff or Merge Tool</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>

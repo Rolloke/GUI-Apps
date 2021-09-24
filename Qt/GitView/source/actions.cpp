@@ -112,7 +112,9 @@ void ActionList::initActionIcons()
     action_icons[Cmd::CopyFileName]            = ":/resource/24X24/edit-copy.png";
     action_icons[Cmd::CopyFilePath]            = ":/resource/24X24/edit-copy.png";
     action_icons[Cmd::RemoveGitFolder]         = ":/resource/24X24/folder.png";
-
+    action_icons[Cmd::ZoomIn]                  = ":/resource/24X24/list-add.png";
+    action_icons[Cmd::ZoomOut]                 = ":/resource/24X24/list-remove.png";
+    action_icons[Cmd::FitInView]               = ":/resource/24X24/view-fullscreen.png";
 
     for (const auto& icon_path: action_icons )
     {
