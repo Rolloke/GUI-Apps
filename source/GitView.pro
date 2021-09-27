@@ -20,7 +20,9 @@ TEMPLATE = app
 CONFIG += c++17
 unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 

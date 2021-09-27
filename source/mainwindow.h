@@ -49,6 +49,7 @@ private Q_SLOTS:
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
     void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void find_item_in_treeSource(const QString& git_root, const QString& filepath);
 
     void on_ckHideEmptyParent_clicked(bool checked);
     void on_ckShortState_clicked(bool checked);
@@ -61,6 +62,7 @@ private Q_SLOTS:
 
     void on_treeStash_customContextMenuRequested(const QPoint &pos);
     void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 

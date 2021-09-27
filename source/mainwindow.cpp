@@ -135,6 +135,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
 
+    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
+
     fSettings.beginGroup(config::sGroupFilter);
     LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
@@ -766,7 +768,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             fResult = getShowTypeResult(fType);
                             if (fResult == false)
                             {
-                            fResult = fCountOk != 0;
+                                fResult = fCountOk != 0;
                             }
                             aParentItem->setHidden(!fResult); // true means visible
                         }
@@ -2771,10 +2773,52 @@ void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current *
     }
 }
 
+void MainWindow::find_item_in_treeSource(const QString& git_root, const QString& filepath)
+{
+    QStringList items = filepath.split("/");
+    auto list = ui->treeSource->findItems(git_root, Qt::MatchExactly);
+    if (!list.empty() )
+    {
+        auto* found = list[0];
+        for (const QString& item : items)
+        {
+            std::int32_t i;
+            if (found != nullptr)
+            {
+                const auto children = found->childCount();
+                for (i=0; found != nullptr && i<children; ++i)
+                {
+                    if (found->child(i)->text(0) == item)
+                    {
+                        found = found->child(i);
+                        break;
+                    }
+                }
+                if (i == children) found = nullptr;
+            }
+        }
+        if (found)
+        {
+            found->setSelected(true);
+            auto* parent = found->parent();
+            while (parent)
+            {
+                ui->treeSource->setItemExpanded(parent, true);
+                parent = parent->parent();
+            }
+            ui->treeSource->scrollToItem(found);
+        }
+    }
+}
+
+
 void MainWindow::on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
     ui->treeStash->on_currentItemChanged(current, previous);
 }
 
-
+void MainWindow::on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    ui->treeStash->on_itemDoubleClicked(item, column);
+}
 

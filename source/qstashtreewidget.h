@@ -32,8 +32,10 @@ public:
     QString  getStashTopItemText(Role::e role);
     void     on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
     void     on_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void     on_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 Q_SIGNALS:
+    void find_item_in_treeSource(const QString&, const QString&);
 
 public Q_SLOTS:
     void clear();
