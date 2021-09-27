@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 
-project(sysLogger)
+project(acalc)
 
 add_definitions(-D_USE_MATH_DEFINES)
 

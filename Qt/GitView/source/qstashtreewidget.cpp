@@ -9,8 +9,6 @@
 
 using namespace git;
 
-// TODO: doubleclick on stashed item selects item in repository view
-
 QStashTreeWidget::QStashTreeWidget(QWidget *parent): QTreeWidget(parent)
 {
     setVisible(false);
@@ -30,7 +28,6 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
     {
         header()->setSectionResizeMode(Column::Text, QHeaderView::ResizeToContents);
         header()->setSectionResizeMode(Column::Description, QHeaderView::Stretch);
-        //header()->setStretchLastSection(false);
         mInitialized = true;
     }
 
@@ -134,6 +131,12 @@ void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionLi
 void QStashTreeWidget::on_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem * /* previous */)
 {
     mSelectedItem = current;
+}
+
+void QStashTreeWidget::on_itemDoubleClicked(QTreeWidgetItem *item, int /* column */)
+{
+    mSelectedItem = item;
+    emit find_item_in_treeSource(getStashTopItemText(Role::GitRootPath), getSelectedStashItem());
 }
 
 

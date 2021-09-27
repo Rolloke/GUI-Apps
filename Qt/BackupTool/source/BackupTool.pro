@@ -13,6 +13,9 @@ unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
+
 TARGET = BackupTool
 TEMPLATE = app
 
