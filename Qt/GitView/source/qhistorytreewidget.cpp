@@ -303,7 +303,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
             }
             else
             {
-                TRACE(Logger::to_browser, tr("error inserting filenames:\n%1\n%2\nerror number: %d").arg(fGitCmd).arg(fResultStr).toStdString().c_str(), fError);
+                TRACE(Logger::to_browser, tr("error inserting filenames:\n%1\n%2\nerror number: %d").arg(fGitCmd, fResultStr).toStdString().c_str(), fError);
             }
         }
     }

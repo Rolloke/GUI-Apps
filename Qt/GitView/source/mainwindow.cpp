@@ -459,7 +459,7 @@ void MainWindow::createDockWindows()
 
     // stash tree
     dock = new QDockWidget(tr("Stash View"), this);
-    //ui->comboFindBox->addItem(dock->windowTitle());
+    ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("stashview");
     ui->verticalLayout->removeWidget(ui->treeStash);
@@ -761,7 +761,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     }
                     break;
                     case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowStaged: case Work::ShowUnMerged:
-                    case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected: case Work::ShowStashed:
+                    case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected:
                     {
                         if (ui->ckHideEmptyParent->isChecked())
                         {
@@ -807,7 +807,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                             fResult = true;
                             break;
                         case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
-                        case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged: case Work::ShowStashed:
+                        case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged:
                             fResult = getShowTypeResult(fType);
                             aParentItem->setHidden(!fResult); // true means visible
                             break;
@@ -866,9 +866,6 @@ bool MainWindow::getShowTypeResult(const Type& fType)
         break;
     case Work::ShowStaged:
         fResult = fType.is(Type::GitStaged);
-        break;
-    case Work::ShowStashed:
-        fResult = fType.is(Type::GitStashed);
         break;
         case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::DetermineGitMergeTools:
         case Work::ShowAllFiles: case Work::InsertPathFromCommandString: case Work::ShowSelected:
@@ -1405,14 +1402,6 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
     case ComboShowItems::Gitstaged:     mCurrentTask = Work::ShowStaged;        break;
     case ComboShowItems::GitUnmerged:   mCurrentTask = Work::ShowUnMerged;      break;
     case ComboShowItems::GitSelected:   mCurrentTask = Work::ShowSelected;      break;
-    case ComboShowItems::GitStashed:
-        mCurrentTask = Work::ShowStashed;
-        // TODO: update stashed items
-        for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
-        {
-            //updateTreeItemStatus(ui->treeSource->topLevelItem(i));
-        }
-        break;
     }
     iterateTreeItems(*ui->treeSource);
     mCurrentTask = Work::None;
@@ -1511,12 +1500,6 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 
         stringt2typemap check_map;
         parseGitStatus(repository_path + QDir::separator(), result_string, check_map);
-
-        if (mCurrentTask == Work::ShowStashed)
-        {
-            applyGitCommandToFilePath(repository_path, Cmd::getCommand(Cmd::StashShow), result_string);
-            ui->treeStash->parseGitStash(repository_path +  QDir::separator(), result_string, check_map);
-        }
 
         const QString source_path = file_info.absolutePath();
         // TODO: does not work in every case
@@ -1667,6 +1650,7 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandMessageBoxText(Cmd::Stash, "Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::StashShow      , tr("Show stash"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::StashClear     , tr("Stash clear"), Cmd::getCommand(Cmd::StashClear)), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
@@ -1898,7 +1882,7 @@ void  MainWindow::call_git_commit()
         on_btnCloseText_clicked();
         const QString fMessageText = fCommitMsg.getMessageText();
         const std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
-        const QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fMessageText);
+        const QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem), fMessageText);
         if (fCommitMsg.getAutoStage())
         {
             getSelectedTreeItem();
@@ -1941,7 +1925,7 @@ void MainWindow::call_git_move_rename()
                        tr("Move or rename %1").arg(fFileTypeName),
                        tr("Enter a new name or destination for \"./%1\".\n"
                           "To move the %3 insert the destination path before.\n"
-                          "To rename just modify the name.").arg(fPath.filePath()).arg(fFileTypeName),
+                          "To rename just modify the name.").arg(fPath.filePath(), fFileTypeName),
                        QLineEdit::Normal, fOldName, &fOk);
 
         if (fOk && !fNewName.isEmpty())
@@ -1954,12 +1938,12 @@ void MainWindow::call_git_move_rename()
             {
                 fMoved   = true;
                 fOldName = "\"" + fPath.filePath() + "\"";
-                fCommand = tr(fFormatCmd.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem)).arg(fOldName).arg(fNewGitName);
+                fCommand = tr(fFormatCmd.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem), fOldName, fNewGitName);
             }
             else
             {
                 fOldName = "\"" + fOldName + "\"";
-                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath()).arg(fOldName).arg(fNewGitName);
+                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath(), fOldName, fNewGitName);
             }
 
             QString fResultStr;
@@ -2068,7 +2052,7 @@ void MainWindow::perform_custom_command()
                 option += ui->comboDiffTool->currentText();
             }
 
-            git_command = tr(git_command.toStdString().c_str()).arg(option).arg("%1");
+            git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
 
             int fResult = QMessageBox::Yes;
             if (message_box_text != ActionList::sNoCustomCommandMessageBox)
@@ -2084,7 +2068,7 @@ void MainWindow::perform_custom_command()
         else
         {
             QString fOption;
-            git_command = tr(git_command.toStdString().c_str()).arg(fOption).arg("");
+            git_command = tr(git_command.toStdString().c_str()).arg(fOption, "");
         }
 
         switch (variant_list[ActionList::Data::Action].toUInt())
@@ -2129,7 +2113,7 @@ void MainWindow::call_git_history_diff_command()
         {
             tool_cmd = " --tool=" + ui->comboDiffTool->currentText();
         }
-        QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd).arg("-- %1");
+        QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
         if (history_file.size())
         {
             const QString quoted_history_file = "\"" + history_file + "\"";
@@ -2158,11 +2142,11 @@ void MainWindow::call_git_history_diff_command()
 
         if (history_file.size())
         {
-            command = tr(format_string.toStdString().c_str()).arg(history_hash_items).arg(history_file);
+            command = tr(format_string.toStdString().c_str()).arg(history_hash_items, history_file);
         }
         else
         {
-            command = tr(format_string.toStdString().c_str()).arg(history_hash_items).arg("");
+            command = tr(format_string.toStdString().c_str()).arg(history_hash_items, "");
         }
         QString result_str;
         int result = execute(command, result_str);
@@ -2330,7 +2314,7 @@ int MainWindow::call_git_command(QString git_command, const QString& argument1, 
     {
         if (git_command.contains("%2"))
         {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1).arg(argument2);
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
         }
         else
         {
@@ -2345,7 +2329,7 @@ int MainWindow::call_git_command(QString git_command, const QString& argument1, 
         }
         if (git_command.contains("%2"))
         {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1).arg(argument2);
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
         }
         else if (git_command.contains("%1"))
         {
@@ -2603,7 +2587,7 @@ void MainWindow::find_function(find find_item)
             case FindView::Source:  tree_view = ui->treeSource;   break;
             case FindView::History: tree_view = ui->treeHistory;  break;
             case FindView::Branch:  tree_view = ui->treeBranches; break;
-//            case FindView::Stash:   tree_view = ui->treeStash;    break;
+            case FindView::Stash:   tree_view = ui->treeStash;    break;
             case FindView::Text: break;
         }
 

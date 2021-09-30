@@ -200,7 +200,7 @@ QString weight_name(int weight)
 
 QString Highlighter::Language::to_string(const QTextCharFormat & format)
 {
-    return tr("%1,%2,%3").arg(format.foreground().color().name()).arg(weight_name(format.fontWeight())).arg(format.fontItalic());
+    return tr("%1,%2,%3").arg(format.foreground().color().name(), weight_name(format.fontWeight())).arg(format.fontItalic());
 }
 
 void Highlighter::Language::convert(QTextCharFormat& format, const QString& string)
@@ -211,7 +211,7 @@ void Highlighter::Language::convert(QTextCharFormat& format, const QString& stri
         if (string_list.count() == 3)
         {
             format.setForeground(QBrush(QColor(string_list[0])));
-            if (string_list[1] == weight_name(QFont::Thin)) format.setFontWeight(QFont::Thin);
+            if      (string_list[1] == weight_name(QFont::Thin)) format.setFontWeight(QFont::Thin);
             else if (string_list[1] == weight_name(QFont::ExtraLight)) format.setFontWeight(QFont::ExtraLight);
             else if (string_list[1] == weight_name(QFont::Light)) format.setFontWeight(QFont::Light);
             else if (string_list[1] == weight_name(QFont::Normal)) format.setFontWeight(QFont::Normal);

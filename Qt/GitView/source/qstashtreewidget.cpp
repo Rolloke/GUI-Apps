@@ -42,7 +42,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
         {
             QTreeWidgetItem* new_tree_root_item = nullptr;
             QString stash_no = line.split(':')[0];
-            QString git_command = tr("git -C %1 show %2").arg(git_root_path).arg(stash_no);
+            QString git_command = tr("git -C %1 show %2").arg(git_root_path, stash_no);
             QString result_string;
             int result = execute(git_command, result_string);
             if (result != -1)
@@ -60,7 +60,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
             if (new_tree_root_item)
             {
                 items_inserted = true;
-                git_command = tr("git -C %1 stash show %2").arg(git_root_path).arg(stash_no);
+                git_command = tr("git -C %1 stash show %2").arg(git_root_path, stash_no);
                 int result = execute(git_command, result_string);
                 if (result != -1)
                 {
@@ -81,42 +81,6 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
         }
     }
     return items_inserted;
-}
-
-void QStashTreeWidget::parseGitStash(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
-{
-    const auto lines = aStatus.split("\n");
-
-    for (QString line : lines)
-    {
-        QString relative_path;
-        int position = line.indexOf('|');
-        if (position != -1)
-        {
-            relative_path = line.left(position).trimmed();
-        }
-        else
-        {
-            relative_path = line.trimmed();
-        }
-        QString full_path = aSource + relative_path;
-        QFileInfo file_info(full_path);
-        if (file_info.exists())
-        {
-            Type type;
-            auto file_path = file_info.filePath().toStdString();
-            if (aFiles.count(file_path))
-            {
-                type = aFiles[file_path];
-            }
-            else
-            {
-                type.translate(file_info);
-            }
-            type.add(Type::GitStashed);
-            aFiles[file_path] = type;
-        }
-    }
 }
 
 void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)

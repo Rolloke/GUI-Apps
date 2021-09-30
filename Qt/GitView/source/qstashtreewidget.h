@@ -27,7 +27,6 @@ public:
     QStashTreeWidget(QWidget *parent = 0);
 
     bool     parseStashListText(const QString& aBranchText, const QString& aGitRootPath);
-    void     parseGitStash(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QString  getSelectedStashItem();
     QString  getStashTopItemText(Role::e role);
     void     on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
