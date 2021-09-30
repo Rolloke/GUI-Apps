@@ -43,6 +43,7 @@ Cmd::Cmd()
     mCommandMap[Pull]                   = "git -C %1 pull";
     mCommandMap[Stash]                  = "git -C %1 stash push";
     mCommandMap[StashPop]               = "git -C %1 stash pop %2";
+    mCommandMap[StashApply]             = "git -C %1 stash apply %2";
     mCommandMap[StashShow]              = "git -C %1 stash show";
     mCommandMap[StashList]              = "git -C %1 stash list";
     mCommandMap[StashClear]             = "git -C %1 stash clear";
@@ -64,7 +65,7 @@ Cmd::Cmd()
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ShowHideTree, ClearTreeItems };
-    mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashDrop, StashClear, Separator, ShowHideTree, ClearTreeItems };
+    mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ShowHideTree, ClearTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
@@ -202,7 +203,6 @@ QString Type::getStates(bool extended) const
     if (     is(GitLocal    ))  states += name(GitLocal)     + sep;
     if (     is(GitRemote   ))  states += name(GitRemote)    + sep;
     if (     is(GitBoth     ))  states += name(GitBoth)      + sep;
-    if (     is(GitStashed  ))  states += name(GitStashed)   + sep;
 
     if      (is(GitMovedFrom))  states += name(GitMovedFrom) + sep;
     else if (is(GitMovedTo  ))  states += name(GitMovedTo)   + sep;
@@ -245,7 +245,6 @@ const char* Type::name(TypeFlags aType)
         case GitIgnore:    return mShort ? "GIg" : "git ignore";
         case GitMovedFrom: return mShort ? "MvF" : "MovedFrom";
         case GitMovedTo:   return mShort ? "MvT" : "MovedTo";
-        case GitStashed:   return mShort ? "Sts" : "Stashed";
         case SymLink:      return mShort ? "SyL" : "symbolic link";
         case FileType:     return mShort ? "FTy" : "file types (group)";
         case FileFlag:     return mShort ? "FFg" : "file flags (group)";

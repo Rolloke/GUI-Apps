@@ -82,6 +82,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::Fetch]                   = ":/resource/24X24/go-jump.png";
     action_icons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
     action_icons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
+    action_icons[Cmd::StashApply]              = ":/resource/24X24/go-next.png";
     action_icons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
     action_icons[Cmd::StashClear]              = ":/resource/24X24/edit-delete.png";
     action_icons[Cmd::StashDrop]               = ":/resource/24X24/user-trash.png";
@@ -115,6 +116,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::ZoomIn]                  = ":/resource/24X24/list-add.png";
     action_icons[Cmd::ZoomOut]                 = ":/resource/24X24/list-remove.png";
     action_icons[Cmd::FitInView]               = ":/resource/24X24/view-fullscreen.png";
+
 
     for (const auto& icon_path: action_icons )
     {

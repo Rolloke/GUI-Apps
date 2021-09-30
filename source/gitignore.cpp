@@ -76,14 +76,14 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 });
                 if (item != mIgnoreMap.end())
                 {
-                    auto fMessage = QObject::tr("\"%1\" not inserted from %2").arg(fLine).arg(file.fileName());
+                    auto fMessage = QObject::tr("\"%1\" not inserted from %2").arg(fLine, file.fileName());
                     TRACE(Logger::warning, fMessage.toStdString().c_str() );
                 }
                 else
                 {
                     if (Logger::isSeverityActive(Logger::debug))
                     {
-                        auto fMessage = QObject::tr("\"%1\" inserted from %2").arg(fLine).arg(file.fileName());
+                        auto fMessage = QObject::tr("\"%1\" inserted from %2").arg(fLine, file.fileName());
                         TRACE(Logger::debug, fMessage.toStdString().c_str() );
                     }
                     auto pair = std::pair<const std::string, Type>(fLine.toStdString(), fType);

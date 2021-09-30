@@ -55,6 +55,7 @@ struct Cmd
         ZoomIn,
         ZoomOut,
         FitInView,
+        StashApply,
 
         /// hint: add further git commands here
         CustomCommand=50,
@@ -154,8 +155,7 @@ struct Type
         FolderForNavigation = 0x0800000,
         GitMovedFrom        = 0x1000000,
         GitMovedTo          = 0x2000000,
-        GitStashed          = 0x4000000,
-        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo|GitStashed,
+        AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo,
         FileType      = File|Folder|SymLink,
         FileFlag      = Hidden|Executeable
     };

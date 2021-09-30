@@ -120,7 +120,6 @@ private:
         ShowStaged,
         ShowUnMerged,
         ShowSelected,
-        ShowStashed,
         // NOTE: further git items are added here
         // show out of sync...
         Last
@@ -157,15 +156,15 @@ private:
         GitUnknown,
         Gitstaged,
         GitUnmerged,
-        GitSelected,
-        GitStashed
+        GitSelected
     };
     enum class FindView
     {
         Text,
         Source,
         History,
-        Branch
+        Branch,
+        Stash
     };
 
     void     keyPressEvent(QKeyEvent *) override;
