@@ -82,6 +82,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::Fetch]                   = ":/resource/24X24/go-jump.png";
     action_icons[Cmd::Stash]                   = ":/resource/24X24/go-up.png";
     action_icons[Cmd::StashPop]                = ":/resource/24X24/go-down.png";
+    action_icons[Cmd::StashPush]               = ":/resource/24X24/go-previous.png";
     action_icons[Cmd::StashApply]              = ":/resource/24X24/go-next.png";
     action_icons[Cmd::StashShow]               = ":/resource/24X24/edit-find.png";
     action_icons[Cmd::StashClear]              = ":/resource/24X24/edit-delete.png";
@@ -269,14 +270,14 @@ QString ActionList::getIconPath(Cmd::eCmd cmd) const
     return "";
 }
 
-void ActionList::setStagedCmdAddOn(git::Cmd::eCmd cmd, const QString& cmd_add_on)
+void ActionList::setCmdAddOn(git::Cmd::eCmd cmd, const QString& cmd_add_on)
 {
-    setDataVariant(cmd, Data::StagedCmdAddOn, QVariant(cmd_add_on));
+    setDataVariant(cmd, Data::CmdAddOn, QVariant(cmd_add_on));
 }
 
-QString ActionList::getStagedCmdAddOn(git::Cmd::eCmd cmd) const
+QString ActionList::getCmdAddOn(git::Cmd::eCmd cmd) const
 {
-    QVariant variant = getDataVariant(cmd, Data::IconPath);
+    QVariant variant = getDataVariant(cmd, Data::CmdAddOn);
     if (variant.isValid())
     {
         return variant.toString();

@@ -1582,15 +1582,15 @@ void MainWindow::initContextMenuActions()
 {
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
-    mActions.setStagedCmdAddOn(Cmd::ShowDifference, "--cached ");
+    mActions.setCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::ShowDifference, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffCmd, Flag::set);
+    mActions.setFlags(Cmd::ShowDifference, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffCmd|ActionList::Flags::DependsOnStaged, Flag::set);
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
-    mActions.setStagedCmdAddOn(Cmd::CallDiffTool, "--cached ");
+    mActions.setCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread|ActionList::Flags::DependsOnStaged, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
@@ -1646,12 +1646,19 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Fetch, ActionList::Flags::CallInThread, Flag::set);
     connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
+    const QString stash_message = tr("Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::Stash          , tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::Stash, "Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
+    mActions.setCustomCommandMessageBoxText(Cmd::Stash, stash_message);
+    mActions.setFlags(Cmd::Stash, ActionList::Flags::Stash, Flag::set);
     connect(mActions.createAction(Cmd::StashShow      , tr("Show stash"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
-    connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
-    connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    mActions.setFlags(Cmd::StashShow, ActionList::Flags::Stash, Flag::set);
+    connect(mActions.createAction(Cmd::StashPush,       tr("Stash push"),  Cmd::getCommand(Cmd::StashPush)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::StashPush, stash_message);
+    mActions.setCmdAddOn(Cmd::StashPush, " -- ");
+    mActions.setFlags(Cmd::StashPush, ActionList::Flags::Stash, Flag::set);
+    connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop))  ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::StashClear     , tr("Stash clear"), Cmd::getCommand(Cmd::StashClear)), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashClear, "Remove all stash entries;Do you whant to remove all stash entries of repository:\n\"%1\"?");
@@ -2002,16 +2009,21 @@ void MainWindow::perform_custom_command()
     }
     else
     {
-        Type    type;
         getSelectedTreeItem();
-
+        Type    type;
+        type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
         QString message_box_text = variant_list[ActionList::Data::MsgBoxText].toString();
+        QString option = get_git_command_option(type, command_flags, variant_list);
 
         if (git_command.contains("-C %1"))
         {
             on_btnCloseText_clicked();
             QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem));
+            if (option.size())
+            {
+                git_command += option;
+            }
             int result = QMessageBox::Yes;
             if (message_box_text != ActionList::sNoCustomCommandMessageBox)
             {
@@ -2038,20 +2050,6 @@ void MainWindow::perform_custom_command()
         }
         else if (mContextMenuSourceTreeItem)
         {
-            QString staged_cmd_add_on = variant_list[ActionList::Data::StagedCmdAddOn].toString();
-            QString option;
-            type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
-
-            if (staged_cmd_add_on.size() && type.is(Type::GitStaged))
-            {
-                option += staged_cmd_add_on;
-            }
-            if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
-            {
-                option += "--tool=";
-                option += ui->comboDiffTool->currentText();
-            }
-
             git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
 
             int fResult = QMessageBox::Yes;
@@ -2089,6 +2087,29 @@ void MainWindow::perform_custom_command()
             }   break;
         }
     }
+}
+
+QString MainWindow::get_git_command_option(const Type& type, uint command_flags, const QVariantList& variant_list)
+{
+    QString option;
+    QString cmd_add_on = variant_list[ActionList::Data::CmdAddOn].toString();
+    if (cmd_add_on.size() )
+    {
+        if ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
+        {
+            option += cmd_add_on;
+        }
+        if ((command_flags & ActionList::Flags::Stash) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
+        {
+            option += cmd_add_on;
+        }
+    }
+    if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
+    {
+        option += "--tool=";
+        option += ui->comboDiffTool->currentText();
+    }
+    return option;
 }
 
 void MainWindow::call_git_history_diff_command()

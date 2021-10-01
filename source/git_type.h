@@ -56,6 +56,7 @@ struct Cmd
         ZoomOut,
         FitInView,
         StashApply,
+        StashPush,
 
         /// hint: add further git commands here
         CustomCommand=50,
