@@ -8,6 +8,7 @@
 #include "logger.h"
 
 using namespace git;
+/// TODO: update tree after stash command
 
 QStashTreeWidget::QStashTreeWidget(QWidget *parent): QTreeWidget(parent)
 {
@@ -77,6 +78,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
                         }
                     }
                 }
+                expandItem(new_tree_root_item);
             }
         }
     }
@@ -89,7 +91,7 @@ void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionLi
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuStashTree);
-    menu.exec(mapToGlobal(pos) );
+    menu.exec(mapToGlobal(pos));
 }
 
 void QStashTreeWidget::on_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem * /* previous */)

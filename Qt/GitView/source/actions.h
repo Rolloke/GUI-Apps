@@ -17,7 +17,7 @@ class ActionList
 {
 
 public:
-    struct Data   { enum e { MsgBoxText, Action, IconPath, Flags, StagedCmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
+    struct Data   { enum e { MsgBoxText, Action, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
     struct Flags  { enum e { BuiltIn           = 0x001, /// built in command
                              Modified          = 0x002, /// modified built in command
                              Custom            = 0x004, /// custom created command
@@ -28,7 +28,8 @@ public:
                              NotVariableGitCmd = 0x080, /// indicates that the command is not a modifiable git command
                              FunctionCmd       = 0x100, /// command invokes a special destinct function
                              Stash             = 0x200, /// command for stash view
-                             DiffCmd           = 0x400  /// indicates git diff command
+                             DiffCmd           = 0x400, /// indicates git diff command
+                             DependsOnStaged   = 0x800  /// indicate wether the command depends on state staged or not staged
                            }; };
 
     typedef std::map<git::Cmd::eCmd,  QPointer<QAction>> tActionMap;
@@ -48,8 +49,8 @@ public:
     QString  getIconPath(git::Cmd::eCmd aCmd) const;
     void     setFlags(git::Cmd::eCmd aCmd, uint aFlag, Flag aSet = Flag::set, Data::e aData=Data::Flags);
     uint     getFlags(git::Cmd::eCmd aCmd, Data::e aData=Data::Flags) const;
-    void     setStagedCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
-    QString  getStagedCmdAddOn(git::Cmd::eCmd aCmd) const;
+    void     setCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
+    QString  getCmdAddOn(git::Cmd::eCmd aCmd) const;
 
     void     initActionIcons();
     git::Cmd::eCmd createNewID(git::Cmd::eCmd fNewCmd) const;
