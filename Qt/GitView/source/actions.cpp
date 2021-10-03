@@ -31,7 +31,7 @@ QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QSt
     new_action->setToolTip(name);
     QVariantList fList;
     fList.append(QVariant(sNoCustomCommandMessageBox));
-    for (int i = Data::Action; i<Data::ListSize; ++i)
+    for (int i = Data::PostCmdAction; i<Data::ListSize; ++i)
     {
         fList.append(QVariant());
     }
@@ -237,12 +237,12 @@ QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd cmd) const
 
 void  ActionList::setCustomCommandPostAction(Cmd::eCmd cmd, uint action)
 {
-    setDataVariant(cmd, Data::Action, QVariant(action));
+    setDataVariant(cmd, Data::PostCmdAction, QVariant(action));
 }
 
 uint ActionList::getCustomCommandPostAction(Cmd::eCmd cmd) const
 {
-    QVariant variant = getDataVariant(cmd, Data::Action);
+    QVariant variant = getDataVariant(cmd, Data::PostCmdAction);
     if (variant.isValid())
     {
         return variant.toUInt();

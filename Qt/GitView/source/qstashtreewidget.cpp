@@ -89,6 +89,13 @@ void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionLi
 {
     mSelectedItem = itemAt(pos);
 
+    aActionList.getAction(Cmd::StashClear)->setEnabled(getItemLevel(mSelectedItem) == 0);
+    aActionList.getAction(Cmd::StashDrop)->setEnabled(getItemLevel(mSelectedItem) == 0);
+    aActionList.getAction(Cmd::StashApply)->setEnabled(getItemLevel(mSelectedItem) == 0);
+    aActionList.getAction(Cmd::StashPop)->setEnabled(getItemLevel(mSelectedItem) == 0);
+    aActionList.getAction(Cmd::CallDiffTool)->setEnabled(getItemLevel(mSelectedItem) == 1);
+    aActionList.getAction(Cmd::ShowDifference)->setEnabled(getItemLevel(mSelectedItem) == 1);
+
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuStashTree);
     menu.exec(mapToGlobal(pos));

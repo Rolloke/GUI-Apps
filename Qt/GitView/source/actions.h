@@ -17,19 +17,20 @@ class ActionList
 {
 
 public:
-    struct Data   { enum e { MsgBoxText, Action, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
-    struct Flags  { enum e { BuiltIn           = 0x001, /// built in command
-                             Modified          = 0x002, /// modified built in command
-                             Custom            = 0x004, /// custom created command
-                             Branch            = 0x008, /// command for branch view
-                             History           = 0x010, /// command for history view
-                             DiffOrMergeTool   = 0x020, /// indicates diff or mergetool is used by git command
-                             CallInThread      = 0x040, /// indicates that git command is called within thread context
-                             NotVariableGitCmd = 0x080, /// indicates that the command is not a modifiable git command
-                             FunctionCmd       = 0x100, /// command invokes a special destinct function
-                             Stash             = 0x200, /// command for stash view
-                             DiffCmd           = 0x400, /// indicates git diff command
-                             DependsOnStaged   = 0x800  /// indicate wether the command depends on state staged or not staged
+    struct Data   { enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
+    struct Flags  { enum e { BuiltIn           = 0x0001, /// built in command
+                             Modified          = 0x0002, /// modified built in command
+                             Custom            = 0x0004, /// custom created command
+                             Branch            = 0x0008, /// command for branch view
+                             History           = 0x0010, /// command for history view
+                             DiffOrMergeTool   = 0x0020, /// indicates diff or mergetool is used by git command
+                             CallInThread      = 0x0040, /// indicates that git command is called within thread context
+                             NotVariableGitCmd = 0x0080, /// indicates that the command is not a modifiable git command
+                             FunctionCmd       = 0x0100, /// command invokes a special destinct function
+                             Stash             = 0x0200, /// command for stash view
+                             DiffCmd           = 0x0400, /// indicates git diff command
+                             DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
+                             StashCmdOption    = 0x1000, /// option for stash command
                            }; };
 
     typedef std::map<git::Cmd::eCmd,  QPointer<QAction>> tActionMap;
