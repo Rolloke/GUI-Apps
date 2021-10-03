@@ -511,7 +511,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     std::vector<Type::TypeFlags> fGitStatusArray =
     {
         Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
-        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote
+        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote, Type::None, Type::Folder
     };
 
     fMenu.addSeparator();
@@ -535,6 +535,13 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {
             bool fEnabled  = fEnableFlag  & fGitStatus;
             bool fDisabled = fDisableFlag & fGitStatus;
+            if (fGitStatus == Type::None)
+            {
+                fEnableMenu->addSeparator();
+                fDisableMenu->addSeparator();
+                fEnableNotMenu->addSeparator();
+                continue;
+            }
             QAction* fAction = fGitStatusEnableGroup.addAction(Type::name(fGitStatus));
             fEnableMenu->addAction(fAction);
             fAction->setCheckable(true);

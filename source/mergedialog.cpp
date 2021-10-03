@@ -38,7 +38,7 @@ MergeDialog::MergeDialog(QWidget *parent) :
 
     QVariantList fList;
     fList.append(QVariant(ActionList::sNoCustomCommandMessageBox));
-    for (int i = ActionList::Data::Action; i<ActionList::Data::ListSize; ++i)
+    for (int i = ActionList::Data::PostCmdAction; i<ActionList::Data::ListSize; ++i)
     {
         fList.append(QVariant());
     }

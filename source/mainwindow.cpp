@@ -138,94 +138,81 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
 
     fSettings.beginGroup(config::sGroupFilter);
-    LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+    {
+        LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+    }
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupFind);
-    LOAD_PTR(fSettings, ui->ckFindCaseSensitive, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->comboFindBox, setCurrentIndex, currentIndex, toInt);
+    {
+        LOAD_PTR(fSettings, ui->ckFindCaseSensitive, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->comboFindBox, setCurrentIndex, currentIndex, toInt);
+    }
     fSettings.endGroup();
     on_comboFindBox_currentIndexChanged(ui->comboFindBox->currentIndex());
 
     fSettings.beginGroup(config::sGroupLogging);
-    QString fSeverity;
-    LOAD_STR(fSettings, fSeverity, toString);
-    std::uint32_t fSeverityValue = fSeverity.toLong(0, 2);
-    Logger::setSeverity(0xffff, false);
-    Logger::setSeverity(fSeverityValue, true);
-    fSettings.endGroup();
-
-    fSettings.beginGroup(config::sGroupPaths);
-
-    // NOTE: Remote Repositories necessary
-    const QString fCommand = "git remote -v";
-    QString fResultStr;
-    execute(fCommand, fResultStr);
-    appendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
-
-    int fItemCount = fSettings.beginReadArray(config::sSourcePath);
-    for (int fItem = 0; fItem < fItemCount; ++fItem)
     {
-        fSettings.setArrayIndex(fItem);
-        const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(config::sSourcePath+"/"+config::sGroupFilter).toInt());
-        insertSourceTree(fSourceDir, fItem);
+        QString fSeverity;
+        LOAD_STR(fSettings, fSeverity, toString);
+        std::uint32_t fSeverityValue = fSeverity.toLong(0, 2);
+        Logger::setSeverity(0xffff, false);
+        Logger::setSeverity(fSeverityValue, true);
     }
-
-
-    ui->labelFilePath->setText("");
-
-    fSettings.endArray();
-
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
-
-    LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
-
-    initContextMenuActions();
-    mActions.initActionIcons();
-
-    fItemCount = fSettings.beginReadArray(config::sCommands);
-    for (int fItem = 0; fItem < fItemCount; ++fItem)
     {
-        fSettings.setArrayIndex(fItem);
-        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
-        auto* fAction = mActions.getAction(fCmd);
-        if (!fAction)
+
+        LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
+
+        initContextMenuActions();
+        mActions.initActionIcons();
+
+        int fItemCount = fSettings.beginReadArray(config::sCommands);
         {
-            fAction = mActions.createAction(fCmd, "new", "git");
+            for (int fItem = 0; fItem < fItemCount; ++fItem)
+            {
+                fSettings.setArrayIndex(fItem);
+                Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
+                auto* fAction = mActions.getAction(fCmd);
+                if (!fAction)
+                {
+                    fAction = mActions.createAction(fCmd, "new", "git");
+                }
+                fAction->setText(fSettings.value(config::sName).toString());
+                fAction->setToolTip(fSettings.value(config::sName).toString());
+                fAction->setStatusTip(fSettings.value(config::sCommand).toString());
+                fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
+                uint fFlags = fSettings.value(config::sFlags).toUInt();
+                if (fFlags & ActionList::Flags::Custom)
+                {
+                    connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+                }
+                mActions.setFlags(fCmd, fFlags, Flag::replace);
+                mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
+                mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
+                mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
+                mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
+                mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+            }
         }
-        fAction->setText(fSettings.value(config::sName).toString());
-        fAction->setToolTip(fSettings.value(config::sName).toString());
-        fAction->setStatusTip(fSettings.value(config::sCommand).toString());
-        fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
-        uint fFlags = fSettings.value(config::sFlags).toUInt();
-        if (fFlags & ActionList::Flags::Custom)
-        {
-            connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-        }
-        mActions.setFlags(fCmd, fFlags, Flag::replace);
-        mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
-        mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
-        mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
-        mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
-        mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+        fSettings.endArray();
     }
-    fSettings.endArray();
     fSettings.endGroup();
 
     initMergeTools(true);
@@ -252,43 +239,68 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #endif
 
     fSettings.beginGroup(config::sGroupView);
-    LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
-    LOAD_STR(fSettings, Type::mShort, toBool);
-    ui->ckShortState->setChecked(Type::mShort);
     {
-        LOAD_STR(fSettings, mFontName, toString);
-        QFont font;
-        font.setFamily(mFontName);
-        font.setFixedPitch(true);
-        font.setPointSize(10);
-        ui->textBrowser->setFont(font);
-    }
-    LOAD_STR(fSettings, mFileCopyMimeType, toString);
+        LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
+        LOAD_STR(fSettings, Type::mShort, toBool);
+        ui->ckShortState->setChecked(Type::mShort);
+        {
+            LOAD_STR(fSettings, mFontName, toString);
+            QFont font;
+            font.setFamily(mFontName);
+            font.setFixedPitch(true);
+            font.setPointSize(10);
+            ui->textBrowser->setFont(font);
+        }
+        LOAD_STR(fSettings, mFileCopyMimeType, toString);
 
 
 #ifdef DOCKED_VIEWS
-    QByteArray fWindowGeometry;
-    LOAD_STR(fSettings, fWindowGeometry, toByteArray);
-    QByteArray fWindowState;
-    LOAD_STR(fSettings, fWindowState, toByteArray);
-    LOAD_STR(fSettings, mDockedWidgetMinMaxButtons, toBool);
+        QByteArray fWindowGeometry;
+        LOAD_STR(fSettings, fWindowGeometry, toByteArray);
+        QByteArray fWindowState;
+        LOAD_STR(fSettings, fWindowState, toByteArray);
+        LOAD_STR(fSettings, mDockedWidgetMinMaxButtons, toBool);
 
-    if (fWindowGeometry.size())
-    {
-        restoreGeometry(fWindowGeometry);
-    }
-    if (fWindowState.size())
-    {
-        restoreState(fWindowState);
-    }
-    showDockedWidget(ui->textBrowser);
+        if (fWindowGeometry.size())
+        {
+            restoreGeometry(fWindowGeometry);
+        }
+        if (fWindowState.size())
+        {
+            restoreState(fWindowState);
+        }
+        showDockedWidget(ui->textBrowser);
 #endif
-
+    }
     fSettings.endGroup();
-    TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
+
+    fSettings.beginGroup(config::sGroupPaths);
+    {
+
+        // NOTE: Remote Repositories necessary
+        const QString fCommand = "git remote -v";
+        QString fResultStr;
+        execute(fCommand, fResultStr);
+        appendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
+
+        int fItemCount = fSettings.beginReadArray(config::sSourcePath);
+        {
+            for (int fItem = 0; fItem < fItemCount; ++fItem)
+            {
+                fSettings.setArrayIndex(fItem);
+                const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(config::sSourcePath+"/"+config::sGroupFilter).toInt());
+                insertSourceTree(fSourceDir, fItem);
+            }
+            ui->labelFilePath->setText("");
+        }
+        fSettings.endArray();
+    }
+    fSettings.endGroup();
 
     auto text2browser = [this](const std::string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
+
+    TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
 MainWindow::~MainWindow()
@@ -297,98 +309,107 @@ MainWindow::~MainWindow()
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
-    STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
-    STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
-    STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
-    STORE_PTR(fSettings, ui->ckFiles, isChecked);
-    STORE_PTR(fSettings, ui->ckDirectories, isChecked);
-    STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
+    {
+        STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
+        STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
+        STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
+        STORE_PTR(fSettings, ui->ckFiles, isChecked);
+        STORE_PTR(fSettings, ui->ckDirectories, isChecked);
+        STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
+    }
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupFind);
-    STORE_PTR(fSettings, ui->ckFindCaseSensitive, isChecked);
-    STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
-    STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
-    STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
+    {
+        STORE_PTR(fSettings, ui->ckFindCaseSensitive, isChecked);
+        STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
+        STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
+        STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
+    }
     fSettings.endGroup();
 
     Highlighter::Language::store(fSettings);
 
     fSettings.beginGroup(config::sGroupView);
-    STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
-    STORE_STR(fSettings,  Type::mShort);
-    STORE_STR(fSettings, mFontName);
-    STORE_STR(fSettings, mFileCopyMimeType);
-    auto fWindowGeometry = saveGeometry();
-    STORE_STR(fSettings, fWindowGeometry);
-    auto fWindowState = saveState();
-    STORE_STR(fSettings, fWindowState);
-    STORE_STR(fSettings, mDockedWidgetMinMaxButtons);
+    {
+        STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
+        STORE_STR(fSettings,  Type::mShort);
+        STORE_STR(fSettings, mFontName);
+        STORE_STR(fSettings, mFileCopyMimeType);
+        auto fWindowGeometry = saveGeometry();
+        STORE_STR(fSettings, fWindowGeometry);
+        auto fWindowState = saveState();
+        STORE_STR(fSettings, fWindowState);
+        STORE_STR(fSettings, mDockedWidgetMinMaxButtons);
+    }
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupPaths);
-    fSettings.beginWriteArray(config::sSourcePath);
-
-    for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
-        fSettings.setArrayIndex(i);
-        QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
-        fSettings.setValue(config::sSourcePath, fItem->text(Column::FileName));
+        fSettings.beginWriteArray(config::sSourcePath);
+        {
+            for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
+            {
+                fSettings.setArrayIndex(i);
+                QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
+                fSettings.setValue(config::sSourcePath, fItem->text(Column::FileName));
+            }
+        }
+        fSettings.endArray();
     }
-
-    fSettings.endArray();
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
-
-    STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
-    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
-
-    fSettings.beginWriteArray(config::sCommands);
     {
-        int fIndex = 0;
+        STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
+        STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
 
-        for (const auto& fItem : mActions.getList())
+        fSettings.beginWriteArray(config::sCommands);
         {
-            const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
+            int fIndex = 0;
 
-            if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
+            for (const auto& fItem : mActions.getList())
             {
-                const QAction* fAction = fItem.second;
-                QString fCommand = fAction->statusTip();
-                if (fCommand.size())
+                const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
+
+                if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
                 {
-                    fSettings.setArrayIndex(fIndex++);
-                    fSettings.setValue(config::sID, fItem.first);
-                    fSettings.setValue(config::sName, fAction->toolTip());
-                    fSettings.setValue(config::sCommand, fCommand);
-                    fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
-                    fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
-                    fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
-                    fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
-                    fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
-                    fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
-                    fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
+                    const QAction* fAction = fItem.second;
+                    QString fCommand = fAction->statusTip();
+                    if (fCommand.size())
+                    {
+                        fSettings.setArrayIndex(fIndex++);
+                        fSettings.setValue(config::sID, fItem.first);
+                        fSettings.setValue(config::sName, fAction->toolTip());
+                        fSettings.setValue(config::sCommand, fCommand);
+                        fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
+                        fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
+                        fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
+                        fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
+                        fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
+                        fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
+                        fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
+                    }
                 }
             }
         }
+        fSettings.endArray();
     }
-
-    fSettings.endArray();
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupLogging);
-    QString fSeverHlp = "_fsc____acewnidt";
-    STORE_STR(fSettings, fSeverHlp);
-    QString fSeverity = QString::number(Logger::getSeverity(), 2);
-    STORE_STR(fSettings, fSeverity);
-
+    {
+        QString fSeverHlp = "_fsc____acewnidt";
+        STORE_STR(fSettings, fSeverHlp);
+        QString fSeverity = QString::number(Logger::getSeverity(), 2);
+        STORE_STR(fSettings, fSeverity);
+    }
     fSettings.endGroup();
 
     delete ui;
@@ -1021,10 +1042,12 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
             {
                 QString result_string;
                 int result = execute(aData.toString().toStdString().c_str(), result_string, true);
-                if (result == NoError)
+                if (result != NoError)
                 {
-                    work_result.setValue(result_string);
+                    Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
                 }
+                work_result.setValue(result_string);
+
             }
             break;
         default:
@@ -1655,7 +1678,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::StashPush,       tr("Stash push"),  Cmd::getCommand(Cmd::StashPush)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashPush, stash_message);
     mActions.setCmdAddOn(Cmd::StashPush, " -- ");
-    mActions.setFlags(Cmd::StashPush, ActionList::Flags::Stash, Flag::set);
+    mActions.setFlags(Cmd::StashPush, ActionList::Flags::StashCmdOption|ActionList::Flags::Stash, Flag::set);
     connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop))  ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
@@ -2009,20 +2032,23 @@ void MainWindow::perform_custom_command()
     }
     else
     {
-        getSelectedTreeItem();
         Type    type;
-        type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
         QString message_box_text = variant_list[ActionList::Data::MsgBoxText].toString();
-        QString option = get_git_command_option(type, command_flags, variant_list);
+        getSelectedTreeItem();
+        if (mContextMenuSourceTreeItem)
+        {
+            type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
+        }
 
         if (git_command.contains("-C %1"))
         {
             on_btnCloseText_clicked();
             QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem));
-            if (option.size())
+            QString cmd_option = get_git_command_option(type, command_flags, variant_list);
+            if (cmd_option.size())
             {
-                git_command += option;
+                git_command += cmd_option;
             }
             int result = QMessageBox::Yes;
             if (message_box_text != ActionList::sNoCustomCommandMessageBox)
@@ -2050,6 +2076,7 @@ void MainWindow::perform_custom_command()
         }
         else if (mContextMenuSourceTreeItem)
         {
+            QString option = get_git_command_option(type, command_flags, variant_list);
             git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
 
             int fResult = QMessageBox::Yes;
@@ -2069,7 +2096,7 @@ void MainWindow::perform_custom_command()
             git_command = tr(git_command.toStdString().c_str()).arg(fOption, "");
         }
 
-        switch (variant_list[ActionList::Data::Action].toUInt())
+        switch (variant_list[ActionList::Data::PostCmdAction].toUInt())
         {
             case Cmd::UpdateItemStatus:
                 updateTreeItemStatus(mContextMenuSourceTreeItem);
@@ -2097,17 +2124,22 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
     {
         if ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
         {
+            option += " ";
             option += cmd_add_on;
+            option += " ";
         }
-        if ((command_flags & ActionList::Flags::Stash) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
+        if ((command_flags & ActionList::Flags::StashCmdOption) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
         {
+            option += " ";
             option += cmd_add_on;
+            option += " ";
         }
     }
     if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
     {
-        option += "--tool=";
+        option += " --tool=";
         option += ui->comboDiffTool->currentText();
+        option += " ";
     }
     return option;
 }
@@ -2129,11 +2161,7 @@ void MainWindow::call_git_history_diff_command()
     }
     if (mContextMenuSourceTreeItem)
     {
-        QString tool_cmd;
-        if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
-        {
-            tool_cmd = " --tool=" + ui->comboDiffTool->currentText();
-        }
+        QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
         QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
         if (history_file.size())
         {
@@ -2203,7 +2231,7 @@ void MainWindow::call_git_branch_command()
 
     if (result == NoError)
     {
-        switch (variant_list[ActionList::Data::Action].toUInt())
+        switch (variant_list[ActionList::Data::PostCmdAction].toUInt())
         {
             case Cmd::UpdateItemStatus:
             {
@@ -2263,7 +2291,7 @@ void MainWindow::call_git_stash_command()
     const QVariantList variant_list     = action->data().toList();
     const QString&     message_box_text = variant_list[ActionList::Data::MsgBoxText].toString();
     const auto         action_flags     = variant_list[ActionList::Data::Flags].toUInt();
-    const auto         post_action_cmd  = variant_list[ActionList::Data::Action].toUInt();
+    const auto         post_action_cmd  = variant_list[ActionList::Data::PostCmdAction].toUInt();
     const QString&     stash_item       = ui->treeStash->getSelectedStashItem();
     const QString&     stash            = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::Text);
     const QString&     stash_root       = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::GitRootPath);
@@ -2283,12 +2311,7 @@ void MainWindow::call_git_stash_command()
     }
     else
     {
-        if ((action_flags & ActionList::Flags::DiffOrMergeTool) && ui->comboDiffTool->currentIndex() != 0)
-        {
-            option += "--tool=";
-            option += ui->comboDiffTool->currentText();
-            option += " ";
-        }
+        option += get_git_command_option(Type(), action_flags, variant_list);
         if (action_flags & ActionList::Flags::DiffCmd)
         {
             argument1     = stash_commit;
@@ -2324,6 +2347,7 @@ void MainWindow::call_git_stash_command()
             }
             break;
         }
+
     }
 }
 
