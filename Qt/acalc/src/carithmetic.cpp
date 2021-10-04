@@ -12,28 +12,29 @@
 //////////////////////////////////////////////////////////////////////
 const char *CArithmetic::gm_UnaryFkt[] =
 {
-    "sin" ,  "cos" ,  "tan" ,           // 101, 102, 103
-    "asin" , "acos" , "atan" ,          // 104, 105, 106
-    "sinh",  "cosh",  "tanh",           // 107, 108, 109
-    "asinh", "acosh", "atanh",          // 110, 111, 112
-    "abs"  ,"floor" , "ceil" , "round", // 113, 114, 115, 116
-    "ln"   ,"log"   , "sqrt" ,          // 117, 118, 119
-    "phase", "real", "imag",            // 120,121, 122
+    "sin"  , "cos"  , "tan"  ,          // 127, 128, 129
+    "asin" , "acos" , "atan" ,          // 130, 131, 132
+    "sinh" , "cosh" , "tanh" ,          // 133, 134, 135
+    "asinh", "acosh", "atanh",          // 136, 137, 138
+    "abs"  , "floor", "ceil" , "round", // 139, 140, 141, 142
+    "ln"   , "log"  , "sqrt" ,          // 143, 144, 145
+    "phase", "real" , "imag" ,          // 146, 147, 148
+    "erf"  , "erfc" , "gamma",          // 149, 150, 151
     NULL
 };
 
 const char *CArithmetic::gm_BinaryFkt[] =
 {
-    "logb",                            // 150
-    "hypot",                           // 151
-    "bess1",                           // 152
-    "bess2",                           // 153
-    "atan2",                           // 154
-    "roundto",                         // 155
-    "complex",                         // 156
-    "complexAP",                       // 157
-    "min",                             // 158
-    "max",                             // 159
+    "logb",                            // 160
+    "hypot",                           // 161
+    "bess1",                           // 162
+    "bess2",                           // 163
+    "atan2",                           // 164
+    "roundto",                         // 165
+    "complex",                         // 166
+    "complexAP",                       // 167
+    "min",                             // 168
+    "max",                             // 169
     NULL
 };
 
@@ -595,19 +596,26 @@ std::complex<double> CArithmetic::calc(const tArithmaNode& aNode)
         case  IDO_AR_BESS1 :
         {
             int n = (int)round(fA.real());
-            if      (n==0) return std::complex<double>(_j0(fB.real()), 0);
-            else if (n==1) return std::complex<double>(_j1(fB.real()), 0);
-            else if (n>=2) return std::complex<double>(_jn(n, fB.real()), 0);
+            if      (n==0) return std::complex<double>(j0(fB.real()), 0);
+            else if (n==1) return std::complex<double>(j1(fB.real()), 0);
+            else if (n>=2) return std::complex<double>(jn(n, fB.real()), 0);
             throw (int)IDE_AR_OUTOFRANGE;
         }
         case  IDO_AR_BESS2 :
         {
             int n = (int)round(fA.real());
-            if      (n==0) return std::complex<double>(_y0(fB.real()), 0);
-            else if (n==1) return std::complex<double>(_y1(fB.real()), 0);
-            else if (n>=2) return std::complex<double>(_yn(n, fB.real()), 0);
+            if      (n==0) return std::complex<double>(y0(fB.real()), 0);
+            else if (n==1) return std::complex<double>(y1(fB.real()), 0);
+            else if (n>=2) return std::complex<double>(yn(n, fB.real()), 0);
             throw (int)IDE_AR_OUTOFRANGE;
         }
+        case IDO_AR_ERF:
+            return erf(fB.real());
+        case IDO_AR_ERFC:
+            return erfc(fB.real());
+
+        case IDO_AR_GAMMA:
+            return gamma(fB.real());
 #endif
         case IDO_AR_ROUNDTO:    return std::complex<double>(Roundto(fA.real(), fB.real()), 0);
         case IDO_AR_COMPLEX:    return std::complex<double>(fA.real(), fB.real());

@@ -1,9 +1,7 @@
 #ifndef CARITHMETIC_H
 #define CARITHMETIC_H
 
-#ifndef M_PI
-#define _USE_MATH_DEFINES
-#endif
+
 #include <math.h>
 
 #include <complex>
@@ -41,44 +39,47 @@
 #define  IDO_AR_VAR          1     // Variable darf nicht im Gleichungsknoten gelöscht werden, sondern im Variablenknoten
 #define  IDO_AR_CONST        2     // Konstante darf nicht im Gleichungsknoten gelöscht werden, sondern im Variablenknoten
 
-#define  IDO_AR_SIN        101     // unäre Operatoren (Funktionen)
-#define  IDO_AR_COS        102
-#define  IDO_AR_TAN        103
+#define  IDO_AR_SIN        127     // unäre Operatoren (Funktionen)
+#define  IDO_AR_COS        128
+#define  IDO_AR_TAN        129
 
-#define  IDO_AR_ASIN       104
-#define  IDO_AR_ACOS       105
-#define  IDO_AR_ATAN       106
+#define  IDO_AR_ASIN       130
+#define  IDO_AR_ACOS       131
+#define  IDO_AR_ATAN       132
 
-#define  IDO_AR_SINH       107
-#define  IDO_AR_COSH       108
-#define  IDO_AR_TANH       109
+#define  IDO_AR_SINH       133
+#define  IDO_AR_COSH       134
+#define  IDO_AR_TANH       135
 
-#define  IDO_AR_ASINH      110
-#define  IDO_AR_ACOSH      111
-#define  IDO_AR_ATANH      112
+#define  IDO_AR_ASINH      136
+#define  IDO_AR_ACOSH      137
+#define  IDO_AR_ATANH      138
 
-#define  IDO_AR_ABS        113
-#define  IDO_AR_FLOOR      114
-#define  IDO_AR_CEIL       115
-#define  IDO_AR_ROUND      116
+#define  IDO_AR_ABS        139
+#define  IDO_AR_FLOOR      140
+#define  IDO_AR_CEIL       141
+#define  IDO_AR_ROUND      142
 
-#define  IDO_AR_LOG        117
-#define  IDO_AR_LOG10      118
-#define  IDO_AR_SQRT       119
-#define  IDO_AR_PHASE      120
-#define  IDO_AR_REAL       121
-#define  IDO_AR_IMAG       122
+#define  IDO_AR_LOG        143
+#define  IDO_AR_LOG10      144
+#define  IDO_AR_SQRT       145
+#define  IDO_AR_PHASE      146
+#define  IDO_AR_REAL       147
+#define  IDO_AR_IMAG       148
+#define  IDO_AR_ERF        149
+#define  IDO_AR_ERFC       150
+#define  IDO_AR_GAMMA      151
 
-#define  IDO_AR_LOGB       150      // binäre Funktionen
-#define  IDO_AR_HYPOT      151
-#define  IDO_AR_BESS1      152
-#define  IDO_AR_BESS2      153
-#define  IDO_AR_ATAN2      154
-#define  IDO_AR_ROUNDTO    155
-#define  IDO_AR_COMPLEX    156
-#define  IDO_AR_COMPLEX_AP 157
-#define  IDO_AR_MIN        158
-#define  IDO_AR_MAX        159
+#define  IDO_AR_LOGB       160      // binäre Funktionen
+#define  IDO_AR_HYPOT      161
+#define  IDO_AR_BESS1      162
+#define  IDO_AR_BESS2      163
+#define  IDO_AR_ATAN2      164
+#define  IDO_AR_ROUNDTO    165
+#define  IDO_AR_COMPLEX    166
+#define  IDO_AR_COMPLEX_AP 167
+#define  IDO_AR_MIN        168
+#define  IDO_AR_MAX        169
 
 struct SArithmaNode;
 struct SVarNode;

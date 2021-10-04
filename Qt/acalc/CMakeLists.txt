@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8.9)
-
-project(acalc)
+set(PROJECT_NAME acalc)
+project(${PROJECT_NAME})
 
 add_definitions(-D_USE_MATH_DEFINES)
 
 
 if(UNIX)
-set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++0x )
+set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++17 )
 endif(UNIX)
 
 
@@ -16,10 +16,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 
 #Qt
-find_package(Qt5Core)
-find_package(Qt5Widgets)
-find_package(Qt5Network)
-find_package(Qt5OpenGL)
 
 if(WIN32)
 set(QTMAIN_LIBRARIES optimized qtmain debug  qtmaind)
@@ -28,7 +24,7 @@ endif(WIN32)
 
 
 set(CMAKE_AUTOMOC ON)
-add_definitions(-DQT_NO_KEYWORDS)
+add_definitions(-DQT_NO_KEYWORDS )
 
 
 
@@ -47,22 +43,13 @@ link_directories(
 	$ENV{QTDIR}/lib
 )
 
-qt5_wrap_ui(GENERATED_UI_SOURCE_CODE ${UI_FILES})
-
-add_executable(sysLogger
+add_executable(${PROJECT_NAME}
     WIN32
     ${HEADER_FILES}
     ${SOURCE_FILES}
-	${RC_FILES}
-	${GENERATED_UI_SOURCE_CODE}
-    ${GENERATED_MOC_SOURCE_FILES}
-    ${GENERATED_QRC_SOURCE_FILES}
 )
 
 
-qt5_use_modules(sysLogger Core Widgets Network OpenGL)
-
-
-target_link_libraries(sysLogger
+target_link_libraries(${PROJECT_NAME}
     ${QTMAIN_LIBRARIES}
 )
