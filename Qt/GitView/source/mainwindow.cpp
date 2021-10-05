@@ -162,7 +162,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         QString fSeverity;
         LOAD_STR(fSettings, fSeverity, toString);
-        std::uint32_t fSeverityValue = fSeverity.toLong(0, 2);
+        uint32_t fSeverityValue = fSeverity.toLong(0, 2);
         Logger::setSeverity(0xffff, false);
         Logger::setSeverity(fSeverityValue, true);
     }
@@ -297,7 +297,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     }
     fSettings.endGroup();
 
-    auto text2browser = [this](const std::string&text){ appendTextToBrowser(text.c_str()); };
+    auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
 
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
@@ -598,7 +598,6 @@ QString MainWindow::getConfigName() const
 #ifdef __linux__
     return QDir::homePath() + "/.config/" + sConfigFileName + ".ini";
 #else
-
     return "HKEY_CURRENT_USER\\Software\\KESoft\\" + sConfigFileName;
 #endif
 }
@@ -631,7 +630,7 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
 
-    std::vector<int> fMapLevels;
+    vector<int> fMapLevels;
 
     bool fTopLevelItem(false);
     if (!aParentItem)
@@ -900,7 +899,13 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
 {
     if (aParentItem)
     {
-        const QString fSourcePath = aSourceDir ? *aSourceDir + "/" + aParentItem->text(Column::FileName) : aParentItem->text(Column::FileName);
+        QString item_text = aParentItem->text(Column::FileName);
+        auto pos = item_text.lastIndexOf('/');
+        if (pos != -1)
+        {
+            item_text = item_text.right(pos-2);
+        }
+        const QString fSourcePath = aSourceDir ? *aSourceDir + "/" + item_text : item_text;
 
         const auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
@@ -1234,7 +1239,7 @@ void MainWindow::removeGitSourceFolder()
 
 void MainWindow::updateGitStatus()
 {
-    std::vector<QString> fSourceDirs;
+    vector<QString> fSourceDirs;
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
         fSourceDirs.push_back(ui->treeSource->topLevelItem(i)->text(Column::FileName));
@@ -1264,7 +1269,7 @@ void MainWindow::on_btnStoreText_clicked()
     QFile file(fFileName);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
-        const std::string fString = ui->textBrowser->toPlainText().toStdString();
+        const string fString = ui->textBrowser->toPlainText().toStdString();
         file.write(fString.c_str(), fString.size());
         ui->btnStoreText->setEnabled(false);
     }
@@ -1525,7 +1530,6 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
         parseGitStatus(repository_path + QDir::separator(), result_string, check_map);
 
         const QString source_path = file_info.absolutePath();
-        // TODO: does not work in every case
         iterateCheckItems(aItem, check_map, &source_path);
     }
 }
@@ -1793,7 +1797,7 @@ void MainWindow::initContextMenuActions()
     }
 }
 
-void MainWindow::createAutoCmd(QCheckBox *checkbox, std::string icon_path)
+void MainWindow::createAutoCmd(QCheckBox *checkbox, string icon_path)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
     QAction* action = mActions.createAction(comand_id, checkbox->text(), checkbox->toolTip());
@@ -1911,7 +1915,7 @@ void  MainWindow::call_git_commit()
     {
         on_btnCloseText_clicked();
         const QString fMessageText = fCommitMsg.getMessageText();
-        const std::string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
+        const string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
         const QString fCommitCommand = tr(fCommand.c_str()).arg(getItemTopDirPath(mContextMenuSourceTreeItem), fMessageText);
         if (fCommitMsg.getAutoStage())
         {
@@ -1960,7 +1964,7 @@ void MainWindow::call_git_move_rename()
 
         if (fOk && !fNewName.isEmpty())
         {
-            const std::string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
+            const string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
             const QString fNewGitName = "\"" + fNewName + "\"";
             QString     fCommand;
             bool        fMoved = false;
@@ -2558,7 +2562,7 @@ void MainWindow::killBackgroundThread()
         {
             for (const QString &pid : pidlist)
             {
-                std::string cmd = "kill " + pid.toStdString();
+                string cmd = "kill " + pid.toStdString();
                 QString cmd_result;
                 execute(cmd.c_str(), cmd_result, true);
                 cmd += '\n';
@@ -2811,7 +2815,7 @@ void MainWindow::find_item_in_treeSource(const QString& git_root, const QString&
         auto* found = list[0];
         for (const QString& item : items)
         {
-            std::int32_t i;
+            int32_t i;
             if (found != nullptr)
             {
                 const auto children = found->childCount();
