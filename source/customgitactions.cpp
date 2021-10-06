@@ -511,7 +511,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     std::vector<Type::TypeFlags> fGitStatusArray =
     {
         Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
-        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote, Type::None, Type::Folder
+        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote, Type::Folder
     };
 
     fMenu.addSeparator();

@@ -901,7 +901,7 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
     {
         QString item_text = aParentItem->text(Column::FileName);
         auto pos = item_text.lastIndexOf('/');
-        if (pos != -1)
+        if (pos != -1 && aSourceDir != nullptr)
         {
             item_text = item_text.right(pos-2);
         }
@@ -914,6 +914,7 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
             const QString fState = fFoundType->second.getStates();
             aParentItem->setText(Column::State, fState);
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
+            fType.remove(Type::AllGitActions);
             fType.add(static_cast<Type::TypeFlags>(fFoundType->second.type()));
             aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
             TRACE(Logger::info, "set state %s, %x of %s", fState.toStdString().c_str(), fFoundType->second.type(), fSourcePath.toStdString().c_str());
