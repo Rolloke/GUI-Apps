@@ -61,8 +61,8 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
             if (new_tree_root_item)
             {
                 items_inserted = true;
-                git_command = tr("git -C %1 stash show %2").arg(git_root_path, stash_no);
-                int result = execute(git_command, result_string);
+                git_command = tr("git -C %1 stash show %2").arg(git_root_path).arg(stash_no);
+                result = execute(git_command, result_string);
                 if (result != -1)
                 {
                     auto shown_items = result_string.split('\n');

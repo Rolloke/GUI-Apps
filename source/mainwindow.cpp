@@ -2070,7 +2070,7 @@ void MainWindow::perform_custom_command()
                 }
                 else
                 {
-                    int result = execute(git_command, result_str);
+                    result = execute(git_command, result_str);
                     if (result != NoError)
                     {
                         result_str += tr("\nError %1 occurred").arg(result);
@@ -2243,7 +2243,7 @@ void MainWindow::call_git_branch_command()
                 result_str.clear();
                 git_command  = ui->treeBranches->getBranchTopItemText();
                 top_item_path = ui->treeBranches->getSelectedBranchGitRootPath();
-                int result = execute(git_command, result_str);
+                result = execute(git_command, result_str);
                 if (result != NoError)
                 {
                     result_str += tr("\nError %1 occurred").arg(result);
