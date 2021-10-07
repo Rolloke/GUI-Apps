@@ -131,7 +131,10 @@ int execute(const QString& command, QString& aResultText, bool hide)
 {
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
     QString fTempResultFileNameAndPath = fTemp.path();
-    QString system_cmd = command + " > " + fTempResultFileNameAndPath + " 2>&1";
+    QString system_cmd = command + " > " + fTempResultFileNameAndPath;
+#ifdef __linux__
+    system_cmd =+ " 2>&1 ";
+#endif
 
 #ifdef USE_ShellExecute
     system_cmd = "/C " + system_cmd;
@@ -143,11 +146,13 @@ int execute(const QString& command, QString& aResultText, bool hide)
 
     UNUSED(hide);
 
-//    if (fResult != NoError)
-//    {
-//        system_cmd = command + " 2>> " + fTempResultFileNameAndPath;
-//        fResult = system(system_cmd.toStdString().c_str());
-//    }
+#ifndef __linux__
+    if (fResult != NoError)
+    {
+        system_cmd = command + " 2>> " + fTempResultFileNameAndPath;
+        fResult = system(system_cmd.toStdString().c_str());
+    }
+#endif
 #endif
 
     std::ostringstream fStringStream;
