@@ -133,7 +133,7 @@ int execute(const QString& command, QString& aResultText, bool hide)
     QString fTempResultFileNameAndPath = fTemp.path();
     QString system_cmd = command + " > " + fTempResultFileNameAndPath;
 #ifdef __linux__
-    system_cmd =+ " 2>&1 ";
+    system_cmd += " 2>&1 ";
 #endif
 
 #ifdef USE_ShellExecute
