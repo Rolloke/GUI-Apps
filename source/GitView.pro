@@ -31,6 +31,11 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     helper.cpp \
     logger.cpp \
+    mainwindow_branchtree.cpp \
+    mainwindow_historytree.cpp \
+    mainwindow_sourcetree.cpp \
+    mainwindow_stashtree.cpp \
+    mainwindow_textview.cpp \
     workerthreadconnector.cpp \
     git_type.cpp \
     commitmessage.cpp \

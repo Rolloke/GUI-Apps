@@ -15,6 +15,8 @@ public:
     void addItem2graphicsView(QGraphicsItem*item);
     void on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
     void clear();
+    bool render_file(const QString& file_name, const QString& file_extension);
+
 
 signals:
 

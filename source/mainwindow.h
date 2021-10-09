@@ -184,7 +184,6 @@ private:
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
-
     bool     handleInThread();
 
     QString  getItemFilePath(QTreeWidgetItem* item);
@@ -205,7 +204,6 @@ private:
     enum class find { forward, backward, all };
     void     find_function(find forward);
     bool     getShowTypeResult(const git::Type& fType);
-    void     addItem2graphicsView(QGraphicsItem*);
 
     enum class copy { name, path, file };
     void     copy_file(copy command);
