@@ -49,26 +49,26 @@ using namespace git;
 
 namespace config
 {
-const QString sGroupFilter("Filter");
-const QString sGroupView("View");
-const QString sGroupPaths("Paths");
-const QString sSourcePath("Source");
-const QString sUncheckedPath("Unchecked");
-const QString sGroupLogging("Logging");
-const QString sGroupGitCommands("GitCommands");
-const QString sGroupFind("Find");
-const QString sCommands("Commands");
-const QString sCommand("Command");
-const QString sID("ID");
-const QString sName("Name");
-const QString sCustomMessageBoxText("MessageBoxText");
-const QString sCustomCommandPostAction("PostAction");
-const QString sFlags("Flags");
-const QString sFlagsEnabled("FlagsEnabled");
-const QString sFlagsDisabled("FlagsDisabled");
-const QString sIconPath("IconPath");
-const QString sShortcut("Shortcut");
-const QString sModified("Modified");
+constexpr char sGroupFilter[] = "Filter";
+constexpr char sGroupView[] = "View";
+constexpr char sGroupPaths[] = "Paths";
+constexpr char sSourcePath[] = "Source";
+constexpr char sUncheckedPath[] = "Unchecked";
+constexpr char sGroupLogging[] = "Logging";
+constexpr char sGroupGitCommands[] = "GitCommands";
+constexpr char sGroupFind[] = "Find";
+constexpr char sCommands[] = "Commands";
+constexpr char sCommand[] = "Command";
+constexpr char sID[] = "ID";
+constexpr char sName[] = "Name";
+constexpr char sCustomMessageBoxText[] = "MessageBoxText";
+constexpr char sCustomCommandPostAction[] = "PostAction";
+constexpr char sFlags[] = "Flags";
+constexpr char sFlagsEnabled[] = "FlagsEnabled";
+constexpr char sFlagsDisabled[] = "FlagsDisabled";
+constexpr char sIconPath[] = "IconPath";
+constexpr char sShortcut[] = "Shortcut";
+constexpr char sModified[] = "Modified";
 } // namespace config
 
 
@@ -280,7 +280,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             for (int fItem = 0; fItem < fItemCount; ++fItem)
             {
                 fSettings.setArrayIndex(fItem);
-                const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(config::sSourcePath+"/"+config::sGroupFilter).toInt());
+                const QDir fSourceDir = initDir(fSettings.value(config::sSourcePath).toString(), fSettings.value(QString(config::sSourcePath)+"/"+config::sGroupFilter).toInt());
                 insertSourceTree(fSourceDir, fItem);
             }
             ui->labelFilePath->setText("");
@@ -1399,7 +1399,7 @@ void MainWindow::find_function(find find_item)
             }
             if (find_item == find::all)
             {
-                for (auto item : found_items)
+                for (auto& item : found_items)
                 {
                     tree_view->setItemSelected(item, true);
                 }
@@ -1410,7 +1410,7 @@ void MainWindow::find_function(find find_item)
             else if (found_items.size())
             {
                 int i=0;
-                for (auto item : found_items)
+                for (auto& item : found_items)
                 {
                     tree_view->setItemSelected(item, i == property.mIndex);
                     if (i == property.mIndex)

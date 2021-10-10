@@ -62,7 +62,7 @@ tUpdatefunction Highlighter::mUpdateFunction;
 
 namespace
 {
-    const QString groupHighlighter {"Highlighter"};
+    constexpr char groupHighlighter[] = "Highlighter";
 }
 
 QMap<QString, Highlighter::Language> Highlighter::mLanguages;

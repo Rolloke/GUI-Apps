@@ -266,8 +266,8 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
             if (fNextItem)
             {
                 fGitCmd = tr("git diff --name-only %1 %2").
-                          arg(fNextItem->data( History::Column::Commit, History::role(History::Entry::CommitHash)).toString()).
-                          arg(fChildItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+                          arg(fNextItem->data( History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
+                              fChildItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
             else
             {

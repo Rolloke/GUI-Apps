@@ -25,7 +25,8 @@ QString getSettingsName(const QString& aItemName)
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {
-        QString fTemp = fRegEx.capturedTexts()[0];
+        const auto captured = fRegEx.capturedTexts();
+        QString fTemp = captured[0];
         fTemp = fTemp.replace(":", "_");
         fTemp = fTemp.replace("[", "_");
         return fTemp;

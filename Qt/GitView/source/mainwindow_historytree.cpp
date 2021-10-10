@@ -76,6 +76,7 @@ void MainWindow::call_git_history_diff_command()
     }
     if (mContextMenuSourceTreeItem)
     {
+        QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(0));
         QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
         QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
         if (history_file.size())
