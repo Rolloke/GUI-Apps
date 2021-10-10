@@ -23,8 +23,7 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
 
         color_btn->setFont(item.value().font());
         color_btn->setStyleSheet(tr("QPushButton {background-color: %1; color: %2;}")
-                                 .arg(QWidget::palette().color(QPalette::Base).name())
-                                 .arg(item.value().foreground().color().name()));
+                                 .arg(QWidget::palette().color(QPalette::Base).name(), item.value().foreground().color().name()));
         connect(color_btn, SIGNAL(clicked()), this, SLOT(color_btn_clicked()));
 
         auto* italic_check_btn = new QCheckBox(tr("italic"));

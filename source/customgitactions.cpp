@@ -379,7 +379,7 @@ void CustomGitActions::on_btnAdd_clicked()
         mActionList.setIconPath(fCmd, "://resource/24X24/window-close.png");
         insertCmdAction(*mActionList.getList().find(fCmd), fRow);
         mActionList.setFlags(fCmd, ActionList::Flags::Custom);
-        Q_EMIT(initCustomAction(fAction));
+        Q_EMIT initCustomAction(fAction);
     }
 }
 
