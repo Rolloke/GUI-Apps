@@ -765,6 +765,7 @@ void MainWindow::perform_custom_command()
         if (mContextMenuSourceTreeItem)
         {
             type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
+            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(0));
         }
 
         if (git_command.contains("-C %1"))
@@ -821,6 +822,9 @@ void MainWindow::perform_custom_command()
         {
             QString fOption;
             git_command = tr(git_command.toStdString().c_str()).arg(fOption, "");
+//            QString result;
+//            execute(git_command, result);
+//            ui->textBrowser->setText(result);
         }
 
         switch (variant_list[ActionList::Data::PostCmdAction].toUInt())
