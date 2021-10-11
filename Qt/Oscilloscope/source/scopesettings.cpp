@@ -564,6 +564,7 @@ void ScopeSettings::on_clickedColorButtons(int index)
 {
     QColor*     fColor       = 0;
     MainWindow* fMain        = dynamic_cast<MainWindow*>(parentWidget());
+    if (!fMain) return;
     QColor      fBackground  = fMain->getBackgroundColor();
     QColor      fGrid        = fMain->getGridColor();
     const int   fCurveColors = static_cast<int>(fMain->mCurveColors.size());
