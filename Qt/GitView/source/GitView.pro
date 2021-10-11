@@ -83,6 +83,7 @@ FORMS    += mainwindow.ui \
     mergedialog.ui
 
 RESOURCES += resource.qrc
+RC_FILE = resource/resource.rc
 
 TRANSLATIONS    = GitView_de.ts
 
