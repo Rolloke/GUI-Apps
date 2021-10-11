@@ -629,7 +629,10 @@ void MainWindow::saveSettings()
     QDir fdir;
     QString fConfigPath = getConfigPath();
     bool fOk = fdir.mkpath(fConfigPath);
-    fOk = QDir::setCurrent(fConfigPath);
+    if (fOk)
+    {
+        fOk = QDir::setCurrent(fConfigPath);
+    }
     if (fOk)
     {
         file.setFileName(getXmlName());
@@ -842,7 +845,7 @@ void MainWindow::setLabel(const QPoint& aP, const QVariant& aValue)
 
 void MainWindow::hideLabels()
 {
-    for (auto fLabel : mLabels)
+    for (auto& fLabel : mLabels)
     {
         fLabel->setVisible(false);
     }

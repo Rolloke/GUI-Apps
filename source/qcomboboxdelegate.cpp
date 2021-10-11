@@ -19,7 +19,7 @@ QWidget *QComboBoxDelegate::createEditor(QWidget *parent,
     QComboBox *editor = new QComboBox(parent);
     editor->setFrame(false);
     int i=0;
-    for (QString fItem : mItems)
+    for (const QString& fItem : mItems)
     {
         editor->insertItem(i++, fItem);
     }
