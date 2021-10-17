@@ -2,9 +2,9 @@
 #define GRAPHICS_VIEW_H
 
 #include <QGraphicsView>
-class QGraphicsItem;
-class ActionList;
+#include <QGraphicsItem>
 
+class ActionList;
 
 class graphics_view : public QGraphicsView
 {
@@ -28,6 +28,26 @@ public slots:
 private:
     double mGraphicsScale;
     bool   mFitInView;
+};
+
+class commit_graphis_item : public QGraphicsItem
+{
+ public:
+     commit_graphis_item();
+     virtual ~commit_graphis_item();
+
+     void setPen(const QPen* aPen) { m_pen = aPen; }
+     void setFont(const QFont* aPen) { m_font= aPen; }
+
+protected:
+     QRectF boundingRect() const;
+     void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+private:
+     const QPen*     m_pen;
+     const QFont*    m_font;
+     QString m_text;
+     QPointF m_position;
+     QRectF  m_bounding_rect;
 };
 
 #endif // GRAPHICS_VIEW_H

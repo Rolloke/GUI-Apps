@@ -317,9 +317,9 @@ sError CArithmetic::setEquation(const char *aEquation)
                 if (fK==fV)                                 // ist es eine Zahl ?
                 {
                     char *ptr = strstr(fStr, ".");          // Dezimalzeichen korrigieren
-                    if (ptr) ptr[0]  = mDecimalChar[0];
+                    if (ptr) ptr[0]    = mDecimalChar[0];
                     fNumber->pvalue    = make_shared<complex<double>>(); // Speicher allocieren
-                    *fNumber->pvalue = atof(fStr);          // String in Zahlenwert umwandeln
+                    *fNumber->pvalue   = atof(fStr);          // String in Zahlenwert umwandeln
                     fNumber->coperator = IDO_AR_NUM;        // als numerische Konstante deklarieren
                     fNumber->pszname   = NULL;              // einen Namen hat sie nicht
                 }

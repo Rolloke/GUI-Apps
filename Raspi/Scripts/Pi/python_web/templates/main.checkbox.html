@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<head>
+   <title>Drucker Server</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="checkbox.css" integrity="" crossorigin=""> 
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+   <h1>Drucker in der Werkstatt</h1>
+   <table>
+   <tr><th>Druckername</th><th>Befehl</th><th>Auschaltzeit</th></tr>
+   {% for pin in pins %}
+   <tr><td><h4>{{ pins[pin].name }}
+   {% if pins[pin].state == true %}
+      &nbsp;&nbsp;</h4></td><div class="row"><div class="col-md-2">
+      <td>
+       <form action="/{{pin}}/off" id="confirm"><input id="confirm" type="checkbox" /><label for="confirm">Ausschalten</label></form>
+      </td>
+      <td>{{ pins[pin].display_off }}</td></tr></div></div>
+   {% else %}
+      &nbsp;&nbsp;</h4></td><div class="row"><div class="col-md-2">
+      <td>
+       <form action="/{{pin}}/on" id="update"><button type="submit">Einschalten</button></form>
+      </td><td></td></tr></div></div>
+   {% endif %}
+   {% endfor %}
+   </table>
+   <form action="/" id="update"><button type="submit">Aktualisieren</button></form>
+</body>
+</html>
+

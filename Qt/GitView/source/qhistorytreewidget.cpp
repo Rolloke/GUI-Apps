@@ -1,6 +1,7 @@
 #include "qhistorytreewidget.h"
 #include <QHeaderView>
 #include <QMenu>
+#include "actions.h"
 #include "helper.h"
 #include "history.h"
 #include "git_type.h"
@@ -180,9 +181,53 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
     return fItemData;
 }
 
-QVariant QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos)
+void QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos, const ActionList& actions, QTreeWidgetItem**context_menu_source_treeItem)
 {
-    return determineHistoryHashItems(itemAt(pos));
+    const QVariant fItemData = determineHistoryHashItems(itemAt(pos));
+
+    QActionGroup fPostActionGroup(this);
+    fPostActionGroup.setExclusive(false);
+    if (fItemData.isValid())
+    {
+        switch (fItemData.type())
+        {
+            case QVariant::ModelIndex:
+            {
+                QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(this);
+                *context_menu_source_treeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
+            }   break;
+            case QVariant::Map:
+            {
+                auto fMap = fItemData.toMap();
+                for (auto fMapItem = fMap.begin(); fMapItem != fMap.end(); ++fMapItem)
+                {
+                    QAction* fAction = fPostActionGroup.addAction(fMapItem.key());
+                    fAction->setCheckable(true);
+                    fAction->setChecked(fMapItem.value().toBool());
+                }
+                fPostActionGroup.addAction(tr("Enable all"));
+                fPostActionGroup.addAction(tr("Disable all"));
+            }   break;
+            default:
+                break;
+        }
+    }
+
+    QMenu menu(this);
+    QMenu*fAuthorsMenu = nullptr;
+    if (fPostActionGroup.actions().size())
+    {
+        fAuthorsMenu = menu.addMenu(tr("Authors"));
+        fAuthorsMenu->addActions(fPostActionGroup.actions());
+    }
+
+    actions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
+    QAction* fAction = menu.exec(mapToGlobal(pos));
+    if (fAction && fAuthorsMenu)
+    {
+        int fIndex = fAuthorsMenu->actions().indexOf(fAction);
+        checkAuthorsIndex(fIndex, fAction->isChecked());
+    }
 }
 
 QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )

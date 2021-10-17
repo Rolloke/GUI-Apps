@@ -113,6 +113,9 @@ void MainWindow::on_btnCloseText_clicked()
     ui->btnStoreText->setEnabled(false);
     ui->labelFilePath->setText("");
     ui->graphicsView->scene()->clear();
+
+    //ui->graphicsView->addItem2graphicsView(new commit_graphis_item());
+
 }
 
 
