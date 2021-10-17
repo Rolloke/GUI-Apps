@@ -10,52 +10,8 @@ using namespace git;
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
-    const QVariant fItemData = ui->treeHistory->customContextMenuRequested(pos);
     auto * old_item = mContextMenuSourceTreeItem;
-    QActionGroup fPostActionGroup(this);
-    fPostActionGroup.setExclusive(false);
-    if (fItemData.isValid())
-    {
-        switch (fItemData.type())
-        {
-            case QVariant::ModelIndex:
-            {
-                QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-                mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
-            }   break;
-            case QVariant::Map:
-            {
-                auto fMap = fItemData.toMap();
-                for (auto fMapItem = fMap.begin(); fMapItem != fMap.end(); ++fMapItem)
-                {
-                    QAction* fAction = fPostActionGroup.addAction(fMapItem.key());
-                    fAction->setCheckable(true);
-                    fAction->setChecked(fMapItem.value().toBool());
-                }
-                fPostActionGroup.addAction(tr("Enable all"));
-                fPostActionGroup.addAction(tr("Disable all"));
-            }   break;
-            default:
-                break;
-        }
-    }
-
-    QMenu menu(this);
-    QMenu*fAuthorsMenu = nullptr;
-    if (fPostActionGroup.actions().size())
-    {
-        fAuthorsMenu = menu.addMenu(tr("Authors"));
-        fAuthorsMenu->addActions(fPostActionGroup.actions());
-    }
-
-    mActions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
-    QAction* fAction = menu.exec(ui->treeHistory->mapToGlobal(pos));
-    if (fAction && fAuthorsMenu)
-    {
-        int fIndex = fAuthorsMenu->actions().indexOf(fAction);
-        ui->treeHistory->checkAuthorsIndex(fIndex, fAction->isChecked());
-    }
-
+    ui->treeHistory->customContextMenuRequested(pos, mActions, &mContextMenuSourceTreeItem);
     mContextMenuSourceTreeItem = old_item;
 }
 
@@ -76,7 +32,7 @@ void MainWindow::call_git_history_diff_command()
     }
     if (mContextMenuSourceTreeItem)
     {
-        QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(0));
+        QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName));
         QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
         QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
         if (history_file.size())

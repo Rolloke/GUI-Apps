@@ -122,7 +122,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             QString fFileName = aParentItem->text(Column::FileName);
             QString fSource;
             QString fResultStr;
-            if (!fFileName.startsWith(QDir::separator()))
+            if (!fFileName.startsWith(QDir::separator()) && !aSourceDir->isEmpty())
             {
                 fFileName =  QDir::separator() + fFileName;
             }
@@ -292,7 +292,7 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
         auto pos = item_text.lastIndexOf('/');
         if (pos != -1 && aSourceDir != nullptr)
         {
-            item_text = item_text.right(pos-2);
+            item_text = item_text.mid(pos+1);
         }
         const QString fSourcePath = aSourceDir ? *aSourceDir + "/" + item_text : item_text;
 
@@ -634,6 +634,8 @@ void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
         mGitCommand = aCommand;
         mCurrentTask = Work::ApplyGitCommand;
         QString fFilePath = getItemFilePath(mContextMenuSourceTreeItem->parent());
+        QString ftlp = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+        fFilePath = fFilePath.mid(ftlp.length()+1);
         iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuSourceTreeItem);
         mGitCommand.clear();
         mCurrentTask = Work::None;
@@ -765,7 +767,7 @@ void MainWindow::perform_custom_command()
         if (mContextMenuSourceTreeItem)
         {
             type.setType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
-            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(0));
+            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName));
         }
 
         if (git_command.contains("-C %1"))

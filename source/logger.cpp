@@ -72,12 +72,12 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 {
     if (isSeverityActive(aSeverity))
     {
-        const bool fToSyslog   = isSeverityActive(to_syslog);
-        const bool fToFunction = (mLogFunction && (mSeverity&to_function) != 0);
-        const bool fToBrowserFunction = ((aSeverity&to_browser) != 0 && mTxt2BrowserFunction);
-        const bool fToConsole  = isSeverityActive(to_console);
+        const bool log_to_syslog   = isSeverityActive(to_syslog);
+        const bool log_to_function = (mLogFunction && (mSeverity&to_function) != 0);
+        const bool log_to_browser_function = ((aSeverity&to_browser) != 0 && mTxt2BrowserFunction);
+        const bool log_to_console  = isSeverityActive(to_console);
 
-        if (fToConsole)
+        if (log_to_console)
         {
             va_list args;
             va_start (args, format);
@@ -86,7 +86,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             fflush(stdout);
         }
 
-        if (fToFunction)
+        if (log_to_function)
         {
             char fMessage[2048]="";
             va_list args;
@@ -100,7 +100,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             mLogFunction(fMessage);
         }
 
-        if (fToBrowserFunction)
+        if (log_to_browser_function)
         {
             char fMessage[2048]="";
             va_list args;
@@ -114,7 +114,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             mTxt2BrowserFunction(fMessage);
         }
 
-        if (fToSyslog)
+        if (log_to_syslog)
         {
 #ifdef __linux__
             va_list args;

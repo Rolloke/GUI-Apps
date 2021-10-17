@@ -3,6 +3,8 @@
 
 #include <QTreeWidget>
 
+class ActionList;
+
 class QHistoryTreeWidget : public QTreeWidget
 {
     Q_OBJECT
@@ -18,7 +20,7 @@ public:
     QHistoryTreeWidget(QWidget *parent = 0);
 
     void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType);
-    QVariant        customContextMenuRequested(const QPoint &pos);
+    void            customContextMenuRequested(const QPoint &pos, const ActionList&, QTreeWidgetItem**);
     QVariant        determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem);
     QString         itemClicked(QTreeWidgetItem *aItem, int aColumn);
     void            checkAuthorsIndex(int aIndex, bool aChecked);
