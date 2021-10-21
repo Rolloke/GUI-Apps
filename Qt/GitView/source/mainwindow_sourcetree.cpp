@@ -692,7 +692,7 @@ void MainWindow::call_git_move_rename()
         QString       fOldName = mContextMenuSourceTreeItem->text(Column::FileName);
         const QString fNewName = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
-                       tr("Enter a new name or destination for \"./%1\".\n"
+                       tr("Enter a new name or destination for \"%1\".\n"
                           "To move the %3 insert the destination path before.\n"
                           "To rename just modify the name.").arg(fPath.filePath(), fFileTypeName),
                        QLineEdit::Normal, fOldName, &fOk);
