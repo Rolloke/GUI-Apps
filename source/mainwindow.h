@@ -71,6 +71,9 @@ private Q_SLOTS:
     void on_btnFindAll_clicked();
     void on_comboFindBox_currentIndexChanged(int index);
 
+    void on_comboToolBarStyle_currentIndexChanged(int index);
+    void on_comboAppStyle_currentTextChanged(const QString &arg1);
+
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
 #else

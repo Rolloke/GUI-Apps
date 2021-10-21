@@ -19,6 +19,7 @@
 #include <QDockWidget>
 #include <QClipboard>
 #include <QMimeData>
+#include <QStyleFactory>
 
 
 #include <boost/bind.hpp>
@@ -132,12 +133,35 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupFilter);
     {
+        QStringList keys = QStyleFactory::keys();
+        ui->comboAppStyle->addItems(keys);
+
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentText, currentText, toString);
+
+        setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
+
+        QString style = ui->comboAppStyle->currentText();
+        if (style.isEmpty())
+        {
+            style = QApplication::style()->objectName();
+        }
+        auto index = std::find_if(keys.begin(), keys.end(), [style](const QString& key) { return key.compare(style, Qt::CaseInsensitive) == 0;} );
+        if (index != keys.end())
+        {
+            ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
+        }
+        else
+        {
+            ui->comboAppStyle->setCurrentText(style);
+        }
+        QApplication::setStyle(QStyleFactory::create(style));
     }
     fSettings.endGroup();
 
@@ -308,6 +332,8 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckFiles, isChecked);
         STORE_PTR(fSettings, ui->ckDirectories, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
+        STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboAppStyle, currentText);
     }
     fSettings.endGroup();
 
@@ -1272,6 +1298,17 @@ void MainWindow::killBackgroundThread()
         }
     }
 }
+
+void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
+{
+    setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
+}
+
+void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
+{
+    QApplication::setStyle(QStyleFactory::create(style));
+}
+
 
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {

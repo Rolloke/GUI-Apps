@@ -658,6 +658,42 @@ File content opened with double click</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QComboBox" name="comboAppStyle">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboToolBarStyle">
+        <item>
+         <property name="text">
+          <string>Icon</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Text</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Text beside Icon</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Text under Icon</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Follow System</string>
+         </property>
+        </item>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>

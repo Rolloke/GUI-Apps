@@ -59,6 +59,8 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
     menu.exec(mapToGlobal(pos) );
+
+    mSelectedItem = nullptr;
 }
 
 QString QBranchTreeWidget::getSelectedBranch()
@@ -73,9 +75,13 @@ QString QBranchTreeWidget::getSelectedBranch()
             fItem += " ";
         }
     }
-    else
+    else if (mSelectedItem)
     {
-         fItem = (mSelectedItem && indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(Column::Text).remove(0, 2) : "";
+         fItem = (indexOfTopLevelItem(mSelectedItem) == -1) ? mSelectedItem->text(Column::Text) : "";
+         if (fItem.size() > 2)
+         {
+             fItem = fItem.remove(0, 2);
+         }
     }
     return fItem;
 }

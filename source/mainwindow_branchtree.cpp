@@ -17,7 +17,11 @@ void MainWindow::call_git_branch_command()
     const QString&     branch_item          = ui->treeBranches->getSelectedBranch();
     const QString&     branch_git_root_path = ui->treeBranches->getSelectedBranchGitRootPath();
     QString            git_command          = action->statusTip();
-    QString            top_item_path        = getItemTopDirPath(mContextMenuSourceTreeItem);
+    QString            top_item_path        = branch_git_root_path;
+    if (ui->treeSource->hasFocus())
+    {
+        top_item_path = getItemTopDirPath(mContextMenuSourceTreeItem);
+    }
 
     int result = QMessageBox::Yes;
     if (message_box_text != ActionList::sNoCustomCommandMessageBox)
