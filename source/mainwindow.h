@@ -64,6 +64,8 @@ private Q_SLOTS:
     void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
     void on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
+    void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
     void on_btnFindNext_clicked();
@@ -168,8 +170,16 @@ private:
         Source,
         History,
         Branch,
-        Stash
+        Stash,
+        FindTextInFiles
     };
+    struct FindColumn { enum e
+    {
+        FilePath,
+        Line,
+        FoundTextLine,
+        Size
+    }; };
 
     void     keyPressEvent(QKeyEvent *) override;
 
@@ -184,6 +194,7 @@ private:
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
     void     appendTextToBrowser(const QString& aText, bool append=false);
+    void     open_file(const QString& file_path, std::optional<int> line_number);
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);

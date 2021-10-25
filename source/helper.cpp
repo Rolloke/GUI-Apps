@@ -128,6 +128,31 @@ QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem)
     return aItem;
 }
 
+bool containsPathAsChildren(QTreeWidgetItem*parent_item, int column, const QString& right_path)
+{
+    QStringList right_parts = right_path.split('/');
+    for (const auto&file_name : right_parts)
+    {
+        bool found = false;
+        for (int i=0; i<parent_item->childCount(); ++i)
+        {
+            if (parent_item->child(i)->text(column) == file_name)
+            {
+                found = true;
+                parent_item = parent_item->child(i);
+                break;
+            }
+        }
+        if (!found)
+        {
+            parent_item = nullptr;
+            break;
+        }
+    }
+    return parent_item != nullptr;
+}
+
+
 int execute(const QString& command, QString& aResultText, bool hide)
 {
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";

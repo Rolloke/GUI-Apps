@@ -30,6 +30,7 @@ void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem);
 int getItemLevel(QTreeWidgetItem* aItem);
+bool containsPathAsChildren(QTreeWidgetItem*, int, const QString& );
 
 enum error
 {
