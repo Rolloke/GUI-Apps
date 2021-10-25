@@ -10,6 +10,8 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QClipboard>
+#include <QMimeData>
 
 using namespace std;
 using namespace git;
@@ -484,18 +486,21 @@ void MainWindow::removeGitSourceFolder()
     mContextMenuSourceTreeItem = nullptr;
 }
 
-
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
-    on_btnCloseText_clicked();
-
     const QString   file_name      = getItemFilePath(item);
-    const QFileInfo file_info(file_name);
+    open_file(file_name, {});
+}
+
+void MainWindow::open_file(const QString& file_path, std::optional<int> line_number)
+{
+    on_btnCloseText_clicked();
+    const QFileInfo file_info(file_path);
     QString         file_extension = file_info.suffix().toLower();
 
     if (ui->ckRenderGraphicFile->isChecked())
     {
-        if (ui->graphicsView->render_file(file_name, file_extension))
+        if (ui->graphicsView->render_file(file_path, file_extension))
         {
             updateSelectedLanguage(file_extension);
 #ifdef DOCKED_VIEWS
@@ -505,12 +510,12 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         }
     }
 
-    QFile file(file_name);
+    QFile file(file_path);
     if (file.open(QIODevice::ReadOnly))
     {
-        ui->labelFilePath->setText(file_name);
+        ui->labelFilePath->setText(file_path);
         mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
-        if (file_extension == "txt" && file_name.contains("CMakeLists.txt"))
+        if (file_extension == "txt" && file_path.contains("CMakeLists.txt"))
         {
             file_extension = "cmake";
         }
@@ -524,6 +529,13 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
             ui->textBrowser->setPlainText(file.readAll());
         }
         ui->btnStoreText->setEnabled(false);
+        if (line_number)
+        {
+            auto text_block = ui->textBrowser->document()->findBlockByLineNumber(*line_number - 1);
+            QTextCursor cursor(text_block);
+            cursor.select(QTextCursor::LineUnderCursor);
+            ui->textBrowser->setTextCursor(cursor);
+        }
 #ifdef DOCKED_VIEWS
         showDockedWidget(ui->textBrowser);
 #endif
@@ -676,6 +688,32 @@ void  MainWindow::call_git_commit()
             appendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
+    }
+}
+
+void MainWindow::initMergeTools(bool read_new_items)
+{
+    if (mMergeTools.size())
+    {
+        if (ui->comboDiffTool->count() > 1)
+        {
+            QString first_entry = ui->comboDiffTool->itemText(0);
+            ui->comboDiffTool->clear();
+            ui->comboDiffTool->addItem(first_entry);
+        }
+        for (auto item=mMergeTools.begin(); item != mMergeTools.end(); ++item)
+        {
+            if (item.value())
+            {
+                ui->comboDiffTool->addItem(item.key());
+            }
+        }
+    }
+    if (read_new_items && ui->treeSource->topLevelItemCount())
+    {
+        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
+        QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
+        mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
     }
 }
 
@@ -849,6 +887,130 @@ void MainWindow::perform_custom_command()
     }
 }
 
+QString MainWindow::get_git_command_option(const Type& type, uint command_flags, const QVariantList& variant_list)
+{
+    QString option;
+    QString cmd_add_on = variant_list[ActionList::Data::CmdAddOn].toString();
+    if (cmd_add_on.size() )
+    {
+        if ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
+        {
+            option += " ";
+            option += cmd_add_on;
+            option += " ";
+        }
+        if ((command_flags & ActionList::Flags::StashCmdOption) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
+        {
+            option += " ";
+            option += cmd_add_on;
+            option += " ";
+        }
+    }
+    if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
+    {
+        option += " --tool=";
+        option += ui->comboDiffTool->currentText();
+        option += " ";
+    }
+    return option;
+}
+
+
+int MainWindow::call_git_command(QString git_command, const QString& argument1, const QString& argument2, QString&result_str, const QString& git_root_path)
+{
+    on_btnCloseText_clicked();
+
+    if (git_command.contains("-C %1"))
+    {
+        if (git_command.contains("%2"))
+        {
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
+        }
+        else
+        {
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1);
+        }
+    }
+    else
+    {
+        if (git_root_path.size())
+        {
+            git_command.replace("git ", "git -C " + git_root_path + " ");
+        }
+        if (git_command.contains("%2"))
+        {
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
+        }
+        else if (git_command.contains("%1"))
+        {
+            git_command = tr(git_command.toStdString().c_str()).arg(argument1);
+        }
+    }
+
+    int result = execute(git_command, result_str);
+    result_str = git_command + getLineFeed() + result_str;
+    appendTextToBrowser(result_str);
+    return result;
+}
+
+void MainWindow::parseGitStatus(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
+{
+    const auto fLines = aStatus.split("\n");
+
+    for (const QString& fLine : fLines)
+    {
+        const int     fStateSize = 2;
+        const QString fState = fLine.left(fStateSize);
+        auto          fRelativePath = fLine.mid(fStateSize).trimmed();
+
+        if (fRelativePath.size())
+        {
+            Type fType;
+            fType.translate(fState);
+            while (fRelativePath.indexOf('"') != -1)
+            {
+                fRelativePath = fRelativePath.remove('"');
+            }
+            if (fType.is(Type::Repository))
+            {
+                aFiles[fRelativePath.toStdString()] = fType;
+            }
+            else
+            {
+                QString fFullPath = aSource + fRelativePath;
+                if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
+                {
+                    auto fPaths = fRelativePath.split(" -> ");
+                    if (fPaths.size() > 1)
+                    {
+                        fFullPath = aSource + fPaths[1];
+                        QFileInfo fFileInfo(fFullPath);
+                        fType.translate(fFileInfo);
+                        Type fDestinationType = fType;
+                        fDestinationType.add(Type::GitMovedTo);
+                        aFiles[fFullPath.toStdString()] = fDestinationType;
+                        fType.add(Type::GitMovedFrom);
+                        fFullPath = aSource + fPaths[0];
+                    }
+                }
+                QFileInfo fFileInfo(fFullPath);
+                fType.translate(fFileInfo);
+                auto file_path = fFileInfo.filePath().toStdString();
+                if (fType.is(Type::Folder))
+                {
+                    if (file_path.back() == '/')
+                    {
+                        file_path.resize(file_path.size()-1);
+                    }
+                }
+                aFiles[file_path] = fType;
+            }
+
+            TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.type());
+        }
+    }
+}
+
 void MainWindow::deleteFileOrFolder()
 {
     if (mContextMenuSourceTreeItem)
@@ -924,3 +1086,71 @@ void MainWindow::find_item_in_treeSource(const QString& git_root, const QString&
         }
     }
 }
+
+
+void MainWindow::copyFileName()
+{
+    copy_file(copy::name);
+}
+
+void MainWindow::copyFilePath()
+{
+    copy_file(copy::file);
+}
+
+void MainWindow::copy_file(copy command)
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
+        const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
+        QFileInfo fileInfo;
+        if (fItemPath.contains(fTopItemPath))
+        {
+            fileInfo = fItemPath;
+        }
+        else
+        {
+            fileInfo = fTopItemPath + QDir::separator() + fItemPath;
+        }
+        QClipboard *clipboard = QApplication::clipboard();
+#if 0
+        auto testData = clipboard->mimeData();
+        if (testData)
+        {
+            auto text = testData->text();
+            auto urls = testData->urls();
+            auto formats = testData->formats();
+            auto data = testData->data("");
+            for (auto format : formats)
+            {
+                data = testData->data(format);
+            }
+            int f = 0;
+        }
+#endif
+        if (command == copy::name)
+        {
+            clipboard->setText(fileInfo.fileName());
+        }
+        else if (command == copy::path)
+        {
+            clipboard->setText(fileInfo.filePath());
+        }
+        else // copy::file
+        {
+            QMimeData* mime_data = new QMimeData();
+            // Copy path of file
+            mime_data->setText(fileInfo.filePath());
+            // Copy file
+            auto url = QUrl::fromLocalFile(fileInfo.filePath());
+            mime_data->setUrls({ url });
+            // Copy file (mFileCopyMimeType may be edited in ini-file)
+            QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
+            mime_data->setData(mFileCopyMimeType, copied_files);
+            // Set the mimedata
+            clipboard->setMimeData(mime_data);
+        }
+    }
+}
+

@@ -17,10 +17,8 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QDockWidget>
-#include <QClipboard>
-#include <QMimeData>
 #include <QStyleFactory>
-
+//#include <QPlainTextEdit>
 
 #include <boost/bind.hpp>
 
@@ -110,6 +108,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+    // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
+    // https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
 
     Highlighter::Language::load(fSettings);
 
@@ -135,6 +135,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     {
         QStringList keys = QStyleFactory::keys();
         ui->comboAppStyle->addItems(keys);
+        QString style = QApplication::style()->objectName();
+        auto index = std::find_if(keys.begin(), keys.end(), [style](const QString& key) { return key.compare(style, Qt::CaseInsensitive) == 0;} );
+        if (index != keys.end())
+        {
+            ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
+        }
 
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
@@ -143,25 +149,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
-        LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentText, currentText, toString);
+        LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
-
-        QString style = ui->comboAppStyle->currentText();
-        if (style.isEmpty())
-        {
-            style = QApplication::style()->objectName();
-        }
-        auto index = std::find_if(keys.begin(), keys.end(), [style](const QString& key) { return key.compare(style, Qt::CaseInsensitive) == 0;} );
-        if (index != keys.end())
-        {
-            ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
-        }
-        else
-        {
-            ui->comboAppStyle->setCurrentText(style);
-        }
-        QApplication::setStyle(QStyleFactory::create(style));
+        on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
     }
     fSettings.endGroup();
 
@@ -333,7 +324,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckDirectories, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
-        STORE_PTR(fSettings, ui->comboAppStyle, currentText);
+        STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
     }
     fSettings.endGroup();
 
@@ -507,6 +498,17 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
+    // find tree
+    dock = new QDockWidget(tr("Find Text in Files"), this);
+    ui->comboFindBox->addItem(dock->windowTitle());
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("findview");
+    ui->verticalLayout->removeWidget(ui->treeFindText);
+    dock->setWidget(ui->treeFindText);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    tabifyDockWidget(first_tab, dock);
+
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
     pTB = new QToolBar(tr("Git File View States"));
@@ -641,6 +643,10 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
         {
             deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeStash);
         }
+        if (ui->treeFindText->hasFocus())
+        {
+            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeFindText);
+        }
     }
 }
 
@@ -721,60 +727,24 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     }
 }
 
-void MainWindow::parseGitStatus(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
+void MainWindow::killBackgroundThread()
 {
-    const auto fLines = aStatus.split("\n");
-
-    for (const QString& fLine : fLines)
+    QString pids;
+    execute("pidof git", pids, true);
+    QStringList pidlist = pids.split(" ");
+    if (pidlist.size())
     {
-        const int     fStateSize = 2;
-        const QString fState = fLine.left(fStateSize);
-        auto          fRelativePath = fLine.mid(fStateSize).trimmed();
-
-        if (fRelativePath.size())
+        int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
+        if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
         {
-            Type fType;
-            fType.translate(fState);
-            while (fRelativePath.indexOf('"') != -1)
+            for (const QString &pid : pidlist)
             {
-                fRelativePath = fRelativePath.remove('"');
+                string cmd = "kill " + pid.toStdString();
+                QString cmd_result;
+                execute(cmd.c_str(), cmd_result, true);
+                cmd += '\n';
+                appendTextToBrowser(cmd.c_str() + cmd_result, true);
             }
-            if (fType.is(Type::Repository))
-            {
-                aFiles[fRelativePath.toStdString()] = fType;
-            }
-            else
-            {
-                QString fFullPath = aSource + fRelativePath;
-                if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
-                {
-                    auto fPaths = fRelativePath.split(" -> ");
-                    if (fPaths.size() > 1)
-                    {
-                        fFullPath = aSource + fPaths[1];
-                        QFileInfo fFileInfo(fFullPath);
-                        fType.translate(fFileInfo);
-                        Type fDestinationType = fType;
-                        fDestinationType.add(Type::GitMovedTo);
-                        aFiles[fFullPath.toStdString()] = fDestinationType;
-                        fType.add(Type::GitMovedFrom);
-                        fFullPath = aSource + fPaths[0];
-                    }
-                }
-                QFileInfo fFileInfo(fFullPath);
-                fType.translate(fFileInfo);
-                auto file_path = fFileInfo.filePath().toStdString();
-                if (fType.is(Type::Folder))
-                {
-                    if (file_path.back() == '/')
-                    {
-                        file_path.resize(file_path.size()-1);
-                    }
-                }
-                aFiles[file_path] = fType;
-            }
-
-            TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.type());
         }
     }
 }
@@ -801,8 +771,6 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
     return fDir;
 }
 
-
-// SLOTS
 
 //"%12"
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
@@ -854,6 +822,11 @@ void MainWindow::showOrHideTrees(bool checked)
             ui->treeStash->setVisible(checked);
             ++fTrees;
         }
+        if (ui->treeFindText->topLevelItemCount())
+        {
+            ui->treeFindText->setVisible(checked);
+            ++fTrees;
+        }
         checked = (fTrees != 0);
     }
     else
@@ -868,6 +841,7 @@ void MainWindow::showOrHideTrees(bool checked)
             ui->treeHistory->setVisible(checked);
             ui->treeBranches->setVisible(checked);
             ui->treeStash->setVisible(checked);
+            ui->treeFindText->setVisible(checked);
         }
     }
 
@@ -1018,7 +992,7 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
     mActions.setFlags(Cmd::ShowHideTree, ActionList::Flags::FunctionCmd, Flag::set);
 #endif
-    connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear tree items"), tr("Clears all history or branch tree entries")), SIGNAL(triggered()), this, SLOT(clearTrees()));
+    connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear all tree entries"), tr("Clears all tree entries in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(clearTrees()));
     mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
@@ -1093,31 +1067,6 @@ void MainWindow::initCustomAction(QAction* fAction)
     connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 }
 
-void MainWindow::initMergeTools(bool read_new_items)
-{
-    if (mMergeTools.size())
-    {
-        if (ui->comboDiffTool->count() > 1)
-        {
-            QString first_entry = ui->comboDiffTool->itemText(0);
-            ui->comboDiffTool->clear();
-            ui->comboDiffTool->addItem(first_entry);
-        }
-        for (auto item=mMergeTools.begin(); item != mMergeTools.end(); ++item)
-        {
-            if (item.value())
-            {
-                ui->comboDiffTool->addItem(item.key());
-            }
-        }
-    }
-    if (read_new_items && ui->treeSource->topLevelItemCount())
-    {
-        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-        QString first_git_repo =ui->treeSource->topLevelItem(0)->text(Column::FileName);
-        mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
-    }
-}
 
 void MainWindow::clearTrees()
 {
@@ -1136,73 +1085,6 @@ bool MainWindow::handleInThread()
         return (fAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::CallInThread) != 0;
     }
     return false;
-}
-
-
-QString MainWindow::get_git_command_option(const Type& type, uint command_flags, const QVariantList& variant_list)
-{
-    QString option;
-    QString cmd_add_on = variant_list[ActionList::Data::CmdAddOn].toString();
-    if (cmd_add_on.size() )
-    {
-        if ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
-        {
-            option += " ";
-            option += cmd_add_on;
-            option += " ";
-        }
-        if ((command_flags & ActionList::Flags::StashCmdOption) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
-        {
-            option += " ";
-            option += cmd_add_on;
-            option += " ";
-        }
-    }
-    if (command_flags & ActionList::Flags::DiffOrMergeTool && ui->comboDiffTool->currentIndex() != 0)
-    {
-        option += " --tool=";
-        option += ui->comboDiffTool->currentText();
-        option += " ";
-    }
-    return option;
-}
-
-
-int MainWindow::call_git_command(QString git_command, const QString& argument1, const QString& argument2, QString&result_str, const QString& git_root_path)
-{
-    on_btnCloseText_clicked();
-
-    if (git_command.contains("-C %1"))
-    {
-        if (git_command.contains("%2"))
-        {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
-        }
-        else
-        {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1);
-        }
-    }
-    else
-    {
-        if (git_root_path.size())
-        {
-            git_command.replace("git ", "git -C " + git_root_path + " ");
-        }
-        if (git_command.contains("%2"))
-        {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1, argument2);
-        }
-        else if (git_command.contains("%1"))
-        {
-            git_command = tr(git_command.toStdString().c_str()).arg(argument1);
-        }
-    }
-
-    int result = execute(git_command, result_str);
-    result_str = git_command + getLineFeed() + result_str;
-    appendTextToBrowser(result_str);
-    return result;
 }
 
 void MainWindow::expand_tree_items()
@@ -1228,6 +1110,14 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
     else if (ui->treeStash->hasFocus())
     {
         return ui->treeStash;
+    }
+    else if (ui->treeStash->hasFocus())
+    {
+        return ui->treeStash;
+    }
+    else if (ui->treeFindText->hasFocus())
+    {
+        return ui->treeFindText;
     }
     else if (aAlsoSource)
     {
@@ -1277,28 +1167,6 @@ void MainWindow::gitview_about()
     dlg.exec();
 }
 
-void MainWindow::killBackgroundThread()
-{
-    QString pids;
-    execute("pidof git", pids, true);
-    QStringList pidlist = pids.split(" ");
-    if (pidlist.size())
-    {
-        int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
-        if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
-        {
-            for (const QString &pid : pidlist)
-            {
-                string cmd = "kill " + pid.toStdString();
-                QString cmd_result;
-                execute(cmd.c_str(), cmd_result, true);
-                cmd += '\n';
-                appendTextToBrowser(cmd.c_str() + cmd_result, true);
-            }
-        }
-    }
-}
-
 void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
 {
     setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
@@ -1313,6 +1181,8 @@ void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {
     ui->btnFindAll->setEnabled(static_cast<FindView>(index) != FindView::Text);
+    ui->btnFindNext->setEnabled(static_cast<FindView>(index) != FindView::FindTextInFiles);
+    ui->btnFindPrevious->setEnabled(static_cast<FindView>(index) != FindView::FindTextInFiles);
 }
 
 MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
@@ -1365,6 +1235,68 @@ void MainWindow::find_function(find find_item)
             showDockedWidget(ui->textBrowser);
         }
     }
+    else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
+    {
+        //"grep -rnHsI[oiEw] 'search_pattern' 'path'"
+        // r: recursive
+        // n: line number
+        // H: file name
+        // s: no message
+        // I: no text search in binary files
+        // o: show only match without line
+        QString options = "-rnHsI";
+        QString search_path    = getItemFilePath(mContextMenuSourceTreeItem);
+        QString search_pattern = ui->edtFindText->text();
+        if (ui->ckFindCaseSensitive->isChecked())
+        {   // i: ignore case
+            options += "i";
+        }
+        if (ui->ckFindRegEx->isChecked())
+        {   // E: regular expression
+            options += "E";
+        }
+        if (ui->ckFindWholeWord->isChecked())
+        {   // w: whole word
+            options += "w";
+        }
+        QString find_command = tr("grep %1 '%2' '%3'").arg(options, search_pattern, search_path);
+        QString find_result;
+        int result = execute(find_command, find_result);
+        if (result == 0)
+        {
+            auto new_tree_root_item = new QTreeWidgetItem({search_pattern});
+            ui->treeFindText->addTopLevelItem(new_tree_root_item);
+
+            auto found_items = find_result.split('\n');
+            for (const QString& found_item : found_items)
+            {
+                QStringList found_item_parts = found_item.split(':');
+                if (found_item_parts.size() >= 2)
+                {
+                    QString file_path = found_item_parts[FindColumn::FilePath];
+                    if (containsPathAsChildren(mContextMenuSourceTreeItem, Column::FileName, file_path.mid(search_path.size() + 1)))
+                    {
+                        QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
+                        new_tree_root_item->addChild(new_child_item);
+                        new_child_item->setText(FindColumn::FilePath, file_path);
+                        new_child_item->setText(FindColumn::Line, found_item_parts[FindColumn::Line].trimmed());
+                        QString found_text_line = found_item_parts[FindColumn::FoundTextLine];
+                        for (int i = FindColumn::FoundTextLine + 1; i<found_item_parts.size(); ++i)
+                        {
+                            found_text_line += ":";
+                            found_text_line += found_item_parts[i];
+                        }
+                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
+                    }
+                }
+            }
+            if (found_items.size() > 0)
+            {
+                showDockedWidget(ui->treeFindText);
+                ui->treeFindText->expandItem(new_tree_root_item);
+            }
+        }
+    }
     else
     {
         QTreeWidget *tree_view {nullptr};
@@ -1374,7 +1306,7 @@ void MainWindow::find_function(find find_item)
             case FindView::History: tree_view = ui->treeHistory;  break;
             case FindView::Branch:  tree_view = ui->treeBranches; break;
             case FindView::Stash:   tree_view = ui->treeStash;    break;
-            case FindView::Text: break;
+            case FindView::Text: case FindView::FindTextInFiles:  break;
         }
 
         if (tree_view)
@@ -1468,71 +1400,11 @@ void MainWindow::find_function(find find_item)
     }
 }
 
-void MainWindow::copyFileName()
+void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
-    copy_file(copy::name);
-}
-
-void MainWindow::copyFilePath()
-{
-    copy_file(copy::file);
-}
-
-void MainWindow::copy_file(copy command)
-{
-    if (mContextMenuSourceTreeItem)
+    if (item)
     {
-        const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
-        const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
-        QFileInfo fileInfo;
-        if (fItemPath.contains(fTopItemPath))
-        {
-            fileInfo = fItemPath;
-        }
-        else
-        {
-            fileInfo = fTopItemPath + QDir::separator() + fItemPath;
-        }
-        QClipboard *clipboard = QApplication::clipboard();
-#if 0
-        auto testData = clipboard->mimeData();
-        if (testData)
-        {
-            auto text = testData->text();
-            auto urls = testData->urls();
-            auto formats = testData->formats();
-            auto data = testData->data("");
-            for (auto format : formats)
-            {
-                data = testData->data(format);
-            }
-            int f = 0;
-        }
-#endif
-        if (command == copy::name)
-        {
-            clipboard->setText(fileInfo.fileName());
-        }
-        else if (command == copy::path)
-        {
-            clipboard->setText(fileInfo.filePath());
-        }
-        else // copy::file
-        {
-            QMimeData* mime_data = new QMimeData();
-            // Copy path of file
-            mime_data->setText(fileInfo.filePath());
-            // Copy file
-            auto url = QUrl::fromLocalFile(fileInfo.filePath());
-            mime_data->setUrls({ url });
-            // Copy file (mFileCopyMimeType may be edited in ini-file)
-            QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
-            mime_data->setData(mFileCopyMimeType, copied_files);
-            // Set the mimedata
-            clipboard->setMimeData(mime_data);
-        }
+        open_file(item->text(FindColumn::FilePath), item->text(FindColumn::Line).toInt());
     }
 }
-
-
 

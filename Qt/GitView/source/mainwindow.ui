@@ -505,6 +505,31 @@
               </column>
              </widget>
             </item>
+            <item>
+             <widget class="QTreeWidget" name="treeFindText">
+              <property name="toolTip">
+               <string>Shows found text items and according lines and files</string>
+              </property>
+              <property name="statusTip">
+               <string>Find in files view</string>
+              </property>
+              <column>
+               <property name="text">
+                <string>File</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Line</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Found Text Line</string>
+               </property>
+              </column>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -661,7 +686,7 @@ File content opened with double click</string>
       <item>
        <widget class="QComboBox" name="comboAppStyle">
         <property name="editable">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
