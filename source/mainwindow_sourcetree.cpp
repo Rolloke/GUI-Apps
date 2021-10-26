@@ -492,7 +492,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     open_file(file_name, {});
 }
 
-void MainWindow::open_file(const QString& file_path, std::optional<int> line_number)
+void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
 {
     on_btnCloseText_clicked();
     const QFileInfo file_info(file_path);
