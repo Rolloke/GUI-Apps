@@ -1264,7 +1264,8 @@ void MainWindow::find_function(find find_item)
         int result = execute(find_command, find_result);
         if (result == 0)
         {
-            auto new_tree_root_item = new QTreeWidgetItem({search_pattern});
+            QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+            auto new_tree_root_item = new QTreeWidgetItem({search_pattern, "", repository_root});
             ui->treeFindText->addTopLevelItem(new_tree_root_item);
 
             auto found_items = find_result.split('\n');
@@ -1278,7 +1279,7 @@ void MainWindow::find_function(find find_item)
                     {
                         QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
                         new_tree_root_item->addChild(new_child_item);
-                        new_child_item->setText(FindColumn::FilePath, file_path);
+                        new_child_item->setText(FindColumn::FilePath, file_path.mid(repository_root.size() + 1));
                         new_child_item->setText(FindColumn::Line, found_item_parts[FindColumn::Line].trimmed());
                         QString found_text_line = found_item_parts[FindColumn::FoundTextLine];
                         for (int i = FindColumn::FoundTextLine + 1; i<found_item_parts.size(); ++i)
@@ -1295,6 +1296,10 @@ void MainWindow::find_function(find find_item)
                 showDockedWidget(ui->treeFindText);
                 ui->treeFindText->expandItem(new_tree_root_item);
             }
+        }
+        else
+        {
+            appendTextToBrowser(find_command + "\n" + find_result, true);
         }
     }
     else
@@ -1404,7 +1409,14 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
 {
     if (item)
     {
-        open_file(item->text(FindColumn::FilePath), item->text(FindColumn::Line).toInt());
+        QTreeWidgetItem *parent = item->parent();
+        if (parent)
+        {
+            QString repository_root = parent->text(FindColumn::FoundTextLine);
+            QString file_path_part  = item->text(FindColumn::FilePath);
+            open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
+            find_item_in_treeSource(repository_root, file_path_part);
+        }
     }
 }
 

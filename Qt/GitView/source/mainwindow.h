@@ -194,7 +194,7 @@ private:
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
     void     appendTextToBrowser(const QString& aText, bool append=false);
-    void     open_file(const QString& file_path, std::optional<int> line_number);
+    void     open_file(const QString& file_path, boost::optional<int> line_number);
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
