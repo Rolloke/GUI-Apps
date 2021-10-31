@@ -1,0 +1,42 @@
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "programmiert von Oliver E.J. Wesnigk\0Reportfähig\0"
+            VALUE "CompanyName", "ELAC Technische Software GmbH  Kiel\0"
+            VALUE "FileDescription", "Druckersteuerung\0"
+            VALUE "FileVersion", "1, 0, 0, 0\0"
+            VALUE "InternalName", "ETSPRTD\0"
+            VALUE "LegalCopyright", "© 1999 ELAC Technische Software GmbH\0"
+            VALUE "OriginalFilename", "ETSPRTD.DLL\0"
+            VALUE "ProductName", "Standard Komponente"
+            VALUE "ProductVersion", "1, 0, 0, 0\0"
+            VALUE "Spezielles","Reportfähig\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC

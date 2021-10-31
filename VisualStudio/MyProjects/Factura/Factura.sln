@@ -1,0 +1,34 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARAPREV", "..\CARAPREV\Caraprev.vcproj", "{F8057C19-3F70-4955-9AA4-04DEDF8D1173}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Factura", "Factura.vcproj", "{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173} = {F8057C19-3F70-4955-9AA4-04DEDF8D1173}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugEngl|Win32 = DebugEngl|Win32
+		Release|Win32 = Release|Win32
+		ReleaseEngl|Win32 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.DebugEngl|Win32.ActiveCfg = DebugEngl|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Release|Win32.ActiveCfg = Release|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.Debug|Win32.Build.0 = Debug|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.DebugEngl|Win32.ActiveCfg = Debug|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.DebugEngl|Win32.Build.0 = Debug|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.Release|Win32.ActiveCfg = Release|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.Release|Win32.Build.0 = Release|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+		{C9C3306D-A1AD-48BC-A5DB-3040206DBE1C}.ReleaseEngl|Win32.Build.0 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

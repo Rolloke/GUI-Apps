@@ -1,0 +1,217 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TESTAPP             ICON    DISCARDABLE     "TestApp.ICO"
+IDI_SMALL               ICON    DISCARDABLE     "SMALL.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_TESTAPP MENU DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Drucken",                     ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    IDM_EXIT
+    END
+    POPUP "Bearbeiten"
+    BEGIN
+        MENUITEM "Kopieren",                    ID_EDIT_COPY_VIEW
+        MENUITEM "Metadatei",                   ID_EDIT_COPY_TO_META
+        MENUITEM "DeviceContext",               ID_EDIT_COPY_TO_DC
+        MENUITEM "Bitmapdatei",                 ID_EDIT_COPY_TO_BITMAP
+        MENUITEM "Dreiecktest",                 ID_EDIT_TESTTRIANGLE
+    END
+    POPUP "Optionen"
+    BEGIN
+        MENUITEM "Animation",                   ID_OPTIONEN_ANIMATION
+        MENUITEM "Grafik an",                   ID_OPTIONS_STARTGRAFICS
+        MENUITEM "Grafik aus",                  ID_OPTIONS_KILLGRAFICS
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_TESTAPP ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SCRNSAVECONFIG DIALOG DISCARDABLE  0, 0, 186, 45
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "CaraScreenSaver"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,131,28,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,28,50,12
+    LTEXT           "Bitmap Datei :",IDC_STATIC,5,6,50,8
+    EDITTEXT        IDC_FILENAME,60,4,120,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Suchen...",IDC_FIND_FILENAME,67,28,50,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SCRNSAVECONFIG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 180
+        HORZGUIDE, 10
+        HORZGUIDE, 40
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_APP_TITLE           "OpenGL Basisklassen Testapplikation"
+    IDC_TESTAPP             "TESTAPP"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "Colormodes"
+        BEGIN
+            MENUITEM "RGB",                         ID_CONTEXT_COLORMODES_RGB
+
+            MENUITEM "4096 Colors",                 ID_CONTEXT_COLORMODES_4096COLORS
+
+            MENUITEM "256 Colors",                  ID_CONTEXT_COLORMODES_256COLORS
+
+        END
+        POPUP "Rendermodes"
+        BEGIN
+            MENUITEM "DIB",                         ID_CONTEXT_RENDERMODES_DIB
+
+            MENUITEM "DIB (double buffer)",         ID_CONTEXT_RENDERMODES_DIBDOUBLEBUFFER
+
+            MENUITEM "Direct",                      ID_CONTEXT_RENDERMODES_GENERIC
+
+            MENUITEM "Direct (double buffer)",      ID_CONTEXT_RENDERMODES_GENERICDOUBLEBUFFER
+
+        END
+    END
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

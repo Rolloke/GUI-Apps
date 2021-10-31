@@ -1,0 +1,4 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by PHPContentMan.rc
+//
+#define HIDC_EM_MEASUREMENT_LIST        0x80640456    // IDD_PICTURE_CATALOG

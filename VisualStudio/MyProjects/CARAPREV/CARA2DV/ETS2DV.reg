@@ -1,0 +1,75 @@
+REGEDIT
+;   Diese .REG-Datei kann von Ihrem SETUP-Programm verwendet werden.
+;   Falls kein SETUP-Programm verfügbar ist, werden die unten stehenden Einträge
+;   automatisch in InitInstance registriert, mit einem Aufruf an 
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+[HKEY_CLASSES_ROOT\.2dv]
+@="ETS2DV Document"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document]
+@="ETS2DV Document"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\verb]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\verb\0]
+@="&Edit"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\server]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.EXE"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\CLSID]
+@="{E217CE60-3215-11D4-B6EC-0000B458D891}"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell\open]
+"wert"=""
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell\open\command]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.exe \"%1\""
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}]
+@="ETS2DV Document"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\Verb]
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\Verb\0]
+@="&Bearbeiten,0,2"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\Verb\1]
+@="&Öffnen,0,2"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\AuxUserType]
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\AuxUserType\2]
+@="ETS2DV"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\AuxUserType\3]
+@="ETS2DV"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\MiscStatus]
+@="32"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\ProgID]
+@="ETS2DV.Document"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\InprocHandler32]
+@="ole32.dll"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\LocalServer32]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.EXE"
+
+[HKEY_CLASSES_ROOT\CLSID\{E217CE60-3215-11D4-B6EC-0000B458D891}\DefaultIcon]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.EXE,1"
+

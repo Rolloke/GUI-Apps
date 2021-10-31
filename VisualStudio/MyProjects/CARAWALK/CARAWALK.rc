@@ -1,0 +1,945 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS DISCARDABLE 
+BEGIN
+    "1",            IDM_VIEW_DETAIL_VERYLOW, VIRTKEY, CONTROL, NOINVERT
+    "2",            IDM_VIEW_DETAIL_LOW,    VIRTKEY, CONTROL, NOINVERT
+    "3",            IDM_VIEW_DETAIL_MEAN,   VIRTKEY, CONTROL, NOINVERT
+    "4",            IDM_VIEW_DETAIL_HIGH,   VIRTKEY, CONTROL, NOINVERT
+    "5",            IDM_VIEW_DETAIL_VERYHIGH, VIRTKEY, CONTROL, NOINVERT
+    "A",            IDM_VIEW_TEX_MAG_LINEAR, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "B",            IDM_VIEW_BOXES,         VIRTKEY, CONTROL, NOINVERT
+    "B",            IDM_OPTIONS_BOX,        VIRTKEY, CONTROL, ALT, NOINVERT
+    "D",            IDM_VIEW_DETAIL,        VIRTKEY, CONTROL, NOINVERT
+    "F",            IDM_OPTIONS_FLYMODE,    VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "G",            IDM_OPTIONS_GHOSTMODE,  VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "I",            IDM_VIEW_TEX_MIN_LINEAR, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "L",            IDM_VIEW_LIGHT,         VIRTKEY, CONTROL, NOINVERT
+    "L",            IDM_OPTIONS_LIGHT,      VIRTKEY, CONTROL, ALT, NOINVERT
+    "P",            IDM_PRINT,              VIRTKEY, CONTROL, NOINVERT
+    "T",            IDM_VIEW_TEXTURE,       VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         IDM_WALK_GEAR_LEFT,     VIRTKEY, NOINVERT
+    VK_F11,         IDM_WALK_GEAR_LEFT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_F12,         IDM_WALK_GEAR_RIGHT,    VIRTKEY, NOINVERT
+    VK_F12,         IDM_WALK_GEAR_RIGHT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      IDM_SELECTALL,          VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_ROOM_WALKING TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      IDM_SELECTALL
+    BUTTON      IDM_PRINT
+    SEPARATOR
+    BUTTON      IDM_TOGGLEFULLVIEW
+    BUTTON      IDM_VIEW_TEXTURE
+    BUTTON      IDM_VIEW_LIGHT
+    BUTTON      IDM_VIEW_BOXES
+    BUTTON      IDM_VIEW_DETAIL
+    SEPARATOR
+    BUTTON      IDM_WALK_FORWARD
+    BUTTON      IDM_WALK_BACKWARD
+    BUTTON      IDM_WALK_TURNRIGHT
+    BUTTON      IDM_WALK_TURNLEFT
+    BUTTON      IDM_WALK_LOOKUP
+    BUTTON      IDM_WALK_LOOKDOWN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_ROOM_WALKING        BITMAP  DISCARDABLE     "room_wal.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_WALKING             CURSOR  DISCARDABLE     "cursor1.cur"
+IDC_TURN_LIGHT          CURSOR  DISCARDABLE     "turnlight.cur"
+IDC_LOOK_AROUND         CURSOR  DISCARDABLE     "LookAround.cur"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BOX_POSITION DIALOGEX 0, 0, 210, 76
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Lautsprecher"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Phi:",IDC_STATIC,10,36,25,8
+    LTEXT           "Theta:",IDC_STATIC,75,36,30,8
+    LTEXT           "Psi:",IDC_STATIC,145,36,20,8
+    COMBOBOX        IDC_BOXDLG_BOXCOMBO,5,4,200,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Schließen",ID_CLOSE,5,59,70,12,0,0,HID_CLOSE
+    GROUPBOX        "Winkel [deg]",IDC_STATIC,5,20,200,35
+    RTEXT           "Phi",IDC_BOXDLG_E_PHI,40,35,30,10,0,WS_EX_CLIENTEDGE
+    RTEXT           "Theta",IDC_BOXDLG_E_THETA,110,35,30,10,0,
+                    WS_EX_CLIENTEDGE
+    RTEXT           "Psi",IDC_BOXDLG_C_PSI,170,35,30,10,0,WS_EX_CLIENTEDGE
+END
+
+IDD_LIGHTPARAM DIALOGEX 0, 0, 200, 135
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Beleuchtung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_LIGHTDLG_LIGHTCOMBO,5,4,105,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_LIGHTDLG_LIGHTCOMBO
+    CONTROL         "Licht an",IDC_LIGHTDLG_LIGHTON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,120,5,70,10,0,HIDC_LIGHTDLG_LIGHTON
+    EDITTEXT        IDC_LIGHTDLG_CUT_OFF,85,79,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHTDLG_CUT_OFF
+    EDITTEXT        IDC_LIGHTDLG_EXPONENT,170,79,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHTDLG_EXPONENT
+    CONTROL         "Paralleles Licht",IDC_LIGHTDLG_SPOT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,100,63,10
+    PUSHBUTTON      "Farbe",IDC_LIGHTDLG_COLOR,140,99,50,12,0,0,
+                    HIDC_LIGHTDLG_COLOR
+    DEFPUSHBUTTON   "OK",IDOK,5,119,50,12,0,0,HIDOK
+    PUSHBUTTON      "Übernehmen",IDAPPLY,75,119,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,145,119,50,12
+    GROUPBOX        "Lichtintensität [%]",IDC_STATIC,5,20,190,45
+    GROUPBOX        "Strahlereigenschaften",IDC_STATIC,5,65,190,50
+    LTEXT           "Öffnungswinkel [deg]:",IDC_STATIC,10,81,70,8
+    LTEXT           "Bündelung [%]:",IDC_STATIC,115,81,50,8,0,0,HIDC_STATIC
+    LTEXT           " 0",IDC_STATIC,10,31,8,8
+    LTEXT           "100",IDC_STATIC,177,31,13,8
+    LTEXT           "50",IDC_STATIC,96,31,9,8
+    CONTROL         "Slider",IDC_LIGHTDLG_DIMMER,"msctls_trackbar32",TBS_TOP | 
+                    TBS_ENABLESELRANGE | TBS_TOOLTIPS | WS_TABSTOP,10,40,180,
+                    20,0,HIDC_LIGHTDLG_DIMMER
+END
+
+IDD_BOX_PROPERTIES DIALOGEX 0, 0, 210, 205
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Lautsprecher"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_BOXDLG_BOXCOMBO,5,4,200,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Polygon :",IDC_STATIC,5,26,30,8
+    EDITTEXT        IDC_BPR_POLY_EDT,43,24,40,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin2",IDC_BPR_POLY_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,85,23,11,
+                    14
+    GROUPBOX        "Beleuchtungseigenschaften / Farbattribute",IDC_STATIC,5,
+                    40,200,145
+    PUSHBUTTON      "Umgebungslicht",IDC_BTN_AMBIENT,10,54,75,12
+    PUSHBUTTON      "Diffuses Licht",IDC_BTN_DIFFUSE,10,69,75,12
+    PUSHBUTTON      "Reflektiertes Licht",IDC_BTN_SPECULAR,10,84,75,12
+    PUSHBUTTON      "Emittiertes Licht",IDC_BTN_EMISSION,10,99,75,12
+    PUSHBUTTON      "Materialfarbe",IDC_BTN_COLOR,10,114,75,12
+    CONTROL         "a",IDC_AMBIENT_COL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    87,54,16,12
+    CONTROL         "d",IDC_DIFFUSE_COL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    87,69,16,12
+    CONTROL         "s",IDC_SPECULAR_COL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    87,84,16,12
+    CONTROL         "e",IDC_EMISSION_COL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    87,99,16,12
+    CONTROL         "m",IDC_MATERIAL_COL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    87,114,16,12
+    CONTROL         "Textur",IDC_BTN_BITMAP,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,110,54,90,73
+    CONTROL         "Textur speichern",IDC_CK_BMP_FILE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,130,90,10
+    LTEXT           "Skalierung der Textur (x, y)",IDC_STATIC,10,156,100,8
+    EDITTEXT        IDC_BPR_SCALE_X_EDT,125,154,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BPR_SCALE_Y_EDT,165,154,35,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_MATERIAL_COMBO,100,24,105,132,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Speichern",IDC_BPR_SAVE_BOX,10,189,50,12
+    LTEXT           "Größe der Textur (x, y)",IDC_STATIC,10,171,100,8
+    EDITTEXT        IDC_BPR_SIZE_X_EDT,125,169,35,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    EDITTEXT        IDC_BPR_SIZE_Y_EDT,165,169,35,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    CONTROL         "autom. Koordinaten",IDC_CK_TEX_GENCOORD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,143,90,10
+    EDITTEXT        IDC_BPR_SHININESS_EDT,70,129,35,12,ES_AUTOHSCROLL
+    LTEXT           "Glanzexponent :",IDC_STATIC,10,131,56,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_LIGHTPARAM DLGINIT
+BEGIN
+    IDC_LIGHTDLG_LIGHTCOMBO, 0x403, 16, 0
+0x7247, 0x6e75, 0x6864, 0x6c65, 0x696c, 0x6b67, 0x6965, 0x0074, 
+    IDC_LIGHTDLG_LIGHTCOMBO, 0x403, 13, 0
+0x6154, 0x6373, 0x6568, 0x6c6e, 0x6d61, 0x6570, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CARAWALK_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Drucker &einrichten...",      IDM_PRINTERSETUP
+        MENUITEM "&Drucken...\tStrg+P",         IDM_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_FILE_CLOSE_PROGRAM
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "A&nsicht kopieren\tStrg+A",   IDM_SELECTALL
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Raum",                       IDM_TOOLBAR3D
+        MENUITEM "S&tatuszeile",                IDM_STATUSBAR
+        MENUITEM SEPARATOR
+        MENUITEM "Gan&zer Bildschirm",          IDM_TOGGLEFULLVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Boden",                      IDM_SHOWFLOORVIEW
+        MENUITEM "&Decke",                      IDM_SHOWCEILINGVIEW
+        MENUITEM "&Wände",                      IDM_SHOWWALLVIEW
+        MENUITEM "Boxen && &Hörer",             IDM_SHOWSOURCEVIEW
+        MENUITEM "Ra&um",                       IDM_SHOW3DVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "Te&xturen\tStrg+T",           IDM_VIEW_TEXTURE
+        MENUITEM "&Licht\tStrg+L",              IDM_VIEW_LIGHT
+        MENUITEM "Laut&sprecher\tStrg+B",       IDM_VIEW_BOXES
+        POPUP "&Auflösung\tStrg+D"
+        BEGIN
+            MENUITEM "&Sehr niedrig\tStrg+1",       IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Niedrig\tStrg+2",            IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Mittel\tStrg+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&Hoch\tStrg+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "S&ehr hoch\tStrg+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+    END
+    POPUP "Be&wegungen"
+    BEGIN
+        MENUITEM "Vorwärts gehen\tHoch",        IDM_WALK_FORWARD
+        MENUITEM "Rückwärts gehen\tRunter",     IDM_WALK_BACKWARD
+        MENUITEM "Nach links drehen\tLinks",    IDM_WALK_TURNLEFT
+        MENUITEM "Nach rechts drehen\tRechts",  IDM_WALK_TURNRIGHT
+        MENUITEM "Nach oben schauen\tBild Auf", IDM_WALK_LOOKUP
+        MENUITEM "Nach unten schauen\tBild Ab", IDM_WALK_LOOKDOWN
+    END
+    POPUP "&Optionen"
+    BEGIN
+        MENUITEM "&Licht...\tStrg+Alt+L",       IDM_OPTIONS_LIGHT
+        MENUITEM "Laut&sprecher...\tStrg+Alt+B", IDM_OPTIONS_BOX
+        POPUP "Texturinterpolation"
+        BEGIN
+            MENUITEM "Ver&größerung",               IDM_VIEW_TEX_MAG_LINEAR
+            MENUITEM "Ver&kleinerung",              IDM_VIEW_TEX_MIN_LINEAR
+        END
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "&Hilfethemen\tF1",            IDM_HELP_THEMES
+        MENUITEM "Inf&o über CARACAD...",       IDM_HELP_INFO
+    END
+END
+
+IDR_CONTEXT_DETAIL MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "&Auflösung"
+        BEGIN
+            MENUITEM "&Sehr niedrig\tStrg+1",       IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Niedrig\tStrg+2",            IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Mittel\tStrg+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&Hoch\tStrg+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "S&ehr hoch\tStrg+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+        MENUITEM "Te&xturen",                   IDM_VIEW_TEXTURE
+        MENUITEM "&Licht...",                   IDM_OPTIONS_LIGHT
+        MENUITEM "A&nsicht kopieren",           IDM_SELECTALL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_BOX_POSITION, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 70
+        VERTGUIDE, 75
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+    END
+
+    IDD_LIGHTPARAM, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 80
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 115
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 60
+        HORZGUIDE, 65
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+    END
+
+    IDD_BOX_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 85
+        VERTGUIDE, 87
+        VERTGUIDE, 110
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 30
+        HORZGUIDE, 40
+        HORZGUIDE, 60
+        HORZGUIDE, 75
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 120
+        HORZGUIDE, 135
+        HORZGUIDE, 148
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 185
+        HORZGUIDE, 195
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_WALK_FORWARD        "Vorwärts gehen\nVorwärts (Hoch)"
+    IDM_WALK_BACKWARD       "Rückwärts gehen\nRückwärts (Runter)"
+    IDM_WALK_TURNRIGHT      "Nach rechts drehen\nNach rechts (Rechts)"
+    IDM_WALK_TURNLEFT       "Nach links drehen\nNach links (Links)"
+    IDM_WALK_LOOKUP         "Nach oben schauen\nNach oben (Bild Auf)"
+    IDM_WALK_LOOKDOWN       "Nach unten schauen\nNach unten (Bild Ab)"
+    IDS_MOVING_MOUSE        "Gehen mit der Maus"
+    IDS_LOOKING_MOUSE       "Drehen, schauen mit der Maus"
+    IDS_TURNLIGHT_MOUSE     "Lichtwinkel ändern mit der Maus"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_TEXTURE        "Schaltet die Texturen ein oder aus\nTexturen ein (Strg+T)\nTexturen aus (Strg+T)"
+    IDM_VIEW_LIGHT          "Schaltet die Beleuchtung ein oder aus\nBeleuchtung ein (Strg+L)\nBeleuchtung aus (Strg+L)"
+    IDM_VIEW_BOXES          "Schaltet das Anzeigen der Lautsprecher ein oder aus\nLautsprecher ein (Strg+B)\nLautsprecher aus (Strg+B)"
+    IDM_VIEW_DETAIL         "Ändert die Grafikauflösung in 5 Stufen\nAuflösung (Strg+D)"
+    IDM_VIEW_DETAIL_VERYLOW "Sehr niedrige Auflösung"
+    IDM_VIEW_DETAIL_LOW     "Niedrige Auflösung"
+    IDM_VIEW_DETAIL_MEAN    "Mittlere Auflösung"
+    IDM_VIEW_DETAIL_HIGH    "Hohe Auflösung"
+    IDM_VIEW_DETAIL_VERYHIGH "Sehr hohe Auflösung"
+    IDM_VIEW_TEX_MAG_LINEAR "Interpoliert die Texturen bei Vergrößerung"
+    IDM_VIEW_TEX_MIN_LINEAR "Interpoliert die Texturen bei Verkleinerung"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_LIGHT       "Ändert die Einstellungen für die Beleuchtung des Raums"
+    IDM_OPTIONS_BOX         "Zeigt die Einstellung der Lautsprecherausrichtung"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_ROOM_WALKING        "Raum"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VALUES_CHANGED      "Sollen die Änderungen übernommen werden ?"
+    IDS_LIGHTCOLORDLG_HEADING "Farbe des Lichtes"
+    IDS_BMP_FILTER          "Bitmap (*.bmp)\n*.BMP\n\n"
+    IDS_ERROR_MSG_BOX       "Fehler in CARAWALK.dll"
+    IDS_HELP_STRING         "Zeigt eine 3D-Ansicht."
+    IDS_MSG_CARA_WALK       "CARA"
+    IDS_ERROR_HEAP          "Heap Speicher Fehler"
+    IDS_ERROR_WRONG_FOLDER  "Falsches Verzeichnis"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CLOSE                "Schließt das Dialogfeld."
+    IDC_LIGHTDLG_LIGHTCOMBO "Wählen Sie die Lichquelle, die sie einstellen möchen."
+    IDC_LIGHTDLG_CUT_OFF    "In diesem Feld können Sie den Öffnungswinkel des\nLichtkegels (0 - 180 deg) für die Lichtquelle als Strahler\neinstellen. 360 deg entspricht einer Punktlichtquelle."
+    IDC_LIGHTDLG_LIGHTON    "Aktivieren Sie die Lichtquelle."
+    IDC_LIGHTDLG_EXPONENT   "Hier können Sie die Bündelung (0 - 100%) des Lichtkegels\nfür die Lichtquelle als Strahler einstellen. Die Bündelung\ndefiniert die Abnahme der Helligkeit von der Mitte des\nLichtkegels zum Rand hin."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LIGHTDLG_SPOT       "Bei Aktivierung sendet die Lichtquelle \tparalleles Licht\naus, andernfalls sendet sie \tgebündeltes Licht aus."
+    IDC_LIGHTDLG_COLOR      "Ermöglicht die Auswahl der Lichtfarbe."
+    IDC_LIGHTDLG_DIMMER     "Hier können Sie die Intensität der Lichtquelle\nvon 0 bis 100 % einstellen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BOXDLG_BOXCOMBO     "Listet die im Raum vorhandenen Lautsprecher zur Auswahl auf."
+    IDC_BOXDLG_E_PHI        "Dieses Feld zeigt den Winkel \tPhi des Lautsprechers an.\nDer Lautsprecher kann um +/- 180 deg um seine vertikale\nAchse gedreht werden."
+    IDC_BOXDLG_E_THETA      "Dieses Feld zeigt den Winkel \tTheta des Lautsprechers an.\nDer Lautsprecher kann um +/- 90 deg geneigt werden."
+    IDC_BOXDLG_C_PSI        "Dieses Feld zeigt den Winkel \tPsi des Lautsprechers an.\nDer Lautsprecher kann um  0, 90, 180 und -90 deg\ngekippt werden."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDOK                "Schließt das Dialogfeld und speichert\nalle vorgenommenen Änderungen."
+    IDS_IDCANCEL            "Schließt das Dialogfeld, ohne die\nÄnderungen zu speichern."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDAPPLY             "Übernimmt die Änderungen, ohne das\nDialogfeld zu schließen."
+    IDS_FORMAT_MIN_MAX_INT2 "  Zulässiger\nWertebereich\n \t%d - \t%d  !"
+    IDS_FORMAT_MIN_MAX_DOUBLE2 
+                            "  Zulässiger\nWertebereich\n \t%d.%0xd - \t%d.%0xd  !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_LS_BOX_FOLDER "LS_BOX Verzeichnis"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BOX_POSITION DIALOGEX 0, 0, 210, 76
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Loudspeaker"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Phi:",IDC_STATIC,10,36,25,8
+    LTEXT           "Theta:",IDC_STATIC,75,36,30,8
+    LTEXT           "Psi:",IDC_STATIC,145,36,20,8
+    COMBOBOX        IDC_BOXDLG_BOXCOMBO,5,4,200,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Close",ID_CLOSE,5,59,70,12,0,0,HID_CLOSE
+    GROUPBOX        "Angle [deg]",IDC_STATIC,5,20,200,35
+    RTEXT           "Phi",IDC_BOXDLG_E_PHI,40,35,30,10,0,WS_EX_CLIENTEDGE
+    RTEXT           "Theta",IDC_BOXDLG_E_THETA,110,35,30,10,0,
+                    WS_EX_CLIENTEDGE
+    RTEXT           "Psi",IDC_BOXDLG_C_PSI,170,35,30,10,0,WS_EX_CLIENTEDGE
+END
+
+IDD_LIGHTPARAM DIALOGEX 0, 0, 200, 135
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Illumination"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_LIGHTDLG_LIGHTCOMBO,5,4,105,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_LIGHTDLG_LIGHTCOMBO
+    CONTROL         "Light On",IDC_LIGHTDLG_LIGHTON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,120,5,70,10,0,HIDC_LIGHTDLG_LIGHTON
+    EDITTEXT        IDC_LIGHTDLG_CUT_OFF,85,79,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHTDLG_CUT_OFF
+    EDITTEXT        IDC_LIGHTDLG_EXPONENT,170,79,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHTDLG_EXPONENT
+    CONTROL         "Parallel Light",IDC_LIGHTDLG_SPOT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,100,56,10
+    PUSHBUTTON      "Color",IDC_LIGHTDLG_COLOR,140,99,50,12,0,0,
+                    HIDC_LIGHTDLG_COLOR
+    DEFPUSHBUTTON   "OK",IDOK,5,119,50,12,0,0,HIDOK
+    PUSHBUTTON      "Apply",IDAPPLY,75,119,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,145,119,50,12
+    GROUPBOX        "Light Intensity [%]",IDC_STATIC,5,20,190,45
+    GROUPBOX        "Spot Properties",IDC_STATIC,5,65,190,50
+    LTEXT           "Angle of Beam [deg]:",IDC_STATIC,10,81,70,8
+    LTEXT           "Focus [%]:",IDC_STATIC,115,81,50,8,0,0,HIDC_STATIC
+    LTEXT           " 0",IDC_STATIC,10,31,8,8
+    LTEXT           "100",IDC_STATIC,177,31,13,8
+    LTEXT           "50",IDC_STATIC,96,31,9,8
+    CONTROL         "Slider",IDC_LIGHTDLG_DIMMER,"msctls_trackbar32",TBS_TOP | 
+                    TBS_ENABLESELRANGE | TBS_TOOLTIPS | WS_TABSTOP,10,40,180,
+                    20,0,HIDC_LIGHTDLG_DIMMER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_LIGHTPARAM DLGINIT
+BEGIN
+    IDC_LIGHTDLG_LIGHTCOMBO, 0x403, 14, 0
+0x6d41, 0x6962, 0x6e65, 0x2074, 0x696c, 0x6867, 0x0074, 
+    IDC_LIGHTDLG_LIGHTCOMBO, 0x403, 11, 0
+0x6c46, 0x7361, 0x6c68, 0x6769, 0x7468, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CARAWALK_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Printer Set&up...",           IDM_PRINTERSETUP
+        MENUITEM "&Print...\tCtrl+P",           IDM_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit\tAlt+F4",               ID_FILE_CLOSE_PROGRAM
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Copy &View\tCtrl+A",          IDM_SELECTALL
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "R&oom Toolbar",               IDM_TOOLBAR3D
+        MENUITEM "S&tatus Bar",                 IDM_STATUSBAR
+        MENUITEM SEPARATOR
+        MENUITEM "F&ull Screen",                IDM_TOGGLEFULLVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Floor",                      IDM_SHOWFLOORVIEW
+        MENUITEM "&Ceiling",                    IDM_SHOWCEILINGVIEW
+        MENUITEM "&Wall",                       IDM_SHOWWALLVIEW
+        MENUITEM "Speaker && &Listener",        IDM_SHOWSOURCEVIEW
+        MENUITEM "&Room",                       IDM_SHOW3DVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "Te&xtures\tCtrl+T",           IDM_VIEW_TEXTURE
+        MENUITEM "&Illumination\tCtrl+L",       IDM_VIEW_LIGHT
+        MENUITEM "Loud&speaker\tCtrl+B",        IDM_VIEW_BOXES
+        POPUP "R&esolution\tCtrl+D"
+        BEGIN
+            MENUITEM "&Very Low\tCtrl+1",           IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Low\tCtrl+2",                IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Medium\tCtrl+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&High\tCtrl+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "V&ery High\tCtrl+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+    END
+    POPUP "&Movements"
+    BEGIN
+        MENUITEM "Walk &Forwards\tUp",          IDM_WALK_FORWARD
+        MENUITEM "Walk &Backwards\tDown",       IDM_WALK_BACKWARD
+        MENUITEM "Turn &Left\tLeft",            IDM_WALK_TURNLEFT
+        MENUITEM "Turn &Right\tRight",          IDM_WALK_TURNRIGHT
+        MENUITEM "Look &Up\tPage Up",           IDM_WALK_LOOKUP
+        MENUITEM "Look &Down\tPage Down",       IDM_WALK_LOOKDOWN
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Light...\tCtrl+Alt+L",       IDM_OPTIONS_LIGHT
+        MENUITEM "Loud&speaker...\tCtrl+Alt+B", IDM_OPTIONS_BOX
+        POPUP "Te&xture Interpolation"
+        BEGIN
+            MENUITEM "&Enlargement",                IDM_VIEW_TEX_MAG_LINEAR
+            MENUITEM "&Reduction",                  IDM_VIEW_TEX_MIN_LINEAR
+        END
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics\tF1",            IDM_HELP_THEMES
+        MENUITEM "&About CARACAD...",           IDM_HELP_INFO
+    END
+END
+
+IDR_CONTEXT_DETAIL MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "R&esolution\tCtrl+D"
+        BEGIN
+            MENUITEM "&Very Low\tCtrl+1",           IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Low\tCtrl+2",                IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Medium\tCtrl+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&High\tCtrl+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "V&ery High\tCtrl+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+        MENUITEM "Te&xtures",                   IDM_VIEW_TEXTURE
+        MENUITEM "&Light...",                   IDM_OPTIONS_LIGHT
+        MENUITEM "Copy &View",                  IDM_SELECTALL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_BOX_POSITION, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 70
+        VERTGUIDE, 75
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+    END
+
+    IDD_LIGHTPARAM, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 80
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 115
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 60
+        HORZGUIDE, 65
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_WALK_FORWARD        "Walks forward\nForward (Up)"
+    IDM_WALK_BACKWARD       "Walks backward\nBackward (Down)"
+    IDM_WALK_TURNRIGHT      "Turns right\nTurn Right (Right)"
+    IDM_WALK_TURNLEFT       "Turns left\nTurn Left (Left)"
+    IDM_WALK_LOOKUP         "Looks up\nLook Up (Page Up)"
+    IDM_WALK_LOOKDOWN       "Looks down\nLook Down (Page Down)"
+    IDS_MOVING_MOUSE        "Mouse-controlled walking"
+    IDS_LOOKING_MOUSE       "Mouse-controlled looking and turning around"
+    IDS_TURNLIGHT_MOUSE     "Mouse-controlled light"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_TEXTURE        "Shows or hides the material textures\nTextures On (Ctrl+T)\nTextures Off (Ctrl+T)"
+    IDM_VIEW_LIGHT          "Switches the illumination on or off\nIllumination On (Ctrl+L)\nIllumination Off (Ctrl+L)"
+    IDM_VIEW_BOXES          "Shows or hides the Loudspeakers\nLoudspeakers On (Ctrl+B)\nLoudspeakers Off (Ctrl+B)"
+    IDM_VIEW_DETAIL         "Changes the resolution of the graphics in 5 steps\nChange Resolution (Ctrl+D)"
+    IDM_VIEW_DETAIL_VERYLOW "Very low resolution"
+    IDM_VIEW_DETAIL_LOW     "Low resolution"
+    IDM_VIEW_DETAIL_MEAN    "Medium resolution"
+    IDM_VIEW_DETAIL_HIGH    "High resolution"
+    IDM_VIEW_DETAIL_VERYHIGH "Very high resolution"
+    IDM_VIEW_TEX_MAG_LINEAR "Interpolates the textures upon enlargement"
+    IDM_VIEW_TEX_MIN_LINEAR "Interpolates the textures upon reduction"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_LIGHT       "Changes the illumination properties"
+    IDM_OPTIONS_BOX         "Shows the orientation of the loudspeaker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_ROOM_WALKING        "Room"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VALUES_CHANGED      "Apply all changes ?"
+    IDS_LIGHTCOLORDLG_HEADING "Light Color"
+    IDS_BMP_FILTER          "Bitmap (*.bmp)\n*.BMP\n\n"
+    IDS_ERROR_MSG_BOX       "Error in CARAWALK.dll"
+    IDS_HELP_STRING         "Displays a 3D view"
+    IDS_MSG_CARA_WALK       "CARA"
+    IDS_ERROR_HEAP          "Heap-Error"
+    IDS_ERROR_WRONG_FOLDER  "Wrong Folder"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CLOSE                "Closes the Dialog Box"
+    IDC_LIGHTDLG_LIGHTCOMBO "Choose the light source you would like to adjust"
+    IDC_LIGHTDLG_CUT_OFF    "You can adjust the angle of beam in a range from\n0 to 180 degree in this field. InAddition you can define 360\ndegree to get a point source."
+    IDC_LIGHTDLG_LIGHTON    "Activate the light source"
+    IDC_LIGHTDLG_EXPONENT   "In this field you can adjust the focus (0 - 100%) of the\nbeam. The focus defines the decrease in brightness\nfrom the center of the beam towards the margin."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LIGHTDLG_SPOT       "Upon checking the spot light emits parallel light."
+    IDC_LIGHTDLG_COLOR      "Changes the light color"
+    IDC_LIGHTDLG_DIMMER     "Adjust the light intensity in\na range from 0 to 100%."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BOXDLG_BOXCOMBO     "Choose a loudspeaker out of this room."
+    IDC_BOXDLG_E_PHI        "Displays the lateral angle \t(Phi) of the loudspeaker.\nThe valid range is +/- 180 degrees."
+    IDC_BOXDLG_E_THETA      "Displays the vertical angle \t(Theta) of the loudspeaker.\nThe valid range is +/- 90 degrees."
+    IDC_BOXDLG_C_PSI        "Displays the tipping angle \t(Psi) of the loudspeaker.\nValid values are 0, 90, 180 and -90 degrees."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDOK                "Closes the dialog box and saves any changes you have made."
+    IDS_IDCANCEL            "Closes the dialog box without saving the changes."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDAPPLY             "Applies the changes without closing the dialog box."
+    IDS_FORMAT_MIN_MAX_INT2 "Values between\n\t%d and \t%d\nare accepted !"
+    IDS_FORMAT_MIN_MAX_DOUBLE2 
+                            "Values between\n\t%d.%0xd and \t%d.%0xd\nare accepted !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_LS_BOX_FOLDER "LS_BOX-Folder"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish (Castilian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESP)
+#ifdef _WIN32
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS DISCARDABLE 
+BEGIN
+    "1",            IDM_VIEW_DETAIL_VERYLOW, VIRTKEY, CONTROL, NOINVERT
+    "2",            IDM_VIEW_DETAIL_LOW,    VIRTKEY, CONTROL, NOINVERT
+    "3",            IDM_VIEW_DETAIL_MEAN,   VIRTKEY, CONTROL, NOINVERT
+    "4",            IDM_VIEW_DETAIL_HIGH,   VIRTKEY, CONTROL, NOINVERT
+    "5",            IDM_VIEW_DETAIL_VERYHIGH, VIRTKEY, CONTROL, NOINVERT
+    "A",            IDM_VIEW_TEX_MAG_LINEAR, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "B",            IDM_VIEW_BOXES,         VIRTKEY, CONTROL, NOINVERT
+    "B",            IDM_OPTIONS_BOX,        VIRTKEY, CONTROL, ALT, NOINVERT
+    "D",            IDM_VIEW_DETAIL,        VIRTKEY, CONTROL, NOINVERT
+    "F",            IDM_OPTIONS_FLYMODE,    VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "G",            IDM_OPTIONS_GHOSTMODE,  VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "I",            IDM_VIEW_TEX_MIN_LINEAR, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "L",            IDM_VIEW_LIGHT,         VIRTKEY, CONTROL, NOINVERT
+    "L",            IDM_OPTIONS_LIGHT,      VIRTKEY, CONTROL, ALT, NOINVERT
+    "P",            IDM_PRINT,              VIRTKEY, CONTROL, NOINVERT
+    "T",            IDM_VIEW_TEXTURE,       VIRTKEY, CONTROL, NOINVERT
+    VK_DOWN,        IDM_WALK_BACKWARD,      VIRTKEY, NOINVERT
+    VK_DOWN,        IDM_WALK_BACKWARD_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         IDM_WALK_GEAR_LEFT,     VIRTKEY, NOINVERT
+    VK_F11,         IDM_WALK_GEAR_LEFT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_F12,         IDM_WALK_GEAR_RIGHT,    VIRTKEY, NOINVERT
+    VK_F12,         IDM_WALK_GEAR_RIGHT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      IDM_SELECTALL,          VIRTKEY, SHIFT, NOINVERT
+    VK_LEFT,        IDM_WALK_TURNLEFT,      VIRTKEY, NOINVERT
+    VK_LEFT,        IDM_WALK_TURNLEFT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_NEXT,        IDM_WALK_LOOKDOWN,      VIRTKEY, NOINVERT
+    VK_NEXT,        IDM_WALK_LOOKDOWN_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_PRIOR,       IDM_WALK_LOOKUP,        VIRTKEY, NOINVERT
+    VK_PRIOR,       IDM_WALK_LOOKUP_CTRL,   VIRTKEY, CONTROL, NOINVERT
+    VK_RIGHT,       IDM_WALK_TURNRIGHT,     VIRTKEY, NOINVERT
+    VK_RIGHT,       IDM_WALK_TURNRIGHT_CTRL, VIRTKEY, CONTROL, NOINVERT
+    VK_UP,          IDM_WALK_FORWARD,       VIRTKEY, NOINVERT
+    VK_UP,          IDM_WALK_FORWARD_CTRL,  VIRTKEY, CONTROL, NOINVERT
+END
+
+#endif    // Spanish (Castilian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

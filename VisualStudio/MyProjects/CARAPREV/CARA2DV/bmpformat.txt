@@ -1,0 +1,37 @@
+Format 1
+	bfType	0x4d42
+	bfSize	0x001522c6
+	bfReserved1	0x0000
+	bfReserved2	0x0000
+	bfOffBits	0x00000036
+-	bmih	{...}
+	biSize	0x00000028
+	biWidth	0x00000254
+	biHeight	0x00000245
+	biPlanes	0x0001
+	biBitCount	0x0020
+	biCompression	0x00000000
+	biSizeImage	0x00152290
+	biXPelsPerMeter	0x00000ec4
+	biYPelsPerMeter	0x00000ec4
+	biClrUsed	0x00000000
+	biClrImportant	0x00000000
+
+Format 2
+	bfType	0x4d42
+	bfSize	0x000fda22
+	bfReserved1	0x0000
+	bfReserved2	0x0000
+	bfOffBits	0x00000036
+-	bmih	{...}
+	biSize	0x00000028
+	biWidth	0x00000254
+	biHeight	0x00000245
+	biPlanes	0x0001
+	biBitCount	0x0018
+	biCompression	0x00000000
+	biSizeImage	0x00000000
+	biXPelsPerMeter	0x00000000
+	biYPelsPerMeter	0x00000000
+	biClrUsed	0x00000000
+	biClrImportant	0x00000000

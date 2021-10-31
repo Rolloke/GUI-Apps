@@ -1,0 +1,117 @@
+:Base ETS2DV.hlp
+:Title Darstellungs-Module von ETS (Kiel)
+:Link ETS2DV.hlp           ; ETS2DView Hilfe
+:Link ETS3DV.hlp           ; ETS3DView Hilfe
+1 ETS2DView
+2 Allgemein
+3 Was ist ETS2DView ?=ABOUT_ETS2DVIEW
+3 Hilfethemen=main_menu2D
+2 Menüs und Befehle
+3 Menü Datei=menu_file2D
+3 Menü Bearbeiten=menu_edit2D
+3 Menü Ansicht=menu_view2D
+3 Menü Einstellungen=menu_options2D
+3 Menü Funktionen=menu_functions2D
+3 Menü Operationen=menu_operations2D
+3 Menü Hilfe=menu_help2D
+3 Systemmenü=system_menu2D
+3 Kontextmenü=context_menu2D
+2 Inhalt des Dokumentes
+3 Aufbau von Plots
+4 Aufbau=plot_structure
+4 Überschrift=HID_PLOT_HEADING
+4 Gitterlinien=HID_PLOT_GRIDLINES
+4 Gittertext=HID_PLOT_GRIDTEXT
+4 Kurventexte=HID_PLOT_CURVETEXT
+4 Achsenteilung=HID_PLOT_DIVISION
+4 Einheiten=HID_PLOT_UNITS
+4 Zahlendarstellung=HID_PLOT_NUMBER
+3 Aufbau von Kurven
+4 Aufbau=curve_structure
+4 Beschreibung=HID_CURVE_DESCRIPTION
+4 Farbe und Dicke=HID_CURVE_COLOR
+4 Einheiten=HID_CURVE_UNITS
+4 Weitere Parameter=HID_CURVE_PARAMS
+3 Arbeiten mit Plots
+4 Arbeiten mit Plots=working_with_plots
+4 Einstellen von Bereichen mit dem Mauszeiger=HID_FUNC_ZOOMMODE
+4 Auswählen von Bereichen aus der Bereichsliste=HID_PLOT_ZOOMLISTFUNTIONS
+4 Das Eigenschaftsblatt Bereich=HIDD_PROPPAGE_PLOTRANGE
+4 Darstellung des Plots mit einer Referenzkurve=HID_PLOT_REFPRESENTATION
+4 Das Eigenschaftsblatt Darstellung=HIDD_PROPPAGE_PLOTVIEW
+4 Zwischenablageformate eines Plots=HID_PLOT_CLIPBOARDFORMATS
+3 Arbeiten mit Kurven
+4 Arbeiten mit Kurven=working_with_curves
+4 Importieren von Kurven=HID_FUNC_LOAD_CURVE
+4 Importmakros erstellen=HID_FUNC_MAKROEDIT
+4 Das Eigenschaftsblatt Farben=HIDD_PROPPAGE_CURVE_COLORS
+4 Exportieren von Kurven=HID_FUNC_SAVE_CURVE
+4 Editieren=HID_FUNC_EDITMODE
+4 Das Eigenschaftsblatt Kurven=HIDD_PROPPAGE_CURVE
+4 Kurvenglättung=HID_OPERATION_AVERAGE
+4 Der Dialog für Kurvenglättung=HIDD_AVERAGE
+4 Interpolation=HID_OPERATION_SPLINE
+4 Der Dialog für Spline Interpolation=HIDD_SPLINECURVE
+4 Differentiation=HID_OPERATION_DERIVE
+4 Der Dialog für Differentiation=HIDD_DERIVE
+4 Integration=HID_OPERATION_INTEGRATE
+4 Der Dialog für Integration=HIDD_INTEGRATE
+4 Kurvenregression=HID_OPERATION_FITCURVE
+4 Der Dialog für Kurvenregression=HIDD_FITCURVE
+4 Erstellen=HID_OPERATION_CREATECURVE
+4 Der Dialog für Kurvenerstellung=HIDD_CREATECURVE
+4 Zwischenablageformate einer Kurve=HID_CURVE_CLIPBOARDFORMATS
+1 ETS3DView
+2 Allgemein
+3 Was ist ETS3DView ?=ABOUT_ETS3DVIEW@ETS3DV.hlp
+3 Hilfethemen=main_menu3D@ETS3DV.hlp
+2 Menüs und Befehle
+3 Menü Datei=menu_file3D@ETS3DV.hlp
+3 Menü Bearbeiten=menu_edit3D@ETS3DV.hlp
+3 Menü Ansicht=menu_view3D@ETS3DV.hlp
+3 Menü Einstellungen=menu_options3D@ETS3DV.hlp
+3 Menü Animation=menu_film3D@ETS3DV.hlp
+3 Menü Objekt=menu_object3D@ETS3DV.hlp
+3 Menü Hilfe=menu_help3D@ETS3DV.hlp
+3 Systemmenü=system_menu3D@ETS3DV.hlp
+2 Inhalt des Dokumentes
+3 3D-Objekte=ets3d_objects@ETS3DV.hlp
+3 Darstellungsparameter=HIDD_VIEW_DIALOG@ETS3DV.hlp
+3 Objektbeleuchtung=HIDD_LIGHT_DIALOG@ETS3DV.hlp
+3 Standardeinstellungen=HIDD_STANDARD@ETS3DV.hlp
+3 Farbstufenskalierung=HIDR_CARA_COLOR@ETS3DV.hlp
+3 Animation=HIDR_FILMTOOLBAR@ETS3DV.hlp
+3 Maussteuerung=mouse_control3D@ETS3DV.hlp
+3 Koordinatenachsen / Beschriftung=HID_VIEW_AXIS@ETS3DV.hlp
+3 Gitterlinien / Einheiten=HID_VIEW_GRID@ETS3DV.hlp
+1 Druckvorschau
+2 Allgemein
+3 Druckvorschau=HID_FILE_PRINT_PREVIEW
+3 Drucken=HID_FILE_PRINT
+3 Drucker einrichten=HIDD_PRINTDIALOG
+3 Druckerfarben=HID_VIEW_PRINTER_COLORS
+3 Editiersymbolleiste der Druckvorschau=HIDR_PREVIEWBAR
+2 Darstellungselemente
+3 Darstellungselemente=HID_REPRESENTATION_OBJ
+3 Editieren von Darstellungselementen=HID_FUNC_PICK
+3 Darstellungsreihenfolge=HID_SHOW_LABELS
+3 Erstellen von Text=HID_FUNC_TEXT
+3 Editieren von Text=HIDD_TEXTDLG
+3 Erstellen von Linien=HID_FUNC_LINE
+3 Erstellen von Rechtecken=HID_FUNC_RECTANGLE
+3 Erstellen von Bezierkurven=HID_FUNC_BEZIER
+3 Erstellen von Ellipsen=HID_FUNC_CIRCLE
+3 Erstellen von Bezierkreisen=HID_FUNC_BEZIERCIRCLE
+3 Einfügen von Bildern=HIDD_PASTE_SELECTIV
+3 Das Eigenschaftsblatt Schriftart=HIDD_PROPPAGE_FONT
+3 Das Eigenschaftsblatt Rahmen bzw. Linie=HIDD_PROPPAGE_LINE
+3 Das Eigenschaftsblatt Hintergrund=HIDD_PROPPAGE_BRUSH
+3 Das Eigenschaftsblatt Bildeigenschaften=HIDD_PROPPAGE_DIBLABEL
+2 Menüs und Befehle
+3 Menü Datei=menu_filepr
+3 Menü Bearbeiten=menu_editpr
+3 Menü Ansicht=menu_viewpr
+3 Menü Einstellungen=menu_optionspr
+3 Menü Zeichnen=menu_drawpr
+3 Menü Objekte=menu_objectspr
+3 Menü Hilfe=menu_helppr

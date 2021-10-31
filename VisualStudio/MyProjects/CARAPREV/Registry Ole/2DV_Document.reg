@@ -1,0 +1,31 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\ETS2DV Document]
+@="ETS2DV Document"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\verb]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\verb\0]
+@="&Edit"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\protocol\StdFileEditing\server]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.EXE"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\CLSID]
+@="{E217CE60-3215-11D4-B6EC-0000B458D891}"
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell]
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell\open]
+"wert"=""
+
+[HKEY_CLASSES_ROOT\ETS2DV Document\shell\open\command]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS2DV.exe \"%1\""
+

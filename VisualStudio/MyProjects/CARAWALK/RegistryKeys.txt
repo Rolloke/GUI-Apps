@@ -1,0 +1,41 @@
+Registry-Keys           
+
+   Schlüssel                        Typ            Wertebereich         Standard
+
+   Software\\ETSKIEL\\CARAWALK      Schlüssel      --
+      Report                        DWORD          0,1                  0
+      Vx.xx                         Schlüssel      --
+         GLSettings                 Schlüssel      --
+            Generic                 DWORD          0,1                  0
+            GenericAccelerated      DWORD          0,1                  0
+            ColorBits               DWORD          0,..,32              32
+            DepthBits               DWORD          0,..,32              32
+            StencilBits             DWORD          0,..,32              0
+            RefreshTime             DWORD          1,..,32768 [ms]      42
+            BugFixNormalVector      DWORD          0,1                  1
+            BugFixLightTexture      DWORD          0,1                  1
+         Custom                     Schlüssel
+            Colors                  Binärwert
+         Room                       Schlüssel
+            NoOfLights              DWORD          1                    1
+            Light0                  Binärwert      --
+            Ambient                 DWORD          0x0,..,0x00ffffff    0x00333333
+            LightOn                 DWORD          0,1                  1
+            TexOn                   DWORD          0,1                  0
+            BoxOn                   DWORD          0,1                  1
+            Detail                  DWORD          1,..,5               3
+         Box                        Schlüssel
+            NoOfLights              DWORD          1                    1
+            Light0                  Binärwert      --
+            Ambient                 DWORD          0x0,..,0x00ffffff    0x00333333
+            LightOn                 DWORD          0,1                  1
+            TexOn                   DWORD          0,1                  0
+            BoxOn                   DWORD          0,1                  1
+            Detail                  DWORD          1,..,5               3
+
+
+   Software\\ETSKIEL\\ETS3DGL       Schlüssel      --
+      Report                        DWORD          0,1                  0
+      PixelFormat                   DWORD          0,..,nPf             0
+      BugFixBufferSize              DWORD          0,1                  1
+      BugFixMoveWindow              DWORD          0,1                  1

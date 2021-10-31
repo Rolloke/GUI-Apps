@@ -1,0 +1,47 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by CARA3DV.rc
+//
+#define HIDCANCEL                       0x80dc0002    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHTDLG_DEFAULT           0x80dc04e1    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_COLOR                0x80dc04d9    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_COMBO                0x80dc04d8    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_CUTOFF               0x80dc04db    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_DISTANCE             0x80dc04df    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_EXPONENT             0x80dc04dc    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_INTENS0              0x80dc04e0    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_ON                   0x80dc04da    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_PHI                  0x80dc04de    // IDD_LIGHT_DIALOG
+#define HIDC_LIGHT_THETA                0x80dc04dd    // IDD_LIGHT_DIALOG
+#define HIDC_STD_GRAFIC_FONT            0x80de04b2    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_GRID_STEP_X            0x80de04b3    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_GRID_STEP_Y            0x80de04b4    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_GRID_STEP_Z            0x80de04b5    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODE0              0x80de04b6    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODE1              0x80de04b7    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODE2              0x80de04b8    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODEZ0             0x80de04bb    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODEZ1             0x80de04bc    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_NUM_MODEZ2             0x80de04bd    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_REDUCE                 0x80de04bf    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_ROUNDING               0x80de04b9    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_STD_ROUNDINGZ              0x80de04be    // IDD_STANDARD [Deutsch (Schweiz)]
+#define HIDC_VIEW_BKGND_COLOR           0x80dd04d0    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_COLORVIEW             0x80dd04cc    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_COLORVIEW2            0x80dd04cd    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_COLSCALE              0x80dd04d4    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_DETAIL                0x80dd04d2    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_DETAIL_BUDDY          0x80dd04d3    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_INTERPOLATE           0x80dd04cb    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_INTERPOLATE_COLOR     0x80dd04ce    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_NUMCOLORS             0x80dd04ca    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_OBJECT_COLOR          0x80dd04cf    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_OBJECT_ZOOM           0x80dd04c7    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_PROJECTION1           0x80dd04c5    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_PROJECTION2           0x80dd04c6    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_SHADING               0x80dd04c9    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_VALUE_ZOOM            0x80dd04c8    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_ZMAX                  0x80dd04d6    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_ZMIN                  0x80dd04d5    // IDD_VIEW_DIALOG
+#define HIDC_VIEW_Z_UNIT                0x80dd04d1    // IDD_VIEW_DIALOG
+#define HIDOK                           0x80dc0001    // IDD_LIGHT_DIALOG
+#define HID_APPLY_NOW                   0x80dc3021    // IDD_LIGHT_DIALOG

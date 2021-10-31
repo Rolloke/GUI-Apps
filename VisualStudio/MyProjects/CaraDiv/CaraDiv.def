@@ -1,0 +1,18 @@
+LIBRARY ETSDIV BASE=0x69400000
+VERSION 2.10
+EXPORTS
+   Destructor           @1  NONAME
+   CalculateLinDivision	@2  NONAME
+   CalculateLogDivision	@3  NONAME
+   CalculateFrqDivision	@4  NONAME
+   NumberToText         @5  NONAME
+   Teiler               @6  NONAME
+   TestFrqValue         @7  NONAME
+   TestLogValue         @8  NONAME
+   Round                @9  NONAME
+   DrawScale            @10 NONAME
+   RoundMinMaxValues    @11 NONAME
+   GetSineCosineOfAngle @12 NONAME
+   NumberRepDlg         @13 NONAME
+   UnitConvertDlg       @14 NONAME
+   TextToNumber         @15 NONAME

@@ -1,0 +1,111 @@
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,10,0,0
+ PRODUCTVERSION 2,10,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "programmiert von\r\nRolf Kary-Ehlers\0"
+            VALUE "CompanyName", "ELAC Technische Software GmbH  Kiel\0"
+            VALUE "FileDescription", "Lautsprecherdatenbankdialog\0"
+            VALUE "FileVersion", "2,10,0,0\0"
+            VALUE "InternalName", "CARASDB\0"
+            VALUE "LegalCopyright", "© 1998-2002 ELAC Technische Software GmbH\0"
+            VALUE "OriginalFilename", "CARASDB.DLL\0"
+            VALUE "ProductName", "CARA®\0"
+            VALUE "LegalTrademarks", "CARA®\0"
+            VALUE "ProductVersion", "2,10,0,0\0"
+	    VALUE "Spezielles", "Reportfähig\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// English (English USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,10,0,0
+ PRODUCTVERSION 2,10,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "programmed by\r\nRolf Kary-Ehlers\0"
+            VALUE "CompanyName", "ELAC Technische Software GmbH  Kiel\0"
+            VALUE "FileDescription", "Loudspeaker Data Base Dialog\0"
+            VALUE "FileVersion", "2,10,0,0\0"
+            VALUE "InternalName", "CARASDB\0"
+            VALUE "LegalCopyright", "© 1998-2002 ELAC Technische Software GmbH\0"
+            VALUE "OriginalFilename", "CARASDB.DLL\0"
+            VALUE "ProductName", "CARA®\0"
+            VALUE "LegalTrademarks", "CARA®\0"
+            VALUE "ProductVersion", "2,10,0,0\0"
+	    VALUE "Special", "Reportable\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+#endif    // English (English USA) resources
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,13 @@
+LIBRARY ETS3DGL BASE=0x69100000
+VERSION 2.10
+EXPORTS
+   Destructor        @1   NONAME
+   DLL_Create        @2   NONAME
+   OnRenderSzene     @3   NONAME
+   CreateRenderList  @4   NONAME
+   SetList           @5   NONAME
+   TransformPoints   @6   NONAME
+   Draw              @7   NONAME
+   DrawTriangleFan   @8   NONAME
+   SetFirstInstance  @9   NONAME
+   Destroy          @10   NONAME

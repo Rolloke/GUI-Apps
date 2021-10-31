@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CDialog", "CDialog.vcproj", "{22BFC097-B988-4320-BCAA-D71F66CDF156}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARABOX", "..\CARABOX\CaraBox.vcproj", "{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22BFC097-B988-4320-BCAA-D71F66CDF156} = {22BFC097-B988-4320-BCAA-D71F66CDF156}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug WinHelp = Debug WinHelp
+		Release = Release
+		Release WinHelp = Release WinHelp
+		ReleaseEngl = ReleaseEngl
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Debug.ActiveCfg = Debug|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Debug.Build.0 = Debug|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Debug WinHelp.ActiveCfg = Debug WinHelp|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Debug WinHelp.Build.0 = Debug WinHelp|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Release.ActiveCfg = Release|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Release.Build.0 = Release|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Release WinHelp.ActiveCfg = Release WinHelp|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.Release WinHelp.Build.0 = Release WinHelp|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.ReleaseEngl.ActiveCfg = Release|Win32
+		{22BFC097-B988-4320-BCAA-D71F66CDF156}.ReleaseEngl.Build.0 = Release|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Debug.ActiveCfg = Debug|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Debug.Build.0 = Debug|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Debug WinHelp.ActiveCfg = Debug|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Debug WinHelp.Build.0 = Debug|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Release.ActiveCfg = Release|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Release.Build.0 = Release|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Release WinHelp.ActiveCfg = Release|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.Release WinHelp.Build.0 = Release|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.ReleaseEngl.ActiveCfg = ReleaseEngl|Win32
+		{A275A7F8-6E9A-45AB-9497-66A8E67BACB3}.ReleaseEngl.Build.0 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

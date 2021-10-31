@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEtsList", "CEtsList.vcproj", "{2D57D3FF-340C-4FA5-B1B6-416EDF60893C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTestList", "CTestList\CTestList.vcproj", "{3B4DB0C7-C1B8-401D-A4F2-683546C76933}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D57D3FF-340C-4FA5-B1B6-416EDF60893C} = {2D57D3FF-340C-4FA5-B1B6-416EDF60893C}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{2D57D3FF-340C-4FA5-B1B6-416EDF60893C}.Debug.ActiveCfg = Debug|Win32
+		{2D57D3FF-340C-4FA5-B1B6-416EDF60893C}.Debug.Build.0 = Debug|Win32
+		{2D57D3FF-340C-4FA5-B1B6-416EDF60893C}.Release.ActiveCfg = Release|Win32
+		{2D57D3FF-340C-4FA5-B1B6-416EDF60893C}.Release.Build.0 = Release|Win32
+		{3B4DB0C7-C1B8-401D-A4F2-683546C76933}.Debug.ActiveCfg = Debug|Win32
+		{3B4DB0C7-C1B8-401D-A4F2-683546C76933}.Debug.Build.0 = Debug|Win32
+		{3B4DB0C7-C1B8-401D-A4F2-683546C76933}.Release.ActiveCfg = Release|Win32
+		{3B4DB0C7-C1B8-401D-A4F2-683546C76933}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

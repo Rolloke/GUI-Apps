@@ -1,0 +1,130 @@
+kleine Kontakte. Überbrücken Sie diese mit dem
+Schraubenzieher. Setzen Sie die Batterien
+wieder ein und schließen Sie das Fach. Jetzt
+sollte der AC wieder einwandfrei funktionieren.
+Sollte es in Zukunft wider Erwarten weitere
+technische Probleme geben, rufen Sie uns bitte
+an.
+Sollte sich Ihr AC trotz eingelegter Batterien nicht mehr einschalten lassen oder reagiert
+sonst auf keinen Tastendruck, so ist das Gerät ziemlich sicher nicht kaputt, sondern hat
+sich, wie von PC's bekannt, aufgehangen. Für diesen Fall besitzt der AC eine Reset-Funktion.
+Gehen Sie dafür wie folgt vor:
+Legen Sie den AC mit
+Com-Anschluß nach unten
+und Batteriedeckel zu
+Ihnen gewandt auf den
+Tisch.
+Öffnen Sie den Deckel wie
+auf Seite 8 beschrieben,
+mit einem kleinen
+Schraubenzieher und
+entnehmen Sie die
+Batterien.
+Direkt oberhalb der oberen
+kleinen Kreuzschlitzschraube
+befinden sich auf der grünen
+Platine zwei silberne, sehr
+24. Reset Funktion
+Sollte Ihnen die Frequenzgangmessung beim Speaker-Test (100 Hz - 12,5 kHz im Terz-Raster)
+zu grob und ungenau sein, so verwenden Sie doch den Selftest (20 Hz - 20 kHz
+im drittel-Terz-Raster s. Seite 11).
+Sollte Ihnen das immer noch zu ungenau sein, so haben Sie die Möglichkeit, die Data-Logger-
+Funktion für eine Frequenzgangmessung sozusagen zu "missbrauchen", denn
+dabei messen Sie mit 180 Meßpunkten. Stellen Sie dazu die Peak-Hold-Time auf 1 Min
+(Data Logger). Starten Sie die Data-Logger-Funktion und drücken dann eine Taste, damit
+der Speicher geleert und "No Data" angezeigt wird. Kehren Sie zur Pegelmessung zurück
+und starten gleichzeitig den entsprechenden Track der ACD. Verwenden Sie hierfür die
+Tracks 12 - 14. Wenn der Track beendet ist, drücken Sie sofort wieder F1. Die Auswertung
+über das Display liefert Ihnen den Mittel- und den Maximalwert, sowie den Frequenzgang
+im Zeitraffer. Am PC können Sie diesen auch als Kurve darstellen. Für den Frequenzbereich
+20 Hz - 2 KHz ist über die Tracks 15-17 mit dem selben Verfahren eine noch genauere
+Messung möglich. Drücken Sie nach ca. 57 sec. die "F1"-Taste um die Messung bei ca.
+2 kHz abzubrechen. Wenn Sie erst am Ende des Tracks 15-17 abbrechen, messen Sie
+den Frequenzbereich 0,2 - 20 kHz.
+25. Genauigkeit der Frequenzgangmessung
+(Speaker-Test)
+
+Seite 16
+
+26. Meßgenauigkeit
+Wir haben sehr viel Energie in die Entwicklung gesteckt, um ein sehr genaues Meßgerät
+zu entwickeln. Die Spezifikationen entsprechen der IEC-651 Norm Klasse 2 für
+Schallpegelmesser. Diese hohe Qualität konnten
+wir erreichen, weil wir
+1. ein Präzisions Meßmikrofon mit besonders optimiertem Frequenzgang
+2. eine weitgehend Digitale Signalverarbeitung (z.B. die Logarithmierung)
+3. Digitale Filterung und Meßbereichsabstimmung
+verwenden. Daraus ergibt sich weiterhin eine sehr guteLangzeitstabilität der Meßwerte.
+Jeder AC wurde vor Auslieferung getestet und kalibriert. Auf Wunsch können Sie ihn
+jederzeit von uns nachkalibrieren lassen, oder selbst kalibrieren. (siehe Seite 14)
+RT-60 Nachhallzeit Messungen sind sehr komplexe Messungen, die sehr leicht verfälscht
+(Luftbewegungen, Abschattungen, Luftturbulenzen etc.) werden. Um hier eine gute
+Meßgenauigkeit zu erreichen, müssen Sie sehr viele (z.B. 10 x) Messungen durchführen
+und den Mittelwert der Ergebnisse berechnen.
+-30
+-40
+-50
+-60
+-70
+-80 20 200 Hz 2k 20k
+A: Frequency Response, Magn dB re 1.000 Pa/V
+27. Technische Daten
+PC-Anbindung:
+Software:
+CD-Player IR-Codes:
+Abmessungen:
+Display:
+Gewicht:
+Batterien:
+Lieferumfang:
+Garantie:
+RS-232 (serieller Port)
+kostenlos zum Download im
+Internet für Win 95/98/NT/2000,
+später Linux / Mac
+Aiwa, Denon, Harman-Kardon, JVC,
+Kenwood, NAD, Onkyo, Philips (RC-5),
+Pioneer, Rotel, Sony, Teac,
+Technics, Yamaha + 1 freier Platz
+70 x 172 x 25 mm
+LCD 35 x 53 mm
+156 g (inkl. Batterien)
+4 x AAA (Mikro). empfohlen: Alkaline
+(ca. 50 h Betriebsdauer)
+AC, Bed. Anleitung (keine ACD,
+Batterien oder Kabel)
+2 Jahre
+Meßbereich:
+RT-60 Nachhallzeit:
+RT-60 Frequenzgang:
+Frequenzgang:
+Bewertungsfilter:
+Peak-Hold Anzeige:
+Data-Logger:
+Spezielle Funktionen:
+Meßgeschwindigkeit:
+Meßauflösung:
+Meßgenauigkeit:
+Kalibrationsbereich:
+Laufzeitmessung:
+74 dB (41 - 115 dB)
+20 - 2500 ms
+100 Hz - 12,5 kHz (20 - 980 ms)
+60 / 90 Meßpunkte (20 Hz - 20 kHz)
+22 Meßpunkte (100 Hz - 12,5 kHz)
+A / C
+0 sec - 15 h (in 15 Schritten)
+180 Meßwerte (1 min - 15h)
+Selftest, Auto EQ, Auto Sound, Auto
+Balance
+25 Messungen / sec
+2 dB (Analog) / 0,1 dB (Digital)
++/- 1,0 dB (IEC-651)
++/- 5,0 dB (94 dB / 1 kHz)
+0 - 50 ms (0-17 m)
+Garant
+ie 2
+Jahre
+
+Seite 17
+

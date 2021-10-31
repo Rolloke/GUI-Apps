@@ -1,0 +1,59 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARAPREV", "..\CARAPREV\Caraprev.vcproj", "{F8057C19-3F70-4955-9AA4-04DEDF8D1173}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CETSMathClass", "CETSMathClass\CETSMathClass.vcproj", "{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ETSMathC", "ETSMathC.vcproj", "{9DEA6869-971D-4373-A443-B1BD4C6A7640}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1} = {DAA7FE53-FC9F-47DE-B538-FC988661E4E1}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WaveGen", "WaveGen\WaveGen.vcproj", "{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173} = {F8057C19-3F70-4955-9AA4-04DEDF8D1173}
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1} = {DAA7FE53-FC9F-47DE-B538-FC988661E4E1}
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640} = {9DEA6869-971D-4373-A443-B1BD4C6A7640}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugEngl|Win32 = DebugEngl|Win32
+		Release|Win32 = Release|Win32
+		ReleaseEngl|Win32 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.DebugEngl|Win32.ActiveCfg = DebugEngl|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Release|Win32.ActiveCfg = Release|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.Debug|Win32.Build.0 = Debug|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.DebugEngl|Win32.ActiveCfg = Debug|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.DebugEngl|Win32.Build.0 = Debug|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.Release|Win32.ActiveCfg = Release|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.Release|Win32.Build.0 = Release|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.ReleaseEngl|Win32.ActiveCfg = Release|Win32
+		{DAA7FE53-FC9F-47DE-B538-FC988661E4E1}.ReleaseEngl|Win32.Build.0 = Release|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.Debug|Win32.Build.0 = Debug|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.DebugEngl|Win32.ActiveCfg = Debug|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.DebugEngl|Win32.Build.0 = Debug|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.Release|Win32.ActiveCfg = Release|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.Release|Win32.Build.0 = Release|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.ReleaseEngl|Win32.ActiveCfg = Release|Win32
+		{9DEA6869-971D-4373-A443-B1BD4C6A7640}.ReleaseEngl|Win32.Build.0 = Release|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.Debug|Win32.Build.0 = Debug|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.DebugEngl|Win32.ActiveCfg = Debug|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.DebugEngl|Win32.Build.0 = Debug|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.Release|Win32.ActiveCfg = Release|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.Release|Win32.Build.0 = Release|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.ReleaseEngl|Win32.ActiveCfg = Release|Win32
+		{4CEA7E30-E5FE-4671-B1C6-AFDD2550A29A}.ReleaseEngl|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

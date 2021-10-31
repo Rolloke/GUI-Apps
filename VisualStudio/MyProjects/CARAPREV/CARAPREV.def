@@ -1,0 +1,5 @@
+; CARAPREV.def : Deklariert die Modul-Parameter für die DLL.
+LIBRARY      ETSPREV BASE=0x69000000
+VERSION  2.10
+EXPORTS
+

@@ -1,0 +1,75 @@
+REGEDIT4
+;   Diese .REG-Datei kann von Ihrem SETUP-Programm verwendet werden.
+;   Falls kein SETUP-Programm verfügbar ist, werden die unten stehenden Einträge
+;   automatisch in InitInstance registriert, mit einem Aufruf an 
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+[HKEY_CLASSES_ROOT\.3dv]
+@="ETS3DV Document"
+
+[HKEY_CLASSES_ROOT\ETS3DV Document]
+@="ETS3DV Document"
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\protocol]
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\protocol\StdFileEditing\verb]
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\protocol\StdFileEditing\verb\0]
+@="&Edit"
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\protocol\StdFileEditing\server]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS3DV.EXE"
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\CLSID]
+@="{579C69C0-3BA8-11D4-B6EC-0000B458D891}"
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\shell]
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\shell\open]
+"wert"=""
+
+[HKEY_CLASSES_ROOT\ETS3DV Document\shell\open\command]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS3DV.exe \"%1\""
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}]
+@="ETS3DV Document"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\Verb]
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\Verb\0]
+@="&Bearbeiten,0,2"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\Verb\1]
+@="&Öffnen,0,2"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\AuxUserType]
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\AuxUserType\2]
+@="ETS3DV"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\AuxUserType\3]
+@="ETS3DV"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\MiscStatus]
+@="32"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\ProgID]
+@="ETS3DV.Document"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\InprocHandler32]
+@="ole32.dll"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\LocalServer32]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS3DV.EXE"
+
+[HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\DefaultIcon]
+@="C:\\Programme\\ETS\\Cara_1_1\\ETS3DV.EXE,1"
+

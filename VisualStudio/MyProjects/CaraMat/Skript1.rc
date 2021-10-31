@@ -1,0 +1,672 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP  DISCARDABLE     "bitmap1.bmp"
+IDB_BITMAP2             BITMAP  DISCARDABLE     "bitmap2.bmp"
+IDB_BITMAP3             BITMAP  DISCARDABLE     "bitmap3.bmp"
+IDB_BITMAP4             BITMAP  DISCARDABLE     "bitmap4.bmp"
+IDB_BITMAP5             BITMAP  DISCARDABLE     "bitmap5.bmp"
+IDB_BITMAP6             BITMAP  DISCARDABLE     "bitmap6.bmp"
+IDB_BITMAP7             BITMAP  DISCARDABLE     "bitmap7.bmp"
+IDB_BITMAP8             BITMAP  DISCARDABLE     "bitmap8.bmp"
+IDB_BITMAP9             BITMAP  DISCARDABLE     "bitmap9.bmp"
+IDB_BITMAP10            BITMAP  DISCARDABLE     "bitmap10.bmp"
+IDB_BITMAP11            BITMAP  DISCARDABLE     "bitmap11.bmp"
+IDB_BITMAP12            BITMAP  DISCARDABLE     "bitmap12.bmp"
+IDB_BITMAP13            BITMAP  DISCARDABLE     "bitmap13.bmp"
+IDB_BITMAP14            BITMAP  DISCARDABLE     "bitmap14.bmp"
+IDB_BITMAP15            BITMAP  DISCARDABLE     "bitmap15.bmp"
+IDB_BITMAP16            BITMAP  DISCARDABLE     "bitmap16.bmp"
+IDB_BITMAP17            BITMAP  DISCARDABLE     "bitmap17.bmp"
+IDB_BITMAP18            BITMAP  DISCARDABLE     "bitmap18.bmp"
+IDB_BITMAP19            BITMAP  DISCARDABLE     "bitmap19.bmp"
+IDB_BITMAP20            BITMAP  DISCARDABLE     "bitmap20.bmp"
+IDB_BITMAP21            BITMAP  DISCARDABLE     "bitmap21.bmp"
+IDB_BITMAP22            BITMAP  DISCARDABLE     "bitmap22.bmp"
+IDB_BITMAP23            BITMAP  DISCARDABLE     "bitmap23.bmp"
+IDB_BITMAP24            BITMAP  DISCARDABLE     "bitmap24.bmp"
+IDB_BITMAP25            BITMAP  DISCARDABLE     "bitmap25.bmp"
+IDB_BITMAP26            BITMAP  DISCARDABLE     "bitmap26.bmp"
+IDB_BITMAP27            BITMAP  DISCARDABLE     "bitmap27.bmp"
+IDB_BITMAP28            BITMAP  DISCARDABLE     "bitmap28.bmp"
+IDB_BITMAP29            BITMAP  DISCARDABLE     "bitmap29.bmp"
+IDB_BITMAP30            BITMAP  DISCARDABLE     "bitmap30.bmp"
+IDB_BITMAP31            BITMAP  DISCARDABLE     "bitmap31.bmp"
+IDB_BITMAP32            BITMAP  DISCARDABLE     "bitmap32.bmp"
+IDB_BITMAP33            BITMAP  DISCARDABLE     "bitmap33.bmp"
+IDB_BITMAP34            BITMAP  DISCARDABLE     "bitmap34.bmp"
+IDB_BITMAP35            BITMAP  DISCARDABLE     "bitmap35.bmp"
+IDB_BITMAP36            BITMAP  DISCARDABLE     "bitmap36.bmp"
+IDB_BITMAP37            BITMAP  DISCARDABLE     "bitmap37.bmp"
+IDB_BITMAP38            BITMAP  DISCARDABLE     "bitmap38.bmp"
+IDB_BITMAP39            BITMAP  DISCARDABLE     "bitmap39.bmp"
+IDB_BITMAP40            BITMAP  DISCARDABLE     "bitmap40.bmp"
+IDB_BITMAP41            BITMAP  DISCARDABLE     "bitmap41.bmp"
+IDB_BITMAP42            BITMAP  DISCARDABLE     "bitmap42.bmp"
+IDB_BITMAP43            BITMAP  DISCARDABLE     "bitmap43.bmp"
+IDB_BITMAP44            BITMAP  DISCARDABLE     "bitmap44.bmp"
+IDB_BITMAP45            BITMAP  DISCARDABLE     "bitmap45.bmp"
+IDB_BITMAP46            BITMAP  DISCARDABLE     "bitmap46.bmp"
+IDB_BITMAP47            BITMAP  DISCARDABLE     "bitmap47.bmp"
+IDB_BITMAP48            BITMAP  DISCARDABLE     "bitmap48.bmp"
+IDB_BITMAP49            BITMAP  DISCARDABLE     "bitmap49.bmp"
+IDB_BITMAP50            BITMAP  DISCARDABLE     "bitmap50.bmp"
+IDB_BITMAP51            BITMAP  DISCARDABLE     "bitmap51.bmp"
+IDB_BITMAP52            BITMAP  DISCARDABLE     "bitmap52.bmp"
+IDB_BITMAP53            BITMAP  DISCARDABLE     "bitmap53.bmp"
+IDB_BITMAP54            BITMAP  DISCARDABLE     "bitmap54.bmp"
+IDB_BITMAP55            BITMAP  DISCARDABLE     "bitmap55.bmp"
+IDB_BITMAP56            BITMAP  DISCARDABLE     "bitmap56.bmp"
+IDB_BITMAP57            BITMAP  DISCARDABLE     "bitmap57.bmp"
+IDB_BITMAP58            BITMAP  DISCARDABLE     "bitmap58.bmp"
+IDB_BITMAP59            BITMAP  DISCARDABLE     "bitmap59.bmp"
+IDB_BITMAP60            BITMAP  DISCARDABLE     "bitmap60.bmp"
+IDB_BITMAP61            BITMAP  DISCARDABLE     "bitmap61.bmp"
+IDB_BITMAP62            BITMAP  DISCARDABLE     "bitmap62.bmp"
+IDB_BITMAP63            BITMAP  DISCARDABLE     "bitmap63.bmp"
+IDB_BITMAP64            BITMAP  DISCARDABLE     "bitmap64.bmp"
+IDB_BITMAP65            BITMAP  DISCARDABLE     "bitmap65.bmp"
+IDB_BITMAP66            BITMAP  DISCARDABLE     "bitmap66.bmp"
+IDB_BITMAP67            BITMAP  DISCARDABLE     "bitmap67.bmp"
+IDB_BITMAP68            BITMAP  DISCARDABLE     "bitmap68.bmp"
+IDB_BITMAP69            BITMAP  DISCARDABLE     "bitmap69.bmp"
+IDB_BITMAP70            BITMAP  DISCARDABLE     "bitmap70.bmp"
+IDB_BITMAP71            BITMAP  DISCARDABLE     "bitmap71.bmp"
+IDB_BITMAP72            BITMAP  DISCARDABLE     "bitmap72.bmp"
+IDB_BITMAP73            BITMAP  DISCARDABLE     "bitmap73.bmp"
+IDB_BITMAP74            BITMAP  DISCARDABLE     "bitmap74.bmp"
+IDB_BITMAP75            BITMAP  DISCARDABLE     "bitmap75.bmp"
+IDB_BITMAP76            BITMAP  DISCARDABLE     "bitmap76.bmp"
+IDB_NOBMP32             BITMAP  DISCARDABLE     "NoBMP32.bmp"
+IDB_NOBMP08             BITMAP  DISCARDABLE     "NoBMP08.bmp"
+IDB_BITMAP77            BITMAP  DISCARDABLE     "bitmap77.bmp"
+IDB_BITMAP78            BITMAP  DISCARDABLE     "bitmap78.bmp"
+IDB_BITMAP79            BITMAP  DISCARDABLE     "bitmap79.bmp"
+IDB_BITMAP80            BITMAP  DISCARDABLE     "bitmap80.bmp"
+IDB_BITMAP81            BITMAP  DISCARDABLE     "bitmap81.bmp"
+IDB_BITMAP82            BITMAP  DISCARDABLE     "bitmap82.bmp"
+IDB_BITMAP83            BITMAP  DISCARDABLE     "bitmap83.bmp"
+IDB_BITMAP84            BITMAP  DISCARDABLE     "bitmap84.bmp"
+IDB_BITMAP85            BITMAP  DISCARDABLE     "bitmap85.bmp"
+IDB_BITMAP86            BITMAP  DISCARDABLE     "bitmap86.bmp"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOGCREATE DIALOGEX 50, 70, 305, 278
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Materialeditor"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Absorbermaterial",IDC_GRUPPECREATE1,5,5,130,251,
+                    BS_CENTER
+    CONTROL         "Neu",IDC_RADIOCREATE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,21,35,8
+    CONTROL         "Ändern",IDC_RADIOCREATE2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,70,21,60,8
+    CONTROL         "Neu",IDC_RADIOCREATE3,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,144,35,8
+    CONTROL         "Ändern",IDC_RADIOCREATE4,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,70,144,60,8
+    LTEXT           "ID-Nr:",IDC_TEXTCREATE1,10,34,26,8,SS_CENTERIMAGE
+    LTEXT           "",IDC_TEXTCREATE2_1,10,44,35,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Bezeichnung:",IDC_TEXTCREATE2,50,34,80,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCREATE2,50,44,80,12
+    LTEXT           "Beschreibung:",IDC_TEXTCREATE3,10,61,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDITCREATE3,10,72,120,28,ES_MULTILINE | 
+                    ES_WANTRETURN
+    LTEXT           "Oberflächenstruktur:",IDC_TEXTCREATE4,10,112,80,8,
+                    SS_CENTERIMAGE
+    CONTROL         201,IDC_BILDCREATE4,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    WS_BORDER,104,103,26,26
+    GROUPBOX        "Absorptionsgrade:  alpha",IDC_GRUPPECREATE2,135,5,165,
+                    251,BS_CENTER
+    LTEXT           "alpha [%] für\nca. 100-300 Hz:",IDC_TEXTCREATE5,140,65,
+                    60,16
+    EDITTEXT        IDC_EDITCREATE5,140,88,35,12,ES_NUMBER
+    LTEXT           "Frequenz-\nabhängigkeit der  Absorptionsgrade:",
+                    IDC_TEXTCREATE6,140,17,60,33,NOT WS_GROUP
+    CONTROL         "Absorptionsgradliste",IDC_LISTCREATEREP,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_NOLABELWRAP | LVS_AUTOARRANGE | LVS_EDITLABELS | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,206,17,89,83
+    GROUPBOX        "Materialgruppe",IDC_GRUPPECREATE3,5,130,130,126,
+                    BS_CENTER
+    LTEXT           "ID-Nr:",IDC_TEXTCREATE7,10,158,35,8,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    LTEXT           "",IDC_TEXTCREATE2_7,10,168,35,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Bezeichnung:",IDC_TEXTCREATE8,50,158,80,8,
+                    SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCREATE8,50,168,80,12
+    GROUPBOX        "Auswahl: Oberflächenstrukturen",IDC_GRUPPECREATE4,135,
+                    185,165,71,BS_CENTER
+    CONTROL         "Tree1",IDC_TREECREATE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | WS_BORDER | WS_GROUP | WS_TABSTOP,10,
+                    195,120,57
+    CONTROL         "Texturliste",IDC_LISTCREATEBM,"SysListView32",
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOLABELWRAP | 
+                    LVS_AUTOARRANGE | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,140,195,155,57
+    PUSHBUTTON      "Übernehmen",IDC_UEBERNEHMEN,5,260,55,15
+    DEFPUSHBUTTON   "OK",IDC_OK2,205,260,45,15
+    PUSHBUTTON      "Abbrechen",IDC_CANCEL2,255,260,45,15
+    CONTROL         "Absorptionsgrad in Prozent",IDC_MAT_ABSPT_FRQ_RESP9,
+                    "Static",SS_OWNERDRAW | SS_NOTIFY | SS_SUNKEN | 
+                    WS_BORDER,140,105,155,75,WS_EX_TRANSPARENT
+    GROUPBOX        "Auswahl: Material und Gruppe",IDC_GRUPPECREATE5,5,185,
+                    130,71
+END
+
+IDD_DIALOGSELECT DIALOGEX 50, 70, 300, 191
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Auswahl von Absorbermaterialien"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREESELECT,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,5,10,120,178
+    GROUPBOX        "Absorbermaterial",IDC_GRUPPESELECT1,130,5,165,165,
+                    BS_CENTER
+    LTEXT           "Bezeichnung:",IDC_TEXTSELECT2,135,21,55,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_2,200,19,90,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Beschreibung:",IDC_TEXTSELECT3,135,47,55,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_3,135,55,124,30,NOT WS_GROUP,
+                    WS_EX_CLIENTEDGE
+    CONTROL         201,IDC_BILDSELECT4,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    WS_BORDER,260,55,30,30
+    LTEXT           "Materialgruppe:",IDC_TEXTSELECT8,135,36,55,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_8,200,34,90,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "OK",IDC_OK2,200,173,45,15
+    PUSHBUTTON      "Abbrechen",IDC_CANCEL2,250,173,45,15
+    CONTROL         "Absorptionsgrad in Prozent",IDC_MAT_ABSPT_FRQ_RESP9,
+                    "Static",SS_OWNERDRAW | SS_NOTIFY | SS_SUNKEN | 
+                    WS_BORDER,135,90,155,75,WS_EX_TRANSPARENT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOGCREATE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 80
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 140
+        VERTGUIDE, 295
+        VERTGUIDE, 300
+        BOTTOMMARGIN, 274
+        HORZGUIDE, 5
+        HORZGUIDE, 17
+        HORZGUIDE, 25
+        HORZGUIDE, 38
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 72
+        HORZGUIDE, 100
+        HORZGUIDE, 116
+        HORZGUIDE, 130
+        HORZGUIDE, 148
+        HORZGUIDE, 162
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+        HORZGUIDE, 195
+        HORZGUIDE, 252
+        HORZGUIDE, 256
+        HORZGUIDE, 267
+    END
+
+    IDD_DIALOGSELECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 200
+        VERTGUIDE, 255
+        VERTGUIDE, 260
+        VERTGUIDE, 290
+        VERTGUIDE, 295
+        HORZGUIDE, 5
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 165
+        HORZGUIDE, 170
+        HORZGUIDE, 188
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TXT_FIRSTGROUPNAME  "Allgemein"
+    IDS_TXT_CREATENEW       "Soll eine neue Datei für Absorber-Materialien angelegt werden ?"
+    IDS_TXT_CAPTION_CREATENEW "Material-Datei: Neu"
+    IDS_TXT_MATEQUAL1       "Das schallabsorbierende Material '"
+    IDS_TXT_MATEQUAL2       "' existiert schon !"
+    IDS_TXT_MATEQUAL3       "Sollen die Daten des neuen Materials trotzdem gespeichert werden ?"
+    IDS_TXT_CAPTION_MATEQUAL "Materialien gleichen Namens"
+    IDS_TXT_GRPEQUAL1       "Die Materialgruppe '"
+    IDS_TXT_GRPEQUAL2       "' existiert schon !"
+    IDS_TXT_GRPEQUAL3       "Soll die neue Materialgruppe trotzdem gespeichert werden ?"
+    IDS_TXT_CAPTION_GRPEQUAL "Materialgruppen gleichen Namens"
+    IDS_TXT_ERROR_INPUT     "Fehlerhafte bzw. fehlende Eingabe !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_ALPHA         "Zulässiger Wertebereich:\n0 - 500%"
+    IDS_ERROR_ALPHA0        "Zulässiger Wertebereich:\n0 - 30%"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP1               "Programminterne \tIdentifikationsnummer \neines schallabsorbierenden Materials. Sie \nkann vom Benutzer nicht geändert werden."
+    IDS_HELP2               "\tName oder \tKurzbezeichnung eines \nschallabsorbierenden Materials."
+    IDS_HELP3               "\tBeschreibung eines schallabsorbierenden Materials."
+    IDS_HELP4               "Graphische symbolhafte Darstellung der \n\tOberflächenstruktur eines schallab- \nsorbierenden Materials."
+    IDS_HELP5               "Der \tSchallabsorptionsgrad eines Materials \nbeschreibt den prozentualen Anteil der \tSchall- \n\tenergie einer auftreffenden Schallwelle, der \nvom betreffenden Material aufgenommen/absor- \nbiert wird. Der Schallabsorptionsgrad 'alpha' ist \ni.a. \tfrequenzabhängig. Der hier einzugebende \nWert bezieht sich auf \tniedrige \tFrequenzen. \nDieser Wert wird in den raumakustischen Be- \nrechnungen nur herangezogen, wenn die unten \nstehende Tabelle nicht ausgefüllt wird. Werte \ngrößer als 30% werden nicht akzeptiert."
+    IDS_HELP6               "Der \tSchallabsorptionsgrad eines Materials \nbeschreibt den prozentualen Anteil der \tSchall- \n\tenergie einer auftreffenden Schallwelle, der \nvom betreffenden Material aufgenommen/absor- \nbiert wird. Der Schallabsorptionsgrad 'alpha' ist \ni.a. \tfrequenzabhängig. Für fest vorgegebene \nFrequenzstützpunkte im Bereich von 5 Hz bis \n40960 Hz können bis zu 118 Werte eingegeben \nwerden. Es sollten \tmindestens \tdrei \tWerte \neingegeben werden. Werte größer als 500% \nwerden nicht akzeptiert."
+    IDS_HELP7               "Programminterne \tIdentifikationsnummer \neiner Materialgruppe. Eine Materialgruppe \nfaßt mehrere schallabsorbierende Materialien \nähnlicher Art organisatorisch zusammen. Die \nIdentifikationsnummer kann vom Benutzer \nnicht geändert werden."
+    IDS_HELP8               "\tName oder \tKurzbezeichnung einer \nMaterialgruppe. Eine Materialgruppe \nfaßt mehrere schallabsorbierende \nMaterialien ähnlicher Art organisato- \nrisch zusammen."
+    IDS_HELP9               "Zeigt den Frequenzgang des \tAbsortionsgrades an"
+    IDS_HELP11              "Schallabsorbierende Materialien sind Stoffe, die \neinen Teil der \tSchallenergie einer auftreffen- \nden Schallwelle \taufnehmen und in Wärme um- \nwandeln."
+    IDS_HELP12              "Der \tSchallabsorptionsgrad eines Materials \nbeschreibt den prozentualen Anteil der \tSchall- \n\tenergie einer auftreffenden Schallwelle, der \nvom betreffenden Material aufgenommen/absor- \nbiert wird. Der Schallabsorptionsgrad 'alpha' ist \ni.a. \tfrequenzabhängig."
+    IDS_HELP13              "Eine \tMaterialgruppe faßt mehrere schallabsorbierende \nMaterialien ähnlicher Art \torganisatorisch \tzusammen."
+    IDS_HELP14              "Die in dem linken Fenster aufgeführte \tBaumstruktur \nermöglicht die \tAuswahl von \tAbsorbermaterialien \nund deren \tübergeordneten \tMaterialgruppen. Das \nrechts daneben stehende Fenster enthält eine Liste \naller 'BitMaps', die die \tOberflächenstrukturen der \nAbsorbermaterialien symbolisieren sollen und diesen \nzugeordnet werden können."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP21              "Die aufgeführte \tBaumstruktur ermöglicht die \tAuswahl \nvon \tAbsorbermaterialien und ggfs. deren \tübergeord- \n\tneten \tMaterialgruppen. Eine Materialgruppe faßt mehrere \nschallabsorbierende Materialien ähnlicher Art \torganisato- \n\trisch \tzusammen."
+    IDS_HELP22              "Der \tSchallabsorptionsgrad eines Materials \nbeschreibt den prozentualen Anteil der \tSchall- \n\tenergie einer auftreffenden Schallwelle, der \nvom betreffenden Material aufgenommen/absor- \nbiert wird. Der Schallabsorptionsgrad 'alpha' ist \ni.a. \tfrequenzabhängig. Für fest vorgegebene \nFrequenzstützpunkte im Bereich von 5 Hz bis \n40960 Hz können bis zu 118 Werte eingegeben \nwerden. Es sollten \tmindestens \tdrei \tWerte \neingegeben werden. Werte größer als 500% \nwerden nicht akzeptiert."
+    IDS_HELP23              "Die Liste enthält alle 'BitMaps', die die \tOberflächenstrukturen \nder Absorbermaterialien symbolisieren sollen und diesen zuge- \nordnet werden können."
+    IDS_HELP31              "Umschalten der Eingabe auf \t'Definition eines \tneuen \n\tAbsorbermaterials'. Sollte in der unten aufgeführten \nBaumstruktur ein Absorbermaterial ausgewählt werden, \nwird automatisch auf 'Ändern der Daten eines (vorhande- \nnen) Absorbermaterials' umgeschaltet. Die Auswahl einer \nMaterialgruppe in der Baumstruktur fügt das aktuell bear- \nbeitete Absorbermaterial in die betreffende Materialgruppe \nein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP32              "Umschalten der Eingabe auf \t'Ändern der Daten eines \n(vorhandenen) \tAbsorbermaterials'. In der unten auf- \ngeführten Baumstruktur kann das gewünschte Absorber- \nmaterial ausgewählt werden, ebenso die Materialgruppe, \nder das aktuell bearbeitete Absorbermaterial zugeordnet \nwerden soll."
+    IDS_HELP33              "Umschalten der Eingabe auf \t'Definition einer \tneuen \tMaterialgruppe'."
+    IDS_HELP34              "Umschalten der Eingabe auf \t'Ändern der Bezeichnung \neiner (vorhandenen) \tMaterialgruppe'. In der unten auf- \ngeführten Baumstruktur kann die gewünschte Material- \ngruppe ausgewählt werden."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP97              "Schließt das Dialogfeld und speichert\nalle vorgenommenen Änderungen"
+    IDS_HELP98              "Schließt das Dialogfeld, ohne\ndie Änderungen zu speichern"
+    IDS_HELP99              "Speichert alle vorgenommenen Änderungen,\nohne das Dialogfeld zu schließen"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOGSELECT DIALOGEX 50, 70, 300, 191
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Selection of Absorption Materials"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREESELECT,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,5,10,120,178
+    GROUPBOX        "Absorption Material",IDC_GRUPPESELECT1,130,5,165,165,
+                    BS_CENTER
+    LTEXT           "Name:",IDC_TEXTSELECT2,135,21,55,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_2,200,19,90,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Description:",IDC_TEXTSELECT3,135,47,55,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_3,135,55,124,30,NOT WS_GROUP,
+                    WS_EX_CLIENTEDGE
+    CONTROL         201,IDC_BILDSELECT4,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    WS_BORDER,260,55,30,30
+    LTEXT           "Material Group:",IDC_TEXTSELECT8,135,36,55,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_TEXTSELECT2_8,200,34,90,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "OK",IDC_OK2,200,173,45,15
+    PUSHBUTTON      "Cancel",IDC_CANCEL2,250,173,45,15
+    CONTROL         "Absorption Coefficient in Percent",
+                    IDC_MAT_ABSPT_FRQ_RESP9,"Static",SS_OWNERDRAW | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,135,90,155,75,
+                    WS_EX_TRANSPARENT
+END
+
+IDD_DIALOGCREATE DIALOGEX 50, 70, 305, 278
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Materials Editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Absorption Material",IDC_GRUPPECREATE1,5,5,130,251,
+                    BS_CENTER
+    CONTROL         "New",IDC_RADIOCREATE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,21,35,8
+    CONTROL         "Edit",IDC_RADIOCREATE2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,70,21,60,8
+    CONTROL         "New",IDC_RADIOCREATE3,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,144,35,8
+    CONTROL         "Edit",IDC_RADIOCREATE4,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,70,144,60,8
+    LTEXT           "ID-No:",IDC_TEXTCREATE1,10,34,26,8,SS_CENTERIMAGE
+    LTEXT           "",IDC_TEXTCREATE2_1,10,44,35,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Name:",IDC_TEXTCREATE2,50,34,80,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCREATE2,50,44,80,12
+    LTEXT           "Description:",IDC_TEXTCREATE3,10,61,70,8,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_EDITCREATE3,10,72,120,28,ES_MULTILINE | 
+                    ES_WANTRETURN
+    LTEXT           "Material Texture:",IDC_TEXTCREATE4,10,112,80,8,
+                    SS_CENTERIMAGE
+    CONTROL         201,IDC_BILDCREATE4,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    WS_BORDER,104,103,26,26
+    GROUPBOX        "Absorption Coefficients:  alpha",IDC_GRUPPECREATE2,135,
+                    5,165,251,BS_CENTER
+    LTEXT           "alpha [%]  for 100-300 Hz:",IDC_TEXTCREATE5,140,65,60,
+                    16
+    EDITTEXT        IDC_EDITCREATE5,140,88,35,12,ES_NUMBER
+    LTEXT           "Frequency Dependence of Absorption Coefficients:",
+                    IDC_TEXTCREATE6,140,17,60,33,NOT WS_GROUP
+    CONTROL         "Absorption Coefficients List",IDC_LISTCREATEREP,
+                    "SysListView32",LVS_REPORT | LVS_SINGLESEL | 
+                    LVS_SHOWSELALWAYS | LVS_NOLABELWRAP | LVS_AUTOARRANGE | 
+                    LVS_EDITLABELS | WS_BORDER | WS_GROUP | WS_TABSTOP,206,
+                    17,89,83
+    GROUPBOX        "Material Group",IDC_GRUPPECREATE3,5,130,130,126,
+                    BS_CENTER
+    LTEXT           "ID-No:",IDC_TEXTCREATE7,10,158,35,8,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    LTEXT           "",IDC_TEXTCREATE2_7,10,168,35,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_CLIENTEDGE
+    LTEXT           "Name:",IDC_TEXTCREATE8,50,158,80,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDITCREATE8,50,168,80,12
+    GROUPBOX        "Selection: Material Textures",IDC_GRUPPECREATE4,135,185,
+                    165,71,BS_CENTER
+    CONTROL         "Tree1",IDC_TREECREATE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | WS_BORDER | WS_GROUP | WS_TABSTOP,10,
+                    195,120,58
+    CONTROL         "Texture List",IDC_LISTCREATEBM,"SysListView32",
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOLABELWRAP | 
+                    LVS_AUTOARRANGE | LVS_ALIGNLEFT | WS_BORDER | WS_GROUP | 
+                    WS_TABSTOP,140,195,155,58
+    PUSHBUTTON      "Apply",IDC_UEBERNEHMEN,5,259,55,15
+    DEFPUSHBUTTON   "OK",IDC_OK2,205,259,45,15
+    PUSHBUTTON      "Cancel",IDC_CANCEL2,255,259,45,15
+    CONTROL         "Absorption Coefficient in Percent",
+                    IDC_MAT_ABSPT_FRQ_RESP9,"Static",SS_OWNERDRAW | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,140,105,155,75,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Selection: Material and Group",IDC_GRUPPECREATE5,5,185,
+                    130,71
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOGSELECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 200
+        VERTGUIDE, 255
+        VERTGUIDE, 260
+        VERTGUIDE, 290
+        VERTGUIDE, 295
+        HORZGUIDE, 5
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 165
+        HORZGUIDE, 170
+        HORZGUIDE, 188
+    END
+
+    IDD_DIALOGCREATE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 80
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 140
+        VERTGUIDE, 295
+        VERTGUIDE, 300
+        HORZGUIDE, 5
+        HORZGUIDE, 17
+        HORZGUIDE, 25
+        HORZGUIDE, 38
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 72
+        HORZGUIDE, 100
+        HORZGUIDE, 116
+        HORZGUIDE, 130
+        HORZGUIDE, 148
+        HORZGUIDE, 162
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+        HORZGUIDE, 195
+        HORZGUIDE, 253
+        HORZGUIDE, 256
+        HORZGUIDE, 266
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TXT_FIRSTGROUPNAME  "General"
+    IDS_TXT_CREATENEW       "Create a new data base for absorption materials?"
+    IDS_TXT_CAPTION_CREATENEW "Material Data Base: New"
+    IDS_TXT_MATEQUAL1       "The absorption material '"
+    IDS_TXT_MATEQUAL2       "' already exists!"
+    IDS_TXT_MATEQUAL3       "Save the data of the new material nevertheless?"
+    IDS_TXT_CAPTION_MATEQUAL "Identical materials (name)"
+    IDS_TXT_GRPEQUAL1       "The Material Group '"
+    IDS_TXT_GRPEQUAL2       "' already exists!"
+    IDS_TXT_GRPEQUAL3       "Save the data of the new material group nevertheless?"
+    IDS_TXT_CAPTION_GRPEQUAL "Identical material groups (name)"
+    IDS_TXT_ERROR_INPUT     "Wrong or missing Input !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_ALPHA         "Accepted values:\n0 - 500%"
+    IDS_ERROR_ALPHA0        "Accepted Values:\n0 - 30%"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP1               "Program-specific \tId number of an absorption \nmaterial. The Id number cannot be changed."
+    IDS_HELP2               "\tName and short \tdescription \nof an absorption material."
+    IDS_HELP3               "\tDescription of an absorption material."
+    IDS_HELP4               "Graphic representation of texture \nof the absorption material."
+    IDS_HELP5               "The \tabsorption \tcoefficient of a material is \ndefined by the percent share of the \tsound \n\tenergy of an incoming sound wave that is \nabsorbed by that material. In general, the ab- \nsorption coefficient 'alpha' \tdepends on the  \n\tfrequency. The value to be entered here re- \nfers to \tlower \tfrequencies. This value will \nbe used by the program only if the table below \nhas not been filled out. \nValues above 30% are not accepted."
+    IDS_HELP6               "The \tabsorption \tcoefficient of a material is \ndefined by the percent share of the \tsound \n\tenergy of an incoming sound wave that is \nabsorbed by that material. In general, the ab- \nsorption coefficient 'alpha' \tdepends on the  \n\tfrequency. \nIndividual absorption coefficients may be entered \nfor up to 118 frequencies in a range from 5 Hz \nto 40960 Hz. \tAt \tleast \t3 coefficients \nshould be specified. \nValues above 500% are not accepted."
+    IDS_HELP7               "Program specific \tId number of a material \ngroup. A material group subsumes several \nabsorption materials with similar attributes. \nThe Id number cannot be changed."
+    IDS_HELP8               "\tName and short \tdescription of a material \ngroup. A material group subsumes several \nabsorption materials with similar attributes."
+    IDS_HELP11              "Absorption materials \tabsorb a certain share of \nthe \tsound \tenergy of an incoming sound wave \nand transform it into heat."
+    IDS_HELP12              "The \tabsorption \tcoefficient of a material is \ndefined by the percent share of the \tsound \n\tenergy of an incoming sound wave that is \nabsorbed by that material. In general, the ab- \nsorption coefficient 'alpha' \tdepends on the \n\tfrequency."
+    IDS_HELP13              "A \tmaterial group subsumes several absorp- \ntion materials with \tsimilar \tattributes."
+    IDS_HELP14              "You may select \tabsorption \tmaterials or \tmaterial \n\tgroups from the tree in the control on the left side. \nFrom the bitmap list in the control on the right side \nyou may select a material texture and assign it to the \nactual material."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP21              "You may select \tabsorption \tmaterials or \tmaterial \n\tgroups from the tree in the control. A material group \nsubsumes several absorption materials with similar \nattributes."
+    IDS_HELP22              "The \tabsorption \tcoefficient of a material is \ndefined by the percent share of the \tsound \n\tenergy of an incoming sound wave that is \nabsorbed by that material. In general, the ab- \nsorption coefficient 'alpha' \tdepends on the  \n\tfrequency. \nIndividual absorption coefficients may be entered \nfor up to 118 frequencies in a range from 5 Hz \nto 40960 Hz. \tAt \tleast \t3 coefficients \nshould be specified. \nValues above 500% are not accepted."
+    IDS_HELP23              "The list contains all the bitmaps symbolizing  \nthe material textures that may be assigned \nto specific absorption materials."
+    IDS_HELP31              "Switches the input to \t'definition of a \tnew \tabsorption \n\tmaterial.' \nIf you select a certain material from the tree below, the input \nwill automatically be switched to 'Edit an existing absorption \nmaterial.' On selection of a material group, the actual material \nis added to that material group."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP32              "Switches the input to \t'Edit an existing \tabsorption \n\tmaterial'. From the tree below you may select a certain \nabsorption material as well as a material group to which \nthe actual absorption material will be assigned."
+    IDS_HELP33              "Switches the input to \t'Definition \nof a \tnew \tmaterial group'."
+    IDS_HELP34              "Switches the input to \t'Edit the description of \nan existing \tmaterial group.' Select the prefe- \nrable material group from the tree below."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP97              "Closes the dialog box and saves\nany changes you have made"
+    IDS_HELP98              "Closes the dialog box without saving\nany changes you have made"
+    IDS_HELP99              "Saves any changes you have made\nwithout closing the dialog box"
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

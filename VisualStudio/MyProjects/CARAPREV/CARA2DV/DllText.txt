@@ -1,0 +1,19 @@
+"C:\WINDOWS\SYSTEM\WINSPOOL.DRV" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\USER32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\ADVAPI32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\GDI32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+Geladene Symbole für "C:\WINDOWS\SYSTEM\MSVCRTD.DLL"
+Geladene Symbole für "C:\WINDOWS\SYSTEM\MFC42D.DLL"
+"C:\WINDOWS\SYSTEM\KERNEL32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\VERSION.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+Geladene Symbole für "C:\Daten\MyProjects\CARAPREV\CARA2DV\Debug\CARAPREV.dll"
+"C:\WINDOWS\SYSTEM\MFC42LOC.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+CARAPREV.DLL Initializing!
+"C:\WINDOWS\SYSTEM\COMCTL32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\SHELL32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\SAGE.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\COMDLG32.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\MSVCRT.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\Daten\MyProjects\CARAPREV\CARA2DV\Debug\CARALSMB.dll" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\WINDOWS\SYSTEM\MSVCRT.DLL" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.
+"C:\Daten\MyProjects\CARAPREV\CARA2DV\Debug\CaraDiv.dll" wurde geladen. Es wurden keine entsprechenden Symbolinformationen gefunden.

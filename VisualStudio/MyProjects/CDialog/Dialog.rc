@@ -1,0 +1,90 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDCLOSE             "Schließt das Dialogfeld."
+    IDS_IDHELP              "Ruft eine kontextbezogene Hilfe auf."
+    IDS_IDAPPLY             "Übernimmt Ihre Änderungen ohne das\nDialogfeld zu schließen."
+    IDS_FORMAT_MIN_MAX_INT  "Unzulässiger Wertebereich\nGeben Sie Werte zwischen %d und %d ein."
+    IDS_FORMAT_MIN_MAX_DOUBLE 
+                            "Unzulässiger Wertebereich\nGeben Sie Werte zwischen %d.%0xd und %d.%0xd ein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDOK                "Schließt dieses Dialogfeld und speichert\nalle vorgenommenen Änderungen."
+    IDS_IDCANCEL            "Schließt dieses Dialogfeld ohne Ihre\nÄnderungen zu speichern."
+    IDS_IDABORT             "Bricht den Vorgang ab."
+    IDS_IDRETRY             "Wiederholt den Vorgang."
+    IDS_IDIGNORE            "Ignoriert diese Fehlermeldung."
+    IDS_IDYES               "Beantwortet die Frage mit Ja !"
+    IDS_IDNO                "Beantwortet die Frage mit Nein !"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

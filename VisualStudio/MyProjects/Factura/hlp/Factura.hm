@@ -1,0 +1,69 @@
+// Von MAKEHELP.BAT erzeugte Hilfe-Zuordnungsdatei. Wird verwendet von FACTURA.HPJ. 
+ 
+// Befehle (ID_* and IDM_*) 
+HID_EDIT_NEWCUSTOMER                    0x18003
+HID_EDIT_INSERT_HIAK_DATA               0x18004
+HID_EDIT_NEWINVOICE                     0x18005
+HID_EDIT_NEWPRODUCTS                    0x18006
+HID_EDIT_PRODUCT_DELETE                 0x18007
+HID_EDIT_PRODUCT_NEW                    0x18008
+HID_EDIT_PRODUCT_FIND                   0x18009
+HID_OPTIONS_NNZS_PRINTER                0x1800A
+HID_OPTIONS_ADR_KL_PRINTER              0x1800B
+HID_EXTRA_PRINT_ADR                     0x1800C
+HID_EXTRA_PRINT_BANK                    0x1800D
+HID_DATA_STATISTIC                      0x1800E
+HID_EDIT_STATES                         0x1800F
+HID_EXTRA_EXPORT_CUSTOMER               0x18011
+HID_EXTRA_IMPORT_CUSTOMER               0x18012
+HID_FILE_PRINT_LOGFILE                  0x18016
+HID_EXTRA_EDIT_FORM                     0x18017
+HID_EXTRA_PRINT_FORM                    0x18018
+HID_EDIT_PAYMODES                       0x1801A
+HID_EDIT_CURRENCYUNITS                  0x1801B
+HID_EDIT_BASE_DATA                      0x1801C
+HID_EXTRA_PRINT_FORM_DIRECT             0x1801E
+HID_EXTRA_PRINT_STANDARD_LETTER         0x18020
+HID_OPTIONS_LOGFILE_PRINTER             0x18021
+HID_EXTRA_PRINT_PRODUCTS                0x18022
+HID_EXTRA_SEND_MAIL                     0x18023
+HID_PRT_NAME_OF_ADR                     0x18024
+HID_INSERT_TO_BLIND_COPY                0x18025
+HID_INSERT_TO_PHP_CONTENT_FILE          0x18026
+HID_EXTRA_PRINT_LABEL                   0x18027
+HID_PRT_ADR_W_INV_NO                    0x18028
+HID_SPEEDY_DELETE                       0x18029
+HID_SPEEDY_SETTINGS                     0x1802A
+ 
+// Eingabeaufforderungen (IDP_*) 
+ 
+// Ressourcen (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+HIDR_FACTURTYPE                         0x20081
+HIDR_PRODUCT_LISTMENU                   0x2008C
+HIDR_INV_PRT_ADR_KL                     0x2008D
+HIDR_SENDM_INSERT_ADR                   0x2008E
+HIDR_INV_SPEEDY_ITEM                    0x2008F
+ 
+// Dialogfelder (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+HIDD_PRINTASC_DIALOG                    0x20066
+HIDD_CUSTOMER                           0x20082
+HIDD_CUSTOMER_FIND                      0x20083
+HIDD_INVOICE                            0x20084
+HIDD_PRODUCT                            0x20085
+HIDD_PRODUCT_FIND                       0x20086
+HIDD_INVOICE_FIND                       0x20087
+HIDD_STATE                              0x20088
+HIDD_PRINT_ADR_KL                       0x20089
+HIDD_PRINT_BANK_KL                      0x2008A
+HIDD_EDIT_FORM                          0x2008B
+HIDD_PAY_MODE                           0x2008C
+HIDD_CURRENCY_UNIT                      0x2008D
+HIDD_BASE_SETTINGS                      0x2008E
+HIDD_PRINT_LABEL                        0x2008F
+HIDD_SENDEMAIL                          0x20090
+HIDD_PRINT_FROM_TO                      0x20091
+HIDD_LOG_ON                             0x20092
+ 
+// Rahmen-Steuerelemente (IDW_*) 

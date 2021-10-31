@@ -1,0 +1,5 @@
+LIBRARY CARABOXV BASE=0x68200000
+VERSION 2.10
+EXPORTS
+   Destructor   @1   NONAME
+   Create       @2   NONAME

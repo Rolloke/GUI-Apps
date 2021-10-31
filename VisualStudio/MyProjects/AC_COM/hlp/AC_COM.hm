@@ -1,0 +1,35 @@
+ 
+// Commands (ID_* and IDM_*) 
+HID_OPTIONS_PORT                        0x19C41
+HID_VIEW_TABS                           0x19C4C
+HID_VIEW_BUTTONS                        0x19C4D
+HID_EDIT_CD_LIST                        0x19C4E
+HID_OPTIONS_BASIC_PARAMS                0x19C4F
+HID_DELETE_MEASUREMENT                  0x19C50
+HID_EDIT_IR_CODES                       0x19C52
+HID_FILE_INSERT                         0x19C53
+HID_OPTIONS_FRQ_RSP_COR                 0x19C56
+HID_ENABLE_CHECKMARKS                   0x19C57
+HID_DISABLE_CHECKMARKS                  0x19C58
+HID_OPTIONS_MSG_BOX_BEHAVIOUR           0x19C59
+HID_VIEW_CD_PLAYER                      0x19C5A
+ 
+// Prompts (IDP_*) 
+ 
+// Resources (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+HIDR_FILE_TYPE                          0x20081
+HIDR_FILE_TYPECD                        0x20082
+HIDR_FILE_TYPEIRC                       0x20083
+HIDR_AC_ACCEL                           0x2008C
+HIDR_MAIN_MENU                          0x20096
+HIDR_MEASUREMENT_CONTEXT                0x20097
+ 
+// Dialogs (IDD_*) 
+HIDD_AC_COM_DIALOG                      0x20065
+HIDD_IR_CODE_DESCR                      0x20066
+HIDD_BASIC_PARAM                        0x20068
+HIDD_EVAL_MEASUREMENTS                  0x20069
+HIDD_MSG_BOX_BEHAVIOUR                  0x2006A
+ 
+// Frame Controls (IDW_*) 

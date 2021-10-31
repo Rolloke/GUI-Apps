@@ -1,0 +1,4 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by ETS3DGLDLG.rc
+//
+#define HIDCANCEL                       0x806e0002    // IDD_MATERIAL_CMP

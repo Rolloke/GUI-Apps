@@ -1,0 +1,87 @@
+// Von MAKEHELP.BAT erzeugte Hilfe-Zuordnungsdatei. Wird verwendet von ETS2DV.HPJ. 
+ 
+// Befehle (ID_* and IDM_*) 
+HID_FILE_DLG_GROUP                      0x1045F
+HID_VIEW_CALCULATOR                     0x1808D
+HID_VIEW_STATUS_BAR_FP                  0x1808F
+HID_VIEW_CALC_FOREGROUND                0x18090
+HID_SAVE_EQUATION                       0x18091
+HID_SHOW_EQUATION_STRUCTURE             0x18092
+HID_LOAD_EQUATION                       0x18093
+HID_CALC_AVERAGE                        0x18094
+HID_CALC_SLOPE                          0x18095
+HID_CALC_INTEGRAL                       0x18096
+HID_CALC_ZERO                           0x18097
+HID_FILE_SAVE_READ_MACROS               0x180A4
+HID_FILE_LOAD_READ_MACROS               0x180A5
+HID_FUNC_RIGHT_ZOOM                     0x180B3
+HID_FUNC_LEFT_ZOOM                      0x180B4
+HID_FUNC_UP_ZOOM                        0x180B5
+HID_FUNC_DOWN_ZOOM                      0x180B6
+HID_VIEW_PLOTTOOLBAR                    0x180E9
+HID_VIEW_PLOT                           0x180F2
+HID_VIEW_LAST_PLOT                      0x18112
+HID_VIEW_CURVE                          0x18113
+HID_VIEW_HORIZONTAL                     0x1811A
+HID_VIEW_VERTICAL                       0x1811B
+HID_VIEW_SET_SIZE_NORMAL                0x1811C
+HID_VIEW_SET_SIZE_X_200_PC              0x1811D
+HID_VIEW_SET_SIZE_X_300_PC              0x1811E
+HID_VIEW_SET_SIZE_X_400_PC              0x1811F
+HID_VIEW_SET_SIZE_Y_200_PC              0x18121
+HID_VIEW_SET_SIZE_Y_300_PC              0x18122
+HID_VIEW_SET_SIZE_Y_400_PC              0x18123
+HID_OPTIONS_PLOT                        0x18156
+HID_OPTIONS_STANDARD                    0x18157
+HID_OPTIONS_SETSTANDARDS                0x18158
+HID_FUNC_PICKMODE                       0x18160
+HID_FUNC_ZOOMMODE                       0x18161
+HID_FUNC_EDITMODE                       0x18162
+HID_FUNC_ZERO_REFERENCE                 0x18163
+HID_FUNC_REFERENCE_SELECT               0x18164
+HID_FUNC_LOAD_CURVE                     0x18165
+HID_FUNC_SAVE_CURVE                     0x18166
+HID_FUNC_LINEEDITMODE                   0x18171
+HID_FUNC_NUMEDITMODE                    0x18172
+HID_FUNC_EDITSTEPPLUS                   0x18173
+HID_FUNC_EDITSTEPMINUS                  0x18174
+HID_FUNC_MAKROEDIT                      0x18175
+HID_FUNC_ZOOM                           0x18176
+HID_FUNC_REZOOM                         0x18177
+HID_FUNC_DESTROYRANGELIST               0x18178
+HID_FUNC_DELETERANGE                    0x18179
+HID_FUNC_DEFAULTRANGE                   0x1817A
+HID_OPERATION_CREATECURVE               0x1817F
+HID_OPERATION_AVERAGE                   0x18180
+HID_OPERATION_SPLINE                    0x18181
+HID_OPERATION_DERIVE                    0x18182
+HID_OPERATION_INTEGRATE                 0x18183
+HID_OPERATION_FITCURVE                  0x18184
+HID_OPERATION_FFT                       0x18185
+ 
+// Eingabeaufforderungen (IDP_*) 
+ 
+// Ressourcen (IDR_*) 
+HIDR_CONTEXT_MENUES                     0x2007A
+HIDR_CARA2DTYPE                         0x20081
+HIDR_CARA_CURVE                         0x20082
+HIDR_MAINFRAME2                         0x20083
+HIDR_MAINFRAME3                         0x20084
+HIDR_MAINFRAME4                         0x20085
+HIDR_PLOTTOOLBAR                        0x200C8
+ 
+// Dialogfelder (IDD_*) 
+HIDD_REGISTERED                         0x2007D
+HIDD_MARKER_DLG                         0x2007E
+HIDD_AVERAGE                            0x200DD
+HIDD_SPLINECURVE                        0x200DE
+HIDD_CURVE_TEXT_MACRO                   0x200DF
+HIDD_INTEGRATE                          0x200E0
+HIDD_DERIVE                             0x200E1
+HIDD_CREATECURVE                        0x200E2
+HIDD_FITCURVE                           0x200E3
+HIDD_SAVE_WAVE_CURVE                    0x200E4
+HIDD_READWAVEFILE                       0x200E5
+HIDD_FFT                                0x200E6
+ 
+// Rahmen-Steuerelemente (IDW_*) 

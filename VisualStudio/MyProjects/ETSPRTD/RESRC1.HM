@@ -1,0 +1,26 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by resskript_new.rc
+//
+#define HIDCANCEL                       0x271b    // IDD_PRINTERDIALOG
+#define HIDC_BOTTOM                     0x2715    // IDD_PRINTERDIALOG
+#define HIDC_BUTTON_SETUP               0x2711    // IDD_PRINTERDIALOG
+#define HIDC_COMMENT                    0x2712    // IDD_PRINTERDIALOG
+#define HIDC_COPIES                     0x2714    // IDD_PRINTERDIALOG
+#define HIDC_FILE                       0x2713    // IDD_PRINTERDIALOG
+#define HIDC_LANDSCAPE                  0x2716    // IDD_PRINTERDIALOG
+#define HIDC_LEFT                       0x2715    // IDD_PRINTERDIALOG
+#define HIDC_ORT                        0x2712    // IDD_PRINTERDIALOG
+#define HIDC_PORTRAIT                   0x2716    // IDD_PRINTERDIALOG
+#define HIDC_RIGHT                      0x2715    // IDD_PRINTERDIALOG
+#define HIDC_SELECTPRINTER              0x2710    // IDD_PRINTERDIALOG
+#define HIDC_STATIC1                    0x2712    // IDD_PRINTERDIALOG
+#define HIDC_STATIC2                    0x2712    // IDD_PRINTERDIALOG
+#define HIDC_STATIC3                    0x2712    // IDD_PRINTERDIALOG
+#define HIDC_STATIC4                    0x2712    // IDD_PRINTERDIALOG
+#define HIDC_STATIC5                    0x2715    // IDD_PRINTERDIALOG
+#define HIDC_STATIC6                    0x2715    // IDD_PRINTERDIALOG
+#define HIDC_STATIC7                    0x2715    // IDD_PRINTERDIALOG
+#define HIDC_STATIC8                    0x2715    // IDD_PRINTERDIALOG
+#define HIDC_STATUS                     0x2712    // IDD_PRINTERDIALOG
+#define HIDC_TOP                        0x2715    // IDD_PRINTERDIALOG
+#define HIDC_TYP                        0x2712    // IDD_PRINTERDIALOG

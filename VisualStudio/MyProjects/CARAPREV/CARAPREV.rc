@@ -1,0 +1,2773 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "res\CARAPREV.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PREVIEW_DLG_BAR DIALOGEX 0, 0, 362, 27
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "&E",ID_FILE_PRINT_SETUP,25,2,55,24,BS_ICON,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "&D",AFX_ID_PREVIEW_PRINT,85,2,55,24,BS_ICON,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "&K",AFX_ID_PREVIEW_ZOOMOUT,145,2,55,24,BS_ICON,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "&G",AFX_ID_PREVIEW_ZOOMIN,205,2,55,24,BS_ICON,
+                    WS_EX_STATICEDGE
+    DEFPUSHBUTTON   "&S",AFX_ID_PREVIEW_CLOSE,265,2,55,24,BS_ICON,
+                    WS_EX_STATICEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PREVIEW_DLG_BAR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 350
+        VERTGUIDE, 25
+        VERTGUIDE, 80
+        VERTGUIDE, 85
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        VERTGUIDE, 320
+        HORZGUIDE, 2
+        HORZGUIDE, 26
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_COPYCURSOR          CURSOR                  "res\\CopyFist.cur"
+IDC_EDITCURSOR          CURSOR                  "res\\Edit.cur"
+IDC_NODROPCURSOR        CURSOR                  "res\\NoDrop.cur"
+IDC_OPENHANDCURSOR      CURSOR                  "res\\OpenHand.cur"
+IDC_TRACKCURSOR         CURSOR                  "res\\TrackFist.cur"
+IDC_ZOOMCURSOR          CURSOR                  "res\\Magnify.cur"
+IDC_CREATE_LINE         CURSOR                  "res\\CreateLine.cur"
+IDC_CREATE_RECT         CURSOR                  "res\\CreateRect.cur"
+IDC_CREATE_BEZIER       CURSOR                  "res\\CreateBezier.cur"
+IDC_CREATE_CIRCLE       CURSOR                  "res\\CreateCircle.cur"
+IDC_CREATE_TEXT         CURSOR                  "res\\CreateText.cur"
+IDC_TRACKCURVE          CURSOR                  "res\\traCurve.cur"
+IDC_TRACKPLOT           CURSOR                  "res\\tracPlot.cur"
+IDC_COPYPLOT            CURSOR                  "res\\copyplot.cur"
+IDC_COPYCURVE           CURSOR                  "res\\copycurv.cur"
+IDC_NODROPPLOT          CURSOR                  "res\\nodroppl.cur"
+IDC_NODROPCURVE         CURSOR                  "res\\nodropcu.cur"
+IDC_CREATE_BCIRCLE      CURSOR                  "res\\CrBezierCirc.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_PREVIEWBAR          BITMAP                  "res\\PreviewBar.bmp"
+IDB_CARALOGO            BITMAP                  "res\\CaraLogo.bmp"
+IDB_TREE_IMAGES         BITMAP                  "res\\CaraSdb.bmp"
+IDB_BULLET              BITMAP                  "res\\bullet.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_PREVIEWBAR TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FUNC_PICK
+    BUTTON      ID_FUNC_TEXT
+    BUTTON      ID_FUNC_LINE
+    BUTTON      ID_FUNC_RECTANGLE
+    BUTTON      ID_FUNC_BEZIER
+    BUTTON      ID_FUNC_BEZIERCIRCLE
+    BUTTON      ID_FUNC_CIRCLE
+    SEPARATOR
+    BUTTON      ID_EDIT_UNDO
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_EDIT_CLEAR
+    SEPARATOR
+    BUTTON      ID_FUNC_UP
+    BUTTON      ID_FUNC_DOWN
+    BUTTON      ID_FUNC_HIGHEST
+    BUTTON      ID_FUNC_LOWEST
+    SEPARATOR
+    BUTTON      ID_FUNC_GROUP
+    BUTTON      ID_FUNC_UNGROUP
+    SEPARATOR
+    BUTTON      ID_EDIT_PASTE_SELECTIV
+    SEPARATOR
+    BUTTON      ID_FUNC_CATCH_GRID
+    BUTTON      ID_CONTEXT_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_PREVIEWACCELERATORS ACCELERATORS 
+BEGIN
+    "A",            IDX_ADD_PAGE,           VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "B",            ID_FUNC_LOWEST,         VIRTKEY, CONTROL, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_FUNC_HIGHEST,        VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_FUNC_GROUP,          VIRTKEY, CONTROL, NOINVERT
+    "H",            IDX_HEAPWATCH,          VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "L",            IDX_NO_LOGO,            VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "R",            IDX_REMOVE_PAGE,        VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "S",            ID_EDIT_PASTE_SELECTIV, VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_EDIT_PASTE_SPECIAL,  VIRTKEY, CONTROL, ALT, NOINVERT
+    "S",            IDX_SHOW_LABELSTRUCTURE, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "U",            ID_FUNC_UNGROUP,        VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         AFX_ID_PREVIEW_ZOOMIN,  VIRTKEY, NOINVERT
+    VK_APPS,        IDX_CONTEXT_MENU,       VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F10,         IDX_CONTEXT_MENU,       VIRTKEY, SHIFT, NOINVERT
+    VK_F11,         ID_FUNC_CATCH_GRID,     VIRTKEY, NOINVERT
+    VK_F4,          ID_FUNC_PICK,           VIRTKEY, NOINVERT
+    VK_F5,          ID_FUNC_TEXT,           VIRTKEY, NOINVERT
+    VK_F6,          ID_FUNC_LINE,           VIRTKEY, NOINVERT
+    VK_F7,          ID_FUNC_RECTANGLE,      VIRTKEY, NOINVERT
+    VK_F8,          ID_FUNC_BEZIER,         VIRTKEY, NOINVERT
+    VK_F9,          ID_FUNC_CIRCLE,         VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_LEFT,        AFX_ID_PREVIEW_PREV,    VIRTKEY, NOINVERT
+    VK_RIGHT,       AFX_ID_PREVIEW_NEXT,    VIRTKEY, NOINVERT
+    VK_RIGHT,       AFX_ID_PREVIEW_NUMPAGE, VIRTKEY, CONTROL, ALT, NOINVERT
+    VK_SUBTRACT,    AFX_ID_PREVIEW_ZOOMOUT, VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_PRT_SETUP           ICON                    "res\\icon1.ico"
+IDI_PRINT               ICON                    "res\\prt_setu.ico"
+IDI_ZOOM_OUT            ICON                    "res\\ico00001.ico"
+IDI_PREVIEW_CLOSE       ICON                    "res\\ico00003.ico"
+IDI_ZOOM_IN             ICON                    "res\\zoom_out.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_BRUSH DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Hintergrund"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Muster",IDC_STATIC,5,3,75,67
+    LISTBOX         IDC_BRUSH_STYLE,10,13,65,52,LBS_OWNERDRAWFIXED | 
+                    LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP,WS_EX_CLIENTEDGE,HIDC_BRUSH_STYLE
+    GROUPBOX        "Farben",IDC_STATIC,85,3,115,32
+    PUSHBUTTON      "Muster...",IDC_BRUSH_COLOR,90,13,50,17,WS_DISABLED,0,
+                    HIDC_BRUSH_COLOR
+    PUSHBUTTON      "Füllfarbe...",IDC_BRUSH_BKGNDCOLOR,145,13,50,17,
+                    WS_DISABLED,0,HIDC_BRUSH_BKGNDCOLOR
+    PUSHBUTTON      "Bitmap...",IDC_BRUSH_BITMAP,90,40,50,30,NOT WS_VISIBLE,
+                    0,HIDC_BRUSH_BITMAP
+    GROUPBOX        "Vorschau",IDC_STATIC,5,70,200,115
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+END
+
+IDD_PROPPAGE_CURVE DIALOGEX 0, 0, 210, 194
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Kurven"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Auswahl der Kurve",IDC_STATIC,5,0,200,46
+    CONTROL         "Kurvenliste",IDC_CURVE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,10,190,32,0,HIDC_CURVE_LIST
+    LTEXT           "Format :",IDC_CURVE_FORMAT_TXT,10,70,40,8,NOT WS_GROUP
+    COMBOBOX        IDC_CURVE_FORMAT,55,68,145,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_CURVE_FORMAT
+    LTEXT           "Liniendicke (Pixel)",IDC_CURVE_WIDTH_TXT,10,97,60,8
+    EDITTEXT        IDC_CURVE_WIDTH,73,96,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_GROUP,0,HIDC_CURVE_WIDTH
+    CONTROL         "Spin1",IDC_CURVE_WIDTH_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,104,95,
+                    11,14,0,HIDC_CURVE_WIDTH_SPIN
+    PUSHBUTTON      "Farbe der Kurve...",IDC_CURVE_COLOR,120,96,80,12,0,0,
+                    HIDC_CURVE_COLOR
+    COMBOBOX        IDC_COMBO_SCATTER,120,113,80,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Kurve anzeigen",IDC_CURVE_VISIBLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,114,76,10,0,
+                    HIDC_CURVE_VISIBLE
+    CONTROL         "Einzelne Kurvenwerte mit Mauscursor ändern",
+                    IDC_CURVE_EDITMODE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,155,190,8,0,HIDC_CURVE_EDITMODE1
+    CONTROL         "3 Kurvenwerte mit Mauscursor ändern (interpoliert)",
+                    IDC_CURVE_EDITMODE2,"Button",BS_AUTORADIOBUTTON,10,170,
+                    190,8,0,HIDC_CURVE_EDITMODE2
+    CONTROL         "Kurvenparameter änderbar",IDC_CURVE_EDITABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,140,190,9,0,
+                    HIDC_CURVE_EDITABLE
+    LTEXT           "Index i :",IDC_CURVE_INDEX_TXT,10,69,40,8
+    EDITTEXT        IDC_CURVE_INDEX,55,68,52,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_CURVE_INDEX
+    CONTROL         "Spin1",IDC_CURVE_INDEX_SPIN,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_NOTHOUSANDS,108,67,11,12,0,
+                    HIDC_CURVE_INDEX_SPIN
+    LTEXT           "X-Wert (i):",IDC_CURVE_VALUE_X_TXT,10,86,40,8
+    EDITTEXT        IDC_CURVE_VALUE_X,55,84,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_VALUE_X
+    LTEXT           "Y-Wert (i):",IDC_CURVE_VALUE_Y_TXT,10,102,40,8
+    EDITTEXT        IDC_CURVE_VALUE_Y,55,100,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_VALUE_Y
+    LTEXT           "Offset :",IDC_CURVE_OFFSETY_TXT,10,121,60,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_OFFSETY,55,119,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_OFFSETY
+    LTEXT           "X-Start :",IDC_CURVE_ORIGIN_TXT,10,139,60,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_ORIGIN,55,137,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_ORIGIN
+    LTEXT           "X(i)/X(i-1) :",IDC_CURVE_STEP_TXT,10,155,41,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_STEP,55,153,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_STEP
+    LTEXT           "X-Ende :",IDC_CURVE_END_TXT,10,171,60,8,NOT WS_GROUP
+    EDITTEXT        IDC_CURVE_END,55,170,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_END
+    CONTROL         "Werteliste",IDC_CURVE_VALUE_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,10,66,190,118,0,
+                    HIDC_CURVE_VALUE_LIST
+    LTEXT           "Einheit X-Achse:",IDC_CURVE_UNIT_X_TXT,10,71,100,8
+    EDITTEXT        IDC_CURVE_UNIT_X,115,69,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_X
+    LTEXT           "Einheit Y-Achse:",IDC_CURVE_UNIT_Y_TXT,10,89,100,8
+    EDITTEXT        IDC_CURVE_UNIT_Y,115,87,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_Y
+    LTEXT           "Einheit der Ortskurvenachse:",IDC_CURVE_UNIT_LOCUS_TXT,
+                    10,106,100,8
+    EDITTEXT        IDC_CURVE_UNIT_LOCUS,115,105,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_LOCUS
+    CONTROL         "Tab1",IDC_CURVE_TAB,"SysTabControl32",WS_TABSTOP,5,50,
+                    200,139
+END
+
+IDD_PROPPAGE_CURVE_COLORS DIALOGEX 0, 0, 210, 189
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Farben"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CURVECOLOR1,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,18,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR1
+    PUSHBUTTON      "Hintergrundfarbe des Darstellungsfensters...",
+                    IDC_CURVECOLOR_BKGND,9,168,190,15,0,0,
+                    HIDC_CURVECOLOR_BKGND
+    GROUPBOX        "Farbreihenfolge für die Kurven",IDC_STATIC,5,6,200,159
+    CONTROL         "",IDC_CURVECOLOR2,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,18,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR2
+    CONTROL         "",IDC_CURVECOLOR3,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,35,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR3
+    CONTROL         "",IDC_CURVECOLOR4,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,35,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR4
+    CONTROL         "",IDC_CURVECOLOR5,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,53,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR5
+    CONTROL         "",IDC_CURVECOLOR6,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,53,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR6
+    CONTROL         "",IDC_CURVECOLOR7,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,71,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR7
+    CONTROL         "",IDC_CURVECOLOR8,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,71,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR8
+    CONTROL         "",IDC_CURVECOLOR9,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,89,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR9
+    CONTROL         "",IDC_CURVECOLOR10,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,89,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR10
+    CONTROL         "",IDC_CURVECOLOR11,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,107,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR11
+    CONTROL         "",IDC_CURVECOLOR12,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,107,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR12
+    CONTROL         "",IDC_CURVECOLOR13,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,125,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR13
+    CONTROL         "",IDC_CURVECOLOR14,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,125,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR14
+    CONTROL         "",IDC_CURVECOLOR15,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,143,49,15,WS_EX_CLIENTEDGE
+    CONTROL         "",IDC_CURVECOLOR16,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,143,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR16
+    LTEXT           "Kurve 1",IDC_STATIC,10,21,26,8
+    LTEXT           "Kurve 2",IDC_STATIC,110,21,26,8
+    LTEXT           "Kurve 3",IDC_STATIC,10,38,26,8
+    LTEXT           "Kurve 4",IDC_STATIC,110,38,26,8
+    LTEXT           "Kurve 5",IDC_STATIC,10,56,26,8
+    LTEXT           "Kurve 6",IDC_STATIC,110,56,26,8
+    LTEXT           "Kurve 7",IDC_STATIC,10,74,26,8
+    LTEXT           "Kurve 8",IDC_STATIC,110,74,26,8
+    LTEXT           "Kurve 9",IDC_STATIC,10,92,26,8
+    LTEXT           "Kurve 10",IDC_STATIC,110,92,30,8
+    LTEXT           "Kurve 11",IDC_STATIC,10,110,30,8
+    LTEXT           "Kurve 12",IDC_STATIC,110,110,30,8
+    LTEXT           "Kurve 13",IDC_STATIC,10,128,30,8
+    LTEXT           "Kurve 14",IDC_STATIC,110,128,30,8
+    LTEXT           "Kurve 16",IDC_STATIC,110,146,30,8
+    LTEXT           "Kurve 15",IDC_STATIC,10,146,30,8
+END
+
+IDD_PROPPAGE_FONT DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Text"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Schriftart",IDC_STATIC,5,0,200,85
+    COMBOBOX        IDC_FONT_FONT,10,18,110,110,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_FONT
+    LTEXT           "Höhe",IDC_STATIC,125,8,25,8
+    EDITTEXT        IDC_FONT_HEIGHT,125,18,25,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_FONT_HEIGHT
+    EDITTEXT        IDC_FONT_WIDTH,155,18,48,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_FONT_WIDTH
+    LTEXT           "Horizontal",IDC_STATIC,10,38,31,8
+    COMBOBOX        IDC_FONT_ALIGN_H,10,48,55,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_ALIGN_H
+    LTEXT           "Vertikal",IDC_STATIC,70,38,24,8
+    COMBOBOX        IDC_FONT_ALIGN_V,70,48,50,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_ALIGN_V
+    LTEXT           "Extra",IDC_STATIC,125,38,25,8
+    EDITTEXT        IDC_FONT_EXTRASPACE,125,48,25,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FONT_EXTRASPACE
+    LTEXT           "Gewichtung",IDC_STATIC,155,38,48,8
+    COMBOBOX        IDC_FONT_WEIGHT,155,48,48,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_WEIGHT
+    CONTROL         "Kursiv",IDC_FONT_CURSIV,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,70,34,10,0,HIDC_FONT_CURSIV
+    CONTROL         "Unterstrichen",IDC_FONT_UNDERLINE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,65,70,55,10,0,
+                    HIDC_FONT_UNDERLINE
+    CONTROL         "Durchgestrichen",IDC_FONT_LINE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,125,70,78,10,0,HIDC_FONT_LINE
+    GROUPBOX        "Farben",IDC_STATIC,5,90,200,25
+    PUSHBUTTON      "Text...",IDC_FONT_TEXTCOLOR,10,99,55,12,0,0,
+                    HIDC_FONT_TEXTCOLOR
+    PUSHBUTTON      "Texthintergrund...",IDC_FONT_BKGNDCOLOR,70,99,100,12,0,
+                    0,HIDC_FONT_BKGNDCOLOR
+    CONTROL         "",IDC_FONT_BKGND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    174,100,29,10,0,HIDC_FONT_BKGND
+    GROUPBOX        "Vorschau",IDC_STATIC,5,120,200,65
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_GROUP,10,130,160,50,WS_EX_CLIENTEDGE,
+                    HIDC_PREVIEWSTD
+    CONTROL         "2:1",IDC_FONT_ZOOM0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,174,130,29,8,0,HIDC_FONT_ZOOM0
+    CONTROL         "1:1",IDC_FONT_ZOOM1,"Button",BS_AUTORADIOBUTTON,174,140,
+                    29,8,0,HIDC_FONT_ZOOM1
+    CONTROL         "1:2",IDC_FONT_ZOOM2,"Button",BS_AUTORADIOBUTTON,174,150,
+                    29,8,0,HIDC_FONT_ZOOM2
+    CONTROL         "1:5",IDC_FONT_ZOOM3,"Button",BS_AUTORADIOBUTTON,174,160,
+                    29,8,0,HIDC_FONT_ZOOM3
+    CONTROL         "1:10",IDC_FONT_ZOOM4,"Button",BS_AUTORADIOBUTTON,174,
+                    170,29,8,0,HIDC_FONT_ZOOM4
+    LTEXT           "Breite",IDC_STATIC,155,8,48,8
+END
+
+IDD_PROPPAGE_LINE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_DISABLED | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Rahmen/Linie"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Dicke",IDC_STATIC,5,5,85,30
+    EDITTEXT        IDC_FRAME_LINEWIDTH,11,15,64,15,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER,WS_EX_CLIENTEDGE,
+                    HIDC_FRAME_LINEWIDTH
+    CONTROL         "Spin1",IDC_FRAME_LINEWIDTH_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,75,15,15,
+                    15,0,HIDC_FRAME_LINEWIDTH_SPIN
+    PUSHBUTTON      "Linienfarbe...",IDC_FRAME_LINECOLOR,11,43,74,15,0,0,
+                    HIDC_FRAME_LINECOLOR
+    LISTBOX         IDC_FRAME_LINESTYLE,105,15,95,50,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,
+                    WS_EX_CLIENTEDGE,HIDC_FRAME_LINESTYLE
+    GROUPBOX        "Stil",IDC_STATIC,100,5,105,65
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    GROUPBOX        "Vorschau",IDC_STATIC,5,70,200,115
+END
+
+IDD_PROPPAGE_PLOTVIEW DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Darstellung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Schriftarten Plot(s)",IDC_STATIC,5,5,115,46
+    PUSHBUTTON      "Überschrift...",IDC_PLT_HEADINGFONT,10,17,105,12,0,0,
+                    HIDC_PLT_HEADINGFONT
+    PUSHBUTTON      "Gittertext...",IDC_PLT_GRID_FONT,10,34,105,12,0,0,
+                    HIDC_PLT_GRID_FONT
+    GROUPBOX        "Kurven",IDC_STATIC,125,5,80,46,BS_CENTER
+    CONTROL         "Textrahmen",IDC_PLT_CURVETEXTFRAME,"Button",
+                    BS_AUTOCHECKBOX | BS_CENTER | WS_TABSTOP,130,16,70,14,0,
+                    HIDC_PLT_CURVETEXTFRAME
+    PUSHBUTTON      "Schriftart...",IDC_CURVE_FONT,130,34,70,12,0,0,
+                    HIDC_CURVE_FONT
+    CONTROL         "Beschriftung anzeigen",IDC_PLT_SHOWTEXT_X,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,68,105,8,
+                    WS_EX_TRANSPARENT,HIDC_PLT_SHOWTEXT_X
+    GROUPBOX        "Zahlendarstellung : X-Achse",IDC_STATIC,5,55,200,30,
+                    BS_LEFT
+    GROUPBOX        "Zahlendarstellung : Y-Achse",IDC_STATIC,5,90,200,31,
+                    BS_LEFT
+    CONTROL         "Beschriftung anzeigen",IDC_PLT_SHOWTEXT_Y,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,104,105,8,
+                    WS_EX_TRANSPARENT,HIDC_PLT_SHOWTEXT_Y
+    GROUPBOX        "Gitterlinien",IDC_STATIC,5,126,200,59,BS_LEFT
+    PUSHBUTTON      "Farbe...",IDC_PLT_GRIDCOLOR,130,136,70,12,0,0,
+                    HIDC_PLT_GRIDCOLOR
+    CONTROL         "Linien anzeigen",IDC_PLT_SHOWGRID_X,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,130,154,70,8,0,
+                    HIDC_PLT_SHOWGRID_X
+    EDITTEXT        IDC_PLT_GRIDSTEPX,50,152,40,12,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_PLT_GRIDSTEPX
+    CONTROL         "Linien anzeigen",IDC_PLT_SHOWGRID_Y,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,130,170,70,10,0,
+                    HIDC_PLT_SHOWGRID_Y
+    EDITTEXT        IDC_PLT_GRIDSTEPY,50,169,40,12,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_PLT_GRIDSTEPY
+    LTEXT           "mittlerer Abstand :",IDC_STATIC,50,138,65,8
+    LTEXT           "X-Achse :",IDC_STATIC,10,154,35,8
+    LTEXT           "Y-Achse :",IDC_STATIC,10,171,35,8
+    PUSHBUTTON      "Darstellung...",IDC_PLT_NUM_REP_X,130,66,70,12
+    PUSHBUTTON      "Darstellung...",IDC_PLT_NUM_REP_Y,130,102,70,12
+    LTEXT           " [mm]",IDC_STATIC,95,154,20,8
+    LTEXT           " [mm]",IDC_STATIC,95,171,20,8
+END
+
+IDD_PROPPAGE_DIBLABEL DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Bildeigenschaften"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "beliebig",IDC_PICT_SCALING0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,10,45,10,0,HIDC_PICT_SCALING0
+    CONTROL         "nicht proportional",IDC_PICT_SCALING1,"Button",
+                    BS_AUTORADIOBUTTON,60,10,75,10,0,HIDC_PICT_SCALING1
+    CONTROL         "proportional",IDC_PICT_SCALING2,"Button",
+                    BS_AUTORADIOBUTTON,145,10,55,10,0,HIDC_PICT_SCALING2
+    GROUPBOX        "Skalierung",IDC_STATIC,5,0,200,23,WS_GROUP
+    CONTROL         "Invertiert",IDC_PICT_OUTPUT0,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,32,50,10,0,HIDC_PICT_OUTPUT0
+    CONTROL         "Farben interpolieren",IDC_PICT_HALFTONE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,60,32,85,10,0,
+                    HIDC_PICT_HALFTONE
+    CONTROL         "durchsichtig",IDC_PICT_SHINY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,32,55,10,0,HIDC_PICT_SHINY
+    GROUPBOX        "Speichern",IDC_STATIC,5,45,200,25
+    CONTROL         "Als Datei",IDC_PICT_FILE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,55,44,10,0,HIDC_PICT_FILE
+    EDITTEXT        IDC_PICT_FILENAME,60,54,140,12,ES_AUTOHSCROLL,0,
+                    HIDC_PICT_FILENAME
+    GROUPBOX        "Vorschau",IDC_STATIC,5,70,200,115
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    GROUPBOX        "Ausgabe",IDC_STATIC,5,23,200,22,WS_GROUP
+END
+
+IDD_PASTE_SELECTIV DIALOGEX 0, 0, 145, 61
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Selektives Einfügen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "ETS-Format",IDC_PASTESEL_FORMAT0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,10,70,10,0,
+                    HIDC_PASTESEL_FORMAT0
+    CONTROL         "Meta-Datei",IDC_PASTESEL_FORMAT1,"Button",
+                    BS_AUTORADIOBUTTON,10,20,70,10,0,HIDC_PASTESEL_FORMAT1
+    CONTROL         "Bitmap",IDC_PASTESEL_FORMAT2,"Button",
+                    BS_AUTORADIOBUTTON,10,30,70,10,0,HIDC_PASTESEL_FORMAT2
+    CONTROL         "BMP-Datei",IDC_PASTESEL_FORMAT3,"Button",
+                    BS_AUTORADIOBUTTON,10,40,50,10,0,HIDC_PASTESEL_FORMAT3
+    GROUPBOX        "Formate",IDC_STATIC,5,0,80,56,WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,90,9,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,90,39,50,12
+END
+
+IDD_CATCH_GRID DIALOGEX 0, 0, 160, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Rasterschrittweite"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_STATIC,5,0,95,50
+    LTEXT           "In [mm]",IDC_STATIC,10,6,23,8
+    CTEXT           "X",IDC_STATIC,60,6,15,8
+    CTEXT           "Y",IDC_STATIC,80,6,15,8
+    LTEXT           "Ursprung",IDC_STATIC,10,21,45,8
+    EDITTEXT        IDC_CATCHGRID_ORG_X,60,19,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_ORG_X
+    EDITTEXT        IDC_CATCHGRID_ORG_Y,80,19,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_ORG_Y
+    LTEXT           "Schrittweite",IDC_STATIC,10,36,45,8
+    EDITTEXT        IDC_CATCHGRID_STEP_X,60,34,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_STEP_X
+    EDITTEXT        IDC_CATCHGRID_STEP_Y,80,34,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_STEP_Y
+    DEFPUSHBUTTON   "OK",IDOK,105,10,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,105,34,50,12
+END
+
+IDD_LISTDLG DIALOGEX 0, 0, 90, 122
+STYLE DS_SETFONT | DS_3DLOOK | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Liste"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Liste",IDC_LST_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,3,3,84,104,0,HIDC_LST_LIST
+    PUSHBUTTON      "OK",IDOK,3,108,84,12
+END
+
+IDD_TREEDLG DIALOGEX 0, 0, 122, 132
+STYLE DS_SETFONT | DS_3DLOOK | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Struktur"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_TREECTRL,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | TVS_NOTOOLTIPS | WS_BORDER | 
+                    WS_TABSTOP,3,0,115,116,0,HIDC_TREE_TREECTRL
+    PUSHBUTTON      "OK",IDOK,3,119,115,12
+END
+
+IDD_PROPPAGE_COLORSCALE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Farbstufenskala"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Darstellung ",IDC_STATIC,5,5,200,62,BS_LEFT
+    CONTROL         "Skalentext anzeigen",IDC_CSCALE_SHOWTEXT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,21,105,8,
+                    WS_EX_TRANSPARENT,HIDC_CSCALE_SHOWTEXT
+    EDITTEXT        IDC_CSCALE_STEPWIDTH,58,49,35,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_CSCALE_STEPWIDTH
+    LTEXT           "Schrittweite :",IDC_STATIC,10,51,46,8
+    PUSHBUTTON      "Schriftart...",IDC_CSCALE_FONT,115,49,85,12,0,0,
+                    HIDC_CSCALE_FONT
+    GROUPBOX        "Vorschau",IDC_STATIC,5,67,200,118
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    PUSHBUTTON      "Zahlendarstellung...",IDC_CSCALE_NUM_REP,115,19,85,12
+END
+
+IDD_TEXTDLG DIALOGEX 0, 0, 186, 70
+STYLE DS_SETFONT | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Text editieren"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_TEXTEDIT,2,0,181,57,ES_MULTILINE | ES_AUTOVSCROLL | ES_NOHIDESEL |
+                    ES_WANTRETURN
+    PUSHBUTTON      "Ok, Größe nicht ändern",IDOK,2,58,85,12
+    PUSHBUTTON      "Ok, Größe anpassen",IDC_TEXT_CALCRECT,98,58,85,12
+END
+
+IDD_PROPPAGE_PLOTRANGE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Bereich"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Plotüberschrift",IDC_STATIC,5,1,200,29
+    EDITTEXT        IDC_PLT_PLOTHEADING,10,12,189,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_PLOTHEADING
+    CONTROL         "Polardiagramm",IDC_PLT_POLAR,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE | WS_GROUP,110,45,90,12,
+                    0,HIDC_PLT_POLAR
+    CONTROL         "X-Y-Diagramm",IDC_PLT_X_Y_DIAG,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,10,45,90,12,0,
+                    HIDC_PLT_X_Y_DIAG
+    GROUPBOX        "Art des Diagramms",IDC_STATIC,5,34,200,29,WS_GROUP
+    CONTROL         "Linear",IDC_PLT_XDIVLIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,79,35,8,0,HIDC_PLT_XDIVLIN
+    CONTROL         "Logarithmisch",IDC_PLT_XDIVLOG,"Button",
+                    BS_AUTORADIOBUTTON,70,79,60,8,0,HIDC_PLT_XDIVLOG
+    CONTROL         "Frequenz",IDC_PLT_XDIVFRQ,"Button",BS_AUTORADIOBUTTON,
+                    145,79,55,8,0,HIDC_PLT_XDIVFRQ
+    GROUPBOX        "X-Axenteilung",IDC_STATIC,5,66,200,51,WS_GROUP | 
+                    WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,5,90,200,27,WS_GROUP
+    LTEXT           "von :",IDC_STATIC,10,101,20,8,NOT WS_GROUP
+    EDITTEXT        IDC_PLT_RANGEX1,30,99,50,13,ES_AUTOHSCROLL | WS_GROUP,0,
+                    HIDC_PLT_RANGEX1
+    LTEXT           "bis :",IDC_STATIC,85,101,15,8
+    EDITTEXT        IDC_PLT_RANGEX2,105,99,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_RANGEX2
+    EDITTEXT        IDC_PLT_UNITX,169,99,29,13,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_CLIENTEDGE,HIDC_PLT_UNITX
+    CONTROL         "Linear",IDC_PLT_YDIVLIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,132,35,8,0,HIDC_PLT_YDIVLIN
+    CONTROL         "Logarithmisch",IDC_PLT_YDIVLOG,"Button",
+                    BS_AUTORADIOBUTTON,70,132,64,8,0,HIDC_PLT_YDIVLOG
+    CONTROL         "Frequenz",IDC_PLT_YDIVFRQ,"Button",BS_AUTORADIOBUTTON,
+                    145,132,55,8,0,HIDC_PLT_YDIVFRQ
+    GROUPBOX        "Y-Axenteilung",IDC_STATIC,5,120,200,48,WS_GROUP | 
+                    WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,5,143,200,25,WS_GROUP
+    LTEXT           "von :",IDC_STATIC,10,153,20,8,NOT WS_GROUP
+    EDITTEXT        IDC_PLT_RANGEY1,30,151,50,13,ES_AUTOHSCROLL | WS_GROUP,0,
+                    HIDC_PLT_RANGEY1
+    LTEXT           "bis :",IDC_STATIC,85,153,15,8
+    EDITTEXT        IDC_PLT_RANGEY2,105,151,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_RANGEY2
+    EDITTEXT        IDC_PLT_UNITY,170,151,29,13,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_CLIENTEDGE,HIDC_PLT_UNITY
+    PUSHBUTTON      "Als Voreinstellung setzen",IDC_PLT_SETDEFAULTRANGE,5,
+                    173,90,14,0,0,HIDC_PLT_SETDEFAULTRANGE
+    PUSHBUTTON      "Gesamtbereich ermitteln",IDC_PLT_DETERMINRANGE,115,173,
+                    90,14,0,0,HIDC_PLT_DETERMINRANGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PROPPAGE_BRUSH, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 195
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 3
+        HORZGUIDE, 13
+        HORZGUIDE, 30
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 65
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_CURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+    END
+
+    IDD_PROPPAGE_CURVE_COLORS, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 110
+        VERTGUIDE, 199
+        HORZGUIDE, 25
+        HORZGUIDE, 42
+        HORZGUIDE, 60
+        HORZGUIDE, 78
+        HORZGUIDE, 96
+        HORZGUIDE, 114
+        HORZGUIDE, 132
+        HORZGUIDE, 150
+        HORZGUIDE, 165
+        HORZGUIDE, 175
+    END
+
+    IDD_PROPPAGE_FONT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 150
+        VERTGUIDE, 155
+        VERTGUIDE, 170
+        VERTGUIDE, 174
+        VERTGUIDE, 203
+        VERTGUIDE, 205
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 42
+        HORZGUIDE, 60
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 115
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 140
+        HORZGUIDE, 150
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_LINE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 75
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 30
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_PLOTVIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 23
+        HORZGUIDE, 40
+        HORZGUIDE, 51
+        HORZGUIDE, 55
+        HORZGUIDE, 72
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 108
+        HORZGUIDE, 121
+        HORZGUIDE, 126
+        HORZGUIDE, 142
+        HORZGUIDE, 158
+        HORZGUIDE, 175
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_DIBLABEL, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 145
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 15
+        HORZGUIDE, 23
+        HORZGUIDE, 37
+        HORZGUIDE, 45
+        HORZGUIDE, 60
+        HORZGUIDE, 70
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PASTE_SELECTIV, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 80
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 140
+        HORZGUIDE, 15
+        HORZGUIDE, 25
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 56
+    END
+
+    IDD_CATCH_GRID, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 55
+        VERTGUIDE, 60
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 155
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+    END
+
+    IDD_LISTDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 3
+        VERTGUIDE, 87
+        HORZGUIDE, 3
+        HORZGUIDE, 107
+        HORZGUIDE, 120
+    END
+
+    IDD_TREEDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 3
+        VERTGUIDE, 118
+        HORZGUIDE, 3
+        HORZGUIDE, 116
+        HORZGUIDE, 125
+    END
+
+    IDD_PROPPAGE_COLORSCALE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 115
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 55
+        HORZGUIDE, 67
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_TEXTDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 2
+        VERTGUIDE, 183
+        HORZGUIDE, 57
+        HORZGUIDE, 65
+    END
+
+    IDD_PROPPAGE_PLOTRANGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 70
+        VERTGUIDE, 85
+        VERTGUIDE, 100
+        VERTGUIDE, 110
+        VERTGUIDE, 145
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 18
+        HORZGUIDE, 30
+        HORZGUIDE, 34
+        HORZGUIDE, 51
+        HORZGUIDE, 63
+        HORZGUIDE, 66
+        HORZGUIDE, 83
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 117
+        HORZGUIDE, 120
+        HORZGUIDE, 136
+        HORZGUIDE, 143
+        HORZGUIDE, 157
+        HORZGUIDE, 168
+        HORZGUIDE, 180
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""res\\CARAPREV.rc2""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PROPPAGE_FONT DLGINIT
+BEGIN
+    IDC_FONT_ALIGN_H, 0x403, 6, 0
+0x694c, 0x6b6e, 0x0073, 
+    IDC_FONT_ALIGN_H, 0x403, 10, 0
+0x655a, 0x746e, 0x6972, 0x7265, 0x0074, 
+    IDC_FONT_ALIGN_H, 0x403, 7, 0
+0x6552, 0x6863, 0x7374, "\000" 
+    IDC_FONT_ALIGN_V, 0x403, 5, 0
+0x624f, 0x6e65, "\000" 
+    IDC_FONT_ALIGN_V, 0x403, 6, 0
+0x6142, 0x6973, 0x0073, 
+    IDC_FONT_ALIGN_V, 0x403, 6, 0
+0x6e55, 0x6574, 0x006e, 
+    IDC_FONT_WEIGHT, 0x403, 5, 0
+0xfc64, 0x6e6e, "\000" 
+    IDC_FONT_WEIGHT, 0x403, 7, 0
+0x6f6e, 0x6d72, 0x6c61, "\000" 
+    IDC_FONT_WEIGHT, 0x403, 5, 0
+0x6566, 0x7474, "\000" 
+    0
+END
+
+IDD_PROPPAGE_CURVE DLGINIT
+BEGIN
+    IDC_CURVE_FORMAT, 0x403, 32, 0
+0x6f48, 0x6568, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 0x7469, 0x202c, 
+0x2058, 0x6e75, 0x2064, 0x2d59, 0x6557, 0x7472, 0x0065, 
+    IDC_CURVE_FORMAT, 0x403, 36, 0
+0x694d, 0x7474, 0x656c, 0x6572, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 
+0x7469, 0x202c, 0x2058, 0x6e75, 0x2064, 0x2d59, 0x6557, 0x7472, 0x0065, 
+
+    IDC_CURVE_FORMAT, 0x403, 36, 0
+0x694e, 0x6465, 0x6972, 0x6567, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 
+0x7469, 0x202c, 0x2058, 0x6e75, 0x2064, 0x2d59, 0x6557, 0x7472, 0x0065, 
+
+    IDC_CURVE_FORMAT, 0x403, 30, 0
+0x6f48, 0x6568, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 0x7469, 0x202c, 
+0x756e, 0x2072, 0x2d59, 0x6557, 0x7472, 0x0065, 
+    IDC_CURVE_FORMAT, 0x403, 34, 0
+0x694d, 0x7474, 0x656c, 0x6572, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 
+0x7469, 0x202c, 0x756e, 0x2072, 0x2d59, 0x6557, 0x7472, 0x0065, 
+    IDC_CURVE_FORMAT, 0x403, 34, 0
+0x694e, 0x6465, 0x6972, 0x6567, 0x4720, 0x6e65, 0x7561, 0x6769, 0x656b, 
+0x7469, 0x202c, 0x756e, 0x2072, 0x2d59, 0x6557, 0x7472, 0x0065, 
+    IDC_COMBO_SCATTER, 0x403, 6, 0
+0x694c, 0x696e, 0x0065, 
+    IDC_COMBO_SCATTER, 0x403, 11, 0
+0x6552, 0x6863, 0x6574, 0x6b63, 0x3120, "\000" 
+    IDC_COMBO_SCATTER, 0x403, 6, 0
+0x724b, 0x6965, 0x0073, 
+    IDC_COMBO_SCATTER, 0x403, 11, 0
+0x6552, 0x6863, 0x6574, 0x6b63, 0x3220, "\000" 
+    IDC_COMBO_SCATTER, 0x403, 8, 0
+0x6f42, 0x6567, 0x206e, 0x0031, 
+    IDC_COMBO_SCATTER, 0x403, 8, 0
+0x6f42, 0x6567, 0x206e, 0x0032, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_PREVIEW_CONTEXTMENU MENUEX 
+BEGIN
+    POPUP "context",                        65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        POPUP "&Datei",                         65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "Drucker &einrichten...",      ID_FILE_PRINT_SETUP,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Drucken...\tStrg+P",         AFX_ID_PREVIEW_PRINT,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "Druckervorschau &schließen",  AFX_ID_PREVIEW_CLOSE,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "&Bearbeiten",                    65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO,
+            MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Ein&fügen\tStrg+V",           ID_EDIT_PASTE,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Selektiv einfügen...\tStrg+S", ID_EDIT_PASTE_SELECTIV,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Einfügen &von...",            ID_EDIT_PASTE_SPECIAL,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Löschen\tEntf",              ID_EDIT_CLEAR,
+            MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        END
+        POPUP "&Ansicht",                       65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Vorschau",                   ID_VIEW_TB,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Bearbeiten",                 ID_VIEW_TB1,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Menü",                       ID_VIEW_MENU,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "S&tatuszeile",                ID_VIEW_STATUS_BAR,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "Druckerfarben",               ID_VIEW_PRINTER_COLORS,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "Ver&kleinern",                AFX_ID_PREVIEW_ZOOMOUT,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Ver&größern",                 AFX_ID_PREVIEW_ZOOMIN,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            POPUP "Vorschau",                       65535,MFT_STRING,
+            MFS_ENABLED
+            BEGIN
+                MENUITEM "&Oben",                       ID_VIEW_TB_TOP,
+                MFT_STRING,MFS_ENABLED
+                MENUITEM "&Unten",                      ID_VIEW_TB_BOTTOM,
+                MFT_STRING,MFS_ENABLED
+            END
+            POPUP "Bearbeiten",                     65535,MFT_STRING,
+            MFS_ENABLED
+            BEGIN
+                MENUITEM "&Links",                      ID_VIEW_TB1_LEFT,
+                MFT_STRING,MFS_ENABLED
+                MENUITEM "&Rechts",                     ID_VIEW_TB1_RIGHT,
+                MFT_STRING,MFS_ENABLED
+                MENUITEM "&Oben",                       ID_VIEW_TB1_TOP,
+                MFT_STRING,MFS_ENABLED
+                MENUITEM "&Unten",                      ID_VIEW_TB1_BOTTOM,
+                MFT_STRING,MFS_ENABLED
+            END
+        END
+        POPUP "&Einstellungen",                 65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Text...",                    ID_OPTIONS_TEXT,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Linie...",                   ID_OPTIONS_LINE,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Rechteck...",                ID_OPTIONS_RECT,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Bezierlinie...",             ID_OPTIONS_BEZIER,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Ellipse/Bezierkreis...",     ID_OPTIONS_CIRCLE,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "&Auswahlfarbe...",            ID_OPTIONS_PICK,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Ra&ster...",                  ID_OPTIONS_GRID,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "&Zeichnen",                      65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Verschieben\tF4",            ID_FUNC_PICK,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "&Text\tF5",                   ID_FUNC_TEXT,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Linie\tF6",                  ID_FUNC_LINE,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Rechteck\tF7",               ID_FUNC_RECTANGLE,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Bezierlinien\tF8",           ID_FUNC_BEZIER,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Ellipse\tF9",                ID_FUNC_CIRCLE,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Bezier&kreis",                ID_FUNC_BEZIERCIRCLE,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "Ra&ster\tF11",                ID_FUNC_CATCH_GRID,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "&Objekte",                       65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Ebene höher",                ID_FUNC_UP,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Ebene &tiefer",               ID_FUNC_DOWN,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "&Vordergrund\tStrg+F",        ID_FUNC_HIGHEST,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Hintergrund\tStrg+B",        ID_FUNC_LOWEST,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM MFT_SEPARATOR
+            MENUITEM "&Gruppieren\tStrg+G",         ID_FUNC_GROUP,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Gruppe &auflösen\tStrg+U",    ID_FUNC_UNGROUP,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "&Hilfe",                         65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Hilfethemen\tF1",            ID_HELP_FINDER,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Kontexthilfe\tShift+F1",     ID_CONTEXT_HELP,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "Inf&o über...",               ID_APP_ABOUT,MFT_STRING,
+            MFS_ENABLED
+            MENUITEM "Tastaturkürzel",              32849,MFT_STRING,
+            MFS_ENABLED
+        END
+    END
+END
+
+IDR_EDIT_CURVE_VALUE_MENU MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&X-Wert editieren",           IDM_EDIT_CURVE_VALUEX
+        MENUITEM "&Y-Wert editieren",           IDM_EDIT_CURVE_VALUEY
+        MENUITEM "Kurvenwert &löschen",         IDM_DELETE_CURVE_VALUE
+        MENUITEM "Kurvenwert e&infügen",        IDM_INSERT_CURVE_VALUE
+        MENUITEM SEPARATOR
+        MENUITEM "&Abbrechen",                  IDCANCEL
+    END
+END
+
+IDR_STATUSBAR_MENU MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Ballon Tooltips",             ID_VIEW_BALOON_TOOLTIPS
+        MENUITEM SEPARATOR
+        MENUITEM "&Abbrechen",                  IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt ein neues Dokument\nNeu (Strg+N)"
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument\nÖffnen (Strg+O)"
+    ID_FILE_SAVE            "Speichert das aktive Dokument\nSpeichern (Strg+S)"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen"
+    ID_FILE_PRINT_SETUP     "Ändert die Einstellungen des Druckers und des Seitenlayouts\nDruckereinstellung..."
+    ID_FILE_PRINT           "Druckt den Inhalt des Dokumentes\nDrucken (Strg+P)"
+    ID_FILE_PRINT_PREVIEW   "Öffnet die Druckvorschau\nDruckvorschau"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße"
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters"
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol"
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe"
+    AFX_IDS_SCCLOSE         "Beendet die Anwendung und fordert zum Speichern der Daten auf"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROPERTY_PLOT       "Eigenschaften für Plots"
+    IDS_PROPERTY_RECTANGLE  "Eigenschaften für Rechtecke"
+    IDS_PROPERTY_BEZIER     "Eigenschaften für Bezierkurven"
+    IDS_PROPERTY_CIRCLE     "Eigenschaften für Kreise"
+    IDS_PROPERTY_TEXT       "Eigenschaften für Texte"
+    IDS_PROPERTY_PLOT_STD   "Standardeinstellungen für Plots und Kurven"
+    IDS_PROPERTIES          "Eigenschaften"
+    IDS_PROPERTY_CURVE      "Eigenschaften für Kurve"
+    IDS_PROPERTY_LINES      "Eigenschaften für Linien"
+    IDS_STANDARD_PROPERTIES "Standard Eigenschaften..."
+    IDS_SELECT_ZOOMRANGE    "Zoombereich auswählen"
+    IDS_REQUEST_DELETE_RANGE "Soll dieser Bereich gelöscht werden ?"
+    IDS_PLOT_FROM           "von:%s"
+    IDS_PLOT_TO             "bis:%s"
+    IDS_COLOR_OF_CURVE      "Farbe der Kurve "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKGROUNDCOLOR     "Hintergrundfarbe des Fensters"
+    IDS_CURVECOLOR          "Standardfarbe der Kurve %d"
+    IDS_HEADINGFONT         "Schriftart der Überschrift"
+    IDS_GRIDCOLOR           "Farbe der Gitterlinien"
+    IDS_GRIDFONT            "Schriftart der Gitterbeschriftung"
+    IDS_CURVEFONT           "Schriftart der Kurventexte"
+    IDS_LINECOLOR           "Linienfarbe"
+    IDS_BRUSHCOLOR          "Pinsel oder Musterfarbe"
+    IDS_BKCOLOR             "Hintergrundfarbe"
+    IDS_TEXTCOLOR           "Textfarbe"
+    IDS_SAVE_CHANGES        "Sollen die Änderungen übernommen werden ?"
+    IDS_SCALEFONT           "Schriftart der Farbskala"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_IDLEMESSAGE     "Drücken Sie F1, um Hilfe zu erhalten"
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt, zu dem Sie Hilfe wünschen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_RANGE_TOO_SMALL     "Zoombereich ist zu klein"
+    IDE_DEFAULT_RANGE_ERROR "Der Wertebereich der Kurven kann nicht eingestellt werden.\nÜberprüfen Sie die Achsenteilung.\n(Linear, logarithmisch/Frequenz)"
+    IDS_PRINTPARAMS_CHANGED "Die Größe des Druckbereichs hat sich geändert.\nOffset :\tx = %.1f mm,\ty = %.1f mm\nGröße :\tx = %.1f %%,\ty = %.1f %%\nSollen die Zeichenobjekte entsprechend der neuen Druckbereichs angepaßt werden ?"
+    IDS_FORMAT_LARGE_MEM_REQUEST 
+                            "Dieser Vorgang benötigt mehr als %d MB von %d MB vorhandenem Speicher.\nWenn zuviel Speicher auf die Festplatte ausgelagert werden muß,\n reagiert Ihr System zunehmend langsamer.\n\nWollen Sie diesen Vorgang fortsetzen ?"
+    IDS_WARNING             "Warnung !"
+    IDS_PROPERTY_PICTURE    "Eigenschaften für Bilder"
+    IDS_PICKCOLOR           "Auswahlfarbe"
+    IDS_CRC_EXCEPTIONERROR  "Fehler beim Laden der Datei :\n%s\nCRC-Checksumme falsch !!"
+    IDS_CARA_BITMAP         "Bitmap (*.bmp)\n*.bmp\n\n"
+    IDS_NO_PICTURE          "Kein Bild vorhanden."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VERSION_EXCEPTIONERROR 
+                            "Fehler beim Laden der Datei :\n%s\nDateiversionsnummer höher als Programmversionsnummer!!"
+    IDS_NO_PRINTER          "Es ist kein Drucker installiert !"
+    IDS_PROPERTY_COLORSCALE "Eigenschaften der Farbskala"
+    IDS_PASTE_SPECIAL       "Einfügen von..."
+    IDS_PASTEDATE_FMT       "%02d.%02d.%04d"
+    IDS_PASTEDATE           "Datum (tt.mm.jjjj)"
+    IDS_PASTETIME           "Uhrzeit (hh:mm:ss)"
+    IDS_PASTEDATETIME       "Datum, Uhrzeit"
+    IDS_PASTETIME_FMT       "%02d:%02d:%02d"
+    IDS_PASTEDATETIME_FMT   "%02d.%02d.%04d, %02d:%02d:%02d"
+    IDS_OPEN_DOCUMENT       "Lese die Daten des Dokumentes !"
+    IDS_SAVE_DOCUMENT       "Speichere die Daten des Dokumentes !"
+    IDS_UNTITLED_DOCUMENT   "Unbenannt"
+    IDE_HEAP_EXISTS         """Heap"" existiert bereits !"
+    IDE_HEAP_CREATION       """Heap"" konnte nicht erzeugt werden !"
+    IDE_OUT_OF_MEMORY       "Zu wenig Speicher vorhanden !"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPTIONS_PICK         "Ändert die Farbe für markierte Objekte"
+    ID_OPTIONS_LINE         "Ändert die Standardlinieneinstellung"
+    ID_OPTIONS_CIRCLE       "Ändert die Standardellipseneinstellung"
+    ID_OPTIONS_RECT         "Ändert die Standardrechteckeinstellung"
+    ID_OPTIONS_BEZIER       "Ändert die Standardbezierlinieneinstellung"
+    ID_OPTIONS_TEXT         "Ändert die Standardtexteinstellung"
+    ID_OPTIONS_GRID         "Ändert die Einstellungen für das Raster"
+    ID_FUNC_PICK            "Verschieben und bewegen der Zeichenobjekte\nBewegen (F4)"
+    ID_FUNC_LINE            "Erstellen von Linien\nLinie (F6)"
+    ID_FUNC_CIRCLE          "Erstellen von Ellipsen\nEllipse (F9)"
+    ID_FUNC_RECTANGLE       "Erstellen von Rechtecken\nRechteck (F7)"
+    ID_FUNC_BEZIER          "Erstellen von Bezierlinien\nBezierlinie (F8)"
+    ID_FUNC_TEXT            "Erstellen von Texten\nText (F5)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_UP              "Hebt das Zeichenobjekt mehr in den Vordergrund\nEbene höher"
+    ID_FUNC_DOWN            "Senkt das Zeichenobjekt mehr in den Hintergrund\nEbene tiefer"
+    ID_FUNC_HIGHEST         "Hebt das Zeichenobjekt in den Vordergrund\nVordergrund (Strg+F)"
+    ID_FUNC_GROUP           "Fügt mehrere Zeichenobjekte zusammen\nGruppieren (Strg+G)"
+    ID_FUNC_UNGROUP         "Löst eine Zeichenobjektgruppe\nGruppe auflösen (Strg+U)"
+    ID_FUNC_LOWEST          "Senkt das Zeichenobjekt in den Hintergrund\nHintergrund (Strg+B)"
+    ID_FUNC_CATCH_GRID      "Fängt den Cursor an einem einstellbaren Raster\nAm Raster fangen ein\nAm Raster fangen aus"
+    ID_FUNC_BEZIERCIRCLE    "Erstellen von Bezierkreisen\nBezierkreis"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_PASTE_SELECTIV  "Selektives Einfügen aus der Zwischenablage\nSelektiv einfügen (Strg+S)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TB              "Schaltet die Vorschau-Werkzeugleiste ein oder aus"
+    ID_VIEW_TB1             "Schaltet die Bearbeiten-Werkzeugleiste ein oder aus"
+    ID_VIEW_TB_TOP          "Dockt die Werkzeugleiste oben im Fenster an"
+    ID_VIEW_TB_BOTTOM       "Dockt die Werkzeugleiste unten im Fenster an"
+    ID_VIEW_TB1_LEFT        "Dockt die Werkzeugleiste links im Fenster an"
+    ID_VIEW_TB1_RIGHT       "Dockt die Werkzeugleiste rechts im Fenster an"
+    ID_VIEW_TB1_TOP         "Dockt die Werkzeugleiste oben im Fenster an"
+    ID_VIEW_TB1_BOTTOM      "Dockt die Werkzeugleiste unten im Fenster an"
+    ID_VIEW_PRINTER_COLORS  "Schaltet die Darstellung in Druckerfarben oder Bildschirmfarben um."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_STATUS_BAR      "Schaltet die Statuszeile ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Entfernt das markierte Objekt\nLöschen (Entf.)"
+    ID_EDIT_COPY            "Kopiert das markierte Objekt und überträgt es in die Zwischenablage\nKopieren (Strg+C)"
+    ID_EDIT_CUT             "Entfernt das markierte Objekt und überträgt es in die Zwischenablage\nAusschneiden (Strg+X)"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein\nEinfügen (Strg+V)"
+    ID_EDIT_PASTE_SPECIAL   "Einfügen von Datum, Bildinformationen etc."
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig\nRückgängig (Strg+Z)"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_ID_PREVIEW_CLOSE    "Schließt die Druckvorschau"
+    AFX_ID_PREVIEW_PRINT    "Druckt diese Seite"
+    AFX_ID_PREVIEW_ZOOMIN   "Vergrößert die Druckvorschau"
+    AFX_ID_PREVIEW_ZOOMOUT  "Verkleinert die Druckvorschau"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programminformationen und Urheberrechte an\nInfo über..."
+    ID_APP_EXIT             "Beendet die Anwendung und fordert zum Speichern der Daten auf"
+    ID_HELP_INDEX           "Öffnet die Hilfefunktion\nHilfethemen"
+    ID_HELP_FINDER          "Zeigt das Inhaltsverzeichnis der Online-Dokumentation an\nHilfethemen"
+    ID_HELP_USING           "Zeigt Anweisungen zum Umgang mit der Hilfe an\nHilfe"
+    ID_CONTEXT_HELP         "Aktiviert eine kontextsensitve Hilfe\nKontexthilfe (Shift+F1)"
+    ID_HELP                 "Zeigt Hilfe zum aktuellen Vorgang oder Befehl an\nHilfe"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_DESTRUCTION_WITHOUT_HEAP "Objekt wurde ohne ""Heap"" zerstört !"
+    IDE_HEAP_FREE           "Fehler in Funktion HeapFree() !"
+    IDE_HEAP_DESTROY        "Fehler beim löschen des ""Heaps"" !"
+    IDE_MEMORY_LEAKS_CCURVE "Speicherlecks auf ""CCurve-Heap"" gefunden !"
+    IDE_MEMORY_OBJECTS_CCURVE 
+                            "Speicherlecks auf ""CCurve-Heap"" :\n%d Objekte wurden nicht gelöscht !"
+    IDE_MEMORY_LEAKS_CLABEL "Speicherlecks auf ""CLabel-Heap"" gefunden !"
+    IDE_MEMORY_OBJECTS_CLABEL 
+                            "Speicherlecks auf ""CLabel-Heap"" :\n%d Objekte wurden nicht gelöscht !"
+    IDS_LOAD_BMP            "Bitmap Datei einfügen"
+    IDS_LIGHTVERSIONINFO    "Sie haben nur eine Demo-Version von %s mit eingeschränkter Funktionalität.\nWenn Sie wissen möchten, wie sie die Vollversion erhalten, so drücken Sie ( Ja )."
+    IDS_CURVE_VALUES        "Kurvenwerte"
+    IDS_CURVE_PARAMS        "Kurvenparameter"
+    IDS_CURVE_UNITS         "Einheiten"
+    IDS_CHANGE_FORMAT_REQUEST 
+                            "Die Änderung des Datenformats der Kurve kann zu Datenverlust führen.\nWollen Sie das Datenformat ändern ?"
+    IDS_CURVE_STEP_LOG      "X(i) / X(i-1) :"
+    IDS_CURVE_STEP_LIN      "X(i) - X(i-1) :"
+    IDS_CURVE_VALUE_LIST    "Werteliste"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_MENU            "Schaltet das Menü ein oder aus"
+    ID_VIEW_BALOON_TOOLTIPS "Schaltet Ballon Tooltips ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CURVE_LOCUS_AXIS    "Ortskurve"
+    IDS_OPEN_READ_ONLY_FILE "Diese Datei ist schreibgeschützt !\nMöchten Sie diese Datei trotzdem öffnen ?"
+    IDS_PREVSTATUS_PANE1    "X- und Y-Position im Zeichenbereich in mm"
+    IDS_PREVSTATUS_PANE2    "Breite und Höhe eine Objektes im Zeichenbereich in mm"
+    IDS_STATUS_PANE0        "Kurzhilfe für Toolbar und MenüItems"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CANCEL              "Abbrechen"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CATCH_GRID DIALOGEX 0, 0, 160, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Grid Stepwitdth"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_STATIC,5,0,95,50
+    LTEXT           "Unit [mm]",IDC_STATIC,10,6,38,8
+    CTEXT           "X",IDC_STATIC,60,6,15,8
+    CTEXT           "Y",IDC_STATIC,80,6,15,8
+    LTEXT           "Origin",IDC_STATIC,10,21,45,8
+    EDITTEXT        IDC_CATCHGRID_ORG_X,60,19,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_ORG_X
+    EDITTEXT        IDC_CATCHGRID_ORG_Y,80,19,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_ORG_Y
+    LTEXT           "Stepwidth",IDC_STATIC,10,36,45,8
+    EDITTEXT        IDC_CATCHGRID_STEP_X,60,34,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_STEP_X
+    EDITTEXT        IDC_CATCHGRID_STEP_Y,80,34,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_CATCHGRID_STEP_Y
+    DEFPUSHBUTTON   "OK",IDOK,105,10,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,105,34,50,12
+END
+
+IDD_LISTDLG DIALOGEX 0, 0, 90, 122
+STYLE DS_SETFONT | DS_3DLOOK | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "List"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "OK",IDOK,3,109,84,12
+    CONTROL         "List",IDC_LST_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,3,3,84,104,0,HIDC_LST_LIST
+END
+
+IDD_PASTE_SELECTIV DIALOGEX 0, 0, 145, 61
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Paste Selective"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "ETS Format",IDC_PASTESEL_FORMAT0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,10,70,10,0,
+                    HIDC_PASTESEL_FORMAT0
+    CONTROL         "Meta-File",IDC_PASTESEL_FORMAT1,"Button",
+                    BS_AUTORADIOBUTTON,10,20,70,10,0,HIDC_PASTESEL_FORMAT1
+    CONTROL         "Bitmap",IDC_PASTESEL_FORMAT2,"Button",
+                    BS_AUTORADIOBUTTON,10,30,70,10,0,HIDC_PASTESEL_FORMAT2
+    CONTROL         "Bitmap File",IDC_PASTESEL_FORMAT3,"Button",
+                    BS_AUTORADIOBUTTON,10,40,50,10,0,HIDC_PASTESEL_FORMAT3
+    GROUPBOX        "Formats",IDC_STATIC,5,0,80,56,WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,90,9,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,90,39,50,12
+END
+
+IDD_PROPPAGE_BRUSH DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Background"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Pattern",IDC_STATIC,5,3,75,67
+    LISTBOX         IDC_BRUSH_STYLE,10,13,65,52,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,
+                    WS_EX_CLIENTEDGE,HIDC_BRUSH_STYLE
+    GROUPBOX        "Colors",IDC_STATIC,85,3,115,32
+    PUSHBUTTON      "Pattern...",IDC_BRUSH_COLOR,90,13,50,17,WS_DISABLED,0,
+                    HIDC_BRUSH_COLOR
+    PUSHBUTTON      "Filling Color...",IDC_BRUSH_BKGNDCOLOR,145,13,50,17,
+                    WS_DISABLED,0,HIDC_BRUSH_BKGNDCOLOR
+    PUSHBUTTON      "Bitmap...",IDC_BRUSH_BITMAP,90,40,50,30,NOT WS_VISIBLE,
+                    0,HIDC_BRUSH_BITMAP
+    GROUPBOX        "Preview",IDC_STATIC,5,70,200,115
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+END
+
+IDD_PROPPAGE_CURVE_COLORS DIALOGEX 0, 0, 210, 189
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Colors"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CURVECOLOR1,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,18,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR1
+    PUSHBUTTON      "Background Color of the Application Window...",
+                    IDC_CURVECOLOR_BKGND,9,168,190,15,0,0,
+                    HIDC_CURVECOLOR_BKGND
+    GROUPBOX        "Color Order of the Curves",IDC_STATIC,5,6,200,159
+    CONTROL         "",IDC_CURVECOLOR2,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,18,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR2
+    CONTROL         "",IDC_CURVECOLOR3,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,35,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR3
+    CONTROL         "",IDC_CURVECOLOR4,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,35,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR4
+    CONTROL         "",IDC_CURVECOLOR5,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,53,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR5
+    CONTROL         "",IDC_CURVECOLOR6,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,53,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR6
+    CONTROL         "",IDC_CURVECOLOR7,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,71,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR7
+    CONTROL         "",IDC_CURVECOLOR8,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,71,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR8
+    CONTROL         "",IDC_CURVECOLOR9,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,89,49,15,WS_EX_CLIENTEDGE,HIDC_CURVECOLOR9
+    CONTROL         "",IDC_CURVECOLOR10,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,89,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR10
+    CONTROL         "",IDC_CURVECOLOR11,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,107,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR11
+    CONTROL         "",IDC_CURVECOLOR12,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,107,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR12
+    CONTROL         "",IDC_CURVECOLOR13,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,125,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR13
+    CONTROL         "",IDC_CURVECOLOR14,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,125,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR14
+    CONTROL         "",IDC_CURVECOLOR15,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,50,143,49,15,WS_EX_CLIENTEDGE
+    CONTROL         "",IDC_CURVECOLOR16,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,150,143,49,15,WS_EX_CLIENTEDGE,
+                    HIDC_CURVECOLOR16
+    LTEXT           "Curve 1",IDC_STATIC,10,21,26,8
+    LTEXT           "Curve 2",IDC_STATIC,110,21,26,8
+    LTEXT           "Curve 3",IDC_STATIC,10,38,26,8
+    LTEXT           "Curve 4",IDC_STATIC,110,38,26,8
+    LTEXT           "Curve 5",IDC_STATIC,10,56,26,8
+    LTEXT           "Curve 6",IDC_STATIC,110,56,26,8
+    LTEXT           "Curve 7",IDC_STATIC,10,74,26,8
+    LTEXT           "Curve 8",IDC_STATIC,110,74,26,8
+    LTEXT           "Curve 9",IDC_STATIC,10,92,26,8
+    LTEXT           "Curve 10",IDC_STATIC,110,92,30,8
+    LTEXT           "Curve 11",IDC_STATIC,10,110,30,8
+    LTEXT           "Curve 12",IDC_STATIC,110,110,30,8
+    LTEXT           "Curve 13",IDC_STATIC,10,128,30,8
+    LTEXT           "Curve 14",IDC_STATIC,110,128,30,8
+    LTEXT           "Curve 16",IDC_STATIC,110,146,30,8
+    LTEXT           "Curve 15",IDC_STATIC,10,146,30,8
+END
+
+IDD_PROPPAGE_DIBLABEL DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Picture Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Arbitrary",IDC_PICT_SCALING0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,10,45,10,0,
+                    HIDC_PICT_SCALING0
+    CONTROL         "Non-Proportional",IDC_PICT_SCALING1,"Button",
+                    BS_AUTORADIOBUTTON,60,10,75,10,0,HIDC_PICT_SCALING1
+    CONTROL         "Proportional",IDC_PICT_SCALING2,"Button",
+                    BS_AUTORADIOBUTTON,145,10,55,10,0,HIDC_PICT_SCALING2
+    GROUPBOX        "Scaling",IDC_STATIC,5,0,200,23,WS_GROUP
+    CONTROL         "Inverted",IDC_PICT_OUTPUT0,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,32,50,10,0,HIDC_PICT_OUTPUT0
+    CONTROL         "Interpolate Colors",IDC_PICT_HALFTONE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,60,32,85,10,0,
+                    HIDC_PICT_HALFTONE
+    CONTROL         "Transparent",IDC_PICT_SHINY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,32,55,10,0,HIDC_PICT_SHINY
+    GROUPBOX        "Save",IDC_STATIC,5,45,200,25
+    CONTROL         "As File",IDC_PICT_FILE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,55,37,10,0,HIDC_PICT_FILE
+    EDITTEXT        IDC_PICT_FILENAME,60,54,140,12,ES_AUTOHSCROLL,0,
+                    HIDC_PICT_FILENAME
+    GROUPBOX        "Preview",IDC_STATIC,5,70,200,115
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    GROUPBOX        "Representation",IDC_STATIC,5,23,200,22,WS_GROUP
+END
+
+IDD_PROPPAGE_FONT DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Text"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Font",IDC_STATIC,5,0,200,85
+    COMBOBOX        IDC_FONT_FONT,10,18,110,110,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_FONT
+    LTEXT           "Height",IDC_STATIC,125,8,25,8
+    EDITTEXT        IDC_FONT_HEIGHT,125,18,25,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_FONT_HEIGHT
+    EDITTEXT        IDC_FONT_WIDTH,155,18,48,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_FONT_WIDTH
+    LTEXT           "Horizontal",IDC_STATIC,10,38,31,8
+    COMBOBOX        IDC_FONT_ALIGN_H,10,48,55,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_ALIGN_H
+    LTEXT           "Vertical",IDC_STATIC,70,38,24,8
+    COMBOBOX        IDC_FONT_ALIGN_V,70,48,50,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_ALIGN_V
+    LTEXT           "Extra",IDC_STATIC,125,38,25,8
+    EDITTEXT        IDC_FONT_EXTRASPACE,125,48,25,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FONT_EXTRASPACE
+    LTEXT           "Style",IDC_STATIC,155,38,48,8
+    COMBOBOX        IDC_FONT_WEIGHT,155,48,48,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FONT_WEIGHT
+    CONTROL         "Italic",IDC_FONT_CURSIV,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,70,34,10,0,HIDC_FONT_CURSIV
+    CONTROL         "Underscored",IDC_FONT_UNDERLINE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,65,70,55,10,0,
+                    HIDC_FONT_UNDERLINE
+    CONTROL         "Crossed out",IDC_FONT_LINE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,125,70,78,10,0,HIDC_FONT_LINE
+    GROUPBOX        "Colors",IDC_STATIC,5,90,200,28
+    PUSHBUTTON      "Text...",IDC_FONT_TEXTCOLOR,10,102,55,12,0,0,
+                    HIDC_FONT_TEXTCOLOR
+    PUSHBUTTON      "Text Background...",IDC_FONT_BKGNDCOLOR,70,102,100,12,0,
+                    0,HIDC_FONT_BKGNDCOLOR
+    CONTROL         "",IDC_FONT_BKGND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    174,103,29,10,0,HIDC_FONT_BKGND
+    GROUPBOX        "Preview",IDC_STATIC,5,120,200,65
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_GROUP,10,130,160,50,WS_EX_CLIENTEDGE,
+                    HIDC_PREVIEWSTD
+    CONTROL         "2:1",IDC_FONT_ZOOM0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,174,130,29,8,0,HIDC_FONT_ZOOM0
+    CONTROL         "1:1",IDC_FONT_ZOOM1,"Button",BS_AUTORADIOBUTTON,174,140,
+                    29,8,0,HIDC_FONT_ZOOM1
+    CONTROL         "1:2",IDC_FONT_ZOOM2,"Button",BS_AUTORADIOBUTTON,174,150,
+                    29,8,0,HIDC_FONT_ZOOM2
+    CONTROL         "1:5",IDC_FONT_ZOOM3,"Button",BS_AUTORADIOBUTTON,174,160,
+                    29,8,0,HIDC_FONT_ZOOM3
+    CONTROL         "1:10",IDC_FONT_ZOOM4,"Button",BS_AUTORADIOBUTTON,174,
+                    170,29,8,0,HIDC_FONT_ZOOM4
+    LTEXT           "Width",IDC_STATIC,155,8,48,8
+END
+
+IDD_PROPPAGE_LINE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_DISABLED | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Frame/Line"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Thickness",IDC_STATIC,5,5,85,30
+    EDITTEXT        IDC_FRAME_LINEWIDTH,11,15,64,15,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER,WS_EX_CLIENTEDGE,
+                    HIDC_FRAME_LINEWIDTH
+    CONTROL         "Spin1",IDC_FRAME_LINEWIDTH_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,75,15,15,
+                    15,0,HIDC_FRAME_LINEWIDTH_SPIN
+    PUSHBUTTON      "Color...",IDC_FRAME_LINECOLOR,11,43,74,15,0,0,
+                    HIDC_FRAME_LINECOLOR
+    LISTBOX         IDC_FRAME_LINESTYLE,105,15,95,50,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,
+                    WS_EX_CLIENTEDGE,HIDC_FRAME_LINESTYLE
+    GROUPBOX        "Style",IDC_STATIC,100,5,105,65
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    GROUPBOX        "Preview",IDC_STATIC,5,70,200,115
+END
+
+IDD_PROPPAGE_PLOTRANGE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Range"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Plot Heading",IDC_STATIC,5,1,200,29
+    EDITTEXT        IDC_PLT_PLOTHEADING,10,12,189,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_PLOTHEADING
+    CONTROL         "Polar-Diagram",IDC_PLT_POLAR,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE | WS_GROUP,110,45,90,12,
+                    0,HIDC_PLT_POLAR
+    CONTROL         "X-Y-Diagram",IDC_PLT_X_Y_DIAG,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,10,45,90,12,0,
+                    HIDC_PLT_X_Y_DIAG
+    GROUPBOX        "Type of Diagram",IDC_STATIC,5,34,200,29
+    CONTROL         "Linear",IDC_PLT_XDIVLIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,79,35,8,0,HIDC_PLT_XDIVLIN
+    CONTROL         "Logarithmic",IDC_PLT_XDIVLOG,"Button",
+                    BS_AUTORADIOBUTTON,70,79,60,8,0,HIDC_PLT_XDIVLOG
+    CONTROL         "Frequency",IDC_PLT_XDIVFRQ,"Button",BS_AUTORADIOBUTTON,
+                    145,79,55,8,0,HIDC_PLT_XDIVFRQ
+    GROUPBOX        "X-Axis Properties",IDC_STATIC,5,66,200,51,WS_GROUP
+    LTEXT           "from :",IDC_STATIC,10,101,20,8,NOT WS_GROUP
+    GROUPBOX        "",IDC_STATIC,5,90,200,27
+    EDITTEXT        IDC_PLT_RANGEX1,30,99,50,13,ES_AUTOHSCROLL | WS_GROUP,0,
+                    HIDC_PLT_RANGEX1
+    EDITTEXT        IDC_PLT_RANGEX2,105,99,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_RANGEX2
+    EDITTEXT        IDC_PLT_UNITX,169,99,29,13,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_CLIENTEDGE,HIDC_PLT_UNITX
+    LTEXT           "to :",IDC_STATIC,85,101,15,8
+    GROUPBOX        "Y-Axis Properties",IDC_STATIC,5,120,200,48,WS_GROUP
+    CONTROL         "Linear",IDC_PLT_YDIVLIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,132,35,8,0,HIDC_PLT_YDIVLIN
+    CONTROL         "Logarithmic",IDC_PLT_YDIVLOG,"Button",
+                    BS_AUTORADIOBUTTON,70,132,64,8,0,HIDC_PLT_YDIVLOG
+    CONTROL         "Frequency",IDC_PLT_YDIVFRQ,"Button",BS_AUTORADIOBUTTON,
+                    145,132,55,8,0,HIDC_PLT_YDIVFRQ
+    LTEXT           "from :",IDC_STATIC,10,153,20,8,NOT WS_GROUP
+    GROUPBOX        "",IDC_STATIC,5,143,200,25
+    EDITTEXT        IDC_PLT_RANGEY1,30,151,50,13,ES_AUTOHSCROLL | WS_GROUP,0,
+                    HIDC_PLT_RANGEY1
+    LTEXT           "to :",IDC_STATIC,85,153,15,8
+    EDITTEXT        IDC_PLT_RANGEY2,105,151,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_PLT_RANGEY2
+    EDITTEXT        IDC_PLT_UNITY,170,151,29,13,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_CLIENTEDGE,HIDC_PLT_UNITY
+    PUSHBUTTON      "Set as Default Range",IDC_PLT_SETDEFAULTRANGE,5,173,90,
+                    14,0,0,HIDC_PLT_SETDEFAULTRANGE
+    PUSHBUTTON      "Determine Total Range",IDC_PLT_DETERMINRANGE,115,173,90,
+                    14,0,0,HIDC_PLT_DETERMINRANGE
+END
+
+IDD_TREEDLG DIALOGEX 0, 0, 122, 132
+STYLE DS_SETFONT | DS_3DLOOK | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Structure"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREE_TREECTRL,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | TVS_NOTOOLTIPS | WS_BORDER | 
+                    WS_TABSTOP,3,3,115,113,0,HIDC_TREE_TREECTRL
+    PUSHBUTTON      "OK",IDOK,3,119,115,12
+END
+
+IDD_TEXTDLG DIALOG  0, 0, 185, 71
+STYLE DS_SETFONT | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Edit Text"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_TEXTEDIT,2,0,180,57,ES_MULTILINE | ES_AUTOVSCROLL | ES_NOHIDESEL |
+                    ES_WANTRETURN
+    PUSHBUTTON      "Ok, no size changes",IDOK,2,59,85,12
+    PUSHBUTTON      "Ok, fit size to text",IDC_TEXT_CALCRECT,97,59,85,12
+END
+
+IDD_PROPPAGE_CURVE DIALOGEX 0, 0, 210, 193
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Curves"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Curve Selection",IDC_STATIC,5,0,200,46
+    CONTROL         "Curve List",IDC_CURVE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,10,190,32,0,HIDC_CURVE_LIST
+    LTEXT           "Format :",IDC_CURVE_FORMAT_TXT,10,71,40,8,NOT WS_GROUP
+    COMBOBOX        IDC_CURVE_FORMAT,55,69,145,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_CURVE_FORMAT
+    LTEXT           "Line width in pixels",IDC_CURVE_WIDTH_TXT,10,137,70,8
+    EDITTEXT        IDC_CURVE_WIDTH,85,135,30,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP,0,HIDC_CURVE_WIDTH
+    CONTROL         "Spin1",IDC_CURVE_WIDTH_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,115,134,
+                    11,14,0,HIDC_CURVE_WIDTH_SPIN
+    PUSHBUTTON      "Color of the Curve...",IDC_CURVE_COLOR,10,153,116,12,0,
+                    0,HIDC_CURVE_COLOR
+    COMBOBOX        IDC_COMBO_SCATTER,120,113,80,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show Curve",IDC_CURVE_VISIBLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,171,76,10,0,HIDC_CURVE_VISIBLE
+    CONTROL         "Edit single curve values with mousecursor",
+                    IDC_CURVE_EDITMODE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,103,190,8,0,HIDC_CURVE_EDITMODE1
+    CONTROL         "Edit 3 curve values with mousecursor (interpolated)",
+                    IDC_CURVE_EDITMODE2,"Button",BS_AUTORADIOBUTTON,10,119,
+                    190,8,0,HIDC_CURVE_EDITMODE2
+    CONTROL         "Curve parameters editable",IDC_CURVE_EDITABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,10,86,190,9,0,
+                    HIDC_CURVE_EDITABLE
+    LTEXT           "Index i :",IDC_CURVE_INDEX_TXT,10,70,40,8
+    EDITTEXT        IDC_CURVE_INDEX,55,69,52,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_CURVE_INDEX
+    CONTROL         "Spin1",IDC_CURVE_INDEX_SPIN,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_NOTHOUSANDS,108,68,11,12,0,
+                    HIDC_CURVE_INDEX_SPIN
+    LTEXT           "X-Value (i):",IDC_CURVE_VALUE_X_TXT,10,87,40,8
+    EDITTEXT        IDC_CURVE_VALUE_X,55,85,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_VALUE_X
+    LTEXT           "Y-Value (i):",IDC_CURVE_VALUE_Y_TXT,10,103,40,8
+    EDITTEXT        IDC_CURVE_VALUE_Y,55,101,145,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_VALUE_Y
+    LTEXT           "Offset :",IDC_CURVE_OFFSETY_TXT,10,122,60,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_OFFSETY,75,120,125,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_OFFSETY
+    LTEXT           "X-Start :",IDC_CURVE_ORIGIN_TXT,10,140,60,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_ORIGIN,75,138,125,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_ORIGIN
+    LTEXT           "X(i)/X(i-1) :",IDC_CURVE_STEP_TXT,10,156,41,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CURVE_STEP,75,154,125,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_STEP
+    LTEXT           "X-End :",IDC_CURVE_END_TXT,10,172,60,8,NOT WS_GROUP
+    EDITTEXT        IDC_CURVE_END,75,171,125,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_END
+    CONTROL         "Value List",IDC_CURVE_VALUE_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,10,66,190,118,0,
+                    HIDC_CURVE_VALUE_LIST
+    LTEXT           "Unit of the X-axis:",IDC_CURVE_UNIT_X_TXT,10,72,100,8
+    EDITTEXT        IDC_CURVE_UNIT_X,115,70,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_X
+    LTEXT           "Unit of the Y-axis:",IDC_CURVE_UNIT_Y_TXT,10,90,100,8
+    EDITTEXT        IDC_CURVE_UNIT_Y,115,88,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_Y
+    LTEXT           "Unit of the axis locus:",IDC_CURVE_UNIT_LOCUS_TXT,10,
+                    107,100,8
+    EDITTEXT        IDC_CURVE_UNIT_LOCUS,115,106,85,12,ES_AUTOHSCROLL,0,
+                    HIDC_CURVE_UNIT_LOCUS
+    CONTROL         "Tab1",IDC_CURVE_TAB,"SysTabControl32",0x0,5,49,200,139
+END
+
+IDD_PROPPAGE_PLOTVIEW DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Representation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Fonts of Plot(s)",IDC_STATIC,5,5,115,46
+    PUSHBUTTON      "Heading...",IDC_PLT_HEADINGFONT,10,17,105,12,0,0,
+                    HIDC_PLT_HEADINGFONT
+    PUSHBUTTON      "Grid Text...",IDC_PLT_GRID_FONT,10,34,105,12,0,0,
+                    HIDC_PLT_GRID_FONT
+    GROUPBOX        "Curves",IDC_STATIC,125,5,80,46,BS_CENTER
+    CONTROL         "Text Frame",IDC_PLT_CURVETEXTFRAME,"Button",
+                    BS_AUTOCHECKBOX | BS_CENTER | WS_TABSTOP,130,16,70,14,0,
+                    HIDC_PLT_CURVETEXTFRAME
+    PUSHBUTTON      "Font...",IDC_CURVE_FONT,130,34,70,12,0,0,
+                    HIDC_CURVE_FONT
+    CONTROL         "Show Label",IDC_PLT_SHOWTEXT_X,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,68,105,8,WS_EX_TRANSPARENT,
+                    HIDC_PLT_SHOWTEXT_X
+    GROUPBOX        "Number Representation X Axis",IDC_STATIC,5,55,200,30,
+                    BS_LEFT
+    GROUPBOX        "Number Representation Y Axis",IDC_STATIC,5,90,200,31,
+                    BS_LEFT
+    CONTROL         "Show Label",IDC_PLT_SHOWTEXT_Y,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,104,105,8,WS_EX_TRANSPARENT,
+                    HIDC_PLT_SHOWTEXT_Y
+    GROUPBOX        "Grid Lines",IDC_STATIC,5,126,200,59,BS_LEFT
+    PUSHBUTTON      "Color...",IDC_PLT_GRIDCOLOR,130,136,70,12,0,0,
+                    HIDC_PLT_GRIDCOLOR
+    CONTROL         "Show Grid Lines",IDC_PLT_SHOWGRID_X,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,130,154,70,8,0,
+                    HIDC_PLT_SHOWGRID_X
+    EDITTEXT        IDC_PLT_GRIDSTEPX,50,152,40,12,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_PLT_GRIDSTEPX
+    CONTROL         "Show Grid Lines",IDC_PLT_SHOWGRID_Y,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,130,170,70,10,0,
+                    HIDC_PLT_SHOWGRID_Y
+    EDITTEXT        IDC_PLT_GRIDSTEPY,50,169,40,12,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_PLT_GRIDSTEPY
+    LTEXT           "Average Distance:",IDC_STATIC,50,138,65,8
+    LTEXT           "X-Axis :",IDC_STATIC,10,154,35,8
+    LTEXT           "Y-Axis :",IDC_STATIC,10,171,35,8
+    PUSHBUTTON      "Representation...",IDC_PLT_NUM_REP_X,130,66,70,12
+    PUSHBUTTON      "Representation...",IDC_PLT_NUM_REP_Y,130,102,70,12
+    LTEXT           " [mm]",IDC_STATIC,95,154,20,8
+    LTEXT           " [mm]",IDC_STATIC,95,171,20,8
+END
+
+IDD_PROPPAGE_COLORSCALE DIALOGEX 0, 0, 210, 190
+STYLE DS_SETFONT | DS_3DLOOK | DS_CONTEXTHELP | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Color Scale"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Representation",IDC_STATIC,5,5,200,62,BS_LEFT
+    CONTROL         "Show Scale Text",IDC_CSCALE_SHOWTEXT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,21,95,8,
+                    WS_EX_TRANSPARENT,HIDC_CSCALE_SHOWTEXT
+    EDITTEXT        IDC_CSCALE_STEPWIDTH,58,49,35,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_CSCALE_STEPWIDTH
+    LTEXT           "Stepwidth",IDC_STATIC,10,51,46,8
+    PUSHBUTTON      "Font...",IDC_CSCALE_FONT,105,49,95,12,0,0,
+                    HIDC_CSCALE_FONT
+    GROUPBOX        "Preview",IDC_STATIC,5,67,200,118
+    CONTROL         "",IDC_PREVIEWSTD,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,80,190,100,WS_EX_CLIENTEDGE,HIDC_PREVIEWSTD
+    PUSHBUTTON      "Number Representation...",IDC_CSCALE_NUM_REP,105,19,95,
+                    12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CATCH_GRID, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 55
+        VERTGUIDE, 60
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 155
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+    END
+
+    IDD_LISTDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 3
+        VERTGUIDE, 87
+        HORZGUIDE, 3
+        HORZGUIDE, 107
+        HORZGUIDE, 115
+    END
+
+    IDD_PASTE_SELECTIV, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 80
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 140
+        HORZGUIDE, 15
+        HORZGUIDE, 25
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 56
+    END
+
+    IDD_PROPPAGE_BRUSH, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 195
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 3
+        HORZGUIDE, 13
+        HORZGUIDE, 30
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 65
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_CURVE_COLORS, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 110
+        VERTGUIDE, 199
+        HORZGUIDE, 25
+        HORZGUIDE, 42
+        HORZGUIDE, 60
+        HORZGUIDE, 78
+        HORZGUIDE, 96
+        HORZGUIDE, 114
+        HORZGUIDE, 132
+        HORZGUIDE, 150
+        HORZGUIDE, 165
+        HORZGUIDE, 175
+    END
+
+    IDD_PROPPAGE_DIBLABEL, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 145
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 15
+        HORZGUIDE, 23
+        HORZGUIDE, 37
+        HORZGUIDE, 45
+        HORZGUIDE, 60
+        HORZGUIDE, 70
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_FONT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 150
+        VERTGUIDE, 155
+        VERTGUIDE, 170
+        VERTGUIDE, 174
+        VERTGUIDE, 203
+        VERTGUIDE, 205
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 42
+        HORZGUIDE, 60
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 108
+        HORZGUIDE, 118
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 140
+        HORZGUIDE, 150
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_LINE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 75
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 30
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_PLOTRANGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 70
+        VERTGUIDE, 85
+        VERTGUIDE, 100
+        VERTGUIDE, 110
+        VERTGUIDE, 145
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 18
+        HORZGUIDE, 30
+        HORZGUIDE, 34
+        HORZGUIDE, 51
+        HORZGUIDE, 63
+        HORZGUIDE, 66
+        HORZGUIDE, 83
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 117
+        HORZGUIDE, 120
+        HORZGUIDE, 136
+        HORZGUIDE, 143
+        HORZGUIDE, 157
+        HORZGUIDE, 168
+        HORZGUIDE, 180
+    END
+
+    IDD_TREEDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 3
+        VERTGUIDE, 118
+        HORZGUIDE, 3
+        HORZGUIDE, 116
+        HORZGUIDE, 125
+    END
+
+    IDD_TEXTDLG, DIALOG
+    BEGIN
+        VERTGUIDE, 2
+        VERTGUIDE, 182
+        HORZGUIDE, 57
+        HORZGUIDE, 65
+    END
+
+    IDD_PROPPAGE_CURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+    END
+
+    IDD_PROPPAGE_PLOTVIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 23
+        HORZGUIDE, 40
+        HORZGUIDE, 51
+        HORZGUIDE, 55
+        HORZGUIDE, 72
+        HORZGUIDE, 85
+        HORZGUIDE, 90
+        HORZGUIDE, 108
+        HORZGUIDE, 121
+        HORZGUIDE, 126
+        HORZGUIDE, 142
+        HORZGUIDE, 158
+        HORZGUIDE, 175
+        HORZGUIDE, 185
+    END
+
+    IDD_PROPPAGE_COLORSCALE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 105
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 55
+        HORZGUIDE, 67
+        HORZGUIDE, 80
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PROPPAGE_FONT DLGINIT
+BEGIN
+    IDC_FONT_ALIGN_H, 0x403, 5, 0
+0x654c, 0x7466, "\000" 
+    IDC_FONT_ALIGN_H, 0x403, 7, 0
+0x6543, 0x746e, 0x7265, "\000" 
+    IDC_FONT_ALIGN_H, 0x403, 6, 0
+0x6952, 0x6867, 0x0074, 
+    IDC_FONT_ALIGN_V, 0x403, 4, 0
+0x6f54, 0x0070, 
+    IDC_FONT_ALIGN_V, 0x403, 5, 0
+0x6142, 0x6573, "\000" 
+    IDC_FONT_ALIGN_V, 0x403, 7, 0
+0x6f42, 0x7474, 0x6d6f, "\000" 
+    IDC_FONT_WEIGHT, 0x403, 6, 0
+0x694c, 0x6867, 0x0074, 
+    IDC_FONT_WEIGHT, 0x403, 8, 0
+0x6552, 0x7567, 0x616c, 0x0072, 
+    IDC_FONT_WEIGHT, 0x403, 5, 0
+0x6f42, 0x646c, "\000" 
+    0
+END
+
+IDD_PROPPAGE_CURVE DLGINIT
+BEGIN
+    IDC_CURVE_FORMAT, 0x403, 30, 0
+0x6948, 0x6867, 0x6120, 0x6363, 0x7275, 0x6361, 0x2c79, 0x5820, 0x6120, 
+0x646e, 0x5920, 0x762d, 0x6c61, 0x6575, 0x0073, 
+    IDC_CURVE_FORMAT, 0x403, 31, 0
+0x654d, 0x6e61, 0x6120, 0x6363, 0x7275, 0x6361, 0x2079, 0x202c, 0x2058, 
+0x6e61, 0x2064, 0x2d59, 0x6176, 0x756c, 0x7365, "\000" 
+    IDC_CURVE_FORMAT, 0x403, 29, 0
+0x6f4c, 0x2077, 0x6361, 0x7563, 0x6172, 0x7963, 0x202c, 0x2058, 0x6e61, 
+0x2064, 0x2d59, 0x6176, 0x756c, 0x7365, "\000" 
+    IDC_CURVE_FORMAT, 0x403, 29, 0
+0x6948, 0x6867, 0x6120, 0x6363, 0x7275, 0x6361, 0x2c79, 0x6f20, 0x6c6e, 
+0x2079, 0x2d59, 0x6176, 0x756c, 0x7365, "\000" 
+    IDC_CURVE_FORMAT, 0x403, 29, 0
+0x654d, 0x6e61, 0x6120, 0x6363, 0x7275, 0x6361, 0x2c79, 0x6f20, 0x6c6e, 
+0x2079, 0x2d59, 0x6176, 0x756c, 0x7365, "\000" 
+    IDC_CURVE_FORMAT, 0x403, 28, 0
+0x6f4c, 0x2077, 0x6361, 0x7563, 0x6172, 0x7963, 0x202c, 0x6e6f, 0x796c, 
+0x5920, 0x762d, 0x6c61, 0x6575, 0x0073, 
+    IDC_COMBO_SCATTER, 0x403, 5, 0
+0x694c, 0x656e, "\000" 
+    IDC_COMBO_SCATTER, 0x403, 12, 0
+0x6552, 0x7463, 0x6e61, 0x6c67, 0x2065, 0x0031, 
+    IDC_COMBO_SCATTER, 0x403, 7, 0
+0x6943, 0x6372, 0x656c, "\000" 
+    IDC_COMBO_SCATTER, 0x403, 12, 0
+0x6552, 0x7463, 0x6e61, 0x6c67, 0x2065, 0x0032, 
+    IDC_COMBO_SCATTER, 0x403, 6, 0
+0x7241, 0x2063, 0x0031, 
+    IDC_COMBO_SCATTER, 0x403, 6, 0
+0x7241, 0x2063, 0x0032, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_PREVIEW_CONTEXTMENU MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "&File"
+        BEGIN
+            MENUITEM "Printer &Setup...",           ID_FILE_PRINT_SETUP
+            MENUITEM "&Print...\tCtrl+P",           AFX_ID_PREVIEW_PRINT
+            MENUITEM SEPARATOR
+            MENUITEM "&Close Print Preview",        AFX_ID_PREVIEW_CLOSE
+        END
+        POPUP "&Edit"
+        BEGIN
+            MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO, HELP
+            MENUITEM SEPARATOR
+            MENUITEM "&Cut\tCtrl+X",                ID_EDIT_CUT
+            MENUITEM "C&opy\tCtrl+C",               ID_EDIT_COPY
+            MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+            MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR, HELP
+            MENUITEM "Paste &selective...\tCtrl+S", ID_EDIT_PASTE_SELECTIV
+            MENUITEM "P&aste special...",           ID_EDIT_PASTE_SPECIAL
+        END
+        POPUP "&View"
+        BEGIN
+            MENUITEM "&Preview",                    ID_VIEW_TB
+            MENUITEM "&Edit",                       ID_VIEW_TB1
+            MENUITEM "&Menu",                       ID_VIEW_MENU
+            MENUITEM "S&tatusbar",                  ID_VIEW_STATUS_BAR
+            MENUITEM SEPARATOR
+            MENUITEM "Printer Colors",              ID_VIEW_PRINTER_COLORS
+            MENUITEM SEPARATOR
+            MENUITEM "Zoom &out",                   AFX_ID_PREVIEW_ZOOMOUT
+            MENUITEM "Zoom &in",                    AFX_ID_PREVIEW_ZOOMIN
+            MENUITEM SEPARATOR
+            POPUP "Preview"
+            BEGIN
+                MENUITEM "&Top",                        ID_VIEW_TB_TOP
+                MENUITEM "&Bottom",                     ID_VIEW_TB_BOTTOM
+            END
+            POPUP "Edit"
+            BEGIN
+                MENUITEM "&Left",                       ID_VIEW_TB1_LEFT
+                MENUITEM "&Right",                      ID_VIEW_TB1_RIGHT
+                MENUITEM "&Top",                        ID_VIEW_TB1_TOP
+                MENUITEM "&Bottom",                     ID_VIEW_TB1_BOTTOM
+            END
+        END
+        POPUP "&Settings"
+        BEGIN
+            MENUITEM "&Select Color...",            ID_OPTIONS_PICK
+            MENUITEM SEPARATOR
+            MENUITEM "&Text...",                    ID_OPTIONS_TEXT
+            MENUITEM "&Line...",                    ID_OPTIONS_LINE
+            MENUITEM "&Rectangle...",               ID_OPTIONS_RECT
+            MENUITEM "&Bezier Curve...",            ID_OPTIONS_BEZIER
+            MENUITEM "&Ellipse...",                 ID_OPTIONS_CIRCLE
+            MENUITEM SEPARATOR
+            MENUITEM "&Grid...",                    ID_OPTIONS_GRID
+        END
+        POPUP "&Draw"
+        BEGIN
+            MENUITEM "&Select/Move\tF4",            ID_FUNC_PICK
+            MENUITEM SEPARATOR
+            MENUITEM "&Text\tF5",                   ID_FUNC_TEXT
+            MENUITEM "&Line\tF6",                   ID_FUNC_LINE
+            MENUITEM "&Rectangle\tF7",              ID_FUNC_RECTANGLE
+            MENUITEM "&Bezier Curve\tF8",           ID_FUNC_BEZIER
+            MENUITEM "&Ellipse\tF9",                ID_FUNC_CIRCLE
+            MENUITEM "Bezier &Circle",              ID_FUNC_BEZIERCIRCLE
+            MENUITEM SEPARATOR
+            MENUITEM "&Grid\tF11",                  ID_FUNC_CATCH_GRID
+        END
+        POPUP "&Objects"
+        BEGIN
+            MENUITEM "Forward",                     ID_FUNC_UP
+            MENUITEM "Backward",                    ID_FUNC_DOWN
+            MENUITEM "To &Front\tCtrl+F",           ID_FUNC_HIGHEST
+            MENUITEM "To &Back\tCtrl+B",            ID_FUNC_LOWEST
+            MENUITEM SEPARATOR
+            MENUITEM "&Group\tCtrl+G",              ID_FUNC_GROUP
+            MENUITEM "&Ungroup\tCtrl+U",            ID_FUNC_UNGROUP
+        END
+        POPUP "&Help"
+        BEGIN
+            MENUITEM "&Help Topics\tF1",            ID_HELP_FINDER
+            MENUITEM "&Context Help\tShift+F1",     ID_CONTEXT_HELP
+            MENUITEM "About Program...",            ID_APP_ABOUT
+        END
+    END
+END
+
+IDR_EDIT_CURVE_VALUE_MENU MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Edit &X-Value ",              IDM_EDIT_CURVE_VALUEX
+        MENUITEM "Edit &Y-Value ",              IDM_EDIT_CURVE_VALUEY
+        MENUITEM "&Delete this Value",          IDM_DELETE_CURVE_VALUE
+        MENUITEM "&Insert a Value",             IDM_INSERT_CURVE_VALUE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDCANCEL
+    END
+END
+
+IDR_STATUSBAR_MENU MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Balloon Tooltips",            ID_VIEW_BALOON_TOOLTIPS
+        MENUITEM SEPARATOR
+        MENUITEM "&Abbrechen",                  IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Creates a new document\nNew (Ctrl + N)"
+    ID_FILE_OPEN            "Opens an existing document\nOpen (Ctrl + O)"
+    ID_FILE_SAVE            "Saves the active document\nSave (Ctrl + S)"
+    ID_FILE_SAVE_AS         "Saves the active document with a new name\nSave as"
+    ID_FILE_PRINT_SETUP     "Changes settings of page layout and printer\nPrinter Setup"
+    ID_FILE_PRINT           "Prints contents of document\nPrint (Ctrl + P)"
+    ID_FILE_PRINT_PREVIEW   "Displays print preview\nPrint Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Changes window size"
+    AFX_IDS_SCMOVE          "Changes window position"
+    AFX_IDS_SCMINIMIZE      "Minimizes the window"
+    AFX_IDS_SCMAXIMIZE      "Maximizes the window"
+    AFX_IDS_SCCLOSE         "Quits the application; prompts to save the active document"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROPERTY_PLOT       "Plot Properties"
+    IDS_PROPERTY_RECTANGLE  "Rectangle Properties"
+    IDS_PROPERTY_BEZIER     "Bezier-Curve Properties"
+    IDS_PROPERTY_CIRCLE     "Ellipse Properties"
+    IDS_PROPERTY_TEXT       "Text Properties"
+    IDS_PROPERTY_PLOT_STD   "Default Properties for Plots and Curves"
+    IDS_PROPERTIES          "Properties"
+    IDS_PROPERTY_CURVE      "Curve Properties"
+    IDS_PROPERTY_LINES      "Line Properties"
+    IDS_STANDARD_PROPERTIES "Default Properties..."
+    IDS_SELECT_ZOOMRANGE    "Select Zoom Range"
+    IDS_REQUEST_DELETE_RANGE "Delete this Range ?"
+    IDS_PLOT_FROM           "from:%s"
+    IDS_PLOT_TO             "to:%s"
+    IDS_COLOR_OF_CURVE      "Color of Curve "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKGROUNDCOLOR     "Background Color of Application Window"
+    IDS_CURVECOLOR          "Default Curve Color %d"
+    IDS_HEADINGFONT         "Heading Font"
+    IDS_GRIDCOLOR           "Grid Color"
+    IDS_GRIDFONT            "GridLabel Font"
+    IDS_CURVEFONT           "Curve-Text Font"
+    IDS_LINECOLOR           "Line Color"
+    IDS_BRUSHCOLOR          "Brush or Pattern Color"
+    IDS_BKCOLOR             "Background Color"
+    IDS_TEXTCOLOR           "Text Color"
+    IDS_SAVE_CHANGES        "Save Changes ?"
+    IDS_SCALEFONT           "Color-Scale Font"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restores original window position and size"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_IDLEMESSAGE     "Press F1 for Help"
+    AFX_IDS_HELPMODEMESSAGE "Select the object for which you need help"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Displays program information, version number and copyright\nAbout..."
+    ID_APP_EXIT             "Quits the application; prompts to save the active document"
+    ID_HELP_INDEX           "Opens Help\nHelp Topics"
+    ID_HELP_FINDER          "Lists help topics\nHelp Topics"
+    ID_HELP_USING           "Displays instructions how to use the Help\nHelp"
+    ID_CONTEXT_HELP         "Activates context-sensitive help\nContext Help (Shift+F1)"
+    ID_HELP                 "Displays help for the current process or command\nHelp"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_RANGE_TOO_SMALL     "Zooming range is too small"
+    IDE_DEFAULT_RANGE_ERROR "The determined range of the curves in this plot\ncannot be set. Please check the axis scaling\n(linear, logarithmic/frequency)."
+    IDS_PRINTPARAMS_CHANGED "The size of the printing area has been changed.\nOffset:\tx = %.1f mm,\ty = %.1f mm\nSize:\tx = %.1f %%,\ty = %.1f %%\nAdapt drawing objects to new printing area ?"
+    IDS_FORMAT_LARGE_MEM_REQUEST 
+                            "This process needs %d MB from %d MB available Memory.\nIf too much memory must be evacuated to your hard disk,\nthe application speed will decrease substantially.\n\nDo you really want to do this ?"
+    IDS_WARNING             "Warning !"
+    IDS_PROPERTY_PICTURE    "Picture Properties"
+    IDS_PICKCOLOR           "Select Color"
+    IDS_CRC_EXCEPTIONERROR  "Error loading file :\n%s\nCRC-Checksum error !!"
+    IDS_CARA_BITMAP         "Bitmap (*.bmp)\n*.bmp\n\n"
+    IDS_NO_PICTURE          "No picture available."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VERSION_EXCEPTIONERROR 
+                            "Error loading file :\n%s\nFile version number more recent than program version number!!"
+    IDS_NO_PRINTER          "No Printer available !"
+    IDS_PROPERTY_COLORSCALE "Color Scale Properties"
+    IDS_PASTE_SPECIAL       "Paste Special..."
+    IDS_PASTEDATE_FMT       "%02d.%02d.%04d"
+    IDS_PASTEDATE           "Date (dd.mm.yyyy)"
+    IDS_PASTETIME           "Time (hh:mm:ss)"
+    IDS_PASTEDATETIME       "Date, Time"
+    IDS_PASTETIME_FMT       "%02d:%02d:%02d"
+    IDS_PASTEDATETIME_FMT   "%02d.%02d.%04d, %02d:%02d:%02d"
+    IDS_OPEN_DOCUMENT       "Loading document data !"
+    IDS_SAVE_DOCUMENT       "Saving document data !"
+    IDS_UNTITLED_DOCUMENT   "Untitled"
+    IDE_HEAP_EXISTS         "Heap already exists !"
+    IDE_HEAP_CREATION       "Heap creation failure !"
+    IDE_OUT_OF_MEMORY       "Out of Memory !"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_DESTRUCTION_WITHOUT_HEAP "Destruction without Heap !"
+    IDE_HEAP_FREE           "HeapFree()-Error"
+    IDE_HEAP_DESTROY        "Heap Destruction failure !"
+    IDE_MEMORY_LEAKS_CCURVE "Detected Memory Leaks on CCurve-Heap !"
+    IDE_MEMORY_OBJECTS_CCURVE 
+                            "Detected Memory Leaks on\nCCurve-Heap : %d Objects left !"
+    IDE_MEMORY_LEAKS_CLABEL "Detected Memory Leaks on CLabel-Heap !"
+    IDE_MEMORY_OBJECTS_CLABEL 
+                            "Detected Memory Leaks on\nCLabel-Heap : %d Objects left !"
+    IDS_LOAD_BMP            "Import Bitmap File"
+    IDS_LIGHTVERSIONINFO    "This is only a light version with reduced functionality. If you would like to know how to order the full version, please press ( Yes )."
+    IDS_CURVE_VALUES        "Curve Values"
+    IDS_CURVE_PARAMS        "Curve Parameter"
+    IDS_CURVE_UNITS         "Units"
+    IDS_CHANGE_FORMAT_REQUEST 
+                            "If you change the data format may lead to loss of information.\nDo you want to change the data format nevertheless ?"
+    IDS_CURVE_STEP_LOG      "X(i) / X(i-1) :"
+    IDS_CURVE_STEP_LIN      "X(i) - X(i-1) :"
+    IDS_CURVE_VALUE_LIST    "Truth Table"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPTIONS_PICK         "Changes the color of selected objects"
+    ID_OPTIONS_LINE         "Changes default line properties"
+    ID_OPTIONS_CIRCLE       "Changes default ellipse properties"
+    ID_OPTIONS_RECT         "Changes default rectangle properties"
+    ID_OPTIONS_BEZIER       "Changes default Bezier-curve properties"
+    ID_OPTIONS_TEXT         "Changes default text properties"
+    ID_OPTIONS_GRID         "Changes grid properties"
+    ID_FUNC_PICK            "Selects or moves drawing objects\nPick/Move (F4)"
+    ID_FUNC_LINE            "Draws lines\nLine (F6)"
+    ID_FUNC_CIRCLE          "Draws ellipses\nEllipse (F9)"
+    ID_FUNC_RECTANGLE       "Draws rectangles\nRectangle (F7)"
+    ID_FUNC_BEZIER          "Draws Bezier curves\nBezier Curve (F8)"
+    ID_FUNC_TEXT            "Draws text\nText (F5)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_UP              "Moves selected object one step to front\nForward"
+    ID_FUNC_DOWN            "Moves selected object one step back\nBackward"
+    ID_FUNC_HIGHEST         "Moves selected object to the foreground\nTo Front (Ctrl+F)"
+    ID_FUNC_GROUP           "Joins selected objects into a group\nGroup (Ctrl+G)"
+    ID_FUNC_UNGROUP         "Resolves object group\nUngroup (Ctrl+U)"
+    ID_FUNC_LOWEST          "Moves selected object to the background\nTo Back (Ctrl+B)"
+    ID_FUNC_CATCH_GRID      "Snap cursor to grid\nSnap to Grid"
+    ID_FUNC_BEZIERCIRCLE    "Draws Bezier circles\nBezier circle"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_PASTE_SELECTIV  "Inserts clipboard or file contents\nPaste selective (Ctrl+S)"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TB              "Shows or hides the preview toolbar"
+    ID_VIEW_TB1             "Shows or hides the edit toolbar"
+    ID_VIEW_TB_TOP          "Docks the preview toolbar at the top of the frame window"
+    ID_VIEW_TB_BOTTOM       "Docks the preview toolbar at the bottom of the frame window"
+    ID_VIEW_TB1_LEFT        "Docks the edit toolbar on the left side in the frame window"
+    ID_VIEW_TB1_RIGHT       "Docks the edit toolbar on the right side in the frame window"
+    ID_VIEW_TB1_TOP         "Docks the edit toolbar at the top of the frame window"
+    ID_VIEW_TB1_BOTTOM      "Docks the edit toolbar at the bottom of the frame window"
+    ID_VIEW_PRINTER_COLORS  "Selects between representation of printer colors or screen colors"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Deletes selected object\nDelete (Del.)"
+    ID_EDIT_COPY            "Copies selected object and puts it on the clipboard\nCopy (Ctrl+C)"
+    ID_EDIT_CUT             "Cuts selected object and puts it on the clipboard\nCut (Ctrl+X)"
+    ID_EDIT_PASTE           "Inserts clipboard contents\nPaste (Ctrl+V)"
+    ID_EDIT_PASTE_SPECIAL   "Inserts date, picture-specific information, etc."
+    ID_EDIT_UNDO            "Undo last command\nUndo (Ctrl+Z)"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_ID_PREVIEW_CLOSE    "Closes print preview"
+    AFX_ID_PREVIEW_PRINT    "Prints this page and sets print options"
+    AFX_ID_PREVIEW_ZOOMIN   "Zooms this page in"
+    AFX_ID_PREVIEW_ZOOMOUT  "Zooms this page out"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_STATUS_BAR      "Shows or hides the status bar"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_MENU            "Shows or hides the menu"
+    ID_VIEW_BALOON_TOOLTIPS "Shows Tooltip as balloon"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CURVE_LOCUS_AXIS    "Locus"
+    IDS_OPEN_READ_ONLY_FILE "This file is writeprotected !\nDo you want to open this file nevertheless ?"
+    IDS_PREVSTATUS_PANE1    "x- and y-position in the drawing area in mm"
+    IDS_PREVSTATUS_PANE2    "width and height of an object in the drawing area in mm"
+    IDS_STATUS_PANE0        "Short help for toolbars und menu items"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CANCEL              "Cancel"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
+#ifdef _WIN32
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MENUBAR DIALOGEX 0, 0, 330, 1
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Menu"
+MENU IDR_PREVIEW_CONTEXTMENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+#endif    // Spanish resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

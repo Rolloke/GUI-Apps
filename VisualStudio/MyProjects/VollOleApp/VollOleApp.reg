@@ -1,0 +1,30 @@
+REGEDIT
+;   Diese .REG-Datei kann von Ihrem SETUP-Programm verwendet werden.
+;   Falls kein SETUP-Programm verfügbar ist, werden die unten stehenden Einträge
+;   automatisch in InitInstance registriert, mit einem Aufruf an 
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+HKEY_CLASSES_ROOT\.voa = VollOleApp.Document
+HKEY_CLASSES_ROOT\VollOleApp.Document\shell\open\command = VOLLOLEAPP.EXE %1
+HKEY_CLASSES_ROOT\VollOleApp.Document\shell\open\ddeexec = [open("%1")]
+HKEY_CLASSES_ROOT\VollOleApp.Document\shell\open\ddeexec\application = VOLLOLEAPP
+    ; Hinweis: die Anwendung ist optional
+    ;  (als Standardwert wird der Name der Anwendung in "command" verwendet)
+
+HKEY_CLASSES_ROOT\VollOleApp.Document = VollOl Document
+HKEY_CLASSES_ROOT\VollOleApp.Document\protocol\StdFileEditing\server = VOLLOLEAPP.EXE
+HKEY_CLASSES_ROOT\VollOleApp.Document\protocol\StdFileEditing\verb\0 = &Edit
+HKEY_CLASSES_ROOT\VollOleApp.Document\Insertable =
+HKEY_CLASSES_ROOT\VollOleApp.Document\CLSID = {E1E8E840-3E20-11D4-B6EC-0000B458D891}
+
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891} = VollOl Document
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\DefaultIcon = VOLLOLEAPP.EXE,1
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\LocalServer32 = VOLLOLEAPP.EXE
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\ProgId = VollOleApp.Document
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\MiscStatus = 32
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\AuxUserType\3 = VollOleApp
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\AuxUserType\2 = VollOl
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\Insertable = 
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\verb\1 = &Öffnen,0,2
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\verb\0 = &Bearbeiten,0,2
+HKEY_CLASSES_ROOT\CLSID\{E1E8E840-3E20-11D4-B6EC-0000B458D891}\InprocHandler32 = ole32.dll

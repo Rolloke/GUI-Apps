@@ -1,0 +1,117 @@
+:Base ETS2DV.hlp
+:Title Presentations Modules of ETS (Kiel)
+:Link ETS2DV.hlp           ; ETS2DView Hilfe
+:Link ETS3DV.hlp           ; ETS3DView Hilfe
+1 ETS2DView
+2 General
+3 What is ETS2DView?=ABOUT_ETS2DVIEW
+3 Help Topics=main_menu2D
+2 Menus and Commands
+3 Menu File=menu_file2D
+3 Menu Edit=menu_edit2D
+3 Menu View=menu_view2D
+3 Menu Settings=menu_options2D
+3 Menu Functions=menu_functions2D
+3 Menu Operations=menu_operations2D
+3 Menu Help=menu_help2D
+3 System Menu=system_menu2D
+3 Context Menu=context_menu2D
+2 Contents of the Document
+3 Plot Structure
+4 Plot Structure=plot_structure
+4 Heading=HID_PLOT_HEADING
+4 Grid Lines=HID_PLOT_GRIDLINES
+4 Grid Text=HID_PLOT_GRIDTEXT
+4 Curve Texts=HID_PLOT_CURVETEXT
+4 Axis Scaling=HID_PLOT_DIVISION
+4 Units=HID_PLOT_UNITS
+4 Number Representation=HID_PLOT_NUMBER
+3 Curve Structure
+4 Curve Structure=curve_structure
+4 Description=HID_CURVE_DESCRIPTION
+4 Color and Thickness=HID_CURVE_COLOR
+4 Units=HID_CURVE_UNITS
+4 Further Curve Parameters=HID_CURVE_PARAMS
+3 Working with Plots
+4 Working with Plots=working_with_plots
+4 Zooming with the Mouse=HID_FUNC_ZOOMMODE
+4 Selection of Ranges from the Range List=HID_PLOT_ZOOMLISTFUNTIONS
+4 The Property Page 'Range'=HIDD_PROPPAGE_PLOTRANGE
+4 Plot Representation with Reference Curve=HID_PLOT_REFPRESENTATION
+4 The Property Page 'Representation'=HIDD_PROPPAGE_PLOTVIEW
+4 Plot Clipboard Formats=HID_PLOT_CLIPBOARDFORMATS
+3 Working with Curves
+4 Working with Curves=working_with_curves
+4 Import Curves=HID_FUNC_LOAD_CURVE
+4 Creation of Import Macros=HID_FUNC_MAKROEDIT
+4 The Property Page 'Color'=HIDD_PROPPAGE_CURVE_COLORS
+4 Export Curves=HID_FUNC_SAVE_CURVE
+4 How to edit Curves=HID_FUNC_EDITMODE
+4 The Property Page 'Curves'=HIDD_PROPPAGE_CURVE
+4 Moving Average Value=HID_OPERATION_AVERAGE
+4 The Dialog 'Moving Average Value'=HIDD_AVERAGE
+4 Interpolation=HID_OPERATION_SPLINE
+4 The Dialog Box 'Spline Interpolation'=HIDD_SPLINECURVE
+4 Differentiation=HID_OPERATION_DERIVE
+4 The Dialog Box 'Curve Differentiation'=HIDD_DERIVE
+4 Integration=HID_OPERATION_INTEGRATE
+4 The Dialog 'Curve Integration'=HIDD_INTEGRATE
+4 Curve Regression=HID_OPERATION_FITCURVE
+4 The Dialog 'Curve Regression'=HIDD_FITCURVE
+4 Creation of Curve=HID_OPERATION_CREATECURVE
+4 The Dialog 'Create Curve'=HIDD_CREATECURVE
+4 Curve Clipboard Format=HID_CURVE_CLIPBOARDFORMATS
+1 ETS3DView
+2 General
+3 What is ETS3DView?=ABOUT_ETS3DVIEW@ETS3DV.hlp
+3 Help Topics=main_menu3D@ETS3DV.hlp
+2 Menus and Commands
+3 Menu File=menu_file3D@ETS3DV.hlp
+3 Menu Edit=menu_edit3D@ETS3DV.hlp
+3 Menu View=menu_view3D@ETS3DV.hlp
+3 Menu Settings=menu_options3D@ETS3DV.hlp
+3 Menu Animation=menu_film3D@ETS3DV.hlp
+3 Menu Object=menu_object3D@ETS3DV.hlp
+3 Menu Help=menu_help3D@ETS3DV.hlp
+3 System Menu=system_menu3D@ETS3DV.hlp
+2 Inhalt des Dokumentes
+3 3D-Objects=ets3d_objects@ETS3DV.hlp
+3 Representation Properties=HIDD_VIEW_DIALOG@ETS3DV.hlp
+3 Object Illumination=HIDD_LIGHT_DIALOG@ETS3DV.hlp
+3 Standard Properties=HIDD_STANDARD@ETS3DV.hlp
+3 Color Scale=HIDR_CARA_COLOR@ETS3DV.hlp
+3 Animation=HIDR_FILMTOOLBAR@ETS3DV.hlp
+3 Mouse Control=mouse_control3D@ETS3DV.hlp
+3 Coordinate Axes and X/Y/Z-Label=HID_VIEW_AXIS@ETS3DV.hlp
+3 Grid Lines and X/Y/Z-Units=HID_VIEW_GRID@ETS3DV.hlp
+1 Printpreview
+2 Allgemein
+3 Print Preview=HID_FILE_PRINT_PREVIEW
+3 Printing=HID_FILE_PRINT
+3 Printer Setup=HIDD_PRINTDIALOG
+3 Printer Colors=HID_VIEW_PRINTER_COLORS
+3 The Edit Toolbar of the Print Preview=HIDR_PREVIEWBAR
+2 Darstellungselemente
+3 Representaions Objects=HID_REPRESENTATION_OBJ
+3 Editing Representaions Objects=HID_FUNC_PICK
+3 Representation Order=HID_SHOW_LABELS
+3 Creation of Text=HID_FUNC_TEXT
+3 Editing Texts=HIDD_TEXTDLG
+3 Creation of Lines=HID_FUNC_LINE
+3 Creation of Rectangles=HID_FUNC_RECTANGLE
+3 Creation of Bezier Curves=HID_FUNC_BEZIER
+3 Creation of Ellipses=HID_FUNC_CIRCLE
+3 Creation of Bezier Circles=HID_FUNC_BEZIERCIRCLE
+3 Import Pictures=HIDD_PASTE_SELECTIV
+3 The Property Page 'Text'=HIDD_PROPPAGE_FONT
+3 The Property Page 'Frame (or Line)' =HIDD_PROPPAGE_LINE
+3 The Property Page 'Background'=HIDD_PROPPAGE_BRUSH
+3 The Property Page 'Picture Properties'=HIDD_PROPPAGE_DIBLABEL
+2 Menues und Commands
+3 Menu File=menu_filepr
+3 Menu Edit=menu_editpr
+3 Menu View=menu_viewpr
+3 Menu Settings=menu_optionspr
+3 Menu Draw=menu_drawpr
+3 Menu Objects=menu_objectspr
+3 Menu Help=menu_helppr

@@ -1,0 +1,19 @@
+ 
+// Commands (ID_* and IDM_*) 
+HIDM_ABOUTBOX                           0x10010
+ 
+// Prompts (IDP_*) 
+ 
+// Resources (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+ 
+// Dialogs (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+HIDD_ETS3DGLDLG_DIALOG                  0x20066
+HIDD_CARAWALK_DLG                       0x20067
+HIDD_REPORT_DLG                         0x20068
+HIDD_PATH_DLG                           0x20069
+HIDD_PRESENTATION_DLG                   0x2006A
+HIDD_COPY_FOLDER                        0x2006B
+ 
+// Frame Controls (IDW_*) 

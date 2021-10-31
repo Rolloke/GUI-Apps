@@ -1,0 +1,7 @@
+LIBRARY ETSPRTD BASE=0x69800000
+VERSION 2.0
+EXPORTS
+   Destructor     @1 NONAME
+   DoDataExchange @2 NONAME
+   EndPrinting    @3 NONAME
+   DoDialog       @4 NONAME

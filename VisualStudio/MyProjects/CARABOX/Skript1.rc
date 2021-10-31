@@ -1,0 +1,3146 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BB_FR0              BITMAP  DISCARDABLE     "res\\frqu_0.bmp"
+IDB_BB_FR1              BITMAP  DISCARDABLE     "res\\frqu_1.bmp"
+IDB_BB_FR2              BITMAP  DISCARDABLE     "res\\frqu_2.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON                ICON    DISCARDABLE     "res\\Icon.ico"
+IDC_BI_LP               ICON    DISCARDABLE     "res\\lopass.ico"
+IDC_BI_HP               ICON    DISCARDABLE     "res\\hipass.ico"
+IDC_BI_BP               ICON    DISCARDABLE     "res\\bandpass.ico"
+IDC_3D_PIC_TRAN_X       ICON    DISCARDABLE     "res\\tran_x.ico"
+IDC_3D_PIC_TRAN_Y       ICON    DISCARDABLE     "res\\tran_y.ico"
+IDC_3D_PIC_TRAN_Z       ICON    DISCARDABLE     "res\\tran_z.ico"
+IDC_3D_PIC_LIGHT_BLUE   ICON    DISCARDABLE     "res\\liteblue.ico"
+IDC_3D_PIC_LIGHT_GREEN  ICON    DISCARDABLE     "res\\litegreen.ico"
+IDC_3D_PIC_LIGHT_RED    ICON    DISCARDABLE     "res\\litered.ico"
+IDC_3D_PIC_LIGHT_CUT_OFF ICON    DISCARDABLE     "res\\litecuto.ico"
+IDC_3D_PIC_LIGHT_EXP    ICON    DISCARDABLE     "res\\liteexp.ico"
+IDC_3D_PIC_LITE_DIST    ICON    DISCARDABLE     "res\\litedst.ico"
+IDC_3D_PIC_LITE_PHI     ICON    DISCARDABLE     "res\\litephi.ico"
+IDC_3D_PIC_LITE_THETA   ICON    DISCARDABLE     "res\\liteteta.ico"
+IDC_3D_PIC_TURN_PHI     ICON    DISCARDABLE     "res\\turnphi.ico"
+IDC_3D_PIC_TURN_THETA   ICON    DISCARDABLE     "res\\turnteta.ico"
+IDC_3D_PIC_ZOOM         ICON    DISCARDABLE     "res\\zoom.ico"
+IDC_3D_PIC_ZOOM_DUMMY1  ICON    DISCARDABLE     "res\\view_xy.ico"
+IDC_3D_PIC_ZOOM_DUMMY2  ICON    DISCARDABLE     "res\\view_z.ico"
+IDC_3D_PIC_SET_PROJECTION ICON    DISCARDABLE     "res\\setproj.ico"
+IDC_3D_PIC_SET_BKCOLOR  ICON    DISCARDABLE     "res\\bkcolor.ico"
+IDC_3D_PIC_SET_ALPHA_BLEND ICON    DISCARDABLE     "res\\alphablend.ico"
+IDC_3D_PIC_LIGHT_ON_OFF ICON    DISCARDABLE     "res\\liteonoff.ico"
+IDC_3D_PIC_SET_BOX_COLOR ICON    DISCARDABLE     "res\\colbox.ico"
+IDC_3D_PIC_SET_CHASSIS_COLOR ICON    DISCARDABLE     "res\\colchassis.ico"
+IDC_3D_PIC_SET_SCALE_COLOR ICON    DISCARDABLE     "res\\colscale.ico"
+IDC_3D_PIC_SET_SHININES ICON    DISCARDABLE     "res\\shinines.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BMP_CABINET_DESIGN  BITMAP  DISCARDABLE     "res\\cab_deu.bmp"
+IDB_BMP_CABINET_DESIGN1 BITMAP  DISCARDABLE     "res\\cab_deu1.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BOX_DESCRIPTION DIALOGEX 70, 0, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Neu",IDC_BD_BTN_NEW,5,5,70,12
+    PUSHBUTTON      "Öffnen...",IDC_BD_BTN_OPEN,100,5,70,12
+    PUSHBUTTON      "Speichern unter...",IDC_BD_BTN_SAVE_AS,195,5,70,12
+    EDITTEXT        IDC_BD_EDT_FILENAME,95,39,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    EDITTEXT        IDC_BD_EDT_DESCRIPTION,95,59,164,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BD_EDT_MANUFACTURER,95,79,164,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_BD_COMBO_BOXTYPE,95,99,164,71,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dateiname :",IDC_BD_TXT_FILENAME,10,41,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Bezeichnung :",IDC_BD_TXT_DESCRIPTION,10,61,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Markenname :",IDC_BD_TXT_MANUFACTURER,10,81,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Boxen-Typ :",IDC_BD_TXT_BOXTYPE,10,101,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    GROUPBOX        "Beschreibung der Box",IDC_BD_GRP_DESCRIPTION,5,25,260,
+                    195
+    LTEXT           "Kommentar :",IDC_BD_TXT_COMMENT,10,141,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_COMMENT,10,155,249,60,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN
+    LTEXT           "Für CARA ab Version :",IDC_BD_TXT_FILE_VERSION,10,121,
+                    80,9,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_FILE_VERSION,95,119,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+END
+
+IDD_BOX_BASE_DATA DIALOGEX 70, 0, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Bassreflex (BR)",IDC_BB_R_TYPE0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,10,16,80,8
+    CONTROL         "Geschlossen",IDC_BB_R_TYPE2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,145,16,114,8
+    CONTROL         "Transmission Line (TL)",IDC_BB_R_TYPE1,"Button",
+                    BS_AUTORADIOBUTTON,10,36,104,8
+    CONTROL         "Passivmembran (PM)",IDC_BB_R_TYPE3,"Button",
+                    BS_AUTORADIOBUTTON,145,36,114,8
+    GROUPBOX        "Konstruktionsprinzip",IDC_BB_TXT_TYPE,5,0,260,55,
+                    WS_GROUP
+    LTEXT           "Nennimpedanz :",IDC_BB_TXT_IMPEDANCE,10,74,105,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_IMPEDANCE,140,74,30,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "[Ohm]",IDC_BB_TXT_IMPEDANCEUNIT,200,74,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Empfindlichkeit :",IDC_BB_TXT_SENSITIVITY,10,89,105,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_SENSITIVITY,140,89,30,12,ES_AUTOHSCROLL
+    LTEXT           "[dB/W/m]",IDC_BB_TXT_SENSITIVITYUNIT,200,89,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Übertragungsbereich    von :",IDC_BB_TXT_RANGE,10,104,
+                    105,12,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_RANGEFROM,140,104,30,12,ES_AUTOHSCROLL
+    LTEXT           "bis :",IDC_BB_TXT_RANGE1,178,104,20,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_RANGETO,200,104,35,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_RANGEUNIT,239,104,20,12,SS_CENTERIMAGE
+    GROUPBOX        "Basisdaten",IDC_BB_TXT_BASE,5,60,260,65,WS_GROUP
+    CONTROL         "Impedanzwerte automatisch berechnen",
+                    IDC_BB_CK_CALC_IMPEDANCE_VALUES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,142,249,10
+    LTEXT           "Geschlossene Box :",IDC_BB_TXT_CLOSED,10,155,68,10,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Maximum bei :",IDC_BB_TXT_CLOSEDMAX,90,154,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_CLOSEDMAX,170,154,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_CLOSEDUNIT,239,154,20,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "BR, PM oder TL Box",IDC_BB_TXT_BR_TL,10,170,70,10,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "1.Max :",IDC_BB_TXT_BR_TLMAX1,90,169,30,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMAX1,140,169,30,12,ES_AUTOHSCROLL
+    LTEXT           "Minimum bei :",IDC_BB_TXT_BR_TLMIN,90,184,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMIN,170,184,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_BR_TLUNIT2,239,184,20,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "2.Max. :",IDC_BB_TXT_BR_TLMAX2,172,169,25,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMAX2,200,169,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_BR_TLUNIT,239,169,20,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    GROUPBOX        "Impedanzkurve im Bassbereich (Impedanzmaxima u. -minima)",
+                    IDC_BB_TXT_IMP_BASS,5,130,260,75
+    CONTROL         "",IDC_BB_R_FR0,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE | WS_GROUP | 
+                    WS_TABSTOP,25,223,51,26
+    CONTROL         "",IDC_BB_R_FR1,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE,110,223,51,26
+    CONTROL         "",IDC_BB_R_FR2,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE,191,223,51,26
+    CTEXT           "stark gedämpft",IDC_BB_TXT_FR0,22,251,56,9,NOT WS_GROUP
+    CTEXT           "Standard",IDC_BB_TXT_FR1,110,251,50,9,NOT WS_GROUP
+    CTEXT           "wenig gedämpft",IDC_BB_TXT_FR2,184,251,65,9,NOT 
+                    WS_GROUP
+    GROUPBOX        "SPL-Frequenzgang im Bassbereich",IDC_BB_TXT_FR,5,210,
+                    260,55,WS_GROUP
+END
+
+IDD_BOX_CHASSIS DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "BR-Rohre :",IDC_CH_TXT_BR_TUBES,10,16,45,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_BR_TUBES,100,14,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Passivmembranen :",IDC_CH_TXT_P_MEMBRANES,140,16,75,8
+    EDITTEXT        IDC_CH_EDT_P_MEMBRANE,240,14,19,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "T-Lines :",IDC_CH_TXT_T_LINES,10,31,45,8
+    EDITTEXT        IDC_CH_EDT_T_LINES,100,29,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Tieftöner :",IDC_CH_TXT_TT,10,51,50,8,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    RTEXT           "TT1 :",IDC_CH_TXT_TT1,70,51,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_TT1,100,49,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "TT2 :",IDC_CH_TXT_TT2,140,51,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_TT2,170,49,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Mitteltöner :",IDC_CH_TXT_MT,10,72,45,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    RTEXT           "MT1 :",IDC_CH_TXT_MT1,70,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT1,100,70,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "MT2 :",IDC_CH_TXT_MT2,140,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT2,170,70,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "MT3 :",IDC_CH_TXT_MT3,210,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT3,240,70,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Hochtöner :",IDC_CH_TXT_HT,10,93,45,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_HT,100,91,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "",IDC_CH_GRP_TYPE_COUNT1,5,41,260,25
+    GROUPBOX        "",IDC_CH_GRP_TYPE_COUNT2,5,83,260,27
+    GROUPBOX        "Chassistypen und Anzahl",IDC_CH_GRP_TYPE_COUNT,5,0,260,
+                    110,WS_TABSTOP
+    GROUPBOX        "Chassis-Daten",IDC_CH_GRP_CHASSIS_DATA,5,115,260,149
+    LISTBOX         IDC_CH_LST_LS,10,125,104,72,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NODATA | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Beschreibung :",IDC_CH_TXT_DESCRIPTION,120,125,139,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_DESCRIPTION,120,136,139,12,ES_AUTOHSCROLL
+    CONTROL         "Chassis umpolen ( neg. )",IDC_CH_CHK_POLARITY,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,120,156,139,8
+    GROUPBOX        "Membranformen",IDC_CH_GRP_MEMBRANE_FORM,5,202,260,62,
+                    WS_GROUP
+    CONTROL         "Konus",IDC_CH_R_M_FORM0,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,10,216,37,12
+    CONTROL         "Kalotte",IDC_CH_R_M_FORM1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,47,216,38,12
+    CONTROL         "Flach (rund)",IDC_CH_R_M_FORM2,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,85,216,50,12
+    CONTROL         "Flach (eckig)",IDC_CH_R_M_FORM3,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,135,216,50,12
+    CONTROL         "Kugel",IDC_CH_R_M_FORM4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,185,216,37,12
+    CONTROL         "Dipol",IDC_CH_R_M_FORM5,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,223,216,36,12
+    GROUPBOX        "Membranabmessungen [mm]",IDC_CH_GRP_MEMBRANE_PARAM,5,
+                    234,260,30,WS_GROUP
+    LTEXT           "Durchmesser :",IDC_CH_TXT_DIAMETER,10,249,50,8,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_DIAMETER,70,247,30,12,ES_AUTOHSCROLL
+    LTEXT           "Breite :",IDC_CH_TXT_WIDTH,110,247,25,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_WIDTH,140,247,30,12,ES_AUTOHSCROLL
+    LTEXT           "Höhe :",IDC_CH_TXT_HEIGHT,180,247,30,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_HEIGHT,210,247,30,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "SPL Diagramme...",IDC_CH_BTN_CALC,184,185,75,12,
+                    WS_GROUP
+    LTEXT           "Breitband",IDC_CH_TXT_BB,10,51,44,8,NOT WS_VISIBLE | 
+                    NOT WS_GROUP
+    RTEXT           "BB:",IDC_CH_TXT_BB1,70,51,23,8,NOT WS_VISIBLE | NOT 
+                    WS_GROUP
+END
+
+IDD_BOX_CABINET DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Höhe :",IDC_CD_TXT_HEIGHT,11,14,29,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_HEIGHT,45,12,45,12,ES_AUTOHSCROLL
+    LTEXT           "Breite :",IDC_CD_TXT_WIDTH,11,33,29,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CD_EDT_WIDTH,45,31,45,12,ES_AUTOHSCROLL
+    LTEXT           "Tiefe :",IDC_CD_TXT_DEPTH,11,53,29,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CD_EDT_DEPTH,45,51,45,12,ES_AUTOHSCROLL
+    CONTROL         "Oben",IDC_CD_R_SET_WIDTH1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,120,13,65,10
+    CONTROL         "Hinten",IDC_CD_R_SET_WIDTH2,"Button",BS_AUTORADIOBUTTON,
+                    195,13,64,10
+    LTEXT           "B1 :",IDC_CD_TXT_WIDTH1,120,33,20,8
+    EDITTEXT        IDC_CD_EDT_WIDTH1,145,31,40,12,ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "B2 :",IDC_CD_TXT_WIDTH2,195,33,20,8
+    EDITTEXT        IDC_CD_EDT_WIDTH2,220,31,39,12,ES_AUTOHSCROLL
+    LTEXT           "T1 :",IDC_CD_TXT_DEPTH1,120,53,20,8
+    EDITTEXT        IDC_CD_EDT_DEPTH1,145,51,40,12,ES_AUTOHSCROLL
+    LTEXT           "T2 :",IDC_CD_TXT_DEPTH2,195,53,20,8
+    EDITTEXT        IDC_CD_EDT_DEPTH2,220,51,39,12,ES_AUTOHSCROLL
+    CONTROL         1207,IDC_CD_PICTURE,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    SS_SUNKEN | NOT WS_VISIBLE,11,67,248,46
+    CONTROL         1208,IDC_CD_PICTURE1,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    SS_SUNKEN,11,67,248,46
+    GROUPBOX        "Gehäuse [mm]",IDC_CD_GRP_CABINET_PARAM,5,2,260,116
+    GROUPBOX        "Ändern der Breite",IDC_CD_GRP_WIDTH_CTRL,115,2,150,46
+    COMBOBOX        IDC_CD_LST_CHASSIS_POS,11,145,109,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CD_LST_CHASSIS_CAB,11,130,109,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CD_LST_LS,11,160,109,51,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NODATA | WS_VSCROLL | 
+                    WS_GROUP | WS_TABSTOP
+    LTEXT           "Abstand zur Bezugskante :",IDC_CD_TXT_POS_HEIGHT,11,212,
+                    109,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_POS_HEIGHT,11,224,54,12,ES_AUTOHSCROLL
+    CONTROL         "Zentriert",IDC_CD_R_POS_MH,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,70,224,50,12
+    LTEXT           "Abstand zur Mittellinie :",IDC_CD_TXT_POS_M,11,237,109,
+                    8,NOT WS_GROUP
+    EDITTEXT        IDC_CD_EDT_POS_M,11,249,54,12,ES_AUTOHSCROLL
+    CONTROL         "Zentriert",IDC_CD_R_POS_M,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,70,249,50,12
+    GROUPBOX        "Chassis Position [mm]",IDC_CD_GRP_POSINCABINET,5,120,
+                    120,145
+    CONTROL         "",IDC_CD_POSITION_VIEW,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | WS_TABSTOP,130,130,129,115,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "3D-Ansicht",IDC_CD_BTN_GRAPH,130,249,50,12
+    PUSHBUTTON      "SPL Diagramme...",IDC_CD_BTN_CALC,181,249,78,12
+    CONTROL         "Hauptschallwand",IDC_CD_CK_ZERO_DEG_REF_WALL,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_LEFT | WS_TABSTOP,183,
+                    120,71,10
+    GROUPBOX        "Gehäusewand",IDC_CD_GRP_POSINCABINET1,125,120,140,145
+END
+
+IDD_FILTER_PROPERTIES DIALOGEX 0, 0, 200, 245
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Filtereigenschaften"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Hochpass",IDC_FILTER_GRP_HP,5,5,190,75,0,0,
+                    HIDC_FILTER_GRP_HP
+    LTEXT           "Charakteristik :",IDC_FILTER_TXT_HP_CHARACTERISTIC,10,
+                    21,65,8,0,0,HIDC_FILTER_TXT_HP_CHARACTERISTIC
+    COMBOBOX        IDC_FILTER_COMBO_HP_CHARACTERISTIC,84,19,106,65,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILTER_COMBO_HP_CHARACTERISTIC
+    LTEXT           "Ordnung :",IDC_FILTER_TXT_HP_ORDER,10,41,40,8,0,0,
+                    HIDC_FILTER_TXT_HP_ORDER
+    EDITTEXT        IDC_FILTER_EDT_HP_ORDER,55,39,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FILTER_EDT_HP_ORDER
+    CONTROL         "Spin1",IDC_FILTER_SPIN_HP_ORDER,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,73,38,11,
+                    14,0,HIDC_FILTER_SPIN_HP_ORDER
+    LTEXT           "Q-Faktor :",IDC_FILTER_TXT_HP_QF,110,41,35,8,NOT 
+                    WS_GROUP,0,HIDC_FILTER_TXT_HP_QF
+    EDITTEXT        IDC_FILTER_EDT_HP_QF,150,39,40,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_HP_QF
+    LTEXT           "Untere Grenzfrequenz :",IDC_FILTER_TXT_HP_LOW_FRQ,10,61,
+                    74,8,0,0,HIDC_FILTER_TXT_HP_LOW_FRQ
+    EDITTEXT        IDC_FILTER_EDT_HP_LOW_FRQ,110,59,60,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_HP_LOW_FRQ
+    LTEXT           "Hz",IDC_FILTER_TXT_HP_LOW_FRQ_UNIT,175,61,15,8,0,0,
+                    HIDC_FILTER_TXT_HP_LOW_FRQ_UNIT
+    GROUPBOX        "Tiefpass",IDC_FILTER_GRP_TP,5,85,190,75,0,0,
+                    HIDC_FILTER_GRP_TP
+    LTEXT           "Charakteristik :",IDC_FILTER_TXT_TP_CHARACTERISTIC,10,
+                    101,65,8,0,0,HIDC_FILTER_TXT_TP_CHARACTERISTIC
+    COMBOBOX        IDC_FILTER_COMBO_TP_CHARACTERISTIC,84,99,106,65,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILTER_COMBO_TP_CHARACTERISTIC
+    LTEXT           "Ordnung :",IDC_FILTER_TXT_TP_ORDER,10,121,40,8,0,0,
+                    HIDC_FILTER_TXT_TP_ORDER
+    EDITTEXT        IDC_FILTER_EDT_TP_ORDER,55,119,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FILTER_EDT_TP_ORDER
+    CONTROL         "Spin1",IDC_FILTER_SPIN_TP_ORDER,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,75,118,
+                    11,14,0,HIDC_FILTER_SPIN_TP_ORDER
+    LTEXT           "Q-Faktor :",IDC_FILTER_TXT_TP_QF,110,121,35,8,NOT 
+                    WS_GROUP,0,HIDC_FILTER_TXT_TP_QF
+    EDITTEXT        IDC_FILTER_EDT_TP_QF,150,119,40,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_TP_QF
+    LTEXT           "Obere Grenzfrequenz :",IDC_FILTER_TXT_TP_UPP_FRQ,10,141,
+                    100,8,0,0,HIDC_FILTER_TXT_TP_UPP_FRQ
+    EDITTEXT        IDC_FILTER_EDT_TP_UPP_FRQ,110,139,60,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_TP_UPP_FRQ
+    LTEXT           "Hz",IDC_FILTER_TXT_TP_UPP_FRQ_UNIT,175,141,15,8,0,0,
+                    HIDC_FILTER_TXT_TP_UPP_FRQ_UNIT
+    DEFPUSHBUTTON   "OK",IDOK,5,231,50,12,0,0,HIDOK
+    PUSHBUTTON      "Abbrechen",IDCANCEL,145,231,50,12,0,0,HIDCANCEL
+    CONTROL         "Frequenzgang",IDC_FILTER_WND_FREQUENCY_RESP,"Static",
+                    SS_OWNERDRAW | SS_NOTIFY | SS_SUNKEN | WS_BORDER,5,165,
+                    190,61,0,HIDC_FILTER_WND_FREQUENCY_RESP
+END
+
+IDD_SPL_VIEW DIALOG DISCARDABLE  0, 0, 186, 55
+STYLE DS_SYSMODAL | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Darstellung der Ergebnisse"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,40,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,130,40,50,12
+    COMBOBOX        IDC_SPL_COMBO_DIAGRAM,5,8,175,36,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Entfernung :",IDC_STATIC,5,26,45,8
+    COMBOBOX        IDC_SPL_DIST_COMBO,55,24,32,92,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PROGRESS_VIEW DIALOG DISCARDABLE  0, 0, 190, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Berechnung läuft"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Progress",IDC_PRGR_CNTR,"msctls_progress32",PBS_SMOOTH,
+                    5,16,180,14
+    LTEXT           "",IDC_PRGR_TEXT,5,6,180,8
+    PUSHBUTTON      "Berechnung abbrechen",IDC_PRGR_BTN_BREAK,100,34,85,12
+    LTEXT           "",IDC_PRGR_TIME,5,36,90,8
+END
+
+IDD_OPEN_BOX_FILE DIALOGEX 0, 0, 285, 250
+STYLE DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,5,275,135,NOT WS_VISIBLE
+    LTEXT           "Für CARA ab Version :",IDC_STATIC,10,153,75,8
+    LTEXT           "",IDC_BD_EDT_FILE_VERSION,90,152,110,10,SS_SUNKEN
+    LTEXT           "Markenname :",IDC_BD_TXT_MANUFACTURER,10,175,50,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_BD_EDT_MANUFACTURER,64,174,136,10,SS_SUNKEN
+    LTEXT           "Bezeichnung :",IDC_BD_TXT_DESCRIPTION,10,164,50,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_DESCRIPTION,90,163,110,10,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "Vorschau",IDC_OBF_PREVIEW,225,161,50,14
+    EDITTEXT        IDC_BD_EDT_COMMENT,10,185,265,50,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
+    GROUPBOX        "Beschreibung",IDC_STATIC,5,142,275,96
+END
+
+IDD_3D_VIEW DIALOGEX 0, 0, 270, 274
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "3D Darstellung des Gehäuses"
+MENU IDR_CONTEXT_DETAIL
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,3,3,
+                    197,157,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+    CONTROL         "Verschieben",IDC_3D_R_TRANS0,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE | WS_GROUP,
+                    205,3,60,11
+    CONTROL         "Drehen",IDC_3D_R_TRANS1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,14,60,11
+    CONTROL         "Zoom",IDC_3D_R_TRANS2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,27,60,11
+    CONTROL         "Lichtrichtung",IDC_3D_R_TRANS3,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,40,60,
+                    11
+    CONTROL         "Helligkeit",IDC_3D_R_TRANS4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,51,60,11
+    CONTROL         "Lichtquelle",IDC_3D_R_TRANS5,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,62,60,
+                    11
+    CONTROL         "Darstellung",IDC_3D_R_TRANS6,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,75,60,
+                    11
+    PUSHBUTTON      "X",IDC_3D_BTN_TRAN_X,205,101,15,14,BS_ICON | WS_GROUP,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Y",IDC_3D_BTN_TRAN_Y,205,116,15,14,BS_ICON,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Z",IDC_3D_BTN_TRAN_Z,205,131,15,14,BS_ICON,
+                    WS_EX_STATICEDGE
+    LTEXT           "",IDC_3D_TXT_TRAN_X,222,104,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Y,222,119,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Z,222,134,45,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_3D_EDT_TRAN_X,222,102,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_X,"msctls_updown32",
+                    UDS_ARROWKEYS,254,101,11,14
+    EDITTEXT        IDC_3D_EDT_TRAN_Y,222,117,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Y,"msctls_updown32",
+                    UDS_ARROWKEYS,254,116,11,14
+    EDITTEXT        IDC_3D_EDT_TRAN_Z,222,132,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Z,"msctls_updown32",
+                    UDS_ARROWKEYS,254,131,11,14
+    CTEXT           "",IDC_3D_TXT_UNITS,205,90,60,8
+    PUSHBUTTON      "Standard",IDC_3D_BTN_UPDATE,205,147,60,12
+    PUSHBUTTON      "Gehäusesegment erstellen",IDC_3D_BTN_CREATE_CABINET,10,
+                    164,115,12
+    PUSHBUTTON      "Gehäusesegment löschen...",IDC_3D_BTN_DELETE_CABINET,
+                    155,164,105,12,WS_DISABLED
+    LTEXT           "Name des Gehäusesegmentes:",IDC_STATIC,10,196,115,8
+    EDITTEXT        IDC_3D_EDT_CAB_NAME,130,194,130,12,ES_AUTOHSCROLL
+    LTEXT           "Auswahl des Gehäusesegmentes:",IDC_STATIC,10,211,115,8
+    COMBOBOX        IDC_3D_LST_CAB,130,208,130,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Kann Chassis enthalten",IDC_3D_CK_CAN_CONTAIN_CHASSIS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,225,115,10
+    GROUPBOX        "Gehäusesegment",IDC_STATIC,5,180,260,90
+    CONTROL         "Oben",IDC_3D_CK_TOP_WALL,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_GROUP | WS_TABSTOP,10,255,
+                    38,10
+    CONTROL         "Vorne",IDC_3D_CK_FRONT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,52,255,40,10
+    CONTROL         "Hinten",IDC_3D_CK_BACK_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,94,255,36,10
+    CONTROL         "Links",IDC_3D_CK_LEFT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,136,255,33,10
+    CONTROL         "Rechts",IDC_3D_CK_RIGHT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,178,255,39,10
+    CONTROL         "Unten",IDC_3D_CK_BOTTOM_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,220,255,40,10
+    GROUPBOX        "Sichtbare Wände des Quaders",IDC_3D_GRP_VISIBLE_WALLS,5,
+                    236,260,34
+    LTEXT           "",IDC_3D_TXT_STATUS,5,238,260,32,SS_SUNKEN | NOT 
+                    WS_VISIBLE
+END
+
+IDD_BOX_CROSS_OVER DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "1 Weg",IDC_XO_R_1_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,48,57,9
+    CONTROL         "2 Wege",IDC_XO_R_2_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,82,45,9
+    CONTROL         "2(3) Wege",IDC_XO_R_2_3_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,113,50,9
+    CONTROL         "3 Wege",IDC_XO_R_3_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,144,45,9
+    CONTROL         "3(4) Wege",IDC_XO_R_3_4_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,175,50,9
+    CONTROL         "4 Wege",IDC_XO_R_4_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,206,45,9
+    CONTROL         "5 Wege",IDC_XO_R_5_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,237,45,9
+    PUSHBUTTON      "SPL Diagramme...",IDC_XO_BTN_CALC,181,4,84,12,WS_GROUP
+    CTEXT           "UG",IDC_STATIC,10,60,23,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    COMBOBOX        IDC_XO_LST_1W_UG,45,60,45,222,CBS_DROPDOWN | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "HP",IDC_XO_BTN_1W_UG,91,60,20,14,BS_ICON
+    PUSHBUTTON      "BP",IDC_XO_BTN_1W_BP,124,60,23,14,BS_ICON
+    PUSHBUTTON      "TP",IDC_XO_BTN_1W_OG,160,60,20,14,BS_ICON
+    COMBOBOX        IDC_XO_LST_1W_OG,193,60,45,222,CBS_DROPDOWN | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "OG",IDC_STATIC,239,60,20,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_1_W,5,48,260,31,WS_GROUP
+    PUSHBUTTON      "TT",IDC_XO_BTN_2W_TT,10,93,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2W_TF,33,93,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_2W_HT,67,93,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_2_W,5,82,260,28,WS_GROUP
+    PUSHBUTTON      "TT1",IDC_XO_BTN_2_3W_TT1,10,124,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2_3W_TFTT1,33,124,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_2_3W_HT,67,124,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2_3W_TFTT2,204,124,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TT2",IDC_XO_BTN_2_3W_TT2,181,124,23,12,BS_ICON
+    CTEXT           "HT",IDC_STATIC,238,124,20,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_2_3_W,5,113,260,28,WS_GROUP
+    PUSHBUTTON      "TT",IDC_XO_BTN_3W_TT,10,155,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3W_TF1,33,155,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT",IDC_XO_BTN_3W_MT,67,155,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3W_TF2,90,155,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_3W_HT,124,155,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_3_W,5,144,260,28,WS_GROUP
+    PUSHBUTTON      "TT1",IDC_XO_BTN_3_4W_TT1,10,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TF1TT1,33,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT",IDC_XO_BTN_3_4W_MT,67,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TF2,90,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_3_4W_HT,124,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TFTT2,204,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TT2",IDC_XO_BTN_3_4W_TT2,181,186,23,12,BS_ICON
+    CTEXT           "MT",IDC_STATIC,238,186,20,12,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_3_4_W,5,175,260,28,WS_GROUP
+    PUSHBUTTON      "TT",IDC_XO_BTN_4W_TT,10,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF1,33,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT1",IDC_XO_BTN_4W_MT1,67,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF2,90,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT2",IDC_XO_BTN_4W_MT2,124,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF3,147,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_4W_HT,181,217,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_4_W,5,206,260,28,WS_GROUP
+    PUSHBUTTON      "TT",IDC_XO_BTN_5W_TT,10,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF1,33,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT1",IDC_XO_BTN_5W_MT1,67,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF2,90,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT2",IDC_XO_BTN_5W_MT2,124,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF3,147,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MT3",IDC_XO_BTN_5W_MT3,181,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF4,204,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "HT",IDC_XO_BTN_5W_HT,238,248,20,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_5_W,5,237,260,28,WS_GROUP
+    CTEXT           "1",IDC_XO_TXT_1W_UG,33,60,12,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    CTEXT           "1",IDC_XO_TXT_1W_OG,181,60,12,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    CONTROL         "Symbole anzeigen",IDC_XO_CK_SYMBOLIC_BTN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,181,24,69,12
+    PUSHBUTTON      "Standard Filtereinstellungen",IDC_XO_BTN_RESET_FILTER,
+                    10,5,114,12,WS_GROUP
+    CONTROL         "Standard-Übergangsfrequenzen vorlegen",
+                    IDC_XO_CK_INIT_STD_VALUES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,24,165,12
+END
+
+IDD_SCALE DIALOGEX 0, 0, 225, 111
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Abstand zweier Gehäusesegmente: Bezugsflächen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Oben",IDC_SCA_R00,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,15,20,90,10
+    CONTROL         " + B1",IDC_SCA_R01,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,15,30,90,10
+    CONTROL         "Mitte",IDC_SCA_R02,"Button",BS_AUTORADIOBUTTON,15,40,90,
+                    10
+    CONTROL         " + T1",IDC_SCA_R03,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,15,50,90,10
+    CONTROL         "Unten",IDC_SCA_R04,"Button",BS_AUTORADIOBUTTON,15,60,90,
+                    10
+    GROUPBOX        "",IDC_SCA_GRP1,5,5,105,70,WS_GROUP
+    CONTROL         "Oben",IDC_SCA_R10,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,125,20,90,10
+    CONTROL         " + B2",IDC_SCA_R11,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,125,30,90,10
+    CONTROL         "Mitte",IDC_SCA_R12,"Button",BS_AUTORADIOBUTTON,125,40,
+                    90,10
+    CONTROL         " + T2",IDC_SCA_R13,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,125,50,90,10
+    CONTROL         "Unten",IDC_SCA_R14,"Button",BS_AUTORADIOBUTTON,125,60,
+                    90,10
+    GROUPBOX        "",IDC_SCA_GRP2,115,5,105,70,WS_GROUP
+    COMBOBOX        IDC_SCA_LST_CAB,120,3,95,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Linien sichbar",IDC_SCA_CK_SHOW,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,15,80,90,10
+    CONTROL         "Nach ",IDC_SCA_CK_DIR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,125,80,90,10
+    PUSHBUTTON      "Abbrechen",IDCANCEL,170,94,50,12
+    DEFPUSHBUTTON   "OK",IDOK,5,94,50,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_BOX_DESCRIPTION, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 90
+        VERTGUIDE, 95
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 11
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 155
+        HORZGUIDE, 215
+        HORZGUIDE, 220
+    END
+
+    IDD_BOX_BASE_DATA, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 90
+        VERTGUIDE, 135
+        VERTGUIDE, 145
+        VERTGUIDE, 170
+        VERTGUIDE, 200
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+        HORZGUIDE, 125
+        HORZGUIDE, 130
+        HORZGUIDE, 147
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 205
+        HORZGUIDE, 210
+        HORZGUIDE, 236
+        HORZGUIDE, 255
+        HORZGUIDE, 265
+    END
+
+    IDD_BOX_CHASSIS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 70
+        VERTGUIDE, 100
+        VERTGUIDE, 120
+        VERTGUIDE, 140
+        VERTGUIDE, 170
+        VERTGUIDE, 210
+        VERTGUIDE, 240
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 76
+        HORZGUIDE, 97
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+        HORZGUIDE, 142
+        HORZGUIDE, 160
+        HORZGUIDE, 197
+        HORZGUIDE, 202
+        HORZGUIDE, 222
+        HORZGUIDE, 234
+        HORZGUIDE, 253
+        HORZGUIDE, 264
+    END
+
+    IDD_BOX_CABINET, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 11
+        VERTGUIDE, 40
+        VERTGUIDE, 45
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 90
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 185
+        VERTGUIDE, 195
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 2
+        HORZGUIDE, 18
+        HORZGUIDE, 37
+        HORZGUIDE, 48
+        HORZGUIDE, 57
+        HORZGUIDE, 67
+        HORZGUIDE, 113
+        HORZGUIDE, 118
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 211
+        HORZGUIDE, 220
+        HORZGUIDE, 230
+        HORZGUIDE, 245
+        HORZGUIDE, 255
+        HORZGUIDE, 265
+    END
+
+    IDD_FILTER_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 55
+        VERTGUIDE, 75
+        VERTGUIDE, 84
+        VERTGUIDE, 110
+        VERTGUIDE, 145
+        VERTGUIDE, 150
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 80
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 165
+        HORZGUIDE, 226
+        HORZGUIDE, 237
+    END
+
+    IDD_SPL_VIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 180
+        HORZGUIDE, 14
+        HORZGUIDE, 30
+        HORZGUIDE, 46
+    END
+
+    IDD_PROGRESS_VIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 185
+        BOTTOMMARGIN, 34
+        HORZGUIDE, 10
+        HORZGUIDE, 23
+        HORZGUIDE, 40
+    END
+
+    IDD_OPEN_BOX_FILE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 200
+        VERTGUIDE, 275
+        VERTGUIDE, 280
+        HORZGUIDE, 5
+        HORZGUIDE, 140
+        HORZGUIDE, 142
+        HORZGUIDE, 157
+        HORZGUIDE, 168
+        HORZGUIDE, 179
+        HORZGUIDE, 185
+        HORZGUIDE, 235
+        HORZGUIDE, 238
+    END
+
+    IDD_3D_VIEW, DIALOG
+    BEGIN
+        RIGHTMARGIN, 269
+        VERTGUIDE, 3
+        VERTGUIDE, 10
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        VERTGUIDE, 210
+        VERTGUIDE, 220
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 3
+        HORZGUIDE, 108
+        HORZGUIDE, 123
+        HORZGUIDE, 138
+        HORZGUIDE, 153
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 200
+        HORZGUIDE, 215
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+        HORZGUIDE, 260
+        HORZGUIDE, 270
+    END
+
+    IDD_BOX_CROSS_OVER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 250
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 33
+        VERTGUIDE, 55
+        VERTGUIDE, 60
+        VERTGUIDE, 67
+        VERTGUIDE, 90
+        VERTGUIDE, 124
+        VERTGUIDE, 147
+        VERTGUIDE, 181
+        VERTGUIDE, 204
+        VERTGUIDE, 238
+        VERTGUIDE, 265
+        HORZGUIDE, 11
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 60
+        HORZGUIDE, 79
+        HORZGUIDE, 82
+        HORZGUIDE, 105
+        HORZGUIDE, 110
+        HORZGUIDE, 113
+        HORZGUIDE, 136
+        HORZGUIDE, 141
+        HORZGUIDE, 144
+        HORZGUIDE, 167
+        HORZGUIDE, 172
+        HORZGUIDE, 175
+        HORZGUIDE, 198
+        HORZGUIDE, 203
+        HORZGUIDE, 206
+        HORZGUIDE, 229
+        HORZGUIDE, 234
+        HORZGUIDE, 237
+        HORZGUIDE, 260
+        HORZGUIDE, 265
+    END
+
+    IDD_SCALE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_FILTER_PROPERTIES DLGINIT
+BEGIN
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 22, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6e65, 0x6474, 0x6de4, 
+0x6670, 0x0074, 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 14, 0
+0x7354, 0x6863, 0x6265, 0x7379, 0x6863, 0x6665, 0x0066, 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 22, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6e65, 0x6474, 0x6de4, 
+0x6670, 0x0074, 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 14, 0
+0x7354, 0x6863, 0x6265, 0x7379, 0x6863, 0x6665, 0x0066, 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    0
+END
+
+IDD_BOX_DESCRIPTION DLGINIT
+BEGIN
+    IDC_BD_COMBO_BOXTYPE, 0x403, 24, 0
+0x5328, 0x6174, 0x646e, 0x7261, 0x2964, 0x4c20, 0x7561, 0x7374, 0x7270, 
+0x6365, 0x6568, 0x0072, 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 22, 0
+0x6944, 0x6f70, 0x2d6c, 0x6c46, 0x63e4, 0x6568, 0x736e, 0x7274, 0x6861, 
+0x656c, 0x0072, 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 31, 0
+0x6944, 0x6f70, 0x2d6c, 0x6c46, 0x63e4, 0x6568, 0x736e, 0x7274, 0x6861, 
+0x656c, 0x2072, 0x4828, 0x6279, 0x6972, 0x2964, "\000" 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 25, 0
+0x7553, 0x7762, 0x6f6f, 0x6566, 0x2072, 0x6128, 0x746b, 0x7669, 0x702f, 
+0x7361, 0x6973, 0x2976, "\000" 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 17, 0
+0x755a, 0x6173, 0x7a74, 0x482d, 0x636f, 0x7468, 0x6ef6, 0x7265, "\000" 
+    0
+END
+
+IDD_SPL_VIEW DLGINIT
+BEGIN
+    IDC_SPL_COMBO_DIAGRAM, 0x403, 32, 0
+0x7246, 0x7165, 0x6575, 0x7a6e, 0x6167, 0x676e, 0x5320, 0x4c50, 0x4220, 
+0x7465, 0x6172, 0x2067, 0x2026, 0x6850, 0x7361, 0x0065, 
+    IDC_SPL_COMBO_DIAGRAM, 0x403, 28, 0
+0x4433, 0x5020, 0x6c6f, 0x7261, 0x6964, 0x6761, 0x6172, 0x6d6d, 0x5320, 
+0x4c50, 0x4220, 0x7465, 0x6172, 0x0067, 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2031, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2033, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2035, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 5, 0
+0x3031, 0x6d20, "\000" 
+    0
+END
+
+IDD_BOX_CABINET DLGINIT
+BEGIN
+    IDC_CD_LST_CHASSIS_CAB, 0x403, 1, 0
+"\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT_DETAIL MENU DISCARDABLE 
+BEGIN
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "A&nsicht kopieren",           IDM_VIEW_3D_COPY
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        POPUP "&Maßlinien"
+        BEGIN
+            MENUITEM "&Horizontal",                 IDM_VIEW_X_SCALE, GRAYED
+            MENUITEM "&Vertikal",                   IDM_VIEW_Y_SCALE, GRAYED
+            MENUITEM "&Tiefe",                      IDM_VIEW_Z_SCALE, GRAYED
+            MENUITEM "&Winkel",                     IDM_VIEW_PHI_SCALE
+            , GRAYED
+        END
+        POPUP "&Auflösung"
+        BEGIN
+            MENUITEM "&Sehr niedrig",               IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Niedrig",                    IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Mittel",                     IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&Hoch",                       IDM_VIEW_DETAIL_HIGH
+            MENUITEM "S&ehr hoch",                  IDM_VIEW_DETAIL_VERYHIGH
+        END
+        POPUP "&Projektion"
+        BEGIN
+            MENUITEM "P&arallel",                   IDM_VIEW_PARALLEL
+            MENUITEM "P&erspektivisch",             IDM_VIEW_PERSPECTIVE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Durchsichtig",               IDC_3D_PIC_SET_ALPHA_BLEND
+        MENUITEM "&Umdrehen",                   IDM_VIEW_BACK_SIDE
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        POPUP "&Maßlinien"
+        BEGIN
+            MENUITEM "&Horizontal...",              IDM_SET_X_SCALE, GRAYED
+            MENUITEM "&Vertikal...",                IDM_SET_Y_SCALE, GRAYED
+            MENUITEM "&Tiefe...",                   IDM_SET_Z_SCALE, GRAYED
+            MENUITEM "&Winkel...",                  IDM_SET_PHI_SCALE
+            , GRAYED
+        END
+        POPUP "&Farben"
+        BEGIN
+            MENUITEM "&Hintergrundfarbe...",        IDC_3D_PIC_SET_BKCOLOR
+            MENUITEM "&Lautsprechergehäuse...",     IDC_3D_PIC_SET_BOX_COLOR
+            MENUITEM "Lautsprecher&chassis...",     IDC_3D_PIC_SET_CHASSIS_COLOR
+
+            MENUITEM "&Maßlinien...",               IDC_3D_PIC_SET_SCALE_COLOR
+
+            MENUITEM "&Reflektierte Materialfarbe...", IDM_SET_SPECULAR_MAT
+            MENUITEM SEPARATOR
+            MENUITEM "Licht&quelle...",             IDM_SET_LIGHT_COLOR
+            MENUITEM "&Umgebungslicht...",          IDM_SET_AMBIENT_COLOR
+            MENUITEM "&Glanzeffekt-Licht...",       IDM_SET_SPECULAR_COLOR
+        END
+        MENUITEM "&Standard Lichtparameter",    IDM_SET_STANDARD_LIGHTPARAM
+    END
+END
+
+IDR_CONTEXT_BLENDFUNC MENU DISCARDABLE 
+BEGIN
+    POPUP "Blend Funktion"
+    BEGIN
+        MENUITEM "DstColor, SrcAlpha",          IDM_VIEW_BLEND1
+        MENUITEM "DstColor, 1 - SrcAlpha (Standard)", IDM_VIEW_BLEND2
+        MENUITEM "SrcAlpha, SrcColor",          IDM_VIEW_BLEND3
+        MENUITEM "1 - SrcAlpha, SrcColor",      IDM_VIEW_BLEND4
+        MENUITEM "1 - DstAlpha, SrcColor",      IDM_VIEW_BLEND5
+        MENUITEM "SrcAlpha, 1- SrcAlpha",       IDM_VIEW_BLEND6
+        MENUITEM "SrcColor, SrcAlpha",          IDM_VIEW_BLEND7
+        MENUITEM SEPARATOR
+        MENUITEM "Invertierte Zeichenreihenfolge", IDM_SET_INVERSE_DRAW_DIR
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDM_MENU_CANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BOX_DESCRIPTION     "Boxeneditor :  Lautsprecherbeschreibung"
+    IDS_BOX_BASE_DATA       "Boxeneditor :  Basisdaten des Lautsprechers"
+    IDS_BOX_CROSS_OVER      "Boxeneditor :  Frequenzweiche"
+    IDS_BOX_CHASSIS_DATA    "Boxeneditor :  Daten der Lautsprecherchassis"
+    IDS_BOX_CABINET         "Boxeneditor :  Lautsprechergehäuse und Chassispositionen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROPSHCAPTION       "CARA  Boxeneditor"
+    IDS_FORMAT_MIN_MAX_INT  "Unzulässiger Wertebereich:\nGeben Sie Werte zwischen\n %d und %d ein."
+    IDS_FORMAT_MIN_MAX_DOUBLE 
+                            "Unzulässiger Wertebereich:\nGeben Sie Werte zwischen\n %s und %s ein."
+    IDS_EQUAL_VALUES        "Doppelte Werte gefunden !\nDie eingegebenen Werte\n müssen verschieden sein !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHANGE_FILTER       "Sollen die Filterparameter des 2. Tieftöners an die\ngeänderte Übergangsfrequenz angepasst werden ?"
+    IDS_CLOSE_BOXEDITOR     "Möchten Sie den Boxeneditor jetzt beenden ?"
+    IDS_SAVE_CONSISTENT_DATA 
+                            "Die eingebenen Daten sind vollständig aber geändert !\n\nMöchten Sie diese Änderungen speichern ?"
+    IDS_NONCONSISTENT_DATA  "Die bisher eingebenen Daten sind unvollständig !\n\nMöchten Sie diesen Datensatz trotzdem speichern ?"
+    IDS_FORMAT_NO_NUMBER    "Unzulässige Zeichen !\nGeben Sie eine Zahl ein."
+    IDS_CABINET_VIEW        "Gehäuse"
+    IDS_STACK_CHILD_WNDS    "Fenster ü&berlappend"
+    IDS_CLOSE_CHILD_WNDS    "Fenster &schließen"
+    IDS_ERROR_LOW_FREQUENCY "Wert liegt außerhalb des Übertragungsbereichs: zu klein"
+    IDS_ERROR_HIGH_FREQUENCY 
+                            "Wert liegt außerhalb des Übertragungsbereichs: zu groß"
+    IDS_CHANGE_LSTYPE       "Wenn Sie den Boxen-Typ ändern, werden die bisher\neingegebenen Daten auf den folgenden Seiten gelöscht !\n\nMöchten Sie den Boxen-Typ trotzdem ändern ?"
+    IDS_ERROR_FILETYPE      "BOX Datei: Falsches Dateiformat (BOX) !"
+    IDS_ERROR_FILECRC       "BOX Datei: Prüfsumme falsch (CRC) !"
+    IDS_ERROR_FILEREAD      "BOX Datei: Lesefehler in der Datei !"
+    IDS_ERROR_FILEWRITE     "BOX Datei: Schreibfehler in der Datei !"
+    IDS_STACK_CHILDV_WNDS   "Fenster &nebeneinander"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SAVE                "Speichern"
+    IDS_FILTERBOX           "Meine Boxen"
+    IDS_2DVCAPTION          "%s : Schalldruckpegel 0°, für %d m Abstand und 1 Watt (Box u. Einzelchassis)"
+    IDS_2DVCAPTION2         "%s : Schalldruckphase 0°, für %d m Abstand (Box u. Einzelchassis)"
+    IDS_BSD                 "Komprimiere CARA-Schalldruckdaten"
+    IDS_BGD                 "Richtcharakteristik von : "
+    IDS_BGD_TIME            "Restdauer: %d:%02d min"
+    IDS_BDDEXIST            "Diese CARA-SPL-Datendatei (Dateierweiterung: BDD)\nexistiert schon. Beim Abspeichern werden die Daten\ngelöscht. Soll dennoch gespeichert werden ?"
+    IDS_POLARVIEW_HEADLINE  "3D-Richtcharakteristik der Lautsprecherbox ""%s"" in %d m Enfernung"
+    IDS_BDD_ORGFILE         "Diese Original-CARA-SPL-Datendatei\nkann nicht überschrieben werden.\nGeben Sie einen anderen Dateinamen ein !"
+    IDS_EXTRA_TEXT          "Innenvolumen : %.2f\n(Wanddicke : %.1f mm)\nAnzahl der Lautsprecher %d :\nPassive  Elemente : %d\nTieftöner        : %d (%.3f)\nMitteltöner (1) : %d (%.3f)\nMitteltöner (2) : %d (%.3f)\nMitteltöner (3) : %d (%.3f)\nHochtöner      : %d (%.3f)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BDD_DELETED         "Die BDD-Datei %s wurde gelöscht !"
+    IDS_SUB_CABINET         "Gehäusesegment %d"
+    IDS_ORTHOGONAL          "Parallel"
+    IDS_PERSPECTIVE         "Perspektive"
+    IDS_BB                  "BB"
+    IDS_PM                  "PM"
+    IDS_BR                  "BR"
+    IDS_TL                  "TL"
+    IDS_TT1                 "TT1"
+    IDS_TT2                 "TT2"
+    IDS_MT1                 "MT1"
+    IDS_MT2                 "MT2"
+    IDS_MT3                 "MT3"
+    IDS_HT                  "HT"
+    IDS_BOX_FILTER          "Boxendaten (*.BOX)\n*.BOX\nAlle Dateien (*.*)\n*.*\n\n"
+    IDS_BDD_FILTER          "CARA-Box (*.BDD)\n*.BDD\n\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_WND_FREQUENCY_RESP 
+                            "Zeigt den Frequenzgang der Übertragungsfunktion (rot)\nund der Phase (blau) des Filters an."
+    IDC_BD_BTN_NEW          "Erstellen einer neuen Lautsprecherbox"
+    IDC_BD_BTN_OPEN         "Einladen einer vorhandenen selbsterstellten \nBoxendaten-Datei mit Hilfe des für Windows®-\nProgramme üblichen Auswahl-Dialogs"
+    IDC_BD_TXT_FILENAME     "\tDateiname: Unter diesem Namen ist der Boxendatensatz\n  im CARA-Verzeichnis ...\\LS_BOX abgespeichert.\n\tBezeichnung: Eingabe einer beliebigen Kurzbeschreibung.\n\tMarkenname: Eingabe des Firmennamens des betr. Laut-\n sprecherherstellers."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BB_TXT_FR           "Der \tSchalldruck-Frequenzgang zeigt im Bereich der unteren \nGrenzfrequenz (z.B. um 40 Hz) eine aufsteigende Flanke, die \nmit ansteigender Frequenz mehr oder weniger gleichmäßig in\nden linearen (horizontalen) Bereich übergeht. Dieser Übergang\nlässt sich üblicherweise innerhalb dreier Kategorien klassifizieren:\n - sehr 'sanfter' Übergang (\tstark \tgedämpft), \n - 'direkter' Übergang (\tStandard) oder\n - Übergang mit 'Überschwinger' (\twenig \tgedämpft).\n\nDen Schalldruckfrequenzgang finden Sie am besten in den Test-\nberichten diverser Fachzeitschriften, ansonsten fordern Sie vom\nbetr. Hersteller diese Daten an."
+    IDC_BB_TXT_IMP_BASS     "Die \tImpedanzkurve einer Lautsprecherbox bis ca. 200 Hz\nbeschreibt implizit eine Reihe technischer Daten der in die\nBox eingebauten Tieftöner.\n\nFür \tGeschlossene \tBoxen zeigt die Impedanzkurve ein i.a.\ndeutlich ausgeprägtes Maximum. Der zu dem Maximum ge-\nhörende Frequenzwert in Hz ist einzugeben. \nFür \tBassreflex- oder \tTransmission-Line Boxen oder für\nBoxen mit \tPassivmembranen zeigt die Impedanzkurve\nzwei getrennte Maxima und ein dazwischenliegendes Mini-\nmum. Die drei hierzu gehörenden Frequenzwerte in Hz sind\ngeordnet nach aufsteigender Frequenz einzugeben.\n\nDie Impedanzkurve einer Box finden Sie am besten in den \nTestberichten diverser Fachzeitschriften, ansonsten fordern \nSie vom betr. Hersteller diese Daten an."
+    IDC_BB_TXT_BASE         "Die \tBasisdaten einer Lautsprecherbox betreffen die\n\tNennimpedanz (z.B. 4 Ohm), die \tEmpfindlichkeit\n(z.B. 87 dB/W/m) und den \tÜbertragungsbereich\n(z.B. 35 ... 22000 Hz).\n\nDie Daten werden aus den Herstellerangaben entnommen\n(Typenschild oder beiliegendes technisches Datenblatt)."
+    IDC_BB_TXT_TYPE         "Vier verschiedene \tKonstruktionsprinzipien werden\nunterstützt:\n - \tBassreflexboxen,\n - \tGeschlossene \tBoxen,\n - \tTransmission-Line \tBoxen oder\n - \tBoxen mit \tPassivmembranen."
+    IDC_XO_GRP_2_W          "Die \tFrequenzweiche einer Lautsprecherbox teilt den ge- \nsamten Übertragungsbereich (z.B. von 20 bis 20000 Hz) in \nmehrere Unterbereiche (Wege) auf. Für jeden dieser Wege \nsind jeweils ein (oder mehrere parallel arbeitende) Spezial- \nchassis zuständig (z.B. Tieftöner TT, Mitteltöner MT oder \nHochtöner HT).\nZ.B. führt der TT-Weg einer Frequenzweiche den Tieftönern\nnur den tieffrequenten Anteil des Musiksignals zu.\nIn diesem Boxeneditor werden bis zu max 5 Wege unterstützt."
+    IDC_XO_R_1_W            "Ein \t1-Weg-Lautspecher hat keine Frequenzweiche.\nIn Sonderfällen (z.B. aktive Subwoofer) können Sie\nzusätzliche (externe) Hoch- und Tiefpassfilter definieren.\nFür diese Filter können auch mehrere Grenzfrequenzen\nfestgelegt werden."
+    IDC_XO_R_2_W            "Eine \t2-Wege-Frequenzweiche wird definiert durch eine \nÜbergangsfrequenz zwischen dem (oder den) Tieftöner(n) \nund dem (i.a. nur einen) Hochtöner. \nDiese Übergangsfrequenz entnehmen Sie dem technischen \nDatenblatt des Herstellers Ihrer Box."
+    IDC_XO_R_2_3_W          "Eine \t2(3)-Wege-Frequenzweiche ist aus akustischer Sicht\neine 2-Wege-Frequenzweiche, die den Tief- vom Hochtonanteil\ntrennt. Enthält ein solcher '2-Wege-Lautsprecher' jedoch zwei\n(oder mehr) Tieftonchassis, so wird ggfs. einer der beiden TT\nschon vor der eigentlichen Übergangsfrequenz ausgekoppelt,\nmeist der TT, dessen Einbauposition im Gehäuse näher zum\nFußboden liegt (TT2).\nFür tiefe Frequenzen spielen beide TT parallel, der Bereich der\nmittleren Frequenzen wird jedoch mehr und mehr von dem nicht\nausgekoppelten TT1 alleine übernommen.\nIn den technischen Daten zu Ihrer Box wird dies häufig durch\neine zweite in Klammern stehende Übergangsfrequenz kenntlich\ngemacht."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_XO_R_3_W            "Eine \t3-Wege-Frequenzweiche wird definiert durch zwei \nÜbergangsfrequenzen zwischen dem (oder den) Tieftöner(n) \nund dem (oder den) Mitteltöner(n) und zwischen dem (oder \nden) Mitteltöner(n) und dem (i.a. nur einen) Hochtöner. \nDiese Übergangsfrequenz entnehmen Sie dem technischen \nDatenblatt des Herstellers Ihrer Box."
+    IDC_XO_R_3_4_W          "Eine \t3(4)-Wege-Frequenzweiche ist aus akustischer Sicht\neine 3-Wege-Frequenzweiche, die den Tief- vom Mitteltonanteil\nund diesen vom Hochtonanteil trennt. Enthält dieser '3-Wege-\nLautsprecher' jedoch zwei (oder mehr) Tieftonchassis, so wird\nggfs. einer der beiden TT schon vor der eigentlichen Übergangs-\nfrequenz zum Mitteltöner ausgekoppelt, meist der TT, dessen Ein-\nbauposition im Gehäuse näher zum Fußboden liegt (TT2).\nFür tiefe Frequenzen spielen beide TT parallel, der Bereich hin zu\nden mittleren Frequenzen wird jedoch mehr und mehr von dem\nnicht ausgekoppelten TT1 alleine übernommen.\nIn den technischen Daten zu Ihrer Box wird dies häufig durch eine\nweitere in Klammern stehende Übergangsfrequenz kenntlich ge-\nmacht."
+    IDC_XO_R_4_W            "Eine \t4-Wege-Frequenzweiche wird definiert durch drei\nÜbergangsfrequenzen zwischen dem(den) Tieftöner(n)\nund dem(den) unteren Mitteltöner(n), zwischen dem(den)\nunteren Mitteltöner(n) und dem (i.a. nur einen) oberen \nMitteltöner und zwischen dem oberen Mitteltöner und dem \nHochtöner. \nDiese Übergangsfrequenz entnehmen Sie dem technischen\nDatenblatt des Herstellers Ihrer Box."
+    IDC_XO_R_5_W            "Eine \t5-Wege-Frequenzweiche wird definiert durch vier\nÜbergangsfrequenzen zwischen dem(den) Tieftöner(n)\nund dem(den) Tief-Mitteltöner(n), zwischen dem(den)\nTief-Mitteltöner(n) und dem (i.a. nur einen) 'eigentlichen'\nMitteltöner, zwischen dem Mitteltöner und dem Mittel-Hoch-\ntöner und zwischen dem Mittel-Hochtöner und dem Hoch-\ntöner.\nDiese Übergangsfrequenz entnehmen Sie dem technischen\nDatenblatt des Herstellers Ihrer Box."
+    IDC_XO_BTN_2W_HT        "Hier lassen sich detailliertere Festlegungen zur Frequenz-\nweiche spezifizieren (Filtercharakteristik, Filterordnung\nund Dämpfung).\nLesen Sie hierzu auch in den Hilfethemen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_XO_CK_INIT_STD_VALUES 
+                            "Aktiviert die Vorgabe von Standardfrequenzen, die\nerfahrungsgemäß für 2 bis 5-Wege Boxen sinnvoll sind."
+    IDC_XO_BTN_RESET_FILTER "Setzt die Filtereinstellungen (Filtercharakteristik, Ordnung\nund Dämpfung)  auf die Standardwerte zurück"
+    IDC_XO_CK_SYMBOLIC_BTN  "Bei Aktivierung werden auf den Filterschaltflächen Symbole angezeigt."
+    IDC_CH_GRP_TYPE_COUNT   "Es werden folgende \tLautsprecher-Chassistypen definiert:\n \tBR, \tTL, \tPM:\n    Bassreflexrohre, Transmission-Lines oder Passivmembranen\n \tTT1/2:\n    Tieftöner, TT2 in der Frequenzweiche früher als TT1 ausge-\n    koppelt (s.a. Hinweise zu Frequenzweiche)\n \tMT1/2/3:\n    Tief-Mitteltöner, Mitteltöner, Mittel-Hochtöner\n \tHT:\n    Hochtöner\n \tBB:\n    Breitbandchassis für 1-Weg-Lautsprecher\n\nIn den Eingabefeldern werden die Anzahl der Chassis des betr.\nTyps eintragen."
+    IDC_CH_GRP_CHASSIS_DATA "Hier können Sie die Daten der einzelnen Chassis definieren"
+    IDC_CH_TXT_TYPE         "Typ ( \tBR, \tTL, \tPM, \tTT1/2, \tMT1/2/3, \tHT, \tBB )\ndes ausgewählten Lautsprecherchassis."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_TXT_DESCRIPTION  "Jedem Lautsprecherchassis kann ein kurzer\nbeschreibender Text zugeordnet werden."
+    IDC_CH_CHK_POLARITY     "Ändert die Polung des Chassis auf \t'Minus',\nz.B. für nach hinten abstrahlende Chassis\nin Dipolschaltung oder um den Übergang\nzwischen zwei Chassis z.B. von einem Mit-\nteltöner zum Hochtöner zu optimieren."
+    IDC_CH_R_M_FORM0        "Als \tMembranformen kann zwischen Konus, Kalotte,\nKugel, Dipol oder Flachmembranen gewählt werden.\n\nBassreflexrohre und TLs haben stets 'Flachmembranen'.\nFür Tieftöner oder Passivmembranen wird 'Kalotte' und\n'Dipol' als Membranform ausgeschlossen. Nur Hochtöner\nkönnen eine kugelförmige Membran haben."
+    IDC_CH_TXT_DIAMETER     "Für die Membrantypen Konus, Kalotte, Kugel oder\nFlachmembran (rund) wird hier der \teffektive\n\tMembrandurchmesser in mm eingegeben,\nsonst \tLänge und \tBreite der Rechteckmembran.\nFür den effektiven Membrandurchmesser ist\neine an dem Membranrand sich anschließende\nSicke zu berücksichtigen.\nGemessen wird von Sickenmitte zu Sickenmitte."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_GRP_MEMBRANE_FORM 
+                            "Die hier abgefragten \tChassisdaten betreffen die \tMembranform\nund die \tMembranabmessungen.\nAls Membranformen besteht die Auswahl zwischen Konus, Kalotte,\nKugel, Dipol oder Flachmembranen.\n\nBassreflexrohre und TLs haben stets 'Flachmembranen'.\nFür Tieftöner oder Passivmembranen werden 'Kalotte' und 'Dipol' als\nMembranform ausgeschlossen. Nur Hochtöner können eine kugel-\nförmige Membran haben."
+    IDC_CD_LST_CHASSIS_POS  "Auswahl der Gehäusewand, in welche das\nbetr. Chassis montiert werden soll.\nDie Angaben 'Links' und 'Rechts' beziehen sich\nstets auf die Blickrichtung von außen auf die\nGehäusewand."
+    IDC_CD_LST_CHASSIS_CAB  "Auswahl des Gehäusesegments, in dem\ndas betr. Chassis eingebaut werden soll."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_LST_LS           "Hier wählen Sie das Chassis\nzur Dateneingabe aus."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_EDT_WIDTH1       "Ändert die \tBreite des Gehäuses \toben \tbzw. \thinten \tlinks.\nGeben Sie eine positive Zahl ein, um die Breite zu verringern.\nGeben Sie eine negative Zahl ein, um die Breite zu vergrößern.\n\n(Eingabe in mm, Für andere Maßeinheiten drücken Sie F10)"
+    IDC_CD_EDT_DEPTH1       "Ändert die \tTiefe des Gehäuses \toben \tvorne.\nGeben Sie eine positive Zahl ein, um die Tiefe zu verringern.\nGeben Sie eine negative Zahl ein, um die Tiefe zu vergrößern.\n\n(Eingabe in mm, Für andere Maßeinheiten drücken Sie F10)"
+    IDC_CD_EDT_WIDTH2       "Ändert die \tBreite des Gehäuses \toben \tbzw. \thinten \trechts.\nGeben Sie eine positive Zahl ein, um die Breite zu verringern.\nGeben Sie eine negative Zahl ein, um die Breite zu vergrößern.\n\n(Eingabe in mm, Für andere Maßeinheiten drücken Sie F10)"
+    IDC_CD_EDT_DEPTH2       "Ändert die \tTiefe des Gehäuses \toben \thinten.\nGeben Sie eine positive Zahl ein, um die Tiefe zu verringern.\nGeben Sie eine negative Zahl ein, um die Tiefe zu vergrößern.\n\n(Eingabe in mm, Für andere Maßeinheiten drücken Sie F10)"
+    IDC_CD_PICTURE          "\tBild \t1 zeigt die \tBemaßung des Lautsprecher-\ngehäuses (bzw. Gehäusesegments) in einer\n3-dimensionalen Ansicht.\n \tH : Höhe des Gehäuse(segment)s.\n \tB : Grundbreite des Gehäuse(segment)s.\n \tT : Grundtiefe des Gehäuse(segment)s.\n\n\tBild \t2 zeigt das Gehäuse(segment) von \tvorne\r,\n\tBild \t3 von der \trechten \tSeite\r.\n\nIn diesen Bildern wird beschrieben, wie die Para-\nmeter \tB1, \tB2, \tT1 und \tT2 die Form und Lage der\nGehäuseoberseite beeinflussen.\n\nDie \tMittellinie einer Seitenwand (bezogen auf\ndie Gehäuseoberkante) wird auf der Positions-\nansicht gestrichelt dargestellt."
+    IDC_CD_EDT_HEIGHT       "Das \tLautsprechergehäuse hat eine\nQuader- oder Pyramidenform. Das Ge-\nhäuse kann auch aus mehreren Gehäuse-\nsegmenten bestehen.\nDie \tHöhe, \tBreite und \tTiefe beziehen\nsich auf die Außenabmessungen des\nGehäuse(segment)s.\n\n(Eingabe in mm, Für andere Maßeinheiten\ndrücken Sie F10)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_GRP_POSINCABINET "In den untenstehenden drei Auswahllisten werden das \tGehäusesegment,\ndie \tGehäusewand und das \tChassis, das dort eingebaut werden soll, aus-\ngewählt.\n\nDie Angaben 'Links' und 'Rechts' in der Wandauswahlliste beziehen sich auf\ndie Blickrichtung von außen auf die Gehäusefront.\nWeiterhin sind die \tAbstände des Chassismittelpunkts zur sog. \tBezugskante\nsowie zur \tMittellinie einzutragen.\nDie Bezugskante liegt für die Gehäuseoberseite vorne, ansonsten unten; im\nZeichenfeld 'Gehäusewand' ist sie durch einen blauen Pfeil gekennzeichnet.\n\nFür den Abstand zur Mittellinie können positive (rechts von M) oder negative\nWerte (links von M) eingegeben werden.\nMit den Tasten \t'Zentriert' wird das Chassis horizontal bzw. vertikal auf der\nbetr. Gehäusewand zentriert."
+    IDC_CD_EDT_POS_HEIGHT   "Hier können Sie den \tAbstand des\nChassismittelpunkts (in mm) von\nder Bezugskante (blauer Pfeil) dieser\nGehäusewand genau einstellen."
+    IDC_CD_R_POS_M          "Zentriert das Chassis auf der Mittellinie."
+    IDC_CD_POSITION_VIEW    "Zeigt die gewählte Seitenwand (Draufsicht) der\nLautsprecherbox mit den Positionen der Laut-\nsprecherchassis an.\nDie einzelnen Chassis bzw. BR, TL oder PM\nkönnen Sie mit der Maus durch ""drag and drop""\nverschieben."
+    IDC_CD_LST_LS           "Wählen Sie das Chassis aus,\ndas Sie positionieren möchten."
+    IDC_CD_BTN_GRAPH        "3D-Darstellung der aktuell\ndefinierten Lautsprecherbox."
+    IDC_CD_BTN_CALC         "Akustische Berechnungen für die\naktuell definierte Lautsprecherbox:\nSchalldruckfrequenzgang für 1, 3,..m, 0°\noder 3D-Darstellung der Frequenz-\nabhängigkeit der Richtcharakteristik."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_EDT_POS_M        "Hier können Sie den \tAbstand  des Chassismittelpunkts (in mm)\nvon der Mittellinie dieser Gehäusewand genau einstellen.\nFür die Lage links von der Mittellinie sind negative Werte einzu-\ngeben, sonst 0 oder positive Werte."
+    IDC_CD_TXT_BOX_VOLUME   "Gehäusesegment [mm]: %s l"
+    IDC_CD_R_POS_MH         "Zentriert das Chassis auf der halber ""Höhe"" der Schallwand."
+    IDC_BB_CK_CALC_IMPEDANCE_VALUES 
+                            "Aktiviert die \tautomatische \tBerechnung der charakteristischen\nFrequenzwerte für den Impedanzverlauf aus der unteren Grenz-\nfrequenz des Übertragungsbereichs."
+    IDC_CD_PICTURE1         "\tBild \t1 zeigt die \tBemaßung des Lautsprecher-\ngehäuses (bzw. Gehäusesegments) in einer\n3-dimensionalen Ansicht.\n \tH : Höhe des Gehäuse(segment)s.\n \tB : Grundbreite des Gehäuse(segment)s.\n \tT : Grundtiefe des Gehäuse(segment)s.\n\n\tBild \t2 zeigt das Gehäuse(segment) von \toben\r,\n\tBild \t3 von der \trechten \tSeite\r.\n\nIn diesen Bildern wird beschrieben, wie die Para-\nmeter \tB1, \tB2, \tT1 und \tT2 die Form und Lage der\nGehäuseoberseite beeinflussen.\n\nDie \tMittellinie einer Seitenwand (bezogen auf\ndie Gehäuseoberkante) wird auf der Positions-\nansicht gestrichelt dargestellt."
+    IDC_CD_GRP_WIDTH_CTRL   "Hier können Sie das Gehäuse bzw. Gehäuse-\nsegment Ihres Lautsprechers definieren."
+    IDC_CD_R_SET_WIDTH1     "In dieser Einstellung wird die Breite der\nGehäuseoberseite mit B1 bzw. B2 variiert."
+    IDC_CD_R_SET_WIDTH2     "In dieser Einstellung wird die Breite der\nRückwand mit B1 bzw. B2 variiert."
+    IDC_CD_CK_ZERO_DEG_REF_WALL 
+                            "Die \tHauptschallwand ist üblicherweise die Gehäusewand auf der\ndie Lautsprecherchassis eingebaut sind. Die Hauptschallwand wird\nals Bezugswand für die Definition der (horizontalen) \t0°-Richtung\nfür die Berechnung der Schallabstrahlung des Lautsprecher genom-\nmen.\n\nWird diese Feld aktiviert, wird die momentan ausgewählte Gehäuse-\nwand zur Hauptschallwand."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_GRP_HP       "Hier können Sie die Parameter für\ndas Hochpassfilter einstellen."
+    IDC_FILTER_TXT_HP_CHARACTERISTIC 
+                            "Stellen Sie die Charakteristik des Filters ein:\n \tButterworth : Q = 0.7,\n \tButterworth : Q variabel,\n \tBessel,\n \tTschebyscheff,\n \tLinkwitz-Riley."
+    IDC_FILTER_TXT_HP_QF    "Der \tQ-Faktor bestimmt die Dämpfung des Filters."
+    IDC_FILTER_TXT_HP_ORDER "Die \tOrdnung eines Filters bestimmt die Steilheit\nmit der die Amplitude gedämpft wird:\n 1.Ordnung : 6 dB / Oktave\n 2.Ordnung : 12 dB / Oktave\n ..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_TXT_HP_LOW_FRQ "Untere Grenzfrequenz des Hochpassfilters."
+    IDC_FILTER_GRP_TP       "Hier können Sie die Parameter für\ndas Tiefpassfilter einstellen."
+    IDC_FILTER_EDT_TP_UPP_FRQ "Obere Grenzfrequenz des Tiefpassfilters."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BD_COMBO_BOXTYPE    "Hier können Sie den Typ der Lautsprecherbox auswählen:\n - (Standard) Lautsprecher\n - Dipol-Flächenstrahler\n - Dipol-Flächenstrahler (Hybrid)\n - Subwoofer (aktiv/passiv)\n - Zusatz-Hochtöner"
+    IDC_BD_BTN_SAVE_AS      "Abspeichern des aktuell spezifizierten Boxendatensatzes\nunter einem anderen Namen mit Hilfe des für Windows®-\nProgramme üblichen Auswahl-Dialogs."
+    IDC_BD_EDT_COMMENT      "Hier können Sie einen Kommentar für Ihre Box eingeben."
+    IDC_BD_TXT_FILE_VERSION "Dieses Feld zeigt die \tCARA \tVersion mit der entsprechenden\nAusbaustufe des Boxeneditors an, der diesen Datensatz be-\narbeiten kann.\n\nDie fortschreitende Entwicklung des Boxeneditors ermöglicht\nes Ihnen, immer komplexere Boxen zu definieren.\nUm eine Abwärtskompatibilität zu älteren CARA-Versionen zu\nerreichen, wurde das Dateiformat davon abhängig gemacht,\nwie komplex der Aufbau Ihrer Box ist.\nDadurch können Besitzer älterer CARA-Versionen neu erstellte\n'*.BOX'-Dateien mit geringerer Komplexität ebenfalls bearbeiten."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STACK_CHILDH_WNDS   "Fenster &untereinander"
+    IDS_CREATE_BDD_DATA     "Der Boxendatensatz ist noch nicht vollständig berechnet !\n\nSoll dieser jetzt berechnet werden ?"
+    IDS_REQU_RESETFILTER    "Alle Filtereinstellungen werden für die Kompatibilität zu CARA 1.1\nauf Tschebyscheff-Charakteristik mit 3. Ordnung zurückgesetzt.\n\nMöchten Sie die Filtereinstellungen zurücksetzen ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WIZBACK              "Überprüft die Eingaben auf dieser Eingabeseite\nund schaltet zur vorhergehenden Seite um."
+    ID_WIZNEXT              "Überprüft die Eingaben auf dieser Eingabeseite\nund schaltet zur nächsten Seite um."
+    ID_WIZFINISH            "Überprüft die Eingaben von allen Eingabeseiten und berechnet\ndie CARA-Schalldruckdaten für Ihren Lautsprecher."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_WRONGINPUT    "Dateneingabe unvollständig !"
+    IDS_ERROR_FILE_CREATION "Fehler : Die Datei konnte nicht erstellt werden !\nBenutzen Sie die Taste ""Speichern unter"" auf\nder ersten Seite."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_GRP_CABINET_PARAM   "Eigenschaften des Gehäusesegmentes."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BTN_OK              "Schließt das Dialogfeld und\nübernimmt alle Änderungen."
+    IDS_BTN_CANCEL          "Schließt das Dialogfeld, ohne\ndie Änderungen zu übernehmen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NO_WALL             "Keine Wand ausgewählt"
+    IDS_TOP                 "Oben"
+    IDS_FRONT               "Vorne"
+    IDS_REAR                "Hinten"
+    IDS_LEFT                "Links"
+    IDS_RIGHT               "Rechts"
+    IDS_BOTTOM              "Unten"
+    IDS_CANNOT_CONTAIN_CHASSIS "Kann kein Chassis enthalten"
+    IDS_R_MIDDLE            "Absoluter Winkel"
+    IDS_SCALE_ANGLE_HEADLINE "Differenzwinkel der Gehäusesegmente"
+    IDS_LIGHTING            "Beleuchtung"
+    IDS_LIGHT_COLOR         "Farbe des Lichtes der Lichtquelle"
+    IDS_LIGHT_COLOR_D       "Farbe des Umgebungslichtes"
+    IDS_LIGHT_COLOR_S       "Farbe des reflektierten Lichtes"
+    IDS_BK_COLOR            "Farbe des Hintergrundes"
+    IDS_BOX_COLOR           "Farbe der Gehäusesegmente"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHASSIS_COLOR       "Farbe der Lautsprechermembrane"
+    IDS_SELECTION_COLOR     "Farbe der Maßlinien"
+    IDS_CABINET_LIST_ITEM1  "Basis-Segment"
+    IDS_DELETE_CAB          "Möchten Sie das Gehäusesegment ""%s"" löschen ?"
+    IDS_FOOT_OF             "Fuß %d von "
+    IDS_CHANGE_CABINET_OF_CHASSIS 
+                            "Möchten Sie das Chassis auf ein anderes Gehäusesegment setzen ?"
+    IDS_CHANGE_WALL_OF_CHASSIS 
+                            "Möchten Sie das Chassis auf eine andere Gehäusewand setzen ?"
+    IDS_SPEC_MAT_COLOR      "Vom Material reflektierte Farbe"
+    IDS_TOTAL_CABINET       "Gesamtansicht, "
+    IDS_UNIT_MOVE           "[mm]"
+    IDS_UNIT_TURN           "[Grad]"
+    IDS_UNIT_ZOOM           "Faktor"
+    IDS_UNIT_LIGHT_DIR      "[Grad, Grad, m]"
+    IDS_UNIT_LIGHT_INTENS   "[%]"
+    IDS_UNIT_LIGHT_SOURCE   "[%, Grad]"
+    IDS_UNIT_REPRESENTATION "[%]"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_PIC_TRAN_X       "Schaltet die \thorizontale \tMaßlinie zwischen zwei\nGehäusesegmenten ein oder aus und ermöglicht eine\nhorizontale Verschiebung des ausgewählten Gehäuse-\nsegments.\n\nMit der rechten Maustaste stellen Sie die Eigenschaften\nder Maßlinie ein.\nIn der 3D Ansicht können Sie das Objekt mit der linken\nMaustaste verschieben."
+    IDC_3D_PIC_TRAN_Y       "Schaltet die \tvertikale \tMaßlinie zwischen zwei\nGehäusesegmenten ein oder aus und ermöglicht eine\nvertikale Verschiebung des ausgewählten Gehäuse-\nsegments.\n\nMit der rechten Maustaste stellen Sie die Eigenschaften\nder Maßlinie ein.\nIn der 3D Ansicht können Sie das Objekt mit der linken\nMaustaste verschieben."
+    IDC_3D_PIC_TRAN_Z       "Schaltet die \tTiefen-Maßlinie zwischen zwei Gehäuse-\nsegmenten ein oder aus und ermöglicht eine Verschiebung\ndes ausgewählten Gehäusesegments nach vorne oder\nhinten.\n\nMit der rechten Maustaste stellen Sie die Eigenschaften der\nMaßlinie ein.\nIn der 3D Ansicht können Sie das Objekt mit der linken Maus-\ntaste verschieben."
+    IDC_3D_PIC_TURN_PHI     "\tDreht das Objekt horizontal um seine vertkale Mittelachse.\nIn der \t3D \tAnsicht können Sie das Objekt mit der linken\nMaustaste drehen."
+    IDC_3D_PIC_TURN_THETA   "\tKippt das Gehäuse in 15 Grad Schritten um seine\nhorizontale Mittelachse vor und zurück.\nIn der \t3D \tAnsicht können Sie das Objekt mit der\nlinken Maustaste drehen."
+    IDC_3D_PIC_ZOOM         "In der \t3D \tAnsicht können Sie die Vergrößerung des\nGehäuses mit der linken Maustaste ändern."
+    IDC_3D_PIC_ZOOM_DUMMY1  "In der \t3D \tAnsicht können Sie die Größe des Darstellungsvolumens\nin der X-Y-Richtung mit der rechten Maustaste ändern."
+    IDC_3D_PIC_ZOOM_DUMMY2  "Zeigt die Größe des Darstellungsvolumens in der Z-Richtung ."
+    IDC_3D_PIC_LITE_PHI     "Dreht die Lichtquelle zur Beleuchtung des Lautsprechers\nin 15 Grad Schritten um die vertikale Achse.\nIn der \t3D \tAnsicht können Sie die Lichtquelle mit der linken\nMaustaste drehen."
+    IDC_3D_PIC_LITE_THETA   "Dreht die Lichtquelle zur Beleuchtung des Lautsprechers\nin 15 Grad Schritten um die horizontale Achse.\nIn der \t3D \tAnsicht können Sie die Lichtquelle mit der linken\nMaustaste drehen."
+    IDC_3D_PIC_LITE_DIST    "In der \t3D \tAnsicht können Sie den Abstand der Lichtquelle\nzum Objekt mit der rechten Maustaste ändern.\n\nBei einem Abstand von 0m sendet die Lichtquelle parallele\nLichtstrahlen aus. Bei größerem Abstand hat die Lichtquelle\ndie Eigenschaften einer Taschenlampe mit einem einstellbaren\nÖffnungswinkel und einer eintellbaren Fokussierung."
+    IDC_3D_PIC_LIGHT_RED    "In dem Eingabefeld wird die Intensität des roten Licht-\nanteils der Lichtquelle angezeigt.\nKlicken Sie mit der linken Maustaste, um die Farbe des\nLichtes der Lichtquelle einzustellen.\nIn der \t3D \tAnsicht können Sie die Lichtintensität mit\nder linken Maustaste ändern."
+    IDC_3D_PIC_LIGHT_GREEN  "In dem Eingabefeld wird die Intensität des grünen Licht-\nanteils der Lichtquelle angezeigt.\nKlicken Sie mit der linken Maustaste, um die Farbe des\nUmgebungslichtes einzustellen.\nIn der \t3D \tAnsicht können Sie die Lichtintensität mit der\nlinken Maustaste ändern."
+    IDC_3D_PIC_LIGHT_BLUE   "In dem Eingabefeld wird die Intensität des blauen\nLichtanteils der Lichtquelle angezeigt.\nKlicken Sie mit der linken Maustaste, um die Farbe\ndes vom Objekt reflektierten Lichtes einzustellen.\nIn der \t3D \tAnsicht können Sie die Lichtintensität\nmit der linken Maustaste ändern."
+    IDC_3D_PIC_LIGHT_CUT_OFF 
+                            "In der \t3D \tAnsicht können Sie den Öffnungswinkel der\nLichtquelle mit der rechten Maustaste ändern."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_PIC_LIGHT_EXP    "In der \t3D \tAnsicht können Sie die  Focussierung der\nLichtquelle mit der linken Maustaste ändern."
+    IDC_3D_PIC_LIGHT_ON_OFF "Schaltet die Beleuchtung  ein oder aus."
+    IDC_3D_PIC_SET_PROJECTION 
+                            "Ändert die Projektion der 3D Ansicht.\nDie perspektivische Darstellung zeigt eine realistische\nVerzerrung des 3D Objektes.\nDie parallele Darstellung eignet sich besser zur\nEinstellung der Positionen der Gehäusesegmente\nzueinander."
+    IDC_3D_PIC_SET_BKCOLOR  "Ändert die Hintergrundfarbe der 3D Ansicht"
+    IDC_3D_PIC_SET_ALPHA_BLEND 
+                            "Läßt das 3D-Objekt durchsichtig erscheinen.\nIn der \t3D \tAnsicht können Sie den Grad der\nDurchsichtigkeit mit der linken Maustaste ändern."
+    IDC_3D_PIC_SET_BOX_COLOR "Ändert die Farbe des Lautsprechergehäuses"
+    IDC_3D_PIC_SET_CHASSIS_COLOR "Ändert die Farbe der Lautsprecherchassis"
+    IDC_3D_PIC_SET_SCALE_COLOR "Ändert die Farbe der Maßlinien"
+    IDC_3D_PIC_SET_SHININES "Ändert den Reflektionsgrad (Glanzeffekt) des Materials.\nBei 0 % erscheinen die Flächen der Box matt."
+    IDC_3D_EDT_CAB_NAME     "Hier können sie den Namen des zusätzlichen Gehäusesegmentes\nändern (z.B.: Deckel oder Fuß etc.)."
+    IDC_3D_LST_CAB          "Hier können Sie das Gehäusesegment auswählen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_EDT_TRAN_X       "Zeigt einen Zahlenwert an. Mit den Tasten auf der rechten\nSeite des Eigabefeldes können Sie diesen Zahlenwert ändern.\nWenn Sie in dem Eingabefeld die gewünschte Dezimalstelle\nmarkieren, so wird der Zahlenwert in dieser Dezimalstelle\ngeändert."
+    IDC_3D_CK_TOP_WALL      "Hier können Sie einzelne Wände des Gehäuseteils, wenn\nsie sich innerhalb des gesamten Gehäuses befinden,\nentfernen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_CK_CAN_CONTAIN_CHASSIS 
+                            "Hier können Sie einstellen, ob dieses Gehäusesegment\nLautsprecher enthalten darf. Ein Lautsprecherfuß\nsollte z.B. keine Lautsprecherchassis enthalten."
+    IDC_3D_BTN_UPDATE       "Stellt die Standard Darstellungsparameter ein und aktualisiert\ndie Darstellung."
+    IDC_3D_BTN_CREATE_CABINET 
+                            "Erstellt ein neues Gehäusesegment, und stellt es\nrechts oberhalb des Basis-Segments dar."
+    IDC_3D_BTN_DELETE_CABINET "Löscht das gewählte Gehäusesegment."
+    IDC_3D_R_TRANS0         "Verschieben sie das Objekt mit der linken Maustaste in\nhorizontaler bzw. vertikaler Richtung, mit der rechten\nMaustaste in der Tiefe. Die Verschiebung in der Tiefe wird\nist in der perspektivischen Ansicht besser zu erkennen."
+    IDC_3D_R_TRANS1         "Drehen Sie das selektierte Gehäusesegment\nmit der linken Maustaste um seinen Mittelpunkt."
+    IDC_3D_R_TRANS2         "Stellen Sie die Objektvergrößerung mit der linken Maustaste ein."
+    IDC_3D_R_TRANS3         "Stellen Sie die Position der Lichtquelle ein. Mit der linken\nMaustaste stellen Sie den Richtungswinkel, mit der rechten\nMaustaste den Abstand der Lichtquelle ein."
+    IDC_3D_R_TRANS4         "Stellen Sie die Hellikeit der Lichtquelle mit der linken Maustaste ein."
+    IDC_3D_R_TRANS5         "Mit der linken Maustaste stellen Sie die Focussierung, mit der\nrechten Maustaste den Öffnungswinkel der Lichtquelle ein."
+    IDC_3D_R_TRANS6         "Darstellungseigenschaften: z.B. Umschalten zwischen\nparalleler und perspektivischer Projektion"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SCA_CK_SHOW         "Schaltet die Maßlinie ein oder aus."
+    IDC_SCA_GRP1            "Einstellungen für das aktive Gehäusesegment."
+    IDC_SCA_CK_DIR          "Ändert die Darstellungseite der Maßlinie."
+    IDC_SCA_LST_CAB         "Hier können Sie das Gehäusesegment wählen, zu dem der\nAbstand durch die Maßlinie angezeigt wird."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SCA_R00             "Hier können Sie die Bezugsebene für die Maßlinie wählen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_DETAIL_VERYLOW "Sehr geringe graphische Flächenauflösung"
+    IDM_VIEW_DETAIL_LOW     "Geringe graphische Flächenauflösung"
+    IDM_VIEW_DETAIL_MEAN    "Mittlere graphische Flächenauflösung"
+    IDM_VIEW_DETAIL_HIGH    "Hohe graphische Flächenauflösung"
+    IDM_VIEW_DETAIL_VERYHIGH "Sehr hohe graphische Flächenauflösung"
+    IDM_VIEW_3D_COPY        "Kopiert die 3D-Ansicht in die Zwischenablage"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_X_SCALE        "Schaltet die horizontale Maßlinie ein oder aus"
+    IDM_VIEW_Y_SCALE        "Schaltet die vertikale Maßlinie ein oder aus"
+    IDM_VIEW_Z_SCALE        "Schaltet die Tiefen-Maßlinie ein oder aus"
+    IDM_VIEW_PHI_SCALE      "Schaltet die Winkel-Anzeigelinien ein oder aus"
+    IDM_VIEW_PARALLEL       "Projiziert das 3D-Objekt parallel in das Darstellungsfenster."
+    IDM_VIEW_PERSPECTIVE    "Projiziert das 3D-Objekt perspektivisch in das Darstellungsfenster."
+    IDM_VIEW_BACK_SIDE      "Dreht die Ansicht des Gehäuses um 180 Grad."
+    IDM_SET_X_SCALE         "Ändert die Einstellungen für die horizontale Maßlinie"
+    IDM_SET_Y_SCALE         "Ändert die Einstellungen für die vertikale Maßlinie"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_SET_Z_SCALE         "Ändert die Einstellungen für die Tiefen-Maßlinie"
+    IDM_SET_PHI_SCALE       "Ändert die Einstellungen für die Winkel-Anzeigelinien"
+    IDM_SET_LIGHT_COLOR     "Ändert die Farbe der Lichquelle"
+    IDM_SET_AMBIENT_COLOR   "Ändert die Farbe des Umgebungslichtes"
+    IDM_SET_SPECULAR_COLOR  "Ändert die Farbe des Lichtes, dass reflektiert wird"
+    IDM_SET_SPECULAR_MAT    "Ändert die vom Material reflektierte Farbe"
+    IDM_SET_STANDARD_LIGHTPARAM 
+                            "Stellt die Standard-Beleuchtungsparameter wieder ein"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HOLDER_OF           "Halterung von "
+    IDS_OPTIMZE_RESULTS     "Berechnung der Pegel"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BMP_CABINET_DESIGN  BITMAP  DISCARDABLE     "res\\cab_enu.bmp"
+IDB_BMP_CABINET_DESIGN1 BITMAP  DISCARDABLE     "res\\cab_enu1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BOX_DESCRIPTION DIALOGEX 70, 0, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "New",IDC_BD_BTN_NEW,5,5,70,12
+    PUSHBUTTON      "Open...",IDC_BD_BTN_OPEN,100,5,70,12
+    PUSHBUTTON      "Save as...",IDC_BD_BTN_SAVE_AS,195,5,70,12
+    EDITTEXT        IDC_BD_EDT_FILENAME,95,39,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    EDITTEXT        IDC_BD_EDT_DESCRIPTION,95,59,164,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BD_EDT_MANUFACTURER,95,79,164,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_BD_COMBO_BOXTYPE,95,99,164,71,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "File Name:",IDC_BD_TXT_FILENAME,10,41,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Description:",IDC_BD_TXT_DESCRIPTION,10,61,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Trademark:",IDC_BD_TXT_MANUFACTURER,10,81,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Loudspeaker Type:",IDC_BD_TXT_BOXTYPE,10,101,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    GROUPBOX        "Loudspeaker Description",IDC_BD_GRP_DESCRIPTION,5,25,
+                    260,195
+    LTEXT           "Comment:",IDC_BD_TXT_COMMENT,10,141,80,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_COMMENT,10,155,249,60,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN
+    LTEXT           "CARA Version from:",IDC_BD_TXT_FILE_VERSION,10,121,80,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_FILE_VERSION,95,119,164,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+END
+
+IDD_BOX_BASE_DATA DIALOGEX 70, 0, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Bass Reflex (BR)",IDC_BB_R_TYPE0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,10,16,80,8
+    CONTROL         "Closed",IDC_BB_R_TYPE2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,145,16,114,8
+    CONTROL         "Transmission Line (TL)",IDC_BB_R_TYPE1,"Button",
+                    BS_AUTORADIOBUTTON,10,36,104,8
+    CONTROL         "Passive Radiator (PR)",IDC_BB_R_TYPE3,"Button",
+                    BS_AUTORADIOBUTTON,145,36,114,8
+    GROUPBOX        "Design Principle",IDC_BB_TXT_TYPE,5,0,260,55,WS_GROUP
+    LTEXT           "Nominal Impedance :",IDC_BB_TXT_IMPEDANCE,10,74,105,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_IMPEDANCE,140,74,30,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "[Ohm]",IDC_BB_TXT_IMPEDANCEUNIT,200,74,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Sensitivity :",IDC_BB_TXT_SENSITIVITY,10,89,105,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_SENSITIVITY,140,89,30,12,ES_AUTOHSCROLL
+    LTEXT           "[dB/W/m]",IDC_BB_TXT_SENSITIVITYUNIT,200,89,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Transmission Range :       from :",IDC_BB_TXT_RANGE,10,
+                    104,105,12,SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_RANGEFROM,140,104,30,12,ES_AUTOHSCROLL
+    LTEXT           "to :",IDC_BB_TXT_RANGE1,178,104,20,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_RANGETO,200,104,35,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_RANGEUNIT,239,104,20,12,SS_CENTERIMAGE
+    GROUPBOX        "Basic Data",IDC_BB_TXT_BASE,5,60,260,65,WS_GROUP
+    CONTROL         "Calculate impedance values automatically",
+                    IDC_BB_CK_CALC_IMPEDANCE_VALUES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,142,249,10
+    LTEXT           "Closed Box :",IDC_BB_TXT_CLOSED,10,155,68,10,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Maximum at :",IDC_BB_TXT_CLOSEDMAX,90,154,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_CLOSEDMAX,170,154,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_CLOSEDUNIT,239,154,20,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "BR, PR or TL Box : ",IDC_BB_TXT_BR_TL,10,170,70,10,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "1.Max :",IDC_BB_TXT_BR_TLMAX1,90,169,30,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMAX1,140,169,30,12,ES_AUTOHSCROLL
+    LTEXT           "Minimum at :",IDC_BB_TXT_BR_TLMIN,90,184,55,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMIN,170,184,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_BR_TLUNIT2,239,184,20,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "2.Max. :",IDC_BB_TXT_BR_TLMAX2,172,169,25,12,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BB_EDT_BR_TLMAX2,200,169,30,12,ES_AUTOHSCROLL
+    LTEXT           "[Hz]",IDC_BB_TXT_BR_TLUNIT,239,169,20,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    GROUPBOX        "Impedance Response at Low Freq. (Impedance Maxima + Minima)",
+                    IDC_BB_TXT_IMP_BASS,5,130,260,75
+    CONTROL         "",IDC_BB_R_FR0,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE | WS_GROUP | 
+                    WS_TABSTOP,25,223,51,26
+    CONTROL         "",IDC_BB_R_FR1,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE,110,223,51,26
+    CONTROL         "",IDC_BB_R_FR2,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | 
+                    BS_CENTER | BS_VCENTER | BS_PUSHLIKE,191,223,51,26
+    CTEXT           "high damping",IDC_BB_TXT_FR0,22,251,56,9,NOT WS_GROUP
+    CTEXT           "standard",IDC_BB_TXT_FR1,110,251,50,9,NOT WS_GROUP
+    CTEXT           "low damping",IDC_BB_TXT_FR2,184,251,65,9,NOT WS_GROUP
+    GROUPBOX        "SPL Frequency Response at Low Frequencies",
+                    IDC_BB_TXT_FR,5,210,260,55,WS_GROUP
+END
+
+IDD_BOX_CHASSIS DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "BR Tubes:",IDC_CH_TXT_BR_TUBES,10,16,45,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_BR_TUBES,100,14,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Passive Radiators:",IDC_CH_TXT_P_MEMBRANES,140,16,75,8
+    EDITTEXT        IDC_CH_EDT_P_MEMBRANE,240,14,19,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "T-Lines:",IDC_CH_TXT_T_LINES,10,31,45,8
+    EDITTEXT        IDC_CH_EDT_T_LINES,100,29,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Woofers:",IDC_CH_TXT_TT,10,51,50,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    RTEXT           "WF1:",IDC_CH_TXT_TT1,70,51,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_TT1,100,49,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "WF2:",IDC_CH_TXT_TT2,140,51,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_TT2,170,49,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Midrange Units:",IDC_CH_TXT_MT,10,72,52,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    RTEXT           "MR1:",IDC_CH_TXT_MT1,70,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT1,100,70,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "MR2:",IDC_CH_TXT_MT2,140,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT2,170,70,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "MR3:",IDC_CH_TXT_MT3,210,72,23,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_CH_EDT_MT3,240,70,19,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Tweeters:",IDC_CH_TXT_HT,10,93,45,9,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_HT,100,91,20,12,ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "",IDC_CH_GRP_TYPE_COUNT1,5,41,260,25
+    GROUPBOX        "",IDC_CH_GRP_TYPE_COUNT2,5,83,260,27
+    GROUPBOX        "Drivers:  Type and Number",IDC_CH_GRP_TYPE_COUNT,5,0,
+                    260,110,WS_TABSTOP
+    GROUPBOX        "Drivers Data",IDC_CH_GRP_CHASSIS_DATA,5,115,260,149
+    LISTBOX         IDC_CH_LST_LS,10,125,104,72,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NODATA | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Description:",IDC_CH_TXT_DESCRIPTION,120,125,139,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_DESCRIPTION,120,136,139,12,ES_AUTOHSCROLL
+    GROUPBOX        "Membrane Shape",IDC_CH_GRP_MEMBRANE_FORM,5,202,260,62
+    CONTROL         "Change driver polarity ( neg. )",IDC_CH_CHK_POLARITY,
+                    "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,120,
+                    156,139,8
+    CONTROL         "Cone",IDC_CH_R_M_FORM0,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,10,216,37,12
+    CONTROL         "Dome",IDC_CH_R_M_FORM1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,47,216,38,12
+    CONTROL         "Flat (round)",IDC_CH_R_M_FORM2,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,85,216,50,12
+    CONTROL         "Flat (rect.)",IDC_CH_R_M_FORM3,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,135,216,50,12
+    CONTROL         "Sphere",IDC_CH_R_M_FORM4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,185,216,37,12
+    CONTROL         "Dipole",IDC_CH_R_M_FORM5,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,223,216,36,12
+    GROUPBOX        "Membrane Dimensions  [mm]",IDC_CH_GRP_MEMBRANE_PARAM,5,
+                    234,260,30,WS_GROUP
+    LTEXT           "Diameter:",IDC_CH_TXT_DIAMETER,10,249,50,8,NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_DIAMETER,70,247,30,12,ES_AUTOHSCROLL
+    LTEXT           "Width:",IDC_CH_TXT_WIDTH,110,247,25,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_WIDTH,140,247,30,12,ES_AUTOHSCROLL
+    LTEXT           "Height:",IDC_CH_TXT_HEIGHT,180,247,30,12,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CH_EDT_HEIGHT,210,247,30,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "SPL Diagrams...",IDC_CH_BTN_CALC,184,185,75,12,WS_GROUP
+    LTEXT           "Broadband:",IDC_CH_TXT_BB,10,51,44,8,NOT WS_VISIBLE | 
+                    NOT WS_GROUP
+    RTEXT           "BB:",IDC_CH_TXT_BB1,70,51,23,8,NOT WS_VISIBLE | NOT 
+                    WS_GROUP
+END
+
+IDD_BOX_CABINET DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Height:",IDC_CD_TXT_HEIGHT,11,14,29,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_HEIGHT,45,12,40,12,ES_AUTOHSCROLL
+    LTEXT           "Width:",IDC_CD_TXT_WIDTH,11,33,29,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_WIDTH,45,31,40,12,ES_AUTOHSCROLL
+    LTEXT           "Depth:",IDC_CD_TXT_DEPTH,11,53,29,9,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_DEPTH,45,51,40,12,ES_AUTOHSCROLL
+    CONTROL         "of Top Side",IDC_CD_R_SET_WIDTH1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,120,14,65,10
+    CONTROL         "of Rear Side",IDC_CD_R_SET_WIDTH2,"Button",
+                    BS_AUTORADIOBUTTON,195,14,55,10
+    LTEXT           "W1:",IDC_CD_TXT_WIDTH1,120,33,20,8
+    EDITTEXT        IDC_CD_EDT_WIDTH1,145,31,40,12,ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "W2:",IDC_CD_TXT_WIDTH2,195,33,20,8
+    EDITTEXT        IDC_CD_EDT_WIDTH2,220,31,39,12,ES_AUTOHSCROLL
+    LTEXT           "D1:",IDC_CD_TXT_DEPTH1,120,53,20,8
+    EDITTEXT        IDC_CD_EDT_DEPTH1,145,51,40,12,ES_AUTOHSCROLL
+    LTEXT           "D2:",IDC_CD_TXT_DEPTH2,195,53,20,8
+    EDITTEXT        IDC_CD_EDT_DEPTH2,220,51,39,12,ES_AUTOHSCROLL
+    CONTROL         1207,IDC_CD_PICTURE,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    SS_SUNKEN | NOT WS_VISIBLE,11,67,248,46
+    CONTROL         1208,IDC_CD_PICTURE1,"Static",SS_BITMAP | SS_CENTERIMAGE | 
+                    SS_SUNKEN,11,67,248,46
+    GROUPBOX        "Cabinet Section  [mm]",IDC_CD_GRP_CABINET_PARAM,5,2,260,
+                    116
+    GROUPBOX        "Change Width",IDC_CD_GRP_WIDTH_CTRL,115,2,150,46
+    COMBOBOX        IDC_CD_LST_CHASSIS_POS,11,145,109,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CD_LST_CHASSIS_CAB,11,130,109,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_CD_LST_LS,11,160,109,51,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NODATA | WS_VSCROLL | 
+                    WS_GROUP | WS_TABSTOP
+    LTEXT           "Distance to Reference Edge:",IDC_CD_TXT_POS_HEIGHT,11,
+                    212,109,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_CD_EDT_POS_HEIGHT,11,224,54,12,ES_AUTOHSCROLL
+    CONTROL         "Centered",IDC_CD_R_POS_MH,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,70,224,50,12
+    LTEXT           "Distance to Centerline:",IDC_CD_TXT_POS_M,11,237,109,8,
+                    NOT WS_GROUP
+    EDITTEXT        IDC_CD_EDT_POS_M,11,249,54,12,ES_AUTOHSCROLL
+    CONTROL         "Centered",IDC_CD_R_POS_M,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,70,249,50,12
+    GROUPBOX        "Driver Position [mm]",IDC_CD_GRP_POSINCABINET,5,120,120,
+                    145
+    CONTROL         "",IDC_CD_POSITION_VIEW,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | WS_TABSTOP,130,130,129,115,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "3D View",IDC_CD_BTN_GRAPH,130,249,50,12
+    PUSHBUTTON      "SPL Diagrams...",IDC_CD_BTN_CALC,181,249,78,12
+    CONTROL         "Main Baffle",IDC_CD_CK_ZERO_DEG_REF_WALL,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | BS_LEFT | WS_TABSTOP,200,
+                    120,52,10
+    GROUPBOX        "Cabinet Wall",IDC_CD_GRP_POSINCABINET1,125,120,140,145
+END
+
+IDD_FILTER_PROPERTIES DIALOGEX 0, 0, 200, 245
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Filter Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "High-Pass",IDC_FILTER_GRP_HP,5,5,190,75,0,0,
+                    HIDC_FILTER_GRP_HP
+    LTEXT           "Characteristics:",IDC_FILTER_TXT_HP_CHARACTERISTIC,10,
+                    21,65,8,0,0,HIDC_FILTER_TXT_HP_CHARACTERISTIC
+    COMBOBOX        IDC_FILTER_COMBO_HP_CHARACTERISTIC,84,19,106,65,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILTER_COMBO_HP_CHARACTERISTIC
+    LTEXT           "Order:",IDC_FILTER_TXT_HP_ORDER,10,41,40,8,0,0,
+                    HIDC_FILTER_TXT_HP_ORDER
+    EDITTEXT        IDC_FILTER_EDT_HP_ORDER,55,39,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FILTER_EDT_HP_ORDER
+    CONTROL         "Spin1",IDC_FILTER_SPIN_HP_ORDER,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,73,38,11,
+                    14,0,HIDC_FILTER_SPIN_HP_ORDER
+    LTEXT           "Q-value:",IDC_FILTER_TXT_HP_QF,110,41,35,8,NOT WS_GROUP,
+                    0,HIDC_FILTER_TXT_HP_QF
+    EDITTEXT        IDC_FILTER_EDT_HP_QF,150,39,40,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_HP_QF
+    LTEXT           "Lower Cutoff Frequency:",IDC_FILTER_TXT_HP_LOW_FRQ,10,
+                    61,80,8,0,0,HIDC_FILTER_TXT_HP_LOW_FRQ
+    EDITTEXT        IDC_FILTER_EDT_HP_LOW_FRQ,110,59,60,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_HP_LOW_FRQ
+    LTEXT           "Hz",IDC_FILTER_TXT_HP_LOW_FRQ_UNIT,175,61,15,8,0,0,
+                    HIDC_FILTER_TXT_HP_LOW_FRQ_UNIT
+    GROUPBOX        "Low-Pass",IDC_FILTER_GRP_TP,5,85,190,75,0,0,
+                    HIDC_FILTER_GRP_TP
+    LTEXT           "Characteristics:",IDC_FILTER_TXT_TP_CHARACTERISTIC,10,
+                    101,65,8,0,0,HIDC_FILTER_TXT_TP_CHARACTERISTIC
+    COMBOBOX        IDC_FILTER_COMBO_TP_CHARACTERISTIC,84,99,106,65,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILTER_COMBO_TP_CHARACTERISTIC
+    LTEXT           "Order:",IDC_FILTER_TXT_TP_ORDER,10,121,40,8,0,0,
+                    HIDC_FILTER_TXT_TP_ORDER
+    EDITTEXT        IDC_FILTER_EDT_TP_ORDER,55,119,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_FILTER_EDT_TP_ORDER
+    CONTROL         "Spin1",IDC_FILTER_SPIN_TP_ORDER,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,75,118,
+                    11,14,0,HIDC_FILTER_SPIN_TP_ORDER
+    LTEXT           "Q-value:",IDC_FILTER_TXT_TP_QF,110,121,35,8,NOT 
+                    WS_GROUP,0,HIDC_FILTER_TXT_TP_QF
+    EDITTEXT        IDC_FILTER_EDT_TP_QF,150,119,40,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_TP_QF
+    LTEXT           "Upper Cutoff Frequency:",IDC_FILTER_TXT_TP_UPP_FRQ,10,
+                    141,100,8,0,0,HIDC_FILTER_TXT_TP_UPP_FRQ
+    EDITTEXT        IDC_FILTER_EDT_TP_UPP_FRQ,110,139,60,12,ES_AUTOHSCROLL,0,
+                    HIDC_FILTER_EDT_TP_UPP_FRQ
+    LTEXT           "Hz",IDC_FILTER_TXT_TP_UPP_FRQ_UNIT,175,141,15,8,0,0,
+                    HIDC_FILTER_TXT_TP_UPP_FRQ_UNIT
+    DEFPUSHBUTTON   "OK",IDOK,5,231,50,12,0,0,HIDOK
+    PUSHBUTTON      "Cancel",IDCANCEL,145,231,50,12,0,0,HIDCANCEL
+    CONTROL         "Frequenzgang",IDC_FILTER_WND_FREQUENCY_RESP,"Static",
+                    SS_OWNERDRAW | SS_NOTIFY | SS_SUNKEN | WS_BORDER,5,165,
+                    190,61,0,HIDC_FILTER_WND_FREQUENCY_RESP
+END
+
+IDD_SPL_VIEW DIALOG DISCARDABLE  0, 0, 186, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Representation of Results"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,40,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,130,40,50,12
+    COMBOBOX        IDC_SPL_COMBO_DIAGRAM,5,8,175,36,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Distance:",IDC_STATIC,5,26,45,8
+    COMBOBOX        IDC_SPL_DIST_COMBO,55,24,32,92,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PROGRESS_VIEW DIALOG DISCARDABLE  0, 0, 190, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Calculation in Progress"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Progress",IDC_PRGR_CNTR,"msctls_progress32",PBS_SMOOTH | 
+                    WS_BORDER,5,18,180,14
+    LTEXT           "",IDC_PRGR_TEXT,5,6,180,8
+    PUSHBUTTON      "Terminate Calculation",IDC_PRGR_BTN_BREAK,100,34,85,12
+    LTEXT           "",IDC_PRGR_TIME,5,36,90,8
+END
+
+IDD_OPEN_BOX_FILE DIALOGEX 0, 0, 285, 250
+STYLE DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,5,275,135,NOT WS_VISIBLE
+    LTEXT           "CARA Version from:",IDC_STATIC,10,153,75,8
+    LTEXT           "",IDC_BD_EDT_FILE_VERSION,90,152,110,10,SS_SUNKEN
+    LTEXT           "Trademark :",IDC_BD_TXT_MANUFACTURER,10,175,50,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "",IDC_BD_EDT_MANUFACTURER,64,174,136,10,SS_SUNKEN
+    LTEXT           "Description :",IDC_BD_TXT_DESCRIPTION,10,164,50,9,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_BD_EDT_DESCRIPTION,90,163,110,10,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "Preview",IDC_OBF_PREVIEW,225,161,50,14
+    EDITTEXT        IDC_BD_EDT_COMMENT,10,185,265,50,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
+    GROUPBOX        "Description of Loudspeaker",IDC_STATIC,5,142,275,96
+END
+
+IDD_BOX_CROSS_OVER DIALOGEX 70, 50, 270, 270
+STYLE DS_3DLOOK | WS_CHILD
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "1 Way",IDC_XO_R_1_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,48,57,9
+    CONTROL         "2 Ways",IDC_XO_R_2_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,82,45,9
+    CONTROL         "2(3) Ways",IDC_XO_R_2_3_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,113,50,9
+    CONTROL         "3 Ways",IDC_XO_R_3_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,144,45,9
+    CONTROL         "3(4) Ways",IDC_XO_R_3_4_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,175,50,9
+    CONTROL         "4 Ways",IDC_XO_R_4_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,206,45,9
+    CONTROL         "5 Ways",IDC_XO_R_5_W,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,237,45,9
+    PUSHBUTTON      "SPL Diagrams...",IDC_XO_BTN_CALC,181,4,84,12,WS_GROUP
+    CTEXT           "LCF",IDC_STATIC,10,60,23,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    COMBOBOX        IDC_XO_LST_1W_UG,45,60,45,222,CBS_DROPDOWN | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "HP",IDC_XO_BTN_1W_UG,91,60,20,14,BS_ICON
+    PUSHBUTTON      "BP",IDC_XO_BTN_1W_BP,124,60,23,14,BS_ICON
+    PUSHBUTTON      "LP",IDC_XO_BTN_1W_OG,160,60,20,14,BS_ICON
+    COMBOBOX        IDC_XO_LST_1W_OG,193,60,45,222,CBS_DROPDOWN | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "UCF",IDC_STATIC,239,60,20,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_1_W,5,48,260,31,WS_GROUP
+    PUSHBUTTON      "WF",IDC_XO_BTN_2W_TT,10,93,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2W_TF,33,93,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_2W_HT,67,93,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_2_W,5,82,260,28,WS_GROUP
+    PUSHBUTTON      "WF1",IDC_XO_BTN_2_3W_TT1,10,124,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2_3W_TFTT1,33,124,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_2_3W_HT,67,124,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_2_3W_TFTT2,204,124,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "WF2",IDC_XO_BTN_2_3W_TT2,181,124,23,12,BS_ICON
+    CTEXT           "TW",IDC_STATIC,238,124,20,12,SS_CENTERIMAGE | NOT 
+                    WS_GROUP,WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_2_3_W,5,113,260,28,WS_GROUP
+    PUSHBUTTON      "WF",IDC_XO_BTN_3W_TT,10,155,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3W_TF1,33,155,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR",IDC_XO_BTN_3W_MT,67,155,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3W_TF2,90,155,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_3W_HT,124,155,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_3_W,5,144,260,28,WS_GROUP
+    PUSHBUTTON      "WF1",IDC_XO_BTN_3_4W_TT1,10,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TF1TT1,33,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR",IDC_XO_BTN_3_4W_MT,67,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TF2,90,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_3_4W_HT,124,186,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_3_4W_TFTT2,204,186,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "WF2",IDC_XO_BTN_3_4W_TT2,181,186,23,12,BS_ICON
+    CTEXT           "MR",IDC_STATIC,238,186,20,12,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    GROUPBOX        "",IDC_XO_GRP_3_4_W,5,175,260,28,WS_GROUP
+    PUSHBUTTON      "WF",IDC_XO_BTN_4W_TT,10,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF1,33,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR1",IDC_XO_BTN_4W_MT1,67,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF2,90,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR2",IDC_XO_BTN_4W_MT2,124,217,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_4W_TF3,147,217,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_4W_HT,181,217,23,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_4_W,5,206,260,28,WS_GROUP
+    PUSHBUTTON      "WF",IDC_XO_BTN_5W_TT,10,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF1,33,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR1",IDC_XO_BTN_5W_MT1,67,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF2,90,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR2",IDC_XO_BTN_5W_MT2,124,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF3,147,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "MR3",IDC_XO_BTN_5W_MT3,181,248,23,12,BS_ICON
+    EDITTEXT        IDC_XO_EDT_5W_TF4,204,248,34,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "TW",IDC_XO_BTN_5W_HT,238,248,20,12,BS_ICON
+    GROUPBOX        "",IDC_XO_GRP_5_W,5,237,260,28,WS_GROUP
+    CTEXT           "1",IDC_XO_TXT_1W_UG,33,60,12,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    CTEXT           "1",IDC_XO_TXT_1W_OG,181,60,12,14,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    CONTROL         "Preset crossover frequencies",IDC_XO_CK_INIT_STD_VALUES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,24,165,12
+    PUSHBUTTON      "Standard Filter Settings",IDC_XO_BTN_RESET_FILTER,10,5,
+                    114,12,WS_GROUP
+    CONTROL         "Show Symbols",IDC_XO_CK_SYMBOLIC_BTN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,181,24,82,12
+END
+
+IDD_SCALE DIALOGEX 0, 0, 225, 111
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Distance of Cabinet Sections: Reference Surfaces"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Top",IDC_SCA_R00,"Button",BS_AUTORADIOBUTTON | WS_GROUP | 
+                    WS_TABSTOP,15,20,90,10
+    CONTROL         " + W1",IDC_SCA_R01,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,15,30,90,10
+    CONTROL         "Center",IDC_SCA_R02,"Button",BS_AUTORADIOBUTTON,15,40,
+                    90,10
+    CONTROL         " + D1",IDC_SCA_R03,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,15,50,90,10
+    CONTROL         "Bottom",IDC_SCA_R04,"Button",BS_AUTORADIOBUTTON,15,60,
+                    90,10
+    GROUPBOX        "",IDC_SCA_GRP1,5,5,105,70,WS_GROUP
+    CONTROL         "Top",IDC_SCA_R10,"Button",BS_AUTORADIOBUTTON | WS_GROUP | 
+                    WS_TABSTOP,125,20,90,10
+    CONTROL         " + W2",IDC_SCA_R11,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,125,30,90,10
+    CONTROL         "Center",IDC_SCA_R12,"Button",BS_AUTORADIOBUTTON,125,40,
+                    90,10
+    CONTROL         " + D2",IDC_SCA_R13,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,125,50,90,10
+    CONTROL         "Bottom",IDC_SCA_R14,"Button",BS_AUTORADIOBUTTON,125,60,
+                    90,10
+    GROUPBOX        "",IDC_SCA_GRP2,115,5,105,70,WS_GROUP
+    COMBOBOX        IDC_SCA_LST_CAB,120,3,95,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Linien sichbar",IDC_SCA_CK_SHOW,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,15,80,90,10
+    CONTROL         "To the ",IDC_SCA_CK_DIR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,125,80,90,10
+    PUSHBUTTON      "Cancel",IDCANCEL,170,94,50,12
+    DEFPUSHBUTTON   "OK",IDOK,5,94,50,12
+END
+
+IDD_3D_VIEW DIALOGEX 0, 0, 270, 274
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "3D View of the Cabinet"
+MENU IDR_CONTEXT_DETAIL
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,3,3,
+                    197,157,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+    CONTROL         "Move",IDC_3D_R_TRANS0,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE | WS_GROUP,205,3,60,11
+    CONTROL         "Rotate",IDC_3D_R_TRANS1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,14,60,11
+    CONTROL         "Zoom",IDC_3D_R_TRANS2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,27,60,11
+    CONTROL         "Light Direction",IDC_3D_R_TRANS3,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,40,60,
+                    11
+    CONTROL         "Brightness",IDC_3D_R_TRANS4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_VCENTER | BS_PUSHLIKE,205,51,60,11
+    CONTROL         "Light Source",IDC_3D_R_TRANS5,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,62,60,
+                    11
+    CONTROL         "Presentation",IDC_3D_R_TRANS6,"Button",
+                    BS_AUTORADIOBUTTON | BS_VCENTER | BS_PUSHLIKE,205,75,60,
+                    11
+    PUSHBUTTON      "X",IDC_3D_BTN_TRAN_X,205,101,15,14,BS_ICON | WS_GROUP,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Y",IDC_3D_BTN_TRAN_Y,205,116,15,14,BS_ICON,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Z",IDC_3D_BTN_TRAN_Z,205,131,15,14,BS_ICON,
+                    WS_EX_STATICEDGE
+    LTEXT           "",IDC_3D_TXT_TRAN_X,222,104,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Y,222,119,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Z,222,134,45,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_3D_EDT_TRAN_X,222,102,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_X,"msctls_updown32",
+                    UDS_ARROWKEYS,254,101,11,14
+    EDITTEXT        IDC_3D_EDT_TRAN_Y,222,117,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Y,"msctls_updown32",
+                    UDS_ARROWKEYS,254,116,11,14
+    EDITTEXT        IDC_3D_EDT_TRAN_Z,222,132,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Z,"msctls_updown32",
+                    UDS_ARROWKEYS,254,131,11,14
+    CTEXT           "",IDC_3D_TXT_UNITS,205,90,60,8
+    PUSHBUTTON      "Standard",IDC_3D_BTN_UPDATE,205,147,60,12
+    PUSHBUTTON      "Create New Cabinet Section",IDC_3D_BTN_CREATE_CABINET,
+                    10,164,115,12
+    PUSHBUTTON      "Delete Cabinet Section...",IDC_3D_BTN_DELETE_CABINET,
+                    155,164,105,12,WS_DISABLED
+    LTEXT           "Name of Cabinet Section",IDC_STATIC,10,196,115,8
+    EDITTEXT        IDC_3D_EDT_CAB_NAME,130,194,130,12,ES_AUTOHSCROLL
+    LTEXT           "Selection of Cabinet Section",IDC_STATIC,10,211,115,8
+    COMBOBOX        IDC_3D_LST_CAB,130,208,130,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Cabinet section with drivers",
+                    IDC_3D_CK_CAN_CONTAIN_CHASSIS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,225,115,10
+    GROUPBOX        "Cabinet Section",IDC_STATIC,5,180,260,90
+    CONTROL         "Top",IDC_3D_CK_TOP_WALL,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_GROUP | WS_TABSTOP,10,255,
+                    38,10
+    CONTROL         "Front",IDC_3D_CK_FRONT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,52,255,32,10
+    CONTROL         "Back",IDC_3D_CK_BACK_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,94,255,36,10
+    CONTROL         "Left",IDC_3D_CK_LEFT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,136,255,28,10
+    CONTROL         "Right",IDC_3D_CK_RIGHT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,178,255,33,10
+    CONTROL         "Bottom",IDC_3D_CK_BOTTOM_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,220,255,38,10
+    GROUPBOX        "Visible Cabinet Surfaces",IDC_3D_GRP_VISIBLE_WALLS,5,
+                    236,260,34
+    LTEXT           "",IDC_3D_TXT_STATUS,5,238,260,32,SS_SUNKEN | NOT 
+                    WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_BOX_DESCRIPTION, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 90
+        VERTGUIDE, 95
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 11
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 155
+        HORZGUIDE, 215
+        HORZGUIDE, 220
+    END
+
+    IDD_BOX_BASE_DATA, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 90
+        VERTGUIDE, 135
+        VERTGUIDE, 145
+        VERTGUIDE, 170
+        VERTGUIDE, 200
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+        HORZGUIDE, 125
+        HORZGUIDE, 130
+        HORZGUIDE, 147
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 205
+        HORZGUIDE, 210
+        HORZGUIDE, 236
+        HORZGUIDE, 255
+        HORZGUIDE, 265
+    END
+
+    IDD_BOX_CHASSIS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 70
+        VERTGUIDE, 100
+        VERTGUIDE, 120
+        VERTGUIDE, 140
+        VERTGUIDE, 170
+        VERTGUIDE, 210
+        VERTGUIDE, 240
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 76
+        HORZGUIDE, 97
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+        HORZGUIDE, 142
+        HORZGUIDE, 160
+        HORZGUIDE, 197
+        HORZGUIDE, 202
+        HORZGUIDE, 222
+        HORZGUIDE, 234
+        HORZGUIDE, 253
+        HORZGUIDE, 264
+    END
+
+    IDD_BOX_CABINET, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 11
+        VERTGUIDE, 40
+        VERTGUIDE, 45
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 85
+        VERTGUIDE, 100
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 185
+        VERTGUIDE, 195
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        VERTGUIDE, 259
+        VERTGUIDE, 265
+        HORZGUIDE, 2
+        HORZGUIDE, 18
+        HORZGUIDE, 37
+        HORZGUIDE, 48
+        HORZGUIDE, 57
+        HORZGUIDE, 67
+        HORZGUIDE, 113
+        HORZGUIDE, 118
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 211
+        HORZGUIDE, 220
+        HORZGUIDE, 230
+        HORZGUIDE, 245
+        HORZGUIDE, 255
+        HORZGUIDE, 265
+    END
+
+    IDD_FILTER_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 55
+        VERTGUIDE, 75
+        VERTGUIDE, 84
+        VERTGUIDE, 110
+        VERTGUIDE, 145
+        VERTGUIDE, 150
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 80
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 165
+        HORZGUIDE, 226
+        HORZGUIDE, 237
+    END
+
+    IDD_SPL_VIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 180
+        HORZGUIDE, 14
+        HORZGUIDE, 30
+        HORZGUIDE, 46
+    END
+
+    IDD_PROGRESS_VIEW, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 185
+        BOTTOMMARGIN, 36
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+    END
+
+    IDD_OPEN_BOX_FILE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 200
+        VERTGUIDE, 275
+        VERTGUIDE, 280
+        HORZGUIDE, 5
+        HORZGUIDE, 140
+        HORZGUIDE, 142
+        HORZGUIDE, 157
+        HORZGUIDE, 168
+        HORZGUIDE, 179
+        HORZGUIDE, 185
+        HORZGUIDE, 235
+        HORZGUIDE, 238
+    END
+
+    IDD_BOX_CROSS_OVER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 250
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 33
+        VERTGUIDE, 55
+        VERTGUIDE, 60
+        VERTGUIDE, 67
+        VERTGUIDE, 90
+        VERTGUIDE, 124
+        VERTGUIDE, 147
+        VERTGUIDE, 181
+        VERTGUIDE, 204
+        VERTGUIDE, 238
+        VERTGUIDE, 265
+        HORZGUIDE, 11
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 60
+        HORZGUIDE, 79
+        HORZGUIDE, 82
+        HORZGUIDE, 105
+        HORZGUIDE, 110
+        HORZGUIDE, 113
+        HORZGUIDE, 136
+        HORZGUIDE, 141
+        HORZGUIDE, 144
+        HORZGUIDE, 167
+        HORZGUIDE, 172
+        HORZGUIDE, 175
+        HORZGUIDE, 198
+        HORZGUIDE, 203
+        HORZGUIDE, 206
+        HORZGUIDE, 229
+        HORZGUIDE, 234
+        HORZGUIDE, 237
+        HORZGUIDE, 260
+        HORZGUIDE, 265
+    END
+
+    IDD_SCALE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+    END
+
+    IDD_3D_VIEW, DIALOG
+    BEGIN
+        RIGHTMARGIN, 269
+        VERTGUIDE, 3
+        VERTGUIDE, 10
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        VERTGUIDE, 210
+        VERTGUIDE, 220
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 3
+        HORZGUIDE, 108
+        HORZGUIDE, 123
+        HORZGUIDE, 138
+        HORZGUIDE, 153
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 200
+        HORZGUIDE, 215
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+        HORZGUIDE, 260
+        HORZGUIDE, 270
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_BOX_DESCRIPTION DLGINIT
+BEGIN
+    IDC_BD_COMBO_BOXTYPE, 0x403, 23, 0
+0x5328, 0x6174, 0x646e, 0x7261, 0x2964, 0x4c20, 0x756f, 0x7364, 0x6570, 
+0x6b61, 0x7265, "\000" 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 38, 0
+0x6944, 0x6f70, 0x656c, 0x5220, 0x6461, 0x6169, 0x6f74, 0x2072, 0x6c28, 
+0x7261, 0x6567, 0x6620, 0x616c, 0x2074, 0x656d, 0x626d, 0x6172, 0x656e, 
+0x0029, 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 39, 0
+0x6944, 0x6f70, 0x656c, 0x5220, 0x6461, 0x6169, 0x6f74, 0x2072, 0x6628, 
+0x616c, 0x2074, 0x656d, 0x626d, 0x6172, 0x656e, 0x2029, 0x7968, 0x7262, 
+0x6469, "\000" 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 27, 0
+0x7553, 0x7762, 0x6f6f, 0x6566, 0x2072, 0x6128, 0x7463, 0x7669, 0x2f65, 
+0x6170, 0x7373, 0x7669, 0x2965, "\000" 
+    IDC_BD_COMBO_BOXTYPE, 0x403, 15, 0
+0x6441, 0x2d64, 0x6e4f, 0x5420, 0x6577, 0x7465, 0x7265, "\000" 
+    0
+END
+
+IDD_FILTER_PROPERTIES DLGINIT
+BEGIN
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 23, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6f6c, 0x2d77, 0x6164, 
+0x706d, 0x6465, "\000" 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 10, 0
+0x6843, 0x6265, 0x7379, 0x6568, 0x0076, 
+    IDC_FILTER_COMBO_HP_CHARACTERISTIC, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 23, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6f6c, 0x2d77, 0x6164, 
+0x706d, 0x6465, "\000" 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 10, 0
+0x6843, 0x6265, 0x7379, 0x6568, 0x0076, 
+    IDC_FILTER_COMBO_TP_CHARACTERISTIC, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    0
+END
+
+IDD_SPL_VIEW DLGINIT
+BEGIN
+    IDC_SPL_COMBO_DIAGRAM, 0x403, 41, 0
+0x5053, 0x204c, 0x7246, 0x7165, 0x6575, 0x636e, 0x2079, 0x6552, 0x7073, 
+0x6e6f, 0x6573, 0x4d20, 0x6761, 0x696e, 0x7574, 0x6564, 0x2620, 0x5020, 
+0x6168, 0x6573, "\000" 
+    IDC_SPL_COMBO_DIAGRAM, 0x403, 31, 0
+0x4433, 0x5020, 0x6c6f, 0x7261, 0x4420, 0x6169, 0x7267, 0x6d61, 0x5320, 
+0x4c50, 0x4d20, 0x6761, 0x696e, 0x7574, 0x6564, "\000" 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2031, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2033, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 6, 0
+0x2020, 0x2035, 0x006d, 
+    IDC_SPL_DIST_COMBO, 0x403, 5, 0
+0x3031, 0x6d20, "\000" 
+    0
+END
+
+IDD_BOX_CABINET DLGINIT
+BEGIN
+    IDC_CD_LST_CHASSIS_POS, 0x403, 4, 0
+0x6f54, 0x0070, 
+    IDC_CD_LST_CHASSIS_POS, 0x403, 6, 0
+0x7246, 0x6e6f, 0x0074, 
+    IDC_CD_LST_CHASSIS_POS, 0x403, 5, 0
+0x6142, 0x6b63, "\000" 
+    IDC_CD_LST_CHASSIS_POS, 0x403, 5, 0
+0x654c, 0x7466, "\000" 
+    IDC_CD_LST_CHASSIS_POS, 0x403, 6, 0
+0x6952, 0x6867, 0x0074, 
+    IDC_CD_LST_CHASSIS_POS, 0x403, 7, 0
+0x6f42, 0x7474, 0x6d6f, "\000" 
+    IDC_CD_LST_CHASSIS_CAB, 0x403, 13, 0
+0x614d, 0x6e69, 0x4320, 0x6261, 0x6e69, 0x7465, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT_DETAIL MENU DISCARDABLE 
+BEGIN
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy 3D-View",               IDM_VIEW_3D_COPY
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "&Dimensional Lines"
+        BEGIN
+            MENUITEM "&Horizontal",                 IDM_VIEW_X_SCALE, GRAYED
+            MENUITEM "&Vertical",                   IDM_VIEW_Y_SCALE, GRAYED
+            MENUITEM "&Depth",                      IDM_VIEW_Z_SCALE, GRAYED
+            MENUITEM "&Angle",                      IDM_VIEW_PHI_SCALE
+            , GRAYED
+        END
+        POPUP "&Resolution"
+        BEGIN
+            MENUITEM "&Very Low",                   IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Low",                        IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Medium",                     IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&High",                       IDM_VIEW_DETAIL_HIGH
+            MENUITEM "V&ery high",                  IDM_VIEW_DETAIL_VERYHIGH
+        END
+        POPUP "&Projection"
+        BEGIN
+            MENUITEM "P&arallel",                   IDM_VIEW_PARALLEL
+            MENUITEM "P&erspective",                IDM_VIEW_PERSPECTIVE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Transparent",                IDC_3D_PIC_SET_ALPHA_BLEND
+        MENUITEM "Turn &around",                IDM_VIEW_BACK_SIDE
+    END
+    POPUP "&Settings"
+    BEGIN
+        POPUP "&Dimensional Lines"
+        BEGIN
+            MENUITEM "&Horizontal...",              IDM_SET_X_SCALE, GRAYED
+            MENUITEM "&Vertical...",                IDM_SET_Y_SCALE, GRAYED
+            MENUITEM "&Depth...",                   IDM_SET_Z_SCALE, GRAYED
+            MENUITEM "&Angle...",                   IDM_SET_PHI_SCALE
+            , GRAYED
+        END
+        POPUP "&Colors"
+        BEGIN
+            MENUITEM "&Background Color...",        IDC_3D_PIC_SET_BKCOLOR
+            MENUITEM "Speaker &Cabinet...",         IDC_3D_PIC_SET_BOX_COLOR
+            MENUITEM "&Drivers...",                 IDC_3D_PIC_SET_CHASSIS_COLOR
+
+            MENUITEM "Dimensional &Lines...",       IDC_3D_PIC_SET_SCALE_COLOR
+
+            MENUITEM "&Reflected Material Color...", IDM_SET_SPECULAR_MAT
+            MENUITEM SEPARATOR
+            MENUITEM "L&ight Source...",            IDM_SET_LIGHT_COLOR
+            MENUITEM "&Ambient Light...",           IDM_SET_AMBIENT_COLOR
+            MENUITEM "&Specular Light...",          IDM_SET_SPECULAR_COLOR
+        END
+        MENUITEM "&Standard Light Paramters",   IDM_SET_STANDARD_LIGHTPARAM
+    END
+END
+
+IDR_CONTEXT_BLENDFUNC MENU DISCARDABLE 
+BEGIN
+    POPUP "Blend Function"
+    BEGIN
+        MENUITEM "DstColor, SrcAlpha",          IDM_VIEW_BLEND1
+        MENUITEM "DstColor, 1 - SrcAlpha (Default)", IDM_VIEW_BLEND2
+        MENUITEM "SrcAlpha, SrcColor",          IDM_VIEW_BLEND3
+        MENUITEM "1 - SrcAlpha, SrcColor",      IDM_VIEW_BLEND4
+        MENUITEM "1 - DstAlpha, SrcColor",      IDM_VIEW_BLEND5
+        MENUITEM "SrcAlpha, 1- SrcAlpha",       IDM_VIEW_BLEND6
+        MENUITEM "SrcColor, SrcAlpha",          IDM_VIEW_BLEND7
+        MENUITEM SEPARATOR
+        MENUITEM "Inverted Drawing Direction",  IDM_SET_INVERSE_DRAW_DIR
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDM_MENU_CANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_GRP_HP       "Defines the parameters for the high-pass filter"
+    IDC_FILTER_TXT_HP_CHARACTERISTIC 
+                            "Defines the filter characteristics:\n \tButterworth : Q = 0.7,\n \tButterworth : Q variable,\n \tBessel,\n tChebyshev,\n \tLinkwitz-Riley"
+    IDC_FILTER_TXT_HP_QF    "The \tQ-value defines the attenuation of the filter."
+    IDC_FILTER_TXT_HP_ORDER "The \torder of a filter defines the rate\nof amplitude increase or decrease:\n 1.Order : 6 dB / octave\n 2.Order : 12 dB / octave\n ..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_TXT_HP_LOW_FRQ "Lower cutoff frequency of the high-pass filter"
+    IDC_FILTER_GRP_TP       "Defines the parameters for the low-pass filter"
+    IDC_FILTER_EDT_TP_UPP_FRQ "Upper cutoff frequency of the low-pass filter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FILTER_WND_FREQUENCY_RESP 
+                            "Displays the frequency response of the transfer\nfunction (red) and phase (blue) of the filter."
+    IDC_BD_BTN_NEW          "Creates a new customized loudspeaker"
+    IDC_BD_BTN_OPEN         "Opens a customized loudspeaker file"
+    IDC_BD_TXT_FILENAME     "\tFile \tName: customized loudspeaker file loaded from\n   CARA folder ...\\LS_BOX\n\tDescription: any (short) description of the speaker\n\tTrademark: brand name of the speaker manufacturer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BD_COMBO_BOXTYPE    "Select your \tloudspeaker \ttype:\n - \t(Standard) \tLoudspeaker\n - \tDipole \tRadiator\n - \tDipole \tRadiator \t(Hybrid)\n - \tSubwoofer (active/passive)\n - \tAdd-On \tTweeter"
+    IDC_BD_BTN_SAVE_AS      "Saves the specified loudspeaker\ndata using a new file name"
+    IDC_BD_EDT_COMMENT      "Here you may enter any comment or description."
+    IDC_BD_TXT_FILE_VERSION "This field contains that \tVersion \tNumber of the program package\n\tCARA the Speaker Editor of which is able to read and process the\ncurrent speaker design data.\n\nThe current version of the Loudspeaker Editor facilitates the design of\nmore complex loudspeaker concepts.\nTo achieve a downwards compatibility to previous versions of CARA\nthe speaker file format depends on the complexity of your loudspeaker\ndesign. This allows users of previous CARA versions also to edit new\n'*.BOX' files but only for the (Standard) Loudspeaker type."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BB_TXT_FR           "The damping of a loudspeaker influences the \tSPL\n\tfrequency \tresponse around the lower cutoff\nfrequency.\n\nDamping classifications are:\n- \thigh, very smooth transition,\n- \tstandard, direct transition, or\n- \tlow, peaked transition.\n\nYou may find the SPL frequency response of your\nspeaker in various test magazines; otherwise, ask\nthe manufacturer for these data."
+    IDC_BB_TXT_IMP_BASS     "The \timpedance \tresponse of a speaker (below 200 Hz)\ndescribes implicitly some technical data of the woofers mounted\nin the speaker cabinet.\n\nFor \tClosed \tBoxes, the impedance response usually shows a\ndistinct maximum. The corresponding frequency value in Hz has\nto be entered.\nFor \tBass \tReflex or \tTransmission \tLine speakers as well as\nfor speakers with \tPassive \tRadiators the impedance response\nshows two separate maxima and one minimum in between. The\ncorresponding three frequency values in Hz have to be entered,\nordered according to ascending frequency values.\n\nYou may find the impedance response of your speaker in various\ntest magazines; otherwise, ask the manufacturer for these data."
+    IDC_BB_TXT_BASE         "The \tbasic \tdata of a loudspeaker include the \tnominal \timped-\n\tance (e.g. 4 Ohms), the \tsensitivity (e.g. 87 dB/Watt/m) and its \n\ttransmission \trange (e.g. 35 ... 22000 Hz).\n\nThese data may be taken from the manufacturer's specifications\n(type-plate or user manual)."
+    IDC_BB_TXT_TYPE         "Four different design principles are supported:\n  - \tBass \tReflex,\n  - \tTransmission \tLine,\n  - \tClosed \tBox, or\n  - using \tPassive \tRadiators"
+    IDC_XO_GRP_2_W          "The \tcrossover \tnetwork of a loudspeaker divides the\ntotal transmission range (from about 20 to 20000 Hz) into\nseveral subranges (ways). Each way is connected to\none or more special driver units such as woofers (WF),\nmidrange units (MR), or tweeters (TW).\nWoofers, for example, are connected to the low frequen-\ncy pass of a crossover network. The CARA loudspeaker\neditor allows crossover network designs for max. five\nways."
+    IDC_XO_R_1_W            "A \t1-way \tspeaker does not contain any crossover network.\nIn special cases (e.g. active subwoofer) you may define\nadditional (external) high- and lowpass filters.\nSeveral cut-off frequencies may be specified here."
+    IDC_XO_R_2_W            "A \t2-way \tcrossover \tnetwork is defined by one crossover \nfrequency separating the transmission range of the woofer(s) \nfrom that of the tweeter (usually only one). \nThis crossover frequency may be taken from the data sheets\nprovided by the manufacturer."
+    IDC_XO_R_2_3_W          "A \t2(3)-way \tcrossover \tnetwork is a 2-way crossover network\nin which one of the woofers (usually the woofer closer to the\nfloor) has a lower crossover frequency than the other.\nAt low frequencies all the woofers work in parallel. At midrange\nfrequencies, however, the woofer WF2 with the lower crossover\nfrequency contributes to sound transmission less and less.\nTo identify these types of crossover networks, technical data\nsheets often contain the lower crossover frequency in paren-\ntheses."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_XO_R_3_W            "A \t3-way \tcrossover \tnetwork is defined by two crossover\nfrequencies: one separating the transmission range of the\nwoofers from that of the midrange units and the other sepa-\nrating the transmission range of the midrange units from that\nof the tweeter.\nThese crossover frequencies are given in the data sheets\nprovided by the manufacturer."
+    IDC_XO_R_3_4_W          "A \t3(4)-way \tcrossover \tnetwork is a 3-way crossover network,\nin which one of the woofers (usually the woofer closer to the\nfloor) has a lower crossover frequency than the other.\nAt low frequencies all the woofers work in parallel. At midrange\nfrequencies, however, the woofer WF2 with the lower crossover\nfrequency contributes to sound transmission less and less.\nTechnical data sheets often contain the lower crossover\nfrequency in parentheses."
+    IDC_XO_R_4_W            "A \t4-way \tcrossover \tnetwork is defined by three crossover \nfrequencies: one separating the transmission range of the woofers\nfrom that of the lower midrange units, the second separating the\ntransmission range of the lower midrange units from that of the\nupper midrange units, and the third separating the transmission\nrange of the upper midrange units from that of the tweeter.\nThese crossover frequencies are given in the data sheets\nprovided by the manufacturer."
+    IDC_XO_R_5_W            "A \t5-way \tcrossover \tnetwork is defined by four crossover\nfrequencies: the first separating the transmission range of the\nwoofers from that of the lower midrange units, the second se-\nparating the transmission range of the lower midrange units\nfrom that of the 'real' midrange units, the third separating the\ntransmission range of the 'real' midrange units from that of the\nupper midrange units, and the final separating the transmission\nrange of the upper midrange units from that of the tweeter.\nThese crossover frequencies are given in the data sheets\nprovided by the manufacturer."
+    IDC_XO_BTN_2W_HT        "Here you may further specify the properties\nof the crossover network (filter characteris-\ntics, filter order, damping).\nOn this, please, also read the help topics."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_XO_CK_INIT_STD_VALUES 
+                            "Activates \tpresets for the \tcrossover \tfrequencies\nof 2- to 5-way crossover networks according to usual\nnetwork concepts"
+    IDC_XO_BTN_RESET_FILTER "Resets the filter settings (characteristics, order,\nand damping) to the defaults"
+    IDC_XO_CK_SYMBOLIC_BTN  "If activated, filter buttons are shown with symbols."
+    IDC_CH_GRP_TYPE_COUNT   "The following \tdriver \ttypes are defined:\n \tBR, \tTL, \tPR:\n    bass reflex tube, transmission line, and passive radiators\n \tWF1/2:\n    woofer; as compared to WF1, WF2 has a lower crossover\n    frequency (see help for crossover network).\n \tMR1/2/3:\n    lower midrange, 'real' midrange, upper midrange\n \tTW:\n    tweeter.\n \tBB:\n    broad-band driver for 1 way speakers\n\nPlease enter the number of drivers of the respective type in\nthe edit controls."
+    IDC_CH_GRP_CHASSIS_DATA "Here you can define the basic characteristics\nof the selected driver."
+    IDC_CH_TXT_TYPE         "Type ( \tBR, \tTL, \tPR, \tWF1/2, \tMR1/2/3, \tTW, \tBB )\nof the selected driver."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_LST_LS           "Select the driver to\nspecify its parameters."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_TXT_DESCRIPTION  "You may assign a short de-\nscriptive text to each driver."
+    IDC_CH_CHK_POLARITY     "Changes the \tpolarity of the driver to\nminus. Used for a driver at the cabinet's\nrear wall acting as a dipole or to linear-\nize the frequency response in a cross-\nover region, e.g. from midrange to tweeter."
+    IDC_CH_R_M_FORM0        "For the \tmembrane \tshape, you may choose \namong: 'Cone,' 'Dome,' 'Sphere,' 'Dipole,' or 'Flat.'\n\nBass reflex tubes and TLs always have flat \n'membranes.' For woofers or passive radiators,\ndomes or dipoles are not accepted. Spherical\nmembranes can only be assigned to tweeters."
+    IDC_CH_TXT_DIAMETER     "The \teffective \tdimensions of the membrane\ndepend on its shape.\nCones, domes, spheres or circular flat membranes\nare defined by the \teffective \tdiameter whereas\nfor rectangular flat membranes the \teffective \tlength\nand \twidth are to be specified.\nThe effective dimensions take into account a pos-\nsible surround. The dimensions are measured from\nmiddle to middle of the surround.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to the\nrespective edit control and hit key F10."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CH_GRP_MEMBRANE_FORM 
+                            "The data specified here refer to the membrane \tshape \nand \tdimensions.\nFor the membrane shape, you may choose among: 'Cone,'\n'Dome,' 'Sphere,' 'Dipole,' and 'Flat.' \n\nBass reflex tubes and TLs always have flat 'membranes.'\nFor woofers and passive radiators a dome shape or dipole\nis not accepted. Only tweeters may have a spherical\nmembrane."
+    IDC_CD_LST_CHASSIS_POS  "Selection of the cabinet wall in which\na driver shall be mounted.\nThe terms 'Left' and 'Right' relate to a\nviewpoint in front of the cabinet."
+    IDC_CD_LST_CHASSIS_CAB  "Selection of the cabinet section in which\nthe respective driver shall be mounted."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_EDT_WIDTH1       "Changes the \twidth of the cabinet's top or of its\nrear wall at the left side.\nEnter a positive number to decrease the width.\nEnter a negative number to increase the width.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_EDT_DEPTH1       "Changes the \tdepth of the cabinet's top at the\nfront wall.\nEnter a positive number to decrease the depth.\nEnter a negative number to increase the depth.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_EDT_WIDTH2       "Changes the \twidth of the cabinet's top or of its\nrear wall at the right side.\nEnter a positive number to decrease the width.\nEnter a negative number to increase the width.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_EDT_DEPTH2       "Changes the \tdepth of the cabinet's top at the\nrear wall.\nEnter a positive number to decrease the depth.\nEnter a negative number to increase the depth.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_PICTURE          "\tFig. \t1 defines the three dimensions \tH (height),\n\tW (width), and \tD (depth) of the loudspeaker\ncabinet or cabinet section respectively.\nThe width and depth are generally valid only for\nthe bottom of the cabinet.\n\n\tFig. \t2 and \tFig. \t3 presents a front and side view\nof the cabinet (section). They describe the\nparameters \tW1, \tW2, \tD1, and \tD2 by which the\nwidth and depth of the top may be further adjusted.\n\nThe dashed line in Fig. 2 and Fig. 3 defines the\nposition of the \tcenterline (CL) of the side walls\nof the cabinet. The centerline is referred to the\nmid of the top edge."
+    IDC_CD_EDT_HEIGHT       "The \tspeaker \tcabinet may be a rectangular block\nor may have an oblique shape. It may be partitioned\ninto several cabinet sections.\nThe \theight, \twidth, and \tdepth refer to the outer\ndimensions of the cabinet (section).\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to the\nrespective edit control and hit key F10."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_GRP_POSINCABINET "From the three lists below you select the \tcabinet \tsection,\nthe \tcabinet \twall, and the \tdriver which shall be mounted\nthere.\n\nThe terms 'Left' and 'Right' in the wall selection list relate to\na viewpoint in front of the cabinet.\nIn the edit controls 'Distance to ...' the \tdistances of the\ndriver's center to the \treference \tedge or to the \tcenterline\nhave to be entered.\nThe reference edge (blue arrow) is the front edge of the top\n(or bottom) of the cabinet (section), for the cabinet walls the\nreference edge corresponds to the bottom edge.\n\nFor the distance to the centerline you may enter positive (to\nthe right) or negative values (to the left).\nUse the buttons 'Centered' to center the driver in horizontal or\nvertical direction on the respective cabinet wall.\n\nTo \tconvert from non metric units to mm click to the respective\nedit control and hit key F10."
+    IDC_CD_EDT_POS_HEIGHT   "\tDistance of the driver to the reference edge\n(blue arrow) of the respective cabinet wall.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_R_POS_M          "Centers the driver at the centerline."
+    IDC_CD_POSITION_VIEW    "Shows the selected cabinet wall and the drivers mounted.\n\nYou may readjust the position of the selected driver with\nthe mouse."
+    IDC_CD_LST_LS           "Select the driver to be mounted."
+    IDC_CD_BTN_GRAPH        "3D representation of the loudspeaker cabinet."
+    IDC_CD_BTN_CALC         "Displays the results of acoustic calculations:\n - SPL frequency response at 1, 3,..m and 0 deg or\n - 3D representation of the frequency dependence\n    of the directivity pattern."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_EDT_POS_M        "\tDistance of the driver to the centerline of the\nrespective cabinet wall.\nEnter negative values for positions left to the\ncenterline, otherwise enter 0 or positive values.\n\nStandard units are mm.\nTo \tconvert from non metric units to mm click to\nthe respective edit control and hit key F10."
+    IDC_CD_TXT_BOX_VOLUME   "Cabinet Section  [mm]: %s l"
+    IDC_CD_R_POS_MH         "Centers the driver in vertical direction."
+    IDC_BB_CK_CALC_IMPEDANCE_VALUES 
+                            "Activates the automatic calculation of the characteristic\nfrequencies of the impedance response depending on\nthe lower cut-off frequency of the transmission range."
+    IDC_CD_PICTURE1         "\tFig. \t1 defines the three dimensions \tH (height),\n\tW (width), and \tD (depth) of the loudspeaker\ncabinet or cabinet section respectively.\nThe width and depth are generally valid only for\nthe bottom of the cabinet.\n\n\tFig. \t2 and \tFig. \t3 presents a top and side view\nof the cabinet (section). They describe the\nparameters \tW1, \tW2, \tD1, and \tD2 by which the\nwidth and depth of the top may be further adjusted.\n\nThe dashed line in Fig. 2 and Fig. 3 defines the\nposition of the \tcenterline (CL) of the side walls\nof the cabinet. The centerline is referred to the\nmid of the top edge."
+    IDC_CD_GRP_WIDTH_CTRL   "Here you may define the size and shape\nof your loudspeaker cabinet (section)."
+    IDC_CD_R_SET_WIDTH1     "In this setting you may change the width\nof the cabinet's top by W1 or W2."
+    IDC_CD_R_SET_WIDTH2     "In this setting you may change the width\nof the cabinet's back by W1 or W2."
+    IDC_CD_CK_ZERO_DEG_REF_WALL 
+                            "The \t'Main \tBaffle' of the loudspeaker cabinet usually\nis that cabinet wall on which the drivers are mounted.\nThe 'Main Baffle' is taken as a reference for the so-\ncalled zero degree direction for all sound radiation\ncalculations in CARA.\n\nChecking this control defines the currently selected\ncabinet wall as the 'Main Baffle'."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WIZBACK              "Checks the input on this property page\nand switches to previous page."
+    ID_WIZNEXT              "Checks the input on this property page\nand switches to next page."
+    ID_WIZFINISH            "Checks the input on all property pages\nand calculates the CARA sound\npressure data for your loudspeaker."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BOX_DESCRIPTION     "Loudspeaker Editor :  Description"
+    IDS_BOX_BASE_DATA       "Loudspeaker Editor :  Basic Parameters"
+    IDS_BOX_CROSS_OVER      "Loudspeaker Editor :  Crossover Network"
+    IDS_BOX_CHASSIS_DATA    "Loudspeaker Editor :  Driver Units"
+    IDS_BOX_CABINET         "Loudspeaker Editor :  Cabinet and Driver Positions"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROPSHCAPTION       "CARA  Loudspeaker Editor"
+    IDS_FORMAT_MIN_MAX_INT  "Inadmissible Range. Please enter\nvalues between %d  and %d."
+    IDS_FORMAT_MIN_MAX_DOUBLE 
+                            "Inadmissible Range. Please enter values\nbetween %s and %s."
+    IDS_EQUAL_VALUES        "Identical values found !\nPlease enter different values !"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHANGE_FILTER       "Adapt filter parameters for the 2. woofer\nto changed crossover frequency?"
+    IDS_CLOSE_BOXEDITOR     "Do you want to quit the loudspeaker editor now ?"
+    IDS_SAVE_CONSISTENT_DATA 
+                            "The entered data are complete but have changed !\n\nDo you want to save the changes?"
+    IDS_NONCONSISTENT_DATA  "The entered data are not complete !\n\nDo you want to save the data, nevertheless?"
+    IDS_FORMAT_NO_NUMBER    "Inadmissible characters !\n Please enter only numerals."
+    IDS_CABINET_VIEW        "Cabinet"
+    IDS_STACK_CHILD_WNDS    "Ca&scade Windows"
+    IDS_CLOSE_CHILD_WNDS    "&Close Windows"
+    IDS_ERROR_LOW_FREQUENCY "Value outside transmission range, too low"
+    IDS_ERROR_HIGH_FREQUENCY "Value outside transmission range, too high"
+    IDS_CHANGE_LSTYPE       "If you change the 'Loudspeaker Type' all\nthe so far specified data will be deleted!\n\nDo you still want to change the 'Loudspeaker Type'?"
+    IDS_ERROR_FILETYPE      "BOX File has a wrong format (BOX) !"
+    IDS_ERROR_FILECRC       "BOX File is not valid (CRC) !"
+    IDS_ERROR_FILEREAD      "BOX File Read Error !"
+    IDS_ERROR_FILEWRITE     "BOX File Write Error !"
+    IDS_STACK_CHILDV_WNDS   "Tile Windows V&ertically"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STACK_CHILDH_WNDS   "Tile Windows &Horizontally"
+    IDS_CREATE_BDD_DATA     "The data set is not yet completely calculated!\n\nDo you want the data set to be finished?"
+    IDS_REQU_RESETFILTER    "For compatibilty to CARA version 1.1 all filter settings are reset\nto Chebyshev characteristic with 3. order.\n\nDo you whant to reset the filter settings ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SAVE                "Save"
+    IDS_FILTERBOX           "My Speakers"
+    IDS_2DVCAPTION          "%s : Sound-Pressure Level at 0 deg, %d m Distance for 1 Watt (speaker and drivers)"
+    IDS_2DVCAPTION2         "%s : Sound-Pressure Phase at 0 deg, %d m Distance (speaker and drivers)"
+    IDS_BSD                 "Deflate CARA  Sound Pressure Data"
+    IDS_BGD                 "Directivity of: "
+    IDS_BGD_TIME            "%d:%02d min remaining"
+    IDS_BDDEXIST            "This CARA SPL-data file (extension: BDD) \nalready exists. \nUpon saving, these data will be deleted. \nSave, nevertheless?"
+    IDS_POLARVIEW_HEADLINE  "3D Directivity Pattern of the Loudspeaker: %s, distance : %d m"
+    IDS_BDD_ORGFILE         "An original CARA SPL-data file\ncannot be overwritten.\nEnter a different file name!"
+    IDS_EXTRA_TEXT          "Net Volume: %.2f\n(Wall Thickness : %.1f mm)\nNumber of Radiators: %d\nPassive Radiators: %d\nWoofers               : %d (%.3f)\nMidrange (1)        : %d (%.3f)\nMidrange (2)        : %d (%.3f)\nMidrange (3)        : %d (%.3f)\nTweeter               : %d (%.3f)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BDD_DELETED         "The BDD-file %s has been deleted !"
+    IDS_SUB_CABINET         "Cabinet Section %d"
+    IDS_ORTHOGONAL          "Parallel"
+    IDS_PERSPECTIVE         "Foreshortened"
+    IDS_BB                  "BB"
+    IDS_PM                  "PR"
+    IDS_BR                  "BR"
+    IDS_TL                  "TL"
+    IDS_TT1                 "WF1"
+    IDS_TT2                 "WF2"
+    IDS_MT1                 "MR1"
+    IDS_MT2                 "MR2"
+    IDS_MT3                 "MR3"
+    IDS_HT                  "TW"
+    IDS_BOX_FILTER          "Box Data (*.BOX)\n*.BOX\nAll Files (*.*)\n*.*\n\n"
+    IDS_BDD_FILTER          "CARA Box (*.BDD)\n*.BDD\n\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_WRONGINPUT    "Data input incomplete!"
+    IDS_ERROR_FILE_CREATION "Error: The file could not be created !\nUse the button ""Save as"" on the first page."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BTN_OK              "Closes the dialog window\nand saves all changes."
+    IDS_BTN_CANCEL          "Closes the dialog window\nwithout saving any changes."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_EDT_TRAN_X       "Clicking on the spin control buttons at the right side of\nthe edit control will increase/decrease the number.\nWhen you select a specific decimal place in the edit\ncontrol the spin controls will affect only that digit."
+    IDC_3D_CK_TOP_WALL      "You may delete those walls of a cabinet section which\nare internal walls, related to the complete cabinet design."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_CK_CAN_CONTAIN_CHASSIS 
+                            "Checking this control identifies the selected cabinet section\nas a section which may have drivers mounted on it.\n\nA base plate e.g. will usually not contain any driver."
+    IDC_3D_BTN_UPDATE       "Resets the presentation parameters to its defaults\nand updates the 3D representation"
+    IDC_3D_BTN_CREATE_CABINET 
+                            "Creates a new cabinet section and displays it\nright above the base cabinet section"
+    IDC_3D_BTN_DELETE_CABINET "Deletes the currently selected cabinet section"
+    IDC_3D_R_TRANS0         "Pressing the left mouse button enables you to move\nthe object within the 3D presentation field horizontally\nor vertically. Pressing the right mouse button moves\nthe object forth and back. Movements forth and back\nare clearly to be seen in the foreshortened projection."
+    IDC_3D_R_TRANS1         "Pressing the left mouse button enables you to rotate the\nobject around its center within the 3D presentation field."
+    IDC_3D_R_TRANS2         "Pressing the left mouse button enables you\nto increase/decrease the size of the object."
+    IDC_3D_R_TRANS3         "Adjust the position of the light source.\nPressing the left mouse button enables\nyou to change the direction of the light\nbeam.\nPressing the right mouse button will\nchange the distance of the light source."
+    IDC_3D_R_TRANS4         "Pressing the left mouse button enables you\nto adjust the brightness of the light source."
+    IDC_3D_R_TRANS5         "Pressing the left mouse button enables you\nto adjust the focus of the light source,\nuse the right mouse button to adjust the\ndivergence of the light source."
+    IDC_3D_R_TRANS6         "Presentation properties: e.g. switch from parallel\nprojection to foreshortened projection"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_PIC_TRAN_X       "Switches the \thorizontal \tdimensional \tline between\ntwo cabinet sections on and off and enables you to move\nthe selected cabinet section horizontally.\n\nRight clicking on the control enables you to change the\nproperties of the dimensional line.\nPressing the left mouse button enables you to move the\nobject within the 3D presentation field."
+    IDC_3D_PIC_TRAN_Y       "Switches the \tvertical \tdimensional \tline between\ntwo cabinet sections on and off and enables you to\nmove the selected cabinet section vertically.\n\nRight clicking on the control enables you to change\nthe properties of the dimensional line.\nPressing the left mouse button enables you to move\nthe object within the 3D presentation field."
+    IDC_3D_PIC_TRAN_Z       "Switches the \tdimensional \tline \tto \tthe \tback between\ntwo cabinet sections on and off and enables you to\nmove the selected cabinet section forth and back.\n\nRight clicking on the control enables you to change\nthe properties of the dimensional line.\nPressing the left mouse button enables you to move\nthe object within the 3D presentation field."
+    IDC_3D_PIC_TURN_PHI     "\tRotates the object horizontally round its vertical centerline.\nIn the 3D presentation field you may rotate the object with\nthe left mouse button."
+    IDC_3D_PIC_TURN_THETA   "\tTilts the object in steps of 15 degrees forth and back\nround its horizontal centerline.\nIn the 3D presentation field you may tilt the object with\nthe left mouse button."
+    IDC_3D_PIC_ZOOM         "In the 3D presentation field you may change the\nzooming factor with the left mouse button."
+    IDC_3D_PIC_ZOOM_DUMMY1  "In the 3D presentation field you may change the\nsize of the view volume with the right mouse button."
+    IDC_3D_PIC_ZOOM_DUMMY2  "Shows the size of the view volume in the z-direction."
+    IDC_3D_PIC_LITE_PHI     "\tRotates the \tlight \tsource horizontally in steps of 15 degrees.\nIn the 3D presentation field you may rotate the light source\nwith the left mouse button."
+    IDC_3D_PIC_LITE_THETA   "\tTilts the \tlight \tsource in steps of 15 degrees forth and back.\nIn the 3D presentation field you may rotate the light source\nwith the left mouse button."
+    IDC_3D_PIC_LITE_DIST    "In the 3D presentation field you may change the \tdistance of\nthe \tlight \tsource to the object with the right mouse button.\n\nAt a distance of zero the light source transmits parallel light.\nAt larger distances the illumination is characterized by the\nfocus and the divergence of the light source."
+    IDC_3D_PIC_LIGHT_RED    "The input control displays the visibility factor of the light\nsource for \tred \tlight.\n\nLeft click on the red button enables you to adjust the\ncolor of the light source.\nMoving the left clicked mouse in the 3D presentation field\nwill change the intensity of the light source."
+    IDC_3D_PIC_LIGHT_GREEN  "The input control displays the visibility factor of the light\nsource for \tgreen \tlight.\n\nLeft click on the green button enables you to adjust the\ncolor of the ambient light.\nMoving the left clicked mouse in the 3D presentation field\nwill change the intensity of the light source."
+    IDC_3D_PIC_LIGHT_BLUE   "The input control displays the visibility factor of the light\nsource for \tblue \tlight.\n\nLeft click on the blue button enables you to adjust the\ncolor of the specular light reflected at the object's surfaces.\nMoving the left clicked mouse in the 3D presentation field\nwill change the intensity of the light source."
+    IDC_3D_PIC_LIGHT_CUT_OFF 
+                            "Moving the right clicked mouse in the 3D presentation\nfield will change the \tdivergence of the light source."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_3D_PIC_LIGHT_EXP    "Moving the left clicked mouse in the 3D presentation\nfield will change the \tfocus of the light source."
+    IDC_3D_PIC_LIGHT_ON_OFF "Switches the light on or off."
+    IDC_3D_PIC_SET_PROJECTION 
+                            "Changes the projection method in the 3D presentation.\nThe \tforeshortened projection presents a more realistic\nview of the object, whereas the \tparallel projection\nis better suited for the exact positioning of the cabinet\nsections."
+    IDC_3D_PIC_SET_BKCOLOR  "Changes the background color of the 3D view"
+    IDC_3D_PIC_SET_ALPHA_BLEND 
+                            "Enables a transparent view of the cabinet surfaces.\nUse the left mouse button to change the coefficient of\ntransparency in the \t3D \tview"
+    IDC_3D_PIC_SET_BOX_COLOR "Changes the color of the speaker cabinet"
+    IDC_3D_PIC_SET_CHASSIS_COLOR "Changes the color of the drivers' membranes"
+    IDC_3D_PIC_SET_SCALE_COLOR "Changes the color of the dimensional lines"
+    IDC_3D_PIC_SET_SHININES "Changes the reflection coefficient (shininess) of the materials.\nEnter 0 % to switch off the shininess effect."
+    IDC_3D_EDT_CAB_NAME     "Here you may change the name of the cabinet section\n(e.g. Bass Cabinet, Top Part, ...)."
+    IDC_3D_LST_CAB          "Here you may select one of the\ncabinet sections from the list."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_GRP_CABINET_PARAM   "Properties of the cabinet section"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SCA_R00             "Here you may select the reference level for the dimensional line.."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SCA_CK_SHOW         "Switches the dimensional line on or off."
+    IDC_SCA_GRP1            "Settings for the active cabinet section"
+    IDC_SCA_CK_DIR          "Switches the presentation of the dimensional\nline from one side to the other."
+    IDC_SCA_LST_CAB         "Select that cabinet section to which\nthe dimensional line is related."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NO_WALL             "No wall selected"
+    IDS_TOP                 "Top"
+    IDS_FRONT               "Front"
+    IDS_REAR                "Back"
+    IDS_LEFT                "Left"
+    IDS_RIGHT               "Right"
+    IDS_BOTTOM              "Bottom"
+    IDS_CANNOT_CONTAIN_CHASSIS "May not contain any driver"
+    IDS_R_MIDDLE            "Absulte Angle"
+    IDS_SCALE_ANGLE_HEADLINE "Differenzwinkel der Gehäusesegmente"
+    IDS_LIGHTING            "Illumination"
+    IDS_LIGHT_COLOR         "Color of light of the light source"
+    IDS_LIGHT_COLOR_D       "Color of light of the ambient light"
+    IDS_LIGHT_COLOR_S       "Color of light of the specular reflection light"
+    IDS_BK_COLOR            "Background color "
+    IDS_BOX_COLOR           "Color of the cabinet section"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHASSIS_COLOR       "Color of the driver's membrane"
+    IDS_SELECTION_COLOR     "Color of the dimensional lines"
+    IDS_CABINET_LIST_ITEM1  "Basic Section"
+    IDS_DELETE_CAB          "Shall the cabinet section ""%s"" be deleted?"
+    IDS_FOOT_OF             "Foot %d of "
+    IDS_CHANGE_CABINET_OF_CHASSIS 
+                            "Do you want to move the driver to another cabinet section?"
+    IDS_CHANGE_WALL_OF_CHASSIS 
+                            "Do you want to move the driver to another cabinet wall?"
+    IDS_SPEC_MAT_COLOR      "Specular material color"
+    IDS_TOTAL_CABINET       "Total Cabinet, "
+    IDS_UNIT_MOVE           "[mm]"
+    IDS_UNIT_TURN           "[Grad]"
+    IDS_UNIT_ZOOM           "Faktor"
+    IDS_UNIT_LIGHT_DIR      "[Grad, Grad, m]"
+    IDS_UNIT_LIGHT_INTENS   "[%]"
+    IDS_UNIT_LIGHT_SOURCE   "[%, Grad]"
+    IDS_UNIT_REPRESENTATION "[%]"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_DETAIL_VERYLOW "Surface presentation at very low graphic resolution"
+    IDM_VIEW_DETAIL_LOW     "Surface presentation at low graphic resolution"
+    IDM_VIEW_DETAIL_MEAN    "Surface presentation at medium graphic resolution"
+    IDM_VIEW_DETAIL_HIGH    "Surface presentation at high graphic resolution"
+    IDM_VIEW_DETAIL_VERYHIGH 
+                            "Surface presentation at very high graphic resolution"
+    IDM_VIEW_3D_COPY        "Copies the 3D view to the clipboard"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_X_SCALE        "Switches the horizontal dimensional line on or off"
+    IDM_VIEW_Y_SCALE        "Switches the vertical dimensional line on or off"
+    IDM_VIEW_Z_SCALE        "Switches the dimensional line to the back on or off"
+    IDM_VIEW_PHI_SCALE      "Switches the angle defining lines on or off"
+    IDM_VIEW_PARALLEL       "Parallel projection of the 3D object"
+    IDM_VIEW_PERSPECTIVE    "Foreshortened projection of the 3D object"
+    IDM_VIEW_BACK_SIDE      "Turns around the view of the cabinet by 180 degrees."
+    IDM_SET_X_SCALE         "Changes the settings for the horizontal dimensional line"
+    IDM_SET_Y_SCALE         "Changes the settings for the vertical dimensional line"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_SET_Z_SCALE         "Changes the settings for the dimensional line to the back"
+    IDM_SET_PHI_SCALE       "Changes the settings for the angle defining lines"
+    IDM_SET_LIGHT_COLOR     "Changes the color of the light source"
+    IDM_SET_AMBIENT_COLOR   "Changes the color of the ambient light"
+    IDM_SET_SPECULAR_COLOR  "Changes the color of the specular light reflected at the cabinet's surfaces"
+    IDM_SET_SPECULAR_MAT    "Changes the specular material color"
+    IDM_SET_STANDARD_LIGHTPARAM 
+                            "Resets the illumination parameters to its default"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HOLDER_OF           "Holder of "
+    IDS_OPTIMZE_RESULTS     "Calculation of Levels"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_3D_VIEW DIALOGEX 0, 0, 270, 274
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "3D View of the Cabinet"
+MENU IDR_CONTEXT_DETAIL
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,3,3,
+                    197,157,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+    CONTROL         "Move",IDC_3D_R_TRANS0,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP,205,3,60,11
+    CONTROL         "Rotate",IDC_3D_R_TRANS1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,205,14,60,11
+    CONTROL         "Zoom",IDC_3D_R_TRANS2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,205,27,60,11
+    CONTROL         "Light Direction",IDC_3D_R_TRANS3,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,205,40,60,11
+    CONTROL         "Brightness",IDC_3D_R_TRANS4,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,205,51,60,11
+    CONTROL         "Light Source",IDC_3D_R_TRANS5,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,205,62,60,11
+    CONTROL         "Presentation",IDC_3D_R_TRANS6,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,205,75,60,11
+    PUSHBUTTON      "X",IDC_3D_BTN_TRAN_X,205,101,15,14,BS_ICON | BS_CENTER | 
+                    BS_VCENTER,WS_EX_STATICEDGE
+    EDITTEXT        IDC_3D_EDT_TRAN_X,222,102,31,12,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_X,"msctls_updown32",
+                    UDS_ARROWKEYS,254,101,11,14
+    PUSHBUTTON      "Y",IDC_3D_BTN_TRAN_Y,205,116,15,14,BS_ICON | NOT 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_3D_EDT_TRAN_Y,222,117,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Y,"msctls_updown32",
+                    UDS_ARROWKEYS,254,116,11,14
+    PUSHBUTTON      "Z",IDC_3D_BTN_TRAN_Z,205,131,15,14,BS_ICON | NOT 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_3D_EDT_TRAN_Z,222,132,31,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_3D_SPIN_TRAN_Z,"msctls_updown32",
+                    UDS_ARROWKEYS,254,131,11,14
+    PUSHBUTTON      "Standard",IDC_3D_BTN_UPDATE,205,147,60,12
+    PUSHBUTTON      "Create New Cabinet Section",IDC_3D_BTN_CREATE_CABINET,
+                    10,164,115,12
+    PUSHBUTTON      "Delete Cabinet Section...",IDC_3D_BTN_DELETE_CABINET,
+                    155,164,105,12,WS_DISABLED
+    EDITTEXT        IDC_3D_EDT_CAB_NAME,130,194,130,12,ES_AUTOHSCROLL
+    LTEXT           "Name of Cabinet Section",IDC_STATIC,10,196,115,8
+    GROUPBOX        "Cabinet Section",IDC_STATIC,3,180,262,90
+    CONTROL         "Top",IDC_3D_CK_TOP_WALL,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_TABSTOP,10,255,29,10
+    CONTROL         "Front",IDC_3D_CK_FRONT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,52,255,32,10
+    CONTROL         "Back",IDC_3D_CK_BACK_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,94,255,33,10
+    CONTROL         "Left",IDC_3D_CK_LEFT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,136,255,28,10
+    CONTROL         "Right",IDC_3D_CK_RIGHT_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,178,255,33,10
+    CONTROL         "Bottom",IDC_3D_CK_BOTTOM_WALL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,220,255,38,10
+    CONTROL         "Cabinet section with drivers",
+                    IDC_3D_CK_CAN_CONTAIN_CHASSIS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,225,115,10
+    LTEXT           "",IDC_3D_TXT_TRAN_X,222,104,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Y,222,119,45,8,NOT WS_VISIBLE
+    LTEXT           "",IDC_3D_TXT_TRAN_Z,222,134,45,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_3D_LST_CAB,130,208,130,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Selection of Cabinet Section",IDC_STATIC,10,211,115,8
+    GROUPBOX        "Visible Cabinet Surfaces",IDC_3D_GRP_VISIBLE_WALLS,3,
+                    236,262,34
+    CTEXT           "",IDC_3D_TXT_UNITS,205,90,60,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_3D_VIEW, DIALOG
+    BEGIN
+        RIGHTMARGIN, 269
+        VERTGUIDE, 3
+        VERTGUIDE, 10
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        VERTGUIDE, 210
+        VERTGUIDE, 220
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 3
+        HORZGUIDE, 108
+        HORZGUIDE, 123
+        HORZGUIDE, 138
+        HORZGUIDE, 153
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 200
+        HORZGUIDE, 215
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+        HORZGUIDE, 260
+        HORZGUIDE, 270
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

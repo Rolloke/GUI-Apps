@@ -1,0 +1,482 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+#include "version.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_CARASCS             ICON    DISCARDABLE     "icon1.ico"
+IDI_SMALL               ICON    DISCARDABLE     "SMALL.ICO"
+IDC_PHILEFT             ICON    DISCARDABLE     "res\\SOPHRIGHT.ico"
+IDC_PSILEFT             ICON    DISCARDABLE     "res\\SOPSLEFT.ico"
+IDC_THETADOWN           ICON    DISCARDABLE     "res\\SOTHDOWN.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_CARASCS ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "/",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "?",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "M",            IDM_OPTIONS_BOX,        VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_CARASCS MENU DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Beenden",                    IDM_EXIT
+        MENUITEM "&Beenden und Speichern",      IDM_EXIT_AND_SAVE
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "A&nsicht kopieren\tStrg+A",   IDM_SELECTALL
+    END
+    POPUP "Ansicht"
+    BEGIN
+        MENUITEM "Te&xturen",                   IDM_VIEW_TEXTURE
+        MENUITEM "&Licht",                      IDM_VIEW_LIGHT
+        MENUITEM "Animation",                   IDM_VIEW_ANIMATION
+        POPUP "&Auflösung\tStrg+D"
+        BEGIN
+            MENUITEM "&Sehr niedrig\tStrg+1",       IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Niedrig\tStrg+2",            IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Mittel\tStrg+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&Hoch\tStrg+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "S&ehr hoch\tStrg+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+    END
+    POPUP "&Optionen"
+    BEGIN
+        MENUITEM "&Licht...",                   IDM_OPTIONS_LIGHT
+        MENUITEM "Animation...",                IDM_OPTIONS_ANIMATION
+        MENUITEM "Boxen...",                    IDM_OPTIONS_BOX
+        POPUP "Texturinterpolation"
+        BEGIN
+            MENUITEM "Ver&größerung",               IDM_VIEW_TEX_MAG_LINEAR
+            MENUITEM "Ver&kleinerung",              IDM_VIEW_TEX_MIN_LINEAR
+        END
+        MENUITEM "Bitmaps als Textur",          IDM_OPTIONS_TEXTUREINDEX
+    END
+    MENUITEM "&Info...",                    IDM_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ANIMATION_DLG DIALOG DISCARDABLE  22, 17, 265, 159
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Animation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Boxen Liste",IDC_AN_BOX_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_OWNERDATA | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,15,55,105
+    CONTROL         "Anfangsposition und Anfangswinkel",IDC_AN_R_WHAT,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,80,15,175,10
+    CONTROL         "Bewegungsrichtung und Drehwinkel",IDC_AN_R_WHAT1,"Button",
+                    BS_AUTORADIOBUTTON,80,27,175,10
+    EDITTEXT        IDC_AN_EDT_MOVE_X,125,54,50,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_AN_EDT_TURN_X,205,54,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_MOVE_Y,125,74,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_TURN_Y,205,74,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_MOVE_Z,125,94,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_TURN_Z,205,94,50,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,190,144,65,11,WS_GROUP
+    CTEXT           "Position [mm]",IDC_AN_TXT_POS,115,41,60,8
+    CTEXT           "Winkel [°]",IDC_AN_TXT_ANGLE,190,41,65,8
+    CTEXT           "Schrittweite  [mm]",IDC_AN_TXT_MOVE,115,41,60,8,NOT 
+                    WS_VISIBLE
+    CTEXT           "Schrittweite [°]",IDC_AN_TXT_TURN,190,41,65,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "Horizontal",IDC_STATIC,80,56,40,8
+    LTEXT           "Vertikal",IDC_STATIC,80,76,40,8
+    LTEXT           "Tiefe",IDC_STATIC,80,96,40,8
+    GROUPBOX        "Parameter des gewählten Lautsprechers",IDC_STATIC,75,5,
+                    185,110
+    PUSHBUTTON      "Auswählen...",IDC_AN_BTN_GETBOX,10,125,55,11,BS_LEFT
+    PUSHBUTTON      "Löschen",IDC_AN_BTN_DELBOX,10,139,55,11,BS_LEFT
+    EDITTEXT        IDC_AN_EDT_REP_TIME,140,124,35,12,ES_AUTOHSCROLL
+    LTEXT           "Zeitschritt [ms]",IDC_STATIC,80,126,59,8
+    CONTROL         "Animation anhalten",IDC_AN_CK_STOP,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,80,144,95,11
+    GROUPBOX        "Lautsprecher",IDC_STATIC,5,5,65,150
+    PUSHBUTTON      "Abbrechen",IDCANCEL,190,125,65,11,WS_GROUP
+    ICON            IDC_THETADOWN,IDC_STATIC,180,50,20,20
+    ICON            IDC_PHILEFT,IDC_STATIC,180,70,20,20
+    ICON            IDC_PSILEFT,IDC_STATIC,180,91,20,20
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "#include ""version.rc""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ANIMATION_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 175
+        VERTGUIDE, 190
+        VERTGUIDE, 205
+        VERTGUIDE, 255
+        VERTGUIDE, 260
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 22
+        HORZGUIDE, 32
+        HORZGUIDE, 45
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 144
+        HORZGUIDE, 155
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_APP_TITLE           "CARASCS"
+    IDM_ABOUT               "Informationen über Copyright, Programmversion"
+    IDM_EXIT                "Beendet das Programm"
+    IDC_CARASCS             "CARASCS"
+    IDC_CARA_STANDARD       "Bereit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_LIGHT       "Ändert die Einstellungen für die Beleuchtung der Lautsprecher"
+    IDM_OPTIONS_BOX         "Editieren der Lautsprechermaterialien"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_TEXTURE        "Schaltet die Texturen ein oder aus"
+    IDM_VIEW_LIGHT          "Schaltet die Beleuchtung ein oder aus"
+    IDM_VIEW_DETAIL_VERYLOW "Sehr niedrige Auflösung"
+    IDM_VIEW_DETAIL_LOW     "Niedrige Auflösung"
+    IDM_VIEW_DETAIL_MEAN    "Mittlere Auflösung"
+    IDM_VIEW_DETAIL_HIGH    "Hohe Auflösung"
+    IDM_VIEW_DETAIL_VERYHIGH "Sehr hohe Auflösung"
+    IDM_VIEW_TEX_MAG_LINEAR "Interpoliert die Texturen bei Vergrößerung"
+    IDM_VIEW_TEX_MIN_LINEAR "Interpoliert die Texturen bei Verkleinerung"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_ANIMATION   "Einstellungen der Animation und Auswahl der Lautsprecher"
+    IDM_OPTIONS_TEXTUREINDEX 
+                            "Benutzt Bitmaps im CARA BMP Verzeichnis als Texturen"
+    IDM_EXIT_AND_SAVE       "Beendet das Programm und speichert die Einstellungen"
+    IDM_VIEW_ANIMATION      "Schaltet die Animation ein oder aus"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_CARASCS MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+        MENUITEM "E&xit and Save",              IDM_EXIT_AND_SAVE
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Copy &View\tCtrl+A",          IDM_SELECTALL
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Te&xtures",                   IDM_VIEW_TEXTURE
+        MENUITEM "&Illumination",               IDM_VIEW_LIGHT
+        MENUITEM "Animation",                   IDM_VIEW_ANIMATION
+        POPUP "R&esolution"
+        BEGIN
+            MENUITEM "&Very Low\tCtrl+1",           IDM_VIEW_DETAIL_VERYLOW
+            MENUITEM "&Low\tCtrl+2",                IDM_VIEW_DETAIL_LOW
+            MENUITEM "&Medium\tCtrl+3",             IDM_VIEW_DETAIL_MEAN
+            MENUITEM "&High\tCtrl+4",               IDM_VIEW_DETAIL_HIGH
+            MENUITEM "V&ery High\tCtrl+5",          IDM_VIEW_DETAIL_VERYHIGH
+        END
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Light...",                   IDM_OPTIONS_LIGHT
+        MENUITEM "Animation...",                IDM_OPTIONS_ANIMATION
+        POPUP "Te&xture Interpolation"
+        BEGIN
+            MENUITEM "&Enlargement",                IDM_VIEW_TEX_MAG_LINEAR
+            MENUITEM "&Reduction",                  IDM_VIEW_TEX_MIN_LINEAR
+        END
+        MENUITEM "Bitmaps as Texture",          IDM_OPTIONS_TEXTUREINDEX
+    END
+    MENUITEM "&About...",                   IDM_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ANIMATION_DLG DIALOG DISCARDABLE  22, 17, 265, 159
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Animation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Box List",IDC_AN_BOX_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_OWNERDATA | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,15,55,105
+    CONTROL         "Starting position and angle",IDC_AN_R_WHAT,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,80,15,175,10
+    CONTROL         "Moving direction and twisting angle",IDC_AN_R_WHAT1,
+                    "Button",BS_AUTORADIOBUTTON,80,27,175,10
+    EDITTEXT        IDC_AN_EDT_MOVE_X,125,54,50,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_AN_EDT_TURN_X,205,54,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_MOVE_Y,125,74,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_TURN_Y,205,74,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_MOVE_Z,125,94,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AN_EDT_TURN_Z,205,94,50,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,190,144,65,11,WS_GROUP
+    CTEXT           "Position [mm]",IDC_AN_TXT_POS,115,41,60,8
+    CTEXT           "Angle [deg]",IDC_AN_TXT_ANGLE,190,41,65,8
+    CTEXT           "Stepwidth [mm]",IDC_AN_TXT_MOVE,115,41,60,8,NOT 
+                    WS_VISIBLE
+    CTEXT           "Stepwidth [deg]",IDC_AN_TXT_TURN,190,41,65,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "Horizontal",IDC_STATIC,80,56,40,8
+    LTEXT           "Vertikal",IDC_STATIC,80,76,40,8
+    LTEXT           "Depth",IDC_STATIC,80,96,40,8
+    GROUPBOX        "Parameters for Selected Loudspeaker",IDC_STATIC,75,5,
+                    185,110
+    PUSHBUTTON      "Choose...",IDC_AN_BTN_GETBOX,10,125,55,11,BS_LEFT
+    PUSHBUTTON      "Delete",IDC_AN_BTN_DELBOX,10,139,55,11,BS_LEFT
+    EDITTEXT        IDC_AN_EDT_REP_TIME,140,124,35,12,ES_AUTOHSCROLL
+    LTEXT           "Time step [ms]",IDC_STATIC,80,126,59,8
+    CONTROL         "Stop Animation",IDC_AN_CK_STOP,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,80,144,95,11
+    GROUPBOX        "Loudspeaker",IDC_STATIC,5,5,65,150
+    PUSHBUTTON      "Cancel",IDCANCEL,190,125,65,11,WS_GROUP
+    ICON            IDC_THETADOWN,IDC_STATIC,180,50,20,20
+    ICON            IDC_PHILEFT,IDC_STATIC,180,70,20,20
+    ICON            IDC_PSILEFT,IDC_STATIC,180,91,20,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ANIMATION_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 75
+        VERTGUIDE, 80
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 175
+        VERTGUIDE, 190
+        VERTGUIDE, 205
+        VERTGUIDE, 255
+        VERTGUIDE, 260
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 22
+        HORZGUIDE, 32
+        HORZGUIDE, 45
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+        HORZGUIDE, 144
+        HORZGUIDE, 155
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_APP_TITLE           "CARASCS"
+    IDM_ABOUT               "Info about copyright and version"
+    IDM_EXIT                "Closes the program"
+    IDC_CARASCS             "CARASCS"
+    IDC_CARA_STANDARD       "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_VIEW_TEXTURE        "Shows or hides the material textures"
+    IDM_VIEW_LIGHT          "Switches the illumination on or off"
+    IDM_VIEW_DETAIL_VERYLOW "Very low resolution"
+    IDM_VIEW_DETAIL_LOW     "Low resolution"
+    IDM_VIEW_DETAIL_MEAN    "Medium resolution"
+    IDM_VIEW_DETAIL_HIGH    "High resolution"
+    IDM_VIEW_DETAIL_VERYHIGH "Very high resolution"
+    IDM_VIEW_TEX_MAG_LINEAR "Interpolates the textures upon enlargement"
+    IDM_VIEW_TEX_MIN_LINEAR "Interpolates the textures upon reduction"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_LIGHT       "Changes the illumination properties"
+    IDM_OPTIONS_BOX         "Shows the orientation of the loudspeaker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPTIONS_ANIMATION   "Settings for animation and loudspeakers"
+    IDM_OPTIONS_TEXTUREINDEX "Use bitmaps from CARA BMP folder as textures"
+    IDM_EXIT_AND_SAVE       "Closes the program and saves the settings"
+    IDM_VIEW_ANIMATION      "Switches the animation on or off"
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

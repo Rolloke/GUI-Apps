@@ -1,0 +1,1849 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\resource.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\CARA3DVIEW.ico"
+IDR_CARA3DTYPE          ICON    DISCARDABLE     "res\\CARA3DVIEWDoc.ico"
+IDR_CARA_COLOR          ICON    DISCARDABLE     "res\\CaraColor.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_FILMTOOLBAR TOOLBAR DISCARDABLE  16, 16
+BEGIN
+    BUTTON      ID_FUNC_FILMSTARTR
+    BUTTON      ID_FUNC_FILMSTEPBEGIN
+    BUTTON      ID_FUNC_FILMSTEPMINUS
+    BUTTON      ID_FUNC_FILMPAUSE
+    BUTTON      ID_FUNC_FILMSTEPPLUS
+    BUTTON      ID_FUNC_FILMSTEPEND
+    BUTTON      ID_FUNC_FILMSTART
+    SEPARATOR
+    BUTTON      ID_FUNC_FILMREPEAT
+    BUTTON      ID_FUNC_FILM_TIMER
+END
+
+IDR_FUNCTOOLBAR TOOLBAR DISCARDABLE  16, 16
+BEGIN
+    BUTTON      ID_FUNC_MOVE_UP
+    BUTTON      ID_FUNC_MOVE_DOWN
+    BUTTON      ID_FUNC_MOVE_LEFT
+    BUTTON      ID_FUNC_MOVE_RIGHT
+    SEPARATOR
+    BUTTON      ID_FUNC_FORWARD
+    BUTTON      ID_FUNC_BACKWARD
+    SEPARATOR
+    BUTTON      ID_FUNC_ZOOM
+    BUTTON      ID_FUNC_REZOOM
+    SEPARATOR
+    BUTTON      ID_FUNC_ROTATE_LEFT
+    BUTTON      ID_FUNC_ROTATE_RIGHT
+    BUTTON      ID_FUNC_ROTATE_UP
+    BUTTON      ID_FUNC_ROTATE_DOWN
+END
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_FILE_SAVE_AS_BITMAP
+    BUTTON      ID_EDIT_COPY_AS_DIB
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_FILE_PRINT_PREVIEW
+    SEPARATOR
+    BUTTON      ID_VIEW_FULL
+    BUTTON      ID_VIEW_LIGHT
+    BUTTON      ID_VIEW_BOXPOS
+    BUTTON      ID_VIEW_LISTENERPOS
+    BUTTON      ID_VIEW_PHASEVALUES
+    SEPARATOR
+    BUTTON      ID_VIEW_AXIS
+    BUTTON      ID_VIEW_GRID
+    SEPARATOR
+    BUTTON      ID_OPTIONS_VIEW
+    BUTTON      ID_OPTIONS_LIGHT
+    BUTTON      ID_OPTIONS_STANDARD
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+    BUTTON      ID_HELP_FINDER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_FILMTOOLBAR         BITMAP  DISCARDABLE     "res\\FilmBar.bmp"
+IDR_FUNCTOOLBAR         BITMAP  DISCARDABLE     "res\\FuncBar.bmp"
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\StdBar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "A",            ID_VIEW_AXIS,           VIRTKEY, CONTROL, NOINVERT
+    "B",            ID_VIEW_BOXPOS,         VIRTKEY, CONTROL, ALT, NOINVERT
+    "C",            ID_EDIT_COPY_AS_DIB,    VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_VIEW_FULL,           VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_VIEW_GRID,           VIRTKEY, CONTROL, NOINVERT
+    "H",            IDX_HEAPWATCH,          VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "L",            ID_VIEW_LIGHT,          VIRTKEY, CONTROL, NOINVERT
+    "L",            ID_VIEW_LISTENERPOS,    VIRTKEY, CONTROL, ALT, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_VIEW_PHASEVALUES,    VIRTKEY, CONTROL, ALT, NOINVERT
+    VK_ADD,         ID_FUNC_ZOOM,           VIRTKEY, NOINVERT
+    VK_ADD,         ID_FUNC_BACKWARD,       VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         ID_FUNC_ZOOM_LEVEL,     VIRTKEY, ALT, NOINVERT
+    VK_DOWN,        ID_FUNC_ROTATE_DOWN,    VIRTKEY, NOINVERT
+    VK_DOWN,        ID_FUNC_MOVE_DOWN,      VIRTKEY, SHIFT, NOINVERT
+    VK_F1,          ID_HELP_FINDER,         VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY_AS_DIB,    VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_LEFT,        ID_FUNC_ROTATE_LEFT,    VIRTKEY, NOINVERT
+    VK_LEFT,        ID_FUNC_FILMSTEPMINUS,  VIRTKEY, CONTROL, NOINVERT
+    VK_LEFT,        ID_FUNC_MOVE_LEFT,      VIRTKEY, SHIFT, NOINVERT
+    VK_RIGHT,       ID_FUNC_ROTATE_RIGHT,   VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_FUNC_FILMSTEPPLUS,   VIRTKEY, CONTROL, NOINVERT
+    VK_RIGHT,       ID_FUNC_MOVE_RIGHT,     VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_FUNC_REZOOM,         VIRTKEY, NOINVERT
+    VK_SUBTRACT,    ID_FUNC_FORWARD,        VIRTKEY, CONTROL, NOINVERT
+    VK_SUBTRACT,    ID_FUNC_REZOOM_LEVEL,   VIRTKEY, ALT, NOINVERT
+    VK_UP,          ID_FUNC_ROTATE_UP,      VIRTKEY, NOINVERT
+    VK_UP,          ID_FUNC_MOVE_UP,        VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_VIEW_X_CHARACTER,    VIRTKEY, CONTROL, ALT, NOINVERT
+    "X",            ID_VIEW_X_UNIT,         VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "Y",            ID_VIEW_Y_CHARACTER,    VIRTKEY, CONTROL, ALT, NOINVERT
+    "Y",            ID_VIEW_Y_UNIT,         VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    "Z",            ID_VIEW_Z_CHARACTER,    VIRTKEY, CONTROL, ALT, NOINVERT
+    "Z",            ID_VIEW_Z_UNIT,         VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_TIMER_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "  50 ms",                     ID_TIME_1
+        MENUITEM "100 ms",                      ID_TIME_2
+        MENUITEM "150 ms",                      ID_TIME_3
+        MENUITEM "200 ms",                      ID_TIME_4
+        MENUITEM "250 ms",                      ID_TIME_5
+        MENUITEM "300 ms",                      ID_TIME_6
+        MENUITEM "350 ms",                      ID_TIME_7
+        MENUITEM "400 ms",                      ID_TIME_8
+        MENUITEM "450 ms",                      ID_TIME_9
+        MENUITEM "500 ms",                      ID_TIME_10
+    END
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Speichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM "&Als Bitmap Speichern...",    ID_FILE_SAVE_AS_BITMAP
+        MENUITEM SEPARATOR
+        MENUITEM "Drucker &einrichten...",      ID_FILE_PRINT_SETUP
+        MENUITEM "Druck&vorschau",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "S&enden...",                  ID_FILE_SEND_MAIL
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "Fensterinhalt &kopieren\tStrg+C", ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Standard",                   ID_VIEW_TOOLBAR
+        MENUITEM "&Objekt",                     ID_VIEW_FUNCTIONS
+        MENUITEM "&Animation",                  ID_VIEW_FILMRUN
+        MENUITEM "&Farbstufen",                 ID_VIEW_COLORBAR
+        MENUITEM "S&tatuszeile",                ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Koordinatenachsen\tStrg+A",  ID_VIEW_AXIS
+        MENUITEM "X-Beschriftung\tStrg+Alt+X",  ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Beschriftung\tStrg+Alt+Y",  ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Beschriftung\tStrg+Alt+Z",  ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "&Gitterlinien\tStrg+G",       ID_VIEW_GRID
+        MENUITEM "X-Einheiten\tStrg+Shift+X",   ID_VIEW_X_UNIT
+        MENUITEM "Y-Einheiten\tStrg+Shift+Y",   ID_VIEW_Y_UNIT
+        MENUITEM "Z-Einheiten\tStrg+Shift+Z",   ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Steck&nadeln"
+        BEGIN
+            MENUITEM "&Lautsprecherposition\tStrg+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Hörerposition\tStrg+Alt+L",  ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciterposition\tStrg+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "Zeit&darstellung\tStrg+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Beleuchtung\tStrg+L",        ID_VIEW_LIGHT
+        MENUITEM "Gan&zer Bildschirm\tStrg+F",  ID_VIEW_FULL, HELP
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "&Darstellungsparameter...",   ID_OPTIONS_VIEW
+        MENUITEM "&Objektbeleuchtung...",       ID_OPTIONS_LIGHT
+        MENUITEM "&Standardeinstellungen...",   ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "Objektposition &einstellen",  ID_OPTIONS_SET_DEFAULT
+        MENUITEM "Farbeinstellung s&peichern...", ID_OPTIONS_SAVE_COLORS
+        MENUITEM "Farbeinstellung &laden...",   ID_OPTIONS_LOAD_COLORS
+        MENUITEM "Farbeinstellung zurücksetzen", ID_OPTIONS_RESET_COLORS
+    END
+    POPUP "A&nimation"
+    BEGIN
+        MENUITEM "Zum &Anfang",                 ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Einzelbild &vor\tStrg + Rechts", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Einzelbild &zurück\tStrg + Links", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &rückwärts",            ID_FUNC_FILMSTARTR
+        MENUITEM "Zum &Ende",                   ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "Auto-&Wiederholung",          ID_FUNC_FILMREPEAT
+        MENUITEM "Zei&tsteuerung",              ID_FUNC_FILM_TIMER
+    END
+    POPUP "&Objekt"
+    BEGIN
+        MENUITEM "Nach &links\tShift + Links",  ID_FUNC_MOVE_LEFT
+        MENUITEM "Nach &rechts\tShift + Rechts", ID_FUNC_MOVE_RIGHT
+        MENUITEM "Nach &oben\tShift + Hoch",    ID_FUNC_MOVE_UP
+        MENUITEM "Nach &unten\tShift + Runter", ID_FUNC_MOVE_DOWN
+        MENUITEM SEPARATOR
+        MENUITEM "Nach &vorn\tStrg + -",        ID_FUNC_FORWARD
+        MENUITEM "Nach &hinten\tStrg + +",      ID_FUNC_BACKWARD
+        MENUITEM SEPARATOR
+        MENUITEM "Ver&größern\t+",              ID_FUNC_ZOOM
+        MENUITEM "Ver&kleinern\t-",             ID_FUNC_REZOOM
+        MENUITEM SEPARATOR
+        MENUITEM "Nach links drehen\tLinks",    ID_FUNC_ROTATE_RIGHT
+        MENUITEM "Nach rechts drehen\tRechts",  ID_FUNC_ROTATE_LEFT
+        MENUITEM "Nach hinten kippen\tHoch",    ID_FUNC_ROTATE_UP
+        MENUITEM "Nach vorn kippen\tRunter",    ID_FUNC_ROTATE_DOWN
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "&Hilfethemen\tF1",            ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "Inf&o über ETS3DVIEW...",     ID_APP_ABOUT
+    END
+END
+
+IDR_VIEW_OPTION_GRID MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "X-Einheiten\tStrg+Shift+X",   ID_VIEW_X_UNIT
+        MENUITEM "Y-Einheiten\tStrg+Shift+Y",   ID_VIEW_Y_UNIT
+        MENUITEM "Z-Einheiten\tStrg+Shift+Z",   ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        MENUITEM "Alle Einheiten an",           ID_VIEW_ALL_UNITS
+        MENUITEM "Alle Einheiten aus",          ID_VIEW_NO_UNITS
+        MENUITEM SEPARATOR
+        MENUITEM "Intelligente Gitteraufteilung", ID_VIEW_INTELLI_GRID
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDCANCEL
+    END
+END
+
+IDR_VIEW_OPTION_AXIS MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "X-Beschriftung\tStrg+Alt+X",  ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Beschriftung\tStrg+Alt+Y",  ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Beschriftung\tStrg+Alt+Z",  ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "Alle Beschriftungen an",      ID_VIEW_ALL_CHARACTERS
+        MENUITEM "Alle Beschriftungen aus",     ID_VIEW_NO_CHARACTERS
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDCANCEL
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\resource.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+4 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""..\resource.h""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_LIGHT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 55
+        VERTGUIDE, 65
+        VERTGUIDE, 90
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 145
+        VERTGUIDE, 165
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 80
+        HORZGUIDE, 90
+        HORZGUIDE, 103
+        HORZGUIDE, 110
+        HORZGUIDE, 134
+        HORZGUIDE, 143
+    END
+
+    IDD_STANDARD, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 50
+        HORZGUIDE, 69
+    END
+
+    IDD_VIEW_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 50
+        VERTGUIDE, 65
+        VERTGUIDE, 90
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 150
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 13
+        HORZGUIDE, 20
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 110
+        HORZGUIDE, 127
+        HORZGUIDE, 140
+        HORZGUIDE, 155
+        HORZGUIDE, 175
+        HORZGUIDE, 180
+        HORZGUIDE, 195
+        HORZGUIDE, 205
+        HORZGUIDE, 215
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LIGHT_DIALOG DIALOGEX 0, 0, 200, 151
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Objektbeleuchtung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Lichtquelle",IDC_STATIC,5,0,90,40
+    COMBOBOX        IDC_LIGHT_COMBO,10,9,80,42,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_LIGHT_COMBO
+    CONTROL         "Lichtquelle an",IDC_LIGHT_ON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,27,80,8,0,HIDC_LIGHT_ON
+    GROUPBOX        "Richtungswinkel",IDC_STATIC,5,40,90,50
+    LTEXT           "vertikal [deg] :",IDC_STATIC,10,56,55,8
+    EDITTEXT        IDC_LIGHT_THETA,65,54,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_THETA
+    LTEXT           "horizontal [deg] :",IDC_STATIC,10,72,55,8
+    EDITTEXT        IDC_LIGHT_PHI,65,69,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_PHI
+    GROUPBOX        "Strahlereigenschaften",IDC_STATIC,100,0,95,90
+    LTEXT           "Abstand [m] :",IDC_STATIC,105,16,60,8
+    EDITTEXT        IDC_LIGHT_DISTANCE,165,14,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_DISTANCE
+    LTEXT           "Öffnung [deg] :",IDC_STATIC,105,46,60,8
+    EDITTEXT        IDC_LIGHT_CUTOFF,165,44,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_CUTOFF
+    PUSHBUTTON      "Abstand berechnen",IDC_LIGHTDLG_DEFAULT,105,29,85,12,0,
+                    0,HIDC_LIGHTDLG_DEFAULT
+    LTEXT           "Bündelung [%] :",IDC_STATIC,105,61,60,8
+    EDITTEXT        IDC_LIGHT_EXPONENT,165,59,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_EXPONENT
+    PUSHBUTTON      "Lichtfarbe",IDC_LIGHT_COLOR,105,74,85,12,0,0,
+                    HIDC_LIGHT_COLOR
+    GROUPBOX        "Lichtintensität [%]",IDC_STATIC,5,90,190,44
+    LTEXT           "0",IDC_STATIC,15,99,8,8
+    LTEXT           "50",IDC_STATIC,96,99,9,8
+    LTEXT           "100",IDC_STATIC,175,99,15,8
+    CONTROL         "Slider",IDC_LIGHT_INTENS0,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,10,110,180,20,0,
+                    HIDC_LIGHT_INTENS0
+    DEFPUSHBUTTON   "OK",IDOK,10,137,50,12,0,0,HIDOK
+    PUSHBUTTON      "Übernehmen",ID_APPLY_NOW,75,137,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Abbrechen",IDCANCEL,140,137,50,12,0,0,HIDCANCEL
+END
+
+IDD_STANDARD DIALOGEX 0, 0, 200, 159
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Standardeinstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Abstand der Gitternetzlinien (Vorgabe)",IDC_STATIC,5,7,
+                    190,30
+    LTEXT           "X [m] : ",IDC_STATIC,15,21,28,8
+    EDITTEXT        IDC_STD_GRID_STEP_Z,45,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Z
+    LTEXT           "Y [m] : ",IDC_STATIC,75,21,25,8
+    EDITTEXT        IDC_STD_GRID_STEP_X,100,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_X
+    LTEXT           "Z [ ] : ",IDC_STATIC,135,21,21,8
+    EDITTEXT        IDC_STD_GRID_STEP_Y,160,18,30,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Y
+    PUSHBUTTON      "Schriftart der Grafikausgabe...",IDC_STD_GRAFIC_FONT,11,
+                    120,179,12,BS_CENTER | BS_VCENTER,0,HIDC_STD_GRAFIC_FONT
+    CONTROL         "Effekte anpassen",IDC_STD_REDUCE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,94,75,10,0,
+                    HIDC_STD_REDUCE
+    DEFPUSHBUTTON   "OK",IDOK,10,143,50,12,0,0,HIDOK
+    PUSHBUTTON      "Übernehmen",ID_APPLY_NOW,75,143,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Abbrechen",IDCANCEL,140,143,50,12,0,0,HIDCANCEL
+    CONTROL         "Intelligente Gitteraufteilung",IDC_STD_INTELLI_GRID,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,106,103,10
+    GROUPBOX        "Weitere Einstellungen",IDC_STATIC,5,82,190,56
+    PUSHBUTTON      "Zahlendarstellung der X- und Y-Achsen...",
+                    IDC_STD_NUM_MODE0,10,44,180,12
+    PUSHBUTTON      "Zahlendarstellung der Z-Achse...",IDC_STD_NUM_MODEZ0,10,
+                    63,180,12
+END
+
+IDD_VIEW_DIALOG DIALOGEX 0, 0, 200, 225
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Darstellungsparameter"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Projektion",IDC_STATIC,5,0,190,20,WS_GROUP
+    CONTROL         "perspektivisch",IDC_VIEW_PROJECTION1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,9,90,8,0,
+                    HIDC_VIEW_PROJECTION1
+    CONTROL         "orthogonal",IDC_VIEW_PROJECTION2,"Button",
+                    BS_AUTORADIOBUTTON,105,9,85,8,0,HIDC_VIEW_PROJECTION2
+    LTEXT           "Objekt :",IDC_STATIC,10,36,30,8
+    GROUPBOX        "Vergrößerung",IDC_STATIC,5,25,190,25
+    EDITTEXT        IDC_VIEW_OBJECT_ZOOM,65,34,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_OBJECT_ZOOM
+    LTEXT           "Z-Werte :",IDC_STATIC,105,36,34,8
+    EDITTEXT        IDC_VIEW_VALUE_ZOOM,165,34,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_VALUE_ZOOM
+    GROUPBOX        "Flächenteilung",IDC_STATIC,5,55,190,25,WS_GROUP
+    LTEXT           "Teilungsgrad",IDC_STATIC,10,66,50,8
+    EDITTEXT        IDC_VIEW_DETAIL,65,64,25,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_VIEW_DETAIL
+    CONTROL         "Spin1",IDC_VIEW_DETAIL_BUDDY,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,90,64,
+                    10,12,0,HIDC_VIEW_DETAIL_BUDDY
+    CONTROL         "Flächen interpolieren",IDC_VIEW_INTERPOLATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,66,85,8,0,
+                    HIDC_VIEW_INTERPOLATE
+    GROUPBOX        "Farbauswahl",IDC_STATIC,5,85,190,120
+    CONTROL         "",IDC_VIEW_COLORVIEW,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_BORDER,10,94,180,12,0,HIDC_VIEW_COLORVIEW
+    GROUPBOX        "Farbskala                                                 ",
+                    IDC_STATIC,5,110,190,95
+    CONTROL         "Farbstufen interpolieren",IDC_VIEW_INTERPOLATE_COLOR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,50,110,90,8,0,
+                    HIDC_VIEW_INTERPOLATE_COLOR
+    CONTROL         "",IDC_VIEW_COLORVIEW2,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_BORDER,10,121,180,12,0,
+                    HIDC_VIEW_COLORVIEW2
+    CONTROL         "",IDC_VIEW_COLSCALE,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,134,180,13,0,HIDC_VIEW_COLSCALE
+    EDITTEXT        IDC_VIEW_ZMIN,10,149,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_ZMIN
+    RTEXT           "Z-Bereich für Farbskala :",IDC_STATIC,40,151,90,8
+    LTEXT           "[dB]",IDC_VIEW_Z_UNIT,135,151,25,8,0,0,HIDC_VIEW_Z_UNIT
+    EDITTEXT        IDC_VIEW_ZMAX,165,149,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_ZMAX
+    LTEXT           "Stufenanzahl :",IDC_STATIC,10,171,51,8
+    EDITTEXT        IDC_VIEW_NUMCOLORS,65,169,25,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_VIEW_NUMCOLORS
+    CONTROL         "weiche Farbübergänge",IDC_VIEW_SHADING,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,100,171,90,8,
+                    0,HIDC_VIEW_SHADING
+    GROUPBOX        "",IDC_STATIC,5,180,190,25
+    LTEXT           "Objektfarbe:",IDC_STATIC,10,191,45,8
+    CONTROL         "",IDC_VIEW_OBJECT_COLOR,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,65,189,25,12,0,
+                    HIDC_VIEW_OBJECT_COLOR
+    LTEXT           "Hintergrundfarbe",IDC_STATIC,100,191,65,8
+    CONTROL         "",IDC_VIEW_BKGND_COLOR,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,165,189,25,12,0,
+                    HIDC_VIEW_BKGND_COLOR
+    DEFPUSHBUTTON   "OK",IDOK,5,209,50,12,0,0,HIDOK
+    PUSHBUTTON      "Übernehmen",ID_APPLY_NOW,75,209,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Abbrechen",IDCANCEL,140,209,50,12,0,0,HIDCANCEL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "ETS3DVIEW\n\nETS3DVIEW\nDateityp 3D-View (*.3DV)\n.3DV\nETS3DVIEW.Document\nETS3DVIEW Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ETS3DVIEW"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_SAVE_AS_BITMAP  "Speichert den Fensterinhalt in einer BMP-Datei\nAls BMP speichern"
+    ID_EDIT_COPY_AS_DIB     "Kopiert den Fensterinhalt als Bitmap in die Zwischenablage\nKopieren (Strg+C)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_FILMRUN         "Schaltet die Werkzeugleiste für Animationssteuerung ein oder aus"
+    ID_VIEW_FUNCTIONS       "Schaltet die Werkzeugleiste für Objektbewegung ein oder aus"
+    ID_VIEW_FULL            "Schaltet den Modus ""Ganzer Bildschirm"" ein oder aus\nGanzer Bildschirm (Strg+F)\nFenster (ESC)"
+    ID_VIEW_GRID            "Schaltet die Gitterlinien um das Objekt herum ein oder aus\nGitterlinien ein (Strg+G)\nGitterlinien aus (Strg+G)"
+    ID_VIEW_X_UNIT          "Schaltet die X-Einheiten des Gitters ein oder aus"
+    ID_VIEW_Y_UNIT          "Schaltet die Y-Einheiten des Gitters ein oder aus"
+    ID_VIEW_Z_UNIT          "Schaltet die Z-Einheiten des Gitters ein oder aus"
+    ID_VIEW_ALL_UNITS       "Schaltet alle Einheiten des Gitters ein"
+    ID_VIEW_NO_UNITS        "Schaltet alle Einheiten des Gitters aus"
+    ID_VIEW_AXIS            "Schaltet das Koordinatenkreuz  ein oder aus\nKoordinatenkreuz ein (Strg+A)\nKoordinatenkreuz aus (Strg+A)"
+    ID_VIEW_X_CHARACTER     "Schaltet die X-Beschriftung des Koordinatenkreuzes ein oder aus"
+    ID_VIEW_Y_CHARACTER     "Schaltet die Y-Beschriftung des Koordinatenkreuzes ein oder aus"
+    ID_VIEW_Z_CHARACTER     "Schaltet die Z-Beschriftung des Koordinatenkreuzes ein oder aus"
+    ID_VIEW_ALL_CHARACTERS  "Schaltet alle Beschriftung des Koordinatenkreuzes ein"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_NO_CHARACTERS   "Schaltet alle Beschriftung des Koordinatenkreuzes aus"
+    ID_VIEW_PHASEVALUES     "Stellt den zeitlichen Verlauf bei dieser Frequenz dar\nZeitdarstellung an (Strg+Alt+T)\nZeitdarstellung aus (Strg+Alt+T)"
+    ID_VIEW_BOXPOS          "Schaltet die Lautsprecherpositionsanzeige ein oder aus\nLautsprecherposition ein (Strg+Alt+B)\nLautsprecherposition aus (Strg+Alt+B)"
+    ID_VIEW_LISTENERPOS     "Schaltet die Hörerpositionsanzeige ein oder aus\nHörerposition ein (Strg+Alt+L)\nHörerposition aus (Strg+Alt+L)"
+    ID_VIEW_COLORBAR        "Schaltet die Leiste für die Farbstufen mit Skalierung ein oder aus"
+    ID_VIEW_LIGHT           "Schaltet Beleuchtung ein oder aus\nBeleuchtung ein (Strg+L)\nBeleuchtung aus (Strg+L)"
+    ID_VIEW_EXITERPOS       "Schaltet die Exciterpositionsanzeige ein oder aus"
+    ID_VIEW_INTELLI_GRID    "Schaltet intelligente Gitteraufteilung ein oder aus"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FUNC_MOVE_UP         "Bewegt das Objekt nach oben\nNach oben (Shift+Hoch)"
+    ID_FUNC_MOVE_DOWN       "Bewegt das Objekt nach unten\nNach unten (Shift+Runter)"
+    ID_FUNC_MOVE_LEFT       "Bewegt das Objekt nach links\nNach links (Shift+Links)"
+    ID_FUNC_MOVE_RIGHT      "Bewegt das Objekt nach rechts\nNach rechts (Shift+Rechts)"
+    ID_FUNC_FORWARD         "Schiebt das Objekt weiter nach vorn\nNach vorn (Strg + -)"
+    ID_FUNC_BACKWARD        "Schiebt das Objekt weiter nach hinten\nNach hinten (Strg+ +)"
+    ID_FUNC_ROTATE_UP       "Kippt das Objekt nach hinten\nNach hinten kippen (Hoch)"
+    ID_FUNC_ROTATE_DOWN     "Kippt das Objekt nach vorn\nNach vorn kippen (Runter)"
+    ID_FUNC_ROTATE_LEFT     "Dreht das Objekt um die Mittelachse nach rechts\nNach rechts drehen (Rechts)"
+    ID_FUNC_ROTATE_RIGHT    "Dreht das Objekt um die Mittelachse nach links\nNach links drehen (Links)"
+    ID_FUNC_ZOOM            "Vergrößert das Objekt\nVergrößern (+)"
+    ID_FUNC_REZOOM          "Verkleinert das Objekt\nVerkleinern (-)"
+    ID_FUNC_FILMSTART       "Startet die Animation.\nStart"
+    ID_FUNC_FILMSTOP        "Stoppt die Animation\nStop"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Schaltet die Standard-Werkzeugleiste ein oder aus"
+    ID_VIEW_STATUS_BAR      "Schaltet die Statuszeile ein oder aus"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Schließt die Druckvorschau\nDruckvorschau schließen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FORMAT_OBJECT_ANGLE "Objekt : Theta : %d.%d°, Phi : %d.%d°"
+    IDS_FORMAT_C_VALUE      "Bild : %.3f [%s]"
+    IDS_FORMAT_LIGHT_DISTANCE "Lichtquellenabstand %d m"
+    IDS_16_COLOR_FAILURE    "Dieses Programm benötigt mindestens\n256 Farben zur Darstellung der Grafik !"
+    IDS_CARA_COLORS         "ETS3D-Farben (*.col)\n*.col\n\n"
+    IDS_SAVE_AS_BMP         "Als Bitmap Speichern"
+    IDS_SAVE_COLORS         "Farbeinstellung Speichern"
+    IDS_HEADLINE            "Überschrift"
+    IDS_COLORBAR_NAME       "Farbstufen"
+    IDS_LOAD_COLORS         "Farbeinstellung Laden"
+    IDS_PASTECOLORSCALE     "Farbskala"
+    IDS_PASTE3DPICTURE      "3D-Grafik"
+    IDS_PASTEPICTUREINDEX   "Bildnummer"
+    IDS_FMT_PICTUREINDEX    "Bild Nr.: %d, %s [%s]"
+    IDS_LIGHTCOLOR          "Lichtfarbe"
+    IDS_APPLY_LIGHT_CHANGES "Sollen die Änderungen für diese Lichtquelle übernommen werden ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LIGHTN_COMBO        "Licht %d"
+    IDS_AMBIENT_COMBO       "Umgebungslicht"
+    IDS_CANNOT_SAVE_AS_TEMPORAL_COARSE 
+                            "Das Dokument kann im Modus Zeitdarstellung nicht\nabgespeichert werden. Wenn Sie trotzdem speichern\nmöchten, wird die Zeitdarstellung automatisch abgeschaltet.\n\nMöchten Sie speichern ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FUNC_TOOLBAR_NAME   "Objekt"
+    IDS_MAIN_TOOLBAR_NAME   "Standard"
+    IDS_FILM_TOOLBAR_NAME   "Animation"
+    IDS_GRAFIC_FONT         "Schriftart der Grafikausgabe"
+    IDS_STATUS_PANE1        "Objektposition, Winkel, Zoom, Bild"
+    IDS_FORMAT_LIGHT_ANGLE  "Licht : Theta : %d.%d°, Phi : %d.%d°"
+    IDS_FORMAT_OBJECT_POSITION "Ort: x : %d.%d m, y : %d.%d m, z : %d.%d m"
+    IDS_FORMAT_OBJECT_ZOOM  "Zoom X:%d.%d, Y:%d.%d, Z:%d.%d"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FUNC_FILMPAUSE       "Hält die Animation an.\nPause"
+    ID_FUNC_FILMSTARTR      "Startet die Animation rückwärts.\nStart rückwärts"
+    ID_FUNC_FILMSTEPPLUS    "Einzelschritt vorwärts.\nEinzelbild vor (Strg + -->)"
+    ID_FUNC_FILMSTEPMINUS   "Einzelschritt rückwärts.\nEinzelbild zurück (Strg + <--)"
+    ID_FUNC_FILMSTEPBEGIN   "Springt zum Anfang des Films.\nZum Anfang"
+    ID_FUNC_FILMSTEPEND     "Springt zum Ende des Films.\nZum Ende"
+    ID_FUNC_FILMREPEAT      "Schaltet Automatische Filmwiederholung ein oder aus.\nAuto-Wiederholung ein\nAuto-Wiederholung aus"
+    ID_FUNC_FILM_TIMER      "Schaltet die Zeitsteuerung des Films ein oder aus.\nZeitsteuerung ein\nZeitsteuerung aus"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPTIONS_STANDARD     "Ändert die Standardeinstellungen\nStandardeinstellungen"
+    ID_OPTIONS_VIEW         "Ändert die Darstellungsparameter des Objektes\nDarstellungsparameter"
+    ID_OPTIONS_LIGHT        "Ändert die Objektbeleuchtung\nObjektbeleuchtung"
+    ID_OPTIONS_SET_DEFAULT  "Zentriert das Objekt und stellt die Standardgröße ein"
+    ID_OPTIONS_SAVE_COLORS  "Speichert die aktuelle Farbeinstellung in einer Datei"
+    ID_OPTIONS_LOAD_COLORS  "Lädt die Farbeinstellung aus einer Datei"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_CARA_COLOR          "Zeigt die Skalierung der Z-Werte zu den Farbstufen\nFarbskala"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_SEND_MAIL       "Versendet die Diagramme per E-Mail"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDCANCEL                "Schließt das Menü ohne Änderungen"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &as...",                 ID_FILE_SAVE_AS
+        MENUITEM "Save as &Bitmap...",          ID_FILE_SAVE_AS_BITMAP
+        MENUITEM SEPARATOR
+        MENUITEM "Printer &Setup...",           ID_FILE_PRINT_SETUP
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "S&end...",                    ID_FILE_SEND_MAIL
+        MENUITEM SEPARATOR
+        MENUITEM "&Most Recent File",           ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Standard Bar",               ID_VIEW_TOOLBAR
+        MENUITEM "&Object Bar",                 ID_VIEW_FUNCTIONS
+        MENUITEM "&Animation Bar",              ID_VIEW_FILMRUN
+        MENUITEM "&Color Scale Bar",            ID_VIEW_COLORBAR
+        MENUITEM "S&tatus Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Coordinate &Axes\tCtrl+A",    ID_VIEW_AXIS
+        MENUITEM "X-Label\tCtrl+Alt+X",         ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Label\tCtrl+Alt+Y",         ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Label\tCtrl+Alt+Z",         ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "Grid &Lines\tCtrl+G",         ID_VIEW_GRID
+        MENUITEM "X-Units\tCtrl+Shift+X",       ID_VIEW_X_UNIT
+        MENUITEM "Y-Units\tCtrl+Shift+Y",       ID_VIEW_Y_UNIT
+        MENUITEM "Z-Units\tCtrl+Shift+Z",       ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Pins"
+        BEGIN
+            MENUITEM "&Loudspeaker Positions\tCtrl+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Listener Positions\tCtrl+Alt+L", ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciter Positions\tCtrl+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "&Temporal Course\tCtrl+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Illumination\tCtrl+L",       ID_VIEW_LIGHT
+        MENUITEM "&Full Screen\tCtrl+F",        ID_VIEW_FULL, HELP
+    END
+    POPUP "&Settings"
+    BEGIN
+        MENUITEM "&Representation...",          ID_OPTIONS_VIEW
+        MENUITEM "&Object Illumination...",     ID_OPTIONS_LIGHT
+        MENUITEM "Standard &Properties...",     ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "&Default Object Position",    ID_OPTIONS_SET_DEFAULT
+        MENUITEM "&Save Color Settings...",     ID_OPTIONS_SAVE_COLORS
+        MENUITEM "&Load Color Settings...",     ID_OPTIONS_LOAD_COLORS
+        MENUITEM "Reset Colorsettings",         ID_OPTIONS_RESET_COLORS
+    END
+    POPUP "A&nimation"
+    BEGIN
+        MENUITEM "&First Picture",              ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Single Step &Forward\tCtrl + Right", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Single Step &Back\tCtrl + Left", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &Reverse",              ID_FUNC_FILMSTARTR
+        MENUITEM "&Last Picture",               ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "&Auto-Repeat",                ID_FUNC_FILMREPEAT
+        MENUITEM "&Time Control",               ID_FUNC_FILM_TIMER
+    END
+    POPUP "Obje&ct"
+    BEGIN
+        MENUITEM "Move &Left\tShift + Left",    ID_FUNC_MOVE_LEFT
+        MENUITEM "Move &Right\tShift + Right",  ID_FUNC_MOVE_RIGHT
+        MENUITEM "Move &Up\tShift + Up",        ID_FUNC_MOVE_UP
+        MENUITEM "Move &Down\tShift + Down",    ID_FUNC_MOVE_DOWN
+        MENUITEM SEPARATOR
+        MENUITEM "Move &Forwards\tCtrl + -",    ID_FUNC_FORWARD
+        MENUITEM "Move &Backwards\tCtrl + +",   ID_FUNC_BACKWARD
+        MENUITEM SEPARATOR
+        MENUITEM "Zoom In\t+",                  ID_FUNC_ZOOM
+        MENUITEM "Zoom Out\t-",                 ID_FUNC_REZOOM
+        MENUITEM SEPARATOR
+        MENUITEM "Turn Left\tLeft",             ID_FUNC_ROTATE_RIGHT
+        MENUITEM "Turn Right\tRight",           ID_FUNC_ROTATE_LEFT
+        MENUITEM "Tilt Up\tUp",                 ID_FUNC_ROTATE_UP
+        MENUITEM "Tilt Down\tDown",             ID_FUNC_ROTATE_DOWN
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics\tF1",            ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&About ETS3DVIEW...",         ID_APP_ABOUT
+    END
+END
+
+IDR_VIEW_OPTION_AXIS MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "X-Label\tStrg+Alt+X",         ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Label\tStrg+Alt+Y",         ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Label\tStrg+Alt+Z",         ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "Show all Labels",             ID_VIEW_ALL_CHARACTERS
+        MENUITEM "Show no Labels",              ID_VIEW_NO_CHARACTERS
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDCANCEL
+    END
+END
+
+IDR_VIEW_OPTION_GRID MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "X-Unit\tStrg+Shift+X",        ID_VIEW_X_UNIT
+        MENUITEM "Y-Unit\tStrg+Shift+Y",        ID_VIEW_Y_UNIT
+        MENUITEM "Z-Unit\tStrg+Shift+Z",        ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        MENUITEM "Show all Units",              ID_VIEW_ALL_UNITS
+        MENUITEM "Show no Units",               ID_VIEW_NO_UNITS
+        MENUITEM SEPARATOR
+        MENUITEM "Intelligent Grid Division",   ID_VIEW_INTELLI_GRID
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_LIGHT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 55
+        VERTGUIDE, 65
+        VERTGUIDE, 90
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 145
+        VERTGUIDE, 170
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 80
+        HORZGUIDE, 90
+        HORZGUIDE, 103
+        HORZGUIDE, 110
+        HORZGUIDE, 134
+        HORZGUIDE, 143
+    END
+
+    IDD_STANDARD, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 190
+    END
+
+    IDD_VIEW_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 50
+        VERTGUIDE, 65
+        VERTGUIDE, 90
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 150
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 190
+        VERTGUIDE, 195
+        HORZGUIDE, 13
+        HORZGUIDE, 20
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 80
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 110
+        HORZGUIDE, 127
+        HORZGUIDE, 140
+        HORZGUIDE, 155
+        HORZGUIDE, 175
+        HORZGUIDE, 180
+        HORZGUIDE, 195
+        HORZGUIDE, 205
+        HORZGUIDE, 215
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LIGHT_DIALOG DIALOGEX 0, 0, 200, 151
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Object Illumination"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Light Source",IDC_STATIC,5,0,90,40
+    COMBOBOX        IDC_LIGHT_COMBO,10,9,80,42,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_LIGHT_COMBO
+    CONTROL         "Light On",IDC_LIGHT_ON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,27,80,8,0,HIDC_LIGHT_ON
+    GROUPBOX        "Light Direction",IDC_STATIC,5,40,90,50
+    LTEXT           "Vertical [deg] :",IDC_STATIC,10,56,55,8
+    EDITTEXT        IDC_LIGHT_THETA,65,54,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_THETA
+    LTEXT           "Horizontal [deg] :",IDC_STATIC,10,72,55,8
+    EDITTEXT        IDC_LIGHT_PHI,65,69,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_PHI
+    GROUPBOX        "Spot Properties",IDC_STATIC,100,0,95,90
+    LTEXT           "Distance [m] :",IDC_STATIC,105,16,65,8
+    EDITTEXT        IDC_LIGHT_DISTANCE,170,14,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_DISTANCE
+    LTEXT           "Angle of Beam [deg] :",IDC_STATIC,105,42,55,17
+    EDITTEXT        IDC_LIGHT_CUTOFF,170,44,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_CUTOFF
+    PUSHBUTTON      "Calculate Distance",IDC_LIGHTDLG_DEFAULT,105,29,85,12,0,
+                    0,HIDC_LIGHTDLG_DEFAULT
+    LTEXT           "Focus [%] :",IDC_STATIC,105,61,65,8
+    EDITTEXT        IDC_LIGHT_EXPONENT,170,59,20,12,ES_AUTOHSCROLL,0,
+                    HIDC_LIGHT_EXPONENT
+    PUSHBUTTON      "Light Color",IDC_LIGHT_COLOR,105,74,85,12,0,0,
+                    HIDC_LIGHT_COLOR
+    GROUPBOX        "Light Intensity [%]",IDC_STATIC,5,90,190,44
+    LTEXT           "0",IDC_STATIC,15,99,8,8
+    LTEXT           "50",IDC_STATIC,96,99,9,8
+    LTEXT           "100",IDC_STATIC,175,99,15,8
+    CONTROL         "Slider",IDC_LIGHT_INTENS0,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,10,110,180,20,0,
+                    HIDC_LIGHT_INTENS0
+    DEFPUSHBUTTON   "OK",IDOK,10,137,50,12,0,0,HIDOK
+    PUSHBUTTON      "Apply",ID_APPLY_NOW,75,137,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Cancel",IDCANCEL,140,137,50,12,0,0,HIDCANCEL
+END
+
+IDD_STANDARD DIALOGEX 0, 0, 200, 161
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Standard Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Grid Line Distance (Initial Setting)",IDC_STATIC,5,7,
+                    190,30
+    LTEXT           "X [m] : ",IDC_STATIC,15,21,28,8
+    EDITTEXT        IDC_STD_GRID_STEP_Z,45,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Z
+    LTEXT           "Y [m] : ",IDC_STATIC,75,21,25,8
+    EDITTEXT        IDC_STD_GRID_STEP_X,100,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_X
+    LTEXT           "Z [ ] : ",IDC_STATIC,135,21,21,8
+    EDITTEXT        IDC_STD_GRID_STEP_Y,160,18,30,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Y
+    PUSHBUTTON      "Graphics Font...",IDC_STD_GRAFIC_FONT,11,120,179,12,
+                    BS_CENTER | BS_VCENTER,0,HIDC_STD_GRAFIC_FONT
+    CONTROL         "Reduce Effects",IDC_STD_REDUCE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,94,75,10,0,HIDC_STD_REDUCE
+    DEFPUSHBUTTON   "OK",IDOK,10,143,50,12,0,0,HIDOK
+    PUSHBUTTON      "Apply",ID_APPLY_NOW,75,143,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Cancel",IDCANCEL,140,143,50,12,0,0,HIDCANCEL
+    GROUPBOX        "Further Settings",IDC_STATIC,5,82,190,56
+    CONTROL         "Intelligent Grid Division",IDC_STD_INTELLI_GRID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,106,103,10
+    PUSHBUTTON      "Number Representation of the X- and Y- Axis...",
+                    IDC_STD_NUM_MODE0,10,44,180,12
+    PUSHBUTTON      "Number Representation of the Z-Axis...",
+                    IDC_STD_NUM_MODEZ0,10,63,180,12
+END
+
+IDD_VIEW_DIALOG DIALOGEX 0, 0, 200, 225
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Representation Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Projection",IDC_STATIC,5,0,190,20,WS_GROUP
+    CONTROL         "Perspective",IDC_VIEW_PROJECTION1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,9,90,8,0,
+                    HIDC_VIEW_PROJECTION1
+    CONTROL         "Orthogonal",IDC_VIEW_PROJECTION2,"Button",
+                    BS_AUTORADIOBUTTON,105,9,85,8,0,HIDC_VIEW_PROJECTION2
+    LTEXT           "Object :",IDC_STATIC,10,36,26,8
+    GROUPBOX        "Magnification",IDC_STATIC,5,25,190,25
+    EDITTEXT        IDC_VIEW_OBJECT_ZOOM,65,34,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_OBJECT_ZOOM
+    LTEXT           "Z-Values :",IDC_STATIC,105,36,34,8
+    EDITTEXT        IDC_VIEW_VALUE_ZOOM,165,34,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_VALUE_ZOOM
+    GROUPBOX        "Surface Partitioning",IDC_STATIC,5,55,190,25,WS_GROUP
+    LTEXT           "Partition Value",IDC_STATIC,10,66,50,8
+    EDITTEXT        IDC_VIEW_DETAIL,65,64,25,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_VIEW_DETAIL
+    CONTROL         "Spin1",IDC_VIEW_DETAIL_BUDDY,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_NOTHOUSANDS,90,64,
+                    10,12,0,HIDC_VIEW_DETAIL_BUDDY
+    CONTROL         "Interpolate Surface",IDC_VIEW_INTERPOLATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,66,85,8,0,
+                    HIDC_VIEW_INTERPOLATE
+    GROUPBOX        "Color Selection",IDC_STATIC,5,85,190,120
+    CONTROL         "",IDC_VIEW_COLORVIEW,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_BORDER,10,94,180,12,0,HIDC_VIEW_COLORVIEW
+    GROUPBOX        "Color Scale                                                   ",
+                    IDC_STATIC,5,110,190,95
+    CONTROL         "Interpolate Color Gradation",IDC_VIEW_INTERPOLATE_COLOR,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,56,110,109,8,0,
+                    HIDC_VIEW_INTERPOLATE_COLOR
+    CONTROL         "",IDC_VIEW_COLORVIEW2,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN | WS_BORDER,10,121,180,12,0,
+                    HIDC_VIEW_COLORVIEW2
+    CONTROL         "",IDC_VIEW_COLSCALE,"Static",SS_WHITERECT | SS_NOTIFY | 
+                    SS_SUNKEN,10,134,180,13,0,HIDC_VIEW_COLSCALE
+    EDITTEXT        IDC_VIEW_ZMIN,10,149,25,12,ES_AUTOHSCROLL | ES_NUMBER,0,
+                    HIDC_VIEW_ZMIN
+    RTEXT           "Z-Range of Color Scale :",IDC_STATIC,40,151,90,8
+    LTEXT           "[dB]",IDC_VIEW_Z_UNIT,135,151,25,8,0,0,HIDC_VIEW_Z_UNIT
+    EDITTEXT        IDC_VIEW_ZMAX,165,149,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_ZMAX
+    LTEXT           "Color Steps :",IDC_STATIC,10,171,51,8
+    EDITTEXT        IDC_VIEW_NUMCOLORS,65,169,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_VIEW_NUMCOLORS
+    CONTROL         "Smooth Shading",IDC_VIEW_SHADING,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,100,171,90,8,
+                    0,HIDC_VIEW_SHADING
+    GROUPBOX        "",IDC_STATIC,5,180,190,25
+    LTEXT           "Object Color",IDC_STATIC,10,191,45,8
+    CONTROL         "",IDC_VIEW_OBJECT_COLOR,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,65,189,25,12,0,
+                    HIDC_VIEW_OBJECT_COLOR
+    LTEXT           "Background Color",IDC_STATIC,100,191,65,8
+    CONTROL         "",IDC_VIEW_BKGND_COLOR,"Static",SS_WHITERECT | 
+                    SS_NOTIFY | SS_SUNKEN | WS_BORDER,165,189,25,12,0,
+                    HIDC_VIEW_BKGND_COLOR
+    DEFPUSHBUTTON   "OK",IDOK,5,209,50,12,0,0,HIDOK
+    PUSHBUTTON      "Apply",ID_APPLY_NOW,75,209,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Cancel",IDCANCEL,140,209,50,12,0,0,HIDCANCEL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "ETS3DVIEW\n\nETS3DVIEW\nFile type 3D-View (*.3DV)\n.3DV\nETS3DVIEW.Document\nETS3DVIEW Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ETS3DVIEW"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_SAVE_AS_BITMAP  "Saves the contents of the application window in a bitmap file\nSave as Bitmap"
+    ID_EDIT_COPY_AS_DIB     "Copies the contents of the application window to clipboard as bitmap\nCopy (Ctrl+C)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_FILMRUN         "Shows or hides the toolbar for animation control"
+    ID_VIEW_FUNCTIONS       "Shows or hides the toolbar for object movement"
+    ID_VIEW_FULL            "Switches between full screen and windowed mode\nFull Screen (Ctrl+F)\nWindow (ESC)"
+    ID_VIEW_GRID            "Shows or hides the grid lines around the object\nShow Grid Lines (Ctrl+G)\nHide Grid Lines (Ctrl+G)"
+    ID_VIEW_X_UNIT          "Shows or hides unit labels for the X grid lines"
+    ID_VIEW_Y_UNIT          "Shows or hides unit labels for the Y grid lines"
+    ID_VIEW_Z_UNIT          "Shows or hides unit labels for the Z grid lines"
+    ID_VIEW_ALL_UNITS       "Shows all unit labels"
+    ID_VIEW_NO_UNITS        "Hides all unit labels"
+    ID_VIEW_AXIS            "Shows or hides coordinate axes\nShow Coordinate Axes (Ctrl+A)\nHide Coordinate Axes (Ctrl+A)"
+    ID_VIEW_X_CHARACTER     "Shows or hides labels for the X axis"
+    ID_VIEW_Y_CHARACTER     "Shows or hides labels for the Y axis"
+    ID_VIEW_Z_CHARACTER     "Shows or hides labels for the Z axis"
+    ID_VIEW_ALL_CHARACTERS  "Shows all labels"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_NO_CHARACTERS   "Hides all labels"
+    ID_VIEW_PHASEVALUES     "Switches the object to represent the temporal course at this frequency\nTemporal Course (Ctrl+Alt+T)\nFrequency (Ctrl+Alt+T)"
+    ID_VIEW_BOXPOS          "Shows or hides the loudspeaker positions\nShow Box Positions (Ctrl+Alt+B)\nHide Box Positions (Ctrl+Alt+B)"
+    ID_VIEW_LISTENERPOS     "Shows or hides the listeners' positions\nShow Listener Positions (Ctrl+Alt+L)\nHide Listener Positions (Ctrl+Alt+L)"
+    ID_VIEW_COLORBAR        "Shows or hides the color scale bar"
+    ID_VIEW_LIGHT           "Switches illumination on or off\nIllumination on (Ctrl+L)\nIllumination off (Ctrl+L)"
+    ID_VIEW_EXITERPOS       "Shows or hides the exciter positions"
+    ID_VIEW_INTELLI_GRID    "Switches intelligent grid division on or off"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FUNC_MOVE_UP         "Moves the object up\nMove Up (Shift+Up)"
+    ID_FUNC_MOVE_DOWN       "Moves the object down\nMove Down (Shift+Down)"
+    ID_FUNC_MOVE_LEFT       "Moves the object left\nMove Left (Shift+Left)"
+    ID_FUNC_MOVE_RIGHT      "Moves the object right\nMove Right (Shift+Right)"
+    ID_FUNC_FORWARD         "Moves the object forwards\nForward (Ctrl + -)"
+    ID_FUNC_BACKWARD        "Moves the object backwards\nBackward (Ctrl+ +)"
+    ID_FUNC_ROTATE_UP       "Tilts the front edge of object upwards\nTilt Up (Up)"
+    ID_FUNC_ROTATE_DOWN     "Tilts the front edge of object downwards\nTilt Down (Down)"
+    ID_FUNC_ROTATE_LEFT     "Turns the object right\nTurn Right (Right)"
+    ID_FUNC_ROTATE_RIGHT    "Turn the object left\nTurn Left (Left)"
+    ID_FUNC_ZOOM            "Magnifies the object\nZoom In (+)"
+    ID_FUNC_REZOOM          "Reduces the object\nZoom Out (-)"
+    ID_FUNC_FILMSTART       "Starts the animation sequence\nStart"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Shows or hides the standard toolbar"
+    ID_VIEW_STATUS_BAR      "Shows or hides the status bar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Opens this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Closes print preview\nClose Print Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FORMAT_OBJECT_ANGLE "Object : Theta : %d.%d°, Phi : %d.%d°"
+    IDS_FORMAT_C_VALUE      "Picture : %.3f [%s]"
+    IDS_FORMAT_LIGHT_DISTANCE "Light source distance %d m"
+    IDS_16_COLOR_FAILURE    "This program needs at least\n256 colors for the representation of graphics !"
+    IDS_CARA_COLORS         "ETS3D-Colors (*.col)\n*.col\n\n"
+    IDS_SAVE_AS_BMP         "Save as Bitmap"
+    IDS_SAVE_COLORS         "Save Color Settings"
+    IDS_HEADLINE            "Heading"
+    IDS_COLORBAR_NAME       "Color Scale"
+    IDS_LOAD_COLORS         "Load Color Settings"
+    IDS_PASTECOLORSCALE     "Color Scale"
+    IDS_PASTE3DPICTURE      "3D Graphics"
+    IDS_PASTEPICTUREINDEX   "Picture Number"
+    IDS_FMT_PICTUREINDEX    "Picture No.: %d, %s [%s]"
+    IDS_LIGHTCOLOR          "Light Color"
+    IDS_APPLY_LIGHT_CHANGES "Apply modifications to this light source ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LIGHTN_COMBO        "Light %d"
+    IDS_AMBIENT_COMBO       "Ambient Light"
+    IDS_CANNOT_SAVE_AS_TEMPORAL_COARSE 
+                            "The document can not be saved in temporal coarse mode.\nIf you want to save nevertheless, the temporal coarse mode\nis switched of automatically !\n\nDo you want to save ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FUNC_TOOLBAR_NAME   "Object"
+    IDS_MAIN_TOOLBAR_NAME   "Standard"
+    IDS_FILM_TOOLBAR_NAME   "Animation"
+    IDS_GRAFIC_FONT         "Graphics Font"
+    IDS_STATUS_PANE1        "Position, angle, zoom, picture"
+    IDS_FORMAT_LIGHT_ANGLE  "Light : Theta : %d.%d°, Phi : %d.%d°"
+    IDS_FORMAT_OBJECT_POSITION 
+                            "Location: x : %d.%d m, y : %d.%d m, z : %d.%d m"
+    IDS_FORMAT_OBJECT_ZOOM  "Zoom X:%d.%d, Y:%d.%d, Z:%d.%d"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FUNC_FILMPAUSE       "Stops the animation sequence\nPause"
+    ID_FUNC_FILMSTARTR      "Starts the animation sequence in reverse\nStart Reverse"
+    ID_FUNC_FILMSTEPPLUS    "Single step forwards\nForwards (Ctrl + -->)"
+    ID_FUNC_FILMSTEPMINUS   "Single step back\nBack (Ctrl + <--)"
+    ID_FUNC_FILMSTEPBEGIN   "Jumps to the first animation picture\nFirst Picture"
+    ID_FUNC_FILMSTEPEND     "Jumps to the last animation picture\nLast Picture"
+    ID_FUNC_FILMREPEAT      "Switches automatic animation repetition on or off\nAuto-Repeat on\nAuto-Repeat off"
+    ID_FUNC_FILM_TIMER      "Switches time control on or off\nTime Control on\nTime Control off"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPTIONS_STANDARD     "Changes standard properties\nStandard Properties"
+    ID_OPTIONS_VIEW         "Changes representation properties of object\nRepresentation"
+    ID_OPTIONS_LIGHT        "Changes object illumination properties\nObject Illumination Options"
+    ID_OPTIONS_SET_DEFAULT  "Centers object and sets its size to the default"
+    ID_OPTIONS_SAVE_COLORS  "Saves current color settings in a file"
+    ID_OPTIONS_LOAD_COLORS  "Loads color settings from a file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_CARA_COLOR          "Shows scaling of z-values for color steps\nColor Scale"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_SEND_MAIL       "Sends the diagrams as electronic mail"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDCANCEL                "Closes the menu"
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Schweiz) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DES)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_SWISS
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_SRVR_EMBEDDED MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Aktualisieren\tStrg+S",      ID_FILE_UPDATE
+        MENUITEM "Kopie speichern &unter...",   ID_FILE_SAVE_COPY_AS
+        MENUITEM "&Als Bitmap Speichern...",    ID_FILE_SAVE_AS_BITMAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "Fensterinhalt &kopieren\tStrg+C", ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Standard",                   ID_VIEW_TOOLBAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Koordinatenachsen\tStrg+A",  ID_VIEW_AXIS
+        MENUITEM "X-Beschriftung\tStrg+Alt+X",  ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Beschriftung\tStrg+Alt+Y",  ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Beschriftung\tStrg+Alt+Z",  ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "&Gitterlinien\tStrg+G",       ID_VIEW_GRID
+        MENUITEM "X-Einheiten\tStrg+Shift+X",   ID_VIEW_X_UNIT
+        MENUITEM "Y-Einheiten\tStrg+Shift+Y",   ID_VIEW_Y_UNIT
+        MENUITEM "Z-Einheiten\tStrg+Shift+Z",   ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Steck&nadeln"
+        BEGIN
+            MENUITEM "&Lautsprecherposition\tStrg+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Hörerposition\tStrg+Alt+L",  ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciterposition\tStrg+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "Zeit&darstellung\tStrg+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Beleuchtung\tStrg+L",        ID_VIEW_LIGHT
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "&Darstellungsparameter...",   ID_OPTIONS_VIEW
+        MENUITEM "&Objektbeleuchtung...",       ID_OPTIONS_LIGHT
+        MENUITEM "&Standardeinstellungen...",   ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "Objektposition &einstellen",  ID_OPTIONS_SET_DEFAULT
+        MENUITEM "Farbeinstellung s&peichern...", ID_OPTIONS_SAVE_COLORS
+        MENUITEM "Farbeinstellung &laden...",   ID_OPTIONS_LOAD_COLORS
+    END
+    POPUP "&Animation"
+    BEGIN
+        MENUITEM "Zum &Anfang",                 ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Einzelbild &vor\tStrg + Rechts", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Einzelbild &zurück\tStrg + Links", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &rückwärts",            ID_FUNC_FILMSTARTR
+        MENUITEM "Zum &Ende",                   ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "Auto-&Wiederholung",          ID_FUNC_FILMREPEAT
+        MENUITEM "Zei&tsteuerung",              ID_FUNC_FILM_TIMER
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "&Hilfethemen\tF1",            ID_HELP_FINDER
+        MENUITEM "Inf&o über ETS3DVIEW...",     ID_APP_ABOUT
+    END
+END
+
+IDR_SRVR_INPLACE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "Fensterinhalt &kopieren\tStrg+C", ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Standard",                   ID_VIEW_TOOLBAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Koordinatenachsen\tStrg+A",  ID_VIEW_AXIS
+        MENUITEM "X-Beschriftung\tStrg+Alt+X",  ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Beschriftung\tStrg+Alt+Y",  ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Beschriftung\tStrg+Alt+Z",  ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "&Gitterlinien\tStrg+G",       ID_VIEW_GRID
+        MENUITEM "X-Einheiten\tStrg+Shift+X",   ID_VIEW_X_UNIT
+        MENUITEM "Y-Einheiten\tStrg+Shift+Y",   ID_VIEW_Y_UNIT
+        MENUITEM "Z-Einheiten\tStrg+Shift+Z",   ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Steck&nadeln"
+        BEGIN
+            MENUITEM "&Lautsprecherposition\tStrg+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Hörerposition\tStrg+Alt+L",  ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciterposition\tStrg+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "Zeit&darstellung\tStrg+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Beleuchtung\tStrg+L",        ID_VIEW_LIGHT
+    END
+    MENUITEM SEPARATOR
+    MENUITEM SEPARATOR
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "&Darstellungsparameter...",   ID_OPTIONS_VIEW
+        MENUITEM "&Objektbeleuchtung...",       ID_OPTIONS_LIGHT
+        MENUITEM "&Standardeinstellungen...",   ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "Objektposition &einstellen",  ID_OPTIONS_SET_DEFAULT
+        MENUITEM "Farbeinstellung s&peichern...", ID_OPTIONS_SAVE_COLORS
+        MENUITEM "Farbeinstellung &laden...",   ID_OPTIONS_LOAD_COLORS
+    END
+    POPUP "&Animation"
+    BEGIN
+        MENUITEM "Zum &Anfang",                 ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Einzelbild &vor\tStrg + Rechts", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Einzelbild &zurück\tStrg + Links", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &rückwärts",            ID_FUNC_FILMSTARTR
+        MENUITEM "Zum &Ende",                   ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "Auto-&Wiederholung",          ID_FUNC_FILMREPEAT
+        MENUITEM "Zei&tsteuerung",              ID_FUNC_FILM_TIMER
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "Inf&o über ETS3DVIEW...",     ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STANDARD DIALOGEX 0, 0, 200, 180
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Standardeinstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Abstand der Gitternetzlinien (Vorgabe)",IDC_STATIC,5,7,
+                    190,30
+    LTEXT           "X [m] : ",IDC_STATIC,15,21,28,8
+    EDITTEXT        IDC_STD_GRID_STEP_Z,45,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Z
+    LTEXT           "Y [m] : ",IDC_STATIC,75,21,25,8
+    EDITTEXT        IDC_STD_GRID_STEP_X,100,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_X
+    LTEXT           "Z [ ] : ",IDC_STATIC,135,21,21,8
+    EDITTEXT        IDC_STD_GRID_STEP_Y,160,18,30,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Y
+    GROUPBOX        "Zahlendarstellung der X- und Y-Achsen",IDC_STATIC,5,42,
+                    190,25
+    CONTROL         "STD",IDC_STD_NUM_MODE0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,53,35,8,0,HIDC_STD_NUM_MODE0
+    CONTROL         "FIX",IDC_STD_NUM_MODE1,"Button",BS_AUTORADIOBUTTON,45,
+                    53,30,8,0,HIDC_STD_NUM_MODE1
+    CONTROL         "ENG",IDC_STD_NUM_MODE2,"Button",BS_AUTORADIOBUTTON,75,
+                    53,40,8,0,HIDC_STD_NUM_MODE2
+    LTEXT           "Runden :",IDC_STATIC,120,53,40,8
+    EDITTEXT        IDC_STD_ROUNDING,160,50,30,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_STD_ROUNDING
+    GROUPBOX        "Zahlendarstellung der Z-Achse",IDC_STATIC,5,72,190,25
+    CONTROL         "STD",IDC_STD_NUM_MODEZ0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,82,35,8,0,HIDC_STD_NUM_MODEZ0
+    CONTROL         "FIX",IDC_STD_NUM_MODEZ1,"Button",BS_AUTORADIOBUTTON,45,
+                    82,30,8,0,HIDC_STD_NUM_MODEZ1
+    CONTROL         "ENG",IDC_STD_NUM_MODEZ2,"Button",BS_AUTORADIOBUTTON,75,
+                    82,40,8,0,HIDC_STD_NUM_MODEZ2
+    LTEXT           "Runden :",IDC_STATIC,120,82,40,8
+    EDITTEXT        IDC_STD_ROUNDINGZ,160,81,30,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_STD_ROUNDINGZ
+    PUSHBUTTON      "Schriftart der Grafikausgabe",IDC_STD_GRAFIC_FONT,11,
+                    140,105,12,BS_CENTER | BS_VCENTER,0,HIDC_STD_GRAFIC_FONT
+    CONTROL         "Effekte anpassen",IDC_STD_REDUCE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,114,75,10,0,
+                    HIDC_STD_REDUCE
+    DEFPUSHBUTTON   "OK",IDOK,10,163,50,12,0,0,HIDOK
+    DEFPUSHBUTTON   "Übernehmen",ID_APPLY_NOW,75,163,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Abbrechen",IDCANCEL,140,163,50,12,0,0,HIDCANCEL
+    CONTROL         "Intelligente Gitteraufteilung",IDC_STD_INTELLI_GRID,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,126,103,10
+    GROUPBOX        "Weitere Einstellungen",IDC_STATIC,5,102,190,56
+END
+
+#endif    // Deutsch (Schweiz) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (GB) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_SRVR_INPLACE TOOLBAR DISCARDABLE  16, 16
+BEGIN
+    BUTTON      ID_FILE_SAVE_AS_BITMAP
+    BUTTON      ID_EDIT_COPY_AS_DIB
+    SEPARATOR
+    BUTTON      ID_VIEW_LIGHT
+    BUTTON      ID_VIEW_BOXPOS
+    BUTTON      ID_VIEW_LISTENERPOS
+    BUTTON      ID_VIEW_PHASEVALUES
+    SEPARATOR
+    BUTTON      ID_VIEW_AXIS
+    BUTTON      ID_VIEW_GRID
+    SEPARATOR
+    BUTTON      ID_OPTIONS_VIEW
+    BUTTON      ID_OPTIONS_LIGHT
+    BUTTON      ID_OPTIONS_STANDARD
+    SEPARATOR
+    BUTTON      ID_FUNC_FILMSTARTR
+    BUTTON      ID_FUNC_FILMSTEPBEGIN
+    BUTTON      ID_FUNC_FILMSTEPMINUS
+    BUTTON      ID_FUNC_FILMPAUSE
+    BUTTON      ID_FUNC_FILMSTEPPLUS
+    BUTTON      ID_FUNC_FILMSTEPEND
+    BUTTON      ID_FUNC_FILMSTART
+    SEPARATOR
+    BUTTON      ID_FUNC_FILMREPEAT
+    BUTTON      ID_FUNC_FILM_TIMER
+    SEPARATOR
+    BUTTON      ID_FUNC_ZOOM
+    BUTTON      ID_FUNC_REZOOM
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_SRVR_INPLACE        BITMAP  MOVEABLE PURE   "res\\mainfram.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_SRVR_EMBEDDED MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Update\tStrg+S",             ID_FILE_UPDATE
+        MENUITEM "Save copy &as...",            ID_FILE_SAVE_COPY_AS
+        MENUITEM "Save as &Bitmap",             ID_FILE_SAVE_AS_BITMAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tStrg+P",           ID_FILE_PRINT
+        MENUITEM "Print Preview",               ID_FILE_PRINT_PREVIEW
+        MENUITEM "Printe Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Standard Bar",               ID_VIEW_TOOLBAR
+        MENUITEM SEPARATOR
+        MENUITEM "Coordinate &Axes\tCtrl+A",    ID_VIEW_AXIS
+        MENUITEM "X-Label\tCtrl+Alt+X",         ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Label\tCtrl+Alt+Y",         ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Label\tCtrl+Alt+Z",         ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "Grid &Lines\tCtrl+G",         ID_VIEW_GRID
+        MENUITEM "X-Units\tCtrl+Shift+X",       ID_VIEW_X_UNIT
+        MENUITEM "Y-Units\tCtrl+Shift+Y",       ID_VIEW_Y_UNIT
+        MENUITEM "Z-Units\tCtrl+Shift+Z",       ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Pins"
+        BEGIN
+            MENUITEM "&Loudspeaker Positions\tCtrl+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Listener Positions\tCtrl+Alt+L", ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciter Positions\tCtrl+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "&Temporal Course\tCtrl+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Illumination\tCtrl+L",       ID_VIEW_LIGHT
+    END
+    POPUP "&Settings"
+    BEGIN
+        MENUITEM "&Representation...",          ID_OPTIONS_VIEW
+        MENUITEM "&Object Illumination...",     ID_OPTIONS_LIGHT
+        MENUITEM "Standard &Properties...",     ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "&Default Object Position",    ID_OPTIONS_SET_DEFAULT
+        MENUITEM "&Save Color Settings...",     ID_OPTIONS_SAVE_COLORS
+        MENUITEM "&Load Color Settings...",     ID_OPTIONS_LOAD_COLORS
+    END
+    POPUP "&Animation"
+    BEGIN
+        MENUITEM "&First Picture",              ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Single Step &Forward\tCtrl + Right", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Single Step &Back\tCtrl + Left", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &Reverse",              ID_FUNC_FILMSTARTR
+        MENUITEM "&Last Picture",               ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "&Auto-Repeat",                ID_FUNC_FILMREPEAT
+        MENUITEM "&Time Control",               ID_FUNC_FILM_TIMER
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ETS3DVIEW...",         ID_APP_ABOUT
+    END
+END
+
+IDR_SRVR_INPLACE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY_AS_DIB
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Standard Bar",               ID_VIEW_TOOLBAR
+        MENUITEM SEPARATOR
+        MENUITEM "Coordinate &Axes\tCtrl+A",    ID_VIEW_AXIS
+        MENUITEM "X-Label\tCtrl+Alt+X",         ID_VIEW_X_CHARACTER
+        MENUITEM "Y-Label\tCtrl+Alt+Y",         ID_VIEW_Y_CHARACTER
+        MENUITEM "Z-Label\tCtrl+Alt+Z",         ID_VIEW_Z_CHARACTER
+        MENUITEM SEPARATOR
+        MENUITEM "Grid &Lines\tCtrl+G",         ID_VIEW_GRID
+        MENUITEM "X-Units\tCtrl+Shift+X",       ID_VIEW_X_UNIT
+        MENUITEM "Y-Units\tCtrl+Shift+Y",       ID_VIEW_Y_UNIT
+        MENUITEM "Z-Units\tCtrl+Shift+Z",       ID_VIEW_Z_UNIT
+        MENUITEM SEPARATOR
+        POPUP "Pins"
+        BEGIN
+            MENUITEM "&Loudspeaker Positions\tCtrl+Alt+B", ID_VIEW_BOXPOS
+            MENUITEM "&Listener Positions\tCtrl+Alt+L", ID_VIEW_LISTENERPOS
+            MENUITEM "&Exciter Positions\tCtrl+Alt+E", ID_VIEW_EXITERPOS
+        END
+        MENUITEM "&Temporal Course\tCtrl+Alt+T", ID_VIEW_PHASEVALUES
+        MENUITEM "&Illumination\tCtrl+L",       ID_VIEW_LIGHT
+    END
+    MENUITEM SEPARATOR
+    MENUITEM SEPARATOR
+    POPUP "&Settings"
+    BEGIN
+        MENUITEM "&Representation...",          ID_OPTIONS_VIEW
+        MENUITEM "&Object Illumination...",     ID_OPTIONS_LIGHT
+        MENUITEM "Standard &Properties...",     ID_OPTIONS_STANDARD
+        MENUITEM SEPARATOR
+        MENUITEM "&Default Object Position",    ID_OPTIONS_SET_DEFAULT
+        MENUITEM "&Save Color Settings...",     ID_OPTIONS_SAVE_COLORS
+        MENUITEM "&Load Color Settings...",     ID_OPTIONS_LOAD_COLORS
+    END
+    POPUP "&Animation"
+    BEGIN
+        MENUITEM "&First Picture",              ID_FUNC_FILMSTEPBEGIN
+        MENUITEM "&Start",                      ID_FUNC_FILMSTART
+        MENUITEM "Single Step &Forward\tCtrl + Right", ID_FUNC_FILMSTEPPLUS
+        MENUITEM "&Pause",                      ID_FUNC_FILMPAUSE
+        MENUITEM "Single Step &Back\tCtrl + Left", ID_FUNC_FILMSTEPMINUS
+        MENUITEM "Start &Reverse",              ID_FUNC_FILMSTARTR
+        MENUITEM "&Last Picture",               ID_FUNC_FILMSTEPEND
+        MENUITEM SEPARATOR
+        MENUITEM "&Auto-Repeat",                ID_FUNC_FILMREPEAT
+        MENUITEM "&Time Control",               ID_FUNC_FILM_TIMER
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ETS2DVIEW...",         ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STANDARD DIALOGEX 0, 0, 200, 180
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Standard Properties"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Grid Line Distance (Initial Setting)",IDC_STATIC,5,7,
+                    190,30
+    LTEXT           "X [m] : ",IDC_STATIC,15,21,28,8
+    EDITTEXT        IDC_STD_GRID_STEP_Z,45,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Z
+    LTEXT           "Y [m] : ",IDC_STATIC,75,21,25,8
+    EDITTEXT        IDC_STD_GRID_STEP_X,100,18,25,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_X
+    LTEXT           "Z [ ] : ",IDC_STATIC,135,21,21,8
+    EDITTEXT        IDC_STD_GRID_STEP_Y,160,18,30,12,ES_AUTOHSCROLL,0,
+                    HIDC_STD_GRID_STEP_Y
+    GROUPBOX        "Number Representation of the X- and Y- Axis",IDC_STATIC,
+                    5,42,190,25
+    CONTROL         "STD",IDC_STD_NUM_MODE0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,53,35,8,0,HIDC_STD_NUM_MODE0
+    CONTROL         "FIX",IDC_STD_NUM_MODE1,"Button",BS_AUTORADIOBUTTON,45,
+                    53,30,8,0,HIDC_STD_NUM_MODE1
+    CONTROL         "ENG",IDC_STD_NUM_MODE2,"Button",BS_AUTORADIOBUTTON,75,
+                    53,40,8,0,HIDC_STD_NUM_MODE2
+    LTEXT           "Round :",IDC_STATIC,120,53,40,8
+    EDITTEXT        IDC_STD_ROUNDING,160,50,30,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_STD_ROUNDING
+    GROUPBOX        "Number Representation of the Z-Axis",IDC_STATIC,5,72,
+                    190,25
+    CONTROL         "STD",IDC_STD_NUM_MODEZ0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,82,35,8,0,HIDC_STD_NUM_MODEZ0
+    CONTROL         "FIX",IDC_STD_NUM_MODEZ1,"Button",BS_AUTORADIOBUTTON,45,
+                    82,30,8,0,HIDC_STD_NUM_MODEZ1
+    CONTROL         "ENG",IDC_STD_NUM_MODEZ2,"Button",BS_AUTORADIOBUTTON,75,
+                    82,40,8,0,HIDC_STD_NUM_MODEZ2
+    LTEXT           "Round :",IDC_STATIC,120,82,40,8
+    EDITTEXT        IDC_STD_ROUNDINGZ,160,81,30,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_STD_ROUNDINGZ
+    PUSHBUTTON      "Graphics Font",IDC_STD_GRAFIC_FONT,11,140,105,12,
+                    BS_CENTER | BS_VCENTER,0,HIDC_STD_GRAFIC_FONT
+    CONTROL         "Reduce Effects",IDC_STD_REDUCE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,114,75,10,0,HIDC_STD_REDUCE
+    DEFPUSHBUTTON   "OK",IDOK,10,163,50,12,0,0,HIDOK
+    DEFPUSHBUTTON   "Apply",ID_APPLY_NOW,75,163,50,12,0,0,HID_APPLY_NOW
+    PUSHBUTTON      "Cancel",IDCANCEL,140,163,50,12,0,0,HIDCANCEL
+    GROUPBOX        "Further Settings",IDC_STATIC,5,102,190,56
+    CONTROL         "Intelligent Grid Division",IDC_STD_INTELLI_GRID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,126,103,10
+END
+
+#endif    // Englisch (GB) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

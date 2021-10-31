@@ -1,0 +1,11 @@
+LIBRARY ETSMATHC
+VERSION 1.0
+EXPORTS
+	Destructor				@1  NONAME
+	GetRandomValue			@2  NONAME
+	RealFFT					@3  NONAME
+	CalculateFilter			@4  NONAME
+	RealFFT_float			@5  NONAME
+	CalculateFilter_float	@6  NONAME
+	MultiplyFilterExp		@7  NONAME
+	PinkNoiseFilterExp		@8  NONAME

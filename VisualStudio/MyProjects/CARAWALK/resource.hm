@@ -1,0 +1,12 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by CARAWALK.rc
+//
+#define HIDC_LIGHTDLG_COLOR             0x806a0401    // IDD_LIGHTPARAM
+#define HIDC_LIGHTDLG_CUT_OFF           0x806a03fd    // IDD_LIGHTPARAM
+#define HIDC_LIGHTDLG_DIMMER            0x806a0402    // IDD_LIGHTPARAM
+#define HIDC_LIGHTDLG_EXPONENT          0x806a03ff    // IDD_LIGHTPARAM
+#define HIDC_LIGHTDLG_LIGHTCOMBO        0x806a03fc    // IDD_LIGHTPARAM
+#define HIDC_LIGHTDLG_LIGHTON           0x806a03fe    // IDD_LIGHTPARAM
+#define HIDC_STATIC                     0x806affff    // IDD_LIGHTPARAM
+#define HIDOK                           0x806a0001    // IDD_LIGHTPARAM
+#define HID_CLOSE                       0x806b03f1    // IDD_BOX_POSITION
