@@ -1051,6 +1051,7 @@ void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current *
 
 void MainWindow::find_item_in_treeSource(const QString& git_root, const QString& filepath)
 {
+    ui->treeSource->selectionModel()->clearSelection();
     QStringList items = filepath.split("/");
     auto list = ui->treeSource->findItems(git_root, Qt::MatchExactly);
     if (!list.empty() )
