@@ -1,0 +1,590 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "winres.h"
+#include "resource.h"
+#include "resource.hm"
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "Prtd.ico"
+IDI_ICON2               ICON    DISCARDABLE     "Quer.ico"
+IDI_ICON3               ICON    DISCARDABLE     "Hoch.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PRINTERDIALOG DIALOGEX 0, 0, 290, 270
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Drucker",IDC_STATIC1,5,110,280,90
+    LTEXT           "&Name:",IDC_STATIC2,10,126,22,8,0,0,IDHS_SELECTPRINTER
+    COMBOBOX        IDC_SELECTPRINTER,60,124,144,67,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,0,IDHS_SELECTPRINTER
+    PUSHBUTTON      "&Eigenschaften...",IDC_BUTTON_SETUP,210,123,70,14,0,0,
+                    IDHS_BUTTON_SETUP
+    LTEXT           "Status:",IDC_STATIC3,10,141,23,8,0,0,IDHS_INFORMATION
+    LTEXT           "Typ:",IDC_STATIC4,10,156,15,8,0,0,IDHS_INFORMATION
+    LTEXT           "Ort:",IDC_STATIC5,10,171,12,8,0,0,IDHS_INFORMATION
+    LTEXT           "Kommentar:",IDC_STATIC6,10,186,38,8,0,0,IDHS_INFORMATION
+    CONTROL         "Ausdruck &in Datei",IDC_FILE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,210,185,72,10,0,IDHS_PRINTTOFILE
+    GROUPBOX        "Format",IDC_STATIC7,5,200,100,45,WS_GROUP,0,IDHS_ORIENTPREVIEW
+    ICON            "",IDC_ORIENTICON,10,214,22,20,SS_CENTERIMAGE |
+                    SS_REALSIZEIMAGE
+    CONTROL         "Ho&chformat",IDC_PORTRAIT,"Button",BS_AUTORADIOBUTTON,
+                    45,210,53,10,0,IDHS_ORIENTPREVIEW
+    CONTROL         "&Querformat",IDC_LANDSCAPE,"Button",BS_AUTORADIOBUTTON,
+                    45,230,51,10,0,IDHS_ORIENTPREVIEW
+    GROUPBOX        "Ränder (Millimeter)",IDC_STATIC8,110,200,130,45,0,0,IDHS_MARGINS
+    LTEXT           "&Links:",IDC_STATIC9,115,211,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_LEFT,140,209,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Rechts:",IDC_STATIC10,175,211,26,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_RIGHT,204,209,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Oben:",IDC_STATIC11,115,231,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_TOP,140,229,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Unten:",IDC_STATIC12,175,231,22,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_BOTTOM,204,229,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    GROUPBOX        "&Kopien",IDC_STATIC13,245,200,40,45,0,0,IDHS_COPIES
+    EDITTEXT        IDC_COPIES,250,209,30,12,ES_AUTOHSCROLL,0,IDHS_COPIES
+    DEFPUSHBUTTON   "OK",IDOK,190,251,45,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,240,251,45,14,0,0,IDHS_CANCEL
+    LTEXT           "",IDC_STATUS,60,141,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_ORT,60,171,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_TYP,60,156,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_COMMENT,60,186,144,8,0,0,IDHS_INFORMATION
+    CONTROL         "",IDC_PAGEPREVIEW,"Static",SS_BLACKFRAME,5,5,280,105
+END
+
+IDD_PRINTERDIALOGNO DIALOGEX 0, 0, 290, 165
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Drucker",IDC_STATIC1,5,5,280,90
+    LTEXT           "&Name:",IDC_STATIC2,9,19,22,8,0,0,IDHS_SELECTPRINTER
+    COMBOBOX        IDC_SELECTPRINTER,59,17,144,67,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,0,IDHS_SELECTPRINTER
+    PUSHBUTTON      "&Eigenschaften...",IDC_BUTTON_SETUP,210,15,70,14,0,0,
+                    IDHS_BUTTON_SETUP
+    LTEXT           "Status:",IDC_STATIC3,9,34,23,8,0,0,IDHS_INFORMATION
+    LTEXT           "Typ:",IDC_STATIC4,9,49,15,8,0,0,IDHS_INFORMATION
+    LTEXT           "Ort:",IDC_STATIC5,9,64,12,8,0,0,IDHS_INFORMATION
+    LTEXT           "Kommentar:",IDC_STATIC6,9,79,38,8,0,0,IDHS_INFORMATION
+    CONTROL         "Ausdruck &in Datei",IDC_FILE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,209,78,72,10,0,IDHS_PRINTTOFILE
+    GROUPBOX        "Format",IDC_STATIC7,5,95,100,45,WS_GROUP,0,IDHS_ORIENTATION
+    ICON            "",IDC_ORIENTICON,10,108,22,20,SS_CENTERIMAGE |
+                    SS_REALSIZEIMAGE
+    CONTROL         "Ho&chformat",IDC_PORTRAIT,"Button",BS_AUTORADIOBUTTON,
+                    45,105,53,10,0,IDHS_ORIENTATION
+    CONTROL         "&Querformat",IDC_LANDSCAPE,"Button",BS_AUTORADIOBUTTON,
+                    45,124,51,10,0,IDHS_ORIENTATION
+    GROUPBOX        "Ränder (Millimeter)",IDC_STATIC8,110,95,130,45,0,0,IDHS_MARGINS
+    LTEXT           "&Links:",IDC_STATIC9,115,105,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_LEFT,140,105,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Rechts:",IDC_STATIC10,175,105,26,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_RIGHT,204,105,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Oben:",IDC_STATIC11,115,126,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_TOP,140,124,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Unten:",IDC_STATIC12,175,126,22,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_BOTTOM,204,124,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    GROUPBOX        "&Kopien",IDC_STATIC13,245,95,40,45,0,0,IDHS_COPIES
+    EDITTEXT        IDC_COPIES,250,105,30,12,ES_AUTOHSCROLL,0,IDHS_COPIES
+    DEFPUSHBUTTON   "OK",IDOK,190,146,45,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,240,146,45,14,0,0,IDHS_CANCEL
+    LTEXT           "",IDC_STATUS,59,34,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_ORT,59,64,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_TYP,59,49,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_COMMENT,59,79,144,8,0,0,IDHS_INFORMATION
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE
+BEGIN
+    IDD_PRINTERDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 285
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 60
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 186
+        VERTGUIDE, 204
+        VERTGUIDE, 210
+        VERTGUIDE, 235
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        VERTGUIDE, 250
+        VERTGUIDE, 280
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 265
+        HORZGUIDE, 110
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 200
+        HORZGUIDE, 215
+        HORZGUIDE, 224
+        HORZGUIDE, 235
+        HORZGUIDE, 245
+    END
+
+    IDD_PRINTERDIALOGNO, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 285
+        VERTGUIDE, 210
+        VERTGUIDE, 235
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 160
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "programmiert von Oliver E.J. Wesnigk\0"
+            VALUE "CompanyName", "ELAC Technische Software GmbH  Kiel\0"
+            VALUE "FileDescription", "Druckersteuerung\0"
+            VALUE "FileVersion", "2, 0, 0, 0\0"
+            VALUE "InternalName", "ETSPRTD\0"
+            VALUE "LegalCopyright", "© 1999-2000 ELAC Technische Software GmbH\0"
+            VALUE "OriginalFilename", "ETSPRTD.DLL\0"
+            VALUE "ProductName", "Standard Komponente\0"
+            VALUE "ProductVersion", "2, 0, 0, 0\0"
+            VALUE "Spezielles", "Reportfähig\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_STATUS_READY        "Bereit"
+    IDS_STATUS_BUSY         "Ausgelastet"
+    IDS_STATUS_DOOR_OPEN    "Abdeckung ist offen"
+    IDS_STATUS_ERROR        "Fehler"
+    IDS_STATUS_INITIALIZING "Initialisierend"
+    IDS_STATUS_IO_ACTIVE    "E. / A. aktive"
+    IDS_STATUS_MANUAL_FEED  "Manuelle Papierzufuhr"
+    IDS_STATUS_NO_TONER     "kein Toner"
+    IDS_STATUS_NOT_AVAILABLE "Nichtverfügbar"
+    IDS_STATUS_OFFLINE      "Offline"
+    IDS_STATUS_OUT_OF_MEMORY "Nicht genügend Arbeitsspeicher"
+    IDS_STATUS_OUTPUT_BIN_FULL "Ausgabefach ist voll"
+    IDS_STATUS_PAGE_PUNT    "Seitenverwurf"
+    IDS_STATUS_PAPER_JAM    "Papierstau"
+    IDS_STATUS_PAPER_OUT    "Papiermangel"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_STATUS_PAPER_PROBLEM "Papierproblem"
+    IDS_STATUS_PAUSED       "Angehalten"
+    IDS_STATUS_PENDING_DELETION "Löschen anstehend"
+    IDS_STATUS_POWER_SAVE   "Energie sparend"
+    IDS_STATUS_PRINTING     "Druckend"
+    IDS_STATUS_PROCESSING   "Verarbeitend"
+    IDS_STATUS_SERVER_UNKNOWN "Unbekannter Server"
+    IDS_STATUS_TONER_LOW    "Niedriger Tonerstand"
+    IDS_STATUS_USER_INTERVENTION "Benutzereingriff nötig"
+    IDS_STATUS_WAITING      "Wartend"
+    IDS_STATUS_WARMING_UP   "Anlaufend"
+    IDS_DEFAULTPRINTER      "Standarddrucker;"
+    IDS_DEFAULTDOC          "Unbenannt"
+    IDS_OFNFILTER           "Druckerdatei (*.prn)\t*.prn\tAlle Dateien (*.*)\t*.*\t"
+    IDS_OFNTITLE            "Ausdruck in Datei"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_OFNDEFAULT          "Ausgabe.prn"
+    IDS_MBNP_TITLE          "Es ist kein Drucker installiert !"
+    IDS_MBNP_TEXT           "Wollen Sie jetzt einen Drucker installieren ?"
+    IDS_DPRINTING           "Drucken"
+    IDS_DSETUP              "Drucker einrichten"
+    IDS_MBQ_PRINTING        "Dokument drucken"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDHS_SELECTPRINTER      "Zeigt eine Liste der Drucker an, die an Ihrem Computer\nangeschlossen sind."
+    IDHS_BUTTON_SETUP       "Klicken Sie hierauf, um Optionen für den Drucker einzurichten.\nWelche Optionen verfügbar sind, hängt von den\nLeistungsmerkmalen des Druckers ab."
+    IDHS_INFORMATION        "Zeigt Informationen über den ausgewählten Drucker\nan."
+    IDHS_PRINTTOFILE        "Druckt das Dokument nicht direkt auf einem Drucker, sondern\ngibt es in eine Datei aus."
+    IDHS_COPIES             "Dient zur Eingabe der Anzahl der zu druckenden\nKopien, wenn der Drucker Kopien unterstützt."
+    IDHS_MARGINS            "Legt den Druckbereich der Seite fest. Der Drucker druckt das\nDokument nur innerhalb dieser Ränder."
+    IDHS_ORIENTPREVIEW      "Gibt an, wie das Dokument auf der gedruckten Seite platziert\nwird.\nKlicken Sie auf \tHochformat oder \tQuerformat, um eine\nBeispieldarstellung für die Ausrichtung auf der Seite zu sehen."
+    IDHS_ORIENTATION        "Gibt an, wie das Dokument auf der gedruckten Seite platziert\nwird."
+    IDHS_PREVIEWTEXT        "Zeigt eine Vorschau des Seitenlayouts an. Wenn Sie die\nOptionen ändern, ändert sich auch die Beispieldarstellung\nim Seitenlayout."
+    IDHS_OK                 "Schließt das Dialogfeld und speichert alle vorgenommenen\nÄnderungen."
+    IDHS_CANCEL             "Schließt das Dialogfeld, ohne die vorgenommenen\nÄnderungen zu speichern."
+    IDHS_PRINTOK            "Schließt das Dialogfeld, speichert alle vorgenommenen\nÄnderungen und druckt das Dokument."
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PRINTERDIALOG DIALOGEX 0, 0, 290, 270
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Printer",IDC_STATIC1,5,110,280,90
+    LTEXT           "&Name:",IDC_STATIC2,10,126,22,8,0,0,IDHS_SELECTPRINTER
+    COMBOBOX        IDC_SELECTPRINTER,60,124,144,67,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,0,IDHS_SELECTPRINTER
+    PUSHBUTTON      "&Properties...",IDC_BUTTON_SETUP,210,123,70,14,0,0,IDHS_BUTTON_SETUP
+    LTEXT           "Status:",IDC_STATIC3,10,141,23,8,0,0,IDHS_INFORMATION
+    LTEXT           "Type:",IDC_STATIC4,10,156,19,8,0,0,IDHS_INFORMATION
+    LTEXT           "Location:",IDC_STATIC5,10,171,30,8,0,0,IDHS_INFORMATION
+    LTEXT           "Comment:",IDC_STATIC6,10,186,32,8,0,0,IDHS_INFORMATION
+    CONTROL         "Print to &file",IDC_FILE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,210,185,49,10,0,IDHS_PRINTTOFILE
+    GROUPBOX        "Orientation",IDC_STATIC7,5,200,100,45,WS_GROUP,0,IDHS_ORIENTPREVIEW
+    ICON            "",IDC_ORIENTICON,10,214,22,20,SS_CENTERIMAGE |
+                    SS_REALSIZEIMAGE
+    CONTROL         "P&ortrait",IDC_PORTRAIT,"Button",BS_AUTORADIOBUTTON,45,
+                    210,38,10,0,IDHS_ORIENTPREVIEW
+    CONTROL         "L&andscape",IDC_LANDSCAPE,"Button",BS_AUTORADIOBUTTON,
+                    45,230,51,10,0,IDHS_ORIENTPREVIEW
+    GROUPBOX        "Margins (millimeters)",IDC_STATIC8,110,200,130,45,0,0,IDHS_MARGINS
+    LTEXT           "&Left:",IDC_STATIC9,115,211,15,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_LEFT,140,209,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Right:",IDC_STATIC10,175,211,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_RIGHT,204,209,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Top:",IDC_STATIC11,115,231,16,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_TOP,140,229,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Bottom:",IDC_STATIC12,175,231,25,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_BOTTOM,204,229,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    GROUPBOX        "&Copies",IDC_STATIC13,245,200,40,45,0,0,IDHS_COPIES
+    EDITTEXT        IDC_COPIES,250,209,30,12,ES_AUTOHSCROLL,0,IDHS_COPIES
+    DEFPUSHBUTTON   "OK",IDOK,190,251,45,14,0,0,IDHS_OK
+    PUSHBUTTON      "Cancel",IDCANCEL,240,251,45,14,0,0,IDHS_CANCEL
+    LTEXT           "",IDC_STATUS,60,141,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_ORT,60,171,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_TYP,60,156,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_COMMENT,60,186,144,8,0,0,IDHS_INFORMATION
+    CONTROL         "",IDC_PAGEPREVIEW,"Static",SS_BLACKFRAME,5,5,280,105
+END
+
+IDD_PRINTERDIALOGNO DIALOGEX 0, 0, 290, 165
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Printer",IDC_STATIC1,5,5,280,90
+    LTEXT           "&Name:",IDC_STATIC2,9,19,22,8,0,0,IDHS_SELECTPRINTER
+    COMBOBOX        IDC_SELECTPRINTER,59,17,144,67,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP,0,IDHS_SELECTPRINTER
+    PUSHBUTTON      "&Properties...",IDC_BUTTON_SETUP,210,15,70,14,0,0,IDHS_BUTTON_SETUP
+    LTEXT           "Status:",IDC_STATIC3,9,34,23,8,0,0,IDHS_INFORMATION
+    LTEXT           "Type:",IDC_STATIC4,9,49,19,8,0,0,IDHS_INFORMATION
+    LTEXT           "Location:",IDC_STATIC5,9,64,30,8,0,0,IDHS_INFORMATION
+    LTEXT           "Comment:",IDC_STATIC6,9,79,32,8,0,0,IDHS_INFORMATION
+    CONTROL         "Print to &file",IDC_FILE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,209,78,49,10,0,IDHS_PRINTTOFILE
+    GROUPBOX        "Orientation",IDC_STATIC7,5,95,100,45,WS_GROUP,0,IDHS_ORIENTATION
+    ICON            "",IDC_ORIENTICON,10,108,22,20,SS_CENTERIMAGE |
+                    SS_REALSIZEIMAGE
+    CONTROL         "P&ortrait",IDC_PORTRAIT,"Button",BS_AUTORADIOBUTTON,45,
+                    105,38,10,0,IDHS_ORIENTATION
+    CONTROL         "L&andscape",IDC_LANDSCAPE,"Button",BS_AUTORADIOBUTTON,
+                    45,124,51,10,0,IDHS_ORIENTATION
+    GROUPBOX        "Margins (millimeters)",IDC_STATIC8,110,95,130,45,0,0,IDHS_MARGINS
+    LTEXT           "&Left:",IDC_STATIC9,115,105,15,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_LEFT,140,105,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Right:",IDC_STATIC10,175,105,20,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_RIGHT,204,105,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Top:",IDC_STATIC11,115,126,16,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_TOP,140,124,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    LTEXT           "&Bottom:",IDC_STATIC12,175,126,25,8,0,0,IDHS_MARGINS
+    EDITTEXT        IDC_BOTTOM,204,124,30,12,ES_AUTOHSCROLL,0,IDHS_MARGINS
+    GROUPBOX        "&Copies",IDC_STATIC13,245,95,40,45,0,0,IDHS_COPIES
+    EDITTEXT        IDC_COPIES,250,105,30,12,ES_AUTOHSCROLL,0,IDHS_COPIES
+    DEFPUSHBUTTON   "OK",IDOK,190,146,45,14,0,0,IDHS_OK
+    PUSHBUTTON      "Cancel",IDCANCEL,240,146,45,14,0,0,IDHS_CANCEL
+    LTEXT           "",IDC_STATUS,59,34,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_ORT,59,64,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_TYP,59,49,220,8,0,0,IDHS_INFORMATION
+    LTEXT           "",IDC_COMMENT,59,79,144,8,0,0,IDHS_INFORMATION
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE
+BEGIN
+    IDD_PRINTERDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 285
+        VERTGUIDE, 10
+        VERTGUIDE, 45
+        VERTGUIDE, 60
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 186
+        VERTGUIDE, 204
+        VERTGUIDE, 210
+        VERTGUIDE, 235
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        VERTGUIDE, 250
+        VERTGUIDE, 280
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 265
+        HORZGUIDE, 110
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 200
+        HORZGUIDE, 215
+        HORZGUIDE, 224
+        HORZGUIDE, 235
+        HORZGUIDE, 245
+    END
+
+    IDD_PRINTERDIALOGNO, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 285
+        VERTGUIDE, 210
+        VERTGUIDE, 235
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 160
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,0
+ PRODUCTVERSION 2,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "programmed by Oliver E.J. Wesnigk\0"
+            VALUE "CompanyName", "ELAC Technische Software GmbH  Kiel\0"
+            VALUE "FileDescription", "Printercontrol\0"
+            VALUE "FileVersion", "2, 0, 0, 0\0"
+            VALUE "InternalName", "ETSPRTD\0"
+            VALUE "LegalCopyright", "© 1999-2000 ELAC Technische Software GmbH\0"
+            VALUE "OriginalFilename", "ETSPRTD.DLL\0"
+            VALUE "ProductName", "Standard Component\0"
+            VALUE "ProductVersion", "2, 0, 0, 0\0"
+            VALUE "Special", "Reportable\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_STATUS_READY        "Ready"
+    IDS_STATUS_BUSY         "Busy"
+    IDS_STATUS_DOOR_OPEN    "Door open"
+    IDS_STATUS_ERROR        "Error"
+    IDS_STATUS_INITIALIZING "Initializing"
+    IDS_STATUS_IO_ACTIVE    "I/O active"
+    IDS_STATUS_MANUAL_FEED  "Manual feed"
+    IDS_STATUS_NO_TONER     "No toner"
+    IDS_STATUS_NOT_AVAILABLE "Not available"
+    IDS_STATUS_OFFLINE      "Offline"
+    IDS_STATUS_OUT_OF_MEMORY "Out of memory"
+    IDS_STATUS_OUTPUT_BIN_FULL "Output bin full"
+    IDS_STATUS_PAGE_PUNT    "Page punt"
+    IDS_STATUS_PAPER_JAM    "Paper jam"
+    IDS_STATUS_PAPER_OUT    "Paper out"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_STATUS_PAPER_PROBLEM "Paper problem"
+    IDS_STATUS_PAUSED       "Paused"
+    IDS_STATUS_PENDING_DELETION "Pending deletion"
+    IDS_STATUS_POWER_SAVE   "Power saved"
+    IDS_STATUS_PRINTING     "Printing"
+    IDS_STATUS_PROCESSING   "Processing"
+    IDS_STATUS_SERVER_UNKNOWN "Server unknown"
+    IDS_STATUS_TONER_LOW    "Toner low"
+    IDS_STATUS_USER_INTERVENTION "User intervention"
+    IDS_STATUS_WAITING      "Waiting"
+    IDS_STATUS_WARMING_UP   "Warming up"
+    IDS_DEFAULTPRINTER      "Default Printer;"
+    IDS_DEFAULTDOC          "Unknown"
+    IDS_OFNFILTER           "Printer Files (*.prn)\t*.prn\tAll Files (*.*)\t*.*\t"
+    IDS_OFNTITLE            "Print to File"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_OFNDEFAULT          "Output.prn"
+    IDS_MBNP_TITLE          "No printer installed!"
+    IDS_MBNP_TEXT           "Do you wish to install a printer now?"
+    IDS_DPRINTING           "Print"
+    IDS_DSETUP              "Printer setup"
+    IDS_MBQ_PRINTING        "Print document"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDHS_SELECTPRINTER      "Lists the printers that are connected to your computer."
+    IDHS_BUTTON_SETUP       "Click to set up options for the printer. The options available\ndepend on the printer´s features."
+    IDHS_INFORMATION        "Shows information about the selected printer, such as the\nprinter´s name and location."
+    IDHS_PRINTTOFILE        "Prints the document to a file instead of routing it directly to a\nprinter. The document is saved with the printer formatting, such\nas font selection and color specifications, in a .prn file that can\nbe printed on another printer."
+    IDHS_COPIES             "Provides a space for you to type the number of copies you\nwant to print."
+    IDHS_MARGINS            "Sets the printing area of the page. The printer will print only\nwithin these margins."
+    IDHS_ORIENTPREVIEW      "Specifies how the document is positioned on the printed page.\n\nTo see how the orientation will look on the sample page, click\n\tPortrait or \tLandscape\r."
+    IDHS_ORIENTATION        "Specifies how the document is positioned on the printed page."
+    IDHS_PREVIEWTEXT        "Shows how the page layout will look. As you change the\noptions, the page layout example changes."
+    IDHS_OK                 "Closes the dialog box and saves any changes you\nhave made"
+    IDHS_CANCEL             "Closes the dialog box without saving any changes you have\nmade."
+    IDHS_PRINTOK            "Closes the dialog box and saves any changes you\nhave made and starts printing the document."
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

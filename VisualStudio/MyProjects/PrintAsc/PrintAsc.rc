@@ -1,0 +1,270 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\PrintAsc.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\PrintAsc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PRINTASC_DIALOG DIALOGEX 0, 0, 238, 103
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP | WS_EX_APPWINDOW
+CAPTION "Speedy, der ASCII Drucker"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,175,85,55,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,115,85,55,12
+    GROUPBOX        "",IDC_STATIC,5,5,230,60
+    LTEXT           "Drucker",IDC_STATIC,10,16,45,8
+    LTEXT           "Status :",IDC_STATUS,10,31,45,8
+    LTEXT           "Ort :",IDC_LOCATION,10,41,45,8
+    LTEXT           "Kommentar :",IDC_COMMENT,10,51,45,8
+    COMBOBOX        IDC_COMBO_PRINTER,60,14,110,51,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_STATUS_TEXT,60,31,110,8
+    LTEXT           "",IDC_LOCATION_TEXT,60,41,110,8
+    LTEXT           "",IDC_COMMENT_TEXT,60,51,110,8
+    PUSHBUTTON      "Einstellungen...",IDC_SETUP,175,14,55,12
+    EDITTEXT        IDC_TAB_LENGTH,215,39,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_TAB_LENGTH
+    LTEXT           "Tablänge:",IDC_STATIC,175,41,36,8
+    CONTROL         "Zwischenablage drucken",IDC_CLIPBOARD_PRINT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,86,105,10,0,
+                    HIDC_CLIPBOARD_PRINT
+    CONTROL         "Textformat für EtsHelp.dll drucken.",IDC_ETSHELP_FORMAT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,70,125,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PRINTASC_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 110
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 230
+        VERTGUIDE, 235
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 91
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o über PrintAsc..."
+    IDS_PRINTDIALOG_STD     "Standarddrucker "
+    IDS_PRINTDIALOG_OK      "(bereit)"
+    IDS_PRINTDIALOG_ERROR   "(nicht bereit)"
+    IDS_PRINTINFO_ERROR     "Fehler !!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PRINTASC_DIALOG DIALOGEX 0, 0, 238, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Speedy, the ASCII Printer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,175,74,55,12
+    PUSHBUTTON      "Cancel",IDCANCEL,115,74,55,12
+    GROUPBOX        "",IDC_STATIC,5,5,230,60
+    LTEXT           "Printer :",IDC_STATIC,10,16,45,8
+    LTEXT           "Status :",IDC_STATUS,10,31,45,8
+    LTEXT           "Location :",IDC_LOCATION,10,41,45,8
+    LTEXT           "Comment :",IDC_COMMENT,10,51,45,8
+    COMBOBOX        IDC_COMBO_PRINTER,60,14,110,51,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_STATUS_TEXT,60,31,110,8
+    LTEXT           "",IDC_LOCATION_TEXT,60,41,110,8
+    LTEXT           "",IDC_COMMENT_TEXT,60,51,110,8
+    PUSHBUTTON      "Options...",IDC_SETUP,175,14,55,12
+    EDITTEXT        IDC_TAB_LENGTH,215,39,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_TAB_LENGTH
+    LTEXT           "Tablength:",IDC_STATIC,175,41,36,8
+    CONTROL         "Print Clipboard",IDC_CLIPBOARD_PRINT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,75,105,10,0,
+                    HIDC_CLIPBOARD_PRINT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PRINTASC_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 110
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 230
+        VERTGUIDE, 235
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+        HORZGUIDE, 80
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "About PrintAsc..."
+    IDS_PRINTDIALOG_STD     "Defaultprinter"
+    IDS_PRINTDIALOG_OK      "(Ready)"
+    IDS_PRINTDIALOG_ERROR   "(Not ready)"
+    IDS_PRINTINFO_ERROR     "Error !!"
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\PrintAsc.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

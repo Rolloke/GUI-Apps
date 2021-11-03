@@ -1,0 +1,20 @@
+ 
+// Commands (ID_* and IDM_*) 
+HID_VIEW_NORMAL                         0x18003
+HID_VIEW_STRETCHED                      0x18004
+HID_VIEW_200_PERCENT                    0x18005
+HID_VIEW_400_PERCENT                    0x18006
+HID_VIEW_ZOOM                           0x18007
+HID_VIEW_BW                             0x18008
+HID_EDIT_CONVERT                        0x18009
+ 
+// Prompts (IDP_*) 
+ 
+// Resources (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+HIDR_ETSPAITYPE                         0x20081
+ 
+// Dialogs (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+ 
+// Frame Controls (IDW_*) 

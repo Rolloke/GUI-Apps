@@ -1,0 +1,1959 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\AC_COM.ico"
+IDR_FILE_TYPE           ICON    DISCARDABLE     "res\\FileType.ico"
+IDR_FILE_TYPECD         ICON    DISCARDABLE     "res\\CDInfo.ico"
+IDR_FILE_TYPEIRC        ICON    DISCARDABLE     "res\\Remote.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LIST_IMAGES         BITMAP  DISCARDABLE     "res\\NTCHECK.BMP"
+IDB_LIST_IMAGES1        BITMAP  DISCARDABLE     "res\\list_ima.bmp"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\AC_COM.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AC_COM_DIALOG DIALOGEX 0, 0, 310, 205
+STYLE DS_ABSALIGN | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_APPWINDOW
+CAPTION "AC Kommunikations Schnittstelle"
+MENU IDR_MAIN_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "AC-Grundeinstellungen für Messungen",
+                    IDC_AC_R_BASIC_AC_SETTINGS,"Button",BS_AUTORADIOBUTTON | 
+                    BS_CENTER | BS_PUSHLIKE | WS_GROUP,6,2,148,12
+    CONTROL         "Weitere AC Einstellungen",IDC_AC_R_EXTENDED_AC_SETTINGS,
+                    "Button",BS_AUTORADIOBUTTON | BS_CENTER | BS_PUSHLIKE,
+                    156,2,148,12
+    CONTROL         "Balkenanzeige",IDC_AC_R_ANALOG,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,150,51,150,10,0,
+                    HIDC_AC_R_ANALOG
+    CONTROL         "Digitalanzeige",IDC_AC_R_DIGITAL,"Button",
+                    BS_AUTORADIOBUTTON,10,51,135,10,0,HIDC_AC_R_DIGITAL
+    CONTROL         "Stereo Modus",IDC_AC_R_STEREO,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_STEREO
+    CONTROL         "Surround Modus",IDC_AC_R_SURROUND,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,51,150,10,0,
+                    HIDC_AC_R_SURROUND
+    CONTROL         "RT 60 Messung mit Sinus",IDC_AC_R_RT60_SINUS,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_RT60_SINUS
+    CONTROL         "RT 60 Messung mit Rauschen",IDC_AC_R_RT60_RAUSCHEN,
+                    "Button",BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,51,150,
+                    10,0,HIDC_AC_R_RT60_RAUSCHEN
+    CONTROL         "3-Wege Lautsprecher",IDC_AC_R_3WAY,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,150,51,
+                    150,10,0,HIDC_AC_R_3WAY
+    CONTROL         "2-Wege Lautsprecher",IDC_AC_R_2WAY,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,10,51,135,10,0,
+                    HIDC_AC_R_2WAY
+    CONTROL         "Messung mit Filter A",IDC_AC_R_FILTER_A,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_FILTER_A
+    CONTROL         "Messung mit Filter C",IDC_AC_R_FILTER_C,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,51,150,10,0,
+                    HIDC_AC_R_FILTER_C
+    LTEXT           "Peak-Hold-Zeit/\nMittelungszeit :",
+                    IDC_AC_TXT_PEAK_HOLD_TIME,10,48,65,16,NOT WS_VISIBLE,0,
+                    HIDC_AC_TXT_PEAK_HOLD_TIME
+    COMBOBOX        IDC_AC_COMBO_PEAK_HOLD_TIME,80,50,220,66,
+                    CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_AC_COMBO_PEAK_HOLD_TIME
+    LTEXT           "Kalibrierung (bei 1000 Hz):",IDC_AC_TXT_CALIBRATION,10,
+                    52,150,8,NOT WS_VISIBLE,0,HIDC_AC_TXT_CALIBRATION
+    EDITTEXT        IDC_AC_EDT_CALIBRATION,161,50,35,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_CALIBRATION
+    CONTROL         "Calibration",IDC_AC_SPIN_CALIBRATION,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,197,50,11,12,0,
+                    HIDC_AC_SPIN_CALIBRATION
+    CONTROL         "System Configuration",IDC_AC_TAB_SYSTEM_CONFIG,
+                    "SysTabControl32",TCS_MULTILINE | TCS_TOOLTIPS | 
+                    WS_BORDER | WS_GROUP,5,17,300,53,0,
+                    HIDC_AC_TAB_SYSTEM_CONFIG
+    CONTROL         "Menü für Frequenzweiche aktivieren",IDC_AC_CK_NETWORK,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_GROUP | 
+                    WS_TABSTOP,10,51,200,10,0,HIDC_AC_CK_NETWORK
+    PUSHBUTTON      "Konfigurieren...",IDC_AC_BTN_CONF_NETWORK,235,50,64,12,
+                    NOT WS_VISIBLE,0,HIDC_AC_BTN_CONF_NETWORK
+    CONTROL         "Autobalance mit Delta-T",IDC_AC_CK_AUTOBALANCE_DELTAT,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    10,51,135,10,0,HIDC_AC_CK_AUTOBALANCE_DELTAT
+    CONTROL         "Autobalance mit dB Level",
+                    IDC_AC_CK_AUTOBALANCE_DB_LEVEL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,150,51,150,10,0,
+                    HIDC_AC_CK_AUTOBALANCE_DB_LEVEL
+    LTEXT           "Sound Anzahl für Autosound :",
+                    IDC_AC_TXT_NO_OF_SOUNDS_AUTO,10,52,150,8,NOT WS_VISIBLE,
+                    0,HIDC_AC_TXT_NO_OF_SOUNDS_AUTO
+    EDITTEXT        IDC_AC_EDT_NO_OF_SOUNDS_AUTO,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,
+                    HIDC_AC_EDT_NO_OF_SOUNDS_AUTO
+    CONTROL         "Autosound",IDC_AC_SPIN_NO_OF_SOUNDS_AUTO,
+                    "msctls_updown32",UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,
+                    11,12,0,HIDC_AC_SPIN_NO_OF_SOUNDS_AUTO
+    LTEXT           "Anzahl Memo :",IDC_AC_TXT_MEMO_COUNTER,10,52,150,8,NOT 
+                    WS_VISIBLE,0,HIDC_AC_TXT_MEMO_COUNTER
+    EDITTEXT        IDC_AC_EDT_MEMO_COUNTER,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_MEMO_COUNTER
+    CONTROL         "Memo Counter",IDC_AC_SPIN_MEMO_COUNTER,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,11,12,0,
+                    HIDC_AC_SPIN_MEMO_COUNTER
+    LTEXT           "Bewertungs-/Qualitätsniveau:",IDC_AC_TXT_BAD_POINTS,10,
+                    52,150,8,NOT WS_VISIBLE,0,HIDC_AC_TXT_BAD_POINTS
+    EDITTEXT        IDC_AC_EDT_BAD_POINTS,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_BAD_POINTS
+    CONTROL         "Bad Points",IDC_AC_SPIN_BAD_POINTS,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,11,12,0,
+                    HIDC_AC_SPIN_BAD_POINTS
+    LTEXT           "Bewertungsschwelle (Bewertung nach n Werten außerhalb des Bereichs) :",
+                    IDC_AC_TXT_WEIGHTING,10,52,258,8,NOT WS_VISIBLE,0,
+                    HIDC_AC_TXT_WEIGHTING
+    EDITTEXT        IDC_AC_EDT_WEIGHTING,259,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_WEIGHTING
+    CONTROL         "Weighting",IDC_AC_SPIN_WEIGHTING,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,285,50,11,12,0,
+                    HIDC_AC_SPIN_WEIGHTING
+    COMBOBOX        IDC_AC_COMBO_CD_A,10,50,90,102,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_A
+    COMBOBOX        IDC_AC_COMBO_CD_B,110,50,90,103,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_B
+    COMBOBOX        IDC_AC_COMBO_CD_C,210,50,90,103,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_C
+    CONTROL         "Tables",IDC_AC_TAB_TABLES,"SysTabControl32",
+                    TCS_MULTILINE | TCS_TOOLTIPS | NOT WS_VISIBLE | 
+                    WS_BORDER,5,17,300,53,0,HIDC_AC_TAB_TABLES
+    CONTROL         "Auf neues Meßergebnis warten",
+                    IDC_AC_BTN_START_MEASUREMENT_ONCE,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,10,88,140,12
+    CONTROL         "Neue Meßergebnisse fortlaufend abrufen",
+                    IDC_AC_BTN_START_MEASUREMENT,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,160,88,140,12
+    CONTROL         "Aktuelle Meßdaten sofort anzeigen :",
+                    IDC_AC_CK_SHOW_CURVES,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,10,107,140,10
+    PUSHBUTTON      "Meßergebnisse auswählen...",
+                    IDC_AC_BTN_EVALUATE_MEASUREMENTS,160,106,140,12,
+                    WS_DISABLED
+    GROUPBOX        "AC-Meßdaten abrufen",IDC_STATIC,5,75,300,98,0,0,
+                    HIDC_STATIC
+    LTEXT           "Beschreibung:",IDC_STATIC,10,138,48,8,0,0,HIDC_STATIC
+    EDITTEXT        IDC_AC_EDT_CURVENAME,60,136,170,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Anzeigen",IDC_AC_BTN_SHOW_CURVES,235,136,65,12,
+                    WS_DISABLED,0,HIDC_AC_BTN_SHOW_CURVES
+    LTEXT           "Ergebnisstyp:",IDC_STATIC,10,155,48,8,0,0,HIDC_STATIC
+    COMBOBOX        IDC_AC_COMBO_MEANING_OF_TV,60,153,240,72,
+                    CBS_DROPDOWNLIST | WS_VSCROLL
+    GROUPBOX        "Aktuelle Meßdaten",IDC_STATIC,5,125,300,48
+    LTEXT           "Port :",IDC_AC_TXT_PORT,5,178,18,8,SS_NOTIFY,0,
+                    HIDC_AC_TXT_PORT
+    COMBOBOX        IDC_AC_COMBO_PORT,29,176,43,66,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_AC_COMBO_PORT
+    PUSHBUTTON      "Daten holen",IDC_AC_BTN_GETDATA,77,176,50,12,0,0,
+                    HIDC_AC_BTN_GETDATA
+    PUSHBUTTON      "Daten senden",IDC_AC_BTN_PUTDATA,135,176,55,12,0,0,
+                    HIDC_AC_BTN_PUTDATA
+    DEFPUSHBUTTON   "OK",IDOK,255,176,50,12,0,0,HIDOK
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,0,192,
+                    310,1
+    LTEXT           "Status",IDC_AC_STATUS,0,195,310,10,0,0,HIDC_AC_STATUS
+END
+
+IDD_BASIC_PARAM DIALOGEX 0, 0, 280, 250
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Grundeinstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Linear",IDC_BS_R_LIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_GROUP,15,22,35,10,0,HIDC_BS_R_LIN
+    CONTROL         "Logarithmisch in Dekaden",IDC_BS_R_LOG_DEK,"Button",
+                    BS_AUTORADIOBUTTON,135,16,100,10,0,HIDC_BS_R_LOG_DEK
+    CONTROL         "Logarithmisch in Oktaven, Terzen",IDC_BS_R_LOG_OCT,
+                    "Button",BS_AUTORADIOBUTTON,135,28,130,10,0,
+                    HIDC_BS_R_LOG_OCT
+    GROUPBOX        "Skalierung der Frequenzachsen",IDC_STATIC,5,8,270,219,
+                    WS_GROUP
+    GROUPBOX        "Bereiche (X-Achse)",IDC_STATIC,5,39,270,188
+    LTEXT           "Frequenzbereich 1 (Selftest) [Hz]",IDC_STATIC,14,52,121,
+                    8
+    LTEXT           "von:",IDC_STATIC,140,52,15,8
+    EDITTEXT        IDC_BS_EDT_X_FROM1,160,50,45,12,ES_AUTOHSCROLL | 
+                    WS_GROUP,0,HIDC_BS_EDT_X_FROM1
+    LTEXT           "bis:",IDC_STATIC,208,52,12,8
+    EDITTEXT        IDC_BS_EDT_X_TO1,225,50,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_X_TO1
+    LTEXT           "Frequenzbereich 2 (Speakertest) [Hz]",IDC_STATIC,14,66,
+                    121,8
+    LTEXT           "von:",IDC_STATIC,140,66,15,8
+    EDITTEXT        IDC_BS_EDT_X_FROM2,160,64,45,12,ES_AUTOHSCROLL | 
+                    WS_GROUP,0,HIDC_BS_EDT_X_FROM2
+    LTEXT           "bis:",IDC_STATIC,208,66,12,8
+    EDITTEXT        IDC_BS_EDT_X_TO2,225,64,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_X_TO2
+    GROUPBOX        "Bereiche (Y-Achse)",IDC_STATIC,5,79,270,148
+    LTEXT           "Lautstärkepegel [dB]",IDC_STATIC,14,92,121,8
+    LTEXT           "von:",IDC_STATIC,140,92,15,8
+    EDITTEXT        IDC_BS_EDT_Y_FROM1,160,90,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_FROM1
+    LTEXT           "bis:",IDC_STATIC,208,92,12,8
+    EDITTEXT        IDC_BS_EDT_Y_TO1,225,90,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_TO1
+    LTEXT           "Nachhallzeit RT-60 [ms]",IDC_STATIC,14,106,121,8
+    LTEXT           "von:",IDC_STATIC,140,106,15,8
+    EDITTEXT        IDC_BS_EDT_Y_FROM2,160,104,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_FROM2
+    LTEXT           "bis:",IDC_STATIC,208,106,12,8
+    EDITTEXT        IDC_BS_EDT_Y_TO2,225,104,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_TO2
+    GROUPBOX        "Fortlaufende Messungen",IDC_STATIC,5,119,270,108
+    LTEXT           "Wiederholungszeit für die zyklische Abfage der Meßdaten [s]:",
+                    IDC_STATIC,14,132,206,8
+    EDITTEXT        IDC_BS_EDT_POLLTIME,225,130,25,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_POLLTIME
+    GROUPBOX        "Parameter für Kommunikation mit dem AC",IDC_STATIC,5,
+                    145,270,82
+    LTEXT           "Anzahl der Versuche für die Abfrage des Ports :",
+                    IDC_STATIC,14,158,206,8
+    EDITTEXT        IDC_BS_EDT_TRIALS,225,156,26,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_TRIALS
+    LTEXT           "Wartezeit für die Rückmeldung des Ports [ms]:",
+                    IDC_STATIC,14,172,206,8
+    EDITTEXT        IDC_BS_EDT_EVENT_TIME,225,170,26,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_EVENT_TIME
+    GROUPBOX        "Einstellungen für die Frequenzgangmessung (Selftest)",
+                    IDC_STATIC,5,185,270,42
+    CONTROL         "Messungen mit Track 9 der Test-CD ACD 2",
+                    IDC_BS_CK_TRACK9OLD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,197,256,10,0,HIDC_BS_CK_TRACK9OLD
+    CONTROL         "Messungen mit Track 10 der Test-CD ACD 3 (20 Hz - 200 Hz)",
+                    IDC_BS_CK_TRACK10NEW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,210,256,10,0,HIDC_BS_CK_TRACK10NEW
+    DEFPUSHBUTTON   "OK",IDOK,225,234,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,170,234,50,12
+    PUSHBUTTON      "Standard setzen",IDC_BS_BTN_DEFAULT,67,234,68,12,0,0,
+                    HIDC_BS_BTN_DEFAULT
+    PUSHBUTTON      "Hilfe",IDHELP,5,234,50,12
+END
+
+IDD_EVAL_MEASUREMENTS DIALOGEX 0, 0, 420, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Messergebnisse auswählen / Parameter Einstellung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Ergebnisse :",IDC_STATIC,5,8,45,8
+    COMBOBOX        IDC_EM_COMBO_MEANING_OF_TV,59,6,265,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL,0,HIDC_EM_COMBO_MEANING_OF_TV
+    PUSHBUTTON      "Messung löschen...",IDC_EM_BTN_DELETE_MEASUREMENT,335,6,
+                    80,12,WS_DISABLED,0,HIDC_EM_BTN_DELETE_MEASUREMENT
+    CONTROL         "Ergebnissliste",IDC_EM_MEASUREMENT_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,
+                    5,25,410,100,0,HIDC_EM_MEASUREMENT_LIST
+    PUSHBUTTON      "Hilfe",IDHELP,5,129,50,12
+    CONTROL         "Links",IDC_EM_CK_SHOW_LEFT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,73,130,50,10,0,HIDC_EM_CK_SHOW_LEFT
+    CONTROL         "Center",IDC_EM_CK_SHOW_CENTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,124,130,50,10,0,HIDC_EM_CK_SHOW_CENTER
+    CONTROL         "Rechts",IDC_EM_CK_SHOW_RIGHT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,175,130,50,10,0,HIDC_EM_CK_SHOW_RIGHT
+    CONTROL         "Mittelwert",IDC_EM_CK_SHOW_AVERAGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,226,130,60,10,0,
+                    HIDC_EM_CK_SHOW_AVERAGE
+    DEFPUSHBUTTON   "Anzeigen",IDC_EM_BTN_SHOW_CURVES,290,129,50,12,0,0,
+                    HIDC_EM_BTN_SHOW_CURVES
+    PUSHBUTTON      "Abbrechen",IDCANCEL,365,129,50,12
+END
+
+IDD_IR_CODE_DESCR DIALOGEX 0, 0, 205, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "IR-Codes"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Gerät :",IDC_STATIC,5,6,30,8
+    EDITTEXT        IDC_IR_EDT_DEVICE,40,4,160,12,ES_AUTOHSCROLL,0,
+                    HIDC_IR_EDT_DEVICE
+    CONTROL         "Code Liste",IDC_IR_CODE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDATA | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,20,195,130,0,HIDC_IR_CODE_LIST
+    PUSHBUTTON      "Speichern...",IDC_IR_BTN_SAVE,150,154,50,12,0,0,
+                    HIDC_IR_BTN_SAVE
+    PUSHBUTTON      "Öffnen...",IDC_IR_BTN_LOAD,5,154,50,12,0,0,
+                    HIDC_IR_BTN_LOAD
+    DEFPUSHBUTTON   "OK",IDOK,150,169,50,12
+    PUSHBUTTON      "Hilfe",IDHELP,5,169,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,95,169,50,12
+END
+
+IDD_MSG_BOX_BEHAVIOUR DIALOG DISCARDABLE  0, 0, 240, 74
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "AC-Com Verhalten bei Ereignissen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Ereignisse :",IDC_STATIC,5,6,37,8
+    COMBOBOX        IDC_MBB_COMBO,5,19,230,106,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Warnen / Abfragen",IDC_MBB_CK_REQUEST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,40,77,10
+    CONTROL         "Automatisch",IDC_MBB_CK_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,101,40,55,10
+    PUSHBUTTON      "Standard",IDC_MBB_BTN_DEFAULT,5,59,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,122,59,50,12
+    DEFPUSHBUTTON   "OK",IDOK,185,59,50,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_AC_COM_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 300
+        VERTGUIDE, 305
+        HORZGUIDE, 8
+        HORZGUIDE, 17
+        HORZGUIDE, 56
+        HORZGUIDE, 70
+        HORZGUIDE, 75
+        HORZGUIDE, 94
+        HORZGUIDE, 112
+        HORZGUIDE, 125
+        HORZGUIDE, 142
+        HORZGUIDE, 159
+        HORZGUIDE, 173
+        HORZGUIDE, 182
+    END
+
+    IDD_BASIC_PARAM, DIALOG
+    BEGIN
+        HORZGUIDE, 79
+        HORZGUIDE, 119
+        HORZGUIDE, 145
+        HORZGUIDE, 185
+        HORZGUIDE, 227
+        HORZGUIDE, 240
+    END
+
+    IDD_EVAL_MEASUREMENTS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 415
+        HORZGUIDE, 12
+        HORZGUIDE, 25
+        HORZGUIDE, 125
+        HORZGUIDE, 135
+    END
+
+    IDD_IR_CODE_DESCR, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 200
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 150
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+    END
+
+    IDD_MSG_BOX_BEHAVIOUR, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 235
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AC_COM_DIALOG DLGINIT
+BEGIN
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 4, 0
+0x7541, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 34, 0
+0x2020, 0x2031, 0x6553, 0x756b, 0x646e, 0x2065, 0x2020, 0x3e2d, 0x6b20, 
+0x6965, 0x206e, 0x6144, 0x6574, 0x6c6e, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 33, 0
+0x2020, 0x2033, 0x6553, 0x756b, 0x646e, 0x6e65, 0x2d20, 0x203e, 0x656b, 
+0x6e69, 0x4420, 0x7461, 0x6e65, 0x6f6c, 0x6767, 0x7265, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 32, 0
+0x3031, 0x5320, 0x6b65, 0x6e75, 0x6564, 0x206e, 0x3e2d, 0x6b20, 0x6965, 
+0x206e, 0x6144, 0x6574, 0x6c6e, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 32, 0
+0x3033, 0x5320, 0x6b65, 0x6e75, 0x6564, 0x206e, 0x3e2d, 0x6b20, 0x6965, 
+0x206e, 0x6144, 0x6574, 0x6c6e, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x2020, 0x2031, 0x694d, 0x756e, 0x6574, 0x2020, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x6e65, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5720, 0x7265, 
+0x2074, 0x7270, 0x206f, 0x2020, 0x3233, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 50, 0
+0x2020, 0x2032, 0x694d, 0x756e, 0x6574, 0x206e, 0x2d20, 0x203e, 0x6144, 
+0x6574, 0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 
+0x7020, 0x6f72, 0x2020, 0x3620, 0x3034, 0x6d20, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 49, 0
+0x2020, 0x2034, 0x694d, 0x756e, 0x6574, 0x206e, 0x2d20, 0x203e, 0x6144, 
+0x6574, 0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 
+0x7020, 0x6f72, 0x3120, 0x3832, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 49, 0
+0x2020, 0x2038, 0x694d, 0x756e, 0x6574, 0x206e, 0x2d20, 0x203e, 0x6144, 
+0x6574, 0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 
+0x7020, 0x6f72, 0x3220, 0x3635, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 49, 0
+0x3033, 0x4d20, 0x6e69, 0x7475, 0x6e65, 0x2020, 0x3e2d, 0x4420, 0x7461, 
+0x6e65, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5720, 0x7265, 0x2074, 
+0x7270, 0x206f, 0x3120, 0x2c30, 0x3432, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 50, 0
+0x2020, 0x2031, 0x7453, 0x6e75, 0x6564, 0x2020, 0x2d20, 0x203e, 0x6144, 
+0x6574, 0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 
+0x7020, 0x6f72, 0x2020, 0x3032, 0x342c, 0x2038, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 49, 0
+0x2020, 0x2032, 0x7453, 0x6e75, 0x6564, 0x206e, 0x3e2d, 0x4420, 0x7461, 
+0x6e65, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5720, 0x7265, 0x2074, 
+0x7270, 0x206f, 0x3420, 0x2c30, 0x3639, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 50, 0
+0x2020, 0x2033, 0x7453, 0x6e75, 0x6564, 0x206e, 0x3e2d, 0x4420, 0x7461, 
+0x6e65, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5720, 0x7265, 0x2074, 
+0x7270, 0x206f, 0x2020, 0x3136, 0x342c, 0x2034, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 48, 0
+0x2020, 0x2035, 0x7453, 0x6e75, 0x6564, 0x206e, 0x3e2d, 0x4420, 0x7461, 
+0x6e65, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5720, 0x7265, 0x2074, 
+0x7270, 0x206f, 0x3031, 0x2c32, 0x2034, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 47, 0
+0x3031, 0x5320, 0x7574, 0x646e, 0x6e65, 0x2d20, 0x203e, 0x6144, 0x6574, 
+0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 0x7020, 
+0x6f72, 0x3220, 0x3430, 0x382c, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 47, 0
+0x3531, 0x5320, 0x7574, 0x646e, 0x6e65, 0x2d20, 0x203e, 0x6144, 0x6574, 
+0x6c6e, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6557, 0x7472, 0x7020, 
+0x6f72, 0x3320, 0x3730, 0x322c, 0x7320, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 19, 0
+0x4152, 0x204d, 0x7270, 0x676f, 0x6172, 0x6d6d, 0x6569, 0x6272, 0x7261, 
+"\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6941, 0x6177, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6b41, 0x6961, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6544, 0x6f6e, 0x006e, 
+    IDC_AC_COMBO_CD_A, 0x403, 16, 0
+0x6148, 0x6d72, 0x6e61, 0x4b20, 0x7261, 0x6f64, 0x206e, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 16, 0
+0x6148, 0x6d72, 0x6e61, 0x4b20, 0x7261, 0x6f64, 0x206e, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x564a, 0x2043, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x434a, 0x2056, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x654b, 0x776e, 0x6f6f, 0x2064, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x654b, 0x776e, 0x6f6f, 0x2064, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 4, 0
+0x414e, 0x0044, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6e4f, 0x796b, 0x006f, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x6150, 0x616e, 0x6f73, 0x696e, 0x0063, 
+    IDC_AC_COMBO_CD_A, 0x403, 14, 0
+0x6850, 0x6c69, 0x7069, 0x2073, 0x5228, 0x3543, 0x0029, 
+    IDC_AC_COMBO_CD_A, 0x403, 8, 0
+0x6950, 0x6e6f, 0x6565, 0x0072, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6f52, 0x6574, 0x006c, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6853, 0x7261, 0x0070, 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6f53, 0x796e, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 8, 0
+0x6554, 0x6361, 0x6120, 0x0020, 
+    IDC_AC_COMBO_CD_A, 0x403, 7, 0
+0x6554, 0x6361, 0x6220, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 9, 0
+0x6554, 0x6863, 0x696e, 0x7363, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 13, 0
+0x6554, 0x6863, 0x696e, 0x7363, 0x6120, 0x746c, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 7, 0
+0x6159, 0x616d, 0x6168, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 6, 0
+0x656b, 0x6e69, 0x0065, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 38, 0
+0x6353, 0x6168, 0x6c6c, 0x6570, 0x6567, 0x616c, 0x6675, 0x657a, 0x6369, 
+0x6e68, 0x6e75, 0x2067, 0x4428, 0x7461, 0x6e65, 0x6f6c, 0x6767, 0x7265, 
+0x0029, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 48, 0
+0x6550, 0x6567, 0x2c6c, 0x4e20, 0x6361, 0x6868, 0x6c61, 0x7a6c, 0x6965, 
+0x6574, 0x2c6e, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 0x207a, 
+0x6c28, 0x6e69, 0x656b, 0x2072, 0x534c, 0x0029, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 48, 0
+0x6550, 0x6567, 0x2c6c, 0x4e20, 0x6361, 0x6868, 0x6c61, 0x7a6c, 0x6965, 
+0x6574, 0x2c6e, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 0x207a, 
+0x6328, 0x6e65, 0x6574, 0x2072, 0x534c, 0x0029, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 49, 0
+0x6550, 0x6567, 0x2c6c, 0x4e20, 0x6361, 0x6868, 0x6c61, 0x7a6c, 0x6965, 
+0x6574, 0x2c6e, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 0x207a, 
+0x7228, 0x6365, 0x7468, 0x7265, 0x4c20, 0x2953, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 51, 0
+0x614c, 0x7475, 0x7073, 0x6572, 0x6863, 0x7265, 0x462d, 0x6572, 0x7571, 
+0x6e65, 0x677a, 0x6e61, 0x2c67, 0x3220, 0x4830, 0x2d7a, 0x3032, 0x486b, 
+0x207a, 0x5328, 0x6c65, 0x7362, 0x7474, 0x7365, 0x2974, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 19, 0
+0x7541, 0x6f74, 0x4220, 0x6c61, 0x6e61, 0x6563, 0x5020, 0x6765, 0x6c65, 
+"\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 11, 0
+0x7541, 0x6f74, 0x5320, 0x756f, 0x646e, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 64, 0
+0x614c, 0x7475, 0x7073, 0x6572, 0x6863, 0x7265, 0x462d, 0x6572, 0x7571, 
+0x6e65, 0x677a, 0x6e61, 0x2c67, 0x3220, 0x4830, 0x2d7a, 0x3032, 0x486b, 
+0x207a, 0x5328, 0x6c65, 0x7362, 0x7474, 0x7365, 0x2974, 0x5420, 0x6172, 
+0x6b63, 0x2039, 0x4341, 0x2044, 0x0032, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 66, 0
+0x614c, 0x7475, 0x7073, 0x6572, 0x6863, 0x7265, 0x462d, 0x6572, 0x7571, 
+0x6e65, 0x677a, 0x6e61, 0x2c67, 0x3220, 0x4830, 0x2d7a, 0x3032, 0x486b, 
+0x207a, 0x5328, 0x6c65, 0x7362, 0x7474, 0x7365, 0x2974, 0x5420, 0x6172, 
+0x6b63, 0x3120, 0x2030, 0x4341, 0x2044, 0x0033, 
+    0
+END
+
+IDD_EVAL_MEASUREMENTS DLGINIT
+BEGIN
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 5, 0
+0x6c41, 0x656c, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 38, 0
+0x6353, 0x6168, 0x6c6c, 0x6570, 0x6567, 0x616c, 0x6675, 0x657a, 0x6369, 
+0x6e68, 0x6e75, 0x2067, 0x4428, 0x7461, 0x6e65, 0x6f6c, 0x6767, 0x7265, 
+0x0029, 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 36, 0
+0x6550, 0x6567, 0x2c6c, 0x4e20, 0x6361, 0x6868, 0x6c61, 0x7a6c, 0x6965, 
+0x6574, 0x2c6e, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 0x007a, 
+
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 46, 0
+0x614c, 0x7475, 0x7073, 0x6572, 0x6863, 0x7265, 0x462d, 0x6572, 0x7571, 
+0x6e65, 0x677a, 0x6e61, 0x2c67, 0x3220, 0x4830, 0x2d7a, 0x3032, 0x486b, 
+0x2c7a, 0x5320, 0x6574, 0x6572, 0x006f, 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 48, 0
+0x614c, 0x7475, 0x7073, 0x6572, 0x6863, 0x7265, 0x462d, 0x6572, 0x7571, 
+0x6e65, 0x677a, 0x6e61, 0x2c67, 0x3220, 0x4830, 0x2d7a, 0x3032, 0x486b, 
+0x2c7a, 0x5320, 0x7275, 0x6f72, 0x6e75, 0x0064, 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 25, 0
+0x7541, 0x6f74, 0x4220, 0x6c61, 0x6e61, 0x6563, 0x5020, 0x6765, 0x6c65, 
+0x2820, 0x4341, 0x2943, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 17, 0
+0x7541, 0x6f74, 0x5320, 0x756f, 0x646e, 0x2820, 0x4353, 0x294d, "\000" 
+    0
+END
+
+IDD_MSG_BOX_BEHAVIOUR DLGINIT
+BEGIN
+    IDC_MBB_COMBO, 0x403, 52, 0
+0x6553, 0x646e, 0x6e65, 0x6720, 0xe465, 0x646e, 0x7265, 0x6574, 0x2072, 
+0x4341, 0x452d, 0x6e69, 0x7473, 0x6c65, 0x756c, 0x676e, 0x6e65, 0x6220, 
+0x6965, 0x5020, 0x6f72, 0x7267, 0x6d61, 0x656d, 0x646e, 0x0065, 
+    IDC_MBB_COMBO, 0x403, 44, 0
+0x7053, 0x6965, 0x6863, 0x7265, 0x206e, 0x6567, 0x6ee4, 0x6564, 0x7472, 
+0x7265, 0x4420, 0x7461, 0x6e65, 0x6220, 0x6965, 0x5020, 0x6f72, 0x7267, 
+0x6d61, 0x656d, 0x646e, 0x0065, 
+    IDC_MBB_COMBO, 0x403, 38, 0
+0x6945, 0x666e, 0x67fc, 0x6e65, 0x6420, 0x7265, 0x6e20, 0x7565, 0x7265, 
+0x4420, 0x7461, 0x6e65, 0x6920, 0x206e, 0x6964, 0x2065, 0x694c, 0x7473, 
+0x0065, 
+    IDC_MBB_COMBO, 0x403, 55, 0
+0xe457, 0x6c68, 0x6e65, 0x6520, 0x6e69, 0x7365, 0x6120, 0x646e, 0x7265, 
+0x6e65, 0x5020, 0x726f, 0x7374, 0x6220, 0x6965, 0x6120, 0x6675, 0x7274, 
+0x7465, 0x6e65, 0x6520, 0x6e69, 0x7365, 0x4620, 0x6865, 0x656c, 0x7372, 
+"\000" 
+    IDC_MBB_COMBO, 0x403, 39, 0
+0x7254, 0x6e65, 0x656e, 0x206e, 0x6564, 0x2073, 0x4341, 0x7620, 0x6d6f, 
+0x5020, 0x2043, 0x6562, 0x2069, 0x7250, 0x676f, 0x6172, 0x6d6d, 0x6e65, 
+0x6564, "\000" 
+    IDC_MBB_COMBO, 0x403, 52, 0
+0x7247, 0x6661, 0x6b69, 0x6164, 0x7372, 0x6574, 0x6c6c, 0x6e75, 0x2c67, 
+0x7720, 0x6e65, 0x206e, 0x656b, 0x6e69, 0x2065, 0x6144, 0x6574, 0x206e, 
+0x7561, 0x6773, 0x7765, 0x68e4, 0x746c, 0x7320, 0x6e69, 0x0064, 
+    IDC_MBB_COMBO, 0x403, 23, 0
+0x6d55, 0x6373, 0x6168, 0x746c, 0x6e65, 0x6120, 0x6675, 0x5420, 0x6172, 
+0x6b63, 0x3920, "\000" 
+    IDC_MBB_COMBO, 0x403, 24, 0
+0x6d55, 0x6373, 0x6168, 0x746c, 0x6e65, 0x6120, 0x6675, 0x5420, 0x6172, 
+0x6b63, 0x3120, 0x0030, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Daten hinzufügen...",        ID_FILE_INSERT
+        MENUITEM SEPARATOR
+        MENUITEM "&Speichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "IR Codes...\tF4",             ID_EDIT_IR_CODES
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "Registerkarten",              ID_VIEW_TABS
+        MENUITEM "Schaltflächen",               ID_VIEW_BUTTONS
+        MENUITEM SEPARATOR
+        MENUITEM "CD-Spieler",                  ID_VIEW_CD_PLAYER
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "Port...",                     ID_OPTIONS_PORT
+        MENUITEM "Ereignisbehandlung...",       ID_OPTIONS_MSG_BOX_BEHAVIOUR
+        MENUITEM "Grundeinstellungen...\tF5",   ID_OPTIONS_BASIC_PARAMS
+        MENUITEM "Mikro-Frequenzgangkorrektur...\tF6", 
+                                                ID_OPTIONS_FRQ_RSP_COR
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "&Hilfethemen\tF1",            ID_HELP_FINDER
+        MENUITEM "Kontexthilfe\tShift+F1",      ID_CONTEXT_HELP
+        MENUITEM SEPARATOR
+        MENUITEM "Inf&o über AC-Com...",        ID_APP_ABOUT
+    END
+END
+
+IDR_MEASUREMENT_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Alle auswählen",              ID_ENABLE_CHECKMARKS
+        MENUITEM "Keine auswählen",             ID_DISABLE_CHECKMARKS
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_AC_ACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F4,          ID_EDIT_IR_CODES,       VIRTKEY, NOINVERT
+    VK_F4,          ID_APP_EXIT,            VIRTKEY, ALT, NOINVERT
+    VK_F5,          ID_OPTIONS_BASIC_PARAMS, VIRTKEY, NOINVERT
+    VK_F6,          ID_OPTIONS_FRQ_RSP_COR, VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AC_READY            "Überprüfen Sie, ob der Audio Controller angeschlossen und eingeschaltet ist."
+    IDS_CHANGE_PORT         "Soll ein anderer COM-Port geprüft werden ?"
+    IDS_TRANSMISSION_ERROR  "Übertragungsfehler :"
+    IDS_TRANSMISSION_ERROR2 "Checksumme falsch !"
+    IDS_TRANSMISSION_ERROR3 "Lese bzw. Schreibfehler !"
+    IDS_TRANSMISSION_ERROR4 "Falsches Steuerungszeichen !"
+    IDS_TRANSMISSION_ERROR5 "Port konnte nicht geöffnet werden !"
+    IDS_TRANSMISSION_ERROR6 "Übertragung nicht bestätigt !"
+    IDS_TRANSMISSION_ERROR7 "Keine Daten erhalten !"
+    IDS_DATA_OK             "Daten gelesen"
+    IDS_DATA_NOT_OK         "Daten nicht gelesen"
+    IDS_SEND_DATA           "Geänderte Daten an den AC senden ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AC_QUALITY_REFERENCE_NO "Qualitätsniveau der Klangeinstellungen (SCM)"
+    IDS_AC_AVERAGE          "Mittelwert"
+    IDS_SWITCH_OF_PEAKHOLD  "Für die Frequenzgang- und Nachhallzeitmessungen\nmuß die Datenloggerfunktion ausgeschaltet werden !\nDie Datenloggerfunktion würde die Werte dieser\nMessungen überschreiben.\n\nSoll die Datenloggerfunktion ausgeschaltet werden ?"
+    IDS_AC_AUTOSOUND_NO     "Aktuelle Klangeinstellung"
+    IDS_AC_AUTOSOUND_BEST   "Beste Klangeinstellung"
+    IDS_MEMO_COUNTER        "Memo"
+    IDS_SOUND_COUNTER       "Sound"
+    IDS_BAD_POINTS          "Qualitätsniveau"
+    IDS_WEIGHTING           "Bewertungsschwelle"
+    IDS_PEAKHOLD            "Datenloggerfunktion"
+    IDS_MEASUREMENT_VALUES  "Messwerte"
+    IDS_AUTOBALANCE         "Autobalance"
+    IDS_LOUDSPEAKER         "Lautsprecher"
+    IDS_RT60_MEASURE        "Nachhallzeit"
+    IDS_LOUDSPEAKER_CONFIG  "Lautsprecher-Konfiguration"
+    IDS_LEVEL_DISPLAY       "Anzeige"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEASUREMENT_FILTER  "Messfilter"
+    IDS_AUTOBALANCE_RESULTS "Lautstärken für Lautsprecher:\nlinks\t: %d dB\nrechts\t: %d dB\ncenter\t: %d dB\nMittelwerte für Lautsprecher:\ngesamt\t: %d dB\nlinks\t: %d dB\nrechts\t: %d dB\ncenter\t: %d dB\nAbsolute Laufzeiten :\nlinks\t: %d ms\nrechts\t: %d ms\ncenter\t: %d ms"
+    IDS_LEFT                "links (%d)"
+    IDS_RIGHT               "rechts (%d)"
+    IDS_CENTER              "center (%d)"
+    IDS_NETWORK             "Frequenzweiche"
+    IDS_CALIBRATION         "Kalibrierung"
+    IDS_REVERBERATION_TIME  "Nachhallzeit"
+    IDS_CD_ROOM             "CD Raum A, B, C"
+    IDS_CD_ROOM_HELP        "Einstellungen für Fernbedienung von externen CD-Geräten mit dem AC"
+    IDS_CALIBRATION_HELP    "Einstellung der Empfindlichkeit des Meßmikrofons (Kalibrator erforderlich !)"
+    IDS_CUT_AC_FROM_PC      "Trennen Sie bitte den Audio Controller von Ihrem PC,\nda sich sonst die Batterien über den COM Port entladen !"
+    IDS_MEASUREMENT_NO      "Nr.:"
+    IDS_MEASUREMENT_TIME    "Messzeitpunkt :"
+    IDS_MEASURE_TIME_FMT    "%d.%m.%Y, %H:%M:%S"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPTIONS_PORT         "Ruft den Dialog für Porteinstellungen auf"
+    ID_VIEW_TABS            "Schaltet die Schaltflächen in Registerkarten um"
+    ID_VIEW_BUTTONS         "Schaltet die Registerkarten in Schaltflächen um"
+    ID_EDIT_CD_LIST         "Editiert die CD Informationen (Titel, Interpret...)"
+    ID_OPTIONS_BASIC_PARAMS "Grundeinstellungen für Darstellung, Kommunikation und Messung"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CALC_AVERAGE        "MW"
+    IDS_OLD_TRACK9          "T9 ACD 2"
+    IDS_NEW_TRACK10         "T10 ACD 3"
+    IDS_NO_CORRECT_CURVE    "Fehler bei der Korrektur der Meßwerte !\nDie Dateien ""Correct.CVE"" bzw. ""FrqRspCo.CVE"" mit den Korrekturwerten\nkonnten nicht gelesen werden."
+    IDS_IR_CODES            "Codes"
+    IDS_IR_CODE_DESCR       "Beschreibung"
+    IDS_INSERT_DATA_FROM_AC "Soll der AC-Datensatz in die Liste eingefügt werden ?"
+    IDS_DATALOGGER_T1_T2    "t1, t2 [s]"
+    IDS_IR_CODE1            "Type"
+    IDS_IR_CODE2            "1/f = TP [µs]"
+    IDS_IR_CODE3            "Puls (high) [µs]"
+    IDS_IR_CODE4            "Pulszeit T (high) [hex]"
+    IDS_IR_CODE5            "Pausenzeit T (low)  [hex]"
+    IDS_IR_CODE6            "Zeitabstand zwischen Headern"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt einen neuen AC-Datensatz für Grundeinstellungen"
+    ID_FILE_OPEN            "Öffnet eine vorhandene Datei, um einen AC-Datensatz zu laden"
+    ID_FILE_SAVE            "Speichert den vorhandenen AC-Datensatz in einer Datei"
+    ID_FILE_SAVE_AS         "Speichert den AC-Datensatz unter einem anderen Namen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programminformationen und Urheberrechte an"
+    ID_APP_EXIT             "Beendet die Anwendung und fordert zum Speichern der Daten auf"
+    ID_HELP_FINDER          "Zeigt das Inhaltsverzeichnis der Online-Dokumentation an"
+    ID_CONTEXT_HELP         "Schaltet eine kontextsensitve Hilfe ein"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DATA_SENT           "Daten übertragen"
+    IDS_SAVE_CHANGED_DATA   "Geänderte Daten speichern ?"
+    IDS_OPEN_PORT_ERROR     "Fehler beim Zugriff auf Port %s !\nPosition: %d,\n%s\nÜberprüfen Sie, ob dieser Port von einem\nanderen Programm bzw. Gerät benutzt wird."
+    IDS_OPEN_PORT_TRIALS    "Versuch : %d.%d"
+    IDS_TRACK_9_OF_THE_TESTCD 
+                            "Die TestCD ACD 2 hat einen Bug bei Track 9.\nDie Stufen der Frequenzwerte des Sinussweeps\nsind nicht ganz logarithmisch und müssen korrigiert werden.\nHier können Sie diese Korrektur aktivieren.\nAchtung !\nVergewissern Sie sich, welche CD Sie haben und\nwelchen Track Sie für die Messung nehmen."
+    IDS_NOT_YET_IMPLEMENTED "Funktion noch nicht implementiert !"
+    IDS_MEASUREMENT         "Messung"
+    IDS_TRACK_10_OF_THE_TESTCD 
+                            "Auf der TestCD ACD 3 ist der Track 10 ein Sinussweep\nmit dem Frequenzbereich 20 - 200 Hz.\nBei Aktivierung erreichen Sie eine höhere Auflösung im\nunteren Frequenzbereich !\nAchtung !\nVergewissern Sie sich, welche CD Sie haben und\nwelchen Track Sie für die Messung nehmen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "AC-Com\n\nAC-Com\nDateityp Hifish AC(*.hac)\n.hac\nAC-Com.Dokument\nAC-Com Dokument"
+    IDR_FILE_TYPECD         "AC-Com\n\nAC-Com\nDateityp CD-Info AC(*.cdi)\n.cdi\nCD-Info.Dokument\nCD-Info Dokument"
+    IDR_FILE_TYPEIRC        "AC-Com\n\nAC-Com\nDateityp IR-Codes AC(*.irc)\n.irc\nIR-Code.Dokument\nIR-Code Dokument"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_BTN_START_MEASUREMENT 
+                            "Schaltet die automatische Messfunktion ein oder aus"
+    IDC_AC_CK_SHOW_CURVES   "Zeigt die gepollten Meßdaten sofort (graphisch) an."
+    IDC_AC_BTN_EVALUATE_MEASUREMENTS 
+                            "Ermöglicht Auswahl der Meßergebnisse und Parametereinstellungen"
+    IDC_AC_BTN_GETDATA      "Liest eine neuen Datensatz vom AC"
+    IDC_AC_BTN_SHOW_CURVES  "Zeigt die Kurven bzw. Ergebnisse an"
+    IDC_AC_BTN_PUTDATA      "Schreibt die eingestellten Daten in den AC"
+    IDC_AC_COMBO_PORT       "Ändert den aktiven Com-Port"
+    IDC_AC_CK_NETWORK       "Aktivierung des Menüs für Konfigurierung der Frequenzweiche (SCM)"
+    IDC_AC_CK_AUTOBALANCE_DELTAT "Einstellung für Tonburst Messungen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_R_RT60_SINUS     "Einstellung für die Messung der Nachhallzeit"
+    IDC_AC_R_2WAY           "Einstellung des Lautsprechertyps"
+    IDC_AC_R_STEREO         "Einstellung der Lautsprecher-Konfiguration"
+    IDC_AC_R_DIGITAL        "Einstellung der Pegelanzeige im AC-Display"
+    IDC_AC_R_FILTER_A       "Filtereinstellung für die Messung"
+    IDC_AC_EDT_CALIBRATION  "Einstellung der Mikrofon-Kalibrierung für die Messung"
+    IDC_AC_COMBO_CD_A       "Auswahl des externen CD Spielers Raum A"
+    IDC_AC_COMBO_CD_B       "Auswahl des externen CD Spielers Raum B"
+    IDC_AC_COMBO_CD_C       "Auswahl des externen CD Spielers Raum C"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_PEAK_HOLD_TIME 
+                            "Einstellung der Messzeit für Schallpegelmessung"
+    IDC_AC_EDT_NO_OF_SOUNDS_AUTO 
+                            "Einstellung der Anzahl der Meßreihen für die Auto Sound Funktion (SCM)"
+    IDC_AC_BTN_CONF_NETWORK "Ruft den Netzwerkdialog auf (SCM)"
+    IDC_AC_TAB_TABLES       "Ergebnisse bzw. Einstellung der Messung"
+    IDC_AC_EDT_MEMO_COUNTER "Anzahl der zu speichernden SCM-Klangeinstellungen"
+    IDC_AC_SPIN_BAD_POINTS  "Einstellung der Qualitätsniveau 1 - 16 für eine Fehlermeldung (L, C, R)"
+    IDC_AC_SPIN_WEIGHTING   "Einstellung der Bewertungsschwelle"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_MEANING_OF_TV "Ergebnistyp"
+    IDC_AC_EDT_CURVENAME    "Hier können Sie einen anderen Kurvennamen eingeben"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_DELETE_MEASUREMENT   "Messung vom %s löschen"
+    ID_EDIT_IR_CODES        "Editiert den IR-Code für den frei programmierbaren CD-Speicherplatz "
+    ID_FILE_INSERT          "Fügt dem AC-Dokument Meßdaten aus einer Datei hinzu."
+    ID_OPTIONS_FRQ_RSP_COR  "Editiert die Frequenzgangkorrekturkurve für das Meßmikrofon"
+    ID_OPTIONS_MSG_BOX_BEHAVIOUR 
+                            "Hier können Sie das Verhalten des Dialogs beim Beenden, Speichern etc. einstellen"
+    ID_VIEW_CD_PLAYER       "Aktiviert den CD-Spieler"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE7            "Header Puls"
+    IDS_IR_CODE8            "Header Pause"
+    IDS_IR_CODE9            "1 Puls [T]"
+    IDS_IR_CODE10           "1 Pause [T]"
+    IDS_IR_CODE11           "0 Puls [T]"
+    IDS_IR_CODE12           "0 Pause [T]"
+    IDS_IR_CODE13           "Stop Puls (high) [T]"
+    IDS_IR_CODE14           "Stop Pause (low) [T]"
+    IDS_IR_CODE15           "Framelänge [bit]"
+    IDS_IR_CODE16           "Gruppenlänge [bit]"
+    IDS_IR_CODE17           "Codelänge [bit]"
+    IDS_IR_CODE18           "Anzahl Startbits"
+    IDS_IR_CODE19           "Anzahl Togglebits"
+    IDS_IR_CODE20           "Anzahl Stopbits"
+    IDS_IR_CODE21           "Gruppe 0"
+    IDS_IR_CODE22           "Gruppe 1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE23           "Gruppe 2"
+    IDS_IR_CODE24           "Gruppe 3"
+    IDS_IR_CODE25           "XOR high"
+    IDS_IR_CODE26           "XOR low"
+    IDS_IR_CODE27           "Flags"
+    IDS_IR_CODE2829         "Abbruch Break"
+    IDS_IR_CODE3031         "Vorherg. Track"
+    IDS_IR_CODE3233         "Nächster Track"
+    IDS_IR_CODE3435         "Start"
+    IDS_IR_CODE3637         "Stop"
+    IDS_IR_CODE3839         "Code für 1"
+    IDS_IR_CODE4041         "Code für 2"
+    IDS_IR_CODE4243         "Code für 3"
+    IDS_IR_CODE4445         "Code für 4"
+    IDS_IR_CODE4647         "Code für 5"
+    IDS_IR_CODE4849         "Code für 6"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE5051         "Code für 7"
+    IDS_IR_CODE5253         "Code für 8"
+    IDS_IR_CODE5455         "Code für 9"
+    IDS_IR_TYPE_SPACE       "Space"
+    IDS_IR_TYPE_PULSE       "Puls"
+    IDS_IR_TYPE_SHIFT       "Shift"
+    IDS_DATALOGGER_F1_F2    "f1, f2 [Hz]"
+    IDS_DATALOGGER_F_LIN    "linear"
+    IDS_FREQUENCY_RESPONSE  "Frequenzgang"
+    IDS_ERROR_OCCURRED      "Systemfunktions Fehler Nr.: %x, %d !"
+    IDS_SELECT_VIEW_PROG    "Pfad des Darstellungsprogramms ETS2DVIEW"
+    IDS_ERROR_NO_CURVE      "Sie haben keine Kurven zur Anzeige ausgewählt !"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AC_COM_DIALOG DIALOGEX 0, 0, 310, 207
+STYLE DS_ABSALIGN | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_APPWINDOW
+CAPTION "AC Communications Interface"
+MENU IDR_MAIN_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Basic AC Settings for Measurements",
+                    IDC_AC_R_BASIC_AC_SETTINGS,"Button",BS_AUTORADIOBUTTON | 
+                    BS_CENTER | BS_PUSHLIKE | WS_GROUP,6,2,148,12
+    CONTROL         "Extended AC Settings",IDC_AC_R_EXTENDED_AC_SETTINGS,
+                    "Button",BS_AUTORADIOBUTTON | BS_CENTER | BS_PUSHLIKE,
+                    156,2,148,12
+    CONTROL         "Bar Display",IDC_AC_R_ANALOG,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,150,51,150,10,0,
+                    HIDC_AC_R_ANALOG
+    CONTROL         "Digital Display",IDC_AC_R_DIGITAL,"Button",
+                    BS_AUTORADIOBUTTON,10,51,135,10,0,HIDC_AC_R_DIGITAL
+    CONTROL         "Stereo Mode",IDC_AC_R_STEREO,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_STEREO
+    CONTROL         "Surround Mode",IDC_AC_R_SURROUND,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,51,150,10,0,
+                    HIDC_AC_R_SURROUND
+    CONTROL         "RT 60 Measurement with Sine",IDC_AC_R_RT60_SINUS,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_RT60_SINUS
+    CONTROL         "RT 60 Measurement with Noise",IDC_AC_R_RT60_RAUSCHEN,
+                    "Button",BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,51,150,
+                    10,0,HIDC_AC_R_RT60_RAUSCHEN
+    CONTROL         "3 Ways Speaker",IDC_AC_R_3WAY,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,150,51,
+                    150,10,0,HIDC_AC_R_3WAY
+    CONTROL         "2 Ways Speaker",IDC_AC_R_2WAY,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,10,51,135,10,0,
+                    HIDC_AC_R_2WAY
+    CONTROL         "Measurement with Filter A",IDC_AC_R_FILTER_A,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,10,51,135,
+                    10,0,HIDC_AC_R_FILTER_A
+    CONTROL         "Measurement with Filter C",IDC_AC_R_FILTER_C,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,151,51,150,10,0,
+                    HIDC_AC_R_FILTER_C
+    LTEXT           "Peak Hold Time/\nAveraging Interval:",
+                    IDC_AC_TXT_PEAK_HOLD_TIME,10,48,65,16,NOT WS_VISIBLE,0,
+                    HIDC_AC_TXT_PEAK_HOLD_TIME
+    COMBOBOX        IDC_AC_COMBO_PEAK_HOLD_TIME,80,50,220,66,
+                    CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_AC_COMBO_PEAK_HOLD_TIME
+    LTEXT           "Calibration (1000 Hz):",IDC_AC_TXT_CALIBRATION,10,52,
+                    135,8,NOT WS_VISIBLE,0,HIDC_AC_TXT_CALIBRATION
+    EDITTEXT        IDC_AC_EDT_CALIBRATION,161,50,35,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_CALIBRATION
+    CONTROL         "Calibration",IDC_AC_SPIN_CALIBRATION,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,197,50,11,12,0,
+                    HIDC_AC_SPIN_CALIBRATION
+    CONTROL         "System Configuration",IDC_AC_TAB_SYSTEM_CONFIG,
+                    "SysTabControl32",TCS_MULTILINE | TCS_TOOLTIPS | 
+                    WS_BORDER | WS_GROUP,5,17,300,53,0,
+                    HIDC_AC_TAB_SYSTEM_CONFIG
+    CONTROL         "Activate Menu for Crossover Network",IDC_AC_CK_NETWORK,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_GROUP | 
+                    WS_TABSTOP,10,51,200,10,0,HIDC_AC_CK_NETWORK
+    PUSHBUTTON      "Configure...",IDC_AC_BTN_CONF_NETWORK,236,50,64,12,NOT 
+                    WS_VISIBLE,0,HIDC_AC_BTN_CONF_NETWORK
+    CONTROL         "Auto Balance with Delta-T",IDC_AC_CK_AUTOBALANCE_DELTAT,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    10,51,135,10,0,HIDC_AC_CK_AUTOBALANCE_DELTAT
+    CONTROL         "Auto Balance with dB Level",
+                    IDC_AC_CK_AUTOBALANCE_DB_LEVEL,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,150,51,150,10,0,
+                    HIDC_AC_CK_AUTOBALANCE_DB_LEVEL
+    LTEXT           "Number of Sound Presets for Autosound:",
+                    IDC_AC_TXT_NO_OF_SOUNDS_AUTO,10,52,150,8,NOT WS_VISIBLE,
+                    0,HIDC_AC_TXT_NO_OF_SOUNDS_AUTO
+    EDITTEXT        IDC_AC_EDT_NO_OF_SOUNDS_AUTO,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,
+                    HIDC_AC_EDT_NO_OF_SOUNDS_AUTO
+    CONTROL         "Autosound",IDC_AC_SPIN_NO_OF_SOUNDS_AUTO,
+                    "msctls_updown32",UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,
+                    11,12,0,HIDC_AC_SPIN_NO_OF_SOUNDS_AUTO
+    LTEXT           "Number of Memos:",IDC_AC_TXT_MEMO_COUNTER,10,52,150,8,
+                    NOT WS_VISIBLE,0,HIDC_AC_TXT_MEMO_COUNTER
+    EDITTEXT        IDC_AC_EDT_MEMO_COUNTER,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_MEMO_COUNTER
+    CONTROL         "Memo Counter",IDC_AC_SPIN_MEMO_COUNTER,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,11,12,0,
+                    HIDC_AC_SPIN_MEMO_COUNTER
+    LTEXT           "Quality Level:",IDC_AC_TXT_BAD_POINTS,10,52,150,8,NOT 
+                    WS_VISIBLE,0,HIDC_AC_TXT_BAD_POINTS
+    EDITTEXT        IDC_AC_EDT_BAD_POINTS,161,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_BAD_POINTS
+    CONTROL         "Bad Points",IDC_AC_SPIN_BAD_POINTS,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,187,50,11,12,0,
+                    HIDC_AC_SPIN_BAD_POINTS
+    LTEXT           "Evaluation Threshold (evaluation after n values being out of range):",
+                    IDC_AC_TXT_WEIGHTING,10,52,258,8,NOT WS_VISIBLE,0,
+                    HIDC_AC_TXT_WEIGHTING
+    EDITTEXT        IDC_AC_EDT_WEIGHTING,259,50,25,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE,0,HIDC_AC_EDT_WEIGHTING
+    CONTROL         "Weighting",IDC_AC_SPIN_WEIGHTING,"msctls_updown32",
+                    UDS_ARROWKEYS | NOT WS_VISIBLE,285,50,11,12,0,
+                    HIDC_AC_SPIN_WEIGHTING
+    COMBOBOX        IDC_AC_COMBO_CD_A,10,50,90,102,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_A
+    COMBOBOX        IDC_AC_COMBO_CD_B,110,50,90,103,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_B
+    COMBOBOX        IDC_AC_COMBO_CD_C,210,50,90,103,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_AC_COMBO_CD_C
+    CONTROL         "Tables",IDC_AC_TAB_TABLES,"SysTabControl32",
+                    TCS_MULTILINE | TCS_TOOLTIPS | NOT WS_VISIBLE | 
+                    WS_BORDER,5,17,300,53,0,HIDC_AC_TAB_TABLES
+    CONTROL         "Wait for New Result",IDC_AC_BTN_START_MEASUREMENT_ONCE,
+                    "Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,10,
+                    88,140,12
+    CONTROL         "Update New Results Continuously",
+                    IDC_AC_BTN_START_MEASUREMENT,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,160,88,140,12
+    CONTROL         "Show current results immediately:",
+                    IDC_AC_CK_SHOW_CURVES,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,10,107,140,10
+    PUSHBUTTON      "Selection of Measurement Results...",
+                    IDC_AC_BTN_EVALUATE_MEASUREMENTS,160,106,140,12,
+                    WS_DISABLED
+    GROUPBOX        "Get AC Measurement Data",IDC_STATIC,5,75,300,98,0,0,
+                    HIDC_STATIC
+    LTEXT           "Description:",IDC_STATIC,10,138,43,8,0,0,HIDC_STATIC
+    EDITTEXT        IDC_AC_EDT_CURVENAME,55,136,175,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Graphics",IDC_AC_BTN_SHOW_CURVES,235,136,65,12,
+                    WS_DISABLED,0,HIDC_AC_BTN_SHOW_CURVES
+    LTEXT           "Type of\nResults:",IDC_STATIC,10,150,40,16,0,0,
+                    HIDC_STATIC
+    COMBOBOX        IDC_AC_COMBO_MEANING_OF_TV,55,153,245,72,
+                    CBS_DROPDOWNLIST | WS_VSCROLL
+    GROUPBOX        "Current Measurement Data",IDC_STATIC,5,125,300,48
+    LTEXT           "Port:",IDC_AC_TXT_PORT,5,178,18,8,SS_NOTIFY,0,
+                    HIDC_AC_TXT_PORT
+    COMBOBOX        IDC_AC_COMBO_PORT,29,176,43,66,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_AC_COMBO_PORT
+    PUSHBUTTON      "Get Data",IDC_AC_BTN_GETDATA,77,176,50,12,0,0,
+                    HIDC_AC_BTN_GETDATA
+    PUSHBUTTON      "Send Data",IDC_AC_BTN_PUTDATA,133,176,55,12,0,0,
+                    HIDC_AC_BTN_PUTDATA
+    DEFPUSHBUTTON   "OK",IDOK,255,176,50,12,0,0,HIDOK
+    LTEXT           "Status",IDC_AC_STATUS,0,197,310,10,0,0,HIDC_AC_STATUS
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,0,192,
+                    310,1
+END
+
+IDD_BASIC_PARAM DIALOGEX 0, 0, 280, 250
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Basic Settings"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Linear",IDC_BS_R_LIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_GROUP,15,22,35,10,0,HIDC_BS_R_LIN
+    CONTROL         "Logarithmic in decades",IDC_BS_R_LOG_DEK,"Button",
+                    BS_AUTORADIOBUTTON,135,16,100,10,0,HIDC_BS_R_LOG_DEK
+    CONTROL         "Logarithmic in octaves, 1/3 octaves",IDC_BS_R_LOG_OCT,
+                    "Button",BS_AUTORADIOBUTTON,135,28,127,10,0,
+                    HIDC_BS_R_LOG_OCT
+    GROUPBOX        "Scaling of Frequency Axis",IDC_STATIC,5,8,270,219,
+                    WS_GROUP
+    GROUPBOX        "Range (X-Axis)",IDC_STATIC,5,39,270,188
+    LTEXT           "Frequency range 1 (Selftest) [Hz]",IDC_STATIC,14,52,121,
+                    8
+    LTEXT           "from:",IDC_STATIC,140,52,16,8
+    EDITTEXT        IDC_BS_EDT_X_FROM1,160,50,45,12,ES_AUTOHSCROLL | 
+                    WS_GROUP,0,HIDC_BS_EDT_X_FROM1
+    LTEXT           "to:",IDC_STATIC,213,52,9,8
+    EDITTEXT        IDC_BS_EDT_X_TO1,225,50,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_X_TO1
+    LTEXT           "Frequency range 2 (Speakertest) [Hz]",IDC_STATIC,14,66,
+                    119,8
+    LTEXT           "from:",IDC_STATIC,140,66,16,8
+    EDITTEXT        IDC_BS_EDT_X_FROM2,160,64,45,12,ES_AUTOHSCROLL | 
+                    WS_GROUP,0,HIDC_BS_EDT_X_FROM2
+    LTEXT           "to:",IDC_STATIC,213,66,9,8
+    EDITTEXT        IDC_BS_EDT_X_TO2,225,64,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_X_TO2
+    GROUPBOX        "Range (Y-Axis)",IDC_STATIC,5,79,270,148
+    LTEXT           "Volume level [dB]",IDC_STATIC,14,92,121,8
+    LTEXT           "from:",IDC_STATIC,140,92,16,8
+    EDITTEXT        IDC_BS_EDT_Y_FROM1,160,90,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_FROM1
+    LTEXT           "to:",IDC_STATIC,213,92,9,8
+    EDITTEXT        IDC_BS_EDT_Y_TO1,225,90,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_TO1
+    LTEXT           "Reverberation Time RT-60 [ms]",IDC_STATIC,14,106,121,8
+    LTEXT           "from:",IDC_STATIC,140,106,16,8
+    EDITTEXT        IDC_BS_EDT_Y_FROM2,160,104,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_FROM2
+    LTEXT           "to:",IDC_STATIC,213,106,9,8
+    EDITTEXT        IDC_BS_EDT_Y_TO2,225,104,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_BS_EDT_Y_TO2
+    GROUPBOX        "Continuous Measurement",IDC_STATIC,5,119,270,108
+    LTEXT           "Polling rate for the cyclical query of measurement data [s]:",
+                    IDC_STATIC,14,132,206,8
+    EDITTEXT        IDC_BS_EDT_POLLTIME,225,130,25,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_POLLTIME
+    GROUPBOX        "AC Communications Parameters",IDC_STATIC,5,145,270,82
+    LTEXT           "Maximum number of trials of polling the AC:",IDC_STATIC,
+                    14,158,206,8
+    EDITTEXT        IDC_BS_EDT_TRIALS,225,156,26,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_TRIALS
+    LTEXT           "Polling timeout period [ms]:",IDC_STATIC,14,172,206,8
+    EDITTEXT        IDC_BS_EDT_EVENT_TIME,225,170,26,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_BS_EDT_EVENT_TIME
+    GROUPBOX        "Settings for Frequency Response Measurements (Selftest)",
+                    IDC_STATIC,5,185,270,42
+    CONTROL         "Measurements using track 9 of the Test-CD ACD 2",
+                    IDC_BS_CK_TRACK9OLD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,197,256,10,0,HIDC_BS_CK_TRACK9OLD
+    CONTROL         "Measurements using track 10 of the Test-CD ACD 3 (20 Hz - 200 Hz)",
+                    IDC_BS_CK_TRACK10NEW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,210,256,10,0,HIDC_BS_CK_TRACK10NEW
+    DEFPUSHBUTTON   "OK",IDOK,225,234,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,170,234,50,12
+    PUSHBUTTON      "Set Defaults",IDC_BS_BTN_DEFAULT,67,234,68,12,0,0,
+                    HIDC_BS_BTN_DEFAULT
+    PUSHBUTTON      "Help",IDHELP,5,234,50,12
+END
+
+IDD_EVAL_MEASUREMENTS DIALOGEX 0, 0, 420, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Selection / Parameter Adjustment"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Type of\nResults:",IDC_STATIC,5,4,35,16
+    COMBOBOX        IDC_EM_COMBO_MEANING_OF_TV,59,6,265,72,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL,0,HIDC_EM_COMBO_MEANING_OF_TV
+    PUSHBUTTON      "Delete Measurement...",IDC_EM_BTN_DELETE_MEASUREMENT,
+                    335,6,80,12,WS_DISABLED,0,HIDC_EM_BTN_DELETE_MEASUREMENT
+    CONTROL         "Measurement List",IDC_EM_MEASUREMENT_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,
+                    5,25,410,100,0,HIDC_EM_MEASUREMENT_LIST
+    PUSHBUTTON      "Help",IDHELP,5,129,50,12
+    CONTROL         "Left",IDC_EM_CK_SHOW_LEFT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,73,130,50,10,0,HIDC_EM_CK_SHOW_LEFT
+    CONTROL         "Center",IDC_EM_CK_SHOW_CENTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,124,130,50,10,0,HIDC_EM_CK_SHOW_CENTER
+    CONTROL         "Right",IDC_EM_CK_SHOW_RIGHT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,175,130,50,10,0,HIDC_EM_CK_SHOW_RIGHT
+    CONTROL         "Mean Value",IDC_EM_CK_SHOW_AVERAGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,226,130,60,10,0,
+                    HIDC_EM_CK_SHOW_AVERAGE
+    DEFPUSHBUTTON   "Graphics",IDC_EM_BTN_SHOW_CURVES,290,129,50,12,0,0,
+                    HIDC_EM_BTN_SHOW_CURVES
+    PUSHBUTTON      "Cancel",IDCANCEL,365,129,50,12
+END
+
+IDD_IR_CODE_DESCR DIALOGEX 0, 0, 205, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "IR Codes"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Device:",IDC_STATIC,5,6,26,8
+    EDITTEXT        IDC_IR_EDT_DEVICE,40,4,160,12,ES_AUTOHSCROLL,0,
+                    HIDC_IR_EDT_DEVICE
+    CONTROL         "Code List",IDC_IR_CODE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDATA | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,20,195,130,0,HIDC_IR_CODE_LIST
+    PUSHBUTTON      "Open...",IDC_IR_BTN_LOAD,5,154,50,12,0,0,
+                    HIDC_IR_BTN_LOAD
+    PUSHBUTTON      "Save...",IDC_IR_BTN_SAVE,150,154,50,12,0,0,
+                    HIDC_IR_BTN_SAVE
+    DEFPUSHBUTTON   "OK",IDOK,150,169,50,12
+    PUSHBUTTON      "Help",IDHELP,5,169,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,95,169,50,12
+END
+
+IDD_MSG_BOX_BEHAVIOUR DIALOG DISCARDABLE  0, 0, 240, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "AC-Com Behaviour on Events"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Events:",IDC_STATIC,5,6,25,8
+    COMBOBOX        IDC_MBB_COMBO,5,19,230,116,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Warn / Request",IDC_MBB_CK_REQUEST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,40,67,10
+    CONTROL         "Automatically",IDC_MBB_CK_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,101,40,57,10
+    PUSHBUTTON      "Default",IDC_MBB_BTN_DEFAULT,5,59,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,122,59,50,12
+    DEFPUSHBUTTON   "OK",IDOK,185,59,50,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_AC_COM_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 300
+        VERTGUIDE, 305
+        HORZGUIDE, 8
+        HORZGUIDE, 17
+        HORZGUIDE, 56
+        HORZGUIDE, 70
+        HORZGUIDE, 75
+        HORZGUIDE, 94
+        HORZGUIDE, 112
+        HORZGUIDE, 125
+        HORZGUIDE, 142
+        HORZGUIDE, 159
+        HORZGUIDE, 173
+        HORZGUIDE, 182
+    END
+
+    IDD_BASIC_PARAM, DIALOG
+    BEGIN
+        HORZGUIDE, 79
+        HORZGUIDE, 119
+        HORZGUIDE, 145
+        HORZGUIDE, 185
+        HORZGUIDE, 227
+        HORZGUIDE, 240
+    END
+
+    IDD_EVAL_MEASUREMENTS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 415
+        HORZGUIDE, 12
+        HORZGUIDE, 25
+        HORZGUIDE, 125
+        HORZGUIDE, 135
+    END
+
+    IDD_IR_CODE_DESCR, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 35
+        VERTGUIDE, 40
+        VERTGUIDE, 200
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 150
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+    END
+
+    IDD_MSG_BOX_BEHAVIOUR, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 235
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AC_COM_DIALOG DLGINIT
+BEGIN
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 4, 0
+0x664f, 0x0066, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 32, 0
+0x2020, 0x2031, 0x6553, 0x6f63, 0x646e, 0x2020, 0x2020, 0x3e2d, 0x6e20, 
+0x206f, 0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 31, 0
+0x2020, 0x2033, 0x6553, 0x6f63, 0x646e, 0x2073, 0x2d20, 0x203e, 0x6f6e, 
+0x4420, 0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 30, 0
+0x3031, 0x5320, 0x6365, 0x6e6f, 0x7364, 0x2020, 0x3e2d, 0x6e20, 0x206f, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 30, 0
+0x3033, 0x5320, 0x6365, 0x6e6f, 0x7364, 0x2020, 0x3e2d, 0x6e20, 0x206f, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x0072, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 53, 0
+0x2020, 0x2031, 0x694d, 0x756e, 0x6574, 0x2020, 0x2020, 0x2d20, 0x203e, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6156, 
+0x756c, 0x2065, 0x6570, 0x2072, 0x2020, 0x3233, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 52, 0
+0x2020, 0x2032, 0x694d, 0x756e, 0x6574, 0x2073, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 0x6c61, 
+0x6575, 0x7020, 0x7265, 0x2020, 0x3620, 0x3034, 0x6d20, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x2020, 0x2034, 0x694d, 0x756e, 0x6574, 0x2073, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 0x6c61, 
+0x6575, 0x7020, 0x7265, 0x3120, 0x3832, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x2020, 0x2038, 0x694d, 0x756e, 0x6574, 0x2073, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 0x6c61, 
+0x6575, 0x7020, 0x7265, 0x3220, 0x3635, 0x2030, 0x736d, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x3033, 0x4d20, 0x6e69, 0x7475, 0x7365, 0x2020, 0x2d20, 0x203e, 0x6144, 
+0x6174, 0x6c20, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6156, 0x756c, 
+0x2065, 0x6570, 0x2072, 0x3120, 0x2c30, 0x3432, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 54, 0
+0x2020, 0x2031, 0x6f48, 0x7275, 0x2020, 0x2020, 0x2020, 0x2020, 0x3e2d, 
+0x4420, 0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 
+0x6c61, 0x6575, 0x7020, 0x7265, 0x2020, 0x3032, 0x342c, 0x2038, 0x0073, 
+
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 53, 0
+0x2020, 0x2032, 0x6f48, 0x7275, 0x2073, 0x2020, 0x2020, 0x2d20, 0x203e, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6156, 
+0x756c, 0x2065, 0x6570, 0x2072, 0x3420, 0x2c30, 0x3639, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 54, 0
+0x2020, 0x2033, 0x6f48, 0x7275, 0x2073, 0x2020, 0x2020, 0x2d20, 0x203e, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6156, 
+0x756c, 0x2065, 0x6570, 0x2072, 0x2020, 0x3136, 0x342c, 0x2034, 0x0073, 
+
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 52, 0
+0x2020, 0x2035, 0x6f48, 0x7275, 0x2073, 0x2020, 0x2020, 0x2d20, 0x203e, 
+0x6144, 0x6174, 0x6c20, 0x676f, 0x6567, 0x2072, 0x203a, 0x2031, 0x6156, 
+0x756c, 0x2065, 0x6570, 0x2072, 0x3031, 0x2c32, 0x2034, 0x0073, 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x3031, 0x4820, 0x756f, 0x7372, 0x2020, 0x2020, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 0x6c61, 
+0x6575, 0x7020, 0x7265, 0x3220, 0x3430, 0x382c, 0x7320, "\000" 
+    IDC_AC_COMBO_PEAK_HOLD_TIME, 0x403, 51, 0
+0x3531, 0x4820, 0x756f, 0x7372, 0x2020, 0x2020, 0x2020, 0x3e2d, 0x4420, 
+0x7461, 0x2061, 0x6f6c, 0x6767, 0x7265, 0x3a20, 0x3120, 0x5620, 0x6c61, 
+0x6575, 0x7020, 0x7265, 0x3320, 0x3730, 0x322c, 0x7320, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 17, 0
+0x4152, 0x204d, 0x7270, 0x676f, 0x6172, 0x6d6d, 0x6261, 0x656c, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6941, 0x6177, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6b41, 0x6961, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6544, 0x6f6e, 0x006e, 
+    IDC_AC_COMBO_CD_A, 0x403, 16, 0
+0x6148, 0x6d72, 0x6e61, 0x4b20, 0x7261, 0x6f64, 0x206e, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 16, 0
+0x6148, 0x6d72, 0x6e61, 0x4b20, 0x7261, 0x6f64, 0x206e, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x564a, 0x2043, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x434a, 0x2056, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x654b, 0x776e, 0x6f6f, 0x2064, 0x0061, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x654b, 0x776e, 0x6f6f, 0x2064, 0x0062, 
+    IDC_AC_COMBO_CD_A, 0x403, 4, 0
+0x414e, 0x0044, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6e4f, 0x796b, 0x006f, 
+    IDC_AC_COMBO_CD_A, 0x403, 10, 0
+0x6150, 0x616e, 0x6f73, 0x696e, 0x0063, 
+    IDC_AC_COMBO_CD_A, 0x403, 14, 0
+0x6850, 0x6c69, 0x7069, 0x2073, 0x5228, 0x3543, 0x0029, 
+    IDC_AC_COMBO_CD_A, 0x403, 8, 0
+0x6950, 0x6e6f, 0x6565, 0x0072, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6f52, 0x6574, 0x006c, 
+    IDC_AC_COMBO_CD_A, 0x403, 6, 0
+0x6853, 0x7261, 0x0070, 
+    IDC_AC_COMBO_CD_A, 0x403, 5, 0
+0x6f53, 0x796e, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 8, 0
+0x6554, 0x6361, 0x6120, 0x0020, 
+    IDC_AC_COMBO_CD_A, 0x403, 7, 0
+0x6554, 0x6361, 0x6220, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 9, 0
+0x6554, 0x6863, 0x696e, 0x7363, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 13, 0
+0x6554, 0x6863, 0x696e, 0x7363, 0x6120, 0x746c, "\000" 
+    IDC_AC_COMBO_CD_A, 0x403, 7, 0
+0x6159, 0x616d, 0x6168, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 11, 0
+0x6f4e, 0x5220, 0x7365, 0x6c75, 0x7374, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 45, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x5220, 0x6365, 0x726f, 0x6964, 0x676e, 0x2820, 0x6144, 0x6174, 
+0x6c20, 0x676f, 0x6567, 0x2972, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 66, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x202c, 0x6552, 0x6576, 0x6272, 0x7265, 0x7461, 0x6f69, 0x206e, 
+0x6954, 0x656d, 0x2c73, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 
+0x207a, 0x6c28, 0x6665, 0x2074, 0x534c, 0x0029, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 68, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x202c, 0x6552, 0x6576, 0x6272, 0x7265, 0x7461, 0x6f69, 0x206e, 
+0x6954, 0x656d, 0x2c73, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 
+0x207a, 0x6328, 0x6e65, 0x6574, 0x2072, 0x534c, 0x0029, 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 67, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x202c, 0x6552, 0x6576, 0x6272, 0x7265, 0x7461, 0x6f69, 0x206e, 
+0x6954, 0x656d, 0x2c73, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 
+0x207a, 0x7228, 0x6769, 0x7468, 0x4c20, 0x2953, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 54, 0
+0x6f4c, 0x6475, 0x7073, 0x6165, 0x656b, 0x2072, 0x7246, 0x7165, 0x6575, 
+0x636e, 0x2079, 0x6552, 0x7073, 0x6e6f, 0x6573, 0x202c, 0x3032, 0x7a48, 
+0x322d, 0x6b30, 0x7a48, 0x2820, 0x6553, 0x666c, 0x6574, 0x7473, 0x0029, 
+
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 19, 0
+0x7541, 0x6f74, 0x4220, 0x6c61, 0x6e61, 0x6563, 0x4c20, 0x7665, 0x6c65, 
+"\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 17, 0
+0x7541, 0x6f74, 0x5320, 0x756f, 0x646e, 0x2820, 0x4353, 0x294d, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 67, 0
+0x6f4c, 0x6475, 0x7073, 0x6165, 0x656b, 0x2072, 0x7246, 0x7165, 0x6575, 
+0x636e, 0x2079, 0x6552, 0x7073, 0x6e6f, 0x6573, 0x202c, 0x3032, 0x7a48, 
+0x322d, 0x6b30, 0x7a48, 0x2820, 0x6553, 0x666c, 0x6574, 0x7473, 0x2029, 
+0x7254, 0x6361, 0x396b, 0x4120, 0x4443, 0x3220, "\000" 
+    IDC_AC_COMBO_MEANING_OF_TV, 0x403, 69, 0
+0x6f4c, 0x6475, 0x7073, 0x6165, 0x656b, 0x2072, 0x7246, 0x7165, 0x6575, 
+0x636e, 0x2079, 0x6552, 0x7073, 0x6e6f, 0x6573, 0x202c, 0x3032, 0x7a48, 
+0x322d, 0x6b30, 0x7a48, 0x2820, 0x6553, 0x666c, 0x6574, 0x7473, 0x2029, 
+0x7254, 0x6361, 0x206b, 0x3031, 0x4120, 0x4443, 0x3320, "\000" 
+    0
+END
+
+IDD_EVAL_MEASUREMENTS DLGINIT
+BEGIN
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 4, 0
+0x6c41, 0x006c, 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 45, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x5220, 0x6365, 0x726f, 0x6964, 0x676e, 0x2820, 0x6144, 0x6174, 
+0x6c20, 0x676f, 0x6567, 0x2972, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 56, 0
+0x6f53, 0x6e75, 0x2064, 0x7250, 0x7365, 0x7573, 0x6572, 0x4c20, 0x7665, 
+0x6c65, 0x202c, 0x6552, 0x6576, 0x6272, 0x7265, 0x7461, 0x6f69, 0x206e, 
+0x6954, 0x656d, 0x2c73, 0x3120, 0x3030, 0x312d, 0x3532, 0x3030, 0x4820, 
+0x007a, 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 51, 0
+0x6f4c, 0x6475, 0x7073, 0x6165, 0x656b, 0x2072, 0x7246, 0x7165, 0x6575, 
+0x636e, 0x2079, 0x6552, 0x7073, 0x6e6f, 0x6573, 0x202c, 0x3032, 0x7a48, 
+0x322d, 0x6b30, 0x7a48, 0x202c, 0x7453, 0x7265, 0x6f65, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 53, 0
+0x6f4c, 0x6475, 0x7073, 0x6165, 0x656b, 0x2072, 0x7246, 0x7165, 0x6575, 
+0x636e, 0x2079, 0x6552, 0x7073, 0x6e6f, 0x6573, 0x202c, 0x3032, 0x7a48, 
+0x322d, 0x6b30, 0x7a48, 0x202c, 0x7553, 0x7272, 0x756f, 0x646e, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 25, 0
+0x7541, 0x6f74, 0x4220, 0x6c61, 0x6e61, 0x6563, 0x4c20, 0x7665, 0x6c65, 
+0x2820, 0x4341, 0x2943, "\000" 
+    IDC_EM_COMBO_MEANING_OF_TV, 0x403, 17, 0
+0x7541, 0x6f74, 0x5320, 0x756f, 0x646e, 0x2820, 0x4353, 0x294d, "\000" 
+    0
+END
+
+IDD_MSG_BOX_BEHAVIOUR DLGINIT
+BEGIN
+    IDC_MBB_COMBO, 0x403, 25, 0
+0x7055, 0x6164, 0x6574, 0x4120, 0x2043, 0x7461, 0x7020, 0x6f72, 0x7267, 
+0x6d61, 0x6520, 0x646e, "\000" 
+    IDC_MBB_COMBO, 0x403, 33, 0
+0x6153, 0x6576, 0x6320, 0x6168, 0x676e, 0x6465, 0x6420, 0x7461, 0x2061, 
+0x7461, 0x7020, 0x6f72, 0x7267, 0x6d61, 0x6520, 0x646e, "\000" 
+    IDC_MBB_COMBO, 0x403, 49, 0
+0x6e49, 0x6573, 0x7472, 0x6d20, 0x6165, 0x7573, 0x6572, 0x656d, 0x746e, 
+0x6420, 0x7461, 0x2061, 0x6e69, 0x6f74, 0x7420, 0x6568, 0x6520, 0x6176, 
+0x756c, 0x7461, 0x6f69, 0x206e, 0x696c, 0x7473, "\000" 
+    IDC_MBB_COMBO, 0x403, 30, 0
+0x6843, 0x6f6f, 0x6573, 0x6120, 0x6e6e, 0x746f, 0x6568, 0x2072, 0x6f70, 
+0x7472, 0x6f20, 0x206e, 0x7265, 0x6f72, 0x0072, 
+    IDC_MBB_COMBO, 0x403, 54, 0
+0x6948, 0x746e, 0x203a, 0x6964, 0x6373, 0x6e6f, 0x656e, 0x7463, 0x4120, 
+0x2043, 0x7266, 0x6d6f, 0x7920, 0x756f, 0x2072, 0x6f63, 0x706d, 0x7475, 
+0x7265, 0x6120, 0x2074, 0x7270, 0x676f, 0x6172, 0x206d, 0x6e65, 0x0064, 
+
+    IDC_MBB_COMBO, 0x403, 50, 0
+0x6948, 0x746e, 0x203a, 0x6f6e, 0x6420, 0x7461, 0x2061, 0x6573, 0x656c, 
+0x7463, 0x6465, 0x6620, 0x726f, 0x6720, 0x6172, 0x6870, 0x6369, 0x7220, 
+0x7065, 0x6572, 0x6573, 0x746e, 0x7461, 0x6f69, 0x006e, 
+    IDC_MBB_COMBO, 0x403, 45, 0
+0x6948, 0x746e, 0x6120, 0x2074, 0x6573, 0x656c, 0x7463, 0x6f69, 0x206e, 
+0x666f, 0x5420, 0x6172, 0x6b63, 0x3920, 0x6f20, 0x2066, 0x4341, 0x5420, 
+0x7365, 0x2d74, 0x4443, 0x3220, "\000" 
+    IDC_MBB_COMBO, 0x403, 46, 0
+0x6948, 0x746e, 0x6120, 0x2074, 0x6573, 0x656c, 0x7463, 0x6f69, 0x206e, 
+0x666f, 0x5420, 0x6172, 0x6b63, 0x3120, 0x2030, 0x666f, 0x4120, 0x2043, 
+0x6554, 0x7473, 0x432d, 0x2044, 0x0033, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Insert Data File...",        ID_FILE_INSERT
+        MENUITEM SEPARATOR
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &as",                    ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "IR Codes...\tF4",             ID_EDIT_IR_CODES
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Tabs",                        ID_VIEW_TABS
+        MENUITEM "Buttons",                     ID_VIEW_BUTTONS
+        MENUITEM SEPARATOR
+        MENUITEM "CD Player",                   ID_VIEW_CD_PLAYER
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Port...",                     ID_OPTIONS_PORT
+        MENUITEM "Event handling...",           ID_OPTIONS_MSG_BOX_BEHAVIOUR
+        MENUITEM "Basic Settings...\tF5",       ID_OPTIONS_BASIC_PARAMS
+        MENUITEM "Microphone Calibration Curve...\tF6", 
+                                                ID_OPTIONS_FRQ_RSP_COR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help Topics\tF1",            ID_HELP_FINDER
+        MENUITEM "Context Help\tShift+F1",      ID_CONTEXT_HELP
+        MENUITEM SEPARATOR
+        MENUITEM "About AC-Com...",             ID_APP_ABOUT
+    END
+END
+
+IDR_MEASUREMENT_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Set All Checkmarks",          ID_ENABLE_CHECKMARKS
+        MENUITEM "Delete All Checkmarks",       ID_DISABLE_CHECKMARKS
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_AC_ACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_CD_LIST,        VIRTKEY, NOINVERT
+    VK_F4,          ID_EDIT_IR_CODES,       VIRTKEY, NOINVERT
+    VK_F4,          ID_APP_EXIT,            VIRTKEY, ALT, NOINVERT
+    VK_F5,          ID_OPTIONS_BASIC_PARAMS, VIRTKEY, NOINVERT
+    VK_F6,          ID_OPTIONS_FRQ_RSP_COR, VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AC_READY            "Check whether the Audio Controller is connected and switched on."
+    IDS_CHANGE_PORT         "Would you like to check annother port?"
+    IDS_TRANSMISSION_ERROR  "Transmission error:"
+    IDS_TRANSMISSION_ERROR2 "Wrong checksum!"
+    IDS_TRANSMISSION_ERROR3 "Read/write error!"
+    IDS_TRANSMISSION_ERROR4 "Wrong control character!"
+    IDS_TRANSMISSION_ERROR5 "Port could not be opened!"
+    IDS_TRANSMISSION_ERROR6 "Transmission not confirmed!"
+    IDS_TRANSMISSION_ERROR7 "No data received!"
+    IDS_DATA_OK             "Data Ok"
+    IDS_DATA_NOT_OK         "Data invalid"
+    IDS_SEND_DATA           "Shall the AC be updated?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AC_QUALITY_REFERENCE_NO "Quality level of the sound settings (SCM)"
+    IDS_AC_AVERAGE          "Mean Value"
+    IDS_SWITCH_OF_PEAKHOLD  "To measure the frequency responses and reverberation times\nthe data logger function has to be switched off!\nDo you want to switch off the data logger function?"
+    IDS_AC_AUTOSOUND_NO     "Current Sound Setting"
+    IDS_AC_AUTOSOUND_BEST   "Best Sound Setting"
+    IDS_MEMO_COUNTER        "Memo"
+    IDS_SOUND_COUNTER       "Sound"
+    IDS_BAD_POINTS          "Quality Level"
+    IDS_WEIGHTING           "Eval. Threshold"
+    IDS_PEAKHOLD            "Data Logging Function"
+    IDS_MEASUREMENT_VALUES  "Measured values"
+    IDS_AUTOBALANCE         "Auto Balance"
+    IDS_LOUDSPEAKER         "Loudspeaker"
+    IDS_RT60_MEASURE        "RT-60"
+    IDS_LOUDSPEAKER_CONFIG  "Speaker Configuration"
+    IDS_LEVEL_DISPLAY       "Display"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEASUREMENT_FILTER  "Filter"
+    IDS_AUTOBALANCE_RESULTS "Loudspeaker volumes:\nleft\t: %d dB\nright\t: %d dB\ncenter\t: %d dB\nMean values for loudspeaker:\ntotal\t: %d dB\nleft\t: %d dB\nright\t: %d dB\ncenter\t: %d dB\nAbsolute propagation delays:\nleft\t: %d ms\nright\t: %d ms\ncenter\t: %d ms"
+    IDS_LEFT                "left"
+    IDS_RIGHT               "right"
+    IDS_CENTER              "center"
+    IDS_NETWORK             "Crossover"
+    IDS_CALIBRATION         "Calibration"
+    IDS_REVERBERATION_TIME  "Reverberation Time"
+    IDS_CD_ROOM             "CD Room A, B, C"
+    IDS_CD_ROOM_HELP        "Settings for the remote control of external CD players using the AC"
+    IDS_CALIBRATION_HELP    "Adjustment of the sensitivity of the microphone in use (calibrator required)!"
+    IDS_CUT_AC_FROM_PC      "Please, unplug the Audio Controller (AC) from your PC since\notherwise the batteries will be discharged via the COM port!"
+    IDS_MEASUREMENT_NO      "No:"
+    IDS_MEASUREMENT_TIME    "Time:"
+    IDS_MEASURE_TIME_FMT    "%d.%m.%Y, %H:%M:%S"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_OPTIONS_PORT         "Opens the dialog box for port settings"
+    ID_VIEW_TABS            "Shows Tabs"
+    ID_VIEW_BUTTONS         "Shows Buttons"
+    ID_EDIT_CD_LIST         "Edits the CD title list"
+    ID_OPTIONS_BASIC_PARAMS "Opens the dialog box for the basic settings"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Creates a new data set with default settings"
+    ID_FILE_OPEN            "Opens an existing file to load a data set"
+    ID_FILE_SAVE            "Saves an existing data set in a file"
+    ID_FILE_SAVE_AS         "Saves an existing data set using annother file name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Shows program information and copyright"
+    ID_APP_EXIT             "Closes the application and asks for saving the data"
+    ID_HELP_FINDER          "Shows the contents list of the online help"
+    ID_CONTEXT_HELP         "Brings up a context sensitive help for the item selected by left clicking"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DATA_SENT           "Data transmitted"
+    IDS_SAVE_CHANGED_DATA   "Save changed data?"
+    IDS_OPEN_PORT_ERROR     "Error: access to port %s is denied!\nPosition: %d,\n%s\nCheck whether this port is in use by annother program or device."
+    IDS_OPEN_PORT_TRIALS    "Trial: %d.%d"
+    IDS_TRACK_9_OF_THE_TESTCD 
+                            "There is a bug in the Test CD ACD 2 in Track 9.\nThe frequency scaling of the sine sweep is not\nexactly logarithmically and has to be corrected.\nAttention!\nProof the version of your test CD and the track\nused for the measurement."
+    IDS_NOT_YET_IMPLEMENTED "Function not yet implemented!"
+    IDS_MEASUREMENT         "Measurement"
+    IDS_TRACK_10_OF_THE_TESTCD 
+                            "On the test CD ACD 3 track 10 contains a sine\nsweep with a frequency range 20-200 Hz\n(high frequency resolution).\nAttention!\nProof the version of your test CD and the track\nused for the measurement."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "AC-Com\n\nAC-Com\nFile type Hifish AC(*.hac)\n.hac\nAC-Com.Document\nAC-Com Document"
+    IDR_FILE_TYPECD         "AC-Com\n\nAC-Com\nFile type CD Info AC(*.cdi)\n.cdi\nCD Info.Document\nCD Info Document"
+    IDR_FILE_TYPEIRC        "AC-Com\n\nAC-Com\nFile type IR Codes AC(*.irc)\n.irc\nIR Code.Document\nIR Code Document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_BTN_START_MEASUREMENT 
+                            "Switches the single or continuous measurement on or off"
+    IDC_AC_CK_SHOW_CURVES   "Shows the polled measurement data immediately (graphically)."
+    IDC_AC_BTN_EVALUATE_MEASUREMENTS 
+                            "Provides for selection of measurement data and parameter adjustment"
+    IDC_AC_BTN_GETDATA      "Reads new data from the AC"
+    IDC_AC_BTN_SHOW_CURVES  "Presents measurement results (graphically)"
+    IDC_AC_BTN_PUTDATA      "Writes the current settings to the AC"
+    IDC_AC_COMBO_PORT       "Changes the active COM port"
+    IDC_AC_CK_NETWORK       "Switches crossover configuration menu on or off (SCM)"
+    IDC_AC_CK_AUTOBALANCE_DELTAT "Settings for tone burst measurements"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_R_RT60_SINUS     "Setting for reverberation time measurements"
+    IDC_AC_R_2WAY           "Changes the loudspeaker type"
+    IDC_AC_R_STEREO         "Changes the loudspeaker configuration type"
+    IDC_AC_R_DIGITAL        "Changes the AC level meter display mode"
+    IDC_AC_R_FILTER_A       "Changes filter type for the measurement"
+    IDC_AC_EDT_CALIBRATION  "Microphone calibration value for the measurement"
+    IDC_AC_COMBO_CD_A       "Selection of external CD player Room A"
+    IDC_AC_COMBO_CD_B       "Selection of external CD player Room B"
+    IDC_AC_COMBO_CD_C       "Selection of external CD player Room C"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_PEAK_HOLD_TIME "Selection of different time setups"
+    IDC_AC_EDT_NO_OF_SOUNDS_AUTO 
+                            "Settings for auto sound measurements (SCM required)"
+    IDC_AC_BTN_CONF_NETWORK "Brings up the dialog box for crossover configuration (SCM required)"
+    IDC_AC_TAB_TABLES       "Measurement results and settings"
+    IDC_AC_EDT_MEMO_COUNTER "Number of sound setups to be saved (SCM required)"
+    IDC_AC_SPIN_BAD_POINTS  "Adjustment of the quality level 1-16 for creating an error message (L, C, R)"
+    IDC_AC_SPIN_WEIGHTING   "Adjustment of the evaluation threshold"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_MEANING_OF_TV "Type of results"
+    IDC_AC_EDT_CURVENAME    "Here you may change the curve description"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_DELETE_MEASUREMENT   "Deletes Measurement of %s"
+    ID_EDIT_IR_CODES        "Edits the remote control code for the RAM programmable CD player"
+    ID_FILE_INSERT          "Inserts an existing file and adds a data set to the list"
+    ID_OPTIONS_FRQ_RSP_COR  "Calls ETS2DVIEW to edit the microphone calibration curve"
+    ID_OPTIONS_MSG_BOX_BEHAVIOUR 
+                            "Defines the dialog functions for Finish, Load, Save etc."
+    ID_VIEW_CD_PLAYER       "Shows or hides the CD Player"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CALC_AVERAGE        "AVG"
+    IDS_OLD_TRACK9          "T9 ACD 2"
+    IDS_NEW_TRACK10         "T10 ACD 3"
+    IDS_NO_CORRECT_CURVE    "Error: correction of the measurement values not possible!\nThe files ""Correct.CVE"" and ""FrqRspCo.CVE"" containing the correction\nvalues are not found."
+    IDS_IR_CODES            "Codes"
+    IDS_IR_CODE_DESCR       "Description"
+    IDS_INSERT_DATA_FROM_AC "Do you want to insert the AC data set into the list?"
+    IDS_DATALOGGER_T1_T2    "t1, t2 [s]"
+    IDS_IR_CODE1            "Type"
+    IDS_IR_CODE2            "1/f = TP [µs]"
+    IDS_IR_CODE3            "Pulse high [µs]"
+    IDS_IR_CODE4            "Burst T high [hex]"
+    IDS_IR_CODE5            "Burst T low  [hex]"
+    IDS_IR_CODE6            "Space between Headers"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE7            "Header Pulse"
+    IDS_IR_CODE8            "Header Space"
+    IDS_IR_CODE9            "1 Pulse [T]"
+    IDS_IR_CODE10           "1 Space [T]"
+    IDS_IR_CODE11           "0 Pulse [T]"
+    IDS_IR_CODE12           "0 Space [T]"
+    IDS_IR_CODE13           "Stop Pulse high [T]"
+    IDS_IR_CODE14           "Stop Pulse low [T]"
+    IDS_IR_CODE15           "Frame length [bit]"
+    IDS_IR_CODE16           "Group length [bit]"
+    IDS_IR_CODE17           "Code length [bit]"
+    IDS_IR_CODE18           "No of Start bits"
+    IDS_IR_CODE19           "No of Toggle bits"
+    IDS_IR_CODE20           "No of Stop bits"
+    IDS_IR_CODE21           "Group 0"
+    IDS_IR_CODE22           "Group 1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE23           "Group 2"
+    IDS_IR_CODE24           "Group 3"
+    IDS_IR_CODE25           "XOR high"
+    IDS_IR_CODE26           "XOR low"
+    IDS_IR_CODE27           "Flags"
+    IDS_IR_CODE2829         "Break"
+    IDS_IR_CODE3031         "Back"
+    IDS_IR_CODE3233         "Next"
+    IDS_IR_CODE3435         "Start"
+    IDS_IR_CODE3637         "Stop"
+    IDS_IR_CODE3839         "Code for 1"
+    IDS_IR_CODE4041         "Code for 2"
+    IDS_IR_CODE4243         "Code for 3"
+    IDS_IR_CODE4445         "Code for 4"
+    IDS_IR_CODE4647         "Code for 5"
+    IDS_IR_CODE4849         "Code for 6"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IR_CODE5051         "Code for 7"
+    IDS_IR_CODE5253         "Code for 8"
+    IDS_IR_CODE5455         "Code for 9"
+    IDS_IR_TYPE_SPACE       "Space"
+    IDS_IR_TYPE_PULSE       "Pulse"
+    IDS_IR_TYPE_SHIFT       "Shift"
+    IDS_DATALOGGER_F1_F2    "f1, f2 [Hz]"
+    IDS_DATALOGGER_F_LIN    "linear"
+    IDS_FREQUENCY_RESPONSE  "Frequency Response"
+    IDS_ERROR_OCCURRED      "System Function Error No: %x, %d !"
+    IDS_SELECT_VIEW_PROG    "Path of the representation program ETS2DVIEW"
+    IDS_ERROR_NO_CURVE      "You did not select a curve to be displayed !"
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\AC_COM.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

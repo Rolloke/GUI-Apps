@@ -1,0 +1,91 @@
+// Von MAKEHELP.BAT erzeugte Hilfe-Zuordnungsdatei. Wird verwendet von ETS3DV.HPJ. 
+ 
+// Befehle (ID_* and IDM_*) 
+HID_FILE_SAVE_AS_BITMAP                 0x180E8
+HID_EDIT_COPY_AS_DIB                    0x180E9
+HID_VIEW_FILMRUN                        0x180F2
+HID_VIEW_FUNCTIONS                      0x180F3
+HID_VIEW_FULL                           0x180F4
+HID_VIEW_GRID                           0x180F5
+HID_VIEW_X_UNIT                         0x180F6
+HID_VIEW_Y_UNIT                         0x180F7
+HID_VIEW_Z_UNIT                         0x180F8
+HID_VIEW_ALL_UNITS                      0x180F9
+HID_VIEW_NO_UNITS                       0x180FA
+HID_VIEW_AXIS                           0x180FB
+HID_VIEW_X_CHARACTER                    0x180FC
+HID_VIEW_Y_CHARACTER                    0x180FD
+HID_VIEW_Z_CHARACTER                    0x180FE
+HID_VIEW_ALL_CHARACTERS                 0x180FF
+HID_VIEW_NO_CHARACTERS                  0x18100
+HID_VIEW_PHASEVALUES                    0x18101
+HID_VIEW_BOXPOS                         0x18102
+HID_VIEW_LISTENERPOS                    0x18103
+HID_VIEW_COLORBAR                       0x18104
+HID_VIEW_LIGHT                          0x18105
+HID_VIEW_EXITERPOS                      0x18106
+HID_VIEW_INTELLI_GRID                   0x18107
+HID_FUNC_MOVE_UP                        0x18110
+HID_FUNC_MOVE_DOWN                      0x18111
+HID_FUNC_MOVE_LEFT                      0x18112
+HID_FUNC_MOVE_RIGHT                     0x18113
+HID_FUNC_FORWARD                        0x18114
+HID_FUNC_BACKWARD                       0x18115
+HID_FUNC_ROTATE_UP                      0x18116
+HID_FUNC_ROTATE_DOWN                    0x18117
+HID_FUNC_ROTATE_LEFT                    0x18118
+HID_FUNC_ROTATE_RIGHT                   0x18119
+HID_FUNC_ZOOM                           0x1811A
+HID_FUNC_REZOOM                         0x1811B
+HID_FUNC_ZOOM_LEVEL                     0x1811C
+HID_FUNC_REZOOM_LEVEL                   0x1811D
+HID_FUNC_FILMSTART                      0x1811E
+HID_FUNC_FILMSTOP                       0x1811F
+HID_FUNC_FILMPAUSE                      0x18120
+HID_FUNC_FILMSTARTR                     0x18121
+HID_FUNC_FILMSTEPPLUS                   0x18122
+HID_FUNC_FILMSTEPMINUS                  0x18123
+HID_FUNC_FILMSTEPBEGIN                  0x18124
+HID_FUNC_FILMSTEPEND                    0x18125
+HID_FUNC_FILMREPEAT                     0x18126
+HID_FUNC_FILM_TIMER                     0x18127
+HID_TIME_1                              0x1812E
+HID_TIME_2                              0x1812F
+HID_TIME_3                              0x18130
+HID_TIME_4                              0x18131
+HID_TIME_5                              0x18132
+HID_TIME_6                              0x18133
+HID_TIME_7                              0x18134
+HID_TIME_8                              0x18135
+HID_TIME_9                              0x18136
+HID_TIME_10                             0x18137
+HID_OPTIONS_STANDARD                    0x18138
+HID_OPTIONS_LIGHT_EXT                   0x18139
+HID_OPTIONS_VIEW_EXT                    0x1813A
+HID_OPTIONS_VIEW                        0x1813B
+HID_OPTIONS_LIGHT                       0x1813C
+HID_OPTIONS_SET_DEFAULT                 0x1813D
+HID_OPTIONS_SAVE_COLORS                 0x1813E
+HID_OPTIONS_LOAD_COLORS                 0x1813F
+HID_OPTIONS_PLOT                        0x18140
+HID_OPTIONS_RESET_COLORS                0x1814E
+ 
+// Eingabeaufforderungen (IDP_*) 
+ 
+// Ressourcen (IDR_*) 
+HIDR_TIMER_MENU                         0x2006A
+HIDR_VIEW_OPTION_GRID                   0x20075
+HIDR_CARA3DTYPE                         0x20081
+HIDR_FUNCTOOLBAR                        0x200C8
+HIDR_FILMTOOLBAR                        0x200C9
+HIDR_CARA_COLOR                         0x200CA
+HIDR_SRVR_INPLACE                       0x200CB
+HIDR_SRVR_EMBEDDED                      0x200CC
+HIDR_VIEW_OPTION_AXIS                   0x200CD
+ 
+// Dialogfelder (IDD_*) 
+HIDD_LIGHT_DIALOG                       0x200DC
+HIDD_VIEW_DIALOG                        0x200DD
+HIDD_STANDARD                           0x200DE
+ 
+// Rahmen-Steuerelemente (IDW_*) 

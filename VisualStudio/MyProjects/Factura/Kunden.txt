@@ -1,0 +1,14 @@
+From:
+To:
+Subject:
+Date:
+
+Vorname = Rolf
+Nachname = Ehlers
+Email = Rolf_Ehlers@Cara.de
+Strasse = Karpfenteich 10
+PLZ = 24113
+Ort = Kiel
+Telefon = 0431/6409303
+Telefax = -
+

@@ -1,0 +1,2482 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\resource.h"
+#include "res\CARA2DV.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_FUNC_DEFAULTRANGE,   VIRTKEY, NOINVERT
+    VK_F6,          ID_FUNC_DELETERANGE,    VIRTKEY, NOINVERT
+    VK_F9,          ID_FUNC_DESTROYRANGELIST, VIRTKEY, NOINVERT
+    VK_F4,          ID_FUNC_EDITMODE,       VIRTKEY, NOINVERT
+    "L",            ID_FUNC_LINEEDITMODE,   VIRTKEY, CONTROL, ALT, NOINVERT
+    "R",            ID_FUNC_NUMEDITMODE,    VIRTKEY, CONTROL, ALT, NOINVERT
+    VK_F3,          ID_FUNC_PICKMODE,       VIRTKEY, NOINVERT
+    VK_F11,         ID_FUNC_REFERENCE_SELECT, VIRTKEY, NOINVERT
+    VK_F7,          ID_FUNC_REZOOM,         VIRTKEY, NOINVERT
+    VK_F12,         ID_FUNC_ZERO_REFERENCE, VIRTKEY, NOINVERT
+    VK_F8,          ID_FUNC_ZOOM,           VIRTKEY, NOINVERT
+    VK_F2,          ID_FUNC_ZOOMMODE,       VIRTKEY, NOINVERT
+    VK_F1,          ID_HELP_FINDER,         VIRTKEY, NOINVERT
+    "H",            IDX_HEAPWATCH,          VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "C",            IDX_NOCECKSUM,          VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_UP,          ID_FUNC_UP_ZOOM,        VIRTKEY, CONTROL, NOINVERT
+    VK_DOWN,        ID_FUNC_DOWN_ZOOM,      VIRTKEY, CONTROL, NOINVERT
+    VK_LEFT,        ID_FUNC_LEFT_ZOOM,      VIRTKEY, CONTROL, NOINVERT
+    VK_RIGHT,       ID_FUNC_RIGHT_ZOOM,     VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\CARA2DVIEW.ico"
+IDR_CARA2DTYPE          ICON                    "res\\CARA2DVIEWDoc.ico"
+IDR_CARA_CURVE          ICON                    "res\\cara_cur.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_CLEAR
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      ID_EDIT_UNDO
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_FILE_PRINT_PREVIEW
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+    BUTTON      ID_HELP_FINDER
+END
+
+IDR_PLOTTOOLBAR TOOLBAR  16, 16
+BEGIN
+    BUTTON      ID_FUNC_ZOOMMODE
+    BUTTON      ID_FUNC_PICKMODE
+    BUTTON      ID_FUNC_EDITMODE
+    SEPARATOR
+    BUTTON      ID_FUNC_DEFAULTRANGE
+    BUTTON      ID_FUNC_REZOOM
+    BUTTON      ID_FUNC_ZOOM
+    BUTTON      ID_FUNC_DELETERANGE
+    BUTTON      ID_FUNC_DESTROYRANGELIST
+    BUTTON      ID_FUNC_LEFT_ZOOM
+    BUTTON      ID_FUNC_RIGHT_ZOOM
+    BUTTON      ID_FUNC_UP_ZOOM
+    BUTTON      ID_FUNC_DOWN_ZOOM
+    SEPARATOR
+    BUTTON      ID_FUNC_ZERO_REFERENCE
+    BUTTON      ID_FUNC_REFERENCE_SELECT
+    SEPARATOR
+    BUTTON      ID_FUNC_LINEEDITMODE
+    BUTTON      ID_FUNC_NUMEDITMODE
+    BUTTON      ID_FUNC_EDITSTEPPLUS
+    BUTTON      ID_FUNC_EDITSTEPMINUS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\StdBar.bmp"
+IDR_PLOTTOOLBAR         BITMAP                  "res\\PlotBar.bmp"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\resource.h""\r\n"
+    "#include ""res\\CARA2DV.rc2""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+4 TEXTINCLUDE 
+BEGIN
+    "..\resource.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_REGISTERED, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 30
+        VERTGUIDE, 190
+        VERTGUIDE, 215
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 30
+        HORZGUIDE, 40
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 120
+        HORZGUIDE, 155
+        HORZGUIDE, 165
+    END
+
+    IDD_MARKER_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 54
+        VERTGUIDE, 60
+        VERTGUIDE, 120
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+    END
+
+    IDD_FFT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 205
+        BOTTOMMARGIN, 54
+        HORZGUIDE, 60
+        HORZGUIDE, 83
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AVERAGE DIALOGEX 0, 0, 210, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Gleitender Mittelwert"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Linear über",IDC_AVG_LINTEXT,10,21,36,8,NOT WS_VISIBLE | 
+                    NOT WS_GROUP
+    LTEXT           "Frequenz über",IDC_AVG_FRQUTEXT,10,21,46,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    LTEXT           "Logarithmisch über eine",IDC_AVG_LOGTEXT,10,21,76,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    EDITTEXT        IDC_AVG_RANGE,97,19,46,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_AVG_RANGE
+    EDITTEXT        IDC_AVG_FREQU_NO_OF_STEPS,97,19,16,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_VISIBLE,0,HIDC_AVG_FREQU_NO_OF_STEPS
+    EDITTEXT        IDC_AVG_LOG_DIVIDER,98,19,21,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_VISIBLE,0,HIDC_AVG_LOG_DIVIDER
+    COMBOBOX        IDC_AVG_FREQU_STEP,131,19,69,60,CBS_DROPDOWNLIST | 
+                    CBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_AVG_FREQU_STEP
+    LTEXT           "[]",IDC_AVG_UNITX,167,21,38,8,0,0,HIDC_AVG_UNITX
+    LTEXT           " -tel Dekade",IDC_AVG_LOGTEXT1,125,21,40,8,NOT 
+                    WS_VISIBLE,0,HIDC_AVG_LOGTEXT1
+    CONTROL         "Linear",IDC_AVG_R_LIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,40,59,10,0,HIDC_AVG_R_LIN
+    CONTROL         "Logarithmisch",IDC_AVG_R_LOG,"Button",
+                    BS_AUTORADIOBUTTON,75,40,59,10,0,HIDC_AVG_R_LOG
+    CONTROL         "Frequenz",IDC_AVG_R_LOG_FRQ,"Button",BS_AUTORADIOBUTTON,
+                    140,40,59,10,0,HIDC_AVG_R_LOG_FRQ
+    GROUPBOX        "Mittelungsbereich",IDC_STATIC,5,5,200,123,BS_CENTER | 
+                    WS_GROUP
+    CONTROL         "Slider",IDC_AVG_WHERE,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,10,72,190,23,0,HIDC_AVG_WHERE
+    GROUPBOX        "Position des Mittelwertes innerhalb des Mittelungsbereiches",
+                    IDC_STATIC,5,55,200,73,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,109,190,13,ES_AUTOHSCROLL,0,
+                    HIDC_NEW_NAME
+    GROUPBOX        "Name der Ergebniskurve",IDC_STATIC,5,95,200,33,
+                    BS_CENTER
+    LTEXT           "0",IDC_STATIC,15,64,8,8
+    LTEXT           "0.5",IDC_STATIC,99,64,11,8
+    LTEXT           "1",IDC_STATIC,190,64,8,8
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    109,190,13
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,134,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,134,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,134,50,12,0,0,HIDC_HIDE
+END
+
+IDD_CURVE_TEXT_MACRO DIALOGEX 0, 0, 240, 140
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Makroeditor für die Kurven-Textdateien"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_MACRO_LIST,5,5,165,95,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_MACRO_LIST
+    EDITTEXT        IDC_MACRO_EDIT,5,25,165,111,ES_MULTILINE | ES_NOHIDESEL | 
+                    ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL,
+                    WS_EX_ACCEPTFILES,HIDC_MACRO_EDIT
+    PUSHBUTTON      "Neues Makro",IDC_MACRO_NEW,175,5,60,12,0,0,
+                    HIDC_MACRO_NEW
+    PUSHBUTTON      "Makro löschen",IDC_MACRO_DELETE,175,20,60,12,0,0,
+                    HIDC_MACRO_DELETE
+    PUSHBUTTON      "Speichern",IDC_MACRO_SAVE,175,36,60,12,0,0,
+                    HIDC_MACRO_SAVE
+    PUSHBUTTON      "Debuggen",IDC_MACRO_DEBUG,175,51,60,12
+    CONTROL         "Run",IDC_RD_RUN,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP,175,69,35,10
+    CONTROL         "Break",IDC_RD_BREAK,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,175,80,35,10
+    CONTROL         "Step",IDC_RD_STEP,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,175,91,35,10
+    PUSHBUTTON      "Hilfe",IDC_HELP_BUTTON,175,107,60,12,WS_GROUP
+    PUSHBUTTON      "Schließen",IDC_STOP,175,123,60,12
+END
+
+IDD_SPLINECURVE DIALOGEX 0, 0, 210, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Spline-Interpolation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Interpolationsbereich",IDC_STATIC,5,5,200,108,BS_CENTER
+    LTEXT           "von :",IDC_STATIC,10,21,18,8,NOT WS_GROUP
+    EDITTEXT        IDC_SPLINE_RANGEX1,30,19,50,13,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_SPLINE_RANGEX1
+    LTEXT           "bis :",IDC_STATIC,90,21,14,8
+    EDITTEXT        IDC_SPLINE_RANGEX2,110,19,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_SPLINE_RANGEX2
+    LTEXT           "[ ]",IDC_SPLINE_UNITX,166,21,34,8,NOT WS_GROUP,0,
+                    HIDC_SPLINE_UNITX
+    GROUPBOX        "",IDC_STATIC,5,40,200,73
+    LTEXT           "Anzahl der Interpolationsschritte",IDC_STATIC,10,61,124,
+                    8
+    EDITTEXT        IDC_SPLINE_NUMSTEPS,139,59,50,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_SPLINE_NUMSTEPS
+    GROUPBOX        "Name der Ergebniskurve",IDC_STATIC,5,80,200,33,
+                    BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,94,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,119,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,119,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,119,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    94,190,13,0,HIDC_PROGRESS
+END
+
+IDD_DERIVE DIALOGEX 0, 0, 210, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Kurvendifferentiation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name der Ergebniskurve",-1,5,5,200,30,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,39,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,39,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,39,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+IDD_FITCURVE DIALOGEX 0, 0, 210, 201
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Kurvenregression"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Regressionsparameter",IDC_STATIC,5,5,200,176
+    COMBOBOX        IDC_CR_COMBO,10,16,190,65,CBS_DROPDOWNLIST | WS_TABSTOP,
+                    0,HIDC_CR_COMBO
+    LTEXT           "Y = A0 + A1 * X + ... + An * X^n",IDC_CR_FUNCTION_STR,
+                    10,34,190,12,SS_SUNKEN,0,HIDC_CR_FUNCTION_STR
+    CONTROL         "Variable List",IDC_CR_VARLIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,50,95,100,0,HIDC_CR_VARLIST
+    LTEXT           "X-Bereich :",IDC_CR_RANGE_STR,110,50,90,8
+    LTEXT           "von :",IDC_STATIC,110,66,35,8
+    EDITTEXT        IDC_CR_FROM,150,64,50,12,ES_AUTOHSCROLL,0,HIDC_CR_FROM
+    LTEXT           "bis :",IDC_STATIC,110,81,14,8
+    EDITTEXT        IDC_CR_TO,150,79,50,12,ES_AUTOHSCROLL,0,HIDC_CR_TO
+    LTEXT           "Ordnung (n) :",IDC_CR_POLY_ORDN_STR,110,96,60,8,0,0,
+                    HIDC_CR_POLY_ORDN_STR
+    EDITTEXT        IDC_CR_POLY_ORDN,175,94,25,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_CR_POLY_ORDN
+    PUSHBUTTON      "Berechnen der Variablen",IDC_CR_CALCULATE,110,109,90,12,
+                    0,0,HIDC_CR_CALCULATE
+    LTEXT           "Abweichung",IDC_CR_DIFF_STR,110,126,90,8,0,0,
+                    HIDC_CR_DIFF_STR
+    EDITTEXT        IDC_CR_DIFF,110,138,90,12,ES_AUTOHSCROLL,0,HIDC_CR_DIFF
+    GROUPBOX        "Name der Ergebniskurve",IDC_STATIC,5,155,200,26,
+                    BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,164,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "Berechnen",IDC_CALCULATE,100,185,50,12,0,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,185,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,185,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    164,190,13,0,HIDC_PROGRESS
+END
+
+IDD_CREATECURVE DIALOGEX 0, 0, 225, 245
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Kurvenerstellung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Kurvenparameter",IDC_STATIC,5,1,215,224
+    LTEXT           "Funktion :\n       F (...) =",IDC_STATIC,9,15,45,20
+    EDITTEXT        IDC_FC_FUNCTION,55,21,160,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_FUNCTION
+    DEFPUSHBUTTON   "Auswerten",IDC_FC_TEST,10,39,40,12,0,0,HIDC_FC_TEST
+    CONTROL         "Variablenliste",IDC_FC_VARLIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_AUTOARRANGE | LVS_EDITLABELS | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,10,55,100,120,0,HIDC_FC_VARLIST
+    LTEXT           "Anzahl der\nKurvenwerte :",IDC_STATIC,115,55,50,16
+    EDITTEXT        IDC_FC_NO_OF_VAL,170,58,45,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_FC_NO_OF_VAL
+    LTEXT           "Y =  F ( %s )\nim Bereich :",IDC_FC_RUNVARSTR,115,75,
+                    100,17,0,0,HIDC_FC_RUNVARSTR
+    LTEXT           "von :",IDC_STATIC,130,96,35,8
+    EDITTEXT        IDC_FC_FROM,170,94,45,12,ES_AUTOHSCROLL,0,HIDC_FC_FROM
+    LTEXT           "bis :",IDC_STATIC,130,110,35,8
+    EDITTEXT        IDC_FC_TO,170,108,45,12,ES_AUTOHSCROLL,0,HIDC_FC_TO
+    CONTROL         "Bereich logarithmisch",IDC_FC_LOGARITHMIC,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,115,170,99,10,
+                    0,HIDC_FC_LOGARITHMIC
+    EDITTEXT        IDC_FC_RESULT_UNIT,170,153,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_RESULT_UNIT
+    EDITTEXT        IDC_FC_RUNVAR_UNIT,170,139,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_RUNVAR_UNIT
+    LTEXT           "x",IDC_FC_RUNVAR_UNIT_TXT,130,141,35,8
+    LTEXT           "Y",IDC_STATIC,130,155,35,8
+    GROUPBOX        "Ergebniskurve(n)",IDC_STATIC,5,180,215,45,BS_LEFT,0,
+                    HIDC_STATIC
+    EDITTEXT        IDC_NEW_NAME,55,207,160,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "Berechnen",IDC_CALCULATE,105,229,50,12,0,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,165,229,55,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,229,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    207,205,13,0,HIDC_PROGRESS
+    EDITTEXT        IDC_FC_ERROR,55,39,160,12,ES_AUTOHSCROLL | ES_READONLY,0,
+                    HIDC_FC_ERROR
+    CONTROL         "Kurvenliste",IDC_FC_CURVELIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_AUTOARRANGE | LVS_EDITLABELS | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,10,55,100,120,0,HIDC_FC_CURVELIST
+    COMBOBOX        IDC_FC_COMBO_RESULT_FKT,55,190,160,60,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FC_COMBO_RESULT_FKT
+    LTEXT           "Ausgabe :",IDC_STATIC,10,192,40,8
+    LTEXT           "Name :",IDC_NEW_NAME_STR,10,209,24,8,NOT WS_VISIBLE,0,
+                    HIDC_NEW_NAME_STR
+    LTEXT           "Einheiten der Variablen :",IDC_STATIC,115,126,100,8
+END
+
+IDD_INTEGRATE DIALOGEX 0, 0, 210, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Kurvenintegration"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name der Ergebniskurve",-1,5,5,200,30,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,39,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,39,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,39,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+IDD_SAVE_WAVE_CURVE DIALOG  0, 0, 285, 329
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Parameter für Wavedateien",IDC_WAVE_GROUP,5,153,275,162
+    CONTROL         "Mono",IDC_WD_CANNEL1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,26,165,40,10
+    CONTROL         "Stereo",IDC_WD_CANNEL2,"Button",BS_AUTORADIOBUTTON,89,
+                    165,40,10
+    PUSHBUTTON      "Standard Pegel",IDC_WD_DEFAULT_SETTINGS,190,164,85,12,
+                    WS_GROUP
+    GROUPBOX        "",IDC_STATIC,5,181,275,134
+    CTEXT           "------ Linker Kanal ------",IDC_STATIC,72,181,75,8
+    CTEXT           "----- Rechter Kanal -----",IDC_STATIC,184,181,75,8
+    COMBOBOX        IDC_WD_LEFT_CHANNEL,60,194,105,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_WD_CURVE1_MIN,60,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE1_MAX,115,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE1_OFFSET,60,214,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WD_CURVE1_LEVEL,115,214,50,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_WD_RIGHT_CHANNEL,170,194,105,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_WD_CURVE2_MIN,170,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE2_MAX,225,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE2_OFFSET,170,214,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WD_CURVE2_LEVEL,225,214,50,12,ES_AUTOHSCROLL
+    LTEXT           "Kurve :",IDC_STATIC,10,196,40,8
+    LTEXT           "Y-Min / Max:",IDC_STATIC,10,231,45,8
+    LTEXT           "Offset und Pegel in %:",IDC_STATIC,10,212,45,16
+    GROUPBOX        "Format",IDC_WAVE_FORMAT_GROUP,5,245,275,70
+    LTEXT           "Abtastrate :",IDC_STATIC,10,256,49,8
+    COMBOBOX        IDC_WD_SAMPLE_RATE,60,254,50,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_WD_BLOCK_ALIGN,205,269,45,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP
+    LTEXT           "Wiederholung :",IDC_STATIC,10,271,49,8
+    EDITTEXT        IDC_WD_CURVE_COUNT,60,269,50,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_WD_CURVE_COUNT_BUDDY,"msctls_updown32",
+                    UDS_WRAP | UDS_SETBUDDYINT | UDS_AUTOBUDDY,110,269,11,12
+    LTEXT           "Dateigröße :",IDC_STATIC,10,286,45,8
+    EDITTEXT        IDC_WD_FILE_SIZE,60,284,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[KB]",IDC_STATIC,115,286,20,8
+    LTEXT           "Länge :",IDC_STATIC,145,286,55,8
+    EDITTEXT        IDC_WD_WAVE_TIME,205,284,45,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[ms]",IDC_STATIC,255,286,20,8
+    LTEXT           "Breite :",IDC_STATIC,145,271,55,8
+    LTEXT           "Wiederholrate :",IDC_STATIC,145,256,53,8
+    EDITTEXT        IDC_WD_WAVE_FRQ,205,254,45,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[Hz]",IDC_STATIC,255,256,20,8
+    CONTROL         "Ersten Kurvenwert am Ende der Wavedatei anhängen",
+                    IDC_WD_CONCAT_1ST_VALUE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,300,200,10
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,0,275,153,NOT WS_VISIBLE
+    LTEXT           "[Hz]",IDC_STATIC,115,256,20,8
+END
+
+IDD_READWAVEFILE DIALOGEX 0, 0, 285, 220
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,5,275,150,NOT WS_VISIBLE
+    COMBOBOX        IDC_FILE_COMBO_FORMAT,75,169,195,57,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILE_COMBO_FORMAT
+    LTEXT           "Genauigkeit:",IDC_STATIC,10,171,45,8
+    GROUPBOX        "Kurvenparameter",IDC_STATIC,5,155,275,50
+    CONTROL         "Wavedateien mit vorzeichenbehafteten Daten",
+                    IDC_FILE_CK_SIGNED,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,10,190,260,10,0,
+                    HIDC_FILE_CK_SIGNED
+END
+
+IDD_REGISTERED DIALOGEX 0, 0, 220, 175
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "OK",IDOK,165,159,50,12,0,0,HIDOK
+    CTEXT           "ETS2DVIEW",IDC_REG_TITLE,30,5,160,20,SS_SUNKEN
+    CTEXT           "Dies ist eine nicht lizensierte Version !\nSie können dieses Programm 4 Wochen kostenlos testen.\nBitte lassen Sie sich danach registrieren !",
+                    IDC_REG_PLEASE_REG,5,120,210,35
+    ICON            IDR_MAINFRAME,IDC_STATIC,194,5,21,20
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,5,21,20
+    CONTROL         "REGISTRIEREN",IDC_REG_BTN_REGISTER,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,5,159,70,12
+    LTEXT           "- 2D Visualisierung von X-Y-, Polardiagrammen und Ortkurven.",
+                    IDC_REG_DESCRIPTION,5,30,210,10
+    LTEXT           "- Berechnung von beliebigen mathematischen Funktionen\n  auch mit den Kurven in den Diagrammen.",
+                    IDC_REG_DESCRIPTION2,5,40,210,20
+    LTEXT           "- Mittelwertbildung, Integration, Ableitung, Interpolation und\n  Regression der Kurven in den Diagrammen.",
+                    IDC_REG_DESCRIPTION3,5,60,210,20
+    LTEXT           "- Import und Export von Wavedateien und beliebigen Textdateien\n  (Makrosprache)",
+                    IDC_REG_DESCRIPTION4,5,80,210,20
+    LTEXT           "- Referenkurvendarstellung, Zoomfunktion mit Speicherung von\n  Zoombereichlisten.",
+                    IDC_REG_DESCRIPTION5,5,100,210,15
+    LTEXT           "Vorname und Name :",IDC_REG_NAME_TXT,5,41,70,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_REG_NAME_EDT,80,39,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "Firma :",IDC_REG_COMPANY_TXT,5,56,70,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_COMPANY_EDT,80,54,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "Straße, HNr :",IDC_REG_STREET_TXT,5,71,70,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_REG_STREET_EDT,80,69,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "PLZ, Ort :",IDC_REG_CITTY_TXT,5,86,70,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_CITTY_EDT,80,84,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    CTEXT           "Registriernummer !\nDiese bekommen Sie nur von ETS !\nAchten sie darauf, daß Sie alle Angaben korrekt eingeben !",
+                    IDC_REG_REG_NO_TXT,5,100,210,35,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_REG_NO_EDT,30,138,160,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+END
+
+IDD_MARKER_DLG DIALOGEX 0, 0, 128, 41
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Markierung setzen"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,6,24,48,12
+    EDITTEXT        IDC_EDT_MARKER,60,5,60,14,ES_AUTOHSCROLL
+    LTEXT           "Position:",IDC_STATIC,9,8,45,8
+    PUSHBUTTON      "Löschen",IDCANCEL,60,24,60,12,0,0,HIDCANCEL
+END
+
+IDD_FFT DIALOGEX 0, 0, 210, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Schnelle Fourier Transformation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name der Ergebniskurve",IDC_STATIC,5,5,200,30,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    GROUPBOX        "Transformation in:",IDC_STATIC,5,40,200,30,WS_GROUP
+    CONTROL         "Zeitbereich",IDC_RD_TIME,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,55,81,10
+    CONTROL         "Frequenzbereich",IDC_RD_FREQUENCY,"Button",
+                    BS_AUTORADIOBUTTON,110,55,80,10
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,77,50,12,WS_GROUP,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Abbrechen",IDC_STOP,155,77,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Symbol",IDC_HIDE,5,77,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AVERAGE DLGINIT
+BEGIN
+    IDC_AVG_FREQU_STEP, 0x403, 13, 0
+0x2f31, 0x2d33, 0x6554, 0x7a72, 0x6528, 0x296e, "\000" 
+    IDC_AVG_FREQU_STEP, 0x403, 9, 0
+0x6554, 0x7a72, 0x6528, 0x296e, "\000" 
+    IDC_AVG_FREQU_STEP, 0x403, 10, 0
+0x6b4f, 0x6174, 0x6576, 0x6e28, 0x0029, 
+    0
+END
+
+IDD_FITCURVE DLGINIT
+BEGIN
+    IDC_CR_COMBO, 0x403, 16, 0
+0x6f50, 0x796c, 0x6f6e, 0x666d, 0x6e75, 0x746b, 0x6f69, 0x006e, 
+    IDC_CR_COMBO, 0x403, 15, 0
+0x6f50, 0x6574, 0x7a6e, 0x7566, 0x6b6e, 0x6974, 0x6e6f, "\000" 
+    IDC_CR_COMBO, 0x403, 20, 0
+0x7845, 0x6f70, 0x656e, 0x746e, 0x6169, 0x666c, 0x6e75, 0x746b, 0x6f69, 
+0x006e, 
+    0
+END
+
+IDD_SAVE_WAVE_CURVE DLGINIT
+BEGIN
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3820, 0x3030, 0x0030, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3131, 0x3230, 0x0035, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3232, 0x3530, 0x0030, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3434, 0x3031, 0x0030, 
+    IDC_WD_BLOCK_ALIGN, 0x403, 6, 0
+0x2038, 0x6942, 0x0074, 
+    IDC_WD_BLOCK_ALIGN, 0x403, 7, 0
+0x3631, 0x4220, 0x7469, "\000" 
+    0
+END
+
+IDD_CREATECURVE DLGINIT
+BEGIN
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 14, 0
+0x6552, 0x6c65, 0x656c, 0x5a20, 0x6861, 0x656c, 0x006e, 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 24, 0
+0x6542, 0x7274, 0x6761, 0x7520, 0x646e, 0x5020, 0x6168, 0x6573, 0x5b20, 
+0x7247, 0x6461, 0x005d, 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 29, 0
+0x6542, 0x7274, 0x6761, 0x5b20, 0x4264, 0x205d, 0x6e75, 0x2064, 0x6850, 
+0x7361, 0x2065, 0x475b, 0x6172, 0x5d64, "\000" 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 10, 0
+0x724f, 0x7374, 0x756b, 0x7672, 0x0065, 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 26, 0
+0x6552, 0x6c61, 0x6574, 0x6c69, 0x7520, 0x646e, 0x4920, 0x616d, 0x6967, 
+0xe46e, 0x7472, 0x6965, 0x006c, 
+    0
+END
+
+IDD_READWAVEFILE DLGINIT
+BEGIN
+    IDC_FILE_COMBO_FORMAT, 0x403, 48, 0
+0x6553, 0x7268, 0x4820, 0x636f, 0x2068, 0x6728, 0x6f72, 0x65df, 0x2072, 
+0x7053, 0x6965, 0x6863, 0x7265, 0x6562, 0x6164, 0x6672, 0x202c, 0x7954, 
+0x2070, 0x203a, 0x6f64, 0x6275, 0x656c, 0x0029, 
+    IDC_FILE_COMBO_FORMAT, 0x403, 44, 0
+0x6f48, 0x6863, 0x2820, 0x696d, 0x7474, 0x656c, 0x6572, 0x2072, 0x7053, 
+0x6965, 0x6863, 0x7265, 0x6562, 0x6164, 0x6672, 0x5420, 0x7079, 0x3a20, 
+0x6620, 0x6f6c, 0x7461, 0x0029, 
+    IDC_FILE_COMBO_FORMAT, 0x403, 48, 0
+0x694e, 0x6465, 0x6972, 0x2067, 0x6e28, 0x6569, 0x7264, 0x6769, 0x7265, 
+0x5320, 0x6570, 0x6369, 0x6568, 0x6272, 0x6465, 0x7261, 0x2c66, 0x5420, 
+0x7079, 0x3a20, 0x7320, 0x6f68, 0x7472, 0x0029, 
+    IDC_FILE_COMBO_FORMAT, 0x403, 17, 0
+0x6157, 0x6576, 0x6164, 0x6574, 0x2069, 0x6964, 0x6572, 0x746b, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "Kurve &importieren...",       ID_FUNC_LOAD_CURVE
+        MENUITEM SEPARATOR
+        MENUITEM "&Speichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM "Kurve &exportieren...",       ID_FUNC_SAVE_CURVE
+        MENUITEM SEPARATOR
+        MENUITEM "Text&datei Interpreter erstellen...", ID_FUNC_MAKROEDIT
+        MENUITEM "Interpreter Makros speichern...", ID_FILE_SAVE_READ_MACROS
+        MENUITEM "Interpreter Makros laden...", ID_FILE_LOAD_READ_MACROS
+        MENUITEM SEPARATOR
+        MENUITEM "Drucker &einrichten...",      ID_FILE_PRINT_SETUP
+        MENUITEM "Druck&vorschau",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "S&enden...",                  ID_FILE_SEND_MAIL
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "Ein&fügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "&Löschen\tEntf",              ID_EDIT_CLEAR
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        POPUP "  &Symbolleisten"
+        BEGIN
+            MENUITEM "&Standard",                   ID_VIEW_TOOLBAR
+            MENUITEM "&Funktionen",                 ID_VIEW_PLOTTOOLBAR
+            MENUITEM "S&tatuszeile",                ID_VIEW_STATUS_BAR
+        END
+        POPUP "  Plot&ansicht"
+        BEGIN
+            MENUITEM "&Nebeneinander",              ID_VIEW_VERTICAL
+            MENUITEM "&Untereinander",              ID_VIEW_HORIZONTAL
+        END
+        MENUITEM "ETS&2DView in Vordergrund",   ID_VIEW_FOREGROUND
+        MENUITEM SEPARATOR
+        POPUP "  V&ertikale Größe"
+        BEGIN
+            MENUITEM "&200 %",                      ID_VIEW_SET_SIZE_Y_200_PC
+
+            MENUITEM "&300 %",                      ID_VIEW_SET_SIZE_Y_300_PC
+
+            MENUITEM "&400 %",                      ID_VIEW_SET_SIZE_Y_400_PC
+
+        END
+        POPUP "  H&orizontale Größe"
+        BEGIN
+            MENUITEM "&200 %",                      ID_VIEW_SET_SIZE_X_200_PC
+
+            MENUITEM "&300 %",                      ID_VIEW_SET_SIZE_X_300_PC
+
+            MENUITEM "&400 %",                      ID_VIEW_SET_SIZE_X_400_PC
+
+        END
+        MENUITEM "&Gesamtgröße",                ID_VIEW_SET_SIZE_NORMAL
+        MENUITEM SEPARATOR
+        MENUITEM "Windows &Rechner...",         ID_VIEW_CALCULATOR
+        MENUITEM "Rechner in &Vordergrund",     ID_VIEW_CALC_FOREGROUND
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "&Standardeinstellungen...",   ID_OPTIONS_STANDARD
+        MENUITEM "&Ploteinstellungen...",       ID_OPTIONS_PLOT
+        MENUITEM SEPARATOR
+        MENUITEM "Standard&einstellung setzen", ID_OPTIONS_SETSTANDARDS
+    END
+    POPUP "&Funktionen"
+    BEGIN
+        MENUITEM "&Auschnitt vergrößern\tF2",   ID_FUNC_ZOOMMODE
+        MENUITEM "&Markieren/Verschieben\tF3",  ID_FUNC_PICKMODE
+        MENUITEM "&Kurven ändern\tF4",          ID_FUNC_EDITMODE
+        MENUITEM SEPARATOR
+        MENUITEM "&Voreingestellter Bereich\tF5", ID_FUNC_DEFAULTRANGE
+        MENUITEM "V&orhergehender Bereich\tF7", ID_FUNC_REZOOM
+        MENUITEM "&Nächster Bereich\tF8",       ID_FUNC_ZOOM
+        MENUITEM "Bereich lös&chen\tF6",        ID_FUNC_DELETERANGE
+        MENUITEM "Bereichsliste lösc&hen\tF9",  ID_FUNC_DESTROYRANGELIST
+        MENUITEM SEPARATOR
+        MENUITEM "Referenzkurve &wählen\tF11",  ID_FUNC_REFERENCE_SELECT
+        MENUITEM "&Referenz ein/aus\tF12",      ID_FUNC_ZERO_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Linie &ziehen\tStrg+Alt+L",   ID_FUNC_LINEEDITMODE
+        MENUITEM "Schrittweite r&unden\tStrg+Alt+R", ID_FUNC_NUMEDITMODE
+        MENUITEM "Schri&ttweite erhöhen\t+",    ID_FUNC_EDITSTEPPLUS
+        MENUITEM "Schrittweite verrin&gern\t-", ID_FUNC_EDITSTEPMINUS
+    END
+    POPUP "&Operationen"
+    BEGIN
+        MENUITEM "Kurven&glättung...",          ID_OPERATION_AVERAGE
+        MENUITEM "Inter&polation...",           ID_OPERATION_SPLINE
+        MENUITEM "&Differentiation...",         ID_OPERATION_DERIVE
+        MENUITEM "&Integration...",             ID_OPERATION_INTEGRATE
+        MENUITEM "FFT...",                      ID_OPERATION_FFT
+        MENUITEM "Kurven&regression...",        ID_OPERATION_FITCURVE
+        MENUITEM "Kurve &erzeugen...",          ID_OPERATION_CREATECURVE
+    END
+    POPUP "&Hilfe"
+    BEGIN
+        MENUITEM "&Hilfethemen\tF1",            ID_HELP_FINDER
+        MENUITEM "Tastaturkürzel ",             ID_HELP_SHORTCUTS
+        MENUITEM SEPARATOR
+        MENUITEM "Inf&o über ETS2DVIEW...",     ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT_MENUES MENU 
+BEGIN
+    POPUP "Gleichung"
+    BEGIN
+        MENUITEM "Gleichung &speichern",        ID_SAVE_EQUATION
+        MENUITEM "Gleichung &laden",            ID_LOAD_EQUATION
+        MENUITEM "Gleichungs&struktur anzeigen", ID_SHOW_EQUATION_STRUCTURE
+        MENUITEM SEPARATOR
+        MENUITEM "&Abbrechen",                  IDCANCEL
+    END
+    POPUP "Kurve"
+    BEGIN
+        MENUITEM "Mittelwert",                  ID_CALC_AVERAGE
+        MENUITEM "Fläche",                      ID_CALC_INTEGRAL
+        MENUITEM "Steigung",                    ID_CALC_SLOPE
+        MENUITEM "Nullpunkte",                  ID_CALC_ZERO
+        MENUITEM SEPARATOR
+        MENUITEM "Eigenschaften...",            ID_OPTIONS_PLOT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "ETS2DVIEW\n\nETS2DVIEW\nDateityp Plot (*.2dv)\n.2dv\nETS2DVIEW.Document\nETS2DVIEW Document"
+    IDR_MAINFRAME2          " \n\n \nDateityp Plot alt (*.plt)\n.plt\n"
+    IDR_MAINFRAME3          " \n\n \nDateityp Kurve (*.crv)\n.crv\n"
+    IDR_MAINFRAME4          " \n\n \nDateityp Wave (*.wav)\n.wav\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ETS2DVIEW"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_PLOTTOOLBAR     "Schaltet die Werkzeugleiste 'Funktionen' ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_PLOT            "Schaltet den Plot ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CURVE           "Schaltet die Kurven ein oder aus"
+    ID_VIEW_HORIZONTAL      "Stellt mehrere Plots untereinander dar"
+    ID_VIEW_VERTICAL        "Stellt mehrere Plots nebeneinander dar"
+    ID_VIEW_SET_SIZE_NORMAL "Stellt alle Plots im Rechteck des Fenster dar"
+    ID_VIEW_SET_SIZE_X_200_PC "Vergrößert die X-Achse der Plots auf 200 %"
+    ID_VIEW_SET_SIZE_X_300_PC "Vergrößert die X-Achse der Plots auf 300 %"
+    ID_VIEW_SET_SIZE_X_400_PC "Vergrößert die X-Achse der Plots auf 400 %"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_SET_SIZE_Y_200_PC "Vergrößert die Y-Achse der Plots auf 200 %"
+    ID_VIEW_SET_SIZE_Y_300_PC "Vergrößert die Y-Achse der Plots auf 300 %"
+    ID_VIEW_SET_SIZE_Y_400_PC "Vergrößert die Y-Achse der Plots auf 400 %"
+    IDX_CONTEXT_SET_PLOT_MARKER 
+                            "Ruft einen Dialog auf um eine Markerposition einzugeben.\nMarker setzen..."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Schaltet die Werkzeugleiste 'Standard' ein oder aus"
+    ID_VIEW_STATUS_BAR      "Schaltet die ETS2DV Statuszeile ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPTIONS_PLOT         "Ändert die Einstellungen des markierten Plots"
+    ID_OPTIONS_STANDARD     "Ändert die Standardeinstellungen für die Plots"
+    ID_OPTIONS_SETSTANDARDS "Setzt die Standardeinstellungen für alle Plots im Dokument"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_PICKMODE        "Schaltet Markieren und Verschieben von Kurven ein\nMarkieren/verschieben (F3)"
+    ID_FUNC_ZOOMMODE        "Schaltet die Funktion Ausschnitt vergrößern ein\nAusschnitt vergrößern (F2)"
+    ID_FUNC_EDITMODE        "Schaltet die Funktion Kurven ändern ein\nKurven ändern (F4)"
+    ID_FUNC_ZERO_REFERENCE  "Schaltet Referenzkurve ein oder aus\nReferenz ein (F12)\nReferenz aus (F12)"
+    ID_FUNC_REFERENCE_SELECT 
+                            "Wählt die ausgewählte Kurve als Referenzkurve oder löscht die vorhandene Referenz\nReferenzkurve wählen (F11)"
+    ID_FUNC_LOAD_CURVE      "Lädt eine Kurve aus einer Datei"
+    ID_FUNC_SAVE_CURVE      "Speichert eine Kurve in einer Datei"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_RIGHT_ZOOM      "Verschiebt den Zoombereich nach rechts\nZoom rechts"
+    ID_FUNC_LEFT_ZOOM       "Verschiebt den Zoombereich nach links\nZoom links"
+    ID_FUNC_UP_ZOOM         "Verschiebt den Zoombereich nach oben\nZoom rauf"
+    ID_FUNC_DOWN_ZOOM       "Verschiebt den Zoombereich nach unten\nZoom runter"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_LINEEDITMODE    "Schaltet Punkt- oder Linien- Modus um\nLinie ziehen (Strg+Alt+L)"
+    ID_FUNC_NUMEDITMODE     "Schaltet Rundung der Schrittweite ein oder aus\nSchrittweite runden (Strg+Alt+R)"
+    ID_FUNC_EDITSTEPPLUS    "Erhöht die Schrittweite für die Pfeiltasten\nSchrittweite erhöhen (+)"
+    ID_FUNC_EDITSTEPMINUS   "Verringert die Schrittweite für die Pfeiltasten\nSchrittweite verringern (-)"
+    ID_FUNC_MAKROEDIT       "Erstellt Makro bzw. Interpreter zum Lesen von Kurven in Textdateien"
+    ID_FUNC_ZOOM            "Wählt den nächsten Bereich in der Bereichsliste\nNächster Bereich (F8)"
+    ID_FUNC_REZOOM          "Wählt den vorhergehenden Bereich in der Bereichsliste\nVorhergehender Bereich (F7)"
+    ID_FUNC_DESTROYRANGELIST 
+                            "Löscht die gespeicherten Ausschnittsbereiche\nBereichsliste löschen (F9)"
+    ID_FUNC_DELETERANGE     "Löscht den aktuellen Bereich und wählt den vorhergehenden Bereich aus der Bereichsliste\nBereich löschen (F6)"
+    ID_FUNC_DEFAULTRANGE    "Wählt den Bereich ""Voreinstellung""\nVoreingestellter Bereich (F5)"
+    ID_OPERATION_CREATECURVE "Erzeugt eine Kurve aus einer Funktion"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPERATION_AVERAGE    "Berechnet eine Glättungsfunktion für die markierte Kurve"
+    ID_OPERATION_SPLINE     "Berechnet zusätzliche Kurvenwerte für die markierte Kurve durch Spline-Interpolation"
+    ID_OPERATION_DERIVE     "Berechnet die Ableitungfunktion der markierten Kurve"
+    ID_OPERATION_INTEGRATE  "Berechnet die Integrationsfunktion der markierten Kurve"
+    ID_OPERATION_FITCURVE   "Ermittelt eine Näherungsfunktion für die markierte Kurve"
+    ID_OPERATION_FFT        "Berechnet die FFT der markierten Kurve"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_FILE_FORMAT_ERROR   "Datei konnte nicht gelesen werden\nFalsches Dateiformat"
+    IDS_SAVE_CURVE          "Kurve exportieren"
+    IDS_LOAD_CURVE          "Kurve importieren"
+    IDS_CURVE_FILTER        "Dateityp Kurve (*.crv)"
+    IDS_TEXT_FILTER         "Dateityp %s"
+    IDS_TOOLBAR             "Standard"
+    IDS_PLOTTOOLBAR         "Funktionen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AVERAGE_CURVE       "Gleitender Mittelwert von %s"
+    IDS_SPLINE_CURVE        "Interpolation von %s"
+    IDS_PLOTS               "  &Plots"
+    IDS_PLOT_N              "Plot &%d"
+    IDS_DERIVE_CURVE        "Ableitung von %s"
+    IDS_INTEGRATE_CURVE     "Integration von %s"
+    IDS_WAVE_FILTER         "Dateityp Wave (*.wav)"
+    IDS_CREATE_CURVE        "Neue Kurve"
+    IDS_ERROR_INDEX         "Fehler: Zuordnungsnummer darf nicht größer als die Anzahl der Kurven sein."
+    IDS_ERROR_REPEAT        "Fehler: Schleifenanfang nicht gefunden."
+    IDS_ERROR_NOINIT        "Fehler: Für die Zuweisung auf %s wurde kein Initialisierer gefunden"
+    IDS_ERROR_NOVALUE       "Fehler: Initialisierer %s für die Zuweisung wurde noch nicht belegt."
+    IDS_ERROR_UNKNOWN       "Fehler: unbekannter Bezeichner: "
+    IDS_ERROR_INIT_WRONG    "Fehler: unterschiedliches Format:\n%s kann nicht mit %s belegt werden."
+    IDS_ERROR_INIT_SAME     "Fehler: gleicher Bezeichner:\n%s kann nicht mit %s belegt werden."
+    IDS_ERROR_CURVE_INIT    "Warnung: %s wurde in der Schleife %d nicht belegt"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_NO_OF_VALUES  "Fehler: Werteanzahl für Kurve %d nicht zugewiesen"
+    IDS_ERROR_NO_INDEX      "Fehler: Zuordnungsnummer fehlt: Der Bezeichner muß einer Kurve zugeordnet werden."
+    IDS_ERROR_CURVE_INIT_TWICE 
+                            "Fehler: %s%d wird in dieser Schleife mehrfach initialisiert."
+    IDS_ERROR_NO_NO_OF_CURVES 
+                            "Warnung: Anzahl der Kurven wurde nicht festgelegt.\nLegen Sie die Anzahl der Kurven am Anfang fest.\nDie Syntax kann dann genauer untersucht werden."
+    IDS_DELETE_MACRO        "Wollen Sie dieses Makro löschen ?"
+    IDS_ERROR_READING_TEXT_CURVE 
+                            "Fehler beim Lesen der Kurvendaten !\n%s\nDatei : %s\nZeile : %d, Position: %d\nText : %s\nKommando : %s"
+    IDS_FORMAT_NEWMAKRONAME "Neues Makro %d (*.*)"
+    IDS_ERROR_BRACE         "Klammerfehler"
+    IDS_ERROR_OUT_OF_RANGE  "Fehler : Der Zahlenbereich wurde verlassen"
+    IDS_ERROR_NUMBER        "Fehler : Zeichen nicht erlaubt"
+    IDS_ERROR_OPERATOR      "Fehler : Aufeinanderfolgende Operatoren sind nicht erlaubt"
+    IDS_ERROR_NOEQUATION    "Fehler : Keine Gleichung vorhanden"
+    IDS_ERROR_DIVIDE_BY_ZERO "Fehler : Es wurde durch 0 geteilt"
+    IDS_ERROR_NOFUNCTION    "Fehler : Ausdruck ergibt keine Funktion"
+    IDS_EQUATION_OK         "Funktion ist ok"
+    IDS_FIT_CURVE           "Regressionskurve von %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FIT_POLYNOMFKT      "y = a0 + a1 * x + a2 * x^2 + ... + an * x^n"
+    IDS_FIT_EXP_FKT         "y = a0 * e^(a1 * x)"
+    IDS_FIT_POT_FKT         "y = a0 *  x^a1"
+    IDS_FIT_RANGE_STR       "X-Bereich in [%s]"
+    IDS_FIT_DIFF_STR        "Std.-Abweichung in [%s]"
+    IDS_INSERT              "Einfügen"
+    IDS_FUNCTIONTREE        "Funktionsbaum"
+    IDS_FIT_COLUMN_VAR      "Var. :"
+    IDS_FIT_COLUMN_VALUE    "Wert :"
+    IDS_CR_COLUMN_VAR       "Variable :"
+    IDS_CR_COLUMN_VALUE     "Wert :"
+    IDS_ARE_UNARY_FKT       "Unäre Funktionen"
+    IDS_ARE_BINARY_FKT      "Binäre Funktionen"
+    IDS_ARE_OPERATOR        "Operatoren"
+    IDS_ARE_CONSTANTS       "Konstanten"
+    IDS_ARE_REST            "% : Rest"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ARE_EXPONENT        "^ : Exponent"
+    IDS_ARE_LOG_AND         "& : logisches UND"
+    IDS_ARE_LOG_OR          "| : logisches ODER"
+    IDS_ARE_LOG_NEG         "! : logische Negation"
+    IDS_ARE_NEG             "- : Negation"
+    IDS_ARE_LOG_GREATER_THAN "> : logisch größer als"
+    IDS_ARE_LOG_LESS_THAN   "< : logisch kleiner als"
+    IDS_ARE_LOG_EQUAL       "= : logisch gleich"
+    IDS_CR_CURVE_FMT        "Ku%d.%c"
+    IDS_CR_COLUMN_CURVE     "Kurve :"
+    IDS_SEPARATOR_SIGN      "Trennzeichen : %c"
+    IDS_ERROR_LESS_CURVES   "Kurvenanzahl negativ bzw. 0"
+    IDS_ERROR_LESS_VALUES   "Anzahl der Kurvenwerte negativ bzw. 0."
+    IDS_ERROR_READ_FORMAT   "Falsches Format gelesen."
+    IDS_ERROR_LESS_LOOPS    "Anzahl der Schleifendurchläufe negativ bzw. 0."
+    IDS_ERROR_NUMBER_FORMAT "Fließkommazahl konnte nicht gelesen werden."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_ARRAY_BOUNDS  "Feldgröße überschritten."
+    IDS_ERROR_ALLOCATION    "Zu wenig Speicher."
+    IDS_ERROR_WAVE_FORMAT   "Fehler in der Wavedatei."
+    IDS_LOAD_CURVETEXTFILE  "Lade Kurven aus der Textdatei !"
+    IDS_LOAD_CURVEWAVEFILE  "Lade Kurven aus der Wavedatei !"
+    IDS_CANNOT_CALC_CURVE   "Die Kurve kann nicht bearbeitet werden, da einzelne Kurvenwerte fehlen."
+    IDS_CANNOT_CALC_CURVE2  "Die Kurve kann nicht bearbeitet werden, da\ndie enthaltenen X-Werte der Kurve nicht fortlaufend sind."
+    IDS_CANNOT_CALC_CURVE3  "Die Kurve kann nicht bearbeitet werden,\nBearbeitung von Ortskurven wird nicht unterstützt."
+    IDS_CANNOT_CALC_CURVE4  "Die Kurve kann nicht bearbeitet werden, da\ndie enthaltenen X-Werte der Kurve nicht fortlaufend sind.\n\nMöchten Sie die X-Werte sortieren ?"
+    IDS_EQUATION_CONST      "Gleichung liefert konstanten Wert"
+    IDS_SEPARATOR_KEYS      "Trennzeichen"
+    IDS_READ_KEYS           "Leseanweisung"
+    IDS_LOOP_KEYS           "Schleifenanweisung"
+    IDS_SWITCH_KEYS         "Schalter"
+    IDS_OTHER_KEYS          "Andere"
+    IDS_MACRO_KEYS          "Makro einfügen..."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SEND_MAIL       "Versendet die Diagramme per E-Mail"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FORMATCHARACTER     "Zeichen : %c"
+    IDS_NEWLINE             "Neue Zeile"
+    IDS_ERROR_STRINGEND     "Zeichenkette %s nicht abgeschlossen, ("") fehlt"
+    IDS_TXT_FILTER          "Dateityp Text (*.txt)"
+    IDS_ERROR_CURVE_NOT_IN_LST 
+                            "Eine Kurvenvariable, die in der Gleichung benutzt wird, muß im Plot markiert sein."
+    IDS_SET_CURVE_VISIBILITY "Kurve(n) anzeigen/verbergen"
+    IDE_PARSE_COMPLEX_NUMBER 
+                            "Geben Sie ein Reelle Zahl oder eine Komplexe Zahl ein.\nEine Komplexe Zahl wird wird durch Klammern (Realteil%c Imaginärteil)\nz.B.: (1%c2%c 3%c4) definiert.\nReal- und Imaginärteil sind durch ein Trennzeichen getrennt !"
+    IDS_ERROR_NO_COMPLEX_IMPL 
+                            "Funktion oder Operator für komplexe Argumente nicht vorhanden"
+    IDS_AMPLITUDE           "Betrag"
+    IDS_PHASE               "Phase"
+    IDS_REAL_PART           "Realteil"
+    IDS_IMAG_PART           "Imaginärteil"
+    IDS_LOCUS               "Ortskurve"
+    IDS_CURVE_FILTER2       "Dateityp Kurve einfach (*.cve)"
+    IDS_EQU_FILTER          "Dateityp Gleichung (*.equ)"
+    IDS_WAVE_FILE_COMMENT   "%s, WAVE_FORMAT_PCM Sample Rate: %d, Kanäle : %d, Breite: %d"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CALCULATOR      "Startet den Windows Rechner"
+    ID_VIEW_STATUS_BAR_FP   "Schaltet die ETS2DV Statuszeile ein oder aus"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_LOCUSUNIT           "OV"
+    IDS_ERROR_DECIMAL_POINT "Innerhalb der Gleichung müssen Fließkommazahlen immer mit einem Dezimalpunkt geschrieben werden."
+    IDS_REG_ERROR           "Bitte füllen Sie die Felder für Namen, Straße, Ort aus !\n\nDiese Daten werden verschlüsselt per Email an ETS\nübergeben und vertraulich behandelt !"
+    IDS_NO_RESULT           "Kein Ergebnis"
+    IDS_FUNC_ZOOM           "Zeigt die Zoombereiche in einer Liste an"
+    IDS_AVG_VALUES          "Mittelwert im Bereich %f bis %f:\n\narithmetisch: %f\nquadratisch: %f"
+    IDS_AREA_VALUES         "Fläche im Bereich %f bis %f:\n\nSumme: %f\nBetrag: %f"
+    IDS_SLOPE_VALUES        "Steigung in den Punkten:\n\n%f: %f (y=%f)\n%f: %f (y=%f)"
+    IDS_ZERO_POINTS         "Nullpunkte:\n\n%.10f: y=%e\n%.10f: y=%e"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STATUS_PANE1        "Steigung der Geraden bzw. Änderungsschrittweite in Pixel oder Y-Einheiten"
+    IDS_STATUS_PANE2        "X-Wert"
+    IDS_STATUS_PANE3        "Y-Wert"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CALC_FOREGROUND "Setzt den Rechner in den Vordergrund"
+    ID_CALC_AVERAGE         "Berechnet den Mittelwert der Kurvenwerte zwischen den Markerpunkten"
+    ID_CALC_SLOPE           "Berechnet die Steigung in den Markerpunkten."
+    ID_CALC_INTEGRAL        "Berechnet die Fläche der Kurve zwischen den Markerpunkten"
+    ID_CALC_ZERO            "Sucht die Nullpunkte in der Nähe der Markerpunkte"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_FOREGROUND      "Setzt ETS2DV in Vordergrund"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SAVE_READ_MACROS 
+                            "Speichert Textdateiinterpretermakros in einer ini-Datei."
+    ID_FILE_LOAD_READ_MACROS 
+                            "Lädt Texdateiinterpretermakros aus einer ini-Datei"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_AVERAGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 68
+        HORZGUIDE, 95
+        HORZGUIDE, 115
+        HORZGUIDE, 128
+        HORZGUIDE, 140
+    END
+
+    IDD_CURVE_TEXT_MACRO, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 235
+        BOTTOMMARGIN, 120
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 135
+    END
+
+    IDD_DERIVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 65
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 22
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+    END
+
+    IDD_FITCURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 145
+        VERTGUIDE, 150
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 22
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 144
+        HORZGUIDE, 150
+        HORZGUIDE, 155
+        HORZGUIDE, 170
+        HORZGUIDE, 181
+        HORZGUIDE, 191
+    END
+
+    IDD_INTEGRATE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 65
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        HORZGUIDE, 5
+        HORZGUIDE, 22
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+    END
+
+    IDD_SPLINECURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 205
+        HORZGUIDE, 65
+        HORZGUIDE, 125
+    END
+
+    IDD_CREATECURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 55
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 130
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        HORZGUIDE, 1
+        HORZGUIDE, 12
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 75
+        HORZGUIDE, 92
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 140
+        HORZGUIDE, 153
+        HORZGUIDE, 168
+        HORZGUIDE, 175
+        HORZGUIDE, 180
+        HORZGUIDE, 196
+        HORZGUIDE, 214
+        HORZGUIDE, 225
+        HORZGUIDE, 235
+    END
+
+    IDD_READWAVEFILE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 55
+        VERTGUIDE, 75
+        VERTGUIDE, 270
+        VERTGUIDE, 280
+        HORZGUIDE, 5
+        HORZGUIDE, 155
+        HORZGUIDE, 175
+        HORZGUIDE, 195
+        HORZGUIDE, 205
+    END
+
+    IDD_SAVE_WAVE_CURVE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 65
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 120
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 200
+        VERTGUIDE, 205
+        VERTGUIDE, 220
+        VERTGUIDE, 225
+        VERTGUIDE, 250
+        VERTGUIDE, 255
+        VERTGUIDE, 275
+        VERTGUIDE, 280
+        HORZGUIDE, 152
+        HORZGUIDE, 170
+        HORZGUIDE, 181
+        HORZGUIDE, 200
+        HORZGUIDE, 220
+        HORZGUIDE, 235
+        HORZGUIDE, 245
+        HORZGUIDE, 260
+        HORZGUIDE, 275
+        HORZGUIDE, 290
+        HORZGUIDE, 305
+        HORZGUIDE, 315
+    END
+
+    IDD_MARKER_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 54
+        VERTGUIDE, 60
+        VERTGUIDE, 120
+        BOTTOMMARGIN, 25
+        HORZGUIDE, 12
+        HORZGUIDE, 29
+    END
+
+    IDD_FFT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 205
+        HORZGUIDE, 60
+        HORZGUIDE, 83
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AVERAGE DIALOGEX 0, 0, 210, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Moving Average Value"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Linear through",IDC_AVG_LINTEXT,10,21,46,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    LTEXT           "Frequency through",IDC_AVG_FRQUTEXT,10,21,60,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    LTEXT           "Logarithmic through one",IDC_AVG_LOGTEXT,10,21,77,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    EDITTEXT        IDC_AVG_RANGE,95,19,46,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_AVG_RANGE
+    EDITTEXT        IDC_AVG_FREQU_NO_OF_STEPS,97,19,16,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_VISIBLE,0,HIDC_AVG_FREQU_NO_OF_STEPS
+    EDITTEXT        IDC_AVG_LOG_DIVIDER,98,19,21,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_VISIBLE,0,HIDC_AVG_LOG_DIVIDER
+    COMBOBOX        IDC_AVG_FREQU_STEP,130,19,69,60,CBS_DROPDOWNLIST | 
+                    CBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP,0,HIDC_AVG_FREQU_STEP
+    LTEXT           "[]",IDC_AVG_UNITX,167,21,38,8,0,0,HIDC_AVG_UNITX
+    LTEXT           " -th Decade",IDC_AVG_LOGTEXT1,125,21,38,8,NOT 
+                    WS_VISIBLE,0,HIDC_AVG_LOGTEXT1
+    CONTROL         "Linear",IDC_AVG_R_LIN,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,40,59,10,0,HIDC_AVG_R_LIN
+    CONTROL         "Logarithmic",IDC_AVG_R_LOG,"Button",BS_AUTORADIOBUTTON,
+                    75,40,52,10,0,HIDC_AVG_R_LOG
+    CONTROL         "Frequency",IDC_AVG_R_LOG_FRQ,"Button",
+                    BS_AUTORADIOBUTTON,140,40,59,10,0,HIDC_AVG_R_LOG_FRQ
+    GROUPBOX        "Averaging Range",IDC_STATIC,5,5,200,123,BS_CENTER | 
+                    WS_GROUP
+    LTEXT           "0",IDC_STATIC,15,64,8,8
+    LTEXT           "0.5",IDC_STATIC,99,64,11,8
+    LTEXT           "1",IDC_STATIC,190,64,8,8
+    CONTROL         "Slider",IDC_AVG_WHERE,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,10,72,190,23,0,HIDC_AVG_WHERE
+    GROUPBOX        "Position of Average Value in Averaging Range",
+                    IDC_STATIC,5,55,200,73,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,109,190,13,ES_AUTOHSCROLL,0,
+                    HIDC_NEW_NAME
+    GROUPBOX        "Name of the Averaging Curve",IDC_STATIC,5,95,200,33,
+                    BS_CENTER
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    109,190,13
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,134,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,134,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,134,50,12,0,0,HIDC_HIDE
+END
+
+IDD_CURVE_TEXT_MACRO DIALOGEX 0, 0, 240, 140
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Macro Editor for Curve Text Files"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_MACRO_LIST,5,5,165,95,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_MACRO_LIST
+    EDITTEXT        IDC_MACRO_EDIT,5,25,165,110,ES_MULTILINE | ES_NOHIDESEL | 
+                    ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL,
+                    WS_EX_ACCEPTFILES,HIDC_MACRO_EDIT
+    PUSHBUTTON      "New Macro",IDC_MACRO_NEW,175,5,60,12,0,0,HIDC_MACRO_NEW
+    PUSHBUTTON      "Delete Macro",IDC_MACRO_DELETE,175,20,60,12,0,0,
+                    HIDC_MACRO_DELETE
+    PUSHBUTTON      "Save Macro",IDC_MACRO_SAVE,175,35,60,12,0,0,
+                    HIDC_MACRO_SAVE
+    PUSHBUTTON      "Close",IDC_STOP,175,123,60,12
+    PUSHBUTTON      "Help",IDC_HELP_BUTTON,175,107,60,12
+    PUSHBUTTON      "Debuggen",IDC_MACRO_DEBUG,175,51,60,12
+    CONTROL         "Run",IDC_RD_RUN,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP,175,68,35,10
+    CONTROL         "Break",IDC_RD_BREAK,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,175,80,35,10
+    CONTROL         "Step",IDC_RD_STEP,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,175,92,35,10
+END
+
+IDD_DERIVE DIALOGEX 0, 0, 210, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Curve Differentiation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name of the Derived Curve",-1,5,5,200,30,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,39,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,39,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,39,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+IDD_FITCURVE DIALOGEX 0, 0, 210, 201
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Curve Regression"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Parameter for Curve Regression",IDC_STATIC,5,5,200,176
+    COMBOBOX        IDC_CR_COMBO,10,16,190,65,CBS_DROPDOWNLIST | WS_TABSTOP,
+                    0,HIDC_CR_COMBO
+    LTEXT           "Y = A0 + A1 * X + ... + An * X^n",IDC_CR_FUNCTION_STR,
+                    10,34,190,12,SS_SUNKEN,0,HIDC_CR_FUNCTION_STR
+    CONTROL         "Variable List",IDC_CR_VARLIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,50,95,100,0,HIDC_CR_VARLIST
+    LTEXT           "X-Range :",IDC_CR_RANGE_STR,110,50,90,8
+    LTEXT           "from :",IDC_STATIC,110,66,35,8
+    EDITTEXT        IDC_CR_FROM,150,64,50,12,ES_AUTOHSCROLL,0,HIDC_CR_FROM
+    LTEXT           "to :",IDC_STATIC,110,81,11,8
+    EDITTEXT        IDC_CR_TO,150,79,50,12,ES_AUTOHSCROLL,0,HIDC_CR_TO
+    LTEXT           "Order (n) :",IDC_CR_POLY_ORDN_STR,110,96,60,8,0,0,
+                    HIDC_CR_POLY_ORDN_STR
+    EDITTEXT        IDC_CR_POLY_ORDN,175,94,25,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_CR_POLY_ORDN
+    PUSHBUTTON      "Calculate Variables",IDC_CR_CALCULATE,110,109,90,12,0,0,
+                    HIDC_CR_CALCULATE
+    LTEXT           "Deviation",IDC_CR_DIFF_STR,110,126,90,8,0,0,
+                    HIDC_CR_DIFF_STR
+    EDITTEXT        IDC_CR_DIFF,110,138,90,12,ES_AUTOHSCROLL | ES_READONLY,0,
+                    HIDC_CR_DIFF
+    GROUPBOX        "Name of the Best Fit Curve",IDC_STATIC,5,155,200,26,
+                    BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,164,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "Calculate",IDC_CALCULATE,100,185,50,12,0,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,185,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,185,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    164,190,13,0,HIDC_PROGRESS
+END
+
+IDD_INTEGRATE DIALOGEX 0, 0, 210, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Curve Integration"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name of the Integral Curve",-1,5,5,200,30,BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,39,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,39,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,39,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+IDD_SPLINECURVE DIALOGEX 0, 0, 210, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Spline-Interpolation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Interpolation Range",IDC_STATIC,5,5,200,108,BS_CENTER
+    LTEXT           "from :",IDC_STATIC,10,21,18,8,NOT WS_GROUP
+    EDITTEXT        IDC_SPLINE_RANGEX1,30,19,50,13,ES_AUTOHSCROLL | WS_GROUP,
+                    0,HIDC_SPLINE_RANGEX1
+    LTEXT           "to :",IDC_STATIC,90,21,11,8
+    EDITTEXT        IDC_SPLINE_RANGEX2,110,19,50,13,ES_AUTOHSCROLL,0,
+                    HIDC_SPLINE_RANGEX2
+    LTEXT           "[ ]",IDC_SPLINE_UNITX,166,21,34,8,NOT WS_GROUP,0,
+                    HIDC_SPLINE_UNITX
+    GROUPBOX        "",IDC_STATIC,5,40,200,73
+    LTEXT           "Number of Interpolation Steps",IDC_STATIC,10,61,130,8
+    EDITTEXT        IDC_SPLINE_NUMSTEPS,150,59,50,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER,0,HIDC_SPLINE_NUMSTEPS
+    GROUPBOX        "Name of the Spline Curve",IDC_STATIC,5,80,200,33,
+                    BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,94,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,119,50,12,0,0,HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,119,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,119,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    94,190,13,0,HIDC_PROGRESS
+END
+
+IDD_CREATECURVE DIALOGEX 0, 0, 225, 245
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Creation of Curves"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Curve Parameters",IDC_STATIC,5,1,215,224,0,0,
+                    HIDC_STATIC
+    DEFPUSHBUTTON   "Evaluate",IDC_FC_TEST,10,39,40,12,0,0,HIDC_FC_TEST
+    CONTROL         "Variable List",IDC_FC_VARLIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_AUTOARRANGE | LVS_EDITLABELS | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,10,55,100,120,0,HIDC_FC_VARLIST
+    LTEXT           "Number of\nValues :",IDC_STATIC,115,54,50,16
+    EDITTEXT        IDC_FC_NO_OF_VAL,170,55,45,12,ES_AUTOHSCROLL | ES_NUMBER,
+                    0,HIDC_FC_NO_OF_VAL
+    LTEXT           "Y =  F ( %s )\nin the range :",IDC_FC_RUNVARSTR,115,75,
+                    100,17,0,0,HIDC_FC_RUNVARSTR
+    LTEXT           "from :",IDC_STATIC,130,96,35,8
+    EDITTEXT        IDC_FC_FROM,170,94,45,12,ES_AUTOHSCROLL,0,HIDC_FC_FROM
+    LTEXT           "to :",IDC_STATIC,130,111,35,8
+    EDITTEXT        IDC_FC_TO,170,109,45,12,ES_AUTOHSCROLL,0,HIDC_FC_TO
+    CONTROL         "Logarithmic Range",IDC_FC_LOGARITHMIC,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,115,125,100,
+                    10,0,HIDC_FC_LOGARITHMIC
+    LTEXT           "x",IDC_FC_RUNVAR_UNIT_TXT,130,149,35,8
+    LTEXT           "Y",IDC_STATIC,130,164,35,8
+    EDITTEXT        IDC_FC_RESULT_UNIT,170,163,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_RESULT_UNIT
+    EDITTEXT        IDC_FC_RUNVAR_UNIT,170,147,45,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_COMBO_RESULT_FKT
+    GROUPBOX        "Name of the Created Curve",IDC_STATIC,5,180,215,45,
+                    BS_CENTER,0,HIDC_STATIC
+    EDITTEXT        IDC_NEW_NAME,55,208,160,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    PUSHBUTTON      "Calculate",IDC_CALCULATE,100,229,50,12,0,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,165,229,55,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,229,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    208,205,13,0,HIDC_PROGRESS
+    EDITTEXT        IDC_FC_ERROR,55,39,160,12,ES_AUTOHSCROLL | ES_READONLY,0,
+                    HIDC_FC_ERROR
+    CONTROL         "Curve List",IDC_FC_CURVELIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | 
+                    LVS_EDITLABELS | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,10,55,100,120,0,HIDC_FC_CURVELIST
+    COMBOBOX        IDC_FC_COMBO_RESULT_FKT,55,190,160,60,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP,0,HIDC_FC_COMBO_RESULT_FKT
+    LTEXT           "Output :",IDC_STATIC,10,192,40,8
+    LTEXT           "Name :",IDC_NEW_NAME_STR,10,210,24,8,NOT WS_VISIBLE
+    LTEXT           "Function :\n       F (...) =",IDC_STATIC,9,15,45,20
+    EDITTEXT        IDC_FC_FUNCTION,55,21,160,12,ES_AUTOHSCROLL,0,
+                    HIDC_FC_FUNCTION
+    LTEXT           "Units of the Variables",IDC_STATIC,115,136,100,8
+END
+
+IDD_READWAVEFILE DIALOGEX 0, 0, 285, 220
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,5,275,150,NOT WS_VISIBLE
+    COMBOBOX        IDC_FILE_COMBO_FORMAT,75,169,195,57,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP,0,
+                    HIDC_FILE_COMBO_FORMAT
+    LTEXT           "Accuracy:",IDC_STATIC,10,171,45,8
+    GROUPBOX        "Curve parameters",IDC_STATIC,5,155,275,50
+    CONTROL         "Wave files with signed data",IDC_FILE_CK_SIGNED,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,10,190,260,10,
+                    0,HIDC_FILE_CK_SIGNED
+END
+
+IDD_SAVE_WAVE_CURVE DIALOGEX 0, 0, 285, 329
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Parameters of wave files",IDC_WAVE_GROUP,5,152,275,163
+    CONTROL         "Mono",IDC_WD_CANNEL1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,26,165,40,10
+    CONTROL         "Stereo",IDC_WD_CANNEL2,"Button",BS_AUTORADIOBUTTON,89,
+                    165,40,10
+    PUSHBUTTON      "Standard Level",IDC_WD_DEFAULT_SETTINGS,190,164,85,12,
+                    WS_GROUP
+    GROUPBOX        "",IDC_STATIC,5,181,275,134
+    CTEXT           "------ Left Channel ------",IDC_STATIC,72,181,75,8
+    CTEXT           "----- Right Channel -----",IDC_STATIC,184,181,75,8
+    COMBOBOX        IDC_WD_LEFT_CHANNEL,65,194,100,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP,0,HIDC_WD_LEFT_CHANNEL
+    EDITTEXT        IDC_WD_CURVE1_MIN,65,229,45,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE1_MAX,115,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE1_OFFSET,65,214,45,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WD_CURVE1_LEVEL,115,214,50,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    COMBOBOX        IDC_WD_RIGHT_CHANNEL,170,194,105,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP,0,HIDC_WD_RIGHT_CHANNEL
+    EDITTEXT        IDC_WD_CURVE2_MIN,170,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE2_MAX,225,229,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WD_CURVE2_OFFSET,170,214,50,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WD_CURVE2_LEVEL,225,214,50,12,ES_AUTOHSCROLL
+    LTEXT           "Curve:",IDC_STATIC,10,196,40,8
+    LTEXT           "Y-Min / Max:",IDC_STATIC,10,231,50,8
+    LTEXT           "Offset and Level in %:",IDC_STATIC,10,212,50,16
+    GROUPBOX        "Format",IDC_WAVE_FORMAT_GROUP,5,245,275,70
+    LTEXT           "Sampling Rate:",IDC_STATIC,10,256,49,8
+    COMBOBOX        IDC_WD_SAMPLE_RATE,65,254,50,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP,0,HIDC_WD_SAMPLE_RATE
+    COMBOBOX        IDC_WD_BLOCK_ALIGN,205,269,45,65,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP,0,HIDC_WD_BLOCK_ALIGN
+    LTEXT           "Repeat:",IDC_STATIC,10,271,26,8
+    EDITTEXT        IDC_WD_CURVE_COUNT,65,269,50,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_WD_CURVE_COUNT_BUDDY,"msctls_updown32",
+                    UDS_WRAP | UDS_SETBUDDYINT | UDS_AUTOBUDDY,115,269,11,12
+    LTEXT           "File Size :",IDC_STATIC,10,286,50,8
+    EDITTEXT        IDC_WD_FILE_SIZE,65,284,50,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[KB]",IDC_STATIC,120,286,20,8
+    LTEXT           "Length:",IDC_STATIC,145,286,55,8
+    EDITTEXT        IDC_WD_WAVE_TIME,205,284,45,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[ms]",IDC_STATIC,255,286,20,8
+    LTEXT           "Width:",IDC_STATIC,145,271,55,8
+    LTEXT           "Repetition Rate:",IDC_STATIC,145,256,55,8
+    EDITTEXT        IDC_WD_WAVE_FRQ,205,254,45,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "[Hz]",IDC_STATIC,255,256,20,8
+    CONTROL         "Append first curve value at the end of the Wave file",
+                    IDC_WD_CONCAT_1ST_VALUE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,300,200,10
+    GROUPBOX        "",ID_FILE_DLG_GROUP,5,0,275,152,NOT WS_VISIBLE
+    LTEXT           "[Hz]",IDC_STATIC,120,256,20,8
+END
+
+IDD_MARKER_DLG DIALOGEX 0, 0, 125, 39
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Set Marker"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,6,23,48,12
+    EDITTEXT        IDC_EDT_MARKER,60,5,60,14,ES_AUTOHSCROLL
+    LTEXT           "Position:",IDC_STATIC,9,8,45,8
+    PUSHBUTTON      "Delete",IDCANCEL,60,23,60,12,0,0,HIDCANCEL
+END
+
+IDD_FFT DIALOGEX 0, 0, 210, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | 
+    WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Fast Fourier Transformation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Name of the Created Curve",IDC_STATIC,5,5,200,30,
+                    BS_CENTER
+    EDITTEXT        IDC_NEW_NAME,10,16,190,13,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,0,HIDC_NEW_NAME
+    GROUPBOX        "Transformation into:",IDC_STATIC,5,40,200,30,WS_GROUP
+    CONTROL         "Time range",IDC_RD_TIME,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,55,81,10
+    CONTROL         "Frequency range",IDC_RD_FREQUENCY,"Button",
+                    BS_AUTORADIOBUTTON,110,55,80,10
+    PUSHBUTTON      "OK",IDC_CALCULATE,100,77,50,12,WS_GROUP,0,
+                    HIDC_CALCULATE
+    PUSHBUTTON      "Cancel",IDC_STOP,155,77,50,12,0,0,HIDC_STOP
+    PUSHBUTTON      "Minimize",IDC_HIDE,5,77,50,12,0,0,HIDC_HIDE
+    CONTROL         "Progress",IDC_PROGRESS,"msctls_progress32",WS_BORDER,10,
+                    16,190,13,0,HIDC_PROGRESS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AVERAGE DLGINIT
+BEGIN
+    IDC_AVG_FREQU_STEP, 0x403, 13, 0
+0x2f31, 0x2d33, 0x6854, 0x7269, 0x2864, 0x2973, "\000" 
+    IDC_AVG_FREQU_STEP, 0x403, 9, 0
+0x6854, 0x7269, 0x2864, 0x2973, "\000" 
+    IDC_AVG_FREQU_STEP, 0x403, 10, 0
+0x634f, 0x6174, 0x6576, 0x7328, 0x0029, 
+    0
+END
+
+IDD_FITCURVE DLGINIT
+BEGIN
+    IDC_CR_COMBO, 0x403, 17, 0
+0x6f70, 0x796c, 0x6f6e, 0x2d6d, 0x7566, 0x636e, 0x6974, 0x6e6f, "\000" 
+    IDC_CR_COMBO, 0x403, 15, 0
+0x6f70, 0x6577, 0x2d72, 0x7566, 0x636e, 0x6974, 0x6e6f, "\000" 
+    IDC_CR_COMBO, 0x403, 21, 0
+0x7865, 0x6f70, 0x656e, 0x746e, 0x6169, 0x2d6c, 0x7566, 0x636e, 0x6974, 
+0x6e6f, "\000" 
+    0
+END
+
+IDD_CREATECURVE DLGINIT
+BEGIN
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 13, 0
+0x6552, 0x6c61, 0x4e20, 0x6d75, 0x6562, 0x7372, "\000" 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 29, 0
+0x614d, 0x6e67, 0x7469, 0x6475, 0x2065, 0x6e61, 0x2064, 0x6850, 0x7361, 
+0x2065, 0x645b, 0x6765, 0x6572, 0x5d65, "\000" 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 34, 0
+0x614d, 0x6e67, 0x7469, 0x6475, 0x2065, 0x645b, 0x5d42, 0x6120, 0x646e, 
+0x5020, 0x6168, 0x6573, 0x5b20, 0x6564, 0x7267, 0x6565, 0x005d, 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 6, 0
+0x6f4c, 0x7563, 0x0073, 
+    IDC_FC_COMBO_RESULT_FKT, 0x403, 29, 0
+0x6552, 0x6c61, 0x5020, 0x7261, 0x2074, 0x6e61, 0x2064, 0x6d49, 0x6761, 
+0x6e69, 0x7261, 0x2079, 0x6150, 0x7472, "\000" 
+    0
+END
+
+IDD_READWAVEFILE DLGINIT
+BEGIN
+    IDC_FILE_COMBO_FORMAT, 0x403, 45, 0
+0x6556, 0x7972, 0x4820, 0x6769, 0x2068, 0x6e28, 0x6565, 0x7364, 0x6c20, 
+0x7261, 0x6567, 0x6d20, 0x6d65, 0x726f, 0x2c79, 0x7420, 0x7079, 0x3a65, 
+0x6420, 0x756f, 0x6c62, 0x2965, "\000" 
+    IDC_FILE_COMBO_FORMAT, 0x403, 40, 0
+0x6948, 0x6867, 0x2820, 0x656e, 0x6465, 0x2073, 0x656d, 0x6964, 0x6d75, 
+0x6d20, 0x6d65, 0x726f, 0x2c79, 0x7420, 0x7079, 0x3a65, 0x6620, 0x6f6c, 
+0x7461, 0x0029, 
+    IDC_FILE_COMBO_FORMAT, 0x403, 36, 0
+0x6f4c, 0x2077, 0x6e28, 0x6565, 0x7364, 0x6c20, 0x776f, 0x6d20, 0x6d65, 
+0x726f, 0x2c79, 0x7420, 0x7079, 0x3a65, 0x7320, 0x6f68, 0x7472, 0x0029, 
+
+    0
+END
+
+IDD_SAVE_WAVE_CURVE DLGINIT
+BEGIN
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3820, 0x3030, 0x0030, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3131, 0x3230, 0x0035, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3232, 0x3530, 0x0030, 
+    IDC_WD_SAMPLE_RATE, 0x403, 6, 0
+0x3434, 0x3031, 0x0030, 
+    IDC_WD_BLOCK_ALIGN, 0x403, 6, 0
+0x2038, 0x6942, 0x0074, 
+    IDC_WD_BLOCK_ALIGN, 0x403, 7, 0
+0x3631, 0x4220, 0x7469, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENUEX 
+BEGIN
+    POPUP "&File",                          65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "Import Cur&ve...",            ID_FUNC_LOAD_CURVE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "Save &as ...",                ID_FILE_SAVE_AS,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "Export Curve...",             ID_FUNC_SAVE_CURVE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "Make Import &Macros...",      ID_FUNC_MAKROEDIT,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Save Interpreter Macros...",  32932,MFT_STRING,MFS_ENABLED
+        MENUITEM "Load Interpreter Macros...",  32933,MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "Printer S&etup...",           ID_FILE_PRINT_SETUP,
+        MFT_STRING,MFS_ENABLED
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW,
+        MFT_STRING,MFS_ENABLED
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "S&end...",                    ID_FILE_SEND_MAIL,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "Most Recent File",            ID_FILE_MRU_FILE1,MFT_STRING,
+        MFS_GRAYED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               ID_APP_EXIT,MFT_STRING,
+        MFS_ENABLED
+    END
+    POPUP "&Edit",                          65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Cut\tCtrl+X",                ID_EDIT_CUT,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "C&opy\tCtrl+C",               ID_EDIT_COPY,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+    END
+    POPUP "&View",                          65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        POPUP "&Toolbars",                      65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Standard",                   ID_VIEW_TOOLBAR,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Functions",                  ID_VIEW_PLOTTOOLBAR,
+            MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+            MENUITEM "S&tatus Bar",                 ID_VIEW_STATUS_BAR,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "&Tile Plots",                    65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&Vertically",                 ID_VIEW_VERTICAL,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&Horizontally",               ID_VIEW_HORIZONTAL,
+            MFT_STRING,MFS_ENABLED
+        END
+        MENUITEM MFT_SEPARATOR
+        POPUP "V&ertical Size",                 65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&200 %",                      ID_VIEW_SET_SIZE_Y_200_PC,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&300 %",                      ID_VIEW_SET_SIZE_Y_300_PC,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&400 %",                      ID_VIEW_SET_SIZE_Y_400_PC,
+            MFT_STRING,MFS_ENABLED
+        END
+        POPUP "H&orizontal Size",               65535,MFT_STRING,MFS_ENABLED
+        BEGIN
+            MENUITEM "&200 %",                      ID_VIEW_SET_SIZE_X_200_PC,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&300 %",                      ID_VIEW_SET_SIZE_X_300_PC,
+            MFT_STRING,MFS_ENABLED
+            MENUITEM "&400 %",                      ID_VIEW_SET_SIZE_X_400_PC,
+            MFT_STRING,MFS_ENABLED
+        END
+        MENUITEM "F&it View Size",              ID_VIEW_SET_SIZE_NORMAL,
+        MFT_STRING,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "Windows &Calculator...",      ID_VIEW_CALCULATOR,
+        MFT_STRING,MFS_ENABLED
+        MENUITEM "&Foreground",                 ID_VIEW_CALC_FOREGROUND,
+        MFT_STRING,MFS_ENABLED
+    END
+    POPUP "&Settings",                      65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Default...",                 ID_OPTIONS_STANDARD,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Plot...",                    ID_OPTIONS_PLOT,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Set to Defaults",            ID_OPTIONS_SETSTANDARDS,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+    END
+    POPUP "F&unctions",                     65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Magnify\tF2",                ID_FUNC_ZOOMMODE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Select/Move\tF3",            ID_FUNC_PICKMODE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Edit Curve\tF4",             ID_FUNC_EDITMODE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Default Range\tF5",          ID_FUNC_DEFAULTRANGE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "P&revious Range\tF7",         ID_FUNC_REZOOM,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Next Range\tF8",             ID_FUNC_ZOOM,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Delete Ran&ge\tF6",           ID_FUNC_DELETERANGE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Delete Range &List\tF9",      ID_FUNC_DESTROYRANGELIST,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Set Reference Curve\tF11",   ID_FUNC_REFERENCE_SELECT,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Use Reference\tF12",         ID_FUNC_ZERO_REFERENCE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Line Mode\tCtrl+Alt+L",      ID_FUNC_LINEEDITMODE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Use Ro&unding\tCtrl+Alt+R",   ID_FUNC_NUMEDITMODE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Increase Stepwidth\t+",      ID_FUNC_EDITSTEPPLUS,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Decrea&se Stepwidth\t-",      ID_FUNC_EDITSTEPMINUS,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+    END
+    POPUP "&Operations",                    65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Moving Average...",          ID_OPERATION_AVERAGE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "Inter&polation...",           ID_OPERATION_SPLINE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Differentiation...",         ID_OPERATION_DERIVE,
+        MFT_STRING,MFS_ENABLED
+        MENUITEM "&Integration...",             ID_OPERATION_INTEGRATE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "FFT...",                      33157,MFT_STRING,MFS_ENABLED
+        MENUITEM "&Regression...",              ID_OPERATION_FITCURVE,
+        MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Create Curve...",            ID_OPERATION_CREATECURVE,
+        MFT_STRING,MFS_ENABLED
+    END
+    POPUP "&Help",                          65535,MFT_STRING,MFS_ENABLED
+    BEGIN
+        MENUITEM "&Help Topics\tF1",            ID_HELP_FINDER,MFT_STRING,
+        MFS_ENABLED
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&About ETS2DVIEW...",         ID_APP_ABOUT,MFT_STRING,
+        MFS_ENABLED
+    END
+END
+
+IDR_CONTEXT_MENUES MENU 
+BEGIN
+    POPUP "equation"
+    BEGIN
+        MENUITEM "&Save equation",              ID_SAVE_EQUATION
+        MENUITEM "&Load Equation",              ID_LOAD_EQUATION
+        MENUITEM "&Show equation strukture",    ID_SHOW_EQUATION_STRUCTURE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDCANCEL
+    END
+    POPUP "Kurve"
+    BEGIN
+        MENUITEM "Average",                     ID_CALC_AVERAGE
+        MENUITEM "Area",                        ID_CALC_INTEGRAL
+        MENUITEM "Slope",                       ID_CALC_SLOPE
+        MENUITEM "Zero points",                 ID_CALC_ZERO
+        MENUITEM SEPARATOR
+        MENUITEM "Propterties...",              ID_OPTIONS_PLOT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "ETS2DVIEW\n\nETS2DVIEW\nFile type Plot (*.2dv)\n.2dv\nETS2DVIEW.Document\nETS2DVIEW Document"
+    IDR_MAINFRAME2          " \n\n \nFile type Plot old (*.plt)\n.plt\n"
+    IDR_MAINFRAME3          " \n\n \nFile type Curve (*.crv)\n.crv\n"
+    IDR_MAINFRAME4          " \n\n \nDateityp Wave (*.wav)\n.wav\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ETS2DVIEW"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_PLOTTOOLBAR     "Shows or hides the Functions toolbar"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_PLOT            "Shows or hides this plot"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CURVE           "Shows or hides the curves"
+    ID_VIEW_HORIZONTAL      "Tiles the plots horizontally"
+    ID_VIEW_VERTICAL        "Tiles the plots vertically"
+    ID_VIEW_SET_SIZE_NORMAL "Fits the plotsize to the view size"
+    ID_VIEW_SET_SIZE_X_200_PC 
+                            "Sizes the x-axis of the plots to 200 % of the view rectangle"
+    ID_VIEW_SET_SIZE_X_300_PC 
+                            "Sizes the x-axis of the plots to 300 % of the view rectangle"
+    ID_VIEW_SET_SIZE_X_400_PC 
+                            "Sizes the x-axis of the plots to 400 % of the view rectangle"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_SET_SIZE_Y_200_PC 
+                            "Sizes the y-axis of the plots to 200 % of the view rectangle"
+    ID_VIEW_SET_SIZE_Y_300_PC 
+                            "Sizes the y-axis of the plots to 300 % of the view rectangle"
+    ID_VIEW_SET_SIZE_Y_400_PC 
+                            "Sizes the y-axis of the plots to 400 % of the view rectangle"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Shows or hides the standard toolbar"
+    ID_VIEW_STATUS_BAR      "Shows or hides the status bar"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Opens this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPTIONS_PLOT         "Changes properties of selected plots"
+    ID_OPTIONS_STANDARD     "Changes graphic defaults for plots and curves; does not affect current plots"
+    ID_OPTIONS_SETSTANDARDS "Sets graphic settings for all plots in active document to their default values"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_PICKMODE        "Switches cursor to selection\nSelect/Move (F3)"
+    ID_FUNC_ZOOMMODE        "Switches cursor to magnifying\nMagnify (F2)"
+    ID_FUNC_EDITMODE        "Switches cursor to editing\nEdit Curves (F4)"
+    ID_FUNC_ZERO_REFERENCE  "Uses or stops using current reference for the selected plot\nUse Reference (F12)"
+    ID_FUNC_REFERENCE_SELECT 
+                            "Makes selected curve the present reference for current plot\nSelect Reference Curve (F11)"
+    ID_FUNC_LOAD_CURVE      "Loads a curve from a file"
+    ID_FUNC_SAVE_CURVE      "Saves a curve as a special type of file"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_RIGHT_ZOOM      "Moves zoom range right\nZoom right"
+    ID_FUNC_LEFT_ZOOM       "Moves zoom range left\nZoom left"
+    ID_FUNC_UP_ZOOM         "Moves zoom range up\nZoom up"
+    ID_FUNC_DOWN_ZOOM       "Moves zoom range down\nZoom down"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FUNC_LINEEDITMODE    "Edits selected curve by points (y direction) or lines (x-y direction)\nLine Mode (Ctrl+Alt+L)"
+    ID_FUNC_NUMEDITMODE     "Makes cursor move in rounded steps\nRound (Ctrl+Alt+R)"
+    ID_FUNC_EDITSTEPPLUS    "Increases the rounding stepwidth\nIncrease Stepwidth (+)"
+    ID_FUNC_EDITSTEPMINUS   "Decreases the rounding stepwidth\nDecrease Stepwidth (-)"
+    ID_FUNC_MAKROEDIT       "Creates macros for reading curves in text files"
+    ID_FUNC_ZOOM            "Sets the next range for the selected plot\nNext Range (F8)"
+    ID_FUNC_REZOOM          "Sets the previous range for the selected plot\nPrevious Range (F7)"
+    ID_FUNC_DESTROYRANGELIST 
+                            "Deletes the complete range list for the selected plot\nDelete Range List (F9)"
+    ID_FUNC_DELETERANGE     "Removes current actual range from list for selected plot; sets values to previous range\nDelete Range (F6)"
+    ID_FUNC_DEFAULTRANGE    "Sets the default range for the selected plot\nDefault Range (F5)"
+    ID_OPERATION_CREATECURVE 
+                            "Creates a new curve from a mathematical function"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_OPERATION_AVERAGE    "Calculates moving average value of selected curve"
+    ID_OPERATION_SPLINE     "Calculates additional values for selected curve by spline interpolation"
+    ID_OPERATION_DERIVE     "Calculates derivative of selected curve"
+    ID_OPERATION_INTEGRATE  "Calculates integral of selected curve"
+    ID_OPERATION_FITCURVE   "Determines an approximate function of selected curve"
+    ID_OPERATION_FFT        "Calculates FFT of selected curve"
+END
+
+STRINGTABLE 
+BEGIN
+    IDE_FILE_FORMAT_ERROR   "Error: file could not be read.\nWrong format"
+    IDS_SAVE_CURVE          "Export Curve"
+    IDS_LOAD_CURVE          "Import Curve"
+    IDS_CURVE_FILTER        "File type curve (*.crv)"
+    IDS_TEXT_FILTER         "File type %s"
+    IDS_TOOLBAR             "Standard"
+    IDS_PLOTTOOLBAR         "Functions"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AVERAGE_CURVE       "Moving Average Value of %s"
+    IDS_SPLINE_CURVE        "Interpolation of %s"
+    IDS_PLOTS               "&Plots"
+    IDS_PLOT_N              "Plot &%d"
+    IDS_DERIVE_CURVE        "Derivative of %s"
+    IDS_INTEGRATE_CURVE     "Integration of %s"
+    IDS_WAVE_FILTER         "File type Wave (*.wav)"
+    IDS_CREATE_CURVE        "New Curve"
+    IDS_ERROR_INDEX         "Error: Assignment number must not be larger than the number of the curves."
+    IDS_ERROR_REPEAT        "Error: Loop beginning not found."
+    IDS_ERROR_NOINIT        "Error: For the assignement to %s%d no initiator was found"
+    IDS_ERROR_NOVALUE       "Error: Initiator %s%d for assignment not yet used."
+    IDS_ERROR_UNKNOWN       "Error: Unknown identifier: "
+    IDS_ERROR_INIT_WRONG    "Error: Different format: \n%s%d cannot be assigned %s%d."
+    IDS_ERROR_INIT_SAME     "Error: Same identifier: \n%s%d cannot be assigned %s%d."
+    IDS_ERROR_CURVE_INIT    "Warning: %s%d has not been named in loop %d"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_NO_OF_VALUES  "Error: Curve %d has not been assigned number of values"
+    IDS_ERROR_NO_INDEX      "Error: Assignment number is missing: The identifier must be assigned to a curve."
+    IDS_ERROR_CURVE_INIT_TWICE 
+                            "Error : %s%d is initialized repeatedly in this loop."
+    IDS_ERROR_NO_NO_OF_CURVES 
+                            "Number of the curves has not been defined. Define the number of curves at the start. The syntax can be examined more exactly, then."
+    IDS_DELETE_MACRO        "Do you want to delete this macro ?"
+    IDS_ERROR_READING_TEXT_CURVE 
+                            "Error reading curve data !\n%s\nFile : %s\nLine : %d, Position: %d\nText : %s\nCommand : %s"
+    IDS_FORMAT_NEWMAKRONAME "New macro %d (*.*)"
+    IDS_ERROR_BRACE         "Error : Parentheses"
+    IDS_ERROR_OUT_OF_RANGE  "Error : The range was left"
+    IDS_ERROR_NUMBER        "Error : Inadmissible character"
+    IDS_ERROR_OPERATOR      "Error : Operators succeeding one another are not admitted"
+    IDS_ERROR_NOEQUATION    "Error : No equation available"
+    IDS_ERROR_DIVIDE_BY_ZERO "Error : Divided by zero"
+    IDS_ERROR_NOFUNCTION    "Error : Term does not yield mathematical function"
+    IDS_EQUATION_OK         "Function ok"
+    IDS_FIT_CURVE           "Regression of %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FIT_POLYNOMFKT      "y = a0 + a1 * x + a2 * x^2 + ... + an * x^n"
+    IDS_FIT_EXP_FKT         "y = a0 * e^(a1 * x)"
+    IDS_FIT_POT_FKT         "y = a0 *  x^a1"
+    IDS_FIT_RANGE_STR       "X-Range in [%s]"
+    IDS_FIT_DIFF_STR        "Standard Deviation in [%s]"
+    IDS_INSERT              "Insert"
+    IDS_FUNCTIONTREE        "Function tree"
+    IDS_FIT_COLUMN_VAR      "Var. :"
+    IDS_FIT_COLUMN_VALUE    "Value :"
+    IDS_CR_COLUMN_VAR       "Variable :"
+    IDS_CR_COLUMN_VALUE     "Value :"
+    IDS_ARE_UNARY_FKT       "Unary Functions"
+    IDS_ARE_BINARY_FKT      "Binary Functions"
+    IDS_ARE_OPERATOR        "Operators"
+    IDS_ARE_CONSTANTS       "Constants"
+    IDS_ARE_REST            "% : Rest"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ARE_EXPONENT        "^ : exponent"
+    IDS_ARE_LOG_AND         "& : logical AND"
+    IDS_ARE_LOG_OR          "| : logical OR"
+    IDS_ARE_LOG_NEG         "! : logical Negation"
+    IDS_ARE_NEG             "- : Negation"
+    IDS_ARE_LOG_GREATER_THAN "> : logically greater than"
+    IDS_ARE_LOG_LESS_THAN   "< : logically less than"
+    IDS_ARE_LOG_EQUAL       "= : logically equal"
+    IDS_CR_CURVE_FMT        "Cu%d.%c"
+    IDS_CR_COLUMN_CURVE     "Curve :"
+    IDS_SEPARATOR_SIGN      "Separator : %s, %d"
+    IDS_ERROR_LESS_CURVES   "Number of curves negative or 0"
+    IDS_ERROR_LESS_VALUES   "Number of curve values negative or 0"
+    IDS_ERROR_READ_FORMAT   "A wrong format has been read."
+    IDS_ERROR_LESS_LOOPS    "Number of loopings negative or 0"
+    IDS_ERROR_NUMBER_FORMAT "Floating point number could not be read"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_ARRAY_BOUNDS  "Array bounds exceeded"
+    IDS_ERROR_ALLOCATION    "Not enough memory"
+    IDS_ERROR_WAVE_FORMAT   "Error in wave file"
+    IDS_LOAD_CURVETEXTFILE  "Loading curves from textfile !"
+    IDS_LOAD_CURVEWAVEFILE  "Loading curves from wavefile !"
+    IDS_CANNOT_CALC_CURVE   "The curve cannot be processed since\nsome curve values are missing."
+    IDS_CANNOT_CALC_CURVE2  "The curve cannot be processed since\nthe x-values are not sorted."
+    IDS_CANNOT_CALC_CURVE3  "The curve cannot be processed since\nprocessing of locus curves is not supported."
+    IDS_CANNOT_CALC_CURVE4  "The curve cannot be processed since\nthe x-values are not sorted.\n\nDo you want to sort the x-values?"
+    IDS_EQUATION_CONST      "Result of Equation is constant"
+    IDS_SEPARATOR_KEYS      "Separators"
+    IDS_READ_KEYS           "Read Instructions"
+    IDS_LOOP_KEYS           "Loop Instructions"
+    IDS_SWITCH_KEYS         "Switches"
+    IDS_OTHER_KEYS          "Others"
+    IDS_MACRO_KEYS          "Insert Macro..."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SEND_MAIL       "Sends the diagrams as electronic mail"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FORMATCHARACTER     "Character : %c"
+    IDS_NEWLINE             "New Line"
+    IDS_ERROR_STRINGEND     "String %s not closed, missing ("")"
+    IDS_TXT_FILTER          "Filetype Text (*.txt)"
+    IDS_ERROR_CURVE_NOT_IN_LST 
+                            "A curve variable wich is used in the equation must be selected in the plot."
+    IDS_SET_CURVE_VISIBILITY "Show or hide Curves"
+    IDE_PARSE_COMPLEX_NUMBER 
+                            "Please enter either a real or a complex number.\nA complex number is defined by braces (real part, imaginary part)\ne.g.: (1.2, 3.4).\nReal and imaginary part are separated by a comma !"
+    IDS_ERROR_NO_COMPLEX_IMPL 
+                            "This function or operator does not support complex arguments"
+    IDS_AMPLITUDE           "Magnitude"
+    IDS_PHASE               "Phase"
+    IDS_REAL_PART           "Real part"
+    IDS_IMAG_PART           "Imaginary part"
+    IDS_LOCUS               "Locus"
+    IDS_CURVE_FILTER2       "Filetype simple Curve (*.cve)"
+    IDS_EQU_FILTER          "Filetype Equation (*.equ)"
+    IDS_WAVE_FILE_COMMENT   "%s, Sample Rate: %d, Channels : %d, Width: %d"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CALCULATOR      "Starts the Windows Calculator"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_LOCUSUNIT           "LV"
+    IDS_ERROR_DECIMAL_POINT "In an equation floating point number are defined with a decimal point"
+    IDS_NO_RESULT           "No Result"
+    IDS_FUNC_ZOOM           "Shows the stored zoom ranges in a list"
+    IDS_AVG_VALUES          "Mittelwert im Bereich %f bis %f:\n\narithmetisch: %f\nquadratisch: %f"
+    IDS_AREA_VALUES         "Fläche im Bereich %f bis %f:\n\nSumme: %f\nBetrag: %f"
+    IDS_SLOPE_VALUES        "Steigung in den Punkten:\n\n%f: %f (y=%f)\n%f: %f (y=%f)"
+    IDS_ZERO_POINTS         "Nullpunkte:\n\n%.10f: y=%e\n%.10f: y=%e"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STATUS_PANE1        "line gradient or current stepwidth (pixel or y units)"
+    IDS_STATUS_PANE2        "x value"
+    IDS_STATUS_PANE3        "y value"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_CALC_FOREGROUND "Sets the Windows Calculator to Forground"
+    ID_CALC_AVERAGE         "Calculates the average of the curve values between the marker points"
+    ID_CALC_SLOPE           "Calculates the slope of the curve in marker points"
+    ID_CALC_INTEGRAL        "Calculates the area of the curve between the marker points"
+    ID_CALC_ZERO            "Searches the zero points of the curve near the marker points"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SAVE_READ_MACROS "Saves the interpreter macros into an ini-file"
+    ID_FILE_LOAD_READ_MACROS "Loads interpreter macros from an ini-file"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Switzerland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DES)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_SWISS
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_REGISTERED, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 30
+        VERTGUIDE, 190
+        VERTGUIDE, 215
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 30
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 135
+        HORZGUIDE, 144
+        HORZGUIDE, 165
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_REGISTERED DIALOGEX 0, 0, 220, 175
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "OK",IDOK,165,159,50,12,0,0,HIDOK
+    CTEXT           "ETS2DVIEW",IDC_REG_TITLE,30,5,160,20,SS_SUNKEN
+    ICON            IDR_MAINFRAME,IDC_STATIC,194,5,21,20
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,5,21,20
+    CONTROL         "REGISTRIEREN",IDC_REG_BTN_REGISTER,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,5,159,70,12
+    LTEXT           "Vorname und Name :",IDC_REG_NAME_TXT,5,36,70,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_REG_NAME_EDT,80,34,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "Firma :",IDC_REG_COMPANY_TXT,5,51,70,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_COMPANY_EDT,80,49,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    CTEXT           "Registriernummer !\nDiese bekommen Sie nur von ETS !\nAchten sie darauf, daß Sie alle Angaben korrekt eingeben !",
+                    IDC_REG_REG_NO_TXT,5,100,210,35,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_REG_NO_EDT,30,138,160,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "Straße, HNr :",IDC_REG_STREET_TXT,5,66,70,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_REG_STREET_EDT,80,64,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "PLZ, Ort :",IDC_REG_CITTY_TXT,5,81,70,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_REG_CITTY_EDT,80,79,135,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+END
+
+#endif    // German (Switzerland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

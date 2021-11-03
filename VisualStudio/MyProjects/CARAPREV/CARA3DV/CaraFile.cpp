@@ -1,0 +1,27 @@
+// CaraFile.cpp: Implementierung der Klasse CCaraFile.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "CARA3DV.h"
+#include "CaraFile.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Konstruktion/Destruktion
+//////////////////////////////////////////////////////////////////////
+
+CCaraFile::CCaraFile()
+{
+
+}
+
+CCaraFile::~CCaraFile()
+{
+
+}

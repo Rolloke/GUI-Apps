@@ -1,0 +1,72 @@
+
+ Datentr„ger in Laufwerk C: hat keine Bezeichnung
+ Seriennummer des Datentr„gers: 3A39-18FD
+ Verzeichnis von C:\Daten\MyProjects\CARA3DVIEW\hlp
+
+.              <DIR>        22.04.98  15:20 .
+..             <DIR>        22.04.98  15:20 ..
+CARA3D~1 HPJ         2.383  09.03.98  13:25 CARA3DVIEW.hpj
+CARA3D~1 CNT           255  09.03.98  13:25 CARA3DVIEW.cnt
+AFXCORE  RTF        53.556  25.05.98  12:57 AfxCore.rtf
+AFXPRINT RTF        16.023  09.03.98  13:25 AfxPrint.rtf
+APPEXIT  BMP         2.262  09.03.98  13:25 AppExit.bmp
+HLPSBAR  BMP         6.838  25.05.98  13:52 HlpSBar.bmp
+FILENEW  BMP           486  25.05.98  13:40 FileNew.bmp
+FILEOPEN BMP           486  25.05.98  13:41 FileOpen.bmp
+FILEPRNT BMP           486  25.05.98  13:46 FilePrnt.bmp
+FILESAVE BMP           486  25.05.98  13:42 FileSave.bmp
+EDITCOPY BMP           486  25.05.98  13:43 EditCopy.bmp
+EDITCUT  BMP           502  09.03.98  13:25 EditCut.bmp
+EDITPAST BMP           502  09.03.98  13:25 EditPast.bmp
+EDITUNDO BMP           502  09.03.98  13:25 EditUndo.bmp
+CURHELP  BMP           486  25.05.98  13:49 CurHelp.bmp
+SCMAX    BMP           502  09.03.98  13:25 Scmax.bmp
+SCMIN    BMP           502  09.03.98  13:25 Scmin.bmp
+BULLET   BMP           142  09.03.98  13:25 Bullet.bmp
+HLPTBAR  BMP         8.098  25.05.98  13:52 HlpTBar.bmp
+RECFIRST BMP           502  09.03.98  13:25 RecFirst.bmp
+RECPREV  BMP           502  09.03.98  13:25 RecPrev.bmp
+RECNEXT  BMP           502  09.03.98  13:25 RecNext.bmp
+RECLAST  BMP           502  09.03.98  13:25 RecLast.bmp
+CARA3D~1 HM          2.851  19.05.98  10:26 CARA3DVIEW.hm
+CARA3D~1 LOG         5.046  19.05.98  10:27 CARA3DVIEW.LOG
+CARA3D~1 HLP        42.856  19.05.98  10:27 CARA3DVIEW.HLP
+CARA3D~1 PH          4.750  09.03.98  15:36 CARA3DVIEW.ph
+AFXPRINT WPD        66.643  06.03.98  14:49 AfxPrint.wpd
+AFXCORE  WPD       119.715  25.05.98  12:56 AfxCore.wpd
+GESAMT~1 BMP       393.334  25.05.98  12:59 gesamtbild.bmp
+STDBAR   BMP         8.098  25.05.98  13:03 stdbar.bmp
+FILMBAR  BMP         6.958  25.05.98  13:05 filmbar.bmp
+OBJBAR   BMP         9.466  25.05.98  13:07 objbar.bmp
+TITLEBAR BMP         5.782  25.05.98  13:13 titlebar.bmp
+STATUBAR BMP         6.838  25.05.98  13:17 statubar.bmp
+VIEWDLG  BMP        95.182  25.05.98  13:21 viewdlg.bmp
+LIGHTDLG BMP        54.994  25.05.98  13:25 lightdlg.bmp
+STDDLG   BMP        81.106  25.05.98  13:29 stddlg.bmp
+SAVEBMP  BMP           486  25.05.98  13:43 SaveBmp.bmp
+OPTVIEW  BMP           486  25.05.98  13:44 optview.bmp
+OPTLITE  BMP           486  25.05.98  13:45 optlite.bmp
+HELP     BMP           486  25.05.98  13:48 help.bmp
+OBJUP    BMP           486  25.05.98  13:53 ObjUp.bmp
+OBJDOWN  BMP           486  25.05.98  13:54 Objdown.bmp
+OBJLEFT  BMP           486  25.05.98  13:55 Objleft.bmp
+OBJRIGHT BMP           486  25.05.98  13:56 Objright.bmp
+OBJNEAR  BMP           486  25.05.98  13:56 Objnear.bmp
+OBJFAR   BMP           486  25.05.98  13:57 Objfar.bmp
+OBJZOOM  BMP           486  25.05.98  13:59 objzoom.bmp
+OBJRZOOM BMP           486  25.05.98  13:59 objrzoom.bmp
+OBJROTR  BMP           486  25.05.98  14:00 objrotr.bmp
+OBJROTL  BMP           486  25.05.98  14:01 objrotl.bmp
+OBJROTUP BMP           486  25.05.98  14:02 objrotup.bmp
+OBJROTDN BMP           486  25.05.98  14:02 objrotdn.bmp
+FLMSTRTR BMP           486  25.05.98  14:06 flmstrtr.bmp
+FLMSTPB  BMP           486  25.05.98  14:05 flmstpb.bmp
+FLMSTPR  BMP           486  25.05.98  14:07 flmstpr.bmp
+FLMSTPN  BMP           486  25.05.98  14:08 flmstpn.bmp
+FLMSTPE  BMP           486  25.05.98  14:09 flmstpe.bmp
+FLMAREP  BMP           486  25.05.98  14:06 flmarep.bmp
+DIR      TXT             0  25.05.98  14:16 dir.txt
+FLMTIME  BMP           486  25.05.98  14:06 flmtime.bmp
+FLMPAUS  BMP           486  25.05.98  14:06 flmpaus.bmp
+        66 Datei(en)             1.015.284 Bytes
+         2 Verzeichnis(se)     288.481.280 Bytes frei

@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARA2DV", "Cara2dv.vcproj", "{F12DACBE-9C02-4A87-9183-DE3004AD3092}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173} = {F8057C19-3F70-4955-9AA4-04DEDF8D1173}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARAPREV", "..\Caraprev.vcproj", "{F8057C19-3F70-4955-9AA4-04DEDF8D1173}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugEngl|Win32 = DebugEngl|Win32
+		Release|Win32 = Release|Win32
+		ReleaseEngl|Win32 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.Debug|Win32.Build.0 = Debug|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.DebugEngl|Win32.ActiveCfg = DebugEngl|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.DebugEngl|Win32.Build.0 = DebugEngl|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.Release|Win32.ActiveCfg = Release|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.Release|Win32.Build.0 = Release|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+		{F12DACBE-9C02-4A87-9183-DE3004AD3092}.ReleaseEngl|Win32.Build.0 = ReleaseEngl|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.DebugEngl|Win32.ActiveCfg = DebugEngl|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.Release|Win32.ActiveCfg = Release|Win32
+		{F8057C19-3F70-4955-9AA4-04DEDF8D1173}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

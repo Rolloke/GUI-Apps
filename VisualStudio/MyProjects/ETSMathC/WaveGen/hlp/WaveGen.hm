@@ -1,0 +1,45 @@
+ 
+// Commands (ID_* and IDM_*) 
+HID_CALC_FOURIER                        0x18003
+HID_CALC_RANDOM                         0x18004
+HID_CALC_RE_FOURIER                     0x18005
+HID_OPTIONS_WAVEFILE                    0x18007
+HID_OPTIONS_FILTER                      0x18008
+HID_VIEW_PLOT                           0x18009
+HID_FILE_SAVE_CURVE                     0x1800A
+HID_CALC_RANDOM_FRQ                     0x1800B
+HID_VIEW_PLOTS                          0x1800C
+HID_OPTIONS_STANDARD                    0x1800D
+HID_FILE_LOAD_LEFTCURVE                 0x1800F
+HID_FILE_LOAD_RIGHTCURVE                0x18010
+HID_CALC_NORM_FRQ                       0x18014
+HID_OPTIONS_FILTER_EDIT                 0x18015
+HID_CALC_CANCEL                         0x18016
+HID_PROGRESS_STEP                       0x18017
+HID_PROGRESS_SETRANGE                   0x18018
+HID_PLAY_WAVE                           0x18018
+HID_PLAY_STOP                           0x18019
+HID_OPTIONS_MIRROR_FILE                 0x1801A
+HID_CALC_MULTIPLY_FILTER                0x1801B
+HID_CALC_DIVIDE_FILTER                  0x1801C
+HID_CALC_ADD_FILTER                     0x1801D
+HID_CALC_SUBTRACT_FILTER                0x1801E
+HID_CALC_TIME_FUNCTION                  0x1801F
+HID_REPEAT_WAVE                         0x18020
+ 
+// Prompts (IDP_*) 
+ 
+// Resources (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+HIDR_WAVEGETYPE                         0x20081
+HIDR_MAINFRAME2                         0x20081
+ 
+// Dialogs (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+HIDD_WAVE_PROPERTIES                    0x20082
+HIDD_FILTER_PROPERTIES                  0x20084
+HIDD_STANDARD_PROPERTIES                0x20086
+HIDD_PROGRESS_DLG                       0x20087
+HIDD_CREATE_TIME_FUNC                   0x20088
+ 
+// Frame Controls (IDW_*) 

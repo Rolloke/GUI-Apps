@@ -1,0 +1,15 @@
+// Von MAKEHELP.BAT erzeugte Hilfe-Zuordnungsdatei. Wird verwendet von PRINTASC.HPJ. 
+ 
+// Befehle (ID_* and IDM_*) 
+HIDM_ABOUTBOX                           0x10010
+ 
+// Eingabeaufforderungen (IDP_*) 
+ 
+// Ressourcen (IDR_*) 
+HIDR_MAINFRAME                          0x20080
+ 
+// Dialogfelder (IDD_*) 
+HIDD_ABOUTBOX                           0x20064
+HIDD_PRINTASC_DIALOG                    0x20066
+ 
+// Rahmen-Steuerelemente (IDW_*) 

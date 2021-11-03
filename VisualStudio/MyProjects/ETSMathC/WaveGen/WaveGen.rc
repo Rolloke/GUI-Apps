@@ -1,0 +1,733 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\WaveGen.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#include ""l.deu\\afxprint.rc""        // Ressourcen für Drucken/Seitenansicht\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\WaveGen.ico"
+IDR_WAVEGETYPE          ICON    DISCARDABLE     "res\\WaveGenDoc.ico"
+IDI_CF_SINE             ICON    DISCARDABLE     "res\\icon1.ico"
+IDI_CF_RECT             ICON    DISCARDABLE     "res\\cf_rect.ico"
+IDI_CF_TRIANGLE         ICON    DISCARDABLE     "res\\cf_rect1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+    SEPARATOR
+    BUTTON      ID_CALC_RANDOM
+    BUTTON      ID_CALC_RANDOM_FRQ
+    BUTTON      ID_CALC_FOURIER
+    BUTTON      ID_CALC_MULTIPLY_FILTER
+    BUTTON      ID_CALC_RE_FOURIER
+    SEPARATOR
+    BUTTON      ID_PLAY_STOP
+    BUTTON      ID_PLAY_WAVE
+    BUTTON      ID_REPEAT_WAVE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "Linke Kurve laden",           ID_FILE_LOAD_LEFTCURVE
+        MENUITEM "Rechte Kurve laden",          ID_FILE_LOAD_RIGHTCURVE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Kurven",                      ID_VIEW_PLOTS
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "Grundeinstellungen...",       ID_OPTIONS_STANDARD
+        MENUITEM "Wavedatei...",                ID_OPTIONS_WAVEFILE
+        MENUITEM "Filterfunktion...",           ID_OPTIONS_FILTER
+        MENUITEM "Filterfunktion editieren...", ID_OPTIONS_FILTER_EDIT
+        MENUITEM SEPARATOR
+    END
+    POPUP "Be&rechnen"
+    BEGIN
+        MENUITEM "Zufalls Zeitfunktion berechnen", ID_CALC_RANDOM
+        MENUITEM "Zufalls Frequenzwerte berechnen", ID_CALC_RANDOM_FRQ
+        MENUITEM "Normierte Frequenzwerte berechnen", ID_CALC_NORM_FRQ
+        MENUITEM "Zeitfunktion berechnen",      ID_CALC_TIME_FUNCTION
+        MENUITEM SEPARATOR
+        MENUITEM "Fouriertransformation",       ID_CALC_FOURIER
+        MENUITEM "Rücktransformation",          ID_CALC_RE_FOURIER
+        MENUITEM SEPARATOR
+        MENUITEM "Filterfunktion multiplizieren", ID_CALC_MULTIPLY_FILTER
+        MENUITEM "Filterfunktion dividieren",   ID_CALC_DIVIDE_FILTER
+        MENUITEM "Filterfunktion addieren",     ID_CALC_ADD_FILTER
+        MENUITEM "Filterfunktion subtrahieren", ID_CALC_SUBTRACT_FILTER
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   ID_CALC_CANCEL
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "&Hilfethemen",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "Inf&o über WaveGen...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT
+    VK_F1,          ID_HELP,                VIRTKEY 
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info über WaveGen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "WaveGen Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 1999",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_WAVE_PROPERTIES DIALOG DISCARDABLE  0, 0, 186, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wavedateien"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "11025",IDC_WAVE_FREQU0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,10,40,10
+    CONTROL         "22050",IDC_WAVE_FREQU1,"Button",BS_AUTORADIOBUTTON,71,
+                    10,40,10
+    CONTROL         "44100",IDC_WAVE_FREQU2,"Button",BS_AUTORADIOBUTTON,125,
+                    10,50,10
+    GROUPBOX        "Samplefrequenz [Hz]",IDC_STATIC,5,0,175,25,WS_GROUP
+    CONTROL         "8 Bit",IDC_WAVE_BITS0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,40,30,10
+    CONTROL         "16 Bit",IDC_WAVE_BITS1,"Button",BS_AUTORADIOBUTTON,71,
+                    40,37,10
+    GROUPBOX        "Speicherformat",IDC_STATIC,5,30,175,25,WS_GROUP
+    CONTROL         "Stereo",IDC_WAVE_STEREO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,138,40,37,10
+    CONTROL         "Mono linker Kanal",IDC_WAVE_INPUT0,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,122,73,10
+    CONTROL         "Mono rechter Kanal",IDC_WAVE_INPUT1,"Button",
+                    BS_AUTORADIOBUTTON,90,122,85,10
+    CONTROL         "Stereo",IDC_WAVE_INPUT2,"Button",BS_AUTORADIOBUTTON,10,
+                    132,37,10
+    CONTROL         "Stereo L/R vertauscht",IDC_WAVE_INPUT3,"Button",
+                    BS_AUTORADIOBUTTON,90,132,85,10
+    GROUPBOX        "Speicheroptionen",IDC_STATIC,5,60,175,103,WS_GROUP
+    LTEXT           "Maximalpegel L :",IDC_STATIC,10,76,55,8
+    EDITTEXT        IDC_WAVE_MAX_MAGNITUDE_L,71,74,34,12,ES_AUTOHSCROLL
+    LTEXT           "%",IDC_STATIC,108,76,12,8
+    EDITTEXT        IDC_WAVE_MAX_MAGNITUDE_DB_L,125,74,35,12,ES_AUTOHSCROLL
+    LTEXT           "dB",IDC_STATIC,162,76,13,8
+    LTEXT           "Maximalpegel R :",IDC_STATIC,10,91,55,8
+    EDITTEXT        IDC_WAVE_MAX_MAGNITUDE_R,71,89,34,12,ES_AUTOHSCROLL
+    LTEXT           "%",IDC_STATIC,108,95,12,8
+    EDITTEXT        IDC_WAVE_MAX_MAGNITUDE_DB_R,125,89,35,12,ES_AUTOHSCROLL
+    LTEXT           "dB",IDC_STATIC,162,91,13,8
+    CONTROL         "Links verpolt",IDC_WAVE_L_INV,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,147,61,10
+    CONTROL         "Rechts verpolt",IDC_WAVE_R_INV,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,90,147,85,10
+    DEFPUSHBUTTON   "OK",IDOK,10,170,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,125,170,50,12
+    CONTROL         "RMS-Pegel",IDC_WAVE_RMS_MAGNITUDE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,105,165,10
+END
+
+IDD_FILTER_PROPERTIES DIALOG DISCARDABLE  0, 0, 186, 215
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Filtereigenschaften"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_FILTER_TYPE,5,5,175,54,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Hochpass",IDC_STATIC,3,25,175,60
+    LTEXT           "Charakteristik :",IDC_STATIC,8,41,65,8
+    COMBOBOX        IDC_FILTER_CHARACTER_HP,82,38,91,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Ordnung :",IDC_STATIC,8,57,40,8
+    EDITTEXT        IDC_FILTER_ORDN_EDIT_HP,53,54,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_FILTER_ORDN_SPIN_HP,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,71,54,11,
+                    14
+    LTEXT           "Q-Faktor :",IDC_STATIC,88,57,40,8
+    EDITTEXT        IDC_FILTER_QFACTOR_HP,133,54,40,12,ES_AUTOHSCROLL
+    LTEXT           "untere Grenzfrequenz :",IDC_STATIC,8,71,74,8
+    EDITTEXT        IDC_FILTER_FRQ_HP,88,70,60,12,ES_AUTOHSCROLL
+    LTEXT           "Hz",IDC_STATIC,153,71,20,8
+    GROUPBOX        "Tiefpass",IDC_STATIC,5,90,175,61
+    LTEXT           "Charakteristik :",IDC_STATIC,10,103,65,8
+    COMBOBOX        IDC_FILTER_CHARACTER_TP,84,102,91,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Ordnung :",IDC_STATIC,10,119,40,8
+    EDITTEXT        IDC_FILTER_ORDN_EDIT_TP,55,118,20,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_FILTER_ORDN_SPIN_TP,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,75,117,
+                    11,14
+    LTEXT           "Q-Faktor :",IDC_STATIC,90,119,40,8
+    EDITTEXT        IDC_FILTER_QFACTOR_TP,135,118,40,12,ES_AUTOHSCROLL
+    LTEXT           "obere Grenzfrequenz :",IDC_STATIC,10,135,80,8
+    EDITTEXT        IDC_FILTER_FRQ_TP,90,134,60,12,ES_AUTOHSCROLL
+    LTEXT           "Hz",IDC_STATIC,155,135,20,8
+    GROUPBOX        "Bandpass",IDC_STATIC,5,155,175,40
+    LTEXT           "Bandbreitenfaktor :",IDC_STATIC,10,166,65,8
+    EDITTEXT        IDC_FILTER_BAND_WIDTH,90,164,60,12,ES_AUTOHSCROLL
+    LTEXT           "Mittenfrequenz :",IDC_STATIC,10,181,65,8
+    EDITTEXT        IDC_FILTER_FRQ_M,90,179,60,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,5,200,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,135,200,45,12
+END
+
+IDD_STANDARD_PROPERTIES DIALOG DISCARDABLE  0, 0, 186, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Grundeinstellungen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,39,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,130,39,50,12
+    LTEXT           "Ordnung für die FFT :",IDC_STATIC,5,6,80,8
+    LTEXT           "Anzahl der Werte :",IDC_STATIC,5,23,80,8
+    EDITTEXT        IDC_STD_ORDER,90,4,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_STD_NUM_OF_VAL,90,21,90,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    CONTROL         "Spin1",IDC_STD_ORDER_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_AUTOBUDDY | UDS_ARROWKEYS,125,3,11,
+                    14
+END
+
+IDD_PROGRESS_DLG DIALOG DISCARDABLE  0, 0, 186, 23
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Rechnung läuft !"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Progress",IDC_PROGRESS1,"msctls_progress32",PBS_SMOOTH | 
+                    WS_BORDER,5,3,175,14
+END
+
+IDD_CREATE_TIME_FUNC DIALOG DISCARDABLE  0, 0, 250, 132
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Funktion erstellen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,9,114,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,191,114,50,12
+    CONTROL         "Sinus",IDC_CF_R_SINE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_ICON | BS_PUSHLIKE | WS_GROUP,10,20,38,34
+    GROUPBOX        "Funktion",IDC_STATIC,5,5,240,57
+    CONTROL         "Rechteck",IDC_CF_R_RECT,"Button",BS_AUTORADIOBUTTON | 
+                    BS_ICON | BS_PUSHLIKE,60,20,38,34
+    CONTROL         "Dreieck",IDC_CF_R_TRIANGLE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_ICON | BS_PUSHLIKE,111,20,38,34
+    LTEXT           "T1 (%) :",IDC_STATIC,160,26,25,8
+    LTEXT           "T2 (%) :",IDC_STATIC,160,41,25,8
+    EDITTEXT        IDC_CF_EDT_T1,202,24,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CF_EDT_T2,202,39,38,12,ES_AUTOHSCROLL
+    LTEXT           "Frequenz [Hz] :",IDC_STATIC,45,81,50,8
+    EDITTEXT        IDC_CF_EDT_FRQ1,100,79,40,12,ES_AUTOHSCROLL
+    CONTROL         "Sweep",IDC_CF_CK_SWEEP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,65,38,10
+    RTEXT           "Periode [s]:",IDC_STATIC,155,81,40,8
+    EDITTEXT        IDC_CF_EDT_TG1,200,79,40,12,ES_AUTOHSCROLL
+    LTEXT           "Frequenz [Hz] :",IDC_STATIC,45,96,50,8
+    EDITTEXT        IDC_CF_EDT_FRQ2,100,94,40,12,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    RTEXT           "Periode [s]:",IDC_STATIC,155,96,40,8
+    EDITTEXT        IDC_CF_EDT_TG2,200,94,40,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "F/t A.:",IDC_STATIC,10,81,21,8
+    LTEXT           "F/t B.:",IDC_STATIC,10,96,21,8
+    EDITTEXT        IDC_CF_EDT_SWEEP_LENGTH,200,64,40,12,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    RTEXT           "Länge des Sweeps [s]:",IDC_STATIC,117,66,78,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_WAVE_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 65
+        VERTGUIDE, 71
+        VERTGUIDE, 90
+        VERTGUIDE, 105
+        VERTGUIDE, 108
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 160
+        VERTGUIDE, 162
+        VERTGUIDE, 175
+        VERTGUIDE, 180
+        HORZGUIDE, 15
+        HORZGUIDE, 25
+        HORZGUIDE, 30
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+        HORZGUIDE, 127
+        HORZGUIDE, 137
+        HORZGUIDE, 152
+        HORZGUIDE, 163
+        HORZGUIDE, 176
+    END
+
+    IDD_FILTER_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 55
+        VERTGUIDE, 75
+        VERTGUIDE, 84
+        VERTGUIDE, 90
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 150
+        VERTGUIDE, 155
+        VERTGUIDE, 175
+        VERTGUIDE, 180
+        HORZGUIDE, 11
+        HORZGUIDE, 25
+        HORZGUIDE, 43
+        HORZGUIDE, 59
+        HORZGUIDE, 75
+        HORZGUIDE, 86
+        HORZGUIDE, 90
+        HORZGUIDE, 109
+        HORZGUIDE, 125
+        HORZGUIDE, 140
+        HORZGUIDE, 150
+        HORZGUIDE, 155
+        HORZGUIDE, 170
+        HORZGUIDE, 185
+        HORZGUIDE, 195
+        HORZGUIDE, 206
+    END
+
+    IDD_STANDARD_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 85
+        VERTGUIDE, 90
+        VERTGUIDE, 125
+        VERTGUIDE, 180
+        HORZGUIDE, 10
+        HORZGUIDE, 27
+        HORZGUIDE, 45
+    END
+
+    IDD_PROGRESS_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 180
+        BOTTOMMARGIN, 22
+        HORZGUIDE, 10
+    END
+
+    IDD_CREATE_TIME_FUNC, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 30
+        HORZGUIDE, 45
+        HORZGUIDE, 54
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 120
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_FILTER_PROPERTIES DLGINIT
+BEGIN
+    IDC_FILTER_TYPE, 0x403, 9, 0
+0x6954, 0x6665, 0x6170, 0x7373, "\000" 
+    IDC_FILTER_TYPE, 0x403, 9, 0
+0x6f48, 0x6863, 0x6170, 0x7373, "\000" 
+    IDC_FILTER_TYPE, 0x403, 9, 0
+0x6142, 0x646e, 0x6170, 0x7373, "\000" 
+    IDC_FILTER_TYPE, 0x403, 14, 0
+0x6f52, 0x6173, 0x5220, 0x7561, 0x6373, 0x6568, 0x006e, 
+    IDC_FILTER_CHARACTER_HP, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_CHARACTER_HP, 0x403, 22, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6e65, 0x6474, 0x6de4, 
+0x6670, 0x0074, 
+    IDC_FILTER_CHARACTER_HP, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_CHARACTER_HP, 0x403, 14, 0
+0x7354, 0x6863, 0x6265, 0x7379, 0x6863, 0x6665, 0x0066, 
+    IDC_FILTER_CHARACTER_HP, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    IDC_FILTER_CHARACTER_TP, 0x403, 12, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x0068, 
+    IDC_FILTER_CHARACTER_TP, 0x403, 22, 0
+0x7542, 0x7474, 0x7265, 0x6f77, 0x7472, 0x2068, 0x6e65, 0x6474, 0x6de4, 
+0x6670, 0x0074, 
+    IDC_FILTER_CHARACTER_TP, 0x403, 7, 0
+0x6542, 0x7373, 0x6c65, "\000" 
+    IDC_FILTER_CHARACTER_TP, 0x403, 14, 0
+0x7354, 0x6863, 0x6265, 0x7379, 0x6863, 0x6665, 0x0066, 
+    IDC_FILTER_CHARACTER_TP, 0x403, 15, 0
+0x694c, 0x6b6e, 0x6977, 0x7a74, 0x522d, 0x6c69, 0x7965, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "Wave-Generator\n\nWave-Generator\nDateityp Wavespektrum (*.frq)\n.frq\nWave-Generator.Document\nWave-Generator Document"
+    IDR_MAINFRAME2          "Wave-Generator\n\nWave-Generator\nDateityp Wave (*.wav)\n.wav\nWave-Generator.Document\nWave-Generator Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "WaveGen"
+    AFX_IDS_IDLEMESSAGE     "Drücken Sie F1, um Hilfe zu erhalten."
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt, zu dem Sie Hilfe wünschen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+    ID_INDICATOR_KANA       "KAN"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt ein neues Dokument.\nNeu"
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter"
+    ID_FILE_PAGE_SETUP      "Ändert die Druckoptionen.\nSeite einrichten"
+    ID_FILE_PRINT_SETUP     "Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung"
+    ID_FILE_PRINT           "Druckt das aktive Dokument.\nDrucken"
+    ID_FILE_PRINT_PREVIEW   "Zeigt ganze Seiten an.\nSeitenansicht"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+    ID_APP_EXIT             "Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden"
+    ID_HELP_INDEX           "Öffnet die Hilfefunktion.\nHilfethemen"
+    ID_HELP_FINDER          "Listet die Hilfethemen auf.\nHilfethemen"
+    ID_HELP_USING           "Zeigt Anweisungen zum Umgang mit der Hilfe an.\nHilfe"
+    ID_CONTEXT_HELP         "Zeigt Hilfe zu angeklickten Schaltflächen, Menüs und Fenstern an.\nHilfe"
+    ID_HELP                 "Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "MMMMMMMMMMMMMMMMMM"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Beendet die Seitenansicht.\nSeitenansicht beenden"
+    IDS_WAVE_FILE_COMMENT   "%s, Sample Rate: %d, Kanaele: %d, Breite: %d"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CALC_FOURIER         "Berechnet die Fourierkoeffizienten"
+    ID_CALC_RANDOM          "Berechnet die Zeitfunktionswerte für die Wavedatei aus Zufallszahlen"
+    ID_CALC_RE_FOURIER      "Transformiert in den Zeitbereich zurück"
+    ID_OPTIONS_WAVEFILE     "Ändert die aktuellen Wavedateieinstellungen"
+    ID_OPTIONS_FILTER       "Ändert die Filterfunktionsparameter"
+    ID_VIEW_PLOT            "Zeigt die Kurven der aktuellen Berechnung an"
+    ID_FILE_SAVE_CURVE      "Speichert die aktuellen Kurven"
+    ID_CALC_RANDOM_FRQ      "Berechnet die Fourier Frequenzamplituden aus Zufallszahlen"
+    ID_VIEW_PLOTS           "Zeigt die aktuellen Ergebniskurven an"
+    ID_OPTIONS_STANDARD     "Ändert die Grundeinstellungen"
+    ID_FILE_LOAD_LEFTCURVE  "Lädt die linke Fourierkurve"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_LOAD_RIGHTCURVE "Lädt die rechte Fourierkurve"
+    ID_CALC_NORM_FRQ        "Frequenzwert mit Sinusanteil = 1"
+    ID_OPTIONS_FILTER_EDIT  "Erzeugt bzw. ändert eine beliebige Filterfunktion"
+    ID_CALC_CANCEL          "Bricht eine begonnene Berechnung ab"
+    ID_OPTIONS_MIRROR_FILE  "Spiegelt die Zeitwerte, so daß eine virtuell niedrigeren untere Grenzfrequenz entsteht"
+    ID_CALC_MULTIPLY_FILTER "Multipliziert die Fourierkoeffizienten mit der Filterfunktion"
+    ID_CALC_DIVIDE_FILTER   "Dividiert die Fourierkoeffizienten durch die Filterfunktion"
+    ID_CALC_ADD_FILTER      "Addiert die Fourierkoeffizienten zu der Filterfunktion"
+    ID_CALC_SUBTRACT_FILTER "Subtrahiert die Fourierkoeffizienten von der Filterfunktion"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\WaveGen.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#include "l.deu\afxprint.rc"        // Ressourcen für Drucken/Seitenansicht
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

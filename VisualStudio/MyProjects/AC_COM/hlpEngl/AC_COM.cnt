@@ -1,0 +1,108 @@
+:Base AC_COM.hlp
+:Title AC Communications Interface
+:Link ETS2DV.hlp           ; ETS2DView Help
+:Link AC_COM.hlp           ; AC_COM Help
+1 Menus and Commands
+2 Menu File=menu_file
+2 Menu Edit=menu_edit
+2 Menu View=menu_view
+2 Menu Options=menu_options
+2 Menu Help=menu_help
+2 System Menu=system_menu
+1 Functional Groups
+2 Basic AC Settings for Measurements=HIDC_AC_R_BASIC_AC_SETTINGS
+2 Extended AC Settings=HIDC_AC_R_EXTENDED_AC_SETTINGS
+2 Get AC Measurement Data=HIDC_AC_COMBO_MEASUREMENTS
+2 Communication via RS-232 (V24) Interface=HIDC_AC_COMBO_PORT
+1 AC Manual
+2 General
+3 Preface=man_pre
+3 The ‘AS-2' Concept for Stereo and Surround Systems=man_concept
+3 Introduction=man_intro
+3 Optimization of Speaker Positioning=man_loudspeaker_positioning
+2 Operating Instructions
+3 How to Exchange the Batteries=man_batteryexchange
+3 How to Switch the AC On/Off=man_switch_off
+3 Connection to the Computer=man_pc_conection
+3 Maintenace=man_maintenance
+3 Reset Function=man_reset_ac
+2 Menus
+3 Menu Structure=man_menu_structure
+3 Menu 1  - Control of Volume Level and Balance=man_volume_balance
+3 Menu 1  - Retrieval of Sound Settings (SCM)=man_sound_request
+3 Menu 1a - Remote Control of CD Players=man_remote_cd
+3 Menu 1b - Selecting Input Channels=man_select_input
+3 Menu 1c - Multi Room Functions=man_multi_room
+3 Menu 2a - SCM Programming=man_scm_prog
+3 Menu 2b - Sound Pressure Level Metering=man_sound_pressure_measure
+3 Menu 2b - Data Logger=man_data_logger
+3 Menu 2b - RT-60 Measurement=man_rt60_measure
+3 Menu 2b - Selftest=man_self_test
+3 Menu 2b - Auto Balance=man_auto_balance
+3 Menu 2b - Auto EQ=man_auto_eq
+3 Menu 2b - Auto Sound=man_auto_sound
+3 Menu 2b - Speaker Test=man_speaker_test
+3 Menu 3  - Basic Settings=man_basic_settings
+2 Technical Reference
+3 Technical Data=man_technical_data
+3 Accuracy of Frequency Response Measurements=man_accuracy_frq_rsp
+3 Accuracy (Microphone)=man_accuracy_micro
+1 ETS2DView
+2 General
+3 What is ETS2DView?=ABOUT_ETS2DVIEW@ETS2DV.hlp
+3 Help Topics=main_menu2D@ETS2DV.hlp
+2 Menus and Commands
+3 Menu File=menu_file2D@ETS2DV.hlp
+3 Menu Edit=menu_edit2D@ETS2DV.hlp
+3 Menu View=menu_view2D
+3 Menu Settings=menu_options2D@ETS2DV.hlp
+3 Menu Functions=menu_functions2D@ETS2DV.hlp
+3 Menu Operations=menu_operations2D@ETS2DV.hlp
+3 Menu Help=menu_help2D@ETS2DV.hlp
+3 System Menu=system_menu2D@ETS2DV.hlp
+3 Context Menu=context_menu2D@ETS2DV.hlp
+2 Contents of the Document
+3 Plot Structure
+4 Plot Structure=plot_structure@ETS2DV.hlp
+4 Heading=HID_PLOT_HEADING@ETS2DV.hlp
+4 Grid Lines=HID_PLOT_GRIDLINES@ETS2DV.hlp
+4 Grid Text=HID_PLOT_GRIDTEXT@ETS2DV.hlp
+4 Curve Texts=HID_PLOT_CURVETEXT@ETS2DV.hlp
+4 Axis Scaling=HID_PLOT_DIVISION@ETS2DV.hlp
+4 Units=HID_PLOT_UNITS@ETS2DV.hlp
+4 Number Representation=HID_PLOT_NUMBER@ETS2DV.hlp
+3 Curve Structure
+4 Curve Structure=curve_structure@ETS2DV.hlp
+4 Description=HID_CURVE_DESCRIPTION@ETS2DV.hlp
+4 Color and Thickness=HID_CURVE_COLOR@ETS2DV.hlp
+4 Units=HID_CURVE_UNITS@ETS2DV.hlp
+4 Further Curve Parameters=HID_CURVE_PARAMS@ETS2DV.hlp
+3 Working with Plots@ETS2DV.hlp
+4 Working with Plots=working_with_plots@ETS2DV.hlp
+4 Zooming with the Mouse=HID_FUNC_ZOOMMODE@ETS2DV.hlp
+4 Selection of Ranges from the Range List=HID_PLOT_ZOOMLISTFUNTIONS@ETS2DV.hlp
+4 The Property Page 'Range'=HIDD_PROPPAGE_PLOTRANGE@ETS2DV.hlp
+4 Plot Representation with Reference Curve=HID_PLOT_REFPRESENTATION@ETS2DV.hlp
+4 The Property Page 'Representation'=HIDD_PROPPAGE_PLOTVIEW@ETS2DV.hlp
+4 Plot Clipboard Formats=HID_PLOT_CLIPBOARDFORMATS@ETS2DV.hlp
+3 Working with Curves
+4 Working with Curves=working_with_curves@ETS2DV.hlp
+4 Import Curves=HID_FUNC_LOAD_CURVE@ETS2DV.hlp
+4 Creation of Import Macros=HID_FUNC_MAKROEDIT@ETS2DV.hlp
+4 The Property Page 'Color'=HIDD_PROPPAGE_CURVE_COLORS@ETS2DV.hlp
+4 Export Curves=HID_FUNC_SAVE_CURVE@ETS2DV.hlp
+4 How to edit Curves=HID_FUNC_EDITMODE@ETS2DV.hlp
+4 The Property Page 'Curves'=HIDD_PROPPAGE_CURVE@ETS2DV.hlp
+4 Moving Average Value=HID_OPERATION_AVERAGE@ETS2DV.hlp
+4 The Dialog 'Moving Average Value'=HIDD_AVERAGE@ETS2DV.hlp
+4 Interpolation=HID_OPERATION_SPLINE@ETS2DV.hlp
+4 The Dialog Box 'Spline Interpolation'=HIDD_SPLINECURVE@ETS2DV.hlp
+4 Differentiation=HID_OPERATION_DERIVE@ETS2DV.hlp
+4 The Dialog Box 'Curve Differentiation'=HIDD_DERIVE@ETS2DV.hlp
+4 Integration=HID_OPERATION_INTEGRATE@ETS2DV.hlp
+4 The Dialog 'Curve Integration'=HIDD_INTEGRATE@ETS2DV.hlp
+4 Curve Regression=HID_OPERATION_FITCURVE@ETS2DV.hlp
+4 The Dialog 'Curve Regression'=HIDD_FITCURVE@ETS2DV.hlp
+4 Creation of Curve=HID_OPERATION_CREATECURVE@ETS2DV.hlp
+4 The Dialog 'Create Curve'=HIDD_CREATECURVE@ETS2DV.hlp
+4 Curve Clipboard Format=HID_CURVE_CLIPBOARDFORMATS@ETS2DV.hlp

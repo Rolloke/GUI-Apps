@@ -1,0 +1,249 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_BIGICON             ICON    DISCARDABLE     "res\\BigIcon.ico"
+IDC_PHIRIGHT            ICON    DISCARDABLE     "res\\SOPHLEFT.ico"
+IDC_PHILEFT             ICON    DISCARDABLE     "res\\SOPHRIGHT.ico"
+IDC_PSILEFT             ICON    DISCARDABLE     "res\\SOPSLEFT.ico"
+IDC_PSIRIGHT            ICON    DISCARDABLE     "res\\SOPSRIGHT.ico"
+IDC_THETADOWN           ICON    DISCARDABLE     "res\\SOTHDOWN.ico"
+IDC_THETAUP             ICON    DISCARDABLE     "res\\SOTHUP.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SHOW_BOX DIALOGEX 0, 0, 130, 110
+STYLE DS_SETFOREGROUND | DS_3DLOOK | DS_CENTERMOUSE | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Ansicht der Lautsprecherbox"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "",IDC_PHIRIGHT,3,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PHILEFT,18,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETAUP,42,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETADOWN,57,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSIRIGHT,82,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSILEFT,97,95,15,15,BS_ICON
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,3,3,
+                    122,89,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SHOW_BOX, DIALOG
+    BEGIN
+        RIGHTMARGIN, 116
+        VERTGUIDE, 3
+        VERTGUIDE, 18
+        VERTGUIDE, 57
+        VERTGUIDE, 97
+        VERTGUIDE, 112
+        VERTGUIDE, 125
+        HORZGUIDE, 3
+        HORZGUIDE, 92
+        HORZGUIDE, 95
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PHIRIGHT            "Dreht den Lautsprecher um die vertikale Achse nach rechts."
+    IDC_PHILEFT             "Dreht den Lautsprecher um die vertikale Achse nach links."
+    IDC_THETAUP             "Neigt den Lautsprecher um die horizontale Achse nach hinten."
+    IDC_PSILEFT             "Kippt den Lautsprecher um 90° nach links."
+    IDC_PSIRIGHT            "Kippt den Lautsprecher um 90° nach rechts."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_THETADOWN           "Neigt den Lautsprecher um die horizontale Achse nach vorne."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TOPMOST             "Vordergrund"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SHOW_BOX DIALOGEX 0, 0, 116, 111
+STYLE DS_SETFOREGROUND | DS_3DLOOK | DS_CENTERMOUSE | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "3D View of Loudspeaker"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "",IDC_PHIRIGHT,3,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PHILEFT,18,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETAUP,42,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETADOWN,57,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSIRIGHT,82,95,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSILEFT,97,95,15,15,BS_ICON
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,3,3,
+                    109,89,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SHOW_BOX, DIALOG
+    BEGIN
+        VERTGUIDE, 3
+        VERTGUIDE, 18
+        VERTGUIDE, 57
+        VERTGUIDE, 97
+        VERTGUIDE, 112
+        HORZGUIDE, 3
+        HORZGUIDE, 92
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PHIRIGHT            "Turns the loudspeaker to the right."
+    IDC_PHILEFT             "Turns the loudspeaker to the left."
+    IDC_THETAUP             "Tilts the loudspeaker backwards."
+    IDC_PSILEFT             "Tips the loudspeaker by 90 degree to the left."
+    IDC_PSIRIGHT            "Tips the loudspeaker by 90 degree to the right."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_THETADOWN           "Tilts the loudspeaker forward."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TOPMOST             "Foreground"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

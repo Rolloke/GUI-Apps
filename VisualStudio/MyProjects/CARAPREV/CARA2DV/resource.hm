@@ -1,0 +1,60 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by CARA2DV.rc
+//
+#define HIDCANCEL                       0x807e0002    // IDD_MARKER_DLG
+#define HIDC_AVG_FREQU_NO_OF_STEPS      0x80dd04e0    // IDD_AVERAGE
+#define HIDC_AVG_FREQU_STEP             0x80dd04df    // IDD_AVERAGE
+#define HIDC_AVG_LOGTEXT1               0x80dd04e4    // IDD_AVERAGE
+#define HIDC_AVG_LOG_DIVIDER            0x80dd04e6    // IDD_AVERAGE
+#define HIDC_AVG_RANGE                  0x80dd04dd    // IDD_AVERAGE
+#define HIDC_AVG_R_LIN                  0x80dd04e8    // IDD_AVERAGE
+#define HIDC_AVG_R_LOG                  0x80dd04e9    // IDD_AVERAGE
+#define HIDC_AVG_R_LOG_FRQ              0x80dd04ea    // IDD_AVERAGE
+#define HIDC_AVG_UNITX                  0x80dd04e7    // IDD_AVERAGE
+#define HIDC_AVG_WHERE                  0x80dd04de    // IDD_AVERAGE
+#define HIDC_CALCULATE                  0x80dd04b6    // IDD_AVERAGE
+#define HIDC_CR_CALCULATE               0x80e304d1    // IDD_FITCURVE
+#define HIDC_CR_COMBO                   0x80e304ce    // IDD_FITCURVE
+#define HIDC_CR_DIFF                    0x80e304d2    // IDD_FITCURVE
+#define HIDC_CR_DIFF_STR                0x80e304d6    // IDD_FITCURVE
+#define HIDC_CR_FROM                    0x80e304d3    // IDD_FITCURVE
+#define HIDC_CR_FUNCTION_STR            0x80e304cf    // IDD_FITCURVE
+#define HIDC_CR_POLY_ORDN               0x80e304d0    // IDD_FITCURVE
+#define HIDC_CR_POLY_ORDN_STR           0x80e304d5    // IDD_FITCURVE
+#define HIDC_CR_TO                      0x80e304d4    // IDD_FITCURVE
+#define HIDC_CR_VARLIST                 0x80e304d8    // IDD_FITCURVE
+#define HIDC_FC_COMBO_RESULT_FKT        0x80e2050a    // IDD_CREATECURVE
+#define HIDC_FC_CURVELIST               0x80e204cc    // IDD_CREATECURVE
+#define HIDC_FC_ERROR                   0x80e204c6    // IDD_CREATECURVE
+#define HIDC_FC_FROM                    0x80e204c8    // IDD_CREATECURVE
+#define HIDC_FC_FUNCTION                0x80e204c4    // IDD_CREATECURVE
+#define HIDC_FC_LOGARITHMIC             0x80e204cd    // IDD_CREATECURVE
+#define HIDC_FC_NO_OF_VAL               0x80e204ca    // IDD_CREATECURVE
+#define HIDC_FC_RESULT_UNIT             0x80e204da    // IDD_CREATECURVE
+#define HIDC_FC_RUNVARSTR               0x80e204c7    // IDD_CREATECURVE
+#define HIDC_FC_RUNVAR_UNIT             0x80e204d9    // IDD_CREATECURVE
+#define HIDC_FC_TEST                    0x80e204c5    // IDD_CREATECURVE
+#define HIDC_FC_TO                      0x80e204c9    // IDD_CREATECURVE
+#define HIDC_FC_VARLIST                 0x80e204cb    // IDD_CREATECURVE
+#define HIDC_FILE_CK_SIGNED             0x807b0537    // IDD_READWAVEFILE
+#define HIDC_FILE_COMBO_FORMAT          0x807b0536    // IDD_READWAVEFILE
+#define HIDC_HIDE                       0x80dd04b5    // IDD_AVERAGE
+#define HIDC_MACRO_DELETE               0x80df0501    // IDD_CURVE_TEXT_MACRO [English (U.S.)]
+#define HIDC_MACRO_EDIT                 0x80df0502    // IDD_CURVE_TEXT_MACRO [English (U.S.)]
+#define HIDC_MACRO_LIST                 0x80df0503    // IDD_CURVE_TEXT_MACRO [English (U.S.)]
+#define HIDC_MACRO_NEW                  0x80df0500    // IDD_CURVE_TEXT_MACRO [English (U.S.)]
+#define HIDC_MACRO_SAVE                 0x80df0504    // IDD_CURVE_TEXT_MACRO [English (U.S.)]
+#define HIDC_NEW_NAME                   0x80dd04b1    // IDD_AVERAGE
+#define HIDC_NEW_NAME_STR               0x80e2050b    // IDD_CREATECURVE
+#define HIDC_PROGRESS                   0x80e204b4    // IDD_CREATECURVE
+#define HIDC_SPLINE_NUMSTEPS            0x80de04bb    // IDD_SPLINECURVE
+#define HIDC_SPLINE_RANGEX1             0x80de04bd    // IDD_SPLINECURVE
+#define HIDC_SPLINE_RANGEX2             0x80de04be    // IDD_SPLINECURVE
+#define HIDC_SPLINE_UNITX               0x80de04ba    // IDD_SPLINECURVE
+#define HIDC_STATIC                     0x80e2ffff    // IDD_CREATECURVE
+#define HIDC_STOP                       0x80dd04b7    // IDD_AVERAGE
+#define HIDC_WD_BLOCK_ALIGN             0x80e404f0    // IDD_SAVE_WAVE_CURVE [English (U.S.)]
+#define HIDC_WD_LEFT_CHANNEL            0x80e404ec    // IDD_SAVE_WAVE_CURVE [English (U.S.)]
+#define HIDC_WD_RIGHT_CHANNEL           0x80e404ed    // IDD_SAVE_WAVE_CURVE [English (U.S.)]
+#define HIDC_WD_SAMPLE_RATE             0x80e404f1    // IDD_SAVE_WAVE_CURVE [English (U.S.)]
+#define HIDOK                           0x80e60001    // IDD_REGISTERED

@@ -1,0 +1,59 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARABOX", "CARABOX.vcproj", "{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CDialog", "..\CDialog\CDialog.vcproj", "{21FBB698-9E46-468C-8080-FF726A7447DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cara3DTr", "..\Cara3DTr\Cara3DTr.vcproj", "{46D5EE97-807B-4FA6-8BE3-8792A7C97139}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ETS3DGL", "..\ETS3DGL\ETS3DGL.vcproj", "{F5575A7E-EA9D-4B29-B030-D71D6A20F696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug WinHelp|Win32 = Debug WinHelp|Win32
+		Debug|Win32 = Debug|Win32
+		Release WinHelp|Win32 = Release WinHelp|Win32
+		Release|Win32 = Release|Win32
+		ReleaseEngl|Win32 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Debug WinHelp|Win32.ActiveCfg = Debug|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Debug WinHelp|Win32.Build.0 = Debug|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Debug|Win32.Build.0 = Debug|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Release WinHelp|Win32.ActiveCfg = Release|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Release WinHelp|Win32.Build.0 = Release|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Release|Win32.ActiveCfg = Release|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.Release|Win32.Build.0 = Release|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+		{38D02BED-BF5A-4D3A-A251-3D2A0D52D0C7}.ReleaseEngl|Win32.Build.0 = ReleaseEngl|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Debug WinHelp|Win32.ActiveCfg = Debug WinHelp|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Debug WinHelp|Win32.Build.0 = Debug WinHelp|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Debug|Win32.Build.0 = Debug|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Release WinHelp|Win32.ActiveCfg = Release WinHelp|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Release WinHelp|Win32.Build.0 = Release WinHelp|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Release|Win32.ActiveCfg = Release|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.Release|Win32.Build.0 = Release|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.ReleaseEngl|Win32.ActiveCfg = Release|Win32
+		{21FBB698-9E46-468C-8080-FF726A7447DB}.ReleaseEngl|Win32.Build.0 = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Debug WinHelp|Win32.ActiveCfg = Debug|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Debug WinHelp|Win32.Build.0 = Debug|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Debug|Win32.ActiveCfg = Debug|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Debug|Win32.Build.0 = Debug|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Release WinHelp|Win32.ActiveCfg = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Release WinHelp|Win32.Build.0 = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Release|Win32.ActiveCfg = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.Release|Win32.Build.0 = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.ReleaseEngl|Win32.ActiveCfg = Release|Win32
+		{46D5EE97-807B-4FA6-8BE3-8792A7C97139}.ReleaseEngl|Win32.Build.0 = Release|Win32
+		{F5575A7E-EA9D-4B29-B030-D71D6A20F696}.Debug WinHelp|Win32.ActiveCfg = Debug|Win32
+		{F5575A7E-EA9D-4B29-B030-D71D6A20F696}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5575A7E-EA9D-4B29-B030-D71D6A20F696}.Release WinHelp|Win32.ActiveCfg = ReleaseEngl|Win32
+		{F5575A7E-EA9D-4B29-B030-D71D6A20F696}.Release|Win32.ActiveCfg = Release|Win32
+		{F5575A7E-EA9D-4B29-B030-D71D6A20F696}.ReleaseEngl|Win32.ActiveCfg = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

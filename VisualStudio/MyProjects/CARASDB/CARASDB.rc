@@ -1,0 +1,550 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SDB_IMAGES          BITMAP  DISCARDABLE     "res\\CaraSdb.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDC_PHIRIGHT            ICON    DISCARDABLE     "res\\SOPHLEFT.ico"
+IDC_PHILEFT             ICON    DISCARDABLE     "res\\SOPHRIGHT.ico"
+IDC_PSILEFT             ICON    DISCARDABLE     "res\\SOPSLEFT.ico"
+IDC_PSIRIGHT            ICON    DISCARDABLE     "res\\SOPSRIGHT.ico"
+IDC_THETADOWN           ICON    DISCARDABLE     "res\\SOTHDOWN.ico"
+IDC_THETAUP             ICON    DISCARDABLE     "res\\SOTHUP.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SELECT_BOX DIALOGEX 0, 0, 339, 205
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTERMOUSE | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Auswahl der Lautsprecherboxen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | SS_NOTIFY | 
+                    WS_BORDER,110,10,225,170,WS_EX_DLGMODALFRAME | 
+                    WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE
+    COMBOBOX        IDC_BOX_TYPE,5,10,100,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "BoxTree",IDC_BOX_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,5,30,100,170
+    PUSHBUTTON      "",IDC_PHIRIGHT,115,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PHILEFT,131,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETAUP,151,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETADOWN,167,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSIRIGHT,187,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSILEFT,203,185,15,15,BS_ICON
+    PUSHBUTTON      "Abbrechen",IDCANCEL,280,185,50,15
+    DEFPUSHBUTTON   "OK",IDOK,226,185,49,15
+    CTEXT           "Beschreibung",IDC_DESCRIPTION,110,1,225,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SELECT_BOX, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 330
+        VERTGUIDE, 335
+        HORZGUIDE, 5
+        HORZGUIDE, 10
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+        HORZGUIDE, 200
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT_SPEAKER MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Material &einstellen...",     IDM_SELECTMATERIAL
+        MENUITEM "Material l&öschen",           IDM_DELETEMATERIAL
+        MENUITEM SEPARATOR
+        MENUITEM "&Hauptlautsprecher",          IDM_MAIN_SPEAKER
+        MENUITEM "&Centerlautsprecher vorne",   IDM_CENTER_SPEAKER_F
+        MENUITEM "&Centerlautsprecher hinten",  IDM_CENTER_SPEAKER_R
+        MENUITEM "&Effektlautsprecher",         IDM_EFFECT_SPEAKER
+        MENUITEM SEPARATOR
+        MENUITEM "A&bbrechen",                  IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_DELETE_BOXFILE MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Lautsprecher löschen",       IDM_DELETE_BOX_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "A&bbrechen",                  IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_TREEVIEW MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM SEPARATOR
+        MENUITEM "&Lautsprecher importieren",   IDM_LOAD_BOXFILES
+        MENUITEM "Lautsprecher downloaden",     IDM_BOX_FROM_INTERNET
+        MENUITEM "&Datenbank aktualisieren",    IDM_UPDATE_DATABASE
+        MENUITEM SEPARATOR
+        MENUITEM "A&bbrechen",                  IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_PURGE_CR MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Zuordnung löschen",          IDM_PURGE_CROSS_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "A&bbrechen",                  IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_DELETE_BOXFILE1 MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Material &einstellen...",     IDM_SELECTMATERIAL
+        MENUITEM "Material l&öschen",           IDM_DELETEMATERIAL
+        MENUITEM "&Lautsprecher löschen",       IDM_DELETE_BOX_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "A&bbrechen",                  IDM_CANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MAIN_SPEAKER        "Hauptlautsprecher"
+    IDS_CENTER_SPEAKER_F    "Centerlautsprecher vorne"
+    IDS_EFFECT_SPEAKER      "Effektlautsprecher"
+    IDS_SAT_SUB_SYSTEM      "Satelliten-Subwoofer-Systeme"
+    IDS_ADD_ON_SPEAKER      "Zusatzlautsprecher"
+    IDS_ALL_UNITS           "Beschallungslautsprecher"
+    IDS_BOXFILE_ERROR       "Fehler in der Lautsprecherdatei !\nSoll die Datei gelöscht werden ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PURGE_CROSS_REFERENCE "Zuordnung löschen"
+    IDS_UPDATE_DATA_BASE    "Aktualisiere Lautsprecherdatenbank"
+    IDS_NO_CROSS_REFERENCE_H "Die Satelliten sind noch nicht spezifiziert !"
+    IDS_NO_CROSS_REFERENCE_T 
+                            "Ordnen Sie den Satelliten in diesem System mit\nHilfe des \tKontextmenues (rechte Maustaste)\nihre Funktion (Haupt, Center, Effekt) in der\nLautsprecher-Konfiguration zu."
+    IDS_MASTER_ERROR_H      "Fehler im Satelliten-Subwoofer-System !"
+    IDS_MASTER_ERROR_T      "Soll das Satelliten-Subwoofer-System gelöscht werden ?\nBei ""Nein"" versucht CARA das System zu reparieren.\n\nDatei : "
+    IDS_LOAD_BOX_TITLE      "Importieren von Lautsprecherdateien"
+    IDS_LOAD_BOX_FILTER     "Lautsprecherdateien (*.BDD)\n*.BDD\n\n"
+    IDS_LOAD_BOX_FILES      "Kopiere Lautsprecherdatei(en)"
+    IDS_MANUFACTURER_INFO   "\tHersteller : %s\n\tLautsprecher : %d"
+    IDS_SELECT_LS_MATERIAL  "!Material für Lautsprecherbox"
+    IDS_LOAD_BOX_FILTER2    "Lautsprecherdateien (*.BDD)\n*.BDD\nLautsprecherdateien (*.ZIP)\n*.ZIP\n\n"
+    IDS_LOUDSPEAKER_HELPTEXT 
+                            "\tName : %s,\n\tBeschreibung : %s\n%s : %s\n\tTyp : %s"
+    IDS_DELETE_FILES        "Zip-Dateien nach dem Entpacken löschen !"
+    IDS_CENTER_SPEAKER_R    "Centerlautsprecher hinten"
+    IDS_MANUFACTURER        "\tHersteller"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BOX_TREE            "Listet die Lautsprecher nach Herstellern und Benutzerdefinitionen geordnet auf."
+    IDC_BOX_TYPE            "Listet die Lautsprechertypen auf, die in der Strukturansicht\nalphabetisch, nach Herstellern und Benutzerdefinitionen geordnet, dargestellt werden."
+    IDC_DESCRIPTION         "Zeigt eine kurze Beschreibung des Lautsprechers."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PHIRIGHT            "Dreht den Lautsprecher um die vertikale Achse nach rechts."
+    IDC_PHILEFT             "Dreht den Lautsprecher um die vertikale Achse nach links."
+    IDC_THETAUP             "Neigt den Lautsprecher um die horizontale Achse nach hinten."
+    IDC_PSILEFT             "Kippt den Lautsprecher um 90° nach links."
+    IDC_PSIRIGHT            "Kippt den Lautsprecher um 90° nach rechts."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_THETADOWN           "Neigt den Lautsprecher um die horizontale Achse nach vorn."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDOK                "Schließt dieses Dialogfeld und speichert\nalle vorgenommenen Änderungen."
+    IDS_IDCANCEL            "Schließt dieses Dialogfeld ohne Ihre\nÄnderungen zu speichern."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LS_TYPE_NONAME      "Noname"
+    IDS_LS_TYPE_MANUFACTURER "Hersteller"
+    IDS_LS_TYPE_USER_DEFINED "Selbst erstellter Lautsprecher"
+    IDS_LS_TYPE_BOX         "Allgemeiner Lautsprecher"
+    IDS_LS_TYPE_SLAVES      "Satellit"
+    IDS_LS_TYPE_SLAVES_MAIN "Hauptlautsprecher (Satellit)"
+    IDS_LS_TYPE_SLAVES_CENTER "Centerlautsprecher vorne (Satellit)"
+    IDS_LS_TYPE_SLAVES_CENTER2 "Centerlautsprecher hinten (Satellit)"
+    IDS_LS_TYPE_SLAVES_EFFECT "Effektlautsprecher (Satellit)"
+    IDS_LS_TYPE_USER_BOX    "Selbst erstellter Lautsprecher"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LS_TYPE_STAND_ALONE "Unabhängiger Lausprecher"
+    IDS_LS_TYPE_STAND_MASTER "Subwoofer (Sat-Sub-System)"
+    IDS_LS_TYPE_STAND_PSEUDO_MASTER "Subwoofer (Sat-Sub-System) *"
+    IDS_LS_TYPE_SLAVE       "Satellit"
+    IDS_LS_TYPE_ADD_ON1     "Subwoofer"
+    IDS_LS_TYPE_ADD_ON2     "Mitteltoneinheit"
+    IDS_LS_TYPE_ADD_ON      "Zusatz Hochtöner"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_USE_AS              "\tVerwendung"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SELECT_BOX DIALOGEX 0, 0, 339, 207
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTERMOUSE | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Selection of Loudspeakers"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_BOX_TYPE,5,10,100,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "BoxTree",IDC_BOX_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,5,30,100,170
+    PUSHBUTTON      "",IDC_PHIRIGHT,115,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PHILEFT,131,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETAUP,151,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_THETADOWN,167,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSIRIGHT,187,185,15,15,BS_ICON
+    PUSHBUTTON      "",IDC_PSILEFT,203,185,15,15,BS_ICON
+    PUSHBUTTON      "Cancel",IDCANCEL,280,185,50,15
+    DEFPUSHBUTTON   "OK",IDOK,226,185,49,15
+    CONTROL         "",IDC_BOX_VIEW,"Static",SS_BLACKFRAME | WS_BORDER,110,
+                    10,225,170,WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | 
+                    WS_EX_CLIENTEDGE
+    CTEXT           "Description",IDC_DESCRIPTION,110,1,225,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SELECT_BOX, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 115
+        VERTGUIDE, 330
+        VERTGUIDE, 335
+        HORZGUIDE, 5
+        HORZGUIDE, 10
+        HORZGUIDE, 180
+        HORZGUIDE, 185
+        HORZGUIDE, 200
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT_DELETE_BOXFILE MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Delete Loudspeaker",         IDM_DELETE_BOX_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_DELETE_BOXFILE1 MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Select Material...",         IDM_SELECTMATERIAL
+        MENUITEM "&Delete Material",            IDM_DELETEMATERIAL
+        MENUITEM "Delete &Loudspeaker",         IDM_DELETE_BOX_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_PURGE_CR MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Delete Assignment",          IDM_PURGE_CROSS_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_SPEAKER MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Select Material...",         IDM_SELECTMATERIAL
+        MENUITEM "&Delete Material",            IDM_DELETEMATERIAL
+        MENUITEM SEPARATOR
+        MENUITEM "&Main Speaker",               IDM_MAIN_SPEAKER
+        MENUITEM "Ce&nter Speaker Front",       IDM_CENTER_SPEAKER_F
+        MENUITEM "Ce&nter Speaker Rear",        IDM_CENTER_SPEAKER_R
+        MENUITEM "&Effect Speaker",             IDM_EFFECT_SPEAKER
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDM_CANCEL
+    END
+END
+
+IDR_CONTEXT_TREEVIEW MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM SEPARATOR
+        MENUITEM "&Import Loudspeaker Files",   IDM_LOAD_BOXFILES
+        MENUITEM "&Download Loudspeaker Files", IDM_BOX_FROM_INTERNET
+        MENUITEM "&Update Data Base",           IDM_UPDATE_DATABASE
+        MENUITEM SEPARATOR
+        MENUITEM "&Cancel",                     IDM_CANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MAIN_SPEAKER        "Main Speaker"
+    IDS_CENTER_SPEAKER_F    "Center Speaker Front"
+    IDS_EFFECT_SPEAKER      "Effect Speaker"
+    IDS_SAT_SUB_SYSTEM      "Satellite Subwoofer Systems"
+    IDS_ADD_ON_SPEAKER      "Add-On Loudspeaker"
+    IDS_ALL_UNITS           "Public-Address Speakers"
+    IDS_BOXFILE_ERROR       "Error in loudspeaker file !\nDo you want to delete this file?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PURGE_CROSS_REFERENCE "Delete assignment"
+    IDS_UPDATE_DATA_BASE    "Update loudspeaker data base"
+    IDS_NO_CROSS_REFERENCE_H "The satellites are not yet specified!"
+    IDS_NO_CROSS_REFERENCE_T 
+                            "Use the context menu to assign the selected satellite\na function (Main, Center, Effect) in the configuration."
+    IDS_MASTER_ERROR_H      "Error in Satellite Subwoofer System !"
+    IDS_MASTER_ERROR_T      "Do you want to delete this satellite subwoofer system ?\nIf you choose ""No"", CARA will try to repair the system.\n\nFile : "
+    IDS_LOAD_BOX_TITLE      "Importing loudspeaker files"
+    IDS_LOAD_BOX_FILTER     "Loudspeaker Files (*.BDD)\n*.BDD\n\n"
+    IDS_LOAD_BOX_FILES      "Copy loudspeaker file(s)"
+    IDS_MANUFACTURER_INFO   "\tManufacturer : %s\n\tLoudspeaker : %d"
+    IDS_SELECT_LS_MATERIAL  "!Material for Loudspeaker"
+    IDS_LOAD_BOX_FILTER2    "Loudspeaker Files (*.BDD)\n*.BDD\nLoudspeaker Files (*.ZIP)\n*.ZIP\n\n"
+    IDS_LOUDSPEAKER_HELPTEXT 
+                            "\tName : %s,\n\tDescription:%s\n \t%s: %s\n\tType : %s"
+    IDS_DELETE_FILES        "Delete Zip-Files after inflating !"
+    IDS_CENTER_SPEAKER_R    "Center Speaker Rear"
+    IDS_MANUFACTURER        "\tManufacturer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BOX_TREE            "Lists the loudspeakers ordered according to manufacturers and user groups."
+    IDC_BOX_TYPE            "Lists the loudspeaker types, which in the structural view are ordered\nalphabetically and according to manufacturers and user groups."
+    IDC_DESCRIPTION         "Shows a short description of the loudspeaker."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PHIRIGHT            "Turns the loudspeaker right around the vertical axis."
+    IDC_PHILEFT             "Turns the loudspeaker left around the vertical axis."
+    IDC_THETAUP             "Tips the loudspeaker backwards around the horizontal axis."
+    IDC_PSILEFT             "Tilts the loudspeaker to the left by 90 deg."
+    IDC_PSIRIGHT            "Tilts the loudspeaker to the right by 90 deg."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_THETADOWN           "Tips the loudspeaker forwards around the horizontal axis."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_IDOK                "Closes the dialog and saves all the modifications."
+    IDS_IDCANCEL            "Closes the dialog without saving the modifications"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LS_TYPE_NONAME      "Noname"
+    IDS_LS_TYPE_MANUFACTURER "Manufacturer"
+    IDS_LS_TYPE_USER_DEFINED "Self made"
+    IDS_LS_TYPE_BOX         "General Loudspeaker"
+    IDS_LS_TYPE_SLAVES      "Satelite"
+    IDS_LS_TYPE_SLAVES_MAIN "Main (Satelite)"
+    IDS_LS_TYPE_SLAVES_CENTER "Center front (Satelite)"
+    IDS_LS_TYPE_SLAVES_CENTER2 "Center rear (Satelite)"
+    IDS_LS_TYPE_SLAVES_EFFECT "Effekt (Satelite)"
+    IDS_LS_TYPE_USER_BOX    "Self made Loudspeaker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LS_TYPE_STAND_ALONE "Independent Loudspeaker"
+    IDS_LS_TYPE_STAND_MASTER "Subwoofer (Sat-Sub-System)"
+    IDS_LS_TYPE_STAND_PSEUDO_MASTER "Subwoofer (Sat-Sub-System) *"
+    IDS_LS_TYPE_SLAVE       "Satelite"
+    IDS_LS_TYPE_ADD_ON1     "Subwoofer"
+    IDS_LS_TYPE_ADD_ON2     "Midrange unit"
+    IDS_LS_TYPE_ADD_ON      "Additional Tweeter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_USE_AS              "\tUsage"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

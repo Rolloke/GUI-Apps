@@ -1,0 +1,1751 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "Version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ETS3DGLDLG.ico"
+IDR_MAINFRAME1          ICON    DISCARDABLE     "res\\idr_main.ico"
+IDR_MAINFRAME2          ICON    DISCARDABLE     "res\\ico00001.ico"
+IDR_MAINFRAME3          ICON    DISCARDABLE     "res\\ico00002.ico"
+IDR_MAINFRAME4          ICON    DISCARDABLE     "res\\ico00003.ico"
+IDR_MAINFRAME5          ICON    DISCARDABLE     "res\\ico00004.ico"
+IDR_MAINFRAME6          ICON    DISCARDABLE     "res\\ico00005.ico"
+IDR_MAINFRAME7          ICON    DISCARDABLE     "res\\ico00006.ico"
+IDR_MAINFRAME8          ICON    DISCARDABLE     "res\\ico00007.ico"
+IDR_MAINFRAME9          ICON    DISCARDABLE     "res\\ico00008.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""Version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ETS3DGLDLG_DIALOG DIALOGEX 0, 0, 204, 255
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS3DGL Einstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "BugFixes für verschiedene Graphiktreiber",IDC_STATIC,5,
+                    5,194,120
+    CONTROL         "Normalenvektoren für jeden Vertex erzeugen.",
+                    IDC_BUGFIX_NORMALVECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,18,179,10
+    CONTROL         "Fenster verschieben.",IDC_BUGFIX_MOVEWINDOW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,30,95,10
+    CONTROL         "Maximale Puffergröße initialisieren.",
+                    IDC_BUGFIX_BUFFERSIZE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,42,140,10
+    CONTROL         "Licht ändern ohne Texturen.",IDC_BUGFIX_LIGHTTEXTURE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,54,120,10
+    GROUPBOX        "Ausgabe der Materialpolygone ",IDC_STATIC,5,95,194,30
+    LTEXT           "Offset:",IDC_STATIC,15,109,30,8
+    EDITTEXT        IDC_POLYGON_OFFSET,50,107,15,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Faktor:",IDC_STATIC,75,109,30,8
+    EDITTEXT        IDC_POLYGON_FACTOR,110,107,25,12,ES_AUTOHSCROLL
+    GROUPBOX        "Raum und Lautsprecheransicht (CARACAD)",IDC_STATIC,5,
+                    130,194,40
+    CONTROL         "Hardwarebeschleunigung",IDC_CARAWALK_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,140,100,10
+    CONTROL         "Hardwarebeschleunigung",IDC_ETS3DV_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,185,100,10
+    PUSHBUTTON      "Hilfe",ID_HELP,155,219,45,12
+    DEFPUSHBUTTON   "OK",IDOK,5,239,60,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,72,239,60,12
+    PUSHBUTTON      "Standard",IDC_DEFAULT,55,219,45,12
+    COMBOBOX        IDC_BUGFIX_BUFFER,110,79,84,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Puffereinstellungen",IDC_STATIC,15,81,90,8
+    PUSHBUTTON      "Report...",IDC_REPORT,5,219,45,12
+    GROUPBOX        "Ergebnisdarstellung (ETS3DVIEW)",IDC_STATIC,5,175,194,
+                    40
+    CONTROL         "Bitmap Rendern",IDC_CARAWALK_BMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,155,95,10
+    CONTROL         "Bitmap Rendern",IDC_ETS3DV_BMP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,200,95,10
+    CONTROL         "Doppel Graphikpuffer",IDC_CARAWALK_DOUBLE_BUFFER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,155,84,10
+    CONTROL         "Doppel Graphikpuffer",IDC_ETS3DV_DOUBLE_BUFFER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,200,84,10
+    EDITTEXT        IDC_PIXELFORMAT,155,41,39,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Pixelformat:",IDC_PIXELFORMAT_TXT,155,31,39,8
+    CONTROL         "Schatten",IDC_CARAWALK_SHADOWS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,140,84,10
+    PUSHBUTTON      "Übernehmen",IDC_APPLY,139,239,60,12
+    CONTROL         "3D Graphik immer neu initialisieren.",
+                    IDC_BUGFIX_INIT_ALWAYS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,66,120,10
+    PUSHBUTTON      "Info",IDC_INFO,105,219,45,12
+    EDITTEXT        IDC_INFO_TEXT,5,5,194,211,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE | 
+                    WS_VSCROLL
+END
+
+IDD_CARAWALK_DLG DIALOGEX 0, 0, 205, 231
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "CARAWALK Einstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Anzahl der Bits für den Farbpuffer",IDC_STATIC,10,6,106,
+                    8
+    EDITTEXT        IDC_COLOR_BITS,170,4,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Anzahl der Bits für den Z-Puffer",IDC_STATIC,10,21,99,8
+    EDITTEXT        IDC_DEPTH_BITS,170,19,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Anzahl der Bits für den Stencil-Puffer",IDC_STATIC,10,
+                    36,116,8
+    EDITTEXT        IDC_STENCIL_BITS,170,34,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Anzahl der Bits für den Alpha-Puffer",IDC_STATIC,10,51,
+                    112,8
+    EDITTEXT        IDC_ALPHA_BITS,170,49,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Anzahl der Bits für den Acumulation-Puffer",IDC_STATIC,
+                    10,66,133,8
+    EDITTEXT        IDC_ACCUM_BITS,170,64,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Bildwiederholungzeit [ms]",IDC_STATIC,10,80,80,8
+    EDITTEXT        IDC_REFRESH_TIME,170,78,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    DEFPUSHBUTTON   "OK",IDOK,10,213,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,145,213,50,14
+    LTEXT           "Öffnungswinkel für perspektivische Darstellung",
+                    IDC_STATIC,10,111,155,8
+    EDITTEXT        IDC_PERSPECTIVE_ANGLE,170,109,24,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    PUSHBUTTON      "Umgebung",IDC_TEX_AMBIENT,10,142,60,12
+    GROUPBOX        "Material / Beleuchtungsparameter bei Texturdarstellung",
+                    IDC_STATIC,5,130,195,75
+    PUSHBUTTON      "Diffus",IDC_TEX_DIFFUSE,72,142,60,12
+    PUSHBUTTON      "Reflektion",IDC_TEX_SPECULAR,134,142,60,12
+    CONTROL         "Software Beschleunigung",IDC_GENERIC_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,97,10
+    LTEXT           "Helligkeitsbereich des Texturfarbmittelwertes :\n(Standardwert: 0,2 bis 0,7)",
+                    IDC_STATIC,10,158,155,19
+    EDITTEXT        IDC_AVG_COL_FROM,170,159,24,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AVG_COL_TO,170,171,24,12,ES_AUTOHSCROLL
+    LTEXT           "Faktor für die Umgebungslichkomponente desTexturfarbmittelwertes",
+                    IDC_STATIC,10,185,155,18
+    EDITTEXT        IDC_AMBIENT_COL_FACTOR,170,189,24,12,ES_AUTOHSCROLL
+END
+
+IDD_REPORT_DLG DIALOGEX 0, 0, 160, 159
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Debug Report für ETS Module"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "ETS2DVIEW 2D-Darstellung",IDC_REPORT_ETS2DVIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,5,140,10
+    CONTROL         "ETS3DVIEW 3D-Darstellung",IDC_REPORT_ETS3DVIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,20,140,10
+    CONTROL         "ETS3DGL 3D-Grafik-Basismodul",IDC_REPORT_ETS3DGL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,35,140,10
+    CONTROL         "ETSPRTD Druckerdialog",IDC_REPORT_ETSPRTD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,50,140,10
+    CONTROL         "CARAWALK Raumwanderer",IDC_REPORT_CARAWALK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,65,140,10
+    DEFPUSHBUTTON   "OK",IDOK,10,143,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,100,143,50,14
+    CONTROL         "CARASDB Lautsprecherdatenbank",IDC_REPORT_CARASDB,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,80,140,10
+    CONTROL         "CARABOX Lautsprechereditor",IDC_REPORT_CARABOX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,140,10
+    CONTROL         "ETSCDPL Multimedia Player",IDC_REPORT_ETSCDPL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,110,140,10
+    CONTROL         "AC_COM Mess Schnittstelle",IDC_REPORT_AC_COM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,125,140,10
+END
+
+IDD_PATH_DLG DIALOGEX 0, 0, 250, 100
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Pfade für die ETS-Module"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_DLL_PATH,7,14,221,12,ES_AUTOHSCROLL
+    PUSHBUTTON      ">...",IDC_SEARCH_PATH,228,14,16,12
+    GROUPBOX        "Einstellen der Dll-Pfade in der Registry",IDC_STATIC,2,
+                    0,246,50
+    CONTROL         "Standard",IDC_R_PATH0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,7,33,48,10
+    CONTROL         "Debug",IDC_R_PATH1,"Button",BS_AUTORADIOBUTTON,60,33,42,
+                    10
+    CONTROL         "Release (deu.)",IDC_R_PATH2,"Button",BS_AUTORADIOBUTTON,
+                    108,33,62,10
+    CONTROL         "Release (engl.)",IDC_R_PATH3,"Button",
+                    BS_AUTORADIOBUTTON,175,33,69,10
+    DEFPUSHBUTTON   "OK",IDOK,7,84,70,12,WS_GROUP
+    PUSHBUTTON      "Abbrechen",IDCANCEL,170,84,74,12
+    CONTROL         "Anwendungen debuggen (Debug Dll´s immer verwenden)",
+                    IDC_CK_DEBUG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,55,
+                    237,10
+    CONTROL         "Nur Lokale Dll´s verwenden (kein gemeinsamer Pfad)",
+                    IDC_CK_NO_DLLPATH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    7,70,237,10
+END
+
+IDD_PRESENTATION_DLG DIALOGEX 0, 0, 225, 175
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Darstellungseigenschaften der Module"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,10,159,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,165,159,50,12
+    CONTROL         "Icons im Menü anzeigen =>  Breite des Menüs [%] :",
+                    IDC_2DV_MENU_BMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,20,175,10
+    CONTROL         "Icons im Menü anzeigen =>  Breite des Menüs [%] :",
+                    IDC_3DV_MENU_BMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,70,175,10
+    GROUPBOX        "ETS2DVIEW",IDC_STATIC,5,5,215,50
+    EDITTEXT        IDC_2DV_MENU_SCALE,190,19,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_3DV_MENU_SCALE,190,69,25,12,ES_AUTOHSCROLL
+    CONTROL         "Füllen der Polygone",IDC_FILL_PATH,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,120,205,10
+    PUSHBUTTON      "Standard",IDC_DEFAULT,69,159,50,12
+    GROUPBOX        "ETS3DVIEW",IDC_STATIC,5,55,215,50
+    GROUPBOX        "ETS2DVIEW und ETS3DVIEW",IDC_STATIC,5,105,215,50
+    LTEXT           "Anzahl der zuletzt geöffneten Dateien im Menü 'Datei' :",
+                    IDC_STATIC,10,36,175,8
+    EDITTEXT        IDC_2DV_MENU_RECENT_FILES,190,34,25,12,ES_AUTOHSCROLL
+    LTEXT           "Anzahl der zuletzt geöffneten Dateien im Menü 'Datei' :",
+                    IDC_STATIC,10,86,175,8
+    EDITTEXT        IDC_3DV_MENU_RECENT_FILES,190,84,25,12,ES_AUTOHSCROLL
+    LTEXT           "Offsetkorrektur für Drucker (x, y) [mm]:",IDC_STATIC,10,
+                    136,140,8
+    EDITTEXT        IDC_2_3DV_PRINTER_OFFSET_X,160,134,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_2_3DV_PRINTER_OFFSET_Y,190,134,25,12,ES_AUTOHSCROLL
+END
+
+IDD_COPY_FOLDER DIALOGEX 0, 0, 250, 250
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS-Sicherung für die Projekte"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Einstellungen",IDC_STATIC,5,5,240,225
+    LTEXT           "Quellordner :",IDC_STATIC,10,16,50,8
+    EDITTEXT        IDC_CPF_SOURCE_PATH,70,14,155,12,ES_AUTOHSCROLL
+    PUSHBUTTON      ">...",IDC_CPF_SEARCH_SOURCE_PATH,225,14,15,12
+    LTEXT           "Zielordner :",IDC_STATIC,10,31,50,8
+    EDITTEXT        IDC_CPF_DESTINATION_PATH,70,29,155,12,ES_AUTOHSCROLL
+    PUSHBUTTON      ">...",IDC_CPF_SEARCH_DESTINATION_PATH,225,29,15,12
+    PUSHBUTTON      "Dateityp(en) :",IDC_BTN_FILES,10,44,50,12,BS_LEFT | 
+                    BS_FLAT
+    COMBOBOX        IDC_CPF_INCLUDES,70,44,170,139,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Nur neuere Dateien kopieren",IDC_CPF_COPY_ONLY_NEWER,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    10,60,115,10
+    CONTROL         "Verzeichnisse erstellen",IDC_CPF_COPY_CREATE_DIR,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,135,60,105,10
+    CONTROL         "In ein Verzeichniss kopieren",IDC_CPF_COPY_IN_ONE_DIR,
+                    "Button",BS_AUTORADIOBUTTON,135,70,105,10
+    EDITTEXT        IDC_LOG_WINDOW,10,85,230,140,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_WANTRETURN | WS_VSCROLL | WS_GROUP
+    LTEXT           "Ergebnis :",IDC_STATIC,10,75,50,8
+    DEFPUSHBUTTON   "OK",IDOK,5,234,60,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,185,234,60,12
+    PUSHBUTTON      "Kopieren",IDC_COPY,89,234,60,12
+END
+
+IDD_MATERIAL_CMP DIALOGEX 0, 0, 250, 145
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_NOFAILCREATE | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Materialeigenschaften für die 3D-Darstellung"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Speichern",IDOK,5,129,50,12
+    DEFPUSHBUTTON   "Löschen",IDCANCEL,195,129,50,12,0,0,HIDCANCEL
+    CONTROL         "Rand",IDC_BORDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    5,35,45,10
+    CONTROL         "Automatische Texturkoordinaten",IDC_GENERATE_TEX_COORD,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,20,120,10
+    LTEXT           "Skalierungsfaktor :",IDC_STATIC,125,21,70,8
+    EDITTEXT        IDC_SCALEFACTOR_S,199,19,22,12,ES_AUTOHSCROLL
+    LTEXT           "Glanzexponent (0,...128):",IDC_STATIC,125,36,85,8
+    EDITTEXT        IDC_SHININESS,215,34,30,12,ES_AUTOHSCROLL
+    LTEXT           "Lichtkomponenten (0,..1)",IDC_STATIC,5,51,86,8
+    CTEXT           "Rot",IDC_STATIC,85,51,35,8
+    CTEXT           "Grün",IDC_STATIC,125,51,35,8
+    CTEXT           "Blau",IDC_STATIC,165,51,35,8
+    CTEXT           "Alpha",IDC_STATIC,215,51,30,8
+    EDITTEXT        IDC_ALPHA_AMBIENT,210,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_DIFFUSE,210,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_SPECULAR,210,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_EMISSION,210,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_AMBIENT,85,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_DIFFUSE,85,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_SPECULAR,85,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_EMISSION,85,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_AMBIENT,125,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_DIFFUSE,125,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_SPECULAR,125,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_EMISSION,125,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_AMBIENT,165,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_DIFFUSE,165,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_SPECULAR,165,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_EMISSION,165,108,35,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Randfarbe",IDC_BORDER_COLOR,58,34,50,12
+    PUSHBUTTON      "Umgebungslicht :",IDC_AMBIENT_LIGHT,5,64,65,12,BS_LEFT
+    PUSHBUTTON      "Diffuses Licht :",IDC_DIFFUSE_LIGHT,5,79,65,12,BS_LEFT
+    PUSHBUTTON      "Reflektiertes Licht :",IDC_SPECULAR_LIGHT,5,94,65,12,
+                    BS_LEFT
+    PUSHBUTTON      "Emittiertes Licht :",IDC_EMISSION_LIGHT,5,108,65,12,
+                    BS_LEFT
+    EDITTEXT        IDC_SCALEFACTOR_T,223,19,22,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Bitmap...",IDC_BITMAP_FILE,200,4,45,12
+    PUSHBUTTON      "Material...",IDC_SELECT_MATERIAL,5,4,45,12
+    LTEXT           ">> Materialbeschreibung <<",IDC_MATERIA_DESCR,55,6,140,
+                    8
+END
+
+IDD_TIMER_DLG DIALOGEX 0, 0, 300, 201
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Terminplaner"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "MonthCalendar2",IDC_TIMER_CALENDAR,"SysMonthCal32",
+                    MCS_NOTODAY | WS_TABSTOP,5,5,130,90
+    DEFPUSHBUTTON   "OK",IDOK,235,184,60,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,184,60,12
+    LTEXT           "Programm starten :",IDC_STATIC,5,117,65,8
+    EDITTEXT        IDC_TIMER_PATH,74,115,205,12,ES_AUTOHSCROLL
+    PUSHBUTTON      ">...",IDC_BTN_TIMER_PATH,280,115,15,12
+    CONTROL         "Zeitliste",IDC_TIMER_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_OWNERDATA | 
+                    WS_BORDER | WS_TABSTOP,140,5,155,90
+    LTEXT           "Nachricht :",IDC_STATIC,5,130,65,8
+    EDITTEXT        IDC_TIMER_MESSAGE,74,130,221,50,ES_AUTOHSCROLL
+    LTEXT           "Weckzeit (Termin) :",IDC_STATIC,5,101,65,8
+    CONTROL         "DateTimePicker1",IDC_TIMER_CLOCK,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | DTS_APPCANPARSE | 
+                    WS_TABSTOP | 0x8,75,99,60,13
+    CONTROL         "DateTimePicker1",IDC_TIMER_CLOCK_CURRENT,
+                    "SysDateTimePick32",DTS_UPDOWN | WS_TABSTOP | 0x8,230,99,
+                    65,13
+    LTEXT           "Aktuelle Zeit :",IDC_STATIC,177,101,45,8
+    PUSHBUTTON      "Setzen",IDC_TIMER_BTN_SET,75,184,60,12
+    PUSHBUTTON      "Löschen",IDC_TIMER_BTN_DELETE,5,160,60,12
+    PUSHBUTTON      "Neu",IDC_TIMER_BTN_NEW,5,144,60,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ETS3DGLDLG_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 203
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 65
+        VERTGUIDE, 75
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 135
+        VERTGUIDE, 155
+        VERTGUIDE, 160
+        VERTGUIDE, 194
+        VERTGUIDE, 199
+        HORZGUIDE, 5
+        HORZGUIDE, 23
+        HORZGUIDE, 35
+        HORZGUIDE, 47
+        HORZGUIDE, 59
+        HORZGUIDE, 71
+        HORZGUIDE, 85
+        HORZGUIDE, 95
+        HORZGUIDE, 113
+        HORZGUIDE, 125
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 205
+        HORZGUIDE, 225
+        HORZGUIDE, 245
+    END
+
+    IDD_CARAWALK_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 194
+        VERTGUIDE, 200
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 84
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 148
+        HORZGUIDE, 165
+        HORZGUIDE, 177
+        HORZGUIDE, 195
+        HORZGUIDE, 205
+        HORZGUIDE, 220
+    END
+
+    IDD_REPORT_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 150
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 150
+    END
+
+    IDD_PATH_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 2
+        VERTGUIDE, 7
+        VERTGUIDE, 55
+        VERTGUIDE, 60
+        VERTGUIDE, 102
+        VERTGUIDE, 108
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 228
+        VERTGUIDE, 244
+        VERTGUIDE, 248
+        HORZGUIDE, 10
+        HORZGUIDE, 20
+        HORZGUIDE, 38
+        HORZGUIDE, 50
+        HORZGUIDE, 60
+        HORZGUIDE, 75
+        HORZGUIDE, 90
+    END
+
+    IDD_PRESENTATION_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 185
+        VERTGUIDE, 190
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 140
+        HORZGUIDE, 155
+        HORZGUIDE, 165
+    END
+
+    IDD_COPY_FOLDER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 225
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+    END
+
+    IDD_MATERIAL_CMP, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 70
+        VERTGUIDE, 85
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 200
+        VERTGUIDE, 210
+        VERTGUIDE, 215
+        VERTGUIDE, 245
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 114
+        HORZGUIDE, 135
+    END
+
+    IDD_TIMER_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 70
+        VERTGUIDE, 75
+        VERTGUIDE, 135
+        VERTGUIDE, 140
+        VERTGUIDE, 295
+        HORZGUIDE, 5
+        HORZGUIDE, 95
+        HORZGUIDE, 105
+        HORZGUIDE, 121
+        HORZGUIDE, 130
+        HORZGUIDE, 180
+        HORZGUIDE, 190
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ETS3DGLDLG_DIALOG DLGINIT
+BEGIN
+    IDC_BUGFIX_BUFFER, 0x403, 12, 0
+0x6f56, 0x6472, 0x7265, 0x7267, 0x6e75, 0x0064, 
+    IDC_BUGFIX_BUFFER, 0x403, 12, 0
+0x6948, 0x746e, 0x7265, 0x7267, 0x6e75, 0x0064, 
+    IDC_BUGFIX_BUFFER, 0x403, 20, 0
+0x6f56, 0x6472, 0x7265, 0x7267, 0x6e75, 0x2064, 0x6c28, 0x6e69, 0x736b, 
+0x0029, 
+    IDC_BUGFIX_BUFFER, 0x403, 20, 0
+0x6948, 0x746e, 0x7265, 0x7267, 0x6e75, 0x2064, 0x6c28, 0x6e69, 0x736b, 
+0x0029, 
+    IDC_BUGFIX_BUFFER, 0x403, 21, 0
+0x6f56, 0x6472, 0x7265, 0x7267, 0x6e75, 0x2064, 0x7228, 0x6365, 0x7468, 
+0x2973, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 21, 0
+0x6948, 0x746e, 0x7265, 0x7267, 0x6e75, 0x2064, 0x7228, 0x6365, 0x7468, 
+0x2973, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 6, 0
+0x694c, 0x6b6e, 0x0073, 
+    IDC_BUGFIX_BUFFER, 0x403, 7, 0
+0x6552, 0x6863, 0x7374, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 26, 0
+0x6f56, 0x6472, 0x7265, 0x7267, 0x6e75, 0x2064, 0x2026, 0x6948, 0x746e, 
+0x7265, 0x7267, 0x6e75, 0x0064, 
+    IDC_BUGFIX_BUFFER, 0x403, 15, 0
+0x6948, 0x666c, 0x7073, 0x6675, 0x6566, 0x2072, 0x2031, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x6948, 0x666c, 0x7073, 0x6675, 0x6566, 0x2072, 0x0032, 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x6948, 0x666c, 0x7073, 0x6675, 0x6566, 0x2072, 0x0033, 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x6948, 0x666c, 0x7073, 0x6675, 0x6566, 0x2072, 0x0034, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "GLSetup schließen",           ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&Info über GLSetup...",       ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Einstellungen für 3D-&Grafik...", ID_CALL_GLSETUP
+        MENUITEM "Einstellungen für &CaraWalk...", ID_CALL_CARAWALKSETUP
+        MENUITEM "Einstellungen für &ETSVIEW...", ID_CALL_CARAVIEW_SETUP
+        MENUITEM "Einstellungen für &Debug Report...", ID_CALL_REPORT_SETUP
+        MENUITEM "Einstellungen für &Material und Licht...", 
+                                                ID_CALL_MATERIALSETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Ets Multi Media Gerät...",    ID_CALL_ETSMMPLAYER
+        MENUITEM "Ets Mixer Dialog...",         ID_CALL_ETSMIXER
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDCANCEL
+    END
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "GLSetup &schließen",          ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&Info über GLSetup...",       ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Einstellungen für 3D-&Grafik...", ID_CALL_GLSETUP
+        MENUITEM "Einstellungen für &CaraWalk...", ID_CALL_CARAWALKSETUP
+        MENUITEM "Einstellungen für &Material und Licht...", 
+                                                ID_CALL_MATERIALSETUP
+        MENUITEM "Einstellungen für &Debug Report...", ID_CALL_REPORT_SETUP
+        MENUITEM "Einstellungen für &ETSVIEW...", ID_CALL_CARAVIEW_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Ets Multi Media Gerät...",    ID_CALL_ETSMMPLAYER
+        MENUITEM "Ets Mixer Dialog...",         ID_CALL_ETSMIXER
+        MENUITEM SEPARATOR
+        MENUITEM "Sicherung von Projektdateien...", ID_CALL_SAVE_PROJECT
+        MENUITEM "Einstellungen für Dll &Pfade...", ID_CALL_DLL_PATHSETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Debug Dll-Pfad setzen",       ID_SET_DEBUG_PATH
+        MENUITEM "Release Dll-Pfad setzen (deutsch)", ID_SET_RELEASE_PATH
+        MENUITEM "Release Dll-Pfad setzen (englisch)", 
+                                                ID_SET_RELEASE_ENG_PATH
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TEX_AMBIENT_COLOR   "Umgebungslicht (Material)"
+    IDS_TEX_DIFFUSE_COLOR   "Diffuses Licht (Material)"
+    IDS_TEX_SPECULAR_COLOR  "Reflektiertes Licht (Material)"
+    IDS_DIR_CREATED         "Verzeichnis %s erstellt"
+    IDS_FILE_COPIED         "%s kopiert"
+    IDS_SAVE_CHANGED_PATH   "Geänderten Pfad speichern ?"
+    IDS_SHOW_INFO           "Info"
+    IDS_HIDE_INFO           "Info aus"
+    IDS_FILE_OLDER          "#%s ist neuer"
+    IDS_ICON_INFO_TIP       "CARA Grafikeinstellungen"
+    IDS_ICON_INFO_TIP_EX    "ETS-Service, Parametereinstellungen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SELECT_MATERIAL_HEADING 
+                            "Wählen Sie das Material, daß sie verändern wollen."
+    IDS_SAVE_MATERIAL_NOW   "Sollen die Materialparameter gespeichert werden ?"
+    IDS_T_NO                "Nr.:"
+    IDS_T_DATE              "Datum"
+    IDS_T_TIME              "Uhrzeit"
+    IDS_T_MSG               "Nachricht"
+    IDS_T_TIME_FMT          "%H:%M:%S"
+    IDS_T_DATE_FMT          "%A, %d.%B, %Y"
+    IDS_T_SAVE_PARAMS       "Änderungen Speichern"
+    IDS_SHORT_KEY_HELP      "GL-Setup Erweiterungen, Aufruf: GLSetup.exe /##\n/k\tAufruf als Toolbar Icon\n/ks\tAufruf als Toolbar Icon (Spezial)\n/mm\tMultimedia Gerät\n/mr\tWave Rekorder\n/mi\tMixer\n/c\tCaraWalk Einstellungen\n/r\tReport Einstellungen\n/m\tMaterial Einstellungen\n/p\tDll Pfade\n/d\tETS2DView Darstellung (Menü)\n/s\tProjektsicherung\n/S\tGLSetup Spezial"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CARAWALK_DLG DIALOGEX 0, 0, 205, 225
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "CARAWALK Settings"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Number of bits for color buffer",IDC_STATIC,10,6,94,8
+    EDITTEXT        IDC_COLOR_BITS,170,4,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Number of bits for depth buffer",IDC_STATIC,10,21,96,8
+    EDITTEXT        IDC_DEPTH_BITS,170,19,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Number of bits for stencil buffer",IDC_STATIC,10,36,98,
+                    8
+    EDITTEXT        IDC_STENCIL_BITS,170,34,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Number of bits for alpha buffer",IDC_STATIC,10,51,96,8
+    EDITTEXT        IDC_ALPHA_BITS,170,49,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Number of bits for acumulation buffer",IDC_STATIC,10,66,
+                    116,8
+    EDITTEXT        IDC_ACCUM_BITS,170,64,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Frame rate [ms]",IDC_STATIC,10,81,49,8
+    EDITTEXT        IDC_REFRESH_TIME,170,79,24,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Software acceleration",IDC_GENERIC_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,85,10
+    DEFPUSHBUTTON   "OK",IDOK,10,208,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,145,208,50,14
+    PUSHBUTTON      "Ambient",IDC_TEX_AMBIENT,10,137,60,12
+    GROUPBOX        "Material / lighting parameters for texture representation",
+                    IDC_STATIC,5,125,195,80
+    PUSHBUTTON      "Diffuse",IDC_TEX_DIFFUSE,72,137,60,12
+    PUSHBUTTON      "Reflection",IDC_TEX_SPECULAR,134,137,60,12
+    LTEXT           "Flare angle for perspective representation",IDC_STATIC,
+                    10,111,155,8
+    EDITTEXT        IDC_PERSPECTIVE_ANGLE,170,109,24,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Range of brightnes of the average texture color: (default: 0.2 bis 0.7)",
+                    IDC_STATIC,10,158,155,19
+    EDITTEXT        IDC_AVG_COL_FROM,170,159,24,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AVG_COL_TO,170,171,24,12,ES_AUTOHSCROLL
+    LTEXT           "Factor for the ambient component of the average texture color:",
+                    IDC_STATIC,10,185,155,18
+    EDITTEXT        IDC_AMBIENT_COL_FACTOR,170,189,24,12,ES_AUTOHSCROLL
+END
+
+IDD_COPY_FOLDER DIALOGEX 0, 0, 250, 250
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS-Save-Tool for Projects"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,234,60,12
+    PUSHBUTTON      "Cancel",IDCANCEL,185,234,60,12
+    PUSHBUTTON      "Copy",IDC_COPY,89,234,60,12
+    EDITTEXT        IDC_CPF_SOURCE_PATH,70,14,155,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CPF_DESTINATION_PATH,70,29,155,12,ES_AUTOHSCROLL
+    LTEXT           "Source :",IDC_STATIC,10,16,50,8
+    LTEXT           "Destination :",IDC_STATIC,10,31,50,8
+    GROUPBOX        "Options",IDC_STATIC,5,5,240,225
+    PUSHBUTTON      ">...",IDC_CPF_SEARCH_SOURCE_PATH,225,14,15,12
+    PUSHBUTTON      ">...",IDC_CPF_SEARCH_DESTINATION_PATH,225,29,15,12
+    EDITTEXT        IDC_LOG_WINDOW,10,85,230,140,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_VSCROLL
+    LTEXT           "Result :",IDC_STATIC,10,75,50,8
+    LTEXT           "Filetype(s) :",IDC_STATIC,10,46,47,8
+    CONTROL         "Copy only newer files",IDC_CPF_COPY_ONLY_NEWER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,93,10
+    COMBOBOX        IDC_CPF_INCLUDES,70,44,170,137,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Create Directories",IDC_CPF_COPY_CREATE_DIR,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,135,60,105,10
+    CONTROL         "Copy in one Directory",IDC_CPF_COPY_IN_ONE_DIR,"Button",
+                    BS_AUTORADIOBUTTON,135,70,105,10
+END
+
+IDD_PATH_DLG DIALOGEX 0, 0, 250, 100
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Paths for ETS Modules"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,6,84,70,12
+    PUSHBUTTON      "Cancel",IDCANCEL,172,84,70,12
+    EDITTEXT        IDC_DLL_PATH,6,14,221,12,ES_AUTOHSCROLL
+    PUSHBUTTON      ">...",IDC_SEARCH_PATH,227,14,15,12
+    GROUPBOX        "Setting of the DLL paths in the Registry",IDC_STATIC,2,
+                    0,246,49
+    CONTROL         "Default",IDC_R_PATH0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,6,33,39,10
+    CONTROL         "Debug",IDC_R_PATH1,"Button",BS_AUTORADIOBUTTON,60,33,42,
+                    10
+    CONTROL         "Release (ger.)",IDC_R_PATH2,"Button",BS_AUTORADIOBUTTON,
+                    108,33,62,10
+    CONTROL         "Release (engl.)",IDC_R_PATH3,"Button",
+                    BS_AUTORADIOBUTTON,175,33,65,10
+    CONTROL         "Debug Applications (Use Debug Dll´s always)",
+                    IDC_CK_DEBUG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,55,
+                    236,10
+    CONTROL         "Use Local Dll´s (No Common Path)",IDC_CK_NO_DLLPATH,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,70,236,10
+END
+
+IDD_PRESENTATION_DLG DIALOGEX 0, 0, 225, 174
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Representation-Settings of Modules"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,10,159,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,165,159,50,12
+    CONTROL         "Show Icons in Menues =>  Width of Menues [%]:",
+                    IDC_2DV_MENU_BMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,20,175,10
+    CONTROL         "Show Icons in Menues =>  Width of Menues [%]:",
+                    IDC_3DV_MENU_BMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,70,175,10
+    GROUPBOX        "ETS2DVIEW",IDC_STATIC,5,5,215,49
+    EDITTEXT        IDC_2DV_MENU_SCALE,190,19,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_3DV_MENU_SCALE,190,69,25,12,ES_AUTOHSCROLL
+    CONTROL         "Fill polygons (ETS2D/3DVIEW)",IDC_FILL_PATH,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,120,205,10
+    PUSHBUTTON      "Default",IDC_DEFAULT,69,159,50,12
+    GROUPBOX        "ETS3DVIEW",IDC_STATIC,5,54,215,51
+    LTEXT           "Number of Most Recent Files in Menu 'File':",IDC_STATIC,
+                    10,36,175,8
+    LTEXT           "Number of Most Recent Files in Menu 'File':",IDC_STATIC,
+                    10,86,175,8
+    GROUPBOX        "ETS2DVIEW and ETS3DVIEW",IDC_STATIC,5,105,215,50
+    EDITTEXT        IDC_2DV_MENU_RECENT_FILES,190,34,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_3DV_MENU_RECENT_FILES,190,84,25,12,ES_AUTOHSCROLL
+    LTEXT           "Offsetcorrection for Printer (x, y) [mm]:",IDC_STATIC,
+                    10,136,140,8
+    EDITTEXT        IDC_2_3DV_PRINTER_OFFSET_X,160,134,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_2_3DV_PRINTER_OFFSET_Y,190,134,25,12,ES_AUTOHSCROLL
+END
+
+IDD_REPORT_DLG DIALOGEX 0, 0, 160, 162
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Debug Report for ETS Modules"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "ETS2DVIEW 2D Presentation",IDC_REPORT_ETS2DVIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,5,140,10
+    CONTROL         "ETS3DVIEW 3D Presentation",IDC_REPORT_ETS3DVIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,20,140,10
+    CONTROL         "ETS3DGL 3D Graphics Base Module",IDC_REPORT_ETS3DGL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,35,140,10
+    CONTROL         "ETSPRTD Printer Setup Dialog",IDC_REPORT_ETSPRTD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,50,140,10
+    CONTROL         "CARAWALK Room Walker",IDC_REPORT_CARAWALK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,65,140,10
+    DEFPUSHBUTTON   "OK",IDOK,10,141,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,100,141,50,14
+    CONTROL         "CARASDB Loudspeaker Data Base",IDC_REPORT_CARASDB,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,80,140,10
+    CONTROL         "CARABOX Loudspeaker Editor",IDC_REPORT_CARABOX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,140,10
+    CONTROL         "ETSCDPL Multimedia Player",IDC_REPORT_ETSCDPL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,110,140,10
+    CONTROL         "AC_COM Measurement Interface",IDC_REPORT_AC_COM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,125,140,10
+END
+
+IDD_ETS3DGLDLG_DIALOG DIALOGEX 0, 0, 205, 250
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS3DGL Settings"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Bug Fixes for Different Graphics Drivers",IDC_STATIC,5,
+                    5,195,120
+    CONTROL         "Generate normal vectors for each vertex.",
+                    IDC_BUGFIX_NORMALVECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,18,179,10
+    CONTROL         "Move window.",IDC_BUGFIX_MOVEWINDOW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,30,90,10
+    CONTROL         "Initialize with maximum buffersize.",
+                    IDC_BUGFIX_BUFFERSIZE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,42,120,10
+    CONTROL         "Light changes without textures.",
+                    IDC_BUGFIX_LIGHTTEXTURE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,54,179,10
+    GROUPBOX        "Output of Material Polygons",IDC_STATIC,5,95,195,30
+    LTEXT           "Offset:",IDC_STATIC,15,109,30,8
+    EDITTEXT        IDC_POLYGON_OFFSET,50,107,15,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Factor:",IDC_STATIC,75,109,30,8
+    EDITTEXT        IDC_POLYGON_FACTOR,110,107,25,12,ES_AUTOHSCROLL
+    GROUPBOX        "Room and Loudspeaker View (CARACAD)",IDC_STATIC,5,130,
+                    195,40
+    CONTROL         "Hardware Acceleration",IDC_CARAWALK_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,140,100,10
+    CONTROL         "Hardware Acceleration",IDC_ETS3DV_ACCELERATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,185,100,10
+    PUSHBUTTON      "Help",ID_HELP,155,219,45,12
+    DEFPUSHBUTTON   "OK",IDOK,5,235,60,12
+    PUSHBUTTON      "Cancel",IDCANCEL,72,235,60,12
+    PUSHBUTTON      "Defaults",IDC_DEFAULT,55,219,45,12
+    COMBOBOX        IDC_BUGFIX_BUFFER,110,79,84,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Buffer Settings",IDC_STATIC,15,81,90,8
+    PUSHBUTTON      "Report...",IDC_REPORT,5,219,45,12
+    GROUPBOX        "Presentation of Results (ETS3DVIEW)",IDC_STATIC,5,175,
+                    195,40
+    CONTROL         "Bitmap Rendering",IDC_CARAWALK_BMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,155,95,10
+    CONTROL         "Bitmap Rendering",IDC_ETS3DV_BMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,200,95,10
+    CONTROL         "Double Buffer",IDC_CARAWALK_DOUBLE_BUFFER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,155,84,10
+    CONTROL         "Double Buffer",IDC_ETS3DV_DOUBLE_BUFFER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,200,84,10
+    EDITTEXT        IDC_PIXELFORMAT,155,41,39,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Pixel Format:",IDC_PIXELFORMAT_TXT,155,31,41,8
+    CONTROL         "Shadows",IDC_CARAWALK_SHADOWS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,140,84,10
+    PUSHBUTTON      "Apply",IDC_APPLY,139,235,60,12
+    CONTROL         "Always initialize 3D graphics.",IDC_BUGFIX_INIT_ALWAYS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,66,120,10
+    PUSHBUTTON      "Info",IDC_INFO,105,219,45,12
+    EDITTEXT        IDC_INFO_TEXT,5,5,195,211,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE | 
+                    WS_VSCROLL
+END
+
+IDD_MATERIAL_CMP DIALOGEX 0, 0, 250, 145
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_NOFAILCREATE | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Material Properties for 3D Representation"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Save",IDOK,5,129,50,12
+    DEFPUSHBUTTON   "Delete",IDCANCEL,195,129,50,12,0,0,HIDCANCEL
+    CONTROL         "Border",IDC_BORDER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,35,45,10
+    CONTROL         "Generate Texture Coordinates",IDC_GENERATE_TEX_COORD,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,20,120,10
+    LTEXT           "Scaling Factor :",IDC_STATIC,125,21,70,8
+    EDITTEXT        IDC_SCALEFACTOR_S,199,19,22,12,ES_AUTOHSCROLL
+    LTEXT           "Shinines (0,..,128):",IDC_STATIC,125,36,85,8
+    EDITTEXT        IDC_SHININESS,215,34,30,12,ES_AUTOHSCROLL
+    LTEXT           "Light Components (0,..,1)",IDC_STATIC,5,51,86,8
+    CTEXT           "Red",IDC_STATIC,85,51,35,8
+    CTEXT           "Green",IDC_STATIC,125,51,35,8
+    CTEXT           "Blue",IDC_STATIC,165,51,35,8
+    CTEXT           "Alpha",IDC_STATIC,215,51,30,8
+    EDITTEXT        IDC_ALPHA_AMBIENT,210,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_DIFFUSE,210,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_SPECULAR,210,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ALPHA_EMISSION,210,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_AMBIENT,85,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_DIFFUSE,85,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_SPECULAR,85,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RED_EMISSION,85,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_AMBIENT,125,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_DIFFUSE,125,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_SPECULAR,125,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_GREEN_EMISSION,125,108,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_AMBIENT,165,64,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_DIFFUSE,165,79,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_SPECULAR,165,94,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BLUE_EMISSION,165,108,35,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Border Color",IDC_BORDER_COLOR,58,34,50,12
+    PUSHBUTTON      "Ambient Light :",IDC_AMBIENT_LIGHT,5,64,65,12,BS_LEFT
+    PUSHBUTTON      "Diffuse Light :",IDC_DIFFUSE_LIGHT,5,79,65,12,BS_LEFT
+    PUSHBUTTON      "Specular Light :",IDC_SPECULAR_LIGHT,5,94,65,12,BS_LEFT
+    PUSHBUTTON      "Emission Light :",IDC_EMISSION_LIGHT,5,108,65,12,
+                    BS_LEFT
+    EDITTEXT        IDC_SCALEFACTOR_T,223,19,22,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Bitmap...",IDC_BITMAP_FILE,200,4,45,12
+    PUSHBUTTON      "Material...",IDC_SELECT_MATERIAL,5,4,45,12
+    LTEXT           ">> Material description <<",IDC_MATERIA_DESCR,55,6,140,
+                    8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CARAWALK_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 194
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+        HORZGUIDE, 143
+        HORZGUIDE, 205
+        HORZGUIDE, 215
+    END
+
+    IDD_COPY_FOLDER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 225
+        HORZGUIDE, 230
+        HORZGUIDE, 240
+    END
+
+    IDD_PATH_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 2
+        VERTGUIDE, 6
+        VERTGUIDE, 227
+        VERTGUIDE, 242
+        VERTGUIDE, 248
+        HORZGUIDE, 20
+        HORZGUIDE, 38
+        HORZGUIDE, 90
+    END
+
+    IDD_PRESENTATION_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 185
+        VERTGUIDE, 190
+        VERTGUIDE, 215
+        VERTGUIDE, 220
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 54
+        HORZGUIDE, 75
+        HORZGUIDE, 90
+        HORZGUIDE, 105
+        HORZGUIDE, 125
+        HORZGUIDE, 155
+        HORZGUIDE, 165
+    END
+
+    IDD_REPORT_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 150
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 148
+    END
+
+    IDD_ETS3DGLDLG_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 204
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 15
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 65
+        VERTGUIDE, 75
+        VERTGUIDE, 105
+        VERTGUIDE, 110
+        VERTGUIDE, 135
+        VERTGUIDE, 155
+        VERTGUIDE, 160
+        VERTGUIDE, 194
+        VERTGUIDE, 200
+        HORZGUIDE, 5
+        HORZGUIDE, 23
+        HORZGUIDE, 35
+        HORZGUIDE, 47
+        HORZGUIDE, 59
+        HORZGUIDE, 71
+        HORZGUIDE, 85
+        HORZGUIDE, 95
+        HORZGUIDE, 113
+        HORZGUIDE, 125
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 170
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 205
+        HORZGUIDE, 225
+        HORZGUIDE, 241
+    END
+
+    IDD_MATERIAL_CMP, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 70
+        VERTGUIDE, 85
+        VERTGUIDE, 120
+        VERTGUIDE, 125
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 200
+        VERTGUIDE, 210
+        VERTGUIDE, 215
+        VERTGUIDE, 245
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 114
+        HORZGUIDE, 135
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ETS3DGLDLG_DIALOG DLGINIT
+BEGIN
+    IDC_BUGFIX_BUFFER, 0x403, 13, 0
+0x7246, 0x6e6f, 0x2074, 0x7542, 0x6666, 0x7265, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 12, 0
+0x6142, 0x6b63, 0x4220, 0x6675, 0x6566, 0x0072, 
+    IDC_BUGFIX_BUFFER, 0x403, 20, 0
+0x7246, 0x6e6f, 0x2074, 0x7542, 0x6666, 0x7265, 0x2820, 0x656c, 0x7466, 
+0x0029, 
+    IDC_BUGFIX_BUFFER, 0x403, 19, 0
+0x6142, 0x6b63, 0x4220, 0x6675, 0x6566, 0x2072, 0x6c28, 0x6665, 0x2974, 
+"\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 21, 0
+0x7246, 0x6e6f, 0x2074, 0x7542, 0x6666, 0x7265, 0x2820, 0x6972, 0x6867, 
+0x2974, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 20, 0
+0x6142, 0x6b63, 0x4220, 0x6675, 0x6566, 0x2072, 0x7228, 0x6769, 0x7468, 
+0x0029, 
+    IDC_BUGFIX_BUFFER, 0x403, 5, 0
+0x654c, 0x7466, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 6, 0
+0x6952, 0x6867, 0x0074, 
+    IDC_BUGFIX_BUFFER, 0x403, 26, 0
+0x7246, 0x6e6f, 0x2074, 0x7542, 0x6666, 0x7265, 0x2620, 0x4220, 0x6361, 
+0x426b, 0x6675, 0x6566, 0x0072, 
+    IDC_BUGFIX_BUFFER, 0x403, 15, 0
+0x7541, 0x2e78, 0x4220, 0x6675, 0x6566, 0x2072, 0x2031, "\000" 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x7541, 0x2e78, 0x4220, 0x6675, 0x6566, 0x2072, 0x0032, 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x7541, 0x2e78, 0x4220, 0x6675, 0x6566, 0x2072, 0x0033, 
+    IDC_BUGFIX_BUFFER, 0x403, 14, 0
+0x7541, 0x2e78, 0x4220, 0x6675, 0x6566, 0x2072, 0x0034, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "Close GLSetup",               ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&About GLSetup...",           ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Settings for 3D-&Graphics...", ID_CALL_GLSETUP
+        MENUITEM "Settings for &Materials and Lights...", 
+                                                ID_CALL_MATERIALSETUP
+        MENUITEM "Settings for &CaraWalk...",   ID_CALL_CARAWALKSETUP
+        MENUITEM "Settings for &ETSVIEW...",    ID_CALL_CARAVIEW_SETUP
+        MENUITEM "Settings for &Debug Report...", ID_CALL_REPORT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Ets Multi Media Player...",   ID_CALL_ETSMMPLAYER
+        MENUITEM "Ets Mixer Dialog...",         ID_CALL_ETSMIXER
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDCANCEL
+    END
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "Close GLSetup",               ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&About GLSetup...",           ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Settings for 3D-&Graphics...", ID_CALL_GLSETUP
+        MENUITEM "Settings for &CaraWalk...",   ID_CALL_CARAWALKSETUP
+        MENUITEM "Settings for &Materials and Light...", 
+                                                ID_CALL_MATERIALSETUP
+        MENUITEM "Settings for &Debug Report...", ID_CALL_REPORT_SETUP
+        MENUITEM "Settings for &ETSVIEW...",    ID_CALL_CARAVIEW_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Ets Multi Media Player...",   ID_CALL_ETSMMPLAYER
+        MENUITEM "Ets Mixer Dialog...",         ID_CALL_ETSMIXER
+        MENUITEM SEPARATOR
+        MENUITEM "Save Project Files...",       ID_CALL_SAVE_PROJECT
+        MENUITEM "Settings for Dll &Paths...",  ID_CALL_DLL_PATHSETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Set Debug Dll-Path",          ID_SET_DEBUG_PATH
+        MENUITEM "Set Release Dll-Path (german)", ID_SET_RELEASE_PATH
+        MENUITEM "Set Release Dll-Path (english)", ID_SET_RELEASE_ENG_PATH
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TEX_AMBIENT_COLOR   "Ambient Light (Material)"
+    IDS_TEX_DIFFUSE_COLOR   "Diffuse Light (Material)"
+    IDS_TEX_SPECULAR_COLOR  "Specular Light (Material)"
+    IDS_DIR_CREATED         "Directory %s created"
+    IDS_FILE_COPIED         "%s copied"
+    IDS_SAVE_CHANGED_PATH   "Save changed path ?"
+    IDS_SHOW_INFO           "Info"
+    IDS_HIDE_INFO           "Info off"
+    IDS_FILE_OLDER          "#%s is newer"
+    IDS_ICON_INFO_TIP       "CARA Graphics Settings"
+    IDS_ICON_INFO_TIP_EX    "ETS-Service, Parameter Settings"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SELECT_MATERIAL_HEADING "Choose the Material to change."
+    IDS_SHORT_KEY_HELP      "GL-Setup Extensions, Call: GLSetup.exe /##\n/k\tStart as Toolbar Icon\n/ks\tStart as Toolbar Icon (Special)\n/mm\tMultimedia Player\n/mr\tWave Recorder\n/mi\tMixer\n/c\tCaraWalk Settings\n/r\tReport Settings\n/m\tMaterial Settings\n/p\tDll Paths\n/d\tETS2DView Representation (Menu)\n/s\tProject saving\n/S\tGLSetup Special"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Switzerland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DES)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_SWISS
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ERROR_MESSAGE DIALOGEX 0, 0, 250, 100
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_NOFAILCREATE | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS Fehler Meldungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,195,84,50,12
+    EDITTEXT        IDC_EDT_ERROR_NUMBER,65,84,40,12,ES_AUTOHSCROLL
+    LTEXT           "Fehlernummer",IDC_STATIC,5,86,55,8
+    EDITTEXT        IDC_EDT_ERRRO_MESSAGE,5,5,240,75,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_ANIMATION DIALOGEX 0, 0, 235, 230
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_NOFAILCREATE | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ETS-Sicherung für die Projekte"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,182,200,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,180,214,51,12
+    CONTROL         "",IDC_ANIMATION,"{B09DE715-87C1-11D1-8BE3-0000F8754DA1}",
+                    WS_TABSTOP,6,5,225,189
+    CONTROL         "",IDC_MMCONTROL,"{C1A8AF25-1257-101B-8FB0-0020AF039CA3}",
+                    WS_TABSTOP,7,204,123,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ERROR_MESSAGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 60
+        VERTGUIDE, 65
+        VERTGUIDE, 245
+        HORZGUIDE, 5
+        HORZGUIDE, 80
+        HORZGUIDE, 90
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ANIMATION DLGINIT
+BEGIN
+    IDC_ANIMATION, 0x376, 116, 0
+0x0024, 0x0000, 0x0036, 0x0035, 0x0031, 0x0041, 0x0038, 0x0039, 0x0034, 
+0x0030, 0x002d, 0x0038, 0x0037, 0x0043, 0x0035, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0038, 0x0042, 0x0045, 0x0033, 0x002d, 0x0030, 
+0x0030, 0x0030, 0x0030, 0x0046, 0x0038, 0x0037, 0x0035, 0x0034, 0x0044, 
+0x0041, 0x0031, 0x4321, 0x1234, 0x0008, 0x0000, 0x22ef, 0x0000, 0x1fbb, 
+0x0000, 0x85e0, 0x1b83, 0x0000, 0x0006, 0x0152, 0x0000, 0x0133, 0x0000, 
+0x000f, 0x8000, 0x4322, 0x1234, 
+    IDC_MMCONTROL, 0x376, 964, 0
+0x0024, 0x0000, 0x006d, 0x0067, 0x006b, 0x0067, 0x0074, 0x0067, 0x006e, 
+0x006e, 0x006d, 0x006e, 0x006d, 0x006e, 0x0069, 0x006e, 0x0069, 0x0067, 
+0x0074, 0x0068, 0x006b, 0x0067, 0x006f, 0x0067, 0x0067, 0x0067, 0x0076, 
+0x006d, 0x006b, 0x0068, 0x0069, 0x006e, 0x006a, 0x0067, 0x0067, 0x006e, 
+0x0076, 0x006d, 0x4321, 0x1234, 0x0008, 0x0000, 0x1304, 0x0000, 0x0369, 
+0x0000, 0xface, 0xdead, 0x0000, 0x0006, 0x0040, 0x0000, 0x0001, 0x0000, 
+0x0001, 0x0000, 0x0001, 0x0001, 0x03e8, 0x0000, 0xffff, 0xffff, 0xffff, 
+0x0000, 0xffff, 0xffff, 0xffff, 0x0000, 0xffff, 0x0000, 0x0000, 0xffff, 
+0xffff, 0xffff, 0x0000, 0xffff, 0xffff, 0xffff, 0x0000, 0xffff, 0x0000, 
+0xffff, 0x0001, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 0x11ce, 
+0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x02fe, 0x0000, 0x0000, 
+0x0002, 0x0001, 0x2020, 0x0000, 0x0006, 0x0007, 0x02e8, 0x0000, 0x0016, 
+0x0000, 0x0028, 0x0000, 0x0020, 0x0000, 0x0040, 0x0000, 0x0001, 0x0004, 
+0x0000, 0x0000, 0x0280, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0080, 0x8000, 0x0000, 
+0x8000, 0x0080, 0x0080, 0x0000, 0x0080, 0x0080, 0x8080, 0x0000, 0xc0c0, 
+0x00c0, 0x8080, 0x0080, 0x0000, 0x00ff, 0xff00, 0x0000, 0xff00, 0x00ff, 
+0x00ff, 0x0000, 0x00ff, 0x00ff, 0xffff, 0x0000, 0xffff, 0x00ff, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x7087, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x708f, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0800, 0x00f7, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0800, 0x00f7, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8000, 0x8f00, 
+0x0070, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8700, 0x8f00, 0x0070, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8f00, 0xf770, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x8f00, 0x00f7, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x8f00, 0x77ff, 0x7077, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x8f00, 0x77ff, 0x0077, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x8f00, 0x77f7, 0x0070, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x8f00, 0x77f7, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8f00, 
+0x7077, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8f00, 0x0077, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8700, 0x0070, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x8700, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x8000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xf8ff, 0xffff, 0xf0ff, 
+0xffff, 0xf0ff, 0xffff, 0xe1ff, 0xffff, 0xe1fd, 0xffff, 0xc3fc, 0xffff, 
+0x43fc, 0xffff, 0x07fc, 0xffff, 0x00fc, 0xff7f, 0x00fc, 0xffff, 0x01fc, 
+0xffff, 0x03fc, 0xffff, 0x07fc, 0xffff, 0x0ffc, 0xffff, 0x1ffc, 0xffff, 
+0x3ffc, 0xffff, 0x7ffc, 0xffff, 0xfffc, 0xffff, 0xfffd, 0xffff, 0xffff, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 
+0xffff, 0xffff, 0xffff, 0xffff, 0x0000, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TEX_AMBIENT_COLOR   "Umgebungslicht (Material)"
+    IDS_TEX_DIFFUSE_COLOR   "Diffuses Licht (Material)"
+    IDS_TEX_SPECULAR_COLOR  "Reflektiertes Licht (Material)"
+    IDS_DIR_CREATED         "Verzeichnis %s erstellt"
+    IDS_FILE_COPIED         "Datei %s kopiert"
+    IDS_SAVE_CHANGED_PATH   "Geänderten Pfad speichern ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MATHERR_DOMAIN      "domain"
+    IDS_MATHERR_SING        "singularity"
+    IDS_MATHERR_OVERFLOW    "overflow"
+    IDS_MATHERR_UNDERFLOW   "underflow"
+    IDS_MATHERR_PLOSS       "partial loss of significance"
+    IDS_MATHERR_TLOSS       "total loss of significance"
+    IDS_MATHERR_DENORMAL_OPERAND "denormal operand"
+    IDS_MATHERR_INVALID_OPERATION "invalid operation"
+    IDS_MATHERR_INEXACT_RESULT "inexact result"
+    IDS_MATHERR_STACK_CHECK "stack check"
+    IDS_UNKNOWN_ERROR       "Unknown"
+    IDS_DESTRUCTION_ERROR   "delete or free"
+    IDS_ALLOCATION_ERROR    "new or alloc"
+    IDS_HEAP_ERROR          "heap"
+    IDS_HEAP_DESTROY_ERROR  "heap destroy"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FILEERR_READ        "reading file"
+    IDS_FILEERR_WRITE       "writing file"
+    IDS_FILEERR_CRC         "crc checksum"
+    IDS_FILEERR_TYPE        "wrong file type"
+    IDS_ERR_INVALID_HANDLE  "invalid handle value"
+    IDS_ERR_ACCESS_VIOLATION "access violation"
+    IDS_ERR_DATATYPE_MISALIGNMENT "datatype misalignment"
+    IDS_ERR_PRIV_INSTRUCTION "priv instruction"
+    IDS_ERR_IN_PAGE_ERROR   "in page_error"
+    IDS_ERR_STACK_OVERFLOW  "stack overflow"
+    IDS_ERR_INVALID_DISPOSITION "invalid disposition"
+    IDS_ERR_ARRAY_BOUNDS_EXCEEDED "array bounds exceeded"
+    IDS_ERR_INT_DIVIDE_BY_ZERO "int divide by zero"
+    IDS_ERR_INT_OVERFLOW    "int overflow"
+    IDS_FUNCTION_LOAD_ERROR "Could not Load all Functions"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BASE_MODULE         "Base"
+    IDS_CARA_MODULE         "CARA"
+    IDS_CAPE_MODULE         "CAPE"
+    IDS_UNKNOWN_MODULE      "Unknown"
+    IDS_MODULE              "Module : "
+    IDS_PRODUCT             "Product : "
+    IDS_ETSDIV              "ETSDIV.dll"
+    IDS_ETS3DGL             "ETS3DGL.dll"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CARAWALK            "CARAWALK.dll"
+    IDS_CARABOX             "CARABOX.dll"
+    IDS_CARASDB             "CARASDB.dll"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ETSDIV_ERROR_DISTANCE "Distance out of Range"
+    IDS_ETSDIV_ERROR_STEPS  "Stepvalue out of Range"
+    IDS_ETSDIV_ERROR_RANGE  "Invalid Range"
+    IDS_ETSDIV_ERROR_STEPWIDTH "Stepwidthvalue out of range"
+    IDS_ETSDIV_ERROR_NUMSTEPS "Number of steps out of range"
+    IDS_ETSDIV_ERROR_TEXTLEN "Textlen too small"
+    IDS_ETSDIV_ERROR_MODE   "Invalid Numeric mode"
+    IDS_ETSDIV_ERROR_POINTER "Structure-pointer Zero"
+    IDS_ETSDIV_ERROR_DIV_FKT "Invalid Division-function"
+    IDS_ETSDIV_ERROR_NO_ARRAY "No Array for Sin and Cos Values calculated"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CARAWALK_ROOMDATA_ERROR "Invalid  Roomdata"
+    IDS_CARAWALK_PARENTWND_ERROR "Invalid Parent Window"
+    IDS_CARAWALK_BOXDATA_ERROR "Invalid BoxData"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ETS3DERR_SET_HDC    "Could not set HDC"
+    IDS_ETS3DERR_SET_PIXFMT "Could not set Pixelformat"
+    IDS_ETS3DERR_CREATE_RC  "Could not create Rendercontext"
+    IDS_ETS3DERR_MKCURR_RC  "Could nat make the Rendercontext Current to DC"
+    IDS_ETS3DERR_NOSYNCEVEVT "Could nat Create a syncronise Event-Handle"
+    IDS_ETS3DERR_NOTHREAD   "Could not Create a Thread"
+    IDS_ETS3DERR_TIMEOUT    "Timeout waiting for OpenGL initializing"
+    IDS_ETS3DERR_NOTIMER    "Could not Create a Control-Timer"
+    IDS_ETS3DERR_NOPALETTE  "Kein Farbpaletten-Handle vorhanden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DLL_LOAD_ERROR      "Could not Load Library"
+END
+
+#endif    // German (Switzerland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TEX_AMBIENT_COLOR   "Ambient Light (Material)"
+    IDS_TEX_DIFFUSE_COLOR   "Diffuse Light (Material)"
+    IDS_TEX_SPECULAR_COLOR  "Specular Light (Material)"
+    IDS_DIR_CREATED         "Directory %s created"
+    IDS_FILE_COPIED         "File %s copied"
+    IDS_SAVE_CHANGED_PATH   "Save changed path ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MATHERR_DOMAIN      "domain"
+    IDS_MATHERR_SING        "singularity"
+    IDS_MATHERR_OVERFLOW    "overflow"
+    IDS_MATHERR_UNDERFLOW   "underflow"
+    IDS_MATHERR_PLOSS       "partial loss of significance"
+    IDS_MATHERR_TLOSS       "total loss of significance"
+    IDS_MATHERR_DENORMAL_OPERAND "denormal operand"
+    IDS_MATHERR_INVALID_OPERATION "invalid operation"
+    IDS_MATHERR_INEXACT_RESULT "inexact result"
+    IDS_MATHERR_STACK_CHECK "stack check"
+    IDS_UNKNOWN_ERROR       "Unknown"
+    IDS_DESTRUCTION_ERROR   "delete or free"
+    IDS_ALLOCATION_ERROR    "new or alloc"
+    IDS_HEAP_ERROR          "heap"
+    IDS_HEAP_DESTROY_ERROR  "heap destroy"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FILEERR_READ        "reading file"
+    IDS_FILEERR_WRITE       "writing file"
+    IDS_FILEERR_CRC         "crc checksum"
+    IDS_FILEERR_TYPE        "wrong file type"
+    IDS_ERR_INVALID_HANDLE  "invalid handle value"
+    IDS_ERR_ACCESS_VIOLATION "access violation"
+    IDS_ERR_DATATYPE_MISALIGNMENT "datatype misalignment"
+    IDS_ERR_PRIV_INSTRUCTION "priv instruction"
+    IDS_ERR_IN_PAGE_ERROR   "in page_error"
+    IDS_ERR_STACK_OVERFLOW  "stack overflow"
+    IDS_ERR_INVALID_DISPOSITION "invalid disposition"
+    IDS_ERR_ARRAY_BOUNDS_EXCEEDED "array bounds exceeded"
+    IDS_ERR_INT_DIVIDE_BY_ZERO "int divide by zero"
+    IDS_ERR_INT_OVERFLOW    "int overflow"
+    IDS_FUNCTION_LOAD_ERROR "Could not Load all Functions"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BASE_MODULE         "Base"
+    IDS_CARA_MODULE         "CARA"
+    IDS_CAPE_MODULE         "CAPE"
+    IDS_UNKNOWN_MODULE      "Unknown"
+    IDS_MODULE              "Module : "
+    IDS_PRODUCT             "Product : "
+    IDS_ETSDIV              "ETSDIV.dll"
+    IDS_ETS3DGL             "ETS3DGL.dll"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CARAWALK            "CARAWALK.dll"
+    IDS_CARABOX             "CARABOX.dll"
+    IDS_CARASDB             "CARASDB.dll"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ETSDIV_ERROR_DISTANCE "Distance out of Range"
+    IDS_ETSDIV_ERROR_STEPS  "Stepvalue out of Range"
+    IDS_ETSDIV_ERROR_RANGE  "Invalid Range"
+    IDS_ETSDIV_ERROR_STEPWIDTH "Stepwidthvalue out of range"
+    IDS_ETSDIV_ERROR_NUMSTEPS "Number of steps out of range"
+    IDS_ETSDIV_ERROR_TEXTLEN "Textlen too small"
+    IDS_ETSDIV_ERROR_MODE   "Invalid Numeric mode"
+    IDS_ETSDIV_ERROR_POINTER "Structure-pointer Zero"
+    IDS_ETSDIV_ERROR_DIV_FKT "Invalid Division-function"
+    IDS_ETSDIV_ERROR_NO_ARRAY "No Array for Sin and Cos Values calculated"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CARAWALK_ROOMDATA_ERROR "Invalid  Roomdata"
+    IDS_CARAWALK_PARENTWND_ERROR "Invalid Parent Window"
+    IDS_CARAWALK_BOXDATA_ERROR "Invalid BoxData"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ETS3DERR_SET_HDC    "Could not set HDC"
+    IDS_ETS3DERR_SET_PIXFMT "Could not set Pixelformat"
+    IDS_ETS3DERR_CREATE_RC  "Could not create Rendercontext"
+    IDS_ETS3DERR_MKCURR_RC  "Could nat make the Rendercontext Current to DC"
+    IDS_ETS3DERR_NOSYNCEVEVT "Could nat Create a syncronise Event-Handle"
+    IDS_ETS3DERR_NOTHREAD   "Could not Create a Thread"
+    IDS_ETS3DERR_TIMEOUT    "Timeout waiting for OpenGL initializing"
+    IDS_ETS3DERR_NOTIMER    "Could not Create a Control-Timer"
+    IDS_ETS3DERR_NOPALETTE  "Kein Farbpaletten-Handle vorhanden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DLL_LOAD_ERROR      "Could not Load Library"
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

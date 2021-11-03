@@ -1,0 +1,26 @@
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(27):#define WM_RENDER_SCENE       (WM_APP + 100)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(28):#define WM_TRANSFORMPOINTS    (WM_APP + 101)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(29):#define WM_SET_VIEWPORT       (WM_APP + 102)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(30):#define WM_SET_VIEWVOLUME     (WM_APP + 103)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(31):#define WM_VALIDATE_LISTS     (WM_APP + 104)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(32):#define WM_VALIDATE_COMMANDS  (WM_APP + 105)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(33):#define WM_CHANGE_3DMODES     (WM_APP + 106)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(35):#define WM_COPY_FRAME_BUFFER  (WM_APP + 107)
+
+C:\Daten\MyProjects\CARAWALK\carawalkdll.cpp(38):#define  WM_CHECKPOS                   (WM_APP+110)            // Sendet eine Nachricht zum überprüfen der Position im Raum
+
+C:\Daten\MyProjects\CARABOXV\CaraBoxViewDlg.cpp(12):#define WM_SETBOXDATA        (WM_APP+111)
+C:\Daten\MyProjects\CARABOXV\CaraBoxViewDlg.cpp(13):#define WM_SETDLGTOTOP       (WM_APP+112)
+C:\Daten\MyProjects\CARABOX\CARABOX.cpp(41):#define WM_GETPICKCOLOR              (WM_APP+113)
+
+C:\Daten\MyProjects\CARAWALK\carawalkdll.cpp(48):#define  WM_3DCHECK                    (WM_APP+114)            // Update-commands für die Menü- und Toolbar-Steuerung
+C:\Daten\MyProjects\CARAWALK\carawalkdll.cpp(57):#define  WM_SETSTATUSBAR_TEXT          (WM_APP+115)
+C:\Daten\MyProjects\CARAWALK\carawalkdll.cpp(75):#define WM_RESET_CURSOR_AFTER_RENDERING  (WM_APP +116)
+
+
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(43):#define WM_REMOVE_PROPERTY      (WM_APP + 150)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(44):#define WM_THREAD_SIZE          (WM_APP + 151)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(45):#define WM_HIDE_THREAD_WND      (WM_APP + 152)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(46):#define WM_SHOW_THREAD_WND      (WM_APP + 153)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(47):#define WM_ATTACH_THREAD_STATES (WM_APP + 154)
+C:\Daten\MyProjects\ETS3DGL\ETS3DGL.h(48):#define WM_DETACH_THREAD_STATES (WM_APP + 155)

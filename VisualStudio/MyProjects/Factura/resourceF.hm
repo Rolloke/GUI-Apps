@@ -1,0 +1,4 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by Factura.rc
+//
+#define HIDC_CUSTOMER_NEW               0x808203e8    // IDD_CUSTOMER

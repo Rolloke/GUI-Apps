@@ -1,0 +1,73 @@
+ 
+// Befehle (ID_* and IDM_*) 
+HID_EDIT_PASTE_SELECTIV                 0x1800C
+HID_VIEW_TB                             0x18016
+HID_VIEW_TB1                            0x18017
+HID_VIEW_TB_TOP                         0x18018
+HID_VIEW_TB_BOTTOM                      0x18019
+HID_VIEW_TB1_LEFT                       0x1801A
+HID_VIEW_TB1_RIGHT                      0x1801B
+HID_VIEW_TB1_TOP                        0x1801C
+HID_VIEW_TB1_BOTTOM                     0x1801D
+HID_VIEW_PRINTER_COLORS                 0x1801E
+HID_VIEW_MENU                           0x1804A
+HID_OPTIONS_PICK                        0x18020
+HID_OPTIONS_LINE                        0x18021
+HID_OPTIONS_CIRCLE                      0x18022
+HID_OPTIONS_RECT                        0x18023
+HID_OPTIONS_BEZIER                      0x18024
+HID_OPTIONS_TEXT                        0x18025
+HID_OPTIONS_GRID                        0x18026
+HID_FUNC_PICK                           0x1802A
+HID_FUNC_LINE                           0x1802B
+HID_FUNC_CIRCLE                         0x1802C
+HID_FUNC_RECTANGLE                      0x1802D
+HID_FUNC_BEZIER                         0x1802E
+HID_FUNC_TEXT                           0x1802F
+HID_FUNC_UP                             0x18034
+HID_FUNC_DOWN                           0x18035
+HID_FUNC_HIGHEST                        0x18036
+HID_FUNC_GROUP                          0x18037
+HID_FUNC_UNGROUP                        0x18038
+HID_FUNC_LOWEST                         0x18039
+HID_FUNC_CATCH_GRID                     0x1803A
+HID_FUNC_BEZIERCIRCLE                   0x1803B
+HID_PLOT_UNITS                   	0x1804B
+HID_PLOT_GRIDLINES               	0x1804C
+HID_PLOT_GRIDTEXT                	0x1804D
+HID_PLOT_HEADING                 	0x1804E
+HID_PLOT_CURVETEXT               	0x1804F
+HID_PLOT_PLOT                           0x18050
+ 
+// Eingabeaufforderungen (IDP_*) 
+ 
+// Ressourcen (IDR_*) 
+HIDR_PREVIEW_CONTEXTMENU                0x20065
+HIDR_MAINFRAME                          0x20080
+HIDR_PREVIEWBAR                         0x2008C
+HIDR_PREVIEWACCELERATORS                0x2008D
+ 
+// Dialogfelder (IDD_*) 
+HIDD_MENUBAR                            0x20067
+HIDD_LISTDLG                            0x2006C
+HIDD_TREEDLG                            0x2006D
+HIDD_PREVIEW_DLG_BAR                    0x2006E
+HIDD_PRINTDIALOG                        0x20096
+HIDD_MARGIN_DIALOG                      0x20097
+HIDD_PASTE_SELECTIV                     0x20098
+HIDD_CATCH_GRID                         0x20099
+HIDD_PRINTING_NOW                       0x2009A
+HIDD_PROPPAGE_LINE                      0x200AA
+HIDD_PROPPAGE_BRUSH                     0x200AB
+HIDD_PROPPAGE_CURVE                     0x200AC
+HIDD_PROPPAGE_FONT                      0x200AD
+HIDD_PROPPAGE_PLOTRANGE                 0x200AE
+HIDD_PROPPAGE_PLOTVIEW                  0x200AF
+HIDD_PROPPAGE_CURVE_COLORS              0x200B0
+HIDD_PROPPAGE_DIBLABEL                  0x200B1
+HIDD_PASTE_SPECIAL                      0x200B2
+HIDD_PREVIEW_DLG_BAR1                   0x200E5
+HIDD_PROPPAGE_COLORSCALE                0x200E6
+HIDD_TEXTDLG                            0x200E7
+ 
+// Rahmen-Steuerelemente (IDW_*) 

@@ -1,0 +1,8 @@
+LIBRARY ETSCDPL BASE=0x69d00000
+VERSION 1.0
+EXPORTS
+   Destructor     @1 NONAME
+   DoModal        @2 NONAME
+   Create         @3 NONAME
+   DoDataExchange @4 NONAME
+   Destroy        @5 NONAME

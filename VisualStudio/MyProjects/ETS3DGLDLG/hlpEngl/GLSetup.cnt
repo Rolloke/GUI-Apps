@@ -1,0 +1,8 @@
+:Base GLSetup.hlp
+:Title Help for Hardware Accelerated 3D Representation
+1 The Dialog 'GLSetup'=HIDD_ETS3DGLDLG_DIALOG
+1 How to set the graphics output=TOPIC1
+1 Bug Fixes=TOPIC2
+1 Settings for individual modules=TOPIC3
+1 If nothing else works=TOPIC4
+1 Glossary=TOPIC5

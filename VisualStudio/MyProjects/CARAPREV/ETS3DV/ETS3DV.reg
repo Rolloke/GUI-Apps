@@ -1,0 +1,30 @@
+REGEDIT
+;   Diese .REG-Datei kann von Ihrem SETUP-Programm verwendet werden.
+;   Falls kein SETUP-Programm verfügbar ist, werden die unten stehenden Einträge
+;   automatisch in InitInstance registriert, mit einem Aufruf an 
+;   CWinApp::RegisterShellFileTypes and COleObjectFactory::UpdateRegistryAll.
+
+HKEY_CLASSES_ROOT\.3dv = ETS3DV.Document
+HKEY_CLASSES_ROOT\ETS3DV.Document\shell\open\command = ETS3DV.EXE %1
+HKEY_CLASSES_ROOT\ETS3DV.Document\shell\open\ddeexec = [open("%1")]
+HKEY_CLASSES_ROOT\ETS3DV.Document\shell\open\ddeexec\application = ETS3DV
+    ; Hinweis: die Anwendung ist optional
+    ;  (als Standardwert wird der Name der Anwendung in "command" verwendet)
+
+HKEY_CLASSES_ROOT\ETS3DV.Document = ETS3DV Document
+HKEY_CLASSES_ROOT\ETS3DV.Document\protocol\StdFileEditing\server = ETS3DV.EXE
+HKEY_CLASSES_ROOT\ETS3DV.Document\protocol\StdFileEditing\verb\0 = &Edit
+HKEY_CLASSES_ROOT\ETS3DV.Document\Insertable =
+HKEY_CLASSES_ROOT\ETS3DV.Document\CLSID = {579C69C0-3BA8-11D4-B6EC-0000B458D891}
+
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891} = ETS3DV Document
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\DefaultIcon = ETS3DV.EXE,1
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\LocalServer32 = ETS3DV.EXE
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\ProgId = ETS3DV.Document
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\MiscStatus = 32
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\AuxUserType\3 = ETS3DV
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\AuxUserType\2 = ETS3DV
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\Insertable = 
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\verb\1 = &Öffnen,0,2
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\verb\0 = &Bearbeiten,0,2
+HKEY_CLASSES_ROOT\CLSID\{579C69C0-3BA8-11D4-B6EC-0000B458D891}\InprocHandler32 = ole32.dll

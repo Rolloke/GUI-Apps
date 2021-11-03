@@ -1,0 +1,881 @@
+Herzlichen Glückwunsch.
+Sie haben mit dem Audiocontroller AC ein professionelles Meßsystem für
+Lautsprecher- und Raumakustikmessungen erworben.
+Lassen Sie sich begeistern - Folgen Sie uns in die aufregende Welt der
+Akustik.
+Ihnen ist sicher bekannt, daß Lautsprecherboxen in verschiedenen Räumen
+sehr unterschiedlich klingen. Die Klangcharakteristik eines Raumes hat einen
+hohen, bisher weit unterschätzten Einfluß auf die Qualität von Musikwiedergabe.
+Sie wollen die Klangqualität Ihrer Stereoanlage verbessern. Mit unserem
+Audiocontroller geben wir Ihnen ein Hilfsmittel in die Hand, dieses Ziel zu
+erreichen. Vereinfacht ausgedrückt ist Musikwiedergabe über Lautsprecherboxen
+eine Kopplung verschiedener Filterfunktionen (Raumakustik, Lautsprecher-bzw.
+Frequenzweichencharakteristik sowie Lautsprecher- und Hörposition)
+mit einem bestimmten Übertragungsverhalten. Mit dem Audiocontroller können
+Sie nun die verschiedenen Übertragungsverhalten bestimmen und mit diversen
+Maßnahmen (Aufstelloptimierung, Frequenzweichenabstimmung, DSP-Entzerrung,...)
+einer möglichst linearen Zielfunktion annähern. Ebenso können
+Sie Computersimulationen überprüfen.
+Obwohl unser Meßsystem professionellen Ansprüchen genügt, ist es trotzdem
+für normale Musikliebhaber und Laien konzipiert. Da es aber im Akustikbereich
+keine Patentrezepte gibt müssen Sie sich Ihr persönliches Konzept selbst
+erarbeiten.
+Wir wünschen Ihnen dabei
+viel Spaß und Erfolg.
+Bedienungsanleitung
+AC AC
+Das ultimative Audio-Tool
+Audio Controller
+Johannes von Reusner e-mail: Reusner@hifish.de
+
+Seite 1
+
+Das Konzept AS-2
+Einleitung
+Batterien oder Akkus wechseln
+Ein und Ausschalten des AC's
+Beschreibung der Menüstruktur
+Menü 1 - Lautstärke u. Balanceregelung
+Menü 1 - Soundabruf SCM
+Menü 1a - Fernsteuerung für CD Spieler
+Menü 1b - Eingangswahl
+Menü 1c - Multiroom Funktionen
+Menü 2a - SCM Programmierung
+Menü 2b - Schallpegelmessung
+Menü 2b - Data Logger
+Menü 2b - RT-60 Messung
+Menü 2b - Selftest
+Menü 2b - Auto-EQ
+Menü 2b - Auto Balance
+Menü 2b - Auto Sound
+Menü 2b - Speakertests
+Menü 3 - Grundeinstellungen
+Anschluß an PC
+Lautsprecheraufstellung optimieren
+Pflege und Reinigung
+Reset Funktion
+Genauigkeit der Frequenzgangmessung
+Meßgenauigkeit
+Technische Daten
+Thema: Seite:
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.
+20.
+21.
+22.
+23.
+24.
+25.
+26.
+27.
+3
+3
+4
+4
+5
+5
+6
+6
+7
+7
+8
+9
+10
+10
+11
+11
+11
+12
+12
+13
+15
+15
+15
+16
+16
+17
+17
+INHALT INHALT Seite 2
+
+
+Mit dem Audiocontroller stehen Ihnen drei Geräte in Einem zur Verfügung: Ein Meßgerät,
+eine Programmiereinheit und eine Fernbedienung.
+Mit dem Meßgerät können Sie die wichtigsten Akustischen Messungen durchführen.
+Es lassen sich die RT 60 Nachhallzeit und der RT 60 Nachhallfrequenzgang eines
+Raumes ebenso wie der Frequenzgang und der Pegel eines Lautsprechers bestimmen.
+Außerdem können Sie damit jederzeit und überall Schallpegel- und Lärmmessungen
+durchführen und den zeitlichen Verlauf bis zu 15h aufzeichnen. Sie können z.B. überprüfen,
+ob sich die Disco in der Nachbarschaft an zulässige Grenzwerte hält. Anschließend
+lassen sich die Meßergebnisse auf dem PC darstellen und ausdrucken.
+Mit dem Programmiergerät haben Sie die Möglichkeit einzelne Bauelemente der
+programmierbaren Frequenzweiche SCM in ihren Werten zu verändern und damit die
+Lautsprecher an Ihren Hörgeschmack und Ihre Raumakustik anzupassen.
+Mit der Fernbedienung rufen Sie verschiedene Soundeinstellungen von programmierbaren
+Lautsprecherboxen ab und bedienen die meisten CD-Spieler ebenso wie unseren
+multiroomfähigen Vorverstärker.
+Zusätzlich gibt es noch Sonderfunktionen wie z.B. den Selftest. Damit können
+Lautsprecherboxen auf Defekte untersucht werden.
+Da im Audiocontroller drei Einzelgeräte zusammengefaßt wurden, stehen Ihnen
+Möglichkeiten zur Verfügung, die bisher mit "normalen" Geräten nicht möglich waren,
+wie z.B.
+- Autobalance, bei dem nicht nur die Amplitude angepaßt, sondern auch die Signale von
+den Lautsprechern so verzögert (Laufzeitkorrektur) werden, daß der Hörer immer im
+perfekten Stereodreieck sitzt.
+- Autosound, der einem die Suche nach der besten Soundeinstellung auf Wunsch komplett
+abnimmt und alles automatisch einstellt.
+- Auto EQ, wobei der Equalizer im Vorverstärker automatisch auf die Raumgegebenheiten
+an der Hörposition eingestellt wird.
+Sie sehen, mit dem AC stehen Ihnen ungeahnte Möglichkeiten der Klangoptimierung
+offen. Um Ihnen den Umgang mit dem "AC" zu erleichtern, steht Ihnen auf unserer
+website www.hifish.de auch eine interaktive Bedienungsanleitung zur Verfügung.
+Mit dem "AC" haben Sie ein äußerst Leistungsstarkes Meß- und Steuergerät erworben,
+das für sich alleine schon ein ultimatives Tool im Akustikbereich darstellt. Doch eingebettet
+in das Akustiksystem "AS-2" kann der "AC" seine volle Funktionalität entfalten. Zusammen
+mit den anderen HiFish-Komponenten bildet der "AC" mit Ihrer Stereoanlage ein
+Akustiksystem, das nicht nur die Hörqualität enorm steigert, sondern auch komplizierteste
+Messungen, Tests und Abstimmungen einfach und bequem per Fernsteuerung ermöglicht.
+Der kostenlose Update Service auf unserer website garantiert Ihnen ständige
+Verbesserungen, Erweiterungen und Neuerungen, ohne das Sie immer wieder Geld für
+neue Geräte ausgeben müssen.
+1. Das Konzept "AS-2"
+für Stereo und Surroundanlagen
+DVD
+VERSTÄRKER
+VORVERSTÄRKER
+CD DST
+SCM SCM
+TUNER
+2. Einleitung
+
+Seite 3
+
+3. Batterien oder Akkus wechseln
+(nicht im Lieferumfang enthalten)
+Öffnen Sie den Deckel auf der Rückseite des Gerätes. Benutzen Sie dazu immer einen
+kleinen Schraubenzieher, versuchen Sie es nie mit den Fingernägeln - der Deckel sitzt
+sehr streng. Führen Sie den Schraubenzieher schräg in einen der beiden kleineren
+Schlitze ein. (siehe Abb. 1) Drücken Sie den Schraubenzieher nach unten und stellen
+ihn dabei senkrecht. (siehe Abb. 2) Hebeln Sie den Deckel auf, indem Sie den
+Schraubenzieher wieder schräg nach unten drücken. (siehe Abb. 3)
+Abb. 1 Abb. 2 Abb. 3
+Wiederholen Sie den Vorgang bei dem zweiten Schlitz. Nun können Sie den Deckel
+aufklappen und entfernen.
+Entnehmen Sie eventuell vorhandene alte Batterien bzw. leere Akkus und legen Sie die
+neuen (4 x Micro/AAA), genau wie in der Abbildung am Boden des Batteriefachs, ein.
+(siehe Abb. 4)
+Abb. 4
+Legen Sie den Deckel zuerst auf der linken Seite des Batteriefaches
+bündig ein, (siehe Abb. 5) und drücken dann mit dem Finger den
+Deckel an der Stelle nach unten, an der sich der Schlitze befindet,
+bis der Deckel einrastet. (siehe Abb. 6) Wiederholen Sie dies beim
+zweiten Schlitz. Abb. 5 Abb. 6
+ACHTUNG !! Verbrauchte Accus u. Batterien gehören in den Sondermüll.
+4. Ein- und Ausschalten des AC's
+Einschalten:
+Ausschalten:
+Selbstverständlich verfügt
+der "AC" auch über eine
+Abschaltautomatik, die
+den "AC" in Menü 1 ca.
+30 sec., in Menü 2 ca. 3
+min. nach dem letzten
+Tastendruck ausschaltet.
+(außer im Modus 3
+"Einstellungen") In Menü
+2b ist die Auto Power Off
+Funktion zusätzlich an die
+Peak-Hold Zeit gekoppelt.
+Drücken Sie einfach die Taste "Select" um den
+"AC" einzuschalten. Sie befinden sich dann
+immer im zuletzt benutzten Menü.
+Drücken Sie die "Select" Taste so oft, bis Sie zu
+Menü 1b gelangen (Beschreibung der
+Menüstruktur siehe Seite 5).
+Drücken Sie ca. 2 sec. die Taste "F3" um den
+"AC", und falls vorhanden, auch den "ACC"
+auszuschalten. 2 sec.
+
+Seite 4
+
+5. Beschreibung der Menüstruktur
+Um die Bedienung möglichst einfach zu gestalten, besitzt der "AC" nur wenige Tasten.
+Um sich innerhalb der vielen Funktionen schnell zurecht zu finden, sind die Funktionen
+in verschiedene Menüs unterteilt.
+Mit Hilfe der "Select" - Taste kann man zwischen den einzelnen Menüs hin- und herspringen.
+2 sec
+drücken
+Menü 1a
+Fernst. CD-Spieler,
+Soundabruf
+1 sec
+drücken
+Menü
+1 / 2
+5 sec
+drücken
+Menü 1b
+Eingangswahl,
+Soundabruf
+1 sec
+drücken
+Menü 1c
+Single- Multiroom,
+Soundabruf
+1 sec
+drücken
+um zwischen
+Menü 1 und
+2 hin und her
+zu wechseln
+Menü 2a SCM-Programmierung
+(Expertenebene)
+1 sec
+drücken
+Menü 2b
+Meß- und
+Testfunktionen
+1 sec
+drücken
+Menü
+3
+1 sec
+drücken
+Menü
+1a
+6. Menü 1 - Lautstärke- und Balanceregelung
+(Menü 1a, 1b, 1c und 2b)
+Zusammen mit den HiFiSH Komponenten Docking Station "DST", Audio Control Center
+"ACC" und Vorverstärker-Modul "PreAmp" kann sowohl die Lautstärke (Volume) als auch
+die Balance mit dem "AC" eingestellt werden.
+Kurzes bzw. langes Drücken
+der "V+" Taste erhöht die
+Lautstärke.
+Kurzes bzw. langes Drücken
+der "V-" Taste senkt die
+Lautstärke.
+Kurzes bzw. langes Drücken
+der "Left" Taste verlagert die
+Balance nach links.
+Kurzes bzw. langes Drücken
+der "Right" Taste verlagert
+die Balance nach rechts.
+
+Seite 5
+
+TIP:
+Legen Sie sich je eine
+andere Programmierung
+auf die "L", "C" und "R"
+Taste, indem Sie mit Hilfe
+der entsprechenden "+"
+und "-" Tasten das
+gewünschte Programm
+einstellen. Durch ab-wechselndes
+Drücken der
+"L", "C" und "R" Tasten
+können Sie drei Sound-programme
+sofort mit-einander
+vergleichen.
+7. Menü 1 - Soundabruf "SCM"
+(Menü 1a, 1b, 1c und 2b)
+Das Speaker Control Modul "SCM" (programmierbare Frequenzweiche) kann bis zu 63
+verchiedene Abstimmungen speichern. (siehe Seite 8 - SCM Programmierung). Diese
+gespeicherten Einstellungen lassen sich mit Hilfe der "DST" und des "AC"s einfach und
+schnell in Echtzeit abrufen und vergleichen.
+Kurzes bzw. langes Drücken der "+" Taste erhöht
+die Programmnummer für die entsprechende
+Programmabruf Taste ("L", "C" oder "R" Taste).
+Durch Drücken der "L", "C" oder "R" Taste wird
+das auf der jeweiligen Taste eingestellte
+Programm in Echtzeit aufgerufen.
+Kurzes bzw. langes Drücken der "-" Taste senkt
+die Programmnummer für die entsprechende
+Programmabruf Taste ("L", "C" oder "R" Taste).
+8. Menü 1a - Fernsteuerung für CD-Spieler
+Der "AC" kann die meisten CD-Spieler folgender Marken fernsteuern: - Aiwa, Denon,
+Harman-Kardon, JVC, Kenwood, NAD, Onkyo, Panasonic, Philips (RC5/kompatibel u.a.
+mit Arcam, Grundig, Linn, Marantz, Meridian, Micromega, Mission, Naim, Proton, Quad,
+Revox/Studer, Rotel, SAE, Sansui, Universum), Pioneer, Rotel, Sharp, Sony, Teac,
+Technics, Yamaha (siehe Seite 36). Außerdem verfügt er noch über einen frei
+programmierbaren Platz, um einen beliebigen CD-Spieler Fernsteuerungs-Code
+abzuspeichern. Dies geschieht über den RS-232 Anschluß mit dem PC. Die dafür
+benötigte Software und verschiedene Codes können Sie sich kostenlos von der HiFiSH.de
+website auf den PC laden.
+Drücken Sie die "Select" Taste
+so oft, bis Sie zu Menü 1a
+gelangen (Beschreibung der
+Menüstruktur siehe Seite 5).
+Drücken Sie "F1" bzw. "F2" um
+einen Track vor bzw. zurück zu
+springen. Für den Schnellauf
+halten Sie die Taste gedrückt.
+Drücken Sie 2 sec. lang die
+Taste "F2" um die Wiedergabe
+ein- bzw. auszuschalten. 2 sec.
+Drücken Sie kurz die Taste "F2"
+um die Pausenfunktion zu
+aktivieren.
+
+Seite 6
+
+9. Menü 1b - Eingangswahl
+Mit Hilfe des "AC" kann die Eingangswahl
+des Vorverstärkers "PreAmp" ferngesteuert
+werden. Es kann zwischen sechs
+verschiedenen Geräten (CD-Spieler, Tuner,
+Tape ...) gewählt werden (Source 1-6).
+Drücken Sie die Taste "F2"
+um Source 2 zu wählen.
+Durch erneutes Drücken der
+Taste "F2" wählen Sie
+Source 5.
+Drücken Sie die Taste "F3"
+um Source 3 zu wählen.
+Durch erneutes Drücken der
+Taste "F3" wählen Sie
+Source 6.
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+1b gelangen.
+Drücken Sie die Taste "F1"
+um Source 1 zu wählen.
+Durch erneutes Drücken der
+Taste "F1" wählen Sie
+Source 4.
+10. Menü 1c - Multiroom Funktionen
+Mit dem "AC" kann die Ausgangswahl des Vorverstärkers "PreAmp" ferngesteuert werden.
+Dabei lassen sich bis zu drei Räume (A,B und C) einzeln oder in jeder beliebigen
+Kombination ansteuern. Im Single Room Modus wählen Sie immer nur einen Raum (A,
+B oder C) aus, im Multi Room Modus können Sie die drei Räume beliebig kombinieren.
+Dabei wird der dominante Raum mit einem Großbuchstaben dargestellt. Dies ist der
+Raum, für den die Änderungen der Eingangswahl, der Lautstärke und der Balance gelten.
+So können Sie z.B. in Raum A Radio, in Raum B und C Musik von verschiedenen CD-Spielern
+hören.
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+1c gelangen (Beschreibung
+der Menüstruktur siehe
+Seite 5).
+Drücken Sie 2 sec. die Taste
+"F1", "F2" oder "F3" um
+zwischen Single und Multi-Room
+Modus zu wechseln.
+2 sec.
+Single Room Modus
+Multi Room Modus
+Drücken Sie kurz die Taste "F1", "F2" oder "F3"
+um zwischen Raum A, B oder C zu wechseln.
+Drücken Sie kurz die Taste "F1", "F2" oder "F3"
+um Raum A, B oder C ein- bzw. auszuschalten.
+Die zuletzt gedrückte Taste erzeugt immer den
+dominanten Raum. (Großbuchstabe)
+
+Seite 7
+
+11. Menü 2a - SCM Programmierung
+Dieses Menü steht nur zur Verfügung, wenn es in den
+Grundeinstellungen aktiviert ist. (siehe Seite 13)
+Zusammen mit dem Audio Control Center "ACC" oder der Docking Station "DST" ist der
+AC in der Lage je nach Version bis zu 100 Millionen Einstellmöglichkeiten für das Speaker
+Control Modul "SCM" (programmierbare Frequenzweiche) zu programmieren. Dazu
+gehört das Ein bzw. Ausschalten, das parallel bzw. in Reihe schalten von Bauteilen, das
+Umpolen des Hochtöners (F3-Phase 0° / 180°) sowie das Ändern der Werte von Spulen,
+Kondensatoren und Widerstände. Durch kombinieren dieser Veränderungen sind Sie in
+der Lage die Klangcharakteristik Ihrer Lautsprecher wesentlich zu beeinflussen, und so
+das für Sie optimale Klangbild zu finden. Dabei werden die Einstellungen per Infrarot
+abgestrahlt, und sind sofort in Echtzeit hörbar.
+Das "SCM" kann bis zu 63 solcher Einstellungen speichern, davon sind die Speicherplätze
+von 01 - 12 (je nach Softwareversion veränderbar) frei belegbar. Per Tastendruck lassen
+sich die 63 Einstellungen auch wieder abrufen.
+Drücken Sie die Taste "F1" um den
+Widerstand R4 (Brücke zum Tieftöner
+- Filter 12 dB) ein- bzw. auszuschalten.
+Drücken Sie die "Left/Right" Taste um
+das Speaker Control Modul "SCM"
+der linken/rechten Lautsprecherbox
+für die Programmierung ein- bzw.
+auszuschalten.
+Schalten Sie alle Lautsprecher-anzeigen
+aus (LE, CE, RI) um in den
+Surround Modus zu gelangen.
+Drücken Sie die "V+" Taste um das
+Speaker Control Modul "SCM" des
+Center Speakers für die Program-mierung
+ein- bzw. auszuschalten.
+(Diese Funktion steht nur zur
+Verfügung, wenn bei den Grundein-stellungen
+der Surround-Modus
+eingestellt ist)
+Drücken Sie die
+Taste "F2" um die
+Bauteilgruppe R1 /
+C2 parallel bzw. in
+Reihe zum Mittel-töner
+zu schalten.
+Drücken Sie die
+Taste "L" mehrfach
+um eine der Spulen
+auszuwählen.
+Drücken Sie die +
+bzw. - Taste um den
+Wert der angezeig-ten
+Spule zu erhö-hen
+/bzw. zu senken.
+Tieftöner
+Mitteltöner
+Hochtöner
+-
++
+Drücken Sie die "Select" Taste so oft,
+bis Sie zu Menü 2a gelangen.
+Durch Drücken der "V-" Taste
+gelangen Sie in den Spei-chermodus.
+(Fisch blinkt)
+Jetzt können Sie mit Hilfe
+einer der "+" bzw. einer der
+"-" Tasten den Speicherplatz
+einstellen (01 - 12). Bei noch-maligen
+Drücken der "V-"
+Taste (2 sec.) werden Ihre
+Einstellungen am gewählten
+Speicherplatz gesichert, und
+es erscheint wieder das
+normale Display. Wird die "V-"
+Taste nicht gedrückt, so wird
+5 sec. nach Drücken der
+letzten Taste der Speicher-modus
+abgebrochen. 2 sec.
+Drücken Sie die Taste "R"
+mehrfach, um einen der
+Widerstände (R1, R2 oder
+R3) auszuwählen.
+Drücken Sie die Taste "+"
+bzw. "-" um den Wert des
+ausgewählten Widerstandes
+zu erhöhen bzw. zu senken.
+Drücken Sie die Taste "C"
+mehrfach, um einen der
+Kondensatoren (C1, C2 oder
+C3) auszuwählen.
+Drücken Sie die Taste "+"
+bzw. "-" um den Wert des
+ausgewählten Kondensators
+zu erhöhen bzw. zu senken.
+
+Seite 8
+
+L1 mH 0,0 1,0 2,2 3,3 4,7 6,8 12
+L2 mH 0,0 ,02 ,03 ,04 ,05 ,07 1,8
+L3 mH 0,2 0,3 0,4 0,5 0,7 1,8 -.-C1
+mF -.- 3,3 6,8 10 15 18 22 25 30 33 37 40 45 48 52 55
+C2 mF -.- 3,3 4,7 6,8 8,0 10 12 15
+C3 mF -.- 0,5 0,7 1,0 1,2 1,5 1,7 2,2 2,7 3,2 3,9 4,4 4,9
+R1 ohm 3,3 3,9 4,7 5,6 6,8 9,5 13 -.-R2
+ohm 0,2 1,0 2,2 2,7 3,3 3,9 4,7 6,5 9,1 -.-R3
+ohm 0,2 2,2 2,7 3,3 3,9 4,7 6,5 9,1
+Tabelle
+Bauteilwerte:
+12. Menü 2b - Schallpegelmessung
+Sobald Sie in das Menü 2b schalten, startet die automatische Pegelmessung.
+(Schallpegelmessung mit Aufzeichnung und Peak-Hold Funktionen)
+Die Aufzeichnung (Data Logger) kann jederzeit durch Drücken einer Taste unterbrochen,
+und später wieder aufgenommen werden. Der AC wird nach Beenden der eingestellten
+Peak-Hold Zeit automatisch abgeschaltet. (nur bei Peak-Hold Zeit von min. 4 min. - Peak-Hold
+Einstellung siehe Seite 14)
+Die so aufgezeichneten Daten können über die Data-Loggerfunktion (siehe Seite 10) in
+Zeitraffer wieder abgerufen, oder am PC ausgelesen werden.
+Haben Sie die digitale Anzeigenart gewählt, so können Sie den dB-Wert direkt ablesen,
+bei der analogen Anzeige (autom. Umschaltung auf digitale Anzeige ab 95 dB/slow)
+werden Ihnen folgende Werte gleichzeitig angezeigt:
+Obere Balkenanzeige:
+Zeigt den aktuellen Schallpegel ("fast"-Meßfenster = 125 ms) und den Maximalwert an
+(einzelner Balken der nach rechts versetzt ist).
+Untere Balkenanzeige:
+Zeigt den Schallpegel als Mittelwert ("slow"-Meßfenster = 1000 ms) und den Maximalwert
+an.
+Anzeige des Maximalwerts
+(Peak-Hold)
+obere Balkenanzeige "fast"
+untere Balkenanzeige "slow"
+Skala von 46
+bis 100 dB
+Schalldruckpegel in dB
+0 10 20 30 40 50 60 70 80 90 100 110 120 130 140
+| | | | | | | | | | | | | | |
+* Abstand 25 m
+übliche Laut-sprecherbox
+mit
+einem Wirkungs-grad
+von 1% entspr.
+92 dB bei 1 Watt
+und 1 m Abstand
+1 m
+| | | | | | | |
+42 52 62 72 82 92 102 112
+Düsentriebwerk*Preßlufthammer Laute HupeRock Gruppe Klassik
+Konzert Maschinenhalle Straßenverkehr Staubsauger Unterhaltung Büroraum Wohnraum Leseraum SchlafraumRundfunkstudio Hörschwelle
+(20 mPa)
+10 mW 0,1 mW1 mW 10 mW 0,1
+W 1 W 10 W100
+W
+dB
+
+Seite 9
+
+13. Menü 2b - Data Logger
+Mit Hilfe der Data Logger Funktion können Sie die automatisch gespeicherten Daten der
+letzten Pegelmessung ( 180 Mittelwerte über die Peak Hold Zeit) im Zeitraffer abspielen.
+Dabei werden in der oberen Balkenanzeige 180 Meßwerte innerhalb 30 sec. (beginnend
+beim ältesten dB-Wert) angezeigt. Die untere Balkenanzeige zeigt den Mittel- und den
+Maximalwert. Sie können die gespeicherten Daten über die Data Logger Funktion immer
+wieder abrufen, solange Sie keine neue Messung vornehmen, (Daten werden
+überschrieben) oder das Abspielen durch einen Tastendruck abbrechen (Daten werden
+gelöscht - Anzeige "no Data"). Die Meßdaten können am PC auch in Kurvenform dargestellt
+werden.
+Drücken Sie 2 sec. die "F1"
+Taste um die Data Logger
+Funktion zu aktivieren. 2 sec.
+Nach abspielen der Daten
+erscheint die Anzeige
+"Ready".
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu
+Menü 2b gelangen.
+Drücken Sie so oft die "F1"
+Taste bis die Anzeige für die
+Data Logger Funktion
+erscheint.
+14. Menü 2b - RT-60 Messung
+Bei dieser Funktion handelt es sich um die wichtigste Raumakustikmessung.
+RT = Reverberation Time (Nachhallzeit): Ermittlung der Zeitspanne in ms, in der der
+Schallpegel um 60 dB abfällt.
+110 dB -100
+dB -90
+dB -80
+dB -70
+dB -60
+dB -50
+dB -40
+dB - ZEIT (t)
+60 dB
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+2b gelangen.
+Drücken Sie 2 sec. die "F1"
+Taste um die RT-60 Messung
+zu aktivieren. 2 sec.
+Drücken Sie so oft die "F1"
+Taste bis die Anzeige für die
+RT-60 Messung erscheint.
+Plazieren Sie den AC im Raum. Klatschen Sie nun kräftig in die Hände oder erzeugen
+Sie auf andere Weise ein kurzes kräftiges Geräusch. Wiederholen Sie die Messung 5 -10
+mal an unterschiedlichen Positionen. Vermeiden Sie dabei einen zu geringen Abstand
+(1 - 2 m) zum "AC", da sonst der Direktschalleinfluß zu groß ist. Bilden Sie aus den
+gemessenen Werten einen Mittelwert für den RT-60 Wert Ihres Raumes.
+Nach Erzeugen eines
+geeigneten Geräusches,
+dessen Pegel mind. 45 dB
+über den Ruhepegel des
+Raumes liegt, erscheint der
+gemessenen Wert im
+Display. Durch Drücken einer
+beliebigen Taste können Sie
+die Messung abbrechen.
+
+Seite 10
+
+15. Menü 2b - Selftest (Frequenzgangmessung
+20 Hz - 20 kHz)
+Durch diese Funktion sind Sie in der Lage eine automatische Überprüfung Ihrer
+Lautsprecher auf Defekte vorzunehmen. Dazu muß die Test CD "ACD" im CD-Spieler
+eingelegt sein. Zuerst erfolgt eine Frequenzgangmessung des linken Lautsprechers,
+dann des rechten, und wenn vorhanden, auch des Center Speakers. (2 x 90 Messungen
+bei Stereo, 3 x 60 Messungen bei Surround, Meßbereich von 20 Hz bis 20 kHz).
+Bekommt der "AC" während der Messung kein Testsignal, so wird dies durch einen vollen
+Ausschlag beider Balken angezeigt. Nachdem die Messung abgeschlossen ist, erscheint
+die Auswertung im Display (OK bzw. Error-Meldung). Optional können Sie das Testergebniss
+mit den Meßkurven auch über den PC abrufen und ausdrucken. ACHTUNG !! Bei einer
+"Error" Meldung muß der Lautsprecher nicht defekt sein, sondern dies kann auch auf
+Raum- und / oder Aufstellungsprobleme hinweisen.
+Regeln Sie die Lautstärke am
+Verstärker so, daß Sie bei
+Track 23 am AC etwa 70 - 80
+dB Pegel messen.
+Drücken Sie 2 sec. die "F2"
+Taste um die Selftest
+Funktion zu aktivieren. (CD-Spieler
+startet Track 9
+automatisch)
+2 sec.
+Als Ergebnis wird entweder
+eine Fehlermeldung für den
+entsprechenden Laut-sprecher
+oder die Anzeige
+für den bestandenen Test
+dargestellt.
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+2b gelangen
+Drücken Sie so oft die "F2"
+Taste bis die Anzeige für die
+Selftest-Funktion erscheint.
+17. Menü 2b - Auto Balance
+Diese Funktion stellt Ihnen, abhängig von verschiedenen HiFiSH Komponenten, mehrere
+Möglichkeiten zur Verfügung:
+1.) - "AC" + Audio Control Center "ACC"
+Damit sind Sie in der Lage die Schallaufzeit jeder Lautsprecherbox zum Hörplatz
+zu messen (in ms).
+2.) - "AC" + Docking Station "DST", Vorverstärker "PreAmp" und Audio Control Center
+"ACC"
+Automatische Einstellung der Lautstärkepegel aller Lautsprecherboxen bezogen
+auf die Hörposition.
+3.) - "AC" + Docking Station "DST", Vorverstärker "PreAmp", Audio Control Center "ACC"
+und Digitaler Signal Prozessor "DSP"
+Mit Hilfe der Auto-Balance Funktion werden die Schallpegel und Signallaufzeiten autom.
+so eingestellt, daß bei jeder Stellung der Lautsprecher zur Hörposition eine optimale
+Raum- oder Stereoperspektive erreicht wird.
+16. Menü 2b - Auto-EQ
+Für diese Funktion werden außer dem "AC" noch folgende HiFiSH Komponenten benötigt:
+- Docking Station "DST", Vorverstärker Modul "PreAmp", Audio Control Center "ACC"
+und der Digitale Signal Prozessor "DSP".
+Die Auto-EQ Funktion führt Frequenzgangmessungen durch, wertet diese selbstständig
+aus und nimmt eine automatische Korrektur am Hörplatz vor.
+
+Seite 11
+
+Regeln Sie die Lautstärke am
+Verstärker so, daß Sie bei
+Track 23 am AC etwa 70 - 80
+dB Pegel messen.
+Drücken Sie 2 sec. die "L",
+"C", oder "R" Taste um den
+Speaker Test für die linke,
+mittlere oder rechte Laut-sprecherbox
+zu aktivieren.
+(CD-Spieler startet Track 3 -
+8 automatisch) 2 sec.
+Drücken Sie so oft die "+"
+bzw. "-" Tasten um zur
+gewünschten Meßfrequenz
+zu kommen.
+Abwechselnd werden Pegel
++ Nachhallzeit (nur bei
+Pegeln > 77 dB) angezeigt.
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+2b gelangen.
+Drücken Sie die "L", "C", oder
+"R" Taste um den Speaker
+Test im Display anzuzeigen.
+18. Menü 2b - Auto Sound
+Für diese Funktion werden außer dem "AC" noch folgende HiFiSH Komponenten benötigt:
+- Docking Station "DST" und Speaker Control Modul "SCM".
+Die Auto-Sound Funktion ist eine automatische Auswahl der optimalen Frequenz-weichenabstimmung
+am Hörplatz. Dabei werden bis zu 52 Soundabstimmungen
+miteinander verglichen. Die Anzahl der zu prüfenden Soundabstimmungen kann in den
+Grundeinstellungen verändert werden (4 - 52) - siehe Seite 14. Das SCM wird automatisch
+auf die beste ermittelte Abstimmung umgestellt. Die Dauer dieser Messung kann bis zu
+5 Minuten betragen, dies ist abhängig von der Anzahl der eingestellten Sound-abstimmungen,
+die durch den AC gemessen, qualitativ beurteilt und miteinander verglichen
+werden.
+Drücken Sie die "Select"
+Taste so oft, bis Sie zu Menü
+2b gelangen.
+Regeln Sie die Lautstärke am
+Verstärker so, daß Sie bei
+Track 23 am AC etwa 70 - 80
+dB Pegel messen.
+Nach der Auswertung erscheint die Anzeige des
+Sounds mit dem besten Meßergebnis, und das
+SCM wird auf diesen Sound umgestellt.
+19. Menü 2b - Speaker Test
+Dies ist eine automatische Pegel und RT-60 Messung.
+Mit 22 Messungen (100 Hz - 12,5 kHz) im Terzraster wird der Frequenzgang der einzelnen
+Lautsprecherboxen und der Nachhallfrequenzgang des Raumes (in ms) ermittelt.
+Die Ausgabe der Daten erfolgt im Display mit Hilfe zweier Anzeigen (Frequenzgang in
+dB und RT-60 Messung in ms) die ca. alle 2 sec. wechseln. Über die RS 232 Schnittstelle
+können die Ergebnisse der Messungen am PC dargestellt werden. Bekommt der "AC"
+während der Messung kein Testsignal, so wird dies durch einen vollen Ausschlag des
+jeweiligen Balken's angezeigt.
+Drücken Sie so oft die "F3"
+Taste bis die Anzeige für die
+Auto-Sound-Funktion
+erscheint.
+Drücken Sie 2 sec. die "F3"
+Taste um die Auto-Sound
+Funktion zu aktivieren. CD-Spieler
+startet Track 2 autom. 2 sec.
+
+Seite 12
+
+C) Digitale oder Analoge Anzeigenart
+Auswahl zwischen Analog- (Balken) oder Digitalanzeige bei Schallpegelmessungen.
+20. Menü 3 - Grundeinstellungen
+Mit Hilfe der Grundeinstellungen sind Sie in der Lage, den "AC" exakt an
+Ihre Bedürfnisse anzupassen.
+A) Filter der Schallpegelanzeige (dB)
+Filter C ist die Normaleinstellung. Bei Filter A wird die Schallpegelanzeige dem menschlichen
+Hören angeglichen. Dies bedeutet, tiefe Töne (unter 1 kHz) werden in der Anzeige
+gefiltert, da diese vom Menschen als nicht so laut empfunden werden wie hohe Töne.
+Frequenzgangmessungen werden prinzipiell linear gemessen, d.h. sie
+werden ohne Filter durchgeführt. Eingeschaltete Filter werden autom. ausgeschaltet.
+Drücken Sie die "Select" Taste 5 sec., bis Sie
+in Menü 3 gelangen (Beschreibung der
+Menüstruktur siehe Seite 5).
+Pegelkorrekturen
+für Filter A und
+Filter C
+gegenüber
+einem linear
+gemessenen
+Schallpegel
+(in dB)
+10
+0
+-10
+-20
+-30
+-40
+31 125 500 2k 8k 63 250 1k 4k 16k
+Frequenz (in Hz)
+Filter A
+Filter C Drücken Sie die "F1" Taste
+um zwischen Filter A und
+Filter C zu wechseln. (nur bei
+Schallpegelmessungen aktiv)
+B) Sinus / Noise - Modus
+Auswahl zwischen Sinus- oder Rauschmessungen bei Speakertest's. Die Einstellung
+Noise bringt genauere Meßergebnisse bei Räumen mit ausgeprägten Raumresonanzen,
+bei normalen Räumen ist der Sinus - Modus vorzuziehen.
+Drücken Sie die "F2" Taste um zwischen Sinus
+und Noisemessungen zu wechseln.
+Drücken Sie die "F3" Taste um zwischen Digital-und
+Analoganzeige zu wechseln.
+D) Einstellung 2- oder 3- Wege Lautsprecherboxen
+Stellen Sie hier ein, ob Sie 2- oder 3- Wege-Lautsprecherboxen besitzen.
+E) Sperren der Programmierebene (Menü 2a).
+F) Einstellung Stereo- oder Surroundanlage
+Schalten Sie hier auf Stereo, wenn Sie eine normale Stereoanlage, und auf Surround,
+wenn Sie eine Surroundanlage mit Center-Speaker besitzen.
+Drücken Sie die "F1" Taste 2 sec., um zwischen
+2- oder 3- Wege Lautsprecherboxen zu
+wechseln. 2 sec.
+Drücken Sie die "F2" Taste 2 sec. um zwischen
+Programmierebene ein (SET NETW) und
+Programmierebene aus (no NETW) zu wechseln. 2 sec.
+Drücken Sie die "F3" Taste 2 sec. um zwischen
+Stereo und Surround zu wechseln.
+2 sec.
+
+Seite 13
+
+G) Einstellung der Soundanzahl für die Auto-Sound Funktion
+Hier legen Sie fest, wieviele gespeicherte SCM-Programmierungen bei der Auto-Sound
+Funktion berücksichtigt werden (04 - 52).
+H) Einstellen der Peak-Hold Zeit
+Stellen Sie hier die Peak-Hold Zeit ein. Nach Ablauf dieser Zeit wird der "AC" automatisch
+abgeschaltet. Bei einer Peak-Hold Zeit von 1 min. oder mehr werden die gemessenen
+Daten automatisch abgespeichert, und können mit der Data Logger Funktion (Seite 10)
+abgerufen werden.
+Peak-Hold Time Tabelle:
+0 sec 1 sec 3 sec 10 sec 30 sec 1 min 2 min 4 min
+8 min 30 min 1 Std 2 Std 3 Std 5 Std 10 Std 15 Std
+Drücken der "V+" Taste
+erhöht die Anzahl um 4 (max.
+52).
+Drücken der "V-" Taste senkt
+die Anzahl um 4 (min. 04).
+Drücken der "Left" Taste
+senkt die Peak-Hold Zeit,
+drücken der "Right" Taste
+erhöht die Peak-Hold Zeit.
+I) Einstellen der CD-Spieler Marke
+Hier können Sie die CD-Spieler für die Räume A, B und C einstellen. Mit Hilfe der "+"
+bzw. "-" Tasten lassen sich die verschiedenen Marken einstellen. Dabei legen Sie den
+CD-Spieler für Raum A auf Taste "L", Raum B auf Taste "C" und Raum C auf Taste "R".
+Eine Liste der gespeicherten Marken finden Sie auf Seite 6.
+Der erste Eintrag "RAM-CDPL" ist ein freier Speicherplatz, auf den sich per PC jeder
+CD-Spieler-Fernsteuerungscode legen läßt. Verschiedene dieser Codes finden Sie in
+unserer "AC"-Software (AC Control). Diese können Sie von unserer website www.hifish.de
+kostenlos herunterladen. Sollten Sie dort Ihren Code auch nicht finden, so können Sie
+uns auch Ihre Fernsteuerung zuschicken. Gegen einen geringen Unkostenbeitrag
+scannen wir Ihre Fernbedienung und
+generieren den entsprechenden Code für
+Ihren AC.
+Durch drücken der den
+Räumen zugehörigen "+"
+bzw. "-" Tasten können Sie
+zwischen den einzelnen
+Marken hin- und herschalten.
+J) Automatische Kalibrierung
+Der "AC" führt eine automatische Kalibrierung (94 dB/1 kHz) durch. In Abwesenheit eines
+Kalibrators wird der Kalibrationswert nicht verändert. In der Anzeige erscheint die
+Versionsnummer der Software.
+K) Grundeinstellungen beenden
+Die veränderten Grundeinstellungen werden wirksam, sobald Sie das Menü 3 verlassen.
+Drücken Sie die "Select" Taste 2 sec., um die
+Auto Kalibration durchzuführen. 2 sec.
+Drücken Sie die "Select" Taste um von Menü 3
+zu Menü 1a zu wechseln.
+
+Seite 14
+
+In jedem Raum entstehen bei entsprechender Anregung diverse Resonanzen, welche
+die Hörqualität beeinträchtigen. Diese Resonanzen verursachen an bestimmten Punkten
+im Raum starke Überhöhungen oder Auslöschungen. Die "Kunst" besteht nun darin, eine
+Lautsprecher- und Hörposition zu finden, an der Raumresonanzen einen möglichst
+geringen Einfluß aufweisen.
+1. Bestimmen Sie den Frequenzgang Ihrer Lautsprecher und den Nachhallfrequenzgang
+Ihres Raumes an verschiedenen Positionen. (Speaker Tests Seite 12)
+2. Ermitteln Sie die Frequenz der ausgeprägtesten Resonanz (längste Nachhallzeit)
+3. Stellen Sie Ihren CD-Spieler auf "Repeat" und spielen Sie den Track mit Terzband
+Rauschen (71-99) mit der entsprechenden Frequenz.
+4. Messen Sie nun den Schallpegel an möglichst vielen Punkten im Raum und notieren
+sich die Plätze mit besonders geringen Pegeln.
+5. An diesen Punkten plazieren Sie nun Ihre Lautsprecherboxen und wiederholen die
+Schritte 1-5 mehrmals.
+6. Die Positionen, die häufig positiv auffielen, eignen sich gleichermaßen als Aufstell-
+und Hörposition.
+7. Plazieren Sie nun Ihre Lautsprecher an Akustisch sinnvollen und Wohnraum akzeptablen
+Punkten, und überprüfen, ob sich der neue Frequenzgang Ihrer Lautsprecher und der
+Nachhallfrequenzgang Ihres Raumes verbessert (möglichst linearer Verlauf) hat.
+21. Anschluß an PC
+(Kabel nicht im Lieferumfang enthalten)
+Über die RS-232 Schnittstelle können Sie mittels eines seriellen Kabels* oder direkt den
+"AC" an den PC anschließen. Dabei verbinden Sie mit dem Kabel die Buchse an der
+Unterseite des "AC"s mit einem der Com-Ports des PC's. Darüber hinaus benötigen Sie
+nur noch die entsprechende Software, die auf unserer website www.hifish.de kostenlos
+zum herunterladen bereit gestellt wird. Dort finden Sie auch Informationen über Installation
+und Bedienung. Achtung !! Stecken Sie nach Gebrauch den "AC" vom PC ab, da sich
+sonst die Batterien des "AC"s entladen !!
+22. Lautsprecheraufstellung optimieren
+23. Pflege und Reinigung
+Setzen Sie den AC keinen extremen Temperaturen aus. Außerdem ist er wasserscheu
+und mag keine Sonnenbäder. Der AC ist absolut wartungsfrei.
+Zum Reinigen verwenden Sie bitte nur ein leicht feuchtes Tuch ohne Alkohol oder
+irgendwelche Reinigungsmittel. Das Display darf nur sehr vorsichtig mit einem
+Brillenputztuch gesäubert werden (Verkratzungsgefahr).
+Diese Vorgehensweise ist eine mögliche Strategie, aber
+kein Patentrezept, mit einer gegebenen Raumakustik
+besser leben zu können.
+
+Seite 15
+
+

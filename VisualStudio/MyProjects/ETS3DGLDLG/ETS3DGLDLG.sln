@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ETS3DGLDLG", "ETS3DGLDLG.vcproj", "{0BC53210-B241-4A7B-980B-1436D5CDC660}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		ReleaseEngl = ReleaseEngl
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.Debug.ActiveCfg = Debug|Win32
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.Debug.Build.0 = Debug|Win32
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.Release.ActiveCfg = Release|Win32
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.Release.Build.0 = Release|Win32
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.ReleaseEngl.ActiveCfg = ReleaseEngl|Win32
+		{0BC53210-B241-4A7B-980B-1436D5CDC660}.ReleaseEngl.Build.0 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

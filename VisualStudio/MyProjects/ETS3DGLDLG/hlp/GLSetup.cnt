@@ -1,0 +1,8 @@
+:Base GLSetup.hlp
+:Title Hilfe für Hardwarebeschleunigte 3D-Darstellung
+1 Der Dialog GLSetup=HIDD_ETS3DGLDLG_DIALOG
+1 Schrittweises Vorgehen=TOPIC1
+1 Bugfixes=TOPIC2
+1 Einstellungen für einzelne Programme=TOPIC3
+1 Wenn nichts mehr geht=TOPIC4
+1 Glossar=GLOSSAR

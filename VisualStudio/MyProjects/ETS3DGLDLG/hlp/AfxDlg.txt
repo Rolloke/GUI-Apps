@@ -1,0 +1,242 @@
+Hilfe für Einstellungen der 3D-Grafikausgabe
+
+Die Grundeinstellungen für die 3D-Grafikausgabe sind so gewählt worden, daß die Grafikausgabe in
+den meisten Fällen funktioniert. Dieser kleinste gemeinsame Nenner ist leider auch sehr langsam.
+
+Wenn Sie eine Grafikkarte mit Hardwarebeschleunigter Grafikausgabe haben, so können Sie die
+HardwarebeschleunigungTOPIC4C mit Hilfe des Programms "GLSetup.exe" aktivieren. Dabei können bei einigen
+Grafikkarten kleine Fehler in der 3D-Darstellung auftreten. Um diese Fehler zu beheben, wurden
+verschiedene BugFixesTOPIC4K für die von ETS getesteten Grafikkarten eingebaut.
+
+
+Worüber möchten Sie mehr erfahren ?
+
+1) Vorgehensweise bei der Einstellung der GrafikausgabeTOPIC1
+2) BugFixes für verschiedene GrafiktreiberTOPIC2
+3) Einstellungen für einzelne ModuleTOPIC3
+4) Allgemeine Beschreibung der BegriffeTOPIC4
+5) Wenn nichs mehr gehtTOPIC5
+
+
+Hinweise !!
+
+{bmc bt.bmp}   Bei dem Modul ETS3DVIEW muß das Programm beendet und erneut aufgerufen werden, um 
+               die Einstellungen zu übernehmen.
+{bmc bt.bmp}   Bei dem Modul CARACAD muß die 3D Ansicht geschlossen und wieder geöffnet werden, um
+               die Einstellung zu übernehmen.
+{bmc bt.bmp}   Installieren Sie, wenn möglich, die aktuellste Treiberversion für Ihre Grafikkarte. Diese können
+               Sie meistens aus dem Internet "downloaden".
+{bmc bt.bmp}   Lesen Sie diese Hilfe sorgfältig und vollständig durch.
+
+
+Das Dialogfeld des Programms GLSetup.exe
+
+{bmc dlg16.bmp}
+
+
+1) Vorgehensweise bei der Einstellung der Grafikausgabe !
+
+1a)  Rufen Sie das Programm GLSetup.exe auf.
+1b)  Aktivieren Sie die HardwarebeschleunigungTOPIC4C für die einzelnen Module (CARACAD &
+     ETS3DVIEW) in dem Dialogfeld.
+1a)  Rufen Sie das Modul CARACAD auf, öffnen eines der Beispiele (z.B.: Sample1.cad) und
+     drücken die Lasche Raum. Schalten Sie im Menu "Ansicht" die "Texturen" ein.  Wenn der
+     Raum mit Texturen fehlerfrei dargestellt wird und Sie sich trotzdem schnell durch den Raum
+     bewegen können, so ist die Einstellung für dieses Modul beendet.
+1d)  Rufen Sie das Modul CARACALC auf, öffnen eines der Beispiele (z.B.: Sample2.cad), rufen im
+     Menü "Ergebnisse/Schallfeldberechnungen..." den Dialog "Ergebnisse der
+     Schallfeldberechnung" auf und drücken dann auf "Graphik". Dadurch wird das Modul
+     ETS3DVIEV aufgerufen und stellt eine 3D-Grafik dar. Aktivieren Sie im Menü "Ansicht" die
+     "Koordinatenachsen", die "Gitterlinien", die "Beleuchtung" und die "Stecknadeln"
+     "Lautsprecherposition" und "Hörerposition". Wenn die Grafik fehlerfrei dargetellt wird, können
+     Sie die Animation im Menü "Animation" mit "Start" aktivieren. Wenn die Animation der Bilder 
+     flüssig aussieht, so ist die einstellung für das Modul ETS3DVIEW beendet.
+1e)  Bei dem Modul ETS3DVIEW werden die Zahlen zur Beschriftung des Gitters oder der
+     Koordinatenachsen nicht durch den Renderer, sondern nach dem RendernTOPIC4A durch das GDITOPIC4N
+     ausgegeben. Dadurch flackern die Zahlen, wenn Sie direktes RendernTOPIC4D eingeschaltet haben.
+     Wenn Sie Bitmap RendernTOPIC4F einschalten, flackern die Zahlen nicht mehr.
+1f)  Sollte die Grafik fehlerhaft dargestellt werden, so können Sie in GLSetup.exe verschiedene
+     Bugfixes aktivieren, um die Darstellung zu verbessern. Die Tabelle zeigt die beste Einstellung
+     für die von ETS getesteten Grafikkarten bzw. den ICDTOPIC4I auf Ihrem Betriebssystem (Win95/98,
+     WinNT4.0, Windows2000, WindowsME). Wenn Ihre Grafikkarte nicht in der Tabelle ist, so
+     können Sie versuchen die Fehler zu beheben, indem Sie verschiedene Einstellungen
+     ausprobieren. Dafür sollten Sie aber vorher diese Hilfe durch lesen, um die für Ihre Grafikkarte
+     sinnvollen Einstellungen zu finden.
+
+
+Diese Grafikkarten wurden von ETS getestet. Wir empfehlen folgende Einstellungen :
+
+{bmc Tabelle.bmp}
+
+
+2) BugFixes für verschiedene Grafiktreiber
+     Diese Einstellungen in dieser Gruppe wirken sich auf alle Module aus.
+
+2a) Normalenvektoren für jeden VertexTOPIC4O erzeugen
+     Wenn die Beleuchtung des Raumes bzw. einzelner Objekte auch bei hoher Auflösung
+     unrealistisch und fleckig erscheint, so werden mit Hilfe dieses BugFixesTOPIC4K zusätzliche
+     NormalenvektorenTOPIC4J für die Berechnung der Beleuchtung erzeugt.
+
+2b) Fenster verschieben
+     Wenn Sie das Anwendungsfenster verschieben und die Grafik nicht verschoben wird, so
+     werden durch diesen BugFix zusätzliche Funktionen ausgeführt, die das Verschieben der
+     Grafik bewirken können.
+
+2c) Maximale Puffergröße initialisieren
+     Wenn Sie das Anwendungsfenster vergrößern, und die Grafik wird nicht oder nur teilweise
+     vergrößert bzw. abgeschnitten, kann dies daran liegen, daß die PuffergrößeTOPIC4B für die
+     Grafikausgabe nicht angepaßt wird. Durch diesen BugFix wird bei Programmstart die
+     Puffergröße mit der maximalen Größe der Bildschirmausgabe initialisiert.
+
+2d) Licht ändern ohne Texturen
+     Bei dem GLDirect Treiber bleibt die Beleuchtung bei eingeschalteten TexturenTOPIC4L (Raum-,
+     Boxenansicht) an einer Stelle stehen. Durch diesen Bugfix wird die Texturberechnung während
+     der Übergabe der Lichtparameter an OpenGL ausgeschaltet.
+
+2e) Puffereinstellungen
+     Diese Einstellung betrifft das Kopieren des Fensterinhaltes in die Zwischenablage, eine
+     Bitmapdatei oder ein Metafileobjekt. Normalerweise werden die Grafikbits aus dem
+     HintergrundpufferTOPIC4E kopiert. Sollte dies nicht funktionieren, so können Sie den VordergrundpufferTOPIC4E
+     für das Kopieren der Grafikbits auswählen. Wenn Sich zum Zeitpunkt des Kopierens ein
+     anderes Fenster über dem 3D-Fenster befindet, so wird in dem 3D-Bild dieses Fenster zu
+     sehen sein. 
+
+2f) Ausgabe der Materialpolygone
+{bmc bt.bmp}   Wenn die Materialflächen bzw. die Lautsprecherchassis in der Raumansicht fehlerhaft
+               gezeichnet werden oder bei Bildbewegungen flackern, so können Sie mit Hilfe des Offsets die
+               Ausgabe der Materialflächen einstellen. Die Voreinstellung für den Offset ist 2.
+{bmc bt.bmp}   Wenn Sie für Offset > 0 wählen, so werden die Materialflächen durch den Z-BufferTOPIC4H um diesen
+               konstanten Z-Offset von der Wand abgehoben. Der Faktor definiert hierbei einen zusätzlichen
+               variablen Wert für den Z-Offset, üblicherweise ist dieser Wert 0.
+{bmc bt.bmp}   Wenn Sie für Offset 0 einstellen, so werden die einzelnen Materialflächen um einen
+               bestimmten (sichtbaren) Betrag von der Wandfläche abgehoben. Mit Hilfe des Faktors können
+               Sie in den Betrag des Abstandes einstellen. Dieser läßt sich im Bereich von 0.0001 bis 0.5
+               variieren. Die Voreinstellung ist hier 0.05.
+
+3) Einstellungen für einzelne Module
+     Die Module CARACAD und ETS3DVIEW haben sehr unterschiedliche Ansprüche an die
+     Ausgabe der 3D-Grafik. Daher können Sie getrennt konfiguriert werden.
+
+3a) Einstellungen für das Modul CARACAD (Raum- und Lautsprecheransicht)
+     
+HardwarebeschleunigungTOPIC4C
+     Die Raum- und Lautsprecheransicht ist ohne Hardwarebeschleunigung sehr langsam. Schalten
+     Sie dann die Texturen aus, um sich im Raum zu bewegen.
+
+Schatten
+     Wenn die Darstellung der Schatten für die Boxen fehlerhaft ist, so können Sie die Darstellung
+     der Schatten ausschalten. Zunächst können Sie aber versuchen den Fehler durch die
+     "Bugfixes" zu beheben, oder die Hardwarebeschleunigung abschalten.
+
+3b) Einstellungen für das Modul ETS3DVIEW (Ergebnisdarstellung)
+     
+HardwarebeschleunigungTOPIC4C
+     Die Darstellung von Filmsequenzen (Zeit-, Frequenzdarstellung) kann bei einigen Treibern zu
+     Speicherverlusten führen (weiterer Speicherbedarf wird dann auf die Festplatte ausgelagert
+     und führt, wenn kein Speicher mehr vorhanden ist, zum Systemabsturz). Dieser Speicher wird
+     zwar bei Programmende wieder freigegeben, jedoch sollten Sie in diesem Falle die
+     Hardwarebeschleunigung abschalten oder einen aktuelleren Treiber installieren.
+
+4) Allgemeine Beschreibung der Begriffe
+
+4a) Rendern
+     Eine 3D-Grafik besteht aus Objekten mit Farbeigenschaften, Material-/ Lichteigenschaften und
+     Oberflächenstruktur (Textur) die beleuchtet werden können und durch perspektivische oder
+     orthogonale Projektion auf einer rechteckigen Fläche wie z.B.: Ihrem Bildschirm dargestellt
+     werden. Der Aufbau bzw. die Berechnung dieser Grafik wird Rendern genannt.
+
+4b) Grafikpuffer
+     Der Grafikpuffer besteht aus Zeilen und Spalten, die einzelne Bildpunkte enthalten (stark
+     vereinfacht). In dem Grafikpuffer wird das Bild gerendert. Der vom Renderer  benutzte
+     Grafikpuffer kann sich auf der Grafikkarte oder im Hauptspeicher Ihres PC's befinden.
+
+4c) Hardwarebeschleunigung
+     Die Hardwarebeschleunigung besteht aus Hardwarekomponenten auf Ihrer Grafikkarte, die
+     dem Prozessor die Berechnung der Grafik abnehmen. Da diese Komponenten speziell für die
+     Ausführung  von Grafikbefehlen konzipiert wurden, kann das Rendern erheblich schneller
+     werden. Wenn die Hardwarebeschleunigung ausgeschaltet wird, so wird die Grafik durch ein
+     Softwaremodul vom Prozessor gerendert.
+
+4d) Direktes Rendern
+     Beim direkten Rendern benutzt der Renderer den Grafikpuffer auf der Grafikkarte. In diesem
+     Fall kann der Renderer die Grafik durch eine Hardwarebeschleunigung erheblich schneller
+     berechnen.
+
+4e) Doppel Grafikpuffer bei direktem Rendern
+     Wenn zwei Grafikpuffer aktiviert sind, wird die Grafik zunächst in den nicht sichtbaren
+     (Hintergrundpuffer) ausgegeben. Der Vordergrundpuffer ist während des Renderns sichtbar. 
+     Anschließend werden der Hintergrund- und Vordergrundpuffer vertauscht.
+
+4f) Indirektes bzw. Bitmap Rendern
+     Beim indirekten Rendern wird die Grafik zuerst in eine Bitmap ausgegeben und anschließend
+     auf den Bildschirm ausgegeben. Der Grafikpuffer (in diesem Fall die Bitmap) befindet sich im
+     Hauptspeicher Ihres Rechners. Dadurch ist eine Beschleunigung der Berechnung durch
+     Hardware nicht möglich.
+
+4g) Doppel Grafikpuffer bei Bitmap Rendern
+     Hier werden zwei Bitmaps für die Ausgabe der Grafik erzeugt. Der Renderer benutzt die 
+     Hintergrundbitmap, um die Grafik zu berechnen während die vordere Bitmap auf den
+     Bildschirm ausgegeben wird.
+
+4h) Z-Puffer
+     Der Z-Puffer enthält Informationen darüber, welche Grafikobjekte von anderen verdeckt
+     werden. Je größer die Tiefe des Z-Puffers ist, desto besser kann OpenGL die Objekte
+     voneinander trennen.
+
+4i) ICD Installable Client Driver
+     Wenn eine hardwarebeschleunigte Grafikkarte die OpenGL-Grafikbefehle nicht versteht, so
+     können sie einen ICD benutzen, um die die OpenGL Grafikbefehle in die Grafikbefehle (z.B.:
+     Direct3D) dieser Karte zu übersetzen.
+
+4j) Normalenvektoren
+     Normalenvektoren stehen immer senkrecht (rechwinklig) zu einer Ebene bzw. zu einer Linie.
+     Sie werden benötigt, um aus dem Einfallswinkel des Lichtes die Helligkeit der Materialfarbe des
+     Grafikobjektes zu berechnen.
+
+4k) BugFix
+     Als die Computer noch aus mechanischen Bauteilen (Relais und Schalter) gebaut wurden,
+     waren Wanzen (Bugs) in diesen Schaltkreisen eine häufige Fehlerursache. Deshalb werden
+     Fehler in Programmen auch heute noch BugFix genannt.
+
+4l) Texturen
+     Mit Hilfe von Texturen kann man der Oberfläche eines 3D-Objektes eine Struktur geben, um
+     somit eine realistischere Darstellung zu erreichen. Texturen sind (vereinfacht betrachtet)
+     Muster, die auf eine Fläche projeziert werden.
+
+4m) OpenGL
+     OpenGL ist eine standardisierte Betriebssystem- und Programiersprachen- unabhängige,
+     Grafikschnittstelle mit deren Hilfe 3 dimensionale Darstellungen realisiert werden können.
+
+4n) GDI Grafik Device Interface
+     Das GDI ist eine Windows spezifische Grafikschnittstelle, die 2 dimensionale Darstellungen
+     ermöglicht.
+
+4o) Vertex
+     3 dimensionale Koordinate für die Beschreibung der 3D-Objekte in OpenGL. 
+
+5) Wenn nichs mehr geht !!
+{bmc bt.bmp}   Report : Mit Hilfe des Report Dialoges können Sie für einzelne Module eine Datei erzeugen, die
+               bekannte Fehler und auch den Programmablauf protokolliert.
+
+     {bmc reportdlg.bmp}
+     {bmc bt.bmp} ETS2DVIEW: Ausgabe von 2D-Diagrammen.
+     {bmc bt.bmp} ETS3DVIEW: Ausgabe von 3D-Diagrammen und Grafiken.
+     {bmc bt.bmp} ETS3DGL: Basismodul für alle 3D-Grafik Darstellungen.
+     {bmc bt.bmp} ETSPRTD: Basismodul für alle Druckaufgaben.
+     {bmc bt.bmp} CARAWALK: Basismodul für die 3D-Grafik im Programm (CARACAD).
+
+     Sollten schwere Fehler bei der Grafikausgabe auftreten, so können Sie die erzeugten
+     Protokolldateien (Dateien mit der Endung *.dbg) mit einer Beschreibung des Fehlers via E-Mail
+     an ELAC Technische Software schicken (info@cara.de). Diese Datei steht, wenn sie erzeugt
+     wird, im CARA-Verzeichnis. Sie können sie mit Hilfe des Windows-Such-Programmes
+     (Startmenü / Suchen / Dateien,Ordner) suchen lassen, indem Sie dort nach Dateien mit der
+     Endung (*.dbg) suchen.
+     Die Erzeugung der Datei benötigt Speicherplatz auf der Festplatte. Außerdem wird das
+     Programm durch das Schreiben des Protokolls langsamer. Die Protokolldatei sollte deshalb nur
+     in Ausnahmefällen erzeugt werden.
+{bmc bt.bmp}   Standard : Stellen Sie die vorgenommenen Änderungen mit Hilfe der Standard-Taste wieder
+               zurück. Die Grafikausgabe wird dann in den meisten Fällen wieder funktionieren.
+{bmc bt.bmp}   In einigen Fällen hilft ein Neustart des Computers, um die normale Funktion der Programme
+               wieder herzustellen.
+{bmc bt.bmp}   Wenn Sie keinen Internet-Anschluß haben, rufen Sie unsere Hotline an (+ 49 - 431 - 680779).
+

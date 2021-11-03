@@ -1,0 +1,906 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_FILE_TYPECD         ICON    DISCARDABLE     "res\\CDInfo.ico"
+IDR_BTN_EJECT           ICON    DISCARDABLE     "res\\BtnEject.ico"
+IDR_BTN_FOLDER          ICON    DISCARDABLE     "res\\idc_ac_b.ico"
+IDR_BTN_FOLDER1         ICON    DISCARDABLE     "res\\idr_btn_.ico"
+IDR_BTN_FOLDER2         ICON    DISCARDABLE     "res\\ico00001.ico"
+IDR_BTN_FOLDER3         ICON    DISCARDABLE     "res\\ico00002.ico"
+IDR_BTN_FOLDER4         ICON    DISCARDABLE     "res\\ico00003.ico"
+IDR_BTN_FOLDER5         ICON    DISCARDABLE     "res\\ico00004.ico"
+IDR_BTN_FOLDER6         ICON    DISCARDABLE     "res\\ico00005.ico"
+IDR_BTN_FOLDER7         ICON    DISCARDABLE     "res\\ico00006.ico"
+IDR_BTN_FOLDER8         ICON    DISCARDABLE     "res\\ico00007.ico"
+IDR_BTN_FOLDER9         ICON    DISCARDABLE     "res\\ico00008.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LIST_IMAGES         BITMAP  DISCARDABLE     "res\\NTCHECK.BMP"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CD_TITLE DIALOGEX 0, 0, 310, 141
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Titelliste"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,255,125,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,190,125,50,12
+    CONTROL         "Titelliste",IDC_CD_TITLE_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,21,300,100
+    EDITTEXT        IDC_CD_INTERPRET,65,4,240,12,ES_AUTOHSCROLL
+    LTEXT           "Autor :",IDC_CD_AUTHOR,5,6,45,8
+    PUSHBUTTON      "Einfügen...",IDC_CD_BTN_INSERT_TITELS,5,126,50,12
+    LTEXT           "Pfad :",IDC_WAVE_PATH,5,6,45,8
+END
+
+IDD_FORMATS DIALOGEX 0, 0, 130, 141
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Multimedia Formate"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,125,50,12
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,125,50,12
+    CONTROL         "Formatliste",IDC_FORMAT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDATA | LVS_NOCOLUMNHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,30,120,91
+    LTEXT           "Geben Sie hier die Dateierweiterung und das Multimediaformat ein :\nBeispiel : *.WAV, waveaudio",
+                    IDC_STATIC,5,0,120,25
+END
+
+IDD_MIXER DIALOGEX 0, 0, 45, 140
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Lautstärke Kontrolle :"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Slider",IDC_MIXER_SLIDER_L,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,5,30,
+                    17,90
+    CONTROL         "Slider",IDC_MIXER_SLIDER_R,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,23,30,
+                    17,90
+    CONTROL         "Line",IDC_MIXER_LINE_MUTE,"Button",BS_AUTOCHECKBOX | 
+                    BS_CENTER | BS_PUSHLIKE | BS_MULTILINE | WS_TABSTOP,5,2,
+                    35,26,WS_EX_STATICEDGE
+    CONTROL         "Einzeln",IDC_MIXER_LINE_SINGLE,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,5,124,35,12,WS_EX_STATICEDGE
+END
+
+IDD_MIXER_OPTIONS DIALOGEX 0, 0, 300, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Lautstärke Kontrolle Optionen:"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_MIXER_OPTIONS_TREE,"SysTreeView32",
+                    TVS_HASBUTTONS | TVS_HASLINES | TVS_DISABLEDRAGDROP | 
+                    TVS_SHOWSELALWAYS | TVS_NOTOOLTIPS | WS_BORDER | 
+                    WS_TABSTOP,5,5,109,125
+END
+
+IDD_CD_PLAYER DIALOGEX 0, 0, 310, 125
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "ETS Multi Media Player : "
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_AC_CD_TIME,5,3,299,37,SS_NOTIFY
+    CONTROL         "1",IDC_AC_BTN_TITLE1,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,5,43,15,14
+    CONTROL         "2",IDC_AC_BTN_TITLE2,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,22,43,15,14
+    CONTROL         "3",IDC_AC_BTN_TITLE3,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,39,43,15,14
+    CONTROL         "4",IDC_AC_BTN_TITLE4,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,56,43,15,14
+    CONTROL         "5",IDC_AC_BTN_TITLE5,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,73,43,15,14
+    CONTROL         "6",IDC_AC_BTN_TITLE6,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,90,43,15,14
+    CONTROL         "7",IDC_AC_BTN_TITLE7,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,107,43,15,14
+    CONTROL         "8",IDC_AC_BTN_TITLE8,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,124,43,15,14
+    CONTROL         "9",IDC_AC_BTN_TITLE9,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,141,43,15,14
+    CONTROL         "10",IDC_AC_BTN_TITLE10,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,158,43,15,14
+    LTEXT           "Titel",IDC_STATIC,177,46,23,8
+    COMBOBOX        IDC_AC_COMBO_CD_TITLE,204,44,60,75,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Start",IDC_AC_CK_PLAY,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_GROUP | WS_TABSTOP,5,59,
+                    61,12
+    CONTROL         "Stop",IDC_AC_CK_STOP,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_TABSTOP,70,59,40,12
+    CONTROL         "Pause",IDC_AC_CK_PAUSE,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_TABSTOP,114,59,40,12
+    CONTROL         "|<<",IDC_AC_BTN_PREV,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,178,59,20,12
+    CONTROL         "<<",IDC_AC_BTN_PREV_C,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,200,59,20,12
+    CONTROL         ">>",IDC_AC_BTN_NEXT_C,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,222,59,20,12
+    CONTROL         ">>|",IDC_AC_BTN_NEXT,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,244,59,20,12
+    CONTROL         "Eject",IDC_AC_BTN_EJECT,"Button",BS_OWNERDRAW | BS_ICON | 
+                    WS_TABSTOP,269,42,35,31
+    CONTROL         "Slider",IDC_SLIDER_TITLE1,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,5,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE2,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,22,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE3,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,39,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE4,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,56,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE5,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,73,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE6,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,90,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE7,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,107,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE8,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,124,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE9,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,141,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE10,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,158,
+                    78,15,45
+    LTEXT           "Lautstärke für Einzeltitel :\nBitte stellen Sie für Musiktitel, die sie vergleichen wollen, eine gleiche Abhörlautstärke ein.",
+                    IDC_STATIC,181,83,123,36,SS_SUNKEN
+    CONTROL         "",IDC_VOLUME_LINE,"Static",SS_BLACKFRAME | SS_SUNKEN,5,
+                    76,299,2
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CD_TITLE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 305
+        HORZGUIDE, 10
+        HORZGUIDE, 132
+    END
+
+    IDD_FORMATS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 125
+        HORZGUIDE, 25
+        HORZGUIDE, 30
+        HORZGUIDE, 121
+        HORZGUIDE, 131
+    END
+
+    IDD_MIXER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 40
+        BOTTOMMARGIN, 139
+        HORZGUIDE, 2
+        HORZGUIDE, 28
+        HORZGUIDE, 30
+        HORZGUIDE, 120
+        HORZGUIDE, 130
+    END
+
+    IDD_MIXER_OPTIONS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        HORZGUIDE, 5
+        HORZGUIDE, 130
+    END
+
+    IDD_CD_PLAYER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 304
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT1 MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "Anzeige"
+        BEGIN
+            MENUITEM "Einzelzeit",                  ID_OPTIONS_CD_ELAPSED_TIME
+
+            MENUITEM "Verbleibende Einzelzeit",     ID_OPTIONS_CD_REMAINING_TIME
+
+            MENUITEM "Gesamtzeit",                  ID_OPTIONS_CD_ELAPSED_TOTAL
+
+            MENUITEM "Verbleibende Gesamtzeit",     ID_OPTIONS_CD_REMAINING_TOTAL
+
+            MENUITEM SEPARATOR
+            MENUITEM "Schriftart...\tF8",           ID_OPTIONS_CD_DISPLAY_FONT
+
+            MENUITEM "Schriftfarbe...",             ID_OPTIONS_CD_DISPLAY_COLOR
+
+            MENUITEM "Hintergrundfarbe...",         ID_OPTIONS_CD_DISPLAY_COLOR_BK
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Titelliste...",               ID_EDIT_CD_LIST
+        MENUITEM "CD-Info speichern in...",     ID_EDIT_CD_LIST_PATH
+        MENUITEM SEPARATOR
+        MENUITEM "Laufwerk / Verzeichnis wählen...", ID_OPTIONS_CD_DRIVE
+        MENUITEM "Dateiformate editieren...",   ID_EDIT_FORMATS
+        MENUITEM SEPARATOR
+        MENUITEM "Lautstärkeregler...",         ID_EDIT_VOLUMES
+        MENUITEM "Audio Kanäle initialisieren", ID_CHANGE_VOLUMES
+        MENUITEM SEPARATOR
+        MENUITEM "Titel vergleichen (Hörtest)", ID_OPTIONS_CD_COMPARE
+        MENUITEM "Abspielen beenden",           ID_OPTIONS_CD_STOP_AT_TRACK_END
+
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   ID_CANCEL_MENU
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_CD_GRP_TEXT      "PC CD-Laufwerk : "
+    IDC_AC_NO_CD_DRIVE      "Kein PC CD-Laufwerk vorhanden"
+    IDS_READ_CD_STATUS      "CD-Daten werden ermittelt"
+    IDS_CD_TRACK            "Titel-Spielzeit:"
+    IDS_CD_TIME             "%d[%d:%02d:%02d]"
+    IDS_CD_TOTAL            "Gesamt-Spielzeit:"
+    IDS_NOCD                "Keine CD im Laufwerk"
+    IDS_CDOTHER             "CD enthält keine Audio Daten"
+    IDS_SELECT_CD_DRIVE     "CD-Laufwerk oder\nVerzeichnis mit Wave-Dateien"
+    IDS_SELECT_CD_INFO_PATH "Wählen Sie das Verzeichnis für die CD-Info Dateien"
+    IDS_TITLE_LIST_WO_PATH  "# Titelliste"
+    IDS_CD_TITLE_TIME       "Länge"
+    IDS_CD_TIME2            "%d:%02d"
+    IDC_AC_CD_RECORD        "Aufnahme"
+    IDS_LOAD_FILE_TITLE     "Einfügen von Multimedia Dateien"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CD_LIST_PATH    "Ändert das Verzeichnis, in dem die CD-Info Dateien gespeichert werden"
+    ID_OPTIONS_CD_DRIVE     "Stellt ein anderes PC CD-Laufwerk oder ein Verzeichnis mit Wave-Dateien ein"
+    ID_OPTIONS_CD_ELAPSED_TIME "Zeigt die abgelaufene Zeit des Titels an"
+    ID_OPTIONS_CD_REMAINING_TIME "Zeigt die Restzeit des Titels an"
+    ID_OPTIONS_CD_ELAPSED_TOTAL "Zeigt die abgelaufene Zeit der CD an"
+    ID_OPTIONS_CD_REMAINING_TOTAL "Zeigt die Restzeit der CD an"
+    ID_OPTIONS_CD_COMPARE   "Bei Aktivierung wird die aktuelle Titelzeit beim Umschalten nicht zurückgesetzt, um z.B. zwei Titel zu vergleichen"
+    ID_EDIT_FORMATS         "Editiert die Dateiformate, die abgespielt werden können"
+    ID_OPTIONS_CD_DISPLAY_COLOR "Stellt die Farbe der CD-Anzeige ein"
+    ID_OPTIONS_CD_DISPLAY_FONT "Stellt die Schriftart für die CD-Anzeige ein"
+    ID_OPTIONS_CD_DISPLAY_COLOR_BK 
+                            "Stellt die Hintergrundfarbe der CD-Anzeige ein"
+    ID_EDIT_VOLUMES         "Stellt die Lautstärke ein"
+    ID_EDIT_CD_LIST         "Zeigt eine Titelliste bzw. editiert Titel und Interpret einer CD"
+    ID_OPTIONS_CD_STOP_AT_TRACK_END 
+                            "Stopt das Abspielen, wenn das Musikstück zu Ende ist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CD_TITLE_NO         "Nr"
+    IDS_CD_TITLE_TEXT       "Titel"
+    IDS_CD_SAVE_TITLE       "Wave Recorder"
+    IDS_CD_SAVE_TEXT        "Soll der Titel gespeichert werden ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_DEST0         "Undefiniert"
+    IDS_MIXER_DEST1         "Digital"
+    IDS_MIXER_DEST2         "Line"
+    IDS_MIXER_DEST3         "Monitor"
+    IDS_MIXER_DEST4         "Lautsprecher"
+    IDS_MIXER_DEST5         "Kopfhörer"
+    IDS_MIXER_DEST6         "Telefon"
+    IDS_MIXER_DEST7         "Wave Eingang"
+    IDS_MIXER_DEST8         "Stimme Eingang"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_SRC0          "Undefiniert"
+    IDS_MIXER_SRC1          "Digital"
+    IDS_MIXER_SRC2          "Line"
+    IDS_MIXER_SRC3          "Mikrophon"
+    IDS_MIXER_SRC4          "Synthesizer"
+    IDS_MIXER_SRC5          "CD"
+    IDS_MIXER_SRC6          "Telefon"
+    IDS_MIXER_SRC7          "PC Lautsprecher"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_SRC8          "Wave Ausgang"
+    IDS_MIXER_SRC9          "Aux"
+    IDS_MIXER_SRC10         "Analog"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_BTN_NEXT_C       "Spult in 10 Sek. Schritten vor"
+    IDC_AC_BTN_PREV_C       "Spult in 10 Sek. Schritten zurück"
+    IDC_AC_CD_TIME          "Zeigt Informationen über Titel, Zeit und Position an.\nKlicken Sie mit der rechten Maustaste auf das Dialogfenster,\num weitere Einstellungen über ein \tKontextmenü vorzunehmen."
+    IDC_MIXER_LINE_FADER    "\tFunktion : %s\n\tName : %s\n\tKomponente : %s\n\tKanal : %x (%d)"
+    IDC_MIXER_LINE_MUX      "Umschalter für mehrere Kanäle"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_INTERPRET_B      "Zeigt das Verzeichnis der Titelliste."
+    IDC_MIXER_LINE_MUTE     "Schaltet diesen Kanal ein bzw. aus.\n\tFunktion : %s\n\tName : %s\n\tKomponente : %s\n\tKanal : %x (%d)"
+    IDC_MIXER_SLIDER_L      "Pegel für den linken Kanal"
+    IDC_MIXER_SLIDER_R      "Pegel für den rechten Kanal"
+    IDC_MIXER_LINE_SINGLE   "Bei Aktivierung lassen sich die Lautstärkeregler für den\nlinken und rechten Kanal getrennt einstellen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FORMAT_LIST         "Zeigt die Multimediaformate, die der ETS MM-Player spielen kann.\nSie können weitere Formate hinzufügen.\nMit dem Häckchen können Sie einzelne Formate (de)aktivieren"
+    IDC_AC_BTN_EJECT        "Öffnet die CD-Schublade"
+    IDC_AC_CK_PLAY          "Startet die Wiedergabe des aktuellen Titels"
+    IDC_AC_CK_STOP          "Stopt die Wiedergabe"
+    IDC_AC_CK_PAUSE         "Unterbricht die Wiedergabe"
+    IDC_AC_BTN_NEXT         "Springt zu nächsten Titel"
+    IDC_AC_BTN_PREV         "Springt zum vorhergehenden Titel"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_CD_TITLE   "Hier können Sie einen Titel direkt wählen"
+    IDC_SLIDER_TITLE1       "Stellt die Lautstärke für Titel %d ein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_BTN_INSERT_TITELS 
+                            "Fügen Sie weitere Titel zu der Titelliste hinzu."
+    IDC_CD_TITLE_LIST       "Hier können Sie die Titel der CD ändern.\nMarkieren Sie dazu einen Titel mit der Maustaste.\nKlicken Sie dann nochmals auf den markierten Titel,\num ihn zu editieren.\nMit einem Doppelklick können Sie einen Titel für\nden Media Player wählen."
+    IDC_CD_TITLE_LIST_B     "Zeigt die Titelliste.\nMit einem Doppelklick können Sie einen Titel\nfür den Media Player wählen."
+    IDC_CD_INTERPRET        "Hier können sie den Namen des Interpreten ändern"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CHANGE_VOLUMES       "Schaltet alle für das Abhören benötigten Audiokanäle ein. Alle anderen nicht benötigten Audiokanäle werden ausgeschaltet."
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Englisch (USA) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CD_TITLE DIALOGEX 0, 0, 300, 141
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Track List"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,245,125,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,190,125,50,12
+    CONTROL         "Track List",IDC_CD_TITLE_LIST,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_EDITLABELS | LVS_OWNERDATA | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,21,290,100
+    EDITTEXT        IDC_CD_INTERPRET,55,5,240,12,ES_AUTOHSCROLL
+    LTEXT           "Author:",IDC_CD_AUTHOR,5,6,45,8
+    PUSHBUTTON      "Insert...",IDC_CD_BTN_INSERT_TITELS,5,126,50,12
+    LTEXT           "Path:",IDC_WAVE_PATH,5,7,45,8
+END
+
+IDD_FORMATS DIALOGEX 0, 0, 130, 141
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Multimedia Formats"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,125,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,5,125,50,12
+    CONTROL         "Format List",IDC_FORMAT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDATA | LVS_NOCOLUMNHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,30,120,91
+    LTEXT           "Please enter file extension\nand multimedia format:\ne.g.: *.WAV, waveaudio",
+                    IDC_STATIC,5,0,120,25
+END
+
+IDD_CD_PLAYER DIALOGEX 0, 0, 310, 125
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "ETS Multi Media Player: "
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_AC_CD_TIME,5,3,299,37,SS_NOTIFY
+    CONTROL         "1",IDC_AC_BTN_TITLE1,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,5,43,15,14
+    CONTROL         "2",IDC_AC_BTN_TITLE2,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,22,43,15,14
+    CONTROL         "3",IDC_AC_BTN_TITLE3,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,39,43,15,14
+    CONTROL         "4",IDC_AC_BTN_TITLE4,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,56,43,15,14
+    CONTROL         "5",IDC_AC_BTN_TITLE5,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,73,43,15,14
+    CONTROL         "6",IDC_AC_BTN_TITLE6,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,90,43,15,14
+    CONTROL         "7",IDC_AC_BTN_TITLE7,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,107,43,15,14
+    CONTROL         "8",IDC_AC_BTN_TITLE8,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,124,43,15,14
+    CONTROL         "9",IDC_AC_BTN_TITLE9,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,141,43,15,14
+    CONTROL         "10",IDC_AC_BTN_TITLE10,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_TABSTOP,158,43,15,14
+    LTEXT           "Track",IDC_STATIC,177,46,23,8,WS_TABSTOP
+    COMBOBOX        IDC_AC_COMBO_CD_TITLE,204,44,60,75,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Start",IDC_AC_CK_PLAY,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_GROUP | WS_TABSTOP,5,59,
+                    61,12
+    CONTROL         "Stop",IDC_AC_CK_STOP,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_TABSTOP,70,59,40,12
+    CONTROL         "Pause",IDC_AC_CK_PAUSE,"Button",BS_OWNERDRAW | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_TABSTOP,114,59,40,12
+    CONTROL         "|<<",IDC_AC_BTN_PREV,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,178,59,20,12
+    CONTROL         "<<",IDC_AC_BTN_PREV_C,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,200,59,20,12
+    CONTROL         ">>",IDC_AC_BTN_NEXT_C,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,222,59,20,12
+    CONTROL         ">>|",IDC_AC_BTN_NEXT,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED | WS_TABSTOP,244,59,20,12
+    CONTROL         "Eject",IDC_AC_BTN_EJECT,"Button",BS_OWNERDRAW | BS_ICON,
+                    269,42,35,31
+    CONTROL         "Slider",IDC_SLIDER_TITLE1,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,5,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE2,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,22,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE3,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,39,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE4,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,56,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE5,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,73,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE6,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,90,78,
+                    15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE7,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,107,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE8,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,124,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE9,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,141,
+                    78,15,45
+    CONTROL         "Slider",IDC_SLIDER_TITLE10,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,158,
+                    78,15,45
+    LTEXT           "Volumes for single tracks:\nPlease adjust equal volumes for the tracks to be compared.",
+                    IDC_STATIC,181,83,123,36,SS_SUNKEN
+    CONTROL         "",IDC_VOLUME_LINE,"Static",SS_BLACKFRAME | SS_SUNKEN,5,
+                    76,299,2
+END
+
+IDD_MIXER DIALOGEX 0, 0, 44, 140
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP
+CAPTION "Volume Control: "
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Slider",IDC_MIXER_SLIDER_L,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,5,30,
+                    17,90
+    CONTROL         "Slider",IDC_MIXER_SLIDER_R,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | TBS_TOOLTIPS | WS_TABSTOP,23,30,
+                    17,90
+    CONTROL         "Line",IDC_MIXER_LINE_MUTE,"Button",BS_AUTOCHECKBOX | 
+                    BS_CENTER | BS_PUSHLIKE | BS_MULTILINE | WS_TABSTOP,5,2,
+                    35,26,WS_EX_STATICEDGE
+    CONTROL         "Single",IDC_MIXER_LINE_SINGLE,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,5,123,35,12,WS_EX_STATICEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CD_TITLE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        HORZGUIDE, 10
+        HORZGUIDE, 132
+    END
+
+    IDD_FORMATS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 125
+        HORZGUIDE, 25
+        HORZGUIDE, 30
+        HORZGUIDE, 121
+        HORZGUIDE, 131
+    END
+
+    IDD_CD_PLAYER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 304
+        HORZGUIDE, 50
+        HORZGUIDE, 65
+    END
+
+    IDD_MIXER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 40
+        BOTTOMMARGIN, 139
+        HORZGUIDE, 2
+        HORZGUIDE, 28
+        HORZGUIDE, 30
+        HORZGUIDE, 120
+        HORZGUIDE, 129
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT1 MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        POPUP "Display"
+        BEGIN
+            MENUITEM "Track Time",                  ID_OPTIONS_CD_ELAPSED_TIME
+
+            MENUITEM "Remaining Track Time",        ID_OPTIONS_CD_REMAINING_TIME
+
+            MENUITEM "Total Time",                  ID_OPTIONS_CD_ELAPSED_TOTAL
+
+            MENUITEM "Remaining Total Time",        ID_OPTIONS_CD_REMAINING_TOTAL
+
+            MENUITEM SEPARATOR
+            MENUITEM "Font...",                     ID_OPTIONS_CD_DISPLAY_FONT
+
+            MENUITEM "Text Color...",               ID_OPTIONS_CD_DISPLAY_COLOR
+
+            MENUITEM "Background Color...",         ID_OPTIONS_CD_DISPLAY_COLOR_BK
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Track List...",               ID_EDIT_CD_LIST
+        MENUITEM "Save CD Info in...",          ID_EDIT_CD_LIST_PATH
+        MENUITEM SEPARATOR
+        MENUITEM "Select Drive or Folder...",   ID_OPTIONS_CD_DRIVE
+        MENUITEM "Edit Multi Media Formats...", ID_EDIT_FORMATS
+        MENUITEM SEPARATOR
+        MENUITEM "Volume Control...",           ID_EDIT_VOLUMES
+        MENUITEM "Initialisize Audio Lines",    ID_CHANGE_VOLUMES
+        MENUITEM SEPARATOR
+        MENUITEM "Compare Tracks (Listening Test)", ID_OPTIONS_CD_COMPARE
+        MENUITEM "Stop at Track End",           ID_OPTIONS_CD_STOP_AT_TRACK_END
+
+        MENUITEM SEPARATOR
+        MENUITEM "Cancel",                      ID_CANCEL_MENU
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_CD_GRP_TEXT      "CD Drive: "
+    IDC_AC_NO_CD_DRIVE      "No CD drive available"
+    IDS_READ_CD_STATUS      "Reading CD Data"
+    IDS_CD_TRACK            "Track Time"
+    IDS_CD_TIME             "%d[%d:%02d:%02d]"
+    IDS_CD_TOTAL            "Total Time"
+    IDS_NOCD                "No Media"
+    IDS_CDOTHER             "CD does not contain any audio data"
+    IDS_SELECT_CD_DRIVE     "Select CD drive or folder with multi media files"
+    IDS_SELECT_CD_INFO_PATH "Select folder for the CD information files"
+    IDS_TITLE_LIST_WO_PATH  "# Track List"
+    IDS_CD_TITLE_TIME       "Length"
+    IDS_CD_TIME2            "%d:%02d"
+    IDC_AC_CD_RECORD        "Record"
+    IDS_LOAD_FILE_TITLE     "Insertion of multi media files"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CD_LIST_PATH    "Changes the folder for CD info files"
+    ID_OPTIONS_CD_DRIVE     "Selects annother CD drive or folder for multi media files"
+    ID_OPTIONS_CD_ELAPSED_TIME "Shows the elapsed time of the current track"
+    ID_OPTIONS_CD_REMAINING_TIME 
+                            "Shows the remaining time of the current track"
+    ID_OPTIONS_CD_ELAPSED_TOTAL "Shows the overall elapsed time"
+    ID_OPTIONS_CD_REMAINING_TOTAL "Shows the overall remaining time"
+    ID_OPTIONS_CD_COMPARE   "Checking this menu item causes the timer not to be reset while switching the tracks"
+    ID_EDIT_FORMATS         "Edits the multi media file formats"
+    ID_OPTIONS_CD_DISPLAY_COLOR "Changes the display color"
+    ID_OPTIONS_CD_DISPLAY_FONT "Changes the display font"
+    ID_OPTIONS_CD_DISPLAY_COLOR_BK "Changes the display background color"
+    ID_EDIT_VOLUMES         "Sets the volume"
+    ID_EDIT_CD_LIST         "Shows the play list or edits CD information (track, author)"
+    ID_OPTIONS_CD_STOP_AT_TRACK_END "Stops playing at the end of the track"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CD_TITLE_NO         "No"
+    IDS_CD_TITLE_TEXT       "Track"
+    IDS_CD_SAVE_TITLE       "Wave Recorder"
+    IDS_CD_SAVE_TEXT        "Shall the track be saved?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_DEST0         "Undefined"
+    IDS_MIXER_DEST1         "Digital"
+    IDS_MIXER_DEST2         "Line"
+    IDS_MIXER_DEST3         "Monitor"
+    IDS_MIXER_DEST4         "Loudspeaker"
+    IDS_MIXER_DEST5         "Headphone"
+    IDS_MIXER_DEST6         "Telephone"
+    IDS_MIXER_DEST7         "Wave In"
+    IDS_MIXER_DEST8         "Voice In"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_SRC0          "Undefined"
+    IDS_MIXER_SRC1          "Digital"
+    IDS_MIXER_SRC2          "Line"
+    IDS_MIXER_SRC3          "Microphone"
+    IDS_MIXER_SRC4          "Synthesizer"
+    IDS_MIXER_SRC5          "CD"
+    IDS_MIXER_SRC6          "Telephone"
+    IDS_MIXER_SRC7          "PC Loudspeaker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIXER_SRC8          "Wave Out"
+    IDS_MIXER_SRC9          "Aux"
+    IDS_MIXER_SRC10         "Analog"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FORMAT_LIST         "Shows the multi media formats supported by the ETS MM-Player.\nYou may add further formats.\nChecking the control activates single formats."
+    IDC_AC_BTN_EJECT        "Opens the CD drawer"
+    IDC_AC_CK_PLAY          "Starts playing the selected track"
+    IDC_AC_CK_STOP          "Stops playing"
+    IDC_AC_CK_PAUSE         "Interupts playing"
+    IDC_AC_BTN_NEXT         "Skips to next track"
+    IDC_AC_BTN_PREV         "Skips to last track"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_BTN_NEXT_C       "Winds in steps of 10 sec."
+    IDC_AC_BTN_PREV_C       "Rewinds in steps of 10 sec."
+    IDC_AC_CD_TIME          "Displays information about track, time and position.\nRight click on the dialog window will\nopen a context menu for further settings."
+    IDC_MIXER_LINE_FADER    "\tControl : %s\n\tName : %s\n\tComponent : %s\n\tLine : %x (%d)"
+    IDC_MIXER_LINE_MUX      "Switch for multiple channels"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_INTERPRET_B      "Shows the track list folder if the files are saved in one single folder."
+    IDC_MIXER_LINE_MUTE     "Switches this channel on or off.\n\tControl : %s\n\tName : %s\n\tComponent : %s\n\tLine : %x (%d)"
+    IDC_MIXER_SLIDER_L      "Level of the left channel"
+    IDC_MIXER_SLIDER_R      "Level of the right channel"
+    IDC_MIXER_LINE_SINGLE   "On activation, the volumes of the left and\nright channel may be controlled separately."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_AC_COMBO_CD_TITLE   "Select a specific track"
+    IDC_SLIDER_TITLE1       "Adjusts the volume for track %d."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CD_BTN_INSERT_TITELS "Add further tracks to the track list."
+    IDC_CD_TITLE_LIST       "Here you may change the name of a CD track.\nClicking two times on a track of the list\nswitches to the editing mode."
+    IDC_CD_TITLE_LIST_B     "Shows the track list. Double clicking on a track\nwill select this track for the CD player."
+    IDC_CD_INTERPRET        "Here you may change the name of the interpreter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CHANGE_VOLUMES       "Switches all required audio lines on. Not required audio lines are switched off."
+END
+
+#endif    // Englisch (USA) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Österreich) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT1 MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "Regler Einstellungen...",     ID_OPTIONS_VOLUME
+        MENUITEM SEPARATOR
+        MENUITEM "Abbrechen",                   ID_CANCEL_MENU
+    END
+END
+
+#endif    // Deutsch (Österreich) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
