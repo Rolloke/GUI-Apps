@@ -10,6 +10,9 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QSettings>
+#include <QGraphicsPixmapItem>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
@@ -50,12 +53,24 @@ MainWindow::MainWindow(QWidget *parent) :
         mListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
         ui->comboBoxSearchColumn->addItem(fSectionNames[fSection], fSection);
     }
+    // TODO! checkboxes in table
+    // TODO! hide columns
+    // TODO! isRadio as column
+    // TODO! stretch view
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
     ui->tableView->setModel(mListModel);
+    ui->graphicsView->setScene(new QGraphicsScene ());
+
+    ui->sliderVolume->setMinimum(0);
+    ui->sliderVolume->setMaximum(100);
+    ui->sliderVolume->setTickPosition(QSlider::TicksBothSides);
+    ui->sliderVolume->setTickInterval(10);
+    ui->sliderVolume->setSingleStep(1);
 
     fSettings.beginGroup(config::sGroupSettings);
 
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
+    LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
     LOAD_STR(fSettings, mFileOpenPath, toString);
 
     fSettings.endGroup();
@@ -66,6 +81,7 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupSettings);
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
+    STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
     fSettings.endGroup();
 
@@ -83,17 +99,79 @@ QString MainWindow::getConfigName() const
 #endif
 }
 
+void MainWindow::on_tableView_clicked(const QModelIndex &index)
+{
+    QString mediaUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
+    mPlayer.setMedia(QUrl(mediaUrl));
+    if (!mIsRadio[index.row()])
+    {
+        mVideo.show();
+    }
+
+    ui->graphicsView->scene()->clear();
+    QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
+    const QUrl url(logoUrl);
+    QNetworkRequest request(url);
+
+    QNetworkReply* reply = mNetManager.get(request);
+    connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
+}
+
+void MainWindow::onReplyFinished()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (reply)
+    {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            const int available = reply->bytesAvailable();
+            if (available > 0)
+            {
+                const QByteArray data(reply->readAll());
+                QImage image;
+                image.loadFromData(data);
+                ui->graphicsView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
+                auto items = ui->graphicsView->scene()->items();
+                if (items.size())
+                {
+                    ui->graphicsView->fitInView(items[0], Qt::KeepAspectRatio);
+                }
+            }
+            ui->statusBar->showMessage("image loaded");
+        }
+        else
+        {
+            ui->statusBar->showMessage(tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()));
+        }
+        reply->deleteLater();
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Download failed. Check internet connection"));
+    }
+}
 
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 {
     QString mediaUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
     mPlayer.setMedia(QUrl(mediaUrl));
-    mPlayer.setVolume(50);
+    on_pushButtonStart_clicked();
+}
+
+void MainWindow::on_pushButtonStart_clicked()
+{
     mPlayer.play();
-    if (!mIsRadio[index.row()])
-    {
-        mVideo.show();
-    }
+}
+
+void MainWindow::on_sliderVolume_valueChanged(int value)
+{
+    mPlayer.setVolume(value);
+}
+
+void MainWindow::on_pushButtonStop_clicked()
+{
+    mPlayer.stop();
 }
 
 void MainWindow::on_pushButtonSelect_clicked()
@@ -211,3 +289,5 @@ QString getSettingsName(const QString& aItemName)
     }
     else return aItemName;
 }
+
+
