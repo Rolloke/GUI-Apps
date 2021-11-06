@@ -29,12 +29,20 @@ QString getSettingsName(const QString& aItemName);
 
 namespace config
 {
-constexpr char sGroupSettings[] = "Settinga";
+constexpr char sGroupSettings[] = "Settings";
+}
+
+namespace txt
+{
+const QString radio           = QObject::tr("Radio");
+const QString tv              = QObject::tr("TV");
+const QString open_media_list = QObject::tr("Open Media List");
+const QString media_list      = QObject::tr("Media List (*.txt *.*)");
 }
 
 enum eTable
 {
-    eName, eID, eGroup, eURL, eLogo, eFriendlyName, eLast = eFriendlyName
+    eName, eID, eGroup, eURL, eLogo, eFriendlyName, eDestination, eLast
 };
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -45,18 +53,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     mPlayer.setVideoOutput(&mVideo);
 
-    QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Gruppe"), tr("URL"), tr("Logo"), tr("Friendly Name")};
+    QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Gruppe"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
-    mListModel = new QStandardItemModel(0, eLast, this);
-    for (int fSection = 0; fSection <= eLast; ++fSection)
+    mListModel = new CheckboxItemModel(0, eLast, this);
+    for (int fSection = 0; fSection < eLast; ++fSection)
     {
         mListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
         ui->comboBoxSearchColumn->addItem(fSectionNames[fSection], fSection);
     }
-    // TODO! checkboxes in table
-    // TODO! hide columns
-    // TODO! isRadio as column
-    // TODO! stretch view
+
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
     ui->tableView->setModel(mListModel);
     ui->graphicsView->setScene(new QGraphicsScene ());
@@ -101,12 +106,12 @@ QString MainWindow::getConfigName() const
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    QString mediaUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
-    mPlayer.setMedia(QUrl(mediaUrl));
-    if (!mIsRadio[index.row()])
+    if (index.column() == eName)
     {
-        mVideo.show();
+        mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
+    mCurrentUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
+    mCurrentDestination = mListModel->data(mListModel->index(index.row(), eDestination)).toString();
 
     ui->graphicsView->scene()->clear();
     QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
@@ -152,15 +157,18 @@ void MainWindow::onReplyFinished()
     }
 }
 
-void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &)
 {
-    QString mediaUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
-    mPlayer.setMedia(QUrl(mediaUrl));
     on_pushButtonStart_clicked();
 }
 
 void MainWindow::on_pushButtonStart_clicked()
 {
+    mPlayer.setMedia(QUrl(mCurrentUrl));
+    if (mCurrentDestination == txt::tv)
+    {
+        mVideo.show();
+    }
     mPlayer.play();
 }
 
@@ -190,22 +198,25 @@ void MainWindow::on_pushButtonSelect_clicked()
 
 void MainWindow::on_pushButtonOpen_clicked()
 {
+    QString filename = QFileDialog::getOpenFileName(this, txt::open_media_list, mFileOpenPath, txt::media_list);
+    QFileInfo info(filename);
+    mFileOpenPath = info.dir().absolutePath();
+    open_file(filename);
+}
+
+void MainWindow::open_file(const QString& filename)
+{
     const QString tvg_name    = "tvg-name=";
     const QString tvg_id      = "tvg-id=";
     const QString tvg_logo    = "tvg-logo=";
     const QString group_title = "group-title=";
     const QString is_radio    = "radio=\"true\"";
 
-    QString filename = QFileDialog::getOpenFileName(this, "Open Media List", mFileOpenPath, tr("Media List (*.txt *.*)"));
-    QFileInfo info(filename);
-    mFileOpenPath = info.dir().absolutePath();
-
     QFile file(filename);
 
     if (file.open(QIODevice::ReadOnly))
     {
         mListModel->removeRows(0, mListModel->rowCount());
-        mIsRadio.clear();
         bool read_url = false;
         int fRow = 0;
         while (!file.atEnd())
@@ -226,8 +237,10 @@ void MainWindow::on_pushButtonOpen_clicked()
                 mListModel->insertRows(fRow, 1, QModelIndex());
                 int end = line.indexOf('\"', start + 2);
                 QString name = line.mid(start+1, end - start -1);
-                mListModel->setData(mListModel->index(fRow, eName, QModelIndex()), name);
-                mIsRadio.append(line.indexOf(is_radio) != -1);
+                auto index = mListModel->index(fRow, eName, QModelIndex());
+                mListModel->setData(index, name);
+                mListModel->setData(index, true, Qt::CheckStateRole);
+                mListModel->setData(mListModel->index(fRow, eDestination, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);
             }
             else
             {
@@ -272,6 +285,10 @@ void MainWindow::on_pushButtonOpen_clicked()
         };
         file.close();
     }
+
+    ui->tableView->setColumnHidden(eURL, true);
+    ui->tableView->setColumnHidden(eLogo, true);
+    ui->tableView->setColumnHidden(eFriendlyName, true);
 }
 
 
@@ -290,4 +307,16 @@ QString getSettingsName(const QString& aItemName)
     else return aItemName;
 }
 
+CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
+    QStandardItemModel(rows, columns, parent)
+{
+}
 
+QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
+{
+    if (role == Qt::CheckStateRole && index.column() == eName)
+    {
+        return QStandardItemModel::data(index, role).toBool() ? Qt::Checked : Qt::Unchecked;
+    }
+    return QStandardItemModel::data(index, role);
+}
