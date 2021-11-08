@@ -47,6 +47,11 @@ private slots:
     void on_sliderVolume_valueChanged(int value);
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
+    void on_checkBoxSelectAll_clicked(bool checked);
+    void on_pushButtonSaveAsFavorites_clicked();
+    void on_pushButtonFind_clicked();
+    void on_lineEditSelection_textChanged(const QString &arg1);
+    void show_media_player_error(QMediaPlayer::Error error);
 
 private:
 
@@ -59,6 +64,8 @@ private:
     QNetworkAccessManager mNetManager;
     QString mCurrentUrl;
     QString mCurrentDestination;
+    QList<int> mHiddenColumns;
+    int        mFindStartRow;
 };
 
 #endif // MAINWINDOW_H
