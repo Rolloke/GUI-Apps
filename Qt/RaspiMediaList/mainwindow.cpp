@@ -38,28 +38,38 @@ const QString radio           = QObject::tr("Radio");
 const QString tv              = QObject::tr("TV");
 const QString open_media_list = QObject::tr("Open Media List");
 const QString media_list      = QObject::tr("Media List (*.txt *.*)");
+
+const QString store_kodi_fav  = QObject::tr("Store as Kodi favorites");
+const QString kodi_favorites  = QObject::tr("Favorites (*.xml *.*)");
+
 }
 
 enum eTable
 {
-    eName, eID, eGroup, eURL, eLogo, eFriendlyName, eDestination, eLast
+    eName, eID, eGroup, eURL, eLogo, eFriendlyName, eMedia, eLast
 };
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
 , ui(new Ui::MainWindow)
 , mFileOpenPath(QDir::homePath())
+, mFindStartRow(0)
 {
     ui->setupUi(this);
     mPlayer.setVideoOutput(&mVideo);
+    connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
 
-    QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Gruppe"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
+    mHiddenColumns = {eURL, eLogo, eFriendlyName };
+    QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Group"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     mListModel = new CheckboxItemModel(0, eLast, this);
     for (int fSection = 0; fSection < eLast; ++fSection)
     {
         mListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
-        ui->comboBoxSearchColumn->addItem(fSectionNames[fSection], fSection);
+        if (!mHiddenColumns.contains(fSection))
+        {
+            ui->comboBoxSearchColumn->addItem(fSectionNames[fSection], fSection);
+        }
     }
 
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
@@ -79,6 +89,29 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mFileOpenPath, toString);
 
     fSettings.endGroup();
+
+    const QString arg_file        = "--file=";
+    QString filename;
+    QStringList arguments = QCoreApplication::arguments();
+    for (int n=0; n<arguments.size(); ++n)
+    {
+        if (arguments[n] == "-f" && n + 1 < arguments.size())
+        {
+            filename = arguments[n+1];
+        }
+        else
+        {
+            int pos = arguments[n].indexOf(arg_file);
+            if (pos != -1)
+            {
+                filename = arguments[n].mid(pos + arg_file.size());
+            }
+        }
+    }
+    if (filename.size())
+    {
+        open_file(filename);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -111,7 +144,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
     mCurrentUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
-    mCurrentDestination = mListModel->data(mListModel->index(index.row(), eDestination)).toString();
+    mCurrentDestination = mListModel->data(mListModel->index(index.row(), eMedia)).toString();
 
     ui->graphicsView->scene()->clear();
     QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
@@ -120,41 +153,6 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
     QNetworkReply* reply = mNetManager.get(request);
     connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
-}
-
-void MainWindow::onReplyFinished()
-{
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-
-    if (reply)
-    {
-        if (reply->error() == QNetworkReply::NoError)
-        {
-            const int available = reply->bytesAvailable();
-            if (available > 0)
-            {
-                const QByteArray data(reply->readAll());
-                QImage image;
-                image.loadFromData(data);
-                ui->graphicsView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
-                auto items = ui->graphicsView->scene()->items();
-                if (items.size())
-                {
-                    ui->graphicsView->fitInView(items[0], Qt::KeepAspectRatio);
-                }
-            }
-            ui->statusBar->showMessage("image loaded");
-        }
-        else
-        {
-            ui->statusBar->showMessage(tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()));
-        }
-        reply->deleteLater();
-    }
-    else
-    {
-        ui->statusBar->showMessage(tr("Download failed. Check internet connection"));
-    }
 }
 
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &)
@@ -182,16 +180,96 @@ void MainWindow::on_pushButtonStop_clicked()
     mPlayer.stop();
 }
 
+void MainWindow::on_checkBoxSelectAll_clicked(bool checked)
+{
+    const int table_rows = mListModel->rowCount();
+    for (int current_row = 0; current_row < table_rows; ++current_row)
+    {
+        mListModel->setData(mListModel->index(current_row, eName), checked, Qt::CheckStateRole);
+    }
+}
+
 void MainWindow::on_pushButtonSelect_clicked()
 {
-    QString fSelect = ui->lineEditSelection->text();
-    int fRows = mListModel->rowCount();
-    int fSection = ui->comboBoxSearchColumn->currentIndex();
-    for (int fRow=0; fRow < fRows; ++fRow)
+    const QString select_text = ui->lineEditSelection->text();
+    const int table_rows = mListModel->rowCount();
+    const int search_column = ui->comboBoxSearchColumn->currentIndex();
+    const Qt::CaseSensitivity case_sens = ui->checkBoxCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
+
+    int selected = 0;
+    for (int current_row = 0; current_row < table_rows; ++current_row)
     {
-        if (mListModel->data(mListModel->index(fRow, fSection)).toString().indexOf(fSelect) != -1)
+        if (mListModel->data(mListModel->index(current_row, search_column)).toString().indexOf(select_text, 0, case_sens) != -1)
         {
-            ui->tableView->selectionModel()->select(mListModel->index(fRow, fSection), QItemSelectionModel::Select);
+            bool checked = mListModel->data(mListModel->index(current_row, eName),  Qt::CheckStateRole).toBool();
+            mListModel->setData(mListModel->index(current_row, eName), !checked, Qt::CheckStateRole);
+        }
+        if (mListModel->data(mListModel->index(current_row, eName),  Qt::CheckStateRole).toBool())
+        {
+            ++selected;
+        }
+    }
+    ui->statusBar->showMessage(tr("Currently selected favorites %1").arg(selected));
+}
+
+void MainWindow::on_pushButtonFind_clicked()
+{
+    const QString select_text = ui->lineEditSelection->text();
+    const int table_rows = mListModel->rowCount();
+    const int search_column = ui->comboBoxSearchColumn->currentIndex();
+    const Qt::CaseSensitivity case_sens = ui->checkBoxCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
+
+    int current_row;
+    for (current_row = mFindStartRow; current_row < table_rows; ++current_row)
+    {
+        if (mListModel->data(mListModel->index(current_row, search_column)).toString().indexOf(select_text, 0, case_sens) != -1)
+        {
+            ui->tableView->selectRow(current_row);
+            const auto index = mListModel->index(current_row, eID);
+            ui->tableView->scrollTo(index);
+            on_tableView_clicked(index);
+            mFindStartRow = current_row + 1;
+            if (mFindStartRow == table_rows)
+            {
+                mFindStartRow = 0;
+            }
+            break;
+        }
+    }
+    if (current_row == table_rows)
+    {
+        mFindStartRow = 0;
+    }
+}
+
+void MainWindow::on_lineEditSelection_textChanged(const QString &)
+{
+    mFindStartRow = 0;
+}
+
+void MainWindow::on_pushButtonSaveAsFavorites_clicked()
+{
+    QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFileOpenPath, txt::kodi_favorites);
+    if (filename.size())
+    {
+        QFile file(filename);
+
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write("<favourites>\n");
+            const int table_rows = mListModel->rowCount();
+            for (int current_row = 0; current_row < table_rows; ++current_row)
+            {
+                if (mListModel->data(mListModel->index(current_row, eName), Qt::CheckStateRole).toBool())
+                {
+                    QString line = tr("<favourite name=\"%1\" thumb=\"%2\">PlayMedia(&quot;%3&quot;)</favourite>\n").
+                            arg(mListModel->data(mListModel->index(current_row, eName)).toString(),
+                            mListModel->data(mListModel->index(current_row, eLogo)).toString(),
+                            mListModel->data(mListModel->index(current_row, eURL)).toString());
+                    file.write(line.toStdString().c_str());
+                }
+            }
+            file.write("</favourites>\n");
         }
     }
 }
@@ -199,96 +277,124 @@ void MainWindow::on_pushButtonSelect_clicked()
 void MainWindow::on_pushButtonOpen_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, txt::open_media_list, mFileOpenPath, txt::media_list);
-    QFileInfo info(filename);
-    mFileOpenPath = info.dir().absolutePath();
-    open_file(filename);
+    if (filename.size())
+    {
+        QFileInfo info(filename);
+        mFileOpenPath = info.dir().absolutePath();
+        open_file(filename);
+    }
+}
+
+void MainWindow::onReplyFinished()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (reply)
+    {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            const int available = reply->bytesAvailable();
+            if (available > 0)
+            {
+                const QByteArray data(reply->readAll());
+                QImage image;
+                image.loadFromData(data);
+                ui->graphicsView->scene()->addItem(new QGraphicsPixmapItem(QPixmap::fromImage(image)));
+                auto items = ui->graphicsView->scene()->items();
+                if (items.size())
+                {
+                    ui->graphicsView->fitInView(items[0], Qt::KeepAspectRatio);
+                }
+            }
+//            ui->statusBar->showMessage("image loaded");
+        }
+        else
+        {
+            ui->statusBar->showMessage(tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()));
+        }
+        reply->deleteLater();
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Download failed. Check internet connection"));
+    }
+}
+
+void MainWindow::show_media_player_error(QMediaPlayer::Error error)
+{
+    ui->statusBar->showMessage(tr("%1: %2").arg(static_cast<int>(error)).arg(mPlayer.errorString()));
 }
 
 void MainWindow::open_file(const QString& filename)
 {
-    const QString tvg_name    = "tvg-name=";
-    const QString tvg_id      = "tvg-id=";
-    const QString tvg_logo    = "tvg-logo=";
-    const QString group_title = "group-title=";
+    QMap<int, QString> tvg_tags // the tag of the text file containing the media urls
+    {
+        { eName,  "tvg-name=\""    },
+        { eID,    "tvg-id=\""      },
+        { eLogo,  "tvg-logo=\""    },
+        { eGroup, "group-title=\"" }
+    };
+
     const QString is_radio    = "radio=\"true\"";
 
     QFile file(filename);
 
     if (file.open(QIODevice::ReadOnly))
     {
-        mListModel->removeRows(0, mListModel->rowCount());
         bool read_url = false;
-        int fRow = 0;
+        int current_row = 0;
+
+        mListModel->removeRows(0, mListModel->rowCount());
+        mListModel->insertRows(current_row, 1, QModelIndex());
         while (!file.atEnd())
         {
             QString line(file.readLine());
             line.resize(line.size()-1);
-            if (read_url)
+            if (read_url)           // the url is in the next line
             {
-                mListModel->setData(mListModel->index(fRow, eURL, QModelIndex()), line);
-                ++fRow;
-                read_url = false;
-                continue;
-            }
-            int start = line.indexOf(tvg_name);
-            if (start != -1)
-            {
-                start += tvg_name.size();
-                mListModel->insertRows(fRow, 1, QModelIndex());
-                int end = line.indexOf('\"', start + 2);
-                QString name = line.mid(start+1, end - start -1);
-                auto index = mListModel->index(fRow, eName, QModelIndex());
-                mListModel->setData(index, name);
-                mListModel->setData(index, true, Qt::CheckStateRole);
-                mListModel->setData(mListModel->index(fRow, eDestination, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);
-            }
-            else
-            {
-                continue;
+                mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), line);
+                ++current_row;      // insert the nex row regardless, whether the may or not be one more line
+                mListModel->insertRows(current_row, 1, QModelIndex());
+                read_url = false;   // read tags again
+                continue;           // read the next line
             }
 
-            start = line.indexOf(tvg_id);
-            if (start != -1)
+            int start = 0;          // read all tags in the first line
+            for (auto tag = tvg_tags.begin(); tag != tvg_tags.end(); ++tag )
             {
-                start += tvg_id.size();
-                int end = line.indexOf('\"', start + 2);
-                QString name = line.mid(start+1, end - start -1);
-                mListModel->setData(mListModel->index(fRow, eID, QModelIndex()), name);
+                start = line.indexOf(tag.value());
+                if (start != -1)
+                {
+                    start += tag.value().size();
+                    int end = line.indexOf('\"', start + 1);
+                    QString name = line.mid(start, end - start);
+                    mListModel->setData(mListModel->index(current_row, tag.key(), QModelIndex()), name);
+                }
             }
-
-            start = line.indexOf(group_title);
-            if (start != -1)
-            {
-                start += group_title.size();
-                int end = line.indexOf('\"', start + 2);
-                QString name = line.mid(start+1, end - start -1);
-                mListModel->setData(mListModel->index(fRow, eGroup, QModelIndex()), name);
-            }
-
-            start = line.indexOf(tvg_logo, start);
-            if (start != -1)
-            {
-                start += tvg_logo.size();
-                int end = line.indexOf('\"', start + 2);
-                QString name = line.mid(start+1, end - start -1);
-                start = end;
-                mListModel->setData(mListModel->index(fRow, eLogo, QModelIndex()), name);
-            }
+            if (start == -1) continue; // if no tag matches, read the next line
 
             start = line.indexOf(",", start);
-            if (start != -1)
+            if (start != -1)        // the friendly name resides behind the comma
             {
                 QString name = line.mid(start+1);
-                mListModel->setData(mListModel->index(fRow, eFriendlyName, QModelIndex()), name);
+                mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), name);
+                // insert the checkbox and the media type
+                mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), true, Qt::CheckStateRole);
+                mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);
                 read_url = true;
             }
         };
         file.close();
+
+        // remove the last row at the end
+        mListModel->removeRows(current_row, 1);
+        ui->checkBoxSelectAll->setChecked(true);
     }
 
-    ui->tableView->setColumnHidden(eURL, true);
-    ui->tableView->setColumnHidden(eLogo, true);
-    ui->tableView->setColumnHidden(eFriendlyName, true);
+    for (auto& column : mHiddenColumns)
+    {
+        ui->tableView->setColumnHidden(column, true);
+    }
 }
 
 
@@ -320,3 +426,4 @@ QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
     }
     return QStandardItemModel::data(index, role);
 }
+
