@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
 , ui(new Ui::MainWindow)
 , mFileOpenPath(QDir::homePath())
-, mVideo(this)
 , mPlayer(this)
 , mFindStartRow(0)
 , mShowIcon(true)
@@ -188,6 +187,10 @@ void MainWindow::on_sliderVolume_valueChanged(int value)
 void MainWindow::on_pushButtonStop_clicked()
 {
     mPlayer.stop();
+    if (mVideo.isVisible())
+    {
+        mVideo.hide();
+    }
 }
 
 void MainWindow::on_checkBoxSelectAll_clicked(bool checked)

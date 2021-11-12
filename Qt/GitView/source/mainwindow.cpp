@@ -82,6 +82,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
     , mFileCopyMimeType("x-special/mate-copied-files")
+    , mUseSourceTreeCheckboxes(false)
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -142,6 +143,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
         }
 
+        LOAD_STR(fSettings, mUseSourceTreeCheckboxes, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
@@ -317,6 +319,7 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     {
+        STORE_STR(fSettings, mUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
         STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
         STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);

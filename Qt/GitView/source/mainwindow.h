@@ -253,6 +253,7 @@ private:
     };
 
     QMap <QString, tree_find_properties> mTreeFindProperties;
+    bool mUseSourceTreeCheckboxes;
 };
 
 #endif // MAINWINDOW_H
