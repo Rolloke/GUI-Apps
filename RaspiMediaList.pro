@@ -8,13 +8,18 @@ QT += core gui
 QT += xml
 QT += multimedia
 QT += multimediawidgets
-QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = RaspiMediaList
 TEMPLATE = app
-QMAKE_CXXFLAGS += -std=c++17
+
+CONFIG += c++17
+unix:QMAKE_CXXFLAGS += -std=c++17
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
 SOURCES += main.cpp\
         mainwindow.cpp

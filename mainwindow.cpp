@@ -22,7 +22,7 @@
 
 #define LOAD_PTR(SETTING, ITEM, SET, GET, CONVERT)  ITEM->SET(SETTING.value(getSettingsName(#ITEM), ITEM->GET()).CONVERT())
 #define LOAD_NP(SETTING, ITEM, SET, GET, CONVERT)   ITEM.SET(SETTING.value(getSettingsName(#ITEM), ITEM.GET()).CONVERT())
-#define LOAD_STR(SETTING, ITEM, CONVERT)            ITEM=SETTING.value(getSettingsName(#ITEM), ITEM).CONVERT()
+#define LOAD_STR(SETTING, ITEM, CONVERT)            ITEM=SETTING.value(getSettingsName(#ITEM), QVariant(ITEM)).CONVERT()
 #define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(getSettingsName(#ITEM), QVariant(FUNC_IN(ITEM))).CONVERT());
 
 QString getSettingsName(const QString& aItemName);
@@ -53,7 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
 , ui(new Ui::MainWindow)
 , mFileOpenPath(QDir::homePath())
+, mVideo(this)
+, mPlayer(this)
 , mFindStartRow(0)
+, mShowIcon(true)
 {
     ui->setupUi(this);
     mPlayer.setVideoOutput(&mVideo);
@@ -87,15 +90,16 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
     LOAD_STR(fSettings, mFileOpenPath, toString);
+    LOAD_STR(fSettings, mShowIcon, toBool);
 
     fSettings.endGroup();
 
     const QString arg_file        = "--file=";
     QString filename;
     QStringList arguments = QCoreApplication::arguments();
-    for (int n=0; n<arguments.size(); ++n)
+    for (int n = 0; n < arguments.size(); ++n)
     {
-        if (arguments[n] == "-f" && n + 1 < arguments.size())
+        if (arguments[n] == "-f" && (n + 1) < arguments.size())
         {
             filename = arguments[n+1];
         }
@@ -121,8 +125,10 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
+    STORE_STR(fSettings, mShowIcon);
     fSettings.endGroup();
 
+    mPlayer.stop();
     delete ui;
 }
 
@@ -143,16 +149,20 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     {
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
+    ui->statusBar->showMessage(mListModel->data(mListModel->index(index.row(), eName)).toString());
     mCurrentUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
     mCurrentDestination = mListModel->data(mListModel->index(index.row(), eMedia)).toString();
 
-    ui->graphicsView->scene()->clear();
-    QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
-    const QUrl url(logoUrl);
-    QNetworkRequest request(url);
+    if (mShowIcon)
+    {
+        ui->graphicsView->scene()->clear();
+        QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
+        const QUrl url(logoUrl);
+        QNetworkRequest request(url);
 
-    QNetworkReply* reply = mNetManager.get(request);
-    connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
+        QNetworkReply* reply = mNetManager.get(request);
+        connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
+    }
 }
 
 void MainWindow::on_tableView_doubleClicked(const QModelIndex &)
@@ -306,7 +316,6 @@ void MainWindow::onReplyFinished()
                     ui->graphicsView->fitInView(items[0], Qt::KeepAspectRatio);
                 }
             }
-//            ui->statusBar->showMessage("image loaded");
         }
         else
         {

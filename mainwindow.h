@@ -58,14 +58,15 @@ private:
     Ui::MainWindow *ui;
     QErrorMessage mErrorMsgDlg;
     QString mFileOpenPath;
-    QMediaPlayer mPlayer;
     QVideoWidget mVideo;
+    QMediaPlayer mPlayer;
     CheckboxItemModel* mListModel;
     QNetworkAccessManager mNetManager;
     QString mCurrentUrl;
     QString mCurrentDestination;
     QList<int> mHiddenColumns;
     int        mFindStartRow;
+    bool       mShowIcon;
 };
 
 #endif // MAINWINDOW_H
