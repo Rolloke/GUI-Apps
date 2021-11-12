@@ -29,8 +29,11 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         QStringList fStrings;
         fStrings.append(aParentDir.absolutePath());
         aParentItem = new QTreeWidgetItem(fStrings);
-        aParentItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|aParentItem->flags());
-        aParentItem->setCheckState(Column::FileName, Qt::Checked);
+        if (mUseSourceTreeCheckboxes)
+        {
+            aParentItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|aParentItem->flags());
+            aParentItem->setCheckState(Column::FileName, Qt::Checked);
+        }
         aParentItem->setData(Column::FileName, Role::isDirectory, QVariant(true));
         aParentItem->setData(Column::FileName, Role::Filter, QVariant(INT(aParentDir.filter())));
 
@@ -69,8 +72,11 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
         fColumns.append("");
 
         QTreeWidgetItem* fItem = new QTreeWidgetItem(aParentItem, fColumns);
-        fItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|fItem->flags());
-        fItem->setCheckState(Column::FileName, Qt::Checked);
+        if (mUseSourceTreeCheckboxes)
+        {
+            fItem->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsAutoTristate|fItem->flags());
+            fItem->setCheckState(Column::FileName, Qt::Checked);
+        }
         fItem->setData(Column::FileName, Role::isDirectory, QVariant(fFileInfo.isDir()));
         fItem->setData(Column::DateTime, Role::DateTime, QVariant(fFileInfo.lastModified()));
 
@@ -116,8 +122,12 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
     bool fResult  = false;
     if (aParentItem)
     {
-        if (   aParentItem->checkState(Column::FileName) == Qt::Checked
-            || aParentItem->checkState(Column::FileName) == Qt::PartiallyChecked
+        auto check_state = aParentItem->checkState(Column::FileName);
+        if (!mUseSourceTreeCheckboxes)
+        {
+            check_state = Qt::Checked;
+        }
+        if (   check_state == Qt::Checked || check_state == Qt::PartiallyChecked
             || mCurrentTask == Work::InsertPathFromCommandString)
         {
             const QVariant& fIsDir = aParentItem->data(Column::FileName, Role::isDirectory);
@@ -139,8 +149,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     fType = Type(fVariant.toUInt());
                 }
 
-                if (   mCurrentTask == Work::ApplyGitCommand
-                    && aParentItem->checkState(Column::FileName) == Qt::Checked)
+                if (mCurrentTask == Work::ApplyGitCommand && check_state == Qt::Checked)
                 {
                     const QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
                     appendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
@@ -301,7 +310,10 @@ bool MainWindow::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2typemap
         const auto fFoundType = aPathMap.find(fSourcePath.toStdString());
         if (fFoundType != aPathMap.end())
         {
-            aParentItem->setCheckState(Column::FileName, Qt::Checked);
+            if (mUseSourceTreeCheckboxes)
+            {
+                aParentItem->setCheckState(Column::FileName, Qt::Checked);
+            }
             const QString fState = fFoundType->second.getStates();
             aParentItem->setText(Column::State, fState);
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
@@ -395,19 +407,26 @@ quint64 MainWindow::sizeOfCheckedItems(QTreeWidgetItem* aParentItem)
     if (aParentItem)
     {
         bool fIterate = false;
-        switch (aParentItem->checkState(Column::FileName))
+        if (mUseSourceTreeCheckboxes)
         {
-            case Qt::Unchecked: return fSize;
-            case Qt::PartiallyChecked:
-                fIterate = true;
-                break;
-            case  Qt::Checked:
-                if (!aParentItem->data(Column::FileName, Role::isDirectory).toBool())
-                {
-                    fSize = aParentItem->data(Column::Size, Qt::SizeHintRole).toLongLong();
-                }
-                fIterate = true;
-                break;
+            switch (aParentItem->checkState(Column::FileName))
+            {
+                case Qt::Unchecked: return fSize;
+                case Qt::PartiallyChecked:
+                    fIterate = true;
+                    break;
+                case  Qt::Checked:
+                    if (!aParentItem->data(Column::FileName, Role::isDirectory).toBool())
+                    {
+                        fSize = aParentItem->data(Column::Size, Qt::SizeHintRole).toLongLong();
+                    }
+                    fIterate = true;
+                    break;
+            }
+        }
+        else
+        {
+            fIterate = true;
         }
         if (fIterate)
         {
@@ -1015,7 +1034,6 @@ void MainWindow::deleteFileOrFolder()
 {
     if (mContextMenuSourceTreeItem)
     {
-        const QString fTopItemPath  = getItemTopDirPath(mContextMenuSourceTreeItem);
         const QString fItemPath     = getItemFilePath(mContextMenuSourceTreeItem);
         const Type fType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
         if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) == QMessageBox::Yes)
