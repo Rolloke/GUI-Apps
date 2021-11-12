@@ -1020,7 +1020,7 @@ void MainWindow::deleteFileOrFolder()
         const Type fType(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt());
         if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
-            const bool result = QFile::remove(fTopItemPath + "/" + fItemPath);
+            const bool result = QFile::remove(fItemPath);
             if (result)
             {
                 if (fType.is(Type::AllGitActions) && !fType.is(Type::GitUnTracked))
@@ -1035,6 +1035,11 @@ void MainWindow::deleteFileOrFolder()
                         parent->removeChild(mContextMenuSourceTreeItem);
                     }
                 }
+            }
+            else
+            {
+                appendTextToBrowser(tr("Could not delete %1 %2").arg(fType.type_name()).arg(fItemPath));
+                // TODO: detailed error message
             }
         }
     }
