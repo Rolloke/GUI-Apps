@@ -28,8 +28,8 @@
    #define INVLOG10_2  3.3219280948873623478703194294894
 #endif
 
+#include <cmath>
 #include <float.h>
-#include <math.h>
 #include "Curve.h"
 #include "FileHeader.h"
 
@@ -649,7 +649,7 @@ void CCurve::Destroy()
 void CCurve::Write(HANDLE hfile)
 {
    DWORD dwactbytes=0;
-   int   size;
+   auto   size = strlen("");
    int nFormat = m_Parameter.format;
    if (hfile==INVALID_HANDLE_VALUE)  return;
 
@@ -662,23 +662,23 @@ void CCurve::Write(HANDLE hfile)
    if (m_pszDescription) size = strlen(m_pszDescription);
    else                  size = 0;
    WriteFile(hfile, &size, sizeof(int), &dwactbytes, NULL);
-   if (size) WriteFile(hfile, m_pszDescription, size, &dwactbytes, NULL);
+   if (size) WriteFile(hfile, m_pszDescription, static_cast<DWORD>(size), &dwactbytes, NULL);
 
    if (m_pszUnitx) size = strlen(m_pszUnitx);
    else            size = 0;
    WriteFile(hfile, &size, sizeof(int), &dwactbytes, NULL);
-   if (size) WriteFile(hfile, m_pszUnitx, size, &dwactbytes, NULL);
+   if (size) WriteFile(hfile, m_pszUnitx, static_cast<DWORD>(size), &dwactbytes, NULL);
 
    if (m_pszUnity) size = strlen(m_pszUnity);
    else            size = 0;
    WriteFile(hfile, &size, sizeof(int), &dwactbytes, NULL);
-   if (size) WriteFile(hfile, m_pszUnity, size, &dwactbytes, NULL);
+   if (size) WriteFile(hfile, m_pszUnity, static_cast<DWORD>(size), &dwactbytes, NULL);
    if (m_Parameter.locus)
    {
       if (m_pszUnitLocus) size = strlen(m_pszUnitLocus);
       else            size = 0;
       WriteFile(hfile, &size, sizeof(int), &dwactbytes, NULL);
-      if (size) WriteFile(hfile, m_pszUnitLocus, size, &dwactbytes, NULL);
+      if (size) WriteFile(hfile, m_pszUnitLocus, static_cast<DWORD>(size), &dwactbytes, NULL);
       m_Parameter.format = CF_SINGLE_SHORT;
    }
    switch (m_Parameter.format)
@@ -774,7 +774,7 @@ bool CCurve::Read(HANDLE hfile)
 
 void CCurve::GetChecksum(CFileHeader *pFH)
 {
-   int size;
+   auto size = strlen("");
    if (!pFH) return;
    pFH->CalcChecksum(&m_nNum,      sizeof(int));
    pFH->CalcChecksum(&m_dOffset,   sizeof(double));
@@ -785,17 +785,17 @@ void CCurve::GetChecksum(CFileHeader *pFH)
    if (m_pszDescription) size = strlen(m_pszDescription);
    else                  size = 0;
    pFH->CalcChecksum(&size,            sizeof(int));
-   if (m_pszDescription) pFH->CalcChecksum(m_pszDescription, size);
+   if (m_pszDescription) pFH->CalcChecksum(m_pszDescription, static_cast<long>(size));
 
    if (m_pszUnitx) size = strlen(m_pszUnitx);
    else            size = 0;
    pFH->CalcChecksum(&size,      sizeof(int));
-   if (m_pszUnitx) pFH->CalcChecksum(m_pszUnitx, size);
+   if (m_pszUnitx) pFH->CalcChecksum(m_pszUnitx, static_cast<long>(size));
 
    if (m_pszUnity) size = strlen(m_pszUnity);
    else            size = 0;
    pFH->CalcChecksum(&size,      sizeof(int));
-   if (m_pszUnity) pFH->CalcChecksum(m_pszUnity, size);
+   if (m_pszUnity) pFH->CalcChecksum(m_pszUnity, static_cast<long>(size));
 }
 
 bool CCurve::IsValid()

@@ -1264,7 +1264,7 @@ bool CMathCurve::MultiplyUnitPart(char * pszPart, char * pszUnit)
          {
             ptr++;
             int nExp = atoi(ptr) + 1;
-            itoa(nExp, ptr, 10);
+            _itoa(nExp, ptr, 10);
          }
          else
          {
@@ -1290,14 +1290,14 @@ bool CMathCurve::DivideUnitPart(char * pszPart, char * pszUnit)
       char *ptr = strstr(pszPart, pszUnit);
       if (ptr)
       {
-         int nOffset = ptr - pszPart;
+         auto nOffset = ptr - pszPart;
          char *ptr1 = strstr(pszPart, "^");
          if (ptr1)
          {
             ptr1++;
             int nExp = atoi(ptr1) - 1;
             if (nExp <= 1) ptr1[-1] = 0;
-            else           itoa(nExp, ptr1, 10);
+            else           _itoa(nExp, ptr1, 10);
          }
          else if ((nOffset>1) && (ptr[-1] == '*'))
             ptr[-1] = 0;

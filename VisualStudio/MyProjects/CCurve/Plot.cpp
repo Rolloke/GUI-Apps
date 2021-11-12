@@ -45,13 +45,14 @@ bool CPlot::SetSize(int n)
 void CPlot::Write(HANDLE hfile)
 {
    DWORD dwactbytes=sizeof(int);
-   int   i, size;
+   int   i;
+   auto size = strlen("");
    if (hfile==INVALID_HANDLE_VALUE)  return;
    // Überschrift
    if (m_pszHeading) size = strlen(m_pszHeading);
    else          size = 0;
    WriteFile(hfile, &size, sizeof(int), &dwactbytes, NULL);
-   if (size) WriteFile(hfile, m_pszHeading, size, &dwactbytes, NULL);
+   if (size) WriteFile(hfile, m_pszHeading, static_cast<DWORD>(size), &dwactbytes, NULL);
    // Zoombereiche
    int count = 1;
    WriteFile(hfile, &count,   sizeof(int),   &dwactbytes, NULL);
@@ -94,13 +95,14 @@ bool CPlot::Read(HANDLE hfile)
 void CPlot::GetChecksum(CFileHeader *pFH)
 {
    if (!pFH) return;
-   int   i, size=0;
+   int   i;
+   auto size = strlen("");
 
    if (m_pszHeading)
    {
       size = strlen(m_pszHeading);
       pFH->CalcChecksum(&size, sizeof(int));
-      pFH->CalcChecksum(m_pszHeading, size);
+      pFH->CalcChecksum(m_pszHeading, static_cast<long>(size));
    }
    else pFH->CalcChecksum(&size, sizeof(int));
 
@@ -228,7 +230,7 @@ bool Call2DView(const char *pszProgrPath, int nPlots, CPlot *pPlots, bool bDeter
       CloseHandle(hFile);
       if ((hWnd!=NULL) && (nMsgID != 0))
       {
-         wsprintf(szTempPath, "%sETS2DV.EXE \"%s\" :H%d :M%d :W%d", pszProgrPath, szCaraViewFileName, (int)hWnd, nMsgID, nParam);
+         wsprintf(szTempPath, "%sETS2DV.EXE \"%s\" :H%d :M%d :W%d", pszProgrPath, szCaraViewFileName, (long)hWnd, nMsgID, nParam);
       }
       else
       {
