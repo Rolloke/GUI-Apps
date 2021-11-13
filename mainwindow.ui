@@ -248,13 +248,23 @@
         <item>
          <widget class="QPushButton" name="pushButtonSaveAsFavorites">
           <property name="toolTip">
-           <string>Store lists checked items as favorites for Raspi Kodi</string>
+           <string>Store the lists checked items as favorites for Raspi Kodi</string>
           </property>
           <property name="statusTip">
            <string/>
           </property>
           <property name="text">
            <string>Favorites</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonUpdateFavorites">
+          <property name="toolTip">
+           <string>Update check states from favorites</string>
+          </property>
+          <property name="text">
+           <string>Update</string>
           </property>
          </widget>
         </item>
