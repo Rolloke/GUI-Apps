@@ -53,11 +53,14 @@ private slots:
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error);
 
+    void on_pushButtonUpdateFavorites_clicked();
+
 private:
 
     Ui::MainWindow *ui;
     QErrorMessage mErrorMsgDlg;
     QString mFileOpenPath;
+    QString mFavoritesOpenPath;
     QVideoWidget mVideo;
     QMediaPlayer mPlayer;
     CheckboxItemModel* mListModel;

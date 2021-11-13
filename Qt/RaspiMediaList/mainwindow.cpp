@@ -53,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
 , ui(new Ui::MainWindow)
 , mFileOpenPath(QDir::homePath())
+, mFavoritesOpenPath(QDir::homePath())
 , mPlayer(this)
 , mFindStartRow(0)
 , mShowIcon(true)
@@ -89,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
     LOAD_STR(fSettings, mFileOpenPath, toString);
+    LOAD_STR(fSettings, mFavoritesOpenPath, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
 
     fSettings.endGroup();
@@ -124,6 +126,7 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
+    STORE_STR(fSettings, mFavoritesOpenPath);
     STORE_STR(fSettings, mShowIcon);
     fSettings.endGroup();
 
@@ -262,9 +265,12 @@ void MainWindow::on_lineEditSelection_textChanged(const QString &)
 
 void MainWindow::on_pushButtonSaveAsFavorites_clicked()
 {
-    QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFileOpenPath, txt::kodi_favorites);
+    QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
     if (filename.size())
     {
+        QFileInfo info(filename);
+        mFavoritesOpenPath = info.dir().absolutePath();
+
         QFile file(filename);
 
         if (file.open(QIODevice::WriteOnly))
@@ -283,6 +289,49 @@ void MainWindow::on_pushButtonSaveAsFavorites_clicked()
                 }
             }
             file.write("</favourites>\n");
+        }
+    }
+}
+
+void MainWindow::on_pushButtonUpdateFavorites_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+    if (filename.size())
+    {
+        QFileInfo info(filename);
+        mFavoritesOpenPath = info.dir().absolutePath();
+
+        QFile file(filename);
+
+        if (file.open(QIODevice::ReadOnly))
+        {
+            on_checkBoxSelectAll_clicked(false);
+
+            const QString tag = "<favourite name=\"";
+
+            while (!file.atEnd())
+            {
+                QString line(file.readLine());
+                line.resize(line.size()-1);
+                int start = line.indexOf(tag);
+                if (start != -1)
+                {
+                    start += tag.size();
+                    int end = line.indexOf('\"', start + 1);
+                    const int table_rows = mListModel->rowCount();
+
+                    QString select_text = line.mid(start, end - start);
+                    for (int current_row = 0; current_row < table_rows; ++current_row)
+                    {
+                        if (mListModel->data(mListModel->index(current_row, eName)).toString().indexOf(select_text, 0, Qt::CaseSensitive) != -1)
+                        {
+                            mListModel->setData(mListModel->index(current_row, eName), true, Qt::CheckStateRole);
+                            break;
+                        }
+                    }
+                }
+            };
+            file.close();
         }
     }
 }
