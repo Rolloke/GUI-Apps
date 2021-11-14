@@ -60,7 +60,7 @@ void QRadioButtonGroup::on_radio_button_clicked(bool checked)
     int fNewIndex = getCurrentIndex();
     if (fNewIndex != mIndex)
     {
-        emit clicked(fNewIndex);
+        Q_EMIT clicked(fNewIndex);
         mIndex = fNewIndex;
     }
     else if (mClickSignal == click_always)

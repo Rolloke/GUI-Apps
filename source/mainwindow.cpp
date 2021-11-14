@@ -62,31 +62,38 @@ MainWindow::MainWindow(QApplication& aApp, QWidget *parent) :
     ui->setupUi(this);
 
     mScopeSettings.setFFT_FilterIndex(ui->graphicsViewFFT->getFilterFunction());
-    QObject::connect(&mScopeSettings, SIGNAL(send_radio_filter(int)), ui->graphicsViewFFT, SLOT(setFilterFunction(int)));
+    connect(&mScopeSettings, SIGNAL(send_radio_filter(int)), ui->graphicsViewFFT, SLOT(setFilterFunction(int)));
     mScopeSettings.setFFT_OutputIndex(ui->graphicsViewFFT->getFFT_ValueFunction());
-    QObject::connect(&mScopeSettings, SIGNAL(send_radio_output(int)), ui->graphicsViewFFT, SLOT(setFFT_ValueFunction(int)));
-    QObject::connect(&mScopeSettings, SIGNAL(send_floating_avg_values(int)), ui->graphicsViewFFT, SLOT(setFFT_FloatingAvgValues(int)));
+    connect(&mScopeSettings, SIGNAL(send_radio_output(int)), ui->graphicsViewFFT, SLOT(setFFT_ValueFunction(int)));
+    connect(&mScopeSettings, SIGNAL(send_floating_avg_values(int)), ui->graphicsViewFFT, SLOT(setFFT_FloatingAvgValues(int)));
 
-    QObject::connect(&mFunctionGenerator, SIGNAL(start_stream(bool, qint32)), &mAudioOutput, SLOT(do_start_stream(bool, qint32)));
-    QObject::connect(&mAudioOutput, SIGNAL(send_stream_state(bool)), &mFunctionGenerator, SLOT(get_stream_state(bool)));
+    connect(&mFunctionGenerator, SIGNAL(start_stream(bool, qint32)), &mAudioOutput, SLOT(do_start_stream(bool, qint32)));
+    connect(&mAudioOutput, SIGNAL(send_stream_state(bool)), &mFunctionGenerator, SLOT(get_stream_state(bool)));
 
-    QObject::connect(ui->groupTrigger, SIGNAL(clicked(int)), this, SLOT(click_radio_trigger(int)));
+    connect(ui->groupTrigger, SIGNAL(clicked(int)), this, SLOT(click_radio_trigger(int)));
 
     mScopeSettings.addCursors(ui->graphicsViewScope->getCursors());
-    QObject::connect(&ui->graphicsViewScope->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
-    QObject::connect(ui->graphicsViewScope, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
+    connect(&ui->graphicsViewScope->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
+    connect(ui->graphicsViewScope, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
     ui->graphicsViewScope->setDragMode(QGraphicsView::RubberBandDrag);
-    QObject::connect(ui->graphicsViewScope, SIGNAL(sendSelectedRange(const QRectF&)), ui->graphicsViewZoom, SLOT(onSelectRange(const QRectF&)));
+    connect(ui->graphicsViewScope, SIGNAL(sendSelectedRange(const QRectF&)), ui->graphicsViewZoom, SLOT(onSelectRange(const QRectF&)));
 
     mScopeSettings.addCursors(ui->graphicsViewFFT->getCursors());
-    QObject::connect(&ui->graphicsViewFFT->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
-    QObject::connect(ui->graphicsViewFFT, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
+    connect(&ui->graphicsViewFFT->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
+    connect(ui->graphicsViewFFT, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
     ui->graphicsViewFFT->setFont(ui->labelLevel->font());
 
     ui->graphicsViewZoom->getCursors().setID(Cursors::zoom_view);
     mScopeSettings.addCursors(ui->graphicsViewZoom->getCursors());
-    QObject::connect(&ui->graphicsViewZoom->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
-    QObject::connect(ui->graphicsViewZoom, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
+    connect(&ui->graphicsViewZoom->getCursors(), SIGNAL(update(Cursors::eCursor,Cursors::eView)), this, SLOT(update_scope_view(Cursors::eCursor,Cursors::eView)));
+    connect(ui->graphicsViewZoom, SIGNAL(sendEvent(const QEvent*)), this, SLOT(receive_subview_event(const QEvent*)));
+
+    connect(ui->actionAudioInputSettings, SIGNAL(triggered(bool)), this, SLOT(onAudioInputSettings()));
+    connect(ui->actionAudioCalibrationSettings, SIGNAL(triggered(bool)), &mCalibrationDlg, SLOT(show()));
+    connect(ui->actionOscilloscopeSettings, SIGNAL(triggered(bool)), &mScopeSettings, SLOT(show()));
+    connect(ui->actionFunctions_Generator, SIGNAL(triggered(bool)), &mFunctionGenerator, SLOT(show()));
+    connect(ui->actionCopyToClipboard, &QAction::triggered, [&] () { mCopyToClipboard = true; });
+    connect(ui->actionAbout, &QAction::triggered, [&] () { AboutDlg dlg(this); dlg.exec(); });
 
     ui->labelLevelValue->initUnit();
     ui->labelLevelValue->getPrefix().setPrefixChange(UnitPrefix::auto_change);
@@ -366,7 +373,6 @@ MainWindow::MainWindow(QApplication& aApp, QWidget *parent) :
     mBufferUpdate.resize(mAudioInput.getBuffers(), -1);
 #endif
 
-    ui->menuBar->connect(ui->menuBar, SIGNAL(triggered(QAction*)), this, SLOT(trigger_menu_action(QAction*)));
     on_hslideTimePosition_valueChanged(ui->hslideTimePosition->value());
 
     QTimer *timer = new QTimer(this);
@@ -417,36 +423,6 @@ void MainWindow::setProbeValues(const QList<double> &fProbes)
         ui->comboVerticalChannelAmplification->setItemData(index++, QVariant(1.0));
     }
     mChanging = action::None;
-}
-
-void MainWindow::trigger_menu_action(QAction*anAction)
-{
-    static map<string, action::eAction> fMap =
-    {
-        {ui->actionAudioInputSettings->objectName().toStdString()      , action::AudioInputSettings},
-        {ui->actionAudioCalibrationSettings->objectName().toStdString(), action::AudioCalibrationSettings},
-        {ui->actionOscilloscopeSettings->objectName().toStdString()    , action::OscilloscopeSettings},
-        {ui->actionFunctions_Generator->objectName().toStdString()     , action::FunctionsGenerator},
-        {ui->actionCopyToClipboard->objectName().toStdString()         , action::CopyToClipboard},
-        {ui->actionAbout->objectName().toStdString()                   , action::About}
-    };
-
-    map<string, action::eAction>::iterator fFound = fMap.find(anAction->objectName().toStdString());
-    if (fFound != fMap.end())
-    {
-        switch (fFound->second)
-        {
-        case action::AudioInputSettings:        onAudioInputSettings();    break;
-        case action::AudioCalibrationSettings:  mCalibrationDlg.show();    break;
-        case action::OscilloscopeSettings:      mScopeSettings.show();     break;
-        case action::FunctionsGenerator:        mFunctionGenerator.show(); break;
-        case action::CopyToClipboard:           mCopyToClipboard = true;   break;
-        case action::About: { AboutDlg dlg(this); dlg.exec(); }; break;
-
-        default:
-            break;
-        }
-    }
 }
 
 void MainWindow::onAudioInputSettings()

@@ -40,15 +40,6 @@ public:
 private:
     struct action
     {
-        enum eAction
-        {
-            AudioInputSettings,
-            AudioCalibrationSettings,
-            OscilloscopeSettings,
-            FunctionsGenerator,
-            CopyToClipboard,
-            About
-        };
         enum eChanging
         {
             None,
@@ -88,7 +79,6 @@ private Q_SLOTS:
     void on_comboVerticalChannel_currentIndexChanged(int index);
     void on_pushTriggerEdge_clicked(bool checked);
     void on_checkChannelVisible_clicked(bool checked);
-    void trigger_menu_action(QAction*);
     void on_comboFFT_currentIndexChanged(int index);
     void on_checkFFT_Log_clicked(bool checked);
     void on_checkShowFFT_clicked(bool checked);
@@ -100,6 +90,7 @@ private Q_SLOTS:
     void update_scope_view(Cursors::eCursor aCursor=Cursors::noCursor, Cursors::eView aID=Cursors::unknown_view);
     void on_comboVerticalChannelAmplification_currentIndexChanged(int index);
     void receive_subview_event(const QEvent* aEvent);
+    void onAudioInputSettings();
 
 private:
 
@@ -112,7 +103,6 @@ private:
     bool isDisplayTriggered();
     void determineAutomaticLevel(int aC);
     void determineMinMaxLevel(int start_pos, int stop_pos);
-    void onAudioInputSettings();
     void handleBufferChanged(int aStartPosition);
 
 #if TRIGGER_PROCESSING == 1
