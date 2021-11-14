@@ -13,6 +13,7 @@
 #include <QGraphicsPixmapItem>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QMessageBox>
 
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
@@ -36,10 +37,11 @@ namespace txt
 {
 const QString radio           = QObject::tr("Radio");
 const QString tv              = QObject::tr("TV");
-const QString open_media_list = QObject::tr("Open Media List");
+const QString open_media_list = QObject::tr("Open Kodi raw media List");
 const QString media_list      = QObject::tr("Media List (*.txt *.*)");
 
-const QString store_kodi_fav  = QObject::tr("Store as Kodi favorites");
+const QString store_kodi_fav  = QObject::tr("Store media list as favorites for Raspi");
+const QString update_kodi_fav = QObject::tr("Load favorites for update media list check states");
 const QString kodi_favorites  = QObject::tr("Favorites (*.xml *.*)");
 
 }
@@ -55,6 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
 , mFileOpenPath(QDir::homePath())
 , mFavoritesOpenPath(QDir::homePath())
 , mPlayer(this)
+, mListModel(nullptr)
+, mCurrentRowIndex(-1)
 , mFindStartRow(0)
 , mShowIcon(true)
 {
@@ -78,6 +82,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
     ui->tableView->setModel(mListModel);
     ui->graphicsView->setScene(new QGraphicsScene ());
+
+    connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(on_menu_file_open()));
+    connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(on_menu_file_save_as_favorites()));
+    connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(on_menu_file_update_favorites()));
+
+    connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(on_menu_help_about()));
+    connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(on_menu_help_info()));
 
     ui->sliderVolume->setMinimum(0);
     ui->sliderVolume->setMaximum(100);
@@ -152,8 +163,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
     ui->statusBar->showMessage(mListModel->data(mListModel->index(index.row(), eName)).toString());
-    mCurrentUrl = mListModel->data(mListModel->index(index.row(), eURL)).toString();
-    mCurrentDestination = mListModel->data(mListModel->index(index.row(), eMedia)).toString();
+    mCurrentRowIndex = index.row();
 
     if (mShowIcon)
     {
@@ -174,12 +184,15 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &)
 
 void MainWindow::on_pushButtonStart_clicked()
 {
-    mPlayer.setMedia(QUrl(mCurrentUrl));
-    if (mCurrentDestination == txt::tv)
+    if (mCurrentRowIndex != -1)
     {
-        mVideo.show();
+        mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
+        if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
+        {
+            mVideo.show();
+        }
+        mPlayer.play();
     }
-    mPlayer.play();
 }
 
 void MainWindow::on_sliderVolume_valueChanged(int value)
@@ -263,7 +276,7 @@ void MainWindow::on_lineEditSelection_textChanged(const QString &)
     mFindStartRow = 0;
 }
 
-void MainWindow::on_pushButtonSaveAsFavorites_clicked()
+void MainWindow::on_menu_file_save_as_favorites()
 {
     QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
     if (filename.size())
@@ -293,9 +306,9 @@ void MainWindow::on_pushButtonSaveAsFavorites_clicked()
     }
 }
 
-void MainWindow::on_pushButtonUpdateFavorites_clicked()
+void MainWindow::on_menu_file_update_favorites()
 {
-    QString filename = QFileDialog::getOpenFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+    QString filename = QFileDialog::getOpenFileName(this, txt::update_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
     if (filename.size())
     {
         QFileInfo info(filename);
@@ -336,7 +349,7 @@ void MainWindow::on_pushButtonUpdateFavorites_clicked()
     }
 }
 
-void MainWindow::on_pushButtonOpen_clicked()
+void MainWindow::on_menu_file_open()
 {
     QString filename = QFileDialog::getOpenFileName(this, txt::open_media_list, mFileOpenPath, txt::media_list);
     if (filename.size())
@@ -344,6 +357,38 @@ void MainWindow::on_pushButtonOpen_clicked()
         QFileInfo info(filename);
         mFileOpenPath = info.dir().absolutePath();
         open_file(filename);
+    }
+}
+
+void MainWindow::on_menu_help_about()
+{
+    QMessageBox::about(this, windowTitle(),
+         tr("About Kodi media list viewer and editor\n"
+            "\n"
+            "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
+            "\n"
+            "Build on:\t%1 , %2\n"
+            "Author:\tRolf Kary Ehlers\n"
+            "Version:\t1.0.0.0\n"
+            "License:\tGNU GPL Version 2\n"
+            "Email:\trolf-kary-ehlers@t-online.de\n").arg(__DATE__, __TIME__));
+}
+
+void MainWindow::on_menu_help_info()
+{
+    if (mCurrentRowIndex != -1)
+    {
+        QMessageBox::about(this, windowTitle(),
+        tr("Information about selected item\n"
+           "\n"
+           "Name:\t%1\n"
+           "Web:\t%2\n"
+           "Media URL:\t%3\n\n"
+           "Thumb:\t%4\n").arg(
+           mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
+           mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
+           mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
+           mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString()));
     }
 }
 

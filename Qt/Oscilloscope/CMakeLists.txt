@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.8.9)
 
 project(Oscilloscope)
  
-add_definitions(-D_USE_MATH_DEFINES)
-
 
 if(UNIX)
 set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++0x )
@@ -14,46 +12,46 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+#set(QT_SEARCH_PATH, "/opt/Qt5.12.11/5.12.11/gcc_64/lib/cmake")
 
-#Qt
-#CURRENTDIR=$(pwd)
+find_package(Qt5Core)
+find_package(Qt5Widgets)
+find_package(Qt5Xml)
+find_package(Qt5Gui)
+find_package(Qt5Multimedia)
 
-find_package(Qt5Core PATHS /home/rolf/Qt/5.6/gcc_64/lib/cmake)
-find_package(Qt5Widgets PATHS /home/rolf/Qt/5.6/gcc_64/lib/cmake)
-find_package(Qt5Xml PATHS /home/rolf/Qt/5.6/gcc_64/lib/cmake)
-find_package(Qt5Gui PATHS /home/rolf/Qt/5.6/gcc_64/lib/cmake)
-find_package(Qt5Multimedia PATHS /home/rolf/Qt/5.6/gcc_64/lib/cmake)
 
-#cd $CURRENTDIR
-
-if(WIN32)
-set(QTMAIN_LIBRARIES optimized qtmain debug  qtmaind)
-set(RC_FILES resources/Oscilloscope.rc)
-endif(WIN32)
-
+#if(WIN32)
+#set(QTMAIN_LIBRARIES optimized qtmain debug  qtmaind)
+set(RC_FILES source/resource/resource.rc)
+#endif(WIN32)
 
 set(CMAKE_AUTOMOC ON)
-add_definitions(-DQT_NO_KEYWORDS)
 add_definitions(-D_USE_QT_AUDIO)
+
+# define trigger processing:
+# 1: processing depending on buffer update flag
+# 2: find all trigger points and take the latest trigger point with enough display poinds behind it
+#    note: processing 2 is not stable
+add_definitions(-DTRIGGER_PROCESSING=1)
+
 
 file(GLOB_RECURSE HEADER_FILES source/*.h)
 file(GLOB_RECURSE SOURCE_FILES source/*.cpp)
 file(GLOB_RECURSE UI_FILES source/*.ui)
 
-
-
 include_directories(
 	${CMAKE_CURRENT_BINARY_DIR}
 	${GENERATED_MOC_SOURCE_FILES}
 	${GENERATED_UI_SOURCE_CODE}
+        ${RC_FILES}
     ./application_build/x86-release
     ./source
 )
 
-link_directories(
-	$ENV{GLEW_ROOT}/lib
-	$ENV{QTDIR}/lib
-)
+#link_directories(
+#	$ENV{QTDIR}/lib
+#)
 
 qt5_wrap_ui(GENERATED_UI_SOURCE_CODE ${UI_FILES})
 
@@ -68,8 +66,7 @@ add_executable(Oscilloscope
 )
 
 
-qt5_use_modules(Oscilloscope Core Widgets Xml Gui)
-
+qt5_use_modules(Oscilloscope Core Widgets Xml Gui Multimedia)
 
 target_link_libraries(Oscilloscope
     ${QTMAIN_LIBRARIES}
