@@ -1250,7 +1250,7 @@ void MainWindow::find_function(find find_item)
         QString options = "-rnHsI";
         QString search_path    = getItemFilePath(mContextMenuSourceTreeItem);
         QString search_pattern = ui->edtFindText->text();
-        if (ui->ckFindCaseSensitive->isChecked())
+        if (!ui->ckFindCaseSensitive->isChecked())
         {   // i: ignore case
             options += "i";
         }
