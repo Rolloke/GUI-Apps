@@ -39,7 +39,11 @@ private:
     QString getConfigName() const;
 
 private slots:
-    void on_pushButtonOpen_clicked();
+    void on_menu_file_open();
+    void on_menu_file_save_as_favorites();
+    void on_menu_file_update_favorites();
+    void on_menu_help_about();
+    void on_menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
     void on_pushButtonSelect_clicked();
     void on_tableView_clicked(const QModelIndex &index);
@@ -48,12 +52,9 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
     void on_checkBoxSelectAll_clicked(bool checked);
-    void on_pushButtonSaveAsFavorites_clicked();
     void on_pushButtonFind_clicked();
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error);
-
-    void on_pushButtonUpdateFavorites_clicked();
 
 private:
 
@@ -65,8 +66,7 @@ private:
     QMediaPlayer mPlayer;
     CheckboxItemModel* mListModel;
     QNetworkAccessManager mNetManager;
-    QString mCurrentUrl;
-    QString mCurrentDestination;
+    int        mCurrentRowIndex;
     QList<int> mHiddenColumns;
     int        mFindStartRow;
     bool       mShowIcon;
