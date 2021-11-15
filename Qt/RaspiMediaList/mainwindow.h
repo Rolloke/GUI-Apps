@@ -39,11 +39,13 @@ private:
     QString getConfigName() const;
 
 private slots:
-    void on_menu_file_open();
-    void on_menu_file_save_as_favorites();
-    void on_menu_file_update_favorites();
-    void on_menu_help_about();
-    void on_menu_help_info();
+    void menu_file_open();
+    void menu_file_save_as_favorites();
+    void menu_file_update_favorites();
+    void menu_edit_copy_url();
+    void menu_edit_copy_thumb();
+    void menu_help_about();
+    void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
     void on_pushButtonSelect_clicked();
     void on_tableView_clicked(const QModelIndex &index);
