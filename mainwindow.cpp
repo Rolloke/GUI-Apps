@@ -14,6 +14,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QMessageBox>
+#include <QClipboard>
 
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
@@ -83,12 +84,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->setModel(mListModel);
     ui->graphicsView->setScene(new QGraphicsScene ());
 
-    connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(on_menu_file_open()));
-    connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(on_menu_file_save_as_favorites()));
-    connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(on_menu_file_update_favorites()));
+    connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
+    connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
+    connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
 
-    connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(on_menu_help_about()));
-    connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(on_menu_help_info()));
+    connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
+    connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
+
+    connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
+    connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
 
     ui->sliderVolume->setMinimum(0);
     ui->sliderVolume->setMaximum(100);
@@ -276,7 +280,7 @@ void MainWindow::on_lineEditSelection_textChanged(const QString &)
     mFindStartRow = 0;
 }
 
-void MainWindow::on_menu_file_save_as_favorites()
+void MainWindow::menu_file_save_as_favorites()
 {
     QString filename = QFileDialog::getSaveFileName(this, txt::store_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
     if (filename.size())
@@ -306,7 +310,7 @@ void MainWindow::on_menu_file_save_as_favorites()
     }
 }
 
-void MainWindow::on_menu_file_update_favorites()
+void MainWindow::menu_file_update_favorites()
 {
     QString filename = QFileDialog::getOpenFileName(this, txt::update_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
     if (filename.size())
@@ -349,7 +353,7 @@ void MainWindow::on_menu_file_update_favorites()
     }
 }
 
-void MainWindow::on_menu_file_open()
+void MainWindow::menu_file_open()
 {
     QString filename = QFileDialog::getOpenFileName(this, txt::open_media_list, mFileOpenPath, txt::media_list);
     if (filename.size())
@@ -360,7 +364,7 @@ void MainWindow::on_menu_file_open()
     }
 }
 
-void MainWindow::on_menu_help_about()
+void MainWindow::menu_help_about()
 {
     QMessageBox::about(this, windowTitle(),
          tr("About Kodi media list viewer and editor\n"
@@ -374,7 +378,7 @@ void MainWindow::on_menu_help_about()
             "Email:\trolf-kary-ehlers@t-online.de\n").arg(__DATE__, __TIME__));
 }
 
-void MainWindow::on_menu_help_info()
+void MainWindow::menu_help_info()
 {
     if (mCurrentRowIndex != -1)
     {
@@ -389,6 +393,24 @@ void MainWindow::on_menu_help_info()
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString()));
+    }
+}
+
+void MainWindow::menu_edit_copy_url()
+{
+    if (mCurrentRowIndex != -1)
+    {
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString());
+    }
+}
+
+void MainWindow::menu_edit_copy_thumb()
+{
+    if (mCurrentRowIndex != -1)
+    {
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
     }
 }
 
