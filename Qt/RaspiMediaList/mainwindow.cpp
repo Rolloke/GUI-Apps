@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <iostream>
 #include <QFile>
 #include <QDir>
 #include <QUrl>
@@ -14,6 +14,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QClipboard>
 
 
@@ -36,14 +37,19 @@ constexpr char sGroupSettings[] = "Settings";
 
 namespace txt
 {
-const QString radio           = QObject::tr("Radio");
-const QString tv              = QObject::tr("TV");
-const QString open_media_list = QObject::tr("Open Kodi raw media List");
-const QString media_list      = QObject::tr("Media List (*.txt *.*)");
+const QString radio            = QObject::tr("Radio");
+const QString tv               = QObject::tr("TV");
+const QString open_media_list  = QObject::tr("Open Kodi raw media List");
+const QString media_list       = QObject::tr("Media List (*.txt *.*)");
 
-const QString store_kodi_fav  = QObject::tr("Store media list as favorites for Raspi");
-const QString update_kodi_fav = QObject::tr("Load favorites for update media list check states");
-const QString kodi_favorites  = QObject::tr("Favorites (*.xml *.*)");
+const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
+const QString update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
+const QString kodi_favorites   = QObject::tr("Favorites (*.xml *.*)");
+
+const QString media_player_cmd = QObject::tr(
+            "Edit media player command:\n"
+            "- path_to_media_player %1\n"
+            "- %1 Placeholder for URL\n");
 
 }
 
@@ -55,11 +61,11 @@ enum eTable
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
 , ui(new Ui::MainWindow)
-, mFileOpenPath(QDir::homePath())
-, mFavoritesOpenPath(QDir::homePath())
 , mPlayer(this)
 , mListModel(nullptr)
 , mCurrentRowIndex(-1)
+, mFileOpenPath(QDir::homePath())
+, mFavoritesOpenPath(QDir::homePath())
 , mFindStartRow(0)
 , mShowIcon(true)
 {
@@ -90,6 +96,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
     connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
+    connect(ui->actionOpen_Mediaplayer, SIGNAL(triggered(bool)), SLOT(menu_edit_open_media_player()));
+
+    connect(ui->actionMedia_player, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
 
     connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
@@ -107,10 +116,14 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mFileOpenPath, toString);
     LOAD_STR(fSettings, mFavoritesOpenPath, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
+    LOAD_STR(fSettings, mMediaPlayerCommand, toString);
+    LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
+    LOAD_STR(fSettings, mOpenFileAtStart, toString);
 
     fSettings.endGroup();
 
-    const QString arg_file        = "--file=";
+    const QString arg_file = "--file=";
+    const QString arg_help = "--help";
     QString filename;
     QStringList arguments = QCoreApplication::arguments();
     for (int n = 0; n < arguments.size(); ++n)
@@ -126,11 +139,23 @@ MainWindow::MainWindow(QWidget *parent) :
             {
                 filename = arguments[n].mid(pos + arg_file.size());
             }
+            pos = arguments[n].indexOf(arg_help);
+            if (pos != -1)
+            {
+                std::cout << "Arguments:" << std::endl;
+                std::cout << "-f <file>, --file=<file> open kodi file" << std::endl;
+                std::cout << "--help show this help" << std::endl;
+            }
         }
     }
     if (filename.size())
     {
         open_file(filename);
+    }
+    else if (mOpenFileAtStart.size())
+    {
+        ui->actionLoadLastOpenedFileAtStart->setChecked(true);
+        open_file(mOpenFileAtStart);
     }
 }
 
@@ -143,6 +168,14 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mFileOpenPath);
     STORE_STR(fSettings, mFavoritesOpenPath);
     STORE_STR(fSettings, mShowIcon);
+    STORE_STR(fSettings, mMediaPlayerCommand);
+    STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
+    if (!ui->actionLoadLastOpenedFileAtStart->isChecked())
+    {
+        mOpenFileAtStart.clear();
+    }
+    STORE_STR(fSettings, mOpenFileAtStart);
+
     fSettings.endGroup();
 
     mPlayer.stop();
@@ -190,12 +223,19 @@ void MainWindow::on_pushButtonStart_clicked()
 {
     if (mCurrentRowIndex != -1)
     {
-        mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
-        if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
+        if (ui->actionOpenMediaPlayerOnDoubleclick->isChecked())
         {
-            mVideo.show();
+            menu_edit_open_media_player();
         }
-        mPlayer.play();
+        else
+        {
+            mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
+            if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
+            {
+                mVideo.show();
+            }
+            mPlayer.play();
+        }
     }
 }
 
@@ -387,10 +427,12 @@ void MainWindow::menu_help_info()
            "\n"
            "Name:\t%1\n"
            "Web:\t%2\n"
-           "Media URL:\t%3\n\n"
-           "Thumb:\t%4\n").arg(
+           "Pretty name:\t%3\n"
+           "Media URL:\t%4\n"
+           "Thumb:\t%5\n").arg(
            mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
+           mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString()));
     }
@@ -411,6 +453,28 @@ void MainWindow::menu_edit_copy_thumb()
     {
         QClipboard *clipboard = QApplication::clipboard();
         clipboard->setText(mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
+    }
+}
+
+void MainWindow::menu_edit_open_media_player()
+{
+    if (mCurrentRowIndex != -1 && mMediaPlayerCommand.size())
+    {
+        QString command = tr(mMediaPlayerCommand.toStdString().c_str()).arg(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString());
+        int result = system(command.toStdString().c_str());
+        if (result != 0)
+        {
+            ui->statusBar->showMessage(QString(strerror(errno)));
+        }
+    }
+}
+
+void MainWindow::menu_option_media_player_command()
+{
+    QString text = QInputDialog::getText(this, windowTitle(), txt::media_player_cmd, QLineEdit::Normal, mMediaPlayerCommand);
+    if (text.size())
+    {
+        mMediaPlayerCommand = text;
     }
 }
 
@@ -469,6 +533,8 @@ void MainWindow::open_file(const QString& filename)
 
     if (file.open(QIODevice::ReadOnly))
     {
+        mOpenFileAtStart = filename;
+
         bool read_url = false;
         int current_row = 0;
 
