@@ -105,42 +105,58 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonStart">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="toolTip">
-             <string>Starts Media Stream</string>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="statusTip">
-             <string/>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <property name="text">
-             <string>Start</string>
+            <property name="bottomMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonStop">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Stops Media Stream</string>
-            </property>
-            <property name="statusTip">
-             <string/>
-            </property>
-            <property name="text">
-             <string>Stop</string>
-            </property>
-           </widget>
+            <item>
+             <widget class="QPushButton" name="pushButtonStart">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Starts Media Stream</string>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonStop">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Stops Media Stream</string>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Stop</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QSlider" name="sliderVolume">
@@ -281,9 +297,20 @@
     </property>
     <addaction name="actionCopy_URL"/>
     <addaction name="actionCopy_Thumb"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_Mediaplayer"/>
+   </widget>
+   <widget class="QMenu" name="menuOption">
+    <property name="title">
+     <string>Option</string>
+    </property>
+    <addaction name="actionMedia_player"/>
+    <addaction name="actionOpenMediaPlayerOnDoubleclick"/>
+    <addaction name="actionLoadLastOpenedFileAtStart"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuOption"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -321,6 +348,9 @@
    <property name="text">
     <string>About...</string>
    </property>
+   <property name="statusTip">
+    <string>Show information about</string>
+   </property>
    <property name="shortcut">
     <string>Shift+F1</string>
    </property>
@@ -328,6 +358,9 @@
   <action name="actionInfo">
    <property name="text">
     <string>Info...</string>
+   </property>
+   <property name="statusTip">
+    <string>Show information to selected item</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -337,6 +370,9 @@
    <property name="text">
     <string>Copy URL</string>
    </property>
+   <property name="statusTip">
+    <string>Copy URL path to clipboard</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
    </property>
@@ -345,8 +381,52 @@
    <property name="text">
     <string>Copy Thumb</string>
    </property>
+   <property name="statusTip">
+    <string>Copy Thump path to clipboard</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+Shift+C</string>
+   </property>
+  </action>
+  <action name="actionMedia_player">
+   <property name="text">
+    <string>Media player...</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit path to media player command</string>
+   </property>
+  </action>
+  <action name="actionOpen_Mediaplayer">
+   <property name="text">
+    <string>Open Mediaplayer</string>
+   </property>
+  </action>
+  <action name="actionOpenMediaPlayerOnDoubleclick">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Open media player</string>
+   </property>
+   <property name="iconText">
+    <string>Open media player</string>
+   </property>
+   <property name="toolTip">
+    <string>Open media player with start</string>
+   </property>
+   <property name="statusTip">
+    <string>Open median player with start btton or doubleclick</string>
+   </property>
+  </action>
+  <action name="actionLoadLastOpenedFileAtStart">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Load last opened file at start</string>
+   </property>
+   <property name="statusTip">
+    <string>Open current loaded kodi media list at program start</string>
    </property>
   </action>
  </widget>

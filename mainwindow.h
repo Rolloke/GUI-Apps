@@ -44,6 +44,8 @@ private slots:
     void menu_file_update_favorites();
     void menu_edit_copy_url();
     void menu_edit_copy_thumb();
+    void menu_edit_open_media_player();
+    void menu_option_media_player_command();
     void menu_help_about();
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
@@ -60,18 +62,20 @@ private slots:
 
 private:
 
-    Ui::MainWindow *ui;
-    QErrorMessage mErrorMsgDlg;
-    QString mFileOpenPath;
-    QString mFavoritesOpenPath;
-    QVideoWidget mVideo;
-    QMediaPlayer mPlayer;
-    CheckboxItemModel* mListModel;
+    Ui::MainWindow *    ui;
+    QErrorMessage       mErrorMsgDlg;
+    QVideoWidget        mVideo;
+    QMediaPlayer        mPlayer;
+    CheckboxItemModel*  mListModel;
     QNetworkAccessManager mNetManager;
-    int        mCurrentRowIndex;
-    QList<int> mHiddenColumns;
-    int        mFindStartRow;
-    bool       mShowIcon;
+    int                 mCurrentRowIndex;
+    QList<int>          mHiddenColumns;
+    QString             mFileOpenPath;
+    QString             mFavoritesOpenPath;
+    QString             mMediaPlayerCommand;
+    QString             mOpenFileAtStart;
+    int                 mFindStartRow;
+    bool                mShowIcon;
 };
 
 #endif // MAINWINDOW_H
