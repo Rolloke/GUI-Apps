@@ -23,12 +23,7 @@ void MainWindow::call_git_branch_command()
         top_item_path = getItemTopDirPath(mContextMenuSourceTreeItem);
     }
 
-    int result = QMessageBox::Yes;
-    if (message_box_text != ActionList::sNoCustomCommandMessageBox)
-    {
-        result = callMessageBox(message_box_text, "branch", branch_item);
-    }
-
+    int result = callMessageBox(message_box_text, "branch", branch_item);
     QString result_str;
     if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
     {

@@ -88,6 +88,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::StashClear]              = ":/resource/24X24/edit-delete.png";
     action_icons[Cmd::StashDrop]               = ":/resource/24X24/user-trash.png";
     action_icons[Cmd::StashList]               = ":/resource/24X24/text-x-log.png";
+    action_icons[Cmd::Blame]                   = ":/resource/24X24/emblem-urgent.png";
 
     action_icons[Cmd::BranchList]              = ":/resource/24X24/open-menu.png";
     action_icons[Cmd::BranchListRemote]        = ":/resource/24X24/open-menu.png";

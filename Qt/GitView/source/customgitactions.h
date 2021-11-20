@@ -52,6 +52,7 @@ public:
     explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent = 0);
     ~CustomGitActions();
     bool isMergeToolsChanged();
+    bool mExperimental;
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -72,6 +73,7 @@ private Q_SLOTS:
     void on_tableViewVarious_clicked(const QModelIndex &index);
     void enableButtons(std::uint32_t aBtnFlag);
     void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
+    void on_btnHelp_clicked(bool checked);
 
 private:
     void initListIcons();
@@ -90,6 +92,7 @@ private:
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
     QBitArray mMergeToolsState;
+    QMap<QWidget*, QString> mToolTips;
 };
 
 struct ActionsTable { enum e

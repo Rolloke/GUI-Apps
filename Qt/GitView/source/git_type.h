@@ -57,6 +57,7 @@ struct Cmd
         FitInView,
         StashApply,
         StashPush,
+        Blame,
 
         /// hint: add further git commands here
         CustomCommand=50,

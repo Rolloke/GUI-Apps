@@ -4,6 +4,7 @@
 #include "logger.h"
 
 #include <QMenu>
+#include <QMessageBox>
 
 using namespace std;
 using namespace git;
@@ -17,28 +18,69 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::call_git_history_diff_command()
 {
-    const QString &history_hash_items = ui->treeHistory->getSelectedHistoryHashItems();
+    QString history_hash_items = ui->treeHistory->getSelectedHistoryHashItems();
     const QString &history_file       = ui->treeHistory->getSelectedHistoryFile();
     const QAction *action             = qobject_cast<QAction *>(sender());
     const Type    type(ui->treeHistory->getSelectedTopLevelType());
     const QVariantList variant_list   = action->data().toList();
     const uint    command_flags       = variant_list[ActionList::Data::Flags].toUInt();
 
-    QString path;
-    if (type.is(Type::Branch) && mContextMenuSourceTreeItem)
+    int result = callMessageBox(variant_list[ActionList::Data::MsgBoxText].toString(), tr("history"), history_file);
+    if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
     {
-        path =  mContextMenuSourceTreeItem->text(0);
-        mContextMenuSourceTreeItem = nullptr;
-    }
-    if (mContextMenuSourceTreeItem)
-    {
-        QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName));
-        QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
-        QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
-        if (history_file.size())
+        QString path;
+        if (type.is(Type::Branch) && mContextMenuSourceTreeItem)
         {
-            const QString quoted_history_file = "\"" + history_file + "\"";
-            command = tr(command.toStdString().c_str()).arg(quoted_history_file);
+            path =  mContextMenuSourceTreeItem->text(0);
+            mContextMenuSourceTreeItem = nullptr;
+        }
+        if (mContextMenuSourceTreeItem)
+        {
+            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName));
+            QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
+            if (((command_flags & ActionList::Flags::DiffCmd)==0) && history_hash_items.contains(" "))
+            {
+                history_hash_items = history_hash_items.left(history_hash_items.indexOf(" "));
+            }
+            QString command = tr(action->statusTip().toStdString().c_str()).arg(history_hash_items + tool_cmd, "-- %1");
+            if (history_file.size())
+            {
+                const QString quoted_history_file = "\"" + history_file + "\"";
+                command = tr(command.toStdString().c_str()).arg(quoted_history_file);
+                QString result_str;
+                int result = execute(command, result_str);
+                if (result != NoError)
+                {
+                    result_str += tr("\nError %1 occurred").arg(result);
+                }
+                appendTextToBrowser(command + getLineFeed() + result_str);
+            }
+            else
+            {
+                applyGitCommandToFileTree(command);
+            }
+            if (variant_list[ActionList::Data::PostCmdAction].toUInt() == Cmd::UpdateItemStatus)
+            {
+                updateTreeItemStatus(mContextMenuSourceTreeItem);
+            }
+        }
+        else
+        {
+            QString command;
+            QString format_string = action->statusTip();
+            if (path.size())
+            {
+                format_string.replace(QString("git "), tr("git -C %1 ").arg(path));
+            }
+
+            if (history_file.size())
+            {
+                command = tr(format_string.toStdString().c_str()).arg(history_hash_items, history_file);
+            }
+            else
+            {
+                command = tr(format_string.toStdString().c_str()).arg(history_hash_items, "");
+            }
             QString result_str;
             int result = execute(command, result_str);
             if (result != NoError)
@@ -47,35 +89,6 @@ void MainWindow::call_git_history_diff_command()
             }
             appendTextToBrowser(command + getLineFeed() + result_str);
         }
-        else
-        {
-            applyGitCommandToFileTree(command);
-        }
-    }
-    else
-    {
-        QString command;
-        QString format_string = action->statusTip();
-        if (path.size())
-        {
-            format_string.replace(QString("git "), tr("git -C %1 ").arg(path));
-        }
-
-        if (history_file.size())
-        {
-            command = tr(format_string.toStdString().c_str()).arg(history_hash_items, history_file);
-        }
-        else
-        {
-            command = tr(format_string.toStdString().c_str()).arg(history_hash_items, "");
-        }
-        QString result_str;
-        int result = execute(command, result_str);
-        if (result != NoError)
-        {
-            result_str += tr("\nError %1 occurred").arg(result);
-        }
-        appendTextToBrowser(command + getLineFeed() + result_str);
     }
 }
 

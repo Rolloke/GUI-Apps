@@ -70,6 +70,21 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->tableViewVarious->setColumnWidth(VariousHeader::Icon, INT(0.2  * fWidth));
     ui->tableViewVarious->setColumnWidth(VariousHeader::Name, INT(0.75 * fWidth));
 
+    const QString button_enabled_style = "QPushButton:enabled { background-color:skyblue;}";
+    ui->btnToLeft->setStyleSheet(button_enabled_style);
+    ui->btnToRight->setStyleSheet(button_enabled_style);
+    ui->btnMoveUp->setStyleSheet(button_enabled_style);
+    ui->btnMoveDown->setStyleSheet(button_enabled_style);
+    ui->btnAdd->setStyleSheet(button_enabled_style);
+    ui->btnDelete->setStyleSheet(button_enabled_style);
+
+    mToolTips.insert(ui->tableViewActions, ui->tableViewActions->toolTip());
+    ui->tableViewActions->setToolTip("");
+
+    mToolTips.insert(ui->tableViewVarious, ui->tableViewVarious->toolTip());
+    ui->tableViewVarious->setToolTip("");
+
+
     enableButtons(0);
     for (int i=0; i< VariousListIndex::Size; ++i)
     {
@@ -570,7 +585,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
          set_tooltip(fA_Modified, tr("After program restart all modifications of this command are removed"));
     }
 
-    bool custom_enabled = (fFlags & ActionList::Flags::Custom);
+    bool custom_enabled = (fFlags & ActionList::Flags::Custom) || mExperimental;
     QAction* fA_BranchCmd  = fMenu.addAction(tr("Branch command"));
     fA_BranchCmd->setCheckable(true);
     fA_BranchCmd->setChecked(fFlags & ActionList::Flags::Branch);
@@ -595,7 +610,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     set_tooltip(fA_ThreadCmd, tr("The git command is called without blocking the program"));
 
     fMenu.addSeparator();
-    if (function_cmd)
+    if (function_cmd && !mExperimental)
     {
         fMenu.removeAction(fDoNothing);
         fMenu.removeAction(fUpdateStatus);
@@ -722,3 +737,12 @@ Qt::ItemFlags VariousItemModel::flags(const QModelIndex &index) const
     fFlags &= ~Qt::ItemIsEditable;
     return  fFlags;
 }
+
+void CustomGitActions::on_btnHelp_clicked(bool checked)
+{
+    for (auto tooltip = mToolTips.begin(); tooltip != mToolTips.end(); ++tooltip)
+    {
+        tooltip.key()->setToolTip(checked ? tooltip.value() : "");
+    }
+}
+

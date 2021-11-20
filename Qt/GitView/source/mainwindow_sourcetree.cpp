@@ -837,12 +837,8 @@ void MainWindow::perform_custom_command()
             {
                 git_command += cmd_option;
             }
-            int result = QMessageBox::Yes;
-            if (message_box_text != ActionList::sNoCustomCommandMessageBox)
-            {
-                result = callMessageBox(message_box_text, "", getItemTopDirPath(mContextMenuSourceTreeItem), false);
-            }
 
+            int result = callMessageBox(message_box_text, "", getItemTopDirPath(mContextMenuSourceTreeItem), false);
             if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
             {
                 if (handleInThread() && !mWorker.isBusy())
@@ -866,12 +862,7 @@ void MainWindow::perform_custom_command()
             QString option = get_git_command_option(type, command_flags, variant_list);
             git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
 
-            int fResult = QMessageBox::Yes;
-            if (message_box_text != ActionList::sNoCustomCommandMessageBox)
-            {
-                fResult = callMessageBox(message_box_text, type.type_name(), mContextMenuSourceTreeItem->text(Column::FileName), type.is(Type::File));
-            }
-
+            int fResult = callMessageBox(message_box_text, type.type_name(), mContextMenuSourceTreeItem->text(Column::FileName), type.is(Type::File));
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
             {
                 applyGitCommandToFileTree(git_command);
