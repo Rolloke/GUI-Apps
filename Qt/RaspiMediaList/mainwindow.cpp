@@ -51,6 +51,7 @@ const QString media_player_cmd = QObject::tr(
             "- path_to_media_player %1\n"
             "- %1 Placeholder for URL\n");
 
+const QString version          = QObject::tr("1.0.0.1");
 }
 
 enum eTable
@@ -193,13 +194,18 @@ QString MainWindow::getConfigName() const
 #endif
 }
 
+QString MainWindow::get_item_name(int row) const
+{
+    return mListModel->data(mListModel->index(row, eName)).toString();
+}
+
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
     if (index.column() == eName)
     {
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
-    ui->statusBar->showMessage(mListModel->data(mListModel->index(index.row(), eName)).toString());
+    ui->statusBar->showMessage(get_item_name(index.row()));
     mCurrentRowIndex = index.row();
 
     if (mShowIcon)
@@ -339,7 +345,7 @@ void MainWindow::menu_file_save_as_favorites()
                 if (mListModel->data(mListModel->index(current_row, eName), Qt::CheckStateRole).toBool())
                 {
                     QString line = tr("<favourite name=\"%1\" thumb=\"%2\">PlayMedia(&quot;%3&quot;)</favourite>\n").
-                            arg(mListModel->data(mListModel->index(current_row, eName)).toString(),
+                            arg(get_item_name(current_row),
                             mListModel->data(mListModel->index(current_row, eLogo)).toString(),
                             mListModel->data(mListModel->index(current_row, eURL)).toString());
                     file.write(line.toStdString().c_str());
@@ -380,7 +386,7 @@ void MainWindow::menu_file_update_favorites()
                     QString select_text = line.mid(start, end - start);
                     for (int current_row = 0; current_row < table_rows; ++current_row)
                     {
-                        if (mListModel->data(mListModel->index(current_row, eName)).toString().indexOf(select_text, 0, Qt::CaseSensitive) != -1)
+                        if (get_item_name(current_row).indexOf(select_text, 0, Qt::CaseSensitive) != -1)
                         {
                             mListModel->setData(mListModel->index(current_row, eName), true, Qt::CheckStateRole);
                             break;
@@ -411,11 +417,11 @@ void MainWindow::menu_help_about()
             "\n"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
             "\n"
-            "Build on:\t%1 , %2\n"
+            "Build on:\t%1, %2\n"
             "Author:\tRolf Kary Ehlers\n"
-            "Version:\t1.0.0.0\n"
+            "Version:\t%3\n"
             "License:\tGNU GPL Version 2\n"
-            "Email:\trolf-kary-ehlers@t-online.de\n").arg(__DATE__, __TIME__));
+            "Email:\trolf-kary-ehlers@t-online.de\n").arg(__DATE__, __TIME__, txt::version));
 }
 
 void MainWindow::menu_help_info()
@@ -570,8 +576,17 @@ void MainWindow::open_file(const QString& filename)
             start = line.indexOf(",", start);
             if (start != -1)        // the friendly name resides behind the comma
             {
-                QString name = line.mid(start+1);
-                mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), name);
+                QString friendly_name = line.mid(start+1);
+                QString ordinary_name = get_item_name(current_row);
+                if (ordinary_name.size() < friendly_name.size())
+                {   // just swap the names, the longer name is the visible name
+                    mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), ordinary_name);
+                    mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), friendly_name);
+                }
+                else
+                {
+                    mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), friendly_name);
+                }
                 // insert the checkbox and the media type
                 mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), true, Qt::CheckStateRole);
                 mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);

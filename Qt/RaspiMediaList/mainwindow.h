@@ -37,6 +37,7 @@ public:
 private:
     void open_file(const QString& file_name);
     QString getConfigName() const;
+    QString get_item_name(int row) const;
 
 private slots:
     void menu_file_open();
