@@ -1,5 +1,6 @@
 #include "helper.h"
 #include "logger.h"
+#include "actions.h"
 
 #include <QRegExp>
 #include <QStringList>
@@ -206,26 +207,30 @@ int execute(const QString& command, QString& aResultText, bool hide)
 
 int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, const QString& aFileName, bool aIsFile)
 {
-    QStringList fTextList = aMessageBoxText.split(";");
-    QMessageBox fRequestMessage;
-
-    std::string fText1   = fTextList[0].toStdString().c_str();
-    switch (fTextList.size())
+    if (aMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
-        case 1:
-            fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
-            fRequestMessage.setInformativeText(aFileName);
-            break;
-        case 2:
-            fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
-            fRequestMessage.setInformativeText(QObject::tr(fTextList[1].toStdString().c_str()).arg(aFileName));
-            break;
+        QStringList fTextList = aMessageBoxText.split(";");
+        QMessageBox fRequestMessage;
+
+        std::string fText1   = fTextList[0].toStdString().c_str();
+        switch (fTextList.size())
+        {
+            case 1:
+                fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
+                fRequestMessage.setInformativeText(aFileName);
+                break;
+            case 2:
+                fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
+                fRequestMessage.setInformativeText(QObject::tr(fTextList[1].toStdString().c_str()).arg(aFileName, aFileTypeName));
+                break;
+        }
+
+        fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
+        fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
+
+        return fRequestMessage.exec();
     }
-
-    fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-    fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
-
-    return fRequestMessage.exec();
+    return QMessageBox::Yes;
 }
 
 const char* getLineFeed()

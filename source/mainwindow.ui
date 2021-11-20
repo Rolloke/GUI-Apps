@@ -684,6 +684,16 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="ckExperimental">
+        <property name="toolTip">
+         <string>Experimental</string>
+        </property>
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QComboBox" name="comboAppStyle">
         <property name="editable">
          <bool>false</bool>

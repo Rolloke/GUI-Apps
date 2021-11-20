@@ -144,6 +144,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         }
 
         LOAD_STR(fSettings, mUseSourceTreeCheckboxes, toBool);
+        LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
@@ -320,6 +321,7 @@ MainWindow::~MainWindow()
     fSettings.beginGroup(config::sGroupFilter);
     {
         STORE_STR(fSettings, mUseSourceTreeCheckboxes);
+        STORE_PTR(fSettings, ui->ckExperimental, isChecked);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
         STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
         STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
@@ -900,16 +902,21 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandPostAction(Cmd::History, Cmd::ParseHistoryText);
     mActions.getAction(Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
 
+    connect(mActions.createAction(Cmd::Blame          , tr("Blame")      , Cmd::getCommand(Cmd::Blame))               , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread, Flag::set);
+
     connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     mActions.setCustomCommandPostAction(Cmd::Remove, Cmd::UpdateItemStatus);
+    mActions.setFlags(Cmd::Remove, Type::GitUnTracked, Flag::set, ActionList::Data::StatusFlagDisable);
 
     connect(mActions.createAction(Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore changes;Do you want to restore changes in file \"%1\"?"));
+    mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore %1 changes;Do you want to restore changes in \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
     mActions.setFlags(Cmd::Restore, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::Restore, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
+    mActions.setFlags(Cmd::Restore, ActionList::Flags::History);
 
     connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
@@ -1131,11 +1138,13 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 
 void MainWindow::performCustomGitActionSettings()
 {
-    CustomGitActions fCustomGitActions(mActions, mMergeTools, this);
-    connect(&fCustomGitActions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
-    if (fCustomGitActions.exec() == QDialog::Accepted)
+    CustomGitActions edit_custom_git_actions(mActions, mMergeTools, this);
+    edit_custom_git_actions.mExperimental = ui->ckExperimental->isChecked();
+
+    connect(&edit_custom_git_actions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
+    if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {
-        if (fCustomGitActions.isMergeToolsChanged())
+        if (edit_custom_git_actions.isMergeToolsChanged())
         {
             initMergeTools();
         }
