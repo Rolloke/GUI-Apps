@@ -27,6 +27,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
+    code_browser.cpp \
     highlighterdialog.cpp \
     mainwindow.cpp \
     helper.cpp \
@@ -54,6 +55,7 @@ SOURCES += main.cpp\
     graphics_view.cpp
 
 HEADERS  += mainwindow.h \
+    code_browser.h \
     helper.h \
     highlighterdialog.h \
     logger.h \

@@ -33,7 +33,6 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
     }
     QVector<QStringList> fList;
     History::parse(fText, fList);
-    // TODO: validate parse diffs between branches (files)
 
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(aFileName));
     addTopLevelItem(fNewHistoryItem);

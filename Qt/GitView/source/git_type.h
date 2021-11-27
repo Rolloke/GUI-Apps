@@ -52,9 +52,6 @@ struct Cmd
         StashClear,
         StashDrop,
         Fetch,
-        ZoomIn,
-        ZoomOut,
-        FitInView,
         StashApply,
         StashPush,
         Blame,
@@ -84,11 +81,15 @@ struct Cmd
         CopyFileName,
         CopyFilePath,
         RemoveGitFolder,
+        ZoomIn,
+        ZoomOut,
+        FitInView,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
         Invalid = -1,
-        Restore = Checkout
+        Restore = Checkout,
+        RenderGraphics = AutoCommand+6
     };
     enum ePostAction
     {

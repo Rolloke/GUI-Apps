@@ -34,17 +34,7 @@ using namespace git;
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
-// TODO: merge command mit Dialog implementieren
-// git merge --abort
-// git merge --continue
-// git merge -s <resolve|recursive <ours|theirs|patience> > obsolete
-// git mergetool
-// Preview anzeigen ...
-// git log --merge -p <path>
-
 // TODO: show branch graphically
-// TODO: checkout commit for branch, folder or file also from history
-// TODO: diff branches: git diff branch1...branch2
 
 namespace config
 {
@@ -109,8 +99,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
-    // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
-    // https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
 
     Highlighter::Language::load(fSettings);
 
@@ -131,6 +119,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
 
     connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
+    connect(ui->ckShowLineNumbers, SIGNAL(clicked(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
 
     fSettings.beginGroup(config::sGroupFilter);
     {
@@ -145,6 +134,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
         LOAD_STR(fSettings, mUseSourceTreeCheckboxes, toBool);
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
@@ -156,6 +146,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
+        ui->textBrowser->set_show_line_numbers(ui->ckShowLineNumbers->isChecked());
     }
     fSettings.endGroup();
 
@@ -322,6 +313,7 @@ MainWindow::~MainWindow()
     {
         STORE_STR(fSettings, mUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
+        STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
         STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
         STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
@@ -1046,6 +1038,8 @@ void MainWindow::initContextMenuActions()
     createAutoCmd(ui->ckFindCaseSensitive);
     createAutoCmd(ui->ckFindRegEx);
     createAutoCmd(ui->ckFindWholeWord);
+    createAutoCmd(ui->ckExperimental);
+    createAutoCmd(ui->ckShowLineNumbers);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1431,4 +1425,3 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         }
     }
 }
-
