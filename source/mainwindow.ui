@@ -232,6 +232,12 @@
           <property name="statusTip">
            <string>Git repository view</string>
           </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::NoDragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::IgnoreAction</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
@@ -547,7 +553,7 @@
              <number>5</number>
             </property>
             <item>
-             <widget class="QTextBrowser" name="textBrowser">
+             <widget class="code_browser" name="textBrowser">
               <property name="toolTip">
                <string>Shows git command results or
 File content opened with double click</string>
@@ -689,7 +695,14 @@ File content opened with double click</string>
          <string>Experimental</string>
         </property>
         <property name="text">
-         <string>X</string>
+         <string>Experimental</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckShowLineNumbers">
+        <property name="text">
+         <string>Show line numbers</string>
         </property>
        </widget>
       </item>
@@ -873,6 +886,11 @@ File content opened with double click</string>
    <class>graphics_view</class>
    <extends>QGraphicsView</extends>
    <header location="global">graphics_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>code_browser</class>
+   <extends>QTextBrowser</extends>
+   <header location="global">code_browser.h</header>
   </customwidget>
  </customwidgets>
  <resources>

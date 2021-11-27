@@ -100,7 +100,6 @@ quint64 MainWindow::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTree
             fItem->setText(Column::Size, formatFileSize(fFileInfo.size()));
             fItem->setData(Column::Size, Qt::SizeHintRole, QVariant(fFileInfo.size()));
         }
-        //mIgnoreContainingNegation.reset();
     }
     while (fIterator.hasNext());
 
@@ -1047,8 +1046,11 @@ void MainWindow::deleteFileOrFolder()
             }
             else
             {
-                appendTextToBrowser(tr("Could not delete %1 %2").arg(fType.type_name()).arg(fItemPath));
-                // TODO: detailed error message
+                appendTextToBrowser(tr("Could not delete %1 %2\n").arg(fType.type_name()).arg(fItemPath));
+                if (errno)
+                {
+                    appendTextToBrowser(strerror(errno), true);
+                }
             }
         }
     }
@@ -1056,6 +1058,17 @@ void MainWindow::deleteFileOrFolder()
 
 void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current */, QTreeWidgetItem *previous)
 {
+//    QString items;
+//    if (current)
+//    {
+//        items += current->text(Column::FileName);
+//    }
+//    if (previous)
+//    {
+//        items += ", ";
+//        items += previous->text(Column::FileName);
+//    }
+//    //TRACE(Logger::info, items.toStdString().c_str());
     if (   mContextMenuSourceTreeItem
         && mContextMenuSourceTreeItem == previous)
     {
@@ -1168,4 +1181,3 @@ void MainWindow::copy_file(copy command)
         }
     }
 }
-
