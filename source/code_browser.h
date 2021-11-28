@@ -16,6 +16,7 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int  lineNumberAreaWidth();
     int  blockCount() const;
+    void go_to_line(int);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
