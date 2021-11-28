@@ -167,3 +167,11 @@ QPointF code_browser::contentOffset() const
 {
     return QPointF(horizontalScrollBar()->value(), verticalScrollBar()->value());
 }
+
+void code_browser::go_to_line(int line)
+{
+    QTextBlock text_block = document()->findBlockByLineNumber(line-1);
+    QTextCursor text_cursor(text_block);
+    text_cursor.select(QTextCursor::BlockUnderCursor);
+    setTextCursor(text_cursor);
+}

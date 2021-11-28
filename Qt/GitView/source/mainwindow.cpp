@@ -506,6 +506,8 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
+    ui->comboFindBox->addItem(tr("Go to line"));
+
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
     pTB = new QToolBar(tr("Git File View States"));
@@ -1186,9 +1188,10 @@ void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
 
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {
-    ui->btnFindAll->setEnabled(static_cast<FindView>(index) != FindView::Text);
-    ui->btnFindNext->setEnabled(static_cast<FindView>(index) != FindView::FindTextInFiles);
-    ui->btnFindPrevious->setEnabled(static_cast<FindView>(index) != FindView::FindTextInFiles);
+    auto find = static_cast<FindView>(index);
+    ui->btnFindAll->setEnabled(find != FindView::Text && find != FindView::GoToLineInText);
+    ui->btnFindNext->setEnabled(find != FindView::FindTextInFiles);
+    ui->btnFindPrevious->setEnabled(find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
 }
 
 MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
@@ -1240,6 +1243,10 @@ void MainWindow::find_function(find find_item)
         {
             showDockedWidget(ui->textBrowser);
         }
+    }
+    else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
+    {
+        ui->textBrowser->go_to_line(ui->edtFindText->text().toInt());
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
     {
@@ -1318,6 +1325,7 @@ void MainWindow::find_function(find find_item)
             case FindView::Branch:  tree_view = ui->treeBranches; break;
             case FindView::Stash:   tree_view = ui->treeStash;    break;
             case FindView::Text: case FindView::FindTextInFiles:  break;
+            case FindView::GoToLineInText: break;
         }
 
         if (tree_view)

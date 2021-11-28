@@ -171,7 +171,8 @@ private:
         History,
         Branch,
         Stash,
-        FindTextInFiles
+        FindTextInFiles,
+        GoToLineInText
     };
     struct FindColumn { enum e
     {
