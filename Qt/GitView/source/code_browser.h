@@ -1,6 +1,8 @@
 #ifndef CODE_BROWSER_H
 #define CODE_BROWSER_H
 
+#include "actions.h"
+
 #include <QTextBrowser>
 
 #include <QPlainTextEdit>
@@ -17,9 +19,11 @@ public:
     int  lineNumberAreaWidth();
     int  blockCount() const;
     void go_to_line(int);
+    void set_actions(ActionList* list);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *e) override;
 
 Q_SIGNALS:
     void blockCountChanged(int newBlockCount);
@@ -43,6 +47,7 @@ private:
 private:
     QWidget *m_line_number_area;
     bool m_show_line_numbers;
+    ActionList *m_actions;
 };
 
 class LineNumberArea : public QWidget

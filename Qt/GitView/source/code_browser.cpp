@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QTextBlock>
 #include <QScrollBar>
+#include <QMenu>
 
 // NOTE: source for this solution, but a little bit modified
 // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
@@ -12,6 +13,7 @@
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
+  , m_actions(nullptr)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -34,7 +36,7 @@ int code_browser::lineNumberAreaWidth()
             ++digits;
         }
 
-        int space = 3 + fontMetrics().horizontalAdvance(QLatin1Char('9')) * digits;
+        int space = 3 + fontMetrics().charWidth("9", 0) * digits;
 
         return space;
     }
@@ -82,6 +84,21 @@ void code_browser::resizeEvent(QResizeEvent *e)
     QTextBrowser::resizeEvent(e);
     QRect cr = contentsRect();
     m_line_number_area->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+}
+
+void code_browser::contextMenuEvent(QContextMenuEvent *event)
+{
+    if (m_actions && git::Cmd::mContextMenuCodeBrowser.size())
+    {
+        QMenu *menu = createStandardContextMenu();
+        m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuCodeBrowser);
+        menu->exec(event->globalPos());
+        delete menu;
+    }
+    else
+    {
+        QTextBrowser::contextMenuEvent(event);
+    }
 }
 
 void code_browser::highlightCurrentLine()
@@ -174,4 +191,9 @@ void code_browser::go_to_line(int line)
     QTextCursor text_cursor(text_block);
     text_cursor.select(QTextCursor::BlockUnderCursor);
     setTextCursor(text_cursor);
+}
+
+void code_browser::set_actions(ActionList *list)
+{
+    m_actions = list;
 }

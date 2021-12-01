@@ -116,6 +116,7 @@ struct Cmd
     static tVector mContextMenuBranchTree;
     static tVector mContextMenuStashTree;
     static tVector mContextMenuGraphicsView;
+    static tVector mContextMenuCodeBrowser;
     static std::vector<tVector> mToolbars;
 #ifdef DOCKED_VIEWS
     static std::vector<QString> mToolbarNames;

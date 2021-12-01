@@ -174,6 +174,7 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
         case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
         case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
         case VariousListIndex::MenuGraphicView:     return Cmd::mContextMenuGraphicsView;
+        case VariousListIndex::MenuCodeBrowser:     return Cmd::mContextMenuCodeBrowser;
         case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
         case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
         case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
@@ -195,6 +196,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
         case VariousListIndex::MenuSrcTree:         return tr("Context Menu Source");
         case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
         case VariousListIndex::MenuGraphicView:     return tr("Context Menu Graphics View");
+        case VariousListIndex::MenuCodeBrowser:     return tr("Context Menu Code Browser");
         case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
         case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
         case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");

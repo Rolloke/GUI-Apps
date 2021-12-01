@@ -18,7 +18,6 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QStyleFactory>
-//#include <QPlainTextEdit>
 
 #include <boost/bind.hpp>
 
@@ -117,6 +116,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
     ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
+    ui->textBrowser->set_actions(&mActions);
 
     connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
     connect(ui->ckShowLineNumbers, SIGNAL(clicked(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
@@ -178,6 +178,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuCodeBrowser, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
@@ -372,6 +373,7 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuCodeBrowser, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
@@ -1029,19 +1031,25 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::FitInView)->setCheckable(true);
 
 
-    createAutoCmd(ui->ckDirectories);
-    createAutoCmd(ui->ckFiles);
-    createAutoCmd(ui->ckHiddenFiles);
-    createAutoCmd(ui->ckShortState);
-    createAutoCmd(ui->ckSymbolicLinks);
-    createAutoCmd(ui->ckSystemFiles);
-    createAutoCmd(ui->ckRenderGraphicFile, ":/resource/24X24/applications-graphics.png");
-    createAutoCmd(ui->ckHideEmptyParent);
-    createAutoCmd(ui->ckFindCaseSensitive);
-    createAutoCmd(ui->ckFindRegEx);
-    createAutoCmd(ui->ckFindWholeWord);
-    createAutoCmd(ui->ckExperimental);
-    createAutoCmd(ui->ckShowLineNumbers);
+    create_auto_cmd(ui->ckDirectories);
+    create_auto_cmd(ui->ckFiles);
+    create_auto_cmd(ui->ckHiddenFiles);
+    create_auto_cmd(ui->ckShortState);
+    create_auto_cmd(ui->ckSymbolicLinks);
+    create_auto_cmd(ui->ckSystemFiles);
+    create_auto_cmd(ui->ckRenderGraphicFile, ":/resource/24X24/applications-graphics.png");
+    create_auto_cmd(ui->ckHideEmptyParent);
+    create_auto_cmd(ui->ckFindCaseSensitive);
+    create_auto_cmd(ui->ckFindRegEx);
+    create_auto_cmd(ui->ckFindWholeWord);
+    create_auto_cmd(ui->ckExperimental);
+    create_auto_cmd(ui->ckShowLineNumbers);
+
+    create_auto_cmd(ui->btnStoreText, ":/resource/24X24/text-x-patch.png");
+    create_auto_cmd(ui->btnCloseText);
+    create_auto_cmd(ui->btnFindAll, ":/resource/24X24/edit-find.png");
+    create_auto_cmd(ui->btnFindNext, ":/resource/24X24/go-next.png");
+    create_auto_cmd(ui->btnFindPrevious, ":/resource/24X24/go-previous.png");
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1049,14 +1057,30 @@ void MainWindow::initContextMenuActions()
     }
 }
 
-void MainWindow::createAutoCmd(QCheckBox *checkbox, string icon_path)
+void MainWindow::create_auto_cmd(QAbstractButton *button, string icon_path)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
-    QAction* action = mActions.createAction(comand_id, checkbox->text(), checkbox->toolTip());
-    action->setCheckable(true);
-    if (checkbox->isChecked()) action->setChecked(true);
-    connect(action, SIGNAL(triggered(bool)), checkbox, SLOT(setChecked(bool)));
-    connect(checkbox, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+    QAction* action = mActions.createAction(comand_id, button->text(), button->toolTip(), button);
+
+    ui->textBrowser->addAction(action);
+    ui->treeSource->addAction(action);
+    ui->treeBranches->addAction(action);
+    ui->treeFindText->addAction(action);
+    ui->treeHistory->addAction(action);
+    ui->treeStash->addAction(action);
+    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+
+    if (button->isCheckable())
+    {
+        action->setCheckable(true);
+        if (button->isChecked()) action->setChecked(true);
+        connect(action, SIGNAL(triggered(bool)), button, SLOT(setChecked(bool)));
+        connect(button, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+    }
+    else
+    {
+        connect(action, SIGNAL(triggered()), button, SLOT(click()));
+    }
     if (icon_path.size())
     {
         mActions.setIconPath(comand_id, icon_path.c_str());
@@ -1433,3 +1457,4 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         }
     }
 }
+

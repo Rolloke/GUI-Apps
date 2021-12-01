@@ -22,7 +22,7 @@ class MainWindow;
 
 class MergeDialog;
 class QGraphicsItem;
-class QCheckBox;
+class QAbstractButton;
 
 
 class MainWindow : public QMainWindow
@@ -105,6 +105,7 @@ private Q_SLOTS:
     void killBackgroundThread();
     void copyFileName();
     void copyFilePath();
+
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -223,7 +224,7 @@ private:
     enum class copy { name, path, file };
     void     copy_file(copy command);
 
-    void     createAutoCmd(QCheckBox*, std::string icon_path="");
+    void     create_auto_cmd(QAbstractButton*, std::string icon_path="");
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
