@@ -7,6 +7,7 @@
 namespace git
 {
 
+const std::string resource = ":/resource/24X24/";
 int2stringmap Cmd::mCommandMap;
 Cmd::tVector  Cmd::mContextMenuSourceTree;
 Cmd::tVector  Cmd::mContextMenuEmptySourceTree;

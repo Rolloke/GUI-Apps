@@ -142,6 +142,10 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Icon)      , QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
         ++aRow;
     }
+    else
+    {
+        TRACE(Logger::warning, "no command text for %s", fAction->toolTip().toStdString().c_str());
+    }
 }
 
 void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)

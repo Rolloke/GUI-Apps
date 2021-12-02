@@ -224,7 +224,7 @@ private:
     enum class copy { name, path, file };
     void     copy_file(copy command);
 
-    QAction* create_auto_cmd(QAbstractButton*, std::string icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    QAction* create_auto_cmd(QAbstractButton*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
