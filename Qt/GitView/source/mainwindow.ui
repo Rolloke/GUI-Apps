@@ -806,6 +806,9 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QPushButton" name="btnFindAll">
+        <property name="toolTip">
+         <string>Search all </string>
+        </property>
         <property name="text">
          <string>All</string>
         </property>

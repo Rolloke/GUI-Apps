@@ -1036,7 +1036,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckShortState);
     create_auto_cmd(ui->ckSymbolicLinks);
     create_auto_cmd(ui->ckSystemFiles);
-    create_auto_cmd(ui->ckRenderGraphicFile, ":/resource/24X24/applications-graphics.png");
+    create_auto_cmd(ui->ckRenderGraphicFile, resource+"applications-graphics.png");
     create_auto_cmd(ui->ckHideEmptyParent);
     create_auto_cmd(ui->ckFindCaseSensitive);
     create_auto_cmd(ui->ckFindRegEx);
@@ -1051,7 +1051,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnStoreText, ":/resource/24X24/text-x-patch.png", &new_id)->
+    create_auto_cmd(ui->btnStoreText, resource+"text-x-patch.png", &new_id)->
             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnCloseText, "", &new_id)->
@@ -1059,11 +1059,11 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnFindAll, ":/resource/24X24/edit-find.png", &new_id);
-    create_auto_cmd(ui->btnFindNext, ":/resource/24X24/go-next.png", &new_id)->
+    create_auto_cmd(ui->btnFindAll, resource+"edit-find.png", &new_id);
+    create_auto_cmd(ui->btnFindNext, resource+"go-next.png", &new_id)->
             setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, ":/resource/24X24/go-previous.png", &new_id)->
+    create_auto_cmd(ui->btnFindPrevious, resource+"go-previous.png", &new_id)->
             setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
 
@@ -1078,7 +1078,7 @@ void MainWindow::initContextMenuActions()
     }
 }
 
-QAction* MainWindow::create_auto_cmd(QAbstractButton *button, string icon_path, Cmd::eCmd *new_id)
+QAction* MainWindow::create_auto_cmd(QAbstractButton *button, const string& icon_path, Cmd::eCmd *new_id)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
     QAction* action = mActions.createAction(comand_id, button->text(), button->toolTip(), button);

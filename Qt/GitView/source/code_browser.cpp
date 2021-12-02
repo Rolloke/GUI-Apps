@@ -189,7 +189,7 @@ void code_browser::go_to_line(int line)
 {
     QTextBlock text_block = document()->findBlockByLineNumber(line-1);
     QTextCursor text_cursor(text_block);
-    text_cursor.select(QTextCursor::BlockUnderCursor);
+    text_cursor.select(QTextCursor::LineUnderCursor);
     setTextCursor(text_cursor);
 }
 
