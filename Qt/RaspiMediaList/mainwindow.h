@@ -75,6 +75,7 @@ private:
     QString             mFavoritesOpenPath;
     QString             mMediaPlayerCommand;
     QString             mOpenFileAtStart;
+    QString             mOpenFileCmdLine;
     int                 mFindStartRow;
     bool                mShowIcon;
 };
