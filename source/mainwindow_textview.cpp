@@ -64,7 +64,7 @@ void MainWindow::selectTextBrowserLanguage()
     {
         bool enabled = ui->btnStoreText->isEnabled();
         mHighlighter->setLanguage(language_list[index]);
-        ui->btnStoreText->setEnabled(enabled);
+        set_widget_and_action_enabled(ui->btnStoreText, enabled);
     }
 }
 
@@ -80,13 +80,13 @@ void MainWindow::on_btnStoreText_clicked()
     {
         const string fString = ui->textBrowser->toPlainText().toStdString();
         file.write(fString.c_str(), fString.size());
-        ui->btnStoreText->setEnabled(false);
+        set_widget_and_action_enabled(ui->btnStoreText, false);
     }
 }
 
 void MainWindow::textBrowserChanged()
 {
-    ui->btnStoreText->setEnabled(true);
+    set_widget_and_action_enabled(ui->btnStoreText, true);
 }
 
 void MainWindow::on_btnCloseText_clicked()
@@ -110,7 +110,8 @@ void MainWindow::on_btnCloseText_clicked()
         }
     }
     ui->textBrowser->setText("");
-    ui->btnStoreText->setEnabled(false);
+    set_widget_and_action_enabled(ui->btnStoreText, false);
+
     ui->labelFilePath->setText("");
     ui->graphicsView->scene()->clear();
 
