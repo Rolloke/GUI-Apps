@@ -546,7 +546,8 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             ui->textBrowser->setPlainText(file.readAll());
         }
-        ui->btnStoreText->setEnabled(false);
+        set_widget_and_action_enabled(ui->btnStoreText, false);
+
         if (line_number)
         {
             auto text_block = ui->textBrowser->document()->findBlockByLineNumber(*line_number - 1);

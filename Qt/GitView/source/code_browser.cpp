@@ -88,10 +88,10 @@ void code_browser::resizeEvent(QResizeEvent *e)
 
 void code_browser::contextMenuEvent(QContextMenuEvent *event)
 {
-    if (m_actions && git::Cmd::mContextMenuCodeBrowser.size())
+    if (m_actions && git::Cmd::mContextMenuTextView.size())
     {
         QMenu *menu = createStandardContextMenu();
-        m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuCodeBrowser);
+        m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
         menu->exec(event->globalPos());
         delete menu;
     }

@@ -56,4 +56,6 @@ public:
 private:
 };
 
+void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index=0);
+
 #endif // HELPER_H

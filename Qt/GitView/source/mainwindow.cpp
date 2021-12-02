@@ -119,7 +119,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->set_actions(&mActions);
 
     connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
-    connect(ui->ckShowLineNumbers, SIGNAL(clicked(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
+    connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
 
     fSettings.beginGroup(config::sGroupFilter);
     {
@@ -146,7 +146,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
-        ui->textBrowser->set_show_line_numbers(ui->ckShowLineNumbers->isChecked());
     }
     fSettings.endGroup();
 
@@ -178,7 +177,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuCodeBrowser, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
@@ -373,7 +372,7 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuCodeBrowser, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
@@ -980,10 +979,10 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
     mActions.setFlags(Cmd::ExpandTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
-    mActions.getAction(Cmd::ExpandTreeItems)->setShortcut(QKeySequence(Qt::Key_F3));
+    mActions.getAction(Cmd::ExpandTreeItems)->setShortcut(QKeySequence(Qt::Key_F11));
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
     mActions.setFlags(Cmd::CollapseTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
-    mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
+    mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F11));
 
     connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Add a git source folder to repository view")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     mActions.setFlags(Cmd::AddGitSourceFolder, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1043,13 +1042,35 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckFindRegEx);
     create_auto_cmd(ui->ckFindWholeWord);
     create_auto_cmd(ui->ckExperimental);
-    create_auto_cmd(ui->ckShowLineNumbers);
 
-    create_auto_cmd(ui->btnStoreText, ":/resource/24X24/text-x-patch.png");
-    create_auto_cmd(ui->btnCloseText);
-    create_auto_cmd(ui->btnFindAll, ":/resource/24X24/edit-find.png");
-    create_auto_cmd(ui->btnFindNext, ":/resource/24X24/go-next.png");
-    create_auto_cmd(ui->btnFindPrevious, ":/resource/24X24/go-previous.png");
+    Cmd::eCmd new_id = Cmd::Invalid;
+    std::vector<Cmd::eCmd> contextmenu_text_view;
+    contextmenu_text_view.push_back(Cmd::Separator);
+
+    create_auto_cmd(ui->ckShowLineNumbers, "", &new_id);
+    contextmenu_text_view.push_back(new_id);
+    contextmenu_text_view.push_back(Cmd::Separator);
+
+    create_auto_cmd(ui->btnStoreText, ":/resource/24X24/text-x-patch.png", &new_id)->
+            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
+    contextmenu_text_view.push_back(new_id);
+    create_auto_cmd(ui->btnCloseText, "", &new_id)->
+            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
+    contextmenu_text_view.push_back(new_id);
+    contextmenu_text_view.push_back(Cmd::Separator);
+
+    create_auto_cmd(ui->btnFindAll, ":/resource/24X24/edit-find.png", &new_id);
+    create_auto_cmd(ui->btnFindNext, ":/resource/24X24/go-next.png", &new_id)->
+            setShortcut(QKeySequence(Qt::Key_F3));
+    contextmenu_text_view.push_back(new_id);
+    create_auto_cmd(ui->btnFindPrevious, ":/resource/24X24/go-previous.png", &new_id)->
+            setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
+    contextmenu_text_view.push_back(new_id);
+
+    if (Cmd::mContextMenuTextView.empty())
+    {
+        Cmd::mContextMenuTextView = contextmenu_text_view;
+    }
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1057,11 +1078,16 @@ void MainWindow::initContextMenuActions()
     }
 }
 
-void MainWindow::create_auto_cmd(QAbstractButton *button, string icon_path)
+QAction* MainWindow::create_auto_cmd(QAbstractButton *button, string icon_path, Cmd::eCmd *new_id)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
     QAction* action = mActions.createAction(comand_id, button->text(), button->toolTip(), button);
+    if (new_id)
+    {
+        *new_id = comand_id;
+    }
 
+    button->addAction(action);
     ui->textBrowser->addAction(action);
     ui->treeSource->addAction(action);
     ui->treeBranches->addAction(action);
@@ -1090,6 +1116,7 @@ void MainWindow::create_auto_cmd(QAbstractButton *button, string icon_path)
         mActions.setIconPath(comand_id, ":/resource/24X24/window-close.png");
     }
     mActions.setFlags(comand_id, ActionList::Flags::FunctionCmd);
+    return action;
 }
 
 void MainWindow::initCustomAction(QAction* fAction)
@@ -1213,9 +1240,9 @@ void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {
     auto find = static_cast<FindView>(index);
-    ui->btnFindAll->setEnabled(find != FindView::Text && find != FindView::GoToLineInText);
-    ui->btnFindNext->setEnabled(find != FindView::FindTextInFiles);
-    ui->btnFindPrevious->setEnabled(find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
+    set_widget_and_action_enabled(ui->btnFindAll, find != FindView::Text && find != FindView::GoToLineInText);
+    set_widget_and_action_enabled(ui->btnFindNext, find != FindView::FindTextInFiles);
+    set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
 }
 
 MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)

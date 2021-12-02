@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QDir>
 #include <QMessageBox>
+#include <QAction>
 #include <fstream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
@@ -256,4 +257,14 @@ QModelIndex QTreeWidgetHook::indexFromItem(QTreeWidgetItem *item, int column) co
 QTreeWidgetItem * QTreeWidgetHook::itemFromIndex(const QModelIndex &index) const
 {
     return QTreeWidget::itemFromIndex(index);
+}
+
+void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index)
+{
+    auto actions = widget->actions();
+    if (action_index < actions.size())
+    {
+        actions[action_index]->setEnabled(enabled);
+    }
+    widget->setEnabled(enabled);
 }
