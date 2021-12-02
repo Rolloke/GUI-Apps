@@ -71,6 +71,37 @@ MainWindow::MainWindow(QWidget *parent) :
 , mShowIcon(true)
 {
     ui->setupUi(this);
+
+    const QString arg_file = "--file=";
+    const QString arg_help = "--help";
+    QString filename;
+    QStringList arguments = QCoreApplication::arguments();
+    for (int n = 0; n < arguments.size(); ++n)
+    {
+        if (arguments[n] == "-f" && (n + 1) < arguments.size())
+        {
+            filename = arguments[n+1];
+        }
+        else
+        {
+            int pos = arguments[n].indexOf(arg_file);
+            if (pos != -1)
+            {
+                filename = arguments[n].mid(pos + arg_file.size());
+            }
+            pos = arguments[n].indexOf(arg_help);
+            if (pos != -1)
+            {
+                std::cout << "Arguments:" << std::endl;
+                std::cout << "-f <file>, --file=<file> open kodi file" << std::endl;
+                std::cout << "--help show this help" << std::endl;
+                exit(0);
+            }
+        }
+    }
+    QFileInfo info(filename);
+    QString settings_file_name = info.baseName();
+
     mPlayer.setVideoOutput(&mVideo);
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
 
@@ -98,6 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
     connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
     connect(ui->actionOpen_Mediaplayer, SIGNAL(triggered(bool)), SLOT(menu_edit_open_media_player()));
+    connect(ui->actionOpenMediaPlayerOnDoubleclick, &QAction::triggered, [&](bool checked) { ui->sliderVolume->setEnabled(!checked); });
 
     connect(ui->actionMedia_player, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
 
@@ -110,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sliderVolume->setTickInterval(10);
     ui->sliderVolume->setSingleStep(1);
 
-    fSettings.beginGroup(config::sGroupSettings);
+    fSettings.beginGroup(config::sGroupSettings + settings_file_name);
 
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
@@ -123,35 +155,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fSettings.endGroup();
 
-    const QString arg_file = "--file=";
-    const QString arg_help = "--help";
-    QString filename;
-    QStringList arguments = QCoreApplication::arguments();
-    for (int n = 0; n < arguments.size(); ++n)
-    {
-        if (arguments[n] == "-f" && (n + 1) < arguments.size())
-        {
-            filename = arguments[n+1];
-        }
-        else
-        {
-            int pos = arguments[n].indexOf(arg_file);
-            if (pos != -1)
-            {
-                filename = arguments[n].mid(pos + arg_file.size());
-            }
-            pos = arguments[n].indexOf(arg_help);
-            if (pos != -1)
-            {
-                std::cout << "Arguments:" << std::endl;
-                std::cout << "-f <file>, --file=<file> open kodi file" << std::endl;
-                std::cout << "--help show this help" << std::endl;
-            }
-        }
-    }
+    ui->sliderVolume->setEnabled(!ui->actionOpenMediaPlayerOnDoubleclick->isChecked());
+
     if (filename.size())
     {
         open_file(filename);
+        if (mOpenFileAtStart.size())
+        {
+            mOpenFileCmdLine = mOpenFileAtStart;
+        }
     }
     else if (mOpenFileAtStart.size())
     {
@@ -163,7 +175,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
-    fSettings.beginGroup(config::sGroupSettings);
+
+    QFileInfo info(mOpenFileCmdLine);
+
+    fSettings.beginGroup(config::sGroupSettings + info.baseName());
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
