@@ -233,7 +233,7 @@
            <string>Show file and folder tree of git repositories</string>
           </property>
           <property name="statusTip">
-           <string>Git repository view</string>
+           <string/>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::NoDragDrop</enum>
@@ -433,7 +433,7 @@
                <string>Shows git history of files or folders</string>
               </property>
               <property name="statusTip">
-               <string>Git history view</string>
+               <string/>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -470,7 +470,7 @@
                <string>Shows git stashed of files or folders</string>
               </property>
               <property name="statusTip">
-               <string>Git stash view</string>
+               <string/>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -496,7 +496,7 @@
                <string>Shows git branches</string>
               </property>
               <property name="statusTip">
-               <string>Git branch view</string>
+               <string/>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -520,7 +520,7 @@
                <string>Shows found text items and according lines and files</string>
               </property>
               <property name="statusTip">
-               <string>Find in files view</string>
+               <string/>
               </property>
               <column>
                <property name="text">
@@ -562,7 +562,7 @@
 File content opened with double click</string>
               </property>
               <property name="statusTip">
-               <string>Text view and editor</string>
+               <string/>
               </property>
               <property name="undoRedoEnabled">
                <bool>true</bool>
@@ -581,7 +581,7 @@ File content opened with double click</string>
                <string>Shows graphics file content opened with double click</string>
               </property>
               <property name="statusTip">
-               <string>Graphics viewer</string>
+               <string/>
               </property>
              </widget>
             </item>
