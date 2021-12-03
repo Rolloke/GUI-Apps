@@ -72,6 +72,7 @@ private Q_SLOTS:
     void on_btnFindPrevious_clicked();
     void on_btnFindAll_clicked();
     void on_comboFindBox_currentIndexChanged(int index);
+    void combo_triggered();
 
     void on_comboToolBarStyle_currentIndexChanged(int index);
     void on_comboAppStyle_currentTextChanged(const QString &arg1);
@@ -168,12 +169,12 @@ private:
     enum class FindView
     {
         Text,
+        GoToLineInText,
         Source,
         History,
         Branch,
         Stash,
-        FindTextInFiles,
-        GoToLineInText
+        FindTextInFiles
     };
     struct FindColumn { enum e
     {
@@ -224,7 +225,7 @@ private:
     enum class copy { name, path, file };
     void     copy_file(copy command);
 
-    QAction* create_auto_cmd(QAbstractButton*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

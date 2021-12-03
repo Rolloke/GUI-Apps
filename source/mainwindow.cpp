@@ -444,6 +444,7 @@ void MainWindow::createDockWindows()
     QDockWidget *first_tab;
     dock = new QDockWidget(tr("Text Editor"), this);
     ui->comboFindBox->addItem(dock->windowTitle());
+    ui->comboFindBox->addItem(tr("Go to line"));
     ui->comboFindBox->addItem("Repository View");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("textbrowser");
@@ -506,8 +507,6 @@ void MainWindow::createDockWindows()
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
-
-    ui->comboFindBox->addItem(tr("Go to line"));
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
@@ -1043,6 +1042,8 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckFindWholeWord);
     create_auto_cmd(ui->ckExperimental);
 
+    create_auto_cmd(ui->comboFindBox)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
     contextmenu_text_view.push_back(Cmd::Separator);
@@ -1078,16 +1079,22 @@ void MainWindow::initContextMenuActions()
     }
 }
 
-QAction* MainWindow::create_auto_cmd(QAbstractButton *button, const string& icon_path, Cmd::eCmd *new_id)
+QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, Cmd::eCmd *new_id)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
-    QAction* action = mActions.createAction(comand_id, button->text(), button->toolTip(), button);
     if (new_id)
     {
         *new_id = comand_id;
     }
 
-    button->addAction(action);
+    QAbstractButton*button = dynamic_cast<QAbstractButton*>(widget);
+    QComboBox*      combo  = dynamic_cast<QComboBox*>(widget);
+    QString         text   = button != 0 ? button->text() : "";
+    if (combo)      text   = combo->itemText(combo->currentIndex());
+
+    QAction* action = mActions.createAction(comand_id, text, widget->toolTip(), button);
+
+    widget->addAction(action);
     ui->textBrowser->addAction(action);
     ui->treeSource->addAction(action);
     ui->treeBranches->addAction(action);
@@ -1096,17 +1103,25 @@ QAction* MainWindow::create_auto_cmd(QAbstractButton *button, const string& icon
     ui->treeStash->addAction(action);
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 
-    if (button->isCheckable())
+    if (button)
     {
-        action->setCheckable(true);
-        if (button->isChecked()) action->setChecked(true);
-        connect(action, SIGNAL(triggered(bool)), button, SLOT(setChecked(bool)));
-        connect(button, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+        if (button->isCheckable())
+        {
+            action->setCheckable(true);
+            if (button->isChecked()) action->setChecked(true);
+            connect(action, SIGNAL(triggered(bool)), button, SLOT(setChecked(bool)));
+            connect(button, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+        }
+        else
+        {
+            connect(action, SIGNAL(triggered()), button, SLOT(click()));
+        }
     }
-    else
+    if (combo)
     {
-        connect(action, SIGNAL(triggered()), button, SLOT(click()));
+        connect(action, SIGNAL(triggered()), this, SLOT(combo_triggered()));
     }
+
     if (icon_path.size())
     {
         mActions.setIconPath(comand_id, icon_path.c_str());
@@ -1243,6 +1258,65 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
     set_widget_and_action_enabled(ui->btnFindAll, find != FindView::Text && find != FindView::GoToLineInText);
     set_widget_and_action_enabled(ui->btnFindNext, find != FindView::FindTextInFiles);
     set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
+    switch(find)
+    {
+    case FindView::Text:            ui->statusBar->showMessage(tr("Search in Text View")); break;
+    case FindView::GoToLineInText:  ui->statusBar->showMessage(tr("Go to line in Text View")); break;
+    case FindView::FindTextInFiles: ui->statusBar->showMessage(tr("Search for text in files under selected folder in Repository View")); break;
+    case FindView::Source:          ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
+    case FindView::History:         ui->statusBar->showMessage(tr("Search item in History View")); break;
+    case FindView::Branch:          ui->statusBar->showMessage(tr("Search item in Branch View")); break;
+    case FindView::Stash:           ui->statusBar->showMessage(tr("Search in Stash View")); break;
+    }
+}
+void MainWindow::combo_triggered()
+{
+    const QAction* action = qobject_cast<QAction *>(sender());
+    if (ui->comboFindBox->actions().first() == action)
+    {
+        FindView index = FindView::FindTextInFiles;
+        if (ui->textBrowser->hasFocus())       index = FindView::Text;
+        else if (ui->treeHistory->hasFocus())  index = FindView::History;
+        else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
+        else if (ui->treeStash->hasFocus())    index = FindView::Stash;
+        else if (ui->treeSource->hasFocus())   index = FindView::Source;
+
+        QString find_text;
+        QTreeWidget* tree_view = nullptr;
+        switch (index)
+        {
+        case FindView::Text:
+            find_text = ui->textBrowser->textCursor().selectedText();
+            if (!find_text.size())
+            {
+                index = FindView::GoToLineInText;
+                find_text = QString::number(ui->textBrowser->current_line());
+                ui->statusBar->showMessage(tr("You may select a text to search for"));
+            }
+            else
+            {
+                ui->statusBar->showMessage(tr("Select start folder"));
+            }
+            break;
+        case FindView::History: tree_view = ui->treeHistory; break;
+        case FindView::Branch:  tree_view = ui->treeBranches; break;
+        case FindView::Stash:   tree_view = ui->treeStash; break;
+        case FindView::Source:  tree_view = ui->treeSource; break;
+        case FindView::GoToLineInText:
+        case FindView::FindTextInFiles:
+            break;
+        }
+
+        ui->comboFindBox->setCurrentIndex(static_cast<int>(index));
+        if (tree_view && tree_view->currentItem())
+        {
+            find_text = tree_view->currentItem()->text(0);
+        }
+        if (find_text.size())
+        {
+            ui->edtFindText->setText(find_text);
+        }
+    }
 }
 
 MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)

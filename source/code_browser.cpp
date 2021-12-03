@@ -5,6 +5,7 @@
 #include <QTextBlock>
 #include <QScrollBar>
 #include <QMenu>
+#include <QTextCursor>
 
 // NOTE: source for this solution, but a little bit modified
 // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
@@ -183,6 +184,11 @@ QRectF code_browser::blockBoundingRect(const QTextBlock &block) const
 QPointF code_browser::contentOffset() const
 {
     return QPointF(horizontalScrollBar()->value(), verticalScrollBar()->value());
+}
+
+int code_browser::current_line() const
+{
+    return extraSelections().first().cursor.blockNumber()+1;
 }
 
 void code_browser::go_to_line(int line)

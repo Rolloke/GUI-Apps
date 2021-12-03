@@ -12,12 +12,13 @@ class code_browser : public QTextBrowser
 {
     Q_OBJECT
 
+    friend class LineNumberArea;
 public:
     code_browser(QWidget *parent = nullptr);
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
-    int  lineNumberAreaWidth();
     int  blockCount() const;
+    int  current_line() const;
     void go_to_line(int);
     void set_actions(ActionList* list);
 
@@ -42,6 +43,7 @@ private:
     QTextBlock firstVisibleBlock(int& diff);
     QRectF     blockBoundingRect(const QTextBlock &block) const;
     QPointF    contentOffset() const;
+    int        lineNumberAreaWidth();
 
 
 private:
