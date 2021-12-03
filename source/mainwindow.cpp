@@ -1260,8 +1260,8 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
     set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
     switch(find)
     {
-    case FindView::Text:            ui->statusBar->showMessage(tr("Search in Text View")); break;
-    case FindView::GoToLineInText:  ui->statusBar->showMessage(tr("Go to line in Text View")); break;
+    case FindView::Text:            ui->statusBar->showMessage(tr("Search in Text Editor")); break;
+    case FindView::GoToLineInText:  ui->statusBar->showMessage(tr("Go to line in Text Editor")); break;
     case FindView::FindTextInFiles: ui->statusBar->showMessage(tr("Search for text in files under selected folder in Repository View")); break;
     case FindView::Source:          ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
     case FindView::History:         ui->statusBar->showMessage(tr("Search item in History View")); break;
