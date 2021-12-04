@@ -1047,7 +1047,7 @@ void MainWindow::deleteFileOrFolder()
             }
             else
             {
-                appendTextToBrowser(tr("Could not delete %1 %2\n").arg(fType.type_name()).arg(fItemPath));
+                appendTextToBrowser(tr("Could not delete %1 %2\n").arg(fType.type_name(), fItemPath));
                 if (errno)
                 {
                     appendTextToBrowser(strerror(errno), true);

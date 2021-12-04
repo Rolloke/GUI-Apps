@@ -188,7 +188,12 @@ QPointF code_browser::contentOffset() const
 
 int code_browser::current_line() const
 {
-    return extraSelections().first().cursor.blockNumber()+1;
+    const auto selections = extraSelections();
+    if (selections.size())
+    {
+        return selections.first().cursor.blockNumber()+1;
+    }
+    return 0;
 }
 
 void code_browser::go_to_line(int line)

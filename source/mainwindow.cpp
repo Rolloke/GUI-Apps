@@ -95,7 +95,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-open.png); }";
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
-    QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
+    QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int, QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
@@ -118,7 +118,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
     ui->textBrowser->set_actions(&mActions);
 
-    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&,const QString&)), this, SLOT(find_item_in_treeSource(const QString&,const QString&)));
+    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&, const QString&)), this, SLOT(find_item_in_treeSource(const QString&, const QString&)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
 
     fSettings.beginGroup(config::sGroupFilter);
@@ -1042,8 +1042,6 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckFindWholeWord);
     create_auto_cmd(ui->ckExperimental);
 
-    create_auto_cmd(ui->comboFindBox)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
-
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
     contextmenu_text_view.push_back(Cmd::Separator);
@@ -1068,6 +1066,8 @@ void MainWindow::initContextMenuActions()
             setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
 
+    create_auto_cmd(ui->comboFindBox)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+
     if (Cmd::mContextMenuTextView.empty())
     {
         Cmd::mContextMenuTextView = contextmenu_text_view;
@@ -1082,19 +1082,25 @@ void MainWindow::initContextMenuActions()
 QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, Cmd::eCmd *new_id)
 {
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
+
+    const QAbstractButton*button  = dynamic_cast<QAbstractButton*>(widget);
+    QString               name    = button != 0 ? button->text() : "";
+    const QString         command = widget != 0 ? widget->toolTip() : "";
+    const QComboBox*      combobox= dynamic_cast<QComboBox*>(widget);
+    if (combobox)
+    {
+        name = combobox->itemText(combobox->currentIndex());
+    }
+    QAction* action  = mActions.createAction(comand_id, name, command, widget);
+
     if (new_id)
     {
         *new_id = comand_id;
     }
-
-    QAbstractButton*button = dynamic_cast<QAbstractButton*>(widget);
-    QComboBox*      combo  = dynamic_cast<QComboBox*>(widget);
-    QString         text   = button != 0 ? button->text() : "";
-    if (combo)      text   = combo->itemText(combo->currentIndex());
-
-    QAction* action = mActions.createAction(comand_id, text, widget->toolTip(), button);
-
-    widget->addAction(action);
+    if (widget)
+    {
+        widget->addAction(action);
+    }
     ui->textBrowser->addAction(action);
     ui->treeSource->addAction(action);
     ui->treeBranches->addAction(action);
@@ -1117,7 +1123,7 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, C
             connect(action, SIGNAL(triggered()), button, SLOT(click()));
         }
     }
-    if (combo)
+    if (combobox)
     {
         connect(action, SIGNAL(triggered()), this, SLOT(combo_triggered()));
     }
@@ -1272,7 +1278,8 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 void MainWindow::combo_triggered()
 {
     const QAction* action = qobject_cast<QAction *>(sender());
-    if (ui->comboFindBox->actions().first() == action)
+    const auto combofind_actions = ui->comboFindBox->actions();
+    if (combofind_actions.size() && combofind_actions.first() == action)
     {
         FindView index = FindView::FindTextInFiles;
         if (ui->textBrowser->hasFocus())       index = FindView::Text;

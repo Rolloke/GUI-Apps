@@ -23,7 +23,7 @@ WorkerThreadConnector::WorkerThreadConnector(QObject*aParent):
     fWorker->moveToThread(&mWorkerThread);
     connect(&mWorkerThread, SIGNAL(finished()), fWorker, SLOT(deleteLater()));
     connect(this, SIGNAL(operate(int, QVariant)), fWorker, SLOT(operate(int, QVariant)));
-    connect(fWorker, SIGNAL(sendMessage(int,QVariant)), this, SLOT(receiveMessage(int,QVariant)));
+    connect(fWorker, SIGNAL(sendMessage(int, QVariant)), this, SLOT(receiveMessage(int, QVariant)));
 
     mWorker = fWorker;
     mWorkerThread.start();
