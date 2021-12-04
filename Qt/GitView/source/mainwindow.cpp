@@ -1069,6 +1069,9 @@ void MainWindow::initContextMenuActions()
             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
+    create_auto_cmd(ui->comboShowItems);
+
+
     if (Cmd::mContextMenuTextView.empty())
     {
         Cmd::mContextMenuTextView = contextmenu_text_view;
@@ -1284,7 +1287,7 @@ void MainWindow::combo_triggered()
     if (combofind_actions.size() && combofind_actions.first() == action)
     {
         FindView index = FindView::FindTextInFiles;
-        if (ui->textBrowser->hasFocus())       index = FindView::Text;
+        if      (ui->textBrowser->hasFocus())  index = FindView::Text;
         else if (ui->treeHistory->hasFocus())  index = FindView::History;
         else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
         else if (ui->treeStash->hasFocus())    index = FindView::Stash;
@@ -1321,6 +1324,19 @@ void MainWindow::combo_triggered()
         {
             ui->edtFindText->setText(find_text);
             ui->edtFindText->setModified(true);
+        }
+    }
+    const auto combofind_show_items = ui->comboShowItems->actions();
+    if (combofind_show_items.size() && combofind_show_items.first() == action)
+    {
+        auto index = ui->comboShowItems->currentIndex();
+        if (index < ui->comboShowItems->count()-1)
+        {
+            ui->comboShowItems->setCurrentIndex(index + 1);
+        }
+        else
+        {
+            ui->comboShowItems->setCurrentIndex(0);
         }
     }
 }
