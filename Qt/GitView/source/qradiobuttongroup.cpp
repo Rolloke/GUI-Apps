@@ -14,9 +14,9 @@ void QRadioButtonGroup::setClickSignal(QRadioButtonGroup::eType aClickType)
     mClickSignal = aClickType;
 }
 
-void QRadioButtonGroup::childEvent ( QChildEvent * c )
+void QRadioButtonGroup::childEvent ( QChildEvent * event )
 {
-    QAbstractButton* fRB = qobject_cast<QAbstractButton*>(c->child());
+    QAbstractButton* fRB = dynamic_cast<QAbstractButton*>(event ? event->child() : nullptr);
     if (fRB)
     {
         QObject::connect(fRB, SIGNAL(clicked(bool)), this, SLOT(on_radio_button_clicked(bool)));
