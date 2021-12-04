@@ -103,6 +103,9 @@
             <property name="toolTip">
              <string>Show files depending on git status</string>
             </property>
+            <property name="statusTip">
+             <string>Show files depending on git status</string>
+            </property>
             <item>
              <property name="text">
               <string>Show all files</string>
