@@ -774,6 +774,9 @@ File content opened with double click</string>
          </size>
         </property>
         <property name="toolTip">
+         <string>Find</string>
+        </property>
+        <property name="statusTip">
          <string>Select View for search function</string>
         </property>
        </widget>

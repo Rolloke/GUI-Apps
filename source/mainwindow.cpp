@@ -1065,8 +1065,9 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->btnFindPrevious, resource+"go-previous.png", &new_id)->
             setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-
-    create_auto_cmd(ui->comboFindBox)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+    create_auto_cmd(ui->comboFindBox, resource+"edit-find.png", &new_id)->
+            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+    contextmenu_text_view.push_back(new_id);
 
     if (Cmd::mContextMenuTextView.empty())
     {
@@ -1084,12 +1085,13 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, C
     auto comand_id = mActions.createNewID(Cmd::AutoCommand);
 
     const QAbstractButton*button  = dynamic_cast<QAbstractButton*>(widget);
-    QString               name    = button != 0 ? button->text() : "";
-    const QString         command = widget != 0 ? widget->toolTip() : "";
     const QComboBox*      combobox= dynamic_cast<QComboBox*>(widget);
+    QString               name    = button != 0 ? button->text() : "";
+    QString               command = widget != 0 ? widget->toolTip() : "";
     if (combobox)
     {
-        name = combobox->itemText(combobox->currentIndex());
+        name    = combobox->toolTip();
+        command = combobox->statusTip();
     }
     QAction* action  = mActions.createAction(comand_id, name, command, widget);
 
@@ -1300,10 +1302,6 @@ void MainWindow::combo_triggered()
                 find_text = QString::number(ui->textBrowser->current_line());
                 ui->statusBar->showMessage(tr("You may select a text to search for"));
             }
-            else
-            {
-                ui->statusBar->showMessage(tr("Select start folder"));
-            }
             break;
         case FindView::History: tree_view = ui->treeHistory; break;
         case FindView::Branch:  tree_view = ui->treeBranches; break;
@@ -1322,6 +1320,7 @@ void MainWindow::combo_triggered()
         if (find_text.size())
         {
             ui->edtFindText->setText(find_text);
+            ui->edtFindText->setModified(true);
         }
     }
 }
@@ -1495,6 +1494,7 @@ void MainWindow::find_function(find find_item)
 
             if (tree_match_flag != property.mFlags || ui->edtFindText->isModified())
             {
+                tree_view->clearSelection();
                 found_items     = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
                 property.mFlags = tree_match_flag;
                 property.mIndex = 0;
