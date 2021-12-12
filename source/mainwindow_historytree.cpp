@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "helper.h"
 #include "logger.h"
+#include "history.h"
 
 #include <QMenu>
 #include <QMessageBox>
@@ -18,7 +19,7 @@ void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 
 void MainWindow::call_git_history_diff_command()
 {
-    QString history_hash_items = ui->treeHistory->getSelectedHistoryHashItems();
+    QString history_hash_items        = ui->treeHistory->getSelectedHistoryHashItems();
     const QString &history_file       = ui->treeHistory->getSelectedHistoryFile();
     const QAction *action             = qobject_cast<QAction *>(sender());
     const Type    type(ui->treeHistory->getSelectedTopLevelType());
@@ -116,5 +117,47 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
     if (!ui->treeHistory->isSelectionFileDiffable())
     {
         mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
+    }
+    if (mHistoryFile.size() == HistoryFile::Size)
+    {
+        appendTextToBrowser(mHistoryFile[HistoryFile::Content], false, mHistoryFile[HistoryFile::Extension]);
+        ui->labelFilePath->setText(mHistoryFile[HistoryFile::FilePath]);
+        ui->btnStoreText->setEnabled(false);
+    }
+    mHistoryFile.clear();
+}
+
+void MainWindow::on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    if (   column == History::Column::Filename
+        && getItemLevel(item) == QHistoryTreeWidget::Level::File)
+    {
+        QString history_hash_items        = ui->treeHistory->getSelectedHistoryHashItems();
+        const QString &history_file       = ui->treeHistory->getSelectedHistoryFile();
+        if (history_hash_items.contains(" "))
+        {
+            history_hash_items = history_hash_items.mid(history_hash_items.indexOf(" "));
+        }
+        QString command = tr("git show %1:%2").arg(history_hash_items, history_file);
+        mHistoryFile.append("");
+        int result = execute(command, mHistoryFile[HistoryFile::Content]);
+        if (result == NoError)
+        {
+            int pos = history_file.lastIndexOf('.');
+            if (pos != -1)
+            {
+                mHistoryFile.append(history_file.mid(pos+1));
+            }
+            QString root_path;
+            if (mContextMenuSourceTreeItem)
+            {
+                root_path = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+            }
+            mHistoryFile.append(root_path + "/" + history_file);
+        }
+        else
+        {
+            mHistoryFile.clear();
+        }
     }
 }

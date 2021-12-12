@@ -95,7 +95,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-open.png); }";
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
-    QObject::connect(this, SIGNAL(doWork(int, QVariant)), &mWorker, SLOT(doWork(int, QVariant)));
+    QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
@@ -118,7 +118,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
     ui->textBrowser->set_actions(&mActions);
 
-    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(const QString&, const QString&)), this, SLOT(find_item_in_treeSource(const QString&, const QString&)));
+    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(QString,QString)), this, SLOT(find_item_in_treeSource(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
 
     fSettings.beginGroup(config::sGroupFilter);
@@ -1459,7 +1459,7 @@ void MainWindow::find_function(find find_item)
         }
         else
         {
-            appendTextToBrowser(find_command + "\n" + find_result, true);
+            appendTextToBrowser(find_command + "\n" + find_result + tr("\nresult error: %1").arg(result));
         }
     }
     else
@@ -1581,4 +1581,5 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         }
     }
 }
+
 

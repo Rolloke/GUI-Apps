@@ -9,14 +9,13 @@ class QHistoryTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
+public:
     struct Level { enum e
     {
         Top,
         Log,
         File
     }; };
-
-public:
     QHistoryTreeWidget(QWidget *parent = 0);
 
     void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType);

@@ -33,7 +33,8 @@ struct History
         CommitDate,
         Description,
         Author,
-        Commit
+        Commit,
+        Filename = CommitDate
     }; };
 
     struct Role { enum e
