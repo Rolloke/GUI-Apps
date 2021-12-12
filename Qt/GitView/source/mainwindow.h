@@ -57,6 +57,7 @@ private Q_SLOTS:
 
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
+    void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
@@ -106,7 +107,6 @@ private Q_SLOTS:
     void killBackgroundThread();
     void copyFileName();
     void copyFilePath();
-
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -183,6 +183,13 @@ private:
         FoundTextLine,
         Size
     }; };
+    struct HistoryFile { enum e
+    {
+        Content,
+        Extension,
+        FilePath,
+        Size
+    }; };
 
     void     keyPressEvent(QKeyEvent *) override;
 
@@ -196,7 +203,7 @@ private:
 
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
-    void     appendTextToBrowser(const QString& aText, bool append=false);
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext="");
     void     open_file(const QString& file_path, boost::optional<int> line_number);
 
     QVariant handleWorker(int, const QVariant&);
@@ -257,6 +264,7 @@ private:
 
     QMap <QString, tree_find_properties> mTreeFindProperties;
     bool mUseSourceTreeCheckboxes;
+    QStringList mHistoryFile;
 };
 
 #endif // MAINWINDOW_H

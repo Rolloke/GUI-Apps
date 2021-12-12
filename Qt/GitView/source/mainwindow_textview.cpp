@@ -12,18 +12,21 @@ using namespace std;
 using namespace git;
 
 
-void MainWindow::appendTextToBrowser(const QString& aText, bool append)
+void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QString ext)
 {
-    if (!append)
+    if (aText.size())
     {
-        on_btnCloseText_clicked();
+        if (!append)
+        {
+            on_btnCloseText_clicked();
+        }
+        mHighlighter->setExtension(ext);
+        ui->textBrowser->insertPlainText(aText + getLineFeed());
+        ui->textBrowser->textCursor().movePosition(QTextCursor::End);
+    #ifdef DOCKED_VIEWS
+        showDockedWidget(ui->textBrowser);
+    #endif
     }
-    mHighlighter->setExtension("");
-    ui->textBrowser->insertPlainText(aText + getLineFeed());
-    ui->textBrowser->textCursor().movePosition(QTextCursor::End);
-#ifdef DOCKED_VIEWS
-    showDockedWidget(ui->textBrowser);
-#endif
 }
 
 void MainWindow::selectTextBrowserLanguage()
