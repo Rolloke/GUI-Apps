@@ -35,6 +35,7 @@ using namespace git;
 
 // TODO: show branch graphically
 
+
 namespace config
 {
 constexpr char sGroupFilter[] = "Filter";
@@ -899,6 +900,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::Blame          , tr("Blame")      , Cmd::getCommand(Cmd::Blame))               , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::Blame, Type::Folder, Flag::set, ActionList::Data::StatusFlagDisable);
 
     connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
@@ -984,9 +986,11 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
     mActions.setFlags(Cmd::ExpandTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::ExpandTreeItems)->setShortcut(QKeySequence(Qt::Key_F11));
+    mActions.setFlags(Cmd::ExpandTreeItems, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
     mActions.setFlags(Cmd::CollapseTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F11));
+    mActions.setFlags(Cmd::CollapseTreeItems, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Add a git source folder to repository view")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
     mActions.setFlags(Cmd::AddGitSourceFolder, ActionList::Flags::FunctionCmd, Flag::set);
