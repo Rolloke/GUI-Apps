@@ -97,7 +97,7 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
     on_btnCloseText_clicked();
     mHighlighter->setExtension("");
-    appendTextToBrowser(ui->treeHistory->itemClicked(aItem, aColumn));
+    appendTextToBrowser(ui->treeHistory->clickItem(aItem, aColumn));
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
 #endif

@@ -639,6 +639,7 @@ void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column 
     mContextMenuSourceTreeItem = item;
     const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(Column::State, Role::Filter).toUInt()));
     mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
+    mActions.enableItemsByType(Cmd::mToolbars[0], fType);
     if (mMergeDialog)
     {
         mMergeDialog->mGitFilePath = getItemFilePath(mContextMenuSourceTreeItem);

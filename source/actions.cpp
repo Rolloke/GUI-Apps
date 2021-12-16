@@ -136,6 +136,10 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
             auto status_enabled     = getFlags(cmd, Data::StatusFlagEnable);
             auto status_disabled    = getFlags(cmd, Data::StatusFlagDisable);
             auto status_not_enabled = status_enabled & status_disabled;
+            if (status_enabled & Type::IgnoreTypeStatus)
+            {
+                continue;
+            }
             if (   Logger::isSeverityActive(Logger::trace)
                 && (status_enabled  || status_disabled || status_not_enabled))
             {

@@ -224,9 +224,10 @@ QString Type::getStates(bool extended) const
         else if (is(WildCard))    states += name(WildCard)    + sep;
         else if (is(RegExp))      states += name(RegExp)      + sep;
         else if (is(Negation))    states += name(Negation)    + sep;
-        else if (is(FolderForNavigation))  states += name(FolderForNavigation) + sep;
         else if (is(Checked))     states += name(Checked)     + sep;
         else if (is(Executeable)) states += name(Executeable) + sep;
+        else if (is(FolderForNavigation)) states += name(FolderForNavigation) + sep;
+        else if (is(IgnoreTypeStatus))    states += name(IgnoreTypeStatus) + sep;
     }
     return states;
 }
@@ -263,6 +264,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(RegExp);
         RETURN_NAME(Negation);
         RETURN_NAME(FolderForNavigation);
+        RETURN_NAME(IgnoreTypeStatus);
         RETURN_NAME(None);
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);
