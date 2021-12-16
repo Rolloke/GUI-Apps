@@ -146,17 +146,38 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
             }
             if (type.type() & Type::File)
             {
+                status_not_enabled &= ~Type::Folder;
                 if (status_not_enabled)
                 {
                     enabled = (type.type() & status_not_enabled) != 0;
                 }
                 else
                 {
+                    status_enabled  &= ~Type::Folder;
+                    status_disabled &= ~Type::Folder;
                     if (status_enabled  && (type.type() & status_enabled) == 0)
                     {
                         enabled = false;
                     }
                     else if (status_disabled && (type.type() & status_disabled) != 0)
+                    {
+                        enabled = false;
+                    }
+                }
+            }
+            else if (type.type() & Type::Folder)
+            {
+                if (status_not_enabled & Type::Folder)
+                {
+                    enabled = true;
+                }
+                else
+                {
+                    if ((status_enabled & Type::Folder) == 0)
+                    {
+                        enabled = false;
+                    }
+                    else if (status_disabled & Type::Folder)
                     {
                         enabled = false;
                     }
