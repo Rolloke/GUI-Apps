@@ -532,7 +532,8 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     std::vector<Type::TypeFlags> fGitStatusArray =
     {
         Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
-        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote, Type::Folder
+        Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote,
+        Type::Folder, Type::IgnoreTypeStatus
     };
 
     fMenu.addSeparator();
@@ -567,8 +568,15 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
             fEnableMenu->addAction(fAction);
             fAction->setCheckable(true);
             fAction->setChecked(fEnabled && !fDisabled);
-            set_tooltip(fAction, tr("Enable command if this git status is set"));
-
+            if (fGitStatus == Type::IgnoreTypeStatus)
+            {
+                set_tooltip(fAction, tr("Ignore git file type status"));
+                continue;
+            }
+            else
+            {
+                set_tooltip(fAction, tr("Enable command if this git status is set"));
+            }
             fAction = fGitStatusDisableGroup.addAction(Type::name(fGitStatus));
             fDisableMenu->addAction(fAction);
             fAction->setCheckable(true);

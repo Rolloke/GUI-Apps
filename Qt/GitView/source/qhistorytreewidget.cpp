@@ -229,7 +229,7 @@ void QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos, const Act
     }
 }
 
-QString QHistoryTreeWidget::itemClicked(QTreeWidgetItem *aItem, int aColumn )
+QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
 {
     QString fText;
     int fLevel = getItemLevel(aItem);

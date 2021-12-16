@@ -21,7 +21,7 @@ public:
     void            parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType);
     void            customContextMenuRequested(const QPoint &pos, const ActionList&, QTreeWidgetItem**);
     QVariant        determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem);
-    QString         itemClicked(QTreeWidgetItem *aItem, int aColumn);
+    QString         clickItem(QTreeWidgetItem *aItem, int aColumn);
     void            checkAuthorsIndex(int aIndex, bool aChecked);
 
     const QString&  getSelectedHistoryHashItems();
