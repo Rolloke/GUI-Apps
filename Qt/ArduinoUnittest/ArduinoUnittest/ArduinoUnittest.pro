@@ -13,6 +13,9 @@ QMAKE_CXXFLAGS += -std=c++17
 QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
+unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
+unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 TARGET = ArduinoUnittest
 TEMPLATE = app
 
@@ -52,5 +55,5 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
             logic_analyser.ui
 
-ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.12/libraries
-ARDUINO_LOCAL_LIBRARY_PATH = /home/rolfke/Projekte/Arduino/libraries
+ARDUINO_LIBRARY_PATH = /opt/arduino-1.8.16/libraries
+ARDUINO_LOCAL_LIBRARY_PATH = /home/rolf/projects/Arduino/libraries

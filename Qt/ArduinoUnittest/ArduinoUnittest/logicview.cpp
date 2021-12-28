@@ -1,6 +1,6 @@
 #include "logicview.h"
 #include <algorithm>
-
+#include <cmath>
 #include <QMoveEvent>
 // TODO: show analog curve and validate
 
@@ -119,6 +119,7 @@ void LogicView::drawLogicCurves(const PinMap& aPins)
             auto fPi = fPoints.begin();
 
             float fValue = fLevel + (fOffset + fPi->second * fHeight);
+            if (__isnan(fValue) ) fValue = 0;
             fPolyLine.append(QPointF(mRange.left(), fValue));
             for (++fPi; fPi != fPoints.end(); ++fPi)
             {
