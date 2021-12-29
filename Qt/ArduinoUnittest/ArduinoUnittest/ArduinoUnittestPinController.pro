@@ -6,6 +6,9 @@
 
 include (ArduinoUnittest.pro)
 
+EMULATED=1
+DEFINES += EMULATED
+
 # Aduino Project Files
 SKETCH_NAME = AlarmLeuchte
 ARDUINO_PATH = /home/rolf/projects/Arduino/Sketches/$${SKETCH_NAME}
@@ -13,7 +16,8 @@ INCLUDEPATH += $${ARDUINO_PATH}
 SOURCES += $${SKETCH_NAME}.cpp
 DISTFILES += $${ARDUINO_PATH}/$${SKETCH_NAME}.ino
 
-DEFINES += INO_FILE="$${ARDUINO_PATH}/$${SKETCH_NAME}.ino"
+INO_FILE="$${ARDUINO_PATH}/$${SKETCH_NAME}.ino"
+DEFINES += INO_FILE
 
 
 # Libraries

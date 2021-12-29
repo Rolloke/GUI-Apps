@@ -36,10 +36,12 @@ bool PinController::do_repeat()
 }
 
 
-DigitalPinController::DigitalPinController(uint8_t* pOutputPins, Command* pCommands, uint8_t repeats):
+DigitalPinController::DigitalPinController(uint8_t* pOutputPins, Command* pCommands, uint16_t commands, uint8_t repeats):
     PinController(repeats)
   , mpOutputPin(pOutputPins)
   , mpCommands(pCommands)
+  , mCommands(commands)
+  , mFlags(none)
 {
     for (int i=0; mpOutputPin[i] != 0; ++i)
     {
@@ -56,28 +58,78 @@ void DigitalPinController::tick(unsigned long fNow_ms)
     {
         if (do_repeat())
         {
-            if (mpCommands != 0 && (mpCommands[mCurrentCommand].mBits != 0 || mpCommands[mCurrentCommand].mDelay != 0))
+            if (mpCommands != 0 && mCurrentCommand >= 0 && mCurrentCommand < mCommands)
             {
                 unsigned long fLength_ms = mpCommands[mCurrentCommand].mDelay;
-                for (int i=0; mpOutputPin[i] != 0; ++i)
+                int i;
+                for (i=0; i < 16 && mpOutputPin[i] != 0; ++i)
                 {
                     digitalWrite(mpOutputPin[i], bitRead(mpCommands[mCurrentCommand].mBits,i) ? HIGH : LOW);
                 }
-                mNextTime_ms = mCurrent_ms + fLength_ms;
-                ++mCurrentCommand;
+                if (is_set(common_delay))
+                {
+                    for ( ; i < 32 && mpOutputPin[i] != 0; ++i)
+                    {
+                        digitalWrite(mpOutputPin[i], bitRead(mpCommands[mCurrentCommand].mBits,i) ? HIGH : LOW);
+                    }
+                    mNextTime_ms = mCurrent_ms + mDelay;
+                }
+                else
+                {
+                    mNextTime_ms = mCurrent_ms + fLength_ms;
+                }
+                if (is_set(reverse))
+                {
+                    --mCurrentCommand;
+                }
+                else
+                {
+                    ++mCurrentCommand;
+                }
             }
             else
             {
                 ++mCurrentRepeat;
-                mCurrentCommand = 0;
+                if (is_set(reverse))
+                {
+                    mCurrentCommand = mCommands - 1;
+                }
+                else
+                {
+                    mCurrentCommand = 0;
+                }
             }
         }
     }
 }
 
-void DigitalPinController::setCommands(Command* aCommands)
+void DigitalPinController::setCommands(Command* aCommands, uint16_t commands)
 {
     mpCommands = aCommands;
+    mCommands  = commands;
+}
+
+void DigitalPinController::setFlags(uint8_t flags, bool set)
+{
+    if (set)
+    {
+        mFlags |= flags;
+    }
+    else
+    {
+        mFlags &= ~flags;
+    }
+}
+
+bool DigitalPinController::is_set(uint8_t flags)
+{
+    return mFlags & flags ? true : false;
+}
+
+void DigitalPinController::setCommonDelay(uint16_t delay)
+{
+    mDelay = delay;
+    setFlags(common_delay, mDelay != 0);
 }
 
 
@@ -103,27 +155,23 @@ void AnalogPinController::tick(unsigned long now_ms)
     mCurrent_ms += step_ms;
     if (mCurrent_ms > mNextTime_ms && repeat)
     {
-        if (mpFunctions != 0 && mpFunctions[mCurrentCommand].mFunction != Function::none)
+        if (mpFunctions)
         {
-            Function::eFunction function = mpFunctions[mCurrentCommand].mFunction;
-            if (mPreviousValue == start_value)
+            mPreviousValue   = mpFunctions[mCurrentCommand].mValue;
+
+            switch (mpFunctions[mCurrentCommand].mFunction)
             {
-                mPreviousValue = 0;
-            }
-            else
-            {
-                mPreviousValue = mpFunctions[mCurrentCommand].mValue;
-                ++mCurrentCommand;
+            case Function::set_start_value:
+            case Function::constant:
+            case Function::linear_ramp:
+                write_to_pins(mpFunctions[mCurrentCommand].mValue);
+                break;
+             case Function::sine_half: case Function::none: break;
             }
 
-            switch (function)
-            {
-            case Function::linear_ramp:
-            case Function::constant:
-                write_to_pins(mPreviousValue);
-                break;
-            case Function::sine_half: case Function::none: break;
-            }
+            ++mCurrentCommand;
+            mPreviousTime_ms = mCurrent_ms;
+            mNextTime_ms     = mCurrent_ms + mpFunctions[mCurrentCommand].mPeriod;
 
             if (mpFunctions[mCurrentCommand].mFunction == Function::none)
             {
@@ -133,16 +181,11 @@ void AnalogPinController::tick(unsigned long now_ms)
                 }
                 mCurrentCommand = 0;
             }
-            else
-            {
-                mPreviousTime_ms = mCurrent_ms;
-                mNextTime_ms = mCurrent_ms + mpFunctions[mCurrentCommand].mPeriod;
-            }
         }
     }
     else if (repeat && mCurrent_ms >= mPreviousTime_ms && mCurrent_ms < mNextTime_ms)
     {
-        const uint16_t current_time = mCurrent_ms - mPreviousTime_ms;
+        const uint16_t current_time = mCurrent_ms  - mPreviousTime_ms;
         const uint16_t length_ms    = mNextTime_ms - mPreviousTime_ms;
         int32_t value = 0;
         switch (mpFunctions[mCurrentCommand].mFunction)
@@ -151,6 +194,7 @@ void AnalogPinController::tick(unsigned long now_ms)
             value = calculate_linear_ramp(current_time, length_ms);
             break;
         case Function::constant:
+        case Function::set_start_value:
             return;
         case Function::sine_half:
             value = sin(M_PI * current_time / length_ms) * mpFunctions[mCurrentCommand].mValue;
@@ -188,9 +232,3 @@ void AnalogPinController::setFunctions(Function* aFunctions)
     mpFunctions = aFunctions;
 }
 
-void AnalogPinController::start()
-{
-    PinController::start();
-    mPreviousValue = start_value;
-    mPreviousTime_ms = 0;
-}
