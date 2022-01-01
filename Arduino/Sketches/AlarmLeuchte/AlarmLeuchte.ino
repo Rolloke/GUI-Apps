@@ -1,8 +1,10 @@
 #ifndef EMULATED
 #include <avr/sleep.h>
 #endif
+
 #include "PinController.h"
 #include "button.h"
+#include "Melody.h"
 
 
 uint8_t pin_numbers[] =
@@ -51,6 +53,20 @@ Command circle3[] =
     { PINS08(0,0,0,1, 0,0,0,1), dwell_time },
 };
 
+Command blink1[] =
+{
+    { PINS08(1,1,1,1, 1,1,1,1), dwell_time },
+    { PINS08(0,0,0,0, 0,0,0,0),        500 }
+};
+
+Command blink2[] =
+{
+    { PINS08(1,1,1,1, 1,1,1,1),  50 },
+    { PINS08(0,0,0,0, 0,0,0,0), 100 },
+    { PINS08(1,1,1,1, 1,1,1,1),  50 },
+    { PINS08(0,0,0,0, 0,0,0,0), 500 }
+};
+
 Command all_zero[] =
 {
     { PINS08(0,0,0,0, 0,0,0,0), dwell_time }
@@ -73,6 +89,7 @@ Function trapez[] =
     { Function::set_start_value,   0,    0 },
     { Function::linear_ramp    , 255, 1000 },
     { Function::linear_ramp    ,   0, 1000 },
+    { Function::constant       ,   0, 1000 },
     { Function::none           ,   0,    0 }
 };
 
@@ -82,6 +99,7 @@ Function triangle[] =
     { Function::linear_ramp    , 255, 2000 },
     { Function::constant       , 255,  200 },
     { Function::linear_ramp    ,   0,   20 },
+    { Function::constant       ,   0, 1000 },
     { Function::none,              0,    0 }
 };
 
@@ -89,28 +107,41 @@ Function sine_half[] =
 {
     { Function::set_start_value,   0,    0 },
     { Function::sine_half      , 255, 2000 },
+    { Function::constant       ,   0, 1000 },
     { Function::none           , 0  ,    0 }
 };
 
 AnalogPinController gAnalogPin(analog_pins, triangle);
 
+Tone gTones1[] =
+{
+    { NOTE_FS4, 1, 1},
+    { SILENCE , 1,16},
+    { NOTE_DS5, 1, 1},
+    { SILENCE , 1, 8},
+    { 0, 0, 0}
+};
+
+Melody gFireHorn(8, gTones1, 20, 1000);
+
 // control functions with button
-uint8_t button_pin = A2;
+const uint8_t button_pin = 2;
 void button_pressed(uint8_t aState, uint8_t aPin);
 Button gButton(button_pin, button_pressed);
 
 struct state {
-enum e { circle1, rev_circle1, circle2, rev_circle2, circle3, rev_circle3, sine_half, trapez, triangle, size };
+enum e { circle1, blink1, rev_circle1, circle2, blink2, rev_circle2, circle3, rev_circle3, sine_half, triangle, trapez, size };
 };
 
 state::e gState = state::circle1;
 
+bool gSleeping = false;
 
 void setup() 
 {
     gAnalogPin.stop();
     gPinControl.start();
-    gButton.setDelay(3000);
+    gButton.setDelay(2000);
 }
 
 void loop() 
@@ -119,6 +150,7 @@ void loop()
   gAnalogPin.tick(fNow);
   gPinControl.tick(fNow);
   gButton.tick(fNow);
+  gFireHorn.tick(fNow);
 }
 
 void button_pressed(uint8_t aState, uint8_t )
@@ -127,6 +159,7 @@ void button_pressed(uint8_t aState, uint8_t )
     {
         gState = static_cast<state::e>(gState + 1);
         if (gState == state::size) gState = state::circle1;
+        gFireHorn.stopMelody();
 
         bool is_pin_control = true;
         switch (gState)
@@ -154,6 +187,16 @@ void button_pressed(uint8_t aState, uint8_t )
         case state::rev_circle3:
             gPinControl.setCommands(circle3, lengthof(circle3));
             gPinControl.setFlags(DigitalPinController::reverse, true);
+            break;
+        case state::blink1:
+            gPinControl.setCommands(blink1, lengthof(blink1));
+            gPinControl.setFlags(DigitalPinController::reverse, false);
+            gFireHorn.startMelody();
+            break;
+        case state::blink2:
+            gPinControl.setCommands(blink2, lengthof(blink2));
+            gPinControl.setFlags(DigitalPinController::reverse, false);
+            gFireHorn.startMelody();
             break;
         case state::sine_half:
             is_pin_control = false;
@@ -186,6 +229,11 @@ void button_pressed(uint8_t aState, uint8_t )
     }
     else if (aState == Button::delayed)
     {
+        gFireHorn.stopMelody();
+        gPinControl.start();
+        gPinControl.setCommands(all_zero, lengthof(all_zero));
+        gPinControl.setFlags(DigitalPinController::reverse, false);
+        gPinControl.tick(millis()+1);
 #ifndef EMULATED
         enterSleepMode();
 #endif
@@ -195,25 +243,26 @@ void button_pressed(uint8_t aState, uint8_t )
 #ifndef EMULATED
 void isrAwake(void)
 {
-    detachInterrupt(0);
-    set_sleep_mode(SLEEP_MODE_IDLE);
-    sleep_enable();
-    sleep_mode();
+  if (gSleeping)
+  {
+    cli(); // deactivate interrupts
+    detachInterrupt(digitalPinToInterrupt(button_pin));
+    sei(); // 
+    
     sleep_disable();
+  }
+  gSleeping = false;
 }
 
 void enterSleepMode(void)
 {
-    attachInterrupt(digitalPinToInterrupt(button_pin), isrAwake, LOW);
-
-    gPinControl.start();
-    gPinControl.setCommands(all_zero, lengthof(all_zero));
-    gPinControl.setFlags(DigitalPinController::reverse, false);
-    gPinControl.tick(millis()+1);
+    cli(); // deactivate interrupts
+    attachInterrupt(digitalPinToInterrupt(button_pin), isrAwake, FALLING);
+    sei(); // 
     
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();
     sleep_mode();
-    sleep_disable();
+    gSleeping = true;
 }
 #endif
