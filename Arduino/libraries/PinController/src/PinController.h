@@ -2,16 +2,17 @@
 #define PinController_h
 
 /*!
- * PinController.h - library for switching pins
+ * PinController.h - library for switching pins on and off or controlling
+ * analog pins using a predefined function
  * The library switches pins on and off asynchronously controlled by
  * repeatedly calling the tick(..) function within the function loop().
  */
 #include <inttypes.h>
 
-class PinController
+class TimerController
 {
 public:
-    enum e { for_ever = 255 };
+    enum e { one_shot=1, for_ever = 255 };
     //! @brief starts playing the melody
     virtual void start();
 
@@ -22,14 +23,12 @@ public:
     bool isPlaying();
 
 protected:
-    PinController(uint8_t repeats);
+    TimerController(uint8_t repeats);
     bool do_repeat();
 
     uint8_t  mRepeats;
     uint8_t  mCurrentRepeat;
     int16_t  mCurrentCommand;
-    unsigned long mLast_ms;
-    unsigned long mCurrent_ms;
     unsigned long mNextTime_ms;
 };
 
@@ -60,7 +59,7 @@ typedef struct
                         // if common delay is used this value may be used for further pin bits
 } Command;
 
-class DigitalPinController : public PinController
+class DigitalPinController : public TimerController
 {
 public:
     enum flags
@@ -73,18 +72,18 @@ public:
     //! @param outputPin No
     //! @param pCommands array with command bits zero terminated, see structure tones
     //! @param commands length of array with commands
-    //! @param repeats of control commands, zero means forever
+    //! @param repeats of control commands or for_ever
     DigitalPinController( uint8_t* pOutputPin, Command* pCommands, uint16_t commands, uint8_t repeats=for_ever);
 
     //! @brief controlles events to switch pins on and off
-    //! @param fNow_ms current time determined by millis()
+    //! @param current_ms current time determined by millis()
     //! @note must be called repeatedly within loop()
-    void tick(unsigned long fNow_ms);
+    void tick(unsigned long current_ms);
 
     //! @brief sets a new array with commands
     //! @param pCommands array with commands, see structure Commands
     //! @param commands length of array with commands
-    void setCommands(Command* aCommands, uint16_t commands);
+    void setCommands(Command* aCommands, uint16_t commands, uint8_t repeats=for_ever);
 
     //! @brief sets or clears control flags
     //! @param flags, see enum flags
@@ -95,6 +94,10 @@ public:
     //! @param common delay
     //! @note sets flag common_delay automatically
     void setCommonDelay(uint16_t delay);
+
+    //! @brief sets value of all pins
+    //! @param value (LOW, HIGH)
+    void set_all_pins(uint8_t value);
 
 private:
     DigitalPinController();
@@ -116,42 +119,77 @@ struct Function
         set_start_value,
         linear_ramp,
         constant,
-        sine_half
+        sine,
+        sine_half_1,
+        sine_half_2,
+        sine_quater_1,
+        sine_quater_2,
+        sine_quater_3,
+        sine_quater_4,
     };
     eFunction mFunction;
     uint16_t  mValue;
     uint16_t  mPeriod;
 };
 
-class AnalogPinController: public PinController
+class AnalogPinController: public TimerController
 {
 public:
     //! @brief constructor with parameters
     //! @param outputPin No
     //! @param pCommands array with functions zero terminated, see structure Functions
     //! @note the last entry must contain zeros
-    //! @param repeats of control commands, zero means forever
+    //! @param repeats of control commands or (one_shot, for_ever)
     AnalogPinController( uint8_t* OutputPins, Function* pFunctions, uint8_t repeats=for_ever);
 
-    //! @brief controles events to play the melody
-    //! @param fNow_ms current time determined by millis()
+    //! @brief controles events to control analog pin
+    //! @param current_ms current time determined by millis()
     //! @note must be called repeatedly within loop()
-    void tick(unsigned long fNow_ms);
+    void tick(unsigned long current_ms);
 
-    //! @brief sets a new array with tones
-    //! @param pCommands array with tones zero terminated, see structure tones
+    //! @brief sets a new functions for controlling analog pin
+    //! @param functions array with mathematical functions zero terminated, see structure Function
     //! @note the last entry must contain zeros
-    void setFunctions(Function* aFunctions);
+    void setFunctions(Function* functions, uint8_t repeats=for_ever);
+
+    //! @brief sets value of all pins
+    //! @param value (0, ..., 256 [4096])
+    void set_value_of_all_pins(uint16_t value);
 
 private:
     AnalogPinController();
     int32_t calculate_linear_ramp(uint16_t current_time, uint16_t length_ms);
-    void    write_to_pins(uint16_t value);
 
     uint8_t*  mOutputPins;
     Function* mpFunctions;
     uint16_t  mPreviousValue;
+    uint16_t  mPeriodStep;
     unsigned long mPreviousTime_ms;
+};
+
+typedef bool (*TriggerFunc)();
+
+class TimerFunction: public TimerController
+{
+public:
+    //! @brief constructor with parameters
+    //! @param function callback function to be called after timeout
+    //! @param repeats of function calls or for_ever
+    TimerFunction(TriggerFunc function, uint16_t timeout, uint8_t repeats=for_ever);
+
+    //! @brief controles events to call the callback function
+    //! @param current_ms current time determined by millis()
+    //! @note must be called repeatedly within loop()
+    void tick(unsigned long current_ms);
+
+    //! @brief sets a new callback function
+    //! @param function callback function to be called after timeout
+    //! @param repeats of function calls or (one_shot, for_ever)
+    void setTimerFunction(TriggerFunc function, uint16_t timeout, uint8_t repeats=for_ever);
+
+private:
+    TriggerFunc mTriggerFunction;
+    uint16_t mTimeout;
 };
 
 #endif
