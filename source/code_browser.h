@@ -21,6 +21,7 @@ public:
     int  current_line() const;
     void go_to_line(int);
     void set_actions(ActionList* list);
+    void set_dark_mode(bool );
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -47,9 +48,11 @@ private:
 
 
 private:
-    QWidget *m_line_number_area;
-    bool m_show_line_numbers;
+    QWidget *   m_line_number_area;
+    bool        m_show_line_numbers;
     ActionList *m_actions;
+    bool        m_dark_mode;
+
 };
 
 class LineNumberArea : public QWidget

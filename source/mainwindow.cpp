@@ -18,6 +18,8 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QStyleFactory>
+#include <QPalette>
+#include <QTextStream>
 
 #include <boost/bind.hpp>
 
@@ -32,8 +34,6 @@ using namespace git;
 // Referenz entfernen:
 // URL korrigieren:
 // git remote set - url < Name > <URL >
-
-// TODO: show branch graphically
 
 
 namespace config
@@ -73,6 +73,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mFontName("Courier")
     , mFileCopyMimeType("x-special/mate-copied-files")
     , mUseSourceTreeCheckboxes(false)
+    , mStylePath( "/opt/tools/git_view/style.qss")
 {
     ui->setupUi(this);
 #ifdef DOCKED_VIEWS
@@ -83,11 +84,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
-            "    border-image: url(://resource/24X24/stylesheet-vline.png) 0; }"
+            "    border-image: url(:/resource/24X24/stylesheet-vline.png) 0; }"
             "QTreeView::branch:has-siblings:adjoins-item {"
-            "    border-image: url(://resource/24X24/stylesheet-branch-more.png) 0; }"
+            "    border-image: url(:/resource/24X24/stylesheet-branch-more.png) 0; }"
             "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
-            "    border-image: url(://resource/24X24/stylesheet-branch-end.png) 0; }"
+            "    border-image: url(:/resource/24X24/stylesheet-branch-end.png) 0; }"
             "QTreeView::branch:has-children:!has-siblings:closed,"
             "QTreeView::branch:closed:has-children:has-siblings { "
             "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-closed.png); }"
@@ -133,6 +134,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
         }
 
+        LOAD_STR(fSettings, mStylePath, toString);
         LOAD_STR(fSettings, mUseSourceTreeCheckboxes, toBool);
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
@@ -144,9 +146,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
+        on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
     }
     fSettings.endGroup();
 
@@ -312,6 +316,7 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     {
+        STORE_STR(fSettings, mStylePath);
         STORE_STR(fSettings, mUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
@@ -323,6 +328,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
     }
     fSettings.endGroup();
 
@@ -1444,6 +1450,26 @@ void MainWindow::find_function(find find_item)
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
     {
+        // TODO! use fsrc from samuel
+        // Usage  : fsrc [options] term
+        // Options:
+        //  -d [ --dir ] arg      Search folder
+        //  -e [ --ext ] arg      Search only in files with extension <arg>, equiv. to
+        //                        --glob '*.ext'
+        //  -g [ --glob ] arg     Search only in files filtered by <arg> glob, e.g.
+        //                        '*.txt'; overrides --ext
+        //  -h [ --help ]         Help
+        //  --html                open web page with results
+        //  -i [ --ignore-case ]  Case insensitive search
+        //  --no-git              Disable search with 'git ls-files'
+        //  --no-colors           Disable colorized output
+        //  --no-piped            Disable piped output
+        //  --no-uri              Print w/out file:// prefix
+        //  --only-files          Only print filenames
+        //  --piped               Enable piped output
+        //  -q [ --quiet ]        only print status
+        //  -r [ --regex ]        Regex search (slower)
+
         //"grep -rnHsI[oiEw] 'search_pattern' 'path'"
         // r: recursive
         // n: line number
@@ -1627,6 +1653,56 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
             find_item_in_treeSource(repository_root, file_path_part);
         }
     }
+}
+
+void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
+{
+    switch (index)
+    {
+    case UserStyle::None:
+        setStyleSheet("");
+        QApplication::setPalette(QGuiApplication::palette());
+        ui->textBrowser->set_dark_mode(false);
+        break;
+    case UserStyle::User:
+    {
+        // TODO: find a good dark style
+        QFile f(mStylePath);
+        if (!f.exists())
+        {
+            TRACE(Logger::error, "Unable to set stylesheet, file %s not found\n", mStylePath.toStdString().c_str());
+        }
+        else
+        {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            setStyleSheet(ts.readAll());
+            ui->textBrowser->set_dark_mode(true);
+        }
+        break;
+    }
+    case UserStyle::Palette:
+    {
+        QPalette palette = QGuiApplication::palette();
+        palette.setColor(QPalette::Window, QColor(53, 53, 53));
+        palette.setColor(QPalette::WindowText, Qt::white);
+        palette.setColor(QPalette::Base, QColor(25, 25, 25));
+        palette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+        palette.setColor(QPalette::ToolTipBase, Qt::black);
+        palette.setColor(QPalette::ToolTipText, Qt::white);
+        palette.setColor(QPalette::Text, Qt::white);
+        palette.setColor(QPalette::Button, QColor(53, 53, 53));
+        palette.setColor(QPalette::ButtonText, Qt::white);
+        palette.setColor(QPalette::BrightText, Qt::red);
+        palette.setColor(QPalette::Link, QColor(42, 130, 218));
+        palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+        palette.setColor(QPalette::HighlightedText, Qt::black);
+        QApplication::setPalette(palette);
+        ui->textBrowser->set_dark_mode(true);
+        break;
+    }
+    }
+
 }
 
 

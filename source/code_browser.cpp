@@ -15,6 +15,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
   , m_actions(nullptr)
+  , m_dark_mode(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -110,7 +111,7 @@ void code_browser::highlightCurrentLine()
     {
         QTextEdit::ExtraSelection selection;
 
-        QColor lineColor = QColor(Qt::yellow).lighter(160);
+        QColor lineColor = QColor(m_dark_mode ? Qt::darkYellow : Qt::yellow).lighter(m_dark_mode ? 0 : 160);
 
         selection.format.setBackground(lineColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
@@ -125,7 +126,7 @@ void code_browser::highlightCurrentLine()
 void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(m_line_number_area);
-    painter.fillRect(event->rect(), Qt::lightGray);
+    painter.fillRect(event->rect(), m_dark_mode ? Qt::darkGray : Qt::lightGray);
 
     int top = 0;
     QTextBlock block = firstVisibleBlock(top);
@@ -138,7 +139,7 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top())
         {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(Qt::black);
+            painter.setPen(m_dark_mode ? Qt::lightGray : Qt::black);
             painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), Qt::AlignRight, number);
         }
 
@@ -207,4 +208,9 @@ void code_browser::go_to_line(int line)
 void code_browser::set_actions(ActionList *list)
 {
     m_actions = list;
+}
+
+void code_browser::set_dark_mode(bool dark)
+{
+    m_dark_mode = dark;
 }

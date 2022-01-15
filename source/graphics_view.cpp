@@ -9,6 +9,9 @@
 #include <QGraphicsSvgItem>
 #endif
 
+
+// TODO: show branches graphically
+
 graphics_view::graphics_view(QWidget *parent) :
     QGraphicsView(parent)
   , mGraphicsScale(1.0)
