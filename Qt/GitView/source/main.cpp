@@ -10,13 +10,7 @@ namespace cmdline
     const QString Log2file    = "log2file";
     const QString Language    = "language";
 }
-/*
-app = QApplication(sys.argv)
-file = QFile(":/dark.qss")
-file.open(QFile.ReadOnly | QFile.Text)
-stream = QTextStream(file)
-app.setStyleSheet(stream.readAll())
- */
+
 int main(int argc, char *argv[])
 {
     QFileInfo fFile(argv[0]);
@@ -33,7 +27,6 @@ int main(int argc, char *argv[])
     cmd_line.addOption({{"lang", cmdline::Language}, QObject::tr("Language."), "language"});
     cmd_line.parse(fApp.arguments());
     FILE* logfile = 0;
-
 
     QTranslator translator;
     bool loaded = translator.load(QLocale(), QLatin1String(fTitle.toStdString().c_str()), QLatin1String("_"), QLatin1String(":/i18n"));

@@ -77,6 +77,7 @@ private Q_SLOTS:
 
     void on_comboToolBarStyle_currentIndexChanged(int index);
     void on_comboAppStyle_currentTextChanged(const QString &arg1);
+    void on_comboUserStyle_currentIndexChanged(int index);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -190,6 +191,13 @@ private:
         FilePath,
         Size
     }; };
+    struct UserStyle { enum e
+    {
+        None,
+        User,
+        Palette
+
+    }; };
 
     void     keyPressEvent(QKeyEvent *) override;
 
@@ -265,6 +273,7 @@ private:
     QMap <QString, tree_find_properties> mTreeFindProperties;
     bool mUseSourceTreeCheckboxes;
     QStringList mHistoryFile;
+    QString mStylePath;
 };
 
 #endif // MAINWINDOW_H

@@ -698,7 +698,7 @@ File content opened with double click</string>
       <item>
        <widget class="QCheckBox" name="ckExperimental">
         <property name="toolTip">
-         <string>Experimental</string>
+         <string>Experimental functions</string>
         </property>
         <property name="text">
          <string>Experimental</string>
@@ -716,7 +716,32 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
+       <widget class="QComboBox" name="comboUserStyle">
+        <property name="toolTip">
+         <string>Select User defines Styles for App</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>No Style</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>User Style</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dark Palette</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
        <widget class="QComboBox" name="comboAppStyle">
+        <property name="toolTip">
+         <string>Select Visual Style</string>
+        </property>
         <property name="editable">
          <bool>false</bool>
         </property>
@@ -724,6 +749,9 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QComboBox" name="comboToolBarStyle">
+        <property name="toolTip">
+         <string>Select Toolbar Style</string>
+        </property>
         <item>
          <property name="text">
           <string>Icon</string>
