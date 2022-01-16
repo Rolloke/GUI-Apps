@@ -321,7 +321,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
 
 
             if (fType.is(Type::Branch))
-            {   // TODO: validate, if this is correct also for branch
+            {   // FIXME: validate, if this is correct also for branch
                 fGitCmd += " -- ";
                 fGitCmd += fParent->text(History::Column::CommitDate);
             }

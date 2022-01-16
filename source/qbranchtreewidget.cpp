@@ -6,9 +6,9 @@
 
 using namespace git;
 
-// TODO: validate diffs between branches and their files
-// TODO: diff branches: git diff branch1...branch2
-// History::parse()
+/// FIXME: validate diffs between branches and their files
+/// TODO: diff branches: git diff branch1...branch2
+/// History::parse()
 
 QBranchTreeWidget::QBranchTreeWidget(QWidget *parent) : QTreeWidget(parent)
 , mSelectedItem(nullptr)

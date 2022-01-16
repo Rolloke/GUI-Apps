@@ -6,6 +6,7 @@
 #include <QScrollBar>
 #include <QMenu>
 #include <QTextCursor>
+#include <QApplication>
 
 // NOTE: source for this solution, but a little bit modified
 // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
@@ -125,9 +126,12 @@ void code_browser::highlightCurrentLine()
 
 void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
+    const QPalette p = QApplication::palette(this);
+    const auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
+    const auto button_color = p.color(QPalette::Normal, QPalette::Button);
     QPainter painter(m_line_number_area);
-    painter.fillRect(event->rect(), m_dark_mode ? Qt::darkGray : Qt::lightGray);
 
+    painter.fillRect(event->rect(), button_color);
     int top = 0;
     QTextBlock block = firstVisibleBlock(top);
     int blockNumber = block.blockNumber();
@@ -139,7 +143,7 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top())
         {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(m_dark_mode ? Qt::lightGray : Qt::black);
+            painter.setPen(text_color);
             painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), Qt::AlignRight, number);
         }
 

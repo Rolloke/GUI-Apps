@@ -29,12 +29,14 @@ using namespace std;
 using namespace git;
 
 // Kapitel 1.4.12.2 Entfernte Referenzen anpassen
-// TODO:  Entferntes Repository hinzufügen:
+/// FEATURE:  Entferntes Repository hinzufügen:
 // git remote add < Name > <URL >
 // Referenz entfernen:
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
+/// FEATURE: create binary file viewer with hex style
+/// TODO: Branch editierbar beim Auschecken
 
 namespace config
 {
@@ -156,6 +158,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupFind);
     {
+        LOAD_PTR(fSettings, ui->ckFastFileSearch, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindCaseSensitive, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
@@ -334,6 +337,7 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupFind);
     {
+        STORE_PTR(fSettings, ui->ckFastFileSearch, isChecked);
         STORE_PTR(fSettings, ui->ckFindCaseSensitive, isChecked);
         STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
         STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
@@ -1315,6 +1319,59 @@ void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
     QApplication::setStyle(QStyleFactory::create(style));
 }
 
+void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
+{
+    switch (index)
+    {
+    case UserStyle::None:
+        setStyleSheet("");
+        QApplication::setPalette(QGuiApplication::palette());
+        ui->textBrowser->set_dark_mode(false);
+        break;
+    case UserStyle::User:
+    {
+        /// TODO: find a good dark style
+        QFile f(mStylePath);
+        if (!f.exists())
+        {
+            TRACE(Logger::error, "Unable to set stylesheet, file %s not found\n", mStylePath.toStdString().c_str());
+        }
+        else
+        {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            setStyleSheet(ts.readAll());
+            ui->textBrowser->set_dark_mode(true);
+        }
+        break;
+    }
+    case UserStyle::Palette:
+    {
+        const auto button_color = QColor(53, 53, 53);
+        QPalette palette = QGuiApplication::palette();
+        palette.setColor(QPalette::Window, button_color);
+        palette.setColor(QPalette::WindowText, Qt::white);
+        palette.setColor(QPalette::Base, QColor(25, 25, 25));
+        palette.setColor(QPalette::AlternateBase, button_color);
+        palette.setColor(QPalette::ToolTipBase, Qt::black);
+        palette.setColor(QPalette::ToolTipText, Qt::white);
+        palette.setColor(QPalette::Text, Qt::white);
+        palette.setColor(QPalette::ButtonText, Qt::white);
+        palette.setColor(QPalette::BrightText, Qt::red);
+        palette.setColor(QPalette::Link, QColor(42, 130, 218));
+        palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+        palette.setColor(QPalette::HighlightedText, Qt::black);
+        palette.setColor(QPalette::Button, button_color);              // invert normal behavour
+        palette.setColor(QPalette::Light, button_color.darker(50));    // Lighter than Button color
+        palette.setColor(QPalette::Midlight, button_color.lighter(50));// Between Button and Light.
+        palette.setColor(QPalette::Mid, button_color.lighter(100));    // Between Button and Dark.
+        palette.setColor(QPalette::Dark, button_color.lighter(150));   // Darker than Button.
+        QApplication::setPalette(palette);
+        ui->textBrowser->set_dark_mode(true);
+        break;
+    }
+    }
+}
 
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {
@@ -1417,32 +1474,7 @@ void MainWindow::find_function(find find_item)
 {
     if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
     {
-        Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
-        int                 find_flag   = find_item == find::forward ? 0 : QTextDocument::FindBackward;
-
-        if (ui->ckFindCaseSensitive->isChecked())
-        {
-            reg_ex_case = Qt::CaseSensitive;
-            find_flag |= QTextDocument::FindCaseSensitively;
-        }
-        if (ui->ckFindWholeWord->isChecked())
-        {
-            find_flag |= QTextDocument::FindWholeWords;
-        }
-
-        bool found_text = false;
-        if (ui->ckFindRegEx->isChecked())
-        {
-            found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
-        }
-        else
-        {
-            found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
-        }
-        if (found_text)
-        {
-            showDockedWidget(ui->textBrowser);
-        }
+        find_in_text_view(find_item);
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
     {
@@ -1450,7 +1482,157 @@ void MainWindow::find_function(find find_item)
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
     {
-        // TODO! use fsrc from samuel
+        find_text_in_files();
+    }
+    else
+    {
+        find_in_tree_views(find_item);
+    }
+}
+
+void MainWindow::find_in_text_view(find find_item)
+{
+    Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
+    int                 find_flag   = find_item == find::forward ? 0 : QTextDocument::FindBackward;
+
+    if (ui->ckFindCaseSensitive->isChecked())
+    {
+        reg_ex_case = Qt::CaseSensitive;
+        find_flag |= QTextDocument::FindCaseSensitively;
+    }
+    if (ui->ckFindWholeWord->isChecked())
+    {
+        find_flag |= QTextDocument::FindWholeWords;
+    }
+
+    bool found_text = false;
+    if (ui->ckFindRegEx->isChecked())
+    {
+        found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
+    }
+    else
+    {
+        found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
+    }
+    if (found_text)
+    {
+        showDockedWidget(ui->textBrowser);
+    }
+}
+
+void MainWindow::find_in_tree_views(find find_item)
+{
+    QTreeWidget *tree_view {nullptr};
+    switch (static_cast<FindView>(ui->comboFindBox->currentIndex()))
+    {
+        case FindView::Source:  tree_view = ui->treeSource;   break;
+        case FindView::History: tree_view = ui->treeHistory;  break;
+        case FindView::Branch:  tree_view = ui->treeBranches; break;
+        case FindView::Stash:   tree_view = ui->treeStash;    break;
+        case FindView::Text: case FindView::FindTextInFiles:  break;
+        case FindView::GoToLineInText: break;
+    }
+
+    if (tree_view)
+    {
+        tree_find_properties& property = mTreeFindProperties[tree_view->objectName()];
+        const auto& text_to_find    = ui->edtFindText->text();
+        int  tree_match_flag = Qt::MatchExactly;
+
+        if (!ui->ckFindWholeWord->isChecked())
+        {
+            tree_match_flag = Qt::MatchContains;
+        }
+        if (ui->ckFindRegEx->isChecked())
+        {
+            tree_match_flag = Qt::MatchRegExp;
+        }
+        else if (text_to_find.contains('*') || text_to_find.contains('?'))
+        {
+            tree_match_flag = Qt::MatchWildcard;
+        }
+
+        if (ui->ckFindCaseSensitive->isChecked())
+        {
+            tree_match_flag |= Qt::MatchCaseSensitive;
+        }
+        tree_match_flag |= Qt::MatchRecursive;
+
+        //! NOTE: also possible flags
+        //  MatchStartsWith = 2,
+        //  MatchEndsWith = 3,
+        //  MatchFixedString = 8,
+        //  MatchWrap = 32,
+
+        auto& found_items = property.mItems;
+
+        if (tree_match_flag != property.mFlags || ui->edtFindText->isModified())
+        {
+            tree_view->clearSelection();
+            found_items     = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
+            property.mFlags = tree_match_flag;
+            property.mIndex = 0;
+            ui->edtFindText->setModified(false);
+        }
+        else
+        {
+            if (find_item == find::forward)
+            {
+                if (++property.mIndex >= found_items.size())
+                {
+                    property.mIndex = 0;
+                }
+            }
+            else
+            {
+                if (--property.mIndex <= 0 )
+                {
+                    property.mIndex = found_items.size() -1;
+                }
+            }
+        }
+        if (find_item == find::all)
+        {
+            for (auto& item : found_items)
+            {
+                tree_view->setItemSelected(item, true);
+            }
+            ui->comboShowItems->setCurrentIndex(static_cast<int>(ComboShowItems::GitSelected));
+            on_comboShowItems_currentIndexChanged(static_cast<int>(ComboShowItems::GitSelected));
+            expand_tree_items();
+        }
+        else if (found_items.size())
+        {
+            int i=0;
+            for (auto& item : found_items)
+            {
+                tree_view->setItemSelected(item, i == property.mIndex);
+                if (i == property.mIndex)
+                {
+                    auto* parent = item->parent();
+                    while (parent)
+                    {
+                        tree_view->setItemExpanded(parent, true);
+                        parent = parent->parent();
+                    }
+                    tree_view->scrollToItem(item);
+                }
+                ++i;
+            }
+            showDockedWidget(tree_view);
+        }
+    }
+}
+
+void MainWindow::find_text_in_files()
+{
+    const bool fast_search = ui->ckFastFileSearch->isChecked();
+    QString find_result;
+    QString find_command;
+    QString search_path    = getItemFilePath(mContextMenuSourceTreeItem);
+    QString search_pattern = ui->edtFindText->text();
+    if (fast_search)
+    {
         // Usage  : fsrc [options] term
         // Options:
         //  -d [ --dir ] arg      Search folder
@@ -1469,7 +1651,19 @@ void MainWindow::find_function(find find_item)
         //  --piped               Enable piped output
         //  -q [ --quiet ]        only print status
         //  -r [ --regex ]        Regex search (slower)
-
+        QString options = "--no-piped";
+        if (!ui->ckFindCaseSensitive->isChecked())
+        {   // i: ignore case
+            options += " -i";
+        }
+        if (ui->ckFindRegEx->isChecked())
+        {   // E: regular expression
+            options += " -r";
+        }
+        find_command = tr("fsrc -d %1 %2 '%3'").arg(search_path, options, search_pattern );
+    }
+    else
+    {
         //"grep -rnHsI[oiEw] 'search_pattern' 'path'"
         // r: recursive
         // n: line number
@@ -1478,8 +1672,6 @@ void MainWindow::find_function(find find_item)
         // I: no text search in binary files
         // o: show only match without line
         QString options = "-rnHsI";
-        QString search_path    = getItemFilePath(mContextMenuSourceTreeItem);
-        QString search_pattern = ui->edtFindText->text();
         if (!ui->ckFindCaseSensitive->isChecked())
         {   // i: ignore case
             options += "i";
@@ -1492,16 +1684,59 @@ void MainWindow::find_function(find find_item)
         {   // w: whole word
             options += "w";
         }
-        QString find_command = tr("grep %1 '%2' '%3'").arg(options, search_pattern, search_path);
-        QString find_result;
-        int result = execute(find_command, find_result);
-        if (result == 0)
-        {
-            QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
-            auto new_tree_root_item = new QTreeWidgetItem({search_pattern, "", repository_root});
-            ui->treeFindText->addTopLevelItem(new_tree_root_item);
+        find_command = tr("grep %1 '%2' '%3'").arg(options, search_pattern, search_path);
+    }
+    int result = execute(find_command, find_result);
+    if (result == 0)
+    {
+        QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+        auto new_tree_root_item = new QTreeWidgetItem({search_pattern, "", repository_root});
+        ui->treeFindText->addTopLevelItem(new_tree_root_item);
+        auto found_items = find_result.split('\n');
 
-            auto found_items = find_result.split('\n');
+        if (fast_search)
+        {
+            const QString file_id = "file://";
+            QString current_file;
+            for (const QString& found_item : found_items)
+            {
+                int pos = found_item.indexOf(file_id);
+                if (pos != -1)
+                {
+                    current_file = found_item.mid(pos + file_id.size());
+                    if (containsPathAsChildren(mContextMenuSourceTreeItem, Column::FileName, current_file.mid(search_path.size() + 1)))
+                    {
+                        current_file = current_file.mid(repository_root.size() + 1);
+                    }
+                    else
+                    {
+                        current_file.clear();
+                    }
+                    continue;
+                }
+                if (current_file.size())
+                {
+                    QStringList found_item_parts = found_item.split(':');
+                    if (found_item_parts.size() >= 2 && found_item_parts[0].size() && found_item_parts[0][0] == 'L')
+                    {
+                        QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
+                        new_tree_root_item->addChild(new_child_item);
+                        new_child_item->setText(FindColumn::FilePath, current_file);
+                        found_item_parts[0][0] = ' ';
+                        new_child_item->setText(FindColumn::Line, found_item_parts[0].trimmed());
+                        QString found_text_line = found_item_parts[1];
+                        for (int i = 2; i<found_item_parts.size(); ++i)
+                        {
+                            found_text_line += ":";
+                            found_text_line += found_item_parts[i];
+                        }
+                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
+                    }
+                }
+            }
+        }
+        else
+        {
             for (const QString& found_item : found_items)
             {
                 QStringList found_item_parts = found_item.split(':');
@@ -1524,119 +1759,16 @@ void MainWindow::find_function(find find_item)
                     }
                 }
             }
-            if (found_items.size() > 0)
-            {
-                showDockedWidget(ui->treeFindText);
-                ui->treeFindText->expandItem(new_tree_root_item);
-            }
         }
-        else
+        if (found_items.size() > 0)
         {
-            appendTextToBrowser(find_command + "\n" + find_result + tr("\nresult error: %1").arg(result));
+            showDockedWidget(ui->treeFindText);
+            ui->treeFindText->expandItem(new_tree_root_item);
         }
     }
     else
     {
-        QTreeWidget *tree_view {nullptr};
-        switch (static_cast<FindView>(ui->comboFindBox->currentIndex()))
-        {
-            case FindView::Source:  tree_view = ui->treeSource;   break;
-            case FindView::History: tree_view = ui->treeHistory;  break;
-            case FindView::Branch:  tree_view = ui->treeBranches; break;
-            case FindView::Stash:   tree_view = ui->treeStash;    break;
-            case FindView::Text: case FindView::FindTextInFiles:  break;
-            case FindView::GoToLineInText: break;
-        }
-
-        if (tree_view)
-        {
-            tree_find_properties& property = mTreeFindProperties[tree_view->objectName()];
-            const auto& text_to_find    = ui->edtFindText->text();
-            int  tree_match_flag = Qt::MatchExactly;
-
-            if (!ui->ckFindWholeWord->isChecked())
-            {
-                tree_match_flag = Qt::MatchContains;
-            }
-            if (ui->ckFindRegEx->isChecked())
-            {
-                tree_match_flag = Qt::MatchRegExp;
-            }
-            else if (text_to_find.contains('*') || text_to_find.contains('?'))
-            {
-                tree_match_flag = Qt::MatchWildcard;
-            }
-
-            if (ui->ckFindCaseSensitive->isChecked())
-            {
-                tree_match_flag |= Qt::MatchCaseSensitive;
-            }
-            tree_match_flag |= Qt::MatchRecursive;
-
-            //! NOTE: also possible flags
-            //  MatchStartsWith = 2,
-            //  MatchEndsWith = 3,
-            //  MatchFixedString = 8,
-            //  MatchWrap = 32,
-
-            auto& found_items = property.mItems;
-
-            if (tree_match_flag != property.mFlags || ui->edtFindText->isModified())
-            {
-                tree_view->clearSelection();
-                found_items     = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
-                property.mFlags = tree_match_flag;
-                property.mIndex = 0;
-                ui->edtFindText->setModified(false);
-            }
-            else
-            {
-                if (find_item == find::forward)
-                {
-                    if (++property.mIndex >= found_items.size())
-                    {
-                        property.mIndex = 0;
-                    }
-                }
-                else
-                {
-                    if (--property.mIndex <= 0 )
-                    {
-                        property.mIndex = found_items.size() -1;
-                    }
-                }
-            }
-            if (find_item == find::all)
-            {
-                for (auto& item : found_items)
-                {
-                    tree_view->setItemSelected(item, true);
-                }
-                ui->comboShowItems->setCurrentIndex(static_cast<int>(ComboShowItems::GitSelected));
-                on_comboShowItems_currentIndexChanged(static_cast<int>(ComboShowItems::GitSelected));
-                expand_tree_items();
-            }
-            else if (found_items.size())
-            {
-                int i=0;
-                for (auto& item : found_items)
-                {
-                    tree_view->setItemSelected(item, i == property.mIndex);
-                    if (i == property.mIndex)
-                    {
-                        auto* parent = item->parent();
-                        while (parent)
-                        {
-                            tree_view->setItemExpanded(parent, true);
-                            parent = parent->parent();
-                        }
-                        tree_view->scrollToItem(item);
-                    }
-                    ++i;
-                }
-                showDockedWidget(tree_view);
-            }
-        }
+        appendTextToBrowser(find_command + "\n" + find_result + tr("\nresult error: %1").arg(result));
     }
 }
 
@@ -1653,56 +1785,6 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
             find_item_in_treeSource(repository_root, file_path_part);
         }
     }
-}
-
-void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
-{
-    switch (index)
-    {
-    case UserStyle::None:
-        setStyleSheet("");
-        QApplication::setPalette(QGuiApplication::palette());
-        ui->textBrowser->set_dark_mode(false);
-        break;
-    case UserStyle::User:
-    {
-        // TODO: find a good dark style
-        QFile f(mStylePath);
-        if (!f.exists())
-        {
-            TRACE(Logger::error, "Unable to set stylesheet, file %s not found\n", mStylePath.toStdString().c_str());
-        }
-        else
-        {
-            f.open(QFile::ReadOnly | QFile::Text);
-            QTextStream ts(&f);
-            setStyleSheet(ts.readAll());
-            ui->textBrowser->set_dark_mode(true);
-        }
-        break;
-    }
-    case UserStyle::Palette:
-    {
-        QPalette palette = QGuiApplication::palette();
-        palette.setColor(QPalette::Window, QColor(53, 53, 53));
-        palette.setColor(QPalette::WindowText, Qt::white);
-        palette.setColor(QPalette::Base, QColor(25, 25, 25));
-        palette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-        palette.setColor(QPalette::ToolTipBase, Qt::black);
-        palette.setColor(QPalette::ToolTipText, Qt::white);
-        palette.setColor(QPalette::Text, Qt::white);
-        palette.setColor(QPalette::Button, QColor(53, 53, 53));
-        palette.setColor(QPalette::ButtonText, Qt::white);
-        palette.setColor(QPalette::BrightText, Qt::red);
-        palette.setColor(QPalette::Link, QColor(42, 130, 218));
-        palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-        palette.setColor(QPalette::HighlightedText, Qt::black);
-        QApplication::setPalette(palette);
-        ui->textBrowser->set_dark_mode(true);
-        break;
-    }
-    }
-
 }
 
 

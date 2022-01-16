@@ -706,6 +706,13 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="ckFastFileSearch">
+        <property name="text">
+         <string>Fast file search (fsrc)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="ckShowLineNumbers">
         <property name="toolTip">
          <string>Shows line numbers in text view</string>
