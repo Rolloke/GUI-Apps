@@ -10,7 +10,7 @@
 #endif
 
 
-// TODO: show branches graphically
+/// TODO: show branches graphically
 
 graphics_view::graphics_view(QWidget *parent) :
     QGraphicsView(parent)

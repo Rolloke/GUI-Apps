@@ -3,7 +3,7 @@
 #include "helper.h"
 #include "ui_mergedialog.h"
 
-// TODO: merge command mit Dialog validieren
+// FIXME: merge command mit Dialog validieren
 // git merge --abort
 // git merge --continue
 // git merge -s <resolve|recursive <ours|theirs|patience> > obsolete

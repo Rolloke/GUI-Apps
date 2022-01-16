@@ -235,6 +235,9 @@ private:
 
     enum class find { forward, backward, all };
     void     find_function(find forward);
+    void     find_in_tree_views(find forward);
+    void     find_in_text_view(find forward);
+    void     find_text_in_files();
     bool     getShowTypeResult(const git::Type& fType);
 
     enum class copy { name, path, file };
