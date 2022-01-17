@@ -605,7 +605,7 @@ File content opened with double click</string>
        <number>2</number>
       </property>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="labelFileFlags">
         <property name="text">
          <string>File Flags:</string>
         </property>
@@ -683,6 +683,13 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="labelMisc">
+        <property name="text">
+         <string>Miscelaneous:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="ckRenderGraphicFile">
         <property name="toolTip">
          <string>Render graphics or HTML file in Graphics View</string>
@@ -696,19 +703,19 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="ckFastFileSearch">
+        <property name="text">
+         <string>Fast file search (fsrc)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="ckExperimental">
         <property name="toolTip">
          <string>Experimental functions</string>
         </property>
         <property name="text">
          <string>Experimental</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckFastFileSearch">
-        <property name="text">
-         <string>Fast file search (fsrc)</string>
         </property>
        </widget>
       </item>

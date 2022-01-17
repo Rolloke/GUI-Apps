@@ -14,8 +14,8 @@ void MainWindow::call_git_branch_command()
     const QAction*     action               = qobject_cast<QAction *>(sender());
     const QVariantList variant_list         = action->data().toList();
     const QString&     message_box_text     = variant_list[ActionList::Data::MsgBoxText].toString();
-    const QString&     branch_item          = ui->treeBranches->getSelectedBranch();
     const QString&     branch_git_root_path = ui->treeBranches->getSelectedBranchGitRootPath();
+    QString            branch_item          = ui->treeBranches->getSelectedBranch();
     QString            git_command          = action->statusTip();
     QString            top_item_path        = branch_git_root_path;
     if (ui->treeSource->hasFocus())

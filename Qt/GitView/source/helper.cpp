@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QDir>
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QAction>
 #include <fstream>
 #include <sstream>
@@ -206,30 +207,54 @@ int execute(const QString& command, QString& aResultText, bool hide)
     return fResult;
 }
 
-int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, const QString& aFileName, bool aIsFile)
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, bool aIsFile)
+{
+    QString file_name(fFileName);
+    return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, false);
+}
+
+int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, bool aIsFile, bool aEditText)
 {
     if (aMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
         QStringList fTextList = aMessageBoxText.split(";");
-        QMessageBox fRequestMessage;
-
         std::string fText1   = fTextList[0].toStdString().c_str();
+        QString message_text;
+        QString informative_text;
         switch (fTextList.size())
         {
-            case 1:
-                fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
-                fRequestMessage.setInformativeText(aFileName);
-                break;
-            case 2:
-                fRequestMessage.setText(QObject::tr(fText1.c_str()).arg(aFileTypeName));
-                fRequestMessage.setInformativeText(QObject::tr(fTextList[1].toStdString().c_str()).arg(aFileName, aFileTypeName));
-                break;
+        case 1:
+            message_text = QObject::tr(fText1.c_str()).arg(aFileTypeName);
+            informative_text = aFileName;
+            break;
+        case 2: case 3:
+            message_text = QObject::tr(fText1.c_str()).arg(aFileTypeName);
+            informative_text = QObject::tr(fTextList[1].toStdString().c_str()).arg(aFileName, aFileTypeName);
+            break;
         }
 
-        fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-        fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
+        if (aEditText && fTextList.size() == 3)
+        {
+            bool ok;
+            QString text = QInputDialog::getText(0, message_text, informative_text, QLineEdit::Normal, aFileName, &ok);
+            if (ok && !text.isEmpty())
+            {
+                aFileName = text;
+                return QMessageBox::Yes;
+            }
+            return QMessageBox::No;
+        }
+        else
+        {
+            QMessageBox fRequestMessage;
+            fRequestMessage.setText(message_text);
+            fRequestMessage.setInformativeText(informative_text);
 
-        return fRequestMessage.exec();
+            fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
+            fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
+
+            return fRequestMessage.exec();
+        }
     }
     return QMessageBox::Yes;
 }
