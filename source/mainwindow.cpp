@@ -36,7 +36,6 @@ using namespace git;
 // git remote set - url < Name > <URL >
 
 /// FEATURE: create binary file viewer with hex style
-/// TODO: Branch editierbar beim Auschecken
 
 namespace config
 {
@@ -1379,6 +1378,8 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
     set_widget_and_action_enabled(ui->btnFindAll, find != FindView::Text && find != FindView::GoToLineInText);
     set_widget_and_action_enabled(ui->btnFindNext, find != FindView::FindTextInFiles);
     set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
+    ui->ckFindWholeWord->setEnabled(!(find == FindView::FindTextInFiles && ui->ckFastFileSearch->isChecked()));
+
     switch(find)
     {
     case FindView::Text:            ui->statusBar->showMessage(tr("Search in Text Editor")); break;
