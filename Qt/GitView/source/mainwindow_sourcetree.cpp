@@ -537,14 +537,22 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             file_extension = "cmake";
         }
-        mHighlighter->setExtension(file_extension);
-        if (ui->ckRenderGraphicFile->isChecked())
+        if (code_browser::is_binary(file))
         {
-            ui->textBrowser->setText(file.readAll());
+            mHighlighter->setExtension("bin");
+            ui->textBrowser->set_binary_data(file.readAll());
         }
         else
         {
-            ui->textBrowser->setPlainText(file.readAll());
+            mHighlighter->setExtension(file_extension);
+            if (ui->ckRenderGraphicFile->isChecked())
+            {
+                ui->textBrowser->setText(file.readAll());
+            }
+            else
+            {
+                ui->textBrowser->setPlainText(file.readAll());
+            }
         }
         set_widget_and_action_enabled(ui->btnStoreText, false);
 
@@ -560,6 +568,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 #endif
     }
 }
+
 
 void MainWindow::updateGitStatus()
 {

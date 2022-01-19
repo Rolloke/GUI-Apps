@@ -36,6 +36,9 @@ using namespace git;
 // git remote set - url < Name > <URL >
 
 /// FEATURE: create binary file viewer with hex style
+// Use /home/rolf/projects/VisualStudio/AnyFileViewer/AnyFileViewer/
+// - DisplayType.cpp
+// - DisplayType.h
 
 namespace config
 {
@@ -260,8 +263,15 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             font.setPointSize(10);
             ui->textBrowser->setFont(font);
         }
+        {
+            int fBytesPerPart = ui->textBrowser->get_bytes_per_part();
+            LOAD_STR(fSettings, fBytesPerPart, toInt);
+            ui->textBrowser->set_bytes_per_part(fBytesPerPart);
+            int fPartsPerLine = ui->textBrowser->get_parts_per_line();
+            LOAD_STR(fSettings, fPartsPerLine, toInt);
+            ui->textBrowser->set_parts_per_line(fPartsPerLine);
+        }
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
-
 
 #ifdef DOCKED_VIEWS
         QByteArray fWindowGeometry;
@@ -351,6 +361,13 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
         STORE_STR(fSettings,  Type::mShort);
         STORE_STR(fSettings, mFontName);
+        {
+            int fBytesPerPart = ui->textBrowser->get_bytes_per_part();
+            STORE_STR(fSettings, fBytesPerPart);
+            int fPartsPerLine = ui->textBrowser->get_parts_per_line();
+            STORE_STR(fSettings, fPartsPerLine);
+        }
+
         STORE_STR(fSettings, mFileCopyMimeType);
         auto fWindowGeometry = saveGeometry();
         STORE_STR(fSettings, fWindowGeometry);

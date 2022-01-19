@@ -81,8 +81,16 @@ void MainWindow::on_btnStoreText_clicked()
     QFile file(fFileName);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
-        const string fString = ui->textBrowser->toPlainText().toStdString();
-        file.write(fString.c_str(), fString.size());
+        const auto & binary_data = ui->textBrowser->get_binary_data();
+        if (binary_data.size())
+        {
+            file.write(binary_data);
+        }
+        else
+        {
+            const string fString = ui->textBrowser->toPlainText().toStdString();
+            file.write(fString.c_str(), fString.size());
+        }
         set_widget_and_action_enabled(ui->btnStoreText, false);
     }
 }
@@ -113,6 +121,8 @@ void MainWindow::on_btnCloseText_clicked()
         }
     }
     ui->textBrowser->setText("");
+    ui->textBrowser->clear_binary_content();
+
     set_widget_and_action_enabled(ui->btnStoreText, false);
 
     ui->labelFilePath->setText("");

@@ -23,9 +23,20 @@ public:
     void set_actions(ActionList* list);
     void set_dark_mode(bool );
 
+    void set_binary_data(const QByteArray& data);
+    const QByteArray& get_binary_data() const;
+    void clear_binary_content();
+    int  get_bytes_per_part() { return m_bytes_per_part; }
+    int  get_parts_per_line() { return m_parts_per_line; }
+    void set_bytes_per_part(int b) { m_bytes_per_part = b; }
+    void set_parts_per_line(int p) { m_parts_per_line = p; }
+
+    static bool is_binary(QFile& file);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
 
 Q_SIGNALS:
     void blockCountChanged(int newBlockCount);
@@ -52,7 +63,9 @@ private:
     bool        m_show_line_numbers;
     ActionList *m_actions;
     bool        m_dark_mode;
-
+    int         m_bytes_per_part;
+    int         m_parts_per_line;
+    QByteArray  m_binary_content;
 };
 
 class LineNumberArea : public QWidget
