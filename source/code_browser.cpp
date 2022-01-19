@@ -17,6 +17,8 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_show_line_numbers(false)
   , m_actions(nullptr)
   , m_dark_mode(false)
+  , m_bytes_per_part(4)
+  , m_parts_per_line(8)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -101,6 +103,26 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
     else
     {
         QTextBrowser::contextMenuEvent(event);
+    }
+}
+
+void code_browser::keyPressEvent(QKeyEvent *e)
+{
+    if (m_binary_content.size())
+    {
+        switch (e->key())
+        {
+        case Qt::Key_Left:   case Qt::Key_Right:
+        case Qt::Key_Up:     case Qt::Key_Down:
+        case Qt::Key_PageUp: case Qt::Key_PageDown:
+        case Qt::Key_Home:   case Qt::Key_End:
+            QTextBrowser::keyPressEvent(e);
+            break;
+        }
+    }
+    else
+    {
+        QTextBrowser::keyPressEvent(e);
     }
 }
 
@@ -218,3 +240,92 @@ void code_browser::set_dark_mode(bool dark)
 {
     m_dark_mode = dark;
 }
+
+void code_browser::set_binary_data(const QByteArray& array)
+{
+    QString binary_coded_line;
+    QString ascii_coded_line;
+    int bytes = 0;
+    int parts = 0;
+    for (const auto& data : array)
+    {
+        const unsigned char byte = data;
+        binary_coded_line.append(QString::asprintf("%02X", byte));
+        ascii_coded_line.append((byte >= 32 && byte <= 127) ? byte : '.');
+        if (++bytes == m_bytes_per_part)
+        {
+            binary_coded_line.append(" ");
+            bytes = 0;
+            ++parts;
+        }
+        if (parts == m_parts_per_line)
+        {
+            insertPlainText(binary_coded_line + "\t" + ascii_coded_line + "\n");
+            binary_coded_line.clear();
+            ascii_coded_line.clear();
+            parts = 0;
+        }
+    }
+    insertPlainText(binary_coded_line + "\t" + ascii_coded_line);
+    m_binary_content = array;
+}
+
+const QByteArray& code_browser::get_binary_data() const
+{
+    return m_binary_content;
+}
+
+void code_browser::clear_binary_content()
+{
+    m_binary_content.clear();
+}
+
+bool code_browser::is_binary(QFile& file)
+{
+    bool binary = false;
+    unsigned char buffer[64];
+    auto read_bytes = file.peek(reinterpret_cast<char*>(&buffer[0]), sizeof(buffer));
+    union unicode_id
+    {
+        std::uint16_t utf16;
+        std::uint32_t utf32;
+    };
+
+    for (qint64 i=0; i<read_bytes; ++i)
+    {
+        if (buffer[i] == 0 || !isascii(buffer[i]))
+        {
+            if (i < 6)
+            {
+                unicode_id *unicode = reinterpret_cast<unicode_id*>(&buffer[0]);
+                if (unicode->utf32 == 0xfffe0000 || unicode->utf32 == 0x0000fffe)
+                {
+                    break;  // UTF-32-LE | UTF-32-BE
+                }
+                else if (unicode->utf16 == 0xfffe || unicode->utf16 == 0xfeff)
+                {
+                    break;  // UTF-16-LE | UTF-16-BE
+                }
+                else if (buffer[0] == 0x2B && buffer[1] == 0x2F && buffer[2] == 0x76 && buffer[3] == 0x38 && buffer[4] == 0x2D )
+                {
+                    break;  // UTF-7 	endianless
+                }
+                else if (buffer[0] == 0xEF && buffer[1] == 0xBB && buffer[2] == 0xBF)
+                {
+                    break;  // UTF-8 	endianless
+                }
+                else
+                {
+                    binary = true;
+                }
+            }
+            else
+            {
+                binary = true;
+            }
+            break;
+        }
+    }
+    return binary;
+}
+
