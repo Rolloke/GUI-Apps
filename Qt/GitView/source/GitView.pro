@@ -27,6 +27,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
+    binary_values_view.cpp \
     code_browser.cpp \
     highlighterdialog.cpp \
     mainwindow.cpp \
@@ -52,9 +53,11 @@ SOURCES += main.cpp\
     xml_functions.cpp \
     mergedialog.cpp \
     qradiobuttongroup.cpp \
-    graphics_view.cpp
+    graphics_view.cpp \
+    DisplayType.cpp
 
 HEADERS  += mainwindow.h \
+    binary_values_view.h \
     code_browser.h \
     helper.h \
     highlighterdialog.h \
@@ -74,10 +77,12 @@ HEADERS  += mainwindow.h \
     xml_functions.h \
     mergedialog.h \
     qradiobuttongroup.h \
-    graphics_view.h
+    graphics_view.h \
+    DisplayType.h
 
 
 FORMS    += mainwindow.ui \
+    binary_values_view.ui \
     commitmessage.ui \
     customgitactions.ui \
     aboutdlg.ui \

@@ -23,6 +23,7 @@ class MainWindow;
 class MergeDialog;
 class QGraphicsItem;
 class QAbstractButton;
+class binary_values_view;
 
 
 class MainWindow : public QMainWindow
@@ -247,7 +248,7 @@ private:
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
-    void     showDockedWidget(QWidget* widget);
+    void     showDockedWidget(QWidget* widget, bool hide=false);
     bool     mDockedWidgetMinMaxButtons;
 #endif
 
@@ -261,6 +262,7 @@ private:
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<Highlighter> mHighlighter;
     QSharedPointer<MergeDialog> mMergeDialog;
+    QSharedPointer<binary_values_view> mBinaryValuesView;
     QString               mFontName;
     QString               mFileCopyMimeType;
     string2bool_map       mMergeTools;
@@ -277,6 +279,7 @@ private:
     bool mUseSourceTreeCheckboxes;
     QStringList mHistoryFile;
     QString mStylePath;
+
 };
 
 #endif // MAINWINDOW_H
