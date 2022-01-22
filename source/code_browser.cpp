@@ -19,6 +19,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_dark_mode(false)
   , m_bytes_per_part(4)
   , m_parts_per_line(8)
+  , m_displaying(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -129,16 +130,17 @@ void code_browser::keyPressEvent(QKeyEvent *e)
 void code_browser::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
+    QTextEdit::ExtraSelection selection;
+    selection.cursor = textCursor();
+    change_cursor(selection.cursor.block().blockNumber(), selection.cursor.positionInBlock());
 
     if (!isReadOnly())
     {
-        QTextEdit::ExtraSelection selection;
 
         QColor lineColor = QColor(m_dark_mode ? Qt::darkYellow : Qt::yellow).lighter(m_dark_mode ? 0 : 160);
 
         selection.format.setBackground(lineColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.cursor = textCursor();
         selection.cursor.clearSelection();
         extraSelections.append(selection);
     }
@@ -243,11 +245,18 @@ void code_browser::set_dark_mode(bool dark)
 
 void code_browser::set_binary_data(const QByteArray& array)
 {
+    m_binary_content = array;
+    display_binary_data();
+}
+
+void code_browser::display_binary_data()
+{
+    m_displaying = true;
     QString binary_coded_line;
     QString ascii_coded_line;
     int bytes = 0;
     int parts = 0;
-    for (const auto& data : array)
+    for (const auto& data : m_binary_content)
     {
         const unsigned char byte = data;
         binary_coded_line.append(QString::asprintf("%02X", byte));
@@ -266,13 +275,51 @@ void code_browser::set_binary_data(const QByteArray& array)
             parts = 0;
         }
     }
-    insertPlainText(binary_coded_line + "\t" + ascii_coded_line);
-    m_binary_content = array;
+    if (binary_coded_line.size())
+    {
+        insertPlainText(binary_coded_line + "\t" + ascii_coded_line);
+    }
+    m_displaying = false;
 }
 
 const QByteArray& code_browser::get_binary_data() const
 {
     return m_binary_content;
+}
+
+void code_browser::change_cursor(int block, int position)
+{
+    if (m_binary_content.size() && !m_displaying)
+    {
+        const int line_hex_size = (m_bytes_per_part) * m_parts_per_line;
+        const int line_hex_area_size = (m_bytes_per_part*2+1) * m_parts_per_line + 1;
+        TRACE(Logger::info, "change_cursor(%d, %d): %d, %d, %d", block, position, line_hex_area_size, line_hex_size, m_bytes_per_part);
+        if (position >= line_hex_area_size)
+        {
+            position -= line_hex_area_size;
+            TRACE(Logger::info, "position: %d", position);
+        }
+        else
+        {
+            const int spaces = position / (m_bytes_per_part*2+1);
+            position -= spaces;
+            position &= ~1;
+            position /= 2;
+            TRACE(Logger::info, "spaces: %d, position %d", spaces, position);
+        }
+        const int byte_position = block * line_hex_size + position;
+        Q_EMIT set_value(m_binary_content, byte_position);
+    }
+}
+
+void code_browser::receive_value(const QByteArray &array, int position)
+{
+    for (int i=0; i<array.size(); ++i)
+    {
+        m_binary_content[position + i] = array[i];
+    }
+    Q_EMIT textChanged();
+    // TODO: update view lines
 }
 
 void code_browser::clear_binary_content()
@@ -283,7 +330,7 @@ void code_browser::clear_binary_content()
 bool code_browser::is_binary(QFile& file)
 {
     bool binary = false;
-    unsigned char buffer[64];
+    unsigned char buffer[16];
     auto read_bytes = file.peek(reinterpret_cast<char*>(&buffer[0]), sizeof(buffer));
     union unicode_id
     {
@@ -291,6 +338,23 @@ bool code_browser::is_binary(QFile& file)
         std::uint32_t utf32;
     };
 
+    /*
+7.5. UTF-16 surrogate pairs
+
+Surrogates are characters in the Unicode range U+D800—U+DFFF (2,048 code points): it is also the Unicode category “surrogate” (Cs). The range is composed of two parts:
+
+        U+D800—U+DBFF (1,024 code points): high surrogates
+        U+DC00—U+DFFF (1,024 code points): low surrogates
+
+In UTF-16, characters in ranges U+0000—U+D7FF and U+E000—U+FFFD are stored as a single 16 bits unit. Non-BMP characters (range U+10000—U+10FFFF) are stored as “surrogate pairs”, two 16 bits units: a high surrogate (in range U+D800—U+DBFF) followed by a low surrogate (in range U+DC00—U+DFFF). A lone surrogate character is invalid in UTF-16, surrogate characters are always written as pairs (high followed by low).
+
+Examples of surrogate pairs:
+Character 	Surrogate pair
+U+10000 	{U+D800, U+DC00}
+U+10E6D 	{U+D803, U+DE6D}
+U+1D11E 	{U+D834, U+DD1E}
+U+10FFFF 	{U+DBFF, U+DFFF}
+     */
     for (qint64 i=0; i<read_bytes; ++i)
     {
         if (buffer[i] == 0 || !isascii(buffer[i]))

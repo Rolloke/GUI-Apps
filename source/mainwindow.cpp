@@ -7,6 +7,7 @@
 #include "customgitactions.h"
 #include "aboutdlg.h"
 #include "mergedialog.h"
+#include "binary_values_view.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -34,11 +35,6 @@ using namespace git;
 // Referenz entfernen:
 // URL korrigieren:
 // git remote set - url < Name > <URL >
-
-/// FEATURE: create binary file viewer with hex style
-// Use /home/rolf/projects/VisualStudio/AnyFileViewer/AnyFileViewer/
-// - DisplayType.cpp
-// - DisplayType.h
 
 namespace config
 {
@@ -270,6 +266,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             int fPartsPerLine = ui->textBrowser->get_parts_per_line();
             LOAD_STR(fSettings, fPartsPerLine, toInt);
             ui->textBrowser->set_parts_per_line(fPartsPerLine);
+            bool fDifferentEndian = CDisplayType::getDifferentEndian();
+            LOAD_STR(fSettings, fDifferentEndian, toBool);
+            CDisplayType::setDifferentEndian(fDifferentEndian);
+
         }
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
 
@@ -317,6 +317,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
+
+    connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->textBrowser, SLOT(receive_value(QByteArray,int)));
+    connect(ui->textBrowser, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
 
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
@@ -366,6 +369,8 @@ MainWindow::~MainWindow()
             STORE_STR(fSettings, fBytesPerPart);
             int fPartsPerLine = ui->textBrowser->get_parts_per_line();
             STORE_STR(fSettings, fPartsPerLine);
+            bool fDifferentEndian = CDisplayType::getDifferentEndian();
+            STORE_STR(fSettings, fDifferentEndian);
         }
 
         STORE_STR(fSettings, mFileCopyMimeType);
@@ -535,6 +540,15 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
+    dock = new QDockWidget(tr("Binary Values"), this);
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("binaryview");
+    mBinaryValuesView.reset(new binary_values_view(this));
+    dock->setWidget(mBinaryValuesView.data());
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    tabifyDockWidget(first_tab, dock);
+
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
     pTB = new QToolBar(tr("Git File View States"));
@@ -590,16 +604,23 @@ void MainWindow::createDockWindows()
     ui->verticalLayoutForTreeView = nullptr;
 }
 
-void MainWindow::showDockedWidget(QWidget* widget)
+void MainWindow::showDockedWidget(QWidget* widget, bool hide)
 {
     QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
     if (parent)
     {
-        if (!parent->isVisible())
+        if (hide)
         {
-            parent->setVisible(true);
+            parent->setVisible(false);
         }
-        parent->raise();
+        else
+        {
+            if (!parent->isVisible())
+            {
+                parent->setVisible(true);
+            }
+            parent->raise();
+        }
     }
 }
 
@@ -1534,7 +1555,9 @@ void MainWindow::find_in_text_view(find find_item)
     }
     if (found_text)
     {
+#ifdef DOCKED_VIEWS
         showDockedWidget(ui->textBrowser);
+#endif
     }
 }
 
@@ -1637,7 +1660,9 @@ void MainWindow::find_in_tree_views(find find_item)
                 }
                 ++i;
             }
+#ifdef DOCKED_VIEWS
             showDockedWidget(tree_view);
+#endif
         }
     }
 }
@@ -1780,7 +1805,9 @@ void MainWindow::find_text_in_files()
         }
         if (found_items.size() > 0)
         {
+#ifdef DOCKED_VIEWS
             showDockedWidget(ui->treeFindText);
+#endif
             ui->treeFindText->expandItem(new_tree_root_item);
         }
     }

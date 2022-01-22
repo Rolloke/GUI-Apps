@@ -24,6 +24,7 @@ public:
     void set_dark_mode(bool );
 
     void set_binary_data(const QByteArray& data);
+    void display_binary_data();
     const QByteArray& get_binary_data() const;
     void clear_binary_content();
     int  get_bytes_per_part() { return m_bytes_per_part; }
@@ -41,9 +42,11 @@ protected:
 Q_SIGNALS:
     void blockCountChanged(int newBlockCount);
     void updateRequest(const QRect &rect, int dy);
+    void set_value(const QByteArray& array, int position);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
+    void receive_value(const QByteArray& array, int position);
 
 private Q_SLOTS:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -56,7 +59,7 @@ private:
     QRectF     blockBoundingRect(const QTextBlock &block) const;
     QPointF    contentOffset() const;
     int        lineNumberAreaWidth();
-
+    void       change_cursor(int block, int position);
 
 private:
     QWidget *   m_line_number_area;
@@ -66,6 +69,7 @@ private:
     int         m_bytes_per_part;
     int         m_parts_per_line;
     QByteArray  m_binary_content;
+    bool        m_displaying;
 };
 
 class LineNumberArea : public QWidget

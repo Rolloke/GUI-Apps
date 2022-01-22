@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "helper.h"
 #include "logger.h"
+#include "binary_values_view.h"
 
 #include <QMenu>
 #include <QFileDialog>
@@ -121,7 +122,13 @@ void MainWindow::on_btnCloseText_clicked()
         }
     }
     ui->textBrowser->setText("");
-    ui->textBrowser->clear_binary_content();
+    if (ui->textBrowser->get_binary_data().size())
+    {
+        ui->textBrowser->clear_binary_content();
+#ifdef DOCKED_VIEWS
+        showDockedWidget(mBinaryValuesView.data(), true);
+#endif
+    }
 
     set_widget_and_action_enabled(ui->btnStoreText, false);
 

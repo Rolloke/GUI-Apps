@@ -4,6 +4,7 @@
 #include "logger.h"
 #include "commitmessage.h"
 #include "mergedialog.h"
+#include "binary_values_view.h"
 
 
 #include <QMenu>
@@ -541,6 +542,9 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             mHighlighter->setExtension("bin");
             ui->textBrowser->set_binary_data(file.readAll());
+#ifdef DOCKED_VIEWS
+            showDockedWidget(mBinaryValuesView.data());
+#endif
         }
         else
         {
