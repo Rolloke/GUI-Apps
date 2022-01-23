@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>539</width>
-    <height>293</height>
+    <height>245</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -182,7 +182,10 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkSignedByte">
+      <widget class="QCheckBox" name="checkUnsignedByte">
+       <property name="toolTip">
+        <string>Check to edit this value</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -190,6 +193,9 @@
      </item>
      <item>
       <widget class="QLineEdit" name="edtUnsignedByte">
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="locale">
         <locale language="English" country="UnitedStates"/>
        </property>
@@ -203,7 +209,10 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkUnsignedByte">
+      <widget class="QCheckBox" name="checkSignedByte">
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -261,7 +270,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkSignedShort">
+      <widget class="QCheckBox" name="checkUnsignedShort">
        <property name="text">
         <string/>
        </property>
@@ -278,7 +287,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkUnsignedShort">
+      <widget class="QCheckBox" name="checkSignedShort">
        <property name="text">
         <string/>
        </property>
@@ -336,7 +345,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkSignedLong">
+      <widget class="QCheckBox" name="checkUnsignedLong">
        <property name="text">
         <string/>
        </property>
@@ -353,7 +362,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkUnsignedLong">
+      <widget class="QCheckBox" name="checkSignedLong">
        <property name="text">
         <string/>
        </property>
@@ -411,7 +420,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkSignedLongLong">
+      <widget class="QCheckBox" name="checkUnsignedLongLong">
        <property name="text">
         <string/>
        </property>
@@ -428,7 +437,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkUnsignedLongLong">
+      <widget class="QCheckBox" name="checkSignedLongLong">
        <property name="text">
         <string/>
        </property>
@@ -569,6 +578,9 @@
           <height>20</height>
          </rect>
         </property>
+        <property name="toolTip">
+         <string>Select little endian</string>
+        </property>
         <property name="text">
          <string>Little</string>
         </property>
@@ -582,6 +594,9 @@
           <height>20</height>
          </rect>
         </property>
+        <property name="toolTip">
+         <string>Select big endian</string>
+        </property>
         <property name="text">
          <string>Big</string>
         </property>
@@ -589,7 +604,34 @@
       </widget>
      </item>
      <item>
+      <widget class="Line" name="line_21">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkStandAlone">
+       <property name="toolTip">
+        <string>Check to edit local values</string>
+       </property>
+       <property name="text">
+        <string>Local Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_22">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btnReadValue">
+       <property name="toolTip">
+        <string>Read values again</string>
+       </property>
        <property name="text">
         <string>Read Value</string>
        </property>
@@ -597,6 +639,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnWriteValue">
+       <property name="toolTip">
+        <string>Store edited value to file</string>
+       </property>
        <property name="text">
         <string>Write Value</string>
        </property>

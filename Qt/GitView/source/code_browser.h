@@ -24,7 +24,7 @@ public:
     void set_dark_mode(bool );
 
     void set_binary_data(const QByteArray& data);
-    void display_binary_data();
+    void display_binary_data(int line = -1);
     const QByteArray& get_binary_data() const;
     void clear_binary_content();
     int  get_bytes_per_part() { return m_bytes_per_part; }

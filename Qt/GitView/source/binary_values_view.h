@@ -50,9 +50,12 @@ private slots:
     void on_btnWriteValue_clicked();
     void on_radioEndian1_clicked();
     void on_radioEndian2_clicked();
+    void on_checkStandAlone_clicked(bool checked);
+
+    void editing_finished();
 
 private:
-    void uncheck_all();
+    void uncheck_all(bool checked);
     Ui::binary_values_view *ui;
     std::map<CDisplayType::eType, std::unique_ptr<CDisplayType>> m_display;
     QVector<QCheckBox*> m_Checkboxes;
