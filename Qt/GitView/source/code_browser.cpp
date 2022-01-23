@@ -246,6 +246,7 @@ void code_browser::set_dark_mode(bool dark)
 void code_browser::set_binary_data(const QByteArray& array)
 {
     m_binary_content = array;
+    Q_EMIT set_value(m_binary_content, 0);
     display_binary_data();
 }
 
@@ -325,6 +326,7 @@ void code_browser::receive_value(const QByteArray &array, int position)
 void code_browser::clear_binary_content()
 {
     m_binary_content.clear();
+    Q_EMIT set_value(m_binary_content, 0);
 }
 
 bool code_browser::is_binary(QFile& file)
@@ -338,23 +340,6 @@ bool code_browser::is_binary(QFile& file)
         std::uint32_t utf32;
     };
 
-    /*
-7.5. UTF-16 surrogate pairs
-
-Surrogates are characters in the Unicode range U+D800—U+DFFF (2,048 code points): it is also the Unicode category “surrogate” (Cs). The range is composed of two parts:
-
-        U+D800—U+DBFF (1,024 code points): high surrogates
-        U+DC00—U+DFFF (1,024 code points): low surrogates
-
-In UTF-16, characters in ranges U+0000—U+D7FF and U+E000—U+FFFD are stored as a single 16 bits unit. Non-BMP characters (range U+10000—U+10FFFF) are stored as “surrogate pairs”, two 16 bits units: a high surrogate (in range U+D800—U+DBFF) followed by a low surrogate (in range U+DC00—U+DFFF). A lone surrogate character is invalid in UTF-16, surrogate characters are always written as pairs (high followed by low).
-
-Examples of surrogate pairs:
-Character 	Surrogate pair
-U+10000 	{U+D800, U+DC00}
-U+10E6D 	{U+D803, U+DE6D}
-U+1D11E 	{U+D834, U+DD1E}
-U+10FFFF 	{U+DBFF, U+DFFF}
-     */
     for (qint64 i=0; i<read_bytes; ++i)
     {
         if (buffer[i] == 0 || !isascii(buffer[i]))
@@ -393,3 +378,68 @@ U+10FFFF 	{U+DBFF, U+DFFF}
     return binary;
 }
 
+/*
+
+// NOTE: something to know about unicode
+7.5. UTF-16 surrogate pairs
+
+Surrogates are characters in the Unicode range U+D800—U+DFFF (2,048 code points): it is also the Unicode category “surrogate” (Cs). The range is composed of two parts:
+
+        U+D800—U+DBFF (1,024 code points): high surrogates
+        U+DC00—U+DFFF (1,024 code points): low surrogates
+
+In UTF-16, characters in ranges U+0000—U+D7FF and U+E000—U+FFFD are stored as a single 16 bits unit. Non-BMP characters (range U+10000—U+10FFFF) are stored as “surrogate pairs”, two 16 bits units: a high surrogate (in range U+D800—U+DBFF) followed by a low surrogate (in range U+DC00—U+DFFF). A lone surrogate character is invalid in UTF-16, surrogate characters are always written as pairs (high followed by low).
+
+Examples of surrogate pairs:
+Character 	Surrogate pair
+U+10000 	{U+D800, U+DC00}
+U+10E6D 	{U+D803, U+DE6D}
+U+1D11E 	{U+D834, U+DD1E}
+U+10FFFF 	{U+DBFF, U+DFFF}
+
+// NOTE: a try to display faster, but not successful
+
+void code_browser::display_binary_data()
+{
+    m_displaying = true;
+    QString binary_coded_line;
+    QString ascii_coded_line;
+    int parts = 0;
+
+    std::unique_ptr<CDisplayType> display;
+    const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
+    switch (m_bytes_per_part)
+    {
+    case 1: display = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));break;
+    case 2: display = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));break;
+    case 4: display = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));break;
+    case 8: display = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));break;
+    }
+
+    int start = 0;
+    int end   = m_binary_content.size();
+    for (int i=start; i<end; i+=m_bytes_per_part)
+    {
+        binary_coded_line.append(display->Display(&buffer_pointer[i]));
+        for (int j=i; j<i+m_bytes_per_part; ++j)
+        {
+            std::uint8_t byte = buffer_pointer[j];
+            ascii_coded_line.append((byte >= 32 && byte <= 127) ? byte : '.');
+        }
+        binary_coded_line.append(" ");
+        ++parts;
+        if (parts == m_parts_per_line)
+        {
+            insertPlainText(binary_coded_line + "\t" + ascii_coded_line + "\n");
+            binary_coded_line.clear();
+            ascii_coded_line.clear();
+            parts = 0;
+        }
+    }
+    if (binary_coded_line.size())
+    {
+        insertPlainText(binary_coded_line + "\t" + ascii_coded_line);
+    }
+    m_displaying = false;
+}
+*/

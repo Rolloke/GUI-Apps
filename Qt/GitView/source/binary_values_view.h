@@ -58,6 +58,7 @@ private:
     QVector<QCheckBox*> m_Checkboxes;
     QVector<QLineEdit*> m_Edit;
     int                 m_current_position;
+    QByteArray          m_array;
 };
 
 #endif // BINARY_VALUES_VIEW_H

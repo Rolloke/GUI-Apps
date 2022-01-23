@@ -55,6 +55,8 @@ binary_values_view::binary_values_view(QWidget *parent) :
     m_display[CDisplayType::HEX4]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
     m_display[CDisplayType::HEX8]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
     m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+
+    m_array.resize(sizeof(std::uint64_t));
 }
 
 binary_values_view::~binary_values_view()

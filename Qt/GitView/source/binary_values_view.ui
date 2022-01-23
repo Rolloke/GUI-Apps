@@ -170,7 +170,7 @@
         <locale language="English" country="UnitedStates"/>
        </property>
        <property name="text">
-        <string>Byte</string>
+        <string>Character</string>
        </property>
       </widget>
      </item>

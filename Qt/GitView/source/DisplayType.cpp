@@ -464,7 +464,7 @@ QString CDisplayHEX4::Display(const std::uint8_t*pData)const
 {
     std::uint16_t value;
     const auto *value_pointer = reinterpret_cast<const std::uint16_t*>(pData);
-    if (m_different_endian)
+    if (!m_different_endian)
     {
         value_pointer = &value;
         CopyInverse(pData, (std::uint8_t*)value_pointer, sizeof(std::uint16_t));
@@ -483,7 +483,7 @@ bool CDisplayHEX4::Write(std::uint8_t*pData, const QString& sValue)const
     std::uint16_t value = static_cast<double>(sValue.toUShort(&bok, 16));
     if (bok)
     {
-        if (m_different_endian)
+        if (!m_different_endian)
         {
             CopyInverse((std::uint8_t*)&value, (std::uint8_t*)pData, sizeof(std::uint16_t));
         }
@@ -505,7 +505,7 @@ QString CDisplayHEX8::Display(const std::uint8_t*pData)const
 {
     std::uint32_t value;
     const auto *value_pointer = reinterpret_cast<const std::uint32_t*>(pData);
-    if (m_different_endian)
+    if (!m_different_endian)
     {
         value_pointer = &value;
         CopyInverse(pData, (std::uint8_t*)value_pointer, sizeof(std::uint32_t));
@@ -524,7 +524,7 @@ bool CDisplayHEX8::Write(std::uint8_t*pData, const QString& sValue)const
     std::uint32_t value = static_cast<double>(sValue.toULong(&bok, 16));
     if (bok)
     {
-        if (m_different_endian)
+        if (!m_different_endian)
         {
             CopyInverse((std::uint8_t*)&value, (std::uint8_t*)pData, sizeof(std::uint32_t));
         }
@@ -546,7 +546,7 @@ QString CDisplayHEX16::Display(const std::uint8_t*pData)const
 {
     std::uint64_t value;
     const auto *value_pointer = reinterpret_cast<const std::uint64_t*>(pData);
-    if (m_different_endian)
+    if (!m_different_endian)
     {
         value_pointer = &value;
         CopyInverse(pData, (std::uint8_t*)value_pointer, sizeof(std::uint64_t));
@@ -566,7 +566,7 @@ bool CDisplayHEX16::Write(std::uint8_t*pData, const QString& sValue)const
     std::uint64_t value = static_cast<double>(sValue.toULongLong(&bok, 16));
     if (bok)
     {
-        if (m_different_endian)
+        if (!m_different_endian)
         {
             CopyInverse((std::uint8_t*)&value, (std::uint8_t*)pData, sizeof(std::uint64_t));
         }
