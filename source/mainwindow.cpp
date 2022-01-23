@@ -327,6 +327,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 MainWindow::~MainWindow()
 {
     disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+#ifdef DOCKED_VIEWS
+    showDockedWidget(mBinaryValuesView.data(), true);
+#endif
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
@@ -548,6 +551,7 @@ void MainWindow::createDockWindows()
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
+    dock->setVisible(false);
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
