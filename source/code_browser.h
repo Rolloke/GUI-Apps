@@ -43,6 +43,7 @@ Q_SIGNALS:
     void blockCountChanged(int newBlockCount);
     void updateRequest(const QRect &rect, int dy);
     void set_value(const QByteArray& array, int position);
+    void publish_has_binary_content(bool );
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);

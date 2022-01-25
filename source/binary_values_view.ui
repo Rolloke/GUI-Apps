@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>539</width>
-    <height>245</height>
+    <height>259</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,14 +39,14 @@
       <widget class="QLabel" name="label_2">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>60</width>
-         <height>16777215</height>
+         <width>80</width>
+         <height>20</height>
         </size>
        </property>
        <property name="text">
@@ -162,7 +162,7 @@
       <widget class="QLabel" name="label_signed_byte">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -253,7 +253,7 @@
       <widget class="QLabel" name="label_unsigned_short">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -328,7 +328,7 @@
       <widget class="QLabel" name="label_signed_long">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -403,7 +403,7 @@
       <widget class="QLabel" name="labelLongLong">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -478,7 +478,7 @@
       <widget class="QLabel" name="labelFloat">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -648,6 +648,26 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_23">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
