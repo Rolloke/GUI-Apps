@@ -321,6 +321,7 @@ void code_browser::change_cursor(int block, int position)
             TRACE(Logger::info, "spaces: %d, position %d", spaces, position);
         }
         const int byte_position = block * line_hex_size + position;
+        Q_EMIT publish_has_binary_content(true);
         Q_EMIT set_value(m_binary_content, byte_position);
     }
 }
@@ -346,6 +347,7 @@ void code_browser::clear_binary_content()
 {
     m_binary_content.clear();
     Q_EMIT set_value(m_binary_content, 0);
+    Q_EMIT publish_has_binary_content(false);
 }
 
 bool code_browser::is_binary(QFile& file)

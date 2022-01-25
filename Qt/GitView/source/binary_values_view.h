@@ -30,6 +30,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);
+    void receive_external_data(bool external);
+
 
 private slots:
     void on_checkSignedByte_clicked(bool checked);

@@ -53,6 +53,38 @@ public:
    static void  setDifferentEndian(bool de);
    static bool  getDifferentEndian();
 protected:
+
+   QString      toHexString(const std::uint8_t*pData) const;
+
+   template <class Type>
+   QString toString(const std::uint8_t*pData)const
+   {
+       Type value;
+       const Type *value_pointer = reinterpret_cast<const Type*>(pData);
+       if (m_different_endian)
+       {
+           value_pointer = &value;
+           CopyInverse(pData, (std::uint8_t*)value_pointer, sizeof(Type));
+       }
+       return QString("%1").arg(*value_pointer);
+   }
+
+   template <class Type>
+   void setData(std::uint8_t*pData, Type value, bool bok)const
+   {
+       if (bok)
+       {
+           if (m_different_endian)
+           {
+               CopyInverse((std::uint8_t*)&value, (std::uint8_t*)pData, sizeof(Type));
+           }
+           else
+           {
+               *reinterpret_cast<Type*>(pData) = value;
+           }
+       }
+   }
+
    int   m_nBytes;
    eType mType;
    static bool m_different_endian;

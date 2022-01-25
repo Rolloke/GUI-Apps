@@ -320,6 +320,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->textBrowser, SLOT(receive_value(QByteArray,int)));
     connect(ui->textBrowser, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
+    connect(ui->textBrowser, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
 
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }

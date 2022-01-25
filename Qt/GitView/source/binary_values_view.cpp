@@ -82,7 +82,22 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
 
     for (auto& display : m_display )
     {
-        if (position + display.second->GetByteLength() <= array.size())
+        if (ui->checkStandAlone->isChecked())
+        {
+            if (m_Checkboxes[display.first]->isChecked())
+            {
+                continue;
+            }
+            if (display.second->GetByteLength() == array.size())
+            {
+                text = display.second->Display(buffer_pointer);
+            }
+            else
+            {
+                text.clear();
+            }
+        }
+        else if (position + display.second->GetByteLength() <= array.size())
         {
             text = display.second->Display(&buffer_pointer[position]);
         }
@@ -111,6 +126,11 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
             break;
         }
     }
+}
+
+void binary_values_view::receive_external_data(bool external_data)
+{
+    ui->checkStandAlone->setChecked(!external_data);
 }
 
 void binary_values_view::on_btnReadValue_clicked()
