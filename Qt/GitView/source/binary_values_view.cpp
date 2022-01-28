@@ -32,6 +32,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
         checkbox->setToolTip(tooltip);
     }
 
+    tooltip = ui->edtUnsignedByte->toolTip();
     m_Edit.push_back(ui->edtSignedByte);
     m_Edit.push_back(ui->edtUnsignedByte);
     m_Edit.push_back(ui->edtSignedShort);
@@ -307,8 +308,16 @@ void binary_values_view::editing_finished()
                 auto type = static_cast<CDisplayType::eType>(index);
                 m_array.clear();
                 m_array.resize(m_display[type]->GetByteLength());
-                m_display[type]->Write(reinterpret_cast<std::uint8_t*>(m_array.data()), text);
-                receive_value(m_array, 0);
+                if (m_display[type]->Write(reinterpret_cast<std::uint8_t*>(m_array.data()), text))
+                {
+                    receive_value(m_array, 0);
+                }
+                else
+                {
+                    QByteArray empty;
+                    receive_value(empty, 0);
+                    Q_EMIT status_message(tr("Wrong input value: %1 for type %2").arg(text, m_display[type]->Type()), 10);
+                }
             }
         }
     }

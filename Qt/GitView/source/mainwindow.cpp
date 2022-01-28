@@ -318,6 +318,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
 
+    connect(mBinaryValuesView.data(), SIGNAL(status_message(QString,int)), ui->statusBar, SLOT(showMessage(QString,int)));
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->textBrowser, SLOT(receive_value(QByteArray,int)));
     connect(ui->textBrowser, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
     connect(ui->textBrowser, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
@@ -1139,6 +1140,8 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckFindRegEx);
     create_auto_cmd(ui->ckFindWholeWord);
     create_auto_cmd(ui->ckExperimental);
+    create_auto_cmd(ui->ckFastFileSearch);
+    create_auto_cmd(ui->ckTypeConverter);
 
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
@@ -1837,4 +1840,8 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
     }
 }
 
+void MainWindow::on_ckTypeConverter_stateChanged(int arg1)
+{
+    showDockedWidget(mBinaryValuesView.data(), !arg1);
+}
 

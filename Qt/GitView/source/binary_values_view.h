@@ -27,6 +27,7 @@ public:
 
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
+    void status_message(const QString&, int);
 
 public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);

@@ -68,6 +68,8 @@ private Q_SLOTS:
 
     void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
+    void on_ckTypeConverter_stateChanged(int arg1);
+
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
     void on_btnFindNext_clicked();

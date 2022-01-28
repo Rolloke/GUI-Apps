@@ -308,6 +308,12 @@
           </item>
           <item>
            <widget class="QLabel" name="labelFilePath">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>400</width>
@@ -704,8 +710,11 @@ File content opened with double click</string>
       </item>
       <item>
        <widget class="QCheckBox" name="ckFastFileSearch">
+        <property name="toolTip">
+         <string>Use fast file search function (fsrc)</string>
+        </property>
         <property name="text">
-         <string>Fast file search (fsrc)</string>
+         <string>Fast file search</string>
         </property>
        </widget>
       </item>
@@ -726,6 +735,16 @@ File content opened with double click</string>
         </property>
         <property name="text">
          <string>Show line numbers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckTypeConverter">
+        <property name="toolTip">
+         <string>Display Type Converter</string>
+        </property>
+        <property name="text">
+         <string>Type Converter</string>
         </property>
        </widget>
       </item>
