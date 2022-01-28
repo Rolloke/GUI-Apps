@@ -27,14 +27,14 @@ const char* CDisplayType::getNameOfType(eType aType)
 {
     switch (aType)
     {
-    case Char: return "char";
-    case UChar: return "unsigned_char";
-    case Short: return "short";
-    case UShort: return "unsigned_short";
-    case Long: return "long";
-    case ULong: return "unsigned_long";
-    case LongLong: return "LONGLONG";
-    case ULongLong: return "ULONGLONG";
+    case Char: return "signed char";
+    case UChar: return "unsigned char";
+    case Short: return "signed short";
+    case UShort: return "unsigned short";
+    case Long: return "signed long";
+    case ULong: return "unsigned long";
+    case LongLong: return "signed long long";
+    case ULongLong: return "unsigned long long";
     case Float: return "float";
     case Double: return "double";
     case HEX2: return "HEX2";
@@ -111,9 +111,9 @@ QString CDisplayType::toHexString(const std::uint8_t*pData) const
 {
     QString text;
 # if __BYTE_ORDER == __LITTLE_ENDIAN
-    if (!m_different_endian)
-#else
     if (m_different_endian)
+#else
+    if (!m_different_endian)
 #endif
     {
         for (int i=GetByteLength()-1; i>=0; --i)
@@ -143,7 +143,7 @@ CDisplayChar::CDisplayChar()
 
 QString CDisplayChar::Display(const std::uint8_t*pData)const
 {
-   return QString("%1").arg(*reinterpret_cast<const char*>(pData));
+   return QString("%1").arg(static_cast<int>(*reinterpret_cast<const char*>(pData)));
 }
 
 bool CDisplayChar::Write(std::uint8_t*pData, const QString& sValue) const
@@ -351,7 +351,10 @@ QString CDisplayHEX2::Display(const std::uint8_t*pData)const
 bool CDisplayHEX2::Write(std::uint8_t*pData, const QString& sValue)const
 {
     bool bok {false};
-    *reinterpret_cast<char*>(pData) = static_cast<char>(sValue.toUInt(&bok, 16));
+    if (sValue.size()<= 2)
+    {
+        *reinterpret_cast<char*>(pData) = static_cast<char>(sValue.toUInt(&bok, 16));
+    }
     return bok;
 }
 
@@ -369,8 +372,11 @@ QString CDisplayHEX4::Display(const std::uint8_t*pData)const
 bool CDisplayHEX4::Write(std::uint8_t*pData, const QString& sValue)const
 {
     bool bok {false};
-    std::uint16_t value = static_cast<double>(sValue.toUShort(&bok, 16));
-    setData(pData, value, bok);
+    if (sValue.size()<= 4)
+    {
+        std::uint16_t value = static_cast<double>(sValue.toUShort(&bok, 16));
+        setData(pData, value, bok);
+    }
     return bok;
 }
 
@@ -388,8 +394,11 @@ QString CDisplayHEX8::Display(const std::uint8_t*pData)const
 bool CDisplayHEX8::Write(std::uint8_t*pData, const QString& sValue)const
 {
     bool bok {false};
-    std::uint32_t value = static_cast<double>(sValue.toULong(&bok, 16));
-    setData(pData, value, bok);
+    if (sValue.size()<= 8)
+    {
+        std::uint32_t value = static_cast<double>(sValue.toULong(&bok, 16));
+        setData(pData, value, bok);
+    }
     return bok;
 }
 
@@ -407,8 +416,11 @@ QString CDisplayHEX16::Display(const std::uint8_t*pData)const
 bool CDisplayHEX16::Write(std::uint8_t*pData, const QString& sValue)const
 {
     bool bok {false};
-    std::uint64_t value = static_cast<double>(sValue.toULongLong(&bok, 16));
-    setData(pData, value, bok);
+    if (sValue.size()<= 16)
+    {
+        std::uint64_t value = static_cast<double>(sValue.toULongLong(&bok, 16));
+        setData(pData, value, bok);
+    }
     return bok;
 }
 
