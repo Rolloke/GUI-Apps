@@ -231,7 +231,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTreeWidget" name="treeSource">
+         <widget class="QSourceTreeWidget" name="treeSource">
           <property name="toolTip">
            <string>Show file and folder tree of git repositories</string>
           </property>
@@ -967,6 +967,11 @@ File content opened with double click</string>
    <class>code_browser</class>
    <extends>QTextBrowser</extends>
    <header location="global">code_browser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSourceTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qsourcetreewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

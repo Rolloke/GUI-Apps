@@ -20,7 +20,7 @@ void MainWindow::call_git_branch_command()
     QString            top_item_path        = branch_git_root_path;
     if (ui->treeSource->hasFocus())
     {
-        top_item_path = getItemTopDirPath(mContextMenuSourceTreeItem);
+        top_item_path = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
     }
 
     int result = callMessageBox(message_box_text, "branch", branch_item);

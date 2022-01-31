@@ -3,7 +3,6 @@
 
 #include "workerthreadconnector.h"
 #include "actions.h"
-#include "gitignore.h"
 #include "highlighter.h"
 
 #include <QMainWindow>
@@ -13,6 +12,7 @@
 #include <QTreeWidgetItem>
 #include <QSemaphore>
 #include <QTime>
+#include <boost/optional.hpp>
 
 
 namespace Ui
@@ -50,7 +50,6 @@ private Q_SLOTS:
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_customContextMenuRequested(const QPoint &pos);
     void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-    void find_item_in_treeSource(const QString& git_root, const QString& filepath);
 
     void on_ckHideEmptyParent_clicked(bool checked);
     void on_ckShortState_clicked(bool checked);
@@ -100,7 +99,7 @@ private Q_SLOTS:
     void invoke_highlighter_dialog();
     void performCustomGitActionSettings();
     void call_git_commit();
-    void call_git_move_rename();
+    void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
     void expand_tree_items();
     void collapse_tree_items();
     void addGitSourceFolder();
@@ -142,21 +141,6 @@ private:
         UpdateBytes = static_cast<int>(Work::Last),
         InsertTreeItem
     };
-
-    struct Column { enum e
-    {
-        FileName,
-        DateTime,
-        State,
-        Size
-    }; };
-    struct Role { enum e
-    {
-        isDirectory = Qt::UserRole,
-        DateTime,
-        Filter,
-        GitFolder
-    }; };
 
     enum class ComboShowItems
     {
@@ -206,11 +190,8 @@ private:
 
     QString  getConfigName() const;
 
-    quint64  insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem=0);
     bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
-    bool     iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, const QString* aSourceDir=0);
     void     insertSourceTree(const QDir& fSource, int fItem);
-    quint64  sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
 
     QDir     initDir(const QString& aDirPath, int aFilter=0);
 
@@ -221,8 +202,6 @@ private:
     void     handleMessage(int, QVariant);
     bool     handleInThread();
 
-    QString  getItemFilePath(QTreeWidgetItem* item);
-    QString  getItemTopDirPath(QTreeWidgetItem* item);
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
 
@@ -233,7 +212,6 @@ private:
     void     applyGitCommandToFileTree(const QString& aCommand);
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
 
-    void     parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
     enum class find { forward, backward, all };
@@ -260,7 +238,6 @@ private:
     Work::e               mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
-    GitIgnore             mGitIgnore;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<Highlighter> mHighlighter;
     QSharedPointer<MergeDialog> mMergeDialog;
@@ -278,7 +255,6 @@ private:
     };
 
     QMap <QString, tree_find_properties> mTreeFindProperties;
-    bool mUseSourceTreeCheckboxes;
     QStringList mHistoryFile;
     QString mStylePath;
 

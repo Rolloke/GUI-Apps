@@ -38,6 +38,7 @@ SOURCES += main.cpp\
     mainwindow_sourcetree.cpp \
     mainwindow_stashtree.cpp \
     mainwindow_textview.cpp \
+    qsourcetreewidget.cpp \
     workerthreadconnector.cpp \
     git_type.cpp \
     commitmessage.cpp \
@@ -62,6 +63,7 @@ HEADERS  += mainwindow.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
+    qsourcetreewidget.h \
     workerthreadconnector.h \
     git_type.h \
     commitmessage.h \

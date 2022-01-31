@@ -23,7 +23,7 @@ void MainWindow::call_git_stash_command()
     const QString&     stash_root       = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::GitRootPath);
     const QString&     stash_commit     = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::Commit);
     const QString&     git_command      = action->statusTip();
-    const QString&     top_item_path    = getItemTopDirPath(mContextMenuSourceTreeItem);
+    const QString&     top_item_path    = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
 
     QString argument1 = stash_root;
     QString argument2 = stash;

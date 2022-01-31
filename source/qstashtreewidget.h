@@ -35,7 +35,7 @@ public:
 
 
 Q_SIGNALS:
-    void find_item_in_treeSource(const QString&, const QString&);
+    void find_item(const QString&, const QString&);
 
 
 public Q_SLOTS:
