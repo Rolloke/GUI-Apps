@@ -37,7 +37,7 @@ void MainWindow::call_git_history_diff_command()
         }
         if (mContextMenuSourceTreeItem)
         {
-            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName));
+            QDir::setCurrent(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName));
             QString tool_cmd = get_git_command_option(type, command_flags, variant_list);
             if (((command_flags & ActionList::Flags::DiffCmd)==0) && history_hash_items.contains(" "))
             {
@@ -151,7 +151,7 @@ void MainWindow::on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int col
             QString root_path;
             if (mContextMenuSourceTreeItem)
             {
-                root_path = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+                root_path = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
             }
             mHistoryFile.append(root_path + "/" + history_file);
         }

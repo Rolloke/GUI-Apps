@@ -206,6 +206,8 @@ typedef std::unordered_map<std::string, Type> stringt2type_umap;
 typedef std::pair<std::string, Type> string2typepair;
 typedef std::vector< string2typepair > stringt2type_vector;
 
+void parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);
+
 }
 
 #endif // GIT_TYPE_H

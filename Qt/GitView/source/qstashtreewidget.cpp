@@ -109,7 +109,7 @@ void QStashTreeWidget::on_currentItemChanged(QTreeWidgetItem *current, QTreeWidg
 void QStashTreeWidget::on_itemDoubleClicked(QTreeWidgetItem *item, int /* column */)
 {
     mSelectedItem = item;
-    emit find_item_in_treeSource(getStashTopItemText(Role::GitRootPath), getSelectedStashItem());
+    emit find_item(getStashTopItemText(Role::GitRootPath), getSelectedStashItem());
 }
 
 

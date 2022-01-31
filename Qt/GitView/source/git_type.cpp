@@ -1,5 +1,6 @@
 
 #include "git_type.h"
+#include "logger.h"
 #include <QStringList>
 #include <QObject>
 #include <QFileInfo>
@@ -307,5 +308,62 @@ void Type::translate(const QFileInfo& fInfo)
     if (fInfo.isSymLink())    add(SymLink);
 }
 
+void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2typemap& aFiles)
+{
+    const auto fLines = aStatus.split("\n");
+
+    for (const QString& fLine : fLines)
+    {
+        const int     fStateSize = 2;
+        const QString fState = fLine.left(fStateSize);
+        auto          fRelativePath = fLine.mid(fStateSize).trimmed();
+
+        if (fRelativePath.size())
+        {
+            Type fType;
+            fType.translate(fState);
+            while (fRelativePath.indexOf('"') != -1)
+            {
+                fRelativePath = fRelativePath.remove('"');
+            }
+            if (fType.is(Type::Repository))
+            {
+                aFiles[fRelativePath.toStdString()] = fType;
+            }
+            else
+            {
+                QString fFullPath = aSource + fRelativePath;
+                if (fType.is(Type::GitRenamed) && fRelativePath.contains("->"))
+                {
+                    auto fPaths = fRelativePath.split(" -> ");
+                    if (fPaths.size() > 1)
+                    {
+                        fFullPath = aSource + fPaths[1];
+                        QFileInfo fFileInfo(fFullPath);
+                        fType.translate(fFileInfo);
+                        Type fDestinationType = fType;
+                        fDestinationType.add(Type::GitMovedTo);
+                        aFiles[fFullPath.toStdString()] = fDestinationType;
+                        fType.add(Type::GitMovedFrom);
+                        fFullPath = aSource + fPaths[0];
+                    }
+                }
+                QFileInfo fFileInfo(fFullPath);
+                fType.translate(fFileInfo);
+                auto file_path = fFileInfo.filePath().toStdString();
+                if (fType.is(Type::Folder))
+                {
+                    if (file_path.back() == '/')
+                    {
+                        file_path.resize(file_path.size()-1);
+                    }
+                }
+                aFiles[file_path] = fType;
+            }
+
+            TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.type());
+        }
+    }
+}
 
 }

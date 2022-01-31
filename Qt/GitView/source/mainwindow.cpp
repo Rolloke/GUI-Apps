@@ -36,6 +36,8 @@ using namespace git;
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
+// TODO: mHighlighter should be part of code_browser
+
 namespace config
 {
 constexpr char sGroupFilter[] = "Filter";
@@ -72,7 +74,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mContextMenuSourceTreeItem(nullptr)
     , mFontName("Courier")
     , mFileCopyMimeType("x-special/mate-copied-files")
-    , mUseSourceTreeCheckboxes(false)
     , mStylePath( "/opt/tools/git_view/style.qss")
 {
     ui->setupUi(this);
@@ -106,21 +107,27 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::setUpdateFunction(boost::bind(&MainWindow::updateSelectedLanguage, this, _1));
     mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
 
-    ui->treeSource->header()->setSortIndicator(Column::FileName, Qt::AscendingOrder);
-    ui->treeSource->header()->setSectionResizeMode(Column::FileName, QHeaderView::Stretch);
-    ui->treeSource->header()->setSectionResizeMode(Column::DateTime, QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(Column::Size    , QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(Column::State   , QHeaderView::Interactive);
+    ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::Size    , QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::State   , QHeaderView::Interactive);
     ui->treeSource->header()->setStretchLastSection(false);
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeSource->setDragEnabled(true);
+    ui->treeSource->viewport()->setAcceptDrops(true);
+    ui->treeSource->setDropIndicatorShown(true);
+    ui->treeSource->setDragDropMode(QAbstractItemView::InternalMove);
+    connect(ui->treeSource, SIGNAL(dropped_to_target(QTreeWidgetItem*,bool*)), this, SLOT(call_git_move_rename(QTreeWidgetItem*,bool*)));
+
     ui->treeSource->setStyleSheet(style_sheet_treeview_lines);
     ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
     ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
     ui->textBrowser->set_actions(&mActions);
 
-    connect(ui->treeStash, SIGNAL(find_item_in_treeSource(QString,QString)), this, SLOT(find_item_in_treeSource(QString,QString)));
+    connect(ui->treeStash, SIGNAL(find_item(QString,QString)), ui->treeSource, SLOT(find_item(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
 
     fSettings.beginGroup(config::sGroupFilter);
@@ -135,7 +142,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         }
 
         LOAD_STR(fSettings, mStylePath, toString);
-        LOAD_STR(fSettings, mUseSourceTreeCheckboxes, toBool);
+        LOAD_STR(fSettings, ui->treeSource->mUseSourceTreeCheckboxes, toBool);
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
@@ -337,7 +344,7 @@ MainWindow::~MainWindow()
     fSettings.beginGroup(config::sGroupFilter);
     {
         STORE_STR(fSettings, mStylePath);
-        STORE_STR(fSettings, mUseSourceTreeCheckboxes);
+        STORE_STR(fSettings, ui->treeSource->mUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
@@ -395,7 +402,7 @@ MainWindow::~MainWindow()
             {
                 fSettings.setArrayIndex(i);
                 QTreeWidgetItem* fItem = ui->treeSource->topLevelItem(i);
-                fSettings.setValue(config::sSourcePath, fItem->text(Column::FileName));
+                fSettings.setValue(config::sSourcePath, fItem->text(QSourceTreeWidget::Column::FileName));
             }
         }
         fSettings.endArray();
@@ -1339,7 +1346,7 @@ void MainWindow::invoke_git_merge_dialog()
         connect(mMergeDialog->getAction(), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     }
 
-    mMergeDialog->mGitFilePath = getItemFilePath(mContextMenuSourceTreeItem);
+    mMergeDialog->mGitFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
     mMergeDialog->show();
 }
 
@@ -1680,7 +1687,7 @@ void MainWindow::find_text_in_files()
     const bool fast_search = ui->ckFastFileSearch->isChecked();
     QString find_result;
     QString find_command;
-    QString search_path    = getItemFilePath(mContextMenuSourceTreeItem);
+    QString search_path    = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
     QString search_pattern = ui->edtFindText->text();
     if (fast_search)
     {
@@ -1740,7 +1747,7 @@ void MainWindow::find_text_in_files()
     int result = execute(find_command, find_result);
     if (result == 0)
     {
-        QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(Column::FileName);
+        QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
         auto new_tree_root_item = new QTreeWidgetItem({search_pattern, "", repository_root});
         ui->treeFindText->addTopLevelItem(new_tree_root_item);
         auto found_items = find_result.split('\n');
@@ -1755,7 +1762,7 @@ void MainWindow::find_text_in_files()
                 if (pos != -1)
                 {
                     current_file = found_item.mid(pos + file_id.size());
-                    if (containsPathAsChildren(mContextMenuSourceTreeItem, Column::FileName, current_file.mid(search_path.size() + 1)))
+                    if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, current_file.mid(search_path.size() + 1)))
                     {
                         current_file = current_file.mid(repository_root.size() + 1);
                     }
@@ -1794,7 +1801,7 @@ void MainWindow::find_text_in_files()
                 if (found_item_parts.size() >= 2)
                 {
                     QString file_path = found_item_parts[FindColumn::FilePath];
-                    if (containsPathAsChildren(mContextMenuSourceTreeItem, Column::FileName, file_path.mid(search_path.size() + 1)))
+                    if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, file_path.mid(search_path.size() + 1)))
                     {
                         QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
                         new_tree_root_item->addChild(new_child_item);
@@ -1835,7 +1842,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
             QString repository_root = parent->text(FindColumn::FoundTextLine);
             QString file_path_part  = item->text(FindColumn::FilePath);
             open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
-            find_item_in_treeSource(repository_root, file_path_part);
+            ui->treeSource->find_item(repository_root, file_path_part);
         }
     }
 }
