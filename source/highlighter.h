@@ -58,14 +58,11 @@
 #include <map>
 #include <boost/function.hpp>
 
-QT_BEGIN_NAMESPACE
 class QTextDocument;
 class QDomDocument;
 class QSettings;
-QT_END_NAMESPACE
 
 typedef QMap<QString, QTextCharFormat> TextCharFormatMap;
-typedef boost::function<void(const QString&)> tUpdatefunction;
 
 QString weight_name(int weight);
 
@@ -121,7 +118,6 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     const QString& currentLanguage() const;
-    static void setUpdateFunction(const tUpdatefunction& );
     static const QStringList& getLanguages();
 
 
@@ -129,21 +125,22 @@ protected:
     void highlightBlock(const QString &text) override;
 
 private:
-
-
     void load_language_list();
     void load_language(QString fLanguage);
     void load_default_language();
     const Language& get_language();
 
+Q_SIGNALS:
+    void updateExtension(const QString&);
 
+
+private:
     static QMap<QString, Language> mLanguages;
     static QMap<QString, QString>  mExtensionToLanguage;
     static QSharedPointer<QDomDocument> mDoc;
     static QStringList mLanguageNames;
 
     QString mCurrentLanguage;
-    static tUpdatefunction mUpdateFunction;
     static const QString mDefault;
     static QMap<QString, int>  mKeywordMap;
 };

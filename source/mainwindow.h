@@ -3,7 +3,6 @@
 
 #include "workerthreadconnector.h"
 #include "actions.h"
-#include "highlighter.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -113,6 +112,7 @@ private Q_SLOTS:
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
+    void updateSelectedLanguage(const QString&);
 
 private:
 
@@ -205,7 +205,6 @@ private:
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
 
-    void     updateSelectedLanguage(const QString&);
     void     initContextMenuActions();
     void     initMergeTools(bool read_new_items = false);
 
@@ -239,7 +238,6 @@ private:
     ActionList            mActions;
     QString               mConfigFileName;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
-    QSharedPointer<Highlighter> mHighlighter;
     QSharedPointer<MergeDialog> mMergeDialog;
     QSharedPointer<binary_values_view> mBinaryValuesView;
     QString               mFontName;

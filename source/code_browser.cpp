@@ -69,6 +69,11 @@ void code_browser::vertical_scroll_value(int value)
     }
 }
 
+void code_browser::call_updateExtension(const QString& ext)
+{
+    Q_EMIT updateExtension(ext);
+}
+
 void code_browser::updateLineNumberArea(const QRect &rect, int dy)
 {
     if (dy)
@@ -241,6 +246,30 @@ void code_browser::set_actions(ActionList *list)
 void code_browser::set_dark_mode(bool dark)
 {
     m_dark_mode = dark;
+}
+
+void code_browser::reset()
+{
+    if (mHighlighter)
+    {
+        disconnect(mHighlighter.data(), SIGNAL(updateExtension(QString)), this, SLOT(call_updateExtension(QString)));
+    }
+    mHighlighter.reset(new Highlighter(document()));
+    connect(mHighlighter.data(), SIGNAL(updateExtension(QString)), this, SLOT(call_updateExtension(QString)));
+}
+
+const  QString& code_browser::currentLanguage() const
+{
+    return mHighlighter->currentLanguage();
+}
+void code_browser::setExtension(const QString &ext)
+{
+    mHighlighter->setExtension(ext);
+}
+
+void code_browser::setLanguage(const QString& language)
+{
+    mHighlighter->setLanguage(language);
 }
 
 void code_browser::set_binary_data(const QByteArray& array)

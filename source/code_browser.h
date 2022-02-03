@@ -2,6 +2,7 @@
 #define CODE_BROWSER_H
 
 #include "actions.h"
+#include "highlighter.h"
 
 #include <QTextBrowser>
 
@@ -20,15 +21,21 @@ public:
     int  blockCount() const;
     int  current_line() const;
     void go_to_line(int);
+
     void set_actions(ActionList* list);
     void set_dark_mode(bool );
+
+    void reset();
+    const QString& currentLanguage() const;
+    void setExtension(const QString& ext);
+    void setLanguage(const QString& language);
 
     void set_binary_data(const QByteArray& data);
     void display_binary_data(int line = -1);
     const QByteArray& get_binary_data() const;
     void clear_binary_content();
-    int  get_bytes_per_part() { return m_bytes_per_part; }
-    int  get_parts_per_line() { return m_parts_per_line; }
+    int  get_bytes_per_part() const { return m_bytes_per_part; }
+    int  get_parts_per_line() const { return m_parts_per_line; }
     void set_bytes_per_part(int b) { m_bytes_per_part = b; }
     void set_parts_per_line(int p) { m_parts_per_line = p; }
 
@@ -44,6 +51,7 @@ Q_SIGNALS:
     void updateRequest(const QRect &rect, int dy);
     void set_value(const QByteArray& array, int position);
     void publish_has_binary_content(bool );
+    void updateExtension(const QString&);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
@@ -54,6 +62,7 @@ private Q_SLOTS:
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &rect, int dy);
     void vertical_scroll_value(int );
+    void call_updateExtension(const QString&);
 
 private:
     QTextBlock firstVisibleBlock(int& diff);
@@ -71,6 +80,7 @@ private:
     int         m_parts_per_line;
     QByteArray  m_binary_content;
     bool        m_displaying;
+    QSharedPointer<Highlighter> mHighlighter;
 };
 
 class LineNumberArea : public QWidget

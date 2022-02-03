@@ -96,7 +96,7 @@ void MainWindow::call_git_history_diff_command()
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
     on_btnCloseText_clicked();
-    mHighlighter->setExtension("");
+    ui->textBrowser->setExtension("");
     appendTextToBrowser(ui->treeHistory->clickItem(aItem, aColumn));
 #ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
