@@ -58,7 +58,6 @@
 #include <QDir>
 
 const QString Highlighter::mDefault {"git"};
-tUpdatefunction Highlighter::mUpdateFunction;
 
 namespace
 {
@@ -244,10 +243,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
         load_default_language();
         load_language_list();
-        if (mUpdateFunction)
-        {
-            mUpdateFunction(mDefault);
-        }
+        Q_EMIT updateExtension(mDefault);
     }
     mCurrentLanguage = mDefault;
 }
@@ -271,19 +267,13 @@ void Highlighter::setExtension(const QString& ext)
             load_language(mCurrentLanguage);
         }
     }
-    if (mUpdateFunction)
-    {
-        mUpdateFunction(mCurrentLanguage);
-    }
+    Q_EMIT updateExtension(mCurrentLanguage);
 }
 
 void Highlighter::setLanguage(const QString &language)
 {
     mCurrentLanguage = language;
-    if (mUpdateFunction)
-    {
-        mUpdateFunction(language);
-    }
+    Q_EMIT updateExtension(language);
     load_language(mCurrentLanguage);
     rehighlight();
 }
@@ -293,10 +283,6 @@ const QString& Highlighter::currentLanguage() const
     return mCurrentLanguage;
 }
 
-void Highlighter::setUpdateFunction(const tUpdatefunction & updatefunction)
-{
-    mUpdateFunction = updatefunction;
-}
 
 void Highlighter::load_language_list()
 {

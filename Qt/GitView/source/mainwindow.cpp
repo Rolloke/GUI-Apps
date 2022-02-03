@@ -36,8 +36,6 @@ using namespace git;
 // URL korrigieren:
 // git remote set - url < Name > <URL >
 
-// TODO: mHighlighter should be part of code_browser
-
 namespace config
 {
 constexpr char sGroupFilter[] = "Filter";
@@ -76,13 +74,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mFileCopyMimeType("x-special/mate-copied-files")
     , mStylePath( "/opt/tools/git_view/style.qss")
 {
-    ui->setupUi(this);
-#ifdef DOCKED_VIEWS
-    createDockWindows();
-#endif
-
-    setWindowIcon(QIcon(":/resource/logo@2x.png"));
-    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
             "    border-image: url(:/resource/24X24/stylesheet-vline.png) 0; }"
@@ -97,15 +88,23 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "QTreeView::branch:open:has-children:has-siblings  { "
             "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-open.png); }";
 
+    ui->setupUi(this);
+#ifdef DOCKED_VIEWS
+    createDockWindows();
+#endif
+
+    setWindowIcon(QIcon(":/resource/logo@2x.png"));
+
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
     QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
 
-    Highlighter::Language::load(fSettings);
+    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
-    Highlighter::setUpdateFunction(boost::bind(&MainWindow::updateSelectedLanguage, this, _1));
-    mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
+    Highlighter::Language::load(fSettings);
+    ui->textBrowser->reset();
+    connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
 
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
@@ -142,7 +141,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         }
 
         LOAD_STR(fSettings, mStylePath, toString);
-        LOAD_STR(fSettings, ui->treeSource->mUseSourceTreeCheckboxes, toBool);
+        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
+        LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
+        ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
@@ -344,7 +345,8 @@ MainWindow::~MainWindow()
     fSettings.beginGroup(config::sGroupFilter);
     {
         STORE_STR(fSettings, mStylePath);
-        STORE_STR(fSettings, ui->treeSource->mUseSourceTreeCheckboxes);
+        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
+        STORE_STR(fSettings, fUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);

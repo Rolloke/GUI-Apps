@@ -46,7 +46,7 @@ void MainWindow::call_git_branch_command()
                 }
                 QString parse_text = git_command + getLineFeed() + result_str + getLineFeed();
                 ui->treeBranches->parseBranchListText(parse_text, top_item_path);
-                mHighlighter->setExtension("");
+                ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(parse_text);
 #ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeBranches);
@@ -57,7 +57,7 @@ void MainWindow::call_git_branch_command()
             case Cmd::ParseBranchListText:
             {
                 ui->treeBranches->parseBranchListText(result_str, top_item_path);
-                mHighlighter->setExtension("");
+                ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(git_command);
 #ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeBranches);
@@ -70,7 +70,7 @@ void MainWindow::call_git_branch_command()
                 auto items = ui->treeSource->findItems(branch_git_root_path, Qt::MatchExactly);
                 QTreeWidgetHook*source_hook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
                 ui->treeHistory->parseGitLogHistoryText(result_str, items.size() ? QVariant(source_hook->indexFromItem(items[0])) : QVariant(branch_git_root_path), branch_item, Type::Branch);
-                mHighlighter->setExtension("");
+                ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(git_command);
 #ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeHistory);

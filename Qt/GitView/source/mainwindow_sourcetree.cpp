@@ -307,14 +307,14 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     if (file.open(QIODevice::ReadOnly))
     {
         ui->labelFilePath->setText(file_path);
-        mHighlighter.reset(new Highlighter(ui->textBrowser->document()));
+        ui->textBrowser->reset();
         if (file_extension == "txt" && file_path.contains("CMakeLists.txt"))
         {
             file_extension = "cmake";
         }
         if (code_browser::is_binary(file))
         {
-            mHighlighter->setExtension("bin");
+            ui->textBrowser->setExtension("bin");
             ui->textBrowser->set_binary_data(file.readAll());
 #ifdef DOCKED_VIEWS
             showDockedWidget(mBinaryValuesView.data());
@@ -322,7 +322,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         }
         else
         {
-            mHighlighter->setExtension(file_extension);
+            ui->textBrowser->setExtension(file_extension);
             if (ui->ckRenderGraphicFile->isChecked())
             {
                 ui->textBrowser->setText(file.readAll());

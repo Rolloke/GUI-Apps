@@ -3,6 +3,7 @@
 #include "helper.h"
 #include "logger.h"
 #include "binary_values_view.h"
+#include "code_browser.h"
 
 #include <QMenu>
 #include <QFileDialog>
@@ -21,7 +22,7 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
         {
             on_btnCloseText_clicked();
         }
-        mHighlighter->setExtension(ext);
+        ui->textBrowser->setExtension(ext);
         ui->textBrowser->insertPlainText(aText + getLineFeed());
         ui->textBrowser->textCursor().movePosition(QTextCursor::End);
     #ifdef DOCKED_VIEWS
@@ -53,7 +54,7 @@ void MainWindow::selectTextBrowserLanguage()
         }
         auto* action = submenu->addAction(language);
         actionlist.append(action);
-        if (language == mHighlighter->currentLanguage())
+        if (language == ui->textBrowser->currentLanguage())
         {
             action->setCheckable(true);
             action->setChecked(true);
@@ -67,7 +68,7 @@ void MainWindow::selectTextBrowserLanguage()
     if (index != -1)
     {
         bool enabled = ui->btnStoreText->isEnabled();
-        mHighlighter->setLanguage(language_list[index]);
+        ui->textBrowser->setLanguage(language_list[index]);
         set_widget_and_action_enabled(ui->btnStoreText, enabled);
     }
 }
@@ -138,7 +139,6 @@ void MainWindow::on_btnCloseText_clicked()
     //ui->graphicsView->addItem2graphicsView(new commit_graphis_item());
 
 }
-
 
 void MainWindow::updateSelectedLanguage(const QString& language)
 {

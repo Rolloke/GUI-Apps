@@ -111,9 +111,9 @@ QString CDisplayType::toHexString(const std::uint8_t*pData) const
 {
     QString text;
 # if __BYTE_ORDER == __LITTLE_ENDIAN
-    if (m_different_endian)
-#else
     if (!m_different_endian)
+#else
+    if (m_different_endian)
 #endif
     {
         for (int i=GetByteLength()-1; i>=0; --i)
