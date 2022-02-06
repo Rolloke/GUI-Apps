@@ -281,8 +281,10 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Kodi_raw_list"/>
-    <addaction name="actionSave_as_favorites"/>
+    <addaction name="actionDownload_favorites"/>
     <addaction name="actionRead_favorites"/>
+    <addaction name="actionSave_as_favorites"/>
+    <addaction name="actionUpload_favorites"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -307,6 +309,8 @@
     <addaction name="actionMedia_player"/>
     <addaction name="actionOpenMediaPlayerOnDoubleclick"/>
     <addaction name="actionLoadLastOpenedFileAtStart"/>
+    <addaction name="actionEdit_Upload_Command"/>
+    <addaction name="actionEdit_Download_Command"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -427,6 +431,38 @@
    </property>
    <property name="statusTip">
     <string>Open current loaded kodi media list at program start</string>
+   </property>
+  </action>
+  <action name="actionEdit_Upload_Command">
+   <property name="text">
+    <string>Edit Upload Command...</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit the command to upload faorites to Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionEdit_Download_Command">
+   <property name="text">
+    <string>Edit Download Command...</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit the command to upload faorites from Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionUpload_favorites">
+   <property name="text">
+    <string>Upload favorites...</string>
+   </property>
+   <property name="statusTip">
+    <string>Upload favorites list to Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionDownload_favorites">
+   <property name="text">
+    <string>Download favorites...</string>
+   </property>
+   <property name="statusTip">
+    <string>Download favorites from Raspi Kodi</string>
    </property>
   </action>
  </widget>

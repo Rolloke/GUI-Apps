@@ -17,6 +17,9 @@
 #include <QInputDialog>
 #include <QClipboard>
 
+#include <fstream>
+#include <sstream>
+#include <boost/algorithm/string.hpp>
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
@@ -29,6 +32,8 @@
 #define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(getSettingsName(#ITEM), QVariant(FUNC_IN(ITEM))).CONVERT());
 
 QString getSettingsName(const QString& aItemName);
+int execute(const QString& command, QString& aResultText);
+
 
 namespace config
 {
@@ -43,6 +48,8 @@ const QString open_media_list  = QObject::tr("Open Kodi raw media List");
 const QString media_list       = QObject::tr("Media List (*.txt *.*)");
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
+const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
+const QString upload_kodi_fav  = QObject::tr("Upload favorites to Raspi");
 const QString update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
 const QString kodi_favorites   = QObject::tr("Favorites (*.xml *.*)");
 
@@ -51,12 +58,28 @@ const QString media_player_cmd = QObject::tr(
             "- path_to_media_player %1\n"
             "- %1 Placeholder for URL\n");
 
+const QString upload_favorite_cmd = QObject::tr(
+            "Edit upload favorite command:\n"
+            "- scp %1 user@address:/path/favorites.xml\n"
+            "- %1 Placeholder for favorites file name\n");
+
+const QString download_favorite_cmd = QObject::tr(
+            "Edit upload favorite command:\n"
+            "- scp user@address:/path/favorites.xml %1\n"
+            "- %1 Placeholder for favorites file name\n");
+
 const QString version          = QObject::tr("1.0.0.1");
 }
 
 enum eTable
 {
     eName, eID, eGroup, eURL, eLogo, eFriendlyName, eMedia, eLast
+};
+
+enum error
+{
+    ErrorNumberInErrno = -1,
+    NoError = 0
 };
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -125,6 +148,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
     connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
+    connect(ui->actionUpload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_upload_favorites()));
+    connect(ui->actionDownload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_download_favorites()));
 
     connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
     connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
@@ -132,6 +157,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpenMediaPlayerOnDoubleclick, &QAction::triggered, [&](bool checked) { ui->sliderVolume->setEnabled(!checked); });
 
     connect(ui->actionMedia_player, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
+    connect(ui->actionEdit_Upload_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_upload_command()));
+    connect(ui->actionEdit_Download_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_command()));
 
     connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
@@ -148,6 +175,8 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
     LOAD_STR(fSettings, mFileOpenPath, toString);
     LOAD_STR(fSettings, mFavoritesOpenPath, toString);
+    LOAD_STR(fSettings, mDownloadFavoriteCommand, toString);
+    LOAD_STR(fSettings, mUploadFavoriteCommand, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
@@ -183,6 +212,8 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
     STORE_STR(fSettings, mFavoritesOpenPath);
+    STORE_STR(fSettings, mDownloadFavoriteCommand);
+    STORE_STR(fSettings, mUploadFavoriteCommand);
     STORE_STR(fSettings, mShowIcon);
     STORE_STR(fSettings, mMediaPlayerCommand);
     STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
@@ -227,11 +258,16 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     {
         ui->graphicsView->scene()->clear();
         QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
+#if 0
+        QString style = tr("QGraphicsView:background-image: url(%1);").arg(logoUrl);
+        ui->graphicsView->setStyleSheet(style);
+#else
         const QUrl url(logoUrl);
         QNetworkRequest request(url);
 
         QNetworkReply* reply = mNetManager.get(request);
         connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
+#endif
     }
 }
 
@@ -621,6 +657,62 @@ void MainWindow::open_file(const QString& filename)
     }
 }
 
+void MainWindow::menu_file_upload_favorites()
+{
+    if (mUploadFavoriteCommand.size())
+    {
+        QString filename = QFileDialog::getOpenFileName(this, txt::upload_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+        if (filename.size())
+        {
+            QString command_str = tr(mUploadFavoriteCommand.toStdString().c_str()).arg(filename);
+            QString result_str;
+            int result = execute(command_str, result_str);
+            ui->statusBar->showMessage(tr("upload favorites: %1, %2").arg(result).arg(result_str));
+        }
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Define upload favorite command"));
+    }
+}
+
+void MainWindow::menu_file_download_favorites()
+{
+    if (mDownloadFavoriteCommand.size())
+    {
+        QString filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_fav, mFavoritesOpenPath, txt::kodi_favorites);
+        if (filename.size())
+        {
+            QString command_str = tr(mDownloadFavoriteCommand.toStdString().c_str()).arg(filename);
+            QString result_str;
+            int result = execute(command_str, result_str);
+            ui->statusBar->showMessage(tr("download favorites: %1, %2").arg(result).arg(result_str));
+        }
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Define download favorite command"));
+    }
+}
+
+void MainWindow::menu_option_edit_upload_command()
+{
+    QString text = QInputDialog::getText(this, windowTitle(), txt::upload_favorite_cmd, QLineEdit::Normal, mUploadFavoriteCommand);
+    if (text.size())
+    {
+        mUploadFavoriteCommand = text;
+    }
+}
+
+void MainWindow::menu_option_edit_download_command()
+{
+    QString text = QInputDialog::getText(this, windowTitle(), txt::download_favorite_cmd, QLineEdit::Normal, mDownloadFavoriteCommand);
+    if (text.size())
+    {
+        mDownloadFavoriteCommand = text;
+    }
+}
+
 
 QString getSettingsName(const QString& aItemName)
 {
@@ -651,3 +743,31 @@ QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
     return QStandardItemModel::data(index, role);
 }
 
+int execute(const QString& command, QString& aResultText)
+{
+    QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
+    QString fTempResultFileNameAndPath = fTemp.path();
+    QString system_cmd = command + " > " + fTempResultFileNameAndPath;
+#ifdef __linux__
+    system_cmd += " 2>&1 ";
+#endif
+
+    auto fResult = system(system_cmd.toStdString().c_str());
+
+    std::ostringstream fStringStream;
+    std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
+    fStringStream << fFile.rdbuf();
+    std::string fStreamString = fStringStream.str();
+    boost::algorithm::trim_right(fStreamString);
+    if (fResult != NoError)
+    {
+        fStringStream << QObject::tr("Error occurred executing command: ").toStdString() << fResult;
+        if (fResult == ErrorNumberInErrno)
+        {
+            fStringStream << QObject::tr("Error number : ").toStdString() << errno;
+        }
+    }
+    aResultText = fStreamString.c_str();
+
+    return fResult;
+}
