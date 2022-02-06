@@ -114,7 +114,7 @@ bool   isSerialConfig = false;
 
 struct Keys
 {
-    enum
+    enum e
     {
           joystick
         , up_key
@@ -163,7 +163,7 @@ const char* gKeywords[] =
 
 struct Joystick
 {
-    enum
+    enum e
     {
           no_standard
         , Msx_Joystick

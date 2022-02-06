@@ -356,7 +356,9 @@ public class CalculatorDialog extends JPanel
 		addComponent(gbl, new JButton(new TiA("5")), 1, line, 1, 1, 1.0, 1.0 );
 		addComponent(gbl, new JButton(new TiA("6")), 2, line, 1, 1, 1.0, 1.0 );
 		addComponent(gbl, new JButton(new TiA("^")), 4, line, 1, 1, 1.0, 1.0 );
-		addComponent(gbl, new JButton(new TiA("e")), 5, line, 1, 1, 1.0, 1.0 );
+		JButton exponent = new JButton(new TiA("e"));
+		exponent.setToolTipText("Exonent: 1e-5 -> 10^-5");
+		addComponent(gbl, exponent, 5, line, 1, 1, 1.0, 1.0 );
 		addComponent(gbl, new JButton(new TiA("-")), 3, line, 1, 1, 1.0, 1.0 );
 		line++;
 		addComponent(gbl, new JButton(new TiA("7")), 0, line, 1, 1, 1.0, 1.0 );

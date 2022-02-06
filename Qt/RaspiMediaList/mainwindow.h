@@ -43,10 +43,14 @@ private slots:
     void menu_file_open();
     void menu_file_save_as_favorites();
     void menu_file_update_favorites();
+    void menu_file_upload_favorites();
+    void menu_file_download_favorites();
     void menu_edit_copy_url();
     void menu_edit_copy_thumb();
     void menu_edit_open_media_player();
     void menu_option_media_player_command();
+    void menu_option_edit_upload_command();
+    void menu_option_edit_download_command();
     void menu_help_about();
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
@@ -74,8 +78,11 @@ private:
     QString             mFileOpenPath;
     QString             mFavoritesOpenPath;
     QString             mMediaPlayerCommand;
+
     QString             mOpenFileAtStart;
     QString             mOpenFileCmdLine;
+    QString             mUploadFavoriteCommand;
+    QString             mDownloadFavoriteCommand;
     int                 mFindStartRow;
     bool                mShowIcon;
 };
