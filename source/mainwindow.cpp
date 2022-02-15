@@ -510,6 +510,17 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
+    // binary table view
+    dock = new QDockWidget(tr("Binary View"), this);
+    // ui->comboFindBox->addItem(dock->windowTitle());
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("binary_table_view");
+    ui->verticalLayout->removeWidget(ui->tableBinaryView);
+    dock->setWidget(ui->tableBinaryView);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    tabifyDockWidget(first_tab, dock);
+
     // history tree
     dock = new QDockWidget(tr("History View"), this);
     ui->comboFindBox->addItem(dock->windowTitle());

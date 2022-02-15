@@ -594,6 +594,13 @@ File content opened with double click</string>
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="qbinarytableview" name="tableBinaryView">
+              <property name="inputMethodHints">
+               <set>Qt::ImhNone</set>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -972,6 +979,11 @@ File content opened with double click</string>
    <class>QSourceTreeWidget</class>
    <extends>QTreeWidget</extends>
    <header location="global">qsourcetreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qbinarytableview</class>
+   <extends>QTableView</extends>
+   <header location="global">qbinarytableview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
