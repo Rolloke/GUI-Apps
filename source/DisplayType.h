@@ -2,6 +2,10 @@
 #define DISPLAY_TYPES_H
 
 #include <QString>
+#include <map>
+#include <memory>
+
+
 
 class CDisplayType
 {
@@ -38,6 +42,8 @@ public:
       LastType=Structure             // last display type
     };
 
+    typedef std::map<CDisplayType::eType, std::unique_ptr<CDisplayType>> type_map;
+
    CDisplayType();
 
    virtual      QString Display(const std::uint8_t*) const { return ""; }
@@ -52,6 +58,7 @@ public:
    bool         isSizeFixed();
    static void  setDifferentEndian(bool de);
    static bool  getDifferentEndian();
+   static type_map& get_type_map();
 protected:
 
    QString      toHexString(const std::uint8_t*pData) const;
@@ -88,6 +95,7 @@ protected:
    int   m_nBytes;
    eType mType;
    static bool m_different_endian;
+   static type_map m_display;
 };
 
 class CDisplayChar : public CDisplayType

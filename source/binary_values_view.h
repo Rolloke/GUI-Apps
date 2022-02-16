@@ -60,7 +60,7 @@ private slots:
 private:
     void uncheck_all(bool checked);
     Ui::binary_values_view *ui;
-    std::map<CDisplayType::eType, std::unique_ptr<CDisplayType>> m_display;
+    CDisplayType::type_map& m_display;
     QVector<QCheckBox*> m_Checkboxes;
     QVector<QLineEdit*> m_Edit;
     int                 m_current_position;
