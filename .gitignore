@@ -2,7 +2,6 @@
 spice/
 Kikad/
 portaudio/
-own_drivers/
 CVS/
 *.aps
 *.user.*

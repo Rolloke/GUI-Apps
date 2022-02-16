@@ -127,10 +127,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mPlayer.setVideoOutput(&mVideo);
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
+    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     mHiddenColumns = {eURL, eLogo, eFriendlyName };
     QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Group"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
-    QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     mListModel = new CheckboxItemModel(0, eLast, this);
     for (int fSection = 0; fSection < eLast; ++fSection)
     {

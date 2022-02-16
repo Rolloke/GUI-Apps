@@ -10,29 +10,51 @@
 
    <style>
    <!--
-@media screen and (orientation:portrait) {
+@media screen and (orientation:landscape) {
   body {
-    background:#200000;
+    background:#010e1d;
     width:100%;
     margin: 0; 
     padding: 0;
     font-family:"brandon-grotesque";
     color:#fff;
-    font-size: 2.5em;
+    font-size: 12px;
     font-family:Arial,sans-serif;
   }
+  button { 
+  padding: .4em .8em; 
+  background: #035099 linear-gradient(#4a43b2, #170099); 
+  border: thin solid green;
+  border-radius: 0 .4em .4em; 
+  box-shadow: 0 .2em .4em gray; 
+  color: white;
+  text-shadow: 0 -.05em .05em #333; 
+  font-size: 100%; 
+  line-height: 1.5;
 }
-@media screen and (orientation:landscape) {
+}
+@media screen and (orientation:portrait) {
   body {
-    background:#002000;
+    background:#150020;
     height:100%;
     margin: 0; 
     padding: 0;
     font-family:"brandon-grotesque";
     color:#fff;
-    font-size: 1.5em;
+    font-size: 12px;
     font-family:Arial,sans-serif;
   }
+  button { 
+  padding: .4em .8em; 
+  background: #5802bb linear-gradient(#a943b2, #7f0099); 
+  border: thin solid green;
+  border-radius: 0 .4em .4em; 
+  box-shadow: 0 .2em .4em gray; 
+  color: white;
+  text-shadow: 0 -.05em .05em #333; 
+  font-size: 100%; 
+  line-height: 1.5;
+}
 }
 table th { 
   text-align: left;
@@ -42,17 +64,6 @@ table {
   table-layout: auto;
   max-width: 100%;
 }
-button { 
-  padding: .4em .8em; 
-  background: #5a9900 linear-gradient(#8db243, #5a9900); 
-  border: thin solid green;
-  border-radius: 0 .4em .4em; 
-  box-shadow: 0 .2em .4em gray; 
-  color: white;
-  text-shadow: 0 -.05em .05em #333; 
-  font-size: 100%; 
-  line-height: 1.5;
-}
 -->
     </style>
 </head>
@@ -60,7 +71,7 @@ button {
 <body>
    <h1>Drucker in der Werkstatt</h1>
    <table>
-   <tr><th>Druckername</th><th>Befehl</th><th>Auschaltzeit</th></tr>
+   <tr><th>Gerätename</th><th>Befehl</th><th>Ausschaltzeit</th><th></th></tr>
    {% for pin in pins %}
    <tr><td><h4>{{ pins[pin].name }}
    {% if pins[pin].state == true %}
@@ -68,12 +79,13 @@ button {
       <td>
        <form action="/{{pin}}/off" id="update"><button type="submit">Ausschalten</button></form>
       </td>
-      <td>{{ pins[pin].display_off }}</td></tr></div></div>
+      <td style="text-align:center" >{{ pins[pin].display_off }}</td>
+      <td><form action="/{{pin}}/enhance" id="update"><button type="submit">Verlängern</button></form></td></tr></div></div>
    {% else %}
       &nbsp;&nbsp;</h4></td><div class="row"><div class="col-md-2">
       <td>
        <form action="/{{pin}}/on" id="update"><button type="submit">Einschalten</button></form>
-      </td><td></td></tr></div></div>
+      </td><td></td><td></td></tr></div></div>
    {% endif %}
    {% endfor %}
    </table>

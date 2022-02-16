@@ -1,1 +1,3 @@
 bin/
+javax.swing.*
+java.awt.event.*
