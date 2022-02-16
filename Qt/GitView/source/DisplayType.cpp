@@ -3,6 +3,7 @@
 #include <QMap>
 
 bool CDisplayType::m_different_endian = false;
+CDisplayType::type_map CDisplayType::m_display;
 
 CDisplayType::CDisplayType()
 {
@@ -105,6 +106,28 @@ void CDisplayType::setDifferentEndian(bool de)
 bool CDisplayType::getDifferentEndian()
 {
     return m_different_endian;
+}
+
+CDisplayType::type_map& CDisplayType::get_type_map()
+{
+    if (m_display.size() == 0)
+    {
+        m_display[CDisplayType::Char]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayChar));
+        m_display[CDisplayType::UChar]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUChar));
+        m_display[CDisplayType::Short]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayShort));
+        m_display[CDisplayType::UShort]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUShort));
+        m_display[CDisplayType::Long]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayLong));
+        m_display[CDisplayType::ULong]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayULong));
+        m_display[CDisplayType::LongLong]  = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayLongLong));
+        m_display[CDisplayType::ULongLong] = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayULongLong));
+        m_display[CDisplayType::Float]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayFloat));
+        m_display[CDisplayType::Double]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayDouble));
+        m_display[CDisplayType::HEX2]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
+        m_display[CDisplayType::HEX4]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
+        m_display[CDisplayType::HEX8]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
+        m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+    }
+    return m_display;
 }
 
 QString CDisplayType::toHexString(const std::uint8_t*pData) const

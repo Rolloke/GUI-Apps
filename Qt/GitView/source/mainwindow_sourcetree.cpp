@@ -316,6 +316,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             ui->textBrowser->setExtension("bin");
             ui->textBrowser->set_binary_data(file.readAll());
+            ui->tableBinaryView->set_binary_data(ui->textBrowser->get_binary_data());
 #ifdef DOCKED_VIEWS
             showDockedWidget(mBinaryValuesView.data());
 #endif

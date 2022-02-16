@@ -49,6 +49,7 @@ SOURCES += main.cpp\
     qbranchtreewidget.cpp \
     qhistorytreewidget.cpp \
     qstashtreewidget.cpp \
+    qbinarytableview.cpp \
     gitignore.cpp \
     aboutdlg.cpp \
     highlighter.cpp \
@@ -75,6 +76,7 @@ HEADERS  += mainwindow.h \
     qbranchtreewidget.h \
     qhistorytreewidget.h \
     qstashtreewidget.h \
+    qbinarytableview.h \
     gitignore.h \
     aboutdlg.h \
     highlighter.h \
