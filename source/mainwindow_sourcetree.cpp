@@ -306,18 +306,19 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     QFile file(file_path);
     if (file.open(QIODevice::ReadOnly))
     {
+        QWidget* widget_to_be_shown = ui->textBrowser;
         ui->labelFilePath->setText(file_path);
         ui->textBrowser->reset();
         if (file_extension == "txt" && file_path.contains("CMakeLists.txt"))
         {
             file_extension = "cmake";
         }
-        if (code_browser::is_binary(file))
+        if (qbinarytableview::is_binary(file))
         {
             ui->textBrowser->setExtension("bin");
-            ui->textBrowser->set_binary_data(file.readAll());
-            ui->tableBinaryView->set_binary_data(ui->textBrowser->get_binary_data());
+            ui->tableBinaryView->set_binary_data(file.readAll());
 #ifdef DOCKED_VIEWS
+            widget_to_be_shown = ui->tableBinaryView;
             showDockedWidget(mBinaryValuesView.data());
 #endif
         }
@@ -343,7 +344,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             ui->textBrowser->setTextCursor(cursor);
         }
 #ifdef DOCKED_VIEWS
-        showDockedWidget(ui->textBrowser);
+        showDockedWidget(widget_to_be_shown);
 #endif
     }
 }

@@ -39,8 +39,6 @@ public:
     void set_bytes_per_part(int b) { m_bytes_per_part = b; }
     void set_parts_per_line(int p) { m_parts_per_line = p; }
 
-    static bool is_binary(QFile& file);
-
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *e) override;

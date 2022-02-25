@@ -83,7 +83,7 @@ void MainWindow::on_btnStoreText_clicked()
     QFile file(fFileName);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
-        const auto & binary_data = ui->textBrowser->get_binary_data();
+        const auto & binary_data = ui->tableBinaryView->get_binary_data();
         if (binary_data.size())
         {
             file.write(binary_data);
@@ -123,9 +123,10 @@ void MainWindow::on_btnCloseText_clicked()
         }
     }
     ui->textBrowser->setText("");
-    if (ui->textBrowser->get_binary_data().size())
+
+    if (ui->tableBinaryView->get_binary_data().size())
     {
-        ui->textBrowser->clear_binary_content();
+        ui->tableBinaryView->clear_binary_content();
 #ifdef DOCKED_VIEWS
         showDockedWidget(mBinaryValuesView.data(), true);
 #endif
