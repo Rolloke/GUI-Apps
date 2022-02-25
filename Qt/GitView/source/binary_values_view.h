@@ -25,46 +25,41 @@ public:
     explicit binary_values_view(QWidget *parent = nullptr);
     ~binary_values_view();
 
+
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
     void status_message(const QString&, int);
+    void change_table_type(int type);
+    void change_table_columns(int columns);
+    void change_table_offset(int offset);
 
 public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);
     void receive_external_data(bool external);
+    void set_table_type(int type);
+    void set_table_columns(int columns);
+    void set_table_offset(int offset);
 
-
-private slots:
-    void on_checkSignedByte_clicked(bool checked);
-    void on_checkUnsignedByte_clicked(bool checked);
-    void on_checkHexByte_clicked(bool checked);
-    void on_checkSignedShort_clicked(bool checked);
-    void on_checkUnsignedShort_clicked(bool checked);
-    void on_checkHexShort_clicked(bool checked);
-    void on_checkSignedLong_clicked(bool checked);
-    void on_checkUnsignedLong_clicked(bool checked);
-    void on_checkHexLong_clicked(bool checked);
-    void on_checkSignedLongLong_clicked(bool checked);
-    void on_checkUnsignedLongLong_clicked(bool checked);
-    void on_checkHexLongLong_clicked(bool checked);
-    void on_checkFloat_clicked(bool checked);
-    void on_checkDouble_clicked(bool checked);
+private Q_SLOTS:
+    void check_box_clicked(bool checked);
     void on_btnReadValue_clicked();
     void on_btnWriteValue_clicked();
     void on_radioEndian1_clicked();
     void on_radioEndian2_clicked();
     void on_checkStandAlone_clicked(bool checked);
-
+    void table_type_changed(int type);
+    void table_columns_changed(int columns);
+    void table_offset_changed(int offset);
     void editing_finished();
 
 private:
-    void uncheck_all(bool checked);
     Ui::binary_values_view *ui;
     CDisplayType::type_map& m_display;
     QVector<QCheckBox*> m_Checkboxes;
     QVector<QLineEdit*> m_Edit;
     int                 m_current_position;
     QByteArray          m_array;
+    bool                m_setting_table_property;
 };
 
 #endif // BINARY_VALUES_VIEW_H

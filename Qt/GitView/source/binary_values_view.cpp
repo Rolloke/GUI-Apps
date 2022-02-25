@@ -7,6 +7,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
   , ui(new Ui::binary_values_view)
   , m_display(CDisplayType::get_type_map())
   , m_current_position(0)
+  , m_setting_table_property(false)
 {
     ui->setupUi(this);
 
@@ -32,6 +33,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     for (auto& checkbox : m_Checkboxes)
     {
         checkbox->setToolTip(tooltip);
+        connect(checkbox, SIGNAL(clicked(bool)), this, SLOT(check_box_clicked(bool)));
     }
 
     tooltip = ui->edtUnsignedByte->toolTip();
@@ -55,6 +57,14 @@ binary_values_view::binary_values_view(QWidget *parent) :
         edit->setToolTip(tooltip);
         connect(edit, SIGNAL(editingFinished()), this, SLOT(editing_finished()));
     }
+    for (const auto& type : m_display)
+    {
+        ui->comboType->addItem(CDisplayType::getNameOfType(type.second->getType()));
+    }
+
+    connect(ui->comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(table_type_changed(int)));
+    connect(ui->spinColumns, SIGNAL(valueChanged(int)), this, SLOT(table_columns_changed(int)));
+    connect(ui->spinOffset, SIGNAL(valueChanged(int)), this, SLOT(table_offset_changed(int)));
 }
 
 binary_values_view::~binary_values_view()
@@ -119,6 +129,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
 void binary_values_view::receive_external_data(bool external_data)
 {
     ui->checkStandAlone->setChecked(!external_data);
+    on_checkStandAlone_clicked(!external_data);
 }
 
 void binary_values_view::on_btnReadValue_clicked()
@@ -163,122 +174,83 @@ void binary_values_view::on_radioEndian2_clicked()
 #endif
 }
 
-void binary_values_view::uncheck_all(bool checked)
+void binary_values_view::set_table_type(int type)
 {
-    ui->btnWriteValue->setEnabled(checked);
-    for (auto& checkbox : m_Checkboxes)
+    m_setting_table_property = true;
+    ui->comboType->setCurrentIndex(type);
+    m_setting_table_property = false;
+}
+
+void binary_values_view::table_type_changed(int type)
+{
+    if (!m_setting_table_property)
     {
-        checkbox->setChecked(false);
+        Q_EMIT change_table_type(type);
     }
-    for (auto& edit: m_Edit)
+}
+
+void binary_values_view::set_table_columns(int columns)
+{
+    m_setting_table_property = true;
+    ui->spinColumns->setValue(columns);
+    m_setting_table_property = false;
+}
+
+void binary_values_view::table_columns_changed(int columns)
+{
+    if (!m_setting_table_property)
     {
-        edit->setReadOnly(true);
+        Q_EMIT change_table_columns(columns);
     }
 }
 
-void binary_values_view::on_checkSignedByte_clicked(bool checked)
+void binary_values_view::set_table_offset(int offset)
 {
-    uncheck_all(checked);
-    ui->checkSignedByte->setChecked(checked);
-    ui->edtSignedByte->setReadOnly(!checked);
-
+    m_setting_table_property = true;
+    ui->spinOffset->setValue(offset);
+    m_setting_table_property = false;
 }
 
-void binary_values_view::on_checkUnsignedByte_clicked(bool checked)
+void binary_values_view::table_offset_changed(int offset)
 {
-    uncheck_all(checked);
-    ui->checkUnsignedByte->setChecked(checked);
-    ui->edtUnsignedByte->setReadOnly(!checked);
+    if (!m_setting_table_property)
+    {
+        Q_EMIT change_table_offset(offset);
+    }
 }
 
-void binary_values_view::on_checkHexByte_clicked(bool checked)
+void binary_values_view::check_box_clicked(bool checked)
 {
-    uncheck_all(checked);
-    ui->checkHexByte->setChecked(checked);
-    ui->edtHexByte->setReadOnly(!checked);
-}
+    auto found_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [&] (auto &checkbox)
+    { return checkbox == sender(); } );
 
-void binary_values_view::on_checkSignedShort_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkSignedShort->setChecked(checked);
-    ui->edtSignedShort->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkUnsignedShort_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkUnsignedShort->setChecked(checked);
-    ui->edtUnsignedShort->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkHexShort_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkHexShort->setChecked(checked);
-    ui->edtHexShort->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkSignedLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkSignedLong->setChecked(checked);
-    ui->edtSignedLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkUnsignedLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkUnsignedLong->setChecked(checked);
-    ui->edtUnsignedLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkHexLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkHexLong->setChecked(checked);
-    ui->edtHexLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkSignedLongLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkSignedLongLong->setChecked(checked);
-    ui->edtSignedLongLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkUnsignedLongLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkUnsignedLongLong->setChecked(checked);
-    ui->edtUnsignedLongLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkHexLongLong_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkHexLongLong->setChecked(checked);
-    ui->edtHexLongLong->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkFloat_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkFloat->setChecked(checked);
-    ui->edtFloat->setReadOnly(!checked);
-}
-
-void binary_values_view::on_checkDouble_clicked(bool checked)
-{
-    uncheck_all(checked);
-    ui->checkDouble->setChecked(checked);
-    ui->edtDouble->setReadOnly(!checked);
+    if (found_box != m_Checkboxes.end())
+    {
+        ui->btnWriteValue->setEnabled(checked);
+        int index = std::distance(m_Checkboxes.begin(), found_box);
+        for (int i=0; i<m_Checkboxes.size(); ++i)
+        {
+            if (i == index)
+            {
+                m_Edit[i]->setReadOnly(!checked);
+            }
+            else
+            {
+                m_Edit[i]->setText("");
+                m_Checkboxes[i]->setChecked(false);
+                m_Edit[i]->setReadOnly(true);
+            }
+        }
+    }
 }
 
 void binary_values_view::on_checkStandAlone_clicked(bool checked)
 {
     ui->btnReadValue->setEnabled(!checked);
     ui->btnWriteValue->setEnabled(!checked);
+    ui->comboType->setEnabled(!checked);
+    ui->spinColumns->setEnabled(!checked);
+    ui->spinOffset->setEnabled(!checked);
 }
 
 void binary_values_view::editing_finished()

@@ -266,6 +266,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             font.setFixedPitch(true);
             font.setPointSize(10);
             ui->textBrowser->setFont(font);
+            ui->tableBinaryView->setFont(font);
         }
         {
             int fBytesPerPart = ui->textBrowser->get_bytes_per_part();
@@ -277,7 +278,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
             LOAD_STR(fSettings, fDifferentEndian, toBool);
             CDisplayType::setDifferentEndian(fDifferentEndian);
-
+            int fBinaryDisplayType = ui->tableBinaryView->get_type();
+            LOAD_STR(fSettings, fBinaryDisplayType, toInt);
+            ui->tableBinaryView->set_type(fBinaryDisplayType);
+            int fBinaryDisplayColumns = ui->tableBinaryView->get_columns();
+            LOAD_STR(fSettings, fBinaryDisplayColumns, toInt);
+            ui->tableBinaryView->set_columns(fBinaryDisplayColumns);
         }
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
 
@@ -326,10 +332,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
 
+    mBinaryValuesView->set_table_type(ui->tableBinaryView->get_type());
+    mBinaryValuesView->set_table_columns(ui->tableBinaryView->get_columns());
+    mBinaryValuesView->set_table_offset(ui->tableBinaryView->get_offset());
+
+    connect(ui->tableBinaryView, SIGNAL(offset_changed(int)), mBinaryValuesView.data(), SLOT(set_table_offset(int)));
+    connect(mBinaryValuesView.data(), SIGNAL(change_table_type(int)), ui->tableBinaryView, SLOT(set_type(int)));
+    connect(mBinaryValuesView.data(), SIGNAL(change_table_columns(int)), ui->tableBinaryView, SLOT(set_columns(int)));
+    connect(mBinaryValuesView.data(), SIGNAL(change_table_offset(int)), ui->tableBinaryView, SLOT(set_offset(int)));
     connect(mBinaryValuesView.data(), SIGNAL(status_message(QString,int)), ui->statusBar, SLOT(showMessage(QString,int)));
-    connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->textBrowser, SLOT(receive_value(QByteArray,int)));
-    connect(ui->textBrowser, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
-    connect(ui->textBrowser, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
+
+    connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
+    connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
+    connect(ui->tableBinaryView, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
+    connect(ui->tableBinaryView, SIGNAL(contentChanged()), this, SLOT(textBrowserChanged()));
 
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
@@ -385,6 +401,10 @@ MainWindow::~MainWindow()
             STORE_STR(fSettings, fPartsPerLine);
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
             STORE_STR(fSettings, fDifferentEndian);
+            int fBinaryDisplayType = ui->tableBinaryView->get_type();
+            STORE_STR(fSettings, fBinaryDisplayType);
+            int fBinaryDisplayColumns = ui->tableBinaryView->get_columns();
+            STORE_STR(fSettings, fBinaryDisplayColumns);
         }
 
         STORE_STR(fSettings, mFileCopyMimeType);
@@ -1060,7 +1080,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::BranchDelete, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::BranchCheckout, tr("Checkout Branch"), Cmd::getCommand(Cmd::BranchCheckout)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?"));
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?;"));
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchCheckout, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
