@@ -302,7 +302,7 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     int start = row * bytes_per_row + m_start_offset;
     int end   = m_binary_content.size() - bytes_per_type;
     QString line;
-    for (int i=0; i<m_columns_per_row && start < end; ++i)
+    for (int i=0; i<m_columns_per_row && start <=end; ++i)
     {
         QString part = thetype.Display(&buffer_pointer[start]);
         if (m_byte_cursor >= start  && m_byte_cursor < (start+bytes_per_type))

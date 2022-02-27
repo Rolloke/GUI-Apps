@@ -1167,31 +1167,30 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::FitInView)->setCheckable(true);
     mActions.setFlags(Cmd::FitInView, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-
     create_auto_cmd(ui->ckDirectories);
     create_auto_cmd(ui->ckFiles);
     create_auto_cmd(ui->ckHiddenFiles);
     create_auto_cmd(ui->ckShortState);
     create_auto_cmd(ui->ckSymbolicLinks);
     create_auto_cmd(ui->ckSystemFiles);
-    create_auto_cmd(ui->ckRenderGraphicFile, resource+"applications-graphics.png");
+    create_auto_cmd(ui->ckRenderGraphicFile, resource + "applications-graphics.png");
     create_auto_cmd(ui->ckHideEmptyParent);
-    create_auto_cmd(ui->ckFindCaseSensitive);
-    create_auto_cmd(ui->ckFindRegEx);
-    create_auto_cmd(ui->ckFindWholeWord);
+    create_auto_cmd(ui->ckFindCaseSensitive, resource + "applications-system.png");
+    create_auto_cmd(ui->ckFindRegEx,         resource + "applications-system.png");
+    create_auto_cmd(ui->ckFindWholeWord,     resource + "applications-system.png");
     create_auto_cmd(ui->ckExperimental);
     create_auto_cmd(ui->ckFastFileSearch);
-    create_auto_cmd(ui->ckTypeConverter);
+    create_auto_cmd(ui->ckTypeConverter, resource + "format-text-direction-rtl.png");
 
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->ckShowLineNumbers, "", &new_id);
+    create_auto_cmd(ui->ckShowLineNumbers, resource + "x-office-document.png", &new_id);
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnStoreText, resource+"text-x-patch.png", &new_id)->
+    create_auto_cmd(ui->btnStoreText, resource + "text-x-patch.png", &new_id)->
             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnCloseText, "", &new_id)->
@@ -1199,19 +1198,18 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnFindAll, resource+"edit-find.png", &new_id);
-    create_auto_cmd(ui->btnFindNext, resource+"go-next.png", &new_id)->
+    create_auto_cmd(ui->btnFindAll, resource + "edit-find.png", &new_id);
+    create_auto_cmd(ui->btnFindNext, resource + "go-next.png", &new_id)->
             setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, resource+"go-previous.png", &new_id)->
+    create_auto_cmd(ui->btnFindPrevious, resource + "go-previous.png", &new_id)->
             setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboFindBox, resource+"edit-find.png", &new_id)->
+    create_auto_cmd(ui->comboFindBox, resource + "edit-find.png", &new_id)->
             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
     create_auto_cmd(ui->comboShowItems);
-
 
     if (Cmd::mContextMenuTextView.empty())
     {
@@ -1477,6 +1475,7 @@ void MainWindow::on_comboFindBox_currentIndexChanged(int index)
     case FindView::Stash:           ui->statusBar->showMessage(tr("Search in Stash View")); break;
     }
 }
+
 void MainWindow::combo_triggered()
 {
     const QAction* action = qobject_cast<QAction *>(sender());
@@ -1496,12 +1495,6 @@ void MainWindow::combo_triggered()
         {
         case FindView::Text:
             find_text = ui->textBrowser->textCursor().selectedText();
-            if (!find_text.size())
-            {
-                index = FindView::GoToLineInText;
-                find_text = QString::number(ui->textBrowser->current_line());
-                ui->statusBar->showMessage(tr("You may select a text to search for"));
-            }
             break;
         case FindView::History: tree_view = ui->treeHistory; break;
         case FindView::Branch:  tree_view = ui->treeBranches; break;
@@ -1521,6 +1514,11 @@ void MainWindow::combo_triggered()
         {
             ui->edtFindText->setText(find_text);
             ui->edtFindText->setModified(true);
+        }
+        else
+        {
+            ui->edtFindText->selectAll();
+            ui->edtFindText->setFocus();
         }
     }
     const auto combofind_show_items = ui->comboShowItems->actions();

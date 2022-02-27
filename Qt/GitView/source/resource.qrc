@@ -101,5 +101,11 @@
         <file>resource/24X24/text-x-log.png</file>
         <file>resource/24X24/text-x-patch.png</file>
         <file>resource/24X24/view-fullscreen.png</file>
+        <file>resource/24X24/applications-colors.png</file>
+        <file>resource/24X24/applications-system.png</file>
+        <file>resource/24X24/input-tablet.png</file>
+        <file>resource/24X24/model.png</file>
+        <file>resource/24X24/network-wireless.png</file>
+        <file>resource/24X24/x-office-document.png</file>
     </qresource>
 </RCC>

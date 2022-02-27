@@ -266,6 +266,7 @@ void CustomGitActions::initListIcons()
     QDir fResources(fPath);
     QStringList fList = fResources.entryList();
 
+
     int fRow = 0;
     for (const auto& fItem : fList)
     {
