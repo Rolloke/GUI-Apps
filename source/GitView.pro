@@ -38,7 +38,6 @@ SOURCES += main.cpp\
     mainwindow_sourcetree.cpp \
     mainwindow_stashtree.cpp \
     mainwindow_textview.cpp \
-    qbinarytableview.cpp \
     qsourcetreewidget.cpp \
     workerthreadconnector.cpp \
     git_type.cpp \
@@ -65,7 +64,6 @@ HEADERS  += mainwindow.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
-    qbinarytableview.h \
     qsourcetreewidget.h \
     workerthreadconnector.h \
     git_type.h \
