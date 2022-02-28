@@ -46,11 +46,12 @@ private Q_SLOTS:
     void on_btnWriteValue_clicked();
     void on_radioEndian1_clicked();
     void on_radioEndian2_clicked();
-    void on_checkStandAlone_clicked(bool checked);
+    void on_checkStandAlone_toggled(bool checked);
     void table_type_changed(int type);
     void table_columns_changed(int columns);
     void table_offset_changed(int offset);
     void editing_finished();
+
 
 private:
     Ui::binary_values_view *ui;

@@ -129,7 +129,6 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
 void binary_values_view::receive_external_data(bool external_data)
 {
     ui->checkStandAlone->setChecked(!external_data);
-    on_checkStandAlone_clicked(!external_data);
 }
 
 void binary_values_view::on_btnReadValue_clicked()
@@ -244,7 +243,7 @@ void binary_values_view::check_box_clicked(bool checked)
     }
 }
 
-void binary_values_view::on_checkStandAlone_clicked(bool checked)
+void binary_values_view::on_checkStandAlone_toggled(bool checked)
 {
     ui->btnReadValue->setEnabled(!checked);
     ui->btnWriteValue->setEnabled(!checked);

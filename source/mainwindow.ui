@@ -307,26 +307,8 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="labelFilePath">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>400</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Shows filename of opened file</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="wordWrap">
+           <widget class="QLineEdit" name="labelFilePath">
+            <property name="readOnly">
              <bool>true</bool>
             </property>
            </widget>
