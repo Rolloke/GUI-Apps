@@ -286,6 +286,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             ui->tableBinaryView->set_columns(fBinaryDisplayColumns);
         }
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
+        LOAD_STR(fSettings, mExternalIconFiles, toString);
 
 #ifdef DOCKED_VIEWS
         QByteArray fWindowGeometry;
@@ -408,6 +409,7 @@ MainWindow::~MainWindow()
         }
 
         STORE_STR(fSettings, mFileCopyMimeType);
+        STORE_STR(fSettings, mExternalIconFiles);
         auto fWindowGeometry = saveGeometry();
         STORE_STR(fSettings, fWindowGeometry);
         auto fWindowState = saveState();
@@ -1353,6 +1355,7 @@ void MainWindow::performCustomGitActionSettings()
 {
     CustomGitActions edit_custom_git_actions(mActions, mMergeTools, this);
     edit_custom_git_actions.mExperimental = ui->ckExperimental->isChecked();
+    edit_custom_git_actions.mExternalIconFiles = mExternalIconFiles;
 
     connect(&edit_custom_git_actions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
@@ -1361,6 +1364,7 @@ void MainWindow::performCustomGitActionSettings()
         {
             initMergeTools();
         }
+        mExternalIconFiles = edit_custom_git_actions.mExternalIconFiles;
     }
     for (unsigned int i=0; i<mToolBars.size(); ++i)
     {
@@ -1880,6 +1884,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
 
 void MainWindow::on_ckTypeConverter_stateChanged(int arg1)
 {
+    mBinaryValuesView->receive_external_data(!arg1);
     showDockedWidget(mBinaryValuesView.data(), !arg1);
 }
 

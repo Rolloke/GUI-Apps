@@ -11,6 +11,7 @@
 #include <QActionGroup>
 #include <QComboBox>
 #include <QScrollBar>
+#include <QFileDialog>
 
 using namespace git;
 
@@ -150,23 +151,28 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
 
 void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
 {
+    const auto icon_tooltip = tr("Apply selected icon in right view to selected command entry in left view");
     auto fIndex = static_cast<VariousListIndex::e>(aIndex);
     switch (fIndex)
     {
-        case VariousListIndex::Icons:
-            initListIcons();
-            ui->btnToLeft->setToolTip(tr("Apply selected icon in right view to selected command entry in left view"));
-            break;
-        case VariousListIndex::MergeTool:
-            initListMergeTool();
-            break;
-        default:
-            if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
-            {
-                ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
-                initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
-            }
-            break;
+    case VariousListIndex::Icons:
+        initListIcons(fIndex);
+        ui->btnToLeft->setToolTip(icon_tooltip);
+        break;
+    case VariousListIndex::ExternalIcons:
+        initListIcons(fIndex, mExternalIconFiles);
+        ui->btnToLeft->setToolTip(icon_tooltip);
+        break;
+    case VariousListIndex::MergeTool:
+        initListMergeTool();
+        break;
+    default:
+        if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
+        {
+            ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
+            initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
+        }
+        break;
     }
 }
 
@@ -175,18 +181,19 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     static Cmd::tVector fDummy;
     switch (aIndex)
     {
-        case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
-        case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
-        case VariousListIndex::MenuGraphicView:     return Cmd::mContextMenuGraphicsView;
-        case VariousListIndex::MenuCodeBrowser:     return Cmd::mContextMenuTextView;
-        case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
-        case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
-        case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
-        case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
-        case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
-        case VariousListIndex::Size:
-        case VariousListIndex::MergeTool:
-        case VariousListIndex::Icons:
+    case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
+    case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
+    case VariousListIndex::MenuGraphicView:     return Cmd::mContextMenuGraphicsView;
+    case VariousListIndex::MenuCodeBrowser:     return Cmd::mContextMenuTextView;
+    case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
+    case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
+    case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
+    case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
+    case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
+    case VariousListIndex::Size:
+    case VariousListIndex::MergeTool:
+    case VariousListIndex::Icons:
+    case VariousListIndex::ExternalIcons:
         break;
     }
     return fDummy;
@@ -196,18 +203,19 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
 {
     switch (aIndex)
     {
-        case VariousListIndex::Icons:               return tr("Icons");
-        case VariousListIndex::MenuSrcTree:         return tr("Context Menu Source");
-        case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
-        case VariousListIndex::MenuGraphicView:     return tr("Context Menu Graphics View");
-        case VariousListIndex::MenuCodeBrowser:     return tr("Context Menu Text View");
-        case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
-        case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
-        case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
-        case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
-        case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
-        case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
-        case VariousListIndex::Size: break;
+    case VariousListIndex::Icons:               return tr("Icons");
+    case VariousListIndex::ExternalIcons:       return tr("External Icons");
+    case VariousListIndex::MenuSrcTree:         return tr("Context Menu Source");
+    case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
+    case VariousListIndex::MenuGraphicView:     return tr("Context Menu Graphics View");
+    case VariousListIndex::MenuCodeBrowser:     return tr("Context Menu Text View");
+    case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
+    case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
+    case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
+    case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
+    case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
+    case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
+    case VariousListIndex::Size: break;
     }
     return "";
 }
@@ -256,25 +264,44 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
     }
 }
 
-void CustomGitActions::initListIcons()
+void CustomGitActions::initListIcons(VariousListIndex::e aIndex, QString aPath)
 {
     mInitialize = true;
-    mListModelVarious->setHeaderData(VariousHeader::Icon, Qt::Horizontal, getVariousListHeader(VariousListIndex::Icons));
+    mListModelVarious->setHeaderData(VariousHeader::Icon, Qt::Horizontal, getVariousListHeader(aIndex));
     mListModelVarious->setHeaderData(VariousHeader::Name, Qt::Horizontal, tr("Name"));
     mListModelVarious->removeRows(0, mListModelVarious->rowCount());
-    QString fPath = ":/resource/24X24/";
-    QDir fResources(fPath);
-    QStringList fList = fResources.entryList();
 
-
-    int fRow = 0;
-    for (const auto& fItem : fList)
+    if (aPath.size() != 0)
     {
-        mListModelVarious->insertRows(fRow, 1, QModelIndex());
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(fPath + fItem), Qt::DecorationRole);
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QVariant(fPath + fItem), Qt::UserRole);
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), fItem, Qt::EditRole);
-        ++fRow;
+        QDir fResources(aPath);
+        QStringList fList = fResources.entryList();
+
+        auto remove_item = [&fList](const QString& item)
+        {
+            auto found_item = std::find_if(fList.begin(), fList.end(), [&item] (auto& entry) { return entry == item; });
+            if (found_item != fList.end())
+            {
+                fList.removeAt(std::distance(fList.begin(), found_item));
+            }
+        };
+
+        remove_item(".");
+        remove_item("..");
+
+        int fRow = 0;
+        for (const auto& fItem : fList)
+        {
+            mListModelVarious->insertRows(fRow, 1, QModelIndex());
+            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(aPath + fItem), Qt::DecorationRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QVariant(aPath + fItem), Qt::UserRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), fItem, Qt::EditRole);
+            ++fRow;
+        }
+    }
+    else
+    {
+        mListModelVarious->insertRows(0, 1, QModelIndex());
+        mListModelVarious->setData(mListModelVarious->index(0, VariousHeader::Name, QModelIndex()), tr("< empty >"), Qt::EditRole);
     }
     mInitialize = false;
 }
@@ -332,7 +359,7 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
 
 void CustomGitActions::on_btnToLeft_clicked()
 {
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons)
+    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
     {
         int fIconRow   = ui->tableViewVarious->currentIndex().row();
         int fActionRow = ui->tableViewActions->currentIndex().row();
@@ -433,7 +460,7 @@ void CustomGitActions::on_btnDelete_clicked()
 
 void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index */)
 {
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons)
+    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
     {
         enableButtons(Btn::Add|Btn::Delete);
     }
@@ -446,9 +473,9 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 {
     ui->btnAdd->setEnabled(false);
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons)
+    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
     {
-        enableButtons(Btn::Left);
+        enableButtons(Btn::Left|(ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons ? Btn::Load : 0));
     }
     else if (ui->comboBoxVarious->currentIndex() == VariousListIndex::MergeTool)
     {
@@ -471,12 +498,13 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 
 void CustomGitActions::enableButtons(std::uint32_t aBtnFlag)
 {
-    ui->btnAdd->setEnabled(     (aBtnFlag&Btn::Add)    != 0);
-    ui->btnDelete->setEnabled(  (aBtnFlag&Btn::Delete) != 0);
-    ui->btnMoveUp->setEnabled(  (aBtnFlag&Btn::Up)     != 0);
-    ui->btnMoveDown->setEnabled((aBtnFlag&Btn::Down)   != 0);
-    ui->btnToRight->setEnabled( (aBtnFlag&Btn::Right)  != 0);
-    ui->btnToLeft->setEnabled(  (aBtnFlag&Btn::Left)   != 0);
+    ui->btnAdd->setEnabled(      (aBtnFlag&Btn::Add)    != 0);
+    ui->btnDelete->setEnabled(   (aBtnFlag&Btn::Delete) != 0);
+    ui->btnMoveUp->setEnabled(   (aBtnFlag&Btn::Up)     != 0);
+    ui->btnMoveDown->setEnabled( (aBtnFlag&Btn::Down)   != 0);
+    ui->btnToRight->setEnabled(  (aBtnFlag&Btn::Right)  != 0);
+    ui->btnToLeft->setEnabled(   (aBtnFlag&Btn::Left)   != 0);
+    ui->btnLoadIcons->setEnabled((aBtnFlag&Btn::Load)   != 0);
 }
 
 void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoint &pos)
@@ -758,6 +786,17 @@ void CustomGitActions::on_btnHelp_clicked(bool checked)
     for (auto tooltip = mToolTips.begin(); tooltip != mToolTips.end(); ++tooltip)
     {
         tooltip.key()->setToolTip(checked ? tooltip.value() : "");
+    }
+}
+
+
+void CustomGitActions::on_btnLoadIcons_clicked()
+{
+    const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select Icon Files"), mExternalIconFiles);
+    if (fSourcePath.size() > 1)
+    {
+        mExternalIconFiles = fSourcePath + '/';
+        initListIcons(VariousListIndex::ExternalIcons, mExternalIconFiles);
     }
 }
 

@@ -255,6 +255,7 @@ private:
     QMap <QString, tree_find_properties> mTreeFindProperties;
     QStringList mHistoryFile;
     QString mStylePath;
+    QString mExternalIconFiles;
 
 };
 

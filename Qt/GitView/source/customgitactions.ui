@@ -124,6 +124,20 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="btnLoadIcons">
+       <property name="toolTip">
+        <string>Open external icon folder</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/folder-open.png</normaloff>:/resource/24X24/folder-open.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btnToLeft">
        <property name="toolTip">
         <string/>

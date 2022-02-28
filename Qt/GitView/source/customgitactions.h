@@ -21,6 +21,7 @@ class CustomGitActions : public QDialog
     struct VariousListIndex { enum e
     {
         Icons,
+        ExternalIcons,
         MenuSrcTree,
         MenuEmptySrcTree,
         MenuGraphicView,
@@ -46,7 +47,7 @@ class CustomGitActions : public QDialog
 
     struct Btn {enum e
     {
-        Add=1, Delete=2, Up=4, Down=8, Right=16, Left=32
+        Add=1, Delete=2, Up=4, Down=8, Right=16, Left=32, Load=64
     }; };
 
 public:
@@ -54,6 +55,7 @@ public:
     ~CustomGitActions();
     bool isMergeToolsChanged();
     bool mExperimental;
+    QString mExternalIconFiles;
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -76,8 +78,10 @@ private Q_SLOTS:
     void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
     void on_btnHelp_clicked(bool checked);
 
+    void on_btnLoadIcons_clicked();
+
 private:
-    void initListIcons();
+    void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");
     void initListMergeTool();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
