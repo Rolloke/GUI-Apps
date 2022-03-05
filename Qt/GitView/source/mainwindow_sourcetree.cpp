@@ -807,23 +807,19 @@ void MainWindow::deleteFileOrFolder()
     }
 }
 
-void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem * /* current */, QTreeWidgetItem *previous)
+void MainWindow::on_treeSource_currentItemChanged(QTreeWidgetItem *  current, QTreeWidgetItem *previous)
 {
-//    QString items;
-//    if (current)
-//    {
-//        items += current->text(QSourceTreeWidget::Column::FileName);
-//    }
-//    if (previous)
-//    {
-//        items += ", ";
-//        items += previous->text(QSourceTreeWidget::Column::FileName);
-//    }
-//    //TRACE(Logger::info, items.toStdString().c_str());
     if (   mContextMenuSourceTreeItem
         && mContextMenuSourceTreeItem == previous)
     {
-        mContextMenuSourceTreeItem = 0;
+        if (current)
+        {
+            on_treeSource_itemClicked(current, 0);
+        }
+        else
+        {
+            mContextMenuSourceTreeItem = nullptr;
+        }
     }
 }
 

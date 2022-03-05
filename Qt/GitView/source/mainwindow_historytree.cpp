@@ -161,3 +161,11 @@ void MainWindow::on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int col
         }
     }
 }
+
+void MainWindow::on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem * /* previous */)
+{
+    if (current)
+    {
+        on_treeHistory_itemClicked(current, 0);
+    }
+}

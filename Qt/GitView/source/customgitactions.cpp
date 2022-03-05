@@ -65,11 +65,14 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, ActionsTable::ID), QItemSelectionModel::SelectCurrent);
 
-    int fWidth = ui->tableViewVarious->rect().width()-6;
+    const int various_width = ui->tableViewVarious->rect().width() - ui->tableViewVarious->verticalScrollBar()->sizeHint().width();
+    const int icon_width = INT(0.15 * various_width);
     mListModelVarious = new VariousItemModel(0, VariousHeader::Size, this);
     ui->tableViewVarious->setModel(mListModelVarious);
-    ui->tableViewVarious->setColumnWidth(VariousHeader::Icon, INT(0.2  * fWidth));
-    ui->tableViewVarious->setColumnWidth(VariousHeader::Name, INT(0.75 * fWidth));
+    ui->tableViewVarious->setColumnWidth(VariousHeader::Icon, icon_width);
+    ui->tableViewVarious->setColumnWidth(VariousHeader::Name, various_width-icon_width);
+    ui->tableViewVarious->horizontalHeader()->setSectionResizeMode(VariousHeader::Icon, QHeaderView::Fixed);
+    ui->tableViewVarious->horizontalHeader()->setSectionResizeMode(VariousHeader::Name, QHeaderView::Stretch);
 
     const QString button_enabled_style = "QPushButton:enabled { background-color:skyblue;}";
     ui->btnToLeft->setStyleSheet(button_enabled_style);
