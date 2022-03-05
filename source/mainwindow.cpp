@@ -29,6 +29,8 @@
 using namespace std;
 using namespace git;
 
+/// TODO: Update Status of root folder
+/// TODO: Update menu items from git status
 // Kapitel 1.4.12.2 Entfernte Referenzen anpassen
 /// FEATURE:  Entferntes Repository hinzufügen:
 // git remote add < Name > <URL >
@@ -1887,4 +1889,5 @@ void MainWindow::on_ckTypeConverter_stateChanged(int arg1)
     mBinaryValuesView->receive_external_data(!arg1);
     showDockedWidget(mBinaryValuesView.data(), !arg1);
 }
+
 

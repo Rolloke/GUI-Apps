@@ -57,6 +57,7 @@ private Q_SLOTS:
     void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
     void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
 
