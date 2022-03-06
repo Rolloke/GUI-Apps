@@ -30,7 +30,6 @@ using namespace std;
 using namespace git;
 
 /// TODO: Update Status of root folder
-/// TODO: Update menu items from git status
 // Kapitel 1.4.12.2 Entfernte Referenzen anpassen
 /// FEATURE:  Entferntes Repository hinzufügen:
 // git remote add < Name > <URL >
@@ -312,12 +311,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupPaths);
     {
-        // NOTE: Remote Repositories necessary?
-        const QString fCommand = "git remote -v";
-        QString fResultStr;
-        execute(fCommand, fResultStr);
-        appendTextToBrowser(fCommand + getLineFeed() + fResultStr + getLineFeed());
-
         int fItemCount = fSettings.beginReadArray(config::sSourcePath);
         {
             for (int fItem = 0; fItem < fItemCount; ++fItem)

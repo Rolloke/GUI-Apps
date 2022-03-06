@@ -201,7 +201,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
     QString result_string;
     applyGitCommandToFilePath(source_dir.path(), Cmd::getCommand(Cmd::GetStatusAll), result_string);
 
-    appendTextToBrowser(tr("Repository: ")+source_dir.path(), item == 0 ? false : true);
+    appendTextToBrowser(tr("Repository: ") + source_dir.path(), item == 0 ? false : true);
     appendTextToBrowser(result_string, true);
     appendTextToBrowser("", true);
 
@@ -228,34 +228,38 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 {
-    const QFileInfo file_info(ui->treeSource->getItemFilePath(aItem));
-
-    QDir fParent;
-    if (file_info.isDir()) fParent.setPath(file_info.absoluteFilePath());
-    else                   fParent.setPath(file_info.absolutePath());
-
-    while (!QDir(fParent.absolutePath() + QDir::separator() + Folder::GitRepository).exists())
+    if (aItem)
     {
-        fParent.cdUp();
-        if (fParent.isRoot()) break;
-        if (!fParent.exists()) break;
-    };
+        const QFileInfo file_info(ui->treeSource->getItemFilePath(aItem));
 
-    if (!fParent.isRoot())
-    {
-        const QString repository_path = fParent.absolutePath();
-        QString fCommandString = tr(Cmd::getCommand(Cmd::GetStatusAll).toStdString().c_str()).arg(repository_path);
-        fCommandString.append(" ");
-        fCommandString.append(file_info.absoluteFilePath());
+        QDir fParent;
+        if (file_info.isDir()) fParent.setPath(file_info.absoluteFilePath());
+        else                   fParent.setPath(file_info.absolutePath());
 
-        QString result_string;
-        applyGitCommandToFilePath(repository_path, fCommandString, result_string);
+        while (!QDir(fParent.absolutePath() + QDir::separator() + Folder::GitRepository).exists())
+        {
+            fParent.cdUp();
+            if (fParent.isRoot()) break;
+            if (!fParent.exists()) break;
+        };
 
-        stringt2typemap check_map;
-        parseGitStatus(repository_path + QDir::separator(), result_string, check_map);
+        if (!fParent.isRoot())
+        {
+            const QString repository_path = fParent.absolutePath();
+            QString fCommandString = tr(Cmd::getCommand(Cmd::GetStatusAll).toStdString().c_str()).arg(repository_path);
+            fCommandString.append(" ");
+            fCommandString.append(file_info.absoluteFilePath());
 
-        const QString source_path = file_info.absolutePath();
-        ui->treeSource->iterateCheckItems(aItem, check_map, &source_path);
+            QString result_string;
+            applyGitCommandToFilePath(repository_path, fCommandString, result_string);
+
+            stringt2typemap check_map;
+            parseGitStatus(repository_path + QDir::separator(), result_string, check_map);
+
+            const QString source_path = file_info.absolutePath();
+            ui->treeSource->iterateCheckItems(aItem, check_map, &source_path);
+        }
+        on_treeSource_itemClicked(aItem, 0);
     }
 }
 
@@ -425,13 +429,16 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
 
 void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column */ )
 {
-    mContextMenuSourceTreeItem = item;
-    const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
-    mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
-    mActions.enableItemsByType(Cmd::mToolbars[0], fType);
-    if (mMergeDialog)
+    if (item)
     {
-        mMergeDialog->mGitFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        mContextMenuSourceTreeItem = item;
+        const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
+        mActions.enableItemsByType(Cmd::mToolbars[0], fType);
+        if (mMergeDialog)
+        {
+            mMergeDialog->mGitFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        }
     }
 }
 
