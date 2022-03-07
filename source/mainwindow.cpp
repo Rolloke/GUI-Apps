@@ -32,7 +32,7 @@ using namespace git;
 /// TODO: Update Status of root folder
 // Kapitel 1.4.12.2 Entfernte Referenzen anpassen
 /// FEATURE:  Entferntes Repository hinzufügen:
-// git remote add < Name > <URL >
+// die <URL > speichern
 // Referenz entfernen:
 // URL korrigieren:
 // git remote set - url < Name > <URL >
@@ -232,7 +232,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     }
     fSettings.endGroup();
 
-    initMergeTools(true);
 
 #ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
@@ -324,6 +323,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         fSettings.endArray();
     }
     fSettings.endGroup();
+
+    initMergeTools(true);
 
     auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
     Logger::setTextToBrowserFunction(text2browser);
