@@ -7,6 +7,7 @@
 QT += core gui
 QT += xml
 QT += svg
+QT += webenginewidgets webchannel
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +19,10 @@ TARGET = GitView
 TEMPLATE = app
 
 CONFIG += c++17
+CONFIG -= qtquickcompiler
+
 unix:QMAKE_CXXFLAGS += -std=c++17
+unix:QMAKE_LFLAGS   = -fuse-ld=gold
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined

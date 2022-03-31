@@ -21,6 +21,8 @@
 #include <QStyleFactory>
 #include <QPalette>
 #include <QTextStream>
+#include <QWebEnginePage>
+#include <QWebChannel>
 
 #include <boost/bind.hpp>
 
@@ -28,14 +30,6 @@
 
 using namespace std;
 using namespace git;
-
-/// TODO: Update Status of root folder
-// Kapitel 1.4.12.2 Entfernte Referenzen anpassen
-/// FEATURE:  Entferntes Repository hinzufügen:
-// die <URL > speichern
-// Referenz entfernen:
-// URL korrigieren:
-// git remote set - url < Name > <URL >
 
 namespace config
 {
@@ -106,12 +100,44 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::Language::load(fSettings);
     ui->textBrowser->reset();
     connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+    connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+
+    ui->markdownView->setContextMenuPolicy(Qt::NoContextMenu);
+    QWebEnginePage* page = new QWebEnginePage(this);
+    ui->markdownView->setPage(page);
+
+    QWebChannel *channel = new QWebChannel(this);
+    channel->registerObject(QStringLiteral("content"), ui->textBrowser);
+    page->setWebChannel(channel);
+
+    ui->markdownView->setUrl(QUrl(":/resource/index.html"));
+    // TODO: fix markdown view
+
+//    QStringList list =
+//    {
+//        ":/resource/index.html",
+//        ":/resource/3rdparty/markdown.css",
+//        ":/resource/3rdparty/marked.js",
+//        ":/resource/default.md",
+//        ":/qtwebchannel/qwebchannel.js"
+//    };
+//    for (auto & item : list)
+//    {
+//        QFile defaultTextFile(item);
+//        if (defaultTextFile.open(QIODevice::ReadOnly))
+//        {
+//            QString str = defaultTextFile.readAll();
+//            str.clear();
+//        }
+//    }
+
+    ui->textBrowser->set_page(page);
 
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
-    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::Size    , QHeaderView::Interactive);
-    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::State   , QHeaderView::Interactive);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::ResizeToContents);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::Size    , QHeaderView::ResizeToContents);
+    ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::State   , QHeaderView::ResizeToContents);
     ui->treeSource->header()->setStretchLastSection(false);
 
     ui->treeSource->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -269,12 +295,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             ui->tableBinaryView->setFont(font);
         }
         {
-            int fBytesPerPart = ui->textBrowser->get_bytes_per_part();
-            LOAD_STR(fSettings, fBytesPerPart, toInt);
-            ui->textBrowser->set_bytes_per_part(fBytesPerPart);
-            int fPartsPerLine = ui->textBrowser->get_parts_per_line();
-            LOAD_STR(fSettings, fPartsPerLine, toInt);
-            ui->textBrowser->set_parts_per_line(fPartsPerLine);
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
             LOAD_STR(fSettings, fDifferentEndian, toBool);
             CDisplayType::setDifferentEndian(fDifferentEndian);
@@ -392,10 +412,6 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings,  Type::mShort);
         STORE_STR(fSettings, mFontName);
         {
-            int fBytesPerPart = ui->textBrowser->get_bytes_per_part();
-            STORE_STR(fSettings, fBytesPerPart);
-            int fPartsPerLine = ui->textBrowser->get_parts_per_line();
-            STORE_STR(fSettings, fPartsPerLine);
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
             STORE_STR(fSettings, fDifferentEndian);
             int fBinaryDisplayType = ui->tableBinaryView->get_type();
@@ -592,6 +608,19 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
+
+    // markdown view
+    dock = new QDockWidget(tr("Markdown View"), this);
+    // ui->comboFindBox->addItem(dock->windowTitle());
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("markdown_view");
+    ui->verticalLayout->removeWidget(ui->markdownView);
+    dock->setWidget(ui->markdownView);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    tabifyDockWidget(first_tab, dock);
+    dock->setVisible(false);
+
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};

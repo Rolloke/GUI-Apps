@@ -114,6 +114,7 @@ private Q_SLOTS:
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
+    void show_web_view(bool );
 
 private:
 

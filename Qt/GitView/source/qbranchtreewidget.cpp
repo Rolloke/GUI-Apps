@@ -69,7 +69,7 @@ QString QBranchTreeWidget::getSelectedBranch()
 {
     QString fItem;
     auto fSelectedList = selectedItems();
-    if (fSelectedList.size() == 2)
+    if (fSelectedList.size() > 1)
     {
         for (auto fSelectedItem : fSelectedList)
         {

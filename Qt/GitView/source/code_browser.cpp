@@ -7,6 +7,8 @@
 #include <QMenu>
 #include <QTextCursor>
 #include <QApplication>
+#include <QWebEnginePage>
+
 
 // NOTE: source for this solution, but a little bit modified
 // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
@@ -17,17 +19,21 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_show_line_numbers(false)
   , m_actions(nullptr)
   , m_dark_mode(false)
-  , m_bytes_per_part(4)
-  , m_parts_per_line(8)
-  , m_displaying(false)
+  , m_web_page(nullptr)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
 
     updateLineNumberAreaWidth(blockCount());
     highlightCurrentLine();
+}
+
+code_browser::~code_browser()
+{
+    m_web_page = nullptr;
 }
 
 int code_browser::lineNumberAreaWidth()
@@ -74,6 +80,30 @@ void code_browser::call_updateExtension(const QString& ext)
     Q_EMIT updateExtension(ext);
 }
 
+void code_browser::own_text_changed()
+{
+    QString current_language = mHighlighter->currentLanguage();
+    if (current_language == "html")
+    {
+        if (m_web_page)
+        {
+            QString text = toPlainText();
+            m_web_page->setHtml(text);
+            Q_EMIT show_web_view(text.size() ? true : false);
+        }
+    }
+    else if (current_language == "markdown")
+    {
+        QString text = toPlainText();
+        Q_EMIT textChanged(text);
+        Q_EMIT show_web_view(text.size() ? true : false);
+    }
+    else
+    {
+        Q_EMIT show_web_view(false);
+    }
+}
+
 void code_browser::updateLineNumberArea(const QRect &rect, int dy)
 {
     if (dy)
@@ -114,22 +144,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
 
 void code_browser::keyPressEvent(QKeyEvent *e)
 {
-    if (m_binary_content.size())
-    {
-        switch (e->key())
-        {
-        case Qt::Key_Left:   case Qt::Key_Right:
-        case Qt::Key_Up:     case Qt::Key_Down:
-        case Qt::Key_PageUp: case Qt::Key_PageDown:
-        case Qt::Key_Home:   case Qt::Key_End:
-            QTextBrowser::keyPressEvent(e);
-            break;
-        }
-    }
-    else
-    {
-        QTextBrowser::keyPressEvent(e);
-    }
+     QTextBrowser::keyPressEvent(e);
 }
 
 void code_browser::highlightCurrentLine()
@@ -137,11 +152,9 @@ void code_browser::highlightCurrentLine()
     QList<QTextEdit::ExtraSelection> extraSelections;
     QTextEdit::ExtraSelection selection;
     selection.cursor = textCursor();
-    change_cursor(selection.cursor.block().blockNumber(), selection.cursor.positionInBlock());
 
     if (!isReadOnly())
     {
-
         QColor lineColor = QColor(m_dark_mode ? Qt::darkYellow : Qt::yellow).lighter(m_dark_mode ? 0 : 160);
 
         selection.format.setBackground(lineColor);
@@ -248,6 +261,11 @@ void code_browser::set_dark_mode(bool dark)
     m_dark_mode = dark;
 }
 
+void code_browser::set_page(QWebEnginePage*page)
+{
+    m_web_page = page;
+}
+
 void code_browser::reset()
 {
     if (mHighlighter)
@@ -270,113 +288,6 @@ void code_browser::setExtension(const QString &ext)
 void code_browser::setLanguage(const QString& language)
 {
     mHighlighter->setLanguage(language);
-}
-
-void code_browser::set_binary_data(const QByteArray& array)
-{
-    m_binary_content = array;
-    display_binary_data();
-    Q_EMIT publish_has_binary_content(true);
-    Q_EMIT set_value(m_binary_content, 0);
-}
-
-void code_browser::display_binary_data(int line)
-{
-    m_displaying = true;
-    QString binary_coded_line;
-    QString ascii_coded_line;
-    int bytes = 0;
-    int parts = 0;
-    int start = 0;
-    int end   = m_binary_content.size();
-    QString linefeed {"\n"};
-
-    if (line != -1)
-    {
-        const int line_hex_size = m_bytes_per_part * m_parts_per_line;
-        start = line * line_hex_size;
-        end   = std::min(end, start + line_hex_size);
-        go_to_line(line+1);
-        linefeed = "";
-    }
-
-    for (int i=start; i<end; ++i)
-    {
-        const std::uint8_t byte = m_binary_content[i];
-        binary_coded_line.append(QString::asprintf("%02X", byte));
-        ascii_coded_line.append((byte >= 32 && byte <= 127) ? byte : '.');
-        if (++bytes == m_bytes_per_part)
-        {
-            binary_coded_line.append(" ");
-            bytes = 0;
-            ++parts;
-        }
-        if (parts == m_parts_per_line)
-        {
-            insertPlainText(binary_coded_line + "\t" + ascii_coded_line +  linefeed);
-            binary_coded_line.clear();
-            ascii_coded_line.clear();
-            parts = 0;
-        }
-    }
-    if (binary_coded_line.size())
-    {
-        insertPlainText(binary_coded_line + "\t" + ascii_coded_line);
-    }
-    m_displaying = false;
-}
-
-const QByteArray& code_browser::get_binary_data() const
-{
-    return m_binary_content;
-}
-
-void code_browser::change_cursor(int block, int position)
-{
-    if (m_binary_content.size() && !m_displaying)
-    {
-        const int line_hex_size = m_bytes_per_part * m_parts_per_line;
-        const int line_hex_area_size = (m_bytes_per_part*2+1) * m_parts_per_line + 1;
-        if (position >= line_hex_area_size)
-        {
-            position -= line_hex_area_size;
-            TRACE(Logger::info, "position: %d", position);
-        }
-        else
-        {
-            const int spaces = position / (m_bytes_per_part*2+1);
-            position -= spaces;
-            position &= ~1;
-            position /= 2;
-            TRACE(Logger::info, "spaces: %d, position %d", spaces, position);
-        }
-        const int byte_position = block * line_hex_size + position;
-        Q_EMIT set_value(m_binary_content, byte_position);
-    }
-}
-
-void code_browser::receive_value(const QByteArray &array, int position)
-{
-    if (array.size())
-    {
-        for (int i=0; i<array.size(); ++i)
-        {
-            m_binary_content[position + i] = array[i];
-        }
-        Q_EMIT textChanged();
-        display_binary_data(position / (m_bytes_per_part * m_parts_per_line));
-    }
-    else
-    {
-        Q_EMIT set_value(m_binary_content, position);
-    }
-}
-
-void code_browser::clear_binary_content()
-{
-    m_binary_content.clear();
-    Q_EMIT set_value(m_binary_content, 0);
-    Q_EMIT publish_has_binary_content(false);
 }
 
 

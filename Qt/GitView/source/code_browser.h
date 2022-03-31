@@ -8,6 +8,7 @@
 
 #include <QPlainTextEdit>
 
+class QWebEnginePage;
 
 class code_browser : public QTextBrowser
 {
@@ -16,6 +17,7 @@ class code_browser : public QTextBrowser
     friend class LineNumberArea;
 public:
     code_browser(QWidget *parent = nullptr);
+    virtual ~code_browser();
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int  blockCount() const;
@@ -25,19 +27,12 @@ public:
     void set_actions(ActionList* list);
     void set_dark_mode(bool );
 
+    void set_page(QWebEnginePage*);
+
     void reset();
     const QString& currentLanguage() const;
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
-
-    void set_binary_data(const QByteArray& data);
-    void display_binary_data(int line = -1);
-    const QByteArray& get_binary_data() const;
-    void clear_binary_content();
-    int  get_bytes_per_part() const { return m_bytes_per_part; }
-    int  get_parts_per_line() const { return m_parts_per_line; }
-    void set_bytes_per_part(int b) { m_bytes_per_part = b; }
-    void set_parts_per_line(int p) { m_parts_per_line = p; }
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -45,15 +40,14 @@ protected:
     void keyPressEvent(QKeyEvent *e) override;
 
 Q_SIGNALS:
+    void textChanged(const QString &text);
     void blockCountChanged(int newBlockCount);
     void updateRequest(const QRect &rect, int dy);
-    void set_value(const QByteArray& array, int position);
-    void publish_has_binary_content(bool );
     void updateExtension(const QString&);
+    void show_web_view(bool);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
-    void receive_value(const QByteArray& array, int position);
 
 private Q_SLOTS:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -61,24 +55,22 @@ private Q_SLOTS:
     void updateLineNumberArea(const QRect &rect, int dy);
     void vertical_scroll_value(int );
     void call_updateExtension(const QString&);
+    void own_text_changed();
+
 
 private:
     QTextBlock firstVisibleBlock(int& diff);
     QRectF     blockBoundingRect(const QTextBlock &block) const;
     QPointF    contentOffset() const;
     int        lineNumberAreaWidth();
-    void       change_cursor(int block, int position);
 
 private:
     QWidget *   m_line_number_area;
     bool        m_show_line_numbers;
     ActionList *m_actions;
     bool        m_dark_mode;
-    int         m_bytes_per_part;
-    int         m_parts_per_line;
-    QByteArray  m_binary_content;
-    bool        m_displaying;
     QSharedPointer<Highlighter> mHighlighter;
+    QWebEnginePage * m_web_page;
 };
 
 class LineNumberArea : public QWidget
