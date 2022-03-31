@@ -72,10 +72,10 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
 {
     if (isSeverityActive(aSeverity))
     {
-        const bool log_to_syslog   = isSeverityActive(to_syslog);
-        const bool log_to_function = (mLogFunction && (mSeverity&to_function) != 0);
-        const bool log_to_browser_function = ((aSeverity&to_browser) != 0 && mTxt2BrowserFunction);
-        const bool log_to_console  = isSeverityActive(to_console);
+        const bool log_to_syslog           = isSeverityActive(to_syslog);
+        const bool log_to_function         = isSeverityActive(to_function) && mLogFunction;
+        const bool log_to_browser_function = (aSeverity&to_browser) != 0 && mTxt2BrowserFunction;
+        const bool log_to_console          = isSeverityActive(to_console);
 
         if (log_to_console)
         {

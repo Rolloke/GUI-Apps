@@ -107,5 +107,9 @@
         <file>resource/24X24/model.png</file>
         <file>resource/24X24/network-wireless.png</file>
         <file>resource/24X24/x-office-document.png</file>
+        <file>resource/default.md</file>
+        <file>resource/index.html</file>
+        <file>resource/3rdparty/markdown.css</file>
+        <file>resource/3rdparty/marked.js</file>
     </qresource>
 </RCC>
