@@ -23,7 +23,10 @@ class MergeDialog;
 class QGraphicsItem;
 class QAbstractButton;
 class binary_values_view;
-
+#ifdef WEB_ENGINE
+class QWebEngineView;
+class Document;
+#endif
 
 class MainWindow : public QMainWindow
 {
@@ -114,8 +117,9 @@ private Q_SLOTS:
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
+#ifdef WEB_ENGINE
     void show_web_view(bool );
-
+#endif
 private:
 
     struct Work { enum e
@@ -242,6 +246,11 @@ private:
     QTreeWidgetItem*      mContextMenuSourceTreeItem;
     QSharedPointer<MergeDialog> mMergeDialog;
     QSharedPointer<binary_values_view> mBinaryValuesView;
+#ifdef WEB_ENGINE
+    QSharedPointer<QWebEngineView> mWebEngineView;
+    QSharedPointer<Document>       m_web_content;
+#endif
+
     QString               mFontName;
     QString               mFileCopyMimeType;
     string2bool_map       mMergeTools;

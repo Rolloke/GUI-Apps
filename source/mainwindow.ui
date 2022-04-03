@@ -583,16 +583,6 @@ File content opened with double click</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QWebEngineView" name="markdownView" native="true">
-              <property name="minimumSize">
-               <size>
-                <width>186</width>
-                <height>80</height>
-               </size>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
          </layout>
@@ -942,12 +932,6 @@ File content opened with double click</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header>qwebengineview.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>QBranchTreeWidget</class>
    <extends>QTreeWidget</extends>

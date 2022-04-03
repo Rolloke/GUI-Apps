@@ -21,8 +21,12 @@
 #include <QStyleFactory>
 #include <QPalette>
 #include <QTextStream>
+
+#ifdef WEB_ENGINE
+#include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebChannel>
+#endif
 
 #include <boost/bind.hpp>
 
@@ -101,37 +105,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->reset();
     connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
-
-    ui->markdownView->setContextMenuPolicy(Qt::NoContextMenu);
-    QWebEnginePage* page = new QWebEnginePage(this);
-    ui->markdownView->setPage(page);
-
-    QWebChannel *channel = new QWebChannel(this);
-    channel->registerObject(QStringLiteral("content"), ui->textBrowser);
-    page->setWebChannel(channel);
-
-    ui->markdownView->setUrl(QUrl(":/resource/index.html"));
-    // TODO: fix markdown view
-
-//    QStringList list =
-//    {
-//        ":/resource/index.html",
-//        ":/resource/3rdparty/markdown.css",
-//        ":/resource/3rdparty/marked.js",
-//        ":/resource/default.md",
-//        ":/qtwebchannel/qwebchannel.js"
-//    };
-//    for (auto & item : list)
-//    {
-//        QFile defaultTextFile(item);
-//        if (defaultTextFile.open(QIODevice::ReadOnly))
-//        {
-//            QString str = defaultTextFile.readAll();
-//            str.clear();
-//        }
-//    }
-
-    ui->textBrowser->set_page(page);
 
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
@@ -363,6 +336,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
     connect(ui->tableBinaryView, SIGNAL(contentChanged()), this, SLOT(textBrowserChanged()));
+
+#ifdef WEB_ENGINE
+    mWebEngineView->setContextMenuPolicy(Qt::NoContextMenu);
+    PreviewPage* page = new PreviewPage(this, mWebEngineView.data());
+    mWebEngineView->setPage(page);
+    ui->textBrowser->set_page(page);
+
+    m_web_content.reset(new Document);
+    connect(ui->textBrowser, &code_browser::textChanged, [this]() { m_web_content->setText(ui->textBrowser->toPlainText()); });
+
+    QWebChannel *channel = new QWebChannel(this);
+    channel->registerObject(QStringLiteral("content"), m_web_content.data());
+    page->setWebChannel(channel);
+#endif
 
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
@@ -609,18 +596,20 @@ void MainWindow::createDockWindows()
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 
+#ifdef WEB_ENGINE
     // markdown view
-    dock = new QDockWidget(tr("Markdown View"), this);
+    dock = new QDockWidget(tr("Html & Markdown View"), this);
     // ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("markdown_view");
-    ui->verticalLayout->removeWidget(ui->markdownView);
-    dock->setWidget(ui->markdownView);
+    mWebEngineView.reset(new QWebEngineView(this));
+    ui->verticalLayout->removeWidget(mWebEngineView.data());
+    dock->setWidget(mWebEngineView.data());
     addDockWidget(Qt::RightDockWidgetArea, dock);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
-
+#endif
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
