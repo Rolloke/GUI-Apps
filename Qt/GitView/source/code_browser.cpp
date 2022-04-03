@@ -7,33 +7,35 @@
 #include <QMenu>
 #include <QTextCursor>
 #include <QApplication>
-#include <QWebEnginePage>
 
-
-// NOTE: source for this solution, but a little bit modified
-// https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
-// https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
+#ifdef WEB_ENGINE
+#include <QWebEngineView>
+#endif
 
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
   , m_actions(nullptr)
   , m_dark_mode(false)
-  , m_web_page(nullptr)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-    connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
-
     updateLineNumberAreaWidth(blockCount());
     highlightCurrentLine();
+
+#ifdef WEB_ENGINE
+  m_web_page = nullptr;
+  connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
+#endif
 }
 
 code_browser::~code_browser()
 {
+#ifdef WEB_ENGINE
     m_web_page = nullptr;
+#endif
 }
 
 int code_browser::lineNumberAreaWidth()
@@ -78,30 +80,6 @@ void code_browser::vertical_scroll_value(int value)
 void code_browser::call_updateExtension(const QString& ext)
 {
     Q_EMIT updateExtension(ext);
-}
-
-void code_browser::own_text_changed()
-{
-    QString current_language = mHighlighter->currentLanguage();
-    if (current_language == "html")
-    {
-        if (m_web_page)
-        {
-            QString text = toPlainText();
-            m_web_page->setHtml(text);
-            Q_EMIT show_web_view(text.size() ? true : false);
-        }
-    }
-    else if (current_language == "markdown")
-    {
-        QString text = toPlainText();
-        Q_EMIT textChanged(text);
-        Q_EMIT show_web_view(text.size() ? true : false);
-    }
-    else
-    {
-        Q_EMIT show_web_view(false);
-    }
 }
 
 void code_browser::updateLineNumberArea(const QRect &rect, int dy)
@@ -166,6 +144,9 @@ void code_browser::highlightCurrentLine()
     setExtraSelections(extraSelections);
 }
 
+// NOTE: source for this solution, but a little bit modified
+// https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
+// https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
 void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     const QPalette p = QApplication::palette(this);
@@ -261,11 +242,6 @@ void code_browser::set_dark_mode(bool dark)
     m_dark_mode = dark;
 }
 
-void code_browser::set_page(QWebEnginePage*page)
-{
-    m_web_page = page;
-}
-
 void code_browser::reset()
 {
     if (mHighlighter)
@@ -291,4 +267,87 @@ void code_browser::setLanguage(const QString& language)
 }
 
 
+#ifdef WEB_ENGINE
 
+void code_browser::set_page(PreviewPage*page)
+{
+    m_web_page = page;
+}
+
+void code_browser::own_text_changed()
+{
+    if (m_web_page)
+    {
+        QString current_language = mHighlighter->currentLanguage();
+        if (current_language == "html")
+        {
+            m_web_page->set_type(PreviewPage::type::html);
+            QString text = toPlainText();
+            m_web_page->setHtml(text);
+            Q_EMIT show_web_view(text.size() ? true : false);
+        }
+        else if (current_language == "markdown")
+        {
+            m_web_page->set_type(PreviewPage::type::markdown);
+            QString text = toPlainText();
+            emit textChanged(text);
+            Q_EMIT show_web_view(text.size() ? true : false);
+        }
+        else
+        {
+            Q_EMIT show_web_view(false);
+        }
+    }
+}
+
+
+#include <QDesktopServices>
+
+PreviewPage::PreviewPage(QObject *parent, QWebEngineView* view) : QWebEnginePage(parent)
+, m_type(type::html)
+, m_web_enginge_view(view)
+{
+
+}
+
+void PreviewPage::set_type(PreviewPage::type type)
+{
+    bool changed = m_type != type;
+    m_type = type;
+    if (changed && m_type == type::markdown)
+    {
+        load_markdown_page();
+    }
+}
+
+void PreviewPage::load_markdown_page()
+{
+    m_web_enginge_view->setUrl(QUrl("qrc:/resource/index.html"));
+}
+
+bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType, bool)
+{
+    if (m_type == type::html)
+    {
+        return true;
+    }
+    else if (m_type == type::markdown && url.scheme() == QString("qrc")) // Only allow qrc:/index.html.
+    {
+        return true;
+    }
+    else
+    {
+        QDesktopServices::openUrl(url);
+        return false;
+    }
+}
+
+void Document::setText(const QString &text)
+{
+    if (text == m_text)
+        return;
+    m_text = text;
+    emit textChanged(m_text);
+}
+
+#endif

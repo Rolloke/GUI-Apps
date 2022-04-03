@@ -5,10 +5,13 @@
 #include "highlighter.h"
 
 #include <QTextBrowser>
-
 #include <QPlainTextEdit>
 
-class QWebEnginePage;
+#ifdef WEB_ENGINE
+#include <QWebEnginePage>
+class    QWebEngineView;
+class    PreviewPage;
+#endif
 
 class code_browser : public QTextBrowser
 {
@@ -26,8 +29,6 @@ public:
 
     void set_actions(ActionList* list);
     void set_dark_mode(bool );
-
-    void set_page(QWebEnginePage*);
 
     void reset();
     const QString& currentLanguage() const;
@@ -55,7 +56,9 @@ private Q_SLOTS:
     void updateLineNumberArea(const QRect &rect, int dy);
     void vertical_scroll_value(int );
     void call_updateExtension(const QString&);
+#ifdef WEB_ENGINE
     void own_text_changed();
+#endif
 
 
 private:
@@ -70,7 +73,11 @@ private:
     ActionList *m_actions;
     bool        m_dark_mode;
     QSharedPointer<Highlighter> mHighlighter;
-    QWebEnginePage * m_web_page;
+#ifdef WEB_ENGINE
+    PreviewPage * m_web_page;
+public:
+    void set_page(PreviewPage*);
+#endif
 };
 
 class LineNumberArea : public QWidget
@@ -93,5 +100,44 @@ protected:
 private:
     code_browser *codeEditor;
 };
+
+#ifdef WEB_ENGINE
+
+class PreviewPage : public QWebEnginePage
+{
+    Q_OBJECT
+public:
+    enum class type { html, markdown };
+    explicit PreviewPage(QObject *parent = nullptr, QWebEngineView* view = nullptr);
+
+    void set_type(type type);
+
+    void load_markdown_page();
+
+protected:
+    bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame) override;
+
+private:
+    type m_type;
+    QWebEngineView* m_web_enginge_view;
+};
+
+class Document : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QString text MEMBER m_text NOTIFY textChanged FINAL)
+public:
+    explicit Document(QObject *parent = nullptr) : QObject(parent) {}
+
+    void setText(const QString &text);
+
+signals:
+    void textChanged(const QString &text);
+
+private:
+    QString m_text;
+};
+
+#endif
 
 #endif // CODE_BROWSER_H

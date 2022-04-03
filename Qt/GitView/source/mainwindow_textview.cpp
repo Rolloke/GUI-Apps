@@ -146,12 +146,15 @@ void MainWindow::updateSelectedLanguage(const QString& language)
     ui->labelLanguage->setText(tr(" Type: ") + language);
 }
 
+#ifdef WEB_ENGINE
 void MainWindow::show_web_view(bool show)
 {
 #ifdef DOCKED_VIEWS
-        showDockedWidget(ui->markdownView, !show);
+    QWidget* pView = (QWidget*)mWebEngineView.data();
+    showDockedWidget(pView, !show);
 #endif
 }
+#endif
 
 void MainWindow::invoke_highlighter_dialog()
 {
