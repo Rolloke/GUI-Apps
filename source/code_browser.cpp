@@ -285,6 +285,7 @@ void code_browser::own_text_changed()
             QString text = toPlainText();
             m_web_page->setHtml(text);
             Q_EMIT show_web_view(text.size() ? true : false);
+            setFocus();
         }
         else if (current_language == "markdown")
         {
