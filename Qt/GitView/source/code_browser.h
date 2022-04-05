@@ -122,12 +122,12 @@ private:
     QWebEngineView* m_web_enginge_view;
 };
 
-class Document : public QObject
+class MarkdownProxy : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text MEMBER m_text NOTIFY textChanged FINAL)
 public:
-    explicit Document(QObject *parent = nullptr) : QObject(parent) {}
+    explicit MarkdownProxy(QObject *parent = nullptr) : QObject(parent) {}
 
     void setText(const QString &text);
 
