@@ -342,7 +342,7 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
     }
 }
 
-void Document::setText(const QString &text)
+void MarkdownProxy::setText(const QString &text)
 {
     if (text == m_text)
         return;
