@@ -343,11 +343,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mWebEngineView->setPage(page);
     ui->textBrowser->set_page(page);
 
-    m_web_content.reset(new Document);
-    connect(ui->textBrowser, &code_browser::textChanged, [this]() { m_web_content->setText(ui->textBrowser->toPlainText()); });
+    m_markdown_proxy.reset(new MarkdownProxy);
+    connect(ui->textBrowser, &code_browser::textChanged, [this]() { m_markdown_proxy->setText(ui->textBrowser->toPlainText()); });
 
     QWebChannel *channel = new QWebChannel(this);
-    channel->registerObject(QStringLiteral("content"), m_web_content.data());
+    channel->registerObject(QStringLiteral("content"), m_markdown_proxy.data());
     page->setWebChannel(channel);
 #endif
 
@@ -598,7 +598,7 @@ void MainWindow::createDockWindows()
 
 #ifdef WEB_ENGINE
     // markdown view
-    dock = new QDockWidget(tr("Html & Markdown View"), this);
+    dock = new QDockWidget(tr("Html && Markdown"), this);
     // ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("markdown_view");
