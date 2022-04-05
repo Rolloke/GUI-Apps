@@ -25,7 +25,7 @@ class QAbstractButton;
 class binary_values_view;
 #ifdef WEB_ENGINE
 class QWebEngineView;
-class Document;
+class MarkdownProxy;
 #endif
 
 class MainWindow : public QMainWindow
@@ -248,7 +248,7 @@ private:
     QSharedPointer<binary_values_view> mBinaryValuesView;
 #ifdef WEB_ENGINE
     QSharedPointer<QWebEngineView> mWebEngineView;
-    QSharedPointer<Document>       m_web_content;
+    QSharedPointer<MarkdownProxy>  m_markdown_proxy;
 #endif
 
     QString               mFontName;
