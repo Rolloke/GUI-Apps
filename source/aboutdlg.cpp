@@ -11,6 +11,10 @@ AboutDlg::AboutDlg(QWidget *parent) :
         setWindowTitle(tr("About ") + parent->windowTitle());
         ui->labelTitle->setText(parent->windowTitle());
     }
+    QString based = ui->textBased_on->text();
+    based += qVersion(); //QT_VERSION_STR;
+    ui->textBased_on->setText(based);
+
     ui->textBuildDate->setText(__DATE__ + tr(", ") + __TIME__);
 }
 
