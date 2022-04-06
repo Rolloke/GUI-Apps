@@ -5,9 +5,11 @@
 #define MyAppVersion "1.1"
 #define MyAppPublisher "Rolf Kary-Ehlers"
 #define MyAppExeName "GitView.exe"
-#define BuildFolder "..\build\GitView-Desktop_Qt_5_9_9_MSVC2017_64bit-Release\release"
-#define QtDllFolder "C:\Qt\5.9.9\msvc2017_64\bin"
-#define QtPluginFolder "C:\Qt\5.9.9\msvc2017_64\plugins"
+#define BuildFolder "..\build\GitView-Desktop_Qt_5_9_9_MSVC2015_64bit-Release\release"
+#define QtDllFolder "C:\Qt\5.9.9\msvc2015_64\bin"
+#define QtPluginFolder "C:\Qt\5.9.9\msvc2015_64\plugins"
+#define QtTranslationsFolder "C:\Qt\5.9.9\msvc2015_64\translations"
+#define QtResourcesFolder "C:\Qt\5.9.9\msvc2015_64\resources"
 #define VisualStudio17="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE"
                     
 [Setup]
@@ -26,6 +28,8 @@ OutputDir=./build_MSVC17/
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
+AlwaysShowDirOnReadyPage=yes
+DisableDirPage=no
 
 
 
@@ -37,21 +41,42 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "{#BuildFolder}/{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/QtWebEngineProcess.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#QtDllFolder}/Qt5Multimedia.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#QtDllFolder}/Qt5SerialBus.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#QtDllFolder}/Qt5SerialPort.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5WebEngineWidgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5WebEngineCore.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5WebEngine.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5WebChannel.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5QuickWidgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5Quick.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5Qml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5PrintSupport.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QtDllFolder}/Qt5Positioning.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#VisualStudio17}\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#VisualStudio17}\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#VisualStudio17}\api-ms-win-crt-runtime-l1-1-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#QtPluginFolder}/audio/qtaudio_windows.dll"; DestDir: "{app}/plugins/audio"; Flags: ignoreversion
+;Source: "{#QtPluginFolder}/audio/qtaudio_windows.dll"; DestDir: "{app}/plugins/audio"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/iconengines/qsvgicon.dll"; DestDir: "{app}/plugins/iconengines"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qwebp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qwbmp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qtiff.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qtga.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qsvg.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qjpeg.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qico.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qicns.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtPluginFolder}/imageformats/qgif.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
+Source: "{#QtTranslationsFolder}/qtwebengine_locales/de.pak"; DestDir: "{app}/translations"; Flags: ignoreversion
+Source: "{#QtResourcesFolder}/icudtl.dat"; DestDir: "{app}\resources"; Flags: ignoreversion
+Source: "{#QtResourcesFolder}/qtwebengine_resources_200p.pak"; DestDir: "{app}\resources"; Flags: ignoreversion
+Source: "{#QtResourcesFolder}/qtwebengine_resources_100p.pak"; DestDir: "{app}\resources"; Flags: ignoreversion
+Source: "{#QtResourcesFolder}/qtwebengine_resources.pak"; DestDir: "{app}\resources"; Flags: ignoreversion
+Source: "{#QtResourcesFolder}/qtwebengine_devtools_resources.pak"; DestDir: "{app}\resources"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/platforms/qwindows.dll"; DestDir: "{app}/plugins/platforms"; Flags: ignoreversion
 Source: "./qt.conf"; DestDir: "{app}"; Flags: ignoreversion
 Source: "langs.model.xml"; DestDir: "{app}"; Flags: ignoreversion
