@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     QCommandLineParser cmd_line;
     cmd_line.addOption({{"c", cmdline::Config}, QObject::tr("Alternative Config file name."), "filename"});
-    cmd_line.addOption({{"log", cmdline::Log2file}, QObject::tr("Alternative Config file name."), "log2file"});
+    cmd_line.addOption({{"log", cmdline::Log2file}, QObject::tr("Log file name for debugging."), "log2file"});
 
     // For debugging purpose: --lang=../../source/GitView_de.qm
     cmd_line.addOption({{"lang", cmdline::Language}, QObject::tr("Language."), "language"});

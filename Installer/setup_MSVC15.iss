@@ -4,14 +4,14 @@
 #define MyAppName "GitView"
 #define MyAppVersion "1.1"
 #define MyAppPublisher "Rolf Kary-Ehlers"
-#define MyAppExeName "GitView.exe.exe"
-#define BuildFolder "..\build\GitView-Desktop_Qt_5_9_9_MinGW_32bit-Release\release"
-#define QtDllFolder "C:\Qt\5.9.9\mingw53_32\bin"
-#define QtPluginFolder "C:\Qt\5.9.9\mingw53_32\plugins"
+#define MyAppExeName "GitView.exe"
+#define BuildFolder "..\build\GitView-Desktop_Qt_5_9_9_MSVC2015_64bit-Release\release"
+#define QtDllFolder "C:\Qt\5.9.9\msvc2015_64\bin"
+#define QtPluginFolder "C:\Qt\5.9.9\msvc2015_64\plugins"
 #define QtTranslationsFolder "C:\Qt\5.9.9\msvc2015_64\translations"
 #define QtResourcesFolder "C:\Qt\5.9.9\msvc2015_64\resources"
 #define VisualStudio17="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE"
-
+                    
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -19,12 +19,12 @@
 AppId={{9A751E76-F6DC-4759-AED9-087BA26FF7EF}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-AppVerName={#MyAppName} {#MyAppVersion} based on Qt5 compiled for MinGW
+AppVerName={#MyAppName} {#MyAppVersion} based on Qt5 compiled for MSVC15
 AppPublisher={#MyAppPublisher}
 AppComments="Git Viewer"
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=./build_MinGW/
+OutputDir=./build_MSVC15/
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -57,9 +57,9 @@ Source: "{#QtDllFolder}/Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Qml.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5PrintSupport.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtDllFolder}/Qt5Positioning.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#QtDllFolder}/libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#QtDllFolder}/libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#QtDllFolder}/libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#VisualStudio17}\api-ms-win-crt-runtime-l1-1-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/iconengines/qsvgicon.dll"; DestDir: "{app}/plugins/iconengines"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qwebp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qwbmp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
