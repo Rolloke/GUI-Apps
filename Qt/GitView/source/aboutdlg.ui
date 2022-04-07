@@ -247,7 +247,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Build on:</string>
+    <string>Built on:</string>
    </property>
   </widget>
   <widget class="QLabel" name="labelBased_on">

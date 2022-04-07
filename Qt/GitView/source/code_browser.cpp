@@ -301,9 +301,6 @@ void code_browser::own_text_changed()
     }
 }
 
-
-#include <QDesktopServices>
-
 PreviewPage::PreviewPage(QObject *parent, QWebEngineView* view) : QWebEnginePage(parent)
 , m_type(type::html)
 , m_web_enginge_view(view)
@@ -338,7 +335,6 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
     }
     else
     {
-        QDesktopServices::openUrl(url);
         return false;
     }
 }

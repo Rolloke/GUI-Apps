@@ -4,6 +4,7 @@ Kikad/
 portaudio/
 CVS/
 *.aps
+*.bin
 *.user.*
 OpenDDS/
 *.geany
