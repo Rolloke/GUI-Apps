@@ -17,6 +17,11 @@
 #include <QInputDialog>
 #include <QClipboard>
 
+#ifdef WEB_ENGINE
+#include <QWebEngineView>
+#include <QWebEnginePage>
+#endif
+
 #include <fstream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
@@ -143,8 +148,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
     ui->tableView->setModel(mListModel);
-    ui->graphicsView->setScene(new QGraphicsScene ());
+#ifdef WEB_ENGINE
 
+    mWebEngineView.reset(new QWebEngineView(this));
+    // mWebEngineView->setContextMenuPolicy(Qt::NoContextMenu);
+    QWebEnginePage* page = new QWebEnginePage(this);
+    mWebEngineView->setPage(page);
+    ui->verticalLayout_2->removeWidget(ui->graphicsView);
+    delete ui->graphicsView;
+    ui->graphicsView = nullptr;
+    ui->verticalLayout_2->insertWidget(0, mWebEngineView.data());
+#else
+    ui->graphicsView->setScene(new QGraphicsScene ());
+#endif
     connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
     connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
@@ -256,15 +272,16 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
     if (mShowIcon)
     {
-        ui->graphicsView->scene()->clear();
         QString logoUrl = mListModel->data(mListModel->index(index.row(), eLogo)).toString();
-#if 0
-        QString style = tr("QGraphicsView:background-image: url(%1);").arg(logoUrl);
-        ui->graphicsView->setStyleSheet(style);
+#ifdef WEB_ENGINE
+        QString iconpage = tr("<!DOCTYPE html><html><head><title>Page Title</title></head>"
+        "<body style='background-color:white;' ><img src='%1' alt='%2' width='90%' height='90%'></body>"
+        "</html>").arg(logoUrl, mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString());
+        mWebEngineView->page()->setHtml(iconpage);
 #else
+        ui->graphicsView->scene()->clear();
         const QUrl url(logoUrl);
         QNetworkRequest request(url);
-
         QNetworkReply* reply = mNetManager.get(request);
         connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
 #endif
@@ -468,7 +485,7 @@ void MainWindow::menu_help_about()
             "\n"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
             "\n"
-            "Build on:\t%1, %2\n"
+            "Built on:\t%1, %2\n"
             "Author:\tRolf Kary Ehlers\n"
             "Version:\t%3\n"
             "License:\tGNU GPL Version 2\n"

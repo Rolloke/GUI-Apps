@@ -11,6 +11,7 @@
 
 
 class QModelIndex;
+class QWebEngineView;
 
 class CheckboxItemModel : public QStandardItemModel
 {
@@ -73,6 +74,7 @@ private:
     QMediaPlayer        mPlayer;
     CheckboxItemModel*  mListModel;
     QNetworkAccessManager mNetManager;
+    QSharedPointer<QWebEngineView> mWebEngineView;
     int                 mCurrentRowIndex;
     QList<int>          mHiddenColumns;
     QString             mFileOpenPath;
