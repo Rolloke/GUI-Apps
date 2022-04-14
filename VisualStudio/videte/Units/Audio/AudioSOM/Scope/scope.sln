@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scope", "scope.vcproj", "{0283B981-3503-421D-8D2E-387075B94E98}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/DXSDK/Filter/scope\u0022,\u0020TVBAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {DD9F7F01-E4ED-4D4C-B4FF-8238568419ED}
+		SccProjectUniqueName1 = scope.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug Unicode = Debug Unicode
+		Release = Release
+		Release Unicode = Release Unicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug.ActiveCfg = Debug|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug.Build.0 = Debug|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug Unicode.ActiveCfg = Debug Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug Unicode.Build.0 = Debug Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release.ActiveCfg = Release|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release.Build.0 = Release|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release Unicode.ActiveCfg = Release Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release Unicode.Build.0 = Release Unicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

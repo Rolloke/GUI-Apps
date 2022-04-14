@@ -1,0 +1,4110 @@
+
+@@ArchivSize
+Größe des Archivs
+
+@@CIPC_SHM_STRUCT
+Shared Memory Struktur
+
+@@CIPCExtraMemoryPtr
+Extra Memory Pointer
+
+@@theLogFileGenerator
+\Klasse zu Schreiben einer Logdatei für Module
+
+@@WK_DELETE_ARRAY
+<LINK Hilfmakros, Übersicht> 
+
+@@oc
+<TOPICORDER 1>
+<GROUP $Collection>
+
+@@WK_CLOSE_HANDLE
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_IS_WINDOW
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_ALONE
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_IS_RUNNING
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_DB_READY
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_DESTROY_WINDOW
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_TRACE_WARNING
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Trace Header, Übersicht> 
+
+@@WK_TRACE_USER
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Trace Header, Übersicht> 
+
+@@WK_STAT_LOG
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Trace Header, Übersicht> 
+
+@@WK_STAT_PEAK
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Trace Header, Übersicht> 
+
+@@GET_WK_STAT_TICK_COUNT
+<LINK Trace Header, Übersicht> 
+
+@@SET_WK_STAT_TICK_COUNT
+<LINK Trace Header, Übersicht> 
+
+@@WK_TRACE_EXCEPTION
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK Trace Header, Übersicht> 
+
+@@WK_CATCH
+<LINK Trace Header, Übersicht> 
+
+@@WK_PASSWORDLEN
+<LINK Password, Übersicht> 
+
+@@$WK_Makros
+<TITLE WK Makros und Funktionen>
+<TOPICORDER 0>
+
+@@WK_ALLOW_ALARM_OFF_SPAN
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_ARCHIV
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_BACKUP
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_HARDWARE
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_PICTURE	
+<LINK $WK_Makros, Übersicht> 
+
+@@WK_APP_NAME_PTUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SERVER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_ALLOW_DATA
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ASSERT
+<LINK Debug, Übersicht> 
+
+@@WK_CATCH
+<LINK $WK_Makros, Übersicht> 
+
+@@WK_DELETE
+<LINK Hilfmakros, Übersicht> 
+
+@@WK_MAGIC_DW_FETCH_RESULT
+<LINK $WK_Makros, Übersicht> 
+
+@@WK_PTR_ARRAY
+<LINK Template Makros, Übersicht> 
+
+@@WK_TRACE
+<LINK Trace Header, Übersicht> 
+
+@@WK_RegistryKey
+<LINK Globale Zeichenketten, Übersicht> 
+
+@@WK_WITH_DONGLE
+<LINK $WK_Makros, Übersicht> 
+
+@@WK_SMServerControlPres
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_ALLOW_DATA_EXPORT
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_DATE_TIME
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_DELETE
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_HOST
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_IMAGECOMPARE
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_INPUT
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_LINK
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_LOGVIEW
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_OUTPUT
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_PERMISSION
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_PROZESS
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_SDICONFIG
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_SECURITY
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_SETTINGS
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_SHUTDOWN
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_TIMER
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_ALLOW_USER
+<LINK Zugriffsrechte, Übersicht> 
+
+@@WK_APP_NAME_ACTUAL_IMAGE
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_AKUUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_ANALYZER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_COCOUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_COMMUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DB_CLIENT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DB_SERVER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DV_REMOTE_CD
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DV_WATCH_CD
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DVCLIENT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DVHOOK
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_DVSTARTER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_EXPLORER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_GAUUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_HTTP
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_IMAGE_COMPARE
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_ISDN
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_ISDN2
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_JACOB_TEST
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_JACOBUNIT1
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_JACOBUNIT2
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_JACOBUNIT3
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_JACOBUNIT4
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_LAUNCHER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_LOG_VIEW
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_MICOUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_MICOUNIT2
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_MICOUNIT3
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_MICOUNIT4
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_PRODUCT_VERSION
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_PRODUCT_VIEW
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_PTUNIT2
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SDICONFIG
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SDIUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SIMUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SOCKETS
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_SUPERVISOR
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APP_NAME_UPDATE_HANDLER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_CDRWRITER
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_EMAILUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_FAXUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_GEMOSUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_PRESUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_SMSUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_TOBSUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_APPNAME_VCSUNIT
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_DB_SERVER_READ_ONLY
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_DB_SERVER_READY
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_FAILED
+<LINK Debug, Übersicht> 
+
+@@WK_MEMORY_NAME_RELAISWATCHDOG
+<LINK Anwendungsnamen, Übersicht> 
+
+@@WK_MODULE_ADDRESS
+<LINK $WK_Makros, Übersicht> 
+
+@@WK_PASSWORD_MIN_ALPHA
+<LINK Password, Übersicht> 
+
+@@WK_PASSWORD_MIN_LEN
+<LINK Password, Übersicht> 
+
+@@WK_PASSWORD_MIN_NUM
+<LINK Password, Übersicht> 
+
+@@WK_PTR_ARRAY_CS
+<LINK Template Makros, Übersicht> 
+
+@@WK_PTR_LIST
+<LINK Template Makros, Übersicht> 
+
+@@WK_PTR_LIST_CS
+<LINK Template Makros, Übersicht> 
+
+@@WK_PTR_LIST_SEMA
+<LINK Template Makros, Übersicht> 
+
+@@WK_SecurityKey
+<LINK Globale Zeichenketten, Übersicht> 
+
+@@WK_SMClientControl
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMDatabaseControl
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlEMail
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControl
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlFAX
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlGemos
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlIsdn
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlIsdn2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlPT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlPT2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlSMS
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlTOBS
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMServerControlVcs
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_SMSocketControl
+<LINK SharedMemoryNames, Übersicht> 
+
+@@WK_TRACE_ERROR
+<LINK Trace Header, Übersicht> 
+
+@@WK_VERSION_NUMBER
+<LINK $WK_Makros, Übersicht> 
+
+@@ZEIT_LEN
+
+@@$WK_Makros
+<TITLE (WK) Makros und Funktionen>
+
+
+
+Klicken Sie auf <U>Gruppen Themen</U>, um die Makros und
+Funktionen nach Gruppen sortiert zu sehen.
+
+@@Zugriffsrechte
+<TITLE Zugriffsrechte>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+<LINK $WK_Makros, Übersicht>
+<B>
+Zugriffsrechte</B>
+
+<TABLE>
+Name                      Wert         \Beschreibung
+------------------------  -----------  --------------
+WK_ALLOW_HARDWARE         0x00000001   
+WK_ALLOW_INPUT            0x00000002   
+WK_ALLOW_OUTPUT           0x00000004   
+WK_ALLOW_TIMER            0x00000008   
+WK_ALLOW_PROZESS          0x00000010   
+WK_ALLOW_LINK             0x00000020   
+WK_ALLOW_USER             0x00000040   
+WK_ALLOW_PERMISSION       0x00000080   
+WK_ALLOW_HOST             0x00000100   
+WK_ALLOW_ARCHIV           0x00000200   
+WK_ALLOW_BACKUP           0x00000400   
+WK_ALLOW_SDICONFIG        0x00000800   
+WK_ALLOW_SHUTDOWN         0x00001000   
+WK_ALLOW_DATA_EXPORT      0x00002000   
+WK_ALLOW_SETTINGS         0x00004000   
+WK_ALLOW_SECURITY         0x00008000   
+WK_ALLOW_LOGVIEW          0x00010000   
+WK_ALLOW_DATE_TIME        0x00020000   
+WK_ALLOW_IMAGECOMPARE     0x00040000   
+WK_ALLOW_ALARM_OFF_SPAN   0x00080000   
+</TABLE>
+
+@@Anwendungsnamen
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> <B>
+Anwendungsnamen</B>
+
+<TABLE>
+Name                            Wert                       \Beschreibung
+------------------------------  -------------------------  --------------
+WK_APP_NAME_SERVER              SecurityServer             
+WK_APP_NAME_DB_SERVER           SecurityDatabaseServer     
+WK_APP_NAME_EXPLORER            SecurityExplorer           
+WK_APP_NAME_DB_CLIENT           SecurityDatabaseClient     
+WK_APP_NAME_SDICONFIG           SDIConfig                  
+WK_APP_NAME_DVCLIENT            DVClient                   
+WK_APP_NAME_DVSTARTER           DVStarter                  
+WK_APP_NAME_DVHOOK              DVHook                     
+WK_APP_NAME_HTTP                HTTP                       
+WK_APP_NAME_ISDN                ISDNUnit                   
+WK_APP_NAME_ISDN2               ISDNUnit2                  
+WK_APP_NAME_SOCKETS             SecuritySocketUnit         
+WK_APPNAME_SMSUNIT              SMSUnit                    
+WK_APPNAME_EMAILUNIT            EMailUnit                  
+WK_APPNAME_FAXUNIT              FAXUnit                    
+WK_APPNAME_GEMOSUNIT            GEMOSUnit                  
+WK_APP_NAME_COCOUNIT            CoCoUnit                   
+WK_APP_NAME_GAUUNIT             GAUnit                     
+WK_APP_NAME_COMMUNIT            CommUnit                   
+WK_APP_NAME_SIMUNIT             SimUnit                    
+WK_APP_NAME_SDIUNIT             SDIUnit                    
+WK_APP_NAME_MICOUNIT            MiCoUnit                   
+WK_APP_NAME_MICOUNIT2           MiCoUnit2                  
+WK_APP_NAME_MICOUNIT3           MiCoUnit3                  
+WK_APP_NAME_MICOUNIT4           MiCoUnit4                  
+WK_APP_NAME_JACOBUNIT1          JaCobUnit1                 
+WK_APP_NAME_JACOBUNIT2          JaCobUnit2                 
+WK_APP_NAME_JACOBUNIT3          JaCobUnit3                 
+WK_APP_NAME_JACOBUNIT4          JaCobUnit4                 
+WK_APP_NAME_JACOB_TEST          JaCobTest                  
+WK_APP_NAME_AKUUNIT             AkuUnit                    
+WK_APP_NAME_SUPERVISOR          SecuritySupervisor         
+WK_APP_NAME_LAUNCHER            SecurityLauncher           
+WK_APP_NAME_UPDATE_HANDLER      SecurityUpdateHandler      
+WK_APP_NAME_ANALYZER            Analyzer                   
+WK_APPNAME_VCSUNIT              VCSUnit                    
+WK_APPNAME_PRESUNIT             PresUnit                   
+WK_APP_NAME_PTUNIT              PresUnit                   
+WK_APP_NAME_PTUNIT2             PresUnit2                  
+WK_APPNAME_TOBSUNIT             TOBSUnit                   
+WK_APPNAME_CDRWRITER            CDRWriter                  
+WK_APP_NAME_PRODUCT_VIEW        ProductView                
+WK_APP_NAME_PRODUCT_VERSION     ProductVersion             
+WK_APP_NAME_LOG_VIEW            LogView                    
+WK_APP_NAME_IMAGE_COMPARE       ImageCompare               
+WK_APP_NAME_ACTUAL_IMAGE        ActualImage                
+WK_APP_NAME_DV_WATCH_CD         WatchCD                    
+WK_APP_NAME_DV_REMOTE_CD        RemoteCD                   
+WK_DB_SERVER_READY              SecurityDatabaseReady      
+WK_DB_SERVER_READ_ONLY          SecurityDatabaseReadOnly   
+WK_MEMORY_NAME_RELAISWATCHDOG   RelaisWatchDog             
+</TABLE>
+
+@@Globale Zeichenketten
+<TITLE Globale Zeichenketten>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+<LINK $WK_Makros, Übersicht> 
+
+<B>
+Globale Zeichenketten</B>
+
+<TABLE>
+Name             Wert                     \Beschreibung
+---------------  -----------------------  --------------
+WK_RegistryKey   w+k VideoCommunication   
+WK_SecurityKey   Security\\3.00           
+</TABLE>
+
+@@Hilfmakros
+<TITLE Hilfsmakros>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+<LINK $WK_Makros, Übersicht> 
+
+<B>
+Hilfsmakros</B>
+
+<TABLE>
+Name                      \Beschreibung
+------------------------  --------------
+WK_DELETE(ptr)            
+WK_DELETE_ARRAY(ptr)      
+WK_DESTROY_WINDOW(pWnd)   
+WK_CLOSE_HANDLE(h)        Inline Fkt.
+WK_IS_WINDOW(pWnd)        
+NAME_OF_CMD(x)            
+NAME_OF_ENUM(x)           
+WK_ALONE(myName)          Ext Class
+WK_IS_RUNNING(appName)    Ext Class
+WK_DB_READY()             Ext Class
+</TABLE>
+
+
+CAVEAT
+
+<TABLE>
+Name                                    \Beschreibung
+--------------------------------------  ----------------------------------------------------
+PRE_NOT_NULL(pData)                     DOES a return;
+PRE_NOT_NULL_UNLOCK(ptr,cs)             dito with embedded Unlock, macro without type check
+PRE_NOT_NULL_VALUE(ptr,val)             DOES a return;
+PRE_NOT_NULL_VALUE_UNLOCK(ptr,val,cs)   dito with embedded Unlock, macro without type check
+</TABLE>
+
+
+Bitmakros
+
+<TABLE>
+Name                  \Beschreibung
+--------------------  ----------------------------------------------------
+setbit(val,bit,set)   Setzt oder löscht ein Bit
+getbit(val,bit)       Bit gesetzt ?
+invbit(val,bit)       toggle Bit
+</TABLE>
+
+@@PRE_NOT_NULL
+<LINK Hilfmakros, Übersicht> 
+
+@@PRE_NOT_NULL_UNLOCK
+<LINK Hilfmakros, Übersicht> 
+
+@@PRE_NOT_NULL_VALUE
+<LINK Hilfmakros, Übersicht> 
+
+@@PRE_NOT_NULL_VALUE_UNLOCK
+<LINK Hilfmakros, Übersicht> 
+
+@@setbit
+<LINK Hilfmakros, Übersicht> 
+
+@@getbit
+<LINK Hilfmakros, Übersicht> 
+
+@@invbit
+<LINK Hilfmakros, Übersicht> 
+
+@@Debug
+<TITLE Debug>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> 
+<B>
+Debug</B>
+
+<TABLE>
+Name           \Beschreibung
+-------------  --------------
+WK_ASSERT(f)   
+WK_FAILED()    
+</TABLE>
+
+@@Trace Header
+<TITLE Trace Header>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> 
+<B>
+Trace (Ext Class)</B>
+
+<TABLE>
+Name                                        \Beschreibung
+------------------------------------------  --------------
+WK_TRACE(LPCSTR lpszFormat, ...)            
+WK_TRACE_ERROR(lpszFormat, ...)             
+WK_TRACE_WARNING(lpszFormat, ...)           
+WK_TRACE_USER(lpszFormat, ...)              
+WK_STAT_LOG(pszTopic,iValue,pszName)        
+WK_STAT_PEAK(pszTopic,iValue,pszName)       
+GET_WK_STAT_TICK_COUNT()                    
+SET_WK_STAT_TICK_COUNT(dwTick)              
+WK_TRACE_EXCEPTION(pszMessage,pException)   
+WK_CATCH(s)                                 
+</TABLE>
+
+@@Password
+<TITLE Password>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> 
+<B>
+Passwort</B>
+
+<TABLE>
+Name                    Wert   \Beschreibung
+----------------------  -----  --------------
+WK_PASSWORDLEN          30     
+WK_PASSWORD_MIN_LEN     0      
+WK_PASSWORD_MIN_ALPHA   0      
+WK_PASSWORD_MIN_NUM     0      
+</TABLE>
+
+@@Template Makros
+<TITLE Template Makros>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> 
+<B>
+Template Makros</B>
+
+<TABLE>
+Name                                    \Beschreibung
+--------------------------------------  --------------
+WK_PTR_ARRAY(CNAME,TYPE)                
+WK_PTR_ARRAY_CS(CNAME,TYPE,CNAME_CS)    
+WK_PTR_LIST(CNAME, TYPE)                
+WK_PTR_LIST_CS(CNAME,TYPE,CNAME_CS)     
+WK_PTR_LIST_SEMA(CNAME,TYPE,CNAME_CS)   
+</TABLE>
+
+@@NAME_OF_CMD
+<LINK Hilfmakros, Übersicht> 
+
+@@NAME_OF_ENUM
+<LINK Hilfmakros, Übersicht> 
+
+@@SharedMemoryNames
+<TITLE Shared Memory Namen>
+<TOPICORDER 1>
+<GROUP $WK_Makros>
+
+
+<LINK $WK_Makros, Übersicht> 
+<B>
+Common</B>
+
+<TABLE>
+Name                 Wert              \Beschreibung
+-------------------  ----------------  --------------
+SM_SIMUNIT_INPUT     SIMUNITInput      
+SM_SIMUNIT_OUTPUT    SIMUNITOutput     
+SM_GAUNIT_INPUT      GAUnitInput       
+SM_GAUNIT_OUTPUT     GAUnitOutput      
+SM_SDIUNIT_INPUT     SDIUnitInput      
+SM_GEMOSUNIT_INPUT   GemosUnitInput    
+SM_COMMUNIT_INPUT    CommUnitInput     
+SM_COMMUNIT_OUTPUT   CommUnitOutput    
+SM_SWCODEC_INPUT     SWCodec1 Input    
+SM_SWCODEC_OUTPUT    SWCodec1 Output   
+SM_DATABASE_SERVER   DataBaseServer    
+</TABLE>
+<B>
+Coco</B>
+
+<TABLE>
+Name                    Wert                        \Beschreibung
+----------------------  --------------------------  --------------
+SM_COCO_INPUT0          CoCoUnitInput0              
+SM_COCO_INPUT1          CoCoUnitInput1              
+SM_COCO_INPUT2          CoCoUnitInput2              
+SM_COCO_INPUT3          CoCoUnitInput3              
+SM_COCO_OUTPUT_CAM0     CoCoUnitOutputCameraCoCo0   
+SM_COCO_OUTPUT_CAM1     CoCoUnitOutputCameraCoCo1   
+SM_COCO_OUTPUT_CAM2     CoCoUnitOutputCameraCoCo2   
+SM_COCO_OUTPUT_CAM3     CoCoUnitOutputCameraCoCo3   
+SM_COCO_OUTPUT_RELAY0   CoCoUnitOutputRelay0        
+SM_COCO_OUTPUT_RELAY1   CoCoUnitOutputRelay1        
+SM_COCO_OUTPUT_RELAY2   CoCoUnitOutputRelay2        
+SM_COCO_OUTPUT_RELAY3   CoCoUnitOutputRelay3        
+</TABLE>
+<B>
+Mico</B>
+
+<TABLE>
+Name                      Wert                    \Beschreibung
+------------------------  ----------------------  --------------
+SM_MICO_INPUT             MiCoUnitInput           
+SM_MICO_OUTPUT_CAMERAS    MiCoUnitOutputCamera    
+SM_MICO_OUTPUT_RELAYS     MiCoUnitOutputRelay     
+SM_MICO_INPUT2            MiCoUnitInput2          
+SM_MICO_OUTPUT_CAMERAS2   MiCoUnitOutputCamera2   
+SM_MICO_OUTPUT_RELAYS2    MiCoUnitOutputRelay2    
+SM_MICO_INPUT3            MiCoUnitInput3          
+SM_MICO_OUTPUT_CAMERAS3   MiCoUnitOutputCamera3   
+SM_MICO_OUTPUT_RELAYS3    MiCoUnitOutputRelay3    
+SM_MICO_INPUT4            MiCoUnitInput4          
+SM_MICO_OUTPUT_CAMERAS4   MiCoUnitOutputCamera4   
+SM_MICO_OUTPUT_RELAYS4    MiCoUnitOutputRelay4    
+</TABLE>
+<B>
+Jacob</B>
+
+<TABLE>
+Name                        Wert                   \Beschreibung
+--------------------------  ---------------------  --------------
+SM_MICO_MD_INPUT            MiCoUnitMDInput        
+SM_MICO_MD_INPUT2           MiCoUnitMDInput2       
+SM_MICO_MD_INPUT3           MiCoUnitMDInput3       
+SM_MICO_MD_INPUT4           MiCoUnitMDInput4       
+EV_MICO_TRIGGER_WATCHDOG    MiCoTriggerWatchDog    
+EV_MICO_PIEZO               MiCoPiezoOnOff         
+EV_JACOB_TRIGGER_WATCHDOG   JaCobTriggerWatchDog   
+EV_JACOB_PIEZO              JaCobPiezoOnOff        
+</TABLE>
+
+<B>
+Security</B>
+
+<TABLE>
+Name                Wert                    \Beschreibung
+------------------  ----------------------  --------------
+SM_LAUNCHER         SecurityLauncher        
+SM_LAUNCHER_INPUT   SecurityLauncherInput   
+SM_AKU_INPUT        AkuUnitInput            
+SM_AKU_OUTPUT       AkuUnitOutput           
+</TABLE>
+<B>
+Server</B>
+
+<TABLE>
+Name                      Wert                 \Beschreibung
+------------------------  -------------------  --------------
+WK_SMServerControl        ServerControl        
+WK_SMServerControlIsdn    ServerControlIsdn    
+WK_SMServerControlIsdn2   ServerControlIsdn2   
+WK_SMDatabaseControl      DatabaseControl      
+WK_SMClientControl        ClientControl        
+WK_SMSocketControl        WK_SMTcp             
+WK_SMServerControlVcs     ServerControlVcs     
+WK_SMServerControlSMS     ServerControlSMS     
+WK_SMServerControlEMail   ServerControlEMail   
+WK_SMServerControlFAX     ServerControlFAX     
+WK_SMServerControlGemos   ServerControlGemos   
+WK_SMServerControlPres    ServerControlPres    
+WK_SMServerControlPT      ServerControlPres    
+WK_SMServerControlPT2     ServerControlPres2   
+WK_SMServerControlTOBS    ServerControlTOBS    
+</TABLE>
+
+@@SM_AKU_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_AKU_OUTPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_INPUT0
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_INPUT1
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_INPUT2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_INPUT3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_CAM0
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_CAM1
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_CAM2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_CAM3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_RELAY0
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_RELAY1
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_RELAY2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COCO_OUTPUT_RELAY3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_DATABASE_SERVER
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_SWCODEC_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_SWCODEC_OUTPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COMMUNIT_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_COMMUNIT_OUTPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_GAUNIT_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_GAUNIT_OUTPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_GEMOSUNIT_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_LAUNCHER
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_LAUNCHER_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_INPUT2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_INPUT3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_INPUT4
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_MD_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_MD_INPUT2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_MD_INPUT3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_MD_INPUT4
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_SIMUNIT_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_CAMERAS
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_CAMERAS2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_CAMERAS3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_CAMERAS4
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_RELAYS
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_RELAYS2
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_RELAYS3
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_MICO_OUTPUT_RELAYS4
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_SDIUNIT_INPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@SM_SIMUNIT_OUTPUT
+<LINK SharedMemoryNames, Übersicht> 
+
+@@EV_MICO_TRIGGER_WATCHDOG
+<LINK SharedMemoryNames, Übersicht> 
+
+@@BBT_CALCULATE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@BBT_EXECUTE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@BBT_PROGRESS
+<LINK CIPCDBCommands, Übersicht> 
+
+@@BBT_FINISHED
+<LINK CIPCDBCommands, Übersicht> 
+
+@@BBT_CALCULATE_END
+<LINK CIPCDBCommands, Übersicht> 
+
+@@DBEC_ARCHIVE_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_DELETE_SEQUENCE_DENIED
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_ARCHIVE_DELETE_FAILED
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_ARCHIVE_DELETE_DENIED
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_RECORD_NR_NO_SEQUENCE
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_RECORD_NR_NO_ARCHIVE
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_SEQUENCE_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_SAVE_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_RECORD_NR_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_CAMERA_NAMES_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_QUERY_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_DELETE_SEQUENCE_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_DELETE_ARCHIVE_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_DRIVES_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_BACKUP_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@DBEC_FIELD_INFO_DURING_RESET
+<LINK CIPCDataBaseErrorCodes, Übersicht> 
+
+@@EV_MICO_PIEZO
+<LINK SharedMemoryNames, Übersicht> 
+
+@@EV_JACOB_TRIGGER_WATCHDOG
+<LINK SharedMemoryNames, Übersicht> 
+
+@@EV_JACOB_PIEZO
+<LINK SharedMemoryNames, Übersicht> 
+
+@@$Collection
+<TITLE Collection>
+
+@@$CIPCDataBase
+<TITLE CIPC Datenbank>
+<TOPICORDER 0>
+
+@@CIPCDataBaseErrorCodes
+<TITLE Fehlercodes>
+<TOPICORDER 1>
+<GROUP $CIPCDataBase>
+
+
+
+<B>
+Fehlercodes</B>
+
+<TABLE>
+Name                                Wert   \Beschreibung
+----------------------------------  -----  ---------------------------------------
+DBEC_ARCHIVE_DURING_RESET           0      client tried to get archive list
+                                            during database reset
+DBEC_DELETE_SEQUENCE_DENIED         1      client denied to delete a sequence
+DBEC_ARCHIVE_DELETE_FAILED          1      failed to delete archive
+DBEC_ARCHIVE_DELETE_DENIED          2      client denied to delete archive
+DBEC_RECORD_NR_NO_SEQUENCE          3      client tried to get a record but
+                                            sequence No is invalid
+DBEC_RECORD_NR_NO_ARCHIVE           4      client tried to get a record but
+                                            archive No is invalid
+DBEC_SEQUENCE_DURING_RESET          4      client tried to get a sequence list
+                                            during database reset
+DBEC_SAVE_DURING_RESET              6      client tried to save during database
+                                            reset
+DBEC_RECORD_NR_DURING_RESET         11     client tried to get a record during
+                                            database reset
+DBEC_CAMERA_NAMES_DURING_RESET      12     client tried to get camera names
+                                            during database reset
+DBEC_QUERY_DURING_RESET             16     client tried to query during database
+                                            reset
+DBEC_DELETE_SEQUENCE_DURING_RESET   18     client tried to delete a sequence
+                                            during database reset
+DBEC_DELETE_ARCHIVE_DURING_RESET    19     client tried to delete an archive
+                                            during database reset
+DBEC_DRIVES_DURING_RESET            20     client tried to get drives during
+                                            database reset
+DBEC_BACKUP_DURING_RESET            21     client tried to backup during database
+                                            reset
+DBEC_FIELD_INFO_DURING_RESET        23     client tried to get field info during
+                                            database reset
+</TABLE>
+
+@@CIPCDBCommands
+<TITLE Kommandos>
+<TOPICORDER 1>
+<GROUP $CIPCDataBase>
+
+<B>Kommandos</B>
+<TABLE>
+Name                                   Wert    \Beschreibung
+-------------------------------------  ------  --------------
+CIPC_DB_REQUEST_INFO                   12001   
+CIPC_DB_CONFIRM_INFO                   12002   
+CIPC_DB_REQUEST_SAVE_PICTURE           12003   
+CIPC_DB_REQUEST_FILELIST               12004   
+CIPC_DB_INDICATE_ARCHIVE_FILE          12005   
+CIPC_DB_REQUEST_OPEN_FILE              12006   
+CIPC_DB_CONFIRM_OPEN_FILE              12007   
+CIPC_DB_REQUEST_FILE_CLOSED            12008   
+CIPC_DB_INDICATE_FILE_CLOSED           12009   
+CIPC_DB_REQUEST_REC_NO                 12010   
+CIPC_DB_CONFIRM_REC_NO                 12011   
+CIPC_DB_REQUEST_QUERY                  12012   
+CIPC_DB_CONFIRM_QUERY                  12013   
+CIPC_DB_REQUEST_REMOVE_FILE            12014   
+CIPC_DB_INDICATE_REMOVE_FILE           12015   
+CIPC_DB_INDICATE_QUERY_RESULT          12016   
+CIPC_DB_RESPONSE_QUERY_RESULT          12017   
+CIPC_DB_REQUEST_CHANGE_INFO            12018   
+CIPC_DB_CONFIRM_CHANGE_INFO            12019   
+CIPC_DB_REQUEST_FLUSH                  12020   
+CIPC_DB_REQUEST_SAVE_BY_HOST           12021   
+CIPC_DB_REQUEST_BACKUP_INFO            12022   
+CIPC_DB_CONFIRM_BACKUP_INFO            12023   
+CIPC_DB_BACKUP_INDICATE_ARCHIVE_FILE   12024   
+CIPC_DB_BACKUP_REQUEST_OPEN_FILE       12025   
+CIPC_DB_BACKUP_CONFIRM_OPEN_FILE       12026   
+CIPC_DB_BACKUP_REQUEST_FILE_CLOSED     12027   
+CIPC_DB_BACKUP_INDICATE_FILE_CLOSED    12028   
+CIPC_DB_BACKUP_REQUEST_REC_NO          12029   
+CIPC_DB_BACKUP_CONFIRM_REC_NO          12030   
+</TABLE>
+<B>Kommandos ab 3.6</B>
+<TABLE>
+Name                             Wert    \Beschreibung
+-------------------------------  ------  --------------
+CIPC_DB_INDICATE_REMOVE_ARCHIV   12031   
+CIPC_DB_INDICATE_NEW_ARCHIV      12032   
+</TABLE>
+<B>Kommandos ab 4.0</B>
+<TABLE>
+Name                                  Wert    \Beschreibung
+------------------------------------  ------  --------------
+CIPC_DB_REQUEST_SEQUENCE_LIST         12033   
+CIPC_DB_CONFIRM_SEQUENCE_LIST         12034   
+CIPC_DB_REQUEST_RECORD_NR             12035   
+CIPC_DB_CONFIRM_RECORD_NR             12036   
+CIPC_DB_REQUEST_DELETE_SEQUENCE       12037   
+CIPC_DB_INDICATE_DELETE_SEQUENCE      12038   
+CIPC_DB_INDICATE_NEW_SEQUENCE         12039   
+CIPC_DB_REQUEST_FIELD_INFO            12040   
+CIPC_DB_CONFIRM_FIELD_INFO            12041   
+CIPC_DB_NEW_REQUEST_SAVE              12042   
+CIPC_DB_NEW_REQUEST_SAVE_FOR_HOST     12043   
+CIPC_DB_REQUEST_NEW_QUERY             12044   
+CIPC_DB_INDICATE_NEW_QUERY_RESULT     12045   
+CIPC_DB_REQUEST_DRIVES                12046   
+CIPC_DB_CONFIRM_DRIVES                12047   
+CIPC_DB_REQUEST_BACKUP                12048   
+CIPC_DB_CONFIRM_BACKUP                12049   
+CIPC_DB_REQUEST_CANCEL_BACKUP         12050   
+CIPC_DB_CONFIRM_CANCEL_BACKUP         12051   
+CIPC_DB_REQUEST_DELETE_ARCHIV         12052   
+CIPC_DB_REQUEST_CAMERA_NAMES          12053   
+CIPC_DB_CONFIRM_CAMERA_NAMES          12054   
+CIPC_DB_NEW_CONFIRM_SAVE              12055   
+CIPC_DB_REQUEST_BACKUP_BY_TIME        12056   
+CIPC_DB_CONFIRM_BACKUP_BY_TIME        12057   
+CIPC_DB_REQUEST_ALARM_LIST_ARCHIVES   12058   
+CIPC_DB_CONFIRM_ALARM_LIST_ARCHIVES   12059   
+CIPC_DB_REQUEST_ALARM_LIST_RECORD     12060   
+CIPC_DB_CONFIRM_ALARM_LIST_RECORD     12061   
+CIPC_DB_REQUEST_SAVE_DATA             12062   
+CIPC_DB_REQUEST_RECORDS               12063   
+CIPC_DB_CONFIRM_RECORDS               12064   
+</TABLE>
+<B>
+
+Weitere</B>
+<TABLE>
+Name                Wert   \Beschreibung
+------------------  -----  --------------
+BBT_CALCULATE       0x01   
+BBT_EXECUTE         0x02   
+BBT_PROGRESS        0x04   
+BBT_FINNISHED       0x08   
+BBT_CALCULATE_END   0x10   
+</TABLE>
+
+@@CIPC_DB_BACKUP_CONFIRM_OPEN_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_CONFIRM_REC_NO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_INDICATE_ARCHIVE_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_INDICATE_FILE_CLOSED
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_REQUEST_FILE_CLOSED
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_REQUEST_OPEN_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_BACKUP_REQUEST_REC_NO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_ALARM_LIST_ARCHIVES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_ALARM_LIST_RECORD
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_BACKUP
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_BACKUP_BY_TIME
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_BACKUP_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_CAMERA_NAMES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_CANCEL_BACKUP
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_CHANGE_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_DRIVES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_FIELD_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_OPEN_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_QUERY
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_REC_NO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_RECORD_NR
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_RECORDS
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_CONFIRM_SEQUENCE_LIST
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_ARCHIVE_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_DELETE_SEQUENCE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_FILE_CLOSED
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_NEW_ARCHIV
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_NEW_QUERY_RESULT
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_NEW_SEQUENCE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_QUERY_RESULT
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_REMOVE_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_NEW_CONFIRM_SAVE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_NEW_REQUEST_SAVE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_NEW_REQUEST_SAVE_FOR_HOST
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_ALARM_LIST_ARCHIVES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_ALARM_LIST_RECORD
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_BACKUP
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_BACKUP_BY_TIME
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_BACKUP_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_CAMERA_NAMES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_CANCEL_BACKUP
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_CHANGE_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_DELETE_ARCHIV
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_DELETE_SEQUENCE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_DRIVES
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_FIELD_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_FILE_CLOSED
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_FILELIST
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_FLUSH
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_NEW_QUERY
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_OPEN_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_QUERY
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_REC_NO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_RECORD_NR
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_RECORDS
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_REMOVE_FILE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_SAVE_BY_HOST
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_SAVE_DATA
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_SAVE_PICTURE
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_RESPONSE_QUERY_RESULT
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_INFO
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_INDICATE_REMOVE_ARCHIV
+<LINK CIPCDBCommands, Übersicht> 
+
+@@CIPC_DB_REQUEST_SEQUENCE_LIST
+<LINK CIPCDBCommands, Übersicht> 
+
+@@$CIPCBase
+<TITLE CIPC Basiselemente>
+<TOPICORDER 0>
+
+<B>Basiselemente</B>
+
+
+<TABLE>
+Name           Wert    \Beschreibung
+-------------  ------  --------------
+CIPC_VERSION   2
+CIPC_MASTER	   TRUE	   CIPC master
+CIPC_SLAVE	   FALSE   CIPC slave
+</TABLE>
+
+@@CIPC_VERSION
+<LINK $CIPCBase, Übersicht> 
+
+@@CIPC_MASTER
+<LINK $CIPCBase, Übersicht> 
+
+@@CIPC_SLAVE
+<LINK $CIPCBase, Übersicht> 
+
+
+@@CIPCBaseCmd
+<TITLE Kommandos>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Kommandos</B>
+
+
+<TABLE>
+Name                             Wert     \Beschreibung
+-------------------------------  -------  --------------
+CIPC_BASE_REQ_CONNECTION         11001
+CIPC_BASE_CONF_CONNECTION		 11002
+CIPC_BASE_INDICATE_ERROR		 11004
+CIPC_BASE_REQUEST_SET_GROUP_ID	 11005
+CIPC_BASE_CONFIRM_SET_GROUP_ID	 11006
+CIPC_BASE_REQUEST_GET_VALUE		 11007
+CIPC_BASE_CONFIRM_GET_VALUE		 11008
+CIPC_BASE_REQUEST_SET_VALUE		 11009
+CIPC_BASE_CONFIRM_SET_VALUE		 11014
+CIPC_BASE_REQUEST_BITRATE		 110010
+CIPC_BASE_CONFIRM_BITRATE		 110011
+CIPC_BASE_REQUEST_VERSION		 110012
+CIPC_BASE_CONFIRM_VERSION		 110013
+</TABLE>
+
+@@CIPC_BASE_REQ_CONNECTION
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONF_CONNECTION
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_INDICATE_ERROR
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_REQUEST_SET_GROUP_ID
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONFIRM_SET_GROUP_ID
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_REQUEST_GET_VALUE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONFIRM_GET_VALUE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_REQUEST_SET_VALUE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONFIRM_SET_VALUE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_REQUEST_BITRATE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONFIRM_BITRATE
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_REQUEST_VERSION
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPC_BASE_CONFIRM_VERSION
+<LINK CIPCBaseCmd, Übersicht> 
+
+@@CIPCBaseErrors
+<TITLE Fehlercodes>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Fehlercodes</B>
+
+
+<TABLE>
+Name                              Wert   \Beschreibung
+--------------------------------  -----  -----------------------------------
+CIPC_ERROR_OKAY                   0      okay value
+CIPC_ERROR_USER_DEFINED           1      depends on the context. Used if no
+                                          other value fits.
+CIPC_ERROR_INVALID_GROUP          2      the group id is not valid
+CIPC_ERROR_INVALID_SUBID          3      the sub id is not valid
+CIPC_ERROR_UNHANDLED_CMD          4      reserved for CIPC cmds
+CIPC_ERROR_INVALID_RANGE          5      value ot of range
+CIPC_ERROR_INVALID_VALUE          6      set or get value unknown key
+CIPC_ERROR_UNKNOWN                7      an invalid error
+CIPC_ERROR_INVALID_USER           8      the user is unknown or invalid
+CIPC_ERROR_INVALID_PERMISSIONS    9      the permission is unknown or
+                                          invalid
+CIPC_ERROR_INVALID_PASSWORD       10     the password is wrong
+CIPC_ERROR_INVALID_HOST           11     the host is unknown
+CIPC_ERROR_UNABLE_TO_CONNECT      12     cannot connect
+                                         errorCode 1: link-modul not found,
+                                          2: server not found, 3: server
+                                          performs reset 4: max clients
+                                          reached 5: writeChannel busy
+CIPC_ERROR_INVALID_ARCHIVE        13     invalid archive nr
+CIPC_ERROR_ARCHIVE_FULL           14     archive is full
+CIPC_ERROR_ARCHIVE                15     common archiving error
+CIPC_ERROR_ARCHIVE_SEARCH         16     error during a query
+CIPC_ERROR_CANT_DECODE            17     unable to decode (not supported by
+                                          hardware)
+CIPC_ERROR_CAMERA_NOT_PRESENT     18     a camera signal is present
+                                          errorCode 1
+                                         or not present error code 0
+CIPC_ERROR_FILE_UPDATE            19     error updating of a file
+CIPC_ERROR_GET_FILE               20     error getting a file
+CIPC_ERROR_ARCHIVE_LOCAL_SEARCH   21     error local database query
+CIPC_ERROR_ACCESS_DENIED          22     access denied
+CIPC_ERROR_BACKUP                 23     error during backup
+                                         errorCode 1 delete sequence
+CIPC_ERROR_BUSY                   24     no connection line is busy
+CIPC_ERROR_CANCELLED              25     connection was cancelled by user
+CIPC_ERROR_MEMORY                 26     \internal memory error
+CIPC_ERROR_INVALID_SERIAL         27     invalid serial number
+</TABLE>
+
+@@CIPCError
+<LINK CIPCBaseErrors, Übersicht> 
+
+@@CIPC_ERROR
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK CIPCBaseErrors, Übersicht> 
+
+@@CIPCBaseStates
+<TITLE Zustände>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Zustände</B>
+
+
+<TABLE>
+Name                        Wert   \Beschreibung
+-------------------------   -----  ------------------------------------------
+CIPC_STATE_INVALID			0      initial state
+CIPC_STATE_WRITE_CREATED	1      write channel created
+CIPC_STATE_READ_FOUND		2      read channel found
+CIPC_STATE_CONNECTED		3      the 'normal' action state
+CIPC_STATE_DISCONNECTED		4      between OnRequestDisconnect and reconnect
+</TABLE>
+
+@@CIPC_STATE
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK CIPCBaseStates, Übersicht> 
+
+@@CIPCState
+<LINK CIPCBaseStates, Übersicht> 
+
+@@BitValarm
+<TITLE Virtuelle Alarme>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Virtuelle Alarme</B>
+
+
+<TABLE>
+Name                                Wert   \Beschreibung
+----------------------------------  -----  --------------
+BIT_VALARM_ARCHIVE_60PERCENT_FULL	0
+BIT_VALARM_ARCHIVE_FULL				1
+BIT_VALARM_KAMERAMISSING			2
+
+BIT_VALARM_OUTGOING_CALL_TCP		3	
+BIT_VALARM_INCOMING_CALL_TCP		4 	
+BIT_VALARM_REJECT_TCP				5	
+
+BIT_VALARM_OUTGOING_CALL_ISDN1		6
+BIT_VALARM_INCOMING_CALL_ISDN1		7
+BIT_VALARM_REJECT_ISDN1				8
+
+BIT_VALARM_OUTGOING_CALL_PT1		9	
+BIT_VALARM_INCOMING_CALL_PT1		10
+BIT_VALARM_REJECT_PT1				11
+
+BIT_VALARM_OUTGOING_CALL_ISDN2		12
+BIT_VALARM_INCOMING_CALL_ISDN2		13
+BIT_VALARM_REJECT_ISDN2				14
+
+BIT_VALARM_OUTGOING_CALL_PT2		15
+BIT_VALARM_INCOMING_CALL_PT2		16	
+BIT_VALARM_REJECT_PT2				17
+BIT_VALARM_CHECK_CALL_ERROR			18
+
+BIT_VALARM_ALWAYS_ALARM				19
+BIT_VALARM_CHECK_CALL_OK			20
+BIT_VALARM_ALARM_OFF_SPAN			21
+</TABLE>
+
+@@BIT_VALARM_ARCHIVE_60PERCENT_FULL
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_ARCHIVE_FULL
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_KAMERAMISSING
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_OUTGOING_CALL_TCP
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_INCOMING_CALL_TCP
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_REJECT_TCP
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_OUTGOING_CALL_ISDN1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_INCOMING_CALL_ISDN1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_REJECT_ISDN1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_OUTGOING_CALL_PT1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_INCOMING_CALL_PT1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_REJECT_PT1
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_OUTGOING_CALL_ISDN2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_INCOMING_CALL_ISDN2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_REJECT_ISDN2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_OUTGOING_CALL_PT2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_INCOMING_CALL_PT2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_REJECT_PT2
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_CHECK_CALL_ERROR
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_ALWAYS_ALARM
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_CHECK_CALL_OK
+<LINK BitValarm, Übersicht> 
+
+@@BIT_VALARM_ALARM_OFF_SPAN
+<LINK BitValarm, Übersicht> 
+
+@@CIPCBaseInp
+<TITLE Eingabe Makros>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Eingabe Makros</B>
+
+Setup Dialog
+
+<TABLE>
+Name             Wert   \Beschreibung
+---------------  -----  ---------------------------------------
+INP_REQ_SETUP    1		dwParam1: GroupID
+INP_CONF_SETUP   2		dwParam1: GroupID
+INP_REQ_INFO     3		dwParam1 wGroupID, SECID_NO_ID for all
+INP_CONF_INFO    4
+</TABLE>
+
+Reset Inputmodule
+
+<TABLE>
+Name             Wert   \Beschreibung
+---------------  -----  ------------------
+INP_REQ_RESET    5		dwParam1: GroupID
+INP_CONF_RESET   6		dwParam1: GroupID
+</TABLE>
+
+Set EDGE
+
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  -----------------------------------------------------------------------
+INP_REQ_SETEDGE   7		 dwParam1: GroupID, dwParam2: Edge-Bitmask.  1: pos. edge, 0: neg. edge 
+INP_CONF_EDGE     8		 dwParam1: GroupID, dwParam2: Edge-Bitmask.  1: pos. edge, 0: neg. edge 
+</TABLE>
+
+Open or close input channel
+
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  -------------------------------------------------------------------------
+INP_REQ_SETFREE   9		 dwParam1: GroupID, dwParam2: Open-Bitmask.  1: inp. open, 0: inp. closed 
+INP_CONF_FREE     10	 dwParam1: GroupID, dwParam2: Open-Bitmask.  1: inp. open, 0: inp. closed 
+</TABLE>
+
+Get/Indicate alarm state
+
+<TABLE>
+Name                Wert   \Beschreibung
+------------------  -----  --------------------------------------------------------------
+INP_REQ_AL_STATE    13     dwParam1: GroupID,
+INP_CONF_AL_STATE   14	   dwParam1: GroupID, 
+                            dwParam2: Input-Bitmask.  1: high (alarm), 0: low,
+							dwParam3: Change-Bitmask. 1: input has changed, 0: no change 
+INP_IND_AL_STATE	15	   dwParam1: GroupID,
+                            dwParam2: Input-Bitmask.  1: high (alarm), 0: low 
+                            dwParam3: Change-Bitmask. 1: input has changed, 0: no change
+INP_RESP_AL_STATE	16     dwParam1: GroupID
+</TABLE>
+
+Hardware state request/indication
+
+<TABLE>
+Name                          Wert   \Beschreibung
+----------------------------  -----  -----------------------------------------------------
+INP_REQ_HARDWARE              19     dwParam1: GroupID
+INP_CONF_HARDWARE             20     dwParam1: GroupID, dwParam2: 0: no error, !=0: error
+INP_INDICATE_ALARM_INFO		  21
+INP_REQUEST_GET_FILE		  33
+INP_CONFIRM_GET_FILE		  34
+INP_REQUEST_FILE_UPDATE		  35
+INP_CONFIRM_FILE_UPDATE		  36
+INP_INDICATE_COMM_DATA		  37
+INP_WRITE_COMM_DATA			  38
+INP_CONFIRM_WRITE_COMM_DATA	  39
+INP_REQUEST_CAMERA_CONTROL    40
+</TABLE>
+
+Alarm
+
+<TABLE>
+Name                              Wert   \Beschreibung
+--------------------------------  -----  --------------
+INP_IND_ALARM_FIELD_STATE         41
+INP_IND_ALARM_FIELD_UPDATE	      42
+INP_CONFIRM_ALARM			      47
+INP_INDICATE_ALARM_NR		      48
+INP_REQUEST_GET_ALARM_OFF_SPANS	  49
+INP_CONFIRM_GET_ALARM_OFF_SPANS	  50
+INP_REQUEST_SET_ALARM_OFF_SPANS	  51
+INP_CONFIRM_SET_ALARM_OFF_SPANS	  52
+</TABLE>
+
+
+System Time
+
+<TABLE>
+Name                          Wert   \Beschreibung
+----------------------------  -----  --------------
+INP_REQUEST_GET_SYSTEM_TIME	  43
+INP_CONFIRM_GET_SYSTEM_TIME	  44
+INP_REQUEST_SET_SYSTEM_TIME	  45
+INP_CONFIRM_SET_SYSTEM_TIME	  46
+</TABLE>
+
+Time Zone
+
+<TABLE>
+Name                                     Wert   \Beschreibung
+---------------------------------------  -----  --------------
+INP_REQUEST_GET_ZIME_ZONE_INFORMATION	 53
+INP_CONFIRM_GET_ZIME_ZONE_INFORMATION	 54
+INP_REQUEST_SET_ZIME_ZONE_INFORMATION	 55
+INP_CONFIRM_SET_ZIME_ZONE_INFORMATION	 56
+INP_REQUEST_GET_ZIME_ZONE_INFORMATIONS	 57
+INP_CONFIRM_GET_ZIME_ZONE_INFORMATIONS	 58
+</TABLE>
+
+
+@@INP_REQ_SETUP
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_SETUP
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_INFO
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_INFO
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_RESET
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_RESET
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_SETEDGE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_EDGE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_SETFREE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_FREE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_AL_STATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_AL_STATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_IND_AL_STATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_RESP_AL_STATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQ_HARDWARE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONF_HARDWARE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_INDICATE_ALARM_INFO
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_GET_FILE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_GET_FILE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_FILE_UPDATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_FILE_UPDATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_INDICATE_COMM_DATA
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_WRITE_COMM_DATA
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_WRITE_COMM_DATA
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_CAMERA_CONTROL
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_IND_ALARM_FIELD_STATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_IND_ALARM_FIELD_UPDATE
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_GET_SYSTEM_TIME
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_GET_SYSTEM_TIME
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_SET_SYSTEM_TIME
+<LINK CIPCBaseInp, Übersicht>
+
+@@INP_CONFIRM_SET_SYSTEM_TIME
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_ALARM
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_INDICATE_ALARM_NR
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_GET_ALARM_OFF_SPANS
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_GET_ALARM_OFF_SPANS
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_SET_ALARM_OFF_SPANS
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_SET_ALARM_OFF_SPANS
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_GET_ZIME_ZONE_INFORMATION
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_GET_ZIME_ZONE_INFORMATION
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_SET_ZIME_ZONE_INFORMATION
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_SET_ZIME_ZONE_INFORMATION
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_REQUEST_GET_ZIME_ZONE_INFORMATIONS
+<LINK CIPCBaseInp, Übersicht> 
+
+@@INP_CONFIRM_GET_ZIME_ZONE_INFORMATIONS
+<LINK CIPCBaseInp, Übersicht> 
+
+
+@@CIPCActMask
+<TITLE Aktivitäts Maske>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<LINK CIPCActivityMask, Klasse CIPCActivityMask> 
+
+<B>
+
+Aktivitäts Maske</B>
+
+
+<TABLE>
+Name                Wert   \Beschreibung
+------------------  -----  --------------
+AM_UPPER_BOUNDARY   1000   (WORD)
+AM_LOWER_BOUNDARY   0      (WORD)
+</TABLE>
+Ist dieser Header am Beginn der Maskendatein vorhanden, so
+ist dies eine Maskendatei neuen Types.
+<TABLE>
+Name                     Wert         \Beschreibung
+-----------------------  -----------  --------------
+MAGIC_FILE_MASK_HEADER   0x11071964   
+MASK_VERSION             1            
+</TABLE>
+Maskentyp
+<TABLE>
+Name           Wert   \Beschreibung
+-------------  -----  --------------
+AM_INVALID     0      
+AM_PERMANENT   1      
+AM_ADAPTIVE    2      
+</TABLE>
+
+@@AM_UPPER_BOUNDARY
+<LINK CIPCActMask, Übersicht> 
+
+@@AM_LOWER_BOUNDARY
+<LINK CIPCActMask, Übersicht> 
+
+@@MAGIC_FILE_MASK_HEADER
+<LINK CIPCActMask, Übersicht> 
+
+@@MASK_VERSION
+<LINK CIPCActMask, Übersicht> 
+
+@@AM_INVALID
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK CIPCActMask, Übersicht> 
+
+@@AM_PERMANENT
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK CIPCActMask, Übersicht> 
+
+@@AM_ADAPTIVE
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK CIPCActMask, Übersicht> 
+
+@@CIPCArchiv
+<TITLE Archiv Makros>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Archiv Makros</B>
+<TABLE>
+Name                Wert           \Beschreibung
+------------------  -------------  ----------------------------
+CAR_IS_RING         ((BYTE)0x01)   standard ring archiv
+CAR_IS_ALARM        ((BYTE)0x02)   alarm archiv
+CAR_IS_SAFE_RING    ((BYTE)0x04)   sicherungsring, vorring
+CAR_IS_SEARCH       ((BYTE)0x08)   never used
+CAR_IS_BACKUP       ((BYTE)0x10)   backup archiv read/search
+                                    only !
+CAR_CAN_DELETE      ((BYTE)0x20)   archiv sequence read/search
+                                    only by permission!
+CAR_IS_SUSPECT      ((BYTE)0x40)   archiv sequence suspect!
+CAR_IS_ALARM_LIST   ((BYTE)0x80)   alarm list archiv
+</TABLE>
+<B></B>
+
+Suche
+<TABLE>
+Name                          Wert   \Beschreibung
+----------------------------  -----  --------------
+SEARCH_SUCCESS                (1)    
+SEARCH_FAILED_NO_OPEN_FILES   (2)    
+SEARCH_CANCELED               (3)    
+</TABLE>
+
+
+Verschiedene
+<TABLE>
+Name                            Wert    \Beschreibung
+------------------------------  ------  --------------
+START_SIZE_MB                   (15)    
+LOCAL_SEARCH_RESULT_ARCHIV_NR   (255)   
+MIN_ARCHIV_SIZE_MB              15      
+</TABLE>
+
+
+enum DriveType
+<TABLE>
+Name            Wert   \Beschreibung
+--------------  -----  --------------
+INVALID_DRIVE   0      
+LOCAL_DRIVE     1      
+REMOTE_DRIVE    2      
+CDROM_DRIVE     3      
+</TABLE>
+
+
+enum ArchivType
+<TABLE>
+Name                     Wert   \Beschreibung
+-----------------------  -----  --------------
+NO_ARCHIV                0      
+ALARM_ARCHIV             1      
+RING_ARCHIV              2      
+SICHERUNGS_RING_ARCHIV   3      
+SUCHERGEBNIS_ARCHIV      4      
+BACKUP_ARCHIV            5      
+VERDACHT_ARCHIV          6      
+ALARM_LIST_ARCHIV        7      
+MIN_ARCHIV_SIZE_MB       15     
+</TABLE>
+
+
+enum NavigationType
+<TABLE>
+Name                   Wert   \Beschreibung
+---------------------  -----  --------------
+NAVIGATION_ALL         0      
+NAVIGATION_TRACK       1      
+NAVIGATION_SUSPECT     2      
+NAVIGATION_FULL_HOUR   3      
+NAVIGATION_LAST        4      
+</TABLE>
+
+
+Zeichenketten
+<TABLE>
+Name                            Wert                     \Beschreibung
+------------------------------  -----------------------  --------------
+STRING_NO_ARCHIV                NO_ARCHIV                
+STRING_ALARM_ARCHIV             ALARM_ARCHIV             
+STRING_RING_ARCHIV              RING_ARCHIV              
+STRING_SICHERUNGS_RING_ARCHIV   SICHERUNGS_RING_ARCHIV   
+STRING_SUCHERGEBNIS_ARCHIV      SUCHERGEBNIS_ARCHIV      
+</TABLE>
+
+
+Bezeichnungen
+<TABLE>
+Name              Wert       \Beschreibung
+----------------  ---------  --------------
+DFN_ARCHIV_NR     ARC_NR     
+DFN_KAMERA_NR     SKAMERA    
+DFN_REC_DATE      DATUM      
+DFN_REC_TIME      ZEIT       
+DFN_PICTURETYP    TYP        
+DFN_COMPRESSION   COMP       
+DFN_FULL          VOLLBILD   
+DFN_DTP_TIME      DTP_ZEIT   
+DFN_DTP_DATE      DTP_DATE   
+DFN_DTP_CAMERA    GKAMERA    
+DFN_GA_NR         GA_NR      
+DFN_TA_NR         TA_NR      
+DFN_KTO_NR        KTO_NR     
+DFN_CARD_TYP      CARD_TYP   
+DFN_GAA_TYP       GAA_TYP    
+DFN_BLZ           BLZ        
+DFN_VALUE         BETRAG     
+DFN_CURRENCY      WAEHRUNG   
+DFN_STATION       STATION    
+DFN_CAM_NAME      KAM_NAME   
+DFN_VAR1          VAR1       
+DFN_VAR2          VAR2       
+DFN_VAR3          VAR3       
+DFN_COMMENT       COMMENT    
+DFN_PICT_NR       PICT_NR    
+</TABLE>
+
+@@CAR_IS_RING
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_ALARM
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_SAFE_RING
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_SEARCH
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_BACKUP
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_CAN_DELETE
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_SUSPECT
+<LINK CIPCArchiv, Übersicht> 
+
+@@CAR_IS_ALARM_LIST
+<LINK CIPCArchiv, Übersicht> 
+
+@@SEARCH_SUCCESS
+<LINK CIPCArchiv, Übersicht> 
+
+@@SEARCH_FAILED_NO_OPEN_FILES
+<LINK CIPCArchiv, Übersicht> 
+
+@@SEARCH_CANCELED
+<LINK CIPCArchiv, Übersicht> 
+
+@@START_SIZE_MB
+<LINK CIPCArchiv, Übersicht> 
+
+@@LOCAL_SEARCH_RESULT_ARCHIV_NR
+<LINK CIPCArchiv, Übersicht> 
+
+
+@@DriveType
+<LINK CIPCArchiv, Übersicht> 
+
+@@ArchivType
+<LINK CIPCArchiv, Übersicht> 
+
+@@NavigationType
+<LINK CIPCArchiv, Übersicht> 
+
+
+@@STRING_NO_ARCHIV
+<LINK CIPCArchiv, Übersicht> 
+
+@@STRING_ALARM_ARCHIV
+<LINK CIPCArchiv, Übersicht> 
+
+@@STRING_RING_ARCHIV
+<LINK CIPCArchiv, Übersicht> 
+
+@@STRING_SICHERUNGS_RING_ARCHIV
+<LINK CIPCArchiv, Übersicht> 
+
+@@STRING_SUCHERGEBNIS_ARCHIV
+<LINK CIPCArchiv, Übersicht> 
+
+
+@@DFN_ARCHIV_NR
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_KAMERA_NR
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_REC_DATE
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_REC_TIME
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_PICTURETYP
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_COMPRESSION
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_FULL
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_DTP_TIME
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_DTP_DATE
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_DTP_CAMERA
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_GA_NR
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_TA_NR
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_KTO_NR
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_CARD_TYP
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_GAA_TYP
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_BLZ
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_VALUE
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_CURRENCY
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_STATION
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_CAM_NAME
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_VAR1
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_VAR2
+<LINK CIPCArchiv, Übersicht>
+
+@@DFN_VAR3
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_COMMENT
+<LINK CIPCArchiv, Übersicht> 
+
+@@DFN_PICT_NR
+<LINK CIPCArchiv, Übersicht> 
+
+
+
+@@CIPCServCtrl
+<TITLE Server Kontrolle>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Server Kontrolle</B>
+
+<TABLE>
+Name                                    Wert   \Beschreibung
+--------------------------------------  -----  -------------------------------------
+SRV_CONTROL_REQUEST_OUTPUT_CONNECTION	1002   dwParam1 outputOptions SCO_.XXX, extraMemory remoteAddress
+SRV_CONTROL_CONFIRM_OUTPUT_CONNECTION	1003   dwParam1 assigned groupID, dwParam2 selected options SCO_XXX, extraMem shared memory name
+SRV_CONTROL_REQUEST_INPUT_CONNECTION	1004   dwParam1 outputOptions SCO_.XXX, extraMemory remoteAddress
+SRV_CONTROL_CONFIRM_INPUT_CONNECTION	1005   dwParam1 assigned groupID, dwParam2 selected options SCO_XXX, extraMem shared memory name
+SRV_CONTROL_REQUEST_DB_CONNECTION		1006
+SRV_CONTROL_CONFIRM_DB_CONNECTION		1007
+SRV_CONTROL_REQUEST_SERVER_RESET		1008
+SRV_CONTROL_CONFIRM_SERVER_RESET		1009
+SRV_CONTROL_REQUEST_ALARM_CONNECTION	1010
+SRV_CONTROL_CONFIRM_ALARM_CONNECTION	1011
+</TABLE>
+
+
+special cmds reserved for LinkUnits
+
+<TABLE>
+Name                              Wert   \Beschreibung
+--------------------------------  -----  --------------
+SRV_CONTROL_REQUEST_PIPE		  1012
+SRV_CONTROL_CONFIRM_PIPE		  1013
+SRV_CONTROL_REQUEST_REMOVE_PIPE	  1014
+SRV_CONTROL_CONFIRM_REMOVE_PIPE	  1015
+SRV_CONTROL_CANCEL_CONNECTION	  1016
+</TABLE>
+
+options for input connections:
+options for output connections:
+
+<TABLE>
+Name                        Wert         \Beschreibung
+--------------------------  -----------  --------------
+SCO_WANT_RELAYS				0x00000001
+SCO_WANT_CAMERAS_BW			0x00000002
+SCO_WANT_CAMERAS_COLOR		0x00000004
+SCO_WANT_DECOMPRESS_BW		0x00000008
+SCO_WANT_DECOMPRESS_COLOR	0x00000010
+SCO_IS_DV					0x00000020
+SCO_JPEG_AS_H263			0x00000040
+SCO_NO_STREAM				0x00000080
+SCO_MULTI_CAMERA			0x00000100
+</TABLE>
+
+
+enum ServerControlGroup 
+
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  -------------------------------------
+SC_NONE           0      invalid connection type
+SC_INPUT          1      Input connection type
+SC_OUTPUT         2      Output connection type
+SC_DATABASE       3      Database connection type
+SC_CLIENT         4      Alarm connection type
+SC_RESET_SERVER   5      Reset connection type
+SC_FILE_UPDATE    6      Launcher file update connection type
+</TABLE>
+
+@@SRV_CONTROL_REQUEST_OUTPUT_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_OUTPUT_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_REQUEST_INPUT_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_INPUT_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_REQUEST_DB_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_DB_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_REQUEST_SERVER_RESET
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_SERVER_RESET
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_REQUEST_ALARM_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_ALARM_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+
+@@SRV_CONTROL_REQUEST_PIPE
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_PIPE
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_REQUEST_REMOVE_PIPE
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CONFIRM_REMOVE_PIPE
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SRV_CONTROL_CANCEL_CONNECTION
+<LINK CIPCServCtrl, Übersicht> 
+
+
+@@SCO_WANT_RELAYS
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_WANT_CAMERAS_BW
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_WANT_CAMERAS_COLOR
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_WANT_DECOMPRESS_BW
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_WANT_DECOMPRESS_COLOR
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_IS_DV
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_JPEG_AS_H263
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_NO_STREAM
+<LINK CIPCServCtrl, Übersicht> 
+
+@@SCO_MULTI_CAMERA
+<LINK CIPCServCtrl, Übersicht> 
+
+@@ServerControlGroup
+<LINK CIPCServCtrl, Übersicht> 
+
+
+@@CIPCUpdDef
+<TITLE Update Makros>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Update Makros</B>
+
+
+<TABLE>
+Name                   Wert   \Beschreibung
+---------------------  -----  --------------
+RFU_APPDIR			   0x00
+RFU_WINDOWS			   0x01
+RFU_SYSTEM			   0x02
+RFU_ROOT			   0x03
+RFU_FULLPATH		   0x04
+RFU_STRING_INTERFACE   0x05
+RFU_DELETE			   0x08
+RFU_EXECUTE			   0x10
+</TABLE>
+
+
+Weitere
+
+<TABLE>
+Name                       Wert   \Beschreibung
+-------------------------  -----  --------------
+CFU_FILE				   0x01
+CFU_DIRECTORY			   0x05
+CFU_GET_LOGICAL_DRIVES     0x06
+CFU_GET_DISK_FREE_SPACE	   0x07
+CFU_GET_OS_VERSION		   0x08
+CFU_GET_SYSTEM_INFO		   0x09
+CFU_GET_CURRENT_TIME	   0x0A
+CFU_GET_SOFT_VERSION	   0x0B
+CFU_GET_FILE_VERSION	   0x0C
+CFU_GLOBAL_MEMORY_STATUS   0x0D
+CFU_EXPORT_REGISTRY		   0x0E
+CFU_DELETE_FILE			   0x0F
+CFU_EXECUTE_FILE		   0x10
+CFU_WWW_FILE			   0x11
+CFU_TIME_ZONE_INFO		   0x12
+</TABLE>
+
+@@RFU_APPDIR
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_WINDOWS
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_SYSTEM
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_ROOT
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_FULLPATH
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_STRING_INTERFACE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_DELETE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@RFU_EXECUTE
+<LINK CIPCUpdDef, Übersicht> 
+
+
+@@CFU_FILE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_DIRECTORY
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_LOGICAL_DRIVES
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_DISK_FREE_SPACE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_OS_VERSION
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_SYSTEM_INFO
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_CURRENT_TIME
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_SOFT_VERSION
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GET_FILE_VERSION
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_GLOBAL_MEMORY_STATUS
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_EXPORT_REGISTRY
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_DELETE_FILE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_EXECUTE_FILE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_WWW_FILE
+<LINK CIPCUpdDef, Übersicht> 
+
+@@CFU_TIME_ZONE_INFO
+<LINK CIPCUpdDef, Übersicht> 
+
+
+@@CIPC_Output
+<TITLE Ausgabe Makros>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>AusgabeMakros</B>
+
+enum OverlayDisplayMode
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  --------------
+ODM_INVALID       0      
+ODM_LOCAL_VIDEO   1      
+ODM_DECODE        2      
+ODM_ENCODE        3      
+</TABLE>
+enum ClientDisplayResource {
+<TABLE>
+Name                  Wert   \Beschreibung
+--------------------  -----  --------------
+CDR_INVALID           0      
+CDR_OVERLAY           1      
+CDR_DECOMPRESS_H263   2      
+</TABLE>
+Setup Dialog
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  ------------------------------------
+OUTP_REQ_SETUP    101    Called to show Setup Dialog.
+                          Respond: OUTP_CONF_SETUP
+OUTP_CONF_SETUP   102    Confirms that Dialog has been shown
+OUTP_REQ_INFO     103    
+OUTP_CONF_INFO    104    
+</TABLE>
+Reset Inputmodule
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  ---------------------------------------------------
+OUTP_REQ_RESET    105    dwParam1 iGroupID
+OUTP_CONF_RESET   106    Confirms a Reset,
+                          
+                          dwParam1: wGroupID
+                          
+                          dwParam2: iErrorCode: 0, hardware OK, !=0 hardware
+                          error
+                          
+                          dwParam3: bitmask with information about
+                          capabilities: 
+                          
+                          1 = canBWCompress 
+                          
+                          2 = canBWDecompress 
+                          
+                          4 = canColorCompress 
+                          
+                          8 = canColorDecompress 
+                          
+                          16 = canOverlay
+</TABLE>
+
+
+
+<TABLE>
+Name                      Wert   \Beschreibung
+------------------------  -----  -----------------------------------------
+PICT_REQ_JPEG_ENCODING    301    
+PICT_CONF_JPEG_ENCODING   302    
+PICT_REQ_WND_DISPLAY      308    dwParam1: (lo,hi) left, top
+                                  
+                                  dwParam2: (lo,hi) right, bottom
+PICT_CONF_WND_DISPLAY     309    
+PICT_REQ_WND_OUTP         310    dwParam1: Camera system-number
+                                  
+                                  dwParam2: (lo,hi) oben links
+                                  
+                                  dwParam3: (lo,hi) unten rechts
+PICT_CONF_WND_OUTP        311    dwParam1: Camera system-number
+                                  
+                                  dwParam2: PICTURE_ERROR,
+                                  PICTURE_OVERLAY, PICTURE_BITMAP
+PICT_REQ_DECOMPRESS       318    dwParam1: Picture Type: PICTURE_HIGH,
+                                  PICTURE_MID, PICTURE_LOW
+                                  
+                                  dwParam2: CameraSystemNumber
+                                  
+                                  dwParam3: Size of Compressed Picture.
+PICT_CONF_DECOMPRESS      319    dwParam1:
+                                  
+                                  PICTURE_OVERLAY, ignore dwParam1 and
+                                  dwParam2.
+                                  
+                                  PICTURE_BITMAP, dwParam1 and dwParam2
+                                  are valid.
+                                  
+                                  PICTURE_ERROR, Error, ignore dwParam1,
+                                  dwParam2 and dwParam4
+                                  
+                                  dwParam2: X-Size of Picture in
+                                  Cipc-Extra-Memory
+                                  
+                                  dwParam3: Y-Size of Picture in
+                                  Cipc-Extra-Memory
+                                  
+                                  dwParam4: OutputWindowNumber. The same
+                                  number as in OUTP_REQ_WND_OUTP
+DECOMPRESS_ERROR          1000   
+DECOMPRESS_OVERLAY        1001   
+DECOMPRESS_BITMAP         1002   
+PICT_REQ_START_H263       330    for params see according functions calls
+PICT_CONF_START_H263      331    
+PICT_REQ_STOP_H263        333    no response, DoIndicateError instead
+PICT_CONF_STOP_H263       334    
+PICT_INDICATE_H263_DATA   335    
+PICT_REQ_DISPLAY_H263     336    
+PICT_CONF_DISPLAY_H263    337    
+</TABLE>
+Select Output
+<TABLE>
+Name                     Wert   \Beschreibung
+-----------------------  -----  --------------
+OUTP_REQUEST_SET_RELAY   107    
+OUTP_CONFIRM_SET_RELAY   108    
+</TABLE>
+Current state
+<TABLE>
+Name                  Wert   \Beschreibung
+--------------------  -----  -------------------------------------------
+OUTP_REQ_CUR_STATE    110    Respond: OUTP_CONF_CUR_STATE
+OUTP_CONF_CUR_STATE   111    dwParam1: Output-state Bitmask
+                              
+                              dwParam2: Output-state Bitmask for changed
+                              outputs
+</TABLE>
+Hardware state request
+<TABLE>
+Name                                 Wert   \Beschreibung
+-----------------------------------  -----  -------------------
+OUTP_REQ_HARDWARE                    114    Get Hardware
+                                             Status,
+                                             Respond:
+                                             OUTP_CONF_HARDWARE
+OUTP_CONF_HARDWARE                   115    dwParam1: 0:
+                                             no error, !=0:
+                                             error
+OUTP_REQ_CLOSE_MODULE                118    Stop module
+                                             execution
+OUTP_CONF_CLOSE_MODULE               119    
+OUTP_REQUEST_LOCAL_VIDEO             120    
+OUTP_CONFIRM_LOCAL_VIDEO             121    
+OUTP_INDICATE_LOCAL_VIDEO_DATA       122    
+OUTP_REQUEST_STOP_H263_DECODING      124    
+OUTP_CONFIRM_STOP_H263_DECODING      125    
+OUTP_REQUEST_LOCAL_OVERLAY           126    
+OUTP_CONFIRM_JPEG_ENCODING_NEW       127    
+OUTP_CONFIRM_JPEG_DECODING_NEW       128    
+OUTP_INDICATE_LOCAL_VIDEO_DATA_NEW   129    
+</TABLE>
+Weitere
+<TABLE>
+Name                                     Wert   \Beschreibung
+---------------------------------------  -----  --------------
+CIPC_OUTPUT_REQUEST_DUMP_OUTPUT_WINDOW   130    
+CIPC_OUTPUT_CONFIRM_DUMP_OUTPUT_WINDOW   131    
+CIPC_REQUEST_SYNC                        132    
+CIPC_CONFIRM_SYNC                        133    
+OUTP_INDICATE_CLIENT_ACTIVE              134    send to
+                                                 client
+OUTP_REQUEST_SELECT_CAMERA               135    
+OUTP_REQUEST_ENCODED_VIDEO               136    
+OUTP_INDICATE_CLIENT_CHANGED             137    
+OUTP_CONFIRM_ENCODED_VIDEO               138    
+OUTP_REQUEST_IDLE_PICTURES               139    
+PICT_REQ_UNIT_JPEG_ENCODING              338    
+CIPC_OUTPUT_REQUEST_GET_MASK             140    
+CIPC_OUTPUT_CONFIRM_GET_MASK             141    
+CIPC_OUTPUT_REQUEST_SET_MASK             142    
+CIPC_OUTPUT_CONFIRM_SET_MASK             143    
+</TABLE>
+enum SecOutputType
+<TABLE>
+Name            Wert   \Beschreibung
+--------------  -----  --------------
+OUTPUT_OFF      -1,    
+OUTPUT_CAMERA   0,     
+OUTPUT_RELAY    1,     
+OUTPUT_AUDIO    2      
+</TABLE>
+
+@@OUTP_REQ_SETUP
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_SETUP
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQ_INFO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_INFO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQ_RESET
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_RESET
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_JPEG_ENCODING
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_JPEG_ENCODING
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_WND_DISPLAY
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_WND_DISPLAY
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_WND_OUTP
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_WND_OUTP
+<LINK CIPC_Output, Übersicht>
+
+@@PICT_REQ_DECOMPRESS
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_DECOMPRESS
+<LINK CIPC_Output, Übersicht> 
+
+@@DECOMPRESS_ERROR
+<LINK CIPC_Output, Übersicht> 
+
+@@DECOMPRESS_OVERLAY
+<LINK CIPC_Output, Übersicht> 
+
+@@DECOMPRESS_BITMAP
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_START_H263
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_START_H263
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_STOP_H263
+<LINK CIPC_Output, Übersicht>
+
+@@PICT_CONF_STOP_H263
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_INDICATE_H263_DATA
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_DISPLAY_H263
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_CONF_DISPLAY_H263
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_SET_RELAY
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_SET_RELAY
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQ_CUR_STATE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_CUR_STATE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQ_HARDWARE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_HARDWARE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQ_CLOSE_MODULE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONF_CLOSE_MODULE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_LOCAL_VIDEO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_LOCAL_VIDEO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_INDICATE_LOCAL_VIDEO_DATA
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_STOP_H263_DECODING
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_STOP_H263_DECODING
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_LOCAL_OVERLAY
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_JPEG_ENCODING_NEW
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_JPEG_DECODING_NEW
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_INDICATE_LOCAL_VIDEO_DATA_NEW
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_OUTPUT_REQUEST_DUMP_OUTPUT_WINDOW
+<LINK CIPC_Output, Übersicht>
+
+@@CIPC_OUTPUT_CONFIRM_DUMP_OUTPUT_WINDOW
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_REQUEST_SYNC
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_CONFIRM_SYNC
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_INDICATE_CLIENT_ACTIVE
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_SELECT_CAMERA
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_ENCODED_VIDEO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_INDICATE_CLIENT_CHANGED
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_CONFIRM_ENCODED_VIDEO
+<LINK CIPC_Output, Übersicht> 
+
+@@OUTP_REQUEST_IDLE_PICTURES
+<LINK CIPC_Output, Übersicht> 
+
+@@PICT_REQ_UNIT_JPEG_ENCODING
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_OUTPUT_REQUEST_GET_MASK
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_OUTPUT_CONFIRM_GET_MASK
+<LINK CIPC_Output, Übersicht> 
+
+@@CIPC_OUTPUT_REQUEST_SET_MASK
+<LINK CIPC_Output, Übersicht>
+
+@@CIPC_OUTPUT_CONFIRM_SET_MASK
+<LINK CIPC_Output, Übersicht> 
+
+@@SecOutputType
+<LINK CIPC_Output, Übersicht> 
+
+
+@@CIPCStrings
+<TITLE CIPC Zeichenketten Makros>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Zeichenketten</B>
+
+
+<TABLE>
+Name                            Wert
+------------------------------  ----------------------
+CSD_CONTRAST                    Contrast
+CSD_BRIGHTNESS                  Brightness
+CSD_SATURATION                  Saturation
+CSD_CONTRAST_PERCENT            ContrastPercent
+CSD_BRIGHTNESS_PERCENT          BrightnessPercent
+CSD_SATURATION_PERCENT          SaturationPercent
+CSD_MAX_OVERLAY_RECT            MaxOverlayRect
+CSD_COLORKEY                    ColorKey
+CSD_APPLICATION_NAME            ApplicationName
+CSD_SCAN_FOR_CAMERAS            ScanForCameras
+CSD_MODE					    MODE
+CSD_PIN						    PIN
+CSD_PIN_SUPERVISOR			    PIN_Supervisor
+CSD_PIN_OPERATOR			    PIN_Operator
+CSD_NAME					    NAME
+CSD_IS_TIMER_ACTIVE			    IsTimerActive
+CSD_DETECTOR_IGNORE_TIMER	    DetectorIgnoreTimer
+CSD_TARGET_DISPLAY			    TargetDisplay
+CSD_ALARM_OUTPUT_ON_OFF_STATE   AlarmOutputOnOffState
+CSD_ALARM_DIALING_NUMBER	    AlarmDialingNumber
+CSD_MD_MASK_SENSITIVITY         MDMaskSensitivity
+CSD_MD_ALARM_SENSITIVITY        MDAlarmSensitivity
+CSD_HIGH	                    High
+CSD_NORMAL	                    Normal
+CSD_LOW		                    Low
+CSD_MD		                    MD
+CSD_UVV		                    UVV
+CSD_ON		                    1
+CSD_OFF		                    0
+</TABLE>
+
+
+Switches video signal of camera to video out port
+DoRequestSetValue(camID,CSD_V_OUT,CSD_PORTx,dwUserID)
+
+<TABLE>
+Name        Wert
+----------  ------
+CSD_V_OUT	VOUT
+CSD_PORT0	PORT0
+CSD_PORT1	PORT1
+CSD_PORT2	PORT2
+CSD_PORT3	PORT3
+</TABLE>
+
+Switches the mode or usage of the video out port
+Get
+ DoRequestGetValue(SECID_NO_ID,CSD_PORTx,dwUserID)
+  -> OnConfirmGetValue(SECID_NO_ID,CSD_PORTx,CSD_VOUT_xxx,dwUserID)
+Set
+ DoRequestSetValue(SECID_NO_ID,CSD_PORTx,CSD_VOUT_xxx,dwUserID)
+  -> OnConfirmSetValue(SECID_NO_ID,CSD_PORTx,CSD_VOUT_xxx,dwUserID)
+
+<TABLE>
+Name                Wert
+------------------  --------------
+CSD_VOUT_OFF		VOUT_OFF
+CSD_VOUT_ACTIVITY	VOUT_ACTIVITY
+CSD_VOUT_CLIENT		VOUT_CLIENT
+CSD_VOUT_SEQUENCE   VOUT_SEQUENCE
+</TABLE>
+
+Set's and Get's the dwell time of a camera
+Values as CString in seconds, 5 seconds = 5
+Get
+ DoRequestGetValue(camID,CSD_DWELL,dwUserID); 
+  -> OnConfirmGetValue(camID,CSD_DWELL,sValue,dwUserID)
+Set
+ DoRequestSetValue(camID,CSD_DWELL,sValue,dwUserID); 
+  -> OnConfirmSetValue(camID,CSD_DWELL,sValue,dwUserID)
+
+<TABLE>
+Name                         Wert
+---------------------------  -------------
+CSD_DWELL	                 DWELL
+CSD_ALARM_SPAN_OFF_FEATURE	 ASOF
+CSD_ALARM_SPAN_OFF_STATUS	 ASOS
+CSD_IS_DV	                 ISDV
+CSD_ALARMCALL_EVENT			 ACE
+CSD_ALARMCALL_EVENT_OFF		 ACE_OFF
+CSD_ALARMCALL_EVENT_A		 ACE_A
+CSD_ALARMCALL_EVENT_A1		 ACE_A1
+CSD_ALARMCALL_EVENT_A2		 ACE_A2
+CSD_ALARMCALL_EVENT_A12		 ACE_A12
+CSD_ALARMCALL_EVENT_1		 ACE_1
+CSD_ALARMCALL_EVENT_2		 ACE_2
+CSD_ALARMCALL_EVENT_12		 ACE_12
+CSD_EXPANSION_CODE			 EXP_CODE
+CSD_DIB_TRANSFER		     DIB_TRANSFER
+CSD_RESET				     RESET
+CSD_LED1_ON				     LED1_ON
+CSD_LED1_BLINK			     LED1_BLINK
+CSD_LED2_ON				     LED2_ON
+CSD_LED2_OFF			     LED2_OFF
+CSD_DV_CONFIG			     DV_CONFIG
+</TABLE>
+
+
+@@CSD_CONTRAST
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_BRIGHTNESS
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_SATURATION
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_CONTRAST_PERCENT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_BRIGHTNESS_PERCENT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_SATURATION_PERCENT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_MAX_OVERLAY_RECT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_COLORKEY
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_APPLICATION_NAME
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_SCAN_FOR_CAMERAS
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_MODE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PIN
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PIN_SUPERVISOR
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PIN_OPERATOR
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_NAME
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_IS_TIMER_ACTIVE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_DETECTOR_IGNORE_TIMER
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_TARGET_DISPLAY
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARM_OUTPUT_ON_OFF_STATE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARM_DIALING_NUMBER
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_MD_MASK_SENSITIVITY
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_MD_ALARM_SENSITIVITY
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_HIGH
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_NORMAL
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_LOW
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_MD
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_UVV
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ON
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_OFF
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_V_OUT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PORT0
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PORT1
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PORT2
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_PORT3
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_VOUT_OFF
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_VOUT_ACTIVITY
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_VOUT_CLIENT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_VOUT_SEQUENCE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_DWELL
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARM_SPAN_OFF_FEATURE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARM_SPAN_OFF_STATUS
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_IS_DV
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_OFF
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_A
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_A1
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_A2
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_A12
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_1
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_2
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_ALARMCALL_EVENT_12
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_EXPANSION_CODE
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_DIB_TRANSFER
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_RESET
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_LED1_ON
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_LED1_BLINK
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_LED2_ON
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_LED2_OFF
+<LINK CIPCStrings, Übersicht> 
+
+@@CSD_DV_CONFIG
+<LINK CIPCStrings, Übersicht> 
+
+
+@@CIPCPictureDef
+<TITLE Bild Typen>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Bild Typen</B>
+
+
+enum CIPCSavePictureType 
+
+<TABLE>
+Name               Wert   \Beschreibung
+-----------------  -----  -------------------------------
+SPT_SUPER_BUBBLE   0      I-frame with followig P-frames
+SPT_DIFF_PICTURE   1      P-frame
+SPT_FULL_PICTURE   2      I-frame or JPEG
+</TABLE>
+
+
+enum Resolution
+
+<TABLE>
+Name              Wert   \Beschreibung
+----------------  -----  ----------------------------------------------------
+RESOLUTION_NONE	  -1     invalid resolution
+RESOLUTION_HIGH	  0      high resolution, CIF for H.263, half field for JPEG
+RESOLUTION_MID	  1      mid resolution, never used
+RESOLUTION_LOW	  2      low resolution, QCIF for H.263, CIF for JPEG
+</TABLE>
+
+
+enum Compression
+
+<TABLE>
+Name               Wert   Komprimierung   Übertragung   Bildrate 
+-----------------  -----  --------------  ------------  ---------
+COMPRESSION_NONE   -1     invalid
+COMPRESSION_1		0	   1 H.263        2048KBit/s    25fps
+COMPRESSION_2		1	   2 H.263        2048KBit/s	12fps
+COMPRESSION_3		2	   3 H.263        1536KBit/s	25fps 
+COMPRESSION_4		3	   4 H.263        1536KBit/s	12fps
+COMPRESSION_5		4	   5 H.263        1024KBit/s	25fps
+COMPRESSION_6		5	   6 H.263        1024KBit/s	12fps
+COMPRESSION_7		6	   7 H.263         512KBit/s	25fps
+COMPRESSION_8		7	   8 H.263         512KBit/s	12fps
+COMPRESSION_9		8	   9 H.263         512KBit/s	6fps
+COMPRESSION_10		9	  10 H.263         512KBit/s	3fps
+COMPRESSION_11		10	  11 H.263         512KBit/s	1fps
+COMPRESSION_12		11	  12 H.263         256KBit/s	25fps
+COMPRESSION_13		12	  13 H.263         256KBit/s	12fps
+COMPRESSION_14		13	  14 H.263         256KBit/s	 6fps
+COMPRESSION_15		14	  15 H.263         256Bit/s	     3fps
+COMPRESSION_16		15	  16 H.263         256Bit/s	     1fps
+COMPRESSION_17		16    17 H.263         128KBit/s	25fps
+COMPRESSION_18		17	  18 H.263         128KBit/s	12fps
+COMPRESSION_19		18	  19 H.263         128KBit/s	6fps
+COMPRESSION_20		19	  20 H.263         128KBit/s	 3fps
+COMPRESSION_21		20	  21 H.263         128KBit/s	 1fps
+COMPRESSION_22		21	  22 H.263          64KBit/s	25fps
+COMPRESSION_23		22	  23 H.263          64Bit/s	    12fps
+COMPRESSION_24		23	  24 H.263          64Bit/s	     6fps
+COMPRESSION_25		24	  25 H.263          64Bit/s	     3fps
+COMPRESSION_26		25    26 H.263          64Bit/s	     1fps
+</TABLE>
+
+
+enum CompressionType
+
+<TABLE>
+Name                    Wert   Kompressionstyp
+----------------------  -----  ----------------------------
+COMPRESSION_UNKNOWN		-1     invalid
+COMPRESSION_H263		 4     H.263
+COMPRESSION_COLORJPEG	 5     Color JPEG
+COMPRESSION_DIB			 6     DIB
+COMPRESSION_PRESENCE	 8     Presence propriatary format
+</TABLE>
+
+
+Absolute Bildtypen
+
+<TABLE>
+Name             Wert   Beschreibung
+---------------  -----  ----------------------------
+H263_HIGH		 (4)	idip! CoCo
+H263_LOW		 (5)
+COLORJPEG_HIGH	 (6)	idip! Mico
+COLORJPEG_MID	 (7)
+COLORJPEG_LOW	 (8)
+PRESENCE_HIGH	 (10)   pt-Box (Presence Technology)
+PRESENCE_LOW	 (11)
+</TABLE>
+
+@@CIPCSavePictureType
+<LINK CIPCPictureDef, Übersicht> 
+
+@@Resolution
+<LINK CIPCPictureDef, Übersicht> 
+
+@@Compression
+<LINK CIPCPictureDef, Übersicht> 
+
+@@CompressionType
+<LINK CIPCPictureDef, Übersicht> 
+
+@@H263_HIGH
+<LINK CIPCPictureDef, Übersicht> 
+
+@@H263_LOW
+<LINK CIPCPictureDef, Übersicht> 
+
+@@COLORJPEG_HIGH
+<LINK CIPCPictureDef, Übersicht> 
+
+@@COLORJPEG_MID
+<LINK CIPCPictureDef, Übersicht> 
+
+@@COLORJPEG_LOW
+<LINK CIPCPictureDef, Übersicht> 
+
+@@PRESENCE_HIGH
+<LINK CIPCPictureDef, Übersicht> 
+
+@@PRESENCE_LOW
+<LINK CIPCPictureDef, Übersicht> 
+
+@@CIPCConectRecord
+<TITLE Verbindungs Aufzeichnung>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Verbindungs Aufzeichnung</B>
+
+
+<TABLE>
+Name              Wert   
+----------------  --------------
+LOCAL_LOOP_BACK   LocalLoopBack
+ROUTING_CHAR	  '#'
+CRF_IPADDRESS	  IPADDRESS
+CRF_BITRATE		  BITRATE
+CRF_MSN			  MSN
+CRF_SERIAL		  SERIAL
+</TABLE>
+
+@@LOCAL_LOOP_BACK
+<LINK CIPCConectRecord, Übersicht>
+
+@@ROUTING_CHAR
+<LINK CIPCConectRecord, Übersicht> 
+
+@@CRF_IPADDRESS
+<LINK CIPCConectRecord, Übersicht> 
+
+@@CRF_BITRATE
+<LINK CIPCConectRecord, Übersicht> 
+
+@@CRF_MSN
+<LINK CIPCConectRecord, Übersicht> 
+
+@@CRF_SERIAL
+<LINK CIPCConectRecord, Übersicht> 
+
+@@WK_Dongle
+<TITLE Dongle>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Dongle</B>
+
+enum InternalProductCode 
+
+<TABLE>
+Name                           Wert   \Beschreibung
+-----------------------------  -----  ----------------------------------------------------------------
+IPC_MIN_CODE			        0     invalid value
+IPC_FREE_STYLE			        0     free style product
+IPC_STORAGE				        1     idip recorder, MiCo or JaCob
+IPC_STORAGE_PLUS		        2     idip recorder, MiCo or JaCob plus
+IPC_STATION_TRANSMITTER	        3     idip live cam, CoCo
+IPC_STORAGE_TRANSMITTER	        4     idip recorder, MiCo or JaCob , TCP or ISDN
+IPC_PROFESSIONAL_TRANSMITTER    5     idip recorder and live cam, MiCo or JaCob and CoCo, TCP or ISDN
+IPC_STATION_RECEIVER	        6     idip livecam receiver, H.263
+IPC_STORAGE_RECEIVER	        7     idip recorder receiver, JPEG
+IPC_PROFESSIONAL_RECEIVER       8     idip recorder and livecam receiver, H.263 and JPEG
+IPC_MINI_RECEIVER		        9     idip B3 receiver, PT200
+IPC_MIDI_RECEIVER		       10     idip B6 receiver, VCS H.320
+IPC_UNIVERSAL_TRANSMITTER      11     idip recorder and livecam and receiver
+IPC_UNIVERSAL_RECEIVER	       12     idip receiver for all
+IPC_VIDEO_MASTER		       13     4 jacobs
+IPC_ATM_SURVEILENCE		       14     for atm's in banks
+IPC_TOBS_RECEIVER		       15     for TeleObserver only receiver
+IPC_DTS_RECEIVER		       16     for DTS only receiver
+IPC_DTS					       17     for DTS transmitter
+IPC_DTS_IP_RECEIVER		       18     for DTS IP receiver
+IPC_TO3000_PROTOTYPE	       19     for TO 3000 Prototyp
+IPC_MAX_CODE			       19
+IPC_VS_MINI_SB			        1     VideoSave products
+IPC_VS_MINI_ORUEA		        2
+IPC_VS_MINI_SB_ORUEA	        3
+IPC_VS_SB8				        4
+IPC_VS_ORUEA8			        5
+IPC_VS_SB_ORUEA8		        6
+IPC_VS_AWP				        7
+IPC_VS_AWP_CONFIG		        8
+IPC_VS_MAX_CODE			        8
+</TABLE>
+
+
+enum OemCode 
+
+<TABLE>
+Name                 Wert   \Beschreibung
+-------------------  -----  ----------------------------------------------------
+OEM_INVALID           0     invalid OEM code
+OEM_IDIP              1     the idip OEM
+OEM_GARNY             2     never use OEM value 2 again
+OEM_SANTEC            3     Santec OEM, formerly unused German Parcel OEM
+OEM_AKUBIS            4     Akubis OEM for Deutsche Telekom
+OEM_VDR               5     VDR OEM for Alarmcom DTS receiver software
+OEM_DRESEARCH         6     DResearch OEM for idip and DTS receiver software
+OEM_DTS               7     DTS OEM for DTS receiver software
+OEM_PROTECTION_ONE    8     ProtectionOne OEM for DTS and DTS receiver software
+OEM_SIEMENS           9     Siemens OEM for Vidis Mobile software
+OEM_ALARMCOM         10     Alarmcom OEM for idip software
+OEM_INVALID_MAX      11
+</TABLE>
+
+@@InternalProductCode
+<LINK WK_Dongle, Übersicht> 
+
+@@OemCode
+<TOPICORDER 1>
+<GROUP $Collection>
+<LINK WK_Dongle, Übersicht>
+
+@@MIN_ARCHIV_SIZE_MB
+<LINK CIPCArchiv, Übersicht> 
+
+@@CIPCInpuRecord
+<TITLE Eingabe Aufzeichnung>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Eingabe Aufzeichnung</B>
+
+<TABLE>
+Name                            Wert           \Beschreibung
+------------------------------  -------------  ---------------------------------------------------
+IREC_STATE_OKAY					((BYTE)0x01)   hardware ok
+IREC_STATE_ENABLED				((BYTE)0x02)   enabled by sysadmin
+IREC_STATE_ALARM				((BYTE)0x04)   in alarm/active state
+IREC_STATE_EDGE					((BYTE)0x08)   positive edge ?
+IREC_STATE_NEEDS_CONFIRMATION	((BYTE)0x10)   needs a user confirmation
+IREC_IS_COMM_PORT				((BYTE)0x20)   is virtual commport id
+IREC_STATE_TEMP_DEACTIVATE		((BYTE)0x40)   is temporary deactivation allowed
+</TABLE>
+
+
+@@IREC_STATE_OKAY
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_STATE_ENABLED
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_STATE_ALARM
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_STATE_EDGE
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_STATE_NEEDS_CONFIRMATION
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_IS_COMM_PORT
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@IREC_STATE_TEMP_DEACTIVATE
+<LINK CIPCInpuRecord, Übersicht> 
+
+@@CIPC_OutputRecord
+<TITLE Ausgabe Aufzeichnung>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Ausgabe Aufzeichnung</B>
+
+
+<TABLE>
+Name                    Wert            \Beschreibung
+----------------------  --------------  --------------------------------------------------------
+OREC_IS_OKAY			((WORD)1)       is hardware ok
+OREC_IS_ENABLED			((WORD)1<<1)    is enabled by sysadmin
+OREC_IS_RELAY			((WORD)1<<2)    is a relais
+OREC_RELAY_CLOSED		((WORD)1<<3)    is relais closed
+OREC_IS_CAMERA			((WORD)1<<4)    is a camera
+OREC_CAMERA_COLOR		((WORD)1<<5)    is a color compression algorithm
+OREC_CAMERA_IS_FIXED	((WORD)1<<6)    is not a pan tilt zoom camera
+OREC_CAMERA_DOES_JPEG	((WORD)1<<7)    is a JPEG (color or bw) compression
+OREC_CAMERA_VCS			((WORD)1<<8)    is a VCS box	camera
+OREC_CAMERA_PRESENCE	((WORD)1<<9)    is PT200 box camera
+OREC_CAMERA_REFERENCE	((WORD)1<<10)   camera has reference image function enabled (only idip)
+</TABLE>
+
+@@OREC_IS_OKAY
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_IS_ENABLED
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_IS_RELAY
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_RELAY_CLOSED
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_IS_CAMERA
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_COLOR
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_IS_FIXED
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_DOES_JPEG
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_VCS
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_PRESENCE
+<LINK CIPC_OutputRecord, Übersicht> 
+
+@@OREC_CAMERA_REFERENCE
+<LINK CIPC_OutputRecord, Übersicht> 
+
+
+@@WK_Profile
+<TITLE Profile Header>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Profile Header</B>
+
+Sec
+
+<TABLE>
+Name                    Wert            \Beschreibung
+----------------------  --------------  --------------
+SEC_NAME_INPUTGROUPS	InputGroups	
+SEC_NAME_OUTPUTGROUPS	OutputGroups	
+SEC_NAME_PROZESS		ProcessMacros	
+SEC_NAME_TIMER			Timer	
+SEC_NAME_USER			User	
+</TABLE>
+
+
+Ent
+
+<TABLE>
+Name                    Wert            \Beschreibung
+----------------------  --------------  --------------
+ENT_NAME_MAXGROUPS		MaxGroups
+ENT_NAME_MAX_TIMER		MaxTimer
+ENT_NAME_MAX_PROZESS	MaxProzess
+</TABLE>
+
+
+Ini
+
+<TABLE>
+Name             Wert       \Beschreibung
+---------------  ---------  --------------
+INI_ACTIVE		 \\A
+INI_ARCHIVE		 \\ARC%u=
+INI_BEST		 \\B
+INI_BREAK		 \\B
+INI_MAXBCH		 \\B
+INI_EDGE		 \\E
+INI_HOLD		 \\H
+INI_INTERVAL	 \\I
+INI_ID			 \\ID
+INI_LENGTH		 \\MT
+INI_NAME		 \\N
+INI_NR			 \\NR
+INI_OUTPUT		 \\O%u=
+INI_PRIOR		 \\P
+INI_PROZPRIOR	 \\PP
+INI_PAUSE_TIME	 \\PT
+INI_ON			 \\RT
+INI_SIZE		 \\Z
+INI_SMNAME		 \\SM
+INI_TYPE		 \\T
+INI_TEL			 \\Tel
+INI_TEMP_DEACT	 \\TDA
+</TABLE>
+
+
+@@SEC_NAME_INPUTGROUPS
+<LINK WK_Profile, Übersicht> 
+
+@@SEC_NAME_OUTPUTGROUPS
+<LINK WK_Profile, Übersicht> 
+
+@@SEC_NAME_PROZESS
+<LINK WK_Profile, Übersicht> 
+
+@@SEC_NAME_TIMER
+<LINK WK_Profile, Übersicht> 
+
+@@SEC_NAME_USER
+<LINK WK_Profile, Übersicht> 
+
+@@ENT_NAME_MAXGROUPS
+<LINK WK_Profile, Übersicht> 
+
+@@ENT_NAME_MAX_TIMER
+<LINK WK_Profile, Übersicht> 
+
+@@ENT_NAME_MAX_PROZESS
+<LINK WK_Profile, Übersicht> 
+
+@@INI_ACTIVE
+<LINK WK_Profile, Übersicht> 
+
+@@INI_ARCHIVE
+<LINK WK_Profile, Übersicht> 
+
+@@INI_BEST
+<LINK WK_Profile, Übersicht> 
+
+@@INI_BREAK
+<LINK WK_Profile, Übersicht> 
+
+@@INI_MAXBCH
+<LINK WK_Profile, Übersicht> 
+
+@@INI_EDGE
+<LINK WK_Profile, Übersicht> 
+
+@@INI_HOLD
+<LINK WK_Profile, Übersicht> 
+
+@@INI_INTERVAL
+<LINK WK_Profile, Übersicht> 
+
+@@INI_ID
+<LINK WK_Profile, Übersicht> 
+
+@@INI_LENGTH
+<LINK WK_Profile, Übersicht> 
+
+@@INI_NAME
+<LINK WK_Profile, Übersicht> 
+
+@@INI_NR
+<LINK WK_Profile, Übersicht> 
+
+@@INI_OUTPUT
+<LINK WK_Profile, Übersicht> 
+
+@@INI_PRIOR
+<LINK WK_Profile, Übersicht> 
+
+@@INI_PROZPRIOR
+<LINK WK_Profile, Übersicht> 
+
+@@INI_PAUSE_TIME
+<LINK WK_Profile, Übersicht> 
+
+@@INI_ON
+<LINK WK_Profile, Übersicht> 
+
+@@INI_SIZE
+<LINK WK_Profile, Übersicht> 
+
+@@INI_SMNAME
+<LINK WK_Profile, Übersicht> 
+
+@@INI_TYPE
+<LINK WK_Profile, Übersicht> 
+
+@@INI_TEL
+<LINK WK_Profile, Übersicht> 
+
+@@INI_TEMP_DEACT
+<LINK WK_Profile, Übersicht> 
+
+
+
+
+@@CIPC_CamerCtrl
+<TITLE Kamera Kontrolle>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Kamera Kontrolle</B>
+
+Einzelbits
+
+<TABLE>
+Name              Wert       \Beschreibung
+----------------  ---------  --------------
+PTZF_PAN_LEFT	  0x000001
+PTZF_PAN_RIGHT	  0x000002
+PTZF_TILT_UP	  0x000004
+PTZF_TILT_DOWN	  0x000008
+PTZF_FOCUS_NEAR	  0x000010
+PTZF_FOCUS_FAR	  0x000020
+PTZF_IRIS_OPEN	  0x000040
+PTZF_IRIS_CLOSE	  0x000080
+PTZF_ZOOM_IN	  0x000100
+PTZF_ZOOM_OUT	  0x000200
+PTZF_POS_1		  0x000400
+PTZF_POS_2		  0x000800
+PTZF_POS_3		  0x001000
+PTZF_POS_4		  0x002000
+PTZF_POS_5		  0x004000
+PTZF_POS_6		  0x008000
+PTZF_POS_HOME	  0x010000
+PTZF_SPEED		  0x020000
+PTZF_POS_7		  0x040000
+PTZF_POS_8		  0x080000
+PTZF_POS_9		  0x100000
+PTZF_CONFIG		  0x200000
+</TABLE>
+
+Gruppen
+
+<TABLE>
+Name           Wert 
+-------------  ------------------------------------------------------------------------------------------------------------------
+PTZF_DEFAULT   PTZF_PAN_LEFT | PTZF_PAN_RIGHT | PTZF_TILT_UP | PTZF_TILT_DOWN | PTZF_ZOOM_IN | PTZF_ZOOM_OUT
+PTZF_PAN	   PTZF_PAN_LEFT | PTZF_PAN_RIGHT 
+PTZF_TILT	   PTZF_TILT_UP | PTZF_TILT_DOWN
+PTZF_ZOOM	   PTZF_ZOOM_IN | PTZF_ZOOM_OUT
+PTZF_IRIS	   PTZF_IRIS_OPEN | PTZF_IRIS_CLOSE
+PTZF_FOCUS	   PTZF_FOCUS_NEAR | PTZF_FOCUS_FAR
+PTZF_POS	   PTZF_POS_1|PTZF_POS_2|PTZF_POS_3|PTZF_POS_4|PTZF_POS_5|PTZF_POS_6|PTZF_POS_HOME
+PTZF_POSALL	   PTZF_POS_1|PTZF_POS_2|PTZF_POS_3|PTZF_POS_4|PTZF_POS_5|PTZF_POS_6|PTZF_POS_7|PTZF_POS_8|PTZF_POS_9|PTZF_POS_HOME
+</TABLE>
+
+Panasonic
+
+<TABLE>
+Name                             Wert     \Beschreibung
+-------------------------------  -------  --------------
+PTZF_CONFIG_PANASONIC_ON		 0x0001
+PTZF_CONFIG_PANASONIC_OFF		 0x0002
+PTZF_CONFIG_PANASONIC_UP		 0x0004
+PTZF_CONFIG_PANASONIC_DOWN		 0x0008
+PTZF_CONFIG_PANASONIC_LEFT		 0x0010
+PTZF_CONFIG_PANASONIC_RIGHT		 0x0020
+PTZF_CONFIG_PANASONIC_SET1		 0x0040
+PTZF_CONFIG_PANASONIC_SET2		 0x0080
+PTZF_CONFIG_PANASONIC_RESET		 0x0100
+PTZF_CONFIG_PANASONIC_ALLRESET	 0x0200
+</TABLE>
+
+enum CameraControlCmd
+
+<TABLE>
+Name             Wert   \Beschreibung
+---------------  -----  --------------
+CCC_INVALID      0
+CCC_PAN_LEFT     1	
+CCC_PAN_RIGHT    2	
+CCC_PAN_STOP     3	
+CCC_TILT_UP      4	
+CCC_TILT_DOWN    5	
+CCC_TILT_STOP    6	
+CCC_FOCUS_NEAR   7
+CCC_FOCUS_FAR    8
+CCC_FOCUS_STOP   9
+CCC_IRIS_OPEN    10
+CCC_IRIS_CLOSE   11
+CCC_IRIS_STOP    12
+CCC_ZOOM_IN      13
+CCC_ZOOM_OUT     14
+CCC_ZOOM_STOP    15
+CCC_POS_1        16
+CCC_POS_2        17
+CCC_POS_3        18
+CCC_POS_4        19
+CCC_POS_5        20
+CCC_POS_6        21
+CCC_POS_HOME     22
+CCC_POS_7        23
+CCC_POS_8        24
+CCC_POS_9        25
+CCC_CONFIG       26
+</TABLE>
+
+
+enum CameraControlType
+
+<TABLE>
+Name                           Wert   \Beschreibung
+-----------------------------  -----  --------------
+CCT_RS232_TRANSPARENT          -1
+CCT_UNKNOWN                    0
+CCT_SENSORMATIC_TOUCHTRACKER   1
+CCT_PANASONIC_WV_RM70          2
+CCT_ERNITEC_BDR_510            3
+CCT_ELBEX_97_6                 4
+CCT_PIEPER_KMS_850S            5
+CCT_VIDEV_EC160                6
+CCT_RELAY_PTZ                  7
+CCT_CANON_VISCA                8
+</TABLE>
+
+
+@@CameraControlCmd
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@CameraControlType
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_PAN_LEFT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_PAN_RIGHT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_TILT_UP
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_TILT_DOWN
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_FOCUS_NEAR
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_FOCUS_FAR
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_IRIS_OPEN
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_IRIS_CLOSE
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_ZOOM_IN
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_ZOOM_OUT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_1
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_2
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_3
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_4
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_5
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_6
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_HOME
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_SPEED
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_7
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_8
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS_9
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_DEFAULT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_PAN
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_TILT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_ZOOM
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_IRIS
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_FOCUS
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POS
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_POSALL
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_ON
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_OFF
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_UP
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_DOWN
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_LEFT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_RIGHT
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_SET1
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_SET2
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_RESET
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+@@PTZF_CONFIG_PANASONIC_ALLRESET
+<LINK CIPC_CamerCtrl, Übersicht> 
+
+
+@@CIPCSecID
+<TITLE Sicherheits ID>
+<TOPICORDER 1>
+<GROUP $CIPCBase>
+
+<B>Sicherheits ID</B>
+
+
+<TABLE>
+Name               Wert                  \Beschreibung
+-----------------  --------------------  ------------------------
+SECID_NO_SUBID     ((WORD)0xffff)        (-1) invalid id, for
+                                          constructors and checks
+SECID_NO_GROUPID   ((WORD)0xffff)        
+SECID_NO_ID        ((DWORD)0xffffffff)   
+</TABLE>
+SECID_GROUPS 0x0001 - 0x0FFF for special IDs groupID 0x0001
+is used for input activations
+<TABLE>
+Name                Wert                  \Beschreibung
+------------------  --------------------  --------------
+SECID_ACTIVE_OFF    ((DWORD)0x00010000)   
+SECID_ACTIVE_ON     ((DWORD)0x00010001)   
+SECID_ACTIVE_LOCK   ((DWORD)0x00010002)   
+</TABLE>
+ISDN
+<TABLE>
+Name                       Wert             \Beschreibung
+-------------------------  ---------------  -----------------------------
+SECID_ISDN_CONNECTION      ((WORD)0x0002)   is used for ISDN connections
+SECID_ISDN_INPUT_PIPE      ((WORD)0x0003)   is used for ISDN Input Pipes
+SECID_ISDN_OUTPUT_PIPE     ((WORD)0x0004)   is used for ISDN Output
+                                             Pipes
+SECID_INPUT_CLIENT         ((WORD)0x0005)   is used for Input Clients
+SECID_OUTPUT_CLIENT        ((WORD)0x0006)   is used for Output Clients
+SECID_ISDN_DATABASE_PIPE   ((WORD)0x0007)   is used for ISDN DataBase
+                                             Pipes
+</TABLE>
+
+
+min/max values for IDs, 1..N numbered in the hiword Use the
+check functions: IsXXXID()
+
+Note:
+order is important: the sequence of the minvalues is used for
+the maxvalues!
+<TABLE>
+Name                              Wert             \Beschreibung
+--------------------------------  ---------------  ------------------------
+SECID_GROUP_INPUT                 ((WORD)0x1000)   the input group id
+SECID_GROUP_OUTPUT                ((WORD)0x2000)   the output group id
+SECID_GROUP_PROCESS               ((WORD)0x3000)   the process group id
+SECID_GROUP_TIMER                 ((WORD)0x4000)   the timer group id
+SECID_GROUP_USER                  ((WORD)0x5000)   the user group id
+SECID_GROUP_ARCHIVE               ((WORD)0x6000)   the archive group id
+SECID_GROUP_PERMISSION            ((WORD)0x7000)   the permission group id
+SECID_GROUP_HOST                  ((WORD)0x8000)   the host group id
+SECID_GROUP_NOTIFICATIONMESSAGE   ((WORD)0x9000)   the notification
+                                                    message group id
+SECID_GROUP_LAST                  ((WORD)0xA000)   
+</TABLE>
+
+
+\NOTE: same order/values as above!!!
+<TABLE>
+Name                            Wert
+------------------------------  -----------------------------------------------
+SECID_MIN_INPUT                 (DWORD(SECID_GROUP_INPUT)\<\<16)
+SECID_MIN_OUTPUT                (DWORD(SECID_GROUP_OUTPUT)\<\<16)
+SECID_MIN_PROCESS               (DWORD(SECID_GROUP_PROCESS)\<\<16)
+SECID_MIN_TIMER                 (DWORD(SECID_GROUP_TIMER)\<\<16)
+SECID_MIN_USER                  (DWORD(SECID_GROUP_USER)\<\<16)
+SECID_MIN_ARCHIVE               (DWORD(SECID_GROUP_ARCHIVE)\<\<16)
+SECID_MIN_PERMISSION            (DWORD(SECID_GROUP_PERMISSION)\<\<16)
+SECID_MIN_HOST                  (DWORD(SECID_GROUP_HOST)\<\<16)
+SECID_MIN_NOTIFICATIONMESSAGE   (DWORD(SECID_GROUP_NOTIFICATIONMESSAGE)\<\<16)
+SECID_MIN_LAST                  (DWORD(SECID_GROUP_LAST)\<\<16)
+SECID_MAX_INPUT                 ((DWORD)(SECID_MIN_OUTPUT-1))
+SECID_MAX_OUTPUT                ((DWORD)(SECID_MIN_PROCESS-1))
+SECID_MAX_PROCESS               ((DWORD)(SECID_MIN_TIMER-1))
+SECID_MAX_TIMER                 ((DWORD)(SECID_MIN_USER-1))
+SECID_MAX_USER                  ((DWORD)(SECID_MIN_ARCHIVE-1))
+SECID_MAX_ARCHIVE               ((DWORD)(SECID_MIN_PERMISSION-1))
+SECID_MAX_PERMISSION            ((DWORD)(SECID_MIN_HOST-1))
+SECID_MAX_HOST                  ((DWORD)(SECID_MIN_NOTIFICATIONMESSAGE-1))
+SECID_MAX_NOTIFICATIONMESSAGE   ((DWORD)(SECID_MIN_LAST-1))
+</TABLE>
+NEW 27.08.97
+<TABLE>
+Name                                Wert                                                   \Beschreibung
+----------------------------------  -----------------------------------------------------  -----------------------
+SECID_LOCAL_HOST                    ((DWORD)(SECID_GROUP_HOST\<\<16)|(SECID_NO_SUBID-1))   the special local host
+                                                                                            id
+SECID_SUPERVISOR_PERMISSION         ((DWORD)(SECID_MIN_PERMISSION))                        the special supervisor
+                                                                                            permission id
+SECID_SPECIAL_RECEIVER_PERMISSION   ((DWORD)(SECID_MAX_PERMISSION))                        the special supervisor
+                                                                                            permission id
+</TABLE>
+NEW 20.8.97 RelaisProzesse Flanke==EDGE, Pegel==STATE
+<TABLE>
+Name                                Wert                             \Beschreibung
+----------------------------------  -------------------------------  ----------------------------
+SECID_PROCESS_RELAY_EDGE_CONTROL    ((DWORD)(SECID_MAX_PROCESS-1))   the special relay process
+                                                                      with edge control id
+SECID_PROCESS_RELAY_STATE_CONTROL   ((DWORD)(SECID_MAX_PROCESS-2))   the special relay process
+                                                                      with state control id
+SECID_PROCESS_CAMERA_MD_OK          ((DWORD)(SECID_MAX_PROCESS-3))   the special camera with
+                                                                      motion detection ok process
+                                                                      id
+</TABLE>
+
+@@SECID_NO_SUBID
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_NO_GROUPID
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_NO_ID
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ACTIVE_OFF
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ACTIVE_ON
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ACTIVE_LOCK
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ISDN_CONNECTION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ISDN_INPUT_PIPE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ISDN_OUTPUT_PIPE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_INPUT_CLIENT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_OUTPUT_CLIENT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_ISDN_DATABASE_PIPE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_INPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_OUTPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_PROCESS
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_TIMER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_USER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_ARCHIVE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_PERMISSION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_HOST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_NOTIFICATIONMESSAGE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_GROUP_LAST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_INPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_OUTPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_PROCESS
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_TIMER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_USER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_ARCHIVE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_PERMISSION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_HOST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_NOTIFICATIONMESSAGE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MIN_LAST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_INPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_OUTPUT
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_PROCESS
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_TIMER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_USER
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_ARCHIVE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_PERMISSION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_HOST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_MAX_NOTIFICATIONMESSAGE
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_LOCAL_HOST
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_SUPERVISOR_PERMISSION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_SPECIAL_RECEIVER_PERMISSION
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_PROCESS_RELAY_EDGE_CONTROL
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_PROCESS_RELAY_STATE_CONTROL
+<LINK CIPCSecID, Übersicht> 
+
+@@SECID_PROCESS_CAMERA_MD_OK
+<LINK CIPCSecID, Übersicht> 

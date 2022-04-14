@@ -1,0 +1,38 @@
+24.07.00 TKR - RemoteCD steuert das CD-R Brennen, das vom DVClient aus gestartet
+			   wird. RemoteCD brennt CD`s mit dem Programm "PacketCD". Im Folgenden
+			   wird der Ablauf beschrieben:
+			   Der "WatchDog" von PacketCD (Programm: C2udfsvc.exe) wird beim Starten
+			   des Computer ebenfalls gestartet und läuft im Hintergrund. Es überwacht
+			   den CD-Brenner. Wird dort eine leere, unformatierte CD (ein "frischer"
+			   Rohling) eingelegt, startet C2udfsvc.exe automatisch das Programm
+			   "Udfform.exe". Mit diesen Programm werden Rohlinge formatiert.
+			   Dieses ursprünglich zu PacketCD gehörige Programm wurde durch 
+			   ein gleichnamiges ersetzt. Das Original wurde in "UdfOrig.exe" umbenannt.
+			   Das "neue" Programm "Udfform.exe" wird anstelle des "alten" 
+			   gestartet, sobald ein frischer Rohling eingelegt wurde. Im 
+			   Anschluss prüft es, ob sich der DVClient im Status "Backup"
+			   befindet. Ist das nicht der Fall, beendet sich Udfform.exe wieder.
+			   Ansonsten wird der Rohling formatiert (durch Aufruf des Programms
+			   "UdfOrig.exe"). Ist der Rohling formatiert, beenden sich UdfOrig.exe 
+			   wieder. Im Anschluss benachrichtigt Udfform.exe den DVClient über 
+			   das erfolgreiche Formatieren (oder dessen Fehlschlag) und beendet
+			   sich anschleißend. Der DVClient beginnt nun sein Backup. Ist er
+			   fertig, ruft er Udfform.exe auf und teilt diesem mit, dass die
+			   CD-R nun finalisiert werden kann. Udfform.exe finalisiert dann
+			   die CD-R und beendet sich anschleißend. 
+
+			   Das Formatieren und anschließende Backup funktioniert auf 
+			   dem Mitsumi-Brenner (CR-4804TE) noch nicht einwandfrei. 
+			   Nach dem Formatieren muss mindestens 20 Sek. gewartet werden,
+			   ehe Windows die CD wieder erkennt. Dieses ist noch einzubauen.
+27.07.00 TKR - Der Client übernimmt das Warten nach dem Formatieren und dem Finalisieren.
+			   RemoteCD ist nur für die Durchführung des Formatierens und
+			   Finalisierens zuständig. Bis jetzt lief es in den Tests stabil.
+02.08.00 TKR - RemoteCD funktioniert nur einwandfrei mit der PacketCD-Version: 2.50.035.,
+			   beim Mitsumi-Brenner (CR-4804TE).
+			   PacketCD wirft die CD-R nach erfolgreichem Finalisieren selbstständig aus.
+07.08.00 TKR - In der Methode "ExecutePacketCD" wurde beim Aufruf des Programms "udforig.exe"
+			   mit CreateProcess das "handle inheritance flag" auf FALSE gesetzt, da es dann
+			   die Eigenschaften des aufrufenden Prozesses nicht erbt und somit durch den
+			   DVHook vor dem Erscheinen auf dem Desktop abgefangen und versteckt werden kann.
+04.03.04 GF  - Umstellung auf Unicode und VS_71

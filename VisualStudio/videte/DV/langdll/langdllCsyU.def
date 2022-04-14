@@ -1,0 +1,7 @@
+; DVUCsy.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVUCsy"
+DESCRIPTION  'DVUCsy Unicode Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

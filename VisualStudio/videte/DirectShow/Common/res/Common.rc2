@@ -1,0 +1,20 @@
+//
+// COMMON.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+/*
+#include <WK_Version.h>
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+WK_VERSION(19, 8, 11, 18, "19/8/96\0", // @AUTO_UPDATE
+		   "CommonDirectShow.dll\0",	// exe name
+		   "Common DirectShow® Dll\0",	// product name
+		   "DirectShow® common functions\0",	// product description
+		   "3.0\0",		// UNUSED now hardcoded for all general product version
+		   "3.001\0"	// UNUSED now hardcoded for all real version
+		   )
+*/
+/////////////////////////////////////////////////////////////////////////////

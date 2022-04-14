@@ -1,0 +1,79 @@
+22.04.06 - UF Bugfix Schneider Intercom Simulation.
+21.04.06 - UF Bugfix Schneider Intercom Simulation.
+04.01.06 - UF Anpassung PM 100 XML an neue Infos.
+30.12.05 - UF Bugfix Schneider Intercom Simulation
+29.12.2005 - UF Designa PM 100 XML Protokoll und Schneider Intercom implementiert.
+28.12.2005 - UF Designa PM 100 IP Alarm Protokoll implementiert.
+28.01.2000
+	GF	- Landau DTP jetzt mit Update von Interface (SPACE) und Kamera (0, SPACE)
+
+12.5.99 >>> UpdateVersion um 15:57 <<<
+	GF	- Die Bytes können jetzt auch einzeln gesendet werden
+
+10.5.99 >>> UpdateVersion um 11:57 <<<
+	GF	- IBM um Statusabfrage erweitert
+
+30.4.99 >>> UpdateVersion um 9:31 <<<
+	GF	- RepeatTime auf ms herabgesetzt, um GermanParcel testen zu koennen (3 Alarme / s)
+
+21.4.99 >>> UpdateVersion um 10:29 <<<
+
+5.1.99 >>> UpdateVersion um 12:25 <<<
+	GF	- Bugfix, bei variablen Protokollen kam es beim Ersetzen der Daten zu Fehlern,
+			wenn die Daten kuerzer als das vorgesehene Feld waren
+
+1.12.98 >>> UpdateVersion um 15:16 <<<
+	GF	- NCR neu hinzugefuegt
+		- Bugfix Serialize (Speichern und Laden)
+		- Bugfix Leserichtung der Daten bei NCR
+
+24.11.98 >>> UpdateVersion um 14:05 <<<
+	GF	- Auf WK-RS232 umgestellt
+		- Bugfixing bei Wiederholung und Begrenzung
+
+12.10.98 >>> UpdateVersion um 12:34 <<<
+	GF	-Eingestellte Werte koennen jetzt als Datei abgespeichert
+			und neu geladen werden.
+
+11.9.98 >>> UpdateVersion um 11:24 <<<
+	GF	Neue Protokolle implementiert
+		- GermanParcel und IBM
+
+2.6.98 >>> UpdateVersion um 16:25 <<<
+	GF	Die GA's unterstützen explizite TAN
+
+4.5.98 >>> UpdateVersion um 15:34 <<<
+	GF	- Bugfix Baudrate bei SNI von 9600 auf 2400 korrigiert
+		- Auf OemGui umgestellt
+
+9.3.98 >>> UpdateVersion um 15:18 <<<
+
+	GF	- Bugfix, Übernahme der 
+
+9.3.98 >>> UpdateVersion um 12:41 <<<
+
+	GF	- Neue Protokolle SNI GA, Engel ZK
+		- Es können Datum und Uhrzeit explizit eingegeben werden
+
+18.2.98 >>> UpdateVersion um 14:02 <<<
+
+	GF	- Neues Protokoll NCR GA
+		- Es können BLZ, Kontonummer und ggf. Betrag explizit eingegeben werden 
+
+17.2.98 >>> UpdateVersion um 15:16 <<<
+
+	GF	Die Version unterstützt
+			Landau	DTP
+			Keba	portachec 2000
+
+		Es werden folgende Möglichkeiten unterstützt:
+			- Einen Datensatz mit bestimmten Geräteeinstellungen senden
+			- Automatische Wiederholung mit einstellbarer Intervalldauer
+				- mit den eingestellten bestimmten Geräteeinstellungen
+				- mit zufälligen Werten für die Geräteeinstellungen
+				- alle Geräteeinstellungen nacheinander durchlaufen
+				- Begrenzen der Wiederholung auf eine bestimmte Anzahl an Vorgängen
+			- Erzeugen eines zufälligen Bitfehlers im Datensatz
+
+	11.02.98
+	GF	history.txt started

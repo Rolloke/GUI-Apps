@@ -1,0 +1,306 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DVStorage.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DVStorage.ico"
+IDR_DVSTORTYPE          ICON                    "res\\DVStorageDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Settings...",            ID_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F10,         ID_FILE_FAST_RESET,     VIRTKEY, NOINVERT
+    VK_F5,          ID_FILE_ACTUALIZE,      VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_FILE_RESET,          VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SETTINGS DIALOGEX 0, 0, 351, 300
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "DV Storage Settings and Surveillance"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDT_TRACE,5,5,341,175,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "No. of Bubbles:",IDC_TXT_BUBBLES,5,188,79,8
+    LTEXT           "Thread Buffer:",IDC_TXT_SAVE_BUFFER,5,200,79,8
+    LTEXT           "Buffer Size:",IDC_TXT_SAVE_BUFFER_COUNT,5,212,
+                    79,8
+    RTEXT           "0",IDC_TXTINT_BUBBLES,90,188,30,8
+    RTEXT           "0",IDC_TXTINT_SAVE_BUFFER,90,200,30,8
+    RTEXT           "0",IDC_TXTINT_SAVE_BUFFER_COUNT,90,212,30,8
+    LTEXT           "Storing Time",IDC_TXT_STORE,138,188,72,8
+    LTEXT           "Bitrate (MB):",IDC_TXT_BITRATEMB,138,200,72,8
+    LTEXT           "Frames per Second",IDC_TXT_FPS,138,212,72,8
+    RTEXT           "0",IDC_TXTINT_STORE,217,188,30,8
+    RTEXT           "0",IDC_TXTINT_BITRATEMB,217,200,30,8
+    RTEXT           "0",IDC_TXTINT_FPS,217,212,30,8
+    LTEXT           "",IDC_TXT_LINE1,5,224,341,8
+    LTEXT           "",IDC_TXT_LINE2,5,236,341,8
+    LTEXT           "",IDC_TXT_LINE3,5,248,341,8
+    LTEXT           "",IDC_TXT_LINE4,5,260,341,8
+    CONTROL         "Debug Output",IDC_RD_DEBUG_TRACE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,270,187,76,10
+    CONTROL         " Diagram",IDC_RD_DIAGRAM,"Button",BS_AUTORADIOBUTTON,
+                    270,199,76,10
+    PUSHBUTTON      "Reset",IDC_BTN_RESET,5,281,50,14,WS_GROUP
+    PUSHBUTTON      "Fast Reset",IDC_BTN_FAST_RESET,60,281,70,14
+    PUSHBUTTON      "Clear Output",IDC_BTN_CLEAR_OUTPUT,135,281,75,14
+    PUSHBUTTON      "Copy Output",IDC_BTN_COPY_OUTPUT,215,281,75,14
+    DEFPUSHBUTTON   "OK",IDOK,296,281,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 84
+        VERTGUIDE, 90
+        VERTGUIDE, 120
+        VERTGUIDE, 138
+        VERTGUIDE, 210
+        VERTGUIDE, 217
+        VERTGUIDE, 247
+        VERTGUIDE, 270
+        VERTGUIDE, 346
+        HORZGUIDE, 5
+        HORZGUIDE, 180
+        HORZGUIDE, 192
+        HORZGUIDE, 204
+        HORZGUIDE, 216
+        HORZGUIDE, 228
+        HORZGUIDE, 240
+        HORZGUIDE, 252
+        HORZGUIDE, 264
+        HORZGUIDE, 288
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DVStorage\n\nDVStor\n\n\nDVStorage.Document\nDVStor Document"
+    IDS_ALARM               "Alarm"
+    IDS_RING                "Circle"
+    IDS_SAFERING            "Safety Circle"
+    IDS_UNDEFINED           "undefined"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Storage"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Shows program information, version number and copyright.\nAbout"
+    ID_APP_EXIT             "Exits the application\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window\nNext Window"
+    ID_PREV_PANE            "Switch back to the previous window\nPrevious Window"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Changes the window size."
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_CANNOT_DELETE_ARCHIV 
+                            "Archive no. %d could not be totally deleted."
+    IDS_NOT_ENOUGH_SPACE    "There are defined archives with %d MB, but hard disk space is only %d MB."
+    IDS_PANE_CLIENTS        "DBC 00"
+    IDS_PANE_PROCESS        "not connected"
+    IDS_PANE_PROCESS2       "connected"
+    IDS_NO_DRIVE            "There is no valid drive to store any images or data available."
+    IDS_PANE_FPS            "0000 fps"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ALARM_60            "The alarm %s is filled at %d%%."
+    IDS_ALARM_FULL          "The alarm %s is full."
+    IDS_ALARM_LIST          "Alarmlist"
+    IDS_STORING_INTERVAL    "Saving Interval"
+    IDS_STORE_MUES          "Store [µs]"
+    IDS_FRAMES_PER_SECOND   "Fps"
+    IDS_SYSTEM_DRIVE        "System drive"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STORAGE_DRIVE       "Storage drive"
+    IDS_HDD_FAILURE         "Drive %c: (%s) failure.\nDrive type: "
+    IDS_NO_STORAGE_DRIVE    "No Harddisk available for storage."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DVStorage.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

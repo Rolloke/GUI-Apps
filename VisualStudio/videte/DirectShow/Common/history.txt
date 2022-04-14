@@ -1,0 +1,4 @@
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+08.10.03 RKE - DirectShow CommonFunctions Dll wurde in Idip und DTS aufgenommen.
+			   Diese Dll implementiert nuetzliche Funktionen für die DirectShow
+			   Schnittstellen.

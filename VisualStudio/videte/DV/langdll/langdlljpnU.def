@@ -1,0 +1,7 @@
+; DVUJpn.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVUJpn"
+DESCRIPTION  'DVUJpn Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

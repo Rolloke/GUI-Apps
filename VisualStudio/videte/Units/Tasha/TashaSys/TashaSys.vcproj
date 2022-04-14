@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="TashaSys"
+	ProjectGUID="{EAED9E09-798F-4A7A-923D-F1C004705E03}"
+	SccProjectName="&quot;$/Project/Units/Tasha/TashaSys&quot;, FNJCAAAA"
+	SccAuxPath=""
+	SccLocalPath="."
+	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
+	Keyword="MakeFileProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\Debug"
+			IntermediateDirectory=".\Debug"
+			ConfigurationType="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="d:\Project\Units\Tasha\TashaSys\BuildDebug d:\Project\Units\Tasha\TashaSys"
+				ReBuildCommandLine="d:\Project\Units\Tasha\TashaSys\BuildDebug d:\Project\Units\Tasha\TashaSys -c"
+				Output="TashaSys.exe"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\Release"
+			IntermediateDirectory=".\Release"
+			ConfigurationType="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="d:\Project\Units\Tasha\TashaSys\BuildRelease d:\Project\Units\Tasha\TashaSys"
+				ReBuildCommandLine="d:\Project\Units\Tasha\TashaSys\BuildRelease d:\Project\Units\Tasha\TashaSys -c"
+				Output="TashaSys.exe"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="c">
+			<File
+				RelativePath="Eventlog.c">
+			</File>
+			<File
+				RelativePath=".\TashaCommon.c">
+			</File>
+			<File
+				RelativePath="TashaSys.c">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h">
+			<File
+				RelativePath="Driver.h">
+			</File>
+			<File
+				RelativePath="Eventlog.h">
+			</File>
+			<File
+				RelativePath="resource.h">
+			</File>
+			<File
+				RelativePath=".\TashaCommon.h">
+			</File>
+			<File
+				RelativePath=".\TashaIOctl.H">
+			</File>
+			<File
+				RelativePath="TashaSys.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc">
+			<File
+				RelativePath="TashaSys.rc">
+			</File>
+		</Filter>
+		<Filter
+			Name="Misc"
+			Filter="">
+			<File
+				RelativePath="BuildDebug.bat">
+			</File>
+			<File
+				RelativePath="BuildRelease.bat">
+			</File>
+			<File
+				RelativePath="MAKEFILE">
+			</File>
+			<File
+				RelativePath="SOURCES">
+			</File>
+			<File
+				RelativePath=".\TashaMSG.mc">
+			</File>
+		</Filter>
+		<Filter
+			Name="Bin"
+			Filter="">
+			<File
+				RelativePath=".\Bin\Install.cmd">
+			</File>
+			<File
+				RelativePath=".\Bin\mdsad301.inf">
+			</File>
+			<File
+				RelativePath=".\Bin\mdsad301.sys">
+			</File>
+			<File
+				RelativePath=".\Bin\mdsdsp.dll">
+			</File>
+			<File
+				RelativePath=".\Bin\TashaSys.reg">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

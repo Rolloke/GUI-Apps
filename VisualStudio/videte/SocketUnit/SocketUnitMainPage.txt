@@ -1,0 +1,69 @@
+
+/*
+@TOPIC{SocketUnit MainPage|SocketUnit,MainPge}
+
+@ITEM @LINK{StateOfTheArt|SocketUnit,StateOfTheArt}
+@ITEM @LINK{Testcases|Testcases,SocketUnit}
+*/
+
+/*
+@TOPIC{Testcases|TestCases,SocketUnit}
+@RELATED @LINK{StateOfTheArt|SocketUnit,StateOfTheArt}
+
+@LISTHEAD{Vorbemerkungen:}
+@ITEM Im Gegensatz zu den ISDNTests, @BW{teilen} sich alle ein und dasselbe Netz.
+So etwas wie ein Bitratenmessung muss also noch auf ganz andere Faktoren achten.
+So etwas wie ein VollLastTest muss gut bedacht sein!
+
+@LISTHEAD{Offene Fragen:}
+@ITEM Q1) Welche effektive Bitrate kann erreicht werden ?
+@ITEM Q2) Wie stark wird das Netz belastet ?
+@ITEM Q3) Netzwerkanschlüsse (Tabelle der Rechner/Ausstattungen und IPs).
+
+@PAR
+@ITEM M)ehrfach Verbindungen C)oCo, M)ico, D)atabase:
+@ITEM2 MC1) Mehrere clients auf einem server. Dann wohl
+nicht mehr 100 P Bilder in Folge sondern im SekundenTakt
+
+@ITEM2 MC2) Mehrere Verbindungen im explorerer. Gemischtes Dekodieren kann
+nicht klappen.
+
+@ITEM2 MM1) Meherer clients auf einem server. Sollte gut klappen.
+		Der Flaschenhals ist beim Dekodieren.
+
+@ITEM2 MM2) Mehrer Verbindungen im Explorer, das SoftDekodieren schafft
+wohl nur ein Bild pro Sekunde.
+
+@ITEM2 MD1) Mehrere clients auf einem server.
+
+@ITEM2 MD2) Mehrere Verbindungen im PictureHandler.
+
+@ALSO @LINK{StateOfTheArt|SocketUnit,StateOfTheArt}
+*/
+
+/*
+@TOPICPSocketUnit Internals|SocketUnit,Internals}
+@LINK{Threads|SocketUnits,Threads}
+
+@TOPICPSocketUnit Threads|SocketUnit,Threads}
+Es gibt die folgenenden Threads:
+@ITEM MainThread mit MessageLoop fuer MainFrame und Doc
+und den ControlSockets
+@ITEM ServerControl
+@ITEM ConnectionThread[s]
+@ITEM CIPCPipe[s]
+
+Kernstueck sind die ConnectionThreads.
+*/
+
+/*
+@TOPIC{StateOfTheArt|SocketUnit,StateOfTheArt}
+@LISTHEAD{Working:}
+@ITEM Input/Output/Datenbankverbindungen funktionieren, auch MEHRFACH.
+
+@LISTHEAD{ToDo:}
+@ITEM ClosingProblem, machmal werden Verbindungen nicht richtig aufgeloest.
+@ITEM Benutzung/Anzweige der Hostnames, nicht nur dotted IPNumbers.
+@ITEM Es gehen noch keine AlarmVerbindungen.
+@ITEM Es gibt noch keine Überprüfung, der Permission etc.
+*/

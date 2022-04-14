@@ -1,0 +1,94 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=VIMAX
+  Title French=Alarmcom VDR 400 Serie
+  Title German=PIN Reader
+  Flags=00011000
+  Split=1420
+  Languages=0 0 0 0 65 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000000010110001000000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\Install\PINReader\setup.exe
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=C:\Programme\Wise
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=c:\dv
+end
+item: Remark
+end
+item: Get Registry Key Value
+  Variable=COMPUTERNAME
+  Key=SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName
+  Value Name=ComputerName
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=COMPUTERNAME
+  Value=2010162-5
+  Flags=00000100
+end
+item: Install File
+  Source=P:\Intern\Tools\PINReader.exe
+  Destination=%MAINDIR%\PINReader.exe
+  Flags=0000000000000010
+end
+item: Execute Program
+  Pathname=%MAINDIR%\PINReader.exe
+  Flags=00000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\PINReader.exe
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=PINReader
+  Text German=Die Serienummer des Gerätes ist falsch. %COMPUTERNAME%
+  Flags=00100000
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%MAINDIR%\DVStarter.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: End Block
+end
+item: Remark
+end
+item: New Event
+  Name=Cancel
+end
+item: Execute Program
+  Pathname=%MAINDIR%\DVStarter.exe
+end

@@ -1,0 +1,61 @@
+// CDecoder.cpp: implementation of the CDecoder class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "Simulator.h"
+
+#include "CDecoder.h"
+#include "CSignal.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+CDecoder::CDecoder()
+{
+	m_pSignal		= NULL;
+	m_nReSyncTime	= 0;
+	m_SignalNoSync.Init(20, 0, UNDEFINE, 0, MID_LEVEL, RGB(192, 192, 192));
+}
+
+//////////////////////////////////////////////////////////////////////
+CDecoder::~CDecoder()
+{
+	
+}
+
+//////////////////////////////////////////////////////////////////////
+void CDecoder::In(CSignal &Signal)
+{
+	if (m_pSignal== NULL || (Signal.GetUNR() != m_pSignal->GetUNR()))
+	{
+		m_nReSyncTime = 30;
+		m_pSignal = &Signal;
+	}
+
+}
+
+//////////////////////////////////////////////////////////////////////
+CSignal& CDecoder::Out()
+{
+	if (m_nReSyncTime == 0)
+		return *m_pSignal;
+	else
+		return m_SignalNoSync;
+
+}
+
+//////////////////////////////////////////////////////////////////////
+void CDecoder::Clock()
+{
+	if (m_nReSyncTime > 0)
+		m_nReSyncTime--;
+}

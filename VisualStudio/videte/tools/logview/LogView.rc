@@ -1,0 +1,526 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LogView.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#include ""l.deu\\afxolecl.rc""        // OLE container resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\LogView.ico"
+IDR_LOGVIEWTYPE         ICON                    "res\\LogViewDoc.ico"
+IDR_HTMLVIEWTYPE        ICON                    "res\\LogViewDoc.ico"
+IDR_HTMLVIEWTYPE2       ICON                    "res\\LogViewDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  17, 16
+BEGIN
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_EDIT_FIND
+    BUTTON      ID_EDIT_COPY
+    SEPARATOR
+    BUTTON      ID_VIEW_SET_BOOKMARK
+    BUTTON      ID_VIEW_NEXT_BOOKMARK
+    BUTTON      ID_VIEW_PREV_BOOKMARK
+    BUTTON      ID_VIEW_DELETE_BOOKMARKS
+    SEPARATOR
+    BUTTON      ID_VIEW_SHOW_SYNCPOINT
+    BUTTON      ID_VIEW_SYNC_TIME
+    BUTTON      ID_REFRESH
+    BUTTON      ID_VIEW_PREV_COMPRESSED
+    BUTTON      ID_VIEW_NEXT_COMPRESSED
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM "Zeitformate Editieren...",    ID_FILE_EDIT_TIME_FORMATS
+        MENUITEM SEPARATOR
+        MENUITEM "Logdateipfad &wählen",        ID_FILE_CHANGE_LOG_PATH
+        MENUITEM "Logdateien &speichern",       ID_FILE_SAVE_LOGFILES
+        MENUITEM "Logdateien &löschen",         ID_FILE_DELETE_LOGFILES
+        MENUITEM "Logdatei in Unicode",         ID_FILE_READ_LOGFILE_UNICODE
+        MENUITEM SEPARATOR
+        MENUITEM "Protokolle speichern",        ID_FILE_SAVE_PROTOCOLLS
+        MENUITEM "Protokolle löschen",          ID_FILE_DELETE_PROTOCOLLS
+        MENUITEM SEPARATOR
+        MENUITEM "Laufzeitfehler...",           ID_FILE_RUNTIME_ERRORS
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM "Automatisch updaten",         ID_VIEW_UPDATE_AUTOMATICALLY
+        MENUITEM "Zum Dateinde springen",       ID_VIEW_JUMP_TO_END
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über...",               ID_APP_ABOUT
+    END
+END
+
+IDR_LOGVIEWTYPE MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "Laufzeitfehler...",           ID_FILE_RUNTIME_ERRORS
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "Alles &markieren\tStrg+A",    ID_EDIT_SELECT_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Suchen...\tStrg+F",          ID_EDIT_FIND
+        MENUITEM "&Weitersuchen\tF3",           ID_EDIT_REPEAT
+        MENUITEM "&Komprimierte durchsuchen\tF7", ID_EDIT_SEARCH_IN_COMPRESSED
+        MENUITEM "Suche beenden",               ID_EDIT_STOP_SEARCH_IN_COMPRESSED
+        MENUITEM "&Zeitpunkt suchen",           ID_EDIT_SEARCH_TIME_VALUE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Aktualisieren\tF5",          ID_REFRESH
+        MENUITEM "A&utomatisch aktualisieren",  ID_VIEW_UPDATE_AUTOMATICALLY
+        MENUITEM "Zum Datei&ende springen",     ID_VIEW_JUMP_TO_END
+        MENUITEM SEPARATOR
+        MENUITEM "S&ynchronisationpunkt",       ID_VIEW_SHOW_SYNCPOINT
+        MENUITEM "Nächstes Komprimiertes",      ID_VIEW_NEXT_COMPRESSED
+        MENUITEM "Vorhergehendes Komprimiertes", ID_VIEW_PREV_COMPRESSED
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Untereinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+        MENUITEM SEPARATOR
+        MENUITEM "S&ynchronisieren",            ID_VIEW_SYNC_TIME
+        MENUITEM "Komprimierte synchronisieren", ID_WINDOW_SYNC_COMPRESSED
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über...",               ID_APP_ABOUT
+    END
+END
+
+IDR_HTMLVIEWTYPE MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Aktualisieren\tF5",          ID_REFRESH
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Untereinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+END
+
+IDR_HTMLVIEWTYPE2 MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Aktualisieren\tF5",          ID_REFRESH
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Untereinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    VK_F7,          ID_EDIT_SEARCH_IN_COMPRESSED, VIRTKEY, NOINVERT
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_RETURN,      ID_OLE_EDIT_PROPERTIES, VIRTKEY, ALT, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F5,          ID_REFRESH,             VIRTKEY, NOINVERT
+    VK_F4,          IDC_COMBO_LOG_FILES,    VIRTKEY, NOINVERT
+    VK_F2,          ID_VIEW_NEXT_BOOKMARK,  VIRTKEY, NOINVERT
+    VK_F2,          ID_VIEW_PREV_BOOKMARK,  VIRTKEY, SHIFT, NOINVERT
+END
+
+IDR_HTMLVIEWTYPE ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+END
+
+IDR_HTMLVIEWTYPE2 ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDR_MAINFRAME DIALOGEX 0, 0, 491, 12
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO_LOG_FILES,30,0,123,323,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_HTM_FILES,195,0,150,316,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Logfiles:",IDC_STATIC_LOG,0,1,27,8
+    LTEXT           "Protokolle:",IDC_STATIC_HTML,157,2,34,8
+    CONTROL         "",IDC_SEARCH_DATE,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,350,0,65,12
+    CONTROL         "",IDC_SEARCH_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,415,0,60,12
+    PUSHBUTTON      ">>",ID_EDIT_SEARCH_TIME_VALUE,477,0,14,12
+END
+
+IDD_LOAD_COMPRESSED DIALOGEX 0, 0, 190, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Komprimierte Dateien laden"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,135,132,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,132,50,14
+    CONTROL         "",IDC_FILE_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | LVS_OWNERDATA | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,5,5,180,121
+    PUSHBUTTON      "Alles markieren",ID_EDIT_SELECT_ALL,60,132,70,14,NOT WS_VISIBLE
+END
+
+IDD_EDIT_TIME_FORMATS DIALOGEX 0, 0, 190, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Zeitformate editieren"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,135,132,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,132,50,14
+    CONTROL         "",IDC_TIME_FORMAT_LIST,"SysListView32",LVS_REPORT | LVS_EDITLABELS | LVS_ALIGNLEFT | LVS_OWNERDATA | LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,5,5,180,121
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDR_MAINFRAME, DIALOG
+    BEGIN
+        RIGHTMARGIN, 490
+        VERTGUIDE, 198
+    END
+
+    IDD_LOAD_COMPRESSED, DIALOG
+    BEGIN
+        RIGHTMARGIN, 145
+        VERTGUIDE, 5
+        VERTGUIDE, 185
+        BOTTOMMARGIN, 150
+        HORZGUIDE, 5
+        HORZGUIDE, 126
+        HORZGUIDE, 139
+    END
+
+    IDD_EDIT_TIME_FORMATS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 185
+        BOTTOMMARGIN, 150
+        HORZGUIDE, 5
+        HORZGUIDE, 126
+        HORZGUIDE, 139
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_OLE_INIT_FAILED     "Fehler bei der OLE-Initialisierung. Überprüfen Sie, ob die OLE-Bibliotheken in der richtigen Version vorliegen."
+    IDP_FAILED_TO_CREATE    "Fehler beim Erzeugen des Objekts. Stellen Sie sicher, daß das Objekt in der Systemregistrierung eingetragen ist."
+    IDS_MSG_LOAD_ALL        "Es werden %d Dateien zusätzlich importiert.\nWenn zu viele Dateien importiert werden\nreagiert der Rechner zunehmend langsamer.\n\nSoll der Vorgang fortgesetzt werden?"
+    IDS_DIRECTORY           "Verzeichnis"
+    IDS_SAVE                "Speichern"
+    IDS_SAVE_LOG_FILES      "Logdateien speichern"
+    IDS_DELETE_LOGFILES     "Logdateien löschen"
+    IDS_NOT_DELETED_LOGFILES "Nicht gelöschte Logdateien"
+    IDS_SAVE_PROTOCOLLS     "Protokolle speichern"
+    IDS_DELETE_PROTOCOLLS   "Protokolle löschen"
+    IDS_NOT_DELETED_PROTOCOLLS "Nicht gelöschte Protokolle"
+    IDS_OPEN_RTE_FILE       "Laufzeitfehler öffnen."
+    IDS_RTE                 "Laufzeitfehler"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "LogView"
+    IDR_LOGVIEWTYPE         "\nLogVie\nLogView\nDateityp Log (*.log)\n.log\nLogView.Document\nLogViewDocument"
+    IDR_HTMLVIEWTYPE        "\nHtmlVi\nHtmlVi\nDateityp Hypertext (*.htm)\n.htm\nHtmlView.Document\nHtmlVi Document"
+    IDR_HTMLVIEWTYPE2       "\nHtmlVi\nHtmlVi\nDateityp Hypertext (*.html)\n.html\nHtmlView.Document\nHtmlVi Document"
+    DC_TIME_FORMAT_LIST     "Editiert Zeitformate"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "LogView"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_REFRESH              "Aktualisiert die Anzeige der Logdatei.\nAktualisieren (F5)"
+    ID_FILE_SAVE_LOGFILES   "Speichert die Logdateien in einem anderen Verzeichnis (z.B.: Diskette)"
+    ID_FILE_CHANGE_LOG_PATH "Wählt einen alternativen Pfad für die Logdateien."
+    ID_VIEW_SYNC_TIME       "Synchronisiert Zeiten der geöffneten Fenster mit dem aktiven Fenster durch Auswahl der Zeit in der Zeile.\nFenster Syschronisieren"
+    ID_EDIT_SEARCH_IN_COMPRESSED 
+                            "Durchsucht alle komprimierten Dateien nach der Zeichenfolge."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_UPDATE_AUTOMATICALLY 
+                            "Schaltet automatisches Aktualisieren der Logdateien ein bzw. aus"
+    ID_VIEW_JUMP_TO_END     "Schaltet das Springen zum Ende der Logdatei nach dem Aktualisieren ein bzw. aus"
+    ID_VIEW_SHOW_SYNCPOINT  "Springt zum Synchronisationspunkt und markiert ihn.\nSynchronisationspunkt suchen (F8)"
+    ID_EDIT_SEARCH_TIME_VALUE 
+                            "Sucht einen Zeitpunkt (Werkzeugleiste) in dem geöffneten Dokument\nSuchen"
+    ID_VIEW_SET_BOOKMARK    "Lesezeichen setzen bzw. löschen\nLesezeichen"
+    ID_VIEW_NEXT_BOOKMARK   "Springt zum nächsten Lesezeichen\nNächstes Lesezeichen (F2)"
+    ID_VIEW_PREV_BOOKMARK   "Springt zum vorhergehenden Lesezeichen\nVorhergehendes Lesezeichen (Shift + F2)"
+    ID_VIEW_DELETE_BOOKMARKS "Alle Lesezeichen löschen\nAlle löschen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_COMBO_LOG_FILES     "Zeigt alle verfügbaren Logdateien an und öffnet diese.\nLogdateien öffnen"
+    IDC_COMBO_HTM_FILES     "Zeigt alle verfügbaren Protokolle an und öffnet diese.\nProtokolle öffnen"
+    IDC_SEARCH_DATE         "Geben Sie hier das gesuchte Datum ein\nDatum suchen"
+    IDC_SEARCH_TIME         "Geben Sie hier die gesuchte Zeit ein\nZeitpunkt suchen"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_DELETE_LOGFILES "Löscht die Logdateien im Logverzeichnis."
+    ID_WINDOW_SYNC_COMPRESSED 
+                            "Ermöglicht die Synchronisierung auch in den Komprimierten Dateien."
+    ID_VIEW_NEXT_COMPRESSED "Nächste komprimierte Datei öffnen\nNächste Komprimierte"
+    ID_VIEW_PREV_COMPRESSED "Vorhergehende komprimierte Datei öffnen\nVorhergehende Komprimierte"
+    ID_EDIT_STOP_SEARCH_IN_COMPRESSED 
+                            "Stopt die Suchen in Komprimierten Dateien."
+    ID_FILE_DELETE_PROTOCOLLS 
+                            "Löscht die Protokolldateien im Protokollverzeichnis."
+    ID_FILE_SAVE_PROTOCOLLS "Speichert die Prokolldateien in einem anderen Verzeichnis (z.B.: Diskette)"
+    ID_FILE_READ_LOGFILE_UNICODE "Liest die Logdateien im Unicodeformat ein"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_TIME_FORMAT_LIST    "Formate für Zeit\n%y: Jahr 2 Stellen (00 - 99)\n%Y: Jahr 4 Stellen\n%m: Monat\n%U: Woche des Jahres (0-53)\n%d: Tag des Monats\n%w: Tag der Woche (0-7)\n%j: Tag des Jahres\n%H: Stunde (0 - 23)\n%M: Minute\n%S:Sekunde\n%s: Millisekunde\n%u: Mikrosekunde\n%%: Prozentzeichen"
+END
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LogView.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#include "l.deu\afxolecl.rc"        // OLE container resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

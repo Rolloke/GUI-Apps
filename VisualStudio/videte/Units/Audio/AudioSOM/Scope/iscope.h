@@ -1,0 +1,9 @@
+
+#ifndef __ISCOPE_H__
+#define __ISCOPE_H__
+
+// { 35919F40-E904-11ce-8A03-00AA006ECB65 }
+DEFINE_GUID(CLSID_Scope,
+0x35919f40, 0xe904, 0x11ce, 0x8a, 0x3, 0x0, 0xaa, 0x0, 0x6e, 0xcb, 0x65);
+
+#endif // __ISCOPE_H__

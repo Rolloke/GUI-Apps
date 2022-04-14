@@ -1,0 +1,274 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DVHook.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\DVHook.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DVHOOK_DIALOG DIALOGEX 0, 0, 500, 200
+STYLE WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DVHook"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,410,183,85,14
+    EDITTEXT        IDC_EDT_OUTPUT,5,5,490,175,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_VSCROLL
+    LTEXT           "",IDC_DUMMY,5,186,194,8,NOT WS_VISIBLE
+    PUSHBUTTON      "Debug Flags...",IDC_BTN_FLAGS,328,183,76,14
+END
+
+IDD_DVHOOK_PASSWORD DIALOGEX 0, 0, 215, 82
+STYLE DS_SYSMODAL | DS_MODALFRAME | WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "",IDC_TXT_ENTER_PASSWORD,5,3,135,37
+    EDITTEXT        IDC_EDT_PASSWORD,5,44,135,14,ES_PASSWORD | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER
+    DEFPUSHBUTTON   "OK",IDOK,92,63,48,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,63,48,14
+    PUSHBUTTON      "0",IDC_BTN_0,145,61,20,18
+    PUSHBUTTON      "1",IDC_BTN_1,145,2,20,18
+    PUSHBUTTON      "2",IDC_BTN_2,168,2,20,18
+    PUSHBUTTON      "3",IDC_BTN_3,190,2,20,18
+    PUSHBUTTON      "4",IDC_BTN_4,145,22,20,18
+    PUSHBUTTON      "5",IDC_BTN_5,168,22,20,18
+    PUSHBUTTON      "6",IDC_BTN_6,190,22,20,18
+    PUSHBUTTON      "7",IDC_BTN_7,145,42,20,18
+    PUSHBUTTON      "8",IDC_BTN_8,168,42,20,18
+    PUSHBUTTON      "9",IDC_BTN_9,190,42,20,18
+    PUSHBUTTON      "C",IDC_BTN_DEL,190,61,20,18
+END
+
+IDD_DVHOOK_SEARCH_FILES DIALOGEX 0, 0, 300, 188
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,226,168,69,15,WS_DISABLED
+    CONTROL         "List1",IDC_LIST_FOUND_FILES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,5,290,160
+    DEFPUSHBUTTON   "Abbrechen",IDCANCEL,109,168,69,15
+END
+
+IDD_FLAGS_MSG DIALOGEX 0, 0, 199, 201
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DVHook"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,125,183,69,15
+    CONTROL         "List1",IDC_LIST_MSG,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,5,189,174
+    PUSHBUTTON      "Abbrechen",IDCANCEL,5,183,69,15
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MFC-Anwendung DVHook\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "DVHook\0"
+            VALUE "LegalCopyright", "Copyright (C) 2000\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "DVHook.EXE\0"
+            VALUE "ProductName", "Anwendung DVHook\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DVHOOK_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 495
+        HORZGUIDE, 5
+        HORZGUIDE, 180
+        HORZGUIDE, 190
+    END
+
+    IDD_DVHOOK_PASSWORD, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 140
+        VERTGUIDE, 155
+        VERTGUIDE, 178
+        VERTGUIDE, 200
+        HORZGUIDE, 11
+        HORZGUIDE, 31
+        HORZGUIDE, 51
+        HORZGUIDE, 70
+    END
+
+    IDD_DVHOOK_SEARCH_FILES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 295
+        HORZGUIDE, 5
+        HORZGUIDE, 165
+        HORZGUIDE, 175
+    END
+
+    IDD_FLAGS_MSG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 194
+        HORZGUIDE, 5
+        HORZGUIDE, 179
+        HORZGUIDE, 190
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "Anzeigen",                    ID_SHOW_HOOK_DLG
+        MENUITEM "B&eenden",                    IDCANCEL
+    END
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DVHook.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

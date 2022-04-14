@@ -1,0 +1,8 @@
+History von Configure
+---------------------
+
+
+12.02.99
+	- Beginn des Projektes
+	- Erstellung eines Programmes zur Konfiguration einer
+	  MiCoISA und drei CoVi8-Karten

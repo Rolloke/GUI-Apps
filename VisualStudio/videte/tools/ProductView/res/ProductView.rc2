@@ -1,0 +1,32 @@
+//
+// PRODUCTVIEW.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+#ifdef _GARNY
+GARNY_VERSION(18, 8, 11, 36, "18/08/99 , 11:36\0", // @AUTO_UPDATE
+		   "ProductView.exe\0",	// exe name
+		   "Video-Save ProductView\0",	// product name
+		   "Video-Save ProductView\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+#else
+WK_VERSION(18, 8, 11, 36, "18/08/99 , 11:36\0", // @AUTO_UPDATE
+		   "ProductView.exe\0",	// exe name
+		   "idip! ProductView\0",	// product name
+		   "ProductView\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+#endif

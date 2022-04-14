@@ -1,0 +1,141 @@
+//////////////////////////////////////////
+// Christian Lohmeier 					//
+// 29.10.2003							//
+// videte IT AG							//
+// Projekt: Tasha 						//
+// Firmware 533							//
+// Status: [develop]					//
+//////////////////////////////////////////
+
+14.09.03 	Bewegungserkennung unter 
+			C:\Blackfin\ADSP\Code\Examples\BewegungserkennungI2SEXT
+			ist fertiggestellt und Funktioniert
+			Senden der Bilder (720*288) über I2S an die Savic
+			Header liegt im Speicher und wird vor den Bilddaten gesendet (32 Bytes)
+
+01.10.03	Bewegungserkennung
+			C:\Blackfin\ADSP\Code\Examples\BewegungserkennungTDM
+			Senden auf TDM umgestellt 
+			Header wird auf PC Seite hardgecoodet
+			Bild wird auf 240*136 mittels DMA skalliert
+
+15.10.03 	Bootfähiges Programm zum senden eines selbsterzeugten Testbildes 
+			mittels TDM auf SPORT0
+			C:\Blackfin\ADSP\Code\BootTestbildTDM
+			Die Größe kann beliebig variert werden
+			Der Header wird vorab mit einem Marker gesendet so dass,
+			die UNIT jedes Bild und dessen Abmaße erkennt
+		
+20.10.03 	Bootfähiges Programm zum senden eiens Videobildes
+			C:\Blackfin\ADSP\Code\BootVideoTDM
+			je ein Halbbild wird aus dem SDRAM pos 0x00000000 (*pInBuffA) 
+			über den SPORT0 mittels TDM übertragen
+			Vorgestllt ist eine Header der allerdings durch SwapEndian zur 
+			8 Bit übertragung vorbereitet ist.  
+
+28.10.03	Altera.cpp ist mit CYCLON-Board getestet und die Programmierung gelingt
+			Eine Bestätigung über CONF_DONE kommt nur, wenn der SPORT zuvor nicht 
+			enabled ist. 
+			Das Ansprechen der Register im Altera über das asynchrone 
+			Interface ist getestet
+          TODO: Abfragen des Pins INIT_DONE als Bestätigung das Altera angelaufen ist // kommt wohl nicht mehr in frage da auf Tasha keine Verbindung besteht!
+ 	
+
+31.10.03  	Implementierung der Bewegungserkennung als Bootfähiges File (ldr)
+		  	ist abgeschlossen. Header wird mit Bewegungskoordinaten gesendet.
+		  TODO: Ablaufsteuerung erweitern und algemeiner halten. 
+		  		Bufferhandling als Funktion
+	  	   
+	  	 	
+	  
+05.11.03 	Header übermittelt zu den Koordinaten die jeweiligen 
+			Bewegungsintensitäten in (Point[].nValue) und sendet di Maske_A 
+			sowie das Differnzbild (byFrameBuff_C)
+			Bug im starten des SPORT ist behoben 
+			Bug im Löschen der Koordinaten ist behoben 
+		  
+		  INFO: Timing Diagramm:
+		   
+			time	 __________
+		 			|          |
+		 	 ||		|  F1      |
+			 \/		|          |T   SPORT_TX
+		  			|          |
+		  			|__________|
+		  			|          |S	Bewegungserkennung F0&F1 Abgeschlossen (byLineC == 36)
+		  			|  F2      |L	Ende SPORT_TX (SPORT ISR)
+		  			|          |T 	SPORT_TX
+		  			|          |
+		  			|__________|
+
+10.11.03	Zeitversetztes Löschen der Bewegungskoordinaten und von (bMotion)
+	
+17.11.03	Massage-Handlings über SPI1 eingebunden. Wechselt zwischen Rx und Tx.
+			Ein und Ausgabebuffer werden mittels DMA an den SPI gebunden.
+			Problem: Abschalten wenn noch nicht alle Daten aus dem DMA FIFO an 
+			den SPI FIFO gesendet sind. Durch CheckIncommingData ist die Funktionalität gegeben.
+			 
+	  	 	
+18.11.03	BF533 booted über SPI1, läd das entsprechende File in Programmspeicher
+	  	 	und started.
+	  	 	
+19.11.03	Eprombrennplatine gebaut und in Betrieb genommen 
+			WInBoot Eprom vom Hawk-Board ausgelesen und gesichert.
+		  TODO: Vendor ID in Loaderfile für BF535 
+		 
+20.11.03  TODO: Abfrage sämtlicher Fehlerstati und senden als TMMMessage	
+		  INFO: Codec ist bestellt und kommt KW49 
+		 
+24.11.03	Messages werden über SPI ausgetauscht. 2 Mal pro Sekunde PING mit Confirm 
+			zum Testen des Betriebszustands
+			Weiterhin folgende TMM_Messages als implentiert:
+				CONTRAST
+				BRIGHTNESS
+				SATURATION
+				PING
+				NOTIFY + INFO
+				THRESHOLD MD
+				THRESHOLD Mask
+				DELAY Mask
+				INCREMENT Mask
+				
+26.11.03  	MASKE_B wird über SPI1 übertragen und im BF533 gesetzt.
+			TMM:
+				PERMANENT_MASK			
+		  TODO: Alter Header muß weg
+		  
+08.12.03 	Weiter Funktionalitäten bei der MAske_B hinzugefügt. 
+			Setzen einzelner Punkte: 	TMM_REQUEST_CHANGE_PERMANENT_MASK
+			Löschen der kompleten Maske:TMM_REQUEST_CLEAR_PERMANENT_MASK
+			Invertieren der Maske:		TMM_REQUEST_INVERT_PERMANENT_MASK
+			TIMER mit niedriger Priorität und Interrupt implementiert
+
+15.12.03	Checksumme der Bilddaten durch Aufsummieren und hinterlegen im Header (nur über 100 BYTES)
+
+17.12.03 	Mpeg4 Codec von Emuzed ist da erste Tests
+
+06.01.04 	Tashaprojekt eingefrohren in TashaDeveloper 
+			mit Tasha geht es weiter!
+			Codec getestet und YUV 4:2:0 ca 300 Frames in Mp4 encoded (über Nacht) 
+			(Projekt: MPEG4_SP_ENC_EZ533_LIB.dpj)
+		  
+		  INFO: YUV 4:2:0 planar  Reihenfolge: Y,Cb,Cr
+		  
+		 ------------------------------------------ 
+		  				  | Horizontal | Vertikal
+		 ------------------------------------------ 					
+		  Y Sample Period | 	1	   |	1
+	   Cb U Sample Periot |		2	   |	2
+	   Cr V	Sample Periot |		2	   |	2
+		 ------------------------------------------ 
+		  
+	   Bsp.:	Breite 	720 = n = 2a
+		  		Höhe 	288 = m = 2b
+		 
+		  Y(0,0)  . .  Y(n-1,0) | U(0,0)  . .  U(a-1,0) | V(0,0)  . .  V(a-1,0)  	
+		  .			  		  . | .			 	 	  . | .					  .
+		  .					  . | .					  . | .					  .
+		  Y(0,m-1). .Y(n-1,m-1) | U(0,b-1). .U(a-1,b-1) | V(0,b-1). .V(a-1,b-1)             
+			
+09.01.04  TODO:	Codec initialisieren
+

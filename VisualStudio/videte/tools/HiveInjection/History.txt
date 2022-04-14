@@ -1,0 +1,101 @@
+History:
+----------------
+12.08.2005
+	- CHive ist eine Klasse mit der es möglich ist festgelegte Registry-Pfade
+	  in einer eigenen hive-Datei zu speichern, wieder herzustellen und automatisch
+	  auf Änderungen zu überwachen.
+	- HiveInjection lädt bei Programmstart den Registryzweig HKLM\SOFTWARE\Dvrt aus
+	  der Datei d:\Settings\Dvrt.dat und schreibt ihn bei Beenden auch dort wieder hin.
+	  Zur Laufzeit wird dieser Schlüssel mit allen  Unterschlüsseln auf Änderungen hin 
+	  überwacht und dann ggf. in der hive-Datei gesichert.
+	- Wird HiveInjection nun durch den Dienst 'ControlService' gestartet, ist sicher-
+	  gestellt, dass der Dvrt-Zweig der Registry VOR dem Start von Idip/DTS geladen wurde.
+	- Mit Hilfe von HiveInjection lassen sich nun einige 'alte' Ideen auf verblüffend
+	  einfache Weise realisieren. Dies wären z.B. der Factory-Reset, oder 'Last good known'
+	  Hierzu muß lediglich beim Start von HiveInjection, oder durch 'antriggern' der 
+	  Restorefunktion andere hive-Dateien geladen werden.
+	- Zusammenarbeit mit Ewf: 
+		a) HiveInjection sichert den Dvrt-Zweig bei jeder Änderung auf der Festplatte.
+		   und lädt diese auch zu Programmstart wieder ein. Dadurch werden alle Änderungen
+		   an den DVRT-Schlüsseln sofort gesichert und werden nach einem Stromausfall
+		   auch wieder hergestellt. Parallel dazu wird der Dvrt-zweig auch weiterhin
+		   im Software-Hive unter C:\WINDOWS\system32\config\software gesichert und
+		   gelangt so beim ordnungsgemäßen Herrunterfahren auch auf den CF (sofern ein
+		   commit-Kommando an den Ewf-Manager geschickt wurde, was die Software aber
+		   ja bereits macht.)
+		b) Festplatte defekt: Nach dem Austausch der Platte ist die hive-Datei
+		   d:\Settings\Dvrt.dat natürlich verschwunden. HiveInjection kann folglich den
+		   hive nicht laden, und belässt die Registry so wie sie ist. Der Dvrt-Zweig
+		   entspricht nun dem des letzten Herrunterfahrens. Sobald die erste Änderung
+		   im Dvrt-Zweig der Registry erfolgt, wird die Datei d:\Settings\Dvrt.dat neu
+		   angelegt.
+		   
+17.08.2005
+	- Es wird eine Sicherheitskopie des Dvrt-hive unter d:\settings\Dvrt.dat.bak erstellt.
+	  Wenn die Datei d:\settings\Dvrt.dat nicht geladen werden kann, so wird die Backup-Datei
+	  verwendet.
+		
+24.08.2005
+	- WK_VERSION in rc2 hinzugefügt
+
+26.08.2005
+	- Klasse CObserveDirectory zur Überwachung und Spiegelung von Verzeichnissen
+	  hinzugefügt.
+	- Beim Start von HiveInjection wird zunächst ein evtl. vorhandene Backup in das
+	  zu überwachende Verzeichnis kopiert.
+	- Beim Beenden von HiveInjection wird das überwachte Verzeichnis in das Backup
+	  Verzeichnis zurück kopiert.
+	- Änderungen im überwachten Verzeichnis werden im Bakupverzeichnis ebenfalls 
+	  durchgefürt, sodas dort immer unmittelbar alle Dateien aktuell sind.
+	  Im Falle eines Stromausfalls (mit Ewf) sind die Dateiänderungen nicht verloren.
+	  Wenn die Festplatte ausgetauscht wird, so werden die Dateien auf dem CF verwendet,
+	  welche ja beim letzten ordnungsgemäßen Herrunterfahren aktualisiert wurden.
+
+29.08.2005
+	- Bei Erhalt von FILE_ACTION_ADDED wird nun zunächst auf das Ende der Dateioperation
+	  gewartet.
+
+02.09.2005
+	- Die Registrierungsschlüssel zur Konfiguration haben sich verändert.
+		- HKEY_LOCAL_MACHINE\SOFTWARE\DVRT\HiveInjection\Hive\HivePathFile (REG_SZ)
+		  (Dies ist der Ort an dem der DVRT-Hive gespiegelt wird) 
+		- HKEY_LOCAL_MACHINE\SOFTWARE\DVRT\HiveInjection\Directories
+		  (Hier können bis zu 255 Unterschlüssel der folgenden Form angelegt werden:
+		    Quellverzeichnis REG_SZ Zielverzeichnis
+		    also z.B. C:\DV\		REG_SZ	D:\backup\DV\
+					  C:\Security\	REG_SZ	D:\Backup\Security\
+						 ...		 ...		...
+						 ...		 ...		...
+						 
+						 
+08.09.2005
+	- Die Registryschlüssel für die Konfiguration von HiveInjection werden nun aus
+	  dem WK_Profile Header genommen.
+
+09.09.2005
+	- Es läßt sich nun unter DVRT\HiveInjection\IncludedFilterExt (REG_SZ) eine 
+	  Liste von FileExtensions angeben, die bei allen Dateioperationen beachtet werden.
+	  sollen. Alle anderen werden ignoriert.
+	  Default ist derzeit: '.msk,.dbf,.htm,.jpg,.png,.bmp,.gif,.ini'
+	  Diese Liste gilt für alle überwachten Verzeichnisse.
+	  
+13.09.2005
+	- CHive::Lock besitzt nun ein Timeout und ein Sleep, um zu verhindern, das HiveInjection
+	  bei Dateien die permanent von anderen Prozessen geöffnet sind hängen bleibt.
+
+20.10.2005
+	- Bugfix: Wenn Unterverzeichnisse im Backupverzeichnis noch nicht existieren, im
+		      Überwachungsverzeichnis hingegen schon, so wurden bislang Änderung innerhalb dieser
+		      Unterverzeichnisse erst beim Beenden von HiveInjection im Backupverzeichnis gespiegelt.
+		
+23.11.2005
+	- CHive::m_dwCheckIntervall war auf 0 -> Dadurch hohe CPU Auslastung		      
+
+28.11.2005
+	- m_hObservedDirectory muß auf INVALID_HANDLE_VALUE anstatt auf NULL überprüft werden. 
+	  Dadurch wurde versucht ein Verzeichnis zu überwachen was nicht existiert. -> Hohe CPU auslastung.
+20.10.06
+	- UF wchar_t as build in WK_TRACE immer von wkclasses.
+04.07.06
+	- RKE Die Sicerungsverzeicnisse werden jetzt nicht mehr fixed auf D: eingetragen. Sie werden auf dem
+		  auf dem ersten fixed drive (Suche begint bei D:) erzeugt.

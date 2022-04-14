@@ -1,0 +1,6 @@
+; CommonD.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CommonDirectShowD"
+
+EXPORTS
+    ; Explicit exports can go here

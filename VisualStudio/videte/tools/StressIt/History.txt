@@ -1,0 +1,25 @@
+History Stress It
+-----------------
+
+25.02.98
+	- StressIt, dient zur Schaffung von gewissen Extrembedingungen (Speichernot)
+	  Hiermit lassen sich gewisse Schwachstellen nachweisen.
+	- Beginn des Projektes
+	- Umstellung von Konsolenapplikation auf Dialogbased.
+	- Es lassen sich nun Speicherblöcke in den folgenden Größen allozieren
+			- 100KByte, 1MByte, 10Mbyte, 50MByte, 100MByte.
+	- Der aktuelle Speicherbedarf wird nun alle 500ms aktualisiert angezeigt.
+
+
+17.02.98
+	- Mit Hilfe eines Slidercontrolls läßt sich die Prozessorlast einstellen
+
+18.02.98
+	- Threadprorität einstellbar
+
+11.06.98
+	- Plattenschreibzugriffe möglich
+12.04.02
+	- Die Auslastung ein wenig verschärft, da die Rechner inzwischen sehr viel schneller sind
+05.03.04
+	- Umstellung auf Unicode und VS_71

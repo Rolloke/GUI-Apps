@@ -1,0 +1,16 @@
+Erst mal eine Sammlung der Informationen
+
+Ursprüngliche Rufnummern der SMSC:
+D1    : 0171 252 1001
+D2    : 0172 227 8010
+E-plus: 0177 1167
+
+20.08.01	D1		Neue Rufnummer 0171 252 1002
+12.02.02	D2		Neue Rufnummer 0172 227 8020
+
+xx.02.02	D2		Handbuch Vodafone:
+					ISDN-Zugang mit spezieller Software: 0172/2278000 oder 0172/2278010 
+					Analog-Modem-Zugang mit spezieller Software 
+						mit eingeschalteter Fehlerkorrektur (empfohlen):0172/2278025 (alt: 0172/2278020)
+						ohne eingeschaltete Fehlerkorrektur:			0172/2278052 (auch 0172/2278020)
+					Analog-Modem-Zugang mit Terminal-Programm 0172/2278030 

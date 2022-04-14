@@ -1,0 +1,226 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "..\inc\mico.h"
+#include "dialog.h"
+#include "ntverp.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+DLG_VIDEOCONFIG DIALOG DISCARDABLE  48, 40, 177, 123
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Mico Device Setup"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "",ID_FILEDESCRIPTION,40,4,120,8
+    CTEXT           "",ID_DRIVERVERSION,40,16,120,8
+    CTEXT           "",ID_LEGALCOPYRIGHT,4,28,172,8
+    LTEXT           "&Interrupt (IRQ):",IDC_STATIC,4,48,65,10
+    COMBOBOX        ID_LBINTERRUPTNUMBER,85,45,85,40,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Frame mapped at:",IDC_STATIC,4,88,75,8
+    COMBOBOX        ID_LBMEMORYBASEADDRESS,85,85,85,52,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "O&K",IDOK,36,104,45,14,WS_GROUP
+    PUSHBUTTON      "&Cancel",IDCANCEL,92,104,45,14,WS_GROUP
+    COMBOBOX        ID_LBIOADDRESS,85,65,85,60,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "&IO Baseaddress:",IDC_STATIC,4,68,65,8
+END
+
+DLG_VIDEOSOURCE DIALOG DISCARDABLE  56, 18, 179, 161
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Video Source"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Hue",IDC_STATIC,5,5,20,10
+    SCROLLBAR       ID_SBHUE,55,5,40,12,WS_TABSTOP
+    EDITTEXT        ID_EBHUE,100,5,20,12
+    GROUPBOX        "Video Connector",IDC_STATIC,5,100,80,46,WS_GROUP
+    CONTROL         "Input &A",ID_INPUTA,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,15,110,52,10
+    CONTROL         "Input &B",ID_INPUTB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,15,120,52,10
+    CONTROL         "Input &C (S-VHS)",ID_INPUTC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,15,130,65,10
+    GROUPBOX        "Standard",IDC_STATIC,90,105,80,38,WS_GROUP
+    CONTROL         "&NTSC (USA)",ID_PBNTSC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,100,115,54,10
+    CONTROL         "&PAL (Europe)",ID_PBPAL,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,100,130,54,10
+    CONTROL         "&Filter",ID_FILTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,85,65,10
+    PUSHBUTTON      "O&K",IDOK,125,5,48,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,125,25,48,14
+    PUSHBUTTON      "&Default",ID_PBDEFAULT,125,45,48,14
+    SCROLLBAR       ID_SBBRIGHT,55,25,40,11,WS_TABSTOP
+    SCROLLBAR       ID_SBCONTRAST,55,45,40,11,WS_TABSTOP
+    SCROLLBAR       ID_SBSAT,55,65,40,11,WS_TABSTOP
+    EDITTEXT        ID_EBBRIGHT,100,25,20,13,ES_AUTOHSCROLL
+    EDITTEXT        ID_EBCONTRAST,100,45,20,13,ES_AUTOHSCROLL
+    EDITTEXT        ID_EBSAT,100,65,20,13,ES_AUTOHSCROLL
+    LTEXT           "B&right",IDC_Bright,5,25,25,10
+    LTEXT           "&Contrast",IDC_Contrast,5,45,30,10
+    LTEXT           "&Saturation",IDC_Sat,5,65,40,8
+END
+
+DLG_VIDEOFORMAT DIALOG DISCARDABLE  26, 38, 180, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Video Format"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Image Dimensions",IDC_STATIC,4,4,114,56
+    RTEXT           "Width:",IDC_STATIC,8,20,26,8
+    LTEXT           "",ID_SIZEX,38,20,16,8
+    RTEXT           "Height:",IDC_STATIC,66,20,28,8
+    LTEXT           "",ID_SIZEY,98,20,16,8
+    PUSHBUTTON      "1/&8",ID_PBSIZEEIGHTH,8,36,18,14
+    PUSHBUTTON      "1/&4",ID_PBSIZEQUARTER,30,36,18,14
+    PUSHBUTTON      "&3/8",ID_PBSIZETHREEEIGTHS,52,36,18,14
+    PUSHBUTTON      "1/&2",ID_PBSIZEHALF,74,36,18,14
+    PUSHBUTTON      "&Full",ID_PBSIZEFULL,96,36,18,14
+    LTEXT           "&Image Format:",IDC_STATIC,4,68,94,8
+    COMBOBOX        ID_LBIMAGEFORMAT,4,80,102,64,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "O&K",IDOK,128,8,48,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,128,24,48,14
+    PUSHBUTTON      "&Default",ID_DEFAULT,128,40,48,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,0,1318,1
+ PRODUCTVERSION 4,0,1318,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "w+k VideoCommunication\0"
+            VALUE "FileDescription", "Mico NT Driver\0"
+            VALUE "FileVersion", "4.00\037\0"
+            VALUE "InternalName", "Mico.DLL\0"
+            VALUE "LegalCopyright", "w+k VideoCommunication\0"
+            VALUE "OriginalFilename", "Mico.DLL\0"
+            VALUE "ProductName", "Microsoft® Windows NT(TM) Operating System\0"
+            VALUE "ProductVersion", "4.00$\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""mico.h""\r\n"
+    "#include ""dialog.h""\r\n"
+    "#include ""ntverp.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VCAPPRODUCT         "Mico Board"
+    IDS_ERR_UNKNOWN         "The driver failed to install"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    VC_ERR_OK               "The driver was successfully installed"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    VC_ERR_CREATEDEVICE     "The device object could not be created"
+    VC_ERR_CONFLICT         "A hardware conflict was detected"
+    VC_ERR_DETECTFAILED     "The hardware could not be detected at this address"
+    VC_ERR_INTERRUPT        "The hardware does not interrupt at this interrupt number"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

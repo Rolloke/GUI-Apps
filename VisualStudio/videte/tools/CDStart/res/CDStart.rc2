@@ -1,0 +1,21 @@
+//
+// CDSTART.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+#include "WK_Version.h"
+
+/////////////////////////////////////////////////////////////////////////////
+WK_VERSION(1, 2, 0, 378, "1.2.0.378\0", // @AUTO_UPDATE
+		   "CDSTART.exe\0",	// exe name
+		   "CDSTART\0",	// product name
+		   "CDSTART\0",	// product description
+		   "1.2\0",		// general product version
+		   "1.2\0"	// real version
+		   )

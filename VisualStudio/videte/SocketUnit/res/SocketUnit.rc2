@@ -1,0 +1,25 @@
+//
+// SOCKETUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+
+WK_VERSION(8, 1, 13, 0, "08/01/99,13:00\0", // @AUTO_UPDATE
+		   "SocketUnit.exe\0",	// exe name
+		   "SocketUnit\0",	// product name
+		   "SocketUnit\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )
+
+/////////////////////////////////////////////////////////////////////////////

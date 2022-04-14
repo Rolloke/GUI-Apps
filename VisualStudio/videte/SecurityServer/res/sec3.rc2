@@ -1,0 +1,24 @@
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(17, 8, 10, 35, "17/08/99 , 10:35\0", // @AUTO_UPDATE */
+//
+// SEC3.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#include  "WK_Version.h"
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+
+
+WK_VERSION(5, 0, 4, 948, "5.0.4.948\0", // @AUTO_UPDATE
+		   "sec3.exe\0",	// exe name
+		   "Server\0",	// product name
+		   "Server application\0",	// product description
+		   "3.02\0",		// general product version
+		   "3.02\0"	// real version
+		   )
+

@@ -1,0 +1,24 @@
+//
+// TASHAUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+	   WK_VERSION(4, 6, 1, 602, "4.6.1.602\0", // @AUTO_UPDATE
+	   "TashaUnit.exe\0",	// exe name
+	   "TashaUnit 2.0\0",	// product name
+	   "TashaUnit 2.0\0",	// product description
+	   "4.0\0",				// general product version
+	   "4.001\0"			// real version
+	   )
+

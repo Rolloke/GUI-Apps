@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ICPCONUnit", "ICPCONUnit.vcproj", "{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = ICPCONUnit.vcproj
+		SccProjectName0 = \u0022$/Project/Units/ICPCONUnit\u0022,\u0020KGICAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Debug.ActiveCfg = Debug|Win32
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Debug.Build.0 = Debug|Win32
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Enu.ActiveCfg = Enu|Win32
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Enu.Build.0 = Enu|Win32
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Release.ActiveCfg = Release|Win32
+		{29F1B4F8-5D11-42F2-B716-F9D4B0C9D935}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

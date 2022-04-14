@@ -1,0 +1,125 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Developer Studio generated include file.
+// Used by SavicUnit.rc
+//
+#define BIN_SMALL_TESTBILD              50
+#define BIN_LARGE_TESTBILD              51
+#define ID_ABOUT                        101
+#define IDD_SAVIC_APP_DIALOG            102
+#define IDR_MAINFRAME                   105
+#define IDS_RTE_NO_VIDEO                1001
+#define IDS_RTE_VIDEO                   1002
+#define IDS_RTE_ALLOW_HARDDECODE_SAVIC  1003
+#define IDS_RTE_DLL_WRONG_VERSION       1004
+#define IDS_RTE_DRIVER_NOT_LOADED       1005
+#define IDR_SAVICUNIT1                  1100
+#define IDR_SAVICUNIT2                  1101
+#define IDR_SAVICUNIT3                  1102
+#define IDC_SOURCE1                     1103
+#define IDC_SOURCE2                     1104
+#define IDC_SOURCE3                     1105
+#define IDC_SOURCE4                     1106
+#define IDC_SOURCE5                     1107
+#define IDC_SOURCE6                     1108
+#define IDC_SOURCE7                     1109
+#define IDC_SOURCE8                     1110
+#define IDC_SOURCE9                     1111
+#define IDC_SOURCE10                    1112
+#define IDC_SOURCE11                    1113
+#define IDC_SOURCE12                    1114
+#define IDC_SOURCE13                    1115
+#define IDC_SOURCE14                    1116
+#define IDC_SOURCE15                    1117
+#define IDC_SOURCE16                    1118
+#define IDC_FE_PAL_CCIR                 1119
+#define IDC_FE_NTSC_CCIR                1120
+#define IDC_FE_PAL_SQUARE               1121
+#define IDC_FE_NTSC_SQUARE              1122
+#define IDC_FE_FBAS                     1123
+#define IDC_FE_SVHS                     1124
+#define IDC_BE_PAL_CCIR                 1125
+#define IDC_BE_NTSC_CCIR                1126
+#define IDC_BE_PAL_SQUARE               1127
+#define IDC_BE_NTSC_SQUARE              1128
+#define IDC_DLG_LUMINANCE               1129
+#define IDC_BE_COMPOSITE                1130
+#define IDC_BE_RGB                      1131
+#define IDC_FE_LNOTCH                   1132
+#define IDC_FE_LDEC                     1133
+#define IDC_EDGE7                       1134
+#define IDC_EDGE6                       1135
+#define IDC_EDGE5                       1136
+#define IDC_EDGE4                       1137
+#define IDC_EDGE3                       1138
+#define IDC_EDGE2                       1139
+#define IDC_EDGE1                       1140
+#define IDC_EDGE0                       1141
+#define IDC_ACK7                        1142
+#define IDC_ACK6                        1143
+#define IDC_ACK5                        1144
+#define IDC_ACK4                        1145
+#define IDC_ACK3                        1146
+#define IDC_ACK2                        1147
+#define IDC_ACK1                        1148
+#define IDC_ACK0                        1149
+#define IDC_RELAIS3                     1150
+#define IDC_RELAIS2                     1151
+#define IDC_RELAIS1                     1152
+#define IDC_RELAIS0                     1153
+#define IDC_DECODED_FRAMES              1154
+#define IDC_ENCODED_FRAMES              1155
+#define IDC_DEC_START                   1156
+#define IDC_DEC_STOP                    1157
+#define IDC_ENC_START                   1158
+#define IDC_ENC_STOP                    1159
+#define IDC_TEST                        1160
+#define IDC_HIGH_RES                    1161
+#define IDC_LOW_RES                     1162
+#define IDC_COMPRESS_0                  1163
+#define IDC_COMPRESS_1                  1164
+#define IDC_COMPRESS_2                  1165
+#define IDC_COMPRESS_3                  1166
+#define IDC_COMPRESS_4                  1167
+#define IDC_COMPRESS_5                  1168
+#define IDC_VIDEOINLAY                  1169
+#define IDC_DLG_MD_CONFIG               1170
+#define ID_SETTINGS                     1171
+#define IDC_SWITCHES                    1171
+#define IDC_TXT_DECODER                 1172
+#define IDC_TXT_ENCODER                 1173
+#define IDC_TXT_FRAMES1                 1182
+#define IDC_TXT_FRAMES2                 1183
+#define IDC_GROUP_RESOLUTION            1184
+#define IDC_GROUP_COMPRESSION           1185
+#define IDC_TXT_RELAIS                  1186
+#define IDC_GROUP_EXTENSION             1187
+#define IDC_TXT_SWITCHES                1187
+#define IDC_GROUP_VIDEOSOURCE           1188
+#define IDC_GROUP_VIDEOFRONTEND         1189
+#define IDC_GROUP_VIDEOBACKEND          1190
+#define IDC_GROUP_SOURCETYPE            1191
+#define IDC_TXT_EDGE                    1192
+#define IDC_TXT_ACK                     1193
+#define IDC_MD_TRAINING                 1194
+#define IDC_MD_INVERT_MASK              1195
+#define IDC_ENABLE_TWO_FIELDS           1196
+#define IDC_LED1                        1197
+#define IDC_LED2                        1198
+#define IDC_EDIT_FPS                    1201
+#define IDC_TXT_FPS                     1202
+#define IDC_INIT_PLL                    1204
+#define IDC_NOISE_REDUCTION             1205
+#define IDC_RADIO_JPEG                  1206
+#define IDC_RADIO_DIB                   1207
+#define IDC_STATIC_CODEC                1208
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        106
+#define _APS_NEXT_COMMAND_VALUE         32771
+#define _APS_NEXT_CONTROL_VALUE         1209
+#define _APS_NEXT_SYMED_VALUE           104
+#endif
+#endif

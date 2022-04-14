@@ -1,0 +1,6 @@
+; cipcdebugU.def : Declares the module parameters for the DLL.
+
+LIBRARY      "cipcdebugU"
+
+EXPORTS
+	SetDllDebugger

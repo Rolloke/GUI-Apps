@@ -1,0 +1,671 @@
+<html>
+<head>
+	<title>Axis Communications - Network Camera Developer Pages</title>
+
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+	<meta name="ProgId" content="FrontPage.Editor.Document">
+	<meta name="KeyWords" content="network camera, network cameras, IP, IP camera, IP cameras, netcam, web camera, webcamera, web cameras, webcam, webcams, video server, print server, video servers, print servers, network, server, video, print, document, document server, scan, wireless, developer, linux, asic, chip, camera server, bluetooth, 802.11, communications, thinserver, lan, video solutions, video products, surveillance, document server, oem, remote camera, download, remote monitoring, web promotion">	
+	<meta name="Description" content="Axis specializes in professional network video and printing solutions">
+	
+	<link rel="stylesheet" type="text/css" href="../../../core/css/axis.css">
+
+	<script language="javascript" type="text/javascript" src="../../../core/javascripts/axis.js"></script>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF">
+<br>
+<center>
+<div class="axisLight_BgTop">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/top.htm" TAG="BODY" startspan -->
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td height="34" width="96"><a href="../../../index.htm"><img src="../../../core/graphics/axis_logo.gif" border="0" alt="www.axis.com" width="96" height="34"></a></td>
+    <td height="34" width="10" class="axisGraphics"><img src="../../../core/graphics/blank.gif" border="0" alt width="10" height="1"></td>
+    <td valign="middle" align="right" height="34" width="100%">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_home.gif" alt="Home" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../index.htm">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../products/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_products.gif" alt="Products" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../products/index.htm">Products</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../solutions/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_video.gif" alt="Video solutions" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../solutions/index.htm" target="_top">Solutions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_support.gif" alt="Support" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../index.htm" target="_top">Support</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../sales/index.php" target="_top"><img border="0" src="../../../core/graphics/button_wheretobuy.gif" alt="Where to buy" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../sales/index.php" target="_top">Where to buy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../corporate/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_axis.gif" alt="Corporate" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../corporate/index.htm">Corporate</a>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!--webbot bot="Include" i-checksum="64338" endspan -->
+</div></div>
+<div class="axisLight_BgMid">
+<table width="750" cellspacing="0" cellpadding="0" border="0">	
+	<tr>
+		<td class="axisLight_TwoColLeft" valign="top" width="147">
+			<!-- Content left column begin -->
+<ul>
+					<li class="arrowsdown"><a href="../../index.htm">Support</a></li>
+                      <li class="arrowsdown"><b><a href="../index.htm">Network Video</a></b></li>
+                      <li class="arrowsdown"><a href="index.htm">Developer pages</a></li>
+                      <li class="bullet"><a href="cam_http_api_index.htm">AXIS
+                        VAPIX 
+                      API</a></li>
+                      <li class="dash"><a href="cam_http_api.htm">HTTP API ver.1</a></li>
+                      <li class="dash"><a href="cam_http_api_2.htm">HTTP API ver.2</a></li>
+                      <li class="dash"><b>Difference v1/v2</b></li>
+                      <li class="dash"><b><a href="cam_rtsp_api.htm">RTSP API</a></b></li>
+                      <li class="dash"><b><a href="recording_api.htm">Recording
+                        API</a></b></li>
+                      <li class="dash"><b><a href="cam_param_2.htm">Parameters</a></b></li>
+                    </ul>
+                     <div class="dotline">             
+                    <ul>    
+                          <li class="nobullet">Other links</li>
+                          <li class="dash">
+                          <a href="../../../partner/adp_intro.htm">Partner program (ADP)</a>
+                          </li>
+					</ul>
+                        </div>
+  					
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/e-news_video.htm" TAG="BODY" startspan -->
+<form action="../../../reg/nlinsert.php" method="post" onsubmit="this.oldurl.value=location.href;">
+              			<div class="greybox">
+							<span class="smallheadline">Subscribe to e-news:</span><br>
+			<a href="#" onclick="axisPopUp('http://www.axis.com/reg/info/infosmall.php?id=1','NetworkVideoNews',360,200,false); return false;">Network Video News</a>			
+			<br><br>
+			Enter your E-mail:
+			<br>
+			<input type="text" name="email" size="15" maxlength="100">
+			<input type="submit" value="OK" name="enews"> 
+			<br> 
+			<br> 
+            <a href="../../../reg/index.php">Other e-newsletter options</a>
+            <input type="hidden" value=1 name="newsmail">
+			<input type="hidden" name="success" value="/reg/nlinsert.php">
+			<input type="hidden" name="oldurl" value="/">
+			<input type="hidden" name="failure" value="/reg/fel.htm">
+</div>
+
+</form>
+<!--webbot bot="Include" i-checksum="13382" endspan -->
+            </div>
+              
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/search.htm" TAG="BODY" startspan -->
+
+<form name="gs" method="GET" action="http://search.axis.com/search" style="margin:0; padding:0;">
+	<input type="hidden" name="restrict" value=""> 
+    <input type="hidden" name="ie" value="">
+    <input type="hidden" name="site" value="axis_com">
+    <input type="hidden" name="output" value="xml_no_dtd">
+    <input type="hidden" name="client" value="axis_com">
+    <input type="hidden" name="lr" value="">
+    <input type="hidden" name="proxystylesheet" value="axis_com">
+    <input type="hidden" name="oe" value="">
+       
+<table border="0" cellpadding="0" width="100%">
+	<tr>
+		<td valign="top">
+			<p class="midtext"><b><font color="#666666">Search</font></b><br>
+			<input type="text" name="q" size="10" style="width:100px;">
+		</td>
+		<td valign="middle"><input type="image" name="btnG" border="0" src="../../../core/graphics/find_small.gif" align="middle" width="30" height="30"></td>	
+	</tr>
+</table>
+</form>
+                  
+<!--webbot bot="Include" i-checksum="33403" endspan -->
+            </div>
+              		
+                    <!-- Content left column end -->
+		
+		</td>
+		<td class="axisLight_TwoColRight" valign="top" width="540">
+		
+					<!-- Content right column begin -->
+            <p class="title">Differences between Axis Video HTTP API version 1 and version
+            2</p>
+                    <p>Revision: 1.08<br>
+            Date: 2005-<span lang="sv">October</span>-<span lang="sv">26</span></p>
+            <hr>
+            <h2>TABLE OF CONTENTS</h2>
+            <ul class="TOC">
+              <li><a href="#doc_history">DOCUMENT HISTORY</a>
+              <li><a href="#overview">1 OVERVIEW</a>
+                <ul>
+                  <li><a href="#overview_versions">1.1 Product and firmware
+                    versions</a></li>
+                </ul>
+              <li><a href="#references">2 REFERENCES</a>
+              <li><a href="#api_blocks">3 API GROUPS</a>
+                <ul>
+                  <li><a href="#api_blocks_general">3.1 General</a>
+                    <ul>
+                      <li><a href="#api_blocks_general_add_update_remove_list">3.1.1
+                        Add, update, remove and list parameters and their values</a>
+                      <li><a href="#api_blocks_general_users">3.1.2&nbsp;Add,
+                        modify and delete users</a>
+                      <li><a href="#api_blocks_general_hard_factory_default">3.1.3
+                        Hard factory default</a>
+                      <li><a href="#api_blocks_general_backup">3.1.4 Backup</a>
+                      <li><a href="#api_blocks_general_restore">3.1.5 Restore</a>
+                      <li><a href="#api_blocks_general_firmware_upgrade">2.1.6 Firmware upgrade</a>
+                      <li><a href="#api_blocks_general_time_date">3.1.7 System
+                        date and time</a></li>
+                    </ul>
+                  <li><a href="#api_blocks_image_video">3.2 Image and Video</a>
+                    <ul>
+                      <li><a href="#api_blocks_image_video_imagesize">3.2.1
+                        Image size</a>
+                      <li><a href="#api_blocks_image_video_videostatus">3.2.2 Video status</a>
+                      <li><a href="#api_blocks_image_video_bitmap">3.2.3 Bitmap</a>
+                      <li><a href="#api_blocks_image_video_jpeg_mjpg">3.2.4
+                        JPEG/MJPG</a>
+                        <ul>
+                          <li><a href="#api_blocks_image_video_jpeg_jpeg_image">3.2.4.1
+                            JPEG image request</a>
+                          <li><a href="#api_blocks_image_video_jpeg_jpeg_snapshot">3.2.4.2
+                            JPEG image (snapshot) CGI request</a>
+                          <li><a href="#api_blocks_image_video_jpeg_jpeg_response">3.2.4.3
+                            JPEG image response</a></li>
+                          <li><a href="#api_blocks_image_video_jpeg_jpeg_buffer">3.2.4.4 JPEG buffer request</a></li>
+                        </ul>
+                        <ul>
+                          <li><a href="#api_blocks_image_video_mjpg_mjpg_video">3.2.4.5
+                            MJPG video request</a>
+                          <li><a href="#api_blocks_image_video_mjpg_mjpg_video_cgi">3.2.4.6
+                            MJPG video CGI request</a>
+                          <li><a href="#api_blocks_image_video_mjpg_mjpg_response">3.2.4.7
+                            MJPG video response</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#api_blocks_image_video_overlay">3.2.5 Image overlay</a></li>
+                      <li><a href="#api_blocks_image_video_mpeg4">3.2.6 MPEG-4</a></li>
+                    </ul>
+                  <li><a href="#api_blocks_ptz">3.3 PTZ</a></li>
+                  <li><a href="#api_blocks_md">3.4 Motion Detection</a></li>
+                  <li><a href="#api_blocks_io">3.5 I/O</a>
+                    <ul>
+                      <li><a href="#api_blocks_io_control">3.5.1 I/O control</a>
+                        <ul>
+                          <li><a href="#api_blocks_io_input">3.5.1 Input</a></li>
+                          <li><a href="#api_blocks_io_output">3.5.2 Output</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#api_blocks_io_virtual">3.5.2 Virtual I/O control</a>
+                        <ul>
+                          <li><a href="#api_blocks_io_virtual_input">3.4.2.1 Input</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="#api_blocks_event">3.6 Event</a>
+                  <li><a href="#api_blocks_firewall">3.7 Firewall - IP filter</a></li>
+                  <li><a href="#api_blocks_audio">3.8 Audio</li>
+                </ul>
+              </li>
+            </ul>
+            <hr>
+            </a>
+            <h2>&nbsp;</h2>
+            <h2><a name="doc_history">DOCUMENT HISTORY</a></h2>
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%"><b>Version</b></td>
+                  <td width="25%"><b>Date</b></td>
+                  <td><b>Comment</b></td>
+                </tr>
+                <tr>
+                  <td width="25%">1.00</td>
+                  <td width="25%">2003-Sep-16</td>
+                  <td>Initial version.</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.01</td>
+                  <td width="25%">2004-Feb-03</td>
+                  <td>Updated&nbsp;according to HTTP API version 2.01.</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.02</td>
+                  <td width="25%">2004-Feb-16</td>
+                  <td>Updated&nbsp;according to HTTP API version 2.02.</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.03</td>
+                  <td width="25%">2004-May-27</td>
+                  <td>Updated according to HTTP API version 2.03.</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.04</td>
+                  <td width="25%">2004-July-23</td>
+                  <td>Updated according to HTTP API version 2.05</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.05</td>
+                  <td width="25%">2004-Nov-03</td>
+                  <td>Updated according to HTTP API version 2.06</td>
+                </tr>
+                <tr>
+                  <td width="25%">1.06</td>
+                  <td width="25%">2005-Jan-20</td>
+                  <td>Added the change made for virtual input control</td>
+                </tr>
+                <tr>
+                  <td width="25%" valign="top">1.07</td>
+                  <td width="25%" valign="top">2005-Feb-25</td>
+                  <td valign="top">Removed the nosync parameter from the param.cgi</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">1.08</td>
+                  <td width="25%">2005-10-26</td>
+                  <td>Moved PTZ preset configuration from ptz.cgi to
+                    ptzconfig.cgi.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="overview">1 OVERVIEW</a></h2>
+            <p>Axis camera products with firmware version 4.00 and above support
+            dynamic parameters. This new functionality and the improvement in
+            Axis products require a new way of interfacing with them. This is
+            the main reason for the conversion from the Axis Video HTTP API
+            version 1 to version 2.&nbsp;&nbsp;</p>
+            <p>This document describes the differences between Axis Video HTTP
+            API version 1 and version 2.&nbsp;</p>
+            <!-- =============================================================== -->
+            <h3><a name="overview_versions">1.1 Product and firmware versions</a></h3>
+            <p>The support for the HTTP APIs is heavily dependent on the product
+            and firmware release. For compliance information, please refer to
+            the product's Release Notes.</p>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="references">2 REFERENCES</a></h2>
+            <p><a href="cam_http_api.htm">Axis Video HTTP API, version 1</a><br>
+            <a href="cam_http_api_2.htm">Axis Video HTTP API, version 2</a>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <!-- *********************************************************************** -->
+            <!-- *********************************************************************** -->
+            <h2><a name="api_blocks">3 API GROUPS</a></h2>
+            <!-- *********************************************************************** -->
+            <!-- *********************************************************************** -->
+            <h3><a name="api_blocks_general">3.1 General</a></h3>
+            <h3><a name="api_blocks_general_add_update_remove_list">3.1.1 Add,
+            update, remove and list parameters and their values</a></h3>
+            <!-- *********************************************************************** -->
+            <p>The requests in this group provide a new and more consistent way
+            of getting and setting parameters in Axis products with firmware
+            version 4.00 and above. The parameters have three
+            different security levels, which level to use depends on which
+            operation shall be done and which parameter shall be operated on.
+            The security levels for each parameter are specified in the <a href="cam_param_2.htm">
+            parameter document</a>.
+            <p> For the sake of backwards compatibility, the
+            getparam.cgi and setparam.cgi requests in the HTTP API version 1.xx&nbsp;
+            will continue to be supported by these products for some time to
+            come. However, these requests are obsolete and should not be used.
+            <p>This new cgi group also allows the adding and removal of dynamic
+            parameters.&nbsp;&nbsp;&nbsp;&nbsp;<p>The parameter <b>nosync</b>
+        has been removed.<!-- *********************************************************************** -->
+            <p><!-- *********************************************************************** -->
+            &nbsp;
+            <h3><a name="api_blocks_general_users">3.1.2 Add, modify and delete
+            users</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            <h3><a name="api_blocks_general_hard_factory_default">3.1.3 Hard
+            factory default</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            
+            <h3><a name="api_blocks_general_backup">3.1.4 Backup</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            
+            <h3><a name="api_blocks_general_restore">3.1.5 Restore</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            
+            <h3><a name="api_blocks_general_firmware_upgrade">3.1.6 Firmware upgrade</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            
+            <!-- *********************************************************************** -->
+            
+            
+            <h3><a name="api_blocks_general_time_date">3.1.7 System date and
+            time</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video">3.2 Image and video</a></h3>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_imagesize">3.2.1 Image size</a></h3>
+            <p>This is a new feature in Axis 4.xx products.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_videostatus">3.2.2 Video status</a></h3>
+            <p>This is a new feature in Axis 4.xx video
+            servers.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_bitmap">3.2.3 Bitmap</a></h3>
+            <p>Bitmap support is a new feature in some
+            Axis 4.xx products. The requests in this section are very similar to
+            the JPEG requests.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_jpeg_mjpg">3.2.4 JPEG/MJPG</a></h3>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_jpeg_jpeg_image">3.2.4.1 JPEG
+            image request</a></h3>
+            <p>This request is slightly modified.&nbsp;</p>
+            <ul>
+              <li>The parameter <b>&lt;name&gt;</b> from the HTTP API version 1.xx is no longer available.
+              <li>New valid values for <b>&lt;camera&gt;</b> have been added.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_jpeg_jpeg_snapshot">3.2.4.2 JPEG
+            image (snapshot) CGI request</a></h3>
+            <p>This request is slightly modified.</p>
+            <ul>
+              <li>New valid values for the parameter <b>resolution</b> have been
+                added.
+              <li>New valid values for the parameter <b>camera</b> have been added.
+              <li>There is a new parameter <b>color</b>.
+              <li>There is a new parameter <b>textstring</b>.
+              <li>There is a new parameter <b>textcolor</b>.
+              <li>There is a new parameter <b>textbackgroundcolor</b>.
+              <li>There is a new parameter <b>textpos</b>.
+              <li>There is a new parameter <b>overlayimage</b>.
+              <li>There is a new parameter <b>overlaypos</b>.
+              <li>There is a new parameter <b>squarepixel</b>.
+              <li>The parameter <b>quad</b> is no longer available.
+              <li>The parameter <b>showlength</b> is no longer available. The
+                Content-Length is always included in the HTTP-header.
+              <li>The parameter <b>timeout</b> is no longer available.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_jpeg_jpeg_response">3.2.4.3 JPEG
+            image response</a></h3>
+            <p>The field &quot;Content-Length&quot; is always included, and the
+            field &quot;Content-Auth&quot; can no longer be included.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_jpeg_jpeg_buffer">3.2.4.4 JPEG buffer request</a>
+            </h3>
+
+            <p>This request is slightly modified.
+            </p>
+            <ul>
+              <li>The parameter <b>do</b> has a new valid
+                value; <b>remove</b>, and the meaning of the value <b>reset</b>
+                has been changed.</li>
+              <li>The time between prealarm and postalarm
+                images is changed. The images will be produced as fast as
+                possible if no predelay and postdelay have been set. The default
+                delay was previously set to 1000 ms.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_mjpg_mjpg_video">3.2.4.5 MJPG
+            video request</a></h3>
+            <p>This request is slightly modified.&nbsp;</p>
+            <ul>
+              <li>The parameter <b>&lt;name&gt;</b> from the HTTP API version
+                1.xx is no longer available.
+              <li>New valid values for <b>&lt;camera&gt;</b> have been added.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_mjpg_mjpg_video_cgi">3.2.4.6
+            MJPG video CGI request</a></h3>
+            <p>This request is slightly modified.</p>
+            <ul>
+              <li>New valid values for the parameter <b>resolution </b>have been
+                added.
+              <li>New valid values for the parameter <b>camera</b> have been added.
+              <li>There is a new parameter <b>color</b>.
+              <li>There is a new parameter <b>textstring</b>.
+              <li>There is a new parameter <b>textcolor</b>.
+              <li>There is a new parameter <b>textbackgroundcolor</b>.
+              <li>There is a new parameter <b>textposition</b>.
+              <li>There is a new parameter <b>textpos</b>.
+              <li>There is a new parameter <b>overlayimage</b>.
+              <li>There is a new parameter <b>overlaypos</b>.
+              <li>There is a new parameter <b>squarepixel</b>.
+              <li>There is a new parameter <b>fps</b>.
+              <li>The parameter <b>quad</b> is no longer available.
+              <li>The parameter <b>showlength</b> is no longer available. The
+                Content-Length is always included in the HTTP-header.
+              <li>The parameters <b>req_fps</b> and <b>des_fps</b> are no longer
+                available.
+              <li>The parameter <b>deltatime</b> is no longer available.
+              <li>The parameter <b>timeout</b> is no longer available.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_image_video_mjpg_mjpg_response">3.2.4.7 MJPG
+            video response</a></h3>
+            <p>The field &quot;Content-Length&quot; is always included, and the
+            field &quot;Content-Auth&quot; can no longer be included.</p>
+            <p>&nbsp;</p>
+
+
+            <!-- *********************************************************************** -->
+            
+            <h3><a name="api_blocks_image_video_overlay">3.2.4 Image overlay</a></h3>
+            
+            <p>This is a new feature in some Axis 4.xx products.</p>
+            
+            <p>&nbsp;</p>
+            
+            <h3><a name="api_blocks_image_video_mpeg4">3.2.5 MPEG-4</a></h3>
+            
+        <p>MPEG-4 is a new feature in some Axis 4.xx products.</p>
+            
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_ptz">3.3 PTZ</a></h3>
+            <p>The PTZ framework is completely new in 4.xx
+            products.&nbsp;</p>
+            <ul>
+              <li>These products have no PTZ drivers installed from
+                start, a driver must be uploaded and associated with a serial
+                port and then the camera must be connected to the serial
+                port.&nbsp;</li>
+              <li>To set the PTZ parameters, the
+                ptzparam.cgi is used. Listing the PTZ parameters is done with
+                param.cgi like any other parameters.</li>
+              <li>PTZ control queue is a new feature in
+                4.xx products.</li>
+            </ul>
+            <p>Modifications made to control PTZ:</p>
+            <ul>
+              <li>PTZ preset configuration is moved from ptz.cgi to
+                ptzconfig.cgi due to security reasons.</li>
+              <li>There is a new parameter <b>home</b>.</li>
+              <li>There is a new parameter <b>bartype</b>.</li>
+              <li>There is a new parameter <b>imagerotation</b>.</li>
+              <li>The parameter <b>zoomrel</b> is no longer available.</li>
+              <li>The parameter <b>focusrel</b> is no longer available.</li>
+              <li>The parameter <b>irisrel</b> is no longer available.</li>
+              <li>The meaning of the value to the
+                parameter <b>rfocus</b> has changed.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_md">3.4 Motion Detection</a></h3>
+            <p>The Motion Detection framework is
+            completely new.&nbsp;</p>
+            <ul>
+              <li>A Motion Detection window is created
+                when adding a group of Motion parameters. The parameters are
+                dynamically created and are created, modified, listed and
+                removed with param.cgi.&nbsp;</li>
+              <li>It is now possible to define exclude
+                windows, i.e. defining that motion in a specific area should be
+                ignored.</li>
+              <li>To get the Motion Detection levels,
+                motiondetect.cgi is used, with ability to define which MD
+                windows are of interest. It is also possible to get the MD
+                levels related to a specific window configuration.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+            
+            <h3><a name="api_blocks_io">3.5 I/O</a></h3>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_io_control">3.5.1 I/O control</a></h3>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_io_input">3.5.1.1 Input</a></h3>
+
+            <p>This request is slightly modified.</p>
+            <ul>
+              <li>There is a new parameter <b>checkactive</b>.
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_io_output">3.5.1.2 Output</a></h3>
+
+            <p>This request is slightly modified.</p>
+            <ul>
+              <li>There is a new parameter <b>checkactive</b>.</li>
+            </ul>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_io_virtual">3.5.2 Virtual I/O control</a></h3>
+            
+            <!-- *********************************************************************** -->
+            
+            <h3><a name="api_blocks_io_virtual_input">3.5.2.1 Input</a></h3>
+            
+          <p>The state of the virtual input control has changed. The virtual
+          input is simulating a real electrical input and can either be activated or
+          deactivated. This means that after having activated the virtual input,
+          it must first be deactivated to be able to activate it again.</p>
+            
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+
+            <h3><a name="api_blocks_event">3.6 Event</a></h3>
+            <p>The event administration is completely changed and settings are
+            now stored as any other parameter, meaning that param.cgi is used to
+            add, modify and remove events.</p>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            <h3><a name="api_blocks_firewall">3.7 Firewall - IP filter</a></h3>
+            <p>The firewall (IP address filtering) administration is completely
+            changed. The IP filter settings can be made either by changing the
+            parameters using param.cgi or by using the ipfilter.cgi. The
+            ipfilter.cgi offers possibility to verify that you are able to
+            connect to the Axis device when the IP filter is enabled.&nbsp;
+            <p>&nbsp;
+            
+            <!-- *********************************************************************** -->
+            
+            <h3><a name="api_blocks_audio">3.8 Audio</a></h3>
+            <p>The Audio requests are the same but now with ability to choose
+            streaming method.
+            <ul>
+              <li>There is a new parameter <b>httptype</b>.</li>
+            </ul>
+            <p>param.cgi can be used to get and set the Audio parameters, but for the sake of backwards compatibility, the
+            /axis-cgi/audio/getparam.cgi requests in the HTTP API version 1
+            will continue to be supported by these products for some time to
+            come.&nbsp;</p>
+                    <!-- Content right column end --></td>
+	</tr>
+</table>
+</div>
+<div class="axisLight_BgBottom">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/bottom.htm" TAG="BODY" startspan -->
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+   			<td width="55%"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br><img border="0" src="../../../core/graphics/blank.gif" width="9" height="1"><img border="0" src="../../../core/graphics/logo_triangle_bw.gif" width="11" height="9">
+				<font color="#999999"><i>Axis specializes in professional network video and printing solutions</i></font>
+			</td>
+   			<td width="45%" align="right"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br>
+              &nbsp;&nbsp;&nbsp; <a href="../../../corporate/corp/glossary_general.htm" style="text-decoration:none;color:#999999"><b>Glossary</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../corporate/contact.htm" style="text-decoration:none;color:#999999"><b>Contact</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../sites.htm" style="text-decoration:none;color:#999999"><b>Sites</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../privacy.htm" style="text-decoration:none;color:#999999"><b>Privacy Statement</b></a>
+				<img border="0" src="../../../core/graphics/blank.gif" width="9" height="1">
+			</td>
+		</tr>
+	</table>
+<!-- Google analytics start -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-266925-1";
+urchinTracker();
+</script>
+<!-- Google analytics end -->
+<!--webbot bot="Include" i-checksum="33026" endspan -->
+</div></div>
+
+</center>
+</body>
+</html>

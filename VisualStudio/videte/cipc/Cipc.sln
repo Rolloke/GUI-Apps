@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cipc", "Cipc.vcproj", "{6D53F786-4DEB-489E-A37A-1F9B79851EAC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectUniqueName0 = Cipc.vcproj
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SccProjectName1 = \u0022$/Project/CIPC\u0022,\u0020XDEAAAAA
+		SccLocalPath1 = .
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {2F6C9992-7EE3-435B-9CD7-E18D4B1F1DBA}
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Debug.ActiveCfg = Debug|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Debug.Build.0 = Debug|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Release.ActiveCfg = Release|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Release.Build.0 = Release|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

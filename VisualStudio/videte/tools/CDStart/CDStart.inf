@@ -1,0 +1,152 @@
+; Diese Einträge können sowohl in der <Programmname>.inf als auch in der AUTORUN.INF stehen.
+; Als erstes wird in der <Programmname>.inf gesucht.
+; Wird diese Datei nicht gefunden, so wird in der AUTORUN.INF gesucht.
+
+; Mehrsprachigkeit:
+; Es wird die 2-Zeichen Abkürzung nach ISO Standard 639 (mit wenigen MS-Ausnahmen) verwendet
+; EN ist Standardvorgabe und muss immer vorhanden sein
+; Jede neue Sprache muss komplett bei allen Texten und Programmen eingetragen werden!
+
+;********************************************************************
+[CDStartControl]
+
+SkinTest=1
+ShowLocalLanguage=0
+
+; AutoRun: Soll das Programm automatisch im Hintergrund arbeiten
+; und alle Programme starten ? 0=Nein(Default), 1=Ja
+AutoRun=0
+
+; Width: Breite des Fensters (nur im Zusammenhang mit Height)
+Width=
+
+; Height: Breite des Fensters (nur im Zusammenhang mit Width)
+Height=
+
+;********************************************************************
+[CDStartBackground]
+
+; BackgroundStyle: Typ des Hintergrundes
+; StyleBackGroundPlaneColor = 2
+; StyleBackGroundColorChangeSimple = 3
+; StyleBackGroundColorChangeBrushed = 4 (Default)
+BackgroundStyle=4
+
+; BackgroundColor: "R,G,B" Werte für die Farbe (Default "150,150,255" BLAU)
+BackgroundColor="150,150,255"
+
+;********************************************************************
+[CDStartTitle]
+
+; TitleColor: "R,G,B" Werte für die Farbe (Default "250,250,250" FAST_WEISS)
+TitleColor="250,250,250"
+
+; TitleColorShadow: "R,G,B" Werte für die Farbe (Default "0,0,0" SCHWARZ)
+TitleColorShadow="0,0,0"
+
+; TitleFontName: Name des Fonts für den Titel (Default ist "Arial Black")
+TitleFontName="Arial Black"
+
+; TitleFontHeight: Höhe des Fonts für den Titel (Default ist 30)
+TitleFontHeight=30
+
+; Title: Text der Titelzeile
+Title_DE="Titel der CD"
+Title_EN="Title of CD"
+
+;********************************************************************
+[CDStartButtons]
+
+; ButtonShape
+; ShapeRect = 1
+; ShapeRound= 2
+ButtonShape=1
+
+; ButtonSurface
+; SurfacePlaneColor = 0			// einfarbig
+; SurfaceColorChangeSimple = 1	// einfacher Farbverlauf
+; SurfaceColorChangeBrushed = 2	// doppelter, abgestufter Farbverlauf (Default)
+; Surface3DPlaneEdge5= 3		// 3D-Button mit 5-Pixel-Kante
+; Surface3DPlaneEdge10 = 4		// 3D-Button mit 10-Pixel-Kante
+; Surface3DPlaneEdge15 = 5		// 3D-Button mit 15-Pixel-Kante
+ButtonSurface=2
+
+; ButtonColor: "R,G,B" Werte für die Farbe (Default "176,176,144" GOLD_METALLIC)
+ButtonColor="176,176,144"
+
+; ButtonColorText: "R,G,B" Werte für die Farbe (Default "0,0,0" SCHWARZ)
+ButtonColorText="0,0,0"
+
+; ButtonColorTextHighlight: "R,G,B" Werte für die Farbe (Default "0,0,0" SCHWARZ)
+ButtonColorTextHighlight="0,0,0"
+
+; ButtonFontName: Name des Fonts für die Buttons (Default ist "MS Sans Serif")
+;ButtonFontName="MS Sans Serif"
+
+; ButtonFontHeight: Höhe des Fonts für die Buttons (Default ist 8)
+ButtonFontHeight=8
+
+; Einträge mit dem Text, der auf dem jeweiligen Button stehen soll
+; Der Accelerator (unterstrichener Buchstabe) wird durch ein davorgesetzte "&" gekennzeichnet
+1_DE="Aktion 1"
+2_DE="Aktion 2"
+3_DE="Aktion 3"
+4_DE="Aktion 4"
+5_DE="Aktion 5"
+1_EN="Action 1"
+2_EN="Action 2"
+3_EN="Action 3"
+4_EN="Action 4"
+5_EN="Action 5"
+
+;********************************************************************
+[CDStartDisplays]
+
+; DisplayColor: "R,G,B" Werte für die Farbe (Default "250,250,250" FAST_WEISS)
+DisplayColor="250,250,250"
+
+; DisplayColorShadow: "R,G,B" Werte für die Farbe (Default "0,0,0" SCHWARZ)
+DisplayColorShadow="0,0,0"
+
+; DisplayFontName: Name des Fonts für die Displays (Default ist "Arial")
+;DisplayFontName="Arial"
+
+; DisplayFontHeight: Höhe des Fonts für die Displays (Default ist 14)
+DisplayFontHeight=14
+
+; Einträge mit dem Text, der links vom Button erscheinen soll, wenn dieser ausgewählt wird
+1_DE="Hier wird Display 1 angezeigt"
+2_DE="Hier wird Display 2 angezeigt"
+3_DE="Hier wird Display 3 angezeigt"
+4_DE="Hier wird Display 4 angezeigt"
+5_DE="Hier wird Display 5 angezeigt"
+1_EN="Here is shown Display 1"
+2_EN="Here is shown Display 2"
+3_EN="Here is shown Display 3"
+4_EN="Here is shown Display 4"
+5_EN="Here is shown Display 5"
+
+;********************************************************************
+[CDStartPrograms]
+; Allgemein:
+; Alle Eintäge sollten in "" gesetzt werden, da sie als Strings interpretiert werden
+; Einträge mit Parameterübergabe oder Leerzeichen MÜSSEN in "" gesetzt werden
+; Pfadangaben können sowohl absolut mit Laufwerksbuchstaben
+; als auch relativ zum Laufwerk (mit "..\" vorweg)
+; bzw. relativ zum aktuellen Verzeichnis (mit ".\" vorweg) angegeben werden
+; a)	Einträge mit Programmen die gestartet werden sollen
+; b)	copy|<Quelle>|<Zielverzeichnis> kopiert nur Dateien im Verzeichnis,
+;		xcopy|<Quelle>|<Zielverzeichnis> kopiert immer rekursiv:
+;		Dateien, auch mit Wildcards
+;		Verzeichnisse, diese müssen am Ende einen Backslash '\' haben 
+; c)	"EXIT" zum Beenden des Programms
+1_DE=
+2_DE=
+3_DE=
+4_DE=
+5_DE=
+1_EN=
+2_EN=
+3_EN=
+4_EN=
+5_EN=

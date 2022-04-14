@@ -1,0 +1,233 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Endcontrol.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Endcontrol.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ENDCONTROL_DIALOG DIALOGEX 0, 0, 417, 258
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Endcontrol"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,365,7,45,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,365,23,45,14
+    LTEXT           "Launcher heruntergefahren",IDC_SL1_LAUNCHER_EXITED,30,
+                    22,87,8
+    LTEXT           "alle Archive gelöscht",IDC_SL2_ARCHIVES_DELETED,30,33,
+                    66,8
+    LTEXT           "Laufwerkbezeichnungen (DISK1_1 ...)  OK",
+                    IDC_SL3_DRIVES_OK,30,46,136,8
+    LTEXT           "C:\\WINST95  vorhanden",IDC_F1_WIN95_OK,31,188,88,8
+    LTEXT           "C:\\INSTALL  vorhanden",IDC_F2_INSTALL_OK,31,200,88,8
+    LTEXT           "C:\\OUT  incl. *.jpg und *.htm vorhanden",IDC_F3_OUT_OK,
+                    31,212,130,8
+    LTEXT           "C:\\log  gelöscht",IDC_F4_LOG_DELETED,31,224,54,8
+    LTEXT           "Drucker eingerichtet",IDC_P1_PRINTER_INSTALLED,27,102,
+                    88,8
+    LTEXT           "bidirektionale Unterstützung deaktiviert",
+                    IDC_P3_BIDIRECT_DISABLED,27,126,129,8
+    LTEXT           "Übertragungswiederholzeit = 45 Sekunden",
+                    IDC_P4_TRANSREPEAT_45_OK,27,138,139,8
+    LTEXT           """Universal-Nur-Text"" - Drucker gelöscht",
+                    IDC_P2_DEFAULT_PRINTER_DELETED,27,114,137,8
+    LTEXT           "nötige Shortcuts auf Desktop",IDC_SY1_SHORTCUTS_OK,223,
+                    20,113,8
+    LTEXT           "selbständige Energieverw. abgeschaltet",
+                    IDC_SY2_SELFPOWER_DISABLED,223,36,133,8
+    LTEXT           "Startmenü angepaßt",IDC_SY3_STARTMENU_OK,223,48,88,8
+    LTEXT           "Zeitzone eingestellt",IDC_SY4_TIMEAREA_OK,223,62,88,8
+    LTEXT           "autom. Sommer/Winterzeit deaktiviert",
+                    IDC_SY5_AUTSUM_WINTIME_DIABLED,220,76,129,8
+    LTEXT           "Papierkorb (global) deaktiviert",
+                    IDC_SY6_TRASH_GLOBAL_DISABLED,223,90,100,8
+    LTEXT           "Explorer - Dateierweiterungen sichtbar",
+                    IDC_SY7_EXPL_FILETYP_ENABLED,223,104,129,8
+    LTEXT           "Auflösung 1024X768",IDC_M2_SOLUTION_OK,216,163,88,8
+    LTEXT           "Farbtiefe 16 bit",IDC_M3_COLOUR_OK,225,175,88,8
+    LTEXT           """Plug and Play"" - Bildschirm",IDC_M1_PLUGPLAY_OK,216,
+                    152,88,8
+    GROUPBOX        "Security Launcher",IDC_STATIC,5,7,173,61
+    GROUPBOX        "Drucker",IDC_STATIC,5,83,175,76
+    GROUPBOX        "Verzeichnisse",IDC_STATIC,5,173,176,72
+    CONTROL         136,IDC_SL1_NOT,"Static",SS_BITMAP | NOT WS_VISIBLE,5,24,
+                    9,8
+    GROUPBOX        "System",IDC_STATIC,197,7,160,116
+    GROUPBOX        "Monitor",IDC_STATIC,198,140,144,58
+    CONTROL         135,IDC_F2_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,16,201,
+                    9,8
+    CONTROL         135,IDC_F3_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,16,213,
+                    9,8
+    CONTROL         135,IDC_F4_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,16,225,
+                    9,8
+    CONTROL         135,IDC_F1_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,16,189,
+                    9,8
+    CONTROL         135,IDC_M3_OK,"Static",SS_BITMAP,211,174,9,8
+    CONTROL         135,IDC_M2_OK,"Static",SS_BITMAP,207,164,9,8
+    CONTROL         135,IDC_SL2_OK,"Static",SS_BITMAP,19,33,9,8
+    CONTROL         135,IDC_SL3_OK,"Static",SS_BITMAP,19,43,9,8
+    CONTROL         135,IDC_P1_OK,"Static",SS_BITMAP,17,102,9,8
+    CONTROL         135,IDC_P2_OK,"Static",SS_BITMAP,17,114,9,8
+    CONTROL         135,IDC_P3_OK,"Static",SS_BITMAP,18,127,9,8
+    CONTROL         135,IDC_P4_OK,"Static",SS_BITMAP,18,137,9,8
+    CONTROL         135,IDC_SY1_OK,"Static",SS_BITMAP,209,21,9,8
+    CONTROL         135,IDC_SY2_OK,"Static",SS_BITMAP,211,37,9,8
+    CONTROL         135,IDC_SY3_OK,"Static",SS_BITMAP,213,48,9,8
+    CONTROL         135,IDC_SY5_OK,"Static",SS_BITMAP,208,76,9,8
+    CONTROL         135,IDC_SY4_OK,"Static",SS_BITMAP,211,61,9,8
+    CONTROL         135,IDC_SY6_OK,"Static",SS_BITMAP,211,87,9,8
+    CONTROL         135,IDC_SY7_OK,"Static",SS_BITMAP,213,102,9,8
+    CONTROL         135,IDC_M1_OK,"Static",SS_BITMAP,205,152,9,8
+    CONTROL         136,IDC_SL2_NOT,"Static",SS_BITMAP,5,33,9,8
+    CONTROL         136,IDC_SL3_NOT,"Static",SS_BITMAP,5,45,9,8
+    CONTROL         136,IDC_P1_NOT,"Static",SS_BITMAP,5,103,9,8
+    CONTROL         136,IDC_P2_NOT,"Static",SS_BITMAP,5,114,9,8
+    CONTROL         136,IDC_P3_NOT,"Static",SS_BITMAP,5,125,9,8
+    CONTROL         136,IDC_P4_NOT,"Static",SS_BITMAP,5,137,9,8
+    CONTROL         136,IDC_F1_NOT,"Static",SS_BITMAP | NOT WS_VISIBLE,16,
+                    189,9,8
+    CONTROL         136,IDC_F2_NOT,"Static",SS_BITMAP | NOT WS_VISIBLE,16,
+                    201,9,8
+    CONTROL         136,IDC_STATIC,"Static",SS_BITMAP,89,102,9,8
+    CONTROL         136,IDC_F3_NOT,"Static",SS_BITMAP | NOT WS_VISIBLE,16,
+                    213,9,8
+    CONTROL         136,IDC_F4_NOT,"Static",SS_BITMAP | NOT WS_VISIBLE,16,
+                    225,9,8
+    CONTROL         136,IDC_STATIC,"Static",SS_BITMAP,117,127,9,8
+    CONTROL         136,IDC_SY2_NOT,"Static",SS_BITMAP,200,37,9,8
+    CONTROL         136,IDC_SY1_NOT,"Static",SS_BITMAP,200,20,9,8
+    CONTROL         136,IDC_SY3_NOT,"Static",SS_BITMAP,203,47,9,8
+    CONTROL         136,IDC_SY4_NOT,"Static",SS_BITMAP,202,62,9,8
+    CONTROL         136,IDC_SY5_NOT,"Static",SS_BITMAP,200,78,9,8
+    CONTROL         136,IDC_SY6_NOT,"Static",SS_BITMAP,199,89,9,8
+    CONTROL         136,IDC_SY7_NOT,"Static",SS_BITMAP,201,102,9,8
+    CONTROL         136,IDC_M1_NOT,"Static",SS_BITMAP,198,151,9,8
+    CONTROL         136,IDC_M2_NOT,"Static",SS_BITMAP,200,164,9,8
+    CONTROL         136,IDC_M3_NOT,"Static",SS_BITMAP,200,174,9,8
+    CONTROL         135,IDC_SL1_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,17,24,
+                    9,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ENDCONTROL_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 410
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 251
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CHECK_OK            BITMAP  DISCARDABLE     "res\\bitmap1.bmp"
+IDB_CHECK_FAILED        BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Endcontrol.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

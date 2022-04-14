@@ -1,0 +1,6 @@
+13.10.03 RKE - SynchPoint Bug entfernt. Die Sychronisation wird jetzt bis zum letzten Glied durchgeschleift.
+07.10.03 RKE - DirectShow Filter WaveSplitter wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der Audio (WAVE) Datenströme in getrennte Kanäle splitten
+			   kann. Dabei können die einzelnen OutputPins an- bzw. abgeschaltet werden, vertauscht
+			   werden und zusätzlich für jeden Pin eine Funktion (Pointer) implementiert werden,
+			   die die Daten auswerten kann und bei Bedarf den Datenstrom unterbrechen kann.

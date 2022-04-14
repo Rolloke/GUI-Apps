@@ -1,0 +1,509 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian (Russian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LogView.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#include ""afxprint.rc""        // printing/print preview resources\r\n"
+    "#include ""afxolecl.rc""        // OLE container resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\LogView.ico"
+IDR_LOGVIEWTYPE         ICON                    "res\\LogViewDoc.ico"
+IDR_HTMLVIEWTYPE        ICON                    "res\\LogViewDoc.ico"
+IDR_HTMLVIEWTYPE2       ICON                    "res\\LogViewDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  17, 16
+BEGIN
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_EDIT_FIND
+    BUTTON      ID_EDIT_COPY
+    SEPARATOR
+    BUTTON      ID_VIEW_SET_BOOKMARK
+    BUTTON      ID_VIEW_NEXT_BOOKMARK
+    BUTTON      ID_VIEW_PREV_BOOKMARK
+    BUTTON      ID_VIEW_DELETE_BOOKMARKS
+    SEPARATOR
+    BUTTON      ID_VIEW_SHOW_SYNCPOINT
+    BUTTON      ID_VIEW_SYNC_TIME
+    BUTTON      ID_REFRESH
+    BUTTON      ID_VIEW_PREV_COMPRESSED
+    BUTTON      ID_VIEW_NEXT_COMPRESSED
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Файл "
+    BEGIN
+        MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Выберете путь для лог файла",        ID_FILE_CHANGE_LOG_PATH
+        MENUITEM "Сохранить лог файл",       ID_FILE_SAVE_LOGFILES
+        MENUITEM "&Удалить лог файлы",         ID_FILE_DELETE_LOGFILES
+        MENUITEM "Logfile in Unicode",         ID_FILE_READ_LOGFILE_UNICODE
+        MENUITEM SEPARATOR
+        MENUITEM "Save protocolls",        ID_FILE_SAVE_PROTOCOLLS
+        MENUITEM "Delete protocolls",          ID_FILE_DELETE_PROTOCOLLS
+        MENUITEM SEPARATOR
+        MENUITEM "Runtime errors...",           ID_FILE_RUNTIME_ERRORS
+        MENUITEM "Последний файл",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Выход",                    ID_APP_EXIT
+    END
+    POPUP "&Просмотр"
+    BEGIN
+        MENUITEM "&Панель Инструментов",               ID_VIEW_TOOLBAR
+        MENUITEM "&Панель Состояния",               ID_VIEW_STATUS_BAR
+        MENUITEM "Обновить автоматически",         ID_VIEW_UPDATE_AUTOMATICALLY
+        MENUITEM "Перейти к концу Файла",       ID_VIEW_JUMP_TO_END
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "&О Программе...",               ID_APP_ABOUT
+    END
+END
+
+IDR_LOGVIEWTYPE MENU 
+BEGIN
+    POPUP "&Файл "
+    BEGIN
+        MENUITEM "Закрыть",                  ID_FILE_CLOSE
+        MENUITEM "Runtime errors...",           ID_FILE_RUNTIME_ERRORS
+        MENUITEM SEPARATOR
+        MENUITEM "&Печать",         ID_FILE_PRINT
+        MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Последний файл",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Выход",                    ID_APP_EXIT
+    END
+    POPUP "&Редактировать"
+    BEGIN
+        MENUITEM "&Отменить\Ctrl+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Копировать\rCtrl+C",           ID_EDIT_COPY
+        MENUITEM "Выделить &Все\tCtrl+A",    ID_EDIT_SELECT_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "Поиск",          ID_EDIT_FIND
+        MENUITEM "Новый по&иск\tF3",           ID_EDIT_REPEAT
+        MENUITEM "Поиск в сжатом\tF7", 
+                                                ID_EDIT_SEARCH_IN_COMPRESSED
+        MENUITEM "Останавливает поиск",               ID_EDIT_STOP_SEARCH_IN_COMPRESSED
+
+        MENUITEM "Найти & Значение Времени",           ID_EDIT_SEARCH_TIME_VALUE
+    END
+    POPUP "&Просмотр"
+    BEGIN
+        MENUITEM "&Панель Инструментов",               ID_VIEW_TOOLBAR
+        MENUITEM "&Панель Состояния",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Обновить\tF5",          ID_REFRESH
+        MENUITEM "Обновить автоматически",  ID_VIEW_UPDATE_AUTOMATICALLY
+        MENUITEM "Перейти к концу &файла",     ID_VIEW_JUMP_TO_END
+        MENUITEM SEPARATOR
+        MENUITEM "Точка С&инхронизации",       ID_VIEW_SHOW_SYNCPOINT
+        MENUITEM "Следующий сжатый",      ID_VIEW_NEXT_COMPRESSED
+        MENUITEM "Предыдущий сжатый", ID_VIEW_PREV_COMPRESSED
+    END
+    POPUP "&Окно"
+    BEGIN
+        MENUITEM "&Каскад",                ID_WINDOW_CASCADE
+        MENUITEM "&Заголовок вертикально",              ID_WINDOW_TILE_HORZ
+        MENUITEM "Заголовки &Горизонтально",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Расставить иконки",           ID_WINDOW_ARRANGE
+        MENUITEM SEPARATOR
+        MENUITEM "Синхронизировать",            ID_VIEW_SYNC_TIME
+        MENUITEM "Синхронизирует сжатые", ID_WINDOW_SYNC_COMPRESSED
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "&О Программе...",               ID_APP_ABOUT
+    END
+END
+
+IDR_HTMLVIEWTYPE MENU 
+BEGIN
+    POPUP "&Файл "
+    BEGIN
+        MENUITEM "Закрыть",                  ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "&Печать",         ID_FILE_PRINT
+        MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Последний файл",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Выход",                    ID_APP_EXIT
+    END
+    POPUP "&Просмотр"
+    BEGIN
+        MENUITEM "&Панель Инструментов",               ID_VIEW_TOOLBAR
+        MENUITEM "&Панель Состояния",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Обновить\tF5",          ID_REFRESH
+    END
+    POPUP "&Окно"
+    BEGIN
+        MENUITEM "Новое &Окно",              ID_WINDOW_NEW
+        MENUITEM "&Каскад",                ID_WINDOW_CASCADE
+        MENUITEM "&Заголовок вертикально",              ID_WINDOW_TILE_HORZ
+        MENUITEM "Заголовки &Горизонтально",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Расставить иконки",           ID_WINDOW_ARRANGE
+    END
+END
+
+IDR_HTMLVIEWTYPE2 MENU 
+BEGIN
+    POPUP "&Файл "
+    BEGIN
+        MENUITEM "Закрыть",                  ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "&Печать",         ID_FILE_PRINT
+        MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Последний файл",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Выход",                    ID_APP_EXIT
+    END
+    POPUP "&Просмотр"
+    BEGIN
+        MENUITEM "&Панель Инструментов",               ID_VIEW_TOOLBAR
+        MENUITEM "&Панель Состояния",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Обновить\tF5",          ID_REFRESH
+    END
+    POPUP "&Окно"
+    BEGIN
+        MENUITEM "Новое &Окно",              ID_WINDOW_NEW
+        MENUITEM "&Каскад",                ID_WINDOW_CASCADE
+        MENUITEM "&Заголовок вертикально",              ID_WINDOW_TILE_HORZ
+        MENUITEM "Заголовки &Горизонтально",              ID_WINDOW_TILE_VERT
+        MENUITEM "&Расставить иконки",           ID_WINDOW_ARRANGE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
+    "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    VK_F7,          ID_EDIT_SEARCH_IN_COMPRESSED, VIRTKEY, NOINVERT
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_RETURN,      ID_OLE_EDIT_PROPERTIES, VIRTKEY, ALT, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F5,          ID_REFRESH,             VIRTKEY, NOINVERT
+    VK_F4,          IDC_COMBO_LOG_FILES,    VIRTKEY, NOINVERT
+    VK_F2,          ID_VIEW_NEXT_BOOKMARK,  VIRTKEY, NOINVERT
+    VK_F2,          ID_VIEW_PREV_BOOKMARK,  VIRTKEY, SHIFT, NOINVERT
+END
+
+IDR_HTMLVIEWTYPE ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+END
+
+IDR_HTMLVIEWTYPE2 ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDR_MAINFRAME DIALOGEX 0, 0, 491, 12
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO_LOG_FILES,30,0,123,323,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_HTM_FILES,195,0,150,316,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ЛогФайлы:",IDC_STATIC_LOG,0,1,27,8
+    LTEXT           "Протаколы:",IDC_STATIC_HTML,157,2,34,8
+    CONTROL         "",IDC_SEARCH_DATE,"SysDateTimePick32",DTS_RIGHTALIGN | 
+                    WS_TABSTOP,350,0,65,12
+    CONTROL         "",IDC_SEARCH_TIME,"SysDateTimePick32",DTS_RIGHTALIGN | 
+                    DTS_UPDOWN | WS_TABSTOP | 0x8,415,0,60,12
+    PUSHBUTTON      ">>",ID_EDIT_SEARCH_TIME_VALUE,477,0,14,12
+END
+
+IDD_LOAD_COMPRESSED DIALOGEX 0, 0, 190, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Загрузить сжатые файлы"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,135,132,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,5,132,50,14
+    CONTROL         "",IDC_FILE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | LVS_OWNERDATA | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,5,180,121
+    PUSHBUTTON      "Выбрать &Все",ID_EDIT_SELECT_ALL,60,132,70,14,NOT 
+                    WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDR_MAINFRAME, DIALOG
+    BEGIN
+        RIGHTMARGIN, 490
+        VERTGUIDE, 198
+    END
+
+    IDD_LOAD_COMPRESSED, DIALOG
+    BEGIN
+        RIGHTMARGIN, 145
+        VERTGUIDE, 5
+        VERTGUIDE, 185
+        BOTTOMMARGIN, 150
+        HORZGUIDE, 5
+        HORZGUIDE, 126
+        HORZGUIDE, 139
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_OLE_INIT_FAILED     "Ошибка при установке OLE. Пожалуйста, проверьте вашу установку OLE."
+    IDP_FAILED_TO_CREATE    "Ошибка при создании объекта. Проверьте зарегистрирован ли объект"
+    IDS_MSG_LOAD_ALL        "%d дополнительные сжатые лог файлы будут загружены.\nЕсли вы импортируете слишком много файлов \nможет упасть производительность системы.\n\nВы хотите продолжить."
+    IDS_DIRECTORY           "Директория"
+    IDS_SAVE                "Сохранить"
+    IDS_SAVE_LOG_FILES      "Сохранить Лог Файлы"
+    IDS_DELETE_LOGFILES     "Удалить Лог Файлы"
+    IDS_NOT_DELETED_LOGFILES "Не удаленные Файлы"
+    IDS_SAVE_PROTOCOLLS     "Save protocolls"
+    IDS_DELETE_PROTOCOLLS   "Delete protocolls"
+    IDS_NOT_DELETED_PROTOCOLLS "Not deleted Files"
+    IDS_OPEN_RTE_FILE       "Open runtime errors."
+    IDS_RTE                 "Runtime errors..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Вид ЛогФайлов"
+    IDR_LOGVIEWTYPE         "\nЛогВид\nЛогВид\nТип Лог файла (*.log)\n.log\nЛогВид.Документ\nЛогВидДокумент"
+    IDR_HTMLVIEWTYPE        "\nHtmlВид\nHtmlВид\nТип файла Гипертекст (*.htm)\n.htm\nHtmlВид.Документt\nHtmlВидДокумент"
+    IDR_HTMLVIEWTYPE2       "\nHtmlВид\nHtmlВид\nТип файла Гипертекст (*.html)\n.html\nHtmlВид.Документ\nHtmlВидДокумент"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Вид ЛогФайлов"
+    AFX_IDS_IDLEMESSAGE     "Готово"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_REFRESH              "Обновляет вид логфайла.\nОбновить"
+    ID_FILE_SAVE_LOGFILES   "Сохраняет лог файлы в другой директории (напр.: floppy диск)."
+    ID_FILE_CHANGE_LOG_PATH "Выбирает альтернативный путь для чтения лог файлов."
+    ID_VIEW_SYNC_TIME       "Синхронизирует время открытого окна и активного окна выбором значений времени в строках."
+    ID_EDIT_SEARCH_IN_COMPRESSED 
+                            "Осуществляет поиск во всех сжатых файлах по строке поиска."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_UPDATE_AUTOMATICALLY 
+                            "Переключает автоматическое обновление лог файла Вкл или Выкл"
+    ID_VIEW_JUMP_TO_END     "Переключает автоматический переход в конец лог файла Вкл или Выкл"
+    ID_VIEW_SHOW_SYNCPOINT  "Переходит к точке синхронизации и выделяет ее"
+    ID_EDIT_SEARCH_TIME_VALUE 
+                            "Ищет значение времени (панель инструментов) в активном документе\nПоиск"
+    ID_VIEW_SET_BOOKMARK    "Установить / убрать закладки\nЗакладки"
+    ID_VIEW_NEXT_BOOKMARK   "Перейти к следующей закладке\nСледующая закладка"
+    ID_VIEW_PREV_BOOKMARK   "Перейти к предыдущей закладке\nПредыдущая закладка"
+    ID_VIEW_DELETE_BOOKMARKS "Удаляет все закладки\nУдалить все"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_COMBO_LOG_FILES     "Показывает доступные лог файлы и открывает выбранный\nОткрыть лог файлы"
+    IDC_COMBO_HTM_FILES     "Показывает доступные протоколы и отрывает выбранный\nОткрыть протаколы"
+    IDC_SEARCH_DATE         "Вставить желаемую дату\nИскать дату"
+    IDC_SEARCH_TIME         "Вставить желаемое время\nИскать время"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_DELETE_LOGFILES "Удаляет лог файлы в лог папке"
+    ID_WINDOW_SYNC_COMPRESSED 
+                            "Разрешает также синхронизацию со сжатыми файлами"
+    ID_VIEW_NEXT_COMPRESSED "Открывает следующий сжатый файл\nСледующий сжатый"
+    ID_VIEW_PREV_COMPRESSED "Открывает предыдущий сжатый файл\nПредыдущий сжатый"
+    ID_EDIT_STOP_SEARCH_IN_COMPRESSED 
+                            "Прекращает поиск в сжатых файлах."
+    ID_FILE_DELETE_PROTOCOLLS 
+                            "Deletes the protocol files in the protocol folder."
+    ID_FILE_SAVE_PROTOCOLLS "Saves the protocol files in annother directory (e.g.: floppy disk)."
+    ID_FILE_READ_LOGFILE_UNICODE "Reads the log files in unicode format."
+END
+
+#endif    // Russian (Russian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#endif //_WIN32
+#include "res\LogView.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#include "afxprint.rc"        // printing/print preview resources
+#include "afxolecl.rc"        // OLE container resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

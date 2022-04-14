@@ -1,0 +1,276 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\NetUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "res\\NetUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NETUNIT_DIALOG DIALOGEX 0, 0, 347, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "SocketUnit"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "E&xit",IDOK,290,180,50,14
+    GROUPBOX        "DUN",IDC_DUN,7,71,333,107
+    CONTROL         "Allow incoming calls",IDC_ALLOW_INCOMING_CALLS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,6,102,10
+    CONTROL         "Ring at incoming call",IDC_DOBEEP,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,16,157,10
+    CONTROL         "Allow outgoing calls",IDC_ALLOW_OUTGOING_CALLS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,26,99,10
+    CONTROL         "Accept only calls in IP-list",IDC_IPLIST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,194,6,131,10
+    LTEXT           "Expected bitrate:",IDC_TXT_BITRATE,16,39,55,8
+    COMBOBOX        IDC_COMBO_BITRATE,82,37,63,118,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Sync repeat time:",IDC_TXT_SYNC,16,55,64,8
+    EDITTEXT        IDC_EDIT_SYNC,82,53,31,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "seconds",IDC_TXT_SYNC_SECONDS,115,55,34,8
+    PUSHBUTTON      "Adopt host list",IDC_BUTTON_IPLIST,194,
+                    54,128,15
+    CONTROL         "",IDC_RICHEDIT_IPHOSTLIST,"RICHEDIT",TCS_HOTTRACK | 
+                    TCS_VERTICAL | TCS_FOCUSONBUTTONDOWN | TCS_MULTISELECT | 
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP,194,16,128,37
+    LTEXT           "Username:",IDC_STATIC_USERNAME,16,105,48,8
+    LTEXT           "DUN-name:",IDC_STATIC_DUNNAME,16,92,60,8
+    LTEXT           "Call number:",IDC_STATIC_TELNR,16,132,39,8
+    LTEXT           "Establish via:",IDC_STATIC_DUNDEVICE,16,145,49,8
+    LTEXT           "Password:",IDC_STATIC_PASSWORD,16,119,32,8
+    EDITTEXT        IDC_EDIT_DUNNAME,79,90,136,13,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_USERNAME,79,103,136,13,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_PASSWORD,79,116,136,13,ES_PASSWORD | 
+                    ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_TELNUM,79,129,136,13,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    COMBOBOX        IDC_COMBO_DUNDEVICE,79,142,137,60,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "New",IDC_BUTTON_NEWDUN,15,159,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DELETEDUN,281,159,50,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Details",IDC_BUTTON_DETAILS,229,159,50,14,WS_DISABLED
+    LISTBOX         IDC_LIST_DUNS,218,90,113,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "available entries",IDC_STATIC_DUNS,264,80,67,8
+    PUSHBUTTON      "Reinitialize",IDC_BUTTON_REINIT,230,180,56,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Undo",IDC_BUTTON_CANCELNEWDUN,119,159,50,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Store",IDC_BUTTON_CHANGEDUN,67,159,50,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Networkdetails",IDC_BUTTON_NETWORKDETAILS,15,180,62,14
+END
+
+IDD_DIALOG_NETWORKDETAILS DIALOGEX 0, 0, 325, 174
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Networkdetails"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,268,153,50,14
+    CONTROL         "",IDC_PROGRESS_BITRATE_SUM,"msctls_progress32",
+                    WS_BORDER | 0x1,88,66,161,14
+    CONTROL         "",IDC_PROGRESS_BITRATE_INPUT,"msctls_progress32",
+                    WS_BORDER | 0x1,88,82,161,14
+    CONTROL         "",IDC_PROGRESS_BITRATE_OUTPUT,"msctls_progress32",
+                    WS_BORDER | 0x1,88,98,161,14
+    CONTROL         "",IDC_PROGRESS_BITRATE_AUDIO,"msctls_progress32",
+                    WS_BORDER | 0x1,88,114,161,14
+    CONTROL         "",IDC_PROGRESS_BITRATE_DATABASE,"msctls_progress32",
+                    WS_BORDER | 0x1,88,130,161,14
+    LTEXT           "Total bitrate:",IDC_STATIC_BITRATE_SUM,16,69,49,8
+    LTEXT           "Input:",IDC_STATIC_BITRATE_INPUT,16,85,21,8
+    LTEXT           "Output:",IDC_STATIC_BITRATE_OUPUT,16,101,26,8
+    LTEXT           "Audio:",IDC_STATIC_BITRATE_AUDIO,16,117,22,8
+    LTEXT           "Database:",IDC_STATIC_BITRATE_DATABASE,16,133,34,8
+    LTEXT           "Connection to:",IDC_STATIC_NETWORKADAPTER,13,11,49,8
+    COMBOBOX        IDC_COMBO_NETWORKADAPTER,65,9,164,89,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "0 kBit/s",IDC_STATIC_BITRATESUM_NR,260,69,51,8
+    RTEXT           "0 kBit/s",IDC_STATIC_BITRATEINPUT_NR,259,86,52,8
+    RTEXT           "0 kBit/s",IDC_STATIC_BITRATEOUTPUT_NR,259,102,52,8
+    RTEXT           "0 kBit/s",IDC_STATIC_BITRATEAUDIO_NR,258,117,53,8
+    RTEXT           "0 kBit/s",IDC_STATIC_BITRATEDATABASE_NR,258,133,53,8
+    PUSHBUTTON      "Close connection",IDC_BUTTON_CLOSE_CUR_CON,233,8,83,
+                    14
+    GROUPBOX        "Properties",IDC_STATIC_PROPERTIES,7,28,311,122
+    LTEXT           "Local IP address:",IDC_STATIC_LOCAL_IP_ADDRESS,16,39,
+                    59,8
+    LTEXT           "Remote IP address:",IDC_STATIC_REMOTE_IP_ADDRESS,167,39,
+                    66,8
+    LTEXT           "0.0.0.0",IDC_STATIC_LOCAL_IP_ADDRESS_NR,88,39,77,8
+    LTEXT           "0.0.0.0",IDC_STATIC_REMOTE_IP_ADDRESS_NR,239,39,72,8
+    LTEXT           "Connection type:",IDC_STATIC_CON_TYPE,16,51,54,8
+    LTEXT           "-",IDC_STATIC_CON_TYPE_NR,88,51,75,8
+    LTEXT           "maximum bitrate:",IDC_STATIC_MAX_BITRATE,167,51,56,8
+    LTEXT           "0 kBit/s",IDC_STATIC_MAX_BITRATE_NR,239,51,72,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_NETUNIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 340
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+
+    IDD_DIALOG_NETWORKDETAILS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 318
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 167
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&About...",               ID_APP_ABOUT
+        MENUITEM "&Settings...",            ID_SETTINGS
+        MENUITEM "&Close all connections",  ID_CLOSE_ALL_CONNECTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "About NetUnit..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_WINDOW_CLEARED      "Window empty."
+    IDS_DIALOG_DUN_ENTRY_ERROR "The DUN form has to be filled out completely."
+    IDS_ENTRY_NAME_ALREADY_EXISTS "DUN name already exists."
+    IDS_INVALID_ENTRY_NAME  "Invalid DUN name!"
+    IDS_DISCARD_NEW_DUN_ENTRY "Discard DUN entry?"
+    IDS_ERROR_CREATE_DUN    "DUN entry cannot be created or changed."
+    IDS_DISCARD_CHANGES     "Discard changes?"
+    IDS_DISCARD_CHANGES_AND_EXIT "Adopt changes?"
+    IDS_NEW_DUN             "New DUN entry"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\NetUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

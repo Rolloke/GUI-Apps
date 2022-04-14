@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="KeyHook"
+	ProjectGUID="{A83965E1-05F7-4916-80D6-B68C8B877CE4}"
+	SccProjectName="&quot;$/DV/KeyHook&quot;, LNZBAAAA"
+	SccAuxPath=""
+	SccLocalPath="."
+	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
+	Keyword="MakeFileProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\Release"
+			IntermediateDirectory=".\Release"
+			ConfigurationType="0"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="d:\Project\DV\KeyHook\BuildRelease d:\Project\DV\KeyHook"
+				ReBuildCommandLine="d:\Project\DV\KeyHook\BuildRelease d:\Project\DV\KeyHook -c"
+				Output="KeyHook.exe"/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\Debug"
+			IntermediateDirectory=".\Debug"
+			ConfigurationType="0"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="d:\Project\DV\KeyHook\BuildDebug d:\Project\DV\KeyHook"
+				ReBuildCommandLine="d:\Project\DV\KeyHook\BuildDebug d:\Project\DV\KeyHook -c"
+				Output="KeyHook.sys"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<File
+				RelativePath="KeyHook.c">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl">
+			<File
+				RelativePath="KeyHook.h">
+			</File>
+			<File
+				RelativePath="NTDDKBD.H">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath="KeyHook.rc">
+			</File>
+		</Filter>
+		<Filter
+			Name="Misc"
+			Filter="">
+			<File
+				RelativePath="BuildDebug.bat">
+			</File>
+			<File
+				RelativePath="BuildRelease.bat">
+			</File>
+			<File
+				RelativePath="History.txt">
+			</File>
+			<File
+				RelativePath="KeyHook.reg">
+			</File>
+			<File
+				RelativePath="Bin\KeyHook.sys">
+			</File>
+			<File
+				RelativePath="SOURCES">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

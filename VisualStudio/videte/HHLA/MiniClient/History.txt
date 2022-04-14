@@ -1,0 +1,77 @@
+History des MiniClients
+-----------------------
+
+03.12.98
+	- Beginn des MiniClient-projektes.
+	- FetchoutputConnection zum Server funktioniert
+	- Bildanforderung von der MiCoUnit funktioniert.
+	- Darstellung der Bilder durch die Imagen-Dll funktioniert.
+
+04.12.98
+	- Instanzenzähler implementiert.
+	- Jede Instanz des MiniClients baut nun eine eigene Outputverbindung zum
+	  Server auf.
+	- Bildschirmposition und Kameranummer werden in der Registry gesichert.
+	- Umschalten der Kameras im Client implementiert.
+
+07.12.98
+	- Kameraumschaltung nun über Windowsmessages fernsteuerbar.
+	- Bilschirmposition nun über Windowsmessages fernsteuerbar.
+	- Bildschirmposition und Kameranummer können nun 'gelockt' werden.
+
+01.02.99
+	- Zoom eingebaut.
+	- Jpegbilder werden auf Anforderung abgespeichert.
+
+03.02.99
+	- Die letzte Fensterposition wird in der Registry vermerkt
+
+04.02.99
+	- Erst nach OnConfirmInfoOutputs könne Bilder angefordert werden.
+
+16.02.99
+	- Der Client kann nur noch von RemoteControl.exe gestartet werden.
+
+18.02.99
+	- OnRequestCheckCamera(...) fordert ein Bild an, um zu überprüfen, ob
+	  die Kamera ausgefallen ist.
+	- Die Fenster können nun nicht mehr außerhalb des Bildschirms liegen.
+	- Nach dem verändern von Helligkeit, Kontrast, Farbsättigung, wird erst
+	  nach dem erhalt aller drei 'OnConfirmSetValue' ein neues Bild angefordert.
+
+23.02.99				  
+	- 'OnRequestSetInputSource(...)' enthält nun in lParam einen Parameter, der die
+	  Darstellung steuert. Der Parameter kann follgende Werte haben:
+			FREEZE_IT:   Fordert ein Bild von der MiCo an, stellt dieses
+					     aber nicht da.
+			SHOW_IT:	 Zeigt ein zuvor angefordertes Bild.
+			REFRESH_IT:  Sequenz der vorherigen beiden Aktionen,
+						 also Bild anfordern und darstellen. 
+	- Über MiniClient\ClientXX\PT01\AutoRequest=1 läßt sich festlegen, ob bei
+	  'OnRequestSetWindowPosition(...)' ein neues Bild angefordert werden soll.
+
+25.02.99
+	- Die Clientfenster haben nun keinen Close-Button mehr.
+	- 'AutoRequest' wieder entfernt.
+	- Fensterposition werden nicht mehr gesichert.
+	- Fensterpositionen werden nur noch gesetzt, wenn sie sich geändert hat.
+
+17.09.99
+	- Das 'IM_SetAspect(m_BufferID, 2, 1)' war auskommentiert!!
+	- Anstatt der Scrollbar erscheint nun wieder die 'flache Hand' zum verschieben.
+
+27.07.00
+	- Umstieg von der Imagen.dll auf die Jpeglib
+
+12.11.02
+	- Über den Kommandozeilenparameter Cam1, Cam2, .... Cam16 läßt sich der MiniClient
+	  nun im Testmode betreiben. Er fordert dann kontinuierlich Bilder der gewünschten
+	  Kamera an.
+	  
+25.02.04
+	- Umstellung auf Unicode und VS_71
+
+14.09.05
+	- Bugfix: OnConfirmJpegEncoding hat seit längerem einen Parameter mehr, so daß
+	  CIPCOutputMiniClient::OnConfirmJpegEncoding die Basisfunktion nicht mehr überschrieben
+	  hat. 

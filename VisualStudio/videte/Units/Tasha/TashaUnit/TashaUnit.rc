@@ -1,0 +1,481 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\TashaUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_ENABLED        ICON                    "res\\TashaEnabled.ico"
+IDI_ICON_DISABLED       ICON                    "res\\TashaDisabled.ico"
+IDI_ICON_FAILURE        ICON                    "res\\TashaFailure.ico"
+IDI_ICON_ACTIVITY       ICON                    "res\\TashaActivity.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TASHAUNIT_DIALOG DIALOGEX 0, 0, 316, 265
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "TashaUnit"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Video Input",IDC_GROUP_VIDEO_INPUT,4,4,160,40
+    CONTROL         "Cam 1",IDC_RADIO_CAM0,"Button",BS_AUTORADIOBUTTON,12,16,
+                    32,10
+    CONTROL         "Cam 2",IDC_RADIO_CAM1,"Button",BS_AUTORADIOBUTTON,48,16,
+                    32,10
+    CONTROL         "Cam 3",IDC_RADIO_CAM2,"Button",BS_AUTORADIOBUTTON,84,16,
+                    32,10
+    CONTROL         "Cam 4",IDC_RADIO_CAM3,"Button",BS_AUTORADIOBUTTON,120,
+                    16,32,10
+    CONTROL         "Cam 5",IDC_RADIO_CAM4,"Button",BS_AUTORADIOBUTTON,12,28,
+                    32,10
+    CONTROL         "Cam 6",IDC_RADIO_CAM5,"Button",BS_AUTORADIOBUTTON,48,28,
+                    32,10
+    CONTROL         "Cam 7",IDC_RADIO_CAM6,"Button",BS_AUTORADIOBUTTON,84,28,
+                    32,10
+    CONTROL         "Cam 8",IDC_RADIO_CAM7,"Button",BS_AUTORADIOBUTTON,120,
+                    28,32,10
+    GROUPBOX        "Initialisations",IDC_STATIC,168,4,144,56
+    PUSHBUTTON      "Reset BF533",IDC_RESET_BF533,176,17,64,16
+    PUSHBUTTON      "Download Altera...",IDC_DOWNLOAD_ALTERA,244,17,64,16
+    PUSHBUTTON      "Write EEProm...",IDC_DOWNLOAD_EEPROM,176,36,64,16
+    PUSHBUTTON      "Read EEProm...",IDC_SAVE_EEPROM,244,36,64,16
+    GROUPBOX        "Color settings",IDC_STATIC,4,44,160,60
+    RTEXT           "Brightness",IDC_STATIC,28,60,34,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_BRIGHTNESS,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,52,72,15
+    LTEXT           "50",IDC_STATIC_BRIGTNESS,138,58,17,8
+    RTEXT           "Contrast",IDC_STATIC,28,72,34,8
+    CONTROL         "Slider2",IDC_SCROLLBAR_CONTRAST,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,68,72,15
+    LTEXT           "50",IDC_STATIC_CONTRAST,138,72,17,8
+    RTEXT           "Saturation",IDC_STATIC,28,85,34,8
+    CONTROL         "Slider3",IDC_SCROLLBAR_SATURATION,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,84,72,15
+    LTEXT           "50",IDC_STATIC_SATURATION,138,87,17,8
+    GROUPBOX        "Capture",IDC_STATIC,168,60,144,78
+    PUSHBUTTON      "StartCapture",IDC_START,176,72,64,16
+    PUSHBUTTON      "StopCapture",IDC_STOP,244,72,64,16
+    PUSHBUTTON      "PauseCapture",IDC_PAUSE,176,92,64,16
+    PUSHBUTTON      "ResumeCapture",IDC_PLAY,244,92,64,16
+    PUSHBUTTON      "Preview 1...",IDC_PREVIEW1,175,111,63,11
+    RTEXT           "Frames:",IDC_STATIC,244,120,26,8
+    LTEXT           "0",IDC_STATIC_FRAME,272,120,36,8
+    LTEXT           "Fps:",IDC_STATIC,256,112,16,8
+    LTEXT           "0",IDC_STATIC_FPS,272,112,24,8
+    GROUPBOX        "Motion detection",IDC_STATIC,4,105,160,99
+    RTEXT           "MD Treshold",IDC_STATIC,16,121,46,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MD_TRESHOLD,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,117,72,15
+    LTEXT           "50",IDC_STATIC_MD_TRESHOLD,136,121,16,8
+    RTEXT           "Mask Treshold",IDC_STATIC,8,137,52,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_TRESHOLD,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,133,72,15
+    LTEXT           "50",IDC_STATIC_MASK_TRESHOLD,136,137,16,8
+    RTEXT           "Mask Increment",IDC_STATIC,8,153,52,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_INCREMENT,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,149,72,15
+    LTEXT           "50",IDC_STATIC_MASK_INCREMENT,136,153,16,8
+    RTEXT           "Mask Delay",IDC_STATIC,24,169,38,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_DELAY,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,165,72,15
+    LTEXT           "50",IDC_STATIC_MASK_DELAY,136,169,16,8
+    GROUPBOX        "Preview",IDC_STATIC,4,208,160,52
+    CONTROL         "Multi view",IDC_CHECK_MULTY_VIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,216,47,10
+    CONTROL         "Framesync",IDC_CHECK_FRAME_SYNC,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,216,50,10
+    CONTROL         "Noise reduction",IDC_CHECK_NOISEREDUCTION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,229,65,10
+    CONTROL         "Show adap. Mask",IDC_CHECK_SHOW_ADAPTIVE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,240,73,10
+    CONTROL         "Show diff. image",IDC_CHECK_SHOW_DIFF_IMAGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,228,68,10
+    GROUPBOX        "Input/Output",IDC_STATIC,168,140,144,80
+    LTEXT           "Relais",IDC_STATIC,188,164,20,8
+    CONTROL         "",IDC_RELAIS1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,232,
+                    164,8,8
+    CONTROL         "",IDC_RELAIS0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,240,
+                    164,8,8
+    LTEXT           "Alarm:",IDC_STATIC_ALARME,188,177,20,8
+    CONTROL         "",IDC_CHECK_ALARM7,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,216,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM5,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,232,178,8,8
+    CONTROL         "",IDC_RELAIS3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,216,
+                    164,8,8
+    CONTROL         "",IDC_RELAIS2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,
+                    164,8,8
+    DEFPUSHBUTTON   "Exit",IDOK,256,244,56,15
+    CONTROL         "",IDC_CHECK_ALARM0,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,272,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM1,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,264,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM2,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,256,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM3,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,248,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM4,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,240,178,8,8
+    CONTROL         "",IDC_CHECK_ALARM6,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,224,178,8,8
+    CONTROL         "Show perm. Mask",IDC_CHECK_SHOW_PERMANENT_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,240,73,10
+    PUSHBUTTON      "Clear mask",IDC_CLEAR_MASK,16,184,40,16
+    PUSHBUTTON      "Invert mask",IDC_INVERT_MASK,59,184,40,16
+    PUSHBUTTON      "Crosspoint...",IDC_CROSSPOINT,261,187,48,15
+    EDITTEXT        IDC_EDIT_REGISTER,198,225,24,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_REGISTER_VALUE,228,225,24,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    PUSHBUTTON      "Set",IDC_SET_REG,260,225,50,14,WS_DISABLED
+    LTEXT           "Alt.Reg.:",IDC_STATIC,168,226,28,8
+    LTEXT           "Cable:",IDC_STATIC,186,193,21,8
+    CONTROL         "",IDC_CHECK_ADAPTER_SELECT3,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,216,193,8,8
+    CONTROL         "",IDC_CHECK_ADAPTER_SELECT2,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,224,193,8,8
+    CONTROL         "",IDC_CHECK_ADAPTER_SELECT1,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,232,193,8,8
+    CONTROL         "",IDC_CHECK_ADAPTER_SELECT0,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,240,193,8,8
+    LTEXT           "PC-Keys:",IDC_STATIC,184,207,30,8
+    CONTROL         "",IDC_CHECK_PC_KEYS0,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,240,207,8,8
+    CONTROL         "",IDC_CHECK_PC_KEYS1,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,232,207,8,8
+    CONTROL         "",IDC_CHECK_PC_KEYS2,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,224,207,8,8
+    CONTROL         "",IDC_CHECK_PC_KEYS3,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,216,207,8,8
+    CONTROL         "PowerLED",IDC_CHECK_POWER_LED,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,174,153,50,10
+    CONTROL         "ResetLED",IDC_CHECK_RESET_LED,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,228,153,49,10
+    CONTROL         "Save to Disk",IDC_CHECK_SAVE_TO_DISK,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,176,249,57,10
+    PUSHBUTTON      "Enc.Param..",IDC_ENCODERPARAM,261,203,48,15
+    PUSHBUTTON      "Set Mask",IDC_SET_PERM_MASK,102,184,40,16
+    PUSHBUTTON      "Preview 2...",IDC_PREVIEW2,176,124,63,11
+END
+
+IDD_ANALOG_VIDEO DIALOG  0, 0, 148, 156
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Analog Video"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,90,138,50,14
+    CONTROL         "",IDC_CROSSPOINT_0_0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,66,30,12,8
+    CONTROL         "",IDC_CROSSPOINT_1_0,"Button",BS_AUTORADIOBUTTON,66,42,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_2_0,"Button",BS_AUTORADIOBUTTON,66,54,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_3_0,"Button",BS_AUTORADIOBUTTON,66,66,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_4_0,"Button",BS_AUTORADIOBUTTON,66,78,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_5_0,"Button",BS_AUTORADIOBUTTON,66,90,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_6_0,"Button",BS_AUTORADIOBUTTON,66,102,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_7_0,"Button",BS_AUTORADIOBUTTON,66,114,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_0_1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,84,30,12,8
+    CONTROL         "",IDC_CROSSPOINT_1_1,"Button",BS_AUTORADIOBUTTON,84,42,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_2_1,"Button",BS_AUTORADIOBUTTON,84,54,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_3_1,"Button",BS_AUTORADIOBUTTON,84,66,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_4_1,"Button",BS_AUTORADIOBUTTON,84,78,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_5_1,"Button",BS_AUTORADIOBUTTON,84,90,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_6_1,"Button",BS_AUTORADIOBUTTON,84,102,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_7_1,"Button",BS_AUTORADIOBUTTON,84,114,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_0_2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,102,30,12,8
+    CONTROL         "",IDC_CROSSPOINT_1_2,"Button",BS_AUTORADIOBUTTON,102,42,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_2_2,"Button",BS_AUTORADIOBUTTON,102,54,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_3_2,"Button",BS_AUTORADIOBUTTON,102,66,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_4_2,"Button",BS_AUTORADIOBUTTON,102,78,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_5_2,"Button",BS_AUTORADIOBUTTON,102,90,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_6_2,"Button",BS_AUTORADIOBUTTON,102,
+                    102,12,8
+    CONTROL         "",IDC_CROSSPOINT_7_2,"Button",BS_AUTORADIOBUTTON,102,
+                    114,12,8
+    CONTROL         "",IDC_CROSSPOINT_0_3,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,120,30,12,8
+    CONTROL         "",IDC_CROSSPOINT_1_3,"Button",BS_AUTORADIOBUTTON,120,42,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_2_3,"Button",BS_AUTORADIOBUTTON,120,54,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_3_3,"Button",BS_AUTORADIOBUTTON,120,66,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_4_3,"Button",BS_AUTORADIOBUTTON,120,78,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_5_3,"Button",BS_AUTORADIOBUTTON,120,90,
+                    12,8
+    CONTROL         "",IDC_CROSSPOINT_6_3,"Button",BS_AUTORADIOBUTTON,120,
+                    102,12,8
+    CONTROL         "",IDC_CROSSPOINT_7_3,"Button",BS_AUTORADIOBUTTON,120,
+                    114,12,8
+    LTEXT           "Output",IDC_STATIC,66,6,22,8
+    LTEXT           "Input",IDC_STATIC,6,30,17,8
+    LTEXT           "1",IDC_STATIC,30,30,8,8
+    LTEXT           "2",IDC_STATIC,30,42,8,8
+    LTEXT           "3",IDC_STATIC,30,54,8,8
+    LTEXT           "4",IDC_STATIC,30,66,8,8
+    LTEXT           "5",IDC_STATIC,30,78,8,8
+    LTEXT           "6",IDC_STATIC,30,90,8,8
+    LTEXT           "7",IDC_STATIC,30,102,8,8
+    LTEXT           "8",IDC_STATIC,30,114,8,8
+    LTEXT           "1",IDC_STATIC,66,18,8,8
+    LTEXT           "2",IDC_STATIC,84,18,8,8
+    LTEXT           "3",IDC_STATIC,102,18,8,8
+    LTEXT           "4",IDC_STATIC,120,18,8,8
+    GROUPBOX        "",IDC_STATIC,60,24,78,102
+    CONTROL         "",IDC_TERM_0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    30,12,8
+    CONTROL         "",IDC_TERM_1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    42,12,8
+    CONTROL         "",IDC_TERM_2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    54,12,8
+    CONTROL         "",IDC_TERM_3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    66,12,8
+    CONTROL         "",IDC_TERM_4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    78,12,8
+    CONTROL         "",IDC_TERM_5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    90,12,8
+    CONTROL         "",IDC_TERM_6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    102,12,8
+    CONTROL         "",IDC_TERM_7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,
+                    114,12,8
+    LTEXT           "Termin.",IDC_STATIC,36,18,24,8
+    CONTROL         "Video enable",IDC_VID_ENABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,132,57,10
+    CONTROL         "Crosspoint enable",IDC_CROSSPOINT_ENABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,144,72,10
+END
+
+IDD_ENCODER_PARAM DIALOGEX 0, 0, 195, 139
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Encoder Parameter"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    RTEXT           "Resolution:",IDC_STATIC,29,17,36,8
+    CONTROL         "High",IDC_RADIO_RESOLUTION_HIGH,"Button",
+                    BS_AUTORADIOBUTTON,69,17,31,10
+    CONTROL         "Mid",IDC_RADIO_RESOLUTION_MID,"Button",
+                    BS_AUTORADIOBUTTON,109,17,27,10
+    CONTROL         "Low",IDC_RADIO_RESOLUTION_LOW,"Button",
+                    BS_AUTORADIOBUTTON,150,17,29,10
+    RTEXT           "Compression type:",IDC_STATIC,7,30,58,8
+    CONTROL         "MPEG4",IDC_RADIO_MPEG4,"Button",BS_AUTORADIOBUTTON,69,
+                    30,41,10
+    CONTROL         "YUV422",IDC_RADIO_YUV422,"Button",BS_AUTORADIOBUTTON,
+                    109,29,43,10
+    RTEXT           "Bitrate:",IDC_STATIC,37,45,23,8
+    EDITTEXT        IDC_EDIT_BITRATE,63,42,40,14,ES_AUTOHSCROLL
+    RTEXT           "Fps:",IDC_STATIC,47,63,14,8
+    EDITTEXT        IDC_EDIT_FPS,63,60,40,14,ES_AUTOHSCROLL
+    RTEXT           "I-Frame Intervall:",IDC_STATIC,7,81,53,8
+    EDITTEXT        IDC_EDIT_IFRAME_INTERVALL,63,77,40,14,ES_AUTOHSCROLL
+    RTEXT           "ProzessID:",IDC_STATIC,25,97,35,8
+    EDITTEXT        IDC_EDIT_PROZESSID,63,94,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Send parameter",IDC_SEND,115,43,66,14
+    DEFPUSHBUTTON   "OK",IDOK,115,106,66,14
+    RTEXT           "StreamID:",IDC_STATIC,30,114,32,8
+    EDITTEXT        IDC_EDIT_STREAMID,63,110,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Read parameter",IDC_READ,115,64,66,14
+    PUSHBUTTON      "Request single field",IDC_REQ_SINGLE_FIELD,115,85,66,14
+END
+
+IDD_PROGRESS DIALOGEX 0, 0, 186, 36
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "DSP boot process..."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_PROGRESS_BOOTING,"msctls_progress32",WS_BORDER,7,
+                    7,172,14
+    LTEXT           "DSP:",IDC_STATIC_INFOTEXT,12,24,160,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TASHAUNIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 258
+    END
+
+    IDD_ANALOG_VIDEO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 141
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_ENCODER_PARAM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 188
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 132
+    END
+
+    IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 21
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "About...",                    ID_FILE_ABOUT
+        MENUITEM "Settings...",                 ID_FILE_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o about TashaUnit..."
+    IDS_RTE_NO_VIDEO        "Camera %u has no video signal"
+    IDS_RTE_VIDEO           "The video signal from camera %u has been resumed"
+    IDS_EEPROM_READBACK_FAILED "EEProm readback test failed!"
+    IDS_RTE_VIDEO_STREAM_ABORTED "Video stream of camera %u is aborted"
+    IDS_RTE_VIDEO_STREAM_RESUMED "Video stream of camera %u has been resumed"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\TashaUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

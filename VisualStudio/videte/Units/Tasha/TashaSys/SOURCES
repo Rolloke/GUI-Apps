@@ -1,0 +1,11 @@
+TARGETNAME=Tasha
+TARGETTYPE=DRIVER
+
+INCLUDES=..\
+
+SOURCES=TashaSys.c \
+		TashaCommon.c \
+		Eventlog.c \
+		TashaSys.rc
+
+

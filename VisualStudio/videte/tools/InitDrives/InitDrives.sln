@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InitDrives", "InitDrives\InitDrives.vcproj", "{96F98319-E069-4872-8198-025614E37F71}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SolutionUniqueID = {D1AE068A-B620-4427-ADE2-07139777A122}
+		SccProjectUniqueName1 = InitDrives\\InitDrives.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection1 = InitDrives\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{96F98319-E069-4872-8198-025614E37F71}.Debug.ActiveCfg = Debug|Win32
+		{96F98319-E069-4872-8198-025614E37F71}.Debug.Build.0 = Debug|Win32
+		{96F98319-E069-4872-8198-025614E37F71}.Release.ActiveCfg = Release|Win32
+		{96F98319-E069-4872-8198-025614E37F71}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

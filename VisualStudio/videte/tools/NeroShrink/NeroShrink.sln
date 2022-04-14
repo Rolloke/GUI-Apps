@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeroShrink", "NeroShrink\NeroShrink.vcproj", "{516A5298-2021-4B70-803D-28DE51BBBC49}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/NeroShrink\u0022,\u0020FIQCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {58396651-4095-4199-9BBC-A3F84A8F583C}
+		SccProjectUniqueName1 = NeroShrink\\NeroShrink.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection1 = NeroShrink\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{516A5298-2021-4B70-803D-28DE51BBBC49}.Debug.ActiveCfg = Debug|Win32
+		{516A5298-2021-4B70-803D-28DE51BBBC49}.Debug.Build.0 = Debug|Win32
+		{516A5298-2021-4B70-803D-28DE51BBBC49}.Release.ActiveCfg = Release|Win32
+		{516A5298-2021-4B70-803D-28DE51BBBC49}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

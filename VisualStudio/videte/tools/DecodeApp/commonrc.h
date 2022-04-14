@@ -1,0 +1,91 @@
+//{{NO_DEPENDENCIES}}
+// App Studio generated include file.
+// Used by COMMON.RC
+//
+#define IDR_COMMON                      2
+#define DLG_TEILNEHMER_VERWALTUNG       500
+#define DLG_TEILNEHMER_VERWALTUNG_640x480 501
+#define DLG_TEILNEHMERLISTE             502
+#define DLG_MSGBOX                      503
+#define DLG_MSGBOX_OK                   504
+#define DLG_MSGBOX_OKCANCEL             505
+#define DLG_MSGBOX_YESNO                506
+#define DLG_MSGBOX_YESNOCANCEL          507
+#define DLG_MSGBOX_ABORTRETRYIGNORE     508
+#define DLG_MSGBOX_RETRYCANCEL          509
+#define DLG_PASSWORD_CHECK              510
+#define DLG_PASSWORD_CHANGE             511
+#define IDC_TEILNEHMER_RUFNUMMER0       2000
+#define IDC_TEILNEHMER_RUFNUMMER1       2001
+#define IDC_TEILNEHMER_RUFNUMMER2       2002
+#define IDC_TEILNEHMER_RUFNUMMER3       2003
+#define IDC_TEILNEHMER_RUFNUMMER4       2004
+#define IDC_TEILNEHMER_RUFNUMMER5       2005
+#define IDC_TEILNEHMER_RUFNUMMER6       2006
+#define IDC_TEILNEHMER_RUFNUMMER7       2007
+#define IDC_TEILNEHMER_RUFNUMMER8       2008
+#define IDC_TEILNEHMER_RUFNUMMER9       2009
+#define IDC_TEILNEHMER_RUFNUMMER10      2010
+#define IDC_TEILNEHMER_RUFNUMMER11      2011
+#define IDC_TEILNEHMER_RUFNUMMER12      2012
+#define IDC_TEILNEHMER_RUFNUMMER13      2013
+#define IDC_TEILNEHMER_RUFNUMMER14      2014
+#define IDC_TEILNEHMER_RUFNUMMER15      2015
+#define IDC_TEILNEHMER_RUFNUMMER16      2016
+#define IDC_TEILNEHMER_RUFNUMMER17      2017
+#define IDC_TEILNEHMER_RUFNUMMER18      2018
+#define IDC_TEILNEHMER_RUFNUMMER19      2019
+#define IDC_TEILNEHMER_RUFNUMMER20      2020
+#define IDC_TEILNEHMER_NAME             2021
+#define IDC_TEILNEHMER_PASSWORD         2022
+#define IDC_TEILNEHMER_AMTSHOLUNG       2023
+#define IDC_TEILNEHMER_LISTE            2024
+#define IDC_TEILNEHMER_NEU              2025
+#define IDC_TEILNEHMER_LOESCHEN         2026
+#define IDC_SPEICHERN                   2027
+#define IDC_ENDE                        2028
+#define IDC_MESSAGE                     2029
+#define IDC_TEILN_HELP                  2030
+#define IDC_PASSWORD_CHECK              2031
+#define IDC_OLD_PASSWORD                2032
+#define IDC_NEW_PASSWORD_1              2033
+#define IDC_NEW_PASSWORD_2              2034
+#define CMD_PASSWORD_1_CHECK            4000
+#define CMD_PASSWORD_2_CHECK            4001
+#define CMD_PASSWORD_3_CHECK            4002
+#define CMD_PASSWORD_1_CHANGE           4003
+#define CMD_PASSWORD_2_CHANGE           4004
+#define CMD_PASSWORD_3_CHANGE           4005
+#define CMD_TVW                         4006
+#define CMD_MODAL_DIALOG                4007
+#define STR_TEILNEHMER_DATEI            6000
+#define MSG_NAME_MUSS_SEIN              8000
+#define MSG_NAME_EXIST                  8001
+#define MSG_RUFNUMMER_EXIST             8002
+#define MSG_KEIN_TEILNEHMER_MARKIERT    8003
+#define MSG_TEILNEHMER_LOESCHEN         8004
+#define MSG_TEILNEHMER_DATEI_NOT_SAVED  8005
+#define MSG_AENDERUNG_SICHERN           8006
+#define MSG_TEILNEHMER_NICHT_GELOESCHT  8007
+#define MSG_TEILNEHMERVERW_BEENDEN      8008
+#define MSG_NO_DEBUG_FILE               8009
+#define MSG_RUFNUMMER_MUSS_SEIN         8010
+#define MSG_PASSWORDLIST_DATEI_INVALID  8011
+#define MSG_PASSWORDLIST_DATEI_NOT_SAVED 8012
+#define MSG_TEILNEHMER_USED             8013
+#define MSG_PASSWORD_CHANGED            8014
+#define MSG_PASSWORD_NOT_CHANGED        8015
+#define MSG_PASSWORD_EMPTY              8016
+#define MSG_PASSWORD_NOT_SAME           8017
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+
+#define _APS_NEXT_RESOURCE_VALUE        512
+#define _APS_NEXT_COMMAND_VALUE         4008
+#define _APS_NEXT_CONTROL_VALUE         2036
+#define _APS_NEXT_SYMED_VALUE           512
+#endif
+#endif

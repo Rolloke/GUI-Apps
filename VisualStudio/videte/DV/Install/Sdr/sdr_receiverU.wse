@@ -1,0 +1,102 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=SDR Installation
+  Title German=SDR Installation
+  Flags=00000100
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000100010010110000010000
+  Log Pathname=%MAINDIR%\INSTALL.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\Install\SantecU\sdr_receiver.exe
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=C:\Programme\Wise
+  Variable Name2=_OEM_
+  Variable Default2=3
+  Variable Name3=_DEMO_
+  Variable Default3=0
+  Variable Name4=SOURCE_BASE
+  Variable Default4=dts
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=SDR-SOFT ISDN-LAN
+end
+item: Set Variable
+  Variable=GROUP
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=SDRReceiver
+end
+item: Custom Graphic
+  Width=1024
+  Height=139
+  item: Text
+    Text=SDR-SOFT ISDN-LAN
+    Text German=SDR-SOFT ISDN-LAN
+    Rectangle=0 0 1024 139
+    Pen Color=16777215
+    Pen Style=6
+    Pen Width=1
+    Extra Flags=00000011
+    Name=Arial
+    Font Style=-64 0 0 0 700 255 0 0 0 3 2 1 34
+  end
+end
+item: Display Graphic
+  Pathname=D:\Project\DV\Install\logos\Santec.bmp
+  Pathname German=D:\Project\DV\Install\logos\Santec.bmp
+  Y Position=16384
+  Flags=0000000010000000
+end
+item: Remark
+end
+item: Remark
+  Text=Software Dongle
+end
+item: Install File
+  Source=D:\PROJECT\dv\Install\dcf\sdr_receiver.dcf
+  Destination=%TEMP%\dongle.dcf
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Remark
+  Text=+++++++++++++ EULA +++++++++++++++++
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Deutsch
+end
+item: Install File
+  Source=D:\Project\DV\Install\license\SDR_License_Deutsch.rtf
+  Destination=%TEMP%\EULA.rtf
+  Flags=0000000000000010
+end
+item: Else Statement
+end
+item: Install File
+  Source=D:\Project\DV\Install\license\SDR_License_English.rtf
+  Destination=%TEMP%\EULA.rtf
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+end
+item: Include Script
+  Pathname=D:\PROJECT\dv\Install\include\receiverU.wse
+end

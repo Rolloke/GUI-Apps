@@ -1,0 +1,14 @@
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+02.03.04 GF	- Umstellung auf Unicode und VS_71
+18.11.02 GF	- Anpassung VS_70
+07.06.01 GF	- Titel- und Display-Font Änderung auf OEM_CHARSET widerrufen, da keine Lösung
+07.06.01 GF	- Titel- und Display-Font auf OEM_CHARSET angepasst
+27.04.01 GF	- Auch Programme mehrsprachig
+26.04.01 GF	- Mehrsprachigkeit überarbeitet
+				Jetzt allgemein gültig über 2-Zeichen-Abkürzung nach ISO Standard 639 (meistens)
+				Damit ohne Source-Änderung beliebig erweiterbar in der Ini-Datei
+				Ini-Datei-Format mußte dafür angepasst werden
+25.04.01 GF	- Mehrsprachig eingeführt
+			- Spezial-Konfigurationen entfernt, da alles über INI einstellbar ist
+04.04.01 GF	- Ini-Einstellungen erweitert, fast alle einstellbar
+04.04.01 GF	- Gestartet

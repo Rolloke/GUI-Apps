@@ -1,0 +1,57 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IdipClient", "IdipClient.vcproj", "{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A} = {D1F91B75-EDAC-4690-B30F-76E9A1C6869A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IdipClientDll", "IdipClientDll\IdipClientDll.vcproj", "{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectName0 = \u0022$/Project/Clients/IdipClient\u0022,\u0020TRMCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {C9746473-1BCC-4129-8CEC-9DB82FDE128C}
+		SccProjectUniqueName1 = IdipClient.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = IdipClientDll\\IdipClientDll.vcproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection2 = IdipClientDll\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Chs = Chs
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+		Rus = Rus
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Chs.ActiveCfg = Chs|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Debug.ActiveCfg = Debug|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Debug.Build.0 = Debug|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Enu.ActiveCfg = Enu|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Release.ActiveCfg = Release|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Release.Build.0 = Release|Win32
+		{D05F7C07-A5F3-45A3-AD4E-97880B889A7C}.Rus.ActiveCfg = Rus|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Chs.ActiveCfg = Chs|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Chs.Build.0 = Chs|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Debug.ActiveCfg = Debug|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Debug.Build.0 = Debug|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Enu.ActiveCfg = Enu|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Enu.Build.0 = Enu|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Release.ActiveCfg = Release|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Release.Build.0 = Release|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Rus.ActiveCfg = Rus|Win32
+		{D1F91B75-EDAC-4690-B30F-76E9A1C6869A}.Rus.Build.0 = Rus|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

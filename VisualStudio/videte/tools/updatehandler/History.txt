@@ -1,0 +1,180 @@
+20.01.06 UF - Compilereinstellung tread wchar_t as build in eingeschaltet. CIPC und wkclasses geaendert.
+13.01.06 UF - Bugfix GP beim holen von Logdateien.
+04.01.06 RKE- Kommandozeile: Bugs behoben, Timeout einstellbar (bis zu infinite, dann manuell abholen).
+			  Neue Kommandos koennen jetzt schon vor Ablauf der Zeit fuer das vorhergehende Komando
+			  abgeschickt werden.
+			  FileView Rekursion in OnSize wird jetzt verhindert.
+			  Focus zu begin auf CmdLineEdit.
+13.12.05 RKE- Die Dateiinformationen koennen jetzt Portionsweise geholt werden. Es werden dann 50
+	      WIN32_FIND_DATA Struktur Objekte am Stueck geliefert.
+24.11.05 RKE- Kommandozeile auf Remoterechner ausfuehrbar (Datei/Kommandozeile ausfuehren...)
+20.03.05 UF - Unicode Bugfix beim Update / SetupDialog.
+24.06.04 RKE- Unicode Verbindungen getestet und gebugfixed (Unicode <--> Ansi) (Unicode <--> Unicode)
+			  DirDialog an XP angepasst.
+03.03.04 GF	- Umstellung auf Unicode und VS_71
+18.11.02
+	GF	Anpassung VS_70
+11.5.98 >>> UpdateVersion um 13:08 <<<
+	UF ExceptionHanlder in InitDebugger
+/*
+
+Bestandsaufnahme 09.05.97
+
+Dokumentation der UpdateHandler Schnittstelle
+
+1. Konstanten
+	// Destination: 0=AppDir, 1=Windows, 2=Windows/System, 3=Root
+	//				4=use sFileName
+	//				5=new String Interface in sFileName
+	#define RFU_APPDIR			 0x00
+	#define RFU_WINDOWS			 0x01
+	#define RFU_SYSTEM			 0x02
+	#define RFU_ROOT			 0x03
+	#define RFU_FULLPATH		 0x04
+	#define RFU_STRING_INTERFACE 0x05
+
+	#define RFU_DELETE			 0x08
+	#define RFU_EXECUTE			 0x10
+
+2. Prinzip
+
+	Für Update Befehle ist ein Input Client zu einer beliebigen Station aufzubauen.
+	Ein NewFetchInputConnection liefert eine Möglichkeit eine von CIPCInput abgeleitete
+	Klasse als Verbindungsinterface zu nutzen.
+	Über die von CIPCInput abgeleitete Klasse ist der Zugriff auf die Update Dienste mittels
+	DoRequestFileUpdate und DoRequestGetFile möglich.
+	DoRequestFileUpdate wird vom Server nur in ein FetchUpdate zum passenden Launcher hin
+	umgesetzt, dieser übernimmt dann die Behandlung des Requests. Siehe 3.
+	DoRequestGetFile wird direkt vom Server behandelt und dient in erster Linie dazu,
+	Dateien und Verzeichnisse von der Gegenstation zu lesen. Siehe 4.
+
+
+
+
+3. 	void DoRequestFileUpdate(	int iDestination,
+								const CString &sFileName,
+								const void *pData,
+								DWORD dwDataLen,
+								BOOL bNeedsReboot
+								);
+	
+	Die Funktion ermöglicht es Dateien auf einen beliebigen ServerRechner zu schreiben.
+	Es besteht das Win95 Problem, daß nur vom System nicht benutzte Dateien geschrieben
+	werden dürfen. Die executable Dateien laufende Programme können also erst nach
+	Beendigung des jeweiligen Programms erneuert werden. Dazu gibt der Server mittels
+	FetchUpdate die Behandlung des Requests an der Launcher weiter.
+	Dieser ist in der Lage laufende Programme zu beenden, die neue Datei zu schreiben,
+	um dann diese wieder zu starten.
+	Ist das Verzeichnis, in das die Datei geschrieben werden soll nicht vorhanden, so
+	wird es unabhängig von der Schachtelungstiefe angelegt.(3.5)
+
+	int iDestination : bestimmt die Verwendung der weiteren Parameter.
+
+	const CString &sFileName: bestimmt den oder die Dateinamen bzw. das genaue 
+							  UpdateKommando mittels Stringinterface in Abhängigkeit
+							  von iDestination.
+
+		3.1) iDestination = RFU_APPDIR
+			 Es wird aus dem Verzeichnis, in dem sich der Launcher befindet und sFileName
+			 ein Pfadname gebildet, der die Datei dann adressiert. Relative Pfadangaben
+			 sind möglich.
+			 z.B. ergibt sFileName = "coco\cocounit.exe" mit dem Launcherverzeichnis
+			 C:\Security zusammen C:\Security\coco\cocounit.exe als Dateinamen.
+			 
+		3.2) iDestination = RFU_WINDOWS
+			Es wird das Windowsverzeichnis als Ausgangspunkt benutzt. Diese Funktion wird
+			benötigt, da das Windowsverzeichnis sich von Rechner zu Rechner unterscheiden
+			kann.
+
+		3.3) iDestination = RFU_SYSTEM
+			Es wird das Windows Systemverzeichnis als Ausgangspunkt benutzt. 
+			Diese Funktion wird	benötigt, da das Windows Systemverzeichnis sich von 
+			Rechner zu Rechner unterscheiden kann.
+
+		3.4) iDestination = RFU_ROOT
+			Es wird C:\ als Ausgangspunkt benutzt.
+
+		3.5) iDestination = RFU_FULLPATH
+			sFileName enthält einen vollständigen Dateinamen. Diese Möglichkeit
+			sollte nur dann benutzt werden, wenn sicher ist, daß das angesprochene 
+			Verzeichnis auch existiert. DoRequestGetFile ermöglicht es, sich einen
+			Überblick über die Dateistruktur zu verschaffen.
+
+		3.6) iDestination = RFU_STRING_INTERFACE
+			sFileName enthält ein String Befehl. Davon sin z.Z. nur
+			MultipleUpdate implementiert.
+
+			3.6.1) MultipleUpdate [Dateiname,DateiGröße,ZielVerzeichnis;]
+					
+				   Dateiname: ist der Name der zu schreibenden Datei
+				   DateiGröße: ist die Größe der Datei
+				   ZielVerzeichnis: ist ein Character, der beschreibt, wie der
+						            Dateiname zu benutzen ist:
+									f .. full path vollständiger Pfadname
+									m .. Mico Verzeichnis
+									c .. Coco Verzeichnis
+									p .. Programm oder Launcher Verzeichnis
+									w .. Windows Verzeichnis
+									s .. Windows Systemverzeichnis
+									t .. Windows Temp Verzeichnis (3.5)
+				   
+				   Die Dateien werden aus dem Buffer in pData gebildet.
+				   Dazu wird pData erst mit CLogZip::DecompressFile dekomprimiert,
+				   und anschließend anhand der Dateigrößen zerschnitten.
+				   Um also einen solchen Buffer anzulegen, sind erst alle Dateien
+				   hintereinander zu ketten, der so entstandene Buffer mit
+				   CLogZip::CompressFile zu komprimieren.
+
+		3.7) RFU_DELETE und RFU_EXECUTE werden für DoRequestGetFile benutzt.
+
+	const void *pData: enthält die Datei(en) je nach iDestination
+						ist pData NULL, so wird nur ein Verzeichnis mit dem Namen
+						sFileName angelegt.
+	DWORD dwDataLen: Länge des Buffers in pData
+	BOOL bNeedsReboot: soll der Rechner nach erfolgtem Update neu gestartet werden.
+					   TRUE, nach erfolgtem Update wird der Rechner rebootet,
+					   FALSE, kein reboot
+
+	Antwort: 	virtual void OnConfirmFileUpdate(const CString &sFileName);
+
+	Achtung: bei Update des Servers erfolgt z.Z. kein Confirm, sollte das Update
+			 keinen Erfolg haben, so gibt es auch kein Confirm !!
+
+
+
+4. 	virtual void DoRequestGetFile(int iDestination,	const CString &sFileName);
+
+	DoRequestGetFile wird vom Server selbst behandelt.
+
+	int iDestination:  iDestination bestimmt, wie der Parameter sFilename zu benutzen ist.
+	
+	const CString &sFileName: Die Verwendung von sFileName hängt von iDestination ab.
+	
+	4.1) RFU_APPDIR, RFU_WINDOWS, RFU_SYSTEM, RFU_ROOT,	RFU_FULLPATH legen wie bei
+		 DoRequestFileUpdate den Dateinamen fest.
+
+
+		 Ist unter dem Dateinamen eine einfache Datei zu finden, so wird diese gelesen
+		 und ist dann bei OnConfirmGetFile in pData gespeichert.
+		 Ist unter dem Dateinamen ein Verzeichnis zu finden, so wird dieses gelesen,
+		 pData enthält dann hintereinander gekettete WIN32_FIND_DATA Strukturen.
+		 die die Dateien im Verzeichnis gepräsentieren.
+	4.2) Ist zusätzlich das Bit RFU_DELETE gesetzt, so wird die Datei gelöscht,
+		 Verzeichnisse werden nicht gelöscht.
+	
+	4.3) Ist zusätzlich das Bit RFU_EXECUTE gesetzt, so wird die Datei ausgeführt,
+		 Es wird nicht überprüft, ob es sich um eine ausführbare Datei handelt!
+
+	4.4) RFU_STRING_INTERFACE ist am 07.04.97 noch nicht implementiert.
+		 (TODO DOKU)
+
+
+	 Antwort: 	virtual void OnConfirmGetFile(
+											int iDestination,
+											const CString &sFileName,
+											const void *pData,
+											DWORD dwDataLen
+											);
+
+
+*/

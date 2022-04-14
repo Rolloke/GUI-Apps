@@ -1,0 +1,45 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: MCLT - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "I:\Temp\RSPD2.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_WINDLL" /D "_AFXDLL" /D "_MBCS" /D "_USRDLL" /Fp"Release/MCLT.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"F:\project\MCLT\MCLTCtl.cpp"
+]
+Creating command line "cl.exe @I:\Temp\RSPD2.tmp" 
+Creating temporary file "I:\Temp\RSPD3.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:no /pdb:"Release/MCLT.pdb" /machine:I386 /def:".\MCLT.def" /out:"Release/MCLT.ocx" /implib:"Release/MCLT.lib" 
+.\Release\MCLT.obj
+.\Release\MCLTCtl.obj
+.\Release\MCLTPpg.obj
+.\Release\StdAfx.obj
+.\Release\MCLT.res
+]
+Creating command line "link.exe @I:\Temp\RSPD3.tmp"
+Creating temporary file "I:\Temp\RSPD4.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\Release\MCLT.ocx"
+echo regsvr32 exec. time > ".\Release\regsvr32.trg"
+]
+Creating command line "I:\Temp\RSPD4.bat"
+Compiling...
+MCLTCtl.cpp
+Linking...
+   Creating library Release/MCLT.lib and object Release/MCLT.exp
+<h3>Output Window</h3>
+Registering ActiveX Control...
+
+
+
+<h3>Results</h3>
+MCLT.ocx - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

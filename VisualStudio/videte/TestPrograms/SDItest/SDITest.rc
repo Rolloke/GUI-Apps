@@ -1,0 +1,2070 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SDITest.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SDITest.ico"
+IDR_SDITESTYPE          ICON                    "res\\SDITestDoc.ico"
+IDR_DTP                 ICON                    "res\\dtp.ico"
+IDR_KEBA                ICON                    "res\\idr_keba.ico"
+IDR_NCR                 ICON                    "res\\idr_ncr.ico"
+IDR_ENGEL               ICON                    "res\\engel.ico"
+IDR_SNI                 ICON                    "res\\sni.ico"
+IDR_IBM                 ICON                    "res\\ibm.ico"
+IDR_GERMAN_PARCEL       ICON                    "res\\GermanParcel.ico"
+IDR_NCR_NEW             ICON                    "res\\idr_ncr_new.ico"
+IDR_SNI_IBM_EMU         ICON                    "res\\idr_sni_ibm_emu.ico"
+IDR_AV_CUSTOMER_SAFE    ICON                    "res\\AVM.ico"
+IDR_SNI_COM             ICON                    "res\\sni_com.ico"
+IDR_KEBA_PASADOR        ICON                    "res\\icon1.ico"
+IDR_ASCOM               ICON                    "res\\Ascom.ico"
+IDR_RONDO               ICON                    "res\\Rondo.ico"
+IDR_DIALOGBANK          ICON                    "res\\Dialogbank.ico"
+IDR_FILE                ICON                    "res\\idr_file.ico"
+IDR_PM_100_IP_ALARM     ICON                    "res\\idr_sni_.ico"
+IDR_PM_100_XML          ICON                    "res\\idr_pm_1.ico"
+IDR_SCHNEIDER_INTERCOM  ICON                    "res\\idr_sdit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_SEND
+    BUTTON      ID_STOP_SEND
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_SDITESTYPE MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_DTP MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_KEBA MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_NCR MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_ENGEL MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_SNI MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_IBM MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_GERMAN_PARCEL MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_NCR_NEW MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_SNI_IBM_EMU MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_AV_CUSTOMER_SAFE MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_SNI_COM MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_KEBA_PASADOR MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_ASCOM MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_RONDO MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_DIALOGBANK MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_FILE MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_PM_100_IP_ALARM MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "Netzwerk...",                 ID_CONFIG_IP
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_PM_100_XML MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "Netzwerk...",                 ID_CONFIG_IP
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_SCHNEIDER_INTERCOM MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "COM &Schnittstelle...",       ID_CONFIG_COM
+    END
+    POPUP "&Trace"
+    BEGIN
+        MENUITEM "RS232 &Hex",                  ID_TRACE_RS232_HEX
+        MENUITEM "RS232 &Ascii",                ID_TRACE_RS232_ASCII
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDITest...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SDITEST_FORM DIALOG  0, 0, 140, 10
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_DTP_FORM DIALOG  0, 0, 265, 105
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Schnittstelle &1",IDC_RADIO_PORT_NR_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,20,100,8
+    CONTROL         "Schnittstelle &2",IDC_RADIO_PORT_NR_2,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,8
+    CONTROL         "Schnittstelle &3",IDC_RADIO_PORT_NR_3,"Button",
+                    BS_AUTORADIOBUTTON,12,50,100,8
+    CONTROL         "Schnittstelle &4",IDC_RADIO_PORT_NR_4,"Button",
+                    BS_AUTORADIOBUTTON,12,65,100,8
+    CONTROL         "Leerzeichen (&Update)",IDC_RADIO_PORT_UPDATE,"Button",
+                    BS_AUTORADIOBUTTON,12,80,100,8
+    GROUPBOX        "DTP-Schnittstellennummer",IDC_TXT_PORT_NR,7,7,120,90,
+                    WS_GROUP
+    CONTROL         "&Porträt",IDC_RADIO_CAMERA_NR_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,142,20,100,8
+    CONTROL         "&Hand zum Geld",IDC_RADIO_CAMERA_NR_2,"Button",
+                    BS_AUTORADIOBUTTON,142,35,100,8
+    CONTROL         "Update (&Null)",IDC_RADIO_CAMERA_UPDATE_NULL,"Button",
+                    BS_AUTORADIOBUTTON,142,50,100,8
+    CONTROL         "Update (&Leerzeichen)",IDC_RADIO_CAMERA_UPDATE_SPACE,
+                    "Button",BS_AUTORADIOBUTTON,142,65,100,8
+    GROUPBOX        "Kamera",IDC_TXT_CAMERA,137,7,120,90,WS_GROUP
+END
+
+IDD_CONFIG_IP DIALOGEX 0, 0, 150, 82
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IP-Schnittstelle konfigurieren"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,37,61,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,93,61,50,14
+    COMBOBOX        IDC_COMBO_IP_TYPE,43,7,48,48,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Typ:",IDC_STATIC,7,8,15,8
+    LTEXT           "Port:",IDC_STATIC,7,24,16,8
+    EDITTEXT        IDC_EDIT_PORT,43,23,48,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_IPADDRESS,"SysIPAddress32",WS_TABSTOP,43,39,100,
+                    12
+    LTEXT           "Adresse:",IDC_STATIC,7,41,28,8
+END
+
+IDD_KEBA_FORM DIALOG  0, 0, 135, 60
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Kartenleser",IDC_TXT_CARD_READER,7,7,120,45,WS_GROUP
+    CONTROL         "Kartenleser &1",IDC_RADIO_CARD_READER_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,12,20,100,8
+    CONTROL         "Kartenleser &2",IDC_RADIO_CARD_READER_2,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,8
+END
+
+AFX_IDD_NEWTYPEDLG DIALOGEX 9, 26, 200, 167
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Neu"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&Neu",IDC_STATIC,6,5,123,8,NOT WS_GROUP
+    LISTBOX         AFX_IDC_LISTBOX,6,15,125,144,WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,137,6,55,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,137,23,55,14
+    PUSHBUTTON      "&Hilfe",ID_HELP,137,43,55,14
+END
+
+IDD_NCR_FORM DIALOG  0, 0, 135, 84
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Komando",IDC_TXT_COMMAND,7,7,120,60,WS_GROUP
+    CONTROL         "Sta&rtkommando",IDC_RADIO_START_COMMAND,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,12,20,100,8
+    CONTROL         "D&iagnose",IDC_RADIO_DIAGNOSE,"Button",
+                    BS_AUTORADIOBUTTON,12,50,100,8
+    LTEXT           "ggf. abwechselnd gleiche und neue TAN",
+                    IDC_TXT_SAME_AND_NEW_TAN,24,29,88,18
+END
+
+IDD_ENGEL_FORM DIALOG  0, 0, 140, 70
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Kommando",IDC_TXT_KOMMANDO,7,7,120,45,WS_GROUP
+    CONTROL         "&EC-Karte",IDC_RADIO_L_COMMAND,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,12,20,100,8
+    CONTROL         "K&redit-Karte",IDC_RADIO_E_COMMAND,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,8
+END
+
+IDD_SNI_FORM DIALOG  0, 0, 265, 105
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Ansteuerungspunkt",IDC_GROUP_POINT_OF_DATA,7,7,251,90,
+                    WS_GROUP
+    CONTROL         "00 frei (Statusabfrage in LOOP)",
+                    IDC_RADIO_POINT_OF_DATA_0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,12,20,115,8
+    CONTROL         "01 Nach erfolgreichem Log&in",IDC_RADIO_POINT_OF_DATA_1,
+                    "Button",BS_AUTORADIOBUTTON,12,35,115,8
+    CONTROL         "02 Nach dem Log&out",IDC_RADIO_POINT_OF_DATA_2,"Button",
+                    BS_AUTORADIOBUTTON,12,50,115,8
+    CONTROL         "03 Karte e&rkannt",IDC_RADIO_POINT_OF_DATA_3,"Button",
+                    BS_AUTORADIOBUTTON,12,65,115,8
+    CONTROL         "04 Karte kla&ssifiziert",IDC_RADIO_POINT_OF_DATA_4,
+                    "Button",BS_AUTORADIOBUTTON,12,80,115,8
+    CONTROL         "05 Nach der A&utorisierung",IDC_RADIO_POINT_OF_DATA_5,
+                    "Button",BS_AUTORADIOBUTTON,135,20,115,8
+    CONTROL         "06 Vor der Gelda&usgabe",IDC_RADIO_POINT_OF_DATA_6,
+                    "Button",BS_AUTORADIOBUTTON,135,35,115,8
+    CONTROL         "07 Nac&h der Geldausgabe",IDC_RADIO_POINT_OF_DATA_7,
+                    "Button",BS_AUTORADIOBUTTON,135,50,115,8
+    CONTROL         "08 Transaktions&ende",IDC_RADIO_POINT_OF_DATA_8,"Button",
+                    BS_AUTORADIOBUTTON,135,65,115,8
+    CONTROL         "09 frei",IDC_RADIO_POINT_OF_DATA_9,"Button",
+                    BS_AUTORADIOBUTTON,135,80,115,8
+END
+
+IDD_IBM_FORM DIALOG  0, 0, 265, 174
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Ansteuerungspunkte",IDC_GROUP_POINT_OF_DATA,7,7,250,110
+    CONTROL         " 1 Open Command erkannt",IDC_RADIO_POINT_OF_DATA_1,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,
+                    20,115,8
+    CONTROL         " 2 Close Command erkannt",IDC_RADIO_POINT_OF_DATA_2,
+                    "Button",BS_AUTORADIOBUTTON,12,32,115,8
+    CONTROL         " 3 Vor PIN-Eingabe",IDC_RADIO_POINT_OF_DATA_3,"Button",
+                    BS_AUTORADIOBUTTON,12,44,115,8
+    CONTROL         " 4 reserviert/vorbehalten",IDC_RADIO_POINT_OF_DATA_4,
+                    "Button",BS_AUTORADIOBUTTON,12,56,115,8
+    CONTROL         " 5 reserviert",IDC_RADIO_POINT_OF_DATA_5,"Button",
+                    BS_AUTORADIOBUTTON,12,68,115,8
+    CONTROL         " 6 Vor Transaktion senden",IDC_RADIO_POINT_OF_DATA_6,
+                    "Button",BS_AUTORADIOBUTTON,12,80,115,8
+    CONTROL         " 7 Nach Transaktions-Antwort",IDC_RADIO_POINT_OF_DATA_7,
+                    "Button",BS_AUTORADIOBUTTON,12,92,115,8
+    CONTROL         " 8 reserviert",IDC_RADIO_POINT_OF_DATA_8,"Button",
+                    BS_AUTORADIOBUTTON,12,104,115,8
+    CONTROL         " 9 Vor Kartenrückgabe",IDC_RADIO_POINT_OF_DATA_9,"Button",
+                    BS_AUTORADIOBUTTON,135,20,115,8
+    CONTROL         "10 Nach Kartenrückgabe",IDC_RADIO_POINT_OF_DATA_10,
+                    "Button",BS_AUTORADIOBUTTON,135,32,115,8
+    CONTROL         "11 Vor Geldausgabe",IDC_RADIO_POINT_OF_DATA_11,"Button",
+                    BS_AUTORADIOBUTTON,135,44,115,8
+    CONTROL         "12 Vor Buchrückgabe",IDC_RADIO_POINT_OF_DATA_12,"Button",
+                    BS_AUTORADIOBUTTON,135,56,115,8
+    CONTROL         "13 Nach Buchrückgabe",IDC_RADIO_POINT_OF_DATA_13,"Button",
+                    BS_AUTORADIOBUTTON,135,68,115,8
+    CONTROL         "14 reserviert",IDC_RADIO_POINT_OF_DATA_14,"Button",
+                    BS_AUTORADIOBUTTON,135,80,115,8
+    CONTROL         "15 reserviert",IDC_RADIO_POINT_OF_DATA_15,"Button",
+                    BS_AUTORADIOBUTTON,135,92,115,8
+    CONTROL         "16 reserviert",IDC_RADIO_POINT_OF_DATA_16,"Button",
+                    BS_AUTORADIOBUTTON,135,104,115,8
+    GROUPBOX        "Statusabfrage",IDC_TXT_STATUS_REQUEST,7,121,251,22,
+                    WS_GROUP
+    CONTROL         "Statusabfrage",IDC_CHECK_STATUS_REQUEST,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,131,115,10
+    CONTROL         "mit Terminalnummer",IDC_CHECK_WITH_TERMINAL_ID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,135,131,115,10
+    GROUPBOX        "Datenformat",IDC_TXT_DATA_FORMAT,7,148,250,25,WS_GROUP
+    EDITTEXT        IDC_EDIT_DATA_FORMAT,12,158,240,12,ES_AUTOHSCROLL
+END
+
+IDD_GERMAN_PARCEL_FORM DIALOG  0, 0, 152, 9
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_NCR_NEW_FORM DIALOG  0, 0, 264, 84
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Komando",IDC_TXT_COMMAND,7,7,120,60,WS_GROUP
+    CONTROL         "Sta&rtkommando",IDC_RADIO_START_COMMAND,"Button",
+                    BS_AUTORADIOBUTTON | BS_MULTILINE | WS_GROUP,12,20,100,8
+    CONTROL         "D&iagnose",IDC_RADIO_DIAGNOSE,"Button",
+                    BS_AUTORADIOBUTTON,12,50,100,8
+    LTEXT           "ggf. abwechselnd gleiche und neue TAN",
+                    IDC_TXT_SAME_AND_NEW_TAN,24,29,88,18
+    GROUPBOX        "Variante",IDC_TXT_VARIANT,137,7,120,60,WS_GROUP
+    CONTROL         "Variante 1",IDC_RADIO_VARIANT_1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,142,20,100,8
+    CONTROL         "Variante 2",IDC_RADIO_VARIANT_2,"Button",
+                    BS_AUTORADIOBUTTON,142,35,100,8
+    CONTROL         "Variante 3",IDC_RADIO_VARIANT_3,"Button",
+                    BS_AUTORADIOBUTTON,142,50,100,8
+END
+
+IDD_STANDARD DIALOG  0, 0, 330, 208
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "",IDC_GROUP_REPEAT,7,0,316,72,WS_GROUP
+    CONTROL         "Wieder&holend im Abstand von",IDC_CHECK_REPEAT,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,10,113,8
+    EDITTEXT        IDC_EDIT_REPEAT_TIME,138,8,43,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "m&s",IDC_TXT_REPEAT_TIME,186,10,63,8,NOT WS_GROUP
+    CONTROL         "&Ausgewählte Geräte",IDC_RADIO_CHOSEN_UNITS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,24,20,102,11
+    CONTROL         "Z&ufällig",IDC_RADIO_RANDOM,"Button",BS_AUTORADIOBUTTON,
+                    24,32,102,11
+    CONTROL         "&Nacheinander",IDC_RADIO_SUCCESSIVE,"Button",
+                    BS_AUTORADIOBUTTON,24,44,102,11
+    CONTROL         "Beg&renzt auf",IDC_CHECK_LIMITED,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,24,56,102,8
+    EDITTEXT        IDC_EDIT_LIMITED,138,54,43,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "&Vorgänge",IDC_TXT_LIMITED,186,56,63,8
+    GROUPBOX        "",IDC_GROUP_EXPLICIT,7,72,316,132,WS_GROUP
+    CONTROL         "Zufälligen Bit&fehler erzeugen",IDC_CHECK_BIT_ERROR,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,84,
+                    145,8
+    CONTROL         "B&ytes einzeln senden",IDC_CHECK_SEND_SINGLE_BYTE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,166,84,86,10
+    LTEXT           "Delay",IDC_TXT_DELAY,256,85,19,8
+    EDITTEXT        IDC_EDIT_SEND_DELAY,279,83,23,14,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "&Datum explizit vorgeben ( TTMMJJJJ )",IDC_CHECK_DATE,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,97,
+                    145,8
+    EDITTEXT        IDC_EDIT_DATE,166,95,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&Zeit explizit vorgeben ( HHMMSS )",IDC_CHECK_TIME,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,110,
+                    145,8
+    EDITTEXT        IDC_EDIT_TIME,166,108,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&GA-Nummer explizit vorgeben",IDC_CHECK_WSID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,123,145,8
+    EDITTEXT        IDC_EDIT_WSID,166,121,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&TAN explizit vorgeben",IDC_CHECK_TAN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,136,145,8
+    EDITTEXT        IDC_EDIT_TAN,166,134,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Bank&leitzahl explizit vorgeben",IDC_CHECK_BLZ,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,149,145,8
+    EDITTEXT        IDC_EDIT_BLZ,166,147,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&Konto-/Kartennummer explizit vorgeben",IDC_CHECK_KONTO,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,162,
+                    145,8
+    EDITTEXT        IDC_EDIT_KONTO,166,160,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&Betrag explizit vorgeben",IDC_CHECK_BETRAG,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,12,175,145,8
+    EDITTEXT        IDC_EDIT_BETRAG,166,173,86,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "&Währung explizit vorgeben",IDC_CHECK_CURRENCY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,188,145,8
+    COMBOBOX        IDC_COMBO_CURRENCY,166,186,48,64,CBS_DROPDOWN | CBS_SORT | 
+                    CBS_UPPERCASE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ms",IDC_TXT_SEND_DELAY,307,85,13,8,NOT WS_GROUP
+END
+
+IDD_AVM_FORM DIALOG  0, 0, 140, 80
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Vorgang",IDC_TXT_EVENT,7,7,120,63,WS_GROUP
+    CONTROL         "Zugang &prüfen",IDC_RADIO_CHECK_ACCESS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,20,100,10
+    CONTROL         "Zugang &erlaubt",IDC_RADIO_ACCESS,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,10
+    CONTROL         "&Fachfreigabe",IDC_RADIO_RELEASE,"Button",
+                    BS_AUTORADIOBUTTON,12,50,100,10
+END
+
+IDD_SNI_COM_FORM DIALOG  0, 0, 186, 46
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_KEBA_PASADOR DIALOG  0, 0, 135, 60
+STYLE DS_SETFONT | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "aus &Datei:",IDC_CHECK_FILE_BASED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,7,121,10
+    EDITTEXT        IDC_EDIT_FILENAME,7,20,121,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Durch&suchen...",IDC_BTN_BROWSE,38,39,60,14
+END
+
+IDD_RONDO DIALOG  0, 0, 140, 100
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "&Kommando",IDC_TXT_COMMAND,7,7,120,80
+    CONTROL         "Statusabfrage",IDC_RADIO_STATUS_REQUEST,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,20,100,10
+    CONTROL         "Ruheposition",IDC_RADIO_QUIET,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,10
+    CONTROL         "Portrait-Kamera",IDC_RADIO_PORTRAIT,"Button",
+                    BS_AUTORADIOBUTTON,12,50,100,10
+    CONTROL         "HzG-Kamera",IDC_RADIO_MONEY,"Button",BS_AUTORADIOBUTTON,
+                    12,65,100,10
+END
+
+IDD_DIALOGBANK DIALOG  0, 0, 140, 70
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "&Kartentyp",IDC_TXT_CARD_TYPE,7,7,120,45
+    CONTROL         "EC-Karte",IDC_RADIO_EC_CARD,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,12,20,100,10
+    CONTROL         "TAN-Karte",IDC_RADIO_TAN_CARD,"Button",
+                    BS_AUTORADIOBUTTON,12,35,100,10
+END
+
+IDD_FILE_FORM DIALOG  0, 0, 331, 90
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Binär Datei",IDC_STATIC,7,7,317,76
+    LTEXT           "Name:",IDC_TXT_NAME,13,19,22,8
+    LTEXT           "Static",IDC_FILE,39,19,202,8
+    PUSHBUTTON      "Durchsuchen...",IDC_BROWSE,252,17,66,14
+    PUSHBUTTON      "COM Parameter...",IDC_COM,252,38,66,14
+END
+
+IDD_COM_CONFIGURATION DIALOG  0, 0, 133, 119
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,21,98,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,76,98,50,14
+    LTEXT           "&Baudrate:",IDC_STATIC_BAUDRATE,15,15,36,8
+    COMBOBOX        IDC_COMBO_BAUDRATE,53,13,64,96,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Datenbits:",IDC_STATIC_DATABITS,15,35,36,8
+    COMBOBOX        IDC_COMBO_DATABITS,53,33,64,66,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Parität:",IDC_STATIC_PARITY,15,55,36,8
+    COMBOBOX        IDC_COMBO_PARITY,53,53,64,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Stopbits:",IDC_STATIC_STOPBITS,15,75,36,8
+    COMBOBOX        IDC_COMBO_STOPBITS,53,73,64,52,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PM100IPALARM_FORM DIALOGEX 0, 0, 331, 90
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "PM 100 IP Alarm",IDC_STATIC,7,7,317,76
+    LTEXT           "BFR:",IDC_STATIC,15,22,17,8
+    LTEXT           "TCC:",IDC_STATIC,17,41,17,8
+    LTEXT           "Alarmnummer:",IDC_STATIC,18,62,45,8
+    EDITTEXT        IDC_EDIT_BFR,49,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TCC,49,38,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_ALARM,69,59,165,120,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_CONFIG_COM DIALOG  0, 0, 179, 127
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "COM-Schnittstelle konfigurieren"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,122,7,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,122,24,50,14
+    GROUPBOX        "Schnittstelle",IDC_TXT_COM_PORT,7,7,96,114
+    CONTROL         "Com &1",IDC_RADIO_COM_1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,15,16,80,8
+    CONTROL         "Com &2",IDC_RADIO_COM_2,"Button",BS_AUTORADIOBUTTON,15,
+                    29,80,8
+    CONTROL         "Com &3",IDC_RADIO_COM_3,"Button",BS_AUTORADIOBUTTON,15,
+                    42,80,8
+    CONTROL         "Com &4",IDC_RADIO_COM_4,"Button",BS_AUTORADIOBUTTON,15,
+                    55,80,8
+    CONTROL         "Com &5",IDC_RADIO_COM_5,"Button",BS_AUTORADIOBUTTON,15,
+                    68,80,8
+    CONTROL         "Com &6",IDC_RADIO_COM_6,"Button",BS_AUTORADIOBUTTON,15,
+                    81,80,8
+    CONTROL         "Com &7",IDC_RADIO_COM_7,"Button",BS_AUTORADIOBUTTON,15,
+                    94,80,8
+    CONTROL         "Com &8",IDC_RADIO_COM_8,"Button",BS_AUTORADIOBUTTON,15,
+                    107,80,8
+END
+
+IDD_PM100XML_FORM DIALOGEX 0, 0, 331, 111
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "PM 100 XML",IDC_STATIC,7,7,317,97
+    LTEXT           "BFR:",IDC_STATIC,15,22,17,8
+    LTEXT           "TCC:",IDC_STATIC,17,41,17,8
+    LTEXT           "Alarmnummer:",IDC_STATIC,18,62,45,8
+    EDITTEXT        IDC_EDIT_BFR,49,19,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_TCC,49,38,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_ALARM,69,59,165,120,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Ticketnummer:",IDC_STATIC,18,85,48,8
+    EDITTEXT        IDC_EDIT_TNR,70,82,40,14,ES_AUTOHSCROLL
+END
+
+IDD_VIEWSCHNEIDERINTERCOM DIALOGEX 0, 0, 298, 79
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Teilnehmer:",IDC_STATIC,7,9,38,8
+    EDITTEXT        IDC_EDIT_SUBSCRIBER,57,7,40,14,ES_AUTOHSCROLL
+    CONTROL         "Rufaufbau",IDC_RADIO_ON,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,7,30,49,10
+    CONTROL         "Rufabbau",IDC_RADIO_OFF,"Button",BS_AUTORADIOBUTTON,7,
+                    44,47,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SDITEST_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 3
+    END
+
+    IDD_DTP_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_CONFIG_IP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+    END
+
+    IDD_KEBA_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    AFX_IDD_NEWTYPEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 193
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_NCR_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 77
+    END
+
+    IDD_ENGEL_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+
+    IDD_SNI_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_IBM_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+    END
+
+    IDD_GERMAN_PARCEL_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 145
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 2
+    END
+
+    IDD_NCR_NEW_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 257
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 70
+    END
+
+    IDD_STANDARD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 323
+        BOTTOMMARGIN, 204
+    END
+
+    IDD_AVM_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 73
+    END
+
+    IDD_SNI_COM_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_KEBA_PASADOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    IDD_RONDO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 93
+    END
+
+    IDD_DIALOGBANK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+
+    IDD_FILE_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_COM_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 126
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 112
+    END
+
+    IDD_PM100IPALARM_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_CONFIG_COM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 143
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_PM100XML_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 104
+    END
+
+    IDD_VIEWSCHNEIDERINTERCOM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 291
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_STANDARD DLGINIT
+BEGIN
+    IDC_COMBO_CURRENCY, 0x403, 4, 0
+0x4544, 0x004d, 
+    IDC_COMBO_CURRENCY, 0x403, 4, 0
+0x5545, 0x0052, 
+    IDC_COMBO_CURRENCY, 0x403, 4, 0
+0x5355, 0x0044, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "SDITest"
+    IDR_SDITESTYPE          "\nSDITest1\nSDITest2\nDateityp SDITest3 (*.sdi)\n.sdi\nSDITest.Document\nSDITest4 Document"
+    IDR_DTP                 "\nLandau DTP\nLandau DTP\nDateityp Landau DTP (*.dtp)\n.dtp\nSDITestLandauDTP.Document\nSDITest Landau DTP Document"
+    IDR_KEBA                "\nportachec2000\nportachec2000\nDateityp portachec2000 (*.pc2000)\n.pc2000\nSDITestportachec2000.Document\nSDITest portachec2000 Document"
+    IDR_NCR                 "\nNCR\nNCR\nDateityp NCR (*.ncr)\n.ncr\nSDITestNCR.Document\nSDITest NCR Document"
+    IDR_ENGEL               "\nEngel Multipass\nEngel Multipass\nDateityp Engel Multipass (*.emp)\n.emp\nSDITestEngelMultipass.Document\nSDITest Engel Multipass Document"
+    IDR_SNI                 "\nSNI_Chase\nSNI_Chase\nDateityp SNI_Chase (*.sni)\n.sni\nSDITestSNI_Chase.Document\nSDITest SNI_Chase Document"
+    IDR_IBM                 "\nIBM\nIBM\nDateityp IBM (*.ibm)\n.ibm\nSDITestIBM.Document\nSDITest IBM Document"
+    IDR_ASCOM               "\nAscom\nAscom\nDateityp Ascom (*.ibm)\n.ibm\nSDITestAscom.Document\nSDITest Ascom Document"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_GERMAN_PARCEL       "\nGermanParcel\nGermanParcel\nDateityp GermanParcel (*.gp)\n.gp\nSDITestGermanParcel.Document\nSDITest GermanParcel Document"
+    IDR_NCR_NEW             "\nNCR neu\nNCR neu\nDateityp NCR neu(*.ncn)\n.ncn\nSDITestNCRneu.Document\nSDITest NCR neu Document"
+    IDR_SNI_IBM_EMU         "\nSNI_IBM_Emulation\nSNI_IBM_Emulation\nDateityp SNI_IBM_Emulation(*.sne)\n.sne\nSDITestSNI_IBM_Emulation.Document\nSDITest SNI_IBM_Emulation Document"
+    IDR_AV_CUSTOMER_SAFE    "\nAvm Kundentresor\nAvm Kundentresor\nDateityp Avm Kundentresor(*.avm)\n.avm\nSDITestAvmKundentresor.Document\nSDITest Avm Kundentresor Document"
+    IDR_SNI_COM             "\nSNI_COM\nSNI_COM\nDateityp SNI_COM (*.snc)\n.snc\nSDITestSNI_COM.Document\nSDITest SNI_COM Document"
+    IDR_KEBA_PASADOR        "\npasador\npasador\nDateityp pasador (*.pasador)\n.pasador\nSDITestpasador.Document\nSDITest pasador Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SDITest"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt ein neues Dokument.\nNeu"
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+    ID_APP_EXIT             "Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_NEW           "Öffnet ein weiteres Fenster für das aktive Dokument.\nNeues Fenster"
+    ID_WINDOW_ARRANGE       "Ordnet die Symbole im unteren Bereich des Fensters an.\nSymbole anordnen"
+    ID_WINDOW_CASCADE       "Ordnet die Fenster überlappend an.\nÜberlappende Fenster"
+    ID_WINDOW_TILE_HORZ     "Ordnet die Fenster nebeneinander an.\nFenster nebeneinander"
+    ID_WINDOW_TILE_VERT     "Ordnet die Fenster nebeneinander an.\nFenster nebeneinander"
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+    AFX_IDS_MDICHILD        "Aktiviert dieses Fenster."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SEND                 "Sendet einen Datensatz\nSendet einen Datensatz"
+    ID_TRACE_RS232_HEX      "Protokolliert die RS232-Daten in Hex-Ziffern\nProtokolliert die RS232-Daten in Hex-Ziffern"
+    ID_TRACE_RS232_ASCII    "Protokolliert die RS232-Daten im ASCII-Klartext\nProtokolliert die RS232-Daten im ASCII-Klartext"
+    ID_STOP_SEND            "Stoppt das Senden der Datenpakete\nStoppt das Senden der Datenpakete"
+    ID_CONFIG_COM           "Konfiguriert die COM-Schnittstelle\nKonfiguriert die COM-Schnittstelle"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RADIO_PORT_NR_2     "Wählen Sie eine DTP-Schnittstelle."
+    IDC_RADIO_PORT_NR_3     "Wählen Sie eine DTP-Schnittstelle."
+    IDC_RADIO_PORT_NR_4     "Wählen Sie eine DTP-Schnittstelle."
+    IDC_RADIO_CAMERA_NR_1   "Wählen Sie eine Kamera."
+    IDC_RADIO_CAMERA_NR_2   "Wählen Sie eine Kamera."
+    IDC_CHECK_REPEAT        "Automatische Wiederholung der Vorfallgenerierung."
+    IDC_EDIT_REPEAT_TIME    "Intervalldauer bei automatischer Wiederholung.\nZugelassen sind Werte zwischen 1 ms und 4.294.967 ms (~1h11m)."
+    IDC_RADIO_CHOSEN_UNITS  "Es werden Vorfälle mit den oben eingestellten Werten erzeugt."
+    IDC_CHECK_BIT_ERROR     "Erzeugt einen zufälligen Bitfehler im Datensatz."
+    IDC_RADIO_RANDOM        "Es werden Vorfälle mit zufälligen Werten für\ndie oben angegebenen Möglichkeiten erzeugt."
+    IDC_RADIO_SUCCESSIVE    "Es werden Vorfälle in der Reihenfolge\nder oben angegebenen Möglichkeiten erzeugt.\nSind mehrere Geräte mit mehreren Transaktionsschritten möglich,\nso wird dabei je Gerät eine komplette Transaktion abgearbeitet."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CHECK_LIMITED       "Begrenzt die Anzahl der Vorfälle bei automatischer Wiederholung."
+    IDC_EDIT_LIMITED        "Wieviele Vorfälle sollen erzeugt werden?\nZugelassen sind Werte zwischen 1 und 4.294.967.295."
+    IDC_RADIO_CARD_READER_1 "Wählen Sie einen Kartenleser."
+    IDC_RADIO_CARD_READER_2 "Wählen Sie einen Kartenleser."
+    IDC_CHECK_BLZ           "Sie können eine feste BLZ vorgeben,\ndie bei jedem Vorgang übertragen wird."
+    IDC_EDIT_BLZ            "Die BLZ wird in der Regel 8-stellig übertragen.\nIst der eingegebene Wert größer, so werden nur die ersten 8 Zeichen ausgewertet.\nIst der eingegebene Wert kleiner, so werden ggf. Nullen vorangestellt."
+    IDC_CHECK_KONTO         "Sie können eine feste Konto-/Kartennummer vorgeben,\ndie bei jedem Vorgang übertragen wird."
+    IDC_EDIT_KONTO          "Die Karten-/Kontonummer wird maximal 16-stellig, meist jedoch  10-stellig übertragen.\nIst der eingegebene Wert größer, so werden nur die ersten 16 bzw. 10 Zeichen ausgewertet.\nIst der eingegebene Wert kleiner, so werden ggf. Nullen vorangestellt."
+    IDC_CHECK_BETRAG        "Sie können einen festen Betrag vorgeben,\nder bei jedem Vorgang übertragen wird."
+    IDC_EDIT_BETRAG         "Die maximale Länge des Betrages ist abhängig vom Protokoll.\nGgf. werden nur die ersten Stellen übertragen oder es werden Nullen vorangestellt."
+    IDC_CHECK_TAN           "Sie können eine feste TAN vorgeben,\ndie bei jedem Vorgang übertragen wird."
+    IDC_EDIT_TAN            "Die maximale Länge de TAN ist abhängig vom Protokoll.\nGgf. werden nur die ersten Stellen übertragen oder es werden Nullen vorangestellt."
+    IDC_RADIO_DIAGNOSE      "Wählen Sie das entsprechende Kommando."
+    IDC_CHECK_DATE          "Sie können ein festes Datum vorgeben,\ndas bei jedem Vorgang übertragen wird."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RADIO_PORT_NR_1     "Wählen Sie eine DTP-Schnittstelle."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CHECK_TIME          "Sie können eine feste Zeit vorgeben,\ndie bei jedem Vorgang übertragen wird."
+    IDC_EDIT_DATE           "Das Datum muß immer 8-stellig sein!\nEs wird ansonsten aber nicht auf Korrektheit überprüft,\nsondern so wie eingegeben übermittelt!"
+    IDC_EDIT_TIME           "Die Zeit muß immer 6-stellig sein!\nSie wird ansonsten aber nicht auf Korrektheit überprüft,\nsondern so wie eingegeben übermittelt!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RADIO_START_COMMAND "Wählen Sie das entsprechende Kommando."
+    IDC_EDIT_DATA_FORMAT    "Hier werden die variablen Kameradaten mit den folgenden Platzhaltern eingestellt:\na\tKonto- oder Kreditkartennummer (Account)\nb\tBankleitzahl (Bankcode)\nc\tWährung (Currency)\nt\tTAN\nv\tBetrag (Value)\nw\tGA-Nummer(Workstation)\nDD,MM,YY\tDatum\nhh,mm,ss\tZeit\nDiese Platzhalter müssen eindeutig verwendet werden!"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDP_PARSE_INT       "Bitte geben Sie eine ganze Zahl ein."
+    AFX_IDP_PARSE_REAL      "\nPM 100 XML\nPM100XML\nDateityp PM100XML(*.PM100XML)\n.PM100XML\nSDITestPMXML.Document\nSDITest PM100XML Document"
+    AFX_IDP_PARSE_INT_RANGE "Bitte geben Sie eine ganze Zahl zwischen %1 und %2 ein."
+    AFX_IDP_PARSE_REAL_RANGE 
+                            "Bitte geben Sie eine Zahl zwischen %1 und %2 ein."
+    AFX_IDP_PARSE_STRING_SIZE "Bitte geben Sie nicht mehr als %1 Zeichen ein."
+    AFX_IDP_PARSE_RADIO_BUTTON "Bitte wählen Sie eine Taste aus."
+    AFX_IDP_PARSE_BYTE      "Bitte geben Sie eine ganze Zahl zwischen 0 und 255 ein."
+    AFX_IDP_PARSE_UINT      "Bitte geben Sie eine positive ganze Zahl ein."
+    AFX_IDP_PARSE_DATETIME  "Bitte geben Sie ein Datum und/oder eine Zeit ein."
+    AFX_IDP_PARSE_CURRENCY  "Bitte geben Sie eine Währung ein."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION       "SDITest kann die Verbindung zur seriellen Schnittstelle nicht aufbauen.\nMöglicherweise ist die Schnittstelle nicht vorhanden oder von einem anderen Gerät belegt."
+    IDS_ACTIVE              " - Aktiv"
+    IDS_INVALID_DATE        "Sie haben ein ungültiges Datum eingegeben!\nIhre Eingabe wird ignoriert!"
+    IDS_INVALID_TIME        "Sie haben eine ungültige Zeit eingegeben!\nIhre Eingabe wird ignoriert!"
+    IDS_CUSTOMER_ID         "&Kundennummer explizit vorgeben"
+    IDS_PROCESS_ID          "Vorgang&snummer explizit vorgeben"
+    IDS_FIRST_NAME          "Vorna&me explizit vorgeben"
+    IDS_LAST_NAME           "Nac&hname explizit vorgeben"
+    IDS_BOX_ID              "Fa&chnummer explizit vorgeben"
+    IDS_DAT_FILTER          "Binär Dateien (*.dat)|*.dat||"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CHECK_CURRENCY      "Sie können eine feste Währung vorgeben,\ndie bei jedem Vorgang übertragen wird"
+    IDC_COMBO_CURRENCY      "Sie können ein Währungskürzel aus der Liste auswählen\noder ein dreistelliges Kürzel eingeben."
+    IDC_CHECK_WSID          "Sie können eine feste GA-Nummer(Workstation-ID) vorgeben,\ndie bei jedem Vorgang übertragen wird"
+    IDC_EDIT_WSID           "Die maximale Länge der GA-Nummer ist abhängig vom Protokoll.\nGgf. werden nur die ersten Stellen übertragen oder es werden Nullen vorangestellt."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CHECK_STATUS_REQUEST "Erzeugt eine Statusabfrage."
+    IDC_CHECK_WITH_TERMINAL_ID 
+                            "Soll die Statusabfrage die Terminal-ID enthalten?"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_RONDO               "\nRondo\nRondo\nDateityp Rondo(*.rondo)\n.rondo\nSDITestRondo.Document\nSDITest Rondo Document"
+    IDR_DIALOGBANK          "\nDialogbank\nDialogbank\nDateityp Dialogbank (*.dialogbank)\n.dialogbank\nSDITestDialogbank.Document\nSDITest Dialogbank Document"
+    IDR_FILE                "\nBinär Datei\nBinär Datei\nDateityp Binär Datei (*.sbn)\n.sbn\nSDITestBinary.Document\nSDITest Binary Document"
+    IDR_PM_100_IP_ALARM     "\nPM 100 IP Alarm\nPM 100 IP Alarm\nDateityp PM100IPAlarm(*.PM100IPAlarm)\n.PM100IPAlarm\nSDITestPM 100 IP Alarm.Document\nSDITest PM100IPAlarm Document"
+    IDR_PM_100_XML          "\nPM 100 XML\nPM 100 XML\nDateityp PM100XML(*.PM100XML)\n.PM100XML\nSDITestPMXML.Document\nSDITest PM100XML Document"
+    IDR_SCHNEIDER_INTERCOM  "\nSchneider Intercom\nSchneider Intercom\nDateityp Schneider Intercom(*.SchneiderIntercom)\n.SchneiderIntercom\nSDITestSchneiderIntercom.Document\nSDITest Schneider Intercom Document"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE_COM_CONFIGURATION "Konfiguriere "
+    IDS_NOPARITY            "Keine"
+    IDS_ODDPARITY           "Ungerade"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EVENPARITY          "Gerade"
+    IDS_MARKPARITY          "Markierte"
+    IDS_SPACEPARITY         "Leer"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_COM_PARAMS_CHANGED  "Änderungen der Schnittstellenparameter können u.U. die Erfassung der Daten beeinträchtigen!\nWollen Sie diese Parameter wirklich übernehmen?"
+    IDS_REOPEN_COM_AFTER_COM_PARAMS_CHANGED 
+                            "Nach dem Ändern der Schnittstellenparameter muß die Schnittstelle neu geöffnet werden!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\SDITest.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

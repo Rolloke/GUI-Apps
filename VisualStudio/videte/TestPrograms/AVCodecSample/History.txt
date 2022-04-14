@@ -1,0 +1,8 @@
+History
+-------
+
+13.03.2006
+	- ML: Testprogramm zur Performanceuntersuchung des libavcodecs erstellt.
+	-	  Folgende Dateien sind unter der MSys-Laufzeitumgebung mit Hilfe des gcc-Compilers erstellt worden.
+		   - avcodec.dll, avcodec.lib, avformat.dll, avformat.lib.
+	- Ergebnis: AVCodec: 575 fps, eMuzed: 128 fps (P4 2,4GHz, reine Dekodierzeit)

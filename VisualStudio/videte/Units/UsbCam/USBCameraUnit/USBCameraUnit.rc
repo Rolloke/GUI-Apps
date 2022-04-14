@@ -1,0 +1,362 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\USBCameraUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\USBCamUnit.ico"
+IDC_PAUSE               ICON                    "res\\idc_paus.ico"
+IDC_RECORDING           ICON                    "res\\idc_reco.ico"
+IDC_START               ICON                    "res\\START.ico"
+IDC_STOP                ICON                    "res\\idc_stop.ico"
+IDR_RECORDING           ICON                    "res\\idr_runi.ico"
+IDR_RUNNING             ICON                    "res\\idr_main.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_USBCAMERAUNIT_DIALOG DIALOGEX 0, 0, 355, 233
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "USBCameraUnit"
+MENU IDR_DLG_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Abbrechen",IDCANCEL,130,213,50,14
+    PUSHBUTTON      "Start",IDC_BTN_START,308,188,16,14,BS_ICON
+    PUSHBUTTON      "Stop",IDC_BTN_STOP,329,188,16,14,BS_ICON
+    COMBOBOX        IDC_COMBO_CAMERAS,5,29,120,142,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_FORMATS,5,54,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Initialisieren",IDC_BTN_INIT,135,188,50,14
+    PUSHBUTTON      "Freigeben",IDC_BTN_UN_INIT,191,188,50,14
+    LTEXT           "--",IDC_STR_MEDIA_SUB_TYPE,5,111,120,8
+    GROUPBOX        "Kamera",IDC_GRP_CAM_PICTURE,130,5,220,205
+    CONTROL         "",IDC_FRM_CAM_PICTURE,"Static",SS_BLACKRECT | SS_NOTIFY | 
+                    WS_BORDER,132,15,216,160
+    LTEXT           "Kameras:",IDC_TXT_CAMERAS,5,11,40,8
+    LTEXT           "Ausgabeformate der Kamera:",IDC_TXT_FORMATS,5,45,120,8
+    COMBOBOX        IDC_COMBO_ENCODERS,5,134,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Videokompressor:",IDC_TXT_ENCODERS,5,125,120,8
+    CONTROL         "Anzeigen",IDC_CK_SHOW_PICTUR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,247,190,58,10
+    LTEXT           "--",IDC_STR_OUTPUT_SUB_TYPE,5,151,120,8
+    LTEXT           "Frame Raten:",IDC_TXT_FRAMERATES,5,85,120,8
+    COMBOBOX        IDC_COMBO_FRAMERATES,5,94,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TEST,5,189,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Video Dekompressor:",IDC_TXT_DECODERS,5,177,120,8
+    COMBOBOX        IDC_COMBO_CAMERA_NO,50,9,75,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Übernehmen",ID_APPLY_NOW,300,213,50,14
+    CONTROL         "MD",IDC_CK_MOTION_DETECTION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,161,30,10
+    PUSHBUTTON      "Stop",IDC_RECORDING,37,159,16,15,BS_ICON | BS_FLAT,
+                    WS_EX_DLGMODALFRAME
+    COMBOBOX        IDC_COMBO_FORMATS2,5,69,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Stop",IDC_STILL,110,158,16,15,BS_ICON | BS_FLAT,
+                    WS_EX_DLGMODALFRAME
+    COMBOBOX        IDC_COMBO_TEST2,5,214,120,142,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "StillImage",IDC_CK_STILL_IMAGE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,63,161,44,10
+    CONTROL         "Server",IDC_BTN_SERVER,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,203,214,59,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "FileDescription", "MFC-Anwendung USBCameraUnit"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "USBCameraUnit"
+            VALUE "LegalCopyright", "Copyright (C) 2003"
+            VALUE "OriginalFilename", "USBCameraUnit.EXE"
+            VALUE "ProductName", "Anwendung USBCameraUnit"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_USBCAMERAUNIT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 125
+        VERTGUIDE, 130
+        VERTGUIDE, 135
+        VERTGUIDE, 345
+        VERTGUIDE, 350
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 60
+        HORZGUIDE, 75
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+        HORZGUIDE, 140
+        HORZGUIDE, 155
+        HORZGUIDE, 166
+        HORZGUIDE, 175
+        HORZGUIDE, 185
+        HORZGUIDE, 195
+        HORZGUIDE, 210
+        HORZGUIDE, 220
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_DLG_MENU MENU 
+BEGIN
+    POPUP "Einstellungen"
+    BEGIN
+        MENUITEM "Kamera...",                   ID_SETTINGS_CAMERA
+        MENUITEM "Bewegungserkennung...",       ID_SETTINGS_MD
+        MENUITEM SEPARATOR
+        MENUITEM "Kompressor...",               ID_SETTINGS_ENCODER
+        MENUITEM "Kompressor Info...",          ID_SETTINGS_ENCODER_INFO
+        MENUITEM SEPARATOR
+        MENUITEM "Quellfilter...",              ID_SETTINGS_SOURCE_FILTER
+    END
+    POPUP "Debug"
+    BEGIN
+        MENUITEM "Alle Filter freigeben",       ID_RELEASE_ALL
+        MENUITEM SEPARATOR
+        MENUITEM "ROT für GraphEdit erzeugen",  ID_DBG_ADD_TO_ROT
+        MENUITEM "ROT freigeben",               ID_DBG_REMOVE_ROT
+        MENUITEM SEPARATOR
+        MENUITEM "Reset",                       ID_REQUEST_RESET
+    END
+    POPUP "?"
+    BEGIN
+        MENUITEM "&Info über...",               ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT_MENU MENU 
+BEGIN
+    POPUP "CONTEXT"
+    BEGIN
+        MENUITEM "&Info über...",               ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Start",                      IDC_BTN_START
+        MENUITEM "Sto&p",                       IDC_BTN_STOP
+        MENUITEM "Reset",                       ID_REQUEST_RESET
+        MENUITEM SEPARATOR
+        POPUP "Einstellungen"
+        BEGIN
+            MENUITEM "USB Camera Dialog...",        ID_SETTINGS_DLG
+            MENUITEM "Bewegungserkennung...",       ID_SETTINGS_MD
+            MENUITEM SEPARATOR
+            MENUITEM "Kompressor...",               ID_SETTINGS_ENCODER
+            MENUITEM "Kompressor Info...",          ID_SETTINGS_ENCODER_INFO
+            MENUITEM SEPARATOR
+            MENUITEM "Kamera%d...",                 ID_SETTINGS_CAMERA
+        END
+        POPUP "Debug"
+        BEGIN
+            MENUITEM "ROT für GraphEdit erzeugen",  ID_DBG_ADD_TO_ROT
+            MENUITEM "ROT freigeben",               ID_DBG_REMOVE_ROT
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "B&eenden",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_USBCAMERAUNIT_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_TEST2, 0x403, 28, 0
+0x6944, 0x6572, 0x7463, 0x7720, 0x7469, 0x2068, 0x6573, 0x656c, 0x7463, 
+0x6465, 0x4620, 0x6c69, 0x6574, 0x0072, 
+    IDC_COMBO_TEST2, 0x403, 15, 0
+0x6956, 0x6564, 0x206f, 0x6552, 0x646e, 0x7265, 0x7265, "\000" 
+    IDC_COMBO_TEST2, 0x403, 18, 0
+0x6153, 0x706d, 0x656c, 0x2073, 0x6f74, 0x4d20, 0x6d65, 0x726f, 0x0079, 
+
+    IDC_COMBO_TEST2, 0x403, 20, 0
+0x6153, 0x706d, 0x656c, 0x2073, 0x6f74, 0x4d20, 0x6d65, 0x726f, 0x2079, 
+0x0032, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_NO_ENCODER          "Keine Komprimierung"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Info über USB Camera Unit."
+    IDS_RTE_NO_VIDEO        "Kamera %d ausgefallen"
+    IDS_RTE_VIDEO           "Kamera %d liefert wieder ein Signal"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINRES
+//
+
+BIN_LARGE_TESTBILD      BINRES                  "TESTBILD2.JPG"
+BIN_SMALL_TESTBILD      BINRES                  "TESTBILD1.JPG"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\USBCameraUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,77 @@
+// MCLT.odl : type library source for ActiveX Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (MCLT.tlb) that will become a resource in
+// MCLT.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(8BB23FBD-1808-4A6D-A215-F0FC67255B47), version(1.0),
+  helpfile("MCLT.hlp"),
+  helpstring("MCLT ActiveX Control module"),
+  control ]
+library MCLTLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CMCLTCtrl
+
+	[ uuid(73F1F421-9A15-4BDB-A50E-E8FBA070AA7A),
+	  helpstring("Dispatch interface for MCLT Control"), hidden ]
+	dispinterface _DMCLT
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CMCLTCtrl)
+			[id(1)] boolean Selected;
+			[id(2)] short Shape;
+			[id(3)] short Connect;
+			[id(4)] short Camera;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CMCLTCtrl)
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CMCLTCtrl
+
+	[ uuid(0BE2E041-E0F4-40F8-8275-F6B6F816FE45),
+	  helpstring("Event interface for MCLT Control") ]
+	dispinterface _DMCLTEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CMCLTCtrl)
+			[id(1)] void Select(BOOL IsSelected);
+			//}}AFX_ODL_EVENT
+	};
+/*
+
+
+*/
+	//  Class information for CMCLTCtrl
+
+	[ uuid(739AEA24-A07C-487A-9845-2F9FA78E141A),
+	  helpstring("MCLT Control"), control ]
+	coclass MCLT
+	{
+		[default] dispinterface _DMCLT;
+		[default, source] dispinterface _DMCLTEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

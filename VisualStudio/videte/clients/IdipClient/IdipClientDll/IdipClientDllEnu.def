@@ -1,0 +1,6 @@
+; IdipClientDll.def : Declares the module parameters for the DLL.
+
+LIBRARY      "IdipClientEnu"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -1,0 +1,5 @@
+History von MiCoDLRTest
+-----------------------
+
+31.03.99
+	- Beginn des Projektes

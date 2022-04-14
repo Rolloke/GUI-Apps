@@ -1,0 +1,5 @@
+18.11.02 GF	- Anpassung VS_70
+18.11.02 GF	- History begonnen!
+25.11.05 UF - Bugfix Kommandozeile Endlosschleife
+			  neuer Kommandozeilenschalter -NOEULA, dann nur Lizenzabfrage
+

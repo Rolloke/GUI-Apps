@@ -1,0 +1,698 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\WkTranslator.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#include ""afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\WkTranslator.ico"
+IDR_LANGTYPE            ICON                    "res\\WkTranslatorDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_CHECK_TRANSLATION
+    BUTTON      ID_NEXT_TODO
+    BUTTON      ID_EDIT_FIND
+    BUTTON      ID_EDIT_FIND_NEXT
+    SEPARATOR
+    BUTTON      ID_VIEW_SHOW_ONLY_TODO
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tStrg+N",                ID_FILE_NEW
+        MENUITEM "&Open...\Strg+O",          ID_FILE_OPEN
+        MENUITEM "&Save\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Save &As...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print",                    ID_FILE_PRINT
+        MENUITEM "P&rint Preview",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Printer &Settings",         ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Save as &glossary...",  ID_FILE_SAVE_AS_GLOSSARY
+        MENUITEM "Save as Gl&ossary (German)...", 
+                                                ID_FILE_SAVE_AS_GLOSSARY_DEU
+        MENUITEM SEPARATOR
+        MENUITEM "Save only as &text",    ID_FILE_SAVE_TEXT_ONLY
+        MENUITEM "Save only Original text, Length and Co&mment", 
+                                                ID_FILE_SAVE_ORIGINAL_LEN_COMMENT
+
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                    ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Check&Translation\tStrg + T", ID_CHECK_TRANSLATION
+        MENUITEM "&Translate...\tENTER",       ID_EDIT
+        MENUITEM "Search &next TODO\tF3", ID_NEXT_TODO
+        MENUITEM SEPARATOR
+        MENUITEM "&Find...\tStrg + F",        ID_EDIT_FIND
+        MENUITEM "&Find next\tStrg + G",  ID_EDIT_FIND_NEXT
+        MENUITEM "Replace...\tCtrl + H",       ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "&Edit max. length",       ID_ENABLE_EDIT
+        MENUITEM "Remove all TODOs",         ID_EDIT_REMOVE_ALL_TODOS
+    END
+    POPUP "&Glossary"
+    BEGIN
+        MENUITEM "&Import glossary...",     ID_GLOSSARY_IMPORT
+        MENUITEM "&Export glossary...",     ID_GLOSSARY_EXPORT
+        MENUITEM "Import g&lossary (German)...", ID_GLOSSARY_IMPORT_DEU
+        MENUITEM "Export glo&ssary (German)...", ID_GLOSSARY_EXPORT_DEU
+        MENUITEM SEPARATOR
+        MENUITEM "Import glossary from &text file...", 
+                                                ID_GLOSSARY_IMPORT_TXT_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "Codepage...",                 ID_GLOSSARY_SELECT_CODEPAGE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",               ID_VIEW_TOOLBAR
+        MENUITEM "&Statusbar",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Font...",               ID_VIEW_EDITFONT
+        MENUITEM SEPARATOR
+        MENUITEM "Show only TO&DOs\tCtrl + D",  ID_VIEW_SHOW_ONLY_TODO
+        MENUITEM "Show only Suggestions",        ID_VIEW_SHOW_ONLY_SUGGESTIONS
+
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Ab&out...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_VIEW_SHOW_ONLY_TODO, VIRTKEY, CONTROL, NOINVERT
+    "E",            ID_ENABLE_EDIT_ACC,     VIRTKEY, CONTROL, ALT, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_EDIT_FIND_NEXT,      VIRTKEY, CONTROL, NOINVERT
+    "L",            ID_CHECK_MAX_LENGTH,    VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_CHECK_TRANSLATION,   VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_NEXT_TODO,           VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F7,          ID_GLOSSARY_IMPORT,     VIRTKEY, NOINVERT
+    VK_F8,          ID_GLOSSARY_EXPORT,     VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_EDIT,                VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 217, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Videte Translator"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC_ICON,11,17,20,20
+    LTEXT           "Videte Translator, Version 1.2",IDC_TXT_TRANSLATOR,40,
+                    10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright © Videte IT 1997-2000",IDC_TXT_COPYRIGHT,40,
+                    25,119,8
+    DEFPUSHBUTTON   "Ok",IDOK,178,7,32,14,WS_GROUP
+END
+
+IDD_EDIT DIALOGEX 0, 0, 434, 305
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Translate"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Original Text:",IDC_TXT_ORIGINAL,7,5,60,11
+    EDITTEXT        IDC_EDIT_ORIGINAL,7,17,420,65,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY
+    LTEXT           "Suggestion:",IDC_TXT_SUGGESTION,7,90,420,10
+    EDITTEXT        IDC_EDIT_SUGGESTION,7,100,420,64,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY
+    LTEXT           "Translated Text:",IDC_TXT_COPY,7,171,74,10
+    EDITTEXT        IDC_EDIT_TRANSLATE,7,181,420,64,ES_MULTILINE | 
+                    ES_AUTOVSCROLL
+    LTEXT           "Maximum length:",IDC_TXT_MAX_LENGTH,7,252,80,14
+    EDITTEXT        IDC_EDIT_MAX_LENGTH,91,251,20,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    EDITTEXT        IDC_EDIT_COMMENT,145,251,282,30,ES_MULTILINE | 
+                    ES_READONLY
+    PUSHBUTTON      "&Copy",IDC_COPY,7,286,60,14
+    PUSHBUTTON      "&Use suggestion",IDC_BUTTON_SUGGESTION,74,286,120,
+                    14
+    DEFPUSHBUTTON   "Ok",IDOK,300,286,60,14
+    PUSHBUTTON      "Cancel",IDCANCEL,367,286,60,14
+    LTEXT           "Actual Length:",IDC_TXT_ACTUAL_LENGTH,7,268,80,14
+    EDITTEXT        IDC_EDIT_ACTUAL_LENGTH,91,267,20,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    PUSHBUTTON      "Font...",IDC_BTN_FONT,201,286,67,14
+    LTEXT           "Type / ID:",IDC_TXT_RESSOURCE_TYPE,75,5,35,11
+    LTEXT           "",IDC_TXT_RESSOURCE_TYPE_NAME,115,4,312,11
+    PUSHBUTTON      "Search / Convert",IDC_BTN_SEARCH_CONVERT,292,166,
+                    135,14
+END
+
+IDD_FIND DIALOG  0, 0, 262, 58
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Search for:",IDC_TXT_FIND,7,8,46,8
+    EDITTEXT        IDC_EDIT_FIND,60,7,112,14,ES_AUTOHSCROLL
+    CONTROL         "&Case sensitive",IDC_CHECK_CASE_SENSITIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,42,87,10
+    DEFPUSHBUTTON   "Find",IDOK,195,7,60,14
+    PUSHBUTTON      "Cancel",IDCANCEL,195,24,60,14
+END
+
+IDD_EDIT_REPLACE DIALOG  0, 0, 243, 49
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search/Replace"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Ok",IDOK,186,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,186,28,50,14
+    LTEXT           "&Search for:",IDC_TXT_FIND,7,8,46,8
+    EDITTEXT        IDC_EDIT_FIND,60,7,112,14,ES_AUTOHSCROLL
+    LTEXT           "&Replace:",IDC_TXT_FIND2,7,29,50,8
+    EDITTEXT        IDC_EDIT_REPLACE,60,28,112,14,ES_AUTOHSCROLL
+END
+
+IDD_IMPORT_GLOSSARY_INFO DIALOG  0, 0, 300, 230
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Import Glossary"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Glossaries to import:",IDC_TXT_GLOSSARY,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,9,88,12
+    LTEXT           "9999999999",IDC_TXT_GLOSSARY_NR,100,9,43,12
+    CONTROL         "Text entries imported:",IDC_TXT_STRINGS,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,24,88,12
+    LTEXT           "9999999999",IDC_TXT_STRINGS_NR,100,24,43,12
+    PUSHBUTTON      "Cancel",IDCANCEL,228,208,65,14
+    LTEXT           "",IDC_TXT_ORIGINAL,7,65,286,60,SS_SUNKEN
+    LTEXT           "",IDC_TXT_TRANSLATION,7,145,286,60,SS_SUNKEN
+    CONTROL         "Stop",IDC_CK_STOP,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,7,208,65,14
+    CONTROL         "Original Text:",IDC_TXT_ORG,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,7,53,93,12
+    CONTROL         "Translation",IDC_TXT_TRAN,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,7,133,88,12
+    CONTROL         "Replace Texts",IDC_CK_REPLACE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,131,178,14
+    PUSHBUTTON      "Single Step",IDC_STEP,95,209,113,14
+    CONTROL         "Translation:",IDC_TXT_STRINGS2,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,39,88,12
+    CONTROL         "",IDC_TXT_FILENAME,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,153,9,140,12
+    LTEXT           "9999999999",IDC_TXT_TRANSLATE_NR,100,39,43,12
+END
+
+IDD_SELECT_CODEPAGE DIALOG  0, 0, 210, 46
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Select Code Page"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO_CODE_PAGE,5,9,200,220,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Ok",IDOK,5,28,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,28,50,14
+END
+
+IDD_TRANSLATOR DIALOGEX 0, 0, 340, 122
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Translate / Convert / Glossary"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,285,101,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,5,101,50,14
+    LTEXT           "Original Text:",IDC_TXT_ORIGINAL,5,8,61,8
+    LTEXT           "Translated Text:",IDC_TXT_COPY,5,31,61,10
+    EDITTEXT        IDC_EDT_ORG_TEXT,72,5,263,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_TRANS_TEXT,72,29,263,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Convert",IDC_BTN_CONVERT,267,77,68,14
+    EDITTEXT        IDC_EDT_CODEPAGE,72,77,37,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Code page",IDC_BTN_CODEPAGE,5,77,58,14
+    CONTROL         "Original Text MBCS",IDC_CK_MBCS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,117,79,105,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,1
+ PRODUCTVERSION 1,1,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "WKTRANSLATOR MFC Application"
+            VALUE "FileVersion", "1, 1, 0, 1"
+            VALUE "InternalName", "WKTRANSLATOR"
+            VALUE "LegalCopyright", "Copyright © 1997"
+            VALUE "OriginalFilename", "WKTRANSLATOR.EXE"
+            VALUE "ProductName", "WKTRANSLATOR Application"
+            VALUE "ProductVersion", "1, 1, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_EDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 427
+        BOTTOMMARGIN, 300
+        HORZGUIDE, 9
+    END
+
+    IDD_FIND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_EDIT_REPLACE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 42
+    END
+
+    IDD_IMPORT_GLOSSARY_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        BOTTOMMARGIN, 223
+        HORZGUIDE, 15
+        HORZGUIDE, 30
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 205
+        HORZGUIDE, 215
+    END
+
+    IDD_SELECT_CODEPAGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 205
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+    END
+
+    IDD_TRANSLATOR, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 66
+        VERTGUIDE, 72
+        VERTGUIDE, 335
+        HORZGUIDE, 12
+        HORZGUIDE, 36
+        HORZGUIDE, 60
+        HORZGUIDE, 84
+        HORZGUIDE, 108
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Videte Translator\n\nLang\nFiletype Language (*.lng)\n.LNG\nVidete Translator.Document\nLang Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Videte Translator"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Creates a new document (Clears the table). \nNew (Clear table)"
+    ID_FILE_OPEN            "Opens an existing document and appends it to the table.\nOpen and append"
+    ID_FILE_CLOSE           "Closes the active document.\nClose"
+    ID_FILE_SAVE            "Saves the active document.\nSave"
+    ID_FILE_SAVE_AS         "Saves the active document with a new name.\nSave As"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Printing\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Print preview\nPrint preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Shows program information, version number and copyright.\nAbout"
+    ID_APP_EXIT             "Exits application, asks to save modified documents.\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Opens this document"
+    ID_FILE_MRU_FILE2       "Opens this document"
+    ID_FILE_MRU_FILE3       "Opens this document"
+    ID_FILE_MRU_FILE4       "Opens this document"
+    ID_FILE_MRU_FILE5       "Opens this document"
+    ID_FILE_MRU_FILE6       "Opens this document"
+    ID_FILE_MRU_FILE7       "Opens this document"
+    ID_FILE_MRU_FILE8       "Opens this document"
+    ID_FILE_MRU_FILE9       "Opens this document"
+    ID_FILE_MRU_FILE10      "Opens this document"
+    ID_FILE_MRU_FILE11      "Opens this document"
+    ID_FILE_MRU_FILE12      "Opens this document"
+    ID_FILE_MRU_FILE13      "Opens this document"
+    ID_FILE_MRU_FILE14      "Opens this document"
+    ID_FILE_MRU_FILE15      "Opens this document"
+    ID_FILE_MRU_FILE16      "Opens this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Deletes the selection.\nDelete"
+    ID_EDIT_CLEAR_ALL       "Deletes all.\nDelete all"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Removes the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Inserts the contents of the Clipboard.\nPaste"
+    ID_EDIT_REPEAT          "Repeats the alst action.\nRepeat"
+    ID_EDIT_REPLACE         "Replaces the specified text with different text.\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undoes the last action.\nUndo"
+    ID_EDIT_REDO            "Redoes the previously undone action.\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Changes the window size."
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT                 "Edit the selected text\nEdit"
+    ID_GLOSSARY_IMPORT      "Loads a glossary and transletes matching strings automatically.\nLoads a glossary and translates automatically"
+    ID_GLOSSARY_EXPORT      "Exports all loaded glossaries in a new file.\nExports loaded glossaries"
+    ID_FILE_SAVE_AS_GLOSSARY 
+                            "Saves the actual file/table as glossary.\nSave as glossary"
+    ID_NEXT_TODO            "Search next text to translate (marked with TODO).\nSearch TODO"
+    ID_ENABLE_EDIT          "Enable the edit fields 'Maximum length' and 'Comment'.\Edit maximum length"
+    ID_CHECK_MAX_LENGTH     "Check, if maximum length will be exceeded.\nCheck maximum length"
+    ID_EDIT_FIND_NEXT       "Find next.\nFind next"
+    ID_CHECK_TRANSLATION    "Check the Translation for possible Errors.\nCheck Translation"
+    ID_GLOSSARY_EXPORT_DEU  "Exports all loaded glossaries in a new file.\nExports loaded glossaries"
+    ID_GLOSSARY_IMPORT_DEU  "Loads a glossary and transletes matching strings automatically.\nLoads a glossary and translates automatically"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ORIGINAL            "Original Text"
+    IDS_TRANSLATE           "Translation"
+    IDP_NOTHING_TODO        "There is no untranslated text!"
+    IDP_ERROR_FORMAT_SPECIFIER 
+                            "The format specifications (%s, %i, ...) are not identical!"
+    IDP_NO_MORE_FOUND       "No more strings found"
+    IDS_ERROR_STATIC        "There is already a control with the ID IDC_STATIC  in dialog %s"
+    IDS_ERROR               "Error in Resource file:"
+    IDP_ERROR_MAX_LENGTH    "The translation exceeds the maximum length!\n\nConsider that the text is possibly not complete visible!\nAlso the following value to enter has to be complete visible!\n\nDo you REALLY want to accept this?"
+    IDS_MAX_LENGTH          "Length maximum"
+    IDP_SEARCH_END_OF_DOC   "The end of document was reached.\nDo you want to restart the search at the begin?"
+    IDP_SAVE_FILE_FAILED    "The file\n%s\ncould not be saved!"
+    IDP_ERROR_SPECIAL_START_CHARS 
+                            "The following characters are required at the begin:\n\n%s"
+    IDP_CHECK_TRANSLATION   "The translation contains (possible) errors.\n\nDo you want to check the translation?"
+    IDP_ERROR_SPECIAL_CHARS_TO_AVOID 
+                            "Please do not use the chars\n%s\nbecause they have a special meaning in programming."
+    IDP_GLOSSARY_ADDED      "%d automatic texts added\n%d automatic texts replaced"
+    IDP_FILE_OPEN_FAILED    "The file\n%s\ncould not be opened!"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SAVE_AS_GLOSSARY_DEU 
+                            "Saves the actual file/table as glossary.\nSave as glossary"
+    ID_FILE_SAVE_TEXT_ONLY  "Save only as &text.\nSave only as &text."
+    ID_FILE_SAVE_ORIGINAL_LEN_COMMENT 
+                            "Saves the translation, length and comment in a text file."
+    ID_VIEW_SHOW_ONLY_TODO  "Toggles the view between 'Only TODOs' and 'All texts'\nShow 'TODOs' only"
+    ID_GLOSSARY_IMPORT_TXT_FILE 
+                            "Imports a glossary from a translation of a previous saved text file"
+    ID_VIEW_EDITFONT        "Changes the font for the edit and text fields."
+    ID_GLOSSARY_SELECT_CODEPAGE 
+                            "Chooses the code page for the import and export of glossaries."
+    ID_EDIT_REMOVE_ALL_TODOS "Removes all TODOs from the translated texts"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SUGGESTION          "Suggestion"
+    IDS_DEFAULTANSICODEPAGE "Default Ansi Codepage"
+    IDS_DEFAULTOEMCODEPAGE  "Default OEM Codepage"
+    IDS_UNICODE             "Unicode"
+    IDS_START               "Start"
+    IDS_STOP                "Stop"
+    IDS_RST_DEFAULT         "Standard Resource"
+    IDS_RST_MENUITEM        "Menu Text"
+    IDS_RST_POPUP           "Popup Menu Text"
+    IDS_RST_CAPTION         "Dialog Headline"
+    IDS_RST_LTEXT           "Left Text"
+    IDS_RST_CTEXT           "Centered Text"
+    IDS_RST_RTEXT           "Right Text"
+    IDS_RST_DEFPUSHBUTTON   "Button Text (Def Push Btn)"
+    IDS_RST_BUTTON          "Button Text"
+    IDS_RST_GROUPBOX        "Group"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RST_CONTROL         "CONTROL: Radio, Check, Tree, List"
+    IDS_RST_PUSHBOX         "Push Box"
+    IDS_RST_SCROLLBAR       "Scrollbar"
+    IDS_RST_STATE3          "State 3"
+    IDS_RST_STRING          "String"
+    IDS_CHECK_AND_REPLACE_MULTIPLE_OCCURRENCES 
+                            "This text exist manifold.\nShall all other texts be replaced, too?"
+    IDS_REQUES_TREMOVE_ALL_TODOS 
+                            "Do you want to remove all TODOs\n\nTODOs mark all translations, which have been changed or are new.\nThis information is lost then."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\WkTranslator.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#include "afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

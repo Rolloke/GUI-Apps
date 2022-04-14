@@ -1,0 +1,353 @@
+13.04.04 GF	- Bugfix: CollMenuMAnager nicht mit MFC 7.1
+30.03.04 UF - Bugfix Nr. 897 Abspielen mehrerer Kameras in einem Archiv ging nicht mehr.
+16.03.04 UF - Bugfix Nr. 891 mp4spvd.dll fehlte beim Backup
+08.04.04 RKE- Bugfix 875: Bei synchron Abspielen werden jetzt auch Audiodaten wiedergegeben.
+04.03.04 RKE- Ist der Playstatus ungleich Stop, wird beim Springen zu anderen Archiven/Sequenzen (Doppelklick im Tree)
+              der Playstatus auf Stop gesetzt.
+03.03.04 RKE- Audio CIPC Verbindung wird jetzt in OnIdle gestartet.
+02.03.04 RKE- Beim Abspielen von Audio wird Echtzeitsteuerung ignoriert.
+27.02.04 RKE- Bugfix 856 Audiokanal belegt wird jetzt aktualisiert, wenn das lokale Audioobjekt benutzt wird.
+25.02.04 GF	- Auf Unicode und VS_71 umgestellt
+10.02.04 RKE- Bei gemischten Archiven wird nur beim vorwaerts Abspielen Audio mit ausgegeben.
+10.02.04 TKR- Bugfix 831: Gemischte Archive (Audio+Video) bleibt beim Abspielen nicht mehr stehen
+			  Bugfix 833: In gemischten Archiven wird nun bei Audio Abspielen das zuletzt angezeigte
+						  Bild nicht mehr gelöscht.
+04.02.04 GF	- Bugfix 823: Gebackupte Audio-Daten können nicht wiedergegeben werden
+02.02.04 RKE- Bugfix erneut 811: Am Ende eines Archivs wird der Stop Status jetzt gesetzt.
+28.01.04 RKE- Bugfix 811: Am Ende eines Archivs wird der Stop Status jetzt gesetzt.
+27.01.04 RKE- Bugfix 809: Recherche stoppt die Wiedergabe jetzt auch, wenn die Anwendung geschlossen wird.
+26.01.04 RKE- Subclassing fuer HTMLWindow fuer alle OS ausser WinNT40 enabled
+22.01.04 RKE- Bugfix 787 jetzt geht es wirklich.
+22.01.04 RKE- Bugfix 785 AudioUnit liefert jetzt in den States, ob die Hardware vorhanden ist.
+              Recherche wertet diese aus und disabled den Startbutton bzw. verhindert das senden
+			  von Audiodaten.
+22.01.04 RKE- Bugfix 787 die Audiounit wird nicht gestartet die CIPC Verbindung kommt nicht zustande.
+              Startbutton wird disabled.
+              785 und 787 betreffen nur den Readonly modus
+22.01.04 TKR- Bugfix Nr. 786 Recherche im RO-Modus löscht den von Recherche angelegten 
+						  Registryeintrag "Recherche" wieder, wenn zu Beginn keiner da war.
+22.01.04 TKR- Bugfix 564: Zeit läuft beim zeitsynchronen Abspielen nun immer mit und wird
+			              kontinuierlich aktualisiert.
+20.01.04 GF	- Bugfix 582: Bei als BMP oder JPEG gespeicherten Bildern wird beim Wiedereinlesen "Camera no. 0" statt "Camera no. 1" angezeigt
+						  Kamera ist gar nicht bekannt, daher bei Camera = 0 String m_sCamera in CFieldDialog geleert => Feld wird nicht angezeigt
+20.01.04 TKR- Bei CDisplayWindow::GetTimeStam() werden nun auch MediaFiles (Audio) berücksichtigt.
+20.01.04 TKR- Bugfix 630: Nun wird unterschieden, ob ein Backup auf der lokalen Station (Sender oder
+              Receiver) oder auf einer verbundenen Gegenstation gemacht werden soll.
+			  Lokal kann beim Sender und Receiver auch auf C:\ ein Backup erfolgen.
+			  Auf einer verbundenen Gegenstation steht nun C:\ nicht mehr zur Auswahl.
+			  egal ob man von einem Sender oder Receiver aus mit der Gegenstation verbunden ist.
+20.01.04 TKR- Bugfix 775: Beim Wechsel zur Echtzeit wird nun der RequestRecord-Zaehler resetet,
+			  somit funktioniert die Echtzeit auch wieder.
+19.01.04 TKR- Bugfix 694: Audio abspielen geht nun auch im ReadOnly Modus
+19.01.04 TKR- Echtzeitwiedergabe und normale Wiedergabe getrennt. Bei Echtzeit wird, wie gehabt,
+			  immer nur ein Bild zurzeit angefordert. Bei normaler Wiedergabe werden zunächst 
+			  5 Bilder angefordert. Bei 5er Anforderung funktioniert die Echtzeit nicht, da
+			  immer nur das aktuelle mit dem nächsten Bild verglichen wird. 
+16.01.04 GF	- Bugfix 764: Wenn beim Abspielen (in Echtzeit, die ja keine war, siehe Bug 767) der Scrollbalken vor-geklickt
+						  wurde, konnte anschließend nicht weiter abgespielt werden
+						  Der Scrollbalken ist während des Abspielens disabled
+			- Bugfix 767: Am Anfang war ... Immer Echtzeit-Abspielen, nur das Menü behauptete was anderes
+16.01.04 RKE- Bugfix 751: Wird einmal Audio abgespielt, das Fenster danach geschlossen, so steht der Play forward button einer Audiosequence
+              auf disabled, kein weiteres Audioabspielen möglich. Das Flag wird jetzt gelöscht.
+16.01.04 RKE- Bugfix 763: Die Clients dürfen nicht gleichzeitig auf die Audiounit abspielen, auch remote nicht. Es dürfen auch nicht mehrere Mikrofone in Vision angeklickt werden können.
+15.01.04 UF - Bugfix 758: Abspielbutton funzen wieder. (Lag an der Umstellung der Bildanforderung
+			  von Einzelanforderung nach nach 5er Block Anforderung)
+14.01.04 UF - Das Abspielen von Audiodaten geht jetzt auch remote, dazu werden einstellbar
+			  Unter DVRT-Recherche-MaxRequestedRecords Standard 10 Audio oder Video Records
+			  im Vorlauf von der Datenbank angefordert, alles damit jetzt viel schneller.
+14.01.04 TKR- Bugfix Nr. 672 Abspielen in DibWindows (4er und 9er) komplett überarbeitet.
+09.01.04 GF	- Bugfix Nr. 725 DeviceDetect.Dll muss mit auf die Backup-CD kopiert werden
+08.01.04 TKR- Bugfix Nr. 708, 716 Rechtklick auf Fenster (Audio oder Video) bewirkt zunächst die
+			  Aktivierung der sich unter dem Mauszeiger befindlichen Fensters. Erst dann
+			  erscheint das Kontextmenü.
+08.01.04 TKR- Bugfix Nr. 714 Audiofenster werden nun bei Klick auf Titelzeile aktiviert.
+			  Rechteck aufziehen und Lupendarstellung für Audiofenster werden unterdrückt.
+07.01.04 TKR- Bugfix Nr. 704 Nach Remote Suche von Audiodaten werden diese kopiert (wenn 
+			  kopieren gewünscht war) und in das Archiv "Suchergebnisse" einsortiert.	     
+06.01.04 TKR- Bugfix Nr. 695 Im RO-Modus von DBS gestartete AudioUnit wird von Recherche
+			  im RO-Modus wieder geschlossen. (DBS wird ebenfalls von Recherche aus geschlossen)
+05.01.04 TKR- Bugfix Nr. 692 Audio Komponenten ins Backup mit aufgenommen.
+02.01.04 UF - Bugfix Nr. 686, 687, 688 Wiedergabe Audio
+18.12.03 UF - Audiodaten werden jetzt von Recherche abgespielt, es fehlt noch die Sychronisation
+			  mit der Audiounit beim decoden.
+17.12.03 TKR- BUGFIX 671: In der 4er bzw 9er Ansicht ist nun keine Lupe mehr zu sehen.
+			  Dazu in CDisplayWindow::OnMouseMove() in Abhängigkeit von m_nDibData != 1 
+			  Cursor als Pfeil gesetzt.
+11.12.03 TKR- Grundfunktion für Audio eingebaut: 
+			  - Neue Klasse IPCControlAudioUnit angelegt
+			  - Verbinden mit der lokalen Audiounit aus CServer::Connect() heraus
+			  - Zugriff auf ein Audiofile, das sich in der Datenbank befindet
+			  (Abspielen von Audiofiles noch nicht möglich).
+19.11.03 GF	- Bugfix 630 teilweise: Beim idip wird jetzt das C: Laufwerk im Auswahl-Dialog nicht mehr angezeigt
+									Außerdem wird auf die Gegenstation hingewiesen
+18.11.03 UF	- Datensicherung-Dialog wird jetzt sofort beendet, wenn der Laufwerk-Auswahl-Dialog abgebrochen wird
+18.11.03 UF - Jetzt wirklich Echtzeitwiedergabe eingeschaltet.
+17.11.03 GF	- Bugfix 609: Keine Aufforderung zum nahtlosen Fortsetzen des Backups, wenn nur ein CD-Laufwerk fuers Backup konfiguriert ist
+17.11.03 UF - Echtzeitwiedergabe eingeschaltet.
+13.11.03 GF	- Hier irrte der Chef ...
+			  Bugfix 618: Export auf Diskette
+11.10.03 UF - Bugfix Nr. 602 und 618 Export auf Diskette.
+23.10.03 TKR- Echtzeit-Wiedergabe nun in DEBUG im Menü "Sequenz" schaltbar. Um es in RELEASE zu
+			  übernehmen nach Text "//TODO TKR ab 4.7 wieder rein" suchen.
+21.10.03 TKR- Echtzeit-Wiedergabe in Recherche eingebaut. Dazu die Klasse CPlayRealtime aus dem DTS
+			  integriert und die Schnittstelle zu Recherche realisiert. Zurzeit noch kein direkter
+			  Aufrufe (Realtime: ein/aus) implementiert. 
+			  Ist zurzeit mittels Registryeintrag DVRT/Recherche/"Realtime" schaltbar.
+17.10.03 GF	- Bugfix 584: Werden in der SV neue Datenbankfelder angelegt, erscheinen diese
+						  nach einer Initialisierung nicht in Recherche/Suchmaske
+22.09.03 GF	- Bugfix 560: In der Readonly-Version werden nicht alle Datenfelder angezeigt
+19.09.03 GF	- Bugfix 540: "Bild vor"-Button bei Sequenzen in einzelnen Fenstern beim 1. Bild nicht enabled
+12.09.03 GF	- Bugfix 530: Neue Datenbankfelder werden im Suchdialog nicht mit angezeigt
+29.08.03 GF	- Bugfix 523: In der Suchmaske werden die "dontuse" Felder angezeigt und nicht ausgeblendet
+28.08.03 GF	- An neue Datenbankfelder angepasst
+19.08.03 GF	- Bugfix 515: GP beim RÜCKWÄRTS-Abspielen von einzelnen Kameras bei Multi-Kamera-Archiv
+18.08.03 GF	- Bugfix 514: GP beim Abspielen von einzelnen Kameras bei Multi-Kamera-Archiv
+31.07.03 UF	- DoRequestOpenSequence und DoRequestCloseSequence eingebaut
+21.06.03 UF - Bugfix Fadenkreuze waren ueber ISDN zum DTS/VDR/SDR nicht zu sehen!
+17.06.03 UF - Bugfix Server ID's evtl. doppelt
+10.06.03 GF	- Bugfix 472: Listbox der Kameranamen ist zu klein (Ab 30 Kameras erscheint Scrollbalken)
+27.05.03 RKE- Bugfix 464: Bei Wiedergabe wird die Selektion im Baum aktualisiert.
+			- Bugfix 428: Splashdialog erscheint jetzt auf dem aktuellen Monitor.
+21.05.03 GF	- Bugfix 364: Context-Menü "Löschen" bei CD-Backup-Archiven (Datum-Item) disabled
+			- Bugfix 398: Bei Backup über Temp-Verzeichnis wird vorher der freie Temp-Platz überprüft
+			- Bugfix 458: Backuparchive haben nur noch den Menüpunkt "Löschen", nicht mehr "Leeren"
+21.03.03 TK - Idip kann nun auch DVD`s brennen!
+21.03.03 TK - Vor dem Anlegen des Temp Verzeichnises, in das die auszulagernden Daten 
+			  zwischenkopiert werden, wird geprüft, ob es schon existiert. Wenn ja, dann wird es
+			  gelöscht und ein neues Temp Verzeichnis angelegt.
+21.03.03 TK - Bugfix Nr. 382: Berechnung der DVD Kapazität angepasst.
+13.03.03 GF	- Suchsequenzen sollten nicht nach Datum aufgesplittet werden, z.Z. aber wegen "verlorenen" Sequenznamen nicht implementierbar
+03.03.03 UF - Die Suche auf lokal gespeicherten H.263 Bildern kopiert auf zu schnellen Rechnern nicht alle gefundenen Bilder mit.
+26.02.03 UF - Bugfix Suche auf Differenzbildern
+05.02.03 UF - Bugfix Nr 692 Autologout
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CQueryFieldTimeDialog::OnInitDialog()
+			  - CQueryFieldDateDialog::OnInitDialog()
+			  - CDisplayWindow::PictureData()
+17.01.03 GF	- Synchrones Abspielen auch für Such-Archive freigegeben
+15.01.03 GF	- Bugfix 300: Beim Leeren eines Archives mit "Ja,alle" wird nur der 1. Tag gelöscht
+			- Bugfix 301: Meldung bei Bearbeiten/Stationsname unvollständig
+10.01.03 GF	- PIN wird - wenn beim Host als erforderlich markiert - vom Host übernommen oder per Dialog abgefragt
+07.01.03 TKR- Bugfix 245 DV: Häkchen bei Bereichsuche im Suchdialog (wenn geöffnet) wird gelöscht, sobald
+			  die Ansicht anders als "1 Bild" ist. (siehe vorherigen Bugfix).
+23.12.02 TKR- Bugfix 244 DV: War ein Rechteck in Ansicht "1 Bild" vorhanden und wird dann in Ansicht
+			  "4 Bilder" oder "9 Bilder" gewechslet, wird das Rechteck gelöscht.
+			  Rechteck lässt sich nur Aufziehen in Ansicht "1 Bild"
+20.12.02 GF	- Bugfix 242 DV: Automatisches Trennen einer Verbindung
+			- Bugfix 243 DV: Kommentar beim Speichern als HTML
+18.12.02 GF	- Im Debug-Modus wird die lokale Verbindung nicht mehr automatisch aufgebaut
+				Es erschwerte unheimlich das Debuggen von Remote-Verbindungen
+			- Menü und Tooltips überarbeitet
+17.12.02 GF	- Tooltips der Sync-Toolbar an die Statusleiste weitergeleitet
+21.11.02 GF	- Anpassung VS_70, Fehlerfrei
+21.11.02 GF	- Anpassung VS_70, aber noch Fehler vorhanden
+21.10.02 GF	- Laufwerksaenderungen werden vom DBS signalisiert und entsprechend erkannt
+18.10.02 GF	- Bugfix 261/261 Backup fortsetzen bzw. abbrechen
+16.10.02 GF	- Bugfix: Backup unter NT/Direct-CD, es wurde keine Reader-Software kopiert
+			- Bugfix: Backup ohne Laufwerk, der Dialog wird disabled bis auf Schließen-Button
+15.10.02 GF	- Bugfix 278: CD-R unter NT mit Direct-CD only werden wieder als Backup-Medien erkannt
+20.09.02 GF	- Backup für DataCarrier implementiert, Funktion ok, aber Fehlerbehandlung noch rudimentär
+11.09.02 GF	- Bugfix 261: Meldung "Backup nahtlos fortführen?" nur wenn Wechselmedium oder weitere Laufwerke vorhanden
+			- Bugfix 266: GP wenn kein Backup-Laufwerk eingerichtet ist und
+						  der Backup-Laufwerk-Auswählen-Dialog abgebrochen wird
+05.09.02 UF - Die DirectCD Texte werden jetzt nur gesucht, wenn auch der DirectCD Treiber installiert ist.
+04.09.02 UF - Bugfix Nr 248 Abspielen einer Kamera ueber Sequencegrenzen hinweg ging nicht.
+03.09.02 UF - Bugfix Nr: Wird bin an das Ende eines Achives geplayt, 
+			  wird zwar der Button disabled aber Knopf rastet erst nach der Betaetigung von 'Stop' aus.
+30.08.02 UF - Bugfix Nr. 242 rueckwaerts abspielen bei Gleiches Fenster benutzen ging nicht immer.
+			- Bei gleiches Fenster benutzen gehen jetzt die Schalter erstes und letztes Bild
+			- gleiches Fenster benutzen per Standard an
+30.08.02 GF	- Bugfix 226: Beenden der Datensicherung bei mehreren verbundenen Stationen
+29.08.02 GF	- Bugfix 230: Tooltips
+28.08.02 UF - Bugfix Nr 187 Warnung beim Ueberschreiben von Dateien
+			- Bugfix 197: Hunderte Fehlermeldungen beim Archiv leeren ohne Berechtigung
+26.08.02 GF	- Bugfix 206: Beim Zoomen am Rand wurde das Bild verzerrt
+			- Hotspot bei den Zeigern ins Zentrum des Lupenglases bzw. des Kreuzes verlegt
+			- Kreuzcursor: Weiße Mittellinie für dunkle Hintergründe eingezogen
+23.08.02 UF - Bugfix Nr. 80 Backuparchive nach DB Server reset doppelt
+23.08.02 UF - Bugfix Nr. 173 keine 9er Ansicht waehlbar
+20.08.02 UF - Bugfix Nr. 181 GP beim Oeffnen von Bildern ohne MD Koordinaten
+		 GF	- Bugfix 201: Image des Datums bei Alarmarchiven immer auf Alarmarchiv-Image gesetzt
+19.08.02 GF	- Bugfix 199: Menüpunkte Backup und Synchron Playback gegenseitig ausgeschlossen
+07.08.02 GF	- Bugfix 189: Datensicherung ist nur noch bei entsprechender Berechtigung des Users möglich
+02.08.02 GF	 - SplittingBackup implementiert
+			 - Bugfix Nr.175 Gelöschte Alarmarchive und Sequenzen sind nach erneuter Verbindung
+							 zur lokalen Station wieder da.
+10.07.02 GF	 - BackupDialogNew für automatische Berechnung angefangen
+10.07.02 UF  - Rechtecksuche im idip freigeschaltet.
+05.06.02 UF  - Es werden jetzt auch die Millisekunden der gespeicherten Bilder angezeigt.
+			   Ab 1GHz Processortakt ist die Noisreduction bei JPEG Bildern an.
+31.05.02 TKR - erneut Bugfix Nr. 224 Teilweise wurde der Zähler, ob noch Bilder zu erwarten sind, nach
+			   einer Trennung nicht auf 0 zurückgesetzt. Nun aber.
+30.05.02 TKR - Bugfix Nr. 224 Bei zeitsynchroner Wiedergabe behalten alle Buttons ihre Funktion, auch
+			   nach Beenden der Verbindung zur Gegenstation, dessen Bilder synchron abgespielt wúrden
+14.05.02 TKR - Bugfix Nr. 218 Kein GP mehr beim Verbinden von 2 Rechnern gleichzeitig auf einen Server 
+			   (mit Recherche) wobei beide Rechner dieselbe Seriennummer haben.
+13.05.02 UF  - Bugfix Nr. 216 GP beim Oeffnen der Alarmliste
+13.05.02 TKR - Bugfix Nr. 213 Recktecksuche nur noch in "normalen" Archiven möglich. Ist nun nicht
+			   mehr möglich in Alarm-Archiven und Archiven mit Suchergebnissen
+			   Dazu im DisplayWindow Funktion IsAlarm() eingebaut.
+			 - Bugfix Nr. 219 Ist der Suchdialog geöffnet und ein Rechteck aufgezogen, wird die 
+			   zugehörige Gegenstation und das gewählte Archiv (das mit dem Rechteck) im Suchdialog 
+			   disabled angezeigt. Die "Haken" können nicht an- bzw. ausgehakt werden.
+			   Dazu das zugehörige Bitmap der Haken (states.bmp) um neues Bild erweitert.
+			 - Bugfix Nr. 221  Fadenkreuz wird nur noch beim Aufziehen eines Rechtecks angezeigt.
+			   Dazu im CDisplayWindow::OnMouseMove() das Setzen des Cursors geändert. Ist nun genauso 
+			   wie im DTS bei selbiger Funktion.
+08.05.02 TKR - Bugfix Nr. 214  Zoomout über Kontextmenü funktioniert wieder.
+			   Bugfix Nr. 215  Button 1, 4 und 9 Bilder im Kontextmenü funktionieren wieder.
+08.05.02 TKR - Kreuze werden nun korrekt angezeigt. Ebenfalls wird bei aufgezogenem Rechteck
+			   das Kreuz der stärksten Bewegung innerhalb des Rechtecks weiß (mit Faden) angezeigt 
+			   (wie im DTS). Befindet sich kein Kreuz innerhalb des Rechtecks wird nur das Kreuz der
+			   stärksten Bewegung weiß (mit Faden) angezeigt.
+07.05.02 TKR - Die Kreuze auf Datenbankbildern werden nun nicht mehr alle mit Faden angezeigt,
+			   nur noch das der starksten Bewegung. Alle anderen werden als kleine, eingekreiste
+			   Kreuzchen angezeigt. 
+			   TODO: Muss noch getestet werden, nach nächstem Build 
+06.05.02 TKR - Nicht mehr benötigte Funktionen gelöscht:  
+			   UpdateQueryDialog(), OnSearchRectangle(), OnSearchRectangleDelete(), 
+			   OnUpdateSearchRectangleDelete(CCmdUI* pCmdUI), OnUpdateSearchRectangle(CCmdUI* pCmdUI)
+06.05.02 TKR - Rechtecksuche angepasst. Es kann nun immer nur ein einziges Rechteck in einem Fenster
+			   aufgezogen werden. Mehrere Rechtecke gleichzeitig in mehreren Fenstern ist nicht möglich.
+			   Ist in einem Fenster ein Rechteck vorhanden und wird in einem anderen Fenster ein
+			   neues Rechteck aufgezogen, wird das "alte", schon vorhandene Rechteck gelöscht.
+			   TODO: "Kreuz" Cursor muss noch korrekt eingebunden werden + Suchmaske testen + 
+			   Suchergebnis-Dialog bei Rechtecksuche textmäßig anpassen.
+03.05.02 TKR - Rechtecksuche angepasst. Zoom und verschieben bzw. resizen funktionert nun auch.
+			   Es muss nur noch verhindert werden,dass mehr als ein Rechteck aufgezogen werden
+			   kann (in mehreren Fenstern ein Rechteck).
+17.04.02 TKR - Rechtecksuche angepasst. Lässt sich nun ebenso aufziehen wie im DTS. Dazu neuen 
+			   "Kreuz" Cursor eingefügt. Im gezoomten Zustand läuft allerdings mit 
+			   Rechteck noch nicht alles glatt.
+27.03.02 UF - Rechtecksuche und Zeitsynchrones Abspielen freigeschaltet.
+11.02.02 UF - Bugfix in der Alarmliste wird das Datum jetzt	immer als DD.MM.JJJJ angezeigt,
+			  damit die Suche nach dem zugehoerigen Bild funktioniert
+22.10.01 UF - Im Demo Modus ist die Verbindungszeit auf 10 Minuten beschränkt.
+15.10.01 UF - Bugfix Wenn der schnelle Vorlauf bis zum Ende durchlief, funktionierten 
+			  die Tasten für Einzelbildweiterschaltung und Wiedergabe nicht mehr.
+09.10.01 UF - Bugfix: Es lassen sich jetzt im Synchronmodus keine weiteren Sequenzen
+			  mehr oeffnen.
+26.09.01 GF	- Bugfix: Alarmlist-Archive werden nicht mehr im Suchen-Dialog angezeigt
+26.09.01 GF	- ACHTUNG: Zeitsynchrones Abspielen erstmal auf IPC_TO3000_PROTOTYPE beschränkt
+						(in CMainFrame::OnCreate und OnUpdateSync)
+21.09.01 UF - Bugfix zeitsynchrones Abspielen von Bildern war nur in DEBUG
+21.09.01 UF - zeitsynchrones Abspielen von Bildern
+			- Wiedergabe über Sequenzgrenzen hinweg
+09.08.01 UF - Bugfix kleine Toolbar wiederhergestellt.
+31.07.01 UF - Audruck der Alarmliste geht jetzt, auch mehrere Seiten
+27.07.01 GF	- Alarmlist: Activity/Melder1+2 werden jetzt im ListControl gefiltert
+26.07.01 GF	- Bugfix: CServer::Connect 
+				Die Parameter werden als Referenzen auf Member von CHost übergeben
+				Das HostArray wird jedoch bei Aufruf von GetHosts() gelöscht und neu angelegt,
+				dabei werden die Referenzen gekillt!
+26.07.01 GF	- UF hat bis gestern die Alarmliste eingebaut,
+				 die Einzelheiten sind leider nicht genauer bekannt...
+11.04.01 GF	- English: Comment in Notes geändert
+30.03.01 UF - Bugfix, Die Messagebox nach dem Speichern auf Diskette zeigt jetzt
+			  ein Ausrufezeichen anstelle eines Stop.
+30.03.01 UF - Bugfix DTS Empfänger Archive lassen sich jetzt leeren,
+			  DTS Sender lassen sich weiter weder leeren noch löschen.
+30.03.01 TKR- Meldung bei abgewiesener Verbindungsanfrage: "Die Lizenz-Nummer 
+			  ist ungültig" eingebaut. (Tritt auf, wenn sich 2 Empfänger mit derselben
+			  Lizenz-Nummer auf einen Server einwählen.)
+30.03.01 UF - Bugfix, im Datei Öffnen von Diskette kein jpx mehr bei DTS Variante
+28.03.01 UF - Die DTS Variante von Recherche hat jetzt kein jpx mehr,
+			  standard ist html mit jpg
+27.03.01 TKR- Recherche: Bugfix: 
+			  Dateien öffnen von Diskette um "jpg" und "bmp" erweitert.
+27.03.01 TKR- Recherche: Ausgangssituation: 
+			  1x1 Ansicht und 4 oder mehr Sequenzen geöffnet. 
+			  Alt: neue Sequenz öffnen, autom. Wechsel in 2x2 Ansicht 
+			  Neu: neue Sequenz öffnen, autom. Wechsel in 3x3 Ansicht
+27.03.01 TKR- Bugfix: Recherche: Bei Wechsel von 2x2 und 3x3 auf 1x1 Ansicht 
+			  wird die aktive Kamera angezeigt. 
+22.03.01 TKR- Bugfix: Recherche: Nach Rechtsclick auf Nicht-Backup-Archive können diese 
+			  nur noch geleert werden. Die Funktion "Löschen" steht nicht mehr zur Auswahl.
+21.03.01 TKR- Bugfix: Tooltip bei MouseOver auf Videobild nur noch in 4er /9er Ansicht. 
+			  In 1er Ansicht kein Tooltip, da die Daten als Bildeigenschaften 
+			  gleich daneben stehen.
+26.02.01 UF - Neues Login wieder da
+23.02.01 UF - Bugfix H263+ Bildgröße, Schneller Rücklauf auch bei H263 vom DTS
+23.02.01 TKR- Zoomen nur noch 3 mal nacheinander, dann wieder Originalgröße. 
+			  Lupe als Cursor. Funktion "Zoomout" disabled, wenn Originalgröße angezeigt. 
+22.02.01 UF - beim DTS Receiver werden jetzt die automatischen IP Stationen der
+			  Socketunit vom IP Book genommen
+13.02.01 UF - Newline Zeichen im Sequenznamen für die Suche entfernt.
+12.02.01 UF - Neue Toolbars für den DTS Empfänger
+22.01.01 TKR- Recherche: Sind mehrere Sequenzen geöffnet und wird die gerade aktive
+			  Sequenz geschlossen (aktives Bild), wird die nun letzte Sequenz
+			  (letzte Bild) aktiviert (bekommt den Focus). 
+29.12.00 TKR- Recherche: Die Suche nach Bildern in der Datenbank ist nun auch über
+			  mehrere Tage hinweg möglich (zweites Datumsfeld eingebaut).
+01.12.00 ML - 'CDisplayWindow::GetPictureSize()' ermittelt das Bildformat nun nicht mehr aus dem PictureRecord,
+			  sondern aus dem dekodiereten Jpegbild. Dies ist notwendig, weil die bisherige
+			  Routine (GetJpegSize) immer von einem Halbbild ausgeht und deshalb die doppelte
+			  vertikale Größe zurückliefert. Bei 'RESOLUTION_LOW' wird diesen dann wieder halbiert.
+			  In Zunkunft sollen aber auch kleinere Bildgrößen (Zur ISDN-Übertragung) dargestellt werden.
+16.11.00 GF	SpecialReceiver: Keine PIN-Abfrage bei lokaler Station
+30.10.00 GF	SpecialReceiver version eingebaut:
+			- Kein Login beim Start
+			- Eingabe der PIN bei Verbindung
+09.08.00 ML Bugfix: Die Position des Fadenkreuzes war falsch.
+10.04.00 GF	Verbindungsaufbau kann abbrochen werden
+16.12.99 ML Bugfix in 'CDisplayWindow::OnEditCopy()' Nach einem erfolgreichen Aufruf von
+		    'SetClipboardData(...,hBitmap)' darf 'hBitmap'-Objekt nicht zerstört werden,
+			da das System nun der Besitzer ist. Das gleiche gilt für die H263.dll in
+			'CDib::CopyToClipBoard()'
+19.19.99 UF Jpeg von Imagn auf Intel umgestellt
+04.09.99 ML Die Anzahl der Gegenstationen im Verbindungsmenü auf 9 begrenzt, da Hex-
+			Zahlen nicht ins GUI gehören.
+22.09.99 ML Zoom nun auch für CoCo und PT-Bilder
+21.09.99 ML Das gezoomte Bild läßt sich nun auch unter Verwendung der Intel-Jpeglib
+			verschieben.
+2.8.99 >>> UpdateVersion um 16:49 <<<
+02.08.99 UF Auf CD werden jetzt auch die Feldnamen gebrannt
+30.07.99 UF Bugfix GP bei eingeschalteter Verbindung nach Suchlauf trennen
+			Bugfix Datum des Bildes/Sequence bei 4.x->3.x Verbindungen
+16.6.99 >>> UpdateVersion um 14:37 <<<
+16.06.99 UF Abgeschaltete Suchmasken felder sind auch die Daten nicht mehr
+			zu sehen.
+			Leere Datenfelder werden bei HTML nicht mehr exportiert.
+15.6.99 >>> UpdateVersion um 10:10 <<<
+15.06.99 UF - Flimmereffekte neim Fullscreen Modus beseitigt.
+19.11.99 Uf - Button Next auch bei 1/1 Bildern aktiv, da evtl noch bilder gespeichert
+			- werden koennten.
+11.05.99 UF - neue Felder in Suchmaske Vorgangsnr, Vorname, Nachname, Fachnr, Kundennr
+10.05.99 UF - Bugfix Suchdialog wird bei trennen geschlossen
+10.05.99 UF - Bugfix Button Trennen nach Beenden des Suchlaufs
+05.05.99 UF - Bugfix FF Play per Tastatur CoCo
+            - Bugfix Schließen der Anwahlkarte
+03.04.99 UF - Map, Anwahlkarte hinzugefügt
+21.0499 UF - Warnings beseitigt
+9.4.99 >>> UpdateVersion um 8:39 <<<
+07.04.99 - Bugfix Playback Mico die zweite
+7.4.99 >>> UpdateVersion um 10:08 <<<
+07.04.99 - Bugfix Playback Mico
+25.03.99 - Bugfix Selection beim Löschen
+		 - Nachfrage beim Löschen von Backuparchiven
+		 - Nachfrage beim Löschen von Sequencen
+22.2.99 >>> UpdateVersion um 19:23 <<<
+22.02.99
+	UF	Suche wird jetzt unter einem Namen = Suchstring
+		abgespeichert
+29.12.98 >>> UpdateVersion um 12:36 <<<
+06.11.98
+	UF Bugfix Slider
+	UF JPX lesen geht wieder
+15.10.98 >>> UpdateVersion um 12:31 <<<
+	UF - Bugfix Zeitsuche
+13.10.98
+	UF - Suchmaske bei De La Rue
+	   - Ausdruck auf Video Printer
+	   - Suchergebnisse werden geoeffnet
+11.5.98 >>> UpdateVersion um 12:50 <<<
+
+	UF	Exceptionhandler in InitDebugger
+1.4.98 >>> UpdateVersion um 8:03 <<<
+
+1.4.98 >>> UpdateVersion um 8:02 <<<
+ UF Recherche angelegt, soll der zukuenftige Datenbank Client
+	fuer anzeige gespeicherter Bilder und Suche nach
+	Bildern werden.
+

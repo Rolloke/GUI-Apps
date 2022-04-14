@@ -1,0 +1,6 @@
+; SystemVerwaltungChs.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SystemVerwaltungChs"
+
+EXPORTS
+    ; Explicit exports can go here

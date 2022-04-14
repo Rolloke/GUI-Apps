@@ -1,0 +1,61 @@
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+16.11.04 RKE - Audiokanal Aktiv wird jetzt unter dem Wert "Active" auch gelesen.
+			 - Funktion SetLanguageParameters(..), OnLanguageChanged(..) eingebaut, um die Codepage anzupassen.
+10.03.04 GF  - Umstellung auf Unicode und VS_71
+04.03.04 RKE - In OnRequestStopMediaDecoding wird jetzt nur noch gestoppt, wenn kein anderes Geraet mehr laufen muss.
+               Das Stoppen und anschliessende Starten fuehrte zu nicht loesbaren Problemen beim Abspielen.
+			   Ein leichtes Nachlaufen der Audioausgabe kann eher akzeptiert werden, als wenn die Ausgabe um x! Sekunden (Stunden, Tage?) verzögert wird.
+			   In der Registry kann fuer die AudioUnit der Wert "FreePushSourceBuffers" auf 1 gesetzt werden.
+			   Bitte testen, ob es was bringt und ob es Nebenwirkungen hat.
+03.03.04 RKE - Wenn neue Samples geliefert werden wird ein SyncPoint (2) gesetzt.
+02.03.04 RKE - Bei Reset werden Steuerungsvariablen reinitialsiert.
+               PushSource wird jetzt als previleged capture source initialisiert.
+23.02.04 RKE - Extended Menu wird jetzt nicht mehr aufgerufen.
+18.02.04 RKE - MediaSamples werden jetzt zusammengefasst zu groesseren Samples mit einer einstellbaren Mindestlaenge.
+               Das Zusammenfassen ist abschaltbar durch einen Registryeintrag:
+			   "HKEY_LOCAL_MACHINE\SOFTWARE\DVRT\AudioUnit\Device1\Debug\" "MergeSamples"
+13.02.04 RKE - Bugfix 847: Lautstaerkedefaultwert war falsch.
+06.02.04 RKE - Audiokanal Aktiv wird jetzt unter dem Wert "Active" gespeichert. Der Defaulteintrag des Schlüssels wird nicht mehr benutzt,
+               da er Remote nicht übertragen wird
+05.02.04 RKE - Unicode Versionen eingebaut.
+04.02.04 RKE - OnDecodeMediaData wird jetzt nur noch im Main Thread ausgefuehrt.
+               InitDecodeMediaData wird jetzt direkt in dieser Funktion aufgerufen, so dass die Samples nicht mehr
+			   zwischengespeichert werden muessen.
+27.01.04 RKE - Bugfix 809: MEDIA_STATE Anfrage wird jetzt beantwortet.
+26.01.04 RKE - DeviceChange Nachricht für USB Audio Geräte ausgewertet.
+22.01.04 RKE - automatische Encoderauswahl, wenn noch keiner gewählt ist.
+               Die Reihenfolge ist:              Bytes/Sec
+					MPEG Layer                   1000 - 2000
+					WMAudio                      1000
+					Windows Media Audio V2       1000
+					DSP Group TrueSpeech         1067
+					GSM 6.10                     1625
+					IMA ADPCM                    4055
+					Microsoft ADPCM              4096
+					PCM                          8000
+					CCITT                        8000
+22.01.04 RKE - Bugfix 797 Wenn ein LongHeader geliefert wird, so ist jetzt auch das Flag SyncPoint immer gesetzt.
+               Für die Initialisierung der Audiowiedergabeist einerseits der LongHeader notwendig, um den Decoder
+			   zu initialisieren, andererseits ist für die beginnende Wiedergabe ein Synchronisationspunkt notwendig,
+			   um die Wiedergabe zu starten.
+22.01.04 RKE - Bugfix 785 AudioUnit liefert jetzt in den States, ob die Hardware vorhanden ist.
+22.01.04 RKE - Bugfix 787 Audiounit wird jetzt silent gestartet, bei diesem Fehler also nicht.
+               785 und 787 betreffen nur den Readonly modus
+22.01.04 RKE - Bugfix 784 AudioUnit in RO startet nicht mehr mit Konfig-Dlg.
+22.01.04 RKE - Bugfix 786 Audiounit im RO-Modus löscht den von Audiounit angelegten 
+			   Registryeintrag "AudioUnit" wieder, wenn zu Beginn keiner da war.
+06.01.04 TKR - Bugfix Nr. 695: Im ReadOnly Modus (Start der Unit von CD) wird eine 
+			   anderes Logfile "AudioUnit1RO.log" angelegt.
+16.12.03 TKR - BUGFIX 622: Versionnummer wird nun richtig angezeigt.
+05.12.03 RKE - Wiedergabeverzoegerung ueber Registry einstellbar unter
+			   dvrt/debug REG_DWORD:AudioOffsetForReplay in [ms]
+			 - Initialisierung der Filter nur noch im MainThread durch PostMessage aufgerufen.
+			 - Abfrage der DirectShow FilterParameter nur noch im MainThread
+			 - Abfrage und Update der Dialog Controls nur noch im MainThread
+			 - Message WM_TRACE_TEXT -> OnTraceText() fuer Debugausgaben eingefuegt.
+13.10.03 RKE - Threshold Value wird jetzt sofort gesetzt
+			 - Verzögerung wurde auf 20 ms gesetzt.
+			 - Control Updates verbessert
+02.10.03 RKE - AudioUnit Projekt wurde in Idip und DTS aufgenommen

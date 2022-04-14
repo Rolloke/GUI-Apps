@@ -1,0 +1,542 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\VipCleanNT.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\VipCleanNT.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VIPCLEANNT_DIALOG DIALOGEX 0, 0, 322, 318
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DTSCleanNT"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_OEM1,80,31,30,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_OEM2,139,30,37,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_OEM3,180,30,39,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_XPE,80,20,95,14,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    EDITTEXT        IDC_NERO1,80,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_NERO2,113,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_NERO3,145,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_NERO4,177,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_NERO5,209,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_NERO6,242,35,30,15,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_HOSTNAME,81,61,155,15,ES_AUTOHSCROLL
+    COMBOBOX        IDC_ORGA_COMBO,80,82,156,54,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "ISDN",IDC_CHECK_ISDN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,252,112,37,10
+    CONTROL         "Netzwerk",IDC_CHECK_NET,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,252,124,49,10
+    EDITTEXT        IDC_LOADERTIMEOUT,85,179,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "setze 75 Hz",IDC_FREQUENCE,255,199,50,12
+    PUSHBUTTON      "&Directories löschen",IDC_DELDIR,10,255,75,14
+    PUSHBUTTON      "Ping",IDC_PING,10,299,50,14
+    PUSHBUTTON      "&Registry aktualisieren",IDC_WRITEREG,235,255,75,14,
+                    WS_DISABLED
+    DEFPUSHBUTTON   "Quit",IDOK2,241,298,75,16
+    GROUPBOX        "Zu ändernde Registry Einträge:",IDC_STATIC,-3,7,313,163
+    EDITTEXT        IDC_TEMP,70,229,235,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER
+    LTEXT           "2    Jacobs",IDC_KAM16,21,126,38,8,NOT WS_VISIBLE
+    CONTROL         "4",IDC_RADIO4KAM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    179,116,51,10
+    CONTROL         "8",IDC_RADIO8KAM,"Button",BS_AUTORADIOBUTTON,179,126,51,
+                    10
+    CONTROL         "16",IDC_RADIO16KAM,"Button",BS_AUTORADIOBUTTON,179,136,
+                    51,10
+    LTEXT           " - OEM -",IDC_STATICOEM2,110,35,30,8
+    CONTROL         "OEM",IDC_STATICOEM1,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,46,33,20,8
+    LTEXT           "Computername",IDC_STATIC,16,64,48,8
+    LTEXT           "Organisation",IDC_STATIC,23,82,40,8
+    EDITTEXT        IDC_DEL,96,255,75,15,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "4, 8, 16 Kameras",IDC_KAM,173,99,64,62
+    LTEXT           "NT- Loader Timeout",IDC_STATIC,10,182,64,8
+    GROUPBOX        "Systemeinstellungen",IDC_STATIC,5,173,313,77
+    LTEXT           "Display Settings :",IDC_STATIC,10,216,55,8
+    LTEXT           "c:\\Temp :",IDC_STATICTEMP,10,231,36,8
+    GROUPBOX        "Dongle",IDC_STATIC,243,99,58,62
+    CONTROL         "IPAddress1",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,
+                    70,299,100,15
+    CONTROL         135,IDC_PING_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,175,
+                    302,9,8
+    CONTROL         136,IDC_PING_NOTYET,"Static",SS_BITMAP,175,302,9,8
+    LTEXT           "aktuelle Bildschirm-Frequenz",IDC_STATIC,175,182,98,8
+    EDITTEXT        IDC_HZ,276,179,16,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Hz",IDC_STATIC,295,182,10,8
+    LTEXT           "1    Savic",IDC_KAM4,21,108,38,8,NOT WS_VISIBLE
+    LTEXT           "1    Jacob",IDC_KAM8,21,117,38,8,NOT WS_VISIBLE
+    LTEXT           "XPe Lizenz",IDC_STATICXPE,25,23,39,10,NOT WS_VISIBLE
+    LTEXT           "Nero Lizenz",IDC_STATICNERO,23,39,39,10,NOT WS_VISIBLE
+    LTEXT           "",IDC_STATIC_DISPLAY,71,216,174,8
+    CONTROL         "CD/RW",IDC_CHECK_BACKUP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,252,138,47,10
+    CONTROL         "DVD/RW",IDC_CHECK_DVD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,251,150,48,10
+    LTEXT           "Audio:",IDC_STATIC,10,201,30,8
+    PUSHBUTTON      "Lautstärke...",IDC_BTN_AUDIO_VOLUMES,161,199,50,12
+    PUSHBUTTON      "Audioeigenschaften...",IDC_CK_AUDIO_TEST,47,199,107,12
+    LTEXT           "5.5.10.14",IDC_STATICNERO_VERSION,25,49,44,10
+    LTEXT           "1    Tasha",IDC_KAM8_TASHA,21,135,38,8,NOT WS_VISIBLE
+    LTEXT           "2    Tashas",IDC_KAM16_TASHA,21,144,38,8,NOT WS_VISIBLE
+    GROUPBOX        "Image Test",IDC_IMAGE_TEST,14,99,64,68
+    LTEXT           "ComPort",IDC_STATIC,105,112,28,8
+    CONTROL         135,IDC_COMPORT_OK,"Static",SS_BITMAP | NOT WS_VISIBLE,
+                    138,112,9,8
+    CONTROL         136,IDC_COMPORT_NOTOK,"Static",SS_BITMAP | NOT 
+                    WS_VISIBLE,138,112,9,8
+    PUSHBUTTON      "EWF Initialisieren",IDC_BTN_CF_INIT,10,276,91,14
+    PUSHBUTTON      "Festplatten erstellen",IDC_BTN_INIT_DISKS,219,276,91,14
+    PUSHBUTTON      "EWF ausschalten",IDC_BTN_CF_UNINIT,114,276,91,14
+    LTEXT           "1    Q Unit",IDC_KAM_QUNIT,21,153,38,8,NOT WS_VISIBLE
+END
+
+IDD_IDIPCLEAN_DIALOG DIALOGEX 0, 0, 579, 306
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "IdipClean"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_CHECK_LOG,"Button",BS_AUTOCHECKBOX | WS_GROUP | 
+                    WS_TABSTOP,10,249,8,12
+    CONTROL         "",IDC_CHECK_TEMP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,279,8,12
+    CONTROL         "",IDC_CHECK_ARCHIVE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,264,8,12
+    PUSHBUTTON      "Verzeichnisse leeren",IDC_DELDIR,200,278,75,14
+    EDITTEXT        IDC_OS,10,18,95,12,ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_BORDER | NOT WS_TABSTOP
+    GROUPBOX        "Installiertes Betriebssystem",IDC_STATIC,5,5,275,30
+    EDITTEXT        IDC_SR,171,18,75,12,ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_VISIBLE | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_BUILD,115,18,40,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_VISIBLE | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_DRIVES,10,162,265,63,ES_MULTILINE | ES_READONLY | 
+                    WS_VSCROLL
+    GROUPBOX        "Laufwerke / Ports",IDC_STATIC,5,150,275,79
+    GROUPBOX        "Zu leerende Verzeichnisse",IDC_STATIC,2,235,278,64
+    EDITTEXT        IDC_ALLE_ARCHIVE,75,264,200,12,ES_READONLY | NOT 
+                    WS_BORDER,WS_EX_TRANSPARENT
+    LTEXT           "alle Archive :",IDC_STATIC,25,264,49,12,SS_CENTERIMAGE
+    LTEXT           "C:\\temp :",IDC_TXT_TEMP_PATH,25,279,35,12,
+                    SS_CENTERIMAGE
+    LTEXT           "Bildschirm :",IDC_STATIC,10,67,36,12
+    LTEXT           "Datum :",IDC_STATIC,10,84,30,8,SS_CENTERIMAGE
+    LTEXT           "Uhrzeit :",IDC_STATIC,85,84,30,8,SS_CENTERIMAGE
+    EDITTEXT        IDC_SCREEN,55,67,220,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER
+    GROUPBOX        "Sytemeinstellungen",IDC_STATIC,5,40,275,105
+    EDITTEXT        IDC_TEMP,75,279,100,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER
+    LTEXT           "C:\\log :",IDC_TXT_LOGPATH,25,249,28,12,SS_CENTERIMAGE
+    LTEXT           "Zeitzone :",IDC_STATIC,10,100,35,8
+    EDITTEXT        IDC_INFO_DELDIR,290,278,110,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_INFO_NOTDELDIR,290,276,104,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    PUSHBUTTON      "Beenden",IDOK2,438,280,65,19
+    EDITTEXT        IDC_DATE,40,82,35,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_TIME,115,82,35,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_ZONE,10,108,265,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "ändern",IDC_DATETIMEZONE,155,82,50,12
+    PUSHBUTTON      "setze 75 Hz",IDC_75HZ,225,48,50,14
+    PUSHBUTTON      "setze 60 Hz",IDC_60Hz,170,48,50,14
+    LTEXT           "aktuelle Bildschirm-Frequenz",IDC_STATIC,10,51,98,8
+    EDITTEXT        IDC_HZ,115,48,16,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Hz",IDC_STATIC,135,51,10,8
+    LTEXT           "Audio:",IDC_STATIC,10,131,30,8
+    PUSHBUTTON      "Lautstärke...",IDC_BTN_AUDIO_VOLUMES,150,129,70,12
+    PUSHBUTTON      "Audioeigenschaften...",IDC_CK_AUDIO_TEST,40,129,100,12
+    PUSHBUTTON      "Tweak Tool...",IDC_TWEAK_TOOL,225,82,50,12
+END
+
+IDD_CLEAN98 DIALOG  0, 70, 318, 190
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_OEM,95,22,155,15,ES_NUMBER
+    EDITTEXT        IDC_HOSTNAME,95,48,155,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ORGA,95,69,155,15,ES_AUTOHSCROLL
+    CONTROL         "4",IDC_RADIO4CAMS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,130,95,25,10
+    CONTROL         "8",IDC_RADIO8CAMS,"Button",BS_AUTORADIOBUTTON,165,95,23,
+                    10
+    CONTROL         "16",IDC_RADIO16CAMS,"Button",BS_AUTORADIOBUTTON,195,95,
+                    28,10
+    CONTROL         "OEM:",IDC_CHECK_OEM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,26,35,10
+    CONTROL         "Computername:",IDC_CHECK_COMPNAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,25,51,65,10
+    CONTROL         "Organisation:",IDC_CHECK_ORGA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,71,57,10
+    LTEXT           "Anzahl Kameras:",IDC_STATIC,45,95,54,8
+END
+
+IDD_CLEANNT DIALOGEX 290, 0, 296, 276
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_OEM1,69,52,27,15,ES_NUMBER | NOT WS_VISIBLE,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_OEM2,133,52,35,15,ES_NUMBER | NOT WS_VISIBLE,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_OEM3,173,52,27,15,ES_NUMBER | NOT WS_VISIBLE,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_COMPNAME,69,73,100,15,ES_AUTOHSCROLL,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_ORGA,69,92,115,15,ES_AUTOHSCROLL,WS_EX_STATICEDGE
+    EDITTEXT        IDC_LOADERTIMEOUT,97,108,18,14,ES_AUTOHSCROLL,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_DESK_FOLDER,100,143,65,14,ES_AUTOHSCROLL,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_SYSTEM_OVERVIEW,100,179,65,14,ES_AUTOHSCROLL,
+                    WS_EX_STATICEDGE
+    EDITTEXT        IDC_FILE_LIST,100,161,65,14,ES_AUTOHSCROLL,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Änderungen übernehmen",IDC_UEBERNEHMEN,105,207,100,14,
+                    WS_DISABLED
+    CONTROL         "",IDC_CHECK_DESK_FOLDER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,143,8,14
+    CONTROL         "",IDC_CHECK_SYSTEM_OVERVIEW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,179,8,14
+    CONTROL         "",IDC_CHECK_FILE_LIST,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,161,8,14
+    GROUPBOX        "Einträge ändern",IDC_STATIC,15,31,262,94
+    LTEXT           " - OEM -",IDC_STATIC_OEM_MIDDLE,101,55,30,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "Name :",IDC_STATIC,41,76,24,8
+    LTEXT           "Orga. :",IDC_STATIC,43,95,22,8
+    LTEXT           "OEM :",IDC_STATIC_OEM,41,57,21,8,NOT WS_VISIBLE
+    LTEXT           "NT- Loader Timeout :",IDC_STATIC_LOADER,28,113,68,8,
+                    SS_CENTERIMAGE
+    LTEXT           "Sekunden",IDC_STATIC_SECONDS,120,113,34,8
+    LTEXT           "Desktop-Ordner :",IDC_STATIC_ORDNER,40,143,55,14,
+                    SS_CENTERIMAGE
+    LTEXT           "Systemübersicht :",IDC_STATIC_SYS,39,179,56,14,
+                    SS_CENTERIMAGE
+    LTEXT           "Dateiliste (C:\\) :",IDC_STATIC_LIST,45,161,50,14,
+                    SS_CENTERIMAGE
+    GROUPBOX        "Erstellen von",IDC_STATIC_CREATE,15,128,261,74
+    GROUPBOX        "",IDC_STATIC,5,7,277,218
+    EDITTEXT        IDC_AENDERUNGEN,7,243,117,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_KEINE_AENDERUNGEN,7,243,140,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_ORDNERDATEI,5,260,140,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_KEINE_ORDNERDATEI,5,260,140,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_STATUS,7,243,155,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_VISIBLE | NOT WS_BORDER
+    EDITTEXT        IDC_RESULT,5,230,40,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_VISIBLE | NOT WS_BORDER
+    LTEXT           "",IDC_OS_IN_USE,14,18,81,8
+    EDITTEXT        IDC_EDIT_XP,69,39,122,14,ES_AUTOHSCROLL | NOT WS_VISIBLE,
+                    WS_EX_STATICEDGE
+    LTEXT           "XPe Lizenz:",IDC_STATIC_XPE,24,42,39,8,NOT WS_VISIBLE
+    LTEXT           "Nero :",IDC_STATIC_NERO,42,58,21,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_NERO1,69,56,26,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_NERO2,97,56,24,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_NERO3,123,56,24,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_NERO4,149,56,24,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_NERO5,175,56,25,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_NERO6,202,56,26,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE,WS_EX_STATICEDGE
+    LTEXT           "HDD-ID :",IDC_STATIC_HDD,35,113,33,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_HDD,69,109,23,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER | NOT WS_VISIBLE,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_HDD2,102,109,27,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER | NOT WS_VISIBLE,WS_EX_STATICEDGE
+    LTEXT           " -",IDC_STATIC_HDD_LINE,93,111,8,8,NOT WS_VISIBLE
+    CONTROL         "ID eintragen (Neustart)",IDC_CHECK_HDD,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,167,111,
+                    102,8
+    EDITTEXT        IDC_SET_HDDID,143,230,115,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_VISIBLE | NOT WS_BORDER
+    PUSHBUTTON      "EWF Initialisieren",IDC_BTN_CF_INIT,175,143,91,14
+    PUSHBUTTON      "Festplatten erstellen",IDC_BTN_INIT_DISKS,175,179,91,14
+    PUSHBUTTON      "EWF ausschalten",IDC_BTN_CF_UNINIT,175,161,91,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "FileDescription", "MFC-Anwendung VipCleanNT"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "VipCleanNT"
+            VALUE "LegalCopyright", "Copyright (C) 2000"
+            VALUE "OriginalFilename", "VipCleanNT.EXE"
+            VALUE "ProductName", "Anwendung VipCleanNT"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_VIPCLEANNT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 305
+        VERTGUIDE, 310
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 306
+        HORZGUIDE, 186
+        HORZGUIDE, 205
+        HORZGUIDE, 220
+        HORZGUIDE, 235
+        HORZGUIDE, 250
+        HORZGUIDE, 262
+        HORZGUIDE, 283
+        HORZGUIDE, 306
+    END
+
+    IDD_IDIPCLEAN_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 572
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 25
+        VERTGUIDE, 275
+        VERTGUIDE, 280
+        VERTGUIDE, 290
+        BOTTOMMARGIN, 299
+        HORZGUIDE, 5
+        HORZGUIDE, 24
+        HORZGUIDE, 35
+        HORZGUIDE, 40
+        HORZGUIDE, 55
+        HORZGUIDE, 73
+        HORZGUIDE, 88
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 135
+        HORZGUIDE, 145
+        HORZGUIDE, 150
+        HORZGUIDE, 162
+        HORZGUIDE, 225
+        HORZGUIDE, 229
+        HORZGUIDE, 235
+        HORZGUIDE, 255
+        HORZGUIDE, 270
+        HORZGUIDE, 285
+    END
+
+    IDD_CLEAN98, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 183
+    END
+
+    IDD_CLEANNT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 289
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 269
+        HORZGUIDE, 150
+        HORZGUIDE, 168
+        HORZGUIDE, 186
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CHECK_FAILED        BITMAP                  "res\\bmp00001.bmp"
+IDB_CHECK_OK            BITMAP                  "res\\bitmap1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_MIXER_DEST0         "Undefiniert"
+    IDS_MIXER_DEST1         "Digital"
+    IDS_MIXER_DEST2         "Line"
+    IDS_MIXER_DEST3         "Monitor"
+    IDS_MIXER_DEST4         "Lautsprecher"
+    IDS_MIXER_DEST5         "Kopfhörer"
+    IDS_MIXER_DEST6         "Telefon"
+    IDS_MIXER_DEST7         "Wave Eingang"
+    IDS_MIXER_DEST8         "Stimme Eingang"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MIXER_SRC0          "Undefiniert"
+    IDS_MIXER_SRC1          "Digital"
+    IDS_MIXER_SRC2          "Line"
+    IDS_MIXER_SRC3          "Mikrophon"
+    IDS_MIXER_SRC4          "Synthesizer"
+    IDS_MIXER_SRC5          "CD"
+    IDS_MIXER_SRC6          "Telefon"
+    IDS_MIXER_SRC7          "PC Lautsprecher"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MIXER_SRC8          "Wave Ausgang"
+    IDS_MIXER_SRC9          "Aux"
+    IDS_MIXER_SRC10         "Analog"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_60Hz                "Setzt MonitorFrequenz auf 60 Hz"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_75HZ                "Setzt MonitorFrequenz auf 75 Hz"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\VipCleanNT.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

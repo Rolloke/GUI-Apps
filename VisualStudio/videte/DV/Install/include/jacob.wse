@@ -1,0 +1,214 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Check Configuration
+  Flags=10111001
+end
+item: Install File
+  Source=D:\dv\JaCob.vxd
+  Destination=%WIN%\System\JaCob.vxd
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\dv\JaCob.inf
+  Destination=%WIN%\Inf\JaCob.inf
+  Flags=0000000010000010
+end
+item: End Block
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Check Configuration
+  Message German=Es werden NT Administratorrechte benötigt!
+  Title German=Installation
+  Flags=01011111
+end
+item: Find File in Path
+  Variable=JACOB
+  Pathname List=JaCob.sys
+  Default=NOT FOUND
+  Search Directories=%SYS%\drivers\
+  Description=Searching for JaCob.sys...
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=JACOB
+  Value=NOT FOUND
+  Flags=00000100
+end
+item: Edit Registry
+  Total Keys=4
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\JaCob
+    New Value=1
+    New Value=
+    Value Name=Type
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\JaCob
+    New Value=2
+    New Value=
+    Value Name=Start
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\JaCob
+    New Value=Extended Base
+    Value Name=Group
+    Root=2
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\JaCob
+    New Value=1
+    New Value=
+    Value Name=ErrorControl
+    Root=2
+    Data Type=3
+  end
+end
+item: Get Registry Key Value
+  Variable=EDIT_PCI
+  Key=SYSTEM\CurrentControlSet\Services\EventLog\System
+  Value Name=Sources
+  Flags=00000100
+end
+item: Set Variable
+  Variable=EDIT_PCI
+  Value=JaCob
+  Flags=00000001
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\EventLog\System
+  New Value=%EDIT_PCI%
+  New Value=
+  Value Name=Sources
+  Root=2
+  Data Type=4
+end
+item: Edit Registry
+  Total Keys=2
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\EventLog\System\JaCob
+    New Value=%%SystemRoot%%\System32\Drivers\JaCob.sys
+    New Value=
+    Value Name=EventMessageFile
+    Root=2
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlSet\Services\EventLog\System\JaCob
+    New Value=7
+    New Value=
+    Value Name=TypesSupported
+    Root=2
+    Data Type=3
+  end
+end
+item: End Block
+end
+item: Install File
+  Source=D:\dv\JaCob.sys
+  Destination=%WIN%\System32\Drivers\JaCob.sys
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\dv\JaCob.inf
+  Destination=%WIN%\Inf\JaCob.inf
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\dv\KeyHook.sys
+  Destination=%WIN%\System32\Drivers\KeyHook.sys
+  Flags=0000000000000010
+end
+item: Remark
+  Text=****************************  SkipFields auf 0 setzen  *************************
+end
+item: Edit Registry
+  Total Keys=8
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device1\General
+    New Value=0
+    Value Name=SkipFields
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device2\General
+    Value Name=SkipFields
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device1\General
+    New Value=0.2
+    Value Name=MinJpegSize
+    Root=2
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device1\General
+    New Value=2.0
+    Value Name=MaxJpegSize
+    Root=2
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device2\General
+    New Value=0.2
+    Value Name=MinJpegSize
+    Root=2
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device2\General
+    New Value=2.0
+    Value Name=MaxJpegSize
+    Root=2
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device1\General
+    New Value=0
+    Value Name=AlarmVideoOutHandling
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Jacobunit\Device2\General
+    New Value=0
+    Value Name=AlarmVideoOutHandling
+    Root=2
+    Data Type=3
+  end
+end
+item: Open/Close INSTALL.LOG
+end
+item: Set Variable
+  Variable=RESTART
+  Value=S
+end
+item: End Block
+end

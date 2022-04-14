@@ -1,0 +1,13 @@
+RunDatabaseClient=1
+RunSocketUnit=1
+RunSecAnalyzer=1
+RunJaCobUnit1=1
+RunJaCobUnit2=1
+RunISDNUnit=1
+RunAudioUnit=1
+RunSavicUnit1=1
+RunSavicUnit2=1
+RunTashaUnit1=1
+RunTashaUnit2=1
+AllowSoftDecodeMiCo=1
+MagicNumber=234567

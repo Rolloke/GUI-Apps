@@ -1,0 +1,54 @@
+History von SaVicUnit
+-----------------------
+21.06.02
+	- Beginn des Projektes. Ausgangsframework ist die JaCobUnit.
+
+24.06.02
+	- Globale Umbenennung und Abspeckaktion.
+
+03.07.02
+	- Das Inlay Fenster wird nun über OnMoving/OnSizing anstatt OnMove/OnSize mitgeführt
+
+21.08.02
+	- Bugfix: SetCameraToAnalogOut wurde in OnRequestGetValue verwendet.
+
+04.09.02
+	- Bei erhalt von WM_POWERBROADCAST (PBT_APMSUSPEND) wird die Unit heruntergefahren
+
+16.09.02
+	- Das Scannen nach den SaVic-Boards erfolgt nun ohne Berücksichtigung
+	  der SubSystemID, wodurch nun auch eine evtl. vorhandene 2. SaVic gefunden wird.
+
+17.09.02
+	- Sharedmemorynamen  SM_MICO_XXX in SM_SAVIC_XXX geändert, um einen Parallelbetrieb
+	  von SaVic und JaCob zu ermöglichen.
+
+29.10.02
+	- Im Motiondetectionmodus wird nun im Standalonebetrieb ein Preview-fenster geöffnet
+	  in dem die Jpegbilder wieder dekodiert werden. Damit hat man eine direkte Kontrolle
+	  der Bildqualität.
+	- Die Framerate läßt sich nun im Standalonebetrieb einstellen.
+
+15.11.02
+	- NoiseReduction läßt sich nun im Preview aktivieren.
+
+25.11.02
+	- Es wird nun beim Scannen des PCI-Busses die SubSystemID des SaVic-Boards mit
+	  ausgewertet. 1.Savic = 0x1864, 2. SaVic = 0x1865, 3. SaVic = 0x1866, 4. SaVic = 0x1867. 
+	  Über den Registrierungsschlüssel DVRT\SaVicUnit\IgnoreSubSystemIDs läßt sich
+	  wie bei der JaCob auch, die Scanstrategie ändern. Ist dieser Schlüssel auf 1, so
+	  wird die SubSystemID ignoriert, und der PCI-Slots der Reihe nach, nach einer
+	  SaVic-Karte durchsucht. Dies erlaubt den Mehrkartenbetrieb mit der gleichen SubSystemID.
+	  Allerdings ist die Zuordnung nicht sicher und vom Mainboard abhängig.
+
+05.12.02
+	- Im Standalone betrieb kann der Codec gewählt werden (JPEG, YUV422)
+
+13.12.02
+	- Die englische Dialogresource aktualisiert
+
+19.12.02
+	- Bugfix: DV-656 DVProcess versucht das 4. Relay zu schalten. Die SaVic hat aber nur eins.
+	  daher wird die Relaynummer nun einfach ignoriert.
+02.07.03
+	- Bugfix Mehrkartenbetrieb ging nicht mehr

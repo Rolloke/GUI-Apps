@@ -1,0 +1,5 @@
+05.07.06 TKR- Das Setzen der Optionen (ISDN, LAN, CD, DVD) fuer die QUnit eingebaut.
+19.07.05 UF - Bugfix Checkbox COM war falsch platziert.
+28.10.03 GF	- Unicode Set-Registry-Key gefixt
+23.10.03 GF	- Konfiguration DtsUnicode implementiert und Code angepasst
+23.10.03 GF	- Irgendwas fehlt hier ...

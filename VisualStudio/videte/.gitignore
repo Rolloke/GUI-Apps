@@ -1,0 +1,14 @@
+Debug/
+DebugUnicode/
+Release/
+ReleaseUnicode/
+ReleaseEnu/
+ReleaseIta/
+Lib/
+AnalyseMapfile/
+AnyfileViewer/
+*.wav
+*.suo
+*.aps
+*.ncb
+*.tmp

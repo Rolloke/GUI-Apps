@@ -1,0 +1,43 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=Windows-1252">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: scope, Configuration: Debug Unicode|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "f:\Dxsdk\Samples\C++\DirectShow\Filters\Scope\Debug_Unicode\RSP000008.rsp" with contents
+[
+/Od /I "..\..\BaseClasses" /I "..\..\..\..\..\include" /I "G:\MyProjects\Libraries\\" /D "_WIN32_WINNT=0x0400" /D "WINVER=0x0400" /D "DBG=1" /D "DEBUG" /D "_DEBUG" /D "INC_OLE2" /D "STRICT" /D "_WIN32" /D "_MT" /D "_DLL" /D "_X86_=1" /D "WIN32" /D "UNICODE" /D "_UNICODE" /FD /EHsc /MDd /GS /YX"streams.h" /Fp".\Debug_Unicode/scope.pch" /Fo".\Debug_Unicode/" /Fd".\Debug_Unicode/" /W4 /c /Zi /Gz  /Oid 
+".\scope.cpp"
+]
+Creating command line "cl.exe @"f:\Dxsdk\Samples\C++\DirectShow\Filters\Scope\Debug_Unicode\RSP000008.rsp" /nologo"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+scope.cpp
+scope.cpp(535) : error C2440: 'initializing' : cannot convert from 'char [30]' to 'LPTSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(551) : error C2664: 'CreateWindowExW' : cannot convert parameter 3 from 'const char [1]' to 'LPCWSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(601) : error C2664: 'LoadLibraryW' : cannot convert parameter 1 from 'const char [13]' to 'LPCWSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(1531) : error C2440: '=' : cannot convert from 'const char [9]' to 'LPWSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(1653) : error C2664: 'strlen' : cannot convert parameter 1 from 'TCHAR [16]' to 'const char *'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(1838) : error C2664: 'wsprintfW' : cannot convert parameter 1 from 'char [64]' to 'LPWSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+scope.cpp(1839) : error C2664: 'OutputDebugStringW' : cannot convert parameter 1 from 'char [64]' to 'LPCWSTR'
+        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://f:\Dxsdk\Samples\C++\DirectShow\Filters\Scope\Debug_Unicode\BuildLog.htm"
+scope - 7 error(s), 0 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>

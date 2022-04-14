@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestJoystick", "TestJoystick.vcproj", "{1DD6B223-9C0A-432A-8B4C-0249A0A09BA5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/TestJoystick\u0022,\u0020ZAQCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {163E8773-9B9E-47C4-A446-50B5B3C52E79}
+		SccProjectUniqueName1 = TestJoystick.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{1DD6B223-9C0A-432A-8B4C-0249A0A09BA5}.Debug.ActiveCfg = Debug|Win32
+		{1DD6B223-9C0A-432A-8B4C-0249A0A09BA5}.Debug.Build.0 = Debug|Win32
+		{1DD6B223-9C0A-432A-8B4C-0249A0A09BA5}.Release.ActiveCfg = Release|Win32
+		{1DD6B223-9C0A-432A-8B4C-0249A0A09BA5}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

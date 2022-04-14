@@ -1,0 +1,13 @@
+[DONGLE]
+ProductCode=18
+OEMCode=6
+RunLauncher=1
+RunSupervisor=1
+RunExplorer=1
+RunDatabaseClient=1
+RunDatabaseServer=1
+RunCDRWriter=0
+RunISDNUnit=1
+RunSocketUnit=1
+AllowSoftDecodeMiCo=1
+MagicNumber=234567

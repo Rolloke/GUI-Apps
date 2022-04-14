@@ -1,0 +1,61 @@
+16.06.04
+	-dynamisches Umschalten zwischen CIF und 2CIF
+	-25 fps / Bewegungserkennung ohne Störung
+	-2. Stream Ruckelt
+
+17.06.04
+	-über StreamID 3 liefert ein unter Stream ID 1 gestarteter Codec Einzelbilder
+	-BETA und bis Dienstag
+
+22.06.04
+	-2.Stream kann vom Server angeforderte Einzelbilder liefern ("NOSTREAM")
+
+23.06.04
+	-High	2CIF
+	-Mid	Cif
+
+24.06.04
+	-2.Stream liefert sofort Bilder nicht erst nach 2. I-Frame
+	-Low 	QCIF
+
+29.06.04
+	-Auf VisualDSP++3.5 Umgestellt
+	-Checksumme über Header
+
+01.07.04
+	-Checksumme um Videodaten
+	-keine Streifen DMA wartet auf Codec	
+	-Kameraausfall wird nicht gemeldet
+
+02.07.04
+	-Kameraausfall wird wieder gemeldet
+
+03.07.04
+	-SDRAM neu Programmiert
+
+06.07.04
+	-Kameraausfall wird nicht mehr beim Idip start erkannt
+
+13.07.04
+	-Unterstützt NTSC-Kameras
+
+16.07.04
+	-1 Stream 2CIF, CIF, QCIF* (* wenn nicht Stream2)
+	-Debug LED's an 
+
+17.08.04
+	-2, 3, 4, 6 fps werden genau berechnet
+
+------ Übernahme von Christians Projekt. -------
+
+24.01.05
+	- Neue Funktion 'DoFiltering' führt ein 3x3 correlationsfilter zur Veringerung
+		des Farbrauschens ein.
+	- Framerate auf 25fps gesteigert.
+		- Die MD wird nun aus main herraus gestartet und nicht mehr aus der ISR.
+		- Das Prüfen von bCoding in 'PPI_ISR' kann nun entfallen.
+	
+	- Die Videosignalerkennung zu Beginn zuverlässig gemacht.
+
+31.01.05
+	- Zwei zusätzliche Kommandos zur Aktivierung/Deaktivierung, sowie der Abfrage des temp. NR-Filters implementiert

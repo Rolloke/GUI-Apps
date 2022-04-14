@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample", "Sample.vcproj", "{EBAF57B3-C65F-4C2E-BE65-317E0F713AE4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = Sample.vcproj
+		SccProjectName0 = \u0022$/Project/SDK/Sample\u0022,\u0020JISCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{EBAF57B3-C65F-4C2E-BE65-317E0F713AE4}.Debug.ActiveCfg = Debug|Win32
+		{EBAF57B3-C65F-4C2E-BE65-317E0F713AE4}.Debug.Build.0 = Debug|Win32
+		{EBAF57B3-C65F-4C2E-BE65-317E0F713AE4}.Release.ActiveCfg = Release|Win32
+		{EBAF57B3-C65F-4C2E-BE65-317E0F713AE4}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

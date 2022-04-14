@@ -1,0 +1,124 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Install File
+  Source=d:\Dts\Dlls\cipcU.dll
+  Destination=%MAINDIR%\cipcU.dll
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Install File
+  Source=d:\Dts\Dlls\oemguiU.dll
+  Destination=%MAINDIR%\oemguiU.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\Dts\Dlls\OemGuiDeu.dll
+  Destination=%MAINDIR%\OemGuiDeu.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\oemguienu.dll
+  Destination=%MAINDIR%\oemguienu.dll
+  Flags=0000000010000010
+end
+item: Remark
+end
+item: Install File
+  Source=d:\Dts\Dlls\vimageU.dll
+  Destination=%MAINDIR%\vimageU.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\ijl15.dll
+  Destination=%MAINDIR%\ijl15.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\SkinsU.dll
+  Destination=%MAINDIR%\SkinsU.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\JView.exe
+  Destination=%MAINDIR%\JView.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\HardwareInfoU.dll
+  Destination=%MAINDIR%\HardwareInfoU.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\DeviceDetectU.dll
+  Destination=%MAINDIR%\DeviceDetectU.dll
+  Flags=0000000000000010
+end
+item: Include Script
+  Pathname=D:\installation\Wise\dvrt\include\mp4dec.wse
+end
+item: Remark
+end
+item: Install File
+  Source=d:\Dts\LogView.exe
+  Destination=%MAINDIR%\LogView.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\\Enu\DelRegDb.exe
+  Destination=%MAINDIR%\DelRegDb.exe
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Install File
+  Source=d:\Dts\Dlls\Psapi.dll
+  Destination=%MAINDIR%\Psapi.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\DVStarter.exe
+  Destination=%MAINDIR%\DVStarter.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\SocketUnit.exe
+  Destination=%MAINDIR%\SocketUnit.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\ISDNUnit.exe
+  Destination=%MAINDIR%\ISDNUnit.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\dlls\netcommU.dll
+  Destination=%MAINDIR%\netcommU.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\DVClient.exe
+  Destination=%MAINDIR%\DVClient.exe
+  Flags=0000000000000010
+end
+item: Remark
+end

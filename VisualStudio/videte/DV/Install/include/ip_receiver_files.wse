@@ -1,0 +1,105 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Install File
+  Source=D:\DV\Dlls\cipc.dll
+  Destination=%MAINDIR%\cipc.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Dlls\oemgui.dll
+  Destination=%MAINDIR%\oemgui.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\dv\Dlls\vimage.dll
+  Destination=%MAINDIR%\vimage.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\dv\Dlls\ijl15.dll
+  Destination=%MAINDIR%\ijl15.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\dv\Dlls\Skins.dll
+  Destination=%MAINDIR%\Skins.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\dv\JView.exe
+  Destination=%MAINDIR%\JView.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\HardwareInfo.dll
+  Destination=%MAINDIR%\HardwareInfo.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\DeviceDetect.dll
+  Destination=%MAINDIR%\DeviceDetect.dll
+  Flags=0000000000000010
+end
+item: Include Script
+  Pathname=D:\installation\Wise\dvrt\include\mp4dec.wse
+end
+item: Remark
+end
+item: Install File
+  Source=D:\DV\LogView.exe
+  Destination=%MAINDIR%\LogView.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\DelRegDb.exe
+  Destination=%MAINDIR%\DelRegDb.exe
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Install File
+  Source=D:\dv\Dlls\Psapi.dll
+  Destination=%MAINDIR%\Psapi.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\dv\DVStarter.exe
+  Destination=%MAINDIR%\DVStarter.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\SocketUnit.exe
+  Destination=%MAINDIR%\SocketUnit.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\dv\dlls\netcomm.dll
+  Destination=%MAINDIR%\netcomm.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\DVClient.exe
+  Destination=%MAINDIR%\DVClient.exe
+  Flags=0000000000000010
+end
+item: Remark
+end

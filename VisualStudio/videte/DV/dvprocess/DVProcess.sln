@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DVProcess", "DVProcess.vcproj", "{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = DVProcess.vcproj
+		SccProjectName0 = \u0022$/DV/DVProcess\u0022,\u0020BAYBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Enu = Enu
+		EnuUnicode = EnuUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Debug.ActiveCfg = Debug|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Debug.Build.0 = Debug|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Enu.ActiveCfg = Enu|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Enu.Build.0 = Enu|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.EnuUnicode.ActiveCfg = EnuUnicode|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.EnuUnicode.Build.0 = EnuUnicode|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Release.ActiveCfg = Release|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.Release.Build.0 = Release|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{AE58DFFC-772A-4CF7-856E-6BD8BD368DF1}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

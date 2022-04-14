@@ -1,0 +1,10 @@
+[TopDir]
+file0=D:\HHLA\OEMgui.dll
+file1=D:\HHLA\Imw32d30.dll
+file2=D:\HHLA\MiCoDA.dll
+file3=D:\HHLA\cipc.dll
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

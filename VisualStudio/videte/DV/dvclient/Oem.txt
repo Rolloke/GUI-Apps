@@ -1,0 +1,29 @@
+Auflistung der OEM-Spezifischen Programmteile.
+Beim Hinzufügen eines neuen OEMs müssen die folgenden Programmteile ergänzt bzw. geändert
+werden:
+
+	- Enumerations.h
+		- OEM-Enum						// Neuen Oem dort hinzufügen
+	- CMinimizedDlg.cpp
+		- MinimizedDlg::OnInitDialog()	// (Die Bitmap des MinimizedDialog's)
+	- CPanel.cpp
+//		- NameOfEnum, StringToOEM		// werden nicht mehr benutzt, sind entfallen
+		- CPanel::LoadNormalMenu()		// Enable/Disable Square-mode
+		- CPanel::OnInitDialog()		// Bitmap des MinimizeButtons auf dem Panel
+		- OnCrossUp,Down,left,right		// Menüsteuerung
+		- ChangeDisplayColor()			// Displayfarbe der einzelnen Menüs
+	- DVUiThread.cpp
+		- HandleKeyStroke()				// Evtl. neues Masterpaßwort hinzufügen
+	- Mainframe.cpp
+		- GetOemName()					// Rekorderbezeichnung im gesperrten Modus.
+		- GetShortOemName()				// Rekorderbezeichnung im gesperrten Modus.
+	- CRteDlg.cpp
+		- OnInitDialog()				// Displayfarbe des RTE-Dialoges Oem-spezifisch
+	- CStatisticDlg.cpp
+		- OnInitDialog()				// Displayfarbe des Statistic-Dialoges Oem-spezifisch			
+
+Weitere OEM-Spezifische Programmteile:
+
+	- Mainframe.cpp
+		- SetWindowSize1pX()			// Bei OemAlarmCom und 4 sichtbaren Fenstern werden
+										// diese im 2x2 Modus angezeigt

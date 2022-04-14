@@ -1,0 +1,64 @@
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+23.02.04 GF	- Feature: Ausgehende Verbindungen wahlweise mit B-Kanal-Beschraenkung
+18.02.04 GF	- Bugfix connect_req : LISTEN_ALL bzw. LISTEN_REJECTALL wurde als CallingPartyNumber an CAPI übermittelt, muss dann aber leer sein
+14.11.03 GF	- Bugfix CLimitedString, Pointer war nicht initialisiert
+29.10.03 GF	- Unicode Umstellung
+20.11.02 GF	- 20main.cpp DLL-Funktionen vorgezogen und Trace bei LoadDll() erweitert
+11.10.02 GF	- CAbstractCapiClient erweitert:
+				virtual void OnCapiGetMessageError()
+				Diese Funktion wird aufgerufen, wenn CAPI_GET_MESSAGE einen Fehler zurückliefert.
+				Das bedeutet immer, dass die Applikation nicht ordnungsgemäß mit der CAPI zusammenarbeitet
+07.10.02 GF	- Das verborgene Fenster wird jetzt im Parent-Destructor zerstört und UnregisterClass aufgerufen,
+			  um die Capi mehrfach aus einer Applikation heraus initialisieren zu können.
+04.09.02 GF	- OnUserBusy wird jetzt bei BUSY aufgerufen
+02.04.01 GF	- WK_TRACE bei Fehlern in WK_TRACE_ERROR geändert
+			- einzelne Formatierung zur besseren Lesbarkeit
+29.03.01 GF	DoCapiDebugTrace über (BOOL)CWK_Profile.GetInt("ISDNUnit", "CapiDebugTrace", 0)
+05.03.01 GF	Behandlung von RESET_B3 Ind und Resp eingebaut
+02.03.01 GF	WK_TRACE bei Fehlern in WK_TRACE_ERROR geändert
+
+13.9.97 SumperMake VersionLabel Test
+
+05.09.97 RawData support added in NewCreate and EnableRawData()
+
+17.8.97 CAbstractCapiClient erweitert:
+	virtual void OnCallRejected()=0;
+	virtual void OnUserBusy()=0;
+	virtual void OnUnableToConnect()=0;	// 0x34A2
+	virtual void OnInfo(WORD wInfo)=0;	// always called !
+
+	DisonnectIndication with SendInfo
+/////////////////////////////////////////
+09.05.07 HEDU	Services beim ListenRequest auf DIGITAL beschraenkt
+
+06.05.97 HEDU	Message fuer TIME_REEBOOT in common.cpp
+
+14.04.97 HEDU	NR_B_CHANNELS 3, damit PseudoKanal fuer REJECT erzeugt werden kann
+
+13.04.97 HEDU   hdrLen dropped, it's const
+				CCAPIHDR dropped unused
+				CAPI_ID, CAPI_ID{OK,FALSE) protocol dropped
+08.04.97 HEDU	SetBestChannel mit mehr Kanalwechseln
+				TIME_CHECK von 10 auf 60 Sekunden
+				Nach SetPasswort(NULL) auch 2. BKanal
+
+03.04.97 HEDU	20connind.cpp dropped now in 20main.cpp
+				hdr.h alten Mist entfernt
+01.04.97 HEDU	m_waitQ nicht mehr CDataQ sondern als CQueueBlockArray m_waitQueue
+				CQueueBlock::FillFromHeader in PutData
+
+31.03.97 HEDU	QUEUEBLOCK->CQueueBlock
+				CQueueBlockArray
+				CDataQ mit CQueueBlockArray
+				OnCallback inlined mit Aufruf von RealOnCallback
+				OnCallback 'getuned'
+
+26.03.97 CT		Große Aufräumaktion, alle WIN16 und CAPI 1.1 rausgeschmissen
+
+13.03.97 HEDU	noch mehr inlined, NUM_BCHANNELS auf 3!!!
+10.03.97 HEDU	NewCreate mit CAbstractCpiClient *
+				statt SendMessage auch m_pWrapper->OnReceiveData();
+
+10.03.97 HEDU	CIPCHDR crc daten entfernt
+10.03.97 HEDU	einige kleine Funktionen inlined
+

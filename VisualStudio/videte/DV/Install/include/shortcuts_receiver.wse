@@ -1,0 +1,240 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 67 0 68 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=STARTUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu\Programs\StartUp
+  Value Name=StartUp
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=DESKTOPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Desktop
+  Value Name=Desktop
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=STARTMENUDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu
+  Value Name=Start Menu
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=GROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu\Programs
+  Value Name=Programs
+  Flags=00000010
+end
+item: Get Registry Key Value
+  Variable=CSTARTUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%STARTUPDIR%
+  Value Name=Common Startup
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CDESKTOPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%DESKTOPDIR%
+  Value Name=Common Desktop
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CSTARTMENUDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%STARTMENUDIR%
+  Value Name=Common Start Menu
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=CGROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%GROUPDIR%
+  Value Name=Common Programs
+  Flags=00000100
+end
+item: Set Variable
+  Variable=CGROUP_SAVE
+  Value=%GROUP%
+end
+item: Set Variable
+  Variable=GROUP
+  Value=%GROUPDIR%\%GROUP%
+end
+item: Remark
+end
+item: Set Variable
+  Variable=CGROUPDIR
+  Value=%CGROUPDIR%\%APPTITLE%
+end
+item: Delete File
+  Pathname=%CGROUPDIR%\*.*
+  Flags=00001100
+end
+item: Remark
+end
+item: Compiler Variable If
+  Variable=_OEM_
+  Value=1
+end
+item: Remark
+  Text=!!! Achtung Alarmcom hat anderes Icon !!!
+end
+item: Create Shortcut
+  Source=%MAINDIR%\SecurityLauncher.exe
+  Source German=%MAINDIR%\SecurityLauncher.exe
+  Source Spanish=%MAINDIR%\SecurityLauncher.exe
+  Source Italian=%MAINDIR%\SecurityLauncher.exe
+  Destination=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination German=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination Spanish=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination Italian=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Working Directory=%MAINDIR%
+  Working Directory German=%MAINDIR%
+  Working Directory Spanish=%MAINDIR%
+  Working Directory Italian=%MAINDIR%
+  Icon Number=1
+  Icon Number German=1
+  Icon Number Spanish=1
+  Icon Number Italian=1
+  Icon Pathname=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname German=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname Spanish=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname Italian=%MAINDIR%\SecurityLauncher.exe
+  Key Type=1536
+  Key Type German=1536
+  Key Type Spanish=1536
+  Key Type Italian=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR%\SecurityLauncher.exe
+  Source German=%MAINDIR%\SecurityLauncher.exe
+  Source Spanish=%MAINDIR%\SecurityLauncher.exe
+  Source Italian=%MAINDIR%\SecurityLauncher.exe
+  Destination=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination German=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination Spanish=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination Italian=%CGROUPDIR%\%APPTITLE%.lnk
+  Working Directory=%MAINDIR%
+  Working Directory German=%MAINDIR%
+  Working Directory Spanish=%MAINDIR%
+  Working Directory Italian=%MAINDIR%
+  Icon Number=1
+  Icon Number German=1
+  Icon Number Spanish=1
+  Icon Number Italian=1
+  Icon Pathname=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname German=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname Spanish=%MAINDIR%\SecurityLauncher.exe
+  Icon Pathname Italian=%MAINDIR%\SecurityLauncher.exe
+  Key Type=1536
+  Key Type German=1536
+  Key Type Spanish=1536
+  Key Type Italian=1536
+  Flags=00000001
+end
+item: Compiler Variable Else
+end
+item: Create Shortcut
+  Source=%MAINDIR%\SecurityLauncher.exe
+  Source German=%MAINDIR%\SecurityLauncher.exe
+  Source Spanish=%MAINDIR%\SecurityLauncher.exe
+  Source Italian=%MAINDIR%\SecurityLauncher.exe
+  Destination=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination German=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination Spanish=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Destination Italian=%CDESKTOPDIR%\%APPTITLE%.lnk
+  Working Directory=%MAINDIR%
+  Working Directory German=%MAINDIR%
+  Working Directory Spanish=%MAINDIR%
+  Working Directory Italian=%MAINDIR%
+  Icon Number=0
+  Icon Number German=0
+  Icon Number Spanish=0
+  Icon Number Italian=0
+  Key Type=1536
+  Key Type German=1536
+  Key Type Spanish=1536
+  Key Type Italian=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR%\SecurityLauncher.exe
+  Source German=%MAINDIR%\SecurityLauncher.exe
+  Source Spanish=%MAINDIR%\SecurityLauncher.exe
+  Source Italian=%MAINDIR%\SecurityLauncher.exe
+  Destination=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination German=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination Spanish=%CGROUPDIR%\%APPTITLE%.lnk
+  Destination Italian=%CGROUPDIR%\%APPTITLE%.lnk
+  Working Directory=%MAINDIR%
+  Working Directory German=%MAINDIR%
+  Working Directory Spanish=%MAINDIR%
+  Working Directory Italian=%MAINDIR%
+  Icon Number=0
+  Icon Number German=0
+  Icon Number Spanish=0
+  Icon Number Italian=0
+  Key Type=1536
+  Key Type German=1536
+  Key Type Spanish=1536
+  Key Type Italian=1536
+  Flags=00000001
+end
+item: Compiler Variable End
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%MAINDIR%\manual.pdf
+  Flags=00000100
+end
+item: Create Shortcut
+  Source=%MAINDIR%\manual.pdf
+  Source German=%MAINDIR%\manual.pdf
+  Source Spanish=%MAINDIR%\manual.pdf
+  Source Italian=%MAINDIR%\manual.pdf
+  Destination=%CGROUPDIR%\Manual.lnk
+  Destination German=%CGROUPDIR%\Handbuch.lnk
+  Destination Spanish=%CGROUPDIR%\Manual.lnk
+  Destination Italian=%CGROUPDIR%\Manuale.lnk
+  Key Type=1536
+  Key Type German=1536
+  Key Type Spanish=1536
+  Key Type Italian=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Else Statement
+end
+item: End Block
+end

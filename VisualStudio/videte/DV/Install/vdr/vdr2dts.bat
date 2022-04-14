@@ -1,0 +1,1 @@
+v:\bin\tools\MakeUpdateDisk.exe d:\install\vdr2dts 1 471

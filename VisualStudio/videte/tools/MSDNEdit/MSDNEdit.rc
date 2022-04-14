@@ -1,0 +1,678 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SDB_IMAGES          BITMAP  DISCARDABLE     "res\\CaraSdb.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDC_ICON_NEW            ICON    DISCARDABLE     "res\\new.ico"
+IDC_ICON_DELETE         ICON    DISCARDABLE     "res\\delete.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\MSDNEdit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MSDNEdit.ico"
+IDR_MSDNEDTYPE          ICON    DISCARDABLE     "res\\MSDNEditDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_CLEAR
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_VIEW_LARGEICON
+    BUTTON      ID_VIEW_SMALLICON
+    BUTTON      ID_VIEW_LIST
+    BUTTON      ID_VIEW_DETAILS
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Neu laden",                   ID_FILE_RELOAD
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Exportieren...",              ID_FILE_EXPORT
+        MENUITEM "Importieren...",              ID_FILE_IMPORT
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "&Löschen",                    ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "Neuer Ordner",                ID_EDIT_NEW_FOLDER
+        MENUITEM "Neue Hilfedatei...",          ID_EDIT_NEW_ITEM
+        MENUITEM SEPARATOR
+        MENUITEM "Batch Build...",              ID_EDIT_COMILE_BATCH
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Zweig aufklappen",            ID_VIEW_EXPAND_TREE
+        MENUITEM SEPARATOR
+        MENUITEM "Reg-Datei",                   ID_VIEW_REG_FILE
+        MENUITEM "Col-Datei",                   ID_VIEW_COL_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "Collection Info...",          ID_VIEW_COL_INFO
+        MENUITEM "Collection...",               ID_VIEW_COLECTIONS
+        MENUITEM "Locations...",                ID_VIEW_LOCATIONS
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über MSDNEdit...",      ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info über MSDNEdit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "MSDNEdit Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright © Videte IT 2002",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+    LTEXT           "Programmiert von Rolf Kary-Ehlers",IDC_STATIC,40,40,122,
+                    8
+END
+
+IDD_TEXT_EDIT DIALOG DISCARDABLE  0, 0, 235, 84
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Texte in der Spalte ändern"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Ändern von :",IDC_TXT_EDIT_WHAT,5,6,225,8
+    EDITTEXT        IDC_EDT_EDIT_TEXT,5,38,225,14,ES_AUTOHSCROLL
+    LTEXT           "Anzahl der gewählten Zeilen:",IDC_STATIC,5,21,94,8
+    DEFPUSHBUTTON   "Ok",IDOK,5,58,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,180,58,50,14
+    LTEXT           "",IDC_TXT_NO_OF_SELECTED,101,21,129,8
+    CONTROL         "Text löschen",IDC_CK_DELETE_TEXT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,83,60,57,10
+END
+
+IDD_COMPILE_BATCH DIALOGEX 0, 0, 235, 214
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Dateien Kompilieren"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Ok",IDOK,180,5,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,180,55,50,14
+    CONTROL         "List2",IDC_COMPILE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,5,169,155
+    PUSHBUTTON      "Build All",IDC_BUILD_ALL,180,36,50,14
+    LTEXT           "Compiler : ",IDC_STATIC,5,171,34,8
+    EDITTEXT        IDC_EDT_COMPILER_PATH,45,168,171,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "..>",IDC_SELECT_COMPILER,215,168,15,14
+    LTEXT           "Komandos:",IDC_STATIC,5,186,36,8
+    EDITTEXT        IDC_EDT_COMPILER_COMMANDS,45,183,185,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Löschen",IDC_DELETE_FILE,180,146,50,14
+    LTEXT           "",IDC_TXT_COMPILING_FILE,45,202,185,8
+    LTEXT           "Kompiliere",IDC_STATIC,5,202,35,8
+END
+
+IDD_COLLECTIONS DIALOG DISCARDABLE  0, 0, 235, 43
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Collections"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Nummer:",IDC_STATIC,5,6,35,8
+    EDITTEXT        IDC_COL_EDT_NUMBER,45,3,55,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_COL_EDT_NUM,119,3,25,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_COL_SPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_HORZ | 
+                    UDS_NOTHOUSANDS,145,3,27,14
+    LTEXT           "Pfad:",IDC_STATIC,5,25,35,8
+    EDITTEXT        IDC_COL_EDT_PATH,45,22,183,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "new",IDC_BTN_COL_NEW,190,3,15,14,BS_ICON
+    PUSHBUTTON      "delete",IDC_BTN_COL_DELETE,213,3,15,14,BS_ICON
+END
+
+IDD_LOCATIONS DIALOG DISCARDABLE  0, 0, 235, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Locations"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Nummer:",IDC_STATIC,5,6,35,8
+    EDITTEXT        IDC_LOC_EDT_NUMBER,45,3,55,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LOC_EDT_NUM,115,3,25,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_LOC_SPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_HORZ | 
+                    UDS_NOTHOUSANDS,140,3,27,14
+    LTEXT           "Pfad:",IDC_STATIC,5,66,35,8
+    EDITTEXT        IDC_LOC_EDT_PATH,45,63,183,14,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,5,26,35,8
+    EDITTEXT        IDC_LOC_EDT_NAME,45,23,183,14,ES_AUTOHSCROLL
+    LTEXT           "Titel:",IDC_STATIC,5,46,35,8
+    EDITTEXT        IDC_LOC_EDT_TITLE,45,43,183,14,ES_AUTOHSCROLL
+    LTEXT           "Volume:",IDC_STATIC,5,86,35,8
+    EDITTEXT        IDC_LOC_EDT_VOLUME,45,83,183,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "new",IDC_BTN_LOC_NEW,190,3,15,14,BS_ICON
+    PUSHBUTTON      "delete",IDC_BTN_LOC_DELETE,213,3,15,14,BS_ICON
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "Programmiert von Rolf Kary-Ehlers\0"
+            VALUE "CompanyName", "Videte IT\0"
+            VALUE "FileDescription", "MFC-Anwendung MSDNEdit\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "MSDNEdit\0"
+            VALUE "LegalCopyright", "Copyright © Videte IT 2002\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "MSDNEdit.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Anwendung MSDNEdit\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TEXT_EDIT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 45
+        VERTGUIDE, 50
+        VERTGUIDE, 230
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+    END
+
+    IDD_COMPILE_BATCH, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 40
+        VERTGUIDE, 45
+        VERTGUIDE, 174
+        VERTGUIDE, 230
+        HORZGUIDE, 5
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 206
+    END
+
+    IDD_COLLECTIONS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 40
+        VERTGUIDE, 45
+        VERTGUIDE, 228
+        HORZGUIDE, 10
+        HORZGUIDE, 29
+    END
+
+    IDD_LOCATIONS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 40
+        VERTGUIDE, 45
+        VERTGUIDE, 228
+        HORZGUIDE, 10
+        HORZGUIDE, 30
+        HORZGUIDE, 50
+        HORZGUIDE, 70
+        HORZGUIDE, 90
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "MSDNEdit\n\nMSDNEDIT\nDateityp Help Collection (*.col)\n.col\nMSDNEdit.Document\nMSDNEd Document"
+    IDR_MAINFRAME2          "MSDNEdit\n\nMSDNEDIT\nDateityp Doc Compilation(*.dat)\n.dat\nMSDNEdit.Document\nMSDNEd Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "MSDNEdit"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+    IDS_IMPORT_FILE         "Daten Importieren"
+    IDS_EXPORT_FILE         "Daten Exportieren"
+    IDS_LIST_HEAD_MODULE    "Modul"
+    IDS_LIST_HEAD_CHM_PATH  "chm Pfad"
+    IDS_LIST_HEAD_CHI_PATH  "chi Pfad"
+    IDS_LIST_HEAD_QUERY_LOC "Suchpfad"
+    IDS_LIST_HEAD_COL_NUM   "Collection Nummer"
+    IDS_LIST_HEAD_LOC_REF   "Referenz"
+    IDS_LIST_HEAD_VERSION   "Version"
+    IDS_LIST_HEAD_LAST_PROMPT_VERSION "Zuletzt veröffentlichte Version"
+    IDS_LIST_HEAD_TITLE_SAMP_LOC "Titel Bsp"
+    IDS_LIST_HEAD_TITLE_QUERY_LOC "Titel Suchpfad"
+    IDS_LIST_HEAD_TITLE_SUPPORT_MERGE "Unterstützung"
+    IDS_LIST_HEAD_LANGID    "Sprache"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt ein neues Dokument.\nNeu"
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter"
+    ID_FILE_PAGE_SETUP      "Ändert die Druckoptionen.\nSeite einrichten"
+    ID_FILE_PRINT_SETUP     "Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung"
+    ID_FILE_PRINT           "Druckt das aktive Dokument.\nDrucken"
+    ID_FILE_PRINT_PREVIEW   "Zeigt ganze Seiten an.\nSeitenansicht"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+    ID_APP_EXIT             "Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+    ID_VIEW_AUTOARRANGE     "Symbole am Raster ausrichten."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Beendet die Seitenansicht.\nSeitenansicht beenden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_SMALLICON       "Zeigt Elemente mit kleinen Symbolen an.\nKleine Symbole"
+    ID_VIEW_LARGEICON       "Zeigt Elemente mit großen Symbolen an.\nGroße Symbole"
+    ID_VIEW_LIST            "Zeigt Elemente als Liste an.\nListe"
+    ID_VIEW_DETAILS         "Zeigt Informationen über jedes Element im Fenster an.\nDetails"
+    ID_VIEW_LINEUP          "Richtet Symbole am Raster aus."
+    ID_VIEW_BYNAME          "Sortiert die Symbole alphabetisch."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_NEW_FOLDER      "Erstellt einen neuen Ordner"
+    ID_FILE_EXPORT          "Exportiert die markierten Daten"
+    ID_FILE_IMPORT          "Imortiert eine Datei und fügt Sie zu den bestehenden Daten hinzu"
+    ID_EDIT_NEW_ITEM        "Erstellt einen neuen Hilfedateieintrag"
+    ID_FILE_RELOAD          "Liest die geöffneten Dateien neu ein"
+    ID_VIEW_REG_FILE        "Öffnet den Ordner für die Registry-Datei"
+    ID_VIEW_COL_FILE        "Öffnet den Ordner für die Collection-Datei"
+    ID_VIEW_COL_INFO        "Zeigt Info über die Collection der Hilfedateien an"
+    ID_VIEW_COLECTIONS      "Zeigt die Collections der Hilfedateien an"
+    ID_VIEW_LOCATIONS       "Zeigt die Locations der Hilfedateien an"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LIST_COMPILE        "Datei(en)"
+    IDS_FILES_IMPORTED      "Es wurden %d Dateien importiert."
+    IDS_COL_INFO            "Master chm-Datei :\t\t%s\nMaster Language Id:\t%d\nSample Location:\t\t%s\nCollection Number:\t\t%d\nReferenz Count:\t\t%d\nVersion:\t\t\t%d\nFind merged chms:\t\t%d"
+    IDS_SAVE_CHANGED_ITEMS  "Sollen die Änderungen übernommen werden?"
+    IDS_DELETE_ITEM         "Soll dieser Eintrag gelöscht werden?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERR_COLNOTFOUND     "Error finding MSDN collection.\nMSDN integration can only be performed on a system that\nhas the MSDN library installed. Registrypath:\nHKEY_LOCAL_MACHINE\\%s"
+    IDS_ERR_REGNOTFOUND     "The MSDN Library Installation was not found in your systems registry."
+    IDS_ERR_DATNOTFOUND     "Error finding MSDN hhcolreg.dat, MSDN integration can only be performed on a system that has the MSDN library installed, aborting."
+    IDS_ERR_CREATE_GUID     "Unable to create new GUID."
+    IDS_ERR_INIT_CHM        "Unable to update MSDN collection, .CHM path was not specified."
+    IDS_ERR_INIT_CHI        "Unable to update MSDN collection, .CHI path was not specified."
+    IDS_ERR_INIT_TITLE      "Unable to update MSDN collection, title string was not specified."
+    IDS_ERR_INIT_ID         "Unable to update MSDN collection, unique ID was not specified."
+    IDS_ERR_INIT_DAT        "Unable to update MSDN collection, hhcolreg.dat path was not specified."
+    IDS_ERR_INIT_COL        "Unable to update MSDN collection, MSDN collection path was not specified."
+    IDS_ERR_OPENFILE        "File could not be opened, cause:%d"
+    IDS_INTEGRATION_COMPLETE "Integration Complete!"
+    IDS_REMOVAL_COMPLETE    "Integration Removal Complete!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MSDN_KEY            "Software\\Microsoft\\HTML Help Collections\\Developer Collections"
+    IDS_OLD_DAT             "%s\\Help\\hhcolreg.dat"
+    IDS_NEW_DAT             "%s\\Documents and Settings\\All Users\\Application Data\\Microsoft\\HTML Help\\hhcolreg.dat"
+    IDS_NEWER_DAT           "%s\\Microsoft\\HTML Help\\hhcolreg.dat"
+    IDS_REGISTRY            "<DocCompilation>\n\t<DocCompId value=""%s""/>\n\t<DocCompLanguage value=%s/>\n\t<LocationHistory>\n\t\t<ColNum value=%s/>\n\t\t<TitleLocation value=""%s""/>\n\t\t<IndexLocation value=""%s""/>\n\t\t<LocationRef value=""""/>\n\t\t<Version value=%s/>\n\t\t<LastPromptedVersion value=0/>\n\t\t<TitleSampleLocation value=""""/>\n\t\t<TitleQueryLocation value=""""/>\n\t\t<SupportsMerge value=0/>\n\t</LocationHistory>\n</DocCompilation>\n"
+    IDS_COLLECTION          "\t\t<Folder>\n\t\t\t<TitleString value=""%s""/>\n\t\t\t<FolderOrder value=2/>\n\t\t\t<Folder>\n\t\t\t\t<TitleString value=""=%s""/>\n\t\t\t\t<FolderOrder value=1/>\n\t\t\t\t<LangId value=%s/>\n\t\t\t</Folder>\n\t\t</Folder>\n"
+    IDS_GUID                "{%08lX-%04X-%04x-%02X%02X-%02X%02X%02X%02X%02X%02X}"
+    IDS_CHI_FILTER          "Chi Files (*.chi)|*.chi|All Files (*.*)|*.*||"
+    IDS_CHM_FILTER          "Chm Files (*.chm)|*.chm|All Files (*.*)|*.*||"
+    IDS_ERR_TITLE           "Error During Integration"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDT_COMPILER_PATH   "Pfad für den Hilfedatei Compiler"
+    IDC_EDT_COMPILER_COMMANDS 
+                            "Komandos : [-chk] [-all] [-noshow] [-w1|-w2|-w3]"
+    IDC_DELETE_FILE         "Löscht die selektierten Listeneinträge"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_COMPILE_LIST        "Neuer Eintrag mit Doppelklick"
+    IDC_BUILD_ALL           "Compiliert alle selektierten Dateien"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOK                    "Schließt das Dialogfeld und übernimmt alle Einstellungen"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\MSDNEdit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

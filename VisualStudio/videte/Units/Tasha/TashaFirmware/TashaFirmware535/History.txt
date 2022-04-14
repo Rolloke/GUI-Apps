@@ -1,0 +1,261 @@
+History
+-------
+
+Evtl. folgendes ausprobieren:
+
+	- artsuper.asm und pll_init.asm aus dem Projekt entfernen
+
+	- artsuper.obj aus dem 21535asm_dl.ldf file entfernen.
+
+	- In dev_inittst.asm 'jump start' durch 'jump _main' ersetzen
+
+8.8.03
+	- Das bisherige LDF-File gegen ein vom ExpertLinker generiertes ausgetausct,
+	  damit alle wichtigen Bibliotheken mit hinzu gelinkt werden. Der Elfloader
+	  kommt nun (dank eines Updates?!) auch damit zu recht. Die Kommunikation
+	  mit der tashaUnit über die ReceiveMessageQueue und der SendMessageQueue scheinen
+	  gut zu funktionieren. Die TimerInterruptroutine läuft und schickt derzeit zum Test
+	  400 Packete/Sekunde an die TashaUnit. 
+
+12.08.03
+	- Eine SPORT Empfangsroutine (ISR/DMA) eingebaut, aber mangels Sender noch nicht
+	  getestet.
+	  
+13.08.03
+	- Um Speichersegmente außerhalb des L2 zu nutzen (z.B. im SDRAM), muß
+	  beim erzeugen des Bootimages mit Hilfe von 'elfloader.exe' ein
+	  bootkernel ausgewählt werden, da elfloader ansonsten gigabytegroße
+	  bootimages erzeugt. Warscheinlich ermittelt elfloader alle vorhandenen
+	  Adressen der Speichersegmente und generiert dann ein Bootimage, welches
+	  von der kleinsten verwendeten bis zur größten verwendeten Adresse reicht.
+	  Also bei Verwendung von SDRAM von 0x00000000....0xf000xxxx
+	  
+	 - Das Problem ist das die Api Funktion 'mdsBoardDownLoad' anscheinend keine
+	  bootimages verarbeitet, die einen bootloader enthalten. Sie lädt dieses zwar
+	  ohne Fehlermeldung, schaut man dann aber mit dem VisualDSP Studio
+	  an Adresse 0xf0000000 ist dort kein außführbares Programm enthalten!
+
+14.08.03
+	- MemoryDMA funktioniert. Die Funktion 'MemCopyDma(pDst, pSrc, dwLen)' kopiert per
+	  DMA die Daten von 'pSrc' nach 'pDest'
+
+15.08.04
+	- Innerhalb der SPORT0_RX_ISR erfolgt nun folgendes:
+		- Die ISR-Routine wird aufgerufen, wenn 16KByte Daten über den SPORT0
+		  eingetroffen sind.
+		- 'DemultiplexSPORTChannels' demultiplext die eingetroffenen Daten und verteilt
+		  sie in die 8 jeweils 2KByte großen Buffer im L1.
+		- 'MultiChannelCopy' kopiert nun per MemoryDMA die Daten aus den 8 L1-Buffern in
+		  die jeweiliegen Framebuffer im SDRAM/PCI. Jeder der 8 Framebuffer hat eine
+		  größe von 64KByte. Sind alle 8 Framebuffer gefüllt, wird die TashaUnit darüber
+		  informiert. Diese kann die Bilddaten dann abholen und weiter verteilen.
+	
+	- Einschränkungen bislang:
+		- 'DemultiplexSPORTChannels' ist derzeit um den Faktor 10 zu langsam. Sie ist
+		  komplett in 'C' geschrieben und sehr universell (Channelbreite, Anzahl der Kanäle,
+		  Buffergrößen lassen sich frei einstellen)
+		- Der Framebuffer, der bislang zum Transport der Bilddaten zur TashaUnit gedacht
+		  war, fast derzeit nur 50KByte und nicht die notwendigen 512KByte. Da der Transport der
+		  Daten mittels der Funktion 'mdsBoardReadMemory' aber ohnehin viel zu langsam ist.
+		  wird er vorraussichtlich über eine Art 'MultiChannelCopy'-Funktion über den PCI-Bus
+		  in den Speicher des PCs erfolgen. (Ich hoffe so etwas geht)
+		
+18.08.03
+	- Die Assemblerversion zum demultiplexen ist um den Faktor 80 schneller als die
+      universelle 'C'-Funktion. Sie benötigt ca 75ys zum demultiplexen von 8KByte Daten
+      in 4 Kanäle. Sie ist damit mehr als schnell genug!!
+		  
+20.08.03
+	- Der Rückkanal über den PCI-Bus funktioniert. Dazu legt die TashaUnit mit Hilfe von
+	  'HACCAllocFramebuffer' einen Framebuffer von 4*64KByte an und übermittelt dessen
+	  physikalische Adresse dem Blackfin, der dann die Basisadresse des PCI-MemorySpace (PCI_MBAP)
+	  entsprechend setzt.
+
+01.09.03
+	- Framework für die SPI-Kommunikation ist integriert.
+
+03.09.03
+	- Den SPI1 mit einer kurzschlußbrücke getestet. Funktioniert!
+	  Nach dem manuellen Senden des Kommandos über den SPI1 werden 
+	  solange weitere Packete vom Typ 'TMM_WAIT_FOR_SPI_CONFIRM'
+	  an den Slave verschickt, bis dieser mit einem Confirm reagiert.
+
+08.10.03
+	- Das Sammeln der Daten im SRAM bis ein Bild komplett ist, hat sich als ungünstig erwiesen.
+	  Der Transport von 4*64KB=265KB blockiert die SPORT-ISR des BF535 zu lange. Dadurch gehen Daten
+	  die währenddessen über den SPORT eintreffen verloren. Folge: Das Bild wandert vertikal aufwährts.
+		- Lösung:
+			- Sobald 4KByte Daten von einem SPORT eingetroffen sind, werden diese Demultiplext, und
+		  	  sofort über den PCI-Bus in die entsprechenden Framebuffer übertragen.
+		  	- Um zu verhindern, daß der DMA-Controler die Daten überschreibt, bevor die TashaUnit
+		  	  sie abgeholt hat, wird hier mit zwei Sätzen von Buffern gearbeitet. Der DMA-Controler
+		  	  schreibt in BufferA, während die TashaUnit aus BufferB liest.
+			- Um zu verhindern, das während des demultiplexens die Daten im L1 vom SPORT-DMA
+			  überschrieben werden, wird auch hier mit zwei Buffern gearbeitet.
+		   
+16.10.03
+	- Es wird nun nur noch 1/8 der Interrupts zur PC-Seite hin ausgelöst.
+	
+29.10.03
+	- Die Programierung des Alteras funktioniert. Allerding darf der SPORT nicht enabled
+	  sein!?... Wenn der SPORT aktiviert ist, wird der Altera zwar korrekt programmiert,
+	  aber das pollen auf die CONF_DONE-Leitung scheitert.
+	  Es reicht in 'InitSPORTsISR' die Zeile '*pSIC_IMASK = *pSIC_IMASK | SIC_MASK4 | SIC_MASK6'
+	  auszukommentieren!?
+
+03.11.03
+	- Die Funktionalität de BF533-Bootvorganges implementiert.
+
+13.11.03
+	- Die Kommunikation mit den BF533er über den SPI erfolgt nun Timer-Interruptroutine sowie
+	  einer Messagequequeue pro Slave. D.h. es werden pro Slave bis zu 32 Messages entgegengenommen und
+	  innerhalb der TimerInterrupt-Routine abgearbeitet.
+	  
+19.11.03
+	- Das Booten des BF533 über den SPI funktioniert!! Der BF535 emuliert dabei das EEProm
+
+20.11.03
+	- Lesen und Schreiben des EEProms über SPI1 implementiert.
+
+03.12.03
+	- Die CoreTimer-ISR in SPICommunication durch TIMER1 mit niedriger Priorität ersetzt
+	
+	
+07.01.04
+	- Folgende Funktionen hinzugefügt (Bisher nur Dummyfunktionen)
+		BOOL OnRequestSetAnalogOut(DWORD dwCrosspointMask);
+		BOOL DoConfirmSetAnalogOut(DWORD dwCrosspointMask);
+		
+		BOOL OnRequestGetAnalogOut();
+		BOOL DoConfirmGetAnalogOut(DWORD dwCrosspointMask);
+		
+		BOOL OnRequestSetTermination(BYTE byTermMask);
+		BOOL DoConfirmSetTermination(BYTE byTermMask);
+		
+		BOOL OnRequestGetTermination();
+		BOOL DoConfirmGetTermination(BYTE byTermMask);
+		
+		BOOL OnRequestSetEnableVideo(BOOL bState);
+		BOOL DoConfirmSetEnableVideo(BOOL bState);
+		
+		BOOL OnRequestGetEnableVideo();
+		BOOL DoConfirmGetEnableVideo(BOOL bState);
+		
+		BOOL OnRequestGetEnableCrosspoint();
+		BOOL DoConfirmGetEnableCrosspoint(BOOL bState);
+
+09.01.04
+	- SlaveSelect und BF533 Reset wird bei der Tasha über den Altera gesteuert.
+	
+12.01.04
+	- EEProm Zugriff erfolgt bei der Tasha über SPI0
+	- CS-Leitung des EEProms auf PF10 geändert.
+	- Zugriffsfunktion auf den Crosspoint über SPI0 implementiert.
+	- Relayregister werden über den Altera beschrieben
+	- Alarminputregister werden nun über den Altera gelesen.		
+
+13.01.04
+	- 25Hz Altera clock über Timer2 realisiert.
+
+16.01.04
+	- Booten des BF533 funktioniert nun. MISO wird nun auf High gehalten (*pSPI1_TDBR = 0xff), bis
+	  die das Readkommando und die 16Bit Leseadresse empfangen wurde.
+	- Slaveselect bei der SPI-Kommunikation erfolgt nun über den Altera
+	- Alarmeingänge können abgefragt werden.
+	- Terminierung ist schaltbar
+	
+27.01.04
+	- DoNotifyAdapterSelectStateChanged implementiert
+	- DoNotifyPCKeysStateChanges implementiert
+	
+30.01.04
+	- Die defekten Bilder bei höherer CPU Auslastung treten nun nicht mehr auf. Der
+	  Grund war ein zugeringer Timeout wert in 'SendMessage' Der Timeout beträgt nun 100ms
+	  anstatt 10ms
+	- Das Resetproblem nach einem Crosspoint Zugriff wurde durch kappen der MISO-Leitung zwischen
+	  BF535 und Crosspoint gelöst.
+
+04.03.04
+	- 'WaitUntilMemCopyDmaCompleted' enthält nun einen Timeout, damit das Programm auf jedenfall
+	  fortgesetzt wird.
+	- while-Schleife in 'PostMessage' entschärft
+
+31.03.04
+	- Bugfix: In die Prüfsumme darf das Pendingfeld nicht mit einfließen.
+	
+08.04.04
+	- Bugfix: Der Transfer der permanenten Maske erfolgt nun über 8 MASK_STRUCT-Buffer im L2
+	          und nicht mehr über den PC-Speicher.          
+	- Bugfix: Im DATA_PACKET ist nun am Beginn ein Dummy DWORD, da die ersten Bytes häufig
+	          von Übertragungsfehlern betroffen waren. Zuvor stand dort der Startmarker. War
+	          dieser von einem Übertragungsfehler betroffen, so wurde das Frame nicht erkannt.
+	- Vor dem Beenden der Firmware wird der Altera und der BF535 resetet.
+	
+14.04.04
+	- WaitMicro nun auf 64Bit umgestellt, dadurch muß der 'cycle'-Counter nicht 'genullt' werden.
+	- Die TashaUnit wird nun darüber informiert wenn ein DSP mehrfach in Folge kein Confirm auf einen
+	  Request sendet. Die TashaUnit hat dann die Möglichkeit den jeweiligen DSP neu zu booten.
+	  
+19.04.04
+	- Bugfix: WriteToEEPromX konnte bislang nur ab Adresse '0' schreiben.
+			  Nun funktioniert auch der Wahlfreie Zugriff aufs EEProm, und damit auch
+			  die Donglefunktionalität
+
+21.04.04
+	- Im Header TashaTimer.h sind nun Funktionen zur genauen Zeitsteuerung.
+
+22.04.04
+	- In der ISR 'MessageCallback' wird nun 'SAVE_USER_REGS' vor dem Anlegen der
+	  lokalen Variablen ausgeführt. Seitdem wird der Cyclecounter korrekt behandelt und
+	  die Waitfunktionen basierend auf der CInt64 Klasse arbeiten korrekt.
+	
+26.04.04
+	- Der '/= Operator der CInt64 Klasse scheint nicht immer korrekte Ergebnisse zu liefern,
+	  daher sollen die GetTime und GetTimeSpan-Funktion ebenfalls bis auf weiteres gemieden
+	  werden.
+
+27.04.04
+	- Die SPI-Kommunication und der SPORT-Datentransfer über den PCI-Bus wird während
+	  eines EEProm Zugriffs gesperrt.
+	
+30.04.04
+	- Wenn ein BF533 bootet, wird der 'g_i64LastSlaveResponseTime'- Timer zuvor zurückgesetzt,
+	- 'BF533LastResponseTime wird beim Start initialisiert'
+	- HandleSPICommunication() wird nun anstatt alle 100ys alle 1000ys bearbeitet. Dadurch
+	  scheint die SPI-Kommunikation sicherer zu sein.	
+
+06.05.04
+	- 'Emulate24BitEEProm' besitzt nun einen Timeout, der nach einigen Sekunden zum Abbruch führt, wenn
+	  der Bootvorgang zu keinem Ende kommt.
+	- Bugfix: 'sti R5' in 'Emulate24BitEEProm' ohne vorheriges 'cli R5'
+	- Da die Message 'TMM_NOTIFY_SLAVE_INIT_READY' des öfteren falsche Slavenummer enthielt, wird
+	  diese nun vom BF535 durch die korrekte ersetzt.
+
+27.05.04
+	- Das Booten der BF533 komplett neu implementiert. Die BF533 sind nun Slaves und der
+	  BF535 der Master. Daduch kann der SPI mit bis zu 30MHz betrieben werden. Zuvor 500Khz.
+	- Beim Übertragen der permanenten Maske wird der Slave nur einmal vor dem Datenblock
+	  selektiert, und nicht bei jedem Datenwort.
+
+08.06.04
+	- Bugfix: Die Tasha übernahm nicht die Kontrolle des Reset/Power-Buttons
+
+18.06.04
+	- Neues Kommando (TMM_REQUEST_NEW_FRAME/TMM_CONFIRM_NEW_FRAME) hinzugefügt. Der 2.Stream (StrewamID=1)
+	  liefert nun nur nach dem Erhalt dieses Kommandos genau ein neues Frame!
+
+24.01.05
+	- Idip5Bugfix714: Alarmedge wurde nicht berücksichtigt.
+
+31.01.05
+	- Neue SPI-Kommandos (TMM_REQUEST_SET_NR, MM_REQUEST_GET_NR) zum
+	  aktivieren/deaktivieren und abfragen des temporalen NR-Filters.
+	  hinzugefügt.
+
+02.02.05
+	- DoRequestTriggerWatchdog reicht nun das WatchdogTimeOut in Sekunden an die BF535,
+	  somit läßt sich nun wie bei den anderen Boards die Zeitspanne verändern. (-1=Disable)
+	- DoRequestEnableWatchdog enthält nun nicht mehr den WatchdogtimeOut.
+
+10.02.05
+	- SPI1_BOOTBF533_BAUDRATE von 10MHz auf 5MHz verringert.

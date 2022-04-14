@@ -1,0 +1,11 @@
+03.03.04 RKE - Timer in PushSource entfernt, wird nicht von allen Systemen akzeptiert.
+			   Time Variablen werden beim ersten SyncPoint (2) neu initialisiert.
+02.03.04 RKE - Timer in PushSource eingebaut. Wenn die Ausgabe hängt kann der Thread getriggert werden.
+05.12.03 RKE - Tracefunktion ueber PostMessage(..) an Parentmodul eingebaut
+			 - Time scheduling verbessert
+			 - Ueberpruefung und korrektur der ermittelten Samplezeiten, um zu verhindern,
+			   dass ein nachgeschalteter Renderer bis uebermorgen warten muß.
+13.10.03 RKE - Assertion für Zeitwerte eingebaut
+07.10.03 RKE - DirectShow Filter PushSource wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der aus binären Daten einen MediaSample erzeugt, der
+			   von DirectShow Filtern verarbeitet werden kann.

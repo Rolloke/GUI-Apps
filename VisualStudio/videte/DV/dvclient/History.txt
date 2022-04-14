@@ -1,0 +1,1519 @@
+07.02.00 UF - besser spät als nie
+
+16.02.00 ML - Druckoption implementiert
+		 ML - Jpeg-Export implementiert
+
+17.02.00 ML - Zoom arbeitet nun auch an den Rändern korrekt
+		 ML - HTML-Export implementiert.
+		 ML - Für Kameras ohne MD lassen sich auch keine Alarm- und Masken-
+		      sensibilität einstellen.
+		 ML - Kameras, die nicht vorhanden sind und die auch kein Archiv besitzen
+			  lassen sich nun auch nicht mehr über den Zehnerblock anwählen.
+
+18.02.00 ML - Fadenkreuz berücksichtigt nun auch den Zoom korrekt
+02.03.00 UF - neue Darstellungsmodi Full, XxX, 1pX
+			- einige Bugfixes in der Darstellung
+			- Lock Modus
+			- letzte Alarmzeit wird im LiveWindow gespeichert
+03.03.00 ML - Export Button abhängig von Laufwerk
+			- Druck Button abhängig von Drucker
+			- Export auf dem ersten Wechselmedium
+25.04.00 UF - bei FF oder FB wird jetzt bei MD zum nächsten
+			  Referenzbild gesprungen
+25.04.00 ML - Das aktive Bild wird nun durch die Titelzeile hervorgehoben
+26.04.00 ML - Wird ein Playwindow geöffnet, so wird immer zum letzten Bild
+			  gesprungen.
+27.04.00 GF	- Umgestellt auf Sprach-Dll, z.Z. Deu und Enu
+05.05.00 ML - Beim Export wird nun das erste Wechselmedium indem sich auch ein Medium
+			  befindet verwendet.
+11.05.00 UF	- Oem und Sprach DLL werden jetzt in die autorun.inf beim
+			  Sichern geschrieben.
+			  und in der Readonly Version auch wieder geladen.
+12.05.00 UF	- Die Button Links/rechts und Oben/unten sind jetzt in ihrer
+			  Bedeutung vertauscht
+
+17.05.00 UF+ML - Suche/Play .. auf das letzte aufgenommene Bild
+				 korrigiert
+17.05.00 UF - Der Title war bei 1+17 beim PlayWindow immer noch zu lang.
+			  Jahreszahl weggelassen.
+17.05.00 UF	- Bugfix Suche
+18.05.00 ML - Temporäres Paßwort zum herunterfahren auf Systemebene
+			- Bugfix: Nach einem Neustart wird wieder in die NT-Oberfläche gebootet!!
+25.05.00 TKR- Daten sichern auf CD-Rom eingebunden. Noch nicht voll funktionsfähig.
+25.05.00 UF - Das Navigieren auf das letzte Bild einer Sequenz geht jetzt.
+			  Mit enum direkt aufs letzte gespeicherte Bild!
+26.05.00 ML - Vor der Ausgabe der Druck/Export-Erfolgsmeldung muß ein evtl. laufender
+			  Scrollthread beendet werden, da ansonsten die Meldung nicht erscheint.
+26.05.00 TKR- Finalisieren klappt. Es fehlt nur noch eine Zeitanzeige, wie lange das
+			  Finalisieren schon dauert. 
+			  Formatieren klappt noch nicht ganz.
+29.05.00 ML - Bugfix die Eingabe von 'aaaaaaaa' ergab einen negativen TimeSpan, der
+			  als gültiges temporäres Paßwort interpretiert wird (<1800Se.).
+30.05.00 UF - CD Ein/ausgabe wird in Shell Oberfläche behandelt
+			- Bugfix CD Wiedergabe bei einer Camera.
+			- Anzeige für keine Bilder gefunden.
+31.05.00 ML - Bugfix: Von ausgefallenen Kameras lassen sich keine Alarmbilder auslagern
+			  und keine Alarmbilder löschen.
+			- Das Temoräre Paßwort und das Masterpaßwort werden nur im Shellmodus ausgewertet.
+			  Das neue Paßwort 'shellmode' wird nur im Systemmodus ausgewertet. Es wechselt
+			  vom Systemmodus wieder in den Shellmodus.
+02.06.00 UF - Backup Bestaetigung vom Server korrigiert.
+			- Bugfix Wiedergabe letztes Bild einer Sequenz und 3 mal Suche Button
+06.06.00 ML - Im Shellmode läßt sich nun durch Eingabe von 'startlogview' bzw.
+			  'startexplorer' Logview.exe bzw. Explorer.exe starten.
+07.06.00 ML - Im Druckertooltip wird nun der ausgewählte Drucker angezeigt.
+07.06.00 TKR- Backup und Finalisieren einer CD-R funktioniert. Finalize Progress Dlg
+			  wird immer vom Desktop entfernt. Nach erfolgreichem Finalize wird
+			  CD-R nach 5 Sekunden Wartezeit ausgeworfen. Alle angestossenen Prozesse
+			  "Formatieren", "Finalisieren" und "Eject" (Auswerfen der CD-R) laufen
+			  in einem eigenen Thread. Beendigung dieser Thread automatisch durch
+			  Windows, wenn die jeweils angestossenen Prozesse ausgeführt wurden.
+08.06.00 UF	- Menubefehle auf Wiedergabefenster, die nicht möglich sind,
+			  werden ignoriert, so kann kein doppeltes Backup gestartet werden.
+09.06.00 ML - Bugfix: Keyboard Dialog konnte sich links außerhalb des Fensters öffnen,
+			  wenn das Panel sich ganz links befand.
+			- Bugfix: Das Create auf den MinumizeDlg darf nur einmal in 'OnInitDialog'
+			  erfolgen und nicht in 'LoadMenus'
+09.06.00 TKR- Fehler wurde abgefangen, wenn ein defekter Rohling eingelegt wird.
+13.06.00 ML - Die Klasse CExportDlg dem Projekt hinzugefügt. Hier lassen sich die
+			  Exportparameter 'Kameranummer' und Zeitraum einstellen. Aufgerufen wird
+			  der Dialog über den Exportbutton, wenn keine Diskette im Laufwerk 'A' oder
+			  'B' steckt und ein anderes Exportmedium am DV angeschlossen ist, indem
+			  sich ein Medium befindet.
+13.06.00 TKR- Fehler von PacketCD entdeckt. Was kann man machen, wenn PacketCD einen
+			  Rohling nicht erkennt und sich im Remount-Prozess aufhängt?
+			  Lösungsansatz gefunden. Den User die CD-R per Hand rausnehmen lassen.
+			  Nach Einlegen einer neuen CD-R sollte der 'alte' Remount-Prozess von
+			  PacketCD beendet werden. Klappt meist auch, aber wenn nicht, läßt sich
+			  der DVClient nicht mal mehr mit Taskmanager (unter NT) beenden.
+			  Wird leere CD-R erkannt, klappt alles wunderbar. Formatieren, Brennen
+			  und Finalisieren!		
+14.06.00 TKR- Alle 'alten' Remount-Prozesse werden von PacketCD beim Rausnehmen einer
+			  CD-R nicht automatisch beendet. Das ganze System wird blockiert.
+			  Lösungsansatz2: Den Remount-Thread mit TerminateThread abschiessen.
+			  Ist CD-R i.O. und wird zu Beginn als 'leer' erkannt, funktioniert das
+			  Bachup einwandfrei.
+15.06.00 TKR- Zu lange dauernde Remounts werden jetzt per Terminate() aus WK_Thread
+			  beendet. 
+16.06.00 TKR- Probleme mit dem Beenden von zu lange dauernden Remount gibt es auch
+			  mit Terminate(). Diese Probleme entstehen aber nur, wenn der Windows
+			  Explorer zur Laufzeit von DTS geöffnet ist. Da in der Shell nur
+			  DTS allein läuft, gibt es dort auch keine Remount-Probleme.
+20.06.00 UF - Bugfix Kamera Nr, beim Activity Backup			   	  
+			- Bugfix Read Only Version, Track Funktionen
+21.06.00 UF - Bugfix kein Lock / Shutdown mehr während eines Backups
+22.06.00 UF - Beim abpielen dreht sich jetzt eine CD
+			- Bugfix Ist die Start- gleich Endzeit, wird das Backup nicht gestartet.
+			- Bugfix Backup die Eingabe nicht existierender Kameras ist nicht mehr möglich
+			- Bugfix Bei Sperren der Gerätes fliegt der Client in Addr.0x00419451 weg
+			- Bugfix Am Ende der fast forward/backward Funktionen erscheint 
+			  jetzt eine Meldung.
+			- Bugfix Wird nach einem Zeitpunkt gesucht, 
+			  der nach dem zuletzt gespeicherten Bild liegt, 
+			  wird die Fehlermeldung jetzt sofort angezeigt.
+			- Eject geht jetzt auch, wenn keine Bilder aufgenommen wurden.
+30.06.00 ML - CheckMenuPos ist nun vom Panel in COSMenu gewandert und protected.
+			- CheckMenuPos wird nicht mehr extern aufgerufen, sondern nur aus COSMenu,
+			  immer dann wenn ein Menüeintrag disabled wird. Dadurch ist es nun nicht mehr
+			  möglich auf Menüeinträge zu stehen, die disabled wurden.
+			- Sind alle Submenüeintrag eines Menütitels disabled, so disabled COSMenu
+			  automatisch den zugehörigen Menütitel.
+			- Wird ein Submenüeintrag enabled, so enabled COSMenu automatisch den zugehörigen
+			  Menütitel.
+			- Bugfix: Alarmarchive können nur ausgelagert werden, wenn sie auch gelöscht
+			  werden können, sprich wenn sie Bilder enthalten.
+12.06.00 UF - Prüfsummenfehler bzw. manipulierte Bilder werden im Client angezeigt.
+13.06.00 UF - der Power Button ist jetzt immer an
+24.07.00 TKR- Die Funktion CD-R brennen wurde komplett aus dem DVClient ausgelagert. 
+			  Es existiert nu´n ein eigenes Projekt "RemoteCD", welches alle zum
+			  CD-R brennen notwendigen Funktionen beinhaltet. RemoteCD und der DVClient
+			  kommunizieren über Nachrichten miteinander. Die Klasse CDRBurn wird
+			  nun nicht mehr benötigt und wurde aus dem DVClient entfernt.
+27.07.00 TKR- Das Backup funktioniert nun nur noch bei einer CD-R, die leer ist.
+			  Später soll dieses auch mit schon beschriebenen funktioneieren. Die
+			  Stellen im Quellcode, die dazu geändert werden müssen, sind schon
+			  gekennzeichnet. Auch müssen dann die Anzeigetexte geändert werden.
+			  Nach erfolgreichem Backup wird die CD-R ausgeworfen.  
+28.07.00 ML - Dritten OEM eingeführt (DResearch)
+			- Es wird nun Hersteller, Produktbezeichnung und Buildnummer unten
+			  rechts neben dem OEM-Logo dargestellt.
+31.07.00 ML - Die MSN ist bis zu 11 Stellen lang und wird nun in den ISDNUNIT\\-Zweig
+			  der Registry vermerkt.
+			- Nach einer Änderung der IP-Adresse oder der Subnetmask wird das System
+			  nun automatisch heruntergefahren.
+02.08.00 TKR- Anzeigetexte für Backup auf leeren CD-R`s wurde entsprechend angepaßt.
+			  Der gesamte Vorgang: Backup starten, leere CD-R einlegen, automatisches
+			  Formatieren, Backup erstellen, Finalisieren und anschließender Auswurf
+			  der CD-R funktioniert. Eingelegte, nicht leere CD-R werden erkannt und im
+			  Anschluß ausgeworfen.
+03.08.00 ML - Bugfix: Bei den 'InputBackup...'-InputStatis darf das Menü nicht upgedatet
+			  werden.
+03.08.00 UF - Ist die aus den Einstellungen gelesene aktive Kamera nicht vorhanden,
+			  so wird jetzt auf die erste vorhandene Kamera geschaltet.
+03.08.00 UF - Nach Änderung der MSN erfolgt jetzt ein Reset der ISDN Unit			  
+03.08.00 UF - Bei der Wiedergabe von CDs werden jetzt gleich die Daten angezeigt
+04.08.00 UF - Bugfixes Wiedergabe CD, Anordnung Fenster
+07.08.00 TKR- Anzeigetexte wurden erneut angepaßt. Zu Beginn des Backup`s wird angezeigt, 
+			  welcher Zeitraum und welche Kameras ausgewählt wurden. Zusätzlich zu jeder
+			  Kameras wird angezeigt, ob Bilder im gewählten Zeitraum existieren.
+08.08.00 ML - Der Mauscursor wird nur zum Vergrößerungsglas, wenn ein Bild zusehen ist.
+09.08.00 ML - Im Shellmode läßt sich nun durch Eingabe von 'mdconfig1' bzw.
+			  'mdconfig2' der Motiondetection-Dialog der 1. JaCob bzw. der 2. JaCob
+			  öffnen.
+09.08.00 TKR- Anzeigetexte (wo es nötig war) unterschiedlich gestaltet, in Abhängigkeit
+			  eines Alarm-Kamera-Backups bzw. eines 'normalen' Backups. 
+			  Zwei weitere Anzeigetexte implementiert, die angeizeigt werden, wenn im
+			  gewählten Zeitraum für eine Auslagerung auf CD-R keine, bzw. zu viele
+			  Bilder (mehr als 618mb) gefunden werden.
+09.08.00 ML - Das Flackern des Mauszeigers zwischen Lupe und Pfeil in der Titelzeile
+			  beseitigt.
+11.08.00 ML - Bugfix: Das Panel erhält nun auch nach einem 'rechtsklick' auf eines der
+			  Displaywindows, oder des Mainwindows, den Focus zurück.
+			- Sobald das Panel den Focus verliert (WM_ACTIVATE, WA_INACTIVE) sucht
+			  es das Vordergrundfenster. Ist dieses vorhanden und besitzt es eine
+			  Titelzeile und die Fensterklasse #32770 (Dialog), so wird es mit WM_CLOSE
+			  geschlossen. Das sollte gehen, da unsere Fenster eine eigene Fensterklasse
+			  besitzen (DVClient, DVDisplay, DVPanel), oder aber keinen Fenstertitel
+			  besitzen.
+15.08.00 TKR- Backup auf CD-R: Der Eject-Button bleibt solange aktiv, bis der Backup-Vorgang 
+			  explizit gestartet wird. Der Start erfolgt nach Erkennen einer leeren CD-R. 
+			  Solange keine CD-R eingelegt wurde, ist es durch Klicken des Eject-Buttons 
+			  möglich, den Backup-Vorgang zu beenden. Sobald eine leere CD-R erkannt wurde,
+			  wird er Eject-Button disabled.
+15.08.00 TKR- Bei Auslagerung mehrerer Kameras kann jede Kamera nur einmal angegeben werden. 
+			  Wird versucht, sie erneut einzugeben, ertönt ein Beep.
+
+16.08.00 ML - Datumseingaben werden nun genauer auf Richtigkeit überprüft. (Inklusive
+			  Schaltjahr)
+			- Die Datumsangabe und die Zeitangabe bei der Suche werden nun unmittelbar
+			  nach der Eingabe überprüft und nicht erst wenn die Suche gestartet wurde.
+16.08.00 UF - Bugfix Wiedergabe CD, es wird jetzt wenn die Wiedergabe der Kamera schon 
+			  gestartet war auch gleich auf das CD Bild gesprungen.
+16.08.00 UF - Bugfix Typenbezeichnung in Read Only Version (CD)
+			- Bugfix Symbol CD/UVV
+17.08.00 ML - Bugfix in der quadratischen Darstellung im 16 Systems des Alarmcom OEMs
+			- Bugfix Im 16. System läßt sich nun nicht mehr auf Kamera 17, 18, 19 wechseln
+22.08.00 UF - Wiedergabefenster legen den JPEG Decoder erst an, wenn auch ein
+			  Bild angezeigt wird, spart Speicher.
+23.08.00 ML - Der Regelbereich von Kontrast, Helligkeit und Farbsättigung erweitert.
+29.08.00 ML - DResearch bekommt nun ein eigenes Masterpaßwort. Siehe Quelltext
+30.08.00 ML - Bugfix: In der DResearch-Oem war der Minimize Button nicht zu sehen, und
+			  der MinimizeDialog ebenfalls nicht.
+31.08.00 ML - Der Runtimeerror Dialog und das Panel sollten gleich breit sein.
+18.09.00 GF	- Anzeige 1+3 wird bei Alarmcom durch 2x2 ersetzt, wenn XxX nicht zugelassen ist.
+			- Das Fadenkreuz ist ausschaltbar (vorbereitet: CPanel::m_bShowCross, Menu fehlt noch)
+			- Die Suchzeit wird nur noch als HH:MM eingegeben, Sekunden automatisch zu 00 angenommen.
+			- Bei der Suche werden vorher eingegebene Datum/Uhrzeit als Standardvorgabe übernommen.
+			- Suche ohne Datum und Zeit springt jetzt zum ältesten Bild
+19.09.00 GF	- Panel wird beim Splash-Screen (Start oder gesperrt)jetzt zentriert
+			  unterhalb des Logos bzw. ohne Logo zentriert im Fenster  angezeigt.
+			  Nach Eingabe der korrekten PIN wandert es in die rechte untere Ecke
+20.09.00 GF	- Menüstruktur gemäß Alarmcom-Wunsch überarbeitet
+			- Fadenkreuz ein-/ausschaltbar fertiggestellt
+			- Helligkeit, Kontrast, Farbsättigung jetzt in 1er Schritten änderbar
+21.09.00 ML - 2. PIN komplettiert.
+		    - Button zum Löschen aller Laufzeitfehler hinzugefügt.
+22.09.00 ML - Es wird nun standardmäßig quer gedruckt.
+22.09.00 GF	- Bugfix: 2x2 Darstellung bei 4 Fenstern im 1plus Mode
+22.09.00 ML - Die RuntimeErrors könnnen nun ausgedruckt werden.
+		    - Ringmechanismus für die Runtimeerrors implementiert, es werden immer die
+			  letzten 1000 angezeigt
+			- Die Displayfarbe wird für den Oem Alarmcom nach deren Wünschen dynamisch angepasst
+			- Bugfix: Wenn kein Drucker gewählt ist, darf der Druckerbutton im Runtimedialog nicht
+			  anwählbar sein.
+25.09.00 ML - Bei der Einagabe des Suchdatums/Suchzeit, ist es nun nicht mehr notwendig das vorherige
+			  Suchdatum/Suchzeit mit 'C' zu löschen, die geschieht nun automatisch.
+			- Das Verhalten der Eingabemasken etwas verändert: Ist der Eingabestring voll, so wird
+			  dieser bei dem nächsten eingegebenen Zeichen zunächst gelöscht. Dies erspart bei einem
+			  evtl. Tipfehler das drücken von 'C'
+26.09.00 ML - Die Menüpunkte 'Alarmbilder löschen', 'Alarmbilder auslagern', Verdachtsbilder anzeigen'
+			  'Verdachtsbilder löschen', 'Bilder auslagern' befinden sich nun unter dem neuen Menüzweig
+			  'Bilder'
+			- Beim Export von Einzelbildern werden nun die Dateien 'jview.exe' und 'ijl11.dll' mit
+			  auf das Medium kopiert.
+27.09.00 ML	- Neuer Menüpunkt zum Ein/Ausschalten der Timerabhängigkeit der externen Melder.
+			- Das Lesen und Setzen des Datums/Uhrzeit ist nun remotefähig.
+			- Im Menüzweig 'Kameraname ändern', läßt sich nun mit Pfeil hoch/runter die Kamera wechseln
+02.10.00 ML - Bugfix: Im ReadOnly-Modus wurde das Panel nicht in die rechte untere Ecke verschoben.
+			  Bugfix: Nach dem 'Entriegeln' war manchmal das Fadenkreuz zu sehen und verschwand erst
+			  nach einem MD-Alarm. Ursache: Die Variablen m_wMD_X, m_wMD_Y waren nicht initialisiert.
+			  Bugfix: Bei kameraspezifischen Konfigurationen (Zeitschaltuhr, Alarmkonf, Sensibilität,....)
+			  konnte bei Entriegelung die Kamera gewechselt werden.
+04.10.00 ML - Bugfix: Die Kameraauswahl über 'Pfeil hoch/runter' im 'Kameraname ändern'-Menü
+			  funktionierte nicht rückwärts über die '1'
+			- Änderung in der Funktion 'OnSetCamera'. Falls die gewünscht Kamera nicht existiert, wird
+			  versucht auf die nächstmögliche zu schalten (Aufwärts oder Abwärts)
+			- Bugfix: In der ReadOnly-Version läßt sich das System 'locken'
+			- Buffix: Die Kameraauswahl über 'Pfeil hoch/runter' im 'Kameraname ändern'-Menü schaltet
+			  nur die Livekameras durch, da nur von diesen die Namen geändert werden können.  
+09.10.00 ML - Nicht wählbare Menüeinträge werden nun nicht mehr übersprungen, sondern hell dargestellt
+			  und somit als nicht anwählbar markiert. Gleichzeitig wird der Set-Button gesperrt. 
+			  Die Klasse COSMenu hat sich dadurch vereinfacht, und der User wird nicht mehr verwirrt, das
+			  das System plötzlich zu anderen Menüeinträgen springt.
+10.10.00 TKR- Das Backup funktioniert nun auch mit dem Programm "DirectCD". 
+			  !! Vorerst nur mit Version 2.5d (02/14/00)!!
+			  Dazu wurde ein Fernsteuerprogramm "WatchCD.exe" geschrieben, welches 
+			  das Backup überwacht und DirectCD.exe fernsteuert. Die Anzeigetexte
+			  während des Backup`s sind die gleichen wie beim Backup mit PacketCD.exe. 
+			  Um auch in Zukunft ein Backup mit DirectCD.exe und neueren Brenner-Modellen
+			  zu gewährleisten, wird noch geprüft, wie stark sich die DirectCD-Version 3.01
+			  von 2.5d unterscheidet. WatchCD.exe wird dementsprechend noch angeglichen.
+10.10.00 ML - Die drei Hintergrundfarben des Panels gibt's nun bei allen Oems
+17.10.00 TKR- Das Backup funktioniert jetzt auch mit der DirectCD Version 3.01. 
+
+23.10.00 ML - Diskettenupdate nun durchführbar. 
+24.10.00 ML - Mechanismus eingebaut, der verhindert, daß andere Setupdisketten
+			  außer die vom DTS akzeptiert werden.
+24.10.00 TKR- Backup wurde erweitert auf die DirectCD Version 3.01c. Der "normale"
+			  Durchlauf beim Backup funktioniert, es müssen noch evtl. auftretende
+			  Fehler behandelt werden.
+26.10.00 ML - Auf zweifachen Wunsch hin werden nun Fehlermeldungen 2 anstatt 1 Sekunde
+			  angezeigt und von einem MessageBeep begleitet.
+26.10.00 TKR- Das Backup funktioniert nun auch mit der OEM Version von DirectCD in der
+			  Version 3.01c. Zum Backup immer darauf achten, dass V 3.01c installiert ist.
+			  In RegPfad DV\DVClient neuen Eintrag "DirectCDPath" erstellt. Er enthält 
+			  den Installationspfad von DirectCD.
+27.10.00 ML - Bugfix: Bei Eingabe einer falschen PIN hat das System periodisch versucht sich
+			  mit der falschen PIN erneut zu verbinden, so daß immer die Meldung
+			  'Geheimzahl falsch' erschient, obwohl der User keine neuen Eingaben gemacht hat.
+30.10.00 ML - Einige Hilfetexte bezüglich des Updates hinzugefügt.
+01.11.00 ML - Alle Disketten eines Disketten-Update-satzes müssen nun die gleiche Buildnummer
+			  und den gleichen Timestamp besitzen. Dadurch wird verhindert, daß eine Mischung
+			  aus mehreren unterschiedlichen Buildnummern entsteht.
+01.11.00 GF	- Bugfix: Beim Eingeben von Masken- und Alarmsensibilität wurde "Kamera:" angezeigt
+			- Bugfix: Bei fehlendem Registryeintrag für OwnMsn wurde ein Sonderzeichen angezeigt
+			- Bugfix: UpdateMenu während der Pinänderung verhinderte Eingabe
+02.11.00 GF	- Im Config-Menu erfolgt Anzeige des aktuellen Wertes mit (*) nur noch bei der
+				Eingabe, im OSD-Menu gar nicht mehr
+02.11.00 ML - Aus Platzgründen wird der Defaultwert nun mit * und nicht mehr mit (*) markiert.
+			- Die Einstellungen Helligkeit, Kontrast, Farbsättigung müssen nun, wie bei
+			  den anderen Menüpunkten auch, durch Betätigung der Eingabetaste
+			  bestätigt werden, ansonsten wird wieder die bisherige Einstellung gesetzt.
+			- Die Farbe des Störungsprotokollfensters ist nun blau.
+02.11.00 GF	- Die Einstellung Fadenkreuz an/aus muß nun ebenfalls durch Betätigung der
+			  Eingabetaste bestätigt werden, ansonsten wird wieder die bisherige Einstellung
+			  gesetzt.
+02.11.00 ML - Beim Wechsel eines Menüpunktes wird nun immer der 1. Submenüeintrag angezeigt.
+			  Dies war ein Wunsch von Alarmcom
+			- Bugfix: Der Buildnummernvergleich beim Update ging nicht.
+			- Bugfix: Hübsche Rekursion in CPanel::GetSaturation() entfernt.
+03.11.00 UF - Bugfix jüngstes aufgenommenes Bild anzeigen.
+07.11.00 ML - Zeitzonen sind nun einstellbar
+08.11.00 ML - Statisticanzeige implementiert.
+			- Durch Eingabe von watchdog wird nun der watchdog getestet (Rechnerreset)
+			- Bugfix: Nachdem das System gelockt ist, wird keine PIN mehr akzeptiert.
+			- Bugfix: GP beim 'locken' bei geöffnetem Datenbankfenster
+09.11.00 ML - Bugfix:Nach einem Neustart stimmt das 1+plus-Fenster nicht mit der
+			  aktiven Kamera im Panel überein.
+09.11.00 UF - Power Off Button in Read Only Version jetzt anstelle Eject
+			  Druckericon ist in RO Version immer an.
+09.11.00 ML - Bugfix: Klick auf die Statistik löscht diese
+09.11.00 UF - Display Farben geändert
+10.11.00 ML - Default timezone wird ím Menü mit * gekennzeichnet.
+14.11.00 ML - Die Schattenfarbe im Panel ist nun abhängig von der Hintergrundfarbe und etwas
+			  heller.
+15.11.00 GF	- Bugfix: Spracheinstellung, bei "Set" wechselte die angezeigte Sprache auf
+				den ersten Eintrag in der Liste, dies ist behoben
+16.11.00 GF	- Panel im gesperrten Zustand jetzt zentriert im 'Rest'-Fenster unter dem Logo
+			- Bei Wechsel zwischen Debug- und Release-Version wird jetzt die richtige,
+				abgespeicherte Sprache ausgewählt.
+21.11.00 GF	- Alarmcom Logotext geändert (VDR400 ohne Kameraanzahl)
+			- Menü 'Bilder' hat ab jetzt Default 'Bilder auslagern'
+24.11.00 ML - GetPictureSize() holt sich nun die tatsächlichen Bildabmessungen von der Jpeglib
+			  und nicht mehr aus dem Picturerecord.
+			- Bugfix: Bei den folgenden Eingaben wird nun die Zeichenzahl kontrolliert:
+			  PIN (4-Stellig), Timer (8-stellig), IP-Addresse (12-stellig), Subnetmask (12-stellig)
+			- Santec-Jpeg mit ins	Projekt aufgenommen
+27.11.00 ML - Neuen Oem (Santec=3) hinzugefügt.
+			- Mit dem Mausrad kann nun im Playwindow vorwärts und rückwärts geblättert werden.
+27.11.00 UF - Track auch für UVV Kassen, von Alarm zu Alarm und Verdacht zu Verdacht
+			- Bugfix Version Text war nicht zu sehen
+28.11.00 ML - Bugfix: Durch das Verschieben des Menüeintrags 'Melder' ans Ende des Timermenüs, wurde
+			  der Wochentag falsch ermittelt.
+			- Bugfix: CLiveWindow::ConfirmSetValue hat die Timer nicht behandelt.
+			- Bugfix: Im Menü den Text 'Sensivity' in 'Sensitivity' geändert.
+			- Bugfix: Alle Oben/Unten (up/down)'s wegen des Sanyo-Oem's aus den Tooltips entfernt.
+			- Bugfix: Das ennglische 'Medium' in 'Mid' geändert, da der Text im Menü zu lang ist.
+29.11.00	- Bugfix Tracking Funktion auf CD-R
+30.11.00	- Bugfix Tracking Rückwärts auf UVV Archiven
+			  Tracking Buttons gehen jetzt erst nach dem die Wiedergabe
+			  gestartet wurde.
+01.12.00	- UF Bugfix Fast Forward and Fast Back
+06.12.00	- ML Die unterschiedlichen Hintergrundfarben im Panel sind nun nur bei Alarmcom aktiviert.
+			- UF Fast Forward und Fastback spielen jetzt die Bilder
+			  wieder schneller ab, und zwar durch auslassen von Bildern,
+			  dabei wird mit jedem zweiten Bild angefangen und bis zu jedem
+			  20ten Bild beschleunigt.
+11.12.00 ML - Bugfix: Durch den Umbau, daß nur bei Alarmcom sich die Displayfarben ändern, wurden bei
+			  den anderen Oem's gesperrte Menüeinträge nicht mehr hell dargestellt.
+14.12.00 ML - Bugfix: In der ReadOnly-Variante wurde 'NrOfCam' nicht aus der Autorun.inf gelesen.
+			  Bugfix: Diskettenexport wird während eines Exportes gesperrt. Dazu wird nun aus 
+			  'OnUpdateMenu' 'UpdateButtons' aufgerufen.
+			  Bugfix: Das Betätigen der Menüpfeile bewirkt nun den Abbruch eines Diskettenupdates.
+18.12.00 ML - Bugfix: Der Runtimeerror Dialog und der Statisticsdialog war noch blau.
+			  Dies sollte aber exclusive für Alarmcom sein.
+03.01.01 ML - Wenn DVClient als Receiver läuft, wird nun das Menü 'Bilder' entfernt.
+		 ML - Es läßt sich nun ein Stationsname für das IPBook vergeben.
+04.01.01 ML - Beim DTS-IP-Receiver läßt sich nun eine Verbindung zur einer, sich in der Hostliste
+			  befindlichen Gegenstation aufbauen. 
+10.01.01 ML - Bugfix: Beim Setzen des 'LocalHostNames' wurde die Registry nicht korrekt
+			  aktualisiert.
+11.01.01 ML - Der DTS_IP_RECEIVER besitzt keine Netzwerkeinstellungen, da diese nur Local
+			  gelten. Die Netzwerkeinstellungen werden über die Windowsnetzwerkkonfiguration
+			  erledigt.
+11.01.01 ML - Bugfix: Das Flackern des 1... - Buttons beseitigt.
+12.01.01 ML - Bugfix: Beim Export von Bildern auf Diskette wird nun im html-file kein absoluter
+			  Verweis auf das Jpeg-file mehr gemacht. Dadurch läßt sich der Inhalt einer Diskette
+			  nun auch problemlos auf Festplatte kopieren und von dort aus betrachten.
+		 ML - Beim DTS IP Receiver bleibt nun die Taskleiste sichtbar.
+15.01.01 ML - 'Cheatcodes' werden nur beim Transmitter ausgewertet.
+			- Beim DTS IP Receiver gibt es kein Softwareupdate und keine Laufzeitfehler
+			- Bugfix: Der analoge Ausgang (für die aktive Kamera) wird nun nur
+			  noch beim Transmitter geschaltet und nicht mehr remote.
+
+22.02.01 ML - Die folgenden Resourcestrings/Menüpunkte enthalten nun Oem abhängige
+			  Strings: IDS_SELECT_HOST, IDS_HOSTLIST_EMPTY, IDS_HELP_SELECT_HOST,
+					   IDOSD_NET_NAME
+26.02.01 ML - Bugfix: Die Helligkeit wurde auf 0 gesetzt, wenn das Menü auf Helligkeit
+			  steht, und parallel ein Suchvorgang mit den Pfeiltasten abgebrochen
+			  wurde.
+			- Bugfix: Die Panelhintergrundfarbe beim Hostname war noch grün
+
+28.02.01 ML - Nach dem Ändern der IP oder Subnetmask wird nun rebootet und nicht nur 
+			  runtwergefahren
+
+02.03.01 ML - Bugfix: Beim Export auf Diskette, kann es im Fehlerfall dazu kommen, daß die
+			  DIB nicht mehr freigegeben wird.
+
+02.03.01 ML - Bugfix: Sobald man auf einem 'disabelten' Menüpunkt steht, kann man
+			  die Sucheingabe nicht über die Settaste bestätigen, nur über den
+			  Suchbutton.
+		 ML - Bugfix: Da das Speichern auf Diskette, recht lange dauert, insbesondere
+			  wenn mehrmals unmittelbar hintereinander auf den Exportbutton geklickt
+			  wurde, konnte es dazu führen, das die WM_SELFCHECK-Messages des DVStarters
+			  nicht rechtzeitig beantwortet werden, was dazu führt, daß der DVStarter
+			  den DVClient wärend des Exportes beendet. Deshalb wird nun nach jedem
+			  einzelnen Export eine WM_SELFCHECK-Confirm-Message an den Starter zurück
+			  geschickt.
+07.03.01 ML - Bugfix: Die Datei 'h263enc.dll' muß mit auf CD kopiert werden
+		 ML - Bugfix: Ein Verbindungsabbau senderseitig wurde vom DTSIPReceiver nicht
+			  korrekt behandelt
+07.03.01 TKR- CD Brennen: Das Programm WatchCD (zur Fernsteuerung von DirectCD) wird nun mit 
+			  CommandLine Parameter (CD-Drive Letter) gestartet, da es vorkam, dass der
+			  korrekte CD-LW-Buchstabe im DirectCD Pfad der Registry nicht gefunden wurde. In 
+			  einem solchen Fall wird der CommandLine Parameter benutzt.
+21.03.01 UF - Bugfix Operator und Supervisor PIN
+21.03.01 UF - Wenn HKLM\Software\DV\DVClient\FloppyExportOnlySupervisor als DWORD Wert
+			  1 ist, so darf nur der Supervisor Bilder auf Floppy auslagern, ist
+			  der Wert 0, so dürfen Supervisor und Operator Bilder auf Flopy auslagern.
+26.03.01 UF - Der Empfänger übermittelt beim Verbindungsaufbau seine Seriennummer,
+			  damit diese auf der Senderseite überprüft werden kann.
+29.03.01 ML - Fehlermeldung bei falscher oder doppelter Seriennummer eingeführt.
+		
+02.04.01 ML - Bugfix: Die rechte Maustaste wirkt nun auch dort, wo kein Videobild zusehen ist.
+			- Bugfix: Das Flackern des Setbuttons beseitigt.
+02.04.01 UF - Produkt Bezeichnung VDR 400,500,700,950 bei Alarmcom OEM eingebaut
+04.04.01 ML - Von 8 auf max 16 Sprachen erweitert.
+04.04.01 UF - Bugfix Produktbezeichnung Alarmcom
+12.04.01 GF	- In der Taskbar wird jetzt der OEM-Namen angezeigt
+17.04.01 GF	- Beim Receiver wird bei Alarm die Taskbar ge-flashed
+			  Ist eine andere Anwendung aktiv (Panel hat keinen Focus), wird Lärm gemacht
+			- Bugfix: Ominöse Tooltips im Panel (von anderen Fenstern) abgefangen
+19.04.01 GF	- Hostliste wird alphabetisch sortiert
+			- Bugfix: Receiver: Ist eine andere Anwendung aktiv, wird Lärm gemacht
+24.04.01 UF - Es werden die Millisekunden der Bilder angezeigt, wenn unter
+			  HKLM\Software\DVRT\DV\DVClient der DWORD Wert ShowMilliseconds auf 1 steht.
+04.05.01 GF	- Receiver: AcousticAlarmAtBackground ausschaltbar über
+				DV\\DVClient\\AcousticAlarmAtBackground=0
+07.05.01 GF	- Panelgröße änderbar vorbereit, aber noch ausgeschaltet
+08.05.01 UF - Bugfix Kameraanzahl taucht jetzt nicht mehr im Splash Screen
+			  des Empfaengers auf.
+08.05.01 ML - CIPCInputDVClient::OnConfirmSetValue war nicht überschrieben, deshalb kam das
+			  Confirm beim Ändern der Operatorpin nicht durch
+09.05.01 GF	- Receiver: Statt"Gerät sperren" jetzt "Verbindung trennen"
+			- Receiver: Der Gegenstationsname wird im Tooltip angezeigt
+10.05.01 ML - Es läßt sich nun eine Gateway-Adresse eingeben.
+11.05.01 UF - Bugfix Kameramenu Receiver
+			- Das Panel kann man jetzt ueber ESC, F1, F2 .. F12 bedienen.
+			  die Tasten entsprechen von links nach rechts den Buttons.
+11.05.01 UF - 2. Bugfix Kameramenu Receiver
+			  F11 aktiviert ein minimiertes Panel
+14.05.01 GF	- m_bAcousticAlarmAtBackground von CMainframe nach CDVClient verschoben
+17.05.01 GF	- Enumerations.h hinzugefügt
+			- Sequenzer und VideoOutputs hinzugefügt, vorerst nur in DEBUG sichtbar
+			- Receiver: Akustischer Alarm über Menü abschaltbar
+17.05.01 UF - Bugfix Optionsmenu funktionierte nicht bei mehreren Wiedergabefenstern
+28.05.01 UF - Bugfix Groesse der Sequenzen wird jetzt vor dem Brennen neu
+			  beim Server angefragt.
+28.05.01 UF - Bugfix Groesse der Sequenzen wird jetzt vor der Anzeige des Statistikdialogs
+			  beim Server angefragt.
+28.05.01 UF - Bugfix II Groesse der Sequenzen wird jetzt richtig angefragt.
+11.06.01 GF	- Bugfix: Bei einer JaCob-Karte auch nur 2 Videoausgänge konfigurierbar
+12.06.01 GF	- Bugfix 2: Bei einer JaCob-Karte auch nur 2 Videoausgänge konfigurierbar
+			- Bugfix: Bei Einschalten VideoAusgang:AktiveKamera wird jetzt auch die aktive Kamera
+					  auf den Ausgang geschaltet
+14.06.01 TKR- folgende Änderungen können in CPanel bzw. CMainFrame mit
+			  "#define TKR" aktiviert werden (ist z.zt. auskommentiert):
+			  1. CPanel: Eingabe-Reihenfolge der Backup Daten (Startzeitpunkt, 
+				 Endzeitpunkt, Kameras) in (Kameras, Startzeitpunkt, 
+				 "berechneter" Endzeitpunkt) geändert. 
+			  2. CPanel: Starten des Backups nun auch ohne vorheriges Öffnen
+				 eines PlayWindows. 
+			  3. CMainFrame: Zum Anlegen des Backup Window Funktionen hinzugefügt:
+				 - AddBackupWindow(CServer*)
+				 - GetBackupWindow()
+				 - OnAddBackup(CSecID)
+			  4. CMainFrame: Neuer Status "WPARAM_ADD_BACKUP" in OnUser() eingefügt
+			  5. CMainFrame: #define TKR aktiviert folgende Erweiterung:
+				 In "DisconnectDatabase()" BackupWindow deleted
+			  6. CPanel: OnBackup(): Funktion "AddBackupWindow()" eingefügt. Soll
+				 ein Backup gestartet werden, wird ein BackupWindow angelegt und zur
+				 Fensterliste m_Displays[] in CMainFrame addiert (nur, wenn dort noch
+				 nicht vorhanden). 
+15.06.01 GF	- Bugfix: AnalogVideoOut: Manuelle Kamera schaltete auch Remote, fixed
+25.06.01 TKR- folgende Änderungen können im CMainFrame mit
+			  "#define TKR" aktiviert werden (ist z.zt. auskommentiert):
+			  1. CPanel: Wird ein Backup vorzeitig abgebrochen (Kopiervorgang noch 
+				 nicht gestartet, z. B. bei Berechnung des Endzeitpunktes) muss das
+				 Backup Object wieder gelöscht werden. Den Löschaufruf eingebaut in:
+				 - OnCrossDown(), OnCrossLeft(), OnCrossRight(), OnCrossUp()
+				 - MinimizeDlg()
+			  2. CPanel: In "OnUpdateMenu()" BackupWindow mit einbezogen
+			  3. CPanel: "OnDeleteBackup()" eingefügt. 
+			  4. CMainFrame: "IsInBackup()" an BackupWindow angepasst
+			  5. CMainFrame: BackupWindow eingebaut in:
+				 - SetWindowSize1pX(), SetWindowFullSize(), AutoViewMode()
+27.06.01 TKR- folgende Änderungen können im CMainFrame mit
+			  "#define TKR" aktiviert werden (ist z.zt. auskommentiert):
+			  1. CDVClientApp: 
+				 Funktion "InitMaxCDForMultiBackup()" eingefügt. Wird in "InitInstance"
+				 aufgerufen. Trägt in Registry "DV/DVClient" Schlüssel "MaxCD" ein.
+			  2. CPanel:
+				 Neuen m_eInputState eingefügt: "InputBackupMultiCD". Dieser Status
+				 wird erreicht, wenn mehr als eine CD-R gebrannt werden soll. In
+				 folgenden Funktionen diesen neuen Status ebenfalls berücksichtigt:
+				 - OnCrossSet(), ShowOnlineHelp(), OnBackup().
+				 Entsprechend LangDll erweitert.
+28.06.01 GF	- Im Receiver-Config-Menü Sequenzer und Videoausgang enabled
+29.06.01 ML - Bugfix: beim Shutdown wurde 'DV\\DVStarter", "DoReboot"' nicht auf 0
+			  gesetzt.
+29.06.01 GF	- Akustischer Alarm jetzt auch beim Sender
+04.07.01 TKR- Für die Rechtecksuche die Klasse "CQueryRectTracker" eingefügt.
+05.07.01 GF	- Bugfix: CDVUIThread: F10 wird nicht über WM_KEYDOWN, sondern (als einzige! - RTFM)
+							über WM_SYSKEYDOWN gemeldet, da sie bei Windows das Menü aktiviert
+06.07.01 GF	- Bugfix: CPanel: Der Buffer bei EnumeratePrinters muß dynamisch angelegt werden,
+							  da er alle Daten (Texte) erhält und nicht nur die PRINTER_INFO structs
+06.07.01 TKR- folgende Änderungen können in CMainFrame mit
+			  "#define TKR" aktiviert werden (ist z.zt. auskommentiert):
+			  1. Aufziehen eines Rechtecks durch Drücken der linken Maustaste möglich
+			  2. Verschieben des Rechtecks möglich
+			  3. Rechteck löschen durch Rechtsklick, wenn Cursor über dem Rechteck
+
+06.07.01 ML - Die Alarmliste ist im DVClient integriert. Alle Funktionen sind
+			  implementiert und reif für die QS.
+09.07.01 ML - Das Panel holt sich nun nur noch in DEBUG den Focus.
+09.07.01 UF - Bugfix grosses Fenster in 1plus beim CD Replay
+09.07.01 GF	- Bugfix Druckerauswahl bei mehr als 8 Druckern
+13.07.01 ML - Der Dialog zur Erstellung der permanenten Maske ist nun fertig. Es fehlt allerdings noch
+			  die Schnittstelle zur JaCobUnit, um die Masken zu holen und wieder zurück zuschicken
+			- Die Tooltips für die Alarmliste und für den MD-Dialog sind fertig (Deutsch/English)
+14.07.01 GF	- Timer: Die Timer können jetzt auch über Mitternacht hinaus angegeben werden:
+					 Wenn die Endzeit kleiner ist als die Startzeit,
+					 dann gilt die Endzeit für den folgenden Tag
+26.07.01 TKR- Rechtecksuche: mit "#define TKR" in CMainFrame freischaltbar
+			  - Rechteckeigenschaften wie Aufziehen, Größe ändern, Verschieben und Löschen
+			    (jeweils in gezoomter und nicht gezoomter Ansicht) wurden integriert.
+			  - Anzeige von bis zu 5 Fadenkreuzen
+27.07.01 TKR- CPlayWindow: Für Rechtecksuche Funktion "StartDatabaseSearch() um 
+			  (BOOL bRectSearch = FALSE) erweitert
+27.07.01 GF	- Bugfix: Beim 16er System konnte man erst >10 und dann SET ins ConfigMenu drücken,
+					  dann ging keine Ziffer mehr, nur Menüwechsel half
+
+31.07.01 ML - Bei der Alarmliste wird nun die Seitenzahl, sowie der Stationsname
+			  mit ausgedruckt.
+03.08.01 ML - Alamliste für die 1.4 freigeschaltet
+		 ML - Über den Registry Eintrag DVClient\NoiseReduction läßt sich testweise
+		      die Rauschunterdrückung ein oder ausschalten. Das Rauschfilter greift
+			  bei der Darstellung, d.h. die gespeicherten Bilder bleiben unangetastet.
+		 ML - Bufix: Beim Sender wird bei der Alarmliste nun der Stationsname des Senders
+		      mit ausgedruckt.
+06.08.01 ML - Bugfix: Bei der Anzeige des Datenbankbildes aus dem AlarmlistenDialog
+			  heraus, wird nun das Datenbankbild als Hauptbild in der 1+x-Darstellung
+			  angezeigt.
+09.08.01 GF	- HostsDlg hinzugefügt zum manuellen Eingeben von Gegenstationen
+13.08.01 GF	- HostsDlg überarbeitet
+14.08.01 ML - Bugfix: (AlarmListDlg) Das Playfenster öffnet sich nicht immer als Hauptfenster,
+14.08.01 GF	- Optische Korrektur CHostsDialog
+17.08.01 ML - Über den Eintrag 'DV\DVClient\LuminanceCorrection' läßt sich versuchsweise
+			  ein Filter aktivieren, welches Helligkeitsschwankungen mindert.
+17.08.01 GF	- Bugfix: HostsDlg: Name und IP werden jetzt mittels Einfach-Klick geändert
+20.08.01 UF - Kann die Zeit auf dem System nicht gesetzt werden, so
+			  erscheint die Fehlermeldung jetzt vor dem Timeout
+21.08.01 ML - Der Ok-Button des Alarmlisten Dialoges, bleibt immer enabled.
+			- Bugfix: Der Druckerbutton im Alarmlisten Dialog wurde nicht disabled, wenn
+			  kein Drucker ausgewählt war
+			- Bei der manuellen Eingabe der Gegenstation, wird die Eingabe nun abgebrochen,
+			  wenn der Gegenstationsname, oder die IP-Adresse leer ist.
+			- Bugfix: Die manuell eingetragenen IP-Adressen wurden mit führenden Nullen
+			  in die Hostliste eingetragen. Dadurch kam kein Verbindungsaufbau zu stande,
+			  da diese dann als oktalzahl interpretiert wird.
+24.08.01 UF - Bugfix Alarmliste konnte mehrfach geöffnet werden, und wurde
+			  nicht korrekt wieder freigegeben.
+
+30.08.01 ML - Tooltips für die manuelle Eingabe der Gegenstationen in die Gegenstationsliste 
+			  (Deutsch und English)
+			- Der Dialog zur manuellen Eingabe der Gegenstationen öffnet sich nun oberhalb/unterhalb
+			  des Panels und nicht mehr über dem Panel
+			- Bugfix: Beim Ändern der Gegenstations IP-Adresse, wurde die IP-Adresse nicht
+			  3 stellig Erweitert. Dies ist aber für die Eingabemaske notwendig
+			- Bugfix: Es war möglich mehrere viruelle Tastaturen innerhalb des HostEingabeDialoges
+			  zu öffnen.
+			- Bugfix: Der 'Erweitert'-Eintrag in der Hostliste besaß keinen Tooltip
+			- Bugfix: Die Panelbuttons, wurden während des Statisticsdialoges wieder enabled.
+			- Bugfix: Bei Eingabe einer neuen IP Adresse, müssen zunächst 12 nullen gelöscht werden,
+			  was sehr umständlich ist
+
+05.09.01 ML - ProtectionOne Logo mit ins Projekt aufgenommen
+			- ProtectionOne Oem'misierung' durchgefürt.
+				- MinimizeButton bekommt das ProtectionOne Logo 
+				- Panelfarben wie bei Alarmcom
+				- Die Gerätebezeichnungen derzeit bei Alarmcom....Uwe klärt dies noch
+				- Die Funktionalität des Oems ProtectionOne ist identisch mit Oem Alarmcom
+				- Bei der minimierten Darstellung des Panels, erscheint das ProtectionOne Logo
+06.09.01 UF - Bugfix Alarmliste, die Button voriger Tag und naechster Tag wurden nicht korrekt
+			  enabled und disabled.
+08.09.01 ML - Beim Disconnect wurde der Alarmlistendialog nicht geschlossen
+10.09.01 ML - Die IP-Adresse und die Subnetmask, werden nun nicht mehr über die Registry ermittelt,
+			  sondern durch eine API-Funktion (GetIpAddrTable(...))
+11.09.01 ML - Das Standard-Gateway wird nun nicht mehr aus der Registry ermittelt, sondern durch
+			  die API-Funktion GetIpAddrTable(...)
+			- GetIpAddrTable(...) und GetIpAddrTable(...) gibt es für WinNT4 SP4 und Windows2000
+			  und neuer. Da diese Funktionen nur senderseitig benötigt werden, muß Win95/98 nicht
+			  unterstützt werden
+			- In ExitInstance stand ein Sleep(5000) (schon seit Juli 2000)... durch den
+			  Wegfall wird das Beenden des DVClient erheblich beschleunigt. 
+12.09.01 GF - AutoLogin für Testzwecke eingebaut,
+				Registry-Eintrag in "DVClient": "AutomaticTestPIN", PIN als Zeichenfolge
+13.09.01 GF	- Bugfix Panel: In OnUpdateMenu '*' für aktuellen Eintrag bei
+				 Zeitschaltuhr-Melder und Alarmkonfiguration-Modus eingebaut
+				 Dazu GetTimerOnOffState() geändert
+13.09.01 GF	- Bugfix: Im HostsDlg wurden die Scroll-Buttons bei Eingabe/Löschen
+						eines Eintrages nicht enabled/disabled
+13.09.01 GF	- Bugfix: Bei offenem HostsDlg wurde das Panel minimiert.
+						Anschleißend war das Display disabled und die Host-Liste leer
+24.09.01 GF	- Akustischer Alarm: Beim Empfänger auch im Vordergrund wie beim Sender
+			- Bugfix: Alarmliste:
+				Scroll-Buttons wiederholen jetzt, wenn sie gedrückt gehalten werden
+			- Bugfix: Alarmliste:
+				 Es wird nicht mehr über das aktuelle oder älteste Datum hinausgescrollt
+26.09.01 GF	- Bugfix: Alarmliste: Es konnte nicht zum folgenden Tag gewechselt werden
+27.09.01 GF	- Enum ViewMode von CPanel.h nach Enumerations.h verschoben
+04.10.01 GF	- Bugfix: Alarmliste: Bei schnellem tageweisen Scrollen wurde die Liste
+				 nicht korrekt aktualisiert, d.h. Tagesanzeige und Alarme stimmten nicht überein
+05.10.01 GF	- Bugfix: Alarmliste: Jetzt wird die Liste endlich korrekt angezeigt!
+10.10.01 GF	- Bugfix: Alarmliste: DVClient sendet jetzt SelfCheck-Confirms,
+				wenn viele Alarme in der Liste sind
+			- Bugfix: Blauen Cursor in mehreren Unterdialogen eingebaut
+15.10.01 GF	- Alarmliste überarbeitet, beschleunigt
+15.10.01 GF	- Alarmliste: Ein paar LOG-Traces rausgenommen
+15.10.01 UF - Es wird jetzt nur noch ein Suchergebnis abgefragt.
+16.10.01 GF	- Bugfix Alarmliste: Beim Drucken wurde die IP-Adresse
+								 anstatt des DTS-Namens ausgegeben
+			- Alarmliste jetzt zeitlich sortiert
+17.10.01 GF	- Bugfix: PlayWindow muss auch sichtbar gemacht werden,
+						 wenn vorher gesucht wurde
+18.10.01 GF	- Bugfix: Alarmliste Spalten korrigiert
+19.10.01 GF	- Bugfix: Alarmliste: Scrollen mit Rollmaus zeigt jetzt Ordnungsnummern an
+25.10.01 UF - Bugfix: Beim Statistikdialog wird jetzt Remote die Uhrzeit des Senders zur Berechnung
+			  der Aufzeichnungsdauer verwendet.
+06.11.01 ML - Bugfix: Das Jpeg-objekt wird nun im Konstruktor des 'CDisplayWindow' angelegt
+			  und im Derstruktor zerstört. Zuvor wurde es erst beim Eintreffen der ersten
+			  Bilddaten angelegt, und bei unterschiedlichen Gelegenheiten in 'DeletePicture'
+			  zerstört. Dieses Verfahren war nicht Thread sicher! 
+08.11.01 UF - Es kann jetzt die Serverversion, also die von DVProcess benutzt werden.
+12.11.01 UF - Betawarning eingebaut.
+12.11.01 TKR - Backup auf nur eine CD funktioniert. Es darf aber KEIN Datum als Endzeitpunkt
+			   angegeben werden, dass jünger als das berechnete ist. Die maximale CD-Kapazität ist in
+			   der Registry unter DV\DVClient\CDCapacity einstellbar. Es werden Werte von 0 bis 700 MB
+			   akzeptiert.
+			   Rechtecksuche funtkioniert vollständig, bis auf ein paar kleinere Bugs.
+			   Freischaltung des "neuen" Backups sowie der Rechtecksuche über den Eintrag
+			   "define TKR". Diese Freischaltung wird später durch eine Variable ersetzt.
+12.11.01 TKR - Beim "neuen" Backup auf CD-R wird nun auch die verbleibende Zeit korrekt runtergezählt.
+14.11.01 TKR - Bei der Rechtecksuche wurde das "define TKR" von der Versionsabfrage des Servers
+			   abhängig gemacht. Nur, wenn die Server-Version mindestens 1.4. ist, wird die
+			   Rechtecksuche aktiviert. Rechtecksuche auf kleineren Server-Versionen ist nicht möglich.
+15.11.01 TKR - Im MainFrame "#define BACKUP_TO_HDD" eingebaut. Wenn aktiviert, erfolgt Auslagerung
+			   auf Festplatte in DV-Verzeichnis. 
+			   Vor der Auslagerung auf HDD in der Registry "DVRT/DV/DVClient" den Schlüssel "CDCapacity"
+			   von "600" auf weniger ändern. Dieser Wert wird bei der Berechnung des Endzeitpunktes
+			   verwendet.
+20.11.01 TKR - Neues Backup Window immer noch mit "define TKR" freischaltbar.
+			   1.) Das hin und her schalten zwischen Livebildern, Datenbankbildern und BackupWindow
+			       funktioniert einwandfrei in allen Ansichten (1+ Ansicht, quadratische und Vollansicht).
+			   2.) Wurde das Backup-Fenster geöffnet, bleibt der Eingabezustand im Panel beim 
+				   Umschalten auf eine Live-Kamera bzw. auf ein Datanbankarchiv 
+				   (Klick auf grüne bzw. blaue Kopfzeile im jew. Fenster) unverändert. 
+				   Er springt nicht wieder zurück auf den Start-Status "Bilder auslagern
+				   auf CD". Im "alten" Backup sowie bei allen anderen Menü-Punkten wird zurück auf
+				   den jeweiligen Start-Status gesprungen (sofern eine Änderung noch nicht 
+				   gespeichert wurde, z.B. bei Änderung der Aktivitätenerkennung).
+				   Ebenfalls verbleibt der Hilfetext im backup-Fenster.
+22.11.01 ML	- Alarmkonfigurationsmenü in das Panel implementiert.
+			- Menüpunkt 'Auslagerung fortsetzen' hinzugefügt
+07.12.01 ML - Beim Empfänger und in Debug läuft der DTS im Fenster, dadurch kann er bei Bedarf minimiert werden.
+			- Die Größe des Mainframes läßt sich nun beim Empfäner verändern
+10.12.01 ML - SetPanelPosition an ein verschiebbares und in der Größe änderbares Mainframe angepasst.
+
+12.12.01 ML - Wenn die Verbindung zur Datenbank unterbrochen wird, soll die Livebilddarstellung
+			  davon unberührt bleiben, also auch kein erneuter Login erfolgen. Hat sich die
+			  Datenbank beendet, so wird sie vom DVStarter ja erneut gestartet und eine neue CIPC-Verbindung
+			  angelegt. 
+14.12.01 UF - Bugfix Rechtecksuche geht nur bei Client >= 1.5 und Server >= 1.4
+21.12.01 TKR - Bugfix Rechtecksuche geht nur bei Server >= 1.4.1
+08.01.02 TKR - Bugfix Rechtecksuche geht nur bei Server bzw. Client > 1.4.1 
+30.01.02 TKR - Panel: In "OnButtonNum" im Zustand (m_eInputState == InputBackupCameras) zusätzliche
+			   Prüfung, ob es zu einer ausgewählten Kamera auch wirklich Datenbankbilder gibt
+
+31.01.02 ML - Im Alarmkonfigurationsmenü wird nun der Menüpunkt 'Alarmanruf bei' behandelt.
+			  Hiermit läßt sich für jede Kamera festlegen welche Alarme (MD, Extern 1, Extern 2, Aus)
+			  zu einem Alarmanruf führen soll.
+			  Die Implementierung und der entsprechenden Kommandos im DVProzess muß noch erfolgen.
+
+01.02.02 ML - Einfreischaltcode läßt sich nun eingeben. Damit sollen in Zukunft Funktionalitäten
+			  wie Netz oder ISDN freischaltbar werden.	
+			  
+07.02.02 TKR - Timeout-Routine eingebaut, falls die Berechnung des Endzeitpunktes zu lange dauert.
+			   In diesem Fall wird dem Benutzer kein Endzeitpunkt zur Auswahl angezeigt. Er muss
+			   selbst Endzeitpunkt eingeben. Anschließend Berechnung, ob diese Endzeitpunkt passt.
+			   Fehlerroutine eingebaut, falls timeout der Berechnung oder Endzeitpunkt zu groß.
+
+08.02.02 ML - Die 1.5 Beta warning wird bei zwei bestimmten Seriennummern nicht mehr
+			  angezeigt.
+
+08.02.02 TKR - 1. Endzeitberechnung optimiert. Ab 8h nur noch Schrittweite jeweils 8h in die Zukunft, 
+			   keine pauschale Verdopplung mehr. Alle Fehlerfälle (timeout, falsches Datum/Zeit, 
+			   zu großes Enddatum, usw.) eingebaut. Berechnung der Endzeit bricht im Storage nun 
+			   übergebenem Abbruchwert (meist 600 MB) ab. Berechnung daurch ebenfalls beschleunigt.
+
+			   2. Prozentanzeige während des Backups zeigt korrekten Wert.
+11.02.02
+		ML	- Bugfix: Fehler im Menühandling von 'Alarmanruf bei' beseitigt
+
+11.02.02 TKR - Alle nötigen Implementierungen für das Multibackup (ausser "Auslagerung fortsetzen"
+			   sind erledigt. 
+
+13.02.02 TKR - Alle nicht nötigen Traces rausgenommen (WK_TRACE("TKR...)
+			   Alle "#ifdef TKR" durch "theApp.CanMultiCDExport" ersetzt.
+			   Prozentanzeige bei Auslagerung auf HDD funktioniert nun korrekt
+13.02.02 UF - Es wird bei 210620-2 und 210620-3 kein Betawarning angezeigt
+
+14.02.02 TKR - Angefangen, Menüeintrag "Auslagerung fortsetzen" aktiv bzw. inaktiv im Panel anzuzeigen
+19.02.02 UF - Es werden jetzt Alarmverbindungen unterstuetzt.
+19.02.02 UF - Bugfix Alarmverbindungen.
+19.02.02 UF - Weiterer Bugfix Alarmverbindungen, Alarmkameraschaltung eingebaut.
+21.02.02 UF - Bugfix ijl15.dll fehlte beim Diskettenexport
+21.02.02 UF - Das Update geht jetzt auch von CD. Dafuer muessen auf der CD Ordner fuer
+			  jede Diskette angelegt sein, die das Update enthalten.
+			  Also Disk1, Disk2 ..., die jeweils eine Datei Update und Disk enthalten.
+21.02.02 UF - Trace Messages Alarmaufschaltung entfernt,Datenbankverbindung bei Alarmaufschaltung schneller.
+26.02.02 TKR - #define MESSE_SPANIEN im Panel eingebaut. Verhindert Multibackup
+26.02.02 UF - Bugfix Lesen von CD-R
+
+11.03.02 ML - Bugfix: AlarmOutputOnOff-Menü handling war fehlerhaft
+12.03.02 TKR - Das Fortsetzen der Auslagerung (schließt direkt an die vorherige an) ist vollständig
+			   implementiert.
+13.03.02 TKR - Bugfix: Rechteck kann nicht mehr im Backup Fenster aufgezogen werden
+13.03.02 ML - DVClient auf die Behandlung des externen PowerOff-Buttons und Reset-Buttons vorbereitet.
+14.03.02 ML - Bugfix: Die Eingabe der Telephonnummern/IP-Adressen funktioniert nun korrekt.
+15.03.02 TKR - Berechnung des Endzeitpunktes der Auslagerung um den Faktor 10 (in Storge) 
+18.03.02 ML - Bugfix Kleinere Probleme und Unstimmigkeiten bei der Eingabe des Suchdatums/Suchzeit
+			   beschleunigt und im Client diese geänderte Berechnung eingebaut.
+19.03.02 ML - Bugfix: Beim Auslagern auf CD MUß nun das Datum und die Uhrzeit eingegeben werden.
+		 ML - Bugfix: Im ReadOnly Mode wird die Software beim herausnehmen der CD nun sauber beendet.
+			- Beim erreichen der Message 'OnDeviceChange' wird noch zusätzlich der DeviceType
+			  überprüft. Dies ist notwendig, da diese Message für jedes PnP-Gerät verschickt wird,
+			  welches entfernt wird, oder hinzugefügt wird, so z.B. auch beim deaktivieren
+			  des JaCob-Treibers, oder beim Anschluß eines USB-Devices.
+19.03.02 TKR - Bugfix: Nr 392: nun korrekte Angabe der Fehlermeldungen  
+19.03.02 ML - Bugfix: Statistikdialog besitzt nun einen Tooltip
+20.03.02 TKR - Bugfix: Nr. 383: Vergrößerung (als Hauptfenster) des Backup Window jetzt immer möglich
+20.03.02 TKR - Bigfix: Nr. 385: Kompletter Menüzweig "Bilder" erst enabled, wenn eine Verbindung
+			   zur Datenbank besteht, d.h. während des Datenbank-Scannens ist Menüzweig disabled
+20.03.02 TKR - Bugfix: Nr. 407: Nur noch Kameras auswählbar, zu denen es Bilder gibt.
+20.03.02 ML - Bugfix: Der LocalHost name wird nun immer korrekt gesichert.
+26.03.02 ML - Bugfix: Die Eingabe der IP-Adresse für Alarmanrufe war noch fehlerhaft.
+			- Bugfix:  Nr. 416: Alarmnummern lassen sich auch wieder löschen.
+		ML/TKR - Größerer Umbau beim Fensterschalten/Fensteraktivierungs-Handling.
+			     Siehe Pflichtenheft DTS 1.5 unter 8. (Reihenfolge der Fensteraktivierung)
+		ML(TKR - Das Flackern beim Umschalten behoben.
+27.03.02 ML - Bugfix Nr. 197 (IP-Receiver). Panel liegt nun immer vor dem Hauptfenster
+28.03.02 ML - Bugfix Nr. 196 (IP-Receiver). %s aus einigen Hilfetexten korrigiert.
+28.03.02 UF - Bugfix Alarmaufschaltung
+28.03.02 ML - Bugfix Br. 421 Playwindow haben nun wieder vorrang vor Livewindows,
+			  wenn über das Menü oder über den Zahlenblock umgeschaltet wird.
+28.03.02 UF - Bugfix Nr. 347,403,408 Beim schnellen Rueckwaerts abspielen, kommt man nicht bis zum Ende der Datenbank.
+28.03.02 ML - Der Starter liegt nun nicht mehr über dem Mainframe-Fenster.
+02.04.02 ML - Bugfix Nr. 425 Das Ein/Ausschalten des Fadenkreuzes geschied nun auch im Wiedergabe-
+			  fenster.
+02.04.02 TKR - Bugfix: Nr. 406: Es ist nur noch ein Backup zurzeit (Alarm oder MD) möglich. Sobald
+			   eines aktiviert ist, ist das andere deaktiviert.
+			   Bugfix: Nr. 427: Menüpunkt "Alarmbilder löschen" ist bei aktivem MD-Backup disabled.
+			   Bugfix: Nr. 428: Menüpunkt "Gerät ausschalten" sowie "Softwareupdate" sind nun auch
+			   bei Alarm Backups disabled.
+02.04.02 ML - Beim Druck auf den Soft-Powerdown/reset-button schließt das System nun evtl. offene
+			  Dialoge und verläßt das Konfigurationsmenü. 
+02.04.02 UF - Bugfix alte Alarmauslagerung bekam keine Confirms mehr.
+02.04.02 ML - Bugfix Nr. 199 (IPReceiver) Bei Verbindungsabbau wird nun grundsätzlich der
+			  Konfigurtationsmudus verlassen.
+02.04.02 ML - Bugfix Nr. 200 (IPReceiver) Bei Verbindungsabbau werden alle evtl. offenen Dialoge 
+			  geschlossen.
+02.04.02 TKR - Rechtecksuche funktioniert nun auch im ReadOnly, also aif gebrannten CD`s.
+02.04.02 ML - Bugfix Nr. 412 Bei einem Verbindungsabbau werden alle evtl. offenen Dialoge
+			  geschlossen und das Panel maximiert.Der InputState wechselt zu
+			  'InputPanelPIN' (Transmitter) bzw. 'InputSelectHost' (Receiver)
+03.04.02 TKR - Bugfix: Nr. 387  Rechtecksuche (Abspielen der Buttons) nun wieder ausführbar, auch wenn
+			   eine Rechtecksuche mitels Suchbutton kein Ergebnis brachte. 
+03.04.02 ML  Bugfix Nr 411 Sicherheitsabfrage beim Wechsel des Aufnahmemodus implementiert.
+05.04.02 ML - Bugfix Nr. 413 Bei einer Datenbanksuche aus der Alarmliste heraus, wird das Wiedergabe-
+			  fenster nun immer geöffnet.
+05.04.02 TKR - Bugfix: Nr. 426 Falls während Rechtecksuche Forward oder Rückwärts Buttons disabled
+			   sind (nach erreichen des letzten gefundenen Bildes) und das Rechteck verschoben oder
+			   resized wird, werde die Buttons wieder enabled.
+			   Bugfix: Nr: 400 Backup von Alararchiven mittels "Alarmbilder auslagern" funktioniert nun
+			   und bleibt nicht mehr hängen. War ein Fehler im Storage.
+			   Bugfix: Nr. 431 Waren Buttons disabled, werden sie nun wieder sofort enabled.
+08.04.02 UF - Bugfix: Nr 435 Bestaetigung des Freischaltcodes wurde nicht ausgewertet.
+
+08.04.02 ML	- Bugfix: 436 'Auslagerung auf CD' nun nur noch auf Systemen mit CD-Brenner möglich
+		 ML - Die Eingabe der Kameras beim Auslagern auf CD erfolgt nun von links nach rechts
+			  und nicht mehr umgekehrt wie bislang. Schließlch schreiben wir auch in dieser Richtung ;-)
+09.04.02 ML - Bugfix Nr. 442 Die Icons (Lupe, usw...) werden nicht mehr im 'Maskeneditor' dargestellt.
+		 ML - Bugfix Nr. 443 Das Bild im 'Maskeneditor' wird zwischendurch nicht mehr schwarz
+10.04.02 TKR - Bugfix Nr. 440 Suche funktioniert bei normaler Suche korrekt, Hinweis 
+			   "Keine Bilder gefunden" wird für 10 Sek. angezeigt und dann zum letzten 
+			   Bild der Datenbank gesprungen.
+			   Bugfix Nr. 445 Bei Suche mittels Suchbutton nun keine Eingabe von Zeitpunkten
+			   in der Zukunft mehr möglich.
+11.04.02 TKR - Bugfix Nr. 453 Nach schließen eines gezoomten Archivs und anschließendem wieder Öffnen
+			   wird das Bild normal (nicht gezoomt) angezeigt. 
+			   Dazu m_rcZoom im PlayWindow::OnEject() wieder auf 0 gesetzt.
+			   Bugfix Nr. 447 Export von Livebild auf Diskette nur noch möglich, wenn auch
+			   ein Livebild angezeigt ist. Ansonsten schlägt die Auslagerung fehl.
+			   Export-Button (Diskettensymbol) bleibt bei "schwarzem" Livebild aber enabled.
+11.04.02 ML - Bugfix Nr. 466 Bei Auswahl eines Alarmes aus der Alarmliste, wird vor der Suche
+              zunächst auf diese Kamera gewechselt.
+12.04.02 TKR - Bugfix Nr. 470 Das zu knapp bemessene (15 Sek.) timeout bei der Endzeitpunkt-
+               Berechnung auf 60 Sek. gesetzt. Bei einem fragmentierten 160er System dauerte die
+			   Endzeitberechnung ca. 30 Sek.
+			   Bugfix Nr. 441 Auf Backup CD`s mit Alarmarchiven wird neben dem CD-Symbol nun 
+			   auch das Alarmarchiv-Symbol angezeigt.
+			   Bugfix Nr. 446 Bei nicht vorhandenen Kameras wird nun angezeigt (als Text im 
+			   schwarzen Fenster) dass keine Kamera angeschlossen ist.
+15.04.02 TKR - Bugfix Nr. 454 Sekundenzähler für Anzeige "Keine Bilder gefunden" im SetPlayStatus
+			   im PlayWindow zurückgesetzt, um immer eine 10sekündige Anzeige zu gewährleisten
+17.04.02 UF  - JPEG Objekt wird nur noch bei Bedarf angelegt, um Speicher zu sparen.
+18.04.02 TKR - Bugfix Nr. 473 Die Rechtecksuche ist nicht mehr möglich, sobald das ein Backup beginnt.
+			   Vorhandene Rechtecke werden auf Archiven ausgeblendet und stehen nach dem Backup wieder
+			   zu Verfügung. Eine Suche mittels Suchbutton ist während des Backups ebenfalls 
+			   nicht mehr möglich.
+18.04.02 TKR - Funktion CopyTrackerFromLiveWindow() im PlayWindow "entsorgt".
+			   Bugfix Nr. 376 Absturz von Client und Storage aufgrund gleichzeitiger Rechtecksuche
+			   und Backup nicht mehr möglich. (siehe Bugfix 473)
+			   Bugfix Nr. 456 Immer wenn mittels Suchbutton kein Bild gefunden wurde, erscheint
+			   zuerst für 10 Sekunden der Text "Keine Bilder gefunden". Danach wird zum letzten 
+			   Archivbild der gewählten Kamera gesprungen.
+19.04.02 TKR - Bugfix Nr. 432 siehe Bugfix Nr. 456
+			   Bugfix Nr. 433 CD-RO Auswurf mittels Auswurfbutton am Brenner. Bilder rücken nun
+			   korrekt nach. Es wird nun der selbe Weg in der Software beschritten, als wenn
+			   der Eject-Button im Panel gedrückt wurde.#
+
+22.04.02 ML  - Bugfix Nr. 201 (DTSReceiver) Division mit Null beim Minimieren des Mainframes.
+23.04.02 TKR - Backup: Während der Berechnung des Endzeitpunktes wird auch im Panel "Bitte warten..."
+			   angezeigt (neuer Zustand: InputBackupWaitCalculatedEnd). 
+			   War die Berechnung erfolgreich, wird der berechnete Endzeitpunkt angeboten. 
+			   Während der Berechnung kann das Backup nun beendet werden (durch Klicken der 
+			   rechten/linken Pfeiltaste). 
+			   Zur Info: Auf einem 160 Gigabyte fragmentiertem Kundengerät dauert die Berechnung
+			   des Endzeitpunktes (bei 7 gewählten Kameras) ca. 7 Sek. Insgesamt dürfte eine 
+			   Berechnung also nie länger als max. 10 Sekunden dauern.
+23.04.02 TKR - Bei "Auslagerung fortsetzen" wird ebenfalls "Bitte warten..." im Panel angezeigt.
+			   Bugfix Nr. 472 + 464 siehe Bugfix zu Nr. 433, Bilder rücken nun korrekt nach.
+25.04.02 TKR - Bugfux Nr. 469 Sekundenzähler für Anzeige "Es wurden keine weiteren Bilder..."
+			   im SetPlayStatus im PlayWindow zurückgesetzt, um immer eine 5sekündige 
+			   Anzeige zu gewährleisten.
+26.04.02 TKR - Bugfix Nr. 488 Wird bei Endzeitberechnung das Datenbankende (= aktueller Zeitpunkt
+			   bei Beginn der Endzeitberechnung) erreicht, liegt der vom
+			   Storage zurückgelieferte Zeitpunkt (Zeitpunkt mit MB`s größer als 600) hinter dem
+			   Datenbankende. Mit diesem "zu großen" Endzeitpunkt wurde fälschlicherweise die weitere
+			   Intervallschachtelung begonnen. Falls dieses nun auftritt, wird der "zu große" 
+			   Endzeitpunkt auf eine Sekunde vor das Datenbankende gelegt.
+29.04.02 TKR - Bugfix Nr. 483 Vor dem Löschen von Alarmbildern muss das Löschen vorher 
+			   explizit mit "ja" bestätigt werden.
+			   Bugfix Nr. 463 Bei Alarmarchive soll immer an den Anfang gesprungen werden können.
+03.05.02 ML  - Bei Rechner mit mindestens 1GHz wird nun bei den Wiedergabefenstern das Rauschfilter aktiviert.
+			   Der Registrierungseintrag DV\DVClient\EnableNoiseReduction wird nicht mehr ausgewertet.
+08.05.02 ML  - Im Shellmodus läßt sich nun durch Eingabe von 'rdisk' 'rdisk.exe /S-' ausführen.
+			   Dadurch wird die komplette Registrierung ins WinNT\Repair Verzeichnis gesichert.
+			   Dieser Schritt muß am Schluß der Endabnahme erfolgen, um sicher zustellen, daß CloneNT
+			   auf einen korrekten Registrierungssatz zugreifen kann.
+			 - Im Shellmodus läßt sich nun zusätzlich durch Eingabe von 'CloneNT' 'CloneNT.exe' starten.
+			   CloneNT erzeugt eine bootfähige NT-Installation im 'c:\CloneNT'-Verzeichnis. Zum
+			   Abschluß des klonens wird 'Rdisk.exe /S-' ausgeführt.
+08.05.02 ML  - Bugfix Nr. 504 Die Kameras 10...16 lassen sich nun wieder über das Menü auswählen
+10.05.02 ML  - Bugfix Nr. 515 Für nicht vorhandene Livekameras sind die Alarmanrufmenüpunkte nun gesperrt.
+14.05.02 TKR - Bugfix Nr. 521 Es werden nun auch Archive von alten gebrannten CD`s (vor Build 380) 
+			   korrekt eingebunden. Eine Rechtecksuche ist auf diesen Archiven allerdings nicht möglich.
+15.05.02 UF  - Rdisk und CloneNT wieder aus den Cheat codes rausgenommen.
+16.05.02 TKR - Bugfix Nr. 456 Bei Alarm-Kameras sind nur noch Alarmanrufe für Ext1, Ext2 und Ext1,Ext2
+			   möglich. Alle Anrufe mit "A" sind nicht mehr wählbar. Steht bei einer MD-Kamera ein
+			   Eintrag mit "A" und wird die Kamera in eine Alarm-Kamera umgeschaltet, ändert sich der
+			   Alarmanruf-Eintrag von "A"->"Aus"; "A,Ext1"->"Ext1" usw.
+17.05.02 TKR - Bugfix Nr. 539 Aufgezogene Rechtecke werden nun auch in kleineren Fenstern korrekt
+			   skalliert angezeigt. Rechteck-Minimalgröße ist nun jeweils von der echten Blockgröße 
+			   einer Bewegungskoordinate abhängig.
+			 - Nicht mehr benötigte Funktion "ResetMinRectSize()" entfernt.
+21.05.02 TKR - Bugfix Nr. 222 Wird im IP-Receiver remote ein Kameraname geändert und steht im
+			   Sender das Panel gerade auf "Kameraname ändern" oder 
+			   "Kamera" (auf der geänderten Kamera), wird nun auch das Panel aktualisiert.
+27.05.02 TKR - Bugfix Nr. 545 Falls beim Alarmbackup das Datenbankfenster in der 1-Plus Ansicht nicht
+			   das aktive (große) Fenster ist, wird es aktiv (und groß) gesetzt, sobald die Alarm-
+			   Auslagerung beginnt.
+28.05.02 UF  - Bugfix Nr 496 und 511 die permanente Maske geht jetzt auch, wenn man erst als Operator
+			   und dann im Systemmenu als Supervisor eingeloggt ist.
+			   Das Panel wird wieder immer richtig dargestellt.
+29.05.02 TKR - Bugfix Nr. 223 Empfänger auf Win95/98/98se/me. Nach Beenden des Programms stürtzt Windows
+			   nicht mehr ab. Ein Absturz erfolgt aber weiterhin, wenn das Programm mittels Taskmanager
+			   gewaltsam beendet wird.
+30.05.02 ML  - Bugfix Nr. 540 Es wird nun überprüft, ob der Ausdruck erfolgreich war oder nicht.
+31.05.02 UD  - DTS Software mit neuem Firmenlogo
+23.09.02 UF  - Backup Code aus dem Playwindow entfernt. Backup von Alarmen erfolgt jetzt auch im
+			   Backupwindow
+25.09.02 TKR - Die Verbindung zu "ACDC" eingebaut. Wird nach DTS Start und Anmeldung (PIN)
+			   connected, wie CIPCDatabase...
+			   Dazu neue Klasse CIPCDataCarrierClient angelegt.
+26.09.02 TKR - Das Starten von ACDC.exe durch den DVClient erfolgt vorerst nur, wenn
+			   TKR definiert ist (#define TKR). 
+			   - ACDC.exe wird nur versucht zu starten, wenn es im Pfad "C:\DV\ACDC.exe" 
+			   auch wirklich vorhanden ist.
+28.09.02 TKR - Eingabereihenfolge für das Backup mit ACDC geändert. Vor Eingabe der KameraNr
+			   wird zunächste ACDC.exe gefragt, was für ein Medium sich im Laufwerk befindet.
+			   Ob ein Backup mit DirectCD oder ACDC.exe erfolgt, hängt ausschließlich von
+			   der Variable "m_bCanBackupWithACDC" ab. Diese wird nur gesetzt, wenn von ACDC.exe
+			   eine positive Rückmeldung bezüglich des eingelegten Mediums erfolgte.
+			   TODO:
+			   - Einbauen der neuen Texte in die Language.dll
+			   - Nachstart von ACDC durch Starter testen, da ACDC dann immer als Vollbild erscheint
+			   - Starter muß ACDC sauber runterfahren (nicht abschießen) da sonst die Verbindung
+			     zur NeroAPI.dll nicht sauber beendet wird. Nach erneutem Start von ACDC.exe kann
+				 dann die NeroAPI.dll nicht mehr initialisiert werden, erst nach Rechnerneustart.
+02.10.02 TKR - 1. Texte in Language.dll eingebaut,
+			   2. Nachstarten durch DVStarter funktionert, ACDC wird ebenfalls durch DVStarter
+			      sauber runtergefahren.
+			   3. Das Brennen mittels ACDC funktioniert soweit. Mit CD-R`s und CD-RW`s. Es können
+			      auch nicht leere CD-RW`s benutzt werden.
+			   TODO:
+		   OK  - Auslagerung fortsetzen mit ACDC.exe !!!
+			   - das Backup (in ACDC.exe) künstlich um ca. 30 Sekunden verlängern, da keine
+			     Progress während des Schreiben des Leadout von Nero gemeldet wird.
+			   - wenn nach CD-RW löschen die RW aus dem Laufwerk genommen wird, muss vor
+			     dem Backup noch geprüft werden, ob eine CD im laufwerk ist. Ansonsten wartet
+				 die NeroAPI.dll (somit auch ACDC.exe) unendlich lange.
+			   - falls auf eine Datei beim baclup nicht zugegriffen werden kann (z.B. acdc.log)
+			     dann das dem Client hochmelden. Erscheint zurzeit nur als Trace in ACDC.exe
+			   - bei Abschuss von ACDC.exe versuchen, die NeroAPI.dll "manuell" wieder freigeben.
+			     Eine autom. Freigabe durch das OS geschieht erst nach ca. 1-2 Minuten
+			   - evtl. noch hochmelden, wenn Buffer underruns verhindert wurden
+			   - evtl. die aktuelle Brenngeschwindigkeit hochmelden, vorher feststellen, ob sie
+			     nur vom Brenner oder auch vom Medium abhängt.
+		   OK  - NeroAPI.dll Error (-19) Fixation nachvollziehen und hochmelden (trat bei 
+			     defektem Brenner auf)
+			   - evtl. das separate Löschen einer CD-RW in ACDC.exe einbauen um zu verhindern 
+			     (wenn es geht), dass CD-RW nach dem Löschen kurz ausgeworfen wird.
+			   - Falls ACDC.exe nicht läuft (weil abgeschossen), im Panel die Auswahl
+			     "Bilder auslagern auf CD" disablen.
+			   - der Suchbutton (Fernglas) braucht während des Brennens nicht mehr disabled sein,
+			     da ja nicht mehr auf die datenbank zugegriffen wird, sondern nur auf das 
+				 separate Tempverzeichnis
+			   - Wenn die automatische Endzeitberechnung nicht genug Daten für Vollauslastung der
+			     CD findet, wird der falsche Text ausgegeben. "optimale CD Ausnutzung". Es sollte
+				 aber "DB ende erreicht, nicht optimale Ausnutzung da zuweig Daten gefunden" oder so
+			   - Wird nach dem Löschen einer CD-RW diese aus dem laufwerk genommen, wartet ACDC
+			     auf eine neue CD. Dieses Abbrechen, da ansonsten beim nächsten brennen ACDC
+				 sofort mit dem Brennen anfängt, ohne dem Client Bescheid zu sagen
+07.10.02 TKR - Alle von Nero gemeldeten Erros werden nun an den DVClient weitergeleitet und es
+			   erfolgt ein Abbruch der Auslagerung incl. HInweis für den Benutzer.
+			 - Multibackup mit ACDC (Auslagerung fortsetzen) integriert.
+07.10.02 ML  - Unter WindowsXP wird bei Eingabe von 'StartExplorer' anstatt des Explorer,
+			   der Internetexplorer gestartet, da dieser sich nicht als Shell einbindet.
+08.10.02 TKR - ACDC Alarmbackup funktioniert.
+			 - Das Temp Verzeichnis für das ACDC Backup wird stets mit neuem Namen angelegt und
+			   später wieder gelöscht.
+08.10.02 ML  - 'StartExplorer' startet nun 'winfile.exe', da der iExplorer ohnehin keine
+			   Zugriffsrechte auf die Laufwerke hätte.
+09.10.02 TKR - Ist physikalisch kein Brenner vorhanden, wird das Menü "Bilder" im Panel entfernt.
+			 - Tritt ein Error mit ACDC auf, wird nun auch der temporäre Pfad des backups mit
+			   ACDC gelöscht
+11.10.02 TKR - In CCopyReadOnlyVersion die neue DLL DeviceDetect.dll mit eingebaut. Sie muß
+			   auch mit der anderen lesesoftware kopiert werden.
+			   BUGFIX DV-578: In CCopyReadOnlyVersion::IsAlreadyDone() wird nun der Pfad
+			                  mit übergeben, in dem nach DVStorage.exe zu suche ist.
+11.10.02 ML  - Das Backup ist nun über das EEPRom der JaCob/SaViC verdongelt (Nur unter WinXP)
+14.10.02 TKR - BUGFIX DV-563: Falls keine Bilder ab dem benutzergewählten Startzeitpunkt der
+			   Endzeitberechnung vorhanden sind, stoppt die Berechnung und der Hilfetext im
+			   Backup-Fenster sagt aus, daßß keine Bilder gefunden wurden. 
+			   BUGFIX DV-579: Alarmbackup unter WinNT mit DirectCD funktioniert nun.
+15.10.02 ML  - BUGFIX DV-580: Das Panel verschwindet nun nicht mehr unter dem Mainframe
+		 RKE - USB-Geraeteerkennung für Drucker und externe Disketten und Memorysticks.
+			   Meldung der erkannten Geraete akustisch und im Display.
+16.10.02 ML  - BUGFIX DV-594: Ist das Backup durch den Dongle untersagt, werden nun auch nur
+			   die Backupfunktionen gesperrt.
+16.10.02 TKR - Backup mit ACDC:
+			   Es wird nun zusätzlich noch unterschieden (Panel::OnUpdateMenu) ob ein backup
+			   mit ACDC grundsätzlich möglich ist (1)
+			   (Brennsoftware muss installiert sein (Nero, XP))
+			   und ob ein Brennlaufwerk zu Verfügung steht (2).
+			   (1) - theApp.CanBackupWithACDC()
+			   (2) - theApp.IsACDCBackupDrive()
+
+			 - USB Erkennung von Brennern in Zusammenarbeit mit ACDC funktioniert. Nach Erkennen
+			   eines neuen Brenners wird ACDC stets beendet und neu gestartet. Nach Neustart ist
+			   der neue Brenner (USB Brenner angesteckt) der aktuelle, 
+			   bzw der alte Brenner ist der aktuelle (USB Brenner abgezogen), 
+			   bzw. kein Brenner ist aktuell (kein Brenner installiert)
+18.10.02 TKR - BUGFIX DV-592: Backup (incl. Lesesoftware) auf Memorystick funktioniert.
+21.10.02 TKR - BUGFIX DV-602: Rechtecksuche auf Memorystick-Backup funktioniert wieder.
+		 ML  - BUGFIX DV-605: Nach dem Einlegen einer CD stimmt das ajktive Playwindow
+		       nicht mit der Kameranummer überein, die im Panel angezeigt wird.
+
+22.10.02 ML  - Die Produktbezeichnung, die unter dem Logo angezeigt wird, wird nun durch
+			   ein ' - XP' (WindowsXP) oder ' - NT' (WindowsNT 4) ergänzt.
+
+23.10.02 TKR - BUGFIX DV-564: Falls es noch einen Versatz zwischen dem Start-und Endzeitpunkt gibt,
+			   wird nun die Endzeit-Berechnung mit jeweils einer einzigen Sekunde weniger durchgeführt.
+23.10.02 UF  - BUGFIX DV-607: Das Timeout tritt nicht mehr auf, nur noch, wenn wirklich NICHT 
+			   kopiert werden kann (Schreibfehler o.Ä.). 
+			   BUGFIX DV-610: Gerät ohne Disketten LW, Memorystick wieder abziehen, Disketten-
+			   Symbol verschwindet wieder.
+			   BUGFIX DV-612: Beim Abbruch (mittels Panel-Button <- oder ->) der Endzeitberechnung
+			   wird noch das letzte ConfirmBackupByTime abgewartet, anschließend schließt sich
+			   das backup fenster von sich selbst aus. 
+23.10.02 RKE - BUGFIX DV-565 Gatewayadresse wird jetzt gesetzt.
+24.10.02 UF  - Bugfix DV 602 Rechtecksuche auf Memorystick ging nicht.
+25.10.02 ML  - BUGFIX DV-621 Bei SDR Geräten wurde das Backupfenster geschlossen, sobald
+			   der Benutzer die Sicherheitsabfrage Ja/Nein beim Löschen des Mediums von
+			   Nein auf Ja umgestellt hat. Dadurch war kein Backup mehr möglich. Dies
+			   trat nur bei SDRs auf, da hier Menüführung gespiegelt ist.
+28.10.02 TKR - BUGFIX DV-618: Der Text der Fehlermeldung, wenn ein Backup fehlschlug,
+			   wurde geändert und ist nun allgemeingültig (CD-R, CD-RW, Medien - Backup)
+			   BUGFIX DV-616: Das Löschen eines externen Mediums wurde nun in einen eigenen
+			   Lösch-Thread verlegt, ähnlich wie bei "CopyReadOnly". Nun wird der MainThread
+			   während des Löschens nicht mehr blockiert.
+			   Dazu neue Klasse "CBackupEraseMedium" eingebaut.
+
+			   Während des Löschens wird die vergangene Zeit in Sekundenschritten angezeigt. Sie
+			   wird dann während des eigentlchen Backups (Kopieren der Daten) weiterhin hochgezählt.
+05.11.02 TKR - BUGFIX DV-626: Kameramode-Wechsel ist bei Alarmkameras nur möglich, wenn gerade
+			   Alarm anliegt. Ebenfalls ist Kamaramode-Wechsel nicht möglich, wenn gerade
+			   ein Backup (auf Medium, nicht auf Diskette) läuft.
+
+08.11.02 ML	 - Export/Import der Einstellungen implementiert. 
+			   Siehe dazu unter 'Videte\Software\Dokumentation\Export-Import der DTS Einstellungen.doc'
+08.11.02 GF	 - BUGFIX DV-630: Beim Disconnect wurde das CServer-Object zerstört, ohne den ConnectThread abzuwarten
+			   Beim Disconnect wird jetzt der Connect + Fetch gecancelt, bevor das CServer-Objekt zerstört wird
+08.11.02 GF	 - BUGFIX DV-630: Zweiter Bug für diese Ursache In CMainframe::OnDisconnect gefunden + behoben
+
+19.11.02 ML  - Ausführliche Fehlermeldungen im Logfile, wenn der Export/Inport der Settings mißlingt.
+20.11.02 TKR - Umstellung der Berechnung und Benutzung der Kapazitäten von Backup-Medien auf 64 bit.
+			   DVD+R und DVD+RW Medien werden unterstützt. Je nach Größe der Kapazitäten der Medien 
+			   wird das Backup auf eine CD bzw. DVD vorbereitet (Berechnung der auszulagernden Bilder).
+
+21.11.02 TKR - Der Fehlerfall, der Eintrat, wenn eine Auslagerung auf ein Memory Stick nicht 
+			   funktioniert, weil der Stick kaputt ist, wird nun abgefangen und die Auslagerung
+			   sauber beendet.
+
+21.11.02 TKR - Die Reserve von 5 MB freier Speicherkapazität auf einem CD/DVD Medium wurde auf 10 MB
+			   erhöht, da es beim Berechnen der Kapazität von beschriebenen CD-RW Medien erneut zu
+			   einem Fehler kam, sodass Nero die Zusammenstellung nicht brennen konnte (zu wenig Platz).
+
+22.11.02 TKR - BUGFIX DV-633: Wird während des Backups (Zwischenspeicherung und Brennen) ein 
+			   USB CD/DVD Laufwerk angeschlossen und erkannt, wird ACDC nicht mehr neu gestartet, um
+			   das neue Laufwerk einzubinden. Dazu wird ACDC über den Beginn eines Backups informiert.
+			   Ist ein Backup beendet worden (auch im Error-Fall) schaltet ACDC sich selbst wieder frei
+			   und reagiert dann wieder auf USB drives. 
+29.11.02 TKR - BUGFIX DV-637: Vor der Zwischenspeicherung der Bilder eines Backup auf LW C:\ wird
+			   die auf C:\ noch freie Kapazität geprüft. In Abhängigkeit des freien Platzes wird
+			   dann die Größe des zu bebrennenden Mediums gesetzt.
+03.12.02 TKR - BUGFIX DV-Empfänger - 232: Beim Speichern von Bildern auf Diskette wird nicht nur nach 
+			   erfolgreichem Speichervorgang aller zu speichernden Dateien (ijl.dll usw.) 
+			   eine Message (ConfirmSelfCheck) an den Starter geschickt, sondern auch nach jedem 
+			   Speichern einer einzelnen Datei. 
+
+05.12.02 TKR - BUGFIX DV-640: Alarmkonfigurations-Menü geändert. Die Eintrage "Alarmanruf bei:" und 
+			   "Rufe 1,2,3" werden nicht mehr angezeigt, wenn Netzwerk und ISDN nicht freigeschaltet
+			   sind.
+10.12.02 TKR - BUGFIX DV-235: Import/Export Einstellungen wird aus Menü entfernt, bei ReadOnly, 
+			   Receiver und keinem Disk-Laufwerk (MemoryStick)
+
+10.12.02 ML  - Das Backup auf DVD ist nun zusätzlich zum bisherigen Backup verdongelt.
+			   Dabei beinhaltet das DVD-Backup auch das Backup auf CD und/oder Memorystick.
+11.12.02 RKE - BUGFIX DV-630: in CServer::Disconnect(), ~CServer() GetExitcodeThread eingefügt
+			   danach stürzte er bei mir nicht mehr ab.
+11.12.02 TKR - Die Verdongelung wird nun auch korrekt ausgewertet, d.h. Backup auf DVD ist nur
+			   möglich, wenn es freigeschaltet ist. Ist nur CD Brennen freigeschaltet, kann 
+			   trotz nicht DVD-Freischaltung mit einem DVD-Brenner eine CD gebrannt werden.
+12.12.02 TKR - BUGFIX DV-641: Die Prozentanzeige während des Zwischenspeicherns von Alarmbildern
+			   funktioniert. Es musste vor der Zwischenspeicherung bei der Datenbank nachgefragt
+			   werden, wie groß das Alarmarchiv ist, da ansonsten zwar die jeweils aktuell kopierten
+			   Bilder bei der Zwischenspeicherung gemeldet wurden, es aber keinen Bezug zur
+			   Gesamtgröße gab, da diese "0" war. Deshalb war Prozentanzeige immer 0.
+13.12.02 RKE - Workaround für HP-Drucker, dessen Druckaufträge nicht gelöscht werden, wenn Bilder
+			   gedruckt werden. Das Drucken der Listen (Alarm, Störungsprotokol) wurde auch geändert!
+13.12.02 ML  - Bugfix DV-645: Aufgrund eines Fehlers in der Jpeglib gab's einen GP beim Disketten-
+			   export von einem Livebild der SaVic, wenn diese unkomprimierte Bilddaten an 
+			   DVProzess liefert.
+16.12.02 RKE - In der Funktion InitInstance wird jetzt eine Routine zum Löschen aller Druckaufträge des
+			   Standarddruckers aufgerufen, da WinXP fehlgeschlagene Druckaufträge auch nach Neustart
+			   speichert.
+16.12.02 RKE - Das Bild der aktuellen Kamera wird auf der Druckseite jetzt zentriert ausgegeben.
+16.12.02 RKE - Für den Workaround für den HP-Drucker (s.o.) wurde zusätzlich ein Patch für die Version
+			   570 des DVClient erstellt.
+17.12.02 RKE - Mit Rechtsklick auf den Druckerbutton wird jetzt der Druckereinstellungsdialog aufgerufen,
+			   wenn in der Registry unter "HKEY_LOCAL_MACHINE\SOFTWARE\dvrt\DV\DVClient" der DWORD-Wert
+			   PrinterSetup = 1 eingetragen wird.
+			   Die Geraete duerfen nicht mit dieser Einstellung ausgeliefert werden !!!
+			   Es sollte jetzt getestet werden, ob
+			   - dieser Dialog notwendig ist,
+			   - vorher eine PIN-Eingabe sinnvoll ist,
+			   - ueber den Druckerdialog irgendwie auf das System zugegriffen werden kann.
+18.12.02 ML  - BUGFIX DV-650: Export/Import des Recordingmodes (MD/UVV) entfernt.
+			 - Die XPeLicense wird nun mit exportiert.
+			 - Nicht vorhandene AlarmDialing Rufnummern, werden nun importiert, und löschen
+			   beim Import evtl. vorhandene.
+			 - Die Settings.ini wird nun verschlüsselt. und als Settings.dat abgelegt. Sie sollte
+			   aber mit LogView betrachtet werden können.
+18.12.02 TKR - zur Änderung vom 05.12.02: Menüeintrag "Alarmanruf bei:" muss immer vorhanden sein. 
+			   Deshalb wurde dieser Menüeintrag wieder mit reingenommen, wenn es kein Netz und kein
+			   ISDN gibt. Ist notwendig, wenn Alarmausgang auf "Ein" steht und das Relais 
+			   auf der Savic/Jacob geschaltet werden soll.
+  
+19.12.02 TKR - Das Enablen/Disablen der Funktionen Export/Import Settings wurde aus dem LoadConfigMenu 
+			   rausgenommen und ins UpdateMenu verlegt.
+			   In OnNotifyDrive wird am Ende nur noch UpdateMenu aufgerufen und nicht eine Message an das
+			   Panel geschickt, um beim UpdateMenu auch LoadConfigMenu aufzurufen. In diesem Fall nämlich 
+			   wurde beim Abziehen des MemorySticks LoadConfigMenu aufgerufen. Und wenn kein Brenner angeschlossen
+			   war, wurde die 3  Backup Menüs komplett entfernt.
+			   Neue Variable im Panel: m_bIsBackupDrive. Wenn True ist entweder Diskette oder MemoryStick da.
+
+19.12.02 ML  - Zu Supportzwecken, werden nun folgende Dinge mit ins 'Settings.dat' exportiert.
+				- XPeLicense
+				- RecordingMode
+				- Status ob Netz installiert und freigeschaltet ist.
+				- Status ob ISDN installiert und freigeschaltet ist.
+				- Status ob Backup freigeschaltet ist.
+				- Status ob Backup auf DVD freigeschaltet ist.
+
+19.12.02 TKR - BUGFIX DV-653: Disketten Symbol ist nun immer sichtbar, wenn ein Export auf Diskette
+			   oder MemoryStick möglich ist.
+
+02.01.03 TKR - BUGFIX DV-662: Die Meldung "Keine Verbindung möglich" wurde angezeigt, da die 
+			   Gateway-Adresse "000.000.000.000" war. Soll keine Gateway-Adresse eingetragen sein,
+			   (dies ist durch die Eingabe von Nullen möglich), wurde der Wert "0.0.0.0" in die
+			   Registry eingetragen (Hkey_Local_Machine\System\ControlSet001\Services\TCPIP\
+			   Parameters\Interfaces\{...} -> DefaultGateway = 0.0.0.0).
+			   Dort darf bei keinem Gateway aber kein Eintrag vorhanden sein. Deshalb wird nun beim
+			   Setzen einer Gateway-Adresse mit dem Wert "000.000.000.000" in die Registry der
+			   Eintrag auf "leer" gesetzt, genauso, wie es auch nach einer Neuinstallation des DTS ohne
+			   eingetragene Gateway-Adresse ist.
+			   
+			   BUGFIX DV-659: Die Kameranamen werden nun nicht mit importiert, sofern es sich nicht
+			   um das selbe System handelt, von dem exportiert wurde.
+			   BUGFIX DV-658: Wie 659, war selber Fehler.
+
+03.01.03 ML  - BUGFIX DV-665: Nach dem Importieren wird nun die temporär Erzeugte Settings.ini
+			   im DV-Verzeichnis gelöscht.
+
+06.01.03 ML  - Es werden nun auch die Einstellungen der nicht angeschlossenen Kameras
+			   exportiert und importiert.
+
+07.01.03 ML	 - BUGFIX DV-672: Es können nur noch Daten von Systemen mit der gleichen Kameraanzahl
+			   importiert werden.
+
+08.01.03 ML  - BUGFIX: DV-673: Im Maskeneditor wurde immer von einem Jpeg-Format ausgegangen,
+			   was natürlich bei einem YUV422-Format nicht stimmt.
+			 - Es wird nun nur noch die jeweils kleinere Anzahl der Kameraparameter importiert.
+			   d.h. auf einem 16er System werden beim Import einer Settings.ini eines 8er Systems
+			   auch nur die Einstellungen der ersten 8 Kameras importiert.
+15.01.03 UF  - Es lassen sich jetzt mittels ShowSequenceInfo, die Bildnummer, Sequenznummer und Typ anzeigen.
+
+16.01.03 ML -  BUGFIX: DV-681: In 'LoadMenus' wurde auf das Configmenü gewechselt, was aber
+			   falsch ist
+
+31.01.03 TKR - Das Echtzeit-Abspielen von DB-Bildern jeweils einer einzigen Kamera wurde 
+			   vorbereitet. Die Klasse "CPlayRealTime" wurde angelegt. Das Benutzen des
+			   Echtzeit-Abspielens ist im Sourcecode allerdings nicht freigeschaltet. Die Software
+			   verhält sich so, als wenn das Echtzeit-Abspielen nicht da wäre. Es wird noch nicht
+			   aufgerufen.
+
+03.02.03 TKR - BUGFIX DV-252 (Bug-Empfänger): Beim IP-Receiver ist das Netzwerk immer freigeschaltet.
+03.02.03 UF  - Das grosse Fenster in 1-plus wird jetzt als Livebild schnell dargestellt.
+20.02.03 TKR - Echtzeit-Abspielen von Datenbankbildern ist in Vorbereitung, 
+			   aber noch nicht freigeschaltet.
+03.02.03 RKE - sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			   und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			   - CHostsDlg::OnEditIP()
+			   - CPanel::OnPINEntered()
+			   - CPlayWindow::RecordNr();
+25.02.03 TKR - Echtzeit-Abspielen von DB-Bildern vollständig integriert. Ist zurzeit mittels Registry
+			   "DV\DVClient Realtime = 1" freischaltbar. Soll später entweder standartmäßig aktiv
+			   bzw. über Panel einstellbar sein.
+
+26.02.03 TKR - Synchrones Abspielen mehrerer Datenbankfenster in Vorbereitung. Zurzeit auskommentiert.
+31.03.03 UF  - Bugfix Nr 693 Beim Ausloesen des externen Melders von Camera 16 wird die Titelleiste nicht rot. 
+
+07.05.03 TKR - BUGFIX: DV-694: Erst nach dem Anzeigen UND dem bestätigten Ende der Rechtecksuche 
+			   (confirm query) darf die nächste Rechtecksuche gestartet werden.
+09.05.03 TKR - 1. Anzeigen von System Informationen eingebaut aber noch nicht aktiviert.
+			   2. Die RegOption "Realtime" in "DV\DVClient" wird nun auch in Registry angelegt
+
+12.05.03 ML	-  Wenn beim Update in der 'Disk'-Datei -1 angegeben wird, so wird der Oem ignoriert, und
+			   das Update ist für jeden Oem durchführbar.
+19.05.03 TKR - Neuen Dialog "InfoDlg" eingefügt. Kann mittels "System Info" im Hauptmenü des Panels
+			   aufgerufen werden. Zeigt z.B. die Geräteseriennr., Nero-Version, usw. an. 
+23.05.03 TKR - System Informationen werden nun beim Receiver nur angezeigt, wenn der Sender das kann.
+26.05.03 TKR - BUGFIX: DV-712: Die Vorwärtsbutton sind nun enabled, falls etwas gefunden wurde. 
+03.06.03 TKR - BUGFIX: DV-701: Die Einstellungen der Alarmanrufe (Ext1, Ext2 usw) wird jetzt in
+			   Abhängigkeit der installierte(n) Karte(n) (Jacob oder Savic) angezeigt. Bei Savic
+			   gibt es keinen Ext2 Alarmeingang. Dieser wird dann ausgeblendet.
+			   Dazu Funktion CLiveWindow::GetAlarmCallEventByCardType() eingebaut.
+06.06.03 TKR - Falls das CD-Laufwerk fehlerhafte freie Kapazitäten eines Mediums liefert,
+			   wird dieses nun auch im Client als Fehler behandelt und das Medium ausgeworfen.
+06.06.03 RKE - Fuer die Unicode Erweiterung für erweiterte Zeichensaetze wurde eine sprachabhaengige
+               Fontauswahl implementiert, um die erweiterten Zeichensaetze darstellen zu koennen.
+10.06.03 TKR - BUGFIX: DV-705,706: Die Netzwerkadressen xxx.xxx.xxx.000 und xxx.xxx.xxx.255 können 
+			   nicht mehr angegeben werden. Weder als eigene Stationsadresse oder als Adresse der im
+			   Alarmfall anzurufenden Gegenstation.
+11.06.03 TKR - BUGFIX: DV-726 Die Echtzeitwiedergabe von Datenbankbildern ist nun standardmäßig 
+			   zugeschaltet (Registry: DV\DVClient -> Realtime)
+13.06.03 GF	 - Bugfix 625 + 649 + 698: Alarmanruf T->R, dann folgt CallBack R->T, der dann abgewiesen wird
+17.06.03 TKR - BUGFIX: DV-722: Das ® überall bei "videte IT" eingebaut, auch die Logos (oder die Logi?)
+18.06.03 TKR - BUGFIX: DV-733: Im ReadOnly wird im Logfile nun nicht mehr alle 10 Sekunden ausgetraced,
+		       dass sich zu Input/Output/DataCarrier verbunden wird (und fehlschlägt).
+19.06.03 TKR - BUGFIX: DV-736: Der BUGFIX: DV-705,706: wurde wieder zurückgeändert, da
+			   für z.B. Subnetmasken die IP "xxx.xxx.xxx.000" eingegeben werden können muss.
+20.06.03 TKR - Ist die DVD Brennoption nicht freigeschaltet und soll eine DVD gebrannt werden, wird 
+			   ein Fehler gemeldet. In ACDC wird ausgegeben, dass diese Option nicht freigeschaltet ist.
+30.06.03 TKR - Beim Brennen von DVD Minus Medien wird das Schreiben des Leadouts ebenfalls in Prozent
+			   ausgegeben, sodass 2 mal von 0% bis 100% gezählt wird. Da das bis jetzt nur bei einem
+			   DVD Minus Brenner (LG: HL-DT-ST DVDRAM GMA-4020B) und kein weiteres Laufwerk zum Test
+			   vorlag, wird nach erreichen der ersten 100% (schreiben der Tracks) zusätzlich im 
+			   Backupfenster "Die Auslagerung wird beendet. Bitte warten..." angezeigt. Dazu brauchte die Langdll nicht
+			   geändert werden!
+30.06.03 TKR - Die Echtzeitwiedergabe ist standardmäßig AUSgeschaltet. Soll erst in Version 2.5 mit
+			   rein und dann schaltbar sein.
+30.06.03 GF  - Memory leak in CStatisticDlg beseitigt
+			 - Anzeige in CStatisticDlg für Chinesisch angepasst
+07.07.03 TKR - BUGFIX DV-755 Bei Alarmverbindung zum Empfänger wird im Alarmfall nur noch eine Kamera-
+			   umschaltung und somit eine UpdatePanel() vorgenommen, wenn die Alarmkamera NICHT die 
+			   aktive war.
+09.07.03 GF	 - Bugfix DV-758 Menü Alarmkonfiguration im IP-Receiver komplett disabled
+29.07.03 TKR - Beim Receiver ist nun der Button "Eject" immer enabled. Es kann damit nun das 
+			   Optionsmenü verlassen, die Verbindung getrennt oder das Programm (Receiver) beendet werden.
+29.07.03 TKR - Menüstruktur geändert. 
+			   - Hauptmenü: 
+					- "System Info" in "System" umbenannt und 2 Submenüs "System Info" und
+					  "Statistik" eingefügt. Im Optionsmenü "Sonstiges" den Eintrag 
+					  "Statistik" entsprechend entfernt.
+			   - Optionsmenü: 
+					- Menüpunkt "Video-Ausgänge" um Submenü "Sequenzer Zeit" erweitert.
+					  Der Optionsmenüpunkt "Sequenzer" wurde gelöscht.
+					- Menüpunkt "Farbeinstellungen" in "Kamera Einstellungen" geändert. 
+					  Das Submenü "Kameraname" eingefügt. 
+					- Menüpunkt "Kameraname ändern" geändert in "System Einstellungen". Den vorhandenen
+					  Submenüpunkt "Kameraname" gelöscht.
+					  Den Submenüpunkt "Akustischer Alarm" eingefügt und im Optionsmenü "Sonstiges"
+					  den Eintrag "Akustischer Alarm" entsprechend entfernt.
+30.07.03 TKR - Menüstruktur geändert:
+			   - Optionsmenü:
+					- Menüpunkt "System Einstellungen" um Submenü "Bildauflösung" erweitert.
+					- Menüpunkt "System Einstellungen" um Submenü "Export Einstellungen" und
+					  "Import Einstellungen" erweitert. Entsprechende Submenüpunkte im Menü
+					  "Sonstiges" entfernt.
+01.08.03 TKR - Menüstruktur geändert:
+			   - Hauptmenü:
+					- Neuen Menüeintrag "Wiedergabe" eingefügt. Er enthält folgende Submenüs:
+						- Echtzeit
+						- Alarmliste
+						- Fadenkreuz
+					  Entsprechende Einträge (Alarmliste und Fadenkreuz) wurden aus dem Configmenü
+					  "Sonstiges" entfernt.
+18.08.03 TKR - Menüstruktur geändert:
+			   - Optionsmenü:
+					- Menüpunkt "Kamera Einstellungen" erweitert um folgende Unterpunkte:
+						- Typ: Angabe des Kameratyps, Schwenkneider oder Fest
+						- ID:  Bei Schwenkneiger, Angabe der Kamera ID
+						- ComPort: Bei Schwenkneiger, Angabe des Comports (zurzeit nur "1" möglich)
+
+18.08.03 TKR - Im Hauptmenü unter "Wiedergabe" -> "Echtzeit" die Umschaltung Echtzeit ja/nein eingebaut.
+			   Echtzeit abspielen ist in allen Modi (Transmitter, Receiver, ReadOnly) möglich.
+
+18.08.03 TKR - Bei Änderung des Aufnahmemodes einer Kamera nach UVV wird die Kompression auf
+			   auf niedrig gesetzt. Beim Umschalten des Modes zurück nach Aktivitätserk. bleibt die
+			   auf niedrig gesetzte Kompression unverändert.
+28.08.03 GF  - PTZComPort´-Einstellung von Eingabe auf Auswahl umgestellt
+29.08.08 TKR - Hilfetext im backup Fenster für das Abbrechen des Backup erweitert.
+01.09.03 TKR - BUGFIX DV-771 + 773 + 774: Zoomen wieder 3 stufig, bei Santec kann Rechteck wieder 
+			   aufgezogen werden, 1Plus Darstellungswechsel geht auch wieder.
+01.09.03 TKR - BUGFIX DV-770: alle Menüfarben an OEM von Alarmcom angepasst.
+02.09.03 TKR - BUGFIX DV-783: abbrechen des Backup funktioniert
+03.09.03 GF  - BUGFIX DV-785: PTZ-ComPort lässt sich nicht ändern
+			 - BUGFIX DV-788: SchwenkNeiger hört nicht auf, sich zu bewegen
+05.09.03 TKR - BUGFIX DV-782: Abbrechen des Backups nun mit Ja/Nein Anfrage.
+			 - BUGFIX DV-773: Bei Santec erscheint nun kein Kreuz mehr in Titelzeile bei LiveWnd`s
+09.09.03 GF  - BUGFIX DV-769: Bei den Tooltips wurde das '|' nicht berücksichtigt
+09.09.03 GF  - BUGFIX DV-793: Tooltips: Nun ist alles wieder gut
+17.09.03 TKR - BUGFIX DV-771, 786, 787, 797: Sofern die Datei Sequence.dbf im DV-Verzeichnis 
+			   korrekt beschrieben wurde, ist alles wieder okay.
+17.09.03 TKR - BUGFIX DV-269 Empfänger: Hilfetext geändert
+21.10.03 TKR - In CPlayRealTime im Destruktor vorhandenes CIPCField gelöscht. Wurde vergessen.
+23.10.03 TKR - BUGFIX DV-799: Die "neuen" Features können nun auch ex- und importiert werden.
+27.10.03 UF  - Bugfix DV 803: Im gesperrten Zustand stimmt die Versionsangabe nicht.
+27.10.03 GF  - Bugfix DV 801: Einloggen ins Setupmenü ist ohne Eingabe einer PIN möglich.
+27.10.03 TKR - Bugfix DV 818: In der Unicode-Variante werden nun auch die Unicode DLL`s auf das
+			   Backup Medium kopiert.
+28.10.03 TKR - BUGFIX IP_RECEIVER 268: Backup CD einlegen bei gestartetem IP-Receiver erzeugt nun
+			   keinen GP mehr.
+28.10.03 GF  - BUGFIX DV 826: IP-Adresse, Subnet-Maske und Gateway wurden nicht richtig in die Registry eingetragen
+28.10.03 TKR - BUGFIX DV 824: Rechecksuche geht wieder.
+29.10.03 TKR - BUGFIX DV 830: Rechteck Skalliereung bei kleinen DB-Fenstern funktioniert wieder.
+29.10.03 TKR - BUGFIX DV 829: ThreadLog für PlayRealTime wird nur noch alle 24h ausgegeben.
+19.01.04 TKR - Austracen von "PlayRealTime" geschah immer noch alle 15 MInuten. Diesen Wert auf 
+			   12 Stunden verändert.
+30.01.04 RKE - CKeyboard Dialog fuer Sprachabhaengige (speziell russisch) Tastaturlayouts vorbereitet.
+30.01.04 RKE - CIPCAudioDVClient fuer Audioverbindung eingebaut.
+30.01.04 RKE - Anfordern und abspielen von Audiodaten in CPlayWindow und CIPCDatabaseDVClient eingebaut.
+03.02.04 TKR - Audio-Funktionalität ins Panel eingebaut. Funktioniert aber noch nicht.
+05.02.04 TKR - Backup: VImage und alle Audiokomponenten werden nun mitkopiert.
+			   AudioUnitRO: Wird von DVStorage gestartet, aber hier von DVClient wieder beendet.
+05.02.04 RKE - Einstellung der Audio-Funktionalitaet verbessert und verifiziert.
+10.02.04 RKE - Audio abspielen mit Prefetch von samples in Playwindow eingebaut und verifiziert.
+12.02.04 TKR - Bugfix 846:   Menuefarben Audio bei Alarmcom nun korrekt.
+13.02.04 RKE - Audio abspielen verbessert Systemauslastung war zu hoch.
+13.02.04 TKR - Empfindlichkeit nur enabled, wenn Audio einer Kamera zugeordnet ist ODER Mithören = ein
+16.02.04 RKE,TKR Es lässt sich nur eine Audio Archiv (auch gemischte Archive) zurzeit abspielen.
+			   Es wird verhindert, dass mehrere Archive mit Audio gleichzeitig abgespielt werden.
+			   Das Audio abspielende Archiv spielt auch, wenn es nicht aktiv ist. Es zweites
+			   Audio Archiv zeigt dann nur noch Bilder an.
+17.02.04 RKE - Bugfix 854: Audioeinstellungen können nun auch vom IP-Receiver gemacht werden.
+17.02.04 RKE - Funktion App::GetLocalAudio() liefert jetzt nur noch die lokale Verbindung und wird im PlayWindow benutzt.
+               Die Funktion App::GetAudio() liefert jetzt das Serveraudioobjekt. Dies ist beim Receiver remote. 
+			   * Der Transmitter hat nur ein Audioobjekt: lokal
+			   * Der Receiver hat zwei Audioobjekte: lokal und remote
+17.02.04 TKR - Bugfix 861: Audio wird nun auch im ReadOnly wiedergegeben.
+19.02.04 TKR - Bugfix 867: Fällt eine Audio zugewiesene Kamera aus, vebleibt sie nun in der Zuordnung.
+19.02.04 RKE - Bugfix 838: jetzt wird wieder gebeept. In der Registry kann eingestellt werden, ob der Lautsprecher oder Audio benutzt wird.
+               "HKEY_LOCAL_MACHINE\SOFTWARE\DVRT\DV\DVClient", "UseSpeaker", DWORD, Default = 1
+19.02.04 TKR - Bugfix 873: Es stehen nun auch im Panel bei Audio-Kamera-Zuordnung nur 
+			   MD Kameras zur Auswahl.
+20.02.04 RKE - Im Readonly modus bzw. als Receiver wird die lokale Lautstaerke auf 100 % gesetzt.
+23.02.04 RKE - Bugfix 877: CWK_Profile::SetReadOnlyMode(TRUE) verhindert, das Registryeinträge geschrieben werden.
+25.02.04 RKE - Prefetch mit Picture Buffer implementiert.
+		 RKE, TKR - doppelte audiosamples bei umschalten auf Prefetch verhindert.
+25.02.04 TKR - Bugfix: 895: UVV kameras haben bei Audio-Kamerazuordnung nun immer "Aus" stehen
+25.02.04 TKR - Bugfix: 896: Abspielen von gemischten Archiven nun auch über Sequence-Grenze
+			   hinweg möglich
+25.02.04 TKR - Bugfix: 848: Da der Schwellwert beim "Mithören" nicht berücksichtigt 
+			   wird (ist dann immer auf 0%), ist er nur einstellbar, wenn es 
+			   eine Kamerazuordnung gibt. 
+25.02.04 TKR - Bugfix 900: Echtzeit Wiedergabe nicht in Audio Archiven möglich.
+26.02.04 TKR - Bugfix 886: In ReadOnly wird nun nicht mehr versucht, den Wert 
+			   "LuminanceCorrectiong" in die Registry zu schreiben.
+26.02.04 TKR - Bugfix 904: Suche funktioniert wieder. Gefundenes Bild bleibt auch angezeigt.
+27.02.04 TKR - Bugfix 913: Beginnt ein Backup (Stick, CD) mit einem Audio, wird zum ersten 
+			   Bild gesprungen.
+01.03.04 TKR - Bugfix 914: GP im DVClient (CPlayWindow::RecordNr) 
+			   bei pSequenceRecord->SetNrOfPictures(), pSequenceRecord war nicht da. 
+			   Nun wird geprüft, ob pSequenceRecord da ist.
+01.03.04 UF  - Bugfix Nr. 915 GP im Client, keine Critrical Section ...
+03.03.04 TKR - Bugfix Nr: 923 DeadLock im CPlayWindow::RecordNr(Audio) behoben.
+04.03.04 GF  - Umstellung auf Unicode und VS_71
+04.03.04 TKR - Ein Unlock() wurde vergessen. CopyPaste Fehler, da nach Lock() ein Lock() folgte.
+05.03.04 UF  - Die Alarmliste kann jetzt auch Audioalarme.
+30.03.04 ML  - Die 'CDisplayWindow'-Klasse und die 'CMDConfigDlg'-Klasse enthalten nun ein CMPEG4Decoder
+			   Objekt, zwecks Darstellung der Mpeg4 Daten. In der VImage.dll sollte eine algemeine Decoder-
+			   Basisklasse eingeführt werden, von der dann CJpeg und CMPEG4Decoder abgeleitet werden. Dies
+			   würde die Integration der unterschiedlichen Decoder in den Clients vereinfachen.
+15.04.04 ML	 - Zoomen und Verschieben geht nun auch für MPEG4-Daten.
+			 - Das Fadenkreuz geht nun auch im gezoomten MPEG4-Bild
+			 - Im MDConfigDlg das fehlende 'm_pMpeg->Init' ergänzt.
+			 - Das Bild wird korrekt im MDConfigDlg angezeigt.
+			 - Bugfix: Die Maske läßt sich wieder zeichnen, ohne das der Dialog sich verschiebt.
+			 - Die permanente Maske läßt sich nun im DTS zeichnen und zur Tasha übertragen, bzw. laden
+			 - Bugfix: Rundungsfehler in SetBrightness, SetContrast, SetSaturation.
+			 - Helligkeit, Kontrast, Farbsättigung lassen sich nun auch für die Tasha korrekt regeln
+04.05.04 ML  - Jpeg Export von Tasha-Bildern funktioniert nun			 
+04.05.04 UF - MPEG4 Decoder dll auf CD ist jetzt die allgemeine.
+07.05.04 ML  - Bugfix-DV3 25: Der Ausdruck von Tashabildern funktioniert nun. 
+10.05.04 ML  - Bugfix-DV3 26: Die Symbole unten links im Bild (Lupe, etc...) erscheinen nun auch im Tasha Bild
+			 - Das Fadenkreuz wird nun absolut flackerfrei gezeichnet.
+11.05.04 ML  - Bugfix: 'Bitte warten...' bleibt nach einem Kameraausfall endlos stehen.
+			   Grund: Wenn das Kamerasignal wieder da ist, wird vom DVClient kein neues Bild
+			          angefordert, da 'm_iRequests' im 'CDisplayWindow' auf seinen maxiamlwert (5)
+			          herraufgezählt wird, bevor die Bilder real angefordert wurden.
+			 - Der OK-Button beim 'System-Info'-Dialog wird nun wieder korrekt geskint.
+13.05.04 ML  - Bugfix: Die MPEG4-Darstellung in CMDConfigDlg::ShowFrame() geändert, da dort beim dekodieren
+			           nicht zwischen I und P Frames unterschieden wurde.
+10.06.04 ML  - Bugfix: Es werden maximal 5 PictureRequests zur Zeit abgesetzt. DVClient schickt erst
+			           neue PictureRequests los, wenn die vorrangegangenen Bilder angekommen sind.
+			           Wenn die Bilder - aus welchen Gründen auch immer - aber nicht eintreffen, vorder
+			           DVClient nie wieder Bilder an. Workaround: Stehen länger als 10 Sekunden Bilder
+			           aus, so werden nun erneut Bilder angefordert. 
+14.06.04 TKR - Bugfix 42: Backup funktioniert wieder.
+14.06.04 TKR - Bugfix 38: Rechtecksuche geht nun auch bei Tasha vorwärts (und rückwärts)
+17.06.04 ML  - Lastverteilung bei der Livebilddarstellung. Das aktive Livebild dekodiert alle (25/s) Bilder
+			   alle anderen Livebilder dekodieren nur die I-Frames (5/s)
+			 - Die Darstellung der aktive Kamera wurde nur in der 1Plus Darstellung häufiger aktualisiert. 
+13.07.04 ML  - Bugfix-DV3 50: Der Statistikdialog läßt sich nun auch am Rand verschieben.
+13.07.04 TKR - Bugfix 21 + 45: Ältere fehlerhafte Datenbankbilder waren für das Fehlverhalten beim 
+			   Abspielen verantwortlich. Nahc kompletter Neuinstallation (alte Bilder gelöscht)
+			   funktioniert das Suchen und das Abspielen einwandfrei.
+13.07.04 TKR - Bugfix 64: RO-CD`s besitzen nun auch die OemGui-Sprach Dll`s.
+13.07.04 TKR - Bugfix 65: FastForward sind auf IFrames angepasst.
+14.07.04 TKR - Bugfix 67: Bei der rechtecksuche auf Tashabildern werden nur noch die
+			   IFrames (Vollbilder) durchsucht. Somit kommt es nicht mehr zu Geisterbildern.
+
+15.07.04 ML  - Bugfix 62: Das Zerstören der Livewindows ist nun durch eine CS geschützt.
+16.07.04 ML    Bugfix: Wenn alle kameras abgezogen sind und das Panel dann minimiert wird. Verschwindet es!
+				       Ursache: Zugriff über einen Nullpointer.
+20.07.04 UF  - Bugfix 73 Anzeige Fadenkreuze.				       
+21.07.04 TKR - Bugfix 77 Absturz beim Abspielen von Audioarchiven bei 
+			   Savic und Tasha (Jacob verm. auch).
+21.07.04 UF - Bugfix Fadenkreuze Tasha.			   
+22.07.04 UF - Bugfix Panel blockiert und Savic geht mal, mal nicht über IP.
+28.07.04 TKR- Bugfix 84: Auslagerung von Tasha-Bildern auf Diskette (Livebild/Datenbankbild) funzt.
+29.07.04 TKT- Bugfix 88: Tashabilder lassen sich nun auch ausdrucken.
+19.08.04 ML - Bugfix: Wird die letzte Sequenz eines Archives von der Datenbank gelöscht, so wechselte
+			  der Playstatus des PlayWindows auf PS_STOP, was dazu führte, das das entsprechende Fenster
+			  sich öffnete. Korrektur: PS_STOP in PS_EJECT geändert.
+01.10.04 TKR- Bugfix 101: Suche liefert korrektes Ergebnis und zeigt nun auch das korrekte Bild an,
+			  wenn das Datenbankfenster vor der Suche noch nicht geoeffnet war.
+14.10.04 UF - MPEG4 Bilddarstellung jetzt wahlweise Single oder Multithreaded mit Registry Mpeg4DecodeMT
+			  in HKLM\Software\DVRT\DVClient
+20.10.04 UF - Bugfix Versionstempel falsch dadurch Rechtecksuche disabled.			  
+29.10.04 RKE- Russisches (chinesisches [forthecat]) Keyboard jetzt umschaltbar
+11.11.04 UF - Siemens Logo's anstelle von Alarmcom
+18.11.04 TKR- Gemischte Archive (Audio/Video) abspielen funktioniert nun in soweit, dass es bei
+			  Mpeg Bildern zu keinen Geisterbildern mehr kommt. Das Audio selbst hängt bei
+			  der Wiedergabe dem Bild sehr stark hinterher.
+26.11.04 ML - Schaltbare Terminierung ins Menu eingepflegt.
+08.12.04 ML - Bugfix 120: Die Menüeintrag 'Kameraterminierung' wird für SaVic disabled.
+			- Bugfix 112: Der Hintergrund bei 'Kameraterminierung ist bei OEM Siemens nun grau
+08.12.04 RKE- Bugfix 117: StartExplorer ruft jetzt Winfile auf
+			  Bugfix 110: ueber die Tastatur kann jetzt auch Space eingegeben werden.
+			  Bugfix 121: Adaptive Maske entspricht jetzt meinem Geschmack.
+			  Bugfix 115: Picturesize wird jetzt auch ueberprueft
+09.12.04 RKE- Bugfix 114: Critical Section wurde erweitert
+10.12.04 TKR- Bugfix 119: Alle TKR Traces, die mit dem Backup zu tun haben, sind mittels
+			  Reg-Schalter "TKR_TraceBackup" ein bzw. ausschaltbar.
+14.03.05 UF+RKE - Performance Balancing fuer Livebilddarstellung Tasha. 
+			  Mit ShowFPS in der Registry lassen sich die Bilder pro Sekunde anzeigen.
+18.03.05 ML	  Bugfix 136: Das Flackern bei Tashabildern beseitigt.
+06.04.05 TKR- NameOfEnum fuer die InputStates im Panel (Nummernblock-Eingabe) integriert.
+13.04.05 TKR- Das Zwischenspeichern wurde, wie beim idip, auf den Windows eigenen Temppfad
+			  umgebogen. War fuer die Barebones notwendig.
+13.04.05 TKR- Im Menue -Kamera- den Eintrag -Bildrate- eingebaut. Bei Tasha laesst sich
+			  nun die Bildrate einstellen. Laesst sich auch remore (DTS-Receiver) bei 
+			  Tahsa-Systemen einstellen.  
+14.04.05 TKR- Die Einstellung -Bildrate- wurde nun auch in das Exportieren und Imp. der Setting
+		      implementiert.
+15.04.05 RKE- * Fuer WK_PTR_ARRAY´s SetAt durch SetAtFast ersetzt.
+			  * Fuer WK_PTR_ARRAY_CS´s CriticalSections ueberprueft und ergaenzt.
+			  * CProcessGOPThread implementiert zum zeitgesteuerten Abspielen fuer GOP´s.
+27.04.05 RKE- MMTimer fuer das Abspielen der GOPs in CLiveWindow implementiert.
+28.04.05 RKE- MMTimer Bugs behoben, Memberfunktionen aus dem TimerThread werden jetzt mit Postmessage
+			  aufgerufen.
+28.04.05 RKE- LiveWindows können jetzt abgeschaltet werden mit dem Registryeintrag "SwitchableLiveWindow"
+              auf 1 im DVClient.
+29.04.05 RKE/UF- In den LiveWindows ist die Anzahl der Events auf 2 reduziert worden. Bei 16 Kamera Fenstern
+			  werden jetzt 500 Handles eingespart. Mögliche Nebenwirkung: wird ein Handle schon durch einen Thread
+			  benutzt,so kann kein weiterer Thread diese Funktion benutzen. In diesem Fall wird eine Fehlermeldung
+			  in das Logfile geschrieben: "Entering 'funtionname' in Thread 'threadname': Event already used".
+29.04.05 RKE- Bugfix 145: unsichtbare PlayWindows werden nicht mehr angezeigt.
+02.05.05 RKE- Bugfix 147: Die MD Koordinaten, die mit den Bildern (MPEG4) geschickt wurden, haben die Koordinaten
+			  von der Inputverbindung immer wieder geloescht. Das fiel immer nur bei falschen Timing
+			  (!Entwickler Rechner) auf.
+03.05.05 RKE- Bugfix 150: Es werden jetzt alle vorhandenen Comports unter 32 benutzt.
+24.05.05 RKE- Bugfix 151: DHCP ein ausschalten implementiert.
+10.06.05 RKE- Live Bilder werden jetzt in einem extra Thread dekodiert, um den cipcOutput thread zu entlasten.
+			  Für Mpeg4 streams wurde die Abfage geändert. Die Requests werden jetzt vom LiveWindow generiert
+			  (aehnlich wie bei Idip). Der RequestThread hat nur noch eine Kontrollfunktion und steuert die
+			  Bildanfrage bei < 2fps.
+20.07.05 TKR- Bugfix 164: Request von Nicht-Livebildern nicht mehr direkt, sondern gepostet.
+20.07.05 TKR- Bugfix 165 + 166: Ist nur eine Kamera angeschlossen, wurde trotzdem View1Plus aufgerufen.
+			  Hier wird nun zu Beginn geprueft, ob nur eine einizge Kamera angeschlossen ist.
+			  Wen ja, dann nur Vollbild anzeigen.
+22.07.05 RKE- DHCP ein- bzw. ausschalten fuert jetzt zu reboot.
+04.08.05 TKR- Bugfix 173: Backup Endzeit Berechnung bleibt nicht mehr stehen.
+05.09.05 RKE- Die Alarmanrufstationen koennen jetzt auch als DNS/DHCP Namen eingegeben werden.
+19.10.05 ML - Bugfix 183: Bei CF Geräten ist das Diskettensymbol immer aktiv, und es wird auf c: gespeichert.
+28.11.05 TKR- Maintenance Funktionalitaet eingebaut. Zurzeit nur in Debug aktiv.
+29.11.05 TKR- Maintenance Window wird nun auch in Release angezeigt. 
+30.11.05 ML - CARD_TYPE_Q hinzugefügt.
+01.11.05 ML - Das CServer-Objekt besitzt nun die Funktion 'GetCardType(nCam, &nCardTyp)'.
+			  Mit ihrer Hilfe läßt sich auch ohne LiveWindow der Kartentyp ermitteln. Dies
+			  ist z.B. in 'LoadConfigMenu' notwendig, um den Frameratenmenüpunkt abhängig
+			  vom Kartentyp auch ohne Livefenster entfernen zu können.
+			  LiveWindow entfernen zu können.
+			- Die Q besitzt keine per Software schaltbaren Terminierung. -> Eintrag disabeln
+07.12.05 TKR- Maintenance Daten lassen sich nun auch als Systemeinstellungen 
+			  ex- und importieren.
+31.01.06 TKR- Fuer ein Backup wird nun immer der aktuelle Temp-Pfad genommen (CF oder normal).
+09.02.06 RKE- WM_LANGUAGE_CHANGED wird jetzt an den DVstarter gesendet.
+16.02.06 ML - Notwendige Anpassungen an die geänderte CSmart-Klasse durchgeführt.
+28.03.06 TKR- Bildaufloesung Einstellungen an Q-Unit angepasst. Q-Unit: hoch=4CIF, mittel=2CIF
+			  niedrig=CIF. Die Einstellungen aller anderen Karten bleibt unveraendert (hoch/niedrig)
+30.03.06 ML - In den beiden Klassen CDisplayWindow und CMDConfigDlg wird der neue Codec verwendet, sofern der
+			  Regschlüssel UseAVCodec auf 1 steht, und die beiden notwendigen Dlls (avcodec.dll, avformat.dll)
+			  greifbar sind. Ansonsten wird wie bisher der Emuzed Decoder verwendet. Livebild und Playback
+			  scheinen zu funktionieren.
+30.03.06 RKE- In KillGOPTimer wird erst nach dem Einsprung in die CriticalSection ueber die Bilder::timeKillEvent(uIDtemp)
+              aufgerufen. Damit wird garantiert, dass der GOPTimerThread gerade "arbeitslos" ist.
+03.04.06 RKE- Der GOP-Timer-Thread delegiert das Dekodieren jetzt an einen extra DecoderThread durch Events.
+			  Dadurch muss der TimerThread keine Bilder mehr verarbeiten.
+05.03.06 RKE- Der Registryeintrag "DrawInDecodeThread" wurde entfernt, es wird jetzt immer im DecoderThread gezeichnet.
+            - Der Registryeintrag "Mpeg4DecodeMT" wurde entfernt, da die decoder jetzt in Threads der Anwendung laufen.
+              Dazu gehoeren der DisplayWindowThread fuer die Stream bis 5 fps und die GOPThreads die durch den
+              GOPTimer (MMTimer) gesteuert werden.
+            - Wird der Registryeintrag "MinPerformanceLevel" auf Werte < 0 {0xffffffff(-1) - 0xfffffff0(-15)} gesetzt,
+              so wird bei MD die Framerate auf 25 fps hochgesetzt. -1: maximal 1 zusaetzlicher, -x maximal x zusätzliche
+              Streams mit 25 fps.
+            - Das Fadenkreuz im Livebild wird jetzt ca 3,5 Sekunden angezeigt und wandert natuerlich bei neuen
+              Koordinatem weiter. Erst nach Ablauf der 3,5 Sek. werden die Koordinaten wieder auf 0 gesetzt.
+            - Der DisplayWindowThread wird jetzt beim Disconnecten beendet, da es zu GPs beim Beenden kam. Die
+              Bilder in der Queue wurden an nicht mehr vorhandene Objekte geschickt.
+            - In CDisplayWindow::PictureData(..) wird jetzt zusaetzlich der WindowHandle abgefragt, um Zu verhindern,
+              dass ein Thread noch Bilder an ein gerade schliessendes Fenster schickt.
+20.06.06 RKE- Gezoomte Archivbilder werden jetzt Interpoliert gezeichnet. Dazu wird das Flag m_pPrinting des CDC Objektes
+              auf TRUE gesetzt.
+23.06.06 RKE- Bugfix 866: Requests wurden nicht mehr weitergeleitet, CLiveWindow::OnUser(..) hat nicht CDisplayWindow::OnUser(..)
+              aufgerufen.
+            - Bugfix 188: Der font des Hintergrund Logos wird jetzt angepasst.
+            - m_nResolution = EnumOfName(sValue); in CServer::ConfirmGetValue eingebaut.
+            - PerformanceManagement für Q eingebaut abhängig vom Reformancemanagement wird die Anzahl der darstellbaren Bilder
+              prozentual reduziert.
+26.06.06 ML - Bugfix 206: Bei MPEG4 wird das Fadenkreuz bei den P-Frames nicht mehr gelöscht, sondern an die Stelle
+		      gezeichnet, an der es beim vorangegangenem I-Frame zu sehen war.
+28.06.06 TKR- Das System Menü um die Einträge Videoformat (JPEG/MPEG-4), Videonorm (PAL/NTSC)
+		      und AGC (Ein/Aus) erweitert. Diese Einträge sind nur bei einer eingebauten Q Unit sichtbar.           
+28.06.06 ML - Bei Tasha läßst sich nun auch 4CIF einstellen.
+04.07.06 ML - ON_WM_QUERYENDSESSION wird nun behandelt und der Login Dialog gezeigt.
+05.07.06 TKR- Bugfix 210: Die QUnit Dongle Informationen bezueglich Freischaltung (LAN, ISDN, CD, DVD)
+			  werden nun ausgewertet.
+07.07.06 ML - Bugfix 202: Bei einem Auflösungswechsel wird ein evtl. vorhander Zoom zurückgesetzt.
+07.07.06 TKR- Die System Informationen zeigen nun neben den freigeschalteten Optionen 
+			  LAN, ISDN, CD, DVD auch die Anzahl der Kameras an, allerdings nur bei QUnit.
+07.07.06 ML - Sofern der Registryschlüssel DV\DVClient\AllowDeinterlacing auf 1 steht, werden alle
+			  YUV422/JPEG Vollbilder deinterlaced. Default ist der Schlüssel auf 0
+12.07.06 TKR- Bugfix 217: RTEs werden im Störungsprotokoll wieder angezeigt.
+13.07.06 ML - Die MD Koordinaten werden im UVV-Kassen-Modus gelöscht, damit das Fadenkreuz nicht
+			  zu sehen ist.

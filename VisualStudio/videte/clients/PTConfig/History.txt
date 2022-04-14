@@ -1,0 +1,18 @@
+
+24.11.97 >>> UpdateVersion um 10:12 <<<
+24.11.97 History text mit eine laaaaaaaaaaaaaangen laaaaaaangen Zeile. Dies ist sehr lang lang lang lang lang lang lang lang lang lang lang lang lang lang lang lang lang lang.
+24.11.97 History text mit Umlauten הצü und wieder Text
+24.11.97 >>> UpdateVersion um 10:10 <<<
+
+14.11.97 >>> UpdateVersion um 0:13 <<<
+
+2.11.97 >>> UpdateVersion um 22:33 <<<
+
+02.11.97 Interface erweitert, ohne Funktionalitaeten
+
+27.10.97 >>> UpdateVersion um 21:23 <<<
+
+27.10.97 >>> UpdateVersion um 21:11 <<<
+
+
+21.10.97 SetRegistryKey WK konform.

@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SocketUnit", "SocketUnit.vcproj", "{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = SocketUnit.vcproj
+		SccProjectName0 = \u0022$/Project/SocketUnit\u0022,\u0020AQJAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Dts = Dts
+		DtsDebug = DtsDebug
+		Enu = Enu
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Debug.ActiveCfg = Debug|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Debug.Build.0 = Debug|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Dts.ActiveCfg = Dts|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Dts.Build.0 = Dts|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.DtsDebug.ActiveCfg = DtsDebug|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.DtsDebug.Build.0 = DtsDebug|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Enu.ActiveCfg = Enu|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Enu.Build.0 = Enu|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Release.ActiveCfg = Release|Win32
+		{AC6B3B70-8E83-4155-A9B4-173BEE5F3B26}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

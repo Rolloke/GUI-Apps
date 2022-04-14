@@ -1,0 +1,505 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\GraphCreator.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\GraphCreator.ico"
+IDR_GRAPHCTYPE          ICON                    "res\\GraphCreatorDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_GRAPH_START
+    BUTTON      ID_GRAPH_STOP
+    BUTTON      ID_GRAPH_PAUSE
+    SEPARATOR
+    BUTTON      ID_INSERT_FILTER
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Mediadatei Rendern...",       ID_FILE_RENDER_MEDIA
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "Löschen\tStrg+D",             ID_EDIT_CLEAR
+        MENUITEM SEPARATOR
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Filter positionieren",        ID_VIEW_REARRANGE_FILTERS
+        MENUITEM "Automatisch anordnen",        ID_VIEW_AUTO_REARRANGE_FILTERS
+
+    END
+    POPUP "Graph"
+    BEGIN
+        MENUITEM "Filter einfügen...",          ID_INSERT_FILTER
+        MENUITEM "Externen Graphen einfügen...", ID_GRAPH_EXTERNAL
+        MENUITEM SEPARATOR
+        MENUITEM "Start",                       ID_GRAPH_START
+        MENUITEM "Stop",                        ID_GRAPH_STOP
+        MENUITEM "Pause",                       ID_GRAPH_PAUSE
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über GraphCreator...",  ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT MENU 
+BEGIN
+    POPUP "PINS"
+    BEGIN
+        MENUITEM "Render Pin",                  ID_PIN_RENDER
+        MENUITEM "Media-Types",                 ID_PIN_SHOWMEDIATYPES
+        MENUITEM "Schnittstellen",              ID_PIN_INTERFACES
+    END
+    POPUP "FILTERS"
+    BEGIN
+        MENUITEM "Eigenschaften...",            ID_FILTER_PROPERTIES
+        MENUITEM "Schnittstellen",              ID_FILTER_INTERFACES
+        MENUITEM "Aktualisieren",               ID_FILTER_REFRESH
+        MENUITEM "Dateiname",                   ID_FILTER_FILENAME
+        MENUITEM "Pineigenschaften",            ID_FILTERS_PIN_PROPERTIES
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "D",            ID_EDIT_CLEAR,          VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "I",            ID_INSERT_FILTER,       VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 235, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info über FindFilter"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "FindFilter Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2003 videte IT AG",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,180,5,50,14,WS_GROUP
+    LTEXT           "Fehlercode:",IDC_STATIC,11,45,45,8
+    EDITTEXT        IDC_EDT_ERROR_CODE,65,43,56,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_ERROR_TEXT,5,60,225,80,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Code",IDC_BTN_ERROR_CODE,180,43,50,12
+END
+
+IDD_DIRECTXTESTDLG_DIALOG DIALOGEX 0, 0, 320, 274
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DirectX Find Filter"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Filter Kategory:",IDC_STATIC,5,11,65,8
+    COMBOBOX        IDC_COMBO_CATEGORIES,75,9,240,137,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Filter:",IDC_STATIC,5,46,65,8
+    COMBOBOX        IDC_COMBO_FILTERS,75,44,240,161,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDT_FILTER_GUID,75,59,240,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Suchbegriff:",IDC_STATIC,5,97,65,8
+    EDITTEXT        IDC_EDT_SEARCH_STRING,75,94,222,14,ES_AUTOHSCROLL
+    CONTROL         "Name",IDC_RD_NAME,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,75,115,35,10
+    CONTROL         "GUID",IDC_RD_GUID,"Button",BS_AUTORADIOBUTTON,114,115,
+                    34,10
+    CONTROL         "Alle Kategorien",IDC_CK_ALL_CATEGORIES,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,152,115,63,10
+    CONTROL         "Exakt",IDC_CK_EXACT_MATCH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,282,115,34,10
+    CONTROL         "List1",IDC_LIST_FOUND_FILTERS,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,5,126,310,126
+    LTEXT           "Such Optionen:",IDC_STATIC,5,116,65,8
+    DEFPUSHBUTTON   ">>",IDC_BTN_SEARCH,297,94,18,14
+    CONTROL         "Groß/Klein",IDC_CK_MATCH_CASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,219,115,50,10
+    EDITTEXT        IDC_EDT_CATEGORY_GUID,75,23,240,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "GUID:",IDC_STATIC,5,26,65,8
+    PUSHBUTTON      "Liste speichern...",IDC_BTN_SAVE,245,257,70,14
+    DEFPUSHBUTTON   "Einfügen",IDOK,60,257,50,14
+    PUSHBUTTON      "GUID ermitteln",IDC_BTN_DETECT_GUID_NAME,74,78,65,12,
+                    BS_LEFT
+    PUSHBUTTON      "Schließen",IDCANCEL,5,257,50,14
+    PUSHBUTTON      "Schnittstellen",IDC_SHOW_INTERFACES,115,257,55,14
+    PUSHBUTTON      "Namen ändern",IDC_BTN_SET_NAME,145,78,65,12
+    LTEXT           "GUID:",IDC_STATIC,4,62,65,8
+    PUSHBUTTON      "Extra Infos",IDC_BTN_GET_EXTRA_INFO,215,78,65,12
+END
+
+IDD_GRAPHCREATOR_FORM DIALOG  0, 0, 321, 199
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_FILTER_PROPERTIES DIALOGEX 0, 0, 186, 90
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_OUT_PIN_PROPERTIES DIALOGEX 0, 0, 200, 120
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_CFG_CAPS,6,102,190,91,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Configuration Capabilities",IDC_TXT_CFG_CAPS,6,93,82,8,
+                    NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_MEDIA_TYPES,6,6,190,91,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_IN_PIN_PROPERTIES DIALOGEX 0, 0, 200, 120
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_MEDIA_TYPES,6,6,190,91,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_AUDIO_INPUT_MIXER DIALOGEX 0, 0, 200, 120
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER_LEVEL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_DISABLED | WS_TABSTOP,40,5,155,15
+    CONTROL         "Level:",IDC_CK_INPUT,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_TABSTOP,6,7,35,10
+    LTEXT           "Balance:",IDC_STATIC,6,26,30,8
+    CONTROL         "",IDC_SLIDER_BALANCE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_DISABLED | WS_TABSTOP,40,23,155,15
+    LTEXT           "Tiefen:",IDC_STATIC,6,44,30,8
+    CONTROL         "",IDC_SLIDER_BASS,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_DISABLED | WS_TABSTOP,40,41,155,15
+    LTEXT           "Höhen:",IDC_STATIC,6,62,30,8
+    CONTROL         "",IDC_SLIDER_TREBLE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_DISABLED | WS_TABSTOP,40,59,155,15
+    CONTROL         "Loudness",IDC_CK_LOUDNESS,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,6,79,46,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "FileDescription", "MFC-Anwendung GraphCreator"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "GraphCreator"
+            VALUE "LegalCopyright", "Copyright (C) 2003"
+            VALUE "OriginalFilename", "GraphCreator.EXE"
+            VALUE "ProductName", "Anwendung GraphCreator"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIRECTXTESTDLG_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        BOTTOMMARGIN, 262
+        HORZGUIDE, 66
+        HORZGUIDE, 84
+        HORZGUIDE, 101
+        HORZGUIDE, 120
+        HORZGUIDE, 126
+        HORZGUIDE, 252
+        HORZGUIDE, 264
+    END
+
+    IDD_OUT_PIN_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        HORZGUIDE, 12
+        HORZGUIDE, 114
+    END
+
+    IDD_IN_PIN_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        HORZGUIDE, 12
+    END
+
+    IDD_AUDIO_INPUT_MIXER, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 84
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "GraphCreator\n\nGraphCreator\nDateityp Graph (*.grf)\n.grf\nGraphCreator.Document\nGraphCreator Document"
+    IDS_EMPTY_SEARCH_STRING "Geben Sie eine Suchbegriff, Name bzw. eine GUID ein"
+    IDS_UNKNOWN             "Unbekannt"
+    IDS_REQUES_CHANGE_FILTER_NAME 
+                            "Soll der Filtername\nvon ""%s""\nin ""%s""\ngeändert werden?"
+    IDS_FILTER_PROPERTIES   "Filter Eigenschaften"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "GraphCreator"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_FILTER        "Fügt Filter in den Graphen ein\nFilter einfügen"
+    ID_PIN_RENDER           "Erzeugt einen Graphen durch einfügen von weiteren Filtern."
+    ID_GRAPH_START          "Startet das Abspielen des Graphen\nStart"
+    ID_GRAPH_STOP           "Stoppt das Abspielen des Graphen\nStop"
+    ID_GRAPH_PAUSE          "Hält das Abspielen des Graphen an\nPause"
+    ID_FILE_RENDER_MEDIA    "Erzeugt eine Graphen, um eine Datei wiederzugeben."
+    ID_PINS_EIGENSCHAFTEN   "Ruft die Eigenschaftsseiten auf."
+    ID_FILTER_PROPERTIES    "Ruft die Eigenschaftsseiten des Filters auf"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILTER_INTERFACES    "Zeigt die Schnittstellen des Filters an"
+    ID_VIEW_REARRANGE_FILTERS 
+                            "Positioniert die Filter anhand ihrer Verbindungen."
+    ID_FILTER_REFRESH       "Aktualisiert die Filter Pins"
+    ID_VIEW_AUTO_REARRANGE_FILTERS 
+                            "Repositioniert die Filter nach Dateiöffnung bzw. Rendern"
+    ID_FILTER_FILENAME      "Ändert den Dateinamen für den Filter."
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\GraphCreator.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

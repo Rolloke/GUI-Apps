@@ -1,0 +1,343 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ProductView.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\ProductView.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PRODUCTVIEW_DIALOG DIALOGEX 0, 0, 300, 335
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "idip® - Produkt Info"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,124,310,50,14
+    CONTROL         "Serial",IDC_RADIO_SERIAL,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE | WS_GROUP,180,293,38,14
+    CONTROL         "HDD-ID",IDC_RADIO_HDD,"Button",BS_AUTORADIOBUTTON | NOT 
+                    WS_VISIBLE,180,310,38,14
+    EDITTEXT        IDC_EDIT_SERIAL,224,293,61,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE | WS_DISABLED | WS_GROUP
+    EDITTEXT        IDC_EDIT_HDD1,224,310,22,14,ES_UPPERCASE | NOT 
+                    WS_VISIBLE | WS_DISABLED
+    LTEXT           "-",IDC_HDD_ID2,254,311,8,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_HDD2,264,310,22,14,ES_UPPERCASE | NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "Crypt",IDC_CRYPT,65,310,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "Save",IDC_DO_SAVE,7,310,50,14
+    ICON            IDR_MAINFRAME,IDC_STATIC_ICON,7,6,20,20
+    COMBOBOX        IDC_PRODUCT_NAME,83,9,133,233,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_OEM_CODE,224,9,69,234,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "...",IDC_TXT_FULL_PRODUCT_Name,29,7,197,8
+    LTEXT           "Version:",IDC_TXT_PRODUCT_VERSION,29,18,26,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "...",IDC_TXT_FULL_VERSION,62,18,68,8
+    LTEXT           "Nr:",IDC_TXT_SERIAL,134,18,82,8
+    LTEXT           "...",IDC_SERIAL,218,18,75,8
+    GROUPBOX        "Basis",IDC_TXT_BASE,7,30,146,25
+    CONTROL         "Server",IDC_RUN_SERVER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,40,65,10
+    CONTROL         "Backup",IDC_RUN_CDR_WRITER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,81,40,65,10
+    GROUPBOX        "Codec Module",IDC_RUN_CODECS,7,59,146,80
+    CONTROL         "Q(NCP)",IDC_RUN_QUNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,69,41,10
+    CONTROL         "IP (Axis)",IDC_RUN_IP_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,81,42,10
+    CONTROL         "JaCob",IDC_RUN_JACOB1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,94,52,10
+    CONTROL         "2",IDC_RUN_JACOB2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    66,94,20,10
+    CONTROL         "3",IDC_RUN_JACOB3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    95,94,20,10
+    CONTROL         "4",IDC_RUN_JACOB4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    124,94,20,10
+    CONTROL         "SaVic",IDC_RUN_SAVIC1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,104,52,10
+    CONTROL         "2",IDC_RUN_SAVIC2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    66,104,20,10
+    CONTROL         "3",IDC_RUN_SAVIC3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    95,104,20,10
+    CONTROL         "4",IDC_RUN_SAVIC4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    124,104,20,10
+    CONTROL         "Nur 2/4/8 Kameras je Karte",
+                    IDC_RESTRICTED_TO_8_CAMERAS_PER_BOARD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,125,133,10
+    GROUPBOX        "Verbindungs Module",IDC_TXT_LINK_MODULES,7,140,146,45
+    CONTROL         "ISDN",IDC_RUN_ISDN_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,150,64,10
+    CONTROL         "2. ISDN",IDC_RUN_ISDN_UNIT2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,81,150,64,10
+    CONTROL         "NET",IDC_RUN_SOCKET_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,160,64,10
+    CONTROL         "SMS",IDC_RUN_SMS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    81,160,31,10
+    CONTROL         "E-Mail",IDC_RUN_EMAIL_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,170,64,10
+    CONTROL         "FAX",IDC_RUN_FAX_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,81,170,29,10
+    GROUPBOX        "Box Module",IDC_TXT_BOX_MODULES,7,190,146,35
+    CONTROL         "Mini B6",IDC_RUN_VCS_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,200,64,10
+    CONTROL         "TeleObserver®",IDC_RUN_TOBS_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,81,200,64,10
+    CONTROL         "PT 200",IDC_RUN_PRESENCE_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,11,210,64,10
+    CONTROL         "2. PT 200",IDC_RUN_PRESENCE_UNIT2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,81,210,64,10
+    GROUPBOX        "Optionale Module",IDC_TXT_OPTIONAL_MODULES,155,30,138,
+                    195
+    CONTROL         "Relais Plus 8",IDC_RUN_AKU_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,40,127,10
+    CONTROL         "Interface Pan Tilt Zoom",IDC_RUN_COMM_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,50,127,10
+    CONTROL         "GAA / DTP Box",IDC_RUN_GAA_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,60,127,10
+    CONTROL         "Interface Serial Data",IDC_RUN_SDI_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,80,127,10
+    CONTROL         "Geldautomaten",IDC_ALLOW_SDI_GA,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,174,90,113,10
+    CONTROL         "Zutrittskontrolle",IDC_ALLOW_SDI_ACCESS_CONTROL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,174,100,113,10
+    CONTROL         "Industrie / Scanner",IDC_ALLOW_SDI_INDUSTRIAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,174,110,113,10
+    CONTROL         "",IDC_STATIC_LINE,"Static",SS_BLACKFRAME | SS_SUNKEN,
+                    174,131,113,1
+    CONTROL         "ISD Konfiguration",IDC_RUN_SDI_CONFIG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,174,134,113,10
+    CONTROL         "GEMOS Unit",IDC_RUN_GEMOS_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,160,150,127,10
+    CONTROL         "Sim Unit",IDC_RUN_SIM_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,160,160,127,10
+    CONTROL         "Analyzer",IDC_RUN_ANALYZER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,160,170,127,10
+    CONTROL         "Audio Unit",IDC_RUN_AUDIO_UNIT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,160,180,127,10
+    CONTROL         "ICPCON Unit",IDC_RUN_ICPCON_UNIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,190,127,10
+    CONTROL         "USB Kamera",IDC_RUN_USB_CAMERA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,160,200,127,10
+    GROUPBOX        "Optionale Funktionen",IDC_TXT_FUNCTIONALITIES,7,230,286,
+                    57
+    CONTROL         "PT 200 Bilder anzeigen",IDC_ALLOW_SOFT_DECODE_PT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,260,90,10
+    CONTROL         "Lokale Prozesse",IDC_ALLOW_LOCAL_STORAGE_PROCESSES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,116,240,80,10
+    CONTROL         "Routing",IDC_ALLOW_ROUTING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,116,250,82,10
+    CONTROL         "Motion Detection",IDC_ALLOW_MOTION_DETECTION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,271,70,10
+    CONTROL         "HTTP",IDC_RUN_HTTP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,116,260,81,10
+    CONTROL         "Multi Monitor",IDC_ALLOW_MULTI_MONITOR,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,216,240,69,10
+    CONTROL         "Tasha",IDC_RUN_TASHA1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,114,52,10
+    CONTROL         "2",IDC_RUN_TASHA2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    66,114,20,10
+    CONTROL         "3",IDC_RUN_TASHA3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    95,114,20,10
+    CONTROL         "4",IDC_RUN_TASHA4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    124,114,20,10
+    CONTROL         "Zeitschaltuhren",IDC_ALLOW_TIMERS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,116,271,65,10
+    CONTROL         "Anwahlkarten",IDC_ALLOW_HTML_MAPS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,216,250,72,10
+    EDITTEXT        IDC_EDT_NO_OF_HOSTS,45,294,20,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    CONTROL         "",IDC_SPIN_NO_OF_HOSTS,"msctls_updown32",UDS_ARROWKEYS,
+                    65,294,11,12
+    LTEXT           "Maximal",IDC_TXT_NO_OF_HOSTS1,7,296,35,8
+    LTEXT           "Gegenstationen",IDC_TXT_NO_OF_HOSTS2,80,296,60,8
+    CONTROL         "Für internen Gebrauch",IDC_ALLOW_INTERNAL_ACCESS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,198,271,89,10
+    CONTROL         "Parkmanagement",IDC_ALLOW_SDI_PARK_MANAGMENT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,174,120,113,10
+    COMBOBOX        IDC_COMBO_NR_CAMERAS,106,66,38,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Nr. Kameras:",IDC_STATIC_NR_CAMERAS,56,69,42,8
+    LTEXT           "Nr. IP Kameras:",IDC_STATIC_NR_IP_CAMERAS,56,81,50,8
+    COMBOBOX        IDC_COMBO_NR_IP_CAMERAS,106,79,38,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ERROR_DIALOG DIALOGEX 0, 0, 236, 87
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "idip® - Produkt Info (Fehler)"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Weiter",IDOK,92,66,50,14
+    ICON            IDR_MAINFRAME,IDC_STATIC_ICON,7,7,20,20
+    LTEXT           "Es wurde kein Dongle gefunden.",IDC_TXT_ERROR_INFO,35,
+                    17,194,8
+    LTEXT           "...",IDC_TXT_ERROR_MSG,117,34,112,8
+    LTEXT           "Überprüfen sie ob ein Dongle korrekt angeschlossen ist. ",
+                    IDC_ERROR_INSTRUCTION,35,51,194,8
+    LTEXT           "Fehlermeldungmeldung:",IDC_TXT_ERROR_MSG_HEAD,35,34,76,
+                    8
+END
+
+IDD_PIN DIALOG  0, 0, 186, 49
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Crypt PIN"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Bitte geben Sie ihre Berechtigung zur Erstellung\neines Cryptodongles ein.",
+                    IDC_TXT_PIN,7,7,150,18
+    EDITTEXT        IDC_PIN,7,28,107,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,129,28,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PRODUCTVIEW_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 330
+        HORZGUIDE, 300
+    END
+
+    IDD_ERROR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+    END
+
+    IDD_PIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 42
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o..."
+    IDP_ISDN_OR_SOCKET      "Mindestens eins von ISDNUnit/SocketUnit!"
+    IDP_BOX                 "Mindestens ein Box System!"
+    IDP_CRYPT_WRONG         "Die eingegebene Berechtigung für die Erstellung von Cryptodonglen ist falsch."
+    IDS_CRYPT_OK            "Der Dongle wurde erfolgreich verschlüsselt."
+    IDS_CRYPT_ERROR         "Der Dongle konnte nicht verschlüsselt werden."
+    IDP_SERIAL_DIFFERENT    "Die HDD Seriennummer ist geändert worden, soll die geänderte Seriennummer verwendet werden?"
+    IDS_OEM_ERROR           "Unbekannter OEM %i"
+    IDP_NO_VALID_PRODUCT    "Kein gültiges Produkt!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\ProductView.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

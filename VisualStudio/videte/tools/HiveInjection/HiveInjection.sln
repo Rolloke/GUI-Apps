@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HiveInjection", "HiveInjection.vcproj", "{4C99431E-E460-4FE4-A86D-03A98683ABB9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SolutionUniqueID = {85BDFB24-F35F-4B8D-8351-297195A600F4}
+		SccProjectUniqueName1 = HiveInjection.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		ReleaseWithCIPC = ReleaseWithCIPC
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.Debug.ActiveCfg = Debug|Win32
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.Debug.Build.0 = Debug|Win32
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.Release.ActiveCfg = Release|Win32
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.Release.Build.0 = Release|Win32
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.ReleaseWithCIPC.ActiveCfg = ReleaseWithCIPC|Win32
+		{4C99431E-E460-4FE4-A86D-03A98683ABB9}.ReleaseWithCIPC.Build.0 = ReleaseWithCIPC|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

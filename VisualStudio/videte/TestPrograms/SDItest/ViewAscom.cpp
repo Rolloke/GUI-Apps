@@ -1,0 +1,31 @@
+// ViewAscom.cpp: implementation of the CViewAscom class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "sditest.h"
+#include "ViewAscom.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+IMPLEMENT_DYNCREATE(CViewAscom, CViewIbm)
+//////////////////////////////////////////////////////////////////////
+CViewAscom::CViewAscom()
+{
+	m_uTimerID = TIMER_ASCOM;
+}
+/////////////////////////////////////////////////////////////////////////////
+#ifdef _DEBUG
+CDocAscom* CViewAscom::GetDocument() // non-debug version is inline
+{
+	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CDocAscom)));
+	return (CDocAscom*)m_pDocument;
+}
+#endif //_DEBUG

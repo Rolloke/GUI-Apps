@@ -1,0 +1,7 @@
+; DVFra.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVFra"
+DESCRIPTION  'DVFra Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

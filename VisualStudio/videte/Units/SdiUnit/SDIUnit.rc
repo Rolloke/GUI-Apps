@@ -1,0 +1,216 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SDIUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SDIUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Inf&o über...",               ID_ABOUT
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TEST DIALOG  0, 0, 172, 278
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Test der SDIUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Abbrechen",IDCANCEL,61,257,50,14
+    CTEXT           "COM 1",IDC_TXT_COM1,7,7,73,9
+    CTEXT           "COM 2",IDC_TXT_COM2,92,7,73,9
+    PUSHBUTTON      "NCR Startkommando",IDC_NCR_START_1,7,18,73,13
+    PUSHBUTTON      "NCR Startkommando",IDC_NCR_START_2,92,18,73,13
+    PUSHBUTTON      "NCR Diagnose",IDC_NCR_DIAGNOSE_1,7,32,73,13
+    PUSHBUTTON      "NCR Statusabfrage",IDC_NCR_STATUS_1,7,46,73,13
+    PUSHBUTTON      "NCR Diagnose",IDC_NCR_DIAGNOSE_2,92,32,73,13
+    PUSHBUTTON      "NCR Statusabfrage",IDC_NCR_STATUS_2,92,46,73,13
+    PUSHBUTTON      "SNI Karte ein",IDC_SNI_KARTE_EIN_1,7,70,73,13
+    PUSHBUTTON      "SNI Karte ein",IDC_SNI_KARTE_EIN_2,92,70,73,13
+    PUSHBUTTON      "SNI Transaktion",IDC_SNI_TAN_1,7,85,73,13
+    PUSHBUTTON      "SNI Transaktion",IDC_SNI_TAN_2,92,85,73,13
+    PUSHBUTTON      "SNI Karte aus",IDC_SNI_KARTE_AUS_1,7,100,73,13
+    PUSHBUTTON      "SNI Karte aus",IDC_SNI_KARTE_AUS_2,92,100,73,13
+    PUSHBUTTON      "SNI Geldausgabe",IDC_SNI_GELDAUSGABE_1,7,115,73,13
+    PUSHBUTTON      "SNI Geldausgabe",IDC_SNI_GELDAUSGABE_2,92,115,73,13
+    PUSHBUTTON      "SNI Ende",IDC_SNI_ENDE_1,7,130,73,13
+    PUSHBUTTON      "SNI Ende",IDC_SNI_ENDE_2,92,130,73,13
+    PUSHBUTTON      "Engel EC Karte",IDC_ENGEL_KONTO_1,7,153,73,13
+    PUSHBUTTON      "Engel EC Karte",IDC_ENGEL_KONTO_2,92,153,73,13
+    PUSHBUTTON      "Engel KreditKarte",IDC_ENGEL_KREDIT_1,7,168,73,13
+    PUSHBUTTON      "Engel KreditKarte",IDC_ENGEL_KREDIT_2,92,168,73,13
+    PUSHBUTTON      "Keba EC Karte",IDC_KEBA_KONTO_1,7,191,73,13
+    PUSHBUTTON      "Keba EC Karte",IDC_KEBA_KONTO_2,92,191,73,13
+    PUSHBUTTON      "Keba KreditKarte",IDC_KEBA_KREDIT_1,7,206,73,13
+    PUSHBUTTON      "Keba KreditKarte",IDC_KEBA_KREDIT_2,92,206,73,13
+    PUSHBUTTON      "XModem Receiver",IDC_XMODEM_RECEIVER_1,7,225,73,13
+    PUSHBUTTON      "XModem Receiver",IDC_XMODEM_RECEIVER_2,92,225,73,13
+    PUSHBUTTON      "XModem Transmitter",IDC_XMODEM_TRANSMITTER_1,7,241,73,
+                    13
+    PUSHBUTTON      "XModem Transmitter",IDC_XMODEM_TRANSMITTER_2,92,241,73,
+                    13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TEST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 165
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 271
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "SDIUnit"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SDIUnit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ABOUT                "Zeigt den Info-Dialog\nZeigt den Info-Dialog"
+    ID_TEST                 "Öffnet den Test-Dialog\nÖffnet den Test-Dialog"
+    ID_TEST_XMODEM          "Startet den XModem-Modus"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_EXIT             "Beendet die Unit\nBeendet die Unit"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION       "SDIUnit kann die Verbindung zur seriellen Schnittstelle nicht aufbauen.\nMöglicherweise haben Sie in der Systemverwaltung die falsche Schnittstellennummer angegeben."
+    IDS_SDI_CONTROL_CREATE_FAILED 
+                            "Initialisierung von Protokoll  %i (%s) an COM%i fehlgeschlagen\n"
+    IDS_SDICONTROL_WRONG_TYPE 
+                            "Falsches oder nicht zugelassenes Protokoll %i (%s) an COM%i\n"
+    IDS_SDI_CONTROL_OPEN_COM_FAILED 
+                            "Öffnen der Schnittstelle fehlgeschlagen: COM%i Protokoll %i (%s)\n"
+    IDS_SDI_XML_LOAD_ERROR  "XML Protokoll konnte nicht geladen werden."
+    IDS_SDI_XML_WRONG_PARAMETERS 
+                            "Inkorrekte XML Parameter\nID:%s\nName:%s\nControl:%s\nState:%s\n[Data:%s]"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\SDIUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

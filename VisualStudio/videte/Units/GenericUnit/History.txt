@@ -1,0 +1,11 @@
+History.txt von GenericUnit
+---------------------------
+
+
+18.10.00	- Erstellt
+			- Diese Unit dient zur Simulation einer JaCobUnit. mit ihrer Hilfe
+			  l‰ﬂt sich der Rest der Software, insbesondere der Datentransfer zwischen
+			  Unit - Server - Client testen.
+30.10.00	- MD-Alarme und externe Alarme werden simuliert.
+
+24.01.01	- Icon nun im Systemtray

@@ -1,0 +1,1266 @@
+<?xml version="1.0"?>
+<visualdsp-project schema="16" name="TashaFirmware533" file="D:\PROJECT\Units\Tasha\TashaFirmware\TashaFirmware533\TashaFirmware533.dpj" generated="Mon Jan 03 13:40:36 2005" expanded="yes">
+	<!-- Project build target -->
+	<target>
+		<processor>ADSP-BF533</processor>
+		<extension>.ldr</extension>
+		<type>DSP loader file</type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="BF5">
+		<configuration name="Debug">
+			<intermediate-dir>.\Debug</intermediate-dir>
+			<output-dir>.\Debug</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|1033>Check|Defines>CHANNEL=0, SLAVE=0|1025>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0|-g>1]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0|-jcs2l+>Absolute Indirect]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>SPI|-bID>2|-f>Binary|-fID>1|-Width>8|-WidthID>0|-o>TashaFirmware533_BF0.ldr|-o2>1|-kb>SPI|-kf>binary|-kWidth>8]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|-Version>1.0|simcc Optimization>None]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\debug\TashaFirmware533_BF0.ldr D:\Martin\TashaUnit\TashaFirmware533_BF0.ldr /r /c /f /y
+]]></post-build-command>
+		</configuration>
+		<configuration name="Release">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|1032>Check|Defines>CHANNEL=0, SLAVE=0|1023>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0|-jcs2l+>Absolute Indirect]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>SPI|-bID>2|-f>Binary|-fID>1|-Width>8|-WidthID>0|-o>TashaFirmware533_BF0.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|-Version>1.0|simcc Optimization>None]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\release\TashaFirmware533_BF0.ldr D:\Martin\TashaUnit\TashaFirmware533_BF0.ldr /r /c /f /y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF0">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=0, SLAVE=0]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF0.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF0.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF0.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF1">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=0, SLAVE=1]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF1.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF1.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF1.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF2">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=1, SLAVE=2]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF2.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF2.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF2.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF3">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=1, SLAVE=3]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF3.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF3.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF3.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF4">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=2, SLAVE=4]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF4.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF4.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF4.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF5">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=2, SLAVE=5]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF5.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF5.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF5.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF6">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=3, SLAVE=6]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF6.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF6.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF6.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="BF7">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0|-D>CHANNEL=3, SLAVE=7]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-o>.\Bin\TashaFirmware533_BF7.ldr|-No2Kernel>1|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29|split out>TashaFirmware533_BF7.ldr]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\Bin\TashaFirmware533_BF7.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+	</configurations>
+	<!-- Project folders -->
+	<folders>
+		<folder name="Bin" ext=".ldr" expanded="yes">
+			<files>
+				<file name=".\Bin\TashaFirmware533_BF0.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF1.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF2.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF3.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF4.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF5.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF6.ldr">
+				</file>
+				<file name=".\Bin\TashaFirmware533_BF7.ldr">
+				</file>
+			</files>
+		</folder>
+		<folder name="Linker Files" ext=".ldf,.dlb" expanded="no">
+			<files>
+				<file name=".\lib\MPEG4_SP_ENC_EZ533.dlb">
+				</file>
+				<file name=".\TashaFirmware533.ldf">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF0">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF1">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF2">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF3">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF4">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF5">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF6">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+						<file-configuration name="BF7">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+		<folder name="Misc" expanded="no">
+			<files>
+				<file name=".\BuildAll.cmd">
+				</file>
+				<file name=".\History.txt">
+				</file>
+			</files>
+		</folder>
+		<folder name="Source Files" ext=".c,.cpp,.cxx,.asm,.dsp,.s" expanded="yes">
+			<folders>
+				<folder name="ASM-Files" ext=".asm" expanded="no">
+					<files>
+						<file name="..\Include\cycles.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\detection.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\filter.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+					</files>
+				</folder>
+				<folder name="CPP-Files" ext=".cpp" expanded="yes">
+					<files>
+						<file name=".\codec.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\i2c_function.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\initialisation.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\isr.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\main.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\ppi.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\spi.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\sport.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\submain.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF0">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF1">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF2">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF3">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF4">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF5">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF6">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+								<file-configuration name="BF7">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+					</files>
+				</folder>
+				<folder name="Header Codec" ext=".h" expanded="no">
+					<files>
+						<file name=".\export_hdr\baseVideoEnc.h">
+						</file>
+						<file name=".\export_hdr\common.h">
+						</file>
+						<file name=".\export_hdr\exp_SP_MPEG4_Enc.h">
+						</file>
+					</files>
+				</folder>
+				<folder name="Header Files" ext=".h,.hpp,.hxx" expanded="yes">
+					<files>
+						<file name="$(ADI_DSP)\Blackfin\include\cdefBF532.h">
+						</file>
+						<file name=".\codec.h">
+						</file>
+						<file name="$(ADI_DSP)\Blackfin\include\defBF532.h">
+						</file>
+						<file name=".\definitionen.h">
+						</file>
+						<file name=".\filter.h">
+						</file>
+						<file name="..\Include\helper.h">
+						</file>
+						<file name="..\Include\helper_asm.h">
+						</file>
+						<file name=".\i2c.h">
+						</file>
+						<file name=".\main.h">
+						</file>
+						<file name=".\motion.h">
+						</file>
+						<file name=".\ppi.h">
+						</file>
+						<file name=".\spi.h">
+						</file>
+						<file name=".\sport.h">
+						</file>
+						<file name="..\..\TashaUnit\TashaUnitDefs.h">
+						</file>
+						<file name="..\Include\TMMessages.h">
+						</file>
+					</files>
+				</folder>
+			</folders>
+		</folder>
+	</folders>
+	<!-- Custom data tables -->
+	<custom-data-tables>
+		<custom-data-table name="SCCPlugin">
+			<custom-data name="Scc_AddProject"><![CDATA[yes]]></custom-data>
+			<custom-data name="Scc_ProjectName"><![CDATA["$/Project/Units/Tasha/TashaFirmware/TashaFirmware533", RFKCAAAA]]></custom-data>
+			<custom-data name="Scc_ProjectPath"><![CDATA[\\FILE01\Software\VSS,]]></custom-data>
+			<custom-data name="Scc_Provider"><![CDATA[Microsoft Visual SourceSafe]]></custom-data>
+		</custom-data-table>
+	</custom-data-tables>
+</visualdsp-project>

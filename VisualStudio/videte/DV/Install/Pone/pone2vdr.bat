@@ -1,0 +1,1 @@
+v:\bin\tools\MakeUpdateDisk.exe d:\install\pone2vdr 4 471

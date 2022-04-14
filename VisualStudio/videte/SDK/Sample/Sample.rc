@@ -1,0 +1,211 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\Sample.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Sample.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SAMPLE_DIALOG DIALOGEX 0, 0, 579, 468
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Sample"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "close",IDOK,522,443,50,16
+    LTEXT           "Adress:",IDC_STATIC,13,20,34,8
+    LTEXT           "Password:",IDC_STATIC,13,38,34,8
+    LTEXT           "(DTS) Pin:",IDC_STATIC,13,56,34,8
+    PUSHBUTTON      "connect",IDC_BUTTON_CONNECT,512,7,60,18
+    EDITTEXT        IDC_EDIT_PASSWORD,55,36,61,14,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PIN,55,53,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_IPADDRESS,"SysIPAddress32",WS_TABSTOP,55,18,100,
+                    15
+    LTEXT           "Static",IDC_ERROR_CODE,13,76,263,8
+    CONTROL         "",IDC_LIST_ARCHIVES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,398,104,173,
+                    89
+    CONTROL         "",IDC_LIST_SEQUENCES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,399,209,172,
+                    91
+    LTEXT           "Archives",IDC_STATIC,398,92,68,8
+    LTEXT           "Sequences",IDC_STATIC,399,198,95,8
+    CONTROL         "",IDC_PLAY_PICTURE,"Static",SS_BLACKRECT | 
+                    SS_REALSIZEIMAGE,362,302,182,112
+    PUSHBUTTON      "step f.",IDC_BUTTON_STEP_FORWARD,453,416,30,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "step b.",IDC_BUTTON_STEP_BACKWARD,422,416,30,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "disconnect",IDC_BUTTON_DISCONNECT,512,26,59,16
+    CONTROL         "",IDC_LIST_RELAYS,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,192,104,202,89
+    LTEXT           "Cameras",IDC_STATIC,13,93,68,8
+    CONTROL         "",IDC_LIVE_PICTURE,"Static",SS_BLACKRECT,9,303,180,112
+    LTEXT           "Relays",IDC_STATIC,192,92,68,8
+    CONTROL         "",IDC_LIST_CAMERAS,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,9,104,180,196
+    LTEXT           "Detectors",IDC_STATIC,193,199,68,8
+    CONTROL         "",IDC_LIST_DETECTORS,"SysListView32",LVS_REPORT | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,192,209,204,91
+    PUSHBUTTON      "play f.",IDC_BUTTON_PLAY_FORWARD,484,416,28,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "play b.",IDC_BUTTON_PLAY_BACKWARD,393,416,28,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "fast b.",IDC_BUTTON_FAST_BACKWARD,366,416,26,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    PUSHBUTTON      "fast f.",IDC_BUTTON_FAST_FORWARD,513,416,26,11,NOT 
+                    WS_VISIBLE | WS_DISABLED
+    LTEXT           "Static",IDC_PICTURE_INFO,363,429,209,12
+    LTEXT           "Static",IDC_STATIC_DB_TEXT,363,441,153,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "videte IT AG"
+            VALUE "FileDescription", "Sample"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "Sample.exe"
+            VALUE "LegalCopyright", " (c) videte IT AG  All rights reserved."
+            VALUE "OriginalFilename", "Sample.exe"
+            VALUE "ProductName", "Sample"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SAMPLE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 572
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 459
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\Sample.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

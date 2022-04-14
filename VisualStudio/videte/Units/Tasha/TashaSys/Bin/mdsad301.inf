@@ -1,0 +1,108 @@
+; Copyright (c) Momentum Data Systems
+; Manufacturer: MDS
+
+;------------------------------------------------------------------------------
+;  OS Common Area
+;------------------------------------------------------------------------------
+
+[Version]
+Signature=$CHICAGO$
+Class=Video-DSP
+ClassGuid={65AF58AE-3FA6-4383-AA1E-D05E0A29D11C}
+Provider=%MANUFACTURERNAME%
+DriverVer=09/08/2000,1.0
+ 
+
+[Manufacturer]
+%MANUFACTURERNAME%=ModelsSection
+
+[ModelsSection]
+;%DEVICEDESCRIPTION%=DDInstall,PCI\VEN_10B5&DEV_9050&SUBSYS_00011136
+%DEVICEDESCRIPTION%=DDInstall,PCI\VEN_11D4&DEV_1535&SUBSYS_00000000
+%DEVICEDESCRIPTION%=DDInstall,PCI\VEN_1136&DEV_0001&SUBSYS_00000000
+
+[ControlFlags]
+;ExcludeFromSelect=PCI\VEN_10B5&DEV_9050&SUBSYS_00011136
+ExcludeFromSelect=PCI\VEN_11D4&DEV_1535&SUBSYS_00000000
+ExcludeFromSelect=PCI\VEN_1136&DEV_0001&SUBSYS_00000000
+
+[DriverCopyFiles]
+mdsad301.sys,,,2
+
+[SourceDisksNames]
+1=%DiskId%,,,
+
+[SourceDisksFiles]
+mdsad301.sys=1,,
+
+[DestinationDirs]
+DriverCopyFiles_NT=12
+DriverCopyFiles_98=11
+
+[ClassInstall32]
+Addreg=MDSDSPClassReg
+
+[MDSDSPClassReg]
+HKR,,,,%CLASSNAME%
+
+;------------------------------------------------------------------------------
+;  Windows 2000 Sections
+;------------------------------------------------------------------------------
+
+[DDInstall.nt]
+CopyFiles=DriverCopyFiles_NT
+
+[DriverCopyFiles_NT]
+mdsad301.sys
+
+[DDInstall.nt.Services]
+AddService=mdsad301,2,DriverService
+
+[DriverService]
+DisplayName=%SERVICENAME%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\mdsad301.sys
+
+[DDInstall.nt.hw]
+AddReg=DriverAddReg_NT
+
+[DriverAddReg_NT]
+; This name appears in: Add/Remove Hardware Wizard
+;						Device Manager
+;HKR,,FriendlyName,,"Momentum Data Systems Hawk35"
+HKR,,FriendlyName,,"Videte IT - Tasha"
+
+;------------------------------------------------------------------------------
+;  Windows 98 Sections
+;------------------------------------------------------------------------------
+
+[DDInstall]
+DriverVer=31/01/2004,1.0
+AddReg=DriverAddReg_98
+CopyFiles=DriverCopyFiles_98
+
+[DriverCopyFiles_98]
+mdsad301.sys
+
+[DriverAddReg_98]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,mdsad301.sys
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+
+[Strings]
+;MANUFACTURERNAME="Momentum Data Systems"
+MANUFACTURERNAME="Videte IT AG"
+CLASSNAME="Video-DSP"
+SERVICENAME="mdsad301"
+DiskId="MDS Driver Disk"
+
+;This name appears in: Found New Hardware Dialog Box
+;DEVICEDESCRIPTION="Momentum Data Systems Hawk35"
+DEVICEDESCRIPTION="Videte IT - TashaBoard"
+
+

@@ -1,0 +1,110 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=5.1
+  Flags=00000111
+end
+item: Get Registry Key Value
+  Variable=EWF
+  Key=System\CurrentControlSet\Services\EWF\Parameters\Protected\Volume0
+  Value Name=VolumeID
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=EWF
+  Flags=00000001
+end
+item: Set Variable
+  Variable=HIVEINJECTION
+  Value=0
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%\HiveInjectionService.exe
+  Flags=00000100
+end
+item: Set Variable
+  Variable=HIVEINJECTION
+  Value=1
+end
+item: End Block
+end
+item: Install File
+  Source=\%SOURCE_BASE%\HiveInjection.exe
+  Destination=%SYS%\HiveInjection.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=\%SOURCE_BASE%\ControlService.exe
+  Destination=%SYS%\HiveInjectionService.exe
+  Flags=0000000000000010
+end
+item: Edit Registry
+  Total Keys=2
+  item: Key
+    Key=Software\Dvrt\HiveInjectionService
+    New Value=1
+    Value Name=AutoClose
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\Dvrt\HiveInjectionService
+    New Value=HiveInjection.exe
+    Value Name=ControlApplication
+    Root=2
+  end
+end
+item: If/While Statement
+  Variable=HIVEINJECTION
+  Value=0
+end
+item: Execute Program
+  Pathname=%SYS%\HiveInjectionService.exe
+  Command Line=-i
+  Default Directory=%SYS%
+  Flags=00000010
+end
+item: Edit Registry
+  Total Keys=1
+  Key=System\CurrentControlSet\Services\HiveInjectionService
+  New Value=4
+  New Value=
+  Value Name=Start
+  Root=2
+  Data Type=3
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end

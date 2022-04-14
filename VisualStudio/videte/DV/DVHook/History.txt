@@ -1,0 +1,128 @@
+History of DVHook
+
+
+07.08.00
+		- Beginn des Projektes
+		- Lädt die DLL Hooks.dll
+		- Erzeugt die folgenden Defaulteinträge in der Registry:
+			- C2UDFSVC.exe	= Hide
+			- Cdewatch.exe	= Hide
+			- DBGGUI.exe	= Ignore
+			- DVClient.exe	= Ignore
+			- DVHook.exe	= Hide
+			- DVProcess.exe = Ignore
+			- DVStarter.exe = Ignore
+			- DVStorage.exe = Ignore
+			- Explorer.exe	= Ignore
+			- ISDNUnit.exe	= Ignore
+			- JaCobUnit.exe	= Ignore
+			- LogView.exe	= Ignore
+			- Regedit.exe	= Ignore
+			- RemoteCD.exe  = Hide
+			- SocketUnit.exe= Ignore
+			- UDFForm.exe	= Hide
+			- UDFOrig.exe	= Hide
+
+09.08.00
+		- Da die Messagebox 'Druckerordner' über keinen Hook zu erreichen ist,
+		  wird nun alle 1000ms nach diesem Dialog gesucht, und ggf. geschlossen.
+
+14.08.00
+		- Es wird nun das jeweilige Vordergrundfenster gesucht und ermittelt zu welcher
+		  Applikation dieses gehört. Anhand der Einträge in der Registry wird entschieden,
+		  ob das Fenster geschlossen, versteckt, oder ignoriert werden soll. Dieser
+		  Mechanismus greift für alle Fenster, bei denen der Hook nicht fnktioniert.
+
+10.10.00- TKR Zum Brennen von CD-R`s wurden in der Registry die Programme DirectCD.exe (das
+		  eigentliche Brennprogramm) und WatchCD.exe (das DirectCD-Fernsteuerprogramm)
+		  jeweils mit dem Attribut "hide" eingetragen.
+		  - DirectCD.exe = Hide
+		  - WatchCD.exe  = Hide
+
+10.08.01 UF - Rdisk.exe im Hook eingetragen
+
+28.08.02 ML - Die SaVicUnit mit in die Liste aufgenommen, damit sie nicht vom DVHook
+			  beendet wird.
+
+06.09.02 RKE - Der Parameter "Control" wurde eingefügt. Dieser ermöglicht die Kontrolle
+		  von anderen Fenstern wie z.B. Disablen von einzelnen Dialogelementen etc.
+		  Die Beschreibung für die Kontrollbefehle ist in DVHookRegParameter.htm.
+
+		- Weitere Prozesse, die im System gestartet sind und für den reibungslosen Betrieb 
+		  notwendig sind, wurden zu den Defaulteinträgen in der Registry hinzugefügt:
+			- services.exe = Ignore: Systemservices for WinXP Plug and Play
+			- spoolsv.exe  = Ignore: Printerspooler 
+			- svhost.exe   = Ignore: Generic Host Process for Win32 Services
+			- lsass.exe    = Ignore: The Lsass.exe process is responsible for management of
+			  local security authority domain authentication and Active Directory management.
+			  This process handles authentication for both the client and the server, and
+			  it also governs the Active Directory engine. The Lsass.exe process is
+			  responsible for the following components:
+				- Local Security Authority
+				- Net Logon service
+				- Security Accounts Manager service
+				- LSA Server service
+				- Secure Sockets Layer (SSL)
+				- Kerberos v5 authentication protocol
+				- NTLM authentication protocol
+			- winlogon.exe = Ignore: The Windows NT security subsystem includes the
+			  implementation of secure interactive login support, which is
+			  controlled by winlogon.exe. Winlogin.exe gets executed early in
+			  the process and ensures that the user provides the proper
+			  credentials (proof) before obtaining access to the computer.
+			- csrss.exe    =  Ignore: Csrss stands for client/server run-time subsystem and is
+			  an essential subsystem that must be running at all times. Csrss is
+			  responsible for console windows, creating and/or deleting threads,
+			  and some parts of the 16-bit virtual MS-DOS environment
+			- smss.exe     = Ignore: This is the session manager subsystem, which is responsible
+			  for starting the user session. This process is initiated by the system thread and
+			  is responsible for various activities, including launching the Winlogon and Win32
+			  (Csrss.exe) processes and setting system variables. After it has launched these
+			  processes, it waits for either Winlogon or Csrss to end. If this happens
+			  "normally," the system shuts down. If it happens unexpectedly, Smss.exe causes
+			  the system to stop responding (hang)."
+			- rundll32.exe = Control:
+			  Kontrolliert die Installation von Treibern
+			- rundll32<Files Needed> als Key mit den folgenden Einträgen:
+			  - Message01 = PASSWORD
+			  - NotOk als Key mit:
+			    - DlgItem   = 0x6e
+				- Message01 = ENABLE
+				- wParam01  = 0
+			  - Ok als Key mit:
+			    - DlgItem   = 0x6e
+				- Message01 = ENABLE
+				- wParam01  = 1
+		- Bestehende Defaulteinträge die geändert wurden
+			- DVHook.exe    = Control: Selektive kontrolle über die Fenster
+				- DVHook.exe<DVHook> = Hide		: Das DVHook-Fenster wird vesteckt
+				- DVHook.exe<*>		 = Ignore	: Alle anderen ignoriert
+			- Explorer.exe  = Close
+
+08.10.02
+		- Den iExplorer zulassen, da dieser unter WinXP bei Eingabe von 'StartExplorer'
+		  geöffnet werden soll.
+		- Anstatt des iExplorers wird nun winfile.exe gestartet, da der (i)explorer durch
+		  die Explorerpolicy ohnehin keinen Zugriff auf die Laufwerke erlaubt hat.
+21.10.02 RKE
+		- Den Explorer unter WinXP verstecken, da er wenn er gestartet wurde nicht mehr beendet
+		  werden kann. Der Explorer wird von WinXP automatisch mit winfile zusammen gestartet.
+		- Parameter SHOW zum anzeigen bzw verstecken der Fenster hinzugefügt. Weitere Parameter
+		  zu aendern der Z-Reihenfolge des Fensters (Top, TopMost, Bottom, NoTopMost) eingefügt.
+		- Aenderung der Passwortabfrage für die Installationsdialoge, die von rundll32.exe auf-
+		  gerufen werden. Bei gültigem Passwort wird für die Dauer von 3 Minuten die Passwort-
+		  abfrage gesperrt, um die Installation zu ermoeglichen. Die Installationsdialoge werden
+		  als "TopMost" in der Z-Reihenfolge gesetzt.
+
+10.09.03 GF
+		- CommUnit.exe  mit in die Liste aufgenommen, damit sie nicht vom DVHook beendet wird
+30.09.03 rke
+		- Unicode Passwortabfrage korrigiert. Der Passwortdialog kontrolliert ein bestimmtes 
+		  Fensterhandle. der Dialog kann mehrfach aufgerufen werden, wenn mehrere nicht erlaubte
+		  Fenster hoch poppen.
+02.02.04 UF - Audiounit im Hook eingetragen.
+06.04.04 GF	- Umstellung auf Unicode und VS_71
+12.05.04 ML - TashaUnit in die Ignoreliste aufgenommen
+18.08.05 ML - ControlService.exe, HiveInjectionService und HiveInjection in die Ignoreliste aufgenommen.
+03.07.06 RKE- EwfControl.exe in die Ignoreliste aufgenommen.
+04.07.06 ML - QUnit ebenfalls in die Ignoreliste aufgenommen.

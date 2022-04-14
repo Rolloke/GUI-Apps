@@ -1,0 +1,21 @@
+//
+// VISION.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+#include "WK_Version.h"
+
+WK_VERSION(4, 5, 5, 555, "4.5.5.555\0", // @AUTO_UPDATE
+"Vision.exe\0",	// exe name
+"iST 4.0\0",	// product name
+"Vision application\0",	// product description
+"4.0\0",		// general product version
+"4.000\0"	// real version
+)
+/////////////////////////////////////////////////////////////////////////////

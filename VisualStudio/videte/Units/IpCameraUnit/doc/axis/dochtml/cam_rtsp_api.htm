@@ -1,0 +1,730 @@
+<html>
+<head>
+	<title>Axis Communications - Network Camera Developer pages</title>
+
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+	<meta name="ProgId" content="FrontPage.Editor.Document">
+	<meta name="KeyWords" content="network camera, network cameras, IP, IP camera, IP cameras, netcam, web camera, webcamera, web cameras, webcam, webcams, video server, print server, video servers, print servers, network, server, video, print, document, document server, scan, wireless, developer, linux, asic, chip, camera server, bluetooth, 802.11, communications, thinserver, lan, video solutions, video products, surveillance, document server, oem, remote camera, download, remote monitoring, web promotion">	
+	<meta name="Description" content="Axis specializes in professional network video and printing solutions">
+	
+	<link rel="stylesheet" type="text/css" href="../../../core/css/axis.css">
+
+	<script language="javascript" type="text/javascript" src="../../../core/javascripts/axis.js"></script>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF">
+<br>
+<center>
+<div class="axisLight_BgTop">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/top.htm" TAG="BODY" startspan -->
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td height="34" width="96"><a href="../../../index.htm"><img src="../../../core/graphics/axis_logo.gif" border="0" alt="www.axis.com" width="96" height="34"></a></td>
+    <td height="34" width="10" class="axisGraphics"><img src="../../../core/graphics/blank.gif" border="0" alt width="10" height="1"></td>
+    <td valign="middle" align="right" height="34" width="100%">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_home.gif" alt="Home" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../index.htm">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../products/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_products.gif" alt="Products" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../products/index.htm">Products</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../solutions/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_video.gif" alt="Video solutions" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../solutions/index.htm" target="_top">Solutions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_support.gif" alt="Support" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../index.htm" target="_top">Support</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../sales/index.php" target="_top"><img border="0" src="../../../core/graphics/button_wheretobuy.gif" alt="Where to buy" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../sales/index.php" target="_top">Where to buy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../corporate/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_axis.gif" alt="Corporate" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../corporate/index.htm">Corporate</a>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!--webbot bot="Include" i-checksum="64338" endspan -->
+
+</div></div>
+<div class="axisLight_BgMid">
+<table width="750" cellspacing="0" cellpadding="0" border="0">	
+	<tr>
+		<td class="axisLight_TwoColLeft" valign="top" width="147">
+			<!-- Content left column begin -->
+<ul>
+					<li class="arrowsdown"><a href="../../index.htm">Support</a></li>
+                      <li class="arrowsdown"><b><a href="../index.htm">Network Video</a></b></li>
+                      <li class="arrowsdown"><a href="index.htm">Developer pages</a></li>
+                      <li class="bullet"><a href="cam_http_api_index.htm">AXIS
+                        VAPIX API</a></li>
+                      <li class="dash"><b><a href="cam_http_api_2.htm">HTTP API</a></b></li>
+                      <li class="dash"><b><a href="recording_api.htm">Recording
+                        API</a></b></li>
+                      <li class="dash"><b><a href="cam_param_2.htm">Parameters</a></b></li>
+					<li class="dash"><b>RTSP API</b></li>
+					<li class="dash"><a href="iv_modules.htm">IV Modules API</a></li>
+                    </ul>
+                     <div class="dotline">             
+                    <ul>    
+                          <li class="nobullet">Other links</li>
+                          <li class="dash">
+                          <a href="../../../partner/adp_intro.htm">Partner program (ADP)</a>
+                          </li>
+					</ul>
+                        </div>
+  					
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/e-news_video.htm" TAG="BODY" startspan -->
+<form action="../../../reg/nlinsert.php" method="post" onsubmit="this.oldurl.value=location.href;">
+              			<div class="greybox">
+							<span class="smallheadline">Subscribe to e-news:</span><br>
+			<a href="#" onclick="axisPopUp('http://www.axis.com/reg/info/infosmall.php?id=1','NetworkVideoNews',360,200,false); return false;">Network Video News</a>			
+			<br><br>
+			Enter your E-mail:
+			<br>
+			<input type="text" name="email" size="15" maxlength="100">
+			<input type="submit" value="OK" name="enews"> 
+			<br> 
+			<br> 
+            <a href="../../../reg/index.php">Other e-newsletter options</a>
+            <input type="hidden" value=1 name="newsmail">
+			<input type="hidden" name="success" value="/reg/nlinsert.php">
+			<input type="hidden" name="oldurl" value="/">
+			<input type="hidden" name="failure" value="/reg/fel.htm">
+</div>
+
+</form>
+<!--webbot bot="Include" i-checksum="13382" endspan -->
+            </div>
+              
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/search.htm" TAG="BODY" startspan -->
+
+<form name="gs" method="GET" action="http://search.axis.com/search" style="margin:0; padding:0;">
+	<input type="hidden" name="restrict" value=""> 
+    <input type="hidden" name="ie" value="">
+    <input type="hidden" name="site" value="axis_com">
+    <input type="hidden" name="output" value="xml_no_dtd">
+    <input type="hidden" name="client" value="axis_com">
+    <input type="hidden" name="lr" value="">
+    <input type="hidden" name="proxystylesheet" value="axis_com">
+    <input type="hidden" name="oe" value="">
+       
+<table border="0" cellpadding="0" width="100%">
+	<tr>
+		<td valign="top">
+			<p class="midtext"><b><font color="#666666">Search</font></b><br>
+			<input type="text" name="q" size="10" style="width:100px;">
+		</td>
+		<td valign="middle"><input type="image" name="btnG" border="0" src="../../../core/graphics/find_small.gif" align="middle" width="30" height="30"></td>	
+	</tr>
+</table>
+</form>
+                  
+<!--webbot bot="Include" i-checksum="33403" endspan -->
+
+            </div>
+              		
+                    <!-- Content left column end -->
+		
+		</td>
+		<td class="axisLight_TwoColRight" valign="top" width="540">
+		
+					<!-- Content right column begin -->
+                    <p class="title">AXIS VAPIX API, RTSP - Interface Specification&nbsp;</p>
+                    <p>Revision: 1.<span lang="sv">01</span><br>
+            Date: 2006-<span lang="sv">April</span>-10</p>
+            <hr>
+            <h2>TABLE OF CONTENTS</h2>
+            <ul class="TOC">
+              <li><a href="#doc_history">DOCUMENT HISTORY</a>
+              <li><a href="#overview">1 OVERVIEW</a>
+                <ul>
+                  <li><a href="#overview_versions">1.1 Product and firmware
+                    versions</a></li>
+                </ul>
+              <li><a href="#references">2 REFERENCES</a>
+              <li><a href="#rtsp_api">3 RTSP API</a>
+                <ul>
+                  <li><a href="#api_blocks_describe">3.1 RTSP DESCRIBE</a>
+                  <li><a href="#api_blocks_options">3.2 RTSP OPTIONS</a>
+                  <li><a href="#api_blocks_setup">3.3 RTSP SETUP</a>
+                  <li><a href="#api_blocks_play">3.4 RTSP PLAY</a>
+                  <li><a href="#api_blocks_pause">3.5 RTSP PAUSE</a>
+                  <li><a href="#api_blocks_teardown">3.6 RTSP TEARDOWN</a>
+                  <li><a href="#api_blocks_rtsp_over_http">3.7 RTSP over HTTP</a>
+                </ul>
+              </li>
+            </ul>
+                    <p>&nbsp;</p>
+            <hr>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="doc_history">DOCUMENT HISTORY</a></h2>
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="18%"><b>Version</b></td>
+                  <td width="18%"><b>Date</b></td>
+                  <td><b>Comment</b></td>
+                </tr>
+                <tr>
+                  <td>1.00</td>
+                  <td>2005-Feb-24</td>
+                  <td>Initial version</td>
+                </tr>
+                <tr vAlign="top">
+                  <td>1.01</td>
+                  <td>2006-April-10</td>
+                  <td>Corrected errors in encoded example</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="overview">1 OVERVIEW</a></h2>
+            <p>This document specifies the external RTSP-based application
+            programming interface of the Axis camera and video servers with firmware version
+            4.20 and above.</p>
+            <!-- =============================================================== -->
+            <h3><a name="overview_versions">1.1 Product and firmware versions</a></h3>
+            <p>The support for the RTSP API is product and firmware dependent. Please refer to the Release Notes for the
+            actual product for compliance information.</p>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="references">2 REFERENCES</a></h2>
+                    <p><b>RTSP protocol</b>
+                    <ul>
+                      <li><a href="http://rfc.sunsite.dk/rfc/rfc2326.html">Real
+                        Time Streaming Protocol - RFC 2326</a></li>
+                    </ul>
+            <p><b>SDP protocol</b>
+                    <ul>
+                      <li><b><a href="http://www.faqs.org/rfcs/rfc2327.html">Session
+                        Description Protocol - RFC 2327</a></b></li>
+                    </ul>
+            <p><b>HTTP protocol</b>
+            <ul>
+              <li><a href="http://www.w3.org/Protocols/HTTP/1.0/spec">Hypertext
+                Transfer Protocol -- HTTP/1.0</a></li>
+            </ul>
+            <p><b>External application programming interfaces (Client side)</b>
+            <ul>
+              <li><a href="cam_http_api_2.htm">AXIS VAPIX HTTP API</a>
+              <li>AXIS VAPIX RTSP API
+              <li>Axis Video Product Release Notes
+              <li><a href="cam_param_2.htm">AXIS VAPIX Parameter specification</a>
+            </ul>
+            <p>&nbsp;</p>
+            <!-- *************************************************************** -->
+            <h2><a name="api_blocks">3 RTSP API</a></h2>
+            <!-- *********************************************************************** -->
+                    <p>The RTSP URL is rtsp://&lt;server
+                    name&gt;/mpeg4/&lt;camera&gt;/media.amp where &lt;server
+                    name&gt; is the host name or IP address of the server and
+                    &lt;camera&gt; is 1 to 4 or quad. The DESCRIBE, SETUP,
+                    OPTIONS, PLAY, PAUSE and TEARDOWN methods are supported. The
+                    RTSP protocol is described in RFC 2326.</p>
+            <p><b>Request syntax:</b>
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre><i>COMMAND URI</i> RTSP/1.0&lt;CRLF&gt;
+<i>Headerfield1</i>: val1&lt;CRLF&gt;
+<i>Headerfield2</i>: val2&lt;CRLF&gt;
+...
+&lt;CRLF&gt;
+</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response syntax:</b>
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 <i>ResultCode ResultString</i>&lt;CRLF&gt;
+<i>Headerfield3</i>: val3&lt;CRLF&gt;
+<i>Headerfield4</i>: val4&lt;CRLF&gt;
+...
+&lt;CRLF&gt;
+</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>The following header fields are accepted by all commands.
+                    Other header fields are silently ignored (unless stated
+                    otherwise in the sections below).</p>
+            <p>&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%"><b>Field</b></td>
+                  <td><b>Description</b></td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Authorization
+                  </td>
+                  <td>Authorization information from the client.</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">CSeq
+                  </td>
+                  <td>Request sequence number.</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Session
+                  </td>
+                  <td>Session identifier (returned by server in SETUP response).</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Content-Length
+                  </td>
+                  <td>Length of content.</td>
+                </tr>
+              </tbody>
+            </table>
+                    <p><br>
+                    The following header fields can be generated for all
+                    responses by the RTSP server:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%"><b>Field</b></td>
+                  <td><b>Description</b></td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">CSec
+                  </td>
+                  <td>Response sequence number (matches the sequence number of
+                    the request).</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Session
+                  </td>
+                  <td>Session identifier.</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">WWW-Authenticate
+                  </td>
+                  <td>Authentication from client requested.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;
+            <h3><a name="api_blocks_describe">3.1 RTSP DESCRIBE</a></h3>
+                    <p>The DESCRIBE command returns the SDP (RFC 2327)
+                    description for the URI. The DESCRIBE command accepts the
+                    following additional header field:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%">Accept</td>
+                  <td>List of content types that client supports (application/sdp
+                    is the only supported type).</td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>The DESCRIBE command generates the following additional
+                    header fields:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%">Content-Type</td>
+                  <td>Type of content (application/sdp).</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Content-Length</td>
+                  <td>Length of SDP description.</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">Content-Base</td>
+                  <td>If relative URLs are used in the SDP description, then
+                    this is the base URL.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;<br>
+                    
+            <b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>DESCRIBE /mpeg4/1/media.amp RTSP/1.0
+CSec: 1
+Accept: application/sdp
+Authorization: Basic cm9vdDpwYXNz</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK
+CSec: 1
+Content-Base: rtsp://x.y.z.w:554/mpeg4/quad/media.amp
+Content-Type: application/sdp
+Content-Length: 680
+
+v=0
+o=- 1109162014219182 1109162014219192 IN IP4 x.y.z.w
+s=Media Presentation
+e=NONE
+c=IN IP4 0.0.0.0
+b=AS:8000
+t=0 0
+a=control:*
+a=range:npt=now-
+a=mpeg4-iod: &quot;data:application/mpeg4-iod;base64,AoDUAE8BAf/1AQOAbwABQFBkYXRhOmFwcGxpY2
+F0aW9uL21wZWc0LW9kLWF1O2Jhc2U2NCxBUjBCR3dVZkF4Y0F5U1FBWlFRTklCRUVrK0FBZWhJQUFIb1NBQVlC
+QkE9PQQNAQUABAAAAAAAAAAAAAYJAQAAAAAAAAAAAzoAAkA2ZGF0YTphcHBsaWNhdGlvbi9tcGVnNC1iaWZzLW
+F1O2Jhc2U2NCx3QkFTWVFTSVVFVUZQd0E9BBICDQAAAgAAAAAAAAAABQMAAEAGCQEAAAAAAAAAAA==&quot;
+m=video 0 RTP/AVP 96 
+b=AS:8000 
+a=control:trackID=1 
+a=rtpmap:96 MP4V-ES/90000 
+a=fmtp:96 profile-level-id=245; config=000001B0F5000001B509000001000000012008D495880325
+0B042414440F; 
+a=mpeg4-esid:201</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+            <h3><a name="api_blocks_options">3.2 RTSP OPTIONS</a></h3>
+                    <p>The OPTIONS command returns a list of supported RTSP
+                    commands.
+            <p><b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>OPTIONS * RTSP/1.0
+CSec: 2</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK
+CSec: 2
+Public: DESCRIBE, PAUSE, PLAY, SETUP, TEARDOWN</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+            <h3><a name="api_blocks_setup">3.3 RTSP SETUP</a></h3>
+                    <p>The SETUP command configures the delivery method for the
+                    data. The SETUP command requires and generates the following
+                    additional header field:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%">Transport</td>
+                  <td>Specifies how the data stream is transported. Supported
+                    variants:<br>
+                    RTP/AVP;unicast;client_port=port1-port2<br>
+                    RTP/AVP;multicast;client_port=port1-port2<br>
+                    RTP/AVP/TCP;unicast</td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>The response returns a session identifier that should be
+                    used with stream control commands to the server (PLAY,
+                    PAUSE, TEARDOWN). If the Session header includes a timeout
+                    parameter, then the session needs to be kept alive. This can
+                    be done by sending RTSP requests to the server containing
+                    the session identifier (e.g. OPTIONS) within the specified
+                    timeout time or through the use of RTCP. The RTSP server
+                    does not support reconfiguring of the transport parameters.</p>
+            <p><b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>SETUP /mpeg4/1/media.amp/trackID=1 RTSP/1.0 
+CSeq: 3 
+Transport: RTP/AVP;unicast;client_port=20000-20001</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK 
+CSeq: 3 
+Session: 1442774578;timeout=60 
+Transport: RTP/AVP;unicast;mode=play;server_port=49000-49001;client_port=20000-20001</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+                    <h3><a name="api_blocks_play">3.4 RTSP PLAY</a></h3>
+                    <p>The PLAY command starts (or restarts if paused) the data
+                    delivery to the client. The PLAY command generates the following
+                    additional header fields:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" border="1">
+              <tbody>
+                <tr vAlign="top">
+                  <td width="25%">Range</td>
+                  <td>Specifies the range of time being played. Since only live
+                    streams are used, the specified time will always begin now
+                    and have no stop time.</td>
+                </tr>
+                <tr vAlign="top">
+                  <td width="25%">RTP-Info</td>
+                  <td>Information about the RTP stream. More specifically, it
+                    includes the next RTP sequence number that will be used.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>PLAY /mpeg4/1/media.amp RTSP/1.0 
+CSeq: 4 
+Session: 1442774578</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK 
+CSeq: 4 
+Session: 1442774578 
+Range: npt=now- 
+RTP-Info: url=trackID=1;seq=2735</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+                    <h3><a name="api_blocks_pause">3.5 RTSP PAUSE</a></h3>
+                    <p>The PAUSE command pauses the data delivery from the
+                    server.<p><b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>PAUSE /mpeg4/1/media.amp RTSP/1.0
+CSeq: 5
+Session: 1442774578</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK 
+CSeq: 5 
+Session: 1442774578</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <p>&nbsp;</p>
+
+            <!-- *********************************************************************** -->
+            
+                    <h3><a name="api_blocks_teardown">3.6 RTSP TEARDOWN</a></h3>
+                    <p>The TEARDOWN command terminates the data delivery from
+                    the server.<p><b>Example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>TEARDOWN /mpeg4/1/media.amp RTSP/1.0
+CSeq: 6
+Session: 1442774578</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK 
+CSeq: 6 
+Session: 1442774578</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+             <p>&nbsp;</p>
+
+            <!-- *********************************************************************** -->
+            
+                    <h3><a name="api_blocks_rtsp_over_http">3.7 RTSP over HTTP</a></h3>
+                    <p>It is possible to tunnel RTSP through HTTP to get through
+                    firewalls etc. This is achieved by setting up two sessions,
+                    one GET (for command replies and stream data) and one POST
+                    (for commands). RTSP commands sent on the POST connection
+                    are base64 encoded, but replies on the GET connection are
+                    plain text. To bind the two sessions together the server
+                    needs a unique ID (conveyed in the x-sessioncookie header).
+                    The GET and POST request are accepted both on the HTTP port
+                    (default 80) and the RTSP server port (default 554).<p>The
+                    RTSP/HTTP URL is: http//&lt;server name&gt;/mpeg4/1/media.amp.
+                    Supported methods are GET and POST.<p><b>GET example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>GET /mpeg4/1/media.amp HTTP/1.0 
+x-sessioncookie: 944345808</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Response example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>HTTP/1.0 200 OK 
+Content-Type: application/x-rtsp-tunnelled</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>Note that the returned Content-Length is an arbitrary
+                    number and does not indicate the size of any data.</p>
+            
+                    <p><b>POST example:</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>POST /mpeg4/1/media.amp HTTP/1.0
+x-sessioncookie: 944345808
+Content-Length: 32767
+Content-Type: application/x-rtsp-tunnelled</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>Note that the x-sessioncookie present in the POST content
+                    is the same as the x-sessioncookie in the corresponding GET
+                    request. Also note that the POST request must be sent on a
+                    separate connection to the server (i.e. it cannot be sent on
+                    the same connection as the GET request). No response is sent
+                    for the POST request.</p>
+            
+                    <p><b>Command example (base 64 encoded PLAY on the POST
+                    connection):</b> &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre><font face="Courier New">UExBWSAvbXBlZzQvMS9tZWRpYS5hbXAgUlRTUC8xLjANCkNTZXE6IDQNClNl
+c3Npb246IDEzNjk5MTc3MTINCg0K</font></pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    <p>Which corresponds to this command:&nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre><font face="Courier New">PLAY /mpeg4/1/media.amp RTSP/1.0
+CSeq: 4
+Session: 1369917712</font></pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+                    <p><b>Command response (plain-text on the GET connection):</b>
+                    &nbsp;
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>RTSP/1.0 200 OK 
+CSeq: 4 
+Session: 1369917712</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+             <p>&nbsp;</p>
+            
+            <!-- *********************************************************************** -->
+
+            
+
+           
+              <!-- Content right column end --></td>
+	</tr>
+</table>
+</div>
+<div class="axisLight_BgBottom">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/bottom.htm" TAG="BODY" startspan -->
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+   			<td width="55%"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br><img border="0" src="../../../core/graphics/blank.gif" width="9" height="1"><img border="0" src="../../../core/graphics/logo_triangle_bw.gif" width="11" height="9">
+				<font color="#999999"><i>Axis specializes in professional network video and printing solutions</i></font>
+			</td>
+   			<td width="45%" align="right"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br>
+              &nbsp;&nbsp;&nbsp; <a href="../../../corporate/corp/glossary_general.htm" style="text-decoration:none;color:#999999"><b>Glossary</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../corporate/contact.htm" style="text-decoration:none;color:#999999"><b>Contact</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../sites.htm" style="text-decoration:none;color:#999999"><b>Sites</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../privacy.htm" style="text-decoration:none;color:#999999"><b>Privacy Statement</b></a>
+				<img border="0" src="../../../core/graphics/blank.gif" width="9" height="1">
+			</td>
+		</tr>
+	</table>
+<!-- Google analytics start -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-266925-1";
+urchinTracker();
+</script>
+<!-- Google analytics end -->
+<!--webbot bot="Include" i-checksum="33026" endspan -->
+</div></div>
+
+</center>
+</body>
+</html>

@@ -1,0 +1,8 @@
+[TopDir]
+file0=D:\Project\HHLA\RemoteControl\SoftDongle.dcf
+file1=D:\Project\HHLA\RemoteControl\CAMERA.ini
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

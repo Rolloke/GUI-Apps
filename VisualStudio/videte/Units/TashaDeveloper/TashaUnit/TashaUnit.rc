@@ -1,0 +1,311 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\TashaUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\TashaUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info über TashaUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "TashaUnit Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2001",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_TASHAUNIT_DIALOG DIALOGEX 0, 0, 316, 260
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "TashaUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Video Input",IDC_GROUP_VIDEO_INPUT,4,4,160,40
+    CONTROL         "Cam 1",IDC_RADIO_CAM0,"Button",BS_AUTORADIOBUTTON,12,16,
+                    32,10
+    CONTROL         "Cam 2",IDC_RADIO_CAM1,"Button",BS_AUTORADIOBUTTON,48,16,
+                    32,10
+    CONTROL         "Cam 3",IDC_RADIO_CAM2,"Button",BS_AUTORADIOBUTTON,84,16,
+                    32,10
+    CONTROL         "Cam 4",IDC_RADIO_CAM3,"Button",BS_AUTORADIOBUTTON,120,
+                    16,32,10
+    CONTROL         "Cam 5",IDC_RADIO_CAM4,"Button",BS_AUTORADIOBUTTON,12,28,
+                    32,10
+    CONTROL         "Cam 6",IDC_RADIO_CAM5,"Button",BS_AUTORADIOBUTTON,48,28,
+                    32,10
+    CONTROL         "Cam 7",IDC_RADIO_CAM6,"Button",BS_AUTORADIOBUTTON,84,28,
+                    32,10
+    CONTROL         "Cam 8",IDC_RADIO_CAM7,"Button",BS_AUTORADIOBUTTON,120,
+                    28,32,10
+    GROUPBOX        "Initialisations",IDC_STATIC,168,4,144,56
+    PUSHBUTTON      "Reset BF533",IDC_RESET_BF533,176,17,64,16
+    PUSHBUTTON      "Download Altera...",IDC_DOWNLOAD_ALTERA,244,17,64,16
+    PUSHBUTTON      "Write EEProm...",IDC_DOWNLOAD_EEPROM,176,36,64,16
+    PUSHBUTTON      "Read EEProm...",IDC_SAVE_EEPROM,244,36,64,16
+    GROUPBOX        "Color settings",IDC_STATIC,4,44,160,60
+    RTEXT           "Brightness",IDC_STATIC,28,60,34,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_BRIGHTNESS,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,52,72,15
+    LTEXT           "50",IDC_STATIC_BRIGTNESS,138,58,17,8
+    RTEXT           "Contrast",IDC_STATIC,28,72,34,8
+    CONTROL         "Slider2",IDC_SCROLLBAR_CONTRAST,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,68,72,15
+    LTEXT           "50",IDC_STATIC_CONTRAST,138,72,17,8
+    RTEXT           "Saturation",IDC_STATIC,28,85,34,8
+    CONTROL         "Slider3",IDC_SCROLLBAR_SATURATION,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,84,72,15
+    LTEXT           "50",IDC_STATIC_SATURATION,138,87,17,8
+    GROUPBOX        "Capture",IDC_STATIC,168,60,144,72
+    PUSHBUTTON      "StartCapture",IDC_START,176,72,64,16
+    PUSHBUTTON      "StopCapture",IDC_STOP,244,72,64,16
+    PUSHBUTTON      "PauseCapture",IDC_PAUSE,176,92,64,16
+    PUSHBUTTON      "ResumeCapture",IDC_PLAY,244,92,64,16
+    PUSHBUTTON      "Preview",IDC_PREVIEW,176,112,64,16
+    RTEXT           "Frames:",IDC_STATIC,244,120,26,8
+    LTEXT           "0",IDC_STATIC_FRAME,272,120,36,8
+    LTEXT           "Fps:",IDC_STATIC,256,112,16,8
+    LTEXT           "0",IDC_STATIC_FPS,272,112,24,8
+    GROUPBOX        "Motion detection",IDC_STATIC,4,105,160,99
+    RTEXT           "MD Treshold",IDC_STATIC,16,121,46,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MD_TRESHOLD,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,117,72,15
+    LTEXT           "50",IDC_STATIC_MD_TRESHOLD,136,121,16,8
+    RTEXT           "Mask Treshold",IDC_STATIC,8,137,52,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_TRESHOLD,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,133,72,15
+    LTEXT           "50",IDC_STATIC_MASK_TRESHOLD,136,137,16,8
+    RTEXT           "Mask Increment",IDC_STATIC,8,153,52,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_INCREMENT,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,149,72,15
+    LTEXT           "50",IDC_STATIC_MASK_INCREMENT,136,153,16,8
+    RTEXT           "Mask Delay",IDC_STATIC,24,169,38,8
+    CONTROL         "Slider1",IDC_SCROLLBAR_MASK_DELAY,"msctls_trackbar32",
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,64,165,72,15
+    LTEXT           "50",IDC_STATIC_MASK_DELAY,136,169,16,8
+    GROUPBOX        "Preview",IDC_STATIC,4,208,160,48
+    CONTROL         "Multi view",IDC_CHECK_MULTY_VIEW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,216,47,10
+    CONTROL         "Framesync",IDC_CHECK_FRAME_SYNC,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,216,50,10
+    CONTROL         "Noise reduction",IDC_CHECK_NOISEREDUCTION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,229,65,10
+    CONTROL         "Show adap. Mask",IDC_CHECK_SHOW_ADAPTIVE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,240,73,10
+    CONTROL         "Show diff. image",IDC_CHECK_SHOW_DIFF_IMAGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,228,68,10
+    GROUPBOX        "Input/Output",IDC_STATIC,168,132,144,52
+    LTEXT           "Relais",IDC_STATIC,176,148,20,8
+    CONTROL         "",IDC_RELAIS1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,216,
+                    148,8,8
+    CONTROL         "",IDC_RELAIS0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,
+                    148,8,8
+    LTEXT           "Alarm:",IDC_STATIC_ALARME,176,161,20,8
+    CONTROL         "",IDC_CHECK_ALARM7,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,200,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM5,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,216,164,8,8
+    CONTROL         "",IDC_RELAIS3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,200,
+                    148,8,8
+    CONTROL         "",IDC_RELAIS2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,208,
+                    148,8,8
+    DEFPUSHBUTTON   "OK",IDOK,224,240,84,15
+    CONTROL         "",IDC_CHECK_ALARM0,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,256,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM1,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,248,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM2,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,240,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM3,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,232,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM4,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,224,164,8,8
+    CONTROL         "",IDC_CHECK_ALARM6,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,208,164,8,8
+    CONTROL         "Show perm. Mask",IDC_CHECK_SHOW_PERMANENT_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,84,240,73,10
+    PUSHBUTTON      "Clear mask",IDC_CLEAR_MASK,16,184,64,16
+    PUSHBUTTON      "Invert mask",IDC_INVERT_MASK,88,184,64,16
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MFC-Anwendung TashaUnit\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "TashaUnit\0"
+            VALUE "LegalCopyright", "Copyright (C) 2001\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "TashaUnit.EXE\0"
+            VALUE "ProductName", "Anwendung TashaUnit\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TASHAUNIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 253
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o über TashaUnit..."
+    IDS_RTE_NO_VIDEO        "Die Kamera %u liefert kein Videosignal"
+    IDS_RTE_VIDEO           "Die Kamera %u liefert wieder ein Videosignal"
+    IDS_EEPROM_READBACK_FAILED "EEProm readback test failed!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\TashaUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

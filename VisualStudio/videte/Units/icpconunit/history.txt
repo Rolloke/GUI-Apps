@@ -1,0 +1,5 @@
+01.04.03 GF	- Englische Version erstellt
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+17.01.06 RKE- RuntimeErrors angepasst
+20.01.06 UF - Anpassung an Umbau CIPC, WKClasses

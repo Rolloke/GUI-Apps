@@ -1,0 +1,533 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SDIConfig.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\SDIConfig.ico"
+IDR_SDICONTYPE          ICON    DISCARDABLE     "res\\SDIConfigDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_SDICONTYPE          BITMAP  MOVEABLE PURE   "res\\Toolbar_old.bmp"
+IDB_HOT                 BITMAP  DISCARDABLE     "res\\hot.bmp"
+IDB_COLD                BITMAP  DISCARDABLE     "res\\cold.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  20, 20
+BEGIN
+    BUTTON      ID_FILE_NEW
+    SEPARATOR
+    BUTTON      ID_CONNECT
+    BUTTON      ID_DISCONNECT
+    SEPARATOR
+    BUTTON      ID_EXTERN_PROGRAMM
+    SEPARATOR
+    BUTTON      ID_CONFIGURE
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_SDICONTYPE TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDIConfig...",     ID_APP_ABOUT
+    END
+END
+
+IDR_SDICONTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Neu\tStrg+N",                ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Schließen",                  ID_FILE_CLOSE
+        MENUITEM "S&peichern\tStrg+S",          ID_FILE_SAVE
+        MENUITEM "Speichern &unter...",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Letzte Datei",                ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "E&infügen\tStrg+V",           ID_EDIT_PASTE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Fenster"
+    BEGIN
+        MENUITEM "Neues &Fenster",              ID_WINDOW_NEW
+        MENUITEM "Über&lappend",                ID_WINDOW_CASCADE
+        MENUITEM "&Nebeneinander",              ID_WINDOW_TILE_HORZ
+        MENUITEM "&Symbole anordnen",           ID_WINDOW_ARRANGE
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDIConfig...",     ID_APP_ABOUT
+    END
+END
+
+IDR_KEBA MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM SEPARATOR
+        MENUITEM "&Neu...\tStrg+N",             ID_FILE_NEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Verbindung"
+    BEGIN
+        MENUITEM "zur &Gegenstation...\tENTER", ID_CONNECT
+        MENUITEM "&Trennen\tESC",               ID_DISCONNECT
+        MENUITEM "&Lokale Station\tStrg+L",     ID_CONNECT_LOCAL
+    END
+    POPUP "&Konfiguration"
+    BEGIN
+        MENUITEM "&Bearbeiten",                 ID_EXTERN_PROGRAMM
+        MENUITEM "&Durchführen",                ID_CONFIGURE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über SDIConfig...",     ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "L",            ID_CONNECT_LOCAL,       VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_DISCONNECT,          VIRTKEY, NOINVERT
+    VK_RETURN,      ID_CONNECT,             VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SDICONFIG_FORM DIALOG DISCARDABLE  0, 0, 446, 266
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "\n\n\tTODO: Place form controls on this dialog.",
+                    IDC_STATIC,7,7,432,252,WS_BORDER
+END
+
+IDD_KEBA_FORM DIALOG DISCARDABLE  0, 0, 375, 192
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Vorhandene &portachec 2000:",IDC_TXT_LISTCONTROLS,7,7,
+                    146,10
+    LISTBOX         IDC_LB_CONTROLS,7,16,146,46,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Konfigurationsstatus:",IDC_TXT_CONFIG_STATE,7,72,108,8
+    EDITTEXT        IDC_EDIT_CONFIG_STATE,7,82,361,103,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL | NOT 
+                    WS_TABSTOP
+    CONTROL         "Animate1",IDC_ANIMATE,"SysAnimate32",ACS_CENTER | 
+                    ACS_TRANSPARENT | ACS_AUTOPLAY,156,7,200,60
+    RTEXT           "Zeit verstrichen:",IDC_TXT_TIME_ELAPSED,156,72,96,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "Zeit",IDC_TXT_TIME,260,72,96,8,NOT WS_VISIBLE
+END
+
+AFX_IDD_NEWTYPEDLG DIALOG DISCARDABLE  9, 26, 183, 70
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Neu"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Neu",IDC_STATIC,6,5,123,8,NOT WS_GROUP
+    LISTBOX         AFX_IDC_LISTBOX,6,15,125,49,WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,137,6,40,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,137,23,40,14
+    PUSHBUTTON      "&Hilfe",ID_HELP,137,43,40,14
+END
+
+IDD_CONNECTION DIALOG DISCARDABLE  0, 0, 220, 206
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Verbindung"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Wählen Sie die gewünschte Verbindung!",IDC_TXT_TITEL,7,
+                    7,136,8
+    LTEXT           "G&egenstationen:",IDC_TXT_HOST,8,24,53,8
+    LISTBOX         IDC_LB_HOST,7,36,206,116,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Nutzername:",IDC_TXT_NAME,7,170,41,8
+    EDITTEXT        IDC_EDIT_NAME,51,168,103,12,ES_AUTOHSCROLL
+    LTEXT           "&Paßwort:",IDC_TXT_PASWORD,7,188,29,8
+    EDITTEXT        IDC_EDIT_PASSWORD,51,186,103,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,163,166,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,163,185,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_KEBA_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 185
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "SDI Konfiguration"
+    IDR_SDICONTYPE          "\nSDICon1\nSDICon2\n\n\nSDIConfig3.Document\nSDICon4 Document"
+    IDR_KEBA                "\nportachec 2000\nportachec 2000\n\n\nportachec 2000.Document\nportachec 2000 Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SDI Konfiguration"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Neu\nÖffnet eine neue Konfigurationsoberfläche."
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt die aktive Konfigurationsoberfläche.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Info\nZeigt Programm-Informationen, Versionsnummer und Copyright an."
+    ID_APP_EXIT             "Verläßt die Anwendung.\nBeenden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Öffnet ein weiteres Fenster für das aktive Dokument.\nNeues Fenster"
+    ID_WINDOW_ARRANGE       "Ordnet die Symbole im unteren Bereich des Fensters an.\nSymbole anordnen"
+    ID_WINDOW_CASCADE       "Ordnet die Fenster überlappend an.\nÜberlappende Fenster"
+    ID_WINDOW_TILE_HORZ     "Ordnet die Fenster nebeneinander an.\nFenster nebeneinander"
+    ID_WINDOW_TILE_VERT     "Ordnet die Fenster nebeneinander an.\nFenster nebeneinander"
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+    AFX_IDS_MDICHILD        "Aktiviert dieses Fenster."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "Sie haben keinen gültigen Dongle, um diese Software zu starten, oder Ihr Dongle ist defekt.\nWenden Sie sich bitte an einen Servicetechniker!"
+    IDP_CONNECTION_BUSY     "Der Vorgang auf dieser Verbindung ist noch nicht abgeschlossen!\nWollen Sie die Verbindung wirklich beenden?"
+    IDP_EXTERN_PROGRAM_TERMINATED 
+                            "Sie hatten das externe Konfigurationsprogramm gestartet.\nJenes Programm wird beendet!"
+    IDP_EXTERN_PROGRAM_BUSY "Das externe Konfigurationsprogramm ist noch aktiviert.\nWenn Sie fortfahren. wird jenes Programm beendet, ohne daß Ihre Änderungen gespeichert werden.\n\nWollen Sie wirklich fortfahren?"
+    IDS_NEW_DOCUMENT        "Wollen Sie die aktuelle Konfiguration beenden?"
+    IDP_ASK_FOR_DISCONNECT  "Wollen Sie die Verbindung beenden?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_NAME           "Hier können Sie einen anderen Nutzernamen eingeben,\nfalls Sie bei der Gegenstation unter einem anderen Namen eingetragen sind."
+    IDC_LB_HOST             "Wählen Sie eine Gegenstation aus der Liste aus."
+    IDC_EDIT_PASSWORD       "Hier können Sie das Kennwort zu dem Nutzernamen eingeben."
+    IDC_EDIT_CONFIG_STATE   "Hier wird der Status der Konfiguration angezeigt."
+    IDC_LB_CONTROLS         "Wählen Sie den portachec 2000 aus,\nden Sie konfigurieren wollen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CONNECTING          "Die Verbindung zu %s wird aufgebaut."
+    IDS_CONNECTED           "Die Verbindung mit %s wurde hergestellt."
+    IDS_CONFIG_FILE_TRANSFERING 
+                            "Die Konfigurationsdatei %s wird zur Gegenstation übertragen."
+    IDS_CONFIG_FILE_TRANSFERED 
+                            "Die Konfigurationsdatei %s wurde vollständig übertragen."
+    IDS_TIME_TRANSFER       "Vermutete Zeitdauer der Übertragung: %s"
+    IDS_FILE_NOT_READ       "Die Datei %s konnte nicht gelesen werden."
+    IDS_CONNECT_FAILED      "Die Verbindung zu %s konnte nicht hergestellt werden."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CONNECT_END         "Die Verbindung mit %s wird beendet."
+    IDS_SDI_ERROR           "Der folgende Fehler wurde gemeldet:"
+    IDS_INPUT_NO_INFO       "Bei der Gegenstation wurden keine angeschlossenen Geräte gefunden."
+    IDS_DISCONNECTED        "Die Verbindung mit %s wurde von der Gegenstation aus getrennt."
+    IDS_FETCH_INFO_INPUTS   "Es werden Informationen über die angeschlossenen Geräte geholt."
+    IDS_CONFIG_OK           "Die Konfiguration wurde erfolgreich durchgeführt."
+    IDS_CONFIG_FAILED_NOT_ALLOWED 
+                            "Die Konfiguration wird vom externen Gerät verweigert."
+    IDS_CONFIG_FAILED_NOT_STARTED 
+                            "Die Konfiguration kann nicht durchgeführt werden.\r\nDas ausgewählte Gerät reagiert nicht."
+    IDS_CONFIG_FAILED_NOT_OK 
+                            "Die Konfiguration war NICHT erfolgreich!\r\nVor einer Wiederholung sollten Sie ggf. Ihre Konfiguration überprüfen."
+    IDS_CONFIG_FAILED_XMODEM_FAILED 
+                            "Fehler bei der Übertragung der Konfiguration."
+    IDS_INFO_INPUTS_NOTHING "Zu den angeschlossenen Geräten besteht keine Verbindung mehr."
+    IDS_CONFIGURE           "Starte Konfiguration %s. Dieser Vorgang kann einige Minuten dauern."
+    IDS_FILE_TRANSFER_FAILED "Die Datei %s konnte nicht übertragen werden."
+    IDS_EXTERN_PROGRAM_STARTED 
+                            "Das externe Konfigurationsprogramm wurde gestartet."
+    IDS_EXTERN_PROGRAM_NOT_STARTED 
+                            "Das externe Konfigurationsprogramm konnte nicht gestartet werden."
+    IDS_EXTERN_PROGRAM_CLOSED 
+                            "Das externe Konfigurationsprogramm wurde beendet."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CONNECT              "Verbinden\nVerbindung zur Gegenstation herstellen."
+    ID_DISCONNECT           "Trennen\nVerbindung trennen."
+    ID_FILE_TRANSFER        "Überträgt die Konfigurationsdatei zur Gegenstation.\nÜberträgt die Konfigurationsdatei zur Gegenstation."
+    ID_CONFIGURE            "Konfiguration\nFührt die Konfiguration durch."
+    ID_EXTERN_PROGRAMM      "pc 2000\nRuft das Konfigurationsprogramm zum Bearbeiten der Konfigurationsdatei auf."
+    ID_CONNECT_LOCAL        "Verbindung zur lokalen Station herstellen.\nVerbindung zur lokalen Station herstellen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FILE_NOT_OPENED     "Die Datei %s konnte nicht geöffnet werden."
+    IDS_FILE_NOT_FOUND      "Die Datei %s wurde nicht gefunden."
+    IDS_HAS_INFO_INPUTS     "Die Informationen über die angeschlossenen Geräte sind eingetroffen."
+    IDS_CONFIG_TRANSFERING  "Die Konfiguration wird durchgeführt. Vermutete Zeitdauer: %s"
+    IDS_CONFIG_FAILED_NEXT_TRY 
+                            "Die übertragene Konfiguration war fehlerhaft.\r\nDie Konfiguration wird erneut durchgeführt.\r\nVermutete Zeitdauer: %s"
+    IDS_LOCAL_SERVER        "Lokale Station"
+    IDS_FORMAT_TIME_MODIFIED "%a, %d.%m.%Y, %H:%M:%S"
+    IDS_STATE_OF_FILE       "Dateigröße: %d Bytes, geändert am %s"
+    IDS_FORMAT_TIME_TRANSFER "%M min %S s"
+    IDS_FETCH_ERROR         "Fehler-Nr.: %i ; Fehler: %s"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\SDIConfig.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

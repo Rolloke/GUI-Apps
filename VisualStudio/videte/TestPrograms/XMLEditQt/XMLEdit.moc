@@ -1,0 +1,133 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'XMLEdit.h'
+**
+** Created: Tue 2. Sep 21:48:04 2008
+**      by: The Qt Meta Object Compiler version 59 (Qt 4.2.0)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "XMLEdit.h"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'XMLEdit.h' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 59
+#error "This file was generated using the moc from 4.2.0. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+static const uint qt_meta_data_ComboBoxDelegate[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_ComboBoxDelegate[] = {
+    "ComboBoxDelegate\0"
+};
+
+const QMetaObject ComboBoxDelegate::staticMetaObject = {
+    { &QItemDelegate::staticMetaObject, qt_meta_stringdata_ComboBoxDelegate,
+      qt_meta_data_ComboBoxDelegate, 0 }
+};
+
+const QMetaObject *ComboBoxDelegate::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *ComboBoxDelegate::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_ComboBoxDelegate))
+	return static_cast<void*>(const_cast<ComboBoxDelegate*>(this));
+    return QItemDelegate::qt_metacast(_clname);
+}
+
+int ComboBoxDelegate::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QItemDelegate::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    return _id;
+}
+static const uint qt_meta_data_CXMLEditDlg[] = {
+
+ // content:
+       1,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      10,   10, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+
+ // slots: signature, parameters, type, tag, flags
+      13,   12,   12,   12, 0x09,
+      26,   12,   12,   12, 0x09,
+      39,   12,   12,   12, 0x09,
+      60,   12,   12,   12, 0x09,
+      82,   12,   12,   12, 0x09,
+      93,   12,   12,   12, 0x09,
+     102,   12,   12,   12, 0x09,
+     124,  112,   12,   12, 0x09,
+     160,  112,   12,   12, 0x09,
+     213,  196,   12,   12, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_CXMLEditDlg[] = {
+    "CXMLEditDlg\0\0OnOpenFile()\0OnSaveFile()\0OnCreateXMLElement()\0"
+    "OnCreateXMLAttibute()\0OnDelete()\0OnCopy()\0OnPaste()\0item,column\0"
+    "OnItemClicked(QTreeWidgetItem*,int)\0"
+    "OnItemChanged(QTreeWidgetItem*,int)\0item,text,column\0"
+    "OnItemChanged(QTreeWidgetItem*,QString,int)\0"
+};
+
+const QMetaObject CXMLEditDlg::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_CXMLEditDlg,
+      qt_meta_data_CXMLEditDlg, 0 }
+};
+
+const QMetaObject *CXMLEditDlg::metaObject() const
+{
+    return &staticMetaObject;
+}
+
+void *CXMLEditDlg::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_CXMLEditDlg))
+	return static_cast<void*>(const_cast<CXMLEditDlg*>(this));
+    return QDialog::qt_metacast(_clname);
+}
+
+int CXMLEditDlg::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: OnOpenFile(); break;
+        case 1: OnSaveFile(); break;
+        case 2: OnCreateXMLElement(); break;
+        case 3: OnCreateXMLAttibute(); break;
+        case 4: OnDelete(); break;
+        case 5: OnCopy(); break;
+        case 6: OnPaste(); break;
+        case 7: OnItemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 8: OnItemChanged((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 9: OnItemChanged((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        }
+        _id -= 10;
+    }
+    return _id;
+}

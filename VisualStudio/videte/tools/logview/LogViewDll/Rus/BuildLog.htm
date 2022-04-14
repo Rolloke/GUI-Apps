@@ -1,0 +1,64 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=Windows-1252">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: LogViewDll, Configuration: Rus|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP00002F.rsp" with contents
+[
+/O2 /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "_AFXEXT" /D "_WINDLL" /D "_AFXDLL" /D "_UNICODE" /D "UNICODE" /FD /EHsc /MD /GS /Zc:wchar_t /Yu"stdafx.h" /Fp"Rus/LogViewDll.pch" /Fo"Rus/" /Fd"Rus/vc70.pdb" /W3 /c /Wp64 /Zi /TP
+.\LogViewDll.cpp
+]
+Creating command line "cl.exe @d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP00002F.rsp /nologo"
+Creating temporary file "d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP000030.rsp" with contents
+[
+/O2 /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "_AFXEXT" /D "_WINDLL" /D "_AFXDLL" /D "_UNICODE" /D "UNICODE" /FD /EHsc /MD /GS /Zc:wchar_t /Yc"stdafx.h" /Fp"Rus/LogViewDll.pch" /Fo"Rus/" /Fd"Rus/vc70.pdb" /W3 /c /Wp64 /Zi /TP
+.\stdafx.cpp
+]
+Creating command line "cl.exe @d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP000030.rsp /nologo"
+Creating command line "rc.exe /d "NDEBUG" /d "_AFXDLL" /d "_UNICODE" /d "UNICODE" /l 0x419 /I "Rus" /fo"Rus/LogViewrus.res" \Privat\Project\tools\logview\LogViewrus.rc"
+Creating temporary file "d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP000031.rsp" with contents
+[
+/OUT:"Rus/LogViewRus.dll" /INCREMENTAL:NO /NOLOGO /DLL /DEF:".\LogViewDllRus.def" /DEBUG /PDB:"Rus/LogViewDll.pdb" /SUBSYSTEM:WINDOWS /OPT:NOREF /OPT:ICF /IMPLIB:"Rus/LogViewDll.lib" /MACHINE:X86
+.\Rus\LogViewDll.obj
+.\Rus\stdafx.obj
+.\Rus\LogViewrus.res
+]
+Creating command line "link.exe @d:\Privat\Project\tools\logview\LogViewDll\Rus\RSP000031.rsp"
+Creating temporary file "d:\Privat\Project\tools\logview\LogViewDll\Rus\BAT000032.bat" with contents
+[
+@echo off
+copy Rus\*.dll ..\Release\
+if errorlevel 1 goto VCReportError
+goto VCEnd
+:VCReportError
+echo Project : error PRJ0019: A tool returned an error code from "Performing Post-Build Event..."
+exit 1
+:VCEnd
+]
+Creating command line "d:\Privat\Project\tools\logview\LogViewDll\Rus\BAT000032.bat"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+stdafx.cpp
+Compiling...
+LogViewDll.cpp
+Compiling resources...
+Linking...
+   Creating library Rus/LogViewDll.lib and object Rus/LogViewDll.exp
+Performing Post-Build Event...
+Rus\LogViewRus.dll
+        1 Datei(en) kopiert.
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://d:\Privat\Project\tools\logview\LogViewDll\Rus\BuildLog.htm"
+LogViewDll - 0 error(s), 0 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>

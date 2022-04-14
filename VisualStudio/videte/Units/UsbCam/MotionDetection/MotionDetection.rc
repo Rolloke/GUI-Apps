@@ -1,0 +1,222 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\MotionDetection.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MotionDetection DLL\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "MotionDetection\0"
+            VALUE "LegalCopyright", "Copyright (C) 2003\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "MotionDetection.DLL\0"
+            VALUE "ProductName", "MotionDetection Dynamic Link Library\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_MD_CONFIG DIALOGEX 0, 0, 376, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bewegungserkennung-Einstellungen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,281,120,42,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,327,120,42,14
+    PUSHBUTTON      "Invertiere perm. Maske",IDC_INVERT_PERMANENT_MASK,282,
+                    30,87,14
+    PUSHBUTTON      "Lösche Masken",IDC_CLEAR_MASK,282,66,87,14
+    PUSHBUTTON      "Speichere Masken",IDC_SAVE_MASK,282,84,87,14
+    CONTROL         "",IDC_INLAY_WND,"Static",SS_WHITERECT | SS_SUNKEN | 
+                    WS_BORDER,6,12,131,91
+    CONTROL         "",IDC_DIFF_WND,"Static",SS_WHITERECT | SS_SUNKEN | 
+                    WS_BORDER,138,12,131,91
+    COMBOBOX        IDC_SELECT_CAMERA,282,12,87,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Lade Masken",IDC_LOAD_MASK,282,102,87,14
+    CONTROL         "Zeige Maske im Bild",IDC_HIDE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,102,137,78,10
+    LTEXT           "Originalbild:",IDC_TITLE_INLAY,6,3,66,8
+    LTEXT           "Differenzbild:",IDC_TITLE_MASK,138,3,42,8
+    CONTROL         505,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,121,7,6
+    CONTROL         506,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,133,7,6
+    LTEXT           "Adaptive Maske",IDC_STATIC_AM,24,120,52,8
+    LTEXT           "Permanente Maske",IDC_STATIC_PM,24,132,62,8
+    GROUPBOX        "Legende",IDC_STATIC_LEGENDE,6,108,90,36
+    CONTROL         "Histogrammausgleich",IDC_HISTOGRAMM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,137,83,10
+    PUSHBUTTON      "Invertiere adap. Maske",IDC_INVERT_ADAPTIVE_MASK,282,48,
+                    87,14
+    COMBOBOX        IDC_SELECT_MASK_SENSITIVITY,219,123,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SELECT_ALARM_SENSITIVITY,219,109,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Empfindlichkeit der adaptiven Maske",
+                    IDC_STATIC_ALARM_SENSITIVITY,99,125,117,8
+    LTEXT           "Empfindlichkeit der MD",IDC_STATIC_MD_SENSITIVITY,99,
+                    112,117,8,0,WS_EX_RIGHT
+    CONTROL         "Tiefpass Filter",IDC_FILTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,273,138,93,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_GREEN               BITMAP  DISCARDABLE     "green.bmp"
+IDB_RED                 BITMAP  DISCARDABLE     "red.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLG_MD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 369
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HIGH                "Hoch"
+    IDS_NORMAL              "Normal"
+    IDS_LOW                 "Niedrig"
+    IDS_OFF                 "Aus"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\MotionDetection.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

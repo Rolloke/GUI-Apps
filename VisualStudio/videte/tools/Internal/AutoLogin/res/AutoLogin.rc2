@@ -1,0 +1,24 @@
+/////////////////////////////////////////////////////////////////////////////
+// PROJECT:		AutoLogin
+// FILE:		$Workfile: MiCoCommon.h $
+// ARCHIVE:		$Archive: /Project/Units/MiCo/micosys/MiCoCommon.h $
+// CHECKIN:		$Date: 5.08.98 9:40 $
+// VERSION:		$Revision: 19 $
+// LAST CHANGE:	$Modtime: 5.08.98 9:29 $
+// BY AUTHOR:	$Author: Martin $
+// $Nokeywords:$
+//////////////////////////////////////////////////////////////////////
+
+//
+// AUTOLOGIN.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////

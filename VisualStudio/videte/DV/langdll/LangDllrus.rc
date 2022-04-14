@@ -1,0 +1,1126 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian (Russian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU 
+BEGIN
+    POPUP "Просмотр "
+    BEGIN
+        MENUITEM ">Во весь экран ",                   IDOSD_VIEW_FULL
+        MENUITEM ">Квадратирование",                IDOSD_VIEW_XXX
+        MENUITEM ">1 камера увеличенная",                     IDOSD_VIEW_1PX
+    END
+    POPUP "Камера"
+    BEGIN
+        MENUITEM ">Камера ",                     IDOSD_CAM1
+        MENUITEM ">Камера ",                     IDOSD_CAM2
+        MENUITEM ">Камера ",                     IDOSD_CAM3
+        MENUITEM ">Камера ",                     IDOSD_CAM4
+        MENUITEM ">Камера ",                     IDOSD_CAM5
+        MENUITEM ">Камера ",                     IDOSD_CAM6
+        MENUITEM ">Камера ",                     IDOSD_CAM7
+        MENUITEM ">Камера ",                     IDOSD_CAM8
+        MENUITEM ">Камера ",                     IDOSD_CAM9
+        MENUITEM ">Камера ",                     IDOSD_CAM10
+        MENUITEM ">Камера ",                     IDOSD_CAM11
+        MENUITEM ">Камера ",                     IDOSD_CAM12
+        MENUITEM ">Камера ",                     IDOSD_CAM13
+        MENUITEM ">Камера ",                     IDOSD_CAM14
+        MENUITEM ">Камера ",                     IDOSD_CAM15
+        MENUITEM ">Камера ",                     IDOSD_CAM16
+    END
+    POPUP "Установки "
+    BEGIN
+        MENUITEM ">PIN: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM "Блокировать монитор",               IDOSD_OPTION_LOCK
+    POPUP "Система"
+    BEGIN
+        MENUITEM ">Информация о системе",                IDOSD_OPTION_INFO
+        MENUITEM ">Статистика",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "Воспроизведение"
+    BEGIN
+        MENUITEM ">Реальное время ",                   IDOSD_REALTIME
+        MENUITEM ">Тревожный список",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">Показать перекрестие",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU 
+BEGIN
+    POPUP "Настройки камеры"
+    BEGIN
+        MENUITEM ">Имя камеры :________________", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Частота кадров",                   IDOSD_CAMERA_FPS
+        MENUITEM ">Компрессия изображения",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">Яркость",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">Контрастность",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">Насыщение",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Терминирование (75 Ом)",               IDOSD_CAMERA_TERMINATION
+        MENUITEM ">Тип",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">Com порт ",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "Настройки системы"
+    BEGIN
+        MENUITEM ">Разрешение изображения",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">Авар-й звуковой сигнал ",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">Экспорт системных настроек", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">Импорт системных настроек", IDOSD_IMPORT_SETTINGS
+        MENUITEM ">Обслуживание",                    IDOSD_MAINTENANCE
+        MENUITEM ">Видеоформат",                IDOSD_SYSTEM_VIDEOFORMAT
+        MENUITEM ">Видеостандарт",                  IDOSD_SYSTEM_VIDEONORM
+        MENUITEM ">AGC",                        IDOSD_SYSTEM_AGC
+    END
+    POPUP "Расписание камер"
+    BEGIN
+        MENUITEM ">Пон.: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">Вт.: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">Ср.: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">Чт.: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">Пят.: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">Суб.: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">Вос.: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">Входы детекторов",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "Режим записи камеры"
+    BEGIN
+        MENUITEM ">Режим",                      IDOSD_ALARM_MODE
+    END
+    POPUP "Детектор движения "
+    BEGIN
+        MENUITEM ">Чувствительность",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">Чувствительность  маски",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">Постоянная маска",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "Настройки тревоги"
+    BEGIN
+        MENUITEM ">Тревожный вызов",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">Т. дозвона 1",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">Т. дозвона 2",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">Т. дозвона 3",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">Тревожный выход ",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "Изображен."
+    BEGIN
+        MENUITEM ">Экспорт изображений",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">Отменить экспорт",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">Продолжить экспорт",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">Экспорт тревожных изображ-й",      IDOSD_ALARM_BACKUP
+        MENUITEM ">Удалить тревожные изображ-я",        IDOSD_ALARM_DELETE
+        MENUITEM ">Показать подозр. изображения",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">Удалить подозр. изображения",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "Видео выходы"
+    BEGIN
+        MENUITEM ">Выход 1 ",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">Выход 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">Выход 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">Выход 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">Время переключения",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "Звуковые Настройки"
+    BEGIN
+        MENUITEM ">слушать",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM ">Привязка",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">Режим записи",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">Чувствительность",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">Порог",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">Громкость",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "Сеть "
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">Подсеть : ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">Шлюз :___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">%s имя:_______________",    IDOSD_NET_NAME
+        MENUITEM ">DHCP",                       IDOSD_DNS
+    END
+    POPUP "Дата / Время"
+    BEGIN
+        MENUITEM ">Дата: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">Время: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM "> Зона:",                      IDOSD_TIME_ZONE
+    END
+    POPUP " Выбор принтера"
+    BEGIN
+        MENUITEM "Нет принтера",                IDOSD_NO_PRINTER
+        MENUITEM ">Принтер",                    IDOSD_PRINTER1
+        MENUITEM ">Принтер",                    IDOSD_PRINTER2
+        MENUITEM ">Принтер",                    IDOSD_PRINTER3
+        MENUITEM ">Принтер",                    IDOSD_PRINTER4
+        MENUITEM ">Принтер",                    IDOSD_PRINTER5
+        MENUITEM ">Принтер",                    IDOSD_PRINTER6
+        MENUITEM ">Принтер",                    IDOSD_PRINTER7
+        MENUITEM ">Принтер",                    IDOSD_PRINTER8
+        MENUITEM ">Принтер",                    IDOSD_PRINTER9
+        MENUITEM ">Принтер",                    IDOSD_PRINTER10
+        MENUITEM ">Принтер",                    IDOSD_PRINTER11
+        MENUITEM ">Принтер",                    IDOSD_PRINTER12
+        MENUITEM ">Принтер",                    IDOSD_PRINTER13
+        MENUITEM ">Принтер",                    IDOSD_PRINTER14
+        MENUITEM ">Принтер",                    IDOSD_PRINTER15
+        MENUITEM ">Принтер",                    IDOSD_PRINTER16
+    END
+    POPUP "Выбор языка"
+    BEGIN
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE1
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE2
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE3
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE4
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE5
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE6
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE7
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE8
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE9
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE10
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE11
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE12
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE13
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE14
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE15
+        MENUITEM ">Язык",                    IDOSD_LANGUAGE16
+    END
+    POPUP "Изменить PIN код"
+    BEGIN
+        MENUITEM ">Оператор",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">Администратор",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP " Прочие Настройки"
+    BEGIN
+        MENUITEM ">Показать журнал событий",   IDOSD_OPTION_RTE
+        MENUITEM ">Завершение работы",          IDOSD_OPTION_EXIT
+        MENUITEM ">Обновление программы",             IDOSD_OPTION_UPDATE
+        MENUITEM ">Код расширения:____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "Выход из меню Установки",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_MAINTENANCE_DLG DLGINIT
+BEGIN
+    IDC_MAINT_COMBO_INTERVALL, 0x403, 2, 0
+0x0033, 
+    IDC_MAINT_COMBO_INTERVALL, 0x403, 2, 0
+0x0036, 
+    IDC_MAINT_COMBO_INTERVALL, 0x403, 2, 0
+0x0039, 
+    IDC_MAINT_COMBO_INTERVALL, 0x403, 3, 0
+0x3231, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAINTENANCE_DLG DIALOGEX 0, 0, 490, 382
+STYLE DS_SETFONT | DS_MODALFRAME | DS_NOFAILCREATE | WS_POPUP | WS_VISIBLE
+FONT 8, "MS Sans Serif", 400, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_MAINT_USERNAME,31,46,103,14,ES_AUTOHSCROLL,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_MAINT_PASS,32,83,103,15,ES_PASSWORD | ES_AUTOHSCROLL,
+                    WS_EX_TRANSPARENT
+    PUSHBUTTON      "Логин",IDC_MAINT_LOGIN,149,83,46,15
+    PUSHBUTTON      "",IDC_MAINT_BUTTON_OK,436,355,43,18
+    CONTROL         "",IDC_MAINT_CHECK_NAG,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,143,29,13,10,WS_EX_TRANSPARENT
+    COMBOBOX        IDC_MAINT_COMBO_INTERVALL,143,50,47,58,CBS_DROPDOWNLIST | 
+                    NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_MAINT_COMPANY,311,24,146,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_MAINT_STR,311,39,146,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_MAINT_CODE,311,54,35,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_MAINT_CITY,347,54,110,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_MAINT_TELEFON,311,69,146,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_MAINT_EMAIL,311,83,146,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_MAINT_COUNTRY,311,99,146,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "Написать отчет системы",IDC_MAINT_BUTTON_REPORT,265,
+                    141,94,14,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_MAINT_BUTTON_SAVE,381,355,43,18,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    CONTROL         "",IDC_MAINT_START_INTERVALL,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,143,73,101,15,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Установите дату начала",IDC_MAINT_BUTTON_STARTDATE,143,
+                    98,94,14,NOT WS_VISIBLE
+    RTEXT           "Показать подсказку обслуживания",IDC_MAINT_TXT_SHOW_MAINT,27,
+                    29,110,10,NOT WS_VISIBLE,WS_EX_TRANSPARENT
+    LTEXT           "Имя пользователя:",IDC_MAINT_TXT_USER,32,34,110,12,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Пароль:",IDC_MAINT_TXT_PASS,32,71,103,12,0,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Логин",IDC_MAINT_GRP_LOGIN,14,17,233,106,0,
+                    WS_EX_TRANSPARENT
+    RTEXT           "Интервал обслуживания (месяцев):",IDC_MAINT_TXT_INTERVALL,27,
+                    51,110,12,NOT WS_VISIBLE
+    RTEXT           "Текущая дата начала:",
+                    IDC_MAINT_TXT_START_INTERVALL,18,73,119,11,NOT 
+                    WS_VISIBLE
+    RTEXT           "Компания:",IDC_MAINT_TXT_INST_COMP,266,28,35,8,NOT 
+                    WS_VISIBLE,WS_EX_TRANSPARENT
+    RTEXT           "Улица:",IDC_MAINT_TXT_INST_STR,266,41,35,8,NOT 
+                    WS_VISIBLE,WS_EX_TRANSPARENT
+    RTEXT           "ZIP/Город:",IDC_MAINT_TXT_TOWN,266,56,35,8,NOT WS_VISIBLE,
+                    WS_EX_TRANSPARENT
+    RTEXT           "Страна:",IDC_MAINT_TXT_COUNTRY,267,101,35,8,NOT 
+                    WS_VISIBLE,WS_EX_TRANSPARENT
+    RTEXT           "Тел.:",IDC_MAINT_TXT_TELEFON,266,71,35,8,NOT 
+                    WS_VISIBLE,WS_EX_TRANSPARENT
+    RTEXT           "Email:",IDC_MAINT_TXT_EMAIL,266,86,35,8,NOT WS_VISIBLE,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Базовые установки",IDC_MAINT_GRP_SETTINGS,14,10,233,
+                    113,NOT WS_VISIBLE
+    GROUPBOX        "Данные установщика",IDC_MAINT_GRP_INSTALLER,255,10,
+                    224,113,NOT WS_VISIBLE,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_MAINT_REPORT,264,158,206,180,ES_MULTILINE | 
+                    ES_READONLY | NOT WS_VISIBLE | WS_VSCROLL,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Обслуживание",IDC_MAINT_GRP_SYSCHECK,14,130,233,218,NOT 
+                    WS_VISIBLE
+    LTEXT           "Задачи обслуживания",
+                    IDC_MAINT_TXT_MANUAL_MAINT,22,145,187,8,NOT WS_VISIBLE,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Отчет системы",IDC_MAINT_GRP_SYSREPORT,255,130,224,218,
+                    NOT WS_VISIBLE,WS_EX_TRANSPARENT
+    LTEXT           "Пользователь и пароль не имеют действующих прав входа",
+                    IDC_MAINT_TXT_LOGIN_ERROR,26,107,232,8,NOT WS_VISIBLE,
+                    WS_EX_TRANSPARENT
+    CONTROL         "",IDC_MAINT_RICHEDIT_MANUAL_MAINT_RTF,"RichEdit20A",
+                    ES_MULTILINE | ES_READONLY | NOT WS_VISIBLE | WS_BORDER | 
+                    WS_VSCROLL | WS_TABSTOP,24,158,213,182
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MAINTENANCE_DLG, DIALOG
+    BEGIN
+        VERTGUIDE, 247
+        VERTGUIDE, 257
+        VERTGUIDE, 265
+        VERTGUIDE, 489
+        BOTTOMMARGIN, 374
+        HORZGUIDE, 157
+        HORZGUIDE, 337
+        HORZGUIDE, 345
+        HORZGUIDE, 373
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           " DV Клиент"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "PIN код принят"
+    IDS_ON                  "Вкл"
+    IDS_PIN_FAILED          "Неправильный PIN код"
+    IDS_PIN                 "PIN: ____"
+    IDS_SEARCH_DATE         "Поиск по дате: __.__.__"
+    IDS_SEARCH_TIME         "Поиск по времени: __:__"
+    IDS_SEARCH_ERROR        "Ошибка поиска"
+    IDS_OFF                 "Выкл"
+    IDS_CAMERA              ">Камера:"
+    IDS_OLD_PIN             "Текущий PIN: ____"
+    IDS_NEW_PIN             "Новый PIN: ____"
+    IDS_CONFIRM_PIN         "Подтвердить PIN: ____"
+    IDS_PIN_CHANGED         "PIN изменен"
+    IDS_SET_CLOCK_DATE_FAILED "Дата не изменена"
+    IDS_SET_CLOCK_TIME_FAILED "Время не изменено"
+    IDS_SEARCH_START        "Поиск..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "Дата изменена"
+    IDS_SET_CLOCK_TIME_SUCCESS "Время изменено"
+    IDS_SET_TIMER_SUCCESS   "Расписание изменено"
+    IDS_SET_IP_SUCCESS      "IP- адрес изменен"
+    IDS_SET_IP_FAILED       "IP- адрес не изменен"
+    IDS_SET_MSN_SUCCESS     "MSN изменен"
+    IDS_SET_MSN_FAILED      "MSN не изменен"
+    IDS_SET_TIMER_FAILED    "Расписание не изменено"
+    IDS_MD                  "Детектор активности"
+    IDS_UVV                 "Тревога / C опережением"
+    IDS_LOW                 "Низкое"
+    IDS_NORMAL              "Норма."
+    IDS_HIGH                "Высок."
+    IDS_WAIT                "Пожалуйста ждите..."
+    IDS_NO_PICTURES         "Нет изображений для этой камеры"
+    IDS_QUERY               "Поиск на :\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       " DV Клиент"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "Дата и Время"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "Текущая камера.....Все настройки будут применены к текущей камере"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "Быстрое воспроизведение назад"
+    IDC_BUTTON_PLAY         "Воспроизведение вперед "
+    IDC_BUTTON_PLAY_BACK    "Воспроизведение назад"
+    IDC_BUTTON_STOP         "Остановка воспроизведения"
+    IDC_BUTTON_FF           "Быстрое воспроизведение вперед"
+    IDC_BUTTON_EJECT        "Закрыть окно воспроизведения выбранной камеры"
+    IDC_BUTTON_SKIP_BACK    "Перейти на предыдущее событие"
+    IDC_BUTTON_SINGLE_BACK  "Один кадр назад"
+    IDC_BUTTON_SINGLE_FORWARD "Один кадр вперед"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "Поиск"
+    IDC_BUTTON_SKIP_FORWARD "Перейти на следующее событие"
+    IDC_BUTTON_EXPORT       "Экспортировать изображения текущей камеры :"
+    IDC_BUTTON_PRINT        "Печать изображения с текущей камеры на  %s"
+    IDC_BUTTON_MINIMIZE     "Свернуть панель в правый нижний угол"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_OK           "Выйти из программы"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_QUERY_FAILED        "Не обнаружено изображений:\n"
+    IDS_SHUTDOWN            "Выключение модуля..."
+    IDS_END_OPTION          "Выход из меню Установки"
+    IDS_DATE                "Дата:"
+    IDS_TIME                "Время:"
+    IDS_EXPORT_RUNNING      "Идет экспорт..."
+    IDS_EXPORT_SUCCESS      "Экспорт завершен"
+    IDS_EXPORT_FAILED       "Экспорт не удался"
+    IDS_PRINTJOB_RUNNING    "Идет печать..."
+    IDS_PRINTJOB_SUCCESS    "Печать завершена"
+    IDS_PRINTJOB_FAILED     "Печать не удалась"
+    IDS_CAMNAME             "Имя камеры:"
+    IDS_CONNECT_ERROR       "Нет соединения"
+    IDS_LOCKED              "Модуль блокирован"
+    IDS_RTE                 "Ошибка программы %u "
+    IDS_DELETE_ALARM        "Удалить текущую тревогу..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETED_ALARM       "Изображения удачно удалены"
+    IDS_DELETED_ALARM2      "Изображения не смогли быть удалены"
+    IDS_CONFIRM_RTE         "Сообщение о событии подтверждено"
+    IDS_DEFAULTPRINTER_SET  "Принтер выбран успешно"
+    IDS_NO_CAMERA           "Нет подключенных камер"
+    IDS_BACKUP_RUNNING      "Процесс экспорта: %d %%\n\nПриблизительно осталось : %s"
+    IDS_BACKUP_COMPLETE     "Экспорт изображений записанных по тревоге завершен."
+    IDS_DATE_FORMAT         "ддммгг"
+    IDS_TIME_FORMAT_HHMMSS  "ччммсс"
+    IDS_TIMER_FORMAT        "ччммччмм"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "Введите дату поиска и подтвердите клавишей Ввод"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "Введите время поиска и подтвердите клавишей Ввод"
+    IDS_HELP_INPUT_PIN      "Введите ваш PIN код "
+    IDS_HELP_INPUT_NEW_PIN  "Введите ваш новый PIN код"
+    IDS_HELP_INPUT_CONFIRM_PIN "Подтвердите ваш новый PIN код  "
+    IDS_HELP_INPUT_TCPIP    "Введите TCP/IP адрес и подтвердите клавишей Ввод.....ВНИМАНИЕ! Устройство будет автоматически перезагружено после подтверждения нового IP адреса! Для отмены функции используйте кнопки-стрелки."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_DEL             "Удалить сообщение о текущем событии"
+    IDC_RTE_UP              "Перейти на следующее собобщение о событии"
+    IDC_RTE_DOWN            "Перейти на предыдущее сообщение о событии"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "Подтвердить текущее сообщение о событии"
+    IDC_RTE_OK              "Закрыть окно сообщений"
+    IDC_RTE_DEL_ALL         "Удалить все сообщения"
+    IDC_RTE_PRINT           "Печатать все сообщения"
+    IDC_CLOCK               "Введите период времени для экспорта "
+    IDC_STATIC_EXPORT       ">Камера:"
+    IDC_EXPORT_CAM1         "Выберите камеры для экспорта изображений"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "Введите MSN и подтвердите клавишей Ввод"
+    IDS_HELP_INPUT_TIMER    "Введите период времени и подтвердите клавишей Ввод"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "Введите текущее время и подтвердите клавишей Ввод"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "Введите дату и подтвердите ввод нажатием клавиши Ввод"
+    IDS_HELP_INPUT_CAMERANAME "Введите новое название камеры"
+    IDS_HELP_INPUT_OLD_PIN  "Введите ваш PIN код "
+    IDS_SET_SUBNETMASK_SUCCESS "Маска подсети выбрана"
+    IDS_SET_SUBNETMASK_FAILED "Маска подсети ошибочна"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "Введите маску подсети и подтвердите клавишей Ввод....ВНИМАНИЕ! Устройство будет автоматически перезагружено после подтверждения новой маски подсети! Для отмены функции используйте кнопки-стрелки."
+    IDS_NO_PRINTER          "Нет принтера"
+    IDS_DEFAULT_LANGUAGE_SET "Язык выбран"
+    IDS_BACKUP_FORMAT       "Пожалуйста ждите, подготовка носителя к экспорту изображений %s.\nЭто может занять несколько минут.\n\nПрошло времени: %s"
+    IDS_BACKUP_FINALIZE     "Сообщения по тревоге записаны удачно.\nЗавершение экспорта.\nЭто может занять несколько монут.\n\nОсталось времени: %s"
+    IDS_HELP_UPDATE_SYSTEM  "Вставьте диск с обновлением в FDD дисковод. После завершения обновления система будет автоматически перезагружена."
+    IDS_BACKUP_FORMAT_NOCDR "Носитель не пустой.\nИзображения немогут быть экспортированны."
+    IDS_BACKUP_FORMAT_ERROR "При подготовке экспорта произошла ошибка.\nЭкспорт остановлен.\nПожалуйста замените диск и попробуйте снова."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CAM11             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM12             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM13             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM14             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM15             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM16             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_VIEW_FULL         "Полноэкранный режим просмотра ….Для изменения режима просмотра воспользуйтесь  клавишами позиционирования и нажмите Ввод."
+    IDOSD_VIEW_XXX          "Режим квадратора.....Для изменения выберете режим клавишами и нажмите Ввод"
+    IDOSD_VIEW_1PX          "Режим 1плюс....выберете режим клавишами и нажмите Ввод"
+    IDOSD_TIMER_MO          "Расписание на понедельник….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_TU          "Расписание на вторник….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_WE          "Расписание на среду….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_TH          "Расписание на четверг….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_FR          "Расписание на пятницу….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_SA          "Расписание на субботу….Для изменения расписания нажмите Ввод"
+    IDOSD_TIMER_SU          "Расписание на воскресенье….Для изменения расписания нажмите Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "Текущая дата …..Для изменения даты нажмите Ввод."
+    IDOSD_CLOCK_TIME        "Текущее время.....Для изменения, введите время и нажмите Ввод"
+    IDOSD_ALARM_MODE        "Текущий режим записи.....Для изменения режима записи надмите Ввод.|Для переключения между режимами 'Тревога/Предтревога' или 'Детектор движения' нажмимте  клавиши управления и подтвердите клавишей Ввод. ВНИМАНИЕ! Все предыдущие сообщения будут постоянно стираться пока вы выбираете."
+    IDOSD_TCPIP             "Выбранный IP адрес…..Для изменения выбранного IP адреса нажмите Ввод."
+    IDOSD_ISDN_MSN          "Текуший MSN.....Для изменения MSN нажмите Ввод"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "Изменить PIN код"
+    IDOSD_CONFIG_PIN        "Для входа в меню установки нажмите Ввод и введите ваш PIN код "
+    IDOSD_OPTION_END        "Для выхода из меню установок нажмите Ввод"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "Текущая чувсвительность маски.....Для изменения текущей маски нажмите Ввод|Переключите клавишами уровни чувствительности маски и нажмите Ввод"
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "Текущая чувствительность….Для изменения чувствительности нажмите Ввод.|To switch between detection sensitivity levels press arrow keys and confirm with Enter key"
+    IDOSD_OPTION_EXIT       "Для завершения работы нажмите Ввод"
+    IDOSD_CHANGE_CAMNAME    "Текущее имя камеры …Для изменения имени камеры нажмите Ввод"
+    IDOSD_OPTION_LOCK       "Для блокировки монитора нажмите Ввод"
+    IDOSD_OPTION_RTE        "Для просмотра лога нажмите Ввод"
+    IDOSD_ALARM_DELETE      "Для удаления текущих изображений по тревоге нажмите Ввод"
+    IDOSD_NO_PRINTER        "Не выбран принтер.....Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "Текущая яркость…..Для изменения уровня яркости нажмите Ввод"
+    IDOSD_COLOR_CONTRAST    "Текущая контрастность….Для изменения контрастности нажмите Ввод"
+    IDOSD_COLOR_SATURATION  "Текущее насыщение …..Для изменения насыщения нажмите Ввод"
+    IDOSD_CAM1              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM2              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM3              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM4              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM5              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM6              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM7              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM8              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM9              "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+    IDOSD_CAM10             "Текущая камера ….выберете камеру клавишами позиционирования и подтвердите клавишей Ввод. Все настройки камеры будут применены к текущей камере"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_PRINTER1          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER2          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER3          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER4          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER5          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER6          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER7          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER8          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER9          "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER10         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER11         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER12         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER13         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER14         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER15         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+    IDOSD_PRINTER16         "Для выбора принтера по умолчанию нажмите Ввод|Выберете клавишами принтер по умолчанию  и подтвердите клавишей Ввод "
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE2         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE3         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE4         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE6         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE7         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE8         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE9         "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE10        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE11        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE12        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE13        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE14        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE15        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+    IDOSD_LANGUAGE16        "Для выбора другого языка нажмите Ввод|выберете клавишами язык по умолчанию и подтвердите клавишей Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "Для экспорта текущих изображений по тревоге нажмите клавишу Ввод"
+    IDOSD_SUSPECT_SEARCH    "Для показа первого подозрительног изображения нажмите Ввод"
+    IDOSD_SUSPECT_DELETE    "Для удаления всех подозрительных изображений нажмите Ввод"
+    IDOSD_SUBNETMASK        "Текущая маска подсети …..Для выбора маски подсети нажмите Ввод"
+    IDOSD_ACTIVITY_BACKUP   "Для начала экспорта изображений нажмите Ввод"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "Отображение курсора движущегося объекта вкл./выкл."
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "Изменить PIN код"
+    IDOSD_TIMER_ONOFF       "Действует постоянно или только по расписанию "
+    IDOSD_OPTION_UPDATE     "Пожалуйста, нажмите Ввод для начала процесса обновления Программного Обеспеченя. ВНИМАНИЕ! Устройство будет автоматически перезагружено после окончания процесса обновления!!!"
+    IDOSD_TIME_ZONE         "Для изменения временной зоны нажмите Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "Показ статистики"
+    IDOSD_NET_NAME          "Текущее %s имя …..Для изменения %s нажмите Ввод"
+    IDOSD_GATEWAY           "Текущий адрес шлюза….Для изменения адреса шлюза нажмите Ввод"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "Режим просмотра видео выходов….Для изменения режима просмотра нажмите Ввод"
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "Режим просмотра видео выходов….Для изменения режима просмотра нажмите Ввод"
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "Режим просмотра видео выходов….Для изменения режима просмотра нажмите Ввод"
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "Режим просмотра видео выходов….Для изменения режима просмотра нажмите Ввод"
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "Время задержки  вывода на монитор в режиме секвенсора….для выбора времени задержки нажмите Ввод"
+    IDOSD_ACOUSTIC_ALARM    "Аварийный сигнал вкл./выкл."
+    IDOSD_SHOW_ALARMLIST    "Показать тревожный список по выбранной дате"
+    IDOSD_MD_DRAW_MASK      "Нажмите Ввод для выбора маски во весь экран"
+    IDOSD_ALARM_OUTPUT_ON_OFF "Включить или выключить выход тревоги"
+    IDOSD_ALARM_CALLNUMBER1 "Текщий номер дозвона….Для изменения  номера  1 нажмите Ввод"
+    IDOSD_ALARM_CALLNUMBER2 "Текщий номер дозвона….Для изменения  номера  2 нажмите Ввод"
+    IDOSD_ALARM_CALLNUMBER3 "Текщий номер дозвона….Для изменения  номера  3 нажмите Ввод"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "Для продолжения экспорта изображения нажмите Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "При завершении экспорта произошла ошибка.\nПожалуйста замените носитель и повторите процесс снова"
+
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "Экспорт изображений успешно завершен.\nПожалуйста выньте носитель.\n"
+    IDS_NO_RECORD_FOUND     "Нет изображений для этой функции.\n"
+    IDS_BACKUP_CHECK_CD     "Пожалуйста вставьте пустой носитель в рекордер.\nДля идентификации носителя может потребоваться несколько секунд.\nНоситель будет извлечен после окончания экспорта.\n\nЭкспорт:\nот %s\nдо   %s\n\nКамера:\n%s"
+    IDS_BACKUP_FORMATTED    "Носитель подготовлен для экспорта.\nПожалуйста подождите..."
+    IDS_BACKUP_FAILED       "Во время экспорта произошла ошибка.\nПожалуйста замените носитель и повторите процесс снова."
+    IDS_BACKUP_COPYING      "Копирование программного обеспечения.\nПожалуйста ждите..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "Носитель не читаемый.\nПожалуйста замените носитель другим и повторите попытку"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "Пожалуйста введите дату и время начала экспорта изображений "
+    IDS_EXPORT_TIME_OK      "Дата и время верны"
+    IDS_EXPORT_TIME_BAD     "Ошибка в дате и времени"
+    IDS_EXPORT_INPUT_STARTTIME "Ввод нач. дату и время"
+    IDS_EXPORT_INPUT_ENDTIME "Ввод кон. дату и время"
+    IDS_EXPORT_STARTTIME_FORMAT "от: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "до:   __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "Введите камеры"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "No.:__"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "Введите конечные даты и время для экспорта изображений от"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "Выберите камеры для экспорта изображений"
+    IDS_BACKUP_COMPLETE2    "Экспорт изображений завершен"
+    IDS_IMAGE_MANIPULATED   "Возможно это изображение повреждено!"
+    IDS_BACKUP_DISC_FULL    "На имеющемся носителе нет места.\nПожалуйста замените носитель и повторите экспорт снова."
+    IDS_BACKUP_NO_EMPTY_CD  "Носитель не пуст.\nПожалуйста замените носитель на пустой и повторите экспорт снова."
+    IDS_VERSION             "Версия"
+    IDS_HELP_SELECT_HOST    "Выберете %s от %s списка и подтвердите клавишей Ввод"
+    IDS_SET_DHCP_FAILED     "Статус DHCP не изменен."
+    IDS_BACKUP_NODATA       "Нет доступных изображений"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "Слишком много изображений для экспорта.\nПожалуйста уменьшите период времени или количество камер."
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "В указанном периоде времени нет изображений.\n"
+    IDS_BACKUP_FORMAT2      "Пожалуйста подождите пока идет подготовка носителя.\nЭто может занять несколько минут.\n\nПрошло времени: %s"
+    IDS_BACKUP_FINALIZE2    "Изображения удачно скопированны.\nЗавершение экспорта изображений.\nЭто может занять несколько минут.\n\nПрошло времени: %s"
+    IDS_READ_FAILED         "Изображение не может быть отображено."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "Пожалуйста вставьте в рекордер пустой носитель.\nДля идентификации носителя может потребоваться несколько минут.\nпосле завершения процесса экспорта носитель будет извлечен.\n\nЭкспорт изображений по тревоге:\nот %s\nдо   %s\n"
+    IDS_SEARCH_DATE_FAILED  "Дата неверна"
+    IDS_SEARCH_TIME_FAILED  "Время неверно"
+    IDS_TIME_FORMAT_HHMM    "ччмм"
+    IDS_TIMER_ON            "Всегда активно"
+    IDS_TIMER_OFF           "По расписанию"
+    IDS_INPUT_DISK          "Всавьте диск %d"
+    IDS_UPDATE_SUCCESS      "Обновление завершено"
+    IDS_UPDATE_RUNNING      "Обновление в процессе.."
+    IDS_UPDATE_FAILED       "Копирование неудалось"
+    IDS_UPDATE_WRONG_CRC    "Контр. сумма не верна"
+    IDS_UPDATE_WRONG_DISK   "Обновлений нет "
+    IDS_UPDATE_DISKFAILED   "Ошибка чтения диска"
+    IDS_UPDATE_NO_UPDATE_DISK "Нет диска или он поврежден"
+    IDS_UPDATE_WRONG_OEM    "Неверная OEM версия"
+    IDS_UPDATE_WRONG_BUILD  "Неверный номер версии"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "Часовой пояс изменен"
+    IDS_SET_TIME_ZONE_FAILED "Часовой пояс не изменен"
+    IDS_HELP_SET_TIME_ZONE  "Введите код вашего часового пояса. (Смотрите вашу документацию)"
+    IDS_STATISTIC_STARTTIME "Время начала:"
+    IDS_STATISTIC_DURATION  "Дни:"
+    IDS_STATISTIC_PICCOUNTER "Изображен.:"
+    IDS_EXPORT_NO_CAMERA    "Ошибка, нет камеры"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "Имя удачно изменено"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "Неудалось изменить имя"
+    IDS_SELECT_HOST         "%s список"
+    IDS_HOSTLIST_EMPTY      "%s список пуст"
+    IDS_INVALID_SERIAL      "Номер лицензии неверен"
+    IDS_DISCONNECT          "Отключение"
+    IDS_SET_GATEWAY_SUCCESS "Адрес шлюза изменен"
+    IDS_SET_GATEWAY_FAILED  "Адрес шлюза не изменен"
+    IDS_HELP_INPUT_GATEWAY  "Введите адрес шлюза и подтвердите клавишей Ввод....ВНИМАНИЕ! Устройство будет автоматически перезагружено после подтверждения нового адреса шлюза! Для отмены функции используйте кнопки-стрелки."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "Текущая камера"
+    IDS_VOUT_MODE_SEQUENCER "Последовательность"
+    IDS_VOUT_MODE_ACTIVITY  "Движение"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "Дата и время успешно подсчитаны.\nНажмите Ввод чтоб использовать рассчетные дату и время для оптимального использования носителя.\n\nЭкспорт:\nот %s\n\nКамера:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "Дата и время окончания подсчитаны успешно.\nВремя показывает конец новых изображения выделенных камер.Не достаточно изображений для оптимального использования носителя.\n\nПриблизительно использовано:  %s %%\n\nЭкспорт:\nот%s\n\nКамера:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "Пожалуйста ждите...\Идет подсчет времени/даты  оптимального окончания экспорта изображений."
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "До выбранной даты/времени начала изображения не обнаружены. Пожалуйста введите более поздние время и дату начала."
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "Подсчет даты и времени неудался.\Пожалуйста введите дату и время окончания экспорта изображений от.\n\nЭкспорт:\nот %s\n\nКамера:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "Подсчет неудался"
+    IDS_EXTEND              "Расширенный..."
+    IDS_HELP_EXTEND         "Нажмите Ввод чтоб редактировать %s список, или ввести новый."
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "Набор номеров дозвона"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "Вызываемый номер не набран"
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "Выберите камеры для экспорта изображений"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_ACTIVITY  "Показает события детектора движения (А) в тревожном списке. Выберете также один или более фильтров камеры, чтобы видеть тревоги от  "
+    IDC_ALARMLIST_EXTERN1   "Показает события от первого внешнего датчика (Ext1) в тревожном списке. Выберете также один или более фильтров камеры, чтобы видеть тревоги от  "
+    IDC_ALARMLIST_EXTERN2   "Показает события от второго внешнего датчика (Ext2) в тревожном списке. Выберете также один или более фильтров камеры, чтобы видеть тревоги от  "
+    IDC_ALARMLIST_IMAGE     "Открывает для каждой камеры только одно новое окно для просмотра выбранных изображений. В этом новом окне вы можете использовать все функции просмотра."
+    IDC_ALARMLIST_UP2       "Показать тревожный список следующего дня"
+    IDC_ALARMLIST_DOWN2     "Показать тревожный список предыдущего дня"
+    IDC_ALARMLIST_AUDIO     "Показывает аудио тревоги в списке тревог. Выберете одну или несколько камер для просмортра в списке тревог с ... "
+    IDC_STATISTIC_OK        "Закрыть статистику"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Удалить постоянную маску"
+    IDC_MD_INVERT           "Инвертировать постоянную маску"
+    IDC_MD_SHOW_ADAPTIVE    "Показывает адаптивную маску в изображении... Она не может быть изменена, при необходимости измените 'Чувствительность Маски' "
+    IDC_ALARMLIST_OK        "Закрыть список тревог"
+    ID_MD_OK                "Закрыть редактор маски"
+    IDC_HOSTS_OK            "Закрыть окно списка %s"
+    IDC_HOSTS_NEW           "Вставить  в выбранном %s списке"
+    IDC_HOSTS_DELETE        "Удалить в выбранном  %s списке"
+    IDC_HOSTS_DISPLAY_NAME  "Имя удаленного %s выбранного в %s списка...Нажмите здесь для редактирования."
+    IDC_HOSTS_DISPLAY_IP    "IP адрес удаленного %s выбранного в  %s списке...Нажмите вздесь для редактирования."
+    IDC_HOSTS_UP_START      "Перейти к началу %s списка."
+    IDC_HOSTS_UP            "Перейти к следующей странице  %s списка."
+    IDC_HOSTS_DOWN          "Перейти к предыдущей странице  %s списка."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "Перейти к концу %s списка"
+    IDC_ALARMLIST_UP        "Показать предыдущую страницу в тревожном списке"
+    IDC_ALARMLIST_DOWN      "Показать следующую страницу в тревожном списке"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "Печатать список тревог выбранного дня"
+    IDC_ALARMLIST_CAM0      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM1      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM2      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM3      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM4      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM5      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM6      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM7      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM8      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM9      "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM10     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM11     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM12     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM13     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+    IDC_ALARMLIST_CAM14     "Фильтр камеры ….Если фильтр активирован, события (A, Ext1, Ext2, L если активны) выбранной камеры будут видны в тревожном списке. Вы можете активировать больше камер одновременно"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "Введите дату и время начала экспорта изображений. По умолчанию запись начнется с наиболее старых изображений выделенной камеры. "
+    IDS_BACKUP_MULTI        "Необходим более чем один носитель, потому что расчетный объем изображений превышает объем носителя. Пожалуйста начните резервирование с рассчетным временем начала и конца и далее выберете в меню 'Продолжить резервирование'. Второй носитель будет записан после первого.\n\nЭкспорт: \nот %s\n\nКамера:\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "A,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "A,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "A,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "Выкл"
+    IDS_EXPANSION_CODE_SUCCESS "Extension код принят"
+    IDS_EXPANSION_CODE_FAILED "Extension код неверен"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "Продолжение экспорта после предыдущего экспорта.\n\nПредыдущий экспорт:\nот %s\nдо   %s\n\nПродолжение экспорта:\nот %s\n\nКамера:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "Продолжение экспорта после предыдущего экспорта.\n\nпредыдущий экспорт:\nот %s\nдо   %s\n\nпродолжение экспорта:\nот %s\n\nКамера:\n%s\n\nПожалуйста ждите...\nИдет подсчет оптимального времени завершения экспорта изображений..."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "Продолжение экспорта после предыдущего экспорта.\n\nПредыдущий экспорт:\nот %s\nдо   %s\n\nПродолжение экспорта:\nот %s\n\nКамера:\n%s\n\nПодсчет времени окончания завершен. Недостаточно изображений для оптимального использования носителя.\n\nПриблизительно использовано %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "Продолжение экспорта после предыдущего экспорта.\n\nПредыдущий экспорт:\nот %s\nдо   %s\n\nПродолжение экспорта:\nот %s\n\nКамера:\n%s\n\nПодсчет времени окончания завершен. Нажмите Ввод чтоб использовать оптимальное время завершения."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "Определяет по каким причинам произошел вызов для текущей камеры. A = детектор движения, Ext1=Первый внешний датчик, Ext2=второй внешний датчик…. или их комбинация. Установки сохраняются для каждой камеры. Нажмите Ввод для редактирования и используйте стрелки для выбора, подтвердите нажатием Ввод."
+    IDOSD_EXPANSION_CODE    "Для  ввода расширенного кода нажмите клавишу Ввод"
+    IDOSD_EXPORT_SETTINGS   "Для экспорта системных настроек нажмите клавишу Ввод (в инструкции пользователя Вы можете посмотреть какие именно настройки будут экспортироваться) "
+    IDOSD_IMPORT_SETTINGS   "Для импорта предыдущих экспортированных настроек, нажмите клавишу Ввод (в инструкции пользователя Вы можете посмотреть какие именно настройки будут импортироваться). ВНИМАНИЕ! Устройство будет автоматически перезагружено после завершения процесса импорта! "
+    IDOSD_OPTION_INFO       "Для просмотра информации о системе нажмите Ввод"
+    IDOSD_CAMERA_RESOLUTION "Для выбора разрешения нажмите Ввод. Выберете разрешение стрелками и нажмите Ввод"
+    IDOSD_CAMERA_COMPRESSION 
+                            "Для изменения степени компрессии нажмите клавишу Ввод, выберете степень компрессии стрелками и нажмите Ввод"
+    IDOSD_CAMERA_FPS        "Для изменения частоты кадров ТЕКУЩЕЙ камеры, пожалуйста нажмите Ввод.|Выберете частоту кадров стрелками и нажмите Ввод для выбора. "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "Продолжение экспорта после предыдущего экспорта.\n\nПредыдущий экспорт:\nот %s\nдо   %s\n\nпродолжение экспорта:\nот %s\n\nКамера:\n%s.\n\nПодсчет времени окончания неудался.\nПожалуйста введите дату и время окончания для изображений которые вы хотите экспортировать."
+    IDS_POWEROFF_PRESSED    "Завершение работы"
+    IDS_RESET_PRESSED       "Перезагрузка "
+    IDS_EXPORT_NO_IMAGES    "Нет изображений"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "В этом промежутке не найдено изображений. Пожалуйста введите новые дату и время.\nНажмите Ввод для использования оптимального расчетного времени окончания.\n\nЭкспорт:\nот %s\n\nКамера:\n%s"
+    IDS_BACKUP_REQUEST_MB   "Изображения необнаружены.введите новое время окончания.\nрасчетное время показывает самые новые изображения выбранных камер. Недостаточно изображений для оптимального использования носителя.\n\nПриблизительно использовано%s %%\n\nЭкспорт:\nот %s\n\nКамера:\n%s"
+    IDS_EXIT_ENTRY          ">Выйти из программы"
+    IDS_YES                 "Да"
+    IDS_NO                  "Нет"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "Выберете режим записи клавишами со стрелками и подтвердите клавишей Ввод....ВНИМАНИЕ! Все предыдушие изображения этой камеры будут стерты, подтвердите клавишей 'Да'"
+    IDS_OK                  "OK"
+    IDS_CANCEL              "Отмена"
+    IDS_ERROR               "Ошибка"
+    IDS_FILE_SYSTEM_ACCESS  "Для получения доступа к системе требуются права администратора.\nПожалуйста введите ваш PIN код."
+    IDS_BACKUP_TITLE        "Экспорт изображений"
+    IDS_KEYBOARD_UPPER_KEYS "ЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ?ЖЭЮЪ?"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "йцукенгшщзфывапролдячсмитьх?эюъ."
+    IDS_SET_COMPUTERNAME_FAILED "Имя компьютера не изменено."
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "Обнаруженный носитель не пуст.\nЭкспорт изображений возможен только на пустой носитель. Сначала нужно очистить носитель.\nВыберете в пункте меню 'Очистка носителя: Да' и нажмите Ввод.\nНоситель будет автоматически стерт перед экспортом изображений."
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "Очистка носителя: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "Подготовка к экспорту изображений.\n\nПроцесс : %d %%\n\nПрошедшее время: %s"
+    IDS_BACKUP_ACDC_START   "Пожалуйста вставьте носитель в рекордер.\nМожет занять несколько секунд для определения носителя."
+
+    IDS_ERASE_MEDIUM        "Очистка носителя"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "Пожалуйста вставьте носитель в рекордер или нажмите клавиши со стрелками для прекращения процесса."
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "Обнаруженный носитель не пуст. Очистить носитель перед экспортом?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "Ожидание носителя"
+    IDS_EXPORT_INSERT_MEDIUM "Вставьте носитель"
+    IDS_EXPORT_ERASE_MEDIUM "Носитель найден"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "Для экспорта изображений требуется пустой носитель.\nПожалуйста очистите носитель или вставьте другой."
+    IDS_FOUND_NEW_DEVICE    "Обнаружено новое устройство: "
+    IDS_REMOVED_DEVICE      "Удаленное устройство: "
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "Обнаруженный носитель не пуст.\n Для использования полного объема носитель необходимо очистить. Иначе при экспорте будет использовано только свободное пространство.\nСделайте выбор, выберете пункт меню и нажмите Ввод."
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "На носителе недостаточно места для экспорта.\nПожалуйста очистите носитель или используйте другой."
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "Очистка внешнего носителя\n\nВремя: %s"
+    IDS_BACKUP_RUNNING_UP   "Прогресс экспорта: %d %%\n\nВремя: %s"
+    IDS_IMPORT_SUCCESS      "Импорт удался"
+    IDS_IMPORT_FAILED       "Импорт не удался"
+    IDS_IMPORT_RUNNING      "Идет импорт..."
+    IDS_CAMERA_FIX          "Фиксированная камера"
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "Подготовка к экспорту изображений отменена пользователем."
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "Экспорт изображений отменен пользователем"
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\nЭкспорт будет отменен.\nПожалуйста ждите...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_REALTIME          "Нажмите Ввод для выбора режима воспроизведения в реальном времени вкл./выкл. Нажмите клавиши со стрелками для выбора и подтвердите нажатием кливиши Ввод"
+    IDOSD_CAMERA_PTZ_TYPE   "Для выбора типа камеры нажмите Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод "
+    IDOSD_CAMERA_PTZ_ID     "Для выбора ID камеры нажмите Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод "
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "Для выбора com порта камеры нажмите Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод "
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "Текущая привязка аудио канала к камере. Аудио запись может быть привязана только к одной камере... Для изменения привязки Аудио, нажмите клавишу Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод"
+    IDOSD_AUDIO_THRESHOLD   "Текущий порог на аудио канал привязанной каеры. Определяет уровень звука, который активирует запись... Для установки порога пожалуйста нажмите клавишу Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод"
+    IDOSD_AUDIO_SENSITIVITY "Текущая чувствительность. Определяет уровень усиления аудио входа (микрофона)... Для выбора аудио чувствительности нажмите клавишу Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод"
+    IDOSD_AUDIO_VOLUME      "Текущая громкость. Определяет громкость аудио выхода (динамиков)... Для выбора уровня громкости нажмите влавишу Ввод "
+    IDOSD_AUDIO_RECORD_MODE "Текущий Режим Записи. Определяет тип активации записи L= Уровень (превышение порога), A= детектор движения (на привязанной камере), Ext=Внешний детектор"
+    IDOSD_AUDIO_LISTEN_IN   "Для осуществления (отключения) возможности прослушивания аудио привязанной камеры, нажмите Ввод, сделайте выбор клавишами со стрелками и подтвердите нажатием клавиши Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "L"
+    IDS_AUDIO_RECORDING_EXT "Внешн."
+    IDS_AUDIO_RECORDING_AL  "А,L"
+    IDS_AUDIO_RECORDING_AEXT "А,внешн."
+    IDS_AUDIO_RECORDING_LEXT "L, Ext"
+    IDS_AUDIO_RECORDING_ALEXT "А, L ,Ext"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_DNS               "Переключает DHCP Вкл. или Выкл."
+    IDOSD_SYSTEM_VIDEOFORMAT 
+                            "Наберите текущий видеоформат... Для изменения видеоформата, пожалуйста нажмите сейчас Ввод|Нажмите кнопки стрелки для выбора видеоформата и подтвердите нажатием кнопки Ввод"
+    IDOSD_SYSTEM_VIDEONORM  "Наберите текущий видеостандарт... Для изменения видеостандарта, пожалуйста нажмите сейчас Ввод|Нажмите кнопки стрелки для выбора видеостандарта и подтвердите нажатием кнопки Ввод"
+    IDOSD_SYSTEM_AGC        "Нажмите Ввод для переключения вкл/выкл AGC системы|Выберете кнопками стрелками и подтвердите кнопкой Ввод"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MAINT_TXT_SHOW_MAINT "Показать подсказку обслуживания"
+    IDC_MAINT_GRP_INSTALLER "Данные установщика:"
+    IDC_MAINT_TXT_INST_COMP "Компания:"
+    IDC_MAINT_TXT_INST_STR  "Улица:"
+    IDC_MAINT_TXT_TOWN      "ZIP/Город:"
+    IDC_MAINT_TXT_COUNTRY   "Страна:"
+    IDC_MAINT_TXT_TELEFON   "Тел.:"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MAINT_TXT_EMAIL     "Email:"
+    IDC_MAINT_GRP_SETTINGS  "Базовые установки"
+    IDC_MAINT_BUTTON_STARTDATE "Установите дату начала"
+    IDC_MAINT_BUTTON_REPORT "Написать отчет системы"
+    IDC_MAINT_GRP_SYSCHECK  "Обслуживание"
+    IDC_MAINT_TXT_MANUAL_MAINT "Задачи обслуживания"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MAINT_GRP_SYSREPORT "Отчет системы"
+    IDC_MAINT_LOGIN         "Логин"
+    IDC_MAINT_TXT_USER      "Имя пользователя:"
+    IDC_MAINT_TXT_PASS      "Пароль:"
+    IDC_MAINT_GRP_LOGIN     "Логин"
+    IDC_MAINT_TXT_INTERVALL "Интервал обслуживания (месяцев):"
+    IDC_MAINT_TXT_START_INTERVALL "Текущая дата начала:"
+    IDC_MAINT_TXT_LOGIN_ERROR 
+                            "Пользователь и пароль не имеют действующих прав входа"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MAINT_INFO_TXT_HEADER1 "Совет по обслуживанию!\r\n===================="
+    IDS_MAINT_INFO_TXT_HEADER2 
+                            "Это сообщение появляется с момента, когда система DTS должна быть проинспектирована. Последняя дата проверки или установки системы:"
+    IDS_MAINT_INFO_TXT_HEADER3 
+                            "Пожалуйста свяжитесь с Вашим установщиком."
+    IDS_MAINT_INFO_TXT_VERSION "Версия Программного Обеспечения:"
+    IDS_MAINT_INFO_TXT_SERIAL "Серийный номер:"
+    IDS_MAINT_INFO_TXT_INSTALLER "Установщик:"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MAINT_INFO_TXT_POSTCODE "Почтовый индекс:"
+    IDS_MAINT_INFO_TXT_CITY "Город:"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERROR_HARDWARE_HEADER 
+                            "Возникли следующие фатальные ошибки:\r\n===========================================\r\n\r\n"
+    IDS_SYSTEM_MPEG4        "MPEG-4"
+    IDS_SYSTEM_JPEG         "JPEG"
+    IDS_SYSTEM_PAL          "PAL"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SYSTEM_NTSC         "NTSC"
+END
+
+#endif    // Russian (Russian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

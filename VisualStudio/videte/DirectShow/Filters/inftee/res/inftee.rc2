@@ -1,0 +1,22 @@
+//
+// inftee.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+#include "WK_Version.h"
+
+WK_VERSION(30, 9, 16, 41, "30/09/99 , 16:41\0", // @AUTO_UPDATE
+"inftee.ax\0",	// dll name
+"inftee 4.0\0",	// product name
+"inftee filter\0",	// product description
+"4.0\0",		// general product version
+"4.000\0"	// real version
+)
+
+/////////////////////////////////////////////////////////////////////////////

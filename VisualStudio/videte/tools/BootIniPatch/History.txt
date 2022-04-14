@@ -1,0 +1,11 @@
+21.07.03 GF	- Version 1.0.0.4
+			- Bugfix: Kopiert Datei "system" von "x:\image" nach "x:\windows\system32\config\"
+			- Release wird nach P.\Programme\NewStuff\Intern\ kopiert
+21.07.03 GF	- Version 1.0.0.3
+			- Kopiert Datei "system" von "x:\image" nach "x:\windows\system32\"
+18.07.03 GF	- Version 1.0.0.2
+			- Patch-Vorgang wird sofort bei Programmstart gestartet
+			- Alle gefundenen rdisk( werden angezeigt
+			- Bei rdisk > (1) wird gewarnt
+			- Ausgaben einheitlich in Deutsch
+17.07.03 GF	- Projekt gestartet

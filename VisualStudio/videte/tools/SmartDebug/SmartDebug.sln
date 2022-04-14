@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmartDebug", "SmartDebug.vcproj", "{C53B7404-588C-450B-8C57-386B02C744C9}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SmartDebugSetup", "SmartDebugSetup\SmartDebugSetup.vdproj", "{56498F5F-6F56-4685-9A0A-07B2AB9605DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugModal|Win32 = DebugModal|Win32
+		Release|Win32 = Release|Win32
+		ReleaseModal|Win32 = ReleaseModal|Win32
+		TestDebug|Win32 = TestDebug|Win32
+		TestRelease|Win32 = TestRelease|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C53B7404-588C-450B-8C57-386B02C744C9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.Debug|Win32.Build.0 = Debug|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.DebugModal|Win32.ActiveCfg = DebugModal|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.DebugModal|Win32.Build.0 = DebugModal|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.Release|Win32.ActiveCfg = Release|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.Release|Win32.Build.0 = Release|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.ReleaseModal|Win32.ActiveCfg = ReleaseModal|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.ReleaseModal|Win32.Build.0 = ReleaseModal|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.TestDebug|Win32.ActiveCfg = TestDebug|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.TestDebug|Win32.Build.0 = TestDebug|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.TestRelease|Win32.ActiveCfg = TestRelease|Win32
+		{C53B7404-588C-450B-8C57-386B02C744C9}.TestRelease|Win32.Build.0 = TestRelease|Win32
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.Debug|Win32.ActiveCfg = DebugModal
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.DebugModal|Win32.ActiveCfg = DebugModal
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.Release|Win32.ActiveCfg = ReleaseModal
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.ReleaseModal|Win32.ActiveCfg = ReleaseModal
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.TestDebug|Win32.ActiveCfg = TestDebug
+		{56498F5F-6F56-4685-9A0A-07B2AB9605DC}.TestRelease|Win32.ActiveCfg = TestRelease
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

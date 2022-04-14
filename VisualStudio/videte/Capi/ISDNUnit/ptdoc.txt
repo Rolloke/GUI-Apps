@@ -1,0 +1,3943 @@
+Beschreibung des Host-Interfaces der pt-100/pt-200    13.05.98
+Nur für den internen Gebrauch! MST
+
+Das hier Beschriebene Host-Interface ist auf dem Stand der Version x.28
+Es ist damit kompatibel zur Presence-GUI Version 1.20.
+
+Hier fehlt noch einiges an Dokumentation zum Remote-Makro Interface
+der pt-200/pt-100.
+
+1.      Übersicht
+1.1     Diagnose-Modus
+1.2     Terminal-Emulation für Fern-Konfiguration
+
+2.      Kommandos
+2.1.    BoxInfo
+2.2.    Kamera-Zustand
+2.3.    Box-Konfiguration/Zugriff auf Datenstrukturen
+2.4.    Remote I/O
+2.5.    Kamera-Konfiguration
+2.6.    Bild-Grabber
+2.7.    Bilder im Speicher suchen/übertragen
+2.8.    Verbindung kontrolliert beenden und Reset
+2.9.    Konfiguration dauerhaft speichern
+2.10.   Uhrzeit setzen/abfragen
+2.11.   Harddisk-Operationen
+2.12.   Alarm/Störungs-Behandlung
+2.13.   Ereignis-Liste
+2.14.   Passwort ändern/prüfen
+2.15.   Audio-Konfiguration
+2.16.   Remote-Makro Operationen
+
+
+3.      Datenstrukturen
+3.1.    Box-Info
+3.2.    Box-Konfiguration
+3.3.    Alarm-Aktionen
+3.4.    Alarm-Linien
+3.5.    Kamera-Konfiguration
+3.6.    Kamera-Status
+3.7.    Modem-Init-Strings
+3.8.    Audiokanal-Konfiguration
+3.9.    Telefonbuch
+3.10.   Box EEPROM
+
+4.      Beschreibung der Bildformate
+4.1.    Komprimierung HDelta64 Stream
+4.2.    Komprimierung HDeltaDCT Stream
+
+5.      Fehlercodes
+5.1.    Betriebsystem
+5.2.    Anwendungssoftware
+5.3.    POST Codes
+5.3.1.  pt-100
+5.3.2.  pt-200
+5.4.    Reserviert
+5.5.    Systemerweiterung Framegrabber
+5.6.    Systemerweiterung Fax
+5.7.    Systemerweiterung Alarm/Uhr
+5.8.    Systemerweiterung ISDN-Voice
+5.9.    Reserviert
+5.10.   Reserviert
+5.11.   Reserviert
+5.12.   Reserviert
+5.13.   Systemerweiterung Festplatte
+
+6.      Remote-Makros & Dialoge
+6.1.    Syntax der Makro-Sprache
+6.2.    Befehle der Makro-Sprache
+6.3.    Ereignis-Makros
+6.4.    Systemvariable
+6.5.    Systemfunktionen
+6.6.    GUI-Dialoge
+
+
+1.      Übersicht
+
+Grundsätzlich verhält sich die Box (hier kurz für pt-100/pt-200 verwendet)
+passiv, d.h. sie sendet erst Informationen, wenn sie vom Host (hier synonym
+mit PC verwendet, kann aber auch eine initierende andere Box sein) dazu
+aufgefordert wird.
+
+Der Host sendet ein Kommando an die Box, worauf sie mit einem Acknowledge
+antwortet. Das Acknowledge bestätigt dem Host die Ausführung seines Kommandos
+bzw. enthält die angeforderten Daten.
+
+Kommando/Acknowledge Format:
+<Code> <N> <ParamByte 1>..<ParamByte N> <Checksum>
+
+<Code> ist der Kommando (80..BF) oder Acknowledge (C0..FF) Code.
+       Die Acknowledges folgen in der Reihenfolge der empfangenen Kommandos
+       als KommandoCode+40h.
+
+<N> ist die Länge (ein Byte) und kann die Werte 0..255 umfassen. Ein
+    Kommando/Acknowledge ohne Parameter hat also die Form <Code> <0> <Code>.
+
+<Checksum> die Summe aller Bytes von <Code> bis <ParamByteN> einschliesslich.
+    Beim Summieren wird der Übertrag ignoriert.
+    Hier wird nur ein CheckSum und keine CRC verwendet, da auf einer
+    fehlergesicherten Datenübertragungsschicht (ISDN/V.42/MNP4) aufgesetzt
+    wird. Nur der Verlust von Zeichen durch Pufferüberläufe soll damit erkannt
+    werden.
+
+    Die Fehlerbehandlung geschieht
+
+    - indem der Host einen Timeout erkennt, d.h. auf ein Kommando folgt kein
+      ACK. Der Timeout ist im Host z.T. auf Werte von 300ms bis 3000ms
+      eingestellt (typ. 500ms für ISDN, 3000ms für Modems mit großem
+      Blockpuffer). Wird nach dieser Zeit kein gültiges ACK empfangen,
+      wiederholt der Host das Kommando. Es gibt in diesem Fall für die Box
+      keine Möglichkeit, zu erkennen ob das Kommando bereits ausgeführt wurde.
+      Kritisch wird dies zur Zeit nur bei einem Kommando: Toggle eines
+      Remote-Out Bits.
+
+    - indem der Host den Prüfsummenfehler oder einen Timeout von 100ms in
+      einem fehlerhaften Kommando erkennt und daraufhin ein NAK (<FE> <00>
+      <FE>) sendet.
+
+<Param1..N> Da Anzahl N der Parameterbytes bekannt ist, können alle Zeichen
+      00..FF darin vorkommen. Es gibt keine ESC-Codes.
+
+
+Damit eine kontextunabhängige Kommunikationsstruktur mittels
+ACK-Behandlungsroutinen aufgebaut werden kann, liefert nicht nur das Byte
+<Code> sondern bei den Abfrage- Kommandos auch die ersten Parameterbytes einen
+Hinweis auf die zurückgelieferten (d.h. angeforderten) Daten. Es schadet also
+nicht, beim Timeout ein Abfrage-Kommando zu wiederholen und damit evtl. doppelt
+eintreffende Abfragedaten zu erhalten. Der abfragende Host hat ja die
+Kontrolle darüber, ob seine angefragten Daten bereits eingetroffen sind.
+
+Ausnahmen von der obigen Regel, daß die Box nur auf Anforderung ACKs schickt
+gibt es auch: Falls durch einen Parameter des Kommandos CMDGetAlarmState das
+automatische Senden von Alarmänderungen während der Verbindung eingeschaltet
+wird, wird der Host automatisch bei Änderung eines Alarmzustandes mit einem
+ACKGetAlarmState informiert. Eine weitere (selten vorkommende) Ausnahme: Falls
+auf dem Bedienpanel der Box das Licht ein/ausgeschaltet wird, wird der Box
+dies durch ACKRemoteIn mitgeteilt. In beiden Fällen genauso also wenn der Host
+den Status abgefragt hätte.
+Seitdem es Remote-I/O Makros gibt, kann jederzeit ein ACKRemoteMakro Kommando
+gesendet werden, indem Dialogelemente angezeigt oder verändert werden sollen.
+
+
+Für einen minimalen Betrieb als Bildsender ohne Konfigurationsmöglichkeit der
+Box, ohne Alarmierung und ohne Fernsteuerung sind die Kommandos
+
+CMDCheckBoxPasswod (Autorisierung des Zugriffs),
+CMDGetBoxInfo (Version der Box und Identifikation),
+CMDGrabFrame (Bild von einer Kamera anfordern)
+
+notwendig.
+
+
+1.1.    Diagnose-Modus
+
+Abweichend von den oben beschriebenen Kommando/Acknowledge Formaten gibt es
+noch einige Ausnahmen:
+
+Das Zeichen "!" <Code>=21h schaltet in einen Ferndiagnose-Modus, bei dem (bei
+korrekter Verifikation des Konfigurations-Passworts) durch ein externes
+Programm (PLOAD) direkter Zugriff auf alle internen Betriebssystem-Resourcen
+geschaffen wird. Dieses Interface ist
+
+a.) Hardwareabhängig (pt-100/pt-200)
+b.) Zu komplex um es hier zu beschreiben (siehe SmartCAN Referenz-Manual)
+c.) Nur sinnvoll mit Kenntnis der Speicherstruktur des Betriebssystems zu
+    benutzen.
+
+Die Kommandos werden als Ascii-Repräsentationen (Hex-Ascii) geschickt:
+Kommando @7F00<CR> führt zum Beispiel "Nichts" aus. Daraufhin wird
+@FF00<CR><LF> geantwortet. Mit Space <Code>=20h wird das lokale Echo
+eingeschaltet. Dieser Modus wird mit dem Zeichen LF <Code>=0Ah vom Host wieder
+verlassen. Die PLOAD-Userkommandos 0000-00FF werden auf Host-Kommandos
+umgesetzt, die Aufrufe von Betriebsystemerweiterungen (SYSCALLs) werden
+mittels Kommando 7F44/7F45 ausgeführt, deren Parameter die Registerbelegung
+für den SYSCALL darstellen.
+
+
+1.2.    Terminal-Emulation für Fern-Konfiguration
+
+Die Zeichenfolge <ESC> c (1Bh 63h) bringt die Box in einen
+Fernkonfigurationsmodus, bei dem die Ausgaben des LCD-Displays umgeleitet
+werden auf die aktuelle Host-Schnittstelle (ISDN/Modem). Von dort werden auch
+Zeichen entgegengenommen, die wie Tastatureingaben behandelt werden. Die
+Bildschirmkoordinaten reichen von 0..MaxX und 0..MaxY, wobei für pt-100
+MaxX=23, MaxY=1 und für pt-200 MaxX=20, MaxY=7.
+
+Die Eingabezeichen sind:
+Druckbare Zeichen: Codes 32..126, 128..254, wobei von den Zeichen mit Codes >=
+128 z.Zt. nur die Zeichen Ä,Ö,Ü,ä,ö,ü,ß benutzt werden.
+
+Eingabe-Steuerzeichen:
+08 : Left Cursor Key
+09 : Insert/Plus Key
+0C : Right Cursor Key
+0D : Enter Key
+18 : Clear Key
+1B : Esc Key
+7F : Delete/Minus Key
+und zusätzlich für pt-200:
+0A : Cursor Down Key
+0B : Cursor Up Key
+0E : F1 Key
+0F : F2 Key
+10 : F3 Key
+1E : Select Key
+
+Die Ausgabesteuerzeichen sind:
+00..07 : User-Defined Character 0..7 ausgeben. Falls das Ausgabegerät keine
+         benutzerdefinierten Zeichen zulässt, sollte stattdessen ein Punkt .
+         ausgegeben werden.
+08 : Cursor Left (am Linken Zeilenrand zur darüberliegenden Zeile rechts,
+     ausser in Zeile 0).
+0A : Cursor Down (Vom Scrolling wird z.Zt. kein Gebrauch gemacht).
+0B : Cursor Up (Vom Scrolling wird kein Gebrauch gemacht).
+0C : Cursor Right (am rechten Zeilenende zum linken Zeilenanfang der nächsten
+     Zeile).
+0D : CR (Cursor in die erste Spalte der aktuellen Zeile)
+0E : Inverse Off falls möglich.
+0F : Inverse On falls möglich (sonst ohne Funktion). Bewegt den Cursor nicht!
+17 : ScrollUp (wird zur Zeit nicht benötigt).
+19 : ScrollDown (wird zur Zeit nicht benötigt).
+1A : Clear Screen & Cursor Home. Dieser Steuercode wird u.a. beim
+     Initialisieren des Terminal-Emulationsmodus gesendet. Schaltet
+     den Cursor aus, die Invertierung ab und den Bildschirm ein.
+1B : ESC s.u.
+1C : ScrollLeft (Nicht verwendet).
+1D : ScrollRight (Nicht verwendet).
+1E : Cursor Home (=0,0)
+1F : New Line (wie CR+LF).
+
+ESC-Codes:
+ESC * : Clear Screen & Cursor Home. Wie 1A (wird aber nicht zum
+        initialisieren, sondern zum Löschen verwendet).
+ESC < : Zeigt dem Host das Ende des Terminal-Emulationsmodus an. Damit kann der
+        Host die Terminalemulation verlassen und wieder in den Host-Kommandomodus
+        wechseln.
+ESC T : Clear to End of Line. Bewegt den Cursor nicht. Berücksichtigt evtl.
+        Eingeschaltete Invertierung.
+ESC Y : Clear to End of Screen. Bewegt den Cursor nicht. Berücksichtigt evtl.
+        Eingeschaltete Invertierung.
+ESC = <y><x> : Cursor an Position x=<x> und y=<y> setzen. Falls nötig, clippen
+        auf MaxX/MaxY ohne Umbruch in die nächste Zeile.
+ESC ` <mode> : Cursor Mode festlegen.
+        <mode> = " " (Space): Display ausschalten ("Screen Saver"), falls möglich
+                              (kein Clear Screen).
+        <mode> = "0" : Bildschirm an und Cursor unsichtbar.
+        <mode> = "1" : Bildschirm an und Cursor blinked.
+        <mode> = "2" : Bildschirm an und Cursor an.
+        Die Form des Cursors ist nicht vorgegeben, sollte nach Möglichkeit
+        aber ein Unterstrich sein.
+ESC # <size> : Buchstabengröße festlegen (Doppelte Breite/Höhe). Nur
+               implementieren, falls möglich.
+        <size> = "4" : Doppelte Höhe
+        <size> = "5" : Normale Größe
+        <size> = "6" : Doppelte Breite
+        <size> = "7" : Doppelte Höhe und Breite
+        Die Cursorkoordinaten ändern sich nicht. D.h. normale Buchstaben
+        könnten breite Buchstaben teilweise überschreiben. Es wird
+        berücksichtigt, daß dies nicht passiert. Bei doppelter Höhe beginnt
+        das Zeichen in der aktuellen Zeile und dehnt sich in die Zeile
+        darunter aus. Bei doppelt breiten Zeichen beginnt das Zeichen in der
+        aktuellen Spalte und dehnt sich nach rechts aus.
+ESC c <code> <row1>..<row8>: Benutzerdefinierbares Zeichen.
+        Nur die Bits 0..4 der "rows" werden in der verwendeten Zeichenmatrix
+        5x7 berücksichtigt. row1 ist die oberste Zeile, row8 die unterste
+        (i.d.R. vom Cursor benutzt). <code> gibt das Zeichen an, das
+        überschrieben wird (0..7). Es wird unter diesem Code anschliessend
+        auf dem Bildschirm dargestellt. Falls das Ausgabegerät keine
+        Benutzerdefinierten Zeichen zulässt, sollte dieses Kommando alle
+        Parameter lesen und dann ohne Funktion beendet werden.
+
+
+2.      Kommandos
+
+Texte werden, falls nichts anderes erwähnt ist mit führendem Längenbyte ohne
+0-Terminator übergeben. Die Byte-Order für WORD/DWORD ist "niederwertiges Byte
+zuerst".
+
+Viele Kommandos liefern einen Fehler bei falschen Eingabeparameter zurück,
+indem sie eine Antwort von genau einem Byte Länge (dem Messagecode) liefern:
+(Hinweis: Bei Länge ist hier immer die Länge der Parameter ohne ACK/CMD,
+Len-Byte und Prüfsumme gemeint. Die folgenden Datenstrukturen ist mit "Reply"
+der Parameter-Teil des Acknowledges gemeint.)
+
+Reply: BYTE MessageCode ;
+
+Diese Messagecodes sind zugewiesen:
+MsgInvalidCmd  = 10h : Unbekanntes Kommando (Code >= 80h und < 0C0h)
+MsgSizeError   = 31h : Der Parameter "size" ist ungültig.
+MsgAddressError= 32h : Der Parameter "offset" oder "address" ist ungültig.
+MsgCameraError = 33h : Die Kameranummer ist ungültig.
+MsgParamError  = 34h : Einer der Parameter ist ungültig.
+MsgChannelError= 36h : Die Remote-Channel Nummer ist ungültig.
+MsgEndOfList   = 37h : Information über Listenende bei Bildlistenabruf.
+MsgNoDisk      = 38h : Keine Remote-Disk installiert/aktiv.
+MsgNoAudio     = 39h : Kein Audio-Support im Bildempfänger verfügbar
+MsgExecError   = 3Ah : Makro nicht unterstützt oder Fehler bei der Ausführung
+MsgNoAccessError=3Bh : Zugriff auf EEPROM verweigert.
+MsgError       = FFh : Es folgt STRUCT (WORD ErrorNo, ErrorParam).
+
+
+2.1.    BoxInfo
+
+CMDGetBoxInfo (80h)
+
+Input: STRUCT (TEXT[20] CallerID)
+Reply: STRUCT (ASCIIZ Version, TEXT[20] BoxName, TELTXT Number) ; { bis 1.27 }
+Reply: STRUCT (TEXT[24] Version, TEXT[20] BoxName, TELTXT Number,
+               TEXT[15] Number, SerialNo, Dealer) ;               { Ab 1.28 }
+
+Dieses Kommando wird vom Host verwendet, um sie bei der Box bekannt zu machen,
+falls keine Verbindung mit Rufnummernübermittlung möglich ist (z.B. Modem).
+Der Host erfragt damit mindestens die Version-Nummer und das Datum der in MCL
+geschriebenen Steuersoftware der Box (also den Box-Typ pt-100/pt-200 und die
+Kommando-Interface Version).
+
+Die Inhalt des Feldes Version hat z.B. folgendes Aussehen:
+"1.23 05.04.97 12:34:56",0
+1.xx gibt an, daß dies eine pt-100 Box mit 1x64kBit/s ist.
+2.xx gibt an, daß dies eine pt-200 Box mit 2x64kBit/s ist.
+x.23 ist die Software-Version (es wird von 01 bis 99 durchnumeriert).
+
+
+2.2.    Kamera-Zustand
+
+CMDGetCamState (84h)
+
+Input: STRUCT (WORD offset, size, CameraNo)
+Reply: STRUCT (WORD offset, CameraNo, ARRAY[...] BYTE data) ;
+
+Liest (einen Teil) des CameraState Records (siehe Datenstruktur CAMERASTATE)
+von Kamera "CameraNo" aus.
+
+CameraNo kann Werte von 0..2 annehmen (intern werden die Kameras von 0..2 und
+nicht von 1..3 nummeriert). Offset und Size werden nicht gemeinsam auf
+Überlauf über die Grenze der Datenstruktur überprüft. (Bisher undokumentierter
+Sonderfall falls size=0: Identifiziert die Kamera neu/Sucht aktives
+Videosignal. Liefert die ersten beiden Bytes von CAMERATSTATE: Active &
+Flags).
+
+
+CMDSetCamState (85h)
+
+Input: STRUCT (BYTE Operation, BYTE Camera, ...Params) ;
+Reply: STRUCT (BYTE Operation, BYTE Camera, ...Params) ;
+
+Setzt durch die "Operation" den Kamerazustand neu:
+
+Operation: SCSIdentify (00h)
+Versucht ein gültiges Videosignal an der Kamera zu finden (das kann 1-4s
+dauern) und liefert STRUCT (BYTE Active, Flags) zurück (siehe Datenstruktur
+CAMERASTATE).
+
+Operation: SCSDisableRecord (01h)
+Falls die automatische Bildaufzeichnung eingeschaltet ist (Intervall > 0s)
+wird sie abgeschaltet und BYTE Params=00 (ok) zurückgeliefert.
+Falls sie bereits abgeschaltet war wird 01 zurückgeliefert.
+Falls keine automatische Bildaufzeichnung vorbereitet wurde für diese Kamera
+(Intervall = 0s) wird 02 zurückgeliefert.
+
+Operation: SCSEnableRecord (02h)
+Falls die automatische Bildaufzeichnung abgeschaltet ist (Intervall = 0s)
+wird sie eingeschaltet und BYTE Params=00 (ok) zurückgeliefert.
+Falls sie bereits eingeschaltet war wird 01 zurückgeliefert.
+Falls keine automatische Bildaufzeichnung vorbereitet wurde für diese Kamera
+(Intervall = 0s) wird 02 zurückgeliefert.
+
+
+2.3.    Box-Konfiguration/Zugriff auf Datenstrukturen
+
+CMDGetBoxConfig (86h)
+
+Input: STRUCT (BYTE Index, HostId, Len, DSId) ;
+Reply: STRUCT (BYTE Index, HostId, Len, DSId, ARRAY[...] BYTE Data) ;
+
+Falls Len=0 ist, wird die Geometrie der Datenstruktur mit der Nummer DSId
+zurückgeliefert, anderenfalls der Anfang (mit der Länge "Len") des
+ausgewählten Datensatzes mit dem Index aus der Datenstruktur. HostId ist ein
+"Dummy" der dem Host zur Identifikation seiner angefragten Daten in
+Message-orientierten System dient. Er wird einfach von Input zu Reply
+kopiert.
+
+Zur Zeit definierte Datenstrukturen (DSId):
+DSBoxInfo         =  0 ;
+DSBoxConfig       =  1 ;
+DSBoxEEPROM       =  2 ;
+DSPhoneBook       =  4 ;
+DSAlarmactions    =  8 ;
+DSAlarmlines      =  9 ;
+DSCameras         = 16 ;
+DSCameraState     = 17 ;
+DSModemInitString = 24 ;
+DSModemConfig     = 25 ;
+DSAudioConfig     = 26 ;
+
+Falls Len=0 ist wird Reply: STRUCT (BYTE MinIndex, HostId, EntrySize, DSId,
+MaxIndex, WORD Ptr) zurückgeliefert. Die Adresse Ptr kann nicht für Zugriffe
+auf die Datenstruktur angewandt werden. Alle Zugriffe des Hosts laufen über
+die Zugriffsprozeduren ohne direkte Adressierung ab.
+
+Falls Len>0 ist finden folgende Überprüfungen statt:
+- Gültige DSId? sonst Reply: BYTE MsgParamError
+- Gültiger Index (>= MinEntry <= MaxEntry)? Sonst MsgAddressError
+- Falls Len > Größe der Datenstruktur ist, wird nur der definierte Teil
+  zurückgeliefert.
+
+
+CMDSetBoxConfig (87h)
+
+Input: STRUCT (BYTE Index, HostId, Len, DSId, ARRAY[...] BYTE Data) ;
+Reply: - if ok
+       BYTE MsgCode, if not ok
+
+Es finden folgende Überprüfungen statt:
+- Gültige DSId? sonst Reply: BYTE MsgParamError
+- Gültiger Index (>= MinEntry <= MaxEntry)? Sonst MsgAddressError
+- Len-3 <= Größe der Datenstruktur ist? Sonst MsgSizeError
+- Zugriff auf Datenstruktur erlaubt? Sonst MsgNoAccessError
+
+Im Normalfall wird also der Anfang des Eintrags "Index" der Datenstruktur
+"DSId" mit "Len" Bytes der Daten "Data" überschrieben.
+
+
+2.4.    Remote I/O
+
+Das aktuelle Remote-I/O-Konzept ist noch recht starr. Die folgenden Kommandos
+sind also als ein Anfang anzusehen, um vordefinierte Ausgänge zu schalten oder
+auszulesen. Zur Strukturierung sind I/O-Kanäle eingeführt worden (als
+Erweiterung von I/O-Ports). Darüber lassen sich auch Bit-I/Os abwickeln. Die
+alte (nicht kanalorientiere) Remote-I/O wird hier nicht weiter beschrieben, da
+nur noch wenige (< 10) Boxen in Betrieb sind, die dann besser Umgerüstet
+werden. Diese Boxen haben eine Version < 1.16 und ein Datum vor 9.1.96.
+
+CMDRemoteOut (8Ch)
+
+Input: ARRAY[MsgHeader.Len] BYTE Paramstring ;
+       Paramstring kann mehrere Ausgabekommando zusammenfassen, die ohne Unterbrechung
+       nacheinander ausgeführt werden:
+       n*{ BYTE Channel, BYTE Len, ARRAY[Len] BYTE IOParam }
+       "IOParam" hängt dabei vom Kanaltyp ab.
+Reply: - falls ok, sonst BYTE MsgByte
+
+Die Datenstruktur, die als Parameterstring übergeben wird, besteht aus
+Elementen mit Variabler Länge.
+
+Channel gibt den I/O-Kanal an. Der bestimmt unter anderem den Aufbau von
+"IOParam":
+
+Channel_LPT      = 0
+    Betrieb des Parallelports mit Drucker (ACK/Busy/Strobe). Die Ausgabe
+    erfolgt nur, wenn Druckerbetrieb am Parallelport freigegeben wurde. Sonst
+    wird MsgParamError geliefert.
+    IOParam enthält "Len" Bytes, die an den Printer-Port ausgegeben werden.
+    Maximal 127 Zeichen können in einem Kommando an LPT ausgegeben werden.
+
+Channel_SIO      = 1
+    Betrieb der seriellen Schnittstelle als Remote-I/O Port. Die Ausgabe
+    erfolgt nur, wenn Remote-I/O für die V.24/RS232 freigegeben wurde. Sonst
+    wird MsgParamError geliefert. Die Baudrate wird durch die Datenstruktur
+    ModemConfig vorher festgelegt.
+    IOParam enthält "Len" Bytes, die an den V.24 Port ausgegeben werden. Da
+    die Ausgabe gepuffert erfolgt, wird RemotOut bereits beendet, bevor das
+    letzte Zeichen tatsächlich an der V.24 ausgegeben wurde.
+
+Channel_IOPORT   = 8
+    Einzelbit-Umschaltung für Relais-Ausgänge und Parallelport-Bits. Die Länge
+    (Len) von IOParam muß mindestens 4 Byte sein.
+
+    STRUCT (BYTE Mode, WORD IOAddr, BYTE Mask) IOParam
+
+    Mode: 0=PUT
+          1=OR
+          2=AND
+          3=XOR
+
+    IOAddr: Für pt-100 und pt-200 sprechen die Adressen 120h..122h
+          den Parallelport an. Da dieser PC-kompatibel ist, entspricht
+          120h dem Datenport (R/W),
+          121h dem Statusport (R),
+          122h dem Controlport (R/W).
+          Zugriffe auf diese Adressen sind nur möglich, wenn Remote-I/O
+          für den Parallelport freigeschaltet ist, anderenfalls wird ein
+          Paramerror geliefert.
+
+          Für pt-100 ist das Bit 1 von Port 00CAh und für pt-200 die Bits 0..2
+          von von 00CAh (dem Relaisport) für den Benutzer verfügbar. Alle
+          anderen I/O Adressen sind zwar ansprechbar, aber nicht geschützt!
+          Bit 1 von 00CAh wird per Default in der PC-Oberfläche als "Licht"
+          Ausgang angelegt und mit einem Button versehen, der mittels
+          CmdRemoteIn auch den aktuellen Zustand des Licht- Relais anzeigt.
+
+    Mask: Die Bitmaske, die mit dem alten Remote-Port Wert verknüpft wird. Die
+          Verknüpfung wird im Mode-Byte angegeben. Bis auf Mode 0 (PUT) muß
+          der Port also lesbar sein, damit kein Unsinn zurückgeschrieben wird!
+
+Channel_CTRL     = 9
+    Steuerfunktionen für verschiedene Kanäle.
+    Die Länge (Len) von IOParam muß mindestens 1 Byte sein.
+
+    STRUCT (BYTE Mode, BYTE/WORD Value) IOParam
+
+    Mode = 1: DELAY (Value)
+           Verzögert die Ausführung des nächsten RemoteOut Elements um Value
+           Millisekunden.
+    Mode = 2: Empfangspuffer der SIO löschen.
+
+Channel_IR       = 10
+    Ansprechen verschiedener Peripheriegeräte mittels spezieller Protokolle.
+    Die Länge von IOParam muß mindestens 1 Byte sein.
+
+    STRUCT (BYTE Mode, SubCode, Device, WORD Data) ;
+
+    Die ursprüngliche Bedeutung der Infrarot-Steuerung über den Parallelport
+    wird zur Zeit nicht unterstützt (Mode 01h..1Fh). Unterstützt wird:
+
+    Mode=20h: SERTX (siehe Channel_SERTX)
+
+    Mode=C0h..CFh: I2C Bus der internen Geräte:
+
+      Device  = Address des Chips (88h, 90h, 9Ch, 0Axh)
+      SubCode = SubAddress (Register) des Chips
+      Das Datenbyte/Datenwort wird in dieses Register geschrieben.
+      Bit 0..3 im I2C-Mode:
+      CFh: Reset Bus
+      C0h: Nur Device-Addresse wird ausgegeben
+      C1h: Subaddress als Datenbyte an Device ausgeben
+      C2h: Databyte an Subaddress von Device ausgeben oder
+           Word aus [DataByte (HighByte) und SubAddress (LowByte)] an Device ausgeben.
+      C3h: Dataword an Subaddress von Device ausgeben.
+
+Channel_SERTX    = 11
+    Emulation einer seriellen Sendeschnittstelle nach V.24 (mit kleinerem
+    Pegel) auf den acht Datenbits des Parallelports:
+
+    Die Länge von IOParam muß mindestens 1 Byte sein.
+
+    STRUCT (BYTE Mode, ARRAY[Len-1] CHAR String) IOParam
+
+    Mode wird Bitweise interpretiert und legt Übertragungsbit und Baudrate
+    etc. fest:
+
+    Bit 210: Legt fest, überwelches Portbit die Ausgaben erfolgen sollen.
+        000: Portbit PD0
+        ...
+        111: Portbit PD7
+    Bit 3: 0 = Invertierte Bitausgabe (für Betrieb ohne ext. Pegelwandler
+               Chip).
+           1 = Nichtinvertierte Bitausgabe (für Betrieb mit ext. Pegelwandler
+               Chip).
+    Bit 7..4 Mode
+        0000   9600, 8N1
+        0001   1200, 8N1
+        0010   2400, 8N1
+        0011   4800, 8N1
+        0100  19200, 8N1
+        0101  38400, 8N1
+        0110
+        0111
+        1000   9600, 7E1
+        1001   1200, 7O1
+        1010   2400, 7E1
+        1011   4800, 7E1
+        1100   1200, 7E1
+        1101
+        1110
+        1111
+
+    Die Zeichen von String werden nacheinander auf dem Parallelport
+    ausgegeben. Die Ausgabe findet nicht gepuffert statt.
+
+Alle anderen Channels sind für zukünftige Erweiterungen reserviert.
+Channel=2..Channel=7 z.B. für weitere serielle Schnittstellen.
+
+
+
+
+CMDRemoteIn (8Dh)
+
+Input: ARRAY[Len] BYTE Paramstring ;
+       Paramstring kann mehrere Leseanforderungen zusammenfassen, die ohne
+       Unterbrechung nacheinander ausgeführt werden:
+
+       n*{ BYTE Channel, BYTE Len, ARRAY[Len] BYTE IOParam }
+       "IOParam" hängt dabei vom Kanaltyp ab.
+
+Reply: n*{ BYTE Channel, BYTE Len, ARRAY[Len] BYTE IOResult }
+       Falls ReplyLen=1 ist, wird BYTE MsgByte mit dem Fehlergrund
+       zurückgeliefert.
+
+Die Datenstruktur, die als Parameterstring übergeben wird, bzw zurückgeliefert
+wird besteht aus Elementen mit Variabler Länge.
+
+Channel gibt den I/O-Kanal an. Der bestimmt unter anderem den Aufbau von "IOParam":
+Channel_LPT      = 0
+    Der LPT-Port kann nicht als Eingabekanal genutzt werden und liefert d.h.
+    einen Fehler.
+
+Channel_SIO      = 1
+    Betrieb der seriellen Schnittstelle als Remote-I/O Port. Das Lesen erfolgt
+    nur, wenn Remote-I/O für die V.24/RS232 freigegeben wurde. Sonst wird
+    MsgParamError geliefert. Die Baudrate wird durch die Datenstruktur
+    ModemConfig vorher festgelegt.
+
+    STRUCT (CHAR Terminator, BYTE MaxLen) IOParam.
+
+    Es werden solange Zeichen aus dem SIO-Eingabepuffer gelesen, bis entweder
+    MaxLen erreicht wurde, das Terminator-Zeichen gelesen wurde oder 100ms
+    gewartet wurde, ohne daß ein Zeichen im Empfangspuffer ist. Das
+    Terminator-Zeichen selbst wird auch geliefert. Returns Len Bytes
+    ARRAY[Len] CHAR IOResult liefert die Empfangenen Zeichen zurück.
+
+Channel_IOPORT   = 8
+    Einzelbit-Umschaltung für Relais-Ausgänge und Parallelport-Bits.
+    Die Länge (Len) von IOParam muß mindestens 4 Byte sein.
+
+    STRUCT (BYTE Mode, WORD IOAddr, BYTE Mask/Bit) IOParam
+
+    Mode: 0=GET     Liest ein Byte vom Port (Mask/Bit wird ignoriert)
+          1=TESTBIT Tested ob Bit 0..7 gesetzt ist und liefert 00 falls
+                    nicht gesetzt und FF falls gesetzt.
+          2=MASK    Liefert die Bitweise UND-Verknüpfung zwischen I/O-Port
+                    und Mask.
+          3=TESTBITCLEARED Liefert FF, falls Bit 0..7 im I/O-Port nicht
+                    gesetzt ist und 00, falls es gesetzt ist.
+
+    IOAddr:
+          Zugriffe auf die Adressen 0120h-122h sind nur möglich, wenn
+          Remote-I/O für den Parallelport freigeschaltet ist, anderenfalls
+          wird ein Paramerror geliefert. Auch die Relais-Ausgänge können
+          gelesen werden, um den aktuellen Zustand des Lichts abzufragen.
+
+    Returns 4 Bytes STRUCT (BYTE Mode, WORD IOAddr, BYTE Value) IOResult
+
+Channel_IR       = 10
+    Ansprechen verschiedener Peripheriegeräte mittels spezieller Protokolle.
+    Die Länge von IOParam muß mindestens 3 Byte sein.
+
+    STRUCT (BYTE Mode, SubAddress, Device, WORD Data) ;
+
+    Die ursprüngliche Bedeutung der Infrarot-Steuerung über den Parallelport
+    wird zur Zeit nicht unterstützt (Mode 01h..1Fh). Unterstützt wird:
+
+    Mode=CEh: Vom I2C Bus der internen Geräte lesen
+    Device  = Address des Chips (89h, 91h, 9Dh, 0Axh)
+    SubAddress=Egal
+    Returns 6 Bytes: STRUCT (BYTE Mode, Device, Subaddress, ReadByteH,
+                             ReadByteL, LRegister) IOResult
+
+Alle anderen Channels sind für zukünftige Erweiterungen reserviert.
+Channel=2..Channel=7 z.B. für weitere serielle Schnittstellen.
+
+
+
+2.5.    Kamera-Konfiguration
+
+Die Kamerakonfiguration erlaubt den Zugriff auf die Datenstruktur CAMERAPARAMS
+für alle 3 Kameras:
+
+
+CMDGetCamera (8Eh)
+
+Input: STRUCT (WORD offset, size, CameraNo)
+Reply: STRUCT (WORD offset, CameraNo, ARRAY[...] BYTE data)
+
+Liest (einen Teil) des Camera Records (siehe Datenstruktur CAMERAPARAMS)
+von Kamera "CameraNo" aus.
+CameraNo kann Werte von 0..2 annehmen (intern werden die Kameras von 0..2 und
+nicht von 1..3 nummeriert). Offset und Size werden nicht gemeinsam auf
+Überlauf über die Grenze der Datenstruktur überprüft.
+
+
+CMDSetCamera (8Fh)
+
+Input: STRUCT (WORD offset, CameraNo, ARRAY[...] Params) ;
+Reply: - falls ok.
+       BYTE MsgError falls nicht ok.
+
+Ersetzt (einen Teil) des Camera Records (siehe Datenstruktur CAMERAPARAMS)
+von Kamera "CameraNo".
+CameraNo kann Werte von 0..2 annehmen (intern werden die Kameras von 0..2 und
+nicht von 1..3 nummeriert). Offset und Size werden nicht gemeinsam auf
+Überlauf über die Grenze der Datenstruktur überprüft.
+
+
+
+2.6.    Bild-Grabber
+
+Der Bild-Grabber wird vom Host über diesen Befehl beauftragt ein neues Bild
+von einer bestimmten Kamera zu liefern.
+
+CMDGrabFrame (90h) Input: STRUCT (BYTE Control, VideoSource) ;
+
+Als Antwort auf dieses Kommando folgt ACKPicture mit einem anderen Code als
+CMDGrabFrame+ACK (s.u.)
+Falls beim Grabben ein Fehler auftrat, wird eine Fehlermeldung mittels
+ACKError erzeugt.
+
+Control (Bitmaske) bestimmt die Art und Weise der Bildaufnahme:
+BIntraFrame      = 0 ; Es soll ein Vollbild (mit allen Bildblöcken) gesendet
+                       werden.
+BDiskStorage     = 2 ; Das Bild soll auf die Festplatte gespeichert werden.
+BOfflineStorage  = 3 ; Das Bild soll ins RAM gespeichert werden.
+BStreamPicture   = 4 ; Das Bild soll als ByteStream auf dem HostPort
+                       ausgegeben werden
+BAutoGrab        = 5 ; Solange automatisch Bilder ohne Anforderung senden, bis
+                       neues Kommando diesen Modus abbricht (Zur Zeit nicht
+                       von der PC-Oberfläche unterstützt). Dadurch wird der
+                       ACK-Overhead reduziert und bei Halbduplex-Modem
+                       Verbindungen die Umschaltzeit minimiert.
+
+VideoSource kann Werte von 0..2 annehmen, da die Kameras intern nicht von 1..3
+numeriert werden.
+
+
+ACKPicture (D3h)
+      Reply: STRUCT (BYTE CompressionFormat)
+             und nach der ACK-Prüfsumme die Bilddaten.
+
+Die Anzeige-Routine für Bilder wird also nur auf dieses ACK-Kommando achten
+müßen, da dadurch alle Bilddatenströme eingeleitet werden.
+
+CompressionFormat nimmt zur Zeit folgende Werte an:
+20h für HDelta64 Vollbild
+60h für HDelta64 Differenzbild
+24h für HDeltaDCT Vollbild
+64h für HDeltaDCT Differenzbild
+
+Die Bilddaten (deren Aufbau in Abschnitt 4. beschrieben ist) beginnen mit dem Bildheader:
+STRUCT (BYTE SOPMarker, XBlocks, YBlocks, GreyAndCamera, {BYTE option
+Time/Date}) PictureHeader ;
+Der SOPMarker ist für die HDelta Kompressionsformate 0FEh.
+
+XBlocks:
+Bit 0..6 gibt die Breite des Bildes DIV 8 an.
+Bit 7    ist bei einem Differenzbild gesetzt.
+
+YBlocks:
+Bit 0..6 gibt die Höhe des Bildes DIV 8 an.
+Bit 7    ist bei DCT-Kompression gesetzt.
+
+GreyAndCamera:
+Bit 0..2 gibt die Zweierpotenz der Helligkeitsstufen des Bildes an
+         (Helligkeitsstufen=2^(Bit 0..2)).
+Bit 3    ist bei Farbbildern gesetzt.
+Bit 4..6 enthalten die Kameranummer 0..6 (7=Ungültige Kameranummer)
+Bit 7    ist bei folgender Time/Date Zeitangabe gesetzt, ansonsten ist der
+         Header beendet.
+
+Bei DCT-basierter Kompression ist die Zeitangabe:
+STRUCT (BYTE FrameNo, Sec, Min, Hour, Day, Month, Year-1980)
+sonst
+STRUCT (BYTE Sec, Min, Hour, Day, Month, Year-1980).
+Bis auf FrameNo sind alle Werte BCD-Codiert. Bit 7 (Extend) ist jedesmal
+gesetzt, wenn noch ein Byte folgt. Dadurch kann z.B. nur das Sekunden-Byte
+übertragen werden, wenn sich die Minute nicht ändert.
+
+
+2.7.    Bilder im Speicher suchen/übertragen
+
+CMDFindPicture (94h)
+
+Dieses Kommando operiert auf dem batteriegepufferten RAM-Ringspeicher für
+Bilder.
+
+Input: BYTE Flags
+Reply: STRUCT (DWORD Size, WORD Ofs, BYTE Page,
+               BYTE XBlocks, YBlocks, GreyAndCamera,
+               BYTE Second, Minute, Hour, Day, Month, Year-1980) ;
+
+Flags (Bitmask):
+Bit 0: 1=FindNext
+       0=FindFirst
+Bit 1: 1=Fault Tolerant Search ("Picture in Picture by overwritten RAM")
+Bit 2: 1=Geometrie des Bildspeichers abfragen
+
+Für den ersten Aufruf wird Bit 0 nicht gesetzt. Dadurch wird das älteste
+Bild in der Bildliste gesucht. Alle folgenden Aufrufe werden mit Bit 0=1
+durchgeführt.
+
+Falls Bit 31 von Size gesetzt ist, wurde das Ende der der Bildliste erreicht
+(die in diesem Reply gelieferten Daten sind dann zu ignorieren).
+
+Falls Fault Tolerant Search gesetzt ist, wird nicht auf die Reihenfolge
+Bildanfang nach Bildende geachtet sondern auch Bildheader im Bild geliefert.
+Die Anwendung muß dann durch decodieren der Bilddaten herausfinden, ob dies
+ein gültiges Bild ist.
+
+Falls CMDFindPicture mit Flags=04h aufgerufen wird, wird die Anzahl der durch
+Bilddaten belegten 4k Speicherseiten gemeldet. Bei der pt-100 wird auch noch
+die Zahl der freien Seiten gemeldet (Bei der pt-200 steht dieser Wert nicht in
+Zusammenhang mit den benutzten Seite, da es ein anderer Speicherbereich ist).
+Wird evtl. in Zukunft noch ändern. Reply: STRUCT (BYTE Used, Free)
+
+
+CMDClearPictures (96h)
+
+Dieses Kommando (setzt Konfigurations-Erlaubnis voraus) löscht den
+batteriegepufferten Bildspeicher.
+
+Input: BYTE Flags
+Reply: - Falls ok, sonst BYTE MsgParamError
+
+Flags muß gleich 80h oder 82h sein.
+Falls Flags=82h wird der Bildspeicher nicht gelöscht sonder "gültig gemacht",
+d.h. eine anschließende fehlertolerante Suche versucht im evtl. teilweise
+gelöschten RAM (z.B. Weil die Box zu lange vom Netz getrennt war) die
+Bildheader wiederzufinden.
+
+
+CMDSendPicture (95h)
+
+Input: STRUCT (WORD Ofs, BYTE Page)
+Reply: ACKPicture (0D3h) mit Bilddaten
+
+Liest falls, Offset und PageNo einen gültigen Bildanfang beschreiben den
+Codierten Bildinhalt aus dem Speicher zurück. Offset und PageNo wurden zuvor
+durch FindPicture bestimmt.
+
+
+2.8.    Verbindung kontrolliert beenden und Reset
+
+CMDExit (98h)
+Input: -
+Reply: Es wird kein ACK gesendet.
+
+Beendet eine bestehende Host-Verbindung. Hierdurch wird sichergestellt, daß
+alle Kommandos aus den Puffern der Modems/Terminaladapter abgearbeitet wurden
+und nicht durch ein einfaches "Hangup" des Host evtl. verlorengehen. Die Box
+beendet hierdurch die Verbindung.
+
+CMDReset (9Ah)
+Input: -
+Reply: Es wird kein ACK gesendet.
+
+Beendet die Verbindung und führt einen Reset mit Neustart und
+Re-Initialisierung von Modem/ISDN durch. Alle Schaltausgänge werden
+zurückgesetzt und bestehende Alarme gelöscht. Die Kameras werden neu
+identifiziert.
+
+
+2.9.    Konfiguration dauerhaft speichern
+
+CMDEEPromWrite (99h)
+Input: -
+Reply: -
+
+Dieses Kommando wird nur ausgeführt, falls Konfigurations-Erlaubnis besteht.
+Überträgt die Datenstrukturen, auf denen im RAM operiert wird in das EEPROM,
+damit sie beim nächsten Wiedereinschalten der Box als Voreinstellung dienen.
+
+
+2.10.   Uhrzeit setzen/abfragen
+
+CMDSetClock (9Bh)
+
+Falls Konfigurationserlaubnis besteht und Parameter für dieses Kommando
+übergeben werden, wird die Uhrzeit mit den Daten aus TimeDate in der
+Batteriegepufferten Uhr der Box gesetzt. Falls keine Input-Parameter übergeben
+werden (Len=0) wird die aktuelle Uhrzeit abgefragt. In jedem Fall wird in
+Reply die eingestellte Uhrzeit zurückgeliefert.
+
+Input: STRUCT (BYTE Sec, Min, Hour, Day, Month, Year-1980) TimeDate
+oder
+Input: -
+
+Reply: STRUCT (BYTE Sec, Min, Hour, Day, Month, Year-1980)
+
+Die BYTE-Wert enthalten die Uhrzeit/Datum BCD-codiert.
+Beispiel: 16:38:45 wird zu Sec=4*16+5=45h, Min=3*16+8=38h, Hour=1*16+6=16h
+
+
+2.11.   Harddisk-Operationen
+
+Alle Remote-Harddisk-Operationen laufen über dieses Kommando.
+
+CMDDiskFunction (9Dh)
+Input: STRUCT (BYTE Function, ARRAY[...] BYTE Params) ;
+Reply: STRUCT (BYTE Function, Status, ARRAY[...] BYTE Params) ;
+Falls keine Harddisk installiert ist (oder keine Harddisk-Nutzung für den
+Parallelport freigeschaltet ist) wird STRUCT (BYTE Function, Status) mit
+Status=MsgNoDisk zurückgeliefert.
+
+Für die folgenden Funktionen wird oft der Typ
+FILEENTRY = STRUCT (WORD FoundDate, FoundTime, ARRAY[1..11] OF CHAR FileName,
+                    BYTE Attribut, LONGINT Size, WORD Directory, DirEntry)
+benutzt.
+
+Date und Time werden bei diesen Funktionen im gepackten DOS-Format übergeben:
+Date:
+Bit 15..9 = Jahr-1980
+Bit 8..5  = Monat 1..12
+Bit 4..0  = Tag 1..31
+Time:
+Bit 15..11 = Stunde 0..23
+Bit 10..5  = Minute 0..59
+Bit 4..0   = Sekunde/2  0..29
+Falls Time oder Date = 0000 ist, soll in Anzeigefunktionen nichts ausgegeben
+werden, da Zeit oder Datum nicht vorhanden sind.
+
+Function=00h : GetDiskInfo
+ Input: STRUCT (BYTE Function) ;
+ Reply: STRUCT (BYTE Function, Status, WORD ClusterSize, Used, Size) ;
+
+ Function wird von Input kopiert.
+ Status ist 00h (ok)
+ ClusterSize kann 2048, 4096, 8192, 16384 oder 32768 betragen.
+ Used gibt die Anzahl der belegten Cluster und Size die Gesamtzahl der
+ Cluster (Frei und belegt) auf der Platte an.
+
+
+Function=02h : FindSequenceAfter
+ Input: STRUCT (BYTE Function, WORD SearchDate, SearchTime,
+                ARRAY[1..11] CHAR SearchMask)
+ Reply: STRUCT (BYTE Function, BYTE Status, FILEENTRY Entry)
+
+ Sucht den nächst neueren Eintrag nach SearchDate/SearchTime, der auf die
+ Suchmaske SearchMask passt. SearchMask darf Fragezeichen als Wildcards
+ enthalten (aber keinen Punkt als Trenner). Falls kein Eintrag gefunden wird,
+ wird Status=01h geliefert sonst Status=00h. Falls der älteste Eintrag gesucht
+ werden soll, kann SearchDate=0000 und SearchTime=0000 übergeben werden.
+ Weitere Suchaufrufe erfolgen dann mit ToNextSequence um den nächst neueren
+ Eintrag zu finden oder ToPrevSequence um den nächst älteren Eintrag zu
+ finden.
+
+
+Function=03h : FindSequenceBefore
+ Input: STRUCT (BYTE Function, WORD SearchDate, SearchTime,
+                ARRAY[1..11] CHAR SearchMask)
+ Reply: STRUCT (BYTE Function, BYTE Status, FILEENTRY Entry)
+
+ Sucht den nächst älteren Eintrag vor SearchDate/SearchTime, der auf die
+ Suchmaske SearchMask passt. SearchMask darf Fragezeichen als Wildcards
+ enthalten (aber keinen Punkt als Trenner). Falls kein Eintrag gefunden wird,
+ wird Status=01h geliefert sonst Status=00h. Falls die neueste Sequenz gesucht
+ werden soll, kann SearchDate=FFFF und SearchTime=FFFF übergeben werden.
+ Weitere Suchaufrufe erfolgen dann mit ToNextSequence um den nächst neueren
+ Eintrag zu finden oder ToPrevSequence um den nächst älteren Eintrag zu
+ finden.
+
+
+Function=04h : ReadNextPicture
+ Input: STRUCT (BYTE Function, CompleteSequence)
+ Reply: STRUCT (BYTE Function, BYTE Status)
+   und  ACKPicture mit den Bilddaten (evtl. mehrmals hintereinander).
+
+ Falls Bit 0 von CompleteSequence gesetzt ist, werden alle Bilder dieser
+ Sequenzdatei nacheinander geschickt, ohne daß der Host einzelne Bilder erneut
+ anfordern müßte. Anderenfalls wird intern die Datei zum Lesen offen gehalten
+ und das nächste Bild erst nach einer erneuten ReadNextPicture Anforderung
+ gesendet. Falls Status=MsgEndOfList ist, enthält die Bildsequenzdatei keine
+ weiteren Bilder. Falls beim Lesen ein Plattenfehler auftrat, wird
+ Status=MsgError und in den Bytes danach die Fehlermeldung geliefert.
+
+Function=05h: ReadFirstPicture
+ Input: STRUCT (BYTE Function, WORD Directory,DirEntry,BYTE CompleteSequence)
+ Reply: STRUCT (BYTE Function, BYTE Status) ;
+  und   ACKPicture mit den Bilddaten (evtl. mehrmals hintereinander)
+
+ Öffnet eine neue Bildsequenzdatei und liefert das erste Bild. Die Position
+ der Bilddatei wurde vorher durch FindSequence... bestimmt und in Directory
+ und DirEntry geliefert. Diese beiden WORD Einträge können auch als ein DWORD
+ Handle für die Datei angesehen werden. Die Dateien brauchen nicht explizit
+ geschlossen werden. Falls Bit 0 von CompleteSequence gesetzt ist, werden alle
+ Bilder dieser Sequenzdatei nacheinander geschickt, ohne daß der Host einzelne
+ Bilder erneut anfordern müßte. Anderenfalls wird intern die Datei zum Lesen
+ offen gehalten und das nächste Bild erst nach einer erneuten ReadNextPicture
+ Anforderung gesendet. Falls das Directory keine Bildsequenzdateien enthält
+ wird Status=MsgEndOfList zurückgemeldet. Falls beim Lesen ein Plattenfehler
+ auftrat, wird Status=MsgError und in den Bytes danach die Fehlermeldung
+ geliefert.
+
+
+Function=06h: ToNextSequence
+ Input: STRUCT (BYTE Function)
+ Reply: STRUCT (BYTE Function, Status, FILEENTRY Entry) ;
+
+ Sucht den nächst neueren Eintrag, der auf die Suchmaske von
+ FindSequenceAfter/FindSequenceBefore passt. Falls Status=00h, enthält Entry
+ den Datei- Eintrag, der gefunden wurde, falls Status=01h, wurde kein weiterer
+ Passender Dateieintrag gefunden.
+
+Function=07h: ToPrevSequence
+ Input: STRUCT (BYTE Function)
+ Reply: STRUCT (BYTE Function, Status, FILEENTRY Entry) ;
+
+ Sucht den nächst älteren Eintrag, der auf die Suchmaske von
+ FindSequenceAfter/FindSequenceBefore passt. Falls Status=00h, enthält Entry
+ den Datei- Eintrag, der gefunden wurde, falls Status=01h, wurde kein weiterer
+ Passender Dateieintrag gefunden.
+
+Function=08h: Set Archive Attribut
+ Input: STRUCT (BYTE Function, WORD Directory, DirEntry) ;
+ Reply: STRUCT (BYTE Function, Status) ;
+
+ Setzt das ArchiveAttribut der Datei, die durch Directory/DirEntry
+ spezifiziert wird. Status=00h wird zurückgeliefert. Es gibt z.Zt. keine
+ Möglichkeit das ArchivAttribut wieder zu löschen.
+
+Function=09h: RemoveEntry
+ Input: STRUCT (BYTE Function, WORD Directory, DirEntry) ;
+ Reply: STRUCT (BYTE Function, Status)
+
+ Markiert den Dateieintrag als gelöscht. Die Daten der Datei werden bei
+ nächster Gelegenheit überschrieben. Der durch die Bilddaten belegte
+ Speicherplatz wird sofort freigegeben. Status=00h: Ok
+
+Function=0Ah: ListSequencesAfter
+ Input: STRUCT (BYTE Function, WORD Date, Time, ARRAY[1..11] CHAR Mask,
+                BYTE LoopCounter) ;
+ Reply: LoopCounter * STRUCT (BYTE Function, Status, FILEENTRY Entry) ;
+   und  STRUCT (BYTE Function, BYTE Status) ;
+        Status=MsgEndOfList
+ Liefert ohne erneute Anfrage eine Anzahl (LoopCounter) von aufsteigend nach
+ Uhrzeit sortierten Directory-Einträgen. Nach dem letzten Eintrag wird eine
+ MsgEndOfList Meldung gebracht.
+
+Function=0Bh: ListSequencesBefore
+ Input: STRUCT (BYTE Function, WORD Date, Time, ARRAY[1..11] CHAR Mask,
+                BYTE LoopCounter) ;
+ Reply: LoopCounter * STRUCT (BYTE Function, Status, FILEENTRY Entry) ;
+   und  STRUCT (BYTE Function, BYTE Status) ;
+        Status=MsgEndOfList
+ Liefert ohne erneute Anfrage eine Anzahl (LoopCounter) von absteigend nach
+ Uhrzeit sortierten Directory-Einträgen. Nach dem letzten Eintrag wird eine
+ MsgEndOfList Meldung gebracht.
+
+
+Function=0Fh: ReinitFileSystem
+ Input: STRUCT (BYTE Function) ;
+ Reply: - ok
+
+ (Re-)Initialisiert die Plattendatenstrukturen im RAM und legt ggf. das
+ Root-Verzeichnis an ("ARCHIV"), falls es noch nicht existiert. Daten werden
+ nur, gelöscht wenn sie noch nicht auf die Platte geschrieben wurden (Cache).
+ Diese Funktion ist für Crash-Fälle gedacht.
+
+
+
+
+2.12.   Alarm/Störungs-Behandlung
+
+CMDClearAlarm (0A0h)
+
+Input: STRUCT (BYTE Linien, Unscharf, x1, x2)
+Reply: STRUCT (BYTE CurrentAlarmInputs, LatchedAlarmInputs) ;
+
+Löscht den Alarm auf den in der Bitmaske "Linien" vorgegebenen Alarmlinien.
+Bei der pt-100 sind die Linien 1..4 (Bits 0..3) und bei der pt-200 die Linien
+1..3 (Bits 0..2) vorhanden.
+
+Unscharf ist als Bitmaske zu interpretieren:
+Bit 10
+    0X = Aktuellen Zustand nicht verändern
+    10 = Scharf schalten
+    11 = Unscharf schalten
+
+Falls x1 und x2 (Dummys) vorhanden sind und Linien=0FFh ist, wird die
+Ereignisliste gelöscht. Der Host-Anrufer wird als Urheber der Löschaktion in
+die Ereignisliste neu eingetragen.
+
+
+CMDGetAlarmState (0A4h)
+Fragt den aktuellen Alarmzustand der Box ab:
+Input: BYTE Flags
+Reply: STRUCT (BYTE LatchedAlarmInputs, CurrentAlarmInputs, ControlInfo, InvolvedKameras,
+              {WORD ErrorType, ErrorParam, ErrorPC}) ;
+
+Flags (Bitmaske):
+Bit 0: 1=Automatisch bei Änderung des Alarmzustandes einen Update (ACKGetAlarmState) an den
+         Host senden.
+Bit 1: 0
+Bit 2: 1=Aktuellen Zustand abfragen
+       0=Nur Scharf/Unscharf setzen.
+
+LatchedAlarmInputs entspricht der Anzeige der roten LEDs auf der Frontplatte.
+Der Alarmspeicher muß durch CMDClearAlarm gelöscht werden.
+
+CurrentAlarmInputs zeigt an, ob der Melder an der Linie wieder deaktiviert ist
+(Eingang ohne Speicherfunktion).
+
+ControlInfo (Bitmaske):
+Bit 0: 1=Scharf geschaltet
+Bit 1: 1=Alarm (Relais ist an) liegt vor
+Bit 2: 1=Störung/Fehler liegt an.
+         Die Felder ErrorType, ErrorParam, ErrorPC werden übermittelt.
+
+InvolvedKameras enthält die Bitmaske aller der bei diesem Alarm involvierten
+Kameras. Dies ist eine Oder-Verküpfung des Feldes "Zugerodnete Kameras" aller
+aktiven Alarmlinien.
+
+ErrorType siehe Kapitel 5.
+ErrorParam spezifiziert den Fehlerparameter.
+ErrorPC liefert den Anwendungs-Programm-Counter, an dessen Stelle der Fehler
+auftrat.
+
+ACKGetAlarmState (0E4h) wird dann automatisch gesendet, wenn sich ein Zustand
+auf den Alarmlinien ändert und Bit 0 von Flags gesetzt war. Solange bis die
+Verbindung beendet wird oder ein neues CMDGetAlarmState mit Flags Bit 0=0
+gesendet wird.
+
+
+CMDClearError (0AFh)
+Input: -
+Reply: -
+
+Löscht eine eventuell anliegende Störung/Fehler.
+
+
+ACKError (0FFh)
+
+Reply: STRUCT (WORD ErrorNo, ErrorParam)
+
+Liefert eine Fehlermeldung an den Host. ErrorNo ist im Kapitel 5. beschrieben.
+ErrorParam spezifiziert den Fehlergrund etwas genauer. Typische Fehler sind:
+Kein Videosignal, keine Zugangsberechtigung, Keine Konfigurationsberechtigung,
+Harddiskfehler.
+
+
+2.13.   Ereignis-Liste
+
+CMDGetAlarmHistory (0A5h)
+Hier wird nur das Format ab Version x.21 beschrieben.
+Input: STRUCT (BYTE Function, EventType, FlagMask, SearchTime, SearchDate)
+Reply: STRUCT (BYTE Function, Flags, EventType, WORD ToTime, ToDate,
+               FromTime, FromDate, ARRAY[1..20{max}] BYTE Params) ;
+
+Dieses Kommando liefert eine Liste von Ereignisse (steigend/fallend) nach Zeit
+und Priorität des Beginns eines Ereignisses sortiert. Für alle Funktionen
+gilt: Ist Flags=FF und EventType=FF, dann gibt es keine weiteren passenden
+Ereignisse (das Ende der Liste wurde erreicht). Zur Zeit speichern beide Boxen
+100 Ereignis-Einträge. Bei neuen Ereignissen werden zuerst die ältesten,
+bereits beendeten mit der niedrigsten Priorität verdrängt (gelöscht).
+
+Function s.u.
+
+EventType kann entweder 0FFh sein (liefert alle Ereignisse, EventType ist also
+egal) oder ein bestimmter Type z.B. 10h für ISDN-Anrufe.
+
+FlagMask definiert, ob z.B. nur neue oder aktive Ereignisse übertragen werden
+sollen.
+
+Flags (Bitmaske):
+EFActive                = 0 ; (* Active Flag *)
+EFTransmitted           = 1 ; (* Event transmitted Flag. 0=New Event *)
+EFBCDFlag               = 4 ; (* Parameter is 9 Byte Packed BCD Format *)
+
+SearchTime und SearchDate sind im DOS-Format gepackt. Das "älteste" Ereignis
+wird mit einer Suche EventGetNewer mit SearchTime=0000h und SearchDate=0000h
+geliefert. Das neueste Ereignis mit EventGetOlder und SearchTime=FFFFh und
+SearchDate=FFFF.
+
+Function=06h: EventGetNewer
+ Liefert das nächste Ereignis, das neuer ist als SearchTime/Date.
+
+Function=07h: EventGetNext
+ Liefert das nächste Ereignis, das neuer ist als das letzte übertragene.
+
+Function=08h: EventGetOlder
+ Liefert das nächste Ereignis, das älter ist als SearchTime/Date.
+
+Function=09h: EventGetPrev
+ Liefert das nächste Ereignis, das älter ist als das letzte übertragene.
+
+
+EventType (höchste Priorität zuerst):
+EFDisarmed = 00h ; Unscharf. Keine Parameter
+EFAlarm1   = 01h ; Alarm auf Linie 1. Keine Parameter
+EFAlarm2   = 02h ;
+EFAlarm3   = 03h ;
+EFAlarm4   = 04h ;
+EFError    = 0Eh ; Fehler/Störung.
+                   Parameter: STRUCT (WORD ErrorType, ErrorParams, ErrorPC)
+                   Falls ErrorType=2000h ist wurde die
+                         Ruftaste (0) gedrückt.
+EFPower    = 0Fh ; Reset. Parameter: STRUCT (BYTE CauseForReset,
+                          BYTE PostCode, WORD HLreg, PCreg, DEreg).
+                   CauseForReset:
+                   01h = BOOT (Power off)
+                   02h = STACK (Severe Stackoverflow)
+                   03h = SOFTRESET (Angefordert durch Debug-Tool)
+                   04h = SYSCALL (Angefordert durch Warmstart Host/Menuepunkt)
+                   05h = WATCHDOG (Watchdog 100s abgelaufen oder Reset-Taste
+                                   gedrückt).
+                   Falls PostCode <> 0 ist trat beim Power-On-Self-Test ein
+                   Fehler auf. HLreg, PCreg, DEreg spezifizieren den genauen
+                   Fehlerort/Grund.
+
+EFISDNCall = 10h ; ISDN-Verbindung.
+                   Parameter: STRUCT (ARRAY[0..17]BYTE Rufnummer,BYTE TelType)
+EFExtCall  = 11h ; RS232-Verbindung. Parameter:  ""
+EFAudioCall= 12h ; Audio/Telefonie Verbindung. Parameter: ""
+EFOutput   = 20h ; Remote Makro aufgerufen. Der Parameter enthält die ersten 10
+                   Zeichen des Makro-Namens.
+EFDeleted  = 7Fh ; Eventliste gelöscht durch Anruf von XXX
+                   Parameter: STRUCT (ARRAY[0..17]BYTE Rufnummer,BYTE TelType)
+
+Rufnummer enthält die Vorwahl, so wie sie im ISDN übermittelt wurde, bzw. bei
+Fax-Anrufen die CallerID des sendenden Fax (kann also Space,+,- enthalten).
+
+TelType Bit 0..3 sind wie üblich definiert:
+TelType_ISDN     = 1 ; ISDN-Anruf.
+TelType_Modem    = 2 ; Modem-Anruf per RS232.
+TelType_Aux      = 3 ; Aux-Anruf per RS232.
+TelType_Scall    = 4 ; Scall-Versandt per ISDN/Modem.
+TelType_Voice    = 6 ; Voice-Ansage per ISDN.
+TelType_Fax      = 7 ; Fax-Anruf per Modem.
+TelType_Phone    = 8 ; (* Nur pt-200 *)
+
+Bit 7 von TelType gibt die Richtung des Anrufes an:
+Bit 7=0: Incoming Call. Der Anruf kam vom Telefonnetz an die Box.
+      1: Outgoing Call. Die Box hat den Anruf veranlasst.
+
+
+2.14.   Passwort ändern/prüfen
+
+CMDCheckBoxPassword (0A8h)
+
+Input: STRUCT (TEXT[8] CryptedAccessPassword, TEXT[8] CryptedConfigPassword,
+               WORD HostVersion, HostCapabilities);
+Reply: - oder BYTE MsgWrongXPassword falls eines der Passwörter nicht ok ist.
+
+Dieses Kommando muß vor allen anderen Kommandos einmal nach Aufbau der
+Verbindung gesendet werden, um den Zugang zur Box über die Host-Schnittstelle
+zu authorisieren. Dabei wird zwischen Zugangserlaubnis (Access) und
+Konfigurationserlaubnis getrennt. Die beiden Passwörter sind mit Längenbyte
+angegeben und mit dem Transport-Key verschlüsselt worden (Schlüssel für
+Implementierer auf Anfrage).
+
+Falls das ConfigPassword nicht korrekt ist besteht trotzdem Zugang zur Box,
+bei dem aber alle Konfigurations-Kommandos eine Fehlermeldung produzieren.
+
+Ab GUI-Interface x.20 wird HostVersion und HostCapabilities übergeben.
+Ab Box-Interface x.27 werden diese Parameter überprüft. Dadurch ist es auch
+einer pt-100/200 möglich abwärtskompatibel zu "alten" Anrufern zu reagieren,
+z.B. bei fehlender Dialog-Anzeige für Remote-Makros.
+
+HostVersion HighByte: GUI-Type
+ 1: DOS-Presence
+ 2: pt-200 als Bildempfänger
+
+HostVersion LowByte: Host-Interface Version dezimal
+
+HostCapabilities Bitmask:
+ Bit 0: HCBasic (HDelta64 Dekompression und Standard Remote I/O Support)
+ Bit 1: HCRemoteMakros (Remote Dialoge können angezeigt werden)
+ Bit 2: HCVM422 (VM422 DCT-basierte Dekompression wird unterstützt)
+ Bit 3: HCPhone (Kann G.711 Anrufe über separaten B-Kanal empfangen)
+
+Alle noch nicht definierten Capability Bits werden als 0 gesendet.
+
+
+CMDSetBoxPassword (0A9h)
+
+Input: STRUCT (TEXT[8] CryptedNewAccessPassword,
+               TEXT[8], CryptedNewConfigPassword) ;
+Reply: - oder Fehlermeldung über falsches Config-Password.
+
+Dieses Kommando setzt das Zugangs- und das Konfigurationspasswort neu. Dazu
+ist allerdings eine Konfigurationserlaubnis (und damit auch Zugangserlaubnis)
+notwendig, anderenfalls wird eine Fehlermeldung zurückgesendet.
+
+Die Passwörter werden erst dauerhaft gespeichert, wenn das Kommando
+CMDEEPromWrite gesendet wurde.
+
+
+2.15.   Audio-Konfiguration (Ab 2.26, nur pt-200)
+
+CMDAudioFunction (9Eh)
+
+Input: STRUCT (BYTE Function, STRUCT (...) Params)
+Reply: STRUCT (BYTE Function, BYTE Result, ...)
+
+Function 01h: Set Microphone Volume
+         Input: STRUCT (BYTE Function{01}, BYTE MicSource{, MicVolume}) ;
+         MicSource=0: Select Internal Mic
+         MicSource=1: Select External Mic
+         Falls MicVolume vorhanden ist, wird die Lautstärke des ausgewählten
+         Mikrofons zw. 0 und 13 verändert.
+         Reply: STRUCT (BYTE Function{01}, Result{00}) ;
+
+Function 02h: Set Speaker Volume
+         Input: STRUCT (BYTE Function{02}, BYTE LSVolume{, Mode}) ;
+         LSVolume 0..10 erlaubt.
+         Mode : Bitmask
+         Bit 0: Speaker On
+         Bit 1: Connected Signal (kurzer Beep)
+         Reply: STRUCT (BYTE Function{02}, Result{00})
+
+Function 03h: Beep
+         Input: STRUCT (BYTE Function{03}, Freq, Vol)
+         Vol: 0..9
+         Freq: ?
+
+Function 04h: GetStatus
+         Input: STRUCT (BYTE Function{04}) ;
+         Reply: STRUCT (BYTE Function{04}, Result{00}, InternalMicVol,
+                             ExternalMicVol, LSVol, Status,
+                             InternalMicFilter, ExternalMicFilter, LSFilter)
+         Status: 0=Not connected
+                 1=Internal Mic selected
+                 2=External Mic selected
+
+Function 05h: SetFilter
+         Input: STRUCT (BYTE Function{05}, FilterMap, FilterNo) ;
+         Reply: STRUCT (BYTE Function{05}, Result{00}) ;
+         FilterMap: 0=Filter für Speaker
+                    1=Filter für InternalMic
+                    2=Filter für ExternalMic
+         FilterNo: 0..9 (Frequenzgang siehe graphische Ausdrucke)
+
+
+
+2.16.   Remote-Makro Operationen (Ab x.27)
+
+CMDRemoteObjectFunction (8Bh)
+Input:  STRUCT (BYTE Function {,ARRAY[...] BYTE Params})
+Reply:  STRUCT (BYTE Function, Result {, ARRAY[...] BYTE Params})
+
+Alle Funktionen sind nur bei Konfigurationsberechtigung zugelassen.
+
+Funktion 00h: Init Object Table
+         Input: STRUCT (BYTE Function{00})
+         Verifiziert die korrekte interne Struktur aller Makros und bereinigt
+         nach Batterieausfall eventuelle Fehler in den Datenstrukturen.
+         Reply: STRUCT (BYTE Function{00}, Status{00}, WORD FreeEntries,
+                        MaxEntries)
+
+Funktion 02h: GetFirst
+         Input: STRUCT (BYTE Function{02}, CHAR ObjectType)
+         Liefert das Erste Objekt des gewünschten Typs aus der Remote-Objekt Liste:
+         ObjektType = 'M' : Makro
+         ObjektType = 'T' : Text-Variable ("String")
+         ObjektType = 'W' : Word-Variable (0..65535)
+         ObjektType = 0FFh: Alle Objekte
+         Reply: STRUCT (BYTE Function{02}, Status{00/37h}, CHAR ObjectType,
+                ARRAY[...] CHAR ObjectName, 0,
+                ARRAY[...] CHAR ObjectValue)
+         Status 37h (MsgEndOfList) wird geliefert, wenn keine (weiteren)
+         Einträge dieses Typs existieren.
+         ObjectType enthält den tatsächlich gefundenen Objekt-Typ (M, W, T),
+         ObjectName den 1..12 Zeichen langen ObjektNamen,
+         ObjectValue entweder zwei Bytes (Low, High) für den Word-Wert oder
+         eine Folge von Zeichen bei Makros und Text-Variablen.
+
+Funktion 03h: GetNext
+         Input: STRUCT (BYTE Function{03}, CHAR ObjectType)
+         Liefert das nächste Objekt des Typs aus der Liste der Objekte.
+         Reply: Wie Funktion GetFirst (02)
+
+Funktion 04h: Replace
+         Input: STRUCT (BYTE Function{04}, CHAR ObjectType,
+                        ARRAY[...] CHAR ObjectName,0,ARRAY[...] CHAR NewValue)
+         Reply: STRUCT (BYTE Function{04}, Status{00})
+         Ersetzt (oder erzeugt, falls noch nicht Existent) das Objekt 'Name'
+         mit dem angegebenen Typ ('M', 'W', 'T') und weist ihm den Wert zu.
+         Bei Makros und Texten darf NewValue nicht das 0-Zeichen enthalten, da
+         dies der String-Terminator ist.
+
+Funktion 05h: Remove
+         Input: STRUCT (BYTE Function{05}, CHAR ObjectType,
+                ARRAY[...] ObjectName)
+         Reply: STRUCT (BYTE Function{05}, Status{00}) ;
+         Entfernt das Objekt mit Namen und Typ aus der Objekt-Liste.
+
+
+
+3.      Datenstrukturen
+
+Bis auf das Telefonbuch sind alle Datenstrukturen in der Box statisch und die
+Anzahl der Datensätze von vornherein bekannt (können sich aber zwischen Box-
+Versionen z.B. pt-100/pt-200 unterscheiden). Das Telefonbuch ist nur in seiner
+maximalen Größe (auf z.T. 50 Datensätze) beschränkt.
+
+Der Zugriff auf alle Datenstrukturen kann entweder über ein generisches
+Zugriffs- Interface CMDGetBoxConfig/CMDSetBoxConfig erfolgen (für
+Neuentwicklungen empfohlen) oder über das "etablierte"
+CmdGetXXX/CmdSetXXXInterface.
+
+Da sich die Datenstrukturen weiterentwickeln (die Datensätze werden
+verlängert), ist es sinnvoll, wenn der Host sich die per ACKGetBoxInfo
+gelieferte Interface- Versionsnummer merkt, um nur die Teile der
+Datenstrukturen zu benutzen, die auch implementiert sind. Die generischen
+Zugriffsprozeduren benutzen folgenden Mechanismus: Falls die vom Host an die
+Box übertragenen Daten länger als der Datensatz der Box sind, werden nur bis
+zur Datensatzlänge der Box die Daten übertragen.
+
+
+3.1.    Box-Info
+
+DSBoxInfo = 0 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 0 ;
+TYPE BOXINFOREC   = STRUCT (TEXT[20] Name,
+                            TELTXT Number,
+                            TEXT[8] ConfigPassword,
+                                    Password,
+                            WORD BoxPIN
+                           ) ; { Bis 1.27 }
+TYPE BOXINFOREC   = STRUCT (TEXT[20] Name,
+                            TELTXT Number,
+                            TEXT[15] Model, SerialNo, Dealer) ; { Ab 1.28 }
+
+
+
+Diese Datenstruktur enthält grundsätzliche Identifizierungsvariablen der Box
+und kann vom Host nur gelesen werden (Ausnahme: Fern-Konfigurationsmenue). Der
+Name der Box kann Leerzeichen und die Umlaute enthalten.
+
+Number enthält die Telefonnummer der Box (am besten mit Ländervorwahl) aber
+ohne Amtswahlziffer. Er kann die Zeichen +- enthalten. In den
+Modem-Init-Strings wird der Platzhalter Ö durch diese Nummer ersetzt (z.B. als
+Fax-Kennung).
+
+Bis 1.27:
+Das Config-Password und das Access-Password (kurz Password) werden
+verschlüsselt in der Box gespeichert und für die Übertragung mit einem anderen
+Schlüssel verschlüsselt.  Das Config-Password wird für den Fern-Zugang per
+Terminal-Emulation, das permanente Abspeichern der Parameter durch den Host-PC
+(und einige andere Funktionen) und den Debug-Zugang benötigt. Das
+Access-Password wird vor allen Kommandos überprüft. Das einzige Kommando ohne
+Access-Berechtigung ist CMDCheckBoxPassword. Falls ein leeres Passwort
+eingestellt ist, wird das entsprechende Passwort nicht überprüft.
+
+Die BoxPIN (auch Vor-Ort-Zugang PIN) enthält (verschlüsselt) die Zugangs-PIN,
+die benötigt wird, um die Box über das Tastenfeld zu konfigurieren. Der Wert
+liegt zwischen 0000 und 9999. 0000 (verschlüsselt gespeichert) prüft keine
+Zugangs-PIN.
+
+Ab 1.28:
+Model enthält die Modell-Bezeichnung der Box, die bei der Fertigung ins
+EEPROM eingetragen wurde.
+
+SerialNo enthält die bis zu 15stellige Seriennummer, die bei der Fertigung ins
+EEPROM eingetragen wurde.
+
+Dealer enthält den optionalen Händler-Namen der Box. Hier kann durch ein externes
+Tool der Händlername ins EEPROM eingetragen werden. Voreingestellt ist kein Name.
+
+Der letzten drei Felder werden beim einschalten der Box aus dem EEPROM gelesen
+und können nicht als Bestandteil dieser Datenstruktur überschrieben werden.
+
+
+3.2.    Box-Konfiguration
+
+DSBoxConfig = 1 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 0 ;
+TYPE BOXCONFIGREC = STRUCT (TELTXT AcceptMSN,
+                            ARRAY[0..14] OF BYTE SysConfig,
+                            BYTE MaxConnectTime{min},
+                            BYTE VoiceBanks,
+                            BYTE VideoBanks,
+                            BYTE VideoOffDelay,
+                            WORD AllowedTelTypes,
+                            BYTE SleepTime, Config,
+                            TEXT[8] PollID,  { Bis 1.27 }
+                                    VoicePIN { Bis 1.27 }
+                           ) ;
+
+
+
+Die Box-Konfiguration legt einige grundlegende Konfigurationsdaten für die Box
+fest: AcceptMSN enthält die 1-stellige EAZ bzw. i.d.R. bis zu 8-stellige MSN
+der Box (ohne Vorwahl).
+
+Das Sys-Config Array legt die System-Konfiguration für einige kritische oder
+sensible Systemparameter fest. Zur Zeit werden mit SysConfig[0] und
+SysConfig[1] die Waitstates für die verschiedenen Memory- und I/O-Bereiche
+festgelegt. Die anderen SysConfig-Einträge sind zur Zeit unbenutzt.
+
+MaxConnectTime gibt (in Minuten) die maximale Verbindungsdauer zum Host an
+(gilt für Modem- und ISDN-Verbindungen). Bei einem Wert von 255 wird die
+Verbindung nicht durch die Box beendet.
+
+VoiceBanks (Bitmaske) legt die für Ansagetexte benutzbaren Speicherbanks fest.
+Dabei entspricht jedes nicht(!) gesetzte Bit einer 128k Bank. Die Bitmaske
+wird ausserdem mit der installierten Speichergröße (Maske) verknüft, so daß
+nur tatsächlich vorhandene Speicherbanks genutzt werden können. Bei der pt-200
+stehen alle 8 Banks zur Verfügung, wobei die Bank 3 nur 64k groß ist. Bei der
+pt-100 steht nur die Bank 3 mit 64k Größe zur Verfügung.
+
+VideoBanks (Bitmaske) legt die für Offline-Bildspeicherung (Vorlauf- oder
+Alarm- Bildspeicher) benutzbaren Speicherbanks fest. Dabei entspricht jedes
+nicht(!) gesetzte Bit einer 128k Bank. Die Bitmaske wird ausserdem mit der
+installierten Speichergröße (Maske) verknüft, so daß nur tatsächlich
+vorhandene Speicherbanks genutzt werden können. Bei der pt-200 stehen alle 8
+Banks zur Verfügung, wobei die Bank 3 nur 64k groß ist. Bei der pt-100 wird
+diese Variable nicht genutzt und der gesamte installierte Speicherbereich über
+128k wird für Bildspeicher genutzt.
+
+VideoOffDelay (in Sekunden) legt die Zeit fest, bis zur Abschaltung des Video-
+Systems nach der letzten Benutztung. Dadurch wird die Stromaufnahme und
+Verlustleistung reduziert. Während einer Online-Verbindung zum Host und
+während der Vorlaufbildspeicherung mit kurzen Intervallen wird das Videosystem
+nicht abgeschaltet. Ist dieser Wert auf 0 gesetzt, dann wird das Videosystem
+nicht abgeschaltet. Eingeschaltet wird das Videosystem innerhalb von einer
+knappen Sekunde, bis das Videosignal der zuletzt aktiven Kamera sich wieder
+stabilisiert hat.
+
+AllowedTelTypes gibt als Bitmaske die mit der aktuellen Box-Peripherie (Modem,
+ISDN) möglichen Alarmierungs-Typen an. Dieser Wert ist "Read-Only" und wird
+während der Box-Initialisierungsphase ermittelt. Zum Beispiel ist eine
+Print-Aktion nur bei freigegebem Drucker erlaubt und eine Modem/Aux/Fax
+Alarmierung nur bei angeschlossenem externen Modem.
+
+SleepTime gibt in Sekunden die Zeit bis zur Abschaltung des LCDs an. Dadurch
+erscheint die Box nach außen "nicht in Betrieb". Dieser Zustand reduziert ein
+wenig die Stromaufnahme. Ist SleepTime auf 255 gesetzt (Default), wird das
+Display nicht abgeschaltet.
+
+Config (Bitmaske) enthält einige "Sonstige" Konfigurationsbits:
+
+BConfOutConnect  = 0
+     Falls gesetzt wird der "Licht"-Ausgang (pt-100: Hilfsausgang, pt-200:
+     OUT1 (von 0..2)) bei Online-Zustand zum Host gesetzt und anderenfalls
+     abgeschaltet. Damit lässt sich eine Beleuchtung des Raumes nur bei
+     Verbindung durchführen.
+
+BConfPrinterProt = 1
+     Printer-Protokolle freigeben, falls Drucker am Parallelport betrieben
+     wird. Das Printer-Protokoll enthält Alarme und sonstige Ereignisse.
+
+BConfRejectDCD   = 2
+     ISDN-Ruf aktiv ablehnen, falls Modem-Verbindung besteht. Anderenfalls
+     würde der per ISDN anrufende Host nicht erkennen, ob die Box "BUSY" oder
+     nicht anwählbar ist.
+
+BConfVideoOutActive = 3
+     Dieses Bit signalisiert den betrieb mit einem externen Monitor an
+     Video-Out. Darauf kann das lokale Bild einer Kamera bzw. der Inhalt des
+     RAM-Bildspeichers betrachtet werden. Ausserdem wird der Video-Teil nicht
+     abgeschaltet.
+
+BConfMonitorMenue = 4
+     Das Konfigurations-Menue und die Statusmeldungen der Box werden nicht
+     über das eingebaute LCD sondern über den externen Monitor (VideoOut)
+     ausgegeben.
+
+
+PollID ist die für Fax-Polling verwendete ID, die mit der übermittelten
+Fax-Poll ID übereinstimmen muß. Dies kann z.B. die Rufnummer des Anrufers
+sein. Der Platzhalter ß wird in den Modem-Initstrings durch diese PollID
+ersetzt. Falls die PollID leer ist, wird die Fax-PollID nicht überprüft.
+
+VoicePIN (auch DTMF-Config-Pin) ist eine bis zu achtstellige PIN, die beim
+Zugang zum Voice-Modus abgefragt wird. Die Länge der korrekt eingebenen
+Pin-Ziffern der VoicePIN legen die Zugriffsrechte auf die Box fest (2 Ziffern,
+4 Ziffern, >=6Ziffern). Falls die VoicePIN leer ist, wird der
+DTMF-Konfigurationszugang nicht überprüft.
+
+
+
+3.3.    Alarm-Aktionen
+
+DSAlarmactions = 8 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 1 ;
+MaxEntry = 9 ;
+TYPE ACTIONREC    = STRUCT (TELTXT Nr,
+                            BYTE Type,
+                                 Fail,
+                                 RetryDelay,
+                            WORD FromTime,
+                                 ToTime,
+                            TEXT[20] Params
+                           ) ;
+Nr enthält die "Telefonnumer", durch die der Buchstabe Ü im entsprechenden
+Anwahlstring (z.B. ATDÜ) ersetzt wird.
+
+Type enthält in den Bits 0..3 eine der folgenden Aktionen, die bei der Anwahl
+ausgeführt werden sollen:
+
+TelType_Unused   = 0  Keine Aktion ausführen. Immer "erfolglos".
+
+TelType_ISDN     = 1  Per eingebautem ISDNTA wählen und Bilder übertragen.
+                      Erfolg bei "CONNECT".
+
+TelType_Modem    = 2  Per externem Modem wählen und Bilder übertragen. Erfolg
+                      bei "CONNECT".
+
+TelType_Aux      = 3  Per externem Modem wählen. Erfolgt bei "CONNECT".
+
+TelType_Scall    = 4  Falls eingebauter ISDNTA am ISDN genutzt wird, per
+                      Voice-Funktion mit Scall-Delay die Rufnummer anwählen
+                      und per DTMF die eigene Rufnummer und Infos übertragen.
+                      Falls nur externes Modem genutzt wird, mittels Pulswahl
+                      wählen und durch den Scall-Wählstring per DTMF-Wahl den
+                      Scall absetzten.
+
+TelType_Makro    = 5  Remote-Makro Aufrufen. Wahl-Parameter enthält den
+                      Makronamen.
+
+TelType_Voice    = 6  Aufgesprochenen Ansagetext aus einem Voice-Slot
+                      abspielen.
+
+TelType_Fax      = 7  Mit einem externen Fax-Class 2-Modem Bilder und/oder
+                      Alarmliste an ein Faxgerät senden.
+
+TelType_Phone    = 8  (* Nur pt-200 *) Telefon-Anruf/Raumhören
+
+
+Type:
+
+Ist Bit 7 von Type gesetzt, wird der Alarm bei einer erfolgreichen Verbindung
+automatisch gelöscht, ohne daß eine Benutzer-Aktion erforderlich ist. Ist Bit
+6 von Type gesetzt, wird auf bei erfolgreicher Anwahl noch die Folgefunktion
+ausgeführt.
+
+Die Bits 0..3 von Fail geben die Nummer der Folgefunktion an (z.B. falls
+letzte Aktion erfolglos war). Bits 0..3=0000 bedeutet: Keine Folgefunktion.
+
+Die Bits 4..7 geben an, wieviele Wiederhol-Versuche bei einer erfolglosen
+Anwahl mit dieser Aktion durchgeführt werden. 0=Keine Wiederholung..9=9
+Widerholungen.
+
+RetryDelay gibt die Zeit zwischen zwei Wiederholversuchen in 10s Schritten an.
+Ein Wert von 0 wird sobald möglich (i.d.R. 1s) wiederholen, ein Wert von 255
+nach 42.5Stunden. Zwischen den Wiederholungen dieser Aktion führt die Box
+keine Folgefunktionen aus!
+
+FromTime..ToTime legen das Zeitfenster für die Gültigkeit dieser Alarmaktion
+fest.
+
+Die Bits 15..13 definieren den Wochentag (000=So,001=Mo,...,006=Sa).
+    Es darf durchaus FromTime > ToTime sein (in den Wochentags/Uhrzeitfeldern
+    getrennt).
+Die Bits 12..8 definieren die Stunde (binär 00h..17h=0h..23h)
+Die Bits 7..0 definierten die Minute (BCD(!) 00h..59h=0min..59min).
+
+Params enthalten die Alarmparameter (-Zeichen), die bei der Anwahl übergeben
+werden. Z.B. Wahl-Timeout, Wahl-Verzögerung, Ansage-Slot, Fax-Kameras etc.
+
+
+3.4.    Alarm-Linien
+
+DSAlarmlines = 9 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 4 ; { 4 für pt-100, 3 für pt-200 }
+TYPE ALARMLINEREC = STRUCT (BYTE Kameras,
+                                 TriesNAction,
+                                 Flags,
+                            TEXT[12] Name,
+                            DWORD AutoClearTime
+                           ) ;
+
+Definiert die Konfiguration für die Alarm-Linien.
+
+Kameras ist eine Bitmaske (Bits 0..2 genutzt), in der die dieser Alarmlinie
+zugeordneten Kameras definiert sind. Diese Information wird für das
+"Alarmbild" bei Eintreffen eines neuen Alarms und für die Nachlauf-
+Bildspeicherung benötigt.
+
+Von TriesNAction werden z.Zt. nur die Bits 0..3 mit der ersten zugewiesenen
+Alarm-Aktion benutzt. Die Bits 4..7 sind 0. Die gültigen Werte sind 0..9: 0
+löscht sofort nach Erkennen des Alarms den Zustand alle anderen Werte rufen
+die Alarm-Aktion (1..9) auf.
+
+Flags (Bitmaske) definiert zur Zeit nur die Polarität der Alarmeingänge:
+
+Bit 7..2=0
+Bit 1: 1 = Falls Alarmlinie aktiviert ist.
+       0 = Falls kein Alarm auf dieser Linie gemeldet werden soll.
+Bit 0: 0 = Alarm bei unterbrochener Schleife (NC)
+       1 = Alarm bei Verbindung (NO)
+
+Name gibt die Position des Melders bzw. den Namen der Alarmlinie an.
+
+AutoClearTime gibt in ms an, nach welcher Zeit der Alarm automatisch von der
+Box gelöscht werden soll. Falls AutoClearTime=0 ist, wird der Alarm nicht auf
+diese Weise automatisch gelöscht.
+
+
+
+3.5.    Kamera-Konfiguration
+
+DSCameras = 16 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 2 ;
+
+TYPE CAMERAPARAMS = STRUCT (
+     WORD XSize, YSize,
+     BYTE ColorSaturation, { Nur Farbversion. S/W-Version: Quantization }
+     BYTE MaxGrey,
+     BYTE Contrast,        { Nur Farbversion. S/W-Version: MinLevel }
+     BYTE Brightness,      { Nur Farbversion. S/W-Version: MaxLevel }
+     BYTE Sensitivity, Threshold, Control, Control2,
+     WORD DCTyq12,         { Nur Farb-Version }
+     WORD DCTuvq12,        { Nur Farb-Version }
+     WORD DestOfs, BYTE DestPage, DestPages,
+     BYTE DCTyq0,          { Nur Farb-Version }
+     BYTE DCTuvq0,         { Nur Farb-Version }
+     BYTE YSensitivity,    { Nur Farb-Version }
+     BYTE UVSensitivity,   { Nur Farb-Version }
+     WORD FirstLine,
+     WORD FirstColumn,
+     QWORD Reserved3,
+     TEXT[20] Location,
+     BYTE IntraframeSeconds,
+     DWORD AutoGrabTime,
+     BYTE GrabFlags,
+     DWORD PostAlarmRecordTime,
+     WORD FromTime, ToTime
+    ) ;
+
+Mit S/W-Version ist die Framegrabber Version 0 gemeint, mit Farbversion, die
+Framegrabber- Version 1.
+
+Einige Felder sind reserviert und sollten aus Gründen der Abwärts- und
+Aufwärtskompatibilität nicht verändert werden. Die Initialisierung auf
+sinnvolle Werte wird bei der Erstintialisierung des EEPROMs in der Box
+durchgeführt. Erweiterungen werden nach Möglichkeit am Ende der Datenstruktur
+vorgenommen.
+
+XSize/YSize gibt in Pixeln die Breite und Höhe des übertragenen
+Bildes/Bildausschnittes an. Im DCT-Basierten Modus sind nur die Werte 192x144
+und 384x288 Pixel zulässig. Alle anderen werden auf diese Größen abgebildet.
+
+Colorsaturation gibt als Wert zwischen 0..255 (Default: 128) gibt die
+Farbsättigung an (nur Farbframegrabber):
+  0: 0.000 Schwarz/Weiß.
+128: 1.000 Normal
+255: 1.999
+(Bit 0 wird ignoriert, d.h. nur in 2er Stufen einstellbar).
+
+Contrast (Default 140) gibt des Helligkeitskontrast an (nur Farbframegrabber):
+0:   0.0 Schwarz.
+128: 1.0
+140: CCIR-Level Kontrast
+255: 1.99 Kontrast (stark)
+
+Brightness (Default 139) gibt die Helligkeit an (nur Farbframegrabber):
+0:   Dunkel
+128: Normal
+139: CCIR Level
+255: Hell
+
+Quantization gibt für den Schwarz/Weiß Framegrabber die Gamma-Korrektur an:
+--> C=0: No Quantization
+
+--> C=1: Fast linear Quantization 2 (MaxGrey = 63)
+
+    f(x,y) <= 58h: F(x,y) = 0
+    f(x,y) >= D8h: F(x,y) = MaxGrey
+    58h<f(x,y)<D8h: F(x,y) = (f(x,y)-58h)/2
+
+--> C=2: Fast linear Quantization 3 (MaxGrey = 63)
+
+    f(x,y) <  40h: F(x,y) = 0
+    f(x,y) >= 40h: F(x,y) = (f(x,y)-40h)/3
+
+
+--> C=4: Linear Quantization (Gammakorr = 1.0)          ++++
+                                                       +
+               (f(x,y)-MinLevel)                      +
+    F(x,y) = --------------------- * (MaxGrey+1)     +
+              MaxLevel-MinLevel+1                   +
+                                                ++++               +++++
+                                                                +
+--> C=8: Nonlinear Quantization (Gammakorr = 0.5)             +
+                  ______________________                     +
+                 /   f(x,y)-MinLevel    |                   +
+    F(x,y) = \  / ---------------------   * (MaxGrey+1)     +
+              \/   MaxLevel-Minlevel+1                  ++++           +
+                                                                       +
+--> C=9: Quadratic Quantization (Gammakorr = 2.0)                      +
+                                                                      +
+                 (f(x,y)-MinLevel)^2                                 +
+    F(x,y) =   -------------------------  * (MaxGrey+1)            ++
+                (MaxLevel-Minlevel+1)^2                         +++
+                                                          ++++++
+
+--> C=16: Non linear Quantization (Table)
+                                    +++++++
+                                 +++
+                               ++
+                              +
+                             +
+                            +
+                          ++
+                       +++
+                +++++++
+
+MinLevel/MaxLevel: Gibt bei adaptiver Gammakorrektur (Quantization=4,8,9) den
+Basis- und Limit-Helligkeitspegel für die Adaption vor (Maximale Dynamik wird
+durch MinLevel=40h und MaxLevel=0FFh erzielt). Die Framegrabbing-Routinen
+berechnen auf Wunsch durch eine Histogramm-Analyse die Level aus den letzten
+Bilddaten. Für die nicht-Adaptiven Quantisierungen sind MinLevel/MaxLevel ohne
+Belang.
+
+Sensitivity (auch Änderungen/64erBlock): Für das nicht DCT-basierte
+Kompressionsverfahren HDelta64 wird durch diese Variable die Anzahl der zu
+verändernderten Pixel gegenüber dem letzten Differenzbildblock mit der
+gleichen Blocknummer vorgeben, bevor dieser 64-Pixel Block als verändert (und
+damit zu Übertragen) angesehen wird. Für ein Bild mit mehr als 240 Zeilen
+sollte ein Wert von 3 eingestellt sein, für ein Bild mit mehr als 120 Zeilen,
+sollte ein Wert von 2 eingestellt sein, ansonsten 1.
+
+Threshold (auch Grauwert-Abweichung/Pixel): Für das nicht DCT-basierte
+Kompressionsverfahren HDelta64 wird durch diese Variable die Änderung der
+aktuellen Pixel-Helligkeit gegenüber der Helligkeit des Pixels an gleicher
+Stelle im letzten Bild vorgegeben, bevor dieses Pixel als verändert (siehe
+Sensitivity) angesehen wird. Für mehr als 32 Graustufen sollte ein Wert von 3
+eingestellt werden, für mehr als 16 Graustufen ein Wert von 2 andernfalls 1.
+
+Control (Bitmaske):
+
+BCTAdjust       =  0  Automatische Kontrastanpassung (siehe Quantization). Nur
+                      bei Framegrabber Version 0 berücksichtigt.
+
+BCTRate         =  1  Picture Scan Rate: 0=Normal. 1=Fast.
+                      In Kombination mit der Bildgröße wird beim HDelta64
+                      Kompressions verfahren festgelegt, ob Oversampling in
+                      horizontaler Richtung eingeschaltet werden soll.
+
+                      XSize>=352: BCTRate wird ignoriert.
+                                  Immer ohne Oversampling.
+                      XSize>=176: 1-faches Oversampling ist eingeschaltet,
+                                  wenn BCTRate=0, sonst ohne Oversampling.
+                      XSize>=88: 2-faches Oversampling falls BCTRate=0,
+                                 1-faches Oversampling falls BCTRate=1.
+                      Default: Dieses Bit ist gesetzt.
+
+BCTSmooth       =  2  Single Pixel Remove für HDelta64 Kompressionsverfahren.
+                      Falls dieses Bit gesetzt ist, werden alle "Ausreißer"
+                      Helligkeiten zwischen zwei ansonsten gleichen
+                      Helligkeits- Pixeln (in horizontaler Richtung) entfernt.
+                      Dadurch kann das Bild besser komprimiert werden, ohne
+                      daß die Bildqualität sichtbar leidet. Default: Dieses
+                      Bit ist gesetzt.
+
+BCTNoSkip       =  5  Dont Skip Picture Data (FirstLines, FirstColumns).
+                      Muß 0 sein.
+
+BCTNoSigCheck   =  6  Don't Check for Valid Videosignal before Grab.
+                      Muß 0 sein.
+
+BCTNoXYCalc     =  7  Dont calculate Xsize/Ysize. Muß 0 sein.
+
+
+Control2 (Bitmaske):
+BCTdct2         =  0  1: DCT-basierte Kompression eingeschaltet.
+BCTsvhs3        =  3  1: Kamera 3 nutzt den SVHS Eingang (nur pt-200).
+
+MaxGrey definiert die Zahl der Graustufen, die nach der Codierung noch
+übertragen werden:
+MaxGrey=7 ist nur für den Version 0 Framegrabber erlaubt: 8 Graustufen.
+MaxGrey=15 -> 16 Graustufen
+MaxGrey=31 -> 32 Graustufen
+MaxGrey=63 -> 64 Graustufen
+MaxGrey=64+31 -> Farbe mit 32 Helligkeitsstufen (nur mit Farbframegrabber)
+
+DCTyq0,DCTyq12 DCT-Quantisierungsmatrix Luminanz (Y) Koeffizienten Q0, Q1, Q2
+
+DCTuvq0, DCTuvq12 DCT-Quantisierungsmatrix Chrominanz (U/V) Koeffizienten Q0,
+            Q1, Q2 Die im Frequenzbereich stattfindende Quantisierung der AC
+            Koeffizienten der Diskreten Cosinus-Transformation wird über
+            Multiplikation der AC-Koeffizientenmatrix mit der
+            Quantisierungsmatrix durchgeführt. Die Koeefizienten der im
+            Zick-Zack (wie ISO11172) gelesenen Quantisierungsmatrix sind von
+            0..63 numeriert. Dabei ist 0 der DC Koeefizient, der mit 1
+            multipliziert wird, die Koeffizienten 1..14 (niedrige Frequenzen)
+            werden mit Q0 multipliziert, die mittleren Frequenzen
+            (Koeffizienten 15..42) werden mit Q1 multipliziert und die hohen
+            Frequenzen (Koeffizienten 43..63) werden mit Q2 multipliziert.
+
+            Da für die Helligkeits- und die Farbinformation verschiedene
+            Quantisierungsmatrizen verwendet werden, gibt es auch
+            unterschiedliche Variablen für die Multiplikatoren. Typische Werte
+            für verlustbehaftete Kompression sind Q0=1, Q1=1 und Q2=3 für Y
+            und U/V Multiplikatoren. Je höher der Wert, desto höher ist die
+            Unterdrückung der hohen Frequenzen, also desto gröber Aufgelöst
+            erscheint das Bild. Der Wertebereich der Multiplikatoren liegt bei
+            1..128.
+
+DestOfs, DestPage, DestPages werden zur Zeit nicht verwendet könnten in
+            Zukunft aber für die Spezifikation von verschiedenen
+            Referenzbildspeichern pro Kamera verwendet werden.
+
+YSensitivity, UVSensitivity (nur bei DCT-basiertem Kompressionsverfahren
+            benutzt) legen die Abweichung des DC-Koeffizienten des
+            quantisierten Blockes vom letzten Referenzbild fest, bevor dieser
+            Block als verändert erkannt und damit übertragen wird.
+
+FirstLine  gibt in den HDelta64 basierten Verfahren den Y-Offset des
+           komprimierten Bildausschnittes vom oberen Bildrand an.
+
+FirstColumn gibt in den HDelta64 basierten Verfahren den X-Offset des
+           komprimierten Bildausschnittes von linken Bildrand an.
+
+Reserved3  sollte 0 sein
+
+Location   beschreibt den Ort der Kamera.
+
+IntraframeSeconds legt die Anzahl der Sekunden zwischen zwei
+           Vollbild-Übertragungen fest (Default 60s). Falls IntraFrameeconds =
+           255, wird kein Vollbild automatisch angefordert (nur vom Host).
+
+AutoGrabTime legt in 100us Schritten die Zeit zwischen zwei automatisch
+           aufgezeichneten Bildern dieser Kamera fest. Falls
+           AutograbTime=FFFFFFFF ist, wird nicht automatisch aufgezeichnet.
+
+GrabFlags (Bitmaske):
+Bit 0 = 0: Aufzeichnung der Bilder auf Harddisk.
+      = 1: Aufzeichnung der Bilder ins RAM.
+
+PostAlarmRecordTime legt die Bildaufzeichnungs-Nachlaufzeit nach einem Alarm
+           auf einer Linie mit dieser Kamera als zugeordneter Kamera fest.
+           Nach dem Alarm auf der Linie wird der Nachlauf-Timer erneut
+           gestartet um die Bildaufzeichnung erneut zu starten. Die Auflösung
+           beträgt 100us. Falls PostAlarmRecordTime=0 ist, wird die
+           Bildaufzeichnung nach dem Alarm nicht angehalten (falls sie
+           überhaupt aktiv ist).
+
+FromTime, ToTime legen das Zeitfenster fest, in der auf dieser Kamera
+           automatisch aufgezeichnet werden soll.
+           Die Bits 15..13 definieren den Wochentag
+           (000=So,001=Mo,...,006=Sa). Es darf durchaus FromTime > ToTime sein
+           (in den Wochentags/Uhrzeitfeldern getrennt).
+           Die Bits 12..8 definieren die Stunde (binär 00h..17h=0h..23h). Die
+           Bits 7..0 definierten die Minute (BCD(!) 00h..59h=0min..59min).
+
+
+3.6.    Kamera-Status
+
+DSCameraState = 17 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 2 ;
+TYPE CAMERASTATE  = STRUCT (BOOL Active,
+                            BYTE Flags,
+                            WORD Reserved,
+                            DWORD IntraframeTimer,
+                                  AutoGrabTimer,
+                                  PostAlarmRecordTimer
+                           ) ;
+
+Diese Datenstruktur spiegelt den aktuellen Zustand der Videoquellen wieder.
+Sie wird nicht aus dem EEPROM geladen, sondern zur Laufzeit angelegt und
+verwaltet.
+
+Active enthält  0FFh (TRUE), falls die Kamera angeschlossen ist und ein
+gültiges Videosignal entdeckt wurde.
+
+Flags (Bitmaske):
+Bit 0: 1=Automatische Bildaufzeichnung (wg.Alarm) angehalten
+Bit 1: -
+Bit 2: 1=Color Signal, 0=B/W Signal
+Bit 3: 1=PAL Color Signal, 0=SECAM o.NTSC
+Bit 7..4: Framegrabber Version
+       0000/1111 = Framegrabber ohne DCT-Support und ohne Farbe
+       0001 = VM422 Framegrabber mit Farbe & DCT-Support
+Reserved: Z.Zt. 0000h
+
+Die folgenden Variablen werden vom System gesetzt und nicht durch den Host
+verändert:
+
+IntraframeTimer gibt die Systemzeit an, nach der ein neues Vollbild
+       angefordert werden muß (100us Schritte). 0 bedeutet, Intraframe-
+       Timeout inaktiv.
+
+AutoGrabTimer gibt die Systemzeit an, nach der ein neues Bild von dieser
+       Kamera gespeichert werden soll (100us Schritte).
+       0 bedeutet, daß die automatische Bildaufzeichnung deaktiviert ist.
+
+PostAlarmRecordTimer gibt die Systemzeit an, nach der die automatische
+       Bildaufzeichnung angehalten werden soll, da ein Alarm auftrat.
+       Dabei wird Bit 0 von "Flags" gesetzt.
+       0 bedeutet, die automatische Bildaufzeichung wird nach einem Alarm
+       nicht angehalten.
+
+
+3.7.    Modem-Konfiguration
+
+
+DSModemInitString = 24 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 9 ;
+TYPE MODEMINITSTRING = LCDTXT ;
+
+Zur Zeit benutzte Modem Init Strings:
+MIInit1          = 0 ; Wird beim Einschalten ans Modem geschickt
+MIInit2          = 1 ; "
+MIInit3          = 2 ; " und beim Verlassen des Fax-Modus.
+MIInitVIDEOTA    = 3 ; Wird beim Einschalten an den eingebauten
+                       ISDN-Terminaladapter geschickt.
+MIAnswer         = 4 ; Wird zur Rufannahme nach RING ans Modem geschickt.
+MIPreVIDEOTA     = 5 ; Wird zum Wählen an den eingebauten ISDN-TA geschickt.
+MIPreModem       = 6 ; Wird zum Wählen an das externe Modem geschickt.
+MIPreAux         = 7 ; Wird zum Wählen bei AUX ans externe Modem geschickt.
+MIPreFax         = 8 ; Wird zum Wählen für Fax-Modus ans externe Modem
+                       geschickt.
+MIPreScall       = 9 ; Wird zum versenden eines Scalls ans externe Modem
+                       geschickt.
+
+Einige Zeichen im Modem-Initstring sind Platzhalter (Variablen) für folgende
+in der Box eingestellte Zugangsdaten:
+Ä = MSN/EAZ. Z.B. in AT\EÄ für das Elink 310.
+Ö = BoxNumber. Eigene Rufnummer. Kann die Zeichen -+ enthalten. Z.B.f.Fax-ID.
+Ü = DestinationNumber. Rufnummer die angewählt werden soll (z.B. in ATDÜ)
+ß = Fax-PollID. I.d.R. die Abruf-PIN bei den Faxgeräten, die für den Abruf
+    überprüft wird.
+
+DSModemConfig = 25 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 0 ;
+TYPE MODEMCONFIGREC=STRUCT (BYTE SIOUsage,
+                                 PPUsage,
+                                 ScallDelay,
+                            DWORD Baudrate,
+                            BYTE VoiceMode) ;
+
+SIOUsage (Byte-Werte): Nutzung der RS232/SIO/V.24
+SIO_Nullmodem    = 00h ; Nullmodem an RS232 verwenden
+SIO_ModemAT      = 01h ; AT-Modem an RS232
+SIO_ModemNoAT    = 02h ; Modem ohne AT-Prefix an RS232
+SIO_Notused      = 07h ; RS232 nicht verwendet
+SIO_RemoteIO     = 08h ; RS232 für Remote-I/O verwendet.
+
+PPUsage (Bits): Parallelport Nutzung
+BPP_RemoteIO     = 0 ;   Gesetzt, falls Remote-I/O am Parallelport erlaubt
+BPP_Printer      = 1 ;   "    , falls Printer-Ausgaben am Parallelport erlaubt
+BPP_Harddisk     = 2 ;   "    , falls Harddisk am Parallelport angeschlossen.
+
+ScallDelay (1..255):
+Zeit in Sekunden, die im ISDN zwischen der ersten Gebühreneinheit
+(CONNECT-Meldung) und der Bereitschaft für die Eingabe von DTMF-Zeichen
+für die SCALL-Meldung abgewartet werden muß.
+
+Baudrate(1..1250000) :
+Baudrate, die für die RS232 Schnittstelle verwendet wird. Die Box versucht,
+den gewünschten Wert so nah wie möglich einzustellen. 1250000/Baudrate sollte
+möglich nah an einer natürliche Zahl liegen, um den Fehler gering zu halten.
+Der prozentuale Fehler berechnet sich zu:
+((1250000 DIV (1250000 DIV Baudrate)) DIV Baudrate-1)*100
+(DIV = Ganzzahldivsion)
+
+VoiceMode (Byte-Werte): Sprachansage Behandlung
+VoiceOff         = 00h ; Keine Annahme von Sprachanrufen über die Box MSN/EAZ
+VoiceRecord      = 02h ; Aufzeichnen des nächsten Anrufes mit 8kHz Qualität
+VoiceRecordLow   = 03h ; Aufzeichnen des nächsten Anrufes mit 4kHz Qualität
+VoicePlay        = 04h ; Sprachansage (Slot 0) abspielen und auf DTMF warten.
+VoicePlayDelayed = 05h ; Sprachansage (Slot 0) nach 2 Klingelzeichen abspielen
+                         und auf DTMF warten.
+VoiceAccept      = 06h ; Ruf annehmen, keine Sprachansage abspielen aber auf
+                         DTMF warten.
+
+
+3.8.    Audiokanal-Konfiguration
+
+DSAudioConfig = 26 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry = 0 ;
+MaxEntry = 0 ;
+TYPE AUDIOCONFREC = STRUCT (BYTE MaxConnectTime { Min},
+                                 RingerVolume,
+                                 InternalMicVolume,
+                                 ExternalMicVolume,
+                                 LSVolume,
+                            TELTXT AudioMSN,
+                            ARRAY[1..3] ACCEPTREC Accept,
+                            TEXT[8] DialPrefix
+                           ),
+     ACCEPTREC   = STRUCT (TELTXT Number, WORD FromTime, ToTime, BYTE Config) ;
+
+Diese Datenstruktur, die nur in der pt-200 Box (mit Telefonie-Unterstützung)
+vorhanden ist, konfiguriert den Audio-Kanal der Box.
+
+
+InternalMicVolume, ExternalMicVolume: Bit 0..3: Volume, Bit 4..7: Filter (0..9 s.u.)
+             Wert zwischen 0 und 13 gibt die Mikrofonverstärkung des
+             ausgewählten Mikrofons an:
+              0 MUTE, -ìdB
+              1  0dB, 0dB   = 0dB
+              2  0dB, 3dB   = 3dB
+              3  0dB, 6dB   = 6dB
+              4  0dB, 9dB   = 9dB
+              5  0dB,12dB   =12dB
+              6  6dB, 9dB   =15dB
+              7  6dB,12dB   =18dB
+              8 12dB, 9dB   =21dB
+              9 12dB,12dB   =24dB
+             10 18dB, 9dB   =27dB
+             11 18dB,12dB   =30dB
+             12 24dB, 9dB   =33dB
+             13 24dB,12dB   =36dB
+
+LSVolume: Bit 0..3 Volume, Bit 4..7 Filter (0..9 s.u.)
+          Wert zwischen 0 und 10 gibt die Lautsprecherverstärkung an:
+             0  -ìdB
+             1  -9dB
+             2  -6dB
+             3  -3dB
+             4   0dB
+             5   3dB
+             6   6dB
+             7   9dB
+             8  12dB
+             9  15dB
+             10 18dB
+
+AudioMSN: Ist die EAZ/MSN für Audioanrufe. Typische Länge 1-8 Zeichen. Sollte
+          verschieden von der Box-MSN sein, da Anrufe mit der Dienstkennung
+          Sprache o. 3,1kHz Audio sonst evtl. der Sprachansage (über die
+          Box-MSN) zugewiesen werden.
+
+Accept:   Bis zu drei Rufnummerspezifikationen für Ankommende Rufnummern, mit
+          denen die Annahme von Audio-Anrufen auf bestimmte Anrufer und Uhrzeiten
+          beschränkt werden kann. Dies ist notwendig, da es bei Telefonie keine
+          "Inband-Autorisierung" für das Raumhören gibt.
+
+Accept.Config (BitMaske): Verschiedene Einstellungen für die Rufannahme:
+                  Bit
+BALoudspeakerOn  = 0 1: Externer Lautsprecher wird bei Rufannahme
+                        eingeschaltet, damit Kommunikation in beide Richtung
+                        stattfinden kann.
+
+BAConnectedSignal= 1 1: Ein kurzer Signalton aus dem Lautsprecher der Box
+                        alle 5s (ca.) erinnert daran, daß gerade Raumhören
+                        aktiv ist.
+
+BAInternalMicro  = 2 1: Das eingebaute Elektret-Mikrofon wird für die
+                        Kommunikation bei der Rufannahme verwendet.
+                     0: Die externe Tonquelle wird für die Kommunikation
+                        verwendet.
+
+BAAutoAccept     = 3 1: Ankommende Rufe auf der AudioMSN von zugelassenen
+                        Anrufern werden automatisch angenommen.
+                     0: Zur Rufannahme muß eine Taste auf der Tastatur
+                        gedrückt werden. Zuvor klingelt der Lautsprecher.
+
+Accept.Number:
+          Das Wildcard * ist am Anfang, am Ende und in der Mitte der Rufnummer erlaubt,
+          darf aber maximal einmal in der Rufnummern- Spezifikation auftauchen
+          (Ausnahme: **2 **3 etc. um Rufe von 2- oder 3- stelligen Anrufern entgegenzunehmen)
+          Sollen also nur Anrufe aus der Firma mit der Zentralrufnummer 02508-9820-x
+          angenommen werden, wird als Accept.Number[1] 025089820* eingestellt.
+          Sollen nur Inhouse Anrufe mit der Durchwahl 12 angenommen werden,
+          wird 12 eingestellt. Sollen keine Inhouse-Anrufe, sondern nur
+          externe Anrufe angenommen werden, dann wird 0* eingegeben, sollen alle internen
+          (zweistelligen) Durchwahlen angenommen werden: **2 usw.
+
+DialPrefix: Wählprefix abgehende Audio-Anrufe (ohne ATD). Hier kann z.B. die 0
+          für die Amtsholung eingetragen werden.
+
+MaxConnectTime: Gibt in Minuten die maximale Verbindungsdauer für ankommende
+          und abgehende Audio-Anrufe an. Damit kann eine Blockade durch
+          böswillige Anrufe (Hörer danebenlegen) vermieden werden.
+
+RingerVolume: Lautstärke für das Klingelsignal und den Connected-Beep während
+          der Verbindung (0..9).
+          0   OFF
+          1
+          2
+          3
+          4   -18dB
+          5   -16dB
+          6   -12dB
+          7    -6dB
+          8    -4dB
+          9     0dB
+
+
+3.9.    Telefonbuch
+
+DSPhoneBook = 4 ; { Nummer der Datenstruktur für CMDSet/GetBoxConfig }
+MinEntry    = 0 ; { Erster genutzer Eintrag ist aber 1 }
+MaxEntry    =50 ;
+TYPE TELTXT = TEXT[20],
+     PHONEENTRY = STRUCT (WORD Next,
+                               Prev,
+                          TEXT[16] Name,
+                          BYTE TelType,
+                          TELTXT Number,
+                          TEXT[20] Params
+                         ) ;
+
+Das Telefonbuch wird intern als doppelt verkettete Liste gespeichert. Die
+Pointer Next und Prev dürfen nur von der Box verändert werden. Die Liste ist
+alphabetisch aufsteigend nach dem Namen sortiert. Der Eintrag 0 des
+Telefonbuchs enthält in den Pointern den Beginn und das Ende des Telefonbuchs
+(Next=Ende, Prev=Anfang). Dies ist der "Root-Entry". Das Ende der Liste wird
+durch einen Nil-Pointer (Next/Prev=0) gekennzeichnet. Beim Namen ist
+Groß/Kleinschreibung relevant. Number ist die Zugeordnete Telefonnummer, die
+beim Auswählen eines Listeneintrags den Ü-Parameter im entsprechenden
+Anwahlstring ersetzt.
+
+Für TelType sind folgende Werte zugewiesen (Bits 0..3 relevant):
+TelType_Unused   = 0 ; Keine Alarmierung
+TelType_ISDN     = 1 ; Bildverbindung zum Host über eingebautes ISDN
+TelType_Modem    = 2 ; Bildverbindung zum Host über externes Modem
+TelType_Aux      = 3 ; Anwahl über externes Modem
+TelType_Scall    = 4 ; Scall über ISDN o. externes Modem
+TelType_Makro    = 5 ; Remote-Makro aufrufen
+TelType_Voice    = 6 ; Sparach-Ansage über ISDN
+TelType_Fax      = 7 ; Fax über externes Modem
+TelType_Phone    = 8 ; Audio-Kanal für Telefonie (* Nur pt-200 *)
+
+
+3.10.   Box EEPROM       { Ab 2.28 }
+
+DSBoxEEPROM = 2 ;
+MinEntry    = 0 ;
+MaxEntry    = 255 ; (* Nur pt-200 mit 24C16 *)
+
+TYPE BOXEEPROMREC = STRUCT (TEXT[15] entry, BYTE CheckSum) ;
+
+Datenstruktur für den Zugriff auf das EEPROM für die Daten Seriennummer, Model etc.
+
+
+4.      Beschreibung der Bildformate
+
+Zur Zeit sind zwei Bildformate implementiert. Das eine (HDelta64) arbeitet
+ohne DCT, ohne Motioncompensation und versucht mit der Performance eines 20MHz
+Z80 genügend schnell abzuschätzen welche Bildteile komprimiert über einen
+Kanal mit bis zu ca. 10kByte/s Bandbreite geschickt werden können. Die
+Prozessor-Performance und Kanalbandbreite sind relativ gut aufeinander
+abgestimmt.
+
+Das andere (HDeltaDCT) arbeitet mit einer proprietären DCT-Konvertierung,
+Quantisierung und VL-Codierung und überträgt anhand eines
+Helligkeitsvergleichs, ob der DCT-komprimierte Block übertragen werden muß.
+Beiden Formaten gemeinsam ist die Unterteilung des Bildes in 8x8 Pixel Blöcke
+und der Verzicht auf Motion-Compensation und umfangreiches Framing. Das
+HDeltaDCT Verfahren benötigt im Encoder eine Hardware-Unterstützung für
+DCT/VL-Coding, da der 20MHz Z80 nicht genug Performance hätte einen 8kByte/s
+Kanal zu füllen. Beide Verfahren versuchen nicht durch Verringerung der
+Qualität (gröbere Quantisierung) die Kanalbandbreite zu füllen. Ziel ist es in
+beiden Fällen, die Auflösung und Qualität (den Signal-Rausch-Abstand) gut zu
+halten und dafür die Frame-Rate zu reduzieren. Hier ist der Unterschied
+zu den Zielen der Video- Telefonie- oder sogar Video-Konferenz-
+Kompressionsverfahren zu merken.
+
+
+Im Folgenden wird eine Decoderbeschreibung der beiden Formate geliefert. Das
+Encoder Verhalten bzgl. zukünftiger Optimierungen ist dadurch nicht
+eingeschränkt.
+
+
+4.1.    Komprimierung HDelta64 Stream
+
+Decode Picture:
+ Get Picture Header ;
+ Prepare Decoding ;
+ LOOP
+  IF BlockOffset >= 64
+     THEN DecodeBlockCode ;
+          PutPixel ;
+          inc (BlockOffset) ;
+  ENDIF ;
+  DecodeVLCode ;
+  PutPixel ;
+  inc (BlockOffset) ;
+ ENDLOOP.
+
+Prepare Decoding:
+ BlockOffset := 64 ;
+ ErrorBlock := -1 ; { Für Resynchronisation }
+ XSize := XBlocks*8 ;
+ YSize := YBlocks*8 ;
+ BlockNo := -1 ;
+ Blocks := XBlocks*YBlocks ;     { Die maximale Anzahl Blocks im Bild }
+
+     IF Blocks >=4096 THEN BlockBits := 13
+ ELSEIF Blocks >=2048 THEN BlockBits := 12
+ ELSEIF Blocks >=1024 THEN BlockBits := 11
+ ELSEIF Blocks >= 512 THEN BlockBits := 10
+ ELSEIF Blocks >= 256 THEN BlockBits := 9
+ ELSEIF Blocks >= 128 THEN BlockBits := 8
+                      ELSE BlockBits := 7
+ ENDIF.                      { Berechnet die Zahl der Bits die bei einer
+                               Blockadresse gelesen werden müßen }
+
+
+
+Get Picture Header:
+ Get Bits (8) ;
+ IF Bits <> 0FEh
+    THEN ERROR (EInvalidStartcode)
+ ENDIF ;
+
+ Get Bits (8) ;
+ XBlocks := Bits AND 127 ;
+ IsDiffPic := Bits >= 128 ;  { Diese Information wird zum Decoding nicht
+                               benötigt }
+
+ Get Bits (8) ;
+ YBlocks := Bits AND 127 ;
+ WithDCT := Bits >= 128 ;    { Bei HDelta64 immer 0 }
+
+ Get Bits (8) ;
+
+ GreyBits := Bits AND 7 ; { Anzahl Bits für absoluten Helligkeitswert }
+ GreyMult := 1 SHL (6-Bits) ; Anpassung auf 64 Graustufen für Darstellung }
+ UVBits := 3 ;            { Anzahl Bits für absoluten U/V Wert }
+ UVMult := 16 ; UVOffset := 64 ; { Für UVBits=3 }
+ WithColor := (Bits AND 8) <> 0 ;
+
+ VideoSource := (Bits SHR 4) AND 3 ;
+
+ IF Bits >= 128
+    THEN Decode Picture Time ;
+ ENDIF.
+
+
+Decode Picture Time:
+ IF WithDCT AND Bits >= 128
+    THEN GetBits (8) ;
+         Time.FrameCounter := Bits AND 127 ;
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDSecond := Bits AND 127 ;
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDMinute := Bits AND 127 ;
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDHour := Bits AND 127 ;
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDDay := Bits AND 127
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDMonth := Bits AND 127 ;
+ ENDIF ;
+ IF Bits >= 128
+    THEN GetBits (8) ;
+         Time.BCDYear80 := Bits AND 127 ;
+ ENDIF ;
+ WHILE Bits >= 128 DO { Kompatibilität für zukünftige Erweiterungen }
+  GetBits (8)
+ ENDWHILE.
+
+
+Resync:
+ IF ErrorBlock < 0
+    THEN ErrorBlock := BlockNo
+    ELSE BlockOffs := 64 ;
+         BlockNo := ErrorBlock
+ ENDIF.
+
+
+DecodeBlockCode:
+ IF GetBits(1) = 0 { "0" at Start of Block }
+    THEN { New Block Follows: "0" <AbsGreyVal> "0" <BlockNo> "0" }
+     Grey := GetBits (GreyBits);
+     BlockOffset := 0 ;
+     UV := FALSE ;
+     IF GetBits (1) = 0
+        THEN GetBits (BlockBits);
+             IF Bits <= BlockNo
+                THEN ERROR (EInvalidBlockNo) ;
+                     Resync ;
+             ENDIF ;
+             BlockNo := Bits ;
+             IF GetBits (1) = 1
+                THEN ERROR (EInvalidBlockCode) ;
+                     Resync ;
+             ENDIF ;
+        ELSE { NewAutoIncr Block: "0" <AbsGreyVal> "1" }
+             inc (BlockNo) ;
+     ENDIF ;
+     BlockXPos := (BlockNo MOD XBlocks) SHL 3;
+     BlockYPos := (BlockNo DIV XBlocks) SHL 3;
+ ELSE { 1 at Start of Block }
+     IF GetBits (1) = 0
+        THEN { "1" "0" <AbsUVVal> UV Data follows }
+             Grey := GetBits (UVBits);
+             BlockOffset := 0 ;
+             UV := TRUE ;
+             BlockXPos := (BlockNo MOD XBlocks) SHL 3;
+             BlockYPos := (BlockNo DIV XBlocks) SHL 3;
+        ELSE FOR j:=1 TO 6 DO BEGIN
+              IF GetBits (1) = 0
+                 THEN ERROR (EInvalidBlockCode) ;
+                      Resync
+              ENDIF ;
+             ENDFOR :
+             IF NextByte <> FFh { Letztes FF Byte ist Byte-Aligned }
+                THEN ERROR (EInvalidBlockCode)
+                ELSE EXITLOOP { EOF }
+             ENDIF
+     ENDIF ;
+ ENDIF.
+
+
+DecodeVLCode:
+  IF GetBits (1) = 0
+    THEN { Grey+0 }
+  ELSEIF GetBits (1) = 0
+    THEN IF GetBits (1) = 0
+            THEN inc (Grey)    { 100 }
+            ELSE dec (Grey) ;  { 101 }
+         ENDIF ;
+  ELSEIF GetBits (1) =  0
+    THEN IF GetBits (1) = 0
+            THEN inc (Grey, 2)   { 1100 }
+            ELSE dec (Grey, 2) ; { 1101 }
+         ENDIF
+  ELSEIF GetBits (1) = 0
+    THEN IF GetBits (1) = 0
+            THEN inc (Grey, 3)   { 11100 }
+            ELSE dec (Grey, 3) ; { 11101 }
+         ENDIF
+  ELSEIF GetBits (1) = 0
+    THEN IF GetBits (1) = 0
+            THEN inc (Grey, 4)   { 111100 }
+            ELSE dec (Grey, 4) ; { 111101 }
+         ENDIF
+  ELSEIF GetBits (1) = 0         { 111110yyyy...}
+    THEN IF UV
+            THEN Grey := GetBits (UVBits)
+            ELSE Grey := GetBits (GreyBits)
+         ENDIF
+    ELSE ERROR (EInvalidVLCode) ;
+         Resync
+  ENDIF.
+
+
+PutPixel:
+  IF UV
+     THEN IF BlockOffset < 32 { U }                     { U/V 0..255 }
+             THEN Picture[BlockYPos,BlockXPos+0].UV := Grey*UVMult+UVOffset
+             ELSE Picture[BlockYPos,BlockXPos+1].UV := Grey*UVMult+UVOffset
+          ENDIF ;
+          IF odd(BlockYPos) { Zigzag laufen. Ungerade Zeilen rückwärts. }
+             THEN IF (BlockXPos AND 7) = 0
+                     THEN inc (BlockYPos) ;
+                     ELSE dec (BlockXPos, 2)
+                  ENDIF ;
+             ELSE IF (BlockXPos AND 7) = 6
+                     THEN inc (BlockYPos) ;
+                     ELSE inc (BlockXPos, 2) ;
+                  ENDIF ;
+          ENDIF
+     ELSE Picture[BlockYPos,BlockXPos].Y := Grey*GreyMult ; { Y 0..63 }
+          IF odd(BlockYPos)
+             THEN IF (BlockXPos AND 7) = 0
+                     THEN inc (BlockYPos) ;
+                     ELSE dec (BlockXPos)
+                  ENDIF
+             ELSE IF (BlockXPos AND 7) = 7
+                     THEN inc (BlockYPos) ;
+                     ELSE inc (BlockXPos) ;
+                  ENDIF
+          ENDIF
+  ENDIF.
+
+
+GetBits (CONST BYTE Number) : BYTE
+ liefert die nächsten "Number" "Bits" aus dem Eingabe-Bitstrom. Das
+ niederwertige Bit wird im Eingabe-Bitstrom zuerst übertragen.
+ return (Bits) ;
+ Bits ist dann auch als globale Variable auslesbar
+
+
+Farbraumkonvertierung bei der Darstellung:
+
+Die in 'Picture' gesammelten Bilddaten YUV werden durch eine Konvertierung
+ins RGB-Format (jeweils 0..255) umgewandelt:
+
+YUV2RGB (BYTE y, u, v ; &STRUCT(BYTE r,g,b)) ;
+/* Da es sich um 8*8*64 = 4096 Tabelleneinträge mit jeweils 3 Bytes (=12kByte)
+   handelt, ist es sinnvoll, diese Tabelle für
+   y=0..63,
+   u=64..192 (in 16er Schritten),
+   v=64..192 (in 16er Schritten)
+   auszurechnen und dann mittels Table-Lookup R[Y,U,V], G[Y,U,V], B[Y,U,V] die
+   RGB Werte zu bestimmen.
+
+   1.402*(u-0x80)
+   0.7143*(v-0x80)-0.3437*(v-0x80)
+   1.772*(v-0x80)
+   zu berechnen.
+*/
+
+INTEGER cr := u-0x80 ;
+INTEGER cb := v-0x80 ;
+REAL va ;
+va := 4*y+1.402 *cr ;
+IF va < 0.0 THEN r := 0 ELSE IF va > 255.0 THEN r := 255 ELSE r := trunc (va) ENDIF ;
+va := 4*y-0.7143*cr-0.3437*cb ;
+IF va < 0.0 THEN g := 0 ELSE IF va > 255.0 THEN g := 255 ELSE g := trunc (va) ENDIF ;
+va := 4*y          +1.772 *cb ;
+IF va < 0.0 THEN b := 0 ELSE IF va > 255.0 THEN b := 255 ELSE b := trunc (va) ENDIF ;
+
+
+
+4.2.    Komprimierung HDeltaDCT Stream
+
+
+Beschreibung des Formats:
+
+RL-Block-Coding (ohne VL):
+ 00,XX     : SkipToBlock (XX)
+ 01-0F     : Run=0, Level=-8..+7 (ausser Level = 0)
+ 10,XX     : SkipToBlock ($1XX)
+ 11-1F     : Run=1, Level=-8..+1 "
+ 20,XX     : SkipToBlock ($2XX)
+ 21-2F     : Run=2, Level=-8..+1 "
+ 30,XX     : SkipToBlock ($3XX)
+ 31-3F     : Run=3, Level=-8..+1 "
+ 40,XX     : SkipToBlock ($4XX)
+ 41-4F     : Run=4, Level=-8..+1 "
+ 50,XX     : SkipToBlock ($5XX)
+ 51-5F     : Run=5, Level=-8..+1 "
+ 60,XX     : SkipToBlock ($6XX)
+ 61-6F     : Run=6, Level=-8..+1 "
+ 70        : Increment (Run, 8) (* "8-mal" Prefix *)
+ 71-7F     : Run=7, Level=-8..+1 "
+ 80..87,XX : DC-Value 0..+2047 or AC 0..+2047
+ 88        : EOB   GGf. Word mit 80  Word mit 80 auffüllen und 8800 als EOB schicken.
+ 89..8F,XX : DC-Value -2047..-1 or AC -2047..-1
+ 90..FD    : AC or Invalid DC-Value
+ F0        : AC or Start of Y-Component (BlockCounter=0, Hardware Enable Compression mode for Component, Q0-Q2 Laden)
+ F1        : AC or Start of U-Component "
+ F2        : AC or Start of V-Component "
+ F3        : AC or End of Component     (Fillup Block with 80 and Write 8800 until DCTEOI)
+
+ FE,XX,YY,VC,FN, <SS<MM<HH<DD<MO<YY>>>>>>>... Header or AC
+               XX=Ixxxxxxx (I=InterFrame, xxxxxxx=Width DIV 8)
+               YY=1yyyyyyy (1=NewFormat,  yyyyyyy=Height DIV 8)
+               VC=1vvvcggg (vvv=VideoSource, c=Color(1)/BW(0), ggg=GreyValues/Component(Y=000,U=001,V=010))
+               FN=t0ffffff (t=TimeFollows, ffffff=FrameCounter)
+               SS=tsssssss (t=TimeFollows, sssssss=BCD Seconds)
+               MM=tmmmmmmm (t=TimeFollows, mmmmmmm=BCD Minutes)
+               HH=thhhhhhh (t=TimeFollows, hhhhhhh=BCD Hours)
+               DD=tddddddd (t=TimeFollows, ...
+               MO=tmmmmmmm
+               YY=0yyyyyyy
+
+ FF,FF : EOP : Display Decompressed Picture
+
+--------------------------
+VL-Coding
+
+Before Block:
+0 dd dddddddd  : Next Block follows: LastBlockNo+1 . Includes dc
+1 bbb bbbbbbbb dd dddddddd: SkipToBlockNo (000..6BF). Includes dc
+1 111 0000    : Start of Component Y
+1 111 0001    : Start of Component U
+1 111 0010    : Start of Component V
+1 111 0011    : End of Component
+1 111 1111    : End of Picture
+1 111 0111 qqqqqqqq QQQQQQQQ qqqqqqqq DCT Q0, Q1, Q2
+
+Within Block:
+Run (>=0)
+   0 : 0
+   1 : 10
+INC8 : 11000
+ELSE : 11bin(3)
+
+
+Level (<> 0)
++-1    : 00s
++-2    : 01s
++-3    : 10s
++-4    : 11000s
++-5    : 11001s
++-6    : 11010s
++-7    : 11011s           (0rrrsnnn Bytes)
++-<=31 : 1110bbbbbs       (1rrrnnnnnnnnnnnn Bytes)
++->=32 : 11110bbbbbbbbbs  (" Limits clipped to +-1FFh)
+EOB    : 11111 (Prefix: Run 0)
+
+
+
+Decoder-Beschreibung:
+
+Decode Picture:
+ Get Picture Header ;
+ Prepare Decoding ;
+ LOOP
+  IF GetBits (1) = 0 { DC Coefficient next Block }
+     THEN GetBits (10) ;
+          IF Bits >= 200h
+             THEN GetBlock (Bits OR 8E00h)
+             ELSE GetBlock (Bits OR 8000h)
+          ENDIF
+  ELSEIF GetBits (7) >= 70h { Control Code Fx on Block Level }
+     THEN CASE Bits AND 00001111b OF
+           0..2 : NewYUVComponent (Bits AND 3) ;
+           3    : EndOfYUVComponent ;
+           7    : GetDCTQuants ;
+           15   : EndOfPicture ; EXITLOOP ;
+           ELSE ERROR (EInvalidBlockCode)
+          ENDCASE ;
+  ELSE { BlockNumber and DC Coefficient of new Block }
+       IF NOT SkipTo (Bits*16+GetBits(4))
+          THEN ERROR (EInvalidBlockNo)
+       ENDIF ;
+       GetBits (10) ;
+       IF Bits >= 200h
+          THEN GetBlock (Bits OR 8E00h)
+          ELSE GetBlock (Bits OR 8000h)
+       ENDIF ;
+  ENDIF ;
+ ENDLOOP.
+
+
+EndOfPicture:
+ IF Block <> -1
+    THEN ERROR (EInvalidBlockCode)
+ ENDIF ;
+ GetBits (7) ;
+ IF Bits = 7Fh
+    THEN { DisplayPicture. Finish }
+    ELSE ERROR (EInvalidBlockCode)
+ ENDIF.
+
+
+GetDCTQuants:
+ q0 := GetBits (8) ;
+ q1 := GetBits (8) ;
+ q2 := GetBits (8).
+
+
+EndOfComponent:
+ IF Block = -1
+    THEN ERROR (EInvalidBlockCode)
+ ENDIF ;
+ IF Block < Blocks
+    THEN SkipTo (Blocks)
+    ELSE IF MustFill
+            THEN WriteDCTCodeB (PadByte) ;
+         ENDIF ;
+         { Signal End of Component to HW }
+         block := -1 ;
+         dcofs := 0 ;
+ ENDIF.
+
+NewComponent (CONST BYTE comp):
+ IF block <> -1
+    THEN ERROR (EInvalidBlockCode)
+ ENDIF ;
+ block := 0 ;
+ IF comp=0 { YComponent }
+    THEN Blocks := XBlocks*YBlocks
+    ELSE Blocks := XBlocks*YBlocks DIV 4  { 4:2:2 Format }
+ ENDIF ;
+ LastBlock := -1 ;
+ dcofs := 0 ;
+ yuvcomp := comp ;
+ { Signal Component to HW }
+ .
+
+
+SkipTo (NewBlock : WORD) : BOOL ;
+ { Nur benötigt, wenn die HW lückenlos aufeinanderfolgenden Blöcke erwartet }
+ IF NewBlock <= Block OR NewBlock > Blocks
+    THEN ERROR (EInvalidBlockNo) ; EXITPROC WITH FALSE
+ ENDIF ;
+ IF MustFill
+    THEN WriteDCTCodeB (PadByte) ;
+ ENDIF ;
+ Block := NewBlock ;
+ WHILE LastBlock+1 < Block DO
+  dcofs := 0 ;
+  inc (LastBlock) ;
+  coeff := RefPic[yuvcomp][LastBlock][dcofs] ; { WORD }
+  WriteDCTCodeW (coeff) ;
+  inc (dcofs) ;
+  WHILE coeff <> EOBWord AND dcofs <= MaxCoeffs DO
+   coeff := RefPic[yuvcomp][LastBlock][dcofs] ; { WORD }
+   WriteDCTCodeW (coeff) ;
+   inc (dcofs) ;
+  ENDWHILE ;
+  IF coeff <> EOBWord
+     THEN WriteDCTCodeW (EOBWord)
+  ENDIF ;
+ ENDWHILE ;
+ dcofs := 0 ;
+ TRUE. { ok, Fehlerfrei }
+
+
+GetBlock (dc : WORD) ;
+ IF Block = -1 OR Block >= Blocks
+    THEN ERROR (EInvalidBlockCode)
+ ENDIF ;
+ dcofs := 0 ;
+ WriteDCTCode (dc) ; { DC Coeff }
+ LOOP
+  { Get Run }
+  IF GetBits (1) = 0
+     THEN run := 00h
+  ELSEIF GetBits (1) = 0
+     THEN run := 10h
+  ELSEIF GetBits (3) = 0
+     THEN WriteDCTCodeB (RunExtend8) ;
+          CONTINUELOOP
+     ELSE run := Bits*16
+  ENDIF ;
+
+  { Get Level }
+  IF GetBits (1) = 0
+     THEN IF GetBits (1) = 0 { 00s : +-1 }
+             THEN IF GetBits (1) = 0
+                     THEN WriteDCTCodeB (Run+01h) { +1 }
+                     ELSE WriteDCTCodeB (Run+0Fh) { -1 }
+                  ENDIF
+             ELSE IF GetBits (1) = 0 { 01s: +-2 }
+                     THEN WriteDCTCodeB (Run+02h) { +2 }
+                     ELSE WriteDCTCodeB (Run+0Eh) { -2 }
+                  ENDIF
+          ENDIF
+  ELSEIF GetBits (1) = 0
+     THEN IF GetBits (1) = 0 { 10s: +-3 }
+             THEN WriteDCTCodeB (Run+03h) { +3 }
+             ELSE WriteDCTCodeB (Run+0Dh) { -3 }
+          ENDIF
+  ELSEIF GetBits (1) = 0
+     THEN l := GetBits (2) ; { 110xxs: +-4..7 }
+          IF GetBits (1) = 0
+             THEN WriteDCTCodeB (Run+04h+l) { +4..+7 }
+             ELSE WriteDCTCodeB (Run+0Ch+l) { -4..-7 }
+          ENDIF
+  ELSEIF GetBits (1) = 0
+     THEN l := GetBits (5) ; { 1110xxxxxs }
+          IF GetBits (1) = 0
+             THEN WriteDCTCodeW (run*256+8000h+l)
+          ELSEIF l = 8
+             THEN WriteDCTCodeB (run+08h) { -8 }
+             ELSE WriteDCTCodeW (run*256+8001h+(l XOR 0FFFh))
+          ENDIF
+  ELSEIF GetBits (1) = 0
+     THEN l := GetBits (9) ; { 11110xxxxxxxxxs }
+          IF GetBits (1) = 0
+             THEN WriteDCTCodeW (run*256+8000h+l)
+             ELSE WriteDCTCodeW (run*256+8001h+(l XOR 0FFFh)) ;
+          ENDIF
+  ELSE WriteDCTCodeW (EOBWord) ; { 11111 }
+       EXITLOOP
+  ENDIF ;
+ ENDLOOP ;
+ lastblock := Block ;
+ inc (Block) ;
+ dcofs := 0.
+
+
+WriteDCTCodeB (b : BYTE) ;
+ IF MustFill
+    THEN DCTCodeToHW (LastByte*256+b) ;
+         RefPic[yuvcomp][block][dcofs] := LastByte*256+b ;
+         inc (dcofs ) ; IF dcofs > MaxCoeffs THEN dec (dcofs) ENDIF ;
+    ELSE LastByte := b ;
+ ENDIF ;
+ MustFill := NOT MustFill.
+
+
+WriteDCTCodeW (w : WORD) ;
+ IF MustFill
+    THEN DCTCodeToHW (LastByte*256+PadByte) ;
+         RecPic[yuvcomp][block][dcofs] := LastByte*256+PadByte ;
+         inc (dcofs) ; IF dcofs > MaxCoeffs THEN dec (dcofs) ENDIF ;
+         MustFill := FALSE
+ ENDIF ;
+ DCTCodeToHW (w) ;
+ RefPic[yuvcomp][Block][dcofs] := w ;
+ inc (dcofs) ; IF dcofs > MaxCoeffs THEN dec (dcofs) ENDIF.
+
+
+
+Prepare Decoding:
+ MustFill := FALSE ; { "Not On Word Boundary" }
+ block := -1 ;
+ dcofs := 0 ;
+ LastBlock := -1 ;
+ yuvcomp := 0 ;
+ XSize := XBlocks*8 ;
+ YSize := YBlocks*8.
+
+----------------------------------------------------------------------------
+Der folgende Teil wird nicht für die Implementierung des Box-Interfaces
+benötigt und dient nur der Verdeutlichung des Hardware-Interfaces.
+
+Der Hardware VM422 Decoder erwartet alle Blöcke ohne Lücke nach
+folgendem Schema:
+1.) DC Coefficient 1000 slll llll llll (signed DC coefficient)
+2.) AC Coefficients ZigZag Run-Length Coded
+    (R,L) pairs. R=Run (number of zeroes preceeding the non-zero
+                 L Level Coefficient.
+    PadByte = 80h ;
+    EOBWord = 8800h ;
+    RunExtend8 = 70h ;
+
+    WHILE (R >= 8) DO
+     NextCode = RunExtend8 ;
+     dec (R, 8)
+    ENDWHILE ;
+    IF (L >= -8) AND (L <= 7)
+       THEN NextCode = 0rrr slll (Signed Level)
+       ELSE IF Not on Word Boundary
+               THEN NextCode (PadByte) ;
+            ENDIF ;
+            NextCode = 1rrr slll llll llll ;
+    ENDIF ;
+
+3.) Blockende
+    IF Not on Word Boundary
+       THEN NextCode := PadByte
+    ENDIF ;
+    NextCode = EOBWord.
+
+
+5.      Fehlercodes
+
+Die Fehlercodes sind 16-Bittig. Der ErrorParam ist vom Fehlertyp abhängig. Die
+Bits 15..12 des Fehlercodes geben die Quelle des Fehlers an (Anwendung,
+Betriebssystem, Systemerweiterung etc.), die Bits 11..8 geben die ID-Nummer
+der Systemerweiterung an.
+
+
+5.1.    Betriebsystem
+
+10XXh = Invalid Opcode. Opcode XX nicht implementiert.
+                      ErrorParam = Previous PC.
+14XXh = EEPROM Error. Fehler beim Programmieren des Flash-EPROMs.
+                      XX=Status+HAddr. ErrorParam=LAddress
+1800h = Stack-Overflow. Überlauf des Datenstacks der Anwendung.
+1801h = Stack-Underflow. Unterlauf des Datenstacks der Anwendung.
+1802h = Division durch 0.
+1803h = Arithmetical Overflow. Bei MUL/ADD/SUB
+1805h = String too long.
+1806h = Anwendung per STOP versucht anzuhalten.
+1807h = Adresse ausserhalb des Stackbereichs.
+1808h = Adresse ausserhalb des Datenbereichs.
+1809h = Adresse ausserhalb des Codebereichs.
+180Ah = Array-Zugriff Index zu klein.
+180Bh = Array-Zugriff Index zu gross.
+180Ch = Objekt nicht initialisiert.
+
+1C01h = Kein freier Pageframe vorhanden
+1C10h = Zuviele aktive Prozesse gestartet.
+1C11h = Prozess-Kontext konnte nicht wiederhergestellt werden.
+
+3YXXh = Fehler XX in Systemerweiterung Y.
+
+40XXh = Timeout-Wartezeit in Opcode XX abgelaufen.
+        XX=14h/94h : Warte auf Senden von Zeichen an Schnittstelle
+        XX=18h/98h : Warte auf Eingang=1
+        XX=19h/99h : Warte auf Eingang=0
+        XX=1Ch/9Ch : Warte auf Com-Schnittstelle Zeichen
+        XX=2Ah/AAh : Warte auf Semaphore Flag = 0
+        XX=2Bh/ABh : Warte auf Semaphore Flag = 1
+        XX=7Eh     : Warte auf Message von anderer Task
+
+50XXh = Allgemeiner Parameterfehler in Opcode XX.
+
+75XXh = TRAP Breakpoint Restart/Invalid Opcode
+79XXh = TRAP NMI.
+7DXXh = TRAP Invalid Interrupt.
+
+81XXh = Power-On-Selftest Fehler XX.
+
+
+5.2.    Anwendungssoftware
+
+2000h = Ruftaste gedrückt (Manuell ausgelöste "Störung").
+2001h = Kein Zugangserlaubnis (Access-Password falsch).
+2002h = Keine Konfigurations-Erlaubnis (Config-Password falsch).
+2032h = Kein Speicher für temporäre Parameterpage (EEPROM-Schreiben).
+20D0h = Keine Remote-Harddisk installiert.
+20FEh = Zuviele Menue-Einträge definiert.
+
+
+5.3.    POST Codes
+
+5.3.1.  pt-100
+
+Alle Post-Fehler beginnen mit 81XXh, wobei XX der PostCode ist, der im
+folgenden erläutert ist. Hier sind nur die wichtigsten gelistet:
+
+03h     Ramtest Shared 32k D8.000
+73h     Backup Battery Voltage and BackRAM Size Test
+13h     Check Main RAM Size
+23h     256k RAM-Error 80.000-9F.FFF
+33h     32k RAM Error A0.000-A7.FFF
+43h     128k RAM-Error A0.000-B7.FFF
+53h     Ramtest D0.000-D7.FFF
+63h     Ramtest D8.000-DF.FFF
+83h     128k BackupRAM Error
+93h     32k BackupRAM Error
+C3h     40000-5FFFF Lower RAM Test
+D3h     60000-7FFFF Lower RAM Test
+04h     ROM Checksum
+24h     Check FlashEPROM Type
+14h     Check ROM-Size
+34h     Find Executable EPROM Pages
+44..F4  44+ExtId=Copy to ShadowRAM and ChecksumTest
+C5h     DIPPORT Error
+06h     Init 82C452 SIOA
+16h     SIO-1 Missing Clock (TX not cleared)
+76h     Check LPT
+96h     LCD Port Init
+49h     Z80H RAM Test Error
+0Ah     Init Application Code
+4A..FA  0A+16*Id = Init Application Code (ID)
+2Ch     No Operating System Found
+EEh     Invalid IRQ
+EFh     Invalid NMI
+
+
+5.3.2.  pt-200
+
+Alle Post-Fehler beginnen mit 81XXh, wobei XX der PostCode ist, der im
+folgenden erläutert ist. Hier sind nur die wichtigsten gelistet:
+
+03h       Ramtest M2 First 4k Basememory Addresstest (KK):
+          HL=Addressmask. A=Ist. E=Soll.
+23h       Remaining M2 4k Pages BaseRAM Addresstest (KK):
+          HL=Addressmask. A=Ist. E=Soll.
+33h       Z80H Shared RAM (M2) Test R/W & Clear (IC Defekt)
+43h       Addresstest M1 RAM (4*16k Banks) (KK oder GAL16V8).
+          HL=Addressmask. A=Ist. E=Soll.
+53h       Ramtest M1 (4*16k Banks) R/W & Clear (IC Defekt)
+63h       Main 128k RAM (A0000-BFFFF) Address Bits (KK)
+          HL=Addressmask. A=Ist. E=Soll.
+73h       Main 128k RAM (A0000-BFFFF) R/W & Clear (IC Defekt)
+83h       Backup Battery Voltage and BackRAM Size Test
+93h       Backup-RAM Bankselect Logic & Register Test
+0A3h      BackupRAM (- 2x512k) Address Test (KK oder GAL16V8).
+          HL=Addressmask. A=Ist. E=Soll.
+0B3h      BackupRAM R/W & Clear Test (IC Defekt oder Zugriffszeitproblem)
+04h       ** 4: ROM Checksum
+24h       Check FlashEPROM Type
+14h       Check ROM-Size
+34h       Find Executable EPROM Pages
+44h..F4h  44+ExtId=Copy to ShadowRAM and ChecksumTest.
+          Error in System Extension Module
+06h       ** 6: Init 82C452 SIOA
+16h       SIO-1 Missing Clock (TX not cleared):
+          20MHz Clock für Serielle Schnittstelle nicht ok.
+76h       Check LPT
+96h       LCD Port Init
+A6h       Timing Test: Clock Frequency
+0Bh       Check VM422 & MACH211 Installed
+1Bh       Test I2C SAA7110
+2Bh       Test I2C Bt856
+3Bh       Test LM75 and Init Ventilator Hysteresis
+4Bh       Check EEPROM 24C16
+5Bh       Check VSYNC Video Timing (SAA7110 & VM422):
+          LCC to VM422 Clock not ok.
+6Bh       Check Video Bank A Databus U601-U604, VM422:
+          HL=Failed Bitmask. DE=Readback Val
+7Bh       Check Video Bank A Addressbus U601-U604, VM422:
+          HL=Failed Addressbitmask. DE=Readback Val
+          E=00,FF,11,EE,22,DD,33,CC: Test Addresslines 0/1 Readback in A
+8Bh       Check Video Bank B Databus, U605-U608, VM422:
+          HL=Failed Bitmask. DE=Readback Val
+9Bh       Check Video Bank B Addressbus, U605-U608, VM422:
+          HL=Failed Addressbitmask. DE=Readback Val
+          E=00,FF,11,EE,22,DD,33,CC: Test Addresslines 0/1 Readback in A
+0Dh...FDh 0D+16*Id = Init Application Code (ID)
+2Eh       No Operating System Found
+3Eh       LastCheckpoint in INIT.MAC. Jump to OS.
+EEh       Invalid IRQ
+EFh       Invalid NMI
+
+5.4.    Reserviert
+
+5.5.    Systemerweiterung Framegrabber
+3503h = Parameter Fehler. Z.B. Nicht implementierte SYSCALL-Funktion
+3504h = Invalid XDimension. Bildbreite in XSize ungültig.
+3505h = Invalid YDimension. Bildhöhe in YSize ungültig.
+3507h = Memory Corrupt (Used Pages Table in Backup Memory). Batterie leer.
+3508h = No Frame Memory. Zuwenig schneller Speicher übrig.
+3509h = No Line Memory. Zuwenig Speicher übrig.
+350Ah = No Storage. Zuwenig Speicher für komprimiertes Bild im Backup-Memory.
+350Bh = Out of Memory. Während der Kompression/Speicherung keine Seiten mehr.
+350Ch = Invalid I/O-Mode. Speichermedium nicht zulässig/implementiert.
+350Eh = Kein Videosignal nach bestimmter Zeit (>50ms) entdeckt.
+350Fh = Keinen Framegrabber gefunden. Wahrscheinlich defekt.
+3510h = Interner Arithmetiküberlauf
+3520h = Ungültiges Kompressionsformat beim Decodieren
+3521h = Ungültiger VL-Blockcode beim Decodieren
+3522h = Ungültige Bildgröße beim Decodieren
+3523h = Ungültiger VL-Code im Block beim Decodieren
+3524h = Ungültiger Startcode (<>FE) beim Decodieren
+3530h = Fehler bei Ausgabe auf Serieller Schnittstelle/ISDN (Zulange kein
+        Senden möglich)
+3531h = Fehler beim Senden ans Modem
+353Fh = Bildübertragung wurde abgebrochen
+3540h = Bildausdruck nicht möglich, da Drucker aus oder nicht angeschlossen
+3541h = Drucker offline.
+355Ah = I2C Bus Fehler. Kein ACK.
+355Bh = I2C Bus Fehler. Busy.
+355Dh = Kein I2C Bus Controller.
+355Eh = Falsche Funktion für I2C-Bus Routinen.
+355Fh = I2C Bus Controller hängt. Controller-Reset durchgeführt.
+3580h..35FFh = Disk Errors beim Speichern auf HD (HDErrorType=ErrorType-3580h)
+        Siehe Fehlercodes 3D00..3D7Fh.
+
+
+5.6.    Systemerweiterung Fax
+
+3601h = Decoderfehler (Fehler in den Fax-Daten)
+3602h = Encoderfehler
+3603h = Drucker nicht bereit.
+3604h = Fehler (Timeout) bei Ausgabe ans Fax-Modem.
+3605h = Parameter Limit Error (z.B. Breite linker Rand, Font-Größe etc.)
+3606h = Fehler bei Ausgabe ans Modem.
+360Ch = Keine Backup-Page für temporäre Fax-Daten/Config-Page gefunden.
+
+5.7.    Systemerweiterung Alarm/Uhr
+
+3703h = Parameter-Fehler. SYSCALL-Funktion nicht implementiert.
+370Ch = Keine Backup-Page für temporäre DCF-Daten/Config-Page gefunden.
+370Fh = Keine Real-Time-Clock (RTC) installiert. Wahrscheinlich defekt.
+3730h = Keine gültige BCD-Ziffer
+3731h = Ungültiges Datums/Zeit Format in der RTC.
+3732h = Falsche Konfiguration der RTC gefunden.
+3735h = RTC zu lange Busy.
+3737h = DCF77 Error. Ungültige DCF77 Daten empfangen.
+3738h = Ungültiger Pointer beim Kopieren der Eventparameter.
+3739h = Ungültiger Buffer beim Kopieren der EventParameter
+
+5.8.    Systemerweiterung ISDN-Voice
+
+3811h = DFT Arithmetik Überlauf
+3812h = DFT Energy-Überlauf
+3820h = Ungültiger Voice Header
+3830h = Nicht Online
+3831h = Nicht im Datenmode
+3840h = Audio-Prozessor Timeout bei Kommandoverarbeitung
+3841h = Syntax-Error bei Audio-Prozessor Kommando
+3850h = Ungültiger Voice-Slot
+3851h = Kein Speicher für Sprachaufzeichnung
+
+
+5.9.    Reserviert
+
+5.10.   Reserviert
+
+5.11.   Reserviert
+
+5.12.   Reserviert
+
+5.13.   Systemerweiterung Festplatte
+
+3D02h = InvalidFunction
+3D03h = Parameter
+3D04h = InvalidATACall
+3D05h = InvalidDOSCall
+3D06h = InvalidSYSCall
+
+3D0Ah = NoDiskMemory         ;Buffer not allocated
+3D0Fh = DriveNotFound        ;Drive not installed
+
+3D10h = Timeout              ;IDE/BIOS Errors
+3D11h = InvalidCommand       ;
+3D12h = AddressMarkNotFound
+3D13h = WriteProtected
+3D14h = SectorNotFound
+3D15h = BadSector
+3D16h = UncorrectableData
+3D17h = ControllerFailure
+3D18h = SeekNotCompleted
+3D1Ah = DriveNotReady
+3D1Bh = Undefined
+3D1Ch = WriteFault
+3D1Eh = StatusRegisterRead
+3D1Fh = SenseFailed
+
+3D30h = DuplicatePartition   ;Partitiontable Management
+3D31h = TooManyPartitions
+3D32h = PartitionNotFound
+                             ;FAT/Cluster Management
+3D40h = DiskFull
+3D41h = InvalidCluster
+
+3D50h = DirEntryNotFound
+3D51h = FileNotFound         ;Directory Management
+3D52h = PathNotFound
+3D53h = InvalidFileName
+3D54h = NoFile
+3D55h = DirectoryFull
+3D56h = DuplicateDirEntry
+3D57h = InvalidPath
+
+3D60h = TooManyFiles
+3D61h = InvalidHandle
+3D62h = TooManyBuffers
+3D64h = SeekBeyondEOF
+3D65h = FileNotOpen
+3D66h = FileIsOpen
+3D67h = NoInputFile
+3D68h = NoOutputFile
+3D69h = NoModifyFile
+3D6Ah = FileIsReadOnly
+
+
+
+6.      Remote Makros & Dialoge
+
+6.1.    Syntax der Makro-Sprache
+
+Zahl- und Textvariablen beginnen mit einem Kleinbuchstaben.
+
+Systemkonstante bestehen aus Großbuchstaben.
+
+Vordefinierte Makros (durch Events gleichen Namens aufgerufen) bestehen
+aus Großbuchstaben und Zahlen.
+Makronamen (in der Definitionstabelle) können mit * beendet werden,
+(z.B. DTMF*) dann rufen alle Events wie z.B. DTMF1, DTMF200 dieses Makro
+auf.
+
+Hex-Zahlen beginnen mit $. Alle Zahlen (Dezimal und Hex) im Wertebereich
+0..65535 ($0000..$FFFF) erlaubt.
+Text können eine Länge von 0 bis 140 Zeichen besitzen. Im Text ist das
+Zeichen #0 (Code 0) nicht erlaubt, da es als Terminierungszeichen dient.
+
+Makro-, Event-, Variablen- und Systemkonstantennamen bestehen aus max.
+11 Zeichen. Port-Adressen werden in eckigen Klammern angegeben [$120].
+
+Texte werden in ' eingeschlossen und können nicht-druckbare Zeichen
+enthalten, die mit #13 oder #$D angegeben werden: 'ATD31'#13 oder 'Ein
+"''" Zeichen'.
+
+Makro-Anweisungen haben folgendes Format:
+<Befehl><Param1>,<Param2> oder <Befehl><Param1>
+Zwei Anweisungen werden durch Semikolon (;) getrennt.
+
+Die "IF"-Anweisung (Bedingte Ausführung, abhängig von Testergebnis) hat
+folgendes Format (die Spitzen Klammern sind natürlich nicht notwendig):
+<TestBefehl><Param1>,<Param2>:<TRUE-Anweisung>!<FALSE-Anweisung>
+
+Anweisungsfolgen können in runden Klammern () eingeschlossen werden,
+damit alle Anweisungen im IF-Zweig ausgeführt werden. Würden die
+Klammern fehlen, würde nach dem nächsten Semikolon die bedingte
+Ausführung beendet sein.
+
+<Befehl> besteht aus zwei Großbuchstaben z.B. XO
+Param1 und Param2 sind Parameter folgenden Typs:
+
+- Text-Literal (in '' eingeschlossen oder mit # beginnend)
+- Dezimal-Zahl (0..65535)
+- Hexadezimal-Zahl mit $ beginnend. Z.B. $A123
+- Text-Variable (als Text-Variable definiert und mit Kleinbuchstaben
+  beginnend)
+- Zahl-Variable (als Zahl-Variable definiert und mit Kleinbuchstaben
+  beginnend)
+- Undefinierte Variable (noch nicht definiert und mit Kleinbuchstaben
+  beginnend)
+- I/O-Port in eckigen Klammern z.B. [$0120]. Liefert ein Byte und kann
+  mit einem Byte beschrieben werden.
+
+Systemkonstante/Systemvariable besteht nur aus Großbuchstaben. Je nach
+Name (siehe unten) liefern sie Port-Wert, Word-Wert oder Text-Wert.
+
+WORD  Dezimal-Zahl, Hexadezimalzahl oder Zahl Variable
+TEXT  Text-Literal oder Text-Variable
+NUM   Dezimal-Zahl, Hexadezimalzahl, Zahl-Variable oder Port
+NVAR  ZahlVariable, undefinierte Variable oder beschreibbarer I/O-Port
+TVAR  TextVariable oder undefinierte Variable
+WVAR  WordVariable oder undefinierte Variable
+
+Falls auf eine undefinierte Variable in einem numerischen Ausdruck
+lesend zugegriffen wird, dann wird 0 gelesen und die Variable bleibt
+undefiniert.
+
+
+6.2.    Befehle der Makro-Sprache
+
+Zwischen Befehlsnamen und Parameter muß kein Leerzeichen stehen. Die
+erlaubten Parametertypen sind oben erklärt.
+
+
+         Zahlen und Bit-Operationen
+
+SE NVAR,NUM  Set. Wertzuweisung von NUM an I/O-Port oder Variable
+
+AN NVAR,NUM  AND. Bitweise Und-Verknüpfung NVAR := NVAR AND NUM
+
+OR NVAR,NUM  OR. Bitweise Oder-Verknüpfung NVAR := NVAR OR NUM
+
+NA NVAR,NUM  NAND. Bitweise NAND-Verknüpfung NVAR := NVAR AND NOT NUM
+
+XO NVAR,NUM  XOR. Bitweise Exklusiv-Oder Verknüpfung NVAR := NVAR XOR NUM
+
+SL NVAR,NUM  Shift Left. Linksschieben um NUM Bits: SHL (NVAR, NUM)
+
+SR NVAR,NUM  Shift Right. Rechtsschieben um NUM Bits: SHR (NVAR, NUM)
+
+MU NVAR,NUM  Multiplikation NVAR := NVAR*NUM
+
+DI NVAR,NUM  Division NVAR := NVAR DIV NUM
+
+MO NVAR,NUM  Modulo. Restberechnung NVAR := NVAR MOD NUM
+
+IN NVAR,NUM  Inkrementierung (Addition) NVAR := NVAR+NUM
+
+DE NVAR,NUM  Dekrementierung (Subktraktion) NVAR := NVAR-NUM
+
+
+          Textbehandlung
+
+SE TVAR,TEXT Set. Wertzuweisung von TEXT an Text-Variable
+
+IN TVAR,TEXT Insert.
+             Fügt den Text TEXT am Anfang von TVAR ein
+IN TVAR,NUM  Insert.
+             Fügt das Zeichen NUM am Anfang von TVAR ein
+
+DE TVAR,WORD Delete.
+             WORD ist in HIGH und LOW Teil aufgeteilt (jeweils ein Byte):
+             HIGH=0: Entfernt in TVAR das Zeichen an Position LOW
+             HIGH=255: Entfernt in TVAR das letzte Zeichen
+             sonst: Entfernt an Position HIGH LOW Zeichen.
+
+
+WT WORD,WORD Write Text.
+             Gibt das Zeichen des zweiten Paramters an der
+             COM-Schnittstelle deren Nummer im ersten Parameter steht
+             aus. Zeichencodes 0..255 sind erlaubt.
+WT WORD,TEXT Write Text.
+             Gibt den Text auf der COM-Schnittstelle, deren Nummer im
+             ersten Parameter steht, aus.
+             COM-Schnittstellen:
+             0 = LPT (Printer)
+             1 = V.24/RS232C ("Modem")
+             3 = LCD
+             5 = ISDN
+             6 = TV/Monitor
+             8..15 = Parallelport PD0..PD7 Serielle TX-Emulation
+
+RT WORD,WVAR Read Text.
+             Liest ein Zeichen von COM-Schnittstelle (Parameter 1) in
+             die Variable WVAR ein. Falls kein Zeichen verfügbar ist,
+             wird 0 geliefert. Es wird nicht gewartet.
+RT WORD,TVAR Read Text.
+             Hängt solange Zeichen von der COM-Schnittstelle (Parameter
+             1) an die Varibale TVAR an, bis 10ms lang kein Zeichen
+             verfügbar ist, oder TVAR die maximale Länge von 140 Zeichen
+             überschreitet.
+
+CH NVAR,TEXT Convert Hexadecimal.
+             Wandelt die als Text übergebene Hexadezimal-Repräsentation
+             um und weist sie an NVAR zu.
+
+CH TVAR,WORD Convert Hexadecimal.
+             Wandelt die Zahl WORD in eine
+             Hexadezimalzahl-Repräsentation (ohne führendes $ Zeichen)
+             um und weisst sie an die Text-Variable zu.
+
+CD NVAR,TEXT Convert Decimal.
+             Wandelt die als Text übergebene Dezimalzahl-Repräsentation
+             um und weist sie an NVAR zu.
+
+CD TVAR,WORD Convert Decimal.
+             Wandelt die Zahl WORD in eine Dezimal-Repräsentation um und
+             weisst sie an die Text-Variable zu.
+
+CB NVAR,TEXT Convert Binary.
+             Wandelt die als Text übergebene Binärzahl-Repräsentation um
+             und weist sie an NVAR zu.
+
+CB TVAR,WORD Convert Binary.
+             Wandelt die Zahl WORD in eine Binärzahl-Repräsentation um
+             und weisst sie an die Text-Variable zu.
+
+
+LE WVAR,TEXT Length. Liefert in WVAR die Länge (=Anzahl Zeichen) des
+             Textes TEXT.
+
+AP TVAR,TEXT Hängt den TEXT an das Ende der Text-Variablen an.
+AP TVAR,WORD Hängt das Zeichen aus WORD an das Ende der Text-Variablen an.
+
+
+  Sonstige Befehle
+
+FN WORD,...  Function. Ruft Systemfunktion (siehe unten) auf.
+
+JP TEXT      Jump.
+             Springt in das Makro dessen Name als Paramter übergeben
+             wird. Hinweis: Der Makroname muss in ' Zeichen stehen.
+             Hinweis: Alle Zeichen nach dem Sprungbefehl im aktuellen
+             Makro werden ignoriert.
+
+CA TEXT      Call.
+             Ruft das Makro TEXT als Unterprogramm auf. Max. 12
+             Unterprogramme, Funktionsaufrufe und Makros lassen sich
+             ineinander verschachteln.
+
+KI VAR       Kill. Entfernt die Text- oder Zahl-Variable bzw. das Makro.
+             Sie/Es ist anschliessend undefiniert.
+
+SE RES,NUM   Set. Wertzuweisung von NUM an Resultats-Systemvariable
+
+
+   Timer- und Timeoutbehandlung
+
+TO TEXT,WORD Timeout Milliseconds.
+             Setzt den Timeout für den Timer (Name angeben)
+             auf die im 2.Parameter übergebenen Millisekunden. Falls
+             Parameter 2=0 ist, wird der Timer abgeschaltet und liefert
+             keinen Timeout mehr.
+
+TS TEXT,WORD Timout Seconds. Setzt den Timeout für den Timer (Name angeben)
+             auf die im 2.Parameter übergebenen Sekunden.
+
+TM TEXT,WORD Timeout Minutes. Setzt den Timeout für den Timer (Name angeben)
+             auf die im 2.Parameter übergebenen Minuten.
+
+TH TEXT,WORD Timout Hours. Setzt den Timeout für den Timer (Name angeben)
+             auf die im 2.Parameter übergebenen Stunden.
+
+             Bei Ablauf eines Timers wird das entsprechende Makro gleichen
+             Namens aufgerufen. Der Timer wird nicht automatisch neu gesetzt.
+             Um einen periodischen Timer zu erhalten muß der Timer in diesem
+             Makro neu gesetzt werden. Die Timer werden während einer
+             Bildverbindung höchstens alle 500ms überprüft. Im Standby ca. alle
+             10ms.
+
+   Dialog-Befehle zur Darstellung und Veränderung von Dialogelementen
+   während einer Online-Verbindung.
+
+MD TEXT,TEXT Make Dialog. Erzeugt ein Dialogelement auf dem Bildschirm
+             des Hosts, falls eine Verbindung besteht. Im 1.Parameter
+             wird der Name für den Dialog übergeben (max.11 Zeichen), im
+             zweiten Parameter die Beschreibung des Dialogelementes
+             (Syntax s.u.).
+
+WD TEXT,TEXT Write Dialog. Gibt den Text des zweiten Parameters im
+             Dialog mit dem Namen des ersten Parameters aus.
+WD TEXT,NUM  Write Dialog. Gibt den Zahlwert des zweiten Parameters im
+             Dialog mit dem Namen des ersten Parameters aus.
+
+QD TEXT      Query Dialog. Fordert den Dialog-Status an. Wird dann über
+             ein Event mit dem Namen des ersten Parameters mitgeteilt.
+
+KD TEXT      Kill Dialog. Entfernt den Dialog, der im Parameter TEXT
+             angegeben ist vom Bildschirm des Hosts, falls eine
+             Online-Verbindung besteht.
+
+
+  Test-Befehle, die ein Bool'sches Resultat (0000=TRUE, FFFF=FALSE) liefern.
+  Das Resultat wird durch eine folgende Bedingte Anweisung : ! oder das
+  Abfragen der Systemvariablen RES geprüft.
+
+TT TEXT      Timer-Test. Prüft ob Timer noch läuft. FALSE=Timer abgelaufen.
+
+TB NUM,WORD  Test Bit. Prüft ob Bit 'WORD' in Port, Wert oder Variable 'NUM'
+             gesetzt ist.
+
+MS NUM,NUM   Mask Set.
+             Führt eine bitweise UND-Verknüpfung der beiden Parameter durch
+             (ohne das Ergebnis zu speichern) und liefert TRUE, wenn das
+             Ergebnis gleich dem zweiten Parameter ist. Dadurch lässt sich
+             prüfen, ob in einem I/O Port oder einer Variablen alle gewünschten
+             Bits gesetzt sind.
+MC NUM,NUM   Mask Cleared.
+             Führt eine bitweise UND-Verknüpfung der beiden Parameter durch
+             (ohne das Ergebnis zu speichern) und liefert TRUE, wenn das
+             Ergebnis 0 ist. Dadurch lässt sich prüfen, ob in einem I/O Port
+             oder einer Variablen alle gewünschten Bits gelöscht sind.
+
+
+EQ NUM,NUM   Equal. Prüft beide Werte auf Gleichheit.
+
+EQ TEXT,TEXT Equal. Prüft beide Texte auf Gleichheit.
+
+NE NUM,NUM   Not Equal. Prüft beide Werte auf Ungleichheit.
+
+NE TEXT,TEXT Not Equal. Prüft beide Texte auf Ungleichheit.
+
+GE NUM,NUM   Greater or Equal. Liefert TRUE, wenn NUM1  >= NUM2 ist
+
+GE TEXT,TEXT Greater or Equal. Liefert TRUE, wenn TEXT1 >= TEXT2 ist
+
+LE NUM,NUM   Less or Equal. Liefert TRUE, wenn NUM1  <= NUM2 ist
+
+LE TEXT,TEXT Less or Equal. Liefert TRUE, wenn TEXT1 <= TEXT2 ist
+
+LT NUM,NUM   Less Than. Liefert TRUE, wenn NUM1  <  NUM2 ist
+
+LT TEXT,TEXT Less Than. Liefert TRUE, wenn TEXT1 <  TEXT2 ist
+
+GT NUM,NUM   Greater Than. Liefert TRUE, wenn NUM1  >  NUM2 ist
+
+GT TEXT,TEXT Greater Than. Liefert TRUE, wenn TEXT1 >  TEXT2 ist
+
+CT TEXT,TEXT Contains. Liefert TRUE, wenn TEXT2 in TEXT1 enthalten ist
+
+
+
+
+6.3.    Ereignis-Makros
+
+Einige System-Ereignisse rufen diese Makros auf:
+
+#ALARM1..#ALARM3: Alarmlinie wurde aktiviert.
+
+#ALARMO1..#ALARMO3: Alarmlinie wurde deaktiviert.
+
+#ARMED0  : Unscharf geschaltet
+
+#ARMED1  : Scharf geschaltet
+
+#DTMF0..#DTMF999: DTMF Funktion 24..24999 über Telefon aufgerufen
+
+#CAM1..3 : Kamera 1..3 wird ausgewählt.
+
+#VIDEO0  : Videoteil abgeschaltet
+
+#VIDEO1  : Videoteil ohne TV/Monitor eingeschaltet (nur Kameras)
+
+#VIDEO2  : Videoteil mit TV/Monitor aktiv.
+
+#RESET0  : Reset der Box vor der Initialisierung von Harddisk, Kameras,
+           Modem, ISDN etc.
+
+#RESET1  : Reset der Box nach obiger Initialisierung
+
+#COM1    : Zeichen von der seriellen Schnittstelle (mit RT1,x lesen)
+           empfangen. Wird nur aufgerufen, wenn V.24 für Remote-I/O
+           freigegeben ist.
+
+
+#HOUR0..23   : Stundenwechsel auf die angegebene Stunde.
+
+#CONN1/#CONN81: Abgehende/Ankommende ISDN-Verbindung besteht.
+
+#CONN2/#CONN82: Abgehende/Ankommende Modem-Verbindung besteht.
+
+#CONN3/#CONN83: Abgehende/Ankommende Aux-Verbindung besteht.
+
+#CONN4        : Abgehende Scall-Verbindung aufgebaut
+
+#CONN6/#CONN86: Abgehende/Ankommende Voice-Verbindung (DTMF & Sprachansage)
+
+#CONN7/#CONN87: Abgehende/Ankommende Fax-Verbindung besteht
+
+#CONN8/#CONN88: Abgehende/Ankommende Telefonie-Verbindung besteht.
+
+#DISC1:  ISDN-Verbindung beendet.
+
+#DISC2:  Modem-Verbindung beendet.
+
+#DISC3:  Aux-Verbindung beendet
+
+#DISC4:  Scall-Verbindung beendet
+
+#DISC6:  Voice-Verbindung (DTMF & Sprachansage) beendet
+
+#DISC7:  Fax-Verbindung beendet
+
+#DISC8:  Telefonie-Verbindung beendet
+
+#KEY31..#KEY39: Taste 1..9
+
+#KEYD:   Taste Enter
+
+#KEY8:   Taste Cursor Left
+
+#KEYC:   Taste Cursor Right
+
+#KEY18:  Taste Clear
+
+#KEY7F:  Taste Delete/Minus
+
+#KEY9:   Taste Insert/Plus
+
+#KEY1B:  Taste Esc
+
+#KEYA:   Taste Cursor Down (nur pt-200)
+
+#KEYB:   Taste Cursor Up (nur pt-200)
+
+#KEY1E:  Taste Select (nur pt-200)
+
+#KEYF1..#KEYF3: Taste F1..F3 (nur pt-200)
+
+#MIC0:   Audio-Verbindung beendet (Mikrofon abgeschaltet).
+
+#MIC1:   Internes Mikrofon gewählt
+
+#MIC2:   Externes Mikrofon gewählt
+
+#ONL0:   Host-Verbindung beendet (Offline)
+
+#ONL1:   Als Bildsender Online mit Zugriffsberechtigung durch Host
+
+#ONL2:   Als Bildempfänger Online
+
+#ONL3:   Als Bildsender Online ohne Zugriffsberechtigung
+
+#ONL4:   Als Bildsender Online. Empfänger kann keine Makros darstellen.
+
+#PICM:   Während der Online-Verbindung am Host in das Dargestellte
+         Bild geclickt. PAR übergibt die Position:
+         LOBYTE=X-Block (0..95)
+         HIBYTE=Y-Block (0..71)
+         Der Wert ist unabhängig der Auflösung, Vergrößerung und Teilbild-
+         Darstellung. Bei einer PAL-Auflösung von 786x576 Punkten wird
+         durch 8 geteilt, bei 96x72 Pixel Großen Bilder wird jeder Punkt
+         addressiert.
+#PICM1:  Wie PICM aber ins Bildgeclickt und Taste bleibt gedrückt ("Move")
+#PICM2:  Wie PICM aber als Doppelclick
+#PICM3:  Wie PICM aber Taste wurde nach Move losgelassen. Die Position, die
+         übergeben wird ist die Position des ersten Tastendrucks von "Move".
+
+
+
+6.4.    Systemvariable
+
+
+(R=Nur Lesen möglich, W=Lesen und Schreiben möglich).
+
+AIN   R WORD Alarm Inputs. Aktueller Alarmlinien Status.
+             Bit 0..2 entsprechen den Alarmlinien 1..3.
+
+AL    R WORD Alarm Latched. Gespeicherter Alarmstatus.
+             Bit 0..2 entsprechen den Alarmlinien 1..3.
+
+ASTAT R WORD Alarm Status.
+             Bit 0: 1=Scharf, 0=Unscharf
+             Bit 1: 1=Alarmrelais an. 0=Alarmrelais aus.
+             Bit 2: 1=Störung
+
+REL   W WORD Relais. Liefert die Portadresse der Relais-Ausgänge.
+             Durch OR REL,4 wird der Ausgang 3 eingeschaltet,
+             durch NA REL,4 ausgeschaltet,
+             durch MS REL,4 geprüft, ob der Ausgang eingeschaltet ist,
+             durch MC REL,4 geprüft, ob der Ausgang ausgeschaltet ist.
+
+PD    W WORD Parallel Data. Liefert die Portadresse der TTL-Datenausgänge.
+
+PS    R WORD Parallel Status. Liefert die Portadresse des TTL-
+             Statusregisters/Eingänge
+
+PC    W WORD Parallel Control. Liefert die Portadresse des TTL-Controlports.
+
+DOW   R WORD Day of Week. 0=Sonntag,1=Montag,...,6=Samstag
+
+SEC   R WORD Aktuelle Sekunde: 0..59 (Nur gerade Sekunden!)
+
+MIN   R WORD Aktuelle Minute: 0..59
+
+HOUR  R WORD Aktuelle Stunden: 0..23
+
+DAY   R WORD Aktueller Tag: 1..31
+
+MON   R WORD Aktueller Monat (1..12)
+
+YEAR  R WORD Aktuelles Jahr (1980..2050)
+
+TIME  R TEXT Aktuelle Zeit: 15:30:23
+
+DATE  R TEXT Aktuelles Datum: 22.07.1997
+
+CAM   R WORD Ausgewählte Kamera (1..3). 0=Videoeingänge inaktiv.
+
+HOST  R WORD PC-Hostport, falls Verbindung besteht:
+             0=Keine Verbindung, 1=Modem-Verbindung, 5=ISDN-Verbindung
+
+CON   R WORD Console-Port: 1=Modem, 3=LCD/KBD(Standard), 5=ISDN, 6=IR/TV
+
+KEY   R WORD Letzte gedrückte Taste auf der aktuellen Console.
+
+DTMF  R WORD Letzte mit DTMF 24xxx ausgewählte Funktion per DTMF.
+             Es wird nur der Wert xxx (ohne 24 geliefert).
+
+CSV   R WORD Current Service. Diese Bitmaske gibt an, über welche
+             Verbindungen (Dienste) aktuell zwischen Box und Netz bestehen:
+             Bit 1: ISDN
+             Bit 2: Modem
+             Bit 3: Aux (Reserviert für spätere Erweiterung)
+             Bit 4: Scall
+             Bit 6: Voice (Sprachansage)
+             Bit 7: Fax
+             Bit 8: Telefonie
+             Falls keine Verbindungen bestehen, ist CSV=0.
+
+MIC   R WORD Ausgewählter Mikrofoneingang:
+             0 = Keine Übertragung per Mikrofon (kein Mikrofon aktiv)
+             1 = Eingebautes Mikrofon überträgt
+             2 = Externes Mikrofon überträgt
+
+TVO   R WORD TV-Output Status: 0=Inaktiv, 1=Aktiv.
+
+CID   R TEXT CallerID: Nummer des aktuellen Anrufers.
+
+RES   W WORD Resultat des letzten Vergleichs.
+             Kann auch durch SE RES,xxx gesetzt werden.
+
+BNR   R TEXT Boxrufnummer (kann Ländervorwahl enthalten) dieser Box.
+
+NAME  R TEXT Resultat einer Textoperation (siehe FN...)
+
+BNAME R TEXT Boxname (max. 20 Zeichen)
+
+TEMP  R WORD Innentemperatur der pt200 in Grad Celsius.
+
+PAR   R WORD Parameter des letzten Event/Makro Aufrufs, der
+             bei CALL oder vom Host übergeben wurde. Z.B.
+             der Wert 0000 oder FFFF, der den aktuellen
+             Button Status wiederspiegelt.
+
+NAME  R TEXT Wie PAR nur falls es sich um einen Text-Parameter
+             handelte.
+
+HVER  R WORD Host-Version während einer Online Verbindung:
+             HIBYTE: Major Version (GUI-Type)
+             LOBYTE: Minor Version (Interface-Type)
+
+HCAP  R WORD Host-Capabilities:
+             Bit 0: Basic Functionality HDelta & Standard Remote I/O
+             Bit 1: Remote Makros werden unterstützt
+             Bit 2: VM422 basierte DCT-Dekompression wird unterstützt
+             Bit 3: Telefonie Kanal wird unterstützt
+
+
+6.5.    Systemfunktionen
+
+   Allgemeine Funktionen:
+
+FN1,ms       Warte ms. Beispiel: FN1,1000: Warte 1 Sekunde. Die
+             Programmausführung sollte nicht länger als einige Sekunden
+             angehalten werden. Besser ist es länge Verzögerungen
+             mittels Timer/Timeout Konstruktion durchzuführen.
+
+FN2,com      Löscht den Eingabepuffer von Modem (com=1), ISDN (com=5),
+             Keyboard (com=3)
+
+FN3          Reset des Systems.
+
+FN4          Liefert (durch Systemvariable NAME abfragbar) den Namen des
+             aktuellen Makros (=Events).
+
+FN5          Aktuelle Einstellungen ins EEPROM Sichern. Nur Möglich, falls
+             Offline oder Online mit Config-Permission.
+
+
+   Video-Funktionen:
+
+FN$10,cam    Setze Videoeingang auf cam (1..3)
+
+FN$11,0/1    FN$11,0 schaltet Videoteil ab. FN$11,1 schaltet ein.
+
+FN$12,5      Speichert Vollbild von aktueller Kamera auf Harddisk
+
+FN$12,4      Speichert Differenzbild von aktueller Kamera auf Harddisk
+
+FN$12,9      Speichert Vollbild von aktueller Kamera ins RAM
+
+FN$13,size   Setzt Spalten und Zeilen des Text-Schirms der Monitor-Ausgabe
+             (com=6). size=spalten+256*zeilen.
+
+FN$12,8      Speichert Differenzbild von aktueller Kamera ins RAM
+
+FN$14,cam    Speichert den Namen der Kamera cam (1..3) in der Variablen
+             NAME.
+
+FN$1C,cam    Speichert Bild von Kamera cam ins RAM
+
+FN$1D,cam    Speichert Bild von Kamera cam auf Harddisk.
+
+FN$1E,param  Bildänderungsdetektor für aktuellen Videoeingang aufrufen.
+             Beim Ersten Aufruf nach einer
+             Kameraumschaltung oder Grabben von Video (z.B. während einer
+             Onlineverbindung oder Harddiskspeicherung) werden die übergebenen
+             Parameter (s.u.) neu gesetzt und ein Referenzbild angefordert.
+             Durch Aufruf von FN$10,cam kann das Neusetzen der Parameter durch
+             FN$1E,param erzwungen werden.
+
+             Param:
+             Bit 0..3   = 16,1..15 Anzahl geänderter Pixel bevor ein Block
+                          als geändert gilt..
+             Bit 4..7   = 16,1..15 Min. Grauwertänderung damit Pixel als
+                          geändert gilt
+             Bit 8..9   = 4,1..3 Höhe des Sensitiven Fensters
+             Bit 10..11 = 4,1..3 Breite des Sensitiven Fensters
+             Bit 12..13 = 0..3 = Linke obere Ecke Y des Sensitiven Fensters
+             Bit 14..15 = 0..3 = Linke obere Ecke X des Sensitiven Fensters
+
+             Liefert in RES die Zahl der geänderten Blöcke des Bildes zurück.
+             Ein volles Bild hat 48x36 Blöcke.
+
+FN$60,ctrl   Kamera-Control für aktuelle Kamera ändern:
+             LOBYTE: BitNr
+             HIBYTE: Neuer Wert (1=Bit setzen, 0=Bit rücksetzen)
+             Bit:
+             0: Kontrastanpassung (nur pt-100 alter FG)
+             1: Schnell abtasten
+             2: Glätten
+             8: DCT-Basierte Kompression
+             9: Kamera 3 S-VHS
+             Z.B.: 108h: DCT-Basierte Kompression einschalten
+                   008h: DCT-Basierte Kompression ausschalten
+
+FN$61,size   Bildgröße/Ausschnitt der aktuellen Kamera ändern.
+             LOBYTE(size):
+             0=192x144 (oder 176x144)
+             1..9: 160x128 Ausschnitt aus 384x288 mit Position:
+                1 2 3
+                4 5 6
+                7 8 9
+             14: 96x72 (oder 88x72)
+             15: 384x288 (oder 352x288)
+             HIBYTE(size): PixelÄnderung Pro 8x8 Block neu setzen:
+             0=Default setzen (<120 Zeilen: 1, < 240Zeilen:2 sonst 3)
+             1..5 : Neuen Wert setzen
+
+FN$62,grey   Graustufen/Farbe für aktuelle Kamera ändern:
+             LOBYTE(grey)=16,32,64: Grau
+                          32+128,64+128 : Farbe (5 bzw. 6 Grau-Bits)
+             HIBYTE(grey): Schwellwert für Pixeländerung
+             0 = Default (< 64 Grau: 2 sonst 3)
+             1..8: Neuer Schwellwert
+
+FN$63,ctr_bri Kontrast/Helligkeit auf neuen Wert (1..255) setzen:
+              LOBYTE: Kontrast (0 = Nicht ändern)
+              HIBYTE: Helligkeit (0 = Nicht ändern)
+
+
+   Audio-Funktionen:
+
+FN$20        200ms Beep über den externen Lautsprecher (Freq=$20)
+
+FN$20,dur    Beep über den externen Lautsprecher für 'dur' ms.
+             Lautspärke über Menuepunkt "Ruf-Lautstärke" einstellbar.
+
+FN$21,f&vol  Dauerton mit vorgegebener Lautstärke und Frequenz über den
+             externen Lautsprecher wiedergeben.
+             f&vol=Frequenz+256*Volume Frequenz=1..255, Volume=0..9.
+             Falls Volume = 0 ist, wird die "Ruf-Lautstärke" aus dem
+             entsprechenden Menue verwendet.
+
+FN$22,mic    mic=0: Audioverbindung beenden. mic=1: Internes Mikrofon
+             auswählen, mic=2: Externes Mikrofon auswählen.
+
+FN$23,f&ms   Beep mit der eingestellten Ruf-Lautstärker, aber gewählter
+             Frequenz und Länge über externen Lautsprecher ausgeben.
+             f&dur=Frequenz+256*ms. Falls ms=0, dauert der Beep 200ms
+             lang.
+
+  Voice-Funktionen (Nur möglich während einer bestehenden Voice-Verbindung).
+
+FN$30,dtmf   DTMF-Zeichenfolge als Ton erzeugen. Erlaubte Zeichen im
+             Text 'dtmf' sind 0..9, *, #, A..F, e, b und das Leerzeichen
+             für Pause. Die Töne haben eine Länge von 80ms und werden
+             ohne Pausen nacheinander erzeugt.
+
+FN$31,0      Beep für Bestätigung *
+
+FN$31,1      Beep für ok
+
+FN$31,2      Beep oder Ansage für Fehler
+
+FN$31,3      Beep oder Ansage für "An"
+
+FN$31,4      Beep oder Ansage für "Aus"
+
+FN$31,5      Beep oder Ansage für "Alarm"
+
+FN$32,slot   Ansage-Slot abspielen.
+
+FN$33,slot   Ansage in Slot 'slot' (0..59) Aufzeichnen mit guter Qualität
+
+FN$33,slot+256 Wie vor, aber mit reduzierter Qualität und halber Datenmenge
+
+   Schnittstellen-Konfiguration:
+
+FN$41,cfg    Setze Baudrate und Datenbits für com=1 (V.24):
+             cfg (Bits 0..7)*1200 = Baudrate
+             cfg (Bit  9) = 1: Parity, 0=No Parity
+             cfg (Bit  8) = 1: Parity Odd, 0=Parity Even
+             cfg (Bits 11..10) = Datenbits (11=8, 10=7, 01=6, 00=5)
+             cfg (Bit  12) = 1: 2 Stopbits, = 0: 1 Stopbit
+             cfg (Bit  13) = 1: RTS/CTS Flusskontrolle
+             cfg (Bit  14) = 1: XON/XOFF Flusskontrolle
+
+FN$48,cfg..  Setzte Baudrate und Datenbits für com=8..com=15 (Seriell TX
+FN$4F,cfg    via TTL-Port DB25):
+             cfg (Bit 3): 0 = V.24 direkt angeschlossen,
+                          1 = Über inv. Pegelwandler
+             cfg (Bit 7..4) = 0000 = 9600, 8N1
+                              0001 = 1200, 8N1
+                              0010 = 2400, 8N1
+                              0011 = 4800, 8N1
+                              0100 = 19200, 8N1
+                              0101 = 38400, 8N1
+                              1000 = 9600, 7E1
+                              1001 = 1200, 7O1
+                              1010 = 2400, 7E1
+                              1011 = 4800, 8E1
+                              1100 = 1200, 7E1
+
+   Verbindungen Aufbauen und Beenden:
+
+FN$50        Aktuelle Host-Verbindung beenden
+
+FN$51,nr     ISDN Verbindung nach 'nr' wählen
+
+FN$52,nr     Modem Verbindung nach 'nr' wählen
+
+FN$53,nr     Aux Verbindung nach 'nr' wählen
+
+FN$54,nr     Scall Nachricht an 'nr' senden
+
+FN$56,nr     Voice Verbindung nach 'nr' wählen
+
+FN$57,nr     Fax Verbindung nach 'nr' wählen
+
+FN$58,nr     Telefonie Verbindung nach 'nr' wählen
+
+
+   Alarme:
+
+FN$A0        Gespeicherte Alarme und Störung löschen
+
+FN$A1,linien Alle Alarmspeicher von Linien deren zugeordnete Bits in
+             'linien' gesetzt sind, werden gelöscht. Bit 0: Linie 1, Bit
+             1: Linie 2, Bit 2: Linie 3
+
+FN$A2,0      Unscharf Schalten
+
+FN$A2,1      Scharf Schalten
+
+FN$A3,aktion Alarmaktion 1..9 ausführen.
+
+FN$A4,linie  Name der Alarmlinie 'linie' (1..3) in der Systemvariablen
+             'NAME' abgelegen.
+
+
+
+6.6.    GUI-Dialoge
+
+Werden durch Befehl 'MD - Make Dialog' während der Online-Verbindung
+auf der grafischen Oberfläche des Bildempfängers angezeigt.
+
+Beispiel: MD'ptLicht~','PB:Licht' ;
+
+Folge von Anweisungen: <Token>:<Parameter>;
+
+PB:Name      PushButton (Name als Button-Beschriftung)
+ W:Width     Breite (In Grid-Units)
+ H:Height    Height (In Grid-Units)
+ X:XPos      In Grid-Units. X=255 sucht freie
+ Y:YPos      In Grid-Units
+[WD übergibt 0000 oder FFFF für TRUE resp. FALSE. Der Button wird
+ bei TRUE farblich hervorgehoben]
+ Als Ereignis bei Drücken der Taste wird geliefert:
+ DialogName        Falls Taste normal angeclickt
+ DialogName1       Falls Taste lange gedrückt bleibt
+ DialogName2       Falls Doppelclick auf Taste
+ DialogName3       Falls Taste nach langem Drücken losgelassen wird
+
+RB:Name      RadioButton (Name als Überschrift optional)
+ 0:Name;1:Name,2:Name,3:Name... Bitmask
+ W,H,X,Y wie in PB
+ O:H/V       Orientierung Horizontal/Vertikal
+[WD übergibt die Bitmaske mit einem Bit gesetzt, das dem gedrückten
+ Button entspricht]
+Beim Ändern eines Buttons wird der Dialogname als Event verschickt.
+
+CB:Name      CheckBox (Name als Überschrift optional)
+0:Name;1:Name;2:Name;3:Name... Bitmask
+ W,H,X,Y wie in PB
+ O:H/V       Orientierung Horizontal/Vertikal
+[WD übergibt die Bitmaske mit den Bits gesetzt, die angekreutzten Optionen
+entsprechen]
+Beim Ändern eines Buttons wird der Dialogname als Event verschickt.
+
+ET:Name      Entry Text (Name als Überschrift optional)
+ W,H,X,Y wie in PB
+ MIN:0       Min. Stringlänge (wird notfalls rechtsbündig mit Leerzeichen
+             aufgefüllt).
+ LIM:10      Max. Stringlänge
+ SET:0-2     Zulässiger Zeichensatz. Alles, Nur Ziffern, Telefonnummern.
+             Default: Alles
+[WD übergibt den Wert, der als Default im Eingabefeld steht]
+Beim Bestätigen der Eingabe wird der Dialogname als Event verschickt.
+
+
+EN:Name      Entry Number (Name als Überschrift optional)
+ MIN:0       Min.Eingabe
+ LIM:10      Max.Eingabe
+ W,H,X,Y wie in PB
+[WD übergibt den Wert, der als Default im Eingabefeld steht]
+Beim Bestätigen der Eingabe wird der Dialogname als Event verschickt.
+
+
+SL:Name      Slider (Name als Überschrift optional)
+ W,H,X,Y wie in PB
+ O:H/V       Orientierung horizontal, vertikal
+[WD übergibt Wert 0..255]
+
+LD:Name      LED
+ COL:R,G,B,Y Farbe Rot, Grün, Blau, Gelb
+ X,Y wie in PB
+[WD übergibt 0 für die Farbe COL oder 1..14 für die Direkte Farbwahl oder
+             FFFF für "Aus"]
+
+
+ND:Name      Numerical Display (Name als Überschrift optional)
+ LIM:999     Max. Wert
+ F:S Z H D B 0 1 2 3 4 5 Format
+             S=Signed (Default: Unsigned)
+             Z=Show leading zeroes (Default: Right justified, no zeroes)
+             H=Show Hexadecimal
+             D=Show Decimal (Default)
+             B=Show Binary
+             L=Large (Doppelte Größe=
+             0=Decimal point xxxxx. (Default: No decimal point)
+             1=Decimal point xxxx.y
+             2=Decimal point xxx.yy
+             3=Decimal point xx.yyy
+             4=Decimal point x.yyyy
+             5=Decimal point .yyyyy
+ UN:chars    Unit (Default: None). Example UN:øC
+ COL:<farbe> Segmentfarbe (Default Grün)
+ BG:<farbe>  Hintergrundfarbe (Default Schwarz)
+ X,Y wie in PB
+[WD übergibt eine Zahl, die ins Display geschrieben werden soll]
+
+
+TD:Name      Text Display (Name als Überschrift optional)
+ F:V B       V=Vektor Font
+             B=Bitmap Font
+ COL:<farbe> Textfarbe (Default Grün)
+ BG:<farbe>  Hintergrundfarbe (Default Schwarz)
+ Beim Anclicken wird der Dialogname als Event verschickt.
+
+
+ST:Name      Static Text (Name wird als Statischer Text in den Dialog-
+             Bereich gesetzt).
+ X,Y wie in PB
+[WD verändert den statischen Text]
+Erzeugt kein Event.
+
+
+MT:Name      Message Text (Name als Prefix fürs MessageWindow optional)
+             Kein sichtbares Dialog-Element, sondern WD gibt Ausgabe
+             ins Message-Fenster
+[WD übergibt den Text, der ins Message-Fenster (und ins Log-File)
+geschrieben wird]
+Erzeugt kein Event.
+
+
+LF:Name      "LogFile" der Oberfläche benutzen
+

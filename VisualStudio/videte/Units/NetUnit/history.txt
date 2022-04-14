@@ -1,0 +1,17 @@
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+04.03.05 RKE CIPC und Net Klassen in die NFC ausgelagert.
+13.05.04 GF - Bugfix 194: Alarm-Anruf Handling idipClient
+21.04.04 AH Enu-Konfiguration und Netzwerkdetails-Dialog hinzugefuegt.
+            Der Netzwerkdetails-Dialog zeigt die Netzwerkauslastungen einzelner Verbindungen aufgespalten
+            in Input, Output, Audio, Database und Summe. Der Dialog ist zunaechst nur ueber den Hauptdialog
+            der Anwendung zu erreichen.
+18.03.04 GF	- Umstellung auf Unicode und VS_71
+21.11.03 AH Alarmverbindung realisiert. 
+            Bei einer DUN-Verbindung muss sichergestellt werden, dass der Windows-Dienst: Zeitgeber deaktiviert ist.
+		    Ansonsten synchronisiert sich die lokale Station mit der Gegenstation, was die Nachricht WM_TIMECHANGE
+		    zur Folge hat. Der idip-Server reagiert auf diese Nachricht in der Release-Version mit einem 
+		    Server-Reset. Eine Alarmverbindung zur Gegenstation ist dann nicht mehr moeglich, da das System
+			die entsprechenden CIPC-Pipes nicht mehr finden kann.
+30.10.03 AH Verbindungssynchronisation überprüft.
+29.10.03 AH History der NetUnit hinzugefügt und Firewall-Fähigkeit eingebaut.

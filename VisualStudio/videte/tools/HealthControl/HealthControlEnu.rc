@@ -1,0 +1,282 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\HealthControl.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\HealthControl.ico"
+IDR_NOT_HEALTHY         ICON                    "res\\idr_main.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_HEALTHCONTROL_DIALOG DIALOGEX 0, 0, 220, 154
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "HealthControl"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Fan 1:",IDC_STATIC_FAN1,6,20,48,8,WS_DISABLED
+    LTEXT           "0",IDC_FAN1_RPM,60,20,22,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "rmp",IDC_STATIC_FANUNIT1,84,20,18,8,WS_DISABLED
+    LTEXT           "Fan 2:",IDC_STATIC_FAN2,6,32,48,8,WS_DISABLED
+    LTEXT           "0",IDC_FAN2_RPM,60,32,22,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "rmp",IDC_STATIC_FANUNIT2,84,32,18,8,WS_DISABLED
+    LTEXT           "Fan 3:",IDC_STATIC_FAN3,6,44,48,8,WS_DISABLED
+    LTEXT           "0",IDC_FAN3_RPM,60,44,22,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "rmp",IDC_STATIC_FANUNIT3,84,44,18,8,WS_DISABLED
+    LTEXT           "Temperature 1:",IDC_STATIC_TEMP1,108,20,54,8,WS_DISABLED
+    LTEXT           "0",IDC_TEMP1,168,20,13,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "deg",IDC_STATIC_CELSIUS1,198,20,12,8,WS_DISABLED
+    LTEXT           "Temperature 2:",IDC_STATIC_TEMP2,108,32,54,8,WS_DISABLED
+    LTEXT           "0",IDC_TEMP2,168,32,13,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "deg",IDC_STATIC_CELSIUS2,198,32,12,8,WS_DISABLED
+    LTEXT           "Temperature 3:",IDC_STATIC_TEMP3,108,44,54,8,WS_DISABLED
+    LTEXT           "0",IDC_TEMP3,168,44,13,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "deg",IDC_STATIC_CELSIUS3,198,44,12,8,WS_DISABLED
+    LTEXT           "VCoreA:",IDC_STATIC_VCOREA,26,80,28,8,WS_DISABLED
+    LTEXT           "0",IDC_VCOREA,60,80,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V1,84,80,18,8,WS_DISABLED
+    LTEXT           "VCoreB:",IDC_STATIC_VCOREB,27,92,27,8,WS_DISABLED
+    LTEXT           "0",IDC_VCOREB,60,92,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V2,84,92,18,8,WS_DISABLED
+    LTEXT           "12V:",IDC_STATIC_12V,38,104,16,8,WS_DISABLED
+    LTEXT           "0",IDC_12V,60,104,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V3,84,104,18,8,WS_DISABLED
+    LTEXT           "-5V:",IDC_STATIC_N5V,40,116,14,8,WS_DISABLED
+    LTEXT           "0",IDC_N5V,60,116,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V4,84,116,18,8,WS_DISABLED
+    LTEXT           "3.3V:",IDC_STATIC_3_3V,144,80,18,8,WS_DISABLED
+    LTEXT           "0",IDC_3_3V,168,80,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V5,198,80,12,8,WS_DISABLED
+    LTEXT           "5V:",IDC_STATIC_5V,150,92,12,8,WS_DISABLED
+    LTEXT           "0",IDC_5V,168,92,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V6,198,92,12,8,WS_DISABLED
+    LTEXT           "-12V:",IDC_STATIC_N12V,144,104,18,8,WS_DISABLED
+    LTEXT           "0",IDC_N12V,168,104,24,8,SS_NOTIFY | WS_DISABLED
+    LTEXT           "V",IDC_STATIC_V7,198,104,12,8,WS_DISABLED
+    LTEXT           "Chip set:",IDC_STATIC_DETECTED,6,135,48,8
+    LTEXT           "?",IDC_STATIC_IDENTIFIER,60,135,42,8
+    DEFPUSHBUTTON   "Close",IDOK,168,131,47,16
+    CTEXT           "Fans",IDC_STATIC_FANS,6,1,96,8
+    CTEXT           "Temperatures",IDC_STATIC_TEMPERATURES,108,1,102,8
+    CONTROL         "",IDC_STATIC_LINE1,"Static",SS_ETCHEDFRAME,14,12,201,1
+    CONTROL         "",IDC_STATIC_LINE2,"Static",SS_ETCHEDFRAME,0,71,215,1
+    CONTROL         "",IDC_STATIC_LINE3,"Static",SS_ETCHEDFRAME,103,0,1,55
+    CTEXT           "Mainboard Voltages",IDC_STATIC_VOLTAGES,6,61,204,8
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,108,131,54,16,WS_DISABLED
+    CONTROL         "Start as Icon",IDC_CK_STAND_ALONE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,108,115,102,10
+END
+
+IDD_DEVICE_MIN_MAX DIALOGEX 0, 0, 235, 63
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Configuration:"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,178,42,50,12,WS_GROUP
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,108,42,50,12,WS_GROUP
+    LTEXT           "Device:",IDC_STATIC_DEV,31,7,22,8
+    LTEXT           "Minimum:",IDC_STATIC_MIN,93,7,30,8
+    LTEXT           "Maximum",IDC_STATIC_MAX,147,7,30,8
+    COMBOBOX        IDC_COMBO_DEVICE,7,24,70,89,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_MIN_VALUE,86,23,45,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_MAX_VALUE,140,23,45,14,ES_AUTOHSCROLL
+    LTEXT           "Unit",IDC_STATIC_UNIT,199,7,22,8
+    LTEXT           "",IDC_TXT_UNIT,200,26,20,8
+    CONTROL         "Send RuntimeError",IDC_CHECK_SEND_RTE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,43,87,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_HEALTHCONTROL_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 205
+        VERTGUIDE, 6
+        VERTGUIDE, 54
+        VERTGUIDE, 60
+        VERTGUIDE, 84
+        VERTGUIDE, 102
+        VERTGUIDE, 108
+        VERTGUIDE, 162
+        VERTGUIDE, 168
+        VERTGUIDE, 198
+        VERTGUIDE, 210
+        VERTGUIDE, 215
+        HORZGUIDE, 5
+        HORZGUIDE, 12
+        HORZGUIDE, 24
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 65
+        HORZGUIDE, 72
+        HORZGUIDE, 84
+        HORZGUIDE, 96
+        HORZGUIDE, 108
+        HORZGUIDE, 120
+        HORZGUIDE, 139
+    END
+
+    IDD_DEVICE_MIN_MAX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        VERTGUIDE, 42
+        VERTGUIDE, 108
+        VERTGUIDE, 162
+        VERTGUIDE, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&About...",               ID_ABOUT
+        MENUITEM "&Settings...",           ID_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About HealthControl..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DEVICE_UNKNOWN      "Unknown"
+    IDS_DEVICE_HARDDISK     "Harddisk:"
+    IDS_DEVICE_CPU          "CPU:"
+    IDS_DEVICE_POWER_SUPPLY "Power Supply:"
+    IDS_DEVICE_HW_BOARD     "HW Board: "
+    IDS_DEVICE_CASE         "Case:"
+    IDS_DEVICE_SYSTEM       "System"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FAN                 "Fan %d:"
+    IDS_TEMPERATURE         "Temperature %d:"
+    IDS_TEMP_TOO_HIGH       "%s Temperature too high! (%d > %d)°C"
+    IDS_RPM_TOO_LOW         "%s fan speed to low! (%d < %d) rpm"
+    IDS_VOLTAGE_WRONG       "%s wrong! (%f < %f < %f) V"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\HealthControl.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

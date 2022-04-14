@@ -1,0 +1,906 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Czech (Czech) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+#ifdef _WIN32
+LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 5, 1\r\n"
+    "#pragma code_page(1250)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU 
+BEGIN
+    POPUP "Zobrazení"
+    BEGIN
+        MENUITEM ">Plné zobrazení",                   IDOSD_VIEW_FULL
+        MENUITEM ">Dilené zobrazení",                IDOSD_VIEW_XXX
+        MENUITEM ">1 plus",                     IDOSD_VIEW_1PX
+    END
+    POPUP "Kamera"
+    BEGIN
+        MENUITEM ">Kamera",                     IDOSD_CAM1
+        MENUITEM ">Kamera",                     IDOSD_CAM2
+        MENUITEM ">Kamera",                     IDOSD_CAM3
+        MENUITEM ">Kamera",                     IDOSD_CAM4
+        MENUITEM ">Kamera",                     IDOSD_CAM5
+        MENUITEM ">Kamera",                     IDOSD_CAM6
+        MENUITEM ">Kamera",                     IDOSD_CAM7
+        MENUITEM ">Kamera",                     IDOSD_CAM8
+        MENUITEM ">Kamera",                     IDOSD_CAM9
+        MENUITEM ">Kamera",                     IDOSD_CAM10
+        MENUITEM ">Kamera",                     IDOSD_CAM11
+        MENUITEM ">Kamera",                     IDOSD_CAM12
+        MENUITEM ">Kamera",                     IDOSD_CAM13
+        MENUITEM ">Kamera",                     IDOSD_CAM14
+        MENUITEM ">Kamera",                     IDOSD_CAM15
+        MENUITEM ">Kamera",                     IDOSD_CAM16
+    END
+    POPUP "Nastavení menu"
+    BEGIN
+        MENUITEM ">PIN: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM " Uzamknout zobrazení",               IDOSD_OPTION_LOCK
+    POPUP "Systém"
+    BEGIN
+        MENUITEM ">Systém Info",                IDOSD_OPTION_INFO
+        MENUITEM ">Statistiky",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "Replay"
+    BEGIN
+        MENUITEM ">Realtime",                   IDOSD_REALTIME
+        MENUITEM ">Alarm List",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">Cílové zobrazení",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU 
+BEGIN
+    POPUP "Nastavení kamery"
+    BEGIN
+        MENUITEM ">Oznaèení kamery:______", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Komprese záznamu",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">Jas",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">Kontrast",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">Sytost",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Omezení",               IDOSD_CAMERA_TERMINATION
+        MENUITEM ">Type",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">Com Port",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "Nastavení systému"
+    BEGIN
+        MENUITEM ">Rozlišení obrazu",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">Zvuková výstraha",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">Nastavení Exportu ", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">Nastavení Importu", IDOSD_IMPORT_SETTINGS
+    END
+    POPUP "Easový rozvrh kamer"
+    BEGIN
+        MENUITEM ">Po: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">Út: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">St: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">Et: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">Pá: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">So: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">Ne: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">Alarmový vstup",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "Záznamový režim kamery"
+    BEGIN
+        MENUITEM ">Re?im",                      IDOSD_ALARM_MODE
+    END
+    POPUP "Nastavení aktivity"
+    BEGIN
+        MENUITEM ">Citlivost",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">Citlivost maskování",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">Change Mask",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "Nastavení alarmu"
+    BEGIN
+        MENUITEM ">Volat pøi alarmu",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">Volat èíslo1",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">Volat èíslo2",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">Volat èíslo3",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">Alarm Output",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "Obraz"
+    BEGIN
+        MENUITEM ">Export záznamu",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">Zrušit export",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">Pokraèovat v exportu",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">Exportovat záznam z alarmu",      IDOSD_ALARM_BACKUP
+        MENUITEM ">Vymazat záznam z alarmu",        IDOSD_ALARM_DELETE
+        MENUITEM ">Ukázat podezøelý záznam",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">Vymazat podezøelý záznam",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "Video Outputs"
+    BEGIN
+        MENUITEM ">Výstup 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">Výstup 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">Výstup 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">Výstup 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">Sequenzer Time (s)",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "Nastavení Audia"
+    BEGIN
+        MENUITEM ">Hledat v",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM "> Pøiøazení",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">Režim nahrávání",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">Citlivost",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">Prahová hodnota",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">Hlasitost",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "Sí?"
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">Subnetmask: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">Brána:___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">%s Meno:_______________",    IDOSD_NET_NAME
+    END
+    POPUP "Datum/Eas"
+    BEGIN
+        MENUITEM ">Datum: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">Eas: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM ">Zóna:",                      IDOSD_TIME_ZONE
+    END
+    POPUP "Volba tiskárny"
+    BEGIN
+        MENUITEM "Není poipojena tiskárna",                IDOSD_NO_PRINTER
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER1
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER2
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER3
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER4
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER5
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER6
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER7
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER8
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER9
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER10
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER11
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER12
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER13
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER14
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER15
+        MENUITEM ">Tiskárna",                    IDOSD_PRINTER16
+    END
+    POPUP "Volba jazyka"
+    BEGIN
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE1
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE2
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE3
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE4
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE5
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE6
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE7
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE8
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE9
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE10
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE11
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE12
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE13
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE14
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE15
+        MENUITEM ">Jazyk",                    IDOSD_LANGUAGE16
+    END
+    POPUP "Zmina PIN"
+    BEGIN
+        MENUITEM ">Operátor",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">Supervizor",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "Dal?í systém. mo?nosti"
+    BEGIN
+        MENUITEM ">Pami? událostí",   IDOSD_OPTION_RTE
+        MENUITEM ">Ukoneení systému",          IDOSD_OPTION_EXIT
+        MENUITEM ">Programová aktualizace",             IDOSD_OPTION_UPDATE
+        MENUITEM ">Rozšíøení kódu:____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "Odejít z nastavení Menu",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DVClient"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "PIN správni"
+    IDS_ON                  "Zap."
+    IDS_PIN_FAILED          "?patný PIN"
+    IDS_PIN                 "PIN: ____"
+    IDS_SEARCH_DATE         "Vyhledat datum: __.__.__"
+    IDS_SEARCH_TIME         "Vyhledat eas: __:__"
+    IDS_SEARCH_ERROR        "Chyba vyhledávání"
+    IDS_OFF                 "Vyp."
+    IDS_CAMERA              "Kamera:"
+    IDS_OLD_PIN             "Aktuální PIN: ____"
+    IDS_NEW_PIN             "Nový PIN: ____"
+    IDS_CONFIRM_PIN         "Potvrdit PIN: ____"
+    IDS_PIN_CHANGED         "PIN byl zminin"
+    IDS_SET_CLOCK_DATE_FAILED "Datum nezminino"
+    IDS_SET_CLOCK_TIME_FAILED "Eas nezminin"
+    IDS_SEARCH_START        "Vyhledávání..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "Zmina data"
+    IDS_SET_CLOCK_TIME_SUCCESS "Zmina easu"
+    IDS_SET_TIMER_SUCCESS   "Zmina easovaee"
+    IDS_SET_IP_SUCCESS      "Zmina IP adresa"
+    IDS_SET_IP_FAILED       "IP adresa nezminina"
+    IDS_SET_MSN_SUCCESS     "MSN zminino"
+    IDS_SET_MSN_FAILED      "MSN nezminino"
+    IDS_SET_TIMER_FAILED    "Easovae nezminin"
+    IDS_MD                  "Detekce aktivity"
+    IDS_UVV                 "Poplach/Poedpoplach"
+    IDS_LOW                 "Nízká"
+    IDS_NORMAL              "Normální"
+    IDS_HIGH                "Vysoká"
+    IDS_WAIT                "Eekejte prosím..."
+    IDS_NO_PICTURES         "?ádné snímky z této kamery."
+    IDS_QUERY               "Vyhledávání:\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DVClient"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "Datum a eas"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "Aktuální kamera.....Všechny kamery konkrétních hodnot jsou odkázany na tuto kameru."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "Rychlé pøehrání zpìt"
+    IDC_BUTTON_PLAY         "Poehrávání dopoedu"
+    IDC_BUTTON_PLAY_BACK    "Poehrávání dozadu"
+    IDC_BUTTON_STOP         "Konec poehrávání"
+    IDC_BUTTON_FF           "Rychlé poetáeení vpoed"
+    IDC_BUTTON_EJECT        "Zavøít okno právì zobrazené kamery."
+    IDC_BUTTON_SKIP_BACK    "Vrátit se k poede?lé události"
+    IDC_BUTTON_SINGLE_BACK  "O krok zpìt"
+    IDC_BUTTON_SINGLE_FORWARD "O krok vpøed"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "Vyhledat"
+    IDC_BUTTON_SKIP_FORWARD "Poejít k dal?í události"
+    IDC_BUTTON_EXPORT       "Exportovat záznam této kamery do:"
+    IDC_BUTTON_PRINT        "Vytisknout obraz kamery na %s"
+    IDC_BUTTON_MINIMIZE     "Minimalizovat panel do pravého dolního rohu"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_OK           "Odchod z programová"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_QUERY_FAILED        "Nenalezeny ?ádné snímky:\n"
+    IDS_SHUTDOWN            "Zaoízení se vypíná..."
+    IDS_END_OPTION          "Odejít z nastavení Menu"
+    IDS_DATE                "Datum:"
+    IDS_TIME                "Eas:"
+    IDS_EXPORT_RUNNING      "Probíhá export..."
+    IDS_EXPORT_SUCCESS      "Export úspi?ni dokoneen"
+    IDS_EXPORT_FAILED       "Export neúspi?ni dokoneen"
+    IDS_PRINTJOB_RUNNING    "Probíhá tisk..."
+    IDS_PRINTJOB_SUCCESS    "Tisk úspi?ni dokoneen"
+    IDS_PRINTJOB_FAILED     "Tisk selhal"
+    IDS_CAMNAME             "Náz. kamery:"
+    IDS_CONNECT_ERROR       "Není mo?né navázat spojení"
+    IDS_LOCKED              "Jednotka je uzamknutá"
+    IDS_RTE                 "Run-time chyba %u z"
+    IDS_DELETE_ALARM        "Mazání aktuálního poplachu..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETED_ALARM       "Snímky byly úspi?ni vymazány"
+    IDS_DELETED_ALARM2      "Snímky byly úspi?ni vymazány"
+    IDS_CONFIRM_RTE         "Zpráva události potvrzena"
+    IDS_DEFAULTPRINTER_SET  "Volba tiskárny úspi?ná"
+    IDS_NO_CAMERA           "Není poipojená kamera"
+    IDS_BACKUP_RUNNING      "Probíhá export: %d %%\n\n Do dokoneení zbývá asi: %s"
+    IDS_BACKUP_COMPLETE     "Export alarmového snímku by úspìšný."
+    IDS_DATE_FORMAT         "ddmmrr"
+    IDS_TIME_FORMAT_HHMMSS  "hhmmss"
+    IDS_TIMER_FORMAT        "hhmmhhmm"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "Prosím, zadejte hledané datum a potvrïte klávesou Enter"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "TODO!Prosím, zadejte hledaný èas  a potvrite klávesou Enter"
+    IDS_HELP_INPUT_PIN      "Prosím, zadejte Váš aktuální PIN"
+    IDS_HELP_INPUT_NEW_PIN  "Vložte Váš nový PIN"
+    IDS_HELP_INPUT_CONFIRM_PIN "Potvrdte Vá? nový PIN"
+    IDS_HELP_INPUT_TCPIP    "Prosím, vložte IP -  adresu a potvrïte vstupním klíèem.....!!POZOR!! Jednotka se automaticky restartuje pøi potvrzení nové IP adresy! K ponechání bez zmìny pouze stisknìte kurzorový ovladaè."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_DEL             "Vymazat aktuální deník událostí"
+    IDC_RTE_UP              "Poejít k dal?í zprávi události"
+    IDC_RTE_DOWN            "Poejít k poedchozí zprávi události"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "Potvrdit aktuální zprávu události"
+    IDC_RTE_OK              "Zavoít dialog zprávy událostí"
+    IDC_RTE_DEL_ALL         "Vymazat v?echny nahrané události"
+    IDC_RTE_PRINT           "Tisk v?ech deníku událostí"
+    IDC_CLOCK               "Vložte èas pøenosu (periodu)."
+    IDC_STATIC_EXPORT       "Kamera:"
+    IDC_EXPORT_CAM1         "Prosím zadejte kamery pro export snímku"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "Zadejte MSN a potvrïte ho klávesou Enter"
+    IDS_HELP_INPUT_TIMER    "Zadejte èasové rozmezí èasovaèe a potvrïte ho klávesou Enter"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "Zadejte aktuální èas a potvrïte ho klávesou Enter"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "Zadejte aktuální datum a potvrïte ho klávesou Enter"
+    IDS_HELP_INPUT_CAMERANAME "Zadejte nový název kamery"
+    IDS_HELP_INPUT_OLD_PIN  "Zadejte Váš aktuální PIN"
+    IDS_SET_SUBNETMASK_SUCCESS "Subnet maska nastav. úspi?ni"
+    IDS_SET_SUBNETMASK_FAILED "Ne?lo nastavit subnet masku"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "TODO!Prosím, vložte  masku síové adresy a potvrdte spouštìcí klávesasu....!!POZOR!! Jednotka se restartuje automticky po potvrzení sít'ové masky!"
+    IDS_NO_PRINTER          "Není poipojena tiskárna"
+    IDS_DEFAULT_LANGUAGE_SET "Výbir jazyku úspi?ný"
+    IDS_BACKUP_FORMAT       "Prosím poèkejte dokud jednotka nebude pøipravena exportovat záznam z kamer (y) %s. Mùže to trvat nìkolik minut.\n\n Uplynulý èas %s"
+    IDS_BACKUP_FINALIZE     "Záznam z alarmu úspìšnì zkopírován.\n Ukonèení exportu záznamu.\n. Mùže to trvat nìkolik minut.\n\n Uplynulý èas: %s"
+    IDS_HELP_UPDATE_SYSTEM  "Vložte aktualizaèní disketu do disketové mechaniky. Po ukonèní aktualizace se systém automaticky rebootuje."
+    IDS_BACKUP_FORMAT_NOCDR "Medium je plné.\n Nemuže být zahájen export dat."
+    IDS_BACKUP_FORMAT_ERROR "Objevila se chyba pøí zápisu na medium.\n Export proces se nezdaøil.\n Prosím vymìnte medium za jiné prázdné a zaènìte export proces znovu."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CAM11             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_CAM12             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_CAM13             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_CAM14             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_CAM15             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_CAM16             "Aktuální kamera.....Zmìnit aktuální kameru-zmáèknìte kurzorový ovladaè a potvrïte spouštìcí klávesou. Všechny kamery s nastavenými hodnotami podléhají pouze této kameøe."
+    IDOSD_VIEW_FULL         "Obraz kamery pøes celou obrazovku.....Pro zmìnu sledovacího zobrazení stisknìte kurzorové klávesy a potvrïte klávesou Enter."
+    IDOSD_VIEW_XXX          "Dìlené zobrazení.....Pro zmìnu sledovacího zobrazení stisknìte kurzorové klávesy a potvrïte klávesou Enter."
+    IDOSD_VIEW_1PX          "1 plus zobrazení....Pro zmìnu sledovacího zobrazení stisknìte kurzorové klávesy a potvrïte klávesou Enter."
+    IDOSD_TIMER_MO          "Èasový rozvrh na pondìlí.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_TU          "Èasový rozvrh na úterý.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_WE          "Èasový rozvrh na støedu.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_TH          "Èasový rozvrh na ètvrtek.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_FR          "Èasový rozvrh na pátek.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_SA          "Èasový rozvrh na sobotu.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_TIMER_SU          "Èasový rozvrh na nedìli.....Pro zmìnu stisknìte klávesu Enter."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "Aktuální datum.....Pro zmìnu stisknìte klávesu Enter."
+    IDOSD_CLOCK_TIME        "Aktuální èas.....Pro zmìnu èasu stisknìte klávesu Enter."
+    IDOSD_ALARM_MODE        "Nastavení nahrávání aktuální kamery... Pøepnout mezi  'Alarm/Pre-alarm' nebo 'Activity detection' zmaènìte ENTER. Vyberte kurzorem z nabídky  zmáèknìte Enter, pak potvrdte Yes kurzorem a potvrïte Entrem. VAROVÁNÍ!! Všechny pøedešlé záznamy z této kamery budou vymazány."
+    IDOSD_TCPIP             "Aktuální IP adresa .....stisknìte Enter pro zmìnu aktuální IP adresy."
+    IDOSD_ISDN_MSN          "Aktuální MSN..... stisknìte Enter pro zmìnu aktuálního MSN"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "Zmìna PIN"
+    IDOSD_CONFIG_PIN        "Pro vstup do nastavovacího menu, stisknìte klávesu Enter a zadejte heslo."
+    IDOSD_OPTION_END        "Pro odchod z nastavovacího menu stisknìte klávesu Enter."
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "Nastvení masky aktuální kamery. Vysoké rozlišení znamená - konstantní pohyby budou detekovány rychleji (ex. stromy ve vìtru) a ignorovány... Pro zmìnu citlivosti masky zmaèknìte Enter a vyberte z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "Detekce citlivosti aktuální kamery... Vysoká citlivost znamená, drobné pohyby budou detekovány a zaznamenány. Pro zmìnu citlivosti zmaèknìte Enter a kurzorem vyberte z nabídky a potvrdte Entrem."
+    IDOSD_OPTION_EXIT       "!!POZOR!! Po stisknutí Entru se jednotka vypne.!!!"
+    IDOSD_CHANGE_CAMNAME    "Aktuální název kamery.....Pro zmìnu názvu kamery stisknìte klávesu Enter."
+    IDOSD_OPTION_LOCK       "Pro uzamèení obrazovky stisknìte klávesu Enter. Obraz nebude zobrazen ale jednotka provádí záznam."
+    IDOSD_OPTION_RTE        "Pro zobrazení deníku událostí stisknìte nyní Enter"
+    IDOSD_ALARM_DELETE      "Pro vymazání soueasných poplachových snímku stisknite klávesu Enter."
+    IDOSD_NO_PRINTER        "Bez tiskárny ... Vymìnit vadnou tiskárnu: stisknìte Enter a vyberte vadnou tiskárnu kurzorem, potvrïte Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "Jas kamery....Zmìnit nastavení: zmáèknìte Enter a vyberte kurzorem požadovanou úroveò a potvrïte Entrem."
+    IDOSD_COLOR_CONTRAST    "Kontrast kamery....Zmìnit nastavení: zmáèknìte Enter a vyberte kurzorem požadovanou úroveò a potvrïte Entrem."
+    IDOSD_COLOR_SATURATION  "Situace kamery....Zmìnit nastavení:zmáèknìte Enter a vyberte kurzorem požadovanou úroveò a potvrïte Entrem."
+    IDOSD_CAM1              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM2              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM3              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM4              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM5              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM6              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM7              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM8              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM9              "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+    IDOSD_CAM10             "Aktuální kamera (v horním pravém rohu displeje)... Pro zmìnu kliknìte na požadovanou kameru a potvrïte Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_PRINTER1          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER2          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER3          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER4          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER5          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER6          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER7          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER8          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER9          "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER10         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER11         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER12         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER13         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER14         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER15         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+    IDOSD_PRINTER16         "Zmìnit chybnou tiskárnu: zmaèknìte Enter. Vyberte chybnou tiskárnu z nabídky kurzorem a potvrïte Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE2         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE3         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE4         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE6         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE7         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE8         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE9         "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE10        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE11        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE12        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE13        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE14        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE15        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+    IDOSD_LANGUAGE16        "Pøepnout na jiný jazyk: zmáèknìte Enter , vyberte požadovaný jazyk kurzorem a  potvrïte  Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "Pro export souèasných poplachových snímku stisknìte klávesu Enter."
+    IDOSD_SUSPECT_SEARCH    "Pro zobrazení první podezøelé události stisknìte klávesu Enter."
+    IDOSD_SUSPECT_DELETE    "Pro vymazání všech podezøelých snímku stisknìte klávesu Enter."
+    IDOSD_SUBNETMASK        "Aktuální subnet maska.....Pro zmìnu subnet masky stisknìte nyní Enter"
+    IDOSD_ACTIVITY_BACKUP   "Pro zahájení exportu snímku prosím stisknìte klávesu Enter"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "Pøepnout on/off  display zmáèknìte Enter."
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "Zmìna PIN"
+    IDOSD_TIMER_ONOFF       "V provozu vždy nebo jen bìhem aktivace èasovaèe kamer."
+    IDOSD_OPTION_UPDATE     "Zahájit aktualizaci z diskety"
+    IDOSD_TIME_ZONE         "Pro zmìnu vašeho èasového pásma stisknìte nyní klávesu Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "Zobrazit tabulku statistiky"
+    IDOSD_NET_NAME          "Aktuální %s název.....Pro zmìnu názvu %s stisknìte klávesu Enter."
+    IDOSD_GATEWAY           "Aktuální adresa brány.....Pro zmìnu adresy brány stisknìte nyní Enter"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "Zobrazení tohoto output... Zmìnait zobrazení zmáèknìte Enter. Vyberte z nabídky a potvrïte Entrem.V pøípadì nastavení  'Sequencer' prosím nastavte také 'Dwell Time (s)' individuálnì pro každou kameru."
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "Zobrazení tohoto output... Zmìnait zobrazení zmáèknìte Enter. Vyberte z nabídky a potvrïte Entrem.V pøípadì nastavení  'Sequencer' prosím nastavte také 'Dwell Time (s)' individuálnì pro každou kameru."
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "Zobrazení tohoto output... Zmìnait zobrazení zmáèknìte Enter. Vyberte z nabídky a potvrïte Entrem.V pøípadì nastavení  'Sequencer' prosím nastavte také 'Dwell Time (s)' individuálnì pro každou kameru."
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "Zobrazení tohoto output... Zmìnait zobrazení zmáèknìte Enter. Vyberte z nabídky a potvrïte Entrem.V pøípadì nastavení  'Sequencer' prosím nastavte také 'Dwell Time (s)' individuálnì pro každou kameru."
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "Dwell time of monitor output for sequencer mode .....To change the dwell time press Enter now|To change the time press arrow keys and confirm with Enter key"
+    IDOSD_ACOUSTIC_ALARM    "Pøepnout on/off akustický alarm."
+    IDOSD_SHOW_ALARMLIST    "Zobrazení výpisu poplachu pro zadané datum."
+    IDOSD_MD_DRAW_MASK      "Pro zmìnu permanetní masky stisknìte Enter."
+    IDOSD_ALARM_OUTPUT_ON_OFF "Aktivovat - deaktivovat  alarm output."
+    IDOSD_ALARM_CALLNUMBER1 "Aktuální èíslo volání....Zmìnit  èíslo  1 zmáèknìte Enter "
+    IDOSD_ALARM_CALLNUMBER2 "Druhé èíslo volání (lLAN, ISDN).... Zmìnit druhé volací èíslo zmáèkni Enter"
+    IDOSD_ALARM_CALLNUMBER3 "Tøetí èíslo volání (lLAN, ISDN).... Zmìnit tøetí volací èíslo zmáèkni Enter"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            " Potvrï Entrem pokraèování Exportu."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "TODO!Bìhem exportu záznamu došlo k chybì.\n Prosím vymìnte medium za  prázdné a zaènìt export proces znovu."
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "Export záznamu byl úspìšnì dokonèen.\nProsím vyjmìte medium.\n"
+    IDS_NO_RECORD_FOUND     "Zde nejsou žedné další záznamy pro tuto funkci.\n"
+    IDS_BACKUP_CHECK_CD     "Prosím vložte medium do recordéru.\nProsím poèkejte nìkolik sekund.\nMedium se automaticky vysune po nahrání.\n\nExport:\nz %s\ndo   %s\n\nKamera:\n%s"
+    IDS_BACKUP_FORMATTED    "Médium je úspìšnì pøipraveno k exportu.\nProsím poèkejte..."
+    IDS_BACKUP_FAILED       "Bìhem exportu záznamu došlo k chybì.\n Prosím vymìnte medium za  prázdné a zaènìte export proces znovu."
+    IDS_BACKUP_COPYING      "Kopírování softwaru pro etení.\nProsím poekejte..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "Tento CD-R není èitelný.\nProsím nahraïte CD-R jiným prázdným médiem a zahajte proces exportu znovu"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "Prosím zadejte datum a eas zahájení pro export snímku"
+    IDS_EXPORT_TIME_OK      "Datum a eas v pooádku"
+    IDS_EXPORT_TIME_BAD     "Chyba ve formátu datumu/easu"
+    IDS_EXPORT_INPUT_STARTTIME "Poeáteení datum/eas"
+    IDS_EXPORT_INPUT_ENDTIME "Koneené datum/eas"
+    IDS_EXPORT_STARTTIME_FORMAT "od: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "do: __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "Prosím zadejte kamery"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "Èíslo:__"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "Prosím zadejte datum a eas zahájení pro export snímku"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "Prosím zadejte kamery pro export snímku"
+    IDS_BACKUP_COMPLETE2    "Export snímku úspi?ný"
+    IDS_IMAGE_MANIPULATED   "Se snímkem bylo manipulováno nebo je poškozen!"
+    IDS_BACKUP_DISC_FULL    "Na vloženém mediu není dostatek volného místa..\nProsím nahraïte CD-R jiným prázdným médiem a zahajte proces exportu znovu."
+    IDS_BACKUP_NO_EMPTY_CD  "Vložené medium není prázdné..\nProsím nahraïte CD-R jiným prázdným médiem a zahajte proces exportu znovu."
+    IDS_VERSION             "Verze"
+    IDS_HELP_SELECT_HOST    "Vyberte %s ze seznamu %s a potvrdte stisknutím klávesy Enter"
+    IDS_BACKUP_NODATA       "Žádné snímky nejsou k dispozici."
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "Pøíliš mnoho snímkù pro export.\n Prosím snižte specifikovaný èasový úsek nebo poèet kamer."
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "V zadaném èasovém pásmu nejsou žádné snímky pro export .\n"
+    IDS_BACKUP_FORMAT2      "Prosím èekejte, medium je pøipravováno na export.\nMùže to trvat i nìkolik minut.\n\nUplynulý èas: %s"
+    IDS_BACKUP_FINALIZE2    "Snímky se úspi?oi zkopírovaly.\n Dokoneuje se export snímku.\n Tato operace mu?e trvat nikolik minut.\n\n Uplynulá doba: %s"
+    IDS_READ_FAILED         "Snímek nemùže být zobrazen."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "Prosím vložte medium do recorderu.\nProsím poèkejte nìkolik sekund.\nMedium se automaticky vysune po nahrání.\n\nExport:\nz %s\ndo   %s\n\nKamera:\n%s"
+    IDS_SEARCH_DATE_FAILED  "Chybné datum"
+    IDS_SEARCH_TIME_FAILED  "Chybný èas"
+    IDS_TIME_FORMAT_HHMM    "hhmm"
+    IDS_TIMER_ON            "Stále aktivní"
+    IDS_TIMER_OFF           "Easovae aktivní"
+    IDS_INPUT_DISK          "Vlo?te disketu %d"
+    IDS_UPDATE_SUCCESS      "Úspi?ná aktualizace"
+    IDS_UPDATE_RUNNING      "Probiha aktualizace..."
+    IDS_UPDATE_FAILED       "Neúspi?ná kopie"
+    IDS_UPDATE_WRONG_CRC    "?patný kontrolní soueet"
+    IDS_UPDATE_WRONG_DISK   "?patná aktualizaení disketa"
+    IDS_UPDATE_DISKFAILED   "Chyba poi etení diskety"
+    IDS_UPDATE_NO_UPDATE_DISK "Akt. disketa chybí(je ?patná)"
+    IDS_UPDATE_WRONG_OEM    "?patná OEM-verze"
+    IDS_UPDATE_WRONG_BUILD  "?patné eíslo verze"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "Zmina easové zóny"
+    IDS_SET_TIME_ZONE_FAILED "Easová zóna nezminina"
+    IDS_HELP_SET_TIME_ZONE  "Zadejte Váš  kód èasové zóny (Viz dokumentace)"
+    IDS_STATISTIC_STARTTIME "Eas zahájení:"
+    IDS_STATISTIC_DURATION  "Dny:"
+    IDS_STATISTIC_PICCOUNTER "Snímky:"
+    IDS_EXPORT_NO_CAMERA    "Chyba, ?ádná kamera"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "Název byl úspe?ne zminin"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "Nelze zminit název"
+    IDS_SELECT_HOST         "%s seznam"
+    IDS_HOSTLIST_EMPTY      "%s seznam je prázdný"
+    IDS_INVALID_SERIAL      "?patné eíslo licence"
+    IDS_DISCONNECT          "Rozpojit"
+    IDS_SET_GATEWAY_SUCCESS "Zmina adresa brány"
+    IDS_SET_GATEWAY_FAILED  "Adresa brány nezminina"
+    IDS_HELP_INPUT_GATEWAY  "Vložte prosím adresu brány (gateway address ) a potvrdte Entrem.....!POZOR!!Jednotka se automaticky restartuje."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "Aktuální kamera"
+    IDS_VOUT_MODE_SEQUENCER "Sekvencer"
+    IDS_VOUT_MODE_ACTIVITY  "Aktivity"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "Výpoèet datumu a èasu byl úspìšný.\n Pro zjištìní kapacity media zmaèknìte prosím Enter P.\n\nExport:\nz %s\n\nKamera:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "Výpoèet date/time byl úšpìšný.\nByl nalezen nový záznam z vybrané kamery. Nebude využito 100% kapacity media.\nProsím zmáèknìte Enter a vyberte více záznamu z date/time nebo vyberte více kamer.\n\nMediums utilization: ca. %s %%\n\nExport:\nz %s\n\nKamera:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "Prosím èekejte...\nProbíhá výpoèet pro export záznamu."
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "Nebyl nalezen záznam z požadovaného  data/èasu.!Prosím vložte nové datum/èas."
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "Hledání se nezdaøílo.\nProsím vložte nový datum/èas pro exportování záznamu z.\n\nExport:\nz %s\n\nKamera:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "Výpoèet se nezdaøil."
+    IDS_EXTEND              "Upoesnit..."
+    IDS_HELP_EXTEND         "Prosím zmáèknìte Enter pro vytvoøení %s seznamu, nebo vytvoøte novou položku."
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "Nastavení vytáèení."
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "Vytáèení nebylo nastaveno."
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "Prosím zadejte kamery pro export snímku"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_ACTIVITY  "Zobrazit detekovanou aktivitu v seznamu alarmù.Mùžete vybrat jednu nebo více kamer."
+    IDC_ALARMLIST_EXTERN1   "Zobrazit události z prvního extrerního pøipojení v seznamu událostí (alarmù)."
+    IDC_ALARMLIST_EXTERN2   "Zobrazit udalosti z druhého externího pøipojení v seznamu událostí (alarmù)."
+    IDC_ALARMLIST_IMAGE     "TODO!Otevøít pro každou kameru nové okno s playbackem. V každém oknì mužete použít zpomalený zábìr."
+    IDC_ALARMLIST_UP2       "Zobrazit  seznam alarmù z dalšího dne."
+    IDC_ALARMLIST_DOWN2     "Zobrazit seznam alarmù z pøedchozího dne."
+    IDC_ALARMLIST_AUDIO     "Zobrazit detekovaný alarm v seznamu alarmù.Mužete vybrat nìkolik kamer pro tuto funkci."
+    IDC_STATISTIC_OK        "Ukonèit statistiku."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Vymazat  permanentní masku."
+    IDC_MD_INVERT           "Invertovat permanentní masku."
+    IDC_MD_SHOW_ADAPTIVE    "Zobrazit masku na záznamu."
+    IDC_ALARMLIST_OK        "Zavøít seznam alarmù."
+    ID_MD_OK                "Zavøít editor masky."
+    IDC_HOSTS_OK            "Close the %s list dialog"
+    IDC_HOSTS_NEW           "Insert a new entry in the %s list"
+    IDC_HOSTS_DELETE        "Delete the selected %s list entry"
+    IDC_HOSTS_DISPLAY_NAME  "Name of the remote %s currently selected in the %s list...Click here, to edit this entry."
+    IDC_HOSTS_DISPLAY_IP    "IP address of the remote %s currently selected in the %s list...Click here, to edit this entry."
+    IDC_HOSTS_UP_START      "Pøeskoèit na  zaèátek%s seznamu."
+    IDC_HOSTS_UP            "Pøejít na další stranu  %s listu."
+    IDC_HOSTS_DOWN          "Pøejít na pøedešlou stranu %s listu."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "Pøeskoèit na konec %s listu."
+    IDC_ALARMLIST_UP        "Zobrazit pøedešlou stranu seznamu alarmù."
+    IDC_ALARMLIST_DOWN      "Zobrazit další stranu seznamu alarmù"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "Vytisknout  seznam alarmu k vybranému datu."
+    IDC_ALARMLIST_CAM0      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM1      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM2      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM3      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM4      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM5      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM6      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM7      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM8      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM9      "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM10     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM11     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM12     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM13     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+    IDC_ALARMLIST_CAM14     "Fitry pro kamery...Pøi aktivaci filtru jsou alarmy  zobrazovány na seznamu alarmù. Mùžete zároveò nastavit více kamer ve stejnou dobu."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "Prosím vložte datum/èas pro Export. Pøí nesprávném zadání datumu/èasu bude zobrazen nejstarší záznam z vybrané kamery."
+    IDS_BACKUP_MULTI        "Na základì velkého množství dat bude potøeba více než jednoho media.Prosím zaènìte zálohování a pak pokraèujte zvolením v menu Pokraèovat v zálohování (Continue backup). Druhé zálohování je pokraèováním prvního.\n\nExport: \nz %s\n\nKamera(s):\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "A,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "A,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "A,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "Vyp."
+    IDS_EXPANSION_CODE_SUCCESS "Akceptováno."
+    IDS_EXPANSION_CODE_FAILED "Zadejte kód znovu."
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "Export bude pokraèovat po ukonèení pøedešlého.\n\nPøedešlý export:\nz %s\ndo   %s\n\nPrávì probíhá export:\nfrom %s\n\nKamera(s):\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "Export bude pokraèovat po ukonèení pøedešlého.\n\nPøedešlý exportt:\nz %s\ndo   %s\n\nPrávì probíhá export:\nz%s\n\nKamera:\n%s\n\nProsím èekejte...\n"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "Export bude pokraèovat po ukonèení pøedešlého.\n\nPøedešlý export:\nz %s\ndo   %s\n\nPrávì probíhá export:\nz %s\n\nKamera:\n%s\n\n datu/èas v poøádku. Není dostatek záznamu k optimálnímu  nalnìní media.\n\n Stav media: ca. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "Export bude pokraèovat po ukonèení pøedešlého.\n\nPøedešlý export:\nz %s\ndo   %s\n\nPravì probíhá export:\nz %s\n\nKamera:\n%s\n\n datu/èas v poøádku. Prosím použijte claculator datum/èasu k dosžení optimálního zaplnìní media."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "Zjistit který detektor vyvolává alarm. A = activity detection, Ext1 = první external detector, Ext2 = druhý external detector....Prosím, použij kurzor pro zmìnu nastavení a potvrï Entrem."
+    IDOSD_EXPANSION_CODE    "Pro vložení kodu zmáèkni ovládací klávesu."
+    IDOSD_EXPORT_SETTINGS   "Exportovat nastavení systému."
+    IDOSD_IMPORT_SETTINGS   "Importovat pøedchozí nastavení systému."
+    IDOSD_OPTION_INFO       "Pro zobrazení systémových informací zmáèkni Enter."
+    IDOSD_CAMERA_RESOLUTION "Por zmìnu nastavení rozlišení všech kamer zmáèkni Enter.Vysoké rozlišení = perfektní zobrazení ale velký objem dat."
+    IDOSD_CAMERA_COMPRESSION 
+                            "Pro zmìnu komprese u aktuální kamery zmáèkni Enter. Vysoká komprese = málo kvalitní záznam ale malý objem dat."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "Export bude pokraèovat po ukonèení pøedešlého.\n\nPøedešlý export:\nz %s\ndo   %s\n\nPravì probíhá export:\nz %s\n\nKamera:\n%s\n\n datu/èas nebyl zadán správnì. Prosím zadejt  datum/èas který chcete exportovat."
+    IDS_POWEROFF_PRESSED    "Vypnout systém."
+    IDS_RESET_PRESSED       "Reboot system"
+    IDS_EXPORT_NO_IMAGES    "Nebyl nalezen záznam."
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "Nebyly nalezeny záznamy z požadovaného období (datum/èas).Prosím volžte nový datum/èas.\nProsím zmáèknìte Enter pro použití výpoètu k dosažení optimálního zaplnìní nahrávacího media.\n\nExport:\nz %s\n\nKamera:\n%s"
+    IDS_BACKUP_REQUEST_MB   "Nebyly nalezeny záznamy z požadovaného období (datum/èas).Prosím vožte nový datum/èas.\n Calkuklace ukazala nový záznam na vybrané kameøe.Medium nebude zcela zaplnìno\n.\nOptimalizace media: ca. %s %%\n\nExport:\nz %s\n\nKamera:\n%s"
+    IDS_EXIT_ENTRY          ">Odchod z programová"
+    IDS_YES                 "Ano"
+    IDS_NO                  "Ne"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "Prosím vyberte ANO èi NE kurzorem a potvrïte Entrem....POZOR!! Všechnen záznam z této kamery bude trvale vymazán. Prosím potvrïte ANO!"
+    IDS_OK                  "OK"
+    IDS_CANCEL              "Storno"
+    IDS_ERROR               "Chyba"
+    IDS_FILE_SYSTEM_ACCESS  "Prosím vložte PIN pro pøístup k datùm.\n"
+    IDS_BACKUP_TITLE        "Export záznamu"
+    IDS_KEYBOARD_UPPER_KEYS "QWERTYUIOPASDFGHJKLZXCVBNM"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "qwertyuiopasdfghjklzxcvbnm"
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "Vložené medium není prázdné.\nExport záznamu je možný pouze na prázdné medium. Pøed exportem musíte medium vymazat nebo vymìnit za jiné.\nVymazat medium: ANO' zmáèknìte Enter.\n Medium bude aoutomaticky vymazáno pøed exportem."
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "Vymazání media: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "Pøíprava pro expot záznamu.\n\nVývoj: %d %%\n\nUplynulý èas: %s"
+    IDS_BACKUP_ACDC_START   "Prosím vložte medium.\nIt Prosím poèkejte nìkolik sekund než bude medium identifikováno.\nMedium bude vysunuto po ukonèení exportu."
+    IDS_ERASE_MEDIUM        "Vymazat Medium"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "Prosím vložte medium."
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "Medium není prázdné. Má se medium vymazat pøed exportem záznamu?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "Vysunování media."
+    IDS_EXPORT_INSERT_MEDIUM "Vložte medium."
+    IDS_EXPORT_ERASE_MEDIUM "Medium rozpoznáno."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "K exportu záznamu je potøeba prázdné medium.\nProsím vymažte medium nebo vložte jiné prázdné."
+    IDS_FOUND_NEW_DEVICE    "Nalezena nová jednotka:"
+    IDS_REMOVED_DEVICE      "Odstranit jednotku:"
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "Nalezené medium není prázdné.\n Prosím vyberte zda se má nový záznam pøíøadit k stávajícímu èi vymazat medium a nahrát nový záznam na celou kapacitu media."
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "Ma mediu není dostatek místa pro export.\nProsím vložte nové medium nebo ho vymažte."
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "Vymazání media\n\nTime: %s"
+    IDS_BACKUP_RUNNING_UP   "Probíhá export: %d %%\n\nEas: %s"
+    IDS_IMPORT_SUCCESS      "Import byl úspìšný."
+    IDS_IMPORT_FAILED       "Import se nezdaøil."
+    IDS_IMPORT_RUNNING      "TODO!Právì probíhá Import..."
+    IDS_CAMERA_FIX          "Fixní Kamera. "
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "Pøíprava Exportu byla zrušena uživatelem."
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "Export byl zrušen uživatelem."
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\nExport bude zrušen.\nProsím èekejte...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_REALTIME          "ON/OFF realtime nahrávání"
+    IDOSD_CAMERA_PTZ_TYPE   "Pro zmìnu kamery zmáèkni ENTER"
+    IDOSD_CAMERA_PTZ_ID     "ID kamery je.....Pro zmìnu ID zmáèknìte Enter."
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "Pro zmìnu COM kamery zmáèknìte Enter."
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "Current audio assigned camera. The audio recording can only be assigned to one camera at the same time... To change the audio assignment, please press Enter now|Choose with arrow keys and confirm it with Enter"
+    IDOSD_AUDIO_THRESHOLD   "Current Threshold on audio assigned camera. Defines the sound level that, when exceeded, activates the recording... To adjust the threshold, please press Enter|Choose with arrow keys and confirm it with Enter"
+    IDOSD_AUDIO_SENSITIVITY "Aktuální citlivost... Pro nastavení citlivosti mikrofonu zmáèknìte Enter."
+    IDOSD_AUDIO_VOLUME      "Aktuální hlasitost...Pro nastavení hlasitosti reproduktoru zmáèknìte prosím Enter."
+    IDOSD_AUDIO_RECORD_MODE "Current alarm type on audio assigned camera. Defines what kind of detector activates the recording: L=exceeding the threshold, A=activity detection, Ext=External detector, or a combination of them. Please, press Enter to change|Choose with arrow keys and confirm it with Enter"
+    IDOSD_AUDIO_LISTEN_IN   "TODO!Vypnout nebo zapnout poslech zmaèknìte prosím Enter.Vyberte kurzorem z nabídky a potvrdte Entrem."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "L"
+    IDS_AUDIO_RECORDING_EXT "Ext"
+    IDS_AUDIO_RECORDING_AL  "A,L"
+    IDS_AUDIO_RECORDING_AEXT "A,Ext"
+    IDS_AUDIO_RECORDING_LEXT "L,Ext"
+    IDS_AUDIO_RECORDING_ALEXT "A,L,Ext"
+END
+
+#endif    // Czech (Czech) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+#ifdef _WIN32
+LANGUAGE 5, 1
+#pragma code_page(1250)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

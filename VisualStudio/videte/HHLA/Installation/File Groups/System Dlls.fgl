@@ -1,0 +1,8 @@
+[TopDir]
+file0=C:\WINNT\system32\Mfc42.dll
+file1=C:\WINNT\system32\msvcrt.dll
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

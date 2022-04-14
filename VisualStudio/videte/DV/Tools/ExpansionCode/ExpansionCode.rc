@@ -1,0 +1,282 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ExpansionCode.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\ExpansionCode.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EXPANSIONCODE_DIALOG DIALOGEX 0, 0, 321, 293
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ExpansionCode"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_EDIT_SERIAL,72,7,66,14,ES_AUTOHSCROLL
+    LTEXT           "Freischaltcode:",IDC_TXT_EXPANSION_CODE,150,9,49,8
+    EDITTEXT        IDC_EDIT_CODE,210,7,104,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "idip® PL Receiver",IDC_RADIO_IDIP_PL,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,9,38,73,10
+    CONTROL         "idip® XL Receiver",IDC_RADIO_IDIP_XL,"Button",
+                    BS_AUTORADIOBUTTON,97,38,73,10
+    CONTROL         "DTS Sender",IDC_RADIO_DTS,"Button",BS_AUTORADIOBUTTON,
+                    189,38,55,10
+    CONTROL         "idip® Sender (alle Versionen)",
+                    IDC_RADIO_IDIP_TRANSMITTER,"Button",BS_AUTORADIOBUTTON,9,
+                    52,107,10
+    CONTROL         "LAN",IDC_DTS_CHECK_LAN,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,26,95,30,10
+    CONTROL         "ISDN",IDC_DTS_CHECK_ISDN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,110,33,10
+    CONTROL         "Auslagerung auf CD/RW und USB Geräte",
+                    IDC_DTS_CHECK_CDRW,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,26,125,149,10
+    CONTROL         "Auslagerung auf DVD",IDC_DTS_CHECK_DVD,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,26,140,91,10
+    GROUPBOX        "Q Unit only",IDC_DTS_STATIC_GRP_Q,20,152,77,56,NOT 
+                    WS_VISIBLE
+    CONTROL         "4  Kameras",IDC_DTS_RADIO_QCAM_4,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,26,165,51,
+                    10
+    CONTROL         "8  Kameras",IDC_DTS_RADIO_QCAM_8,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,26,177,51,10
+    CONTROL         "16 Kameras",IDC_DTS_RADIO_QCAM_16,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,26,190,53,10
+    CONTROL         "Timer ............ (bei PL/XL Receiver immer freigeschaltet)",
+                    IDC_CHECK_IDIP_RECEIVER_TIMER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,95,192,10
+    CONTROL         "PTZ ............. (bei PL/XL Receiver immer freigeschaltet)",
+                    IDC_CHECK_IDIP_RECEIVER_PTZ,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,112,191,10
+    CONTROL         "2 Monitore .... (bei XL immer freigeschaltet, bei PL nie)",
+                    IDC_CHECK_IDIP_RECEIVER_MONITOR2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,26,128,185,10
+    CONTROL         "Anwahlkarten (bei XL immer freigeschaltet, bei PL nie)",
+                    IDC_CHECK_IDIP_RECEIVER_MAPS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,26,142,185,8
+    LTEXT           "Anzahl Gegenstationen:",
+                    IDC_STATIC_IDIP_RECEIVER_NR_HOST,26,155,80,8
+    COMBOBOX        IDC_COMBO_IDIP_RECEIVER_NR_HOST,24,167,72,88,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,264,270,50,14
+    LTEXT           "Lizenznummer:",IDC_TXT_LICENCE,7,10,53,8
+    LTEXT           "Die Lizensnummer (Idip) / Seriennummer (DTS) darf nicht größer als 410.000.000 sein.",
+                    IDC_STATIC,15,25,289,8
+    CONTROL         "idip® Backup",IDC_DONGLE_CHECK_BACKUP,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,26,98,63,
+                    10
+    CONTROL         "Q (NCP)",IDC_DONGLE_CHECK_QUNIT,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,27,151,63,
+                    10
+    CONTROL         "IP (Axis)",IDC_DONGLE_CHECK_IP,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,98,150,63,10
+    COMBOBOX        IDC_DONGLE_COMBO_NR_Q_CAMERAS,28,174,46,88,
+                    CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "ISDN (incl. 2. ISDN + SMS)",IDC_DONGLE_CHECK_ISDN,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    29,224,101,10
+    CONTROL         "PTZ",IDC_DONGLE_CHECK_PTZ,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,176,97,40,10
+    CONTROL         "Geldautomat",IDC_DONGLE_CHECK_GAA,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,186,124,76,10
+    CONTROL         "Zutrittskontrolle",IDC_DONGLE_CHECK_ACCESS,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,186,137,76,10
+    CONTROL         "Industrie / Scanner",IDC_DONGLE_CHECK_SCANNER,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,186,150,76,10
+    CONTROL         "Parkmanagment",IDC_DONGLE_CHECK_PARK,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,186,164,76,10
+    CONTROL         "ICPCON Unit",IDC_DONGLE_CHECK_ICPCON,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,175,182,76,
+                    10
+    CONTROL         "HTTP in Planung",IDC_DONGLE_CHECK_HTTP,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_TABSTOP,176,222,76,10
+    GROUPBOX        "Basis",IDC_DONGLE_STATIC_GRP_BASIS,21,81,134,39,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Codec Module",IDC_DONGLE_STATIC_CODEC,21,131,134,66,NOT 
+                    WS_VISIBLE
+    LTEXT           "Nr. Q Kameras:",IDC_DONGLE_STATIC_NR_Q_CAMERAS,28,163,
+                    65,8,NOT WS_VISIBLE
+    GROUPBOX        "Verbindungs Module",IDC_DONGLE_STATIC_VERBINDUNG,21,207,
+                    134,38,NOT WS_VISIBLE
+    GROUPBOX        "Optionale Module",IDC_DONGLE_STATIC_OPTIONAL_MODULE,168,
+                    81,131,117,NOT WS_VISIBLE
+    GROUPBOX        "Optionale Funktionen",
+                    IDC_DONGLE_STATIC_OPTIONAL_FUNCTIONS,168,207,132,38,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Optionen DTS Sender",IDC_GRP_OPTIONS,8,67,306,197
+    CONTROL         "Serial Alarm",IDC_DONGLE_CHECK_SERIAL_ALARM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,176,110,55,11
+    COMBOBOX        IDC_DONGLE_COMBO_NR_IP_CAMERAS,98,174,46,88,
+                    CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Nr. IP Kameras",IDC_DONGLE_STATIC_NR_IP_CAMERAS,98,163,
+                    51,11,NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_EXPANSIONCODE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 314
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 284
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_EXPANSIONCODE_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 2, 0
+0x0035, 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3032, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3033, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3034, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3035, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 3, 0
+0x3036, "\000" 
+    IDC_COMBO_IDIP_RECEIVER_NR_HOST, 0x403, 11, 0
+0x6e75, 0x6562, 0x7267, 0x6e65, 0x747a, "\000" 
+    IDC_DONGLE_COMBO_NR_Q_CAMERAS, 0x403, 2, 0
+0x0034, 
+    IDC_DONGLE_COMBO_NR_Q_CAMERAS, 0x403, 2, 0
+0x0038, 
+    IDC_DONGLE_COMBO_NR_Q_CAMERAS, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_DONGLE_COMBO_NR_Q_CAMERAS, 0x403, 3, 0
+0x3432, "\000" 
+    IDC_DONGLE_COMBO_NR_Q_CAMERAS, 0x403, 3, 0
+0x3233, "\000" 
+    IDC_DONGLE_COMBO_NR_IP_CAMERAS, 0x403, 2, 0
+0x0034, 
+    IDC_DONGLE_COMBO_NR_IP_CAMERAS, 0x403, 2, 0
+0x0038, 
+    IDC_DONGLE_COMBO_NR_IP_CAMERAS, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_DONGLE_COMBO_NR_IP_CAMERAS, 0x403, 3, 0
+0x3432, "\000" 
+    IDC_DONGLE_COMBO_NR_IP_CAMERAS, 0x403, 3, 0
+0x3233, "\000" 
+    0
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\ExpansionCode.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

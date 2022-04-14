@@ -1,0 +1,64 @@
+History AkuUnit
+---------------
+
+
+
+7.1.97
+	- Erstellt
+
+8.1.97
+	- MicoRelikte entfernt
+
+9.1.97
+	- Ausgabe der Versionsnummer in der AkuUnit.log bei Programmstart
+
+10.1.97
+	- WK_ALONE(WK_APP_NAME_AKUUNIT) eingeführt
+
+14.1.97
+	- Die Makros SETBIT, CLRBIT, TESTBIT basierten auf dem Typ WORD.
+	  Da dieses Makro aber auch bei der Alarm und Relais Behandlung
+	  benutzt werden, müssen diese auf DWORD ausgelegt sein!!
+
+23.4.97
+	- Die CIo-Klasse für NT angepaßt. Die AkuUnit läßt sich nun auch als
+	  NT Version kompilieren. Der Zugehörige NT-Treiber (AkuDrv.sys) muß
+	  natürlich zuvor installiert werden.
+
+25.4.97
+	- Das Alarmpolling des Micos übernommen, d.h, Ein Alarm wird erst als solcher
+	  registriert, wenn der Pegel am Alarmeingang sich mindestens 50ms nicht ändert.
+	- Die Member der Klasse CAku durch CrtiticalSections geschützt.
+	- Die Member der Klasse CIo durch CrtiticalSections geschützt.
+
+12.6.97
+	- Der AboutDialog befindet sich nun in der idip.dll
+
+29.7.97
+	- Umstellung auf den Developer 5.0
+
+12.8.97
+	- Dongleabfrage bei Programmstart implementiert
+
+18.8.97
+	- dongle.RunAKUUnit() durch dongle.IsExeOkay() ersetzt
+
+30.03.98
+	- AkuUnit an die COemGui.dll angepaßt
+11.05.98 HD ExceptionHandler via InitDebugger.
+
+24.06.98
+	- Umzug von der AkuUnit.ini in die Registry
+	- Sofern eine AkuUnit.ini existiert, werden
+	  diese Einstellungen in die Registry kopiert,
+	  und in OldAkuUnit umbenannt.
+09.07.98
+	- Die Unterscheidung zwischen Win95/WinNT wird 
+	  nun dynamisch unterschieden.
+
+17.01.01
+	- Das Icon erscheint nun im Systemtray
+
+14.11.02
+	- Anpassung VS_70
+	

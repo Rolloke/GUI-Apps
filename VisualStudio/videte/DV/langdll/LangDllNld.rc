@@ -1,0 +1,904 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Dutch (Dutch) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NLD)
+#ifdef _WIN32
+LANGUAGE LANG_DUTCH, SUBLANG_DUTCH
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NLD)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 19, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU DISCARDABLE 
+BEGIN
+    POPUP "Weergave"
+    BEGIN
+        MENUITEM ">Volbeeld",                   IDOSD_VIEW_FULL
+        MENUITEM ">Mozaïek",                IDOSD_VIEW_XXX
+        MENUITEM ">1 plus",                     IDOSD_VIEW_1PX
+    END
+    POPUP "Camera"
+    BEGIN
+        MENUITEM ">Camera",                     IDOSD_CAM1
+        MENUITEM ">Camera",                     IDOSD_CAM2
+        MENUITEM ">Camera",                     IDOSD_CAM3
+        MENUITEM ">Camera",                     IDOSD_CAM4
+        MENUITEM ">Camera",                     IDOSD_CAM5
+        MENUITEM ">Camera",                     IDOSD_CAM6
+        MENUITEM ">Camera",                     IDOSD_CAM7
+        MENUITEM ">Camera",                     IDOSD_CAM8
+        MENUITEM ">Camera",                     IDOSD_CAM9
+        MENUITEM ">Camera",                     IDOSD_CAM10
+        MENUITEM ">Camera",                     IDOSD_CAM11
+        MENUITEM ">Camera",                     IDOSD_CAM12
+        MENUITEM ">Camera",                     IDOSD_CAM13
+        MENUITEM ">Camera",                     IDOSD_CAM14
+        MENUITEM ">Camera",                     IDOSD_CAM15
+        MENUITEM ">Camera",                     IDOSD_CAM16
+    END
+    POPUP "Setup menu"
+    BEGIN
+        MENUITEM ">PIN: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM ">Vergrendel weergave",               IDOSD_OPTION_LOCK
+    POPUP "Systeem"
+    BEGIN
+        MENUITEM ">Systeem Info",                IDOSD_OPTION_INFO
+        MENUITEM ">Statistieken",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "Replay"
+    BEGIN
+        MENUITEM ">Realtime",                   IDOSD_REALTIME
+        MENUITEM ">Alarmlijst",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">Weergave Doelwit",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU DISCARDABLE 
+BEGIN
+    POPUP "Camera Instelling"
+    BEGIN
+        MENUITEM ">Camera naam:________________", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Beeld Compressie",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">Helderheid",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">Contrast",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">Saturatie",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Type",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">Com Poort: __",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "Systeem Instellingen"
+    BEGIN
+        MENUITEM ">Beeld Resolutie",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">Akoestisch alarm",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">Exporteer Systeem Instelling", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">Importeer Systeem Instelling", IDOSD_IMPORT_SETTINGS
+    END
+    POPUP "Cameratimers"
+    BEGIN
+        MENUITEM ">Maandag: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">Dinsdag: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">Woensdag: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">Donderdag: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">Vrijdag: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">Zaterdag: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">Zondag: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">Alarmingangen",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "Camera Opnamemode"
+    BEGIN
+        MENUITEM ">Mode",                      IDOSD_ALARM_MODE
+    END
+    POPUP "Activiteitsconfiguratie"
+    BEGIN
+        MENUITEM ">Sensitivity",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">Maskeergevoeligheid",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">Wijzigen masker",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "Alarmconfiguratie"
+    BEGIN
+        MENUITEM ">Alarmoproep bij",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">Kiezen nr. 1",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">Kiezen nr. 2",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">Kiezen nr. 3",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">Alarm-uitgang",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "Beelden"
+    BEGIN
+        MENUITEM ">Beelden exporteren",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">Afbreken export proces",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">Vervolg exporteren",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">Alarmbeelden exporteren",      IDOSD_ALARM_BACKUP
+        MENUITEM ">Alarmbeelden verwijderen",        IDOSD_ALARM_DELETE
+        MENUITEM ">Verdachte beelden weergeven",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">Verdachte beeld. verwijderen",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "Video Uitgangen"
+    BEGIN
+        MENUITEM ">Uitgang 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">Uitgang 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">Uitgang 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">Uitgang 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">Dwell tijd switcher (s)",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "Audio Settings"
+    BEGIN
+        MENUITEM ">Listen In",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM ">Assignment",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">Record Mode",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">Sensitivity",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">Threshold",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">Volume",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "Netwerk"
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">Subnetmask: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">Gateway:___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">%s naam:_______________",    IDOSD_NET_NAME
+    END
+    POPUP "Datum/Tijd"
+    BEGIN
+        MENUITEM ">Datum: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">Tijd: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM ">Zone:",                      IDOSD_TIME_ZONE
+    END
+    POPUP "Printer Selectie"
+    BEGIN
+        MENUITEM "Geen printer",                IDOSD_NO_PRINTER
+        MENUITEM ">Printer",                    IDOSD_PRINTER1
+        MENUITEM ">Printer",                    IDOSD_PRINTER2
+        MENUITEM ">Printer",                    IDOSD_PRINTER3
+        MENUITEM ">Printer",                    IDOSD_PRINTER4
+        MENUITEM ">Printer",                    IDOSD_PRINTER5
+        MENUITEM ">Printer",                    IDOSD_PRINTER6
+        MENUITEM ">Printer",                    IDOSD_PRINTER7
+        MENUITEM ">Printer",                    IDOSD_PRINTER8
+        MENUITEM ">Printer",                    IDOSD_PRINTER9
+        MENUITEM ">Printer",                    IDOSD_PRINTER10
+        MENUITEM ">Printer",                    IDOSD_PRINTER11
+        MENUITEM ">Printer",                    IDOSD_PRINTER12
+        MENUITEM ">Printer",                    IDOSD_PRINTER13
+        MENUITEM ">Printer",                    IDOSD_PRINTER14
+        MENUITEM ">Printer",                    IDOSD_PRINTER15
+        MENUITEM ">Printer",                    IDOSD_PRINTER16
+    END
+    POPUP "Taalselectie"
+    BEGIN
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE1
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE2
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE3
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE4
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE5
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE6
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE7
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE8
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE9
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE10
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE11
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE12
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE13
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE14
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE15
+        MENUITEM ">Taal",                    IDOSD_LANGUAGE16
+    END
+    POPUP "Wijzig PIN"
+    BEGIN
+        MENUITEM ">Gebruiker",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">Installateur",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "Andere Systeemopties"
+    BEGIN
+        MENUITEM ">Toon Gebeurtenissenlog",   IDOSD_OPTION_RTE
+        MENUITEM ">Systeem Uitschakelen",          IDOSD_OPTION_EXIT
+        MENUITEM ">Software Update",             IDOSD_OPTION_UPDATE
+        MENUITEM ">Extensiecode:_____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "Verlaat Setup menu",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "DVClient"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "PIN correct"
+    IDS_ON                  "Aan"
+    IDS_PIN_FAILED          "PIN gewijgerd"
+    IDS_PIN                 "PIN: ____"
+    IDS_SEARCH_DATE         "Zoek datum: __.__.__"
+    IDS_SEARCH_TIME         "Zoek tijd: __:__"
+    IDS_SEARCH_ERROR        "Zoekfout"
+    IDS_OFF                 "Uit"
+    IDS_CAMERA              "Camera:"
+    IDS_OLD_PIN             "Huidige PIN: ____"
+    IDS_NEW_PIN             "Nieuwe PIN: ____"
+    IDS_CONFIRM_PIN         "Bevestig PIN: ____"
+    IDS_PIN_CHANGED         "PIN werd gewijzigd"
+    IDS_SET_CLOCK_DATE_FAILED "Datum niet gewijzigd"
+    IDS_SET_CLOCK_TIME_FAILED "Tijd niet gewijzigd"
+    IDS_SEARCH_START        "Zoeken..."
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "Datum gewijzigd"
+    IDS_SET_CLOCK_TIME_SUCCESS "Tijd gewijzigd"
+    IDS_SET_TIMER_SUCCESS   "Timer gewijzigd"
+    IDS_SET_IP_SUCCESS      "IP-Adres gewijzigd"
+    IDS_SET_IP_FAILED       "IP-Adres niet gewijzigd"
+    IDS_SET_MSN_SUCCESS     "MSN gewijzigd"
+    IDS_SET_MSN_FAILED      "MSN niet gewijzigd"
+    IDS_SET_TIMER_FAILED    "Timer niet gewijzigd"
+    IDS_MD                  "Activiteitsdetectie"
+    IDS_UVV                 "Alarm/Pre-alarm"
+    IDS_LOW                 "Laag"
+    IDS_NORMAL              "Normal"
+    IDS_HIGH                "Hoog"
+    IDS_WAIT                "Wachten aub..."
+    IDS_NO_PICTURES         "Geen beelden voor deze camera"
+    IDS_QUERY               "Zoek naar:\n"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DVClient"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "Datum en tijd"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "Actieve camera.....Alle camera-specifieke waarden verwijzen naar deze camera."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "Weergave snel achterwaarts "
+    IDC_BUTTON_PLAY         "Weergave voorwaarts"
+    IDC_BUTTON_PLAY_BACK    "Weergave achterwaarts"
+    IDC_BUTTON_STOP         "Weergave beëindigen"
+    IDC_BUTTON_FF           "Weergave snel vooruit"
+    IDC_BUTTON_EJECT        "Weergavevenster van de actieve camera sluiten"
+    IDC_BUTTON_SKIP_BACK    "Spring naar de vorige gebeurtenis"
+    IDC_BUTTON_SINGLE_BACK  "Enkele stap terug"
+    IDC_BUTTON_SINGLE_FORWARD "Enkele stap voorwaarts"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "Zoek"
+    IDC_BUTTON_SKIP_FORWARD "Spring naar de volgende gebeurtenis"
+    IDC_BUTTON_EXPORT       "Exporteer een beeld van de actieve camera naar:"
+    IDC_BUTTON_PRINT        "Print een beeld van de actieve camera op %s"
+    IDC_BUTTON_MINIMIZE     "Minimaliseer menuvenster in de rechteronderhoek."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_OK           "Programma afsluiten"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_QUERY_FAILED        "Geen beelden gevonden:\n"
+    IDS_SHUTDOWN            "Systeem wordt uitgeschakeld.."
+    IDS_END_OPTION          "Verlaat Setup menu"
+    IDS_DATE                "Datum:"
+    IDS_TIME                "Tijd:"
+    IDS_EXPORT_RUNNING      "Exporteren bezig..."
+    IDS_EXPORT_SUCCESS      "Exporteren geslaagd"
+    IDS_EXPORT_FAILED       "Exporteren mislukt"
+    IDS_PRINTJOB_RUNNING    "Afdrukken bezig..."
+    IDS_PRINTJOB_SUCCESS    "Afdrukken geslaagd"
+    IDS_PRINTJOB_FAILED     "Afdrukken mislukt"
+    IDS_CAMNAME             "Cameranaam:"
+    IDS_CONNECT_ERROR       "Geen verbinding mogelijk"
+    IDS_LOCKED              "Toestel is vergrendeld"
+    IDS_RTE                 "Run-time Error %u van"
+    IDS_DELETE_ALARM        "Huidige alarm wordt gewist..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DELETED_ALARM       "De beelden werden successvol gewist"
+    IDS_DELETED_ALARM2      "De beelden konden niet volledig worden gewist"
+    IDS_CONFIRM_RTE         "Gebeurtenisbericht bevestigd"
+    IDS_DEFAULTPRINTER_SET  "Printerselectie geslaagd"
+    IDS_NO_CAMERA           "Geen camera aangesloten."
+    IDS_BACKUP_RUNNING      "Export vooruitgang: %d %%\n\nGeschatte resterende tijd: %s"
+    IDS_BACKUP_COMPLETE     "Exporteren van Alarmbeelden geslaagd"
+    IDS_DATE_FORMAT         "ddmmjj"
+    IDS_TIME_FORMAT_HHMMSS  "uummss"
+    IDS_TIMER_FORMAT        "uummuumm"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "Geef te zoeken datum in en bevestig met de Enter toets"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "Geef de te zoeken tijd in en bevestig met de Enter toets"
+    IDS_HELP_INPUT_PIN      "Geef uw huidige PIN in"
+    IDS_HELP_INPUT_NEW_PIN  "Geef uw nieuwe PIN in"
+    IDS_HELP_INPUT_CONFIRM_PIN "Bevestig uw nieuwe PIN"
+    IDS_HELP_INPUT_TCPIP    "Geef TCP/IP-adres in en bevestig met de Enter toets....U dient het toestel te herstarten."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RTE_DEL             "Huidige gebeurtenisbericht wissen"
+    IDC_RTE_UP              "Spring naar het volgende gebeurtenisbericht."
+    IDC_RTE_DOWN            "Spring naar het vorige gebeurtenisbericht"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "Huidige gebeurtenisbericht bevestigen"
+    IDC_RTE_OK              "Gebeurtenisbericht dialoog sluiten"
+    IDC_RTE_DEL_ALL         "Alle gebeurtenissen wissen"
+    IDC_RTE_PRINT           "Alle gebeurtenissen afdrukken"
+    IDC_CLOCK               "Ingave van de tijdspanne voor export."
+    IDC_STATIC_EXPORT       "Cam.:"
+    IDC_EXPORT_CAM1         "Geef camera's in waarvan beelden moeten worden geëxporteerd."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "Geef MSN in en bevestig met de Enter toets"
+    IDS_HELP_INPUT_TIMER    "Geef de tijdspanne in voor de timer en bevestig met de Enter toets"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "Geef de huidige tijd in en bevestig met de Enter toets"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "Geef de huidige datum in en bevestig met de Enter toets"
+    IDS_HELP_INPUT_CAMERANAME "Geef de nieuwe cameranaam in"
+    IDS_HELP_INPUT_OLD_PIN  "Geef uw huidige PIN in"
+    IDS_SET_SUBNETMASK_SUCCESS "Instelling subnetmask OK"
+    IDS_SET_SUBNETMASK_FAILED "Instelling subnetmask niet OK"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "Geef subnetmask in en bevestig met de Enter toets....U dient het toestel  te herstarten"
+    IDS_NO_PRINTER          "Geen printer"
+    IDS_DEFAULT_LANGUAGE_SET "Taalkeuze geslaagd"
+    IDS_BACKUP_FORMAT       "Wachten Aub... De medium wordt voorbereid om beelden te exporteren van camera %s.\nDit kan enkele minuten duren.\n\nVerstreken tijd: %s"
+    IDS_BACKUP_FINALIZE     "Alarmbeelden succesvol gecopieerd.\nExporteren van beelden wordt beëindigd.\nDit kan meerdere minuten duren.\n\nVerstreken tijd: %s"
+    IDS_HELP_UPDATE_SYSTEM  "Plaats de update-diskette in het diskette station. Als de update is voltooid zal het systeem automatisch herstarten."
+    IDS_BACKUP_FORMAT_NOCDR "Er is een beschreven medium in de drive aangetroffen .\nDe beelden konden niet geexporteerd worden."
+    IDS_BACKUP_FORMAT_ERROR "Er is een fout opgetreden tijdens voorbereiding van de medium.\nProces is afgebroken.\nPlaats een nieuwe, lege medium en start het export proces weer op."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_CAM11             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM12             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM13             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM14             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM15             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM16             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_VIEW_FULL         "Volbeeld.....Om de weergavemode te wijzigen, druk op de pijltjestoetsen en bevestig met de Enter toets"
+    IDOSD_VIEW_XXX          "Mozaïek mode.....Om de weergavemode te wijzigen, druk op de pijltjestoetsen en bevestig met de Enter toets"
+    IDOSD_VIEW_1PX          "1 plus weergave....Om de weergavemode te wijzigen, druk op de pijltjestoetsen en bevestig met de Enter toets"
+    IDOSD_TIMER_MO          "Timer voor maandag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_TU          "Timer voor dinsdag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_WE          "Timer voor woensdag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_TH          "Timer voor donderdag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_FR          "Timer voor vrijdag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_SA          "Timer voor zaterdag.....Om de timer te wijzigen, druk op Enter"
+    IDOSD_TIMER_SU          "Timer voor zondag.....Om de timer te wijzigen, druk op Enter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "Huidige datum.....Om de huidige datum te wijzigen, druk op Enter"
+    IDOSD_CLOCK_TIME        "Huidige tijd.....Om de huidige tijd wijzigen, druk op Enter"
+    IDOSD_ALARM_MODE        "Huidige opnamemode.....Om de huidige opnamemode te wijzigen druk op Enter. Om te kiezen tussen 'Alarm/Pre-alarm' mode of 'Activiteitsdetectie', druk op de pijltjestoetsen en bevestig met Enter. Alle vorige beelden worden gewist bij het selecteren van deze optie."
+    IDOSD_TCPIP             "Huidige IP adres.....Om de huidige IP adres te wijzigen druk op Enter"
+    IDOSD_ISDN_MSN          "Huidige MSN.....Om de huidige MSN te wijzigen druk op Enter"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "Wijzig PIN"
+    IDOSD_CONFIG_PIN        "Om het Setup menu in te gaan, druk op enter en geef uw PIN in."
+    IDOSD_OPTION_END        "Om het Setup menu te verlaten, druk op Enter"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "Huidige maskeergevoeligheid..... Om de huidige maskeergevoeligheid te wijzigen, druk nu op Enter|Om te kiezen tussen maskeergevoeligheidsniveaus, druk op de pijltjestoetsen."
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "Huidige detectiegevoeligheid..... Om de huidige detectiegevoeligheid te wijzigen, druk nu op Enter|Om te kiezen tussen detectiegevoeligheidsniveaus, druk op de pijltjestoetsen"
+    IDOSD_OPTION_EXIT       "Druk op Enter om het systeem uit te schakelen"
+    IDOSD_CHANGE_CAMNAME    "Huidige cameranaam.....Om de huidige cameranaam te wijzigen, druk op Enter"
+    IDOSD_OPTION_LOCK       "Om de weergave te vergrendelen, druk op Enter"
+    IDOSD_OPTION_RTE        "Om de gebeurtenissenlog te tonen, druk nu op Enter"
+    IDOSD_ALARM_DELETE      "Om de huidige alarmbeelden te wissen, druk nu op Enter"
+    IDOSD_NO_PRINTER        "Geen printer.....Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaardprinter met de pijltjestoetsen en bevestig met de pijltjestoets"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "Huidige Helderheid.....Om de helderheid te wijzigen, druk nu op Enter|Om de helderheid te wijzigen, druk op de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_COLOR_CONTRAST    "Huidig contrast....Om het contrast te wijzigen, druk nu op Enter|Om het contrast te wijzigen druk, op de pijltjestoetsen en bevestig met de Enter toets"
+    IDOSD_COLOR_SATURATION  "Huidige saturatie.....Om de saturatie te wijzigen, druk nu op Enter|Om de saturatie te wijzigen, druk op de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_CAM1              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM2              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM3              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM4              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM5              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM6              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM7              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM8              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM9              "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+    IDOSD_CAM10             "Huidige camera..... Om de huidige camera te wijzigen, druk op de pijltjestoetsen. Activeer deze camera door op enter te drukken. Alle camera-specifieke waarden verwijzen naar deze camera."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_PRINTER1          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER2          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER3          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER4          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER5          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER6          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER7          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER8          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER9          "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER10         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER11         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER12         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER13         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER14         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER15         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_PRINTER16         "Om de standaardprinter te wijzigen, druk nu op Enter|Selecteer de standaard printer met de pijltjestoetsen en bevestig met de Enter toets."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE2         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE3         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE4         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE6         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE7         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE8         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE9         "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE10        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE11        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE12        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE13        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE14        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE15        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_LANGUAGE16        "Om een andere taal te kiezen, druk nu op Enter|Selecteer de standaard taal met de pijltjestoetsen en bevestig met de Enter toets."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "Om de huidige alarmbeelden te exporteren, druk nu op Enter"
+    IDOSD_SUSPECT_SEARCH    "Om het eerste verdachte beeld te tonen, druk nu op Enter"
+    IDOSD_SUSPECT_DELETE    "Om alle verdachte beelden te wissen, druk nu op Enter"
+    IDOSD_SUBNETMASK        "Huidige subnet masker....Om het subnet masker te wijzigen druk nu op Enter"
+    IDOSD_ACTIVITY_BACKUP   "Om het exporteren van beelden te starten, druk nu op Enter"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "Schakel de doelwit weergave aan/uit"
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "Wijzig PIN"
+    IDOSD_TIMER_ONOFF       "Actief gedurende de gehele tijd of enkel gedurende de Camera Timers."
+    IDOSD_OPTION_UPDATE     "Start een Update vanaf de diskette"
+    IDOSD_TIME_ZONE         "Om uw tijdzone te veranderen, druk nu op Enter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "Weergave van een tabel met statistieken"
+    IDOSD_NET_NAME          "%s naam....Om de %s naam te wijzigen,  bevestigen met de Enter toets."
+    IDOSD_GATEWAY           "Huidige gatewayadres....Om het gatewayadres te wijzigen druk nu op Enter"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "Weergavemode van de video uitgang.....Om de weergavemode te wijzigen, druk nu op Enter|Selecteer de weergavemode met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "Weergavemode van de video uitgang.....Om de weergavemode te wijzigen, druk nu op Enter|Selecteer de weergavemode met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "Weergavemode van de video uitgang.....Om de weergavemode te wijzigen, druk nu op Enter|Selecteer de weergavemode met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "Weergavemode van de video uitgang.....Om de weergavemode te wijzigen, druk nu op Enter|Selecteer de weergavemode met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "Dwell tijd van de camera's in sequencer mode aan de monitor uitgang  .....Om de Dwelltijd te wijzigen, druk nu op Enter|Selecteer de weergavetijd met de pijltjestoetsen en bevestig met de Enter toets."
+    IDOSD_ACOUSTIC_ALARM    "In/uitschakelen akoestisch signaal"
+    IDOSD_SHOW_ALARMLIST    "Toon de alarmlijst voor een specifieke datum"
+    IDOSD_MD_DRAW_MASK      "Druk op de Enter toets om het permanente masker te wijzigen"
+    IDOSD_ALARM_OUTPUT_ON_OFF "Activeer of de-activeer de alarmuitgang."
+    IDOSD_ALARM_CALLNUMBER1 "Huidig te vormen nummer....om het nummer 1 te wijzigen druk nu op Enter"
+    IDOSD_ALARM_CALLNUMBER2 "Huidig te vormen nummer....om het nummer 2 te wijzigen druk nu op Enter"
+    IDOSD_ALARM_CALLNUMBER3 "Huidig te vormen nummer....om het nummer 3 te wijzigen druk nu op Enter"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "Om het exporteren van beelden voort te zetten druk nu op Enter."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "Er is een fout opgetreden tijdens het voltooien van de beelden export.\nPlaats een andere (lege) medium en start het export proces opnieuw."
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "Exporteren van beelden geslaagd.\nNeem de medium uit het station.\n"
+    IDS_NO_RECORD_FOUND     "Er zijn verder geen beelden voor deze functie.\n"
+    IDS_BACKUP_CHECK_CD     "Plaatsen een lege medium in de VDR.\nIdentificatie van de medium kan enige tijd in beslag nemen.\nDe medium wordt uitgeworpen na voltooien export-proces.\n\nExport:\nvan %s\ntot   %s\n\nCamera:\n%s"
+    IDS_BACKUP_FORMATTED    "Het medium is succesvol voorbereid om te exporteren.\nWachten aub..."
+    IDS_BACKUP_FAILED       "Er is een fout opgetreden tijdens het export proces.\nPlaats een nieuwe medium en start het export proces opnieuw."
+    IDS_BACKUP_COPYING      "Bezig met lezersoftware te copiëren.\nWachten aub..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "De CD-R kan niet worden gelezen.\nGelieve de CD-R te vervangen door een andere blanco CD-R en en start het export proces opnieuw."
+    IDS_HELP_INPUT_EXPORT_START 
+                            "Gelieve de startdatum en - tijd in te geven vanaf waar beelden moeten worden geëxporteerd"
+    IDS_EXPORT_TIME_OK      "Datum en tijd correct"
+    IDS_EXPORT_TIME_BAD     "Fout in Datum-/ Tijdformaat"
+    IDS_EXPORT_INPUT_STARTTIME "Geef Startdatum/ -tijd"
+    IDS_EXPORT_INPUT_ENDTIME "Geef Einddatum/ -tijd"
+    IDS_EXPORT_STARTTIME_FORMAT "van: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "tot:   __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "Geef camera's in"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "Nr.:__"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "Gelieve de einddatum en - tijd in te geven tot waar beelden moeten worden geëxporteerd"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "Geef de camera-nummers in, om beelden van te exporteren."
+    IDS_BACKUP_COMPLETE2    "Exporteren van beelden geslaagd"
+    IDS_IMAGE_MANIPULATED   "Dit beeld werd gemanipuleerd of is beschadigd!"
+    IDS_BACKUP_DISC_FULL    "De geplaatste medium heeft geen opslag ruimte meer voor een export.\nPlaats een nieuwe medium en start het export proces opnieuw."
+    IDS_BACKUP_NO_EMPTY_CD  "De medium is niet leeg.\nPlaats een nieuwe medium en start het exporteren opnieuw."
+    IDS_VERSION             "Versie"
+    IDS_HELP_SELECT_HOST    "Kies de %s uit de %s lijst en bevestig met de Enter toets"
+    IDS_BACKUP_NODATA       "geen beelden beschikbaar"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "Er zijn te veel beelden om te exporteren.\nDe opgegeven tijdspanne of het aantal camera's verkleinen a.u.b."
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "Er zijn geen beelden om te exporteren in de opgegeven tijdspanne.\n"
+    IDS_BACKUP_FORMAT2      "Medium wordt voorbereid om beelden te exporteren.\nDit exporteren kan enige minuten duren .\n\nVerstreken tijd: %s"
+    IDS_BACKUP_FINALIZE2    "Beelden kopieeren geslaagd.\n exporteren van beelden beeindigd.\nDit kan enige minuten duren.\n\nVerstreken tijd: %s"
+    IDS_READ_FAILED         "Het beeld kan niet worden weergegeven."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "Plaats een lege medium in de VDR.\nHet indentificeren van de medium duurt enige seconden.\nDe medium wordt uitgeworpen na einde van het Export proces.\n\nExporteer alarm beelden:\nvan %s\ntot   %s\n"
+    IDS_SEARCH_DATE_FAILED  "Foutieve datum"
+    IDS_SEARCH_TIME_FAILED  "Foutieve tijd"
+    IDS_TIME_FORMAT_HHMM    "uumm"
+    IDS_TIMER_ON            "Altijd actief"
+    IDS_TIMER_OFF           "Actief volgens timer"
+    IDS_INPUT_DISK          "Voeg diskette %d in"
+    IDS_UPDATE_SUCCESS      "Update geslaagd"
+    IDS_UPDATE_RUNNING      "Update bezig..."
+    IDS_UPDATE_FAILED       "Copie mislukt"
+    IDS_UPDATE_WRONG_CRC    "Verkeerde checksum"
+    IDS_UPDATE_WRONG_DISK   "Verkeerde update diskette"
+    IDS_UPDATE_DISKFAILED   "Fout bij lezen van diskette"
+    IDS_UPDATE_NO_UPDATE_DISK "Geen of foutieve disk"
+    IDS_UPDATE_WRONG_OEM    "Verkeerde OEM versie"
+    IDS_UPDATE_WRONG_BUILD  "Verkeerd versienummer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "Tijdzone gewijzigd"
+    IDS_SET_TIME_ZONE_FAILED "Tijdzone niet gewijzigd"
+    IDS_HELP_SET_TIME_ZONE  "Geef de code in van uw tijdzone. (Raadpleeg uw documentatie)"
+    IDS_STATISTIC_STARTTIME "Starttijd:"
+    IDS_STATISTIC_DURATION  "Dagen:"
+    IDS_STATISTIC_PICCOUNTER "Beelden:"
+    IDS_EXPORT_NO_CAMERA    "Fout, geen camera"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "Naam succesvol gewijzigd"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "Kon naam niet wijzigen"
+    IDS_SELECT_HOST         "%s lijst"
+    IDS_HOSTLIST_EMPTY      "%s lijst is leeg"
+    IDS_INVALID_SERIAL      "Foutieve licentienummer"
+    IDS_DISCONNECT          "Verbinding verbreken"
+    IDS_SET_GATEWAY_SUCCESS "Gatewayadres gewijzigd"
+    IDS_SET_GATEWAY_FAILED  "Gatewayadres niet gewijzigd"
+    IDS_HELP_INPUT_GATEWAY  "Geef gatewayadres in en bevestig met de Enter toets....Het toestel zal automatisch herstarten."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "Huidige camera"
+    IDS_VOUT_MODE_SEQUENCER "Sequencer"
+    IDS_VOUT_MODE_ACTIVITY  "Activiteit"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "Bereken eind datum/tijd geslaagd.\nDruk op  enter toets  om de berekende periode te gebruiken voor een meest optimaal gebruik van de capaciteit van de medium.\n\nExporteer:\nvan %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "Bereken eind datum/tijd geslaagd.\nEind datum en tijd is een indicatie voor het recentste beeld van geselecteerde camera's. Niet genoeg beelden voor een optimaal medium gebruik.\n\nMedium geheugen gebruik: ca. %s %%\n\nExporteer:\nvan %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "Wachten aub...\nBerekening van optimale einddatum en -tijd voor exporteren van beelden."
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "Geen beelden gevonden op geselecteerde startdatum en -tijd. Gelieve nieuwe startdatum en -tijd in te geven, gesitueerd vóór de laatst geselecteerde."
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "Berekening van einddatum en -tijd mislukt.\nGelieve einddatum en -tijd in te geven om beelden van te exporteren.\n\nExporteer:\nvan %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "Berekening mislukt"
+    IDS_EXTEND              "Geavanceerd..."
+    IDS_HELP_EXTEND         "Druk op Enter om de %s list te wijzigen en nieuwe in te geven"
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "Te kiezen nummer ingesteld"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "Te kiezen nr. niet ingesteld"
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "Geef de camera-nummers in, om beelden van te exporteren."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_ACTIVITY  "Toont de gebeurtenissen van de beweginsdetectie in de alarmlijst"
+    IDC_ALARMLIST_EXTERN1   "Toont de gebeurtenissen van de eerste externe alarmconnector in de alarmlijst."
+    IDC_ALARMLIST_EXTERN2   "Toont de gebeurtenissen van de tweede externe alarmconnector in de alarmlijst."
+    IDC_ALARMLIST_IMAGE     "Toont het alarmbeeld van het geselecteerde alarm"
+    IDC_ALARMLIST_UP2       "Toont de alarmlijst van de volgende dag"
+    IDC_ALARMLIST_DOWN2     "Toont de alarmlijst van de vorige dag"
+    IDC_STATISTIC_OK        "Sluit statistiek"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_MD_DEL              "Verwijdert het permanente masker"
+    IDC_MD_INVERT           "Inverteert het permanente masker"
+    IDC_MD_SHOW_ADAPTIVE    "Toont het adaptieve masker in het beeld"
+    IDC_ALARMLIST_OK        "Sluit de alarmlijst"
+    ID_MD_OK                "Sluit de dialoogvenster: adaptief masker"
+    IDC_HOSTS_OK            "Sluit de %s lijst dialoog"
+    IDC_HOSTS_NEW           "Voeg een nieuwe ingave in in de %s lijst"
+    IDC_HOSTS_DELETE        "Verwiijder de geselecteerde %s lijst ingave"
+    IDC_HOSTS_DISPLAY_NAME  "Naam van de %s momenteel geselecteerd in de %s lijst...Klik hier om deze ingave te wijzigen."
+    IDC_HOSTS_DISPLAY_IP    "IP adres van de %s momenteel geselecteerd in de %s lijst...Klik hier om deze ingave te wijzigen."
+    IDC_HOSTS_UP_START      "Spring naar het begin van de %s lijst"
+    IDC_HOSTS_UP            "Rol naar de volgende pagina van de %s lijst."
+    IDC_HOSTS_DOWN          "Rol naar de vorige pagina van de %s lijst"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "Spring naar het einde van de %s lijst"
+    IDC_ALARMLIST_UP        "Toont de volgende pagina van de alarmlijst"
+    IDC_ALARMLIST_DOWN      "Toont de vorige pagina van de alarmlijst"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "Druk de alarmlijst van de huidige geselecteerde dag af"
+    IDC_ALARMLIST_CAM0      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM1      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM2      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM3      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM4      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM5      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM6      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM7      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM8      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM9      "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM10     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM11     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM12     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM13     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+    IDC_ALARMLIST_CAM14     "Camerafilter...Indien dit filter actief is worden de gebeurtenissen van deze camera weergegeven in de alarmlijst."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "Geef startdatum en -tijd in, waarvan beelden moeten geëxporteerd worden. Standaard startdatum en -tijd geeft het eerste beeld weer van de geselecteerde camera's."
+    IDS_BACKUP_MULTI        "Eris meer dan een medium benodigd om beelden te exporteren, omdat eind datum/tijd  vroeger is dan berekend. Start eerst exporteren met berekende eind datum/tijd, Kies daarna in het menu voor  'Vervolgen Exporteren'.Deze tweede Back up volgt de eerste op .\n\nExporteer: \nvan %s\n\nCamera:\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "A,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "A,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "A,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "Uit"
+    IDS_EXPANSION_CODE_SUCCESS "Extensiecode geaccepteerd"
+    IDS_EXPANSION_CODE_FAILED "Extensiecode mislukt"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "Exporteren gaat onmiddellijk verder na voorgaande export.\n\nVoorgaande export:\nvan %s\ntot %s\n\nVervolg exporteren:\nvan %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "Exporteren gaat onmiddellijk verder na voorgaande export.\n\nVoorgaande export:\nvan %s\ntot %s\n\nVervolg export:\nvan %s\n\nCamera:\n%s\n\nWachten a.u.b...\nBerekenen van optimale einddatum en -tijd om beelden te exporteren..."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "Exporteren vervolgt direct na vorig export.\n\nEerste export:\nvan %s\ntot   %s\n\nVervolg export:\nvan %s\n\nCamera:\n%s\n\nBerekenen eind datum/tijd geslaagd. Niet genoeg beelden voor een optimaal gebruik van de medium capaciteit.\n\nMedium's geheugen gebruik: ca. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "Export volgt direct na eerste export.\n\nEerste export:\nvan %s\ntot   %s\n\nVervolg export:\nvan %s\n\nCamera:\n%s\n\nBerekenen eind datum/tijd geslaagd. Druk op enter-toets om de berekening te starten voor eind datum/tijd om optimaal gebruik van de medium te verkrijgen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "Definieert welke detector een alarmoproep veroorzaakt. A = bewegingsdetectie, 1 = eerste externe detector, 2 = tweede externe detector....Instellingen worden bewaard voor iedere camera."
+    IDOSD_EXPANSION_CODE    "Om de extensiecode in te geven druk op de Enter toets."
+    IDOSD_EXPORT_SETTINGS   "Exporteert de systeem Instellingen"
+    IDOSD_IMPORT_SETTINGS   "Importeert eerder geexporteerde systeem instellingen terug."
+    IDOSD_OPTION_INFO       "Druk op  Enter om systeem informatie te raadplegen"
+    IDOSD_CAMERA_RESOLUTION "Druk op Enter om de beeldresolutie te wijzigen|Kies de beeld resolutie met de pijltjes toetsen en druk op Enter om te selecteren."
+    IDOSD_CAMERA_COMPRESSION 
+                            "Druk op Enter om de beeldresolutie te wijzigen|Kies de beeld resolutie met de pijltjes toetsen en druk op Enter om te selecteren."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "Exporteren gaat onmiddellijk verder na voorgaande export.\n\nVoorgaande export:\nvan %s\ntot %s\n\nVoortzetten export:\nvan %s\n\nCamera:\n%s.\n\nBerekening einddatum en -tijd mislukt.\nGelieve einddatum en -tijd in te geven waarvan beelden moeten worden geëxporteerd."
+    IDS_POWEROFF_PRESSED    "Systeem uitschakelen"
+    IDS_RESET_PRESSED       "Systeem heropstarten"
+    IDS_EXPORT_NO_IMAGES    "Geen beelden gevonden"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "Geen beelden aangetroffen tussen de start datum/tijd en eind datum/tijd. Geef nieuwe eind datum/tijd.\nDruk op  Enter om berekende eind datum/tijd te gebruiken voor optimaal gebruik van de mediums capaciteit.\n\nExporteer:\nvan %s\n\nCamera:\n%s"
+    IDS_BACKUP_REQUEST_MB   "Geen beelden aangetroffen tussen de start datum/tijd en eind datum/tijd. Geef nieuwe eind datum/tijd.\nBerekende eind datum/tijd is een indicatie voor het nieuwste beeld van geselecteerde cameras. Niet genoeg beelden om optimaal gebruik te maken van de capaciteit van de medium.\n\nMedium's geheugen gebruik: ca. %s %%\n\nExporteer:\nvan %s\n\nCamera:\n%s"
+    IDS_EXIT_ENTRY          ">Programma afsluiten"
+    IDS_YES                 "Ja"
+    IDS_NO                  "Nee"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "Bevestig de wijziging in opnamemode met de pijltjes en Enter toetsen....OPGEPAST! Alle vooraf opgenomen beelden zullen permanent worden verwijderd indien bevestigd wordt met 'Ja'"
+    IDS_OK                  "OK"
+    IDS_CANCEL              "Annuleren"
+    IDS_ERROR               "Fout"
+    IDS_FILE_SYSTEM_ACCESS  "U hebt systeembeheerder rechten nodig om toegang tot het Bestandssysteem to krijgen.\nGeef uw PIN in."
+    IDS_BACKUP_TITLE        "Beelden exporteren"
+    IDS_KEYBOARD_UPPER_KEYS "QWERTYUIOPASDFGHJKLZXCVBNM"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "qwertyuiopasdfghjklzxcvbnm"
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "Geplaatste medium is niet leeg.\nExporteren van is uitsluitend mogelijk naar lege mediums. De medium moet gewist zijn voor beeld export.\nSelecteer menu item 'Wissen medium: Ja' en druk enter.\nDe medium wordt automatisch gewist voor de beeldexport start."
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "Wissen medium: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "Beelden export in voorbereiding.\n\nVoortgang: %d %%\n\nVerstreken tijd: %s"
+    IDS_BACKUP_ACDC_START   "Plaats een medium in de VDR.\nIndentificatie van de medium duurt enkele seconden.\nDe medium wordt uitgeworpen na einde export proces."
+    IDS_ERASE_MEDIUM        "Wissen medium"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "Plaats een medium in de VDR"
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "Gedetecteerde medium was niet leeg . Moet de medium gewist worden alvorens het exporteren te starten?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "Wacht op medium"
+    IDS_EXPORT_INSERT_MEDIUM "Plaats medium"
+    IDS_EXPORT_ERASE_MEDIUM "Medium gedetecteerd"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "Beeld export vereist een lege medium .\nWis de medium of plaats een leeg exemplaar."
+    IDS_FOUND_NEW_DEVICE    "Nieuw onderdeel gevonden: "
+    IDS_REMOVED_DEVICE      "Verwijderen onderdeel: "
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "Gedetecteerde medium is niet leeg.\nOm van de volle capaciteit v/d medium gebruik te maken moet deze eerst gewist worden. Anders zal alleen geschreven worden op het vrije deel v/d medium.\nMaak een keuze, selecteer het menu item en druk op Enter."
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "Er is niet genoeg geheugen over om beelden te exporteren.\nWis de medium of plaats een nieuwe."
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "Wissen medium\n\nTijd: %s"
+    IDS_BACKUP_RUNNING_UP   "Export vooruitgang: %d %%\n\nTijd: %s"
+    IDS_IMPORT_SUCCESS      "Import geslaagd !"
+    IDS_IMPORT_FAILED       "Import mislukt"
+    IDS_IMPORT_RUNNING      "Importeren bezig..."
+    IDS_CAMERA_FIX          "Vaste camera"
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "Het voorbereiden van beelden export werd afgebroken door de gebruiker."
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "Het export proces is afgebroken door de gebruiker."
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\nHet exporteren van beelden wordt afgebroken.\nWachten a.u.b...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_REALTIME          "Realtime weergave aan/uit"
+    IDOSD_CAMERA_PTZ_TYPE   "Druk op  Enter om het camera type te wijzigen."
+    IDOSD_CAMERA_PTZ_ID     "Druk op Enter om het ID type te wijzigen."
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "Druk op enter om de com poort van de camera te wijzigen."
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "Current Assignment. The audio recording can only be assigned to one single camera.....To assign the audio recording, please press the enter key"
+    IDOSD_AUDIO_THRESHOLD   "Current Threshold. Defines the threshold (level), that, after it has been exceeded, activates the audio recording.....To adjust the threshold, please press the enter key "
+    IDOSD_AUDIO_SENSITIVITY "Current Sensitivity. Defines the volume of the audio input (microphone).....To adjust the audio sensitivity, please press the enter key"
+    IDOSD_AUDIO_VOLUME      "Current Volume. Defines the volume of the audio output (loudspeaker).....To adjust the volume, please press the enter key. "
+    IDOSD_AUDIO_RECORD_MODE "Current Record Mode. Defines what kind of detector activates the recording. L=Level (exceeding the threshold), A=activity detection (on assigned camera), Ext=External detector"
+    IDOSD_AUDIO_LISTEN_IN   "Enable Listen In......To enable Listen In, please press the enter key. "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "P"
+    IDS_AUDIO_RECORDING_EXT "Ext"
+    IDS_AUDIO_RECORDING_AL  "A,L"
+    IDS_AUDIO_RECORDING_AEXT "A,Ext"
+    IDS_AUDIO_RECORDING_LEXT "L,Ext"
+    IDS_AUDIO_RECORDING_ALEXT "A,L,Ext"
+END
+
+#endif    // Dutch (Dutch) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NLD)
+#ifdef _WIN32
+LANGUAGE 19, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

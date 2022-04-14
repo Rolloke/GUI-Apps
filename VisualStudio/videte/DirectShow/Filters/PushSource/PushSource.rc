@@ -1,0 +1,168 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "ver.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""ver.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""res\\pushsource.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPERTIES DIALOGEX 0, 0, 220, 275
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Push Source Filter Parameter",IDC_TXT_HEADING,5,2,95,8
+    CONTROL         " Capture",IDC_CK_CAPTURE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,25,90,10
+    GROUPBOX        "Output Pins",IDC_GRP_PINS,5,12,210,54
+    CONTROL         " Preview",IDC_CK_PREVIEW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,37,90,10
+    CONTROL         "privileged",IDC_CK_CAPTURE_PRIV,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,25,46,10
+    CONTROL         "privileged",IDC_CK_PREVIEW_PRIV,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,37,46,10
+    GROUPBOX        "Push Source Properties",IDC_GRP_PUSH_SOURCE_PROPERTIES,
+                    5,72,210,72
+    CONTROL         "Live Source",IDC_CK_LIVE_SOURCE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,105,85,105,10
+    CONTROL         "Internal rate matching",IDC_CK_INTERNAL_RM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,97,90,10
+    CONTROL         "Filter is a Source Filter",IDC_CK_SOURCE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,85,90,10
+    CONTROL         "Generate Time Stamps",IDC_CK_GENERATE_TIME_STAMPS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,105,97,105,10
+    LTEXT           "Media Time [ms]:",IDC_TXT_MEDIA_TIME,10,164,60,8
+    EDITTEXT        IDC_EDT_MEDIA_TIME,105,161,105,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Stream Offset [ms]:",IDC_TXT_STREAM_OFFSET,10,128,60,8
+    EDITTEXT        IDC_EDT_STREAM_OFFSET,105,125,50,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Info",IDC_GRP_INFO,5,150,210,120
+    CONTROL         " Still",IDC_CK_STILL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,49,90,10
+    CONTROL         "privileged",IDC_CK_STILL_PRIV,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,105,49,46,10
+    LTEXT           "",IDC_CK_PREFER_OWN_ALLOCATOR,10,110,90,8
+    CONTROL         "Prefer own Allocator",IDC_CK_OWN_ALLOCATOR,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,109,90,10
+    EDITTEXT        IDC_EDT_INFO,10,179,200,86,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDT_OFFSET,160,125,50,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 100
+        VERTGUIDE, 105
+        VERTGUIDE, 210
+        VERTGUIDE, 215
+        HORZGUIDE, 6
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 42
+        HORZGUIDE, 54
+        HORZGUIDE, 66
+        HORZGUIDE, 72
+        HORZGUIDE, 90
+        HORZGUIDE, 102
+        HORZGUIDE, 114
+        HORZGUIDE, 132
+        HORZGUIDE, 144
+        HORZGUIDE, 150
+        HORZGUIDE, 168
+        HORZGUIDE, 179
+        HORZGUIDE, 265
+        HORZGUIDE, 270
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE               "PushSource"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\pushsource.rc2"  // non-Microsoft Visual C++ edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

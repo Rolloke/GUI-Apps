@@ -1,0 +1,45 @@
+Hallo
+Hier ist eine Kurzbeschreibung für das Einbinden der Translator Tools in das DevStudio 2003.
+Bei den Dlls muss während des Aufrufs der Tools im ClassView das richtige Project ausgewählt werden und die Konfiguration Release eingestellt werden.
+
+Extract Resource:
+Title:                &Extract Resource
+Command:       V:\bin\Tools\ExtractResourceU.exe
+Arguments:       $(TargetName).rc Enu
+Initial directory:    $(ProjectDir)
+
+Beispiel einer Komandozeile für Ita:
+Aus IdipClient.rc Enu wird:
+IdipClientEnu.rc Ita /r
+
+
+
+Translator:
+Title:                &Translator
+Command:       V:\bin\Tools\TranslatorU.exe
+Arguments:       Enu
+Initial directory:    $(ProjectDir)
+
+
+
+Insert Resource:
+Title:                &Insert Resource
+Command:       V:\bin\Tools\InsertResourceU.exe
+Arguments:       $(TargetName).rc Enu
+Initial directory:    $(ProjectDir)
+
+Beispiel einer Komandozeile für Ita:
+Aus IdipClient.rc Enu wird:
+IdipClient.rc Ita [/r]
+
+
+Schalter:
+/r: Remove TODO!
+Aufruf der Tools ohne Parameter zeigt die Hilfe an.
+
+
+MfG 
+        Rolf
+
+PS: diesen Text bitte speichern!
+Auf den netten Hinweis von Georg: "schick doch mal ´ne Mail ins Nirvana!"

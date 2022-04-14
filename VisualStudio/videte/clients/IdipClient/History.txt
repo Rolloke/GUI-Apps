@@ -1,0 +1,732 @@
+17.08.06 TKR- Bugfix 202: In russicher Sprache sind die Menueeintraege "Softwareupdate..." und "Freischaltung" 
+			  nun auch auf russisch. 
+27.07.06 TKR- Die Funktionen "Softwareupdate" und "Freischaltung" sind nur enabled, wenn der
+			  SuperVisor beim idip angemeldet ist (genauso wie die Optionen 
+			  Anwahl- und Kamerakarte erstellen).
+19.07.06 RKE- Funktion fuer Trennen bestaetigen bei Gegenstationen eingebaut.
+            - Schliessen von Benachrichtigungen mit Passwortabfrage eingebaut.
+18.07.06 UF - Bewegungsmasken lassen sich jetzt als Rechtecke setzen.
+13.07.06 RKE- Bugfix 189: Karten lassen sich rekursiv loeschen.
+10.07.06 RKE- Bugfix 174: Das Flag fuer Alarmanimation wurde in ResetAutoLogout geloescht. Es sollte aber erste beim Trennen der Alarmverbindug
+			  geloescht werden.
+06.07.06 RKE- Bugfix 165: Relais wird jetzt von der Karte aus getoggelt.
+28.06.06 RKE- Performancemanagement für WndMico::IsYUV() (Q-Unit) lokal eingebaut.
+20.06.06 RKE- Gezoomte Archivbilder werden jetzt interpoliert gezeichnet. Dazu wird CDC::m_bPrinting uaf TRUE gesetzt.
+05.05.06 RKE- Feintuning fuer die Regelung der Framerate bei lahmen Netzwerkverbindungen.
+			- Timeout in CWndLive::CheckVideo(..) wieder auf 5 Sekunden erhoeht, da zu haeufiges Abfragen der Bilder
+			  beim Server eher zu Problemen fuehrt und den Datenstau ggf. noch erhoeht.
+04.05.06 RKE- "UseNetworkFrameRate" reduziert die Framerate pro remote Server wenn die Netzwerk-Bandbreite zu gering ist
+			  unabhaengig vom Performancelevel.
+25.04.06 RKE- "RegardAvgVideoTimeout" wurde entfernt weil es nicht funktioniert.
+            - "RegardNetworkFrameRate" eingebaut zur Reduzierung der Framerate ueber den PerformanceLevel.
+24.04.06 UF - Bugfix auch Alarme mit Nr > 32 werden angezeigt.
+21.04.06 TKR- Vor Benutzung des Datenbank-Pointers diesen an mehreren Stellen zuerst geprüft und dann erst benutzt.
+21.04.06 RKE- Bugfix GP bei der Echtzeitwiedergabe. CriticalSection wurde in die Klasse CPlayRealtime eingebaut.
+20.04.06 RKE- WK_TRACE_ERROR im Destruktor von CWndSmall eingebaut um herauszufinden, ob es manchmal nicht im MainThread geloescht wird.
+			- ThreadLog des LiveWindowThread auf 5 h heraufgesetzt, alle 15 Min ist zu viel.
+			- Wiedergabe der Bilder kann jetzt ueber extra Thread geleitet werden. REG_DWORD "RunLiveWindowThread" = 0x00000101.
+20.04.06 UF - Bugfix fehlerhafter Verbindungsaufbau bei z.B. Waechterundgaengen.
+20.04.06 RKE- Bugfix 124: Memorysticks werden jetzt korrekt erkannt (auch wenn das Geraet zur Laufzeit erst angeschlossen wird)
+			  und koennen zur Datensicherung ausgewaehlt werden. Removeable Drives koennen jetzt immer zur Datensicherung ausgewaehlt
+			  werden, auch wenn sie nicht als solche in der SV eingetragen wurden.
+			- Bugfix 1030: Die Groesse der ReaderSoftware wird fuer removable drives berechnet, aufgerundet und von der
+			  Datentraegergroesse abgezogen.
+18.04.06 UF - Bugfix Waiting For Picture graues Kreuz bei ISDN andauernd.
+18.04.06 RKE- Bugfix 121: WM_SIZE wird jetzt mit cx=cy=0 gepostet, damit die aktuelle Fenstergroesse ermittelt wird.
+18.04.06 RKE- TRACE fuer Verfolgung von Pictures an ungeduldige Kamerafenster eingebaut.
+13.04.06 RKE- RegardAvgVideoTimeout wird mit FALSE initialisiert.
+            - DlgField Textefelder in den Ressource waren zu gross.
+            - DlgField Berechnung der Zeilenhoehe verbessert.
+            - Fenter, die auf Bilder warten zeigen jetzt eine Infotext und ein graues Kreuz an.
+            - PlayWindows werden jetzt automatisch BigWindow beim einfuegen.
+12.04.06 RKE- Die Fields im PlayWindow koennen jetzt mehrzeilig sein und sind EditCtrls mit der Möglichkeit
+              in die Zwischenablage zu kopieren.
+            - in CWndMpeg4::CalculateFrameStep wurden die Zeiten zu den entsprechenden Bilddraten aufgerundet.
+            - fuer CViewIdipClient::SetXWin(1) (CViewIdipClient::OnView1(), DoppelClick auf SmallWindow) wird
+              jetzt das CmdActive SW im Client angezeigt und alle anderen auf Monitor 2.
+              Das Symbol fuer 1Window wird jetzt auch bei 2 Monitoren als gedrueckt angezeigt, das war vorher nicht so.
+11.04.06 RKE- Um den CIPC-Thread zu enkoppeln werden die Livebilder in einer Queue pro Fenster gepuffert.
+              Sowohl Einzelbilder als auch GOPs werden vom GOP Thread gezeichnet.
+              GOPs werden duch den MM-Timer gepulst, Einzelbilder bei Ankunft in der Queue.
+06.04.06 RKE- Bugfix: Client startete nicht mehr.
+03.04.06 RKE- Der GOP-Timer-Thread delegiert das Dekodieren jetzt an einen extra DecoderThread durch Events.
+			  Dadurch muss der TimerThread keine Bilder mehr verarbeiten.
+30.03.06 RKE- In KillGOPTimer wird erst nach dem Einsprung in die CriticalSection ueber die Bilder::timeKillEvent(uIDtemp)
+	          aufgerufen. Damit wird garantiert, dass der GOPTimerThread gerade "arbeitslos" ist.
+28.03.06 ML - In den beiden Klassen CWndMpeg4 und CWndPlay wird der neue Codec verwendet, sofern der
+			  Regschlüssel UseAVCodec auf 1 steht, und die beiden notwendigen Dlls (avcodec.dll, avformat.dll)
+			  greifbar sind. Ansonsten wird wie bisher der Emuzed Decoder verwendet. Livebild und Playback
+			  scheinen zu funktionieren. Beim 4er und 9er View ist rechts ein grüner Rand. (Fehler in GetDib())
+			  Die notwendigen Änderungen in den obiegen Klassen sind minimal.
+27.03.06 TKR- Bugfix 118: Der Text der Wartungsmeldung wird nun wieder automatisch umgebrochen.
+21.03.06 RKE- Im HTML Window wird nur noch zwischen PTZ und Fixed Camera unterschieden. Andere Eigenschaften werden nicht angezeigt.
+			  Bugfix 113: Unter dem Datumseintrag wird jetzt nur noch die Uhrzeit eingetragen.
+20.03.06 RKE- Ressourcen HTML Bitmaps ueberarbeitet, Kameras, Audio, Relais.
+15.03.06 UF - Bugfix 110 Timing bei Alarm ISDN war jetzt zu schnell
+15.03.06 UF - Bugfix 109, Alarmverbindungen jetzt ohne doppeltes Input!
+14.03.06 UF - Bei Mico/Jacob/Savic JPEG Kameras werden jetzt minimal 1 Bild in 5 Sekunden angefordert.
+08.03.06 RKE- Ein nicht verbundenes bzw. nicht vorhandenes Datenbankobjekt fuehrt nicht mehr zu einer Trennung der gesamten Verbindung.
+              Die Melder, Kameras und Relais sind dann immer noch online. IdipClient verhaelt sich jetzt ein bischen mehr wie Vision,
+              welches sich auch nicht um die Datenbankverbindung gekuemmert hat. Dadurch duerfte bei MNO die ISDN-Alarm-Verbindung auch
+              bessser klappen.
+08.03.06 TKR- Bugfix 102: Die Bilddaten bei Datenbank-Fenstern bei mehr als 16 offenen 
+			  Bildfenstern wird jetzt wieder versteckt und das "R > >" eingeblendet.
+06.03.06 RKE- Druckausgabe bei CWndText implementiert, Seitenraender ueber MFC Standard PageSetupDialog einstellbar.
+02.03.06 RKE- Druckausgabe bei den Alarmlisten korrigiert und deren Titeltext in englisch korrrigiert.
+			  AllowHTMLMaps() fuer Vista enabled.
+27.02.06 RKE- GP bei Menutooltips in OnExitMenuLoop(..) beseitigt.
+              HostsMenu wird nur ueber dem Connect Button angezeigt, wenn die CursorPosition innerhalb des Buttonrects ist.
+              sonst wird es an der CurorPosition angezeigt.
+16.02.06 RKE- Bugfix 54: Synchrone Wiedergabe wird jetzt nach 3s wieder reaktiviert, wenn kein Bild mehr geliefert wird.
+16.02.06 RKE- Bugfix 80: Der RealtimePlay Thread wird vor dem Schliessen des Fensters in OnDestroy() beendet und die Messages
+              werden entfernt.
+              PerformanceManagement wirkt sich jetzt auch auf Playwindows auf. In CheckPlayStatus() wird bei
+              PerfLevel > 2 Sleep(wait) aufgerufen: mit wait = 10 ms * (PerfLevel - 2).
+15.02.06 RKE- Bugfix 83: Es wird ein Resize an die SmallWindows gesendet
+			  Bugfix 84: siehe Bug 83
+			  Bugfix 85: Bedienerfehler, Einstellungen in der SV müssen richtig sein ("gefaked" werden)
+			  Bugfix 86: Fullscreen wird jetzt als Postmessage forciert.
+			  Bugfix 77: Das Performance Management wurde verbessert:
+			             Bei GOPs wird die ermittelte Zeit durch die Anzahl der Bilder geteilt.
+			             Der Mittelwert wird jetzt über 3 (Mittelwete pro Fenster) Perioden gebildet.
+			             Timerueberlauf (ungueltige Zeitwerte > 0xf0000000) werden nicht berücksichtigt.
+			             Das Anpassen der Performance an Video Timeout kann jetzt abgeschaltet werden: RegKey "RegardAvgVideoTimeout"
+09.02.06 TKR- Bugfix 82: Backup Laufwerke werden wieder angezeigt.
+07.02.06 RKE- Bugfix 72: ConnectToLocalServer geht wieder, wurde als User Setting geladen
+			  Bugfix 73: Nummer wird jetzt unabhaengig von der Hostnummer erhoeht.
+06.02.06 RKE- Bugfix 71: Titelzeilen werden wieder angezeigt.
+01.02.06 RKE- Anpassung des Performancelevel bei VideoTimeoutWerten
+			  Verbesserung des Toolbarupdates der Smallwindows insbesondere bei MPG4 Windows
+			  Userabhaengige Settings erweitert (betrifft Darstellung des Client)
+			  Mit "dvrt\IdipClient\Settings\" "ShowSmallTitles" = 0x00000011 kann jetzt die Titelzeile innerhalb des Bildes gezeichnet werden.
+			  Leider flackert diese Ausgabe bei voller Framerate noch sehr.
+			  Das Flag 0x00000100 zusaetzlich erlaubt Ausgaben, die sonst nur in der Debugversion gemacht wurden.
+30.01.06 TKR- Fuer ein backup wird nun immer der aktuelle Temp-Pfad benutzt (CF oder normal).
+30.01.06 UF - nochma Bugfix Waechterrundgang und 1 plus bei Alarm an/aus
+27.01.06 UF - Bugfix Waechterrundgang
+26.01.06 TKR- Anpassung an VS2005: alle 
+			  for (int i=0...  
+			  in 
+			  int = 0; for (i=0...
+			  geändert
+24.01.06 RKE- Bugfix 1026: Da eine Alarmlisten Sequenz sowohl als Alarmliste als auch als Backup zu erkennen ist, wurde die Reihenfolge der
+              Abfrage des Icons beim Einsortieren in den Baum veraendert. Backup sollte bei den Sequenzen immer als letztes abgefragt werden.
+23.01.06 RKE- In CMainFrame::OnCmdMsg(..) werden jetzt nur noch Command und UpdateCommandUI Messages an die Views, WndSmalls, Coolbar und
+			  SplitterWnd weitergereicht. Notify Msgs (z.B.) werden gefiltert.
+			  Bei VDH_REMOVE_SERVER wurde die ServerID in pHint statt im Hiword des lHint Parameters uebergeben.
+			  Scollbars im Alarm Treeview sind wieder zu sehen.
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+16.01.06 RKE- Anpassung der Tablellenspaltenbreite in der Alarmliste an Inhalt bzw. Kopfzeilen an die Fensterbreite oder wenn noetig
+              oder gewollt ueber Fensterbreite hinaus.
+              Bugfix 1027: Alarmliste wird jetzt geschlossen.
+              Bugfix 1028: die Sequenzen des geschlossen Archivs werden aus der Sequenz-Suchliste des Servers entfernt.
+12.01.06 UF - Bugfix 1plus bei Waechterrundgang, Nicht trennen bei Waechterrundgang.
+12.01.06 RKE- Bugfix 1025: CDialogBackup initialisiert den Font der Listbox mit CSkinListBox::UpdateFont().
+              CDlgImpExpCamSequencer macht dies jetzt auch.
+              Bugfix 1033: Unlock wird jetzt vor dem Trackpopupmenu aufgerufen.
+              Bugfix 1032: Kopieren im Livewindow ist jetzt moeglich
+              Bugfix 1034: Abfrage eingebaut.
+11.01.06 RKE- Bugfix 1029: Livebildrequest wird jetzt bei Timeout erzwungen (m_iPictureRequests = 0).
+09.01.06 RKE- Optimierung der Spaltenbreite der Alarmliste nach Inhalt oder Ueberschrift implementiert.
+			  Speichern der Settings fuer das Alarm-Listen-Fenster in der Registry.
+06.01.06 RKE- Bugfix 995: Kontextmenue für schliessen, Drucken und Monitorsteuerung implementiert.
+02.01.06 RKE- Bugfix 1012: Scrollbalken im Suchdialog wird jetzt nicht mehr geskinned.
+			  ISDN-Kanäle, Datenbankverbindung und Umschaltung wird jetzt im Panel und Statusbar angezeigt.
+29.12.05 UF - Die Dantenbankfelder werden jetzt in der Alarmliste angezeigt.
+21.12.05 TKR- Bugfix 998: Prozentangaben in Datenbank Informationsdialog korregiert.
+20.12.05 UF - Bugfix Alarmliste doppelt.
+16.12.05 UF - Alarmliste idip eingebaut.
+08.12.05 RKE- Im CServer Objekt werden jetzt die CIPC Objekte beim Verbindugsaufbau ueberprueft und ggf. vorher geloescht.
+			- Beim Anlegen eines neuen Servers wird vorher die zyklische Ueberpruefung der Datenbankverbindung zurueckgesetzt,
+			  damit sie sich nicht zeitlich mit dem neuen Verbindungsaufbau ueberschneidet.
+			- Der ConnectThread des Servers loescht sich jetzt automatisch. Die Threadvariable wird in der ThreadProc auf NULL
+			  gesetzt.
+			- Andere mehrsprachige Idip Programme werden jetzt nicht mehr beim Ausloggen beendet,
+			  weil sich ja die Sprache aendern koennte. Die Programme werden jetzt nur noch geschlossen, wenn sich die Sprache wirklich
+			  aendert. Das kommt sehr selten vor.
+30.11.05 RKE- ISDN B-Kanaele werden jetzt wieder angezeigt.
+23.11.05 RKE- Smalltoolbar und DlgField sind jetzt nahezu flackerfrei in Live & Play Windows.
+22.11.05 RKE- Russiche Uebersetzung der Wartungsseite eingefuegt.
+			  Bugfix: 966, Titelzeilen werden enabled bzw. disabled, auch wenn in AddWndSmall das resizen gelockt ist.
+09.11.05 RKE- Bugfix: GP in CIdipClientDoc::OnConnect() bei Alarmanaruf kann es zu GP kommen. Der m_pConnectionDlg wird jetzt nach
+              Verbindugsaufbau nicht mehr geloescht, so dass die Instanz immer vorhanden ist.
+21.10.05 RKE- Bugfix: In LoadUserSpecificSettings() wurden bei m_QueryParameter die Werte vor dem Einlesen nicht geloescht, so dass
+			  die Werte bei jedem Loggin dupliziert wurden. Loesung des Problems:
+			  - Die m_QueryParameter Werte werden jetzt vorher geloescht!
+			  - in den CIPCFields werden doppelt vorhandene Felder nicht mehr hinzugefuegt (Fehlermedung Logfile).
+			  - Als Workaround wird die User Section geloescht, wenn mehr als 150 CIPCFields-Werte vorhanden sind.
+14.10.05 RKE- Bugfix:
+			  - In CQueryParameter::Save(..) wurde WriteString(sSection, NULL); durch DeleteEntry ersetzt, um fehlerhaftes Loeschen zu vermeiden.
+			  - In CViewArchive wurde m_bInsertion eingebaut. Diese Variable ist in allen Insert...() Funktionen auf TRUE gesetzt (ausserhalb 0).
+			    In den Funktionen GetServerItem() und GetArchiveItem() wird jetzt der TreeItem erstellt, wenn er noch nicht vorhanden war.
+13.10.05 RKE- BugFix Sequenzen mehrfach vorhanden: Die Funktionen 
+			  - CIPCDatabaseIdipClientLocal::OnIndicateDeleteSequence(..)
+			  - CIPCDatabaseIdipClientLocal::OnIndicateNewSequence(..) indizieren Aenderungen.
+			  bei der lokalen Station. Da die lokale Verbindung dasselbe tut, muss die Funktion
+			  zwar ueberschrieben sein, aber die daten duerfen nicht weitergeleitet werden.
+12.10.05 TKR- Bugfix 948: In PTZ Bildern ist zoomen nun nicht mehr nach vorheriger
+			  Anzeige des Kontextmenues moeglich.
+10.10.05 TKR- Bugfix 939: Speichern mittels Speicherbutton funktioniert nun auch wieder bei Tasha Systemen.
+07.10.05 RKE- Bugfix ISDNPage liess sich nicht aufrufen.
+07.10.05 RKE- Bugfix 947: Die Userspezifischen Datenbanksuchfelder werden jetzt vor dem neu laden geloescht, so dass sie nicht mehr
+              dazugeladen werden und sich vermehren.
+06.10.05 RKE- Unsichbare Melder in Alarmzustand werden jetzt auf der Karte abwechselnd sichtbar gemacht.
+04.10.05 RKE- CDlgPTZVideo umgebaut: PTZ Steuerung ist obsolet, Auxiliary Out wird jetzt durch diesen Dialog angesteuert.
+30.09.05 RKE- Beim ein(aus)schalten mehrerer Kameras gleichzeitig wird das Resizen jetzt gelockt.
+21.09.05 RKE- CWndMPEG4: Loeschen der GOPS schon in OnDestroy, um GP im Destruktor zu vermeiden.
+			  CIPCDatabaseIdipClientLocal: nicht ueberschriebene Funktionen implementiert.
+			  	virtual void OnIndicateDeleteSequence(WORD wArchivNr, WORD wSequenceNr);
+				virtual void OnIndicateNewSequence(const CIPCSequenceRecord& data, WORD  wPrevSequenceNr, DWORD dwNrOfRecords);
+				Diese liefern das gleiche wie die Funktionen in CIPCDatabaseIdipClient des lokalen Servers.
+				Deshalb muss noch getestet werden, ob sie eine funktion haben muessen oder nur als Dummy implementiert werden.
+			  DrawInDecodethread wird jetzt mit 1 als Defaultwert initialisiert.
+15.09.05 RKE- DeviceChangeMessages registriert und ausgewertet fuer Joy und Memory-sticks bzw. externe medien.
+12.09.05 RKE- Bugfix 924: Parentitem wird jetzt aktualisiert.
+22.08.05 RKE- Bugfix 915: Die SmallWindows wissen jetzt selbst, ob sie drucken koennen.
+15.08.05 RKE  Bugfix 911: Lehrzeichen hinter den kurzen texten eingefuegt.
+			  Bugfix 910: Das m_pPictureRecord wird jetzt nur noch geloescht, wenn danach gleich neues PR eingefuegt
+			  wird. Da mit GOPs gearbeitet wird, ist auch bei 25 Fps ein I-Frame vorhanden.
+			  Urspruenglich wurde das m_pPict.. nach Abarbeitung des GOPs geloescht. Wenn in der Zwischenzeit gedruckt wird,
+			  so ist kein Bild da. Die Abarbeitung eines GOPs wird nun durch m_nCurrentPicture == -1 indiziert.
+			  Bei der Registryeinstellung CanGOP = 0, koennte auch ein P-Frame zum Zeitpunkt des Kopieren vorhanden sein.
+			  Dieser Eintrag wird aber eigentlich nur bei Problemfaellen mit WinNT/2000 gesetzt.
+			  Flags m_bShowHostMapAtLoggin, m_bShowCamereaMapAtConnection eingebaut.
+04.08.05 RKE- Beim Loeschen von HTML maps wird jetzt der Schreibschutz vorher entfernt. Im "dvrtwww"
+			  Verzeichnis ist das nicht nur erlaubt, sondern auch notwendig.
+			  Bugfix 897: remote ging es, lokal nicht. Es wurde auf alle Kameras umgeschaltet,
+			  hätte aber auf eine Kamera umschalten sollen.
+			  Bugfix 898: Die Menupunkte für Vollbild und 1 Plus sind disabled, wenn im Client kein
+			  Fenster zu sehen ist. Deshalb kommt ein PostMessage(WM_COMMAND...) nicht durch.
+			  Bugfix 899: Die Settings sind Userabhaengig, also werden diese nie abgespeichert, da in ExitInstance
+			  kein User mehr eingeloggt ist. SaveSettings sollte sowieso nach OnOK() eines Dialoges gespeichert werden.
+			  Bugfix 900: Die Datenbankfelder werden zuerst mit Namen aus der Ressource belegt, da die Sprache der Oberfläche
+			  wahrscheinlich der gewuenschten Ausgabesprache entspricht.
+27.07.05 UF - Es laesst sich jetzt kein Backup mehr auf das Laufwerk machen,
+			  von dem die Software gestartet wurde, also im Allgemeinen c:.
+22.07.05 RKE- Bugfix 880: PTZ Kameras werden jetzt zyklisch in der Funktion CWndLive::CheckVideo() geprüft (alle 10 sek).
+07.07.05 UF - Bugfix die TAB Taste geht wieder beim Login.
+04.07.05 ML - Bugfix 868: Die Jiystickeinstellungen werden nun ohne Ab/Anmelden des IdipClients
+			  übernommen.
+01.07.05 UF - Bugfix Joystick Oben und Unten vertauscht.
+22.06.05 ML - In der Klasse CViewIdipClient 'm_SmallWindows.m_cs' durch 
+			  'CAutoCritSec acs(&m_SmallWindows.m_cs)' ersetzt, um zu verhindern, daß
+			  bei einer Exception das 'm_SmallWindows.m_cs'Objekt 'gelockt' bleibt.
+21.06.05 RKE- Bugfix 784: Nach dem Sizen bzw Moven wird ein Update Flag gesetzt.
+20.06.05 ML - Bugfix 863: Erste Kamera/Alle Kameras zu beginn funktioniert wieder.
+16.06.05 RKE- Tab Control fuer Focussteuerung der Fenster eingebaut.
+			  TAB: toggle Views (+Shift: zurueck)
+			  TAB+Ctrl: (+Shift: zurueck)
+			  - View IdipClient: toggle SmallWindows 
+			  - ObjectViews: toggle Server
+13.06.05 RKE- Joystick Kontrolle fuer PTZ eingefuegt.
+		    - Bugfix 856: Baumansicht wird jetzt aktualisiert.
+09.06.05 UF - Der Informationsdialog der Datenbank zeigt jetzt GBs an.
+08.06.05 RKE- Einzufuegende Archive werden jetzt zeitlich sortiert eingefuegt.
+03.06.05 RKE- Bugfix 854: Lokale Datenbankverbindung wird jetzt korrekt geschlossen und wieder aufgebaut,
+              wenn die Datenbank initialisiert wird.
+            - Performancemanagement wurde verbessert und kann jetzt mehrere MPeg4 Streams mit 25 fps anzeigen.
+              Dazu muss der RegistryKey "MinPerformanceLevel" auf Werte kleiner als 2 eingestellt werden.
+              n = 0 ergibt max 3 Streams, n < 0 ergibt 3 + (-n) Streams.
+            - Bugfix: Das Main SkinMenue wird jetzt schon in CIdipClientApp::OnAppExit() freigegeben.
+              In CMainFrame::OnDestroy() tritt manchmal (Zeitproblem, bei MenuItem 4-5) eine Debug Assertion durch Zugriff
+              auf falsche Pointer auf. Das MainWnd scheint dann schon das Menu zu zerstoeren.
+              Im Release koennten dann Ressourcen nicht wieder freigegeben werden.
+            - Die Statusbar kann zu Testzwecken aktiviert werden.
+            - Die Bilder werden jetzt in einem extra Thread (LiveWindowThread) dekodiert.
+02.06.05 RKE- Ueberarbeitung der russischen Resourcen Texte eingefuegt.
+01.06.05 RKE- LiveWindow Bilder werden jetzt in einem Thread dekodiert.
+31.05.05 RKE- Bugfix: Um Flackern beim aktivieren aller Kameras einer Station zu verhindern wurde eine Abfage in SwitchCamera
+			  eingebaut die eine Kamera nur einschaltet, wenn sie aus ist. Dies darf bei Aufrufen von anderen Stellen 
+			  so nicht gemacht werden, sie wird dann trotzdem geschaltet, um sie z.B. zu aktivieren.
+31.05.05 RKE- Bugfix 844: Wenn kein ServerItem vorhanden ist, so wird jetzt einer eingefuegt. Wenn der lokale Server
+              noch keinen Namen hat, so wird er "Lokale Station" (IDS_LOCAL_SERVER) genannt.
+30.05.05 RKE- Bugfix 701: Die FieldMap der Applikation wird jetzt nach jedem Verbinden bzw. Trennen einer Station
+			  komplett neu initialisiert.
+			  Bugfix 834: Is die Groeße der Datenbanklaufwerke 0 so wird das automatische Verbinden nach dem Login
+			  verhindert.
+27.05.05 RKE- Checkbox fuer aktivieren aller Kameras einer station wurde enabled.
+              Bugfix 850: Der GOPTimer wurde mit dem Flag TIME_KILL_SYNCHRONOUS gestartet. In diesem Fall versucht die
+              Funktion timeKillEvent(..) auf das Ende des Timer zu warten, was er auch soll. Jetzt wird das Flag nicht mehr gesetzt.
+              Hinter timeKillEvent(..) wird m_csPictureRecord.Lock() und m_csPictureRecord.Unlock() aufgerufen, Wartezeit: 1-6 µs.
+26.05.05 RKE- Bugfix 762: In der FieldMap wurde der Eintrag "dontuse" nicht entfernt. Jetzt wird er geloescht.
+			  - Bei einem Reset werden CIPC Abfragen zu Applicationen gemacht, die logischerweise auch gerade resetten.
+			    Es wurde ein ResetIndikator implementiert, der das Resetten für eine Zeitdauer von 10 Sekunden anzeigt.
+			    CIPC Requests, die im CIPC Thread ausgeloest werden, werden in diesem Fall um 5 Sekunden verzoegert.
+			  - CIPCDatabaseIdipClientLocal::OnConfirmFieldInfo implementiert, da sie nicht ueberschrieben war (CIPC Error)
+03.05.05 ML - Textfarbe in der Titelzeile eines Datenbankfensters war immer dunkelgrau.
+02.05.05 RKE- Bugfix 836: Funktion OnUser wurde in CWndMpeg4 implementiert und nicht an die Basisklasse CWndLive
+			  weitergeleitet.
+28.04.05 UF - Bugfix 832: GP beim Beenden ISDN, doppelte Datenbankverbindung
+27.04.05 TKR- Bugfix 822: Waehrend der Pin Dialog offen war wurde versucht, eine Datenbankverbindung
+			  aufzubauen. Dieses geschieht nun nicht mehr, wenn der PIN Dialog offen ist.
+27.04.05 RKE- MMTimer fuer das Abspielen der GOPs in CWndMpeg4 implementiert.
+26.04.05 TKR- Bugfix 823: Synchrone Wiedergabe war nicht Threadsafe. Ein 'Post' tat gut.
+15.04.05 RKE- * Fuer WK_PTR_ARRAY´s SetAt durch SetAtFast ersetzt.
+			  * Fuer WK_PTR_ARRAY_CS´s CriticalSections ueberprueft und ergaenzt.
+			  * CProcessGOPThread implementiert zum zeitgesteuerten Abspielen fuer GOP´s.
+16.03.05 TKR- Bugfix 686: Bei Wechselfestplatten (bzw. allen USB Geraeten, die in der SV als
+			  Wechselfestplatte eingetragen sind) wird im dem Moment, in dem es in der SV
+			  ausgetragen wird (gesetzt auf "keine Verwendung") die Lesesoftware komplett draufkopiert.
+16.03.05 TKR- Bugfix 744: Eine Rechtecksuche mittels Suchdialog liefert nun korrekte Ergebnisse
+			  und der "abbrechen" Button im Dialog "Suchergebnis" wird nun wieder korrekt
+			  enabled bzw. disabled angezeigt.
+10.03.05 RKE- Bugfix 641: Skinslider in Kameraeinstellungsdialog sind jetzt customdraw. Der Dialog
+			  hat keinen Farbverlauf mehr, da die Slider nicht transparent sind.
+09.03.05 TKR- Solange der BackupDlg oder der Dlg zum Auswaehlen eines Laufwerks geoeffnet sind,
+			  ist das Beenden der Software disabled (OnUpdateAppExit).
+09.03.05 TKR- Bugfix 774: Bei einer Alarmverbindung (Aufschaltung) kann mittels RegKey eingestellt
+			  werden, ob das Menü (oberhalb der Fenster) angezeigt werden soll.
+			  Diese Einstellung wird später in das Menü "Einstellungen" integriert.
+08.03.05 TKR- Bugfix 785: Backup auf CD/DVD nur noch möglich, wenn eine lokale Verbindung besteht.
+07.03.05 ML - Bugfix 773: Leerzeichen am Anfang und am Ende des Titels werden gelöscht.
+07.03.05 ML - Bugfix 769: Beim Speichern von Htm, jpg und bmp-Dateien wird nun die entsprechende Dateiendung
+			  angehängt, sofern diese noch nicht vorhanden ist.
+18.02.05 UF - Bugfixes suchen und kopieren.
+09.02.05 RKE- Checkbox im HostItem des CameraViews implementiert, um alle Kameras des Hosts an- bzw auszuschalten.
+			  Checkbox im HostItem des ArchiveViews implementiert, um alle Archive des Hosts zu(de)selektieren.
+09.02.05 RKE- Bugfix 632: Das Menue wird jetzt ganz gelöscht, wenn die Auflösung nicht einstellbar ist.
+03.02.05 RKE- Performance Balancing implementiert.
+03.02.05 TKR- Bugfix 761: Abspielen über Sequenzgrenzen hinweg klappt wieder einwandfrei.
+02.02.05 UF - Bugfixes suchen und kopieren.
+02.02.05 TKR- Bugfix 758: Sobald das Kopieren von gefundenen Bilder vorzeitig beendet wurde,
+			  werden anschließend nach Betätigen eines Abspielbuttons nicht mehr die noch
+			  fehlenden gefundenen Bilder angezeigt.
+02.02.05 TKR- Bugfix 759: Bei einer Suche wird nun zunächst das erste gefundene Bild angezeigt,
+			  anschließend werden alle kopierten Bilder der Reihe nach angezeigt. Wurden auch
+			  Bilder in der nächsten Sequenz gefunden, werden diese zwar kopiert, aber nicht
+			  angezeigt. Dieser Fehler wird später behoben.
+02.02.05 TKR_ Bugfix 760: Nach dem Ende einer Suche incl. Kopieren der Bilder und anshcließender
+			  Betätigung eines Abspielbutton wird nun auch das korrekte Bild angezeigt.
+31.01.05 UF - Bugfix Bei der Suche kopierte Bilder werden jetzt immer ueber die lokale
+			  Datenbankverbindung kopiert.
+28.01.05 TKR- Bugfix 660: Der neue Startzeitpunkt bei Auslagerung fortsetzen wird nun korrekt eingetragen,
+		      auch wenn auf dem Backup-Medium kein Speicherplatz zur Verfuegung steht. Wird wieder
+		      Platz geschaffen, so kann das Backup nahtlos fortgesetzt werden.
+31.01.05 RKE- Bugfix 753: Im ReadonlyModus wird jetzt eine direkte CIPC Verbindung zur AudioUnit hergestellt.
+26.01.05 RKE- Bugfix 739: ConnectToLocalServer kommt manchmal zu frueh: wenn die Datenbank noch nicht initilisiert ist,
+			  so wird die Verbindung zur Datenbank nicht hergestellt. Die lokale Verbindung wird jetzt in OnTimer statt
+			  in OnIdle erstellt. Die Datenbankverbindungen (auch remote) werden dann alle 5 Sekunden ueberprueft.
+25.01.05 RKE- Bugfix 731: Enable und DisableSlider wird jetzt ausschliesslich in SetPlayStatus behandelt. Der 
+              Playstatus wird nur durch diese Funktion geaendert, somit ist hier der richtige Ort, um den Slider
+              zu enablen.
+              Bugfix 732: Die Cmds OnNavigatePrev und OnNavigateNext sind während des (schnellen) Abspielens enabled.
+              Deshalb sind sie auch über die Tasten ansprechbar. Sie werden jetzt abhängig von Slider disabled.
+              Bugfix 737: Es wird jetzt ein Alarmuser angelegt. Die Berechtigungsstufe muss die vom Prozess sein.
+              Bugfix 734: Es wird jetzt, wenn der Server neu eingefügt wird, idFirstCam = idAlarm gesetzt.
+21.01.05 RKE- Bugfix 727: Fokus wird jetzt nicht in OnTimer mehr beeinflusst (bringt sowieso nix), sondern direkt
+			  nach m_pDlgLogIn->Create().
+17.01.05 TKR- Bugfix 708: Lesesoftware wird nun immer mit auf das Backupmedium kopiert, unabhängig
+			  davon, ob sie schon drauf war oder nicht. Als Backupmedium werden alle Laufwerke/Medien
+			  benutzt, die im Backup-Dialog zur auswahl stehen.		
+14.01.05 TKR- Bugfix 705: Wenn im MPEG4 Decoder OnDraw fehlschlaegt wird der Decoder erneut mit einem PictureRecord
+              initialisiert und das Fenster invalidiert. Rekursion wird unterbunden.
+13.01.05 RKE- Bugfix 663: OK button wird nur enabled, wenn ein Eintrag selektiert wurde.
+				     647: Datum wird jetzt einmal pro Minute upgedatet.
+				     644: Server wird jetzt auch in Actualize eingefügt, CheckVisibility wird jetzt wenn nötig
+				          in Actualize und Delete aufgerufen.
+				     661: Kamerasymbole werden jetzt korrekt angezeigt.
+26.11.04 RKE- Bugfix 618: CheckButton wird jetzt disabled, wenn lokal nicht verbunden ist.
+23.11.04 ML - Bugfix625: Man kommt erst in den Backupdialog, wenn ein zuvor ein Sicherungslaufwerk
+			  ausgewählt wurde.
+17.11.04 TKR- Beim 2-Monitorbetrieb wird bei der 1-Plus Ansicht nun immer nur ein einziges großes
+			  Bild angezeigt. Alle weiteren verteilen sich auf den 2. Monitor.
+16.11.04 RKE- folgende Bugs gefixt:
+			- AudioOutput Volume Lokal wird jetzt angezeigt und kann im Dialog eingestellt eingestellt werden.
+			- Die Titelzeilenhoehe in den Treeviews wird jetzt an die Fontgroesse angepasst.
+12.11.04 RKE- folgende Bugs gefixt:
+			- Im ReadonlyModus ist jetzt SetDateTime disabled.
+			- Die Einstellungen der Benutzerobefläche wurden nicht in jedem Fall uebernommen.
+			  Die einzelnen Views wurden nicht sichtbar bzw. unsichtbar gesetzt beim Wechsel von always auf never visible u. u..
+			- Beim Erstellen der HTML Gegenstationskarte, koennen alle eingetragenen Gegenstationen im Kameraview angezeigt
+			  werden, wenn in der Registry der Eintrag "InsertKnownHosts" auf 1 gesetzt wird.
+11.11.04 RKE- folgende Bugs gefixt:
+			- HTML Seite wurde falsch abespeichert:
+			  (Bei CWK_String wird als Format(...) Parameter der LPCSTR operator bevorzugt, Explizit casten auf LPCTSTR!)
+			- Beim Setzen des PTZ Windows wurden auch !CWndLive´s auf solche gecastet (heftig).
+			- Backup auf CD verbessert: (Anzeige von OEM spezifischen Werten, Lesen der oem.ini von der CD).
+			- Ein CWndPlay zeigt wenn es zu klein wird nur noch das Bild. Ist aber nur Audio vorhanden, so wird jetzt
+			  der FieldDialog noch angezeigt.
+11.11.04 UF - lokale Datenbankverbindung blockiert jetzt nicht mehr den Mainthread
+10.11.04 UF - Alarmcom OEM ist jetzt Siemens.
+04.11.04 RKE- Bugfix 555: Die Notification Message wird innerhalb der Initialisierenden (Alarm) Verbindung uebermittelt
+			  Die Codepage wird mit uebermittelt. Somit wird jetzt der Text korrekt decodiert und der Font des TextWnd
+			  kann angepasst werden.
+04.11.04 RKE- Bugfix 576: In den Ansi Datenbankfeldern werden jetzt MBCS Texte gespeichert. Diese werden jedoch 
+              nur dann korrekt gespeichert bzw. ausgelesen, wenn die Sprache nicht geaendert wird.
+04.11.04 RKE- Beim Aufrufen von StartApplication (an Launcher) wird der Laucher jetzt als Foregroundwindow
+			  gesetzt, um den gestarteten Applikationen (z.B.: Systemverwaltung) den Eingabefocus zu geben.
+03.11.04 TKR- Sind mehrere Datenbankfenster geoeffnet, die ein Rechteck enthalten und ist
+			  gleichzeitig der Suchdialog geoeffnet, so wird der Suchdialog beim Wechsel
+			  des aktiven Fensters aktualisiert.
+03.11.04 TKR- Wird bei einer Rechtecksuche mittels Suchdialog nur ein einziges Bild gefunden,
+			  so wird dieses nun auch im (schon geoeffneten) Datenbankfenster angezeigt.
+02.11.04 UF - Es wird jetzt bei ISDN/DSL nur noch 1fps angefordert.
+02.11.04 UF - Die Auflösung wird bei ISDN/DSL jetzt automatisch umgeschaltet.
+02.11.04 TKR- Wird bei der Rechtecksuche laengere Zeit nichts gefunden (z.B. in Archiven
+			  ohne Bewegungskoordinaten, Daueralarm), erscheint im Datenbankfenster
+			  ein Text, der dem Benutzer anzeigt, dass die Suche noch laeuft.
+29.10.04 RKE- Comboboxen im MD Maskendialog koennen jetzt auch russisch darstellen.
+29.10.04 RKE- Erweiterte Tastaturen mit Hotkeys für IExplorer usw. werden jetzt abgefangen, wenn in
+			  IdipClient/Settings "RegisterHotKey" auf 1 gesetzt wird.
+27.10.04 TKR- Bugfix 605: Fadenkreuze werden nun wieder angezeigt und abgespeichert wenn
+			  MultiThread (DVRT/IdipClient/Settings/Mpeg4DecodeMT = 0) ausgeschaltet ist.
+			  Mit MultiThread gab es bei der Wiedergabe von Datenbankbildern Probleme
+			  (Geisterbilder), deshalb wurde sie ausgeschaltet.
+25.10.04 TKR- Rechtecksuche funktioniert nun auch sequenzübergreifend.
+25.10.04 ML-  Suchparameter werden wieder abgespeichert.
+22.10.04 TKR- Bei Recjtecksuche wird auch der Slider disabled.
+21.10.04 UF - Rechtecksuche idip wie DTS einfach mittels playbutton
+20.10.04 TKR- Bugfix 597: Ansicht 1er ist nun nicht mehr in größerer Ansicht als 4x4 disabled.
+19.10.04 TKR- Bugfix 582: Echtzeitwiedergabe erzeugt nach Stoppen keine Geisterbilder mehr.
+18.10.04 UF - Bugfix nach Servereset werden die Aenderungen von Kameras korrekt uebernommen.
+18.10.04 UF - Bugfix GP beim Abspielen
+18.10.04 UF - Bugfix Nr. 578 4,9 fach Darstellung MPEG4 korrigiert.
+14.10.04 UF - MPEG4 Bilddarstellung jetzt wahlweise Single oder Multithreaded mit Registry Mpeg4DecodeMT
+			  in HKLM\Software\DVRT\IdipClient\Settings
+14.10.04 TKR- Bugfix 577: Scrollbalken auf irgendeine Position gesetzt und dann Einzelbild vorwärts
+			  zeigt keine Geisterbilder mehr.
+30.09.04 TKR- Bugfix 559: Nun wird das jeweil neu geöffnete Archivfenster als einzige aktives angezeigt. 
+29.09.04 TKR- Bugfix 561: Springen zum ersten Bild der ersten Sequenz (Button: Pos1) funktioniert
+			  nun auch immer bei gemischten Archiven
+28.09.04 TKR- Bugfix 557: FastForward bleibt nun nicht mehr bei Sequenzgrenzen stehen. 
+28.09.04 TKR- Prefetch (m_iPictureRequests, nur in gemischten Archiven (Audio/Video)) nur noch 
+			  im PlayStatus PlayForward.
+28.09.04 TKR- Bugfix 556: Das rueckwäerts Abspielen bleibt nun bei nur Bildarchiven nicht mehr stehen.
+27.09.04 UF - Archivnamen werden jetzt aktualisiert, zumindest nach einer Minute.
+23.09.04 UF - Bugfix Darstellung Datenbankfelder
+01.09.04 TKR- Bugfix 536: DTS Aufwahl auf Idip geht nun auch, ohne dass eine Benutzer
+			  beim Idip eingeloggt sein muss.
+31.08.04 RKE- Bei Sprachen, die einen anderen Font benoetigen wird der Font ermittelt und ueber die Skins erstellt.
+30.08.04 RKE- Bugfix 535/534/533 Menuetooltips verbessert bzw. hinzugefuegt.
+26.08.04 RKE- Bugfix 528: Datenbankbilder Textfeld zeigt nicht mehr "static" an.
+26.08.04 TKR- Bugfix 525: Rückwärts abspielen ruckelt nicht mehr
+23.08.04 RKE- Bugfix 511: Multimonitoreinstellungen aus der Registry wurden beim Start falsch gelesen.
+23.08.04 RKE- Bugfix 523: Meldung "gespeichert" bzw. "Fehler beim speichern" für die Bildspeicherfunktionen Vereinheitlicht.
+19.08.04 RKE- Bugfix 522: Bei Einzelansicht im ObjectSplitter muss das Aktive Window sichtbar sein.
+19.08.04 RKE- Bugfix 517: Ohne Titelzeile und !View1Plus() kann jetzt ein nicht Cmd aktives Fenster cmd aktiv gesetzt werden
+              indem man auf den oberen Bereich (20 Pixel) klickt.
+19.08.04 RKE- Bugfix 513: Die CIPC Abfrage wird im Timer nur noch solange wiederholt, bis eine Antwort erfolgt ist.
+			  Die CIPC Confirmations werden nicht mehr mit WM_TIMER sondern mit WM_USER gepostet, da WM_TIMER Nachrichten
+			  verloren gehen können, VS Help:
+			  The DispatchMessage Windows function sends a WM_TIMER message when no other messages are in the
+			  application's message queue.
+			  WM_USER Nachrichten bleiben solange in der MessageLoop bis sie bearbeitet werden.
+17.08.04 RKE- Bugfix 505: Dragging wird jetzt beendet, wenn die rechte Maustaste gedrueckt wird.
+17.08.04 RKE- Bugfix 504: Wenn die Titelzeile nicht da ist, wird der Menuepunkt schliessen eingefuegt, sowie
+              das Menue fuer die Navigation nicht geloescht.
+16.08.04 RKE- Bugfix 503: Drag & Drop Offset (HTML Wnd) wird jetzt abhaengig von der Titelzeile korrigiert.
+16.08.04 RKE- Bugfix 502: Im 1 Plus Modus ohne Titelzeilen ist in den !BigWindows ein Bereich zum Umschalten auf BigWindow
+              durch ArrowCursor definiert.
+16.08.04 RKE- Bugfix 494/495: Der FieldsDialog wird jetzt in der Groeße angepasst. In CWndSmall::OnSize() wird die Groesse nur
+		      angepasst, wenn der Dialog sichtbar ist. Die Sichtbarkeit wird hier auch eingestellt. IsWindowVisible() liefert
+		      manchmal nach dem Aufruf von ShowWindow() den Zustand nicht richtig (Asynchrones updaten?).
+13.08.04 RKE- Bugfix 501: Es werden jetzt die richtigen Karten gelöscht.
+13.08.04 RKE- Bugfix 499: Das Datum wird jetzt einmal pro Stunde upgedated.
+12.08.04 UF - Bugfix 479: Kamerakarte nur noch zu Beginn.
+12.08.04 RKE- Bugfix 459: Der Client fragt jetzt in CIPC...Client::OnConfirmConnection nochmal nach ob die Gegenstation
+		      Unicode kann, wenn die Verbindung als !Unicode initialisiert wurde. Eine !Unicode (Endstation) ignoriert diese Anfrage.
+11.08.04 RKE- Bugfix 483: Nach umstellen der Sprache erscheinen jetzt auch Menue und Anwahlkarten.
+10.08.04 TKR- Alarmanruf auf Receiver. Speicherbutton in Livefenstern sind nun erst enabled,
+			  wenn die anrufende Station im receiver in der Gegegstationsliste eingetragen ist.
+09.08.04 RKE- Bugfix 475: Menue wird nicht mehr angezeigt, wenn kein ValidUser eingeloggt ist.
+09.08.04 TKR- Beim aller erstens Start wird nun die Titelzeile bei den Fenstern angezeigt. 
+06.08.04 UF - Bugfix 477: Alarmverbindung Dialog ohne Text.
+05.08.04 UF - Bugfix 478: Alarmverbindung mit falscher Berechtigung zur Datenbank. 
+05.08.04 UF - Bugfix Livedarstellung Tasha, kein Delay und kein Speicherverbrauch mehr.
+03.08.04 TKR- Bugfix 419: Nach Eingabe eines Datums/Zeitpunktes (synchrone Wiedergabe), nach denen 
+			  keine Bilder mehr ins gewählte Archiv aufgenommen wurden, wird nun das letzte
+			  aufgezeichnete Bild angezeigt.
+30.07.04 TKR- Bugfix 467: Tasha-Datenbankbilder werden nun auch korrekt mit Zusatztexten ausgedruckt.
+28.07.04 UF - Bugfix Karten werden wieder übertragen.
+27.07.04 UF - Tasha fps jetzt default werte und keine Registry mehr.
+27.07.04 UF - MPEG4 Bilder werden jetzt nach dem Dekoden und Anzeigen neu angefragt, fuer langsame Rechner.
+			  Die Maps's werden jetzt nach den Meldern/Kameras und Relais angefragt, wegen ISDN.
+26.07.04 UF - Bugfix Videotimeoutbehandlung!
+23.07.04 TKR- Bugfix 455: Wird beim Schließen eines PlayWindows dieses noch abgespielt, werden vor
+			  dem Schließen des Fensters zuerst die PlayButtons auf stopp gebracht.
+20.07.04 UF - Bugfix Livedarstellung stoppt bei JPEG.
+12.07.04 RKE- Bugfix 444: Der Scrollbalken disabled bei PF, FF, PR, FR
+		    - Bugfix 447: Der Command ID_APP_EXIT wurde intern auf die ID_EXIT_CLIENT umgebogen. ID_APP_EXIT wird vom Launcher
+			  aufgerufen und wird anders behandelt als wenn es durch Menü, Toolbar oder Panel aufgerufen wird (Abfragen etc.).
+			- Bugfix 446: Bei der Alarmverbindung von einem DTS wurde versucht die Audioverbindung ohne Pin aufzubauen. Dadurch
+			  wurde die Verbindung vorzeitig beendet. Die Pin wird schon bei der Alarmverbindung mitgeliefert und kann jetzt für
+			  die weiteren Verbindungen benutzt werden.
+07.07.04 RKE- AccessViolation im ReadOnly modus beseitigt, Resource der oemgui wird jezt neu geladen bei Aenderung der Sprache
+06.07.04 RKE- aus dem Schwenk Neige Menue wird jetzt nur noch die PTZ Konfinguration eingefuegt
+06.07.04 RKE- Bugfix 436: Im AudioView wird jetzt eine neu eingefuegte Station zu Begin selektiert.
+06.07.04 RKE- Bugfix 406: 1 Plus und Exklusiv mit einem Bild wird jetzt wie XxX und Exklusiv behandelt
+06.07.04 RKE- Bugfix 431: Domkaera Steuerungspfeile werden jetzt nur noch im Videorechteck ausgewertet.
+06.07.04 RKE- Bugfix 433: Unnoetige Abfragen beim Beenden des Client durch Launcher werden jetzt verhindert.
+05.07.04 RKE- Bugfix 427: Nummerblock ist jetzt wieder bedienbar
+			  Bugfix 428: Sprachen werden jetzt angezeigt.
+02.07.04 ML - Zum Test die Idlerefresh zeit von 3 Sekunden auf 1 Sekunde verkürzt
+02.07.04 ML - Bugfix 421: Fadenkreuze werden nur noch zu jedem wirklich angezeigtem Bild angezeigt.
+02.07.04 ML - Für Tasha: Alle nicht 'aktiven' Livefenster werden nun im 3 Sekunden takt aktualisiert, sofern KEINE Bewegung
+						 erkannt wurde. Wurde Bewegung erkannt, so werden dort alle I-Frames (derzeit 5fps) angezeigt.
+						 Im aktiven Fenster werden immer alle 25fps angezeigt. Dies entspricht genau dem DTS
+01.07.04 RKE- Bugfix 384: Schwenk/Neige Steuerungsdialog hat jetzt auch die neuen Symbole
+			  Bugfix 413: Tastatursteuerung ist jetzt korrekt, entsprechender Button wird als gedrueckt angezeigt. Fkt. ergaenzt:
+			  - Enter: Position Speichern
+			  - /: Zweistellige Eingabe
+			  - x: Numblock umschaltung von Dom (Kameraposition) auf !Dom (Kameraauswahl)
+			  - -, +: Schwenk/Neige geschwindigkeit aendern
+			  Bugfix 415: Menuepunkt Kamerakarte entfernt.
+			  Bugfix 417: Abfrage kommt jetzt nicht mehr zweimal			  
+30.06.04 TKR- Bugfix 404: Nach schließen eines Alarmlist-Fensters, nur noch ein weiteres Fenster
+			  ist geöffnet) wurde dieses nicht in die 1x1 Ansicht geschaltet. Geht wieder.
+			  Ging übrigens auch nicht mit Referenz- und Textfenstern.
+30.06.04 TKR- Bugfix 405: Livebilder frieren nach SV-Reset nicht mehr ein.
+			  In CServer::ConnectThreadProc() bei  dwOptions "| SCO_NO_STREAM" wieder
+			  zurück geändert.
+29.06.04 RKE- Bugfix 397: Hintergrund static ctrl im MD dialog
+			  Bugfix 400: Launcher beendet den Client, nicht er sich selbst.
+			  Bugfix 402: vollbilt maximized geht jetzt
+29.06.04 ML - Im aktiven Fenster wird mit voller Framerate dekodiert, in allen aderen werden nur die
+			  I-Frames dekodiert.
+28.06.04 RKE- Donglefunktionen hinzugefuegt:
+			  AllowMultiMonitor -> Anzeige auf 2. Monitor verhindert
+			  AllowHTMLmaps	-> Anzeige der HTML Karten verhindert
+23.06.04 TKR- Bugfix 343: Wächsterrundgang funktioniert wieder normal. Es wird nun vor der
+			  Aufwahl auf die nächste Station zuerst die aktuell verbundene getrennt.
+25.06.04 RKE- Masken und Alarm Empfindlichkeit im Dialog "Bewegungsmaske" eingebaut.
+25.06.04 RKE- Steuerung Gegenstationsabhängiger Funktionen verbessert.
+23.06.04 TKR- Bugfix 388: Bei ISDN wird das letzte offene Fenster auch groß dargestellt.
+23.06.04 TKR- Bugfix 389: Ist kein Fenster offen wird die im obersten TreeView markierte 
+			  Station getrennt.
+23.06.04 TKR- Bugfix 390: Slider werden im SyncMode nun korrekt disabled und danach wieder
+			  enabled.
+22.06.04 TKR- Bugfix 381: Stationen trennen: Mittels Button und Menü "Verbindung->Trennen"
+		      wird nun immer die zum aktiven Fenster gehörige Station getrennt. Bei Auswahl
+		      Baumansicht->Kontextmenü(Station)->Trennen wird immer die ausgewählte
+		      Station getrennt.
+22.06.04 TKR- Bugfix 382: Kamerakarten lassen sich mittels Button nur öffnen, nicht schließen.
+22.06.04 TKR- Bugfix 378: Manuell geschlossene Archivfenster werden nun auch im
+			  Archivbaum bei synchroner Wiedergabe ausgehakt.
+15.06.04 TKR- Bugfix 305: Einzelwiedergabe rückwärts zeigt nun nur noch die I-Frames.
+18.06.04 RKE- Bugfix 372: zu trivial
+			  Bugfix 374: GetWndSmallExclusive() sucht jetzt alle Smallwindows nach exclusiven ab. Das Exclusive ist nicht immer das erste.
+			  Bugfix 375: Bei 1 Plus Modus und ExclusivWindow auf dem 1. Monitor wird wenn Is1x1() True liefert der 1 Plus Modus ausgeschaltet.
+						  Is1x1() wurde ann DualMonitor angepasst.
+15.06.04 UF - Bugfix 201: Rückwärts abspielen über Sequenzgrenzen hinweg funktioniert nun korrekt.
+15.06.04 TKR- Bugfix 346: DTS Fehlermeldungen werden nun 
+			  von einem aufgewählten Idip ignoriert. 
+17.06.04 RKE- Bugfix 365: Sprachenauswahl beim einloggen neben Alarmuser ist disabled
+			  Im Readonlymodus wird jetzt zur Auswahl der Sprache aufgefordert.
+16.06.04 RKE- Icons fuer Domsteuerung implementiert.
+			  Der Closebutton der Treeviews wird jetzt disabled, wenn das Fenster nicht geschlossen werden darf.
+			  Bugfix 364: Fullscreenmodus kann immer ausgeschaltet werden. Ausgeschaltet werden kann er nur, wenn
+			              Smallwindows vorhanden sind.
+			  Bugfix 362: WndPlay hat nach dem ServerDelete auf den eigenen Serverpointer zugegriffen. Fuer solche Faelle gibt
+						  es jetzt die Funktion CWndSmall::GetSafeServer(), welche den Server anhand der ID ermittelt.
+			  Bugfix 326: 1 Plus bei Alarmaufschaltung geht.
+			  Bugfix 325: Vollbild bei Alarmaufschaltung wird wieder zurückgesetzt und der Akustische Alarm ausgeschaltet.
+			  Bugfix 99: Einstellungen von Vision und Recherche werden jetzt uebernommen.
+15.06.04 TKR- Bugfix 354: Vor synchroner Wiedergabe schon offene Archive werden nun
+			  im Archivbaum (bei sync. Wiedergabe) angehakt. 
+15.06.04 TKR- Bugfix 303: Synchrones Abspielen funktioniert nun auch korrekt, wenn ein oder
+			  mehrere Livefenster gleichzeitig offen bzw. geöffnet werden. 
+15.04.04 RKE- Bugfix 344: Zustaendsuebergang maximized bzw. restored -> minimized und umgekehrt stimmen jetzt wieder.
+			  Bugfix 351: Alarmlisten Eintrag in Registry wird jetzt geloescht, bis die Alarmliste korrekt implementiert ist.
+			  Bugfix 353: Tastatursteuerung ist jetzt abhaengig vom Fokus fuer Panel, TreeViews und Dialoge.
+			  Bugfix 328: Laden einer JPG datei geht jetzt wieder, Zugriff auf leeres m_pDibData Data Objekt.
+15.06.04 TKR- Bugfix 348: Die Domsteuer-Buttons werden nun bei einem Wechsel des aktiven
+			  Fensters immer mitgeprüft und ggf. ausgeschaltet.
+15.06.04 TKR- Bugfix 346: Die nicht überschriebene Funktion 
+			  CIPCDatabaseStorage::OnRequestOpenSequence() lieferte eine Fehlermeldung,
+			  die von einem aufgewählten DTS an den IdipClient übergeben wurde.
+15.06.04 TKR- Bugfix 331: Alarmlist Archive eines aufgewählten DTS können nun nicht mehr
+		      mehrfach geöffnet werden.
+14.06.04 RKE- Tastatursteuerung für TreeViews und Nichtmodale Dialoge mit DlgBarIdipClient koordiniert.
+14.06.04 RKE- Bugfix 337, 338, 340: Resourcentexte korrigiert.
+11.06.04 RKE- Monitorupdate bei Aenderung der Monitoreinstellungen in der SV eingebaut.
+11.06.04 TKR- Bugfix 332: 1x1 Ansicht überarbeitet, sodass jeweils das richtige Fenster
+			  in Einzelansicht angezeigt wird.
+11.06.04 TKR- Bugfix 329: Alle in der 1-plus Ansicht aktiven Fenster (Live, Play, HTML, Text
+			  Alarmlist, usw) werden jetzt auch als großes angezeigt.
+10.06.04 RKE- Bugfix 323: Domsteuerung Speichern Enabled().
+              Bugfix 158: Shellmodebuttonishistory
+              Bugfix 239: Systemsteuerung wird geschlossen.
+              Bugfix 315: Domsteuerung wird jetzt enabled
+              Bugfix 321: Systemtastenkuerzel &y
+10.06.04 RKE- Tastatursteuerung für das Panel eingebaut (SN + Numblock)
+10.06.04 TKR- Bugfix 311: In 1-Plus werden nun auch mittels Archiv-Baum-Klick geöffnete
+			  Sequenzen groß angezeigt. 
+10.06.04 TKR- Bugfix 319: In der 1-Ansicht werden nun die Kameras via Nummernblock korrekt
+		      umgeschaltet.
+09.06.04 RKE- Schwenk/Neige-Steuerung in Panel des Client eingebaut.
+09.06.04 UF - Readonly Version zeigt jetzt nur noch idip und nicht mehr freestyle
+09.06.04 UF - Lokale Datenbank,Audio und Input Verbindung in Extrathread, Fliegt der Server wech, 
+			  wird auch die lokale Verbindung getrennt.
+08.06.04 UF - Bugfix 221: Referenzbilder fuer Tasha gehen jetzt.
+08.06.04 ML - Bugfix 232: In 'CDlgMDConfig' wird nun beim Öffnen des Dialoges auf das 'OnConfirmGetMask' gewartet.
+						  denn erst dann ist die Maske wirklich übertragen. Wird das Frame vorher gezeigt, so
+						  werden für die Maske undefinierte Werte angezeigt.
+08.06.04 RKE- Bugfix 307: 1 Plus Modus mit Exklusiv kombiniert. Ist ein Fenster exklusiv auf einen Monitor zugewiesen,
+			  so wird der 1 Plus Modus (wie bei Single Monitor) auf dem anderen Monitor angezeigt.
+			  Bugfix 306: Doppelklick auf Titelzeile im Skinned Mode geht jetzt.
+			  Bugfix 301: Domsymbol für Kamerakarte besser erkennbar (schoen sind die Symbole immer noch nicht)
+			  Bugfix 159: Speichern der Hostmap wurde zwar durchgefuert aber der Zustand "Bearbeiten" nicht geaendert.
+			  - Alarmview als Liste vorerst deaktiviert (ist noch unvollendet).
+			  - KameraView Auswahl einer Kamera wird jetzt auch im HTMLWnd angezeigt.
+07.06.04 TKR- Bugfix 302: Die aktive kamera wird nun beim Wechsel in die 1Plus-Ansicht 
+		      immer auch im großen Bild angezeigt.
+07.06.04 UF - Bugfix: Live zu Wiedergabe geht, Bei Tasha Wiedergabe wird der Dialog richtig aktualisiert.
+07.06.04 TKR- Bugfix 245: Buttons in Nummernblock funktionieren wieder.
+07.06.04 TKR- Bugfix 216: Beenden der synchronen Wiedergabe mittel Icon im Panel
+			  stoppt nun vor dem Beenden auch das Abspielen (falls aktiv)
+07.06.04 RKE- Bugfix 246: Update wurde nicht aufgerufen, wenn der Dialog ausgeblendet war.
+              Bugfix 255: siehe 211
+              Bugfix 276: tritt nicht mehr auf, jedenfalls bei mir nicht.
+              Bugfix 278: Mausnachricht wurde geclippt.
+              Bugfix 281: Home String war nicht korrekt (/c:\\dvrt....)
+              Bugfix 286: Static Controlls sind jetzt transparent im Backupdialog.
+                          bei WM_SETTEXT wird jetzt immer InvalidateRect() aufgerufen.
+07.06.04 TKR- Bugfix 148+247+298: Abspielen im Modus "Selbes Fenster = AUS" 
+			  funktioniert wieder korrekt. Es wird nur innerhalb 
+			  der geöffneten Sequenz navigiert.
+04.06.04 RKE- Bugfix 197: Win 2000 Menues sind jetzt nicht mehr abgeschnitten.
+            - Bugfix 211: Fadenkreuz an/aus. Update Fehler beseitigt. Jedes SmallWindow wird jetzt einzeln Redrawed.
+              Fadenkreuzanzeige noch testen!
+            - Bugfix 229: Maximiertes Fenster laesst sich nicht mehr verschieben.
+04.06.04 TKR- Bugfix 179: Kein Disablen von Button mehr beim Abspielen über 
+			  Sequenzgrenzen hinweg.
+04.06.04 RKE- Bugfix 183: Bei DualMonitor wird bein 1:1 Darstellung der Rest auf dem 2. Monitor dargestellt.
+			  ist ein Fenster exklusive auf Monitor 2 so hat der Button keine Auswirkung, ist aber enabled (später).
+04.06.04 TKR- Bugfix 150: FastForward bleibt nicht mehr beim Sequenzwechsel stehen.
+04.06.04 RKE- Bugfix 97: das erste verbleibende Archivfenster wird aktiv gesetzt, wenn ein aktives Archiv-
+              fenster geschlossen wird. Reihenfolge: Archiv vor Live Windows
+            - Bugfix 159: Disconnect, wenn Karte im Bearbeitenmodus (Abfrage speichern OK, Speichern OK, Fenster schließen OK)
+03.06.04 TKR- Menüs sortiert (auch Kontext usw.), alle Accelatoren überprüft
+			  und ergänzt.
+03.06.04 RKE- Login Dialog Elemente im View sind zentriert. Ausloggen beendet alle anderen Clients.
+			  - Systemverwaltung
+			  - LogView
+			  - ProductView
+			  - ProductVersion
+			  Bei Änderung der Sprache wird der Client beendet und wieder neu gestartet im eingeloggten Zustand.
+			  LogView und Systemsteuerung werden jetzt vom Client ohne Logindialog aufgerufen.
+03.06.04 TKR- Das Systemmenü (Klick auf IdipClient-Icon links oben) abgespeckt. Es
+			  ist nur noch der Menüpunkt "Menü" vorhanden. Dieses wird nun auch
+			  bei einer Alarmaufschaltung disabled.
+01.06.04 UF - Bugfix neue Sprachen DLLs mit auf die CD kopieren.
+27.05.04 GF	- Bugfix: Bei Alarmverbindungen wurde Output manchmal doppelt angelegt,
+					  daraus resultierten Fensterordnungsprobleme und Memoryleaks
+27.05.04 GF	- Bugfix: Beim Umschalten von Quadratisch in 1Plus wird nicht immer das CmdActiveWnd groß gesetzt
+					  Beim Umschalten in ViewXxX wird jetzt immer das CmdActiveWnd auch auf SmallBig gesetzt
+26.05.04 GF	- Feature: Umschaltung Live auf Wiedergabe
+						Ist ein Live-Fenster aktiv und werden Bilder dieser Kamera in Archiv(e) gespeichert,
+						wird bei Klick auf einen Navigations-Button entweder
+						- Ein Wiedergabe-Fenster geöffnet und das beim Klick aktuelle Bild (TimesStamp) angezeigt
+						- In einem passendes bereits offenem Wiedergabe-Fenster die gewählte Navigations-Funktion ausgeführt
+						Die jeweiligen Wiedergabe-Fenster werden aktiv und ggf. bei 1Plus groß gesetzt
+26.05.04 RKE- VisibilityStates sind jetzt im Dialog "Benutzer Oberflaeche" einstellbar:
+25.05.04 GF	- Splash-Dialog auskommentiert
+25.05.04 RKE- Bugfix 271: Tooltipp Anzeige bei Backup-Archiven funktioniert wieder.
+25.05.04 TKR- Bugfix 264: Alarmaufschaltung funktioniert wieder.
+25.05.04 TKR- Bugfix 267: Erste Kamera zu beginn funktioniert nun auch 
+			  bei Alarmaufschaltungen.
+19.05.04 RKE- Minimieren von Views implementiert
+			- VisibilityStates werden jetzt behandelt, sind aber vorerst nur in der Registry einstellbar:
+			  DVRT\IdipClient\Settings\Visibility
+				OTVS_Always			= 1,	// Views
+				OTVS_IfNotEmpty		= 2,	// Views
+				OTVS_Never			= 3,	// Views
+				OTVS_InitiallyYes	= 4,	// Views, Splitter, Dlg
+				OTVS_InitiallyNo	= 5,	// Views, Splitter, Dlg
+			- OnDisconnect() an die vielen Views angepasst.
+19.05.04 RKE- Bugfix 231:Im ArchiveView wurde nicht immer die richtige station getrennt, 
+			  wenn über Kontextmenu getrennt wird
+19.05.04 RKE- Bugfix 256, 260:Rechtsklick auf Melder, Informationen von meldern, das Menü ist 
+			  nicht mehr vorhanden.
+19.05.04 TKR- Bugfix 253: Neu Klasse "CViewPrintPreview" eingebaut, um das häufige 
+			  Neuzeíchnen der Seitenansicht (Druckvorschau) zu unterbinden.
+19.05.04 TKR- Bugfix 252: Ausdruck von Livebildern und Druckvorschau (Seitenansicht) 
+			  funktioniert.
+18.05.04 RKE- Ein- bzw. Ausblenden von Views implementiert.
+			- VisibilityStates vorbereitet: DVRT\IdipClient\Settings\Visibility
+			- Alarmliste vorbereitet
+			- Variable aufteilung verbessert.
+			- Darstellung View Exclusive durch VisibilityStates ersetzt (ReadOnlyModus).
+18.05.04 GF	- Öfnnen des PlayWindows vom LiveWindow aus vorbereitet; WndLive::m_idArchive
+17.05.04 TKR- Drucken von Livebildern (Jpeg, H263, Mpeg4) funktioniert. Es muss allerdings
+			  noch die Ausgabe des Bildtextes formatiert werden.
+17.05.04 GF	- Bugfix 223: Am Ende einer Alarmverbindung mit User Alarm wird wieder in den Login-Modus gegangen
+14.05.04 GF	- Bugfix 230: Backup, Anzeige "Kein Medium" deutlicher herausgestellt
+14.05.04 GF	- Bugfix 33: Synchrones Abspielen laesst sich ohne Server nicht mehr ausschalten
+14.05.04 GF	- Bugfix 210: Alarmverbindungen bekommen auch Database und Audio
+14.05.04 GF	- Bugfix 209: Fenster laesst sich zukuenftig nicht mehr über das Kreuz rechts oben schliessen
+14.05.04 GF	- Bugfix 224, 225: Einige Buttons korrekt enabled
+14.05.04 GF	- Bugfix 227: "Speichern als" JPX und JPX auf Diskette entfernt, Standard auf HTML umgestellt
+13.05.04 GF	- Bugfix 192: Login und Alarmverbindungen gefixt
+13.05.04 GF	- Bugfix 68: Bei "Neues Login" dürfen keine Alarmverbindungen gekappt werden
+10:05:04 GF	- Handling New Login und Alarmverbindungen vorbereitet
+10.05.04 RKE- Steuerung der ObjectViews verbessert. Logo als Minimized Button. 
+10.05.04 GF	- Bugfix 161: Domsteuerung-Dialog, Kamera stoppt nicht mehr
+10.05.04 RKE- Bugfix 103: Exclusiv on Monitor in 1 Plus disabled
+			  Bugfix 45:  Fielddialog und Navigation wird jetzt ausgeblendet, wenn zu wenig platz da ist.
+			  Bugfix 172: Datumseingabe jetzt auch mit Livebild möglich. WM_COMMAND hat als UpdateMessage u.A. diese Nebenwirkung.
+07.05.04 TKR- Bugfix (Bugliste aufgeräumt) 173->178, 46->161, 
+		      Bugfix 147,167: ReadOnly Archivbaum und Bilder werden korrekt angezeigt
+		      Bugfix 180: Anwahlkarten in ReadOnly sind disabled.
+07.05.04 RKE- Bugfix 138: Titelzeile in Dialogen ist nun immer geskinnt.  
+07.05.04 GF	- Bugfix 145: Dual-Monitor Betrieb, Nach Umschalten in 1Plus kein zurück mehr
+07.05.04 GF	- Menü: In der ReadOnly-Version die 'Vision' Menüs ausgeblendet
+06.05.04 UF - Bugfix 109: Multibilddarstellung
+06.05.04 TKR- Bugfix 160: Druckerbutton zunächst nur für Archivbilder enabled.
+06.05.04 GF - Bugfix 163: Receiver lässt sich wieder deinstallieren.
+06.05.04 GF - Bugfix 162: CipcU.dll wird beim Receiver nun mitinstalliert. 
+06.05.04 GF	- Bugfix 129: Die Read-Only-Version verbindet sich nicht mit der lokalen Station
+06.05.04 TKR- Bugfix 157: 1x1 Ansicht bleibt solange, bis das angezeigte Fenster
+			  geschlossen wird.
+05.05.04 GF	- Bugfix 130: CD-Brennen Oem.ini, DeviceDetectU.Dll, CommonDirektShowU.dll
+05.05.04 TKR- Bugfix 151: Button Kamerakarte nur enabled, wenn die im Kamerabaum  
+			  markierte Station auch eine Kamerakarte besitzt.
+05.05.04 TKR- Bugfix 126: Button "Alles Speichern" und "Alles speichern stopp" sind
+			  nur noch bei verbundenen lokaler Station enabled.
+05.05.04 TKR- Bugfix 134: Menüpunkte Ansicht Toolbar (Ctrl+Alt+Shift+T) und Ansicht 
+			  Statusbar (Ctrl+Alt+Shift+S) accelatorisiert und aus Menü entfernt.
+05.05.04 TKR- Bugfix 50: Menüeintrag Echtzeit Abspielen ist nun bedienbar.
+05.05.04 TKR- Bugfix 142: Abspiel-Button erstes und letzes Bild haben nun Tooltips
+05.05.04 TKR- Bugfix 9: Dialog-Bar heißt jetzt "Funktionsleiste" bzw. "Panel" (engl.)
+05.05.04 TKR- Bugfix 8: Ex- und Import von Kamerasätzen funktioniert wieder
+05.05.04 TKR- Bugfix 7: kamerasatz hat keine Umschaltzeiten mehr
+05.05.04 TKR- Bugfix 6: Kameraumschaltung heißt jetzt Kamerasatz
+05.05.04 UF - Bugfix MD Koordinaten Tasha
+05.05.04 UF - Bugfix Ctrl+L ohne Login gibt GP.
+04.05.04 UF - MPEG4 Decoder dll auf CD ist jetzt die allgemeine.
+04.05.04 GF	- Splash-Dialog auskommentiert
+04.05.04 GF	- Bugfix 104: 1plus-Button hatte Ein/Aus-Funktion, sogar wenn er disabled war
+04.05.04 TKR- Bugfix 123: Schließen von Datenbankfenstern funktioniert nun.
+04.05.04 TKR- Bugfix 121: Druck-Button hat keine Funktion. Druckt zurzeit nur DB-Bilder.
+04.05.04 UF - Bugfix Shell Button macht jetzt das richtige, Anzeige ist noch falsch.
+04.05.05 TKR- Bugfix 42: OEm_Dialog nun etwas vergrößert.
+04.05.04 TKR- Bugfix 44: OEM-Logo ist über das Pfeil-nach-unten Menü in den
+			  Baumansichten wieder aufrufbar.
+03.05.04 TKR- Bugfix 49: Menüeintrag "Teilen" wird nicht mehr benötigt.
+03.05.04 RKE- Bugfix 71: Dialog "Eigenschaften der Karte" mit x (Button Schließen), ohne
+			  vorher das gewählte Bild gespeichert zu haben erzeugt keinen GP mehr.
+03.05.04 TKR- Bugfix 115 + 47: Doppelte Kontextmenü-Einträge entfernt.
+03.05.04 GF - Bugfix 111: Leeren und Löschen von Archiven erzeugt keinen GP mehr.
+03.05.04 UF - Bugfixes Tasha Livebild
+03.05.04 RKE- Audiowiedergabe, Durchsage, Gegensprechen, Mithören implementiert.
+			  Verriegelung Audioausgabe gegen gleichzeitige Wiedergabe auf ein Ausgabegerät verbessert.
+01.05.04 UF - Menu neu sortiert und einiges geloescht
+30.04.04 UF - Tasha Live Bilder gehen, aber BETA, FPS 1,2,3,5,12,25 
+30.04.04 GF	- Login-Prozedur: Größenanpassung und Doppel-Login
+30.04.04 TKR- Bugfix 26: Stopp Button in Livebild wird während des Speicherns angezeigt.
+30.04.04 GF	- Login-Prozedur: Dialog jetzt modeless, Menu wird ein-/ausgeblendet
+				Known Issues: Größe des Dialoges, Objekt-View-Buttons noch zu disablen
+30.04.04 TKR- Buttongröße in Panel, Panel Dialog und OEM-Dialog verkleinert.
+30.04.04 GF	- CServer::IsConnected genauer nach Bedarf (Live (Input, Output), Play (Database)) spezifiziert
+30.04.04 GF	- Laucher wird beim Schließen des Fensters über das Kreuz nicht mehr aufgerufen, nur noch bei OnAppExit
+30.04.04 GF	- Abfrage CIdipClient::IsValidUserLoggedIn() : "Alarm" ist kein gültiger User, GUI-User muss sich explizit einloggen
+29.04.04 TKR- Bugfix 16: Ejectbutton schließt das aktive Play Fenster 
+29.04.04 TKR- Bugfix 78: Toolbars werde nun richtig gezeichnet und aktualisiert 
+29.04.04 TKR- Bugfix 15: Mouse über Archivbild-Titelzeile ist nun ein Pfeil
+28.04.04 RKR- Bugfix 62: Kein GP mehr bei Rechtsklick auf Kameramenü
+28.04.04 TKR- Bugfix 52: Kein GP mehr beim Kontextmenü im PlayWnd
+27.04.04 TKR- Bugfix 54: Ohne Server, Nummernblock-Klick verursacht GP
+27.04.04 GF	- Bugfix Laden von JPX-Dateien
+26.04.04 GF	- Resizing gefixt, minimale feste Breite, Tool-/Statusbars korrekte Darstellung
+26.04.04 GF	- Bugfix 31: Wiedergabe sehr ruckelnd, 5 Bilder schnell, dann 10 s Pause, bei Echtzeit alle 10 s ein Bild
+

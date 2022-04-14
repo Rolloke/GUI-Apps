@@ -1,0 +1,26 @@
+; Sample INF file for MCLT.OCX und eine mit zu installierende DLL
+[version] 
+; version signature (same for both NT and Win95) do not remove
+signature="$CHICAGO$"
+AdvancedINF=2.0  
+
+[Add.Code]
+polygon.dll=polygon.dll
+atl.dll=atl.dll
+
+; needed DLL
+[dvuesp.dll]
+file-win32-x86=thiscab
+
+;beispiel für eine anderen Pfad der DLL
+;file-win32-x86=http://example.microsoft.com/mydir/NEEDED.DLL 
+FileVersion=3,1,0,860
+DestDir=11
+RegisterServer=yes 
+
+[polygon.dll]
+file-win32-x86=thiscab
+clsid={4CBBC676-507F-11D0-B98B-000000000000} 
+FileVersion=1,0,0,1 
+RegisterServer=yes  
+; end of INF file

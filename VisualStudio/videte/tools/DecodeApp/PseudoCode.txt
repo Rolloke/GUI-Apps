@@ -1,0 +1,390 @@
+-------------------------------------------------------------------------------------------------------------
+5. Decoder
+
+TTimeDate = STRUCT (
+ BYTE Frame, /* BCD Codiert */
+ BYTE Second,
+ BYTE Minute,
+ BYTE Hour,
+ BYTE Day,
+ BYTE Month,
+ WORD Year
+) ;
+
+
+TDecoderState = STRUCT (
+ BYTE XBlocks,
+ BYTE YBlocks,
+ WORD Blocks,
+ WORD XSize,
+ WORD YSize,
+ BYTE BlockBits,
+ BYTE GreyBits,
+ BYTE GreyMult,
+ BYTE UVBits,
+ BYTE UVMult,
+ BYTE UVOffset,
+ BYTE VideoSource,
+ BOOL WithColor,
+ BOOL FaultTolerantDecode,
+ BOOL EOF,
+
+ TTimeDate TD,
+ BYTE BlockOffset,
+ WORD ErrorBlock,
+ BOOL UV,
+ BYTE Grey,
+ WORD ErrorCode
+ HDC MemDC, DC,
+
+        )
+5.1  CDecoder::Open (HWND hWnd) ;
+     DC := GetDC(hWnd) ;
+     MemDC := CreateCompatibleDC(DC) ; /* Das ist der Bildspeicher fuer das immer vollstaendige Bild */
+     /* Wird per BitBlt kopiert */
+
+5.2  CDecoder::Close
+     {
+     DeleteDC (MemDC)
+     }
+
+5.3  CDecoder::Decode (lpData, dwLen, BOOL FaultTolerant) ;
+     FaultTolerantDecode := FaultTolerant ;
+     ptr := lpData ;
+     Len := dwLen ;
+     ErrorCode := 0 ;
+     if !GetPictureHeader
+        then return (FALSE)
+     endif ;
+
+     EOF := FALSE ;
+     ErrorBlock := -1 ;
+     BlockOffset := 64 ;
+
+     LOOP
+      IF BlockOffset >= 64
+         THEN IF !DecodeBlockCode
+                 THEN return (FALSE)
+              ENDIF ;
+              IF EOF THEN EXITLOOP ENDIF ;
+              BlockOffset++ ;
+              PutPixel
+      ENDIF ;
+      IF !DecodeVLCode
+         THEN return (FALSE)
+      ENDIF ;
+      PutPixel ;
+      BlockOffset++
+     ENDLOOP ;
+     /* Die folgende Operation kann natuerlich auf durch eine eigene Methode aufgerufen
+     werden, wenn der MemDC zwischenzeitlich nicht durch einen neuen Decoderaufruf
+     ueberschrieben wird */
+     BitBlt (DC, 0, 0, XSize-1, YSize-1, MemDC, 0, 0, SrcCopy) ; /* MemDC auf dem Bildschirm kopieren */
+     return (TRUE) ;
+     }
+
+5.3.1 CDecoder::DecodePictureTime ;
+      {
+      TD.FrameCounter := 0 ;
+      TD.Second := *(ptr++) ;
+      IF TD.Second < 0x80
+         THEN return (TRUE)
+      ENDIF ;
+      TD.Second &= 0x7F ;
+      TD.Minute := *(ptr++) ;
+      IF TD.Minute < 0x80
+         THEN return (TRUE)
+      ENDIF ;
+      TD.Minute &= 0x7F ;
+      TD.Hour := *(ptr++) ;
+      IF TD.Hour < 0x80
+         THEN return (TRUE)
+      ENDIF ;
+      TD.Hour &= 0x7F ;
+      TD.Day := *(ptr++) ;
+      IF TD.Day < 0x80
+         THEN return (TRUE)
+      ENDIF ;
+      TD.Day &= 0x7F ;
+      TD.Month := *(ptr++) ;
+      IF TD.Month < 0x80
+         THEN return (TRUE)
+      ENDIF ;
+      TD.Month &= 0x7F ;
+      TD.Year := (*(ptr++) & 0x7F)+0x80 ;
+      IF TD.Year >= 0xA0
+         THEN TD.Year += 0x1F60 /* BCD --> 2000 */
+         ELSE TD.Year += 0x1900 ;
+      ENDIF ;
+      return (TRUE) ;
+      }
+
+5.3.2 CDecoder::Resync
+      {
+      IF ErrorBlock < 0
+         THEN ErrorBlock := BlockNo
+         ELSE BlockOffs := 64 ;
+              BlockNo := ErrorBlock
+      ENDIF ;
+      }
+
+
+5.3.3 CDecoder::GetPictureHeader ;
+      {
+       IF *(ptr++) <> 0xFE
+          THEN ErrorCode := InvalidStartCode ;
+               return (FALSE) ;
+       ENDIF ;
+       XBlocks := *(ptr++) & 0x7F ;
+       YBlocks := *(ptr++) ;
+       IF YBlocks >= 0x80
+          THEN ErrorCode := CompressionNotSupported ;
+               return (FALSE) ;
+       ENDIF ;
+       Blocks := XBlocks*YBlocks ;
+       XSize := XBlocks*8 ;
+       YSize := YBlocks*8 ;
+           IF Blocks >= 4096 THEN BlockBits := 13
+       ELSEIF Blocks >= 2048 THEN BlockBits := 12
+       ELSEIF Blocks >= 1024 THEN BlockBits := 11
+       ELSEIF Blocks >= 512 THEN BlockBits := 10
+       ELSEIF Blocks >= 256 THEN BlockBits := 9
+       ELSEIF Blocks >= 128 THEN BlockBits := 8
+                            ELSE BlockBits := 7
+       ENDIF ;
+
+
+       Grey := *(ptr++) ;
+       VideoSource := ((Grey>>4) & 3)+1 ;
+       IF (Grey & 8) = 0
+          THEN WithColor := FALSE
+          ELSE WithColor := TRUE
+       ENDIF ;
+       GreyBits := (Grey & 7) ;
+       GreyMult := 1<<(8-GreyBits) ; /* 16/32/64 -> 256 Colors */
+       /* Zur Zeit verwendete Kombinationen:
+       0000 = Reserviert
+       0001 = Reserviert
+       0010 = Reserviert
+       0011 = (Alt: 8 Grau)
+       0100 = 4Y Bits: 16 Grau                   YMult=16
+       0101 = 5Y Bits: 32 Grau                   YMult=8
+       0110 = 6Y Bits: 64 Grau (Standard B/W)    YMult=4
+       0111 = Reserviert
+       1000 = Reserviert
+       1001 = (Zukunft: 4U, 4V, 5YBits)          UVOffs=32, UVMult=12
+       1010 = (Zukunft: 5U, 5V, 5YBits)          UVOffs=0,  UVMult=8
+       1011 = (Zukunft: 5U, 5V, 6YBits)          UVOffs=0   UVMult=8
+       1100 = 3U, 3V, 4 YBits (nicht verwendet), UVOffs=64, UVMult=16
+       1101 = 3U, 3V, 5 YBits (Standard Farbe)   UVOffs=64, UVMult=16
+       1110 = 3U, 3V, 6 YBits                    UVOffs=64, UVMult=16
+       1111 = Reserviert
+       */
+       UVBits := 3 ;
+       UVMult := 16 ;
+       UVOffset := 64 ;
+       IF Grey >= 0x80
+          THEN return (DecodePictureTime)
+          ELSE return (TRUE)
+       ENDIF ;
+      }
+
+/* GetBits(x) ist eine Inline Funktion oder Makro, das
+   aus dem Bitstrom die naechsten x Bits holt. Das Ergebis sollte
+   ausserdem in der (Register)variablen "Bits" abfragbar sein
+
+   GetBit ist als Abkuerzung dafuer eingefuehrt:
+   GetBits(1) (Dieser Ergebniswert muss uebrigens nicht unbedingt
+   in Bits gespeichert werden */
+
+
+5.3.4 DecodeBlockCode
+      {
+      IF GetBit = 0 { "0" at Start of Block }
+         THEN { New Block Follows: "0" <AbsGreyVal> "0" <BlockNo> "0" }
+          Grey := GetBits (GreyBits);
+          BlockOffset := 0 ;
+          UV := FALSE ;
+          IF GetBit = 0
+             THEN GetBits (BlockBits);
+                  IF Bits <= BlockNo
+                     THEN IF FaultTolerantDecode
+                             THEN Resync
+                             ELSE ErrorCode := InvalidBlockNo ;
+                                  return (FALSE)
+                          ENDIF ;
+                  ENDIF ;
+                  BlockNo := Bits ;
+                  IF GetBit = 1
+                     THEN IF FaultTolerantDecode
+                             THEN Resync
+                             ELSE ErrorCode := InvalidBlockCode ;
+                                  return (FALSE)
+                          ENDIF ;
+                  ENDIF ;
+             ELSE { NewAutoIncr Block: "0" <AbsGreyVal> "1" }
+                  BlockNo++ ;
+          ENDIF ;
+          BlockXPos := (BlockNo % XBlocks) << 3;
+          BlockYPos := (BlockNo / XBlocks) << 3;
+      ELSE { 1 at Start of Block }
+          IF GetBit = 0
+             THEN // "111110" <AbsUVVal> UV Data follows
+                  Grey := GetBits (UVBits);
+                  BlockOffset := 0 ;
+                  UV := TRUE ;
+                  BlockXPos := (BlockNo % XBlocks) << 3;
+                  BlockYPos := (BlockNo / XBlocks) << 3;
+             ELSE FOR j:=1 TO 6 DO BEGIN
+                   IF GetBit = 0
+                      THEN IF FaultTolerantDecode
+                              THEN Resync
+                              ELSE ErrorCode := InvalidBlockCode ;
+                                   return (FALSE)
+                           ENDIF ;
+                   ENDIF ;
+                  ENDFOR :
+                  IF !FaultTolerantDecode & (NextByte <> FFh) // Letztes FF Byte ist Byte-Aligned NextByte: *(ptr)
+                     THEN ErrorCode := InvalidBlockCode ;
+                          return (FALSE)
+                     ELSE EOF := TRUE ;
+                          return (TRUE) // EOF
+                  ENDIF
+          ENDIF ;
+      ENDIF
+      return (TRUE) ;
+      }
+
+5.3.5 DecodeVLCode
+      {
+      IF GetBit = 0
+        THEN /* Greyvalue not changed */
+      ELSEIF GetBit = 0
+        THEN IF GetBit = 0
+                THEN Grey++    // 100
+                ELSE Grey--    // 101
+             ENDIF ;
+      ELSEIF GetBit =  0
+        THEN IF GetBit = 0
+                THEN Grey += 2   // 1100
+                ELSE Grey -= 2   // 1101
+             ENDIF
+      ELSEIF GetBit = 0
+        THEN IF GetBit = 0
+                THEN Grey += 3   // 11100
+                ELSE Grey -= 3   // 11101
+             ENDIF
+      ELSEIF GetBit = 0
+        THEN IF GetBit = 0
+                THEN Grey += 4   // 111100
+                ELSE Grey -= 4   // 111101
+             ENDIF
+      ELSEIF GetBit = 0
+        THEN IF UV
+                THEN Grey := GetBits (UVBits)
+                ELSE Grey := GetBits (GreyBits)
+             ENDIF
+        ELSE IF FaultTolerantDecode
+                THEN Resync
+                ELSE ErrorCode := InvalidVLCode ;
+                     return (FALSE)
+             ENDIF
+      ENDIF ;
+      return (TRUE)
+      }
+
+5.3.6   CDecode::PutPixel
+        {
+        /* Pro Block folgt zunaechst der Y-Anteil von 64 Pixeln und dann
+           falls UV=TRUE ist, 32 U Pixel und 32 V Pixel. Die Anordnung
+           entspricht dem YUV 4:2:2 Format.
+           Da nur jeweils 3 U und 3 V Bits und 5-6 Y Bits uebertragen werden,
+           ist die Farbdarstellung auf 2048-4096 Farben reduziert.
+           SetPixel ist ziemlich langsam. Evtl. laesst sich bei Kenntnis des
+           MemDC Layouts eine C/Assemble Variante selbst codieren. Muss man sehen,
+           ob das notwendig ist.
+           Wir muessen hier auch auf die rot eingefaerbte Differenzbilddarstellung verzichten.
+        */
+
+        IF UV
+           THEN IF BlockOffset < 32 /* U */
+                   THEN BlockU[BlockXPos & 7, BlockYPos & 7] := Grey*UVMult+UVOffset
+                   ELSE SetPixel (MemDC, BlockXPos, BlockYPos, YUV2RGB(BlockY[BlockXPos & 7, BlockYPos & 7],
+                                         BlockU[BlockXPos & 7, BlockYPos & 7],
+                                         Grey*UVMult+UVOffset) ;
+                        SetPixel (MemDC, BlockXPos+1, BlockYPos, YUV2RGB(BlockY[(BlockXPos+1) & 7, BlockYPos & 7],
+                                         BlockU[BlockXPos & 7, BlockYPos & 7],
+                                         Grey*UVMult+UVOffset) ;
+                ENDIF ;
+                IF (BlockYPos & 0x01) <> 0  // Zigzag laufen. Ungerade Zeilen rueckwaerts.
+                   THEN IF (BlockXPos & 7) = 0
+                           THEN BlockYPos++ ;
+                                BlockXPos |= 6
+                           ELSE BlockXPos -= 2
+                        ENDIF ;
+                   ELSE IF (BlockXPos & 7) = 6
+                           THEN BlockYPos++ ;
+                                BlockXPos &= ~0x07
+                           ELSE BlockXPos += 2 ;
+                        ENDIF ;
+                ENDIF
+           ELSE IF WithColor
+                   THEN BlockY[BlockXPos & 7, BlockYPos & 7] := Grey*GreyMult ; // Wird bei U/V nachbearbeitet
+                   ELSE SetPixel (MemDC, BlockXPos, BlockYPos, YUV2RGB(Grey*GreyMult,0x80,0x80)) ;
+                ENDIF ;
+                IF (BlockYPos & 0x01) <> 0
+                   THEN IF (BlockXPos & 7) = 0
+                           THEN BlockYPos++ ;
+                                BlockXPos |= 0x07
+                           ELSE BlockXPos--
+                        ENDIF
+                   ELSE IF (BlockXPos & 7) = 7
+                           THEN BlockYPos++ ;
+                                BlockXPos &= ~0x07
+                           ELSE BlockXPos++ ;
+                        ENDIF
+                ENDIF
+        ENDIF
+        }
+
+5.3.7   YUV2RGB (BYTE y, u, v ; &STRUCT(BYTE r,g,b)) ;
+        {
+        /* Da es sich um 8*8*64 = 4096 Tabelleneintraege mit jeweils 3 Bytes (=12kByte)
+           handelt, ist es sinnvoll, diese Tabelle fuer
+           y=0..252 (in 4er Schritten),
+           u=64..192 (in 16er Schritten),
+           v=64..192 (in 16er Schritten)
+           auszurechnen und dann mittels Table-Lookup R[Y,U,V], G[Y,U,V], B[Y,U,V] die
+           RGB Werte zu bestimmen.
+           Im Falle der 5U+5V+6Y Bit Darstellung (zukuenftige Erweiterung) ist es wahrscheinlich
+           guenstiger, die kleinen Lookuptabellen fuer
+           1.402*(u-0x80)
+           0.7143*(v-0x80)-0.3437*(v-0x80)
+           1.772*(v-0x80)
+           zu berechnen.
+        */
+
+        SIGNED cr := u-0x80 ;
+        SIGNED cb := v-0x80 ;
+        DOUBLE va ;
+        va := y+1.402 *cr ;
+        IF va < 0.0 THEN r := 0 ELSE IF va > 255.0 THEN r := 255 ELSE r := trunc (va) ENDIF ;
+        va := y-0.7143*cr-0.3437*cb ;
+        IF va < 0.0 THEN g := 0 ELSE IF va > 255.0 THEN g := 255 ELSE g := trunc (va) ENDIF ;
+        va := y          +1.772 *cb ;
+        IF va < 0.0 THEN b := 0 ELSE IF va > 255.0 THEN b := 255 ELSE b := trunc (va) ENDIF ;
+        }
+
+        /* Bei schlechter Farbdarstellung ist hier an den Offsets (-0x80) und Faktoren
+           noch Feintuning moeglich. */
+
+
+5.5     CDecode::GetTimeStamp (TimeDate &time) ;
+        {
+        Hier kann der Timestamp (im BCD-Format) des letzten Bildes umgewandelt und abgefragt
+        werden in einem gebraeuchlicheren Format.
+        }
+
+
+
+

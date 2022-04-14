@@ -1,0 +1,4 @@
+18.11.02
+	GF	- Anpassung VS_70
+30.03.99
+	- Beginn des Projektes.

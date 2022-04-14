@@ -1,0 +1,55 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OEMSkinOptions", "OEMSkinOptions.vcproj", "{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435} = {3D594B21-DD7F-458F-9D0F-CE0B5E20D435}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Skins", "..\..\lib\Skins\Skins.vcproj", "{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectUniqueName0 = ..\\..\\lib\\Skins\\Skins.vcproj
+		SccProjectName0 = \u0022$/Project/Lib/Skins\u0022,\u0020FHXBAAAA
+		SccLocalPath0 = ..\\..\\lib\\Skins
+		CanCheckoutShared = false
+		SccProjectName1 = \u0022$/Project/Tools/OEMSkinOptions\u0022,\u0020LCNCAAAA
+		SccLocalPath1 = .
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {A65479D4-4222-425B-827D-E19200486208}
+		SccProjectUniqueName2 = OEMSkinOptions.vcproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.Debug.ActiveCfg = Debug|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.Debug.Build.0 = Debug|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.DebugUnicode.ActiveCfg = Debug|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.DebugUnicode.Build.0 = Debug|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.Release.ActiveCfg = Release|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.Release.Build.0 = Release|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.ReleaseUnicode.ActiveCfg = Release|Win32
+		{8E5EBA5B-54B0-49D9-B647-F86E6CEEF26F}.ReleaseUnicode.Build.0 = Release|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.Debug.ActiveCfg = Debug|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.Debug.Build.0 = Debug|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.Release.ActiveCfg = Release|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.Release.Build.0 = Release|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{3D594B21-DD7F-458F-9D0F-CE0B5E20D435}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

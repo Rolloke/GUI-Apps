@@ -1,0 +1,161 @@
+06.07.06 UF - Anzahl IP Kameras und ML Kameras im Dongle getrennt.
+07.06.06 UF - ML, inspicio, INSPECTUS und IP eingebaut, Coco und Mico raus.
+20.01.06 UF - Compilereinstellung tread wchar_t as build in eingeschaltet. CIPC und wkclasses geaendert.
+28.12.05 UF - SDI Parkmanagment jetzt verdongelt.
+06.10.05 RKE- Ressourcen english und deutsch sind immer enthalten. Umschaltung
+			  ueber InitVideteLocaleLanguage().
+28.12.04 RKE- Windows Tempverzeichnis wird jetzt ueberprueft und ggf. angelegt.
+27.08.04 RKE- Bugfix 532: Routing jetzt unabhängig von ISDN schaltbar.
+06.07.04 RKE- Bugfix 434: PTZ bei NewIdipGeneration jetzt deaktivierbar.
+01.07.04 RKE- Bugfix 414: maximale Anzahl Gegestationen wird jetzt uebernommen.
+29.06.04 RKE- ProductView erweitert um folgende features:
+			  - Multimonitor
+			  - HTML Karten
+			  - Timer
+			  - maximale Anzahl der Gegenstationen
+03.05.04 TKR- Bugfix IdipClient 75: ProduktView TopMost gemacht, da es sonst hinter
+			  dem IdipClient unauffindbar war.
+22.04.04 UF - Tashaunit und neue EL, PL, XL Produktlinien eingebaut.
+13.04.04 GF	- Bugfix: CDialogDongle::TransferSettings: Unicode, CString.Format() und #x
+03.03.04 GF	- Umstellung auf Unicode und VS_71
+21.10.03 GF	- Initialisierung mit "HDD-ID" statt "Serial"
+18.09.03 GF	- Neues Feature: Dongle kann auch über die Geräte-Seriennummer erzeugt werden
+19.08.03 UF - Die PT Unit laesst sich jetzt im Dongle wieder ein und ausschalten.
+			  Name B3 in PT200 geandert.
+01.04.03 UF - ICPConUnit, AudioUnit und USB Camera Unit eingebaut.
+25.03.03 UF - Es lassen sich jetzt auch Receiver Dongle brennen.
+21.02.03 UF - Bugfix Uebersetzung
+11.02.03 GF	- Bugfix 318: Routing nur bei ISDN und Net eineindeutig erlaubt
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CProductViewDlg::OnCrypt()
+20.01.03 UF - Bugfix bei idip-4 ist keine zweite Savic erlaubt.
+17.01.03 GF	- Neue AudioUnit im Untergrund implementiert, GUI noch nicht erweitert
+27.11.02 GF	- Neuer IPC_IDIP_4 mit 2 SaVic Karten
+			- Bugfix: Crypten verlangte ein Boxsystem
+			- "Mini B3 Bilder anzeigen" disabled, da obsolet
+			- "Nur 8 Kameras je Karte" bei idip 16 und 32 disabled, da nicht vorgesehen
+18.11.02 GF	- Anpassung VS_70
+15.11.02 GF	- SaVic implementiert, nur bei project enabled
+			- Bugfix Siemens Vidis mobile Board und Kamera Anzeige
+06.09.02 GF	- CoCo (IPC_STATION_TRANSMITTER und IPC_PROFESSIONAL_TRANSMITTER) wieder ins Programm genommen
+16.08.02 GF	- Umbau auf neue Produktlinie begonnen
+12.08.02 GF	- WAI_CDR_WRITER in WAI_AC_DC umbenannt
+06.03.01 UF - Der idip recorder erlaubt jetzt auch SDI Industrial
+14.02.01 UF - HDD Seriennummer läßt sich jetzt eingeben, default ist die aktuelle
+			  PIN ist nur noch die Uhrzeit in HHMM
+06.02.01 UF - einige Abhaengigkeiten im Dongle korrigiert
+28.12.00 UF - Es lassen sich jetzt auch gecryptete Softwaredongle erstellen.
+27.10.00 GF	Produkte definiert
+			- VideoMaster
+			- ATM surveillance
+			- TOBS Receiver
+			- DTS Receiver
+21.09.00 UF - TeleObserver hinzugefügt.
+21.06.00 GF	- Änderung iST in idip!
+			- Garny entfernt
+17.04.00 GF	- Bugfix: MotionDetection wurde nicht ins DCF-File geschrieben
+10.04.00 UF - Motion Detection extra Funktion im Dongle
+04.04.00 GF	- JaCob jetzt auch in Release möglich (MiCo-JaCob exclusiv oder)
+			- ISDN und B3: zweite Unit nur möglich, wenn die erste markiert ist
+08.12.99
+		 UF  Aku (iST Relais Plus 8) für Station, Storage und Professional Receiver
+			 möglich
+18.08.99 >>> UpdateVersion um 11:36 <<<
+18.08.99 UF Gemos Unit für iST Systeme ergänzt
+13.7.99 >>> UpdateVersion um 16:08 <<<
+13.07.99 GF	RunSDIConfig=FALSE bei NO_SB auskommentiert
+			Bei NO_SB wurde RunSDIConfig immer auf FALSE gesetzt
+			Dadurch konnte kein normaler AWP mit SDIConfig erstellt werden
+			RunSDIConfig hat aber nichts mit SB zu tun
+28.05.99 ML In der Debugversion lassen sich nun auch Dongle brennen, die
+			anstatt der MiCo einen JaCob verwenden. Alle OEM's und iST
+			verwenden den JaCob, Garny den MiCo
+12.04.99 UF Dongle jetzt standardmaessig mit 4.0
+01.04.99 ML Es kann nun nur noch eine Instanz von ProductView
+			gestartet werden.
+29.3.99 >>> UpdateVersion um 15:10 <<<
+29.03.99 UF Alle Abhaengigkeiten an 4.0 angepasst
+19.10.98 >>> UpdateVersion um 10:14 <<<
+19.10.98 HD MiCoUnit3/4 added.
+
+30.9.98 >>> UpdateVersion um 15:00 <<<
+
+30.9.98 HD ISDNUnit2 unt PTUnit2 korrigiert.
+
+15.7.98 >>> UpdateVersion um 15:16 <<<
+15.7.98 HD FillAllButtons added.
+14.7.98 HD Aufgerauemt, SoftDecodePT added.
+13.7.98 SDIOptions added.
+
+10.7.98 >>> UpdateVersion um 9:49 <<<
+
+9.7.98 HD Protokollvarianten fuer SDIUnit,
+		2. ISDN, 2. PTUnit
+8.7.98 >>> UpdateVersion um 12:24 <<<
+	UF	2. Mico und Routing eingebaut
+22.6.98 >>> UpdateVersion um 18:33 <<<
+		UF Versionsnummer jetzt nicht mehr editierbar
+			macht im Dongle so und so keinen Sinn
+			wird aus Registry gelesen.
+18.5.98 >>> UpdateVersion um 16:25 <<<
+18.5.98 HD kraeftig rumgeraeumt.
+
+15.5.98 HD Garny Namen angepasst an MLs Liste.
+		HD Alle Garny Varianten mit RUN_SERVER.
+
+12.5.98 HD HTMLInformation und HTML Notification dazu.
+
+11.5.98 >>> UpdateVersion um 13:26 <<<
+11.05.98 HD ExceptionHandler via InitDebugger.
+
+24.4.98 >>> UpdateVersion um 12:59 <<<
+24.4.98 HD Serial wird aus Serial.snt gelesen
+		und angezeigt. Nur wenn vorhanden.
+
+24.4.98 >>> UpdateVersion um 9:10 <<<
+
+24.4.98 HD SetCurSelByData damit OEM und
+		ProduktName stimmen.
+6.4.98 >>> UpdateVersion um 12:35 <<<
+
+06.04.98 HD OEM_AKUBIS added. Auch zum Brennen!
+		SDIConfig --> Kamerasteuerung.
+		SimUnit
+		Analy
+		zer
+30.3.98 >>> UpdateVersion um 15:42 <<<
+26.03.98 HD OemGui Anpassung.
+
+20.3.98 >>> UpdateVersion um 13:19 <<<
+
+	UF CWK_Profile wegen NT
+18.3.98 >>> UpdateVersion um 9:41 <<<
+
+18.03.98 HD nur IST: SDIUnit --> Interface
+		 HD nur iST: CommUnit --> PTZ Control
+8.1.98 >>> UpdateVersion um 12:24 <<<
+
+08.01.98 HD RunSDIUnit auch fuer Garny.
+
+19.12.97 >>> UpdateVersion um 16:03 <<<
+
+19.12.97 HD	SDIConfig added
+19.12.97 HD AllowInternalAccess added, wird eh noch nicht
+			von irgendwelchen Programmen verwendet.
+			Nur sichtbar im SAVE Modus oder wenn im Dongle gesetzt.
+7.11.97 >>> UpdateVersion um 19:54 <<<
+/*
+@TOPIC{ProductView History|History,ProductView}
+
+@HRULE @BOLD <<<<< August>>>>@NORMAL
+
+@LISTHEAD{02.10.97 HD}
+	WriteHCC on the fly, nach Muster eines .hcc files.
+@LISTHEAD{28.08.97 HD}
+	Regeln erweitert, Codec, Link und Boxen implementiert.
+@LISTHEAD{22.08.97 HD}
+	Einheitliches #include "AllDongleTransfer.h" mit der lib
+@LISTHEAD{20.08.97 HD}
+	Project begonnen
+*/

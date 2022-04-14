@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HealthControl", "HealthControl.vcproj", "{76EA84A3-2DED-4207-B759-2D2D217B3736}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/HealthControl\u0022,\u0020GGSCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {971E54EC-543C-47ED-8B98-2C8B956F8164}
+		SccProjectUniqueName1 = HealthControl.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{76EA84A3-2DED-4207-B759-2D2D217B3736}.Debug.ActiveCfg = Debug|Win32
+		{76EA84A3-2DED-4207-B759-2D2D217B3736}.Debug.Build.0 = Debug|Win32
+		{76EA84A3-2DED-4207-B759-2D2D217B3736}.Release.ActiveCfg = Release|Win32
+		{76EA84A3-2DED-4207-B759-2D2D217B3736}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

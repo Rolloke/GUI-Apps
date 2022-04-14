@@ -1,0 +1,692 @@
+19.07.06 RKE- CIPCField ermittelt Datentyp mit der Funktion TranslateToType(const CString& sData).
+12.06.06 UF - CPermission jetzt mit Timer ID.
+08.06.06 UF - Product Codes aufgeräumt, inspicio und INSPECTUS.
+07.06.06 UF - ML und IP Kram in Dongle eingebaut.
+19.04.06 UF - Bugfix CIPCFetch Verbindungsaufbau ISDN oder TCP/IP
+20.01.06 UF - Compilereinstellung tread wchar_t as build in eingeschaltet.
+20.01.06 UF - folgende Dateien sind geloescht worden
+			  wk_time.h wk_time.cpp
+20.01.06 UF - folgende Dateien sind in die WK_Classes verschoben worden
+			  
+			  wk_util.h
+			  wk_util.cpp
+			  
+			  wk_trace.h
+			  wk_trace.cpp
+			  CLogFile.h
+			  CLogFile.cpp
+			  UnhandledException.h
+			  UnhandledException.cpp
+			  
+			  WK_RunTimeError.h
+			  WK_RunTimeErrors.h
+			  WK_RunTimeError.cpp
+			  WK_RunTimeErrors.cpp
+			  
+			  wk_file.h
+			  wk_file.cpp
+			  
+			  wk_profile.h
+			  wk_profile.cpp
+
+			  getlongpathname.h
+			  getlongpathname.cpp
+			  
+			  WK_ApplicationID.h
+			  
+20.01.06 UF - Enum Resolution umbenannt.
+			  RESOLUTION_HIGH -> RESOLUTION_2CIF 
+			  RESOLUTION_MID  -> RESOLUTION_CIF 
+			  RESOLUTION_LOW  -> RESOLUTION_QCIF 
+			  neu RESOLUTION_4CIF
+19.01.06 RKE- Bugfix 1035: Import der Registry kann jetzt auch exotische Typen wie REG_MULTI_SZ etc..
+17.01.06 RKE- RuntimeErrors dokumentiert,
+			  virtuelle alarme fuer Temperatur Smart und Harddisk failure eingefuegt.
+06.01.06 RKE- In den CIPCFields koennen jetzt Flags definiert werden, die die editierbarkeit der einzelnen Werte definieren.
+              26 Flags sind noch frei.
+13.12.05 RKE- Bugfix: in CIPCInputFileUpdate::OnRequestGetFile(..) benutzt jetzt GetFileAttributes(..) wenn DoesFileExist(..)
+	      fehlschlaegt. Dateiinformationen koennen jetzt Portionsweise (Flag:RFU_DIVIDE_IN_BITS) geliefert werden.
+28.11.05 UF - Dongle entschlüsselt sich jetzt ohne temporaere Datei.
+09.11.05 UF - QUnit verdongelt. CIPCDatabase Save mit 2 Archiv IDs.
+08.11.05 ML - WAI_QUNIT und WK_APP_NAME_QUNIT hinzugefügt (Derzeit aber nicht verdongelt.
+26.10.05 TKR- Zwischenversion mit in Release eingeschaltetem Trace von Locks die sich locken.
+17.10.05 RKE- Bugfix: CIPCDrive::UpdateNetworkState() hat beim Ermitteln der Netwerkparameter die aktuelle Domaene
+			  eingefuegt, auch wenn die Netzwerkverbindung selbst keine brauchte. Eine erneute Verbindung schlaegt dann fehl.
+14.10.05 RKE- Bugfix: in CIPCInputFileUpdate::OnRequestGetFile(..) entfernt jetzt automatisch den Endbackslash,
+			  da einige Programme bei der Abfrage von Dateien diesen setzen und somit nichts zurueckbekommen wuerden.
+07.10.05 RKE- Die CIPCFields fuegen beim Laden keine doppelten Felder mehr hinzu. Wird ein Eintrag
+			  geladen, der schon drin war, so wird eine Fehlermeldung ins Logfile geschrieben.
+29.09.05 RKE- CIPCDrive Der Zustand der Netzwerklaufverbindung kann jetzt ermittelt werden.
+              Die Netzwerkparameter werden in der Registry gespeichert.
+              Folgende Funktionen wurden in wk_util.h hinzugefuegt:
+              - void Encode(CString& s);
+              - void Decode(CString& s);
+              - void ConcatenateStrings(const CStringArray& sa, CString &s, _TCHAR cSeparator);
+              - int FindString(const CStringArray &sa, const CString &sSearch, BOOL bCaseSensitive, BOOL bExact, int nStartAfter=0);
+              - void SortStrings(CStringArray &sa, BOOL bUp);              
+			  - LCID InitVideteLocaleLanguage();
+			  - void EnableThreadPool(BOOL bEnable);
+			  - void AddThreadToPool(DWORD dwID, LPCTSTR sName);
+			  - void RemoveThreadFromPool(DWORD dwID);
+			  - CString GetThreadNameFromPool(DWORD dwThreadID);
+			  - BOOL GetThreadFromPool(int nThread, DWORD &dwID, CString&sName);
+27.09.05 RKE- Bugfix 942: CIPCDrive kann jetzt Netzwerklaufwerke verbinden und trennen.
+24.08.05 RKE- Bugfix 175: Local host wird jetzt wieder angelegt, wenn noch nicht initialisiert.
+              Bugfix CWK_Profile::GetString() benutzt jetzt einen groesseren Buffer zu lesen aus der Registry,
+              um die 0, die nur manchmal gelesen wird, zu speichern.
+25.07.05 RKE- CWK_Profile::Decode(), liefert jetzt korrekte Ergebnisse, auch wenn der String nur 1 byte lang ist.
+23.06.05 RKE- Bugfix: 864: User, Permission, Hosts Laden von alten ansi Inhalten konvertiert jetzt auch Umlaute.
+21.06.05 RKE- Bugfix: CWK_Average Klasse allziert jetzt auch in AddValue, wenn nötig.
+14.06.05 RKE- Bugfix: 861: Fehler in CPermission::Save() behoben.
+02.06.05 TKR- Wenn der Debugger nicht eingebunden ist, wurde
+			  die Unicode-Anfrage nicht mit uebertragen.
+26.05.05 RKE- Bugfix 762: die Funktion CIPCFields::GetCIPCField(Name) lieferte im Fehlerfall immer das letzte Feld zurueck.
+23.05.05 ML - WK_RunTimeError Enum durch RTE_SMART,RTE_FANCONTROL erweitert.
+27.04.05 RKE- PictureRecord (GOP) wurde um FrameTimeStep und um MDPoints für das IFrame erweitert.
+	      Die Werte werden im Kontruktor fuer GOP initialisiert und ueber folgende Funktionen abgerufen:
+	      GetFrameTimeStep(), GetNoOfMDPoints(), GetMDPoint(int).
+21.04.05 RKE- WK_New.inl implementiert, um den new operator zu ueberschreiben.
+			  Das Makro _MAX_WK_NEW_SIZE wird intern definiert auf 10 MB.
+			  Es kann aber auch anders definiert werden vor dem Include der Datei WK_New.inl.
+21.04.05 RKE- Funktion CHostArray::Add(..) ueberschrieben, um die ID beim Einfuegen zu ueberpruefen.
+			  CWK_Profile: Bug beim schreiben und lesen von Inidateien in Unicode behoben.
+21.04.05 ML - CWK_RunTimeErrors::LoadFromFile und CWK_RunTimeErrors::WriteToFile enthielten
+			  beide ein Lock() im TRY-Block, aber im CATCH-Block KEIN Unlock().
+19.04.05 UF - Bugfix Zeitstempel Bilder nicht GOP.
+11.04.05 UF - Bugfix Memoryleak beim holen der Dateiversion.
+11.03.05 RKE- werden im ConnectionRecord (immer MBCS) Notificationmessages uebertragen, so wird auch die eine NotificationCodePage
+			  uebertragen. beim ein bzw ausbubbeln wird diese beruecksichtigt. Das gewaehrleistet die korrekte Uebertragung
+			  in allen Programmmodulen. Das ConnectionRecord wird auch in der Socket-, Net- und ISDNUnit ein und ausgebubbeld.
+			  Die Convertierung in Unicode und wieder zurueck wird also bei einem Verbindungsaufbau X-fach gemacht.
+02.03.05 RKE- Funktion GetLogPath() in wk_trace.h implementiert, diese liest den in der Registry evtl. abweichenden Wert
+			  fuer den Logdateipfad (Compact Flash).
+01.03.05 UF - Bugfix Zugriff auf HKLM-Software nur noch read-only wegen der Nutzerrechte unter Win2000-XP.
+12.01.05 RKE- dbg.dll wurde auch fuer InitializeSymbols() benötigt. Diese wird jetzt nur noch im dbg aufgerufen.
+12.01.05 RKE- Debug Informationen werden nur im Debugmodus ausgegeben. Im Release wird die dbg.dll benötigt, diese ist
+			  in PräXP Versionen u.U. nicht vorhanden.
+28.12.04 RKE- WK_CheckTempDirectory() ueberprueft Windows Tempverzeichnis und legt es ggf. an.
+29.11.04 RKE- Bei einer Exception wird jetzt auch der CallStack ausgegeben.
+04.11.04 RKE- CIPCServerControl bekommt als initialisierende Verbindung jetzt nicht mehr 0 sondern die aktuelle CodePage.
+03.11.04 RKE- Bei einer Exception werden jetzt Informationen ueber Stack und Register ausgegeben.
+28.10.04 RKE- CNotificationMessage::GetWWWRoot() lieferte noch Ansi _T() Makro fehlte.
+30.09.04 RKE- Password Decoding und Encoding geht jetzt auch fuer !Ansi Zeichensaetze.
+29.09.04 RKE- Remote-SV-Settings werden zwischen zwei Unicode Stationen jetzt in Unicode durchgefuehrt.
+			  User und Hosts werden jetzt binaer in der Registry gespeichert und abhaengig vom Format
+			  binaer oder als Strings gelesen.
+			  Registry Import/Export wird bei einer Unicode Station in Unicode durchgefuehrt.
+			  Die Komunikation mit alten Stationen erfolgt in MBCS bzw. Ansi, User und Hosts werden hier in Strings gespeichert.
+17.08.04 RKE- ClearStringFromProcentASCII() korrigiert. Entfernt jetzt nur noch % Zeichen, hinter denen eine zweistellige Hexzahl steht.
+12.08.04 RKE- Die CIPC beantworted jetzt eine spezielle nachtraegliche Anfrage, ob Unicode benutzt werden kann.
+			  Diese wird (vom Client) nur dann aufgerufen, wenn ueber eine !Unicode-Station geroutet wird.
+			  Eine !Unicode-Station ignoriert diese Anfrage.
+24.06.04 UF - Bei DoIndicateNewSequence wird jetzt immer die Anzahl der Bilder der gerade geschlossenen
+			  Sequence mitgeliefert.
+24.06.04 RKE- UpdateHandler auf Unicode umgebaut (CIPCInputFileUpdate)
+23.06.04 RKE- Bugfix 170: Import/Export SV-Settings Special HEDU ecrypted texts (Pins and Passwords) changed after import.
+			  Registry is now exportetd in Ansi. It has been exported in Unicode before.
+22.06.04 UF - Bugfix Failed to map Extra Memory, nach 8 Jahren.
+14.06.04 UF - Critical Section um CIPCExtramemory gebaut, wegen der GP's im Server/Process
+25.05.04 UF - Pure virtual function call beim Debugger (Logfile) erledigt. <h1>PVC, nie mehr, nie mehr, nie mehr.</h1>
+18.05.04 UF - Alle CIPCOutput Bild Kommandos mit Archiv ID.
+17.05.04 GF	- IsUserAlarm() erweitert
+14.05.04 GF	- CUser neues Attribut: BOOL IsUserAlarm() ; Bedingungen: Name "Alarm", Permission: Supervisor, Passwort: Nicht leer
+13.05.04 ML - CIPC_ERROR_VIDEO_STREAM_ABORTED und RTE_VIDEO_STREAM_ABORTED hinzugefügt.
+11.05.04 GF	- Bugfix Alarmverbindungen, Start vom Client und SM-Namen
+05.05.04 GF	- Bugfix für VS 6.0
+30.04.04 UF - Bugfix Nr. 89 Keine Kameras fuer Tasha in der Systemverwaltung
+29.04.04 GF	- Laut Hörensagen für die Buildnotes:
+			- Bugfix Verbindung/Audio: Unicode-Daten wurden falsch ge-bubble-t, GP/Stackoverflow
+27.04.04 UF - StartVideo Befehl geaendert.
+27.04.04 UF - CIPCOutputRecord::DoesCameraMpeg fuer Tasha hinzugefuegt.
+23.04.04 GF	- Einige Compiler-Warnungen abgefangen
+22.04.04 GF	- Bugfix des vorherigen Bugfix; Unicode zu ANSI Verbindung
+22.04.04 GF	- Bugfix: CIPCServerControl und CIPCServerControlClientSide; Unicode Verbindung
+21.04.04 GF	- ConnectionRecord enthaelt standardmaessig das CodePage-Field
+21.04.04 UF - RunTashaUnit und GetNrOfHosts eingebaut. Hardlock code disabled.
+16.04.04 GF	- Pure virtual Funktionen geändert in "Not overwritten" mit zusätzlichem ASSERT(0)
+13.04.04 GF	- Bugfix: CWK_Dongle::ReadSoftwareDongle(): Unicode, CString und #x
+29.03.04 ML - WK_APP_NAME.., WAI_... SM_..., StringToWK_ApplicationID,  EV_SAVIC_TRIGGER_WATCHDOG, GetAppnameFromID und
+			  NameOfEnum für die TashaUnits hinzugefügt, bzw. erweitert.
+19.03.04 ML - Neuen Compressiontype 'COMPRESSION_MPEG4' in 'picturedef.h' hinzugefügt.
+12.03.04 UF - Removable Database Laufwerke eingebaut.
+23.02.04 GF	- ConnectionRecord.h: Neuer Parameter CRF_B_CHANNELS = _T("BCHANNELS"); Angabe der gewuenschten Anzahl B-Kanaele
+18.02.04 RKE- CIPCMediaSampleRecordsEx Liste zum Sammeln und Zusammenfassen von MediaSampleRecords eingefügt.
+02.02.04 GF	- Permission.h: #define WK_SV_ACCESS hinzugefuegt, um die Abfrage nach Zugriff auf die SV zu konkretisieren
+22.01.04 RKE- static Member Funktion CWK_Profile::SetReadOnlyMode() und Variable CWK_Profile::gm_bReadOnly implementiert.
+			  gm_bReadOnly ist standardmäßig auf FALSE.
+			  Wird sie über SetReadOnlyMode() auf TRUE gesetzt, so wird nicht mehr in die Registry geschrieben.
+21.01.04 GF	- Bugfix 781: YutaUnit soll USB Alarmbox heissen
+15.12.03 UF - Bugfix Audiodecoding
+07.12.03 UF	- Neuer CIPC Befehle fuer die Datenbank und Audio.
+25.11.03 GF	- Neuer GroupID-Define SECID_HTML_WINDOWS ((WORD)0x000a) fuer HTML/Text/Windows in Clients
+19.11.03 UF - Flush Registry ueber neue Methode FlushKey.
+19.11.03 UF - Schreibzugriffe auf die Registry ueber WKProfile werden jetzt grundsaetzlich geflusht.
+17.11.03 GF	- CIPCDrive neue Funktion IsWritableRemovableDisk()
+27.10.03 GF	- Bugfix DV 801: Einloggen ins Setupmenü ist ohne Eingabe einer PIN möglich.
+							 Folgefehler, da der Status CIPC_STATE_CONNECTED nicht erreicht wurde
+08.10.03 RKE- Ein- und ausbubblen für MediaSampleRecord gebugfixed.
+02.10.03 RKE- Neue CIPC Klassen für Audio- bzw. Videodatenaustausch eingefügt:
+              CIPCMedia, CIPCMediaClient, CIPCMediaRecord, CIPCMediaSampleRecord
+03.09.03 GF	- Bugfix: Virtuelle Destruktoren
+						- bei Klassen, die nur Strukturen kapseln und nicht abgeleitet werden
+						- die zu dem noch leer sind, also sinnlos
+						- bei Klassen, in denen auf this* kopiert bzw. operiert wird
+					  führen ggf. zu äußerst mysteriösen GP's wegen Heap-/Buffer-Overrun
+
+28.08.03 GF	- CIPCField: Führende Nullen im Betrag (mit '.' oder ',') werden berücksichtigt
+25.08.03 GF	- Bugfix wk_util.cpp BinaryString()
+14.08.03 GF	- CameraControl-Funktionen erweitert und in CameraControl.cpp ausgelagert
+08.08.03 TKR- Alle PTZ (SchwenkNeiger) als Klartext in "NameOfEnumPTZRealName" eingebaut.
+06.06.03 UF - Im Destruktor des Fetch wird dieses jetzt gecancelled.
+12.05.03 TKR- Neuen Wert "CSD_SYSTEM_INFO" in CIPCstringdefs.h eingefügt. Dient zur Anzeige
+			  der Systemeigenschaften z.B. Seriennr. Nero Seriennr. Freischaltungen...
+23.04.03 Gf	- Neue Kameratypen CCT_FASTRAX und CCT_BAXALL implementiert
+01.04.03 GF	- Dongle fuer ICPConUnit und USBCamUnit hinzugefuegt
+31.03.03 GF	- WAI, App- und SM-Names fuer ICPConUnit und USBCamUnit hinzugefuegt
+28.03.03 GF	- Bugfix 396 Der Timer Sa-So ist auch am Freitag aktiv
+11.03.03 RKE- virtueller Alarm für externe Geräte eingefügt:
+			  - BIT_VALARM_EXTERNAL_DEVICE_FAILURE
+			  - RTE_EXTERNAL_DEVICE_FAILURE
+27.02.03 ML - Application writable
+() erweitert: WAI_YUTA_UNIT,
+			  ApplicationName WK_APP_NAME_YUTA_UNIT hinzugefügt.
+			  In CWK_Dongle erstmal nicht verdongelt
+10.02.03 UF - Application ID´s erweitert: WAI_ICPCON_CLIENT,
+			  Dongle erweitert: m_bRunICPCONClient, RunICPCONClient();
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CSecTimeSpan::ConvertFormat2()
+			  - CSystemTime::SetDBTime()
+			  - CSystemTime::SetDBDate()
+			  - CUser::IsLocked()
+			  - CUser::IsPasswordOutOfTime()
+			  - CWK_Profile::Import()
+17.01.03 RKE- Application ID´s erweitert
+		 WAI_AUDIOUNIT_1, WAI_AUDIOUNIT_2, WAI_AUDIOUNIT_3, WAI_AUDIOUNIT_4
+		 Dongle erweitert: m_bRunAudioUnit, RunAudioUnit();
+
+09.01.03 GF	- CHost um m_bPINRequired und m_sPIN erweitert
+			- idip Bugfix 299: User "idipservice" wurde in der Registry gespeichert - und in der SV aufaddiert
+08.01.03 GF	- Spezieller User "idipservice" implementiert
+04.12.02 GF	- Bugfixing CSecTimerSpan
+				Die "Multi"-Timer Taeglich, Mo-Fr und Sa-So funktionierten nicht korrekt
+03.12.02 GF	- Bugfixing CSecTimerSpan
+				Die "Multi"-Timer Taeglich, Mo-Fr und Sa-So funktionierten nicht korrekt
+27.11.02 GF	- Neuer IPC_IDIP_4
+25.11.02 GF	- Bugfix 291: Timer Berechnung korrigiert
+15.10.02 GF	- CIPCServerControlClientSide::CalcRemoteNames fehlende SMSUnit eingebaut
+07.10.02 GF	- Nur kleine Aenderungen beim Millisekunden-Trace
+04.10.02 UF - Nach einem GP werden jetzt die Icons aus dem Systray genommen.
+04.10.02 TKR- In "DeleteDirRecursive" GetLastErrorString eingebaut.
+30.09.02 ML - WAI_SAVIC_DIAGNOSTIC sowie WK_APP_NAME_SAVIC_DIAGNOSTIC hinzugefügt
+04.09.02 UF - Bugfix Nr. 250 Beim Aufbau einer zweiten ausgehenden ISDN Verbindung erfolgt die
+			  Meldung DatabaseConnection failed ISDN busy.
+28.08.02 GF	- cipc.h CIPCError, error codes erweitert
+20.08.02 UF - CIPCDrive fuer neues CD Brennen mit Nero ueberarbeitet.
+19.08.02 GF	- CIPC Thread ID wird im Logfile ausgegeben
+16.08.02 GF	- Neue IPC's: IPC_IDIP_8, IPC_IDIP_16, IPC_IDIP_32, IPC_IDIP_PROJECT
+			- Neues Dongle Flag "RestrictedTo8CamerasPerBoard"
+15.08.02 UF	- Bugfix CIPCDatabase: Bilder ohne Extradaten wurden nicht weitergeleitet
+09.08.02 UF - CIPCDataCarrier als Schnittstelle zu CD und DVD Brennen eingebaut
+01.08.02 GF	- CameraControl.h und wk_util.cpp geaendert/erweitert: VCL_CAMERA und VCL_MAXCOM
+31.07.02 GF	- CameraControl.h und wk_util.cpp erweitert um AutoFocus, AutoIris und Turn180
+09.07.02 GF	- CameraControl.h erweitert, 2 mal
+04.07.02 GF	- CSecTimeSpan angepasst, um auch mehrere Tage - wie Täglich, Mo-Fr, Sa-So - eingeben zu können
+24.06.02 ML - SaVicUnit in wk_applicationid.h, wk_names.h und wk_dongle.h hinzugefügt.
+10.05.02 ML - Neuen RTE (RTE_REJECT_ALARM_CONNECTION) hinzugefügt. Dieser wird von DVProcess
+			  verschickt, wenn bei einem Alarmanruf keine der drei Gegenstationen erreicht werden
+			  kann.
+17.04.02 UF - Zu einem Betriebssystemfehler wird jetzt auch die Nummer mit ausgegeben.
+27.03.02 UF - Berechtigungsstufencheck ueberarbeitet, damit idip auch DTS Alarmaufschaltung
+			  kann. Alles Mpeg und H261 in H263 umbenannt.
+18.02.02 UF - Bugfix DTS Receiver Alarmaufschaltung
+17.11.01 UF - Bugfix Get/Set Value erlaubte keine leeren Values
+11.12.01 UF - Bugfix NTFS Clustersize
+07.12.01 UF - Optimierung von Senden/empfangen von Bild und Daten
+22.11.01 ML - CSD_MD_MASK_SENSITIVITY und CSD_MD_ALARM_SENSITIVITY hinzugefügt
+08.11.01 UF - Neue Klasse CIPCActivityMask fur Remote Permanente Aktivitaetsmaske
+22.10.01 UF - Im Dongle kann jetzt Demo eingestellt werden.
+			  Bugfix Systemtime, increment
+21:09:01 UF	- Neuer IPC
+19.09.01 GF	- Neuer Oem: Siemens
+17.09.01 UF - Bugfix Registry Import fuer Remote Systemverwaltung
+09.08.01 RM - CConnectionRecord und CHost um Verbindungstyp DUN (Dial Up Network erweitert
+18.07.01 GF	- CIPCInputRecord: Flag für Zeitliche Deaktivierung hinzugefügt
+13.07.01 GF	- Bugfix CSecTimeSpan: Bei dem Format WD:00:00-WD:XX:XX wurde ein vom aktuellen
+									Wochentag abweichender Start-Wochentag grundsätzlich in die
+									Zukunft verlegt, auch wenn die Startzeit dann größer war
+									als die Endzeit...
+									Deshalb klappte es auch nie mit Zeitspannen über mehrere Tage!
+14.06.01 UF - Neue CIPC Befehle fuer Alarmliste und neues zeitgesteuertes
+			  Backup
+08.05.01 GF	- Bugfix: CIPCDrive::GetAvailableMB lieferte tw. "negative" Werte, gefixt
+18.04.01 UF - Sort Methode beim CHostArray ergaenzt.
+20.03.01 GF	- WK_STAT_TICK_COUNT != 0 liefert jetzt auch bei normalen Traces
+				die echten Millisekunden (der aktuellen Zeit, nicht seit Programmstart)
+08.01.01 ML - CWK_Profile  besitzt nun endlich eine Funktion zum Löschen
+			  einzelner Einträge (DeleteEntry(...))
+11.01.01 ML - ProductCode 17 (IPC_DTS) fehlte.
+11.12.00 ML - Bugfix: 'DeleteDirRecursiv' löscht nun auch schreibgeschützte Verzeichnisse
+08.12.00 ML - in 'DeleteDirRecursiv' und 'DeleteOldestFile' wird vor dem löschen einer Datei,
+			  die Fileattribute auf 'FILE_ATTRIBUTE_NORMAL' gesetzt um einen evtl. vorhandenen
+			  Schreibschutz zu entfernen.
+29.11.00 UF - Bugfix Crypto Dongle
+16.11.00 GF	Einige Attribute der Permission für SpecialReceiver angepasst
+03.10.00 UF Get- und SetTimeZoneInformation in CIPC Input eingebaut.
+31.10.00 UF Application ID für WatchCD und RemoteCD
+27.10.00 GF	Spezielle Permission SpecialReceiver analog Supervisor hinzugefügt,
+			wird nur bei speziellen Produktcodes angelegt
+20.10.00 ML WK_Util enthält nun die Funktion 'GetTimeSpan(DWORD dwStartTime)', die den Überlauf
+		    nach 49 Tagen korrekt behandelt.
+19.10.00 UF neue Befehle CIPCInput AlarmOff spans
+			neue Klassen CSystemTimeSpan,CSystemTimeSpans
+15.08.00 UF Create CIPCExtraMemory mit Fehlermeldung
+24.07.00 UF Fehlertexte für mciSendCommand eingebaut.
+13.07.00 UF Update Funktionen von Sec3 in CIPC
+03.07.00 UF installiertes PacketCD wird jetzt unter NT
+			an c2udfmmc.sys erkannt, und nicht an c2udffs.sys (Lesetreiber)
+26.06.00 RM CipcDrive erweitert um
+			OpenCD(sdriveletter)   öffnet CD-Caddy
+			CloseCD(..)			   schließt CD-Caddy
+			CheckCD(..)            eingelegte CD ist lesbar
+			CDDriveIsReady(..)     CDROM-Laufwerk ist bereit und ansteuerbar
+21.06.00 GF	- Garny als Option entfernt
+22.05.00 GF	CIPCFetch: Second Unit wird nur noch versucht, wenn sie auch als Module eingetragen ist
+07.12.99
+		 UF neu CeQuadrat PacketCD Driver C2udffs.sys
+			ab Version 2.5 wird erkannt
+13.10.99
+		 UF neue Felder Sollbetrag, Istbetrag, Differenzbetrag, vom Typ W
+30.09.99 >>> UpdateVersion um 16:41 <<<
+		 GF	Bugfix: WK_TRACE und CLogFile::WriteLine gegen überlange Strings abgesichert
+29.09.99 >>> UpdateVersion um 15:17 <<<
+		 GF	Bugfix in wk_profile::ExportRegistry
+			TCHAR-Arrays mit MAX_PATH waren zu klein, dadurch fehlerhafter Export
+08.09.99 ML Bug in CPermission::Load fixed
+19.7.99 >>> UpdateVersion um 12:29 <<<
+19.07.99 GF CipcDrives:
+			Beim Update von 3.1 auf 4.x ging die Info verloren,
+			welche Laufwerke für die Speicherung verwenden wurden.
+			Die Registry wird jetzt wieder konvertiert
+27.05.99 ML Alle AplicationID's sowie die Dongle-abfragen für JaCob1...JaCob4
+			implementiert.
+21.5.99 >>> UpdateVersion um 15:39 <<<
+21.05.99 GF	CUser: Zwang zum Aendern des Passwortes defaultmaessig auf NEIN gesetzt
+					und das Ablaufdatum	dementsprechend gesetzt
+21.5.99 >>> UpdateVersion um 14:49 <<<
+19.05.99 UF Bugfix Datum 3.11 wird jetzt richtig dargestellt
+11.05.99 UF - Kundennummer, Vorname, Nachname, Vorgangsnummer, Fachnummer
+15.04.99 UF Name der lgz dateien geandert, jetzt YYYYMMDD_MMHH_SS
+14.04.99 UF CIPC Semaphore auf 1000 erhöht
+13.04.99 UF Dongle Version mit GetMinorVersion, GetMajorVersion
+			reaktiviert.
+29.03.99 UF normal Archiv und Alarmarchiv jetzt auch für lokale
+			Station
+19.03.99 UF CIPC Semaphore auf 250, wie queue len erhöht
+			WK_Profile Get/WriteBinary hinzugefügt
+			util.h in wk_util.h umbenannt
+18.03.99 GF wk_dongle.cpp m_hSharedMemory und m_pSharedMemory auf NULL initialisiert!
+9.3.99	ML Die Decode-Funktion zum entschlüsseln ist nun in util.cpp
+5.3.99 >>> UpdateVersion um 12:19 <<<
+04.03.99 GF in CHostArray static member fuction GetLocalHostNameStandard() hinzugefuegt
+24.2.99 >>> UpdateVersion um 12:37 <<<
+24.02.99 UF GetDiskFreeSpaceEx wird vor Benutzung ueberprueft
+			und nur benutzt, wenn vorhanden.
+		    wegen Windows 95a
+12.2.99 >>> UpdateVersion um 8:05 <<<
+12.02.99 UF Aenderungen an
+		 - CIPC_DB_REQUEST_BACKUP
+		 - INP_IND_ALARM_FIELD_STATE
+		 - INP_IND_ALARM_FIELD_UPDATE
+9.2.99 >>> UpdateVersion um 14:03 <<<
+09.02.99 UF CIPC_DB_REQUEST_BACKUP,CIPC_DB_CONFIRM_BACKUP
+5.2.99 >>> UpdateVersion um 9:07 <<<
+05.02.99 UF CIPC als DLL umgebaut
+29.1.99 ML CWK_Dongle besitzt nun einen weiteren Konstruktor, der als
+		   Parameter ein Softdongle-file benötigt. (Für das HHLA Projekt)
+28.1.99 HD CSecTimerArray::GetTimerByName added.
+27.1.99 ML CUser enthält nun: ein Paßwort-Ablaufdatum, ein Sperrmechanismuß
+		   bei wiederholtem fehlerhaften Login und die Möglichkeit eines
+		   Dual-Logins.
+21.1.99 HD CSecTimer::IsTimerUsed
+20.1.99 HD SecTimer mit noch mehr combi support.
+19.1.99 HD SecTimer combi-timer in der registry.
+19.1.99 HD CalcTotalSpans mit root. SecTimeSpan mit exta .h .cpp
+		HD CSecIDArray begonnen, als Unterklasse von CDWordArray.
+14.1.99. HD RunTimeError messages in einer Zeile.
+14.1.99. HD noch einige cpp's mit dem DEBUG_NEW versehen.
+08.01.99 HD REL_ reduziert.
+04.01.99 HD SecTimer Fehlermeldung korrigiert.
+21.12.98 UF CIPCDatabase weiter aufgeraeumt, neue Protokollfunktionen
+			hinzugefuegt, neue Klassen CIPCSequenceRecord, CIPCField
+07.12.98 UF CIPCDatabase aufgeraeumt
+26.11.98 HD CSecTimerArray von CSecTimerArrayCS.
+25.11.98 HD CIPC::GetReceiveQueueLength(), CIPC::GetSendQueueLength() added
+23.11.98 HD CWK_Timer added.
+17.11.98 HD SecTimer inklusive englischen WochTagen.
+			CWK_Dongle fuer MiCoUnit3/4 komplett.
+16.11.98 HD CSecTimer um Datumsformat erweitert.
+12.11.98 WK_TRACE mit Jahresangabe. LogFilegrenze wieder auf 512KB.
+11.11.98 HD CSecTimer aufgerauemt, kein DelataTests mehr.
+06.11.98 UF/HD Logfile Mutex umgebaut, nur noch Mutex zum Komprimieren und loeschen
+04.11.98 HD RequestUnitJpegEncoding added, variant from RequestNewJpegEncoding plus nextCam.
+03.11.98 HD CloseDebugger/wk_trace.cpp untersucht. Timeout von 0 auf 500 im DebugThread/WaitForSingleObject.
+28.10.98 HD OnRequestIdlePictures war nicht virtual.
+19.10.98 UF CWK_Profile jetzt auch aus Datei im REGEDIT4 Format
+15.10.98 UF CNotificationMessage neu,
+			CSystemTime neu,
+			CConnectionRecord eigene Dateien
+14.10.98 HD CConnectionRecord um m_fields erweitert.
+14.10.98 HD CIPCOutput RequestIdlePictures added.
+14.10.98 HD CVideoJob added VJA_IDLE.
+13.10.98 ML WAI_MICOUNIT_3 und WAI_MICOUNIT_4 hinzugefügt
+05.10.98 HD CWK_RunTimeError::m_defaulID added.
+16.09.98 HD wk.h pragmas an DevStudio 6.0 angepasst
+02.09.98 HD ErrorMsg bei zu grossen Bilddaten.
+		    im PictureRecord > 1024*1024
+17.08.98 HD CloseDebugger mit doppeltem timeout,
+		 HD final "Stile have message" anders,
+		 HD anderes lock um die ganze print Schleife.
+13.08.98 HD SecID defines auf DWORD gecastet.
+12.08.98 HD extern added in util.h,
+			some functions were missing an extern decl.
+10.08.98 HD FetchInput und FetchDatabase dropped,
+			es werden nur noch die neuen verwendet.
+10.08.98 HD CipcServerControlClientSide mit retries
+		wenn write channel busy. Default 5 Versuche.
+		wwobei ein Sleep(50+0..100) gemacht wird.
+		Dazu ein default parameter in den NewFetch...
+05.08.98  HD AddToQueue mit optionlem Sleep(0),
+			erstmal nur in CIPCOutput::DoConfirmJpegEncoding
+			und in den Encoding requests fur den server
+		HD CVideoJob reduziert.
+23.07.98 HD In CWK_Dongle Produktnamen korrigiert.
+12.07.98 hd dvrXXX nach $\Projetct\Lib\DVRCore
+08.07.98 UF Routing Trennzeichen ist jetzt #
+07.07.98 UF AllowRouting,RunMiCoUnit2 im Dongle
+			in CHost an Routing angepaßt
+03.07.98 UF DoIndicateNewArchiv und DoIndicateRemoveArchiv eingefuegt.
+22.06.98 UF CWK_Dongle::GetVersionString liefert jetzt
+			aus der Registry HKCU/Software/DVRT/Version Number
+			Default ist 3.6
+			Grund sind moegliche weiter Patches = Service Packs
+12.06.98 ML 'GetJpegSize' in util.cpp korrigiert.
+04.06.98 HD WK_ASSERT statt ASSERT,
+		da CATCH ein ASSERT hat.
+03.06.98 HD in wk.h ein Release #define
+		fuer ASSERT; macht ein WK_TRACE_ERROR
+
+28.05.98 UF Log Directory veraenderbar
+			unter DVRT\Log\LogPath
+			Standard bleibt c:\log
+20.05.98 UF WK_CATCH added (mit HD)
+			TRY CATCH bloecke fuer CFile ops
+			CWK_DebugOptions nicht mehr inline
+19.05.98 HD FetchResult ConnectInfo mit String.
+12.05.98 UF Default Exceptionhandler calls ExitProcess
+11.05.98 UF CUnhandledException hinzugefuegt
+			neues InitDebugger.
+04.05.98 UF	vinfo.pvi jetzt im Verzeichnis, von wo die
+			exe gestartet wurde
+30.04.98 HD CWK_Profile hatte ein handle leak.
+			In GetProductKey wurde ein temp. handle
+			nicht aufgerauemt. Unter NT im TaskManager
+			sehr gut zu sehen. Nach einem Nacht Test sind
+			mehr als 50000 Handles in Benutzung.
+30.04.98 HD CWK_Dongle erweitert, die VersionNummer
+			wird anhand der BuilNummer im vinfo.pi
+			modifiziert. <=62 3.5, sonst 3.6
+28.04.98 UF GetCommPortInfo jetzt mit COM1..COM18 dauert 2 - 4 s
+23.04.98 HD SafeGetHead added.
+20.04.98 UF GetProfile Anpassungen wegen NT
+			HKLM\Software\Microsoft\Windows NT\CurrentVersion\WinLogon
+			muss unter NT fuer alle Nutzer mittels
+			regedt32 auf Vollzugriff geschaltet werden.
+			Fehlermeldungen bei Schreibzugriffen auf die Registry hinzugefuegt
+15.04.98 UF BOOL SearchFileRecursiv(const char* szStartDir, const CString& sFileName, CString & sLocation);
+			in wk_files added
+31.03.98 HD OEM_AKUBIS added
+30.03.98 HD WK_Dongle constructors with optional
+			bIgnoreSharedMemory=FALSE
+30.03.98 HD NCR OemCode added in WK_Dongle.
+27.03.98 HD WAI_ANALYZER added.
+26.03.98 HD WK_APP_NAME_PRODUCT_VIEW /VERSION added.
+26.03.98 HD WAI_PRODUCT_VIEW, WAIT_PRODUCT_VERSION added.
+24.03.98 UF RTE_OS_EXCEPTION neuer WK_RunTimeErrorLevel
+19.03.98 UF CWK_Profile Klasse fuer NT
+			und Remote Systemverwaltung
+			neuer Key
+			HKEY_LOCAL_MACHINE\Software\DVRT
+17.03.98 HD SharedCIP.dll wieder raus.
+		 HD Nicht remote update faehig.
+17.03.98 Konsequent OverrideError in virtual fns.
+16.03.97 Strings in WK_Dongle reduziert.
+13.03.98 Ungenutztes junked
+12.03.98 WK_Version reduziert
+/*
+@TOPIC{CIPC History|History,Cipc}
+11.02.98 UF PTZ_POS 789 hinzugefuegt
+09.02.98 UF WK_NTLogon hinzugefuegt
+09.02.98 HD	Dongle Shared Memory Flags fuer NT korrigiert
+09.02.98 UF GetCommPortInfo fuer NT/95
+22.01.98 UF WK_ALLOW_SDICONFIG Flag hinzugefügt
+15.01.98 HD DVRID vollstaendig
+14.01.98 HD AutoDuck Kommentare CIPC und mehr
+19.12.97 HD WK_Dongle RunClient1 -> RunSDIConfig
+17.12.97 HD WK_DebugOptions.h, ReadFile prueft auf
+			Dopplte keys. SetValue mit szComment.
+			KommentarZeilen werden gemerkt, fuers Write...
+03.12.97 HD OnConfirmSetValue added
+29.11.97 HD CSD_APPLICATION_NAME added to CIPCStringDefs.h
+29.11.92 HD Permission.h User.h Host.h mit #include "SecID.h"
+29.11.92 HD CTimedMessage ohne ...Indexed Varianten
+24.11.97 HD WK_STAT_TICK_COUNT von wk.h --> wk_trace.h
+19.11.97 HD	WK_TRACE korrigiert
+			- Grenze von max 100 in der Queue aufgehoben
+			- default queue laenge 5000, im InitDebugger Aufruf
+			- printen von mehr als einer aufgestauten message bei CloseDebugger
+			- C:\log\emergency.log fuer meldungen im WK_TRACE
+18.11.97 GF	WAI_SDI_CONFIG added, WK_RunTimeError.{h,cpp}
+18.11.97 GF	SDI_CONFIG added in WK_Names.h
+17.11.97 HEDU %02d in CWK_RunTimeError
+11.11.97 HEDU Secondary Hardlock auch mit im SharedMemory
+05.11.97 UWE  BOOL WK_CreateDirectory(const CString& sDirName); in wk_file.h
+04.11.97 HEDU CWK_Dongle::Crypt/Decryp added
+04.11.97 HEDU CLogFile wieder mit %02d
+30.10.97 HEDU InitDebugger mit DoesFileExist
+30.10.97 HEDU CLogFileParamter ohne CTime::Format
+30.10.97 UWE  WK_IS_WINDOW in wk.h
+
+@LISTHEAD{27.10.97 HD} REL_PROTOCOL, REL_OVERFLOW added
+	CWK_RunTimeError.Send() immer mit WK_TRACE
+@LISTHEAD{27.10.97 UF} DoesFileExist added in WK_File
+@LISTHEAD{21.10.97 HD} CWK_Dongle mit shared memory.
+	Die FetchXXX nehmen nur das, was vor einem ! ist (wenn ! vorhanden).
+	Erste Instanz eines CWK_Dongle's
+	- liest den hardware Dongle,
+	- legt den shared memory speicher an und fuellt ihn
+	weitere Instanzen lesen dann von dort.
+@LISTHEAD{8.10.97 HD}
+	Launcher, INSDNUnit2, PTUnit, PTUnit2 alle mit direktem FetchServerReset
+@LISTHEAD{2.10.97 HD}
+	NewFetchInput and NewFetchOutput versuchen jetzt auch eine
+	zweite ISDN oder PT Unit.
+@HRULE @BOLD <<<<< August>>>>@NORMAL
+@LISTHEAD{30.09.97 HD}
+	Optional secondary Hardlock im WK_Dongle.cpp.
+@LISTHEAD{2.09.97 HD}
+	SoftDongle.cfg wird nicht mehr gelesen.
+
+@LISTHEAD{29.08.97 HD}
+	CWK_RunTimeError::SetErrorText
+@LISTHEAD{28.08.97 HD}
+	CWK_Dongle erweitert und aufgeraeumt.
+@LISTHEAD{21.08.97 HD}
+	CWK_Dongle mit echtem ReadHardwareDongle, schreiben ueber
+	Project\Tools\ProductView und FAST-Cappuchino
+@LISTHEAD{20.08.97 HD}
+	Hardlock API integriert (using WINNT)
+	SecID.h
+	// NEW 20.8.97
+	// RelaisProzesse Flanke==EDGE, Pegel==STATE
+	#define SECID_PROCESS_RELAY_EDGE_CONTROL	(SECID_MAX_PROCESS-1)
+	#define SECID_PROCESS_RELAY_STATE_CONTROL	(SECID_MAX_PROCESS-2)
+
+@LISTHEAD{18.08.97 HD}
+	CWK_Dongle erweitert
+		CWK_Dongle(WK_ApplicationId appId);	// checks for exe automagically
+		BOOL RunByApplicationID(WK_ApplicationId appId);
+		BOOL IsExeOkay() const;	// only useable if the appId contructor is used
+@LISTHEAD{13.08.97 HD}
+	CIPC::OverrideError() und CIPC::BubbleMissingError()
+	Alle neuen DatabaseBackup Funktionen im HandleCmd inklusive neuer BubbleVarianten.
+@LISTHEAD{12.08.97 CT}
+	CIPDatabase um ...Backup.. Fuktionen erweitert.
+@LISTHEAD{12.08.97 HD}
+	CSecTimer mit Kombizeiten angefangen
+@LISTHEAD{08.08.97 HD}
+	CSecTimer CSecTimeSpan mit currentTime als input in einigen Funktionen.
+@LISTHEAD{06.08.97 HD}
+	CWK_Dongle um IsValid() und RunExplorer() erweitert.
+	Maximize Speed aktiviert.
+@LISTHEAD{05.08.97 HD}
+	CSecTimer um Date-Format erweitert DD:MM:YYYY:hh::mm
+	CWK_Dongle als SoftwareDongle ueber SoftDongle.cfg.
+
+@HRULE @BOLD <<<<< Juli >>>>@NORMAL
+@LISTHEAD{29.07.97 HD}
+	Umstellung auf VC5.0
+@LISTHEAD{24.07.97 CT}
+	Neue Kommandos im CIPCDatabase
+			void	DoRequestBackupInfo();
+	virtual void	OnRequestBackupInfo();
+			void	DoConfirmBackupInfo(int iNumRecords, const CIPCArchivRecord data[]);
+	virtual void	OnConfirmBackupInfo(int iNumRecords, const CIPCArchivRecord data[]);
+
+@LISTHEAD{23.07.97 CT}
+	Neuen Wert in CWK_RunTimeError (für SocketUnit) eingebaut
+	WRE_SU_SYNC_FAIL = 18,
+
+@LISTHEAD{18.07.97 HEDU}
+	XXXInfo{Inputs,Outputs} kommt auch mit 0 info zurecht
+
+@LISTHEAD{01.07.97 UWE}
+	Vervollständigung CIPCOutput
+	DoConfirmEncodedVideo -> OnConfirmEncodedVideo
+@LISTHEAD{01.07.97 UWE}
+	Für VCS Presence, neue Konstanten in PictureDef.h
+	und neue Flags in CIPCOutputRecord.
+
+@HRULE @BOLD <<<<< Juni >>>>@NORMAL
+@LISTHEAD{17.06.97 HEDU}
+	WK_RunTimeError.{h,cpp} angefangen
+
+@LISTHEAD{15.06.97 UWE}
+	extern BOOL DeleteDirRecursiv(const char* szDir); in wk_file
+	extern CString GetLastErrorString(LONG uOsError); in util
+	hinzugefügt.
+
+@LISTHEAD{12.06.97 UWE}
+	Copy Constructor für CConnectionRecord hinzugefügt
+
+@LISTHEAD{02.06.97 UWE}
+	Vorbereitung VCS, Presence als Appname define, SM define
+	und in NewFetch(Input|Output|Database)Connection
+	mit vcs:Nummer, pres:Nummer
+
+@HRULE @BOLD <<<<< Mai >>>>@NORMAL
+@LISTHEAD{28.05.97 HEDU}
+	CIPCExtraMemory.cpp (Schoenheitskorrektur bei CStringArray bubbles)
+	WK_Names.h SM_SOCKET_UNIT
+
+@LISTHEAD{12.05.97 HEDU}
+	WK_Version.h auf 3.02, fest fuer alle, nicht mehr die Parameter aus dem MacroAufruf
+
+@LISTHEAD{09.05.97 HEDU}
+	WK_PTR_LIST_SEMA in WK_Template.h
+	VideoJob.h mit WK_PTR_LIST_SEMA(CSemaVideoJobList, CVideoJobPtr, CSemaVideoJobs);
+
+@LISTHEAD{05.05.97 UWE}
+	Fehler in WK_Trace.cpp::DebugWriteThreadProc (NULL Pointer)
+	korrigiert.
+
+@LISTHEAD{05.05.97 UWE}
+	Fehler in OnConfirmInfo in CIPCOutputClient und CIPCInputClient
+	korrigiert.
+
+@LISTHEAD{04.05.97 HEDU}
+	WK_Trace.cpp::DebugWriteThreadProc nur eine Zeile pro SemaphoreIncrease
+	und Timeout auf 2 Sekunden.
+
+@HRULE @BOLD <<<<< April >>>>@NORMAL
+
+@LISTHEAD{30.04.97 UWE}
+	Neuer SN Typ CCT_CANON_VISCA hinzugefügt.(It's a Sony)
+
+@LISTHEAD{24.04.97 UWE}
+	GetNumberOfCommPorts und DeleteAllSubKey geändert, damit SuperVisor unter NT
+	laufen kann
+
+@LISTHEAD{24.04.97 HEDU}
+	Flags in CIPC und CIPCChannel so geändert, dass CIPC unter NT laufen kann
+
+@LISTHEAD{23.04.97 UWE}
+	In CIPCInputClient und CIPCOutputClient OnAddRecord und OnDeleteRecord
+	als abstrakte Methoden eingeführt.
+
+@LISTHEAD{04.04.97 HEDU}
+	WK_Template.h aus wk.h rausgezogen
+	SetAutoDelete(BOOL bAutoDelete) fuer WK_PTR_ARRAY WK_PTR_LIST
+
+@HRULE @BOLD <<<<< Maerz >>>>@NORMAL
+
+@LISTHEAD{26.03.97 HEDU}
+	CSecTimerArray mit optionalem AutoDelete
+@LISTHEAD{25.03.97 HEDU}
+	CSecTimer ohne SECID_NO_ID locks
+@LISTHEAD{19.03.97 HEDU}
+	ConnectRetryTime mit defaul 750 statt 2000
+@LISTHEAD{16.03.97 HEDU}
+	CIPC mit pre-calced names
+@LISTHEAD{13.03.97 HEDU}
+	WK_Trace.cpp CLogFile.cpp intern, mit BOOL bIsStatLog statt Find('@@')
+@LISTHEAD{10.03.97 HEDU}
+	NameOfEnum um fehlende Kommandos erweitert
+	doc fuer CIPCError erweitert
+@LISTHEAD{07.03.97 HEDU}
+	@LINK{::WK_STAT_PEAK} added in WK_Trace.{h,cpp}
+	WK_STAT_XXX von util.cpp --> WK_Trace.cpp
+	WK_Trace.cpp WK_STAT direkt an WK_TRACE_INTERN
+@LISTHEAD{06.03.97 HEDU}
+	WK_NewHandler mit CriticalSection und Sleep	fuer LogThread. GETESTET!
+	alle CString s=""; --> CString s;
+@LISTHEAD{04.03.97 HEDU}
+	@LINK{CIPCFetchResult} eigenes .h .cpp
+	+ CreateBubble und constructor from bubble
+	Include\WK_Magic.h
+@LISTHEAD{XXX		 CT}
+	InitDebugger nur noch mit einem filename
+	Mit extra TraceMessage thread
+@LISTHEAD{03.03.97 HEDU}
+	CIPCOutputUnit added (z.Zeit nur passend fur SWCodec)
+
+@BOLD <<<<< Februar >>>>@NORMAL
+
+@LISTHEAD{28.02.97 HEDU}
+	CLogFile und TRACE mit const CString und -= '\n'; += '\n' weg.
+@LISTHEAD{25.02.97 UWE}
+	In CIPCInput::HandleCmd im default Zweig den Aufruf von
+	GetGroupIDFromParam bei Übergabe an CIPC entfernt
+@LISTHEAD{10.02.97 HEDU}
+	Im WK_TRACE wird beim APT_LINK, als default nicht
+	Link.log, sondern das erste File aus InitDebugger genommen.
+	Hat den Vorteil, das CIPC Fehler und andere Meldungen
+	im gleichen Log landen.
+@LISTHEAD{10.02.97 HEDU}
+	CTimedMessage korrigiert, OmitMessage war nicht ganz korrekt
+
+
+
+*/
+TODO:
+	Lock/Unlock in CIPCOutputUnit optimieren

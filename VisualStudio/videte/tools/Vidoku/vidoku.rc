@@ -1,0 +1,551 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_VIDOKU              ICON    DISCARDABLE     "res\\icon1.ico"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR_MEDIUM      BITMAP  MOVEABLE PURE   "res\\TBarMedm.bmp"
+IDR_TOOLBAR_LARGE       BITMAP  MOVEABLE PURE   "res\\TBarLrge.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ViDoku.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "1 TYPELIB ""ViDoku.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,0,1
+ PRODUCTVERSION 1,2,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "programmiert von Rolf Kary-Ehlers\0"
+            VALUE "CompanyName", "Videte IT GmbH\0"
+            VALUE "FileDescription", "Add-In für Dokumentation\0"
+            VALUE "FileVersion", "1, 2, 0, 1\0"
+            VALUE "InternalName", "ViDokuTool\0"
+            VALUE "LegalCopyright", "Copyright (C) 2002 Videte IT\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "ViDoku.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "ViDoku Dynamic Link Library\0"
+            VALUE "ProductVersion", "1, 2, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_REPL DIALOG DISCARDABLE  0, 0, 273, 87
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Replace Across Open Text FIles"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Replace &All",IDOK,216,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,216,24,50,14
+    LTEXT           "Fi&nd what:",IDC_STATIC,7,9,34,8
+    LTEXT           "Re&place with:",IDC_STATIC,7,26,44,8
+    CONTROL         "Match &whole word only",IDC_WHOLEWORD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,46,89,10
+    CONTROL         "Match &case",IDC_MATCHCASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,58,53,10
+    CONTROL         "Regular &expression",IDC_REGEXP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,70,76,10
+    PUSHBUTTON      ">",IDC_REGEXPFIND,196,7,13,13
+    EDITTEXT        IDC_FINDTEXT,54,7,138,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REPLTEXT,54,24,138,14,ES_AUTOHSCROLL
+    PUSHBUTTON      ">",IDC_REGEXPREPLACE,196,24,13,13
+END
+
+IDD_COMMENT DIALOGEX 0, 0, 330, 279
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Insert Comment Header"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Class:",IDC_STATIC,4,6,46,8
+    EDITTEXT        IDC_EDT_CLASS,55,3,270,14,ES_AUTOHSCROLL
+    LTEXT           "Function :",IDC_STATIC,4,21,46,8
+    EDITTEXT        IDC_EDT_FUNCTION,55,18,270,14,ES_AUTOHSCROLL
+    LTEXT           "Description:",IDC_STATIC,4,36,46,8
+    EDITTEXT        IDC_EDT_FUNCTION_DESCRIPTION,55,33,270,28,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_WANTRETURN
+    LTEXT           "Result type:",IDC_STATIC,4,66,46,8
+    EDITTEXT        IDC_EDT_RESULT_TYPE,55,63,115,14,ES_AUTOHSCROLL
+    LTEXT           "Description:",IDC_STATIC,4,81,46,8
+    EDITTEXT        IDC_EDT_RESULT_TYPE_DESCRIPTION,55,78,270,14,
+                    ES_AUTOHSCROLL
+    LTEXT           "Function Parameters:",IDC_STATIC,4,96,77,8
+    CONTROL         "Input",IDC_CK_INPUT_PARAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,89,95,38,10
+    CONTROL         "Output",IDC_CK_OUTPUT_PARAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,132,95,41,10
+    CONTROL         "List1",IDC_PARAM_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    WS_BORDER | WS_TABSTOP,4,105,321,69
+    GROUPBOX        "Further Parameters for (doc-o-matic)",IDC_STATIC,4,177,
+                    321,78
+    LTEXT           "Keywords:",IDC_STATIC,10,191,40,8
+    EDITTEXT        IDC_EDT_KEY_WORDS,55,188,265,14,ES_AUTOHSCROLL
+    LTEXT           "Author:",IDC_STATIC,10,206,40,8
+    COMBOBOX        IDC_COMBO_AUTHORS,55,204,240,131,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Del",IDC_BTN_DEL_AUTHOR,300,204,20,12,WS_DISABLED
+    LTEXT           "Group:",IDC_STATIC,10,224,40,8
+    COMBOBOX        IDC_COMBO_GROUP,55,222,151,131,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Topic Order:",IDC_STATIC,211,224,46,8
+    EDITTEXT        IDC_EDT_TOPICORDER,261,221,22,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN_TOPIC,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,283,221,
+                    11,14
+    PUSHBUTTON      "Del",IDC_BTN_DEL_GROUP,300,222,20,12,WS_DISABLED
+    LTEXT           "Insert:",IDC_STATIC,10,241,40,8
+    CONTROL         "Function name as TITLE",IDC_CK_INSERT_TITLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,55,240,95,10
+    CONTROL         "Source Code Link",IDC_CK_INSERT_SOURCE_CODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,177,240,75,10
+    CONTROL         "Auto Links",IDC_CK_INSERT_AUTO_LINKS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,270,240,50,10
+    DEFPUSHBUTTON   "Insert",IDOK,4,258,50,14
+    CONTROL         "in German",IDC_CK_GERMAN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,61,260,48,10
+    CONTROL         "Insert Date",IDC_CK_INSERT_DATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,128,260,54,10
+    PUSHBUTTON      "Save Settings",IDC_BTN_SAVE_SETTINGS,204,258,63,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,275,258,50,14
+    CONTROL         "Link to Type",IDC_CK_TYPE_LINK,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,268,95,57,10
+    CONTROL         "Optional",IDC_CK_OPTIONAL_PARAM,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,189,95,45,10
+END
+
+IDD_STARTUP DIALOG DISCARDABLE  0, 0, 270, 90
+STYLE DS_SETFOREGROUND | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Videte Documentation Tool",IDC_TXT_DOKU_TOOL,5,4,234,36,
+                    SS_CENTERIMAGE
+    CTEXT           "programmed by Rolf Kary-Ehlers",IDC_TXT_DOKU_TOOL2,121,
+                    69,147,12,SS_CENTERIMAGE
+    ICON            IDI_VIDOKU,IDC_STATIC,243,11,20,20
+    CTEXT           "Version 1.2",IDC_TXT_DOKU_TOOL1,5,69,68,12,
+                    SS_CENTERIMAGE
+    CONTROL         "Disable this Dialog",IDC_CK_START_DISABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,179,48,79,12
+END
+
+IDD_PRINTASC_DIALOG DIALOGEX 0, 0, 238, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Speedy, the ASCII Printer"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,175,74,55,12
+    PUSHBUTTON      "Cancel",IDCANCEL,115,74,55,12
+    GROUPBOX        "",IDC_STATIC,5,5,230,60
+    LTEXT           "Printer :",IDC_STATIC,10,16,45,8
+    LTEXT           "Status :",IDC_STATUS,10,31,45,8
+    LTEXT           "Location :",IDC_LOCATION,10,41,45,8
+    LTEXT           "Comment :",IDC_COMMENT,10,51,45,8
+    COMBOBOX        IDC_COMBO_PRINTER,60,14,110,51,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_STATUS_TEXT,60,31,110,8
+    LTEXT           "",IDC_LOCATION_TEXT,60,41,110,8
+    LTEXT           "",IDC_COMMENT_TEXT,60,51,110,8
+    PUSHBUTTON      "Options...",IDC_SETUP,175,14,55,12
+    EDITTEXT        IDC_TAB_LENGTH,215,39,15,12,ES_AUTOHSCROLL,0,
+                    HIDC_TAB_LENGTH
+    LTEXT           "Tablength:",IDC_STATIC,175,41,36,8
+    CONTROL         "Print Clipboard",IDC_CLIPBOARD_PRINT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,75,105,10,0,
+                    HIDC_CLIPBOARD_PRINT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_REPL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 266
+        VERTGUIDE, 54
+        VERTGUIDE, 192
+        VERTGUIDE, 196
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+        HORZGUIDE, 24
+    END
+
+    IDD_COMMENT, DIALOG
+    BEGIN
+        VERTGUIDE, 4
+        VERTGUIDE, 10
+        VERTGUIDE, 50
+        VERTGUIDE, 55
+        VERTGUIDE, 320
+        VERTGUIDE, 325
+        HORZGUIDE, 10
+        HORZGUIDE, 25
+        HORZGUIDE, 40
+        HORZGUIDE, 70
+        HORZGUIDE, 85
+        HORZGUIDE, 100
+        HORZGUIDE, 105
+        HORZGUIDE, 174
+        HORZGUIDE, 177
+        HORZGUIDE, 195
+        HORZGUIDE, 210
+        HORZGUIDE, 228
+        HORZGUIDE, 245
+        HORZGUIDE, 255
+        HORZGUIDE, 265
+    END
+
+    IDD_STARTUP, DIALOG
+    BEGIN
+        HORZGUIDE, 75
+    END
+
+    IDD_PRINTASC_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 60
+        VERTGUIDE, 110
+        VERTGUIDE, 170
+        VERTGUIDE, 175
+        VERTGUIDE, 230
+        VERTGUIDE, 235
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 35
+        HORZGUIDE, 45
+        HORZGUIDE, 55
+        HORZGUIDE, 65
+        HORZGUIDE, 80
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_REGEXPMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "options"
+    BEGIN
+        MENUITEM "Any Character",               ID_OPTIONS_ANYCHARACTER
+        MENUITEM "Character in Range",          ID_OPTIONS_CHARACTERINRANGE
+        MENUITEM "Character Not in Range",      ID_OPTIONS_CHARACTERNOTINRANGE
+
+        MENUITEM "Beginning of Line",           ID_OPTIONS_BEGINNINGOFLINE
+        MENUITEM "End of Line",                 ID_OPTIONS_ENDOFLINE
+        MENUITEM "Tagged Expression",           ID_OPTIONS_TAGGEDEXPRESSION
+        MENUITEM "Not",                         ID_OPTIONS_NOT
+        MENUITEM "Or",                          ID_OPTIONS_OR
+        MENUITEM "0 or More Matches",           ID_OPTIONS_0ORMOREMATCHES
+        MENUITEM "1 or More Matches",           ID_OPTIONS_1ORMOREMATCHES
+        MENUITEM "Group",                       ID_OPTIONS_GROUP
+        MENUITEM SEPARATOR
+        MENUITEM "Whitespace",                  ID_OPTIONS_WHITESPACE
+        MENUITEM "Alphanumeric Character",      ID_OPTIONS_ALPHANUMERICCHARACTER
+
+        MENUITEM "Alphabetic Character",        ID_OPTIONS_ALPHABETICCHARACTER
+
+        MENUITEM "Decimal Digit",               ID_OPTIONS_DECIMALDIGIT
+        MENUITEM "Hexadecimal Number",          ID_OPTIONS_HEXADECIMALNUMBER
+        MENUITEM "Number",                      ID_OPTIONS_NUMBER
+        MENUITEM "Integer",                     ID_OPTIONS_INTEGER
+        MENUITEM "C/C++ Identifier",            ID_OPTIONS_CCIDENTIFIER
+        MENUITEM "Alphabetic String",           ID_OPTIONS_ALPHABETICSTRING
+        MENUITEM "Quoted String",               ID_OPTIONS_QUOTEDSTRING
+    END
+    POPUP "options2"
+    BEGIN
+        MENUITEM "Find What Text",              ID_OPTIONS2_FINDWHATTEXT
+        MENUITEM "Tagged Expression 1",         ID_OPTIONS2_TAGGEDEXPRESSION1
+
+        MENUITEM "Tagged Expression 2",         ID_OPTIONS2_TAGGEDEXPRESSION2
+
+        MENUITEM "Tagged Expression 3",         ID_OPTIONS2_TAGGEDEXPRESSION3
+
+        MENUITEM "Tagged Expression 4",         ID_OPTIONS2_TAGGEDEXPRESSION4
+
+        MENUITEM "Tagged Expression 5",         ID_OPTIONS2_TAGGEDEXPRESSION5
+
+        MENUITEM "Tagged Expression 6",         ID_OPTIONS2_TAGGEDEXPRESSION6
+
+        MENUITEM "Tagged Expression 7",         ID_OPTIONS2_TAGGEDEXPRESSION7
+
+        MENUITEM "Tagged Expression 8",         ID_OPTIONS2_TAGGEDEXPRESSION8
+
+        MENUITEM "Tagged Expression 9",         ID_OPTIONS2_TAGGEDEXPRESSION9
+
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_COMMENT DLGINIT
+BEGIN
+    IDC_COMBO_AUTHORS, 0x403, 3, 0
+0x2d2d, "\000" 
+    IDC_COMBO_GROUP, 0x403, 3, 0
+0x2d2d, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_REPLALL_LONGNAME    "Videte Doku"
+    IDS_REPLALL_DESCRIPTION "Unified documentation for Videte source code into Visual Studio integrated online help."
+    IDS_CMD_STRING          "\nReplace All Command\nSearch and replace across all documents\nReplace All"
+    IDS_CMD_STRING2         "\nInsert Comment Header\nInserts a comment header according to the selected text (e.g. function) in the source code\nComment Header"
+    IDS_DESCRIPTION         "Description"
+    IDS_PARAM               "Parameter"
+    IDS_TYPE                "Type"
+    IDS_NO_TEXT_SELECTED    "No text selected"
+    IDS_HEADER_FORMAT_TOP   "/*********************************************************************************************\n Class      : %s\n Function   : %s\n Description: %s\n\n Parameters: %s \n"
+    IDS_HEADER_FORMAT_MIDDLE "  %-10s: (%s%s): %s  (%s)\n"
+    IDS_HEADER_FORMAT_BOTTOM 
+                            "*********************************************************************************************/\n"
+    IDS_NONE                "None"
+    IDS_HEADER_FORMAT_TOP2  "/*********************************************************************************************\n Klasse  : %s\n Funktion: %s\n Zweck   : %s\n\n Parameter: %s\n"
+    IDS_HEADER_FORMAT_MIDDLE2 "  %-10s: (%s%s): %s  (%s)\n"
+    IDS_CMD_STRING3         "\nPrint selected Text\nPrints the selected text as ASCII-Text.\nPrint selected Text"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NONE2               "Keine"
+    IDS_AUTHOR              "Author%02d"
+    IDS_HEADER_FORMAT_AUTHOR " Author: %s\n"
+    IDS_HEADER_FORMAT_RESULT "\n Result type: %s (%s)\n"
+    IDS_HEADER_FORMAT_RESULT2 "\n Rückgabewert: %s (%s)\n"
+    IDS_WRONG_FORMAT        "Selected text is not a function declaration"
+    IDS_DATE_GERMAN         " erstellt am: %d. %B %Y\n"
+    IDS_DATE_ENGLISH        " created: %B, %d %Y\n"
+    IDS_TITLE               " <TITLE %s>\n"
+    IDS_SOURCE_CODE         " <IMPLEMENTATION ON>\n"
+    IDS_AUTOLINK            " <AUTOLINK ON>\n"
+    IDS_KEYWORDS            " <KEYWORDS %s>\n"
+    IDS_GROUP               " <GROUP $%s>\n"
+    IDS_TOPICORDER          " <TOPICORDER %s>\n"
+    IDS_GROUPX              "Group%02d"
+    IDS_HEADER_FORMAT_GROUP " <GROUP %s>\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PRINTDIALOG_STD     "Defaultprinter"
+    IDS_PRINTDIALOG_OK      "(Ready)"
+    IDS_PRINTDIALOG_ERROR   "(Not ready)"
+    IDS_PRINTINFO_ERROR     "Error !!"
+    IDS_PRINTDIALOG_OFFLINE "Offline"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PARAM_LIST          "List of function parameters.\nDoubleclick to edit the description of the parameter."
+    IDC_EDT_FUNCTION        "You may edit the function name here."
+    IDC_EDT_CLASS           "You may edit the class name here."
+    IDC_EDT_RESULT_TYPE     "You may edit the result type here."
+    IDC_CK_INPUT_PARAM      "Check this, if the selected parameter is an input parameter."
+    IDC_CK_OUTPUT_PARAM     "Check this, if the selected parameter is an output parameter."
+    IDC_EDT_RESULT_TYPE_DESCRIPTION 
+                            "Please enter a description of the functions result."
+    IDC_EDT_FUNCTION_DESCRIPTION 
+                            "Please enter a discription for the functions purpose."
+    IDC_CK_GERMAN           "Check this, if you prefer a german documentation text."
+    IDC_COMBO_AUTHORS       "Lists the available authors. To insert a new author, edit the\nfirst entry '--' in the list and use button 'Save Settings'."
+    IDC_BTN_SAVE_SETTINGS   "Saves the changed settings."
+    IDC_BTN_DEL_AUTHOR      "Deletes the selected author from the list."
+    IDC_CK_INSERT_DATE      "Check this, if you want to insert todays date."
+    IDC_CK_INSERT_TITLE     "Check this, if function name shall be the\nheadline of the help item."
+    IDC_CK_INSERT_SOURCE_CODE 
+                            "Check this, to create a link to the source code\nof the function. The source code text will be inserted\ninto the help file."
+    IDC_CK_INSERT_AUTO_LINKS 
+                            "Check this to create 'automatically link' text blocks:\nWhen this option is enabled, Doc-O-Matic scans any text\nin a topic for linkable parts such as class names, function\nnames, member names and so on. If it finds such a text it\ncreates a link."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDT_KEY_WORDS       "Here you can enter a keyword which may help\nto find this function."
+    IDC_BTN_DEL_GROUP       "Deletes the selected group name from the list."
+    IDC_SPIN_TOPIC          "Adjusts the topic order.\nThe default order value is 0 (zero). This value is used to\nchange the order of topics in the hierarchy. After setting\nup the group topic hierarchy it is sorted according to these\nvalues (topics with a lower value come before topics with\na higher level)."
+    IDC_COMBO_GROUP         "Lists the available group names. To insert a new group name\nedit the first entry '--' in the list and use button 'Save Settings'..\nUsefull groups may be groups of classes or functions that\ndeal with similar subjects."
+    IDC_CK_TYPE_LINK        "Check this, if you want to create a link to the\ndescription of the selected parameter type."
+    IDC_CK_OPTIONAL_PARAM   "Check this, if the parameter is an optional parameter."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOK                    "Inserts the description above the functions declaration."
+    IDCANCEL                "Closes the dialog box without inserting."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DEFAULT_VALUE_GER   "Standard"
+    IDS_DEFAULT_VALUE_ENG   "Default"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\ViDoku.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+1 TYPELIB "ViDoku.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

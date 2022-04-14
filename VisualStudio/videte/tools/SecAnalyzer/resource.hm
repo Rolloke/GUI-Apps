@@ -1,0 +1,8 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by SecAnalyzer.rc
+//
+#define HIDC_DO_PROCESSES               0x806603e9    // CG_IDD_SECANALYZERBAR [English (U.S.)]
+#define HIDC_INCLUDE_PATTERN            0x806603ed    // CG_IDD_SECANALYZERBAR [English (U.S.)]
+#define HIDC_START_TIME                 0x806603eb    // CG_IDD_SECANALYZERBAR [English (U.S.)]
+#define HID_CLEAR_PATTERNS              0x80668013    // CG_IDD_SECANALYZERBAR [English (U.S.)]
+#define HID_CLEAR_TIMES                 0x80668009    // CG_IDD_SECANALYZERBAR [English (U.S.)]

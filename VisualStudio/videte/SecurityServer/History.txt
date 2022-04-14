@@ -1,0 +1,717 @@
+30.08.06 UF - Bugfix IP Camera MD OK Prozesse
+			- Bugfix IP Camera Client Request An/Aus.
+25.08.06 UF - PTZ Interface jetzt per Input an IP Cameraunit wegen AXIS direkt Steuerung.
+25.08.06 UF - Bugfix GP im Server beim Trennen IP Cams
+25.08.06 UF - AVCodec standardmaessig an.
+25.08.06 UF - Bugfix Process Requests Q/ML
+18.08.06 UF - IP Kamera ALPHA hack.
+15.08.06 UF - Bugfix PTZ ID war falsch.
+27.07.06 UF - Bugfix 185: MD Speicherprozesse werden nun auch wieder gestoppt, wenn ein Timer das will.
+24.07.06 UF - Anrufprozesse werden jetzt beendet, wenn die Gegenseite die Verbindung trennt. MNO-Baer.
+12.07.06 ML - Bugfix 170: IsMDActive() liefert nun für die Q immer TRUE.
+23.06.06 RKE- Bugfix GP in CIPCOutputServer::OnConfirmReset(). MD pInput pointer wurde nicht überprueft.
+16.06.06 UF - Tasha und Q Vollbild je max 12 fps.
+			- Bugfix Q Bildverteilung mehrere Prozesse.
+15.06.06 UF - Bugfix Tasha Request.
+			- Q jetzt auch MPEG-4 ueber ISDN
+30.05.06 UF - Tracking Informationen der MD Alarme werden jetzt gespeichert.
+05.05.06 UF - Bugfix nach Aenderungen im Verhalten bei Alarmaufschaltungen.
+04.05.06 UF - Aenderungen im Verhalten bei Alarmaufschaltungen
+			  Der Prozess läuft jetzt solange wie eingestellt, schaltet am Ende 1plus zurueck.
+			  Jeder weitere Prozess wartet auf den ersten und schaltet dann seine passende
+			  Kamera ein. So kann man in Ruhe an einen Melder mehrere Kameras an eine
+			  Station schalten.
+02.05.06 UF - Bugfix 137 fortlaufende Kameraumschaltung bei Alarmverbindungen.
+26.04.06 UF - Optimierungen Tasha Requests sollten GPs vermeiden.
+			  Reste CoCo entfernt.
+25.04.06 UF - Code beim Beenden Reihenfolge geaendert.
+25.04.06 UF - Bugfix 133 keine Jacob/Savic Bilder.
+24.04.06 UF - Bugfix auch Alarme mit Nr > 32 werden an den Client weitergeleitet.
+24.04.06 UF - Bugfix Dubioser GP wegen ID falsch.
+24.04.06 UF - Bugfix GP Server bei Ende Alarmverbindung.
+19.04.06 UF - Bugfix potentielles Deadlock in Client Encoding Request.
+18.04.06 UF - Bugfix doch keine Client Anforderungen Tasha waehrend Reset.
+18.04.06 UF - Einige Verbesserungen in Tasha Prozesshandling
+			  Timeout war falsch, GOPs wurden nicht richtig gezählt. Client Counter
+			  threadsafe.
+08.03.06 TKR- Bugfix 104: Nur die kritischen RTEs werden angezeigt.
+02.03.06 UF - Bugfix PTZ Process jetzt direkt bei Alarm, kein Extra prozess.
+02.03.06 UF - Bugfix AllowGetRegistry Remote SV
+01.03.06 RKE- Kritische RTEs werden nur einmal pro RTE und zugehoerigem Geraet geliefert.
+			  D.h.: Wenn die z.B.: Festplattentemperatur mehrfach zu hoch war wird dies nur einmal
+			  gemeldet.
+01.03.06 TKR- 1. Bugfix 94: RTEs werden nicht mehr bei Alarmverbindungen mitgeschickt.
+			  2. Bei bestehenden Verbindungen wird bei Beginn eines neuen Tages die
+			     NAG Screen (Wartungs und kritische RTEs) angezeigt.
+28.02.06 TKR- Temperatur, Drehzahl und SMART RTEs werden nun (wie das Wartungsfenster) angezeigt.
+22.02.06 UF - Bugfix Kameraname FTP, Fehlermeldung FTP steht jetzt in der LOG Datei.
+21.02.06 RKE- Bugfix: GP beim Schreiben des Protokolls fuer zeitliche Deaktivierung (MNO).
+              Codepage wird jetzt als CString von der Funktion GetHTMLCodePage geliefert.
+17.02.06 UF - FTP Posting Process eingebaut. Nettes Feature.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+13.01.05 UF - Bugfix Kontrollanruf bleibt stehen.
+29.12.05 UF - Die Dantenbankfelder werden jetzt in der Alarmliste mitgespeichert.
+29.12.05 UF - Es koennen jetzt auch mehr als 32 Alarme fuer PM 100 verwaltet werden.
+19.12.05 UF - Bugfix GP Kontrollanrufprotokoll
+16.12.05 UF - Alarmliste eingebaut.
+13.12.05 RKE-Bugfix 979: Der String "Automatisches Backup" wird jetzt aus der oemgui gelesen.
+05.12.05 UF - GP Fehler Alarmverbindung, Bugfixes Kontrollanruf.
+10.11.05 TKR- Wartungshinweise in deutsch und englisch komplett.
+09.11.05 UF - PTZ Preset Prozesse implementiert.
+09.11.05 TKR- Der Wartungshinweis wird nun angezeigt, wenn das Intervall abgelaufen ist.
+			  Der entsprechende Text ist noch nicht ganz komplett.
+08.11.05 UF - Datenbankverbindung wird jetzt geprüft und ggfs. neu aufgebaut.
+31.10.05 UF - Bugfix Deadlock bei Abbau Alarmverbindung beseitigt.
+27.10.05 UF - Bugfix Die Timeout berechnung fuer die Threads und Video waren nicht korrekt.
+19.10.05 TKR- Den automatischen Backup Prozess um ein 24 Stunden Backup erweitert.
+30.09.05 TKR- Bugfix 943: Bei 2 Backups auf verschiedene Laufwerke werden nun im Fehlerfall nur
+			  diejenigen noch anstehenden Backups des betroffenen Laufwerks gelöscht.
+27.09.05 TKR- Tritt beim automatischen Backup ein Fehler auf (z.B. Ziellaufwerk voll), dann werden
+			  die im Server noch anstehenden Backup Processe gelöscht.
+19.09.05 TKR- Bugfix 928: Beim automatischen Backup wurden nicht alle gewaehlten Archive gebackuped,
+			  da versucht wurde, fuer jedes Archiv einen eigenen write channel anzulegen. Bei zu vielen
+			  Archiven schlug das fehl. Nun wird jedes backup nachaeinander abgearbeitet.
+12.09.05 RKE- Bugfix 927: Die Protokoll Datei wird erst beim Starten des Protokolls angelegt.
+27.07.05 UF - Manuell video out um 1 verzaehlt.
+27.07.05 UF - Bugfix jaCob 1 Bild in n Sekunden Live
+18.07.05 UF - Bugfix JaCob ISDN uebertragung.
+15.07.05 UF - GANZ QD-04P Quad implementiert.
+01.07.05 UF - Bugfix JaCob 16 Kameras pro Karte.
+29.06.05 UF - Quad Steuerung vorerst nur Santec SQV 80 eingebaut.
+27.06.05 TKR- In CIPCOutputServerClient::OnRequestStartVideo() wird nun der pOutput Pointer 
+			  vor Benutzung geprueft, ob er denn da ist. Gab sonst nach Kamerawechsel im Sample(SDK)
+			  einen Absturz im SecurityServer, auf den das Sample aufgewaehlt war.
+10.06.05 UF - Bugfix Videoout Sequenzer letzte Kamera.
+23.05.05 RKE- Bugfix 841: vor dem Stringvergleich wird noch die Stringlaenge ueberprueft.
+28.04.05 UF - Die Default Compression (JaCob)wird jetzt nur von den aktiven Prozessen und der gleichen Kamera
+	          genommen.
+25.04.05 UF - Bugfix Nr. 810 ISDN stellt die Speicherung auf 12 fps, nach Beenden jetzt wieder 25 fps.
+21.04.05 RKE- CMultipleCallProcess kann jetzt die Hosts aus einer Ini Datei lesen.
+18.04.05 UF - Bugfix Zaehler fuer GOPs die zweite.
+18.04.05 UF - Bugfix Zaehler fuer gesendete Bilder beruecksichtigt jetzt GOPs.
+15.04.05 UF - Nicht GOP faehige Clients bekommen jetzt getimete Einzelbilder.
+14.04.05 UF - Bugfix Videoout hatte falsche Kameranummer. GOPs implementiert.
+06.03.05 UF - Bugfix 4.7 Systeme erhalten jetzt wieder H.263 Daten.
+04.03.05 TKR- Bugfix 802 Die Aufteilung verschiedener Bildanforderungen bei Jacobsystemen kann sich nun
+			  nicht mehr in einer Endlosschleife aufhängen.
+21.03.05 UF - Bugfix Endlosschleife Sortierung Kameras
+20.03.05 UF - Bugfix 799 Sortierung Kameras
+16.03.05 RKE- Bugfix 712 Systemsteuerung wird jetzt benachrichtigt die HTML Seiten neu zu erstellen, somit werden jetzt
+              Aenderungen von Infos zu Melder, Kameras, Relais und Benachrichtigungen aktualisiert.
+26.02.05 UF - Bugfix Nr 765 Jacob Jobverteilung
+25.01.04 RKE- Bugfix 737: Beim Guardtourprozess wird jetzt im Connectionrecord die Permission mit geliefert.
+20.01.04 UF - Bugfix Pausenzeiten werden bei der Tasha jetzt eingehalten. Pausenzeiten sollte man immer einhalten
+25.11.04 UF - Savic macht jetzt bei Speicherung wieder JPEG anstelle MPEG4, wegen der CPU
+              Performance auf den mini idip.
+04.11.04 RKE- Fuer Alarmverbindungen wird in den initialisierenden Verbindungen jetzt die aktuelle Codepage gesetzt und im ConnectionRecord mit uebermittelt.
+29.10.04 TKR- Die Fadenkreuze werden nun wieder in der Datenbank gespeichert.
+29.09.04 RKE- Codepage wird jetzt ueber CWK_Profile an die CIPC weitergegeben, da der globale Parameter gm_uCodePage in CWK_String
+			  nur in der Anwendung global gesetzt wurde. Dies galt leider nicht für die Dll.
+			  Bei ExportRegistry wird jetzt die Codepage, sowie die Language Abbreviation uebergeben, damit eine Gegenstation Fonts und
+			  Keyboardlayout anpassen kann.
+27.09.04 UF - Bugfix Kameraausfall Tasha bei gleichzeitigem Videoout Prozess auf gleicher Kamera.
+06.09.04 UF - Savic MPEG4 Bugfix 539 Mpeg4 Bilder gruen.
+26.08.04 UF - Savic MPEG4 jetzt mit MD Koordinaten am Bild.
+16.08.04 UF - Savic MPEG4 jetzt mit mehreren Bitraten für die unterschiedlichen Kompressionsstufen.
+11.08.04 UF - Bugfixes Tasha timeout.
+11.08.04 UF - Bugfixes MPEG4 ISDN und Savic speichern.
+10.08.04 UF - Bugfix videoout tasha wurde überhaupt noch nicht angesteuert. MPEG4 ist jetzt an!
+03.08.04 UF - idip kann jetzt Savic Mpeg4 speichern, Savic und Jacob Mpeg4 übertragen.
+			  dazu muss aber Mpeg4 in der Registry freigeschaltet werden.
+22.07.04 UF - idip hat jetzt auch eine Beschraenkung auf 5 lizensierte Empfaenger.
+			  d.h. es koennen sich max 5 Stationen aufwaehlen.
+19.07.04 UF - Scheduling Tasha Request implementiert.
+02.07.04 TKR- Bugfix 426: Automatische (ungewollte) Umschaltung von feiner Auflösung 
+			  in grobe Auflösung bei Livebilder zu beginn eines Speicherprozesses passiert
+			  nun nicht mehr.		
+02.07.04 TKR- Bugfix 425: Umschaltung der Auflösung von grob nach fein und zurück funktioniert. 
+22.06.04 UF - Tasha Requests auf ID 0,1.
+18.06.04 RKE- Bugfix 352 Das Relais wurde trotz Server Resets gehalten, da der Client jetzt immer online ist.
+			  Beim Disconnect eines Client wird der Relaisprozess für den Client terminiert. Bei Flankensteuerung muss das Relais aber gehalten werden.
+			  Beim Server Reset muss der Client Relaisprozess aber trotzdem Terminiert werden und darf den Betrieb nicht aufhalten.
+11.06.04 UF - Bugfix Nr. 312 Archiev ID landet jetzt in der Registry
+11.06.04 UF - Bugfix Nr 113 Waechterrundgang wartete auf Vision, das gibt's es nicht mehr.
+11.06.04 UF - Die Terminierung der Kameras kann jetzt geschaltet werden.
+09.06.04 UF - Der Server reagiert jetzt auf einen Reset am PC, der an den Karten angeschlossen ist.
+07.06.04 ML - Bugfix: 'CIPCOutputServer::IsMDActive' liefert für die Tasha nun immer TRUE, da bei
+			          der Tasha die Bewegungserkennung immer aktiv ist.
+04.06.04 UF - Bugfix Savic und Jacob wurden manchmal als Tasha behandelt.
+18.05.04 UF - Es werden jetzt auch die Archiv ID's mit jedem Livebild mitgeliefert
+18.05.04 UF - Anpassung an Archiv IDs fuer Livebild nach Wiedergabe Umschaltung, geht schon!
+07.05.04 UF - Bugfix Prozesse starten nach Tashaende und Neustart wieder korrekt, auch
+			  Kameraausfaelle sollten gehen.
+05.05.04 UF - Bugfix einige Prozesse, auch Waechterrundgang werden nicht gestartet.
+30.04.04 UF - Bugfixes fuer Tasha Livebild, Reset beschleunigt.
+27.04.04 UF - Bugfix Deadlock im Server.
+27.04.04 UF - Tasha in den Server integriert, es fehlt noch eine gute Clientbehandlung und das
+			  verteilen der Blackfin Kapazität.
+23.04.04 GF	- Bugfix: AlarmConnection, CodePage von Input und Output wurde nicht gesetzt => Daten nicht lesbar
+22.04.04 GF	- Bugfix: CSec3App::InitInstance() ; CIPCServerControlServerSide CodePage muss immer ANSI bleiben
+21.04.04 GF	- Bugfix: CIPCServerControlServerSide: CodePage-Unterstützung bei OnRequest_X_Connection und Add_X_Client
+02.04.04 UF - Bugfix Initiale Alarmzustaende. Z.B. Nr 903
+10.03.04 UF - Bugfix Savic Bilder bei grober Aufloesung falsch.
+23.02.04 GF	- Feature: CheckCallProcess benutzt nur noch 1 B-Kanal bei ISDN
+19.04.02 RKE- Der Audioserver verhindert jetzt, das 2 Clients gleichzeitig eine Durchsage machen koennen.
+19.02.04 GF	- Unicode Umstellung
+13.02.04 GF	- Bugfix CMultipleCallProcess::CheckForConnection() (Version 4.6.3.633)
+			  Da das Fetch einen eigenen Timeout hat, führt der zusätzliche Timeout über m_iConnectionTimeOutCounter dazu,
+			  dass der CallThread nicht korrekt terminiert und letztendlich beim letzten CallThread zum GP 0x77f8ed61
+29.01.04 UF - Bugfix GP beim Serverreset.
+28.01.04 UF - Codec's auf vimage.dll umgestellt.
+27.01.04 UF - Server reset komplett umgestellt, alles passiert jetzt nacheinander.
+27.01.04 UF - Bugfix Nr. 534 und 707
+07.01.04 GF	- Bugfix 705: GP (0x00410d38) beim Initialisieren
+15.12.03 UF - Bugfix Audiodecoding
+10.12.03 UF - Audioprozesse werden beim Beenden gestoppt.
+			  Audioprozesse werden nach Ablauf des Timers gestoppt.
+			  Audioprozesse jetzt mit Multiplexing, und Clientprozessen.
+05.12.03 UF - UVV Kassen 4x2 Bilder in 1 Sekunde jetzt genauer in 450-550 ms Abstaenden.
+04.12.03 UF - Serverumbau wegen Audio Teilung des Schedulers in drei Klassen.
+25.11.03 UF - Audioaufnahmeprozesse werden jetzt aktiviert, es fehlt noch
+			  die Anfrage bei der Unit, sowie das Multiplexen mit den Clients.
+25.11.03 UF - Bei Audioobjekten werden jetzt die Berechtigungen verwendet.
+12.11.03 UF - Alarmverbindungen werden jetzt nach einer voreingestellten Zeit wieder
+			  beendet.
+11.11.03 UF - Bei der Savic JPEG Software kompression werden jetzt die Bildgroessen
+			  richtig verwendet.
+10.11.03 UF - Keep Alive (Volle Zeitdauer halten) Prozesse werden jetzt nach Stromausfall
+			  einfach wieder aufgenommen, das ist fuer die UVV Kassen notwendig.
+08.10.03 RKE- Audiointerface ergaenzt, Verbindungsaufbau realisiert.
+23.09.03 UF - Audiointerface zu Client und Unit angefangen.
+19.09.03 UF - Trace und Debugoptionen jetzt in der Registry schaltbar
+08.09.03 UF - Bugfix Dauerreset
+05.09.03 GF	- WK_Traces zum Eingrenzen des Dauer-Resets eingebaut
+28.08.03 GF	- Bugfix 518: Bei Relais-Aktivierung mit Flankensteuerung öffnet das Relais trotz längerer Haltezeit
+						  sofort, wenn der Melder OK wird (wie bei Pegelsteuerung)     
+28.07.03 UF - Bugfix Nr 501, manuelle Videoout falsch gezaehlt
+24.07.03 UF - Videooutprozesse implementiert.
+23.07.03 UF - Bugfix Serverreset bei fehlenden Bildern
+10.07.03 UF - Wenn es 60 Sekunden lang keine Bilder mehr von der Jacob / Savic kommen,
+			  obwohl aktive Processe vorliegen, wird der Server resettet.
+19.06.03 UF - Noch einige Bugfixes Waechterrundgaenge
+16.06.03 UF - diverse Bugfixes Waechterrundgaenge
+06.06.03 UF - Optimierung der Umschaltung bei einer angeschlossenen Kamera.
+05.06.03 UF - Bugfix Abbruch von Waechterrundgaengen
+23.04.03 UF - Bugfix Kompressionstufen
+23.04.03 UF - Fuer Lokale und H.263 Bilder wird jetzt die gleiche Kompression verwendet
+			  wir fuer alle Speicherprozesse, wenn diese alle die gleiche Kompression haben.
+22.04.03 UF - Bugfix 442 Waechterrundgang zu Stationen mit gleichen Namen
+22.04.03 UF - Bugfix 445 GP beim parallel gestarteten Waechterrundgaengen
+16.04.03 UF - GP beim Beenden des Waechterrundgang
+11.04.03 UF - Bugfix bei 2 gleichzeitigen Waechterrundgaengen zur selben Station.
+05.03.03 UF	- Beim Trennen von Verbindungen wird jetzt eine PTZ Kamera auf die definierte Position zurueckgestellt.
+17.02.03 UF - Es wird jetzt ein DoRequestSelectCamera mit SECID_NO_ID losgeschickt, wenn
+			  ein Alarm der einen Anruf ausgeloest hat, wieder weg ist.
+11.02.03 UF - Bugfix Nr 313 Bei kleinen H263 Bildern bei Jacob tritt unten ein gruener Streifen auf.
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CRecordingProcess::OnStateChanged()
+20.01.03 UF - Die Motion Detection wird jetzt fuer alle Kameras ein/aus geschaltet, je nachdem
+			  ob der zugehoerige Melder an oder aus ist.
+15.01.03 UF - Der idip kann jetzt alle Kameras parallel, bei ISDN und langsam TCP wird die
+			  Bildaufloesung halbiert, die Savic wird jetzt gut unterstuetzt, in Vision geht der Zoom noch
+			  nicht.
+02.01.03 GF	- SaVic analog JaCob implementiert
+03.12.02 GF	- Bugfixing Timerberechnung/-update
+02.12.02 GF	- Konstante wurde umbenannt: COMPRESSION_COLORJPEG in COMPRESSION_JPEG
+15.10.02 UF - Bugfix GP Alarmverbindung wurde sofort wieder getrennt.
+15.10.02 UF - Bugfix GP bei fehlerhafter Alarmverbindung
+02.10.02 UF - ab und zu kam es zu einem GP beim Beenden von Verbindungen
+30.09.02 UF - Der Blocking bug trat bei KeepAlive Prozessen auf und ist nun behoben.
+25.09.02 UF - Bugfix bei Alarmverbindungen wurden die Bildprozesse nicht korrekt umgeschaltet
+24.09.02 UF - Lock beim Starten und Beenden von Prozessen rausgenommen,
+			  damit sollte auch der Blocking Bug endgueltig behoben sein.
+18.09.02 UF - Bugfix Server bei 1 Sekundenumschaltung und H.263
+16.09.02 UF - Bugfix Server friert ein oder stuerzt ab, wenn eine Alarmverbindung
+			  fehlschlaegt.
+09.09.02 UF - Bugfix Nr. 234 Nach dem Neustart der JacobUnit wurden die
+			  Bildanforderungen nicht neu gestartet.
+05.09.02 UF - Clients von Pointer auf ID umgestellt.
+30.08.02 UF - Bugfix Relaissteuerung
+28.08.02 UF - Bugfix mehrfach aktivierte Alarmverbindungen wurden nicht korrekt behandelt.
+28.08.02 UF - Bugfix Nr 224 Relaisprozesse wurden nicht korrekt beendet.
+26.08.02 UF - JPEG nach H.263 jetzt in getrenntem Thread.
+09.08.02 GF	- Bugfix 194: Beim Kontrollanruf- und Referenzbildprozess wurde die erste eingetragene Gegenstation
+						  immer angerufen, auch wenn es eine Email, SMS u.ä. war
+22.07.02 UF - Wenn auf den Verbindungen zur Jacob kein Datenverkehr mehr stattfindet, so
+			  wird jetzt der Server resetted.
+19.07.02 UF - Bugfix, beim Umschalten von einer auf die naechste Kamera wurde
+			  nicht immer ein I-Frame codiert.
+19.07.02 UF - Bugfix, der Server hat jetzt keinen GP mehr, wenn bei H.263 Uebertragung
+			  auf eine Kamera geschaltet wird, die gerade kein Bild liefert.
+15.07.02 UF - Bugfix, die MD Maske laesst sich in Vision 4.3.0.487 nicht setzen,
+			  4.3.0.488 wird wieder gehen.
+07.06.02 UF Letzte Aenderung rueckgeangig gemacht, Gleichverteilung ging nicht mehr.
+07.06.02 UF Bugfix bei Alarmverbindungen ueber Netz wurde nicht richtig zwischen JPEG und H263 entschieden.
+06.06.02 UF Die idip H.263 Uebertragung funktioniert jetzt Es gehen auch Alarmverbindungen
+			und die Gleichverteilung der Bilder sowie die Umschaltung von feiner und grober Aufloesung.
+21.05.02 UF Die idip H.263 Uebertragung fuer Jacob Systeme ist jetzt im BETA Status.
+15.10.01 UF Der Server leitet jetzt Anfragen nach der MD Maske an die Jacobunit weiter.
+18.10.01 UF Nach einer Aenderung der Systemuhrzeit wird jetzt ein Server Reset
+			durchgefuehrt.
+18.07.01 GF	CInput, CInputList, CIPCInputServerClient: Flag für Zeitliche Deaktivierung eingebunden
+02.02.01 UF neue 5er MD Koordinaten
+17.01.01 UF Bugfix: Zwei Alarmverbindungen an einem Melder werden jetzt korrekt
+		    ausgeführt.
+17.01.01 ML Bugfix: Das SystemTray-menü klappt nun korrekt zu
+16.01.01 UF Der Alarm Melder für die Deaktivierungsspanne für MNO hat jetzt
+			die gesamten Deaktivierungsspannen als Text.
+08.01.01 ML Server Icon erscheint nun im SystemTray
+05.01.01 UF Bei Alarmanrufen werden die Gegenstationsnamen jetzt
+			case insensitiv verglichen, die Stationsliste wird jedesmal
+			neu geladen.
+04.01.01 GF	Bugfix: Bei Alarmanruf an "LokaleStation" wurde bei bereits bestehenden Verbindungen
+				immer die erste Verbindung benachrichtigt!
+03.01.01 UF	Bugfix: Bei bestehender Verbindung zwischen Server und Vision wurden bei
+				Benachrichtigungen die anhängenden Daten nicht übermittelt
+28.12.00 GF	MNO Spezial, Der virtuelle "Melder Zeitliche Deaktivierung"
+				übermittelt den Meldernamen und Startdatum/-zeit im Field mit
+27.12.00 GF	Bugfix MNO Spezial, Der virtuelle "Melder Zeitliche Deaktivierung" wird jetzt
+				15 min vorher aufgerufen und übermittelt den Meldernamen im Field mit
+21.12.00 GF	- Bugfix MNO Spezial, der Melderstatus wurde nicht korrekt angezeigt
+				- DoRequestValue wurde in Feature (bei Connect) und Status gesplittet
+				- Clients werden bei ServerReset informiert
+28.11.00 UF - Bugfix MNO Spezial, die Alarmanrufe wurden nicht wieder
+			  gestartet.
+23.10.00 UF - MNO Spezialtimer eingebaut
+04.08.00 UF - Bugfix Reihenfolge beim Speichern von MD Bildern
+			  mit eingebautem MD Prozeß
+03.08.00 UF - MD Alarme werden nicht mehr zum Client gezeigt.
+13.06.00 UF - Bugfix bei Alarm werden jetzt erst die OK Prozesse
+			  beendet, und dann die Alarmprozesse gestartet.
+10.06.00 UF - Motion Detection wird jetzt auch in JacobUnit
+			  ein und ausgeschaltet, 
+07.06.00 UF - Motion Detection Standard OK Prozess eingebaut
+			  wenn der MD Melder an ist und eine Alarmaktivierung auf diesen
+			  Melder eingerichtet ist, so wird dazu eine OK Aktivierung
+			  mit gleichen Parametern eingerichtet.
+14.04.00 UF - Bugfix keine Input Verbindung für E-Mail
+13.04.00 UF - FAX und EMail Alarm Verbindungen
+			  nur mit Output Verbindung, wenn eine Kamera angegben ist
+			  und ohne Input Verbindung
+23.9.99  ML - Die 'names.ini' wird nun auch für die lokale Station angelegt.
+23.9.99	 ML	- Bugfix: Beim Referenzbildprozeß wurden die falschen Outputs in die
+			  'names.ini' geschrieben.
+			- Bugfix: Wenn keine Gegenstationen eingetragen sind stürzte der Server bei
+			  einem Referenzbildprozeß ab. 
+22.09.99 UF von CIPC aus TerminateProcess -> SetState(SPS_TERMINATED
+17.8.99 >>> UpdateVersion um 10:35 <<<
+17.08.99 UF Extra Daten nur noch bei Alarmprozessen
+08.07.99 UF Timeout für Anrufprozesse
+1.7.99 >>> UpdateVersion um 11:13 <<<
+01.07.99 UF BugFix remote Berechtigung zum Zeitsetzen wieder i.O.
+01.06.99 ML Den Schließbutton disabled
+29.04.99 UF HTML Protokoll in ImageCallProcess hinzugefügt
+24.04.99 UF MultipleCallProcess fertig BETA
+			ActualImageCall Process fertig BETA
+20.4.99 >>> UpdateVersion um 16:34 <<<
+20.04.99 UF - ActualImage, ImageCall, CheckCall Prozesse hinzugefuegt
+			- CoCo Bugs behoben
+14.04.99 UF Remote Delete Dir neu, aber nur leere Verzeichnisse.
+19.03.99 ML Das SyncEvent in eine Semaphore geändert.
+			Solange noch Syncs ausstehen werden keine neuen Videojobs verschickt.	
+18.03.99 ML Das SyncEvent auf Autoreset, und der TimeOut im WaitForSingleObject auf
+		    20x250ms verdoppelt. 
+05.03.99
+		ML Das SyncEvent wird nun testweise wieder nach den VideoJobs verschickt,
+		   da es häufiger vorkam, daß der Server eintreffende Bilder keinem Prozeß
+		   mehr zuordnen konnte. Ob diese Maßnahme hilft, muß erst noch überprüft
+		   werden.
+01.03.99
+	UF automatisches Backup implementiert.
+27.02.99
+	UF Prozesse in mehrere Klassen zerlegt
+		CRecordingProcess, CCallProcess, CBackupProcess
+26.02.99
+	UF Backup Processe angefangen
+28.1.99 >>> UpdateVersion um 9:38 <<<
+
+28.1.99 HD Trace der  MiCoFPS korrigiert. DumpID zeigt nur noch die erste id.
+14.1.99 >>> UpdateVersion um 11:56 <<<
+14.21.99 HD MiCoFPS bei default 0, dann wird aus der registry gelesen (unter "SecurityServer/MicoFPS%d".
+	Wenn ungleich 0 kann ein expliziter Wert zum Testen gegeben werden.
+11.1.99 >>> UpdateVersion um 11:41 <<<
+11.01.99 HD Bei AlarmAnrufen wurde GetNr statt GetHexNr fuer die Permission verwendet.
+		Ist die Berechtigung unbekannt, wird "SuperVisor" genommen.
+		Dies hatte zur Folge, das praktisch immer "SuperVisor" verwendet wurde.
+04.12.98 HD BuildNotes Test, dies muesste unter Build201 erscheinen.
+04.12.98 HD trace korrigiert.
+3.12.98 >>> UpdateVersion um 13:43 <<<
+03.12.98 HD "Reset" in verschiedene Gruppen aufgeteilt.
+01.12.98 HD Traces reduziert, OptimierungsDisbleBug beseitigt.
+01.12.98 HD DeltaOffset nicht immer gleich auf 0.
+30.11.98 >>> UpdateVersion um 16:29 <<<
+30.11.98 HD EarlySync wieder auf den alten Mechanismus.
+27.11.98 HD CoCoClient untersucht, umschalten klappt nicht, erst Kamera schon!!!
+27.11.98 >>> UpdateVersion um 8:29 <<<
+27.11.98 Timer ThreadSafe.
+26.11.98 >>> UpdateVersion um 12:02 <<<
+26.11.98 HD "SyncEvent" log mit Namen der Gruppe.
+26.11.98 HD Initial "Synchronizing" reduced to 2 seconds for internal dongles.
+25.11.98 >>> UpdateVersion um 14:38 <<<
+25.11.98 HD GetTickCount durch WK_GetTickCunt ersetzt. Schwere Umbauten beim Sync.
+18.11.98 >>> UpdateVersion um 10:24 <<<
+18.11.98 HD TraceRequestMulkriplexing added.
+13.11.98 HD Fehler in PostOptimization behoben.
+	Neue Optionen DisableRequestOptimization DisableRequestMultiplexing.
+
+5.11.98 >>> UpdateVersion um 13:25 <<<
+5.11.98 HD "NumCameraSwitches" added, default 3.
+5.11.98 >>> UpdateVersion um 11:02 <<<
+05.11.98 HD PostOptimize repariert. "TraceRequestOptimization" added.
+04.11.98 HD using RequestUnitJpegEncoding
+03.11.98 HD Multiplexing komplett, Optimierung korrigiert.
+2.11.98 >>> UpdateVersion um 17:02 <<<
+02.11.98 HD Muliplexing angefangen und RequestOptimizing weiter gebaut.
+	UF Notification Message in Alarmverbindung eingebaut
+	   ExportRegistry jetzt über CWK_Profile
+19.10.98 >>> UpdateVersion um 11:24 <<<
+19.10.98 HD GlobalReplace: pApp-> --> theApp.
+16.10.98 HD CRequestCollector begonnen
+14.10.98 HD Support for MICO_[34] updated.
+2.10.98 >>> UpdateVersion um 12:51 <<<
+02.10.98 HD Anpassung an neue Aktivierung.
+02.10.98 HD Es werden beide Versionen unterstuetzt.
+28.8.98 >>> UpdateVersion um 12:44 <<<
+28.8.98 HD Neue Semantik fuer TraceMilli.
+		< 0 nimmt WK_GetTickCount(), >0 expliziter Wert.
+19.8.98 >>> UpdateVersion um 10:40 <<<
+	UF  DoRequestFile String Interface um GetTimeZoneInformation
+		erweitert.
+18.8.98 >>> UpdateVersion um 17:46 <<<
+	UF	BugFix DoRequestGetFile, nur Dateien mit 0 BYTE Groesse
+5.8.98 >>> UpdateVersion um 15:59 <<<
+
+16.6.98 >>> UpdateVersion um 17:07 <<<
+	UF	GetWWWDirectory jetzt mit Zeitstempel.
+		GetWWWDirectory [dateiname(time)]
+		wobei time das Dateidatum CTime.GetTime in Hex ist.
+		es werden nur neuere Dateien versandt
+		Bei DoConfirmWWWFile wird der Zeitstempel
+		mit an Vision geschickt
+12.6.98 >>> UpdateVersion um 10:55 <<<
+
+	UF	DoRequestFile mit RFU_STRINGINTERFACE
+		GetWWWDirectory eingebaut, liefert
+		alle Dateien der Verzeichnisses .\www\9ffffffe
+11.5.98 >>> UpdateVersion um 12:46 <<<
+11.05.98 ExceptionHandler via InitDebugger.
+
+17.4.98 >>> UpdateVersion um 10:21 <<<
+	UF	Garny Stuff aus der RC entfernt
+		neues Icon
+
+3.4.98 >>> UpdateVersion um 11:15 <<<
+
+	UF	Export Registry auf neuen Pfad HKLM\Software\DVRT
+		umgestellt
+26.3.98 >>> UpdateVersion um 20:14 <<<
+
+20.3.98 >>> UpdateVersion um 11:57 <<<
+
+13.3.98 >>> UpdateVersion um 10:31 <<<
+
+20.03.98 UF CWK_Profile wegen NT
+			Daten werden jetzt aus HKEY_LOCAL_MACHINE\Software\DVRT
+			gelesen
+13.03.98 HD Zweite MiCo auch im ProcessScheduler
+			Auch anderen Namen fuer das SyncEvent!
+
+12.02.98 HD neues Flag im ServerDebug.cfg
+			TraceClientJpegRequests
+		vorher gab es im server.log unnoetige
+		Traces. "...NewJpegEncoding...."
+
+10.2.98 >>> UpdateVersion um 12:29 <<<
+
+XX.01.98 UF Zweite MiCo Unit ermoeglicht.
+
+19.1.98 >>> UpdateVersion um 10:40 <<<
+
+19.01.98 HD	BUGFIX CProcessScheduler::KillProcessByTimer korrigiert.
+			Es konnten Prozesse uebrig bleiben,
+			wenn mehrere BlockSchloss/Timer gesteuerten
+			Prozesse in einer OutputGroup waren.
+16.12.97 >>> UpdateVersion um 18:17 <<<
+
+16.12.97 HD	BugFix, bei RelaisProzessen konnte es zu Abstuerzen
+			kommen, im Zusammenhang OK/Flankensteuerung.
+15.12.97 >>> UpdateVersion um 23:57 <<<
+
+15.12.97 HD EnableTickOffset added, default FALSE
+			Wenn aktiviert ist eine Sekunde mindestens
+			1000 ms lang. Wenn nicht aktiviert ist es wie
+			bisher vor Build27. Lediglich iNumSlicePerPics ist
+			noch dabei.
+15.12.97 >>> UpdateVersion um 20:38 <<<
+
+11.12.97 >>> UpdateVersion um 14:17 <<<
+
+11.12.97 HD <B>Kritische &Auml;nderung bei den Prozessen
+			'Kleine' Prozessen haben eventuell mehrfach Bilder
+			pro Sekunde bekommen.</B>
+			CProcess::CalcMode Wechsel zwichen Active/Pause
+			+- 100 ms, um 'dopplte' Bilder pro slice zu vermeiden.
+11.12.97 HD <B>NumExpectedPictures rechnet auch die PauseTime mit ein.</B>
+05.12.97 HD Nach dem reset werden die InputClient via OnConfirmAlarmState 
+			ueber den aktuellen Zustand informiert.
+4.12.97 >>> UpdateVersion um 16:12 <<<
+04.12.97 HD WICHTIGER PATCH, bei kurzen virtuellen Sekunden konnte
+			es passieren, dass Bilder doppelt angefordert werden.
+			Zum Beispiel "1 Bild pro Sekunde / 1 Minute Pause", 
+			ergab 1 Bild um 00:00:00
+			UND ein zweites Bild um 00:00:01.
+			Jetzt werden nicht mehr Bilder angefordert, 
+			wenn PicsPerSlice schon erfuellt ist.
+		 HD	TraceSchedulerLock dropped
+4.12.97 >>> UpdateVersion um 13:41 <<<
+
+3.12.97 >>> UpdateVersion um 11:38 <<<
+/*@TOPIC{Server History|History,Server}
+03.12.97 HD CIPCInputServer OnConfirmSetValue added
+03.12.97 GF CIPCInputServerClient OnRequestSetValue added
+27.11.97 >>> UpdateVersion um 12:49 <<<
+27.11.97 HD OnRequestGetValue mit Find(SM_SDIUNIT_INPUT)==0, da es mehrere gibt
+26.11.97 >>> UpdateVersion um 18:26 <<<
+26.11.97 HD TraceMili --> TraceMilli, altes TraceMili wird noch gelesen
+			synchronize --> synchronize
+			InputClient::OnRequestGetValue von CSD_APPLICATION_NAME
+@LISTHEAD{18.09.97 HEDU}
+	TraceProcessRun added, prints ProzessInformationen bei jedem CalcMode
+	Info ProcessTermination im ~CProcess
+@LISTHEAD{12.09.97 HEDU}
+	Auch CoCo Bilder werden bei Speicherungsprozessen gezaehlt.
+@LISTHEAD{11.09.97 HEDU}
+	NumExpectedPictures korrigiert.
+@LISTHEAD{08.09.97 HEDU}
+	OnConfirmAlarmState nicht mehr an clients, wird nicht benutzt.
+	Im CoCo::OnConfirmReset kein StopMpegEncoding mehr, wurde ehe nicht verwendet.
+@LISTHEAD{03.09.97 HEDU}
+	AnrufProzesse mit mehreren Gegenstationen.
+	UpdateNextModeChange plus one second
+@LISTHEAD{27.08.97 HEDU}
+	RelayProzesse implementiert
+@LISTHEAD{23.08.97 HEDU}
+	Beim Disconnect von OutputClients, die einen Overlay benutzt haben,
+	wird das DisplayWindow auf 0/0 gesetzt.
+	OUTPUT um Relay Attribute erweitert.
+@LISTHEAD{21.08.97 HEDU}
+	Dongle Check eingebaut
+@LISTHEAD{08.08.97 HEDU}
+	m_pTimers->CalcTotalSpans() added
+@LISTHEAD{08.08.97 HEDU}
+	CSecTimer an neue Funktionen angepasst (mit currentTime)
+@LISTHEAD{07.08.97 HEDU} 
+	BUG REMOVED, bei ProzessMacros war es nicht moeglich
+	ueber die ArchivNummer 15 zu kommen. 
+	Gemeint war nicht mehr als 15 gleichzeitig.
+
+@LISTHEAD{04.08.97 HEDU} CProcessMacro aufgerauemt
+	AboutBox mit idipapi::DoAbout ersetzt
+	einige ungenutzte strings aus der StringTable entfernt.
+
+@LISTHEAD{29.07.97 HEDU} Umstellung auf VC5.0
+
+@LISTHEAD{24.07.97 HEDU}
+	SWCodec stuff dropped
+	virtual seconds optimiert.
+	Nie mehr Bilder als erwartet.
+	Neue Options: "TraceVirtualSecond","TraceProcessTermination","AdjustStartTime"
+@LISTHEAD{23.07.97 HEDU}
+	DatabaseActive im ProcessScheduler mit CTimedMessage(500) und STAT_PEAK. (Ist eh nur aktive bei TraceSavePicture).
+	ProcessSchedule optimiert und mit VirtualSeconds
+	TraceScheduler dropped
+
+@LISTHEAD{18.07.97 HEDU}
+	ClientInfos auch, wenn es gar keine units gibt.
+@LISTHEAD{18.07.97 CT}
+	Default MiCoFPS auf 25.
+@LISTHEAD{21.05.97 HEDU}
+	3.02 in der AboutBox, ein paar AFXStrings wieder in sec3.rc
+
+@LISTHEAD{20.05.97 HEDU}
+	AnrufProzesse auch mit BlockSchlossKontrolle (war nur Timer)
+
+@LISTHEAD{5.05.97 HEDU}
+	m_iMiCoClientPicsPerSecond dropped
+
+	m_iClientJpegMS dropped
+
+	dwUserData in OutputClient::OnRequestNewJpegEncoding is dwClientTimeSlice in ms
+
+	OnRequestVersion support in Input/Output Client
+
+@HRULE @BOLD <<< April >>> @NORMAL
+
+@LISTHEAD{12.05.97 HEDU}
+	Verwendung der angegebenen Berechtigungsstufe fuer ISDNProzesse.
+@LISTHEAD{29.04.97 HEDU}
+	ExitInstance mit anderer Reihefolge Units/ServerControl
+	Kein Trace mehr bei langen Syncs vom SingleClient
+@LISTHEAD{28.04.97 HEDU}
+	WriteLoopLock's Reihenfolge und Sync
+@LISTHEAD{25.04.97 HEDU}
+	CProcessSchedulder::OnIndicateMpegData prueft theApp.IsUpAndRunning()
+	KillLongSequence() immer VOR einem WriLoopLock()!
+
+@LISTHEAD{26.03.97 HEDU}
+@ITEM @LINK{Blockschloss Stufe 2|Server,Lock}
+@ITEM CoCoClientPicsPerSecond > 100 ermoeglicht
+
+@LISTHEAD{23.03.97 HEDU}
+	@LINK{Blockschloss Stufe 1|Server,Lock}
+@LISTHEAD{18.03.97 HEDU}
+	ClientAnforderung von LocalOverlay stopt EncodingProcess.
+	(Wechsel von MiCo auf CoCo)
+@LISTHEAD{18.03.97 HEDU}
+	MicoClientPicsPerSeconds wird als maximalWert benutzt.See @LINK{Options|Server,DebugOptions}.
+@LISTHEAD{11.03.97 HEDU}
+	@LINK{SWCodec specials|Server,SWCodec} komplett implementiert
+@LISTHEAD{05.03.97 HEDU}
+	CIPCOutputServer m_bCanXXX schon im construtor ueber den ShmNamen
+ 	SWCodecCount{Low,Medium,High}, SWCodecFPS dazu SWCodec{Up,Down}Scale
+ 	JpegClientPicPerSecond --> MiCoClientPicsPerSecond
+@LISTHEAD{03.03.97 HEDU}
+	SWCodec auch mit m_hSyncEvent im CProcessScheduler
+
+@BOLD <<<<< Februrar >>>>@NORMAL
+
+@LISTHEAD{28.02.97 HEDU}
+	"OOPS, no color decoder" message dropped
+@LISTHEAD{28.02.97 HEDU}
+	Exactly ONE client message dropped.
+@LISTHEAD{25.02.97 HEDU}
+	CProcessMacro::m_pAlarmPermission, also nicht mehr hardcoded "SuperVisor"
+@LISTHEAD{24.02.97 HEDU}
+	OnRequestGetValue/OnConfirmGetValue	auch fuer Input Connections
+@LISTHEAD{10.02.97 HEDU}
+	durch compiliert fuer CIPC update
+
+*/
+TODO
+TraceCoCoSync --> TraceSync
+TEST: m_bCanXXX testen, Erst Explorer CoCo nachstarten
+//////////////////// ALTES ///////////
+WHAT'S THAT:
+
+
+TODO:
+
+CIPCInput:
+	-ConfirmAlarmState ohne changeMask
+	-int iGroupNr als WORD wGroupID
+
+SWCodec EigenbildStart ist durch m_bBusy blockiert, ein Sleep
+macht es nur noch schlimmer. Muss noch untersucht werden....!
+
+DONE:
+
+12.04.96:
+CInpGrp --> CIPCInputServer
+COutpGrp --> CIPCOutputServer
+CIPCCompressReceiverSec --> CIPCCompressServer
+
+13.04.96
+CProcess --> CProcessManager
+LoadProcessFromDisk als member von CProzList
+
+GetStringFromString GetNrFromString als member von CInifile,
+	aber immer noch in CSec3App, dort dann Aufruf nach m_Ini...
+
+pPR --> pTheProcessManager
+
+CProzList hat jetzt LoadFromDisk/WriteDoDisk (nicht mehr im SuperVisorSheet)
+
+CIPC ReadCmdWait/WriteCmdWait ausge#if'ed und WriteCmd mit eingebautem wait.
+
+CIPCReqLinkSecurity --> CIPCLinkServer
+CIPCPictureReceiver --> CIPCPictureServer
+
+14.04.96
+
+CIPC:
+	OnRequestConnect()
+	OnRequestDisconnect()
+	OnConfirmConnect()
+
+16.04.96
+statt #ifndef KEIN_LOKALES_BILD ein CSec3App::m_bDoLokalesBild (public)
+OnEigenBildStart setzt auf TRUE, OnVerbindung auf FALSE.
+Im CIPCPictureServer wird bei Bedarf im OnConfirmPicture, das
+naechste Request losgeschickt.
+
+FirstClient mit CheckEvent() ueber OnIdle()
+
+17.04.96
+CIPC erweitert um m_cmdQueueList. Aktivierbar ueber EnableWriteQueue();
+Wenn aktiv ist WriteCmd nicht mehr blockierend. Dafuer muss
+im CIPCThread ein WaitForMultipleObject gemacht werden, ueber eine
+Semaphore wird angezeigt, wenn neue cmds in die queue gewandert sind.
+Damit wird erreicht, dass die Bearbeitung des WriteCmds in einem anderen
+Thread als der Aufruf erfolgt.
+
+18.04.96
+CIPC mit vielen TRACE messages fuer Fehlerfaelle versehen.
+SemaphoreName eindeutig fuer Master und Slave.
+PictureDef.h: Resolution wieder auf 'vorherige' Werte, da im NetISDN
+noch ein direkt typecast byType -> Resolution!
+
+
+24.04.96
+CIPC aufgeraumt. CIPCThread in CIPC integriert. Neue Behandlung des ExtraMemory.
+Komplett in CIPC verpackt, nach aussen nur
+WriteCmdData und HandleCmd mit pData,dwDataLen
+Es gibt zwei events: 
+	CmdSend, der writer hat etwas losgeschickt
+	CmdDone, der reader hat das cmd und daten gelesen
+Eine semaphore fuer queued cmds.
+
+Das HauptWAIT is CmdSend/queueSema. Vor dem Schreiben in den
+Kanal wird noch ein WAIT auf CmdDone gemacht, um sicher zu sein,
+dass das letzte cmd gelesen wurde.
+
+Zu diesen beiden WAITs gibt es die virtuellen
+OnTimeoutCmdReceive (idle timeout),
+OnTimeoutWrite (Kanal noch nicht wieder frei).
+und passend GetNumTimeoutXXX().
+
+25.04.96
+PictureGroup mit Attributen in ConfirmHardware, um erkennen zu koennen,
+was moeglich ist. [BW/Color]Compress/Decompress und Overlay.
+
+Eigenbild fuer Overlay.
+
+
+26.04.96
+SecOutputType in OutputGroup.h und
+m_outputType statt byActive, zusammen mit GetOutputType();
+
+INPUT und OUTPUT mit Zugriffsfunktionen versehen, dem entsprechend
+aus den groups/list entfernt.
+
+int CInputList::GetProcessUsage(DWORD dwProcessID) zaehlt wie
+oft ein process noch benutzt wird.
+
+
+28.04.96
+CIPCExtraMemory als public interface, zusammen mit speziellen
+DoXXXExtra(...) erspart dies das Kopieren von Bilddaten.
+
+SWCodec, ExtraMemory passend zur Resolution, deutlich schneller!
+
+
+29.04.96
+CIPCExtraMemoryRecord, um CIPCExtraMemory mit reference-counting zu haben.
+Erlaubt 'kopieren' in einem Prozess, ohne CopyMemory.
+CIPCPictureServer macht davon Gebrauch, und ist in der Lage, das
+naechste Bild anzufordern, bevor das eigentliche BitBlit gemacht wird.
+Der Codec kan also auch schon weitermachen.
+
+
+
+virtual void OnIndicateCompress(CompressionType ct, 
+									Resolution r,
+									int iCameraSystemNumber,
+									DWORD dwSize, 
+									PBYTE pData);
+

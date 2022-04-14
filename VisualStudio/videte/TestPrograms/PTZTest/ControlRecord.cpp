@@ -1,0 +1,45 @@
+// ControlRecord.cpp: implementation of the CControlRecord class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "PTZTest.h"
+#include "ControlRecord.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+CControlRecord::CControlRecord(	int iCom,
+								BOOL bTraceAscii,
+								BOOL bTraceHex,
+								BOOL bTraceEvents)
+	: CWK_RS232(iCom, bTraceAscii, bTraceHex, bTraceEvents)
+{
+}
+//////////////////////////////////////////////////////////////////////
+CControlRecord::~CControlRecord()
+{
+}
+/////////////////////////////////////////////////////////////////////////////
+void CControlRecord::Destroy()
+{
+	Close();
+}
+/////////////////////////////////////////////////////////////////////////////
+void CControlRecord::InitialiseResponses()
+{
+}
+//////////////////////////////////////////////////////////////////////////////////////
+void CControlRecord::OnReceivedData(LPBYTE pBuffer,DWORD dwLen)
+{
+	// may be ignored, otherwise overwrite in derived class
+}
+/////////////////////////////////////////////////////////////////////////////
+void CControlRecord::ClearAllData()
+{
+	m_byaReceived.RemoveAll();
+}

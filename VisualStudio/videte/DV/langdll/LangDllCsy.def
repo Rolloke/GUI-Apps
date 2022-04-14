@@ -1,0 +1,7 @@
+; DVCsy.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVCsy"
+DESCRIPTION  'DVCsy Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

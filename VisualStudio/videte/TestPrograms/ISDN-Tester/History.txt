@@ -1,0 +1,13 @@
+/*@TOPIC{Test History|History,Tester}
+
+01.04.97 hajo -loop set to 20
+26.03.97 hajo -delete implemeted
+25.03.97 hajo CString FindHostNumberByName(const CString &sHostsname) const
+25.03.97 hajo g_lobals to CTesterApp::m_embers; + getfns();
+25.03.97 hajo CStringArray m_lpCmdLineArray; free from pointer oderso
+25.03.97 hajo -Loop added
+24.03.97 HEDU -verify added
+
+21.03.1997 begonnen
+*/
+

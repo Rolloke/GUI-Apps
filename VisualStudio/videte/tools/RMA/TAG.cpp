@@ -1,0 +1,34 @@
+// TAG.cpp: implementation of the CTAG class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "TAG.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+CTAG::CTAG(const CString& sTag, BOOL bClose/*=TRUE*/)
+{
+	printf("<%s>\n",sTag);
+	if (bClose)
+	{
+		int p = sTag.Find(' ');
+		if (p!=-1)
+		{
+			m_sTAG = sTag.Left(p);
+		}
+		else
+		{
+			m_sTAG = sTag;
+		}
+	}
+}
+//////////////////////////////////////////////////////////////////////
+CTAG::~CTAG()
+{
+	if (!m_sTAG.IsEmpty())
+	{
+		printf("</%s>\n",m_sTAG);
+	}
+}

@@ -1,0 +1,36 @@
+14.03.06 RKE- Es werden wieder alle Stellen  angezeigt.
+16.02.06 RKE- Bugfix 994: Zufallsalarme auf s geändert. ms werden als Nachkommastellen eingegeben.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+02.03.04 GF	- Umstellung auf Unicode und VS_71
+06.01.04 GF	- Bugfix 667: Ist kein Melder enabled, kann trotzdem Zufallsalarm ausgelöst werden, die Unit hängt dann
+03.06.03 GF	- Bugfix 468: Nach Software-Neustart werden die automatischen Alarme nur angezeigt, aber nicht gestartet
+			- Trace bei Start irgendeines automatischen Alarms und beim Ende des letzten Alarms zum Debuggen
+05.05.03 GF	- Melder Freigabe der Systemverwaltung wird berücksichtigt
+			- Es werden nur noch freigegebene Melder zufällig/regelmäßig ausgewählt
+			- Öffner/Schließer wird berücksichtigt (Melder sind als Öffner implementiert)
+30.04.03 GF	- SimUnit unterstützt 16 Inputs
+			- Max. Zufalls-Intervall- und - Halte-Zeit implementiert
+29.04.03 GF	- Einstellungen werden gespeichert
+			- Bugfix Fenstergroesse
+25.04.03 GF	- Zufällige bzw. regelmäßige Alarme implementiert
+14.11.02 GF	- Anpassung VS_70
+17.01.01 ML Die SimUnit darf doch nicht ins Systemtray, da sie dann im Shellmodus
+			nicht mehr zu erreichen ist.
+08.01.01 ML SimUnit Icon nun im SystemTray
+
+30.6.99 >>> UpdateVersion um 9:43 <<<
+02.5.99 ML Alarme bleiben nach einem Serverreset bestehen
+
+11.5.98 >>> UpdateVersion um 12:48 <<<
+11.5.98 ExceptionHandler via InitDebugger.
+
+26.3.98 >>> UpdateVersion um 15:24 <<<
+
+26.3.98 HD OemGui eingebaut.
+
+6.3.98 >>> UpdateVersion um 13:28 <<<
+6.3.98	HD Umbau auf Multithreaded CIPC
+
+17.11.97 History.txt begonnen

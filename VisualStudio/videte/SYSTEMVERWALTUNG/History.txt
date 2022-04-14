@@ -1,0 +1,920 @@
+30.08.06 RKE: - OnRequest(GS)etValue werden jetzt ueber Postmessage vom CIPC-Thread entkoppelt.
+              - Rotation und Compression koennen jetzt nachtraeglich geaendert werden.
+              - Kommunikation mit der IpCameraUnit gebugfixed.
+29.08.06 UF - Designa PM Abacus Wizard eingebaut, was ist mit den XML Daten?
+			- Bugfix IP Camera Unit kann jetzt auch Vollbild einstellen.
+28.08.06 RKE- Steuerung der IpCameraUnit verbessert.
+            - Einstellung von Rotation und Compression vorbereitet.
+24.08.06 UF - Bugfix die PTZ Preset Position wurde auf der Aktivierungsseite nicht mit kopiert, wenn
+			  der Melder per Doppelklick geaendert wird.
+18.08.06 UF - Bugfix die Checkbox Simunit ist jetzt auch wieder angehakt (if Professional falsch).
+10.08.06 UF - Die Speicherseite zeigt jetzt
+08.08.06 UF - Auf der Gegenstationsseite fehlt bei ML und IP die PIN Checkbox.
+27.07.06 TKR- Nach dem Start der SV wird geprueft, ob sich die Anzahl der im Dongle freigeschalteten
+		      Q-Unit Kameras (nach einer Freischaltung auf mehr Kameras) vergroessert hat. 
+		      Entsprechend wird die Anzahl der Q-Unit Kameras erhoeht.
+19.07.06 RKE- Trennen bestaetigen bei Gegenstationen in Misc. Page an abschaltbar.
+            - Schliessen von Benachrichtigungen mit Passwortabfrage abschaltbar s.o.
+11.07.06 RKE- Bugfix 156: Tooltips werden jetzt mit CICPCONConfigPage::GetToolTip(..) implementiert.
+10.07.06 RKE- Bugfix 159: Der Suchthread wird beendet, bevor eine Messagebox aufpoppt.
+            - Bugfix 158: Ressourcentexte fuer die Activation Page korrigiert, auch im Englischen.
+            - Bugfix 157: Ressourcentext ergaenzt und Tooltip angepasst.
+06.07.06 RKE- Erweiterte Einstellungen auf der Audioseite werden mit Professional Mode aktiviert.
+            - Die ICPCon Module koennen im Professional Mode konfiguriert werden (Moduladresse, Baudrate).
+22.06.06 TKR- Ring-Archive (ausser Sucharchiv) koennen nun dynamisch vergroessert werden. 
+22.06.06 TKR- Q Unit Videoausgaenge 1 oder 4, je nachdem, ob die VideoOutput Erweiterungskarte installiert ist. 
+21.06.06 TKR- Q Unit Page um AGC und Umschaltung JPEG/MPEG-4 erweitert.
+15.06.06 UF - Bugfix Q kann keine VHS Kameras.
+12.06.06 UF - Bugfix keine Kameras bei Q only.
+			- Zeitschaltuhr für Berechtigungsstufe eingebaut.
+07.06.06 UF - Q Unit Seite eingebaut, IP Kamera vorbereitet
+16.05.06 UF - Bugfix Timer Import Russisch.
+			- Waechterrundgang mit DWELL Time 0
+			- Virtuelle Melder auch als Blockschloss
+10.05.06 UF - Designa Wizard MD Aufzeichnung geht schon!
+05.05.06 UF - Text HTTP/FTP nach nur FTP geandert.
+04.05.06 UF - Alarmanrufprozesse mit sinnvollen Defaultwerten initialisiert.
+27.04.06 UF - Erneut Bugfix Aktivierungen wurden zuviel geloescht Nr 135.
+27.04.06 UF - Bugfix Aktivierungen werden nicht wirklich geloescht.
+24.04.06 RKE- Vorselektion der Designa PM100 Alarmlistenauswahl korrigiert.
+		    - Fehlermeldung Editieren von formatierten Zahlen (z.B:. Hex) erweitert, alte Zahl wird
+		      korrekt formatiert wieder eingetragen, damit man den Dialog wieder verlassen kann.
+		    - Bugfix 58/64: Relais duerfen nicht mit Alarmlisten verknuepft werden.
+21.04.06 RKE- Bugfix 101: Bei Umstellung der Sprache werden die ProzessMacro Namen uebersetzt:
+			  IDS_CHECK_CALL, IDS_IMAGE_CALL
+10.04.06 UF - Bugfix Aktivierungen bei Schneider Intercom, Designa verschwinden jetzt nicht mehr.
+20.03.06 RKE- Ressourcen Bitmaps ueberarbeitet, Wartung, Tasha, Verschiedenes.
+13.03.06 RKE- Bei einem downgrade zu einer Version mit weniger virutellen Alarmen gibt es einen Absturz.
+              Das passiert ab dieser Version nicht mehr, d.h. man kann zu dieser Version downgraden.
+07.03.06 RKE- Fehler beim Zeichnen der editierbaren Listen korrigiert.
+              "MD" bei den MD Meldern beim Wizard zur Kennzeichnung eingefuegt.
+              TODO! in russischer Ressource entfernt.
+02.03.06 RKE- Toolbar wurde Vista faehig gemacht.
+27.02.06 RKE- Wenn das Einlesen der Registry (remote bzw. Lokale Datei) fehlschlaegt, so wird der lokale
+              Registryzweig wieder geladen, so dass die importierten Einstellungen lokal keine Schaden
+              anrichten koennen.
+21.02.06 RKE- Einstellungsseite für "Verschiedenes" (Miscellaneous) implementiert. Im Professional Modus koennen
+			  jetzt sehr schnell weitere Registryeinstellungen eingebaut werden.
+07.02.06 RKE- Bugfix 76: GP gab es bei den virtuellen Meldern, wenn mehr gespeichert waren, als in der Version
+              angezeigt werden duerfen.
+06.02.06 TKR- Bugfix 68: Strasse im Wartungsdialog nun korrekt als Straße.
+30.01.06 RKE- Die Com Ports werden jetzt zentral verwaltet.
+25.01.06 TKR- Maintenance Dlg ist freigeschaltet.
+24.01.06 RKE- Ressourcentexte fuer RuntimeErrors korrigiert.
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+19.01.06 RKE- Bugfix 1035: Import der Registry kann jetzt auch exotische Typen wie REG_MULTI_SZ etc..
+              virtuellen Alarm fuer Luefterdrehzahl eingebaut.
+17.01.06 RKE- virtuelle Alarme fuer Temperatur, SmartParameter und Festplattenausfall eingefuegt.
+13.01.06 RKE- Bugfix 999: Ein zugeordneter Backuprozess wird jetzt auch nach Rueckfrage geloescht.
+11.01.06 UF - Feature Waechterundgang kann jetzt auch Trennen ein/ausschalten, default ist Trennen an.
+11.01.06 RKE- Bugfix 1001: Gegenstationsliste kann jetzt auch DNS Namen, wenn DNS aktiv.
+10.01.06 RKE- Bugfix 1022: SDI Page kann jetzt scrollen.
+06.01.06 RKE- SetCursel bei SDI Designa comboboxes implementiert.
+			- Databasefieldpage kann jetzt teilweise editierbare fields.
+			- Bugfix 1015: Der Standardname kann wieder gesetzt werden.
+05.01.06 RKE- Bugfixes:
+			  - 1021: Die Extras im CInput wurden nicht korrekt gespeichert und gelesen, daher
+			    waren die Parameter fuer einen Vergleich unbrauchbar.
+			  - 1018: Prozess mit sz gibt es nicht mehr.
+05.01.06 UF - Bugfix Alarmlistenprozess wird nur angezeigt, wenn auch eine Alarmliste vorhanden ist.
+04.01.06 RKE- Bugfixes:
+			  - Cursor bei ListenComboBox ist wieder sichtbar.
+			  - Tastensteuerung und Selektionsanzeige der Liste verbessert.
+			  - in Pretranslate Message werden nur noch die zum Fenster gehoerenden Nachrichten
+			    behandelt.
+			  1006: Eine leere Liste wird nicht mehr validiert.
+			  1005: Tooltips erstellt.
+			  1004: Tooltip erstellt.
+			  1003: DNS geht nicht bei TCP oder UDP Sockets
+30.12.05 UF - Seiten fuer Coco, AKU und alte Fieldmap geloescht.
+30.12.05 UF - Bugfix Gruppenname wurde fuer die SDI Melder nicht uebernommen.
+29.12.05 UF - Designa PM100 XML und Schneider Intercom implementiert, Datenbankfelder automatisch.
+28.12.05 UF - Konfigurierbare Alarme fuer Designa fertig. Datenbankfelder fehlen noch.
+16.12.05 TKR- Bugfix 983: Archivtyp "Alarmliste" wird nun bei Auswahl des Archivs
+			  "Suchergebnisse" disabled.
+14.12.05 UF - Alarmliste ist einzurichten :-).
+05.12.05 TKR- Bugfix: 972: Maintenance Dlg an die Aufloesung 1024*768 angepasst.
+30.11.05 RKE- Die Serial Alarm Page kann jetzt UDP Schnittstellen hinzufuegen.
+28.11.05 RKE- Bugfix: eine importierte SV kann jetzt wieder mit Speichern unter gespeichert werden.
+22.11.05 TKR- Wartungsseite komplett eingebaut, auch in release sichtbar.
+21.11.05 RKE- Russiche Uebersetzuing der Wartungsseite eingefuegt.
+			  Bugfix: 964: GetComputerNameEx Funktionspointer wird jetzt aus der kernel32.dll geladen.
+21.11.05 TKR- Wartungsseite bis jetzt nur in Debug. 
+			  Erstellen des System Reports implementiert.
+11.11.05 TKR- Das Anzeigen einer Instruction Seite fuer den Errichter vorbereitet.
+04.11.05 RKE- Wizard fuer die automatische Aktivierung von Kameras, MD Meldern und Archiven fertigestellt.
+02.11.05 RKE- Auf der LanguagePage wurde eine Combobox fuer die Auswahl des Keyboards bei Programstart eingefügt.
+			  Weiterhin sind alle auf dem Betriebssystem installierten Keybords auswaehlbar.
+			  Somit kann jetzt das Start Tastatur Layout erzwungen werden.
+31.10.05 RKE- Bugfix 953: Die Systemverwaltung schickt jetzt PostMessage(hwndClient, WM_COMMAND, 0, 0) an
+			  den IdipClient, wenn in der Systemverwaltung ein Mausclick oder ein Tastaturclick ausgeloest wird.
+17.10.05 RKE- Eine Auswahl fuer ein automatisches Backup der letzten 24 Stunden in den Backup Dlg integriert.
+17.10.05 RKE- Bei einer Netzwerkverbindung koennen die Paramter Domaene, User und Passwort jetzt 
+              nachtraeglich geaendert werden.
+06.10.05 TKR- Wartungsseite erstellt, Daten des Errichters werden gelesen und geschrieben.
+			  Wartungsseite ist disabled.
+04.10.05 TKR- Begonnen, die Page fuer die Service Intervall Routine einzubauen. Ist zurzeit
+			  auskommentiert.
+29.09.05 RKE- Die DrivePage kann jetzt Netzwerklaufwerke anlegen und loeschen.
+16.09.05 RKE- Device Detection fuer Joystick und MemorySticks eingebaut.
+15.09.05 RKE- Zusaetzliche System und Hardware Informationen ermittelt und dargestellt.
+12.09.05 RKE- Bugfix: 929: Tooltips fuer Quadrantenteiler implementiert.
+31.08.05 RKE- Bugfix: 920: Alle auf dem Keyboard vorhandenen Keyboards koennen jetzt eingestellt werden.
+			  Bugfix: 919: Der localHostname wird jetzt vor dem pruefen der Archive gespeichert. Bei
+			  bestehenden Archiven werden die Namen verglichen und bei Aenderung gespeichert.
+22.08.05 RKE- OpenDirectory C:\Out wird jetzt aus der Registry gelesen (CF).
+16.08.05 RKE- Bugfix 913: Schrift wird wieder auf Standardschrift gesetzt, Fontgrößen werden disabled.
+			  Bugfix 895: Falsches Ctrl wurde gelesen.
+			  Bugfix 890: Tooltip eingefuegt.
+08.08.05 RKE- Bugfix 0 en auf Kamera und Relaisseite.
+04.08.05 RKE- Bugfix 895, 896: Die Language Page hat die Parameter nicht korrekt abgespeichert.
+			  - LanguageAbbreviation statt CodePageNummer gespeichert. 
+			  - Bei Standardeinstellungen den falschen Schluessel geloescht.
+			  Da mehrere Sprachen dieselbe Codepage bzw. dieselben CodePagebits haben, werden
+			  diese jetzt zusammengefasst.
+13.07.05 UF - Bugfix 903 Berechtigungstufe Archivfunktionen
+05.07.05 ML - Bugfix 855: Die maximale Länge der Meldernamen von 32 Zeichen auf 64
+			  erhöht, da zumindest ein virtueller Meldername im englischen mehr als 32 Zeichen
+			  besitzt.
+05.07.05 TKR- Bugfix 871: Sofern Videoout Prozesse fuer Tasha, Savic oder Jacob bestehen, werden
+			  diese beim deaktivieren der jeweiligen Karte gelöscht.
+29.06.05 UF - Die Videoout Seite berücksichtig jetzt auch den Quad.
+28.06.05 UF - Neue Seite für Quads eingebaut.
+23.06.05 RKE- Bugfix 866: Die SV importiert jetzt die Einstellungen, legt den IdipClient Schluessel im Laucher wieder an
+              und veranlasst den IdipClient die Settings neu zu laden. Dieser loescht dann den Vision und Recherche Key
+              nachdem er die relevanten Settings aus Ihnen gelesen hat.
+22.06.05 UF - Star Interface Konfiguration für die Fingerabdruck Zutrittskontrolle
+			  von IDTeck eingebaut.
+16.06.05 RKE- LanguagePage für Spracheinstellungen eingebaut.
+			- Joystick Page für Konfiguration des Joysticks eingebaut.
+			- Übersetzung der Ressourcen ins Englische.
+			- Aktualisieren der russischen und italienischen Ressourcen.
+13.06.05 ML - Bugfix 855: Meldernamen auf 32 Zeichen begrenzt.
+02.06.05 RKE- Ueberarbeitung der russischen Resourcen Texte eingefuegt.
+30.05.05 RKE- Bugfix 757: Ressourcentexte korrigiert.
+27.05.05 RKE- Bugfix 679: Ressourcentexte korrigiert.
+24.05.05 RKE- Bugfix 820: Es fehlten die Languagedateien im Image, kein SW-Bug
+			  Bugfix 779: Allgemeine Message ID aus Wächterrundgang verwendet.
+			  Bugfix 821: Abfrage implementiert, wenn Aktivierungen vorhanden, löschen der Aktivierungen implementiert.
+26.04.05 ML - Bugfix 824: MD-Melder sind nun nicht mehr als Blockschloss verwendbar.
+15.03.05 RKE- Bugfix 712: Werden die Infos zu den Meldern, Kameras oder Benachrichtigungen remote geaendert, so koennen Sie
+			  jetzt durch Aufrufen der Systemverwaltung mit dem Parameter -updatelangdepends: erzeugt werden.
+			  Bei Umschalten der Sprache ruft der Launcher die gleiche Funktion auf, um HTML- und Registryeintraege
+			  anzupassen.
+07.03.05 ML - Bugfix 776: Auf Transmittern soll nicht auf der Systempartition gespeichert werden dürfen.
+02.03.05 RKE- LogPath wird jetzt aus CIPC funtkion GetLogPath() gelesen.
+25.01.05 RKE- Bugfix 733: Die Ueberpruefung laesst jetzt auch Kombinationen zu, Leerzeichen werden immer entfernt, da der
+			  Prozess diese nicht richtig interpretiert.
+24.01.05 RKE- Bugfix 728: Der neue Nutzer wird jetzt mit der schon vorhandenen Funktion SelectUser(..) korrekt initialisiert.
+20.01.05 RKE- Bugfix 721: Email, SMS und Fax: Pineingabe disabled, weil nicht nötig.
+			  Bugfix 682: Wenn man nach Namen sortiert, ist die Verwirrung nicht so gross.
+			  Bugfix 713: Backslash wird in OnChange verhindert.
+20.01.05 UF - Bugfix Tasha kann keine VHS Kameras.
+14.01.05 RKE- Bugfix 689: Audiounit wird jetzt geprüft.
+11.01.05 RKE- In der Camerapage werden die PTZ Namen und die neueste PTZ IDNummer jetzt aus der CIPC abgefragt.<h2></h2>
+26.11.04 RKE- Die Namen für Input- und OutputGroups wurden an zwei verschiedenen Stellen zusammengebastelt:
+			  In CXputList::AddXputGroup(sName, ...) und in GetGroupName(...). Das fuehrte zu unterschiedlichen Namen und somit
+              zu Fehlern. Groups mit festem Namen werden jetzt ausschliesslich in GetGroupName benannt. Dazu wird in
+              CXputList::AddXputGroup(NULL, ...) kein Name mehr uebergeben und im Konstruktor der Group der Name anhand
+              der uebergebenen SharedMemoryNamen uebergeben.
+17.11.04 ML - Bugfix 573: Tooltip in der Englischen Resource auf der 'Guardtour-Page' ergänzt
+30.09.04 RKE- Bugfix: USBPage zerstoert jtzt keine fonts mehr.
+29.09.04 RKE- Bei Verbindung (Remote Setup) mit einer Unicode Gegenstation können werden die Daten jetzt in Unicode
+			  empfangen werden. Dies wird dann von der Gegenstation bestimmt, ist aber standardmaessig Unicode.
+			  Eine alte Gegenstation wird immer MBCS bzw, Ansi verwendet.
+			  Die SV-Daten werden jetzt auch in Unicode abgespeichert und geladen, damit keine Informationen verlorengehen.
+			  Hat die Gegestation einen anderen Zeichensatz (Russisch), wird automatisch die Fonts fuer die Sprache
+			  und die Keyboardlayouts geladen. Diese koennen mit F11 umgeschaltet werden.
+			  Nach Ende der Verbindung werden (wenn noetig) die alten Fonts und Keyboardlayouts wiederhergestellt.
+08.09.04 RKE- Bugfix 540: Das neue erstellte Objekt wird jetzt explizit nochmal selektiert.
+01.09.04 RKE- Bei Sprachen, die einen anderen Font benoetigen wird der Font ermittelt und ueber die Skins erstellt
+			  und an die ChildWindows der Dialoge weitergeben.
+27.08.04 RKE- Bugfix 530: Auf der Hostpage wurde die Pineingabe für alle neuen Idip Produkte aktiviert.
+23.08.04 RKE- Bei Remoteverbindung ueber !Unicodestationen geroutet, wird jetzt zusaetzlich nochmal nachgefragt, ob
+			  die Gegenstation Unicode kann, da die Information der naechsten Gegenstation beim routen von der
+			  Endstation abweichen kann.
+23.08.04 RKE- SetMonitor verbessert, so dass jetzt bei Umschalten auf einen anderen Monitor die Zustaende fuer
+			  maximierte und normale Dartellung des Fensters uebereinstimmen.
+23.08.04 RKE- Multimonitorpage speichert jetzt den Wert	fuer Recherche nicht mehr in die Registry.
+		      Beim Umschalten des Monitors fuer die SV muss jetzt nicht mehr initisalisiert werden.
+12.08.04 UF - Noch ein paar Sachen für die Demo disabled.
+11.08.04 UF - Demo Stuff eingebaut, keine Gegenstationen,Socket,Autologout.
+06.07.04 RKE- Bugfix 432: Anpassung der Namen der Units (Tasha, Jacob, Savic, USB Alarmbox) an die Sprache korrigiert.
+              Bei der Numerierung der Units war erste ok, dann 2 => 3, 3=> 4 usw. Numerierung stimmt jetzt.
+28.06.04 RKE- Donglefunktionen hinzugefuegt:
+			  AllowMultiMonitor -> MonitorPage disabled, aut. Anzeige auf 2. monitor verhindert
+			  AllowTimers		-> TimerPage disabled
+			  GetNrOfHosts		-> Anzahl der Hosts begrenzt (0 : unbegrenzt)
+28.06.04 ML - Die JaCobUnit schreibt in die Registry ein Flag, ob Terminierung softwareseitige
+			  schaltbar ist. Die Systemverwaltung liest nun dieses Flag, und disabled es ggf.
+23.06.04 RKE- Bugfix 170: Registry Import Export auch bei unicode.
+			  Die Registry wird jetzt immer als Ansi abgespeichert (bei CHS, RUS spaetestens MBCS)
+			  Bugfix 269, 270: Remote Registry auch mit Unicode / !Unicode
+			  CIPC Verbindungs Objekte wurde nicht ueber die Codepage der Gegenstation informiert.
+21.06.04 RKE- Bugfix 373: Sprachabhaengigkeit fuer Standard Texte eingebaut.
+17.06.04 RKE- Bugfix 363: Texte mit 'Vision' wurden durch 'IdipClient' ersetzt.
+			  Registryeintraege aus Vision\\Settings wurden in IdipClient\\Settings geaendert.
+15.06.04 UF - Bugfix Anzahl der Melder Tasha, Bugfix Videoout Seite bei nur Tasha nicht zu sehen.
+11.06.04 RKE- Bei Aenderung der MultiMon Einstellungen, wird auch IdipClient upgedatet.
+11.06.04 UF - Die Terminierung der Kameras kann jetzt geschaltet werden.
+07.06.04 UF - Die SV zeigt jetzt die Melder/Camera Standardnamen in Deutsch/English.
+19.05.04 GF	- Bugfix DEBUG Assertion bei Aufruf der InputPage
+				CStatic im OwnerDraw-Stil erzeugt seit MFC 7.1 eine Assertation, wenn die Funktion DrawItem nicht ueberschrieben wird
+				Wird das OwnerDraw woanders implementiert, darf dann nicht mehr die Basisklassen-Funktion aufgerufen werden
+				Hat(te) keine Auswirkung in Release, da nur reines Assert()
+17.05.04 GF	- Abfrage User Alarm angepasst
+04.05.04 GF	- Bugfix englische Resourcen
+04.05.04 GF	- Bugfix Multi-Monitor-Page alte / neue Version
+30.04.04 GF	- Multi-Monitor-Page an idipClient angepasst
+22.04.04 UF - Tasha Page eingebaut.
+30.03.04 GF	- Bugfix 901: Es ist nicht möglich ein neues Datenbankfeld anzulegen
+17.03.04 UF - Bugfixes Wechselfestplatte.
+11.03.04 RKE- Fuer das MSDev2003 wurden die Resourcen in eine Extra Sprachen-Dll ausgelagert.
+              Die Sprachen Dll hat den gleichen Namen wie die Anwendung mit dem Zusatz durch die
+              laenderspezifischen Sprachabkuerzungen: SystemVerwaltungXXX.dll
+05.03.04 RKE- Bugfix 872: Die Selektierung wird zwischengespeichert, geloescht und wieder gesetzt.
+03.03.04 RKE- Bugfix 868: War ne merkwürdige Abfrage, die das verhindert hat.
+			  if ((uChanged | TVIF_STATE) == TRUE)
+			  und jetzt : if (uChanged & TVIF_STATE)
+27.02.04 RKE- Bugfix 862: Beim neu Anlegen werden die Groups jetzt erst als disabled angelegt.
+26.02.04 GF	- Umstellung auf Unicode und VS_71
+24.02.04 RKE- Bugfix 838 Winlogon wird jetzt in dem temporaeren Zweig "Winlogon" unter DVRT exportiert bzw. importiert.
+              Bugfix 839 Zeitliche deaktivierung wird nur importiert, wenn es importiert werden darf.
+19.02.04 RKE- Bugfix 849: Das Loeschen der Aktivierungen wird zuerst nur als Flag gespeichert und erst in Input/Output::Save durchgefuert.
+13.02.04 RKE- Bugfix 847: Lautstaerkeregler in AudioPage eingebaut.
+13.02.04 RKE- Bugfix 834/835: Es wird jetzt gewarnt, wenn Aktivierungen da sind und wenn gewollt, geloescht.
+09.02.04 GF	- Bugfix 832: Remote-SV: Wenn der Timeout zuschlaegt, bleibt der Remote-Dialog mit der Meldung "Verbunden" und Progress-Ctrl mit Vollausschlag stehen.
+09.02.04 GF	- Bug 829 Workaround: Der Remote-Timeout kann in der Registry mittels "RemoteTimeoutSeconds" eingestellt werden
+06.02.04 RKE- Audiokanal Aktiv wird jetzt unter dem Wert "Active" gespeichert. Der Defaulteintrag des Schlüssels wird nicht mehr benutzt,
+              da er Remote nicht übertragen wird
+05.02.04 GF	- Nur 2 WK_Traces und MilliSekunden-Trace-Moeglichkeit ueber DVRT/Debug "TraceMilliSeconds" hinzugefuegt
+04.02.04 GF	- Bugfix 828: SDIPage, Konfiguration, Beispiel an Com einlesen. Beim Beenden hängt das Program.
+02.02.04 GF	- Bugfix 819: Ohne Berechtigung auf die SV koennen trotzdem die Audiokanaele konfiguriert werden.
+				- Audio ist über System (Hardware) gekoppelt
+				- Generell wird die Systemverwaltung nur noch geoeffnet, wenn 'echte' SV-Berechtigungen vergeben werden
+				  ('Unecht' sind z.B. Shutdown, Datensicherung, PTZ-Konfiguration u.a.)
+28.01.04 UF - Fuer die Savic laesst sich jetzt ein Rauschfilter ein und ausschalten.
+27.01.04 RKE- Bugfix 809: Checkbox fuer Mithören wird disabled, bei Wiedergabe.
+26.01.04 RKE- DeviceChange Nachricht für HardwareItems ausgewertet. Betrifft USB-Geräte.
+26.01.04 RKE- Subclassing fuer Timerdialog TimerTestDialog fuer alle OS ausser WinNT40 enabled
+22.01.04 RKE- Subclassing der Pegelanzeigen AudioPage für alle OS ausser WinNT40 enabled
+21.01.04 RKE- Bugfix 545: Feldnamen im Listenheader werden jetzt groestenteils aus vorhandenen Dialog
+              controls generiert, ueberfluessige Stringdefs wurden aus der Resource entfernt.
+20.01.04 UF - Alle Yuta durch Alarmbox ersetzt. Relaisseite jetzt wieder resizable, damit die
+			  Namen auch zu lesen sind.
+19.01.04 RKE- Bugfix 774: Wenn die Audiounit aktiviert wird, wird der Anzeigenbaum nicht aktualisiert um den Punkt "Audiokanäle" dies erfolgt erst
+              nach Neustart der Systemverwaltung. Der Melder zu der Audiounit wird auch erst nach schließen und nachfolgenden Öffnen des
+			  "Melder/Blockschlösser" Baumes sichtbar.
+			  Wird nach dem Speichern aktualisiert. Beim Ausschalten wird jetzt auch der Speicher Button wieder aktiv.
+19.01.04 RKE- Bugfix 769: Wenn alle Audioeingänge disabled sind, so kann es auch keinen Melder geben: Melder wird jetzt gelöscht
+16.01.04 RKE- Bugfix 754 UpDown controls Audiokanäle implementiert
+15.01.04 UF - Yuta probeweise in Release freigeschaltet.
+13.01.04 GF	- Englisch: Relay statt Relais
+07.01.04 GF	- Bugfix 666: 2x Schreibfehler in Tooltips (u.a. GuardTour/Bilder speichern)
+07.01.04 UF - Bugfix 701 Auf dem Receiver geht die Audiopage nicht mehr
+05.01.04 GF	- Bugfix 640: Schreibfehler 'zeors' in der engl. Resource - jetzt aber wirklich behoben
+05.01.04 RKE- Funktion CheckActivationsWithOutput(CSecID outID, int nIDMsg) wurde in die Basisklasse
+			  CSVPage eingebaut. In Outputpage und Relaispage wurde diese Funktion auskommentiert.
+			  Vorhandene Aktivierungen mit Kamera und Relais testen.
+05.01.04 RKE- Bugfix 693: Beim Deaktivieren der AudioUnit wird jetzt gefragt, ob die vorhandenen Aktivierungen gelöscht werden sollen.
+17.12.03 UF - Bugfix 681: Die Archive werden auf der Aktivierungsseite bei Audiospeicherung nicht in der Liste angezeigt.
+16.12.03 TKR- Bugfix 665: Schreibfehler bei Tooltipp "Speicherprozesse, bei voller Zeitdauer..."
+			  Bugfix 666: Schreibfehler bei Tooltipp im Wächterrundgang behoben.
+24.11.03 GF	- Bugfix 640: Schreibfehler in der engl. Resource
+24.11.03 GF	- Datenbankfelder: Länge bei 'Datum' und 'Zeit' fest vorgegeben, Reihenfolge getauscht
+19.11.03 GF	- Bugfix 615: Nach löschen sämtlicher Touren werden die Checkboxen der Hosts nicht resetet, hold entire time bleibt enabled
+12.11.03 UF - Feature: Es laesst sich die Zeitdauer von Alarmanrufen einstellen, 0 ist unendlich.
+12.11.03 UF - Feature: Es lassen sich die Berechtigungen fuer Audioobjekte einstellen.
+23.10.03 UF - Feature: Es lassen sich jetzt Audioaufnahmeprozesse einstellen.
+17.10.03 GF	- Feature Datenbank-Felder: Die ID der frei definierbaren Datenbank-Felder ist jetzt ebenfalls konfigurierbar.
+13.10.03 RKE- Audiopage control updates gebugfixed
+09.10.03 GF	- Bugfix 579: Beim ersten Speichern wurden die Kameras nicht korrekt übernommen, es kam zur Fehlermeldung
+08.10.03 GF	- Bugfix 578: Wird der Standard-Name eines festen DB Feldes mittels Button wiederhergestellt,
+						  wird der Name nicht korrekt übernommen, dafür sind Länge und Typ änderbar
+07.10.03 GF	- Bugfix 541, 543, 565: Diverse Schönheitsreparaturen
+06.10.03 GF	- Bugfix 546: Wenn kein Timer vorhanden ist, kann man trotzdem den Namen eingeben
+			- Bugfix 547: Timer-Test-Dialog zusätzlicher Test-Button
+02.10.03 RKE- CAudioPage und CUSBCamPage eingefügt, um die AudioUnit und die USBcamUnits eingefügt.
+              Die Pages können über den Dongle aktiviert werden. Die Implementation in anderen Modulen
+			  ist aber noch unvollständing und nicht getestet, daher nur zu Testzwecken aktivieren!
+02.10.03 GF	- Bugfix 568: Während der Konfiguration des Rundgangs, kommt es immer wieder vor, dass die Eingabefelder
+						  disabled werden.
+			- Bugfix 572: Neue Prozesse lassen sich nur einrichten , wenn Remote-Stationen eingetragen sind.
+						  Andererseits kann man dann aber auch die lokale Station einbinden. Inkonsequent.
+						  Plädiere für erlaubt auch bei nur lokalel Station.
+			- Bugfix 573: Nach dem Speichern stehen keine Kameras mehr im (freigegebenen) Eingabefeld,
+						  da keine Station mehr ausgewählt ist. Das irritiert
+18.09.03 GF	- Bugfix 554: Datenbank ohne Berechtigung System nicht konfigurierbar
+						  Im Baum wurden Datenbank und SDI in die oberste Ebene verschoben
+12.09.03 GF	- Bugfix 537: Prozess 'VideoAusgang' nur, wenn JaCob oder SaVic erlaubt ist
+09.09.03 GF	- Datenbank-Felder nur, wenn SDIUnit erlaubt ist
+08.09.03 GF	- JaCobPage: Bei PostMessage(JACOB_OPEN_MD_DLG, 0, (LPARAM)hWnd) wird der Parent im LPARAM mitgeliefert,
+						 um den Dialog auf dem richtigen Monitor darstellen zu können
+			- SaVicPage: VideoNorm Default-Wert auf PAL geändert, da dies der z.Z. einzig unterstützte Wert ist
+28.08.03 GF	- Datenbank-Zweig in den System-Zweig vor Software-Zweig verschoben, um die sinnvolle Reihenfolge einzuhalten
+			- Seite "Suchmaske" auskommentiert, da Funktion in "Datenbank-Felder" enthalten
+27.08.03 GF	- Feature: Frei konfigurierbare Datenbankfelder "Datenbank - Datenbankfelder" implementiert
+20.08.03 GF	- Bugfix 507 Reloaded: Werden mehrere Aktivierungen markiert und anschließend gelöscht, fliegt die SV weg.
+18.08.03 GF	- Bugfix: 512: Gegenstations-Liste wird beim Löschen von Gegenstations-Archiven nicht aktualisiert
+08.08.03 GF	- PTZ-Protokoll Baxall für Release freigegeben
+04.08.03 GF	- Bugfix 506: Beim Anlegen eines Neuen VideoOut-Prozesses wird ein Standardname vorgegeben
+			- Bugfix 507: Werden mehrere Aktivierungen markiert und anschließend gelöscht, fliegt die SV weg
+			- Bugfix 509: Wird ein neues Archiv angelegt, sind das markierte UND das neue Archiv markiert,
+						  somit werden die Änderungen für beide Archive vorgenommen.
+01.08.03 GF	- Englische Uebersetzung ueberarbeitet
+			- Mehrfachselektion auf der Archivseite (bereits seit 599)
+25.07.03 GF	- VideoOutPage implementiert
+			- VideoOut-Prozesse bei den Aktivierungen hinzugefügt
+16.07.03 RKE- bugfix 480: Gegenstationsliste in GuardTourPage sortierbar. Ausgewählte Gegenstationen
+              erscheinen immer oben in der Liste in der zuvor festgelegten Reihenfolge. Alle nicht
+			  ausgewählten liegen darunter unsortiert.
+15.07.03 RKE- GuardTourPage: weitere Tabellenspalten eingefuegt.
+			  Mehrfachselektion und Aenderung der Tabellenzeilen jetzt möglich.
+14.07.03 RKE- AktivationPage: Mehrfachselektion und Aenderung der Tabellenzeilen jetzt möglich.
+18.06.03 ML - Ist die SaVicUnit deaktiviert, so sollen alle Controls disabled sein und nicht nur die
+			  hälfte der Controls
+18.06.03 ML - Da die SaVic z.Z. nur PAL unterstützt sind die entsprechenden Punkte
+			  auf der SaVic-Seite (AUTO, NTSC) bis auf weiteres disabled.
+27.05.03 RKE- Bugfix 431: Logindialog erscheint jetzt auf dem aktuellen Monitor.
+30.04.03 GF	- SimUnit unterstützt 16 Inputs
+23.04.03 GF	- Neue PTZ-Protokolle in Debug: Fastrax II und Baxall
+			- COutputDialog::GetCameraControlFunctions() in CIPC verlagert
+22.04.03 GF	- Bei einigen konfigurierbaren Protokollen werden die Standartwerte automatisch beim Anlegen eingetragen
+17.04.03 GF	- Neues SDI-Protokoll ACT ab 4.6 implementiert
+16.04.03 GF	- Neues SDI-Protokoll Microlock ab 4.6 implementiert
+14.04.03 Uf - Bugfix Aktivierungen ohne Output verschwanden, wenn eine neue Gruppe angelegt wurde.
+08.04.03 UF - Auf der Hostseite laesst sich jetzt auch fuer idip 4,8,16,32 die PIN fuer DTS/VDR/SDR einstellen.
+07.04.03 UF	- Bugfix 412: Guardtour-Page: Loeschen war noch nicht implementiert.
+07.04.03 GF	- Bugfix 403: Guardtour-Page: In der Gegenstationsliste sollten nur "Kamera"-Gegenstationen aufgelistet werden
+04.04.03 GF	- Multi-Monitor-Page Modulnamen OEMisiert
+03.04.03 GF	- Multi-Monitor-Mode implementiert
+			- Multi-Monitor-Page implementiert
+02.04.03 GF	- GuardTourPage implementiert, Beta-Status
+01.04.03 ML - Die SaVic-Page beläßt nun den Eintrag 'StoreField'.
+27.03.03 GF	- Bugfix 390 Ändert man in der Remote Systemverwaltung die Laufwerke und macht dieses dann rückgängig,
+						 so werden plötzlich die lokalen Laufwerke dargestellt.
+			- Bugfix 393 Gegenstationen können nicht mehr über den Löschbutten gelöscht werden.
+			- Bugfix 394 Wird ein Melder geaendert, gespeichert und wieder geaendert, so wird der Speicherbutton
+						 nicht wieder enabled. Es muss vor dem 2. Aendern erst eine andere Seite aufgerufen werden
+20.03.03 UF - Bugfix 380 Auf der Berechtigungsseite wird 'PTZ Konfiguration' fuer den Supervisor nicht disabled.
+		 GF	- Bugfix 376 Beim TimerTestDialog kann nicht gescrollt werden
+18:03:03 gf	- Bugfix 350: Beim Löschen einer Gegenstation wurden trotz Zustimmung nicht alle Archive gelöscht
+			- Beim Löschen einer Gegenstation wurden auf Abfrage alle Prozesse, Aktivierungen und Archive SOFORT bereinigt,
+			  Bei "Rückgängig" wurde nur die nackte Gegenstation wiederhergestellt.
+17.03.03 GF	- Bugfix 342: Archiv-Page nur freigegeben, wenn Laufwerk(e) eingerichtet wurde(n)
+13.03.03 GF	- Nur die Combobox SDI-Protokolle verlängert
+12.03.03.GF	- Bugfix 336: Kameraauswahl kein Scrollbalken zum auswählen der Kameras 13-16
+11.03.03 GF	- Neue virtuelle Funktion CSVPage::OnIdleSVPage() implementiert,
+				damit die Seiten ggf. auch "online" aktualisiert werden können
+05.03.03 UF - neues Berechtigungstufenflag, Konfiguration und Positionsdefinition von Schwenkneigern
+04.03.03 GF	- Bugfix 331: Prozesse wurden nicht eingelesen und in Folge gelöscht
+03.03.03 UF	- Feature für PTZ-Kameras: Automatische Position bei Verbindungsende. Z.Z. nur Debugmodus
+31.01.03 UF	- Bugfix Suchmaske war nicht im Empfaenger einstellbar.
+31.01.03 GF	- Fieldmap um folgende Eintäge bereinigt:
+				Vorgangsnr, Kundennr, Vorname, Nachname, Fachnr
+			- GAA-Unit endgültig entfernt
+30.01.03 GF	- Bugfix 312: GP, wenn ins leere Feld der Liste geklickt und anschließend ein neuer Eintrag hinzugefügt wurde
+20.01.03 UF - Check Box fuer Motion Detection auf der Savic Seite entfernt. Bug Nr. 304
+17.01.03 GF	- Email-Page überarbeitet
+09.01.03 GF	- SaVicPage um Auflösung erweitert, Werte werden als DWORD in der Registry
+				unter "FrontEnd - CaptureSizeH" gespeichert (768 oder 384)
+			- idip Bugfix 299: User "idipservice" wurde in der Registry gespeichert - und in der SV aufaddiert
+			- Hostpage um PIN erweitert, nur bei Receiver und Project
+08.01.03 GF	- Spezieller User "idipservice" implementiert
+			- Bugfix 297: Input-Page, fehlerhafte Anzeige durch virtuellen Melder "Zeitliche Deaktivierung" korrigiert
+20.12.02 GF	- SaVic im Tree System/Hardware eingebunden
+16.12.02 GF	- ISDNPage: Tooltip für die Liste der erlaubten Anrufer erweitert
+29.11.02 GF	- Anpassung VS_70
+15.11.02 GF	- SaVic Page eingebaut
+18.10.02 GF	- Bugfix 279: Eine neu eingetragene Aktivierung sollte in der Liste auch als aktuell angezeigte sichtbar gemacht werden (scrollen)
+15.10.02 GF	- Bugfix 275: SMSPage: Sicherheitsabfrage für "Eigene Nummer", muss eingetragen werden.
+10.09.02 UF - Bugfix Relaisseite Halten oder Pegelsteuerung bedingen jetzt Unterbrechung.
+06.09.02 GF	- Bugfix 254: Auf der SMS Seite wird die eigene Rufnummer nicht disabled,
+			  wenn die SMS Unit ausgehakt wird
+			- Archive & Laufwerke: Wenn die Archive den Plattenplatz übersteigen,
+			  wird in der Warnmeldung die Übergröße angezeigt
+04.09.02 GF	- SMSPage: Eigene Nummer editierbar
+30.08.02 GF	- Bugfix 231: Führende Nullen bei IP Adressen
+29.08.02 UF - Es kann jetzt die Videonorm zwischen Auto PAL und NTSC gewechselt werden.
+26.08.02 GF	- Bugfix 212: PTZ ohne Hersteller/Modell oder Schnittstelle wird nicht abgefangen
+23.08.02 GF	- JaCob-Page: Beim Deaktivieren der Bewegungserkennung erfolgt eine Sicherheitsabfrage.
+21.08.02 GF	- Begrenzung auf 8 Kameras entsprechend Dongle-Flag
+19.08.02 GF	- Permissionpage: Archive: BD beinhaltet Bi
+14.08.02 GF	- Bugfix 188: Flags für Berechtigung 'Im-/Export' und 'Sicherheit' waren vertauscht
+						  Enablen der Toolbar bzw. Checkbox korrigiert
+13.08.02 GF	- Bugfix 196: Input/Outputs: Scrollen wird als Veränderung fehl interpretiert
+07.08.02 GF	- Bugfix 185: Timer Mo-Fr und Sa-So werden korrekt angezeigt
+			- Bugfix 186: Gleichnamige Timer unterbunden
+			- Bugfix 188, 190: Flags für Berechtigung 'Im-/Export' und 'Sicherheit' waren vertauscht
+06.08.02 GF	- Bugfix: SVView: CheckCallProcess initializiert, wenn Page erlaubt;
+							  Er steht sonst nicht zur Verfügung, bevor man die
+							  CheckCallPage nicht mind. einmal aufgerufen hat
+			- Bugfix: ActivationPage: Relaisprozesse immer verfügbar, auch wenn keine anderen Prozesse erstellt werden
+05.08.02 UF - Der Waechterrundgang laesst sich zu Testzwecken in der Registry
+			  unter Systemverwaltung-ShowGuardTour einschalten.
+			  Bitte noch keine Bugs reporten, da Alphastatus.
+03.08.02 GF	- Bugfix Nr.178 Sind bei einem täglichen Timer zwei Zeitspannen eingestellt,
+							so werden es immer mehr Zeitspannen, wenn man die Seite wechselt.
+02.08.02 UF - Es laesst sich in DEBUG ein Waechterrundgang einstellen.
+			  Erst einmal nur zu Testzwecken.
+01.08.02 GF	- Kameras: Neue Protokolle VCL Camera und VCL MaxCom
+24.07.02 GF	- Bugfix Nr.139 Einem Archiv kann kein Laufwerk zur Speicherung zugewiesen werden
+23.07.02 GF	- Bugfix Nr.132 Bei den Timern wird jetzt auf korrektes Datum inkl. Schaltjahr geachtet
+22.07.02 GF	- Bugfix Nr.145 Doppel-Login bei nur einem echten User wird beim Speichern abgefangen
+			- Bugfix Nr.146 Ist bereits ab Build 487 behoben
+			- Bugfix Nr.147 Timer-Edit-Fenster öffnet sich durch Doppelklick auf Time-Span-Liste,
+				obwohl Edit-Button disabled.
+22.07.02 UF idip Bugfix Nr.155 Bei der englischen idip-Version stuerzt die Systemsteuerung nach Aufruf ab.
+04.07.02 GF	Timer überarbeitet und ergänzt
+			- Zeitspannen Täglich, Mo-Fr, Sa-So hinzugefügt
+			- Neue Zeitspanne kann sofort editiert werden, ist am Anfang leer
+			- Sicherheitsüberprüfung beim Speichern
+			- TimerTestDlg wird jetzt korrekt upgedatet
+23.01.02 UF Bugfix Software Zweig in der Systemverwaltung laesst sich nur
+			noch bearbeiten, wenn man die System Berechtigung hat.
+19.11.01 UF Diverse Bugfixes und Ergaenzungen in der englischen Version.
+07.11.01 UF Englische Uebersetzung fertiggestellt
+07.11.01 UF ISDN Es lassen sich jetzt Prefix und Laenge der Rufnummer
+			fuer den Prefix einstellen.
+24.10.01 UF Bugfix: TO3000, es wurde keine Gegenstationsseite angezeigt
+18.10.01 UF Bugfix: Bei der Timerprogrammierung waren die Tasten Editieren etc
+			bei einer graden Anzahl an Zeitspannen deaktiviert.
+16.10.01 UF Bugfix: Remote Systemverwaltung loescht jetzt nicht mehr
+			alle Einstellungen auf dem Sender, die Systemverwaltung ist zu erneuern,
+			also der Empfaenger!
+28.09.01 GF	Beschränkungen für IPC_TO3000_PROTOTYPE jetzt in CSVView::InitTree
+27.09.01 GF	Beschränkungen für IPC_TO3000_PROTOTYPE:
+			- Keine Gegenstationen (CMainframe::InitHost)
+			- Laufwerke und Archive alle Eingaben disabled (EnableXXX)
+26.09.01 GF	- Bugfix: RemoteSystemverwaltung stürzte beim Holen ab
+03.08.01 GF	- Bugfix: CTimerEditorpage SpanEditor Eingabe Jahreszahl überarbeitet
+			- Bugfix: dito Wechsel zwischen Timespan und CombiZeiten
+18.07.01 GF	- InputPage und InputDlg: Zeitliche Deaktivierung eingebaut
+11.04.01 GF	- Bugfix: Archiv Page: Länge des Archivnamens auf 250 Zeichen beschränkt,
+			                       sonst Müll in Recherche
+			- Englische Texte überarbeitet
+28.03.01 GF	UserPage: Alarm gilt nicht als SuperVisor
+28.12.00 GF	SDIConfigurationDialog ListCtrl Klicks außerhalb abgefangen,
+			 Selektion bleibt erhalten
+30.10.00 GF	SpecialReceiver Version weiter beschränkt:
+			- Keine Buttons für Remote Verbindung
+31.10.00 RM Bugfix Email Systemverwaltung. Beseitigung einiger Schönheitsfehler
+30.10.00 GF	SpecialReceiver Version weiter beschränkt:
+			- Keine Verbindung für Remote
+			- Anlegen von Archiven verhindert (nur Gegenstationsarchive sind zugelassen)
+27:10:00 GF	Erste Version für SpecialReceiver (TOBS, DTS)
+24.10.00 GF	ProductName von Dongle auf OemGui umgestellt
+21.08.00 UF neue TeleObserver Page
+09.08.00 ML Bugfix: Der MD-Dialog der JaCob wird wieder geöffnet.
+03.07.00 ML Da die JaCob nun keine Squaremodi mehr unterstützt und die Videonorm
+			(Pal/Ntsc) selbst erkennt, sind die entsprechenden Punkte auf der JaCob-Page
+			verschwunden.
+14.06.00 GF	Bugfix Remote Systemverwaltung:
+			Empfangen und Senden funktioniert jetzt wieder
+07.06.00 RM	Email Unit um US-English Dialog erweitert
+28.05.00 RM	Email Unit hinzugefügt
+17.04.00 GF	CHostPage: Archive lassen sich bei einzelnen Hosts einrichten
+11.04.00 UF E-Mail und FAX auf CHostPage hinzugefügt
+11.04.00 GF	JaCobPage: MotionDetection verdongelt
+05.04.00 GF Neues CIPCFetch eingebaut und Workaround entfernt
+04.04.00 GF	Workaround gegen GP bei Abbruch des Remote-Verbindungs-Aufbaus
+04.04.00 GF Vorring für Ringarchive aber nur ab Version 4.2 (falls remote)
+04.04.00 UF	Vorring auch für Ringarchive
+29.03.00 GF	Bugfix: GP bzw. Absturz beim Abbruch der Remoteverbindung behoben
+18.10.99 ML Die Gegenstationsliste im Menü auf 9 Einträge begrenzt, da Hex-Zahlen
+			unschön sind
+05.10.99 ML Die Datumsangaben in den Zeitschaltuhren werden nun auf unsinnige
+			Zeichen hin überprüft.
+04.10.99 ML Das Suchergebnisarchiv und die Hostarchive können nun auf der Backup-
+			prozeßseite als zu sicherndes Archive ausgewählt werden, oder spricht
+			etwas dagegen. (Siehe Mail von Stefan vom 27.9.99)
+04.10.99 ML Auf der MiCoPage ist nur noch die MiCoISA einstellbar.
+04.10.99 ML Bugfix HostPage: Beim Anlegen einer neuen Gegenstation wurde der Focus
+			nicht auf die neue Gegenstation gesetzt!
+			Die Nummerierung der Gegenstationen erfolgt nun dreistellig, da sie
+			sonst nicht korrekt sortiert wurden. (1, 10, 11....)
+30.09.99 >>> UpdateVersion um 12:34 <<<
+30.09.99 GF Bugfix Zeitschaltuhren
+			Bei Aufruf der Seite wurde der erste Timer nicht in der Liste markiert.
+			Beim Löschen wurde dann zwar das Objekt zerstört, aber der Listeneintrag
+			blieb erhalten.
+			Wurde dann auf den Listeneintrag zugegriffen (er wurde markiert,
+			manuell oder automatisch beim Löschen eines anderen),
+			so wird damit auf das nicht mehr existierende Objekt zugegriffen.
+09.09.99 ML Bug in CPermissionPage::FlagsToCheckBox fixed. SetCheck funktioniert unter
+			Win95 nur mit 0 oder 1 als Parameter
+07.09.99 ML Beim Import von Zeitschaltuhren, wird nur noch vor dem Überschreiben
+			gewarnt, wenn doppelte Einträge vorhanden sind.
+07.09.99 ML Ein zusätzlicher virtueller Alarm (Daueralarm)
+31.08.99 >>> UpdateVersion um 16:07 <<<
+
+31.08.99 >>> UpdateVersion um 15:34 <<<
+		 GF	SDI Ascom, Rondo, Dialogbank ab 4.1 freigeschaltet, Depros nur in DEBUG
+
+30.08.99 >>> UpdateVersion um 12:25 <<<
+30.08.99 GF	SDI Ascom, Rondo hinzugefuegt, ab 4.1 freigeschaltet
+			SDI Depros, Dialogbank hinzugefuegt, ab 4.1 freigeschaltet, auskommentiert
+30.08.99 ML Das Funkuhrmodul kann nun angegeben werden.
+19.08.99 >>> UpdateVersion um 14:25 <<<
+19.08.99 UF  GemosPage hinzugefuegt.
+18.08.99 UF  Bugfix Checkboxen auf Berechtigungsseite gehen jetzt wieder alle
+17.08.99 ML  Die JaCobUnit unterstützt nun keine CoVi-Karten
+17.08.99 ML	 Datumsangaben werden nun wieder korrekt in den Zeitschaltuhren angezeigt.
+			 Ursache war eine falsche Taborder der Radiobuttons im TimerSetDialog
+17.08.99 >>> UpdateVersion um 11:44 <<<
+
+17.8.99 >>> UpdateVersion um 10:41 <<<
+17.08.99 GF InputPage jetz resizable
+			Outputpage max. Anzahl auf 12 erhoeht
+12.07.88 ML Die JaCob verfügt nun über 16 zusätzliche MotionDetection (MD) Alarme
+07.07.99 UF Bestätigung für Melder als Porträt und HzG, sowie
+			für Position/Länge übernehmen eingebaut.
+07.07.99 UF BugFix
+			Die Melder HzG und Porträt können jetzt nur noch dann
+		    übernommen werden, wenn auch ein Datensatz ausgwählt
+			wurde.
+6.7.99 >>> UpdateVersion um 9:46 <<<
+06.07.99 UF Die Tooltips sind jetzt abschaltbar, einige
+			Tooltips in der Rechtschreibung korrigiert.
+2.07.99	 ML Die ISDN-Page und die Socket-Page bieten nun die Möglichkeit
+			der Übernahme der Gegenstationsliste
+1.7.99 >>> UpdateVersion um 17:51 <<<
+01.07.99 GF	SNI DOS COM hinzugefuegt und ab 4.1 freigeschaltet
+17.06.99 UF Nachdem die Sicherheit verändert wurde, gilt das dann nur
+			für neu angelegte oder veränderte Nutzer.
+15.06.99 UF Berechtigungstufen koennen jetzt Nutzer nach Prioritaet
+			loeschen,
+			Die Brechtigungstufe des Nutzers Alarm ist wieder editierbar.
+2.6.99 >>> UpdateVersion um 13:18 <<<
+02.06.99 GF	Beim Austragen einer Hardwarekarte wurden nicht die Aktivierungen mit den
+			Outputs entfernt, beim naechsten Mal war dann das ganze System durcheinander
+31.05.99 ML In CUserPage::Initialize muß das UserArray neu geladen werden, damit
+			nach einem Wechsel der Page (Ohne Speicherung) ein evtl. neu
+			eingetragener User wieder aus dem UserArray gelöscht wird.
+27.05.99 ML Eine JaCobPage hinzugefügt. Sie ist nur zu sehen, wenn die JaCob im Dongle
+			freigeschaltet ist. (Der SharedMemoryname ist noch der gleiche wie bei der
+			MiCoUnit)
+21.5.99 >>> UpdateVersion um 14:26 <<<
+21.05.99 GF	Userpage: Ein User darf nur noch andere User seiner Permission bearbeiten
+17.5.99 >>> UpdateVersion um 8:15 <<<
+18.05.99 UF	IBM StatusResponse geaendert auf die DTP-Werte,
+		    da der GA auf die bisherigen Werten nicht reagiert
+11.5.99 UF  neue Felder in Suchmaskenseite
+11.5.99 UF  AVM Kundentresor und PC 400 bei 4.1 freigeschaltet
+06.5.99 ML  Die Berechtigungsstufe 'ReferenzbildVergleich' ist nu in der Garny-Version
+			ab Version 4.1 sichtbar.
+			Tooltip auf der SecurityPage erweitert.
+21.4.99 ML  Neue Berechtigunsstufe 'Referenzbildvergleich' hinzugefügt.
+21.4.99 >>> UpdateVersion um 9:06 <<<
+16.4.99 ML  PAL_SQUARE geht nun auch mit der MiCoPCI, der entsprechende Punkt
+			läßt sich nun wieder anwählen
+15.4.99 ML	Die MiCoUnit wird nun bei bedarf sanfter beendet. Nicht mehr
+		   	mit WM_CLOSE.
+31.3.99 >>> UpdateVersion um 17:03 <<<
+
+31.3.99 >>> UpdateVersion um 15:06 <<<
+
+30.3.99 >>> UpdateVersion um 17:56 <<<
+29.03.99 UF normal Archiv und Alarmarchiv jetzt auch für lokale
+			Station
+24.3.99 >>> UpdateVersion um 16:29 <<<
+24.03.99 GF Tooltips abgeschlossen
+			DrivePage (EnableControls und Bugfix beim Rueckgaengig machen)
+24.03.99 ML Einige Strings, die direkt im Quellcode standen in die Resource übertragen.
+24.03.99 ML Noch ein Bugfix auf der TCP/IP-Page
+24.03.99 UF Bugfix TCPIP Seite
+17.3.99 >>> UpdateVersion um 9:34 <<<
+17.03.99 GF Bugfix, ISDN-Page, Radiobuttons Rufannahme,
+			alle Buttons liessen sich markieren, korrigiert
+16.3.99 >>> UpdateVersion um 11:06 <<<
+16.03.99 UF BugFix nach beenden der Verbindung wurde nicht wieder die
+			lokale Station geladen.
+			Bugfix ISDN Seite war bei remote verbindung sofort modified
+			falsche Taborder
+12.02.99 UF RC0
+10.03.99 ML Die ISDN-Page enthält nun eine Hostliste, in der Gegenstationsnummern
+			eingetragen werden können. Die ISDN-Unit nimmt nur Rufe entgegen, die
+			sich in dieser Liste befinden
+10.03.99 ML Die Trivialliste ist nun in der Registry. Dies war für die
+			Remotesystemverwaltung notwendig.
+09.3.99	ML	Die Trivialliste kann nun aus der Secutity-Page herraus bearbeitet werden.
+09.3.99	ML  Das Relay4 war immer eingeschaltet, sobald der Störmelder nicht
+			aktiviert war.
+03.3.99 ML  Beim Speichern auf der MiCopage wurde unter bestimmten Umständen
+			ein IRQ von 0 gespeichert.
+02.3.99 ML  Der TCP-Test auf der SocketPage geht nicht Remote!
+01.3.99 ML	Die MiCo-, CoCo-, AKU-Page besitzen nun alle Tooltips.
+1.3.99 >>> UpdateVersion um 16:52 <<<
+01.3.99	GF	Meldernamen bei ISD werden je nach Protokoll vorgegeben.
+01.3.99 ML	Kleiner Bug auf der Archivepage beseitigt. (Voralarm für ein Vorlarmarchive
+			geht natürlich nicht)
+01.3.99 ML  Das 4. Relay der 1. MiCo heißt nun Störungsmelder, wenn der
+			Störungsmelder aktiviert ist.
+01.3,99 ML  Blokschlösser mit virtuellen Alarmen gibt's nicht mehr.
+			Virtuelle Alarme sind defaultmäßig ausgeschaltet.
+25.2.99 ML	Die Meldung 'Anzahl der virtuellen Alarme hat sich geändert...' kommt
+			nun nicht mehr sobald ein virtueller Alarm deaktiviert wurde.
+22.2.99 ML  Auf der Aktivierungsseite werden nur noch die lokalen Archive
+			gezeigt.
+19.2.99 ML	Wenn der Störmelder an/aus geschaltet wird, wird nun das Relay4
+			korrekt deaktiviert/aktiviert.
+15.2.99 ML  Anstatt des Hinweises, daß die MiCoUnit neu gestartet werden muß,
+			wird sie nun von der Systemverwaltung beendet.
+08.1.99 ML	Ein neuer virtueller Alarm hinzugefügt (60%-Archive voll)
+		ML  Sobald sich die Anzahl der virtuellen Alarme ändern sollte,
+			wird eine Meldung ausgegeben, und die Inputgruppe neu angelegt.
+08.1.99	ML	Die Aufforderung des Neustartes der MiCoUnit, erfolgt nun
+			nur noch, wenn die MiCoUnit gestartet ist.
+08.1.99 ML	Die MiCoPCI hat nur 8 eigene Videoeingänge sobald mindestens
+			eine CoVi angeschlossen ist.
+28.1.99 >>> UpdateVersion um 13:13 <<<
+28.1.99 HD Timer Import/Export komplett.
+27.1.99 ML  Paßwort und Minimallängen sind auf WK_PASSWORDLEN begrenzt.
+27.1.99	ML  Benutzernamen dürfen nur noch aus Ziffern und Buchstaben bestehen,
+			damit die es keine Probleme beim Speichern und Laden aus der Registry gibt.
+			Ebenso werden bei Paßworten nur noch Ziffern und Buchstaben zugelassen.
+22.1.99 >>> UpdateVersion um 12:35 <<<
+22.1.99 HD	KombiZeitschaltuhren mit RekursionsCheck.
+23.1.99	NL	Vergabe von Benutzerrechte maximal < eigene Rechte
+23.1.99 ML	Die Mindestlänge und die Mindestanzahl der Ziffern und Buchstaben
+			sowie das Verfallsdatum eines Paßwortes wird nun in der Registry
+			abgespeichert.
+21.1.99	ML	Es besteht nun Paßwortzwang! Neue Paßworte müssen mindestens
+			5 Zeichen lang sein und mindestens 2 Ziffern und 2 Buchstaben
+			enthalten.
+21.1.99 ML Datenexport-Checkbox auf der Permissionpage wurde nicht disabled.
+19.1.99 >>> UpdateVersion um 15:02 <<<
+19.1.99 HD combi timer mit Editieren und Abspeichern.
+15.1.99	ML  Die 2. ISDN(PT)-Unit kann nur aktiviert werden, wenn die 1.
+			eingetragen wurde.
+			Die 1. ISDN(PT)-Unit läßt sich nur entfernen, wenn die 2.
+			nicht eingetragen ist.
+
+15.1.99 >>> UpdateVersion um 11:01 <<<
+15.1.99 HD TimerTestDialog mit Date- and Timepicker.
+12.01.99 ML Der Button 'Beide Halbbilder nutzen' auf der MiCo-Page
+		 wurde nicht disabled, wenn die MiCo deaktiviert wurde.
+12.01.99 ML	Die MiCo-Page speichert nun unter SecurityServer\\MiCoFPSx
+			(x=1...4) die geforderte Framerate (25 oder 50), je nachdem
+			ob ein oder zwei Halbbilder benutzt werden sollen.
+11.01.99 ML Zweite ISDN-Page eingebaut
+11.01.99 ML Zweite PT-Page eingebaut.
+11.01.99 ML Weitere virtuelle Alarme eingebaut (Inzwischen sind es 17)
+8.1.99 >>> UpdateVersion um 11:23 <<<
+08.01.98 HD FeiertagsGUI fertiggestellt.
+8.01.99 ML Virtuelle Alarme in die Systemverwaltung eingebaut.
+
+3.12.98 >>> UpdateVersion um 13:27 <<<
+	GF	Bugfix bei konfigurierbaren ISD-Protokollen
+			Fehler bei Oeffnen der COM-Schnittstelle abgefangen
+3.12.98 >>> UpdateVersion um 12:34 <<<
+	GF	Interface Serial Data, NCR_NEW hinzugefuegt, konfigurierbar
+26.11.98 HD AlarmBestaetigung dropped, was hidden anyway.
+25.11.98 >>> UpdateVersion um 16:51 <<<
+
+19.11.98 >>> UpdateVersion um 12:49 <<<
+19.11.98 HD alte TimerPagedropped.
+17.11.98 HD/UF Neue CTimerPage.
+	UF	Mico 2 Dongle Bug behoben
+14.10.98 >>> UpdateVersion um 13:52 <<<
+	UF neue Geschwindigkeiten in der Socket
+	8MBit, 4MBit, 2MBit, 1MBit
+14.10.98 >>> UpdateVersion um 12:54 <<<
+
+14.10.98 >>> UpdateVersion um 12:51 <<<
+14.10.98 UF CoolBar eingebaut
+14.10.98 HD DownArrow in der ActivationPage.
+2.10.98 >>> UpdateVersion um 12:10 <<<
+02.10.98 HD Activation Konvertierung komplett.
+		HD \AR%0x fuer die ArchivID in der registry.
+01.10.98 HD ActivierungsSeite mit "Archiv"
+		HD InputToOutput mit GENAU einem Archiv als destination.
+		HD SVDoc mit m_pSingleInstance.
+18.8.98 >>> UpdateVersion um 14:46 <<<
+18.08.98 HD TCP/IP Test auf der SocketPage
+	vervollstaendigt. Haengt davon ab, das ping.exe
+	sich im PATH befindet.
+11.8.98
+	ML	Autoscrolling in den Listboxen der Prozeßseiten
+6.8.98 HD SocketPage mit TCP/IP Test
+		Macht ein `ping 127.0.0.1` .
+5.8.98 >>> UpdateVersion um 9:05 <<<
+	UF	Gegenstationen, Nutzer, B-Stufen, Aktivierungen
+		passen sich der Groesse des Fensters an. ;-)
+	UF	Alle Seiten jetzt von CWK_Dialog abgeleitet
+		Damit Tooltips moeglich
+22.7.98 >>> UpdateVersion um 13:02 <<<
+	GF	- SDIConfigurationDlg: Waehrung wird noch nicht unterstuetzt
+21.7.98 >>> UpdateVersion um 15:40 <<<
+	GF	- SDIConfigurationDialog als Beta fertig
+10.7.98 >>> UpdateVersion um 12:34 <<<
+	UF	Suchmaskenseite fuer den Datenbankclient
+10.7.98 >>> UpdateVersion um 9:32 <<<
+	UF	Unterstuetzung fuer Expert mouse CLOCK
+		Funkuhr eingebaut.
+9.7.98
+	ML	Nach Änderungen innerhalb der Aku-Page und in
+		der CoCo-Page wird der Benutzer nun aufgefordert
+		die AkuUnit bzw CoCoUnit neu zu starten. Bei Änderung
+		des CoCo-IRQ's oder CoCo-Basisadresse wird der Benutzer
+		nun aufgefordert Windows neu zu starten.
+9.7.98 >>> UpdateVersion um 15:35 <<<
+	GF	- CashSystem, EntryControl und Industrial getrennt verdongelt
+		- Neue Protokolle in der SDIDialog eingetragen (IBM, German Parcel)
+		- IBM: zusaetzlichen Konfigurationsdialog begonnen
+9.7.98
+	ML	Die AkuPage speicherte die Basisadressen falsch
+		in die Registry.
+9.7.98
+	ML Relais Plus8 steht nun auch unter WinNT zur Verfügung.
+8.7.98 >>> UpdateVersion um 11:50 <<<
+	UF	Routing Trennzeichen ist jetzt #
+7.7.98 >>> UpdateVersion um 12:43 <<<
+	UF	Routing in der Gegenstationsseite unterstuetzt.
+7.7.98
+	ML	Hinweis bei der Aktivierung beider Halbbilder
+7.7.98
+	UF	2. Mico verdongelt
+		HTML Notification verdongelt
+6.7.98
+	ML	Nach Änderungen innerhalb der MiCo-Page, wird
+		der Benutzer nun aufgefordert die MiCoUnit neu
+		zu starten.
+3.7.98
+	ML	'Beide Halbbilder benutzen' in der MiCo-Page
+		eingebaut.
+2.7.98
+	ML	Default-Eintrag steht auf PAL_CCIR
+
+29.6.98 >>> UpdateVersion um 12:22 <<<
+	UF	RS232 Transparent, ISD und GA koennen keine
+		COM mehr doppelt benutzen.
+25.6.98
+	GF	Beim Interface Serial Data neues Protokoll (Pasador) hinzugefuegt
+
+25.6.98 >>> UpdateVersion um 15:47 <<<
+	UF	Bug Stoermelder wurde ausgeschaltet,
+		wenn man auf der Mico oder Coco Seite etwas aendert.
+25.6.98 >>> UpdateVersion um 12:05 <<<
+	UF Bug Zeitschaltuhren nicht richtig initialisiert.
+		Aktivierungsseite enthaelt keine extra Zeile
+		fuer die ausgewaehlte Aktivierung mehr.
+24.6.98
+	ML AKU-Page überarbeitet.
+23.6.98
+	ML	AKU-Karte unterstützt nun nurnoch 8 anstatt
+		16 Basisadressen.
+	ML	MiCo/CoCo können keine gleichen Resourcen
+		mehr verwenden
+	ML	CoCo-Page überarbeitet.
+	UF	SDI in Interface Serial Data umbenannt.
+22.6.98 >>> UpdateVersion um 18:01 <<<
+	UF	Hilfe aus der Oberflaeche entfernt
+22.6.98 >>> UpdateVersion um 16:39 <<<
+22.6.98
+	ML	Alle Einstellungen, die die MiCo
+		betreffen, werden auf ihre Gültigkeit
+		überprüft. Das gilt auch für den 2Karten-
+		betrieb.
+19.6.98 >>> UpdateVersion um 14:11 <<<
+19.6.98
+	ML	Die Systemverwaltung unterstützt nun 2 MiCos
+		(Muß d.Z. noch über MiCo2=1 in SV.cfg aktiviert
+		werden.)
+18.6.98
+	ML	In der Inputpage,Outputpage und Relaypage
+		das Scrollen verbessert.
+11.6.98 >>> UpdateVersion um 16:37 <<<
+	UF	Erweiterter HTML Export fuer Stoerungsmeldungen
+11.6.98 >>> UpdateVersion um 15:34 <<<
+	UF	Klasse CProcess aufgerauemt
+2.6.98 >>> UpdateVersion um 13:09 <<<
+	GF	SDIDialog NCR auf 3 Alarme erweitert
+11.5.98 >>> UpdateVersion um 13:05 <<<
+	UF	ExceptionHandler in InitDebugger
+7.5.98 >>> UpdateVersion um 17:31 <<<
+	UF	Neues MicoUnit Icon
+5.5.98 >>> UpdateVersion um 15:14 <<<
+	UF  keine Winter- Sommerzeit Umstellungsseite unter NT
+		siehe Launcher
+28.4.98 >>> UpdateVersion um 12:32 <<<
+	UF  Mico Seite Button richtig grau
+		Seitenwechsel Bug behoben
+22.4.98 >>> UpdateVersion um 10:12 <<<
+	UF	SVHS bei MicoUnitPCI wieder richtig gespeichert.
+16.4.98 >>> UpdateVersion um 10:16 <<<
+	UF	MicoUnit.ini wird nicht mehr unterstuetzt
+2.4.98 >>> UpdateVersion um 13:21 <<<
+
+20.3.98 >>> UpdateVersion um 10:15 <<<
+20.3.98
+	UF	Registry umgebaut auf CWK_Profile
+		fuer NT und Remote Systemverwaltung
+18.3.98
+	ML	Einen Checkbutton in der MiCoPage für
+		die individuelle Farbeinstellung dazu
+		gepackt.
+16.3.98 >>> UpdateVersion um 12:30 <<<
+
+	UF	CoVi Bug beim Abspeichern in MicoUnit.ini
+		CocoIsa.ini behoben.
+		ueberschreiben von Mico Werten mit den CoVi
+13.3.98 >>> UpdateVersion um 11:12 <<<
+13.03.98
+	HD Unspace() durch TrimRight() ersetzt.
+	(war nur bei ISDN- und PT- Page)
+11.03.98
+	HD HTML mit BackgroundImage fuer die CeBit
+
+03.03.98
+	UF	HTML Handlungsanweisungen eingebaut
+		pro Melder sind drei Saetze HAW erlaubt
+		werden mit Autor und Zeitstempel versehen
+		in der Registry abgelegt und als HTML
+		exportiert, z.Z. nur, wenn
+		in c:/sv.cfg Instruction=1 steht
+
+23.2.98 >>> UpdateVersion um 12:25 <<<
+	UF	ID Steuerung fuer Panasonic freigeschaltet
+
+19.2.98 >>> UpdateVersion um 18:35 <<<
+
+19.2.98 >>> UpdateVersion um 17:01 <<<
+19.02.98
+	UWE		Mico Einstellungen fuer MiCoPCI eingebaut
+			Einstellungen werden in die Registry
+			geschrieben, wenn die Datei mico\micounitpci.exe
+			existiert.
+			Damit MicoEinstellungen unter NT moeglich.
+
+17.2.98 >>> UpdateVersion um 14:39 <<<
+17.02.98
+	UWE		Bug CoVi Relais und Melder beseitigt
+16.02.98
+	UWE		Neue Funktion fuer Berechtigungsstufen eingebaut
+			System herunterfahren
+10.02.98
+	UWE		PT Unit B3 Seite bug bei Checkbox ein/aus
+			korrigiert
+09.02.98
+	UWE		NT Auto Login Page hinzugefuegt
+	UWE		SN  auf GetCommPortInfo umgestellt.
+	UWE		SDI Seite  auf GetCommPortInfo umgestellt.
+	UWE		GA Seite auf GetCommPortInfo umgestellt.
+	UWE		RS232 Transparent Seite auf GetCommPortInfo
+			umgestellt.
+22.1.98 >>> UpdateVersion um 17:06 <<<
+22.01.98
+	UWE		SDI Konfiguration in Berechtigungststufe eingebaut
+
+19.01.98
+	Georg	SDIDialog Listeintrag Keba PC2000 -> portachec 2000
+			portachec 2000 hat jetzt 2 Melder
+
+13.01.98
+	Georg	SDIUnitPage Datenueberpruefung bei Speicherung erweitert
+			SDIDialog um Kommentar erweitert
+
+17.12.97 >>> UpdateVersion um 13:36 <<<
+	GEORG	SDIUnitPage Keba hinzugefuegt
+			Bug bei nicht ausgewaehltem Protokoll entschaerft
+
+15.12.97 >>> UpdateVersion um 8:27 <<<
+
+	UWE		Bug in Aktivierungsseite Speichern
+			von OK - Relais Prozessen beseitigt
+
+25.11.97 >>> UpdateVersion um 10:52 <<<
+25.11.97
+	UWE		Bug CoVi8 (Video Plus8) behoben.
+
+24.11.97 >>> UpdateVersion um 10:12 <<<
+24.11.97
+	UWE		Oeffner Bug (wird nicht abgespeichert) behoben, ebenso Bestätigung
+
+18.11.97 >>> UpdateVersion um 14:43 <<<
+18.11.97
+	UWE		FBAS/SVHS korrigiert
+
+14.11.97 >>> UpdateVersion um 11:31 <<<
+
+6.11.97 >>> UpdateVersion um 17:56 <<<
+
+5.11.97 >>> UpdateVersion um 14:38 <<<
+
+4.11.97 >>> UpdateVersion um 16:07 <<<
+04.11.97
+	UWE  ISDN und PT Einstellungen jetzt in Systemverwaltung
+
+03.11.97 >>> UpdateVersion um 17:16 <<<
+
+03.11.97
+	UWE  Datenbankeinstellungen von Systemverwaltung aufrufbar,
+		 Einstellungen weiter im DataBaseServer
+
+29.10.97
+	UWE	 SocketUnit Einstellungen jetzt in SystemVerwaltung
+
+21.9.97
+	HEDU void CMicoPage::LoadMiCoAddressAndIRQ() modifiziert, resets von m_bXXX entfernt
+	HEDU PTUnitPage added, analog zu ISDNPage

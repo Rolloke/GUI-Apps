@@ -1,0 +1,15 @@
+#TIMER#
+Oeffungszeiten:Mo:02:30-04:00 ,mo:08:00-12:00 ,MO:14:00-17:00 ,DI:08:00-12:00 ,DI:14:00-17:00 ,MI:08:00-12:00 ,MI:14:00-17:00 ,DO:08:00-12:00 ,DO:14:00-17:00 ,FR:08:00-12:00 ,FR:14:00-15:00
+Wochenende (tagsueber):SA:06:00-18:00 ,SO:06:00-18:00
+Wochenende (nachts):SA:17:00-00:00 ,SO:18:00-00:00
+Unsere Feiertage: -Wochenende (nachts), -Wochenende (tagsueber), /Wochenende (nachts), /Wochenende (tagsueber)
+Mittags:MO:5:0-6:0,MO:13:00-14:00 ,DI:13:00-14:00 ,MI:13:00-14:00 ,DO:13:00-14:00 ,FR:13:00-14:00
+KombiTest1 (Auch Mittags): +Mittags
+KombiTest2 (Auch nachts): +Oeffungszeiten, +Nachts
+Nachts:MO:19:00-00:00 ,DI:18:00-00:00 ,MI:18:00-00:00 ,DO:18:00-00:00 ,FR:18:00-00:00
+KombiTest3 (Mittags): +Mittags
+KombiTest4 Mittag-Mittag: +Mittags, -KombiTest3 (Mittags)
+KombiTest6 (restricted by 10-11): +Oeffungszeiten, -KombiTest1 (Auch Mittags), /Oeefnugszeiten (nur 10-11)
+Oeefnugszeiten (nur 10-11):MO:10:00-11:00 ,DI:10:00-11:00 ,MI:10:00-11:00 ,DO:10:00-11:00 ,FR:10:00-11:00
+HeiligAbend:24.12.****:08:00-14:00
+Foo2:MO:8:00-9:00

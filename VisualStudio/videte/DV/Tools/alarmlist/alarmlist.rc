@@ -1,0 +1,230 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\alarmlist.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\alarmlist.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ALARMLIST_DIALOG DIALOGEX 0, 0, 121, 222
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_DISPLAY_TITLE,"Button",BS_OWNERDRAW | BS_LEFT | 
+                    BS_FLAT | WS_TABSTOP,7,5,81,13
+    CONTROL         "",IDC_DISPLAY_BORDER,"Button",BS_OWNERDRAW | BS_FLAT | 
+                    WS_TABSTOP,1,1,91,20,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Up2",IDC_UP2,98,1,22,20
+    PUSHBUTTON      "Up",IDC_UP,98,26,22,20
+    LISTBOX         IDC_LIST,1,22,92,105,LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | 
+                    LBS_NOINTEGRALHEIGHT | WS_TABSTOP
+    PUSHBUTTON      "1",IDC_CAM0,7,130,18,16
+    PUSHBUTTON      "2",IDC_CAM1,28,130,18,16
+    PUSHBUTTON      "3",IDC_CAM2,49,130,18,16
+    PUSHBUTTON      "4",IDC_CAM3,70,130,18,16
+    PUSHBUTTON      "5",IDC_CAM4,7,148,18,16
+    PUSHBUTTON      "6",IDC_CAM5,28,148,18,16
+    PUSHBUTTON      "7",IDC_CAM6,49,148,18,16
+    PUSHBUTTON      "8",IDC_CAM7,70,148,18,16
+    PUSHBUTTON      "9",IDC_CAM8,7,166,18,16
+    PUSHBUTTON      "10",IDC_CAM9,28,166,18,16
+    PUSHBUTTON      "11",IDC_CAM10,49,166,18,16
+    PUSHBUTTON      "12",IDC_CAM11,70,166,18,16
+    PUSHBUTTON      "13",IDC_CAM12,7,184,18,16
+    PUSHBUTTON      "14",IDC_CAM13,28,184,18,16
+    PUSHBUTTON      "15",IDC_CAM14,49,184,18,16
+    PUSHBUTTON      "16",IDC_CAM15,70,184,18,16
+    PUSHBUTTON      "Activity",IDC_ACTIVITY,7,205,18,16
+    PUSHBUTTON      "Extern 1",IDC_EXTERN1,28,205,18,16
+    PUSHBUTTON      "Extern 2",IDC_EXTERN2,49,205,18,16
+    PUSHBUTTON      "Down",IDC_DOWN,98,104,22,20
+    PUSHBUTTON      "Down2",IDC_DOWN2,98,128,22,20
+    PUSHBUTTON      "Image",IDC_IMAGE,98,153,22,20
+    PUSHBUTTON      "Drucken",IDC_PRINT,98,176,22,20
+    DEFPUSHBUTTON   "OK",IDOK,98,201,22,20
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MFC-Anwendung alarmlist\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "alarmlist\0"
+            VALUE "LegalCopyright", "Copyright (C) 2001\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "alarmlist.EXE\0"
+            VALUE "ProductName", "Anwendung alarmlist\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ALARMLIST_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 120
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 221
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_ENTER               BITMAP  DISCARDABLE     "res\\enter.bmp"
+IDB_UP                  BITMAP  DISCARDABLE     "res\\up.bmp"
+IDB_DOWN                BITMAP  DISCARDABLE     "res\\down.bmp"
+IDB_PRINT               BITMAP  DISCARDABLE     "res\\print.bmp"
+IDB_ACTIVITY            BITMAP  DISCARDABLE     "res\\activity.bmp"
+IDB_EXTERN1             BITMAP  DISCARDABLE     "res\\extern1.bmp"
+IDB_EXTERN2             BITMAP  DISCARDABLE     "res\\extern2.bmp"
+IDB_PLAY2               BITMAP  DISCARDABLE     "res\\play2.bmp"
+IDB_DOWN2               BITMAP  DISCARDABLE     "res\\down2.bmp"
+IDB_UP2                 BITMAP  DISCARDABLE     "res\\up2.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SEARCH_START        "Suche..."
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\alarmlist.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

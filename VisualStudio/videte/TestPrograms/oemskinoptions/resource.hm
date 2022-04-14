@@ -1,0 +1,4 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by OEMSkinOptions.rc
+//
+#define HIDC_TXT_OEM                    0x806603e9    // IDD_OEMSKINOPTIONS_DIALOG

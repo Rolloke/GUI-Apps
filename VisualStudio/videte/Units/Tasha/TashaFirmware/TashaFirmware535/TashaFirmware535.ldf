@@ -1,0 +1,448 @@
+/*
+** LDF for ADSP-BF535.
+** 
+** There are a number of configuration options that can be specified
+** either by compiler flags, or by linker flags directly. The options are:
+** 
+** USE_PROFILER0
+** 	Enabled by -p. Link in profiling library, and write results to
+** 	both stdout and mon.out.
+** USE_PROFILER1
+** 	Enabled by -p1. Only write profiling data to mon.out.
+** USE_PROFILER2
+** 	Enabled by -p2. Only write profiling data to stdout.
+** USE_PROFILER
+** 	Equivalent to USE_PROFILER0.
+** __WORKAROUNDS_ENABLED
+**    Defined by compiler when -workaround is used to direct LDF to
+**    link with libraries that have been built with work-arounds
+**    enabled.
+** USE_FILEIO
+** 	Link in support for file I/O (fopen, etc). Also necessary
+** 	for argc/argv handling.
+** USE_CACHE
+** 	Makes use of Some L1 memory as cache. Implies the presence
+** 	of at least some external memory.
+*/
+
+ARCHITECTURE(ADSP-BF535)
+
+#ifndef __NO_STD_LIB
+SEARCH_DIR( $ADI_DSP/Blackfin/lib )
+#endif
+
+/* Moving to primIO means that we must always include the FileIO support,
+** so that printf() will work.
+*/
+
+#ifndef USE_FILEIO	/* { */
+#define USE_FILEIO 1
+#endif	/* } */
+
+#ifdef USE_PROFILER	/* { */
+#define USE_PROFILER0
+#endif	/* } */
+
+#ifdef USE_PROFILER0	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define PROFFLAG prfflg0_535y.doj
+#else
+#define PROFFLAG prfflg0_535.doj
+#endif	/* } */
+// The profiler needs File I/O to write its results.
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef USE_PROFILER1	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define PROFFLAG prfflg1_535y.doj
+#else
+#define PROFFLAG prfflg1_535.doj
+#endif	/* } */
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef USE_PROFILER2	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define PROFFLAG prfflg2_535y.doj
+#else
+#define PROFFLAG prfflg2_535.doj
+#endif	/* } */
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define OMEGA idle535y.doj
+#else
+#define OMEGA idle535.doj
+#endif	/* } */
+
+#define MEMINIT __initsbsz535.doj,
+
+#define LIBSMALL libsmall535.dlb,
+
+#ifdef M3_RESERVED	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define LIBM3 libm3res535y.dlb
+#define LIBDSP libdspm3res535y.dlb
+#define SFTFLT libsftflt535y.dlb
+#else
+#define LIBM3 libm3res535.dlb
+#define LIBDSP libdspm3res535.dlb
+#define SFTFLT libsftflt535.dlb
+#endif	/* } */
+#else
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define LIBM3 libm3free535y.dlb
+#define LIBDSP libdsp535y.dlb
+#define SFTFLT libsftflt535y.dlb
+#else
+#define LIBM3 libm3free535.dlb
+#define LIBDSP libdsp535.dlb
+#define SFTFLT libsftflt535.dlb
+#endif	/* } */
+#endif	/* } */
+
+#ifdef IEEEFP	/* { */
+#define FPLIBS SFTFLT, LIBDSP
+#else
+#define FPLIBS LIBDSP, SFTFLT
+#endif	/* } */
+
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#ifdef __ADI_LIBEH__ /* { */
+#define LIBS LIBSMALL MEMINIT libc535y.dlb, LIBM3, libevent535y.dlb, libx535y.dlb, libio535y.dlb, libcpp535yx.dlb, libcpprt535yx.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#else
+#define LIBS LIBSMALL MEMINIT libc535y.dlb, LIBM3, libevent535y.dlb, libx535y.dlb, libio535y.dlb, libcpp535y.dlb, libcpprt535y.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#endif /* } */
+#else
+#ifdef __ADI_LIBEH__ /* { */
+#define LIBS LIBSMALL MEMINIT libc535.dlb, LIBM3, libevent535.dlb, libx535.dlb, libio535.dlb, libcpp535x.dlb, libcpprt535x.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#else
+#define LIBS LIBSMALL MEMINIT libc535.dlb, LIBM3, libevent535.dlb, libx535.dlb, libio535.dlb, libcpp535.dlb, libcpprt535.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#endif /* } */
+#endif	/* } */
+#if defined(USE_FILEIO) || defined(USE_PROFGUIDE)
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+$LIBRARIES = LIBS, librt_fileio535y.dlb;
+#else
+$LIBRARIES = LIBS, librt_fileio535.dlb;
+#endif	/* } */
+#else
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+$LIBRARIES = LIBS, librt535y.dlb;
+#else
+$LIBRARIES = LIBS, librt535.dlb;
+#endif	/* } */
+#endif	/* } */
+
+// Libraries from the command line are included in COMMAND_LINE_OBJECTS.
+
+#ifdef USE_PROFILER	/* { */
+#ifdef USE_FILEIO	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define CRT crtsfpc535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtsfpc535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#else
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define CRT crtscp535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtscp535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#else
+#ifdef USE_FILEIO	/* { */
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define CRT  crtsfc535y.doj
+#else
+#define CRT  crtsfc535.doj
+#endif	/* } */
+#else
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define CRT  crtsc535y.doj
+#else
+#define CRT  crtsc535.doj
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#endif  /* USE_PROFILER */	/* } */
+
+#ifdef __WORKAROUNDS_ENABLED	/* { */
+#define ENDCRT , crtn535y.doj
+#else
+#define ENDCRT , crtn535.doj
+#endif	/* } */
+
+$OBJECTS = CRT, $COMMAND_LINE_OBJECTS ,cplbtab535.doj ENDCRT;
+
+MEMORY
+{
+#if 0
+MEM_CORE_MMRS  {	/* Core memory-mapped registers - 2MB */
+	TYPE(RAM) WIDTH(8)
+	START(0xFFE00000) END(0xFFFFFFFF)
+}
+#endif
+MEM_SYS_MMRS  {	/* System memory-mapped registers - 2MB */
+	TYPE(RAM) WIDTH(8)
+	START(0xFFC00000) END(0xFFDFFFFF)
+}
+MEM_L1_SCRATCH  {	/* L1 Scratchpad - 4K */
+	TYPE(RAM) WIDTH(8)
+	START(0xFFB00000) END(0xFFB00FFF)
+}
+MEM_L1_CODE     {	/* L1 Instruction SRAM/Cache - 16K */
+	TYPE(RAM) WIDTH(8)
+	START(0xFFA00000) END(0xFFA03FFF)
+}
+MEM_L1_DATA_B   {	/* L1 Data B SRAM/Cache - 16K */
+	TYPE(RAM) WIDTH(8)
+	START(0xFF900000) END(0xFF903FFF)
+}
+MEM_L1_DATA_A   {	/* L1 Data A SRAM/Cache - 16K */
+	TYPE(RAM) WIDTH(8)
+	START(0xFF800000) END(0xFF803FFF)
+}
+
+/* L2 SRAM - 256K from 0xF0000000 to 0xF003FFFF. */
+/* Divided into sections for program layout. */
+
+#ifdef IDDE_ARGS
+MEM_ARGV        {
+#define ARGV_START 0xF003FE00
+	TYPE(RAM) WIDTH(8)
+	START(0xF003FE00) END(0xF003FEFF)
+}
+MEM_STACK       {
+	TYPE(RAM) WIDTH(8)
+	START(0xF0038000) END(0xF003FDFF)
+}
+#else
+MEM_STACK       {
+	TYPE(RAM) WIDTH(8)
+	START(0xF0038000) END(0xF003FFFF)
+}
+#endif
+MEM_HEAP        {
+	TYPE(RAM) WIDTH(8)
+	START(0xF0030000) END(0xF0037FFF)
+}
+MEM_PROGRAM     {
+	TYPE( RAM) WIDTH(8)
+	START(0xf000d500) END(0xf002ffff)
+  }
+MEM_PCI_CONFIG     {	/* PCI Config Space - 64K */
+	TYPE(RAM) WIDTH(8)
+	START(0xEEFFFF00) END(0xEEFFFFFF)
+}
+MEM_PCI_IO_SPACE     {	/* PCI IO Space - 64K */
+	TYPE(RAM) WIDTH(8)
+	START(0xEEFE0000) END(0xEEFEFFFF)
+}
+MEM_PCI_MEMORY_SPACE     {	/* PCI Memory Space - 128MB */
+	TYPE(RAM) WIDTH(8)
+	START(0xE0000000) END(0xE7FFFFFF)
+}
+MEM_ASYNC3     {	/* Async Bank 3 - 64MB */
+	TYPE(RAM) WIDTH(8)
+	START(0x2C000000) END(0x2FFFFFFF)
+}
+MEM_ASYNC2     {	/* Async Bank 2 - 64MB */
+	TYPE(RAM) WIDTH(8)
+	START(0x28000000) END(0x2BFFFFFF)
+}
+MEM_ASYNC1     {	/* Async Bank 1 - 64MB */
+	TYPE(RAM) WIDTH(8)
+	START(0x24000000) END(0x27FFFFFF)
+}
+MEM_ASYNC0     {	/* Async Bank 0 - 64MB */
+	TYPE(RAM) WIDTH(8)
+	START(0x20000000) END(0x23FFFFFF)
+}
+MEM_SDRAM3     {	/* SDRAM Bank 3 - 16MB-128M */
+	TYPE(RAM) WIDTH(8)
+	START(0x18000000) END(0x1FFFFFFF)
+}
+MEM_SDRAM2     {	/* SDRAM Bank 2 - 16MB-128M */
+	TYPE(RAM) WIDTH(8)
+	START(0x10000000) END(0x17FFFFFF)
+}
+MEM_SDRAM1     {	/* SDRAM Bank 1 - 16MB-128M */
+	TYPE(RAM) WIDTH(8)
+	START(0x08000000) END(0x0FFFFFFF)
+}
+MEM_SDRAM0     {	/* SDRAM Bank 0 - 16MB-128M */
+	TYPE(RAM) WIDTH(8)
+	START(0x00000004) END(0x07FFFFFF)
+}
+MEM_ABSMONDATA     {	                              
+	TYPE( RAM)         
+	START(0xf0000004) END(0xf000007f) WIDTH(8)}
+MEM_JUMPUSERPROGRAM     {	                              
+	TYPE( RAM)         
+	START(0xf0000000) END(0xf0000003) WIDTH(8)}
+MEM_ABSUSERDATA     {	                              
+	TYPE( RAM)         
+	START(0xf0000080) END(0xf000ccff) WIDTH(8)}
+}
+
+
+PROCESSOR P0
+{
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+	/* Following address must match start of MEM_PROGRAM */
+//	RESOLVE(start,0xf0000000)
+#ifdef IDDE_ARGS
+	RESOLVE(___argv_string, ARGV_START)
+#endif
+	KEEP(start,_main)
+
+    SECTIONS
+    {
+        L1_code
+        {
+            INPUT_SECTION_ALIGN(4)
+#ifdef USE_CACHE /* { */
+            ___l1_code_cache = 1;
+#else
+            ___l1_code_cache = 0;
+              
+
+#endif /* USE_CACHE } */
+        } >MEM_L1_CODE
+
+        L1_data_a
+        {
+            INPUT_SECTION_ALIGN(4)
+#ifdef USE_CACHE /* { */
+            ___l1_data_cache_a = 1;
+#else
+            ___l1_data_cache_a = 0;
+              
+               
+                  
+
+#endif /* USE_CACHE } */
+        } >MEM_L1_DATA_A
+
+        L1_data_b
+        {
+            INPUT_SECTION_ALIGN(4)
+            ___l1_data_cache_b = 0;
+                  
+                  
+              
+               
+        } >MEM_L1_DATA_B
+
+        bsz_init
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz_init) $LIBRARIES(bsz_init))
+        } >MEM_PROGRAM
+
+        .meminit {} >MEM_PROGRAM
+
+        program_l2
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(noncache_code) $LIBRARIES(noncache_code) librt_fileio535y.dlb(pci_io))
+            INPUT_SECTIONS( $OBJECTS(program) $LIBRARIES(program))
+            INPUT_SECTIONS( $OBJECTS(.edt) $LIBRARIES(.edt) )
+            INPUT_SECTIONS( $OBJECTS(.cht) $LIBRARIES(.cht) )
+            INPUT_SECTIONS( $OBJECTS(data1) $LIBRARIES(data1))
+            INPUT_SECTIONS( $OBJECTS(cplb) $LIBRARIES(cplb))
+            INPUT_SECTIONS( $OBJECTS(cplb_code) $LIBRARIES(cplb_code))
+            INPUT_SECTIONS( $OBJECTS(cplb_data) $LIBRARIES(cplb_data))
+            INPUT_SECTIONS( $OBJECTS(constdata) $LIBRARIES(constdata)) 
+            INPUT_SECTIONS( $OBJECTS(voldata) $LIBRARIES(voldata))
+
+            INPUT_SECTIONS( $OBJECTS(ctor) $LIBRARIES(ctor) )
+            INPUT_SECTIONS( $OBJECTS(ctorl) $LIBRARIES(ctorl) )
+            INPUT_SECTIONS( $OBJECTS(.gdt) $LIBRARIES(.gdt) )
+            INPUT_SECTIONS( $OBJECTS(.gdtl) $LIBRARIES(.gdtl) )
+        } >MEM_PROGRAM
+ 
+        bsz_L1_data_b ZERO_INIT
+        {
+            INPUT_SECTION_ALIGN(4)
+        } >MEM_L1_DATA_B
+ 
+#ifdef USE_CACHE /* { */
+        bsz_L2 ZERO_INIT
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz) $LIBRARIES(bsz))
+        } > MEM_PROGRAM
+
+        bsz_sdram0 ZERO_INIT
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz) $LIBRARIES(bsz))
+        } >MEM_SDRAM0
+#else
+        bsz_L1_data_a ZERO_INIT
+        {
+        	   INPUT_SECTION_ALIGN(4)
+        } >MEM_L1_DATA_A
+
+        bsz_L2 ZERO_INIT
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz) $LIBRARIES(bsz))
+        } > MEM_PROGRAM
+#endif /* USE_CACHE } */
+ 
+        stack
+        {
+            ldf_stack_space = .;
+            ldf_stack_end = ldf_stack_space + MEMORY_SIZEOF(MEM_STACK);
+        } >MEM_STACK
+
+        heap
+        {
+            // Allocate a heap for the application
+            ldf_heap_space = .;
+            ldf_heap_end = ldf_heap_space + MEMORY_SIZEOF(MEM_HEAP) - 1;
+            ldf_heap_length = ldf_heap_end - ldf_heap_space;        
+        } >MEM_HEAP
+
+        jumpuserprogram{
+        	INPUT_SECTIONS(JumpUser.doj(jump_user_program))
+        }>MEM_JUMPUSERPROGRAM
+
+        absmondata{
+        	INPUT_SECTIONS(basicmon.doj(abs_monitor_data))
+        }>MEM_ABSMONDATA
+
+        absuserdata{
+        	INPUT_SECTIONS(TashaFirmware535.doj(DSP2PCMessageBuffer) TashaFirmware535.doj(PC2DSPMessageBuffer) TashaFirmware535.doj(InitDone) TashaFirmware535.doj(Finish) MemoryDMA.doj(DescriptorDst) MemoryDMA.doj(DescriptorSrc) Altera.doj(DescriptorSPI) TashaFirmware535.doj(PermMasks))
+        }>MEM_ABSUSERDATA
+
+#ifdef USE_CACHE /* { */
+        sdram
+        {
+            // Align all code sections on 2 byte boundary
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(sdram0) $LIBRARIES(sdram0))
+            INPUT_SECTIONS( $OBJECTS(program) $LIBRARIES(program))
+            INPUT_SECTIONS( $OBJECTS(data1) $LIBRARIES(data1))
+            INPUT_SECTIONS( $OBJECTS(constdata) $LIBRARIES(constdata)) 
+            INPUT_SECTIONS( $OBJECTS(voldata) $LIBRARIES(voldata))
+        } >MEM_SDRAM0
+#endif /* USE_CACHE } */
+
+    }
+}
+

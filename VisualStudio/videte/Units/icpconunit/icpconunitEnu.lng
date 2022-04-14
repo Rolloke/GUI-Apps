@@ -1,0 +1,20 @@
+ICPCONUnit.rc@POPUP@IDR_MAINFRAME.POPUP1@@@@context@context@0@
+ICPCONUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_ABOUT@@@@&Info über...@&About...@0@
+ICPCONUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_SETTINGS@@@@&Einstellungen...@&Settings...@0@
+ICPCONUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@@@@&Beenden@&Exit@0@
+ICPCONUnit.rc@CAPTION@IDD_ICPCONUNIT_DIALOG.CAPTION@@@@Konfiguration der ICP CON Module@Configuration of the ICP CON modules@0@
+ICPCONUnit.rc@LTEXT@IDD_ICPCONUNIT_DIALOG.IDOK@@@@OK@OK@0@
+ICPCONUnit.rc@LTEXT@IDD_ICPCONUNIT_DIALOG.IDC_LIST_MODULES@@@@List1@List1@0@
+ICPCONUnit.rc@LTEXT@IDD_ICPCONUNIT_DIALOG.IDCANCEL@@@@Abbrechen@Cancel@0@
+ICPCONUnit.rc@LTEXT@IDD_SWITCH_PANEL.IDC_RELAIS@@@@RL@RL@0@
+ICPCONUnit.rc@STRING@IDS_ABOUTBOX@@@@Inf&o über ICPCONUnit...@&About ICPCONUnit...@0@
+ICPCONUnit.rc@STRING@IDS_CLOSE@@@@Schließen@Close@0@
+ICPCONUnit.rc@STRING@IDS_DIGITAL_IN@@@@Eingänge, Melder@Inputs, Detectors@0@
+ICPCONUnit.rc@STRING@IDS_DIGITAL_OUT@@@@Schalter, Relais@Switches, Relays@0@
+ICPCONUnit.rc@STRING@IDS_DIGITAL_IN_N@@@@DI%d@DI%d@0@
+ICPCONUnit.rc@STRING@IDS_DIGITAL_OUT_N@@@@RL%d@RL%d@0@
+ICPCONUnit.rc@STRING@IDS_PORT_MODULES@@@@Adresse: %02x, Modul: %s@Address: %02x, Modul: %s@0@
+ICPCONUnit.rc@STRING@IDS_BAUDRATE@@@@Baudrate: %d@Baudrate: %d@0@
+ICPCONUnit.rc@STRING@IDS_FIRMWARE_VERSION@@@@Version: %s@Version: %s@0@
+ICPCONUnit.rc@STRING@IDS_COM_PORT@@@@COM%d@COM%d@0@
+ICPCONUnit.rc@STRING@IDS_MODULE_LOCATION@@@@Einbauort@Location@0@

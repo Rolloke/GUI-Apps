@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DBS", "DBS.vcproj", "{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = DBS.vcproj
+		SccProjectName0 = \u0022$/Project/DBS\u0022,\u0020FWMBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Debug.ActiveCfg = Debug|Win32
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Debug.Build.0 = Debug|Win32
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Enu.ActiveCfg = Enu|Win32
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Enu.Build.0 = Enu|Win32
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Release.ActiveCfg = Release|Win32
+		{4648E82F-D0F6-4D6C-97F9-9251ACDAD1D4}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

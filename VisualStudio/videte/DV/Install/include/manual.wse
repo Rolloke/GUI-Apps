@@ -1,0 +1,86 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 67 0 68 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Check if File/Dir Exists
+  Pathname=%INST%\manual.pdf
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%INST%\manual.pdf
+  Destination=%MAINDIR%\manual.pdf
+  Flags=0000000001000010
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Deutsch
+end
+item: Check if File/Dir Exists
+  Pathname=%INST%\manual_deu.pdf
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%INST%\manual_deu.pdf
+  Destination=%MAINDIR%\manual.pdf
+  Flags=0000000001000010
+end
+item: End Block
+end
+item: Check if File/Dir Exists
+  Pathname=%INST%\receiver_deu.pdf
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%INST%\receiver_deu.pdf
+  Destination=%MAINDIR%\manual.pdf
+  Flags=0000000001000010
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Check if File/Dir Exists
+  Pathname=%INST%\manual_enu.pdf
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%INST%\manual_enu.pdf
+  Destination=%MAINDIR%\manual.pdf
+  Flags=0000000001000010
+end
+item: End Block
+end
+item: Check if File/Dir Exists
+  Pathname=%INST%\receiver_enu.pdf
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%INST%\receiver_enu.pdf
+  Destination=%MAINDIR%\manual.pdf
+  Flags=0000000001000010
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end

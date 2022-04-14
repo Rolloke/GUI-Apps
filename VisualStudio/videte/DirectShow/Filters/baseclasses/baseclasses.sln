@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseClasses", "baseclasses.vcproj", "{F4B9E4A0-77BC-456C-BB36-0A66CBBAEBBE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = baseclasses.vcproj
+		SccProjectName0 = \u0022$/Project/DirectShow/Filters/baseclasses\u0022,\u0020TYHCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{F4B9E4A0-77BC-456C-BB36-0A66CBBAEBBE}.Debug.ActiveCfg = Debug|Win32
+		{F4B9E4A0-77BC-456C-BB36-0A66CBBAEBBE}.Debug.Build.0 = Debug|Win32
+		{F4B9E4A0-77BC-456C-BB36-0A66CBBAEBBE}.Release.ActiveCfg = Release|Win32
+		{F4B9E4A0-77BC-456C-BB36-0A66CBBAEBBE}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

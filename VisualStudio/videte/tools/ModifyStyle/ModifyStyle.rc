@@ -1,0 +1,421 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LIST_IMAGES         BITMAP                  "res\\NTCHECK.BMP"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ModifyStyle.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\ModifyStyle.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Info über ModifyStyle"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "ModifyStyle Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2002, Rolf Kary-Ehlers",IDC_STATIC,40,25,
+                    143,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_MODIFYSTYLE_DIALOG DIALOGEX 0, 0, 320, 271
+STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ModifyStyle"
+MENU IDR_MAINMENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_STYLES,5,5,235,240,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List1",IDC_STYLE_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_OWNERDATA | 
+                    WS_BORDER | WS_TABSTOP,5,24,235,146
+    LTEXT           "Text:",IDC_STATIC,5,176,17,8
+    EDITTEXT        IDC_EDT_WND_TXT,31,173,284,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TXT_WND_INFO,5,214,310,51,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Beenden",IDCANCEL,245,5,70,12
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,240,24,79,1
+    DEFPUSHBUTTON   "Parameter setzen",IDC_SET_STYLE,245,31,70,12,
+                    BS_MULTILINE
+    PUSHBUTTON      "Prozess beenden",IDC_KILL_PROCESS,245,44,70,12,
+                    WS_DISABLED
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,240,61,79,1
+    EDITTEXT        IDC_EDT_POS_X,245,74,30,12,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDT_POS_Y,245,89,30,12,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDT_SIZE_X,285,74,30,12,ES_AUTOHSCROLL | WS_DISABLED
+    EDITTEXT        IDC_EDT_SIZE_Y,285,89,30,12,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "Topmost",IDC_CK_TOP_MOST,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,245,107,70,10
+    CONTROL         "Kind-\nfenster\nsuchen",IDC_CK_FIND_DISABLED,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFT | BS_MULTILINE | WS_TABSTOP,
+                    281,134,38,36
+    PUSHBUTTON      "Window suchen",IDC_FIND_WINDOW,243,137,36,33,BS_ICON | 
+                    BS_FLAT
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,240,133,78,1
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT,280,62,1,41
+    PUSHBUTTON      "text holen",IDC_GET_TEXT,245,174,70,12,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    CONTROL         "Verstecken",IDC_CK_HIDE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,245,120,70,10
+    CONTROL         "Pos.:",IDC_CK_POS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    245,63,33,10
+    CONTROL         "Größe",IDC_CK_SIZE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,285,63,33,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,240,103,77,1
+    EDITTEXT        IDC_EDT_MESSAGE,113,193,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Post Message",IDC_BTN_POST_MESSAGE,5,193,65,14
+    EDITTEXT        IDC_EDT_WPARAM,198,193,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_LPARAM,275,193,40,14,ES_AUTOHSCROLL
+    LTEXT           "Message:",IDC_STATIC,74,196,34,8
+    LTEXT           "WPARAM:",IDC_STATIC,160,196,36,8
+    LTEXT           "LPARAM:",IDC_STATIC,242,196,32,8
+    CONTROL         "",IDC_WND_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | NOT WS_VISIBLE | 
+                    WS_BORDER | WS_TABSTOP,5,24,235,146
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "Programmiert von Rolf Kary-Ehlers"
+            VALUE "FileDescription", "MFC-Anwendung ModifyStyle"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ModifyStyle"
+            VALUE "LegalCopyright", "Copyright (C) Rolf Kary-Ehlers 2001"
+            VALUE "OriginalFilename", "ModifyStyle.EXE"
+            VALUE "ProductName", "Anwendung ModifyStyle"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_MODIFYSTYLE_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        VERTGUIDE, 245
+        VERTGUIDE, 315
+        HORZGUIDE, 5
+        HORZGUIDE, 24
+        HORZGUIDE, 68
+        HORZGUIDE, 80
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+        HORZGUIDE, 134
+        HORZGUIDE, 170
+        HORZGUIDE, 180
+        HORZGUIDE, 200
+        HORZGUIDE, 214
+        HORZGUIDE, 265
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_MODIFYSTYLE_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_STYLES, 0x403, 13, 0
+0x6957, 0x646e, 0x776f, 0x7453, 0x6c79, 0x7365, "\000" 
+    IDC_COMBO_STYLES, 0x403, 15, 0
+0x6957, 0x646e, 0x776f, 0x7453, 0x6c79, 0x7365, 0x7845, "\000" 
+    IDC_COMBO_STYLES, 0x403, 18, 0
+0x6445, 0x7469, 0x5720, 0x6e69, 0x6f64, 0x5377, 0x7974, 0x656c, 0x0073, 
+
+    IDC_COMBO_STYLES, 0x403, 20, 0
+0x7542, 0x7474, 0x6e6f, 0x5720, 0x6e69, 0x6f64, 0x5377, 0x7974, 0x656c, 
+0x0073, 
+    IDC_COMBO_STYLES, 0x403, 20, 0
+0x7453, 0x7461, 0x6369, 0x5720, 0x6e69, 0x6f64, 0x5377, 0x7974, 0x656c, 
+0x0073, 
+    IDC_COMBO_STYLES, 0x403, 20, 0
+0x6944, 0x6c61, 0x676f, 0x5720, 0x6e69, 0x6f64, 0x5377, 0x7974, 0x656c, 
+0x0073, 
+    IDC_COMBO_STYLES, 0x403, 21, 0
+0x694c, 0x7473, 0x6f42, 0x2078, 0x6957, 0x646e, 0x776f, 0x7453, 0x6c79, 
+0x7365, "\000" 
+    IDC_COMBO_STYLES, 0x403, 22, 0
+0x6f43, 0x626d, 0x426f, 0x786f, 0x5720, 0x6e69, 0x6f64, 0x5377, 0x7974, 
+0x656c, 0x0073, 
+    IDC_COMBO_STYLES, 0x403, 23, 0
+0x6353, 0x6f72, 0x6c6c, 0x6162, 0x2072, 0x6957, 0x646e, 0x776f, 0x7453, 
+0x6c79, 0x7365, "\000" 
+    IDC_COMBO_STYLES, 0x403, 16, 0
+0x694c, 0x7473, 0x6976, 0x7765, 0x5320, 0x7974, 0x656c, 0x0073, 
+    IDC_COMBO_STYLES, 0x403, 18, 0
+0x694c, 0x7473, 0x6976, 0x7765, 0x5320, 0x7974, 0x656c, 0x4573, 0x0078, 
+
+    IDC_COMBO_STYLES, 0x403, 16, 0
+0x7254, 0x6565, 0x6976, 0x7765, 0x5320, 0x7974, 0x656c, 0x0073, 
+    IDC_COMBO_STYLES, 0x403, 19, 0
+0x6154, 0x2062, 0x6f43, 0x746e, 0x6f72, 0x206c, 0x7453, 0x6c79, 0x7365, 
+"\000" 
+    IDC_COMBO_STYLES, 0x403, 21, 0
+0x6154, 0x2062, 0x6f43, 0x746e, 0x6f72, 0x206c, 0x7453, 0x6c79, 0x7365, 
+0x7845, "\000" 
+    IDC_COMBO_STYLES, 0x403, 15, 0
+0x6f54, 0x6c6f, 0x6162, 0x2072, 0x7453, 0x6c79, 0x7365, "\000" 
+    IDC_COMBO_STYLES, 0x403, 20, 0
+0x7053, 0x6e69, 0x4320, 0x6e6f, 0x7274, 0x6c6f, 0x5320, 0x7974, 0x656c, 
+0x0073, 
+    IDC_COMBO_STYLES, 0x403, 13, 0
+0x6c43, 0x7361, 0x2073, 0x7453, 0x6c79, 0x7365, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_SEARCH_CURSOR       CURSOR                  "res\\search_c.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINMENU MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "Liste &speichern",            ID_FILE_SAVE
+        MENUITEM "&Fenstertexte Speichern",     ID_FILE_SAVE_WND_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "Start"
+    BEGIN
+        MENUITEM "Prozess",                     ID_START_PROCESS
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "Fenster&stile",               ID_VIEW_STYLE
+        MENUITEM "&Erweiterte Stile",           ID_VIEW_STYLE_EX
+        MENUITEM SEPARATOR
+        MENUITEM "&Kindfenster",                ID_VIEW_CHILDWINDOWS
+        MENUITEM "Fensterhirarchie",            ID_VIEW_WINDOW_HIRARCHIE
+        MENUITEM SEPARATOR
+        MENUITEM "&User Prozesse",              ID_VIEW_PROCESSES
+        MENUITEM "&Alle Prozesse",              ID_VIEW_ALL_PROCESSES
+        MENUITEM "&Prozessemodule",             ID_VIEW_PROCESS_MODULES
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o über ModifyStyle..."
+    IDS_STYLE_CODE          "Flags"
+    IDS_STYLE_NAME          "Window Stile   |   Gehe zu Elterfenster"
+    IDS_WND_INFO            "HWND : %x, \tThreadID :%x, ProcessID : %x, Stil:%08x, ExStil:%08x\r\nCtrlID    : %d d, %x h\r\nHelpID  : %d d, %x h\r\nKlasse  %s:"
+    IDS_BTNTXT_PROCESS      "Prozess beenden"
+    IDS_BTNTXT_CLOSE_WINDOW "Fenster Schliessen"
+    IDS_ASK_CLOSE_WND       "Fenster ""%s"" schliessen ?"
+    IDS_WM_CLOSE_SENT       "WM_CLOSE gesendet"
+    IDS_WINDOW_CLOSED       "Fenster geschlossen"
+    IDS_ASK_KILL_PROCESS    "Prozess ""%s"" beenden?"
+    IDS_PROCESS_KILLED      "Prozess beendet"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ASK_COPY_STRING     "Text ""%s"" Kopieren?"
+    IDS_ERROR_COPY_STRING   "Fehler %d beim Kopieren!"
+    IDC_PROCESS_LIST        "Zeigt Prozesse. Doppelklick: Prozesse bzw. Module des Prozesse anzeigen."
+    IDS_PROCESS_NAME        "Name"
+    IDS_PROCESS_PATH        "Prozesse (Pfad)   |   Gehe zu Prozessfenster"
+    IDS_CHILD_HANDLE        "Handle"
+    IDS_CHILD_NAME          "Kindfenster (Klasse: Text)"
+    IDS_PROCESS_MODULES     "Module"
+    IDS_MODULE_PATH         "Module (Pfad)   |   Gehe zu Prozess"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_STYLE_LIST          "Zeigt Fensterstile. Linksklick: setzen, löschen. Rechtsklick: kopieren."
+    IDC_SET_STYLE           "Ändert Fensterstil, -größe, positon und -text."
+    IDC_COMBO_STYLES        "Window-, Extended- und Spezielle Stile; oder Prozesse"
+    IDC_FIND_WINDOW         "Ziehen Sie das Fadenkreuz über ein Fenster, um es zu wählen."
+    IDC_KILL_PROCESS        "Schließt Fenster bzw. Prozesse."
+    IDC_TXT_WND_INFO        "Zusätzliche Info über das Fenster"
+    IDC_EDT_SIZE_X          "Fensterbreite"
+    IDC_EDT_SIZE_Y          "Fensterhöhe"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_POS_X           "Fensterposition linker Rand"
+    IDC_EDT_POS_Y           "Fensterposition oberer Rand"
+    IDC_CK_TOP_MOST         "Positioniert das Fenster auf dem obersten Z-Level."
+    IDC_EDT_WND_TXT         "Fenstertext"
+    IDC_CK_FIND_DISABLED    "Bei Aktivierung werden auch inaktive Fenster (disabled) gefunden."
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\ModifyStyle.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "l.deu\afxres.rc"          // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

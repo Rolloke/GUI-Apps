@@ -1,0 +1,2385 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\IdipClient.ico"
+IDB_SMALL_STOP          ICON                    "res\\smalstop.ico"
+IDI_TURN180             ICON                    "res\\turn180.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SYNC_HOT            BITMAP                  "res\\sync_hot.bmp"
+IDB_IMAGES              BITMAP                  "res\\images.bmp"
+IDB_STATES              BITMAP                  "res\\states.bmp"
+IDB_HOT                 BITMAP                  "res\\hot.bmp"
+IDB_COLD                BITMAP                  "res\\cold.bmp"
+IDR_LIVE                BITMAP                  "res\\display.bmp"
+IDR_HTML                BITMAP                  "res\\html.bmp"
+IDB_ALARM               BITMAP                  "res\\alarm.bmp"
+IDR_TOOLBARMENU         BITMAP                  "res\\toolbarm.bmp"
+IDR_TEXT                BITMAP                  "res\\text.bmp"
+IDR_PLAY                BITMAP                  "res\\play.bmp"
+IDR_PLAY_DTS            BITMAP                  "res\\play_dts.bmp"
+IDR_DIB                 BITMAP                  "res\\dib.bmp"
+IDR_ALARM_LIST          BITMAP                  "res\\alarmlist.bmp"
+IDB_SMALL_STOP          BITMAP                  "res\\small_st.bmp"
+IDB_HTML_IMG            BITMAP                  "res\\HTMLimg.bmp"
+33100                   BITMAP                  "res\\eject.bmp"
+33104                   BITMAP                  "res\\playback.bmp"
+33109                   BITMAP                  "res\\ff.bmp"
+33108                   BITMAP                  "res\\playfwd.bmp"
+33103                   BITMAP                  "res\\rewind.bmp"
+33105                   BITMAP                  "res\\single_b.bmp"
+33107                   BITMAP                  "res\\single_f.bmp"
+33102                   BITMAP                  "res\\skipback.bmp"
+33110                   BITMAP                  "res\\skip_fwd.bmp"
+IDB_STOP                BITMAP                  "res\\stop.bmp"
+33776                   BITMAP                  "res\\search.bmp"
+33796                   BITMAP                  "res\\export.bmp"
+57607                   BITMAP                  "res\\print.bmp"
+33101                   BITMAP                  "res\\pos1.bmp"
+33111                   BITMAP                  "res\\end.bmp"
+32875                   BITMAP                  "res\\stationmap.bmp"
+32876                   BITMAP                  "res\\cameramap.bmp"
+IDB_LOGOS               BITMAP                  "res\\logos.bmp"
+IDB_CENTER              BITMAP                  "res\\center.bmp"
+IDB_TURN180             BITMAP                  "res\\turn180.bmp"
+IDB_DOME                BITMAP                  "res\\Dome.bmp"
+IDB_PTZ_IMAGES          BITMAP                  "res\\PTZimg.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "\r\n"
+    "#if !defined( AFX_RESOURCE_DLL ) || defined( AFX_TARG_DEU )\r\n"
+    "\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\IdipClient.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_LIVE TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_HTML TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_HTML_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_HTML_HOME
+    BUTTON      ID_HTML_PREV
+    BUTTON      ID_HTML_NEXT
+    SEPARATOR
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_TOOLBARMENU TOOLBAR  20, 20
+BEGIN
+    BUTTON      ID_CONNECT
+    BUTTON      ID_DISCONNECT
+    BUTTON      ID_VIEW_1_PLUS
+    BUTTON      ID_VIEW_1
+    BUTTON      ID_VIEW_2_2
+    BUTTON      ID_VIEW_3_3
+    BUTTON      ID_VIEW_4_4
+    BUTTON      ID_VIEW_FULLSCREEN
+    BUTTON      ID_VIEW_ORIGINAL
+    BUTTON      ID_VIDEO_SAVE_ALL
+    BUTTON      ID_VIDEO_SAVE_ALL_STOP
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SEQUENZE
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_HTML_PREV
+    BUTTON      ID_VIEW_DIALOGBAR
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_BUTTON_SYSTEM
+    BUTTON      ID_SYNC
+    BUTTON      ID_ARCHIV_BACKUP
+    BUTTON      ID_NEW_LOGIN
+    BUTTON      ID_OPTIONS
+    BUTTON      ID_AU_PROPERTIES
+    BUTTON      ID_EXIT_CLIENT
+    BUTTON      ID_EXPLORER
+    BUTTON      ID_LOG_VIEW
+    BUTTON      ID_PRODUCT_VIEW
+    BUTTON      ID_SHELL
+    BUTTON      ID_ERROR
+END
+
+IDR_TEXT TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_PLAY TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_POS1
+    BUTTON      ID_NAVIGATE_BACK
+    BUTTON      ID_NAVIGATE_PREV
+    BUTTON      ID_NAVIGATE_STOP
+    BUTTON      ID_NAVIGATE_NEXT
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_NAVIGATE_END
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_DIB TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_PLAY_DTS TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_POS1
+    BUTTON      ID_NAVIGATE_SKIP_BACK
+    BUTTON      ID_NAVIGATE_FAST_BACK
+    BUTTON      ID_NAVIGATE_BACK
+    BUTTON      ID_NAVIGATE_PREV
+    BUTTON      ID_NAVIGATE_STOP
+    BUTTON      ID_NAVIGATE_NEXT
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_NAVIGATE_FAST_FORWARD
+    BUTTON      ID_NAVIGATE_SKIP_FORWARD
+    BUTTON      ID_NAVIGATE_END
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_ALARM_LIST TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_LIVE MENU 
+BEGIN
+    POPUP "&Gegenstation"
+    BEGIN
+        MENUITEM "&Trennen\tESC",               ID_DISCONNECT
+        MENUITEM "Ka&merakarte",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "Kamerasatz &laden...",        ID_HOST_LOAD_SEQUENCE
+        MENUITEM "Kamerasatz &speichern...",    ID_HOST_SAVE_SEQUENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Datum und &Uhrzeit setzen ...", ID_HOST_DATETIME
+    END
+    POPUP "&Melder"
+    BEGIN
+        MENUITEM "&Information...",             ID_INPUT_INFORMATION
+        MENUITEM "&Bestätigen",                 ID_INPUT_CONFIRM
+    END
+    POPUP "&Kamera"
+    BEGIN
+        MENUITEM "&Empfang beenden",            ID_VIDEO_STOP
+        MENUITEM "S&peichern\tF4",              ID_VIDEO_SAVE
+        MENUITEM "als &Referenzbild speichern", ID_VIDEO_SAVE_REFERENCE
+        MENUITEM "Referenzbild &zeigen",        ID_VIDEO_SHOW_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Auflösung &Fein\tSTRG+F8",    ID_VIDEO_FEIN
+        MENUITEM "Auflösung &Grob\tSTRG+F8",    ID_VIDEO_GROB
+        MENUITEM SEPARATOR
+        MENUITEM "&Bewegungsmaske\tSTRG+M",     ID_VIDEO_MASK
+        MENUITEM "Ein&stellungen...",           ID_VIDEO_CSB
+        MENUITEM "Ganzer &Bildschirm\tF9",      ID_VIDEO_FULLSCREEN
+        MENUITEM "&1:1 Darstellung",            ID_SMALL_ORIGINAL
+        MENUITEM "&Zoom out\tF10",              ID_ZOOM_OUT
+    END
+    POPUP "&Relais"
+    BEGIN
+        MENUITEM "Ö&ffnen",                     ID_RELAIS_OPEN
+        MENUITEM "&Schließen",                  ID_RELAIS_CLOSE
+    END
+    POPUP "Se&quenzer"
+    BEGIN
+        MENUITEM "&Ein/Aus\tF7",                ID_SEQUENZE
+        MENUITEM SEPARATOR
+        MENUITEM "&1 Sekunde",                  ID_SEQUENCE_1
+        MENUITEM "&2 Sekunden",                 ID_SEQUENCE_2
+        MENUITEM "&3 Sekunden",                 ID_SEQUENCE_3
+        MENUITEM "&4 Sekunden",                 ID_SEQUENCE_4
+        MENUITEM "&5 Sekunden",                 ID_SEQUENCE_5
+        MENUITEM "1&0 Sekunden",                ID_SEQUENCE_10
+        MENUITEM "15 &Sekunden",                ID_SEQUENCE_15
+        MENUITEM "20 Se&kunden",                ID_SEQUENCE_20
+        MENUITEM "30 Sek&unden",                ID_SEQUENCE_30
+    END
+    POPUP "&Schwenk/Neige"
+    BEGIN
+        MENUITEM "Schwenk/Neige - &Steuerung...", ID_VIDEO_PTZ
+        MENUITEM "Schwenk/Neige &Konfiguration...", ID_VIDEO_PTZ_CONFIG
+        MENUITEM SEPARATOR
+        MENUITEM "&Home Position",              ID_VIDEO_PTZ_HOME
+        MENUITEM "Position &1",                 ID_VIDEO_PTZ_1
+        MENUITEM "Position &2",                 ID_VIDEO_PTZ_2
+        MENUITEM "Position &3",                 ID_VIDEO_PTZ_3
+        MENUITEM "Position &4",                 ID_VIDEO_PTZ_4
+        MENUITEM "Position &5",                 ID_VIDEO_PTZ_5
+        MENUITEM "Position &6",                 ID_VIDEO_PTZ_6
+        MENUITEM "Position &7",                 ID_VIDEO_PTZ_7
+        MENUITEM "Position &8",                 ID_VIDEO_PTZ_8
+        MENUITEM "Position &9",                 ID_VIDEO_PTZ_9
+    END
+    POPUP "M&ico"
+    BEGIN
+        MENUITEM "25 Bilder pro Sekunde",       ID_FPS_25_1
+        MENUITEM "12 Bilder p&ro Sekunde",      ID_FPS_12_1
+        MENUITEM "6 B&ilder pro Sekunde",       ID_FPS_6_1
+        MENUITEM "4 Bilder pro &Sekunde",       ID_FPS_4_1
+        MENUITEM "3 Bilder &pro Sekunde",       ID_FPS_3_1
+        MENUITEM "2 &Bilder pro Sekunde",       ID_FPS_2_1
+        MENUITEM SEPARATOR
+        MENUITEM "&1 Bild pro Sekunde",         ID_FPS_1_1
+        MENUITEM "1 Bild in &2 Sekunden",       ID_FPS_1_2
+        MENUITEM "1 Bild in &3 Sekunden",       ID_FPS_1_3
+        MENUITEM "1 Bild in &4 Sekunden",       ID_FPS_1_4
+        MENUITEM "1 Bild in &5 Sekunden",       ID_FPS_1_5
+    END
+    POPUP "&Coco"
+    BEGIN
+        MENUITEM "&1 Bild pro Sekunde",         ID_FPS_1_1
+        MENUITEM "&3 Bilder pro Sekunde",       ID_FPS_3_1
+        MENUITEM "&6 Bilder pro Sekunde",       ID_FPS_6_1
+        MENUITEM "&9 Bilder pro Sekunde",       ID_FPS_9_1
+        MENUITEM "1&2 Bilder pro Sekunde",      ID_FPS_12_1
+    END
+    POPUP "&Tasha"
+    BEGIN
+        MENUITEM "&1 Bild pro Sekunde",         ID_FPS_1_1
+        MENUITEM "&2 Bild pro Sekunde",         ID_FPS_2_1
+        MENUITEM "&3 Bilder pro Sekunde",       ID_FPS_3_1
+        MENUITEM "&5 Bilder pro Sekunde",       ID_FPS_5_1
+        MENUITEM "1&2 Bilder pro Sekunde",      ID_FPS_12_1
+        MENUITEM "25 Bilder pro Sekunde",       ID_FPS_25_1
+    END
+    POPUP "&Bilder"
+    BEGIN
+        MENUITEM "&Bilder empfangen",           ID_VIDEO_START
+        MENUITEM "&Information...",             ID_INFORMATION
+    END
+    POPUP "&Monitor"
+    BEGIN
+        MENUITEM "E&xklusiv",                   ID_SHOWON_MONITOR_EXCLUSIVE
+        MENUITEM "Monitor &1",                  ID_SHOWON_MONITOR1
+        MENUITEM "Monitor &2",                  ID_SHOWON_MONITOR2
+    END
+    POPUP "Ansicht &HTML"
+    BEGIN
+        POPUP "&Wechseln zu"
+        BEGIN
+            MENUITEM "&Startseite",                 ID_HTML_HOME
+            MENUITEM "&Vorwärts",                   ID_HTML_NEXT
+            MENUITEM "&Zurück",                     ID_HTML_PREV
+        END
+        POPUP "&Ansicht"
+        BEGIN
+            MENUITEM "&Aktualisieren",              ID_VIEW_REFRESH
+            MENUITEM SEPARATOR
+            MENUITEM "&Gegenstationen",             ID_VIEW_HOSTS
+            MENUITEM "&Kameras",                    ID_VIEW_CAMERAS
+            MENUITEM "&Relais",                     ID_VIEW_RELAIS
+            MENUITEM "&Melder",                     ID_VIEW_DETECTORS
+            MENUITEM SEPARATOR
+            MENUITEM "Ak&ustischer Alarm",          ID_ALARM_SOUND
+        END
+        POPUP "&Bearbeiten"
+        BEGIN
+            MENUITEM "Karte &bearbeiten",           ID_EDIT_HTML_PAGE
+            MENUITEM "Karte &speichern",            ID_HTML_SAVE
+            MENUITEM "Karte &hinzufügen",           ID_HTML_NEW_PAGE
+            MENUITEM SEPARATOR
+            MENUITEM "&Eigenschaften Karte...",     ID_EDIT_HTML_MAP_PROPERTIES
+
+            MENUITEM "Karte &löschen",              ID_EDIT_CLEAR_MAP
+            MENUITEM SEPARATOR
+            MENUITEM "Ei&genschaften des Links...", ID_EDIT_HTML_LINK_PROPERTIES
+
+            MENUITEM "L&ink löschen",               ID_EDIT_CLEAR
+        END
+    END
+    POPUP "&Durchsage"
+    BEGIN
+        MENUITEM "&Durchsage",                  ID_AU_START_PLAY
+        MENUITEM "&Gegensprechen",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "&Stopp",                      ID_AU_STOP_PLAY
+        MENUITEM SEPARATOR
+        MENUITEM "&Eigenschaften...",           ID_AU_PROPERTIES
+    END
+    POPUP "&Mithören"
+    BEGIN
+        MENUITEM "&Mithören",                   ID_AU_START_REC
+        MENUITEM "&Stopp",                      ID_AU_STOP_REC
+        MENUITEM SEPARATOR
+        MENUITEM "&Eigenschaften...",           ID_AU_PROPERTIES
+    END
+    POPUP "Gegenstation &nv"
+    BEGIN
+        MENUITEM "&Verbinden",                  ID_CONNECT_HOST
+    END
+    POPUP "Neu"
+    BEGIN
+        MENUITEM "&Lautsprecher / Mikrofone",   ID_VIEW_MEDIAS
+    END
+    POPUP "LiveWindow"
+    BEGIN
+        MENUITEM "&Zoom out\tF10",              ID_ZOOM_OUT
+        POPUP "Schl&ießen"
+        BEGIN
+            MENUITEM "dieses &Fenster schließen\tStrg+F4", ID_CLOSE_WND_THIS
+            MENUITEM "alle &Live-Fenster schließen", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "alle &Datenbank-Fenster schließen", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "&alle Fenster schließen",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM "S&peichern\tF4",              ID_VIDEO_SAVE
+        POPUP "&Referenzbild"
+        BEGIN
+            MENUITEM "Als &Referenzbild speichern", ID_VIDEO_SAVE_REFERENCE
+            MENUITEM "Referenzbild &zeigen",        ID_VIDEO_SHOW_REFERENCE
+        END
+        POPUP "&Auflösung"
+        BEGIN
+            MENUITEM "Auflösung &Fein\tSTRG+F8",    ID_VIDEO_FEIN
+            MENUITEM "Auflösung &Grob\tSTRG+F8",    ID_VIDEO_GROB
+        END
+        MENUITEM SEPARATOR
+        POPUP "Einzelbild &speichern als"
+        BEGIN
+            MENUITEM "&HTML Bild und Daten...",     ID_FILE_HTML
+            MENUITEM "&JPEG Bild...",               ID_FILE_JPG
+            MENUITEM "&Bitmap Bild...",             ID_FILE_DIB
+        END
+        POPUP "&Drucken"
+        BEGIN
+            MENUITEM "Bild &drucken...\tStrg+P",    ID_FILE_PRINT
+            MENUITEM "&Stationsname...",            ID_EDIT_STATION
+            MENUITEM "K&ommentar...",               ID_EDIT_COMMENT
+            MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+            MENUITEM "Seite einrichten...",         ID_FILE_PAGE_SETUP
+        END
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        POPUP "&Einstellungen"
+        BEGIN
+            MENUITEM "&Bewegungsmaske\tSTRG+M",     ID_VIDEO_MASK
+            MENUITEM "&Farbeinstellungen\tSTRG+F7", ID_VIDEO_CSB
+        END
+        MENUITEM "&Ganzer Bildschirm\tF9",      ID_VIEW_FULLSCREEN
+        POPUP "&Kamerasatz"
+        BEGIN
+            MENUITEM "Kamerasatz &laden...",        ID_HOST_LOAD_SEQUENCE
+            MENUITEM "Kamerasatz &speichern...",    ID_HOST_SAVE_SEQUENCE
+            MENUITEM SEPARATOR
+        END
+        MENUITEM SEPARATOR
+    END
+    POPUP "Objekt Ansicht"
+    BEGIN
+        MENUITEM "&Gleichmäßig",                ID_OBJECTVIEW_EQUAL
+        MENUITEM "&Variabel",                   ID_OBJECTVIEW_VARIABLE
+        MENUITEM "&Einzelansicht",              ID_OBJECTVIEW_ONEVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "&Logo",                       ID_VIEW_OEMDIALOG
+    END
+    MENUITEM "Einstellungen",               ID_EINSTELLUNGEN
+END
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Verbindung"
+    BEGIN
+        MENUITEM "Zur &Gegenstation...\tENTER", ID_CONNECT
+        MENUITEM "&Lokale Station\tSTRG+L",     ID_CONNECT_LOCAL
+        MENUITEM "&Trennen\tESC",               ID_DISCONNECT
+        MENUITEM "An&wahlkarte",                ID_CONNECT_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Logout...",                  ID_NEW_LOGIN
+        MENUITEM "&Beenden\tAlt+F4",            ID_EXIT_CLIENT
+        MENUITEM SEPARATOR
+    END
+    MENUITEM "S&uche...",                   ID_SEARCH
+    POPUP "&Datei"
+    BEGIN
+        POPUP "&Speichern als"
+        BEGIN
+            MENUITEM "&HTML Bild und Daten...",     ID_FILE_HTML
+            MENUITEM "&JPEG Bild...",               ID_FILE_JPG
+            MENUITEM "&Bitmap Bild...",             ID_FILE_DIB
+        END
+        MENUITEM "&Öffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        POPUP "&Drucken"
+        BEGIN
+            MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+            MENUITEM "&Stationsname...",            ID_EDIT_STATION
+            MENUITEM "K&ommentar...",               ID_EDIT_COMMENT
+            MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+            MENUITEM "Seite einrichten...",         ID_FILE_PAGE_SETUP
+        END
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "1 &plus\tF8",                 ID_VIEW_1_PLUS
+        MENUITEM "&1\tF8",                      ID_VIEW_1
+        MENUITEM "&quadratisch\tF8",            ID_VIEW_3_3
+        MENUITEM SEPARATOR
+        MENUITEM "&Ganzer Bildschirm\tF9",      ID_VIEW_FULLSCREEN
+        MENUITEM "&Titelzeilen anzeigen",       ID_VIEW_TITLE_OF_SMALLWINDOWS
+
+        MENUITEM "1:1 &Darstellung\tSTRG+F9",   ID_VIEW_ORIGINAL
+        MENUITEM "&Fadenkreuz",                 ID_VIEW_TARGET_DISPLAY
+        MENUITEM SEPARATOR
+        MENUITEM "&Monitor 2",                  ID_VIEW_MONITOR2
+        MENUITEM SEPARATOR
+        MENUITEM "M&enü",                       ID_VIEW_MENU
+        MENUITEM "F&unktionsleiste",            ID_VIEW_DIALOGBAR
+        MENUITEM "&Objektansicht",              ID_VIEW_OBJECT_VIEW
+    END
+    POPUP "&Melder"
+    BEGIN
+        MENUITEM "&Information...",             ID_INPUT_INFORMATION
+        MENUITEM "&Bestätigen",                 ID_INPUT_CONFIRM
+    END
+    POPUP "&Kamera"
+    BEGIN
+        MENUITEM "Zoom &out\tF10",              ID_ZOOM_OUT
+        MENUITEM "&Alles Speichern\tF3",        ID_VIDEO_SAVE_ALL
+        POPUP "&Referenzbild"
+        BEGIN
+            MENUITEM "Als &Referenzbild speichern", ID_VIDEO_SAVE_REFERENCE
+            MENUITEM "Referenzbild &zeigen",        ID_VIDEO_SHOW_REFERENCE
+        END
+        MENUITEM "Ka&merakarte",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        POPUP "&Auflösung"
+        BEGIN
+            MENUITEM "Auflösung &Fein\tSTRG+F8",    ID_VIDEO_FEIN
+            MENUITEM "Auflösung &Grob\tSTRG+F8",    ID_VIDEO_GROB
+        END
+        MENUITEM "&1:1 Darstellung\tSTRG+F9",   ID_VIEW_ORIGINAL
+        MENUITEM SEPARATOR
+        POPUP "&Einstellungen"
+        BEGIN
+            MENUITEM "&Bewegungsmaske\tSTRG+M",     ID_VIDEO_MASK
+            MENUITEM "&Farbeinstellungen\tSTRG+F7", ID_VIDEO_CSB
+        END
+        POPUP "&Kamerasatz"
+        BEGIN
+            MENUITEM "Kamerasatz &laden...",        ID_HOST_LOAD_SEQUENCE
+            MENUITEM "Kamerasatz &speichern...",    ID_HOST_SAVE_SEQUENCE
+            MENUITEM SEPARATOR
+        END
+    END
+    POPUP "&Relais"
+    BEGIN
+        MENUITEM "Ö&ffnen",                     ID_RELAIS_OPEN
+        MENUITEM "&Schließen",                  ID_RELAIS_CLOSE
+    END
+    POPUP "A&udio"
+    BEGIN
+        MENUITEM "&Durchsage ",                 ID_AU_START_PLAY
+        MENUITEM "&Gegensprechen",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "&Mithören",                   ID_AU_START_REC
+        MENUITEM "&Stopp",                      ID_AU_STOP_ANY
+        MENUITEM SEPARATOR
+        MENUITEM "&Eigenschaften...",           ID_AU_PROPERTIES
+    END
+    POPUP "A&rchiv"
+    BEGIN
+        MENUITEM "&Leeren",                     ID_ARCHIV_EMPTY
+        MENUITEM "Lös&chen",                    ID_ARCHIV_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Suche...\tStrg+F",           ID_SEARCH
+        MENUITEM "&Datensicherung...\tStrg+B",  ID_ARCHIV_BACKUP
+        MENUITEM "S&ynchrone Wiedergabe\tStrg+T", ID_SYNC
+        MENUITEM SEPARATOR
+        MENUITEM "&Informationen\tStrg+I",      ID_DATABASE_INFO
+    END
+    POPUP "&Sequenz"
+    BEGIN
+        MENUITEM "Ö&ffnen\tStrg+F5",            ID_SEQUENCE_OPEN
+        MENUITEM "&Einzeln öffnen\tAlt+F5",     ID_SEQUENCE_OPEN_SINGLE
+        POPUP "Schl&ießen"
+        BEGIN
+            MENUITEM "dieses &Fenster schließen\tStrg+F4", ID_CLOSE_WND_THIS
+            MENUITEM "alle &Live-Fenster schließen", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "alle &Datenbank-Fenster schließen", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "&alle Fenster schließen",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM "Selbes &Fenster benutzen",    ID_SEQUENCE_OVER
+        MENUITEM "Echt&zeitwiedergabe\tStrg+R", ID_SEQUENCE_REALTIME
+        MENUITEM SEPARATOR
+        MENUITEM "&Löschen\tStrg+Umschalt+Entf", ID_DELETE
+    END
+    POPUP "S&ystem"
+    BEGIN
+        MENUITEM "&Einstellungen...",           ID_OPTIONS
+        MENUITEM "&Benutzer Oberfläche...",     ID_USER_INTERFACE
+        MENUITEM "Anwahlkarte &erstellen...",   ID_EDIT_CREATE_HTML_HOST_PAGE
+
+        MENUITEM "Kamerakar&te erstellen...",   ID_EDIT_CREATE_HTML_CAMERA_PAGE
+
+        MENUITEM SEPARATOR
+        MENUITEM "&Systemverwaltung...",        ID_BUTTON_SYSTEM
+        MENUITEM "Datum und &Uhrzeit setzen ...", ID_HOST_DATETIME
+        POPUP "Sonstiges"
+        BEGIN
+            MENUITEM "&Laufzeitfehler...",          ID_ERROR
+            MENUITEM "Log&View...",                 ID_LOG_VIEW
+            MENUITEM "&Produkt Module...",          ID_PRODUCT_VIEW
+            MENUITEM "&Explorer öffnen...",         ID_EXPLORER
+            MENUITEM "&Geschützter (Shell) Modus...", ID_SHELL
+            MENUITEM "&Ungeschützter Modus...",     ID_NON_SHELL
+            MENUITEM "&Softwareupdate...",          ID_SOFTWARE_UPDATE
+            MENUITEM "&Freischaltung...",           ID_EXTENSION_CODE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Inf&o über...",               ID_APP_ABOUT
+    END
+END
+
+IDR_MENU_ARCHIVE MENU 
+BEGIN
+    POPUP "Server"
+    BEGIN
+        MENUITEM "&Trennen\tESC",               ID_DISCONNECT
+        MENUITEM "&Informationen\tStrg+I",      ID_DATABASE_INFO
+        MENUITEM "&Suche...\tStrg+F",           ID_SEARCH
+        MENUITEM "&Datensicherung...\tStrg+B",  ID_ARCHIV_BACKUP
+    END
+    POPUP "Archiv"
+    BEGIN
+        MENUITEM "&Leeren",                     ID_ARCHIV_EMPTY
+        MENUITEM "Lös&chen",                    ID_ARCHIV_DELETE
+    END
+    POPUP "Sequenz"
+    BEGIN
+        MENUITEM "Ö&ffnen\tStrg+F5",            ID_SEQUENCE_OPEN
+        MENUITEM "&Einzeln öffnen\tAlt+F5",     ID_SEQUENCE_OPEN_SINGLE
+        MENUITEM "&Löschen\tStrg+Umschalt+Entf", ID_DELETE
+    END
+    POPUP "DisplayWindow"
+    BEGIN
+        MENUITEM "&Vollbild\tF9",               ID_VIDEO_FULLSCREEN
+        MENUITEM "&1:1 Darstellung\tStrg+F9",   ID_VIEW_ORIGINAL
+        MENUITEM "&Zoom out\tF10",              ID_ZOOM_OUT
+        MENUITEM SEPARATOR
+        POPUP "&Speichern als"
+        BEGIN
+            MENUITEM "&HTML Bild und Daten...",     ID_FILE_HTML
+            MENUITEM "&JPEG Bild...",               ID_FILE_JPG
+            MENUITEM "&Bitmap Bild...",             ID_FILE_DIB
+        END
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM "K&ommentar...",               ID_EDIT_COMMENT
+        MENUITEM SEPARATOR
+        MENUITEM "1 &Bild",                     ID_DISPLAY_1
+        MENUITEM "&4 Bilder",                   ID_DISPLAY_4
+        MENUITEM "&9 Bilder",                   ID_DISPLAY_9
+    END
+    POPUP "&Speichern als"
+    BEGIN
+        MENUITEM "&HTML Bild und Daten...",     ID_FILE_HTML
+        MENUITEM "&JPEG Bild...",               ID_FILE_JPG
+        MENUITEM "&Bitmap Bild...",             ID_FILE_DIB
+    END
+    POPUP "DibWindow"
+    BEGIN
+        MENUITEM "&Vollbild\tF9",               ID_VIEW_FULLSCREEN
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+    END
+    POPUP "Query"
+    BEGIN
+        MENUITEM "&Suche...\tStrg+F",           ID_SEARCH
+        MENUITEM "&Bildausschnitt\tStrg+R",     ID_SEARCH_RECTANGLE
+        MENUITEM "Bildausschnitt &löschen \tStrg+D", 
+                                                ID_SEARCH_RECTANGLE_DELETE
+    END
+    POPUP "DatumArchiv"
+    BEGIN
+        MENUITEM "&Löschen",                    ID_DATE_SEQUENCES_DELETE
+    END
+    POPUP "PlayWindow"
+    BEGIN
+        MENUITEM "&Zoom out\tF10",              ID_ZOOM_OUT
+        POPUP "Schl&ießen"
+        BEGIN
+            MENUITEM "dieses &Fenster schließen\tStrg+F4", ID_CLOSE_WND_THIS
+            MENUITEM "alle &Live-Fenster schließen", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "alle &Datenbank-Fenster schließen", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "&alle Fenster schließen",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM SEPARATOR
+        POPUP "Einzelbild &speichern als"
+        BEGIN
+            MENUITEM "&HTML Bild und Daten...",     ID_FILE_HTML
+            MENUITEM "&JPEG Bild...",               ID_FILE_JPG
+            MENUITEM "&Bitmap Bild...",             ID_FILE_DIB
+        END
+        POPUP "&Drucken"
+        BEGIN
+            MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+            MENUITEM "&Stationsname...",            ID_EDIT_STATION
+            MENUITEM "K&ommentar...",               ID_EDIT_COMMENT
+            MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        END
+        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "&Ganzer Bildschirm\tF9",      ID_VIDEO_FULLSCREEN
+        MENUITEM "Selbes &Fenster benutzen",    ID_SEQUENCE_OVER
+        MENUITEM SEPARATOR
+        MENUITEM "1 &Bild",                     ID_DISPLAY_1
+        MENUITEM "&4 Bilder",                   ID_DISPLAY_4
+        MENUITEM "&9 Bilder",                   ID_DISPLAY_9
+    END
+    POPUP "AlarmListe"
+    BEGIN
+        MENUITEM "&Aktualisieren",              ID_VIEW_REFRESH
+        MENUITEM SEPARATOR
+        MENUITEM "Spaltenbreite &optimieren",   ID_VIEW_OPTIMIZE_COLUMN_WIDTH
+
+        MENUITEM "&Kopfzeile",                  ID_VIEW_OPTIMIZE_BY_HEADER
+        MENUITEM "Tabellen&inhalt",             ID_VIEW_OPTIMIZE_BY_CONTENT
+        MENUITEM "Auf Fenster&breite begrenzen", 
+                                                ID_VIEW_OPTIMIZE_TO_WND_WIDTH
+
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "B",            ID_ARCHIV_BACKUP,       VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_CLOSE_WND_THIS,      VIRTKEY, CONTROL, NOINVERT
+    VK_RETURN,      ID_CONNECT,             VIRTKEY, NOINVERT
+    "L",            ID_CONNECT_LOCAL,       VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_DATABASE_INFO,       VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_DELETE,              VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    VK_ESCAPE,      ID_DISCONNECT,          VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_EXIT_CLIENT,         VIRTKEY, ALT, NOINVERT
+    "X",            ID_EXIT_CLIENT,         VIRTKEY, ALT, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_FILE_PAGE_SETUP,     VIRTKEY, CONTROL, ALT, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    VK_NEXT,        ID_NAVIGATE_BACK,       VIRTKEY, NOINVERT
+    VK_END,         ID_NAVIGATE_END,        VIRTKEY, NOINVERT
+    VK_PRIOR,       ID_NAVIGATE_FORWARD,    VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_NAVIGATE_NEXT,       VIRTKEY, NOINVERT
+    VK_HOME,        ID_NAVIGATE_POS1,       VIRTKEY, NOINVERT
+    VK_LEFT,        ID_NAVIGATE_PREV,       VIRTKEY, NOINVERT
+    VK_PAUSE,       ID_NAVIGATE_STOP,       VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "F",            ID_SEARCH,              VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_SEQUENCE_OPEN,       VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_SEQUENCE_REALTIME,   VIRTKEY, CONTROL, NOINVERT
+    VK_SPACE,       ID_SPACE,               VIRTKEY, NOINVERT
+    "T",            ID_SYNC,                VIRTKEY, CONTROL, NOINVERT
+    VK_F8,          ID_TOGGLE,              VIRTKEY, NOINVERT
+    VK_F8,          ID_TOGGLE_RESOLUTION,   VIRTKEY, CONTROL, NOINVERT
+    VK_F7,          ID_VIDEO_CSB,           VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_VIDEO_MASK,          VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_VIDEO_SAVE,          VIRTKEY, NOINVERT
+    VK_F3,          ID_VIDEO_SAVE_ALL_TOGGLE, VIRTKEY, NOINVERT
+    VK_F9,          ID_VIEW_FULLSCREEN,     VIRTKEY, NOINVERT
+    VK_F9,          ID_VIEW_ORIGINAL,       VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_VIEW_STATUS_BAR,     VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "I",            ID_VIEW_TITLE_IN_PICTURE, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "T",            ID_VIEW_TOOLBAR,        VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_F10,         ID_ZOOM_OUT,            VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_IDIP_CLIENT_DLG_BAR DIALOGEX 0, 0, 535, 60
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "log",ID_NEW_LOGIN,5,7,22,20
+    PUSHBUTTON      "Verbinden",ID_CONNECT,32,7,22,20
+    PUSHBUTTON      "Trennen",ID_DISCONNECT,54,7,22,20
+    PUSHBUTTON      "sta",ID_CONNECT_MAP,83,7,22,20
+    PUSHBUTTON      "cam",ID_HOST_CAMERA_MAP,105,7,22,20
+    PUSHBUTTON      "&1",ID_VIEW_1,134,7,22,20
+    PUSHBUTTON      "&3 x 3",ID_VIEW_3_3,156,7,22,20
+    PUSHBUTTON      "1 &Plus",ID_VIEW_1_PLUS,178,7,22,20
+    PUSHBUTTON      "save",ID_VIDEO_SAVE_ALL,208,7,22,20
+    PUSHBUTTON      "SH",ID_SEARCH,230,7,22,20
+    PUSHBUTTON      "Sync",ID_SYNC,252,7,22,20
+    PUSHBUTTON      "Backup",ID_ARCHIV_BACKUP,279,7,22,20
+    PUSHBUTTON      "close",ID_EXIT_CLIENT,5,33,22,20
+    PUSHBUTTON      "Eject",ID_NAVIGATE_EJECT,32,33,22,20
+    PUSHBUTTON      "Pos1",ID_NAVIGATE_POS1,54,33,22,20
+    PUSHBUTTON      "SkB",ID_NAVIGATE_SKIP_BACK,76,33,22,20
+    PUSHBUTTON      "FB",ID_NAVIGATE_FAST_BACK,98,33,22,20
+    PUSHBUTTON      "PB",ID_NAVIGATE_BACK,120,33,22,20
+    PUSHBUTTON      "SiB",ID_NAVIGATE_PREV,142,33,22,20
+    PUSHBUTTON      "SiF",ID_NAVIGATE_NEXT,164,33,22,20
+    PUSHBUTTON      "PF",ID_NAVIGATE_FORWARD,186,33,22,20
+    PUSHBUTTON      "FF",ID_NAVIGATE_FAST_FORWARD,208,33,22,20
+    PUSHBUTTON      "SkF",ID_NAVIGATE_SKIP_FORWARD,230,33,22,20
+    PUSHBUTTON      "End",ID_NAVIGATE_END,252,33,22,20
+    PUSHBUTTON      "PR",ID_FILE_PRINT,279,33,22,20
+    PUSHBUTTON      "&1",ID_BUTTON_NUM1,307,1,16,15
+    PUSHBUTTON      "&2",ID_BUTTON_NUM2,323,1,16,15
+    PUSHBUTTON      "&3",ID_BUTTON_NUM3,339,1,16,15
+    PUSHBUTTON      "&4",ID_BUTTON_NUM4,307,16,16,14
+    PUSHBUTTON      "&5",ID_BUTTON_NUM5,323,16,16,14
+    PUSHBUTTON      "&6",ID_BUTTON_NUM6,339,16,16,14
+    PUSHBUTTON      "&7",ID_BUTTON_NUM7,307,30,16,14
+    PUSHBUTTON      "&8",ID_BUTTON_NUM8,323,30,16,14
+    PUSHBUTTON      "&9",ID_BUTTON_NUM9,339,30,16,14
+    PUSHBUTTON      "&0",ID_BUTTON_NUM0,307,44,16,14
+    PUSHBUTTON      "-/--",ID_BUTTON_NUMPLUS,323,44,16,14
+    CONTROL         "&D",ID_BUTTON_DOME,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,339,44,16,14
+    PUSHBUTTON      "&U",IDC_UP,377,7,16,15
+    PUSHBUTTON      "&R",IDC_RIGHT,394,23,16,15
+    PUSHBUTTON      "&D",IDC_DOWN,377,38,16,15
+    PUSHBUTTON      "&L",IDC_LEFT,360,23,16,15
+    PUSHBUTTON      "&H",IDC_CENTER,377,23,16,15
+    PUSHBUTTON      "O",IDC_IRISIN,415,1,16,15
+    PUSHBUTTON      "F",IDC_FOCUSOUT,431,1,16,15
+    PUSHBUTTON      "T",IDC_ZOOMIN,447,1,16,15
+    PUSHBUTTON      "C",IDC_IRISOUT,415,16,16,14
+    PUSHBUTTON      "N",IDC_FOCUSIN,431,16,16,14
+    PUSHBUTTON      "W",IDC_ZOOMOUT,447,16,16,14
+    CONTROL         "Aut.",IDC_IRIS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,415,30,16,14
+    CONTROL         "Aut.",IDC_FOCUS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,431,30,16,14
+    PUSHBUTTON      "Dreh 180° ",IDC_TURN_180,447,30,16,14,BS_ICON
+    PUSHBUTTON      "Speichern",IDC_PRESET,415,44,48,14
+    CONTROL         "",IDC_SPEED,"msctls_trackbar32",TBS_VERT | WS_TABSTOP,
+                    470,1,17,57,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Schließen",IDC_CLOSE_DLG_BAR,523,1,11,11,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_KB_LANG,518,47,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_ISDN_CHANNELS,518,35,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_SAVE_STATE,518,24,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_SEQUENCE,518,13,16,11,NOT WS_VISIBLE
+END
+
+IDD_CSB DIALOGEX 0, 0, 190, 87
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Kontrast, Helligkeit, Farbe"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&Kontrast:",IDC_STATIC_CONTRAST,5,20,27,8
+    CONTROL         "Slider1",IDC_CONTRAST,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,14,141,20,WS_EX_TRANSPARENT
+    LTEXT           "&Helligkeit:",IDC_STATIC_BRIGHTNESS,5,44,31,8
+    CONTROL         "Slider2",IDC_BRIGHTNESS,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,38,141,20,WS_EX_TRANSPARENT
+    LTEXT           "&Farbe:",IDC_STATIC_COLOR,5,68,21,8
+    CONTROL         "Slider1",IDC_COLOR,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,62,141,20,WS_EX_TRANSPARENT
+    LTEXT           "Static",IDC_TXT_CAM_SERVER,5,5,180,8
+END
+
+IDD_PTZ_CONFIG DIALOGEX 0, 0, 170, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Schwenk/Neige Konfiguration"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,113,42,50,14
+    PUSHBUTTON      "Left",IDC_LEFT,7,24,15,15,BS_ICON
+    PUSHBUTTON      "Up",IDC_UP,24,7,15,15,BS_ICON
+    PUSHBUTTON      "Right",IDC_RIGHT,41,24,15,15,BS_ICON
+    PUSHBUTTON      "Down",IDC_DOWN,24,41,15,15,BS_ICON
+    PUSHBUTTON      "RETURN",IDC_CONFIG_CENTER,63,7,36,14
+    PUSHBUTTON      "ESC",IDC_PROG,63,24,36,15
+END
+
+IDD_VIDEO_PTZ DIALOGEX 0, 0, 198, 81
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "S/N Steuerung"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_PTZ_BTN_SWICTH1,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,5,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH2,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,23,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH3,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,41,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH4,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,60,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH5,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,5,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH6,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,23,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH7,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,41,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH8,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,60,90,14
+END
+
+IDD_SAVE_SEQUENZER DIALOGEX 0, 0, 186, 105
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Kamerasatz"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&Name:",IDC_STATIC_NAME,7,67,22,8
+    EDITTEXT        IDC_NAME,34,64,145,14,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_SEQUENCE,7,7,172,54,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,72,84,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,129,84,50,14
+    PUSHBUTTON      "&Löschen",IDC_DELETE,7,84,50,14
+END
+
+IDD_CONNECTING DIALOG  0, 0, 148, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION
+CAPTION "Verbindung wird aufgebaut zu:"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Abbrechen",IDCANCEL,91,35,50,14
+    LTEXT           "",IDC_HOST,7,7,134,8
+    CONTROL         "Progress1",IDC_PROGRESS_CONNECT,"msctls_progress32",
+                    WS_BORDER,7,18,134,14
+END
+
+IDD_INPUT_DEACTIVATION DIALOGEX 0, 0, 248, 175
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Zeitliche Melderdeaktivierung"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Meldername",IDC_TXT_INPUT,7,7,234,8
+    CONTROL         "List1",IDC_LIST_DEACTIVATIONS,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,7,18,233,63
+    GROUPBOX        "Startzeit / Startdatum",IDC_GRP_START,7,87,108,59
+    CONTROL         "DateTimePicker1",IDC_START_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,16,101,56,15
+    CONTROL         "DateTimePicker1",IDC_START_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,16,122,77,15
+    GROUPBOX        "Endzeit / Enddatum",IDC_GRP_STOP,133,87,108,59
+    CONTROL         "DateTimePicker1",IDC_STOP_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,142,101,56,15
+    CONTROL         "DateTimePicker1",IDC_STOP_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,142,122,77,15
+    PUSHBUTTON      "Neu",IDC_BUTTON_NEW,7,154,50,14
+    PUSHBUTTON      "Löschen",IDC_BUTTON_DELETE,65,154,50,14
+    DEFPUSHBUTTON   "OK",IDOK,133,154,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,191,154,50,14
+END
+
+IDD_MD DIALOGEX 0, 0, 250, 154
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Video",IDC_MD_INLAY,"Button",BS_OWNERDRAW | BS_NOTIFY | 
+                    BS_FLAT | WS_TABSTOP,5,5,176,144
+    PUSHBUTTON      "Löschen",IDC_MD_DEL,185,5,60,14
+    PUSHBUTTON      "Invertieren",IDC_MD_INVERT,185,24,60,14
+    LTEXT           "Empfindlichkeit:",IDC_MD_TXT_SENSITIVITY,186,45,59,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_MD_COMBO_SENSITIVITY_ALARM,185,55,60,86,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Adaptive Maske",IDC_MD_SHOW_ADAPTIVE,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,185,75,60,14
+    COMBOBOX        IDC_MD_COMBO_SENSITIVITY,185,90,60,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "OK",IDC_MD_OK,185,117,60,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,185,135,60,14
+END
+
+IDD_OPTIONS DIALOGEX 0, 0, 187, 103
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Einstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,82,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,130,82,50,14
+    CONTROL         "&Erste Kamera zu Beginn",IDC_RADIO_FIRST_CAM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,7,6,173,12
+    CONTROL         "&Alle Kameras zu Beginn",IDC_RADIO_ALL_CAM,"Button",
+                    BS_AUTORADIOBUTTON,7,20,173,12
+    CONTROL         "Ansicht &1 plus bei Alarmverbindungen",
+                    IDC_CHECK_1PLUS_ALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,7,34,173,12
+    CONTROL         "&Vollbild bei Alarmverbindungen",IDC_CHECK_FULL_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,48,173,12
+    CONTROL         "Ak&ustische Alarmmeldung",IDC_CHECK_AUDIBLE_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,62,173,12
+END
+
+IDD_EXTERNAL_FRAME DIALOGEX 0, 0, 166, 73
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | 
+    WS_CAPTION | WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+CAPTION "Monitor %d"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+IDD_AUDIO_PROPERTIES DIALOGEX 0, 0, 270, 169
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Audioeinstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Kanäle: ",IDC_TXT_AU_INPUT_CHANNELS,10,96,54,8
+    COMBOBOX        IDC_COMBO_AU_INPUT_CHANNELS,10,114,150,121,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_NAMED_INPUTS,70,94,190,121,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Links",IDC_RD_AU_LEFT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,165,115,45,10
+    CONTROL         "Rechts",IDC_RD_AU_RIGHT,"Button",BS_AUTORADIOBUTTON,215,
+                    115,45,10
+    GROUPBOX        "Audioeingang: %s",IDC_GRP_AU_INPUT,5,50,260,115,
+                    WS_GROUP
+    LTEXT           "Empfindlichkeit:",IDC_TXT_AU_INPUT_SENSITIVITY,10,69,54,
+                    8
+    CONTROL         "Slider1",IDC_SLIDER_AU_INPUT_SENSITIVITY,
+                    "msctls_trackbar32",TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,
+                    70,63,190,20,WS_EX_TRANSPARENT
+    GROUPBOX        "Audioausgang",IDC_GRP_AU_OUTPUT,5,5,260,40
+    LTEXT           "Lautstärke:",IDC_TXT_AU_OUTPUT_VOLUME,10,23,54,8
+    CONTROL         "Slider1",IDC_SLIDER_AU_OUTPUT_VOLUME,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,17,190,20,
+                    WS_EX_TRANSPARENT
+    CONTROL         "Slider1",IDC_SLIDER_AU_THRESHOLD,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,135,190,20,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Schwellwert:",IDC_TXT_AU_THRESHOLD,10,141,54,8
+END
+
+IDD_HTML_MAP_PROPERTIES DIALOGEX 0, 0, 230, 111
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Eigenschaften der Karte"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Titel der Seite:",IDC_TXT_HM_TITLE,5,11,60,8
+    EDITTEXT        IDC_EDT_HM_TITLE,70,9,155,12,ES_AUTOHSCROLL
+    LTEXT           "Bilddatei:",IDC_TXT_HM_PICTURE_FILE,5,31,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_FILENAME,70,29,100,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Suchen...",IDC_BTN_HM_PICTURE_FILENAME,175,29,50,12
+    LTEXT           "Bildgröße:",IDC_TXT_HM_PICTURE_SIZE,5,71,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_SIZE,70,69,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    LTEXT           "Zoomfaktor:",IDC_TXT_HM_ZOOM,5,91,60,8
+    EDITTEXT        IDC_EDT_HM_ZOOM,70,89,40,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,89,50,12
+    LTEXT           "Prozent",IDC_TXT_HM_ZOOM_P,115,91,36,8
+    LTEXT           "Bildschirmgröße:",IDC_TXT_HM_MONITOR_SIZE,5,51,60,8
+    EDITTEXT        IDC_EDT_HM_MONITOR_SIZE,70,49,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+END
+
+IDD_HTML_LINK_PROPERTIES DIALOGEX 0, 0, 230, 41
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Eigenschaften des Links"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Infotext:",IDC_TXT_HL_INFO,5,8,163,8
+    EDITTEXT        IDC_EDT_HL_INFO,5,24,220,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,6,50,12
+END
+
+IDD_OEM_DLG DIALOGEX 0, 0, 133, 60
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Schließen",IDC_CLOSE_DLG_BAR,1,1,11,11,BS_ICON
+    LTEXT           "23.04.2004",IDC_DATE,17,49,54,9,0,WS_EX_TRANSPARENT
+    LTEXT           "10:59:00",IDC_TIME,86,49,39,9,0,WS_EX_TRANSPARENT
+    CTEXT           "",IDC_TXT_PRODUCT,1,39,131,12
+END
+
+IDD_ALARM_LIST DIALOGEX 0, 0, 170, 107
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_ALARM,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,0,11,170,96
+    CONTROL         "&Aktivität",IDC_CHECK_ACTIVITY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,1,45,10
+    CONTROL         "&1. Melder",IDC_CHECK_1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,55,1,45,10
+    CONTROL         "&2. Melder",IDC_CHECK_2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,1,45,10
+END
+
+IDD_FIELD DIALOGEX 0, 0, 72, 159
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO_CAMERA,2,12,70,480,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CAMERA,2,2,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_RESOLUTION,2,28,70,8,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+    EDITTEXT        IDC_DATE,2,38,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_TIME,2,48,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_COMPRESSION,2,57,70,8,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+END
+
+IDD_DATABASE_INFO DIALOG  0, 0, 420, 164
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "Datenbank Informationen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_ARCHIV_INFO_LISTE,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,0,0,419,164
+END
+
+IDD_QUERY_RESULT DIALOGEX 10, 10, 451, 178
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_THICKFRAME
+CAPTION "Suchergebnisse"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_RESULTS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,1,73,449,104
+    CONTROL         "Verbindungen nach Suche &trennen",IDC_CHECK_DISCONNECT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,48,128,10
+    DEFPUSHBUTTON   "OK",IDOK,400,41,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,400,57,50,14
+    LTEXT           "Gefundene Bilder:",IDC_TXT_PICTURE,17,60,56,8
+    LTEXT           "-----------------",IDC_TXT_FOUND,90,60,35,8
+    CONTROL         "Animate1",IDC_ANIMATE_SEARCH,"SysAnimate32",
+                    ACS_TRANSPARENT | WS_TABSTOP,406,0,44,38
+    LTEXT           "Suche auf:",IDC_TXT_SEARCH_IN,5,30,40,8
+    LTEXT           "Vergangene Zeit:",IDC_TXT_ELAPSED,259,60,55,8
+    LTEXT           "00:00:00",IDC_ELAPSED,331,60,29,8
+    LTEXT           "Kopierte Bilder:",IDC_TXT_COPIED,142,60,48,8
+    LTEXT           "-----------------",IDC_COPIED,207,60,35,8
+    LTEXT           "",IDC_EDIT_QUERY,5,1,395,24
+    LTEXT           "",IDC_EDIT_SEARCH_IN,50,30,345,8
+END
+
+IDD_COMMENT DIALOGEX 0, 0, 175, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Kommentar"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_COMMENT,5,5,164,166,ES_MULTILINE | ES_WANTRETURN
+    DEFPUSHBUTTON   "OK",IDOK,64,183,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,119,183,50,14
+END
+
+IDD_STATION_NAME DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Stationsname"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Bitte geben Sie den Stationsnamen\nfür den Ausdruck von Bildern an.\nDieser Name wird auf jedem Ausdruck\neines Bildes erscheinen.",
+                    IDC_TXT_BANK,7,7,172,43
+    EDITTEXT        IDC_EDIT_NAME,7,55,172,14
+    DEFPUSHBUTTON   "OK",IDOK,69,74,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,129,74,50,14
+END
+
+IDD_QUERY DIALOGEX 20, 20, 344, 294
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_THICKFRAME
+CAPTION "Suche"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "PC - Zeit und Datum",IDC_GROUP_TIME,12,186,152,99
+    CONTROL         "&Datum:",IDC_CHECK_DATE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,200,46,13
+    CONTROL         "DateTimePicker2",IDC_PCDATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,80,200,80,13
+    CONTROL         "Zeit:",IDC_CHECK_EXACT_TIME,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,215,38,13
+    CONTROL         "DateTimePicker3",IDC_TIME_EXACT,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,80,215,61,13
+    CONTROL         "Zeitraum &bis:",IDC_CHECK_TIME_FROM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,20,235,62,10
+    CONTROL         "DateTimePicker2",IDC_PCDATE_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,80,250,80,13
+    CONTROL         "DateTimePicker3",IDC_TIME_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,80,265,61,13
+    CONTROL         "A&lle Stationen und Archive",IDC_CHECK_ALL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,184,5,111,10
+    CONTROL         "Tree1",IDC_SERVER_ARCHIVES,"SysTreeView32",
+                    TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | 
+                    WS_BORDER | WS_TABSTOP,185,20,154,225
+    CONTROL         "Gefundene Bilder &anzeigen",IDC_CHECK_OPEN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,180,257,104,10
+    CONTROL         "Gefundene Bilder &kopieren",IDC_CHECK_COPY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,180,271,104,10
+    DEFPUSHBUTTON   "Suche",IDOK,289,255,50,14
+    PUSHBUTTON      "Schließen",IDCANCEL,290,274,50,14
+    SCROLLBAR       IDC_SCROLLBAR_FIELDS,155,20,10,162,SBS_VERT
+    GROUPBOX        "Suchkriterien",IDC_GRP_FIELDS,5,5,169,285
+    LTEXT           "Datum:",IDC_PCDATEEND_TEXT,35,251,24,13,SS_CENTERIMAGE
+    LTEXT           "Zeit:",IDC_TIMEEND_TEXT,35,265,15,13,SS_CENTERIMAGE
+    CONTROL         "Bereich-Suche",IDC_SEARCHAREA,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,85,235,71,10
+END
+
+IDD_QUERY_FIELD_NUM DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Feldname",IDC_TXT_FIELD,0,2,56,8
+    EDITTEXT        IDC_EDIT_VALUE,85,0,57,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_BACKUP DIALOGEX 0, 0, 376, 290
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION
+CAPTION "Datensicherung"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Sicherungslaufwerk",IDC_GRP_DRIVE,165,50,196,83
+    LTEXT           "&Ziellaufwerk:",IDC_TXT_DESTINATION,175,65,41,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_COMBO_DESTINATION,230,61,60,49,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Typ:",IDC_STATIC_TYPE,175,85,15,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Static",IDC_TXT_TYPE,225,85,72,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Frei:",IDC_STATIC_FREE,175,100,12,8,0,WS_EX_TRANSPARENT
+    LTEXT           "000000",IDC_TXT_MB_FREE,225,100,25,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "MBytes",IDC_STATIC_MB,267,100,24,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Ausgewählt:",IDC_STATIC_SELECTED,175,115,39,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "000000",IDC_TXT_SELECTED_MB,225,115,25,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "MBytes",IDC_STATIC_MB2,267,115,24,8,0,WS_EX_TRANSPARENT
+    DEFPUSHBUTTON   "Starten",IDOK,202,259,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,256,259,50,14
+    GROUPBOX        "Datensicherung",IDC_GRP_BACKUP,7,7,362,275
+    CONTROL         "Progress2",IDC_PROGRESS_PROCESS,"msctls_progress32",
+                    WS_BORDER,175,220,175,14
+    LTEXT           "Bereits gesichert:",IDC_TXT_SIZE,175,175,55,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0/0MB",IDC_SIZE_MB,245,175,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Verbleibende Zeit:",IDC_TXT_TIME,175,205,58,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Unbekannt",IDC_TIME_S,245,205,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Geschwindigkeit:",IDC_TXT_VELOCITY,175,190,55,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0 kB/s",IDC_VELOCITY_KBS,245,190,106,8,0,
+                    WS_EX_TRANSPARENT
+    PUSHBUTTON      "Schließen",IDC_CLOSE,310,259,50,14
+    LTEXT           "Zu sichernde Sequencen:",IDC_STATIC_SEQUENCES,15,137,82,
+                    8,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Sicherungsfortschritt",IDC_STATIC_PROGRESS,164,143,196,
+                    103
+    LISTBOX         IDC_LIST_SEQUENCES,15,149,138,124,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Status:",IDC_STATIC_STATE,175,160,23,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Noch nicht begonnen",IDC_TXT_STATE,245,160,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Name der Sicherung:",IDC_TXT_NAME,15,20,68,8,0,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT_BACKUP_NAME,87,18,202,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "CD/R",IDC_CDR,301,60,50,14
+    LTEXT           "Zu sichernde Archive:",IDC_STATIC_ARCHIVE,15,39,69,8,0,
+                    WS_EX_TRANSPARENT
+    LISTBOX         IDC_LIST_ARCHIVES,15,50,138,83,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_BACKUP_NEW DIALOGEX 0, 0, 376, 297
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION
+CAPTION "Datensicherung"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Name der Sicherung:",IDC_STATIC_NAME,15,20,68,8,0,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT_BACKUP_NAME,87,18,275,14,ES_AUTOHSCROLL
+    LTEXT           "Zu sichernde Archive:",IDC_STATIC_ARCHIVE,15,38,138,8,0,
+                    WS_EX_TRANSPARENT
+    LISTBOX         IDC_LIST_ARCHIVES,15,49,138,83,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL
+    COMBOBOX        IDC_COMBO_DESTINATION,175,54,175,49,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Überprüfen",IDC_CDR,175,73,50,14
+    LTEXT           "Static",IDC_TXT_TYPE,245,76,105,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Frei:",IDC_STATIC_FREE,175,96,50,8,0,WS_EX_TRANSPARENT
+    RTEXT           "000000",IDC_TXT_MB_FREE,245,96,42,8,0,WS_EX_TRANSPARENT
+    LTEXT           "MBytes",IDC_STATIC_MB,295,96,55,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Ausgewählt:",IDC_STATIC_SELECTED,175,116,50,8,0,
+                    WS_EX_TRANSPARENT
+    RTEXT           "000000",IDC_TXT_SELECTED_MB,245,116,42,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "MBytes",IDC_STATIC_MB2,295,116,55,8,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Sicherungslaufwerk",IDC_GRP_DRIVE,165,40,196,92
+    LTEXT           "Startdatum:",IDC_TXT_START_DATE,21,150,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "DateTimePicker1",IDC_START_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,92,148,55,15
+    LTEXT           "Startzeit:",IDC_TXT_START_TIME,21,169,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "DateTimePicker2",IDC_START_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,92,167,55,15
+    LTEXT           "Enddatum:",IDC_TXT_END_DATE,21,188,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "DateTimePicker3",IDC_END_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,92,186,55,15
+    LTEXT           "Endzeit:",IDC_TXT_END_TIME,21,207,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "DateTimePicker4",IDC_END_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,92,205,55,15
+    PUSHBUTTON      "Aktuelle Größe berechen",IDC_CALCULATE_SIZE,21,223,125,
+                    14
+    PUSHBUTTON      "Maximales Ende berechnen",IDC_CALCULATE_END,21,241,125,
+                    14
+    PUSHBUTTON      "Auf Startwerte zurücksetzen",IDC_RESET_START_END,21,259,
+                    125,14
+    GROUPBOX        "Sicherungszeitraum",IDC_GROUP_BACKUP_SPAN,15,138,138,
+                    142
+    LTEXT           "Status:",IDC_STATIC_STATE,175,155,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Noch nicht begonnen",IDC_TXT_STATE,242,155,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Bereits gesichert:",IDC_TXT_SIZE,175,170,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0/0MB",IDC_SIZE_MB,246,170,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Geschwindigkeit:",IDC_TXT_VELOCITY,175,185,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0 kB/s",IDC_VELOCITY_KBS,246,185,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Verbleibende Zeit:",IDC_TXT_TIME,175,200,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Unbekannt",IDC_TIME_S,246,200,106,8,0,WS_EX_TRANSPARENT
+    CONTROL         "Progress2",IDC_PROGRESS_PROCESS,"msctls_progress32",
+                    WS_BORDER,175,215,175,14
+    GROUPBOX        "Sicherungsfortschritt",IDC_STATIC_PROGRESS,165,138,196,
+                    103
+    DEFPUSHBUTTON   "Starten",IDOK,202,259,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,256,259,50,14
+    PUSHBUTTON      "Schließen",IDC_CLOSE,310,259,50,14
+    GROUPBOX        "Datensicherung",IDC_GRP_BACKUP,7,7,362,281,WS_GROUP
+END
+
+IDD_SELECT_BACKUP_DRIVE DIALOGEX 0, 0, 346, 185
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Festlegen eines Sicherungslaufwerks:"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,232,165,50,14
+    LTEXT           "Wählen Sie bitte eines der Laufwerke als Sicherungslaufwerk aus!",
+                    IDC_TXT0,7,7,223,12
+    CONTROL         "List1",IDC_LISTE,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,7,19,332,139
+    PUSHBUTTON      "Abbrechen",IDCANCEL,289,165,50,14
+END
+
+IDD_QUERY_FIELD_TIME DIALOGEX 0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Feldname",IDC_TXT_FIELD,0,2,56,8
+    CONTROL         "DateTimePicker1",IDC_TIME,"SysDateTimePick32",
+                    DTS_UPDOWN | DTS_SHOWNONE | WS_TABSTOP | 0x8,82,0,60,14
+END
+
+IDD_QUERY_FIELD_DATE DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Feldname",IDC_TXT_FIELD,0,2,56,8
+    CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
+                    DTS_SHOWNONE | DTS_LONGDATEFORMAT | WS_TABSTOP,57,0,85,
+                    14
+END
+
+IDD_QUERY_FIELD_CHAR DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Feldname",IDC_TXT_FIELD,0,2,56,8
+    EDITTEXT        IDC_EDIT_VALUE,69,0,73,14,ES_AUTOHSCROLL
+END
+
+IDD_NAVIGATION DIALOGEX 0, 0, 200, 12
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | TBS_NOTICKS | WS_TABSTOP,72,0,127,12
+    CONTROL         "00000/00000",IDC_NUMBER,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,0,0,72,12
+END
+
+IDD_SUBSTITUTE DIALOGEX 0, 0, 5, 5
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "SHOW",IDC_SHOW_ANCESTOR,0,0,5,5
+END
+
+IDD_USER_INTERFACE DIALOGEX 0, 0, 270, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Benutzer Oberfläche"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_UI_TREE,"SysTreeView32",TVS_NOSCROLL | WS_BORDER | 
+                    WS_TABSTOP,6,6,132,132
+    CONTROL         "Gleichmäßig",IDC_UI_DIVMODE0,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,150,19,96,
+                    10
+    CONTROL         "Einzeln",IDC_UI_DIVMODE1,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,31,96,10
+    CONTROL         "Variabel",IDC_UI_DIVMODE2,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,43,96,10
+    CONTROL         "Immer",IDC_UI_VISIBILITY0,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE | WS_GROUP,150,19,108,10
+    CONTROL         "Automatisch",IDC_UI_VISIBILITY1,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,31,108,10
+    CONTROL         "Nie",IDC_UI_VISIBILITY2,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,43,108,10
+    CONTROL         "Anfangs Ja",IDC_UI_VISIBILITY3,"Button",
+                    BS_AUTORADIOBUTTON,150,61,108,10
+    CONTROL         "Anfangs Nein",IDC_UI_VISIBILITY4,"Button",
+                    BS_AUTORADIOBUTTON,150,73,108,10
+    GROUPBOX        "Anzeigen:",IDC_UI_GROUP,144,6,120,114,WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,153,124,50,14,WS_GROUP
+    PUSHBUTTON      "Abbrechen",IDCANCEL,214,124,50,14
+    CONTROL         "Als Liste",IDC_UI_AS_LIST,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,103,42,10
+    CONTROL         "Minimiert",IDC_UI_MINIMIZED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,91,43,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_IDIP_CLIENT_DLG_BAR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 534
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_CSB, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 185
+        HORZGUIDE, 9
+        HORZGUIDE, 24
+        HORZGUIDE, 48
+        HORZGUIDE, 72
+    END
+
+    IDD_PTZ_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_VIDEO_PTZ, DIALOG
+    BEGIN
+        RIGHTMARGIN, 195
+        VERTGUIDE, 6
+        VERTGUIDE, 96
+        VERTGUIDE, 102
+        VERTGUIDE, 192
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 67
+    END
+
+    IDD_SAVE_SEQUENZER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_CONNECTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 141
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_INPUT_DEACTIVATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 241
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_MD, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 245
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_AUDIO_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 64
+        VERTGUIDE, 70
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 5
+        HORZGUIDE, 27
+        HORZGUIDE, 45
+        HORZGUIDE, 50
+        HORZGUIDE, 73
+        HORZGUIDE, 100
+        HORZGUIDE, 120
+        HORZGUIDE, 145
+        HORZGUIDE, 165
+    END
+
+    IDD_HTML_MAP_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        BOTTOMMARGIN, 110
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 95
+    END
+
+    IDD_HTML_LINK_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 168
+        VERTGUIDE, 174
+        VERTGUIDE, 225
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+    END
+
+    IDD_OEM_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 132
+        VERTGUIDE, 78
+        BOTTOMMARGIN, 59
+        HORZGUIDE, 41
+        HORZGUIDE, 51
+    END
+
+    IDD_ALARM_LIST, DIALOG
+    BEGIN
+        HORZGUIDE, 6
+        HORZGUIDE, 11
+    END
+
+    IDD_BACKUP, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 289
+    END
+
+    IDD_BACKUP_NEW, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 296
+    END
+
+    IDD_NAVIGATION, DIALOG
+    BEGIN
+        VERTGUIDE, 72
+    END
+
+    IDD_USER_INTERFACE, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 138
+        VERTGUIDE, 144
+        VERTGUIDE, 150
+        VERTGUIDE, 246
+        VERTGUIDE, 258
+        VERTGUIDE, 264
+        HORZGUIDE, 6
+        HORZGUIDE, 24
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 78
+        HORZGUIDE, 96
+        HORZGUIDE, 108
+        HORZGUIDE, 120
+        HORZGUIDE, 138
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_PANLEFT             CURSOR                  "res\\panleft.cur"
+IDC_PANRIGHT            CURSOR                  "res\\panright.cur"
+IDC_TILTUP              CURSOR                  "res\\tiltup.cur"
+IDC_TILTDOWN            CURSOR                  "res\\tiltdown.cur"
+IDC_ZOOMIN              CURSOR                  "res\\zoomin.cur"
+IDC_ZOOMOUT             CURSOR                  "res\\zoomout.cur"
+IDC_GLASS               CURSOR                  "res\\glass.cur"
+IDC_LEFTTOP             CURSOR                  "res\\lefttop.cur"
+IDC_RIGHTTOP            CURSOR                  "res\\righttop.cur"
+IDC_RIGHTBOTTOM         CURSOR                  "res\\rightbot.cur"
+IDC_LEFTBOTTOM          CURSOR                  "res\\leftbot.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 2110
+//
+
+NOSTATEMENT.HTM         2110                    "res\\nostatement.htm"
+BACK.GIF                2110                    "res\\back.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "IdipClient"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "IdipClient"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_OPEN            "Öffnet ein gespeichertes Einzelbild"
+    ID_FILE_PRINT           "Druckt das aktive Fenster"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NON_SHELL            "Startet das Programm im ungeschützten 'Windows-Modus'"
+    ID_EXIT_CLIENT          "Verläßt das Programm und schließt alle Verbindungen zu den Gegenstationen."
+    ID_HTML_NEW_PAGE        "Fügt eine neue Karte und einen Link zu dieser Karte ein."
+    ID_VIEW_OPTIMIZE_COLUMN_WIDTH 
+                            "Optimiert die Spaltenbreite nach Inhalt und Überschrift."
+    ID_VIEW_OPTIMIZE_BY_CONTENT "Optimiert die Spaltenbreite nach dem Inhalt"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DISCONNECT           "Trennt die ausgewählte Verbindung"
+    ID_CONNECT              "Stellt eine Verbindung her."
+    ID_CONNECT_LOCAL        "Stellt eine Verbindung zur lokalen Station her"
+    ID_NEW_LOGIN            "Trennt alle Verbindungen zu den Gegenstationen und loggt einen neuen Benutzer ein"
+    ID_VIDEO_SAVE           "Speichert die Bilder der ausgewählten Kamera\nSpeichern"
+    ID_INPUT_CONFIRM        "Bestätigt den Melderalarm"
+    ID_RELAIS_OPEN          "Öffnet ein geschlossenes Relais"
+    ID_RELAIS_CLOSE         "Schließt ein geöffnetes Relais"
+    ID_VIDEO_2_2            "Zeigt 2 mal 2 Bilder\n2 x 2 Bilder"
+    ID_VIDEO_3_3            "Zeigt 3 mal 3 Bilder\n3 x3 Bilder"
+    ID_VIDEO_4_4            "Zeigt 4 mal 4 Bilder\n4 x 4 Bilder"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ZOOM_OUT             "Zeigt das Bild wieder unvergrößert an"
+    ID_SMALL_ORIGINAL       "Stellt das Bild in Originalgröße dar\n1:1"
+    ID_VIDEO_FEIN           "Zeigt Bilder in einer hohen Auflösung"
+    ID_VIDEO_GROB           "Zeigt Bilder in einer geringen Auflösung."
+    ID_VIDEO_SAVE_ALL_STOP  "Stoppt das Speichern der Bilder aller Kameras\nStop"
+    ID_VIDEO_MASK           "Ändert die permanente Maske der Bewegungserkennung"
+    ID_VIEW_1_PLUS          "Zeigt die 1 plus Ansicht"
+    ID_HOST_1_PLUS          "Zeigt bei Alarmen Bilder in 1 plus Ansicht an\nAnsicht 1 plus bei Alarmen"
+    ID_OPTIONS              "Zeigt Einstellungen für das Programverhalten"
+    ID_VIEW_TARGET_DISPLAY  "Schaltet das Fadenkreuz ein und aus\nFadenkreuz"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHOWON_MONITOR1      "Zeigt dieses Fenster auf Monitor 1 an."
+    ID_SHOWON_MONITOR2      "Zeigt dieses Fenster auf Monitor 2 an."
+    ID_VIEW_HOSTS           "Zeigt die Positionen der Gegenstationen auf der Karte an"
+    ID_VIEW_CAMERAS         "Zeigt die Positionen der Kameras auf der Karte an"
+    ID_VIEW_RELAIS          "Zeigt die Positionen der Relais auf der Karte an"
+    ID_VIEW_DETECTORS       "Zeigt die Positionen der Melder auf der Karte an"
+    ID_ALARM_SOUND          "Schaltet die akustische Alarmmeldung an bzw. aus"
+    ID_VIEW_REFRESH         "Aktualisiert die aktuelle Ansicht"
+    ID_VIEW_TITLE_OF_SMALLWINDOWS 
+                            "Zeigt die Titelzeilen der Bildfenster an bzw. versteckt diese."
+    ID_AU_START_PLAY        "Startet die Durchsage an die gewählte Station"
+    ID_AU_START_REC         "Startet das Mithören"
+    ID_AU_STOP_PLAY         "Stoppt die Durchsage"
+    ID_AU_STOP_REC          "Stoppt das Mithören"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_MONITOR2        "Zeigt die Bilder auf dem %d. Monitor an."
+    ID_SHOWON_REGARDLESS    "Kein Monitor wird bevorzugt."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_FULLSCREEN      "Schaltet den Modus 'Ganzer Bildschirm' ein oder aus"
+    ID_VIDEO_STOP           "Schließt das Fenster der ausgewählten Kamera\nEmpfang beenden"
+    ID_VIDEO_SEQUENZER      "Definiert die Kameras für die automatische Umschaltung.\nAutomatische Kameraumschaltung"
+    ID_VIDEO_PTZ            "Steuert die zusätzlichen Kamerafunktionen\nSchwenk/Neige"
+    ID_VIDEO_ALARM_SWITCH   "Schaltet die automatische Kameraumschaltung im Alarmfall ein/aus\nAlarm Kameraumschaltung"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ZOOMIN              "Zoom Tele"
+    IDC_ZOOMOUT             "Zoom Weitwinkel"
+END
+
+STRINGTABLE 
+BEGIN
+    IDW_SYNC_DATE           "Datum für Synchronisation\nDatum für Synchronisation"
+    IDW_SYNC_TIME           "Zeit für Synchronisation\nZeit für Synchronisation"
+    IDW_SYNC_SLIDER         "Gibt an, wie schnell das nächste Bild dargestellt wird (Bereich 10 ms bis 1 s)\nGeschwindigkeit der Wiedergabe"
+    ID_SEQUENCE_PANE        "alle %ds"
+    ID_SEQUENCE_TEXT        "Umschalten:"
+    ID_DATABASE_TEXT        "Speichern:"
+    ID_DATABASE_PANE        "nicht möglich"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HOST_SAVE_SEQUENCE   "Exportiert die aktuelle Umschaltungskonfiguration in eine Datei"
+    ID_HOST_LOAD_SEQUENCE   "Importiert eine gespeicherte Umschaltungskonfiguration"
+    ID_VIDEO_PTZ_CONFIG     "Konfiguriert die Kamerabewegung und -einstellung\nSchwenk/Neige"
+    ID_VIDEO_SAVE_ALL       "Speichert die Bilder aller Kameras"
+    ID_VIDEO_CB             "Regelt Kontrast und Helligkeit und Farbe des Bildes.\nKontrast/Helligkeit/Farbe"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_2_3             "Zeigt 2 mal 3 Bilder\n2 x 3"
+    ID_VIEW_1               "Zeigt 1 Bild an"
+    ID_VIEW_2_2             "Zeigt 2 mal 2 Bilder\n2 x 2"
+    ID_VIEW_3_2             "Zeigt 3 mal 2 Bilder\n3 x 2"
+    ID_VIEW_3_3             "Zeigt die quadratische Ansicht"
+    ID_VIEW_4_4             "Zeigt 4 mal 4 Bilder\n4 x 4"
+    ID_HTML_PREV            "Zurück\nZurück"
+    ID_HTML_NEXT            "Vorwärts\nVorwärts"
+    ID_HTML_HOME            "Startseite\nStartseite"
+    ID_INPUT_LAST           "Alarmmeldungen\nZeigt die eingegangenen Alarme der letzten Zeit"
+    ID_SEQUENCE_1           "Umschaltung jede Sekunde"
+    ID_SEQUENCE_2           "Umschaltung alle 2 Sekunden"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REFERENCE_TITLE     "Referenzbild %s vom %s"
+    IDP_NOT_ALL_REFERENCE   "Es sind noch nicht alle Referenzbilder angelegt worden!\nWollen Sie das Programm trotzdem verlassen?"
+    IDS_TIME_SET            "Die Uhrzeit wurde gesetzt."
+    IDS_NO_REFERENCE        "Für diese Kamera existiert noch kein Referenzbild!"
+    IDS_REFERENCE_TITLE_FULL "Referenzbild %s, %s vom %s"
+    IDS_REFERENCE_TITLE_LIGHT "Referenzbild %s"
+    IDS_VON                 "von"
+    IDS_BIS                 "bis"
+    IDS_INPUT_DEACTIVATE    "&Zeitliche Deaktivierung..."
+    IDS_ALARM_SPAN_OFF_CONFIRM 
+                            "Die Zeitspannen für die Deaktivierung der Alarmanrufe\nwurden erfolgreich gesetzt."
+    IDS_PROGRESS            "Verbindungsfortschritt"
+    IDS_PROGRESS_TEXT       "Verbindungsaufbau:"
+    IDS_ALARM_OFF           "Zeitliche Deaktivierung von Alarmanrufen"
+    IDS_PROTOCOL            "Protokoll"
+    IDS_ALARM_OFF2          "Der Nutzer %s hat bei der Station %s die Zeitspannen für den Melder %s geändert:"
+    IDS_ALARM_OFF3          "von %s bis %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "Sie haben keinen gültigen Dongle, um diese Software zu starten, oder Ihr Dongle ist defekt.\nWenden Sie sich bitte an einen Servicetechniker!"
+    IDS_IMAGN               "This product contains portions of imaging code owned by Imagine Software Solutions, Inc., (WWW.IMAGN.COM) and Pegasus Imaging Corporation, Tampa, FL, (WWW.PEGASUSIMAGING.COM)."
+    IDS_SEQUENCE_OFF        "aus"
+    IDP_NO_CONNECTION       "Es kann keine Verbindung zur Gegenstation hergestellt werden."
+    IDS_LOCAL_SERVER        "Lokale Station"
+    IDS_OVERWRITE_REFERENCE "Für %s existiert bereits ein Referenzbild, wollen Sie das bestehende überschreiben?"
+    IDS_LOGO                "Logo"
+    IDS_POSSIBLE            "möglich"
+    IDS_STORING             "aktiv"
+    IDS_FPS                 "&Bildrate"
+    IDS_PTZ                 "&Schwenk/Neige"
+    IDS_CAMERAS             "Kameras"
+    IDS_INPUT               "Melder"
+    IDS_RELAY               "Relais"
+    IDP_NO_CONNECTION_LINK_MODUL 
+                            "Es kann keine Verbindung aufgebaut werden.\nDas Verbindungsmodul läuft nicht!"
+    IDP_NO_CONNECTION_SERVER 
+                            "Es kann keine Verbindung aufgebaut werden.\nDer angewählte Server läuft nicht!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HTML                "Internet Dokument"
+    IDC_TITLE_BTN           "Minimiert oder maximiert dieses Fenster"
+    IDS_DIB                 "Bitmap Datei"
+    IDS_FIELD_NAME          "Feldname"
+    IDS_FIELD_VALUE         "Feldwert"
+    IDS_PICTURE             "Kamera: %d Datum: %s  Zeit: %s  Auflösung: %dx%d"
+    IDS_PICTURE_TABBED      "Kamera:\t%d\nDatum:\t%s\nZeit:\t%s\nAuflösung:\t%dx%d"
+    IDC_MENU_BTN            "Ruft ein Kontextmenu auf"
+    IDC_CLOSE_VIEW          "Schließt dieses Fenter"
+    IDS_CAMERA_NR           "Kamera Nr.%d"
+    IDP_NO_CONNECTION_INVALID_PERMISSION 
+                            "Sie haben keine Berechtigung sich mit dieser Gegenstation zu verbinden."
+    IDS_ERROR_ON            "Es ist ein Fehler auf der Gegenstation %s aufgetreten.\n%s"
+    IDC_MINIMIZE_SPLITTER   "Minimiert die Strukturansicht"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION_RESET "Es kann keine Verbindung aufgebaut werden.\nDer angewählte Server wird gerade initialisiert!"
+    IDP_NO_CONNECTION_MAX_CLIENT 
+                            "Es kann keine Verbindung aufgebaut werden.\nDer angewählte Server nimmt keine Verbindungen mehr an!"
+    IDP_ERROR               "Die Station %s lieferte folgende Meldung:\n%s."
+    IDP_NO_CONNECTION_UNKNOWN 
+                            "Es kann keine Verbindung zur Gegenstation hergestellt werden."
+    IDS_DEFAULT_HTML_HEAD   "Fehler: Seite nicht vorhanden."
+    IDS_DEFAULT_HTML_TEXT   "Für diesen Zusammenhang existiert keine Seite, die angezeigt werden kann. Die folgenden Ursachen könnten in Frage kommen:"
+    IDS_DEFAULT_HTML_1      "Es wurde für diesen Alarm noch keine Handlungsanweisung gegeben bzw. für diesen Alarm existiert keine Handlungsanweisung."
+    IDS_DEFAULT_HTML_2      "Es wurde für diesen Alarm noch keine Handlungsanweisung vom Sender übertragen."
+    IDS_CONNECT             "zur &Gegenstation...\tENTER"
+    IDS_ALARM               "Alarm"
+    IDS_SAVE                "Speichern"
+    IDS_LOAD                "Öffnen"
+    IDS_MAX_FPS             "%d Bilder pro Sekunde (max.)"
+    IDS_NOTIFICATION_FROM   "Benachrichtigung von %s eingetroffen: %s"
+    IDS_MAP                 "Anwahlkarte"
+    IDP_NO_HOST             "Die Gegenstation %s wurde nicht in der Liste gefunden.\nBitte überprüfen Sie die Schreibweise!"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SEQUENCE_3           "Umschaltung alle 3 Sekunden"
+    ID_SEQUENCE_4           "Umschaltung alle 4 Sekunden"
+    ID_SEQUENCE_5           "Umschaltung alle 5 Sekunden"
+    ID_SEQUENCE_10          "Umschaltung alle 10 Sekunden"
+    ID_SEQUENCE_15          "Umschaltung alle 15 Sekunden"
+    ID_SEQUENCE_20          "Umschaltung alle 20 Sekunden"
+    ID_SEQUENCE_30          "Umschaltung alle 30 Sekunden"
+    ID_SEQUENZE             "Automatische Kameraumschaltung\nUmschaltung"
+    ID_CLOSE_WND_THIS       "Schließt nur das markierte Fenster"
+    ID_SMALL_CONTEXT        "Kontext Menü\nKontext Menü"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CLOSE_WND_LIVE_ALL   "Schließt alle Live-Fenster"
+    ID_CLOSE_WND_PLAY_ALL   "Schließt alle Datenbank-Fenster"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ARCHIV_BACKUP        "Startet die Datensicherung"
+    ID_CLOSE_WND_ALL        "Schließt alle Fenster"
+    ID_SEQUENCE_OPEN_SINGLE "Öffnet das gewählte Archiv und schließt alle anderen."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NAVIGATE_BACK        "Wiedergabe rückwärts"
+    ID_NAVIGATE_PREV        "Einzelbild rückwärts"
+    ID_NAVIGATE_NEXT        "Einzelbild vorwärts"
+    ID_NAVIGATE_FORWARD     "Wiedergabe vorwärts"
+    ID_NAVIGATE_FAST_FORWARD "Schneller Vorlauf"
+    ID_NAVIGATE_SKIP_FORWARD "Springt zum nächsten Vorgang"
+    ID_NAVIGATE_END         "Springt zum neusten Bild"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NAVIGATE_EJECT       "Schließt das aktuelle Datenbankfenster"
+    ID_NAVIGATE_POS1        "Springt zum ersten Bild"
+    ID_NAVIGATE_SKIP_BACK   "Springt zum vorherigen Vorgang"
+    ID_NAVIGATE_FAST_BACK   "Schneller Rücklauf"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIDEO_CSB            "Regelt Kontrast, Helligkeit und Farbe des Bildes"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CONNECTION_ANIMATION "Gibt bei Alarm einen akustischen Alarmton aus\nAkustische Alarmmeldung"
+    ID_VIEW_ORIGINAL        "Stellt das Bild in Originalgröße dar\n1:1"
+    ID_INPUT_INFORMATION    "Zeigt zusätzliche Informationen zu dem ausgewählten Melder an"
+    ID_VIDEO_SAVE_REFERENCE "Speichert das aktuelle Bild der ausgewählten Kamera als Referenzbild"
+    ID_HOST_DATETIME        "Setzt Datum und Uhrzeit bei der Gegenstation\nDatum und Uhrzeit setzen"
+    ID_HOST_FIRST_CAM       "Zeigt zu Begin das Bild der ersten Kamera an\nErste Kamera zu Beginn anzeigen"
+    ID_HOST_ALL_CAMS        "Zeigt zu Beginn Bilder aller Kameras an\nAlle Kameras zu Beginn anzeigen"
+    ID_CONNECT_MAP          "Zeigt eine Anwahlkarte"
+    ID_HOST_CAMERA_MAP      "Zeigt eine Karte mit den Kamerastandorten an"
+    ID_VIDEO_SHOW_REFERENCE "Zeigt das aktuelle Refernzbild an"
+    ID_VIDEO_FULLSCREEN     "Schaltet den Modus 'Ganzer Bildschirm' ein oder aus\nVollbild"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RIGHT               "Rechts"
+    IDC_DOWN                "Runter"
+    IDC_FOCUSIN             "Fokus nah"
+    IDC_FOCUSOUT            "Fokus fern"
+    IDC_IRISIN              "Iris öffnen"
+    IDC_IRISOUT             "Iris schließen"
+    IDC_CENTER              "Anfangs-Position"
+    IDC_START_TIME          "Zum eingestellten Zeitpunkt wird der Melder deaktiviert."
+    IDC_STOP_DATE           "Zum eingestellten Zeitpunkt wird der Melder aktiviert."
+    IDC_STOP_TIME           "Zum eingestellten Zeitpunkt wird der Melder aktiviert."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_LIST_DEACTIVATIONS  "Die aktuellen Deaktivierungszeitspannen für diesen Melder."
+    IDC_BUTTON_NEW          "Fügt eine neue Deaktivierungszeitspanne zur Liste hinzu.\nAnschließend kann die Zeitspanne eingestellt werden."
+    IDC_BUTTON_DELETE       "Eine in der Liste markierte Zeitspanne\nkann über diesen Button gelöscht werden."
+    IDC_SPEED               "Geschwindigkeit"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION_INVALID_SERIAL 
+                            "Es kann keine Verbindung aufgebaut werden.\nUngültige Lizenznummer!"
+    IDP_NO_CONNECTION_INVALID_PASSWORD 
+                            "Es kann keine Verbindung aufgebaut werden.\nUngültiges Passwort oder ungültige PIN!"
+    IDP_MASK_DENIED         "Sie haben nicht die Berechtigung\ndie permanente Maske von Kamera %s zu bearbeiten."
+    IDS_PRESET              "Speichern"
+    IDS_PRESET_CANCEL       "Abbrechen"
+    IDS_TREE_VIEWS          "Kontrollelementanzeigen"
+    IDS_MONITOR             "Monitor %d"
+    IDS_AUDIO               "Audio"
+    IDS_PICTURE_FILETYPES   "Bilddateien"
+    IDS_LOAD_PICTURE_FILE   "Bilddatei laden"
+    IDS_HOSTS               "Gegenstationen"
+    IDS_HTML_EDIT_MODE      " *** bearbeiten ***"
+    IDS_DO_NOT_LEAVE_EMPTY  "Das Feld %s darf nicht leer sein!"
+    IDP_DELETE_HTML_MAP     "Wollen Sie wirklich die\nAnwahlkarte %s\nlöschen?"
+    IDP_REPLACE_EXISTING_CAM_SWITCH 
+                            "Soll die bereits bestehende\nKameraumschaltung %s\nersetzt werden?"
+    IDS_HTML_LINK_NAMES_CHANGED 
+                            "Die Namen der rot markierten Links wurden geändert.\nMöchten Sie die Änderungen sofort speichern?\n\nAntworten Sie mit Nein, wenn Sie die geänderten Links\nüberprüfen wollen."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_INVALID_HTML_ELEMENT 
+                            "Dieses Element ist ungültig. Es sollte gelöscht werden."
+    IDS_REJECT_ANNOUNCEMENT "Die Durchsage an die Gegenstation wurde abgewiesen, da\nbereits eine Durchsage von einer anderen Gegenstation\ngemacht wird."
+    IDS_NO_MEDIA_RECEIVE_CONFIRM 
+                            "Die Audioausgabe ist blockiert!\n\nSoll die Audioausgabe reaktiviert werden?"
+    IDS_CONTROL_BAR         "Funktions Leiste"
+    IDS_OBJECT_VIEW         "Objekt Ansicht"
+    IDS_SHOW_AT_LEAST_ONE_WINDOW 
+                            "Mindestens ein Fenster muß bei Programmstart sichtbar sein."
+    IDS_START_IN_SHELL_MODE "Wollen Sie das Programm im geschützten Modus starten?"
+    IDS_CLOSE_APP_REQUEST   "Wollen Sie das Programm jetzt beenden?"
+    IDS_OFF                 "Aus"
+    IDS_LOW                 "Niedrig"
+    IDS_NORMAL              "Normal"
+    IDS_MEDIUM              "Mittel"
+    IDS_HIGH                "Hoch"
+    IDS_RECTSEARCH          "Bereichsuche"
+    IDS_RECTSEARCHEND       "ergebnislos beendet"
+    IDS_AUX_OUT             "Schalter %d"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_SHOW_ADAPTIVE    "Zeigt die adaptive Maske an"
+    IDC_PRESET              "Speichern der aktuellen Einstellungen auf eine Position (Home, 1 - 9)"
+    IDC_IRIS_AUTO           "Auto-Iris"
+    IDC_FOCUS_AUTO          "Auto-Fokus"
+    IDC_TURN_180            "Schwenkt die Kamera um 180 Grad"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_AU_PROPERTIES        "Ruft den Audioeigenschaftsdialog auf"
+    IDS_AU_AUTOMATIC_GAIN   "Automatisch"
+    ID_EDIT_HTML_PAGE       "Schaltet den Editiermodus für die Karten ein bzw. aus"
+    ID_EDIT_CREATE_HTML_CAMERA_PAGE 
+                            "Erstellt eine Kamerakarte für die lokale Station"
+    ID_EDIT_CREATE_HTML_HOST_PAGE 
+                            "Erstellt eine Anwahlkarte für externe Stationen"
+    ID_EDIT_HTML_MAP_PROPERTIES "Ändert die Eigenschaften der Karte"
+    ID_HTML_SAVE            "Speichert die Karte und beendet den Modus 'Bearbeiten'\nKarte speichern"
+    ID_EDIT_HTML_LINK_PROPERTIES "Ändert die Eigenschaften des Links"
+    ID_AU_STOP              "Beendet die Audioverbindung"
+    ID_AU_START             "Startet die Audioverbindung"
+    ID_AU_START_DUPLEX_PLAY "Baut eine Gegensprechverbindung auf"
+    ID_EDIT_CLEAR_MAP       "Löscht die gewählte Karte"
+    ID_AU_STOP_ANY          "Beendet die aktuelle Audioverbindung"
+    ID_CONNECT_HOST         "Stellt eine Verbindung zur gewählten Gegenstation her"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHOWON_MONITOR_EXCLUSIVE 
+                            "Zeigt nur dieses Fenster auf dem aktuellen Monitor an."
+    ID_VIEW_AUDIOS          "Zeigt die Positionen der Lautsprecher und Mikrofone auf der Karte an"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DRIVE_CD            "CD-ROM-Laufwerk"
+    IDS_BACKUP_NOT_STARTED  "Noch nicht begonnen"
+    IDS_BACKUP_RUNNING      "Sichere die Daten"
+    IDS_BACKUP_CANCELLED    "Abgebrochen"
+    IDS_BACKUP_FINISHED     "Erfolgreich beendet"
+    IDS_TITLE_BACKUP        "Sicherung vom"
+    IDS_BACKUP_FAILED       "Fehler, Sicherung abgebrochen"
+    IDP_BACKUP_INITIALIZE_FAILED 
+                            "Während der Initialisierung des Sicherungsvorganges ist ein Fehler aufgetreten."
+    IDP_BACKUP_COPY_FAILED  "Während des Kopierens einer Datei des Sicherungsvorganges ist ein Fehler aufgetreten."
+    IDS_COPY_ROV            "Kopiere Lesesoftware"
+    IDS_COPY_ROV_DONE       "Lesesoftware kopiert"
+    IDS_CDR_CHECK           "Prüfe Laufwerk..."
+    IDS_ASK_CLOSE_CDR       "Soll die momentan eingelegte CD/R abgeschlossen werden?\nNur dann kann sie von herkömmlichen CD-ROM Laufwerken gelesen werden."
+    IDP_EJECT_DIRECTCD      "Entfernen Sie jetzt die CD/R aus dem Laufwerk!\nSie werden dann gefragt, wie Sie die CD/R behandeln wollen.\nWählen Sie den Punkt:\nCD so organisieren, daß sie in einem Standard-CD-ROM-Laufwerk gelesen werden kann."
+    IDS_SEARCH_FROM         "Suche vom %s nach %s"
+    IDS_DRIVE               "Laufwerk"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_USEDAS              "verwendet als"
+    IDS_USED                "belegt in MByte"
+    IDS_SIZE                "Größe in MByte"
+    IDS_TYP                 "Typ"
+    IDP_ASK_DELETE_ARCHIV   "Wollen Sie das Sicherungsarchiv\n'%s'\nwirklich löschen?\nAlle Bilder und Daten gehen unwiderruflich verloren."
+    IDP_DELETE_SEQUENCE     "Wollen Sie wirklich die Sequenz\n'%s'\ndes Archivs '%s' vom %s\nauf der Station '%s' löschen?\n\nAlle Bilder und Daten gehen unwiderruflich verloren."
+    IDS_DBPROP_NR           "Nr"
+    IDS_DBPROP_FUELL        "Füllgrad"
+    IDS_DBPROP_NAME         "Archivname"
+    IDS_DBPROP_TYP          "Typ"
+    IDS_DBPROP_MB           "Größe in MB"
+    IDS_DBPROP_BENUTZT      "benutzt in MB"
+    IDS_DBPROP_SIZE_GB      "Größe in GB"
+    IDS_DBPROP_USED_GB      "benutzt in GB"
+    IDS_READ_ERROR          "Die Bilddaten konnten nicht gelesen werden."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TIME                "Zeit"
+    IDS_ALARM_LIST_PRINT_TITLE "Alarme von %s vom %s von Kamera %s:"
+    IDS_ALARM_LIST_PRINT_PAGE "Seite %d/%d"
+    IDS_BACKUP_CALCULATING  "Berechne Zeiten und Größen"
+    IDP_BACKUP_ASK_FOR_CONTINUATION 
+                            "Wollen Sie das Backup nahtlos fortführen?"
+    IDP_DELETE_DATE_SEQUENCES 
+                            "Wollen Sie wirklich alle Sequenzen des Archivs\n'%s' vom %s\nauf der Station '%s' löschen?\n\nAlle Bilder und Daten gehen unwiderruflich verloren."
+    IDP_FILE_OVERWRITE      "Die Datei %s existiert bereits.\nSoll die Datei überschrieben werden?"
+    IDS_MEDIUM_CD_R         "CD-R Medium"
+    IDS_MEDIUM_CD_RW        "CD-RW Medium"
+    IDS_MEDIUM_DVD_ROM      "DVD-ROM Medium"
+    IDS_MEDIUM_DVD_RAM      "DVD-RAM Medium"
+    IDS_MEDIUM_DVD_R        "DVD-R Medium"
+    IDS_MEDIUM_DVD_RW       "DVD-RW Medium"
+    IDS_TEMP_BACKUP_RUNNING "Erstelle temporäre Dateien"
+    IDP_DELETE_CDRW         "Das eingelegte Medium enthält bereits Daten.\nVor dem Beschreiben werden diese Daten gelöscht!\n\nWollen Sie diese Daten löschen?"
+    IDP_MULTISESSION_NOT_POSSIBLE 
+                            "Dieses Medium kann von der Software nicht beschrieben werden.\nBitte legen Sie ein anderes Medium ein."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_DISK             "Auf Laufwerk(e) %s kann nicht zugegriffen werden.\nLegen Sie eine Diskette ein!\nWiederholen Sie den Vorgang!"
+    IDP_DISK_RO             "Die Diskette ist mit einem Schreibschutz versehen oder fehlerhaft!\nEntfernen Sie den Schreibschutz und wiederholen Sie den Vorgang!"
+    IDP_NO_DISK_SPACE       "Auf Laufwerk %s ist nicht mehr genügend Platz vorhanden.\n Legen Sie eine andere Diskette ein und wiederholen Sie den Vorgang!"
+    IDP_DISK_WRITTEN        "Die Daten wurden unter dem Namen %s abgespeichert."
+    IDS_DATABASE_INFO       "Datenbank Informationen"
+    IDS_OPEN                "Öffnen"
+    IDS_JPEG                "JPEG Bilder"
+    IDS_JPX                 "Bilder und Daten"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KTO_NR              "Kontonr."
+    IDS_ARCHIV_NR           "Archivnr."
+    IDS_KAMERA_NR           "Kameranr."
+    IDS_REC_DATE            "PC Datum"
+    IDS_REC_TIME            "PC Zeit"
+    IDS_DTP_TIME            "GA Zeit"
+    IDS_GA_NR               "GA Nr."
+    IDS_TA_NR               "TA Nr."
+    IDS_BANKLEITZAHL        "Bankleitzahl"
+    IDS_VALUE               "Betrag"
+    IDS_CURRENCY            "Währung"
+    IDS_STATION             "Stationsname"
+    IDS_CAM_NAME            "Kameraname"
+    IDS_DTP_DATE            "GA Datum"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PICTURE_NR          "Bildnummer"
+    IDS_COMMENT             "Kommentar"
+    IDS_ARCHIVE             "Archiv"
+    IDS_STATION2            "Station"
+    IDS_AND                 "und"
+    IDS_ALL_CAMERAS         "Alle Kameras"
+    IDS_RESOLUTION          "Auflösung"
+    IDP_DELETE_ARCHIV       "Wollen Sie wirklich alle Sequenzen des Archivs\n'%s' auf der Station '%s' löschen?\n\nAlle Bilder und Daten gehen unwiderruflich verloren."
+    IDS_SUM                 "Gesamt"
+    IDS_TOOLTIP_ARCHIV      "Archiv:\t%s\nBenutzt:\t%d MB\nGröße:\t%d MB"
+    IDS_TOOLTIP_DIB         "Bild Nr.:\t\t%d\nDatum:\t\t%s\nZeit:\t\t%s\nAuflösung:\t%dx%d"
+    IDS_NO_BACKUP_3X        "Für die Softwareversion von %s ist diese Form des Backups nicht möglich!"
+    IDS_CANCEL_BACKUP       "Wollen Sie den Backup-Vorgang wirklich abbrechen?"
+    IDS_DRIVE_FD            "Diskette"
+    IDS_DRIVE_HD            "Lokale Festplatte"
+    IDS_DRIVE_NET           "Netzwerkverbindung"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CLEAN_RW            "Lösche RW-Medium"
+    IDS_NO_MEDIUM_FOUND     "Kein Medium gefunden"
+    IDS_MEDIUM_CD_ROM       "CD-ROM Medium"
+    IDS_DRIVE_DVD_RAM       "DVD-RAM Laufwerk"
+    IDS_WRITE_FAILED        "Die Datei %s konnte nicht geschrieben werden.\nDer Datenträger ist voll oder schreibgeschützt."
+    IDS_BACKUP              "Datensicherung"
+    IDS_BACKUP_REMOTE       "Datensicherung auf der Gegenstation"
+    IDS_BACKUP_DRIVE_REMOTE "Sicherungslaufwerk (Gegenstation)"
+    IDS_AUDIO_BUSY          "Audiokanal belegt."
+    IDS_DBD_CSID            "Kundennr."
+    IDS_DBD_FINM            "Vorname"
+    IDS_DBD_LANM            "Nachname"
+    IDS_DBD_PRID            "Vorgangsnr."
+    IDS_DBD_BXID            "Fachnr."
+    IDS_WAIT_FOR_IMAGE      "Das System wartet auf die Bilddaten."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NOTHING_TO_BACKUP   "Es sind weder Sequenzen noch Archive zu sichern!"
+    IDS_DATE                "Datum"
+    IDS_DATE_FORMAT         "%d.%m.%Y"
+    IDP_LOGIN_TIMEOUT       "Ihr Paßwort ist abgelaufen, bitte geben Sie ein neues Paßwort ein."
+    IDP_PASSWORD_LOCKED     "Sie haben mehr als %d Fehlversuche beim Login gemacht.\nIhr Zugang ist für %d Stunden gesperrt."
+    IDP_PASSWORD_WRONG      "Das Paßwort hat sich nicht geändert. Sie müssen ein anderes Paßwort wählen."
+    IDP_WRONG_PERMISSION    "Sie haben nicht die notwendige Berechtigungsstufe"
+    IDS_LOGIN_FAILED        "Nutzer %s: Name und Paßwort stellen keinen gültigen Login dar, der Zugriff wird verweigert"
+    IDS_USER_LOCKED         "Nutzer %s: Mehr als %d Fehlversuche beim Login,  Zugang ist für %d Stunden gesperrt"
+    IDS_PASSWORD_OLD        "Nutzer %s:  Paßwort ist abgelaufen"
+    IDP_LOGIN_FAILED        "Name und Paßwort stellen keinen gültigen Login dar!\nDer Zugriff wird verweigert!"
+    IDS_SECOND_LOGIN        "2. Login"
+    IDP_DISCONNECT_ALARM_CONNECTION 
+                            "Es besteht noch eine Alarmverbindung!\nWollen Sie diese Verbindung wirklich beenden?"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_SEARCH        "Datenbanksuche"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_NUMPLUS       "Zweistellige Eingabe"
+    ID_BUTTON_SYSTEM        "Öffnet die Systemverwaltung"
+    ID_BUTTON_DOME          "Kameraposition / Kameraauswahl"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SYNC                 "Startet oder beendet die zeitsynchrone Wiedergabe von Bildern"
+    ID_SEQUENCE_OVER        "Öffnet auch jede weitere Sequenz in dem selben Fenster."
+    ID_SEQUENCE_REALTIME    "Bei Aktivierung werden die Sequenzen in Echtzeit wiedergegeben."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SEARCH               "Suche nach Bildern"
+    ID_SEQUENCE_OPEN        "Öffnet die gewählte Sequenz."
+    ID_ARCHIV_DELETE        "Löscht das Archiv"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DELETE               "Löscht die gewählte Sequenz."
+    ID_EDIT_STATION         "Ändert den Stationsnamen"
+    ID_EDIT_COMMENT         "Erstellt einen Kommentar für die Druckausgabe"
+    ID_FILE_HTML            "Speichert das angezeigte Bild auf Diskette"
+    ID_FILE_JPG             "Speichert das angezeigte Bild als JPEG "
+    ID_FILE_DIB             "Speichert das angezeigte Bild als Bitmap"
+    ID_ARCHIV_EMPTY         "Leert das Archiv."
+    ID_DATABASE_INFO        "Zeigt Informationen über die Archive an."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_AUDIO                "Öffnet die Audioeinstellungen"
+    ID_VIEW_MENU            "Schaltet das Menü  aus. Anschalten über Systemmenü."
+    ID_LOG_VIEW             "Startet ein Programm zum Betrachten von Log-Dateien"
+    ID_EXPLORER             "Startet den Windows Explorer"
+    ID_PRODUCT_VIEW         "Zeigt die installierten Produkt-Module an"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHELL                "Startet das Programm im geschützten 'Shell-Modus'"
+    ID_ERROR                "Listet alle Laufzeitfehler auf"
+    ID_USER_INTERFACE       "Zeigt die Einstellungen der Benutzeroberfläche"
+    ID_EINSTELLUNGEN_BEWEGUNGSMASKE 
+                            "Ändert die permanente Maske der Bewegungserkennung\nPermanente Maske"
+    ID_EINSTELLUNGEN_FARBEINSTELLUNGEN 
+                            "Regelt Kontrast, Helligkeit und Farbe des Bildes\nKontrast/Helligkeit/Farbe"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_UI_TREE             "Wählen Sie ein Fenster aus."
+    IDC_UI_DIVMODE0         "Teilt die einzelnen Ansichten mit gleicher Höhe auf."
+    IDC_UI_DIVMODE1         "Zeigt nur eine aktive Ansicht, die Inaktiven sind minimiert."
+    IDC_UI_DIVMODE2         "Teilt die Ansichten variabel auf."
+    IDC_UI_VISIBILITY0      "Das Fenster wird immer angezeigt."
+    IDC_UI_VISIBILITY1      "Das Fenster wird nicht angezeigt, wenn es leer ist."
+    IDC_UI_VISIBILITY2      "Das Fenster wird nie angezeigt."
+    IDC_UI_VISIBILITY3      "Das Fenster wird bei Programmstart angezeigt."
+    IDC_UI_VISIBILITY4      "Das Fenster wird bei Programstart noch nicht angezeigt."
+    IDC_UI_MINIMIZED        "Das Fenster wird minimiert angezeigt"
+    IDC_UI_AS_LIST          "Zeigt eine Liste mit Melderereignissen"
+    IDC_MD_COMBO_SENSITIVITY 
+                            "Stellt die Empfindlichkeit der adaptiven Maske ein"
+    IDC_MD_COMBO_SENSITIVITY_ALARM 
+                            "Stellt die Empfindlichkeit der Bewegungserkennung ein"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_DIALOGBAR       "Minimiert oder maximiert die Funktionsleiste."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_OBJECT_VIEW     "Minimiert oder maximiert die Objektansicht"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_LEFT                "Links"
+    IDC_UP                  "Hoch"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_HM_MONITOR_SIZE "Zeigt die Größe des Bildschirms in Pixeln an"
+    IDC_CLOSE_DLG_BAR       "Minimiert dieses Fenster"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Löscht die Maske"
+    IDC_MD_INVERT           "Invertiert die Maskenbereiche"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BTN_KB_LANG         "Tastatur Sprache (F11)"
+    IDC_BTN_ISDN_CHANNELS   "ISDN B-Kanäle"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_HM_TITLE        "Geben Sie eine Titel für die Anwahlkarte ein"
+    IDC_EDT_HM_ZOOM         "Hier können Sie die Größe des Bildes an den Bildschirm anpassen"
+    IDC_EDT_HM_PICTURE_FILENAME 
+                            "Geben Sie den Dateinamen für das Hintergrundbild der Anwahlkarte ein"
+    IDC_BTN_HM_PICTURE_FILENAME 
+                            "Sucht nach einer Bilddatei für die Anwahlkarte"
+    IDC_EDT_HM_PICTURE_SIZE "Zeigt die Größe des Bildes In Pixeln an"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "Erzeugte Bubbles"
+    ID_INDICATOR_CAPS       "Bilder in der LiveWndTread Queue"
+    ID_INDICATOR_NUM        "Reset Zustand"
+    ID_INDICATOR_SCRL       "Prozessorauslastung"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_OPTIMIZE_BY_HEADER 
+                            "Optimiert die Spaltenbreite nach der Überschrift."
+    ID_VIEW_OPTIMIZE_TO_WND_WIDTH 
+                            "Begrenzt die Breite der gesamten Tabelle auf die Fensterbreite."
+    ID_SOFTWARE_UPDATE      "Installiert eine neue Softwareversion."
+    ID_EXTENSION_CODE       "Schaltet zusätzliche Funktionen der Software frei."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REQUEST_DISCONNECT  "Möchten Sie die Gegenstation '%s' trennen?"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+
+#if !defined( AFX_RESOURCE_DLL ) || defined( AFX_TARG_DEU )
+
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\IdipClient.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

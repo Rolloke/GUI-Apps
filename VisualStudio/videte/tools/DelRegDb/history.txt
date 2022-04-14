@@ -1,0 +1,42 @@
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+13.04.04 GF	- Bugfix Unicode CreateProcess-Aufruf
+03.03.04 GF	- Umstellung auf Unicode und VS_71
+21.01.04 TKR- Bugfix Nr.  561 Es werden nur noch die DBS-Verzeichnisse bei der Deinstallation
+			  auf denjenigen Laufwerken gelöscht, die in der SystemVerwaltung (Idip) 
+			  als Speicherlaufwerk eingetragen sind. CIPC-lib und WKClasses.lib mit eingebunden.
+05.01.04 UF - Bugfix Nr.  659 Bei der Deinstallation werden jetzt alle .dbf geloescht.
+
+18.11.02 GF	- Anpassung VS_70
+26.03.01 UF - Die Deinstallation startet jetzt nicht mehr bei laufender Software.
+			
+9.7.98 >>> UpdateVersion um 9:51 <<<
+	UF	Abfrage eingebaut, ob die Deinstallation wirklich
+		durchgefuehrt werden soll.
+	UF	DelRegDB funktioniert nur mit Kommandozeile.
+		Diese wird am Programmende ausgefuehrt.
+		Unter NT wird auf Admin rechte geprueft, falls
+		Admin so wird die Deinstallation begonnen,
+		sonst mit Warnhinweis abgebrochen.
+		Es werden falls die Einstellungen geloescht werden sollen
+		auch alle Datenbankverzeichnisse geloescht.
+29.4.98 >>> UpdateVersion um 16:31 <<<
+	UF	Deinstallation von MicoPCI.sys unter NT
+		hinzugefuegt
+	UF	Es werden folgende Dateien geloescht
+		Pathname=%SYS%\MegraV2.dll
+		Pathname=%SYS%\Convrt32.dll
+		Pathname=%SYS%\CCodec32.dll
+		Pathname=%SYS%\Finfo.dll
+		Pathname=%SYS%\Mico.vxd
+		Pathname=%SYS%\MicoPCI.vxd
+		Pathname=%WIN%\AkuUnit.ini
+		Pathname=%WIN%\megrav2.ini
+		Pathname=%WIN%\micounit.ini
+		Pathname=%WIN%\CoCoIsa.ini
+		Pathname=%WIN%\vidpi.ini
+
+		Weiterhin wird die Deinstallation in dvrt.prv protokolliert.
+
+6.4.98 >>> UpdateVersion um 15:02 <<<
+	UF	Einstellungen unter HKLM\Software\DVRT werden jetzt
+		auch geloescht

@@ -1,0 +1,55 @@
+
+30.3.99 >>> UpdateVersion um 17:56 <<<
+
+8.7.98 >>> UpdateVersion um 11:48 <<<
+	GF	- Bugfix in CSDIConfigInput::FindInputInArray
+			Auch mehrere angeschlossene portachec 2000 werden jetzt
+			korrekt in der Listbox angezeigt
+		- ExtraDebugTraces eingefuegt
+
+11.5.98 >>> UpdateVersion um 12:58 <<<
+	UF	ExceptionHandler in InitDebugger
+10.3.98 >>> UpdateVersion um 15:44 <<<
+	GF	Fehlermeldung bei fehlgeschlagenem Verbindungsaufbau wird mit ausgegeben
+
+2.2.98 >>> UpdateVersion um 13:04 <<<
+	GF	GUI-Bugfix
+
+29.1.98 >>> UpdateVersion um 10:43 <<<
+	GF	GUI-Anpassung
+
+26.1.98 >>> UpdateVersion um 15:02 <<<
+	GF	Bugfix: Menueeintraege, OnUpdateExternProgramm
+
+23.1.98 >>> UpdateVersion um 12:40 <<<
+	GF	Bugfix: Doppelte Eintraege in Log-Datei
+
+23.1.98 >>> UpdateVersion um 11:58 <<<
+	GF	Bugfix: Toolbar ist nicht mehr verschiebbar
+
+22.1.98 >>> UpdateVersion um 13:08 <<<
+	GF	GUI - Hinweise auf Keba durch portachec 2000 ersetzt
+		Bei Konfigurationsende Abfrage nach Beenden der Verbindung
+
+15.1.98 >>> UpdateVersion um 11:39 <<<
+	GF	Version fuer Vorfuehrung abgeschlossen
+
+23.12.97 >>> UpdateVersion um 10:07 <<<
+
+22.12.97 >>> UpdateVersion um 13:46 <<<
+
+19.12.97 >>> UpdateVersion um 17:04 <<<
+	GF	Bugfixing bei Animationen und Messageauswertung
+
+19.12.97 >>> UpdateVersion um 17:01 <<<
+	GF	ToolBar und Icon überarbeitet
+
+18.12.97 >>> UpdateVersion um 15:40 <<<
+	GF	Animationen jetzt etwas flüssiger
+
+17.12.97 >>> UpdateVersion um 15:52 <<<
+	GF	Avi files für die Animationen etwas seriöser gestaltet
+
+17.12.97 >>> UpdateVersion um 13:44 <<<
+	GF	SDIConfig erstellt
+		Unterstuetzt Keba PC2000 und das DOS-Konfigurationsprogramm

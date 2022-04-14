@@ -1,0 +1,53 @@
+22.08.05 RKE - Anfang der Videte Check Disk History.
+15.09.05 RKE - Alle Pfade, die angelegt werden, werden auch ueberprueft und ggf. angelegt.
+			   Die Pfade wurden dafuer in einer globalen Variablen angelegt.
+			   Reboot wird nur dann ausgefuert, wenn systempfade geaendert werden.
+			   Es kann jetzt zwischen Idip und DTS Pfaden unterschieden werden.
+			   Das Installieren der EWF Registry Settings kann jetzt auch das
+			   EWF Lauferk auf Disk 1 und hoeher, und Partition 2 und hoeher anlegen.
+			   Die Logfiles vom EWF Laufwerk werden jetzt verschoben in das neu angelegte
+			   Verzeichnis.
+19.09.05 RKE - Das Anlegen eines automatischen Pagefiles auf dem CF Laufwerk kann jetzt abgechaltet werden.
+			   Das CF Laufwerk wird jetzt im Dvrt\Common-Zweig gespeichert.
+11.10.05 RKE - Wenn Diskpart nicht vorhanden ist, wird jetzt eine Fehlermeldung ausgegeben.
+			   Bei CompactFlash ohne Festplatte werden die Systemeinträge (inkl. Pagefile) wieder auf das 
+			   CompactFlash Laufwerk gelegt. Die DVRT einträge werden gelöscht, Der HiveinjectionService
+			   wird deaktiviert. Nach einem Reboot ist das System dann langsam aber stabil.
+			   Die WM_SELFCHECK Message wird jetzt beantwortet, allerdings ohne Application ID. Sie Liefert
+			   den Status der laufenden Operation als Ruckgabewert und wird mit SendMessageTimeout abgefragt
+			   Der Application Name ist jetzt WK_APP_NAME_VCD.
+14.10.05 RKE - TextInfo im InfoDialog wir mit Dialogtitel initialisiert, da es ohne Inhalt irgentwie leer aussieht.
+			   Hive Pfade für DTS und Idip ergaenzt.
+			   HiveInjectionService wird jetzt dem Systemzustand entsprechend auf auto oder disabled gesetzt.
+			   Reboot wenn notwendig.
+20.10.05 RKE - Automatische Aktivierung des EWF auf CF mit Cmd Parameter /e bzw. Deaktivierung mit /d.
+			   Abbrechen im automatischen Modus moeglich mit ESC und anschliessender Rueckfrage "echt jetzt?".
+			   Bugfix: Beenden von format.exe im Zustand FORMAT_CONFIRM_START haengt jetzt nicht mehr, da
+			   der Eingabeprompt jetzt auch ausgewertet wird um aus diesem Zustand herauszukommen.
+			   Mehrsprachigkeit wird jetzt angezeigt (Versionsinfo).
+23.11.05 RKE - Das Programm laesst sich nicht mehr mehrfach starten.
+28.11.05 RKE - Textkorrektur, Anzeigemindestdauer auf 350 ms verkuerzt.
+28.11.05 ML  - Bugfix: Der Pfad für DVRT.dat von Backup\Dvrt.dat auf Backup\Hive\Dvrt.dat geändert.
+20.01.06 RKE - Anpassung an Umbau CIPC, WKClasses
+23.02.06 RKE - Logpath für IIS eingebaut.
+			   RegistryKeys werden jetzt geprueft, auch wenn die Pfade stimmen.
+27.02.06 RKE - Auf dem CF wird standardmaesig kein Pagefile mehr angelegt.
+20.03.06 RKE - Zwischen diskpart.exe und format.exe wird jetzt eine Pause von 250 ms + 100 ms gemacht. zuerst wird
+               diskpart.exe mit "exit" beendet (250 ms) und dann cmd.exe (100 ms).
+20.04.06 RKE - Bei Removeable Drives wird beim Erstellen neuer Laufwerke ein neuer Laufwerksbuchstabe zugewiesen, der
+			   Ausserhalb des fuer Festplatten reservierten Bereichs (d: - k:) liegt.
+			 - Die gesteuerten Prozesse kommunizieren jetzt nicht mehr ueber WM_TIMER Messages, da Timer Nachrichten
+			   vom System verworfen werden koennen. Dafuer wird jetzt eine eigene WM_USER-Message verwendet.
+			   Auch das Vestecken des Dialogs im Shellmode wird jetzt nicht mehr ueber WM_TIMER sondern ueber WM_USER
+			   behandelt.
+			 - Ueber Kommandozeile kann VCD jetzt Laufwerksbuchstaben umbenennen.
+			   Syntax: VideteCheckDisk.exe /r=d:->e:[,e:->f:,f:->d:]
+			   Die Reihenfolge ist beliebig, Fehlerbehandlung wird durchgefuehrt.
+23.06.06 RKE - Info und HilfeDialog eingebaut.
+             - Dialogelementanordnung veraendert, so dass VCD bei zu kleiner Bildschirmaufloesung noch bedient werden kann.
+05.07.06 RKE - HiveInjection Pfade fuer Spiegelung von Dateien ergaenzt.
+             - Formatierung wird ueberprueft und ggf. rebootet, falls eine Laufwerk nicht formatiert wurde.
+             - Neu erstellte Laufwerke werden in einem Idip System automatisch als Datenbanklaufwerke eingetragen.
+             - Ein auf dem CF vorhandenes Pagefile wird geloescht, dann wird rebooted.
+05.07.06 RKE - Wenn kein fixed drive mehr vorhanden ist, so werden die pagefile Eintraege komplett geloescht.
+07.07.06 RKE - Im Shellmode im DTS wird der Dialog jetzt nicht mehr angezeigt, sondern nur noch das Infofenster.

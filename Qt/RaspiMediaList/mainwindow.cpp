@@ -485,11 +485,12 @@ void MainWindow::menu_help_about()
             "\n"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
             "\n"
-            "Built on:\t%1, %2\n"
-            "Author:\tRolf Kary Ehlers\n"
-            "Version:\t%3\n"
-            "License:\tGNU GPL Version 2\n"
-            "Email:\trolf-kary-ehlers@t-online.de\n").arg(__DATE__, __TIME__, txt::version));
+            "Based on Qt:\t%1\n"
+            "Built on:\t\t%2, %3\n"
+            "Author:\t\tRolf Kary Ehlers\n"
+            "Version:\t\t%4\n"
+            "License:\t\tGNU GPL Version 2\n"
+            "Email:\t\trolf-kary-ehlers@t-online.de\n").arg(qVersion(), __DATE__, __TIME__, txt::version));
 }
 
 void MainWindow::menu_help_info()

@@ -1,0 +1,12 @@
+History
+--------
+
+
+28.08.02
+	- ML Den KeyHook.sys für Windows XP angepasst.
+
+25.09.02
+	- ML Damit der KeyHook.sys auch unter WinNT4 läuft, darf 'PoStartNextPowerIrp' nicht verwendet
+		 werden. Deshalb läuft der Treiber nun wieder als Legacy DeviceDriver! Auch unter WinXP!
+ 
+	

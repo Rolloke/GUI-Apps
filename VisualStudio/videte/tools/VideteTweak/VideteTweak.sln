@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005 Tools for Applications
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VideteTweak", "VideteTweak.vcproj", "{1CEF680A-FAC9-4FB3-A8FB-5FB6D8D9AD4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CEF680A-FAC9-4FB3-A8FB-5FB6D8D9AD4C}.Debug|Default.ActiveCfg = Debug|Win32
+		{1CEF680A-FAC9-4FB3-A8FB-5FB6D8D9AD4C}.Debug|Default.Build.0 = Debug|Win32
+		{1CEF680A-FAC9-4FB3-A8FB-5FB6D8D9AD4C}.Release|Default.ActiveCfg = Release|Win32
+		{1CEF680A-FAC9-4FB3-A8FB-5FB6D8D9AD4C}.Release|Default.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = VideteTweak.vcproj
+		SccProjectName0 = \u0022$/Project/Tools/VideteTweak\u0022,\u0020PTGCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+EndGlobal

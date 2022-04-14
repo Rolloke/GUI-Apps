@@ -1,0 +1,374 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+#define WK_LANG_BLOCK "040904b0"
+#define WK_LANG_BLOCK_NUM 0x409
+    "#include ""res\\CoCoUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_COCOUNIT            ICON    DISCARDABLE     "res\\CoCoUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_COCOAPP_DIALOG DIALOGEX 0, 0, 212, 369
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "CoCoUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Video Source",IDC_GROUP_VIDEOSOURCE,96,28,108,76
+    CONTROL         "Source 1",IDC_SOURCE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,108,40,44,10
+    CONTROL         "Source 2",IDC_SOURCE2,"Button",BS_AUTORADIOBUTTON,108,
+                    56,44,10
+    CONTROL         "Source 3",IDC_SOURCE3,"Button",BS_AUTORADIOBUTTON,108,
+                    72,44,10
+    CONTROL         "Source 4",IDC_SOURCE4,"Button",BS_AUTORADIOBUTTON,108,
+                    88,44,10
+    CONTROL         "Source 5",IDC_SOURCE5,"Button",BS_AUTORADIOBUTTON,156,
+                    40,44,10
+    CONTROL         "Source 6",IDC_SOURCE6,"Button",BS_AUTORADIOBUTTON,156,
+                    56,44,10
+    CONTROL         "Source 7",IDC_SOURCE7,"Button",BS_AUTORADIOBUTTON,156,
+                    72,44,10
+    CONTROL         "Source 8",IDC_SOURCE8,"Button",BS_AUTORADIOBUTTON,156,
+                    88,44,10
+    GROUPBOX        "Video Front End",IDC_GROUP_VIDEOFRONTEND,8,108,96,52
+    CONTROL         "PAL",IDC_FE_PAL,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    22,120,28,10
+    CONTROL         "SECAM",IDC_FE_SECAM,"Button",BS_AUTORADIOBUTTON,22,132,
+                    38,10
+    CONTROL         "NTSC",IDC_FE_NTSC,"Button",BS_AUTORADIOBUTTON,22,144,35,
+                    10
+    GROUPBOX        "Video Back End",IDC_GROUP_VIDEOBACKEND,108,108,96,52
+    CONTROL         "PAL",IDC_BE_PAL,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    120,120,28,10
+    CONTROL         "SECAM",IDC_BE_SECAM,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,120,132,44,10
+    CONTROL         "NTSC",IDC_BE_NTSC,"Button",BS_AUTORADIOBUTTON,120,144,
+                    35,10
+    CONTROL         "RGB",IDC_BE_RGB,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    166,132,31,10
+    CONTROL         "Comp.",IDC_BE_COMPOSITE,"Button",BS_AUTORADIOBUTTON,166,
+                    120,32,10
+    GROUPBOX        "SourceType",IDC_GROUP_SOURCETYPE,8,164,96,40
+    CONTROL         "FBAS",IDC_FE_FBAS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,22,175,32,10
+    CONTROL         "SVHS",IDC_FE_SVHS,"Button",BS_AUTORADIOBUTTON,22,187,32,
+                    10
+    PUSHBUTTON      "Settings..",IDC_DLG_SETTINGS,143,284,60,14
+    EDITTEXT        IDC_SEND_DATA,8,230,60,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "------->",IDC_SEND,73,230,50,14
+    LTEXT           "",IDC_RECEIVE_DATA,129,228,72,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    DEFPUSHBUTTON   "Exit",IDOK,10,316,67,14
+    CONTROL         "Notch",IDC_FE_LNOTCH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,68,120,35,10
+    CONTROL         "Dec",IDC_FE_LDEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    68,132,29,10
+    CONTROL         "",IDC_EDGE7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,136,
+                    168,8,8
+    CONTROL         "",IDC_EDGE6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,144,
+                    168,8,8
+    CONTROL         "",IDC_EDGE5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,
+                    168,8,8
+    CONTROL         "",IDC_EDGE4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,160,
+                    168,8,8
+    CONTROL         "",IDC_EDGE3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,
+                    168,8,8
+    CONTROL         "",IDC_EDGE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,176,
+                    168,8,8
+    CONTROL         "",IDC_EDGE1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,184,
+                    168,8,8
+    CONTROL         "",IDC_EDGE0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,192,
+                    168,8,8
+    LTEXT           "Edge:",IDC_TXT_EDGE,112,168,20,8
+    CONTROL         "",IDC_ACK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,136,
+                    180,8,8
+    CONTROL         "",IDC_ACK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,144,
+                    180,8,8
+    CONTROL         "",IDC_ACK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,
+                    180,8,8
+    CONTROL         "",IDC_ACK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,160,
+                    180,8,8
+    CONTROL         "",IDC_ACK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,
+                    180,8,8
+    CONTROL         "",IDC_ACK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,176,
+                    180,8,8
+    CONTROL         "",IDC_ACK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,184,
+                    180,8,8
+    CONTROL         "",IDC_ACK0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,192,
+                    180,8,8
+    LTEXT           "Ack:",IDC_TXT_ACK,112,180,16,8
+    CONTROL         "",IDC_RELAIS3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,135,
+                    194,8,8
+    CONTROL         "",IDC_RELAIS2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,143,
+                    194,8,8
+    CONTROL         "",IDC_RELAIS1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,151,
+                    194,8,8
+    CONTROL         "",IDC_RELAIS0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,159,
+                    194,8,8
+    LTEXT           "Relay:",IDC_TXT_RELAIS,108,192,24,8
+    EDITTEXT        IDC_EDIT_SEND_MCI,8,212,60,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Send MCI",IDC_SEND_MCI,73,212,50,14
+    PUSHBUTTON      "Send MCI Script...",IDC_SEND_SCRIPT,129,212,72,14
+    GROUPBOX        "CoCoID",IDC_GROUP_COCOID,8,0,196,24
+    CONTROL         "ID1",IDC_COCOID0,"Button",BS_AUTORADIOBUTTON,12,12,27,
+                    10
+    CONTROL         "ID2",IDC_COCOID1,"Button",BS_AUTORADIOBUTTON,64,12,27,
+                    10
+    CONTROL         "ID3",IDC_COCOID2,"Button",BS_AUTORADIOBUTTON,120,12,27,
+                    10
+    CONTROL         "ID4",IDC_COCOID3,"Button",BS_AUTORADIOBUTTON,172,12,27,
+                    10
+    GROUPBOX        "Extension card",IDC_GROUP_EXTENSIONCARD,8,28,84,76
+    CONTROL         "CoCo",IDC_EXTCARD0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,16,40,35,10
+    CONTROL         "ExtCard 1",IDC_EXTCARD1,"Button",BS_AUTORADIOBUTTON,16,
+                    52,48,10
+    CONTROL         "ExtCard 2",IDC_EXTCARD2,"Button",BS_AUTORADIOBUTTON,16,
+                    64,48,10
+    CONTROL         "ExtCard 3",IDC_EXTCARD3,"Button",BS_AUTORADIOBUTTON,16,
+                    76,44,10
+    CONTROL         "Megra",IDC_EXTCARDMEGRA,"Button",BS_AUTORADIOBUTTON,16,
+                    88,44,10
+    LTEXT           "Decoder:",IDC_TXT_DECODER,10,250,28,8
+    LTEXT           "Encoder:",IDC_TXT_ENCODER,10,266,28,8
+    RTEXT           "",IDC_TR_DATA,102,248,48,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    RTEXT           "",IDC_RE_DATA,102,264,48,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    RTEXT           "",IDC_TR_SPEED,154,248,48,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    RTEXT           "",IDC_RE_SPEED,154,264,48,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Start",IDC_DEC_START,42,250,28,14
+    PUSHBUTTON      "Stop",IDC_DEC_STOP,72,250,28,14,WS_DISABLED
+    PUSHBUTTON      "Start",IDC_ENC_START,42,265,28,14
+    PUSHBUTTON      "Stop",IDC_ENC_STOP,72,265,28,14,WS_DISABLED
+    PUSHBUTTON      "Test",IDC_TEST,143,302,60,14
+    EDITTEXT        IDC_DEC_BITRATE,80,282,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ENC_BITRATE,80,298,40,14,ES_AUTOHSCROLL
+    LTEXT           "Bits/s",IDC_TXT_BIT1,121,285,19,8
+    LTEXT           "Bits/s",IDC_TXT_BIT2,121,300,19,8
+    PUSHBUTTON      "Set Decoder Bitrate",IDC_SET_DEC_BITRATE,10,282,67,14
+    PUSHBUTTON      "Set Encoder Bitrate",IDC_SET_ENC_BITRATE,10,297,67,14
+    CONTROL         "QCIF",IDC_QCIF,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    84,332,32,10
+    CONTROL         "CIF",IDC_CIF,"Button",BS_AUTORADIOBUTTON,84,344,27,10
+    GROUPBOX        "Format",IDC_GROUP_FORMAT,80,320,40,40
+    GROUPBOX        "Compression",IDC_GROUP_COMPRESSION,120,320,84,40
+    CONTROL         "1",IDC_COMPRESS_1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,124,332,20,10
+    CONTROL         "2",IDC_COMPRESS_2,"Button",BS_AUTORADIOBUTTON,148,332,
+                    20,10
+    CONTROL         "3",IDC_COMPRESS_3,"Button",BS_AUTORADIOBUTTON,172,332,
+                    20,10
+    CONTROL         "4",IDC_COMPRESS_4,"Button",BS_AUTORADIOBUTTON,124,344,
+                    20,10
+    CONTROL         "5",IDC_COMPRESS_5,"Button",BS_AUTORADIOBUTTON,148,344,
+                    20,10
+END
+
+IDD_SETTINGS DIALOG DISCARDABLE  0, 0, 108, 89
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "VideoOverlay-Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,4,72,48,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,56,72,48,14
+    PUSHBUTTON      "&Image position",IDC_POSITION,4,20,100,14
+    PUSHBUTTON      "&Acquisition...",IDC_ACQUISITION,4,36,100,14
+    PUSHBUTTON      "&Delay...",IDC_DELAYS,4,52,100,14
+    PUSHBUTTON      "PLL-Synthesizer",IDC_PLL,4,4,100,14
+END
+
+IDD_DLG_COLOR DIALOG DISCARDABLE  0, 0, 177, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Color settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,8,76,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,63,76,50,14
+    SCROLLBAR       IDC_SBRIGHTNESS,54,8,95,10
+    SCROLLBAR       IDC_SCONTRAST,54,24,95,10
+    SCROLLBAR       IDC_SSATURATION,54,40,95,10
+    LTEXT           "0",IDC_VBRIGHTNESS,155,8,15,10
+    LTEXT           "0",IDC_VCONTRAST,154,24,15,10
+    LTEXT           "0",IDC_VSATURATION,154,40,15,10
+    RTEXT           "Brightness",IDC_STATIC_BRIGHTNESS,4,8,45,8
+    RTEXT           "Contrast",IDC_STATIC_CONTRAST,4,24,45,8
+    RTEXT           "Color saturation",IDC_STATIC_SATURATION,4,40,45,8
+    PUSHBUTTON      "Apply",IDC_UEBERNAHME,118,76,50,14
+    SCROLLBAR       IDC_SHUE,54,56,95,10
+    LTEXT           "0",IDC_VHUE,154,56,15,10
+    RTEXT           "Hue",IDC_STATIC_HUE,4,56,45,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_COCOAPP_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 210
+        VERTGUIDE, 139
+        BOTTOMMARGIN, 347
+    END
+
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 101
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
+    END
+
+    IDD_DLG_COLOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "&About...",               ID_ABOUT
+        MENUITEM "&Settings...",           IDC_DLG_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&Close",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+    IDP_LOGIN_FAILED        "Access denied!"
+    IDS_RTE_RUN_COCOUNIT    "CoCoUnit needs a Dongle\n"
+    IDS_RTE_ALLOW_HARDDECODE_COCO 
+                            "CoCoUnit needs a dongle for hardware decoding\n"
+    IDS_RTE_COCOSRV_OPEN    "CoCoSrv.exe detected an error while opening\n"
+    IDS_RTE_MCI_SCRIPT      "The configuration script could not be transmitted\n"
+    IDS_RTE_LOAD_SERVER     "Error loading %s\t(Error Code=%u)\n"
+    IDS_RTE_LOAD_SERVER_TIMEOUT "Timeout loading %s\n"
+    IDS_RTE_MEGRA_INIT      "Cannot initialize Megra\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDR_COCOUNIT            "Coco Unit"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define WK_LANG_BLOCK "040904b0"
+#define WK_LANG_BLOCK_NUM 0x409
+#include "res\CoCoUnit.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,2 @@
+27.04.99 TK - Actual Image angelegt macht von jeder Kamera ein Bild,
+			  als Istbildprozess

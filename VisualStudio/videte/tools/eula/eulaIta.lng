@@ -1,0 +1,10 @@
+EULAenu.rc@CAPTION@IDD_EULA_DIALOG.CAPTION@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@End User License Agreement@TODO! End User License Agreement@0@
+EULAenu.rc@LTEXT@IDD_EULA_DIALOG.IDOK@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@Accept@TODO! Accept@0@
+EULAenu.rc@LTEXT@IDD_EULA_DIALOG.IDCANCEL@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@No@TODO! No@0@
+EULAenu.rc@LTEXT@IDD_EULA_DIALOG.IDC_RICHEDIT_EULA@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@@TODO! @0@
+EULAenu.rc@LTEXT@IDD_EULA_DIALOG.IDC_TEXT_TOP_LICENSE@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@Please read the following license agreement carefully. Press the PAGE DOWN key to see the rest of the agreement.@TODO! Please read the following license agreement carefully. Press the PAGE DOWN key to see the rest of the agreement.@0@
+EULAenu.rc@LTEXT@IDD_EULA_DIALOG.IDC_TEXT_BOTTOM_LICENSE@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@Do you accept all the terms of the preceding License Agreement? If you choose 'No', the setup will close. To install the software, you must accept this agreement.@TODO! Do you accept all the terms of the preceding License Agreement? If you choose 'No', the setup will close. To install the software, you must accept this agreement.@0@
+EULAenu.rc@CAPTION@IDD_LICENSE_DIALOG.CAPTION@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@End User License Agreement@TODO! End User License Agreement@0@
+EULAenu.rc@LTEXT@IDD_LICENSE_DIALOG.IDOK@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@OK@TODO! OK@0@
+EULAenu.rc@LTEXT@IDD_LICENSE_DIALOG.IDC_STATIC_LICENSE@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@License number:@TODO! License number:@0@
+EULAenu.rc@LTEXT@IDD_LICENSE_DIALOG.IDC_TEXT_TOP_SERIAL@28,06,2002,14,10,07@28,06,2002,14,10,07@28,06,2002,14,10,07@Please enter your license number. @TODO! Please enter your license number. @0@

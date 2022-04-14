@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoftDongle", "SoftDongle.vcproj", "{10DE9C3C-68E3-4321-B6B0-A250DEE3A39F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectUniqueName0 = SoftDongle.vcproj
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SolutionUniqueID = {BB50E3F7-54FC-49EF-AE27-2743DF1954A3}
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{10DE9C3C-68E3-4321-B6B0-A250DEE3A39F}.Debug.ActiveCfg = Debug|Win32
+		{10DE9C3C-68E3-4321-B6B0-A250DEE3A39F}.Debug.Build.0 = Debug|Win32
+		{10DE9C3C-68E3-4321-B6B0-A250DEE3A39F}.Release.ActiveCfg = Release|Win32
+		{10DE9C3C-68E3-4321-B6B0-A250DEE3A39F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

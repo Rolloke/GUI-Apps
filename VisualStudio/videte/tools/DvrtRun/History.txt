@@ -1,0 +1,16 @@
+History von DvrtRun
+-------------------
+
+06.05.99
+	- Beginn des Projektes
+	- Hilfsprogramm für das Setupprogramm, daß überprüft, ob der Launcher
+	  läuft. Ist dies der Fall, so wird in die Datei DvrtRun.ini unter der
+	  Section [Setup] der Eintrag Launcher=1 gesetzt, ansonsten Launcher=0.
+31.08.99
+	- DirectCD wird falls es läuft beendet
+18.11.02
+	- Anpassung VS_70
+23.01.06
+	- UF DVRTRun kann jetzt per Kommandozeile Programmen eine WM_CLOSE Medlung zusenden.
+23.01.06
+	- UF Bugfix Message waehrend der Installation sind jetzt wieder weg.

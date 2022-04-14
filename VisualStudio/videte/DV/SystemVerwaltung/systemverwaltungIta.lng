@@ -1,0 +1,250 @@
+SystemVerwaltungEnu.rc@POPUP@IDR_MAINFRAME.POPUP1@17,06,2002,15,13,46@17,06,2002,15,29,36@01,01,1980,01,01,01@&File@&File@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_SAVE@17,06,2002,15,13,46@18,06,2002,09,13,55@01,01,1980,01,01,01@&Save\tCTRL+S@TODO! &Salva\tCTRL+S@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_EDIT_CANCEL@17,06,2002,15,13,46@18,06,2002,09,14,06@01,01,1980,01,01,01@&Undo\tESC@TODO! Ann&ulla\tESC@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_EDIT_SERVERINIT@17,06,2002,15,13,46@18,06,2002,09,15,06@01,01,1980,01,01,01@&Initialise\tSTRG+I@TODO! &Inizializzazione\tSTRG+I@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_SAVE_AS@17,06,2002,15,13,46@18,06,2002,09,15,16@01,01,1980,01,01,01@Save &as...@TODO! S&alva con nome...@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_OPEN@17,06,2002,15,13,46@18,06,2002,09,15,30@01,01,1980,01,01,01@&Open...@TODO! A&pri...@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@17,06,2002,15,13,46@18,06,2002,09,15,47@01,01,1980,01,01,01@&Exit\tAlt+F4@TODO! &Esci\tAlt+F4@0@
+SystemVerwaltungEnu.rc@POPUP@IDR_MAINFRAME.POPUP2@17,06,2002,15,13,46@18,06,2002,09,09,31@01,01,1980,01,01,01@&Edit@TODO! &Modifica@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_EDIT_NEW@17,06,2002,15,13,46@18,06,2002,09,16,00@01,01,1980,01,01,01@&New\tStrg+N@TODO! &Nuovo\tStrg+N@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_EDIT_DELETE@17,06,2002,15,13,46@18,06,2002,09,16,11@01,01,1980,01,01,01@&Delete\tShift+DEL@TODO! &Elimina\tShift+DEL@0@
+SystemVerwaltungEnu.rc@POPUP@IDR_MAINFRAME.POPUP3@17,06,2002,15,13,46@17,06,2002,15,29,36@01,01,1980,01,01,01@&View@&Visualizza@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_VIEW_TOOLTIPS@17,06,2002,15,13,46@01,01,1980,01,01,01@01,01,1980,01,01,01@&Tooltips@TODO! &Tooltips@0@
+SystemVerwaltungEnu.rc@POPUP@IDR_MAINFRAME.POPUP4@17,06,2002,15,13,46@17,06,2002,15,29,36@01,01,1980,01,01,01@&?@&?@0@
+SystemVerwaltungEnu.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_APP_ABOUT@17,06,2002,15,13,46@18,06,2002,09,18,10@01,01,1980,01,01,01@&About...@&Informazioni su...@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_HOST_NAME@17,06,2002,15,13,46@18,06,2002,09,18,04@17,06,2002,15,13,46@&Name:@&Nome:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_NUMBER@17,06,2002,15,13,46@18,06,2002,09,17,12@17,06,2002,15,13,46@N&umber/Address:@TODO! N&umero/Indirizzo:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_TXT_TYP@17,06,2002,15,13,46@18,06,2002,09,17,19@17,06,2002,15,13,46@&Type:@TODO! &Tipo:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_LIST_HOST@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@List2@List2@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_OWN_NAME@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Own &host name:@TODO! Own &host name:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_HOSTLIST.IDC_HOST_ARCHIVES@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Setup archives...@TODO! Setup archives...@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_STATIC_ISDN@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@&ISDN@TODO! ISDN@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_CHECK_ISDN@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@&On/Off@TODO! On/Off@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_STATIC_REJECT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Own call number@TODO! Own call number@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_STATIC_B_CHANNELS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Number of B - channels@TODO! Number of B - channels@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_RADIO_B1@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&1 B - channel@TODO! &1 B - channel@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_RADIO_B2@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&2 B - channel@TODO! &2 B - channel@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_CHECK_MSN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Use &MSN@TODO! Use &MSN@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_TXT_PREFIX@17,06,2002,15,13,46@18,06,2002,09,17,31@17,06,2002,15,13,46@&Prefix:@TODO! &Prefisso:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ISDN.IDC_TXT_PREFIX_MINIMUM@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Minimum &length of call numbers which use prefix:@TODO! Minimum &length of call numbers which use prefix:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_STATIC_SOCKET@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@TCP/IP@TCP/IP@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_CHECK_SOCKET@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@&On/Off@TODO! On/Off@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_TXT_EXTENDED_OPTIONS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Expected Bitrate@TODO! Expected Bitrate@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_8MBIT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@> &8 MBit@TODO! > &8 MBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_4MBIT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&4 MBit@TODO! &4 MBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_2MBIT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@2 &MBit@TODO! 2 &MBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_1MBIT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@1 MBi&t@TODO! 1 MBi&t@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_512_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&512 kBit@TODO! &512 kBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_256_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&256 kBit@TODO! &256 kBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_128_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&128 kBit@TODO! &128 kBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_SOCKET.IDC_RADIO_64_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&64 kBit@TODO! &64 kBit@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_GRP_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Automatic exit of applications@TODO! Automatic exit of applications@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_TXT_AUTO_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&Exit after (minutes)@TODO! &Exit after (minutes)@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_TXT_CONF_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&Show confirmation (seconds)@TODO! &Show confirmation (seconds)@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_CHECK_APP@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@&On/Off@TODO! On/Off@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_GRP_CONNECTION@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Automatic disconnect of connections@TODO! Automatic disconnect of connections@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_CHECK_CONN@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@On/O&ff@TODO! On/Off@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_TXT_AUTO_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&Disconnect after (minutes):@TODO! &Disconnect after (minutes):@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_APP.IDC_TXT_CONF_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Show con&firmation (seconds)@TODO! Show con&firmation (seconds)@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_ARCHIVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@List2@List2@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_GROUP_PROPERTIES@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Properties:@Proprietà:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_HOST_NAME@17,06,2002,15,13,46@18,06,2002,09,18,19@17,06,2002,15,13,46@Na&me:@Nome:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_SIZE@17,06,2002,15,13,46@18,06,2002,09,18,28@17,06,2002,15,13,46@&Size:@TODO! Dimen&sione:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@in MByte@TODO! in MByte@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MAX@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@For this archive maximally@TODO! For this archive maximally@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MAX_MB@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@0000@0000@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_FREE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@MB are available@TODO! MB are available@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_WHOLE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Totaling@TODO! Totaling@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_USED_MB@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@000000000000@000000000000@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_SLASH@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@/@/@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_WHOLE_MB@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@000000000000@000000000000@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_ARCHIV.IDC_TXT_USED@17,06,2002,15,13,46@18,06,2002,09,18,48@17,06,2002,15,13,46@MB are used@TODO! MB usato@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_DRIVES@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@List2@List2@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_GROUP_USE@17,06,2002,15,13,46@18,06,2002,12,23,06@17,06,2002,15,13,46@Usage@TODO! Uso@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_RADIO_SYSTEM@17,06,2002,15,13,46@18,06,2002,09,18,58@17,06,2002,15,13,46@&Operating system@TODO! Sistema &operativo@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_RADIO_NORMAL@17,06,2002,15,13,46@18,06,2002,12,22,44@17,06,2002,15,13,46@&No usage@&TODO! Nessuno uso@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_RADIO_DATABASE@17,06,2002,15,13,46@18,06,2002,12,18,31@17,06,2002,15,13,46@&Storage@&TODO! Storage@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_RADIO_BACKUP_WRITE_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@&Backup read && write@TODO! &Backup read && write@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_RADIO_BACKUP_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Backup &read@TODO! Backup &read@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_DRIVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Drive:@Unità:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_STATIC_DRIVE@17,06,2002,15,13,46@18,06,2002,09,22,31@17,06,2002,15,13,46@0:\\@0:\\@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_USE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Size &used:@TODO! Size &used:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB2@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@MByte@TODO! MByte@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_SIZE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Total size of storage drives:\n(without 20 MB reserved space / drive)@TODO! Total size of storage drives:\n(without 20 MB reserved space / drive)@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_STATIC_DRIVES_MB@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@0000000000@0000000000@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@MByte@TODO! MByte@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_GROUP_DRIVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Drive@Unità@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_GROUP_SIZE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Total sizes@TODO! Total sizes@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_SIZE2@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Total size of archives:@TODO! Total size of archives:@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB3@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@MByte@TODO! MByte@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_STATIC_ARCHIVS_MB@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@0000000000@0000000000@0@
+SystemVerwaltungEnu.rc@LTEXT@IDD_DRIVE.IDC_ALL@17,06,2002,15,13,46@18,06,2002,09,22,48@17,06,2002,15,13,46@&All@TODO! &Tutto@0@
+SystemVerwaltungEnu.rc@STRING@IDR_MAINFRAME@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@System Management@TODO! System Management@0@
+SystemVerwaltungEnu.rc@STRING@IDS_HOSTS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Hosts@TODO! Hosts@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_PREVIEW_CLOSE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Close print preview mode\nCancel preview@TODO! Close print preview mode\nCancel preview@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DELETE_HOST_ARCHIV@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@There are still archives for this host.\nShould all archives with images and data be deleted automatically?@TODO! There are still archives for this host.\nShould all archives with images and data be deleted automatically?@0@
+SystemVerwaltungEnu.rc@STRING@IDP_CREATE_NORMAL_ARCHIVE_FOR_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@There is still no archive for images from normal connections for host %s.\nShould such an archive be created automatically?@TODO! There is still no archive for images from normal connections for host %s.\nShould such an archive be created automatically?@0@
+SystemVerwaltungEnu.rc@STRING@IDP_CREATE_SEARCH_ARCHIVE_FOR_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@There is still no archive for images from queries for host %s.\nShould such an archive be created automatically?@TODO! There is still no archive for images from queries for host %s.\nShould such an archive be created automatically?@0@
+SystemVerwaltungEnu.rc@STRING@IDS_HOST_NORMAL_ARCHIVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Normal@Normal@0@
+SystemVerwaltungEnu.rc@STRING@IDS_HOST_SEARCH_ARCHIVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Query@Cerca@0@
+SystemVerwaltungEnu.rc@STRING@IDP_NO_AUTOMATIC_ARCHIV@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@There is not enough space to create an %s archive for host %s!@TODO! There is not enough space to create an %s archive for host %s!@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SAVE@17,06,2002,15,13,46@17,06,2002,15,29,36@17,06,2002,15,13,46@Save@Salva@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SETTINGS@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Settings@Impostazioni@0@
+SystemVerwaltungEnu.rc@STRING@IDS_OPEN@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Open@Apri@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SEARCH_RESULT@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Query results@TODO! Risultati di cerca@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NEW@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@New@Nuovo@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NEWHOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@New host@TODO! New host@0@
+SystemVerwaltungEnu.rc@STRING@IDS_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Remote host@TODO! Remote host@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NUMBER@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Call number@TODO! Call number@0@
+SystemVerwaltungEnu.rc@STRING@IDS_ISDN1@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@ISDN@ISDN@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SOCKET@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@TCP/IP@TCP/IP@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_APP_TITLE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@System Management@TODO! System Management@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_IDLEMESSAGE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@ @ @0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_HELPMODEMESSAGE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Select the object where you need help.@TODO! Select the object where you need help.@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_EXT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@ER@TODO! ER@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_CAPS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@UF@TODO! UF@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_NUM@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@NUM@NUM@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_SCRL@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@RF@TODO! RF@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_OVR@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@OVR@SSC@0@
+SystemVerwaltungEnu.rc@STRING@ID_INDICATOR_REC@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@MA@TODO! MA@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_NEW@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Creates a new document. \nNew@TODO! Crei un documento nouvo.\nNuovo@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_OPEN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Opens present settings.\nOpen@TODO! Opens present settings.\nOpen@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_CLOSE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Closes the active document.\nClose@Chiude il documento attivo\nChiudi@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_SAVE@17,06,2002,15,13,46@18,06,2002,09,25,37@17,06,2002,15,13,46@Save\nSaves all settings@TODO! Salva\nSalva tutti impostazioni@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_SAVE_AS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Saves the active settings under a new name.\nSave as@TODO! Saves the active settings under a new name.\nSave as@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_PAGE_SETUP@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Changes the printing options.\nPage Setup@Modifica le opzioni di stampa\nImposta pagina@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_PRINT_SETUP@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Changes the printer and printing options\nPrint Setup@Cambia la stampante e le opzioni di stampa.\nImposta stampante@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_PRINT@17,06,2002,15,13,46@18,06,2002,09,26,20@17,06,2002,15,13,46@Prints the active document.\nPrinting@TODO! Stampa il documento attiva.\nStampa@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_PRINT_PREVIEW@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Displays the entire cover page.\nPrint Preview@Visualizza tutto il frontespizio.\nAnteprima di stampa@0@
+SystemVerwaltungEnu.rc@STRING@ID_APP_ABOUT@17,06,2002,15,13,46@18,06,2002,09,26,38@17,06,2002,15,13,46@Info...\nShows Program Information, Number of Version an Copyright.@TODO! Informazioni...\nShows Program Information, Number of Version an Copyright.@0@
+SystemVerwaltungEnu.rc@STRING@ID_APP_EXIT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Exit System Management. Asks if the settings should be stored.\nExit@TODO! Exit System Management. Asks if the settings should be stored.\nExit@0@
+SystemVerwaltungEnu.rc@STRING@ID_HELP_INDEX@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Opens the help function.\nHelp topics@TODO! Opens the help function.\nHelp topics@0@
+SystemVerwaltungEnu.rc@STRING@ID_HELP_FINDER@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Lists all help topics.\nHelp topics@TODO! Lists all help topics.\nHelp topics@0@
+SystemVerwaltungEnu.rc@STRING@ID_HELP_USING@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Display instructions about how to use help\nHelp@Visualizza informazioni sull'uso della Guida.\n?@0@
+SystemVerwaltungEnu.rc@STRING@ID_CONTEXT_HELP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Shows help for clicked buttons, menues or windows.\nHelp@TODO! Shows help for clicked buttons, menues or windows.\nHelp@0@
+SystemVerwaltungEnu.rc@STRING@ID_HELP@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Display help for current task or command\nHelp@Visualizza la Guida per l'operazione o il comando corrente.\n?@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE1@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE2@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE3@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE4@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE5@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE6@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE7@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE8@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE9@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE10@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE11@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE12@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE13@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE14@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE15@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_FILE_MRU_FILE16@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Opens this document@Apre il documento selezionato.@0@
+SystemVerwaltungEnu.rc@STRING@ID_NEXT_PANE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Switch to the next window pane\nNext Pane@Passa al riquadro successivo.\nSuccessivo@0@
+SystemVerwaltungEnu.rc@STRING@ID_PREV_PANE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Switch back to the previous window pane\nPrevious pane@TODO! Switch back to the previous window pane\nPrevious pane@0@
+SystemVerwaltungEnu.rc@STRING@ID_WINDOW_SPLIT@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Split the active window into panes\nSplit@Suddivide la finestra attiva in riquadri.\nDividi@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_CLEAR@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Deletes the selection.\nDelete@TODO! Elimina della selezione.\nElimina@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_CLEAR_ALL@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Deletes all.\nDelete all@TODO! Elimina tutta.\nElimina tutta@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_COPY@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Copies the selection and puts it on the Clipboard\nCopy@Copia la selezione e la mette negli Appunti.\nCopia@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_CUT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Removes the selection and put it on the clipboard\nCut@TODO! Removes the selection and put it on the clipboard\nCut@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_FIND@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Find the specified text\nFind@Trova il testo specificato.\nTrova@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_PASTE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Inserts the contents of the clipboard.\nPaste@TODO! Inserts the contents of the clipboard.\nPaste@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_REPEAT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Repeats the alst action.\nRepeat@TODO! Repeats the alst action.\nRepeat@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_REPLACE@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Replaces the specified text with different text.\nReplace@TODO! Sostituisce il testo specificato con altro testo.\nSostituisci@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_SELECT_ALL@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Select the entire document\nSelect All@Seleziona l'intero documento.\nSeleziona tutto@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_UNDO@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Undoes the last action.\nUndo@Annulla l'ultima operazione.\nAnnulla@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_REDO@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Redoes the previously undone action.\nRedo@Ripete l'operazione precedentemente annullata.\nRipeti@0@
+SystemVerwaltungEnu.rc@STRING@ID_VIEW_TOOLBAR@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Show or hide the toolbar\nToggle ToolBar@Mostra o nasconde la barra degli strumenti.\nMostra/nascondi la barra degli strumenti@0@
+SystemVerwaltungEnu.rc@STRING@ID_VIEW_STATUS_BAR@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Show or hide the status bar\nToggle StatusBar@Mostra o nasconde la barra di stato.\nMostra/nascondi la barra di stato@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCSIZE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Changes the window size.@Cambia le dimensioni della finestra.@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCMOVE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Change the window position@Cambia la posizione della finestra@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCMINIMIZE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Reduce the window to an icon@Riduce a icona la finestra@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCMAXIMIZE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Enlarge the window to full size@Ingrandisce la finestra a schermo intero.@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCNEXTWINDOW@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Switch to the previous document window@Passa al documento precedente@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCPREVWINDOW@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Switch to the previous document window@Passa al documento precedente@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCCLOSE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Close the active window and prompts to save the documents@Chiude la finestra attiva e chiede se si desidera salvare il documento.@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCRESTORE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Restore the window to normal size@Ripristina le dimensioni originali della finestra.@0@
+SystemVerwaltungEnu.rc@STRING@AFX_IDS_SCTASKLIST@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Activate Task List@Attiva l'elenco dei processi@0@
+SystemVerwaltungEnu.rc@STRING@IDS_TYP@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Type@Tipo@0@
+SystemVerwaltungEnu.rc@STRING@IDP_HOST_ILLEGAL_ROUTING@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The entered routing address for %s is wrong.\nSingle addresses must be devided by #.\n\nIP addresses must have a tcp: in front.\n\nSMS addresses must have a sms: in front.\n\nB3 addresses must have a pres: in front.@TODO! The entered routing address for %s is wrong.\nSingle addresses must be devided by #.\n\nIP addresses must have a tcp: in front.\n\nSMS addresses must have a sms: in front.\n\nB3 addresses must have a pres: in front.@0@
+SystemVerwaltungEnu.rc@STRING@IDP_INVALID_DONGLE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The dongle you use is not valid to start this software or the dongle is defect.\nPlease ask your service technician.@TODO! The dongle you use is not valid to start this software or the dongle is defect.\nPlease ask your service technician.@0@
+SystemVerwaltungEnu.rc@STRING@IDP_ACCESS_DENIED@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@You are not authorized to modify the system settings.\nAccess denied!@TODO! You are not authorized to modify the system settings.\nAccess denied!@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NAME@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Name@Nome@0@
+SystemVerwaltungEnu.rc@STRING@IDS_LOCAL_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Local host@TODO! Local host@0@
+SystemVerwaltungEnu.rc@STRING@IDP_SAVE_CHANGES@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Do you want to save the changes?@TODO! Do you want to save the changes?@0@
+SystemVerwaltungEnu.rc@STRING@IDS_RESET_FAILED@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The initialising could not be executed!@TODO! The initialising could not be executed!@0@
+SystemVerwaltungEnu.rc@STRING@IDS_AUTOLOGOUT@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Auto Logout@TODO! Auto Logout@0@
+SystemVerwaltungEnu.rc@STRING@IDP_NOAPPWITHOUTCONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@If you want to exit the application automatically, you also have to activate the automatic disconnect of connections!@TODO! If you want to exit the application automatically, you also have to activate the automatic disconnect of connections!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_APP_LT_CONF@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The time for automatic exit is less than the time for confirmation!@TODO! The time for automatic exit is less than the time for confirmation!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_CONN_LT_CONF@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The time for automatic disconnect is less than the time for confirmation!@TODO! The time for automatic disconnect is less than the time for confirmation!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_APP_LT_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The time for automatic exit is less than the time for automatic disconnect!@TODO! The time for automatic exit is less than the time for automatic disconnect!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_NO_LOCAL_HOSTNAME@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Please enter a useful name for this host!@TODO! Please enter a useful name for this host!@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_NEW@17,06,2002,15,13,46@18,06,2002,09,28,07@17,06,2002,15,13,46@New\nCreates a new element@TODO! Nuovo\nCrei un nouvo elemento@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_DELETE@17,06,2002,15,13,46@18,06,2002,09,29,07@17,06,2002,15,13,46@Delete\nDeletes the selected element@TODO! Elimina\nElimina il elemento selezionato@0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_CANCEL@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Undo\nUndo the last changes @TODO! Undo\nUndo the last changes @0@
+SystemVerwaltungEnu.rc@STRING@ID_EDIT_SERVERINIT@17,06,2002,15,13,46@18,06,2002,12,15,13@17,06,2002,15,13,46@Initialise\nInitialises the system@TODO! Initializzazione\n <Initialise> il sistema@0@
+SystemVerwaltungEnu.rc@STRING@ID_VIEW_TOOLTIPS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Tool Tips on/off@TODO! Tool Tips on/off@0@
+SystemVerwaltungEnu.rc@STRING@IDS_ARCHIV@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Archive@Archivio@0@
+SystemVerwaltungEnu.rc@STRING@IDP_REGISTRY_IMPORT_WARNING@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@You are importing settings from another system!\nThis may cause damage to this system or errors in functionality.\nDo you want to import the settings nevertheless?@TODO! You are importing settings from another system!\nThis may cause damage to this system or errors in functionality.\nDo you want to import the settings nevertheless?@0@
+SystemVerwaltungEnu.rc@STRING@IDP_HOST_ILLEGAL_ADDRESS@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The entered address or calling number for %s contains invalid symbols!@TODO! The entered address or calling number for %s contains invalid symbols!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_ARCHIV_SIZE_ZERO@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@You must enter an archive size greater than 0 or check 'all'.@TODO! You must enter an archive size greater than 0 or check 'all'.@0@
+SystemVerwaltungEnu.rc@STRING@IDP_ARCHIV_SIZE_TO_BIG@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The entered size is greater than the maximum available size!\nThe maximum size will be used.@TODO! The entered size is greater than the maximum available size!\nThe maximum size will be used.@0@
+SystemVerwaltungEnu.rc@STRING@IDS_LOGIN_SUCCESFUL@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Login of %s successful@TODO! Login of %s successful@0@
+SystemVerwaltungEnu.rc@STRING@IDS_LOGIN_DENIED@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Login of %s denied@TODO! Login of %s denied@0@
+SystemVerwaltungEnu.rc@STRING@IDP_FIXED_ARCHIVES_ON_DRIVE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@This drive has fixed archives!\nYou must remove this assignment first to change the usage of the drive.\nThe usage was not changed!@TODO! This drive has fixed archives!\nYou must remove this assignment first to change the usage of the drive.\nThe usage was not changed!@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVES@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Drives@Unità@0@
+SystemVerwaltungEnu.rc@STRING@IDS_ARCHIVES@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Archives@TODO! Archives@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NR@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@No@No@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SIZE_MB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Size in MB@TODO! Size in MB@0@
+SystemVerwaltungEnu.rc@STRING@IDS_ALARM_ARCHIV@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Alarm@Allarme@0@
+SystemVerwaltungEnu.rc@STRING@IDS_RING_ARCHIV@17,06,2002,15,13,46@18,06,2002,14,15,30@17,06,2002,15,13,46@Ring@TODO! Ring@0@
+SystemVerwaltungEnu.rc@STRING@IDS_VORRING_ARCHIV@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Pre-ring@TODO! Pre-ring@0@
+SystemVerwaltungEnu.rc@STRING@IDS_NEW_ARCHIV@17,06,2002,15,13,46@18,06,2002,12,15,55@17,06,2002,15,13,46@New archive@TODO! Nuovo archivio@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVE@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@Drive@Unità@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USEDAS@17,06,2002,15,13,46@18,06,2002,12,17,51@17,06,2002,15,13,46@Used as@TODO! Usato per@0@
+SystemVerwaltungEnu.rc@STRING@IDC_ARCHIVE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@List of entered archives.\nSelect an entry to edit it's data.@TODO! List of entered archives.\nSelect an entry to edit it's data.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_SIZE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Please specify the requested size of the archive.@TODO! Please specify the requested size of the archive.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_COMBO_ALARM@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@A pre-ring archive must be assigned to a alarm archive.@TODO! A pre-ring archive must be assigned to a alarm archive.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_STATIONS_NAME@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Own host name.\nEnter a unique name.@TODO! Own host name.\nEnter a unique name.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_DO_LISTEN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Accept incomming calls@TODO! Accept incomming calls@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USED@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Used in MByte@TODO! Used in MByte@0@
+SystemVerwaltungEnu.rc@STRING@IDS_SIZE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Size in MByte@TODO! Size in MByte@0@
+SystemVerwaltungEnu.rc@STRING@IDS_QUOTA@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@To use in MB@TODO! To use in MB@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVE_FD@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Floppy@TODO! Floppy@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVE_HD@17,06,2002,15,13,46@18,06,2002,12,16,26@17,06,2002,15,13,46@Local Drive@TODO! Unità locale@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVE_NET@17,06,2002,15,13,46@18,06,2002,09,09,31@17,06,2002,15,13,46@Network drive@TODO! Unità network@0@
+SystemVerwaltungEnu.rc@STRING@IDS_DRIVE_CD@17,06,2002,15,13,46@17,06,2002,15,29,37@17,06,2002,15,13,46@CD-ROM Drive@Unità CD-ROM@0@
+SystemVerwaltungEnu.rc@STRING@IDS_ALL@17,06,2002,15,13,46@18,06,2002,09,22,48@17,06,2002,15,13,46@All@TODO! Tutto@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USE_NORMAL@17,06,2002,15,13,46@18,06,2002,12,22,44@17,06,2002,15,13,46@No usage@TODO! Nessuno uso@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USE_DATABASE@17,06,2002,15,13,46@18,06,2002,12,18,31@17,06,2002,15,13,46@Storage@TODO! Storage@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USE_BACKUP_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Read backup@TODO! Read backup@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USE_BACKUP_WRITE_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Read and write backup@TODO! Read and write backup@0@
+SystemVerwaltungEnu.rc@STRING@IDS_USE_SYSTEM@17,06,2002,15,13,46@18,06,2002,09,18,58@17,06,2002,15,13,46@Operating system@TODO! Sistema operativo@0@
+SystemVerwaltungEnu.rc@STRING@IDS_TOO_LESS_DATABASE_DRIVES@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@There is not enough space for all archives!\nDecrease the size of one or more archives.\nThe usage of drive will be kept.@TODO! There is not enough space for all archives!\nDecrease the size of one or more archives.\nThe usage of drive will be kept.@0@
+SystemVerwaltungEnu.rc@STRING@IDP_ARCHIVS_TOO_BIG@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The size of all archives exceeds the capacity of all drives.\nPlease decrease the size of one or more archives or provide more drives or increase the used sizes of drives.@TODO! The size of all archives exceeds the capacity of all drives.\nPlease decrease the size of one or more archives or provide more drives or increase the used sizes of drives.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_ADDRESS_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Number or address of the host.\n\nTCP/IP:\nAll characters are allowed, pay attention to correct spelling.\nISDN and SMS:\nAll digits, blanks and / - ( ) are allowed.\n\nRouting:\nThe single hosts must be devided by a #.\nAn IP address must have prefix tcp:.\nA SMS number must have prefix sms:.\nA B3 address must have prefix pres:.@TODO! Number or address of the host.\n\nTCP/IP:\nAll characters are allowed, pay attention to correct spelling.\nISDN and SMS:\nAll digits, blanks and / - ( ) are allowed.\n\nRouting:\nThe single hosts must be devided by a #.\nAn IP address must have prefix tcp:.\nA SMS number must have prefix sms:.\nA B3 address must have prefix pres:.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_AUTO_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Applications will be automatically exited after this time if no user action occurs meanwhile.\n\nThis time must be greater or equal to the time for automatic disconnect.@TODO! Applications will be automatically exited after this time if no user action occurs meanwhile.\n\nThis time must be greater or equal to the time for automatic disconnect.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_CONF_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@A confirmation request will be displayed for the entered last seconds,\nso that the user can prevent automatic exiting.@TODO! A confirmation request will be displayed for the entered last seconds,\nso that the user can prevent automatic exiting.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_512_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Set the requested bit rate.@TODO! Set the requested bit rate.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_CHECK_APP@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if applications providing a user interface should be exited after a given time without user activity meanwhile.\n(Safety turn off to prevent the system from unathorized input.)\nAny established connections will be closed too.@TODO! Check this if applications providing a user interface should be exited after a given time without user activity meanwhile.\n(Safety turn off to prevent the system from unathorized input.)\nAny established connections will be closed too.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_256_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Set the requested bit rate.@TODO! Set the requested bit rate.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_128_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Set the requested bit rate.@TODO! Set the requested bit rate.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_CHECK_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if applications providing a connection should be disconnect after a given time without user activity meanwhile.\n(Safety disconnection to prevent the system from unnecessay connection charge.)@TODO! Check this if applications providing a connection should be disconnect after a given time without user activity meanwhile.\n(Safety disconnection to prevent the system from unnecessay connection charge.)@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_64_KB@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Set the requested bit rate.@TODO! Set the requested bit rate.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_AUTO_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Connections will be closed after a given time without user activity (keyboard or mouse) meanwhile.@TODO! Connections will be closed after a given time without user activity (keyboard or mouse) meanwhile.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_CONF_CONN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@During the last seconds there will be a confirmation request\nso the user is able to prevent the automatic disconnect of the connection.@TODO! During the last seconds there will be a confirmation request\nso the user is able to prevent the automatic disconnect of the connection.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_CHECK_MSN@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Displays if the telephone installation provides the called MSN or not.\nSome telephone installations do not provide the called MSN.\Then only 'Accept all incomming calls' can be used.@TODO! Displays if the telephone installation provides the called MSN or not.\nSome telephone installations do not provide the called MSN.\Then only 'Accept all incomming calls' can be used.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_B1@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Only one B-channel will be available for a connection.@TODO! Only one B-channel will be available for a connection.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_B2@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Up to two B-Channels will be available for a connection.@TODO! Up to two B-Channels will be available for a connection.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_ALL@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if you want to use the whole disc space for this usage.@TODO! Check this if you want to use the whole disc space for this usage.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_DRIVES@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@List of all existing drives.\nSelect an entry to edit its settings.@TODO! List of all existing drives.\nSelect an entry to edit its settings.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_SYSTEM@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if the operating system is installed to this drive and this drive should not be used to store data and images.@TODO! Check this if the operating system is installed to this drive and this drive should not be used to store data and images.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_NORMAL@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if the drive should not be used to store data and images.@TODO! Check this if the drive should not be used to store data and images.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_DATABASE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if the drive should be used to store data and images.@TODO! Check this if the drive should be used to store data and images.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_BACKUP_WRITE_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if the drive should be used to write backup data and images.\nIt is possible to read data from this drive too.\nCD-R and CD-RW drives cannot be used for automatic backups.@TODO! Check this if the drive should be used to write backup data and images.\nIt is possible to read data from this drive too.\nCD-R and CD-RW drives cannot be used for automatic backups.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RADIO_BACKUP_READ@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Check this if the drive should be used to read backup data and images.@TODO! Check this if the drive should be used to read backup data and images.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_EDIT_USE@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@If the software shall not use the entire drive space for storing,\nenter the size to use.@TODO! If the software shall not use the entire drive space for storing,\nenter the size to use.@0@
+SystemVerwaltungEnu.rc@STRING@IDC_RUFNUMMER@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@Enter the calling number to which calls shall be accepted.@TODO! Enter the calling number to which calls shall be accepted.@0@
+SystemVerwaltungEnu.rc@STRING@IDP_ARCHIVE_SIZE_ZERO@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@You have not entered a size!@TODO! You have not entered a size!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_CONFIG_DRIVE_FIRST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@You must enter an archive for storage\nbevor you are able to setup archives!@TODO! You must enter an archive for storage\nbevor you are able to setup archives!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_DOUBLE_HOST@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The host %s is used multiple.\nHosts must have unique names!\nDelete the multiple entries!@TODO! The host %s is used multiple.\nHosts must have unique names!\nDelete the multiple entries!@0@
+SystemVerwaltungEnu.rc@STRING@IDP_HOST_WITHOUT_NUMBER@17,06,2002,15,13,46@17,06,2002,15,13,46@17,06,2002,15,13,46@The host %s does not have a phone number or address.\nPlease enter a phone number or address!@TODO! The host %s does not have a phone number or address.\nPlease enter a phone number or address!@0@

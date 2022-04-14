@@ -1,0 +1,8 @@
+acdc.rc@CAPTION@IDD_ACDC_DIALOG.CAPTION@@@@Acdc@Acdc@0@
+acdc.rc@LTEXT@IDD_ACDC_DIALOG.IDOK@@@@Beenden@Close@0@
+acdc.rc@LTEXT@IDD_ACDC_DIALOG.IDC_ABORT@@@@Brennen abbrechen@Cancel burning@0@
+acdc.rc@LTEXT@IDD_ACDC_DIALOG.IDC_PROGRESS1@@@@Progress1@Progress1@0@
+acdc.rc@LTEXT@IDD_ACDC_DIALOG.IDC_CDINFO@@@@Zurücksetzen@Reset Progress@0@
+acdc.rc@POPUP@IDR_MAINFRAME.POPUP1@@@@Datei@File@0@
+acdc.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_ABOUT@@@@&Info über...@Ab&out...@0@
+acdc.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@@@@&Beenden@&Close@0@

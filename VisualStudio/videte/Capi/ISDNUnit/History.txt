@@ -1,0 +1,345 @@
+03.03.06 RKE- Bugfix 97: Bei fehlgeschlagenen Verbindungen wird jetzt ein voller Reset gemacht.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+06.01.06 RKE- ISDN ohne Nummernuebermitlung england geht jetzt auch wenn die eigene Nummer doch uebergeben wird.
+03.01.06 RKE- Die Verbindung wird jetzt erst wieder auf Closed gesetzt, wenn alle Kanaele geschlossen sind.
+			  Dadurch wir verhindert, das eine Verbindungsanfrage waehrend des Verbindungsabbaus das Handshaking
+			  mit der Capi durcheinander bringt.
+			  Der Registryeintrag "CloseOneChannel" ermoeglicht bei 2 ISDNUnit mit je 2 Kanaelen das schliesen
+			  eines B-Kanals bei einer eingehenden Verbindung ueber die KnockKnockBox. Der Wert 1 zeigt diese
+			  Box. Der Wert 2 fuehrt das Schliessen automatisch durch.
+			  Bei ausgehenden Verbindungen funktioniert es noch nicht, da die Verbindung dann manuell von aussen
+			  getrennt werden muesste.
+16.12.05 RKE- Bugfix 982: ISDN Unit startet wieder.
+07.12.05 UF - Bugfix Channelbundling 1 B Kanal Kontrollanrufe.
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+27.07.05 UF - Bugfix Rufnummernvergleich jetzt von hinten, wegen Vorwahlen.
+			  Bugfix Alarmverbindungen Audio und Database Rueckrufe nehmen jetzt
+			  die uebermittelte Rufnummer, damit die bestehende ISDN Verbindung (Alarm)
+			  wieder genutzt wird.
+18.07.05 UF - Log Einträge der Rufnummern jetzt wieder lesbar, fehlerhafte UNICODE Umstellung.
+13.05.04 GF	- Bugfix 193: AlarmAnruf Handling idipClient
+06.05.04 GF	- Bugfix 35: Unicode: Bei  Verbindung erscheint die Meldung: "Sie haben keine Berechtigung..."     
+05.04.04 GF	- Umstellung auf Unicode
+23.02.04 GF	- Feature: Ausgehende Verbindungen wahlweise mit B-Kanal-Beschraenkung
+18.02.04 GF	- Bugfix 853: GP, wenn während einer aufbauenden Verbindung der CipcServerControl disconnected
+						  und DoNewIndicateError() ohne Überprüfung gesendet wird
+			- Default-Wert fuer m_sOwnNumber in ReadSettings() gesetzt
+04.02.04 GF	- Bugfix 820: (vermutlich)
+			  Einer war da noch: DeleteAllPipesAndResetQueues()
+02.02.04 GF	- Bugfix 820: (vermutlich)
+			  m_AudioPipesServer und m_AudioPipesClient wurden nicht überall berücksichtigt
+			  bei RemoveMe(), AnyPipesExisting(), DumpPipeState() nachgetragen
+14.01.04 GF	- Bugfix 709: GP in der PTUnit bei AudioFetch auf B3-Box
+			- Bugfix 742: Database-Niemand-Verbindung zur B3-Box kann nicht beendet werden
+14.11.03 GF	- Bugfix 625: "Zeige Meldung für Zwischenanrufe" hat keine Funktion
+13.11.03 GF	- Bugfix 624: "ISDN Anruf abgewiesen" hat keine Funktion
+04.11.03 GF	- Bugfix: Beim RequestAudioPipe wurde ein FetchOutput gemacht
+23.04.03 UF - Bugfix Stationsnamen Routing
+22.04.03 UF - Bugfix CIPC Pipes
+19.03.03 GF	- Bugfix idip 368: Toleranter Rufnummernvergleich bei leerer Liste war zu tolerant.
+22.01.03 GF	- Bugfix idip 293: Rufnummernvergleich toleranter, Vergleich "von hinten übereinstimmend"
+21.01.03 UF - Bugfix GP bei Ein- und ausstecken eines USB Geraetes.
+14.11.02 GF	- Anpassung VS 70
+23.10.02 GF	- Indicate error bei fehlender CISDNConnection (z.B. bei USB) implementiert
+11.10.02 GF	- USB-Unterstützung implementiert, Hot-Plug fähig
+20.09.02 GF	- CISDNConnection::CheckConnection() in kleinere Funktionen aufgesplittet, zur GP-Eingrenzung
+16.05.02 UF - Bugfix Nr. 493 bei ausgehender Alarmverbindung auf dem 1 B-Kanal
+			  war der zweite B-Kanal blockiert.
+02.04.02 UF - Start der ISDN Unit korrigiert, jetzt nur noch 200 ms.
+05.10.01 UF - Bugfix Waehlprefix wird jetzt erst ab einer einstellbaren Mindestlaenge
+			  genutzt.
+23.10.01 UF - Bugfix Waehlprefix
+22.10.01 UF - Es wird jetzt ein Waehlprefix unterstuetzt, wenn er in der Registry
+			  als Prefix eingetragen ist.
+17.07.01 GF	- Bugfix: Ist Capi2032.dll vorhanden, aber Karte oder Treiber nicht vorhanden/ok,
+						kam es zum GP
+09.05.01 GF	- Bugfix: Einige Dialogelemente vergrößert, da sonst engl. Texte abgeschnitten wurden 
+25.04.01 GF	- Bugfix: Wegen Aufsplitten in 2 Units an derselben MSN mußte die Behandlung
+			  von eingehenden Rufen angepasst werden
+29.03.01 GF	- Bugfix: DTS muss die Host-Liste auch aus dem DV-Zweig laden,
+						 sonst ist OwnName/RemoteName="Standard" (im Logfile z.B.)
+17.01.01 ML - Bugfix: Das SystemTray-menü klappt nun korrekt zu
+12.01.00 UF - Der DTS Sender arbeitet jetzt standardmaessig mit 2 B Kanaelen
+		      alle anderen, idip und DTS Empfaenger mit 1.
+29.06.00 GF	Neu: Konfiguration DTS mit NO_PERMISSION_CHECK Präprozessor-Define
+24.05.00 GF	- Bugfix:
+				Client-Pipes wurden irrtümlich beendet, wenn keine Daten übertragen wurden,
+				obwohl der Client lebte und verbunden war (z.B. bei Remote Systemverwaltung)
+17.05.00 GF	- Verbindungen, die keine Pipes anlegen werden jetzt beim Timeout beendet
+			- Menüeintrag 'Alle Verbindungen beenden' und entsprechende Funktionen wieder aktiviert
+10.04.00 GF	- Pipes ohne Client (wegen Abbruch) werden jetzt nach 5s entfernt
+				=> Verbindungsabbau (wenn keine Pipes mehr vorhanden sind)
+05.04.00 GF	- Menüeintrag 'Alle Verbindungen beenden' und entsprechende Funktionen entfernt
+			- Alle Fetch's umgestellt auf CIPCFetch-Objekt
+19.5.99		Fehlermeldung 'Capi kann nicht geladen werden' in 'ISDN-Treiber nicht geladen'
+			geändert
+17.3.99 >>> UpdateVersion um 13:36 <<<
+17.03.99 UF Bugfixes PT
+			Setzen von Helligkeit,Kontrast, Farbe
+			Uhrzeit der Box ist setzbar.
+11.3.99 ML  Rufe ohne Rufnummer werden nun wahlweise abgewiesen.
+			Das durchsuchen der Hostliste ist nun abschaltbar.
+10.3.99	ML	AcceptCallingPartyNumber überprüft nun die eingehende Rufnummer
+			(falls vorhanden), ob diese in einer Hostliste vorhanden ist.
+			Ist dies nicht der Fall wird der eingehende Ruf abgewiesen.
+27.1.99 >>> UpdateVersion um 12:17 <<<
+
+27.1.99 HD PTConnection mit reduziertem Senden, dass sollte die NACKs verhindern,
+da die Box nicht mit Kommandos zugeschuettet wird.
+15.1.99 >>> UpdateVersion um 15:18 <<<
+15.1.99 HD PTAlarmAnrufe, verwenden die konfigurierte Kamera. Siehe auch http://lucky/software/Programs/Link/PTUnit/StateOfTheArt.htm
+14.01.99 HD MemoryLeak geflickt (28 bytes pro Verbindung beim Empfaenger)
+13.01.99 ML Neue Implementierung der virtuellen Alarme:
+			RTE_OUTGOING_CALL Param2=1 -> Online Param2=0 -> Offline
+			RTE_INCOMING_CALL  Param2=1 -> Online Param2=0 -> Offline
+			RTE_REJECT
+			Die virtuellen Alarme RTE_ONLINE und RTE_ALARMCALL gibt es
+			nicht mehr
+
+11.01.99 ML Die folgenden virtuellen Alarme implementiert:
+			RTE_ONLINE			Param2=1 -> Online Param2=0 -> Offline
+			RTE_ALARMCALL		
+			RTE_REJECT
+
+8.10.98 >>> UpdateVersion um 12:01 <<<
+08.10.98 HD second instance aufgeraeumt
+
+17.9.98 >>> UpdateVersion um 11:22 <<<
+
+17.9.98 >>> UpdateVersion um 11:21 <<<
+03.8.98 HD PTIdle tiumeout von 10 auf 30 Sekunden hoch gesetzt.
+17.7.98 HD Added WK_Trace for ISDN busy.
+
+8.7.98 >>> UpdateVersion um 11:43 <<<
+	UF	Routing Trennzeichen ist jetzt #
+		Alarmrouting geht jetzt auch.	
+6.7.98 >>> UpdateVersion um 16:13 <<<
+06.07.08	UF Routing ueber ! eingebaut, also
+			erst ISDN dann TCP/IP Verbindung
+19.5.98 >>> UpdateVersion um 14:26 <<<
+19.5.98 HD "Accept by reverse number" added.
+		Damit ist es auch moeglich eine kurze
+		MSN einzutragen, selbst wenn der Anschluss
+		eine lange Zahl liefert. 
+		Beispiel MSN "7", Nummer ist "4444467", ergibt
+		Accepted by reverse number match.
+
+11.5.98 >>> UpdateVersion um 12:41 <<<
+
+11.05.98 ExceptionHandler via InitDebugger.
+6.5.98 >>> UpdateVersion um 12:01 <<<
+06.05.98 HD alle "Modul" nach Unit
+
+27.3.98 >>> UpdateVersion um 13:02 <<<
+
+26.03.98 HD Anpassung OEMGui
+
+20.3.98 >>> UpdateVersion um 12:24 <<<
+
+20.02.08	UF CWK_Profile wegen NT	
+13.3.98 >>> UpdateVersion um 11:09 <<<
+
+13.03.98 Unspace durch TrimRight ersetzt.
+
+27.02.98 >>> UpdateVersion um 12:08 <<<
+27.02.98 Weniger Traces im PTUnit.log
+
+20.1.98 >>> UpdateVersion um 19:17 <<<
+20.01.98 HD PTAlarmConnections machen sofort SendPTConfig
+			Der BoxName wird in dem ZustandsDialog angezeigt.
+19.01.97 HD PT Alarm Connections modifiziert
+
+17.12.97 >>> UpdateVersion um 12:31 <<<
+17.12.97 HD	ForceIntra korrigiert, wenn auf die selbe
+			Kamera geschaltet wird. Wichtig beim Speichern
+			aus einer Verbindung.
+		 HD	TraceFrameSize im AdvancePTSettings, traced die
+			FrameSize und den FrameType
+13.11.97 DoSetHostName und BoxName/BoxNumber in RequestGetValue
+4.11.97 >>> UpdateVersion um 14:52 <<<
+04.11.97 HEDU MSNSupport in der "Aktueller Zustand" Box und registry.
+		 Wird beim jedem IncomingCall aktualisiert.
+02.11.97 AlarmActions angefangen
+28.10.97 >>> UpdateVersion um 16:25 <<<
+28.10.97 HEDU RTE_CONFIG, wenn capi2032.dll nicht geladen werden konnte.
+22.10.97 HEDU VersionInfo ISDNUnit/PTUnit korrigiert
+20.10.97 HEDU RTE_PROTOCOL added, wenn falsche Kombination PT/ISDN
+
+@LISTHEAD{01.10.97 HEDU}
+	WriteEEP via SetValue im OutputClient, geschuetzt durch AllowEEPWrite im cfg
+@LISTHEAD{30.09.97 HEDU}
+	AlarmAnrufe
+@LISTHEAD{29.09.97 HEDU}
+	AppName in wndClass und ISDNUnitWnd fuer PresUnit
+	Relais fuer die pt-200 korrigiert
+@LISTHEAD{25.09.97 HEDU}
+	SetValue CameraName, fuer PTConfig
+@LISTHEAD{24.09.97 HEDU}
+	Relaisschalten bis hin zum client, inklusive Anfangszustand
+	Anfangswerte kommen richtig aus der Box, mit HostId 0
+@LISTHEAD{23.09.97 HEDU}
+	Relaisschalten begonnen
+@LISTHEAD{17.09.97 HEDU}
+	Kameranummer aus dem Bilddaten.
+	'Stoerungsbild' wenn kein Videosignal.
+	Strange FF hack.
+@LISTHEAD{17.09.97 HEDU}
+	Uhrzeit aus den PTBildDaten
+@LISTHEAD{16.09.97 HEDU}
+	CPTBox als container fuer alle PT Daten/Funktionen
+@LISTHEAD{13.09.97 HEDU}
+	Test SuperMake mit VersionLabel
+	Bilder als PictureRecord ins DoConfirmEncodedVideo
+@LISTHEAD{12.09.97 HEDU}
+	PT PictureStream
+@LISTHEAD{12.09.97 HEDU}
+	CRawDataArray
+@LISTHEAD{08.09.97 HEDU}
+	NameOfCapiError
+@LISTHEAD{07.09.97 HEDU}
+	Neue Configuration "PTUnit Debug" "PTUnit Release" mit RUN_AS_PTUNIT=1
+	Unused stuff dropped.
+	CIPCPipeISDN->CIPCPipeIST, CIPCPipeISDN soll Oberklasse werden.
+@LISTHEAD{27.08.97 HEDU}
+	Vision.exe statt SecurityExplorer.exe
+	Versucht nicht mehr alte registry in ISDN_MODUL zu lesen,
+	der Lesezugriff erzeugt sonst leeren Folder.
+	ISDNUnit.htm fuers Web angefangen.
+@LISTHEAD{17.08.97 HEDU}
+	LoginDialog mit idipapi and ALLOW_LINK in der permission
+@LISTHEAD{13.08.97 HEDU}
+	Info mit IdipApi DoAbout
+	Neu "Aktueller Zustand" ist das alte Info.
+@LISTHEAD{20.07.97 HEDU}
+	ConnectClosed() macht das "Link" StatLog wieder zu.
+@LISTHEAD{20.05.97 HEDU}
+	Leicht geaenderte IngoreCodes
+	Ueber regedit ist es moeglich zwei ISDNUnits auf einem Rechner zu haben, noch gar nicht getestet.
+@LISTHEAD{13.05.97 HEDU}
+	OnOK ONCancel in CAboutBox, CKnockKnockBox aufgeraeumt.
+	Accelarators added in SettingsDialog
+
+@LISTHEAD{10.05.97 HEDU}
+	@LINK{AnklopfBox|ISDNUnit,KnockKnockBox} (interner CodeName KnockKnockBox) 
+	inklusive Option unter @LINK{Einstellungen|ISDNUnit,Settings} 
+	und HostnameGuessing (Nummer->Hostname)
+	@LINK{Host/Permission Check|ISDNUnit,IncomingCallCheck}
+
+@LISTHEAD{09.05.97 HEDU}
+	CCapiLib mit eingeschraenkten services beim ListenRequest (kein Fax, kein Voice)
+
+@LISTHEAD{08.05.97 HEDU}
+	AutoStart des Explorers mit User Alarm
+	HostName und HostNumber der GegenStelle werden in der AboutBox gesetzt
+
+@LISTHEAD{07.05.97 HEDU}
+	CopyPasteFehler Input/OutputPipes bei Removes entfernt
+
+@LISTHEAD{02.05.97 HEDU}
+	PipeConfirm Protokoll modifizert
+	PanicClose() added
+
+@HRULE @BOLD <<<<< April >>>> @NORMAL
+
+@LISTHEAD{23.04.97 CT} m_pCachedPipe missing Resets added
+
+@LISTHEAD{15.04.97 HEDU}
+	mulitple pipes possible	(multiple fetch) and added to the respective arrays
+	CIPC_REQ etc. via SRV_CONRTROL_XXX, no more via service
+	Check and ErrorIndication for second outgoing host
+
+@LISTHEAD{08.04.97 HEDU}
+	SetPasswort(NULL), damit ohne CAPI_ID handshake
+
+@LISTHEAD{04.04.97 HEDU}
+	einge Lock()s weg, um deadlock CIPCThread, CapiThread delete pCipc, zu vermeiden,
+
+@LISTHEAD{02.04.97 HEDU}
+	OnIncomingCall via CAbstractCapiClient (auch in Capi4!)
+	Einheitliche Behandlung fuer "A" oder Nummer
+	OnIncomingCall veraendert, kann jetzt auch leere sCalledParty
+
+@LISTHEAD{01.04.97 HEDU}
+	ISDNProcessorUsage als Faktor fuer das Sleep im CCapiThread::OnIdle
+	Einstellbar ueber SettingsDialog.
+
+@HRULE @BOLD <<<<< Maerz >>>> @NORMAL
+
+@LISTHEAD{31.03.97 HEDU}
+	PollConnection und CCapiThread::OnIdle 'getuned'
+	Tester kommt auf 117-121 KB
+
+@LISTHEAD{27.03.97 HEDU}
+	Problem beim ChannelBundling gefunden und behoben ?
+
+@LISTHEAD{19.03.97 HEDU}
+	full multi-threaded runs fine
+	Control und Pipe SetReconnectRetryTime(50)
+	Database connections activated
+	moved to WK_Profile.h, backwards compatible!
+
+@LISTHEAD{10.03.97 HEDU}
+	ganz ohne CRC
+
+@LISTHEAD{07.03.97 HEDU}
+	AboutBox umgruppiert, WK_STAT_PEAKS fuer Send/Receive
+
+@LISTHEAD{06.03.97 HEDU}
+	m_pConnection statt connectionsArray
+
+@LISTHEAD{05.03.97 HEDU}
+	AboutBox wieder in .rc
+
+@LISTHEAD{04.03.97 HEDU}
+		CGF_CapiQueue  --> CCapiQueue
+		CCapiQueueRecord mit eigenem .h .cpp
+
+@LISTHEAD{10.02.97 HEDU}
+	CRC wieder eingebaut, um kompatibel zur Version vom 23.10. zu sein
+	m_timedMessageUpdate mit SetDelta(1000)
+	macht ein AutoUpdate des Info Dialogs
+	Alle  traces in IsdnUnit.log (auch CIPC)
+	dropped SetThreadPriority AVOVE_NORMAL !!
+
+@TOPIC{OLD BUGS|ISDUNIT,OLDBUGS}
+@DASH Bei einem Anruf auf einem 'Sender' mit 
+der Kombination EigeneRufnummer 'A', 
+Capi liefert die echte eigene Nummer (also nicht den Leerstring, wie recht oft)
+und 2 BChannels.
+Es wird KEINE 2 BKanalVerbindung aufgebaut --> Closing1HangUp..
+
+@DASH Queranrufe in eine 1BKanalVerbindung fuehren zu einem
+Closing1HangUp.
+
+@DASH 2-->1 Anrufe bauen eine 2 BKanal Verbindung auf.
+Fiese Falle der Capi4, trotz Create(1Channels) kommen
+OnIncomingCalls bei bestehender 1ChannelConnection hoch.
+
+@DASH ein OK im SettingsDialog ignoriert den aktuellen Zustand,
+wie zum Beispiel gerade verbunden. 
+Setzt gnadenlos intern einiges auf InitialWerte. 
+Dafuer reicht ein 'einfaches' OK beim dem
+kein Wert geaendert wurde. Also kurz Nachschauen, was habe
+ich eigentlich eingestellt, OK und Crunch.
+
+@DASH gleichzeitige bidirektionale Anrufe gehen schief. 
+Ich glaube einfach keine Verbindung oder Closing1HangUp. 
+NOY YET verified.
+*/
+
+TODO:
+	What about LISTEN_REJECTALL ? Ist das in CCapi ?
+	Timeout fuer SendData
+	Timeout fuer client
+	Confirms fuer verschwunde clients ?
+	PIPEID als BYTE
+	CheckOldReceivedBlocks in capi4
+
+ARGHS:
+	kleine MiniFunktionen (1-3 Zeilen),
+	die nur einmal aufgerufen werden, komplizieren das Lesen.
+
+	Haputdaten in Dialogen zu vergraben, kompliziert den Zugriff.
+
+ 

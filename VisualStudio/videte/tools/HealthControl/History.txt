@@ -1,0 +1,41 @@
+History von HealthControl
+=========================
+
+24.05.05	- Testprogramm zum Außlesen von Lüfterdrehzahl/Temperatur/Versorgungsspannungen.
+			- Derzeit Implementiert: 
+				- Zugriffsfunktionen auf den Winbond W83627 (FanRPM, FanDivisor)
+				
+			- Die Klassen CIOPort und CW83627 werden werden nach Fertigstellung in die
+			  Hardwareinfo.dll
+		
+28.06.05	- SetFanCountLimits und GetFanCountLimits der Klasse CW83627 hinzugefügt.
+			- Die Lüfterüberwachung funktioniert mit den folgenden
+				Winbondchips:
+				- W83627HF	(VendorID=0x5ca3, DeviceID=0x02, ChipID=0x21) (3xFan)
+				- W83627THF	(VendorID=0x5ca3, DeviceID=0x02, ChipID=0x90) (3xFan)
+				- W83697HF	(VendorID=0x5ca3, DeviceID=0x02, ChipID=0x60) (2xFan)
+
+				- W83791SD	(VendorID=0x5ca3, DeviceID=0x10, ChipID=0x71) (Nicht unterstützt)
+				- W83781SD	(VendorID=0x5ca3, DeviceID=0x02, ChipID=0x10) (Nicht unterstützt)
+
+30.06.05
+			- Klasse CIT8712  zur Unterstützung des IT8712F von ITE hinzugefügt.
+			- Klasse CPC87372 zur Unterstützung des PC87372 von National hinzugefügt.
+			
+07.07.05
+			- Temperaturmessung W83627 eingebaut.
+			
+08.07.05
+			- Temperaturmessung für IT8712 implementiert.
+			
+12.07.05	- Spannungsüberwachung für die Monitorchips W83627HF, W83627THF und
+			  W83697HF implementiert
+18.01.06 RKE- RuntimeErrors wurden angepasst. Min- Max-Werte und Geraet einstellbar.
+              RuntimeErrors koennen einzeln (Temperatur, Fan, Voltage) abgeschaltet werden.
+19.01.06 RKE- Kontrolle der Applikation durch Launcher implementiert
+              (WAI, OnOK(), Icon, Language, Tray, Selfcheck).
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+25.01.06 RKE- Fuer DTS wird beim RTE Text mitgeliefert.
+06.03.06 RKE- Registryeinstellungen können jetzt in einer Regdatei abgespeichert werden, um
+              die Einstellungen für ein Board zu exportieren bzw. zu sichern.
+24.04.06 RKE- Geraetenummer wird jetzt auch beim Loeschen des RTE mitgeliefert.

@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MCLT", "MCLT.vcproj", "{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = MCLT.vcproj
+		SccProjectName0 = \u0022$/Project/SDK/MCLT\u0022,\u0020NKVCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		Unicode Debug = Unicode Debug
+		Unicode Release = Unicode Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Debug.ActiveCfg = Debug|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Debug.Build.0 = Debug|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Release.ActiveCfg = Release|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Release.Build.0 = Release|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Unicode Debug.ActiveCfg = Unicode Debug|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Unicode Debug.Build.0 = Unicode Debug|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Unicode Release.ActiveCfg = Unicode Release|Win32
+		{8BAB36CE-010F-4956-BE86-EAAE36F2ADE5}.Unicode Release.Build.0 = Unicode Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

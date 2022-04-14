@@ -1,0 +1,52 @@
+10.03.04 GF	- Umstellung auf Unicode und VS_71
+18.11.02 GF	- Anpassung VS_70
+09.3.99 ML Die Entschlüsselungsroutine ist nun in Util.h
+05.2.99 ML Es können nun auch verschlüsselte Log-Dateien gelesen werden.
+26.1.99 HD TimerTest mit ProgressControl.
+25.1.99 >>> UpdateVersion um 11:34 <<<
+25.1.99 HD Start/Endzeit auch mit Jahresangabe. Wichtig fuer Zeitschaltuhrentests.
+4.1.99 HD Beim Zeitschaltuhrentest kann man die Startzeit waehlen.
+1.12.98 >>> UpdateVersion um 11:29 <<<
+01.12.98 HD GruppenAuswahl jetzt dynamisch.
+
+19.11.98 >>> UpdateVersion um 14:38 <<<
+19.11.98 HD TimerTestDialog erweitert. Moegliches GDI leak entfernt.
+02.11.98 HD Ausdruck ohne Farben,Ausdruck anders skaliert.
+
+10.9.98 >>> UpdateVersion um 11:01 <<<
+10.9.98 HD Kann jetzt auch Zeitangaben mit Jahresangabe
+		lesen. Format TT.MM.YYYYY,SS:MM.
+
+31.8.98 >>> UpdateVersion um 11:02 <<<
+31.8.98 HD Bug bei MehrfachDateien behoben.
+
+22.5.98 >>> UpdateVersion um 15:21 <<<
+22.5.98 HD Eingedeutscht.
+20.5.98 HD farbiger Hintergrund, 
+	pro Tag, oder Stunde/Minute.
+	Optional ueber Ansicht->farbiger Hintergrund.
+
+12.5.98 >>> UpdateVersion um 20:47 <<<
+12.5.98 HD ContextMenu rechte Maus:
+	Im Zeitbereich, um Start/Endzeit zu setzen.
+	Im 'Label'bereich, um Include/Exclude zu setzen.
+11.5.98 >>> UpdateVersion um 13:03 <<<
+
+11.05.98 HD ExceptionHandler via InitDebugger
+
+20.3.98 >>> UpdateVersion um 13:23 <<<
+17.11.97 SuperHistory Test 22222222222222222
+
+	UF CWK_Profile wegen NT
+@LISTHEAD{3.9.97 HEDU}
+	Besseres Verhalten bei leeren/nicht vorhandenen Dateien.
+@LISTHEAD{08.08.97 HEDU}
+	Neues E)xtra TimerTest, zeigt die Zeitschaltuhren an.
+@LISTHEAD{20.07.97 HEDU}
+	.lgz Files wieder richtig.
+	StartDirectory jetzt c:\log
+	Analog zu "ServerActive", jetzt auch "Active" moeglich.
+	Perfomance beim Einlesen verbessert.
+
+@LISTHEAD{20.07.97 HEDU}
+	Beginn der History.

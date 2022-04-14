@@ -1,0 +1,917 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 16, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.ita\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU 
+BEGIN
+    POPUP "Visualizzazione"
+    BEGIN
+        MENUITEM ">Schermo intero",                   IDOSD_VIEW_FULL
+        MENUITEM ">Tutte uguale",                IDOSD_VIEW_XXX
+        MENUITEM ">1 plus",                     IDOSD_VIEW_1PX
+    END
+    POPUP "Telecam."
+    BEGIN
+        MENUITEM ">Telecamera",                     IDOSD_CAM1
+        MENUITEM ">Telecamera",                     IDOSD_CAM2
+        MENUITEM ">Telecamera",                     IDOSD_CAM3
+        MENUITEM ">Telecamera",                     IDOSD_CAM4
+        MENUITEM ">Telecamera",                     IDOSD_CAM5
+        MENUITEM ">Telecamera",                     IDOSD_CAM6
+        MENUITEM ">Telecamera",                     IDOSD_CAM7
+        MENUITEM ">Telecamera",                     IDOSD_CAM8
+        MENUITEM ">Telecamera",                     IDOSD_CAM9
+        MENUITEM ">Telecamera",                     IDOSD_CAM10
+        MENUITEM ">Telecamera",                     IDOSD_CAM11
+        MENUITEM ">Telecamera",                     IDOSD_CAM12
+        MENUITEM ">Telecamera",                     IDOSD_CAM13
+        MENUITEM ">Telecamera",                     IDOSD_CAM14
+        MENUITEM ">Telecamera",                     IDOSD_CAM15
+        MENUITEM ">Telecamera",                     IDOSD_CAM16
+    END
+    POPUP "Menù di Configurazione"
+    BEGIN
+        MENUITEM ">PIN: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM "Blocco Display",               IDOSD_OPTION_LOCK
+    POPUP "Sistema"
+    BEGIN
+        MENUITEM ">Informazioni del Sistema",                IDOSD_OPTION_INFO
+        MENUITEM ">Statistiche",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "Replay"
+    BEGIN
+        MENUITEM ">Tempo reale",                   IDOSD_REALTIME
+        MENUITEM ">Lista d'allarmi",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">Linee rilevat movimento",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU 
+BEGIN
+    POPUP "Regolazioni telecamere"
+    BEGIN
+        MENUITEM ">Nome camara:________________", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Framerate",                   IDOSD_CAMERA_FPS
+        MENUITEM ">Compress. d'immagine",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">Luminosità",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">Contrasto",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">Saturazione",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Resistenza terminale",               IDOSD_CAMERA_TERMINATION
+        MENUITEM ">Tipo",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">COM Port",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "System Settings"
+    BEGIN
+        MENUITEM ">Risoluzione d'immagine",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">Allarme acustico",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">Esporta programmazione", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">Importa programmazione", IDOSD_IMPORT_SETTINGS
+    END
+    POPUP "Timer telecamera"
+    BEGIN
+        MENUITEM ">Lunedì: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">Martedì: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">Mercoledì: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">Giovedì: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">Venerdì: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">Sabato: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">Domenica: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">Registra allarme",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "Come registra telecam."
+    BEGIN
+        MENUITEM ">Modo",                      IDOSD_ALARM_MODE
+    END
+    POPUP "Sensibilità rilevazione"
+    BEGIN
+        MENUITEM ">Movimento",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">Maschera adattabile",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">Maschera permanente",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "Configurazione Allarme"
+    BEGIN
+        MENUITEM ">Chiamata quando",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">Numero 1 ",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">Numero 2 ",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">Numero 3 ",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">Uscita Allarme",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "Immagini"
+    BEGIN
+        MENUITEM ">Esportazione d'immagini",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">Annulli esportazione",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">Continua esportazione ",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">Esportazione immag. allarme",      IDOSD_ALARM_BACKUP
+        MENUITEM ">Eliminazione immag. allarme",        IDOSD_ALARM_DELETE
+        MENUITEM ">Mostra immagini sospette",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">Elimina immagini sospette",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "Uscita video"
+    BEGIN
+        MENUITEM ">Uscita 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">Uscita 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">Uscita 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">Uscita 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">Mostrare durante",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "Regolazioni audio"
+    BEGIN
+        MENUITEM ">Ascolti in tensione",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM ">Assegnazione",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">Registrare à",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">Amplificazione",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">Soglia",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">Volume",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "Network"
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">Subnetmask: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">Gateway: ___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">Nome %s: ________________",    IDOSD_NET_NAME
+        MENUITEM ">DHCP",                       IDOSD_DNS
+    END
+    POPUP "Data/Ora"
+    BEGIN
+        MENUITEM ">Data: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">Ora: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM ">Zona:",                      IDOSD_TIME_ZONE
+    END
+    POPUP "Selezione Stampante"
+    BEGIN
+        MENUITEM "Nessuna Stampante",                IDOSD_NO_PRINTER
+        MENUITEM ">Stampante",                    IDOSD_PRINTER1
+        MENUITEM ">Stampante",                    IDOSD_PRINTER2
+        MENUITEM ">Stampante",                    IDOSD_PRINTER3
+        MENUITEM ">Stampante",                    IDOSD_PRINTER4
+        MENUITEM ">Stampante",                    IDOSD_PRINTER5
+        MENUITEM ">Stampante",                    IDOSD_PRINTER6
+        MENUITEM ">Stampante",                    IDOSD_PRINTER7
+        MENUITEM ">Stampante",                    IDOSD_PRINTER8
+        MENUITEM ">Stampante",                    IDOSD_PRINTER9
+        MENUITEM ">Stampante",                    IDOSD_PRINTER10
+        MENUITEM ">Stampante",                    IDOSD_PRINTER11
+        MENUITEM ">Stampante",                    IDOSD_PRINTER12
+        MENUITEM ">Stampante",                    IDOSD_PRINTER13
+        MENUITEM ">Stampante",                    IDOSD_PRINTER14
+        MENUITEM ">Stampante",                    IDOSD_PRINTER15
+        MENUITEM ">Stampante",                    IDOSD_PRINTER16
+    END
+    POPUP "Selezione Lingua"
+    BEGIN
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE1
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE2
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE3
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE4
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE5
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE6
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE7
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE8
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE9
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE10
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE11
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE12
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE13
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE14
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE15
+        MENUITEM ">Lingua",                    IDOSD_LANGUAGE16
+    END
+    POPUP "Cambiare PIN"
+    BEGIN
+        MENUITEM ">Operatore",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">Supervisore",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "Opzioni di sistema"
+    BEGIN
+        MENUITEM ">Mostra lista di eventi",   IDOSD_OPTION_RTE
+        MENUITEM ">Arresta il Sistema",          IDOSD_OPTION_EXIT
+        MENUITEM ">Aggiornamento Software",             IDOSD_OPTION_UPDATE
+        MENUITEM ">Codice estens.: ____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "Uscita dal Menù Config.",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DVCliente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "PIN corretto"
+    IDS_ON                  "On"
+    IDS_PIN_FAILED          "PIN errato"
+    IDS_PIN                 "PIN: ____"
+    IDS_SEARCH_DATE         "Ricerca data: __.__.__"
+    IDS_SEARCH_TIME         "Ricerca ora: __:__"
+    IDS_SEARCH_ERROR        "Ricerca errori"
+    IDS_OFF                 "Off"
+    IDS_CAMERA              "Telecam.:"
+    IDS_OLD_PIN             "PIN corrente: ____"
+    IDS_NEW_PIN             "Nuovo PIN: ____"
+    IDS_CONFIRM_PIN         "Conferma PIN: ____"
+    IDS_PIN_CHANGED         "PIN cambiato"
+    IDS_SET_CLOCK_DATE_FAILED "Data non cambiata"
+    IDS_SET_CLOCK_TIME_FAILED "Ora non cambiata"
+    IDS_SEARCH_START        "Ricerca..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "Data cambiata"
+    IDS_SET_CLOCK_TIME_SUCCESS "Ora cambiata"
+    IDS_SET_TIMER_SUCCESS   "Timer cambiato"
+    IDS_SET_IP_SUCCESS      "Indirizzo IP cambiato"
+    IDS_SET_IP_FAILED       "Indirizzo IP non cambiato"
+    IDS_SET_MSN_SUCCESS     "MSN cambiato"
+    IDS_SET_MSN_FAILED      "MSN non cambiato"
+    IDS_SET_TIMER_FAILED    "Timer non cambiato"
+    IDS_MD                  "Rilevazione di movimento"
+    IDS_UVV                 "Allarme/Pre-allarme"
+    IDS_LOW                 "Bassa"
+    IDS_NORMAL              "Normal"
+    IDS_HIGH                "Alta"
+    IDS_WAIT                "Attendere prego..."
+    IDS_NO_PICTURES         "Nessuna immagine per questa telecamera"
+    IDS_QUERY               "Ricerca per:\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DVCliente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "Data e ora"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "Telecamera corrente... Tutti i valori di telecamera sono individui e si riferiscono alla telecamera corrente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "Riavvolgimento"
+    IDC_BUTTON_PLAY         "Play"
+    IDC_BUTTON_PLAY_BACK    "Replay"
+    IDC_BUTTON_STOP         "Fermare play"
+    IDC_BUTTON_FF           "Avanzamento veloce"
+    IDC_BUTTON_EJECT        "Chiusare la finestra attuale di riproduzione"
+    IDC_BUTTON_SKIP_BACK    "Allarme precedente"
+    IDC_BUTTON_SINGLE_BACK  "Immagine precedente"
+    IDC_BUTTON_SINGLE_FORWARD "Immagine successiva"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "Ricerca"
+    IDC_BUTTON_SKIP_FORWARD "Allarme successivo"
+    IDC_BUTTON_EXPORT       "Esporta l'immagine della telecamera attuale su:"
+    IDC_BUTTON_PRINT        "Stampa l'immagine della telecamera attuale sulla: %s"
+    IDC_BUTTON_MINIMIZE     "Nascondere il pannello nell'angolo in basso a destra del monitor"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_OK           "Uscita Programma"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_QUERY_FAILED        "Nessuna immagine trovata:\n"
+    IDS_SHUTDOWN            "Dispositivo scattato..."
+    IDS_END_OPTION          "Uscita dal Menù Config."
+    IDS_DATE                "Data:"
+    IDS_TIME                "Ora:"
+    IDS_EXPORT_RUNNING      "Esportazione in corso..."
+    IDS_EXPORT_SUCCESS      "Esportazione completata"
+    IDS_EXPORT_FAILED       "Esportazione fallita"
+    IDS_PRINTJOB_RUNNING    "Stampa in corso..."
+    IDS_PRINTJOB_SUCCESS    "Stampa completata"
+    IDS_PRINTJOB_FAILED     "Stampa fallita"
+    IDS_CAMNAME             "Nome telecam:"
+    IDS_CONNECT_ERROR       "Nessuna connessione possibile"
+    IDS_LOCKED              "Dispositivo bloccato"
+    IDS_RTE                 "Errore di Run-time %u da"
+    IDS_DELETE_ALARM        "Cancellazione allarme corrente..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETED_ALARM       "Immagini cancellate"
+    IDS_DELETED_ALARM2      "Immagini non cancellate completamente"
+    IDS_CONFIRM_RTE         "Messaggio Evento confermato"
+    IDS_DEFAULTPRINTER_SET  "Stampante selezionata"
+    IDS_NO_CAMERA           "Non c'è telecamera collegata"
+    IDS_BACKUP_RUNNING      "Processo di esportazione: %d %%\n\nTempo stimato: %s"
+    IDS_BACKUP_COMPLETE     "Esportazione d'immagini d'allarme avvenuta"
+    IDS_DATE_FORMAT         "ggmmaa"
+    IDS_TIME_FORMAT_HHMMSS  "hhmmss"
+    IDS_TIMER_FORMAT        "hhmmhhmm"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "Per favore, inserire la data di ricercamento e confermare con il tasto Enter"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "Per favore, inserire l'ora di ricercamento e confermare con il tasto Enter"
+    IDS_HELP_INPUT_PIN      "Per favore, inserire PIN"
+    IDS_HELP_INPUT_NEW_PIN  "Inserire nuovo PIN. Se non voglia cambiare, semplicemente click le frecce"
+    IDS_HELP_INPUT_CONFIRM_PIN "Confermare nuovo PIN"
+    IDS_HELP_INPUT_TCPIP    "Per favore, inserire l'indirizzo IP e confermare con il tasto Enter... ATTENZIONE! Il sistema sará riavviato automaticamente quando conferma il nuovo indirzzo IP! Se non voglia cambiare l'indirizzo, semplicemente click le frecce"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_DEL             "Cancellare il messaggio corrente"
+    IDC_RTE_UP              "Passa al prossimo messaggio"
+    IDC_RTE_DOWN            "Passa al precedente messaggio"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "Conferma il messaggio corrente"
+    IDC_RTE_OK              "Chiudere il messaggio di evento"
+    IDC_RTE_DEL_ALL         "Cancella tutti i eventi dalla lista"
+    IDC_RTE_PRINT           "Stampa tutti i eventi"
+    IDC_CLOCK               "Per favore, inserire il periodo di tempo dell'esportazione d'immagini"
+    IDC_STATIC_EXPORT       "Telecam.:"
+    IDC_EXPORT_CAM1         "Per favore, inserire i numeri delle telecamere da esportare le immagini"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "Per favore, inserire MSN e confermare con il tasto Enter"
+    IDS_HELP_INPUT_TIMER    "Per favore, inserire l'ora per il timer di questa telecamera e confermare con il tasto Enter"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "Per favore, inserire l'ora corrente e confermare con il tasto Enter"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "Per favore, inserire la data corrente e confermare con il tasto Enter"
+    IDS_HELP_INPUT_CAMERANAME "Per favore, inserire il nuovo nome della telecamera e conferma con Enter"
+    IDS_HELP_INPUT_OLD_PIN  "Per favore, inserire PIN attuale. Se non voglia cambiare, semplicemente click le frecce"
+    IDS_SET_SUBNETMASK_SUCCESS "Subnet mask impostata"
+    IDS_SET_SUBNETMASK_FAILED "Imposta subnet mask fallitta"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "Per favore, inserire la subnet mask e confermare con il tasto Enter... ATTENZIONE! Il sistema sarà riavviato automaticamente quando conferma la nuova subnet mask! Se non voglia cambiare la subnet mask, semplicemente click le frecce"
+    IDS_NO_PRINTER          "Nessuna Stampante"
+    IDS_DEFAULT_LANGUAGE_SET "Lingua selezionata"
+    IDS_BACKUP_FORMAT       "Attesa per favore, mentre il supporto sarà preparato per l'esportazione delle immagini degli telecamere %s.\nQuesta operazione richiederà alcuni minuti.\n\nTempo trascorso: %s"
+    IDS_BACKUP_FINALIZE     "Immagini allarme archiviata con successo.\nChiusura d'il processo di archiviamento.\nQuesta operazione impiegherà alcuni minuti.\n\nTempo trascorso: %s"
+    IDS_HELP_UPDATE_SYSTEM  "Per favore, inserire il floppy disk di aggiornamento. ATTENZIONE! Al termino dell'aggiornamento il sistema si riavvia in automatico"
+    IDS_BACKUP_FORMAT_NOCDR "Il supporto nell'unità non è vuoto.\nLe immagini non possono essere esportate"
+    IDS_BACKUP_FORMAT_ERROR "Errore durante la preparazione del supporto.\nProcesso bloccato.\nPrego sostituire il supporto e avviare nuovamente il processo di esportazione"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CAM11             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_CAM12             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_CAM13             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_CAM14             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_CAM15             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_CAM16             "Telecamera corrente... Per selezionare un'altra telecamera come corrente semplicemente click i tasti con i numeri, o i tasti delle frecce e confermare con Enter. Tutti i valori individui di telecamera si riferiscono alla telecamera corrente"
+    IDOSD_VIEW_FULL         "Schermo intero... Per cambiare la visualizzazione premere i tasti delle frecce e confermare con Enter"
+    IDOSD_VIEW_XXX          "Tutte uguale... Per cambiare la visualizzazione premere i tasti delle frecce e confermare con Enter"
+    IDOSD_VIEW_1PX          "Modo 1 plus. Per cambiare la visualizzazione premere i tasti delle frecce e confermare con Enter"
+    IDOSD_TIMER_MO          "Timer di questa telecamera per lunedì... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_TU          "Timer di questa telecamera per martedì... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_WE          "Timer di questa telecamera per mercoledì... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_TH          "Timer di questa telecamera per giovedì... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_FR          "Timer di questa telecamera per venerdì... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_SA          "Timer di questa telecamera per sabato... Per cambiare il timer premere Enter"
+    IDOSD_TIMER_SU          "Timer di questa telecamera per domenica... Per cambiare il timer premere Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "Data corrente... Per cambiare la data corrente premere Enter"
+    IDOSD_CLOCK_TIME        "Ora corrente... Per cambiare l'ora corrente premere Enter"
+    IDOSD_ALARM_MODE        "Per favore, premere Enter per cambiare il modo di registrazione tra modalità 'Allarme/Pre-allarme' e 'Rilevazione Movimento' della telecamera corrente|Per selezionare premere i tasti delle frecce e confermare con Enter, dopo selezionare 'Si' con le frecce e confermare con Enter.  ATTENZIONE! TUTTE le immagini precedenti di QUESTA telecamera saranno permanentemente cancellate se cambia il modo di registrazione!"
+    IDOSD_TCPIP             "Indirizzo IP corrente (estensione LAN), questo indirizzo identifica il sistema sul LAN, per fare i collegamenti e trasferire le immagini in tensione ad altri PC... Premere il tasto Enter, inserire l'indirizzo IP (esempio: 192.168.001.048) e confermare con Enter. La subnet mask è ancora obbligatorio da essere inserita (per favore, vedere il manuale)"
+    IDOSD_ISDN_MSN          "MSN corrente (estensione ISDN), questo número è utilizzato per fare i collegamenti e trasferire le immagini in tensione ad altri PC sul ISDN (rete telefonica digitale)... Premere il tasto Enter per cambiare il MSN corrente"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "Per cambiare il PIN, per favore click Enter"
+    IDOSD_CONFIG_PIN        "Per entrare nel Menù di Configurazione, per favore premere Enter e inserire il PIN"
+    IDOSD_OPTION_END        "Per uscire dal Menù di Configurazione, per favore premere Enter"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "Sensibilità della maschera adattabile della telecamera corrente... Con sensibilità alta si registra più rapidamente movimenti costanti (es. il movimento di alberi per il vento) e la maschera se costruirà più velocemente, ignorandolo. Per cambiare la sensibilità premere Enter|Selezionare i livello premendo i tasti delle frecce e conferma con Enter"
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "Sensibilità di rilevazione della telecamera corrente... Con sensibilità alta si registra movimenti minimi. Per cambiare la sensibilità premere EnterISelezionare i livello di sensibilità con i tasti delle frecce e conferma con Enter"
+    IDOSD_OPTION_EXIT       "ATTENZIONE! Se click Enter adesso, il sistema sarà arrestato immediatamente !!!"
+    IDOSD_CHANGE_CAMNAME    "Nome della telecamera corrente. Per cambiare il nome click Enter o selezionare un'altra telecamera con i tasti dei numeri e click Enter"
+    IDOSD_OPTION_LOCK       "Per bloccare il display premere Enter adesso. Le immagini non saranno visualizzate, ma la registrazione d'immagini continua normalmente"
+    IDOSD_OPTION_RTE        "Per mostrare la lista di eventi, per favore premere Enter"
+    IDOSD_ALARM_DELETE      "Per eliminare le immagini d'allarme correnti premere Enter"
+    IDOSD_NO_PRINTER        "Nessuna stampante... Per selezionare una stampante premere Enter|Selezionare la stampante con i tasti delle frecce e conferma con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "Luminosità della telecamera corrente... Per cambiare la luminosità premere Enter|Selezionare la luminosità con i tasti delle frecce e conferma con Enter"
+    IDOSD_COLOR_CONTRAST    "Contrasto della telecamera corrente... Per cambiare il contrasto premere Enter|Selezionare il contrasto con i tasti delle frecce e conferma con Enter"
+    IDOSD_COLOR_SATURATION  "Saturazione della telecamera corrente... Per cambiare la saturazione premere EnterISelezionare la saturazione con i tasti delle frecce e conferma con Enter"
+    IDOSD_CAM1              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM2              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM3              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM4              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM5              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM6              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM7              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM8              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM9              "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+    IDOSD_CAM10             "Telecamera corrente (il numero nella parte superiore diretta del display del panel)... Per selezionare un'altra telecamera come corrente click semplicemente i tasti con i numeri, o i tasti delle frecce e conferma con Enter. Tutti i valori individui de telecamera si riferiscono solo alla telecamera corrente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_PRINTER1          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER2          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER3          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER4          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER5          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER6          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER7          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER8          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER9          "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER10         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER11         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER12         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER13         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER14         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER15         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+    IDOSD_PRINTER16         "Per cambiare la stampante premere Enter|Selezionare un'altra stampante con i tasti delle frecce e conferma con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE2         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE3         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE4         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE6         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE7         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE8         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE9         "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE10        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE11        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE12        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE13        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE14        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE15        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+    IDOSD_LANGUAGE16        "Per selezionare un'altra lingua premere Enter|Selezionare la lingua con i tasti delle frecce e conferma con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "Per esportare l'immagine d'allarme corrente premere Enter"
+    IDOSD_SUSPECT_SEARCH    "Per mostrare la prima immagine sospetta premere Enter"
+    IDOSD_SUSPECT_DELETE    "Per eliminare tutte le immagini sospette premere Enter"
+    IDOSD_SUBNETMASK        "Subnet mask... Questo valore è obbligatorio se avete inserito l'indirizzo IP (per favore, veda in vostro manuale). Per cambiare la subnet mask premere Enter, inserire il valore (esempio: 255.255.255.000) e conferma con Enter"
+    IDOSD_ACTIVITY_BACKUP   "Per iniziare l'esportazione delle immagini, per favore premere Enter"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "Attivare/disattivare le linee sopra le immagini, quelle che indicano i movimenti"
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "Per cambiare il PIN, per favore click Enter"
+    IDOSD_TIMER_ONOFF       "Registrazione d'allarme: Sempre o solo durante il Timer (valore globale). Per cambiare, click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_OPTION_UPDATE     "Per favore, click Enter per avviare l'aggiornamento di software. ATTENZIONE! Al fin dell'aggiornamento, il sistema sarà riavviato automaticamente!"
+    IDOSD_TIME_ZONE         "Per variare l'ora della zone premere Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "Per favore, click Enter per mostrare la tabella di statistiche"
+    IDOSD_NET_NAME          "Nome corrente del %s... Per cambiare il nome del %s, per favore premere Enter"
+    IDOSD_GATEWAY           "Indirizzo del gateway (estensione LAN)... Per cambiare l'indirizzo del gateway, per favore premere Enter. Questo valore è facoltativo"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "Modo di visualizzazione di questa uscita video... Per cambiare il modo premere il tasto Enter|Selezionare il modo con i tasti delle frecce e conferma con Enter. Se selezionate modo 'Sequenza', selezionare ancora nel menù 'Mostrare durante' individualmente il tempo che ogni telecamera sarà mostrata in questa uscita video"
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "Modo di visualizzazione di questa uscita video... Per cambiare il modo premere il tasto Enter|Selezionare il modo con i tasti delle frecce e conferma con Enter. Se selezionate modo 'Sequenza', selezionare ancora nel menù 'Mostrare durante' individualmente il tempo che ogni telecamera sarà mostrata in questa uscita video"
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "Modo di visualizzazione di questa uscita video... Per cambiare il modo premere il tasto Enter|Selezionare il modo con i tasti delle frecce e conferma con Enter. Se selezionate modo 'Sequenza', selezionare ancora nel menù 'Mostrare durante' individualmente il tempo che ogni telecamera sarà mostrata in questa uscita video"
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "Modo di visualizzazione di questa uscita video... Per cambiare il modo premere il tasto Enter|Selezionare il modo con i tasti delle frecce e conferma con Enter. Se selezionate modo 'Sequenza', selezionare ancora nel menù 'Mostrare durante' individualmente il tempo che ogni telecamera sarà mostrata in questa uscita video"
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "Tempo in secondi che la telecamera corrente sarà mostrata nell'uscita video con modo 'Sequenza'... Per cambiare il tempo premere Enter|Selezionare il tempo con i tasti delle frecce e conferma con Enter. Questi valori sono individui per ogni telecamera"
+    IDOSD_ACOUSTIC_ALARM    "Per favore, click Enter per Attivare/disattivare l'allarme udibile|Selezionare con i tasti delle frecce e conferma con Enter"
+    IDOSD_SHOW_ALARMLIST    "Per favore, click Enter per mostrare la lista d'allarmi"
+    IDOSD_MD_DRAW_MASK      "Per favore, premere Enter per generare o editare la maschera permanente della telecamera corrente. Qui può anche mostrare la maschera adattabile"
+    IDOSD_ALARM_OUTPUT_ON_OFF "Per favore, click Enter per attivare o disattivare l'uscita allarme. Questo è un valore globale|Selezionare con i tasti delle frecce e conferma con Enter"
+    IDOSD_ALARM_CALLNUMBER1 "Primo numero à chiamare (LAN o ISDN), questo valore è globale e valido per tutte le telecamere... Per cambiare il primo numero premere Enter|Inserire il numero e conferma con Enter (per favore, vedere nel manuale)"
+    IDOSD_ALARM_CALLNUMBER2 "Secondo numero à chiamare (LAN o ISDN), questo valore è globale e valido per tutte le telecamere... Per cambiare il secondo numero premere Enter|Inserire il numero e conferma con Enter (per favore, vedere nel manuale)"
+    IDOSD_ALARM_CALLNUMBER3 "Terzo numero à chiamare (LAN o ISDN), questo valore è globale e valido per tutte le telecamere... Per cambiare il terzo numero premere Enter|Inserire il numero e conferma con Enter (per favore, vedere nel manuale)"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "Per continuare l'esportazione d'immagini premere Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "Errore durante l'eportazione delle immagini.\nPrego sostituire il supporto e ripetere il processo d'esportazione"
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "Esportazione d'immagini completata.\nPrego rimuovere il supporto.\n"
+    IDS_NO_RECORD_FOUND     "Non ci sono ulteriori immagini per questa funzione.\n"
+    IDS_BACKUP_CHECK_CD     "Prego inserire un supporto vuoto nell'unita.\nL'identificazione del supporto può impiegare alcuni secondi.\nIl supporto sarà espulso dopo il processo di esportazione\n\nEsportazione:\nda  %s\na   %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_FORMATTED    "Preparazione all'esportazione avvenuta.\nAttendere prego..."
+    IDS_BACKUP_FAILED       "Errore durante l'esportazione.\nPrego inserire un'altro supporto e riavviare l'esportazione"
+    IDS_BACKUP_COPYING      "Scrittura di software in corso.\nAttendere prego..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "Il supporto non è registrabile .\nPrego inserire un altro supporto registrabile e riavviare l'esportazione"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "Prego inserire data e ora iniziale per l'esportazione d'immagini"
+    IDS_EXPORT_TIME_OK      "Data e ora corrente"
+    IDS_EXPORT_TIME_BAD     "Errore di formato  Data/Ora"
+    IDS_EXPORT_INPUT_STARTTIME "Data/Ora iniziale"
+    IDS_EXPORT_INPUT_ENDTIME "Data/ora finale"
+    IDS_EXPORT_STARTTIME_FORMAT "da: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "a:   __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "Inserire le telecamere"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "Num.: __"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "Prego inserire la data e l'ora finale dell'esportazione d'immagini"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "Inserire il numero delle telecamere da esportare le immagini"
+    IDS_BACKUP_COMPLETE2    "Immagini esportate"
+    IDS_IMAGE_MANIPULATED   "L'immagine è stata manipolata o danneggiata!"
+    IDS_BACKUP_DISC_FULL    "Nel supporto inserito non ha spazio sufficiente per un'altra esportazione.\nPrego inserire un'altro supporto e avviare nuovamente l'esportazione"
+    IDS_BACKUP_NO_EMPTY_CD  "Il supporto non è vuoto.\nPrego inserire un nuovo supporto vuoto e avviare nuovamente l'esportazione"
+    IDS_VERSION             "Versione"
+    IDS_HELP_SELECT_HOST    "Selezionare il %s della lista %s e confermare con Enter"
+    IDS_SET_DHCP_FAILED     "DHCP state is not changed."
+    IDS_BACKUP_NODATA       "Nessuna immagine disponibile"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "Ci sono troppe immagini da esportare.\nPrego ridurre il periodo di tempo specificato o il numero delle telecamere"
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "Non ci sono immagini da esportare nell'arco di tempo richiesto\n"
+    IDS_BACKUP_FORMAT2      "Attendere prego, preparazione del supporto in corso.\nL'operazione potrà richiedere alcuni minuti.\n\nTempo trascorso: %s"
+    IDS_BACKUP_FINALIZE2    "Immagini esportate.\nEsportazione immagini completata.\nL'operazione richiederà alcuni minuti.\n\nTempo trascorso: %s"
+    IDS_READ_FAILED         "L'immagine non può essere visualizzata"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "Prego inserire un supporto vuoto nell'unità.\nL'operazione di verifica del supporto richiederà alcuni secondi.\nIl supporto sarà espulso dopo il processo di esportazione.\n\nEsportazione d'immagini d'allarme:\nda %s\na   %s\n"
+
+    IDS_SEARCH_DATE_FAILED  "Data non valida"
+    IDS_SEARCH_TIME_FAILED  "Ora non valida"
+    IDS_TIME_FORMAT_HHMM    "hhmm"
+    IDS_TIMER_ON            "Sempre"
+    IDS_TIMER_OFF           "Timer attivo"
+    IDS_INPUT_DISK          "Inserire floppy disk %d"
+    IDS_UPDATE_SUCCESS      "Aggiornamento completato"
+    IDS_UPDATE_RUNNING      "Aggiornamento in corso..."
+    IDS_UPDATE_FAILED       "Copia fallita"
+    IDS_UPDATE_WRONG_CRC    "Checksum errato"
+    IDS_UPDATE_WRONG_DISK   "Floppy d'aggiornamento errato"
+    IDS_UPDATE_DISKFAILED   "Lettura floppy disk errata"
+    IDS_UPDATE_NO_UPDATE_DISK "Assenza floppy o non correto"
+    IDS_UPDATE_WRONG_OEM    "Versione OEM errata"
+    IDS_UPDATE_WRONG_BUILD  "Numero di versione errato"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "Ora da zona cambiata"
+    IDS_SET_TIME_ZONE_FAILED "Ora da zona non cambiata"
+    IDS_HELP_SET_TIME_ZONE  "Inserire il codice orario dalla vostra nazione (Prego, vedere la documentazione)"
+    IDS_STATISTIC_STARTTIME "Inizio:"
+    IDS_STATISTIC_DURATION  "Giorni:"
+    IDS_STATISTIC_PICCOUNTER "Immagini:"
+    IDS_EXPORT_NO_CAMERA    "Errore, nessuna telecamera"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "Nome cambiato"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "Impossibile cambiare il nome"
+    IDS_SELECT_HOST         "Lista %s"
+    IDS_HOSTLIST_EMPTY      "La lista %s è vuota"
+    IDS_INVALID_SERIAL      "Numero licenza non valida"
+    IDS_DISCONNECT          "Discollegare"
+    IDS_SET_GATEWAY_SUCCESS "Indirizzo gateway variato"
+    IDS_SET_GATEWAY_FAILED  "Indirizzo gateway non variato"
+    IDS_HELP_INPUT_GATEWAY  "Per favore, inserire l'indirizzo del gateway (estensione LAN) e confermare con il tasto Enter... ATTENZIONE! Il dispositivo sarà riavviato automaticamente quando conferma il nuovo indirizzo del gateway! Se non voglia cambiare l'indirizzo, semplicemente click le frecce"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "Telecamera attuale"
+    IDS_VOUT_MODE_SEQUENCER "Sequenza"
+    IDS_VOUT_MODE_ACTIVITY  "Movimento"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "Calcolazione della data/ora finale effettuata con successo.\nPremere Enter per accetare la data e ora finale calcolata per uttilizzare a pieno tutto lo spazio del supporto.\n\nEsportazione:\nda %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "Calcolazione della data/ora effettuata.\nData/ora indicano l'immagine più recente di tutte le telecamere selezionate. Le immagini non sono sufficienti a uttilizzare tutto lo spazio del supporto. Per accetare premere Enter o ricomincia il processo con data/ora precedenti o più telecamere\n\nSupporto utilizzato: ca. %s %%\n\nEsportazione:\nda %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "Attendere prego...\nCalcola data/ora finale delle immagini da esportare"
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "Nessuna immagine trovata nella data/ora selezionata. Prego inserire un'altra data/ora precedente all'ultima selezionata"
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "Verifica data/ora finale fallita.\nPer favore, inserire la data/ora finale dell'esportazione d'immagini \n\nEsportazione:\nda %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "Verifica fallita"
+    IDS_EXTEND              "Avanzate..."
+    IDS_HELP_EXTEND         "Premere Enter per editare la lista %s"
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "Numero à chiamare impostato"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "No. à chiamare non impostato"
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "Inserire il numero delle telecamere da esportare le immagini"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_ACTIVITY  "Mostra gli eventi della rilevazione di movimento (+) nella lista degli allarmi. Per favore, premere anche alcuni numeri di telecamere"
+    IDC_ALARMLIST_EXTERN1   "Mostra gli eventi della prima allarme esterna collegata (Ext1) nella lista degli allarmi. Per favore, premere anche alcuni filtri di telecamere"
+    IDC_ALARMLIST_EXTERN2   "Mostra gli eventi della seconda allarme esterna collegata (Ext2) nella lista degli allarmi. Per favore, premere anche alcuni filtri di telecamere"
+    IDC_ALARMLIST_IMAGE     "Apre per ogni telecamera soltanto una nuova finestra di reproduzione e mostra l'immagine dell'allarme selezionata. In questa finestra può essere usata tutte le funzioni di reproduzione"
+    IDC_ALARMLIST_UP2       "Mostra la lista degli allarmi del giorno successivo"
+    IDC_ALARMLIST_DOWN2     "Mostra la lista degli allarmi del giorno precedente"
+    IDC_ALARMLIST_AUDIO     "Mostrare i allarmi di rilevazioni audio nella lista d'allarmi. Per favore, selezionare anche alcuni filtri de telecamere"
+    IDC_STATISTIC_OK        "Chiudere le statistiche"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Cancella la maschera permanente"
+    IDC_MD_INVERT           "Inverti la maschera permanente"
+    IDC_MD_SHOW_ADAPTIVE    "Mostra la maschera adattabile sopra l'immagine... La maschera non può essere cambiata perche si costruisce automaticamente, ma può cambiare nel menu 'Maschera adattabile'"
+    IDC_ALARMLIST_OK        "Chiudere la lista d'allarme"
+    ID_MD_OK                "Chiudere il editor di maschera"
+    IDC_HOSTS_OK            "Chiudere la lista %s"
+    IDC_HOSTS_NEW           "Inserire la nuova entrata nella lista %s"
+    IDC_HOSTS_DELETE        "Cancellare la entrata selezionata nella lista %s"
+    IDC_HOSTS_DISPLAY_NAME  "Nome corrente dell' %s selezionato nella lista %s... Click qui, per editare questa entrata"
+    IDC_HOSTS_DISPLAY_IP    "Indirizzo IP del corrente %s remoto selezionato nella lista %s... Clicca qui, per editare questa entrata"
+    IDC_HOSTS_UP_START      "Passa all'inizio della lista %s"
+    IDC_HOSTS_UP            "Passa alla prossima pagina della lista %s"
+    IDC_HOSTS_DOWN          "Passa alla pagina precedente della lista %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "Passa alla fine della lista di %s"
+    IDC_ALARMLIST_UP        "Mostra la pagina precedente della lista di allarme"
+    IDC_ALARMLIST_DOWN      "Mostra la pagina successiva della lista di allarme"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "Stampa la lista degli allarmi del giorno selezionato"
+    IDC_ALARMLIST_CAM0      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM1      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM2      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM3      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM4      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM5      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM6      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM7      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM8      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM9      "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM10     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM11     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM12     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM13     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+    IDC_ALARMLIST_CAM14     "Numero di telecamera... Attivare un numero e anche il tipo d'allarme: A, Ext1, Ext2 o L, per mostrare nella lista i allarmi della telecamera con questo numero. Puoi attivare vari tasti e allarmi contemporaneamente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "Prego inserire la data/ora iniziale dell'esportazione d'immagini. La data e ora d'inizio indica l'immagine precedente de tutte le immagini delle telecamere selezionate"
+    IDS_BACKUP_MULTI        "Sarà necessario più di un supporto per poter archiviare tutte le immagini, perché la quantità d'immagini selezionata è più grande dello spazio del supporto. Prego iniziare il backup con data/ora calcolata, dopo quindi selezionare menù 'Continua backup'. Il secondo backup è seguente al primo.\n\nEsporta: \nda %s\n\nTelecamere:\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "M,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "M,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "M,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "Off"
+    IDS_EXPANSION_CODE_SUCCESS "Codice estensione accettato"
+    IDS_EXPANSION_CODE_FAILED "Codice extensione errato"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "Esportazione continua direttamente dopo della precedente.\n\nEsportazione precedente:\nda %s\na  %s\n\nContinua esportazione:\nda %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "Questa esportazione continua direttamente dopo della precedente.\n\nEsportazione precedente:\nda %s\na  %s\n\nContinua esportazione:\nda %s\n\nTelecamere:\n%s\n\nPrego attendere...\nCalcolando data/ora finale per l'esportazione d'immagini..."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "Questa esportazione continua direttamente dopo della precedente.\n\nEsportazione precedente:\nda %s\na  %s\n\nContinua esportazione:\nda %s\n\nTelecamere:\n%s\n\nCalcolo della data/ora finale effettuata con successo. Non ci sono un numero d'immagini sufficienti per uttilizzare tutto lo spazio del supporto, click Enter per iniziare l'esportazione.\n\nSupporto in uso: ca. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "L'esportazione continua direttamentea dopo della precedente\n\nEsportazione precedente:\nda %s\na  %s\n\nContinua esportazione:\nda %s\n\nTelecamere:\n%s\n\nCalcolazione della data/ora finale effettuata. Premere Enter per accettare data/ora finale per usare tutto lo spazio del supporto"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "Definire quale rilevatore causa una chiamata d'allarme. M=rilevatore movimento, Ext1=primo rilevatore esterno, Ext2=secondo rilevatore esterno, o una combinazione di loro... Impostazioni sono registrate individualmente per ogni telecamera"
+    IDOSD_EXPANSION_CODE    "Per inserire il codice di estensione, per favore premere il tasto Enter"
+    IDOSD_EXPORT_SETTINGS   "Per favore, premere Enter per esportare parametri del sistema (vedere nel manuale, quale parametri saranno esportate)"
+    IDOSD_IMPORT_SETTINGS   "Per favore, premere Enter per importare parametri sul sistema (vedere nel manuale, quale parametri saranno importate) ATTENZIONE! Alla conclusione del processo, il sistema si riavvia in automatico!!!"
+    IDOSD_OPTION_INFO       "Per mostrare l'informazioni del sistema, per favore premere Enter"
+    IDOSD_CAMERA_RESOLUTION "Per cambiare la risoluzione d'immagine di TUTTE le telecamere click Enter. Una risoluzione alta darà immagini de megliore qualità e dati più grandi|Elegi la risoluzione utilizzando i tasti delle frecce e conferma con Enter"
+    IDOSD_CAMERA_COMPRESSION 
+                            "Per cambiare la compressione d'immagine della telecamera CORRENTE click Enter. Una compressione alta darà immagini di bassa qualità e dati più piccole|Elegi la compressione utilizzando i tasti delle frecce e conferma con Enter"
+    IDOSD_CAMERA_FPS        "To change the image framerate of CURRENT camera, please press Enter now.|Choose the image framerate with arrow keys and press Enter to select"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "Questa esportazione continua direttamente dopo della precedente.\n\nEsportazione precedente:\nda %s\na  %s\n\nContinua esportazione:\nda %s\n\nTelecamere:\n%s.\n\nCalcolazione della data/ora finale fallita.\nPrego inserire data/ora finale dell'esportazione d'immagini"
+    IDS_POWEROFF_PRESSED    "Arresta sistema"
+    IDS_RESET_PRESSED       "Reboot sistema"
+    IDS_EXPORT_NO_IMAGES    "Nessuna immagine"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "Nessuna immagine trovata nella data/ora selezionata de inicio e fine. Inserire data/ora finale.\nPremere Enter per accettare data/ora finale calcolata e cossi uttilizzare tutto lo spazio del supporto.\n\nEsportazione:\nda %s\n\nTelecamere:\n%s"
+    IDS_BACKUP_REQUEST_MB   "Nessuna immagine trovata nella data/ora selezionata de inicio e fine. Inserire nuovamente data/ora.\nLa data/ora finale calcolata indica l'immagine più recente di tutte le telecamere. La quantità d'immagini copre tutto lo spazio del supporto. Premere Enter per iniziare il archiviamento\n\nSupporto utilizzato: ca. %s %%\n\nEsp:\nda %s\n\nTelecamere:\n%s"
+    IDS_EXIT_ENTRY          ">Uscita programma"
+    IDS_YES                 "Si"
+    IDS_NO                  "No"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "Selezionare con i tasti delle frecce tra 'Si' e 'No' e conferma con il tasto Enter....ATTENZIONE! TUTTE le immagini precedenti di QUESTA telecamera saranno permanentemente cancellate alla selezione 'Si'"
+    IDS_OK                  "OK"
+    IDS_CANCEL              "Annulla"
+    IDS_ERROR               "Errore"
+    IDS_FILE_SYSTEM_ACCESS  "Per installare il nuovo driver si richiede il diritto del Supervisore.\nPrego, inserire PIN"
+    IDS_BACKUP_TITLE        "Esportazione d'immagini"
+    IDS_KEYBOARD_UPPER_KEYS "QWERTYUIOPASDFGHJKLZXCVBNMéùì;:?"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "qwertyuiopasdfghjklzxcvbnmèòà,.^"
+    IDS_SET_COMPUTERNAME_FAILED "Computer name is not changed."
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "lI supporto trovato non è vuoto.\nL'esportazione necessita di un supporto vuoto.\nIl supporto dovrà essere cancellato. Selezionare nel menù 'Cancella Supporto: Si' e conferma con il tasto Enter.\nIl supporto sarà allora formattato prima della esportazione"
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "Cancellando supporto: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "Preparazione d'esportazione delle immagini.\n\nCorso: %d %%\n\nTempo trascorso: %s"
+    IDS_BACKUP_ACDC_START   "Prego inserire un supporto nell'unita.\nL'identificazione del supporto può impiegare alcuni secondi.\nIl supporto sarà espulso dopo il processo di esportazione"
+    IDS_ERASE_MEDIUM        "Cancellare supporto"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "Prego, inserire un supporto nell'unita, o per annullare il processo premere i tasti delle frecce"
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "Il supporto trovato non è vuoto. Cancellare il supporto prima dell'esportazione d'immagini?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "Attendere il supporto"
+    IDS_EXPORT_INSERT_MEDIUM "Inserire il supporto"
+    IDS_EXPORT_ERASE_MEDIUM "Supporto rilevato"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "L'esportazione d'immagini richiede l'utilizzo di un supporto vuoto.\nPrego inserire un nuovo supporto vuoto"
+    IDS_FOUND_NEW_DEVICE    "È stato rilevato un nuovo dispositivo USB"
+    IDS_REMOVED_DEVICE      "Il dispositivo USB è stato rimosso:"
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "Il supporto in uso non è vuoto.\nUtilizzare un supporto vuoto. Altrimenti per l'esportazione d'immagini verrà utilizzato solo lo spazio a disposizione sul supporto.\nSelezionare la voce del menù desiderata e premere Enter"
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "Lo spazio presente sul supporto non è sufficiente all'esportazione delle immagini.\nPrego inserire un'altro supporto"
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "Cancellando supporto\n\nOra: %s"
+    IDS_BACKUP_RUNNING_UP   "Esportazione en corso: %d %%\n\nOra: %s"
+    IDS_IMPORT_SUCCESS      "Importazione completata"
+    IDS_IMPORT_FAILED       "Importazione fallita"
+    IDS_IMPORT_RUNNING      "Importazione in corso..."
+    IDS_CAMERA_FIX          "Telecamera fissa"
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "La preparazione di esportazione è stato annullato dall'utente"
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "Il processo di esportazione è stato annullato dall'utente"
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\nL'esportazione delle immagini verrà annullata.\nAttendere prego...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_REALTIME          "Per favore, click Enter per Attivar/disattivar la reproduzione in tempo reale|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_CAMERA_PTZ_TYPE   "Per cambiare il tipo della telecamera, per favore click Enter|Selezionare il tipo con i tasti delle frecce e conferma con Enter"
+    IDOSD_CAMERA_PTZ_ID     "Per cambiare la ID (Identificazione) della telecamera click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "Per cambiare il porto COM (l'orificio nel sistema, di controllo della telecamera) click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "Assegnazione audio corrente. La registrazione audio può essere assegnata soltanto ad una telecamera alla volta... Per cambiare l'assegnazione, per favore click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_THRESHOLD   "Soglia corrente della telecamera assegnata audio. Definisce il livello di soglia, dopo che sia stato oltrepassato per ativare la registrazione... Per regolare la soglia, per favore click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_SENSITIVITY "Amplificazione audio corrente. Definisce l'amplificazione della entrata audio (microfono)... Per regolare l'amplificazione audio, per favore click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_VOLUME      "Volume audio corrente. Definisce il volume dell'uscita audio (altoparlante)... Per regolare il volume dell'uscita audio, per favore click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_RECORD_MODE "Tipo d'allarme. Definisce quale rilevatore attiva la registrazione della telecamera assegnata audio: L=Level (eccedere il livello di soglia), M=rilevazione di movimento, Ext=rilevatore esterno, o una combinazione di loro. Per cambiare, click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+    IDOSD_AUDIO_LISTEN_IN   "Attivi/disattivi ascolti in tensione...Per modificare, per favore click Enter|Elegi con i tasti delle frecce e conferma con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "L"
+    IDS_AUDIO_RECORDING_EXT "Ext"
+    IDS_AUDIO_RECORDING_AL  "M, L"
+    IDS_AUDIO_RECORDING_AEXT "M, Ext"
+    IDS_AUDIO_RECORDING_LEXT "L, Ext"
+    IDS_AUDIO_RECORDING_ALEXT "M,L,Ext"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_DNS               "Switches DHCP on or off"
+END
+
+#endif    // Italian (Italian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE 16, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.ita\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

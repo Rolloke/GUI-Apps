@@ -1,0 +1,38 @@
+
+20.4.99 >>> UpdateVersion um 16:38 <<<
+History von ImageCompare
+------------------------
+
+15.4.99
+	- Beginn des Projektes
+	- Laden und Anzeigen eines Bildpaares bereits möglich.
+
+16.4.99
+	- Es läßt sich nun mittels <- -> durch die Referenzbilder blättern
+	  und jedem Bildpaar eine Wertung mitgeben.
+
+20.4.99
+	- Bei Programmstart wird nun als erstes das WWWRoot-Verzeichnis gescannt.
+	  und alle gefundenen Bildreferenzen in eine Liste gehängt.
+	- 'Springe an den Anfang' und 'Springe ans Ende'-Buttons hinzugefügt.
+	- Das Ergebnis wird als HTML-Datei ins Verzeichnis C:\\Out abgelegt.
+	  Gleichzeitig wird das Ergebnis verschlüsselt ins Logfile geschrieben.
+
+21.4.99
+	- Toolbar ist nun fest.
+	- Das Prüfprotokoll kann nun jederzeit gespeichert werden.
+	- Der Name der HTML-Datei beinhaltet nun das Datum (yyyymmtt) 
+	- Login erfolgt nun in InitInstance un nicht in CMainFrm::Create
+
+30.04.99 
+	- Ausgabe des Protocols in c:\protocol
+	- Strings in resource
+
+03.05.99
+	- Der Pfad wird nun aus der Registry gelesen (\Log\ProtocolPath)
+07.05.99
+	- Die Bilder für den lokalen Host werden nun ebenfalls gelesen.
+
+12.07.99
+	- Stimmen Referenz- und Istbild nicht überein, kann nun ein kurzer Kommentar
+	  mitabgespeichert werden.

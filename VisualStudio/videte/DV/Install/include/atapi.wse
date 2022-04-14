@@ -1,0 +1,236 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  EXE Filename=D:\Project\dv\Install\atapi.exe
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=nur bei NT den original ATAPI Treiber wieder aktivieren
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Check Configuration
+  Flags=10111111
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: Get System Information
+  Variable=SERPACK
+  Flags=00010010
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=4.0.1381
+end
+item: If/While Statement
+  Variable=SERPACK
+  Value=4
+  Flags=00000111
+end
+item: Remark
+end
+item: Remark
+  Text=Version und Service Pack sind OK
+end
+item: Remark
+end
+item: Set Variable
+  Variable=ACTIVATE_ATAPI
+  Value=FALSE
+end
+item: Remark
+end
+item: Get Registry Key Value
+  Variable=ATAPI_START
+  Key=SYSTEM\CurrentControlSet\Services\atapi
+  Default=5
+  Value Name=Start
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=ATAPI_START
+  Value=4
+  Flags=00000100
+end
+item: Remark
+end
+item: Remark
+  Text=der original atapi treiber ist deaktiviert
+end
+item: Remark
+end
+item: Remark
+  Text=VIA DSK testen
+end
+item: Get Registry Key Value
+  Variable=VIADSK_START
+  Key=SYSTEM\CurrentControlSet\Services\viadsk
+  Default=5
+  Value Name=Start
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=VIADSK_START
+  Value=0
+end
+item: Remark
+  Text=der VIA Disk Treiber ist installiert und steht auf Neustart -> deaktivieren
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\viadsk
+  New Value=4
+  Value Name=Start
+  Root=2
+  Data Type=3
+end
+item: Get Registry Key Value
+  Variable=VIA_IMAGE_PATH
+  Key=SYSTEM\CurrentControlSet\Services\viadsk
+  Value Name=ImagePath
+  Flags=00000100
+end
+item: Set Variable
+  Variable=VIA_IMAGE_PATH
+  Value=\SystemRoot\%VIA_IMAGE_PATH%
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\viadsk
+  New Value=%VIA_IMAGE_PATH%
+  Value Name=ImagePath
+  Root=2
+  Data Type=1
+end
+item: Set Variable
+  Variable=ACTIVATE_ATAPI
+  Value=TRUE
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Intel ATA testen
+end
+item: Get Registry Key Value
+  Variable=INTELATA_START
+  Key=SYSTEM\CurrentControlSet\Services\IntelATA
+  Default=5
+  Value Name=Start
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=INTELATA_START
+  Value=0
+end
+item: Remark
+  Text=der Intel ATA Treiber ist installiert und steht auf Neustart ->deaktivieren
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\IntelATA
+  New Value=4
+  Value Name=Start
+  Root=2
+  Data Type=3
+end
+item: Get Registry Key Value
+  Variable=ATA_IMAGE_PATH
+  Key=SYSTEM\CurrentControlSet\Services\IntelATA
+  Value Name=ImagePath
+  Flags=00000100
+end
+item: Set Variable
+  Variable=ATA_IMAGE_PATH
+  Value=\SystemRoot\%ATA_IMAGE_PATH%
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\IntelATA
+  New Value=%ATA_IMAGE_PATH%
+  Value Name=ImagePath
+  Root=2
+  Data Type=1
+end
+item: Set Variable
+  Variable=ACTIVATE_ATAPI
+  Value=TRUE
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=original atapi treiber wieder aktivieren
+end
+item: If/While Statement
+  Variable=ACTIVATE_ATAPI
+  Value=TRUE
+end
+item: Set Variable
+  Variable=IMAGE_PATH
+  Value=System32\DRIVERS\atapi.sys
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\atapi
+  New Value=%IMAGE_PATH%
+  Value Name=ImagePath
+  Root=2
+  Data Type=1
+end
+item: Edit Registry
+  Total Keys=1
+  Key=SYSTEM\CurrentControlSet\Services\atapi
+  New Value=0
+  Value Name=Start
+  Root=2
+  Data Type=3
+end
+item: End Block
+end
+item: Remark
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+end

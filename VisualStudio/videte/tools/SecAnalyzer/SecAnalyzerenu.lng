@@ -1,0 +1,192 @@
+SecAnalyzer.rc@POPUP@IDR_MAINFRAME.POPUP1@07,12,1998,14,33,02@07,12,1998,14,33,22@01,01,1980,01,01,01@&Datei@&File
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_NEW@07,12,1998,14,33,02@16,09,1999,11,49,58@01,01,1980,01,01,01@&Aktualisieren@&Aktualize
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_OPEN@07,12,1998,14,33,02@07,12,1998,14,33,49@01,01,1980,01,01,01@Ö&ffnen...\tStrg+O@&Open...\Strg+O
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_PRINT@07,12,1998,14,33,02@07,12,1998,14,34,33@01,01,1980,01,01,01@&Drucken...\tStrg+P@&Print...\tStrg+P
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_PRINT_PREVIEW@07,12,1998,14,33,02@07,12,1998,14,34,44@01,01,1980,01,01,01@Sei&tenansicht@Prin&t Preview
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_PRINT_SETUP@07,12,1998,14,33,02@07,12,1998,14,35,18@01,01,1980,01,01,01@Drucker&einrichtung...@Print S&etup...
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_MRU_FILE1@07,12,1998,14,33,02@07,12,1998,14,35,27@01,01,1980,01,01,01@last file@recent file
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@07,12,1998,14,33,02@07,12,1998,14,35,33@01,01,1980,01,01,01@&Beenden@&Exit
+SecAnalyzer.rc@POPUP@IDR_MAINFRAME.POPUP2@07,12,1998,14,33,02@07,12,1998,14,35,36@01,01,1980,01,01,01@&Ansicht@&View
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_VIEW_TOOLBAR@07,12,1998,14,33,02@07,12,1998,14,35,56@01,01,1980,01,01,01@&Symbolleiste@&Toolbar
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_VIEW_STATUS_BAR@07,12,1998,14,33,02@07,12,1998,14,36,01@01,01,1980,01,01,01@S&tatusleiste@&Statusbar
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_COLORED_BACKGROUND@07,12,1998,14,33,02@07,12,1998,14,36,26@01,01,1980,01,01,01@&farbiger Hintergrund@&colorized Background
+SecAnalyzer.rc@POPUP@IDR_MAINFRAME.POPUP3@07,12,1998,14,33,02@07,12,1998,14,36,31@01,01,1980,01,01,01@E&xtras@E&xtra
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_VIEW_WORDPAD@16,09,1999,11,30,59@16,09,1999,11,47,25@01,01,1980,01,01,01@&Logview@&Logview
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_CLEAR_TIMES@07,12,1998,14,33,02@07,12,1998,14,36,43@01,01,1980,01,01,01@&Zeitfelder leeren@&Clear times
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_CLEAR_PATTERNS@07,12,1998,14,33,02@07,12,1998,14,36,53@01,01,1980,01,01,01@&Musterfelder leeren@Clear &Pattern
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_DO_TIMER_TEST@16,09,1999,11,30,59@16,09,1999,11,47,35@01,01,1980,01,01,01@Zeitschaltuhren &Test@Timer &Test
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_DELETE_FILE@07,12,1998,14,33,02@07,12,1998,14,37,17@01,01,1980,01,01,01@&Datei löschen@&Delete file
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_ALARM_PLAYBACK@07,12,1998,14,33,02@07,12,1998,14,37,29@01,01,1980,01,01,01@Alarmaufzeichnung ab&spielen@Alarm &Playback
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_STOP_PLAYER@07,12,1998,14,33,02@07,12,1998,14,37,42@01,01,1980,01,01,01@Abspielen &anhalten@Stop pla&yback
+SecAnalyzer.rc@POPUP@IDR_MAINFRAME.POPUP4@07,12,1998,14,33,02@16,09,1999,11,47,13@01,01,1980,01,01,01@&?@&?
+SecAnalyzer.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_APP_ABOUT@07,12,1998,14,33,02@07,12,1998,14,37,54@01,01,1980,01,01,01@Inf&o über ...@&About...
+SecAnalyzer.rc@POPUP@IDR_CONTEXT.POPUP1@07,12,1998,14,33,02@16,09,1999,11,49,34@01,01,1980,01,01,01@Dummy1@Dummy1
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP1.ID_POPUP_TIME@07,12,1998,14,33,02@16,09,1999,11,49,38@01,01,1980,01,01,01@calculated time@calculated time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP1.ID_START_POINT@07,12,1998,14,33,02@16,09,1999,11,49,44@01,01,1980,01,01,01@&Startzeit@&Start time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP1.ID_END_POINT@07,12,1998,14,33,02@16,09,1999,11,49,51@01,01,1980,01,01,01@&Endzeit@&End time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP1.ID_FILE_NEW@07,12,1998,14,33,02@16,09,1999,11,49,58@01,01,1980,01,01,01@&Aktualisieren@&Aktualize
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP1.ID_NOP@07,12,1998,14,33,02@16,09,1999,11,50,05@01,01,1980,01,01,01@&Abbrechen@&Cancel
+SecAnalyzer.rc@POPUP@IDR_CONTEXT.POPUP2@07,12,1998,14,33,02@16,09,1999,11,50,09@01,01,1980,01,01,01@Dummy2@Dummy2
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_POPOP2_NAME@07,12,1998,14,33,02@16,09,1999,11,50,11@01,01,1980,01,01,01@calculated name@calculated name
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_POPUP2_DATA@07,12,1998,14,33,02@16,09,1999,11,50,13@01,01,1980,01,01,01@calculated data@calculated data
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_POPUP_EXCLUDE@07,12,1998,14,33,02@16,09,1999,11,50,22@01,01,1980,01,01,01@Aus&schließen@E&xclude
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_POPUP_INCLUDE@07,12,1998,14,33,02@16,09,1999,11,50,27@01,01,1980,01,01,01@&Einschließen@In&clude
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_FILE_NEW@07,12,1998,14,33,02@16,09,1999,11,49,58@01,01,1980,01,01,01@&Aktualisieren@&Aktualize
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP2.ID_NOP@07,12,1998,14,33,02@16,09,1999,11,50,05@01,01,1980,01,01,01@&Abbrechen@&Cancel
+SecAnalyzer.rc@CAPTION@IDD_TIMER_TEST.CAPTION@16,09,1999,11,30,59@16,09,1999,11,47,46@07,12,1998,14,33,02@Zeitschaltuhren Prüfer@Timer Check
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDOK@07,12,1998,14,33,02@07,12,1998,14,38,55@07,12,1998,14,33,02@OK@OK
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDCANCEL@07,12,1998,14,33,02@07,12,1998,14,38,57@07,12,1998,14,33,02@Cancel@Cancel
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TEST_ONE_DAY@16,09,1999,11,30,59@16,09,1999,11,47,53@07,12,1998,14,33,02@ein &Tag@one &Day
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TEST_ONE_WEEK@16,09,1999,11,30,59@16,09,1999,11,47,58@07,12,1998,14,33,02@eine &Woche@one &Week
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TEST_ONE_MONTH@16,09,1999,11,30,59@16,09,1999,11,48,02@07,12,1998,14,33,02@ein &Monat@one &Month
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TEST_ONE_YEAR@16,09,1999,11,30,59@16,09,1999,11,48,09@07,12,1998,14,33,02@ein &Jahr@one &Year
+SecAnalyzer.rc@STRING@IDR_MAINFRAME@07,12,1998,14,33,02@07,12,1998,14,39,07@07,12,1998,14,33,02@SecAnalyzer\nSheet\nLogFile\n LogFiles (*.log,*.lgz)\n.log;.lgz\nSecAnalyzer\n SecAnalyer LogFile\n@SecAnalyzer\nSheet\nLogFile\n LogFiles (*.log,*.lgz)\n.log;.lgz\nSecAnalyzer\n SecAnalyer LogFile\n
+SecAnalyzer.rc@STRING@AFX_IDS_APP_TITLE@07,12,1998,14,33,02@07,12,1998,14,39,12@07,12,1998,14,33,02@Analyzer@Analyzer
+SecAnalyzer.rc@STRING@AFX_IDS_IDLEMESSAGE@07,12,1998,14,33,02@07,12,1998,14,39,22@07,12,1998,14,33,02@F5 zum Aktualisieren@Press F5 for actualize
+SecAnalyzer.rc@STRING@AFX_IDS_HELPMODEMESSAGE@07,12,1998,14,33,02@07,12,1998,14,39,37@07,12,1998,14,33,02@Wählen Sie das Objekt, zu dem Sie Hilfe wünschen.@Choose an object on which to get help.
+SecAnalyzer.rc@STRING@ID_INDICATOR_EXT@07,12,1998,14,33,02@07,12,1998,14,39,40@07,12,1998,14,33,02@ER@ER
+SecAnalyzer.rc@STRING@ID_INDICATOR_CAPS@07,12,1998,14,33,02@07,12,1998,14,39,42@07,12,1998,14,33,02@UF@UF
+SecAnalyzer.rc@STRING@ID_INDICATOR_NUM@07,12,1998,14,33,02@07,12,1998,14,39,44@07,12,1998,14,33,02@NUM@NUM
+SecAnalyzer.rc@STRING@ID_INDICATOR_SCRL@07,12,1998,14,33,02@07,12,1998,14,39,45@07,12,1998,14,33,02@RF@RF
+SecAnalyzer.rc@STRING@ID_INDICATOR_OVR@07,12,1998,14,33,02@07,12,1998,14,39,48@07,12,1998,14,33,02@ÜB@OVR
+SecAnalyzer.rc@STRING@ID_INDICATOR_REC@07,12,1998,14,33,02@07,12,1998,14,39,51@07,12,1998,14,33,02@MA@MA
+SecAnalyzer.rc@STRING@ID_FILE_NEW@07,12,1998,14,33,02@07,12,1998,14,40,07@07,12,1998,14,33,02@Aktualisieren\nAktualisieren@Actualize\nActualize
+SecAnalyzer.rc@STRING@ID_FILE_OPEN@07,12,1998,14,33,02@11,12,1998,10,00,15@07,12,1998,14,33,02@Öffnet ein bestehendes Dokument.\nÖffnen@Opens an existing Document.\nOpen
+SecAnalyzer.rc@STRING@ID_FILE_CLOSE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Schließt das aktive Dokument.\nSchließen@Closes the active document.\nClose
+SecAnalyzer.rc@STRING@ID_FILE_SAVE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Speichert das aktive Dokument.\nSpeichern@Saves the active document.\nSave
+SecAnalyzer.rc@STRING@ID_FILE_SAVE_AS@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter@Saves the active document with a new name.\nSave As
+SecAnalyzer.rc@STRING@ID_FILE_PAGE_SETUP@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Ändert die Druckoptionen.\nSeite einrichten@Changes the printing options.\nPage Setup
+SecAnalyzer.rc@STRING@ID_FILE_PRINT_SETUP@07,12,1998,14,33,02@11,12,1998,10,03,36@07,12,1998,14,33,02@Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung@Change the printer and printing options\nPrint Setup
+SecAnalyzer.rc@STRING@ID_FILE_PRINT@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Druckt das aktive Dokument.\nDrucken@Prints the active document.\nPrint
+SecAnalyzer.rc@STRING@ID_FILE_PRINT_PREVIEW@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Zeigt ganze Seiten an.\nSeitenansicht@Displays the entire cover page.\nPrint Preview
+SecAnalyzer.rc@STRING@ID_APP_ABOUT@07,12,1998,14,33,02@11,12,1998,10,04,14@07,12,1998,14,33,02@Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo@Shows program information, version and copyright.\nAbout
+SecAnalyzer.rc@STRING@ID_APP_EXIT@07,12,1998,14,33,02@11,12,1998,10,04,42@07,12,1998,14,33,02@Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden@Quits application; asks for saving documents.\nExit
+SecAnalyzer.rc@STRING@ID_HELP_INDEX@07,12,1998,14,33,02@11,12,1998,10,04,59@07,12,1998,14,33,02@Öffnet die Hilfefunktion.\nHilfethemen@opens the help function.\nHelp topics
+SecAnalyzer.rc@STRING@ID_HELP_FINDER@07,12,1998,14,33,02@11,12,1998,10,05,22@07,12,1998,14,33,02@Listet die Hilfethemen auf.\nHilfethemen@lists all help topics.\nHelp topics
+SecAnalyzer.rc@STRING@ID_HELP_USING@07,12,1998,14,33,02@11,12,1998,10,03,36@07,12,1998,14,33,02@Zeigt Anweisungen zum Umgang mit der Hilfe an.\nHilfe@Display instructions about how to use help\nHelp
+SecAnalyzer.rc@STRING@ID_CONTEXT_HELP@07,12,1998,14,33,02@07,12,1998,14,44,37@07,12,1998,14,33,02@Zeigt Hilfe zu angeklickten Schaltflächen, Menüs und Fenstern an.\nHilfe@Shows help to clicked buttons, menus and windows.\nHelp
+SecAnalyzer.rc@STRING@ID_HELP@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe@Display help for current task or command\nHelp
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE1@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE2@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE3@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE4@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE5@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE6@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE7@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE8@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE9@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE10@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE11@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE12@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE13@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE14@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE15@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_FILE_MRU_FILE16@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Öffnet dieses Dokument.@Opens this document
+SecAnalyzer.rc@STRING@ID_NEXT_PANE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt@Switch to the next window pane\nNext Pane
+SecAnalyzer.rc@STRING@ID_PREV_PANE@07,12,1998,14,33,02@07,12,1998,14,46,18@07,12,1998,14,33,02@Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt@Switch back to the previous window pane\nPrevious Pane
+SecAnalyzer.rc@STRING@ID_WINDOW_SPLIT@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Teilt das aktive Fenster in Ausschnitte.\nTeilen@Split the active window into panes\nSplit
+SecAnalyzer.rc@STRING@ID_EDIT_CLEAR@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Löscht die Markierung.\nLöschen@Deletes the selection.\nDelete
+SecAnalyzer.rc@STRING@ID_EDIT_CLEAR_ALL@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Löscht alles.\nAlles löschen@Deletes all.\nDelete all
+SecAnalyzer.rc@STRING@ID_EDIT_COPY@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren@Copy the selection and put it on the Clipboard\nCopy
+SecAnalyzer.rc@STRING@ID_EDIT_CUT@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden@Removes the selection and put it on the Clipboard\nCut
+SecAnalyzer.rc@STRING@ID_EDIT_FIND@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Sucht den angegebenen Text.\nSuchen@Find the specified text\nFind
+SecAnalyzer.rc@STRING@ID_EDIT_PASTE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Fügt den Inhalt der Zwischenablage ein.\nEinfügen@Inserts the contents of the Clipboard.\nPaste
+SecAnalyzer.rc@STRING@ID_EDIT_REPEAT@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Wiederholt die letzte Aktion.\nWiederholen@Repeats the alst action.\nRepeat
+SecAnalyzer.rc@STRING@ID_EDIT_REPLACE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen@Replaces the specified text with different text.\nReplace
+SecAnalyzer.rc@STRING@ID_EDIT_SELECT_ALL@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Markiert das gesamte Dokument.\nAlles markieren@Select the entire document\nSelect All
+SecAnalyzer.rc@STRING@ID_EDIT_UNDO@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Macht die letzte Aktion rückgängig.\nRückgängig@Undoes the last action.\nUndo
+SecAnalyzer.rc@STRING@ID_EDIT_REDO@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen@Redoes the previously undone action.\nRedo
+SecAnalyzer.rc@STRING@ID_VIEW_TOOLBAR@07,12,1998,14,33,02@07,12,1998,14,46,55@07,12,1998,14,33,02@Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten@Show or hide the toolbar\nToggle ToolBar
+SecAnalyzer.rc@STRING@ID_VIEW_STATUS_BAR@07,12,1998,14,33,02@07,12,1998,14,47,08@07,12,1998,14,33,02@Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten@Show or hide the status bar\nToggle StatusBar
+SecAnalyzer.rc@STRING@AFX_IDS_SCSIZE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Ändert die Fenstergröße.@Changes the window size.
+SecAnalyzer.rc@STRING@AFX_IDS_SCMOVE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Ändert die Position des Fensters.@Change the window position
+SecAnalyzer.rc@STRING@AFX_IDS_SCMINIMIZE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Verkleinert das Fenster zu einem Symbol.@Reduce the window to an icon
+SecAnalyzer.rc@STRING@AFX_IDS_SCMAXIMIZE@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Vergrößert das Fenster zu voller Größe.@Enlarge the window to full size
+SecAnalyzer.rc@STRING@AFX_IDS_SCNEXTWINDOW@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Wechselt zum nächsten Dokumentfenster.@Switch to the previous document window
+SecAnalyzer.rc@STRING@AFX_IDS_SCPREVWINDOW@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Wechselt zum vorherigen Dokumentfenster.@Switch to the previous document window
+SecAnalyzer.rc@STRING@AFX_IDS_SCCLOSE@07,12,1998,14,33,02@07,12,1998,14,47,22@07,12,1998,14,33,02@Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf.@Close the active window and prompts to save the documents
+SecAnalyzer.rc@STRING@AFX_IDS_SCRESTORE@07,12,1998,14,33,02@07,12,1998,14,47,30@07,12,1998,14,33,02@Stellt das Fenster in seiner normalen Größe wieder her.@Restore the window to normal size
+SecAnalyzer.rc@STRING@AFX_IDS_SCTASKLIST@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Aktiviert die Task-Liste.@Activate Task List
+SecAnalyzer.rc@STRING@AFX_IDS_PREVIEW_CLOSE@07,12,1998,14,33,02@07,12,1998,14,47,40@07,12,1998,14,33,02@Beendet die Seitenansicht.\nSeitenansicht beenden@Close print preview mode\nCancel Preview
+SecAnalyzer.rc@STRING@IDC_START_TIME@07,12,1998,14,33,02@07,12,1998,14,48,29@07,12,1998,14,33,02@Anfangszit  SS:MM or ~Sek.\nstart time SS:MM or ~Sek.@start time  SS:MM or ~Sec.\nstart time SS:MM or ~Sec.
+SecAnalyzer.rc@STRING@IDC_END_TIME@07,12,1998,14,33,02@07,12,1998,14,48,45@07,12,1998,14,33,02@Endzeit SS:MM\nEndzeit SS:MM@end time SS:MM\nend time SS:MM
+SecAnalyzer.rc@STRING@IDC_INCLUDE_PATTERN@07,12,1998,14,33,02@07,12,1998,14,49,10@07,12,1998,14,33,02@einschließlich ..., durch Leerzeichen getrennt\neinschließlich ...@include ..., separated by spaces\ninclude ...
+SecAnalyzer.rc@STRING@IDC_EXLUDE_PATTERN@07,12,1998,14,33,02@07,12,1998,14,49,21@07,12,1998,14,33,02@ausschließlich ..., durch Leerzeichen getrennt\nausschließlich ...@exclude ..., separated by spaces\nexclude ...
+SecAnalyzer.rc@STRING@ID_DELETE_FILE@07,12,1998,14,33,02@07,12,1998,14,49,34@07,12,1998,14,33,02@löschen der Datei\nlöschen der Datei@delete file\ndelete file
+SecAnalyzer.rc@STRING@ID_VIEW_FILE@07,12,1998,14,33,02@07,12,1998,14,49,46@07,12,1998,14,33,02@Anzeige mit WordPad\nAnzeige mit WordPad@view with wordpad\nview with wordpad
+SecAnalyzer.rc@STRING@ID_CLEAR_TIMES@07,12,1998,14,33,02@07,12,1998,14,50,00@07,12,1998,14,33,02@Zeitfelder leeren\n&Zeitfelder leeren@clear time fields\nclear time fields
+SecAnalyzer.rc@STRING@ID_START_POINT@07,12,1998,14,33,02@07,12,1998,14,50,31@07,12,1998,14,33,02@Startzeit setzen\nStartzeit setzen@set start time\nset start time
+SecAnalyzer.rc@STRING@ID_END_POINT@07,12,1998,14,33,02@07,12,1998,14,50,42@07,12,1998,14,33,02@Endeit setzen\nEndzeit setzen@set end time\nset end time
+SecAnalyzer.rc@STRING@ID_POPUP_TIME@07,12,1998,14,33,02@07,12,1998,14,50,57@07,12,1998,14,33,02@Zeitpunkt unter der Maus\nZeitpunkt unter der Maus@time under mouse cursor\ntime under mouse cursor
+SecAnalyzer.rc@STRING@ID_POPOP2_NAME@07,12,1998,14,33,02@07,12,1998,14,51,06@07,12,1998,14,33,02@Name dieses Bereiches@name of this area
+SecAnalyzer.rc@STRING@IDC_LAST_RESET@07,12,1998,14,33,02@07,12,1998,14,51,24@07,12,1998,14,33,02@seit letztem Reset, wenn vorhanden\nseit letztem Reset@since last reset, if exist\nsince last reset
+SecAnalyzer.rc@STRING@IDC_UPDATE_INTERVALL@07,12,1998,14,33,02@07,12,1998,14,51,45@07,12,1998,14,33,02@Aktualisierung (in Sekunden)\nAktualisierung (in Sek.)@Actualization (in seconds)\nActualization (in seconds)
+SecAnalyzer.rc@STRING@IDC_RELATIVE_END@07,12,1998,14,33,02@07,12,1998,14,51,57@07,12,1998,14,33,02@vor letzter Aktion\nvor letzter Aktion@before last action\nbefore last action
+SecAnalyzer.rc@STRING@IDC_START_DATE@16,09,1999,11,30,59@16,09,1999,11,48,54@07,12,1998,14,33,02@Startdatum TT.MM oder Tag.Monat.Jahr\nStartdatum TT.MM  oder Tag.Monat.Jahr@Start date TT.MM or Day.Month.Year\nStart date TT.MM  or Day.Month.Year
+SecAnalyzer.rc@STRING@IDC_END_DATE@16,09,1999,11,30,59@16,09,1999,11,49,29@07,12,1998,14,33,02@Enddatum TT.MM oder Tag.Monat.Jahr\nEnddatum TT.MM oder Tag.Monat.Jahr@End date TT.MM or Day.Month.Year\nEnd date TT.MM or Day.Month.Year
+SecAnalyzer.rc@STRING@IDS_REALLY_DELETE@07,12,1998,14,33,02@07,12,1998,14,52,35@07,12,1998,14,33,02@Soll %s wirklich gelöscht werden ?@Should %d really be deleted?
+SecAnalyzer.rc@STRING@IDC_START_DEFAULT@07,12,1998,14,33,02@07,12,1998,14,52,48@07,12,1998,14,33,02@ganze Zeit anzeigen\nganze Zeit anzeigen@show entire time\nshow entire time
+SecAnalyzer.rc@STRING@ID_POPUP_INCLUDE@07,12,1998,14,33,02@07,12,1998,14,52,58@07,12,1998,14,33,02@Einschließen\nEinschließen@Include\nInclude
+SecAnalyzer.rc@STRING@ID_POPUP_EXCLUDE@07,12,1998,14,33,02@07,12,1998,14,53,05@07,12,1998,14,33,02@Ausschließen\nAusschließen@Exclude\nExclude
+SecAnalyzer.rc@STRING@ID_POPUP2_DATA@07,12,1998,14,33,02@07,12,1998,14,53,15@07,12,1998,14,33,02@Minnimum Maximum Durchschnitt@Minimum Maximum Average
+SecAnalyzer.rc@STRING@ID_CLEAR_PATTERNS@07,12,1998,14,33,02@07,12,1998,14,53,32@07,12,1998,14,33,02@Musterfelder leeren#nMusterfelder leeren@clear pattern\nclear pattern
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_DO_PROCESSES@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Prozesse@Processes
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_DO_TIMERS@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Zeitzonen@Time zones
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_DO_ALARMS@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Alarme@alarms
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_DO_RESETS@07,12,1998,14,33,02@07,12,1998,14,53,37@07,12,1998,14,33,02@Resets@Resets
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_START@07,12,1998,14,33,02@16,09,1999,11,51,52@07,12,1998,14,33,02@Startzeit@Start time
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_KOMMA1@07,12,1998,14,33,02@16,09,1999,11,47,13@07,12,1998,14,33,02@,@,
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_END@07,12,1998,14,33,02@16,09,1999,11,51,56@07,12,1998,14,33,02@Endzeit@End time
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_KOMMA2@07,12,1998,14,33,02@16,09,1999,11,47,13@07,12,1998,14,33,02@,@,
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_INCLUDE@07,12,1998,14,33,02@07,12,1998,14,53,42@07,12,1998,14,33,02@Einschl.@incl.
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_EXCLUDE@07,12,1998,14,33,02@07,12,1998,14,53,46@07,12,1998,14,33,02@Ausschl.@excl.
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_AUTO_UPDATE@07,12,1998,14,33,02@07,12,1998,14,53,53@07,12,1998,14,33,02@automatisch@automatically
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_SHOW_LEVEL_1@07,12,1998,14,33,02@07,12,1998,14,42,59@07,12,1998,14,33,02@Stufe 1@Level 1
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_SHOW_LEVEL_2@07,12,1998,14,33,02@07,12,1998,14,53,59@07,12,1998,14,33,02@Stufe 2@Level 2
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_SELECT@07,12,1998,14,33,02@16,09,1999,11,51,43@07,12,1998,14,33,02@Auswahl@Selection
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TIME_SELECT@07,12,1998,14,33,02@16,09,1999,11,51,49@07,12,1998,14,33,02@Zeit Auswahl@Time selection
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_GRP_PATTERN@07,12,1998,14,33,02@07,12,1998,14,54,14@07,12,1998,14,33,02@Muster Auswahl@Pattern
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_DETAILS@07,12,1998,14,33,02@16,09,1999,11,51,58@07,12,1998,14,33,02@Details@Details
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_START_DEFAULT@07,12,1998,14,33,02@07,12,1998,14,54,26@07,12,1998,14,33,02@ganze Zeit@entire time
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_LAST_RESET@07,12,1998,14,33,02@07,12,1998,14,54,33@07,12,1998,14,33,02@letzter Reset@last reset
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_RELATIVE_END@07,12,1998,14,33,02@07,12,1998,14,54,40@07,12,1998,14,33,02@vor letzter Aktion@before last action
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_DO_UNITS@07,12,1998,14,33,02@07,12,1998,14,54,42@07,12,1998,14,33,02@Units@Units
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_ALL_FILES@07,12,1998,14,33,02@16,09,1999,11,52,02@07,12,1998,14,33,02@alte Dateien@old files
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_NUM_FILES@07,12,1998,14,33,02@07,12,1998,14,54,49@07,12,1998,14,33,02@1 ...@1 ...
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_NUM_LINES@07,12,1998,14,33,02@07,12,1998,14,43,00@07,12,1998,14,33,02@Zeilen@Rows
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.ID_FILE_NEW@07,12,1998,14,33,02@07,12,1998,14,43,00@07,12,1998,14,33,02@Aktualisieren@Refresh
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_DOES_MILLI@07,12,1998,14,33,02@16,09,1999,11,47,13@07,12,1998,14,33,02@@
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.ID_CLEAR_TIMES@07,12,1998,14,33,02@07,12,1998,14,54,56@07,12,1998,14,33,02@leeren@clear
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.ID_CLEAR_PATTERNS@07,12,1998,14,33,02@16,09,1999,11,47,13@07,12,1998,14,33,02@X@X
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_NUM_FILES2@07,12,1998,14,33,02@07,12,1998,14,55,06@07,12,1998,14,33,02@Datei/en gelesen@File(s) read
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_NUM_LINES_READ@07,12,1998,14,33,02@16,09,1999,11,47,13@07,12,1998,14,33,02@...@...
+SecAnalyzer.rc@STRING@CG_ID_VIEW_SECANALYZERBAR@07,12,1998,14,33,02@07,12,1998,14,55,12@07,12,1998,14,33,02@Show or hide SecAnalyzerBar\nToggle SecAnalyzerBar@Show or hide SecAnalyzerBar\nToggle SecAnalyzerBar
+SecAnalyzer.rc@POPUP@IDR_CONTEXT.POPUP5@16,09,1999,11,30,59@16,09,1999,11,49,34@01,01,1980,01,01,01@Dummy1@Dummy1
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP5.ID_POPUP_TIME@16,09,1999,11,30,59@16,09,1999,11,49,38@01,01,1980,01,01,01@calculated time@calculated time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP5.ID_START_POINT@16,09,1999,11,30,59@16,09,1999,11,49,44@01,01,1980,01,01,01@&Startzeit@&Start time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP5.ID_END_POINT@16,09,1999,11,30,59@16,09,1999,11,49,51@01,01,1980,01,01,01@&Endzeit@&End time
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP5.ID_FILE_NEW@16,09,1999,11,30,59@16,09,1999,11,49,58@01,01,1980,01,01,01@&Aktualisieren@&Aktualize
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP5.ID_NOP@16,09,1999,11,30,59@16,09,1999,11,50,05@01,01,1980,01,01,01@&Abbrechen@&Cancel
+SecAnalyzer.rc@POPUP@IDR_CONTEXT.POPUP6@16,09,1999,11,30,59@16,09,1999,11,50,09@01,01,1980,01,01,01@Dummy2@Dummy2
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_POPOP2_NAME@16,09,1999,11,30,59@16,09,1999,11,50,11@01,01,1980,01,01,01@calculated name@calculated name
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_POPUP2_DATA@16,09,1999,11,30,59@16,09,1999,11,50,13@01,01,1980,01,01,01@calculated data@calculated data
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_POPUP_EXCLUDE@16,09,1999,11,30,59@16,09,1999,11,50,22@01,01,1980,01,01,01@Aus&schließen@E&xclude
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_POPUP_INCLUDE@16,09,1999,11,30,59@16,09,1999,11,50,27@01,01,1980,01,01,01@&Einschließen@In&clude
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_FILE_NEW@16,09,1999,11,30,59@16,09,1999,11,49,58@01,01,1980,01,01,01@&Aktualisieren@&Aktualize
+SecAnalyzer.rc@MENUITEM@IDR_CONTEXT.POPUP6.ID_NOP@16,09,1999,11,30,59@16,09,1999,11,50,05@01,01,1980,01,01,01@&Abbrechen@&Cancel
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TIMERTEST_DATEPICKER@16,09,1999,11,30,59@16,09,1999,11,50,32@16,09,1999,11,30,59@DateTimePicker1@DateTimePicker1
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TEST_FIVE_YEARS@16,09,1999,11,30,59@16,09,1999,11,50,43@16,09,1999,11,30,59@&fünf Jahre@&five years
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TIMER_TEST_SHOW_MIDS@16,09,1999,11,30,59@16,09,1999,11,51,11@16,09,1999,11,30,59@Mittag/Mitternacht anzeigen@show Highnoon/Midnight
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_TXT_TIMERS@16,09,1999,11,30,59@16,09,1999,11,51,14@16,09,1999,11,30,59@Zeitschaltuhren@Timer
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_DESELECT_ALL@16,09,1999,11,30,59@16,09,1999,11,51,21@16,09,1999,11,30,59@alle &deselektieren@&deselect all
+SecAnalyzer.rc@LTEXT@IDD_TIMER_TEST.IDC_SELECT_ALL@16,09,1999,11,30,59@16,09,1999,11,51,27@16,09,1999,11,30,59@alle &selektieren@&select all
+SecAnalyzer.rc@CAPTION@IDD_TEST_PROGRESS_DIALOG.CAPTION@16,09,1999,11,30,59@16,09,1999,11,51,32@16,09,1999,11,30,59@Zeitschaltuhren Test@Timer check
+SecAnalyzer.rc@LTEXT@IDD_TEST_PROGRESS_DIALOG.IDC_TEST_PROGRESS@16,09,1999,11,30,59@16,09,1999,11,47,13@16,09,1999,11,30,59@Progress1@Progress1
+SecAnalyzer.rc@LTEXT@IDD_TEST_PROGRESS_DIALOG.IDC_TXT_TEST_TIME@16,09,1999,11,30,59@16,09,1999,11,51,38@16,09,1999,11,30,59@Testzeit:@Test time:
+SecAnalyzer.rc@LTEXT@IDD_TEST_PROGRESS_DIALOG.IDC_LABEL_TEST_TIME@16,09,1999,11,30,59@16,09,1999,11,47,13@16,09,1999,11,30,59@...@...
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_GRP_SELECT@16,09,1999,11,30,59@16,09,1999,11,51,43@16,09,1999,11,30,59@Auswahl@Selection
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_GRP_TIME@16,09,1999,11,30,59@16,09,1999,11,51,49@16,09,1999,11,30,59@Zeit Auswahl@Time selection
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_START_TIME@16,09,1999,11,30,59@16,09,1999,11,51,52@16,09,1999,11,30,59@Startzeit@Start time
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_END_TIME@16,09,1999,11,30,59@16,09,1999,11,51,56@16,09,1999,11,30,59@Endzeit@End time
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_GRP_DETAILS@16,09,1999,11,30,59@16,09,1999,11,51,58@16,09,1999,11,30,59@Details@Details
+SecAnalyzer.rc@LTEXT@CG_IDD_SECANALYZERBAR.IDC_TXT_OLD_FILES@16,09,1999,11,30,59@16,09,1999,11,52,02@16,09,1999,11,30,59@alte Dateien@old files

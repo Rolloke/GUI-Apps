@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<visualdsp-project schema="16" name="BootLoader533" file="D:\PROJECT\Units\Tasha\TashaFirmware\BootLoader533\BootLoader533.dpj" generated="Wed Sep 15 09:55:43 2004" expanded="no">
+	<!-- Project build target -->
+	<target>
+		<processor>ADSP-BF533</processor>
+		<extension>.ldr</extension>
+		<type>DSP loader file</type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="Release">
+		<configuration name="Debug">
+			<intermediate-dir>.\Debug</intermediate-dir>
+			<output-dir>.\Debug</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>0|-Ov>100|-g>1]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>1]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b PROM>1|-f HEX>1|-Width 8>1|-waits >0|-BaudRate 500k>1|-HoldTime >0|-No2Kernel>0|-kb PROM>1|-kf HEX>1|-kWidth 8>1|UserKernel>1|split HEX>1|-maskaddr>0]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+		<configuration name="Release">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[|-Version>3.5|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>3.5|-O1>1|-Ov>100|-g>0]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>3.5|-g>0]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>3.5|-jcs2l>1|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>3.5|-b SPI>1|-f BINARY>1|-Width 8>1|-p>0x0|-waits >15|-BaudRate 500k>1|-HoldTime >3|-init>D:\PROJECT\Units\Tasha\TashaFirmware\BootLoader533\Release\Init_code.dxe|-o>TashaBootloader533.ldr|-No2Kernel>0|-kb PROM>1|-kf HEX>1|-kWidth 8>1|-kp>0x0|UserKernel>1|split HEX>1|-maskaddr>29]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|NOSWITCH>1]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[xcopy .\release\TashaBootloader533.ldr ..\..\TashaUnit\TashaBootloader533.ldr /r /c /f /y
+xcopy .\release\TashaBootloader533.ldr .\Bin\TashaBootloader533.ldr /r /c /f /y
+]]></post-build-command>
+		</configuration>
+	</configurations>
+	<!-- Project folders -->
+	<folders>
+		<folder name="Header Files" ext=".h,.hpp,.hxx" expanded="no">
+		</folder>
+		<folder name="Linker Files" ext=".ldf,.dlb" expanded="yes">
+			<files>
+				<file name=".\BootLoader533.ldf">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+		<folder name="Source Files" ext=".c,.cpp,.cxx,.asm,.dsp,.s" expanded="yes">
+			<files>
+				<file name=".\53x_ssk.asm">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+	</folders>
+	<!-- Custom data tables -->
+	<custom-data-tables>
+		<custom-data-table name="SCCPlugin">
+			<custom-data name="Scc_AddProject"><![CDATA[yes]]></custom-data>
+			<custom-data name="Scc_ProjectName"><![CDATA["$/Project/Units/Tasha/TashaFirmware/BootLoader533", OLLCAAAA]]></custom-data>
+			<custom-data name="Scc_ProjectPath"><![CDATA[\\FILE01\Software\VSS,]]></custom-data>
+			<custom-data name="Scc_Provider"><![CDATA[Microsoft Visual SourceSafe]]></custom-data>
+		</custom-data-table>
+	</custom-data-tables>
+</visualdsp-project>

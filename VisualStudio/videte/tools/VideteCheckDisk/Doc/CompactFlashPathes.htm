@@ -1,0 +1,183 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Pfade in Idip und DTS bzw</title>
+</head>
+
+<body>
+
+<h2>Pfade in Idip und DTS bzw. für das Betriebsystem XPE</h2>
+<ol>
+  <li>
+Nur IdipClient:<br>
+<ul>
+<li>m_sOpenDirectory lesen aus Dvrt\IdipClient\Settings
+  &quot;OpenDirectory&quot;.</li>
+<li>WWWRoot lesen aus Dvrt\common\ &quot;WWWRoot&quot;</li>
+<li>Protokollpfad lesen aus Dvrt\common &quot;ProtocolPath&quot;<br>
+</li>
+</ul>
+  </li>
+	<li>
+	m_sOpenDirectory statt "c:\\out" implementieren, aus aus Dvrt\common\ "OpenDirectory" lesen&nbsp;<br>
+    und benutzen in:<br>
+  <ul>
+    <li>SecurityLauncher erzeugen, wenn nicht vorhanden</li>
+    <li>DatabaseServer</li>
+    <li>SecurityServer</li>
+    <li>SystemVerwaltung<br>
+    </li>
+    </ul>
+    <br>
+  </li>
+  <li>DataBase Verzeichnis "c:\\DATABASE" aus Dvrt\common\ "DataBaseDirectory" lesen<br>
+    Backup Verzeichnis "c:\\Backup" aus Dvrt\common\ "BackupDirectory" lesen<br>
+    zentral speichern und benutzen in:<ul>
+  	 <li>DataBaseServer</li>
+    <li>DBS</li>
+    <li>CIPC<br>
+     </li>
+    </ul>
+    <br>
+    </li>
+    <li>
+    In DatabaseServer DatabaseServerConfig Datei aus Dvrt\common\ "DatabaseServerConfig " lesen&nbsp;<br>
+    Fest kodierter Pfad ist z.Z.: &quot;<a href="file:///C://DataBaseServer.cfg">C:\DataBaseServer.cfg</a>&quot;<br>
+	</li>
+    <li>
+    
+    In DBS Map Verzeichnis (dbf-Dateien) aus &quot;dvrt\dbs&quot; &quot;MapPath&quot;
+    = <a href="file:///d:/files">d:\files</a>&nbsp; lesen.<br>
+    
+	</li>
+    <li>
+    
+    &nbsp;
+    
+	</li>
+	<br>
+	<li>
+    LogFiles für alle Anwendungen:<br>
+    Fest codierte Pfade ("c:\\log") müssen dann in den Anwendungen durch GetLogPath() aus der CIPC ersetzt werden!<br>
+    Dvrt\Log\ "LogPath" = "d:\Log"<br>
+	</li>
+	<br>
+	<li>
+    "rterrors.dat" Zugriff überprüfen (Häufigkeit), evtl. auf d: auslagern<br>
+	</li>
+	<br>
+	<li>
+    Temp Pfade:<br>
+    HKEY_CURRENT_USER\Environment<br>
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment<br>
+    &quot;TEMP&quot; = &quot;<a href="file:///d:/Temp">D:\Temp</a>&quot;<br>
+    &quot;TMP&quot; = &quot;<a href="file:///D:/Temp">D:\Temp</a>&quot;<br>
+	</li>
+	<br>
+	<li>
+    Windows Registry Settings<br>
+    EventLogging<br><ul>
+    <li>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application (App)</li>
+    <li>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security    (Sec)</li>
+    <li>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\System      (Sys)</li>
+    </ul>
+    "File" = "d:\Log\XXXevent.evt"<br>
+	</li>
+	<br>
+	<li>
+    DNS<br>
+    HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters&nbsp;<br>
+    LogFilePath = &quot;d:\log\dns\dns.Log&quot<br>
+	</li>
+	<br>
+	<li>
+    WBEM Logs: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WBEM\CIMOM&nbsp;<br>
+    "Logging Directory" = &quot;C:\Windows\System32\WBEM\Logs&quot;<br>
+	</li>
+	<br>
+	<li>
+    ShellFolders: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShellFolders<br>
+    <ul>
+	    <li>Cache</li>
+	    <li>Cookies</li>
+	    <li>Favorites</li>
+	    <li>History
+        </li>
+    </ul>
+	</li>
+	<br>
+	<li>
+    Registry Hive Paths:<br>
+    HKLM\System\CurrenControlSet\Control\hivelist<br>
+	</li>
+	<br>
+	<li>
+    Virtuelle Pfade: <a href="http://linux-ntfs.sourceforge.net/ntfs/files/mft.html">$Mft, $LogFile, $Bitmap...</a>
+    <br>
+	</li>
+	<br>
+	<li>
+    Die Logdatei für die Windows Firewall kann im Firewall ControlPanel im Tab Advanced unter Security Logging eingestellt werden.<br>
+	</li>
+	<br>
+	<li>
+    PageFile kann im System ControlPanel auf eine andere Platte verschoben werden.<br>
+	</li>
+	<br>
+	<li>
+    Standard Laufwerksbuchstabe für häufige Schreibvorgänge für CompactFlash Geräte darf nicht der für das CF-Laufwerk sein.<br>
+    Also statt z.B.: c:, d: und höher.<br>
+	</li>
+	<br>
+	<li>
+    Automatisches Partitionieren und Formatieren einer neu eingebauten Festplatte.
+   <ul>
+    <li>Anpassen der Pfade, falls nötig.</li>
+    <li>Anlegen der notwendigen&nbsp; Pfade
+    </li>
+    <li>Bei DTS als DBDrive setzen<br>
+    </li>
+    </ul>
+	</li>
+	<br>
+	<li>
+    Beim Erstellen des XP-Images könnte man bestimmte Teile auf andere Laufwerke auslagern:<br>
+    - "D:\Program Files"<br>
+    - &quot;D:\Documents and Settings"<br>
+	</li>
+	<br>
+	</ol>
+<h2>EWF Brainstorming</h2>
+<ul>
+  <li>Spezieller Button, um die Einstellungen permanent zu speichern (erfordert
+    Reboot).</li>
+  <li>Kopie der Einstellungen (Registry) auf der Festplatte Speichern, und im Falle eines Absturzes neu einlesen.</li>
+  <li>Beim Herunterfahren des Rechners eine MsgBox anzeigen, die es ermöglicht die Einstellungen nicht zu speichern.<br>
+  Standardmäßig wird aber gespeichert nach ca. 5 Sekunden.</li>
+  <li>Automatischer Neustart in einstellbaren Intervallen mit optionalen
+    zufälligem Zeitpunkt innerhalb eines bestimmten Zeitraumes.</li>
+  <li>Speichern bzw. Laden des DVRT-Zweiges in bzw. aus einer Hive Datei auf
+    einer zweiten nicht geschützten Partition.</li>
+  <li>Sichern des DVRT-Zweiges unter einem anderen Namen in der Registry.</li>
+</ul>
+<h2>Verschiedenes</h2>
+<ul>
+<li>
+    Die Funktion DoesFileExist() liefert TRUE für Dateien und 2 für Verzeichnisse.<br>
+    Wenn z.B.: eine Datei mit dem Namen des Verzeichnisses existiert, so kann ein Verzeichnis mit demselben Namen nicht angelegt werden.<br>
+    Dies sollte überprüft werden!
+</li>
+<li>
+    Laufwerke in einstellbaren Intervallen mit chkdsk prüfen.
+</li>
+<li>
+    Die CIPC Funktion DoRequestGetFile(RFU_FULLPATH,...) sollte mit geänderten
+    Pfaden bei Remote Verbindungen getestet werden.<br>
+</li>
+</ul>
+</body>
+
+</html>

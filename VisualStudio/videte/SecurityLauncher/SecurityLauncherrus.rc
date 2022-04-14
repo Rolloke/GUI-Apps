@@ -1,0 +1,450 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian (Russian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SecurityLauncher.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SecurityLauncher.ico"
+IDI_ALARMCOM            ICON                    "res\\alarmcom.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON_SYMBOLS      BITMAP                  "res\\button_s.bmp"
+IDR_MENU                BITMAP                  "res\\menu.bmp"
+IDB_ERROR_SYMBOLS       BITMAP                  "res\\error_sy.bmp"
+IDB_VIDETE_LOGO         BITMAP                  "videte_logo_invers_transparent.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MENU TOOLBAR  32, 32
+BEGIN
+    BUTTON      ID_VISION
+    BUTTON      ID_DATABASE
+    BUTTON      ID_SUPERVISOR
+    BUTTON      ID_SDI_CONFIG
+    BUTTON      ID_BACKUP
+    BUTTON      ID_APP_EXIT
+    BUTTON      ID_ERROR
+    BUTTON      ID_VERSION
+    BUTTON      ID_PRODUCT_VIEW
+    BUTTON      ID_LOG_VIEW
+    BUTTON      ID_IMAGE_COMPARE
+    BUTTON      ID_DATETIME
+    BUTTON      ID_EURO_CHANGE
+    BUTTON      ID_LAUNCHER_SHELL
+    BUTTON      ID_EXPLORER_SHELL
+    BUTTON      ID_EXPLORER
+    BUTTON      ID_UPDATE_HANDLER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ERROR DIALOG  0, 0, 500, 137
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Ошибки исполения"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Закрыть",IDOK,443,116,50,14
+    CONTROL         "List1",IDC_ERRORS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,428,123
+    PUSHBUTTON      "Удалить",IDC_DELETE,443,7,50,14
+    PUSHBUTTON      "Пьезо &Выкл",IDC_STMOFF,443,25,50,14
+    PUSHBUTTON      "Пьезо Вкл",IDC_STMON,443,44,50,14
+END
+
+IDD_BEFORE_BACKUP DIALOG  0, 0, 254, 199
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Начать Резервирование"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Резервирование",IDOK,106,180,66,14
+    PUSHBUTTON      "Отмена",IDCANCEL,183,180,66,14
+    LTEXT           "Программное обеспечение будет выключено для резеркирования.",
+                    IDC_TXT1,5,5,244,8
+    LTEXT           "Пожалуйста, выполните следующие шаги:",IDC_TXT2,5,20,
+                    244,8
+    LTEXT           "1. Удалите все диски из дисководов.",
+                    IDC_TXT3,5,35,244,8
+    LTEXT           "2. Подождите заставки 'Сейчас безопасно выключить компьютер'\n на вашем экране.",
+                    IDC_TXT4,5,50,244,18
+    LTEXT           "3. Выключите ваш компьютер.",IDC_TXT5,5,70,244,8
+    LTEXT           "4. Вставьте ваш CD/R Рекодер (или другой внешний носитель для резервирования).",
+                    IDC_TXT6,5,85,244,18
+    LTEXT           "5. Включите ваш CD/R рекодер (или другой внешний носитель для резервирования) и включите ваш компьютер.",
+                    IDC_TXT7,5,110,244,17
+    LTEXT           "6. Подождите перезагрузки вашей системы.",
+                    IDC_TXT8,5,135,244,8
+    LTEXT           "Выберете 'Резервирование', для начала процесса резервирования.",
+                    IDC_TXT9,5,153,223,8
+    LTEXT           "Выберете 'Отмена', для продолжения работы в нормальном рабочем режиме.",
+                    IDC_TXT10,5,163,232,8
+END
+
+IDD_AFTER_BACKUP DIALOG  0, 0, 344, 253
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Резервирование закончено."
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Запустить ПО в обычном режиме",IDOK,242,217,86,14
+    PUSHBUTTON      "Резервирование",IDCANCEL,251,46,80,14
+    LTEXT           "Процесс резервирования окончен.,",IDC_TXT1,7,7,330,8
+    LTEXT           "Вы не можете начать другой процесс резервирования, выберете 'Резервирование' снова.",
+                    IDC_TXT2,15,33,318,8
+    LTEXT           "Вы теперь можете закончить все процессы резервирования и перезагрузить программное обеспечение в нормальном режиме,\nвыберете 'Запустить ПО в обычном режиме'.",
+                    IDC_TXT4,14,87,284,16
+    LTEXT           "Пожалуйста, выполните следующие шаги:",
+                    IDC_TXT6,15,105,164,8
+    LTEXT           "1. Удалите все диски из дисководов.",
+                    IDC_TXT7,30,120,161,8
+    LTEXT           "2. Подождите заставки 'Сейчас безопасно выключить компьютер'\n на вашем экране.",
+                    IDC_TXT8,30,135,301,15
+    LTEXT           "3. Выключите ваш CD/R рекодер (или другой внешний носитель для резервирования) и выключите ваш компьютер.",
+                    IDC_TXT9,30,155,300,18
+    LTEXT           "4. Отключите ваш CD/R рекодер (или другой внешний носитель для резервирования).",
+                    IDC_TXT10,30,180,260,8
+    LTEXT           "5. Включите ваш компьютер.",IDC_TXT11,30,
+                    195,131,8
+    LTEXT           "6. Подождите перезагрузки вашей системы.",
+                    IDC_TXT12,30,210,159,8
+    GROUPBOX        "Резервирование",IDC_GRP1,7,21,330,47
+    GROUPBOX        "Удалите CD/R рекодер (или другой внешний носитель для резервирования) и перезагрузитесь",
+                    IDC_GRP2,7,73,330,173
+END
+
+IDD_EXTENSION_CODE DIALOGEX 0, 0, 205, 71
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Код расширения"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,54,50,12,WS_DISABLED
+    PUSHBUTTON      "Отмена",IDCANCEL,150,54,50,12
+    LTEXT           "&Серийный номер:",IDC_TXT_SERIAL_NUMBER,5,8,62,8
+    EDITTEXT        IDC_EDT_SERIAL_NUMBER,72,6,128,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "&Код расширения:",IDC_TXT_EXTENSION_CODE,5,32,62,8
+    EDITTEXT        IDC_EDT_EXTENSION_CODE,72,30,128,12,ES_AUTOHSCROLL
+END
+
+IDD_SERVICE DIALOG  0, 0, 206, 129
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Сервисный диск"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,91,108,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,149,108,50,14
+    LTEXT           "Вы запустили сервисный диск",IDC_TXT0,7,
+                    7,134,8
+    LTEXT           "Вы хотите выполнить сервис сейчас?",IDC_TXT1,7,
+                    87,136,8
+    EDITTEXT        IDC_EDIT_SERVICE,7,23,192,60,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+    LTEXT           "Этот сервис уже был выполнен!",IDC_TXT2,7,
+                    87,135,8
+    LTEXT           "Следующий сервис прошел успешно.",
+                    IDC_SUCCESS,7,7,161,8
+    LTEXT           "Следующий сервис неудался!",
+                    IDC_NO_SUCCESS,7,7,172,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ERROR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 493
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_BEFORE_BACKUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 249
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 194
+    END
+
+    IDD_AFTER_BACKUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 337
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 246
+    END
+
+    IDD_EXTENSION_CODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 199
+        TOPMARGIN, 7
+    END
+
+    IDD_SERVICE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 67
+        VERTGUIDE, 72
+        VERTGUIDE, 200
+        HORZGUIDE, 12
+        HORZGUIDE, 36
+        HORZGUIDE, 60
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    VK_F4,          ID_BACKUP,              VIRTKEY, NOINVERT
+    "S",            ID_BUTTON,              VIRTKEY, ALT, NOINVERT
+    VK_F9,          ID_DATETIME,            VIRTKEY, NOINVERT
+    VK_F5,          ID_DISK,                VIRTKEY, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_F2,          ID_ERROR,               VIRTKEY, NOINVERT
+    VK_F8,          ID_LOG_VIEW,            VIRTKEY, NOINVERT
+    VK_F3,          ID_PRODUCT_VIEW,        VIRTKEY, NOINVERT
+    VK_F7,          ID_SDI_CONFIG,          VIRTKEY, NOINVERT
+    VK_F1,          ID_VERSION,             VIRTKEY, NOINVERT
+    "U",            ID_SOFTWARE_UPDATE,     VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "E",            ID_EXTENSION_CODE,      VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Запуск безопасности"
+    IDS_TEMPERATUR_ALARM    "Warning: Temperature is too high: %d degree\nMaximum allowed temperature: %d degree\nDevice: %s"
+    IDS_DEVICE_HARDDISK     "Harddisk: "
+    IDS_DEVICE_CPU          "CPU"
+    IDS_DEVICE_POWER_SUPPLY "Power Supply"
+    IDS_DEVICE_HW_BOARD     "Hardware board: "
+    IDS_DEVICE_UNKNOWN      "Unknown"
+    IDS_DEVICE_CASE         "Case"
+    IDS_FAN_SPEED_ALARM     "Warning: The fan speed is too low: %d rpm\nMinimum fan speed allowed: %d rpm\nDevice: %s"
+    IDS_DEVICE_SYSTEM       "Система"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPLORER_SHELL      "перезагрузить систему с Windows &Проводником"
+    IDS_LAUNCHER_SHELL      "перезагрузить &систему с %s"
+    IDS_ALARM_PERCENT       "Тревожный архив %02d%%"
+    IDS_ISDN_BCHANNEL       "ISDN B - Каналы %d"
+    IDS_NOTIME_PERMISSION_NT 
+                            "Вы не имеете NT привилегий для изменения системного времени!"
+    IDS_DATETIME            "Дата и Время..."
+    IDS_EURO_CHANGE         "Euro - Изменить"
+    IDP_EURO_CHANGE_REALLY  "ВНИМАНИЕ:\n\nВы изменяете все подключенные устройства на валюту EUR!\n\nВы хотите продолжить?"
+    IDS_NOT_ALL_RUNNING     "%s не выполняется (Не все приложения работают)."
+    IDS_SO                  "Воскр"
+    IDS_MO                  "Пон"
+    IDS_DI                  "Вт"
+    IDS_MI                  "Ср"
+    IDS_DO                  "Чет"
+    IDS_FR                  "Пят"
+    IDS_SA                  "Суб"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Запуск безопасности"
+    AFX_IDS_IDLEMESSAGE     "Готово"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VISION               "Vision\nVision"
+    ID_DATABASE             "Мастер Изображений\nМастер изображений"
+    ID_SUPERVISOR           "Конфигурирование системы\nКонфигурирование системы"
+    ID_SKIP                 "Изменяет положение окна\nПоложение окна"
+    ID_ERROR                "ошибка выполнения\nОшибка выполнения"
+    ID_PRODUCT_VIEW         "Модули-продукта\nМодули-продукта"
+    ID_BACKUP               "Резервирование\nРезервирование"
+    ID_VERSION              "Версия продукта\nВерсия продукта"
+    ID_SDI_CONFIG           "ISD Конфигурация\nISD Конфигурация"
+    ID_LOG_VIEW             "Просмотр ЛогФайлов\nПросмотр ЛогФайлов"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_EMPTY_REGISTRY      "Пока еще не были выбраны установки.\nВы хотите запустить конфигурирование системы сейчас?"
+    IDP_LOGIN_FAILED        "Имя и Пароль не действительны.\nДоступ запрещен."
+    IDS_PICT_SPACE          "Нажмите пробел для поиска изображений!"
+    IDS_BACKUP_HINT         "Нажмите F4 для резервирования!"
+    IDP_NOLOGDIR            "Директория для файлов протакола не может быть создана."
+    IDS_TIME                "Время"
+    IDS_MODUL               "Модуль"
+    IDS_MESSAGE             "Сообщение"
+    IDS_PARAMETER           "Параметр"
+    IDS_AC_OR_WATCHDOG      "Система не работала по причине отсутствия питания или аппаратной перезагрузки в течении:"
+    IDS_YEAR                "Год(ы)"
+    IDS_MONTH               "месяц(ы)"
+    IDS_DAY                 "день(дни)"
+    IDS_HOUR                "час(ы)"
+    IDS_MINUTE              "минута(ы)"
+    IDS_SECOND              "секунда(ы)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MILLISECOND         "милисекунда(ы)"
+    IDS_UNKOWN              "неизвестно"
+    IDP_INVALID_DONGLE      "Вы не имеете действительного донгла для запуска этого программного обеспечения или ваш донгл вышел из строя.\nПожалуйста, обратитесь к вашему сервисному инженеру."
+    IDS_DONGLE_EXE          "Запрещено использовать этот модуль или эту функцию. "
+    IDP_SHUTDOWN_FOR_BACKUP "Программное обеспечение будет сейчас выключено для резервирования.\nПожалуйста выполните следующие шаги:\n1. Удалите все диски из дисководов.\n2. Подождите заставки 'Сейчас безопасно выключить компьютер'\n на вашем экране.\n3. Выключите ваш компьютер.\n4. Вставьте ваш CD/R Рекодер (или другой внешний носитель для резервирования).\n5. Включите ваш CD/R рекодер (или другой внешний носитель для резервирования) и включите ваш компьютер.\n6. Подождите перезагрузки вашей системы."
+    IDP_SHUTDOWN_AFTER_BACKUP "Процесс резервирования закончен."
+    IDP_DBBACKUP_STILL_RUNNING 
+                            "Вы не можете выключить систему пока идет процесс резервирования!"
+    IDS_BACKUP              "Резервирование"
+    IDP_MICOERROR           "Пожалуйста, проверьте адрес вашейr MiCo платы\n или замените вашу MiCo плату на новую!"
+    IDS_SDICONFIG           "Нажмите F7 для удаленного конфигурирования!"
+    IDS_RTE                 "&Ошибки исполнения..."
+    IDS_EXIT                "В&ыход"
+    IDS_SYSTEM              "Система"
+    IDS_EXTENDED            "&Расширенный"
+    IDS_RESTART             "&перезагрузка"
+    IDS_EXPLORER            "запустить &Windows Проводник"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_USER_ID             "Имя пользователя и пароль необходимя для этого действия.\nПожалуйста, введите ваше имя пользователя и пароль!"
+    IDC_PASSWORD            "Имя пользователя и пароль необходимя для этого действия.\nПожалуйста, введите ваше имя пользователя и пароль!"
+    IDC_ERRORS              "Вы видете список ошибок исполнения.\nкрасный\tкритические ошибки\nоранжевый\tошибки\nжелтый\tпредупреждения\nзеленый\tсообщения\nВы можете увидеть подробности дважды кликнув на ошибку!"
+    IDC_DELETE              "Вы можете удалить все выбранные ошибки и сообщения!"
+    IDC_STMOFF              "Выключить пьезо вручную."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DATETIME             "Установки Даты и Времени...\nУстановки даты и времени..."
+    ID_EURO_CHANGE          "Euro - Изменение\nEuro - Изменение"
+    ID_IMAGE_COMPARE        "Сравнение с Базовым Изображением\nСравнение с Базовым Изображением"
+    ID_AOT                  "Свегда сверху"
+    ID_AIH                  "Автоматический в фоновом"
+    ID_UPDATE_HANDLER       "запускает Мастер Обновлений\nМастер Обновлений"
+    ID_SOFTWARE_UPDATE      "Обновление программы..."
+    ID_EXTENSION_CODE       "Код расширения..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_NO_PERMISSION       "Вы не имеете уровня доступа для этой функции."
+END
+
+#endif    // Russian (Russian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#endif
+#include "res\SecurityLauncher.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

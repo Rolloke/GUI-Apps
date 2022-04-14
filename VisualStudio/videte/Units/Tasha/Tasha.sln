@@ -1,0 +1,71 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TashaDll", "TashaDll\TashaDll.vcproj", "{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A} = {C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TashaUnit", "TashaUnit\TashaUnit.vcproj", "{007B9780-E82E-463A-A511-701FFCE2A745}"
+	ProjectSection(ProjectDependencies) = postProject
+		{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6} = {934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TashaDA", "TashaDA\TashaDA.vcproj", "{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAED9E09-798F-4A7A-923D-F1C004705E03} = {EAED9E09-798F-4A7A-923D-F1C004705E03}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TashaSys", "TashaSys\TashaSys.vcproj", "{EAED9E09-798F-4A7A-923D-F1C004705E03}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectUniqueName0 = TashaDll\\TashaDll.vcproj
+		SccProjectName0 = \u0022$/Project/Units/Tasha/TashaDll\u0022,\u0020EPLCAAAA
+		SccLocalPath0 = TashaDll
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = TashaUnit\\TashaUnit.vcproj
+		SccProjectName1 = \u0022$/Project/Units/Tasha/TashaUnit\u0022,\u0020ERJCAAAA
+		SccLocalPath1 = TashaUnit
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = TashaDA\\TashaDA.vcproj
+		SccProjectName2 = \u0022$/Project/Units/Tasha/TashaDA\u0022,\u0020ILJCAAAA
+		SccLocalPath2 = TashaDA
+		SccProvider2 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = TashaSys\\TashaSys.vcproj
+		SccProjectName3 = \u0022$/Project/Units/Tasha/TashaSys\u0022,\u0020FNJCAAAA
+		SccLocalPath3 = TashaSys
+		SccProvider3 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}.Debug.ActiveCfg = Debug|Win32
+		{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}.Debug.Build.0 = Debug|Win32
+		{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}.Release.ActiveCfg = Release|Win32
+		{934F2F83-F9D9-4D87-B963-3CE5F97BCDC6}.Release.Build.0 = Release|Win32
+		{007B9780-E82E-463A-A511-701FFCE2A745}.Debug.ActiveCfg = Debug|Win32
+		{007B9780-E82E-463A-A511-701FFCE2A745}.Debug.Build.0 = Debug|Win32
+		{007B9780-E82E-463A-A511-701FFCE2A745}.Release.ActiveCfg = Release|Win32
+		{007B9780-E82E-463A-A511-701FFCE2A745}.Release.Build.0 = Release|Win32
+		{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}.Debug.ActiveCfg = Debug|Win32
+		{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}.Debug.Build.0 = Debug|Win32
+		{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}.Release.ActiveCfg = Release|Win32
+		{C156DCA8-C52B-4B1F-9B08-687A19ECCA6A}.Release.Build.0 = Release|Win32
+		{EAED9E09-798F-4A7A-923D-F1C004705E03}.Debug.ActiveCfg = Debug|Win32
+		{EAED9E09-798F-4A7A-923D-F1C004705E03}.Debug.Build.0 = Debug|Win32
+		{EAED9E09-798F-4A7A-923D-F1C004705E03}.Release.ActiveCfg = Release|Win32
+		{EAED9E09-798F-4A7A-923D-F1C004705E03}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

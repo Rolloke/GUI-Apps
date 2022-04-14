@@ -1,0 +1,24 @@
+18.11.02
+	GF	- Anpassung VS_70
+1.4.99 >>> UpdateVersion um 13:26 <<<
+	UF - auf shared MFC geaendert
+15.6.98 >>> UpdateVersion um 13:08 <<<
+	UF	- beim import wird alte micounit.ini geloescht
+
+12.6.98 >>> UpdateVersion um 11:10 <<<
+
+	UF	- import neue Kommandozeile
+		  wegen Reg import und loeschen der alten Einstellungen
+
+7.5.98 >>> UpdateVersion um 13:46 <<<
+	UF neue Commandozeilen Version
+
+		- keine Kommando Zeile   - Kopieren der Registry von HKCU..w+k  nach HKLM..DRVT
+		- movewk2dvrt            - Kopieren der Registry von HKCU..w+k  nach HKLM..DRVT
+		- exportwk2dvrt filename - Export   der Registry von HKCU..w+k  nach HKLM..DRVT
+		- exportwk filename      - Export   der Registry von HKCU..w+k  nach HKCU..w+k
+		- exportdvrt filename    - Export   der Registry von HKLM..DRVT nach HKLM..DRVT
+
+		Exportieren jeweils in eine Datei namens filename
+		Achtung, das Verzeichnis muß existieren.
+			

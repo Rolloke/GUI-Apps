@@ -1,0 +1,27 @@
+24.02.06 RKE- Bugfix SMS Vodafone: x fuer ein u reicht nicht, es muss X sein.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+05.11.04 RKE- Umstellung auf Unicode vollendet und getestet. Sprachabhaengige Parameter werden ueber
+			  WM_LANGUAGE_CHANGED an die Unit weitergegeben.
+02.06.04 UF - Bugfix SMS Vodafone
+02.03.04 GF	- Umstellung auf Unicode und VS_71
+14.11.02 GF	- Anpassung VS_70
+12.09.02 GF	- Bugfix 267: GP geraume Zeit nach Beenden einer D2-Verbindung
+06.08.02 GF	- Bugfix, möglicher GP bei Timeout einer SMS
+04.09.02 GF	- D2 Fehlerbehandlung verfeinert, Freigabe für Release
+			- Bugfix 251: Eigene Rufnummer bei D2
+03.09.02 GF	- Eigene Implementation für D2 im DEBUG mode
+05.07.02 GF	- 0175 bei D1 und 0163 bei E-Plus hinzugefügt
+			- Anzeige der permanenten Logausgabe im View ein/ausschaltbar gemacht (zum Debuggen)
+02.07.02 UF 0178 als Vorwahl für den Provider E-Plus hinzugefuegt
+02.07.02 UF Bugfix und neue LUCA.DLL Version 5.3.9.0 wegen fehlerhaftem SMS
+			Versand zu Vodafone D2.
+17.01.01 ML Bugfix: Das SystemTray-menü klappt nun korrekt zu
+			Bugfix: Nach einem Doppelklick auf das TrayIcon läßt sich das Fenster nicht
+			mehr ins SystemTray minimieren.
+08.01.00 ML Das SMSUnit Icon erscheint nun im SystemTray
+11.07.00 UF Bugfix Kodierung der deutschen Umlaute ist jetzt i.O.
+2.8.99 >>> UpdateVersion um 16:03 <<<
+02.08.99 UF Bugfix Nebenstelle, Amtsleitung(PTT|PBX)
+
+29.12.98 >>> UpdateVersion um 12:38 <<<
+UF	Project SMSUnit angelegt

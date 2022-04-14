@@ -1,0 +1,6 @@
+History ISASpeed
+----------------
+
+15.04.98
+	- Die Genauigkeit mittels des RDTSC-Registers
+	  des Pentium erhöht. 

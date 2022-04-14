@@ -1,0 +1,38 @@
+10.10.00 TKR - Dieses Programm ermöglicht das Fernsteuern des Brennprogramms "DirectCD.exe"
+			   in der Version 2.5d. 
+			   !! Zur Zeit ist nur diese Version fernsteuerbar. !!
+			   Dieses Programm wird bei einem Backup durch den DVClient aufgerufen und
+			   steuert das Backup, indem es das Brennprogramm "DirectCD.exe V. 2.5d" 
+			   fernsteuert. 
+			   Dazu muß, wie folgt, in vorgegebener Reihenfolge DirectCD installiert 
+			   werden:
+			   - DirectCD aus Verzeichnis "CDBrenner/DirectCD25" installieren
+			   - Update aus Verzeichnis "CDBrenner/Update2.5d" installieren
+			   - Patch2.6 aus Verzeichnis "CDBrenner/Patch2.6" installieren
+			   !! Dort, wo die Sprache gewählt werden kann, IMMER englisch wählen !!
+19.10.00 TKR - WatchCD angepasst an die DirectCD Version 3.01 (english).
+26.10.00 TKR - WatchCD angepasst an die DirectCD Version 3.01c (english)
+			   Da es DirectCD als OEM Version aktuell in 3.01c zu kaufen gibt, immer
+			   nur diese Version installieren und benutzen.
+08.11.00 TKR - WatchCD angepasst an die DirectCD Version 3.01d (alle Sprachen).
+			   Mit Version 3.01c funktioniert das backup weiterhin ebenfalls.
+			   Alle verschiedenen Sprachen, in denen DirectCD installiert werden kann,
+			   werden ebenfalls unterstützt (getestet ab Version 3.01c).
+14.02.01 TKR - DirectCD Version 3.03 wird ebenfalls unterstützt (getestet).
+			   Wartezeit nach Formatierung wurde auf 30 Sek. angehoben, da in seltenen
+			   Fällen DirectCD (3.03) die CD-R zu schnell als, vom System wieder unter
+			   Kontrolle habend, deklariert wurde.
+21.02.01 TKR - DirectCD wird nur noch beendet, wenn die CD-R im Brenner nicht von DirectCD
+			   gelockt ist. Entweder wird sie automatisch ausgeworfen, um das Laufwerk
+			   zu "entlocken", oder es wird auf den manuellen Auswurf durch den Benutzer
+			   (Auswurfbutton am Brenner gedrückt) gewartet und DirectCD erst im Anschluss
+			   beendet.
+07.03.01 TKR - WatchCD wird mit CommandLine Parameter (CD-Drive Letter) gestartet, da es vorkam,
+			   dass der korrekte CD-LW-Buchstabe im DirectCD Pfad der Registry nicht gefunden wurde.
+			   In einem solchen Fall wird der CommandLine Parameter benutzt.
+12.12.01 TKR - WatchCD angefangen auf DirectCD5 anzupassen. 
+01.02.02 TKR - Vor dem Start von DirectCD prüfen, ob es entsprechenden Eintrag in Registry im DVClient-Pfad
+			   gibt (DirectCDPath). Wenn nicht, wird nach DirectCD.exe zuerst im wahrscheinlichsten
+			   Verzeichnis gesucht. Wenn nicht da, Laufwerk C:\ komplett durchsuchen.
+			   Wenn gefunden in Registry (DVClient) schreiben.
+04.03.04 GF  - Umstellung auf Unicode und VS_71

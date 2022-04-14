@@ -1,0 +1,12 @@
+
+#if !defined(AFX_BN_H__E8E138B4_BEA2_405B_8DE6_3606FA01862D__INCLUDED_)
+#define AFX_BN_H__E8E138B4_BEA2_405B_8DE6_3606FA01862D__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#include "resource.h"
+
+
+#endif // !defined(AFX_BN_H__E8E138B4_BEA2_405B_8DE6_3606FA01862D__INCLUDED_)

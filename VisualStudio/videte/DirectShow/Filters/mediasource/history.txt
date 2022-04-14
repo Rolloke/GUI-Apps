@@ -1,0 +1,3 @@
+07.10.03 RKE - DirectShow Filter MediaSource wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der aus binären Daten einen MediaSample erzeugt, der
+			   von DirectShow Filtern verarbeitet werden kann.

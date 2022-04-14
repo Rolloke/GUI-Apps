@@ -1,0 +1,60 @@
+History:
+	06.12.01 -----Statusbericht ------
+		- Folgende Kommandos zum Tashaboard implementiert:
+			DoRequestSetBrightness		-> funktionsfähig
+			OnConfirmSetBrightness		-> funktionsfähig
+			DoRequestSetContrast		-> funktionsfähig
+			OnConfirmSetContrast		-> funktionsfähig
+			DoRequestSetSaturation		-> funktionsfähig
+			OnConfirmSetSaturation		-> funktionsfähig
+			DoRequestGetBrightness		-> funktionsfähig
+			OnConfirmGetBrightness		-> funktionsfähig
+			DoRequestGetContrast		-> funktionsfähig
+			OnConfirmGetContrast		-> funktionsfähig
+			DoRequestGetSaturation		-> funktionsfähig
+			OnConfirmGetSaturation		-> funktionsfähig
+			DoRequestStartCapture		-> funktionsfähig
+			OnConfirmStartCapture		-> funktionsfähig
+			DoRequestStopCapture		-> funktionsfähig
+			OnConfirmStopCapture		-> funktionsfähig
+			DoRequestPauseCapture		-> funktionsfähig
+			OnConfirmPauseCapture		-> funktionsfähig
+			DoRequestResumeCapture		-> funktionsfähig
+			OnConfirmResumeCapture		-> funktionsfähig
+			DoRequestSetInputSource		-> Dummy
+			OnConfirmSetInputSource		-> Dummy
+			DoRequestGetInputSource		-> Dummy
+			OnConfirmGetInputSource		-> Dummy
+			DoRequestScanForCameras		-> Dummy
+			OnConfirmScanForCameras		-> Dummy
+			DoRequestSetRelayState		-> Dummy
+			OnConfirmSetRelayState		-> Dummy
+			DoRequestGetRelayState		-> Dummy
+			OnConfirmGetRelayState		-> Dummy
+			DoRequestGetAlarmState		-> Dummy
+			OnConfirmGetAlarmState		-> Dummy
+			DoRequestSetAlarmEdge		-> Dummy
+			OnConfirmSetAlarmEdge		-> Dummy
+			DoRequestGetAlarmEdge		-> Dummy
+			OnConfirmGetAlarmEdge		-> Dummy
+			OnReceiveNewCodecData		-> funktionsfähig
+			DoConfirmReceiveNewCodecData-> funktionsfähig
+
+		- CIPCInput und CIPCOutput verbindung zu DVProcess
+		  Es werden Bilder der Tasha im DTS angezeigt.
+
+
+		- Viele Details sind derzeit nicht implementiert, oder hardgecoded.
+	
+	14.12.01
+		- Die Tashafirmware gaukelt dem DTS nun ein 4 Kamerasystem vor. Es lassen sich
+		  für jede der 4 'Kameras' Helligkeit, Kontrast und Farbsättigung getrennt einstellen.
+		  Diese Einstellungen werden aber derzeit nicht in der Registrierung gesichert.
+		  Das I2C-Bus Handling des Trimedias scheint schnell genug zu sein um das Videofrontend
+		  bei jeder Umschaltung entsprechend zu konfigurieren.
+		- Die 5 stärksten Bewegungspunkte jeder Kamera werden dem DTS nun mitgeteilt und korrekt dargestellt.
+		
+	07.01.02
+		- 3 Wochen Dauertest mit I2C-Bus Zugriffen und simulierter Umschaltung perfekt bestanden!
+
+

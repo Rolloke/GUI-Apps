@@ -1,0 +1,7 @@
+; DVUSve.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVUSve"
+DESCRIPTION  'DVUSve Unicode Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

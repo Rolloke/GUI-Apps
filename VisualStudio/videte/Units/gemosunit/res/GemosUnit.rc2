@@ -1,0 +1,23 @@
+//
+// GEMOSUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+WK_VERSION(12, 5, 15, 53, "12/05/99 , 15:53\0", // @AUTO_UPDATE
+		   "GemosUnit.exe\0",	// exe name
+		   "\0",	// product name
+		   "GemosUnit\0",	// product description
+		   "4.1\0",		// general product version
+		   "4.100\0"	// real version
+		   )
+
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,35 @@
+// DBSId.cpp: implementation of the CDBSId class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "dbs.h"
+#include "DBSId.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+CDBSId::CDBSId()
+{
+	m_wArchiveNr = 0;
+	m_wSequenceNr = 0;
+	m_dwRecordNr = 0;
+}
+//////////////////////////////////////////////////////////////////////
+CDBSId::CDBSId(WORD	wArchiveNr,WORD	wSequenceNr,DWORD dwRecordNr)
+{
+	m_wArchiveNr = wArchiveNr;
+	m_wSequenceNr = wSequenceNr;
+	m_dwRecordNr = dwRecordNr;
+}
+//////////////////////////////////////////////////////////////////////
+CDBSId::~CDBSId()
+{
+
+}

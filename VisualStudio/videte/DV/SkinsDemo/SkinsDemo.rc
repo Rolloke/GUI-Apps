@@ -1,0 +1,287 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\SkinsDemo.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\SkinsDemo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SKINSDEMO_DIALOG DIALOG DISCARDABLE  0, 0, 317, 129
+STYLE WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Live",IDC_DISPLAY_MODE,20,10,63,17,BS_FLAT
+    PUSHBUTTON      "Pin: ____",IDC_DISPLAY_EMPTY1,85,10,126,17,BS_FLAT
+    PUSHBUTTON      "Camera 01",IDC_DISPLAY_CAMERA,20,27,63,12,BS_FLAT
+    PUSHBUTTON      "15:53:41",IDC_DISPLAY_TIME,85,27,63,12,BS_FLAT
+    PUSHBUTTON      "15.10.99",IDC_DISPLAY_DATE,148,27,63,12,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_ALARM,20,39,63,12,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_EMPTY2,85,39,63,12,BS_FLAT
+    PUSHBUTTON      "View: 1x1",IDC_DISPLAY_VIEWMODE,148,39,63,12,BS_FLAT
+    PUSHBUTTON      "",IDC_BORDER1,16,6,201,48,BS_FLAT | WS_GROUP
+    PUSHBUTTON      "&1",IDC_BUTTON_NUM1,229,6,21,18
+    PUSHBUTTON      "&2",IDC_BUTTON_NUM2,253,6,21,18
+    PUSHBUTTON      "&3",IDC_BUTTON_NUM3,277,6,21,18
+    PUSHBUTTON      "&4",IDC_BUTTON_NUM4,229,26,21,18
+    PUSHBUTTON      "&5",IDC_BUTTON_NUM5,251,26,21,18
+    PUSHBUTTON      "&6",IDC_BUTTON_NUM6,277,26,21,18
+    PUSHBUTTON      "&7",IDC_BUTTON_NUM7,229,46,21,18
+    PUSHBUTTON      "&8",IDC_BUTTON_NUM8,251,46,21,18
+    PUSHBUTTON      "&9",IDC_BUTTON_NUM9,277,46,21,18
+    PUSHBUTTON      "Modus",IDC_BUTTON_MODE,19,70,27,24
+    PUSHBUTTON      "Camera",IDC_BUTTON_STATIC_CAM,102,61,42,10,BS_RIGHT | 
+                    BS_FLAT
+    PUSHBUTTON      "",IDC_BUTTON_CAM_HIGHER,182,61,33,10
+    PUSHBUTTON      "",IDC_BUTTON_CAM_LOWER,146,61,33,10
+    PUSHBUTTON      "Power",IDC_BUTTON_OK,229,87,70,14
+    PUSHBUTTON      "",IDC_BUTTON_REWIND,31,108,26,18,WS_DISABLED
+    PUSHBUTTON      "",IDC_BUTTON_PLAY,57,108,46,18,WS_DISABLED
+    PUSHBUTTON      "",IDC_BUTTON_PAUSE,103,108,26,18,WS_DISABLED
+    PUSHBUTTON      "",IDC_BUTTON_STOP,129,108,26,18,WS_DISABLED
+    PUSHBUTTON      "",IDC_BUTTON_FF,155,108,26,18,WS_DISABLED
+    PUSHBUTTON      "Contrast",IDC_BUTTON_STATIC_CONTRAST,102,83,42,10,
+                    BS_RIGHT | BS_FLAT
+    PUSHBUTTON      "",IDC_BUTTON_CONTRAST_HIGHER,182,83,33,10
+    PUSHBUTTON      "",IDC_BUTTON_CONTRAST_LOWER,146,83,33,10
+    PUSHBUTTON      "",IDC_BUTTON_BRIGHTNESS_LOWER,146,72,33,10
+    PUSHBUTTON      "",IDC_BUTTON_BRIGHTNESS_HIGHER,182,72,33,10
+    PUSHBUTTON      "Brightness",IDC_BUTTON_STATIC_BRIGHTNESS,102,72,42,10,
+                    BS_RIGHT | BS_FLAT
+    PUSHBUTTON      "Saturation",IDC_BUTTON_STATIC_SATURATION,102,94,42,10,
+                    BS_RIGHT | BS_FLAT
+    PUSHBUTTON      "",IDC_BUTTON_SATURATION_LOWER,146,94,33,10
+    PUSHBUTTON      "",IDC_BUTTON_SATURATION_HIGHER,182,94,33,10
+    PUSHBUTTON      "&*",IDC_BUTTON_ASTERIX,229,66,21,18
+    PUSHBUTTON      "&C",IDC_BUTTON_CLEAR,277,66,21,18
+    PUSHBUTTON      "",IDC_BUTTON_SEARCH,181,108,26,18,WS_DISABLED
+    PUSHBUTTON      "&0",IDC_BUTTON_NUM0,253,66,21,18
+    PUSHBUTTON      "",IDC_BUTTON_DAYOFWEEK_HIGHER,54,71,15,13
+    PUSHBUTTON      "",IDC_BUTTON_DAYOFWEEK_LOWER,54,85,15,13
+    PUSHBUTTON      "Timer",IDC_BUTTON_STATIC_TIMER,47,60,27,9,BS_FLAT
+    PUSHBUTTON      "View",IDC_BUTTON_STATIC_VIEW,76,60,25,9,BS_FLAT
+    PUSHBUTTON      "",IDC_BUTTON_VIEW_HIGHER,82,71,15,13
+    PUSHBUTTON      "",IDC_BUTTON_VIEW_LOWER,82,85,15,13
+    CONTROL         "Slider1",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,228,102,69,11
+    CONTROL         "Radio1",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,218,113,30,16
+    CONTROL         "Radio2",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,248,113,30,16
+    CONTROL         "Check1",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,287,113,30,16
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MFC-Anwendung SkinsDemo\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "SkinsDemo\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "SkinsDemo.EXE\0"
+            VALUE "ProductName", "Anwendung SkinsDemo\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SKINSDEMO_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_MODE         "Switch between live and playback"
+    IDC_BUTTON_REWIND       "Rewind"
+    IDC_BUTTON_PLAY         "Play"
+    IDC_BUTTON_PAUSE        "Pause"
+    IDC_BUTTON_STOP         "Stop"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_FF           "Fast forward"
+    IDC_BUTTON_SEARCH       "Jump to a specified date/time"
+    IDC_BUTTON_BRIGHTNESS_LOWER "Lower brightness"
+    IDC_BUTTON_CONTRAST_LOWER "Lower contrast"
+    IDC_BUTTON_SATURATION_LOWER "Lover saturation"
+    IDC_BUTTON_CAM_LOWER    "Select the previous camera"
+    IDC_BUTTON_CAM_HIGHER   "Select the next camera"
+    IDC_BUTTON_BRIGHTNESS_HIGHER "Higher brightness"
+    IDC_BUTTON_CONTRAST_HIGHER "Higher contrast"
+    IDC_BUTTON_SATURATION_HIGHER "Higher Saturation"
+    IDC_BUTTON_DAYOFWEEK_HIGHER "Chose the 'day of the week' for the timer"
+    IDC_BUTTON_DAYOFWEEK_LOWER "Chose the 'day of the week' for the timer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_OK           "Exit"
+    IDC_BUTTON_NUM1         "Keypad 1"
+    IDC_BUTTON_NUM2         "Keypad 2"
+    IDC_BUTTON_NUM3         "Keypad 3"
+    IDC_BUTTON_NUM4         "Keypad 4"
+    IDC_BUTTON_NUM5         "Keypad 5"
+    IDC_BUTTON_NUM6         "Keypad 6"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_NUM7         "Keypad 7"
+    IDC_BUTTON_NUM8         "Keypad 8"
+    IDC_BUTTON_NUM9         "Keypad 9"
+    IDC_BUTTON_NUM0         "Keypad 0"
+    IDC_BUTTON_CLEAR        "Clear the current input"
+    IDC_BUTTON_ASTERIX      "Joker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_VIEW_HIGHER  "Chose the Viewmode 1x1,2x2,3x3,4x4"
+    IDC_BUTTON_VIEW_LOWER   "Chose the Viewmode 1x1,2x2,3x3,4x4"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\SkinsDemo.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

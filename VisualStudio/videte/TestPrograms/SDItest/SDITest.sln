@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDITest", "SDITest.vcproj", "{D34D1326-6C50-4994-9A8B-9490CF9C021B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = SDITest.vcproj
+		SccProjectName0 = \u0022$/Project/TestPrograms/SDITest\u0022,\u0020UKZAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D34D1326-6C50-4994-9A8B-9490CF9C021B}.Debug.ActiveCfg = Debug|Win32
+		{D34D1326-6C50-4994-9A8B-9490CF9C021B}.Debug.Build.0 = Debug|Win32
+		{D34D1326-6C50-4994-9A8B-9490CF9C021B}.Release.ActiveCfg = Release|Win32
+		{D34D1326-6C50-4994-9A8B-9490CF9C021B}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

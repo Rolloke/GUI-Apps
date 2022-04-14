@@ -1,0 +1,47 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "USBCameraUnit", "USBCameraUnit.vcproj", "{195D254F-152C-4E18-8876-6AEB19206DBB}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MotionDetection", "..\MotionDetection\MotionDetection.vcproj", "{34E019DA-5422-4371-85C6-EA7017DCF17C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectUniqueName0 = USBCameraUnit.vcproj
+		SccProjectName0 = \u0022$/Project/Units/USBCAM/USBCameraUnit\u0022,\u0020HVJCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = ..\\MotionDetection\\MotionDetection.vcproj
+		SccProjectName1 = \u0022$/Project/Units/USBCAM/MotionDetection\u0022,\u0020WXJCAAAA
+		SccLocalPath1 = ..\\MotionDetection
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Debug.ActiveCfg = Debug|Win32
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Debug.Build.0 = Debug|Win32
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Enu.ActiveCfg = Enu|Win32
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Enu.Build.0 = Enu|Win32
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Release.ActiveCfg = Release|Win32
+		{195D254F-152C-4E18-8876-6AEB19206DBB}.Release.Build.0 = Release|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Debug.ActiveCfg = Debug|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Debug.Build.0 = Debug|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Enu.ActiveCfg = Release|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Enu.Build.0 = Release|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Release.ActiveCfg = Release|Win32
+		{34E019DA-5422-4371-85C6-EA7017DCF17C}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

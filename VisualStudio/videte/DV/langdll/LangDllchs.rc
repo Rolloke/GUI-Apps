@@ -1,0 +1,914 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU 
+BEGIN
+    POPUP "显示方式"
+    BEGIN
+        MENUITEM ">全屏显示",                   IDOSD_VIEW_FULL
+        MENUITEM ">长方形显示",                IDOSD_VIEW_XXX
+        MENUITEM ">1 正形显示",                     IDOSD_VIEW_1PX
+    END
+    POPUP "摄像机"
+    BEGIN
+        MENUITEM ">摄像机",                     IDOSD_CAM1
+        MENUITEM ">摄像机",                     IDOSD_CAM2
+        MENUITEM ">摄像机",                     IDOSD_CAM3
+        MENUITEM ">摄像机",                     IDOSD_CAM4
+        MENUITEM ">摄像机",                     IDOSD_CAM5
+        MENUITEM ">摄像机",                     IDOSD_CAM6
+        MENUITEM ">摄像机",                     IDOSD_CAM7
+        MENUITEM ">摄像机",                     IDOSD_CAM8
+        MENUITEM ">摄像机",                     IDOSD_CAM9
+        MENUITEM ">摄像机",                     IDOSD_CAM10
+        MENUITEM ">摄像机",                     IDOSD_CAM11
+        MENUITEM ">摄像机",                     IDOSD_CAM12
+        MENUITEM ">摄像机",                     IDOSD_CAM13
+        MENUITEM ">摄像机",                     IDOSD_CAM14
+        MENUITEM ">摄像机",                     IDOSD_CAM15
+        MENUITEM ">摄像机",                     IDOSD_CAM16
+    END
+    POPUP "设置菜单"
+    BEGIN
+        MENUITEM ">密码: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM "操作面板上锁",               IDOSD_OPTION_LOCK
+    POPUP "系统"
+    BEGIN
+        MENUITEM ">系统信息",                IDOSD_OPTION_INFO
+        MENUITEM ">统计",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "播放"
+    BEGIN
+        MENUITEM ">实时播放",                   IDOSD_REALTIME
+        MENUITEM ">报警目录",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">十字线",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU 
+BEGIN
+    POPUP "摄像机设置"
+    BEGIN
+        MENUITEM ">摄像机名称:________________", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Bildrate",                   IDOSD_CAMERA_FPS
+        MENUITEM ">图像压缩",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">亮度",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">对比度",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">饱和度",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Termination",               IDOSD_CAMERA_TERMINATION
+        MENUITEM ">型号",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">串行通讯端口: __",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "系统设置"
+    BEGIN
+        MENUITEM ">图像分辨率 ",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">声响报警",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">输出系统设置", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">输入系统设置", IDOSD_IMPORT_SETTINGS
+    END
+    POPUP "摄像机定时器"
+    BEGIN
+        MENUITEM ">星期一: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">星期二: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">星期三: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">星期四: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">星期五: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">星期六: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">星期天: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">报警输入",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "摄像机摄像方式"
+    BEGIN
+        MENUITEM ">方式",                      IDOSD_ALARM_MODE
+    END
+    POPUP "运动检测设置"
+    BEGIN
+        MENUITEM ">灵敏性",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">覆面灵敏性",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">改变覆面",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "报警设置"
+    BEGIN
+        MENUITEM ">报警信息来自",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">呼叫号码 1",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">呼叫号码 2",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">呼叫号码 3",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">报警出口",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "图像"
+    BEGIN
+        MENUITEM ">输出图像",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">中断输出",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">继续输出",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">输出报警图像",      IDOSD_ALARM_BACKUP
+        MENUITEM ">删除报警图像",        IDOSD_ALARM_DELETE
+        MENUITEM ">显示可疑图像",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">删除可疑图像",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "视频出口"
+    BEGIN
+        MENUITEM ">出口 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">出口 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">出口 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">出口 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">顺序显示时间",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "音频设置"
+    BEGIN
+        MENUITEM ">收听",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM ">录音任务",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">录音方式",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">灵敏性",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">极限",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">音量",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "网络"
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">子网掩码: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">默认网关:___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">%s名称:_______________",    IDOSD_NET_NAME
+        MENUITEM ">DNS",                        IDOSD_DNS
+    END
+    POPUP "日期/时间"
+    BEGIN
+        MENUITEM ">日期: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">时间: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM ">时区:",                      IDOSD_TIME_ZONE
+    END
+    POPUP "选择打印机"
+    BEGIN
+        MENUITEM "打印机不存在",                IDOSD_NO_PRINTER
+        MENUITEM ">打印",                    IDOSD_PRINTER1
+        MENUITEM ">打印",                    IDOSD_PRINTER2
+        MENUITEM ">打印",                    IDOSD_PRINTER3
+        MENUITEM ">打印",                    IDOSD_PRINTER4
+        MENUITEM ">打印",                    IDOSD_PRINTER5
+        MENUITEM ">打印",                    IDOSD_PRINTER6
+        MENUITEM ">打印",                    IDOSD_PRINTER7
+        MENUITEM ">打印",                    IDOSD_PRINTER8
+        MENUITEM ">打印",                    IDOSD_PRINTER9
+        MENUITEM ">打印",                    IDOSD_PRINTER10
+        MENUITEM ">打印",                    IDOSD_PRINTER11
+        MENUITEM ">打印",                    IDOSD_PRINTER12
+        MENUITEM ">打印",                    IDOSD_PRINTER13
+        MENUITEM ">打印",                    IDOSD_PRINTER14
+        MENUITEM ">打印",                    IDOSD_PRINTER15
+        MENUITEM ">打印",                    IDOSD_PRINTER16
+    END
+    POPUP "选择语言"
+    BEGIN
+        MENUITEM ">语言",                    IDOSD_LANGUAGE1
+        MENUITEM ">语言",                    IDOSD_LANGUAGE2
+        MENUITEM ">语言",                    IDOSD_LANGUAGE3
+        MENUITEM ">语言",                    IDOSD_LANGUAGE4
+        MENUITEM ">语言",                    IDOSD_LANGUAGE5
+        MENUITEM ">语言",                    IDOSD_LANGUAGE6
+        MENUITEM ">语言",                    IDOSD_LANGUAGE7
+        MENUITEM ">语言",                    IDOSD_LANGUAGE8
+        MENUITEM ">语言",                    IDOSD_LANGUAGE9
+        MENUITEM ">语言",                    IDOSD_LANGUAGE10
+        MENUITEM ">语言",                    IDOSD_LANGUAGE11
+        MENUITEM ">语言",                    IDOSD_LANGUAGE12
+        MENUITEM ">语言",                    IDOSD_LANGUAGE13
+        MENUITEM ">语言",                    IDOSD_LANGUAGE14
+        MENUITEM ">语言",                    IDOSD_LANGUAGE15
+        MENUITEM ">语言",                    IDOSD_LANGUAGE16
+    END
+    POPUP "改变密码"
+    BEGIN
+        MENUITEM ">用户",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">管理员",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "其他选项"
+    BEGIN
+        MENUITEM ">显示故障记录",   IDOSD_OPTION_RTE
+        MENUITEM ">关闭系统",          IDOSD_OPTION_EXIT
+        MENUITEM ">软件更新",             IDOSD_OPTION_UPDATE
+        MENUITEM ">扩展密码:_____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "退出设置菜单",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DVClient"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "密码正确"
+    IDS_ON                  "开"
+    IDS_PIN_FAILED          "密码错误"
+    IDS_PIN                 "密码: ____"
+    IDS_SEARCH_DATE         "搜索日期: __.__.__"
+    IDS_SEARCH_TIME         "搜索时间: __:__"
+    IDS_SEARCH_ERROR        "搜索失败"
+    IDS_OFF                 "关"
+    IDS_CAMERA              "摄像机:"
+    IDS_OLD_PIN             "当前密码: ____"
+    IDS_NEW_PIN             "新密码: ____"
+    IDS_CONFIRM_PIN         "密码确认: ____"
+    IDS_PIN_CHANGED         "密码已被更改"
+    IDS_SET_CLOCK_DATE_FAILED "日期未更改"
+    IDS_SET_CLOCK_TIME_FAILED "时间未更改"
+    IDS_SEARCH_START        "正在搜索..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "日期已被更改"
+    IDS_SET_CLOCK_TIME_SUCCESS "时间已被更改"
+    IDS_SET_TIMER_SUCCESS   "定时器已被更改"
+    IDS_SET_IP_SUCCESS      "IP 地址已被更改"
+    IDS_SET_IP_FAILED       "IP 地址未被更改"
+    IDS_SET_MSN_SUCCESS     "MSN 已被更改"
+    IDS_SET_MSN_FAILED      "错误,MSN未被更改"
+    IDS_SET_TIMER_FAILED    "定时器未被更改"
+    IDS_MD                  "运动检测"
+    IDS_UVV                 "报警/预报警"
+    IDS_LOW                 "低"
+    IDS_NORMAL              "正常"
+    IDS_HIGH                "高"
+    IDS_WAIT                "请稍候..."
+    IDS_NO_PICTURES         "摄像机没有图像接收"
+    IDS_QUERY               "搜索:\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DVClient"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "日期和时间"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "当前摄像机..... 该摄像机包含所有的设置"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "快倒"
+    IDC_BUTTON_PLAY         "前进"
+    IDC_BUTTON_PLAY_BACK    "后退"
+    IDC_BUTTON_STOP         "结束"
+    IDC_BUTTON_FF           "快进"
+    IDC_BUTTON_EJECT        "关闭当前摄像机窗口"
+    IDC_BUTTON_SKIP_BACK    "前一事件"
+    IDC_BUTTON_SINGLE_BACK  "向后一页"
+    IDC_BUTTON_SINGLE_FORWARD "向前一页"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "搜索"
+    IDC_BUTTON_SKIP_FORWARD "下一事件"
+    IDC_BUTTON_EXPORT       "输出当前摄像机的图像到:"
+    IDC_BUTTON_PRINT        "从%s打印出当前摄像机的图像"
+    IDC_BUTTON_MINIMIZE     "操作面板在右下角最小化"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_OK           "退出程序"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_QUERY_FAILED        "没有找到图像:\n"
+    IDS_SHUTDOWN            "关机..."
+    IDS_END_OPTION          "退出设置菜单"
+    IDS_DATE                "日期:"
+    IDS_TIME                "时间:"
+    IDS_EXPORT_RUNNING      "输出中..."
+    IDS_EXPORT_SUCCESS      "输出成功"
+    IDS_EXPORT_FAILED       "输出失败"
+    IDS_PRINTJOB_RUNNING    "打印中..."
+    IDS_PRINTJOB_SUCCESS    "打印成功"
+    IDS_PRINTJOB_FAILED     "打印失败"
+    IDS_CAMNAME             "摄像机名称:"
+    IDS_CONNECT_ERROR       "不能连接"
+    IDS_LOCKED              "系统已上锁"
+    IDS_RTE                 "运作时间错误%u来自"
+    IDS_DELETE_ALARM        "删除当前报警..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETED_ALARM       "图像已被成功删除"
+    IDS_DELETED_ALARM2      "图像不能被删除"
+    IDS_CONFIRM_RTE         "事件被确定"
+    IDS_DEFAULTPRINTER_SET  "打印机选择成功"
+    IDS_NO_CAMERA           "摄像机未被连接"
+    IDS_BACKUP_RUNNING      "输出过程: %d %% \n\n剩余时间:  %s"
+    IDS_BACKUP_COMPLETE     "输出报警图像成功"
+    IDS_DATE_FORMAT         "日日月月年年"
+    IDS_TIME_FORMAT_HHMMSS  "时时分分秒秒"
+    IDS_TIMER_FORMAT        "时时分分时时分分"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "请您输入搜索日期然后按回车键确认"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "请您输入搜索时间然后按回车键确认"
+    IDS_HELP_INPUT_PIN      "请输入密码"
+    IDS_HELP_INPUT_NEW_PIN  "请您输入新密码"
+    IDS_HELP_INPUT_CONFIRM_PIN "请您确认新密码"
+    IDS_HELP_INPUT_TCPIP    "请您输入TCP/IP地址并按回车键确认 ....系统将重新自动启动"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_DEL             "删除当前事件"
+    IDC_RTE_UP              "跳到下一个事件 "
+    IDC_RTE_DOWN            "跳到前一个事件"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "确认当前事件 "
+    IDC_RTE_OK              "关闭当前事件窗口"
+    IDC_RTE_DEL_ALL         "删除所有事件"
+    IDC_RTE_PRINT           "打印所有事件"
+    IDC_CLOCK               "输入要输出图像的开始和结束时间"
+    IDC_STATIC_EXPORT       "摄像机.:"
+    IDC_EXPORT_CAM1         "请选择要输出图像的摄像机"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "请输入MSN号码并用回车键确认"
+    IDS_HELP_INPUT_TIMER    "请您输入定时器的工作时间并按回车键确认"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "请您输入当前时间然后按回车键确认"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "请您输入当前日期然后按回车键确认"
+    IDS_HELP_INPUT_CAMERANAME "请您输入新的摄像机名称并按回车键确认"
+    IDS_HELP_INPUT_OLD_PIN  "请输入密码"
+    IDS_SET_SUBNETMASK_SUCCESS "子网掩码设置成功"
+    IDS_SET_SUBNETMASK_FAILED "子网掩码设置失败"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "请输入子网掩码并用回车键确认 ....为使子网掩码起作用,系统将自动重新启动."
+    IDS_NO_PRINTER          "打印机不存在"
+    IDS_DEFAULT_LANGUAGE_SET "语言选择成功"
+    IDS_BACKUP_FORMAT       "存储介质正准备接收从摄像机%s输出的图像 .\n这过程将持续几分钟.\n\n共用时间: %s"
+    IDS_BACKUP_FINALIZE     "报警图像被成功复制.\n完成图像输出.\n这将持续几分钟.\n\n共用时间:%s"
+    IDS_HELP_UPDATE_SYSTEM  "请在软区中放入更新磁盘并按回车键确认，完成更新后系统将自动重新启动."
+    IDS_BACKUP_FORMAT_NOCDR "刻录机内没找到空的光盘.\n图像不能被输出到光盘.\n"
+    IDS_BACKUP_FORMAT_ERROR "存储介质接收有误.\n这过程将被结束.\n请放入新的存储介质并再次运行图像输出程序."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CAM11             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM12             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM13             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM14             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM15             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM16             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_VIEW_FULL         "全屏显示.....用箭头键可改变视图形式,然后按回车键确认"
+    IDOSD_VIEW_XXX          "正方形显示.....用箭头键可选择其他的视图形式,然后用回车键确认"
+    IDOSD_VIEW_1PX          "1正形显示.....用箭头键可改变视图形式,然后用回车键确认"
+    IDOSD_TIMER_MO          "星期一定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_TU          "星期二定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_WE          "星期三定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_TH          "星期四定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_FR          "星期五定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_SA          "星期六定时器.....改变定时器请按回车键"
+    IDOSD_TIMER_SU          "星期日定时器.....改变定时器请按回车键"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "当前日期.....改变日期请按回车键"
+    IDOSD_CLOCK_TIME        "当前时间.....改变时间请按回车键"
+    IDOSD_ALARM_MODE        "当前摄像方式.....改变当前摄像方式请按回车键.选择'报警/预报警' 摄像方式 或'运动检测'摄像方式请按箭头键,然后按回车键确认.注意！改变方式后所有存储的图像将被永久性删除. "
+    IDOSD_TCPIP             "当前IP地址.....改变IP地址请按回车键"
+    IDOSD_ISDN_MSN          "当前 MSN.....改变 MSN 请按回车键确认"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "改变密码"
+    IDOSD_CONFIG_PIN        "如要进入设置菜单,请按回车键,然后输入您的密码"
+    IDOSD_OPTION_END        "如要离开设置菜单,请按回车键"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "当前覆面灵敏性.....改变当前覆面灵敏性请按回车键|使用箭头键选择灵敏程度,然后用回车键确认"
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "当前运动检测灵敏性.....改变当前运动检测灵敏性请按回车键|使用箭头键选择灵敏程度,然后用回车键确认"
+    IDOSD_OPTION_EXIT       "关机请按回车键确认"
+    IDOSD_CHANGE_CAMNAME    "当前摄像机名称.....改变当前摄像机名称请按回车键确认"
+    IDOSD_OPTION_LOCK       "锁住操作面板请按回车键确认"
+    IDOSD_OPTION_RTE        "浏览事件请按回车键确认"
+    IDOSD_ALARM_DELETE      "要删除当前报警图像请按回车键确认"
+    IDOSD_NO_PRINTER        "打印机不存在.....改变默认打印机请按回车键确认|您可用箭头键选择默认打印机,然后用回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "当前亮度.....改变亮度请按回车键确认|您可用箭头键选择当前摄像机的亮度并按回车键确认"
+    IDOSD_COLOR_CONTRAST    "当前对比度.....改变对比度请按回车键确认|您可用箭头键选择当前摄像机的对比度,然后按回车键确认"
+    IDOSD_COLOR_SATURATION  "当前饱和度.....改变饱和度请按回车键确认|您可用箭头键选择当前摄像机的饱和度,然后按回车键确认"
+    IDOSD_CAM1              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM2              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM3              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM4              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM5              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM6              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM7              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM8              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM9              "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+    IDOSD_CAM10             "当前摄像机.....用箭头键可改变当前的摄像机,然后按回车键确认.该摄像机包含所有的设置."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_PRINTER1          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER2          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER3          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER4          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER5          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER6          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER7          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER8          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER9          "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER10         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER11         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER12         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER13         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER14         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER15         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+    IDOSD_PRINTER16         "改变默认打印机请按回车键确认|选择默认打印机请按箭头键确认,然后用回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE1         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE2         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE3         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE4         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE5         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE6         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE7         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE8         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE9         " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE10        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE11        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE12        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE13        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE14        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE15        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+    IDOSD_LANGUAGE16        " 改变语言请按回车键确认|选择默认语言请用箭头键,然后用回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "输出当前摄像机报警图像请按回车键确认"
+    IDOSD_SUSPECT_SEARCH    "查看最先的可疑图像请按回车键确认"
+    IDOSD_SUSPECT_DELETE    "删除所有可疑图像请按回车键确认"
+    IDOSD_SUBNETMASK        "当前的子网掩码.....要改变子网掩码请按回车键确认"
+    IDOSD_ACTIVITY_BACKUP   "如开始输出图像请按回车键确认"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "十字线显示开/关,按回车键确认,然后用箭头键选择开或关，并按回车键确认"
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "改变密码"
+    IDOSD_TIMER_ONOFF       "连续运行或者在摄像机定时器限定的工作时间内运行"
+    IDOSD_OPTION_UPDATE     "开始软件更新(从磁盘),请按回车键确认"
+    IDOSD_TIME_ZONE         "如要改变时区请按回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "显示存储的统计数据表"
+    IDOSD_NET_NAME          "当前的%s名称.....改变%s名称请按回车键确认"
+    IDOSD_GATEWAY           "当前默认网关地址.....要改变当前默认网关地址请按回车键确认"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "视频出口显示形式.....改变显示形式请按回车键|选择显示形式请按箭头键,然后按回车键确认"
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "视频出口显示形式.....改变显示形式请按回车键|选择显示形式请按箭头键,然后按回车键确认"
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "视频出口显示形式.....改变显示形式请按回车键|选择显示形式请按箭头键,然后按回车键确认"
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "视频出口显示形式.....改变显示形式请按回车键|选择显示形式请按箭头键,然后按回车键确认"
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "在外接显示屏上设定顺序运行的停留时间.....改变顺序运行的停留时间请按回车键|然后按箭头键选择所要的停留时间,然后按回车键确认"
+    IDOSD_ACOUSTIC_ALARM    "选择声响报警的开或关"
+    IDOSD_SHOW_ALARMLIST    "显示在选定日期内的所有报警目录"
+    IDOSD_MD_DRAW_MASK      "如改变固定覆面请按回车键确认"
+    IDOSD_ALARM_OUTPUT_ON_OFF "启动或者解除报警出口"
+    IDOSD_ALARM_CALLNUMBER1 "当前的报警呼叫号码....改变报警呼叫号码1请按回车键确认"
+    IDOSD_ALARM_CALLNUMBER2 "当前的报警呼叫号码....改变报警呼叫号码2请按回车键确认"
+    IDOSD_ALARM_CALLNUMBER3 "当前的报警呼叫号码....改变报警呼叫号码3请按回车键确认"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "继续图像输出请按回车键确认"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "图像输出时有误\n请您放入新的存储介质，然后重新运行图像输出过程"
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "图像被成功输入到存储介质中\n请您移除该存储介质\n"
+    IDS_NO_RECORD_FOUND     "没有或没有足够的图像来运行该操作指令\n"
+    IDS_BACKUP_CHECK_CD     "请您放入新的光盘到刻录机\n识别该光盘将持续几秒钟\n图像输出程序结束后,光盘将被自动弹出\n\n图像输出:\n从 %s\n到 %s\n\n摄像机:\n%s"
+    IDS_BACKUP_FORMATTED    "存储介质准备接收图像.\n请稍候...\n"
+    IDS_BACKUP_FAILED       "图像输出有误\n请您放入新的存储介质，然后重新运行图像输出过程"
+    IDS_BACKUP_COPYING      "复制阅读软件.\n请稍候..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "不能读CD-R\n请放入新的CD-R，然后重新运行图像输出过程"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "请您设定图像输出的开始日期和时间"
+    IDS_EXPORT_TIME_OK      "时间和日期正确"
+    IDS_EXPORT_TIME_BAD     "日期/ 时间输入有误"
+    IDS_EXPORT_INPUT_STARTTIME "设定开始日期 / 时间"
+    IDS_EXPORT_INPUT_ENDTIME "设定结束日期/时间"
+    IDS_EXPORT_STARTTIME_FORMAT "从: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "到: __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "输入摄像机号码"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "号码.:__"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "请您设定图像输出的截止日期和时间"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "请您设定要输出图像的摄像机号码"
+    IDS_BACKUP_COMPLETE2    "输出图像成功."
+    IDS_IMAGE_MANIPULATED   "图像已被改变或者已被损坏."
+    IDS_BACKUP_DISC_FULL    "存储介质没有足够的空间来存储图像.\n请放入新的存储介质,然后再次运行图像输出过程."
+    IDS_BACKUP_NO_EMPTY_CD  "存储介质上已存有内容.\n请您放入空的存储介质,然后再次运行图像输出过程.\n"
+    IDS_VERSION             "版本"
+    IDS_HELP_SELECT_HOST    "请从%s目录中选出%s，然后按回车键确认"
+    IDS_BACKUP_NODATA       "没有图像存在"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "过多图像输出.\n请缩短您所设定的时间段或减少进行图像输出的摄像机数目."
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "在设定的时间内没有图像可供输出.\n"
+    IDS_BACKUP_FORMAT2      "图像输出中,请稍候.\n这将持续几分钟.\n\n共用时间: %s"
+    IDS_BACKUP_FINALIZE2    "图像被成功复制.\n完成图像输出.\n这将持续几分钟.\n\n共用时间: %s"
+    IDS_READ_FAILED         "图像不能被显示."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "请放入空的光盘到刻录机.\n读盘将需几秒钟.\n完成图像输出后,光盘将被自动弹出.\n\n报警图像输出:\n从%s\n到   %s\n"
+    IDS_SEARCH_DATE_FAILED  "错误的日期"
+    IDS_SEARCH_TIME_FAILED  "错误的时间"
+    IDS_TIME_FORMAT_HHMM    "时时分分"
+    IDS_TIMER_ON            "总是运行"
+    IDS_TIMER_OFF           "取决于定时器"
+    IDS_INPUT_DISK          "放入第%d个磁盘"
+    IDS_UPDATE_SUCCESS      "成功更新"
+    IDS_UPDATE_RUNNING      "更新中..."
+    IDS_UPDATE_FAILED       "复制失败"
+    IDS_UPDATE_WRONG_CRC    "检查数目错误"
+    IDS_UPDATE_WRONG_DISK   "错误的更新磁盘"
+    IDS_UPDATE_DISKFAILED   "不能读取磁盘"
+    IDS_UPDATE_NO_UPDATE_DISK "没有磁盘或错误的磁盘"
+    IDS_UPDATE_WRONG_OEM    "错误的OEM 版本"
+    IDS_UPDATE_WRONG_BUILD  "错误的版本号"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "时区被改变"
+    IDS_SET_TIME_ZONE_FAILED "时区未被改变"
+    IDS_HELP_SET_TIME_ZONE  "输入您的时区编码. (请看使用手册)"
+    IDS_STATISTIC_STARTTIME "开始时间:"
+    IDS_STATISTIC_DURATION  "天数:"
+    IDS_STATISTIC_PICCOUNTER "图像:"
+    IDS_EXPORT_NO_CAMERA    "错误, 没有摄像机"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "名称被成功改变"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "不能改变名称"
+    IDS_SELECT_HOST         "%s目录"
+    IDS_HOSTLIST_EMPTY      "%s目录是空的"
+    IDS_INVALID_SERIAL      "错误的许可证号码"
+    IDS_DISCONNECT          "断开"
+    IDS_SET_GATEWAY_SUCCESS "默认网关地址已被改变 "
+    IDS_SET_GATEWAY_FAILED  "默认网关地址未被改变"
+    IDS_HELP_INPUT_GATEWAY  "请输入默认网关地址,然后用回车键确认.....系统将自动重新启动"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "当前摄像机"
+    IDS_VOUT_MODE_SEQUENCER "定序器"
+    IDS_VOUT_MODE_ACTIVITY  "运行"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "计算结束日期/时间成功.\n按回车键可实现存储介质的最佳使用率.\n\n输出:\n从%s\n\n摄像机:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "计算结束日期/时间成功.\n结束的日期和时间将显示出被选摄像机最新的图像.没有足够的图像来达到存储介质的最佳利用.\n\n存储介质利用率:大约 %s.%%\n\n输出:\n从 %s\n\n摄像机:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "请稍候...\n计算图像输出的最佳结束日期/时间 ."
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "在设定的开始日期/时间后没有图像可供输出. 请输入新的开始日期/时间"
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "计算结束日期/时间失败.\n请设定图像输出的结束日期/时间.\n\n输出:\n从%s\n\n摄像机:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "计算失败"
+    IDS_EXTEND              "高级的..."
+    IDS_HELP_EXTEND         "按回车键编辑%s目录,或者建立新条目."
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "设置呼叫号码"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "呼叫号码不能被设置"
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "请您设定要输出图像的摄像机号码"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_ACTIVITY  "显示在报警目录中来自于A(系统内部报警器)的报警信息"
+    IDC_ALARMLIST_EXTERN1   "显示在报警目录中的来自于EXT1(系统外部报警器1)的报警信息"
+    IDC_ALARMLIST_EXTERN2   "显示在报警目录中的来自于EXT2(系统外部报警器2)的报警信息"
+    IDC_ALARMLIST_IMAGE     "显示被选择的报警图像"
+    IDC_ALARMLIST_UP2       "显示下一天的报警目录"
+    IDC_ALARMLIST_DOWN2     "显示上一天的报警目录"
+    IDC_ALARMLIST_AUDIO     "Shows detected audio alarms in the alarm list. Please, select also one or more cameras to view the alarms from"
+    IDC_STATISTIC_OK        "关闭统计表"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "删除固定覆面"
+    IDC_MD_INVERT           "逆转固定覆面"
+    IDC_MD_SHOW_ADAPTIVE    "在图像上显示灵活覆面"
+    IDC_ALARMLIST_OK        "关闭报警目录"
+    ID_MD_OK                "关闭覆面编辑窗口"
+    IDC_HOSTS_OK            "关闭%s目录对话框"
+    IDC_HOSTS_NEW           "增加新条目到%s目录上"
+    IDC_HOSTS_DELETE        "删除从%s目录上被选出的条目"
+    IDC_HOSTS_DISPLAY_NAME  "改变从%s目录中被选出的%s的名称...点击这里, 可编辑该名称."
+    IDC_HOSTS_DISPLAY_IP    "改变从%s目录中被选出的%s的IP地址...点击这里, 可编辑该地址."
+    IDC_HOSTS_UP_START      "跳至%s目录的开头."
+    IDC_HOSTS_UP            "翻转至%s目录的下一页."
+    IDC_HOSTS_DOWN          "翻转至%s目录的上一页."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "跳至%s目录的末尾"
+    IDC_ALARMLIST_UP        "显示上一页报警目录"
+    IDC_ALARMLIST_DOWN      "显示下一页报警目录"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "打印当前所选日期的报警目录"
+    IDC_ALARMLIST_CAM0      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM1      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM2      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM3      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM4      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM5      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM6      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM7      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM8      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM9      "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM10     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM11     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM12     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM13     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+    IDC_ALARMLIST_CAM14     "摄像机筛选器...选择筛选器后只有被选中的摄像机的所有事件被显示在报警目录上."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "请您设置需要输出图像的开始日期/时间. 默认的开始日期/时间显示出被选择摄像机的第一帧图像."
+    IDS_BACKUP_MULTI        "该输出将需要若干个存储介质来存储所有图像,因为结束日期/时间短于计算出的结束日期/时间. 请首先用计算出的结束日期/时间来存储图像,然后选择菜单条目'继续存储'. 第二个存储介质将会接着第一个存储介质继续存储图像.\n\n输出: \n从 %s\n\n摄像机:\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "A,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "A,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "A,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "关"
+    IDS_EXPANSION_CODE_SUCCESS "扩展密码正确"
+    IDS_EXPANSION_CODE_FAILED "扩展密码错误"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "将接在上一次输出后继续输出.\n\n上一次输出 \n从 %s\n到  %s\n\n继续输出:\n从 %s\n\n摄像机:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "将接在上一次输出后继续输出.\n\n上一次输出:\n从%s\n到   %s\n\n继续输出:\n从 %s\n\n摄像机:\n%s\n\n请稍候...\n正在进行计算图像输出的最佳结束日期/时间中 ..."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "将接在上一次输出后继续输出.\n\n上一次输出:\n从%s\n到   %s\n\n继续输出:\n从 %s\n\n摄像机:\n%s\n\n计算结束日期/时间成功. 没有足够的图像来达到存储介质的最佳使用.\n\n存储介质使用率: 大约. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "将接在上一次输出后继续输出.\n\n上一次输出:\n从 %s\n到   %s\n\n继续输出:\n从 %s\n\n摄像机:\n%s\n\n计算结束日期/时间成功. 按回车键将得到在计算出的结束日期/时间内存储介质的最佳使用率."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "报警来自: A = 系统内部报警器, 1 = Ext1(系统外部报警器1),2 = Ext2(系统外部报警器2).....先按回车键,然后用箭头键选择报警来源,最后用回车键确认"
+    IDOSD_EXPANSION_CODE    "要输入扩展密码请按回车键确认"
+    IDOSD_EXPORT_SETTINGS   "输出系统设置"
+    IDOSD_IMPORT_SETTINGS   "输入上次输出的系统设置"
+    IDOSD_OPTION_INFO       "显示系统信息请按回车键确认"
+    IDOSD_CAMERA_RESOLUTION "如要改变图像分辨率,请按回车键确认|用箭头键可选择图像分辨率,然后用回车键确认。"
+    IDOSD_CAMERA_COMPRESSION 
+                            "如您要改变图像压缩请按回车键|请用箭头键选择图像压缩,然后用回车键确认"
+    IDOSD_CAMERA_FPS        "Zum ?ndern der Bildrate bitte jetzt die Eingabetaste bet?tigen|Mit den Pfeiltasten k?nnen Sie nun die Bildrate ?ndern und anschlie?end mit der Eingabetaste best?tigen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "将接在上一次输出后继续输出.\n\n上一次输出:\n从%s\n到   %s\n\n继续输出:\n从 %s\n\n摄像机:\n%s.\n\n计算结束日期/时间失败.\n请您重新设置图像输出的结束日期/时间."
+    IDS_POWEROFF_PRESSED    "关闭系统"
+    IDS_RESET_PRESSED       "重新启动系统"
+    IDS_EXPORT_NO_IMAGES    "没有找到图像"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "在设置的图像输出开始和结束时间内没找到图像. 请输入新的结束日期/时间.\n按回车键将得到在计算出的结束日期/时间内存储介质的最佳使用率.\n\n输出:\n从 %s\n\n摄像机:\n%s"
+    IDS_BACKUP_REQUEST_MB   "在设定的图像输出开始日期/时间和结束日期/时间内没找到图像.请设定图像输出的新的结束日期/时间.\n计算出的结束日期/时间显示出被选摄像机的最新图像.没有足够的图像来达到存储介质的最佳使用.\n\n存储介质使用率:大约. %s %%\n\n输出:\n从%s\n\n摄像机:\n%s"
+    IDS_EXIT_ENTRY          ">退出程序"
+    IDS_YES                 "是"
+    IDS_NO                  "不是"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "用箭头键可改变摄像机摄影方式，然后按回车键确认....注意!当您用'是'确认后,所有先前被该摄像机摄入的图像将被永久性的删除"
+    IDS_OK                  "OK"
+    IDS_CANCEL              "取消"
+    IDS_ERROR               "错误"
+    IDS_FILE_SYSTEM_ACCESS  "只有系统管理员才能进入文件系统.\n请输入您的密码."
+    IDS_BACKUP_TITLE        "输出图像"
+    IDS_KEYBOARD_UPPER_KEYS "手田水口 卜山戈人心日尸木火土竹十大中乙 金女月弓一"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "qwertyuiopasdfghjklzxcvbnm"
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "不是空的存储介质.\n输出图像只能用空的存储介质. 存储介质必须在图像输出过程前被清空.\n选择目录 '清空存储介质: 是'并按回车键.\n存储介质将在图像输出过程前被自动清空"
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "清空存储介质: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "准备输出图像.\n\n过程: %d %%\n\n共用时间: %s"
+    IDS_BACKUP_ACDC_START   "请放入光盘到刻录机.\n读盘将需几秒钟.\n输出结束后光盘将被自动弹出."
+    IDS_ERASE_MEDIUM        "清空存储介质"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "请放入光盘至刻录机"
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "存储介质上以存有内容，请在输出图像前清空它?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "等待存储介质中..."
+    IDS_EXPORT_INSERT_MEDIUM "请放入存储介质 "
+    IDS_EXPORT_ERASE_MEDIUM "发现存储介质"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "图像输出需要空的存储介质.\n请清空存储介质或者放入新的存储介质."
+    IDS_FOUND_NEW_DEVICE    "发现新装置: "
+    IDS_REMOVED_DEVICE      "移除装置: "
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "不是空的存储介质.\n要最佳使用存储介质请在图像输出前清空它. 请尽量使用空的存储介质来输出图像.\n选择菜单条目,然后按回车键确认."
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "存储介质上没有足够的空间用来存储图像.\n请清空存储介质或放入新的存储介质"
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "删除系统外部报警器\n\n时间: %s"
+    IDS_BACKUP_RUNNING_UP   "输出进行中: %d %%\n\n时间: %s"
+    IDS_IMPORT_SUCCESS      "输入成功"
+    IDS_IMPORT_FAILED       "输入失败"
+    IDS_IMPORT_RUNNING      "正在输入中..."
+    IDS_CAMERA_FIX          "固定摄像机"
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "使用者已取消图像输出的准备过程"
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "图像输出过程已被使用者取消"
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\n输出图像过程将被取消.\n请稍候...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_REALTIME          "选择实时重放开/关"
+    IDOSD_CAMERA_PTZ_TYPE   "如要改变摄像机的类型,请按回车键。"
+    IDOSD_CAMERA_PTZ_ID     "如要改变摄像机的ID ,请按回车键 。"
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "如要改变摄像机的串行通讯端口 ,请按回车键。"
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "当前的录音任务. 录音程序只能应用在一台传输信号的摄像机上 .....运行录音程序，请按回车键确认"
+    IDOSD_AUDIO_THRESHOLD   "当前的音频极限值. 先设置音频的极限值(级别)，然后启动录音程序 .....如要调节音频极限值, 请按回车键确认"
+    IDOSD_AUDIO_SENSITIVITY "当前的灵敏性. 设置音频输入的音量(麦克风).....如要调节音频的灵敏性, 请按回车键确认"
+    IDOSD_AUDIO_VOLUME      "当前的音量. 设置音频输入的音量(扩音器).....如要调节音量, 请按回车键确认. "
+    IDOSD_AUDIO_RECORD_MODE "当前的录音方式. 设置进行录音的选择方式. L=级别(超过极限值), A=运动检测(有录音任务的摄像机), Ext=外部报警器"
+    IDOSD_AUDIO_LISTEN_IN   "收听......如要进行收听, 请按回车键确认. "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "P"
+    IDS_AUDIO_RECORDING_EXT "Ext"
+    IDS_AUDIO_RECORDING_AL  "A,L"
+    IDS_AUDIO_RECORDING_AEXT "A,Ext"
+    IDS_AUDIO_RECORDING_LEXT "L,Ext"
+    IDS_AUDIO_RECORDING_ALEXT "A,L,Ext"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_DNS               "Switches DNS on or off"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

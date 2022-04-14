@@ -1,0 +1,575 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\UpdateHandler.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\UpdateHandler.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SYMBOL              BITMAP                  "res\\symbol.bmp"
+IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  32, 32
+BEGIN
+    BUTTON      ID_VERBINDEN
+    BUTTON      ID_TRENNEN
+    SEPARATOR
+    BUTTON      ID_SETUP
+    SEPARATOR
+    BUTTON      ID_FILE_RECEIVE
+    BUTTON      ID_UPDATE_FILE
+    BUTTON      ID_FILE_DELETE
+    BUTTON      ID_FILE_EXECUTE
+    BUTTON      ID_FILE_EXECUTE_CMD_LINE
+    SEPARATOR
+    BUTTON      ID_FILE_SYSTEM_INFO
+    BUTTON      ID_INFO_TIME
+    BUTTON      ID_UPDATE_DISK
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU 
+BEGIN
+    POPUP "&FileView"
+    BEGIN
+        MENUITEM "&Empfangen...",               ID_FILE_RECEIVE
+        MENUITEM "&Löschen",                    ID_FILE_DELETE
+        MENUITEM "&Ausführen",                  ID_FILE_EXECUTE
+        MENUITEM "Ändern...",                   ID_REG_EDIT
+    END
+END
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Verbindung"
+    BEGIN
+        MENUITEM "&Lokale Station",             ID_CONNECT_LOCAL
+        MENUITEM "&Verbinden",                  ID_VERBINDEN
+        MENUITEM "&Trennen",                    ID_TRENNEN
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+        MENUITEM "&Server Reset",               ID_CONNECTION_RESET
+    END
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Quellverzeichnis...\tSTRG+Q", ID_UPDATE_SOURCE
+        MENUITEM "Zielverzeichnis...\tSTRG+D",  ID_UPDATE_ZIEL
+        MENUITEM "&Empfangen...",               ID_FILE_RECEIVE
+        MENUITEM "&Löschen",                    ID_FILE_DELETE
+        MENUITEM "&Ausführen",                  ID_FILE_EXECUTE
+        MENUITEM "Eigen&schaften",              ID_FILE_PROPERTIES
+        MENUITEM "Komandozeile ausführen...",   ID_FILE_EXECUTE_CMD_LINE
+        MENUITEM "Komandodatei holen",          ID_FILE_FETCH_CMD_FILE
+    END
+    POPUP "&Info"
+    BEGIN
+        MENUITEM "&Systeminfo...",              ID_FILE_SYSTEM_INFO
+        MENUITEM "&Uhrzeit",                    ID_INFO_TIME
+    END
+    POPUP "&Optionen"
+    BEGIN
+        MENUITEM "&Report Löschen",             ID_OPTIONS_CLEAR_REPORT
+        MENUITEM "&Einstellungen...",           ID_OPTIONS_SETTINGS
+        MENUITEM "Partielle Übertragung",       ID_OPTION_PARTIAL_TRANSMISSION
+
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über UpdateHandler...", ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "G",            ID_UPDATE_SOURCE_GARNY, VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "Q",            ID_UPDATE_SOURCE,       VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "U",            ID_UPDATE_COMPLETE,     VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_TRENNEN,             VIRTKEY, NOINVERT
+    VK_RETURN,      ID_VERBINDEN,           VIRTKEY, NOINVERT
+    "Z",            ID_UPDATE_ZIEL,         VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONNECTION DIALOG  0, 0, 220, 206
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Verbindung"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_HOST,7,36,206,116,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Wählen Sie die gewünschte Verbindung!",IDC_STATIC,7,7,
+                    136,8
+    LTEXT           "G&egenstationen:",IDC_STATIC_HOST,8,24,53,8
+    DEFPUSHBUTTON   "OK",IDOK,163,166,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,163,185,50,14
+    LTEXT           "&Nutzer:",IDC_STATIC,7,170,24,8
+    EDITTEXT        IDC_NAME,46,167,103,14,ES_AUTOHSCROLL
+    LTEXT           "&Kennwort:",IDC_STATIC,7,188,33,8
+    EDITTEXT        IDC_PASSWORD,46,185,103,14,ES_AUTOHSCROLL
+END
+
+IDD_SEND DIALOG  0, 0, 246, 193
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Senden"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Ziel",IDC_STATIC,7,60,232,101
+    EDITTEXT        IDC_EDIT_FILE_SOURCE,13,71,183,14,ES_AUTOHSCROLL
+    CONTROL         "Installtionsverzeichnis",IDC_RADIO_APPDIR,"Button",
+                    BS_AUTORADIOBUTTON,15,90,152,10
+    CONTROL         "&Root Verzeichnis c:\\",IDC_RADIO_ROOT,"Button",
+                    BS_AUTORADIOBUTTON,15,104,81,10
+    CONTROL         "&Windows Verzeichnis",IDC_RADIO_WINDOWS,"Button",
+                    BS_AUTORADIOBUTTON,15,118,97,10
+    CONTROL         "Windows &Systemverzeichnis",IDC_RADIO_SYSTEM,"Button",
+                    BS_AUTORADIOBUTTON,15,132,123,10
+    CONTROL         "&vollständiger Pfadname",IDC_RADIO_FULL,"Button",
+                    BS_AUTORADIOBUTTON,15,146,105,10
+    GROUPBOX        "Quell - Datei",IDC_STATIC,7,7,232,45
+    LTEXT           "source",IDC_STATIC_SOURCE,13,19,219,8
+    PUSHBUTTON      "Ö&ffnen...",IDC_OPEN,13,31,50,14
+    DEFPUSHBUTTON   "OK",IDOK,129,172,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,189,172,50,14
+    CONTROL         "Gegenstation &neu starten",IDC_CHECK_REBOOT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,134,146,95,10
+END
+
+IDD_TITLE_BAR DIALOG  0, 0, 1024, 14
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Gegenstation:",IDC_HOST,2,2,48,10,SS_SUNKEN
+    LTEXT           "Verzeichnis:",IDC_DIRECTORY,52,2,48,10,SS_SUNKEN
+    LTEXT           "Report:",IDC_REPORT,102,2,48,10,SS_SUNKEN
+END
+
+IDD_SETTINGS DIALOG  0, 0, 175, 89
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Einstellungen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,58,68,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,118,68,50,14
+    CONTROL         "Verbindung nach erfolgtem Update trennen",
+                    IDC_CHECK_DISCONNECT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,7,153,10
+    CONTROL         "Nur bereits existierende Dateien übertragen",
+                    IDC_CHECK_ONLY_EXISTING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,20,152,10
+END
+
+IDD_SYSTEMINFO DIALOG  0, 0, 212, 86
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "System Information"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,155,65,50,14
+    LTEXT           "Prozessor:",IDC_STATIC,7,7,34,8
+    LTEXT           "Static",IDC_TXT_PROZESSOR,77,7,128,8
+    LTEXT           "Windows Version:",IDC_STATIC,7,22,58,8
+    LTEXT           "Hauptspeicher:",IDC_STATIC,7,37,49,8
+    LTEXT           "Static",IDC_TXT_OSVERSION,77,22,128,8
+    LTEXT           "Static",IDC_TXT_MEMORY,77,37,128,8
+    LTEXT           "Software:",IDC_STATIC,7,52,31,8
+    LTEXT           "Static",IDC_TXT_SOFTWARE,77,52,128,8
+END
+
+IDD_SERVICE DIALOG  0, 0, 242, 237
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Service Diskette erstellen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Titel des Services:",IDC_STATIC,7,7,59,8
+    EDITTEXT        IDC_EDIT_SERVICE,7,19,228,51,ES_MULTILINE | 
+                    ES_AUTOHSCROLL
+    CONTROL         "&Update",IDC_RADIO_UPDATE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,7,82,39,10
+    CONTROL         "&Programm ausführen",IDC_RADIO_EXECUTE,"Button",
+                    BS_AUTORADIOBUTTON,65,82,81,10
+    LTEXT           "Dateien:",IDC_STATIC,7,104,28,8
+    PUSHBUTTON      "&Hinzufügen...",IDC_ADD,51,101,50,14
+    PUSHBUTTON      "&Löschen",IDC_DELETE,116,101,50,14
+    LISTBOX         IDC_FILES,7,119,228,72,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,128,216,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,185,216,50,14
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,95,
+                    228,1
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,76,
+                    228,1
+    LTEXT           "Neue Versionsbezeichnung:",IDC_TXT_VERSION,7,197,90,8
+    EDITTEXT        IDC_EDIT_VERSION,108,194,40,14,ES_AUTOHSCROLL
+END
+
+IDD_SETUP DIALOG  0, 0, 236, 162
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Remote Update"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,121,141,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,179,141,50,14
+    LTEXT           "zu sendende Dateien:",IDC_TXT_SEND,7,7,70,8
+    LISTBOX         IDC_LIST_SEND,7,19,108,47,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "gesendete Dateien:",IDC_TXT_SENT,122,7,63,8
+    LISTBOX         IDC_LIST_CONFIRMED,121,19,108,47,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Senden",IDC_BUTTON_SEND,7,70,108,14
+    PUSHBUTTON      "Update Starten",IDC_BUTTON_UPDATE,7,117,108,14
+    LTEXT           "",IDC_TXT_FILE,7,88,222,8
+    CONTROL         "Progress1",IDC_PROGRESS_SEND,"msctls_progress32",
+                    WS_BORDER,7,99,222,14
+END
+
+IDD_CMD_LINE_PARAMS DIALOGEX 0, 0, 240, 50
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Komandozeilenparameter"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,29,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,185,29,50,14
+    EDITTEXT        IDC_EDIT_CMD_LINE_PARAMS,7,8,228,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_WAIT_TIME,67,29,45,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "Wartezeit (ms):",IDC_TXT_WAIT_TIME,5,32,60,8,NOT 
+                    WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CONNECTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 199
+    END
+
+    IDD_SEND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 239
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 186
+    END
+
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 168
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
+    END
+
+    IDD_SYSTEMINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 79
+    END
+
+    IDD_SERVICE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 230
+    END
+
+    IDD_SETUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 155
+    END
+
+    IDD_CMD_LINE_PARAMS, DIALOG
+    BEGIN
+        RIGHTMARGIN, 175
+        VERTGUIDE, 5
+        VERTGUIDE, 235
+        HORZGUIDE, 15
+        HORZGUIDE, 36
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "UpdateHandler"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "UpdateHandler"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+    ID_APP_EXIT             "Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+    AFX_IDS_MDICHILD        "Aktiviert dieses Fenster."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VERBINDEN            "Verbindung herstellen.\nVerbinden"
+    ID_TRENNEN              "Verbindung trennen.\nTrennen"
+    ID_CONNECTION           "keine Verbindung                                   "
+    ID_FILE_RECEIVE         "Empfängt eine Datei der Gegenstation\nEmpfangen"
+    ID_FILE_SEND            "Sendet eine Datei an die Gegenstation.\nSenden"
+    IDS_OPENFILE            "öffne Datei %s"
+    IDS_READFILE            "lese %ld Bytes aus Datei %s"
+    IDS_SENDFILE            "sende Datei %s an %s."
+    IDS_NO_OPENFILE         "Datei %s kann nicht geöffnet werden."
+    IDS_NO_READFILE         "Datei %s kann nicht gelesen werden."
+    IDS_RECEIVEFILE         "empfange Datei %s von %s."
+    IDS_SAVEFILE            "speichere Datei %s von %s unter %s."
+    IDS_FILESAVED           "löscht die Datei\nLöschen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETEFILE          "führt die Datei aus\nAusführen"
+    IDS_DELETEDFILE         "Datei %s auf %s gelöscht."
+    ID_UPDATE_SOURCE        "Legt das Quellverzeichnis der Dateien fest\nQuelle iST"
+    ID_UPDATE_LAUNCHER      "Launcher\nLauncher"
+    ID_UPDATE_EXPLORER      "dated den Explorer ab\nExplorer"
+    ID_UPDATE_PH            "dated den PictureHandler ab\nPictureHandler"
+    ID_UPDATE_SERVER        "Server\nServer"
+    ID_UPDATE_SV            "Systemverwaltung\nSystemVerwaltung"
+    ID_UPDATE_ISDN          "ISDNUnit\nISDNUnit"
+    ID_UPDATE_TCPIP         "SocketUnit\nSocketUnit"
+    ID_UPDATE_DBS           "DataBaseServer\nDataBaseServer"
+    ID_UPDATE_SWCODEC       "SWCodec\nSWCodec"
+    ID_UPDATE_COCO          "CocoUnit\nCocoUnit"
+    ID_UPDATE_MICO          "MicoUnit\nMicoUnit"
+    ID_UPDATE_AKU           "AKUUnit\nAKUUnit"
+    ID_UPDATE_SIM           "SimUnit\nSimUnit"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_NAME                "Name"
+    IDS_SIZE                "Größe"
+    IDS_TYP                 "Typ"
+    IDS_TIME                "geändert am"
+    ID_PROGRESS             "Fortschritt des letzen Befehls"
+    IDP_NO_CONNECTION       "Es konnte keine Verbindung hergestellt werden."
+    IDS_VALUE               "Wert"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DIRECTORY            "Verzeichnis:"
+    ID_FILES                "Dateien:"
+    ID_ACTIONS              "Kommandos/Resultate:"
+    ID_HOST                 "Gegenstation"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UPDATE_GAUNIT        "GAUnit\nGAUnit"
+    ID_UPDATE_COMM          "CommUnit\nCommUnit"
+    ID_UPDATE_FILE          "Sendet eine Datei zur Gegenstation\nSenden"
+    ID_UPDATE_HELP          "dated die Hilfedateien ab\nUpdate Hilfe"
+    ID_UPDATE_COMPLETE      "Komplett\nKomplett"
+    ID_FILE_PROPERTIES      "Zeigt die Eigenschaften an"
+    ID_OPTIONS_CLEAR_REPORT "löscht die Protokollierung der letzten Befehle"
+    ID_OPTIONS_SETTINGS     "bearbeitet die Einstellungen"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_SYSTEM_INFO     "Systeminformation\nSysteminformation"
+    ID_INFO_TIME            "Uhrzeit\nUhrzeit"
+    ID_UPDATE_SOURCE_GARNY  "legt das Quellverzeichnis für Garny fest\nQuelle Garny"
+    ID_UPDATE_ZIEL          "legt das Zielverzeichnis alle kopierten Dateien fest\nZielverzeichnis"
+    ID_UPDATE_SDIUNIT       "SDIUnit\nSDIUnit"
+    ID_UPDATE_SOCKET        "SocketUnit\nSocketUnit"
+    ID_CONNECT_LOCAL        "Stell die Verbindung zu lokalen Station her."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CONNECTION_RESET     "Server Reset"
+    IDS_EXECUTE_CMD_LINE    "Kommandozeile ausführen"
+    ID_FILE_EXECUTE_CMD_LINE 
+                            "Führt eine Kommandozeile aus und überträgt die Ausgabe in das Reportfenster\nKommandozeile"
+    ID_OPTION_PARTIAL_TRANSMISSION 
+                            "Überträgt sehr große Dateiinformationen in mehreren Portionen."
+    ID_FILE_FETCH_CMD_FILE  "Holt eine Komandozeilendatei manuel ab."
+    ID_REG_EDIT             "Ändert den Registrywert.\nÄndern"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\UpdateHandler.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,32 @@
+/////////////////////////////////////////////////////////////////////////////
+// FILE:		$Workfile: SDIConfig.cpp $
+// ARCHIVE:		$Archive: /Project/SDIConfig/SDIConfig.cpp $
+// CHECKIN:		$Date: 20.11.97 13:37 $
+// VERSION:		$Revision: 5 $
+// LAST CHANGE:	$Modtime: 20.11.97 13:37 $
+// BY AUTHOR:	$Author: Georg $
+// $Nokeywords:$
+
+//
+// SDIConfig.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+WK_VERSION(13, 12, 11, 22, "13/12/99 , 11:22\0", // @AUTO_UPDATE
+"SDIUnit.exe\0",	// exe name
+"SDIUnit\0",	// product name
+"SDIUnit Application\0",	// product description
+"3.1\0",		// general product version
+"3.100\0"	// real version
+)
+
+/////////////////////////////////////////////////////////////////////////////

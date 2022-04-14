@@ -1,0 +1,14 @@
+#
+#  build instructions for the mico video capture driver
+#
+
+TARGETNAME=mico
+TARGETPATH=$(BASEDIR)\lib
+TARGETTYPE=DRIVER
+
+TARGETLIBS=$(BASEDIR)\lib\*\$(DDKBUILDENV)\vckernel.lib
+
+INCLUDES=..\Inc; ..\Vckernel
+#INCLUDES=d:\project\nttreiber\micosys\Inc; d:\project\nttreiber\micosys\Vckernel
+
+SOURCES=mico.c

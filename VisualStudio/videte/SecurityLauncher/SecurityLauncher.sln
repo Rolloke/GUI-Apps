@@ -1,0 +1,60 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SecurityLauncher", "SecurityLauncher.vcproj", "{70783954-258D-4424-B3FD-DDCBA8AF2ECD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849} = {58BCEE5A-7096-4C01-874B-8E8207EEB849}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SecurityLauncherDll", "SecurityLauncherDll\SecurityLauncherDll.vcproj", "{58BCEE5A-7096-4C01-874B-8E8207EEB849}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectName0 = \u0022$/Project/SecurityLauncher\u0022,\u0020ZDKAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {F46F507E-AB4F-4843-92BB-CA6DD633B69E}
+		SccProjectUniqueName1 = SecurityLauncher.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = SecurityLauncherDll\\SecurityLauncherDll.vcproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection2 = SecurityLauncherDll\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Enu = Enu
+		Ita = Ita
+		Release = Release
+		Rus = Rus
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Debug.ActiveCfg = Debug|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Debug.Build.0 = Debug|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Enu.ActiveCfg = Enu|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Enu.Build.0 = Enu|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Ita.ActiveCfg = Ita|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Ita.Build.0 = Ita|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Release.ActiveCfg = Release|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Release.Build.0 = Release|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Rus.ActiveCfg = Rus|Win32
+		{70783954-258D-4424-B3FD-DDCBA8AF2ECD}.Rus.Build.0 = Rus|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Debug.ActiveCfg = Debug|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Debug.Build.0 = Debug|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Enu.ActiveCfg = Enu|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Enu.Build.0 = Enu|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Ita.ActiveCfg = Ita|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Ita.Build.0 = Ita|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Release.ActiveCfg = Release|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Release.Build.0 = Release|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Rus.ActiveCfg = Rus|Win32
+		{58BCEE5A-7096-4C01-874B-8E8207EEB849}.Rus.Build.0 = Rus|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

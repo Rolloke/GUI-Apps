@@ -1,0 +1,380 @@
+13.04.04 GF	- Bugfix: CollMenuMAnager nicht mit MFC 7.1
+04.03.04 RKE- Wurfanker fuer die Audiouebertragung. Bestaetigt die Gegenstation die Audiosamples nicht, so wird dies gemeldet und gefragt,
+              ob die Ausgabe reaktiviert bzw. die Wiedergabe bendet werden soll .
+04.03.04 RKE- Bugfix DTS 933: Beim rechtsklick auf eine Kameracheckbox wird bei dts explizit nur output unckecked
+              Bei Idip sind die Eintraege im Baum gruppiert.
+25.02.04 RKE- Bugfix DTS 897: Gegesprechen flag wird auch StopAny geloescht.
+25.02.04 RKE- Bugfix 859: Mikros der anderen Gegenstationen werden jetzt grau hinterlegt, wenn schon eine lauscht.
+25.02.04 UF - Bugfix Nr.898 Aufloesung Grob Fein fuer DTS aus dem Menu genommen, geht ja nicht.
+25.02.04 GF	- AUf Unicode und VS_71 umgestellt
+23.02.04 RKE- Englische resource upgedatet.
+19.02.04 RKE- Der Audioserver verhindert jetzt, das 2 Clients gleichzeitig eine Durchsage machen koennen.
+              Der Client wird dan benachrichtigt und beendet die Verbindung.
+19.02.04 RKE- Bugfix dts 858: CIPCMediaRecord war noch nicht richtig initialisiert, da die lokale CIPC-Verbindung (Master) sich wie ein
+              Server verhalten muss.
+10.02.04 RKE- Bugfix dts 857: siehe 858.
+19.02.04 RKE- Bugfix dts 865: das CIPC Objekt hatte leeren Documentpointer
+12.02.04 GF	- Bugfix idip 845, 846, DV 843: Bei leerem Baum führt Menüaufruf von Audio zum GP
+03.02.04 UF - Neuer Bugfix Vision erlaubt jetzt auch Audioverbindungen zu DTS.
+02.02.04 UF - Bugfix Vision erlaubt jetzt auch Audioverbindungen zu DTS.
+02.02.04 RKE- Bugfix 822: Icon fuer disabled AudioIn eingefuegt im TreeView. Die Mikrofone von exteren Stationen werden disabled,
+              wenn die Audioausgabe auf dem eigenen System schon benutzt wird.
+28.01.04 RKE- Steuerung der Audioverbindung durch anhaken im Treeview korrigiert.
+28.01.04 RKE- Erkennung der Groesse von JPEG bildern verbessert
+26.01.04 TKR- Kamerakarte: Bei Kameras, Relais und Meldern wird nun auch die dazugehörige
+			  Gegenstation im Tooltip (MouseOver) angezeigt. Z.B. "Jacob1Kam2@QS-Rechner-226"
+26.01.04 TKR- Bugfix 803: Kamera- und Hostkarte lassen sich jetzt wieder bearbeiten.
+26.01.04 RKE- Subclassing fuer HTMLWindow fuer alle OS ausser WinNT40 enabled
+22.01.04 RKE- Icon fuer disabled AudioOut eingefuegt im TreeView.
+22.01.04 RKE- Bugfix 788: Bei den Relais wurde noch ein Invalidate() eingefügt.
+22.01.04 RKE- Bugfix 791: Die Updatefunktionen und Komandofunktionen der MenuItems haben nicht zwischen Input und Output unterschieden
+                          Dadurch entstanden viele Fehler mit merkwuerdigen Auswirkungen. Ist jetzt besser.
+19.01.04 RKE- Bugfix 746: Das Kontextmenü der Karten soll eine Funktion exklusiv auf zweitem Monitor anzeigen bekommen.
+						  'Exklusiv' kann jetzt auf beiden Monitoren angeklickt werden. Aber erst, wenn der bevorzugte Monitor gewählt wurde.
+16.01.04 GF	- Bugfix 737: Kamerakarte: Ein am rechten oder unteren Rand tw. außerhalb liegendes Element wird bei einer
+						  Statusänderung (z.B. Relais schließt/öffnet) nicht komplett in den sichtbaren Bereich gescrollt
+16.01.04 RKE- Bugfix 748: Ist lokal kein Mikro bzw Lautsprecher angeschlossen/eingerichtet, sollte die Funktionalität
+                          auf den Kontextmenüs und überhaupt disabled sein
+16.01.04 RKE- Bugfix 755: Der 'Map'-Button erscheint erst nach Neustart von Vision.
+                          Das ToolbarIcon wird jetzt auch ohne Karte schon angezeigt.
+16.01.04 RKE- Bugfix 763: Die Clients dürfen nicht gleichzeitig auf die Audiounit abspielen, auch remote nicht. Es dürfen auch nicht mehrere Mikrofone in Vision angeklickt werden können.
+15.01.04 RKE- Bugfix 750: Die Kamerakarte einer Gegenstation zeigt falsche Symbole und aktualisiert deren Status nicht.
+                          Da auf der lokalen Karte unterschiedliche Gegenstationen angezeigt werden können, so mußten Elemente mit gleicher ID auf
+						  unterschiedlichen Gegenstationen identifiziert werden. Auf den externen Karten war diese ID noch nicht vorhanden.
+15.01.04 GF	- Bugfix 744: Die Anwahlkarte in Vision schließt nicht nach Anwahl einer Station
+14.01.04 GF	- Bugfix 709: GP in der PTUnit bei Aufwahl auf B3-Box
+						  Vision fetcht nur noch Audi, wenn CServer::CanAudio()
+13.01.04 RKE- Bugfix 728: DVRT\Debug\TestHTMLEditor = 1 Registrykey nicht mehr nötig
+12.01.04 GF	- Bugfix 734: Nicht selektierte Map-Elemente unter der Scrollbar führen bei Doppelklick dort auf die Scrollbar zur Access Violation
+			- HTMLWindow Berechnung des Clientbereiches bezüglich der Scrollbar verbessert
+09.01.04 GF	- Bugfix 729: Relais lassen sich auf der Kamerakarte per Doppelklick schließen aber nicht wieder öffnen
+09.01.04 GF	- Bugfix 726: Wenn im 1 plus modus die Kamerakarte "klein" ist und man dann mit den Pfeiltasen nach oben scrollt,
+						  springt die Kamerakarte in die "großansicht"
+09.01.04 GF	- Bugfix 718: Wennn bei minimierter Kamerakarte manuell "gescrollt" wird, wird das jeweilige makierte Relais
+						  in der Kamerakarte geschlossen und geöffnet. Dieses erfolgt nach doppeltem Klicken auf die -> Pfeiltaste
+						  Geht in alle richtungen
+08.01.04 GF	- Bugfix 715: Beim Öffnen einer Kameraumschaltung kommt jetzt die Meldung, ob die Einstellung auch überschrieben werden soll
+07.01.04 GF	- Bugfix 650: Beim Überschreiben einer Kameraumschaltung (exportieren) erscheint keine Hinweismeldung.
+15.12.03 UF - Bugfix Audiodecoding
+09.12.03 RKE- Bugfix 652: Relais ueber Doppelklick schaltbar. Andere Doppelklickfunktionen auf das HTML Fenster testen.
+09.12.03 RKE- Bugfix 656: Zoom funktioniert wieder, bitte Positionen nach dem Aendern des Zoomfaktors pruefen.
+08.12.03 RKE- Bugfix 651: Tooltip-Änderung jetzt sofort zu sehen.
+08.12.03 RKE- Bugfix 653: GP Null Pointer Variable Selection wurde auf NULL gesetzt.
+08.12.03 RKE- Bugfix 654: Tooltips für neue Elemente eingefügt
+05.12.03 RKE- Audio Kontrollelemente an Benutzerwuensche angepasst
+26.11.03 GF	- Bugfix 636: Ein bereits eingebautes Bild kann weder gelöscht noch ausgetauscht werden.
+25.11.03 GF	- Bugfix 637: Vision merkt sich den Ordner der Map-Images in der Registry
+25.11.03 GF	- Bugfix 635: JPG-Bilder können bei der Kartenerstellung nicht geöffnet werden
+25.11.03 GF	- Bugfix 642: Sind mehrere HTML-Fenster geöffnet und wird eines davon geschlossen,
+						  so wird immer das zuerst geöffnete Html-Fenster geschlossen
+20.11.03 GF	- Bugfix 598: Akustische Alarmmeldung funktioniert nicht, seitdem die Soundkarte enabled ist
+14.11.03 GF	- Bugfix 611: Mit Button F8 ist kein Wechsel zur 4x4 Ansicht moeglich
+10.11.03 UF - Bugfix Nr. 613 Savicbilder werden jetzt als JPEG abgespeichert.
+04.11.03 UF - Bugfix Nr. 603 Referenzbilder werden jetzt nicht mehr verzerrt angezeigt.
+04.11.03 UF - Bugfix Nr. 604 Keine Referenzbilder bei Savic, JPEG Kompression fehlte.
+04.11.03 UF - Bugfix Nr. 605 Meldung bei fehlenden Referenzbildern war weg
+03.11.03 RKE- Audio kann durch den Dongle aktiviert werden.
+			  Die HTML Seiten sind aktiv. Das Editieren der HTML Seiten kann durch den Registry-
+			  eintrag: DVRT\Debug REG_DWORD: TestHTMLeditor = 1 aktiviert werden.
+30.10.03 GF	- Bugfix 597: Bei Doppelclick auf Titelzeile bei Multi-Monitor werden die Fenster nicht korrekt dargestellt
+						  Workaround:
+						  Die dort hinterlegte Funktion "View1" ist im Multi-Monitor-Betrieb disabled worden,
+						  da die Menü-Punkte und Toolbar-Buttons entsprechend disabled sind
+21.10.03 GF	- Bugfix 593: FetchAudio darf erst ab Server-Version 4.7 erlaubt sein
+			- Bugfix 590: Zu versteckende Nicht-Displayfenster werden bei 1x1 Ansicht nicht ausgeblendet
+			- Bugfix 591: Werden Nicht-Displayfenster angezeigt, führt die manuelle Umschaltung von 4x4 auf 3x3 (falls enabled) zur Access Violation
+15.10.03 GF	- Bugfix 585: Im PTZ Steuerungsdialog werden nach Verwenden von "Speichern" alle Elemente enabled,
+						  auch wenn einige Funktionen eigentlich nicht unterstützt werden     
+			- Bugfix 587: Der Geschwindigkeits-Slider hat keine Auswirkung, wenn man die Pan/Tilt-Buttons verwendet
+13.10.03 RKE- Audio Duplexverbindung eingebaut.
+08.10.03 RKE- Bugfix 574: Zweite Station kann wieder angewählt werden.
+			  Die Audio verbindung kann jetzt im Release durch den Registry Key
+			  HKLM/Software/dvrt/Debug/: REG_DWORD  TestAudioConnection = 1 aktiviert werden.
+02.10.03 GF	- Bugfix 557: Bei Umschalten in 1plus wird immer die ertse Kamera groß, nicht die aktuelle Kamera
+02.10.03 RKE- Audio Kontrollelemente wurden in Vision eingefügt.
+              die CIPC-Verbindungserkennung für Audio funktioniert vorerst nur
+			  in der Debug Version!
+02.10.03 GF - Kamerakarten wurden deaktiviert!
+02.10.03 GF	- Bugfix 570: Bei 2 Monitor-Betrieb ist die Reihenfolge der nicht explizit zugewiesenen Kameras nicht in Ordnung
+09.09.03 Gf	- Bugfix 622: Bei "Verbindung - Optionen": "bei Alarmverbindungen" statt "bei Alarm"
+03.09.03 RKE- Icons statt Bitmaps für Left, Right, Up, Down
+27.08.03 GF	- Bugfix 520: Der Wechsel von der 1plus-Darstellung direkt zur 4x4 Darstellung über Toolbar-Button geht nicht
+			- Bugfix 519: Die Einsortierung der lokalen Kamerabilder ist falsch bei mehreren Verbindungen und gleicher KameraID
+20.08.03 GF	- Kleine Englisch Korrekturen
+25.07.03 GF	- Vision unterstützt bei idip lokal VideoOut-Prozesse mit dem CommandActiveWindow
+14.07.03 RKE- bugfix 492: Bilder werden jetzt auf dem 2. Monitor angezeigt.
+              Bitte prüfen, ob die Darstellungsarten (abhängig von der Anzahl der Bilder)
+			  sinnvol sind.
+14.07.03 RKE- bugfix 494: Vision wird automatisch auf den freien Monitor verschoben.
+09.07.03 GF	- bugfix DV-738: Reihenfolge der Gegenstationen im Tree
+03.07.03 GF	- Bugfix 490: Taste F8 verursacht GP in Adresse 00421cb3 INT_DIVIDE_BY_ZERO bei Dual-Monitor
+17.06.03 UF - Bugfix Server ID's evtl. doppelt
+16.06.03 UF - Bugfix Bei Waechterrundgaengen, die ins Timeout beim Verbindungsaufbau fuehren,
+			  wurde der Server nicht richtig zerstoert.
+06.06.03 GF	- Bugfix 711 + 721: 1x1 Button und 4x4 Button: Funktion überarbeitet
+05.06.03 RKE- Titelzeile der Smallwindows jetzt auch abschaltbar.
+05.06.03 RKE- Bugfix 590: Sortierung korrigiert
+05.06.03 UF - Bugfix Abbruch der Waechterrundgange und Timeout waren nicht OK
+27.05.03 RKE- Bugfix 460/461 Gegenstationen und Kameras nach HostID sortieren
+26.05.03 GF	- Bugfix 467: LoginTimeout zu schnell
+			- Bugfix 466: GP in der Uniklinik 0x00410c20, CMDConfigDialog in CDisplayWindow wurde nicht destroyed
+06.05.03 GF	- Bugfix 703: Solange der Connection-Dialog geöffnet ist, werden keine Alarmanrufe angenommen
+22.04.03 UF - Bugfix 440 und 446 Exklusiv war falsch und GP behoben
+12.04.03 UF - Bugfix Autologout bei Alarmverbindungen, wenn das nur fuer die Station eingestellt ist.
+11.04.03 UF - Bugfix Bei jedem Trennen wurde der Fullscreen ausgeschalten, soll aber nur beim letzten
+09.04.03 UF - Bugfix Nr 416 1-plus Modus fuer Waechterrundgang.
+			  Das automatische Trennen laesst sich jetzt pro Gegenstation einstellen
+08.04.03 UF - Zwei Monitor Unterstuetzung bei DTS ausgeschaltet.
+26.03.03 GF	- Bugfix 389: DisplayWindow CloseSmall hat im Non-Fullscreenmode keine Funktion
+24.03.03 UF - Änderungen betreffen DisableSmall rückgängig gemacht
+21.03.03 GF	- Bugfix 360: Alarm-Fenster schließen als Flag CloseAlarmWindow in der Registry fuer Bezold
+			- RegistryFlag DisableSmall in DisableSmallDisplay geaendert
+			- DisableSmallDisplay nicht mehr an Fullscreen gekoppelt - betrifft Touchscreen allgemein, nicht nur Bezold
+14.03.03 GF	- Bugfix 340: Beim Trennen einer Verbindung wird im Quadmodus nur um eine Quadstufe runtergeschaltet,
+						  nicht auf die nur max. benötigte Fensterzahl. 
+			- Bugfix 341: Bei 1:1 Darstellung und Umschaltung zwischen Vollbild und 1plus werden in den kleinen
+						  Fenstern nur Ausschnitte des 1:1 Bildes dargestellt.
+			- Bei 1x1, 1:1 und zu kleinem Vision-Fenster wurde das Bild zu groß dargestellt => Flackern in der Titelleiste
+10.03.03 UF - zwei neue Schalter in der Registry DisableZoom und DisableSmall fuer Bezold, damit
+              kann man den Zoom abschalten und die kleinen Toolbars im Vollbildmodus.
+05.03.03 GF - Der Sony DOM (Visca Protocol) kann jetzt die Positionen ueber Vision setzen.
+27.02.03 UF - Bugfix Nr. 323 und 324 Bei der Benutzung der Anwahlkarte gibt es einen GP,
+			  Beim Aufnahmeknopf drücken erscheint ein Fragezeichen
+25.02.03 GF	- erneuter Bugfix 319: S/N-Menü oder -Dialog bietet nicht alle möglichen Funktionen bei Alarmanrufen
+20.02.03 GF	- Bugfix 319: S/N-Menü oder -Dialog bietet nicht alle möglichen Funktionen
+			- Bugfix 320: 1Plus-Darstellung und 1x1 Darstellung bei mehreren Kameras mit Sequenzer überarbeitet
+19.02.03 GF	- Bugfix DTS-Receiver 255: Vollbild durch Doppelclick funktioniert bei 1Plus nur einmal
+			- Doppelte Resource-IDs geaendert, da ein falscher Tooltip angezeigt wurde
+18.02.03 UF - Dialog Einstellungen hinzugefuegt.
+17.02.03 TKR- "Vollbild zu Beginn" wurde eingebaut
+04.02.03 UF - Bugfix Nr 691 ISDN Bilder zu DTS liefen nicht.
+04.02.03 UF - Bugfix Nr 689 Bei Doppelklick wurde das falsche Fenster gross und bei 1 plus ging es gar nicht.
+03.02.03 UF - Bugfix Nr 685 der DTS Receiver zeigte nur Bilder einer Kamera fortlaufend.
+03.02.03 UF - 1 plus Modus eingebaut.
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CIPCControl::OnRequestSetValue()
+			  - 
+31.01.03 GF	- Bugfix: Doppelte Alarmverbindungen
+17.01.03 UF - Bugfix Nr 303 Zoom der Savic Bilder lokal ging nicht.
+10.01.03 GF	- PIN wird - wenn beim Host als erforderlich markiert - vom Host übernommen oder per Dialog abgefragt
+05.12.02 UF - Bugfix H.263 Uebertragung DTS
+21.11.02 GF	- Anpassung VS_70, Fehlerfrei
+21.11.02 GF	- Anpassung VS_70, aber noch Fehler vorhanden
+31.10.02 GF	- Bugfix 289/290: Kontextmenü wirkt jetzt auf die gewählte Kamera
+11.10.02 UF - Bugfix H263 Decoder in Critical Section engepackt, um GPs zu vermeiden.
+03.10.02 UF - Bugfix Es gab einen GP, wenn JPEG Bilder faelschlicherweise vom Server kamen
+			  und diese an den H.263 Decoder geschickt wurden.
+09.09.02 UF - Bugfix Nr 258 Server Prozess wurde abgeschaltet, wenn eine Kamera in Vision
+			  ausgeschaltet wurde.
+06.09.02 UF - Beim JPG Dekodieren werden jetzt Bilder weggeschmissen, wenn
+			  gerade ein Bild dekodiert wird. So entsteht kein Decoderstau.
+06.09.02 UF - Endlosschleife beim Sequencer und nur einer Kamera.
+			  Bugfix Nr. 249
+03.09.02 UF - Bugfix Beim Umschalten mit der rechten Maustaste wurde die Kamera
+			  nicht sofort eingeschaltet, sondern erst nach dem 15 Sekunden timeout
+28.08.02 UF - Bugfix Nr. 227 GP bei offener Kamerakarte und umschalten des Anzeigemodus.
+28.08.02 UF - Bugfix Nr 203 und 215 Bei Sequencerzeit von 1s wurden die Bilder nicht aktualisiert
+26.08.02 UF - Bugfix 207: Bei Sequencerzeit von 1s wurden die Bilder nicht aktualisiert
+			  Beim Beenden von Vision werden jetzt vorher alle Verbindungen getrennt und
+			  die Bildanforderungen gestoppt.
+22.08.02 GF	- Bugfix 113: Sequenzerzeit wird bei Start immer auf 5 s gesetzt
+20.08.02 GF	- Bugfix 117: Referenzbild speicher/zeigen wird erst nach erneutem Verbinden freigegeben
+				- DisplayWindow: OutputRecord wird upgedatet
+				- ObjectView: Namen von Inputs und Outputs werden upgedatet
+13.08.02 GF	- Bugfix 195: Bei der TCP- Übertragung kann max. 1fps angewählt werden.
+08.08.02 UF - Sequencer und Umschaltung der Kameras umgebaut.
+		 GF	- VideoSNDialog: Tooltips verpasst, Turn180 Icon geändert
+23.07.02 UF - idip Bugfix Nr. 161 bei Alarmaufschaltung gab es einen GP
+10.07.02 GF	- S/N-Steuerung um Preset-Speicherung erweitert, z.Z. nur für VCL implementiert
+13.06.02 GF	- Build configuration um Ita und DtsIta erweitert
+05.06.02 UF - Bugfix die Bildraten koennen fuer idip H263 nicht richtig eingestellt werden
+16.05.02 UF - Bugfix Nr 205 und 210
+15.05.02 TKR - Bugfix Nr. 209 Umschaltung von 4x4 auf 5x5 funktioniert nun korrekt beim 17. Bild. Ebenso
+			   beim 25. und 37. Bild usw. (ging vorher auch nicht).
+10.04.02 UF - Bugfix MD Maske geht jetzt auch ueber ISDN und nur noch fuer MD Kameras.
+30.04.02 UF - Vision merkt sich jetzt auch pro Gegenstation und Nutzer die Aufloesung, 
+			  mit der die Bilder angefordert werden.
+18.04.02 UF - Die schnelle Bilduebertragung DTS ueber ISDN funktioniert jetzt richtig.
+04.04.02 UF - Bugfix Art der Verbindung bei Alarm wird jetzt richtig angezeigt.
+04.04.02 UF - Bugfix PIN wird bei Alarmverbindungen nicht mehr in die Logdatei geschrieben.
+23.01.02 UF - Bugfix Versionsnummer fuer Remote Aktivitaetsmaske
+17.01.02 UF - einige Bugfixes Aktivitaetsmaske
+17.01.02 UF - Die permanente Activitaetsmaske laest sich jetzt auch von Vision aus
+			  einstellen.
+09.01.02 UF - Bugfix: GP beim Login
+26.10.01 UF - Bugfix: Bei alle Kameras zu Beginn wurde die Umschaltung nicht eingeschaltet.
+24.10.01 UF - Bugfix: PIN wird jetzt bei Teleobserver Verbindungen angefragt.
+23.10.01 UF - Bugfix: Demo Version Autologout
+22.10.01 UF - Im Demo Modus ist die Verbindungszeit auf 10 Minuten beschränkt.
+18.10.01 UF - Die Sequencerzeit wird jetzt pro Nutzer abgespeichert.
+			  Die Sequencerzeit wird jetzt mit den Kameras abgespeichert.
+16.10.01 UF - Bugfix Anzeige Speicherung in Statuszeile
+15.10.01 UF - Bugfix DTS Ueberfluessigen Separator entfernt
+26.07.01 GF	- Bugfix: CServer::Connect 
+				Die Parameter werden als Referenzen auf Member von CHost übergeben
+				Das HostArray wird jedoch bei Aufruf von GetHosts() gelöscht und neu angelegt,
+				dabei werden die Referenzen gekillt!
+18.07.01 RM - Erweiterung der MNO Melderdeaktivierung um folgende Features:
+			  a)Begrenzung jeder Zeitspanne auf max. 10 Stunden
+			  b)Begrenzung des Startpunktes einer Zeitspanne auf den gleichen Tag
+		 GF	- MNO Melderdeaktivierung:
+				Flag Zeitliche Deaktivierung erlaubt wird berücksichtigt,
+				und der Menüeintrag entsprechend enabled/disabled
+09.05.01 UF - Der Speichern Button verwandelt sich jetzt in einen Stop Button
+			  und umgekehrt.
+08.05.01 GF	- Nur Kommentare: // GF todo m_SmallWindows.Lock(); für weitere GP-Behebung 
+03.04.01 GF	- Bugfix: Sequenzer bei DTS erst ab 4 s (Menüeinträge 1-3 s entfernt)
+					  Jetzt auch im Kamera-Menü entfernt
+			- Bei Verbindungsaufbau wird auf die erste fehlerfreie Kamera geschaltet
+			- Bugfix: Bei Darstellung im kleineren XxX View als Kameras ge-checked
+					  und hinzufügen einer Kamera war die Darstellung fehlerhaft, korrigiert
+02.04.01 UF - Die Sequencerzeit beträgt jetzt defaultmaessig 5 Sekunden.
+29.03.01 GF	- Fehlermeldung "Ungültige Lizenznummer" eingebaut
+			- Sequenzer bei DTS erst ab 4 s (Menüeinträge 1-3 s entfernt)
+28.03.01 GF	- Bugfix: Bildumschaltung/-anforderung für DTS über ISDN
+16.03.01 UF - Vision kann im DTS Empfänger jetzt nicht mehr Kontrast Helligkeit
+			  und Farbe regeln
+14.03.01 UF - Sequencer Laden/Speichern für DTS Receiver entfernt
+01.03.01 GF	- Bugfix: Sequenzer überarbeitet, Aktivierung der Kameras überarbeitet
+28.02.01 GF	- Die aktiven Kameras werden alle 10 s überprüft,
+				ob die letzte Bildanforderung länger als 5 s her ist,
+				dann wird erneut angefordert
+			- Der Sequenzer ist jetzt nur bei mindestens 2 aktiven Kameras erlaubt
+				und wird bei Unterschreiten dieser Anzahl abgeschaltet
+27.02.01 GF	DTS Version Popup-Menü Referenzbild speichern und anzeigen entfernt
+23.02.01 TKR- Zoomen nur noch 3 mal nacheinander, dann wieder Originalgröße. 
+			  Lupe als Cursor. 
+12.02.01 UF - MD Kreuze werden jetzt angezeigt, DTS version aufgeräumt
+07.02.01 UF - neue Konfiguration Dts und DtsEnu ohne PTDecoder und H.263 Decoder
+02.01.01 GF	MNO Spezial Zeitliche Melderdeaktivierung
+			- Nur ein Dialog zur gleichen Zeit erlaubt
+			- Kein Request GetAlarmOffSpans, wenn Dialog offen
+28.12.00 GF	m_ActiveWindows in CVisionView locked/unlocked, da GP bei Verbindungsabbau möglich
+27.12.00 GF	Bugfix im Dialog Zeitliche Melderdeaktivierung
+				Zeiten des ersten Melders werden jetzt bei Aufruf richtig angezeigt
+21.12.00 GF	- Bugfix MNO Spezial, der Melderstatus wurde nicht korrekt angezeigt
+				- DoRequestValue wurde in Feature (bei Connect) und Status gesplittet
+				- Clients werden bei ServerReset informiert
+			- Dialog Zeitliche Melderdeaktivierung überarbeitet (Benutzerfreundlicher gestaltet)
+14.12.00 UF - Im Dialog für die zeitliche Deaktivierung der Melder
+			  für MNO den Kalender auf SpinControl umgestellt.
+04.12.00 GF	SpecialReceiver Version:
+			- Bei 1x1 bleibt das Bild der gewählten KAmera jetzt im Vordergrund
+01.12.00 ML - 'CMicoWindow::GetPictureSize()' ermittelt das Bildformat nun nicht mehr aus dem PictureRecord,
+			  sondern aus dem dekodiereten Jpegbild. Dies ist notwendig, weil die bisherige
+			  Routine (GetJpegSize) immer von einem Halbbild ausgeht und deshalb die doppelte
+			  vertikale Größe zurückliefert. Bei 'RESOLUTION_LOW' wird diesen dann wieder halbiert.
+			  In Zunkunft sollen aber auch kleinere Bildgrößen (Zur ISDN-Übertragung) dargestellt werden.
+01.12.00 UF -Bugfix Redraw Livebild
+22.11.00 GF SpecialReceiver Version:
+			Bugfix: Nach Ausschalten des Sequenzers werden die aktuellen Kameras von
+				ISDN-Verbindungen jetzt weiterhin aktualisiert
+21.11.00 GF	SpecialReceiver Version:
+			- Bei Netzwerk-Verbindung werden alle sichtbaren Kameras laufend aktualisiert
+				Der Sequenzer ist wirkungslos
+			- Bei ISDN-Verbindungen wird entweder nur die aktive Kamera laufend
+				oder entsprechend den Sequenzer-Einstellungen aktualisiert
+17.11.00 GF	SpecialReceiver version erweitert:
+			- Melder und Relais werden im Tree nicht mehr angezeigt (nur Root-Entry)
+			- Melder und Relais werden im Popup-Menu nicht mehr angezeigt
+30.10.00 GF	SpecialReceiver version eingebaut:
+			- Kein Login beim Start
+			- Eingabe der PIN bei Verbindung
+12.04.00 UF Es können jetzt auch Bilder von DTS
+			mit zwei Karten empfangen werden.
+11.04.00 GF	Verbindungsaufbau kann abbrochen werden
+18.02.00 ML Bugfix: Der Zoom funktioniert nun auch an den Rändern korrekt.
+19.10.99 UF Zoom out Funktion für die IJL eingeführt.
+04.9.99 ML Die Anzahl der Gegenstationen im Verbindungsmenü auf 9 begrenzt, da Hex-Zahlen
+		   nicht ins GUI gehören.
+30.9.99 ML Beim Verbindungsaufbau wird der Status aller Melder, Relais und Kameras übermittelt.
+30.9.99 ML Relais und Kameras werden nun 'confirmiert'
+28.9.99 ML Alarme werden nun an die GEMOS-Unit wetergereicht.
+23.9.99 ML In 'CIPCControl::OnRequestSetValue' einen relay-zweig eingefügt, funktioniert
+		   aber noch nicht.
+23.9.99 ML GEMOS Relay-Kommando hinzugefügt.
+22.9.99 ML Zooming und scrolling für MiCo, CoCo und PT implementiert.
+
+2.8.99 >>> UpdateVersion um 13:04 <<<
+02.08.99 UF Mpeg Encoder Stop beim Coco auch bei letzter ausgeschalteter
+			Kamera
+2.8.99 >>> UpdateVersion um 10:09 <<<
+02.08.99 UF Mpeg Encoder Stop beim Coco
+
+20.7.99 ML - Die Uhrzeit beim CoCo mit Hardwaredecoding wurde nicht aktualisiert:
+		     Lösung: Siehe Änderung in CCocoWindow::OnDecodeVideo
+		   - Bei CoCo/Megra Betrieb werden in der Mehrbilddarstellung immer alle
+		     Bilder immer im gleichen Fenster dargestellt. (Beim Softwaredecoding geht's)
+		     Lösung: Siehe Änderung in CVisionView::PictureData und CCocoWindow::OnDecodeVideo
+		   - Bei Verwendung des Hardwaredecodings, kann derzeit nur ein Datenstrom korrekt
+		     dekodiert werden.
+		   - Die CoCo-Clientprozesse werden nicht beendet, wenn die CoCo-Kamera aus-
+		     geschaltet werden. Dadurch wurden CoCo-Speicherprozesse gestoppt, und nie
+			 wieder gestartet.
+			 Lösung:  CIPCOutputVision::UnrequestPictures
+14.7.99 ML GP in CVisionView::GetActiveDisplayWindow() bei Verbindungsabbruch
+		   von der PT-Box:
+8.7.99 >>> UpdateVersion um 10:24 <<<
+
+5.7.99 >>> UpdateVersion um 16:31 <<<
+05.07.99 - UF zur Anzeige von Nachrichten (nur Text) und Referenzbildern
+		   ist der IE nicht mehr notwendig, nur noch für die
+		   Anwahlkarten
+30.04.99 - UF Referenzbilder lassen sich jetzt auch Remote abspeichern.
+		 - UF MAP Technologie eingeführt.
+8.4.99 >>> UpdateVersion um 17:49 <<<
+08.04.99 - UF Bugfix Doppelklick auf Relaisitem führt nicht mehr
+		   zu einem GP
+7.4.99 >>> UpdateVersion um 13:56 <<<
+07.04.99 - Bugfix Sequencer
+
+19.2.99 >>> UpdateVersion um 14:15 <<<
+	UF - Speicherung der Referenz Bilder
+		 unter c:\dvrtwww\hostid\camid.jpg
+// history.txt
+
+29.12.98 >>> UpdateVersion um 12:37 <<<
+
+3.9.98 >>> UpdateVersion um 13:51 <<<
+	UF	- Cool Menu
+21.7.98 >>> UpdateVersion um 13:50 <<<
+	UF  - Einstellungen Dialog
+		- Bugfixing Mico
+	UF	- Performance Verbesserung im Fullscreen
+		- Beseitigung von Redraw Bugs
+18.6.98 >>> UpdateVersion um 15:42 <<<
+	UF	- Bug beim Beenden vom CocoSoftDecoder behoben
+		- F9 FullScreen Modus
+17.6.98 >>> UpdateVersion um 16:26 <<<
+	UF	- rechte Maustaste im HTML weg
+		- dafuer muss das Internet Client SDK installiert sein
+	UF	- GetWWWDirectory mit Zeitstempel
+		  die empfangene Datei erhaelt den Zeitstempel
+		  der Datei des Senders
+15.6.98 >>> UpdateVersion um 17:52 <<<
+	UF  - eigene Exception wieder entfernt
+		- Verbindungsabbau seitens Sender BugFix
+10.6.98 >>> UpdateVersion um 16:29 <<<
+	UF  - mehrere aktive Fenster, eins pro Gegenstation
+		- Farben der Fenstertitle verbessert.
+5.6.98 >>> UpdateVersion um 14:05 <<<
+	UF  - H263 Hard und Soft OK
+		- in Vision.cfg
+		- CoCoSoft = 1/0
+		- H263Fit = 1/0
+	UF	- RS232 Transparent
+		- neues Mico Decoding
+26.5.98 >>> UpdateVersion um 16:07 <<<
+	UF	- Alarmverbindungen
+		- Schwenk Neige Konfiguration
+		- Sequencer Laden und Speichern
+		- Delay Regelung
+		- diverse Traces
+
+
+11.5.98 >>> UpdateVersion um 12:52 <<<
+	UF ExceptionHandler in InitDebugger	
+10.3.98 
+	HD VisionIST.ico und VisionDLRG.ico.
+	   Einfach VisionDLRG.ico fuer den MAINFRAME.

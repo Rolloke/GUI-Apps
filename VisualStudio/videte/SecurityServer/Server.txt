@@ -1,0 +1,119 @@
+12.04.2003, 14:29:19:The error at 12.04.2003 14:29.19 from appId WAI_SECURITY_SERVER was RTE_OS_EXCEPTION, 
+RTES_INVALID,args 0 0, (Addr:0x77f51baa) ACCESS_VIOLATION: 
+The thread tried to read from or write to a virtual address for which it does not have the appropriate access.
+/*
+@TOPIC{Server Documentation|ServerMain}
+
+Topics:
+@ITEM @LINK{Classes|Classes,Server}
+@ITEM @LINK{Client jobs|Server,ClientJobs}
+@ITEM @LINK{Blockschloß|Definition,Blockschloss}
+
+
+@TOPIC{Klassen im Server|Classes,Server}
+@ITEM @LINK{CIPCInputServer}
+@ITEM @LINK{CIPCOutputServer}
+@ITEM @LINK{CIPCOutputServerClient}
+@ITEM @LINK{CProcessScheduler}
+@ITEM @LINK{CSec3App}
+
+@TOPIC{ClientJobs|Server,ClientJobs}
+
+	@LINK{Video Jobs|Server,ClientVideoJobs}
+	@LINK{Relay Jobs|Server,ClientRelayJobs}
+
+@ITEM @LINK{SWCodec Specials|Server,SWCodec}
+
+@TOPIC{Client Video Jobs|Server,ClientVideoJobs}
+
+Jpeg: Die beiden Funktionen:
+@ITEM@LINK{CIPCoutputServerClient::OnRequestNewJpegEncoding}()
+@ITEM@LINK{CIPCoutputServerClient::OnRequestStartMpegEncoding}()
+
+nehmen Client Anforderungen entgegen.
+Siehe @LINK{Server,ConfigOptions} für mögliche Einstellung
+der Konfigurations-Variablen:
+@ITEM SWCodecVirtualFPS
+@ITEM SWCodecCountXXX
+@ITEM SWCodecClientPicsPerSecondXXX
+@ITEM MiCoClientPicsPerSecond
+@ITEM CoCoClientPicsPerSecond
+
+@TOPIC{Client Relay Jobs|Server,ClientRelayJobs}
+
+@TOPIC{SWCodec FPS|Server,SWCodec}
+Der SWCodec erhält eine besondere Behandlung, da die
+drei verschiedenen Auflösungen, sehr untrschiedliche
+Performance haben. Dazu wird SWCodecVirtualFPS verwendet,
+zusammen mit SWCodecCountXXX. Dabi gibt ein SWCodecCountXXX,
+als wieviel virtuelle Frames ein Bild gezehlt werden soll.
+
+@LISTHEAD{Beispiel:} (default Werte)
+@ITEM SWCodecVirtualFPS=12
+@ITEM SWCodecCountLow=2
+@ITEM SWCodecCountMedium=3
+@ITEM SWCodecCountHigh=4
+
+Das bedeutet:
+@ITEM 12/2 max. 6 Bilder grobe Auflösung
+@ITEM 12/3 max. 4 Bilder mittlere Auflösung
+@ITEM 12/4 max. 3 Bilder feine Auflösung
+
+@TOPIC{Blockschloß|Definition,Blockschloss}
+@KEY{Blockschloss}
+@RELATED @LINK{Tests|Testcases,Lock}, @LINK{Zeitzonen|Definition,Zeitzone}
+
+Mit einem Blockschloß ist es möglich Aktivierungen
+über Alarmeingänge zu filtern. Dies erfolgt 
+über @LINK{Zeitzonen|Definition,Zeitzone}, 
+denn nur denen können Blockschlösser 
+zugeordnet werden.
+
+@LISTHEAD{Funktionsweise:}
+@PAR
+Ist einer  @LINK{Zeitzone|Definition,Zeitzone} ein Blockschloß
+zugeordnet, wird zusätzlich zur Ueberprüfung der Zeit
+auch der Zustand des Blockschlosses geprüft.
+
+@ITEM Blockschloß Eingang @BW{ALARM}, Prozesse werden innerhalb der
+AktivZeiten aktiviert.
+@ITEM Blockschloß Eingang @BW{OK} Prozesse werden nicht aktiviert.
+@ITEM Blockschloß Eingang @BW{nicht vorhanden} wie ALARM
+
+Dies gilt sowohl beim Neustart von Prozessen, als auch
+bei Änderungen des Zustands des Blockschlosses:
+
+@ITEM @BW{ALARM} --> @BW{OK} stoppe möglicherweise laufende
+Prozesse, die mit diesem Blockschloß verbunden sind.
+@ITEM @BW{OK} --> @BW{ALARM} aktiviere fehlende Prozesse,
+die mit diesem Blockschloß verbunden sind.
+@ITEM @BW{ALARM/OK} --> @BW{nicht mehr vorhanden} wie --> @BW{ALARM}
+
+@HRULE
+@BOLD Stand der Implementierung@NORMAL
+@PAR
+Stufe1 OKAY @ITEM bei Neustart von Prozessen
+
+Stufe2 OKAY @ITEM bei Änderung des BlocksclossZustands OKAY
+
+Stufe3 NOCH NICHT @ITEM BlockSchlosseingang nicht vorhanden
+Zum Beispiel SimUnitAlarm1 als Blockschloss, aber keine SimUnit da.
+
+@HRULE
+Letzte Änderung HEDU 26.3.97
+*/
+/*@TOPIC{Testcases Blockschloss|Testcases,Lock}
+@RELATED @LINK{Blockschloss|Definition,Blockschloss}
+
+Zu Testen ist:
+@ITEM Prozesse werden nicht gestartet, wenn Blockschloss auf OKAY oder
+nicht da
+
+@ITEM Prozesse werden gestoppt, wenn Blockscloss von ALARM auf OK.
+
+@ITEM Prozesse werden nachgestartet, wenn Blockschloss von OK auf ALARM
+
+@ITEM Ein nicht vorhanderner BlocksclossEingang soll sich verhalten,
+wie auf ALARM gestellt. Wenn zum Beispiel die SimUnit gar nicht laeuft.
+
+*/

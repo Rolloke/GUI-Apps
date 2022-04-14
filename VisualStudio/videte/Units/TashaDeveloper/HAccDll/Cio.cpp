@@ -1,0 +1,182 @@
+/////////////////////////////////////////////////////////////////////////////
+// PROJECT:		HACCDll
+// FILE:		$Workfile: Cio.cpp $
+// ARCHIVE:		$Archive: /Project/Units/Tasha(Developer)/HAccDll/Cio.cpp $
+// CHECKIN:		$Date: 5.01.04 9:52 $
+// VERSION:		$Revision: 1 $
+// LAST CHANGE:	$Modtime: 5.01.04 9:25 $
+// BY AUTHOR:	$Author: Martin.lueck $
+// $Nokeywords:$
+//////////////////////////////////////////////////////////////////////
+	   
+#include "stdafx.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char BASED_CODE THIS_FILE[] = __FILE__;
+#endif
+
+// Initialisieren der static member
+CCriticalSection	CIo::m_csIo;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+CIo::CIo()
+{
+	m_dwIOBase = 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+CIo::CIo(DWORD dwIOBase)
+{
+	m_dwIOBase = dwIOBase;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+CIo::~CIo()
+{				 
+}									 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE CIo::Input(DWORD dwPort)
+{
+	m_csIo.Lock();
+	
+	BYTE byVal = 0xff;
+	
+	if (m_dwIOBase != 0)
+	{
+		byVal = Input8(m_dwIOBase + dwPort);
+	}
+
+	m_csIo.Unlock();
+
+	return byVal;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+WORD CIo::Inputw(DWORD dwPort)
+{
+	m_csIo.Lock();
+
+	WORD wVal = 0xffff;
+
+	if (m_dwIOBase != 0)
+	{
+		wVal = Input16(m_dwIOBase + dwPort);
+	}
+	
+	m_csIo.Unlock();
+
+	return wVal;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD CIo::Inputdw(DWORD dwPort)
+{
+	m_csIo.Lock();
+
+	DWORD dwVal = 0xffffffff;
+
+	if (m_dwIOBase != 0)
+	{
+		dwVal = Input32(m_dwIOBase + dwPort);
+	}
+
+	m_csIo.Unlock();
+
+	return dwVal;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::InputX(void* pDestBuffer, DWORD dwPort, DWORD dwLen)
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		InputNN(pDestBuffer, m_dwIOBase + dwPort, dwLen);
+	}
+
+	m_csIo.Unlock();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::Output(DWORD dwPort, BYTE byDatabyte)
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		Output8(m_dwIOBase + dwPort, byDatabyte);
+	}
+
+	m_csIo.Unlock();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::Outputw(DWORD dwPort, WORD wDataword) 
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		Output16(m_dwIOBase + dwPort, wDataword);
+	}
+
+	m_csIo.Unlock();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::Outputdw(DWORD dwPort, DWORD dwDataword) 
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		Output32(m_dwIOBase + dwPort, dwDataword);
+	}
+
+	m_csIo.Unlock();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::OutputX(void* pSrcBuffer, DWORD dwPort, DWORD dwLen) 
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		OutputNN(pSrcBuffer, m_dwIOBase + dwPort, dwLen);
+	}
+
+	m_csIo.Unlock();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE CIo::ReadFromLatch(DWORD dwPort)
+{
+	m_csIo.Lock();
+
+	BYTE byVal = 0xff;
+	if (m_dwIOBase != 0)
+	{
+		byVal = InputLatch8(m_dwIOBase + dwPort);
+	}
+
+	m_csIo.Unlock();
+
+	return byVal;
+} 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CIo::WriteToLatch(DWORD dwPort, BYTE byDatabyte)
+{
+	m_csIo.Lock();
+
+	if (m_dwIOBase != 0)
+	{
+		OutputLatch8(m_dwIOBase + dwPort, byDatabyte);
+	}
+
+	m_csIo.Unlock();
+}

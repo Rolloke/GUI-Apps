@@ -1,0 +1,14 @@
+Übersicht der unterstützten Monitorchips.
+
+
+					
+Monitorchip:			W83627HF | W83627THF | W83697HF | IT8712  | PC87372
+----------------------------------------------------------------------------
+VendorID:				 0x5ca3  | 0x5ca3	 | 0x5ca3	| 0x90	  | ------	
+DeviceID:				 0x02    | 0x02		 | 0x02		| -----	  | ------
+ChipID:					 0x21	 | 0x90		 | 0x60		| 0x8712  | 0xF000
+Anbindung:				 ISA	 | ISA		 | ISA		| ISA	  | ISA
+Fans:					  3		 | 3		 | 2		| 3 (5)	  |	2
+Temperatursensoren:       3		 | 3		 | 2		| 3		  | 0
+Spannungssensoren:		  9		 | 4	     | 8		| 8		  |	0
+

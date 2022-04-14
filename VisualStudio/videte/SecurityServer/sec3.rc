@@ -1,0 +1,197 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""res\\sec3.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""l.deu\\afxres.rc""  \t// Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""\t// printing/print preview resources\r\n"
+    "#include ""l.deu\\afxolecl.rc""\t// OLE container resources\r\n"
+    "#include ""l.deu\\afxolesv.rc""\t// OLE server resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\sec3.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Reset"
+    BEGIN
+        MENUITEM "&System\tF9",                 ID_EINSTELLUNGEN_SUPERVISOR
+        MENUITEM "Log Prozesse",                ID_LOG_PROZESSE
+        MENUITEM "Log Requests",                ID_LOG_REQUESTS
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über ...",              ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F8,          ID_EINSTELLUNGEN_EIGENBILD, VIRTKEY, NOINVERT
+    VK_F9,          ID_EINSTELLUNGEN_SUPERVISOR, VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINARY
+//
+
+IDR_TEST_SMALL          BINARY                  "test352288.263"
+IDR_TEST_LARGE          BINARY                  "test720280.263"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "iST! Security Server"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PANE_UNITS          "Units"
+    IDS_PANE_CLIENTS        "Clients"
+    IDS_PANE_DATABASE       "Database"
+    IDS_PANE_NO_UNIT        "00,00,00"
+    IDS_PANE_NO_DB          "not available"
+    IDS_PANE_NO_CLIENT      "00,00,00"
+    IDS_REG_CTRLBARS        "Controlbars"
+    IDS_EDGE                "Flankensteuerung"
+    IDS_LEVEL               "Pegelsteuerung"
+    IDS_MD_OK               "Bewegungserkennung OK"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UPDATE_PANES         "Aktualisiere Status"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "idip Security Server"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO               "Audio"
+    IDS_PTZ_PRESET          "PTZ Preset"
+    IDS_ALARM_LIST          "Alarmliste"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\sec3.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "l.deu\afxres.rc"  	// Standard components
+#include "l.deu\afxprint.rc"	// printing/print preview resources
+#include "l.deu\afxolecl.rc"	// OLE container resources
+#include "l.deu\afxolesv.rc"	// OLE server resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,271 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\SaVicDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""l.deu\\afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_COLOR DIALOG DISCARDABLE  0, 0, 173, 122
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Farbeinstellung"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,103,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,61,103,50,14
+    SCROLLBAR       IDC_SBRIGHTNESS,54,8,95,10
+    SCROLLBAR       IDC_SCONTRAST,54,24,95,10
+    SCROLLBAR       IDC_SSATURATION,54,40,95,10
+    LTEXT           "0",IDC_VBRIGHTNESS,155,8,15,10
+    LTEXT           "0",IDC_VCONTRAST,154,24,15,10
+    LTEXT           "0",IDC_VSATURATION,154,40,15,10
+    RTEXT           "Helligkeit",IDC_STATIC_BRIGHTNESS,4,8,45,8
+    RTEXT           "Kontrast",IDC_STATIC_CONTRAST,4,24,45,8
+    RTEXT           "Farbsättigung",IDC_STATIC_SATURATION,4,40,45,8
+    PUSHBUTTON      "Übernehmen",IDC_UEBERNAHME,115,103,50,14
+    SCROLLBAR       IDC_SHUE,54,56,95,10
+    LTEXT           "0",IDC_VHUE,154,56,15,10
+    RTEXT           "Hue",IDC_STATIC_HUE,4,56,45,8
+    SCROLLBAR       IDC_SHSCALE,53,72,95,10
+    LTEXT           "0",IDC_VHSCALE,153,72,15,10
+    RTEXT           "HScale",IDC_STATIC_HSCALE,3,72,45,8
+    SCROLLBAR       IDC_SVSCALE,54,88,95,10
+    RTEXT           "VScale",IDC_STATIC_VSCALE,4,89,45,8
+    LTEXT           "0",IDC_VVSCALE,153,89,15,10
+END
+
+IDD_DLG_MD_CONFIG DIALOGEX 0, 0, 376, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bewegungserkennung-Einstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,281,120,42,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,327,120,42,14
+    PUSHBUTTON      "Invertiere perm. Maske",IDC_INVERT_PERMANENT_MASK,282,
+                    30,87,14
+    PUSHBUTTON      "Lösche Masken",IDC_CLEAR_MASK,282,66,87,14
+    PUSHBUTTON      "Speichere Masken",IDC_SAVE_MASK,282,84,87,14
+    CONTROL         502,IDC_INLAY_WND,"Static",SS_BITMAP | SS_SUNKEN | 
+                    WS_BORDER,6,12,131,91
+    CONTROL         503,IDC_DIFF_WND,"Static",SS_BITMAP | SS_SUNKEN | 
+                    WS_BORDER,138,12,128,89
+    COMBOBOX        IDC_SELECT_CAMERA,282,12,87,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Lade Masken",IDC_LOAD_MASK,282,102,87,14
+    CONTROL         "Zeige Maske im Bild",IDC_HIDE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,102,137,78,10
+    LTEXT           "Originalbild:",IDC_TITLE_INLAY,6,3,66,8
+    LTEXT           "Differenzbild:",IDC_TITLE_MASK,138,3,42,8
+    CONTROL         505,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,121,7,6
+    CONTROL         506,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,133,7,6
+    LTEXT           "Adaptive Maske",IDC_STATIC_AM,24,120,52,8
+    LTEXT           "Permanente Maske",IDC_STATIC_PM,24,132,62,8
+    GROUPBOX        "Legende",IDC_STATIC_LEGENDE,6,108,90,36
+    CONTROL         "Histogrammausgleich",IDC_HISTOGRAMM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,137,83,10
+    PUSHBUTTON      "Invertiere adap. Maske",IDC_INVERT_ADAPTIVE_MASK,282,48,
+                    87,14
+    COMBOBOX        IDC_SELECT_MASK_SENSITIVITY,219,123,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SELECT_ALARM_SENSITIVITY,219,109,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Empfindlichkeit der adaptiven Maske",
+                    IDC_STATIC_ALARM_SENSITIVITY,99,125,117,8
+    LTEXT           "Empfindlichkeit der MD",IDC_STATIC_MD_SENSITIVITY,99,
+                    112,117,8,0,WS_EX_RIGHT
+    CONTROL         "Tiefpass Filter",IDC_FILTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,273,138,93,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLG_COLOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 166
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 115
+    END
+
+    IDD_DLG_MD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 369
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_INLAY               BITMAP  DISCARDABLE     "MDInlay.bmp"
+IDB_MASK                BITMAP  DISCARDABLE     "MDmask.bmp"
+IDB_GREEN               BITMAP  DISCARDABLE     "green.bmp"
+IDB_RED                 BITMAP  DISCARDABLE     "red.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RTE_DRIVER_WRONG_VERSION 
+                            "Falsche Treiberversion (Treiber=0x%08x, Programm=0x%08x)"
+    IDS_RTE_NO_INI          "%s konnte nicht gefunden werden"
+    IDS_RTE_DRIVER_NOT_FOUND 
+                            "%s %s konnte nicht gefunden oder nicht geöffnet werden"
+    IDS_RTE_DRIVER_NO_IOCTL "Device not supported IOCTL interface"
+    IDS_RTE_DRIVER_NOT_LOADED "Der Gerätetreiber ist nicht geladen."
+    IDS_RTE_DLL_WRONG_VERSION 
+                            "SaVicDA.dll falsche Version (Dll=0x%08x, Unit=0x%08x)"
+    IDS_HIGH                "Hoch"
+    IDS_NORMAL              "Normal"
+    IDS_LOW                 "Niedrig"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_INVERT_PERMANENT_MASK 
+                            "Invertiert die permanente Maske\nder aktuell ausgewählten Kamera"
+    IDC_CLEAR_MASK          "Löscht die adaptive sowie die\npermanente Maske der\naktuell ausgewählten Kamera"
+    IDC_SAVE_MASK           "Speichert die Masken für die\naktuell ausgewählte Kamera ab."
+    IDC_SELECT_CAMERA       "Wählt eine Kamera aus,\nderen MD-Einstellungen verändert\nwerden sollen"
+    IDC_INVERT_ADAPTIVE_MASK 
+                            "Invertiert die adaptive Maske\nder aktuell ausgewählten Kamera"
+    IDC_LOAD_MASK           "Lädt die Masken für die\naktuell ausgewählte Kamera"
+    IDC_HIDE_MASK           "Blendet die Masken im Livebild ein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SELECT_MASK_SENSITIVITY 
+                            "Stellt die Empfindlichkeit dir adaptiven Maske ein.\nDie adaptive Maske dient zum ausmaskieren von\n Störbewegungen. (z.B. Bäume im Wind).\nDazu baut sie sich immer an den Stellen im Videobild\nauf, an denen über einen längeren Zeitraum ständig\nÄnderungen auftreten. Nimmt die Intensität der 'Störbewegung'\nab, so wird auch die adaptive Maske wieder schwächer.\nZusätzlich kann eine permanente Maske direkt ins Videobild '\ngezeichnet' werden. An diesen Stellen ist die Bewegungserkennung\nquasi blind."
+    IDC_SELECT_ALARM_SENSITIVITY 
+                            "Stellt für die ausgewählte Kamera die Empfindlichkeit der\nBewegungserkennung ein.\nDie Kamera meldet nun über ihren zugehörigen\n'SaVic MD Alarm'-Melder einen Bewegungsalarm.\nDer Alarm tritt nur als Puls auf, so daß\nin den Prozeßeinstellungen 'Volle Zeitdauer halten' zu \naktivieren ist."
+    IDC_HISTOGRAMM          "Führt ein Histogrammausgleich durch.\nEr kann evtl. eine Bildverbesserung bewirken,\ninsbesondere bei zu dunklen Bildern"
+    IDC_FILTER              "Führt eine Tiefpassfilterung durch, um feine Details vor der\nMD zu entfernen, die evt. zu Fehlalarmen, oder einer\nadaptiven Maske führen würden."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_OFF                 "Aus"
+    IDS_CAMERA1             "Kamera 1"
+    IDS_CAMERA2             "Kamera 2"
+    IDS_CAMERA3             "Kamera 3"
+    IDS_CAMERA4             "Kamera 4"
+    IDS_CAMERA5             "Kamera 5"
+    IDS_CAMERA6             "Kamera 6"
+    IDS_CAMERA7             "Kamera 7"
+    IDS_CAMERA8             "Kamera 8"
+    IDS_CAMERA9             "Kamera 9"
+    IDS_CAMERA10            "Kamera 10"
+    IDS_CAMERA11            "Kamera 11"
+    IDS_CAMERA12            "Kamera 12"
+    IDS_CAMERA13            "Kamera 13"
+    IDS_CAMERA14            "Kamera 14"
+    IDS_CAMERA15            "Kamera 15"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CAMERA16            "Kamera 16"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\SaVicDll.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "l.deu\afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

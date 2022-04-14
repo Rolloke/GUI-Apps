@@ -1,0 +1,6 @@
+; CommonU.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CommonDirectShowU"
+
+EXPORTS
+    ; Explicit exports can go here

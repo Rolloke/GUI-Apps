@@ -1,0 +1,242 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=VIMAX
+  Title French=Alarmcom VDR 400 Serie
+  Title German=HAL DLL und DirectCD 305 Patch
+  Flags=00011000
+  Split=1420
+  Languages=0 0 0 0 65 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000000000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\project\dv\Install\hal_dll_directcd305\setup.exe
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=C:\Programme\Wise
+  Variable Name2=_OEM_
+  Variable Default2=1
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: Get System Information
+  Variable=SERPACK
+  Flags=00010010
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=4.0.1381
+end
+remarked item: Display Message
+  Title German=%WINVER%
+  Text German=%SERPACK%
+end
+item: Custom Graphic
+  Width=1024
+  Height=139
+  item: Text
+    Text=DTS
+    Text German=SoftEx HAL DLL und DirectCD 305 Patch
+    Rectangle=0 0 1024 139
+    Pen Color=16777215
+    Pen Style=6
+    Pen Width=1
+    Extra Flags=00000011
+    Name=Arial
+    Font Style=-32 0 0 0 700 0 0 0 0 3 2 1 34
+  end
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=HAL DLL und DirectCD 305 Patch
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=SERPACK
+  Value=4
+  Flags=00000111
+end
+item: Get System Information
+  Variable=HAL_VER
+  Pathname=%SYS%\hal.dll
+  Flags=00000101
+end
+item: If/While Statement
+  Variable=HAL_VER
+  Value=4.0.1381.4
+  Flags=00000001
+end
+item: Copy Local File
+  Source=%SYS%\hal.dll
+  Destination=%SYS%\hal.001
+  Flags=0000000001000010
+end
+item: Install File
+  Source=D:\project\dv\Install\hal.dll.softex.sp6a
+  Destination=%SYS%\hal.dll
+  Flags=0000000000000010
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+  New Value=1
+  Value Name=PowerdownAfterShutdown
+  Root=2
+end
+item: Install File
+  Source=D:\dv\Win95Reboot.exe
+  Destination=%TEMP%\Win95Reboot.exe
+  Flags=0000000000000010
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%TEMP%\Win95Reboot.exe
+  Command Line=reboot
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=RESTART
+  Value=S
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=Softex HAL.DLL
+  Text German=HAL.DLL ist bereits aktuell
+  Flags=00100000
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=Softex HAL.DLL
+  Text German=Falsche Version des NT Service Packs
+  Flags=00100000
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Ersetze DVStarter und Watch CD
+end
+item: Remark
+end
+item: Get System Information
+  Variable=DV_VER
+  Pathname=c:\dv\dvstarter.exe
+  Flags=00000101
+end
+item: If/While Statement
+  Variable=DV_VER
+  Value=1.3.0.418
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=c:\dv
+end
+item: Remark
+end
+item: Copy Local File
+  Source=%MAINDIR%\DVStarter.exe
+  Destination=%MAINDIR%\DVStarter.418
+  Flags=0000000001000010
+end
+item: Copy Local File
+  Source=%MAINDIR%\WatchCD.exe
+  Destination=%MAINDIR%\WatchCD.418
+  Flags=0000000001000010
+end
+item: Install File
+  Source=V:\bin\DV\DVStarter.exe
+  Destination=%MAINDIR%\DVStarter.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=V:\bin\DV\WatchCD.exe
+  Destination=%MAINDIR%\WatchCD.exe
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Install File
+  Source=D:\dv\Win95Reboot.exe
+  Destination=%TEMP%\Win95Reboot.exe
+  Flags=0000000000000010
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%TEMP%\Win95Reboot.exe
+  Command Line=reboot
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=RESTART
+  Value=S
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=DirectCD 305 Patch
+  Text German=DirectCD 305 Patch wurde bereits installiert
+  Flags=00100000
+end
+item: End Block
+end
+item: Remark
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=Softex HAL.DLL und DirectCD 305 Patch
+  Text German=Falsche Windows Version
+  Flags=00100000
+end
+item: End Block
+end
+item: Remark
+end
+item: Else Statement
+end
+item: Display Message
+  Title German=Softex HAL.DLL und DirectCD 305 Patch
+  Text German=Falsche Windows Version
+  Flags=00100000
+end
+item: End Block
+end
+item: Remark
+end

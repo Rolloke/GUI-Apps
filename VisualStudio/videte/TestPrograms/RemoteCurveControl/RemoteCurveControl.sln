@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RemoteCurveControl", "RemoteCurveControl.vcproj", "{58662C5D-251F-4C1E-9C19-DCD7692054F1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARAPREV", "..\..\..\MyProjects\CARAPREV\Caraprev.vcproj", "{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugEngl = DebugEngl
+		Release = Release
+		ReleaseEngl = ReleaseEngl
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.Debug.ActiveCfg = Debug|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.Debug.Build.0 = Debug|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.DebugEngl.ActiveCfg = Debug|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.DebugEngl.Build.0 = Debug|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.Release.ActiveCfg = Release|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.Release.Build.0 = Release|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.ReleaseEngl.ActiveCfg = Release|Win32
+		{58662C5D-251F-4C1E-9C19-DCD7692054F1}.ReleaseEngl.Build.0 = Release|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.Debug.ActiveCfg = Debug|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.Debug.Build.0 = Debug|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.DebugEngl.ActiveCfg = DebugEngl|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.DebugEngl.Build.0 = DebugEngl|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.Release.ActiveCfg = Release|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.Release.Build.0 = Release|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.ReleaseEngl.ActiveCfg = ReleaseEngl|Win32
+		{4A2A7FDB-8176-45BA-B08E-FC0C4E16B3CC}.ReleaseEngl.Build.0 = ReleaseEngl|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

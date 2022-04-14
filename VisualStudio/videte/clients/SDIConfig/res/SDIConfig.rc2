@@ -1,0 +1,45 @@
+/////////////////////////////////////////////////////////////////////////////
+// FILE:		$Workfile: SDIConfig.cpp $
+// ARCHIVE:		$Archive: /Project/SDIConfig/SDIConfig.cpp $
+// CHECKIN:		$Date: 20.11.97 13:37 $
+// VERSION:		$Revision: 5 $
+// LAST CHANGE:	$Modtime: 20.11.97 13:37 $
+// BY AUTHOR:	$Author: Georg $
+// $Nokeywords:$
+
+//
+// SDICONFIG.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+WK_VERSION(30, 3, 17, 56, "30/03/99,17:56\0", // @AUTO_UPDATE
+	   "SDIConfig.exe\0",	// exe name
+	   "SDIConfig\0",	// product name
+	   "SDIConfig Application\0",	// product description
+	   "3.1\0",		// general product version
+	   "3.100\0"	// real version
+	   )
+/////////////////////////////////////////////////////////////////////////////
+// AVI Files
+IDR_AVI_IDLE					AVI	res\Idle.avi
+IDR_AVI_CONNECT					AVI	res\Connect.avi
+IDR_AVI_CONNECT_FAILED			AVI	res\ConnectFailed.avi
+IDR_AVI_GET_INFO				AVI	res\GetInfo.avi
+IDR_AVI_HAS_INFO				AVI	res\HasInfo.avi
+IDR_AVI_HAS_NO_INFO				AVI	res\HasNoInfo.avi
+IDR_AVI_FILETRANSFER			AVI	res\FileTransfer.avi
+IDR_AVI_CONFIGURATION_TRY		AVI	res\TryConfig.avi
+IDR_AVI_CONFIGURATION			AVI	res\Configure.avi
+IDR_AVI_CONFIGURATION_OK		AVI	res\ConfigOK.avi
+IDR_AVI_CONFIGURATION_FAILED	AVI	res\ConfigFailed.avi
+IDR_AVI_EXTERN_PROGRAM			AVI	res\ExternProgram.avi
+/////////////////////////////////////////////////////////////////////////////

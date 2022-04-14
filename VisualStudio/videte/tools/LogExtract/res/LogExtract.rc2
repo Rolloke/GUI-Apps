@@ -1,0 +1,24 @@
+//
+// LOGEXTRACT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+
+#include "WK_Version.h"
+
+WK_VERSION(31, 8, 11, 2, "31/08/98,11:02\0", // @AUTO_UPDATE
+		   "SomeApp.exe\0",	// exe name WK_TODO
+		   "SomeApp\0",	// product name WK_TODO
+		   "SomeApp\0",	// product description WK_TODO
+		   "1.0\0",		// general product version WK_TODO
+		   "1.0\0"	// real version WK_TODO
+		   )
+

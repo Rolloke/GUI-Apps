@@ -1,0 +1,2 @@
+07.10.03 RKE - DirectShow Filter Dump wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der die binären Daten aus einem MediaSample liefert.

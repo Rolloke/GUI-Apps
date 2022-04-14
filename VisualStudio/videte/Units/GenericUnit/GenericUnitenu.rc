@@ -1,0 +1,252 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\GenericUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""l.deu\\afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINRES
+//
+
+BIN_SMALL_TESTBILD      BINRES  MOVEABLE PURE   "TESTBILD1.JPG"
+BIN_LARGE_TESTBILD      BINRES  MOVEABLE PURE   "TESTBILD2.JPG"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_GENERICUNIT1          ICON    DISCARDABLE     "res\\GenericUnit1.ico"
+IDR_GENERICUNIT2          ICON    DISCARDABLE     "res\\GenericUnit2.ico"
+IDR_GENERICUNIT3          ICON    DISCARDABLE     "res\\GenericUnit3.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GENERIC_APP_DIALOG DIALOGEX 0, 0, 212, 266
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "GenericUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Video Source",IDC_GROUP_VIDEOSOURCE,7,10,192,72
+    CONTROL         "Camera1",IDC_SOURCE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,16,21,42,10
+    CONTROL         "Camera2",IDC_SOURCE2,"Button",BS_AUTORADIOBUTTON,16,35,
+                    42,10
+    CONTROL         "Camera3",IDC_SOURCE3,"Button",BS_AUTORADIOBUTTON,16,49,
+                    42,10
+    CONTROL         "Camera4",IDC_SOURCE4,"Button",BS_AUTORADIOBUTTON,16,63,
+                    42,10
+    CONTROL         "Camera5",IDC_SOURCE5,"Button",BS_AUTORADIOBUTTON,61,21,
+                    42,10
+    CONTROL         "Camera6",IDC_SOURCE6,"Button",BS_AUTORADIOBUTTON,61,35,
+                    42,10
+    CONTROL         "Camera7",IDC_SOURCE7,"Button",BS_AUTORADIOBUTTON,61,49,
+                    42,10
+    CONTROL         "Camera8",IDC_SOURCE8,"Button",BS_AUTORADIOBUTTON,61,63,
+                    42,10
+    CONTROL         "Camera9",IDC_SOURCE9,"Button",BS_AUTORADIOBUTTON,104,21,
+                    44,10
+    CONTROL         "Camera10",IDC_SOURCE10,"Button",BS_AUTORADIOBUTTON,104,
+                    35,44,10
+    CONTROL         "Camera11",IDC_SOURCE11,"Button",BS_AUTORADIOBUTTON,104,
+                    49,44,10
+    CONTROL         "Camera12",IDC_SOURCE12,"Button",BS_AUTORADIOBUTTON,104,
+                    63,44,10
+    CONTROL         "Camera13",IDC_SOURCE13,"Button",BS_AUTORADIOBUTTON,149,
+                    21,44,10
+    CONTROL         "Camera14",IDC_SOURCE14,"Button",BS_AUTORADIOBUTTON,149,
+                    35,44,10
+    CONTROL         "Camera15",IDC_SOURCE15,"Button",BS_AUTORADIOBUTTON,149,
+                    49,44,10
+    CONTROL         "Camera16",IDC_SOURCE16,"Button",BS_AUTORADIOBUTTON,149,
+                    63,44,10
+    GROUPBOX        "Video Front End",IDC_GROUP_VIDEOFRONTEND,8,87,100,39
+    CONTROL         "PAL CCIR",IDC_FE_PAL_CCIR,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,16,96,52,10
+    CONTROL         "NTSC CCIR",IDC_FE_NTSC_CCIR,"Button",BS_AUTORADIOBUTTON,
+                    16,108,52,10
+    CONTROL         "Notch",IDC_FE_LNOTCH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,68,96,35,10
+    CONTROL         "Dec",IDC_FE_LDEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    68,108,29,10
+    GROUPBOX        "Source Type",IDC_GROUP_SOURCETYPE,114,87,87,39
+    CONTROL         "FBAS",IDC_FE_FBAS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,128,97,32,10
+    CONTROL         "SVHS",IDC_FE_SVHS,"Button",BS_AUTORADIOBUTTON,128,110,
+                    32,10
+    PUSHBUTTON      "Start",IDC_DEC_START,41,153,28,14
+    PUSHBUTTON      "Stop",IDC_DEC_STOP,71,153,28,14,WS_DISABLED
+    LTEXT           "Encoder:",IDC_TXT_ENCODER,9,169,28,8
+    PUSHBUTTON      "Start",IDC_ENC_START,41,167,28,14
+    PUSHBUTTON      "Stop",IDC_ENC_STOP,71,167,28,14,WS_DISABLED
+    LTEXT           "Relay:",IDC_TXT_RELAIS,9,135,24,8
+    CONTROL         "",IDC_RELAIS3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,
+                    135,8,8
+    CONTROL         "",IDC_RELAIS2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,
+                    135,8,8
+    CONTROL         "",IDC_RELAIS1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,53,
+                    135,8,8
+    CONTROL         "",IDC_RELAIS0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,61,
+                    135,8,8
+    LTEXT           "Frames",IDC_TXT_FRAMES1,111,155,24,8
+    RTEXT           "0",IDC_DECODED_FRAMES,139,150,62,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    LTEXT           "Frames",IDC_TXT_FRAMES2,111,169,24,8
+    RTEXT           "0",IDC_ENCODED_FRAMES,139,166,62,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    GROUPBOX        "Resolution",IDC_GROUP_RESOLUTION,9,186,47,36
+    CONTROL         "High",IDC_HIGH_RES,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,17,197,32,10
+    CONTROL         "Coarse",IDC_LOW_RES,"Button",BS_AUTORADIOBUTTON,17,209,
+                    37,10
+    GROUPBOX        "Compression",IDC_GROUP_COMPRESSION,59,186,99,36,
+                    WS_GROUP
+    CONTROL         "50K",IDC_COMPRESS_0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,65,196,28,10
+    CONTROL         "40K",IDC_COMPRESS_1,"Button",BS_AUTORADIOBUTTON,95,196,
+                    28,10
+    CONTROL         "32K",IDC_COMPRESS_2,"Button",BS_AUTORADIOBUTTON,125,196,
+                    28,10
+    CONTROL         "24K",IDC_COMPRESS_3,"Button",BS_AUTORADIOBUTTON,65,206,
+                    28,10
+    CONTROL         "16K",IDC_COMPRESS_4,"Button",BS_AUTORADIOBUTTON,95,206,
+                    29,10
+    CONTROL         "8K",IDC_COMPRESS_5,"Button",BS_AUTORADIOBUTTON,125,206,
+                    28,10
+    PUSHBUTTON      "Videoinlay",IDC_VIDEOINLAY,163,191,38,30,WS_GROUP
+    PUSHBUTTON      "Colorsettings...",IDC_DLG_LUMINANCE,9,227,60,14
+    PUSHBUTTON      "MD Settings...",IDC_DLG_MD_CONFIG,9,245,60,14
+    PUSHBUTTON      "Test",IDC_TEST,73,227,60,32
+    DEFPUSHBUTTON   "Close",IDOK,141,226,60,32
+    CONTROL         "Fullframe",IDC_ENABLE_TWO_FIELDS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,114,135,38,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_GENERIC_APP_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 210
+        VERTGUIDE, 139
+        BOTTOMMARGIN, 244
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SETTINGS             "&Settings"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ABOUT                "About GenericUnit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RTE_NO_VIDEO        "The camera %u has no video signal."
+    IDS_RTE_VIDEO           "The camera %u has again a video signal."
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\GenericUnit.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "l.deu\afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

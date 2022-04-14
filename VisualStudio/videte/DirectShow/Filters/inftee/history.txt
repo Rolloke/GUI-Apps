@@ -1,0 +1,6 @@
+07.10.03 RKE - DirectShow Filter inftee wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der MediaSamples auf mehrere (infinite Tee) OutputPins
+			   verteilen kann. Dabei können die einzelnen OutputPins an- bzw. ab-
+			   geschaltet werden und zusätzlich für jeden Pin eine Funktion (Pointer)
+			   implementiert werden, die die Daten auswerten kann und bei Bedarf den Datenstrom
+			   unterbrechen kann.

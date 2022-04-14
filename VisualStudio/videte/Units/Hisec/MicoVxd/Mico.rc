@@ -1,0 +1,67 @@
+#define Not_VxD
+#include <vmm.h>
+#include <ver.h>
+
+#ifndef WK_LANG_BLOCK
+#define WK_LANG_BLOCK "040704b0"
+#endif
+
+#ifndef WK_LANG_BLOCK_NUM
+#define WK_LANG_BLOCK_NUM 0x407
+#endif
+
+#ifdef MICO_DEVICE_ID
+#define VER_FILESUBTYPE 			MICO_DEVICE_ID
+#else
+#define VER_FILESUBTYPE 			UNDEFINED_DEVICE_ID
+#endif
+
+#define VER_FILEVERSION				3.52
+#define VER_PRODUCTVERSION			3.5
+#define VER_FILEFLAGSMASK			VS_FFI_FILEFLAGSMASK
+#define VER_FILEFLAGS				0x00000000L
+#define VER_FILEOS					VOS__WINDOWS32
+#define VER_FILETYPE				VFT_VXD
+
+
+#define VER_FILEDESCRIPTION_STR 	"MiCo Device Driver\0"
+#define VER_FILEVERSION_STR			"3.52\0"
+#define VER_INTERNALNAME_STR		"MiCo ISA\0"
+#define VER_LEGALCOPYRIGHT_YEARS	"1997\0"
+#define VER_ORIGINALFILENAME_STR	"MiCo.VxD\0"
+#define VER_PRODUCTVERSION_STR		"3.5\0"
+
+#define VER_PRODUCTNAME_STR			"iST - idip! Security\0"
+#define VER_COMPANYNAME_STR			"w+k VideoCommunication\0"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright w+k VideoCommunication ©" VER_LEGALCOPYRIGHT_YEARS
+
+VS_VERSION_INFO VERSIONINFO 
+FILEVERSION		VER_FILEVERSION
+PRODUCTVERSION	VER_PRODUCTVERSION
+FILEFLAGSMASK	VER_FILEFLAGSMASK
+FILEFLAGS		VER_FILEFLAGS
+FILEOS			VER_FILEOS
+FILETYPE		VER_FILETYPE
+FILESUBTYPE		VER_FILESUBTYPE
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK WK_LANG_BLOCK
+        BEGIN 
+            VALUE "CompanyName"     ,VER_COMPANYNAME_STR
+            VALUE "FileDescription" ,VER_FILEDESCRIPTION_STR
+            VALUE "FileVersion"     ,VER_FILEVERSION_STR
+            VALUE "InternalName"    ,VER_INTERNALNAME_STR
+            VALUE "LegalCopyright"  ,VER_LEGALCOPYRIGHT_STR
+            VALUE "OriginalFilename",VER_ORIGINALFILENAME_STR
+            VALUE "ProductName"     ,VER_PRODUCTNAME_STR
+            VALUE "ProductVersion"  ,VER_PRODUCTVERSION_STR
+        END 
+	END 
+ 
+    BLOCK "VarFileInfo" 
+    BEGIN 
+        /* the following line should be extended for localized versions */
+        VALUE "Translation", WK_LANG_BLOCK_NUM, 1200
+    END 
+END 

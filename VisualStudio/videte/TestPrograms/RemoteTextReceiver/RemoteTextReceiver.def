@@ -1,0 +1,9 @@
+; RemoteTextReceiver.def : Declares the module parameters.
+
+LIBRARY      "RemoteTextReceiver.OCX"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE

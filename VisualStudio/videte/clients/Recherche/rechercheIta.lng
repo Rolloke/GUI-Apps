@@ -1,0 +1,496 @@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP1@@@@&Connection@&Connessione@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_CONNECT@@@@To &Remote Host...\tENTER@TODO! To &Remote Host...\tENTER@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_CONNECT_MAP@@@@M&ap@TODO! C&arta geografica@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_DISCONNECT@@@@&Disconnect\tESC@&Sconnettere\tESC@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_SEARCH_AT_START@@@@&Query dialog at start@TODO! &Query dialog at start@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_NEW_LOGIN@@@@&New Login...@TODO! Nuovo accesso@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@@@@Logout and Exi&t\tAlt+F4@TODO! Logout and Exi&t\tAlt+F4@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP2@@@@&File@&File@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP3@@@@&Save As@TODO! &Salva con nome@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_DISK@@@@JPX on &Disk\tCTRL+S@TODO! JPX su floppy &disk\tCTRL+S@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_JPX@@@@JP&X Image and Data...@TODO! JP&X Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_HTML@@@@&HTML Image and Data...@TODO! &HTML Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_JPG@@@@&JPEG Image...@TODO! Immagine &JPEG...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_DIB@@@@&BMP Image...@TODO! Immagine &BMP...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_OPEN@@@@&Open...\tCTRL+O@TODO! &Apri...\tCTRL+O@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_OPEN_DISK@@@@Open from Dis&k...@TODO! Apri da dis&k...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_SMALL_CLOSE@@@@&Close@C&hiudi@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_PRINT@@@@&Print...\tCTRL+P@TODO! S&tampa...\tCTRL+P@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_PRINT_PREVIEW@@@@Prin&t Preview@TODO! Ante&prima di stampa@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_FILE_PRINT_SETUP@@@@Print S&etup...@TODO! Imposta stampant&e...@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP0.ID_SEARCH@@@@&Query...@TODO! Ce&rca...@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP4@@@@&Edit@TODO! &Modifica@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_EDIT_COPY@@@@&Copy\tCTRL+C@TODO! &Copia\tCTRL+C@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_EDIT_STATION@@@@Ho&st Name@TODO! Nome ho&st@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_EDIT_COMMENT@@@@N&otes...@TODO! N&ote...@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP5@@@@A&rchive@TODO! A&rchivio@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP5.ID_ARCHIV_EMPTY@@@@&Empty@TODO! &Vuoto@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP5.ID_ARCHIV_DELETE@@@@&Delete@&Elimina@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP5.ID_DATABASE_INFO@@@@&Information\tCTRL+I@TODO! &Informazioni\tCTRL+I@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP5.ID_ARCHIV_BACKUP@@@@&Backup...\tF4@TODO! &Backup...\tF4@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP5.ID_SYNC@@@@S&ynchronized Playback\tCtrl+T@TODO! S&ynchronized Playback\tCtrl+T@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP6@@@@&Sequence@TODO! &Sequenza@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_SEQUENCE_OPEN@@@@O&pen\tCTRL+F5@TODO! &Apri\tCTRL+F5@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_SEQUENCE_OPEN_SINGLE@@@@Open &singly\tAlt+F5@TODO! Apri &seperamente\tAlt+F5@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_SMALL_CLOSE@@@@&Close\tCTRL+F4@TODO! &Chiudi\tCTRL+F4@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_SMALL_CLOSE_ALL@@@@Close &All@TODO! Chiudi &tutto@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_SEQUENCE_OVER@@@@&Use current window@TODO! &Use current window@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_DELETE@@@@De&lete\tCTRL+SHIFT+DEL@TODO! &Elimina\tCTRL+SHIFT+DEL@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_POS1@@@@First Image\tPOS1@TODO! First Image\tPOS1@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_REVIEW@@@@Rewind\tPage down@TODO! Riavvolgimento rapido\tPagina giù@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_PREV@@@@Previous Image\tCursor Left@TODO! Previous Image\tCursor Left@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_STOP@@@@Stop\tBreak@TODO! Interrompi@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_NEXT@@@@Next Image\tCursor right@TODO! Next Image\tCursor right@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_FORWARD@@@@Play\tPage up@TODO! Avanzamento rapido\tPagina su@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP6.ID_NAVIGATE_END@@@@Last Image\tEND@TODO! Last Image\tEND@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP7@@@@&View@&Visualizza@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_1@@@@&1 Sequence\tF8@TODO! &1 Sequenza\tF8@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_2_2@@@@&2 x 2 Sequences\tF8@TODO! &2 x 2 Sequenze\tF8@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_3_3@@@@&3 x 3 Sequences\tF8@TODO! &3 x 3 Sequenze\tF8@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_WINDOW_SPLIT@@@@Sp&lit@&Dividi@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_ORIGINAL@@@@1:1 &Original Size\tCTRL+F9@TODO! 1:1 &Original Size\tCTRL+F9@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_FULLSCREEN@@@@&Full Screen\tF9@TODO! Schermo in&tero\tF9@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_DATABASE_INFO@@@@&Information\tCTRL+I@TODO! &Informazioni\tCTRL+I@0@
+Rechercheenu.rc@POPUP@IDR_MAINFRAME.POPUP8@@@@&?@&?@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP8.ID_APP_ABOUT@@@@&About...@TODO! &Informazioni su...@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP9@@@@Server@Server@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP9.ID_DISCONNECT@@@@&Disconnect\tESC@&Sconnettere\tESC@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP9.ID_DATABASE_INFO@@@@&Information\tCTRL+I@TODO! &Informazioni\tCTRL+I@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP9.ID_SEARCH@@@@&Query@TODO! Cerca@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP9.ID_ARCHIV_BACKUP@@@@&Backup...\tF4@TODO! &Backup...\tF4@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP10@@@@Archive@Archivio@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP10.ID_ARCHIV_EMPTY@@@@&Empty@TODO! &Vuoto@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP10.ID_ARCHIV_DELETE@@@@&Delete@&Elimina@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP11@@@@Sequence@Sequenza@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP11.ID_SEQUENCE_OPEN@@@@O&pen\tCTRL+F5@TODO! &Apri\tCTRL+F5@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP11.ID_SEQUENCE_OPEN_SINGLE@@@@Open &singly\tAlt+F5@TODO! Apri &seperamente\tAlt+F5@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP11.ID_DELETE@@@@&Delete@&Elimina@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP12@@@@DisplayWindow@TODO! DisplayWindow@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP12.ID_VIDEO_FULLSCREEN@@@@&Full Screen\tF9@TODO! Schermo in&tero\tF9@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP12.ID_VIEW_ORIGINAL@@@@&1:1 Original Size\tCTRL+F9@TODO! &1:1 Original Size\tCTRL+F9@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP12.ID_DISPLAY_ZOOM_OUT@@@@&Zoom out\tF10@&Zoom indietro\tF10@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP13@@@@&Save As@TODO! &Salva con nome@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_DISK@@@@JPX on &Disk\tCTRL+S@TODO! JPX su floppy &disk\tCTRL+S@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_JPX@@@@JP&X Image and Data...@TODO! JP&X Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_HTML@@@@&HTML Image and Data...@TODO! &HTML Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_JPG@@@@&JPEG Image...@TODO! Immagine &JPEG...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_DIB@@@@&BMP Image...@TODO! Immagine &BMP...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_FILE_PRINT@@@@&Print...\tCTRL+P@TODO! S&tampa...\tCTRL+P@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_EDIT_COPY@@@@&Copy\tCTRL+C@TODO! &Copia\tCTRL+C@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_EDIT_COMMENT@@@@N&otes...@TODO! N&ote...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_DISPLAY_1@@@@1 &Image@TODO! 1 &Immagine@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_DISPLAY_4@@@@&4 Images@TODO! &4 Immagini@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP13.ID_DISPLAY_9@@@@&9 Images@TODO! &9 Immagini@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP14@@@@&Save As@TODO! &Salva con nome@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP14.ID_FILE_DISK@@@@JPX on &Disk\tCTRL+S@TODO! JPX su floppy &disk\tCTRL+S@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP14.ID_FILE_JPX@@@@JP&X Image and Data...@TODO! JP&X Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP14.ID_FILE_HTML@@@@&HTML Image and Data...@TODO! &HTML Immagine e dati...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP14.ID_FILE_JPG@@@@&JPEG Image...@TODO! Immagine &JPEG...@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP14.ID_FILE_DIB@@@@&BMP Image...@TODO! Immagine &BMP...@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP15@@@@DibWindow@TODO! DibWindow@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP15.ID_VIEW_FULLSCREEN@@@@&Full Screen\tF9@TODO! Schermo in&tero\tF9@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP15.ID_FILE_PRINT@@@@&Print...\tCTRL+P@TODO! S&tampa...\tCTRL+P@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP16@@@@Query@Cerca@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP16.ID_SEARCH@@@@Query...\tStrg+F@TODO! Cerca...\tSTRG+F@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP16.ID_SEARCH_RECTANGLE@@@@Selection\tStrg+R@TODO! Selezione\tSTRG+R@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP16.ID_SEARCH_RECTANGLE_DELETE@@@@Clear selection\tStrg+D@TODO! Clear selection\tStrg+D@0@
+Rechercheenu.rc@POPUP@IDR_CONTEXT.POPUP17@@@@Date archive@TODO! Date archive@0@
+Rechercheenu.rc@MENUITEM@IDR_CONTEXT.POPUP17.ID_DATE_SEQUENCES_DELETE@@@@&Delete@&Elimina@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_CAMERA@@@@Camera@Telecamera@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_RESOLUTION@@@@000x000@000x000@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_TIME@@@@00:00:00,000@00:00:00,000@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_DATE@@@@00.00.0000@00.00.0000@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_RICHEDIT_DATA@@@@@@0@
+Rechercheenu.rc@LTEXT@IDD_FIELD.IDC_COMPRESSION@@@@JPEG@JPEG@0@
+Rechercheenu.rc@CAPTION@IDD_DATABASE_INFO.CAPTION@@@@Database Information@TODO! Database Information@0@
+Rechercheenu.rc@LTEXT@IDD_DATABASE_INFO.IDC_ARCHIV_INFO_LISTE@@@@List1@List1@0@
+Rechercheenu.rc@CAPTION@IDD_QUERY_RESULT.CAPTION@@@@Query results@TODO! Risultati di cerca@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_LIST_RESULTS@@@@List1@List1@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_CHECK_DISCONNECT@@@@Disconnec&t when done@TODO! Scone&ttere when done@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDOK@@@@OK@OK@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_TXT_PICTURE@@@@Images found:@TODO! Immagini trovata:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_TXT_FOUND@@@@-----------------@-----------------@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_ANIMATE_SEARCH@@@@Animate1@Animate1@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_TXT_SEARCH_IN@@@@Query on:@TODO! Cerca di:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_TXT_ELAPSED@@@@Time elapsed:@TODO! Time elapsed:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_ELAPSED@@@@00:00:00@00:00:00@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_TXT_COPIED@@@@Copied images:@TODO! Immagini copiata:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_RESULT.IDC_COPIED@@@@-----------------@-----------------@0@
+Rechercheenu.rc@CAPTION@IDD_COMMENT.CAPTION@@@@Notes@Note@0@
+Rechercheenu.rc@LTEXT@IDD_COMMENT.IDOK@@@@OK@OK@0@
+Rechercheenu.rc@LTEXT@IDD_COMMENT.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@CAPTION@IDD_STATION_NAME.CAPTION@@@@Host name@TODO! Host name@0@
+Rechercheenu.rc@LTEXT@IDD_STATION_NAME.IDC_TXT_BANK@@@@Specify the local host name for image printouts.\nThe name will be inserted on printout.@TODO! Specify the local host name for image printouts.\nThe name will be inserted on printout.@0@
+Rechercheenu.rc@LTEXT@IDD_STATION_NAME.IDOK@@@@OK@OK@0@
+Rechercheenu.rc@LTEXT@IDD_STATION_NAME.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@CAPTION@IDD_QUERY.CAPTION@@@@Query@Cerca@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_GROUP_TIME@@@@PC - Date and time@TODO! PC - Data e ora@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_DATE@@@@&Date:@TODO! &Data:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_PCDATE@@@@DateTimePicker2@TODO! DateTimePicker2@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_EXACT_TIME@@@@Time:@Ora:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_TIME_EXACT@@@@DateTimePicker3@TODO! DateTimePicker3@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_TIME_FROM@@@@Time &to:@TODO! Time &to:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_PCDATE_END@@@@DateTimePicker2@TODO! DateTimePicker2@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_TIME_END@@@@DateTimePicker3@TODO! DateTimePicker3@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_ALL@@@@A&ll hosts and archives@TODO! A&ll hosts and archives@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_SERVER_ARCHIVES@@@@Tree1@Tree1@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_OPEN@@@@&Show found images@TODO! Mo&stra immagini trovata@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_CHECK_COPY@@@@&Copy found images@TODO! &Copia immagini trovata@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDOK@@@@Query@Cerca@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDCANCEL@@@@Close@Chiudi@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_GRP_FIELDS@@@@Query criteria@TODO! Query criteria@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_PCDATEEND_TEXT@@@@Date:@Data:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_TIMEEND_TEXT@@@@Time:@Ora:@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY.IDC_SEARCHAREA@@@@Area search@TODO! Area search@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_NUM.IDC_TXT_FIELD@@@@Field name@TODO! Field name@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_GRP_DRIVE@@@@Backup drive@TODO! Unita di backup@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_DESTINATION@@@@&Destination:@TODO! &Destination:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_TYPE@@@@Type:@Tipo:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_TYPE@@@@Static@Statico@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_FREE@@@@Free:@TODO! Free:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_MB_FREE@@@@000000@000000@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_MB@@@@MBytes@MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_SELECTED@@@@Selected:@TODO! Selezionato:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_SELECTED_MB@@@@000000@000000@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_MB2@@@@MBytes@MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDOK@@@@Start@Avvia@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_GRP_BACKUP@@@@Backup@Backup@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_PROGRESS_PROCESS@@@@Progress2@Progress2@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_SIZE@@@@Already saved:@TODO! Already saved:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_SIZE_MB@@@@0/0MB@0/0MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_TIME@@@@Remaining time:@TODO! Remaining time:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TIME_S@@@@Unknown@Sconosciuta@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_VELOCITY@@@@Speed:@TODO! Speed:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_VELOCITY_KBS@@@@0 kB/s@0 kB/s@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_CLOSE@@@@Close@Chiudi@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_SEQUENCES@@@@Sequences to save:@TODO! Sequences to save:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_PROGRESS@@@@Backup progress@TODO! Backup progress@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_STATE@@@@Status:@Stato:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_TXT_STATE@@@@Not yet started@TODO! Not yet started@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_NAME@@@@Name of backup:@TODO! Name of backup:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_CDR@@@@CD/R@CD/R@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP.IDC_STATIC_ARCHIVE@@@@Archives to save:@TODO! Archives to save:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_GRP_BACKUP@@@@Backup@Backup@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_NAME@@@@Name of backup:@TODO! Name of backup:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_ARCHIVE@@@@Archives to save:@TODO! Archives to save:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_GRP_DRIVE@@@@Backup drive@TODO! Unita di backup@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_DESTINATION@@@@&Destination:@TODO! &Destination:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_CDR@@@@Check@TODO! CD/R@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_TYPE@@@@Type:@Tipo:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_TYPE@@@@Static@Statico@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_FREE@@@@Free:@TODO! Free:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_MB_FREE@@@@000000@000000@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_MB@@@@MBytes@MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_SELECTED@@@@Selected:@TODO! Selezionato:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_SELECTED_MB@@@@000000@000000@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_MB2@@@@MBytes@MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_GROUP_BACKUP_SPAN@@@@Backup period@TODO! Backup period@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_START_DATE@@@@Start date:@TODO! Start date:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_START_DATE@@@@DateTimePicker1@DateTimePicker1@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_START_TIME@@@@Start time:@Ora iniziale:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_START_TIME@@@@DateTimePicker2@TODO! DateTimePicker2@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_END_DATE@@@@End date:@TODO! End date:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_END_DATE@@@@DateTimePicker3@TODO! DateTimePicker3@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_END_TIME@@@@End time:@TODO! End time:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_END_TIME@@@@DateTimePicker4@TODO! DateTimePicker4@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_CALCULATE_SIZE@@@@Calculate current size@TODO! Calculate current size@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_CALCULATE_END@@@@Calculate maximal end@TODO! Calculate maximal end@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_RESET_START_END@@@@Reset to initial values@TODO! Reset to initial values@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_PROGRESS@@@@Backup progress@TODO! Backup progress@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_STATIC_STATE@@@@Status:@Stato:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_STATE@@@@Not yet started@TODO! Not yet started@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_SIZE@@@@Already saved:@TODO! Already saved:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_SIZE_MB@@@@0/0MB@0/0MB@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_VELOCITY@@@@Speed:@TODO! Speed:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_VELOCITY_KBS@@@@0 kB/s@0 kB/s@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TXT_TIME@@@@Remaining time:@TODO! Remaining time:@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_TIME_S@@@@Unknown@Sconosciuta@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_PROGRESS_PROCESS@@@@Progress2@Progress2@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDOK@@@@Start@Avvia@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@LTEXT@IDD_BACKUP_NEW.IDC_CLOSE@@@@Close@Chiudi@0@
+Rechercheenu.rc@CAPTION@IDD_SELECT_BACKUP_DRIVE.CAPTION@@@@Determine backup drive:@TODO! Determine backup drive:@0@
+Rechercheenu.rc@LTEXT@IDD_SELECT_BACKUP_DRIVE.IDOK@@@@OK@OK@0@
+Rechercheenu.rc@LTEXT@IDD_SELECT_BACKUP_DRIVE.IDC_TXT0@@@@Please select drive for backup:@TODO! Prego selezionare unita per backup:@0@
+Rechercheenu.rc@LTEXT@IDD_SELECT_BACKUP_DRIVE.IDC_LISTE@@@@List1@List1@0@
+Rechercheenu.rc@LTEXT@IDD_SELECT_BACKUP_DRIVE.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_TIME.IDC_TXT_FIELD@@@@Field name@TODO! Field name@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_TIME.IDC_TIME@@@@DateTimePicker1@DateTimePicker1@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_DATE.IDC_TXT_FIELD@@@@Field name@TODO! Field name@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_DATE.IDC_DATE@@@@DateTimePicker1@DateTimePicker1@0@
+Rechercheenu.rc@LTEXT@IDD_QUERY_FIELD_CHAR.IDC_TXT_FIELD@@@@Field name@TODO! Field name@0@
+Rechercheenu.rc@LTEXT@IDD_NAVIGATION.IDC_SLIDER@@@@Slider1@Slider1@0@
+Rechercheenu.rc@LTEXT@IDD_NAVIGATION.IDC_NUMBER@@@@00000/00000@00000/00000@0@
+Rechercheenu.rc@CAPTION@IDD_CONNECTING.CAPTION@@@@Connecting to@TODO! Connessere su@0@
+Rechercheenu.rc@LTEXT@IDD_CONNECTING.IDCANCEL@@@@Cancel@Annulla@0@
+Rechercheenu.rc@LTEXT@IDD_CONNECTING.IDC_HOST@@@@@@0@
+Rechercheenu.rc@LTEXT@IDD_CONNECTING.IDC_PROGRESS_CONNECT@@@@Progress1@Progress1@0@
+Rechercheenu.rc@LTEXT@IDD_ALARM_LIST.IDC_LIST_ALARM@@@@List1@List1@0@
+Rechercheenu.rc@LTEXT@IDD_ALARM_LIST.IDC_CHECK_ACTIVITY@@@@&Activity@TODO! &Activity@0@
+Rechercheenu.rc@LTEXT@IDD_ALARM_LIST.IDC_CHECK_1@@@@&1. Detector@TODO! &1. Detector@0@
+Rechercheenu.rc@LTEXT@IDD_ALARM_LIST.IDC_CHECK_2@@@@&2. Detector@TODO! &2. Detector@0@
+Rechercheenu.rc@STRING@IDR_MAINFRAME@@@@iST Recherche 4.0@TODO! idip! Recherche 4.0@0@
+Rechercheenu.rc@STRING@IDS_MAP@@@@Map@Carta geografica@0@
+Rechercheenu.rc@STRING@AFX_IDS_APP_TITLE@@@@Recherche@Recherche@0@
+Rechercheenu.rc@STRING@AFX_IDS_IDLEMESSAGE@@@@Ready@Pronto@0@
+Rechercheenu.rc@STRING@IDP_BACKUP_COPY_FAILED@@@@Error occured during backup.@TODO! Errore durante backup.@0@
+Rechercheenu.rc@STRING@IDS_COPY_ROV@@@@Copying backup reader software@TODO! Scrittura software del lettore in corso.@0@
+Rechercheenu.rc@STRING@IDS_COPY_ROV_DONE@@@@Backup reader software copied@TODO! Software del lettore copiata@0@
+Rechercheenu.rc@STRING@IDS_CDR_CHECK@@@@Checking drive...@TODO! Check@0@
+Rechercheenu.rc@STRING@IDS_ASK_CLOSE_CDR@@@@Finalise inserted CD/R?\nOnly finalised CD/R's can be read by standard CD - ROM - Drives.@TODO! Finalise inserted CD/R?\nOnly finalised CD/R's can be read by standard CD - ROM - Drives.@0@
+Rechercheenu.rc@STRING@IDP_EJECT_DIRECTCD@@@@Remove the CD/R from drive!\nYou will be asked, how you want to handle the CD/R.\nChoose entry:\nStandardise CD to enable use in all CD-ROM drives.@TODO! Remove the CD/R from drive!\nYou will be asked, how you want to handle the CD/R.\nChoose entry:\nStandardise CD to enable use in all CD-ROM drives.@0@
+Rechercheenu.rc@STRING@IDS_SEARCH_FROM@@@@Query from %s on %s@TODO! Cerca da %s su %s@0@
+Rechercheenu.rc@STRING@IDS_DRIVE@@@@Drive@Unità@0@
+Rechercheenu.rc@STRING@IDS_USEDAS@@@@used as@TODO! usato as@0@
+Rechercheenu.rc@STRING@IDS_USED@@@@MBytes used@TODO! MB usato@0@
+Rechercheenu.rc@STRING@IDS_SIZE@@@@Size in MBytes@TODO! Size in MBytes@0@
+Rechercheenu.rc@STRING@IDS_TYP@@@@Type@Tipo@0@
+Rechercheenu.rc@STRING@IDP_ASK_DELETE_ARCHIV@@@@Do you really want to delete backup archive\n'%s'?\nAll images and data will be lost!@TODO! Do you really want to delete backup archive\n'%s'?\nAll images and data will be lost!@0@
+Rechercheenu.rc@STRING@IDP_DELETE_SEQUENCE@@@@Do yo really want to delete sequence\n'%s'\nof date\n'%s'\nin archive\n'%s'\n on\n'%s'?\nAll images and data will be lost!@TODO! Do yo really want to delete sequence\n'%s'\nof date\n'%s'\nin archive\n'%s'\n on\n'%s'?\nAll images and data will be lost!@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_NR@@@@No.@No@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_FUELL@@@@Gauge@Indicatore@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_NAME@@@@archive name@TODO! archive name@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_TYP@@@@Type@Tipo@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_MB@@@@Size in MB@TODO! Size in MB@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_BENUTZT@@@@MB used@TODO! MB usato@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_FREI@@@@MB free@TODO! MB free@0@
+Rechercheenu.rc@STRING@IDS_DBPROP_AKTUELL@@@@Bytes used@TODO! Bytes used@0@
+Rechercheenu.rc@STRING@IDS_READ_ERROR@@@@The image data could not be read.@TODO! The image data could not be read.@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_INVALID_SERIAL@@@@A connection to remote host couldn't be established.\nThe license number is incorrect!@TODO! A connection to remote host couldn't be established.\nThe license number is incorrect!@0@
+Rechercheenu.rc@STRING@IDS_TIME@@@@Time@Ora@0@
+Rechercheenu.rc@STRING@IDS_ALARM_LIST_PRINT_TITLE@@@@Alarms off %s, day %s from camera %s:@TODO! Alarms off %s, day %s from camera %s:@0@
+Rechercheenu.rc@STRING@IDS_ALARM_LIST_PRINT_PAGE@@@@Page %d/%d@TODO! Pagina %d/%d@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_CALCULATING@@@@Calculating times and sizes@TODO! Calculating times and sizes@0@
+Rechercheenu.rc@STRING@IDP_BACKUP_ASK_FOR_CONTINUATION@@@@Do you want to continue the backup seamless?@TODO! Do you want to continue the backup seamless?@0@
+Rechercheenu.rc@STRING@IDP_DELETE_DATE_SEQUENCES@@@@Do you really want to delete all sequences with date\n'%s'\nin archive\n'%s'\non\n'%s'?\nAll images and data will be lost!@TODO! Do you really want to delete all sequences with date\n'%s'\nin archive\n'%s'\non\n'%s'?\nAll images and data will be lost!@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_EXT@@@@ER@TODO! ER@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_CAPS@@@@UF@TODO! UF@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_NUM@@@@NUM@NUM@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_SCRL@@@@RF@TODO! RF@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_OVR@@@@OVR@SSC@0@
+Rechercheenu.rc@STRING@ID_INDICATOR_REC@@@@MA@TODO! MA@0@
+Rechercheenu.rc@STRING@ID_FILE_NEW@@@@Creates a new document. \nNew@TODO! Crei un documento nouvo.\nNuovo@0@
+Rechercheenu.rc@STRING@ID_FILE_OPEN@@@@Opens an existing archive.\nOpen@TODO! Opens an existing archive.\nOpen@0@
+Rechercheenu.rc@STRING@ID_FILE_CLOSE@@@@Closes the active document.\nClose@Chiude il documento attivo\nChiudi@0@
+Rechercheenu.rc@STRING@ID_FILE_SAVE@@@@Saves the active document.\nSave@Salva il documento attivo.\nSalva@0@
+Rechercheenu.rc@STRING@ID_FILE_SAVE_AS@@@@Saves the active document with a new name.\nSave As@Salva il documento attivo con un nuovo nome.\nSalva con nome@0@
+Rechercheenu.rc@STRING@ID_FILE_PAGE_SETUP@@@@Changes the printing options.\nPage Setup@Modifica le opzioni di stampa\nImposta pagina@0@
+Rechercheenu.rc@STRING@ID_FILE_PRINT_SETUP@@@@Change the printer and printing options\nPrint Setup@Modifica la stampante e le opzioni di stampa.\nImposta stampante@0@
+Rechercheenu.rc@STRING@ID_FILE_PRINT@@@@Prints the active image with additional data.\nPrint@TODO! Prints the active image with additional data.\nPrint@0@
+Rechercheenu.rc@STRING@ID_FILE_PRINT_PREVIEW@@@@Displays the entire cover page.\nPrint Preview@Visualizza tutto il frontespizio.\nAnteprima di stampa@0@
+Rechercheenu.rc@STRING@ID_APP_ABOUT@@@@Shows program information, version number and copyright.\nInfo...@TODO! Shows program information, version number and copyright.\nInfo...@0@
+Rechercheenu.rc@STRING@ID_APP_EXIT@@@@Exits the applicationand disconnects all connections.\nExit@TODO! Exits the applicationand disconnects all connections.\nExit@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE1@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE2@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE3@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE4@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE5@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE6@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE7@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE8@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE9@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE10@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE11@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE12@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE13@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE14@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE15@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_FILE_MRU_FILE16@@@@Opens this document@Apre il documento selezionato.@0@
+Rechercheenu.rc@STRING@ID_NEXT_PANE@@@@Switch to the next window\nNext Window@TODO! Switch to the next window\nNext Window@0@
+Rechercheenu.rc@STRING@ID_PREV_PANE@@@@Switch back to the previous window\nPrevious Window@TODO! Switch back to the previous window\nPrevious Window@0@
+Rechercheenu.rc@STRING@ID_WINDOW_SPLIT@@@@Split the active window into panes\nSplit@Suddivide la finestra attiva in riquadri.\nDividi@0@
+Rechercheenu.rc@STRING@ID_EDIT_CLEAR@@@@Deletes the selection.\nDelete@TODO! Elimina della selezione.\nElimina@0@
+Rechercheenu.rc@STRING@ID_EDIT_CLEAR_ALL@@@@Deletes all.\nDelete all@TODO! Elimina tutta.\nElimina tutta@0@
+Rechercheenu.rc@STRING@ID_EDIT_COPY@@@@Copy the selection and put it on the Clipboard\nCopy@Copia l'oggetto selezionato negli Appunti.\nCopia@0@
+Rechercheenu.rc@STRING@ID_EDIT_CUT@@@@Removes the selection and put it on the Clipboard\nCut@TODO! Rimuove la selezione e copiarla negli Appunti.\nCut@0@
+Rechercheenu.rc@STRING@ID_EDIT_FIND@@@@Find the specified text\nFind@Trova il testo specificato.\nTrova@0@
+Rechercheenu.rc@STRING@ID_EDIT_PASTE@@@@Inserts the contents of the Clipboard.\nPaste@Inserisce il contenuto degli Appunti.\nIncolla@0@
+Rechercheenu.rc@STRING@ID_EDIT_REPEAT@@@@Repeats the last action.\nRepeat@Ripete l'ultima azione.\nRipeti@0@
+Rechercheenu.rc@STRING@ID_EDIT_REPLACE@@@@Replaces the specified text with different text.\nReplace@TODO! Sostituisce il testo specificato con altro testo.\nSostituisci@0@
+Rechercheenu.rc@STRING@ID_EDIT_SELECT_ALL@@@@Select the entire document\nSelect All@Seleziona l'intero documento.\nSeleziona tutto@0@
+Rechercheenu.rc@STRING@ID_EDIT_UNDO@@@@Undoes the last action.\nUndo@Annulla l'ultima operazione.\nAnnulla@0@
+Rechercheenu.rc@STRING@ID_EDIT_REDO@@@@Redoes the previously undone action.\nRedo@Ripete l'operazione precedentemente annullata.\nRipeti@0@
+Rechercheenu.rc@STRING@ID_VIEW_TOOLBAR@@@@Show or hide the toolbar\nToggle ToolBar@Mostra o nasconde la barra degli strumenti.\nMostra/nascondi la barra degli strumenti@0@
+Rechercheenu.rc@STRING@ID_VIEW_STATUS_BAR@@@@Show or hide the status bar\nToggle StatusBar@Mostra o nasconde la barra di stato.\nMostra/nascondi la barra di stato@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCSIZE@@@@Changes the window size.@Cambia le dimensioni della finestra.@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCMOVE@@@@Change the window position@Cambia la posizione della finestra@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCMINIMIZE@@@@Reduce the window to an icon@Riduce a icona la finestra@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCMAXIMIZE@@@@Enlarge the window to full size@Ingrandisce la finestra a schermo intero.@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCNEXTWINDOW@@@@Switch to the previous document window@Passa al documento precedente@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCPREVWINDOW@@@@Switch to the previous document window@Passa al documento precedente@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCCLOSE@@@@Close the active window and prompts to save the documents@Chiude la finestra attiva e chiede se si desidera salvare il documento.@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCRESTORE@@@@Restore the window to normal size@Ripristina le dimensioni originali della finestra.@0@
+Rechercheenu.rc@STRING@AFX_IDS_SCTASKLIST@@@@Activate Task List@Attiva l'elenco dei processi@0@
+Rechercheenu.rc@STRING@AFX_IDS_PREVIEW_CLOSE@@@@Close print preview mode\nCancel Preview@Chiude modalità Anteprima di stampa.\nAnnulla Anteprima@0@
+Rechercheenu.rc@STRING@ID_VIEW_FULLSCREEN@@@@Shows the application in full screen mode.\nFull screen@TODO! Shows the application in full screen mode.\nFull screen@0@
+Rechercheenu.rc@STRING@ID_DISCONNECT@@@@Disconnects the selected connection.\nDisconnect@TODO! Disconnects the selected connection.\nDisconnect@0@
+Rechercheenu.rc@STRING@ID_CONNECT@@@@Starts a connection\nConnect@TODO! Starts a connection\nConnect@0@
+Rechercheenu.rc@STRING@ID_CONNECT_LOCAL@@@@Establishes a connection to the local host\nEstablishes a connection to the local host@TODO! Establishes a connection to the local host\nEstablishes a connection to the local host@0@
+Rechercheenu.rc@STRING@ID_NEW_LOGIN@@@@Logs in a new user and disconnects all connections\nNew Login@TODO! Logs in a new user and disconnects all connections\nNew Login@0@
+Rechercheenu.rc@STRING@ID_SEARCH@@@@Query for images\nQuery@TODO! Query for images\nQuery@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_POS1@@@@Jumps to the first image\nFirst image@TODO! Jumps to the first image\nFirst image@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_END@@@@Last image\nLast image@TODO! Immagine ultima\nImmagine ultima@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_NEXT@@@@Shows the next image\nNext image@TODO! Shows the next image\nNext image@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_PREV@@@@Shows the previous image\nPrevious image@TODO! Shows the previous image\nPrevious image@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_REVIEW@@@@Rewind\nRewind@TODO! Riavvolgimento veloce\nRiavvolgimento veloce@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_FORWARD@@@@Play\nPlay@TODO! Avanzamento veloce\nAvanzamento veloce@0@
+Rechercheenu.rc@STRING@ID_VIEW_1@@@@1 sequence\n1 x 1@TODO! 1 sequence\n1 x 1@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_STOP@@@@Stop\nStop@Termina\nTermina@0@
+Rechercheenu.rc@STRING@ID_VIEW_2_2@@@@2 x 2 sequences\n2 x 2@TODO! 2 x 2 sequences\n2 x 2@0@
+Rechercheenu.rc@STRING@ID_VIEW_3_3@@@@3 x 3 sequences\n3 x 3@TODO! 3 x 3 sequences\n3 x 3@0@
+Rechercheenu.rc@STRING@ID_VIEW_4_4@@@@4 x 4\n4 x 4 sequences@TODO! 4 x 4\n4 x 4 sequenze@0@
+Rechercheenu.rc@STRING@ID_SMALL_CLOSE@@@@Closes this sequence@TODO! Closes this sequence@0@
+Rechercheenu.rc@STRING@ID_SEQUENCE_OPEN@@@@Opens the selected sequence\nOpen sequence@TODO! Opens the selected sequence\nOpen sequence@0@
+Rechercheenu.rc@STRING@ID_ARCHIV_DELETE@@@@Deletes the whole archive\nDelete archive@TODO! Deletes the whole archive\nDelete archive@0@
+Rechercheenu.rc@STRING@ID_DELETE@@@@Deletes the selected sequence\nDelete@TODO! Deletes the selected sequence\nDelete@0@
+Rechercheenu.rc@STRING@ID_VIEW_ORIGINAL@@@@Shows image in original size\n1:1@TODO! Shows image in original size\n1:1@0@
+Rechercheenu.rc@STRING@ID_EDIT_STATION@@@@Changes the local host name for the printout of images and data\nLocal host name@TODO! Changes the local host name for the printout of images and data\nLocal host name@0@
+Rechercheenu.rc@STRING@ID_EDIT_COMMENT@@@@Changes the notes of an image for the printout\nNotes@TODO! Changes the notes of an image for the printout\nNotes@0@
+Rechercheenu.rc@STRING@ID_FILE_HTML@@@@Saves image and data in a HTML file\nSave (HTML)@TODO! Saves image and data in a HTML file\nSave (HTML)@0@
+Rechercheenu.rc@STRING@ID_FILE_JPG@@@@Saves image in JPEG format\nSave (JPEG)@TODO! Saves image in JPEG format\nSave (JPEG)@0@
+Rechercheenu.rc@STRING@ID_FILE_DIB@@@@Saves image in BMP format\nSave (BMP)@TODO! Saves image in BMP format\nSave (BMP)@0@
+Rechercheenu.rc@STRING@ID_FILE_JPX@@@@Saves image and data in a JPX file\nSave@TODO! Saves image and data in a JPX file\nSave@0@
+Rechercheenu.rc@STRING@ID_FILE_DISK@@@@Save image and data as JPX on floppy\nSave@TODO! Save image and data as JPX on floppy\nSave@0@
+Rechercheenu.rc@STRING@ID_ARCHIV_EMPTY@@@@Empties the whole archive\nEmpty@TODO! Empties the whole archive\nEmpty@0@
+Rechercheenu.rc@STRING@ID_FILE_OPEN_DISK@@@@Opens an archive from floppy\nOpen@TODO! Opens an archive from floppy\nOpen@0@
+Rechercheenu.rc@STRING@ID_DATABASE_INFO@@@@Shows dialog with detailed database information\nDatabase information@TODO! Shows dialog with detailed database information\nDatabase information@0@
+Rechercheenu.rc@STRING@ID_ARCHIV_BACKUP@@@@Starts the backup process\nBackup process@TODO! Starts the backup process\nBackup process@0@
+Rechercheenu.rc@STRING@ID_SMALL_CLOSE_ALL@@@@Closes all sequences@TODO! Closes all sequences@0@
+Rechercheenu.rc@STRING@ID_PROGRESS@@@@Connecting progress@TODO! Connecting progress@0@
+Rechercheenu.rc@STRING@ID_PROGRESS_TEXT@@@@Connecting:@TODO! Connecting:@0@
+Rechercheenu.rc@STRING@ID_VIDEO_FULLSCREEN@@@@Full screen\nShows the application in full screen mode.@TODO! Scherma intero\nShows the application in full screen mode.@0@
+Rechercheenu.rc@STRING@ID_SEQUENCE_OPEN_SINGLE@@@@Opens this sequence only. Closes all other opened sequences.@TODO! Opens this sequence only. Closes all other opened sequences.@0@
+Rechercheenu.rc@STRING@ID_SEARCH_AT_START@@@@Shows query dialog at program start@TODO! Shows query dialog at program start@0@
+Rechercheenu.rc@STRING@IDP_NO_DISK@@@@No access to drive(s) %s. \nInsert disk! \nRepeat transaction!@TODO! No access to drive(s) %s. \nInsert disk! \nRepeat transaction!@0@
+Rechercheenu.rc@STRING@IDP_DISK_RO@@@@Disk is write protected or faulty! \nRemove write protection and repeat transaction!@TODO! Disk is write protected or faulty! \nRemove write protection and repeat transaction!@0@
+Rechercheenu.rc@STRING@IDP_NO_DISK_SPACE@@@@Not enough room available on drive %s. \nInsert another disk and repeat transaction!@TODO! Not enough room available on drive %s. \nInsert another disk and repeat transaction!@0@
+Rechercheenu.rc@STRING@IDP_DISK_WRITTEN@@@@Data was saved under the name of %s.@TODO! Data was saved under the name of %s.@0@
+Rechercheenu.rc@STRING@IDS_DATABASE_INFO@@@@Database Information@TODO! Database Information@0@
+Rechercheenu.rc@STRING@IDS_OPEN@@@@Open@Apri@0@
+Rechercheenu.rc@STRING@IDS_JPEG@@@@JPEG images@TODO! JPEG images@0@
+Rechercheenu.rc@STRING@IDS_JPX@@@@Images and data@TODO! Immagini e dati@0@
+Rechercheenu.rc@STRING@IDS_HTML@@@@Internet document@TODO! Documento Internet@0@
+Rechercheenu.rc@STRING@IDS_SAVE@@@@Save@Salva@0@
+Rechercheenu.rc@STRING@IDS_DIB@@@@Bitmap File@TODO! Bitmap File@0@
+Rechercheenu.rc@STRING@IDS_FIELD_NAME@@@@Field name@TODO! Field name@0@
+Rechercheenu.rc@STRING@IDS_FIELD_VALUE@@@@Field entry@TODO! Field entry@0@
+Rechercheenu.rc@STRING@IDS_PICTURE@@@@Camera: %d Date: %s Time: %s Resolution: %dx%d@TODO! Telecamera: %d Data: %s Ora: %s Risoluzione: %dx%d@0@
+Rechercheenu.rc@STRING@IDS_PICTURE_TABBED@@@@Camera:\t%d\nDate:\t%s\nTime:\t%s\nResolution:\t%dx%d@TODO! Telecamera:\t%d\nData:\t%s\nOra:\t%s\nRisoluzione:\t%dx%d@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION@@@@A connection to remote host couldn't be established.@TODO! A connection to remote host couldn't be established.@0@
+Rechercheenu.rc@STRING@IDS_LOCAL_SERVER@@@@Local host@TODO! Local host@0@
+Rechercheenu.rc@STRING@IDS_CAMERA_NR@@@@Camera no.%d@TODO! Telecamera no.%d@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_INVALID_PERMISSION@@@@You don't have the authorisation to connect with this remote host.@TODO! You don't have the authorisation to connect with this remote host.@0@
+Rechercheenu.rc@STRING@IDS_ERROR_ON@@@@An error occured at the remote host %s.\n%s@TODO! An error occured at the remote host %s.\n%s@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_LINK_MODUL@@@@A connection to remote host couldn't be established.\nThe link module doesn't run.@TODO! A connection to remote host couldn't be established.\nThe link module doesn't run.@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_SERVER@@@@A connection to remote host couldn't be established.\nThe selected remote host server doesn't run.@TODO! A connection to remote host couldn't be established.\nThe selected remote host server doesn't run.@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_RESET@@@@A connection to remote host couldn't be established.\nThe selected server is just reseting.@TODO! A connection to remote host couldn't be established.\nThe selected server is just reseting.@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_MAX_CLIENT@@@@A connection to remote host could not be established.\nThe selected server does not accept any more connections.@TODO! A connection to remote host couldn't be established.\nThe selected server doesn't take any more connection.@0@
+Rechercheenu.rc@STRING@IDP_NO_CONNECTION_UNKNOWN@@@@A connection to remote host couldn't be established.@TODO! A connection to remote host couldn't be established.@0@
+Rechercheenu.rc@STRING@IDS_CONNECT@@@@To &Remote Host...\tENTER@TODO! To &Remote Host...\tENTER@0@
+Rechercheenu.rc@STRING@IDS_KTO_NR@@@@Account no.@TODO! Account no.@0@
+Rechercheenu.rc@STRING@IDS_ARCHIV_NR@@@@Archive no.@TODO! Archivio no.@0@
+Rechercheenu.rc@STRING@IDS_KAMERA_NR@@@@Camera no.@TODO! Telecamera no.@0@
+Rechercheenu.rc@STRING@IDS_REC_DATE@@@@PC date@TODO! PC data@0@
+Rechercheenu.rc@STRING@IDS_REC_TIME@@@@PC time@TODO! PC ora@0@
+Rechercheenu.rc@STRING@IDS_DTP_TIME@@@@ATM time@TODO! ATM ora@0@
+Rechercheenu.rc@STRING@IDS_GA_NR@@@@ATM no.@TODO! ATM no.@0@
+Rechercheenu.rc@STRING@IDS_TA_NR@@@@Transaction no.@TODO! Transaction no.@0@
+Rechercheenu.rc@STRING@IDS_BANKLEITZAHL@@@@Bank code@TODO! Bank code@0@
+Rechercheenu.rc@STRING@IDS_VALUE@@@@Amount@Valore@0@
+Rechercheenu.rc@STRING@IDS_CURRENCY@@@@Currency@Valuta@0@
+Rechercheenu.rc@STRING@IDS_STATION@@@@Host name@TODO! Host name@0@
+Rechercheenu.rc@STRING@IDS_CAM_NAME@@@@Camera name@TODO! Nome di telecamera@0@
+Rechercheenu.rc@STRING@IDS_DTP_DATE@@@@ATM date@TODO! ATM data@0@
+Rechercheenu.rc@STRING@IDS_PICTURE_NR@@@@Image no.@TODO! Immagine no.@0@
+Rechercheenu.rc@STRING@IDS_COMMENT@@@@Notes@Note@0@
+Rechercheenu.rc@STRING@IDS_ARCHIVE@@@@Archive@Archivio@0@
+Rechercheenu.rc@STRING@IDS_STATION2@@@@Host@Host@0@
+Rechercheenu.rc@STRING@IDS_AND@@@@and@e@0@
+Rechercheenu.rc@STRING@IDS_ALL_CAMERAS@@@@All cameras@TODO! Tutti telecamere@0@
+Rechercheenu.rc@STRING@IDS_RESOLUTION@@@@Resolution@Risoluzione@0@
+Rechercheenu.rc@STRING@IDP_DELETE_ARCHIV@@@@Do you really want to delete all sequences in archive\n'%s'\non\n'%s'?\nAll images and data will be lost!@TODO! Do you really want to delete all sequences in archive\n'%s'\non\n'%s'?\nAll images and data will be lost!@0@
+Rechercheenu.rc@STRING@IDS_SUM@@@@Total@Totale@0@
+Rechercheenu.rc@STRING@IDS_TOOLTIP_ARCHIV@@@@Archive:\t%s\nUsed:\t%d MB\nSize:\t%d MB@TODO! Archivio:\t%s\nUsato:\t%d MB\nSize:\t%d MB@0@
+Rechercheenu.rc@STRING@IDS_TOOLTIP_DIB@@@@Image no.:\t\t%d\nDate:\t\t%s\nTime:\t\t%s\nResolution:\t%dx%d@TODO! Immagine no.:\t\t%d\nData:\t\t%s\nOra:\t\t%s\nRisoluzione:\t%dx%d@0@
+Rechercheenu.rc@STRING@IDS_NO_BACKUP_3X@@@@The software version %s doesn't support this kind of backup!@TODO! The software version %s doesn't support this kind of backup!@0@
+Rechercheenu.rc@STRING@IDS_CANCEL_BACKUP@@@@Do you really want to interrupt the backup process?@TODO! Do you really want to interrupt the backup process?@0@
+Rechercheenu.rc@STRING@IDS_DRIVE_FD@@@@Floppy Disk@Floppy disk@0@
+Rechercheenu.rc@STRING@IDS_DRIVE_HD@@@@Local harddisk@TODO! local drive@0@
+Rechercheenu.rc@STRING@IDS_DRIVE_NET@@@@Network drive@TODO! Unità network@0@
+Rechercheenu.rc@STRING@IDS_DRIVE_CD@@@@CD-ROM Drive@Unità CD-ROM@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_NOT_STARTED@@@@Not yet started@TODO! Not yet started@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_RUNNING@@@@Writing backup data@TODO! Started, running@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_CANCELLED@@@@Cancelled@Annullata@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_FINISHED@@@@Successfully finished@TODO! Successfully finished@0@
+Rechercheenu.rc@STRING@IDS_TITLE_BACKUP@@@@Backup from@TODO! Backup da@0@
+Rechercheenu.rc@STRING@IDS_BACKUP_FAILED@@@@Error, Backup cancelled@TODO! Errore, Backup anullata@0@
+Rechercheenu.rc@STRING@IDP_BACKUP_INITIALIZE_FAILED@@@@An error occured during the backup initialisation.@TODO! Errore durante la preparazione del backup.@0@
+Rechercheenu.rc@STRING@IDC_CAMERA@@@@Camera name or camera number@TODO! Nome o numoro di telecamera@0@
+Rechercheenu.rc@STRING@IDC_RESOLUTION@@@@The resolution of the image in pixels@TODO! The resolution of the image in pixels@0@
+Rechercheenu.rc@STRING@IDC_COMBO_CAMERA@@@@Choose individual camera no. to replay the images.@TODO! Choose individual camera no. to replay the images.@0@
+Rechercheenu.rc@STRING@IDC_TIME@@@@The PC time of the image@TODO! The PC time of the image@0@
+Rechercheenu.rc@STRING@IDC_DATE@@@@The PC date of the image@TODO! The PC date of the image@0@
+Rechercheenu.rc@STRING@IDC_EDIT_DATA@@@@Additional saved data for the image@TODO! Additional saved data for the image@0@
+Rechercheenu.rc@STRING@IDC_CHECK_ALL@@@@Select this to query all hosts and archives.@TODO! Select this to query all hosts and archives.@0@
+Rechercheenu.rc@STRING@ID_SEARCH_RECTANGLE@@@@Query limited to selected rectangle\nQuery limited to selected rectangle@TODO! Query limited to selected rectangle\nQuery limited to selected rectangle@0@
+Rechercheenu.rc@STRING@ID_SEARCH_RECTANGLE_DELETE@@@@Clear selection\nClear selection@TODO! Clear selection\nClear selection@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_SKIP_FORWARD@@@@Next event\Next event@TODO! Next event\Next event@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_FAST_FORWARD@@@@Fast forward\nFast forward@TODO! Avanzamento veloce\nAvanzamento veloce@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_FAST_BACK@@@@Fast rewind\nFast rewind@TODO! Riavvolgimento veloce\nRiavvolgimento veloce@0@
+Rechercheenu.rc@STRING@ID_NAVIGATE_SKIP_BACK@@@@Last event\Last event@TODO! Evento ultimo\nEvento ultimo@0@
+Rechercheenu.rc@STRING@ID_CONNECT_MAP@@@@Shows a map for connections\nMap@TODO! Shows a map for connections\nMap@0@
+Rechercheenu.rc@STRING@ID_SYNC_BACK@@@@Plays images synchronized backward\nPlays images synchronized backward@TODO! Plays images synchronized backward\nPlays images synchronized backward@0@
+Rechercheenu.rc@STRING@ID_SYNC_STEP_BACK@@@@Goes one image synchronized backward\nGoes one image synchronized backward@TODO! Goes one image synchronized backward\nGoes one image synchronized backward@0@
+Rechercheenu.rc@STRING@ID_SYNC_STOP@@@@Stops synchronized playback\nStops synchronized playback@TODO! Stops synchronized playback\nStops synchronized playback@0@
+Rechercheenu.rc@STRING@ID_SYNC_STEP_FORWARD@@@@Goes one image synchronized forward\nGoes one image synchronized forward@TODO! Goes one image synchronized forward\nGoes one image synchronized forward@0@
+Rechercheenu.rc@STRING@ID_SYNC_FORWARD@@@@Plays images synchronized forward\nPlays images synchronized forward@TODO! Plays images synchronized forward\nPlays images synchronized forward@0@
+Rechercheenu.rc@STRING@ID_SYNC@@@@Starts or stops time synchronized playback of images\nStops time synchronized playback of images@TODO! Starts or stops time synchronized playback of images\nStops time synchronized playback of images@0@
+Rechercheenu.rc@STRING@IDS_DBD_CSID@@@@Customer id@TODO! Customer id@0@
+Rechercheenu.rc@STRING@IDS_DBD_FINM@@@@First name@Nome@0@
+Rechercheenu.rc@STRING@IDS_DBD_LANM@@@@Last name@Cognome@0@
+Rechercheenu.rc@STRING@IDS_DBD_PRID@@@@Event no.@TODO! Evento no.@0@
+Rechercheenu.rc@STRING@IDS_DBD_BXID@@@@Box no.@TODO! Box no.@0@
+Rechercheenu.rc@STRING@IDS_WAIT_FOR_IMAGE@@@@The system is waiting for image data.@TODO! The system is waiting for image data.@0@
+Rechercheenu.rc@STRING@IDP_NOTHING_TO_BACKUP@@@@There are no sequences or archives to save!@TODO! There are no sequences or archives to save!@0@
+Rechercheenu.rc@STRING@IDP_ERROR@@@@The host %s supplies the following error:\n%s.@TODO! The host %s supplies the following error:\n%s.@0@
+Rechercheenu.rc@STRING@IDP_NO_HOST@@@@Remote host %s was not found in the host list.\nCheck the spelling!@TODO! Remote host %s was not found in the host list.\nCheck the spelling!@0@
+Rechercheenu.rc@STRING@IDS_DATE@@@@Date@Data@0@
+Rechercheenu.rc@STRING@IDW_SYNC_DATE@@@@Date for synchronization\nDate for synchronization@TODO! Date for synchronization\nDate for synchronization@0@
+Rechercheenu.rc@STRING@IDW_SYNC_TIME@@@@Time for synchronization\nTime for synchronization@TODO! Time for synchronization\nTime for synchronization@0@
+Rechercheenu.rc@STRING@IDW_SYNC_SLIDER@@@@The velocity of playback each picture (In the range 10 ms to 1s)\nVelocity of playback@TODO! The velocity of playback each picture (In the range 10 ms to 1s)\nVelocity of playback@0@
+Rechercheenu.rc@STRING@IDC_CHECK_OPEN@@@@All found images will be shown immediately during the query.@TODO! All found images will be shown immediately during the query.@0@
+Rechercheenu.rc@STRING@IDC_SERVER_ARCHIVES@@@@Select the hosts and archives you want to query.\nQuery time can be reduced by limiting the number of selected archives.@TODO! Select the hosts and archives you want to query.\nQuery time can be reduced by limiting the number of selected archives.@0@
+Rechercheenu.rc@STRING@IDC_CHECK_COPY@@@@All found images will be copied in the query result archive according to the remote host.\nQueries on systems with software version 3.x will always copy the images.@TODO! All found images will be copied in the query result archive according to the remote host.\nQueries on systems with software version 3.x will always copy the images.@0@
+Rechercheenu.rc@STRING@ID_SEQUENCE_OVER@@@@Plays images continuously over sequence borders using the same window@TODO! Plays images continuously over sequence borders using the same window@0@
+Rechercheenu.rc@STRING@ID_DATE_SEQUENCES_DELETE@@@@Deletes all sequences of this date.\nDelete sequences@TODO! Deletes all sequences of this date.\nDelete sequences@0@
+Rechercheenu.rc@STRING@IDP_FILE_OVERWRITE@@@@The file %s already exists.\nShould the file be overwritten?@TODO! The file %s already exists.\nShould the file be overwritten?@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_CD_R@@@@CD-R medium@TODO! CD-R medium@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_CD_RW@@@@CD-RW medium@TODO! CD-RW medium@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_DVD_ROM@@@@DVD-ROM medium@TODO! DVD-ROM medium@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_DVD_RAM@@@@DVD-RAM medium@TODO! DVD-RAM medium@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_DVD_R@@@@DVD-R medium@TODO! DVD-R medium@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_DVD_RW@@@@DVD-RW medium@TODO! DVD-RW medium@0@
+Rechercheenu.rc@STRING@IDS_TEMP_BACKUP_RUNNING@@@@Create temporary files@TODO! Create temporary files@0@
+Rechercheenu.rc@STRING@IDP_DELETE_CDRW@@@@The inserted medium already contains files.\nBefore writing these files will be deleted!\n\nDo you really want to delete these files?@TODO! The inserted medium already contains files.\nBefore writing these files will be deleted!\n\nDo you really want to delete these files?@0@
+Rechercheenu.rc@STRING@IDP_MULTISESSION_NOT_POSSIBLE@@@@This medium can not be written by the software.\nPlease insert another medium.@TODO! This medium can not be written by the software.\nPlease insert another medium.@0@
+Rechercheenu.rc@STRING@IDS_CLEAN_RW@@@@Deleting RW medium@TODO! Deleting RW medium@0@
+Rechercheenu.rc@STRING@IDS_NO_MEDIUM_FOUND@@@@No medium found@TODO! No medium found@0@
+Rechercheenu.rc@STRING@IDS_MEDIUM_CD_ROM@@@@CD-ROM medium@TODO! CD-ROM medium@0@
+RechercheEnu.rc@STRING@IDS_DRIVE_DVD_RAM@@@@DVD-RAM drive@TODO! DVD-RAM drive@0@
+Rechercheenu.rc@MENUITEM@IDR_MAINFRAME.POPUP7.ID_VIEW_TARGET_DISPLAY@@@@&Target display@TODO! &Target display@0@
+Rechercheenu.rc@STRING@IDC_LIST_SEQUENCES@@@@Displays the selected sequences for the backup@TODO! Displays the selected sequences for the backup@0@
+Rechercheenu.rc@STRING@IDC_EDIT_BACKUP_NAME@@@@Enter the name for this backup@TODO! Enter the name for this backup@0@
+Rechercheenu.rc@STRING@IDC_CDR@@@@Ckecks the destination drive@TODO! Ckecks the destination drive@0@
+Rechercheenu.rc@STRING@IDC_LIST_ARCHIVES@@@@Displays the selected archives for the backup@TODO! Displays the selected archives for the backup@0@
+Rechercheenu.rc@STRING@IDC_COMBO_DESTINATION@@@@Select a backup drive@TODO! Select a backup drive@0@
+Rechercheenu.rc@STRING@IDC_PROGRESS_PROCESS@@@@Shows the backup progress@TODO! Shows the backup progress@0@
+Rechercheenu.rc@STRING@ID_VIEW_TARGET_DISPLAY@@@@Toggles the target display on or off\nToggles the target display on or off@TODO! Toggles the target display on or off\nToggles the target display on or off@0@
+Rechercheenu.rc@STRING@IDC_START_DATE@@@@Enter the start date for the backup data@TODO! Enter the start date for the backup data@0@
+Rechercheenu.rc@STRING@IDC_START_TIME@@@@Enter the start time for the backup data@TODO! Enter the start time for the backup data@0@
+Rechercheenu.rc@STRING@IDC_END_DATE@@@@Enter the end date for the backup data@TODO! Enter the end date for the backup data@0@
+Rechercheenu.rc@STRING@IDC_END_TIME@@@@Enter the end time for the backup data@TODO! Enter the end time for the backup data@0@
+Rechercheenu.rc@STRING@IDC_RESET_START_END@@@@Resets the default values for start/end date/time@TODO! Resets the default values for start/end date/time@0@
+Rechercheenu.rc@STRING@IDC_CALCULATE_END@@@@Calculates the end date/time for the available destination capacity@TODO! Calculates the end date/time for the available destination capacity@0@
+Rechercheenu.rc@STRING@IDC_CALCULATE_SIZE@@@@Calculates the requested destination capacity for the backup data.@TODO! Calculates the requested destination capacity for the backup data.@0@

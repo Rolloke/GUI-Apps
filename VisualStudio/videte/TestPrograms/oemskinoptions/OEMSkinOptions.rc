@@ -1,0 +1,334 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\OEMSkinOptions.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\OEMSkinOptions.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "Info über OEMSkinOptions"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_TXT3,11,17,20,20
+    LTEXT           "OEMSkinOptions Version 1.0",IDC_TXT1,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2004",IDC_TXT2,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_OEMSKINOPTIONS_DIALOG DIALOGEX 0, 0, 320, 252
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "OEMSkinOptions"
+MENU IDR_MENU1
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Group Box and Slider",IDC_GRP_OEM,7,7,306,45
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | WS_TABSTOP,14,21,289,22,WS_EX_TRANSPARENT
+    LTEXT           "Edit Control:",IDC_TXT_OEM4,7,62,48,8
+    EDITTEXT        IDC_EDIT1,68,59,93,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,161,59,15,14
+    LISTBOX         IDC_LIST1,177,66,50,36,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    LBS_MULTICOLUMN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "List Box:",IDC_TXT_OEM6,178,58,34,8,0,WS_EX_TRANSPARENT
+    RTEXT           "<b>Static Text Control:</b><br>Zeile 1<br>Zeile 2<br>Zeile 3",
+                    IDC_TXT_OEM,231,66,82,36,SS_NOPREFIX | SS_NOTIFY | 
+                    SS_SUNKEN
+    LTEXT           "Progress",IDC_TXT_OEM3,7,80,48,8
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,67,77,104,
+                    14
+    LTEXT           "Combo Box",IDC_TXT_OEM7,7,98,48,8
+    COMBOBOX        IDC_COMBO1,67,96,102,52,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "List Control",IDC_TXT_OEM2,7,120,48,8
+    LTEXT           "Tree Control:",IDC_TXT_OEM5,130,120,48,8,0,WS_EX_RIGHT
+    CONTROL         "",IDC_DATETIMEPICKER1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,254,113,59,15
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | 
+                    WS_TABSTOP,7,131,115,114,WS_EX_STATICEDGE
+    CONTROL         "",IDC_TREE1,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | WS_TABSTOP,130,131,116,
+                    114,WS_EX_STATICEDGE
+    CONTROL         "Check1",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | 
+                    WS_TABSTOP,251,134,39,10
+    CONTROL         "Radio1",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_GROUP,251,146,38,10
+    CONTROL         "Radio2",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY,251,158,38,10
+    PUSHBUTTON      "Icon",ID_BTN_ICON,263,170,33,32,BS_NOTIFY | WS_GROUP
+    SCROLLBAR       IDC_SCROLLBAR1,303,134,10,68,SBS_VERT
+    PUSHBUTTON      "Abbrechen",IDCANCEL,263,208,50,16,BS_NOTIFY
+    DEFPUSHBUTTON   "OK",IDOK,263,229,50,16,BS_NOTIFY
+END
+
+IDD_SKINPROPERTYPAGE DIALOG  0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,129,26,50,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Firmenname>"
+            VALUE "FileDescription", "TODO: <Dateibeschreibung>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "OEMSkinOptions.exe"
+            VALUE "Copyright (C) 2004", "TODO: (c) <Firmenname>. Alle Rechte vorbehalten."
+            VALUE "OriginalFilename", "OEMSkinOptions.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_OEMSKINOPTIONS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 245
+        HORZGUIDE, 66
+        HORZGUIDE, 84
+        HORZGUIDE, 102
+        HORZGUIDE, 120
+    END
+
+    IDD_SKINPROPERTYPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_OEMSKINOPTIONS_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO1, 0x403, 7, 0
+0x6574, 0x7478, 0x3120, "\000" 
+    IDC_COMBO1, 0x403, 6, 0
+0x6574, 0x7478, 0x0032, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Restore System Colors",       ID_FILE_RESTORE_SYS_COLORS
+        MENUITEM SEPARATOR
+        MENUITEM "Save OEM",                    ID_FILE_SAVE
+        MENUITEM "Save OEM As...",              ID_FILE_SAVE_AS
+        MENUITEM "Load OEM...",                 ID_FILE_LOAD
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_APP_EXIT
+    END
+    POPUP "Test"
+    BEGIN
+        MENUITEM "Enable OK",                   ID_TEST_ENABLEOK
+    END
+END
+
+IDR_CONTEXT MENU 
+BEGIN
+    POPUP "shape"
+    BEGIN
+        MENUITEM "Rectangle",                   ID_SHAPE_RECTANGLE
+        MENUITEM "Round",                       ID_SHAPE_ROUND
+        MENUITEM "Bitmap",                      ID_SHAPE_BITMAP
+        MENUITEM "Round Rect",                  ID_SHAPE_ROUNDRECT
+    END
+    POPUP "surface"
+    BEGIN
+        MENUITEM "Plane Color",                 ID_SURFACE_PLANECOLOR
+        MENUITEM "Change Simple",               ID_SURFACE_CHANGESIMPLE
+        MENUITEM "Change Brushed",              ID_SURFACE_CHANGEBRUSHED
+        MENUITEM "3D Plane Edge 5",             ID_SURFACE_3DPLANEEDGE5
+        MENUITEM "3D Plane Edge 10",            ID_SURFACE_3DPLANEEDGE10
+        MENUITEM "3D Plane Edge 15",            ID_SURFACE_3DPLANEEDGE15
+    END
+    POPUP "bkstyle"
+    BEGIN
+        MENUITEM "Plane Color",                 ID_BKSTYLE_PLANECOLOR
+        MENUITEM "Change Simple",               ID_BKSTYLE_CHANGESIMPLE
+        MENUITEM "Change Brushed",              ID_BKSTYLE_CHANGEBRUSHED
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&Info über OEMSkinOptions..."
+    IDS_PAGE1               "Page One"
+    IDS_PAGE2               "Page Two"
+    IDS_PAGE3               "Page Three"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_TREE1               "Right click to select the color, shape or surface"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_PROGRESS1           "Progress Control"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#include "res\OEMSkinOptions.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

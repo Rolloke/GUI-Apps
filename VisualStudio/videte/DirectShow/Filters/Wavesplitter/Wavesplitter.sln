@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wavesplitter", "Wavesplitter.vcproj", "{A6913FA2-9A41-4164-B3F0-7580A42CBC74}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = Wavesplitter.vcproj
+		SccProjectName0 = \u0022$/Project/DirectShow/Filters/Wavesplitter\u0022,\u0020EYHCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A6913FA2-9A41-4164-B3F0-7580A42CBC74}.Debug.ActiveCfg = Debug|Win32
+		{A6913FA2-9A41-4164-B3F0-7580A42CBC74}.Debug.Build.0 = Debug|Win32
+		{A6913FA2-9A41-4164-B3F0-7580A42CBC74}.Release.ActiveCfg = Release|Win32
+		{A6913FA2-9A41-4164-B3F0-7580A42CBC74}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

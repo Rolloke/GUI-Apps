@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogZipLib", "LogZipLib.vcproj", "{6E532757-252F-464A-821D-70D473C53DE9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = LogZipLib.vcproj
+		SccProjectName0 = \u0022$/Project/Tools/LogZipLib\u0022,\u0020DJNAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{6E532757-252F-464A-821D-70D473C53DE9}.Debug.ActiveCfg = Debug|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.Debug.Build.0 = Debug|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.Release.ActiveCfg = Release|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.Release.Build.0 = Release|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{6E532757-252F-464A-821D-70D473C53DE9}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

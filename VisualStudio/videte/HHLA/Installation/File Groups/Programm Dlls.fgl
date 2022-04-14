@@ -1,0 +1,11 @@
+[TopDir]
+file0=D:\Project\Units\MiCo\MiCoDA\Release\MiCoDA.dll
+file1=D:\Project\Lib\oemgui.dll
+file2=D:\Project\CIPC\release\Cipc.dll
+file3=D:\Project\Lib\JpegLib.dll
+file4=D:\Project\Lib\ijl15.dll
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

@@ -1,0 +1,9 @@
+:Base $$root$$.hlp
+1 Menus
+2 Menu Fichier=menu_file
+2 Menu Edition=menu_edit
+2 Menu Affichage=menu_view
+2 Menu Fenêtre=menu_window
+2 Menu Aide (?)=menu_help
+1 <<add your application-specific topics here>>
+2 <<add your topic jumps here>>=main_index

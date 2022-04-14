@@ -1,0 +1,227 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "version.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""version.rc""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LogoutReminder.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\LogoutReminder.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Logout Reminder...",         ID_APP_ABOUT
+        MENUITEM "&Icon verstecken",            ID_SHOW_ICON
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&Abbrechen",                  IDCANCEL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 139
+STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Logout Reminder - Ausloggen nicht vergessen !!!"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Einloggen / Ausloggen..",IDC_BTN_LOGOUT,5,8,151,14
+    DEFPUSHBUTTON   "OK",IDOK,164,8,66,14,WS_GROUP
+    LTEXT           "Dialog beenden in ",IDC_TXT_LOG_OFF,5,31,59,8
+    CTEXT           "",IDC_TXT_SEC,66,31,15,8
+    LTEXT           "Sekunden",IDC_TXT_SEC_UNIT,82,31,35,8
+    CONTROL         "Stop",IDC_CK_STOP,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,125,30,31,10
+    PUSHBUTTON      "Schließen",IDC_CLOSE,164,28,66,14,WS_GROUP
+    CONTROL         "An das Ausloggen erinnern um:",IDC_CK_LOGOUT_TIME,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,50,116,10
+    CONTROL         "DateTimePicker1",IDC_LOGOUT_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,164,48,66,
+                    15
+    CONTROL         "Gespeicherte Zeit setzen",IDC_CK_LOGOUT_OLD_TIME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,70,102,10
+    PUSHBUTTON      "Eingestellte Zeit speichern",IDC_SAVE_LOGOUT_TIME,129,
+                    68,101,14
+    LTEXT           "Pfad für Logout Programm:",IDC_STATIC,5,108,92,8
+    CONTROL         "Herunterfahren",IDC_RADIO0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_GROUP,5,89,65,10
+    CONTROL         "Neu starten",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,93,89,55,10
+    CONTROL         "Abmelden",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,180,89,50,10
+    EDITTEXT        IDC_EDT_LOGOUT_PROGRAM_PATH,5,118,209,14,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    PUSHBUTTON      "..>",IDC_BTN_FIND_PATH,215,118,15,14
+    CONTROL         "T/D",IDC_CK_DATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    133,50,29,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 164
+        VERTGUIDE, 230
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 94
+        HORZGUIDE, 108
+        HORZGUIDE, 125
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "LogoutReminder"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Logout Reminder"
+    IDS_TOOLTIP             "Logout Reminder (%H:%M:%S)"
+    IDS_TOOLTIP2            "Feierabend: %H:%M Uhr"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDT_LOGOUT_PROGRAM_PATH "Pfad für das Logoutprogramm z.B.: HourTrack"
+    IDC_BTN_FIND_PATH       "Sucht nach dem Logoutprogramm"
+    IDC_BTN_LOGOUT          "Ruft das Programm HourTrack zum Ein-/ausloggen auf"
+    IDC_TXT_SEC             "Zeigt die Zeit an, nach der dieser Dialog automatisch geschlossen wird"
+    IDC_LOGOUT_TIME         "Zeigt die Logout Zeit an"
+    IDC_CK_LOGOUT_TIME      "Aktiviert den Logout Timer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CK_STOP             "Stoppt bzw. Startet das automatische Schließen"
+    IDC_SAVE_LOGOUT_TIME    "Speichert die aktuell eingestellte Zeit"
+    IDC_CK_LOGOUT_OLD_TIME  "Setzt die zuvor gespeicherte Zeit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOK                    "Startet den LogoutReminder"
+    IDCANCEL                "Beendet das Programm LogoutReminder"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LogoutReminder.rc2"  // non-Microsoft Visual C++ edited resources
+//#include "l.deu\afxres.rc"          // Standard components
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

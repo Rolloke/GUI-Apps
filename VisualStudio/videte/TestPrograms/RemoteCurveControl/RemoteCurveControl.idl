@@ -1,0 +1,51 @@
+// RemoteCurveControl.idl : type library source for ActiveX Control project.
+
+// This file will be processed by the MIDL compiler tool to
+// produce the type library (RemoteCurveControl.tlb) that will become a resource in
+// RemoteCurveControl.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(494E8D4A-D219-4FB2-8B6F-6BA43DB5088A), version(1.0),
+  helpfile("RemoteCurveControl.hlp"),
+  helpstring("RemoteCurveControl ActiveX Control module"),
+  control ]
+library RemoteCurveControlLib
+{
+	importlib(STDOLE_TLB);
+
+	//  Primary dispatch interface for CRemoteCurveControlCtrl
+
+	[ uuid(558E0221-7485-41F5-B739-2095CAE64950),
+	  helpstring("Dispatch interface for RemoteCurveControl Control")]
+	dispinterface _DRemoteCurveControl
+	{
+		properties:
+			[id(DISPID_READYSTATE), readonly] long ReadyState;
+		methods:
+	};
+
+	//  Event dispatch interface for CRemoteCurveControlCtrl
+
+	[ uuid(9377B6FC-4B40-4A3B-BAF1-DDB4A757B85C),
+	  helpstring("Event interface for RemoteCurveControl Control") ]
+	dispinterface _DRemoteCurveControlEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+    };
+
+	//  Class information for CRemoteCurveControlCtrl
+
+	[ uuid(3CC27841-69C4-477A-9439-E75EF77FCCF3), licensed,
+	  helpstring("RemoteCurveControl Control"), control ]
+	coclass RemoteCurveControl
+	{
+		[default] dispinterface _DRemoteCurveControl;
+		[default, source] dispinterface _DRemoteCurveControlEvents;
+	};
+
+};

@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QUnit", "QUnit.vcproj", "{DE0A1554-E95F-454D-8C80-FEBC53DB244F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Units/QUnit\u0022,\u0020TKTCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {97960035-4905-4B4F-90BF-0F823A0936EB}
+		SccProjectUniqueName1 = QUnit.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DE0A1554-E95F-454D-8C80-FEBC53DB244F}.Debug.ActiveCfg = Debug|Win32
+		{DE0A1554-E95F-454D-8C80-FEBC53DB244F}.Debug.Build.0 = Debug|Win32
+		{DE0A1554-E95F-454D-8C80-FEBC53DB244F}.Release.ActiveCfg = Release|Win32
+		{DE0A1554-E95F-454D-8C80-FEBC53DB244F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

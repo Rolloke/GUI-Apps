@@ -1,0 +1,57 @@
+// RemoteTextReceiver.idl : type library source for ActiveX Control project.
+
+// This file will be processed by the MIDL compiler tool to
+// produce the type library (RemoteTextReceiver.tlb) that will become a resource in
+// RemoteTextReceiver.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(12403ECC-2EF1-40F2-8BD4-E8564BC82DE6), version(1.0),
+  helpfile("RemoteTextReceiver.hlp"),
+  helpstring("RemoteTextReceiver ActiveX Control module"),
+  control ]
+library RemoteTextReceiverLib
+{
+	importlib(STDOLE_TLB);
+
+	//  Primary dispatch interface for CRemoteTextReceiverCtrl
+
+	[ uuid(884AE4FA-5170-48F7-8B90-7A605E62294C),
+	  helpstring("Dispatch interface for RemoteTextReceiver Control")]
+	dispinterface _DRemoteTextReceiver
+	{
+		properties:
+      [id(DISPID_CAPTION), helpstring("property Caption")] BSTR Caption;
+      [id(DISPID_FORECOLOR), helpstring("property ForeColor")] OLE_COLOR ForeColor;
+      [id(DISPID_BACKCOLOR), helpstring("property BackColor")] OLE_COLOR BackColor;
+      [id(DISPID_BORDERSTYLE), helpstring("property BorderStyle")] SHORT BorderStyle;
+      [id(DISPID_ENABLED), helpstring("property Enabled")] VARIANT_BOOL Enabled;
+      [id(DISPID_FONT), helpstring("property Font")] IFontDisp*Font;
+      [id(DISPID_APPEARANCE), helpstring("property Appearance")] SHORT Appearance;
+methods:
+   };
+
+	//  Event dispatch interface for CRemoteTextReceiverCtrl
+
+	[ uuid(426F7FB8-BE1C-4414-AE3C-3C681AF9FC88),
+	  helpstring("Event interface for RemoteTextReceiver Control") ]
+	dispinterface _DRemoteTextReceiverEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+	};
+
+	//  Class information for CRemoteTextReceiverCtrl
+
+	[ uuid(1B0F0BFD-8A71-4564-AD20-BDEB1CC9A796), licensed,
+	  helpstring("RemoteTextReceiver Control"), control ]
+	coclass RemoteTextReceiver
+	{
+		[default] dispinterface _DRemoteTextReceiver;
+		[default, source] dispinterface _DRemoteTextReceiverEvents;
+	};
+
+};

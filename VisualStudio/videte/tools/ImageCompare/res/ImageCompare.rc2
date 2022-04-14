@@ -1,0 +1,23 @@
+//
+// IMAGECOMPARE.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+
+	   WK_VERSION(20, 4, 16, 38, "20/04/99,16:38\0", // @AUTO_UPDATE
+	   "ImageCompare.exe\0",	// exe name
+	   "ImageCompare\0",		// product name
+	   "ImageCompare\0",		// product description
+	   "4.1\0",					// general product version
+	   "4.1\0"					// real version
+	   )

@@ -1,0 +1,6 @@
+; SystemVerwaltungEnu.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SystemVerwaltungEnu"
+
+EXPORTS
+    ; Explicit exports can go here

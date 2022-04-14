@@ -1,0 +1,32 @@
+//
+// MICOAPP.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+#ifdef _GARNY
+GARNY_VERSION(18, 8, 16, 34, "18/8/97,16:34\0", // @AUTO_UPDATE
+		   "MiCoUnit.exe\0",	// exe name
+		   "Video-Save MiCoUnit\0",	// product name
+		   "Video-Save MiCoUnit application\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )
+#else
+		   WK_VERSION(18, 8, 16, 34, "18/8/97,16:34\0", // @AUTO_UPDATE
+		   "MiCoUnit.exe\0",	// exe name
+		   "idip! MiCoUnit\0",	// product name
+		   "Security MiCoUnit application\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )
+#endif

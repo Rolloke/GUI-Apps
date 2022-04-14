@@ -1,0 +1,200 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LogCount.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\LogCount.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LOGCOUNT_DIALOG DIALOGEX 0, 0, 302, 273
+STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "LogCount"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Suchen nach vorgegebenen Kriterien",IDC_RADIO_SEARCH_1,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,7,7,
+                    133,10
+    CONTROL         "Suchen nach individuellen Kriterien",IDC_RADIO_SEARCH_2,
+                    "Button",BS_AUTORADIOBUTTON,7,34,133,10
+    COMBOBOX        IDC_COMBO_SEARCH_FOR,19,17,222,30,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Verzeichnis",IDC_TXT_DIRECTORY,19,50,55,8
+    EDITTEXT        IDC_EDIT_DIRECTORY,78,49,161,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Durchsuchen...",IDC_BTN_DIRECTORY_SEARCH,243,49,52,14
+    LTEXT           "Logdateien",IDC_TXT_LOG_FILES,19,65,55,8
+    COMBOBOX        IDC_COMBO_LOGFILE,78,64,161,78,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Sucheintrag",IDC_TXT_SEARCH_PATTERN,19,80,55,8
+    EDITTEXT        IDC_EDIT_SEARCH_PATTERN,78,79,161,12,ES_AUTOHSCROLL
+    LTEXT           "Fehler-Eintrag",IDC_TXT_ERROR_PATTERN,19,95,55,8
+    EDITTEXT        IDC_EDIT_ERROR_PATTERN,78,94,161,12,ES_AUTOHSCROLL
+    LTEXT           "Durchsuche den Zeitraum",IDC_TXT_DATE_AND_TIME,7,130,
+                    104,8
+    CONTROL         "ohne Begrenzung (alle Dateien durchsuchen)",
+                    IDC_CHECK_ALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,114,
+                    130,160,10
+    LTEXT           "&vom",IDC_TXT_DATE_START,7,144,66,8
+    CONTROL         "DateTimePicker1",IDC_DATEPICKER_START,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,78,142,47,12
+    LTEXT           "&bis einschlieﬂlich",IDC_TXT_DATE_END,7,160,66,8
+    CONTROL         "DateTimePicker2",IDC_DATEPICKER_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,78,158,47,12
+    LTEXT           "ab",IDC_TXT_TIME_START,147,144,30,8
+    CONTROL         "DateTimePicker1",IDC_TIMEPICKER_START,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | DTS_APPCANPARSE | 
+                    WS_DISABLED | WS_TABSTOP | 0x8,179,142,47,12
+    LTEXT           "bis",IDC_TXT_TIME_END,147,160,30,8
+    CONTROL         "DateTimePicker2",IDC_TIMEPICKER_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | DTS_APPCANPARSE | 
+                    WS_DISABLED | WS_TABSTOP | 0x8,179,158,47,12
+    LTEXT           "Vorgang...",IDC_TXT_PROGRESS,7,186,117,8
+    CONTROL         "Animate1",IDC_ANIMATE,"SysAnimate32",ACS_CENTER | 
+                    ACS_TRANSPARENT | ACS_AUTOPLAY,117,186,90,80
+    LTEXT           "Dateien durchsucht:",IDC_TXT_FILES,7,215,66,8
+    EDITTEXT        IDC_EDIT_FILES,78,214,38,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_TABSTOP
+    LTEXT           "Gefundene Eintr‰ge:",IDC_TXT_COUNTER,7,234,66,8
+    EDITTEXT        IDC_EDIT_COUNTER,78,233,38,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "Gefundene Fehler:",IDC_TXT_ERRORS,7,252,66,8
+    EDITTEXT        IDC_EDIT_ERRORS,78,252,38,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    DEFPUSHBUTTON   "Start",IDOK,245,214,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,245,233,50,14
+    PUSHBUTTON      "Be&enden",IDC_BUTTON_END,245,252,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_LOGCOUNT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 295
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 266
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_GERMAN_PARCEL_SCANNED_PACKETS "GermanParcel gescannte Pakete"
+    IDS_START               "Bereit"
+    IDS_DECOMPRESS          "Dekomprimiere Dateien   %u / %u"
+    IDS_SEARCH              "Suche..."
+    IDS_COMPRESS            "Komprimiere Dateien   %u / %u"
+    IDS_READY               "Fertig"
+    IDS_CANCELLED           "Vorgang abgebrochen!"
+    IDS_CHOSE_DIR           "W‰hle das Verzeichnis"
+    IDS_CHOSE               "&W‰hlen"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LogCount.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

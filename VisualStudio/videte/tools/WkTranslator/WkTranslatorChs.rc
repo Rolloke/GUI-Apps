@@ -1,0 +1,644 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif\r\n"
+    "#include ""res\\WkTranslator.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.chs\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\WkTranslator.ico"
+IDR_LANGTYPE            ICON    DISCARDABLE     "res\\WkTranslatorDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_CHECK_TRANSLATION
+    BUTTON      ID_NEXT_TODO
+    BUTTON      ID_EDIT_FIND
+    BUTTON      ID_EDIT_FIND_NEXT
+    SEPARATOR
+    BUTTON      ID_VIEW_SHOW_ONLY_TODO
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "文件"
+    BEGIN
+        MENUITEM "新建",                ID_FILE_NEW
+        MENUITEM "TODO! &Open...\Strg+O",          ID_FILE_OPEN
+        MENUITEM "保存",          ID_FILE_SAVE
+        MENUITEM "另存为",         ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "打印",                    ID_FILE_PRINT
+        MENUITEM "打印预览",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "TODO! Printer &Settings",         ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! Save as &glossary...",  ID_FILE_SAVE_AS_GLOSSARY
+        MENUITEM "TODO! Save as Gl&ossary (German)...", 
+                                                ID_FILE_SAVE_AS_GLOSSARY_DEU
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! Save only as &text",    ID_FILE_SAVE_TEXT_ONLY
+        MENUITEM "TODO! Save only Original text, Length and Co&mment", 
+                                                ID_FILE_SAVE_ORIGINAL_LEN_COMMENT
+
+        MENUITEM SEPARATOR
+        MENUITEM "当前文件",                ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "退出",                    ID_APP_EXIT
+    END
+    POPUP "编辑"
+    BEGIN
+        MENUITEM "TODO! Check&Translation\tStrg + T", ID_CHECK_TRANSLATION
+        MENUITEM "翻译",       ID_EDIT
+        MENUITEM "TODO! Search &next TODO\tF3", ID_NEXT_TODO
+        MENUITEM SEPARATOR
+        MENUITEM "查找",        ID_EDIT_FIND
+        MENUITEM "查找下一个",  ID_EDIT_FIND_NEXT
+        MENUITEM "替换...",       ID_EDIT_REPLACE
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! &Edit max. length",       ID_ENABLE_EDIT
+    END
+    POPUP "TODO! &Glossary"
+    BEGIN
+        MENUITEM "TODO! &Import glossary...",     ID_GLOSSARY_IMPORT
+        MENUITEM "TODO! &Export glossary...",     ID_GLOSSARY_EXPORT
+        MENUITEM "TODO! Import g&lossary (German)...", ID_GLOSSARY_IMPORT_DEU
+        MENUITEM "TODO! Export glo&ssary (German)...", ID_GLOSSARY_EXPORT_DEU
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! Import glossary from &text file...", 
+                                                ID_GLOSSARY_IMPORT_TXT_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! Codepage...",                 ID_GLOSSARY_SELECT_CODEPAGE
+    END
+    POPUP "视图"
+    BEGIN
+        MENUITEM "工具栏",               ID_VIEW_TOOLBAR
+        MENUITEM "TODO! &Statusbar",               ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "字体...",               ID_VIEW_EDITFONT
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! Show only TO&DOs\tCtrl + D",  ID_VIEW_SHOW_ONLY_TODO
+        MENUITEM "TODO! Show only Suggestions",        ID_VIEW_SHOW_ONLY_SUGGESTIONS
+
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "关于",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_VIEW_SHOW_ONLY_TODO, VIRTKEY, CONTROL, NOINVERT
+    "E",            ID_ENABLE_EDIT_ACC,     VIRTKEY, CONTROL, ALT, NOINVERT
+    "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "G",            ID_EDIT_FIND_NEXT,      VIRTKEY, CONTROL, NOINVERT
+    "L",            ID_CHECK_MAX_LENGTH,    VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "T",            ID_CHECK_TRANSLATION,   VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_NEXT_TODO,           VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F7,          ID_GLOSSARY_IMPORT,     VIRTKEY, NOINVERT
+    VK_F8,          ID_GLOSSARY_EXPORT,     VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_EDIT,                VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "TODO! About Videte Translator"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC_ICON,11,17,20,20
+    LTEXT           "TODO! Videte Translator, Version 1.2",IDC_TXT_TRANSLATOR,40,
+                    10,119,8,SS_NOPREFIX
+    LTEXT           "TODO! Copyright ? Videte IT 1997-2000",IDC_TXT_COPYRIGHT,40,
+                    25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,32,14,WS_GROUP
+END
+
+IDD_EDIT DIALOG DISCARDABLE  0, 0, 374, 254
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "翻译"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO! Original Text:",IDC_TXT_ORIGINAL,7,7,360,8
+    EDITTEXT        IDC_EDIT_ORIGINAL,7,16,360,50,ES_MULTILINE | ES_READONLY
+    LTEXT           "TODO! Suggestion:",IDC_TXT_SUGGESTION,7,71,360,8
+    EDITTEXT        IDC_EDIT_SUGGESTION,7,81,360,50,ES_MULTILINE | 
+                    ES_READONLY
+    LTEXT           "TODO! Translated Text:",IDC_TXT_COPY,7,136,360,8
+    EDITTEXT        IDC_EDIT_TRANSLATE,7,145,360,50,ES_MULTILINE
+    LTEXT           "TODO! Maximum length:",IDC_TXT_MAX_LENGTH,7,200,54,8
+    EDITTEXT        IDC_EDIT_MAX_LENGTH,63,199,20,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    EDITTEXT        IDC_EDIT_COMMENT,85,199,282,30,ES_MULTILINE | 
+                    ES_READONLY
+    PUSHBUTTON      "复制",IDC_COPY,7,233,60,14
+    PUSHBUTTON      "TODO! &Use suggestion",IDC_BUTTON_SUGGESTION,71,233,120,
+                    14
+    DEFPUSHBUTTON   "确定",IDOK,260,233,50,14
+    PUSHBUTTON      "取消",IDCANCEL,317,233,50,14
+    LTEXT           "TODO! Actual Length:",IDC_TXT_ACTUAL_LENGTH,7,216,54,8
+    EDITTEXT        IDC_EDIT_ACTUAL_LENGTH,63,215,20,14,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    PUSHBUTTON      "字体...",IDC_BTN_FONT,200,233,50,14,NOT 
+                    WS_VISIBLE
+END
+
+IDD_FIND DIALOG DISCARDABLE  0, 0, 262, 58
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "查找"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "搜索:",IDC_TXT_FIND,7,8,46,8
+    EDITTEXT        IDC_EDIT_FIND,60,7,112,14,ES_AUTOHSCROLL
+    CONTROL         "TODO! &Case sensitive",IDC_CHECK_CASE_SENSITIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,42,87,10
+    DEFPUSHBUTTON   "查找",IDOK,195,7,60,14
+    PUSHBUTTON      "取消",IDCANCEL,195,24,60,14
+END
+
+IDD_EDIT_REPLACE DIALOG DISCARDABLE  0, 0, 243, 49
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "TODO! Search/Replace"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,186,7,50,14
+    PUSHBUTTON      "取消",IDCANCEL,186,28,50,14
+    LTEXT           "搜索:",IDC_TXT_FIND,7,8,46,8
+    EDITTEXT        IDC_EDIT_FIND,60,7,112,14,ES_AUTOHSCROLL
+    LTEXT           "替换:",IDC_TXT_FIND2,7,29,50,8
+    EDITTEXT        IDC_EDIT_REPLACE,60,28,112,14,ES_AUTOHSCROLL
+END
+
+IDD_IMPORT_GLOSSARY_INFO DIALOG DISCARDABLE  0, 0, 300, 230
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "TODO! Import Glossary"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "TODO! Glossaries to import:",IDC_TXT_GLOSSARY,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,9,88,12
+    LTEXT           "9999999999",IDC_TXT_GLOSSARY_NR,100,9,43,12
+    CONTROL         "TODO! Text entries imported:",IDC_TXT_STRINGS,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,24,88,12
+    LTEXT           "9999999999",IDC_TXT_STRINGS_NR,100,24,43,12
+    PUSHBUTTON      "取消",IDCANCEL,228,208,65,14
+    LTEXT           "",IDC_TXT_ORIGINAL,7,65,286,60,SS_SUNKEN
+    LTEXT           "",IDC_TXT_TRANSLATION,7,145,286,60,SS_SUNKEN
+    CONTROL         "停止",IDC_CK_STOP,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,7,208,65,14
+    CONTROL         "TODO! Original Text:",IDC_TXT_ORG,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,7,53,93,12
+    CONTROL         "TODO! Translation",IDC_TXT_TRAN,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,7,133,88,12
+    CONTROL         "TODO! Replace Texts",IDC_CK_REPLACE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,131,178,14
+    PUSHBUTTON      "TODO! Single Step",IDC_STEP,95,209,113,14
+    CONTROL         "TODO! Translation:",IDC_TXT_STRINGS2,"Static",
+                    SS_LEFTNOWORDWRAP | WS_GROUP,7,39,88,12
+    CONTROL         "",IDC_TXT_FILENAME,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,153,9,140,12
+    LTEXT           "9999999999",IDC_TXT_TRANSLATE_NR,100,39,43,12
+END
+
+IDD_SELECT_CODEPAGE DIALOG DISCARDABLE  0, 0, 210, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "TODO! Select Code Page"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO_CODE_PAGE,5,9,200,220,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "确定",IDOK,5,28,50,14
+    PUSHBUTTON      "取消",IDCANCEL,155,28,50,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,1
+ PRODUCTVERSION 1,1,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "WKTRANSLATOR MFC Application\0"
+            VALUE "FileVersion", "1, 1, 0, 1\0"
+            VALUE "InternalName", "WKTRANSLATOR\0"
+            VALUE "LegalCopyright", "Copyright ? 1997\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "WKTRANSLATOR.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "WKTRANSLATOR Application\0"
+            VALUE "ProductVersion", "1, 1, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_EDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 367
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 247
+    END
+
+    IDD_FIND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_EDIT_REPLACE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 42
+    END
+
+    IDD_IMPORT_GLOSSARY_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        VERTGUIDE, 95
+        VERTGUIDE, 100
+        BOTTOMMARGIN, 223
+        HORZGUIDE, 15
+        HORZGUIDE, 30
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 205
+        HORZGUIDE, 215
+    END
+
+    IDD_SELECT_CODEPAGE, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 205
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "TODO! Videte Translator\n\nLang\nFiletype Language (*.lng)\n.LNG\nVidete Translator.Document\nLang Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "TODO! Videte Translator"
+    AFX_IDS_IDLEMESSAGE     "就绪"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "TODO! ER"
+    ID_INDICATOR_CAPS       "TODO! UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "TODO! RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "TODO! MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "TODO! Creates a new document (Clears the table). \nNew (Clear table)"
+    ID_FILE_OPEN            "TODO! Opens an existing document and appends it to the table.\nOpen and append"
+    ID_FILE_CLOSE           "关闭正在使用的文档。\n关闭"
+    ID_FILE_SAVE            "保存正在使用的文档。\n保存"
+    ID_FILE_SAVE_AS         "将正在使用的文档用新文件名来保存。\n另存为"
+    ID_FILE_PRINT_SETUP     "更改打印机和打印选项\n打印设置"
+    ID_FILE_PRINT           "TODO! Printing\nPrint"
+    ID_FILE_PRINT_PREVIEW   "TODO! Print preview\nPrint preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "TODO! Shows program information, version number and copyright.\nAbout"
+    ID_APP_EXIT             "TODO! Exits application, asks to save modified documents.\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "打开这个文档"
+    ID_FILE_MRU_FILE2       "打开这个文档"
+    ID_FILE_MRU_FILE3       "打开这个文档"
+    ID_FILE_MRU_FILE4       "打开这个文档"
+    ID_FILE_MRU_FILE5       "打开这个文档"
+    ID_FILE_MRU_FILE6       "打开这个文档"
+    ID_FILE_MRU_FILE7       "打开这个文档"
+    ID_FILE_MRU_FILE8       "打开这个文档"
+    ID_FILE_MRU_FILE9       "打开这个文档"
+    ID_FILE_MRU_FILE10      "打开这个文档"
+    ID_FILE_MRU_FILE11      "打开这个文档"
+    ID_FILE_MRU_FILE12      "打开这个文档"
+    ID_FILE_MRU_FILE13      "打开这个文档"
+    ID_FILE_MRU_FILE14      "打开这个文档"
+    ID_FILE_MRU_FILE15      "打开这个文档"
+    ID_FILE_MRU_FILE16      "打开这个文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "切换到下一个窗格\n下一个窗格"
+    ID_PREV_PANE            "切换到上一个窗格\n上一个窗格"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "将活动窗口分割成窗格 \n分割"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "TODO! Deletes the selection.\nDelete"
+    ID_EDIT_CLEAR_ALL       "TODO! Deletes all.\nDelete all"
+    ID_EDIT_COPY            "复制选定范围并将其放到剪贴板上\n复制"
+    ID_EDIT_CUT             "TODO! Removes the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "查找指定文本\n查找"
+    ID_EDIT_PASTE           "插入剪贴板的内容。\n粘贴"
+    ID_EDIT_REPEAT          "TODO! Repeats the alst action.\nRepeat"
+    ID_EDIT_REPLACE         "TODO! Replaces the specified text with different text.\nReplace"
+    ID_EDIT_SELECT_ALL      "选择整个文档\n全选"
+    ID_EDIT_UNDO            "TODO! Undoes the last action.\nUndo"
+    ID_EDIT_REDO            "TODO! Redoes the previously undone action.\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n切换工具栏"
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "更改窗口大小。"
+    AFX_IDS_SCMOVE          "更改窗口位置"
+    AFX_IDS_SCMINIMIZE      "将窗口缩小为图标"
+    AFX_IDS_SCMAXIMIZE      "将窗口放大到最大"
+    AFX_IDS_SCNEXTWINDOW    "切换到前一个文档窗口"
+    AFX_IDS_SCPREVWINDOW    "切换到前一个文档窗口"
+    AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "将窗口还原为正常大小"
+    AFX_IDS_SCTASKLIST      "激活任务列表"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT                 "TODO! Edit the selected text\nEdit"
+    ID_GLOSSARY_IMPORT      "TODO! Loads a glossary and transletes matching strings automatically.\nLoads a glossary and translates automatically"
+    ID_GLOSSARY_EXPORT      "TODO! Exports all loaded glossaries in a new file.\nExports loaded glossaries"
+    ID_FILE_SAVE_AS_GLOSSARY 
+                            "TODO! Saves the actual file/table as glossary.\nSave as glossary"
+    ID_NEXT_TODO            "TODO! Search next text to translate (marked with TODO).\nSearch TODO"
+    ID_ENABLE_EDIT          "TODO! Enable the edit fields 'Maximum length' and 'Comment'.\Edit maximum length"
+    ID_CHECK_MAX_LENGTH     "TODO! Check, if maximum length will be exceeded.\nCheck maximum length"
+    ID_EDIT_FIND_NEXT       "TODO! Find next.\nFind next"
+    ID_CHECK_TRANSLATION    "TODO! Check the Translation for possible Errors.\nCheck Translation"
+    ID_GLOSSARY_EXPORT_DEU  "TODO! Exports all loaded glossaries in a new file.\nExports loaded glossaries"
+    ID_GLOSSARY_IMPORT_DEU  "TODO! Loads a glossary and transletes matching strings automatically.\nLoads a glossary and translates automatically"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ORIGINAL            "TODO! 原始"
+    IDS_TRANSLATE           "转换"
+    IDP_NOTHING_TODO        "TODO! There is no untranslated text!"
+    IDP_ERROR_FORMAT_SPECIFIER 
+                            "TODO! The format specifications (%s, %i, ...) are not identical!"
+    IDP_NO_MORE_FOUND       "TODO! No more strings found"
+    IDS_ERROR_STATIC        "TODO! There is already a control with the ID IDC_STATIC  in dialog %s"
+    IDS_ERROR               "TODO! Error in Resource file:"
+    IDP_ERROR_MAX_LENGTH    "TODO! The translation exceeds the maximum length!\n\nConsider that the text is possibly not complete visible!\nAlso the following value to enter has to be complete visible!\n\nDo you REALLY want to accept this?"
+    IDS_MAX_LENGTH          "TODO! Length maximum"
+    IDP_SEARCH_END_OF_DOC   "TODO! The end of document was reached.\nDo you want to restart the search at the begin?"
+    IDP_SAVE_FILE_FAILED    "TODO! The file\n%s\ncould not be saved!"
+    IDP_ERROR_SPECIAL_START_CHARS 
+                            "TODO! The following characters are required at the begin:\n\n%s"
+    IDP_CHECK_TRANSLATION   "TODO! The translation contains (possible) errors.\n\nDo you want to check the translation?"
+    IDP_ERROR_SPECIAL_CHARS_TO_AVOID 
+                            "TODO! Please do not use the chars\n%s\nbecause they have a special meaning in programming."
+    IDP_GLOSSARY_ADDED      "TODO! %d automatic texts added"
+    IDP_FILE_OPEN_FAILED    "TODO! The file\n%s\ncould not be opened!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_SAVE_AS_GLOSSARY_DEU 
+                            "TODO! Saves the actual file/table as glossary.\nSave as glossary"
+    ID_FILE_SAVE_TEXT_ONLY  "TODO! Save only as &text.\nSave only as &text."
+    ID_FILE_SAVE_ORIGINAL_LEN_COMMENT 
+                            "TODO! Saves the translation, length and comment in a text file."
+    ID_VIEW_SHOW_ONLY_TODO  "TODO! Toggles the view between 'Only TODOs' and 'All texts'\nShow 'TODOs' only"
+    ID_GLOSSARY_IMPORT_TXT_FILE 
+                            "TODO! Imports a glossary from a translation of a previous saved text file"
+    ID_VIEW_EDITFONT        "TODO! Changes the font for the edit and text fields."
+    ID_GLOSSARY_SELECT_CODEPAGE 
+                            "TODO! Chooses the code page for the import and export of glossaries."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SUGGESTION          "TODO! Suggestion"
+    IDS_DEFAULTANSICODEPAGE "TODO! Default Ansi Codepage"
+    IDS_DEFAULTOEMCODEPAGE  "TODO! Default OEM Codepage"
+    IDS_UNICODE             "Unicode"
+    IDS_START               "TODO! Start"
+    IDS_STOP                "TODO! Stop"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif
+#include "res\WkTranslator.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#include "l.chs\afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

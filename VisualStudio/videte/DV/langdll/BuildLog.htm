@@ -1,0 +1,46 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=Windows-1252">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: LangDll, Configuration: LangDll|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "d:\Project\Dv\langdll\LangDll\RSP000015.rsp" with contents
+[
+/O2 /FD /EHsc /Fo"LangDll/" /Fd"LangDll/vc70.pdb" /c /TP
+.\StdAfx.cpp
+.\LangDll.cpp
+]
+Creating command line "cl.exe @d:\Project\Dv\langdll\LangDll\RSP000015.rsp /nologo"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+StdAfx.cpp
+ WINVER not defined. Defaulting to 0x0501 (Windows XP and Windows .NET Server)
+LangDll.cpp
+ WINVER not defined. Defaulting to 0x0501 (Windows XP and Windows .NET Server)
+C:\MsDev2003\Vc7\atlmfc\include\afxdllx.h(53) : error C2039: 'm_pClassInit' : is not a member of 'AFX_MODULE_STATE'
+        C:\MsDev2003\Vc7\atlmfc\include\afxstat_.h(201) : see declaration of 'AFX_MODULE_STATE'
+C:\MsDev2003\Vc7\atlmfc\include\afxdllx.h(54) : error C2039: 'm_pFactoryInit' : is not a member of 'AFX_MODULE_STATE'
+        C:\MsDev2003\Vc7\atlmfc\include\afxstat_.h(201) : see declaration of 'AFX_MODULE_STATE'
+LangDll.cpp(16) : error C2146: syntax error : missing ';' before identifier 'LangDllDLL'
+LangDll.cpp(16) : error C2501: 'LangDllDLL' : missing storage-class or type specifiers
+LangDll.cpp(16) : error C2078: too many initializers
+LangDll.cpp(30) : error C3861: 'AfxInitExtensionModule': identifier not found, even with argument-dependent lookup
+LangDll.cpp(45) : error C2061: syntax error : identifier 'CDynLinkLibrary'
+LangDll.cpp(51) : error C3861: 'AfxTermExtensionModule': identifier not found, even with argument-dependent lookup
+LangDll.cpp(244) : error C2440: 'return' : cannot convert from 'const char [1]' to 'DWORD'
+        This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+Generating Code...
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://d:\Project\Dv\langdll\\BuildLog.htm"
+LangDll - 9 error(s), 0 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>

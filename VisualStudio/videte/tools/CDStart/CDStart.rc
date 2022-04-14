@@ -1,0 +1,210 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\CDStart.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\CDStart.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CDSTART_DIALOG DIALOGEX 0, 0, 320, 214
+STYLE WS_POPUP | WS_VISIBLE | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Bitte warten, System wird überprüft...",
+                    IDC_DISPLAY_TITLE,"Button",BS_OWNERDRAW | BS_LEFT | NOT 
+                    WS_VISIBLE | WS_TABSTOP,7,7,200,30
+    CONTROL         "Anzeige 1",IDC_DISPLAY_1,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | NOT WS_VISIBLE,7,40,
+                    200,30
+    PUSHBUTTON      "Button &1",IDC_BUTTON_1,213,40,100,30,NOT WS_VISIBLE
+    CONTROL         "Anzeige 2",IDC_DISPLAY_2,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | NOT WS_VISIBLE,7,73,
+                    200,30
+    PUSHBUTTON      "Button &2",IDC_BUTTON_2,213,73,100,30,NOT WS_VISIBLE
+    CONTROL         "Anzeige 3",IDC_DISPLAY_3,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | NOT WS_VISIBLE,7,106,
+                    200,30
+    PUSHBUTTON      "Button &3",IDC_BUTTON_3,213,106,100,30,NOT WS_VISIBLE
+    CONTROL         "Anzeige 4",IDC_DISPLAY_4,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | NOT WS_VISIBLE,7,139,
+                    200,30
+    PUSHBUTTON      "Button &4",IDC_BUTTON_4,213,139,100,30,NOT WS_VISIBLE
+    CONTROL         "Anzeige 4",IDC_DISPLAY_5,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | NOT WS_VISIBLE,7,172,
+                    200,30
+    DEFPUSHBUTTON   "Button &5",IDC_BUTTON_5,213,172,100,30,BS_MULTILINE | 
+                    NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_TEST_1,281,7,32,30
+    PUSHBUTTON      "",IDC_TEST_2,242,7,32,30
+    CTEXT           "Size",IDC_TXT_SIZE,212,18,16,8
+END
+
+IDD_COPY_FILES DIALOG DISCARDABLE  0, 0, 242, 142
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Kopiere..."
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Source",IDC_TXT_SOURCE,7,58,228,8
+    LTEXT           "nach",IDC_TXT_TO,7,69,17,8
+    LTEXT           "Destination",IDC_TXT_DESTINATION,7,80,228,8
+    CONTROL         "Progress1",IDC_PROGRESS_FILE,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,7,91,228,14
+    LTEXT           "Gesamt:",IDC_TXT_TOTAL,7,109,27,8
+    CONTROL         "Progress2",IDC_PROGRESS_TOTAL,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,7,120,228,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,185,7,50,14
+    CONTROL         "Animate1",IDC_ANIMATE,"SysAnimate32",ACS_TRANSPARENT | 
+                    ACS_AUTOPLAY | WS_TABSTOP,7,7,167,29
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CDSTART_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 207
+    END
+
+    IDD_COPY_FILES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 135
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_START               BITMAP  DISCARDABLE     "res\\Start.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AVI
+//
+
+IDR_AVI_FILECOPY        AVI     DISCARDABLE     "res\\Filecopy.avi"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROGRAM_NOT_STARTED "Das Programm\n%s\nkonnte nicht gestartet werden."
+    IDS_INITIALIZING        "Initialisiere..."
+    IDS_TO                  "nach"
+    IDS_READY               "Fertig"
+    IDS_COPY_FILE_FAILED    "Die Datei\n\n%s\n\nkonte nicht nach\n\n%s\n\nkopiert werden!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\CDStart.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

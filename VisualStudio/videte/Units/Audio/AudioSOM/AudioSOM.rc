@@ -1,0 +1,443 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\AudioSOM.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AudioSOM.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_IMAGES              BITMAP                  "res\\IMAGES.bmp"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "About AudioSOM"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "Audio Synthesizer Osciloscope Module",IDC_STATIC,40,10,
+                    130,8,SS_NOPREFIX
+    LTEXT           "Copyright Rolf Kary-Ehlers © 2007",IDC_STATIC,40,25,188,
+                    8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+    LTEXT           " Version 1.1 Beta",IDC_STATIC,40,40,166,8
+END
+
+IDD_AUDIOSOM_DIALOG DIALOGEX 0, 0, 320, 244
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "AudioSOM"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_AUDIO_INPUT,10,17,110,106,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_AUDIO_INPUT_PIN,10,35,110,106,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_SLIDER_INPUT_LEVEL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,10,51,110,12
+    GROUPBOX        "Audio Input",IDC_STATIC,5,5,120,62
+    LTEXT           "Frequency:",IDC_STATIC,10,83,45,8
+    COMBOBOX        IDC_COMBO_OUTPUT_FRQ,60,81,60,102,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Filter...",IDC_BTNSHOW_SYNTH_FILTER,10,112,50,12
+    PUSHBUTTON      "Settiings...",IDC_BTNSHOW_SYNTH,70,112,50,12
+    GROUPBOX        "Wave Generator",IDC_STATIC,5,68,120,62
+    EDITTEXT        IDC_EDT_INPUT_FILE_NAME,10,145,103,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SLIDER_MEDIA_POS,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,10,165,110,12
+    CONTROL         "URL",IDC_CK_URL_INPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,178,29,10
+    GROUPBOX        "File Input",IDC_STATIC,5,131,120,62
+    EDITTEXT        IDC_EDT_OUTPUT_FILE_NAME,201,17,102,12,ES_AUTOHSCROLL
+    GROUPBOX        "File Output",IDC_STATIC,196,5,120,62
+    LTEXT           "Frequency:",IDC_STATIC,201,84,45,8
+    COMBOBOX        IDC_COMBO_INPUT_CAPS,251,81,60,102,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Length [ms]:",IDC_STATIC,201,113,45,8
+    COMBOBOX        IDC_COMBO_SAMPLE_LENGTH,251,111,60,102,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Osciloscope (Sample)",IDC_STATIC,195,68,120,60
+    COMBOBOX        IDC_COMBO_AUDIO_OUTPUT,200,145,110,89,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Volume:",IDC_TXT_VOLUME,200,165,30,8
+    CONTROL         "",IDC_SLIDER_VOLUME,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,235,165,75,10
+    LTEXT           "Balance:",IDC_TXT_BALANCE,200,180,30,8
+    CONTROL         "",IDC_SLIDER_BALANCE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,235,180,75,10
+    GROUPBOX        "Audio Output",IDC_STATIC,195,131,120,62
+    CONTROL         "ROT",IDC_CK_ROT,"Button",BS_AUTOCHECKBOX | WS_GROUP | 
+                    WS_TABSTOP,10,201,30,10
+    PUSHBUTTON      "&Help",ID_HELP,5,222,30,12
+    PUSHBUTTON      "Start",IDC_BTN_START,40,222,30,12
+    PUSHBUTTON      "Stop",IDC_BTN_STOP,75,222,30,12,WS_DISABLED
+    PUSHBUTTON      "Initialize",IDC_BTN_INITIALIZE,115,222,50,12
+    PUSHBUTTON      "Reset",IDC_BTN_RESET_ALL,175,222,40,12
+    PUSHBUTTON      "Save Settings",IDC_BTN_SAVE_SETTINGS,256,222,60,12
+    CONTROL         "",IDC_RD_OSZI1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    125,51,9,8
+    CONTROL         "",IDC_RD_OSZI2,"Button",BS_AUTORADIOBUTTON,125,94,9,8
+    CONTROL         "",IDC_RD_OSZI3,"Button",BS_AUTORADIOBUTTON,125,140,9,8
+    CONTROL         "",IDC_RD_FO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,125,
+                    33,9,8
+    CONTROL         "",IDC_RD_FO2,"Button",BS_AUTORADIOBUTTON,125,75,9,8
+    CONTROL         "",IDC_RD_AO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,125,
+                    113,9,8
+    CONTROL         "",IDC_RD_AO2,"Button",BS_AUTORADIOBUTTON,125,161,9,8
+    CONTROL         "",IDC_STATIC_CON_AO_3,"Static",SS_OWNERDRAW | WS_GROUP,
+                    134,165,61,1
+    CONTROL         "",IDC_STATIC_CON_OSZ_3,"Static",SS_OWNERDRAW,134,144,17,
+                    1
+    CONTROL         "",IDC_STATIC_CON_AO_1,"Static",SS_OWNERDRAW,134,117,42,
+                    1
+    CONTROL         "",IDC_STATIC_CON_OSZ_1,"Static",SS_OWNERDRAW,134,98,61,
+                    1
+    CONTROL         "",IDC_STATIC_CON_FO_3,"Static",SS_OWNERDRAW,134,78,42,1
+    CONTROL         "",IDC_STATIC_CON_OSZ_4,"Static",SS_OWNERDRAW,134,55,17,
+                    1
+    CONTROL         "",IDC_STATIC_CON_FO_1,"Static",SS_OWNERDRAW,134,36,61,1
+    CONTROL         "",IDC_STATIC_CON_FO_2,"Static",SS_OWNERDRAW,175,37,1,41
+    CONTROL         "",IDC_STATIC_CON_OSZ_2,"Static",SS_OWNERDRAW,150,55,1,
+                    90
+    CONTROL         "",IDC_STATIC_CON_AO_2,"Static",SS_OWNERDRAW,175,117,1,
+                    49
+    CONTROL         "URL",IDC_CK_URL_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,201,44,29,10
+    PUSHBUTTON      "..",IDC_BTN_FILE_OUTPUT,304,16,10,14
+    PUSHBUTTON      "..",IDC_BTN_FILE_INPUT,113,144,10,14
+    COMBOBOX        IDC_COMBO_OUTPUT_BITS,59,96,60,102,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Bits/Sample:",IDC_STATIC,9,97,45,8
+    LTEXT           "Bits/Sample:",IDC_STATIC,201,99,45,8
+    COMBOBOX        IDC_COMBO_INPUT_BITS,251,96,60,102,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_SYNTHESIZER DIALOGEX 0, 0, 320, 166
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_NOFAILCREATE | 
+    WS_MINIMIZEBOX | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW | WS_EX_APPWINDOW
+CAPTION "Synthesizer"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "Sine",IDC_BTN_WF_SINE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_ICON | BS_PUSHLIKE | WS_GROUP,5,5,44,25
+    CONTROL         "Rectangle",IDC_BTN_WF_RECT,"Button",BS_AUTORADIOBUTTON | 
+                    BS_ICON | BS_PUSHLIKE,50,5,44,25
+    CONTROL         "Triangle",IDC_BTN_WF_TRIANGLE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE,94,5,44,25
+    CONTROL         "Sine Sweep",IDC_BTN_WF_SWEEP,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,138,5,44,25
+    CONTROL         "White Noise",IDC_BTN_WF_WHITE_NOISE,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,182,5,44,25
+    CONTROL         "Pink Noise",IDC_BTN_WF_PINK_NOISE,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,226,5,44,25
+    CONTROL         "Correlated",IDC_BTN_WF_KORR,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_DISABLED | WS_GROUP | WS_TABSTOP,270,5,
+                    45,25
+    LTEXT           "Frequency 1[Hz]",IDC_STATIC,5,38,61,8
+    CONTROL         "Frequency 1",IDC_SLIDER_FREQUENCY1,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,72,
+                    34,198,15
+    EDITTEXT        IDC_EDT_FREQUENCY1,276,35,39,14,ES_AUTOHSCROLL
+    LTEXT           "Frequency 2[Hz]",IDC_STATIC,5,56,61,8
+    CONTROL         "",IDC_SLIDER_FREQUENCY2,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,53,198,15
+    EDITTEXT        IDC_EDT_FREQUENCY2,276,53,39,14,ES_AUTOHSCROLL
+    LTEXT           "Time[%]",IDC_TXT_TIME,5,74,61,8
+    CONTROL         "",IDC_SLIDER_TIME,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,71,198,15
+    EDITTEXT        IDC_EDT_TIME,276,71,39,14,ES_AUTOHSCROLL
+    LTEXT           "Phase[deg]",IDC_TXT_PHASE,5,74,61,8
+    CONTROL         "",IDC_SLIDER_PHASE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,71,198,15
+    EDITTEXT        IDC_EDT_PHASE,276,71,39,14,ES_AUTOHSCROLL
+    LTEXT           "Magnitude 1[%]",IDC_STATIC,5,92,61,8
+    CONTROL         "",IDC_SLIDER_MAGNITUDE1,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,89,198,15
+    EDITTEXT        IDC_EDT_MAGNITUDE1,276,89,39,14,ES_AUTOHSCROLL
+    LTEXT           "Magnitude 2[%]",IDC_STATIC,5,110,61,8
+    CONTROL         "",IDC_SLIDER_MAGNITUDE2,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,107,198,15
+    EDITTEXT        IDC_EDT_MAGNITUDE2,276,107,39,14,ES_AUTOHSCROLL
+    LTEXT           "Offset 1[%]",IDC_STATIC,5,128,61,8
+    CONTROL         "",IDC_SLIDER_OFFSET1,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,125,198,15
+    EDITTEXT        IDC_EDT_OFFSET1,276,125,39,14,ES_AUTOHSCROLL
+    LTEXT           "Offset 2[%]",IDC_STATIC,5,146,61,8
+    CONTROL         "",IDC_SLIDER_OFFSET2,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,72,143,198,15
+    EDITTEXT        IDC_EDT_OFFSET2,276,143,39,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,1
+ PRODUCTVERSION 1,1,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "programmed by Rolf Kary-Ehlers"
+            VALUE "CompanyName", "KeSoft"
+            VALUE "FileDescription", "Audio Synthesizer Osciloscope Module"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "AudioSOM.exe"
+            VALUE "LegalCopyright", "© KeSoft.  All rights reserved."
+            VALUE "OriginalFilename", "AudioSOM.exe"
+            VALUE "ProductName", "Audio S.O.M"
+            VALUE "ProductVersion", "1.1.0.1 Beta"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_AUDIOSOM_DIALOG, DIALOG
+    BEGIN
+        HORZGUIDE, 5
+        HORZGUIDE, 228
+    END
+
+    IDD_SYNTHESIZER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 66
+        VERTGUIDE, 72
+        VERTGUIDE, 270
+        VERTGUIDE, 276
+        VERTGUIDE, 315
+        BOTTOMMARGIN, 162
+        HORZGUIDE, 42
+        HORZGUIDE, 60
+        HORZGUIDE, 78
+        HORZGUIDE, 96
+        HORZGUIDE, 114
+        HORZGUIDE, 132
+        HORZGUIDE, 150
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About AudioSOM..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_COMBO_AUDIO_INPUT_PIN "Select audio input source"
+    IDC_BTN_SAVE_SETTINGS   "Save all settings"
+    IDC_BTN_RESET_ALL       "Reset all filters"
+    IDC_COMBO_INPUT_CAPS    "Select sample frequency of input source"
+    IDC_BTNSHOW_SYNTH       "Show synthesizer dialog"
+    IDC_SLIDER_VOLUME       "Adjust output volume"
+    IDC_SLIDER_BALANCE      "Adjust balance of stereo output"
+    IDC_BTN_WF_SINE         "Select sine wave"
+    IDC_BTN_WF_RECT         "Select rectangular wave form"
+    IDC_COMBO_OUTPUT_FRQ    "Select sample frequency of synthesizer"
+    IDC_BTN_WF_TRIANGLE     "Select triangular wave form"
+    IDC_BTNSHOW_SYNTH_FILTER "Show synthesizer filter dialog"
+    IDC_BTN_WF_PINK_NOISE   "Select pink noise signal"
+    IDC_BTN_WF_WHITE_NOISE  "Select white noise signal"
+    IDC_BTN_WF_SWEEP        "Select sine sweep"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RD_OSZI3            "File or URL as source for oscilloscope"
+    IDC_RD_FO1              "Audio input device as source for file output"
+    IDC_RD_FO2              "Synthesizer as source for file output"
+    IDC_RD_AO1              "Synthesizer as source for audio output"
+    IDC_RD_AO2              "File or URL as source for audio output"
+    IDC_BTN_INITIALIZE      "Initialize filter chain"
+    IDC_SLIDER_INPUT_LEVEL  "Adjust audio input level"
+    IDC_EDT_INPUT_FILE_NAME "Enter source file path or IP address"
+    IDC_EDT_OUTPUT_FILE_NAME "Enter output file path"
+    IDC_SLIDER_MEDIA_POS    "Shows the media file position"
+    IDC_CK_URL_INPUT        "Activate network input source"
+    IDC_CK_ROT              "Export runtime object table to display in GraphEdit"
+    IDC_CK_URL_OUTPUT       "Activate network output destination"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_COMBO_AUDIO_INPUT   "Select audio input device"
+    IDC_COMBO_AUDIO_OUTPUT  "Select audio output device"
+    IDC_COMBO_SAMPLE_LENGTH "Select sample length of input source in ms"
+    IDC_BTN_START           "Start filter chain"
+    IDC_BTN_STOP            "Stop filter chain"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HELP                 "Show help for this dialog"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_SLIDER_MAGNITUDE2   "Adjust magnitude of right channel"
+    IDC_SLIDER_OFFSET1      "Adjust DC offset of left channel"
+    IDC_SLIDER_OFFSET2      "Adjust DC offset of right channel"
+    IDC_RD_OSZI1            "Audio input device as source for oscilloscope"
+    IDC_RD_OSZI2            "Synthesizer as source for oscilloscope"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BTN_WF_KORR         "Correlated noise signal"
+    IDC_SLIDER_FREQUENCY1   "Adjust output frequency"
+    IDC_SLIDER_FREQUENCY2   "Adjust second frequency for sweep"
+    IDC_SLIDER_TIME         "Adjust edge time"
+    IDC_SLIDER_PHASE        "Adjust phase difference between left and right channel"
+    IDC_SLIDER_MAGNITUDE1   "Adjust magnitude of left channel"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\AudioSOM.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,13 @@
+TARGETNAME=HAcc
+TARGETTYPE=DRIVER
+
+INCLUDES=..\
+
+SOURCES=HAccSys.c \
+		HAccCommon.c \
+		HAccIsaStuff.c \
+		HAccPciStuff.c \
+		Eventlog.c \
+		HAccSys.rc
+
+

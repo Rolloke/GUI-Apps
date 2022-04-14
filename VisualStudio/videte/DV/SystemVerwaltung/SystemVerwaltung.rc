@@ -1,0 +1,754 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SystemVerwaltung.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\SystemVerwaltung.ico"
+IDR_SYSTEMTYPE          ICON    DISCARDABLE     "res\\SVDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_IMAGES              BITMAP  DISCARDABLE     "res\\images.bmp"
+IDB_DOWN                BITMAP  DISCARDABLE     "res\\down.bmp"
+IDB_UP                  BITMAP  DISCARDABLE     "res\\Up.bmp"
+IDB_HOT                 BITMAP  DISCARDABLE     "res\\hot.bmp"
+IDB_ARCHIVE             BITMAP  DISCARDABLE     "res\\archive.bmp"
+IDB_DRIVES              BITMAP  DISCARDABLE     "res\\drives.bmp"
+IDB_COLD                BITMAP  DISCARDABLE     "res\\cold.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  20, 20
+BEGIN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_EDIT_CANCEL
+    BUTTON      ID_EDIT_SERVERINIT
+    SEPARATOR
+    BUTTON      ID_EDIT_NEW
+    BUTTON      ID_EDIT_DELETE
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "S&peichern\tSTRG+S",          ID_FILE_SAVE
+        MENUITEM "&Rückgängig\tESC",            ID_EDIT_CANCEL
+        MENUITEM "&Initialisierung\tSTRG+I",    ID_EDIT_SERVERINIT
+        MENUITEM "S&peichern unter...",         ID_FILE_SAVE_AS
+        MENUITEM "Ö&ffnen...",                  ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Bearbeiten"
+    BEGIN
+        MENUITEM "&Neu\tSTRG+N",                ID_EDIT_NEW
+        MENUITEM "&Löschen\tUmschalt+ENTF",     ID_EDIT_DELETE
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Tooltips",                   ID_VIEW_TOOLTIPS
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "I",            ID_EDIT_SERVERINIT,     VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_EDIT_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_DELETE,         VIRTKEY, SHIFT, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_HOSTLIST DIALOG DISCARDABLE  0, 0, 356, 236
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Name:",IDC_STATIC_HOST_NAME,7,9,24,8
+    EDITTEXT        IDC_NAME_HOST,35,7,70,14,ES_AUTOHSCROLL
+    RTEXT           "N&ummer/Adresse:",IDC_STATIC_NUMBER,109,10,64,8
+    EDITTEXT        IDC_ADDRESS_HOST,177,7,70,14,ES_AUTOHSCROLL
+    RTEXT           "&Typ:",IDC_TXT_TYP,254,10,22,8
+    COMBOBOX        IDC_COMBO_TYPE_HOST,279,7,70,83,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List2",IDC_LIST_HOST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,7,26,342,181
+    LTEXT           "Eigener &Stationsname:",IDC_STATIC_OWN_NAME,7,217,80,8
+    EDITTEXT        IDC_STATIONS_NAME,89,215,174,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Archive einrichten...",IDC_HOST_ARCHIVES,280,215,69,14
+END
+
+IDD_ISDN DIALOG DISCARDABLE  0, 0, 320, 132
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "&ISDN",IDC_STATIC_ISDN,5,7,308,118
+    CONTROL         "&Ein/Aus",IDC_CHECK_ISDN,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,17,22,73,10
+    GROUPBOX        "Eigene Rufnummer",IDC_STATIC_REJECT,15,35,135,44,
+                    WS_GROUP
+    EDITTEXT        IDC_RUFNUMMER,34,60,104,12,ES_AUTOHSCROLL | WS_GROUP
+    GROUPBOX        "Anzahl der B - Kanäle",IDC_STATIC_B_CHANNELS,155,35,131,
+                    44,WS_GROUP
+    CONTROL         "&1 B - Kanal",IDC_RADIO_B1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,162,47,116,10
+    CONTROL         "&2 B - Kanäle",IDC_RADIO_B2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,162,61,116,10
+    CONTROL         "&MSN verwenden",IDC_CHECK_MSN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,46,69,10
+    LTEXT           "&Wählpräfix:",IDC_TXT_PREFIX,17,89,36,8
+    EDITTEXT        IDC_EDIT_PREFIX,63,86,31,14
+    LTEXT           "&Länge der Rufnummern, die ein Amt benötigen:",
+                    IDC_TXT_PREFIX_MINIMUM,17,109,149,8
+    EDITTEXT        IDC_EDIT_PREFIX_MINIMUM,173,106,31,14,ES_AUTOHSCROLL
+END
+
+IDD_SOCKET DIALOG DISCARDABLE  0, 0, 236, 103
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "TCP/IP",IDC_STATIC_SOCKET,7,7,222,89
+    CONTROL         "&Ein/Aus",IDC_CHECK_SOCKET,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,17,22,76,10
+    GROUPBOX        "Erwartete Bitrate",IDC_TXT_EXTENDED_OPTIONS,15,39,205,
+                    50
+    CONTROL         "> &8 MBit",IDC_RADIO_8MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,23,54,42,10
+    CONTROL         "&4 MBit",IDC_RADIO_4MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,67,54,36,10
+    CONTROL         "2 &MBit",IDC_RADIO_2MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,110,54,36,10
+    CONTROL         "1 MBi&t",IDC_RADIO_1MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,153,54,36,10
+    CONTROL         "&512 kBit",IDC_RADIO_512_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,24,67,42,10
+    CONTROL         "&256 kBit",IDC_RADIO_256_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,67,67,42,10
+    CONTROL         "&128 kBit",IDC_RADIO_128_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,110,67,42,10
+    CONTROL         "&64 kBit",IDC_RADIO_64_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,153,67,38,10
+END
+
+IDD_APP DIALOG DISCARDABLE  0, 0, 209, 153
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Automatisches Beenden von Programmen",IDC_GRP_APP,5,5,
+                    199,64
+    LTEXT           "&Beenden nach (Minuten):",IDC_TXT_AUTO_APP,15,35,110,8
+    LTEXT           "Bestätigung an&zeigen (Sekunden):",IDC_TXT_CONF_APP,15,
+                    52,110,8
+    EDITTEXT        IDC_EDIT_AUTO_APP,133,32,61,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CONF_APP,133,50,61,14,ES_AUTOHSCROLL
+    CONTROL         "&Ein/Aus",IDC_CHECK_APP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,18,110,10
+    GROUPBOX        "Automatisches Trennen von Verbindungen",
+                    IDC_GRP_CONNECTION,5,78,199,70
+    CONTROL         "Ein/&Aus",IDC_CHECK_CONN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,94,110,10
+    LTEXT           "&Trennen nach (Minuten):",IDC_TXT_AUTO_CONN,15,111,110,
+                    8
+    LTEXT           "Bestätigung anzei&gen (Sekunden):",IDC_TXT_CONF_CONN,15,
+                    128,110,8
+    EDITTEXT        IDC_EDIT_AUTO_CONN,133,107,61,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CONF_CONN,133,125,61,14,ES_AUTOHSCROLL
+END
+
+IDD_ARCHIV DIALOG DISCARDABLE  0, 0, 377, 262
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List2",IDC_ARCHIVE,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,8,7,362,175
+    GROUPBOX        "Eigenschaften:",IDC_GROUP_PROPERTIES,7,184,185,70
+    LTEXT           "Na&me:",IDC_STATIC_HOST_NAME,14,196,39,8
+    EDITTEXT        IDC_NAME_ARCHIV,57,193,129,14,ES_AUTOHSCROLL
+    LTEXT           "&Größe:",IDC_STATIC_SIZE,14,216,38,8
+    EDITTEXT        IDC_EDIT_SIZE,57,214,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "in MByte",IDC_STATIC_MB,107,216,34,8
+    LTEXT           "Für dieses Archiv stehen maximal",IDC_STATIC_MAX,199,
+                    188,116,8
+    RTEXT           "0000",IDC_STATIC_MAX_MB,199,204,50,8
+    LTEXT           "MB zur Verfügung",IDC_STATIC_FREE,255,204,58,8
+    LTEXT           "Insgesamt sind",IDC_STATIC_WHOLE,201,224,62,8
+    LTEXT           "000000000000",IDC_STATIC_USED_MB,201,240,50,8
+    LTEXT           "/",IDC_STATIC_SLASH,261,240,8,8
+    LTEXT           "000000000000",IDC_STATIC_WHOLE_MB,273,240,50,8
+    LTEXT           "MB benutzt",IDC_TXT_USED,331,240,37,8
+END
+
+IDD_DRIVE DIALOG DISCARDABLE  0, 0, 345, 288
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List2",IDC_DRIVES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,7,7,331,167
+    GROUPBOX        "Verwendung",IDC_GROUP_USE,7,180,113,101
+    CONTROL         "&Betriebssystem",IDC_RADIO_SYSTEM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,17,197,98,10
+    CONTROL         "&Keine Verwendung",IDC_RADIO_NORMAL,"Button",
+                    BS_AUTORADIOBUTTON,17,212,98,10
+    CONTROL         "S&peicherung",IDC_RADIO_DATABASE,"Button",
+                    BS_AUTORADIOBUTTON,17,227,98,10
+    CONTROL         "Backup &schreiben && lesen",IDC_RADIO_BACKUP_WRITE_READ,
+                    "Button",BS_AUTORADIOBUTTON,17,242,98,10
+    CONTROL         "Backup &lesen",IDC_RADIO_BACKUP_READ,"Button",
+                    BS_AUTORADIOBUTTON,17,257,98,10
+    LTEXT           "Laufwerk:",IDC_TXT_DRIVE,132,192,32,8
+    LTEXT           "0:\\",IDC_STATIC_DRIVE,175,192,14,8
+    LTEXT           "Zu verwendende &Größe:",IDC_TXT_USE,132,207,78,8
+    EDITTEXT        IDC_EDIT_USE,216,205,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "MByte",IDC_TXT_MB2,268,207,21,8
+    LTEXT           "Gesamte Größe der Speicherlaufwerke:\n(abzüglich 20 MB Reserve / Laufwerk)",
+                    IDC_TXT_SIZE,132,244,124,17
+    LTEXT           "0000000000",IDC_STATIC_DRIVES_MB,263,244,41,8
+    LTEXT           "MByte",IDC_TXT_MB,310,244,21,8
+    GROUPBOX        "Laufwerk",IDC_GROUP_DRIVE,125,180,213,48
+    GROUPBOX        "Gesamte Größen",IDC_GROUP_SIZE,125,233,213,48
+    LTEXT           "Gesamte Größe der Archive:",IDC_TXT_SIZE2,132,265,127,8
+    LTEXT           "MByte",IDC_TXT_MB3,310,265,21,8
+    LTEXT           "0000000000",IDC_STATIC_ARCHIVS_MB,263,265,41,8
+    CONTROL         "&Alles",IDC_ALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    300,207,31,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_HOSTLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 349
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 229
+    END
+
+    IDD_ISDN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 125
+    END
+
+    IDD_SOCKET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_APP, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 204
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 148
+    END
+
+    IDD_ARCHIV, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 370
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 255
+    END
+
+    IDD_DRIVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 338
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 281
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "SystemVerwaltung"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_HOSTS               "Gegenstationen"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Beendet die Seitenansicht.\nSeitenansicht beenden"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_DELETE_HOST_ARCHIV  "Für diese Gegenstation existieren noch Archive.\nSollen diese Archive automatisch mit ihren Daten und Bildern gelöscht werden?"
+    IDP_CREATE_NORMAL_ARCHIVE_FOR_HOST 
+                            "Für die Gegenstation %s existiert noch kein Archiv\nfür Bilder aus normalen Verbindungen.\nWollen Sie, daß ein solches Archiv automatisch angelegt wird?"
+    IDP_CREATE_SEARCH_ARCHIVE_FOR_HOST 
+                            "Für die Gegenstation %s existiert noch kein Archiv\nfür Bilder aus Suchläufen.\nWollen Sie, daß ein solches Archiv automatisch angelegt wird?"
+    IDS_HOST_NORMAL_ARCHIVE "Normal"
+    IDS_HOST_SEARCH_ARCHIVE "Suche"
+    IDP_NO_AUTOMATIC_ARCHIV "Es steht kein ausreichender Platz mehr zur Verfügung, um für %s ein  Archiv für %s anzulegen!"
+    IDS_SAVE                "Speichern"
+    IDS_SETTINGS            "Einstellungen"
+    IDS_OPEN                "Öffnen"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_SEARCH_RESULT       "Suchergebnisse"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_NEW                 "Neu"
+    IDS_NEWHOST             "Neue Gegenstation"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_HOST                "Gegenstation"
+    IDS_NUMBER              "Rufnummer"
+    IDS_ISDN1               "ISDN"
+    IDS_SOCKET              "TCP/IP"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SystemVerwaltung"
+    AFX_IDS_IDLEMESSAGE     " "
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt, zu dem Sie Hilfe wünschen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Erstellt ein neues Dokument.\nNeu"
+    ID_FILE_OPEN            "Öffnet bestehende Einstellungen.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichern\nSpeichert alle Einstellungen"
+    ID_FILE_SAVE_AS         "Speichert die aktiven Eisntellungen unter neuem Namen.\nSpeichern unter"
+    ID_FILE_PAGE_SETUP      "Ändert die Druckoptionen.\nSeite einrichten"
+    ID_FILE_PRINT_SETUP     "Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung"
+    ID_FILE_PRINT           "Druckt das aktive Dokument.\nDrucken"
+    ID_FILE_PRINT_PREVIEW   "Zeigt ganze Seiten an.\nSeitenansicht"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Info...\nZeigt Programm-Informationen, Versionsnummer und Copyright an."
+    ID_APP_EXIT             "Verläßt die Systemverwaltung; fragt, ob die Einstellungen gespeichert werden sollen.\nBeenden"
+    ID_HELP_INDEX           "Öffnet die Hilfefunktion.\nHilfethemen"
+    ID_HELP_FINDER          "Listet die Hilfethemen auf.\nHilfethemen"
+    ID_HELP_USING           "Zeigt Anweisungen zum Umgang mit der Hilfe an.\nHilfe"
+    ID_CONTEXT_HELP         "Zeigt Hilfe zu angeklickten Schaltflächen, Menüs und Fenstern an.\nHilfe"
+    ID_HELP                 "Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TYP                 "Typ"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_HOST_ILLEGAL_ROUTING 
+                            "Die angegebene Routingadresse für %s ist falsch.\n\nDie einzelnen Stationen sind durch # zu trennen.\n\nIP Adressen muß ein tcp: vorangestellt werden.\n\nSMS Nummern muß ein sms: vorangestellt werden.\n\nB3 Nummern muß ein pres: vorangestellt werden.\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "Sie haben keinen gültigen Dongle, um diese Software zu starten, oder Ihr Dongle ist defekt.\nWenden Sie sich bitte an einen Servicetechniker!"
+    IDP_ACCESS_DENIED       "Sie sind nicht dazu berechtigt, Änderungen am System vorzunehmen.\n Der Zugriff wurde verweigert!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NAME                "Name"
+    IDS_LOCAL_HOST          "Lokale Station"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_SAVE_CHANGES        "Möchten Sie die Änderungen speichern ?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RESET_FAILED        "Die Initialisierung des Systems konnte nicht durchgeführt werden!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AUTOLOGOUT          "Auto Logout"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_NOAPPWITHOUTCONN    "Ist das automatische Beenden von Anwendungen aktiviert, so  muß auch das automatische Trennen von Verbindungen aktiviert sein!"
+    IDP_APP_LT_CONF         "Die Zeit für das automatische Beenden ist kleiner als die Zeit für die Bestätigung!"
+    IDP_CONN_LT_CONF        "Die Zeit für das automatische Trennen ist kleiner als die Zeit für die Bestätigung!"
+    IDP_APP_LT_CONN         "Die Zeit für das automatische Beenden ist kleiner als die Zeit für das automatische Trennen."
+    IDP_NO_LOCAL_HOSTNAME   "Bitte geben Sie Ihrer Station einen sinnvollen Namen!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_NEW             "Neu\nErstellt ein neues Element"
+    ID_EDIT_DELETE          "Löschen\nLöscht das ausgewählte Element"
+    ID_EDIT_CANCEL          "Rückgängig\nMacht die Änderungen rückgängig"
+    ID_EDIT_SERVERINIT      "Initialisierung\nInitialisiert das System neu"
+    ID_VIEW_TOOLTIPS        "schaltet die Tooltips ein und aus"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ARCHIV              "Archiv"
+    IDP_REGISTRY_IMPORT_WARNING 
+                            "Sie wollen Einstellungen importieren,\ndie nicht auf diesem System gespeichet wurden!\nDies kann das System u.U. außer Funktion setzen!\n\nWollen Sie trotzdem importieren?"
+    IDP_HOST_ILLEGAL_ADDRESS 
+                            "Die angegebene Addresse oder Rufnummer für %s enthält ungültige Zeichen!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_ARCHIV_SIZE_ZERO    "Sie müssen eine Archivgröße >0 angeben oder 'alles' markieren!"
+    IDP_ARCHIV_SIZE_TO_BIG  "Die von Ihnen eingegebene zu verwendende Größe überschreitet den maximal zur Verfügung stehenden Wert!\nDie zu verwendende Größe wird auf den Maximalwert gesetzt."
+    IDS_LOGIN_SUCCESFUL     "Login von %s erfolgreich"
+    IDS_LOGIN_DENIED        "Login von %s abgewiesen"
+    IDP_FIXED_ARCHIVES_ON_DRIVE 
+                            "Diesem Laufwerk sind Archive fest zugeordnet!\nSie müssen diese Zuordnungen erst aufheben,\nbevor Sie die Verwendung dieses Laufwerks ändern können.\nDie Verwendung des Laufwerks wird nicht geändert."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DRIVES              "Laufwerke"
+    IDS_ARCHIVES            "Archive"
+    IDS_NR                  "Nr"
+    IDS_SIZE_MB             "Größe in MB"
+    IDS_ALARM_ARCHIV        "Alarm"
+    IDS_RING_ARCHIV         "Ring"
+    IDS_VORRING_ARCHIV      "Vorring"
+    IDS_NEW_ARCHIV          "Neues Archiv"
+    IDS_DRIVE               "Laufwerk"
+    IDS_USEDAS              "Verwendet als"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ARCHIVE             "Liste der eingetragenen Archive.\nMarkieren Sie einen Eintrag,\num dessen Daten zu bearbeiten."
+    IDC_EDIT_SIZE           "Geben Sie die gewünschte Größe des Archivs an."
+    IDC_COMBO_ALARM         "Einem Vorringarchiv muß ein Alarmarchiv zugeordnet werden.\nSobald in das Alarmarchiv gespeichert wird, wird auch das\nzugeordnete Vorringarchiv in das Alarmarchiv gesichert."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIONS_NAME       "Eigener Stationsname,\ngeben Sie bitte eine möglichst eindeutige Bezeichnung ein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DO_LISTEN           "Nehme eingehende Anrufe an."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_USED                "Belegt in MByte"
+    IDS_SIZE                "Größe in MByte"
+    IDS_QUOTA               "Zu verwenden in MByte"
+    IDS_DRIVE_FD            "Diskette"
+    IDS_DRIVE_HD            "Lokales Laufwerk"
+    IDS_DRIVE_NET           "Netzwerkverbindung"
+    IDS_DRIVE_CD            "CD-ROM-Laufwerk"
+    IDS_ALL                 "Alles"
+    IDS_USE_NORMAL          "Keine Verwendung"
+    IDS_USE_DATABASE        "Speicherung"
+    IDS_USE_BACKUP_READ     "Backup lesen"
+    IDS_USE_BACKUP_WRITE_READ "Backup schreiben & lesen"
+    IDS_USE_SYSTEM          "Betriebssystem"
+    IDS_TOO_LESS_DATABASE_DRIVES 
+                            "Es steht jetzt nicht mehr genug Platz für alle Archive zur Verfügung!\nVerkleinern Sie erst ein oder mehrere Archive!\nDie Verwendung des Laufwerks wird nicht geändert."
+    IDP_ARCHIVS_TOO_BIG     "Die Größe der Archive übersteigt die Kapazität der Laufwerke.\nBitte verkleinern Sie ein oder mehrere Archive oder\nstellen der Speicherung mehr Laufwerke zur Verfügung oder\nerhöhen die zu benutzenden Größen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ADDRESS_HOST        "Nummer oder Adresse der Gegenstation.\n\nTCP/IP und Email:\nAlle Zeichen sind zugelassen, achten Sie bitte auf korrekte Schreibweise!\nISDN und SMS:\nEs sind alle Ziffern, das Leerzeichen sowie / - ( ) zugelassen.\n\nRouting:\nDie einzelnen Stationen sind durch ein '#' zu trennen.\nEiner TCP/IP-Adresse muss ein 'tcp:' vorangestellt werden.\nEiner SMS-Adresse muss ein 'sms:' vorangestellt werden.\nEiner B3-Adresse muss ein 'pres:' vorangestellt werden."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_AUTO_APP       "Programme werden nach dieser Zeit automatisch beendet,\nwenn keine Benutzereingaben erfolgen.\n\nDiese Zeit muß größer oder gleich der Zeit\nfür das automatische Trennen sein."
+    IDC_EDIT_CONF_APP       "In den angegeben letzten Sekunden wird eine Bestätigung eingeblendet,\nwomit der Benutzer das automatische Beenden verhindern kann."
+    IDC_RADIO_512_KB        "Stellen Sie die gewünschte Bitrate ein."
+    IDC_CHECK_APP           "Markieren Sie dieses Feld, wenn Programme,\ndie Benutzereingaben ermöglichen,\nnach einer bestimmten Zeit ohne Benutzereingaben\nautomatisch beendet werden sollen.\n(Sicherheitsabschaltung, um unbefugte Eingaben zu verhindern.)\n\nDamit ist gleichzeitig das Trennen verbunden!"
+    IDC_RADIO_256_KB        "Stellen Sie die gewünschte Bitrate ein."
+    IDC_RADIO_128_KB        "Stellen Sie die gewünschte Bitrate ein."
+    IDC_CHECK_CONN          "Markieren Sie dieses Feld, wenn Verbindungen\nnach einer bestimmten Zeit, ohne daß Benutzereingaben erfolgten,\nautomatisch beendet werden sollen.\n(Sicherheitsabschaltung, um unnötige Verbindungskosten\nzu vermeiden.)"
+    IDC_RADIO_64_KB         "Stellen Sie die gewünschte Bitrate ein."
+    IDC_EDIT_AUTO_CONN      "Verbindungen werden nach dieser Zeit automatisch getrennt,\nwenn keine Benutzeraktionen, wie Tastatureingaben oder Mausklicks erfolgen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_CONF_CONN      "In den angegeben letzten Sekunden wird eine Bestätigung eingeblendet,\nwomit der Benutzer das automatische Trennen verhindern kann."
+    IDC_CHECK_MSN           "Hier wird angezeigt, ob die Telefonanlage eine eigene MSN unterstützt,\nd.h. ob Anrufe an eine bestimmten MSN angenommen werden können.\nEinige Telefonanlagen liefern die gerufene MSN nicht mit,\nso daß dann nur alle Anrufe angenommen werden können."
+    IDC_RADIO_B1            "Für eine Verbindung wird maximal nur\nein B-Kanal zur Verfügung gestellt."
+    IDC_RADIO_B2            "Für eine Verbindung werden bis zu\nzwei B-Kanäle zur Verfügung gestellt."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALL                 "Markieren Sie dieses Feld,\nwenn Sie das gesamte Laufwerk\nfür diesen Zweck verwenden möchten."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DRIVES              "Liste aller verfügbarer Laufwerke.\nMarkieren Sie einen Eintrag,\num dessen Daten zu bearbeiten."
+    IDC_RADIO_SYSTEM        "Markieren Sie diesen Eintrag, wenn auf diesem Laufwerk\ndas Betriebssystem installiert ist und dieses Laufwerk nicht\nvon der Datenbank verwendet werden soll."
+    IDC_RADIO_NORMAL        "Markieren Sie diesen Eintrag, wenn dieses Laufwerk normal vom Betriebssystem\nund nicht von der Datenbank verwendet werden soll. "
+    IDC_RADIO_DATABASE      "Markieren Sie diesen Eintrag, wenn dieses Laufwerk\nfür die Datenbank-Speicherung verwendet werden soll."
+    IDC_RADIO_BACKUP_WRITE_READ 
+                            "Markieren Sie diesen Eintrag, wenn dieses Laufwerk\nfür die Datenbank-Sicherung (Backup) verwendet werden soll.\nSie können dann auch von diesem Laufwerk Backups lesen.\n\nCD-R- oder CD-RW-Laufwerke können NICHT\nfür Backup-Pozesse verwendet werden!"
+    IDC_RADIO_BACKUP_READ   "Markieren Sie diesen Eintrag, wenn von diesem Laufwerk\neine Datenbank-Sicherung (Backup) gelesen werden soll."
+    IDC_EDIT_USE            "Wenn Sie nicht das gesamte Laufwerk\nfür diesen Zweck verwenden möchten,\ntragen Sie hier die gewünschte Größe ein."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RUFNUMMER           "Geben Sie die Rufnummer ein,\nunter der die Anrufe angenommen\nwerden sollen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_ARCHIVE_SIZE_ZERO   "Sie haben keine Größe angegeben!"
+    IDP_CONFIG_DRIVE_FIRST  "Sie müssen erst ein Laufwerk für die Speicherung angeben,\nbevor Sie Archive einrichten können!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_DOUBLE_HOST         "Die Gegenstation %s ist mehrfach benutzt!\nGegenstationen müssen eindeutige Namen haben!\nLöschen Sie die Mehrfacheinträge!"
+    IDP_HOST_WITHOUT_NUMBER "Der Gegenstation %s wurde noch keine Nummer oder Adresse zugeordnet.\nBitte weisen Sie der Gegenstation eine Nummer zu!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\SystemVerwaltung.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

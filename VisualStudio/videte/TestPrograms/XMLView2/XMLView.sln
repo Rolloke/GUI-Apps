@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XMLView", "XMLView.vcproj", "{097868E7-C50D-41CF-83DE-3ADC9D284B32}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SolutionUniqueID = {E3F5D531-4844-4705-A5BA-0526696D4C58}
+		SccProjectUniqueName1 = XMLView.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{097868E7-C50D-41CF-83DE-3ADC9D284B32}.Debug.ActiveCfg = Debug|Win32
+		{097868E7-C50D-41CF-83DE-3ADC9D284B32}.Debug.Build.0 = Debug|Win32
+		{097868E7-C50D-41CF-83DE-3ADC9D284B32}.Release.ActiveCfg = Release|Win32
+		{097868E7-C50D-41CF-83DE-3ADC9D284B32}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

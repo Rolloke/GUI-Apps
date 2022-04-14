@@ -1,0 +1,6 @@
+07.06.05 RKE- Daueralarm ueber den sonst unnuetzen IconTimer implementiert.
+17.03.05 UF - Neue Button fuer alle Alarme gleichzeitig MD oder Extern 1.
+04.03.04 GF	- Umstellung auf Unicode und VS_71
+12.04.02 UF - Bugfix Alarme zweite Karte.
+12.04.02 UF - Das Icon rotiert jetzt
+12.04.02 UF - Project als Software Alarmgeber fuer DTS angelegt.

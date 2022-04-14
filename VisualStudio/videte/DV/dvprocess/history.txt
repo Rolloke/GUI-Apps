@@ -1,0 +1,328 @@
+16.08.06 UF - Bugfix Speicher LED wird bei Q jetzt nicht mehr gesetzt.
+15.08.06 UF - Bugfix PTZ Input ID war falsch.
+14.08.06 TKR- Bugfix 218: MD Alarme werden nun nur noch an nicht UVV Kameras via Input Verbindung
+			  an den DVClient weitergeleitet.
+10.08.06 UF - AVCodec MPEG-4 eingebaut.
+27.07.06 UF - Bugfix "erkennen" von Datenbanklaufwerken bei CF.
+			- Bugfix bei 4CIF wurden nur CIF Bilder gemacht.
+19.07.06 TKR- Bugfix 221: Wenn nur 2 analoge Videoouts genutz werden, liegt bei den Ausgaengen 3 un 4 nun
+			  kein Signal mehr an.
+18.07.06 TKR- Bugfix 228: Bei DTS XL sind pro Tasha 2 analoge Videoausgänge einstellbar.
+07.07.06 TKR- Beim Freischaltcode (12 Stellen) wurde vorher nur der Computername getestet 
+			  (die ersten 6 Stellen des Freischaltcodes). Nun werden auch die letzten 6 Stellen
+			  getestet, ob sie einen sinnvollen Wert fuer die freizuschaltenden Optionen ergeben.
+07.07.06 TKR- Die System Informationen zeigen nun neben den freigeschalteten Optionen 
+			  LAN, ISDN, CD, DVD auch die Anzahl der Kameras an, allerdings nur bei QUnit.
+07.07.06 TKR- Der DVProcess benutzt nun die in der QUnit eingestellte Anzahl der freigegebenen
+              Kameras.
+06.07.06 TKR- Bei der Q Unit kann nun auch die Anzahl der Kameras (8, 16) per Freischaltcode geaendert
+		      werden. Standardmaessig sind 4 Kameras der Q Unit freigeschaltet.
+		      Zu Benutzen ist dazu, wie immer, das Programm "Expansion Code".
+05.07.06 TKR- Bugfix 210: Die freizuschaltenden Optionen (ISDN, LAN, CD, DVD) koennen, wie gehabt, mittels
+		      Freischaltcode freigeschaltet werden.
+28.06.06 TKR- Die Anzahl der VideoOuts ist bei der Q Unit nun abhängig, ob eine Erweiterungskarte
+	          installiert ist, oder nicht. Maximal 2 Video Outputs werden beim DTS erlaubt.
+26.06.06 RKE- DoRequestGetValue((OutputID:NoSubID), CSD_FPS,...) wird jetzt an die Unit weitergeleitet,
+              und an den fragenden Client zurueck.
+31.05.06 UF - Bugfix GP MD Alarm Koordinatenupdate
+08.03.06 TKR- Bugfix 198: Nur die kritischen RTEs werden angezeigt.
+02.03.06 TKR- Bei bestehenden Verbindungen wird bei Beginn eines neuen Tages die
+			  NAG Screen (Wartungs und kritische RTEs) angezeigt.
+01.03.06 TKR- Bugfix 197: RTEs werden nicht mehr bei Alarmverbindungen mitgeschickt.
+09.02.06 TKR- Kritische Fehler (HDD Ausfall, Temperatur zu hoch, SMART Fehler) werden nun
+			  in einem Fenster ausgegeben (genauso wie beim Wartungsdialog).
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+05.12.05 TKR- Maintenance in Release aktiv. Der Wartungshinweis wird nur angezeigt, wenn es in
+			  der aktuell im DVClient eingestellten Sprache eine entsprechende Uebersetzung gibt.
+			  Zurzeit sind deutsch und englisch verfuegbar.
+02.12.05 TKR- Maintenance Funktionalitaet ist nun sprachabhaengig. LandDLL wird
+			  dazu included. Zurzeit nur in Debug aktiv.
+28.11.05 TKR- Maintenance Funktionalitaet eingebaut, zurzeit nur in Debug aktiv.
+25.10.05 RKE- Bugfix: 179 Es wurden in der CameraGroup nur die Kameras gezaehlt, die von inaktiv
+              auf aktiv gesetzt wurden, die aktiven wurden nicht mitgezaehlt. Also war ActiveCameras = 0.
+              Beim Reset war der Uebergang von inaktiv auf aktiv gegeben.
+14.10.05 UF - Bugfix Initialisierung von Laufwerken
+09.09.05 UF - DVRT.reg wird nicht mehr geschrieben. (CF)
+			  Fremde Dateien auf den Datenbanklaufwerken werden nicht mehr gelöscht. (CF)
+02.09.05 UF - Bugfix Sync Savic und Jacob.
+23.08.05 UF - Process ueberwacht jetzt die Verbindungen zu Savic/Jacob/Tasha und
+			  macht einen Reset, wenn die Verbindung weg ist, obwohl die Unit laeuft.
+19.07.05 UF - Bugfix Kamerascan JaCob / Savic
+26.05.05 UF - Bugfix Lizenznummern
+09.05.05 RKE- Bugfix 152: Der AudioEncoder wird jetzt nur noch gestartet, wenn die EncoderID ok ist.
+03.05.05 RKE- Bugfix 150: Verschiedene Protokolle auf einem Comport werden jetzt überprüft.
+15.04.05 UF - Nicht GOP faehige Clients bekommen die Bilder jetzt einzeln zugesandt.
+14.04.05 UF - Die Framerate Tasha geht jetzt zu stellen, 25,12,8,6,5,4,3,2,1 fps. GOPs werden behandelt.
+11.04.05 UF - Archivgroeße Tasha/XL im UVV Alarmfall von 1.5GB auf 3GB erhoeht.
+24.03.05 UF - Mit IgnoreExternalDetectors lassen sich die externen Alarme jetzt in der Registry abschalten.
+28.02.05 UF - Bugfix Voralarmbilder Tasha jetzt 10 Sekunden lang und Speicherung nach Stromausfall OK.
+28.02.05 ML - Bugfix 135: Das Timeout in 'WaitForCameraScan' wieder auf den ursprünglichen
+			  Wert zurückgesetzt.
+07.02.05 UF - Für UVV Kassen kann die Tasha mit 4 Kameras betrieben werden, dann reichen
+              8 Melder auch für Verdacht, d.h. Melder 5 ist Verdachtsmelder für Kamera 1.
+04.02.05 ML - Der Kamerascan wurde für die Tasha lediglich ein einziges mal durchgeführt
+			  Nun erfolgt er wie bei JaCob und SaVic minütlich.
+22.12.04 TKR- Bugfix 124: Es werden nun wieder alle P-Frames gespeichert, sodass es beim
+			  Abspielen keine Geisterbilder mehr gibt.
+09.12.04 RKE- Bugfix 123: GP nach Zugriff ausserhalb des Arrays in CVOutThread::Sequence
+			  Der Bereich wird jetzt vorher ueberprueft.
+30.11.04 ML - Bugfix108: CheckReset wird nun nicht nur minütlich aufgerufen, sondern häufiger.
+26.11.04 UF - Die Videosignalterminierung wird jetzt zur Unit durchgereicht.
+18.10.04 UF - DTS EL wieder JPEG über Netz und bei Speicherung CPU zu schwach fuer MPEG4.
+17.09.04 UF - Bugfix Savic/Jacob Mpeg4 Uebertragung Umschaltung der Aufloesung.
+31.08.04 UF - Bugfix Savic Mpeg4 Uebertragung.
+26.08.04 UF - MD Koordinaten werden jetzt an Software MPEG4 Bilder geklebt.
+18.08.04 UF - Vielleicht Bugfix Reihenfolge der Bildspeicherung aus dem MD Minivorring
+17.08.04 UF - Bugfix ISDN Uebertragung Mpeg4.
+16.06.04 UF - JPEG nach Mpeg4 jetzt auch mit richtigen Aufloesungen
+10.08.04 UF - Bugfix Videoausfall Tasha, MPEG4 für Savic/ISDN an
+05.08.04 TKR- Bugfix 83: Voral
+arm bei Tasha nun mit 1 fps, Alarm mit 2 fps (15 Minuten).
+29.07.04 UF - DTS unterstützt jetzt MPEG4 für die Savic, per default aber aus.
+28.07.04 TKR- Bugfix 87: Export von Systemeinstellungen funktioniert nun auch auf deutschen OS.
+27.06.04 UF - Bugfix UVV Kassen Bilder/s
+23.06.04 UF - Bugfix ISDN Uebertragung Savic/Jacob/Tasha.
+23.06.04 UF - Bugfix Darstellung Savic/Jacob lokal und IP.
+21.06.04 UF - Bugfix Senden von JPEG Bildern Savic.
+08.07.04 ML - Bugfix-DV3 Nr. 52 Maxim
+algröße von m_dwFramesToRecord von 200 auf 1000 erhöht, da die
+		      Tasha sehr viele Frames/Sekunde verschickt.
+22.06.04 UF - Tasha Requests auf ID 0,1. ISDN Handshake eingebaut
+17.06.04 UF - Nur die aktive Kamera erhaelt jetzt noch alle 25 fps, die anderen nur die I-Bilder = 5fps.
+16.05.04 ML - Input/Output-Gruppen für die zweite Tasha angelegt. (Sofern vorhanden)
+12.05.04 ML - Nach Erhalt von CIPC_ERROR_CAMERA_NOT_PRESENT/CIPC_ERROR_VIDEO_STREAM_ABORTED
+			  wird für die Tasha ein Kamerascan durchgeführt und anschließend der Videostream gestoppt, bzw. gestartet.
+07.05.04 UF - Bugfix Tasha idip -> DTS
+08.03.04 UF - Bugfix Nr. 942 und 943 Anzeige Audioaufnahme im Client, Alarme falsch gemeldet.
+05.03.04 UF - Bugfix Nr. 941 Externe Audioaufnahme
+05.03.04 UF - Bugfix Nr. 936 und 937 Timer und Activity Aufnahme
+04.03.04 UF - Bugfix Nr.: 932 Trotz inaktivem Timer wird Audio aufgezeichnet.
+04.03.04 GF	- Umstellung Unicode und VS_71
+04.03.04 TKR- Bugfix 926, 927: Bei Audio Modus Änderungen wird nun auch ein AudioReset gemacht.
+03.03.04 UF - Bugfix GP bei geoeffneten Livebildern
+03.03.04 UF - Bugfix Nr. 918 Bei externen Alarmen wurden die MD Tracks nicht gesetzt.
+26.02.04 UF - Bugfix Nr. 903 GP beim Start/Reset ohne zugeodnete Audiokamera.
+26.02.04 UF - GP wegen CIPCFields, alles gelockt sollte OK sein.
+		      Shutdown stabilisiert.
+25.02.04 UF - Der Lautsprecher hat jetzt den lokalen Stationsnamen.
+24.02.04 UF - Bugfix 889 Audioaufzeichnung bei extern oder MD funktioniert jetzt.
+20.02.04 TKR- Bugfix 871: Onthefly Kameraumschaltung klappt jetzt.
+19.04.02 RKE- Der Audioserver verhindert jetzt, das 2 Clients gleichzeitig eine Durchsage machen koennen.
+19.02.04 RKE- Bugfix 870: Prozess hat den Schwellwert immer auf 15% zuruekgesetzt.
+19.02.04 UF - Bugfix Nr. 868 Ist einer Kamera Audio zugewiesen, der Aufnahme-Modus aber noch auf "Aus", wird trotzdem aufgezeichnet
+17.02.04 UF - Korrektur Audioaufnahme durch extern oder MD
+17.02.04 UF - Audioalarme lösen jetzt auch die Videoaufnahme aus.
+17.02.04 UF - Bugfix 860: Audiocamera wird jetzt zurückgesetzt, wenn die Kamera 30 Tage weg ist.
+17.02.04 RKE- Bugfix 854: Audioeinstellungen können nun auch vom IP-Receiver gemacht werden.
+17.02.04 UF - Bugfix Audioreset. Es wurden die Inputs nicht neu gestartet.
+			  Beim Kamerawechsel wird nur die Kamera geändert, kein voller Reset.
+13.02.04 UF - Bugfix Audioreset. Bugfix Audioaufnahme jetzt auch mit Lauschen aus.
+04.02.04 UF - Audiowerte koennen jetzt gesetzt werden, Reset wird durchgefuehrt.
+03.02.04 UF - Audiospeicherung eingebaut, Reset Behandlung fehlt noch.
+03.02.04 UF - Bugfix keine Audioverbindung zum Client
+02.02.04 UF - Bugfix keine Audioverbindung zur Unit
+02.02.04 UF - Audio in DVProcess eingebaut, die Einstellungen werden noch nicht dynamisch
+			  geandert, erst nach Neustart, Aufnahme, Lauschen und Durchsagen gehen auch noch nicht.
+30.10.03 GF	- Bugfix 831: PTZ-Kameras an 2. oder weiteren Karten können nicht gesteuert werden
+			- Bugfix 832: Wird die zweite PTZ eingetragen, hängt sich der Prozess auf und wird vom Starter  neu gestartet
+10.09.03 UF - Wenn der Archivname leer ist, so setzt DVProcess den Namen auf die Kameranummer.
+03.09.03 UF - Die Kompression wird jetzt auch bei Savic an die Datenbank uebergeben.
+02.09.03 GF	- Bugfix 784: Beim Start des DTS wird die CommUnit nicht resettet, daher die PTZ-Funktionen nicht geladen
+22.08.03 UF - Aufloesung wird bei der Savic beruecksichtigt, per Skalierung in der SavicUnit.
+21.08.03 UF - Kompression wird bei der Savic beruecksichtigt.
+		      Die Kompressionsstufen sind noch zu ueberdenken.
+21.08.03 UF - Kompression und Aufloesung werden bei der JaCob beruecksichtigt.
+		      Die Kompressionsstufen sind noch zu ueberdenken.
+09.07.03 UF - Wenn es 30 Sekunden lang keine Bilder mehr gab und Kameras angeschlossen sind,
+			  so wird Process resettet.
+		 GF	- "Doppelte" Alarmverbindung bei bereits bestehender manueller Verbindung wieder eingebaut,
+				da das korrekte Alarmhandling über bestehende Verbindungen noch nicht klappt
+09.07.03 UF - Bugfix ungueltige Lizenznummer
+25.06.03 TKR- Bugfix 730: Bei einer bestehenden Verbindung von Vision zu DTS wird im Alarmfall
+			  vom DTS aus dieselbe Verbindung benutzt. Dazu CCallThread::AlreadyConnected geändert
+17.06.03 UF - Bugfix ISDN Uebertragung zweite Karte
+13.06.03 GF	- Bugfix 699: Bei schneller Alarmfolge funktioniert der Alarmanruf nach geraumer Zeit nicht mehr
+			- Relevante Aenderungen in CCallThread, alle anderen Aenderungen sind nicht relevant (CompilerWarnings beseitigt)
+03.06.03 TKR- Funktion CIPCOutputDVClient::OnRequestGetValue() um den sKey CSD_CARD_TYPE erweitert.
+			  Es wird nun je nach zur Kamera gehörenden Karte (Jacob, Savic) ermittelt, ob es
+			  für die Kamera einen Ext2 Alarmeingang gibt (hat Savic nämlich nicht).
+12.05.03 TKR- Klasse CSystemInfo hinzugefügt. Sie liefert Infos über das Gerät (VersionsNr usw.)
+28.03.03 UF - TraceVOUT schaltet jetzt Eintraege in der Logdatei fuer die Video outs ein und aus.
+28.03.03 UF - Fuer den VDR mit 16 Kameras und einer Jacob muss Anzahl der erlaubten Jacob auf 1
+			  stehen und Anzahl der Kameras auf 16!
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CInput::SetActive()
+31.01.03 UF	- Bugfix 683 GP im JPEG Encoder
+29.01.03 GF	- Bugfix: Doppelte Alarmverbindungen
+27.01.03 UF - Bugfix Daten werden bei Kartenausfall nicht mehr geloescht.
+15.01.03 UF - Bitraten / Groessen kontrolle fuer Savic eingebaut.
+27.12.02 UF - Bugfix UVV Kassen mit einer Kamera Nr 649
+02.12.02 UF - YUV Format fuer Savic wird jetzt unterstuetzt.
+27.11.02 UF - Uebertragung der direkt aus den Savic BMP Daten erzeugten H.263 und JPEG daten
+	          implementiert.
+13.11.02 UF - Icon ist jetzt auch im Systray.
+07.11.02 UF - Bugfix Nr. 629, Timer ignorieren wurde nicht bestaetigt.
+04.11.02 UF - Neue Schalter RequestDIBs und JPEGQuality fuer die Savic Optimierung
+17.10.02 UF - Liegt ein Alarm an, waehrend der Timer auslaeuft, wird zwar die Aufzeichnung gestoppt, 
+			  die Anzeige der Titelleist bleibt aber rot.
+17.10.02 UF - Bugfix Nr. 570 Bilder bzw. Archive werden jetzt nur noch geloescht, wenn
+              ein Datumswechsel vorliegt und Jacob oder Savic auch gestartet sind.
+16.10.02 UF - Bugfix Nr 581 Alarme werden nach Timern nicht richtig angezeigt.
+19.09.02 ML - Die maximale Anzahl der JaCobs und SaVics kann über
+				DV\DVStarter\Debug\AllowedJaCobs=XX bzw. DV\DVStarter\Debug\AllowedSaVics=YY
+				begrenzt werden
+18.09.02 UF - Der Freischaltcode sollte jetzt mit Savic und Jacob funktionieren,
+			  es wird immer auf der ersten Karte freigeschaltet.
+17.09.02 UF - Neuer Mehrkartenbetrieb, 2 Jacob und 2 Savic werden parallel unterstuetzt
+02.06.02 UF - Bugfix Nr 520 UVV Timing
+02.06.02 UF - Bugfix Nr 558 und 559 Bei nur UVV Kassenkameras blieb die Bildanfrage stehen.
+31.05.02 UF - Bugfix die Speicher LED funktionierte nicht im Shell modus.
+31.05.02 UF - Bugfix die Anfrage von Bildern blieb stehen.
+31.05.02 ML - Sind keine Gegenstationen in der Alarmanrufliste, erscheint auch kein Laufzeitfehler
+31.05.02 UF - Bugfix: UVV Timing verbessert
+31.05.02 ML - Bugfix: Das schalten des Alarmrelays sollte nun wieder funktionieren.
+			  (Alarm-> Relay fällt ab)
+30.05.02 UF - UVV Timing verbessert
+			  Alarmausgang faellt jetzt bei Alarm ab.
+			  Speicher LED Anzeige in Statuszeile fuer Testzwecke
+29.05.02 UF - UVV Timing erneuert
+15.05.02 UF - Bugfix UVV Alarm wurde nach Stromausfall nicht fortgesetzt, Bug
+			  ist nur in Version 529 und 530
+15.05.02 UF - Bugfix Speicher LED der Jacob DTS 2.0
+			  Nr. 536
+15.05.02 UF - Bugfix Speicher LED der Jacob DTS 2.0
+			  die LED wird jetzt beim Reset und beim Beenden ausgeschaltet.
+15.05.02 UF - Bugfix Speicher LED der Jacob DTS 2.0
+			  Beep beim Servereset
+15.05.02 UF - Die Speicher LED der Jacob DTS 2.0 wird jetzt geschaltet.
+15.05.02 UF - Wird ueber die Jacob DTS 2.0 der reset knopf gedrueckt, so
+			  macht der Server einen Softwarereset, welcher auch die Datenbank resetted.
+			  Bugfix Nr. 533 
+15.05.02 UF - Bugfix Nr. 512 Freischaltcode
+15.05.02 UF - Es werden jetzt auch nichtnumerische Computernamen, also solche auch Buchstaben 
+			  fuer den Freischaltcode unterstuetzt.
+14.05.02 UF - Bugfix Nr 527 und 528 Fehler beim Kameraausfall und Scan wurde der Client nicht
+			  richtig informiert.
+13.05.02 UF - Bugfix Nr 525 GP beim Fehlschlagen der Alarmverbindung
+10.05.02 UF - Bugfix Nr. 476 und 509, die Timer
+10.05.02 ML - Bugfix Nr. 498 Wenn keine Alarmgegenstation erreicht werden konnte, wird ein
+			  Laufzeitfeher verschickt.
+02.05.02 UF - Bugfix Timeout beim Kamerascan.
+29.04.02 UF - Bugfix Nr. 491 und Nr. 490
+29.04.02 UF - zweiter Bugfix Nr.476, server reset funktioniert jetzt richtig
+26.04.02 UF - Bugfix Nr.476, der Client bekam beim Serverreset einfach zu viele Infos.
+			- Bugfix Nr 484, Nach dem Ende einer Zeitzone ohne Aufnahme wird diese bei ständig 
+			  Alarm nicht wieder fortgesetzt.
+22.04.02 ML - Bugfix Nr. 474 Nach einem erfolgreichen Alarmverbindungsaufbau wird beim nächsten
+			  Alarmanruf wieder mit der 1. Alarmnummer begonnen.
+16.04.02 ML - Bugfix: Absturz an Adresse 0x4142f0 (CVOutThread::Sequence) Alle Pointer werden nun
+			  vor der Verwendung auf NULL überprüft.
+12.04.02 UF - Bugfix Alarmhandling wird jetzt sofort abgespeichert.
+04.04.02 UF - Wenn in der Registry eine Festplatte unter DVRT-DV-Drives mit 2
+			  eingetragen wird, so kann diese jetzt als Backuplaufwerk genutzt werden.
+28.03.02 UF - Bugfix Nr. 424 Alarmaufschaltung
+27.03.02 UF - Bugfix Alarmweiterschaltung, es wurde immer wieder auf die Alarmkamera geschaltet.
+27.03.02 ML - In der Klasse CVOutThread den 'pCameraGroup' überprüft.
+26.03.02 UF - Alarmausgang fertiggestellt.
+21.02.02 UF - weiterer Bugfix Alarmaufschaltung
+07.02.02 UF - Bugfix Alarmaufschaltung
+05.02.02 UF - Bugfix Neustart nach Freischaltcode
+05.02.02 UF - Alarmaufschaltung jetzt fuer jede Kamera einzeln schaltbar
+05.02.02 UF - Freischaltcode wird jetzt aktiviert.
+30.01.02 UF - Bugfix GP beim Setzen der Alarmnummern
+26.01.02 UF - Die Alarmaufschaltung geht jetzt, wenn
+			  AlarmCallOnMD, AlarmCallOnExtern,  AlarmCallOnSuspect in der Registry
+			  unter DV-Process als DWORD Werte auf 1 stehen.
+			  Die Anwahl erfolgt immer als Supervisor ohne Passwort.
+			  Die zu verwendende Berechtigung ist noch zu klaeren.
+20.12.01 UF - Bugfix GP bei Programmstart.
+17.12.01 UF - Es werden jetzt die Alarmrufnummern gespeichert und koennen mit
+			  dem Client editiert werden, die Aufschaltung geht noch nicht!
+17.12.01 UF - Bestaetigung der gespeicherten Bilder optimiert.
+08.11.01 UF - Die Aktivitaetsmasken werden jetzt vom Client zur Unit zud umgekehrt durchgereicht.
+05.11.01 UF - Einige Eintragungen in die LOG Datei ueberarbeitet.
+06.09.01 UF - Bugfix Alarme 1. und 2. Jacob
+20.08.01 UF - Die Uhrzeit kann jetzt auch vom Operator gesetzt werden.
+14.08.01 UF - Rdisk wieder abgeschaltet.
+			- Der Fehler, dass keine Bilder mehr gespeichert werden können
+			  kommt jetzt erst bei 100 Bildern, vorher 50.
+10.08.01 UF - Der Zweig HKLM\Software\Dvrt wird jetzt alle Stunde unter c:\dv\dvrt.reg
+			  gesichert.
+			- Es wird einmal am Tak rdisk /s- ausgeführt, um die Registry zu sichern.
+			- Es wird einmal zu Programmstart die Registry HKLM\Software gesichert
+06.08.01 UF - Bugfix, es werden jetzt auch während eines Datenbankresets
+			  die Antworten, das nicht gespeichert werden kann berücksichtigt.
+03.08.01 UF - Alarmliste freigeschaltet.
+23.07.01 GF	- Bugfix Timer: Übergang So-Mo funktionierte nicht
+16.07.01 UF - Bugfix nicht mehr angeschlossene Kamera wurde nicht korrekt geloescht.
+			  Loeschen erfolgte erst nach Neustart
+13.07.01 GF	- Timer können jetzt auch bis in den folgenden Tage reichen (wenn Start < End)
+				zusammen mit Bugfix CIPC CSecTimeSpan funktioniert es dann auch
+12.06.01 UF - Bugfix manueller Videoausgang 2 funktionierte nicht.
+11.06.01 UF - Bugfix GP beim VideoOut Sequencer, falls eine Kamera auf Off steht behoben.
+11.06.01 UF - Bugfix Dreher in der VideoOut Ports
+08.06.01 UF - Bugfix Meldung kann nicht speichern
+07.06.01 UF - Automatische Videoumschaltung bei Bewegung ist jetzt in DVProcess.
+05.06.01 UF - Runtimeerror jetzt auch mit Fehlertext.
+05.06.01 UF - Runtimeerror fuer nicht Speichern eingebaut
+15.05.01 UF - Dwell Time und Videooutmode lassen sich jetzt einstellen.
+02.05.01 UF - Bugfix Anzahl der verbundenen Systeme nicht maximal 5.
+17.04.01 UF - Neuer Registry Schalter TraceH263
+12.04.01 UF - Bugfix Manueller Video Out, wurde auf den automatischen Video Out
+			  geschaltet, Bug nur von 364 bis 377 vorhanden!
+05.04.01 UF - Bugfix Lizenznummern, Anzahl der verbundenen Systeme war falsch
+30.03.01 UF - Anzahl der Clients auf max 5 beschränkt
+26.03.01 UF - Seriennummer wird jetzt beim Verbindungsaufbau überprüft.
+20.03.01 UF - Video Out Sequencer integriert, standard aber MD und Client
+16.03.01 UF - Bugfix Anzeige der prozentualen Bewegung
+21.02.01 UF - neue Anzeige Bewegung in Promille = Anzahl aufgenommene durch gemachte Bilder
+20.02.01 UF - bei ISDN werden jetzt H263 Daten übertragen.
+02.02.01 UF neue 5er MD Koordinaten
+08.12.00 UF - Bugfix beim Löschen fremder Dateien.
+06.12.00 ML - Vor dem Löschen von unbekannten Dateien, wird zuvor ein evtl. vorhandener Schreibschutz
+			  entfernt.
+04.12.00 UF - Für ISDN Verbindungen werden jetzt die Bilder auf ca 4 KB
+			  herunterskaliert und -komprimiert.
+29.11.00 UF - Bugfix Alarmanzeige bei parallelem Betrieb von MD
+			  und externen Melder
+28.11.00 UF - Ausserhalb der Timer wurden die MD Alarme trotzdem an den Client
+			  gesendet. Es wurden aber keine Bilder aufgenommen.
+28.11.00 ML - Bugfix: Bei den Timern wurde 'OnRequestSetValue' mit 'DoConfirmGetValue' quittiert.
+27.11.00 UF - Bugfix Bilder werden ausserhalb der Timer jetzt auch gespeichert
+			  wenn externe Melder unabhaengig vom Timer an ist.
+17.11.00 UF - Bugfix Alarmbildgleichverteilung
+13.11.00 UF - Verdachtsmelder werden jetzt auch zum Client gemeldet,
+			  so dass da das Fenster rot wird.
+0§.10.00 ML - CSD_TIME_ZONE zum Setzen und Abfragen der Zeitzone implementiert.
+23.10.00 UF - Bugfix 49 Tage GetTickCount
+			- Gleichverteilung auch bei Alarmbildern
+26.09.00 UF - neue Funktion DetectorIgnoreTimer, für externe Melder
+			  werden die Timer ignoriert.
+21.09.00 UF - Neue Operator PIN eingefügt
+30.08.00 ML - Bugfix: Es muß heißen r = "2359"; nicht r == "2359";
+			  Nun funktioniert auf auch die Umsetzung 00:00 auf 23:59
+22.08.00 UF - Bugfix 23:59 bleiben die Timer jetzt an
+09.08.00 UF - Der zweite externe Melder wird jetzt bei MD Kameras
+			  mit dem ersten als ODER behandelt.
+21.06.00 UF - Bugfix beim Löschen fremder Dateien/Ordner
+			  es werden jetzt alle fremden Dateien beim
+			  ersten Start gelöscht, und nicht nur eine.
+13.06.00 UF - UpdateHandler Interface aus CIPC hinzugefügt
+12.06.00 UF - fremde Dateien werden auf Datenbanklaufwerken
+			  gelöscht
+11.05.00 UF - wenn kein freies Laufwerk gefunden wird, so
+			  erscheint jetzt ein Laufzeitfehler
+25.04.00 UF - von den MD Kameras wird alle Stunde
+			  ein Bild mit "3" abgespeichert.
+06.03.00 UF - ein Timer Wert vom Client von 00000000
+			- schaltet einen Tages Timer pro Kamera aus.
+15.02.00 UF - ein Timer mit 7 TimeSpans pro Kamera
+19.01.00 UF	- Archivgroessenberechnung auf 3/3 Automatic
+			  1. Drittel fest
+			  2. Drittel Tagesstatistik
+			  3. Drittel Wochenstatistik
+
+
+
+

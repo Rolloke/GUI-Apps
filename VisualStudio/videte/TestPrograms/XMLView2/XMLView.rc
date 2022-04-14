@@ -1,0 +1,330 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EDIT_CLEAR,          VIRTKEY, CONTROL, NOINVERT
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About XML Editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "XML Editor Version 1.1",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2008 Rolf Kary-Ehlers",IDC_STATIC,40,25,
+                    119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_XMLVIEW_DIALOG DIALOGEX 0, 0, 225, 289
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "XMLView"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Parse Text",IDC_PARSE_EDT_XML,169,274,51,12
+    CONTROL         "Tree1",IDC_TREE1,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,
+                    0,0,225,138
+    PUSHBUTTON      "Open File",IDC_OPEN_FILE,5,274,51,12
+    EDITTEXT        IDC_EDT_XML,0,138,225,132,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    PUSHBUTTON      "Get XML",IDC_SET_XML_2_EDT,87,274,51,12
+END
+
+IDD_EDIT_DLG DIALOGEX 0, 0, 380, 300
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "XML Editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Parse Text",IDC_PARSE_EDT_XML,251,285,51,12
+    CONTROL         "Tree1",IDC_TREE1,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,
+                    0,0,192,282
+    PUSHBUTTON      "Open File",IDC_OPEN_FILE,3,285,51,12
+    EDITTEXT        IDC_EDT_XML,192,109,187,173,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | 
+                    WS_VSCROLL
+    PUSHBUTTON      "Get XML",IDC_SET_XML_2_EDT,195,285,51,12
+    CONTROL         "Parse comments",IDC_CK_EDIT_MODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,62,286,70,10
+    EDITTEXT        IDC_EDT_ITEM,198,32,176,12,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    COMBOBOX        IDC_COMBO_ITEM,198,32,177,70,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Value:",IDC_TXT_VALUE,198,24,176,8
+    PUSHBUTTON      "Save File",IDC_SAVE_FILE,137,285,51,12
+    EDITTEXT        IDC_EDIT_NAME,198,10,176,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Name:",IDC_TXT_NAME,198,2,176,8
+    EDITTEXT        IDC_EDIT_FIND,228,83,146,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Find:",IDC_BTN_FIND,198,83,30,12
+    CONTROL         "Case sensitive",IDC_CK_CASE_SENS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,198,98,176,10
+    LTEXT           "",IDC_TXT_HELP,198,46,176,35,SS_SUNKEN
+    PUSHBUTTON      "",ID_EDIT_CLEAR,331,285,14,12,BS_ICON
+    PUSHBUTTON      "",ID_EDIT_COPY,346,285,14,12,BS_ICON
+    PUSHBUTTON      "",ID_EDIT_PASTE,361,285,14,12,BS_ICON
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "XMLView MFC Application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "XMLView"
+            VALUE "LegalCopyright", "Copyright (C) 2005"
+            VALUE "OriginalFilename", "XMLView.EXE"
+            VALUE "ProductName", "XMLView Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_XMLVIEW_DIALOG, DIALOG
+    BEGIN
+        HORZGUIDE, 138
+        HORZGUIDE, 270
+        HORZGUIDE, 280
+    END
+
+    IDD_EDIT_DLG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 379
+        VERTGUIDE, 192
+        VERTGUIDE, 198
+        VERTGUIDE, 374
+        HORZGUIDE, 138
+        HORZGUIDE, 282
+        HORZGUIDE, 291
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About XMLView..."
+    IDS_VIEWER_DLG          "Show XML Viewer"
+    IDS_EDITOR_DLG          "Show XML Editor"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_TREE1               "Shows the XML file as a tree structure"
+    IDC_OPEN_FILE           "Opens an XML file..."
+    IDC_SET_XML_2_EDT       "Extracts the XML code into the edit field"
+    IDC_EDT_XML             "Shows extracted XML code"
+    IDC_PARSE_EDT_XML       "Parses XML code of the edit field into the XML tree"
+    IDC_CK_EDIT_MODE        "If checked the comments of the XML file are parsed"
+    IDC_EDT_ITEM            "Edit the value of the selected XML element or attribute"
+    IDC_COMBO_ITEM          "Select the value of the selected XML element or attribute"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_SAVE_FILE           "Saves all changes to the XML file"
+    IDC_EDIT_NAME           "Shows the name of the selected XML element or attribute"
+    IDC_EDIT_FIND           "Edit the search text"
+    IDC_BTN_FIND            "Starts or continues the search of XML items by its name"
+    IDC_CK_CASE_SENS        "if checked the search is case sensitive"
+    IDC_TXT_HELP            "Shows a help for the selected XML element or attribute, if available"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Deletes a selected XML item Ctrl+X"
+    ID_EDIT_COPY            "Copies a selected XML item Ctrl+C"
+    ID_EDIT_PASTE           "Insert the XML code of the XML edit field behind the selected XML item Ctrl+V"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Hebrew resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_HEB)
+#ifdef _WIN32
+LANGUAGE LANG_HEBREW, SUBLANG_DEFAULT
+#pragma code_page(1255)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\XMLView.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\XMLView.ico"
+IDI_NODECLOSED          ICON                    "blueClFolder.ico"
+IDI_NODEOPEN            ICON                    "blueOpFolder.ico"
+IDI_ATTRIB              ICON                    "icoObject.ico"
+IDI_TEXT                ICON                    "res\\Untitled.ico"
+IDI_COMMENT             ICON                    "comment.ico"
+IDI_CLEAR               ICON                    "res\\clear.ico"
+IDI_COPY                ICON                    "res\\copy.ico"
+IDI_PASTE               ICON                    "res\\paste.ico"
+#endif    // Hebrew resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\XMLView.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

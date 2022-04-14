@@ -1,0 +1,7 @@
+History of JView.exe
+--------------------
+
+
+25.09.00 - UF: Beginn des Projektes
+26.09.00 - ML: Zoom und Scrollfunktionalität hinzugefügt.
+			   Der Titel wird dem Html-file entnommen, sofern vorhanden.

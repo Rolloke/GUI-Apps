@@ -1,0 +1,185 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""Deinterlace.tlb""\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DEINTERLACEPROP DIALOG DISCARDABLE  0, 0, 231, 109
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Deinterlace Type",IDS_STATIC,6,5,222,38
+    CONTROL         "Bob",IDC_BOB,"Button",BS_AUTORADIOBUTTON,13,26,41,12
+    CONTROL         "Weave",IDC_WEAVE,"Button",BS_AUTORADIOBUTTON,13,14,44,
+                    12
+    CONTROL         "Blended Clipping",IDC_TYPE2,"Button",BS_AUTORADIOBUTTON,
+                    61,26,83,12
+    CONTROL         "Two Frame",IDC_TYPE1,"Button",BS_AUTORADIOBUTTON,61,14,
+                    84,12
+    CONTROL         "Field Bob",IDC_TYPE3,"Button",BS_AUTORADIOBUTTON,146,14,
+                    45,10
+    CONTROL         "Use DScaler Plug-in",IDC_TYPE4,"Button",
+                    BS_AUTORADIOBUTTON,146,27,79,10
+    CONTROL         "Is Odd Field First",IDC_ODDFIELDFIRST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,47,118,11
+    COMBOBOX        IDC_PLUGINS,8,85,211,63,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "DScaler Plug-ins",IDS_STATIC,9,69,96,8
+END
+
+IDD_DEINTERLACEABOUT DIALOG DISCARDABLE  0, 0, 231, 71
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Deinterlace DirectShow Filter",-1,0,0,230,10
+    CTEXT           "Copyright (c) 2000-01 John Adcock, Peter Gubanov, Tom Barry, Steve Grimm, Mark Rejhon, Michael Eskin",
+                    -1,5,12,225,21
+    LTEXT           "Deinterlace.ax comes with ABSOLUTELY NO WARRANTY.  This software in licenced under the terms of the GNU GPL for details see http://www.fsf.net/copyleft/gpl.html",
+                    -1,1,32,220,25
+    LTEXT           "The home page for this project is http://www.dscaler.org/",
+                    -1,0,60,220,11
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,0,0
+ PRODUCTVERSION 1,2,0,0
+ FILEFLAGSMASK 0x30003fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x10001L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "ActiveMovie", "Filter dll\0"
+            VALUE "Comments", "Authors: John Adcock, Tom Barry, Steve Grimm, Peter Gubanov, Mark Rejhon, Michael Eskin\0"
+            VALUE "CompanyName", "DScaler Project, see  http://www.dscaler.org/\0"
+            VALUE "FileDescription", "Deinterlace Filter\0"
+            VALUE "FileVersion", "1.2.0\0"
+            VALUE "InternalName", "Deinterlace.ax\0"
+            VALUE "LegalCopyright", "Copyright (C) 2000, 2001 DScaler Project\0"
+            VALUE "LegalTrademarks", "This file is released under the terms of the GNU GPL\0"
+            VALUE "OLESelfRegister", "AM20\0"
+            VALUE "OriginalFilename", "Deinterlace.ax\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "\0"
+            VALUE "ProductVersion", "1.2.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DEINTERLACEPROP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 230
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_DEINTERLACEABOUT, DIALOG
+    BEGIN
+        RIGHTMARGIN, 230
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TITLE               "Deinterlace Settings"
+    IDS_ABOUT               "About Deinterlace"
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "Deinterlace.tlb"
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,412 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 16, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SecurityLauncher.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.ita\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SecurityLauncher.ico"
+IDI_ALARMCOM            ICON                    "res\\alarmcom.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON_SYMBOLS      BITMAP                  "res\\button_s.bmp"
+IDR_MENU                BITMAP                  "res\\menu.bmp"
+IDB_ERROR_SYMBOLS       BITMAP                  "res\\error_sy.bmp"
+IDB_VIDETE_LOGO         BITMAP                  "videte_logo_invers_transparent.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MENU TOOLBAR  32, 32
+BEGIN
+    BUTTON      ID_VISION
+    BUTTON      ID_DATABASE
+    BUTTON      ID_SUPERVISOR
+    BUTTON      ID_SDI_CONFIG
+    BUTTON      ID_BACKUP
+    BUTTON      ID_APP_EXIT
+    BUTTON      ID_ERROR
+    BUTTON      ID_VERSION
+    BUTTON      ID_PRODUCT_VIEW
+    BUTTON      ID_LOG_VIEW
+    BUTTON      ID_IMAGE_COMPARE
+    BUTTON      ID_DATETIME
+    BUTTON      ID_EURO_CHANGE
+    BUTTON      ID_LAUNCHER_SHELL
+    BUTTON      ID_EXPLORER_SHELL
+    BUTTON      ID_EXPLORER
+    BUTTON      ID_UPDATE_HANDLER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ERROR DIALOG  0, 0, 500, 137
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Run time error"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,443,116,50,14
+    CONTROL         "List1",IDC_ERRORS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,428,123
+    PUSHBUTTON      "&Delete",IDC_DELETE,443,7,50,14
+    PUSHBUTTON      "Piezo &off",IDC_STMOFF,443,25,50,14
+    PUSHBUTTON      "Piezo o&n",IDC_STMON,443,44,50,14
+END
+
+IDD_BEFORE_BACKUP DIALOG  0, 0, 254, 199
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Start Backup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Backup",IDOK,106,180,66,14
+    PUSHBUTTON      "Annulla",IDCANCEL,183,180,66,14
+    LTEXT           "The software will shut down for backup now.",
+                    IDC_TXT1,5,5,244,8
+    LTEXT           "Please execute the following steps:",IDC_TXT2,5,20,
+                    244,8
+    LTEXT           "1. Remove all floppies from drives.",
+                    IDC_TXT3,5,35,244,8
+    LTEXT           "2. Wait for 'It's now safe to turn off your Computer'\n on your screen.",
+                    IDC_TXT4,5,50,244,18
+    LTEXT           "3. Turn OFF your computer.",IDC_TXT5,5,70,244,8
+    LTEXT           "4. Plug in your CD/R Recorder (or another external backup media).",
+                    IDC_TXT6,5,85,244,18
+    LTEXT           "5. Turn ON your CD/R recorder (or another external backup media) and turn ON your computer.",
+                    IDC_TXT7,5,110,244,17
+    LTEXT           "6. Wait for restart of your system.",
+                    IDC_TXT8,5,135,244,8
+    LTEXT           "Select 'Backup', to start data backup process.",
+                    IDC_TXT9,5,153,223,8
+    LTEXT           "Select 'Cancel', to continue with normal working mode.",
+                    IDC_TXT10,5,163,232,8
+END
+
+IDD_AFTER_BACKUP DIALOG  0, 0, 344, 253
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Backup finished"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Start software normally",IDOK,242,217,86,14
+    PUSHBUTTON      "&Backup",IDCANCEL,251,46,80,14
+    LTEXT           "The backup process finished.,",IDC_TXT1,7,7,330,8
+    LTEXT           "You can now start another backup process, select 'Backup' again.",
+                    IDC_TXT2,15,33,318,8
+    LTEXT           "You can now finish all backup processing and restart the software in normal mode,\nselect 'Start software normally'.",
+                    IDC_TXT4,14,87,284,16
+    LTEXT           "Please execute the following steps:",
+                    IDC_TXT6,15,105,164,8
+    LTEXT           "1. Remove all floppies from drives.",
+                    IDC_TXT7,30,120,161,8
+    LTEXT           "2. Wait for 'It's now safe to turn off your Computer'\n on your screen.",
+                    IDC_TXT8,30,135,301,15
+    LTEXT           "3. Turn OFF your CD/R recorder (or another external backup media) and turn OFF your computer.",
+                    IDC_TXT9,30,155,300,18
+    LTEXT           "4. Plug out your CD/R Recorder (or another external backup media).",
+                    IDC_TXT10,30,180,260,8
+    LTEXT           "5. Turn ON your computer.",IDC_TXT11,30,
+                    195,131,8
+    LTEXT           "6. Wait for restart of your system.",
+                    IDC_TXT12,30,210,159,8
+    GROUPBOX        "Backup",IDC_GRP1,7,21,330,47
+    GROUPBOX        "Remove CD/R Recorder (or another external backup media) and restart",
+                    IDC_GRP2,7,73,330,173
+END
+
+IDD_SERVICE DIALOG  0, 0, 206, 129
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Service Disc"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,91,108,50,14
+    PUSHBUTTON      "Annulla",IDCANCEL,149,108,50,14
+    LTEXT           "You started a service disc.",IDC_TXT0,7,
+                    7,134,8
+    LTEXT           "Do you want to execute the service now?",IDC_TXT1,7,
+                    87,136,8
+    EDITTEXT        IDC_EDIT_SERVICE,7,23,192,60,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+    LTEXT           "This service was already executed!",IDC_TXT2,7,
+                    87,135,8
+    LTEXT           "The following service was successful.",
+                    IDC_SUCCESS,7,7,161,8
+    LTEXT           "The following service failed!",
+                    IDC_NO_SUCCESS,7,7,172,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ERROR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 493
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_BEFORE_BACKUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 249
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 194
+    END
+
+    IDD_AFTER_BACKUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 337
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 246
+    END
+
+    IDD_SERVICE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 199
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "S",            ID_BUTTON,              VIRTKEY, ALT, NOINVERT
+    VK_F1,          ID_VERSION,             VIRTKEY, NOINVERT
+    VK_F2,          ID_ERROR,               VIRTKEY, NOINVERT
+    VK_F3,          ID_PRODUCT_VIEW,        VIRTKEY, NOINVERT
+    VK_F4,          ID_BACKUP,              VIRTKEY, NOINVERT
+    VK_F5,          ID_DISK,                VIRTKEY, NOINVERT
+    VK_F7,          ID_SDI_CONFIG,          VIRTKEY, NOINVERT
+    VK_F8,          ID_LOG_VIEW,            VIRTKEY, NOINVERT
+    VK_F9,          ID_DATETIME,            VIRTKEY, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "SecurityLauncher"
+    IDS_TEMPERATUR_ALARM    "Temperature of hard disk %d too high (%d°C)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPLORER_SHELL      "restart system with Windows &Explorer"
+    IDS_LAUNCHER_SHELL      "restart &system with %s"
+    IDS_ALARM_PERCENT       "Alarm archive %02d%%"
+    IDS_ISDN_BCHANNEL       "ISDN B - Channels %d"
+    IDS_NOTIME_PERMISSION_NT 
+                            "You don't have NT priviledges to change the system time!"
+    IDS_DATETIME            "Date and Time..."
+    IDS_EURO_CHANGE         "Euro - Change"
+    IDP_EURO_CHANGE_REALLY  "ATTENTION:\n\nYou are now changing any connected device to currency EUR!\n\nDo you want to proceed?"
+    IDS_NOT_ALL_RUNNING     "%s does not run (Not all applications are running)."
+    IDS_SO                  "Sun"
+    IDS_MO                  "Mon"
+    IDS_DI                  "Tue"
+    IDS_MI                  "Wed"
+    IDS_DO                  "Thu"
+    IDS_FR                  "Fri"
+    IDS_SA                  "Sat"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SecurityLauncher"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VISION               "Vision\nVision"
+    ID_DATABASE             "PictureHandler\nPictureHandler"
+    ID_SUPERVISOR           "System management\nSystem management"
+    ID_SKIP                 "Changes window position\nWindow position"
+    ID_ERROR                "Runtime error\nRuntime error"
+    ID_PRODUCT_VIEW         "Product-modules\nProduct-modules"
+    ID_BACKUP               "Backup\nBackup"
+    ID_VERSION              "Product version\nProduct version"
+    ID_SDI_CONFIG           "ISD Configuration\nISD Configuration"
+    ID_LOG_VIEW             "Log-File-Viewer\nLog-File-Viewer"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_EMPTY_REGISTRY      "No adjustments have yet been made.\nDo you want to start the system management now?"
+    IDP_LOGIN_FAILED        "Name and password are not valid legitimation.\nAccess denied."
+    IDS_PICT_SPACE          "Press space bar for image search!"
+    IDS_BACKUP_HINT         "Press F4 for backup!"
+    IDP_NOLOGDIR            "The directory for protocol files couldn't be created."
+    IDS_TIME                "Ora"
+    IDS_MODUL               "Modul"
+    IDS_MESSAGE             "Message"
+    IDS_PARAMETER           "Parameter"
+    IDS_AC_OR_WATCHDOG      "The system was out of order by power failure or hardware reset for:"
+    IDS_YEAR                "year(s)"
+    IDS_MONTH               "month(s)"
+    IDS_DAY                 "day(s)"
+    IDS_HOUR                "hour(s)"
+    IDS_MINUTE              "minute(s)"
+    IDS_SECOND              "Second(s)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_MILLISECOND         "millisecond(s)"
+    IDS_UNKOWN              "unknown"
+    IDP_INVALID_DONGLE      "You don't have a valid dongle to start this software or your dongle is out of order.\nPlease ask your service technician."
+    IDS_DONGLE_EXE          "It's not allowed to start this modul or use this feature."
+    IDP_SHUTDOWN_FOR_BACKUP "The software will shut down for backup now.\nPlease execute the following steps:\n1. Remove all floppies from drives.\n2. Wait for 'It's now safe to turn off your Computer'\n on your screen.\n3. Turn OFF your computer.\n4. Plug in your CD/R Recorder (or another external backup media).\n5. Turn ON your CD/R recorder (or another external backup media) and turn ON your computer.\n6. Wait for restart of your system."
+    IDP_SHUTDOWN_AFTER_BACKUP "The backup process finished."
+    IDP_DBBACKUP_STILL_RUNNING 
+                            "You can't shut down the system while a backup process is running!"
+    IDS_BACKUP              "Backup"
+    IDP_MICOERROR           "Please check the address of your MiCo board\n or exchange your MiCo board for a newer one!"
+    IDS_SDICONFIG           "Press F7 for remote configuration!"
+    IDS_RTE                 "&Runtime errors..."
+    IDS_EXIT                "E&xit"
+    IDS_SYSTEM              "System"
+    IDS_EXTENDED            "&Extended"
+    IDS_RESTART             "&restart"
+    IDS_EXPLORER            "start &Windows Explorer"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_USER_ID             "A user name and password is necessary for this action.\nPlease enter your name and password, pay attention on case sensity!"
+    IDC_PASSWORD            "A user name and password is necessary for this action.\nPlease enter your name and password, pay attention on case sensity!"
+    IDC_ERRORS              "You see a list of runtime errors.\nred\tcritical error\norange\terror\nyello\twarning\ngreen\tmessage\nYou can see details by double clicking an error!"
+    IDC_DELETE              "You can delete here all selected errors and messages!"
+    IDC_STMOFF              "Turn off the piezo manually."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DATETIME             "Date and time settings...\nDate and time settings..."
+    ID_EURO_CHANGE          "Euro - Change\nEuro - Change"
+    ID_IMAGE_COMPARE        "Reference Image Compare\nReference Image Compare"
+    ID_AOT                  "Always on top"
+    ID_AIH                  "Automatic in background"
+    ID_UPDATE_HANDLER       "starts UpdateHandler\nUpdateHandler"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_NO_PERMISSION       "You do not have the permission for this function."
+END
+
+#endif    // Italian (Italian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE 16, 1
+#pragma code_page(1252)
+#endif
+#include "res\SecurityLauncher.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.ita\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

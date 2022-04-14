@@ -1,0 +1,85 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=++++++++++ LANGUAGES +++++++++++
+end
+item: Delete File
+  Pathname=%MAINDIR%\dvu???.dll
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvudeu.dll
+  Destination=%MAINDIR%\dvudeu.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvuenu.dll
+  Destination=%MAINDIR%\dvuenu.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvufra.dll
+  Destination=%MAINDIR%\dvufra.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvuesp.dll
+  Destination=%MAINDIR%\dvuesp.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvuptg.dll
+  Destination=%MAINDIR%\dvuptg.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvurus.dll
+  Destination=%MAINDIR%\dvurus.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvuita.dll
+  Destination=%MAINDIR%\dvuita.dll
+  Flags=0000000010000010
+end
+remarked item: Install File
+  Source=d:\Dts\Dlls\dvuchs.dll
+  Destination=%MAINDIR%\dvuchs.dll
+  Flags=0000000010000010
+end
+item: Compiler Variable If
+  Variable=_OEM_
+  Value=1
+end
+remarked item: Install File
+  Source=d:\Dts\Dlls\dvunld.dll
+  Destination=%MAINDIR%\dvunld.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\Dts\Dlls\dvucsy.dll
+  Destination=%MAINDIR%\dvucsy.dll
+  Flags=0000000010000010
+end
+item: Compiler Variable End
+end
+item: Remark
+end

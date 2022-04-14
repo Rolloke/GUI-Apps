@@ -1,0 +1,6 @@
+; DVUEnu.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVUEnu"
+
+EXPORTS
+    ; Explicit exports can go here

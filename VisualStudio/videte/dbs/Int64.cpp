@@ -1,0 +1,114 @@
+// Int64.cpp: implementation of the CInt64 class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "DBS.h"
+#include "Int64.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64()
+{
+	m_Data = 0;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(const CInt64& source)
+{
+	m_Data = source.m_Data;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(__int64 i)
+{
+	m_Data = i;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(unsigned __int64 i)
+{
+	m_Data = i;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(int i)
+{
+	m_Data = (__int64)i;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(DWORD dw)
+{
+	m_Data = (__int64)dw;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::CInt64(const ULARGE_INTEGER& ul)
+{
+	m_Data = ul.QuadPart;
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::~CInt64()
+{
+
+}
+//////////////////////////////////////////////////////////////////////
+CInt64::operator __int64() const
+{
+	return m_Data;
+}
+//////////////////////////////////////////////////////////////////////
+CString CInt64::Format(BOOL bPoints) const
+{
+	BOOL bMinus = FALSE;
+	__int64 t = m_Data;
+	CString r;
+	int c;
+
+	if (t<0)
+	{
+		t = -t;
+		bMinus = TRUE;
+	}
+	if (t==0)
+	{
+		r = "0";
+	}
+	else
+	{
+		while(t>0)
+		{
+			c = (int)(t%10);
+			t = t/10;
+			r = (char)(c+'0') + r;
+		}
+	}
+
+	if (bMinus)
+	{
+		r = '-' + r;
+	}
+
+	if (bPoints)
+	{
+		CString s3;
+		CString s;
+
+		while (r.GetLength()>3)
+		{
+			s3 = r.Mid(r.GetLength()-3);
+			s = s + '.' + s3;
+			r = r.Left(r.GetLength()-3);
+		}
+		r = r+s;
+	}
+
+	return r;
+}
+//////////////////////////////////////////////////////////////////////
+DWORD CInt64::GetInMB() const
+{
+	return (DWORD)(m_Data / (__int64)(1024*1024));
+}

@@ -1,0 +1,10 @@
+#ifndef __LOCAL_TRACE_HEADER_INCLUDED__
+#define __LOCAL_TRACE_HEADER_INCLUDED__
+
+
+#define WK_TRACE //
+#define WK_TRACE_ERROR //
+#define WK_TRACE_WARNING //
+#define WK_STAT_PEAK //
+
+#endif	// __LOCAL_TRACE_HEADER_INCLUDED__

@@ -1,0 +1,273 @@
+History von SaVicDll
+-----------------------
+21.06.02
+	- Beginn des Projektes. Ausgangsframework ist die JaCobDll.
+
+24.06.02
+	- Globale Umbenennung und Abspeckaktion.
+	- Alle Zoran-Klassen aus dem Projekt entfernt.
+	- Inhaltliche Zusammenlegung der Klassen CZoran und BT829 zu CBT878
+
+28.06.02
+	- Die Registerdefaultwerte können ausgelesen werden.
+	- Die Interruptroutine wird aufgerufen. (VSYNC, HSYNC....)
+
+01.07.02
+	- Risc-Disassembler hinzugefügt.
+	- Erstes Halbbild wurde eingeblendet!!...Ein Einzelbild zwar...und der Rechner
+	  stand danach...aber immerhin, der Weg ist richtig.
+
+02.07.02
+	- Das erste Bewegtbild wird eingeblendet....aber immer noch super schlecht.
+
+	- Das Bild wird nun viel besser eingeblendet. und läßt sich auch schon skallieren.
+	  erzeugt aber immernoch Datenmüll auf dem Bildschirm, oder friert ein.
+
+03.07.02
+	- Das Inlay wird nun immer angezeigt. Das Risc-programm sollte dazu synchron zum
+	  VSYNC gestartet werden.
+
+25.07.02
+	- Motiondetection funktioniert! Das Grabben der Bilder muß aber noch angepasst werden
+	- Die IntelJpeglib komprimiert die Bilder. 
+
+26.07.02
+	- Die Intel-lib kann nun direkt auf die Daten in der Queue zugreifen, ohne DIB und
+	  ohne kopieren. Dadurch beschleunigt sich der Vorgang erheblich!
+	  (80ms -> 15ms bei 768x288)
+	- Für die MD wird nun kein zusätzliches Frame gegrabbt, sondern es wird das für
+	  die Jpeg-komprimierung verwendet.
+	- Für die MD wird das Bild nun von 768x288 auf 192x144 (QCIF) herunterskaliert.
+	- Die Umschaltung erfolgt nun in der ISR.
+
+29.07.02
+	- Erster Testlauf mit der DTS-Software zusammen verlief sehr vielversprechend.
+
+30.07.02
+	- Bitratenregelung zur Einhaltung der gewünschten Dateigröße implementiert.
+
+02.08.02
+	- Der Kamerascan funktioniert nun.
+	- Es werden nun die von der JaCob bekannten Auflösungen (Heigh/Low) unterstützt.
+	  Dazu wird das Quellbild vor der Kompression per Software herunterskaliert.
+
+05.08.02
+	- Abfrage der Alarmeingänge implementiert
+	- Zugriff auf das Realay implementiert.
+	- Abfrage der Power/Reset-Buttons implementiert.
+	- Schalten der LED1 und LED2 implementiert.
+	- Schalten der externen Videoausgänge implementiert.
+
+08.08.02
+	- Zugriff auf das EEProm funktioniert.
+
+09.08.02
+	- VideoOverlay über DirectDraw geht nun auch   
+	- Die Skallierung des VideoOverlay Fensters, erfolgt nun durch die
+	  Grafikkarte. Dadurch kann das Inlay vom BT879 immer die gleiche
+	  Größe behalten. Es wäre dadurch denkbar, daß sich Bewegungserkennung
+	  und das VideoOverlay sich in Zukunft nicht mehr ausschließen, wie es
+	  bislang der Fall ist.
+
+19.08.02
+	- Ein erster Test mit dem SaVic Board verlief positiv
+
+20.08.02
+	- GPIO-Direction war gedreht
+	- Die Zuordnung der Videoeingänge war falsch (00b=MUX3, 01b=MUX1,10b=Mux0, 11b=MUX1)
+	- SaVicInf beinhaltet nun beide Devices (Audio & Video)
+	- Der Status von PowerOff und ResetOff war gedreht (LOW-Aktiv!)
+	- Watchdog in Betrieb genommen
+	- Alarmeingänge in Betrieb genommen.
+	- Öffner/Schließer in Software implementiert.
+	- Entprellen der Alarmeingänge in Software implementiert
+	- SubsystemID und SubsystemVendorID können nun im EEProm gesetzt werden.
+	- Dongleinformationen und Seriennummer können im EEprom gesetzt werden.
+
+21.08.02
+	- Beim Start wird LED1 (PowerLED) eingeschaltet und LED2 (AktivityLED) ausgeschaltet
+	- Der Mux in 'SetCameraToAnalogOut' wurde nicht angesprochen.
+	- ClearLatch wurde auf high gelegt, bevor das GPIO-Register initialisiert wurde,
+	  Nun funktionieren auch die Alarmeingänge.
+	- Korrigiert einen Dreher im SaVic-Layout bezüglich der Alarmkontakt Zuordnung.
+	- Zum Test die Chroma AGC disabled (SC_LOOP)
+
+22.08.02	
+	- Bug in der Ansteuerung der externen Multiplexer behoben.
+	- Im Standalone Betrieb werden die externen Videoausgänge mit geschaltet
+	- Stand der Dinge:
+			- VideoInlay OK.
+			- Ansteuerung des internen Mux OK.
+			- Ansteuerung des externen Mux OK.
+			- Ansteuerung des Relays OK
+			- Ansteuerung der beiden LEDs OK
+			- Abfrage der Alarmeingänge OK
+			- Abfrage des Power/Reset-tasters OK		
+			- Sperren/freigabe des Power/Reset-tasters OK
+			- Ansteuerung des Watchdogtimers OK
+			- Beschreiben/Lesen des ersten EEProms OK
+			- Beschreiben/Lesen des zweiten EEProms OK
+
+28.08.02
+	- Es wurden beim Kamerascan nur die Videoeingänge 0....2 berücksichtigt, so daß
+	  eine Kamera am letzten Videoeingang (3) nicht erkannt wurde.
+	  
+17.09.02
+	- Die Eventnamen von EV_JACOB_XXX auf EV_SAVIC_XXX umbenannt, um ein Mischbetrieb von
+	  SaVic und JaCob zu ermöglichen.
+
+07.10.02
+	- Über den Registrierungsschlüssel SaVicUnit\DeviceX\General\NewCameraScanMethod=0 läßt
+	  sich die Methode des kamerasignalscans ändern. Default ist NewCameraScanMethod=1, d.h.
+	  es wird der auf der SaVic vorhandene Syncseperator zur Erkennung verwendet. Dies scheint
+	  aber noch nicht immer korrekt zu funktionieren.
+
+11.10.02
+	- Ein Ergebnis von 'TestingRealTimeClock' wurde nur ausgegeben, wenn der Timer zumindest
+	  gesetzt werden konnte.
+
+	- Verdongelung der Backupfunktionalität: Das 3. Bit in 
+	  'SaVicUnit\Device1\EEPRom\RawBits' gibt an, ob ein Backup erlaubt ist oder nicht
+
+
+14.10.02
+	- UseGlobalColorSettings ist nun Defaultmäßig aus
+
+15.10.02
+	- Bugfix: Das Videosignal wurde vor der Umschaltung geprüft, anstatt nach der Umschaltung.
+	  Das ist zwar nicht falsch, aber beim TestProgramm (SaVicDiagnostic) wird dann immer die
+	  falsche Kamerannummer beim Videosignaltest ausgegeben.
+	- Ist 'EEPRom\RawBits' = 0, dann werde die Dongleinformationen im EEProm gelöscht, ansonsten
+	  werden die Bits aus 'RawBits' verodert.
+
+22.10.02
+	- Die Locks/Unlocks in der Klasse CIo entfernt, da sie überflüssig sind
+	- Im Hinblick auf die kommende 'Q', alle statics bis auf einen in der CI2C-Klasse
+	  eleminiert. Dadurch sollten mehrere Codec-Objekte in einer Unit gleichzeitig angelegt
+	  werden können.
+
+29.10.02
+	- Die Codec-Klasse besitzt zwei neue Funktionen zum Setzten und Lesen der Framerate
+
+31.10.02
+	- Die Struktur SOURCE_SELECT_STRUCT enthält nun einen 'CompressionType' anhand derer
+	  die SaVicUnit später in der Lage sein soll, die unkomprimierten Bilder auf Wunsch mit
+	  unterschiedlichen Codecs zu komprimieren. Bislang sind Jpeg und Dib vorgesehen.
+	- Einige Aufräumarbeiten durchgeführt: Die meisten JPeg-Spezifischen Dinge, die aus dem
+	  JaCob-Projekt stammen, allgemeiner formuliert.
+	  JPEG und DIB sind nun gleichberechtigt, d.h. es lassen sich wahlweise Jpegbilder oder
+	  DIBs anfordern.
+
+11.11.02
+	- Das Boardvariationregister wird nun genutzt.
+	  Boardvariation 0 ist das SaVic-Prototypenboard:
+			Alarmeingänge tauschen:
+				Alarm0 ist Eingang3
+				Alarm1 ist Eingang2
+				Alarm2 ist Eingang1
+				Alarm3 ist Eingang0
+	  
+	  Boardvariation 1 ist die SaVic-Nullserie:
+			Videoeingänge tauschen (Nur für den BT878):
+				Kamera0 ist Eingang3
+				Kamera1 ist Eingang2
+				Kamera2 ist Eingang1
+				Kamera3 ist Eingang0
+	 
+	 Aus sicht der Multiplexer sind die Videoeingänge aber nicht gedreht!!. 
+	 Beim neuen Layout werden diese aber auch gedreht! Für die 5 Karten wird
+	 dieser Bug nicht korrigiert.
+
+14.11.02
+	- Das Inlay funktioniert nicht, wenn die Funktion 'CVideoInlay::EnableRisc()' mit
+	  der Compileroption 'maximize Speed' compiliert wird!?...Deshalb werden bei dieser Funktion
+	  nun die Optimierungen ausgeschaltet.
+
+25.11.02
+	- Folgende Hilfsfunktionen für den SaVicEEprommer implementiert.
+		- CCodec::ReadSubsystemID(WORD& wSubsystemID)
+	 	- CCodec::ClearEEProm();
+		- CCodec::WriteSN(const CString &sSN);
+		- CCodec::ReadSN(CString &sSN);
+
+02.12.02
+	- Die SaVic ist nun komplett von RGB24 auf YUV422 umgestellt. Dadurch sinkt die Datenmenge
+	  die über den PCI-Bus gerschoben und bearbeitet werden muß um 30%.
+	- Angepasst wurden dazu:
+		- Das Risc-Programm im Fussion 878
+		- Das Bufferhandling im Treiber.
+		- Die Scalierungsroutinen
+		- Die Bewegungserkennung
+		- Der Tiefpassfilter
+		- Der Histogrammausgleich.
+		- Die JPegkomprimierung
+
+05.12.02
+	- Der Previewmodus unterstützt nun außer JPeg auch DIB
+06.12.02
+	- Bufferhandling optimiert
+
+12.12.02
+	- CCodec::TestingEEProm schreibt nun auch die SubSystemID (0x1864) ins EEProm,
+	  sofern noch kein MagicHeader vorhanden ist.
+
+13.12.02
+	- Bugfix: SaVics mit der ID 1 besitzen 5 Alarmeingänge
+
+20.12.02
+	- Neue FastCopy-Funktion ist mehr als 100% schneller!!
+	- Bugfix: DV-655 Die Analogen Ausgänge haben das Sourcemapping nicht berücksichtigt.
+	- Das ummmappen der Kameraeingänge für die Savic erfolgt nicht mehr in der Registrierung
+	  sondern in der SaVic.dll.
+	- Bugfix: DV-655 Das Relay muß abfallen, um den Störmelder einzuschalten. Dies
+      war genau anders herum.
+	- CBT878::IsVideoPresent: Vor dem Abfragen des 'VideoPresent'-Bit des BT878, wird
+	  nun 3ms gewartet, da ansonsten das Ergebnis nach einer Umschaltung nicht stabil
+	  und reproduzierbar ist.
+	- In der 'CMDConfigDlg' Klasse wurde nicht an allen Stellen der CompressionType
+	  in 'SOURCE_SELECT_STRUCT' gesetzt, so daß im Logfile des öfteren 'Unknown CompressionType'
+	  zu finden war.
+	- Die FastCopy-Funktion in CMemCopy ermittelt nun selber anhand der Bufferlänge die notwendige
+	  Größe des Prefetchbereiches. Dadurch muß die zu kopierende Bufferlänge nun nur noch
+	  ein vielfaches von 64 sein.
+
+08.01.03
+	- Der Buffer 'm_Image.pImageData' zur Aufnahme der Bilddaten war um
+	  sizeof(sizeof(BITMAPINFO)) zu klein. Dieser Buffer wird in CreateDIB auch zur
+	  Aufnahme der DIB verwendet
+
+10.01.03
+	- Überprüft, ob der SFENCE-Befehl unterstützt wird.
+	  Dies ist z.B. bei den VIA C3 Prozessoren nicht der Fall.
+	- Den sfence-Befehl nun per _emit implementiert, dann klappt's auch
+	  mit VC6.0
+
+13.01.03
+	- Das Microsoft 'Processor Pack' für MSDEV-SP5 installiert, damit die
+	  Asm-Befehler vom Inline Assembler erkannt werden
+	- Vor dem Initialisieren des PCF8536 wird der Status des TF-Flags geprüft.
+	  Laut Doku behält dieser den Status bei und kann somit dazu dienen zu Prüfen
+	  ob der Countdown '0' erreicht hat. D.h. es wäre hiermit möglich festzustellen,
+	  ob der Watchdog geschaltet hat.
+
+14.01.03
+	- Zusätzliche Funktionen zum Testen des Syncseperators und des Relays mit Hilfe eines Testadapters
+	  hinzugefügt.
+	- Der Test des Syncseperators läßt sich in der Registrierung unter 'SaVicDiagnostic\UsingVideoAdapter' = 0
+	  deaktivieren.
+	- Der Test des Relays mit Hilfe des Testadapters läßt sich in der Registrierung unter
+	 'SaVicDiagnostic\UsingRelayAdapter' = 0 deaktivieren.
+	- Der Testadapter für den Syncseperator muß wie folgt aufgebaut werden:
+			- Kamera 1			auf FusionVideoeingang 1
+			- MUX1-AnalogOut1	auf FusionVideoeingang 2
+			- MUX1-AnalogOut2	Nicht aufgeschaltet
+			- MUX2-AnalogOut1	auf FusionVideoeingang 3
+			- MUX2-AnalogOut2	Nicht aufgeschaltet
+			- Loop1				auf FusionVideoeingang 4
+	- Der Testadapter für das Relay legt den Ausgang des Relays auf den ersten Alarmeingang.
+	- BUGFIX: Idip-295: Bei jedem LoadConfig wurden die Mapping Einstellungen erneut gedreht
+
+27.01.03
+	- BUGFIX: In den Funktionen CBT878::BT878In(WORD wAddress, WORD& wData) und
+	  CBT878::BT878In(WORD wAddress, BYTE& byData)  wurde die referenz auf DWORD gecastet,
+	  wodurch aber Daten überschrieben wurden.

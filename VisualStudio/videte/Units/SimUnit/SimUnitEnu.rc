@@ -1,0 +1,292 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SimUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SimUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CLOSE               BITMAP                  "res\\close.bmp"
+IDB_OPEN                BITMAP                  "res\\open.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "&About...",               ID_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "Close",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SIMUNIT_DIALOG DIALOGEX 0, 0, 310, 180
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "SimUnit"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Alarm &1",IDC_ALERT1,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,2,4,35,14
+    CONTROL         "Alarm &2",IDC_ALERT2,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,40,4,35,14
+    CONTROL         "Alarm &3",IDC_ALERT3,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,78,4,35,14
+    CONTROL         "Alarm &4",IDC_ALERT4,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,116,4,35,14
+    CONTROL         "Alarm &5",IDC_ALERT5,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,2,21,35,14
+    CONTROL         "Alarm &6",IDC_ALERT6,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,40,21,35,14
+    CONTROL         "Alarm &7",IDC_ALERT7,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,78,21,35,14
+    CONTROL         "Alarm &8",IDC_ALERT8,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,116,21,35,14
+    CONTROL         "Alarm &9",IDC_ALERT9,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,2,38,35,14
+    CONTROL         "Alarm 1&0",IDC_ALERT10,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,40,38,35,14
+    CONTROL         "Alarm 11",IDC_ALERT11,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,78,38,35,14
+    CONTROL         "Alarm 12",IDC_ALERT12,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,116,38,35,14
+    CONTROL         "Alarm 13",IDC_ALERT13,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,2,55,35,14
+    CONTROL         "Alarm 14",IDC_ALERT14,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,40,55,35,14
+    CONTROL         "Alarm 15",IDC_ALERT15,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,78,55,35,14
+    CONTROL         "Alarm 16",IDC_ALERT16,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,116,55,35,14
+    LTEXT           "1",IDC_TXT1,7,81,8,8
+    CONTROL         131,IDC_RELAY1,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,80,15,10
+    LTEXT           "2",IDC_TXT_2,45,81,8,8
+    CONTROL         131,IDC_RELAY2,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,52,80,15,10
+    LTEXT           "3",IDC_TXT3,83,81,8,8
+    CONTROL         131,IDC_RELAY3,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,90,80,15,10
+    LTEXT           "4",IDC_TXT4,121,81,8,8
+    CONTROL         131,IDC_RELAY4,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,128,80,15,10
+    LTEXT           "Input History:",IDC_TXT_INPUT,2,101,42,8
+    EDITTEXT        IDC_INPUT_HISTORY,2,112,68,39,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_VSCROLL
+    LTEXT           "Output History:",IDC_TXT_OUTPUT,78,101,44,8
+    EDITTEXT        IDC_OUTPUT_HISTORY,78,112,73,39,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_VSCROLL
+    GROUPBOX        "&Interval",IDC_TXT_INTERVAL,158,4,149,55,WS_GROUP
+    CONTROL         "Regular intervall:",IDC_RADIO_INTERVAL_REGULAR,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,164,
+                    13,90,10
+    CONTROL         "Random interval:",IDC_RADIO_INTERVAL_RANDOM,"Button",
+                    BS_AUTORADIOBUTTON,164,28,70,10
+    EDITTEXT        IDC_EDIT_INTERVAL_REGULAR,258,12,30,14,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    EDITTEXT        IDC_EDIT_INTERVAL_RANDOM_MIN,258,27,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_INTERVAL_RANDOM_MAX,258,42,30,14,ES_AUTOHSCROLL
+    LTEXT           "Min.",IDC_TXT_MIN,240,29,16,8
+    LTEXT           "Max.",IDC_TXT_MAX,240,44,16,8
+    LTEXT           "s",IDC_TXT_MS_1,292,14,8,8
+    LTEXT           "s",IDC_TXT_MS_2,292,29,8,8
+    LTEXT           "s",IDC_TXT_MS_3,292,44,8,8
+    GROUPBOX        "&Hold time of the alarms",IDC_TXT_HOLD_TIME,158,64,149,55,
+                    WS_GROUP
+    CONTROL         "Regular hold time::",IDC_RADIO_HOLD_REGULAR,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,164,73,90,10
+    CONTROL         "Random hold time:",IDC_RADIO_HOLD_RANDOM,"Button",
+                    BS_AUTORADIOBUTTON,164,88,70,10
+    EDITTEXT        IDC_EDIT_HOLD_REGULAR,258,72,30,14,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    EDITTEXT        IDC_EDIT_HOLD_RANDOM_MIN,258,87,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_HOLD_RANDOM_MAX,258,102,30,14,ES_AUTOHSCROLL
+    LTEXT           "Min.",IDC_TXT_MIN2,240,89,16,8
+    LTEXT           "Max.",IDC_TXT_MAX2,240,104,16,8
+    LTEXT           "s",IDC_TXT_MS_4,292,74,8,8
+    LTEXT           "s",IDC_TXT_MS_5,292,89,8,8
+    LTEXT           "s",IDC_TXT_MS_6,292,104,8,8
+    GROUPBOX        "Alarm tri&gger",IDC_TXT_ALARM,158,124,149,50
+    CONTROL         "Random alarm",IDC_RADIO_ALARM_RANDOM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,164,134,138,
+                    10
+    CONTROL         "Rotate alarms",IDC_RADIO_ALARM_REGULAR,"Button",
+                    BS_AUTORADIOBUTTON,164,146,138,10
+    CONTROL         "All alarms at once",IDC_RADIO_ALARM_ALL,"Button",
+                    BS_AUTORADIOBUTTON,164,159,138,10
+    PUSHBUTTON      "Ab&out...",IDC_ABOUT,2,160,39,14,WS_GROUP
+    DEFPUSHBUTTON   "Close",IDOK,45,160,39,14
+    PUSHBUTTON      "Random &Alarms...",IDC_CHECK_RANDOM_ALARM,94,160,57,14
+    CONTROL         "",IDC_LINE,"Static",SS_BLACKFRAME | NOT WS_VISIBLE,155,
+                    8,1,166
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SIMUNIT_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        VERTGUIDE, 2
+        VERTGUIDE, 151
+        VERTGUIDE, 158
+        VERTGUIDE, 307
+        BOTTOMMARGIN, 170
+        HORZGUIDE, 168
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About SimUnit..."
+    IDP_NOCONNECTION        "No connection!"
+    IDS_INITHARDWARE        "Init. Hardware"
+    IDS_UNDEFINED           "Waiting..."
+    IDS_RESET               "Reset"
+    IDS_DISCONNECT          "Disconnected"
+    IDS_CONNECTION          "Connected"
+    IDS_ALARM_ON            "On"
+    IDS_ALARM_OFF           "Off"
+    IDS_RELAY_OPEN          "Open"
+    IDS_RELAY_CLOSE         "Close"
+    IDS_ENABLE_INPUT        "Init. Enabling"
+    IDP_INTERVAL_ERROR      "The max. interval time is less than the min. interval time!"
+    IDP_HOLD_ERROR          "The max. hold time is less than the min. hold time!"
+    IDS_RANDOM_ALARMS       "Random alarms..."
+    IDS_START_ALARMS        "Start Alarms"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "SimUnit"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CHECK_RANDOM_ALARM  "Tri-State-Button:\nUnchecked:      No random alarms\nIndeterminated: Edit settings\nChecked:          Start alarms"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STOP_ALARMS         "Stop Alarms"
+    IDS_EDGE_INPUT          "Init. Openers"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\SimUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

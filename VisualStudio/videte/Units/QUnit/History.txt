@@ -1,0 +1,95 @@
+History
+=========
+
+01.11.2005
+	- Beginn des Projektes
+
+02.11.2005
+	- Erster Test der UDP-Api
+	- Erstellung einer Klasse zur Kapselung der UDP-Api
+	- Einbindung der unterschiedlichen UDP-Api (CAPTURE_METHOD_QUERY,
+	  CAPTURE_METHOD_CALLBACK und CAPTURE_METHOD_CALLBACK mit Context)
+
+03.11.2005
+	- Vergleich der unterschiedlichen Capture Methoden.
+	    Anomalien der API:
+			- Bei CAPTURE_METHOD_QUERY liefet OnVideoPresent nur die Videostatis der 
+				Kameras 0...15, da in der Struktur CAP_IMAGE_INFO die Felder VideoStatus[x]
+				als WORD definiert sind!
+			- Bei CAPTURE_METHOD_CALLBACK mit Context funktioniert OnVideoCallback gar nicht.
+
+	- Multiview mode im Preview implementiert.
+	- Die aktuelle Kamera läßt sich im Preview durch anklicken auswählen.
+	- Kameras ohne Videosignal werden nicht dargestellt.
+
+04.11.2005
+	- Helligkeit, Kontrast, Farbsättigung lassen sich einstellen.
+	- Relays lassen sich schalten.
+	- Alarme werden angezeigt.
+	
+08.11.2005
+	- Motiondetection implementiert.
+	- Fadenkreuz wird eingezeichnet
+	- MD-Config Dialog ist vorhanden.
+
+
+11.11.2005
+	- Kameraspezifische Einstellungen werden nun gesichert.
+
+14.11.2005
+	- EdgeMaske läßt sich setzen.
+	- CIPCInputQUnit, CIPCInputQUnitMDAlarm, CIPCOutputQUnit grob implementiert. Teilweise noch ohne Funktion
+	- Der Analoge Videoout wird nun geschaltet.
+
+15.11.2005
+	- Es läßt sich nun pro Kanal die Auflösung wählen.
+		- CIF, 2CIF, 4CIF.
+		- QCIF wird vom Board nicht unterstützt!
+
+16.11.2005
+	- QUnit als Tasha getarnt: Relays + Alarme funktionieren in Idip
+	- Bilder werden angefordert und als YUV verschickt. Werden aber nicht angezeigt,
+	  da ja MPeg4 Daten erwartet werden.
+	  
+17.11.2005
+	- Strickte Trennung zwischen den Begriffen Camera, Channel, BoardID.
+	     - Camera: Nach außen hin wird immer mit Camera(nummern) gearbeitet.
+	     - BoardID: Kartennummer (0...3)
+	     - Channel: Channelnummer innerhalb eines Boards. (0...16) bzw. (0...32)
+	- Eine Camera kann in eine BoardID+Channel transformiert werden.
+	- Anhand der BoardID+Channel läßt sich die Camera ermitteln.
+	
+	- Einschränkungen derzeit:
+	   - Die Gesamtzahl der Kameras über alle Boards muß kleiner oder gleich 32 betragen.
+	   - Die Gesamtzahl der Inputs über alle Boards muß kleiner oder gleich 32 betragen.
+	   - Die Gesamtzahl der Relays über alle Boards muß kleiner oder gleich 32 betragen.
+	   
+	   da intern DWORDS zur Speicherung der Zustände verwendet werden.
+	
+21.11.2005
+	- ScanForCameras liefert ein __int64 anstatt eines DWORDs
+	
+22.11.2005
+	- WM_SELFCHECK Message integriert.
+	
+28.11.2005
+	- Unit läuft nun im Tray
+	- Settingsmenü erreichbar über Login
+	-struktallignment auf 1 Byte gestellt.
+	
+30.11.2005
+	- Die meisten Funktionen liefern nun ein Confirm zurück.
+	- Die Framerate läßt sich nun pro Kanal im Dialog einstellen.
+
+01.12.2005
+	- In den Klassen CMotiondetection, CMDConfigDlg alle WORD wSubID durch int nCamera vereinheitlicht.
+	- Alle Warnings bei Warninglevel 4 beseitigt.
+	
+2.12-5.12.2005
+	- Umstellung des Projektes von der Cap3-API auf die Cap5-API
+
+13.12.2005
+	- Bei einem Kameraausfall wird nun ein Störungsbild gesandt.
+
+03.01.2006
+	- Mehrkartenbetrieb mit der Cap5-Api nun möglich

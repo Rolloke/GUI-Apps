@@ -1,0 +1,24 @@
+//
+// SIMUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#define WK_LANG_BLOCK_NUM 0x0407, 1200, 0x0409
+#include "WK_Version.h"
+
+
+WK_VERSION(30, 6, 9, 43, "30/06/99 , 09:43\0", // @AUTO_UPDATE
+		   "SimUnit.exe\0",	// exe name
+		   "SimUnit\0",	// product name
+		   "SimUnit application\0",	// product description
+		   "4.0\0",		// general product version
+		   "4.001\0"	// real version
+		   )
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////

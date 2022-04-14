@@ -1,0 +1,250 @@
+SystemVerwaltung.rc@POPUP@IDR_MAINFRAME.POPUP1@@@@&Datei@&File@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_SAVE@@@@S&peichern\tSTRG+S@&Save\tCTRL+S@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_EDIT_CANCEL@@@@&Rückgängig\tESC@&Undo\tESC@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_EDIT_SERVERINIT@@@@&Initialisierung\tSTRG+I@&Initialise\tSTRG+I@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_SAVE_AS@@@@S&peichern unter...@Save &as...@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_OPEN@@@@Ö&ffnen...@&Open...@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@@@@&Beenden\tAlt+F4@&Exit\tAlt+F4@0@
+SystemVerwaltung.rc@POPUP@IDR_MAINFRAME.POPUP2@@@@&Bearbeiten@&Edit@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_EDIT_NEW@@@@&Neu\tSTRG+N@&New\tStrg+N@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_EDIT_DELETE@@@@&Löschen\tUmschalt+ENTF@&Delete\tShift+DEL@0@
+SystemVerwaltung.rc@POPUP@IDR_MAINFRAME.POPUP3@@@@&Ansicht@&View@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_VIEW_TOOLTIPS@@@@&Tooltips@&Tooltips@0@
+SystemVerwaltung.rc@POPUP@IDR_MAINFRAME.POPUP4@@@@&?@&?@0@
+SystemVerwaltung.rc@MENUITEM@IDR_MAINFRAME.POPUP4.ID_APP_ABOUT@@@@Inf&o über...@&About...@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_HOST_NAME@@@@&Name:@&Name:@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_NUMBER@@@@N&ummer/Adresse:@N&umber/Address:@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_TXT_TYP@@@@&Typ:@&Type:@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_LIST_HOST@@@@List2@List2@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_STATIC_OWN_NAME@@@@Eigener &Stationsname:@Own &host name:@0@
+SystemVerwaltung.rc@LTEXT@IDD_HOSTLIST.IDC_HOST_ARCHIVES@@@@Archive einrichten...@Setup archives...@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_STATIC_ISDN@@@@&ISDN@&ISDN@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_CHECK_ISDN@@@@&Ein/Aus@&On/Off@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_STATIC_REJECT@@@@Eigene Rufnummer@Own call number@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_STATIC_B_CHANNELS@@@@Anzahl der B - Kanäle@Number of B - channels@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_RADIO_B1@@@@&1 B - Kanal@&1 B - channel@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_RADIO_B2@@@@&2 B - Kanäle@&2 B - channel@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_CHECK_MSN@@@@&MSN verwenden@Use &MSN@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_TXT_PREFIX@@@@&Wählpräfix:@&Prefix:@0@
+SystemVerwaltung.rc@LTEXT@IDD_ISDN.IDC_TXT_PREFIX_MINIMUM@@@@&Länge der Rufnummern, die ein Amt benötigen:@Minimum &length of call numbers which use prefix:@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_STATIC_SOCKET@@@@TCP/IP@TCP/IP@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_CHECK_SOCKET@@@@&Ein/Aus@&On/Off@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_TXT_EXTENDED_OPTIONS@@@@Erwartete Bitrate@Expected Bitrate@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_8MBIT@@@@> &8 MBit@> &8 MBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_4MBIT@@@@&4 MBit@&4 MBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_2MBIT@@@@2 &MBit@2 &MBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_1MBIT@@@@1 MBi&t@1 MBi&t@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_512_KB@@@@&512 kBit@&512 kBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_256_KB@@@@&256 kBit@&256 kBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_128_KB@@@@&128 kBit@&128 kBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_SOCKET.IDC_RADIO_64_KB@@@@&64 kBit@&64 kBit@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_GRP_APP@@@@Automatisches Beenden von Programmen@Automatic exit of applications@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_TXT_AUTO_APP@@@@&Beenden nach (Minuten):@&Exit after (minutes)@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_TXT_CONF_APP@@@@Bestätigung an&zeigen (Sekunden):@&Show confirmation (seconds)@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_CHECK_APP@@@@&Ein/Aus@&On/Off@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_GRP_CONNECTION@@@@Automatisches Trennen von Verbindungen@Automatic disconnect of connections@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_CHECK_CONN@@@@Ein/&Aus@On/O&ff@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_TXT_AUTO_CONN@@@@&Trennen nach (Minuten):@&Disconnect after (minutes):@0@
+SystemVerwaltung.rc@LTEXT@IDD_APP.IDC_TXT_CONF_CONN@@@@Bestätigung anzei&gen (Sekunden):@Show con&firmation (seconds)@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_ARCHIVE@@@@List2@List2@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_GROUP_PROPERTIES@@@@Eigenschaften:@Properties:@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_HOST_NAME@@@@Na&me:@Na&me:@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_SIZE@@@@&Größe:@&Size:@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MB@@@@in MByte@in MByte@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MAX@@@@Für dieses Archiv stehen maximal@For this archive maximally@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_MAX_MB@@@@0000@0000@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_FREE@@@@MB zur Verfügung@MB are available@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_WHOLE@@@@Insgesamt sind@Totaling@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_USED_MB@@@@000000000000@000000000000@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_SLASH@@@@/@/@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_STATIC_WHOLE_MB@@@@000000000000@000000000000@0@
+SystemVerwaltung.rc@LTEXT@IDD_ARCHIV.IDC_TXT_USED@@@@MB benutzt@MB are used@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_DRIVES@@@@List2@List2@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_GROUP_USE@@@@Verwendung@Usage@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_RADIO_SYSTEM@@@@&Betriebssystem@&Operating system@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_RADIO_NORMAL@@@@&Keine Verwendung@&No usage@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_RADIO_DATABASE@@@@S&peicherung@&Storage@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_RADIO_BACKUP_WRITE_READ@@@@Backup &schreiben && lesen@&Backup read && write@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_RADIO_BACKUP_READ@@@@Backup &lesen@Backup &read@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_DRIVE@@@@Laufwerk:@Drive:@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_STATIC_DRIVE@@@@0:\\@0:\\@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_USE@@@@Zu verwendende &Größe:@Size &used:@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB2@@@@MByte@MByte@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_SIZE@@@@Gesamte Größe der Speicherlaufwerke:\n(abzüglich 20 MB Reserve / Laufwerk)@Total size of storage drives:\n(without 20 MB reserved space / drive)@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_STATIC_DRIVES_MB@@@@0000000000@0000000000@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB@@@@MByte@MByte@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_GROUP_DRIVE@@@@Laufwerk@Drive@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_GROUP_SIZE@@@@Gesamte Größen@Total sizes@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_SIZE2@@@@Gesamte Größe der Archive:@Total size of archives:@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_TXT_MB3@@@@MByte@MByte@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_STATIC_ARCHIVS_MB@@@@0000000000@0000000000@0@
+SystemVerwaltung.rc@LTEXT@IDD_DRIVE.IDC_ALL@@@@&Alles@&All@0@
+SystemVerwaltung.rc@STRING@IDR_MAINFRAME@@@@SystemVerwaltung@System Management@0@
+SystemVerwaltung.rc@STRING@IDS_HOSTS@@@@Gegenstationen@Hosts@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_PREVIEW_CLOSE@@@@Beendet die Seitenansicht.\nSeitenansicht beenden@Close print preview mode\nCancel preview@0@
+SystemVerwaltung.rc@STRING@IDS_DELETE_HOST_ARCHIV@@@@Für diese Gegenstation existieren noch Archive.\nSollen diese Archive automatisch mit ihren Daten und Bildern gelöscht werden?@There are still archives for this host.\nShould all archives with images and data be deleted automatically?@0@
+SystemVerwaltung.rc@STRING@IDP_CREATE_NORMAL_ARCHIVE_FOR_HOST@@@@Für die Gegenstation %s existiert noch kein Archiv\nfür Bilder aus normalen Verbindungen.\nWollen Sie, daß ein solches Archiv automatisch angelegt wird?@There is still no archive for images from normal connections for host %s.\nShould such an archive be created automatically?@0@
+SystemVerwaltung.rc@STRING@IDP_CREATE_SEARCH_ARCHIVE_FOR_HOST@@@@Für die Gegenstation %s existiert noch kein Archiv\nfür Bilder aus Suchläufen.\nWollen Sie, daß ein solches Archiv automatisch angelegt wird?@There is still no archive for images from queries for host %s.\nShould such an archive be created automatically?@0@
+SystemVerwaltung.rc@STRING@IDS_HOST_NORMAL_ARCHIVE@@@@Normal@Normal@0@
+SystemVerwaltung.rc@STRING@IDS_HOST_SEARCH_ARCHIVE@@@@Suche@Query@0@
+SystemVerwaltung.rc@STRING@IDP_NO_AUTOMATIC_ARCHIV@@@@Es steht kein ausreichender Platz mehr zur Verfügung, um für %s ein  Archiv für %s anzulegen!@There is not enough space to create an %s archive for host %s!@0@
+SystemVerwaltung.rc@STRING@IDS_SAVE@@@@Speichern@Save@0@
+SystemVerwaltung.rc@STRING@IDS_SETTINGS@@@@Einstellungen@Settings@0@
+SystemVerwaltung.rc@STRING@IDS_OPEN@@@@Öffnen@Open@0@
+SystemVerwaltung.rc@STRING@IDS_SEARCH_RESULT@@@@Suchergebnisse@Query results@0@
+SystemVerwaltung.rc@STRING@IDS_NEW@@@@Neu@New@0@
+SystemVerwaltung.rc@STRING@IDS_NEWHOST@@@@Neue Gegenstation@New host@0@
+SystemVerwaltung.rc@STRING@IDS_HOST@@@@Gegenstation@Remote host@0@
+SystemVerwaltung.rc@STRING@IDS_NUMBER@@@@Rufnummer@Call number@0@
+SystemVerwaltung.rc@STRING@IDS_ISDN1@@@@ISDN@ISDN@0@
+SystemVerwaltung.rc@STRING@IDS_SOCKET@@@@TCP/IP@TCP/IP@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_APP_TITLE@@@@SystemVerwaltung@System Management@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_IDLEMESSAGE@@@@ @ @0@
+SystemVerwaltung.rc@STRING@AFX_IDS_HELPMODEMESSAGE@@@@Wählen Sie das Objekt, zu dem Sie Hilfe wünschen.@Select the object where you need help.@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_EXT@@@@ER@ER@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_CAPS@@@@UF@UF@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_NUM@@@@NUM@NUM@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_SCRL@@@@RF@RF@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_OVR@@@@ÜB@OVR@0@
+SystemVerwaltung.rc@STRING@ID_INDICATOR_REC@@@@MA@MA@0@
+SystemVerwaltung.rc@STRING@ID_FILE_NEW@@@@Erstellt ein neues Dokument.\nNeu@Creates a new document. \nNew@0@
+SystemVerwaltung.rc@STRING@ID_FILE_OPEN@@@@Öffnet bestehende Einstellungen.\nÖffnen@Opens present settings.\nOpen@0@
+SystemVerwaltung.rc@STRING@ID_FILE_CLOSE@@@@Schließt das aktive Dokument.\nSchließen@Closes the active document.\nClose@0@
+SystemVerwaltung.rc@STRING@ID_FILE_SAVE@@@@Speichern\nSpeichert alle Einstellungen@Save\nSaves all settings@0@
+SystemVerwaltung.rc@STRING@ID_FILE_SAVE_AS@@@@Speichert die aktiven Eisntellungen unter neuem Namen.\nSpeichern unter@Saves the active settings under a new name.\nSave as@0@
+SystemVerwaltung.rc@STRING@ID_FILE_PAGE_SETUP@@@@Ändert die Druckoptionen.\nSeite einrichten@Changes the printing options.\nPage Setup@0@
+SystemVerwaltung.rc@STRING@ID_FILE_PRINT_SETUP@@@@Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung@Changes the printer and printing options\nPrint Setup@0@
+SystemVerwaltung.rc@STRING@ID_FILE_PRINT@@@@Druckt das aktive Dokument.\nDrucken@Prints the active document.\nPrinting@0@
+SystemVerwaltung.rc@STRING@ID_FILE_PRINT_PREVIEW@@@@Zeigt ganze Seiten an.\nSeitenansicht@Displays the entire cover page.\nPrint Preview@0@
+SystemVerwaltung.rc@STRING@ID_APP_ABOUT@@@@Info...\nZeigt Programm-Informationen, Versionsnummer und Copyright an.@Info...\nShows Program Information, Number of Version an Copyright.@0@
+SystemVerwaltung.rc@STRING@ID_APP_EXIT@@@@Verläßt die Systemverwaltung; fragt, ob die Einstellungen gespeichert werden sollen.\nBeenden@Exit System Management. Asks if the settings should be stored.\nExit@0@
+SystemVerwaltung.rc@STRING@ID_HELP_INDEX@@@@Öffnet die Hilfefunktion.\nHilfethemen@Opens the help function.\nHelp topics@0@
+SystemVerwaltung.rc@STRING@ID_HELP_FINDER@@@@Listet die Hilfethemen auf.\nHilfethemen@Lists all help topics.\nHelp topics@0@
+SystemVerwaltung.rc@STRING@ID_HELP_USING@@@@Zeigt Anweisungen zum Umgang mit der Hilfe an.\nHilfe@Display instructions about how to use help\nHelp@0@
+SystemVerwaltung.rc@STRING@ID_CONTEXT_HELP@@@@Zeigt Hilfe zu angeklickten Schaltflächen, Menüs und Fenstern an.\nHilfe@Shows help for clicked buttons, menues or windows.\nHelp@0@
+SystemVerwaltung.rc@STRING@ID_HELP@@@@Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe@Display help for current task or command\nHelp@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE1@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE2@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE3@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE4@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE5@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE6@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE7@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE8@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE9@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE10@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE11@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE12@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE13@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE14@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE15@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_FILE_MRU_FILE16@@@@Öffnet dieses Dokument.@Opens this document@0@
+SystemVerwaltung.rc@STRING@ID_NEXT_PANE@@@@Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt@Switch to the next window pane\nNext Pane@0@
+SystemVerwaltung.rc@STRING@ID_PREV_PANE@@@@Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt@Switch back to the previous window pane\nPrevious pane@0@
+SystemVerwaltung.rc@STRING@ID_WINDOW_SPLIT@@@@Teilt das aktive Fenster in Ausschnitte.\nTeilen@Split the active window into panes\nSplit@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_CLEAR@@@@Löscht die Markierung.\nLöschen@Deletes the selection.\nDelete@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_CLEAR_ALL@@@@Löscht alles.\nAlles löschen@Deletes all.\nDelete all@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_COPY@@@@Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren@Copies the selection and puts it on the Clipboard\nCopy@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_CUT@@@@Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden@Removes the selection and put it on the clipboard\nCut@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_FIND@@@@Sucht den angegebenen Text.\nSuchen@Find the specified text\nFind@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_PASTE@@@@Fügt den Inhalt der Zwischenablage ein.\nEinfügen@Inserts the contents of the clipboard.\nPaste@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_REPEAT@@@@Wiederholt die letzte Aktion.\nWiederholen@Repeats the alst action.\nRepeat@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_REPLACE@@@@Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen@Replaces the specified text with different text.\nReplace@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_SELECT_ALL@@@@Markiert das gesamte Dokument.\nAlles markieren@Select the entire document\nSelect All@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_UNDO@@@@Macht die letzte Aktion rückgängig.\nRückgängig@Undoes the last action.\nUndo@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_REDO@@@@Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen@Redoes the previously undone action.\nRedo@0@
+SystemVerwaltung.rc@STRING@ID_VIEW_TOOLBAR@@@@Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten@Show or hide the toolbar\nToggle ToolBar@0@
+SystemVerwaltung.rc@STRING@ID_VIEW_STATUS_BAR@@@@Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten@Show or hide the status bar\nToggle StatusBar@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCSIZE@@@@Ändert die Fenstergröße.@Changes the window size.@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCMOVE@@@@Ändert die Position des Fensters.@Change the window position@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCMINIMIZE@@@@Verkleinert das Fenster zu einem Symbol.@Reduce the window to an icon@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCMAXIMIZE@@@@Vergrößert das Fenster zu voller Größe.@Enlarge the window to full size@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCNEXTWINDOW@@@@Wechselt zum nächsten Dokumentfenster.@Switch to the previous document window@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCPREVWINDOW@@@@Wechselt zum vorherigen Dokumentfenster.@Switch to the previous document window@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCCLOSE@@@@Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf.@Close the active window and prompts to save the documents@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCRESTORE@@@@Stellt das Fenster in seiner normalen Größe wieder her.@Restore the window to normal size@0@
+SystemVerwaltung.rc@STRING@AFX_IDS_SCTASKLIST@@@@Aktiviert die Task-Liste.@Activate Task List@0@
+SystemVerwaltung.rc@STRING@IDS_TYP@@@@Typ@Type@0@
+SystemVerwaltung.rc@STRING@IDP_HOST_ILLEGAL_ROUTING@@@@Die angegebene Routingadresse für %s ist falsch.\n\nDie einzelnen Stationen sind durch # zu trennen.\n\nIP Adressen muß ein tcp: vorangestellt werden.\n\nSMS Nummern muß ein sms: vorangestellt werden.\n\nB3 Nummern muß ein pres: vorangestellt werden.\n@The entered routing address for %s is wrong.\nSingle addresses must be devided by #.\n\nIP addresses must have a tcp: in front.\n\nSMS addresses must have a sms: in front.\n\nB3 addresses must have a pres: in front.@0@
+SystemVerwaltung.rc@STRING@IDP_INVALID_DONGLE@@@@Sie haben keinen gültigen Dongle, um diese Software zu starten, oder Ihr Dongle ist defekt.\nWenden Sie sich bitte an einen Servicetechniker!@The dongle you use is not valid to start this software or the dongle is defect.\nPlease ask your service technician.@0@
+SystemVerwaltung.rc@STRING@IDP_ACCESS_DENIED@@@@Sie sind nicht dazu berechtigt, Änderungen am System vorzunehmen.\n Der Zugriff wurde verweigert!@You are not authorized to modify the system settings.\nAccess denied!@0@
+SystemVerwaltung.rc@STRING@IDS_NAME@@@@Name@Name@0@
+SystemVerwaltung.rc@STRING@IDS_LOCAL_HOST@@@@Lokale Station@Local host@0@
+SystemVerwaltung.rc@STRING@IDP_SAVE_CHANGES@@@@Möchten Sie die Änderungen speichern ?@Do you want to save the changes?@0@
+SystemVerwaltung.rc@STRING@IDS_RESET_FAILED@@@@Die Initialisierung des Systems konnte nicht durchgeführt werden!@The initialising could not be executed!@0@
+SystemVerwaltung.rc@STRING@IDS_AUTOLOGOUT@@@@Auto Logout@Auto Logout@0@
+SystemVerwaltung.rc@STRING@IDP_NOAPPWITHOUTCONN@@@@Ist das automatische Beenden von Anwendungen aktiviert, so  muß auch das automatische Trennen von Verbindungen aktiviert sein!@If you want to exit the application automatically, you also have to activate the automatic disconnect of connections!@0@
+SystemVerwaltung.rc@STRING@IDP_APP_LT_CONF@@@@Die Zeit für das automatische Beenden ist kleiner als die Zeit für die Bestätigung!@The time for automatic exit is less than the time for confirmation!@0@
+SystemVerwaltung.rc@STRING@IDP_CONN_LT_CONF@@@@Die Zeit für das automatische Trennen ist kleiner als die Zeit für die Bestätigung!@The time for automatic disconnect is less than the time for confirmation!@0@
+SystemVerwaltung.rc@STRING@IDP_APP_LT_CONN@@@@Die Zeit für das automatische Beenden ist kleiner als die Zeit für das automatische Trennen.@The time for automatic exit is less than the time for automatic disconnect!@0@
+SystemVerwaltung.rc@STRING@IDP_NO_LOCAL_HOSTNAME@@@@Bitte geben Sie Ihrer Station einen sinnvollen Namen!@Please enter a useful name for this host!@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_NEW@@@@Neu\nErstellt ein neues Element@New\nCreates a new element@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_DELETE@@@@Löschen\nLöscht das ausgewählte Element@Delete\nDeletes the selected element@0@
+SystemVerwaltung.rc@STRING@ID_EDIT_CANCEL@@@@Rückgängig\nMacht die Änderungen rückgängig@Undo\nUndo the last changes @0@
+SystemVerwaltung.rc@STRING@ID_EDIT_SERVERINIT@@@@Initialisierung\nInitialisiert das System neu@Initialise\nInitialises the system@0@
+SystemVerwaltung.rc@STRING@ID_VIEW_TOOLTIPS@@@@schaltet die Tooltips ein und aus@Tool Tips on/off@0@
+SystemVerwaltung.rc@STRING@IDS_ARCHIV@@@@Archiv@Archive@0@
+SystemVerwaltung.rc@STRING@IDP_REGISTRY_IMPORT_WARNING@@@@Sie wollen Einstellungen importieren,\ndie nicht auf diesem System gespeichet wurden!\nDies kann das System u.U. außer Funktion setzen!\n\nWollen Sie trotzdem importieren?@You are importing settings from another system!\nThis may cause damage to this system or errors in functionality.\nDo you want to import the settings nevertheless?@0@
+SystemVerwaltung.rc@STRING@IDP_HOST_ILLEGAL_ADDRESS@@@@Die angegebene Addresse oder Rufnummer für %s enthält ungültige Zeichen!@The entered address or calling number for %s contains invalid symbols!@0@
+SystemVerwaltung.rc@STRING@IDP_ARCHIV_SIZE_ZERO@@@@Sie müssen eine Archivgröße >0 angeben oder 'alles' markieren!@You must enter an archive size greater than 0 or check 'all'.@0@
+SystemVerwaltung.rc@STRING@IDP_ARCHIV_SIZE_TO_BIG@@@@Die von Ihnen eingegebene zu verwendende Größe überschreitet den maximal zur Verfügung stehenden Wert!\nDie zu verwendende Größe wird auf den Maximalwert gesetzt.@The entered size is greater than the maximum available size!\nThe maximum size will be used.@0@
+SystemVerwaltung.rc@STRING@IDS_LOGIN_SUCCESFUL@@@@Login von %s erfolgreich@Login of %s successful@0@
+SystemVerwaltung.rc@STRING@IDS_LOGIN_DENIED@@@@Login von %s abgewiesen@Login of %s denied@0@
+SystemVerwaltung.rc@STRING@IDP_FIXED_ARCHIVES_ON_DRIVE@@@@Diesem Laufwerk sind Archive fest zugeordnet!\nSie müssen diese Zuordnungen erst aufheben,\nbevor Sie die Verwendung dieses Laufwerks ändern können.\nDie Verwendung des Laufwerks wird nicht geändert.@This drive has fixed archives!\nYou must remove this assignment first to change the usage of the drive.\nThe usage was not changed!@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVES@@@@Laufwerke@Drives@0@
+SystemVerwaltung.rc@STRING@IDS_ARCHIVES@@@@Archive@Archives@0@
+SystemVerwaltung.rc@STRING@IDS_NR@@@@Nr@No@0@
+SystemVerwaltung.rc@STRING@IDS_SIZE_MB@@@@Größe in MB@Size in MB@0@
+SystemVerwaltung.rc@STRING@IDS_ALARM_ARCHIV@@@@Alarm@Alarm@0@
+SystemVerwaltung.rc@STRING@IDS_RING_ARCHIV@@@@Ring@Ring@0@
+SystemVerwaltung.rc@STRING@IDS_VORRING_ARCHIV@@@@Vorring@Pre-ring@0@
+SystemVerwaltung.rc@STRING@IDS_NEW_ARCHIV@@@@Neues Archiv@New archive@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVE@@@@Laufwerk@Drive@0@
+SystemVerwaltung.rc@STRING@IDS_USEDAS@@@@Verwendet als@Used as@0@
+SystemVerwaltung.rc@STRING@IDC_ARCHIVE@@@@Liste der eingetragenen Archive.\nMarkieren Sie einen Eintrag,\num dessen Daten zu bearbeiten.@List of entered archives.\nSelect an entry to edit it's data.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_SIZE@@@@Geben Sie die gewünschte Größe des Archivs an.@Please specify the requested size of the archive.@0@
+SystemVerwaltung.rc@STRING@IDC_COMBO_ALARM@@@@Einem Vorringarchiv muß ein Alarmarchiv zugeordnet werden.\nSobald in das Alarmarchiv gespeichert wird, wird auch das\nzugeordnete Vorringarchiv in das Alarmarchiv gesichert.@A pre-ring archive must be assigned to a alarm archive.@0@
+SystemVerwaltung.rc@STRING@IDC_STATIONS_NAME@@@@Eigener Stationsname,\ngeben Sie bitte eine möglichst eindeutige Bezeichnung ein.@Own host name.\nEnter a unique name.@0@
+SystemVerwaltung.rc@STRING@IDC_DO_LISTEN@@@@Nehme eingehende Anrufe an.@Accept incomming calls@0@
+SystemVerwaltung.rc@STRING@IDS_USED@@@@Belegt in MByte@Used in MByte@0@
+SystemVerwaltung.rc@STRING@IDS_SIZE@@@@Größe in MByte@Size in MByte@0@
+SystemVerwaltung.rc@STRING@IDS_QUOTA@@@@Zu verwenden in MByte@To use in MB@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVE_FD@@@@Diskette@Floppy@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVE_HD@@@@Lokales Laufwerk@Local Drive@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVE_NET@@@@Netzwerkverbindung@Network drive@0@
+SystemVerwaltung.rc@STRING@IDS_DRIVE_CD@@@@CD-ROM-Laufwerk@CD-ROM Drive@0@
+SystemVerwaltung.rc@STRING@IDS_ALL@@@@Alles@All@0@
+SystemVerwaltung.rc@STRING@IDS_USE_NORMAL@@@@Keine Verwendung@No usage@0@
+SystemVerwaltung.rc@STRING@IDS_USE_DATABASE@@@@Speicherung@Storage@0@
+SystemVerwaltung.rc@STRING@IDS_USE_BACKUP_READ@@@@Backup lesen@Read backup@0@
+SystemVerwaltung.rc@STRING@IDS_USE_BACKUP_WRITE_READ@@@@Backup schreiben & lesen@Read and write backup@0@
+SystemVerwaltung.rc@STRING@IDS_USE_SYSTEM@@@@Betriebssystem@Operating system@0@
+SystemVerwaltung.rc@STRING@IDS_TOO_LESS_DATABASE_DRIVES@@@@Es steht jetzt nicht mehr genug Platz für alle Archive zur Verfügung!\nVerkleinern Sie erst ein oder mehrere Archive!\nDie Verwendung des Laufwerks wird nicht geändert.@There is not enough space for all archives!\nDecrease the size of one or more archives.\nThe usage of drive will be kept.@0@
+SystemVerwaltung.rc@STRING@IDP_ARCHIVS_TOO_BIG@@@@Die Größe der Archive übersteigt die Kapazität der Laufwerke.\nBitte verkleinern Sie ein oder mehrere Archive oder\nstellen der Speicherung mehr Laufwerke zur Verfügung oder\nerhöhen die zu benutzenden Größen.@The size of all archives exceeds the capacity of all drives.\nPlease decrease the size of one or more archives or provide more drives or increase the used sizes of drives.@0@
+SystemVerwaltung.rc@STRING@IDC_ADDRESS_HOST@@@@Nummer oder Adresse der Gegenstation.\n\nTCP/IP und Email:\nAlle Zeichen sind zugelassen, achten Sie bitte auf korrekte Schreibweise!\nISDN und SMS:\nEs sind alle Ziffern, das Leerzeichen sowie / - ( ) zugelassen.\n\nRouting:\nDie einzelnen Stationen sind durch ein '#' zu trennen.\nEiner TCP/IP-Adresse muss ein 'tcp:' vorangestellt werden.\nEiner SMS-Adresse muss ein 'sms:' vorangestellt werden.\nEiner B3-Adresse muss ein 'pres:' vorangestellt werden.@Number or address of the host.\n\nTCP/IP:\nAll characters are allowed, pay attention to correct spelling.\nISDN and SMS:\nAll digits, blanks and / - ( ) are allowed.\n\nRouting:\nThe single hosts must be devided by a #.\nAn IP address must have prefix tcp:.\nA SMS number must have prefix sms:.\nA B3 address must have prefix pres:.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_AUTO_APP@@@@Programme werden nach dieser Zeit automatisch beendet,\nwenn keine Benutzereingaben erfolgen.\n\nDiese Zeit muß größer oder gleich der Zeit\nfür das automatische Trennen sein.@Applications will be automatically exited after this time if no user action occurs meanwhile.\n\nThis time must be greater or equal to the time for automatic disconnect.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_CONF_APP@@@@In den angegeben letzten Sekunden wird eine Bestätigung eingeblendet,\nwomit der Benutzer das automatische Beenden verhindern kann.@A confirmation request will be displayed for the entered last seconds,\nso that the user can prevent automatic exiting.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_512_KB@@@@Stellen Sie die gewünschte Bitrate ein.@Set the requested bit rate.@0@
+SystemVerwaltung.rc@STRING@IDC_CHECK_APP@@@@Markieren Sie dieses Feld, wenn Programme,\ndie Benutzereingaben ermöglichen,\nnach einer bestimmten Zeit ohne Benutzereingaben\nautomatisch beendet werden sollen.\n(Sicherheitsabschaltung, um unbefugte Eingaben zu verhindern.)\n\nDamit ist gleichzeitig das Trennen verbunden!@Check this if applications providing a user interface should be exited after a given time without user activity meanwhile.\n(Safety turn off to prevent the system from unathorized input.)\nAny established connections will be closed too.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_256_KB@@@@Stellen Sie die gewünschte Bitrate ein.@Set the requested bit rate.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_128_KB@@@@Stellen Sie die gewünschte Bitrate ein.@Set the requested bit rate.@0@
+SystemVerwaltung.rc@STRING@IDC_CHECK_CONN@@@@Markieren Sie dieses Feld, wenn Verbindungen\nnach einer bestimmten Zeit, ohne daß Benutzereingaben erfolgten,\nautomatisch beendet werden sollen.\n(Sicherheitsabschaltung, um unnötige Verbindungskosten\nzu vermeiden.)@Check this if applications providing a connection should be disconnect after a given time without user activity meanwhile.\n(Safety disconnection to prevent the system from unnecessay connection charge.)@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_64_KB@@@@Stellen Sie die gewünschte Bitrate ein.@Set the requested bit rate.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_AUTO_CONN@@@@Verbindungen werden nach dieser Zeit automatisch getrennt,\nwenn keine Benutzeraktionen, wie Tastatureingaben oder Mausklicks erfolgen.@Connections will be closed after a given time without user activity (keyboard or mouse) meanwhile.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_CONF_CONN@@@@In den angegeben letzten Sekunden wird eine Bestätigung eingeblendet,\nwomit der Benutzer das automatische Trennen verhindern kann.@During the last seconds there will be a confirmation request\nso the user is able to prevent the automatic disconnect of the connection.@0@
+SystemVerwaltung.rc@STRING@IDC_CHECK_MSN@@@@Hier wird angezeigt, ob die Telefonanlage eine eigene MSN unterstützt,\nd.h. ob Anrufe an eine bestimmten MSN angenommen werden können.\nEinige Telefonanlagen liefern die gerufene MSN nicht mit,\nso daß dann nur alle Anrufe angenommen werden können.@Displays if the telephone installation provides the called MSN or not.\nSome telephone installations do not provide the called MSN.\Then only 'Accept all incomming calls' can be used.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_B1@@@@Für eine Verbindung wird maximal nur\nein B-Kanal zur Verfügung gestellt.@Only one B-channel will be available for a connection.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_B2@@@@Für eine Verbindung werden bis zu\nzwei B-Kanäle zur Verfügung gestellt.@Up to two B-Channels will be available for a connection.@0@
+SystemVerwaltung.rc@STRING@IDC_ALL@@@@Markieren Sie dieses Feld,\nwenn Sie das gesamte Laufwerk\nfür diesen Zweck verwenden möchten.@Check this if you want to use the whole disc space for this usage.@0@
+SystemVerwaltung.rc@STRING@IDC_DRIVES@@@@Liste aller verfügbarer Laufwerke.\nMarkieren Sie einen Eintrag,\num dessen Daten zu bearbeiten.@List of all existing drives.\nSelect an entry to edit its settings.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_SYSTEM@@@@Markieren Sie diesen Eintrag, wenn auf diesem Laufwerk\ndas Betriebssystem installiert ist und dieses Laufwerk nicht\nvon der Datenbank verwendet werden soll.@Check this if the operating system is installed to this drive and this drive should not be used to store data and images.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_NORMAL@@@@Markieren Sie diesen Eintrag, wenn dieses Laufwerk normal vom Betriebssystem\nund nicht von der Datenbank verwendet werden soll. @Check this if the drive should not be used to store data and images.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_DATABASE@@@@Markieren Sie diesen Eintrag, wenn dieses Laufwerk\nfür die Datenbank-Speicherung verwendet werden soll.@Check this if the drive should be used to store data and images.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_BACKUP_WRITE_READ@@@@Markieren Sie diesen Eintrag, wenn dieses Laufwerk\nfür die Datenbank-Sicherung (Backup) verwendet werden soll.\nSie können dann auch von diesem Laufwerk Backups lesen.\n\nCD-R- oder CD-RW-Laufwerke können NICHT\nfür Backup-Pozesse verwendet werden!@Check this if the drive should be used to write backup data and images.\nIt is possible to read data from this drive too.\nCD-R and CD-RW drives cannot be used for automatic backups.@0@
+SystemVerwaltung.rc@STRING@IDC_RADIO_BACKUP_READ@@@@Markieren Sie diesen Eintrag, wenn von diesem Laufwerk\neine Datenbank-Sicherung (Backup) gelesen werden soll.@Check this if the drive should be used to read backup data and images.@0@
+SystemVerwaltung.rc@STRING@IDC_EDIT_USE@@@@Wenn Sie nicht das gesamte Laufwerk\nfür diesen Zweck verwenden möchten,\ntragen Sie hier die gewünschte Größe ein.@If the software shall not use the entire drive space for storing,\nenter the size to use.@0@
+SystemVerwaltung.rc@STRING@IDC_RUFNUMMER@@@@Geben Sie die Rufnummer ein,\nunter der die Anrufe angenommen\nwerden sollen.@Enter the calling number to which calls shall be accepted.@0@
+SystemVerwaltung.rc@STRING@IDP_DOUBLE_HOST@@@@Die Gegenstation %s ist mehrfach benutzt!\nGegenstationen müssen eindeutige Namen haben!\nLöschen Sie die Mehrfacheinträge!@The host %s is used multiple.\nHosts must have unique names!\nDelete the multiple entries!@0@
+SystemVerwaltung.rc@STRING@IDP_HOST_WITHOUT_NUMBER@@@@Der Gegenstation %s wurde noch keine Nummer oder Adresse zugeordnet.\nBitte weisen Sie der Gegenstation eine Nummer zu!@The host %s does not have a phone number or address.\nPlease enter a phone number or address!@0@
+SystemVerwaltung.rc@STRING@IDP_ARCHIVE_SIZE_ZERO@@@@Sie haben keine Größe angegeben!@You have not entered a size!@0@
+SystemVerwaltung.rc@STRING@IDP_CONFIG_DRIVE_FIRST@@@@Sie müssen erst ein Laufwerk für die Speicherung angeben,\nbevor Sie Archive einrichten können!@You must enter an archive for storage\nbevor you are able to setup archives!@0@

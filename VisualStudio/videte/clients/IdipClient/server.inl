@@ -1,0 +1,224 @@
+//////////////////////////////////////////////////////////////////////
+inline WORD CServer::GetID() const
+{
+	return m_wID;
+}
+//////////////////////////////////////////////////////////////////////
+inline CSecID CServer::GetHostID() const
+{
+	return m_idHost;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetName() const
+{
+	return m_sName;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetKind() const
+{
+	return m_sKind;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsLocal() const
+{
+	return m_bLocal ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline CSecID	CServer::GetAlarmID() const
+{
+	return m_AlarmID;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::GetAlarmSwitch() const
+{
+	return m_bAlarmSwitch ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::ShowErrorMessage() const
+{
+	return m_bShowErrorMessage ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsAlarm() const
+{
+	return m_bAlarm ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsControl() const
+{
+	return m_pControl != NULL;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL	CServer::IsControlSave() const
+{
+	return m_bControlSave ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsControlExclusive() const
+{
+	return m_bControlExclusive ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetError() const
+{
+	return m_sLastError;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIPCInputIdipClient* CServer::GetInput() const
+{
+	return m_pInput;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIPCOutputIdipClient* CServer::GetOutput() const
+{
+	return m_pOutput;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIPCControl* CServer::GetControl() const
+{
+	return m_pControl;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIPCDatabaseIdipClient* CServer::GetDatabase() const
+{
+	return m_pDatabase;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIdipClientDoc* CServer::GetDocument() const
+{
+	return m_pDoc;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetNotificationURL() const
+{
+	return m_sNotificationURL;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetNotificationMessage() const
+{
+	return m_sNotificationMessage;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsDTS() const
+{
+	return m_bIsDTS ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline void CServer::SetDTS(BOOL bIsDTS) 
+{
+	m_bIsDTS = bIsDTS ? true : false;
+}
+//////////////////////////////////////////////////////////////////////
+inline CString CServer::GetVersion() const
+{
+	return m_sVersion;
+}
+//////////////////////////////////////////////////////////////////////
+inline DWORD CServer::GetConfirmedOutputOptions() const
+{
+	return m_dwConfirmedOutputOptions;
+}
+//////////////////////////////////////////////////////////////////////
+inline CDlgDatabaseInfo* CServer::GetInfoDialog() const
+{
+	return m_pDlgDatabaseInfo;
+}
+//////////////////////////////////////////////////////////////////////
+inline const CIPCFields& CServer::GetFields() const
+{
+	return m_Fields;
+}
+//////////////////////////////////////////////////////////////////////
+inline CQueryArchives& CServer::GetQueryArchives()
+{
+	return m_QueryArchives;
+}
+//////////////////////////////////////////////////////////////////////
+inline BOOL CServer::IsSearching() const
+{
+	return m_bSearching ? TRUE : FALSE;
+}
+//////////////////////////////////////////////////////////////////////
+inline CIPCDrives& CServer::GetDrives()
+{
+	return m_Drives;
+}
+/////////////////////////////////////////////////////
+inline BOOL CServer::CanRectangleQuery() const
+{
+	BOOL b = FALSE;
+
+	if (IsDTS())
+	{
+		b = (    m_iMajorVersion == 1 
+			&& ((m_iMinorVersion==4 && m_iSubVersion > 1) || m_iMinorVersion > 4)
+			|| m_iMajorVersion>1);
+	}
+	else
+	{
+		b = (    m_iMajorVersion == 4 
+			&& (m_iMinorVersion > 2)
+			|| m_iMajorVersion>4);
+	}
+	return b;
+}
+/////////////////////////////////////////////////////
+inline BOOL CServer::CanSplittingBackup() const
+{
+	BOOL b = FALSE;
+
+	if (IsDTS())
+	{
+		// Remote, not yet implemented
+	}
+	else
+	{
+#ifdef _DEBUG
+		b = (   ((m_iMajorVersion == 4) && (m_iMinorVersion > 3))
+			|| ((m_iMajorVersion == 4) && (m_iMinorVersion == 3) && (m_iBuildNr >= 488))
+			|| m_iMajorVersion > 4
+			);
+#else
+		b = (   ((m_iMajorVersion == 4) && (m_iMinorVersion > 3))
+			//			 || ((m_iMajorVersion == 4) && (m_iMinorVersion == 3) && (m_iBuildNr >= 493))
+			|| m_iMajorVersion > 4
+			);
+#endif
+	}
+	return b;
+}
+/////////////////////////////////////////////////////
+inline int CServer::GetMajorVersion() const
+{
+	return m_iMajorVersion;
+}
+/////////////////////////////////////////////////////
+inline int CServer::GetMinorVersion() const
+{
+	return m_iMinorVersion;
+}
+/////////////////////////////////////////////////////
+inline int CServer::GetSubVersion() const
+{
+	return m_iSubVersion;
+}
+/////////////////////////////////////////////////////
+inline int CServer::GetBuildNr() const
+{
+	return m_iBuildNr;
+}
+/////////////////////////////////////////////////////
+inline BOOL CServer::IsInBackupMode() const
+{
+	return m_bBackupMode ? TRUE : FALSE;
+}
+/////////////////////////////////////////////////////
+inline BOOL CServer::CanGOP() const
+{
+	return (m_dwConfirmedOutputOptions & SCO_CAN_GOP)>0;
+}
+/////////////////////////////////////////////////////
+inline	BOOL CServer::DoReconnectDataBase() const
+{
+	return m_bDoReconnectDataBase ? TRUE : FALSE;
+}

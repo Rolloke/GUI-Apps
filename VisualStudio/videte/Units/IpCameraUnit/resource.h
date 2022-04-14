@@ -1,0 +1,122 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by IPCameraUnit.rc
+//
+#define IDD_IPCAMERAUNIT_DIALOG         102
+#define IDP_SOCKETS_INIT_FAILED         103
+#define IDD_CAMERA_PARAMETER            103
+#define IDS_RTE_NO_VIDEO                104
+#define IDS_RTE_VIDEO                   105
+#define IDS_ID                          106
+#define IDS_LOCATION                    107
+#define IDS_STATE                       108
+#define IDS_TYPE                        109
+#define IDS_TYPE_AXIS                   110
+#define IDS_TYPE_CAPTURE                111
+#define IDS_TYPE_PANASONIC              112
+#define IDS_NAME                        113
+#define IDR_MAINFRAME                   128
+#define IDR_INITIALISED                 129
+#define IDR_MOTION_DETECTED             130
+#define IDC_BTN_START                   1000
+#define IDC_BTN_PAUSE                   1001
+#define IDC_BTN_STOP                    1002
+#define IDC_EDT_URL                     1003
+#define IDC_EDT_REQUEST                 1004
+#define IDC_EDT_ANSWER                  1005
+#define IDC_BTN_SEND                    1006
+#define IDC_RD_SET                      1007
+#define IDC_RD_GET                      1008
+#define IDC_BTN_SET_NAME                1009
+#define IDC_EDT_PORT                    1010
+#define IDC_RD_TEXT                     1012
+#define IDC_RD_LIST                     1013
+#define IDC_THREAD_LIST                 1014
+#define IDC_RD_PREVIEW                  1015
+#define IDC_CK_REGISTER_GRAPH           1016
+#define IDC_COMBO_TYPE                  1017
+#define IDC_RD_INPUT_LIST               1017
+#define IDC_TXT_LOCATION                1018
+#define IDC_RD_RELAIS_LIST              1018
+#define IDC_COMBO_CAPTURE_DEVICES       1019
+#define IDC_TXT_TYPE                    1020
+#define IDC_IN_OUT_LIST                 1021
+#define IDC_BTN_CAMERA_SETTINGS         1022
+#define IDC_TXT_NAME                    1023
+#define IDC_TXT_RESOLUTION              1024
+#define IDC_COMBO_RESOLUTIONS           1025
+#define IDC_TXT_ROTATION                1026
+#define IDC_COMBO_ROTATION              1027
+#define IDC_TXT_COMPRESSION             1028
+#define IDC_COMBO_COMPRESSION           1029
+#define IDC_TXT_DEVICE                  1030
+#define IDC_COMBO_OUTPUTS               1031
+#define IDC_TXT_CAMERA                  1031
+#define IDC_TXT_RELAIS                  1032
+#define IDC_TXT_FRAMERATE               1033
+#define IDC_TXT_URL                     1035
+#define IDC_TXT_REQUEST                 1037
+#define IDC_TXT_FRAMERATES              1038
+#define IDC_TXT_USER_NAME               1039
+#define IDC_EDT_NAME                    1040
+#define IDC_TXT_PASSWORD                1041
+#define IDC_EDT_USER_NAME               1043
+#define IDC_EDT_PASSWORD                1044
+#define IDC_CK_LOGS_TO_EDT              1045
+#define IDC_TXT_INPUT                   1046
+#define IDC_CK_INPUT1                   1050
+#define IDC_CK_INPUT2                   1051
+#define IDC_CK_INPUT3                   1052
+#define IDC_CK_INPUT4                   1053
+#define IDC_CK_INPUT5                   1054
+#define IDC_CK_INPUT6                   1055
+#define IDC_CK_INPUT7                   1056
+#define IDC_CK_INPUT8                   1057
+#define IDC_CK_OUTPUT1                  1060
+#define IDC_CK_OUTPUT2                  1061
+#define IDC_CK_OUTPUT3                  1062
+#define IDC_CK_OUTPUT4                  1063
+#define IDC_CK_OUTPUT5                  1064
+#define IDC_CK_OUTPUT6                  1065
+#define IDC_CK_OUTPUT7                  1066
+#define IDC_CK_OUTPUT8                  1067
+#define IDC_CK_CAMERA1                  1070
+#define IDC_CK_CAMERA2                  1071
+#define IDC_CK_CAMERA3                  1072
+#define IDC_CK_CAMERA4                  1073
+#define IDC_CK_CAMERA5                  1074
+#define IDC_CK_CAMERA6                  1075
+#define IDC_CK_CAMERA7                  1076
+#define IDC_CK_CAMERA8                  1077
+#define IDC_TXT_FPS                     1080
+#define IDC_TXT_PERFORMANCE             1081
+#define IDC_TXT_PROXY                   1082
+#define IDC_EDT_PROXY                   1083
+#define IDC_TXT_PROXY_BYPASS            1084
+#define IDC_EDT_PROXY_BYPASS            1085
+#define IDC_BTN_START_THREAD            1086
+#define IDC_BTN_STOP_THREAD             1087
+#define IDC_EDT_SEC_ID                  1088
+#define IDC_STAT_PICTURE                1089
+#define IDC_TXT_START_THREAD            1090
+#define IDC_TXT_GROUPID                 1090
+#define IDC_BTN_SET_PARAM               1092
+#define IDC_EDT_SET_FPS                 1093
+#define IDC_TXT_PICTURE_SIZE            1095
+#define IDC_TXT_PORT                    1096
+#define IDC_COMBO_COMPRESSION_TYPE      1097
+#define IDC_COMBO_RESOLUTION            1098
+#define IDC_COMBO_URL                   1099
+#define ID_ABOUT                        32771
+#define ID_SETTINGS                     32773
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        135
+#define _APS_NEXT_COMMAND_VALUE         32774
+#define _APS_NEXT_CONTROL_VALUE         1100
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif

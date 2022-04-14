@@ -1,0 +1,75 @@
+
+@@CIPCMediaSampleRecord::GetFlags@const
+\Returns MediaSampleFlags (DWORD)
+
+@@CIPCMediaSampleRecord::GetIsPreroll@const
+Determines if this sample is a preroll sample. A preroll
+\sample should not be displayed.
+
+@@CIPCMediaSampleRecord::GetIsDiscontinuty@const
+Determines if this sample represents a break in the data
+stream.
+
+@@CIPCMediaSampleRecord::GetIsSyncPoint@const
+Determines if the beginning of this sample is a
+sychronization point
+
+@@CIPCMediaSampleRecord::GetFormat
+Pointer to the format block. The structure type is specified
+by GetFormatType().
+
+@@CIPCMediaSampleRecord::GetFormatSize
+Size of the format block, in bytes.
+
+@@CIPCMediaSampleRecord::GetFormatType
+Retrieves the formattype as described in <EXTLINK AM_MEDIA_TYPE>MediaType</EXTLINK>.
+
+@@CIPCMediaSampleRecord::GetComment
+Retrieves an optional comment.
+
+@@CIPCMediaSampleRecord::GetActualLength@const
+Retrives the actual data length.
+
+@@CIPCMediaSampleRecord::GetAllocatorProperties@long&@long&@long&@long&
+
+@@CIPCMediaSampleRecord::GetEndTime
+Retrieves the end time of the Sample.
+
+@@CIPCMediaSampleRecord::GetFixedSizeSamples@const
+Determines whethter the samples have a fixed size.
+
+@@CIPCMediaSampleRecord::GetMajorType
+Retrieves the major <EXTLINK AM_MEDIA_TYPE>MediaType</EXTLINK>.
+
+@@CIPCMediaSampleRecord::GetPackageNumber@const
+Retrieves the package number. The number 0 must contains a
+\long header.
+
+@@CIPCMediaSampleRecord::GetRefEndTime
+Retrieves the end reference time of the sample.
+
+@@CIPCMediaSampleRecord::GetRefStartTime
+Retrieves the start reference time of the sample.
+
+@@CIPCMediaSampleRecord::GetSampleSize
+Retrieves the sample size. If the size is not fixed, the
+actual size may be smaller.
+
+@@CIPCMediaSampleRecord::GetStartTime
+Retrieves the Start time of the media sample.
+
+@@CIPCMediaSampleRecord::GetSubType
+Retrieves the subtype of the <EXTLINK AM_MEDIA_TYPE>MediaType</EXTLINK>
+
+@@CIPCMediaSampleRecord::GetTemporalCompression@const
+If TRUE, samples are compressed using temporal (interframe)
+compression. A value of TRUE indicates that not all frames
+are key frames. This field is informational only.
+
+@@CIPCMediaSampleRecord::SetComment@CString&
+Sets the Comment for the media sample.
+
+@@CIPCMediaSampleRecord::MediaSampleFlags
+Bit structure MediaSampleFlags
+
+@@Zugriffsrechte

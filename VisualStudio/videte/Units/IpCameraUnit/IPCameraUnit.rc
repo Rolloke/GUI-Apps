@@ -1,0 +1,358 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\IPCameraUnit.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\IPCameraUnit.ico"
+IDR_INITIALISED         ICON                    "res\\Initialised.ico"
+IDR_MOTION_DETECTED     ICON                    "res\\Motion.ico"
+IDC_BTN_START           ICON                    "res\\START.ico"
+IDC_BTN_STOP            ICON                    "res\\stop.ico"
+IDC_BTN_PAUSE           ICON                    "res\\pause.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_IPCAMERAUNIT_DIALOG DIALOGEX 0, 0, 322, 286
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "IPCameraUnit"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "URL: ",IDC_TXT_URL,5,8,46,8
+    EDITTEXT        IDC_EDT_URL,54,6,70,12,ES_AUTOHSCROLL
+    LTEXT           "Port: ",IDC_TXT_PORT,130,8,21,8
+    EDITTEXT        IDC_EDT_PORT,156,6,39,12,ES_AUTOHSCROLL
+    CONTROL         "POST",IDC_RD_SET,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    205,7,33,10
+    CONTROL         "GET",IDC_RD_GET,"Button",BS_AUTORADIOBUTTON,245,7,29,10
+    PUSHBUTTON      "Senden",IDC_BTN_SEND,280,6,35,12,WS_GROUP
+    LTEXT           "Anfrage:",IDC_TXT_REQUEST,5,26,46,8
+    EDITTEXT        IDC_EDT_REQUEST,54,24,261,12,ES_AUTOHSCROLL
+    LTEXT           "Benutzer:",IDC_TXT_USER_NAME,5,44,46,8
+    EDITTEXT        IDC_EDT_USER_NAME,54,42,69,12,ES_AUTOHSCROLL
+    LTEXT           "Passwort:",IDC_TXT_PASSWORD,135,44,40,8
+    EDITTEXT        IDC_EDT_PASSWORD,185,42,51,12,ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    LTEXT           "Statistik:",IDC_TXT_PERFORMANCE,5,74,46,8
+    LTEXT           "",IDC_TXT_FPS,54,74,183,8
+    LTEXT           "Proxy:",IDC_TXT_PROXY,5,62,46,8
+    EDITTEXT        IDC_EDT_PROXY,54,60,70,12,ES_AUTOHSCROLL
+    LTEXT           "Prox bypass:",IDC_TXT_PROXY_BYPASS,135,62,43,8
+    EDITTEXT        IDC_EDT_PROXY_BYPASS,185,60,52,12,ES_AUTOHSCROLL
+    CONTROL         "Text",IDC_RD_TEXT,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP,5,87,46,10
+    CONTROL         "Kameras",IDC_RD_LIST,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,5,97,46,10
+    CONTROL         "Melder",IDC_RD_INPUT_LIST,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,5,107,46,10
+    CONTROL         "Relais",IDC_RD_RELAIS_LIST,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,5,117,46,10
+    CONTROL         "Bild",IDC_RD_PREVIEW,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,5,127,46,10
+    COMBOBOX        IDC_COMBO_RESOLUTION,5,151,46,113,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_COMPRESSION_TYPE,5,137,46,127,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    EDITTEXT        IDC_EDT_SET_FPS,5,165,46,12,ES_AUTOHSCROLL
+    CTEXT           "SecID:",IDC_TXT_GROUPID,5,179,46,8
+    EDITTEXT        IDC_EDT_SEC_ID,5,187,46,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "Erstellen",IDC_BTN_START_THREAD,5,200,46,10
+    PUSHBUTTON      "Ändern",IDC_BTN_SET_PARAM,5,210,46,10
+    PUSHBUTTON      "Löschen",IDC_BTN_STOP_THREAD,5,220,46,10
+    CONTROL         "ROT registrieren",IDC_CK_REGISTER_GRAPH,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | BS_MULTILINE | 
+                    WS_TABSTOP,5,231,46,20
+    PUSHBUTTON      "Start",IDC_BTN_START,5,252,14,12,BS_ICON
+    PUSHBUTTON      "Pause",IDC_BTN_PAUSE,20,252,14,12,BS_ICON
+    PUSHBUTTON      "Stop",IDC_BTN_STOP,35,252,14,12,BS_ICON
+    EDITTEXT        IDC_EDT_ANSWER,54,87,261,177,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_THREAD_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_SORTASCENDING | LVS_ALIGNLEFT | 
+                    WS_BORDER | WS_TABSTOP,54,87,261,177
+    CONTROL         "",IDC_IN_OUT_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_SORTASCENDING | LVS_ALIGNLEFT | 
+                    WS_BORDER | WS_TABSTOP,54,87,261,177
+    CONTROL         "",IDC_STAT_PICTURE,"Static",SS_BLACKRECT | NOT 
+                    WS_VISIBLE,54,87,261,177
+    PUSHBUTTON      "Kamera einstellen...",IDC_BTN_CAMERA_SETTINGS,5,270,73,
+                    12
+    CONTROL         "Debuginfo loggen",IDC_CK_LOGS_TO_EDT,"Button",
+                    BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,118,270,78,
+                    13
+    DEFPUSHBUTTON   "OK",IDOK,265,270,50,12
+    LTEXT           "Größe:",IDC_TXT_PICTURE_SIZE,240,74,75,8
+END
+
+IDD_CAMERA_PARAMETER DIALOGEX 0, 0, 320, 130
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Kamera Parameter"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Typ:",IDC_TXT_TYPE,5,8,43,8
+    COMBOBOX        IDC_COMBO_TYPE,54,6,90,100,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Name:",IDC_TXT_NAME,150,8,47,8
+    LTEXT           "URL / Port: ",IDC_TXT_LOCATION,5,25,38,8
+    EDITTEXT        IDC_EDT_PORT,224,23,30,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Test",IDC_BTN_SEND,260,23,55,12,WS_GROUP
+    LTEXT           "Gerätename:",IDC_TXT_DEVICE,5,44,43,8,NOT WS_VISIBLE
+    PUSHBUTTON      "Ändern",IDC_BTN_SET_NAME,54,42,90,12,WS_DISABLED | 
+                    WS_GROUP
+    LTEXT           "Kamera:",IDC_TXT_CAMERA,150,44,47,8
+    COMBOBOX        IDC_COMBO_CAPTURE_DEVICES,204,42,111,100,CBS_DROPDOWN | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_CK_CAMERA1,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,204,44,9,8
+    CONTROL         "",IDC_CK_CAMERA2,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,214,44,9,8
+    CONTROL         "",IDC_CK_CAMERA3,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,224,44,9,8
+    CONTROL         "",IDC_CK_CAMERA4,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,234,44,9,8
+    CONTROL         "",IDC_CK_CAMERA5,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,244,44,9,8
+    CONTROL         "",IDC_CK_CAMERA6,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,254,44,9,8
+    CONTROL         "",IDC_CK_CAMERA7,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,264,44,9,8
+    CONTROL         "",IDC_CK_CAMERA8,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,274,44,9,8
+    LTEXT           "Auflösung:",IDC_TXT_RESOLUTION,5,62,43,8
+    COMBOBOX        IDC_COMBO_RESOLUTIONS,54,60,90,100,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Melder:",IDC_TXT_INPUT,150,62,47,8
+    CONTROL         "",IDC_CK_INPUT1,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,204,62,9,8
+    CONTROL         "",IDC_CK_INPUT2,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,214,62,9,8
+    CONTROL         "",IDC_CK_INPUT3,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,224,62,9,8
+    CONTROL         "",IDC_CK_INPUT4,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,234,62,9,8
+    CONTROL         "",IDC_CK_INPUT5,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,244,62,9,8
+    CONTROL         "",IDC_CK_INPUT6,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,254,62,9,8
+    CONTROL         "",IDC_CK_INPUT7,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,264,62,9,8
+    CONTROL         "",IDC_CK_INPUT8,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,274,62,9,8
+    LTEXT           "Format:",IDC_TXT_COMPRESSION,5,80,41,8
+    COMBOBOX        IDC_COMBO_COMPRESSION,54,78,90,100,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Relais:",IDC_TXT_RELAIS,150,80,47,8
+    CONTROL         "",IDC_CK_OUTPUT1,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,204,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT2,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,214,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT3,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,224,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT4,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,234,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT5,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,244,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT6,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,254,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT7,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,264,80,9,8
+    CONTROL         "",IDC_CK_OUTPUT8,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,274,80,9,8
+    LTEXT           "Drehung °:",IDC_TXT_ROTATION,5,98,43,8
+    COMBOBOX        IDC_COMBO_ROTATION,54,96,90,100,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Bilder/s:",IDC_TXT_FRAMERATE,150,98,47,8
+    LTEXT           "",IDC_TXT_FRAMERATES,204,98,111,8
+    PUSHBUTTON      "Abbrechen",IDCANCEL,197,114,50,12
+    DEFPUSHBUTTON   "OK",IDOK,265,114,50,12
+    EDITTEXT        IDC_EDT_NAME,204,6,111,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_URL,54,23,166,97,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_IPCAMERAUNIT_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 320
+        VERTGUIDE, 5
+        VERTGUIDE, 51
+        VERTGUIDE, 54
+        VERTGUIDE, 315
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 78
+        HORZGUIDE, 87
+        HORZGUIDE, 264
+        HORZGUIDE, 276
+    END
+
+    IDD_CAMERA_PARAMETER, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 48
+        VERTGUIDE, 54
+        VERTGUIDE, 144
+        VERTGUIDE, 150
+        VERTGUIDE, 197
+        VERTGUIDE, 204
+        VERTGUIDE, 315
+        HORZGUIDE, 12
+        HORZGUIDE, 29
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 84
+        HORZGUIDE, 102
+        HORZGUIDE, 120
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "IPCAMUNIT"
+    BEGIN
+        MENUITEM "Info...",                     ID_ABOUT
+        MENUITEM "Einstellungen...",            ID_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "Beenden",                     ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_SOCKETS_INIT_FAILED "Fehler beim Initialisieren der Windows-Sockets."
+    IDS_RTE_NO_VIDEO        "Kamera %d ausgefallen"
+    IDS_RTE_VIDEO           "Kamera %d liefert wieder ein Signal"
+    IDS_ID                  "ID"
+    IDS_LOCATION            "Ort/Adresse"
+    IDS_STATE               "Zustand"
+    IDS_TYPE                "Typ"
+    IDS_TYPE_AXIS           "Axis Server"
+    IDS_TYPE_CAPTURE        "Video Capture Device"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ABOUT                "Inf&o über IPCameraUnit..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TYPE_PANASONIC      "Panasonic Network Camera"
+    IDS_NAME                "Name"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#include "res\IPCameraUnit.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

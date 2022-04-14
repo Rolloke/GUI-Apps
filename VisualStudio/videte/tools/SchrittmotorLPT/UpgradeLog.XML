@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SchrittmotorLPT">
+</Property><Property Name="Solution File" Value="P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.sln">
+</Property><Property Name="User Options File" Value="P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.suo">
+</Property><Property Name="Date" Value="Donnerstag, 13. Juni 2013">
+</Property><Property Name="Time" Value="13:42">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="SchrittmotorLPT.sln" Description="File successfully backed up as P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="SchrittmotorLPT.suo" Description="File successfully backed up as P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.suo.old">
+</Event><Event ErrorLevel="0" Project="SchrittmotorLPT" Source="SchrittmotorLPT.vcproj" Description="Converting project file 'P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.vcproj'.">
+</Event><Event ErrorLevel="1" Project="SchrittmotorLPT" Source="SchrittmotorLPT.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="SchrittmotorLPT" Source="SchrittmotorLPT.vcproj" Description="Done converting to new project file 'P:\PROJECT\tools\SchrittmotorLPT\SchrittmotorLPT.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="SchrittmotorLPT" Source="SchrittmotorLPT.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SchrittmotorLPT.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SchrittmotorLPT.sln" Description="Converted">
+</Event></UpgradeLog>

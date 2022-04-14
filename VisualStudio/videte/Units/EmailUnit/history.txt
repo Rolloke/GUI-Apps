@@ -1,0 +1,39 @@
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+21.01.05 UF - RAS API GetProcAdress auf UNICODE umgestellt.
+13.01.05 RKE Bugfix 684: Liste wird jetzt auf leere Emailadresse ueberprueft. 
+05.11.04 RKE	- Umstellung auf Unicode vollendet und getestet. Sprachabhaengige Parameter werden ueber
+		  WM_LANGUAGE_CHANGED an die Unit weitergegeben.
+12.03.04 GF	- Umstellung auf Unicode und VS_71, keine Compiler-Fehler mehr
+27.02.04 GF	- Umstellung auf Unicode und VS_71, noch Fehler
+21.01.03 GF	- Bugfix 309: Dateinamen der Bilder mit Extension ".JPG"
+14.11.02 GF	- Anpassung VS_70
+			- Bugfix in CPOP::GetDataFromReg()
+05.06.02 UF - Bugfix in Verbindung mit Lotus Notes Server
+06.11.01 RM - Der Text der Email wird nicht mehr als Base64 kodiert, da bei kurzen Texten
+			  eine Mindestgrösse nicht erreicht wird und die Lücke aufgefüllt wird.
+			  Dadurch wurden irgendwelche Zeichen an die Email gehängt.
+			  Die Änderung fand in CEmailUnitDlg::OnNewEmail(WPARAM wParam, LPARAM lParam)
+			  statt bei m_pEMail->AddContentToMail((BYTE*)((const char*)sMessage),sMessage.GetLength(),"text","plain","quoted-printable");
+			  Base64 wurde durch quoted-printable ersetzt.
+			  Passwort wird nicht mehr ausgetraced.
+
+04.05.00 RM - Erster Release
+
+24.05.00 RM - Als Gegenstation können in der Systemverwaltung nun mehrere EMail Empfänger
+              eingetragen werden pro Anrufprozeß. Diese müssen durch ein ; voneinander
+              getrennt werden. BSP: rm@wk-online.com;tk@wk-online.com
+07.06.00 RM,UF - englische Version fertig.
+
+13.10.00 RM - Authentifizierung mittels POP3 hinzugefügt.
+08.01.01 ML - EMailUnit Icon erscheint nun im SystemTray
+17.01.01 ML - Bugfix: Das Hauptfenster hatte als Titel nicht den Applikationsnamen, so daß
+			  der Launcher das Fenster nicht finden und so damit auch nicht auf
+			  sanfte Art beenden konnte. Dadurch blieb auch nach dem beenden durch den
+			  Launcher, das Icon im Systemtray.
+			- Bugfix: Das SystemTray-menü klappt nun korrekt zu
+			- Bugfix: Die WM_SELFCHECK Message wurde nicht beantwortet.
+16.01.01 RM - Bugfix: Dial Up Netzwerk wird nun beendet.
+			- Bugfix: Netzwerk Statusanzeige über farbliche Änderung des Icons funktioniert
+			  wieder

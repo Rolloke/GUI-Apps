@@ -1,0 +1,25 @@
+//
+// SECANALYZER.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+#include "WK_Version.h"
+
+WK_VERSION(25, 1, 11, 34, "25/01/99,11:34\0", // @AUTO_UPDATE
+		   "Analyzer.exe\0",	// exe name
+		   "Analyzer\0",	// product name
+		   "Analyzer\0",	// product description
+		   "1.25\0",		// general product version
+		   "1.25\0"	// real version
+		   )
+

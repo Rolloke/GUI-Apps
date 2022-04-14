@@ -1,0 +1,7 @@
+DelRegDbEnu.rc@STRING@IDR_MAINFRAME@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@DelRegDb@TODO! DelRegDb@0@
+DelRegDbEnu.rc@STRING@IDP_REG@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@Do you want to delete all settings?\nWarning, all image archives and all stored data will be deleted too!@TODO! Do you want to delete all settings?\nWarning, all image archives and all stored data will be deleted too!@0@
+DelRegDbEnu.rc@STRING@IDP_DATABASE@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@Do you want to delete all archives with data and images?@TODO! Do you want to delete all archives with data and images?@0@
+DelRegDbEnu.rc@STRING@IDS_TITLE@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@Deinstallation@TODO! Deinstallation@0@
+DelRegDbEnu.rc@STRING@IDP_ADMIN@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@You need administrator priviliedges to deinstall this software.\nThe deinstallation will be aborted!@TODO! You need administrator priviliedges to deinstall this software.\nThe deinstallation will be aborted!@0@
+DelRegDbEnu.rc@STRING@IDP_ASK_UNINSTALL@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@Do you really want to deinstall '%s'?@TODO! Do you really want to deinstall '%s'?@0@
+DelRegDbEnu.rc@STRING@IDP_STILL_RUNNING@28,06,2002,14,23,31@28,06,2002,14,23,31@28,06,2002,14,23,31@'%s' is still running and cannot be deinstalled!@TODO! '%s' is still running and cannot be deinstalled!@0@

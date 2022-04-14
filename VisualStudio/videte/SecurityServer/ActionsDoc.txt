@@ -1,0 +1,18 @@
+/////////////////////////////////////////////////////////////////////////////
+// FILE:		$Workfile: inputlist.cpp $
+// ARCHIVE:		$Archive: /Project/Security 3.xx/inputlist.cpp $
+// CHECKIN:		$Date: 29.05.96 12:28 $
+// VERSION:		$Revision: 42 $
+// LAST CHANGE:	$Modtime: 29.05.96 12:25 $
+// BY AUTHOR:	$Author: Hedu $
+// $Nokeywords:$
+
+
+///////////////////////////////////////////////////////////////////////////
+// Offene Fragen:
+// Wie werden IDs verwendet, ProcessID, Input/Output IDs ?
+// Wer ist nicht von 0.. ?
+// Immer abhaegig vom Systemstart ?
+// Wie werden 'Referenzen' auf irgendwas abgespeichert ?
+
+

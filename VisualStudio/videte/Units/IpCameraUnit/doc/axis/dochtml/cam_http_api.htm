@@ -1,0 +1,3915 @@
+<html>
+<head>
+	<title>Axis Communications - Network Camera Developer pages</title>
+
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+	<meta name="ProgId" content="FrontPage.Editor.Document">
+	<meta name="KeyWords" content="network camera, network cameras, IP, IP camera, IP cameras, netcam, web camera, webcamera, web cameras, webcam, webcams, video server, print server, video servers, print servers, network, server, video, print, document, document server, scan, wireless, developer, linux, asic, chip, camera server, bluetooth, 802.11, communications, thinserver, lan, video solutions, video products, surveillance, document server, oem, remote camera, download, remote monitoring, web promotion">	
+	<meta name="Description" content="Axis specializes in professional network video and printing solutions">
+	
+	<link rel="stylesheet" type="text/css" href="../../../core/css/axis.css">
+
+	<script language="javascript" type="text/javascript" src="../../../core/javascripts/axis.js"></script>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#FFFFFF">
+<br>
+<center>
+<div class="axisLight_BgTop">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/top.htm" TAG="BODY" startspan -->
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+    <td height="34" width="96"><a href="../../../index.htm"><img src="../../../core/graphics/axis_logo.gif" border="0" alt="www.axis.com" width="96" height="34"></a></td>
+    <td height="34" width="10" class="axisGraphics"><img src="../../../core/graphics/blank.gif" border="0" alt width="10" height="1"></td>
+    <td valign="middle" align="right" height="34" width="100%">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_home.gif" alt="Home" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../index.htm">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../products/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_products.gif" alt="Products" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../products/index.htm">Products</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../solutions/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_video.gif" alt="Video solutions" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../solutions/index.htm" target="_top">Solutions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../index.htm" target="_top"><img border="0" src="../../../core/graphics/button_support.gif" alt="Support" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../index.htm" target="_top">Support</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../sales/index.php" target="_top"><img border="0" src="../../../core/graphics/button_wheretobuy.gif" alt="Where to buy" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" href="../../../sales/index.php" target="_top">Where to buy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td valign="middle" align="right" width="18"><a class="country" href="../../../corporate/index.htm" target="_top"><img border="0" src="../../../core/graphics/button_axis.gif" alt="Corporate" align="absmiddle" width="18" height="18"></a></td>
+          <td valign="middle" align="left">&nbsp;<a class="country" target="_top" href="../../../corporate/index.htm">Corporate</a>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!--webbot bot="Include" i-checksum="64338" endspan -->
+</div></div>
+<div class="axisLight_BgMid">
+<table cellspacing="0" cellpadding="0" border="0" width="750">	
+	<tr>
+		<td class="axisLight_TwoColLeft" valign="top" width="147">
+			<!-- Content left column begin -->
+<ul>
+					<li class="arrowsdown"><a href="../../index.htm">Support</a></li>
+                      <li class="arrowsdown"><b><a href="../index.htm">Network Video</a></b></li>
+                      <li class="arrowsdown"><a href="index.htm">Developer pages</a></li>
+                      <li class="bullet"><a href="cam_http_api_index.htm">AXIS
+                        VAPIX 
+                      API</a></li>
+                      <li class="dash"><b>HTTP API ver.1</b></li>
+                      <li class="dash"><a href="cam_http_api_2.htm">HTTP API</a></li>
+                      <li class="dash"><b><a href="cam_http_api_diffdoc.htm">
+                      Difference v1/v2</a></b></li>
+                      <li class="dash"><b><a href="cam_rtsp_api.htm">RTSP API</a></b></li>
+                      <li class="dash"><b><a href="recording_api.htm">Recording
+                        API</a></b></li>
+                      <li class="dash"><b><a href="cam_param_2.htm">Parameters</a></b></li>
+                    </ul>
+                     <div class="dotline">             
+                    <ul>    
+                          <li class="nobullet">Other links</li>
+                          <li class="dash">
+                          <a href="../../../partner/adp_intro.htm">Partner program (ADP)</a>
+                          </li>
+					</ul>
+                        </div>
+  					
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/e-news_video.htm" TAG="BODY" startspan -->
+<form action="../../../reg/nlinsert.php" method="post" onsubmit="this.oldurl.value=location.href;">
+              			<div class="greybox">
+							<span class="smallheadline">Subscribe to e-news:</span><br>
+			<a href="#" onclick="axisPopUp('http://www.axis.com/reg/info/infosmall.php?id=1','NetworkVideoNews',360,200,false); return false;">Network Video News</a>			
+			<br><br>
+			Enter your E-mail:
+			<br>
+			<input type="text" name="email" size="15" maxlength="100">
+			<input type="submit" value="OK" name="enews"> 
+			<br> 
+			<br> 
+            <a href="../../../reg/index.php">Other e-newsletter options</a>
+            <input type="hidden" value=1 name="newsmail">
+			<input type="hidden" name="success" value="/reg/nlinsert.php">
+			<input type="hidden" name="oldurl" value="/">
+			<input type="hidden" name="failure" value="/reg/fel.htm">
+</div>
+
+</form>
+<!--webbot bot="Include" i-checksum="13382" endspan -->
+            </div>
+              
+              		<div class="dotline">
+              			<!--webbot bot="Include" U-Include="../../../core/includes/search.htm" TAG="BODY" startspan -->
+
+<form name="gs" method="GET" action="http://search.axis.com/search" style="margin:0; padding:0;">
+	<input type="hidden" name="restrict" value=""> 
+    <input type="hidden" name="ie" value="">
+    <input type="hidden" name="site" value="axis_com">
+    <input type="hidden" name="output" value="xml_no_dtd">
+    <input type="hidden" name="client" value="axis_com">
+    <input type="hidden" name="lr" value="">
+    <input type="hidden" name="proxystylesheet" value="axis_com">
+    <input type="hidden" name="oe" value="">
+       
+<table border="0" cellpadding="0" width="100%">
+	<tr>
+		<td valign="top">
+			<p class="midtext"><b><font color="#666666">Search</font></b><br>
+			<input type="text" name="q" size="10" style="width:100px;">
+		</td>
+		<td valign="middle"><input type="image" name="btnG" border="0" src="../../../core/graphics/find_small.gif" align="middle" width="30" height="30"></td>	
+	</tr>
+</table>
+</form>
+                  
+<!--webbot bot="Include" i-checksum="33403" endspan -->
+            </div>
+              		
+                    <!-- Content left column end -->
+		
+		</td>
+		<td valign="top" width="561">
+		
+					<!-- Content right column begin -->
+                    <table border="0" cellpadding="15" cellspacing="0" width="100%">
+                      <tr>
+                        <td width="100%">
+            <p class="title">Axis Video API, HTTP - Interface Specification</p>
+
+            <p>&nbsp;Revision: 1.<span lang="sv">14</span>&nbsp;<br>
+            &nbsp;Date: 2004-<span lang="sv">April</span>-<span lang="sv">22</span></p>
+            <hr>
+
+<H2>TABLE OF CONTENTS</H2>
+<UL class=TOC>
+  <LI><A href="#doc_history">DOCUMENT HISTORY</A> 
+  <LI><A href="#overview">1 OVERVIEW</A> 
+  <UL>
+    <LI><A href="#overview_versions">1.1 Product and firmware versions</A> </LI></UL>
+  <LI><A href="#references">2  REFERENCES</A> 
+  <LI><A href="#definitions">3 DEFINITIONS</A> 
+  <UL>
+    <LI><A href="#definitions_general_notations">3.1 General notations</A> 
+    <UL>
+      <LI><A href="#definitions_general_notations_abbreviations">3.1.1 General abbreviations</A> 
+      <LI><A href="#definitions_general_notations_style_convension">3.1.2 Style convention</A> 
+      <LI><A href="#definitions_general_notations_naming_conv_cgi">3.1.3 General CGI URL syntax and parameters</A> 
+      <LI><A href="#definitions_general_notations_parameter_value">3.1.4 Parameter value convention</A> </LI></UL></LI></UL>
+  <LI><A href="#sw_requirements">4 INTERFACE SPECIFICATION</A> 
+  <UL>
+    <LI><A href="#sw_requirements_naming_conv">4.1 Naming conventions and URL syntax</A> 
+    <UL>
+      <LI><A href="#sw_requirements_naming_conv_obsolete">4.1.1 Obsolete CGI parameters</A> </LI></UL>
+    <LI><A href="#sw_requirements_responses">4.2 Server responses</A> 
+    <UL>
+      <LI><A href="#sw_requirements_responses_status">4.2.1 HTTP status codes</A> </LI></UL></LI></UL>
+  <LI><A href="#api_blocks">5 API GROUPS</A> 
+  <UL>
+    <LI><A href="#api_blocks_general">5.1 General</A> 
+    <UL>
+      <LI><A href="#api_blocks_general_getparam">5.1.1 Get camera parameter values</A> 
+      <LI><A href="#api_blocks_general_parameter_response">5.1.2 Camera parameter values response</A> 
+      <LI><A href="#api_blocks_general_setparam">5.1.3 Set camera parameter values</A> 
+      <LI><A href="#api_blocks_general_factory_default">5.1.4 Factory default</A> 
+      <LI><A href="#api_blocks_general_restart_server">5.1.5 Restart server</A> 
+      <LI><A href="#api_blocks_general_server_report">5.1.6 Server report</A> 
+      <LI><A href="#api_blocks_general_system_logs">5.1.7 System logs</A> </LI></UL>
+    <LI><A href="#api_blocks_jpeg_mjpg">5.2 JPEG/MJPG</A> 
+    <UL>
+      <LI><A href="#sw_requirements_image_requests_jpeg">5.2.1 JPEG image request</A> 
+      <LI><A href="#api_blocks_jpeg_mjpg_jpeg_request">5.2.2 JPEG image (snapshot) CGI request</A> 
+      <LI><A href="#api_blocks_jpeg_mjpg_jpeg_response">5.2.3 JPEG image response</A> 
+      <LI><A href="#api_blocks_jpeg_mjpg_jpeg_buffer">5.2.4 JPEG buffer request</A> 
+      <LI><A href="#sw_requirements_image_requests_mjpg">5.2.5 MJPG video request</A> 
+      <LI><A href="#api_blocks_jpeg_mjpg_mjpg_request">5.2.6 MJPG video CGI request</A> 
+      <LI><A href="#api_blocks_jpeg_mjpg_mjpg_response">5.2.7 MJPG video response</A> </LI></UL>
+    <LI><A href="#api_blocks_mpeg2">5.3 MPEG-2</A> 
+    <UL>
+      <LI><A href="#api_blocks_mpeg2_video_request">5.3.1 MPEG-2 video request</A> 
+      <LI><A href="#api_blocks_mpeg2_video_response">5.3.2 MPEG-2 video response</A> 
+      <LI><A href="#api_blocks_mpeg2_buffer">5.3.3 MPEG-2 buffer request</A> </LI> 
+      <LI><A href="#api_blocks_mpeg2_multicast_request">5.3.4 MPEG-2 multicast info request</A></LI> 
+      <LI><A href="#api_blocks_mpeg2_multicast_response">5.3.5 MPEG-2 multicast info response</A></LI></UL>
+    <LI><A href="#api_blocks_ptz">5.4 PTZ</A> 
+    <UL>
+      <LI><A href="#api_blocks_ptz_control">5.4.1 PTZ control</A> </LI></UL>
+    <LI><A href="#api_blocks_audio">5.5 Audio</A> 
+    <UL>
+      <LI><A href="#api_blocks_audio_request">5.5.1 Multipart audio data request</A> 
+      <LI><A href="#api_blocks_audio_response">5.5.2 Multipart audio data response</A> 
+      <LI><A href="#api_blocks_audio_transmit">5.5.3 Multipart audio data transmit</A> 
+      <LI><A href="#api_blocks_audio_parameters">5.5.4 Get audio configuration parameters</A> </LI></UL>
+    <LI><A href="#api_blocks_motion_detection">5.6 Motion Detection</A> 
+    <UL>
+      <LI><A href="#api_blocks_motion_detection_setparam">5.6.1 Set motion detection parameters</A> 
+      <LI><A href="#api_blocks_motion_detection_getparam">5.6.2 Get motion detection parameters</A> 
+      <LI><A href="#api_blocks_motion_detection_level">5.6.3 Get motion detection level</A> </LI></UL>
+    <LI><A href="#api_blocks_recording">5.7 Recording</A> 
+    <UL>
+      <LI><A href="#api_blocks_recording_list">5.7.1 List recordings</A> 
+      <LI><A href="#api_blocks_recording_play">5.7.2 Play recordings</A> 
+      <LI><A href="#api_blocks_recording_video_response">5.7.3 Recorded JPG/MJPG response</A> 
+      <LI><A href="#api_blocks_recording_preserve">5.7.4 Preserve and release recordings</A> 
+      <LI><A href="#api_blocks_recording_control">5.7.5 Controlling recordings</A> </LI></UL>
+    <LI><A href="#api_blocks_io">5.8 I/O</A> 
+    <UL>
+      <LI><A href="#api_blocks_io_control">5.8.1 I/O control</A> 
+      <UL type=disc>
+        <LI><A href="#api_blocks_io_control_input">5.8.1.1 Input</A> 
+        <LI><A href="#api_blocks_io_control_output">5.8.1.2 Output</A> </LI></UL>
+      <LI><A href="#api_blocks_io_virtual">5.8.2 Virtual I/O control</A> 
+      <UL type=disc>
+        <LI><A href="#api_blocks_io_virtual_input">5.8.2.1 Input</A> </LI></UL></LI></UL>
+    <LI><A href="#api_blocks_serial_port">5.9 Serial port</A> 
+    <UL>
+      <LI><A href="#api_blocks_serial_port_control">5.9.1 Serial port control</A> 
+      <LI><A href="#api_blocks_serial_port_open">5.9.2 Open serial port</A> </LI></UL>
+    <LI><A href="#api_blocks_ppp">5.10 PPP</A> 
+    <UL>
+      <LI><A href="#api_blocks_ppp_close">5.10.1 Close PPP connection</A> 
+      <LI><A href="#api_blocks_ppp_reset">5.10.2 Reset PPP connection maxtimer</A> </LI></UL>
+    <LI><A href="#api_blocks_event">5.11 Event</A> 
+    <UL>
+      <LI><A href="#api_blocks_event_admin">5.11.1 Event administration</A> 
+      <UL type=disc>
+        <LI><A href="#api_blocks_event_admin_actions">5.11.1.1 Actions</A> 
+        <LI><A href="#api_blocks_event_admin_server_response">5.11.1.2 Server responses</A> </LI></UL></LI></UL>
+    <LI><A href="#api_blocks_firewall">5.12 Firewall</A> 
+    <UL>
+      <LI><A href="#api_blocks_firewall_admin">5.12.1 Firewall administration</A> 
+      <UL type=disc>
+        <LI><A href="#api_blocks_firewall_admin_actions">5.12.1.1 Actions</A> 
+        <LI><A href="#api_blocks_firewall_admin_parameters">5.12.1.2 Parameters</A> 
+        <LI><A href="#api_blocks_firewall_admin_options">5.12.1.3 Options</A> 
+        <LI><A href="#api_blocks_firewall_admin_server_response">5.12.1.4 Server responses</A> </LI></UL></LI></UL></LI>
+    </UL></LI></UL>
+                          <p>&nbsp;</td>
+                      </tr>
+                    </table>
+<HR>
+
+                    <!-- ***************************************************************
+
+// -->
+<H2><A name=doc_history>DOCUMENT HISTORY</A></H2>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="8%"><B>Version</B></TD>
+    <TD width="36%"><B>Date</B></TD>
+    <TD><B>Comment</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.00</TD>
+    <TD width="36%">2000-nov-01</TD>
+    <TD>Initial version</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.01</TD>
+    <TD width="36%">2000-nov-13</TD>
+    <TD>Added info about dataout and altered description of wait and timeout 
+      in "serial port control".</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.02</TD>
+    <TD width="36%">2000-nov-28</TD>
+    <TD>Added entry for controlling image buffers.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.03</TD>
+    <TD width="36%">2000-nov-30</TD>
+    <TD>Added entries for closing PPP connection and resetting PPP connection 
+      maxtimer.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.04</TD>
+    <TD width="36%">2000-dec-11</TD>
+    <TD>Added examples for setting motion detection parameters.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.05</TD>
+    <TD width="36%">2001-jan-11</TD>
+    <TD>Corrected multipart boundary examples.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.06</TD>
+    <TD width="36%">2001-jan-16</TD>
+    <TD>Removed check of output on IO-ports (until it is supported).</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.07</TD>
+    <TD width="36%">2001-sep-07</TD>
+    <TD>Added Audio support.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.08</TD>
+    <TD width="36%">2001-nov-22</TD>
+    <TD>Changed audio MIME type and audio parameters.</TD></TR>
+  <TR>
+    <TD width="8%">1.09</TD>
+    <TD width="36%">2002-apr-15</TD>
+    <TD>Added frame rate control.</TD></TR>
+  <TR vAlign=top>
+    <TD width="8%">1.10</TD>
+    <TD width="36%">2002-jul-04</TD>
+    <TD>Added MPEG-2, recording, event and firewall support. 
+      <P>Grouped the API requests into different 
+sections.</P></TD></TR>
+  <TR>
+    <TD width="8%">1.11</TD>
+    <TD width="36%">2003-may-07</TD>
+    <TD>Updated and corrected Recording interface.</TD></TR>
+  <tr>
+    <TD width="8%" valign="top">1.12</TD>
+    <TD width="36%" valign="top">2003-dec-04</TD>
+    <TD>Added MPEG-2 multicast info request and response.<br>
+      Removed delay parameter and added predelay and postdelay parameters to
+      JPEG buffer request.&nbsp;</TD>
+  </tr>
+  <tr>
+    <TD width="8%" valign="top">1.13</TD>
+    <TD width="36%" valign="top">2004-jan-22</TD>
+    <TD>Corrected description for JPEG buffer request, do=reset.</TD>
+  </tr>
+  <TR>
+    <TD width="8%" valign="top">1.14</TD>
+    <TD width="36%" valign="top">2004-apr-22</TD>
+    <TD>Added better description and an example for the info parameter to the
+      ptz.cgi.<br>
+      Corrected some response descriptions.</TD></TR>
+</TBODY></TABLE>
+<P>&nbsp;</P><!-- ***************************************************************
+
+// -->
+<H2><A name=overview>1 OVERVIEW</A></H2>
+<P>This document specifies the external HTTP based application programming 
+interface of the Axis camera and video servers.</P>
+            <P>The HTTP-based video interface provides the functionality for requesting single 
+and multi-part images, for controlling camera functions (PTZ, output relay etc.) and
+            for getting and setting internal parameter values. The image and CGI-requests are handled 
+by the built-in Web server in the camera and video server.</P>
+<P>&nbsp;</P><!-- =============================================================== -->
+<H3><A name=overview_versions>1.1 Product and firmware versions</A></H3>
+            <P>The support for this stated HTTP API is very dependent on the product and
+            firmware release. 
+Please refer to the Release Notes for the actual product for compliance 
+information.</P>
+<P>&nbsp;</P><!-- ***************************************************************
+
+// -->
+<H2><A name=references>2 REFERENCES</A></H2>
+<P><B>HTTP protocol</B> 
+<UL>
+  <LI><A href="http://www.w3.org/Protocols/HTTP/1.0/spec">Hypertext Transfer 
+  Protocol -- HTTP/1.0</A> </LI></UL>
+<P><B>External application programming interfaces (Client side)</B> 
+<UL>
+  <LI>Axis Video API, HTTP 
+  <LI>Axis Video Product specific API Notes<!--
+  <li>Axis Camera API, FTP (<i>TBD</i>)</li>
+  <li>Axis Camera API, Camera Parameters (<i>TBD</i>)</li>
+--></LI></UL><!--
+<p><b>Internal application programming interfaces (Server side)</b> 
+
+<ul>
+  <li>Axis Camera API, PHP (<i>TBD</i>)</li>
+  <li>Axis Camera API, C/C++ (<i>TBD</i>)</li>
+</ul>
+-->
+<P>&nbsp;</P><!-- ***************************************************************
+
+// -->
+<H2><A name=definitions>3 DEFINITIONS</A></H2>
+<P>This section contains information on general usage of this document.</P><!-- *********************************************************************** -->
+<H3><A name=definitions_general_notations>3.1 General notations</A></H3><!-- *********************************************************************** -->
+<H3><A name=definitions_general_notations_abbreviations>3.1.1 General 
+abbreviations</A></H3>
+<P>The following abbreviations are used throughout this document 
+<TABLE cellPadding=5>
+  <TBODY>
+  <TR vAlign=top>
+    <TD><B>CGI</B></TD>
+    <TD><I>Common Gateway Interface</I> - a standardized method of communication 
+      between a client (e.g., a web browser) and a server (e.g., a web 
+    server).</TD></TR>
+  <TR vAlign=top>
+    <TD><B>TBD</B></TD>
+    <TD><I>To be done/designed</I> - notifies the reader that the 
+      referenced section/subsection/entity is intended to be specified, but has 
+      not reached a level of maturity to be public at this time.</TD></TR>
+  <TR vAlign=top>
+    <TD><B>N/A</B></TD>
+    <TD><I>Not applicable</I> - a feature/parameter/value is of no use in 
+      a specific task.</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=definitions_general_notations_style_convension>3.1.2 Style 
+convention</A></H3>
+            <P>In URL syntax and in descriptions of CGI parameters, text in italic within 
+angle brackets denotes content that should be replaced with either a value or a 
+string. When replacing the text string, the angle brackets must also be 
+replaced. An example of this is the description of the name for the server, 
+denoted with <TT>&lt;<I>servername</I>&gt;</TT> in the URL syntax description 
+below, which is replaced with the string <TT>myserver</TT> in the URL syntax 
+example, also shown below.</P>
+            <P>URL syntax is written with the word "Syntax:" shown in bold face, followed 
+by a box with the referred syntax, as shown below. The name of the server is 
+written as <TT>&lt;<I>servername</I>&gt;</TT>. This is intended to be replaced 
+with the name of the actual server. This can either be a name, e.g., "thecam" or 
+"thecam.adomain.net" or the associated IP number for the server, e.g., 
+<TT>10.10.2.139</TT>.</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/jpg/image.jpg
+</PRE></TD></TR></TBODY></TABLE>
+            <P>A description of returned data is written with "Return:" in bold face, followed 
+by the returned data in a box. All data returned as HTTP formatted, i.e., 
+starting with the string <TT>HTTP</TT>, is line-separated with a Carriage Return 
+and Line Feed (CRLF) printed as <TT>\r\n</TT>.</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 &lt;<I>HTTP code</I>&gt; &lt;<I>HTTP text</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>URL syntax examples are written with "Example:" in bold face, followed by a 
+short description and a light grey box with the example.</P>
+<P><B>Example:</B> request default image 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/jpg/image.jpg
+</PRE></TD></TR></TBODY></TABLE>
+            <P>Examples of what can be returned by the server from a request is written with 
+"Example:" in bold face, followed by a short description and a light grey box 
+with an example of the returned data.</P>
+<P><B>Example:</B> returned data after a successful request 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 Ok\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=definitions_general_notations_naming_conv_cgi>3.1.3 General CGI URL 
+syntax and parameters</A></H3>
+<P>CGI URLs are written in lower-case. CGI parameters are written in lower-case 
+and as one word, with no underscores or other separators. When the CGI 
+request includes internal camera parameters, the internal parameters must be 
+written exactly as named in the camera or video server. The CGIs are 
+organized in function related directories under the <I>axis-cgi</I> directory. 
+The file extension of the CGI is required.</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/&lt;<I>subdir</I>&gt;[/&lt;<I>subdir</I>&gt;...]/&lt;<I>cgi</I>&gt;.&lt;<I>ext</I>&gt;
+[?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]]
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> setting PTZ parameters 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/com/ptz.cgi?camera=1&amp;move=home
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=definitions_general_notations_parameter_value>3.1.4 Parameter value 
+convention</A></H3>
+<P>In tables defining CGI parameters and supported parameter values, the default 
+value for optional parameters is system configured.</P>
+<P>&nbsp;</P><!-- ***************************************************************
+
+// -->
+<H2><A name=sw_requirements>4 INTERFACE SPECIFICATION</A></H2><!-- =============================================================== -->
+<H3><A name=sw_requirements_naming_conv>4.1 Naming conventions and URL 
+syntax</A></H3><!-- *********************************************************************** -->
+<H3><A name=sw_requirements_naming_conv_obsolete>4.1.1 Obsolete CGI 
+parameters</A></H3>
+            <P>Some CGI parameters and values in this specification are obsolete and are 
+provided for backward compatibility. These might not be supported in the 
+future.</P>
+<P>Obsolete parameters and values are stated in the request descriptions.</P>
+<P>&nbsp;</P><!-- =============================================================== -->
+<H3><A name=sw_requirements_responses>4.2 Server responses</A></H3><!-- *********************************************************************** -->
+<H3><A name=sw_requirements_responses_status>4.2.1 HTTP status codes</A></H3>
+<P>The built-in Web server uses the standard HTTP status codes.</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 &lt;<I>HTTP code</I>&gt; &lt;<I>HTTP text</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following HTTP code and meanings 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>HTTP code</B></TD>
+    <TD width="25%"><B>HTTP text</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">200</TD>
+    <TD width="25%">OK</TD>
+    <TD>The request has succeeded, but an application error can still occur, 
+      which will be returned as an application error code.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">204</TD>
+    <TD width="25%">No Content</TD>
+    <TD>The server has fulfilled the request, but there is no new information 
+      to send back.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">400</TD>
+    <TD width="25%">Bad Request</TD>
+    <TD>The request had bad syntax or was inherently impossible to be satisfied.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">401</TD>
+    <TD width="25%">Unauthorized</TD>
+    <TD>The request requires user authentication or the authorization has been 
+      refused.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">404</TD>
+    <TD width="25%">Not Found</TD>
+    <TD>The server has not found anything matching the request.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">409</TD>
+    <TD width="25%">Conflict</TD>
+    <TD>The request could not be completed due to a conflict with the current
+      state of the resource.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">500</TD>
+    <TD width="25%">Internal Error</TD>
+    <TD>The server encountered an unexpected condition that prevented it from
+      fulfilling the request.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">503</TD>
+    <TD width="25%">Service Unavailable</TD>
+    <TD>The server is unable to handle the request due to temporary overload.</TD></TR>
+  </TBODY>
+</TABLE>
+<P><B>Example:</B> request includes invalid file names. 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 404 Not Found\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** --><!-- *********************************************************************** -->
+<H2><A name=api_blocks>5 API GROUPS</A></H2><!-- *********************************************************************** --><!-- *********************************************************************** -->
+            <P>To make it easier for developers to get an idea of which API requests
+            are supported for different products, the requests have been grouped 
+together. Information about which groups are supported can be found in the 
+product-specific release notes document, available for download from the Axis web 
+site.</P>
+<H3><A name=api_blocks_general>5.1 General</A></H3>
+<P>The requests specified in the General section are supported by all video products.</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_general_getparam>5.1.1 Get camera parameter 
+values</A></H3>
+<P>Get a camera's parameter values.</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Method: </B>GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/getparam.cgi?&lt;<I>parameter</I>&gt;[&amp;&lt;<I>parameter</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;<I>string</I>&gt; <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD width="25%">&lt;<I>group</I>&gt;[.&lt;<I>name</I>&gt;]</TD>
+    <TD>
+      Returns the value of the camera parameter named 
+      &lt;<I>group</I>&gt;.&lt;<I>name</I>&gt; as described in <A href="#sw_requirements_responses_control">5.1.2</A>. 
+      If &lt;<I>name</I>&gt; is omitted, all the parameters of the 
+      &lt;<I>group</I>&gt; are returned<P>The camera parameters must be entered exactly as named in the 
+      camera or the video server.</P></TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> The supported parameters are product/release-dependent.</P>
+<P><B>Example:</B> Get the IP address 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/getparam.cgi?Network.IPAddress
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Get all of the network parameters 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/getparam.cgi?Network
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_general_parameter_response>5.1.2 Camera parameter values 
+response</A></H3>
+<P>When querying parameter values, the current parameter values are 
+returned.</P>
+<P>Successful control requests returns parameter pairs, as follows.</P>
+<P><B>Return:</B> &nbsp; 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+&lt;<I>parameter pair</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where &lt;<I>parameter pair</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;\n
+[ &lt;<I>parameter pair</I>&gt; ]
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> PTZ position query response 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+pan=-50\n
+tilt=0\n
+zoom=500\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>If the CGI request includes an invalid parameter value, the server returns an 
+error message.</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+Error: &lt;<I>error text (or code)</I>&gt;\n
+&lt;<I>description</I>&gt;\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_general_setparam>5.1.3 Set camera parameter 
+values</A></H3>
+<P>Set a camera's parameter values.</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Method: </B>GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/setparam.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;
+[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;string&gt;=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>group.name</I>&gt; = &lt;value&gt;</TD>
+    <TD>Assigns &lt;<I>value</I>&gt; to the parameter 
+      &lt;<I>group.name</I>&gt;<BR>&nbsp;<BR>The &lt;<I>value</I>&gt; must be 
+      URL-encoded when it contains non-alphanumeric characters.<BR>&nbsp;<BR>The 
+      camera parameters must be entered exactly as named in the camera 
+      or the video server. </TD>
+  <TR>
+    <TD width="25%" valign="top">nosync=&lt;string&gt; <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD width="25%" valign="top">yes</TD>
+    <TD>Specifies that there should be no sync (write) of the corresponding 
+      configuration file to flash. If parameter is omitted, a sync will 
+  occur.</TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Set default image resolution to 320x240 pixels 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/setparam.cgi?Image.Resolution=320x240
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Set the bandwidth limitation to 500, without writing the 
+corresponding configuration file to flash 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/setparam.cgi?Network.Bandwidth=500&amp;nosync=yes
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_general_factory_default>5.1.4 Factory default</A></H3>
+<P>Reload factory default</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/factorydefault.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_general_restart_server>5.1.5 Restart server</A></H3>
+<P>Restart server</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> &nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/restart.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_general_server_report>5.1.6 Server report</A></H3>
+            <P>This CGI request generates and returns a server report. This report is useful 
+as an input when requesting support. The report 
+includes product information, parameter settings and system logs.</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/serverreport.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_general_system_logs>5.1.7 System logs</A></H3>
+<P>Get system log information</P>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P><B>Note: </B>The response is product/release-dependent.</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> &nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/systemlog.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+&lt;<I>system log information</I>&gt;
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg>5.2 JPEG/MJPG</A></H3>
+<P>The requests specified in the JPEG/MJPG section are supported by those video products that
+use JPEG/MJPG encoding.</P>
+<H3><A name=sw_requirements_image_requests_jpeg>5.2.1 JPEG image 
+request</A></H3>
+<P>Request JPEG image</P>
+<P><B>Method:</B> GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/jpg[/&lt;<I>camera</I>&gt;]/&lt;<I>name</I>&gt;.jpg
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>Parameter</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;<I>camera</I>&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>
+      Select input source. Applies only to servers with more than one input source.<P><I>Default:</I> default camera</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;<I>name</I>&gt;</TD>
+    <TD width="25%">image,<BR>quad<SUP><SMALL>1</SMALL></SUP>, 
+      halfsize<SUP><SMALL>2</SMALL></SUP>,<BR>fullsize<SUP><SMALL>2</SMALL></SUP>,<BR>hugesize<SUP><SMALL>2</SMALL></SUP></TD>
+    <TD>
+      "image" returns an image with the default resolution and compression, as 
+      defined in the system configuration.<P>The &lt;<I>camera</I>&gt; option is not allowed in quad 
+  request.</P></TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP> Obsolete.</P>
+<P><B>Example:</B> request JPEG image from default camera with default 
+resolution and compression 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/jpg/image.jpg
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg_jpeg_request>5.2.2 JPEG image (snapshot) CGI 
+request</A></H3>
+<P>Request a JPEG image (snapshot) with specified properties.</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/jpg/image.cgi</PRE>
+    <PRE>[?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]]
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">resolution=&lt;int&gt;x&lt;int&gt;</TD>
+    <TD 
+      width="25%">&lt;<I>width</I>&gt;<SUP><SMALL>1</SMALL></SUP>,&lt;<I>height</I>&gt;<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Specify the resolution as &lt;<I>width</I>&gt; times 
+      &lt;<I>height</I>&gt; number of pixels of the returned image.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Applies only to video servers with more than one video input. Selects 
+      the source camera.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">compression=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>
+      Adjusts the compression level of the image. Higher values correspond to 
+      higher compression, i.e. lower quality and smaller image size.<P><B>Note:</B> This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">colorlevel=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Sets level of color or grayscale. 
+      <P>0 = grayscale, 100 = full color. 
+      <P><B>Note:</B> This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">clock=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the time stamp. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">date=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the date. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">quad=&lt;int&gt;</TD>
+    <TD width="25%">0, 1 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Generate a quad image. 
+      <P>0 = normal, 1 = quad</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">text=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the text. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rotation=&lt;int&gt;</TD>
+    <TD width="25%">0, 90, 180, 270 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Rotates the image clockwise.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">showlength=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Content-Length is added to the HTTP-header and in the boundary 
+      section, between the images. 
+      <P>0 = hidden, 1 = shown.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">timeout=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 0<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Set the timeout value (seconds) for the session. If a connection is blocked for this amount of time, the session will be closed by the server.</TD></TR>
+  </TBODY>
+</TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.</P>
+<P><B>Example:</B>  request a JPEG image from camera 1 with a resolution of 320x240 and 
+compression of 25 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/jpg/image.cgi?resolution=320x240&amp;camera=1&amp;compression=25
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg_jpeg_response>5.2.3 JPEG image 
+response</A></H3>
+<P>When a JPEG image is requested, the server either returns the specified JPEG file, or an error.</P>
+            <P>An optional field "Content-Length" header entry specifying the image size in 
+bytes &lt;<I>image size</I>&gt; may also be included if the camera or video 
+server is configured to include it. The other optional field "Content-Auth" is 
+followed by authorization-specific data &lt;<I>authorization 
+information</I>&gt;, e.g., the encryption method being used.</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: image/jpeg\r\n
+[ Content-Length: &lt;<I>image size</I>&gt;\r\n ]
+[ Content-Auth: &lt;<I>authorization information</I>&gt;\r\n ]
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> requested JPEG image 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 15656\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg_jpeg_buffer>5.2.4 JPEG buffer request</A></H3>
+<P>Request for controlling image buffers via HTTP.</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/buffer/command.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;
+[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">do=&lt;string&gt;</TD>
+    <TD width="25%">start,<BR>stop,<BR>get,<BR>reset</TD>
+    <TD>"start" will create a new image buffer.<BR><BR>"stop" will make the 
+      image buffer store post alarm images. Buffer will stop after all post alarm images
+      have been taken.<BR><BR>"get" is used to fetch an image from the image 
+      buffer.<BR><BR>"reset" will remove the image buffer, including any
+      buffered images.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">buffername=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>any string</I>&gt;</TD>
+    <TD>Name used for identifying the buffer.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">uri=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>any string</I>&gt;</TD>
+    <TD>Corresponding image URI to be used by the image buffer. 
+      <P><B>Note:</B> Must be URI-encoded. The URI should also begin with 
+      "ftp://", otherwise an HTTP header is added to the image.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">prealarm=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Number of images to be stored in the pre alarm buffer.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">postalarm=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Number of images to be saved after an alarm occurs.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">predelay=&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>milliseconds</I>&gt;</TD>
+    <TD>The preferred time between the pre alarm images in milliseconds.&nbsp;
+      <p>Default is one second, 1000 milliseconds.</p>
+    </TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">postdelay=&lt;int&gt;</TD>
+    <TD width="25%">&lt;<i>milliseconds&gt;</i></TD>
+    <TD>The preferred time between the post alarm images in milliseconds.
+      <p>Default value is equal to the value of predelay. I.e. 1000 milliseconds
+      if not specified, and for example 3000 milliseconds, if predelay is set to
+      that.</p>
+    </TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">index=&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>image number</I>&gt;</TD>
+    <TD>The index of image in buffer.</TD></TR></TBODY></TABLE>
+<P><B>Example 1:</B> Create an image buffer, named DOOR1, with 10 pre alarm 
+images and 15 post alarm images. 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/buffer/command.cgi?do=start&amp;buffername=DOOR1</PRE><PRE>&amp;prealarm=10&amp;postalarm=15&amp;&amp;uri=ftp://jpg/1/image.jpg
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 2:</B> Stop a buffer. 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/buffer/command.cgi?do=stop&amp;buffername=DOOR1
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 3:</B> Get images from a buffer. 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/buffer/command.cgi?do=get&amp;buffername=DOOR1&amp;index=1
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=sw_requirements_image_requests_mjpg>5.2.5 MJPG video request</A></H3>
+<P>Request Multipart JPEG image.</P>
+<P><B>Method:</B> GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/mjpg[/&lt;<I>camera</I>&gt;]/&lt;<I>name</I>&gt;.mjpg
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>Parameter</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;<I>camera</I>&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>
+      Select input source. Applies only to servers with more than one input source.<P><I>Default:</I> default camera</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;<I>name</I>&gt;</TD>
+    <TD 
+      width="25%">video,<BR>quad<SUP><SMALL>1</SMALL></SUP>,<BR>halfsize<SUP><SMALL>2</SMALL></SUP>,<BR>fullsize<SUP><SMALL>2</SMALL></SUP>,<BR>hugesize<SUP><SMALL>2</SMALL></SUP></TD>
+    <TD>
+      "video" returns a multipart image stream with the default resolution 
+      and compression, as defined in the system configuration.<P>The &lt;<I>camera</I>&gt; option is not allowed in quad 
+  request.</P></TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP> Obsolete.</P>
+<P><B>Example:</B> request JPEG image stream from the 2nd camera with default 
+resolution and compression 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/mjpg/2/video.mjpg
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg_mjpg_request>5.2.6 MJPG video CGI 
+request</A></H3>
+<P>Request a Multipart-JPEG image stream (video) with specified properties.</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/mjpg/video.cgi</PRE>
+    <PRE>[?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">resolution=&lt;int&gt;x&lt;int&gt;</TD>
+    <TD 
+      width="25%">&lt;<I>width</I>&gt;<SUP><SMALL>1</SMALL></SUP>,&lt;<I>height</I>&gt;<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Specify the resolution as &lt;<I>width</I>&gt; times 
+      &lt;<I>height</I>&gt; number of pixels of the returned image.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Applies only to video servers with more than one video input. Selects 
+      the source camera. If omitted, the default camera is used.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">compression=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Adjusts the compression level of the image. Higher values correspond 
+      to higher compression, i.e. lower quality and smaller image size. 
+      <P><B>Note:</B> This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">colorlevel=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Sets level of color or grayscale. 
+      <P>0 = grayscale, 100 = full color. 
+      <P><B>Note:</B> This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">clock=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the time stamp. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">date=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the date. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">quad=&lt;int&gt;</TD>
+    <TD width="25%">0, 1 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Generate a quad image. 
+      <P>0 = normal, 1 = quad</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">text=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Shows/hides the text. 
+      <P>0 = hide, 1 = show</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rotation=&lt;int&gt;</TD>
+    <TD width="25%">0, 90, 180, 270 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Rotates the image clockwise.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">showlength=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Content-Length is added to the HTTP-header and in the boundary 
+      section, between the images. 
+      <P>0 = hidden, 1 = shown.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">duration=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Specifies for how many seconds the video will be generated and pushed 
+      to the client.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">nbrofframes=&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Specifies how many frames the server will generate and push.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">req_fps|des_fps=&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Using either req_fps or des_fps (these cannot be used at the same 
+      time) it is possible to specify the frame rate from the server. 
+      <P>req_fps = required FPS</P>
+      <P>des_fps = desired FPS</P>
+      <P>Required FPS has higher priority than desired FPS if these are used in 
+      two different requests simultaneously.</P>
+      <P>Use req_fps for streams with high priority and des_fps for less 
+      important streams.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">deltatime=&lt;int&gt;</TD>
+    <TD width="25%">0, 1</TD>
+    <TD>Timediff, specifying the time between the images in ms, is added 
+      to the&nbsp; boundary section between the images. 
+      <P>0 = hidden, 1 = shown.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">timeout=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 0<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Set the timeout value (seconds) of the session. If a connection is blocked for this
+      length of time, the session will be closed by the server.</TD></TR>
+  </TBODY>
+</TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.<BR></P>
+<P><B>Example:</B> a Multipart JPEG image stream from camera 1 with a resolution 
+of 320x240 and compression of 25 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/mjpg/video.cgi?resolution=320x240&amp;camera=1</PRE><PRE>&amp;compression=25
+</PRE></TD></TR></TBODY></TABLE><!-- *********************************************************************** -->
+<P><B>Example:</B> a Multipart JPEG image stream from camera 1 with a required 
+frame rate of 5 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/mjpg/video.cgi?req_fps=5
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_jpeg_mjpg_mjpg_response>5.2.7 MJPG video 
+response</A></H3>
+<P>When MJPG video is requested, the server returns a continuous flow of JPEG files. The content type is "multipart/x-mixed-replace" and each image ends 
+with a boundary string &lt;<I>boundary</I>&gt;. The returned image and HTTP data 
+is equal to the request for a single JPEG image.</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=&lt;<I>boundary</I>&gt;\r\n
+\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>image</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where the proposed &lt;<I>boundary</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>myboundary
+</PRE></TD></TR>
+        <TR>
+          <TD>and the returned &lt;<I>image</I>&gt; field is</TD></TR>
+        <TR>
+          <TD><PRE>Content-Type: image/jpeg\r\n
+[ Content-Length: &lt;<I>image size</I>&gt;\r\n ]
+[ Content-Auth: &lt;<I>authorization information</I>&gt;\r\n ]
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>image</I>&gt;
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> requested Multipart JPEG image 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=myboundary\r\n
+\r\n
+--myboundary\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 15656\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 14978\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 15136\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+ .
+ .
+ .
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_mpeg2>5.3 MPEG-2</A></H3>
+            <P>The requests specified in the MPEG-2 section are supported by those
+            products that use MPEG-2 encoding.</P>
+<H3><A name=api_blocks_mpeg2_video_request><SPAN class=toc-index>5.3.1 
+</SPAN>MPEG-2 video request</A></H3>Requests an MPEG-2 video stream with 
+specified properties. 
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/mpeg2/video.cgi[?&lt;parameter&gt;=&lt;value&gt;
+[&amp;&lt;parameter&gt;=&lt;value&gt; ...]]
+</PRE></TD></TR></TBODY></TABLE><BR>with the following parameters and values
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">duration=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Specifies for how many seconds the video shall be generated and pushed 
+      to the client. If the duration parameter is omitted, an infinite video stream
+      will be provided to the client.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Searched recording should match this camera id.</TD></TR>
+  <TR>
+    <TD width="25%">maxlag=&lt;int&gt;</TD>
+    <TD width="25%">500,... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>A number specifying at which lag (in ms) the server should eliminate the 
+      lag by cutting the stream. A lag could occur at the client due to clock 
+      differences between the client computer and the server.&nbsp; 
+      <P><B>Note: </B>This will be the maximum lag. The real lag may be lower 
+      than the specified value. Values less than 500 will be interpreted as 
+      500. If the maxlag parameter is left out, the maximum lag will be 
+      determined by the available space in the 
+server.</P></TD></TR></TBODY></TABLE>
+<p><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check
+            the product specification. 
+<P>&nbsp;</P>
+
+<!-- *********************************************************************** -->
+
+
+<H3><A name=api_blocks_mpeg2_video_response><SPAN class=toc-index>5.3.2 MPEG-2 
+</SPAN>video response</A></H3>
+<P>When MPEG-2 video is requested, the server either returns the specified 
+video stream, or an error message.</P>
+<P>A field "X-Prebuffer-Length" is included in the HTTP header when responding 
+to an MPEG-2 buffer request. This entry specifies the length (in seconds) of the 
+pre-buffer video that is included in the video stream response. This length 
+depends on what is specified in the request, and on a maximum value set by 
+the server. If the requested length is greater than or equal to the maximum 
+value set by the server, the returned pre-buffer length will be equal to the 
+maximum value. If the requested length is shorter than the maximum value, the 
+returned length will be equal to the requested length.</P>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK \r\n</PRE><PRE>Content-type: video/mpeg\r\n</PRE><PRE>[X-Prebuffer-Length: &lt;floating number in seconds&gt; \r\n]</PRE><PRE>\r\n</PRE><PRE>&lt;MPEG stream&gt;\r\n</PRE><PRE>&nbsp;</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+
+Content-Type: video/mpeg\r\n
+
+\r\n
+
+&lt;MPEG stream&gt;\r\n</PRE><PRE>&nbsp;</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+
+<!-- *********************************************************************** -->
+
+
+<H3><A name=api_blocks_mpeg2_buffer><SPAN class=toc-index>5.3.3 </SPAN>MPEG-2 
+buffer request</A></H3>Request for pre-buffered MPEG-2 video. 
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/mpeg2/buffer.cgi?
+[?&lt;parameter&gt;=&lt;value&gt;[&amp;&lt;parameter&gt;=&lt;value&gt;...]]</PRE></TD></TR></TBODY></TABLE><BR>with the following parameters and 
+values
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR>
+    <TD width="25%">prebuffer=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Number of seconds of video, buffered before the request, to be 
+      provided to the client.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">duration=&lt;int&gt;</TD>
+    <TD width="25%">0, ...</TD>
+    <TD>Specifies for how many seconds the video will be generated and pushed 
+      to the client. If the duration parameter is omitted, an infinite video stream will be provided to the client.</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+
+<!-- *********************************************************************** -->
+
+            
+<H3><SPAN class=toc-index><A name=api_blocks_mpeg2_multicast_request>5.3.4
+MPEG-2 multicast info request</A></SPAN></H3>
+<P>The requests specified in this section can be used with MPEG-2 products that
+support multicasting and which have this support enabled.
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/view/sdp/guide.sdp</PRE><PRE>http://&lt;<I>servername</I>&gt;/view/sdp/guide.axsdp</PRE><PRE>http://&lt;<I>servername</I>&gt;/view/sdp/guide.sdpx
+</PRE></TD></TR></TBODY></TABLE>
+<p>&nbsp;
+
+<!-- *********************************************************************** -->
+
+<H3><SPAN class=toc-index><A name=api_blocks_mpeg2_multicast_response>5.3.5
+MPEG-2 multicast info response</A></SPAN></H3>            
+            The response to an MPEG-2 multicast info request is a text file
+            describing the characteristics of the stream elements and where they
+            can be retrieved.
+            <p>            
+            The description text is in SDP format and follows <a href="http://www.faqs.org/rfcs/rfc2327.html" target="_blank">RFC
+            2327</a>.&nbsp;</p>
+            <p>All requests return the same description file. The responses from
+            guide.sdp and guide.axsdp have &quot;application/sdp&quot; as
+            content type, but using guide.sdp is preferred practice. The response
+            from guide.sdpx has &quot;text/plain&quot; as content type.&nbsp;</p>
+            <p><b>Return: </b>
+            A successful guide.sdp or guide.axsdp request
+            <table cellSpacing="0" cellPadding="0" width="100%" border="1">
+              <tbody>
+                <tr>
+                  <td>
+                    <table cellSpacing="0" cellPadding="7" border="0">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <pre>HTTP/1.0 200 OK\r\n
+Date: &lt;date&gt;
+Server: &lt;web server&gt;
+Content-Length: &lt;length&gt;
+Last-Modified: &lt;date&gt;
+Content-Type: application/sdp\r\n
+\r\n    
+\r\n
+&lt;text according to RFC 2327&gt;</pre>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Return:
+            </b>
+            A successful guide.sdpx request
+            <table cellSpacing="0" cellPadding="0" width="100%" border="1">
+              <tbody>
+                <tr>
+                  <td>
+                    <table cellSpacing="0" cellPadding="7" border="0">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <pre>HTTP/1.0 200 OK\r\n
+Date: &lt;date&gt;
+Server: &lt;web server&gt;
+Content-Length: &lt;length&gt;
+Last-Modified: &lt;date&gt;
+Content-Type: text/plain\r\n
+\r\n    
+\r\n
+&lt;text according to RFC 2327&gt;</pre>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><b>Example:</b> Requested MPEG-2 media stream session info with guide.sdp
+            from an MPEG-2 video product
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>HTTP/1.0 200 OK
+Date: Thu, 28 Nov 2002 13:16:13 GMT
+Server: Boa/0.92o
+Content-Length: 777
+Last-Modified: Thu, 28 Nov 2002 13:12:24 GMT
+Content-Type: application/sdp
+
+v=0
+o=root 1038489142 1038489142 IN IP4 10.13.9.123
+s=AXIS 250S MPEG-2 Video Server RTP Stream from 10.13.9.123
+b=AS:4000
+t=0 0
+a=type:broadcast
+a=tool:AXIS 250S MPEG-2 Video Server 3.10
+m=video 5000 RTP/AVP 32
+c=IN IP4 239.192.182.161/5
+a=x-dimensions:720,576
+a=framerate:25
+a=x-iptv-svr:video 10.13.9.123 file 1 loop
+m=audio 5000 RTP/AVP 14
+c=IN IP4 239.192.182.94/5
+a=x-bitrate:128
+a=x-samplerate:44100
+a=x-iptv-svr:audio 10.13.9.123 file 1 loop
+v=0
+o=root 1038489143 1038489143 IN IP4 10.13.9.123
+s=AXIS 250S MPEG-2 Video Server RTP Stream No Audio from 10.13.9.123
+b=AS:4000
+t=0 0
+a=type:broadcast
+a=tool:AXIS 250S MPEG-2 Video Server 3.10
+m=video 5000 RTP/AVP 32
+c=IN IP4 239.192.182.161/5
+a=x-dimensions:720,576
+a=framerate:25
+a=x-iptv-svr:video 10.13.9.123 file 1 loop
+</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>&nbsp;
+            
+            <!-- *********************************************************************** -->
+            
+<H3><A name=api_blocks_ptz>5.4 PTZ</A></H3>
+<P>The requests specified in the PTZ section are supported by those video products that have support for Pan/Tilt/Zoom devices.</P>
+<H3><A name=api_blocks_ptz_control>5.4.1 PTZ control</A></H3>
+<P>To control the Pan, Tilt, and Zoom behavior of a PTZ unit, the following PTZ 
+control URL is used.</P>
+            <P><B>Important: </B>The PTZ control is device-dependent. Please
+            check the 
+specification of the Axis PTZ driver you intend using, for information 
+about supported parameters and actual parameter values. The following table 
+is only an overview.</P>
+<P><B>Method: </B>GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/com/ptz.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;[&amp;
+&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;... ]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>
+      Applies only to video servers with more than one video input. Selects 
+      the source camera. If omitted, the default camera is used.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">whoami=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>any value</I>&gt;</TD>
+    <TD>
+      Returns the name of the system-configured device driver.</TD></TR>
+  <TR vAlign=top>
+    <TD 
+      width="25%">center=&lt;int&gt;,&lt;int&gt;<BR>extrem<SUP><SMALL>3</SMALL></SUP>=&lt;int&gt;,&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>x</I>&gt;,&lt;<I>y</I>&gt;</TD>
+    <TD><B>Absolute: </B>Used to send the coordinates for the point in the 
+      image where the user clicked. This information is then used by the server 
+      to calculate the pan/tilt move required to (approximately) center 
+      the clicked point.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Used to send the coordinates for the point in the image 
+      where the user clicked. This information is then used by the server to 
+      calculate the direction and number of degrees to move. The number of degrees 
+      increases with the distance from the center of the image to the point 
+      clicked.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">imagewidth=&lt;int&gt;<BR></TD>
+    <TD width="25%">1, ...<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Required in conjunction with <I>center</I> if the image width is 
+      displayed different from the default size of the image, which is product-specific.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">imageheight=&lt;int&gt;</TD>
+    <TD width="25%">1, ...<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Needed in conjunction with <I>center</I> if the image height is 
+      different from the default size, which is product-specific.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">move=&lt;string&gt;</TD>
+    <TD 
+      width="25%">home,<BR>up,<BR>down,<BR>left,<BR>right,<BR>upleft,<BR>upright,<BR>downleft,<BR>downright</TD>
+    <TD><B>Absolute: </B>Moves the device 5 degrees in the specified 
+      direction.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Moves the device approx. 50-90 
+      degrees<SUP><SMALL>2</SMALL></SUP> in the specified direction.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">pan=&lt;float&gt;</TD>
+    <TD width="25%">-180.0 - 180.0</TD>
+    <TD><B>Absolute: </B>Pans the device relative to the (0,0) position.<BR>
+      <HR width="75%">
+      <B>Relative:</B> N/A</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">tilt=&lt;float&gt;</TD>
+    <TD width="25%">-180.0 - 180.0</TD>
+    <TD><B>Absolute: </B>Tilts the device relative to the (0,0) position.<BR>
+      <HR width="75%">
+      <B>Relative: </B>n/a</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">zoom=&lt;int&gt;</TD>
+    <TD width="25%">1 - 9999</TD>
+    <TD><B>Absolute: </B>Zooms the device <I>n</I> steps.<BR>
+      <HR width="75%">
+      <B>Relative: </B>n/a</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">focus=&lt;int&gt;</TD>
+    <TD width="25%">1 - 9999</TD>
+    <TD><B>Absolute: </B>Move Focus <I>n</I> steps.<BR>
+      <HR width="75%">
+      <B>Relative: </B>n/a</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">iris=&lt;int&gt;</TD>
+    <TD width="25%">1 - 9999</TD>
+    <TD><B>Absolute: </B>Move iris to <I>n</I> steps.<BR>
+      <HR width="75%">
+      <B>Relative: </B>n/a</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rpan=&lt;float&gt;</TD>
+    <TD width="25%">-360.0 - 360.0</TD>
+    <TD><B>Absolute: </B>Pans the device <I>n</I> degrees relative to the 
+      current position.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Pans the device approx. <I>n</I> degrees relative to the 
+      current position.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rtilt=&lt;float&gt;</TD>
+    <TD width="25%">-360.0 - 360.0</TD>
+    <TD><B>Absolute: </B>Tilts the device <I>n</I> degrees relative to the 
+      current position.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Tilts the device approx. <I>n</I> degrees relative to the 
+      current position.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rzoom=&lt;int&gt;</TD>
+    <TD width="25%">-9999 - 9999</TD>
+    <TD><B>Absolute: </B>Zooms the device <I>n</I> steps relative to the 
+      current position. Positive values mean zoom in, negative values mean 
+      zoom out.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Zooms the device approx. <I>n</I> steps relative to the 
+      current position. Positive values mean zoom in, negative values mean 
+      zoom out.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">rfocus=&lt;int&gt;</TD>
+    <TD width="25%">-9999 - 9999</TD>
+    <TD><B>Absolute: </B>Move Focus <I>n</I> steps relative to the current 
+      position. Positive values mean focus near, negative values mean focus 
+      far.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Move Focus approx. <I>n</I> steps relative to the current 
+      position. Positive values mean focus near, negative values mean focus 
+      far.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">riris=&lt;int&gt;</TD>
+    <TD width="25%">-9999 - 9999</TD>
+    <TD><B>Absolute: </B>Move iris <I>n</I> steps relative to the current 
+      position. Positive values mean open iris, negative values mean close 
+      iris.<BR>
+      <HR width="75%">
+      <B>Relative: </B>Move iris approx. <I>n</I> steps relative to the current 
+      position. Positive values mean open iris, negative values mean close 
+      iris.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">zoomrel<SUP><SMALL>3</SMALL></SUP>=&lt;string&gt;</TD>
+    <TD width="25%">tele,<BR>wide,<BR>telemax,<BR>telemin</TD>
+    <TD>Adjusts the zoom gradually.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">focusrel<SUP><SMALL>3</SMALL></SUP>=&lt;string&gt;</TD>
+    <TD width="25%">far,<BR>farmore,<BR>near,<BR>nearmore</TD>
+    <TD>Adjusts the focus gradually.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">irisrel<SUP><SMALL>3</SMALL></SUP>=&lt;string&gt;</TD>
+    <TD width="25%">open,<BR>close,<BR>openmore,<BR>closemore</TD>
+    <TD>Adjusts the iris gradually.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">autofocus=&lt;string&gt;</TD>
+    <TD width="25%">on, off</TD>
+    <TD>Autofocus On/Off.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">autoiris=&lt;string&gt;</TD>
+    <TD width="25%">on, off</TD>
+    <TD>Autoiris On/Off.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">continuouspantiltmove=<BR>&lt;int&gt;,&lt;int&gt;</TD>
+    <TD width="25%">-100 - 100,<BR>-100 - 100</TD>
+    <TD>Continuous pan/tilt motion.<BR>&nbsp;<BR>Positive values mean right 
+      (pan) and up (tilt), negative values mean left (pan) and down (tilt). 
+      "0,0" means stop.<BR>&nbsp;<BR>Values as &lt;<I>pan 
+      speed</I>&gt;,&lt;<I>tilt speed</I>&gt;</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">continuouszoommove=<BR>&lt;int&gt;</TD>
+    <TD width="25%">-100 - 100</TD>
+    <TD>Continuous zoom motion. Positive values mean zoom in and negative 
+      values mean zoom out. "0" means stop.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">continuousfocusmove=<BR>&lt;int&gt;</TD>
+    <TD width="25%">-100 - 100</TD>
+    <TD>Continuous focus motion. Positive values mean focus near and negative 
+      values mean focus far. "0" means stop.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">continuousirismove=<BR>&lt;int&gt;</TD>
+    <TD width="25%">-100 - 100</TD>
+    <TD>Continuous iris motion. Positive values mean iris open and negative 
+      values mean iris close. "0" means stop.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">auxiliary=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>function name</I>&gt;</TD>
+    <TD>Activates/deactivates auxiliary functions of the device where 
+      &lt;<I>function name</I>&gt; is the name of the device-specific 
+    function.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">setserverpresetname=<BR>&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>preset name</I>&gt;<SUP><SMALL>4</SMALL></SUP></TD>
+    <TD>Associates the current position to &lt;<I>preset name</I>&gt; as a 
+      preset position in the server.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">setserverpresetno=<BR>&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Saves the current position as a preset position number in the 
+    server.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">removeserverpresetname=<BR>&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>preset name</I>&gt;<SUP><SMALL>4</SMALL></SUP></TD>
+    <TD>Removes the specified preset position associated with &lt;<I>preset 
+      name</I>&gt;.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">removeserverpresetno=<BR>&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Removes the specified preset position.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">gotoserverpresetname=<BR>&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>preset name</I>&gt;<SUP><SMALL>4</SMALL></SUP></TD>
+    <TD>Move to the position associated with the &lt;<I>preset 
+  name</I>&gt;.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">gotoserverpresetno=<BR>&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Move to the position associated with the specified preset position 
+      number.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">setdevicepreset=<BR>&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>preset pos</I>&gt;</TD>
+    <TD>Bypasses the presetpos interface and tells the device to save its 
+      current position as preset position &lt;<I>preset pos</I>&gt; directly in 
+      the device, where &lt;<I>preset pos</I>&gt; is a device-specific preset 
+      position number.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">gotodevicepreset=<BR>&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>preset pos</I>&gt;</TD>
+    <TD>Bypasses the presetpos interface and tells the device to go directly 
+      to the preset position number &lt;<I>preset pos</I>&gt; stored in 
+      the device, where the &lt;<I>preset pos</I>&gt; is a device-specific 
+      preset position number.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">barcoord=&lt;int&gt;,&lt;int&gt;</TD>
+    <TD width="25%">&lt;<I>x</I>&gt;,&lt;<I>y</I>&gt;</TD>
+    <TD>Used in conjunction with panbar, tiltbar, zoombar, focusbar or irisbar, 
+      to send coordinates to the server.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">panbar=&lt;int&gt;,&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>length</I>&gt;,<BR>&lt;<I>alignment</I>&gt;</TD>
+    <TD>&lt;<I>length</I>&gt; is the length of the bar in pixels, which is 
+      needed in order to calculate the center of the 
+      bar.<BR>&nbsp;<BR>&lt;<I>alignment</I>&gt; is one of the strings 
+      "<I>horisontal</I>" or "<I>vertical</I>".<BR>&nbsp;<BR>The alignment 
+      string determines if the x (horizontal) or the y (vertical) coordinate 
+      from <I>barcoord</I> is used, i.e. if the bar is horizontal; use 
+      "<I>horizontal</I>" and if the bar is vertical; use <I>"vertical</I>" as 
+      alignment.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">tiltbar=&lt;int&gt;,&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>length</I>&gt;,<BR>&lt;<I>alignment</I>&gt;</TD>
+    <TD>&lt;<I>length</I>&gt; is the length of the bar in pixels, which is 
+      needed in order to calculate the center of the 
+      bar.<BR>&nbsp;<BR>&lt;<I>alignment</I>&gt; is one of the strings 
+      "<I>horisontal</I>" or "<I>vertical</I>".<BR>&nbsp;<BR>The alignment 
+      string determines if the x (horizontal) or the y (vertical) coordinate 
+      from <I>barcoord</I> is used, i.e. if the bar is horizontal; use 
+      "<I>horizontal</I>" and if the bar is vertical; use <I>"vertical</I>" as 
+      alignment.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">zoombar=&lt;int&gt;,&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>length</I>&gt;,<BR>&lt;<I>alignment</I>&gt;</TD>
+    <TD>&lt;<I>length</I>&gt; is the length of the bar in pixels, which is 
+      needed in order to calculate the center of the 
+      bar.<BR>&nbsp;<BR>&lt;<I>alignment</I>&gt; is one of the strings 
+      "<I>horisontal</I>" or "<I>vertical</I>".<BR>&nbsp;<BR>The alignment 
+      string determines if the x (horizontal) or the y (vertical) coordinate 
+      from <I>barcoord</I> is used, i.e. if the bar is horizontal; use 
+      "<I>horizontal</I>" and if the bar is vertical; use <I>"vertical</I>" as 
+      alignment.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">focusbar=&lt;int&gt;,&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>length</I>&gt;,<BR>&lt;<I>alignment</I>&gt;</TD>
+    <TD>&lt;<I>length</I>&gt; is the length of the bar in pixels, which is 
+      needed in order to calculate the center of the 
+      bar.<BR>&nbsp;<BR>&lt;<I>alignment</I>&gt; is one of the strings 
+      "<I>horisontal</I>" or "<I>vertical</I>".<BR>&nbsp;<BR>The alignment 
+      string determines if the x (horizontal) or the y (vertical) coordinate 
+      from <I>barcoord</I> is used, i.e. if the bar is horizontal; use 
+      "<I>horizontal</I>" and if the bar is vertical; use <I>"vertical</I>" as 
+      alignment.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">irisbar=&lt;int&gt;,&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>length</I>&gt;,<BR>&lt;<I>alignment</I>&gt;</TD>
+    <TD>&lt;<I>length</I>&gt; is the length of the bar in pixels, which is 
+      needed in order to calculate the center of the 
+      bar.<BR>&nbsp;<BR>&lt;<I>alignment</I>&gt; is one of the strings 
+      "<I>horisontal</I>" or "<I>vertical</I>".<BR>&nbsp;<BR>The alignment 
+      string determines if the x (horizontal) or the y (vertical) coordinate 
+      from <I>barcoord</I> is used, i.e. if the bar is horizontal; use 
+      "<I>horizontal</I>" and if the bar is vertical; use <I>"vertical</I>" as 
+      alignment.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">speed=&lt;int&gt;</TD>
+    <TD width="25%">1 - 100</TD>
+    <TD>Sets the head speed of the device connected to the specified 
+  camera.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">query=&lt;string&gt;</TD>
+    <TD width="25%">speed,<BR>position,<BR>presetposcam,<BR>presetposall</TD>
+    <TD>Returns the current parameter values. See <A href="#api_blocks_general_parameter_response">5.1.2</A> 
+      for more information about server responses.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">info=&lt;int&gt;</TD>
+    <TD width="25%">1</TD>
+    <TD>Returns a description of available PTZ commands.<BR>&nbsp;<BR>No PTZ control 
+      is performed.</TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP>  Actual values are device 
+driver-specific.<BR><SUP><SMALL>3</SMALL></SUP> 
+Obsolete.<BR><SUP><SMALL>4</SMALL></SUP> &lt;<I>preset name</I>&gt; is a string 
+with a maximum of 31 characters, ~ is not allowed.</P>
+            <p><b>Example:</b> Request information about which PTZ commands are
+            available for camera 3.
+            <table cellSpacing="0" cellPadding="7" width="100%" bgColor="#eeeeee" border="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>http://<i>myserver</i>/axis-cgi/com/ptz.cgi?info=1&amp;camera=3
+</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- *********************************************************************** -->
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_audio>5.5 Audio</A></H3>
+<P>The requests specified in the Audio section are supported by those video products that have audio capability.</P>
+<H3><A name=api_blocks_audio_request>5.5.1 Multipart audio data request</A></H3>
+<P>Request a Multipart Audio stream.</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/audio/receive.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P>There are no valid parameters and values 
+<P><B>Example:</B> a Multipart Audio stream 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/audio/receive.cgi</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_audio_response>5.5.2 Multipart audio data 
+response</A></H3>
+<P>When an audio stream is requested/transmitted, the server returns/receives a 
+continuous flow of audio packets. The content type is 
+"multipart/x-mixed-replace" and each audio packet ends with a boundary string 
+&lt;<I>boundary</I>&gt;. The MIME type used for the audio transmitted is 
+audio/32KADPCM. The message body contains a block of binary data.&nbsp;</P>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=&lt;<I>boundary</I>&gt;\r\n
+\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>audio</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where the proposed &lt;<I>boundary</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>myboundary
+</PRE></TD></TR>
+        <TR>
+          <TD>and the &lt;<I>audio</I>&gt; field is</TD></TR>
+        <TR>
+          <TD><PRE><FONT size=2>Content-Type: </FONT>audio/32KADPCM\r\n
+\r\n
+&lt;<I>Audio data</I>&gt;\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>audio</I>&gt;
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Multipart Audio data 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=myboundary\r\n
+\r\n
+--myboundary\r\n
+Content-Type: audio/32KADPCM\r\n
+\r\n
+&lt;<I>Audio data</I>&gt;\r\n
+--myboundary\r\n
+Content-Type: audio/32KADPCM\r\n
+\r\n
+&lt;<I>Audio data</I>&gt;\r\n
+--myboundary\r\n
+Content-Type: audio/32KADPCM\r\n
+\r\n
+&lt;<I>Audio data</I>&gt;\r\n
+--myboundary\r\n
+ .
+ .
+ .
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_audio_transmit>5.5.3 Multipart audio data 
+transmit</A></H3>
+<P>Transmits a Multipart Audio data stream.</P>
+<P><B>Method: </B>POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/audio/transmit.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P>There are no valid parameters and values. 
+<P><B>Example:</B> transmit a Multipart Audio stream 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/audio/transmit.cgi</PRE></TD></TR></TBODY></TABLE><!-- *********************************************************************** -->
+<P>&nbsp;</P>
+<H3><A name=api_blocks_audio_parameters>5.5.4 Get audio configuration 
+parameters</A></H3>
+<P>Get information about audio configuration parameters. 
+<P><B>Method:</B> GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/audio/getparam.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+&lt;<I>audio parameters</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>audio parameters</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>root.Audiod.duplexMode=&lt;<I>duplexMode</I>&gt;\n
+root.Audiod.maxNumberOfClients=&lt;<I>maxNumberOfClients</I>&gt;\n
+root.Audiod.forwardOnPost=&lt;<I>forwardOnPost</I>&gt;\n
+root.Audiod.buttonMode=&lt;<I>buttonMode</I>&gt;\n
+root.Audiod.acousticEcho=&lt;<i>acousticEcho</i>&gt;\n
+root.Audiod.lineEcho=&lt;<i>lineEcho</i>&gt;\n
+root.Audiod.slopeFilter=&lt;<i>slopeFilter</i>&gt;\n
+root.Audiod.noisecancelIOgain=&lt;<i>noicecancelIOgain</i>&gt;\n
+root.Audiod.noisecancelAttenuation=&lt;<i>noisecancelAttenuation</i>&gt;\n
+root.Audiod.audioEncoding=&lt;<i>audioEncoding</i>&gt;\n
+root.Audiod.httpMessageType=&lt;<i>httpMessageType</i>&gt;\n
+root.Audiod.microphoneMode=&lt;<i>microphoneMode</i>&gt;\n
+root.Audiod.speakerMode=&lt;<i>speakerMode</i>&gt;\n
+root.Audiod.forceMicrophoneMode=&lt;<i>forceMicrophoneMode</i>&gt;\n
+root.Audiod.forceSpeakerMode=&lt;<i>forceSpeakerMode</i>&gt;\n
+root.Audiod.bufferLevel=&lt;<i>bufferLevel</i>&gt;\n
+root.Audiod.forceBufferLevel=&lt;<i>forceBufferLevel</i>&gt;\n
+\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\n
+\n
+root.Audiod.duplexMode=&lt;<I>duplexMode</I>&gt;\n
+root.Audiod.maxNumberOfClients=&lt;<I>maxNumberOfClients</I>&gt;\n
+root.Audiod.forwardOnPost=&lt;<I>forwardOnPost</I>&gt;\n
+root.Audiod.buttonMode=&lt;<I>buttonMode</I>&gt;\n
+root.Audiod.acousticEcho=&lt;<i>acousticEcho</i>&gt;\n
+root.Audiod.lineEcho=&lt;<i>lineEcho</i>&gt;\n
+root.Audiod.slopeFilter=&lt;<i>slopeFilter</i>&gt;\n
+root.Audiod.noisecancelIOgain=&lt;<i>noicecancelIOgain</i>&gt;\n
+root.Audiod.noisecancelAttenuation=&lt;<i>noisecancelAttenuation</i>&gt;\n
+root.Audiod.audioEncoding=&lt;<i>audioEncoding</i>&gt;\n
+root.Audiod.httpMessageType=&lt;<i>httpMessageType</i>&gt;\n
+root.Audiod.microphoneMode=&lt;<i>microphoneMode</i>&gt;\n
+root.Audiod.speakerMode=&lt;<i>speakerMode</i>&gt;\n
+root.Audiod.forceMicrophoneMode=&lt;<i>forceMicrophoneMode</i>&gt;\n
+root.Audiod.forceSpeakerMode=&lt;<i>forceSpeakerMode</i>&gt;\n
+root.Audiod.bufferLevel=&lt;<i>bufferLevel</i>&gt;\n
+root.Audiod.forceBufferLevel=&lt;<i>forceBufferLevel</i>&gt;\n
+\n
+
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_motion_detection>5.6 Motion Detection</A></H3>
+<P>The requests specified in the Motion Detection section are supported by those
+video products that have built-in motion detection.</P>
+<H3><A name=api_blocks_motion_detection_setparam>5.6.1 Set motion detection 
+parameters</A></H3>
+<P>Adding new motion detection window, removing or updating any existing 
+window.</P>
+<P>The "key" entry is a unique window identity communicated in all actions 
+concerning the window, i.e., when adding, updating or removing it, or when 
+reading information about it. The "name" entry is a window identification useful
+when e.g. communicating with a user in an application or an alarm. The three
+parameters &quot;size&quot;, &quot;sensitivity&quot; and &quot;history&quot; are
+as generic as possible, <i>i.e.</i>  they do not depend on the actual motion detection
+algorithm.</P>
+<P><B>Method:</B> GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/mdsetparam.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;[&amp;
+&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">action=&lt;string&gt;</TD>
+    <TD width="25%">add,<BR>remove,<BR>update</TD>
+    <TD>
+      "add" creates a new motion detection window and requires both the "key" 
+      and "name" entries to be defined.<P>"update" make changes to an existing window and only requires the "key" 
+      entry to be defined.</P>
+      <P>"remove" deletes an existing window and only requires the "key" entry 
+      to be defined. Any other additional entry is ignored.</P>
+      <P><I>Default:</I> no default value provided.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">key=&lt;int&gt;</TD>
+    <TD width="25%">0, ...<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>
+      A unique identity to the motion detection window.<P><I>Default:</I> no default value provided.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">name=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>any string</I>&gt;</TD>
+    <TD>
+      A user's window identification, e.g., "Door" or "Window".<P><I>Default:</I> no default value provided.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">method=&lt;char&gt;</TD>
+    <TD width="25%">w</TD>
+    <TD>
+      Motion detection method to use for this window.<P><I>Default:</I> w</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">left=&lt;int&gt;<BR></TD>
+    <TD width="25%">0 ... 9999</TD>
+    <TD>
+      The coordinate for the left boundary of the rectangular motion 
+      detection window.<P>The full value range is related to the full image width and <I>0</I> is 
+      counted from the left hand side of the image.</P>
+      <P><I>Default:</I> 0</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">right=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 9999</TD>
+    <TD>
+      The coordinate for the right boundary of the rectangular motion 
+      detection window.<P>The full value range is related to the full image width and <I>0</I> is 
+      counted from the left hand side of the image.</P>
+      <P><I>Default:</I> 9999</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">top=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 9999</TD>
+    <TD>
+      The coordinate for the upper boundary of the rectangular motion 
+      detection window.<P>The full value range is related to the full image height and <I>0</I> 
+      is counted from the upper side of the image.</P>
+      <P><I>Default:</I> 0</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">bottom=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 9999</TD>
+    <TD>
+      The coordinate for the bottom boundary of the rectangular motion 
+      detection window.<P>The full value range is related to the full image height and <I>0</I> 
+      is counted from the upper side of the image.</P>
+      <P><I>Default:</I> 9999</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">sensitivity=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 100</TD>
+    <TD>
+      This tunes the &quot;object difference from the
+      background&quot;-sensitivity, <i>i.e.</i> difference in terms of color
+      and/or structure. A low value detects even very small changes and can e.g.
+      trigger on image noise if set too low. A very high value on the other
+      hand, requires a very dramatic change, with e.g. a dark object appearing in an
+      almost white scene (or vice versa).<P><I>Default:</I> <I>method specific</I></P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">history=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 100</TD>
+    <TD>
+      This adjusts the motion detection to be more or less sensitive for very
+      fast motion. At very low values motion is detected only when a
+      scene has changed, but rapidly adopts to this changed scene as the new normal scene.
+      Higher values are more conservative and will detect motion in a greater number of pictures before
+      considering this as being a normal
+      object in the scene.<P><I>Default:</I> <I>method specific</I></P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">size=&lt;int&gt;</TD>
+    <TD width="25%">0 ... 100</TD>
+    <TD>
+      Defines as a percentage the size of the object that will result in
+      motion detection. At a low value, even very small changes will trigger detection,
+      whilst a very
+      large value requires a very large object to trigger detection.<P><I>Default:</I> <I>method specific</I></P></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> all parameters are set correct 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 204 No Content\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> one or more critical errors occurred 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+Error: &lt;<I>error description</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Add a new motion detection window 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/mdsetparam.cgi?action=add&amp;key=2</PRE><PRE>&amp;name=Entrance&amp;top=500&amp;bottom=7000&amp;left=5000&amp;right=8500
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Update parameters for an existing motion detection window 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/mdsetparam.cgi?action=update&amp;key=2</PRE><PRE>&amp;top=1500&amp;bottom=8000
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Remove a motion detection window 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/mdsetparam.cgi?action=remove&amp;key=2
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_motion_detection_getparam>5.6.2 Get motion detection 
+parameters</A></H3>
+<P>Read information about current defined motion detection windows. 
+<P><B>Method:</B> GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/motion/mdgetparam.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+&lt;<I>window data</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>window data</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>key=&lt;<I>key</I>&gt;\r\n
+name=&lt;<I>name</I>&gt;\r\n
+method=&lt;<I>method</I>&gt;\r\n
+left=&lt;<I>left</I>&gt;\r\n
+top=&lt;<I>top</I>&gt;\r\n
+right=&lt;<I>right</I>&gt;\r\n
+bottom=&lt;<I>bottom</I>&gt;\r\n
+sensitivity=&lt;<I>sensitivity</I>&gt;\r\n
+history=&lt;<I>history</I>&gt;\r\n
+size=&lt;<I>size</I>&gt;\r\n
+\r\n
+[ &lt;<I>window data</I>&gt; ]
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> two motion detection windows "Backdoor" and "Window" 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+key=0\r\n
+name=Backdoor\r\n
+method=W\r\n
+left=200\r\n
+top=800\r\n
+right=3600\r\n
+bottom=9400\r\n
+sensitivity=90\r\n
+history=85\r\n
+size=10\r\n
+\r\n
+key=1\r\n
+name=Window\r\n
+method=W\r\n
+left=7000\r\n
+top=1000\r\n
+right=9500\r\n
+bottom=4000\r\n
+sensitivity=95\r\n
+history=85\r\n
+size=25\r\n
+\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_motion_detection_level>5.6.3 Get motion detection 
+level</A></H3>
+<P>To read the current motion detection levels of all windows, the URL stated 
+below is used.</P>
+<P><B>Method:</B> GET/POST</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/motion/motiondetect.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=&lt;<I>boundary</I>&gt;\r\n
+\r\n 
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>motion levels</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where the proposed boundary &lt;<I>boundary</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>axismdb
+</PRE></TD></TR>
+        <TR>
+          <TD>and the &lt;<I>motion levels</I>&gt; part is</TD></TR>
+        <TR>
+          <TD><PRE>Content-Type: text/plain\r\n
+\r\n
+&lt;<I>motion level for window n</I>&gt;
+--&lt;<I>boundary</I>&gt;\r\n
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>motion level for window </I>n&gt;" is</TD></TR>
+        <TR>
+          <TD><PRE>key=&lt;<I>key </I>n&gt;;level=&lt;<I>motion level for </I>n&gt;;</PRE><PRE>threshold=&lt;<I>threshold level for </I>n&gt;;\r\n
+[ &lt;<I>motion level for window </I>n+1&gt; ]
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> two motion detection windows with key "0" and key "1" 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=axismdb\r\n
+\r\n 
+--axismdb\r\n
+Content-Type: text/plain\r\n
+\r\n
+key=0;level=28;threshold=45;\r\n
+key=1;level=43;threshold=25;\r\n
+--axismdb\r\n
+Content-Type: text/plain\r\n
+\r\n
+key=0;level=54;threshold=45;\r\n
+key=1;level=38;threshold=25;\r\n
+--axismdb\r\n
+Content-Type: text/plain\r\n
+\r\n
+key=0;level=49;threshold=45;\r\n
+key=1;level=19;threshold=25;\r\n
+--axismdb\r\n
+ .
+ .
+ . 
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** --><!-- *********************************************************************** -->
+<H3><A name=api_blocks_recording>5.7 Recording</A></H3>
+            <P>The requests specified in the Recording section are supported by those
+            products that provide storage of recordings.</P>
+<H3><A name=api_blocks_recording_list><SPAN class=toc-index>5.7.1 </SPAN>List 
+recordings</A></H3>Choose to list all recordings, one specific recording, or all 
+recordings matching a criteria. 
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/view/reclist.cgi[?&lt;parameter&gt;=&lt;value&gt;</PRE><PRE>[&amp;&lt;parameter&gt;=&lt;value&gt; ...]]
+
+</PRE></TD></TR></TBODY></TABLE><BR>with the following parameters and values
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">recordingid=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 0</TD>
+    <TD>Recording id, unique number for each recording.<BR>Only this 
+      recording will be listed.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>List only recordings that match this camera id.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">event=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 0</TD>
+    <TD>List only recordings that match this event id.<BR>Id of an event can be found 
+      in the event parameters.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">time=&lt;int&gt;</TD>
+    <TD width="25%">Seconds since 1970: 1/100 seconds</TD>
+    <TD>List only recordings made during this 
+time.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">timespan=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 0</TD>
+    <TD>List only recordings made during the time span from &quot;time&quot; until &quot;time&quot; + &quot;timespan&quot;.
+	<P><I>Requires:</I> parameter &quot;time&quot;</P> </TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">info=&lt;string&gt;</TD>
+    <TD width="25%">count</TD>
+    <TD>Begin the server response with a count of the number of listed recordings.</TD></TR>
+</TBODY></TABLE>
+<p><SUP><SMALL>1</SMALL></SUP> Product-dependent. 
+Check the product specification. 
+<P><B>Return:</B> 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+&lt;<I>info data</I>&gt;<SUP><SMALL>1</SMALL></SUP>
+&lt;<I>recording data</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>info data</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>numberofrecordings=&lt;<I>count</I>&gt;\r\n
+\r\n  
+        </pre>
+        <TR>
+          <TD>
+            <pre>and &lt;<I>recording data</I>&gt; is</pre>
+          </TD></TR>
+        <TR>
+          <TD><PRE>recordingid=&lt;<I>recordingid</I>&gt;\r\n
+cameraid=&lt;<I>cameraid</I>&gt;\r\n
+cameraname=&lt;<I>name</I>&gt;\r\n
+eventid=&lt;<I>eventid</I>&gt;\r\n
+eventpath=&lt;<I>eventpath</I>&gt;\r\n
+eventname=&lt;<I>name</I>&gt;\r\n
+prebufferstartframe=&lt;<I>prebufferstartframe</I>&gt;\r\n
+prebufferstarttime=&lt;<I>prebufferstarttime</I>&gt;\r\n
+eventstartframe=&lt;<I>eventstartframe</I>&gt;\r\n
+eventstarttime=&lt;<I>eventstarttime</I>&gt;\r\n
+eventstopframe=&lt;<I>eventstopframe</I>&gt;\r\n
+eventstoptime=&lt;<I>eventstoptime</I>&gt;\r\n
+postbufferstopframe=&lt;<I>postbufferstopframe</I>&gt;\r\n
+postbufferstoptime=&lt;<I>postbufferstoptime</I>&gt;\r\n
+priority=&lt;<I>priority</I>&gt;\r\n
+ongoing=&lt;<I>ongoing</I>&gt;\r\n
+secured=&lt;<I>secured</I>&gt;\r\n
+startquality=&lt;<I>startquality</I>&gt;\r\n
+stopquality=&lt;<I>stopquality</I>&gt;\r\n
+\r\n
+[ &lt;<I>recording data</I>&gt; ]
+
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<p><SUP><SMALL>1</SMALL></SUP> Only if parameter &quot;info=count&quot; is used. 
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">recordingid=&lt;int&gt;</TD>
+    <TD width="25%">&gt; 1</TD>
+    <TD>Recording id, unique number for every recording.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>ID of camera recorded from.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">cameraname=&lt;string&gt;</TD>
+    <TD width="25%">user specified</TD>
+    <TD>Name of the camera recorded from.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventid=&lt;int&gt;</TD>
+    <TD width="25%">user specified</TD>
+    <TD>Event ID</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventpath=&lt;string&gt;</TD>
+    <TD width="25%">parameter path</TD>
+    <TD>Parameter path to event parameters.<P><I>Example:</I> root.Event.E7</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventname=&lt;string&gt;</TD>
+    <TD width="25%">user specified</TD>
+    <TD>Name of recorded event.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">prebufferstartframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">frame id</TD>
+    <TD>Startframe is the first image/frame of the recording. If the beginning 
+	is deleted by reduction the startframe is moved to the new start.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">prebufferstarttime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">Seconds since 1970: 1/100 seconds</TD>
+    <TD>Time of the startframe.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventstartframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">frame id</TD>
+    <TD>The image/frame when the event was trigged.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventstarttime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">Seconds since 1970: 1/100 seconds</TD>
+    <TD>Time of the eventstartframe.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventstopframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">frame id</TD>
+    <TD>The image/frame when the event ended.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">eventstoptime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">Seconds since 1970: 1/100 seconds</TD>
+    <TD>Time of the eventstopframe.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">postbufferstopframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">frame id</TD>
+    <TD>The last image/frame of recording.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">postbufferstoptime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD width="25%">Seconds since 1970: 1/100 seconds</TD>
+    <TD>Time of the postbufferstopframe.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">priority=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Priority of the event.<BR>100 = highest priority.
+      <P><B>Note</B>: This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">ongoing=&lt;string&gt;</TD>
+    <TD width="25%">yes, no</TD>
+    <TD>Recording in progress or not.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">secured=&lt;string&gt;</TD>
+    <TD width="25%">yes, no</TD>
+    <TD>A secured (preserved) recording will not be reduced or deleted.<P>See <A href="#api_blocks_recording_preserve">Preserve and release recordings</A></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">startquality=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Quality of the beginning of the recording, due to reduction.<BR>100 = 
+      highest quality.
+      <P><B>Note</B>: This value is internally mapped and is therefore product-dependent.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">stopquality=&lt;int&gt;</TD>
+    <TD width="25%">0 - 100 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Quality of the beginning of the recording, due to reduction.<BR>100 = 
+      highest quality.
+      <P><B>Note</B>: This value is internally mapped and is therefore product-dependent.</P></TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.</P>
+<P><B>Example 1:</B> List recording id 12:
+<P><B>Request:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/reclist.cgi?recordingid=12</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+recordingid=12\r\n
+cameraid=1\r\n
+cameraname=backdoor\r\n
+eventid=2\r\n
+eventpath=root.Event.E2\r\n
+eventname=alarm\r\n
+prebufferstartframe=456213:00\r\n
+prebufferstarttime=98992000:00\r\n
+eventstartframe=456345:00\r\n
+eventstarttime=98992501:00\r\n
+eventstopframe=456287:34\r\n
+eventstoptime=98992500:34\r\n
+postbufferstopframe=456288:34\r\n
+postbufferstoptime=98992501:34\r\n
+priority=2\r\n
+ongoing=no\r\n
+secured=no\r\n
+startquality=3\r\n
+stopquality=4\r\n
+\r\n
+
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 2:</B> List recordings made during timespan Jul 4 2002 12:00:00 - 13:00:00 CET with count info:
+<P><B>Request:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/reclist.cgi?time
+=1025776800&amp;timespan=3600&amp;info=count</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> (edited)
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+numberofrecordings=3\r\n
+\r\n
+recordingid=245\r\n
+...
+eventstarttime=1025754065:43\r\n
+...
+eventstoptime=1025779423:32\r\n
+...
+\r\n
+recordingid=356\r\n
+...
+eventstarttime=1025776780:32\r\n
+...
+eventstoptime=1025776850:02\r\n
+...
+\r\n
+recordingid=357\r\n
+...
+eventstarttime=1025778305:00\r\n
+...
+eventstoptime=1025778401:34\r\n
+...
+\r\n
+
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 3:</B> Search and list recordings of event 6 from camera 1: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/reclist.cgi?camera=1&amp;event=6</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 4:</B> List all available recordings with count info: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/reclist.cgi?info=count</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_recording_play><SPAN class=toc-index>5.7.2 </SPAN>Play 
+recordings</A></H3>With this interface, recorded images can be replayed from the 
+server, either single JPG images or MJPG video streams. 
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/view/player.cgi[?&lt;parameter&gt;=&lt;value&gt;</PRE><PRE>[&amp;&lt;parameter&gt;=&lt;value&gt; ...]]</PRE></TD></TR></TBODY></TABLE><br>
+            Parameters 
+and values listed below.<P>For greater efficiency when playing back and forward, stepping
+            etc., the player uses <I>recording id</I> and <I>session id</I>. <I>Recording id</I>
+            is received by <A href="#api_blocks_recording_list">list recording</A>.<BR>
+Use the recording id in the first player call, and then the 
+session id returned in every player response.<BR><BR><B>Example:</B> 
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TH><font size="1">AXIS Server -&gt;</font></TH>
+    <TH><font size="1">&lt;- Client</font></TH></TR>
+  <TR>
+    <TD colSpan=2><B>List all recordings</B></TD></TR>
+  <TR>
+    <TD>http://myserver/axis-cgi/view/reclist.cgi</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Server response containing info about all recordings</TD></TR>
+  <TR>
+    <TD colSpan=2><B>Play recording 24</B></TD></TR>
+  <TR>
+    <TD>http://myserver/axis-cgi/view/player.cgi?recordingid=24</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Server response containing sessionid=3 and images.</TD></TR>
+  <TR>
+    <TD colSpan=2><B>Play backward</B></TD></TR>
+  <TR>
+    <TD>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;direction=backward</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>Server response containing sessionid=3 and images.</TD></TR></TBODY></TABLE>
+<BR>with the following parameters and values
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%"><B>Parameter/Syntax</B></TD>
+    <TD vAlign=top width="30%"><B>Values</B></TD>
+    <TD vAlign=top><B>Description</B></TR>
+  <TR>
+    <TD vAlign=top width="26%">recordingid=&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">&gt; 0 <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD vAlign=top>
+      The id of the recording to play.<TR>
+    <TD vAlign=top width="26%">sessionid=&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">0 if no session, else &gt; 0 
+      <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Id of this session. Returned in previous server response.<BR>Used for 
+      faster database search.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      camera</TD>
+    <TD vAlign=top width="30%">
+      1, ... <SUP><SMALL>2</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Play from this camera.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      info=&lt;int&gt;</TD>
+    <TD vAlign=top width="30%">
+      1</TD>
+    <TD vAlign=top>
+      Returns a description of this CGI-request. No image generated.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">starttime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">Seconds since 1970: 1/100 seconds 
+      <SUP><SMALL>3</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Play only a part of the recording. Start at this time.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">stoptime=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">Seconds since 1970: 1/100 seconds 
+      <SUP><SMALL>3</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Play only a part of the recording. Stop at this time.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">startframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">frame id <SUP><SMALL>3</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Play only a part of the recording. Start at this frame.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">stopframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">frame id<SUP><SMALL>3</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Play only a part of the recording. Stop at this frame.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">time=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">Seconds since 1970: 1/100 seconds 
+      <SUP><SMALL>4</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Get a single image closest to this time.<P><I>Example:</I> 983453412:10</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">frame=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top width="26%">frame id <SUP><SMALL>4</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Get a single image closest to this frame id.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">direction=&lt;string&gt;</TD>
+    <TD vAlign=top width="30%">forward, backward </TD>
+    <TD vAlign=top>
+      Play recording forwards or backwards.<P><I>Default:</I> forward</P></TD></TR>
+  <TR>
+    <TD rowspan="2" vAlign=top width="26%">step=&lt;int&gt;</TD>
+    <TD vAlign=top width="30%">
+      <CENTER><I>MJPG video stream</I></CENTER></P>
+      <P>&gt; 0</P></TD>
+    <TD vAlign=top>
+      <CENTER><I>MJPG video stream</I></CENTER></P>
+      <P>Play only every <I>n</I>:th frame. Can be used to &quot;fast forward&quot; a recording.</P>
+      <P><I>Default:</I> 1 (play every frame)</P></TD></TR>
+  <TR>
+  <TD vAlign=top width="30%">
+      <CENTER><I>JPG single image</I></CENTER></P>
+      <P>&gt;= 0</P></TD>
+    <TD vAlign=top>
+      <CENTER><I>JPG single image</I></CENTER></P>
+      <P>Get the <I>n</I>:th frame in the given direction from the specified frame.</P>
+      <P><I>Default:</I> 0 (get the specified frame)</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">session=&lt;string&gt;</TD>
+    <TD vAlign=top width="30%">close</TD>
+    <TD vAlign=top>
+      Closes the session and frees server resources for a new session.<BR>
+      If a session is not closed it will eventually timeout and be automatically
+      closed.<P><I>Requires:</I> sessionid</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">timeout=&lt;int&gt;</TD>
+    <TD vAlign=top width="30%">&gt; 0</TD>
+    <TD vAlign=top>
+      Set the timeout value (in seconds) of the player session.<p>The session will be automatically closed if
+      </p>
+      <ul>
+        <LI>an open stream is blocked for this amount of time</LI>
+        <LI>the client has not made a new request in this amount of time after the last stream was closed.</LI>
+      <P><I>Default:</I> 150
+      </ul>
+    </TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">keepalive=&lt;string&gt;</TD>
+    <TD vAlign=top width="30%">yes, no</TD>
+    <TD vAlign=top>
+      Push search progress information in the stream prior to the first frame.<P>This is useful as user feedback and also prevents client software or connection
+      from timing out if the recording lookup (when using start/stop time/frame) takes a long time.</P>
+      <P><I>Default:</I> no </TD></TR>
+  </TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Request must contain one of these. See example below.<BR>
+  <SUP><SMALL>2</SMALL></SUP> Product-dependent. Check the product specification.<BR>
+  <SUP><SMALL>3</SMALL></SUP> Use either <I>starttime</I>/<I>stoptime</I> or <I>startframe</I>/<I>stopframe</I>.
+Do not combine time and frame formats in same request.<BR>
+  <SUP><SMALL>4</SMALL></SUP> Use either <I>time</I> or <I>frame</I> to get a JPG single image.<P>If time is specified, the first subsection
+            found that matches the time (within 
+the specified recording, if such is specified) will be played. Since there can 
+be several subsections that matches the same time (due to changes in server 
+time) there is no way of knowing which was requested, hence the first match 
+is always played.<BR>Frame ID is used to directly identify a unique 
+video frame from a specific camera. This is independent of different recordings and 
+changes in server time. The scale of the Frame ID is linear to real time. 
+<P><B>Example 1:</B> Play recording 5 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?recordingid=5</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 2:</B> Play part of recording backward - (sessionid=3 was returned in previous <A href="#api_blocks_recording_video_response">server response</A>) 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;startframe=45347:00</PRE><PRE>&amp;stopframe=47023:00&amp;direction=backward&amp;keepalive=yes</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 3:</B> Fast forward part of recording - (sessionid=3 was returned in previous <A href="#api_blocks_recording_video_response">server response</A>) 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;startframe=45347:00</PRE><PRE>&amp;stopframe=47023:00&amp;step=4&amp;keepalive=yes</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 4:</B> Get single JPG image of specific time - (sessionid=3 was returned in previous <A href="#api_blocks_recording_video_response">server response</A>)
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;time=983433518:00&amp;keepalive=yes</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 5:</B> Get next single JPG image from specified frame - (sessionid=3 was returned in previous <A href="#api_blocks_recording_video_response">server response</A>)
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;frame=45692:14</PRE><PRE>&amp;direction=forward&amp;step=1&amp;keepalive=yes</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 6:</B> Close session - (sessionid=3 was returned in previous <A href="#api_blocks_recording_video_response">server response</A>)
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?sessionid=3&amp;session=close</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 7:</B> Play time interval - (The first found matching interval for 
+the camera is played) 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/player.cgi?camera=4&amp;starttime=982813227:00</PRE><PRE>&amp;stoptime=982813720:00&amp;keepalive=yes</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_recording_video_response><SPAN class=toc-index>5.7.3 
+Recorded </SPAN>JPG/MJPG response</A></H3>
+<P>When recorded MJPG video is requested, the server returns a continuous 
+flow of JPEG files. The content type is "multipart/x-mixed-replace" and each 
+image is preceded of data about the image and ends with a boundary string 
+&lt;<I>boundary</I>&gt;.</P>
+MJPG video stream response:
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=&lt;<I>boundary</I>&gt;\r\n
+\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>progress</I>&gt;<SUP><SMALL>1</SMALL></SUP>
+&lt;<I>image</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where the proposed &lt;<I>boundary</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>myboundary
+</PRE></TD></TR>
+        <TR>
+          <TD>and the &lt;<I>progress</I>&gt; field is</TD></TR>
+        <TR>
+          <TD><PRE>x-axis-dvr-search-progress-percent: &lt;<I>percent</I>&gt;\r\n
+Content-Type: text/plain\r\n
+\r\n
+searchsourceframe=&lt;<I>frame id</I>&gt;\r\n
+searchcurrentframe=&lt;<I>frame id</I>&gt;\r\n
+searchdestinationframe=&lt;<I>frame id</I>&gt;\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>progress</I>&gt;
+</PRE></TD></TR>
+<TR>
+          <TD>and the returned &lt;<I>image</I>&gt; field is</TD></TR>
+        <TR>
+          <TD><PRE>x-axis-dvr-session-id: &lt;<I>sessionid</I>&gt;\r\n
+x-axis-dvr-frame-time: &lt;<I>time</I>&gt;\r\n
+x-axis-dvr-frame-id: &lt;<I>frameid</I>&gt;\r\n
+x-axis-dvr-frame-state: &lt;<I>state</I>&gt;\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: &lt;<I>image size</I>&gt;\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>image</I>&gt;
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+
+<P><SUP><SMALL>1</SMALL></SUP> Only if parameter &quot;keepalive=yes&quot; is used and
+the search for the start frame takes more than a few seconds. Progress fields are pushed with a few seconds interval.</P>
+
+JPG singe image response:
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+\r\n
+x-axis-dvr-session-id: &lt;<I>sessionid</I>&gt;\r\n
+x-axis-dvr-frame-time: &lt;<I>time</I>&gt;\r\n
+x-axis-dvr-frame-id: &lt;<I>frameid</I>&gt;\r\n
+x-axis-dvr-frame-state: &lt;<I>state</I>&gt;\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: &lt;<I>image size</I>&gt;\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
+<P>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR align=left>
+    <TH><font size="1">Meta tag</font></TH>
+    <TH><font size="1">Description</font></TH></TR>
+  <TR>
+    <TD vAlign=top>x-axis-dvr-search-progress-percent: &lt;int&gt;</TD>
+    <TD vAlign=top>Percent (0-100) of search completed.</TD></TR>
+  <TR>
+    <TD vAlign=top>x-axis-dvr-session-id: &lt;int&gt;</TD>
+    <TD vAlign=top>ID of the session.</TD></TR>
+  <TR>
+    <TD vAlign=top>x-axis-dvr-frame-time: &lt;int&gt;:&lt;int&gt;</TD>
+    <TD>Timestamp in string format epoch:hh.</TD></TR>
+  <TR>
+    <TD vAlign=top>x-axis-dvr-frame-id: &lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top>Frame ID.</TD></TR>
+  <TR>
+    <TD vAlign=top>x-axis-dvr-frame-state: &lt;int&gt;</TD>
+    <TD vAlign=top>Active alarm inputs when this picture was taken, numeric representation of 4-bit field.<BR>
+    Alarm inputs 1 - 4 are represented by values 1 (0001), 2 (0010), 4 (0100), 8 (1000).<P><I>Example:</I> State 5 represents inputs 1 and 3 active (1+4). State 15 represents all inputs active (1+2+4+8).</P></TD></TR></TBODY></TABLE>
+<P>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top>searchsourceframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top>frame id</TD>
+    <TD vAlign=top>Frame that search started at.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR>
+    <TD vAlign=top>searchcurrentframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top>frame id</TD>
+    <TD vAlign=top>Frame that search is currently at.<P><I>Example:</I> 785421:57</P></TD></TR>
+  <TR>
+    <TD vAlign=top>searchdestinationframe=&lt;int&gt;:&lt;int&gt;</TD>
+    <TD vAlign=top>frame id</TD>
+    <TD vAlign=top>Frame that is search for.<P><I>Example:</I> 785421:57</P></TD></TR>
+</TBODY></TABLE>
+<P><B>Example:</B> Response to request for part of recording starting at frame 563234:23 with keepalive set. 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=myboundary\r\n
+\r\n
+--myboundary\r\n
+x-axis-dvr-search-progress-percent: 67\r\n
+Content-Type: text/plain\r\n
+\r\n
+searchsourceframe=436799:00\r\n
+searchcurrentframe=521510:66\r\n
+searchdestinationframe=563234:23\r\n
+--myboundary\r\n
+x-axis-dvr-search-progress-percent: 100\r\n
+Content-Type: text/plain\r\n
+\r\n
+searchsourceframe=436799:00\r\n
+searchcurrentframe=563234:23\r\n
+searchdestinationframe=563234:23\r\n
+--myboundary\r\n
+x-axis-dvr-session-id: 132\r\n
+x-axis-dvr-frame-time: 1003445674:23\r\n
+x-axis-dvr-frame-id: 563234:23\r\n
+x-axis-dvr-frame-state: 3\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 15656\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+x-axis-dvr-session-id: 132\r\n
+x-axis-dvr-frame-time: 1003445674:54\r\n
+x-axis-dvr-frame-id: 563234:54\r\n
+x-axis-dvr-frame-state: 3\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 14978\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+x-axis-dvr-session-id: 132\r\n
+x-axis-dvr-frame-time: 1003445675:21\r\n
+x-axis-dvr-frame-id: 563235:21\r\n
+x-axis-dvr-frame-state: 3\r\n
+Content-Type: image/jpeg\r\n
+Content-Length: 15136\r\n
+\r\n
+&lt;<I>JPEG image data</I>&gt;\r\n
+--myboundary\r\n
+ .
+ .
+ .
+
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_recording_preserve><SPAN class=toc-index>5.7.4 
+</SPAN>Preserve and release recordings</A></H3><B>Note:</B> This request 
+requires Administrator or Operator access. 
+<P>This request changes the status on a recording from released to preserved or 
+vice versa.<BR>A preserved recording is not affected by quality reduction, but
+maintains the quality it had when preserved, until released. 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/operator/recadmin.cgi?</PRE>
+    <PRE>camera=&lt;camera id&gt;&amp;[preserve|release]=&lt;recid&gt;</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 1:</B> Preserve recording 4234 from camera 2: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/operator/recadmin.cgi?camera=2&amp;preserve=4234</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 2:</B> Release recording 243592 from camera 1: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/operator/recadmin.cgi?camera=1&amp;release=243592</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_recording_control><SPAN class=toc-index>5.7.5 
+</SPAN>Controlling recordings</A></H3>
+<P>This interface is used to start and stop recordings from a camera.</P>
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/view/record.cgi[?&lt;parameter&gt;=&lt;value&gt;</PRE><PRE>[&amp;&lt;parameter&gt;=&lt;value&gt; ...]]</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%"><B><I>&lt;parameter&gt;=&lt;value&gt;</I></B> 
+      <P>&nbsp;</P></TD>
+    <TD vAlign=top width="26%"><B>Values</B> 
+      <P>&nbsp;</P></TD>
+    <TD vAlign=top><B>Description</B> 
+      <P>&nbsp;</P></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      do=&lt;string&gt;<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD vAlign=top width="30%">
+      start,<BR>stop</TD>
+    <TD vAlign=top>
+      Start or stop recording.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      camera=&lt;int&gt;<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD vAlign=top width="30%">
+      1, ... <SUP><SMALL>2</SMALL></SUP></TD>
+    <TD vAlign=top>
+      Selects a camera.</TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Request must contain these. See example 
+below.<BR><SUP><SMALL>2</SMALL></SUP> Product-dependent. Check the product 
+specification. 
+<P><B>Example 1: </B>Start recording from camera 1 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/record.cgi?do=start&amp;camera=1</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example 2: </B>Stop recording from camera 2 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/view/record.cgi?do=stop&amp;camera=2</PRE></TD></TR></TBODY></TABLE>
+<P><!-- --------------------------------------------------------------- --></P>
+<H3><A name=api_blocks_io>5.8 I/O</A></H3>
+            <P>The requests specified in the I/O section are supported by those products that have Input/Output connectors.</P>
+<H3><A name=api_blocks_io_control>5.8.1 I/O control</A></H3>
+<H5><A name=api_blocks_io_control_input><SPAN class=toc-index>5.8.1.1 
+</SPAN>Input</A></H5>
+<P>Input</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> &nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/io/input.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</PRE><PRE>[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">check=&lt;int&gt;[,&lt;int&gt;, ...]</TD>
+    <TD width="25%">&lt;<I>id1</I>&gt;[,&lt;<I>id2</I>&gt;, ...] 
+      <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Returns the status of one or more inputs numbered <I>id1 ,id2, 
+      ...</I>. 
+      <P>See <A href="#api_blocks_general_parameter_response">5.2.1</A> 
+      for more information about server responses.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">monitor=&lt;int&gt;[,<BR>&lt;int&gt;, ...] 
+      <SUP><SMALL>2</SMALL></SUP></TD>
+    <TD width="25%">&lt;<I>id1</I>&gt;[,&lt;<I>id2</I>&gt;, ...] 
+      <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Returns a multipart stream of "check" inputs (see return description 
+      below).</TD></TR></TBODY></TABLE>
+            <P><SUP><SMALL>1</SMALL></SUP> Number of inputs may differ for different 
+camera and video servers. See product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP> Support for this parameter is 
+product/release-dependent.</P>
+<P><B>Return:</B> "<I>monitor</I>", i.e., multipart "<I>check</I>" parameter 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace;boundary=&lt;<I>boundary</I>&gt;\r\n
+\r\n 
+--&lt;<I>boundary</I>&gt;\r\n
+&lt;<I>monitor data</I>&gt;
+</PRE></TD></TR>
+        <TR>
+          <TD>where the proposed boundary &lt;<I>boundary</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>ioboundary
+</PRE></TD></TR>
+        <TR>
+          <TD>and the &lt;<I>monitor data</I>&gt; part is</TD></TR>
+        <TR>
+          <TD><PRE>Content-Type: text/plain\r\n
+\r\n
+&lt;<I>check data</I>&gt;
+--&lt;<I>boundary</I>&gt;\r\n
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>check data</I>&gt; is</TD></TR>
+        <TR>
+          <TD><PRE>IO&lt;<I>n</I>&gt;:&lt;<I>action char</I>&gt;\r\n
+</PRE></TD></TR>
+        <TR>
+          <TD>and &lt;<I>n</I>&gt; is the I/O port number and &lt;<I>action 
+            char</I>&gt; is the action character described in the table 
+            above.<BR><B>Note:</B> The output can contain extra blank lines, 
+            i.e., extra <TT>\r\n</TT> within the 
+  sections.</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Monitor data on input ports 1, 2, 3, and 4 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/io/input.cgi?monitor=1,2,3,4
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Monitor data on input port 1 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: multipart/x-mixed-replace; boundary=ioboundary\r\n
+\r\n
+\r\n
+\r\n
+\r\n
+--ioboundary\r\n
+Content-Type: text/plain\r\n
+\r\n
+IO0:/\n
+\r\n
+\r\n
+--ioboundary\r\n
+Content-Type: text/plain\r\n
+\r\n
+IO0:H\n
+\r\n
+--ioboundary\r\n
+Content-Type: text/plain\r\n
+\r\n
+\r\n
+IO0:\\n
+\r\n
+\r\n
+--ioboundary\r\n
+Content-Type: text/plain\r\n
+\r\n
+\r\n                      
+\r\n
+\r\n
+--ioboundary\r\n
+Content-Type: text/plain\r\n
+\r\n
+\r\n
+ .
+ .
+ .
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><A name=api_blocks_io_control_output><SPAN class=toc-index>5.8.1.2 
+</SPAN>Output</A></H5>
+<P>Output</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/io/output.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</PRE><PRE>[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR>
+    <TD width="25%">check=&lt;int&gt;[,&lt;int&gt;, ...]</TD>
+    <TD width="25%">&lt;<I>id1</I>&gt;[,&lt;<I>id2</I>&gt;, ...] 
+      <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Returns the status of one or more outputs numbered <I>id1 ,id2, 
+      ...</I>. 
+      <P>See <A href="#api_blocks_general_parameter_response">5.2.1</A> 
+      for more information about server responses.</P></TD></TR>
+  <TR>
+    <TD width="25%">monitor=&lt;int&gt;[,<BR>&lt;int&gt;, ...] 
+      <SUP><SMALL>2</SMALL></SUP></TD>
+    <TD width="25%">&lt;<I>id1</I>&gt;[,&lt;<I>id2</I>&gt;, ...] 
+      <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Returns a multipart stream of "check" outputs (see return description 
+      below).</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">action=&lt;string&gt;</TD>
+    <TD 
+      width="25%">[&lt;<I>id</I>&gt;<SUP><SMALL>1</SMALL></SUP>]:&lt;<I>a</I>&gt;[&lt;<I>wait</I>&gt; 
+      &lt;<I>a</I>&gt; ...]</TD>
+    <TD>
+      Sets the output relay &lt;<I>id</I>&gt; on or off and waits 
+      &lt;<I>wait</I>&gt; milliseconds.<P>&lt;<I>id</I>&gt; = Output number. If omitted, output <I>1</I> is 
+      selected.</P>
+      <P>&lt;<I>a</I>&gt; = Action character: / or \<BR>/ = on, \ = off.</P>
+      <P>&lt;<I>wait</I>&gt; = Delay in milliseconds.</P></TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Number of outputs may differ for different 
+camera and video servers. See product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP> Support for this parameter is 
+product/release-dependent.</P>
+<P>&nbsp;</P>
+<P><B>Example:</B> Set output 1 on 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/io/output.cgi?action=1:/
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Set two 300 ms pulses with 500 ms delay between the pulses on 
+output 1 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/io/output.cgi?action=1:/300\500/300\
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Wait 1 second before setting output 1 on 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/io/output.cgi?action=1:1000/
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_io_virtual>5.8.2 Virtual I/O control</A></H3>
+<H5><A name=api_blocks_io_virtual_input><SPAN class=toc-index>5.8.2.1 
+</SPAN>Input</A></H5>
+<P>Input</P>
+<P><B>Method: </B>GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/io/virtualinput.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">action=&lt;string&gt;</TD>
+    <TD width="25%">[&lt;<I>id</I>&gt;]:&lt;<I>a</I>&gt;</TD>
+    <TD>
+      Sets the virtual input &lt;<I>id</I>&gt; on or off.<P>&lt;<I>id</I>&gt; = Input number. If omitted, input <I>1</I> is 
+      selected.</P>
+      <P>&lt;<I>a</I>&gt; = Action character: / or \<BR>/ = on, \ = 
+  off.</P></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Set virtual input 1 on 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/io/virtualinput.cgi?action=1:/
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_serial_port>5.9 Serial Port</A></H3>
+<P>The requests specified in the Serial Port section are supported by those
+video products that have implemented a Generic driver.</P>
+<H3><A name=api_blocks_serial_port_control>5.9.1 Serial port control</A></H3>
+<P>Control serial port</P>
+<P><B>Method: </B>GET/POST</P>
+<P><B>Syntax:</B> &nbsp; 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/com/serial.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</PRE><PRE>[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;... ]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">port=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>The COM port is selected with this parameter.</TD></TR>
+  <TR vAlign=top>
+    <TD 
+      width="25%">write=&lt;string&gt;<BR>dataout<SUP><SMALL>2</SMALL></SUP>=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>bytestring</I>&gt;</TD>
+    <TD>
+      &lt;<I>bytestring</I>&gt;: hex coded bytes with values of {0, 1, 2, 3, 
+      4, 5, 6, 7, 8, 9, A, B, C, D, E, F, a, b, c, d, e, f}<P>Writes the specified data string to the selected serial port. Max 
+      string length: 128 bytes <SUP><SMALL>1</SMALL></SUP> .</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">writestring=&lt;string&gt;</TD>
+    <TD width="25%">&lt;<I>url encoded string</I>&gt;</TD>
+    <TD>
+      Writes the URL-encoded string to the selected serial port.<P>Max string length: 128 bytes <SUP><SMALL>1</SMALL></SUP>.</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">read=&lt;int&gt;</TD>
+    <TD width="25%">1, ...</TD>
+    <TD>Reads <I>n</I> bytes from the selected serial port. 
+      <P>The returned data will be hexadecimal coded and placed between #s (e.g. 
+      #3A#)</P></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">wait=&lt;int&gt;</TD>
+    <TD width="25%">1 - 9</TD>
+    <TD>Specified in seconds. Used together with the "read" parameter. A read 
+      is terminated when the specified number of bytes is read or when the wait 
+      period has ended.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">timeout=&lt;int&gt;</TD>
+    <TD width="25%">1 - 9000</TD>
+    <TD>Specified in milliseconds. Used together with the "read" parameter. A 
+      read is terminated when the specified number of bytes is read or the 
+      timeout has expired.</TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.<BR><SUP><SMALL>2</SMALL></SUP> Obsolete.</P>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_serial_port_open>5.9.2 Open serial port</A></H3>
+<P>This CGI makes it possible to open the serial port using the HTTP protocol. 
+Authentication is handled by the Web server.</P>
+<UL>
+  <LI>After an initial connect command from the client, the connection is kept 
+  alive until the client closes it. 
+  <LI>Several clients may be connected concurrently to the same serial port. 
+  <LI>After the connection has been set up, data sent from the client to the Web 
+  server is forwarded to the serial port, and incoming serial data is returned 
+  to all currently connected clients. </LI></UL>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/com/serial.cgi?&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</PRE><PRE>[&amp;&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;...]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameters and values 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;=&lt;<I>value</I>&gt;</B></TD>
+    <TD width="25%"><B>Values</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">port=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD>Select COM port.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">camera=&lt;int&gt;<BR>unit=&lt;int&gt;</TD>
+    <TD width="25%">1, ... <SUP><SMALL>1</SMALL></SUP></TD>
+    <TD width="25%">Selects the source camera or external unit. If omitted, 
+      and "port=" command is also omitted, the default camera/unit is used to 
+      determine the serial port to use.</TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">connect=&lt;string&gt;</TD>
+    <TD width="25%">yes</TD>
+    <TD>Makes the server keep the connection open, and start acting as a link 
+      between the client and the serial port.</TD></TR></TBODY></TABLE>
+<P><SUP><SMALL>1</SMALL></SUP> Product-dependent. Check the product 
+specification.</P>
+<P>&nbsp;</P>
+<H3><A name=api_blocks_ppp>5.10 PPP</A></H3>
+            <P>The requests specified in the PPP section are supported by those products that have support for the PPP protocol.</P>
+<H3><A name=api_blocks_ppp_close>5.10.1 Close PPP connection</A></H3>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P>Accessing this URL will force the Axis device to immediately close and 
+disconnect any current PPP connection. When closing a PPP connection, all 
+connections will be closed (dial-in, dial-out, callback).</P>
+<P><B>Method:</B> GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/closeppp.cgi[?&lt;<I>wait</I>&gt;]
+</PRE></TD></TR></TBODY></TABLE>
+<P>with the following parameter and value 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="25%"><B>&lt;<I>parameter</I>&gt;</B></TD>
+    <TD width="25%"><B>Value</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR vAlign=top>
+    <TD width="25%">&lt;wait&gt;</TD>
+    <TD width="25%">&lt;int&gt;</TD>
+    <TD>Number of seconds from request is received until the PPP connection is 
+      closed. 
+      <P><I>Default:</I> 0</P></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> close PPP connection 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 204 No Content\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P><!-- *********************************************************************** -->
+<H3><A name=api_blocks_ppp_reset>5.10.2 Reset PPP connection maxtimer</A></H3>
+<P><B>Note: </B>This request requires administrator access (administrator 
+authorization).</P>
+<P>Accessing this URL will reset the timer counting down the maximum time a 
+device is allowed to be connected over a PPP connection.</P>
+<P><B>Method:</B> GET</P>
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/resetppptimer.cgi
+</PRE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> reset PPP connection maxtimer 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 204 No Content\r\n
+</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><SPAN class=toc-index><A name=api_blocks_event>5.11 Event</A></SPAN></H3>
+            <P>The requests specified in the Event section are supported by those
+            products that have support for event handling.</P>
+<H3><A name=api_blocks_event_admin><SPAN class=toc-index>5.11.1 </SPAN>Event 
+administration</A></H3><B>Note:</B> This request requires Administrator or 
+Operator access. 
+<P>Used to administer the list of event entries.</P>
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/operator/ev_admin.cgi?add</PRE><PRE>http://&lt;<I>servername</I>&gt;/axis-cgi/operator/ev_admin.cgi?delete=&lt;entry&gt;</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><A name=api_blocks_event_admin_actions><SPAN class=toc-index>5.11.1.1 
+</SPAN>Actions</A></H5>
+            <P>These are the actions used to administer the events. Each event is given an 
+entry identifier (<I>E0</I>, <I>E1</I> <I>E2</I>, etc) which is later used to 
+delete the entry. The identifier of a deleted entry may be reused by a new 
+entry.</P>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%">
+      <B>Action/Syntax</B></TD>
+    <TD vAlign=top width="30%">
+      <B>Argument</B></TD>
+    <TD vAlign=top>
+      <B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      add</TD>
+    <TD vAlign=top width="26%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Add a new empty entry to list of events.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      delete=&lt;<I>entry</I>&gt;</TD>
+    <TD vAlign=top width="30%">
+      E0, E1, E2, ...</TD>
+    <TD vAlign=top>
+      Delete an entry from list of events.</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><SPAN class=toc-index><A 
+name=api_blocks_event_admin_server_response>5.11.1.2 </A></SPAN><A 
+name=api_blocks_event_admin_server_response>Server responses</A></H5>
+<P>The actions produce one of the following server responses:</P>
+<P><B>Return:</B> A successful <I>delete</I>: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+OK\r\n</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A successful <I>add</I>: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+&lt;<I>entry</I>&gt; OK\r\n</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A failed request. Input values are probably incorrect: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+Request failed: &lt;<I>error message</I>&gt;\r\n</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Example: </B>Adding new event entry 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/operator/ev_admin.cgi?add</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+E7 OK\r\n</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example: </B>Deleting event entry 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/operator/ev_admin.cgi?delete=E7</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+OK\r\n</PRE></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H3><SPAN class=toc-index><A name=api_blocks_firewall>5.12 
+Firewall</A></SPAN></H3>
+<P>The requests specified in the Firewall section are supported by those products that have built-in firewall functionality.</P>
+<H3><SPAN class=toc-index><A name=api_blocks_firewall_admin>5.12.1</A></SPAN><A 
+name=api_blocks_firewall_admin><SPAN class=toc-index> </SPAN>Firewall 
+administration</A></H3><B>Note:</B> This request requires Administrator access. 
+<P>Used to administer the built-in firewall, which restricts network access to 
+the server. When enabled, only the hosts added through this interface will be 
+able to access the server.<P>For each added entry, the services that are to be
+            accessible must be specified. 
+This is done by parameters, from where a specific service or a range 
+of port numbers for custom services can be specified.</P>
+<P><B>Method: </B>GET 
+<P><B>Syntax:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD><pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?list</pre>
+<pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?enable[&amp;&lt;option&gt; ...]
+</pre><pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?disable[&amp;&lt;option&gt; ...]
+</pre><pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?add[&amp;&lt;parameter&gt;[=&lt;value&gt;] ...]]
+[&amp;&lt;option&gt; ...]
+</pre><pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?update=&lt;entry&gt;[&amp;&lt;parameter&gt;
+[=&lt;value&gt;] ...]][&amp;&lt;option&gt; ...]
+</pre><pre>http://&lt;<I>servername</I>&gt;/axis-cgi/admin/fwall_admin.cgi?delete=&lt;entry&gt;[&amp;&lt;option&gt; ...]
+</pre></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><A name=api_blocks_firewall_admin_actions><SPAN class=toc-index>5.12.1.1 
+</SPAN>Actions</A></H5>
+<P>These are the actions used to administer the firewall. Each added host is 
+given an entry identifier (<I>F0</I>, <I>F1</I> <I>F2</I>, etc) which is later used to modify or delete the entry. The identifier of a deleted entry may be 
+reused by a new entry.</P>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%">
+      <B>Action/Syntax</B></TD>
+    <TD vAlign=top width="30%">
+      <B>Argument</B></TD>
+    <TD vAlign=top>
+      <B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      list</TD>
+    <TD vAlign=top width="26%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Produce a list of all settings and entries.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      add</TD>
+    <TD vAlign=top width="26%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Add a new entry to list of accepted hosts.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      delete=&lt;<I>entry</I>&gt;</TD>
+    <TD vAlign=top width="30%">
+      F0, F1, F2, ...</TD>
+    <TD vAlign=top>
+      Delete an entry from list of accepted hosts.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      update=&lt;<I>entry</I>&gt;</TD>
+    <TD vAlign=top width="30%">
+      F0, F1, F2, ...</TD>
+    <TD vAlign=top>
+      Update an entry in list of accepted hosts.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      enable</TD>
+    <TD vAlign=top width="26%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Enable the firewall. Blocks access from all except the added 
+      entries.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      disable</TD>
+    <TD vAlign=top width="26%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Disables the firewall. Enables access by everyone.</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><A name=api_blocks_firewall_admin_parameters><SPAN class=toc-index>5.12.1.2 
+</SPAN>Parameters</A></H5>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%">
+      <B>Parameter/Syntax</B></TD>
+    <TD vAlign=top width="30%">
+      <B>Values</B></TD>
+    <TD vAlign=top>
+      <B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      host=&lt;<I>address</I>&gt;<SUP><SMALL>1</SMALL></SUP></TD>
+    <TD vAlign=top width="30%">
+      host name<SUP><SMALL>2</SMALL></SUP> or numerical Internet 
+    address</TD>
+    <TD vAlign=top>
+      Host to add or modify.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      http</TD>
+    <TD vAlign=top width="30%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Opens ports for HTTP access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      https</TD>
+    <TD vAlign=top width="30%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Opens ports for HTTPS access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      ftp</TD>
+    <TD vAlign=top width="30%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Opens ports for FTP access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      telnet</TD>
+    <TD vAlign=top width="30%">
+      &nbsp;</TD>
+    <TD vAlign=top>
+      Opens ports for TELNET access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      tcp=&lt;<I>int</I>&gt;-&lt;<I>int</I>&gt;</TD>
+    <TD vAlign=top width="30%">
+      1024 - 65535</TD>
+    <TD vAlign=top>
+      Opens specified TCP port range.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      udp=&lt;<I>int</I>&gt;-&lt;<I>int</I>&gt;</TD>
+    <TD vAlign=top width="30%">
+      1024 - 65535</TD>
+    <TD vAlign=top>
+      Opens specified UDP port 
+range.</TD></TR></TBODY></TABLE>
+<p><SUP><SMALL>1</SMALL></SUP> Required by 
+action <I>add</I>.<BR><SUP><SMALL>2</SMALL></SUP>Address specified by host name 
+requires that the server has access to a Domain Name Server. 
+<P>&nbsp;</P>
+<H5><A name=api_blocks_firewall_admin_options><SPAN class=toc-index>5.12.1.3 
+</SPAN>Options</A></H5>
+<P>Before modifying the settings of an enabled firewall, the script will verify 
+that the host that requested the action will still have access to the server 
+once the action is performed. If the client uses a proxy, proxy access 
+will be verified instead.</P>
+<P>If verification fails, i.e. the host would have been blocked from the 
+server, the action is not carried out and an error is returned. This prevents 
+accidental lock out by the administrator, etc.</P>
+<P>By setting the <I>force</I> option this verification is skipped and all 
+actions are carried out, regardless of their consequences.</P>
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%">
+      <B>Option/Syntax</B><TD vAlign=top>
+      <B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      force</TD>
+    <TD vAlign=top>
+      Do not verify host accessibility.</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<H5><A name=api_blocks_firewall_admin_server_response><SPAN 
+class=toc-index>5.12.1.4 </SPAN>Server responses</A></H5>
+<P>The actions produce one of the following server responses:</P>
+<P><B>Return:</B> A successful <I>enable</I>, <I>disable</I>, <I>delete</I> or 
+<I>update</I>: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+OK\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A successful <I>add</I>: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+&lt;<I>entry</I>&gt; OK\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A failed request. Input values are probably incorrect: 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+Request failed: &lt;<I>error message</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A failed verification by an <I>enable</I>, <I>add</I>, 
+<I>delete</I> or <I>update</I> request. No settings have been changed. Use the 
+<I>force</I> option to override the verification. 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+Verification failed for IP &lt;<I>Numerical Internet address</I>&gt;\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P><B>Return:</B> A list request. 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=7 border=0>
+        <TBODY>
+        <TR>
+          <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n    
+[Firewall]\r\n
+enabled=&lt;<I>value</I>&gt;\r\n
+\r\n
+&lt;<I>entry data</I>&gt;
+&lt;<I>entry data</I>&gt;
+...
+</PRE></TD></TR>
+        <TR>
+          <TD>where each &lt;<I>entry data</I>&gt; is:</TD></TR>
+        <TR>
+          <TD><PRE>    
+[&lt;<I>entry</I>&gt;]\r\n
+host=&lt;<I>value</I>&gt;\r\n
+http=&lt;<I>value</I>&gt;\r\n
+https=&lt;<I>value</I>&gt;\r\n
+ftp=&lt;<I>value</I>&gt;\r\n
+telnet=&lt;<I>value</I>&gt;\r\n
+tcp=&lt;<I>value</I>&gt;\r\n
+udp=&lt;<I>value</I>&gt;\r\n
+\r\n
+</PRE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P>The parameter values has the following syntax: 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="26%">
+      <B>Parameter</B></TD>
+    <TD vAlign=top width="30%">
+      <B>Values</B></TD>
+    <TD vAlign=top>
+      <B>Description</B></TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      enabled</TD>
+    <TD vAlign=top width="30%">
+      yes, no</TD>
+    <TD vAlign=top>
+      States if the firewall is enabled or disabled.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      host</TD>
+    <TD vAlign=top width="30%">
+      host name<SUP><SMALL>1</SMALL></SUP> or numeric Internet address</TD>
+    <TD vAlign=top>
+      The host for this entry.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      http</TD>
+    <TD vAlign=top width="30%">
+      yes, no</TD>
+    <TD vAlign=top>
+      States if host has HTTP access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      https</TD>
+    <TD vAlign=top width="30%">
+      yes, no</TD>
+    <TD vAlign=top>
+      States if host has HTTPS access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      ftp</TD>
+    <TD vAlign=top width="30%">
+      yes, no</TD>
+    <TD vAlign=top>
+      States if host has FTP access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      telnet</TD>
+    <TD vAlign=top width="30%">
+      yes, no</TD>
+    <TD vAlign=top>
+      States if host has TELNET access.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      tcp</TD>
+    <TD vAlign=top width="30%">
+      [1024-65535]-[1024-65535]</TD>
+    <TD vAlign=top>
+      Specific TCP port range accessible by host.</TD></TR>
+  <TR>
+    <TD vAlign=top width="26%">
+      udp</TD>
+    <TD vAlign=top width="30%">
+      [1024-65535]-[1024-65535]</TD>
+    <TD vAlign=top>
+      Specific UDP port range accessible by 
+host.</TD></TR></TBODY></TABLE>
+<p><SUP><SMALL>1</SMALL></SUP>Address specified 
+by host name requires that the server has access to a Domain Name Server. 
+<P><B>Example:</B> Adding new host with HTTP and FTP access, with verification 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/fwall_admin.cgi?add&amp;host=10.13.18.20&amp;http&amp;ftp</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+F1 OK\r\n</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Listing entries 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/fwall_admin.cgi?list</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+[Firewall]\r\n
+enabled=&quot;yes&quot;\r\n
+\r\n
+[F0]\r\n
+\r\n
+host=10.13.18.1\r\n
+http=yes\r\n
+https=no\r\n
+ftp=no\r\n
+telnet=no\r\n
+tcp=4000-4001\r\n
+udp=\r\n
+\r\n
+[F1]\r\n
+host=10.13.18.20\r\n
+http=yes\r\n
+https=no\r\n
+ftp=yes\r\n
+telnet=no\r\n
+tcp=\r\n
+udp=\r\n
+\r\n</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Deleting entry, with failed verification 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/fwall_admin.cgi?delete=F1</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+Verification failed for IP 10.13.18.20\r\n</PRE></TD></TR></TBODY></TABLE>
+<P><B>Example:</B> Deleting entry, overriding verification 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>http://myserver/axis-cgi/admin/fwall_admin.cgi?delete=F1&amp;force</PRE></TD></TR></TBODY></TABLE>
+<P><B>Response:</B> 
+<TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#eeeeee border=0>
+  <TBODY>
+  <TR>
+    <TD><PRE>HTTP/1.0 200 OK\r\n
+Content-Type: text/plain\r\n
+\r\n
+OK\r\n</PRE></TD></TR></TBODY></TABLE>
+<p>&nbsp;</p>
+
+            <p>&nbsp;
+
+      <!-- Content right column end --></td>
+	</tr>
+</table>
+</div>
+<div class="axisLight_BgBottom">
+<div class="axisLight_Include">
+<!--webbot bot="Include" U-Include="../../../core/includes/bottom.htm" TAG="BODY" startspan -->
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+   			<td width="55%"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br><img border="0" src="../../../core/graphics/blank.gif" width="9" height="1"><img border="0" src="../../../core/graphics/logo_triangle_bw.gif" width="11" height="9">
+				<font color="#999999"><i>Axis specializes in professional network video and printing solutions</i></font>
+			</td>
+   			<td width="45%" align="right"><img border="0" src="../../../core/graphics/blank.gif" width="9" height="4"><br>
+              &nbsp;&nbsp;&nbsp; <a href="../../../corporate/corp/glossary_general.htm" style="text-decoration:none;color:#999999"><b>Glossary</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../corporate/contact.htm" style="text-decoration:none;color:#999999"><b>Contact</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../sites.htm" style="text-decoration:none;color:#999999"><b>Sites</b></a>
+				&nbsp;<font color="#999999">|</font>&nbsp; <a href="../../../privacy.htm" style="text-decoration:none;color:#999999"><b>Privacy Statement</b></a>
+				<img border="0" src="../../../core/graphics/blank.gif" width="9" height="1">
+			</td>
+		</tr>
+	</table>
+<!-- Google analytics start -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-266925-1";
+urchinTracker();
+</script>
+<!-- Google analytics end -->
+<!--webbot bot="Include" i-checksum="33026" endspan -->
+</div></div>
+
+</center>
+</body>
+</html>

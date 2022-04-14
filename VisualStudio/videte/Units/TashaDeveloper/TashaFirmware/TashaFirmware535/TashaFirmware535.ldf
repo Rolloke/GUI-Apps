@@ -1,0 +1,411 @@
+/*
+** LDF for ADSP-BF535.
+** 
+** This LDF defines an example layout for a system which contains 256K
+** of L2 SRAM, with the available L1 SRAM left unused. It does
+** not assume the presence of any external memory. See below for
+** memory map descriptions.
+** 
+** There are a number of configuration options that can be specified
+** either by compiler flags, or by linker flags directly. The options are:
+** 
+** USE_PROFILER0
+** 	Enabled by -p. Link in profiling library, and write results to
+** 	both stdout and mon.out.
+** USE_PROFILER1
+** 	Enabled by -p1. Only write profiling data to mon.out.
+** USE_PROFILER2
+** 	Enabled by -p2. Only write profiling data to stdout.
+** USE_PROFILER
+** 	Equivalent to USE_PROFILER0.
+** USE_FILEIO
+** 	Link in support for file I/O (fopen, etc). Also necessary
+** 	for argc/argv handling.
+** LOW64K
+** 	Place all code and data in the 0x0000-0xFFFF area of memory.
+** 	This option is disabled by default, because that region of
+** 	the memory map is external memory, which may not exist.
+** CMDLINE
+** 	Link exit routines suitable for use with the command-line
+** 	simulator ccblkfn, rather than the VisualDSP++ debugger.
+** CRT
+** 	Link in C/C++ Runtime.
+** USERMODE
+**	Set up event handlers and go to usermode.
+** 
+** Memory map.
+** 
+** The known memory spaces are as follows:
+** 
+** 0xFFE00000 - 0xFFFFFFFF		Core MMR registers (2MB)
+** 0xFFC00000 - 0xFFDFFFFF		System MMR registers (2MB)
+** 0xFFB04000 - 0xFFBFFFFF		Reserved
+** 0xFFB00000 - 0xFFB00FFF		Scratch SRAM (4K)
+** 0xFFA04000 - 0xFFAFFFFF		Reserved
+** 0xFFA00000 - 0xFFA03FFF		Code SRAM (16K)
+** 0xFF904000 - 0xFF9FFFFF		Reserved
+** 0xFF900000 - 0xFF903FFF		Data Bank B SRAM (16K)
+** 0xFF804000 - 0xFF8FFFFF		Reserved
+** 0xFF800000 - 0xFF803FFF		Data Bank A SRAM (16K)
+** 0xF0040000 - 0xFF7FFFFF		Reserved RAM
+** 0xF0000000 - 0xF003FFFF		L2 SRAM (256K)
+** 0xEF000400 - 0xEFFFFFFF		Reserved ROM
+** 0xEF000000 - 0xEF0003FF		Boot ROM (1K)
+** 0x00000000 - 0xEEFFFFFF		unpopulated
+** 
+** The memory sections defined below assume that only L1 and L2 SRAM
+** are available. We use L2, and leave L1 for explicit programmer use.
+** The file VisualDSP/Blackfin/lib/src/libc/basiccrt.s contains example
+** startup code which could be used to initialise the L1 SRAM as cache
+** for L2.
+** 
+*/
+
+ARCHITECTURE(ADSP-BF535)
+
+SEARCH_DIR( $ADI_DSP\Blackfin\lib )
+
+/* Moving to primIO means that we must always include the FileIO support,
+** so that printf() will work.
+*/
+
+#ifndef USE_FILEIO	/* { */
+#define USE_FILEIO 1
+#endif	/* } */
+
+#ifdef USE_PROFILER	/* { */
+#define USE_PROFILER0
+#endif	/* } */
+
+#ifdef USE_PROFILER0	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define PROFFLAG prfflg0_535y.doj
+#else
+#define PROFFLAG prfflg0_535.doj
+#endif	/* } */
+// The profiler needs File I/O to write its results.
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef USE_PROFILER1	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define PROFFLAG prfflg1_535y.doj
+#else
+#define PROFFLAG prfflg1_535.doj
+#endif	/* } */
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef USE_PROFILER2	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define PROFFLAG prfflg2_535y.doj
+#else
+#define PROFFLAG prfflg2_535.doj
+#endif	/* } */
+#define USE_FILEIO 1
+#ifndef USE_PROFILER	/* { */
+#define USE_PROFILER
+#endif	/* } */
+#endif	/* } */
+
+#ifdef CMDLINE	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define OMEGA halt535y.doj
+#else
+#define OMEGA halt535.doj
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define OMEGA idle535y.doj
+#else
+#define OMEGA idle535.doj
+#endif	/* } */
+#endif	/* } */
+
+#ifdef MEMBSZ /* { */
+#define MEMINIT __initsbsz535.doj,
+#else
+#define MEMINIT
+#endif /* } */
+
+#ifdef USERMODE	/* { */
+#define LIBSMALL
+#else
+#define LIBSMALL libsmall535.dlb,
+#endif	/* } */
+
+#ifdef M3_RESERVED	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBM3 libm3res535y.dlb
+#define LIBDSP libdspm3res535y.dlb
+#define SFTFLT libsftflt535y.dlb
+#else
+#define LIBM3 libm3res535.dlb
+#define LIBDSP libdspm3res535.dlb
+#define SFTFLT libsftflt535.dlb
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBM3 libm3free535y.dlb
+#define LIBDSP libdsp535y.dlb
+#define SFTFLT libsftflt535y.dlb
+#else
+#define LIBM3 libm3free535.dlb
+#define LIBDSP libdsp535.dlb
+#define SFTFLT libsftflt535.dlb
+#endif	/* } */
+#endif	/* } */
+
+#ifdef IEEEFP	/* { */
+#define FPLIBS SFTFLT, LIBDSP
+#else
+#define FPLIBS LIBDSP, SFTFLT
+#endif	/* } */
+
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBS LIBSMALL MEMINIT libc535y.dlb, LIBM3, libevent535y.dlb, libio535y.dlb, libcpp535y.dlb, libcpprt535y.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#else
+#define LIBS LIBSMALL MEMINIT libc535.dlb, LIBM3, libevent535.dlb, libio535.dlb, libcpp535.dlb, libcpprt535.dlb, FPLIBS, libetsi535.dlb, OMEGA
+#endif	/* } */
+#if defined(USE_FILEIO) || defined(USE_PROFGUIDE)
+#ifdef CSYNC_DEFINED	/* { */
+$LIBRARIES = LIBS, librt_fileio535y.dlb;
+#else
+$LIBRARIES = LIBS, librt_fileio535.dlb;
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+$LIBRARIES = LIBS, librt535y.dlb;
+#else
+$LIBRARIES = LIBS, librt535.dlb;
+#endif	/* } */
+#endif	/* } */
+
+// Libraries from the command line are included in COMMAND_LINE_OBJECTS.
+
+#ifdef USE_PROFILER	/* { */
+#ifdef USERMODE	/* { */
+#ifdef USE_FILEIO	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT crtfpc535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtfpc535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT crtcp535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtcp535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#else	/* USERMODE */
+#ifdef USE_FILEIO	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT crtsfpc535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtsfpc535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT crtscp535y.doj, libprofile535y.dlb, PROFFLAG
+#else
+#define CRT crtscp535.doj, libprofile535.dlb, PROFFLAG
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#endif	/* USERMODE */	/* } */
+#else
+#ifdef USERMODE	/* { */
+#ifdef USE_FILEIO	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT  crtcf535y.doj
+#else
+#define CRT  crtcf535.doj
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT  crtc535y.doj
+#else
+#define CRT  crtc535.doj
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#else
+#ifdef USE_FILEIO	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT  crtsfc535y.doj
+#else
+#define CRT  crtsfc535.doj
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define CRT  crtsc535y.doj
+#else
+#define CRT  crtsc535.doj
+#endif	/* } */
+#endif  /* USE_FILEIO */	/* } */
+#endif	/* USERMODE */	/* } */
+#endif  /* USE_PROFILER */	/* } */
+
+#ifdef CSYNC_DEFINED	/* { */
+#define ENDCRT , crtn535y.doj
+#else
+#define ENDCRT , crtn535.doj
+#endif	/* } */
+
+$OBJECTS = CRT, $COMMAND_LINE_OBJECTS ENDCRT;
+
+MEMORY
+{
+#ifdef LOW64K	/* { */
+#error Low64k option requires manual configuration of the LDF file.
+#ifdef __EZKIT_LICENSE_RESTRICTION_Blackfin__	/* { */
+#error Low64K option not compatible with initial EZ-Kit Licences.
+#endif	/* } */
+/*
+** The LOW64K option is intended for mapping the code and data into
+** the lowest 64K of memory. The compiler's -Oz option uses LOW64K.
+** There must be suitable external memory available in the range
+** 0x0000 - 0xFFFF for this option to be used. Please modify the
+** PROGRAM ranges accordingly, if you wish to use LOW64K, and have
+** a suitable hardware configuration.
+*/
+#endif	/* } */
+#ifdef __EZKIT_LICENSE_RESTRICTION_Blackfin__	/* { */
+MEM_PROGRAM     { TYPE(RAM) START(0xF0000000) END(0xF0017FFF) WIDTH(8) }
+MEM_HEAP        { TYPE(RAM) START(0xF0018000) END(0xF001BFFF) WIDTH(8) }
+MEM_STACK       { TYPE(RAM) START(0xF001C000) END(0xF001DFFF) WIDTH(8) }
+MEM_SYSSTACK    { TYPE(RAM) START(0xF001E000) END(0xF001FDFF) WIDTH(8) }
+MEM_ARGV        { TYPE(RAM) START(0xF001FE00) END(0xF001FEFF) WIDTH(8) }
+#else
+MEM_PROGRAM     { TYPE(    RAM) START(0xf000d500) END(0xf002ffff) WIDTH(8)         }
+MEM_HEAP        { TYPE(  RAM) START(0xf0030000) END(0xf0037fff) WIDTH(8)     }
+MEM_STACK       { TYPE(  RAM) START(0xf0038000) END(0xf003dfff) WIDTH(8)     }
+MEM_SYSSTACK    { TYPE(  RAM) START(0xf003e000) END(0xf003fdff) WIDTH(8)     }
+MEM_ARGV        { TYPE(  RAM) START(0xf003fe00) END(0xf003feff) WIDTH(8)     }
+#endif	/* } */
+MEM_L1_DATA_A   { TYPE(  RAM) START(0xff800000) END(0xff803fff) WIDTH(8)     }
+MEM_L1_DATA_B   { TYPE(  RAM) START(0xff900000) END(0xff903fff) WIDTH(8)     }
+MEM_L1_CODE     { TYPE(  RAM) START(0xffa00000) END(0xffa03fff) WIDTH(8)     }
+MEM_L1_SCRATCH  { TYPE(  RAM) START(0xffb00000) END(0xffb00fff) WIDTH(8)     }
+MEM_JUMPUSERPROGRAM  { TYPE(   RAM) START(0xf0000000) END(0xf0000003) WIDTH(8)    }
+MEM_ABSMONDATA  { TYPE(   RAM) START(0xf0000004) END(0xf000007f) WIDTH(8)    }
+MEM_ABSUSERDATA  { TYPE(   RAM) START(0xf0000080) END(0xf000ccff) WIDTH(8)    }MEM_SDRAM  { TYPE( RAM) START(0x00000) END(0x3fffff) WIDTH(8)}
+
+}
+
+
+PROCESSOR P0
+{
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+	/* Following address must match start of MEM_PROGRAM */
+//	RESOLVE(start,0xf0000000)
+	KEEP(start,_main)
+
+    SECTIONS
+    {
+        program
+        {
+            // Align all code sections on 2 byte boundary
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(program) $LIBRARIES(program) $LIBRARIES(pci_io)                    )
+            INPUT_SECTIONS( $OBJECTS(data1) $LIBRARIES(data1))
+            INPUT_SECTIONS( $OBJECTS(cplb) $LIBRARIES(cplb))
+            INPUT_SECTIONS( $OBJECTS(cplb_code) $LIBRARIES(cplb_code))
+            INPUT_SECTIONS( $OBJECTS(cplb_data) $LIBRARIES(cplb_data))
+            INPUT_SECTIONS( $OBJECTS(constdata) $LIBRARIES(constdata)) 
+            INPUT_SECTIONS( $OBJECTS(voldata) $LIBRARIES(voldata))
+
+            INPUT_SECTIONS( $OBJECTS(ctor) $LIBRARIES(ctor) )
+        } >MEM_PROGRAM
+
+#ifdef MEMBSZ /* { */
+        bsz
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz) $LIBRARIES(bsz))
+        } >MEM_PROGRAM
+ 
+        bsz_init
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz_init) $LIBRARIES(bsz_init))
+        } >MEM_PROGRAM
+#endif /* MEMBSZ */ /* } */
+  
+        L1_code
+        {
+            // Align all code sections on 2 byte boundary
+            INPUT_SECTION_ALIGN(2)
+            INPUT_SECTIONS( $OBJECTS(L1_code) $LIBRARIES(L1_code))
+        } >MEM_L1_CODE
+
+        L1_data_a
+        {
+            INPUT_SECTION_ALIGN(1)
+            INPUT_SECTIONS( $OBJECTS(L1_data_a) $LIBRARIES(L1_data_a))
+        } >MEM_L1_DATA_A
+
+        L1_data_b
+        {
+            INPUT_SECTION_ALIGN(1)
+            INPUT_SECTIONS( $OBJECTS(L1_data_b) $LIBRARIES(L1_data_b))
+        } >MEM_L1_DATA_B
+
+        stack
+        {
+            ldf_stack_space = .;
+            ldf_stack_end = ldf_stack_space + MEMORY_SIZEOF(MEM_STACK);
+        } >MEM_STACK
+
+        sysstack
+        {
+            ldf_sysstack_space = .;
+            ldf_sysstack_end = ldf_sysstack_space + MEMORY_SIZEOF(MEM_SYSSTACK);
+        } >MEM_SYSSTACK
+
+        heap
+        {
+            // Allocate a heap for the application
+            ldf_heap_space = .;
+            ldf_heap_end = ldf_heap_space + MEMORY_SIZEOF(MEM_HEAP) - 1;
+            ldf_heap_length = ldf_heap_end - ldf_heap_space;        
+        } >MEM_HEAP
+
+        argv
+        {
+            // Allocate argv space for the application
+            ldf_argv_space = .;
+            ldf_argv_end = ldf_argv_space + MEMORY_SIZEOF(MEM_ARGV) - 1;
+            ldf_argv_length = ldf_argv_end - ldf_argv_space;        
+        } >MEM_ARGV
+
+        jumpuserprogram{
+        	INPUT_SECTIONS($OBJECTS(jump_user_program))
+        }>MEM_JUMPUSERPROGRAM
+
+        absmondata{
+        	INPUT_SECTIONS($OBJECTS(abs_monitor_data))
+        }>MEM_ABSMONDATA
+
+        absuserdata{
+        	INPUT_SECTIONS($OBJECTS(DSP2PCMessageBuffer) $OBJECTS(PC2DSPMessageBuffer) $OBJECTS(InitDone) $OBJECTS(Finish)  $OBJECTS(DescriptorDst) $OBJECTS(DescriptorSrc)  Altera.doj(DescriptorSPI) TashaFirmware535.doj(SPIBuffer))
+        }>MEM_ABSUSERDATA
+
+        MEM_SDRAM{
+        }>MEM_SDRAM
+
+        MEM_L1_SCRATCH{
+
+        //	INPUT_SECTIONS( crtsfc535.doj(DescriptorDst)  .\Debug\basicmon.doj(DescriptorDst)  .\Debug\JumpUser.doj(DescriptorDst)  .\Debug\Sports.doj(DescriptorDst)  .\Debug\TashaFirmware535.doj(DescriptorDst)  crtn535.doj(DescriptorDst)  crtsfc535.doj(DescriptorSrc) .\Debug\basicmon.doj(DescriptorSrc) .\Debug\JumpUser.doj(DescriptorSrc) .\Debug\Sports.doj(DescriptorSrc) .\Debug\TashaFirmware535.doj(DescriptorSrc) crtn535.doj(DescriptorSrc))
+        }>MEM_L1_SCRATCH
+
+        	
+    }
+}
+

@@ -1,0 +1,211 @@
+12.07.06 TKR- Bugfix Nr 200: Einzelschritt bei Rechtecksuche liefert nun wieder nur als ein Bild zurueck,
+		      das dann angezeigt wird.
+23.02.06 RKE- GP in CIPCDatabaseStorage::ConfirmRecordNr(..) behoben. Bildhoehe wird jetzt als
+			  Vollbild initialisiert
+24.01.06 RKE- RuntimeError fuer Festplattenausfall implementiert.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+10.06.05 TKR- Bugfix 858 (Idip Bugliste) und Bugfix 157 (DTS Bugliste)
+			  Rechtecksuche funktioneirt wieder, wenn von einem idip aus auf einem DTS
+			  gesucht wird.
+17.05.05 UF - Bugfix bei neuem Tag wird jetzt auch eine neue Sequenz angefangen.
+21.04.05 UF - Bugfix Groeßenberechnung der Datei bei GOP's.
+14.04.05 UF - Bei einem Fast Reset wird jetzt nur noch etwas getan, wenn wirklich
+	          Aenderungen vorliegen, ansonsten passiert nur der Check.
+13.04.05 UF - Die Datenbank speichert jetzt GOPs. Die Sortierung ist wieder aus.
+17.03.05 UF - Die Bilder werden jetzt vor dem Speichern nach Archiven sortiert.
+28.02.05 UF - Bugfix Nr 133 Alarmarchiv voll Meldung bei Tasha Verdachtsbildern.
+07.02.05 UF - Schreiboptimierungen von codebase eingeschaltet.
+26.11.04 UF - Bugfix erste UVV Alarmbilder wurden noch mit an die Voralarmsequenz gespeichert,
+			  dadurch erscheint der UVV-Alarm zu kurz.
+12.10.04 TKR- Bugfix 102: nach Öffnen eines DB-Fensters mittels Abspielbutton wird nun immer ein
+			  Bild angezeigt. "Bitte warten..." steht nur für ganz kurze Zeit dort.
+01.10.04 TKR- Einzelschritt rueckwaerts bei gemischten Archiven funktioniert nun korrekt
+			  in 5er-Schritten (nur I-Frames).
+			  Das Abspielen von gemischten Archiven funktioniert NOCH NICHT korrekt.
+17.08.04 UF - Bugfix ISDN Uebertragung Mpeg4.
+16.08.04 UF - ISDN Uebertragung von JPEG (nur noch JaCob) Bildern jetzt auch Mpeg4.
+14.07.04 TKR- Bugfix 67: Bei der rechtecksuche auf Tashabildern werden nur noch die
+			  IFrames (Vollbilder) durchsucht. Somit kommt es nicht mehr zu Geisterbildern.
+08.07.04 ML - Bugfix-DV3 Nr. 52 Maximalgröße der m_DataQueue von 200 auf 1000 erhöht, da die
+		      Tasha sehr viele Frames/Sekunde verschickt.
+25.06.04 UF - Bei jeder neuen Sequence wird dem Client jetzt die Info gegeben,
+			  wieviel Bilder in der vorigen Sequence sind.
+15.06.04 TKR- Bugfix IdipClient 346: Die nicht überschriebene Funktion 
+			  CIPCDatabaseStorage::OnRequestOpenSequence() lieferte eine Fehlermeldung,
+			  die an den IdipClient übergeben wurde.
+10.06.04 UF - Dateien werden jetzt beim Lesen geoeffnet gehalten, damit die Wiedergabe schneller
+		      ist.
+10.06.04 UF - Bugfix Nr. 37 Differenzbilder Referenzen werden beim Schneiden jetzt korrigiert.
+18.05.04 UF - Bugfix Speicherung startet jetzt nur noch mit I-Bild.
+16.03.04 UF - Bugfix Nr. 948 Schneiden von DBF im alten und neuen Format
+02.03.04 UF - Bugfix Nr. 916 Tracking und I Bilder Steps vertragen sich nicht.
+27.02.04 UF - Bugfix Nr. 913 Wiedergabe geschnittener Sequencen.
+27.02.04 UF - Bugfix Nr. 911 Ein Unlock fehlte ... mmmh.
+26.02.04 UF - Bugfix Verify jetzt im SaveThread
+25.02.04 UF - Bugfix Die Sequence Map Eintraege werden jetzt geloescht, wenn die Sequence
+			  geloescht wird.
+25.02.04 UF - Bugfix 883 Es wurden bei Audio zu grosse Sequenzen angelegt.
+24.02.04 UF - Bugfix Referenzen Video / Audio werden beim Start gelesen.
+18.02.04 UF - Referenzen Video / Audio  noch einmal korrigiert. 
+			  !!! Bitte alte Audioaufzeichnungen loeschen !!!
+17.02.04 UF - Referenzen fuer Video / Audio vorwaerts und rueckwaerts eingebaut.
+10.02.04 RKE- ConfirmRecord liefert bei gemischten Archiven nur Audio oder nur Video auf Anfrage.
+05.02.04 TKR- DVStorageRO löscht AudioUnit1RO Logfile
+03.02.04 UF - Bugfix GP beim Speichern von Audio
+03.02.04 UF - Bugfix GP beim Speichern von Alarmen
+30.01.04 UF - Speicherung und Wiedergabe Audiodaten eingebaut.
+04.12.03 UF - Nach der Feststellung eines fehlerhaften Sequence.dbf Eintrages wird
+			  die Sequenceliste neu sortiert, Eingang findet das in 2.5.0.612c Patch.
+03.12.03 UF - Die Sequence.dbf wird jetzt beim Programmstart und einmal am Tag 0:00 Uhr.
+			  mit den echten Sequencen abgeglichen.
+27.10.03 UF - Die Sequence.dbf wird jetzt beim Fast reset einmal gepackt, d.h. geloeschte
+			  Eintraege werden auch physikalisch geloescht.
+16.09.03 TKR- Das Schreiben der C:\DV\Sequence.dbf repariert. Noch defekte sequence.dbf Dateien,
+			  defekt = fehlerhafte Datums/Uhrzeit Angaben bei Sequenzen
+			  werden nicht repariert. Sie sollen vor dem nächsten Update auf dem Rechner
+			  per Hand gelöscht werden.
+11.09.03 TKR- BUGFIX-DV: 776: Wenn keine Archive in der Registry definiert sind bzw. 
+			  das Laden dieser Archive fehlschlägt, wird nach erfolglosen Registry-Auslesen 
+			  DVStorage beendet. Vor dem Beenden wird ja automatisch die Registry 
+			  vom Process aus mit Archiven neu gefüllt.
+			  Nach dem Neustart wird die Registry wieder korrekt ausgelesen.
+10.09.03 UF - Wenn keine Archive in der Registry definiert sind, so loescht DVStorage
+		      keine Archive mehr auf der Platte.
+09.09.03 TKR- Trace eingebaut in CCollections::GetCollection(), der ausgibt, 
+			  warum Sequernzen beim Starten gelöscht werden.
+09.07.03 UF - Bugfix ungueltige Lizenznummer
+20.06.03 UF - Der Sequence Cache jetzt wie beim idip als sequence.dbf auch auf CD/DVD und online.
+26.05.03 TKR- CD-Schublade öffnen nach Beender der Read Only Software entfernt. CD wird nun nicht mehr
+		      automatisch ausgeworden.
+02.05.03 UF - Bugfix Nr. 588, GP beim starten, wenn dbf Dateien kaputt sind.
+05.02.03 UF - Bugfix Nr. 690 Suche Bei der Suche auf einer Gegenstation werden keine Bilder gefunden, 
+			  obwohl diese vorhanden sind.
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CCollections::ScanDatabaseDrive()
+			  - CCollections::ScanBackupDirectory()
+			  - CCollections::ScanBackupDrive()
+22.01.03 GF	- Bugfix DTS-Receiver 236: Synchrone Wiedergabe hin und her wählen, Bilder wurden nicht angezeigt
+07.01.03 UF - Bugfix DVStorage wurde abgeschossen, falls das scannen einer CD zu lange dauerte. Nr 643
+13.11.02 UF - Icon ist jetzt auch im Systray.
+08.11.02 UF - Noch ein Bugfix Fortschritt der Auslagerung
+08.11.02 UF - Bugfix Fortschritt der Auslagerung
+07.11.02 UF - Die Dateien werden jetzt beim Backup direkt in das Zielverzeichnis geschnitten.
+25.10.02 UF - Bugfix die Archive der geloeschten CD-RW oder Memorystick wurden nicht
+		      aus der Datenbank entfernt.
+23.10.02 UF - Zeitstempel fuer das Backup wird jetzt innerhalb der Kopierroutine gesetzt,
+		      dann sollten auch ultralangsame Geraete immer gehen.
+18.10.02 UF - Wechselmedien werden jetzt richtig als Backup erkannt.
+			  Bugfix beim Loeschen CD-RW
+16.10.02 UF - Bugfix Backup CD wird jetzt auch unter XPe richtig erkannt.
+02.06.02 UF - Bugfix Empfaenger Nr. 193
+10.05.02 UF - Bugfix Nr 374, es werden jetzt nur noch Alarme in der Liste angezeigt, zu denen
+			  es auch noch Bilder gibt.
+25.02.02 UF - Zugriffbeim Kopieren nochmal geandert, damit der Zugriff nicht mehr verweigert wird.
+23.04.02 UF - Traces beim Backup standardmaessig aus.
+22.04.02 UF - Die Sortierung vor der Backupberechnung laesst sich jetzt abbrechen.
+			  Die Sortierung ist zudem optimiert.
+19.04.02 UF - Die Backupberechnung laesst sich jetzt abbrechen.
+17.04.02 UF - Storage liess sich nicht starten, inkompatibel mit H263 Encoder DLL.
+16.04.02 UF - Eintragungen in die Logdatei reduziert
+12.04.02 UF - Bugfix Sequencegroessenberechnung GB und MB verwechselt
+11.04.02 UF - Lock Modus beim Backup verbessert.
+11.04.02 UF - Bugfix Nr 450 Alarmarchive
+08.04.02 UF - Bugfix Nr 429,430,432,433 ha so viele auf einmal.
+			  Sequencetyp wird jetzt auf der CD mit gespeichert
+12.03.02 TKR- Berechnung des ersten Maximums (zu viele MB`s für CD-R gefunden) 
+			  bei der CD-Auslagerung erfolgt nun in Datenbank. Erst dann erfolgt die 
+			  Intervallschachtelung im Client.
+28.02.02 UF - Einige Verbesserungen des Backups und der Suche, neue Eintraege in
+			  der Logdatei.
+07.02.02 UF - Nicht fragmentierendes Schreiben freigeschaltet
+28.01.02 UF - Bugfix Division durch 0.
+22.01.02 UF - ausfuehrlicheres Protokoll beim zeitlichen Backup
+09.01.02 UF - Es gibt jetzt einen NOFRAG Modus, bei dem die DAT Dateien nicht fragmentiert
+			  geschrieben werden, dieser ist in der Registry unter DV-DVStorage
+			  als DWORD Wert Nofrag mit 1 zu aktivieren.
+			  Es wird jetzt nur noch der dann auch benutzte Teil der Datei auf CD geschrieben.
+08.01.02 UF - Quelldateien beim Brennen werden jetzt exklusiv geoeffnet.
+07.01.02 UF - Waehrend des Brennens sind jetzt andere Operationen auf der zu brennenden Datei
+			  nicht mehr moeglich.
+19.12.01 UF - Freier Plattenplatz geaendert.
+17.12.01 UF - Bestaetigung der gespeicherten Bilder optimiert.
+14.12.01 UF - Beim Schnellen Reset wird jetzt die Speicherung angehalten und neu gestartet.
+13.12.01 UF - Bugfix GP das Sleep(100) stand noch drin
+13.12.01 UF - Bugfix GP beim Reset
+12.01.01 UF - Korrektur freier Plattenplatz und Queue Ueberlauf Reset.
+11.01.01 UF - Umbau, das Speichern und Loeschen erfolgt jetzt in einem Thread,
+			  nach jedem Schliessen einer Sequenz wird jetzt der Plattenplatz ueberprueft.
+18.10.01 UF - Bugfix loeschen, wenn eine CD eingelegt ist.
+16.10.01 UF - Bugfix Suche
+15.10.01 UF - Es kann jetzt die Anzahl der gewuenschten Suchergebnisse angegeben werden.
+09.10.01 UF - Bugfix: Wird ein auf CD gebranntes Alarmarchiv auf einem anderen DTS mit Ringarchiv 
+			  der gleichen Kamera aufgerufen kann das Alarmarchiv jetzt wieder
+			  wiedergegeben werden.
+02.10.01 TKR- Bugfix: Nach Einlegen einer mit DTS gebrannten CD-Rom wurden nach deren Entnahme
+			  alle Archive (Kameras) auf der Festplatte gelöscht, die sich ebenfalls auf der CD befanden.
+			  Archive werden nun nicht mehr gelöscht.
+11.09.01 UF - Bugfix: Backup Sequencen wurden nach DBS Serverreset wieder im Client angezeigt.
+			  Das sollte aber nur beim Einlegen der CD passieren. nicht bei jedem Reset.
+06.09.01 UF - Bugfix: Es wurde keine neue Alarmlistensequence angefangen, wenn das System
+			  ueber 0:00 Uhr hinweg aus war.
+21.08.01 UF - Suche geht jetzt auch nach Millsekunden, wird fuer Version 1.5 benoetigt.
+14.08.01 UF - Speicherperformance optimiert
+30.07.01 TKR- CSearch um Suche nach Millisekunden erweitert. Ist mit #define TKR
+		      freischaltbar.
+17.07.01 UF - Bugfix Archivgroesse warin Byte und nicht in MByte
+09.07.01 UF - neuer Loeschalgorithmus, der eine gleichmaessige
+			  Nutzung der Platte garantiert.
+			  Alarmlistenarchive funktionieren.
+29.06.01 UF - Bugfix CD abspielen, nur Build 411
+11.06.01 UF - Bugfix Alarm 60 Prozent wurde nach Alarm voll gesandt.
+08.06.01 UF - Bugfix GP wenn kein Speicherlaufwerk vorhanden.
+31.05.01 UF - Timeoutbehandlung fuer Backup
+30.05.01 UF - dbf Dateien werden jetzt nicht mehr exklusiv
+			  geoeffnet. Dateien werden nur noch bei Fehler -200
+			  repariert und wenn sie nicht gerade gebackupt werden.
+30.05.01 UF - Eigene CopyFile Routine fuer das Backup eingebaut.
+			  paralleler Zugriff auf die Dateien, lesen und Backup
+29.05.01 UF - Brennen und gleichzeitige Dateizugriffe stabilisiert.
+29.05.01 UF - Bugfix Defekte Dateien werden jetzt vor dem Oeffnen
+			  repariert.
+			- Bugfix Es wird kein Reset mehr waehrend eines Backups
+			  ausgefuehrt.
+18.05.01 UF - Bugfix Angabe der Sequenzen fuer die Clients beim Reset
+02.05.01 UF - Bugfix Anzahl der verbundenen Systeme nicht maximal 5.
+26.04.01 UF - 2. Bugfix Cache Datei fuer Sequenzdaten
+24.04.01 UF - Die Datenbank speichert jetzt auch die Millisekunden des Bildes,
+			  und gibt diese auch wieder.
+23.04.01 UF - Bugfix Cache Datei fuer Sequenzdaten
+05.04.01 UF - Bugfix Lizenznummern, Anzahl der verbundenen Systeme war falsch
+02.04.01 UF - Scannen der Datenbank zu Beginn nach korrektem Herunterfahren
+			  optimiert. Jetzt 50 bis 100 mal schneller
+30.03.01 UF - Anzahl der Clients auf max 5 beschränkt
+26.03.01 UF - Seriennummer wird jetzt beim Verbindungsaufbau überprüft.
+14.03.01 UF - Der Datenbankstart kann jetzt nicht mehr vom Starter 
+			  unterbrochen werden. Das Scannen erfolg in einem anderen
+			  Thread.
+02.02.01 UF neue 5er MD Koordinaten
+24.11.00 UF - Bugfix Voralarm Alarm
+23.10.00 UF - Bugfix GetTickCount's
+15.08.00 UF - Backup Archive werden jetzt unabhängig vom Typ
+			  der Kamera zugeordnet.
+10.08.00 UF - Lesefehler von Bilddaten werden jetzt korrekt behandelt.
+04.08.00 UF - Bugfix Lesefehler Backup CDs
+03.08.00 UF - Wiedergabe von CDs korrigiert
+03.08.00 UF - die CD Version wird jetzt versteckt gestartet.
+12.05.00 UF - Prüfsummenfehler werden dem Client über ein
+			  Feld angezeigt.
+14.05.00 UF - es werden jetzt auch CD's im System gelesen
+31.05.00 UF - Bugfix Backup Fehlermeldung
+30.05.00 UF - Bugfix Lesen von Bildern von Packet CD
+29.05.00 UF - Bugfix bei Abfrage einzelner Bilder, enum fuer Navigation
+03.04.00 UF - Sequenztyp Verdacht eingebaut
+14.03.00 UF - Zeitoptimierung bei der Suche eingebaut
+			  es werden nur Sequenzen mit ensprechender
+			  passender Zeit durchsucht, die anderen nicht.
+21.06.00 UF - Bugfix Backup Initialize Error Message
+13.07.00 UF - Beim Verbindungsaufbau wird jetzt die PIN ausgewertet
+21.07.00 UF - Bugfix PIN wird bei Readonly Version nicht mehr
+			  überprüft.
+25.09.00 ML - Bugfix: Die OperatorPIN muß ebenfalls akzeptiert werden.

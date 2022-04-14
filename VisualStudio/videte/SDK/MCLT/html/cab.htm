@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<Title>Sample: Live Video in Internet Explorer</Title>
+</HEAD>
+<BODY>
+
+
+<script language="JavaScript" type="text/javascript" src="hashcode.js"></script>
+<script language="javascript">
+<!--
+function ConnectIdip()
+{ 
+    str = document.connect.password.value;
+    md5_string = hashcode(str);
+    document.connect.password.value = "";
+
+	test_activex.Connect(md5_string);
+}
+</script> 
+<table width="33%" border="1" bordercolor="#000000" height="322">
+  <tr>
+    <td>
+      <p align="center"><object ID="test_activex" width=556 height=448
+	classid="CLSID:739AEA24-A07C-487A-9845-2F9FA78E141A"
+	CODEBASE="http://www.bonehouse.de/mclt/mclt.cab#version=1,0,0,001">
+          <PARAM NAME="Shape" VALUE="1">
+          Ihr Browser kann das Objekt leider nicht anzeigen! 
+        </object></p>
+      </td>
+  </tr>
+</table>
+<form method="post" name="connect">
+
+			<input type="hidden" name="md5password" />
+			<input type="hidden" name="md5password_utf" />
+  <p> 
+    <input width="50" align="center" type="button" value="AboutBox"
+           onClick="test_activex.AboutBox(); return false;">
+    <input width="50" align="center" type="button" value="Dreieck"
+           onClick="test_activex.Shape(2); return false;" name="Button_Dreieck">
+    <input width="50" align="center" type="button" value="Ellipse"
+           onClick="test_activex.Shape(0); return false;" name="Button_Ellipse">
+    <input width="50" align="center" type="button" value="Rechteck"
+           onClick="test_activex.Shape(1); return false;" name="Button_Rechteck">
+  </p>
+  <p> 
+    <input width="50" align="center" type="button" value="Kamera 1"
+           onClick="test_activex.Camera(1); return false;" name="kamera01">
+    <input width="50" align="center" type="button" value="Kamera 2"
+           onClick="test_activex.Camera(2); return false;" name="kamera02">
+    <input width="50" align="center" type="button" value="Kamera 3"
+           onClick="test_activex.Camera(3); return false;" name="kamera03">
+  </p>
+  <table width="76%" border="1">
+    <tr>
+      <td width="23%">username: 
+        <input type="text" name="username">
+      </td>
+      <td width="26%">password: 
+        <input type="password" name="password">
+      </td>
+      <td width="31%">
+        <div align="center">ip adresss: 
+          <input type="text" name="ip1" maxlength="3" size="3">
+          . 
+          <input type="text" name="ip2" maxlength="3" size="3">
+          . 
+          <input type="text" name="ip3" maxlength="3" size="3">
+          . 
+          <input type="text" name="ip4" maxlength="3" size="3">
+        </div>
+      </td>
+      <td width="20%"> 
+        <div align="center">
+          <input width="50" align="center" type="button" value="Anmelden"
+           onClick="ConnectIdip();return false;" name="button_Anmelden">
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  </FORM>
+
+</BODY>
+</HTML>

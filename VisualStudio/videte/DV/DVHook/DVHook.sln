@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DVHook", "DVHook.vcproj", "{F764EF94-3E20-45FD-A6B5-A478D418D78C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = DVHook.vcproj
+		SccProjectName0 = \u0022$/DV/DVHook\u0022,\u0020KGBCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.Debug.ActiveCfg = Debug|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.Debug.Build.0 = Debug|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.Release.ActiveCfg = Release|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.Release.Build.0 = Release|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{F764EF94-3E20-45FD-A6B5-A478D418D78C}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,637 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\VideteTweak.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,1
+ PRODUCTVERSION 1,1,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", "Programmiert von Rolf Kary-Ehlers"
+            VALUE "CompanyName", "videte IT GmbH"
+            VALUE "FileDescription", "Videte Tweak Tool"
+            VALUE "FileVersion", "1, 1, 0, 1"
+            VALUE "InternalName", "VideteTweak"
+            VALUE "LegalCopyright", "Copyright ® videte IT GmbH 2002"
+            VALUE "OriginalFilename", "VideteTweak.EXE"
+            VALUE "ProductName", "Anwendung VideteTweak"
+            VALUE "ProductVersion", "1, 1, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LIST_IMAGES         BITMAP                  "res\\LIST_IMG.bmp"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\VideteTweak.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CONTROL | WS_CHILD | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTROLPARENT
+CAPTION "Info"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "VideteTweak Version 1.1",IDC_STATIC,71,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright © 2002 videte IT",IDC_STATIC,71,25,119,8
+    LTEXT           "Programmed by Rolf Kary-Ehlers",IDC_STATIC,70,41,154,8
+END
+
+IDD_VIDETETWEAK_DIALOG DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Explorer"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Current",IDC_RD_CURRENT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,66,5,40,10
+    CONTROL         "All Users",IDC_RD_ALL,"Button",BS_AUTORADIOBUTTON,113,5,
+                    45,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14,WS_GROUP
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+    CONTROL         "List1",IDC_LST_POLICY_EXPLORER,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,20,235,175
+    CONTROL         "Disable Drives",IDC_RADIO_DISABLEDRIVES,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,5,198,61,10
+    CONTROL         "Disable Autoplay",IDC_RADIO_DISABLEDRIVES2,"Button",
+                    BS_AUTORADIOBUTTON,79,198,69,10
+    CONTROL         "No View on Drive",IDC_RADIO_DISABLEDRIVES3,"Button",
+                    BS_AUTORADIOBUTTON,161,198,79,10
+    CONTROL         "List",IDC_LIST_DRIVES,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,5,210,235,55
+    CONTROL         "List",IDC_LIST_DRIVES_AUTOPLAY,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,210,235,55
+    CONTROL         "List",IDC_LIST_NO_VIEW_ON_DRIVE,"SysListView32",
+                    LVS_LIST | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,5,210,235,55
+    PUSHBUTTON      "Image",IDC_BTN_SET,5,3,50,14
+END
+
+IDD_MEMORY_MANAGEMENT DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Memory"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Memory Management Settings",IDC_STATIC,5,5,124,11
+    CONTROL         "Disable swap out kernel components (RAM > 128 MB)",
+                    IDC_KERNEL_PAGING_DISABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,30,235,10
+    CONTROL         "Always unload DLL`s at process termination",
+                    IDC_UNLOAD_DLL_ALWAYS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,235,10
+    LTEXT           "File Cache Size (KB):\n- Less than 64 MB -> Physical Mem - 7MB\n- 64 - 500 MB -> Physical Mem - 16MB\n- 512 MB and higher -> Physical Mem - 64MB",
+                    IDC_STATIC,5,125,170,37
+    LTEXT           "Size of Second Level Data Cache (KB)",IDC_STATIC,5,183,
+                    129,8
+    EDITTEXT        IDC_EDT_2ND_LEVEL_CACHE,143,180,57,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+    CONTROL         "Use Large System Cache",IDC_LARGE_SYSTEM_CACHE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,92,100,10
+    EDITTEXT        IDC_EDT_FILE_CACHE_SETTINGS,185,125,55,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Optimize",IDC_BTN_OPTIMIZE_FILE_CACHE_SIZE,185,150,55,
+                    14
+    LTEXT           "File Cache Settings:",IDC_STATIC,5,74,70,8
+    COMBOBOX        IDC_COMBO_MEM,93,72,140,79,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_EDT_LANMAN_CACHE_SIZE,225,90,15,14,ES_AUTOHSCROLL
+    LTEXT           "Lanman Server Size:",IDC_STATIC,132,93,72,8
+END
+
+IDD_HDD_MANAGEMENT DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Drives"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Settings for Disc Drives",IDC_STATIC,5,5,95,11
+    CONTROL         "Disable DOS Specific File Name Creation",
+                    IDC_CK_DISABLE_8DOT3_FILENAMES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,30,235,10
+    CONTROL         "Disable System Event Logging",
+                    IDC_CK_DISABLE_SYSTEM_PROTOCOL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,235,10
+    CONTROL         "Clear Page File at Shutdown",
+                    IDC_CK_CLEAR_PAGEFILE_AT_SHUDOWN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,70,235,10
+    CONTROL         "Do Not Update Last Access Time ",
+                    IDC_CK_DO_NOT_UPDATE_LAST_ACCESS_TIME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,90,235,10
+    CONTROL         "Enlarge CD-ROM Cache",IDC_CK_ENLARGE_CDROM_CACHE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,110,235,10
+    LTEXT           "Clear EFS Page File Periodically after:",IDC_STATIC,5,
+                    136,120,8
+    EDITTEXT        IDC_EDT_KEY_CACHE_VALIDATION_PERIOD,130,133,45,14,
+                    ES_AUTOHSCROLL
+    LTEXT           "Minutes",IDC_STATIC,180,136,26,8
+    LTEXT           "Size of the Master File Table:",IDC_STATIC,5,156,92,8
+    COMBOBOX        IDC_COMBO_MFT_SIZE,129,154,55,76,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Enable Big LBA (48 Bit) for ATAPI Drives",
+                    IDC_CK_ENABLE_BIG_LBA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,180,235,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+    PUSHBUTTON      "Image",IDC_BTN_SET,10,232,50,14
+END
+
+IDD_SYSTEM_POLICIES DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "System"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Current User System Policies:",IDC_STATIC,5,5,111,15
+    CONTROL         "List1",IDC_LST_POLICY_EXPLORER,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,5,20,235,135
+    CONTROL         "Remove ""My Documents"" Icon from Desktop",
+                    IDC_CK_REMOVE_MY_DOCUMENT_ICON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,165,235,10
+    CONTROL         "Disable Command Prompt",IDC_CK_DISABLE_COMMAND_PROMPT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,205,235,10
+    CONTROL         "Remove ""My Computer"" Icon from Desktop",
+                    IDC_CK_REMOVE_MY_COMPUTER_ICON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,185,235,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+END
+
+IDD_LOGON_OFF DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Logon"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Logon Settings",IDC_STATIC,10,5,109,10
+    GROUPBOX        "Bypassing the WinNT logon prompt",IDC_STATIC,5,20,235,
+                    110
+    LTEXT           "Default Domain:",IDC_STATIC,10,36,65,8
+    EDITTEXT        IDC_EDT_DEFAULT_DOMAIN,75,33,160,14,ES_AUTOHSCROLL
+    LTEXT           "Default Username:",IDC_STATIC,10,56,65,8
+    EDITTEXT        IDC_EDT_DEFAULT_USERNAME,75,53,160,14,ES_AUTOHSCROLL
+    LTEXT           "Default Pasword:",IDC_STATIC,10,76,65,8
+    EDITTEXT        IDC_EDT_DEFAULT_PASSWORD,75,73,160,14,ES_AUTOHSCROLL
+    CONTROL         "Enable Automatic Admin Logon (press shift key, when loging off)",
+                    IDC_CK_AUTOLOGON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,95,225,10
+    CONTROL         "Dont Display last User Name (disables the default login names)",
+                    IDC_CK_DONT_DISPLAY_LAST_USERNAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,110,225,10
+    CONTROL         "Delete Roaming Cache (roaming profiles consume disk space)",
+                    IDC_CK_DELETE_ROAMING_CACHE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,140,230,10
+    CONTROL         "Power down after Shut down",
+                    IDC_CK_POWER_DOWN_AFTER_SHUTDOWN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,155,230,10
+    LTEXT           "Number of Cached Logons (0,..,50)",IDC_STATIC,5,171,170,
+                    8
+    EDITTEXT        IDC_EDT_CACHED_LOGONS_COUNT,182,168,53,14,ES_AUTOHSCROLL
+    GROUPBOX        "Slow Link Detection",IDC_STATIC,5,185,235,48
+    CONTROL         "Enable Slow Link Detection",
+                    IDC_CK_ENABLE_SLOW_LINK_DETECTION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,200,225,10
+    LTEXT           "Slow Link Time Out (1,..,120 sec)",IDC_STATIC,10,216,
+                    164,8
+    EDITTEXT        IDC_EDT_SLOW_LINK_TIMEOUT,182,213,53,14,ES_AUTOHSCROLL
+    CONTROL         "Don´t Show Popups on Boot",IDC_CK_NO_POPUPS_ON_BOOT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,240,124,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE2,201,3,39,14
+    PUSHBUTTON      "Image",IDC_BTN_SET,185,238,50,14
+END
+
+IDD_SYSTEM_TIMEOUTS DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Timeouts"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "System Timeouts",IDC_STATIC,5,5,113,15
+    CONTROL         "List1",IDC_LST_TIMEOUT,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,5,20,235,240
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+END
+
+IDD_MISCELANEOUS DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Misc."
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Miscelaneous",IDC_STATIC,5,5,113,15
+    GROUPBOX        "Driver Signing Options",IDC_STATIC,5,20,235,49
+    CONTROL         "Ignore - Install Software anyway",IDC_RD_DRIVER_SIGNING,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,10,35,225,10
+    CONTROL         "Warn - Prompt me each time to choose an action",
+                    IDC_RD_DRIVER_SIGNING2,"Button",BS_AUTORADIOBUTTON,10,45,
+                    225,10
+    CONTROL         "Block - Never install unsigned driver software",
+                    IDC_RD_DRIVER_SIGNING3,"Button",BS_AUTORADIOBUTTON,10,55,
+                    225,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14,WS_GROUP
+    PUSHBUTTON      "Restore",IDC_BTN_RESTORE,201,3,39,14
+    LTEXT           "Menu Show Delay (ms):",IDC_STATIC,10,76,91,8
+    EDITTEXT        IDC_EDT_MENU_SHOW_DELAY,190,74,45,12,ES_AUTOHSCROLL
+    CONTROL         "Show detailed Information in Device Manager",
+                    IDC_CK_DEVMGR_SHOW_DETAILS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,95,225,10
+    CONTROL         "Prohibit Interactive Services (WM_TIMER-Bug)",
+                    IDC_CK_NO_INTERACTIVE_SERVICES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,109,225,10
+    LTEXT           "Registered Organisation",IDC_STATIC,10,141,84,8
+    LTEXT           "Registered Owner",IDC_STATIC,10,156,84,8
+    EDITTEXT        IDC_EDT_REGISTERED_ORG,104,139,131,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_REGISTERED_OWNER,104,154,131,12,ES_AUTOHSCROLL
+    GROUPBOX        "Registration Information",IDC_STATIC,5,125,235,75
+    CONTROL         "Registration Done",IDC_CK_REGISTERED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,185,73,10
+    LTEXT           "Product ID",IDC_STATIC,10,171,84,8
+    EDITTEXT        IDC_EDT_PRODUCT_ID,104,169,131,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_LANGUAGES,10,209,225,116,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Image",IDC_BTN_SET,10,232,50,14
+END
+
+IDD_SERVICES DIALOGEX 0, 0, 245, 270
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Services"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "DTS",IDC_RD_DTS,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    5,5,31,10
+    CONTROL         "Idip",IDC_RD_IDIP,"Button",BS_AUTORADIOBUTTON,50,5,27,
+                    10
+    CONTROL         "Original",IDC_RD_ORG,"Button",BS_AUTORADIOBUTTON,94,5,
+                    39,10
+    PUSHBUTTON      "Save",IDC_BTN_SAVE,165,3,32,14,WS_GROUP
+    PUSHBUTTON      "Load",IDC_BTN_RESTORE,201,3,39,14
+    CONTROL         "List1",IDC_LST_SERVICES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_TABSTOP,5,20,235,245
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_VIDETETWEAK_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 195
+        HORZGUIDE, 203
+        HORZGUIDE, 210
+        HORZGUIDE, 265
+    END
+
+    IDD_MEMORY_MANAGEMENT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 16
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 78
+        HORZGUIDE, 97
+        HORZGUIDE, 131
+        HORZGUIDE, 187
+        HORZGUIDE, 265
+    END
+
+    IDD_HDD_MANAGEMENT, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 16
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 95
+        HORZGUIDE, 115
+        HORZGUIDE, 140
+        HORZGUIDE, 160
+        HORZGUIDE, 185
+        HORZGUIDE, 265
+    END
+
+    IDD_SYSTEM_POLICIES, DIALOG
+    BEGIN
+        RIGHTMARGIN, 240
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 155
+        HORZGUIDE, 170
+        HORZGUIDE, 190
+        HORZGUIDE, 210
+        HORZGUIDE, 265
+    END
+
+    IDD_LOGON_OFF, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 75
+        VERTGUIDE, 235
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 60
+        HORZGUIDE, 80
+        HORZGUIDE, 100
+        HORZGUIDE, 115
+        HORZGUIDE, 130
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 185
+        HORZGUIDE, 205
+        HORZGUIDE, 220
+        HORZGUIDE, 245
+        HORZGUIDE, 265
+    END
+
+    IDD_SYSTEM_TIMEOUTS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 260
+    END
+
+    IDD_MISCELANEOUS, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 235
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 40
+        HORZGUIDE, 50
+        HORZGUIDE, 60
+        HORZGUIDE, 69
+        HORZGUIDE, 80
+        HORZGUIDE, 100
+        HORZGUIDE, 114
+        HORZGUIDE, 125
+        HORZGUIDE, 145
+        HORZGUIDE, 160
+        HORZGUIDE, 175
+        HORZGUIDE, 190
+        HORZGUIDE, 215
+        HORZGUIDE, 255
+    END
+
+    IDD_SERVICES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 240
+        HORZGUIDE, 5
+        HORZGUIDE, 20
+        HORZGUIDE, 265
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_HDD_MANAGEMENT DLGINIT
+BEGIN
+    IDC_COMBO_MFT_SIZE, 0x403, 8, 0
+0x6544, 0x6166, 0x6c75, 0x0074, 
+    IDC_COMBO_MFT_SIZE, 0x403, 7, 0
+0x3231, 0x352e, 0x2520, "\000" 
+    IDC_COMBO_MFT_SIZE, 0x403, 5, 0
+0x3532, 0x2520, "\000" 
+    IDC_COMBO_MFT_SIZE, 0x403, 5, 0
+0x3533, 0x2520, "\000" 
+    IDC_COMBO_MFT_SIZE, 0x403, 5, 0
+0x3534, 0x2520, "\000" 
+    0
+END
+
+IDD_MISCELANEOUS DLGINIT
+BEGIN
+    IDC_COMBO_LANGUAGES, 0x403, 17, 0
+0x3030, 0x3030, 0x3430, 0x3930, 0x4520, 0x676e, 0x696c, 0x6873, "\000" 
+    IDC_COMBO_LANGUAGES, 0x403, 15, 0
+0x3030, 0x3030, 0x3430, 0x3530, 0x4320, 0x657a, 0x6863, "\000" 
+    IDC_COMBO_LANGUAGES, 0x403, 16, 0
+0x3030, 0x3030, 0x3430, 0x3730, 0x4720, 0x7265, 0x616d, 0x006e, 
+    IDC_COMBO_LANGUAGES, 0x403, 17, 0
+0x3030, 0x3030, 0x3430, 0x3031, 0x4920, 0x6174, 0x696c, 0x6e61, "\000" 
+    IDC_COMBO_LANGUAGES, 0x403, 15, 0
+0x3030, 0x3030, 0x3430, 0x3331, 0x4420, 0x7475, 0x6863, "\000" 
+    IDC_COMBO_LANGUAGES, 0x403, 17, 0
+0x3030, 0x3030, 0x3430, 0x6130, 0x5320, 0x6170, 0x696e, 0x6873, "\000" 
+    IDC_COMBO_LANGUAGES, 0x403, 16, 0
+0x3030, 0x3030, 0x3430, 0x6330, 0x4620, 0x6572, 0x636e, 0x0068, 
+    0
+END
+
+IDD_MEMORY_MANAGEMENT DLGINIT
+BEGIN
+    IDC_COMBO_MEM, 0x403, 21, 0
+0x694d, 0x696e, 0x696d, 0x657a, 0x6d20, 0x6d65, 0x726f, 0x2079, 0x7375, 
+0x6465, "\000" 
+    IDC_COMBO_MEM, 0x403, 9, 0
+0x6142, 0x616c, 0x636e, 0x6465, "\000" 
+    IDC_COMBO_MEM, 0x403, 26, 0
+0x704f, 0x6974, 0x696d, 0x657a, 0x6620, 0x726f, 0x6620, 0x6c69, 0x2065, 
+0x6873, 0x7261, 0x6e69, 0x0067, 
+    IDC_COMBO_MEM, 0x403, 34, 0
+0x704f, 0x6974, 0x696d, 0x657a, 0x6620, 0x726f, 0x6e20, 0x7465, 0x6f77, 
+0x6b72, 0x6120, 0x7070, 0x696c, 0x6163, 0x6974, 0x6e6f, 0x0073, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_CAPTION             "Videte Tweak Tool"
+    IDS_HL_EXP_POL          "Explorer Policies"
+    IDS_REQUEST_SAVE_CHANGES "Save changes to the Registry ?"
+    IDS_NAME                "Name"
+    IDS_KEY                 "Key"
+    IDS_START_TYPE          "Start Type"
+    IDS_MANUAL              "Manual"
+    IDS_AUTOMATIC           "Automatic"
+    IDS_DEACTIVE            "Deactiviated"
+    IDS_DESCRIPTION         "Description"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\VideteTweak.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

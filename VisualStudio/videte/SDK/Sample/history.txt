@@ -1,0 +1,11 @@
+11.08.05 TKR - Alle Fuktionsruempfe kommentiert.
+04.08.05 TKT - Alle Funktionen dokumentiert. Funktionskoepfe erstellt.
+			   Es fehlt noch die Kommentierung der Funktionsruempfe.
+11.07.05 TKR - Jpeg Database Bilder abspielen integriert.
+08.07.05 TKR - Live Bilder Jpeg funktionieren, Jpeg database fehlt noch.
+07.07.05 TKR - Alle Abspielbutton eingebaut, Mpeg4 Live funktioniert, Umschaltung der Live-Kameras
+			   funktioniert, Erweiterung auf Jpeg Live angefangen, Jpeg Database fehlt noch.
+29.06.05 TKR - Livedarstellung, Kamerawechsel und Einzelbild vorwaerts und rueckwaerts
+			   Abspielen funktioniert.
+21.06.05 TKR - Live-Darstellung in entsprechende Klasse um-implementiert.
+01.06.05 TKR - Sample angelegt und den Verbindungsaufbau implementiert.

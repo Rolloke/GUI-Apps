@@ -1,0 +1,53 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VipCleanNT", "VipCleanNT.vcproj", "{CF2C801E-1708-4D7E-8C70-9192BE3404CD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = VipCleanNT.vcproj
+		SccProjectName0 = \u0022$/Project/Tools/VipCleanNT\u0022,\u0020CPZBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Dts = Dts
+		DtsUnicode = DtsUnicode
+		Idip_Debug = Idip_Debug
+		Idip_Release = Idip_Release
+		IdipUnicode = IdipUnicode
+		IdipUnicode_Debug = IdipUnicode_Debug
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Debug.ActiveCfg = Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Debug.Build.0 = Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Dts.ActiveCfg = Dts|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Dts.Build.0 = Dts|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.DtsUnicode.ActiveCfg = DtsUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.DtsUnicode.Build.0 = DtsUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Idip_Debug.ActiveCfg = Idip_Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Idip_Debug.Build.0 = Idip_Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Idip_Release.ActiveCfg = Idip_Release|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Idip_Release.Build.0 = Idip_Release|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.IdipUnicode.ActiveCfg = IdipUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.IdipUnicode.Build.0 = IdipUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.IdipUnicode_Debug.ActiveCfg = IdipUnicode_Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.IdipUnicode_Debug.Build.0 = IdipUnicode_Debug|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Release.ActiveCfg = Release|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.Release.Build.0 = Release|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{CF2C801E-1708-4D7E-8C70-9192BE3404CD}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

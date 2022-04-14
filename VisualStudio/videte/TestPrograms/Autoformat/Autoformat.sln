@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Autoformat", "Autoformat.vcproj", "{F559C859-75AD-4ED0-BEE4-BB327CCEC3FD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/Autoformat\u0022,\u0020BSQCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {B2046901-5276-4CEC-8889-9605F335F304}
+		SccProjectUniqueName1 = Autoformat.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{F559C859-75AD-4ED0-BEE4-BB327CCEC3FD}.Debug.ActiveCfg = Debug|Win32
+		{F559C859-75AD-4ED0-BEE4-BB327CCEC3FD}.Debug.Build.0 = Debug|Win32
+		{F559C859-75AD-4ED0-BEE4-BB327CCEC3FD}.Release.ActiveCfg = Release|Win32
+		{F559C859-75AD-4ED0-BEE4-BB327CCEC3FD}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

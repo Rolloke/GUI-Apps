@@ -1,0 +1,182 @@
+History
+--------
+
+
+20.02.2004
+		- TashaDll.dll angelegt. 
+
+26.03.2004
+		- TODO: Das resynchronisieren muß auf Stream ebene und nicht auf wSource-Ebene erfolgen,
+		  da jeder DSP mehrere Datenstreams versendet.
+
+06.04.2004
+		- SetMask mit hilfe vonCIPCActivityMask implementiert
+
+19.04.04
+	- Bugfix: WriteToEEPromX konnte bislang nur ab Adresse '0' schreiben.
+			  Nun funktioniert auch der Wahlfreie Zugriff aufs EEProm, und damit auch
+			  die Donglefunktionalität
+
+23.04.2004
+	- Der ':MessageReceiveCallback'-Thread läuft nun mit der Priotität 'THREAD_PRIORITY_TIME_CRITICAL'
+	- Die Process basispriorität ist wieder 'NORMAL_PRIORITY_CLASS'
+
+27.04.2004
+	- Das nicht vorhandensein von gültigen Videodaten - aus welchem Grund auch immer - wird
+	  nun als Ausfall des Videosignales gemeldet.
+
+30.04.2004
+	- 'TraceMissingFields' ist nun ein/ausschaltbar.
+	- 'TraceWriteToEEprom', 'ReadFromEEProm' ist nun ein/ausschaltbar.
+	- 'CanStart()', 'CanStop()', 'CanPause()' und 'CanResume()' sind obsolet.
+	- Bugfix: Die 'StreamID' ín Get/SetEncoderParam wurde nicht korrekt behandelt. 
+	- 'HaltOnBootError' ist defaultmäßig disabled.
+
+02.05.2004
+	- Erst nach Erhalt der 'Notify Slave Init Ready'-Meldung wird der nächste DSP gebootet.
+	- Erst werden nun bis zu 3 aufeinanderfolgende Bootversuche pro DSP durchgeführt.
+	
+04.05.2004
+	- Anzahl der aufeinanderfolgenden Bootversuche eines jeden DSPs ist nun unter
+	  \\Recovery\\BF533BootAttempts einstellbar. Default ist 3
+
+05.05.2004
+	- Wenn kein Startmarker im Circularbuffer gefunden wird, werden nun die letzten Bytes im Buffer
+	  ncht einfach verworfen.
+
+07.05.2004
+	- Empfangene Datenpakete werden zusätzlich auf Gültigkeit der SourceID und StreamID überprüft.
+	- FrameSync läßt sich wieder abschalten
+	- Beim letzten Build wurde die permanente Maske beim Start nicht geladen
+
+13.05.2004
+	- Wenn der Schlüssel ...\TashaUnit\DeviceX\EEProm\ChangeSN auf '1' gesetzt ist. Öffnet sich
+	  beim Start der TashaUnit ein Dialog in dem die neue Seriennummer eingegenen werden kann.
+
+17.05.2004
+	- Der Memberfunktion CCodec::Open(...) wird nun die TashaBoardID übergeben. Diese entspricht der
+	  gewünschten DIP-Stellung auf dem Tashaboard plus eins. (1...4). Es wird nun zunächst ein Scanvorgang
+	  gestartet, um das gewünschte Tashaboard zu ermitteln. Dazu wird für jede gefundene Tasha die
+	  Stellung der DIP-Schalter ausgelesen, und mit der TashaUnit-Instanz verglichen. Ist das
+	  gewünschte Board gefunden, so wird die mds-TreiberInstanz in der Registry vermerkt, um
+	  beim nächsten Start nicht erneut scannen zu müssen. Der Eintrag wird aber nach jedem 
+	  erfolgreichen Start aktualisiert, so daß eine Änderung der DIP-Schalter nach einem weiteren
+	  Start der TashaUnit erkannt wird.
+	   
+24.05.2004
+	- Mit 'TraceGetAlarmState' fehlte noch bislang
+	- Framerate wird nun im Tooltip des Systemtray mit angezeigt.
+	- 'CCodec::Open' in CCodec::DoRequestOpenDevice umbenannt. Das Booten erfolgt nun in einem
+	  extra Thread, da es bis zu 60 Sekunden dauern kann.
+	  'CCodec::OnConfirmOpenDevice' signalisiert das Ende des Bootvorganges
+
+25.04.2004
+	- DoRequestSetPermanentMake wird nun aus 'LoadConfig' asynchron aufgerufen.
+	- Schlüsselname 'GetAlarmState' war falsch.
+	- Das Öffnen der 'FirmwareDateien' muß mit dem Flag 'CFile::shareDenyNone' erfolgen,
+	  da evtl. mehrere tashaUnits gleichzeitig auf diese Dateien lesend zugreifen müssen.
+
+26.05.2004
+	- mit Hilfe von CCodec::OnIndicateError(int nErrorCode) und OnIndicateWarning(int nWarningCode)
+	  werden nun über 60 Fehlerzustände nach außen signalisiert.
+
+28.05.2004
+	- Bugfix: Enthält das EEProm noch keine Daten, so wurde eine gerade neu vergebene Seriennummer
+	          durch '12345678901234567' wieder überschrieben.
+	- Es werden nun im Dialog zur Änderung der Seriennummer die Ziffern 9...13 markiert, so daß
+	  die fortlaufende fünfstellige Nummer einfacher geändert werden kann.
+	- Einige Maßnahmen zur Veringerung der Systemauslastung. Im Systemtray verbraucht die
+	  TashaUnit nun 5,3% anstatt 11,6% CPU-Last bei 200fps (Pentium4 2.4GHz)
+
+02.06.2004
+	- Ist die Datei 'BF535BootImage.ldr' zum Startzeitpunkt der TashaUnit im selben Verzeichnis wie
+	  diese vorhanden, so wird diese Datei ins EEProm übertragen und anschließend gelöscht.
+	  
+04.06.2004
+	- Versionsinfo in die Resource eingebaut
+
+17.06.2004
+	- Zum Ändern der SN kann nun ein SN-Template vorgegeben werden.
+
+19.06.2004
+	- Beim zweiten Stream (StreamID=1) muß nun jedes Frame einzeln mit 'DoRequestNewSingleFrame'
+	  angefordert werden. Der Stream dient zur schmalbandigen übertragung via Netzwerk. Damit es
+	  dort nicht zu Staus kommt, werden die Frames einzeln vom Server angefordert.
+	- Der erste Zugriff auf das EEProm nach einem Neustart des PC's funktionierte nicht,
+	  daher erfolgt 'ReadDongleInformation' nun erst nach Erhalt von 'OnConfirmOpenDevice'.
+	  Dann klappt's
+	  
+21.06.2004
+	- Die zuletzt verwendeten Encoderparameter eines jeden DSPs werden nun in der Registry vermerkt.
+	  Wird nun einer der DSPs neu gestartet, erhält dieser die zuletzt verwendeten Encodereinstellungen.
+
+22.06.2004
+	- 'BF533RecoveryTimeout' und 'StreamRecoveryTimeout' von 2000ms auf 4000ms erhöht.
+	- Bugfix: Die Assembler implementierung der 'Startmarker'-Suche wahr fehlerhaft
+	
+25.06.2004
+	- Wird für den zweiten Stream ein 'dropped'-Field entdeckt, so wird automatisch ein neues I-Frame
+	  angefordert.
+
+15.07.2004
+	Bugfix DV3-57: Fällt der Videostream aus, wird der entsprechende DSP neu gestartet.
+	Liefert dieser nun aber nicht mindestens einmal gültige Videodaten,
+	so wird er auch nie wieder neu gestartet.
+	Bugfix DV3-26: Die analogen Videoausgänge 1 und 2 gedreht. Der Request kommt schon verkehrt
+	an. Die Ausgänge werden schon an anderer Stelle (Server) verdreht. Hier müßte mal aufgeräumt
+	werden!
+
+01.09.2004
+	- Für den 2. Stream wird nun manuell das vorgegebene I-Frame Intervall erzwungen. 
+
+02.09.2004
+	- WK_TRACE in der Tasha.dll wird nun über die Klasse CMyDebug in der TashaUnit umgeleitet.
+
+27.09.2004
+	- Bug in der Kamerasignalerkennung beseitigt.
+	- Kameras, die anfänglich nicht angeschlossen waren, werden auch nicht mehr als
+	  ausgefallen gemeldet.
+
+15.11.2004
+	- Bugfix: Für Stream1: Wenn das I-Frameintervall erreicht ist, so wird ein I-Frame erzwungen, OHNE
+	  ein zusätliches Frame einzufügen. 
+	
+06.12.2004
+	- Alle Threads mit Hilfe von XTIB::SetThreadName benannt
+
+18.01.2005
+	- DoRequestScanForCameras liefert erst ein Ergebnis, wenn von allen 8 Kameras
+	  ein Daten über ein gültiges/ungültiges Videosignal vorliegen.
+
+24.01.2005
+	- Idip5Bugfix664: Es wird nun sichergestellt, das zwei Bilder einer Kamera einen zeitlichen mindestabstand
+	  von 40ms als Timestamp erhalten.
+
+31.01.05
+	- Neue SPI-Kommandos (TMM_REQUEST_SET_NR, MM_REQUEST_GET_NR) zum
+	  aktivieren/deaktivieren und abfragen des temporalen NR-Filters.
+	  hinzugefügt.
+
+01.02.05
+	- Die Tasha 'hört' nun auf die beiden Events zur Ansteuerung des Piezos und des
+	  Watchdogs.
+02.02.05
+	- Nur die erste TashaUnit 'lauscht' auf externe Events.
+	- DoRequestTriggerWatchdog reicht nun das WatchdogTimeOut in Sekunden an die BF535,
+	  somit läßt sich nun wie bei den anderen Boards die Zeitspanne verändern. (-1=Disable)
+	  
+03.02.05
+	- Prozesspriorität von HIGH auf NORMAL abgesenkt. 
+	- TreadPriorität des MessageReceiveCallback von TIME_CRITICAL auf ABOVE_NORMAL abgesenkt.
+	
+03.02.05
+	- Idip5 Bugfix755: Datenpackete, bei denen 'dwImageDataLen' 0 ist, wurden nicht nach oben
+	  indiziert. Da die Tasha aber für ausgefallene Kameras, die Datenlänge auf 0 setzt, wurden
+	  diese (und damit das Testbild) nicht an den Server weitergereicht.
+
+04.02.05
+	- Das Testbild für ausgefallene Kameras wird nun auch über den 2. Stream geschickt.
+
+11.02.05
+	- Den Recovery Mechanismus für den BF535 umgestellt. Es sollte nun zuverlässiger erkannt werden,
+	  ob der BF535 korrekt arbeitet.

@@ -1,0 +1,4 @@
+TARGETNAME=KeyHook
+TARGETTYPE=DRIVER
+
+SOURCES=keyhook.c keyhook.rc

@@ -1,0 +1,48 @@
+// ViDoku.odl : type library source for ViDoku.dll
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (ViDoku.tlb).
+
+[	uuid(1433430E-B34A-11D0-A217-244106C10000), version(1.0),
+	helpstring ("ViDoku Developer Studio Add-in") ]
+library ViDoku
+{
+	importlib("stdole32.tlb");
+	importlib("devshl.dll");
+	importlib("ide\devdbg.pkg");
+	
+
+	//  Dual interface for CCommands
+	//
+	//  All commands that your add-in adds to DevStudio
+	//   must appear in this interface.  You may use the
+	//   ClassView to add methods to this interface, which
+	//   will cause stub implementations of those methods to
+	//   appear in your CCommands class.
+	
+	[	uuid(1433430A-B34A-11D0-A217-244106C10000),
+		oleautomation,
+		dual
+	]
+
+	interface ICommands : IDispatch
+	{
+		// methods
+		[id(1)]
+		HRESULT ReplAllCommandMethod();
+		[id(2), helpstring("method InsertCommentHeader")] HRESULT InsertCommentHeader();
+		[id(3), helpstring("method PrintSelectedText")] HRESULT PrintSelectedText();
+	};
+
+
+	//  Class information for CCommands
+
+	[ uuid(1433430B-B34A-11D0-A217-244106C10000) ]
+	coclass Commands
+	{
+		[default] interface ICommands;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

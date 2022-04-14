@@ -1,0 +1,31 @@
+01.08.06 TKR- Bei DTS Sender sind die Optionen LAN, CD und DVD immer freigeschaltet.
+31.07.06 TKR- Die Dongle Informationen im Freischaltcode wurde um eine CheckSumme erweitert. Diese wird im
+			  SecurityLauncher ueberprueft.
+19.07.06 TKR- Expansion fuer Idip Sender nun mit RSA
+19.07.06 TKR- Expansion Code fuer die Aenderung des Idip Sender Dongles erweitert. Zunaechst ohne RSA.
+06.07.06 TKR- Expansion Code an die Q Unit angepasst. Freischaltung von 8 und 16 Kameras 
+			  nachtraeglich bei Q Unit ist nun moeglich.
+08.12.04 TKR- Die Lizensnummer darf aufgrund der Kodierung/Dekodierung nicht, wenn sie als
+			  Zahl betrachtet wird größer als 410.000.000 sein.
+14.07.04 TKR- Freischaltung erneut umgebaut. Folgende Freischaltungen können erfolgen:
+			  Idip PL Grundeinstellung: 
+										Gegenstationen	: 5 mind.
+										PTZ				: immer freigeschaltet
+										Timer			: immer freigeschaltet
+										2 Monitorbetrieb: nicht freischaltbar
+										Anwahlkarten:	: nicht freischaltbar
+			  Idip XL Grundeinstellung: 
+										Gegenstationen	: 10 mind.
+										PTZ				: immer freigeschaltet
+										Timer			: immer freigeschaltet
+										2 Monitorbetrieb: immer freigeschaltet
+										Anwahlkarten:	: immer freigeschaltet
+30.06.04 TKR- Fuer die Verschluesselung der Seriennummer + Dongle nur die ersten 7 Ziffern der Serial
+			  benutzt, da z.B. Seriennummer 711111221 fuer die Verdongleung zu gross ist.
+			  In Eula.exe wird das beim Decode beruecksichtigt.
+29.06.04 TKR- Dialog angepasst auf Freischaltung von Idip-Features.
+04.03.04 GF	- Umstellung auf Unicode und VS_71
+15.05.02 UF - Es werden jetzt auch nichtnumerische Computernamen, also solche auch Buchstaben unterstuetzt.
+22.03.02 UF - ExpansionCode ist ein Tool zur Generierung von Freischaltcodes fuer DTS VDR und SDR.
+22.03.02 UF - Projekt angelegt.
+11.12.02 TKR- DVD Freischaltung mit eingebaut

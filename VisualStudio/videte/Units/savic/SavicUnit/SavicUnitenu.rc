@@ -1,0 +1,252 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+#define WK_LANG_BLOCK "040904b0"
+#define WK_LANG_BLOCK_NUM 0x409
+    "#include ""res\\SaVicUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINRES
+//
+
+BIN_SMALL_TESTBILD      BINRES  MOVEABLE PURE   "TESTBILD1.JPG"
+BIN_LARGE_TESTBILD      BINRES  MOVEABLE PURE   "TESTBILD2.JPG"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_SAVICUNIT1          ICON    DISCARDABLE     "res\\SavicUnit1.ico"
+IDR_SAVICUNIT2          ICON    DISCARDABLE     "res\\SavicUnit2.ico"
+IDR_SAVICUNIT3          ICON    DISCARDABLE     "res\\SavicUnit3.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SAVIC_APP_DIALOG DIALOGEX 0, 0, 207, 198
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "SaVicUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Video source",IDC_GROUP_VIDEOSOURCE,7,3,192,28
+    CONTROL         "Camera1",IDC_SOURCE1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,16,14,42,10
+    CONTROL         "Camera2",IDC_SOURCE2,"Button",BS_AUTORADIOBUTTON,58,14,
+                    42,10
+    CONTROL         "Camera3",IDC_SOURCE3,"Button",BS_AUTORADIOBUTTON,101,14,
+                    42,10
+    CONTROL         "Camera4",IDC_SOURCE4,"Button",BS_AUTORADIOBUTTON,145,14,
+                    42,10
+    GROUPBOX        "Video Front End",IDC_GROUP_VIDEOFRONTEND,7,32,100,39
+    CONTROL         "PAL CCIR",IDC_FE_PAL_CCIR,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,15,41,52,10
+    CONTROL         "NTSC CCIR",IDC_FE_NTSC_CCIR,"Button",BS_AUTORADIOBUTTON,
+                    15,54,52,10
+    CONTROL         "Notch",IDC_FE_LNOTCH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,67,41,35,10
+    CONTROL         "Dec",IDC_FE_LDEC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    67,54,29,10
+    LTEXT           "Encoder:",IDC_TXT_ENCODER,7,94,28,8
+    PUSHBUTTON      "Start",IDC_ENC_START,39,92,28,14
+    PUSHBUTTON      "Stop",IDC_ENC_STOP,69,92,28,14,WS_DISABLED
+    CONTROL         "Relais",IDC_RELAIS0,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,165,60,33,8
+    LTEXT           "Frames",IDC_TXT_FRAMES2,111,96,24,8
+    RTEXT           "0",IDC_ENCODED_FRAMES,139,94,62,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    GROUPBOX        "Resolution",IDC_GROUP_RESOLUTION,9,140,47,36
+    CONTROL         "Fine",IDC_HIGH_RES,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,17,151,32,10
+    CONTROL         "Coarse",IDC_LOW_RES,"Button",BS_AUTORADIOBUTTON,17,163,
+                    37,10
+    GROUPBOX        "Compression",IDC_GROUP_COMPRESSION,59,140,99,36,
+                    WS_GROUP
+    CONTROL         "50K",IDC_COMPRESS_0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,65,150,28,10
+    CONTROL         "40K",IDC_COMPRESS_1,"Button",BS_AUTORADIOBUTTON,95,150,
+                    28,10
+    CONTROL         "32K",IDC_COMPRESS_2,"Button",BS_AUTORADIOBUTTON,125,150,
+                    28,10
+    CONTROL         "24K",IDC_COMPRESS_3,"Button",BS_AUTORADIOBUTTON,65,161,
+                    28,10
+    CONTROL         "16K",IDC_COMPRESS_4,"Button",BS_AUTORADIOBUTTON,95,161,
+                    29,10
+    CONTROL         "8K",IDC_COMPRESS_5,"Button",BS_AUTORADIOBUTTON,125,161,
+                    28,10
+    PUSHBUTTON      "VideoInlay",IDC_VIDEOINLAY,163,146,38,30,WS_GROUP
+    PUSHBUTTON      "ColorSettings...",IDC_DLG_LUMINANCE,79,114,60,25
+    PUSHBUTTON      "MD Settings...",IDC_DLG_MD_CONFIG,142,114,60,25
+    PUSHBUTTON      "Switch Test",IDC_TEST,9,75,41,13
+    DEFPUSHBUTTON   "Close",IDOK,141,180,60,16
+    CONTROL         "Full frame",IDC_ENABLE_TWO_FIELDS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,36,38,10
+    CONTROL         "LED1",IDC_LED1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    165,36,34,10
+    CONTROL         "LED2",IDC_LED2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    165,47,34,10
+    RTEXT           "0",IDC_SWITCHES,139,74,62,16,WS_BORDER,
+                    WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | 
+                    WS_EX_STATICEDGE
+    LTEXT           "Switch/Sec",IDC_TXT_SWITCHES,99,79,38,8
+    EDITTEXT        IDC_EDIT_FPS,109,57,19,14
+    LTEXT           "fps",IDC_TXT_FPS,134,60,10,8
+    PUSHBUTTON      "Init Pll",IDC_INIT_PLL,55,75,41,13
+    CONTROL         "NR",IDC_NOISE_REDUCTION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,46,27,10
+    CONTROL         "Jpeg",IDC_RADIO_JPEG,"Button",BS_AUTORADIOBUTTON,13,122,
+                    31,10
+    CONTROL         "DIB",IDC_RADIO_DIB,"Button",BS_AUTORADIOBUTTON,45,122,
+                    28,10
+    GROUPBOX        "Codec",IDC_STATIC_CODEC,9,110,65,29
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_SAVIC_APP_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 205
+        VERTGUIDE, 139
+        BOTTOMMARGIN, 176
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "&About",               ID_ABOUT
+        MENUITEM "&Settings...",                ID_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SETTINGS             "&Settings"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ABOUT                "Ab&out SaVicUnit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RTE_NO_VIDEO        "The camera %u has no video signal."
+    IDS_RTE_VIDEO           "The video signal from camera %u has been resumed"
+    IDS_RTE_DLL_WRONG_VERSION 
+                            "SaVcDA.dll wrong Version (Dll=0x%08x, Unit=0x%08x)"
+    IDS_RTE_DRIVER_NOT_LOADED "Device driver not loaded"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define WK_LANG_BLOCK "040904b0"
+#define WK_LANG_BLOCK_NUM 0x409
+#include "res\SaVicUnit.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

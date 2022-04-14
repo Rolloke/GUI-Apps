@@ -1,0 +1,9 @@
+18.11.02
+	GF	Anpassung VS_70
+14.5.98 >>> UpdateVersion um 16:24 <<<
+	UF	Bugfix
+14.5.98 >>> UpdateVersion um 11:42 <<<
+	UF	Projekt angelegt, ruft
+		fuer alle FAT Partitionen
+		convert #: /FS:NTFS
+		auf.

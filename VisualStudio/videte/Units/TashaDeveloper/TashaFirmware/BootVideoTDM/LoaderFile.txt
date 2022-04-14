@@ -1,0 +1,78 @@
+"ADSP-BF533 EZ-KIT Lite Loader File Demo"
+
+Date Created:	3/25/03		Rev 1.0
+
+This directory contains an example ADSP-BF533 subroutine that demonstrates how
+to create a loader file for the BF533 EZ-KIT and use the FlashProgrammer utility
+to download the file to the flash.
+  
+
+Files contained in this directory:
+
+LoaderFile.dpj			VisualDSP project file	
+Blink.asm				Main Module
+adsp-BF533_ASM.ldf		Linker Description File 
+blink533.ldr			Flash Ldr file
+__________________________________________________________
+
+	
+
+CONTENTS
+
+I.		FUNCTIONAL DESCRIPTION
+II.		IMPLEMENTATION DESCRIPTION
+III. 	OPERATION DESCRIPTION
+
+
+I.    FUNCTIONAL DESCRIPTION
+
+The Loader File demo demonstrates how to create a loader file.
+ 
+This example simply uses a blink program to create a loader file.  After
+the loader file is created the user can then use the FlashProgrammer Utility
+to download the intel hex file to flash.
+
+
+II.   IMPLEMENTATION DESCRIPTION
+
+Boots a blink program from Flash and runs a simple blink program.
+
+III.  OPERATION DESCRIPTION
+
+"Creating a Loader File for the ADSP-BF533 EZ-KIT"
+
+- Open an ADSP-BF533 EZ-KIT Lite session in the VisualDSP Integrated Development Environment (IDDE).
+- Open the project "LoaderFile.dpj" in the VisualDSP IDDE.
+- Click on the "Project" Menu item and select "Project Options"
+- In the type combo box under the Project tab, select Loader File
+- Click on the Load tab
+- Make sure the "Category" selected is "Loader file options"
+- Under "Boot source", flash should be selected
+- "Output file format" should be "Intel hex"
+- "Output file word width" should be "16"
+- Start address should only be changed if the user wants the code
+  to be loaded to a different address other than the default start address
+- In the Output file text box type "blink533.ldr"
+  (default uses your project name with .ldr extension)
+- Verbose should be unchecked
+- After all the options are set up select "OK"
+- Click the "Project" menu item and select "rebuild all" to build "blink533.ldr"
+- "blink533.ldr" should now be in your debug folder
+
+
+DOWNLOADING "blink533.ldr" IN THE FLASH PROGRAMMER
+
+- Click on the "Tools" menu item and select "Flash Programmer"
+- The Flash Programmer interface will pop up
+- Click on the "..." next to the Driver file text box to browse for the driver
+- The driver should be in 
+  "...\VisualDSP\Blackfin\Flash Programmer Drivers\ADSP-BF533 EZ-Kit Lite"
+- Select the driver file "BF533EZFLASH.DXE" and then click "Load Driver"
+- Click on the "..." next to the Data file text box to browse for blink.ldr
+- Select the blink533.ldr file just created and click "Load File"
+- Click "yes" to the message asking to erase flash
+- "blink533.ldr" is now in flash
+- To verify that the blink program is in flash go to the Settings menu and
+  click BootLoad.  This will cause the board to boot from flash and run.
+  You should see your leds flashing.
+- You can halt the dsp at any time by clicking on Debug\halt.

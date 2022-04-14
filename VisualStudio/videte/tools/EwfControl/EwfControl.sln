@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EwfControl", "EwfControl.vcproj", "{912FC760-4E1C-4900-9D96-F8F6A0DC097D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = EwfControl.vcproj
+		SccProjectName0 = \u0022$/Project/Tools/EwfControl\u0022,\u0020JXSCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{912FC760-4E1C-4900-9D96-F8F6A0DC097D}.Debug.ActiveCfg = Debug|Win32
+		{912FC760-4E1C-4900-9D96-F8F6A0DC097D}.Debug.Build.0 = Debug|Win32
+		{912FC760-4E1C-4900-9D96-F8F6A0DC097D}.Release.ActiveCfg = Release|Win32
+		{912FC760-4E1C-4900-9D96-F8F6A0DC097D}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

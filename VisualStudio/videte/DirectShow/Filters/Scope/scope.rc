@@ -1,0 +1,210 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SCOPEDIALOG DIALOGEX 0, 0, 381, 241
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Oscilloscope"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "Generic1",IDC_L_GAIN,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,8,22,12,50
+    CONTROL         "Generic1",IDC_L_OFFSET,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,26,22,12,50
+    CONTROL         "Generic1",IDC_R_GAIN,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,8,98,12,50
+    CONTROL         "Generic1",IDC_R_OFFSET,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,26,97,12,50
+    CONTROL         "&Freeze",IDC_FREEZE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,335,11,37,10
+    CONTROL         "&Trigger",IDC_TRIGGER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,335,21,39,10
+    CONTROL         "Generic1",IDC_TIMEBASE,"msctls_trackbar32",TBS_VERT | 
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,339,54,12,54
+    CONTROL         "",IDC_TB_LEVEL,"msctls_trackbar32",TBS_VERT | TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,359,54,12,54
+    CONTROL         "Left",IDC_RD_TRIGGER_C1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_GROUP,329,121,24,10
+    GROUPBOX        "Timebase",IDC_STATIC,327,1,54,133,BS_CENTER
+    CONTROL         "Right",IDC_RD_TRIGGER_C2,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,355,121,24,10
+    COMBOBOX        IDC_COMBO_FFT,332,148,49,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_MODE,332,173,49,108,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "AGC",IDC_CK_AGC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,
+                    166,30,10
+    CONTROL         "AFC",IDC_CK_AFC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    335,31,29,10
+    CONTROL         "",IDC_SLIDER_POS,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,44,232,283,9
+    CTEXT           "G",IDC_L_GAIN_TEXT,3,73,19,10,SS_SUNKEN
+    CONTROL         "",IDC_SCOPEWINDOW,"Static",SS_BLACKRECT,44,4,283,223
+    CTEXT           "G",IDC_R_GAIN_TEXT,3,150,19,10,SS_SUNKEN
+    CTEXT           "EndTime",IDC_TS_LAST,329,231,50,10,SS_SUNKEN
+    GROUPBOX        "Left",IDC_STATIC,2,14,40,72,BS_CENTER
+    GROUPBOX        "Right",IDC_STATIC,2,88,40,76,BS_CENTER
+    CTEXT           "Time/Div",IDC_TIMEBASE_TEXT,329,109,50,10,SS_SUNKEN
+    CTEXT           "O",IDC_L_OFFSET_TEXT,22,73,18,10,SS_SUNKEN
+    CTEXT           "O",IDC_R_OFFSET_TEXT,22,150,18,10,SS_SUNKEN
+    CTEXT           "StartTime",IDC_TS_START,2,231,40,10,SS_SUNKEN
+    CTEXT           "",IDC_TS_DELTA,329,218,50,10,SS_SUNKEN
+    CTEXT           "",IDC_FORMAT,0,217,44,10,SS_SUNKEN
+    CTEXT           "",IDC_BUFSIZE,329,198,50,10,SS_SUNKEN
+    CTEXT           "Gain Offset",IDC_STATIC,0,4,42,10,SS_SUNKEN,
+                    WS_EX_TRANSPARENT
+    CTEXT           "Time",IDC_TXT_TIME_BASE,329,42,25,10,SS_SUNKEN
+    CTEXT           "FFT",IDC_STATIC,329,139,50,8
+    CTEXT           "Format",IDC_STATIC,0,208,42,8
+    CTEXT           "Buffer Size",IDC_STATIC,329,189,50,8
+    CTEXT           "Delta",IDC_STATIC,329,209,50,8
+    CTEXT           "Mode",IDC_TXT_MODE,327,163,54,8,WS_DISABLED
+    CONTROL         "+/-",IDC_CK_TRIGGER_EDGE,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,354,42,25,10,WS_EX_STATICEDGE
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x30003fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation"
+            VALUE "Comment", "DirectShow Sample"
+            VALUE "FileDescription", "Scope Filter (Sample)"
+            VALUE "FileVersion", "9.00"
+            VALUE "InternalName", "Scope.ax"
+            VALUE "LegalCopyright", "Copyright (C) 1992-2002 Microsoft Corporation"
+            VALUE "OriginalFilename", "Scope.ax"
+            VALUE "ProductName", "DirectX 9.0 Sample"
+            VALUE "ProductVersion", "9.00"
+            VALUE "ActiveMovie", "Filter dll"
+            VALUE "OLESelfRegister", "AM20"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SCOPEDIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 327
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_COMBO_MODE          "Both;Channel 1;Channel 2;X/Y;Y/X;"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

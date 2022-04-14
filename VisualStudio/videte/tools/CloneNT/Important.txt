@@ -1,0 +1,3 @@
+Die Registrierungsdateien müssen mit compress.exe komprimiert werden!!
+rdisk scheint eine andere Kompriemierung zu verwenden, so daß die LZCopyFile Funktion
+die Dateien nicht dekomprimieren kann.

@@ -1,0 +1,221 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\EwfControl.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\EwfControl.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EWFCONTROL_DIALOG DIALOGEX 0, 0, 320, 212
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "EWF control dialog"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "Enable",IDC_CK_ENABLE_EWF,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,12,127,60,10
+    CONTROL         "Disable",IDC_CK_DISABLE_EWF,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,12,139,60,10
+    CONTROL         "Commit data permanently",IDC_CK_COMMIT_DATA,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,96,139,114,10
+    CONTROL         "Logoff",IDC_RD_LOGOFF,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE | WS_GROUP,6,163,70,10
+    CONTROL         "Reboot",IDC_RD_REBOOT,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,85,163,70,10
+    CONTROL         "Shutdown",IDC_RD_SHUTDOWN,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,160,163,70,10
+    PUSHBUTTON      "Cancel",IDCANCEL,6,190,66,16
+    DEFPUSHBUTTON   "OK",IDOK,246,190,66,16
+    LTEXT           "Type:",IDC_TXT_TYPE,12,20,54,8
+    LTEXT           "State:",IDC_TXT_STATE,12,32,54,8
+    LTEXT           "Command:",IDC_TXT_BOOT_CMD,12,44,54,8
+    LTEXT           "",IDC_TXTV_TYPE,72,20,72,8
+    LTEXT           "",IDC_TXTV_STATE,72,32,72,8
+    LTEXT           "",IDC_TXTV_BOOT_CMD,72,44,72,8
+    LTEXT           "Level:",IDC_TXT_CURRENT_LEVEL,150,32,54,8
+    LTEXT           "Level (max):",IDC_TXT_LEVEL,150,20,54,8
+    LTEXT           "Level name:",IDC_TXT_LEVEL_NAME,150,44,54,8
+    LTEXT           "",IDC_TXTV_MAX_LEVEL,210,20,30,8
+    LTEXT           "",IDC_TXTV_CURRENT_LEVEL,210,32,30,8
+    LTEXT           "",IDC_TXTV_LEVEL_NAME,210,44,96,8
+    LTEXT           "Clump size:",IDC_TXT_CLUMP_SIZE,12,62,84,8
+    LTEXT           "Mapped memory size:",IDC_TXT_MEM_MAP_SIZE,12,74,84,8
+    LTEXT           "",IDC_TXTV_CLUMP_SIZE,102,62,42,8
+    LTEXT           "",IDC_TXTV_MEM_MAP_SIZE,102,74,42,8
+    LTEXT           "ID:",IDC_TXT_VOLUMEID,150,62,30,8
+    LTEXT           "Name:",IDC_TXT_VOLUME_DESC,150,74,30,8
+    LTEXT           "",IDC_TXTV_VOLUMEID,181,62,125,8
+    LTEXT           "",IDC_TXTV_VOLUME_DESC,181,74,125,8
+    LTEXT           "Current size:",IDC_TXT_RAM_SIZE,12,86,84,8
+    LTEXT           "",IDC_TXTV_RAM_SIZE,102,86,42,8
+    GROUPBOX        "Current EWF Parameter",IDC_GRP_CURRENT_EWF_PARAMETERS,
+                    6,6,306,102
+    GROUPBOX        "Settings",IDC_GRP_SETTINGS,6,114,306,42
+    PUSHBUTTON      "Close",IDC_CLOSE,126,190,66,16
+    LTEXT           "Shall the data on drive %c: be saved permanently?",
+                    IDC_TXTV_EWF_COMMIT_MSG,12,176,300,8,NOT WS_VISIBLE
+    LTEXT           "Disc:",IDC_TXT_STOREV_DESC,150,86,16,8
+    LTEXT           "",IDC_TXTV_STOREV_DESC,181,86,125,8
+    LTEXT           "in %d seconds",IDC_TXT_SHUTDOWN_TIME,240,165,72,8,NOT 
+                    WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_EWFCONTROL_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 12
+        VERTGUIDE, 66
+        VERTGUIDE, 72
+        VERTGUIDE, 96
+        VERTGUIDE, 102
+        VERTGUIDE, 144
+        VERTGUIDE, 150
+        VERTGUIDE, 204
+        VERTGUIDE, 210
+        VERTGUIDE, 240
+        VERTGUIDE, 306
+        VERTGUIDE, 312
+        HORZGUIDE, 6
+        HORZGUIDE, 24
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 78
+        HORZGUIDE, 90
+        HORZGUIDE, 108
+        HORZGUIDE, 114
+        HORZGUIDE, 132
+        HORZGUIDE, 144
+        HORZGUIDE, 156
+        HORZGUIDE, 168
+        HORZGUIDE, 180
+        HORZGUIDE, 198
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_EWF_ENABLED         "enabled"
+    IDS_EWF_DISABLED        "disabled"
+    IDS_EWF_TYPE_DISC       "Disc"
+    IDS_EWF_TYPE_RAM        "RAM"
+    IDS_EWF_TYPE_RAM_REG    "RAM -> Reg"
+    IDS_EWF_CMD_NONE        "none"
+    IDS_EWF_CMD_SETLEVEL    "Set level"
+    IDS_EWF_CMD_COMMIT      "commit"
+    IDS_EWF_ERR_CONFIG      "EWF volume config could not be determined!\n\nRemove EWFControl from autostart?"
+    IDS_EWF_ERR_NO_API      "No EWF API installed!"
+    IDS_EWF_TOOLTIP         "EWF %s on drive %c: %s."
+    IDS_EWF_LOW_DISK_SPACE  "Low memory in disc overlay!"
+    IDS_EWF_ENABLE          "enable"
+    IDS_EWF_DISABLE         "disable"
+    IDS_EWF_ERR_RAM_USAGE   "EWF memory usage too high. %.2f %% have been allocated."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\EwfControl.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

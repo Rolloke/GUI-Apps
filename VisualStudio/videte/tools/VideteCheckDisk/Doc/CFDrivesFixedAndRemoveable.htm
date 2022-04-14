@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Compact Flash Laufwerke in Windows</title>
+</head>
+
+<body>
+<h3>Compact Flash Laufwerke in Windows</h3>
+<p>
+Compact Flash Laufwerke werden meistens als Removeable Media eingebunden. Dies können nicht
+partitioniert werden. Das Betriebssystem erkennt auch keine weiteren Partitionen, die mit Hilfe von fdisk o.ä. Programmen erzeugt wurden.
+Wenn man das Flag für removeable ändert, so können auch Compact Flash Geräte
+mehrere Partitionen haben.
+</p>
+<p>Beide Versionen haben Vor- und Nachteile:
+</p>
+<table border="1" width="100%">
+  <tr>
+    <td width="19%" align="center">Compact Flash</td>
+    <td width="40%">
+      <p align="center">Vorteile</td>
+    <td width="41%">
+      <p align="center">Nachteile</td>
+  </tr>
+  <tr>
+    <td width="19%" rowspan="5" align="center" bgcolor="#C0C0C0">Removeable</td>
+    <td width="40%" bgcolor="#C0C0C0">Die Images können komplett z.B.: auf
+      einer Festplatte erstellt werden und müssen nur noch kopiert werden. Der
+      FBA muss nicht auf dem Compact Flash Gerät laufen.</td>
+    <td width="41%" bgcolor="#C0C0C0">Können nicht partitioniert werden. Es
+      werden auch keine weiteren Partitionen erkannt. Diese währen für den EWF
+      notwendig, um die Einstellungen für den EWF zu speichern.</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#C0C0C0">Ein komplett erstelltes Image kann schon
+      vorher mit allen Einstellungen getestet werden.</td>
+    <td width="41%" bgcolor="#C0C0C0">Nur EWF RAM-REG Modus möglich. Dieser
+      muss nachträglich über Registryeinträge auf der CF Karte aktiviert
+      werden.</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#C0C0C0">Nachträgliche Komprimierung der
+      Betriebssystemkomponenten. auf dem Compact Flash ist möglich. (256 MB CF
+      Karte)</td>
+    <td width="41%" bgcolor="#C0C0C0">Daten können nur auf einer zusätzlichen
+      Festplatte permanent gespeichert werden.</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#C0C0C0">Es ist nur eine Partition notwendig.</td>
+    <td width="41%" bgcolor="#C0C0C0">Permanente Speicherung auf dem CF nur
+      durch Reboot möglich.</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#C0C0C0">Herkömmliche CFs können verwendet
+      werden.</td>
+    <td width="41%" bgcolor="#C0C0C0">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="19%" rowspan="5" align="center">Fixed</td>
+    <td width="40%">Können partitioniert werden. Auf weiteren Partitionen
+      können Daten für den EWF und auch für Anwendungen gespeichert werden.</td>
+    <td width="41%">Für die Erstellung der EWF Partition für den RAM Modus
+      muss der FBA auf dem Compact Flash laufen.</td>
+  </tr>
+  <tr>
+    <td width="40%">Auf einer ungeschützten Partition auf dem CF&nbsp; können
+      die Anwendungsdaten kontrolliert permanent gespeichert werden.</td>
+    <td width="41%">Die Einstellungen für das Betriebssystem müssten
+      nachträglich vorgenommen werden.</td>
+  </tr>
+  <tr>
+    <td width="40%">&nbsp;</td>
+    <td width="41%">Spezielle CFs sind notwendig</td>
+  </tr>
+  <tr>
+    <td width="40%">&nbsp;</td>
+    <td width="41%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="40%">&nbsp;</td>
+    <td width="41%">&nbsp;</td>
+  </tr>
+</table>
+</body>
+
+</html>

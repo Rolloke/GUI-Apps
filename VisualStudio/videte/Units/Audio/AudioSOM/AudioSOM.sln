@@ -1,0 +1,82 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioSOM", "AudioSOM.vcproj", "{B708BD6A-ACDE-4F92-ACE7-41B258648B49}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0283B981-3503-421D-8D2E-387075B94E98} = {0283B981-3503-421D-8D2E-387075B94E98}
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59} = {3A962D87-AB9D-4E56-8CA8-0139DB17EC59}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "synth", "C:\DXSDK\Samples\C++\DirectShow\Filters\Synth\synth.vcproj", "{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "scope", "C:\DXSDK\Samples\C++\DirectShow\Filters\Scope\scope.vcproj", "{0283B981-3503-421D-8D2E-387075B94E98}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dump", "..\..\..\DirectShow\Filters\dump\dump.vcproj", "{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 5
+		SccProjectName0 = \u0022$/Project/Units/Audio/AudioSOM\u0022,\u0020PLDAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {DD9F7F01-E4ED-4D4C-B4FF-8238568419ED}
+		SccProjectUniqueName1 = AudioSOM.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = C:\\DXSDK\\Samples\\C++\\DirectShow\\Filters\\Synth\\synth.vcproj
+		SccProjectName2 = \u0022$/DXSDK/Filter/synth\u0022,\u0020HWBAAAAA
+		SccLocalPath2 = C:\\DXSDK\\Samples\\C++\\DirectShow\\Filters\\Synth
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = C:\\DXSDK\\Samples\\C++\\DirectShow\\Filters\\Scope\\scope.vcproj
+		SccProjectName3 = \u0022$/DXSDK/Filter/scope\u0022,\u0020TVBAAAAA
+		SccLocalPath3 = C:\\DXSDK\\Samples\\C++\\DirectShow\\Filters\\Scope
+		CanCheckoutShared = false
+		SccProjectUniqueName4 = ..\\..\\..\\DirectShow\\Filters\\dump\\dump.vcproj
+		SccProjectName4 = \u0022$/Project/DirectShow/Filters/dump\u0022,\u0020LYHCAAAA
+		SccLocalPath4 = ..\\..\\..\\DirectShow\\Filters\\dump
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug Unicode = Debug Unicode
+		Release = Release
+		Release Unicode = Release Unicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{B708BD6A-ACDE-4F92-ACE7-41B258648B49}.Debug.ActiveCfg = Debug|Win32
+		{B708BD6A-ACDE-4F92-ACE7-41B258648B49}.Debug.Build.0 = Debug|Win32
+		{B708BD6A-ACDE-4F92-ACE7-41B258648B49}.Debug Unicode.ActiveCfg = Debug|Win32
+		{B708BD6A-ACDE-4F92-ACE7-41B258648B49}.Release.ActiveCfg = Release|Win32
+		{B708BD6A-ACDE-4F92-ACE7-41B258648B49}.Release Unicode.ActiveCfg = Release|Win32
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}.Debug.ActiveCfg = Debug|Win32
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}.Debug.Build.0 = Debug|Win32
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}.Debug Unicode.ActiveCfg = Debug Unicode|Win32
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}.Release.ActiveCfg = Release|Win32
+		{3A962D87-AB9D-4E56-8CA8-0139DB17EC59}.Release Unicode.ActiveCfg = Release Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug.ActiveCfg = Debug|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug.Build.0 = Debug|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug Unicode.ActiveCfg = Debug Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Debug Unicode.Build.0 = Debug Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release.ActiveCfg = Release|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release.Build.0 = Release|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release Unicode.ActiveCfg = Release Unicode|Win32
+		{0283B981-3503-421D-8D2E-387075B94E98}.Release Unicode.Build.0 = Release Unicode|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Debug.ActiveCfg = Debug|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Debug.Build.0 = Debug|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Debug Unicode.ActiveCfg = Debug|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Debug Unicode.Build.0 = Debug|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Release.ActiveCfg = Release|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Release.Build.0 = Release|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Release Unicode.ActiveCfg = Release|Win32
+		{1C44F2EF-1FF5-4A9D-B240-0DF618654E2D}.Release Unicode.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

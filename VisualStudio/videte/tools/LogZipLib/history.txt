@@ -1,0 +1,7 @@
+28.10.02	GF	- Umstellung auf .NET
+				  Compiler warnings beseitigt
+				  - C4131: Old-style function declarations, konvertiert in Prototyp-Form
+				  - C4127: Conditional expression is constant, while (1) in for (;;) umgewandelt
+				  - C4702: Unreachable code, nur in Logzip.cpp
+				  - C4244: conversion from 'int' to 'ush', possible loss of data disabled in 2 files
+28.10.02	GF	- History.txt begonnen

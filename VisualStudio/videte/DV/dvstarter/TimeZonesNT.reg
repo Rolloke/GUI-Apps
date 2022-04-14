@@ -1,0 +1,500 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Afghanistan Standard Time]
+"Display"="(GMT+04:30) Kabul"
+"Dlt"="Afghanistan Daylight Time"
+"Std"="Afghanistan Standard Time"
+"MapID"="-1,73"
+"TZI"=hex:f2,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Alaskan Standard Time]
+"Display"="(GMT-09:00) Alaska"
+"Dlt"="Alaskan Daylight Time"
+"Std"="Alaskan Standard Time"
+"MapID"="30,31"
+"TZI"=hex:1c,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Arabian Standard Time]
+"Display"="(GMT+04:00) Abu Dhabi, Muscat"
+"Dlt"="Arabian Daylight Time"
+"Std"="Arabian Standard Time"
+"MapID"="8,9"
+"TZI"=hex:10,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Atlantic Standard Time]
+"Display"="(GMT-04:00) Atlantic Time (Canada)"
+"Dlt"="Atlantic Daylight Time"
+"Std"="Atlantic Standard Time"
+"MapID"="40,41"
+"TZI"=hex:f0,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\AUS Central Standard Time]
+"Display"="(GMT+09:30) Darwin"
+"Dlt"="AUS Central Daylight Time"
+"Std"="AUS Central Standard Time"
+"MapID"="-1,76"
+"TZI"=hex:c6,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Azores Standard Time]
+"Display"="(GMT-01:00) Azores, Cape Verde Is."
+"Dlt"="Azores Daylight Time"
+"Std"="Azores Standard Time"
+"MapID"="46,47"
+"TZI"=hex:3c,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Bangkok Standard Time]
+"Display"="(GMT+07:00) Bangkok, Hanoi, Jakarta"
+"Dlt"="SE Asia Daylight Time"
+"Std"="SE Asia Standard Time"
+"MapID"="14,15"
+"TZI"=hex:5c,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Canada Central Standard Time]
+"Display"="(GMT-06:00) Saskatchewan"
+"Dlt"="Canada Central Daylight Time"
+"Std"="Canada Central Standard Time"
+"MapID"="-1,86"
+"TZI"=hex:68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Caucasus Standard Time]
+"Display"="(GMT+04:00) Baku, Tbilisi"
+"Dlt"="Caucasus Daylight Time"
+"Std"="Caucasus Standard Time"
+"MapID"="8,9"
+"TZI"=hex:10,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Cen. Australia Standard Time]
+"Display"="(GMT+09:30) Adelaide"
+"Dlt"="Cen. Australia Daylight Time"
+"Std"="Cen. Australia Standard Time"
+"MapID"="-1,76"
+"TZI"=hex:c6,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Central Asia Standard Time]
+"Display"="(GMT+06:00) Almaty, Dhaka"
+"Dlt"="Central Asia Daylight Time"
+"Std"="Central Asia Standard Time"
+"MapID"="12,13"
+"TZI"=hex:98,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Central Europe Standard Time]
+"Display"="(GMT+01:00) Bratislava, Budapest, Ljubljana, Prague, Warsaw"
+"Dlt"="Central Europe Daylight Time"
+"Std"="Central Europe Standard Time"
+"MapID"="-1,66"
+"TZI"=hex:c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Central European Standard Time]
+"Display"="(GMT+01:00) Belgrade, Sarajevo, Skopje, Sofija, Zagreb"
+"Dlt"="Central European Daylight Time"
+"Std"="Central European Standard Time"
+"MapID"="2,3"
+"TZI"=hex:c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Central Pacific Standard Time]
+"Display"="(GMT+11:00) Magadan, Solomon Is., New Caledonia"
+"Dlt"="Central Pacific Daylight Time"
+"Std"="Central Pacific Standard Time"
+"MapID"="22,23"
+"TZI"=hex:6c,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Central Standard Time]
+"Display"="(GMT-06:00) Central Time (US & Canada)"
+"Dlt"="Central Daylight Time"
+"Std"="Central Standard Time"
+"MapID"="36,37"
+"TZI"=hex:68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\China Standard Time]
+"Display"="(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+"Dlt"="China Daylight Time"
+"Std"="China Standard Time"
+"MapID"="-1,75"
+"TZI"=hex:20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Dateline Standard Time]
+"Display"="(GMT-12:00) Eniwetok, Kwajalein"
+"Dlt"="Dateline Daylight Time"
+"Std"="Dateline Standard Time"
+"MapID"="24,25"
+"TZI"=hex:d0,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\E. Africa Standard Time]
+"Display"="(GMT+03:00) Nairobi"
+"Dlt"="E. Africa Daylight Time"
+"Std"="E. Africa Standard Time"
+"MapID"="-1,71"
+"TZI"=hex:4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\E. Australia Standard Time]
+"Display"="(GMT+10:00) Brisbane"
+"Dlt"="E. Australia Daylight Time"
+"Std"="E. Australia Standard Time"
+"MapID"="20,21"
+"TZI"=hex:a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\E. Europe Standard Time]
+"Display"="(GMT+02:00) Bucharest"
+"Dlt"="E. Europe Daylight Time"
+"Std"="E. Europe Standard Time"
+"MapID"="4,5"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,09,00,00,00,05,00,01,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\E. South America Standard Time]
+"Display"="(GMT-03:00) Brasilia"
+"Dlt"="E. South America Daylight Time"
+"Std"="E. South America Standard Time"
+"MapID"="-1,80"
+"TZI"=hex:b4,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,02,00,00,00,02,00,02,00,00,\
+  00,00,00,00,00,00,00,0a,00,00,00,03,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Eastern Standard Time]
+"Display"="(GMT-05:00) Eastern Time (US & Canada)"
+"Dlt"="Eastern Daylight Time"
+"Std"="Eastern Standard Time"
+"MapID"="38,39"
+"TZI"=hex:2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Egypt Standard Time]
+"Display"="(GMT+02:00) Cairo"
+"Dlt"="Egypt Daylight Time"
+"Std"="Egypt Standard Time"
+"MapID"="4,68"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,09,00,03,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,05,00,05,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Ekaterinburg Standard Time]
+"Display"="(GMT+05:00) Ekaterinburg"
+"Dlt"="Ekaterinburg Daylight Time"
+"Std"="Ekaterinburg Standard Time"
+"MapID"="10,11"
+"TZI"=hex:d4,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Fiji Standard Time]
+"Display"="(GMT+12:00) Fiji, Kamchatka, Marshall Is."
+"Dlt"="Fiji Daylight Time"
+"Std"="Fiji Standard Time"
+"MapID"="24,25"
+"TZI"=hex:30,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\FLE Standard Time]
+"Display"="(GMT+02:00) Helsinki, Riga, Tallinn"
+"Dlt"="FLE Daylight Time"
+"Std"="FLE Standard Time"
+"MapID"="-1,67"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,04,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,03,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\GFT Standard Time]
+"Display"="(GMT+02:00) Athens, Istanbul, Minsk"
+"Dlt"="GTB Daylight Time"
+"Std"="GTB Standard Time"
+"MapID"="-1,67"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\GMT]
+"Display"="(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
+"Dlt"="GMT Daylight Time"
+"Std"="GMT Standard Time"
+"MapID"="0,1"
+"TZI"=hex:00,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\GMT Standard Time]
+"Display"="(GMT) Casablanca, Monrovia"
+"Dlt"="Greenwich Daylight Time"
+"Std"="Greenwich Standard Time"
+"MapID"="88,89"
+"TZI"=hex:00,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Hawaiian Standard Time]
+"Display"="(GMT-10:00) Hawaii"
+"Dlt"="Hawaiian Daylight Time"
+"Std"="Hawaiian Standard Time"
+"MapID"="28,29"
+"TZI"=hex:58,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\India Standard Time]
+"Display"="(GMT+05:30) Bombay, Calcutta, Madras, New Delhi"
+"Dlt"="India Daylight Time"
+"Std"="India Standard Time"
+"MapID"="-1,74"
+"TZI"=hex:b6,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Iran Standard Time]
+"Display"="(GMT+03:30) Tehran"
+"Dlt"="Iran Daylight Time"
+"Std"="Iran Standard Time"
+"MapID"="-1,72"
+"TZI"=hex:2e,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,09,00,02,00,04,00,02,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Israel Standard Time]
+"Display"="(GMT+02:00) Israel"
+"Dlt"="Israel Daylight Time"
+"Std"="Israel Standard Time"
+"MapID"="-1,70"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Korea Standard Time]
+"Display"="(GMT+09:00) Seoul"
+"Dlt"="Korea Daylight Time"
+"Std"="Korea Standard Time"
+"MapID"="18,19"
+"TZI"=hex:e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Mexico Standard Time]
+"Display"="(GMT-06:00) Mexico City, Tegucigalpa"
+"Dlt"="Mexico Daylight Time"
+"Std"="Mexico Standard Time"
+"MapID"="-1,85"
+"TZI"=hex:68,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Mid-Atlantic Standard Time]
+"Display"="(GMT-02:00) Mid-Atlantic"
+"Dlt"="Mid-Atlantic Daylight Time"
+"Std"="Mid-Atlantic Standard Time"
+"MapID"="44,45"
+"TZI"=hex:78,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,09,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Mountain Standard Time]
+"Display"="(GMT-07:00) Mountain Time (US & Canada)"
+"Dlt"="Mountain Daylight Time"
+"Std"="Mountain Standard Time"
+"MapID"="34,35"
+"TZI"=hex:a4,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\New Zealand Standard Time]
+"Display"="(GMT+12:00) Auckland, Wellington"
+"Dlt"="New Zealand Daylight Time"
+"Std"="New Zealand Standard Time"
+"MapID"="78,79"
+"TZI"=hex:30,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,03,00,02,00,00,\
+  00,00,00,00,00,00,00,0a,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Newfoundland Standard Time]
+"Display"="(GMT-03:30) Newfoundland"
+"Dlt"="Newfoundland Daylight Time"
+"Std"="Newfoundland Standard Time"
+"MapID"="-1,81"
+"TZI"=hex:d2,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Pacific Standard Time]
+"Display"="(GMT-08:00) Pacific Time (US & Canada); Tijuana"
+"Dlt"="Pacific Daylight Time"
+"Std"="Pacific Standard Time"
+"MapID"="32,33"
+"TZI"=hex:e0,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,04,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Romance Standard Time]
+"Display"="(GMT+01:00)  Amsterdam, Copenhagen, Madrid, Paris, Vilnius"
+"Dlt"="Romance Daylight Time"
+"Std"="Romance Standard Time"
+"MapID"="-1,64"
+"TZI"=hex:c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Russian Standard Time]
+"Display"="(GMT+03:00) Moscow, St. Petersburg, Volgograd"
+"Dlt"="Russian Daylight Time"
+"Std"="Russian Standard Time"
+"MapID"="6,7"
+"TZI"=hex:4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\SA Eastern Standard Time]
+"Display"="(GMT-03:00) Buenos Aires, Georgetown"
+"Dlt"="SA Eastern Daylight Time"
+"Std"="SA Eastern Standard Time"
+"MapID"="42,43"
+"TZI"=hex:b4,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\SA Pacific Standard Time]
+"Display"="(GMT-05:00) Bogota, Lima, Quito"
+"Dlt"="SA Pacific Daylight Time"
+"Std"="SA Pacific Standard Time"
+"MapID"="-1,83"
+"TZI"=hex:2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\SA Western Standard Time]
+"Display"="(GMT-04:00) Caracas, La Paz"
+"Dlt"="SA Western Daylight Time"
+"Std"="SA Western Standard Time"
+"MapID"="-1,82"
+"TZI"=hex:f0,00,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Samoa Standard Time]
+"Display"="(GMT-11:00) Midway Island, Samoa"
+"Dlt"="Samoa Daylight Time"
+"Std"="Samoa Standard Time"
+"MapID"="26,27"
+"TZI"=hex:94,02,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Saudi Arabia Standard Time]
+"Display"="(GMT+03:00) Baghdad, Kuwait, Riyadh"
+"Dlt"="Arab Daylight Time"
+"Std"="Arab Standard Time"
+"MapID"="-1,71"
+"TZI"=hex:4c,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Singapore Standard Time]
+"Display"="(GMT+08:00) Singapore"
+"Dlt"="Singapore Daylight Time"
+"Std"="Singapore Standard Time"
+"MapID"="16,17"
+"TZI"=hex:20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\South Africa Standard Time]
+"Display"="(GMT+02:00) Harare, Pretoria"
+"Dlt"="South Africa Daylight Time"
+"Std"="South Africa Standard Time"
+"MapID"="4,69"
+"TZI"=hex:88,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Sri Lanka Standard Time]
+"Display"="(GMT+06:00) Colombo"
+"Dlt"="Sri Lanka Daylight Time"
+"Std"="Sri Lanka Standard Time"
+"MapID"="-1,74"
+"TZI"=hex:98,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Sydney Standard Time]
+"Display"="(GMT+10:00) Canberra, Melbourne, Sydney"
+"Dlt"="AUS Eastern Daylight Time"
+"Std"="AUS Eastern Standard Time"
+"MapID"="20,21"
+"TZI"=hex:a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,0a,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Taipei Standard Time]
+"Display"="(GMT+08:00) Taipei"
+"Dlt"="Taipei Daylight Time"
+"Std"="Taipei Standard Time"
+"MapID"="16,17"
+"TZI"=hex:20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Tasmania Standard Time]
+"Display"="(GMT+10:00) Hobart"
+"Dlt"="Tasmania Daylight Time"
+"Std"="Tasmania Standard Time"
+"MapID"="20,-1"
+"TZI"=hex:a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,03,00,00,00,05,00,02,00,00,\
+  00,00,00,00,00,00,00,0a,00,00,00,01,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Tokyo Standard Time]
+"Display"="(GMT+09:00) Osaka, Sapporo, Tokyo"
+"Dlt"="Tokyo Daylight Time"
+"Std"="Tokyo Standard Time"
+"MapID"="18,19"
+"TZI"=hex:e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\US Eastern Standard Time]
+"Display"="(GMT-05:00) Indiana (East)"
+"Dlt"="US Eastern Daylight Time"
+"Std"="US Eastern Standard Time"
+"MapID"="-1,84"
+"TZI"=hex:2c,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\US Mountain Standard Time]
+"Display"="(GMT-07:00) Arizona"
+"Dlt"="US Mountain Daylight Time"
+"Std"="US Mountain Standard Time"
+"MapID"="-1,87"
+"TZI"=hex:a4,01,00,00,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Vladivostok Standard Time]
+"Display"="(GMT+10:00) Vladivostok"
+"Dlt"="Vladivostok Daylight Time"
+"Std"="Vladivostok Standard Time"
+"MapID"="-1,77"
+"TZI"=hex:a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\W. Australia Standard Time]
+"Display"="(GMT+08:00) Perth"
+"Dlt"="W. Australia Daylight Time"
+"Std"="W. Australia Standard Time"
+"MapID"="16,17"
+"TZI"=hex:20,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\W. Europe Standard Time]
+"Display"="(GMT+01:00) Brussels, Berlin, Bern, Rome, Stockholm, Vienna"
+"Dlt"="W. Europe Daylight Time"
+"Std"="W. Europe Standard Time"
+"MapID"="2,3"
+"TZI"=hex:c4,ff,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\West Asia Standard Time]
+"Display"="(GMT+05:00) Islamabad, Karachi, Tashkent"
+"Dlt"="West Asia Daylight Time"
+"Std"="West Asia Standard Time"
+"MapID"="10,11"
+"TZI"=hex:d4,fe,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\West Pacific Standard Time]
+"Display"="(GMT+10:00) Guam, Port Moresby"
+"Dlt"="West Pacific Daylight Time"
+"Std"="West Pacific Standard Time"
+"MapID"="-1,77"
+"TZI"=hex:a8,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,00,00,00,00,00,00,00,00,00,\
+  00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Yakutsk Standard Time]
+"Display"="(GMT+09:00) Yakutsk"
+"Dlt"="Yakutsk Daylight Time"
+"Std"="Yakutsk Standard Time"
+"MapID"="18,19"
+"TZI"=hex:e4,fd,ff,ff,00,00,00,00,c4,ff,ff,ff,00,00,0a,00,00,00,05,00,03,00,00,\
+  00,00,00,00,00,00,00,03,00,00,00,05,00,02,00,00,00,00,00,00,00
+

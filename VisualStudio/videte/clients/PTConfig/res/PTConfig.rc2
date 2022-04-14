@@ -1,0 +1,41 @@
+//
+// PTCONFIG.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+#ifndef _GARNY
+WK_VERSION(24, 11, 10, 12, "24/11/97,10:12\0", // @AUTO_UPDATE
+		   "PTConfig.exe\0",	// exe name
+		   "idip! PTConfig-Modul\0",	// product name
+		   "Security PTConfig-Modul\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+#else
+GARNY_VERSION(24, 11, 10, 12, "24/11/97,10:12\0", // @AUTO_UPDATE
+		   "PTConfig.exe\0",	// exe name
+		   "De La Rue Garny - Video Save PTConfig-Modul\0",	// product name
+		   "De La Rue Garny - Video Save PTConfig-Modul\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AVI
+//
+
+IDR_AVI_SEARCH  AVI  AviFiles\search.avi
+IDR_AVI_COPY    AVI  avifiles\filecopy.avi
+

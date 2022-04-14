@@ -1,0 +1,40 @@
+Speicherverbrauch:
+
+4  Videobuffer für VideoIn/VideoOut
+1  VideoBuffer zur YUV422->YUV411/Deinterlacing
+2  Videobuffer (Nur Y-Anteil CIF-Auflösung für MD)
+2  Buffer pro Kamera zu Aufnahme der Differenzbilder (CIF/64)
+25 DataPackets zum asynchronen Transport der Daten zum Host
+-------------------------------------------------------------
+4 * 768x576*2	 = 3538944 Bytes
+1 * 768x576*2	 = 884736  Bytes
+2 * 384x288		 = 221184  Bytes
+2 * 16 * 48x36*2 = 110592  Bytes
+25* 50KByte		 = 1280000 Bytes
+=================================
+				 = 6035456 Bytes -> 5,76 MByte
+
+Zeitverhalten: (Bytes per Frame/Field = 24000)
+Vollbild 720x576
+	Bewegungserkennung:	14ms
+	Deinterlacing:		15ms
+	YUV422->YUV411:		4ms
+	Jpegencoding:		26ms
+============================
+	59ms
+
+Halbbild 720x288
+	Bewegungserkennung:	14ms
+	Deinterlacing:		0.00ms
+	YUV422->YUV411:		2,3ys
+	Jpegencoding:		15ms
+============================
+	32ms
+
+CIF 352x288
+	Bewegungserkennung:	14ms
+	Deinterlacing:		0.00ms
+	YUV422->YUV411:		1.1ms
+	Jpegencoding:		8ms
+============================
+	23ms

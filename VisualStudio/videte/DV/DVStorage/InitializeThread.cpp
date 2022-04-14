@@ -1,0 +1,32 @@
+// InitializeThread.cpp: implementation of the CInitializeThread class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "dvstorage.h"
+#include "InitializeThread.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+CInitializeThread::CInitializeThread()
+: CWK_Thread(_T("InitializeThread"))
+{
+
+}
+//////////////////////////////////////////////////////////////////////
+CInitializeThread::~CInitializeThread()
+{
+
+}
+//////////////////////////////////////////////////////////////////////
+BOOL CInitializeThread::Run(LPVOID lpContext)
+{
+	CWK_Profile wkp(CWK_Profile::WKP_REGPATH,HKEY_LOCAL_MACHINE,_T("DVRT\\DV"),_T(""));
+	
+	theApp.Initialize(wkp);
+
+	theApp.m_pMainWnd->PostMessage(WM_USER);
+
+	return FALSE;
+}

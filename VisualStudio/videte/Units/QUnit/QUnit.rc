@@ -1,0 +1,429 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\QUnit.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\QUnit.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Info über QUnit"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "QUnit Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2005",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_QUNIT_DIALOG DIALOGEX 0, 0, 409, 246
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "QUnit"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Cameras",IDC_STATIC,7,6,395,71
+    CONTROL         "",IDC_SLIDER_BRIGHTNESS,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,63,82,233,15
+    CONTROL         "",IDC_SLIDER_CONTRAST,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,63,99,233,15
+    CONTROL         "",IDC_SLIDER_SATURATION,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,63,116,233,15
+    LTEXT           "Brightness:",IDC_STATIC,15,89,37,8,0,WS_EX_RIGHT
+    LTEXT           "Contrast:",IDC_STATIC,20,106,32,8,0,WS_EX_RIGHT
+    LTEXT           "Saturation:",IDC_STATIC,15,123,37,8,0,WS_EX_RIGHT
+    LTEXT           "Relays:",IDC_STATIC,27,154,25,8,0,WS_EX_RIGHT
+    LTEXT           "Alarm:",IDC_STATIC,30,168,22,8,0,WS_EX_RIGHT
+    CONTROL         "",IDC_CHECK_RELAY0,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,63,154,8,8
+    CONTROL         "",IDC_CHECK_ALARM0,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,63,168,8,8
+    LTEXT           "Frames:",IDC_STATIC,338,89,27,8,0,WS_EX_RIGHT
+    LTEXT           "0",IDC_FRAME_COUNTER,365,89,37,8
+    LTEXT           "Fps:",IDC_STATIC,338,106,15,8,0,WS_EX_RIGHT
+    LTEXT           "0",IDC_FRAMERATE,365,106,37,8
+    CONTROL         "1",IDC_CAMERA0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED | WS_TABSTOP,17,17,23,8
+    CONTROL         "Preview...",IDC_PREVIEW,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,7,189,56,15
+    PUSHBUTTON      "MD-Settings...",IDC_DLG_MD_CONFIG,72,189,53,15
+    COMBOBOX        IDC_COMBO_RESOLUTION,338,192,54,81,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Resolution:",IDC_STATIC,296,196,37,8
+    CONTROL         "Multiview",IDC_CHECK_MULTI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,131,194,45,10
+    COMBOBOX        IDC_COMBO_FPS0,17,27,23,318,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Manual Fps",IDC_FREE_FPS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,180,194,52,10
+    CONTROL         "",IDC_SLIDER_HUE,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,63,133,233,15
+    LTEXT           "Hue:",IDC_STATIC,36,140,16,8,0,WS_EX_RIGHT
+    LTEXT           "Deinterlacer",IDC_TXT_DEINT,7,221,40,8
+    CONTROL         "Aus",IDC_RD_DEINT0,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,63,219,28,10
+    CONTROL         "Blend",IDC_RD_DEINT1,"Button",BS_AUTORADIOBUTTON,111,
+                    219,33,10
+    CONTROL         "Blur",IDC_RD_DEINT2,"Button",BS_AUTORADIOBUTTON,160,219,
+                    28,10
+    CONTROL         "Even",IDC_RD_DEINT3,"Button",BS_AUTORADIOBUTTON,197,219,
+                    32,10
+    CONTROL         "Odd",IDC_RD_DEINT4,"Button",BS_AUTORADIOBUTTON,245,219,
+                    29,10
+    DEFPUSHBUTTON   "OK",IDOK,352,212,50,17,WS_GROUP
+END
+
+IDD_DLG_MD_CONFIG DIALOGEX 0, 0, 375, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,281,120,42,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,327,120,42,14
+    PUSHBUTTON      "Invertiere perm. Maske",IDC_INVERT_PERMANENT_MASK,282,
+                    30,87,14
+    PUSHBUTTON      "Lösche Masken",IDC_CLEAR_MASK,282,66,87,14
+    PUSHBUTTON      "Speichere Masken",IDC_SAVE_MASK,282,84,87,14
+    CONTROL         501,IDC_INLAY_WND,"Static",SS_BITMAP | SS_SUNKEN | 
+                    WS_BORDER,6,12,17,15
+    CONTROL         502,IDC_DIFF_WND,"Static",SS_BITMAP | SS_SUNKEN | 
+                    WS_BORDER,138,12,128,89
+    COMBOBOX        IDC_SELECT_CAMERA,282,12,87,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Lade Masken",IDC_LOAD_MASK,282,102,87,14
+    CONTROL         "Zeige Maske im Bild",IDC_HIDE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,102,137,78,10
+    LTEXT           "Originalbild:",IDC_TITLE_INLAY,6,3,66,8
+    LTEXT           "Differenzbild:",IDC_TITLE_MASK,138,3,42,8
+    CONTROL         503,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,121,7,6
+    CONTROL         504,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,133,7,6
+    LTEXT           "Adaptive Maske",IDC_STATIC_AM,24,120,52,8
+    LTEXT           "Permanente Maske",IDC_STATIC_PM,24,132,62,8
+    GROUPBOX        "Legende",IDC_STATIC_LEGENDE,6,108,90,36
+    CONTROL         "Histogrammausgleich",IDC_HISTOGRAMM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,137,83,10
+    PUSHBUTTON      "Invertiere adap. Maske",IDC_INVERT_ADAPTIVE_MASK,282,48,
+                    87,14
+    COMBOBOX        IDC_SELECT_MASK_SENSITIVITY,219,123,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SELECT_ALARM_SENSITIVITY,219,109,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Empfindlichkeit der adaptiven Maske",
+                    IDC_STATIC_ALARM_SENSITIVITY,99,125,117,8
+    LTEXT           "Empfindlichkeit der MD",IDC_STATIC_MD_SENSITIVITY,99,
+                    112,117,8,0,WS_EX_RIGHT
+    CONTROL         "Tiefpass Filter",IDC_FILTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,273,138,93,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Firmenname>"
+            VALUE "FileDescription", "TODO: <Dateibeschreibung>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "QUnit.exe"
+            VALUE "Copyright (C) 2005", "TODO: (c) <Firmenname>. Alle Rechte vorbehalten."
+            VALUE "OriginalFilename", "QUnit.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_QUNIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 402
+        VERTGUIDE, 52
+        VERTGUIDE, 63
+        VERTGUIDE, 296
+        VERTGUIDE, 338
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 239
+        HORZGUIDE, 25
+        HORZGUIDE, 39
+        HORZGUIDE, 97
+        HORZGUIDE, 114
+        HORZGUIDE, 131
+        HORZGUIDE, 148
+        HORZGUIDE, 162
+        HORZGUIDE, 176
+        HORZGUIDE, 204
+        HORZGUIDE, 229
+    END
+
+    IDD_DLG_MD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 368
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 144
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_INLAY               BITMAP                  "MDInlay.bmp"
+IDB_MASK                BITMAP                  "MDmask.bmp"
+IDB_GREEN               BITMAP                  "green.bmp"
+IDB_RED                 BITMAP                  "red.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "About...",                    ID_FILE_ABOUT
+        MENUITEM "Settings...",                 ID_FILE_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_QUNIT_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0030, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0033, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0034, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0035, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0036, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0037, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0038, 
+    IDC_COMBO_FPS0, 0x403, 2, 0
+0x0039, 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3931, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3032, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3132, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3232, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3332, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3432, "\000" 
+    IDC_COMBO_FPS0, 0x403, 3, 0
+0x3532, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINRES
+//
+
+IDR_BIN_TESTIMAGE       BINRES                  "Testbild.jpg"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&Info über QUnit..."
+    IDS_RTE_NO_VIDEO        "Camera %u has no video signal"
+    IDS_RTE_VIDEO           "The video signal from camera %u has been resumed"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_COMBO_QCIF          "QCIF"
+    IDS_COMBO_CIF           "CIF"
+    IDS_COMBO_2CIF          "2CIF"
+    IDS_COMBO_4CIF          "4CIF"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HIGH                "Hoch"
+    IDS_NORMAL              "Normal"
+    IDS_LOW                 "Niedrig"
+    IDS_OFF                 "Aus"
+    IDS_CAMERA              "Kamera "
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#include "res\QUnit.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

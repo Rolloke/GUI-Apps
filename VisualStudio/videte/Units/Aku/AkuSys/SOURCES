@@ -1,0 +1,11 @@
+TARGETNAME=Aku
+TARGETPATH=$(BASEDIR)\lib
+TARGETTYPE=DRIVER
+
+INCLUDES=..\
+
+SOURCES=AkuSys.c \
+		AkuISAStuff.c \
+		AkuSys.rc
+
+

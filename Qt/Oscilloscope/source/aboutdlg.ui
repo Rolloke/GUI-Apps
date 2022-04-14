@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>474</width>
-    <height>300</height>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>200</y>
+     <y>220</y>
      <width>71</width>
      <height>17</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>200</y>
+     <y>220</y>
      <width>341</width>
      <height>20</height>
     </rect>
@@ -43,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>220</y>
+     <y>240</y>
      <width>81</width>
      <height>17</height>
     </rect>
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>220</y>
+     <y>240</y>
      <width>341</width>
      <height>16</height>
     </rect>
@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
+     <y>260</y>
      <width>81</width>
      <height>17</height>
     </rect>
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>240</y>
+     <y>260</y>
      <width>341</width>
      <height>17</height>
     </rect>
@@ -174,7 +174,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>260</y>
+     <y>280</y>
      <width>54</width>
      <height>17</height>
     </rect>
@@ -187,7 +187,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>260</y>
+     <y>280</y>
      <width>341</width>
      <height>17</height>
     </rect>
@@ -212,7 +212,8 @@
     </rect>
    </property>
    <property name="text">
-    <string>Oscilloscope and function generator for selectable audio system devices. Based on Qt 5.12.11 with c++ 17</string>
+    <string>Oscilloscope and function generator for selectable audio system devices.
+Compiled with c++ 17</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -222,7 +223,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>180</y>
+     <y>200</y>
      <width>341</width>
      <height>20</height>
     </rect>
@@ -235,13 +236,39 @@
    <property name="geometry">
     <rect>
      <x>20</x>
+     <y>200</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Built on:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelBased_on">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
      <y>180</y>
      <width>81</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string>Build on:</string>
+    <string>Based on:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="textBased_on">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>180</y>
+     <width>341</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Qt-Version </string>
    </property>
   </widget>
  </widget>

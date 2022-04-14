@@ -1,0 +1,7 @@
+; Tasha.def : Declares the module parameters for the DLL.
+
+LIBRARY      "Tasha"
+DESCRIPTION  'Tasha Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

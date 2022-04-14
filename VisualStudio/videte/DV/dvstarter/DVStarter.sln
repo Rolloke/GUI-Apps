@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DVStarter", "DVStarter.vcproj", "{2E40D474-3496-4114-8B27-F166AC47C8CD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = DVStarter.vcproj
+		SccProjectName0 = \u0022$/DV/DVStarter\u0022,\u0020YGYBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.Debug.ActiveCfg = Debug|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.Debug.Build.0 = Debug|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.Release.ActiveCfg = Release|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.Release.Build.0 = Release|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{2E40D474-3496-4114-8B27-F166AC47C8CD}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

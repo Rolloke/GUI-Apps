@@ -1,0 +1,203 @@
+24.08.06 UF - Listen auf altem Port 888 ausgetragen.
+24.07.06 UF - Massiver Umbau / Bugfix wgen Deadlock Senden und empfangen.
+25.04.06 RKE- Netzwerkperformanceanzeige implementiert (Statusbar).
+              Deaktivieren: "dvrt\SocketUnit\Statistic" REG_DWORD "Values" = 0.
+              "Values": Anzahl der Werte ueber die gemittelt wird.
+              "Timer" : Zeit in ms fuer Aktualisierung der Ausgabe.
+              
+15.02.06 UF - Netzwerkperformance optimiert.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+11.01.06 RKE- Bugfix 1001: Gegenstationsliste kann jetzt auch DNS Namen.
+20.12.05 UF - Nochmal Aenderung, Verbesserung des Sendecodes.
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+11.04.05 UF - Bugfix Alarmverbindung benutzt jetzt die kleiner Bitrate, dann geht auch H.263/MPEG-4 immer.
+31.01.05 ML - Bugfix: Beep on Incomming Call mit MessageBeep(-1)
+14.05.04 UF - Bugfix IP Book Protokoll zurück auf ASCII wegen Abwärtskompatibilität.
+11.05.04 GF	- Bugfix Alarmverbindungen bzw. Verbindungen Unicode/ANSI generell
+23.10.03 GF	- IPBook auf Unicode umgestellt und in DTSUnicode eingebunden
+08.10.03 RKE- Media Verbindungen implementiert.
+29.04.03 UF - Bugfix Bitraten bei Routingverbindungen.
+23.04.03 UF - Bugfix Stationsnamen Routing
+04.04.03 GF	- Bei Systemfehlern Ausgabe um Klartext erweitert
+			- Bugfix: Erst GetLastError(), dann Objekte zerstören, sonst stimmt die Fehlermeldung nicht
+25.02.03 GF	Bugfix 320: "Verwende DNS" führt zu 100% Prozessorlast.
+14.11.02 GF	Anpassung VS_70
+17.10.02 UF Bugfix Nr. 600 GP bei Alarmverbindung
+28.08.02 GF	HandleIncomingConnectionRecord überarbeitet, Fehlermeldungen bei einkommenden Ruf spezifiziert
+07.08.02 GF	Bugfix 180: Nach Abbruch eines Verbindungsversuches am Client,
+						war der ServerControl blockiert, da er trotzdem auf den Socket-Connect bzw. Fehler wartete
+						Der nachfolgende Connect-Versuch bekam dann die Fehlermeldung des nicht geklappten vorherigen
+						mitgeteilt
+06.08.02 GF	Bugfix 140: Virtueller Melder OutgoingCall (Connected) implementiert
+06.06.02 UF Bugfix bei Alarmverbindungen wird die eingestellte Netzlast nicht benutzt.
+19.02.02 UF DTS Receiver und DTS IP Receiver nehmen jetzt Alarmverbindungen an.
+24.10.01 UF Bechraenkung in den Demoversion kein IP Book nur 64kBit
+31.08.01 RM Bugfix, Rechner hinter Gateway nicht erreichbar
+29.08.01 RM Bugfix, Meldung "Keine Verbindung möglich" erscheint jetzt bei eben diesem Problem des Verbindungsaufbaus
+28.08.01 RM Das IPBook unterstüzt nun Rechner mit mehreren IP-Adressen. Z.B. bei aktivem
+			RAS Server + Netzwerkarte, oder bei Rechnern mit zwei oder mehr Netzwerkkarten
+			Dies sollte das letzte Feature der SocketUnit gewesen sein. Die neue Unit wird NetUnit heissen 
+			und die SocketUnit ersetzen.
+
+										##
+										##
+									##########
+										##
+										##
+										##
+										##
+
+								  Hier ruht die
+								SocketUnit 1997-2001
+
+29.03.01 UF,RM - Bugfix Fehlermeldung beim Verbindungsaufbau kommt jetzt noch durch
+22.03.01 RM - Sicherheitsloch gestopft in OnReceive 
+08.03.01 RM - Bugfix IPBook
+01.03.01 RM - Eine idip-Empfänger SocketUnit versucht sich zunächst über Port 1927
+              am Sender anzumelden, danach falls dieser nicht erreichbar ist
+			  aus Abwärtskompatibilitätsgründen über den "alten" Port 888.
+27.02.01 ML - Den "Alle Verbindungen trennen' - Menüpunkt entfernt 
+22.02.01 UF - Bugfix IP Book
+12.02.01 UF - Bugfix GP	bei nicht aufgebauter Verbindung
+09.02.01 RM - Socketunit optimiert. Jahrhundert Bug beseitigt. 
+23.01.01 UF-RM - Aufgeraeumt, Send Funktion korrigiert
+17.01.01 ML Bugfix: Das SystemTray-menü klappt nun korrekt zu
+10.01.01 ML Bugfix: Hostliste wird nun immer aus der Registry neu gelesen
+08.01.01 RM/ML Das IPBook in die SockeUnit integriert, aber noch fehlerbehaftet.
+03.01.01 ML Das Icon der SocketUnit erscheint nun im Systemtray.
+07.12.00 ML Bugfix: In der DTS-Variante wird nun jede Socketverbindung mit einem virtuellen Alarm
+			an den Client gemeldet, nicht nur die erste. Dazu wird eine Verbindungsliste aufgebaut,
+			in der alle IP-Adressen der aktiven Verbindungen eingetragen werden.
+07.12.00 ML Bugfix: In der DTS-Variante wird nun jeder Verbindung-auf/abbau über einen virtuellen Alarm
+			gemeldet. Nicht nur der erste.
+11.06.00 UF Bugfix Melder Eingehender Ruf und Abgewiesener Ruf
+29.06.00 GF	Neu: Konfiguration DTS mit NO_PERMISSION_CHECK Präprozessor-Define
+19.06.00 GF	Bugfix: Pipes wurden irrtümlich als pending erkannt und vorzeitig beim Connect beendet
+13.04.00 GF	Nicht verbundene Pipes (Client has canceled) werden mit 5s Timeout disconnected
+01.06.99 ML Closebutton disabled
+11.03.99 ML Wahlweise wird eine Liste von IP-Adressen durchsucht und nur die
+			Rufe angenommen, deren IP-Adressen sich in der Liste befinden.
+13.01.99 ML Neue Implementierung der virtuellen Alarme:
+			RTE_OUTGOING_CALL Param2=1 -> Online Param2=0 -> Offline
+			RTE_INCOMING_CALL  Param2=1 -> Online Param2=0 -> Offline
+			RTE_REJECT
+			Die virtuellen Alarme RTE_ONLINE und RTE_ALARMCALL gibt es
+			nicht mehr
+
+8.1.99 >>> UpdateVersion um 13:00 <<<
+08.01.99 HD Virtual Alarms "OnlineTCP" "OfflineTCP" added.
+16.10.98 HD BuildNotes Test, dies muesste fuer Build 162 erscheinen. Man beachte die lange Zeile.
+16.10.98 HD SettingsDialog dropped
+15.10.98 HD StatPeak for SendPacketSize
+16.9.98 TraceSync added (nur ueber registry)
+15.9.98 HD Weiteres SocketInfo beim Starten.
+11.9.98 HD local hostname --> locl TCP/IP hostname
+8.7.98 >>> UpdateVersion um 11:36 <<<
+	UF	Routing jetzt mit # als Trennzeichen
+		auch Alarmrufe koennen geroutet werden.
+		Routing ist gedongelt.
+11.5.98 >>> UpdateVersion um 12:38 <<<
+11.05.98 ExceptionHandler via InitDebugger
+17.4.98 >>> UpdateVersion um 11:07 <<<
+	UF	Fenster Name jetzt je nach dongle
+		die OEM Bezeichnung
+
+26.3.98 >>> UpdateVersion um 20:06 <<<
+
+26.03.98 OemGui angepasst
+
+20.3.98 >>> UpdateVersion um 12:09 <<<
+
+20.03.98 UF CWK_Profile wegen NT
+12.3.98 >>> UpdateVersion um 15:36 <<<
+
+12.03.98 HD VersionInfo ohne Fimenname
+
+2.3.98 >>> UpdateVersion um 13:47 <<<
+2.3.98 HD Bubblegrenze auf 20 MB erhoeht.
+	   HD Menue Strings korrigiert
+27.2.98 >>> UpdateVersion um 12:39 <<<
+27.02.98 HEDU Maximale Beschraenkung einer 
+		Bubble, auf 10 MB. Damit lassen sich
+		fremde Protokolle besser identifizieren.
+/*
+@TOPIC{SocketUnit History|History,SocketUnit}
+
+@LISTHEAD{08.10.97 HEDU} 
+	OnRequestServerReset wird unterstuetzt, beendet die Unit.
+@LISTHEAD{02.10.97 HEDU} 
+	Erste Stufe Routing tcp:xxxx!second....
+@LISTHEAD{27.08.97 HEDU} Vision.exe statt SecurityExplorer
+@LISTHEAD{18.08.97 HEDU} DongleCheck im InitInstance
+@LISTHEAD{17.08.97 HEDU}
+	Permission check auf WK_ALLOW_LINK
+	Das remote fetch result wird weiter gereicht.
+@LISTHEAD{10.08.97 HEDU}
+	HandleCmd macht nix mehr, wenn schon DelayeDelete gemacht (possible mem leak)
+@LISTHEAD{23.07.97 CT}
+	CWK_RunTimeError bei Syncfail eingebaut
+	Neuen String IDS_NO_SYNC_RECEIVED2 eingefügt
+	CWK_RunTimeError runtimeError(WAI_SOCKET_UNIT, WRE_SU_SYNC_FAIL, sLangMsg);
+
+@LISTHEAD{20.07.97 HEDU}
+	m_sendQueue limited auf 300
+	Extreme Fehlerfaelle mit PanicClose.
+	VersionCheck bei eingehenden Anrufen. Zur Zeit einfach Version 1.
+	Ist eine AnruferVersion kleiner als beim Empfaenger, wird der Ruf nicht angenommen.
+	STAT_LOG fuer Verbindungen.
+
+@LISTHEAD{19.07.97 HEDU}
+	CIPC-->ConnectionThread mit UebergabeQueue CSocketCmdRecord
+	LoginDialog mit 'FehlerDialog'.
+	AlleVerbindungenTrennen auch mit LoginDialog.
+	IDS_NO_SYNC_RECEIVED als localized message
+
+@LISTHEAD{18.07.97 HEDU}
+	Anzeige loeschen repariert.
+	Fehlermeldung (als WK_STAT_PEAK) bei SendeProblemen und eine 5fach RetryLoop.
+
+@LISTHEAD{14.07.97 HEDU}
+	Bitrate auch im SettingsDialog
+	Automatischer ExplorerStart via User "Alarm", wie in der ISDNUnit
+	LoginDialog vor den Settings (braucht Hardwareberechtigung)
+
+@LISTHEAD{13.07.97 HEDU}
+	Bitrate auch in der Registry
+
+@LISTHEAD{11.07.97 HEDU}
+	Alle Einstellungen aus dem SettingsDialog auch mit der entsprechenden Implementierung.
+
+@LISTHEAD{9.07.97 HEDU}
+	Sync-KeepAlive check (default 5000 ms)
+
+@LISTHEAD{19.06.97 HEDU}
+	Mit ConnectionRecord und FetchResult beim Verbindungsaufbau
+@LISTHEAD{17.06.97 HEDU}
+	IpNameType vorbereitet.
+
+@LISTHEAD{29.05.97 HEDU}
+	Settings auch in der Registry
+
+@LISTHEAD{28.05.97 HEDU}
+	Verwendung von hostnames moeglich
+
+	SettingsDialog
+
+	special ::Run im ConnctionThread
+
+@LISTHEAD{26.05.97 HEDU}
+	WK_DNSLookUp in SocketUtil.cpp mit extra caches
+
+@LISTHEAD{21.05.97 HEDU}
+	DefaultBitrate jetzt 256 KB
+
+	A)nsicht->TCP N)amen zeigt die lokale hosts Tabelle und den eigenen Namen.
+
+	Kleine Korrektur in der Anzeige (CursorPosition stoert nicht mehr)
+
+	Die graue Farbe kommt vom READ)ONLY Modus.
+
+@LISTHEAD{20.05.97 HEDU}
+	Check, ob TCP/IP Protokoll vorhanden (Nicht getestet, sigh)
+*/

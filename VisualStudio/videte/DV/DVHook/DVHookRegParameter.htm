@@ -1,0 +1,138 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="de">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Beschreibung der Registry Parameter für DVHook</title>
+</head>
+
+<body>
+
+<h2>Beschreibung der Registry Parameter für DVHook</h2>
+
+<p>In der Registry werden unter dem Schlüssel [HKEY_LOCAL_MACHINE\SOFTWARE\dvrt\DV\DVHook] die Programme,
+die von DVHook kontrolliert werden, als Stringvariablen eingetragen. <u> Alle nicht eingetragenen Programme werden von DVHook
+geschlossen</u>.
+Diese Variablen können dann folgende Schlüsselworte enthalten: </p>
+
+<ul>
+  <li><font color="#FF0000">Close</font>: Schließt das Programm</li>
+  <li><font color="#FF0000">Hide</font>: Versteckt das Programmfenster </li>
+  <li><font color="#FF0000">Ignore</font>: Das Programm wir ignoriert</li>
+  <li><font color="#FF0000">Control</font>: Das Programm kann mit Hilfe von Nachrichten kontrolliert werden.</li>
+</ul>
+<p>Für den Parameter &quot;Control&quot; werden weitere Parameter (Variablen) benötigt:,
+die unter einem Schlüssel angelegt werden, der sich aus dem Programmnamen und
+dem Fenstertext des zu steuernden Fensters zusammensetzt: z.B.:
+&quot;<b>rundll32.exe&lt;Datei Öffnen&gt;</b>&quot;.&nbsp;</p>
+<ul>
+  <li>Message0x: Nachricht 
+    <ul>
+      <li>PASSWORD: ruft einen Passwortdialog auf
+        <ul>
+          <li>Unter dem Schlüssel &quot;Ok&quot; werden die Befehle
+            eingetragen, die bei korrektem Passwort ausgeführt werden.</li>
+          <li>Unter dem Schlüssel &quot;NotOk&quot; werden die Befehle
+            eingetragen, die bei falschem Passwort ausgeführt werden.</li>
+          <li>lParam0x (DWORD) x: Zeitfenster in Sekunden für die
+            Passwortabfrage. Wenn das korrekte Passwort eingegeben wurde, so
+            wird erst nach Ablauf dieser Zeit erneut das Passwort abgefragt.</li>
+        </ul>
+      </li>
+      <li>FINDFILE: ruft einen Dialog auf, der eine Datei unter den Pfaden
+        sucht, die in der Registry unter dem Schlüssel:<br>
+        HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\Installation
+        Sources<br>
+        gespeichert sind.
+        <ul>
+          <li>Der gefundene Pfad wird unter dem Schlüssel &quot;File&quot; in
+            der Variablen lParam01 gespeichert.</li>
+          <li>Unter dem Schlüssel &quot;NotOk&quot; werden die Befehle
+            eingetragen, die bei Abbruch des Dialoges ausgeführt werden.</li>
+        </ul>
+      </li>
+      <li>ENABLE: Sperrt oder entsperrt das Fenster.
+        <ul>
+          <li>wParam0x (DWORD) 1: Fenster entsperren, 0: Fenster sperren.</li>
+        </ul>
+      </li>
+      <li>SHOW: Zeigt ein Fenster an bzw. versteckt es.
+        <ul>
+          <li>wParam0x (DWORD) 0: Fenster verstecken, 1 Fenster anzeigen</li>
+          <li>lParam0x (String): Ändert die Z-Darstellungsreihenfolge des
+            Fenster. (Top, TopMost, Bottom, NoTopMost)</li>
+        </ul>
+      </li>
+      <li>CLOSE: Schließt das Fenster.</li>
+      <li>GETTEXT: Liefert den Fenstertext
+        <ul>
+          <li>wParam0x (String): Variable, unter dem der Text gespeichert
+            werden kann z.B.: lParam0x.</li>
+          <li>[lParam0x (String)]: Zeichenkette zum Parsen des Textes
+            <ul>
+              <li>Format1 = z1::z2: Zwei Zeichenketten (z1, z2) durch zwei
+                Doppelpunkte getrennt. Wenn diese beiden Zeichenketten gefunden
+                werden, wird der dazwischenliegende Text herausgefiltert.</li>
+              <li>Format2 = %s innerhalb einer Zeichenkette, die durch
+            die Funktion sscanf(..) zum parsen benutzt wird.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SETTEXT: Setzt den Fenstertext des Fensters
+        <ul>
+          <li>wParam0x: (DWORD) wenn der Wert =1 ist wird der Text mit Hilfe des
+            Clipboardes in das Fenster kopiert.</li>
+          <li>lParam0x: (String) neuer Text des Fensters.</li>
+        </ul>
+      </li>
+      <li>COMMAND: Sendet eine WM_COMMAND Nachricht an das Fenster.
+        <ul>
+          <li>wParam0x: Kann je nach Command (DWORD) oder (String) sein</li>
+          <li>lParam0x: Kann je nach Command (DWORD) oder (String) sein</li>
+        </ul>
+      </li>
+      <li>SYSCOMMAND: Sendet eine WM_SYSCOMMAND Nachricht an das Fenster
+        <ul>
+          <li>wParam0x: Kann je nach SysCommand (DWORD) oder (String) sein</li>
+          <li>lParam0x: Kann je nach SysCommand (DWORD) oder (String) sein</li>
+        </ul>
+      </li>
+      <li>Bei den Befehlen COMMAND und SYSCOMMAND kann hinter der Nachricht noch
+        ein weiterer Parameter stehen:
+        <ul>
+          <li>Post: Die Nachricht wird durch PostMessage verschickt.</li>
+          <li>Invoke: Wenn durch die Nachricht ein weiterer Dialog aufgerufen
+            wird, so kehrt dieser zu dem aufrufenden Dialog zurück, ohne die
+            für den aufrufenden Dialog eingetragenen Befehle erneut aufzurufen.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>wParam0x: WPARAM der Windows Nachricht</li>
+  <li>lParam0x: LPARAM der Windows Nachricht</li>
+  <li>DlgItem0x: Auswahl des Fensters bzw Kindfensters:
+    <ul>
+      <li>(DWORD) anhand der ID des Dialogelementes</li>
+      <li>(String) anhand des Namens des Fensters</li>
+      <li>(String) =&quot;Parent&quot; das Fenster selbst</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Da für die Kontrolle über ein Programm mehrere Kommandos nötig sein
+können, steht hinter den Parametern die Nummer (01, 02, 02,.., 0x), die die
+Parameter gruppieren bzw. aufzählen.</p>
+<p> Wird der Name &quot;<b>rundll32.exe&lt;Datei Öffnen&gt;&quot; </b>als
+Stringvariable abgespeichert, so können hier die Parameterwerte <font color="#FF0000">Close</font>,
+<font color="#FF0000">Hide</font> und <font color="#FF0000">Ignore</font>
+eingefügt werden. Auch hier gilt: <u>bei allen nicht eingetragenen
+Fenstern des Programmes wird das Fenster von DVHook geschlossen</u>.</p>
+<p>Der Name &quot;<b>rundll32.exe&lt;*&gt;</b>&quot; als String
+identifiziert alle anderen Fensternamen des Programms.</p>
+
+</body>
+
+</html>

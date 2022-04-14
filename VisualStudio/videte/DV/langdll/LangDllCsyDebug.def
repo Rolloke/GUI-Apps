@@ -1,0 +1,7 @@
+; DVCsyDebug.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVCsyDebug"
+DESCRIPTION  'DVCsyDebug Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

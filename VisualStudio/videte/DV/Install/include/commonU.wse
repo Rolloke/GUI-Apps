@@ -1,0 +1,703 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=VIMAX
+  Title German=COMMON
+  Flags=00011000
+  Split=1420
+  Languages=0 0 0 0 65 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000000000
+  Log Pathname=%MAINDIR%\INSTALL.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000001001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\Project\DV\Install\dts\setup.EXE
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=C:\Programme\Wise
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Check Configuration
+  Message German=Windows NT Administrator rights necessary
+  Message German=for installation.
+  Title German=%APPTITLE%
+  Flags=01011111
+end
+item: End Block
+end
+item: Open/Close INSTALL.LOG
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=SYS
+  Value=%WIN%
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=GROUP
+end
+item: Set Variable
+  Variable=DISABLED
+  Value=!
+end
+item: Set Variable
+  Variable=LANGUAGE
+  Value=English
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=COMMON
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files\Common Files
+  Value Name=CommonFilesDir
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=PROGRAM_FILES
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files
+  Value Name=ProgramFilesDir
+  Flags=00000100
+end
+item: Set Variable
+  Variable=EXPLORER
+  Value=1
+end
+item: End Block
+end
+item: Remark
+end
+item: Install File
+  Source=D:\Dts\version.txt
+  Destination=%TEMP%\version.txt
+  Flags=0000000000000010
+end
+item: Read/Update Text File
+  Variable=VERSION
+  Pathname=%TEMP%\version.txt
+end
+item: End Block
+end
+item: Delete File
+  Pathname=%TEMP%\version.txt
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000101
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=C:\Programme\Wise\DIALOGS\TEMPLATE\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Dialog=Select Program Manager Group
+  Dialog=Select Backup Directory
+  Dialog=Display Registration Information
+  Dialog=Get Registration Information
+  Variable=EXPLORER
+  Variable=DOBACKUP
+  Variable=DOBRAND
+  Variable=DOBRAND
+  Value=1
+  Value=A
+  Value=1
+  Value=1
+  Compare=0
+  Compare=1
+  Compare=0
+  Compare=1
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Welcome
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Welcome!
+      Text French=Bienvenue !
+      Text German=Willkommen!
+      Text Spanish=¡Bienvenido!
+      Text Italian=Benvenuti!
+    end
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=86 42 256 131
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program will install %APPTITLE%.
+      Text=
+      Text=Press the Next button to start the installation. You can press the Cancel button now if you do not want to install %APPTITLE% at this time.
+      Text French=Ce programme d'installation va installer %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour démarrer l'installation. Vous pouvez cliquer sur le bouton Quitter l'installation si vous ne voulez pas installer %APPTITLE% tout de suite.
+      Text German=Mit diesem Installationsprogramm wird %APPTITLE% %VERSION% installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Abbrechen", um die Installation von %APPTITLE% abzubrechen.
+      Text Spanish=Este programa de instalación instalará %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para iniciar la instalación. Puede presionar el botón Salir de instalación si no desea instalar %APPTITLE% en este momento.
+      Text Italian=Questo programma installerà %APPTITLE%.
+      Text Italian=
+      Text Italian=Per avvviare l'installazione premere il pulsante Avanti. Se non si desidera installare %APPTITLE% ora, premere il pulsante Esci dall'installazione.
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+  end
+end
+item: If/While Statement
+  Variable=DISPLAY
+  Value=Select Destination Directory
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%MAINDIR%\BACKUP
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Check Disk Space
+  Component=COMPONENTS
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000101
+end
+item: Edit Registry
+  Total Keys=6
+  item: Key
+    Key=Software\dvrt\DV\DVStarter
+    New Value=0
+    New Value=
+    Value Name=AsShell
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\dvrt\DV\DVStarter\AutoLogin
+    New Value=Administrator
+    New Value=
+    Value Name=User
+    Root=2
+  end
+  item: Key
+    Key=Software\dvrt\DV\DVStarter\AutoLogin
+    Value Name=Domain
+    Root=2
+  end
+  item: Key
+    Key=Software\dvrt\DV\DVStarter\AutoLogin
+    New Value=wk dts
+    New Value=
+    Value Name=Password
+    Root=2
+  end
+  item: Key
+    Key=Software\dvrt\JaCobUnit\Device1\Frontend
+    New Value=0
+    Value Name=UseGlobalColorSetting
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\dvrt\JaCobUnit\Device2\Frontend
+    New Value=0
+    Value Name=UseGlobalColorSetting
+    Root=2
+    Data Type=3
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Edit Registry
+  Total Keys=3
+  item: Key
+    Key=Software\DVRT\JacobUnit\Device1\General
+    New Value=0
+    Value Name=AlarmVideoOutHandling
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\JacobUnit\Device2\General
+    New Value=0
+    Value Name=AlarmVideoOutHandling
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\DV\DVStarter
+    New Value=1
+    Value Name=UsePiezo
+    Root=2
+    Data Type=3
+  end
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\DVRT\DV\DVHook
+  Root=130
+end
+item: Remark
+end
+item: Remark
+  Text=edit the host name
+end
+item: Check if File/Dir Exists
+  Pathname=%MAINDIR%\dvprocess.exe
+  Flags=00000101
+end
+item: Get Registry Key Value
+  Variable=COMPUTER_NAME
+  Key=SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName
+  Default=Standard
+  Value Name=ComputerName
+  Flags=00000100
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\DVRT\DV\Hosts
+  New Value=%COMPUTER_NAME%
+  Value Name=OwnID
+  Root=2
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Alle gemeinsamen Dateien
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\filesU.wse
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\languagesU.wse
+end
+item: Include Script
+  Pathname=D:\installation\Wise\dvrt\include\servicesu.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Die Audio Unit mit Filtern
+end
+item: Include Script
+  Pathname=D:\project\dv\install\include\audioU.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Der Jacob Treiber
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\jacobU.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Der Savic Treiber
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\savicU.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Der Tasha Treiber
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\tashaU.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Der CapSV Q Treiber
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\qu.wse
+end
+item: Remark
+end
+item: Remark
+  Text=*********************************      RUS     ********************************
+end
+remarked item: Include Script
+  Pathname=D:\INSTALLATION\Wise\DVRT\INCLUDE\rus.wse
+end
+item: Remark
+end
+item: Remark
+  Text=Das Symbol auf dem Desktop
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\shortcuts.wse
+end
+item: Remark
+end
+item: Self-Register OCXs/DLLs
+  Description German=Updating System Configuration, Please Wait...
+end
+item: Remark
+end
+item: Remark
+  Text=     Install Support for uninstalling the application.
+end
+item: Include Script
+  Pathname=D:\Project\DV\Install\include\uninstall.wse
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000101
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=C:\Programme\Wise\DIALOGS\TEMPLATE\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Finished
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Finish
+      Text French=&Fin
+      Text German=&Fertig
+      Text Spanish=&Terminar
+      Text Italian=&Fine
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Installation Completed!
+      Text French=Installation terminée !
+      Text German=Die Installation ist abgeschlossen!
+      Text Spanish=¡Instalación terminada!
+      Text Italian=Installazione completata!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=The installation of %APPTITLE% has been successfully completed.
+      Text=
+      Text=Press the Finish button to exit this installation.
+      Text French=%APPTITLE% est maintenant installé.
+      Text French=
+      Text French=Cliquez sur le bouton Fin pour quitter l'installation.
+      Text German=%APPTITLE% wurde erfolgreich installiert.
+      Text German=
+      Text German=Klicken Sie auf "Fertig", um die Installation zu beenden.
+      Text Spanish=%APPTITLE% se ha instalado con éxito.
+      Text Spanish=
+      Text Spanish=Presione el botón Terminar para salir de esta instalación.
+      Text Italian=L'installazione %APPTITLE% è stata portata a termine con successo.
+      Text Italian=
+      Text Italian=Premere il pulsante Fine per uscire dall'installazione.
+    end
+  end
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=CloneNT
+end
+remarked item: Check Configuration
+  Flags=10100000
+end
+remarked item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+remarked item: Get System Information
+  Variable=SERPACK
+  Flags=00010010
+end
+remarked item: If/While Statement
+  Variable=WINVER
+  Value=4.0.1381
+end
+remarked item: If/While Statement
+  Variable=SERPACK
+  Value=6
+  Flags=00000111
+end
+remarked item: Execute Program
+  Pathname=%SYS%\rdisk.exe
+  Command Line=/s-
+  Default Directory=%SYS%
+  Flags=00000010
+end
+remarked item: Execute Program
+  Pathname=%MAINDIR%\CloneNT.exe
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+remarked item: End Block
+end
+remarked item: End Block
+end
+remarked item: End Block
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10100000
+end
+remarked item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+remarked item: If/While Statement
+  Variable=WINVER
+  Value=4.0
+  Flags=00001001
+end
+remarked item: Execute Program
+  Pathname=%WIN%\regedit.exe
+  Command Line=/s %MAINDIR%\TimeZonesNT.reg
+  Flags=00000110
+end
+remarked item: End Block
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%MAINDIR%\Win95Reboot.exe
+  Command Line=reboot
+end
+item: Else Statement
+end
+remarked item: Edit Registry
+  Total Keys=8
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=4294967236
+    New Value=
+    Value Name=ActiveTimeBias
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=4294967236
+    New Value=
+    Value Name=Bias
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=4294967236
+    New Value=
+    Value Name=DaylightBias
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=W. Europe Daylight Time
+    Value Name=DaylightName
+    Root=2
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=00 00 03 00 05 00 02 00 00 00 00 00 00 00 00 00
+    New Value=
+    Value Name=DaylightStart
+    Root=2
+    Data Type=4
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=0x00
+    Value Name=StandardBias
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=W. Europe Standard Time
+    Value Name=StandardName
+    Root=2
+  end
+  item: Key
+    Key=SYSTEM\CurrentControlset\Control\TimeZoneInformation
+    New Value=00 00 0a 00 05 00 03 00 00 00 00 00 00 00 00 00
+    New Value=
+    Value Name=StandardStart
+    Root=2
+    Data Type=4
+  end
+end
+item: Set Variable
+  Variable=RESTART
+  Value=S
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=RESTART
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%MAINDIR%\Win95Reboot.exe
+  Command Line=reboot
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Windows Restart
+  Title German=Windows Neustart
+  Text=Windows must be restartet after installation.
+  Text=Choose 'Yes' to restart windows now..
+  Text German=Windows muß jetzt neu gestartet werden.
+  Text German=Wählen Sie 'Ja' um Windows neu zu starten.
+  Flags=00101101
+end
+item: Execute Program
+  Pathname=%MAINDIR%\Win95Reboot.exe
+  Command Line=reboot
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end

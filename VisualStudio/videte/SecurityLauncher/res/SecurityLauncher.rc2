@@ -1,0 +1,19 @@
+//
+// SECURITYLAUNCHER.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#include "WK_Version.h"
+
+WK_VERSION(4, 5, 6, 563, "4.5.6.563\0", // @AUTO_UPDATE
+		   "SecurityLauncher.exe\0",	// exe name
+		   "Launcher\0",	// product name
+		   "Launcher Application\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )
+
+/////////////////////////////////////////////////////////////////////////////

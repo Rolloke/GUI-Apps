@@ -1,0 +1,1 @@
+v:\bin\tools\MakeUpdateDisk.exe d:\install\vdr_lan 1 473

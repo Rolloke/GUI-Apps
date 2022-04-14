@@ -1,0 +1,129 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 69 66 0 67 0 68 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Install File
+  Source=%_WISE_%\UNWISE32.EXE
+  Destination=%MAINDIR%\UNWISE.EXE
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Set Variable
+  Variable=DELREGDB
+  Value=%MAINDIR%\DelRegDB.exe
+  Flags=00010100
+end
+item: Set Variable
+  Variable=UNWISE
+  Value=%MAINDIR%\UNWISE.EXE
+  Flags=00010100
+end
+item: Set Variable
+  Variable=INSTALLLOG
+  Value=%MAINDIR%\INSTALL.LOG
+  Flags=00010100
+end
+item: Set Variable
+  Variable=UNINSTALL
+  Value=%DELREGDB% %UNWISE% /A %INSTALLLOG%
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10111010
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\Microsoft\Windows\CurrentVersion\Uninstall\%APPTITLE%
+  New Value=%APPTITLE%
+  Value Name=DisplayName
+  Root=2
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\Microsoft\Windows\CurrentVersion\Uninstall\%APPTITLE%
+  New Value=%UNINSTALL%
+  New Value=
+  Value Name=UninstallString
+  Root=2
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=**************************** Deutsche Ini-Datei für De-Installation **********
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Deutsch
+end
+item: Install File
+  Source=C:\Programme\Wise\Unwise.ger
+  Destination=%MAINDIR%\Unwise.ini
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=LANG
+  Value=U.S. English
+end
+item: Install File
+  Source=C:\Programme\Wise\Unwise.eng
+  Destination=%MAINDIR%\Unwise.ini
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Español
+end
+item: Install File
+  Source=C:\Programme\Wise\Unwise.spa
+  Destination=%MAINDIR%\Unwise.ini
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Italiano
+end
+item: Install File
+  Source=C:\Programme\Wise\Unwise.ita
+  Destination=%MAINDIR%\Unwise.ini
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Français
+end
+item: Install File
+  Source=C:\Programme\Wise\Unwise.fre
+  Destination=%MAINDIR%\Unwise.ini
+  Flags=0000000000000010
+end
+item: End Block
+end

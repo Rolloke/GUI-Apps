@@ -1,0 +1,121 @@
+History
+-------
+
+Evtl. folgendes ausprobieren:
+
+	- artsuper.asm und pll_init.asm aus dem Projekt entfernen
+
+	- artsuper.obj aus dem 21535asm_dl.ldf file entfernen.
+
+	- In dev_inittst.asm 'jump start' durch 'jump _main' ersetzen
+
+8.8.03
+	- Das bisherige LDF-File gegen ein vom ExpertLinker generiertes ausgetausct,
+	  damit alle wichtigen Bibliotheken mit hinzu gelinkt werden. Der Elfloader
+	  kommt nun (dank eines Updates?!) auch damit zu recht. Die Kommunikation
+	  mit der tashaUnit über die ReceiveMessageQueue und der SendMessageQueue scheinen
+	  gut zu funktionieren. Die TimerInterruptroutine läuft und schickt derzeit zum Test
+	  400 Packete/Sekunde an die TashaUnit. 
+
+12.08.03
+	- Eine SPORT Empfangsroutine (ISR/DMA) eingebaut, aber mangels Sender noch nicht
+	  getestet.
+	  
+13.08.03
+	- Um Speichersegmente außerhalb des L2 zu nutzen (z.B. im SDRAM), muß
+	  beim erzeugen des Bootimages mit Hilfe von 'elfloader.exe' ein
+	  bootkernel ausgewählt werden, da elfloader ansonsten gigabytegroße
+	  bootimages erzeugt. Warscheinlich ermittelt elfloader alle vorhandenen
+	  Adressen der Speichersegmente und generiert dann ein Bootimage, welches
+	  von der kleinsten verwendeten bis zur größten verwendeten Adresse reicht.
+	  Also bei Verwendung von SDRAM von 0x00000000....0xf000xxxx
+	  
+	 - Das Problem ist das die Api Funktion 'mdsBoardDownLoad' anscheinend keine
+	  bootimages verarbeitet, die einen bootloader enthalten. Sie lädt dieses zwar
+	  ohne Fehlermeldung, schaut man dann aber mit dem VisualDSP Studio
+	  an Adresse 0xf0000000 ist dort kein außführbares Programm enthalten!
+
+14.08.03
+	- MemoryDMA funktioniert. Die Funktion 'MemCopyDma(pDst, pSrc, dwLen)' kopiert per
+	  DMA die Daten von 'pSrc' nach 'pDest'
+
+15.08.04
+	- Innerhalb der SPORT0_RX_ISR erfolgt nun folgendes:
+		- Die ISR-Routine wird aufgerufen, wenn 16KByte Daten über den SPORT0
+		  eingetroffen sind.
+		- 'DemultiplexSPORTChannels' demultiplext die eingetroffenen Daten und verteilt
+		  sie in die 8 jeweils 2KByte großen Buffer im L1.
+		- 'MultiChannelCopy' kopiert nun per MemoryDMA die Daten aus den 8 L1-Buffern in
+		  die jeweiliegen Framebuffer im SDRAM/PCI. Jeder der 8 Framebuffer hat eine
+		  größe von 64KByte. Sind alle 8 Framebuffer gefüllt, wird die TashaUnit darüber
+		  informiert. Diese kann die Bilddaten dann abholen und weiter verteilen.
+	
+	- Einschränkungen bislang:
+		- 'DemultiplexSPORTChannels' ist derzeit um den Faktor 10 zu langsam. Sie ist
+		  komplett in 'C' geschrieben und sehr universell (Channelbreite, Anzahl der Kanäle,
+		  Buffergrößen lassen sich frei einstellen)
+		- Der Framebuffer, der bislang zum Transport der Bilddaten zur TashaUnit gedacht
+		  war, fast derzeit nur 50KByte und nicht die notwendigen 512KByte. Da der Transport der
+		  Daten mittels der Funktion 'mdsBoardReadMemory' aber ohnehin viel zu langsam ist.
+		  wird er vorraussichtlich über eine Art 'MultiChannelCopy'-Funktion über den PCI-Bus
+		  in den Speicher des PCs erfolgen. (Ich hoffe so etwas geht)
+		
+18.08.03
+	- Die Assemblerversion zum demultiplexen ist um den Faktor 80 schneller als die
+      universelle 'C'-Funktion. Sie benötigt ca 75ys zum demultiplexen von 8KByte Daten
+      in 4 Kanäle. Sie ist damit mehr als schnell genug!!
+		  
+20.08.03
+	- Der Rückkanal über den PCI-Bus funktioniert. Dazu legt die TashaUnit mit Hilfe von
+	  'HACCAllocFramebuffer' einen Framebuffer von 4*64KByte an und übermittelt dessen
+	  physikalische Adresse dem Blackfin, der dann die Basisadresse des PCI-MemorySpace (PCI_MBAP)
+	  entsprechend setzt.
+
+01.09.03
+	- Framework für die SPI-Kommunikation ist integriert.
+
+03.09.03
+	- Den SPI1 mit einer kurzschlußbrücke getestet. Funktioniert!
+	  Nach dem manuellen Senden des Kommandos über den SPI1 werden 
+	  solange weitere Packete vom Typ 'TMM_WAIT_FOR_SPI_CONFIRM'
+	  an den Slave verschickt, bis dieser mit einem Confirm reagiert.
+
+08.10.03
+	- Das Sammeln der Daten im SRAM bis ein Bild komplett ist, hat sich als ungünstig erwiesen.
+	  Der Transport von 4*64KB=265KB blockiert die SPORT-ISR des BF535 zu lange. Dadurch gehen Daten
+	  die währenddessen über den SPORT eintreffen verloren. Folge: Das Bild wandert vertikal aufwährts.
+		- Lösung:
+			- Sobald 4KByte Daten von einem SPORT eingetroffen sind, werden diese Demultiplext, und
+		  	  sofort über den PCI-Bus in die entsprechenden Framebuffer übertragen.
+		  	- Um zu verhindern, daß der DMA-Controler die Daten überschreibt, bevor die TashaUnit
+		  	  sie abgeholt hat, wird hier mit zwei Sätzen von Buffern gearbeitet. Der DMA-Controler
+		  	  schreibt in BufferA, während die TashaUnit aus BufferB liest.
+			- Um zu verhindern, das während des demultiplexens die Daten im L1 vom SPORT-DMA
+			  überschrieben werden, wird auch hier mit zwei Buffern gearbeitet.
+		   
+16.10.03
+	- Es wird nun nur noch 1/8 der Interrupts zur PC-Seite hin ausgelöst.
+	
+29.10.03
+	- Die Programierung des Alteras funktioniert. Allerding darf der SPORT nicht enabled
+	  sein!?... Wenn der SPORT aktiviert ist, wird der Altera zwar korrekt programmiert,
+	  aber das pollen auf die CONF_DONE-Leitung scheitert.
+	  Es reicht in 'InitSPORTsISR' die Zeile '*pSIC_IMASK = *pSIC_IMASK | SIC_MASK4 | SIC_MASK6'
+	  auszukommentieren!?
+
+03.11.03
+	- Die Funktionalität de BF533-Bootvorganges implementiert.
+
+13.11.03
+	- Die Kommunikation mit den BF533er über den SPI erfolgt nun Timer-Interruptroutine sowie
+	  einer Messagequequeue pro Slave. D.h. es werden pro Slave bis zu 32 Messages entgegengenommen und
+	  innerhalb der TimerInterrupt-Routine abgearbeitet.
+	  
+19.11.03
+	- Das Booten des BF533 über den SPI funktioniert!! Der BF535 emuliert dabei das EEProm
+
+20.11.03
+	- Lesen und Schreiben des EEProms über SPI1 implementiert.
+
+03.12.03
+	- Die CoreTimer-ISR in SPICommunication durch TIMER1 mit niedriger Priorität ersetzt

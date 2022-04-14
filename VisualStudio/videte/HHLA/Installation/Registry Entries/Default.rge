@@ -1,0 +1,117 @@
+[MiCoDriver:HKLM:SYSTEM\CurrentControlSet\Services\MiCoPCI]
+(Default)=S,
+---Comment---=
+ErrorControl=N,1
+Type=N,1
+Start=N,2
+
+[MiCoDriver]
+---Comment---=
+---FileGroup---=Drivers
+HKLM0=SYSTEM\CurrentControlSet\Services\MiCoPCI
+
+[MiCoUnit:HKLM:SOFTWARE\DVRT\MiCoUnitPCI\Device1\General]
+(Default)=S,
+---Comment---=
+StoreField=N,2
+
+[MiCoUnit:HKLM:SOFTWARE\DVRT\MiCoUnitPCI\Device1\Compressions]
+(Default)=S,
+---Comment---=
+Compression1=N,50000
+
+[User:HKLM:SOFTWARE\DVRT\User]
+(Default)=S,
+---Comment---=
+NumberOfUsers=N,1
+0=S,0000\q\ÎôòóñïîìíëêèéçåãäâàáÜÖÑÉÇÅÄ~}\70000000\00000000\07.11.2500 00:10:00\00\0\01.01.1990 23:59:59
+
+[Outputs:HKLM:SOFTWARE\DVRT\Outputgroups]
+MaxGroups=N,1
+(Default)=S,
+---Comment---=
+1=S,\ID2001\NR32\SMMiCoUnitOutputCamera\COMiCo1 Cameras
+
+[Outputs]
+---Comment---=
+---FileGroup---=
+HKLM0=SOFTWARE\DVRT\Outputgroups
+HKLM1=SOFTWARE\DVRT\OutputGroups\Group2001
+
+[Security:HKLM:SOFTWARE\DVRT\SecurityLevel]
+UserLockTime=N,0
+(Default)=S,
+---Comment---=
+TimeLimit=N,0
+MaxLoginTries=N,0
+
+[MiCoUnit]
+---Comment---=
+---FileGroup---=
+HKLM0=SOFTWARE\DVRT\MiCoUnitPCI\Device1\FrontEnd
+HKLM1=SOFTWARE\DVRT\MiCoUnitPCI\Device1\Compressions
+HKLM2=SOFTWARE\DVRT\MiCoUnitPCI\Device1\General
+
+[User]
+---Comment---=
+---FileGroup---=
+HKLM0=SOFTWARE\DVRT\User
+
+[Data]
+Set0=MiCoDriver
+Set1=User
+Set2=Outputs
+Set3=Security
+Set4=MiCoUnit
+
+[Security]
+---Comment---=
+---FileGroup---=
+HKLM0=SOFTWARE\DVRT\SecurityLevel
+
+[MiCoUnit:HKLM:SOFTWARE\DVRT\MiCoUnitPCI\Device1\FrontEnd]
+UseGlobalColorSetting=N,0
+(Default)=S,
+---Comment---=
+VideoFormat=S,PAL_SQUARE
+
+[General]
+Type=REGISTRYDATA
+Version=1.00.000
+
+[Outputs:HKLM:SOFTWARE\DVRT\OutputGroups\Group2001]
+22=S,\COKamera 22\TYcamera\SN0\CT4
+11=S,\COKamera 11\TYcamera\SN0\CT4
+3=S,\COKamera 3\TYcamera\SN0\CT4
+23=S,\COKamera 23\TYcamera\SN0\CT4
+12=S,\COKamera 12\TYcamera\SN0\CT4
+4=S,\COKamera 4\TYcamera\SN0\CT4
+(Default)=S,
+---Comment---=
+24=S,\COKamera 24\TYcamera\SN0\CT4
+13=S,\COKamera 13\TYcamera\SN0\CT4
+5=S,\COKamera 5\TYcamera\SN0\CT4
+25=S,\COKamera 25\TYcamera\SN0\CT4
+14=S,\COKamera 14\TYcamera\SN0\CT4
+6=S,\COKamera 6\TYcamera\SN0\CT4
+26=S,\COKamera 26\TYcamera\SN0\CT4
+15=S,\COKamera 15\TYcamera\SN0\CT4
+7=S,\COKamera 7\TYcamera\SN0\CT4
+27=S,\COKamera 27\TYcamera\SN0\CT4
+16=S,\COKamera 16\TYcamera\SN0\CT4
+8=S,\COKamera 8\TYcamera\SN0\CT4
+28=S,\COKamera 28\TYcamera\SN0\CT4
+17=S,\COKamera 17\TYcamera\SN0\CT4
+9=S,\COKamera 9\TYcamera\SN0\CT4
+29=S,\COKamera 29\TYcamera\SN0\CT4
+18=S,\COKamera 18\TYcamera\SN0\CT4
+19=S,\COKamera 19\TYcamera\SN0\CT4
+30=S,\COKamera 30\TYcamera\SN0\CT4
+31=S,\COKamera 31\TYcamera\SN0\CT4
+20=S,\COKamera 20\TYcamera\SN0\CT4
+1=S,\COKamera 1\TYcamera\SN0\CT4
+32=S,\COKamera 32\TYcamera\SN0\CT4
+21=S,\COKamera 21\TYcamera\SN0\CT4
+10=S,\COKamera 10\TYcamera\SN0\CT4
+2=S,\COKamera 2\TYcamera\SN0\CT4
+

@@ -1,0 +1,57 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogView", "LogView.vcproj", "{B6630BCC-E84A-4997-B1CD-277BF4B71941}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB} = {7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LogViewDll", "LogViewDll\LogViewDll.vcproj", "{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectName0 = \u0022$/Project/Tools/LogView\u0022,\u0020DROBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {5E60CFDD-656E-4DC0-BE13-5D0EB2A35F60}
+		SccProjectUniqueName1 = LogView.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = LogViewDll\\LogViewDll.vcproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection2 = LogViewDll\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Dts = Dts
+		Enu = Enu
+		Release = Release
+		Rus = Rus
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Debug.ActiveCfg = Debug|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Debug.Build.0 = Debug|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Dts.ActiveCfg = Dts|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Dts.Build.0 = Dts|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Enu.ActiveCfg = Release|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Release.ActiveCfg = Release|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Release.Build.0 = Release|Win32
+		{B6630BCC-E84A-4997-B1CD-277BF4B71941}.Rus.ActiveCfg = Rus|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Debug.ActiveCfg = Debug|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Debug.Build.0 = Debug|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Dts.ActiveCfg = Debug|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Enu.ActiveCfg = Enu|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Enu.Build.0 = Enu|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Release.ActiveCfg = Release|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Release.Build.0 = Release|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Rus.ActiveCfg = Rus|Win32
+		{7C93E29C-A5B5-4C8C-9B38-E05F0A1E42CB}.Rus.Build.0 = Rus|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

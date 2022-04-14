@@ -1,0 +1,52 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCIPCPerformance", "TestCIPCPerformance.vcproj", "{5B363125-CB12-4481-A048-53B1B7D69D84}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cipc", "..\..\cipc\Cipc.vcproj", "{6D53F786-4DEB-489E-A37A-1F9B79851EAC}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectName0 = \u0022$/Project/Tools/TestCIPCPerformance\u0022,\u0020BLQCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {2F6C9992-7EE3-435B-9CD7-E18D4B1F1DBA}
+		SccProjectUniqueName1 = TestCIPCPerformance.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = ..\\..\\cipc\\Cipc.vcproj
+		SccProjectName2 = \u0022$/Project/CIPC\u0022,\u0020XDEAAAAA
+		SccLocalPath2 = ..\\..\\cipc
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.Debug.ActiveCfg = Debug|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.Debug.Build.0 = Debug|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.DebugUnicode.ActiveCfg = Debug|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.DebugUnicode.Build.0 = Debug|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.Release.ActiveCfg = Release|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.Release.Build.0 = Release|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.ReleaseUnicode.ActiveCfg = Release|Win32
+		{5B363125-CB12-4481-A048-53B1B7D69D84}.ReleaseUnicode.Build.0 = Release|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Debug.ActiveCfg = Debug|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.Release.ActiveCfg = Release|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{6D53F786-4DEB-489E-A37A-1F9B79851EAC}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

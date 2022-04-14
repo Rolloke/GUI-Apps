@@ -1,0 +1,9 @@
+[Source Media Descriptions]
+    1  = "Driver Setup Disk #1"  , TAGFILE = disk1
+
+[Installable.Drivers]
+mico = 1:mico.dll, "MSVIDEO", "Mico Board" , , ,
+
+[mico]
+1:mico.sys
+

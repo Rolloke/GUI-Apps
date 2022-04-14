@@ -1,0 +1,161 @@
+CoCoUnit History
+----------------
+
+
+7.1.97
+	- Änderung der Compileroptionen in 'minimize size' und 'pentium'
+
+8.1.97
+	- Compileroptionen wieder auf 'disable opt.' und 'blend' zurückgestellt,
+	  da die Unit im Test GPs lieferte
+
+9.1.97
+	- Ausgabe der Versionsnummer in CoCoUnit.log bei Programmstart
+	
+	- Der Job vom Typ VJA_VIDEO ist von der Decoderjobqueue in die
+	  Encoderjobqueue gewandert.
+	
+	- Die Funktion 'OnRequestSetOutputWindow(...)' enhält nun einen zusätzlichen
+	  Parameter vom Typ	'OverlayDisplayMode'. Dieser Parameter gibt an mit welchem
+	  Module das VideoOutputModule verbunden werden soll (ODM_LOCAL_VIDEO, ODM_DECODE,
+	  ODM_ENCODE)
+	     
+10.1.97
+	- Parameterliste der virtuellen Funktion 'OnRequestStopMpegDecoding()' wurde
+	  geändert.
+
+14.1.97
+	- Vor dem Laden des CoCoSrv's, wird geprüft ob diese schon geladen wurde.
+	  Ist dies der Fall, so wird das Fensterhandle des CoCoSrv's gesucht und
+	  die Initialisierung der CoCoUnit fortgeführt.
+	
+	- I-Bilder werden nun doppelt an den Decoder verschickt, da der AVP-III
+	  das n-te I-Bild erst beim Erhalt des n+1 -ten I-Bildes decodiert.
+
+	- Die Makros SETBIT, CLRBIT, TESTBIT basierten auf dem Typ WORD.
+	  Da dieses Makro aber auch bei der Alarm und Relais Behandlung
+	  benutzt werden, müssen diese auf DWORD ausgelegt sein!!
+
+15.1.97
+	- Das OverlayRect (OutputWindow) aus dem Decoderjob wird nicht mehr an die
+	  Megra weitergereicht, da dies überflüssig ist und zu störenden Effekten
+	  führt. Jeder Client setzt bei Änderung der Fensterposition/größe oder bei
+	  Aktivierung des Fensters das Outputwindow durch die Funktion
+	  'OnRequestSetOutputWindow(...)'.
+	     
+16.1.97
+	- Das doppelte Verschicken der I-Bilder wird nun im DatenbankClient erledigt,
+	  so daß dies aus der CoCoUnit wieder heraus genommen wurde.
+
+5.3.97
+	- Die untere Bitrate von 9500Bit/s auf 0Bits/s herabgesetzt.
+	- In der CoCoISA.ini kann nun ein kompletter Pfad auf den CoCosrv.exe angegeben
+	  werden, wodurch sich die CoCoUnit und der CoCosrv auch in unterschiedlichen
+	  Verzeichnissen befinden dürfen.
+	- Im Destruktor vom CoCo-Objekt war die Zeile
+		::SendMessage(m_hWndServer, COCO_CLOSE, (WPARAM)m_hWndClient, 0L);
+		auskommentiert
+
+19.3.97
+	- Im Livebild wurde das eingeblendete Bild im Sekundentakt eingefroren. um
+	  diesen Effekt zu minimieren, wird beim Localvideo die Kamera nur umgeschaltet,
+	  wenn sich die camID geändert hat.
+
+24.4.97
+	- In CIPCOutputCoCoUnit::LocalVideo(...) wird das Megrabild vor dem
+	  Umsetzen des Outputwindows nur noch dann eingefroren, wenn die Kamera wechselt.
+
+
+05.05.97
+	- Die Message COCO_CLOSE wird nun als Postmessage und nicht mehr als Sendmessage verschickt.
+	- In CoCo::~CoCo() wurde bei einem Fehlschlag den CoCoSrv, vergessen das
+	  DlgColor- und das CopyData-Objekt nicht gelöscht.
+	- Beim Beenden der CoCoUnit kam es bislang zu einem
+	 'Timeout beim Beenden von CoCoSrv.exe'. Dies hatte die folgende Ursache:
+			In CMainWindow::DestroyWindow(..) wird das CoCo-Objekt zerstört.
+			Im Destruktor des CoCo-Objektes wird der CoCoSrv mit Hilfe der
+			Nachricht COCO_CLOSE über das Beenden der CoCoUnit informiert.
+			Da aber das Fensterhandle der CoCoUnit zu diesem Zeitpunkt schon ungültig
+			ist, hat sich der CoCoSrv evtl. schon beendet, das dieser alle
+			2 Sekunden auf das Fensterhandle der CoCoUnit pollt und sich selbstätig
+			beendet sobald dieses ungültig ist.
+	   Als Lösung dieses Problems, fällt die Benachrichtigung des CoCoSrv mit Hilfe
+	   der Nachrich COCO_CLOSE weg.
+
+06.05.97
+	- Der Mechanismus, daß der Encoder nach einer Leerlaufzeit von 30 Sekunden
+	  gestoppt wird griff nicht immer. Die ursache davon waren die 'LocalVideo'-Jobs
+	  Dies ist nun im Encoderjobhandling geändert.
+	- Alle WK_TRACE Aufrufe in WK_TRACE, WK_TRACE_WARNING und WK_TRACE_ERROR unterteilt.
+	
+13.5.97
+	- Auf das Jobmanagement wird nicht mehr gepollt, sondern mit einem 
+	  'WaitForSingleObject' gewartet, was einiges an CPU-Zeit spart. 
+
+8.7.97
+	- Zugriff auf die Settings nur noch bei der Permission 'Hardware' erlaubt
+
+23.7.97
+	- Der laufende Encoderjob wird bei VJA_STOP_ENCODE erst bei erhalt der Message
+	  WM_COCO_ENC_STOP, d.h wenn der Encoder wirklich steht, gelöscht.	   
+
+29.7.97
+	- Umstellung auf den Developer 5.0
+
+18.8.97
+	- dongle.RunCoCoUnit() durch dongle.IsExeOkay() ersetzt
+	- Enable3dControls() entfernt
+
+20.8.97
+	- Beim Start der CoCoUnit wird das Displaywindow der Megra zunächst auf 0,0,0,0
+	   gesetzt, damit die störenden Bildeinblendungen bei Programmstart wegfallen.	
+	- Beim Beenden von Windows, wird die CoCounit nun zuvor sauber beendet. (Durch
+	  Überschreiben von OnQueryEndSession)
+	- Einige Pointer tests hinzugefügt
+22.8.97
+	- Bei Beenden von Windows, wird die MiCoUnit nun zuvor sauber beendet. 
+	  (Mit Hilfe von OnEndSession) OnQueryEndSession wird nun lediglich mit TRUE
+	  beantwortet.
+
+1.8.97
+	- ShowWindow(SW_SHOWMINNOACTIVE) in CoCoUnitDlg::OnCreate durch
+	  ShowWindow(AfxGetApp()->m_nCmdShow) ersetzt, da trotz
+	  Shellinstallation die CoCoUnit mit [Alt] [Tab] erreichbar war.
+
+2.8.97
+	- Umbau von einem modalen in einen modlesdialog (analog der MiCoUnit)
+	  Der Grund war, daß als Shell gestartet, die CoCoUnit sich mit einer
+	  sichtbaren Dialogbox startet.
+
+19.3.98
+	- WK_Profilex durch die Klasse CWK_Profile ersetzt
+
+30.03.98
+	- CoCoUnit an die COemGui.dll angepaßt.
+	- Der RuntimeError beim Megrainitialisierungsfehler herrausgenommen,
+	  da die CoCo auch ohne Megra laufen soll. (Softwaredekoding)
+
+11.05.98 HD ExceptionHandler vai InitDebugger.
+
+28.07.98
+	- Precompiled Header auf stdafx.h. 
+
+29.9.98
+	- 'IsValid' anstatt 'IsValid()' in 'CIPCOutputCoCoUnit::OnRequestDumpOutputWindow'
+	  benutzt!!
+19.3.99
+	- m_hSyncEvent = CreateEvent(...) durch CreateSemaphore(...) ersetzt, da im
+	  Server geändert.
+
+12.04.00
+	- Die Message 'WM_SELFCHECK' wird nun beantwortet.
+
+17.01.01
+	- Das Programmicon erscheint nun im SystemTray
+	- Bugfix: Das SystemTray-menü klappt nun wieder korrekt zu
+06.09.02
+	- Bugfix Nr 112, Das Fenster wird jetzt beim Systemstart nicht mehr angezeigt.
+14.11.02
+	- Anpassung VS_70, aber noch Fehler
+29.11.02
+	- Anpassung VS_70 Fehlerfrei, Warnungen beseitigt

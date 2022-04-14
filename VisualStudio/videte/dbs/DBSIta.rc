@@ -1,0 +1,378 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 16, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+#define WK_LANG_BLOCK "041004b0"
+#define WK_LANG_BLOCK_NUM 0x410
+    "#include ""res\\DBS.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.ita\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.ita\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\DBS.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "TODO! &File"
+    BEGIN
+        MENUITEM "TODO! &Reset\tF9",                  ID_FILE_RESET
+        MENUITEM "TODO! Actualize\tF5",           ID_FILE_ACTUALIZE
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! &Exit",                    ID_APP_EXIT
+    END
+    POPUP "TODO! &View"
+    BEGIN
+        MENUITEM "TODO! &Drives",                  ID_VIEW_DRIVES
+        MENUITEM "TODO! &Archives",                    ID_VIEW_ARCHIVES
+        MENUITEM "TODO! &Threads",                    ID_VIEW_THREADS
+        MENUITEM "TODO! &Clients",                    ID_VIEW_CLIENTS
+    END
+    POPUP "TODO! &Protocol"
+    BEGIN
+        MENUITEM "TODO! &Requests",                   ID_TRACE_REQUESTS
+        MENUITEM "TODO! &Sequences",                  ID_TRACE_SEQUENCES
+        MENUITEM "TODO! &Drives",                  ID_TRACE_DRIVES
+        MENUITEM "TODO! &Queues",                     ID_TRACE_QUEUES
+        MENUITEM "TODO! &Codebase",                   ID_TRACE_CODEBASE
+        MENUITEM "TODO! &Query",                      ID_TRACE_QUERY
+        MENUITEM "TODO! O&pen/Close",           ID_TRACE_OPEN_CLOSE
+        MENUITEM "TODO! &Delete",                    ID_TRACE_DELETE
+        MENUITEM "TODO! Backu&p",                     ID_TRACE_BACKUP
+    END
+    POPUP "TODO! &?"
+    BEGIN
+        MENUITEM "TODO! &About...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_FILE_ACTUALIZE,      VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_FILE_RESET,          VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONVERSION DIALOG DISCARDABLE  0, 0, 318, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "TODO! Conversion"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "TODO! OK",IDOK,207,109,50,14
+    PUSHBUTTON      "TODO! Cancel",IDCANCEL,261,109,50,14
+    LTEXT           "TODO! Database will be converted into a new format, it can take several minutes.",
+                    IDC_TXT_INFO,7,7,304,18
+    LTEXT           "TODO! current converted file:",IDC_TXT_FILE,7,35,82,8
+    LTEXT           "TODO! ...",IDC_FILE,7,47,304,8
+    CONTROL         "TODO! Progress1",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH | 
+                    WS_BORDER,7,63,304,14
+    LTEXT           "TODO! time elapsed:",IDC_TXT_TIME,7,84,55,8
+    LTEXT           "TODO! 00:00:00",IDC_TIME,70,84,29,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CONVERSION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "TODO! DBS\n\nDBS\n\n\nDBS.Document\nDBS Document"
+    IDS_INIT_DRIVES         "TODO! initialising drives"
+    IDS_INIT_ARCHIVS        "TODO! initialising archives"
+    IDS_INIT_THREADS        "TODO! initialising threads"
+    IDS_INIT                "TODO! initialising"
+    IDS_DRIVES_WHOLE        "TODO! Drives total %I64d Bytes %d / %d MB"
+    IDS_ARCHIVES_WHOLE      "TODO! Archives total %I64d Bytes %d / %d MB %d Sequences"
+    IDS_LOCAL               "TODO! Local host"
+    IDS_ALARM               "TODO! Alarm"
+    IDS_RING                "TODO! Circle"
+    IDS_SAFERING            "TODO! Safety Circle"
+    IDS_SEARCH              "TODO! Query"
+    IDS_UNDEFINED           "TODO! undefined"
+    IDS_BACKUP              "TODO! Backup"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "TODO! DBS"
+    AFX_IDS_IDLEMESSAGE     "TODO! Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "TODO! ER"
+    ID_INDICATOR_CAPS       "TODO! UF"
+    ID_INDICATOR_NUM        "TODO! NUM"
+    ID_INDICATOR_SCRL       "TODO! RF"
+    ID_INDICATOR_OVR        "TODO! OVR"
+    ID_INDICATOR_REC        "TODO! MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "TODO! Creates a new document. \nNew"
+    ID_FILE_OPEN            "TODO! Opens an existing Document.\nOpen"
+    ID_FILE_CLOSE           "TODO! Closes the active document.\nClose"
+    ID_FILE_SAVE            "TODO! Saves the active document.\nSave"
+    ID_FILE_SAVE_AS         "TODO! Saves the active document with a new name.\nSave As"
+    ID_FILE_PAGE_SETUP      "TODO! Changes the printing options.\nPage Setup"
+    ID_FILE_PRINT_SETUP     "TODO! Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "TODO! Prints the active document.\nPrint"
+    ID_FILE_PRINT_PREVIEW   "TODO! Displays the entire cover page.\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "TODO! Shows program informations, version number and copyright.\nInfo"
+    ID_APP_EXIT             "TODO! Exits the application; asks for saving.\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "TODO! Opens this document"
+    ID_FILE_MRU_FILE2       "TODO! Opens this document"
+    ID_FILE_MRU_FILE3       "TODO! Opens this document"
+    ID_FILE_MRU_FILE4       "TODO! Opens this document"
+    ID_FILE_MRU_FILE5       "TODO! Opens this document"
+    ID_FILE_MRU_FILE6       "TODO! Opens this document"
+    ID_FILE_MRU_FILE7       "TODO! Opens this document"
+    ID_FILE_MRU_FILE8       "TODO! Opens this document"
+    ID_FILE_MRU_FILE9       "TODO! Opens this document"
+    ID_FILE_MRU_FILE10      "TODO! Opens this document"
+    ID_FILE_MRU_FILE11      "TODO! Opens this document"
+    ID_FILE_MRU_FILE12      "TODO! Opens this document"
+    ID_FILE_MRU_FILE13      "TODO! Opens this document"
+    ID_FILE_MRU_FILE14      "TODO! Opens this document"
+    ID_FILE_MRU_FILE15      "TODO! Opens this document"
+    ID_FILE_MRU_FILE16      "TODO! Opens this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "TODO! Switch to the next window\nNext Window"
+    ID_PREV_PANE            "TODO! Switch back to the previous window\nPrevious Window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "TODO! Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "TODO! Deletes the selection.\nDelete"
+    ID_EDIT_CLEAR_ALL       "TODO! Deletes all.\nDelete all"
+    ID_EDIT_COPY            "TODO! Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "TODO! Removes the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "TODO! Find the specified text\nFind"
+    ID_EDIT_PASTE           "TODO! Inserts the contents of the Clipboard.\nPaste"
+    ID_EDIT_REPEAT          "TODO! Repeats the last action.\nRepeat"
+    ID_EDIT_REPLACE         "TODO! Replaces the specified text with different text.\nReplace"
+    ID_EDIT_SELECT_ALL      "TODO! Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "TODO! Undoes the last action.\nUndo"
+    ID_EDIT_REDO            "TODO! Redoes the previously undone action.\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "TODO! Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "TODO! Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "TODO! Changes the window size."
+    AFX_IDS_SCMOVE          "TODO! Change the window position"
+    AFX_IDS_SCMINIMIZE      "TODO! Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "TODO! Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "TODO! Switch to the previous document window"
+    AFX_IDS_SCPREVWINDOW    "TODO! Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "TODO! Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "TODO! Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "TODO! Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "TODO! Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_RESET           "TODO! loads configuration and initialises archives"
+    ID_FILE_ACTUALIZE       "TODO! actualises display of data"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DBD_TIME            "TODO! Time"
+    IDS_DBD_DATE            "TODO! Date"
+    IDS_DBD_GANR            "TODO! Cash machine id"
+    IDS_DBD_TANR            "TODO! Transaction no."
+    IDS_DBD_KTNR            "TODO! Account no."
+    IDS_DBD_BCNR            "TODO! Bank code"
+    IDS_DBD_AMNT            "TODO! Amount"
+    IDS_DBD_CURR            "TODO! Currency"
+    IDS_DBD_STNM            "TODO! Host"
+    IDS_DBD_CANM            "TODO! Camera"
+    IDS_DBD_INNM            "TODO! Detector"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ALARM_60            "TODO! Alarm archive %s is %d%% filled."
+    IDS_ARCHIVES_ALARM      "TODO! Alarm archives in total %d%% filled."
+    IDS_ALARM_FULL          "TODO! Alarm archive %s full!"
+    IDS_DELETE_SEQUENCE_DENIED 
+                            "TODO! You are not authorised to delete the sequence!"
+    IDS_DELETE_ARCHIVE_DENIED 
+                            "TODO! You are not authorised to delete this archive!"
+    IDS_NO_IMAGE_FOUND      "TODO! No images of this camera found."
+    IDP_CANNOT_DELETE_ARCHIV 
+                            "TODO! Archive no. %d could not be totally deleted."
+    IDS_NO_DATABASE_DRIVE   "TODO! No valid drive for backup defined or drives are not available!\nBackup is not practicable!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ARCHIV_LESS_THAN_DRIVES 
+                            "TODO! The sum of all archives sizes exceeds the available capacity of all drives!\nNo storage possible before settings are corrected!"
+    IDS_INIT_DATABASE_FIELDS "TODO! initialising database fields"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NORMAL              "TODO! Normal"
+END
+
+#endif    // Italian (Italian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE 16, 1
+#pragma code_page(1252)
+#endif
+#define WK_LANG_BLOCK "041004b0"
+#define WK_LANG_BLOCK_NUM 0x410
+#include "res\DBS.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.ita\afxres.rc"          // Standard components
+#include "l.ita\afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

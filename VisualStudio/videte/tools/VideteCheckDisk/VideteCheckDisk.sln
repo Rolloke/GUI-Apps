@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VideteCheckDisk", "VideteCheckDisk.vcproj", "{E4606B9A-27CA-488E-95ED-C82DC2D59170}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = VideteCheckDisk.vcproj
+		SccProjectName0 = \u0022$/Project/Tools/VideteCheckDisk\u0022,\u0020XBTCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = true
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{E4606B9A-27CA-488E-95ED-C82DC2D59170}.Debug.ActiveCfg = Debug|Win32
+		{E4606B9A-27CA-488E-95ED-C82DC2D59170}.Debug.Build.0 = Debug|Win32
+		{E4606B9A-27CA-488E-95ED-C82DC2D59170}.Release.ActiveCfg = Release|Win32
+		{E4606B9A-27CA-488E-95ED-C82DC2D59170}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

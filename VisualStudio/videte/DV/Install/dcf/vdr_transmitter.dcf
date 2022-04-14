@@ -1,0 +1,14 @@
+[DONGLE]
+ProductCode=17
+OEMCode=5
+RunDatabaseClient=1
+RunSocketUnit=1
+RunSecAnalyzer=1
+RunJaCobUnit1=1
+RunJaCobUnit2=1
+RunISDNUnit=1
+RunISDNUnit2=1
+RunCommUnit=1
+RunAudioUnit=1
+AllowSoftDecodeMiCo=1
+MagicNumber=234567

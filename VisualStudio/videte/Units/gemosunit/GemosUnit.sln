@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GemosUnit", "GemosUnit.vcproj", "{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = GemosUnit.vcproj
+		SccProjectName0 = \u0022$/Project/Units/GemosUnit\u0022,\u0020VUSBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Debug.ActiveCfg = Debug|Win32
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Debug.Build.0 = Debug|Win32
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Enu.ActiveCfg = Enu|Win32
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Enu.Build.0 = Enu|Win32
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Release.ActiveCfg = Release|Win32
+		{6918E192-CD9A-40DC-ABDA-B0C8E3ABA265}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

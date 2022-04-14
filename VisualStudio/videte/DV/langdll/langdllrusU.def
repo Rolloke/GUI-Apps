@@ -1,0 +1,7 @@
+; DVURus.def : Declares the module parameters for the DLL.
+
+LIBRARY      "DVURus"
+DESCRIPTION  'DVURus Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

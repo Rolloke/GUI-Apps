@@ -1,0 +1,13 @@
+[OPTIONS]
+TITLE=WKAPPWIZARD AppWizard Help
+COMPRESS=true
+WARNING=2
+HLP=WKAppWizard.HLP
+ERRORLOG=WKAppWizard.LOG
+
+[FILES]
+hlp\WKAppWizard.rtf
+
+[MAP]
+#include <E:\DevStudio\VC\MFC\include\afxhelp.hm>
+#include <hlp\WKAppWizard.hm>

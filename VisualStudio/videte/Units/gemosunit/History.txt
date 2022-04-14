@@ -1,0 +1,13 @@
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CIPCGemosToVision::OnConfirmSetValue()
+			  - CMainFrame::OnCmdReceived()
+			  - CRS232Gemos::OnPackage()
+05.08.99 UF - Projekt angelegt
+24.09.99 ML - Relay-kommando hinzugefügt.
+			- Bugfix: Line 3000...3999 -> Relays
+					  Line 4000...4999 -> Kameras
+17.01.01 ML - Das Programmicon erscheint nun im SystemTray
+			- Bugfix: Das SystemTray-menü klappt nun korrekt zu
+14.11.02 GF	- Anpassung VS_70

@@ -1,0 +1,81 @@
+History:
+	11.10.01
+		- Beginn des Projektes. Aufbauend auf dem Sample Vivot.
+	
+	18.10.01
+		- Die CSourcen aufräumen und in mehrere Klassen aufteilen.
+		  CVideoIn, CVideoOut, CTheApp, CCodec
+	
+	23.10.01
+		- Portierung der Klasse CMotionDetection auf den Trimedia
+
+	25.10.01
+		- Eine Klasse CICP zur Kapselung einiger ICP-Apifunktionen
+			(Deinterlaycing, YUV422->YUV411)
+		- Einbindung des Jpeg-Codecs von DResearch
+		- Skalierungsfunktion für die MD implementiert.
+
+	26.10.01
+		- Portierung der Klasse CPerfMon zwecks genauer Performanceuntersuchung
+		- Implementierung der Klasse CInt64, da der Trimedia13000 keine 64bit
+		  Integer kennt.
+
+	29.10.01
+		- Farbraumkonvertierung von YUV422 nach YUV411 implementiert
+	
+	31.10.01
+		- TP-Filter für die MD implementiert
+
+	06.12.01 -----Statusbericht ------
+		- Folgende Kommandos zum Tashaboard implementiert:
+			DoRequestSetBrightness		-> funktionsfähig
+			OnConfirmSetBrightness		-> funktionsfähig
+			DoRequestSetContrast		-> funktionsfähig
+			OnConfirmSetContrast		-> funktionsfähig
+			DoRequestSetSaturation		-> funktionsfähig
+			OnConfirmSetSaturation		-> funktionsfähig
+			DoRequestGetBrightness		-> funktionsfähig
+			OnConfirmGetBrightness		-> funktionsfähig
+			DoRequestGetContrast		-> funktionsfähig
+			OnConfirmGetContrast		-> funktionsfähig
+			DoRequestGetSaturation		-> funktionsfähig
+			OnConfirmGetSaturation		-> funktionsfähig
+			DoRequestStartCapture		-> funktionsfähig
+			OnConfirmStartCapture		-> funktionsfähig
+			DoRequestStopCapture		-> funktionsfähig
+			OnConfirmStopCapture		-> funktionsfähig
+			DoRequestPauseCapture		-> funktionsfähig
+			OnConfirmPauseCapture		-> funktionsfähig
+			DoRequestResumeCapture		-> funktionsfähig
+			OnConfirmResumeCapture		-> funktionsfähig
+			DoRequestSetInputSource		-> Dummy
+			OnConfirmSetInputSource		-> Dummy
+			DoRequestGetInputSource		-> Dummy
+			OnConfirmGetInputSource		-> Dummy
+			DoRequestScanForCameras		-> Dummy
+			OnConfirmScanForCameras		-> Dummy
+			DoRequestSetRelayState		-> Dummy
+			OnConfirmSetRelayState		-> Dummy
+			DoRequestGetRelayState		-> Dummy
+			OnConfirmGetRelayState		-> Dummy
+			DoRequestGetAlarmState		-> Dummy
+			OnConfirmGetAlarmState		-> Dummy
+			DoRequestSetAlarmEdge		-> Dummy
+			OnConfirmSetAlarmEdge		-> Dummy
+			DoRequestGetAlarmEdge		-> Dummy
+			OnConfirmGetAlarmEdge		-> Dummy
+			OnReceiveNewCodecData		-> funktionsfähig
+			DoConfirmReceiveNewCodecData-> funktionsfähig
+
+	11.12.01
+		- Klassen CAlarm und CRelay als Dummy implementiert.
+		
+	12.12.01
+		- WK_TRACE, WK_TRACE_WARNING, WK_TRACE_ERROR sind nur in DEBUG implementiert.		
+
+	13.12.01
+		- Alarmeingänge werden regelmäßig überwacht und evtl. Alarme der TashaUnit mitgeteilt (Dummyfunktion)
+
+	14.02.02
+		- Makefile an Windows XP angepasst, da dort das SDE/MDS an einen anderen Ort
+		  installiert wurde.

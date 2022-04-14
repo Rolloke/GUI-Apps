@@ -1,0 +1,404 @@
+17.08.06 TKR- Bugfix 193/199: Der Dialog fuer den Freischaltcode ist nun auch in englisch und russisch
+			  verfuegbar.
+31.07.06 TKR- Die neu zu verdonglenden Features (z.B. Erhoehung der Anzahl von Q-Unit Kameras)
+			  werden nun vorher mit einer Checksumme geprueft. Diese wird im dongle mit uebergeben.
+26.07.06 TKR- Launcher erweitert, sodass ein Update auf neue Features (z.B. Erhoehung der Anzahl
+              von Q-Unit Kameras, nachtraegliches Freischalten der ISDN Unit) moeglich ist.
+              Es werden NUR neue Features dazu verdongled, es koennen keine schon vorhandenen
+              Freischaltungen aufgehoben werden!
+              Der Freischaltcode wird mit dem Tool Expansion Code (wie immer) erzeugt.
+13.07.06 RKE- Registryschalter (DeleteTempFiles) fuer das Loeschen der Tempfiles eingebaut.
+04.07.06 UF - Bugfix Q Unit Watchdog wurde nicht getriggert.
+07.06.06 UF - Q Unit Support + Watchdog.
+24.04.06 RKE- Bugfix 117: Der Smart RTE wird jetzt nur wieder geloescht, wenn alle Platten Ok sind.
+			- RTE fuer Temperatur wird jetzt als Bit fuer jedes Geraet einzeln ausgewertet und nur geloescht, wenn alle Geraete
+			  bzw. Festplatten OK sind.
+			- RTE fuer FanSpeed wird jetzt als Bit fuer jedes Geraet einzeln ausgewertet und nur geloescht, wenn alle Geraete
+			  Ok sind.
+20.04.06 RKE- Die Standard RTEerror-datei liegt auf c:\. Bei einem CF wird sie im Backup-Pfad angelegt. Faellt das Laufwerk aus
+			  so wird alternativ wieder c:\ genommen. Ist das Laufwerk wiederhergestellt worden so liegt sie wieder im
+			  Backup-Pfad. Die "alternative" Datei wird ein letztes mal gelesen und geloescht.
+			- In der Registry koennen jetzt RTE-Gruppen (Critical, Error, Warning, Messages) deaktiviert werden.
+			  Dabei kann verhindert werden, dass sie angezeigt werden oder nur verhindert werden dass sie den ErrorDialog
+			  aufpoppen lassen. REG_DWORD "ShowRuntimeErrors" = 0x11111111, das Hiword fuer Popup, das Loword fuer Anzeige.
+			  Weiterhin koennen einzelne RTEs (Popup) deaktiviert werden. Beispiel: REG_DWORD "PopupAtRTE_CAMERA_MISSING" = 0
+27.03.06 RKE- Das Logdateienverzeichnis wird jetzt alle 15 Minuten ueberprueft und ggf. die aeltesten Logdateien geloescht.
+24.03.06 RKE- Wenn sehr viele RuntimeErrors aufgelaufen wird, so steigt der Speicherverbrauch an. Daher werden
+              bei Ankunft der RTEs im Copy-Constructor keine SharedMemory bzw. Eventhandles mehr angelegt (werden
+              ja auch nicht benoetigt) und evtl. vorhandene Handles freigegeben.
+              Bei Fehlerhaften FTP-Uploads werden megaviele RTEs erzeugt. Das System wird dann echt langsam.
+15.03.06 RKE- Bugfix 105: Es werden jetzt defaultmaessig 7 drives gechecked, CF + 4 IDE + 2 SATA.
+01.03.06 RKE- Fuer Festplattenausfall, Fan Speed, Temperatur und SMART werden die Fehlertexte des virtuellen
+              Alarmes an die Nachricht angehaengt (bTextToFields = TRUE).
+01.03.06 TKR- Das rterrors.dat file wird nun alle 20 Sekunden gespeichert, aber nur, wenn sich
+			  etwas geaendert hat (neuer RTE, RTE gelöscht..).
+27.02.06 RKE- Bugfix 55/92: Enable default reply fuer die Systemmeldungen im Shellmode implementiert.
+			  Bugfix 93: Die RTEs werden jetzt alternativ auf c: gespeichert, falls der eingestellte Pfad nicht existiert.
+15.02.06 ML - S.M.A.R.T. RTE wurde nicht angezeigt, da das ShowMsgBox-Bit in dwParam2 nicht gesetzt war.
+15.02.06 ML - Bugfix: Wenn S.M.A.R.T GP, wenn S.M.A.R.T. 'bad' meldet.
+13.02.06 ML - Bugfix 74: CWatchDog::Init muß bei Änderungen in der Systemverwaltung (Tasha, SaVic, JaCob...)
+			  erneut aufgerufen werden, da ansonsten der Launcher den Watchdog evtl. zur falschen Karte triggert.
+			  z.B. Die Jacob wird bei einem bestehenden System ausgetragen, und eine Tasha stattdessen aktiviert.
+			  Bislang war es so, das der Watchdogtrigger vom Launcher bis zu einem Systemneustart weiterhin
+			  zur JaCob geschickt wurde. Nun wird CWatchDog::Init alle 20 Sekunden aufgerufen. CWatchDog::Init
+			  setzt die Events ggf. auf das neue Board, ansonsten geschied nichts.
+26.01.06 RKE- Smartcheck sendet keinen RTE (zuruecksetzen des virtuellen Alarms) mehr beim Start.
+			  Fuer das Rebooten wird jetzt eine Variable gesetzt, die WM_QUERY_ENDSESSION mit TRUE beantwortet,
+			  wenn der Launcher selbst rebooted.
+			  Der Logpfad wird gelöscht, wenn das "Log"-drive nicht mehr vorhanden ist.
+25.01.06 RKE- Smart und Hdd koennen auf mehr als 4 Platten erweitert werden (Registry: "MaxCheckedDrives")
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+19.01.06 RKE- virtuellen Alarm fuer Luefterdrehzal eingefuegt. HealthControl als Applikation eingebaut.
+17.01.06 RKE- virtuelle Alarme fuer Temperatur, SmartParameter und Festplattenausfall eingefuegt.
+06.01.05 UF - Launcher loescht beim Start jetzt auch temporaere Dateien.
+13.12.05 TKR- Beim Auftreten von CRT (C Runtime) Errors wird der vom OS angezeigte Dialog
+			  automatisch weggeklickt (wie gehabt). Der Runtime Error, der anschliessend vom
+			  Launcher gemeldet wird, falls das durch den CRT Error beendete Programm
+			  noch nicht wieder gestartet werden konnte, ist nun mittels Registry-Schalter
+			  "ShowCrtErrorAsRte" einschaltbar. Default ist das nun ausgeschaltet.
+22.11.05 TKR- Die Festplattentemperaturen werden jetzt beim Start und alle 15 Minuten in der
+			  Registry unter DVRT->Maintenance gespeichert. Sie werden nur gespeichert, wenn
+			  es ein Sender ist, wenn sie auslesbar und hoeher als der schon gespeicherte 
+			  Wert sind. Dieser Wert wird im Abschnitt Maintenance der SV (System Report) ausgewertet.
+11.10.05 RKE- VideteCheckDisk wird jetzt bei XPE Images immer gestartet.
+			  VCD wird jetzt mit WM_SELFCHECK Messages überwacht.
+04.10.05 RKE- Bugfix 944: Start wird verhindert, wenn DTS schon läuft.
+14.09.05 RKE- VideteCheckDisk wird jetzt vor Initialisierung des Debugers und des Dongels gestartet.
+14.09.05 RKE- Im Shellmode werden jetzt die System Message Boxen unterdrueckt.
+23.08.05 RKE- Bugfix: LanguageDll war nicht auf Unicode eingestellt, deshalb gab es beim Beenden Memory Leaks.
+			  VideteCheckDisk wird jetzt bei Programmstart aufgerufen. Der Rueckgabewert 2 veranlasst ein Reboot.
+04.08.05 RKE- Bugfix 893: Cleanup wurde nicht aufgerufen.
+23.06.05 RKE- Bugfix 865: Applikationen, die minimiert werden koennen, koennen jetzt wieder ueber Buttons auf dem
+              Laucherwindow aktiviert werden.
+              Bugfix 864: Nach dem Registry Import können jetzt Anwendungen mit Hilfe des Commands ID_FILE_NEW ihre
+              Registry settings neu lesen.
+02.06.05 RKE- SecurityLauncher Dll eingebaut.
+			  Ueberarbeitung der russischen Resourcen Texte eingefuegt.
+23.05.05 ML - S.M.A.R.T bis zur Version 5.1 disabled.
+18.05.05 ML - Wenn der S.M.A.R.T Status schlecht ist, wird nun ein Laufzeitfehler angezeigt.
+17.05.05 ML - Die S.M.A.R.T-Parameter werden bei Programmstart, sowie alle Stunde ins
+			  Logfile geschrieben. Dabei werden die ersten 4 IDE-Platten - sofern vorhanden -
+			  geprüft. Ob SCSI, SATA, RAID, CF funktioniert muß noch geprüft werden!
+07.04.05 ML - Der Plattencache der ersten Festplatte wird nun nicht mehr disabled.
+			  Wenn nötig läßt sich über DVRT\SecurityLauncher\DisableHDWriteCache=1 der Cache
+			  der ersten Platte weiterhin disablen.
+16.03.05 RKE- Bugfix 712: Der Launcher kann jetzt die Systemverwaltung mit der
+              Kommandozeile -updatelanguagedepends aufrufen. Diese aktualisiert dann im Hintergrund die
+              Sprachabhaengien Registry- und HTML- Ressourcen.
+02.03.05 RKE- Log Path wird jetzt aus der CIPC funktion GetLogPath() gelesen.
+15.02.05 UF - EnumWindows eingebaut, um auch Fenster zu finden, die nicht
+			  der Namenskonvention entsprechen.
+31.01.05 RKE- RuntimeErrors werden jetzt immer TopMost angezeigt.
+28.12.04 RKE- Windows Tempverzeichnis wird jetzt ueberprueft und ggf. angelegt.
+13.12.04 ML - Laufzeitfehler nach Rücksprache mit JB und AK, bei zu hoher HD-Temperatur
+			  bis auf weiteres unterdrückt.
+06.12.04 ML - Das automatische Partitionieren/Formatieren von leeren Platten bis auf weiteres deaktiviert,
+			  da wir zwei Systeme hatten, bei denen die Partitionstabelle ungültig war.
+01.12.04 ML - CDrive wird nun mit struct allignment von 8 compiliert!
+22.11.04 ML - Die Temperatur aller IDE-Festplatten werden nun alle 15 Minuten ausgelesen. Überschreitet 
+			  die Temperatur 50°C, so wird ein Alarm ausgelöst.
+19.11.04 ML - Die Temperatur aller IDE-Festplatten, wird nun testweise beim Start ins Logfile geschrieben.
+			  (Sofern die Datei hddtlib.dll vorhanden ist.) (Liegt auf V:\bin\idip\MS_DLL)
+09.11.04 ML - CEwf Klaase implementiert
+08.11.04 ML - Im Shellmode wird unter WinXP bei jedem Start nachgesehen, ob eine leere Festplatte
+              vorhanden ist. Ist dies der Fall, so wird sie partitioniert (Eine primäre Partition)
+              und mit NTFS formatiert.
+01.10.04 RKE- Bugfix 563: Zugriff auf ungueltigen Pointer pUser aus einem UserArray das in einem scope {}
+			  angelegt wurde, welcher schon verlassen wurde.
+30.09.04 RKE- Codepae wird jetzt ueber CWK_Profile an die CIPC-Dll CWK_String::gm_uCodePage weitergegeben.
+27.08.04 RKE- Bugfix 529: Das Backgroundwindow hat jetzt einen eigenen Klassenanmen.
+			  Im Shellmode haben die Hintergrundfenster des Launchers denselben Klassennamen wie das
+              Hauptfenster. Dadurch war die Kommunikation mit dem Client, der das Hauptfenster durch
+              diesem Namen identifiziert nicht immer gegeben, da das Hintergrundfenster (das manchmal
+              statt des Haupfensters gefunden wurde) die Nachrichten vom Client nicht behandelt.
+11.08.04 RKE- Die ResourcenDll der OEMGUI wird bei Aenderung der Sprache neu geladen.
+03.06.04 RKE- OnApplication() erweitert.
+				- LAUNCHER_TERMINATE_APPLICATION
+				- LAUNCHER_CLOSE_APPLICATION
+				- LAUNCHER_APPLICATION_RUNNING
+04.05.04 UF - Bugfix rechte Maustaste Menu in Shell.
+26.04.04 UF - Bugfix Swapfile Suche
+24.04.04 UF - Launcher ist jetzt im Systray. Menu ist erstmal das alte.
+24.04.04 UF - Tashaunit und Tasha Watchdog eingebaut. Warnings beseitigt.
+21.04.04 GF	- CApplication::BringToTop() BringWindowToTop() geaendert zu SetForegroundWindow(),
+				da BringWindowToTop nicht immer den gewünschten Effekt hat
+13.04.04 GF	- Bugfix: CollMenuMAnager nicht mit MFC 7.1
+09.02.04 UF - Update Control wir nach timeout wieder neu gestartet. UNICODE Vorbereitung
+22.01.04 UF	- Bugfix Nr. 793 Yutaunit startet nicht mehr.
+21.01.04 RKE- Bugfix 469: Logo fuer idip Hintergrundbild korrigiert.
+20.01.04 GF	- Bugfix 735: AutoLogin funktioniert beim "System mit idip-Launcher neu starten" nicht mehr
+19.01.04 GF	- AdjustPrivileges auch beim Reboot, um das AutoLogin Problem Bug 735) zu erkunden/beheben
+15.01.04 TKR- ACDC wird nun auch unter 98/ME gestartet. Bei 95 auch, allerdings startet der
+			  IdipReceiver nicht unter 95 wegen fehlender Komponenten in der OEMGUI.dll
+01.12.03 TKR- Bugfix Die Seriennummer des Gerätes wird nun mit ausgetraced.
+25.09.03 UF - Die Audiounit wird jetzt vom Launcher mitgestartet.
+28.08.03 GF	- Bugfix 521: ACDC wird unter Win98 beim idipReceiver gestartet und schmiert mit GP ab
+						  Da ACDC z.Z. nur unter NT/2000/XP laufen soll, dies hier erstmal gefixt
+08.08.03 GF	- Bugfix 510: Nach dem Start im Shell-Modus wird weiterhin"Restart in Shell-Mode" angeboten,
+                          nicht "Restart with Explorer"
+24.06.03 GF	- Bugfix 487 btw. DTS 744: Shellmode startete nicht bei Systemen mit Leerzeichen im Pfadnamen
+24.06.03 GF	- Bugfix 487: Shellmode startete nicht bei Systemen mit Leerzeichen im Pfadnamen
+18.06.03 ML - In Debug ist die YutaUnit eingebunden, aber noch nicht verdongelt
+28.05.03 RKE- Hintergrund für Multimonitorbetrieb eingebaut.
+22.04.03 UF - Neustart des Systems wegen GPs nur noch beim Sender und wenn Shell
+01.04.03 UF - ICPCONUnit wird jetzt vom Launcher mitgestartet.
+31.03.03 UF - Bei Sendern wird jetzt beim Start der Festplattenchache abgeschaltet.
+20.03.03 ML - Die Messages WM_POWERBROADCAST und WM_QUERYENDSESSION werden nun abgefangen,
+			  um den Logout-Dialog anzuzeigen. 
+11.03.03 RKE- RTE_EXTERNAL_DEVICE_FAILURE in CIPCInputVirtualAlarm eingebaut.
+		 GF	- Bugfix 334: JaCobUnit wurde nach GP nicht wieder gestartet - erst nach 5 Tagen
+27.12.02 UF - Savic Unterstuetzung eingebaut
+04.10.02 UF - ACDC mit wird jetzt bei freigeschatetem Backup vom Launcher mitgestartet.
+03.09.02 UF - Inputverbindung für virtuelle Alarme prueft jetzt die Verbindung
+			  zum Server und dann wird diese neu aufgebaut.
+02.09.02 UF - Bugfix Nr 70, kein Menuepunkt idip Backup mehr im Launchermenue.
+28.08.02 UF - Im Shellmode wird wieder ein Videte Logo angezeigt.
+			  Bugfix Nr. 
+12.08.02 GF	- WAI_CDR_WRITER in WAI_AC_DC umbenannt
+28.03.02 UF - Bugfix es wird jetzt Windows XP richtig angezeigt.
+06.11.01 ML - Bugfix: Die Receiver ohne JaCob, MiCo, oder CoCo besitzen keinen Störmelder,
+			  folglich, werden die Buttons zum An/Ausschalten des Piezo im Runtimeerror Dialog
+			  für diese Systeme versteckt.
+29.10.01 UF - Startzeit war bei einigen Systemen mehr als 20s.
+			  Fehler ist behoben.
+18.10.01 UF - Bugfix Backup
+			  Beim Zeitsetzen werden jetzt nicht mehr alle Programme beendet und
+			  neu gestartet.
+16.10.01 UF - TO 3000 Prototyp zeigt nicht mehr den Fuellstand der Alarmarchive an.
+16.10.01 UF - Bugfix: Alle Empfaenger booten jetzt nicht mehr nach so und so vielen
+			  GPs
+16.08.01 GF	- Bugfix: Beim Setzen von Datum/Zeit wurden die Module zu schnell wieder gestartet
+						Jetzt wird nach dem Beenden der Module erstmal gecheckt,
+						ob sie tatsächlich beendet sind.
+14.08.01 UF - In der Fehlerliste ist der Löschen Button jetzt nur anwählbar,
+			  wenn auch ein Fehler ausgewählt wurde.
+14.05.01 UF - Bei Automatisch im Hintergrund wird jetzt immer Immer
+			  im Vordergrund mit eingeschaltet.
+09.05.01 GF	- Enu LNG und RC resettet, abgespeckt
+05.04.01 UF Bugfix Starten der Programme aus einem Ordner mit Leerzeichen
+			im Namen.
+27.12.00 GF	Bei RTE_ALARM_OFF_SPAN wird anhängender Text jetzt weitergeleitet
+17.11.00 GF	Version DTS und TOBS:
+			- Backup im 'Erweitert'-Menu entfernt
+			- Anzeige 'Füllstand Alarmarchive' entfernt
+01.11.00 GF	Bugfix: ProductVersion und ProductView sind jetzt wieder enabled
+30.10.00 GF	Version DTS und TOBS eingebaut
+30.10.00 GF	Bugfix: LauncherBar automatisch im Hintergrund
+			- wird jetzt automatisch in den Hintergrund geschoben
+			- kann jetzt wieder hervorgeholt werden
+24.10.00 GF	ProductName von Dongle auf OemGui umgestellt
+27.09.00 UF - neu Softdongle
+29.08.00 ML - Bugfix In 'InsertError' fehlte dasBit LVIF_IMAGE in lvis.mask, dadurch waren
+			  Im RTE-Dialog alle Icons rot.
+			- Bugfix REL_MESSAGE wurden nicht in die errorliste gehängt, dadurch poppte
+			  zwar der Dialog hoch, es waren aber keine (neuen) Einträge vorhanden.
+22.06.00 UF - Melder für 
+			  Eingehende Rufe, Ausgehende Rufe und abgewiesene Rufe
+			  jetzt mit Stationsnamen oder Rufnummer
+21.06.00 GF	- Garny tw. entfernt
+27.04.00 UF - automatisch im Hintergrund
+			  und immer im Vordergrund hinzugefügt
+14.04.00 UF Remote Update hinzugefügt.
+07.09.99 ML RTE_ALWAYS_ALARM hinzugefügt.
+2.8.99 >>> UpdateVersion um 10:19 <<<
+02.08.99 UF Beim Zeitsetzen erscheint jetzt nicht mehr das Fehlerfenster
+31.05.99 UF Die eigene Uhrzeitumstellung wird jetzt von der Zeitkorrektur
+			nicht mehr rueckgaengig gemacht.
+19.05 99 UF Accelarator Alt+S für Systemmenü
+11.5.99 >>> UpdateVersion um 13:15 <<<
+11.05.99 GF - Check auf korrekten OEM-Code in InitInstance
+			- einige WK_TRACE auf WK_TRACE_ERROR geaendert
+10.05.99 UF - Bugfix Launcher Reboot/Shutdown
+15.04.99 UF TimeCorruption erweitert, Jahr, Monat, Tag, Stunde
+			wenn DCF an ist, fuer German Parcel
+11.3.99 >>> UpdateVersion um 9:15 <<<
+11.03.99 GF Euro-Umstellung und Icons fuer alle Menue-Eintraege
+05.3.99	 ML Archive60%Voll und ArchiveVoll sollen keine Messagebox zeigen.
+04.3.99	 ML Runtimerror werden nun korrekt behandelt, auch wenn sie
+			schnell hintereinander gesendet werden.
+10.2.99	 ML	Der virtuelle Alarm für Kamerausfälle verschwindet nun erst,
+			wenn alle ausgefallenen Kamera wieder ein Signal liefern.
+8.2.99	 ML Der Lauchcher zählt nun die Kameraausfälle, die er
+			über einen virtuellen Alarm gemeldet bekommt, und schaltet
+			entsprechend den Störmelder
+8.2.99 >>> UpdateVersion um 10:14 <<<
+08.02.99 Aufruf der Datums- und Uhrzeitumstellung mit F9
+4.2.99 >>> UpdateVersion um 11:01 <<<
+04.02.99 UF auf WK_TRACE umgestellt
+11.01.99 ML Folgende virtuelle Alarme hinzugefügt
+			RTE_REJECT_TCP		Param2=1 -> Alarm ein Param2=0 -> Alarm aus
+			RTE_REJECT_ISDN1	Param2=1 -> Alarm ein Param2=0 -> Alarm aus
+			RTE_REJECT_ISDN2	Param2=1 -> Alarm ein Param2=0 -> Alarm aus
+			RTE_REJECT_PT1		Param2=1 -> Alarm ein Param2=0 -> Alarm aus
+			RTE_REJECT_PT2		Param2=1 -> Alarm ein Param2=0 -> Alarm aus
+
+08.01.99 ML Virtuelles Alarmhandling über die CWK_RuntimeError-
+		 Schnittstelle und einer Input-Verbindung zum Server implementiert.
+		 Bisher sind folgende virtuelle Alarme vorgesehen:
+			RTE_ARCHIVE_FULL	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ONLINE_ISDN1	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ONLINE_ISDN2	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ONLINE_PT1		Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ONLINE_PT2		Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ONLINE_TCP		Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ALARMCALL_ISDN1	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ALARMCALL_ISDN2	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ALARMCALL_PT1	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ALARMCALL_PT2	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+			RTE_ALARMCALL_TCP	Param1=1 -> Alarm ein Param1=0 -> Alarm aus
+	UF 3. und 4. Mico
+	UF Button Stm ein zu Testzwecken
+15.10.98 >>> UpdateVersion um 12:55 <<<
+	UF Bugfix Zeitanzeige
+14.10.98 >>> UpdateVersion um 10:58 <<<
+14.10.08 UF Uhrzeit jetzt in der Applikationsbar	
+12.10.98 UF neue Oberflaeche !!!!!!!
+06.10.98 UF neue Oberflaeche noch disabled
+17.9.98 >>> UpdateVersion um 15:26 <<<
+17.9.98 HD Traces in CApplication::Create
+16.9.98 HD Beeper an, wenn Kamera missing.
+		Noch ohne Zaehler und automatisches
+		Wiederausschalten. D.h. nach einem beliebigen
+		Kameraausfall geht der Beeper an und bleibt an.
+15.9.98 UF/HD TimeCorrection wenn das Jahr 
+		um mehr als 1 springt.
+11.9.98 >>> UpdateVersion um 14:48 <<<
+	UF	BugFix Tooltip
+7.9.98 >>> UpdateVersion um 10:28 <<<
+	UF	Bugfix Fehlermeldung, wenn kein Dongle angeschlossen ist
+		kommt wieder.
+18.8.98 >>> UpdateVersion um 11:41 <<<
+	UF  Bugfix Service Diskette, neu jetzt auch Versionsnummer
+		Bugfix Start der Services unter Windows
+		in der Shell Oberflaeche
+		Protokollierung von Zeitzonen Information
+		und Bildschirmaufloesung
+10.7.98 >>> UpdateVersion um 9:34 <<<
+	UF	Winclk.exe von Expert Mouse CLOCK wird
+		unterstuetzt.
+25.6.98
+	ML	2.MiCo wird nun auch gestartet
+25.6.98
+	ML	Die Änderung vom 24.6 rückgängig gemacht, da ich dieses
+		Problem in der MiCoUnitPCI geregelt habe.
+24.6.98
+	ML	Der Launcher darf die WatchdogTime nur für den
+		1. MiCo setzen. Für den 2. MiCo muß er auf -1 stehen.
+		Ansonsten würde evtl. die 2. MiCo vor der 1. MiCo auf
+		den Event reagiert, und der Watchdog dann nicht
+		zurückgesetzt werden würde. 
+28.5.98 >>> UpdateVersion um 10:13 <<<
+	UF Log Directory veraenderbar
+	   unter DVRT\Log\LogPath
+	   Standard bleibt c:\log
+27.5.98 >>> UpdateVersion um 11:09 <<<
+	UF	BugFix Garny Icon in ALT+TAB
+14.5.98 >>> UpdateVersion um 11:26 <<<
+	UF	Fehlermeldung, wenn die Exe nicht richtig in
+		der Registrierung eingebunden ist.
+7.5.98 >>> UpdateVersion um 17:20 <<<
+	UF	BugFix Hintergrundfenster bei Shelloberflaeche
+7.5.98 >>> UpdateVersion um 9:45 <<<
+	UF	Die aktuelle Uhrzeit und Datum werden jetzt im Format 
+		HH:MM dd.mm.yy in der Shell Oberflaeche
+		links unten auf dem Hintergrundbild angezeigt. 
+
+5.5.98 >>> UpdateVersion um 15:44 <<<
+
+5.5.98 >>> UpdateVersion um 14:46 <<<
+	UF  Die Umstellung von Sommer- auf Winterzeit und umgekehrt 
+		wird bei Systemen unter Windows NT vom Betriebssystem vorgenommen. 
+		Bei allen Systemen unter Windows NT muß dementsprechend in der 
+		Systemsteuerung für die Zeitzone die automatische Umstellung von 
+		Sommer- auf Winterzeit und umgekehrt eingeschaltet sein.
+
+4.5.98 >>> UpdateVersion um 15:03 <<<
+
+	UF	In der Garny Version steht jetzt rechts unten
+		Windows NT 4.0 oder Windows 95 oder Windows 98
+		in der Shell Oberflaeche auf dem Bildschirm
+17.4.98 >>> UpdateVersion um 12:03 <<<
+
+8.4.98 >>> UpdateVersion um 11:34 <<<
+
+	UF	Stoermelder MicoUnitPCI unter NT/95 mit MiCoPiezoOnOff
+		Event implementiert.
+6.4.98 >>> UpdateVersion um 9:57 <<<
+
+	UF	WatchDog unter NT mit MicoTriggerWatchDogEvent nur mit
+		laufender MicoUnit, Unterstuetzung von 2 MiCo's
+
+30.3.98 >>> UpdateVersion um 14:46 <<<
+
+	UF nur noch eine Konfiguration
+		OEM Aussehen jetzt nach Dongle
+20.3.98 >>> UpdateVersion um 11:11 <<<
+
+	UF	CWK_Profile wegen NT
+17.2.98 >>> UpdateVersion um 14:40 <<<
+17.02.98
+	UWE	Berechtigungsstufenflag WK_ALLOW_SHUTDOWN
+		fuer Herunterfahren der Software eingebaut.
+13.02.98
+	UWE Stat Log beim Start korrigiert
+10.02.98
+	UWE GP Dialog Erkennung fuer NT angepaßt
+10.02.98
+	UWE	ScanDisk fuer NT angepasst
+		es werden auf allen Laufwerken die folgenden Dateien
+		geloescht:
+		Dateien : #:\*.chk
+		Verzeichnisse: #:\found.*
+		Das Loeschen wird protokolliert.
+09.02.98
+	UWE	Shell Funktionen fuer NT angepasst
+	UWE Swap File Ueberwachung fuer NT angepasst
+
+3.2.98 >>> UpdateVersion um 12:21 <<<
+	UWE	SDI Konfig Hinweis hinzugefügt, Hot Key in F7
+		geaendert.
+
+5.1.98 >>> UpdateVersion um 15:04 <<<
+	UWE	Beim Start werden jetzt alle chk Dateien von
+		ScanDisk geloescht
+
+5.1.98 >>> UpdateVersion um 14:33 <<<
+
+	UWE	Trace Stoerungsmelder korrigiert
+
+22.12.97 >>> UpdateVersion um 17:38 <<<
+	GF	Accelerator Alt+K und entsprechende Funktion für SDIConfig hinzugefuegt
+
+16.12.97 >>> UpdateVersion um 9:55 <<<
+	UWE Laufzeitfehler bei nicht startendem
+		Programm angezeigt		
+
+12.12.97 >>> UpdateVersion um 13:26 <<<
+
+	UWE	ProductVersion, ProductInfo jetzt 
+		im richtigen Arbeitsverzeichnis gestartet
+
+11.12.97 >>> UpdateVersion um 16:46 <<<
+
+	UWE	Stoerungsmelder Behandlung bei GPs 
+		so geaendert, dass nach 20s der ST wieder
+		ausgeschaltet wird, es sein denn, es liegt
+		ein anderer Grund vor den ST anzulassen
+
+4.12.97 >>> UpdateVersion um 15:07 <<<
+	UWE		Beenden wegen CocoSrv mit Sleep(5000)
+			damit der hdarvxd GP weg ist
+			Fehler iST neu starten behoben
+
+6.11.97 >>> UpdateVersion um 17:14 <<<
+	UWE		Service Diskette für Update und Programmstart eingebaut
+
+31.10.97 >>> UpdateVersion um 9:43 <<<
+
+/*
+@TOPIC{Launcher History|History,Launcher}
+
+@LISTHEAD{18.08.97 HEDU}
+	ErrorDialog.cpp GetParam4 entfernt, 
+	das gibt's ja nicht mehr im WK_RunTimeError.
+*/

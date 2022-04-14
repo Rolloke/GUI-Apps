@@ -1,0 +1,36 @@
+History
+---------
+
+15.02.2005
+	- Erstellung eines Service zum Überwachen eines anderen Prozesses.
+	- Beim Start des Services wird der zu überwachende Prozess ebenfalls gestartet.
+	- Beim Beenden des Services wird der zu überwachende Prozess mit WM_CLOSE geschlossen
+	- Kommandozeilenparameter:
+		-i Installation des Services
+		-u Deinstallation des Services
+		-s Start des Services
+		-e Beenden des Services
+		
+16.02.2005
+	- Kommandozeilenparameter:
+		-c Konfiguration des Services über ein GUI
+	- Läuft zum Zeitpunkt des Servicestarts der zu überwachende Process bereits,
+	  so wird kein neuer Prozess gestartet. Stattdessen wird der schon laufende Prozess
+	  überwacht.
+	- Der zu überwachende Prozess kann nun im GUI angegeben werden. Er wird in der Registry
+	  gesichert.
+	
+17.02.2005
+	- Wahlweise wird der zu überwachende Prozess beim Beenden des Services nicht mit
+	  beendet.
+	- Wenn der zu überwachende Prozess auf WM_CLOSE oder WM_QUIT nicht reagiert, wird
+	  der Prozess terminiert.
+	- Der Servicename wird nun aus dem Applicationsnamen gebildet, so daß nun mehrere Przesse
+	  überwacht werden können, wenn der Dateiname des Service unterschiedlich gewählt wird. z.B
+	  ControlNotepad.exe oder ControlCalc.exe.
+
+24.08.2005
+	- WK_VERSION in rc2 hinzugefügt
+
+23.11.2005
+	- Den Defaultwert des ControlApplication-Schlüssel von "" auf "HiveInjection.exe" geändert.

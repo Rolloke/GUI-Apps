@@ -1,0 +1,20 @@
+13.04.04 GF	- Bugfix: CollMenuMAnager nicht mit MFC 7.1
+05.12.02 GF	- Bugfix: Rechtschreibfehler Wählprefix -> Wählpräfix
+30.08.02 GF	- Bugfix 226: Führende Nullen bei IP-Adressen
+05.11.01 UF - Auf der ISDN Seite laesst sich jetzt ein Minimallange der Rufnummer fuer
+		      den Waehlprefix einrichten.
+22.10.01 UF - Auf der ISDN Seite laesst sich jetzt ein Waehlprefix einrichten.
+21.05.01 GF	- Warnhinweis, das erst ein Laufwerk eingerichtet werden muß
+				 bevor Archive eingerichtet werden können
+09.05.01 GF	- Netzlaufwerke zur Speicherung freigegeben
+08.05.01 GF	- Bugfix: Laufwerke/Archive: Anzeige der verfügbaren Größe manchmal negativ
+			- Bugfix: ISDN: MSN verwenden, aber Nummer leerlassen
+11.04.01 GF	- Bugfix English TCP/IP Page: Klammer entfernt
+			- Bugfix: Archiv Page: Länge des Archivnamens auf 250 Zeichen beschränkt,
+			                       sonst Müll in Recherche
+			- Englische Texte überarbeitet
+03.04.01 UF - Datei Oeffnen, datei Speichern unter gehen wieder im DTS idip Empfaenger
+27.03.01 UF - Feste laufwerke für Archive, DNS gelöscht
+28.02.01 GF	- Gegenstationen: Nachfrage, ob Archive angelegt werden sollen entfernt
+22.02.01 UF - englische Übersetzung korrigiert.
+22.02.01 UF - spezielle Systemverwaltung für DTS Receiver

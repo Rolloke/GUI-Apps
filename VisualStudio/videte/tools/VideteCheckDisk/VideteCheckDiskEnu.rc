@@ -1,0 +1,301 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\VideteCheckDisk.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\VideteCheckDisk.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VIDETECHECKDISK_DIALOG DIALOGEX 0, 0, 320, 273
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Videte Check Disks"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TAB,"SysTabControl32",0x0,1,35,318,17
+    CONTROL         "Fix errors on disk",IDC_CK_FIX_ERRORS,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    10,71,135,10
+    CONTROL         "Recover bad sectors",
+                    IDC_CK_LOCATE_AND_RECOVER_BAD_SECTORS,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,10,83,139,
+                    10
+    CONTROL         "Force to dismount volume",IDC_CK_FORCE_DISMOUNT,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,10,95,92,
+                    10
+    CONTROL         "Check after reboot, if nesessary.",
+                    IDC_CK_CHECK_AFTER_REBOOT,"Button",BS_AUTOCHECKBOX | NOT 
+                    WS_VISIBLE | WS_TABSTOP,10,107,145,10
+    CONTROL         "Check index entries",IDC_CK_CHECK_INDEX_ENTRIES,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,10,119,85,
+                    10
+    CONTROL         "Check cyclic folder structures",
+                    IDC_CK_CHECK_CYCLIC_FOLDER_STRUCTS,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,10,131,163,
+                    10
+    GROUPBOX        "Checkdisk Parameter",IDC_GRP_CHKDSK_PARAM,5,55,187,91,
+                    NOT WS_VISIBLE
+    CONTROL         "Compact Flash",IDC_CK_COMPACT_FLASH,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,10,168,70,
+                    10
+    CTEXT           "Disk / Part",IDC_TXT_CF_DISK_PART,130,156,60,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDT_CF_DISK,130,166,30,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDT_CF_PARTITION,160,166,30,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "(De) Install EWF",IDC_BTN_CHECK_CF_REG,204,166,105,
+                    14,NOT WS_VISIBLE
+    LTEXT           "Exclude Drives from checking:",
+                    IDC_TXT_DONT_CHECK_DRIVES,10,187,182,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDT_DONT_CHECK_DRIVES,204,184,105,14,ES_AUTOHSCROLL | 
+                    NOT WS_VISIBLE
+    LTEXT           "Pagefile size (MB):",IDC_TXT_PAGE_FILE,10,205,80,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    EDITTEXT        IDC_EDT_PAGEFILE_SIZE,100,202,40,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    CONTROL         "Create Auto Pagefile on CF",IDC_CK_AUTO_PAGE_FILE,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    179,204,130,10
+    LTEXT           "Create Pathes for:",IDC_TXT_VIDETE_SOFTWARE,10,223,70,
+                    8,NOT WS_VISIBLE
+    CONTROL         "Idip®",IDC_RD_IDIP,"Button",BS_AUTORADIOBUTTON | NOT 
+                    WS_VISIBLE | WS_GROUP,100,222,35,10
+    CONTROL         "DTS",IDC_RD_DTS,"Button",BS_AUTORADIOBUTTON | NOT 
+                    WS_VISIBLE,160,222,29,10
+    GROUPBOX        "General",IDC_GRP_COMMON,5,149,310,90,NOT WS_VISIBLE | 
+                    WS_GROUP
+    CTEXT           "Check Drives\nCreate Paths on:",IDC_TXT_DRIVES,
+                    204,52,111,18,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDT_CHECK_DRIVES,204,70,105,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    PUSHBUTTON      "Clear Debug Output",IDC_BTN_CLEAR_OUTPUT_WINDOW,204,90,105,
+                    14,NOT WS_VISIBLE
+    PUSHBUTTON      "Save Settings",IDC_BTN_SAVE_SETTINGS,204,110,
+                    105,14,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDT_DEBUG_OUT,1,240,318,12,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    CONTROL         "",IDC_PROGRESS_PERCENT,"msctls_progress32",WS_BORDER,5,
+                    255,310,14
+    PUSHBUTTON      "Cancel",IDCANCEL,192,0,63,30,BS_MULTILINE
+    PUSHBUTTON      "Create Drives",IDC_CREATE_DISKS,0,0,63,30,
+                    BS_MULTILINE
+    PUSHBUTTON      "Check Drives",IDC_CHECK_DISKS,128,0,63,30,
+                    BS_MULTILINE
+    PUSHBUTTON      "Create Pathes",IDC_CREATE_PATHS,64,0,63,30,
+                    BS_MULTILINE
+    DEFPUSHBUTTON   "OK",IDOK,255,0,63,30,BS_MULTILINE
+    PUSHBUTTON      "Check Pathes",IDC_BTN_CHECK_PATHES,204,130,105,14
+END
+
+IDD_INFO DIALOGEX 0, 0, 220, 26
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CTEXT           "",IDC_TXT_INFO,3,3,213,20,0,WS_EX_TRANSPARENT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_VIDETECHECKDISK_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 319
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 192
+        VERTGUIDE, 204
+        VERTGUIDE, 309
+        VERTGUIDE, 315
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About VideteCheckDisk..."
+    IDS_HELP                "&Help..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_OUTPUT_TAB          "Debug Output"
+    IDS_SETTINGS_TAB        "Settings"
+    IDS_CANCELED            "canceled"
+    IDS_CHECKING_DISK       "Checking disk %s."
+    IDS_LISTING_DISKS       "Listing disks."
+    IDS_CHECKING_DISKS      "Checking hard drives."
+    IDS_CHECKING_PATHES     "Checking pathes."
+    IDS_CREATING_PATHES     "Creating pathes on: "
+    IDS_CRATE_PATHTES_FINISHED "Pathes have been checked."
+    IDS_REBOOTING           "System is rebooting now."
+    IDS_NO_EMPTY_DISK       "No disk partitioning nessesary."
+    IDS_CREATE_PART_EXT     "Creating extended partition."
+    IDS_CREATE_PART_LOG     "Creating logical partition."
+    IDS_FORMATING_AS        "Formating %s (%s) as NTFS."
+    IDS_PART_AND_FORM_FINISHED "Partitioning und Formating finished!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CK_CHECK_AFTER_REBOOT 
+                            "If active, checkdisk is performed after reboot, if nessesary."
+    IDC_CK_CHECK_INDEX_ENTRIES "Only NTFS"
+    IDC_CK_CHECK_CYCLIC_FOLDER_STRUCTS 
+                            "Only NTFS: Checks cycles within the folder structure."
+    IDC_EDT_CHECK_DRIVES    "Enter the drives that shall be checked by checkdisk\nor on which pathes shall be created (only one drive)\nA drive is defined by its letter and a colon (e.g. c:).\nseveral drives are separated by commas.\n\nThe excluded drives are ignored then."
+    IDC_EDT_DONT_CHECK_DRIVES 
+                            "Please enter the drives that are excluded from the automatic check routines."
+    IDC_CK_COMPACT_FLASH    "Activates the outsourcing of logfiles, temp pathes and so on onto another hard disk drive.\nThe Compact Flash device must be defined as first entry in the excluded drives."
+    IDC_BTN_SAVE_SETTINGS   "Save the settings in the groups into an ini file."
+    IDC_EDT_PAGEFILE_SIZE   "Define the desired size of the paging file."
+    IDC_BTN_CHECK_CF_REG    "Checks the EWF settings for the CompactFlash drive and (de)install the nesessary EWF registry settings."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_CREATE_DISKS        "Creates extended and logical partitions on all recognized drives with free space available.\nThe created partitions are formated in NTFS format and are assigned with a free drive letter and a name."
+    IDC_CHECK_DISKS         "Checks the available hard drives or the desired drives with Checkdisk."
+    IDC_CREATE_PATHS        "Checks the outsourcing pathes and creates them, if nessesary, on a free drive and maps then to the registry\n\nAfter changing the pathes a reboot is nessesary!"
+    IDC_PROGRESS_PERCENT    "Show the progress of the current process."
+    IDC_CK_FIX_ERRORS       "Fixes errors on the disk."
+    IDC_CK_LOCATE_AND_RECOVER_BAD_SECTORS 
+                            "Locates bad sectors and recovers readable information."
+    IDC_CK_FORCE_DISMOUNT   "Forces the volume to dismount, if nessesary.\nAll opened handles to the volume would then be invalid."
+END
+
+STRINGTABLE 
+BEGIN
+    IDOK                    "Closes the program."
+    IDCANCEL                "Cancel the current process"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_CF_DISK         "Please enter the drive number of the Compact Flash medium (0-n)."
+    IDC_BTN_CLEAR_OUTPUT_WINDOW "Clears the debug report window"
+    IDC_EDT_CF_PARTITION    "Please enter the number of the protected partition on the Compact Flash medium (1-n)."
+    IDC_RD_IDIP             "Create pathes for Idip® system"
+    IDC_RD_DTS              "Create pathes for DTS system"
+    IDC_CK_AUTO_PAGE_FILE   "If active, the page file size is handled by the OS.\nThis guaraties automatical creation of a new pagefile on a free drive, if the drive which contains the current page file is broken."
+    IDC_BTN_CHECK_PATHES    "Checks all fixed drives for installed pathes."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CHKDSKFINISHED      "Hard drive checkings finished!"
+    IDS_ASK_FOR_REBOOT      "The changes will be applied after reboot.\n\nReboot now?"
+    IDS_ASK_INSTALL_EWF     "Do you want to activate the Enhance Write Filter (EWF)?\n\nYes:\t\tactivate.\nNo:\t\tdeactivate.\nCancel:\t\tno changes."
+    IDS_ASK_FOR_SAVE_SETTINGS "Do you want to save the changes?"
+    IDS_INVALID_PATH_REFERENCE "Invalid path references on: "
+    IDS_PROCESS_ERROR       "%s could not be started."
+    IDS_REQUEST_CANCEL      "Cancel current Process?"
+    IDS_REQUEST_CLOSE       "Close Application?"
+    IDS_HELP_TEXT           "CmdLine parameters are:\n\n/a automatic mode for creating and formating disks\n    and checking / repairing pathes\n/c automatic check disk with previously saved parameters\n/e enable Ewf, set Ewf registry settings\n/d disable ewf filter, restore registry settings\n/r=a:->b:[,b:->c:, c:->a:] rename drive letters\n/? this help as message box"
+    IDS_INFO_TEXT           "VideteCheckDisk\n\nVersion 1.2\nprogrammed by Rolf Kary-Ehlers\nCopyright ® videte IT AG"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\VideteCheckDisk.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

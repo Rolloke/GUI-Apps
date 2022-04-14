@@ -1,0 +1,308 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\DBS.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DBS.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Reset\tF9",                  ID_FILE_RESET
+        MENUITEM "Fast Reset",                  ID_FILE_FAST_RESET
+        MENUITEM "Aktualisieren\tF5",           ID_FILE_ACTUALIZE
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Anzeige"
+    BEGIN
+        MENUITEM "&Laufwerke",                  ID_VIEW_DRIVES
+        MENUITEM "&Archive",                    ID_VIEW_ARCHIVES
+        MENUITEM "&Threads",                    ID_VIEW_THREADS
+        MENUITEM "&Clients",                    ID_VIEW_CLIENTS
+    END
+    POPUP "&Protokoll"
+    BEGIN
+        MENUITEM "&Anfragen",                   ID_TRACE_REQUESTS
+        MENUITEM "Se&quencen",                  ID_TRACE_SEQUENCES
+        MENUITEM "&Laufwerke",                  ID_TRACE_DRIVES
+        MENUITEM "Q&ueues",                     ID_TRACE_QUEUES
+        MENUITEM "Code&base",                   ID_TRACE_CODEBASE
+        MENUITEM "&Suche",                      ID_TRACE_QUERY
+        MENUITEM "Ö&ffnen/Schließen",           ID_TRACE_OPEN_CLOSE
+        MENUITEM "Lös&chen",                    ID_TRACE_DELETE
+        MENUITEM "Backu&p",                     ID_TRACE_BACKUP
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_FILE_ACTUALIZE,      VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F9,          ID_FILE_RESET,          VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONVERSION DIALOG  0, 0, 318, 130
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Konvertierung"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,207,109,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,261,109,50,14
+    LTEXT           "Die Datenbank wird auf ein neues Format konvertiert, das kann mehrere Minuten dauern.",
+                    IDC_TXT_INFO,7,7,304,18
+    LTEXT           "aktuell konvertierte Datei:",IDC_TXT_FILE,7,35,82,8
+    LTEXT           "...",IDC_FILE,7,47,304,8
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",WS_BORDER | 
+                    0x1,7,63,304,14
+    LTEXT           "vergangene Zeit:",IDC_TXT_TIME,7,84,55,8
+    LTEXT           "00:00:00",IDC_TIME,70,84,29,8
+END
+
+IDD_DIALOG_REMOVEABLE_HDD DIALOG  0, 0, 275, 210
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Wechselfestplatte"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,201,168,67,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,218,4,50,14,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    LTEXT           "Soll die Festplatte mit einem Schreibschutz und der passenden Lesesoftware versehen werden, so das sie in einem anderen Windows PC gelesen werden kann?",
+                    IDC_TXT_TO_RO,7,21,261,28,SS_SUNKEN
+    LTEXT           "Festplatte %s %d GByte",IDC_TXT_DRIVE,7,7,261,8
+    PUSHBUTTON      "Schreibschutz",IDC_BUTTON_TO_RO,201,56,67,14
+    LTEXT           "Soll der Schreibschutz der Festplatte aufgehoben werden, so das die Festplatte wieder beschrieben werden kann. Die Daten werden dann schrittweise überschrieben.",
+                    IDC_TXT_TO_WRITE,7,77,261,28,SS_SUNKEN
+    PUSHBUTTON      "Überschreiben",IDC_BUTTON_TO_WRITE,201,112,67,14
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",0x0,7,189,
+                    261,14
+    LTEXT           "Soll die Festplatte so belassen werden. Es werden keine Änderungen vorgenommen. Eine schreibgeschützte Festplatte wird nicht zum Schreiben benutzt. Eine Datenplatte kann nur im gleichen System verwendet werden.",
+                    IDC_STATIC_NOTHING,7,134,261,28,SS_SUNKEN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CONVERSION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+
+    IDD_DIALOG_REMOVEABLE_HDD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 268
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DBS\n\nDBS\n\n\nDBS.Document\nDBS Document"
+    IDS_INIT_DRIVES         "initialisiere Laufwerke"
+    IDS_INIT_ARCHIVS        "initialisiere Archive"
+    IDS_INIT_THREADS        "initialisiere Threads"
+    IDS_INIT                "initialisiere"
+    IDS_DRIVES_WHOLE        "Laufwerke gesamt %I64d Bytes %d / %d MB"
+    IDS_ARCHIVES_WHOLE      "Archive gesamt %I64d Bytes %d / %d MB %d Sequencen"
+    IDS_ALARM_LIST          "Alarmliste"
+    IDS_LOCAL               "Lokale Station"
+    IDS_ALARM               "Alarm"
+    IDS_RING                "Ring"
+    IDS_SAFERING            "Vorring"
+    IDS_SEARCH              "Suche"
+    IDS_UNDEFINED           "undefiniert"
+    IDS_BACKUP              "Backup"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DBS"
+    AFX_IDS_IDLEMESSAGE     "Bereit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_RESET           "lädt die Konfiguration und reinitialisiert die Archive"
+    ID_FILE_ACTUALIZE       "aktualisiert die Anzeige der Daten"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DBD_TIME            "Zeit"
+    IDS_DBD_DATE            "Datum"
+    IDS_DBD_GANR            "GA Nr."
+    IDS_DBD_TANR            "TA Nr."
+    IDS_DBD_KTNR            "Konto Nr."
+    IDS_DBD_BCNR            "BLZ"
+    IDS_DBD_AMNT            "Betrag"
+    IDS_DBD_CURR            "Währung"
+    IDS_DBD_STNM            "Station"
+    IDS_DBD_CANM            "Kamera"
+    IDS_DBD_INNM            "Melder"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ALARM_60            "Das Alarmarchiv %s ist zu %d%% gefüllt."
+    IDS_ARCHIVES_ALARM      "Alarm Archive gesamt %d%% Füllstand"
+    IDS_ALARM_FULL          "Das Alarmarchiv %s ist voll."
+    IDS_DELETE_SEQUENCE_DENIED 
+                            "Sie haben keine Berechtigung, die Sequence zu löschen."
+    IDS_DELETE_ARCHIVE_DENIED 
+                            "Sie haben keine Berechtigung, dieses Archiv zu löschen."
+    IDS_NO_IMAGE_FOUND      "Es wurden keine Bilder zu dieser Kamera gefunden."
+    IDP_CANNOT_DELETE_ARCHIV 
+                            "Das Archiv Nr. %d konnte nicht vollständig gelöscht werden."
+    IDS_NO_DATABASE_DRIVE   "Es ist kein gültiges Laufwerk für die Speicherung definiert, oder diese Laufwerke sind ausgefallen. es ist keine Speicherung möglich."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ARCHIV_LESS_THAN_DRIVES 
+                            "Die Summe der Archivgrößen übersteigt die Kapazität der Laufwerke. Es ist keine Speicherung möglich, bis die Einstellungen korrigiert sind! "
+    IDS_INIT_DATABASE_FIELDS "initialisiere Datenbankfelder"
+    IDS_AUTO_BACKUP_FAILED  "Automatisches Backup von Archiv < %s > auf Laufwerk < %s > fehlgeschlagen."
+    IDS_HDD_FAILURE         "Laufwerk %c: (%s) ausgefallen.\nLaufwerkTyp: "
+    IDS_SYSTEM_DRIVE        "Systemlaufwerk"
+    IDS_STORAGE_DRIVE       "Speicherlaufwerk"
+    IDS_ADAPT_ARCHIVE_SIZE  "Die Summe der Archivgrößen übersteigt die Kapazität der Laufwerke.\nDie Archivgrößen werden auf %d %% verringert."
+    IDS_NO_STORAGE_DRIVE    "Keine Festplatte zur Speicherung vorhanden."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_NORMAL              "Normal"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\DBS.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

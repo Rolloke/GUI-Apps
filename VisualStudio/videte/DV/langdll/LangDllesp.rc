@@ -1,0 +1,917 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish (Modern) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESP)
+#ifdef _WIN32
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESP)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 10, 3\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.esp\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU 
+BEGIN
+    POPUP "Visualizar"
+    BEGIN
+        MENUITEM ">Pantalla completa",                   IDOSD_VIEW_FULL
+        MENUITEM ">Todas iguales",                IDOSD_VIEW_XXX
+        MENUITEM ">1 plus",                     IDOSD_VIEW_1PX
+    END
+    POPUP "Cámara"
+    BEGIN
+        MENUITEM ">Cámara",                     IDOSD_CAM1
+        MENUITEM ">Cámara",                     IDOSD_CAM2
+        MENUITEM ">Cámara",                     IDOSD_CAM3
+        MENUITEM ">Cámara",                     IDOSD_CAM4
+        MENUITEM ">Cámara",                     IDOSD_CAM5
+        MENUITEM ">Cámara",                     IDOSD_CAM6
+        MENUITEM ">Cámara",                     IDOSD_CAM7
+        MENUITEM ">Cámara",                     IDOSD_CAM8
+        MENUITEM ">Cámara",                     IDOSD_CAM9
+        MENUITEM ">Cámara",                     IDOSD_CAM10
+        MENUITEM ">Cámara",                     IDOSD_CAM11
+        MENUITEM ">Cámara",                     IDOSD_CAM12
+        MENUITEM ">Cámara",                     IDOSD_CAM13
+        MENUITEM ">Cámara",                     IDOSD_CAM14
+        MENUITEM ">Cámara",                     IDOSD_CAM15
+        MENUITEM ">Cámara",                     IDOSD_CAM16
+    END
+    POPUP "Menú de Configuración"
+    BEGIN
+        MENUITEM ">Seña: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM "Bloquear monitor",               IDOSD_OPTION_LOCK
+    POPUP "Sistema"
+    BEGIN
+        MENUITEM ">Información del Sistema",                IDOSD_OPTION_INFO
+        MENUITEM ">Estadísticas",                  IDOSD_OPTION_STATISTIC
+    END
+    POPUP "Reproducción"
+    BEGIN
+        MENUITEM ">Tiempo real",                   IDOSD_REALTIME
+        MENUITEM ">Lista de alarmas",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM ">Indicador de movimiento",        IDOSD_OPTION_TARGET_DISPLAY
+    END
+END
+
+IDR_MENU_CONFIG MENU 
+BEGIN
+    POPUP "Configuración cámaras"
+    BEGIN
+        MENUITEM ">Nombre: ________________", IDOSD_CHANGE_CAMNAME
+        MENUITEM ">Framerate",                   IDOSD_CAMERA_FPS
+        MENUITEM ">Compresión de imágen",            IDOSD_CAMERA_COMPRESSION
+        MENUITEM ">Brillo",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM ">Contraste",                   IDOSD_COLOR_CONTRAST
+        MENUITEM ">Saturación",              IDOSD_COLOR_SATURATION
+        MENUITEM ">Resistencia terminal",               IDOSD_CAMERA_TERMINATION
+        MENUITEM ">Tipo",                        IDOSD_CAMERA_PTZ_TYPE
+        MENUITEM ">ID: ________________",       IDOSD_CAMERA_PTZ_ID
+        MENUITEM ">Puerto serial COM",                   IDOSD_CAMERA_PTZ_COMPORT
+    END
+    POPUP "Configuración Sistema"
+    BEGIN
+        MENUITEM ">Resolución de imágen",              IDOSD_CAMERA_RESOLUTION
+        MENUITEM ">Alarma audíble",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM ">Copia Config del Sistema", IDOSD_EXPORT_SETTINGS
+        MENUITEM ">Recibe Config del Sistema", IDOSD_IMPORT_SETTINGS
+    END
+    POPUP "Agenda de las cámaras"
+    BEGIN
+        MENUITEM ">Lun: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM ">Mar: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM ">Mie: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM ">Jue: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM ">Vie: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM ">Sab: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM ">Dom: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM ">Entradas de alarma",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "Cómo graba ésta cámara"
+    BEGIN
+        MENUITEM ">Modo",                      IDOSD_ALARM_MODE
+    END
+    POPUP "Sensibilidad detección"
+    BEGIN
+        MENUITEM ">Movimiento",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM ">Máscara adaptable",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM ">Máscara permanente",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "Configuración alarmas"
+    BEGIN
+        MENUITEM ">Llamar cuando:",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM ">Dial N°. 1 ",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM ">Dial N°. 2 ",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM ">Dial N°. 3 ",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM ">Salida de alarma",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "Imágenes"
+    BEGIN
+        MENUITEM ">Archivar imágenes",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM ">Cancela archivamiento",      IDOSD_STOP_ACTIVITY_BACKUP
+        MENUITEM ">Continuar archivando",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM ">Archivar imágenes de alarma",      IDOSD_ALARM_BACKUP
+        MENUITEM ">Borrar imágenes de alarma",        IDOSD_ALARM_DELETE
+        MENUITEM ">Muestra imágenes sospechosas",   IDOSD_SUSPECT_SEARCH
+        MENUITEM ">Borrar imágenes sospechosas",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "Salidas de video"
+    BEGIN
+        MENUITEM ">Salida 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM ">Salida 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM ">Salida 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM ">Salida 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+        MENUITEM ">Tiempo a ser mostrada",         IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "Configuración de audio"
+    BEGIN
+        MENUITEM ">Escuchar en vivo",                   IDOSD_AUDIO_LISTEN_IN
+        MENUITEM ">Asignación",                  IDOSD_AUDIO_CHANGE_CAMNR
+        MENUITEM ">Grabar si hay alarma",             IDOSD_AUDIO_RECORD_MODE
+        MENUITEM ">Amplificación",            IDOSD_AUDIO_SENSITIVITY
+        MENUITEM ">Nivel mínimo de ruido",                IDOSD_AUDIO_THRESHOLD
+        MENUITEM ">Volume",                 IDOSD_AUDIO_VOLUME
+    END
+    POPUP "Red"
+    BEGIN
+        MENUITEM ">IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM ">Subnetmask: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM ">Portal: ___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM ">MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM ">Nombre %s: ________________",    IDOSD_NET_NAME
+        MENUITEM ">DHCP",                       IDOSD_DNS
+    END
+    POPUP "Fecha/Hora"
+    BEGIN
+        MENUITEM ">Fecha: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM ">Hora: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM ">Zona",                      IDOSD_TIME_ZONE
+    END
+    POPUP "Selección de impresora"
+    BEGIN
+        MENUITEM "Ninguna impresora",                IDOSD_NO_PRINTER
+        MENUITEM ">Impresora",                    IDOSD_PRINTER1
+        MENUITEM ">Impresora",                    IDOSD_PRINTER2
+        MENUITEM ">Impresora",                    IDOSD_PRINTER3
+        MENUITEM ">Impresora",                    IDOSD_PRINTER4
+        MENUITEM ">Impresora",                    IDOSD_PRINTER5
+        MENUITEM ">Impresora",                    IDOSD_PRINTER6
+        MENUITEM ">Impresora",                    IDOSD_PRINTER7
+        MENUITEM ">Impresora",                    IDOSD_PRINTER8
+        MENUITEM ">Impresora",                    IDOSD_PRINTER9
+        MENUITEM ">Impresora",                    IDOSD_PRINTER10
+        MENUITEM ">Impresora",                    IDOSD_PRINTER11
+        MENUITEM ">Impresora",                    IDOSD_PRINTER12
+        MENUITEM ">Impresora",                    IDOSD_PRINTER13
+        MENUITEM ">Impresora",                    IDOSD_PRINTER14
+        MENUITEM ">Impresora",                    IDOSD_PRINTER15
+        MENUITEM ">Impresora",                    IDOSD_PRINTER16
+    END
+    POPUP "Selección de idioma"
+    BEGIN
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE1
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE2
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE3
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE4
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE5
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE6
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE7
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE8
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE9
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE10
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE11
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE12
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE13
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE14
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE15
+        MENUITEM ">Idioma",                    IDOSD_LANGUAGE16
+    END
+    POPUP "Cambiar seña"
+    BEGIN
+        MENUITEM ">Operador",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM ">Supervisor",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "Otras opciones sistema"
+    BEGIN
+        MENUITEM ">Muestra protocólo de eventos",   IDOSD_OPTION_RTE
+        MENUITEM ">Apagar el equipo",          IDOSD_OPTION_EXIT
+        MENUITEM ">Actualizar software",             IDOSD_OPTION_UPDATE
+        MENUITEM ">Código extens.: ____________", IDOSD_EXPANSION_CODE
+    END
+    MENUITEM "Salir de Configuración",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "DVCliente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "Seña correcta !"
+    IDS_ON                  "On"
+    IDS_PIN_FAILED          "Seña incorrecta"
+    IDS_PIN                 "Seña: ____"
+    IDS_SEARCH_DATE         "Buscar fecha: __.__.__"
+    IDS_SEARCH_TIME         "Buscar hora: __:__"
+    IDS_SEARCH_ERROR        "Error de búsqueda"
+    IDS_OFF                 "Off"
+    IDS_CAMERA              "Cámara:"
+    IDS_OLD_PIN             "Seña actual: ____"
+    IDS_NEW_PIN             "Nueva Seña: ____"
+    IDS_CONFIRM_PIN         "Confirmar Seña: ____"
+    IDS_PIN_CHANGED         "La seña fue cambiada"
+    IDS_SET_CLOCK_DATE_FAILED "La fecha no fue cambiada"
+    IDS_SET_CLOCK_TIME_FAILED "La hora no fue cambiada"
+    IDS_SEARCH_START        "Buscando..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "La fecha fue cambiada"
+    IDS_SET_CLOCK_TIME_SUCCESS "La hora fue cambiada"
+    IDS_SET_TIMER_SUCCESS   "La agenda fue cambiada"
+    IDS_SET_IP_SUCCESS      "La dirección IP fue cambiada"
+    IDS_SET_IP_FAILED       "Dirección IP no fue cambiada"
+    IDS_SET_MSN_SUCCESS     "El MSN fue cambiado"
+    IDS_SET_MSN_FAILED      "El MSN no fue cambiado"
+    IDS_SET_TIMER_FAILED    "La agenda no fue cambiada"
+    IDS_MD                  "Detección de movimiento"
+    IDS_UVV                 "Alarma/Pre-Alarma"
+    IDS_LOW                 "Bajo"
+    IDS_NORMAL              "Normal"
+    IDS_HIGH                "Alto"
+    IDS_WAIT                "Por favor espere..."
+    IDS_NO_PICTURES         "No hay imágenes para esta cámara"
+    IDS_QUERY               "Buscar por:\n"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "DVCliente"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "Fecha (en formato dd.mm.aa) y hora"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "Cámara actual, todos los valores específicos de cámara son individuales y cuando son mostrados o modificados son siempre los valores de la cámara actual"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "Reproducción rápida hacia atrás"
+    IDC_BUTTON_PLAY         "Reproducción hacia adelante"
+    IDC_BUTTON_PLAY_BACK    "Reproducción hacia atrás"
+    IDC_BUTTON_STOP         "Detener la reproducción"
+    IDC_BUTTON_FF           "Reproducción rápida hacia adelante"
+    IDC_BUTTON_EJECT        "Cerrar la ventana actual de reproducción"
+    IDC_BUTTON_SKIP_BACK    "Mostrar el evento anterior"
+    IDC_BUTTON_SINGLE_BACK  "Mostrar la imágen anterior"
+    IDC_BUTTON_SINGLE_FORWARD "Mostrar la próxima imágen"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "Buscar por fecha (en formato dd.mm.aa) y hora"
+    IDC_BUTTON_SKIP_FORWARD "Mostrar el próximo evento"
+    IDC_BUTTON_EXPORT       "Archivar la imágen de la cámara actual a:"
+    IDC_BUTTON_PRINT        "Imprimir la imágen de la cámara actual a: %s"
+    IDC_BUTTON_MINIMIZE     "Minimizar el panel en la esquina de abajo a la derecha del monitor"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BUTTON_OK           "Finalizar el programa"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_QUERY_FAILED        "No se encontraron imágenes:\n"
+    IDS_SHUTDOWN            "La unidad se está apagando..."
+    IDS_END_OPTION          "Salir de Configuración"
+    IDS_DATE                "Fecha:"
+    IDS_TIME                "Hora:"
+    IDS_EXPORT_RUNNING      "Archivando ..."
+    IDS_EXPORT_SUCCESS      "Archivamiento finalizado corréctamente"
+    IDS_EXPORT_FAILED       "Fallo al archivar"
+    IDS_PRINTJOB_RUNNING    "Imprimiendo..."
+    IDS_PRINTJOB_SUCCESS    "Impresión finalizada corréctamente"
+    IDS_PRINTJOB_FAILED     "Fallo al imprimir"
+    IDS_CAMNAME             "Nom. cámara:"
+    IDS_CONNECT_ERROR       "No es posible conectar"
+    IDS_LOCKED              "Unidad está bloqueada"
+    IDS_RTE                 "Error de Run-Time %u de"
+    IDS_DELETE_ALARM        "Borrando la alarma actual..."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DELETED_ALARM       "Las imágenes han sido borradas completamente"
+    IDS_DELETED_ALARM2      "Las imágenes no han sido borradas completamente"
+    IDS_CONFIRM_RTE         "Mensaje de evento confirmado"
+    IDS_DEFAULTPRINTER_SET  "Impresora seleccionada"
+    IDS_NO_CAMERA           "No hay cámaras conectadas"
+    IDS_BACKUP_RUNNING      "Archivando: %d %%\n\nTiempo estimado restante: %s"
+    IDS_BACKUP_COMPLETE     "Archivamiento de imágenes de alarma concluído corréctamente"
+    IDS_DATE_FORMAT         "ddmmaa"
+    IDS_TIME_FORMAT_HHMMSS  "hhmmss"
+    IDS_TIMER_FORMAT        "hhmmhhmm"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "Por favor, introduzca la fecha de búsqueda y confirme con Enter"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "Por favor, introduzca la hora de búsqueda y confirme con Enter"
+    IDS_HELP_INPUT_PIN      "Por favor, introduzca su seña actual"
+    IDS_HELP_INPUT_NEW_PIN  "Introduzca una nueva seña"
+    IDS_HELP_INPUT_CONFIRM_PIN "Confirme su nueva seña"
+    IDS_HELP_INPUT_TCPIP    "Por favor, introduzca la dirección IP y confirme con Enter... ATENCIÓN! El equipo se reiniciará automáticamente al confirmar la nueva dirección IP! Si no desea cambiarla, simplemente presione una de las flechas"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_DEL             "Borrar el actual mensaje de eventos"
+    IDC_RTE_UP              "Mostrar el próximo mensaje de eventos"
+    IDC_RTE_DOWN            "Mostrar el mensaje anterior de eventos"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "Confirma el mensaje actual de eventos"
+    IDC_RTE_OK              "Cerrar el diálogo de eventos"
+    IDC_RTE_DEL_ALL         "Borrar todos los mensajes de eventos"
+    IDC_RTE_PRINT           "Imprimir toda la lista de eventos"
+    IDC_CLOCK               "Por favor, introduzca el periodo de tiempo del cual desea archivar"
+    IDC_STATIC_EXPORT       "Cámara:"
+    IDC_EXPORT_CAM1         "Por favor, indique la(s) cámara(s) de la(s) cual(es) desea archivar imágenes"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "Por favor, introduzca el número MSN y confirme con Enter"
+    IDS_HELP_INPUT_TIMER    "Por favor, introduzca el período de tiempo para la agenda de ésta cámara y confirme con Enter"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "Por favor, introduzca la hora actual y confirme con Enter"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "Por favor, introduzca la fecha actual y confirme con Enter"
+    IDS_HELP_INPUT_CAMERANAME "Por favor, introduzca un nuevo nombre para la cámara"
+    IDS_HELP_INPUT_OLD_PIN  "Por favor, introduzca su seña actual. Si no desea cambiarla, simplemente presione una de las flechas"
+    IDS_SET_SUBNETMASK_SUCCESS "Máscara subred fue definida"
+    IDS_SET_SUBNETMASK_FAILED "Máscara subred no definida"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "Por favor, introduzca la máscara de subred y confirme con Enter... ATENCIÓN! El equipo se reiniciará automáticamente al confirmar la nueva máscara de subred! Si no desea cambiarla, simplemente presione una de las flechas"
+    IDS_NO_PRINTER          "Ninguna impresora"
+    IDS_DEFAULT_LANGUAGE_SET "El idioma fue seleccionado"
+    IDS_BACKUP_FORMAT       "Por favor, espere mientras se prepara el medio para archivar imágenes de la(s) cámara(s) %s.\n El proceso puede durar algunos minutos.\n\nTiempo transcurrido: %s"
+    IDS_BACKUP_FINALIZE     "Imágenes de alarma archivadas satisfactoriamente.\nTerminando la sesión de archivamiento.\nEl proceso puede durar unos minutos.\n\nTiempo transcurrido: %s"
+    IDS_HELP_UPDATE_SYSTEM  "Inserte el disquete de actualización en la disquetera. ATENCIÓN! Después de terminar la actualización el equipo se reiniciará automáticamente"
+    IDS_BACKUP_FORMAT_NOCDR "No se ha encontrado un medio vacío en la grabadora.\n Las imágenes no han podido ser archivadas"
+    IDS_BACKUP_FORMAT_ERROR "Ha ocurrido un error durante la preparación del medio.\nEl proceso fue interrumpido.\nPor favor, reemplace el medio por otro vacío y vuelva a empezar el proceso de archivamiento"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CAM11             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_CAM12             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_CAM13             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_CAM14             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_CAM15             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_CAM16             "Cámara actual. Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o las flechas y confirme con Enter. Todos los ajustes referentes a cámara son individuales y válidos para la cámara actual"
+    IDOSD_VIEW_FULL         "Pantalla completa. Para cambiar el modo de visualización pulse los botones con flechas y confirme con Enter"
+    IDOSD_VIEW_XXX          "Modo multi ventanas: Todas iguales. Para cambiar el modo de visualización pulse las flechas y confirme con Enter"
+    IDOSD_VIEW_1PX          "Modo 1 plus: Una grande y las otras pequeñas. Para cambiar el modo de visualización pulse las flechas y confirme con Enter"
+    IDOSD_TIMER_MO          "Horario de ésta cámara para el lunes. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_TU          "Horario de ésta cámara para el martes. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_WE          "Horario de ésta cámara para el miércoles. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_TH          "Horario de ésta cámara para el jueves. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_FR          "Horario de ésta cámara para el viernes. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_SA          "Horario de ésta cámara para el sábado. Para cambiar el horario pulse Enter"
+    IDOSD_TIMER_SU          "Horario de ésta cámara para el domingo. Para cambiar el horario pulse Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "Fecha actual. Para cambiar la fecha actual pulse Enter ahora"
+    IDOSD_CLOCK_TIME        "Hora actual. Para cambiar la hora actual pulse Enter ahora"
+    IDOSD_ALARM_MODE        "Modo de grabación actual. Para cambiarlo pulse Enter|Elija con las flechas entre 'Alarma/Pre-Alarma' o 'Detección de Movimiento', y confirme con Enter, ahora elija con las flechas: 'Si' y confirme con Enter. ATENCIÓN! TODAS las imágenes de ÉSTA cámara grabadas anteriormente serán definitivamente borradas cuando modifique ésta opción!"
+    IDOSD_TCPIP             "Dirección IP actual (extensión LAN), ésta identifica al equipo en un LAN para hacer conexiones y transferir las imágenes en vivo a otra PC. Para cambiarla pulse Enter, introduzca la nueva dirección IP (ejemplo: 192.168.001.048) y confirme con Enter. Además es obligatorio dar un valor a la máscara de subred (por favor, consulte su manual)"
+    IDOSD_ISDN_MSN          "MSN actual (extensión ISDN), con éste número se pueden hacer conexiones y transferir las imágenes en vivo a otra PC a través de ISDN (línea telefónica digital). Para cambiarlo pulse Enter, introduzca el nuevo número y confirme con Enter"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "Para cambiar su seña, por favor pulse Enter"
+    IDOSD_CONFIG_PIN        "Para entrar al Menú de Configuración, por favor pulse Enter e introduzca su seña"
+    IDOSD_OPTION_END        "Para salir del Menú de Configuración, por favor pulse Enter ahora"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "Sensibilidad de la máscara adaptáble de la cámara actual. Con nivel alto, se detectarán mas rápidamente las áreas con movimientos constantes (ej. movimiento de árboles por el viento) enmascarándolas e ignorándolas Para cambiarla pulse Enter|Elija el nivel con las flechas y confirme con Enter"
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "Sensibilidad de detección de la cámara actual. Con sensibilidad alta se detectarán hasta movimientos mínimos. Para cambiarla pulse Enter|Elija la sensibilidad con las flechas y confirme con Enter"
+    IDOSD_OPTION_EXIT       "ATENCIÓN! Si presiona ahora Enter, el equipo se apagará inmediátamente !!!"
+    IDOSD_CHANGE_CAMNAME    "Nombre de la cámara actual. Pulse Enter para cambiar éste nombre o seleccione otra cámara pulsando los números y luego Enter para cambiar su nombre"
+    IDOSD_OPTION_LOCK       "Para bloquear el monitor pulse Enter ahora. Las imágenes de las cámaras no serán mostradas en el monitor, pero el equipo continuará grabando normalmente. Para desbloquearlo debe dar la seña"
+    IDOSD_OPTION_RTE        "Para mostrar el listado de eventos, por favor pulse Enter ahora"
+    IDOSD_ALARM_DELETE      "Para borrar las imágenes de alarma actuales pulse Enter ahora"
+    IDOSD_NO_PRINTER        "No hay impresora. Para elegir una impresora pulse Enter ahora|Seleccione una impresora con las flechas y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "Brillo de la cámara actual. Para cambiar el brillo de ésta cámara pulse Enter|Elija el brillo con las flechas y confirme con Enter"
+    IDOSD_COLOR_CONTRAST    "Contraste de la cámara actual. Para cambiar el contraste de ésta cámara pulse Enter|Elija el contraste con las flechas y confirme con Enter"
+    IDOSD_COLOR_SATURATION  "Saturación de la cámara actual. Para cambiar la saturación de ésta cámara pulse Enter|Elija la saturación con las flechas y confirme con Enter"
+    IDOSD_CAM1              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM2              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM3              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM4              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM5              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM6              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM7              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM8              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM9              "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+    IDOSD_CAM10             "Cámara actual (parte superior derecha del display del panel). Para elegir otra cámara como actual pulse simplemente el botón con el número correpondiente a la cámara, o elija con las flechas y confirme con Enter. Todos los ajustes referentes a cámara son válidos individualmente para cada cámara"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_PRINTER1          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER2          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER3          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER4          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER5          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER6          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER7          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER8          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER9          "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER10         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER11         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER12         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER13         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER14         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER15         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+    IDOSD_PRINTER16         "Para elegir otra impresora pulse Enter|Utilice las flechas para seleccionar otra impresora y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE2         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE3         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE4         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE6         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE7         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE8         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE9         "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE10        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE11        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE12        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE13        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE14        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE15        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+    IDOSD_LANGUAGE16        "Para escoger otro idioma pulse Enter ahora|Utilice las flechas para seleccionar otro idioma y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "Para archivar las imágenes de alarma actuales pulse Enter ahora"
+    IDOSD_SUSPECT_SEARCH    "Para mostrar las primeras imágenes sospechosas pulse Enter ahora"
+    IDOSD_SUSPECT_DELETE    "Para borrar todas las imágenes sospechosas pulse Enter ahora"
+    IDOSD_SUBNETMASK        "Máscara de subred actual (extensión LAN). Éste valor es obligatorio si fue asignado un valor a la Dirección IP (por favor, consulte su manual). Para cambiarla pulse Enter, introduzca el nuevo valor (ejemplo: 255.255.255.000) y confirme con Enter"
+    IDOSD_ACTIVITY_BACKUP   "Para empezar a archivar imágenes, por favor pulse Enter ahora"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "Para activar/desactivar las lineas en cruz indicadoras de movimiento pulse Enter|Elija con las flechas y confirme con Enter"
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "Para cambiar su seña, por favor pulse Enter"
+    IDOSD_TIMER_ONOFF       "Grabación de alarmas: siempre o sólo durante la agenda de las cámaras. Para cambiar pulse Enter|Seleccione con las flechas y confirme con Enter"
+    IDOSD_OPTION_UPDATE     "Por favor, pulse Enter para empezar la actualización de software. ATENCIÓN! Cuando se termine la actualización, el equipo se reiniciará automáticamente!!!"
+    IDOSD_TIME_ZONE         "Para cambiar la zona horaria pulse Enter, busque con las flechas y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "Por favor, presione Enter para mostrar la tabla de estadísticas"
+    IDOSD_NET_NAME          "Nombre actual del %s. Para cambiar el nombre del %s, pulse Enter por favor"
+    IDOSD_GATEWAY           "Dirección de la puerta de enlace actual (Gateway, extensión LAN). Para cambiar la dirección de la puerta de enlace actual pulse Enter. Éste valor es opcional"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "Modo de visualización de ésta salida de video. Para cambiar el modo, por favor pulse Enter|Utilice las flechas y confirme con Enter. Si selecciona modo 'Secuencia', entonces también fije en el menú 'Tiempo a ser mostrada' individualmente el periodo de tiempo que será mostrada ésta cámara en la salida de video"
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "Modo de visualización de ésta salida de video. Para cambiar el modo, por favor pulse Enter|Utilice las flechas y confirme con Enter. Si selecciona modo 'Secuencia', entonces también fije en el menú 'Tiempo a ser mostrada' individualmente el periodo de tiempo que será mostrada ésta cámara en la salida de video"
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "Modo de visualización de ésta salida de video. Para cambiar el modo, por favor pulse Enter|Utilice las flechas y confirme con Enter. Si selecciona modo 'Secuencia', entonces también fije en el menú 'Tiempo a ser mostrada' individualmente el periodo de tiempo que será mostrada ésta cámara en la salida de video"
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "Modo de visualización de ésta salida de video. Para cambiar el modo, por favor pulse Enter|Utilice las flechas y confirme con Enter. Si selecciona modo 'Secuencia', entonces también fije en el menú 'Tiempo a ser mostrada' individualmente el periodo de tiempo que será mostrada ésta cámara en la salida de video"
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "Periodo de tiempo en segundos que la cámara actual será mostrada en la salida de vídeo con modo 'Secuencia', antes de mostrar la siguiente. Para cambiar el periodo de tiempo pulse Enter|Elija el tiempo con las flechas y confirme con Enter. Éste valor es individual"
+    IDOSD_ACOUSTIC_ALARM    "Por favor, pulse Enter para Activar/desactivar la alarma por audio|Elija con las flechas y confirme con Enter"
+    IDOSD_SHOW_ALARMLIST    "Por favor, pulse Enter para mostrar la lista de alarmas"
+    IDOSD_MD_DRAW_MASK      "Por favor, pulse Enter para crear o modificar la máscara permanente de la cámara actual. Aquí podrá tambien ver la máscara adaptable"
+    IDOSD_ALARM_OUTPUT_ON_OFF "Para activar o desactivar la salida de alarma, por favor pulse Enter. Éste es un valor global|Elija con las flechas y confirme con Enter"
+    IDOSD_ALARM_CALLNUMBER1 "Actual primer número a llamar en caso de alarma (extensión LAN o ISDN). Éste número es global y válido para todas la cámaras. Para cambiarlo pulse Enter (por favor, consulte su manual)|Introduzca el número y confirme con Enter. Si no desea cambiarlo, pulse simplemente las flechas"
+    IDOSD_ALARM_CALLNUMBER2 "Actual segundo número a llamar en caso de alarma (extensión LAN o ISDN). Éste número es global y válido para todas la cámaras. Para cambiarlo pulse Enter (por favor, consulte su manual)|Introduzca el número y confirme con Enter. Si no desea cambiarlo, pulse simplemente las flechas"
+    IDOSD_ALARM_CALLNUMBER3 "Actual tercer número a llamar en caso de alarma (extensión LAN o ISDN). Éste número es global y válido para todas la cámaras. Para cambiarlo pulse Enter (por favor, consulte su manual)|Introduzca el número y confirme con Enter. Si no desea cambiarlo, pulse simplemente las flechas"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "Para continuar el archivamiento de imágenes pulse Enter ahora. Éste proceso continúa directamente a partir del tiempo en que terminó el archivamiento anterior"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "Ha ocurrido un error durante el archivamiento de imágenes.\nPor favor reemplace el medio por otro vacío y empiece el proceso de archivamiento de nuevo"
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "Archivamiento de imágenes completado satisfactoriamente.\nPor favor, ya puede retirar el medio\n"
+    IDS_NO_RECORD_FOUND     "No hay más imágenes para esta función.\n"
+    IDS_BACKUP_CHECK_CD     "Por favor coloque un medio vacío en la grabadora.\nSe necesitarán algunos segundos para identificar el medio.\nEl medio será expulsado cuando finalice el proceso de archivamiento.\n\nArchivar:\ndesde %s\nhasta %s\n\nCámara(s):\n%s"
+    IDS_BACKUP_FORMATTED    "El medio fue preparado satisfactoriamente para el archivamiento.\nPor favor espere..."
+    IDS_BACKUP_FAILED       "Ha ocurrido un error durante el proceso de archivamiento.\nPor favor reemplace el medio por otro vacío y vuelva a iniciar el proceso de archivamiento"
+    IDS_BACKUP_COPYING      "Copiando el Software de lectura de imágenes.\nPor favor espere..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "No se puede leer el medio.\nPor favor, reemplace el medio por otro vacío y vuelva a empezar el proceso de archivamiento"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "Por favor, introduzca la fecha y hora de inicio desde cuando desea archivar imágenes"
+    IDS_EXPORT_TIME_OK      "Fecha y hora correctas"
+    IDS_EXPORT_TIME_BAD     "Error de formato fecha/hora"
+    IDS_EXPORT_INPUT_STARTTIME "Inserte día/hora inicio"
+    IDS_EXPORT_INPUT_ENDTIME "Inserte dia/hora final"
+    IDS_EXPORT_STARTTIME_FORMAT "Desde: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "Hasta: __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "Introduzca las cámaras"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "Nº.: __"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "Por favor, introduzca la fecha y hora final hasta cuando desea archivar imágenes"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "Por favor, indique la(s) cámara(s) de la(s) cual(es) desea archivar imágenes"
+    IDS_BACKUP_COMPLETE2    "Archivamiento de imágenes finalizado satisfactoriamente"
+    IDS_IMAGE_MANIPULATED   "Esta imágen ha sido manipulada o está dañada!"
+    IDS_BACKUP_DISC_FULL    "No queda espacio en el medio para otro archivamiento.\nPor favor, cambie el medio por otro vacío e inicie el proceso de archivamiento de nuevo"
+    IDS_BACKUP_NO_EMPTY_CD  "El medio no está vacío.\nPor favor, reemplace el medio por otro vacío y reinicie el proceso de archivamiento"
+    IDS_VERSION             "Versión"
+    IDS_HELP_SELECT_HOST    "Seleccione el %s de la lista %s y confirme pulsando Enter"
+    IDS_SET_DHCP_FAILED     "DHCP state is not changed."
+    IDS_BACKUP_NODATA       "No hay imágenes disponibles"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "Hay demasiadas imágenes para archivar.\nPor favor, reduzca el periodo de tiempo o la cantidad de cámaras"
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "No hay imágenes en este periodo de tiempo.\n"
+    IDS_BACKUP_FORMAT2      "Por favor, espere que el medio esté preparado para archivar imágenes.\nÉsto puede durar unos minutos.\n\nTiempo transcurrido: %s"
+    IDS_BACKUP_FINALIZE2    "Las imágenes fueron archivadas corréctamente.\nTerminando la sesión de archivamiento...\nÉsto puede tomar algunos minutos.\n\nTiempo transcurrido: %s"
+    IDS_READ_FAILED         "La imágen no puede ser mostrada"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "Por favor, inserte un medio vacío en la grabadora.\nSe necesitarán algunos segundos para la identificación del medio.\nEl medio será expulsado al finalizar el proceso de archivamiento.\n\nImágenes de alarma archivadas\ndesde %s\nhasta %s\n"
+    IDS_SEARCH_DATE_FAILED  "Fecha de búsqueda errónea"
+    IDS_SEARCH_TIME_FAILED  "Hora de búsqueda errónea"
+    IDS_TIME_FORMAT_HHMM    "hhmm"
+    IDS_TIMER_ON            "Siempre activo"
+    IDS_TIMER_OFF           "Agenda activada"
+    IDS_INPUT_DISK          "Inserte el disquete %d"
+    IDS_UPDATE_SUCCESS      "Actualización fue efectuada"
+    IDS_UPDATE_RUNNING      "Actualizando..."
+    IDS_UPDATE_FAILED       "Error al copiar"
+    IDS_UPDATE_WRONG_CRC    "Chequeo de suma erróneo"
+    IDS_UPDATE_WRONG_DISK   "Disquete actualización falso"
+    IDS_UPDATE_DISKFAILED   "Error de lectura de disquete"
+    IDS_UPDATE_NO_UPDATE_DISK "Disquete no insertado o falso"
+    IDS_UPDATE_WRONG_OEM    "Versión OEM errónea"
+    IDS_UPDATE_WRONG_BUILD  "Número de versión erróneo"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "Zona horaria fue cambiada"
+    IDS_SET_TIME_ZONE_FAILED "Zona horaria no fue cambiada"
+    IDS_HELP_SET_TIME_ZONE  "Por favor, introduzca el código de zona horaria (véalo en su documentación)"
+    IDS_STATISTIC_STARTTIME "Inició grabar"
+    IDS_STATISTIC_DURATION  "Días:"
+    IDS_STATISTIC_PICCOUNTER "Imágenes:"
+    IDS_EXPORT_NO_CAMERA    "Error, no hay cámara"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "El nombre fue cambiado"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "No se pudo cambiar el nombre"
+    IDS_SELECT_HOST         "Lista %s"
+    IDS_HOSTLIST_EMPTY      "La lista %s está vacía"
+    IDS_INVALID_SERIAL      "Número de licencia errónea"
+    IDS_DISCONNECT          "Desconectar"
+    IDS_SET_GATEWAY_SUCCESS "Puerta de enlace fue cambiada"
+    IDS_SET_GATEWAY_FAILED  "Puerta de enlace no cambiada"
+    IDS_HELP_INPUT_GATEWAY  "Por favor, introduzca la dirección de la puerta de enlace (Gateway) y confirme con Enter. ATENCIÓN! El equipo se reiniciará automáticamente al confirmar la nueva dirección de la puerta de enlace! Si no desea cambiarla, simplemente pulse las flechas"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "Cámara actual"
+    IDS_VOUT_MODE_SEQUENCER "Secuencia"
+    IDS_VOUT_MODE_ACTIVITY  "Movimiento"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "Calculadas la fecha y hora final corréctamente.\nPulse Enter para aceptar la fecha y hora final calculadas para asi utilizar toda la capacidad del medio.\n\nArchivar:\ndesde %s\n\nCámara(s): \n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "Calculadas la fecha y hora final.\nÉstas indican la imágen más reciente de todas las cámaras seleccionadas. La cantidad de imágenes de las cámaras seleccionadas no cubren toda la capacidad del medio. Pulse Enter para empezar el archivamiento o reinicie el proceso seleccionando una fecha más antigua o más cámaras.\n\nUtilización del medio: aprox. %s %%\n\nArchivamiento:\ndesde %s\n\nCámara(s):\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "Por favor espere...\nCalculando la fecha y hora final optimales que cubran toda la capacidad del medio para el archivamiento de imágenes"
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "No hay imágenes a partir de la fecha/hora elegidas. Por favor elija otra fecha/hora más antiguas"
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "Error al calcular la fecha y hora final.\nPor favor, elija la fecha y hora final para archivar imágenes %s\n\nCámara(s):\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "Cálculo erróneo"
+    IDS_EXTEND              "Avanzado..."
+    IDS_HELP_EXTEND         "Por favor, pulse Intro para editar la lista de %s o para crear nuevas entradas"
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "Número a llamar fue definido"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "Número a llamar no definido"
+    IDS_FORMAT_IP           ":___.___.___.___"
+    IDS_FORMAT_TEL          ":________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "Por favor, indique la(s) cámara(s) de la(s) cual(es) desea archivar imágenes"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_ACTIVITY  "Muestra las alarmas de detección de movimiento (+) en la lista, por favor active también los números de las respectivas cámaras de las cuales desea ver las alarmas"
+    IDC_ALARMLIST_EXTERN1   "Muestra las alarmas del primer conector externo (Ext1) de alarma en la lista, por favor active también los números de las respectivas cámaras de las cuales desea ver las alarmas"
+    IDC_ALARMLIST_EXTERN2   "Muestra las alarmas del segundo conector externo (Ext2) de alarma en la lista, por favor active también los números de las respectivas cámaras de las cuales desea ver las alarmas"
+    IDC_ALARMLIST_IMAGE     "Abre por cada cámara una sola nueva ventana de repoducción, para mostrar la imágen de la alarma seleccionada. En ésta(s) nueva(s) ventana(s) se pueden usar todas las funciones de reproducción"
+    IDC_ALARMLIST_UP2       "Muestra la lista de alarmas del día siguiente"
+    IDC_ALARMLIST_DOWN2     "Muestra la lista de alarmas del día anterior"
+    IDC_ALARMLIST_AUDIO     "Muestra las alarmas de audio en la lista, por favor seleccione también las cámaras de las cuales desea ver las alarmas de audio"
+    IDC_STATISTIC_OK        "Cierra estadísticas"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Borra la máscara permanente"
+    IDC_MD_INVERT           "Invierte la máscara permanente"
+    IDC_MD_SHOW_ADAPTIVE    "Muestra la máscara adaptable sobre la imágen. Ésta no puede ser modificada porque se construye automáticamente, pero puede modificar la sensibilidad en el menú 'Máscara adaptable'"
+    IDC_ALARMLIST_OK        "Cierra la lista de alarmas"
+    ID_MD_OK                "Cierra el editor de máscara permanente"
+    IDC_HOSTS_OK            "Cierra el diálogo de la lista de %s"
+    IDC_HOSTS_NEW           "Crear una nueva entrada en la lista de %s"
+    IDC_HOSTS_DELETE        "Borrar de la lista la entrada de %s"
+    IDC_HOSTS_DISPLAY_NAME  "Nombre del %s remoto actualmente seleccionado en la lista de %s. Pulse aquí para editar esta entrada"
+    IDC_HOSTS_DISPLAY_IP    "Dirección IP del %s remoto actualmente seleccionado en la lista de %s. Pulse aquí para editar esta entrada"
+    IDC_HOSTS_UP_START      "Ir al principio de la lista de %s"
+    IDC_HOSTS_UP            "Muestra la siguiente página de la lista de %s"
+    IDC_HOSTS_DOWN          "Muestra la página anterior de la lista de %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "Ir hacia el final de la lista de %s"
+    IDC_ALARMLIST_UP        "Muestra la página anterior de la lista de alarmas"
+    IDC_ALARMLIST_DOWN      "Muestra la siguiente página de la lista de alarmas"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "Imprimir la lista de alarmas del día actualmente seleccionado"
+    IDC_ALARMLIST_CAM0      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM1      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM2      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM3      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM4      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM5      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM6      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM7      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM8      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM9      "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM10     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM11     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM12     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM13     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+    IDC_ALARMLIST_CAM14     "Número de cámara. Active un botón y presione tambien el tipo de alarma: A, Ext1, Ext2 o L para mostrar en la lista las alarmas de la cámara con éste número. Puede también activar varios botones y alarmas al mismo tiempo"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "La fecha y hora de inicio indicadas son de la imágen encontrada más antígua de todas las cámaras seleccionadas. Aqui puede indicar otra fecha y hora posteriores de inicio para archivar las imágenes de la(s) cámara(s) deseada(s)"
+    IDS_BACKUP_MULTI        "La cantidad de imágenes encontradas entre la fecha y hora de inicio y final indicadas es más grande que la capacidad del medio y será necesario más de uno para poder archivarlas todas. Por favor, empiece a archivar con la fecha y hora calculadas, despues elija el menú 'Continuar archivando'. El segundo proceso continuará diréctamente despues de éste.\n\nArchivamiento:n\desde %s\n\nCámara(s):\n%s"
+    IDS_ALARMCALL_EVENT_A   "A"
+    IDS_ALARMCALL_EVENT_A1  "M, Ext1"
+    IDS_ALARMCALL_EVENT_A2  "M, Ext2"
+    IDS_ALARMCALL_EVENT_A12 "M,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "Ext1"
+    IDS_ALARMCALL_EVENT_2   "Ext2"
+    IDS_ALARMCALL_EVENT_12  "Ext1, Ext2"
+    IDS_ALARMCALL_EVENT_OFF "Off"
+    IDS_EXPANSION_CODE_SUCCESS "Código de extensión aceptado"
+    IDS_EXPANSION_CODE_FAILED "Código de extensión erróneo"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "El archivamiento continúa directamente después del anterior.\n\nArchivamiento anterior:\ndesde %s\nhasta %s\n\nArchivamiento actual:\ndesde %s\n\nCámara(s):\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "Éste archivamiento continúa directamente después del anterior.\n\nArchivamiento anterior:\ndesde %s\nhasta %s\n\nArchivamiento actual:\ndesde %s\n\nCámara(s):\n%s\n\nPor favor espere...\nCalculando la fecha y hora final óptimas para el archivamiento de imagenes..."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "El archivamiento continúa directamente después del anterior.\n\nArchivamiento anterior:\ndesde %s\nhasta %s\n\nArchivamiento actual:\ndesde %s\n\nCámara(s):\n%s\n\nCálculo de la fecha y hora final realizado. La cantidad de imágenes no cubre toda la capacidad del medio. Pulse Enter para empezar el archivamiento.\n\nMedio utilización: aprox. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "El archivamiento continúa directamente después del anterior.\n\nArchivamiento anterior:\ndesde %s\nhasta %s\n\nArchivamiento actual:\ndesde %s\n\nCámara(s):\n%s\n\nCálculo de fecha y hora final realizado. Pulse Enter para aceptarlo y asi utilizar la capacidad completa del medio"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "Define para la cámara actual cual detector causará una llamada de alarma: 'M=detección de movimiento', 'Ext1=primer detector externo', 'Ext2=segundo detector externo', o una combinación de éstos. Ésta definición es individual para cada cámara. Para cambiar, pulse Enter|Elija con las flechas y confirme con Enter"
+    IDOSD_EXPANSION_CODE    "Para introducir el código de extensión, por favor pulse Enter"
+    IDOSD_EXPORT_SETTINGS   "Por favor, pulse Enter para exportar/archivar la configuración del sistema. En su manual puede ver los puntos de la configuración que se exportan"
+    IDOSD_IMPORT_SETTINGS   "Por favor, pulse Enter para importar/introducir al sistema una configuración exportada anteriormente. En su manual puede ver los puntos de la configuración que serán importados. ATENCIÓN! Al terminar éste proceso, el equipo se reiniciará automáticamente!!!"
+    IDOSD_OPTION_INFO       "Para mostrar la información del sistema, presione Enter ahora"
+    IDOSD_CAMERA_RESOLUTION "Para cambiar la resolución de la imágen de TODAS las cámaras presione Enter. Una resolución alta dará como resultado imágenes de mejor calidad y ficheros de mayor tamaño|Elija la resolución utilizando las flechas y confirme con Enter"
+    IDOSD_CAMERA_COMPRESSION 
+                            "Para cambiar la compresión de la imágen de la cámara ACTUAL, presione Enter. Una compresión alta dará como resultado imágenes de baja calidad y ficheros de menor tamaño|Elija la compresión utilizando las flechas y confirme con Enter"
+    IDOSD_CAMERA_FPS        "To change the image framerate of CURRENT camera, please press Enter now.|Choose the image framerate with arrow keys and press Enter to select"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "El archivamiento continúa directamente después del anterior.\n\nArchivamiento anterior:\ndesde %s\nhasta %s\n\nArchivamiento actual:\ndesde %s\n\nCámara(s):\n%s.\n\nCálculo de fecha/hora final erróneo.\nPor favor, introduzca la fecha y hora final hasta cuando desea archivar imágenes"
+    IDS_POWEROFF_PRESSED    "Apagar el equipo"
+    IDS_RESET_PRESSED       "Reiniciar el equipo"
+    IDS_EXPORT_NO_IMAGES    "Ninguna imágen encontrada"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "Ninguna imágen encontrada entre la fecha y hora de inicio y la fecha y hora final. Por favor introduzca nueva fecha y hora final.\nPulse Enter para aceptar la fecha y hora final calculadas y asi utilizar óptimamente toda la capacidad del medio\n\nArchivamiento:\ndesde %s\n\nCámara(s):\n%s"
+    IDS_BACKUP_REQUEST_MB   "No hay imágenes entre la fecha/hora de inicio y final. Por favor, introduzca nueva fecha/hora finales.\nLa fecha/hora final calculadas indican la imágen encontrada más reciente de todas las cámaras. La cantidad de imágenes no cubre toda la capacidad del medio. Presione Enter para comenzar el archivamiento\n\nUtilización del medio: aprox. %s %%\n\nArchivamiento:\nde %s\n\nCámara(s):\n%s"
+    IDS_EXIT_ENTRY          ">Finalizar el programa"
+    IDS_YES                 "Sí"
+    IDS_NO                  "No"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "Utilice las flechas para elegir entre 'Si' y 'No' y confirme con Enter. ATENCIÓN! TODAS las imágenes que ÉSTA cámara haya grabado anteriormente serán borradas difinitivamente si confima con 'Sí'"
+    IDS_OK                  "Aceptar"
+    IDS_CANCEL              "Cancelar"
+    IDS_ERROR               "Error"
+    IDS_FILE_SYSTEM_ACCESS  "Para instalar el nuevo Driver se requieren derechos de Supervisor.\nPor favor, introduzca su seña"
+
+    IDS_BACKUP_TITLE        "Archivar imágenes"
+    IDS_KEYBOARD_UPPER_KEYS "QWERTYUIOPASDFGHJKLZXCVBNM¨Ñ´;.?"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KEYBOARD_LOWER_KEYS "qwertyuiopasdfghjklzxcvbnm`ñ´,."
+    IDS_SET_COMPUTERNAME_FAILED "Computer name is not changed."
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "El medio detectado no está vacío.\nSólo se puede realizar el archivamiento de imágenes a medios vacíos. El medio tiene que ser borrado antes de archivar imágenes.\nSeleccione la opción del menú 'Borrar medio: Sí' y pulse Enter.\nEl medio será borrado antes de empezar el archivamiento de imagenes"
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "Borrando medio: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "Preparando el archivamiento de imágenes.\n\nProgreso: %d %%\n\nTiempo transcurrido: %s"
+    IDS_BACKUP_ACDC_START   "Por favor coloque un medio en la grabadora.\nPuede tardar algunos segundos en identificar el medio.\nEl medio será expulsado después de terminado el proceso de archivamiento"
+    IDS_ERASE_MEDIUM        "Borrar el medio"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "Por favor coloque un medio en la grabadora, o para cancelar el proceso simplemente pulse las flechas"
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "El medio detectado no está vacío. ¿Borrar el medio antes del archivamiento de imágenes?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "Esperando medio"
+    IDS_EXPORT_INSERT_MEDIUM "Insertar medio"
+    IDS_EXPORT_ERASE_MEDIUM "Medio detectado"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "Para archivar las imágenes se require de un medio vacío.\nPor favor, borre el medio o coloque otro vacío"
+    IDS_FOUND_NEW_DEVICE    "Detectado nuevo equipo USB externo:"
+    IDS_REMOVED_DEVICE      "Equipo USB externo desconectado:"
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "El medio detectado no está vacío.\nPara usar la capacidad completa del medio, éste tiene que ser borrado antes del archivamiento de imágenes, sino el archivamiento sólo usará el espacio libre disponible.\nSeleccione la opción del menú y pulse Enter"
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "No hay espacio libre suficiente en el medio para archivar imágenes.\nPor favor, borre el medio o use otro vacío"
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "Borrando el medio externo\n\nTiempo: %s"
+    IDS_BACKUP_RUNNING_UP   "Progreso de archivamiento: %d %%\n\nTiempo: %s"
+    IDS_IMPORT_SUCCESS      "Importación realizada"
+    IDS_IMPORT_FAILED       "Fallo en la importación"
+    IDS_IMPORT_RUNNING      "Importando ..."
+    IDS_CAMERA_FIX          "Cámara fija inmóbil"
+    IDS_BACKUP_STOP_RUNNING_UP_ACDC 
+                            "La preparación para el archivamiento de imágenes fue cancelada por el usuario"
+    IDS_BACKUP_STOP_BACKUP_ACDC 
+                            "El proceso de archivamiento fue cancelado por el usuario"
+    IDS_BACKUP_PREPARE_TO_STOP_BACKUP_ACDC 
+                            "\nEl archivamiento de imágenes será cancelado.\nPor favor, espere...\n"
+    IDS_AUDIO_RECORDING_A   "A"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_REALTIME          "Por favor, presione Enter para Activar/desactivar la reproducción en tiempo real|Elija con las flechas y confirme con Enter"
+    IDOSD_CAMERA_PTZ_TYPE   "Para cambiar el tipo de ésta cámara, por favor presione Enter|Elija el tipo con las flechas y confirme con Enter"
+    IDOSD_CAMERA_PTZ_ID     "Para cambiar la ID (Identificación) de la cámara, por favor presione Enter|Por favor, introduzca el nuevo número y confirme con Enter"
+    IDOSD_CAMERA_PTZ_COMPORT 
+                            "Para cambiar el puerto serial COM (de control de la cámara), presione Enter|Elija con las flechas y confirme con Enter"
+    IDOSD_AUDIO_CHANGE_CAMNR 
+                            "Actual cámara asignada para audio. La grabación de audio puede ser asignada a una sola cámara al mismo tiempo... Para cambiar la asignación, por favor presione Enter|Elija una cámara con las flechas y confirme con Enter"
+    IDOSD_AUDIO_THRESHOLD   "Volumen mínimo de audio. Define el nivel mínimo que debe haber en la cámara asignada a audio, a partir del cual la grabación será activada... Para modificarlo, por favor presione Enter|Elija el nuevo valor con las flechas y confirme con Enter"
+    IDOSD_AUDIO_SENSITIVITY "Amplificación de audio. Define el nivel de amplificación de la señal auditiva de entrada en el micrófono a ser grabada... Para modificarla, por favor presione Enter|Elija el nuevo valor con las flechas y confirme con Enter"
+    IDOSD_AUDIO_VOLUME      "Volumen de salida. Define el volumen de salida de audio por los altavoces... Para ajustar el volumen, por favor presione Enter|Elija el nuevo valor con las flechas y confirme con Enter"
+    IDOSD_AUDIO_RECORD_MODE "Actual(es) tipo(s) de alarma de la cámara asignada para audio. Define cual tipo de detector activa la grabación de ésta cámara: L=Level (cuando sobrepasa el nivel mínimo de audio), M=detección de movimiento, Ext=detector externo, o una combinación de ellos... Para modificarlo pulse Enter|Elija con las flechas y confirme con Enter"
+    IDOSD_AUDIO_LISTEN_IN   "Para activar/desactivar el escuchar en vivo, por favor presione Enter|Elija con las flechas y confirme con Enter"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_AUDIO_RECORDING_L   "L"
+    IDS_AUDIO_RECORDING_EXT "Ext"
+    IDS_AUDIO_RECORDING_AL  "M, L"
+    IDS_AUDIO_RECORDING_AEXT "M, Ext"
+    IDS_AUDIO_RECORDING_LEXT "L, Ext"
+    IDS_AUDIO_RECORDING_ALEXT "M,L,Ext"
+END
+
+STRINGTABLE 
+BEGIN
+    IDOSD_DNS               "Switches DHCP on or off"
+END
+
+#endif    // Spanish (Modern) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESP)
+#ifdef _WIN32
+LANGUAGE 10, 3
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.esp\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

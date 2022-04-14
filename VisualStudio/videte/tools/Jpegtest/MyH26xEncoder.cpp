@@ -1,0 +1,35 @@
+// MyH26xEncoder.cpp: implementation of the CMyH26xEncoder class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "jpegtest.h"
+#include "MyH26xEncoder.h"
+#include "CDecodeThread.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CMyH26xEncoder::CMyH26xEncoder(CDecodeThread* pDecoder)
+: CH26xEncoder(TRUE)
+{
+	m_pDecoder = pDecoder;
+}
+//////////////////////////////////////////////////////////////////////
+CMyH26xEncoder::~CMyH26xEncoder()
+{
+
+}
+//////////////////////////////////////////////////////////////////////
+void CMyH26xEncoder::OnEncodedFrame()
+{
+	m_pDecoder->OnEncodedFrame();
+}
+

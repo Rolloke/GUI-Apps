@@ -1,0 +1,14 @@
+<PredefinedItems>
+	<!-- @true;values:true,false -->
+	<!-- @false;values:true,false -->
+	<!-- @systemtype;values:SB2100,SB3000,FISHPAC,SB7300 -->
+	<!-- @ssvsource;values:HSO,SERIAL,FILE;help:"Surface sound velocity source" -->
+	<!-- @dvlsource;values:NONE,PD4,PD5 -->
+	<!-- @hp_arrayconfig;values:NONE,FLATARRAY,VARRAY,CIRULARARRAY -->
+	<!-- @vme_parsertype;values:NONE,HRP,HEADING,SSV,TRANSPARENT,DVLPD5,DVLPD4,HRP_HDT -->
+	<!-- @protocol;values:NONE,TSS1,HDT,SSVAM,TRANSPARENT,DVLPD4,DVLPD5,PASHR,HDMS_THOMSON -->
+	<!-- @type;values:NONE,HSO,WCI -->
+	<!-- @clienttype;values:2100,3000,RAW,FISHPAC -->
+	<!-- @flag;values:NONE,CONNECTONCREATE,CONNECTONDEMAND -->
+	<!-- @source;values:NONE,COM,VME,FILE,SIM,TCPIP -->
+</PredefinedItems>

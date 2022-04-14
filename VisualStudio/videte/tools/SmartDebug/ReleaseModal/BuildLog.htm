@@ -1,0 +1,68 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=Windows-1252">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: SmartDebug, Configuration: ReleaseModal|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "g:\project\TestPrograms\SmartDebug\ReleaseModal\RSP000021.rsp" with contents
+[
+/O1 /Op /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "_USRDLL" /D "MODAL_DLG" /D "_WINDLL" /D "_UNICODE" /D "UNICODE" /D "_ATL_STATIC_REGISTRY" /Gm /EHsc /MD /GS /Yu"stdafx.h" /Fp"ReleaseModal/SmartDebug.pch" /Fo"ReleaseModal/" /Fd"ReleaseModal/vc70.pdb" /W3 /c /Wp64 /Zi /TP
+.\CopyCSVDlg.cpp
+.\Connect.cpp
+.\AddIn.cpp
+]
+Creating command line "cl.exe @g:\project\TestPrograms\SmartDebug\ReleaseModal\RSP000021.rsp /nologo"
+Creating temporary file "g:\project\TestPrograms\SmartDebug\ReleaseModal\RSP000022.rsp" with contents
+[
+/OUT:"ReleaseModal/SmartDebug.dll" /INCREMENTAL /NOLOGO /DLL /DEF:".\AddIn.def" /SUBSYSTEM:WINDOWS /IMPLIB:"ReleaseModal/SmartDebug.lib" /MACHINE:X86  kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib
+.\releasemodal\AddIn.obj
+.\releasemodal\Connect.obj
+.\releasemodal\CopyCSVDlg.obj
+.\releasemodal\stdafx.obj
+.\releasemodal\AddIn.res
+]
+Creating command line "link.exe @g:\project\TestPrograms\SmartDebug\ReleaseModal\RSP000022.rsp"
+Creating temporary file "g:\project\TestPrograms\SmartDebug\ReleaseModal\BAT000023.bat" with contents
+[
+@echo off
+cd .\releasemodal
+regsvr32 /s "SmartDebug.dll"
+]
+Creating command line "g:\project\TestPrograms\SmartDebug\ReleaseModal\BAT000023.bat"
+Creating temporary file "g:\project\TestPrograms\SmartDebug\ReleaseModal\BAT000024.bat" with contents
+[
+@echo off
+regsvr32 /s /c "g:\project\testprograms\smartdebug\releasemodal\SmartDebug.dll"
+if errorlevel 1 goto VCReportError
+goto VCEnd
+:VCReportError
+echo Project : error PRJ0019: A tool returned an error code from "Performing registration"
+exit 1
+:VCEnd
+]
+Creating command line "g:\project\TestPrograms\SmartDebug\ReleaseModal\BAT000024.bat"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+CopyCSVDlg.cpp
+Generating Code...
+Compiling...
+Connect.cpp
+AddIn.cpp
+Generating Code...
+Linking...
+Registering output...
+Performing registration
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://g:\project\TestPrograms\SmartDebug\ReleaseModal\BuildLog.htm"
+SmartDebug - 0 error(s), 0 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>

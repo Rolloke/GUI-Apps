@@ -1,0 +1,105 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="C:\Programme\Analog Devices\VisualDSP\system\linker_map_ss1.xsl"?>
+<!DOCTYPE DOCUMENT SYSTEM "C:\Programme\Analog Devices\VisualDSP\system\linker_map.dtd">
+<DOCUMENT>
+<LINKPROJECT name="p0" orig_file_name="$COMMAND_LINE_OUTPUT_FILE" id='012E5110'>
+<FILE_NAME><![CDATA[C:\Blackfin\ADSP\Code\BootLedC\Debug\LoaderFile.dxe]]></FILE_NAME>
+<MEMORY id='012E51F8' name='MEM_PROGRAM_RAM' start_address='0xffa00000' end_address='0xffa13fff' type='' qualifier='RAM' width='0x8' words_used='0xae' words_unused='0x13f52'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='012E4F58' name='program_ram' type='SHT_PROGBITS' start_address='0xffa00000' word_size='0xae'>
+<INPUT_SECTIONS>
+<INPUT_SECTION id='012FCE80' name='program' start_address='0xffa00000' size='0x38'><INPUT_FILE><![CDATA[C:\Blackfin\ADSP\Code\BootLedC\Debug\Blink.doj]]></INPUT_FILE>
+<SYMBOL name='program' address='0xffa00000' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='START' address='0xffa00000' size='0x38' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='blink_loop' address='0xffa00032' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN1691_0' address='0xffa00036' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='START.END' address='0xffa00038' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN1692_1' address='0xffa00038' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+</INPUT_SECTION>
+<INPUT_SECTION id='012FD1A8' name='program' start_address='0xffa00038' size='0x76'><INPUT_FILE><![CDATA[C:\Blackfin\ADSP\Code\BootLedC\Debug\main.doj]]></INPUT_FILE>
+<SYMBOL name='program' address='0xffa00038' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.epctext' address='0xffa00038' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='_test' address='0xffa00038' size='0x76' binding='GLOBAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._P1L2147483649' address='0xffa0003e' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN1' address='0xffa0003e' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN2' address='0xffa0004c' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN3' address='0xffa0005a' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._P1L3' address='0xffa00068' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN4' address='0xffa00068' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN5' address='0xffa00076' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN6' address='0xffa0007e' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._P1L5' address='0xffa00084' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN7' address='0xffa00084' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN8' address='0xffa00092' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._P1L6' address='0xffa00096' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN9' address='0xffa00096' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._P1L2147483647' address='0xffa000a4' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.LN10' address='0xffa000a4' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.epctext.end' address='0xffa000ae' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='._test.end' address='0xffa000ae' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+</INPUT_SECTION>
+</INPUT_SECTIONS>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5288' name='MEM_DATA' start_address='0xff903000' end_address='0xff907fff' type='' qualifier='RAM' width='0x8' words_used='0x8' words_unused='0x4ff8'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='01727650' name='data' type='SHT_PROGBITS' start_address='0xff903000' word_size='0x8'>
+<INPUT_SECTIONS>
+<INPUT_SECTION id='017278F0' name='data1' start_address='0xff903000' size='0x8'><INPUT_FILE><![CDATA[C:\Blackfin\ADSP\Code\BootLedC\Debug\main.doj]]></INPUT_FILE>
+<SYMBOL name='_bAN' address='0xff903000' size='0x1' binding='GLOBAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='data1' address='0xff903000' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.epcbss' address='0xff903000' size='0x1' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.epcbss.end' address='0xff903001' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='_nCount.0' address='0xff903004' size='0x4' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.test.statics' address='0xff903004' size='0x4' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+<SYMBOL name='.test.statics.end' address='0xff903008' size='0x0' binding='LOCAL'><DEMANGLED_NAME><![CDATA[]]></DEMANGLED_NAME></SYMBOL>
+</INPUT_SECTION>
+</INPUT_SECTIONS>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5318' name='MEM_DATA2' start_address='0xff902000' end_address='0xff902fff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x1000'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='017D5070' name='constdata' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E53A8' name='MEM_STACK' start_address='0xff901400' end_address='0xff901fff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0xc00'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='018F9890' name='stack' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5498' name='MEM_SYSSTACK' start_address='0xff900000' end_address='0xff9013ff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x1400'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='018FC6E8' name='sysstack' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5A80' name='MEM_PCI_IO' start_address='0xff807f00' end_address='0xff807fff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x100'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='018865E0' name='pci_io' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5B88' name='MEM_ARGV' start_address='0xff807e00' end_address='0xff807eff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x100'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='018FA8A8' name='argv' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5C90' name='MEM_HEAP' start_address='0xff800000' end_address='0xff807dff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x7e00'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='018FA698' name='heap' type='SHT_NOBITS' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+<MEMORY id='012E5D98' name='MEM_L1_SCRATCH' start_address='0xffb00000' end_address='0xffb00fff' type='' qualifier='RAM' width='0x8' words_used='0x0' words_unused='0x1000'>
+<OUTPUT_SECTIONS>
+<OUTPUT_SECTION id='0184B730' name='voldata' type='SHT_NULL' start_address='0x0' word_size='0x0'>
+</OUTPUT_SECTION>
+</OUTPUT_SECTIONS>
+</MEMORY>
+</LINKPROJECT>
+</DOCUMENT>

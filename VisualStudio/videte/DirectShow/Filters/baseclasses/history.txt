@@ -1,0 +1,3 @@
+08.10.03 RKE - DirectShow BaseClasses for Filters wurde in Idip und DTS aufgenommen.
+			   Diese Basisklassen implementieren Standardklassen für die einfache
+			   Implementierung von Source-, Transform- und Renderfiltern. 

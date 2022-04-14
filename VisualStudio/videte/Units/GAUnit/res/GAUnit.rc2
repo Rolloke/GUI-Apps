@@ -1,0 +1,24 @@
+//
+// GAUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+GARNY_VERSION(12, 5, 15, 53, "12/05/99 , 15:53\0", // @AUTO_UPDATE
+		   "GAUnit.exe\0",	// exe name
+		   "\0",	// product name
+		   "GAUnit\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////

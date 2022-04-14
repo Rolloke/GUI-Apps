@@ -1,0 +1,33 @@
+SMSUnit.rc@POPUP@IDR_MAINFRAME.POPUP1@@@@&Datei@&File@0@
+SMSUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_FILE_RESET@@@@&Reset\tF9@&Reset\tF9@0@
+SMSUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP1.ID_APP_EXIT@@@@&Beenden@&Exit@0@
+SMSUnit.rc@POPUP@IDR_MAINFRAME.POPUP2@@@@&Ansicht@&View@0@
+SMSUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_VIEW_STATUS_BAR@@@@S&tatusleiste@&Statusbar@0@
+SMSUnit.rc@POPUP@IDR_MAINFRAME.POPUP3@@@@&?@&?@0@
+SMSUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP3.ID_APP_ABOUT@@@@Inf&o über...@Ab&out...@0@
+SMSUnit.rc@STRING@IDR_MAINFRAME@@@@SMSUnit@SMSUnit@0@
+SMSUnit.rc@STRING@AFX_IDS_APP_TITLE@@@@SMSUnit@SMSUnit@0@
+SMSUnit.rc@STRING@AFX_IDS_IDLEMESSAGE@@@@Bereit@Ready@0@
+SMSUnit.rc@STRING@ID_INDICATOR_EXT@@@@ER@ER@0@
+SMSUnit.rc@STRING@ID_INDICATOR_CAPS@@@@UF@UF@0@
+SMSUnit.rc@STRING@ID_INDICATOR_NUM@@@@NUM@NUM@0@
+SMSUnit.rc@STRING@ID_INDICATOR_SCRL@@@@RF@RF@0@
+SMSUnit.rc@STRING@ID_INDICATOR_OVR@@@@ÜB@OVR@0@
+SMSUnit.rc@STRING@ID_INDICATOR_REC@@@@MA@MA@0@
+SMSUnit.rc@STRING@ID_APP_ABOUT@@@@Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo@Shows program information, version and copyright.\nInfo@0@
+SMSUnit.rc@STRING@ID_APP_EXIT@@@@Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden@Exits application; asks for storing documents.\nExit@0@
+SMSUnit.rc@STRING@ID_NEXT_PANE@@@@Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt@Switch to the next window pane\nNext Pane@0@
+SMSUnit.rc@STRING@ID_PREV_PANE@@@@Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt@Switch back to the previous window pane\nPrevious Pane@0@
+SMSUnit.rc@STRING@ID_VIEW_STATUS_BAR@@@@Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten@Show or hide the status bar\nToggle StatusBar@0@
+SMSUnit.rc@STRING@AFX_IDS_SCSIZE@@@@Ändert die Fenstergröße.@Changes the window size.@0@
+SMSUnit.rc@STRING@AFX_IDS_SCMOVE@@@@Ändert die Position des Fensters.@Change the window position@0@
+SMSUnit.rc@STRING@AFX_IDS_SCMINIMIZE@@@@Verkleinert das Fenster zu einem Symbol.@Reduce the window to an icon@0@
+SMSUnit.rc@STRING@AFX_IDS_SCMAXIMIZE@@@@Vergrößert das Fenster zu voller Größe.@Enlarge the window to full size@0@
+SMSUnit.rc@STRING@AFX_IDS_SCNEXTWINDOW@@@@Wechselt zum nächsten Dokumentfenster.@Switch to the previous document window@0@
+SMSUnit.rc@STRING@AFX_IDS_SCPREVWINDOW@@@@Wechselt zum vorherigen Dokumentfenster.@Switch to the previous document window@0@
+SMSUnit.rc@STRING@AFX_IDS_SCCLOSE@@@@Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf.@Close the active window and prompts to save the documents@0@
+SMSUnit.rc@STRING@AFX_IDS_SCRESTORE@@@@Stellt das Fenster in seiner normalen Größe wieder her.@Restore the window to normal size@0@
+SMSUnit.rc@STRING@AFX_IDS_SCTASKLIST@@@@Aktiviert die Task-Liste.@Activate Task List@0@
+SMSUnit.rc@MENUITEM@IDR_MAINFRAME.POPUP2.ID_SHOW_LOG@@@@Zeige &Protokoll\tCTRL+ALT+P@Show &protocol\tCTRL+ALT+P@0@
+SMSUnit.rc@STRING@IDS_FAILED_LOAD_CAPI@@@@Capi2032.dll konnte nicht geladen werden@cannot load capi2032.dll@0@
+SMSUnit.rc@STRING@IDS_CAPI_NOT_CREATED@@@@Capi-Objekt konnte nicht angelegt werden; Info %i@cannot create capi object; info %i@0@

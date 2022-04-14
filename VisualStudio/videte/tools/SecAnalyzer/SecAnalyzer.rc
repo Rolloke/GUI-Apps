@@ -1,0 +1,549 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+// Generated Help ID header file
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.hm"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SecAnalyzer.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.deu\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Aktualisieren",              ID_FILE_NEW
+        MENUITEM "Ö&ffnen...\tStrg+O",          ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Drucken...\tStrg+P",         ID_FILE_PRINT
+        MENUITEM "Sei&tenansicht",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Drucker&einrichtung...",      ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "last file",                   ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "&Ansicht"
+    BEGIN
+        MENUITEM "&Symbolleiste",               ID_VIEW_TOOLBAR
+        MENUITEM "S&tatusleiste",               ID_VIEW_STATUS_BAR
+        MENUITEM "&farbiger Hintergrund",       ID_COLORED_BACKGROUND
+    END
+    POPUP "E&xtras"
+    BEGIN
+        MENUITEM "&Logview",                    ID_VIEW_WORDPAD
+        MENUITEM "&Zeitfelder leeren",          ID_CLEAR_TIMES
+        MENUITEM "&Musterfelder leeren",        ID_CLEAR_PATTERNS
+        MENUITEM SEPARATOR
+        MENUITEM "Zeitschaltuhren &Test",       ID_DO_TIMER_TEST
+        MENUITEM SEPARATOR
+        MENUITEM "&Datei löschen",              ID_DELETE_FILE
+        MENUITEM SEPARATOR
+        MENUITEM "Alarmaufzeichnung ab&spielen", ID_ALARM_PLAYBACK
+        MENUITEM "Abspielen &anhalten",         ID_STOP_PLAYER
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Inf&o über ...",              ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "Dummy1"
+    BEGIN
+        MENUITEM "calculated time",             ID_POPUP_TIME
+        MENUITEM SEPARATOR
+        MENUITEM "&Startzeit",                  ID_START_POINT
+        MENUITEM "&Endzeit",                    ID_END_POINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Aktualisieren",              ID_FILE_NEW
+        MENUITEM "&Abbrechen",                  ID_NOP
+    END
+    POPUP "Dummy2"
+    BEGIN
+        MENUITEM "calculated name",             ID_POPOP2_NAME
+        MENUITEM "calculated data",             ID_POPUP2_DATA
+        MENUITEM SEPARATOR
+        MENUITEM "Aus&schließen",               ID_POPUP_EXCLUDE
+        MENUITEM "&Einschließen",               ID_POPUP_INCLUDE
+        MENUITEM SEPARATOR
+        MENUITEM "&Aktualisieren",              ID_FILE_NEW
+        MENUITEM "&Abbrechen",                  ID_NOP
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F5,          ID_FILE_NEW,            VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_TIMER_TEST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 279
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_TEST_PROGRESS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    CG_IDD_SECANALYZERBAR, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 477
+        TOPMARGIN, 4
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TIMER_TEST DIALOG DISCARDABLE  0, 0, 286, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Zeitschaltuhren Prüfer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_TIMER_LIST,7,22,137,125,LBS_SORT | LBS_MULTIPLESEL | 
+                    LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "DateTimePicker1",IDC_TIMERTEST_DATEPICKER,
+                    "SysDateTimePick32",DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | 
+                    WS_TABSTOP,155,7,100,15
+    CONTROL         "ein &Tag",IDC_TEST_ONE_DAY,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,155,30,40,10
+    CONTROL         "eine &Woche",IDC_TEST_ONE_WEEK,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,155,41,55,10
+    CONTROL         "ein &Monat",IDC_TEST_ONE_MONTH,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,155,52,47,10
+    CONTROL         "ein &Jahr",IDC_TEST_ONE_YEAR,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,155,63,41,10
+    CONTROL         "&fünf Jahre",IDC_TEST_FIVE_YEARS,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,155,73,47,10
+    CONTROL         "Mittag/Mitternacht anzeigen",IDC_TIMER_TEST_SHOW_MIDS,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,155,95,
+                    105,10
+    DEFPUSHBUTTON   "OK",IDOK,173,154,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,229,154,50,14
+    LTEXT           "Zeitschaltuhren",IDC_TXT_TIMERS,19,11,50,8
+    PUSHBUTTON      "alle &deselektieren",IDC_DESELECT_ALL,7,154,63,14
+    PUSHBUTTON      "alle &selektieren",IDC_SELECT_ALL,83,154,63,14
+END
+
+IDD_TEST_PROGRESS_DIALOG DIALOG DISCARDABLE  0, 0, 186, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Zeitschaltuhren Test"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Progress1",IDC_TEST_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,7,34,172,14
+    LTEXT           "Testzeit:",IDC_TXT_TEST_TIME,7,14,28,8
+    LTEXT           "...",IDC_LABEL_TEST_TIME,52,14,127,8
+END
+
+CG_IDD_SECANALYZERBAR DIALOGEX 0, 0, 479, 76
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Auswahl",IDC_GRP_SELECT,3,4,67,66
+    LISTBOX         IDC_KNOW_GROUPS,6,15,62,53,LBS_SORT | LBS_OWNERDRAWFIXED | 
+                    LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Zeit Auswahl",IDC_GRP_TIME,82,4,125,66
+    LTEXT           "Startzeit",IDC_TXT_START_TIME,88,16,26,8
+    EDITTEXT        IDC_START_TIME,120,14,24,12,ES_AUTOHSCROLL,0,
+                    HIDC_START_TIME
+    EDITTEXT        IDC_START_DATE,162,14,37,12,ES_AUTOHSCROLL
+    CONTROL         "ganze Zeit",IDC_START_DEFAULT,"Button",
+                    BS_AUTORADIOBUTTON,123,27,49,10
+    CONTROL         "letzter Reset",IDC_LAST_RESET,"Button",
+                    BS_AUTORADIOBUTTON,123,36,55,10
+    CONTROL         "vor letzter Aktion",IDC_RELATIVE_END,"Button",
+                    BS_AUTORADIOBUTTON,123,45,69,10
+    LTEXT           "Endzeit",IDC_TXT_END_TIME,88,57,24,8
+    EDITTEXT        IDC_END_TIME,120,55,24,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_END_DATE,162,55,37,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "leeren",ID_CLEAR_TIMES,88,33,28,14,0,0,HID_CLEAR_TIMES
+    GROUPBOX        "Muster Auswahl",IDC_GRP_PATTERN,213,4,177,45
+    LTEXT           "Einschl.",IDC_TXT_INCLUDE,217,15,26,8
+    EDITTEXT        IDC_INCLUDE_PATTERN,248,13,128,12,ES_AUTOHSCROLL,0,
+                    HIDC_INCLUDE_PATTERN
+    LTEXT           "Ausschl.",IDC_TXT_EXCLUDE,217,33,28,8
+    EDITTEXT        IDC_EXCLUDE_PATTERN,248,31,128,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "X",ID_CLEAR_PATTERNS,380,12,6,34,0,0,HID_CLEAR_PATTERNS
+    GROUPBOX        "Details",IDC_GRP_DETAILS,402,4,54,35
+    CONTROL         "Stufe 1",IDC_SHOW_LEVEL_1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,408,15,44,10
+    CONTROL         "Stufe 2",IDC_SHOW_LEVEL_2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,408,23,42,13
+    PUSHBUTTON      "Aktualisieren",ID_FILE_NEW,408,43,46,14
+    LTEXT           "alte Dateien",IDC_TXT_OLD_FILES,241,52,56,8,0,
+                    WS_EX_RIGHT
+    EDITTEXT        IDC_NUM_OLD_FILES,303,50,26,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "",IDC_TXT_DOES_MILLI,338,50,26,10
+    LTEXT           "1 ...",IDC_NUM_FILES,257,64,19,8
+    LTEXT           "Datei/en gelesen",IDC_NUM_FILES2,277,64,35,8
+    RTEXT           "...",IDC_NUM_LINES_READ,313,64,26,8
+    CONTROL         "Zeilen",IDC_TXT_NUM_LINES,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,352,64,36,8
+    CONTROL         "automatisch",IDC_AUTO_UPDATE,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFTTEXT | WS_TABSTOP,389,63,48,10
+    EDITTEXT        IDC_UPDATE_INTERVALL,445,61,25,12,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "SecAnalyzer\nSheet\nLogFile\n LogFiles (*.log,*.lgz)\n.log;.lgz\nSecAnalyzer\n SecAnalyer LogFile\n"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Analyzer"
+    AFX_IDS_IDLEMESSAGE     "F5 zum Aktualisieren"
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt, zu dem Sie Hilfe wünschen."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "ER"
+    ID_INDICATOR_CAPS       "UF"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "RF"
+    ID_INDICATOR_OVR        "ÜB"
+    ID_INDICATOR_REC        "MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Aktualisieren\nAktualisieren"
+    ID_FILE_OPEN            "Öffnet ein bestehendes Dokument.\nÖffnen"
+    ID_FILE_CLOSE           "Schließt das aktive Dokument.\nSchließen"
+    ID_FILE_SAVE            "Speichert das aktive Dokument.\nSpeichern"
+    ID_FILE_SAVE_AS         "Speichert das aktive Dokument unter neuem Namen.\nSpeichern unter"
+    ID_FILE_PAGE_SETUP      "Ändert die Druckoptionen.\nSeite einrichten"
+    ID_FILE_PRINT_SETUP     "Ändert den Drucker und die Druckoptionen.\nDruckereinrichtung"
+    ID_FILE_PRINT           "Druckt das aktive Dokument.\nDrucken"
+    ID_FILE_PRINT_PREVIEW   "Zeigt ganze Seiten an.\nSeitenansicht"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Zeigt Programm-Informationen, Versionsnummer und Copyright an.\nInfo"
+    ID_APP_EXIT             "Verläßt die Anwendung; fragt, ob Dokumente gespeichert werden sollen.\nBeenden"
+    ID_HELP_INDEX           "Öffnet die Hilfefunktion.\nHilfethemen"
+    ID_HELP_FINDER          "Listet die Hilfethemen auf.\nHilfethemen"
+    ID_HELP_USING           "Zeigt Anweisungen zum Umgang mit der Hilfe an.\nHilfe"
+    ID_CONTEXT_HELP         "Zeigt Hilfe zu angeklickten Schaltflächen, Menüs und Fenstern an.\nHilfe"
+    ID_HELP                 "Zeigt Hilfe zum aktuellen Vorgang oder Befehl an.\nHilfe"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE2       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE3       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE4       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE5       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE6       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE7       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE8       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE9       "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE10      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE11      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE12      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE13      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE14      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE15      "Öffnet dieses Dokument."
+    ID_FILE_MRU_FILE16      "Öffnet dieses Dokument."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Wechselt zum nächsten Fensterausschnitt.\nNächster Ausschnitt"
+    ID_PREV_PANE            "Springt zum vorherigen Fensterausschnitt zurück.\nVorheriger Ausschnitt"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Teilt das aktive Fenster in Ausschnitte.\nTeilen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Löscht die Markierung.\nLöschen"
+    ID_EDIT_CLEAR_ALL       "Löscht alles.\nAlles löschen"
+    ID_EDIT_COPY            "Kopiert die Markierung und überträgt sie in die Zwischenablage.\nKopieren"
+    ID_EDIT_CUT             "Entfernt die Markierung und überträgt sie in die Zwischenablage.\nAusschneiden"
+    ID_EDIT_FIND            "Sucht den angegebenen Text.\nSuchen"
+    ID_EDIT_PASTE           "Fügt den Inhalt der Zwischenablage ein.\nEinfügen"
+    ID_EDIT_REPEAT          "Wiederholt die letzte Aktion.\nWiederholen"
+    ID_EDIT_REPLACE         "Ersetzt einen bestimmten Text durch einen anderen.\nErsetzen"
+    ID_EDIT_SELECT_ALL      "Markiert das gesamte Dokument.\nAlles markieren"
+    ID_EDIT_UNDO            "Macht die letzte Aktion rückgängig.\nRückgängig"
+    ID_EDIT_REDO            "Wiederholt die vorher rückgängig gemachte Aktion.\nWiederherstellen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Blendet die Symbolleiste ein oder aus.\nSymbolleiste ein-/ausschalten"
+    ID_VIEW_STATUS_BAR      "Blendet die Statusleiste ein oder aus.\nStatusleiste ein-/ausschalten"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Ändert die Fenstergröße."
+    AFX_IDS_SCMOVE          "Ändert die Position des Fensters."
+    AFX_IDS_SCMINIMIZE      "Verkleinert das Fenster zu einem Symbol."
+    AFX_IDS_SCMAXIMIZE      "Vergrößert das Fenster zu voller Größe."
+    AFX_IDS_SCNEXTWINDOW    "Wechselt zum nächsten Dokumentfenster."
+    AFX_IDS_SCPREVWINDOW    "Wechselt zum vorherigen Dokumentfenster."
+    AFX_IDS_SCCLOSE         "Schließt das aktive Fenster und fordert zur Dokumentspeicherung auf."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Stellt das Fenster in seiner normalen Größe wieder her."
+    AFX_IDS_SCTASKLIST      "Aktiviert die Task-Liste."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Beendet die Seitenansicht.\nSeitenansicht beenden"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_START_TIME          "Anfangszit  SS:MM or ~Sek.\nstart time SS:MM or ~Sek."
+    IDC_END_TIME            "Endzeit SS:MM\nEndzeit SS:MM"
+    IDC_INCLUDE_PATTERN     "einschließlich ..., durch Leerzeichen getrennt\neinschließlich ..."
+    IDC_EXLUDE_PATTERN      "ausschließlich ..., durch Leerzeichen getrennt\nausschließlich ..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_DELETE_FILE          "löschen der Datei\nlöschen der Datei"
+    ID_VIEW_FILE            "Anzeige mit WordPad\nAnzeige mit WordPad"
+    ID_CLEAR_TIMES          "Zeitfelder leeren\n&Zeitfelder leeren"
+    ID_START_POINT          "Startzeit setzen\nStartzeit setzen"
+    ID_END_POINT            "Endeit setzen\nEndzeit setzen"
+    ID_POPUP_TIME           "Zeitpunkt unter der Maus\nZeitpunkt unter der Maus"
+    ID_POPOP2_NAME          "Name dieses Bereiches"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LAST_RESET          "seit letztem Reset, wenn vorhanden\nseit letztem Reset"
+    IDC_UPDATE_INTERVALL    "Aktualisierung (in Sekunden)\nAktualisierung (in Sek.)"
+    IDC_RELATIVE_END        "vor letzter Aktion\nvor letzter Aktion"
+    IDC_START_DATE          "Startdatum TT.MM oder Tag.Monat.Jahr\nStartdatum TT.MM  oder Tag.Monat.Jahr"
+    IDC_END_DATE            "Enddatum TT.MM oder Tag.Monat.Jahr\nEnddatum TT.MM oder Tag.Monat.Jahr"
+    IDC_START_DEFAULT       "ganze Zeit anzeigen\nganze Zeit anzeigen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_POPUP_INCLUDE        "Einschließen\nEinschließen"
+    ID_POPUP_EXCLUDE        "Ausschließen\nAusschließen"
+    ID_POPUP2_DATA          "Minnimum Maximum Durchschnitt"
+    ID_CLEAR_PATTERNS       "Musterfelder leeren#nMusterfelder leeren"
+    IDS_REALLY_DELETE       "Soll %s wirklich gelöscht werden ?"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\SecAnalyzer.ico"
+IDR_SECANATYPE          ICON    DISCARDABLE     "res\\SecAnalyzer.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CG_ID_VIEW_SECANALYZERBAR 
+                            "Show or hide SecAnalyzerBar\nToggle SecAnalyzerBar"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\SecAnalyzer.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#include "l.deu\afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

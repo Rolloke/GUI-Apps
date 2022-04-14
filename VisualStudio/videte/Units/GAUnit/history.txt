@@ -1,0 +1,45 @@
+
+12.5.99 >>> UpdateVersion um 15:53 <<<
+	GF	Bugfix: Wenn die Bytes einzeln reinpurzeln, wurden die nach dem Trennzeichen
+				folgenden Daten (Error no deviding character.)
+				und die Checksum nicht korrekt erkannt
+
+5.3.99 >>> UpdateVersion um 9:46 <<<
+	GF	Getestet und ehemalige CRS232 entfernt
+
+3.3.99 >>> UpdateVersion um 11:14 <<<
+
+3.3.99 >>> UpdateVersion um 11:01 <<<
+	GF	Auf WK_RS232 umgestellt
+
+24.2.99 >>> UpdateVersion um 14:43 <<<
+
+30.6.98 >>> UpdateVersion um 8:45 <<<
+	GF	Schnittstellen ab COM10 koennen auch unter NT geoeffnet werden
+
+11.5.98 >>> UpdateVersion um 13:11 <<<
+	UF	ExceptionHandler in InitDebugger
+26.3.98 >>> UpdateVersion um 16:12 <<<
+
+	UF  oemgui.dll anstelle idip.dll
+20.3.98 >>> UpdateVersion um 11:25 <<<
+
+	UF	CWK_Profile wegen NT
+24.2.98 >>> UpdateVersion um 14:36 <<<
+	UWE	RS232 Thread repariert, alle Daten OK
+		geringe Systembelastung, alles auch unter NT
+23.2.98 >>> UpdateVersion um 12:42 <<<
+
+23.2.98 >>> UpdateVersion um 9:59 <<<
+23.02.98
+	UWE	GA Dead Lock beim Beenden behoben.
+12.02.98
+	UWE	GA Unit fuer NT angepasst
+		neues Trace fuer alle Hex Daten	standard ein
+		neues Trace fuer klare Daten
+4.2.98 >>> UpdateVersion um 11:12 <<<
+
+3.2.98 >>> UpdateVersion um 13:33 <<<
+	UWE Alle gelesenen Daten werden in c:\log\gaunit.dat
+		protokolliert.
+		Alarme werden mit Nummern protokolliert.

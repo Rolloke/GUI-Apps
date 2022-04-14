@@ -1,0 +1,22 @@
+//
+// DVPROCESS.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+#include "WK_Version.h"
+
+WK_VERSION(3, 0, 3, 838, "3.0.3.838a\0", // @AUTO_UPDATE
+"DVPROCESS.exe\0",	// exe name
+"idip! DV 1.00\0",	// product name
+"DVPROCESS application\0",	// product description
+"1.0\0",		// general product version
+"1.000\0"	// real version
+)
+
+/////////////////////////////////////////////////////////////////////////////

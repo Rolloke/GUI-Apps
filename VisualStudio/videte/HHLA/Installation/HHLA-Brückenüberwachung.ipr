@@ -1,0 +1,53 @@
+[Language]
+LanguageSupport0=0009
+
+[OperatingSystem]
+OSSupport=0000000000010000
+
+[Data]
+CurrentMedia=HHLA
+set_mifserial=
+ProductName=HHLA-Brückenüberwachung
+CurrentComponentDef=Default.cdf
+set_dlldebug=No
+AppExe=D:\HHLA\RemoteControl.exe
+DevEnvironment=Microsoft Visual C++ 6
+set_mif=No
+set_testmode=No
+Instructions=Instructions.txt
+EmailAddresss=
+SummaryText=
+Department=
+Type=Database Application
+Author=
+HomeURL=
+InstallRoot=D:\Project\HHLA\Installation
+set_level=Level 3
+InstallationGUID=234c9290-c0c9-11d2-8cc2-004005a11e32
+Version=1.00.000
+set_miffile=Status.mif
+set_args=
+set_maxerr=50
+Notes=Notes.txt
+CurrentFileGroupDef=Default.fdf
+set_dllcmdline=
+set_warnaserr=No
+Copyright=
+set_preproc=
+Category=
+CurrentPlatform=
+set_compileb4build=No
+set_crc=Yes
+set_maxwarn=50
+Description=Description.txt
+CompanyName=w+k VideoCommunication
+CurrentLanguage=English
+
+[MediaInfo]
+mediadata0=Default/Media\Default
+mediadata1=HHLA/Media\HHLA
+
+[General]
+Type=INSTALLMAIN
+Version=1.10.000
+

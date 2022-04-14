@@ -1,0 +1,205 @@
+/*
+** LDF for ADSP-BF533.
+** 
+** This LDF defines an example layout for a system which uses only
+** the available L1 SRAM. It does not assume the presence of any
+** external memory. See below for memory map descriptions.
+** 
+** There are a number of configuration options that can be specified
+** either by compiler flags, or by linker flags directly. The options are:
+** 
+** 
+** Memory map.
+** 
+** The known memory spaces are as follows:
+** 
+** Internal Memory:
+** 0xFFE0 0000 - 0xFFFF FFFF		Core MMR registers (2MB)
+** 0xFFC0 0000 - 0xFFDF FFFF		System MMR registers (2MB)
+** 0xFFB0 1000 - 0xFFBF FFFF		Reserved
+** 0xFFB0 0000 - 0xFFB0 0FFF		Scratch SRAM (4K)
+** 0xFFA1 4000 - 0xFFAF FFFF		Reserved
+** 0xFFA0 0000 - 0xFFA1 3FFF		Instruction SRAM (82K)
+** 0xFF90 8000 - 0xFF9F FFFF		Reserved
+** 0xFF90 0000 - 0xFF90 7FFF		Data Bank B SRAM (32K)
+** 0xFF80 8000 - 0xFF8F FFFF		Reserved
+** 0xFF80 0000 - 0xFF80 7FFF		Data Bank A SRAM (32K)
+** 0xEF00 0000 - 0xFF7F FFFF		Reserved
+**
+** External Memory:
+** 0x2040 0000 - 0xEEFF FFFF		Reserved
+** 0x2030 0000 - 0x203F FFFF		Async Mem Bank 3 (1M)
+** 0x2020 0000 - 0x202F FFFF		Async Mem Bank 2 (1M)
+** 0x2010 0000 - 0x201F FFFF		Async Mem Bank 1 (1M)
+** 0x2000 0000 - 0x200F FFFF		Async Mem Bank 0 (1M)
+** 0x0800 0000 - 0x1FFF FFFF		Reserved
+** 0x0000 0000 - 0x07FF FFFF		SDRAM (16M - 128M)
+*/
+
+ARCHITECTURE(ADSP-BF533)
+
+SEARCH_DIR( $ADI_DSP\Blackfin\lib )
+
+/* Moving to primIO means that we must always include the FileIO support,
+** so that printf() will work.
+*/
+
+#ifndef USE_FILEIO	/* { */
+#define USE_FILEIO 1
+#endif	/* } */
+
+#define MEMINIT
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBSMALL libsmall532y.dlb,
+#else
+#define LIBSMALL libsmall532.dlb,
+#endif	/* } */
+
+#ifdef M3_RESERVED	/* { */
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBM3 libm3res532y.dlb
+#define LIBDSP libdspm3res532y.dlb
+#define SFTFLT libsftflt532y.dlb
+#else
+#define LIBM3 libm3res532.dlb
+#define LIBDSP libdspm3res532.dlb
+#define SFTFLT libsftflt532.dlb
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBM3 libm3free532y.dlb
+#define LIBDSP libdsp532y.dlb
+#define SFTFLT libsftflt532y.dlb
+#else
+#define LIBM3 libm3free532.dlb
+#define LIBDSP libdsp532.dlb
+#define SFTFLT libsftflt532.dlb
+#endif	/* } */
+#endif	/* } */
+
+#ifdef IEEEFP	/* { */
+#define FPLIBS SFTFLT, LIBDSP
+#else
+#define FPLIBS LIBDSP, SFTFLT
+#endif	/* } */
+
+
+#ifdef CSYNC_DEFINED	/* { */
+#define LIBS LIBSMALL MEMINIT libc532y.dlb, LIBM3, libevent532y.dlb, libio532y.dlb, FPLIBS, libetsi532.dlb
+#else
+#define LIBS LIBSMALL MEMINIT libc532.dlb, LIBM3, libevent532.dlb, libio532.dlb, FPLIBS, libetsi532.dlb
+#endif	/* } */
+#if defined(USE_FILEIO) || defined(USE_PROFGUIDE)
+#ifdef CSYNC_DEFINED	/* { */
+$LIBRARIES = LIBS, librt_fileio532y.dlb;
+#else
+$LIBRARIES = LIBS, librt_fileio532.dlb;
+#endif	/* } */
+#else
+#ifdef CSYNC_DEFINED	/* { */
+$LIBRARIES = LIBS, librt532y.dlb;
+#else
+$LIBRARIES = LIBS, librt532.dlb;
+#endif	/* } */
+#endif	/* } */
+
+// Libraries from the command line are included in COMMAND_LINE_OBJECTS.
+
+
+$OBJECTS = $COMMAND_LINE_OBJECTS;
+
+MEMORY
+{
+#ifdef __EZKIT_LICENSE_RESTRICTION_Blackfin__ /* { */
+/* Instruction SRAM, 20K */
+MEM_PROGRAM_RAM { TYPE(RAM) START(0xFFA00000) END(0xFFA04FFF) WIDTH(8) }
+#else
+/* Instruction SRAM, 82K */
+MEM_PROGRAM_RAM { TYPE(RAM) START(0xFFA00000) END(0xFFA13FFF) WIDTH(8) }
+#endif /* } */
+/* Data - normal data, 12K */
+MEM_DATA	{ TYPE(RAM) START(0xFF903000) END(0xFF907FFF) WIDTH(8) }
+/* Data2 - const data, 4K */
+MEM_DATA2       { TYPE(RAM) START(0xFF902000) END(0xFF902FFF) WIDTH(8) } 
+/* Stack - 3K, supervisor mode */
+MEM_STACK       { TYPE(RAM) START(0xFF901400) END(0xFF901FFF) WIDTH(8) }
+/* Sysstack - 5K supervisor mode */
+MEM_SYSSTACK    { TYPE(RAM) START(0xFF900000) END(0xFF9013FF) WIDTH(8) }
+MEM_ARGV        { TYPE(RAM) START(0xFF807E00) END(0xFF807FFF) WIDTH(8) }
+MEM_HEAP        { TYPE(RAM) START(0xFF800000) END(0xFF807DFF) WIDTH(8) }
+MEM_L1_SCRATCH  { TYPE(RAM) START(0xFFB00000) END(0xFFB00FFF) WIDTH(8) }
+}
+
+PROCESSOR P0
+{
+    OUTPUT( $COMMAND_LINE_OUTPUT_FILE )
+
+    SECTIONS
+    {
+        program_ram
+        {
+            INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(program) $LIBRARIES(program) librt_fileio532.dlb(pci_io))
+            INPUT_SECTIONS( $OBJECTS(cplb) $LIBRARIES(cplb))
+            INPUT_SECTIONS( $OBJECTS(cplb_code) $LIBRARIES(cplb_code))
+            INPUT_SECTIONS( $OBJECTS(L1_code) $LIBRARIES(L1_code))
+        } >MEM_PROGRAM_RAM
+#ifdef MEMBSZ
+        bsz
+        {
+        	INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz) $LIBRARIES(bsz))
+        } >MEM_DATA
+        bsz_init
+        {
+        	INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS( $OBJECTS(bsz_init) $LIBRARIES(bsz_init))
+        } >MEM_DATA2
+#endif
+
+
+        data
+        {
+	    INPUT_SECTION_ALIGN(4)
+            INPUT_SECTIONS($OBJECTS(data1) $LIBRARIES(data1))
+	    INPUT_SECTIONS($OBJECTS(voldata) $LIBRARIES(voldata))
+            INPUT_SECTIONS( $OBJECTS(L1_data_a) $LIBRARIES(L1_data_a))
+            INPUT_SECTIONS( $OBJECTS(L1_data_b) $LIBRARIES(L1_data_b))
+        } >MEM_DATA
+
+        constdata
+        {
+	    INPUT_SECTION_ALIGN(4)
+	    INPUT_SECTIONS($OBJECTS(constdata) $LIBRARIES(constdata))
+        INPUT_SECTIONS( $OBJECTS(cplb_data) $LIBRARIES(cplb_data))
+        } >MEM_DATA2
+
+        stack
+        {
+            ldf_stack_space = .;
+            ldf_stack_end = ldf_stack_space + MEMORY_SIZEOF(MEM_STACK);
+        } >MEM_STACK
+
+        sysstack
+        {
+            ldf_sysstack_space = .;
+            ldf_sysstack_end = ldf_sysstack_space + MEMORY_SIZEOF(MEM_SYSSTACK);
+        } >MEM_SYSSTACK
+
+        heap
+        {
+            // Allocate a heap for the application
+            ldf_heap_space = .;
+            ldf_heap_end = ldf_heap_space + MEMORY_SIZEOF(MEM_HEAP) - 1;
+            ldf_heap_length = ldf_heap_end - ldf_heap_space;        
+        } >MEM_HEAP
+
+        argv
+        {
+            // Allocate argv space for the application
+            ldf_argv_space = .;
+            ldf_argv_end = ldf_argv_space + MEMORY_SIZEOF(MEM_ARGV) - 1;
+            ldf_argv_length = ldf_argv_end - ldf_argv_space;        
+        } >MEM_ARGV
+    }
+}

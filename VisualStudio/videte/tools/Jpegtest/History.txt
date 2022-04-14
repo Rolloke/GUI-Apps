@@ -1,0 +1,13 @@
+History von JpegTest
+--------------------
+
+
+05.08.99
+	- Beginn des Projektes.
+	- Testapplikation zu Performanceuntersuchung der intel Jpeglib
+		Ergebnis:
+					Decodieren: Resolution High -> ca. 12fps
+								Resolution Low  -> ca  29fps
+					Encoding:	Resolution High -> ca. 17fps
+								Resolution Low  -> ca  33fps
+								

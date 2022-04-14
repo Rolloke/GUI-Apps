@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="AudioSOM"
+	ProjectGUID="{B708BD6A-ACDE-4F92-ACE7-41B258648B49}"
+	SccProjectName="&quot;$/Project/Units/Audio/AudioSOM&quot;, PLDAAAAA"
+	SccAuxPath=""
+	SccLocalPath="."
+	SccProvider="MSSCCI:Microsoft Visual SourceSafe"
+	Keyword="MFCProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Debug"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;C:\DXSDK\Samples\C++\DirectShow\Filters&quot;;..\..\..\DirectShow\Filters\baseclasses;..\..\..\DirectShow"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				TreatWChar_tAsBuiltInType="FALSE"
+				UsePrecompiledHeader="3"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="CommonDirectShowDU.lib Strmiids.lib Strmbasd.lib Winmm.lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="..\..\..\DirectShow\LIB"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="FALSE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="Release"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="3"
+				AdditionalIncludeDirectories="&quot;C:\DXSDK\Samples\C++\DirectShow\Filters&quot;;..\..\..\DirectShow\Filters\baseclasses;..\..\..\DirectShow"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="2"
+				BufferSecurityCheck="FALSE"
+				TreatWChar_tAsBuiltInType="FALSE"
+				UsePrecompiledHeader="3"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="CommonDirectShowU.lib Strmiids.lib Strmbase.lib Winmm.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\..\DirectShow\LIB"
+				IgnoreDefaultLibraryNames="libcmt.lib"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="0"
+				EnableCOMDATFolding="0"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="FALSE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			<File
+				RelativePath=".\AudioSOM.cpp">
+			</File>
+			<File
+				RelativePath=".\AudioSOMDlg.cpp">
+			</File>
+			<File
+				RelativePath=".\ColoLine.cpp">
+			</File>
+			<File
+				RelativePath=".\stdafx.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\SynthesizerDlg.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath=".\AudioSOM.h">
+			</File>
+			<File
+				RelativePath=".\AudioSOMDlg.h">
+			</File>
+			<File
+				RelativePath=".\ColoLine.h">
+			</File>
+			<File
+				RelativePath=".\Resource.h">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating map file for help compiler..."
+						CommandLine="echo // Generated Help Map file.  Used by AudioSOM.HHP. &gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Commands (ID_* and IDM_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h ID_,HID_,0x10000 IDM_,HIDM_,0x10000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Prompts (IDP_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDP_,HIDP_,0x30000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Resources (IDR_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDR_,HIDR_,0x20000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Dialogs (IDD_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDD_,HIDD_,0x20000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Frame Controls (IDW_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h /a afxhh.h IDW_,HIDW_,0x50000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+"
+						Outputs="hlp\HTMLDefines.h"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating map file for help compiler..."
+						CommandLine="echo // Generated Help Map file.  Used by AudioSOM.HHP. &gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Commands (ID_* and IDM_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h ID_,HID_,0x10000 IDM_,HIDM_,0x10000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Prompts (IDP_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDP_,HIDP_,0x30000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Resources (IDR_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDR_,HIDR_,0x20000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Dialogs (IDD_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h IDD_,HIDD_,0x20000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo. &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+echo // Frame Controls (IDW_*) &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+makehm /h /a afxhh.h IDW_,HIDW_,0x50000 &quot;$(InputFileName)&quot; &gt;&gt; &quot;hlp\HTMLDefines.h&quot;
+"
+						Outputs="hlp\HTMLDefines.h"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\SynthesizerDlg.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			<File
+				RelativePath=".\res\AudioSOM.ico">
+			</File>
+			<File
+				RelativePath=".\AudioSOM.rc">
+			</File>
+			<File
+				RelativePath=".\res\AudioSOM.rc2">
+			</File>
+			<File
+				RelativePath=".\res\IMAGES.bmp">
+			</File>
+		</Filter>
+		<Filter
+			Name="HTML Help Files"
+			Filter="hhp;hhc;hhk;gif;jpg">
+			<File
+				RelativePath=".\hlp\AudioSOM.hhc">
+			</File>
+			<File
+				RelativePath=".\hlp\AudioSOM.hhk">
+			</File>
+			<File
+				RelativePath=".\hlp\AudioSOM.hhp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Making help file..."
+						CommandLine="start /wait hhc &quot;hlp\AudioSOM.hhp&quot;
+if not exist &quot;hlp\AudioSOM.chm&quot; goto :HelpError
+copy &quot;hlp\AudioSOM.chm&quot; &quot;$(OutDir)\AudioSOM.chm&quot;
+goto :HelpDone
+:HelpError
+echo hlp\AudioSOM.hhp(1) : error:Problem encountered creating help file
+echo.
+:HelpDone
+echo.
+"
+						AdditionalDependencies="hlp\HTMLDefines.h"
+						Outputs="$(OutDir)\$(ProjectName).chm"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Making help file..."
+						CommandLine="start /wait hhc &quot;hlp\AudioSOM.hhp&quot;
+if not exist &quot;hlp\AudioSOM.chm&quot; goto :HelpError
+copy &quot;hlp\AudioSOM.chm&quot; &quot;$(OutDir)\AudioSOM.chm&quot;
+goto :HelpDone
+:HelpError
+echo hlp\AudioSOM.hhp(1) : error:Problem encountered creating help file
+echo.
+:HelpDone
+echo.
+"
+						AdditionalDependencies="hlp\HTMLDefines.h"
+						Outputs="$(OutDir)\$(ProjectName).chm"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="HTML Help Topics"
+			Filter="htm;html">
+			<File
+				RelativePath=".\hlp\HIDD_ROOT_DIALOG.htm"
+				DeploymentContent="TRUE">
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\res\AudioSOM.manifest">
+		</File>
+		<File
+			RelativePath=".\ReadMe.txt">
+		</File>
+	</Files>
+	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="AudioSOM.rc"/>
+	</Globals>
+</VisualStudioProject>

@@ -1,0 +1,33 @@
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(18, 8, 16, 36, "18/8/97,16:36\0", // @AUTO_UPDATE */
+//
+// AKUUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+
+WK_VERSION(5, 0, 0, 0, "5.0.0.0 Debug\0", // @AUTO_UPDATE
+		   "AkuUnit.exe\0",	// exe name
+		   "AkuUnit\0",	// product name
+		   "AkuUnit application\0",	// product description
+		   "3.0\0",		// general product version
+		   "3.001\0"	// real version
+		   )

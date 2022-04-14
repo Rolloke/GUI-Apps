@@ -1,0 +1,36 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Install File
+  Source=D:\DTS\SantecNT.bmp
+  Destination=%MAINDIR%\WinNT.bmp
+  Flags=0000000010000010
+end
+remarked item: Install File
+  Source=D:\DV\Santec9x.bmp
+  Destination=%MAINDIR%\Win9x.bmp
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\DTS\Santec.jpg
+  Destination=%MAINDIR%\OEM.jpg
+  Flags=0000000010000010
+end

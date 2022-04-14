@@ -1,0 +1,24 @@
+//
+// COCOAPP.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+
+	   WK_VERSION(18, 8, 16, 37, "18/8/97,16:37\0", // @AUTO_UPDATE
+	   "CoCoUnit.exe\0",	// exe name
+	   "CoCoUnit\0",	// product name
+	   "CoCoUnit application\0",	// product description
+	   "3.0\0",		// general product version
+	   "3.001\0"	// real version
+	   )
+

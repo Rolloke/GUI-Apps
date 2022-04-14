@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DVStorage", "DVStorage.vcproj", "{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = DVStorage.vcproj
+		SccProjectName0 = \u0022$/DV/DVStorage\u0022,\u0020YBYBAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugUnicode = DebugUnicode
+		Enu = Enu
+		EnuUnicode = EnuUnicode
+		Release = Release
+		ReleaseUnicode = ReleaseUnicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Debug.ActiveCfg = Debug|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Debug.Build.0 = Debug|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.DebugUnicode.ActiveCfg = DebugUnicode|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.DebugUnicode.Build.0 = DebugUnicode|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Enu.ActiveCfg = Enu|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Enu.Build.0 = Enu|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.EnuUnicode.ActiveCfg = EnuUnicode|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.EnuUnicode.Build.0 = EnuUnicode|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Release.ActiveCfg = Release|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.Release.Build.0 = Release|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.ReleaseUnicode.ActiveCfg = ReleaseUnicode|Win32
+		{C0C3E083-E5C8-4630-8D10-A4395DE63C6C}.ReleaseUnicode.Build.0 = ReleaseUnicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

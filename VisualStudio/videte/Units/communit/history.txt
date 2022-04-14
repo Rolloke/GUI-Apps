@@ -1,0 +1,96 @@
+20.01.06 RKE- Anpassung an Umbau CIPC, WKClasses
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+12.05.05 RKE- Meridian Marc Mercer Protokoll eingefuegt. Noch nicht getestet!
+11.05.05 RKE- Ernitec Protokoll erweitert: IDs, AUX, Positionen, AutoFocus, AutoIris. Noch nicht getestet!
+			  JvcTKC Protokoll getestet und korrigiert.
+08.01.05 RKE- JVC Protokoll eingefuegt. Noch nicht getestet!
+04.01.05 RKE- Bewator Protokoll eingefuegt. Noch nicht getestet!
+19.01.05 RKE- Videoprotokoll Panasonic WV RM70 erweitert um SetPos und Speed
+11.01.05 RKE- Videotec Protokol eingefügt
+28.12.04 RKE- CBC ZC-NAF27 Protokol eingefügt
+17.12.04 RKE- Sensormatic Protokol eingefügt
+19.11.04 RKE- CBC (TOA) Protokoll Stopcommands wurden im switch block nicht behandelt und loesten im default
+              Zweig eine Fehlermeldung aus.
+              Fastrax II Menusteuerung implementiert.
+              RS232 Transparent Baudrate ist jetzt in der Registry einstellbar.
+15.11.04 RKE- CBC (TOA) Protokol Presetposition 7,8,9 korrigiert: ergab 1,2,3
+30.06.04 RKE- CBC (TOA) Protokol implementiert
+10.03.04 GF	- Umstellung auf Unicode und VS_71
+21.01.04 GF - Fastrax: Wieder retour, beim Direktanschluss der Dome kommen keine Antworten,
+					   daher den urspruenglichen Zustand als Standard wieder hergestellt.
+					   Das Protokoll bietet über die Registry alle Moeglichkeiten zum Einstellen
+					   Anschluss Keyboard(RJ-45) - RS232(D-Sub9): 4-2, 5-3, 7-5 (Aufsicht Kontakte,von rechts nach links gezählt)
+14.01.04 GF	- Fastrax: Protokoll auf Send-Answer umgestellt, Registry Einträge sind damit obsolet
+27.11.03 GF	- Fastrax: Registry CommUnit\Debug\RepeatTimeFastrax auf 100 (ms) als besten Kompromiss für Parallel-Betrieb zum Keyboard-Controller
+					   Der idip/DTS wird dabei über RS232/RS485-Konverter parallel an den RS485-Bus (Dome) an der Junction-Box angeklemmt
+11.11.03 GF	- Debug-Schalter "FastraxOpenCloseRS232" und "FastraxBidirectional"eingebaut
+			- ControlRecord an geänderte WK_RS232 angepasst
+06.11.03 GF	- Debug-Schalter "RepeatTimeFastrax" und "TraceMilliSeconds" eingebaut
+05.11.03 GF	- Aenderung FastraxII wegen der parallelen Steuerung idip/DTS und Controller
+27.10.03 GF	- Unicode Umstellung
+15.10.03 GF - Bugfix 588: FastraxII Setzen der Position funktioniert nur bei "jungfräulichen" Positionen,
+						  die vorher noch nicht gesetzt waren
+15.10.03 GF - Bugfix 586: FastraxII oben und unten vertauscht
+23.04.03 GF	- Fastrax II implementiert, Baxall vorbereitet, beide z.Z. nur in Debug
+05.03.03 GF - Positionsspeicherung war nicht eingecheckt
+05.03.03 GF - Der Sony DOM (Visca Protocol) kann jetzt die Positionen ueber Vision setzen.
+14.11.02 GF	- Anpassung VS_70
+26.08.02 GF	- Bugfix 211: PTZ-Modul sorgt für GP 0x00403238
+01.08.02 GF	- VCL_CAMERA und VCL_MAXCOM implementiert und getestet
+31.07.02 GF	- VCL Kamera freigegeben inkl. Preset-Positionen
+			- VCL erweitert um AutoFocus, AutoIris, Turn180
+30.07.02 GF	- VCL Kamera freigegeben, aber ohne Preset-Positionen, da noch nicht funktionierend
+26.07.02 GF - Bugfix VCL Kamerasteuerung
+10.07.02 GF	- Preset-Positionen abspeichern begonnen, z.Z. nur VCL
+06.07.02 GF	- VCL Protokoll angefangen
+17.01.01
+	ML  Bugfix: Das SystemTray-menü klappt nun korrekt zu
+14.09.00
+	GF	CameraControlRecord::Create
+		Bei CANON_VISCA ein Sleep zwischen Buffer löschen und
+		Adresse setzen eingefügt, damit der Adress-Befehl nicht gleich
+		wieder im Empfangsbuffer gelöscht wird.
+
+30.6.98 >>> UpdateVersion um 8:47 <<<
+	GF	Schnittstellen ab COM10 koennen auch unter NT geoeffnet werden
+
+11.5.98 >>> UpdateVersion um 13:10 <<<
+	UF	ExceptionHandler in InitDebugger
+5.5.98 >>> UpdateVersion um 15:38 <<<
+
+23.4.98 >>> UpdateVersion um 12:28 <<<
+	UF	Videv EC 160 Bug Behoben
+
+7.4.98 >>> UpdateVersion um 12:25 <<<
+	UF	CRS232 wieder auf stand vor NT Umbau gebbracht, mit
+		anderer NT Anpassung.
+
+20.3.98 >>> UpdateVersion um 11:21 <<<
+
+	UF	CWK_Profile wegen NT
+24.2.98 >>> UpdateVersion um 9:43 <<<
+
+24.2.98 >>> UpdateVersion um 9:42 <<<
+24.02.98
+	UWE	SN Fernkonfiguration fuer Panasonic WV-RM 70 eingebaut
+		geht nur mit diesem SN
+
+23.2.98 >>> UpdateVersion um 12:24 <<<
+
+	UF	ID Steuerung fuer Panasonic WV-RM 70 hinzugefuegt
+		wenn der ID 0 ist, wird kein ID benutzt,
+		ansonsten ID's von 1-16
+23.2.98 >>> UpdateVersion um 11:00 <<<
+
+23.2.98 >>> UpdateVersion um 9:59 <<<
+23.02.98
+	DeadLock Bug fuer RS232 behoben.
+11.02.98
+	RS232 fuer NT angepasst
+	Positionen 1..9 fuer Sensormatic TT
+	Positionen 1..9 fuer Panasonic RM70 WV-CS600
+26.08. 1997
+	Dongleabfrage in InitInstance implementiert (ML)
+06.03. 1997
+	ID Steuerung für den Videv hinzugefügt

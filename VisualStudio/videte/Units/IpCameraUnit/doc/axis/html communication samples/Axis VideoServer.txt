@@ -1,0 +1,106 @@
+root.Brand.Brand=AXIS
+root.Brand.ProdFullName=AXIS 241Q Video Server Blade
+root.Brand.ProdShortName=AXIS 241Q
+root.Brand.ProdNbr=241Q
+root.Brand.ProdType=Video Server
+root.Brand.WebURL=http://www.axis.com
+root.ImageSource.NbrOfSources=4
+root.Input.NbrOfInputs=4
+root.Network.RTP.NbrOfRTPGroups=5
+root.Output.NbrOfOutputs=4
+root.Properties.API.HTTP.Version=2
+root.Properties.Firmware.BuildNumber=25
+root.Properties.Firmware.BuildDate=May 10 2005 11:45
+root.Properties.Firmware.Version=4.20.1
+root.Properties.HTTPS.HTTPS=yes
+root.Properties.Image.Rotation=0,90,180,270
+root.Properties.Image.Resolution=4CIF,2CIFEXP,2CIF,CIF,QCIF
+root.Properties.Image.Format=jpeg,mjpeg,mpeg4,bitmap
+root.Properties.Motion.Motion=yes
+root.Properties.PTZ.PTZ=yes
+root.Properties.System.Language=English
+root.Properties.System.HardwareID=11D.2
+root.Properties.System.SerialNumber=00408C6D7F13
+root.PTZ.Warning=
+root.Serial.NbrOfPorts=2
+
+
+
+MediaType
+
++	majortype	{E436EB83-524F-11CE-9F53-0020AF0BA770}	MEDIATYPE_Stream
++	subtype	{E06D8022-DB46-11CF-B4D1-00805F6CBBEA}	MEDIASUBTYPE_MPEG2_PROGRAM
+	bFixedSizeSamples	1	int
+	bTemporalCompression	0	int
+	lSampleSize	50000	unsigned long
++	formattype	{GUID_NULL}	_GUID
++	pUnk	0x00000000	IUnknown *
+	cbFormat	0	unsigned long
++	pbFormat	0x00000000 <Bad Ptr>	unsigned char *
+
+
+commands
+
+192.168.0.233/axis-cgi/mjpg/video.cgi
+Response:
+--myboundary
+Content-Type: image/jpeg
+Content-Length: 53312
+jpgdata
+--myboundary
+...
+
+mpeg4/1/media.sdp
+Response:
+v=0
+o=- 33102473580406 33102473580415 IN IP4 192.168.0.233
+s=Media Presentation
+e=NONE
+b=AS:8000
+t=0 0
+a=control:rtsp://192.168.0.233:554/mpeg4/1/media.amp
+a=range:npt=now-
+a=mpeg4-iod: "data:application/mpeg4-iod;base64,AoDUAE8BAf/1AQOAbwABQFBkYXRhOmFwcGxpY2F0aW9uL21wZWc0LW9kLWF1O2Jhc2U2NCxBUjBCR3dVZkF4Y0F5U1FBWlFRTklCRUVrK0FBZWhJQUFIb1NBQVlCQkE9PQQNAQUABAAAAAAAAAAAAAYJAQAAAAAAAAAAAzoAAkA2ZGF0YTphcHBsaWNhdGlvbi9tcGVnNC1iaWZzLWF1O2Jhc2U2NCx3QkFTWVFTSVVFVUZQd0E9BBICDQAAAgAAAAAAAAAABQMAAEAGCQEAAAAAAAAAAA=="
+m=video 24242 RTP/AVP 96
+c=IN IP4 239.241.127.19/5
+b=AS:8000
+a=control:trackID=1
+a=rtpmap:96 MP4V-ES/90000
+a=fmtp:96 profile-level-id=245; config=000001B0F5000001B509000001000000012008D49588032516044814440F;
+a=mpeg4-esid:201
+
+mpeg4/1/video.sdp
+Response:
+v=0
+o=- 33102473580406 33102473580415 IN IP4 192.168.0.233
+s=Media Presentation
+e=NONE
+b=AS:8000
+t=0 0
+a=control:rtsp://192.168.0.233:554/mpeg4/1/media.amp
+a=range:npt=now-
+a=mpeg4-iod: "data:application/mpeg4-iod;base64,AoDUAE8BAf/1AQOAbwABQFBkYXRhOmFwcGxpY2F0aW9uL21wZWc0LW9kLWF1O2Jhc2U2NCxBUjBCR3dVZkF4Y0F5U1FBWlFRTklCRUVrK0FBZWhJQUFIb1NBQVlCQkE9PQQNAQUABAAAAAAAAAAAAAYJAQAAAAAAAAAAAzoAAkA2ZGF0YTphcHBsaWNhdGlvbi9tcGVnNC1iaWZzLWF1O2Jhc2U2NCx3QkFTWVFTSVVFVUZQd0E9BBICDQAAAgAAAAAAAAAABQMAAEAGCQEAAAAAAAAAAA=="
+m=video 24242 RTP/AVP 96
+c=IN IP4 239.241.127.19/5
+b=AS:8000
+a=control:trackID=1
+a=rtpmap:96 MP4V-ES/90000
+a=fmtp:96 profile-level-id=245; config=000001B0F5000001B509000001000000012008D49588032516044814440F;
+a=mpeg4-esid:201
+
+
+
+axis-cgi/mpeg4/restart_stream.cgi?camera=1
+Response:
+MPEG stream 1 restarted
+
+axis-cgi/io/input.cgi?check=1,2,3,4
+Response:
+input1=0
+input2=0
+input3=0
+input4=0
+
+activate output: axis-cgi/io/output.cgi?action=1:\
+deactivate output: axis-cgi/io/output.cgi?action=1:/
+Response: HTTP_STATUS_OK

@@ -1,0 +1,51 @@
+History des Mico NT-Treiber
+---------------------------
+
+5.10.97
+	- Einrichtung der Entwicklungsumgebung (WinNT DDK, MSTOOLS etc..)
+	- Aufbau zweier Projekte (MiCo.fll und MiCo.sys unter dem Developer Studio 5)
+	 
+6.10.97
+	- Korrektur der MiCoUnit für NT (siehe entsprechendes History-File)
+	- Ansicht und Studium der Bosch Quelltexte
+		- Stand des NT-Treibers würde ich als 10,96 einschätzen
+
+7.10.97
+	- Folgende Parameter mit in die Registry aufgenommen:
+		- CameraType		(0=async, 1=sync)
+		- SkipFields		(Anzahl der nach einer Umschaltung zu verwerfenden Fields) 
+		- HardwareSkip		(0=Hardwareskip aus, 1=hardwareskip ein)
+		- SwitchDelay		(Zusätzliches Delay von 20ms zwischen anal. und dig. Umschaltung)
+		- StoreField		(0=EVEN, 1=ODD, 3=EVEN und ODD)
+		- MinJpegSize		(Mindestgröße eines Jpegbildes)
+		- MaxJpegSize		(Maximalgröße eines Jpegbildes)
+	
+	- Folgende Funktionen vom MiCo.VxD/MiCoUnit in den NT-Treiber neu adaptiert:
+		- MICOSetInputSource(...)
+		- ZoranSetInputSource(...)
+		- ServiceSourceSelection(...)
+		- SetBPF(...)
+		- ServiceMICOBdInt(...)
+		- ServiceZoranInt(...)
+		- ServiceZoranIntDPC(...)
+
+8.10.97
+	- Quelltexte in eine vernünftige Form formatiert
+	- Die SetXXX-Funktionen prüfen zunächst, ob sich was ändert.
+
+9.10.97
+	- Die Historys der MiCoUnit und MiCo.VxD nach beseitigten Bugs durchgesehen und
+	  diese ebenfalls aus dem NT Treiber entfernt, sofern sie dort vorhanden waren.
+			25.3.97
+				- In CMiCo::CMiCo wurde die Variable m_wBeVideoType mit MICO_PAL_CCIR initialisiert,
+				  obwohl sie entweder MICO_COMPOSITE/MICO_RGB sein muß (Mit enum wär das nicht passiert)
+			24.4.97
+				- Ein Bug in CBT856::BT856In(...) beseitigt.
+
+16.10.97
+	- Die Funktion 'HW_ConfigSource' setzt nun wieder Helligkeit, Kontrast, Farbsättigung
+	  und Hue, sofern die Werte sich verändert haben.
+
+17.10.97
+	- Die Relayfunktionen greifen nun nicht mehr über die Latchfunktionen auf die Relais,
+	  da das Register ja 'Readback'-fähig ist.

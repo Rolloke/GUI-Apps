@@ -1,0 +1,333 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\TimerEditor.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\TimerEditor.ico"
+IDI_TIMER_PLUS_ICON     ICON    DISCARDABLE     "res\\TimerPlus.ico"
+IDI_TIMER_MINUS_ICON    ICON    DISCARDABLE     "res\\TimerMinus.ico"
+IDI_TIMER_DIV_ICON      ICON    DISCARDABLE     "res\\TimerDiv.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TIMEREDITOR_DIALOG DIALOGEX 0, 0, 387, 285
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "TimerEditor"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,79,264,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,195,264,50,14
+    CONTROL         "List1",IDC_TIMER_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_NOLABELWRAP | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | 
+                    WS_BORDER | WS_TABSTOP,7,27,238,94
+    CONTROL         "List2",IDC_LIST2,"SysListView32",WS_BORDER | WS_TABSTOP,
+                    253,61,127,60
+    LTEXT           "Name",IDC_TXT_TIMER_NAME,7,3,20,8
+    EDITTEXT        IDC_TIMER_SELECTED_NAME,7,11,238,14,ES_AUTOHSCROLL
+    LTEXT           "Blockschlösser",IDC_TXT_TIMER_LOCKS,253,46,48,8
+    CONTROL         "Zeitspannen",IDC_RADIO_TIMER_TYPE_SPAN,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,118,129,55,10
+    CONTROL         "Kombizeit",IDC_RADIO_TIMER_TYPE_COMBINATION,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,209,129,46,10
+    GROUPBOX        "Dummy box",IDC_TIMER_GRP_DUMMY,7,147,373,114,WS_TABSTOP
+    CONTROL         "",IDC_TIMER_HRULE,"Static",SS_BLACKRECT | SS_SUNKEN,7,
+                    124,373,1
+    PUSHBUTTON      "Entferne abgelaufene",IDC_TIMER_REMOVE_EXPIRED,253,3,80,
+                    14,WS_DISABLED
+    PUSHBUTTON      "Importiere...",IDC_TIMER_IMPORT,253,23,61,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Expotiere...",IDC_TIMER_EXPORT,313,23,61,14,WS_DISABLED
+    PUSHBUTTON      "New",IDC_TIMER_TMP_NEW,277,36,50,14
+    PUSHBUTTON      "Delete",IDC_TIMER_TMP_DELETE,330,36,50,14
+END
+
+IDD_TIMER_SPAN_EDITOR DIALOG DISCARDABLE  0, 0, 384, 160
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_TIMER_SPAN_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,7,0,299,160
+    PUSHBUTTON      "Edit",IDC_SPAN_EDIT,320,31,50,14
+    PUSHBUTTON      "Remove",IDC_SPAN_REMOVE,320,51,50,14
+    PUSHBUTTON      "Add",IDC_SPAN_ADD,320,71,50,14
+END
+
+IDD_TIMER_COMBI_EDITOR DIALOG DISCARDABLE  0, 0, 356, 163
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_TIMER_COMBI_SOURCE,"SysListView32",WS_BORDER | 
+                    WS_TABSTOP,3,11,70,152
+    CONTROL         "List1",IDC_TIMER_COMBI_INCLUDE,"SysListView32",
+                    WS_BORDER | WS_TABSTOP,151,11,62,152
+    CONTROL         "List1",IDC_TIMER_COMBI_RESRTICT,"SysListView32",
+                    WS_BORDER | WS_TABSTOP,293,11,62,152
+    CONTROL         "List1",IDC_TIMER_COMBI_EXCLUDE,"SysListView32",
+                    WS_BORDER | WS_TABSTOP,222,11,62,152
+    LTEXT           "(Quell)-Zeiten",IDC_TXT_TIMER_COMBI_SOURCE,9,0,43,8
+    LTEXT           "auch / immer wenn",IDC_TXT_TIMER_COMBI_INCLUDE,144,0,62,
+                    8
+    LTEXT           "aber nur",IDC_TXT_TIMER_COMBI_RESTRICT,284,0,27,8
+    LTEXT           "ausser",IDC_TXT_TIMER_COMBI_EXCLUDE,215,0,22,8
+    PUSHBUTTON      "auch ->",IDC_BUTTON_TIMER_COMI_INCLUDE,95,30,50,14
+    PUSHBUTTON      "aber nur ->",IDC_BUTTON_TIMER_COMI_RESTRICT,95,72,50,14
+    PUSHBUTTON      "ausser ->",IDC_BUTTON_TIMER_COMI_EXCLUDE,95,51,50,14
+    PUSHBUTTON      "<- zurueck",IDC_BUTTON_TIMER_COMI_BACK,97,119,50,14
+    ICON            IDI_TIMER_PLUS_ICON,IDC_TIMER_PLUS_ICON,73,27,20,20,
+                    SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_TIMER_DIV_ICON,IDC_TIMER_DIV_ICON,73,69,20,20,
+                    SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_TIMER_MINUS_ICON,IDC_TIMER_MINUS_ICON,73,48,20,20,
+                    SS_CENTERIMAGE | SS_REALSIZEIMAGE
+END
+
+IDD_TIMER_SET_DIALOG DIALOGEX 0, 0, 390, 369
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Zeitspannen Definition"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,90,352,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,337,352,50,14
+    CONTROL         "&Wochentag",IDC_TIMER_SET_TYPE_WEEK_DAY,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,8,25,53,10
+    CONTROL         "&Datum",IDC_TIMER_SET_TYPE_DATE,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,8,54,50,10
+    CONTROL         "HourTable",IDC_HOURTABLE,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,3,71,384,269
+    COMBOBOX        IDC_TIMER_WEEK_DAY_COMBO,63,23,84,94,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_TIMER_DAY,65,54,13,14,ES_NUMBER
+    EDITTEXT        IDC_TIMER_MONTH,95,54,13,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_TIMER_YEAR,126,54,22,14,ES_AUTOHSCROLL
+    LTEXT           "für Zeitschaltuhr:",IDC_TIMER_TXT_FOR_TIMER_LABEL,20,8,
+                    66,8,0,WS_EX_RIGHT
+    LTEXT           "...",IDC_TXT_TIMER_SET_NAME_LABEL,100,8,166,8
+    LTEXT           ".",IDC_TIMER_TEXT_DAY_DELIMITER,88,57,8,8
+    LTEXT           ".",IDC_TIMER_TEXT_DAY_DELIMITER2,117,57,8,8
+    LTEXT           "Tag",IDC_TIMER_TXT_DAY,65,41,14,8
+    LTEXT           "Monat",IDC_TIMER_TXT_MONTH,95,41,21,8
+    LTEXT           "Jahr",IDC_TIMER_TXT_YEAR,126,41,14,8
+    EDITTEXT        IDC_TIMER_HOURS_TEXT,281,7,106,59,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_TIMER_WARNING DIALOG DISCARDABLE  0, 0, 186, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Warnung"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Ja",ID_TIMER_OK,7,50,50,14
+    PUSHBUTTON      "&Nein",ID_TIMER_CANCEL,129,50,50,14
+    LTEXT           "Beim Ändern des Typs werden bestehende Einstellungen verworfen.\n\nWollen Sie dies wiklich tun ?",
+                    IDC_STATIC,18,7,161,41
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "TimerEditor MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "TimerEditor\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "TimerEditor.EXE\0"
+            VALUE "ProductName", "TimerEditor Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_TIMEREDITOR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 380
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 278
+    END
+
+    IDD_TIMER_SPAN_EDITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 377
+    END
+
+    IDD_TIMER_COMBI_EDITOR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 349
+        VERTGUIDE, 3
+    END
+
+    IDD_TIMER_SET_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 387
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 366
+    END
+
+    IDD_TIMER_WARNING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_TIMER_SET_DIALOG DLGINIT
+BEGIN
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 7, 0
+0x6f4d, 0x746e, 0x6761, "\000" 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 9, 0
+0x6944, 0x6e65, 0x7473, 0x6761, "\000" 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 9, 0
+0x694d, 0x7474, 0x6f77, 0x6863, "\000" 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 11, 0
+0x6f44, 0x6e6e, 0x7265, 0x7473, 0x6761, "\000" 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 8, 0
+0x7246, 0x6965, 0x6174, 0x0067, 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 8, 0
+0x6153, 0x736d, 0x6174, 0x0067, 
+    IDC_TIMER_WEEK_DAY_COMBO, 0x403, 8, 0
+0x6f53, 0x6e6e, 0x6174, 0x0067, 
+    0
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\TimerEditor.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

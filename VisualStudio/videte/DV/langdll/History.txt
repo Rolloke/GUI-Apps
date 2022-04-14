@@ -1,0 +1,86 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Vorgehensweise bei Erweiterung:
+// - Erstellen einer neuen Konfiguration (Kopieren von Release), ggf. zusätzlich Debug-Configuration
+// - Erstellen einer neuen DEF-Datei (Kopieren und anpassen)
+// - Erstellen neuer LNG- und RC-Dateien (mittels WK-Translator)
+// - Settings anpassen:
+//   - LNG-Datei ins Projekt, DEF- und RC-Datei ins Projekt und ins Build
+//   - Prepocessor-Define DV_xxx auf neue Sprache ändern
+//   - Output-Filename entsprechend anpassen (Format DVxxx.dll)
+//   - In der Datei LangDll.cpp die Funktion GetLanguageName() entsprechend anpassen
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+30.06.06 TKR Texte fuer die Erweiterungen der Q Unit eingefuegt, deutsch, englisch,
+             russisch.
+09.02.06 TKR Text fuer HDD-Ausfall usw. Error eingefuegt.
+02.12.05 TKR Text sowie Dialog fuer Maintenance Funktionalitaet integriert. Der Maintenance
+			 Einstell-Dialog wird vom DVClient benutzt. Die Texte fuer die 
+			 Maintenance-Anzeige wird vom DVProcess geladen.
+24.05.05 RKE Bugfix 154: Beim implementieren von Japanisch wurden die Abhaengigkeiten fuer das Kompilieren nicht
+             Korrekt gesetzt.
+14.07.04 RKE	- Enu, Esp, Ita, Ptg ueberarbeitet
+18.05.04 GF	- Esp, Enu, Ita, Ptg ueberarbeitet
+07.05.04 GF	- Esp, Enu, Ita, Ptg ueberarbeitet
+03.03.04 GF	- Esp, Enu, Fra, Ita, Ptg aktuell, Nld fehlt noch
+10.02.04 RKE- Enu, Fra, Ita, Nld, Ptg, Esp Update, nur Enu ist komplett.
+02.02.04 RKE- Tastaturbuchstaben als String resource fuer Russisch eingefuegt. Muss bei den meisten Sprachen nicht uebersetzt werden.
+         Kann spaeter bei Unicode Versionen um Sonderzeichen erweitert werden.
+27.01.04 RKE- Russisch Unicode eingefuegt.
+25.11.03 GF	- Nld update
+28.10.03 GF	- Chs update
+21.10.03 GF	- Chs update
+15.10.03 GF	- Esp, Ita, Ptg update
+09.09.03 GF	- Bugfix 762: Rechtschreibkorrekturen in ENU
+08.07.03 GF	- Rechtschreibfehler in FRA behoben
+			- Die Sprachen dürfen auch als Unicode/MBCS bearbeitet werden
+				(Siehe Schalter bei InsertResource
+04.06.03 GF	- Alle Sprachen dürfen nur als ANSI-Versionen bearbeitet werden
+03.06.03 GF	- Enu. Esp, Ita, Ptg aktuell
+			- Csy, Fra, Nld noch unvollständig
+21.01.03 GF	- Italienisch korrigiert
+19.12.02 GF	- Italienisch aktualisiert, damit
+				Version 2.1 : Deutsch, English, Espanol, Italiano, Português aktuell
+05.12.02 GF	- Französisch tw. aktualisiert, aber nicht komplett
+07.11.02 GF	- Portugiesisch implementiert
+04.11.02 GF	- Portugiesisch vorbereitet
+09.09.02 RKE - Neue Texte für DVHook eingefügt: IDS_OK, IDS_CANCEL, IDS_ERROR, IDS_FILE_SYSTEM_ACCESS
+27.06.02 GF	- Walisisch vorbereitet
+06.06.02 RKE - Funktion GetCodePageBits() wurde eingefuegt, um einen Font zu ermitteln, der den
+			   erweiterten Zeichensatz darstellen kann.24.05.02 UF - Franzoesisch 1.5 eingebaut.
+21.05.02 UF - Nederlands und Italienisch 1.5 eingebaut.
+10.05.02 UF - englische Korrekturen von Alexis Pearcey eingearbeitet
+05.04.02 UF - English, Deutsch und Spanisch fuer Version 1.5 fertig.
+19.03.02 ML - Menüpunkt '>Bewegungssensibilität' in '>Empfindlichkeit'geändert 
+			  , da dieser zu lang war
+11.02.02 UF - Reihenfolge der Menues Alarmaufschaltung geaendert
+07.02.02 UF - English 1.5 vorlaeufig uebersetzt.
+21.02.02 TKR - Nach Berechnung des Endzeitpunktes wird zusätzlich der Startzeitpunkt sowie die 
+			   Kameras des Backups angezeigt.
+31.01.02 ML - Im Alarmkonfigurationsmenü wird nun der Menüpunkt 'Alarmanruf bei' behandelt.
+			  Hiermit läßt sich für jede Kamera festlegen welche Alarme (MD, Extern 1, Extern 2, Aus)
+			  zu einem Alarmanruf führen soll.
+22.11.01 ML	- Den Menüpunkt Alarmkonfiguration in Kamera Aufnahmemodus umbenannt.
+			- Folgende Menüpunkte hinzugefügt: Alarmkonfiguration  	  Bilder
+												 - Alarm Ausgang		.
+												 - Rufnummer 1			Auslagerung fortsezen
+												 - Rufnummer 2			.
+												 - Rufnummer 3			.
+16.11.01 TKR - Backup auf CD-R: Zeit wird ab Version 1.5 pro Sekunde erhöht (IDS_BACKUP_RUNNING_UP)	
+03.09.01 UF - English 1.4 verbessert, Nld 1.4 fertig, Norwegisch angefangen
+12.06.01 GF	- Minor Bugfix
+12.06.01 GF	- DLLInfo um CodePage erweitert
+07.06.01 GF	- DLL Info um Abkürzung erweitert
+10.05.01 ML - Die Gateway-Adresse dem Menü dazugefügt + alle notwendigen Tooltips
+04.04.01 ML - Auf 16 Sprachen erweitert
+29.03.01 ML - "Invalid license number" hizugefügt
+		 GF	- Ita, Esp und Nld übersetzt
+26.02.01 UF - Ita, Esp und Nld für Netzwerk übersetzt
+26.01.01 GF	Espanol und Nederlands eingepflegt
+13.12.00 GF	- Italienische Sprache fertig
+22.11.00 UF - Bugfix TODO! entfernt
+03.05.00 GF	- für folgende Sprachen vorbereitet
+				Czesky, Espanol, Francais, Italiano, Nederlands, Polski
+27.04.00 GF	- Sprach-Dll begonnen
+			- Format DVxxx.dll bzw. DVxxxDebug.dll
+			- z.Z. existieren DEU und ENU Versionen

@@ -1,0 +1,91 @@
+JaCobDll.rc@CAPTION@IDD_DLG_COLOR.CAPTION@06,09,1999,11,30,25@03,04,2000,12,08,49@06,09,1999,11,30,25@Farbeinstellung@Colour settings@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDOK@06,09,1999,11,30,25@20,07,2001,13,13,30@06,09,1999,11,30,25@OK@OK@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDCANCEL@06,09,1999,11,30,25@18,10,1999,13,29,54@06,09,1999,11,30,25@Abbrechen@Cancel@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_VBRIGHTNESS@06,09,1999,11,30,25@01,09,2000,09,57,30@06,09,1999,11,30,25@0@0@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_VCONTRAST@06,09,1999,11,30,25@01,09,2000,09,57,30@06,09,1999,11,30,25@0@0@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_VSATURATION@06,09,1999,11,30,25@01,09,2000,09,57,30@06,09,1999,11,30,25@0@0@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_STATIC_BRIGHTNESS@06,09,1999,11,30,25@18,10,1999,13,30,04@06,09,1999,11,30,25@Helligkeit@Brightness@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_STATIC_CONTRAST@06,09,1999,11,30,25@18,10,1999,13,30,10@06,09,1999,11,30,25@Kontrast@Contrast@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_STATIC_SATURATION@06,09,1999,11,30,25@18,10,1999,13,30,19@06,09,1999,11,30,25@Farbsättigung@Saturation@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_UEBERNAHME@06,09,1999,11,30,25@18,10,1999,13,31,54@06,09,1999,11,30,25@Übernehmen@apply@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_VHUE@06,09,1999,11,30,25@01,09,2000,09,57,30@06,09,1999,11,30,25@0@0@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_STATIC_HUE@06,09,1999,11,30,25@18,10,1999,13,31,59@06,09,1999,11,30,25@Hue@Hue@0@
+JaCobDll.rc@CAPTION@IDD_DLG_MD_CONFIG.CAPTION@06,09,1999,11,30,25@18,10,1999,13,32,20@06,09,1999,11,30,25@Bewegungserkennung-Einstellungen@Motion detection parameters@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDOK@06,09,1999,11,30,25@20,07,2001,13,13,30@06,09,1999,11,30,25@OK@OK@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDCANCEL@06,09,1999,11,30,25@18,10,1999,13,29,54@06,09,1999,11,30,25@Abbrechen@Cancel@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_INVERT_PERMANENT_MASK@06,09,1999,11,30,25@18,10,1999,13,32,45@06,09,1999,11,30,25@Invertiere perm. Maske@Invert perm. mask@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_CLEAR_MASK@06,09,1999,11,30,25@18,10,1999,13,32,57@06,09,1999,11,30,25@Lösche Masken@Delete masks@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_SAVE_MASK@06,09,1999,11,30,25@18,10,1999,13,33,03@06,09,1999,11,30,25@Speichere Masken@Save masks@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_LOAD_MASK@06,09,1999,11,30,25@18,10,1999,13,33,08@06,09,1999,11,30,25@Lade Masken@Load masks@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_HIDE_MASK@06,09,1999,11,30,25@18,10,1999,13,33,23@06,09,1999,11,30,25@Zeige Maske im Bild@Show masks in image@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_TITLE_INLAY@06,09,1999,11,30,25@18,10,1999,13,33,37@06,09,1999,11,30,25@Originalbild:@Original image:@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_TITLE_MASK@06,09,1999,11,30,25@18,10,1999,13,33,56@06,09,1999,11,30,25@Differenzbild:@Difference image@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_USE_ADAPTIVE_MASK@06,09,1999,11,30,25@18,10,1999,13,34,37@06,09,1999,11,30,25@Adaptive Maske@Adaptive mask@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_ACTIVATE_MD@06,09,1999,11,30,25@18,10,1999,13,34,27@06,09,1999,11,30,25@MD aktivieren@Activate MD@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_STATIC_AM@06,09,1999,11,30,25@18,10,1999,13,34,37@06,09,1999,11,30,25@Adaptive Maske@Adaptive mask@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_STATIC_PM@06,09,1999,11,30,25@18,10,1999,13,34,50@06,09,1999,11,30,25@Permanente Maske@Permanent mask@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_STATIC_LEGENDE@06,09,1999,11,30,25@18,10,1999,13,35,39@06,09,1999,11,30,25@Legende@Legend@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_HISTOGRAMM@06,09,1999,11,30,25@18,10,1999,13,36,44@06,09,1999,11,30,25@Histogrammausgleich@Histogram compensation@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_INVERT_ADAPTIVE_MASK@06,09,1999,11,30,25@18,10,1999,13,36,57@06,09,1999,11,30,25@Invertiere adap. Maske@Invert adap. mask@0@
+JaCobDll.rc@STRING@ID_INDICATOR_EXT@06,09,1999,11,30,25@18,10,1999,13,37,01@06,09,1999,11,30,25@ER@ER@0@
+JaCobDll.rc@STRING@ID_INDICATOR_CAPS@06,09,1999,11,30,25@18,10,1999,13,37,08@06,09,1999,11,30,25@UF@UF@0@
+JaCobDll.rc@STRING@ID_INDICATOR_NUM@06,09,1999,11,30,25@18,10,1999,13,37,10@06,09,1999,11,30,25@NUM@NUM@0@
+JaCobDll.rc@STRING@ID_INDICATOR_SCRL@06,09,1999,11,30,25@18,10,1999,13,37,13@06,09,1999,11,30,25@RF@RF@0@
+JaCobDll.rc@STRING@ID_INDICATOR_OVR@06,09,1999,11,30,25@18,10,1999,13,37,18@06,09,1999,11,30,25@ÜB@ÜB@0@
+JaCobDll.rc@STRING@ID_INDICATOR_REC@06,09,1999,11,30,25@18,10,1999,13,37,21@06,09,1999,11,30,25@MA@MA@0@
+JaCobDll.rc@STRING@IDS_RTE_PCD8584_READ_BACK@03,04,2000,12,08,14@03,04,2000,12,09,47@06,09,1999,11,30,25@PCD8584 I2C-Buscontroller: Zurücklesen ist fehlgeschlagen@PCD8584 I2C-Buscontroller readback failed@0@
+JaCobDll.rc@STRING@IDS_RTE_BT829_WRONG_ID@03,04,2000,12,08,14@03,04,2000,12,09,51@06,09,1999,11,30,25@BT829-Video-Dekoder: Falsche ID (0x%02x)@BT829-Frontend wrong ID (0x%02x)@0@
+JaCobDll.rc@STRING@IDS_RTE_BT829_READ_BACK@03,04,2000,12,08,14@03,04,2000,12,09,56@06,09,1999,11,30,25@BT829-Videodekoder: Zurücklesen ist fehlgeschlagen@BT829 Frontend readback failed@0@
+JaCobDll.rc@STRING@IDS_RTE_BT856_WRONG_ID@06,09,1999,11,30,25@18,10,1999,13,37,35@06,09,1999,11,30,25@BT856-Backend wrong ID (0x%02x)@BT856-Backend wrong ID (0x%02x)@0@
+JaCobDll.rc@STRING@IDS_RTE_DRIVER_WRONG_VERSION@03,04,2000,12,08,14@03,04,2000,12,10,02@06,09,1999,11,30,25@Falsche Treiberversion (Treiber=0x%08x, Programm=0x%08x)@Driverversion is wrong (Driver=0x%08x, Unit=0x%08x)@0@
+JaCobDll.rc@STRING@IDS_RTE_UNKNOWN_IRQ@06,09,1999,11,30,25@18,10,1999,13,37,44@06,09,1999,11,30,25@Unknown IRQ (%u)  (Valid IRQ=5,10,11,12,14,15)@Unknown IRQ (%u)  (Valid IRQ=5,10,11,12,14,15)@0@
+JaCobDll.rc@STRING@IDS_RTE_NO_INI@03,04,2000,12,08,14@03,04,2000,12,10,08@06,09,1999,11,30,25@%s konnte nicht gefunden werden@Can't find %s@0@
+JaCobDll.rc@STRING@IDS_RTE_DRIVER_NOT_FOUND@03,04,2000,12,08,14@03,04,2000,12,10,14@06,09,1999,11,30,25@%s %s konnte nicht gefunden oder nicht geöffnet werden@Can't open or find %s@0@
+JaCobDll.rc@STRING@IDS_RTE_DRIVER_NO_IOCTL@06,09,1999,11,30,25@18,10,1999,13,37,54@06,09,1999,11,30,25@Device not supported IOCTL interface@Device not supported IOCTL interface@0@
+JaCobDll.rc@STRING@IDS_RTE_OLD_MICO@06,09,1999,11,30,25@18,10,1999,13,40,52@06,09,1999,11,30,25@Der alte Hardwarestand der MiCo wird von der Software\nnicht mehr unterstützt.\nDas MiCoBoard muß ausgetauscht werden. @Old MiCoversion are not supported any more@0@
+JaCobDll.rc@STRING@IDS_RTE_NO_JACOB_DETECTED@06,09,1999,11,30,25@18,10,1999,13,41,08@06,09,1999,11,30,25@Es konnte keine MiCo im System gefunden werden!\n - Entweder befindet sich keine MiCo in Ihrem Rechner\n - Die MiCo steckt nicht korrekt im ISA-Slot\n - Die MiCo ist defekt\n - Die Basisadresse ist falsch.@No MiCo found@0@
+JaCobDll.rc@STRING@IDC_INVERT_PERMANENT_MASK@06,09,1999,11,30,25@18,10,1999,13,41,33@06,09,1999,11,30,25@Invertiert die permanente Maske\nder aktuell ausgewählten Kamera@Invert the permanent mask from the current camera@0@
+JaCobDll.rc@STRING@IDC_CLEAR_MASK@06,09,1999,11,30,25@18,10,1999,13,42,51@06,09,1999,11,30,25@Löscht die adaptive sowie die\npermanente Maske der\naktuell ausgewählten Kamera@Delete the adaptive and the permanent masks from the current camera@0@
+JaCobDll.rc@STRING@IDC_SAVE_MASK@06,09,1999,11,30,25@18,10,1999,13,43,14@06,09,1999,11,30,25@Speichert die Masken für die\naktuell ausgewählte Kamera ab.@Save the masks from the current camera.@0@
+JaCobDll.rc@STRING@IDC_SELECT_CAMERA@03,08,2000,13,13,37@03,08,2000,13,14,56@06,09,1999,11,30,25@Wählt eine Kamera aus,\nderen MD-Einstellungen verändert\nwerden sollen@Select the camera@0@
+JaCobDll.rc@STRING@IDC_INVERT_ADAPTIVE_MASK@06,09,1999,11,30,25@18,10,1999,13,44,50@06,09,1999,11,30,25@Invertiert die adaptive Maske\nder aktuell ausgewählten Kamera@Invert the adaptive mask for the current camera@0@
+JaCobDll.rc@STRING@IDC_LOAD_MASK@06,09,1999,11,30,25@18,10,1999,13,45,08@06,09,1999,11,30,25@Lädt die Masken für die\naktuell ausgewählte Kamera@Load the masks for the current camera@0@
+JaCobDll.rc@STRING@IDC_HIDE_MASK@06,09,1999,11,30,25@18,10,1999,13,45,34@06,09,1999,11,30,25@Blendet die Masken im Livebild ein.@Shows masks in the live-image@0@
+JaCobDll.rc@STRING@IDC_USE_ADAPTIVE_MASK@06,09,1999,11,30,25@18,10,1999,13,46,00@06,09,1999,11,30,25@Aktiviert die adaptive Maske. Die adaptive Maske dient zum\nausmaskieren von Störbewegungen. (z.B. Bäume im Wind).\nDazu baut sie sich immer an den Stellen im Videobild\nauf, an denen über einen längeren Zeitraum ständig\nÄnderungen auftreten. Nimmt die Intensität der 'Störbewegung'\nab, so wird auch die adaptive Maske wieder schwächer.\nZusätzlich kann eine permanente Maske direkt ins Videobild '\ngezeichnet' werden. An diesen Stellen ist die Bewegungserkennung\nquasi blind.@Activate the adaptive mask@0@
+JaCobDll.rc@STRING@IDC_ACTIVATE_MD@06,09,1999,11,30,25@18,10,1999,13,46,23@06,09,1999,11,30,25@Aktiviert für die ausgewählte Kamera die Bewegungs-\nerkennung. Die Kamera meldet nun über ihren zugehörigen\n'JaCob MD Alarm'-Melder einen Bewegungsalarm.\nDer Alarm tritt nur als Puls auf, so daß\nin den Prozeßeinstellungen 'Volle Zeitdauer halten' zu \naktivieren ist.@Activate the motion detection for the selected camera.@0@
+JaCobDll.rc@STRING@IDC_HISTOGRAMM@06,09,1999,11,30,25@18,10,1999,13,46,57@06,09,1999,11,30,25@Führt ein Histogrammausgleich durch.\nEr kann evtl. eine Bildverbesserung bewirken,\ninsbesondere bei zu dunklen Bildern@Make a histogram correction for the current selected camera@0@
+JaCobDll.rc@STRING@IDS_RTE_JACOB_TOO_HOT@03,04,2000,12,08,14@03,04,2000,12,12,10@03,04,2000,12,08,14@Temperaturalarm!! (%d°C)\nBitte schalten Sie das Gerät aus, oder sorgen Sie für eine bessere Belüftung.@Temperature alarm!! (%d°C)\nPlease shutdown the device or take care of better ventilation!@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_VHSCALE@28,07,2000,13,59,40@01,09,2000,09,57,30@28,07,2000,13,59,40@0@0@0@
+JaCobDll.rc@LTEXT@IDD_DLG_COLOR.IDC_STATIC_HSCALE@28,07,2000,13,59,40@28,07,2000,13,59,49@28,07,2000,13,59,40@HScale@HScale@0@
+JaCobDll.rc@STRING@IDS_RTE_DRIVER_NOT_LOADED@03,08,2000,13,13,37@03,08,2000,13,15,16@03,08,2000,13,13,37@Der Gerätetreiber ist nicht geladen.@Devicedriver not loaded@0@
+JaCobDll.rc@STRING@IDS_RTE_DLL_WRONG_VERSION@03,08,2000,13,15,55@03,08,2000,13,16,18@03,08,2000,13,13,37@JaCobDA.dll falsche Version (Dll=0x%08x, Unit=0x%08x)@JaCobDA.dll wrong Version (Dll=0x%08x, Unit=0x%08x)@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_STATIC_ALARM_SENSITIVITY@09,08,2000,07,51,15@09,08,2000,07,51,53@09,08,2000,07,51,15@Empfindlichkeit der adaptiven Maske@Adaptive mask sensitivity@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_STATIC_MD_SENSITIVITY@09,08,2000,07,51,15@09,08,2000,07,52,19@09,08,2000,07,51,15@Empfindlichkeit der MD@MD alarm sensitivity@0@
+JaCobDll.rc@STRING@IDS_HIGH@09,08,2000,08,13,20@09,08,2000,08,13,31@09,08,2000,08,13,20@Hoch@High@0@
+JaCobDll.rc@STRING@IDS_NORMAL@09,08,2000,08,13,20@09,08,2000,08,13,35@09,08,2000,08,13,20@Normal@Normal@0@
+JaCobDll.rc@STRING@IDS_LOW@09,08,2000,08,13,20@09,08,2000,08,13,39@09,08,2000,08,13,20@Niedrig@Low@0@
+JaCobDll.rc@STRING@IDC_SELECT_MASK_SENSITIVITY@09,08,2000,08,13,20@09,08,2000,08,14,57@09,08,2000,08,13,20@Stellt die Empfindlichkeit dir adaptiven Maske ein.\nDie adaptive Maske dient zum ausmaskieren von\n Störbewegungen. (z.B. Bäume im Wind).\nDazu baut sie sich immer an den Stellen im Videobild\nauf, an denen über einen längeren Zeitraum ständig\nÄnderungen auftreten. Nimmt die Intensität der 'Störbewegung'\nab, so wird auch die adaptive Maske wieder schwächer.\nZusätzlich kann eine permanente Maske direkt ins Videobild '\ngezeichnet' werden. An diesen Stellen ist die Bewegungserkennung\nquasi blind.@Select the sensitivity of the adaptive mask.@0@
+JaCobDll.rc@STRING@IDC_SELECT_ALARM_SENSITIVITY@09,08,2000,08,13,20@09,08,2000,08,15,34@09,08,2000,08,13,20@Stellt für die ausgewählte Kamera die Empfindlichkeit der\nBewegungserkennung ein.\nDie Kamera meldet nun über ihren zugehörigen\n'JaCob MD Alarm'-Melder einen Bewegungsalarm.\nDer Alarm tritt nur als Puls auf, so daß\nin den Prozeßeinstellungen 'Volle Zeitdauer halten' zu \naktivieren ist.@Select the sensitivity of the Motion detection@0@
+JaCobDll.rc@STRING@IDS_OFF@09,08,2000,08,13,20@09,08,2000,08,15,38@09,08,2000,08,13,20@Aus@Off@0@
+JaCobDll.rc@STRING@IDS_CAMERA1@09,08,2000,08,13,20@09,08,2000,08,15,44@09,08,2000,08,13,20@Kamera 1@Camera 1@0@
+JaCobDll.rc@STRING@IDS_CAMERA2@09,08,2000,08,13,20@09,08,2000,08,15,51@09,08,2000,08,13,20@Kamera 2@Camera 2@0@
+JaCobDll.rc@STRING@IDS_CAMERA3@09,08,2000,08,13,20@09,08,2000,08,15,54@09,08,2000,08,13,20@Kamera 3@Camera 3@0@
+JaCobDll.rc@STRING@IDS_CAMERA4@09,08,2000,08,13,20@09,08,2000,08,15,58@09,08,2000,08,13,20@Kamera 4@Camera 4@0@
+JaCobDll.rc@STRING@IDS_CAMERA5@09,08,2000,08,13,20@09,08,2000,08,16,01@09,08,2000,08,13,20@Kamera 5@Camera 5@0@
+JaCobDll.rc@STRING@IDS_CAMERA6@09,08,2000,08,13,20@09,08,2000,08,16,04@09,08,2000,08,13,20@Kamera 6@Camera 6@0@
+JaCobDll.rc@STRING@IDS_CAMERA7@09,08,2000,08,13,20@09,08,2000,08,16,07@09,08,2000,08,13,20@Kamera 7@Camera 7@0@
+JaCobDll.rc@STRING@IDS_CAMERA8@09,08,2000,08,13,20@09,08,2000,08,16,12@09,08,2000,08,13,20@Kamera 8@Camera 8@0@
+JaCobDll.rc@STRING@IDS_CAMERA9@09,08,2000,08,13,20@09,08,2000,08,16,14@09,08,2000,08,13,20@Kamera 9@Camera 9@0@
+JaCobDll.rc@STRING@IDS_CAMERA10@09,08,2000,08,13,20@09,08,2000,08,16,18@09,08,2000,08,13,20@Kamera 10@Camera 10@0@
+JaCobDll.rc@STRING@IDS_CAMERA11@09,08,2000,08,13,20@09,08,2000,08,16,22@09,08,2000,08,13,20@Kamera 11@Camera 11@0@
+JaCobDll.rc@STRING@IDS_CAMERA12@09,08,2000,08,13,20@09,08,2000,08,16,25@09,08,2000,08,13,20@Kamera 12@Camera 12@0@
+JaCobDll.rc@STRING@IDS_CAMERA13@09,08,2000,08,13,20@09,08,2000,08,16,28@09,08,2000,08,13,20@Kamera 13@Camera 13@0@
+JaCobDll.rc@STRING@IDS_CAMERA14@09,08,2000,08,13,20@09,08,2000,08,16,37@09,08,2000,08,13,20@Kamera 14@Camera 14@0@
+JaCobDll.rc@STRING@IDS_CAMERA15@09,08,2000,08,13,20@09,08,2000,08,16,41@09,08,2000,08,13,20@Kamera 15@Camera 15@0@
+JaCobDll.rc@STRING@IDS_CAMERA16@09,08,2000,08,13,20@09,08,2000,08,16,46@09,08,2000,08,13,20@Kamera 16@Camera 16@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG.IDC_FILTER@01,09,2000,09,23,10@01,09,2000,09,30,04@01,09,2000,09,22,29@Tiefpass Filter@Low-Pass filter@0@
+JaCobDll.rc@STRING@IDC_FILTER@01,09,2000,09,57,26@01,09,2000,09,57,36@01,09,2000,09,22,29@Führt eine Tiefpassfilterung durch, um feine Details vor der\nMD zu entfernen, die evt. zu Fehlalarmen, oder einer\nadaptiven Maske führen würden.@Make a Low-Pass filtering to avoid fault alarms@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG2.IDOK@20,07,2001,13,13,20@20,07,2001,13,13,30@20,07,2001,13,13,20@OK@OK@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG2.IDC_INVERT_PERMANENT_MASK@20,07,2001,13,13,20@20,07,2001,13,13,36@20,07,2001,13,13,20@Invert@Invert@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG2.IDC_CLEAR_MASK@20,07,2001,13,13,20@20,07,2001,13,13,42@20,07,2001,13,13,20@Del@Del@0@
+JaCobDll.rc@LTEXT@IDD_DLG_MD_CONFIG2.IDC_HIDE_MASK@20,07,2001,13,13,20@20,07,2001,13,13,49@20,07,2001,13,13,20@Show Mask@Show Mask@0@

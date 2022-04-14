@@ -1,0 +1,22 @@
+//
+// IdipClient.RC2 - Ressourcen, die Microsoft Visual C++ nicht direkt bearbeitet
+//
+
+#ifdef APSTUDIO_INVOKED
+#error Diese Datei kann nicht in Microsoft Visual C++ bearbeitet werden.
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Fügen Sie hier manuell bearbeitete Ressourcen hinzu...
+#include <WK_Version.h>
+
+WK_VERSION(5, 1, 0, 955, "5.1.0.955\0", // @AUTO_UPDATE
+		   "IdipClient.exe\0",	// exe name
+		   "IdipClient\0",	// product name
+		   "IdipClient Application\0",	// product description
+		   "5.1\0",		// general product version
+		   "5.100\0"	// real version
+		   )
+
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,8 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Akudrv\Parameters]
+"AkuIOBase0"=dword:00000240
+"AkuIOBase1"=dword:00000000
+"AkuIOBase2"=dword:00000000
+"AkuIOBase3"=dword:00000000
+

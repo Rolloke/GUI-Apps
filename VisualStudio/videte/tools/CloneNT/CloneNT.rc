@@ -1,0 +1,90 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "res\CloneNT.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""res\\CloneNT.rc2""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// BINRES
+//
+
+IDR_SYSTEM_FILE         BINRES  DISCARDABLE     "EmbeddedFiles\\system._"
+IDR_SOFTWARE_FILE       BINRES  DISCARDABLE     "EmbeddedFiles\\software._"
+IDR_DEFAULT_FILE        BINRES  DISCARDABLE     "EmbeddedFiles\\default._"
+IDR_SECURITY_FILE       BINRES  DISCARDABLE     "EmbeddedFiles\\security._"
+IDR_SAM_FILE            BINRES  DISCARDABLE     "EmbeddedFiles\\sam._"
+IDR_NTUSER_DAT_FILE     BINRES  DISCARDABLE     "EmbeddedFiles\\NTUSER.DA_"
+IDR_REPAIR_REGISTRY_FILE BINRES  DISCARDABLE     "EmbeddedFiles\\RepairRegistry.bat"
+IDR_SHUTDOWN_FILE       BINRES  DISCARDABLE     "EmbeddedFiles\\shutdown.ex_"
+IDR_FILELIST_FILE       BINRES  DISCARDABLE     "EmbeddedFiles\\CloneNTFileList.ini"
+IDR_KBDGR_FILE          BINRES  DISCARDABLE     "EmbeddedFiles\\kbdgr.dl_"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELLO               "Hello from MFC!"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

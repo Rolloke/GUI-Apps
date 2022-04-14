@@ -1,0 +1,112 @@
+History von RemoteControl
+-------------------------
+
+04.12.98
+	- Beginn des Projektes.
+	- Starten von mehreren Clients.
+
+07.12.98
+	- Die Anzahl der Clients kann nun in der Registry eingetragen werden. (1...32)
+	- Das Fensterhandle der Clients wird nun anhand der ProzessID gesucht.
+	- Klasse CClientControl zur Fernsteuerung der Clients angefangen.
+	- 'DoRequestSetInputSource(...)' setzt die Kamera des Clients
+	- 'DoRequestSetWindowPosition(...)' setzt die Position und/oder Größe des
+	  Clientwindows.
+
+04.01.99
+	- Alle 5 Telegrammtypen haben nun eine eigene 'OnReceivePacketTypeXX'
+	  Funktion in der Klasse CHHLASocket, die nur noch überschrieben werden muß.
+
+05.01.99
+	- Die Klassen CConnectSocket und CWorkSocket überschreiben die jeweiligen
+	  'OnReceivePacketTypeXX'-Funktionen.	   
+
+06.01.99
+	- Der Verbindungsaufbau wird nun über die CAMERA.INI gesteuert.
+	- Im Abstand von NO_TRAFFIC/2 wird nun ein ONLINE-Telegramm verschickt,
+	  um eine Verbindungsunterbrechung feststellen zu können.
+	- Die Timeouts aus der CAMERA.INI werden berücksichtigt.
+	- Indexüberprüfung bei allen Telegramm-Zugriffen
+
+19.01.99
+	- Server und MiCoUnit werden nun von 'RemoteControl' gestartet
+
+20.01.99
+	- Telegrammtyp 04 komplett implementiert.
+
+29.01.99
+	- Softdongle implementiert.
+
+01.02.99
+	- Telegrammtyp 02 komplett implementiert (Speicherung)
+
+03.02.99
+	- Es wird laufend überprüft ob alle Clients noch laufen.
+	  Clients werden automatisch nachgestartet, falls sie sich
+	  beendet haben sollten.
+
+11.02.99
+	- MiniClient, Server, MiCoUnit, werden aus dem aktuellen Arbeitsverzeichnis
+	  herraus geladen. SoftDongle aus dem Windowsverzeichnis.
+
+16.02.99
+	- Die RuntimeErrors werden nun entgegengenommen, hiermit werden Kameraausfälle
+	  gemeldet.
+
+17.02.99
+	- Telegrammtyp 05 implementiert. Es kann nun eine bestimmte Kamera
+	  getestet werden, oder aber alle Kameras in Folge
+
+18.02.99
+	- Alle Einträge aus der Camera.ini werden nicht mehr einmalig bei Programmstart
+	  eingelesen, sondern bei bedarf jeweils erneut. Dadurch werden Änderungen in
+	  der Camera.ini zur Laufzeit erkannt und berücksichtigt.
+
+19.02.99
+	- WM_TIMER kam im Abstand von 1ms statt mit 1s
+	- Telegrammtyp 00 Statuscode 99 schließt nun die Socket und startet
+	  das Anmeldeverfahren.
+
+22.02.99
+	- TRY CATCH-Block um die Fileoperationen.
+
+23.02.99
+	- Der Telegrammzähler wird immer auf 00 gesetzt.
+	- Die Paketkennung der Telegramme 01...05 ist immer 'K'.
+	- Das Telegramm 03 enthält nun antatt (J)a, (N)ein die folgenden
+	  drei Möglichkeiten: (F)reeze, (A)zeigen, (R)efresh.
+	- Die Überprüfung der anderen Applikationen erfolgt nun alle 5 Sekunden.
+
+25.02.99
+	- Beim beenden der Socketverbindung werden die Clientfenster zunächst minimiert.
+	- Der TOP/LEFT tauscher lag bei mir.
+
+01.03.99
+	- TYP01 enthält nur die Parameter von maxCam Kameras.
+
+17.09.99
+	- Die maximale Anzahl der gestartetet Clients und somit die maximale Anzahl der
+	  verfügbaren Kameras ist nun in der Camera.ini wie folgt einstellbar:
+	    [PRIVATE]
+		MaxCameras=8
+22.10.01
+	- Configure.exe wird nicht mehr gestartet, da für die MiCoPCI nicht notwendig
+	
+13.03.02
+	- Während des Starts und des Verbindungsaufbaues erscheint der Dialog des
+	  Remotecontrolprogrammes derzeit in der linken oberen Ecke. Er läßt sich
+	  auch nicht verschieben. (Das war auch so gewollt) Da ein anderes Programm
+	  aber nun auch in der oberen linken Ecke erscheint, hat Gückelhorn mich gebeten,
+	  den Dialog des Remontecontrolprogrammes in die Taskleiste zu verbannen.
+	  Dieses Verhalten läßt sich nun über die CAMERA.INI [Private] ForceMinimizeDlg=0
+	  ausschalten.
+
+22.11.02
+	- Anpassung VS_70
+
+25.02.04
+	- Bugfix in CHHLASocket::DoConfirmPacket()
+	- Anpassung VS_71, Umstellung auf Unicode vertagt wegen Uebertragungsprotokoll
+	
+19.09.05
+	- Beginn der Umstellung auf Unicode.

@@ -1,0 +1,52 @@
+/* GlobalReplace: VERSION\(.*@AUTO_UPDATE --> VERSION(17, 3, 13, 36, "17/03/99,13:36\0", // @AUTO_UPDATE */
+//
+// ISDNUNIT.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+#if RUN_AS_PTUNIT
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\pticon.ico"
+#else
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ISDNUnit.ico"
+#endif
+IDR_MAINFRAME_PT        ICON    DISCARDABLE     "res\\pticon.ico"
+
+IDR_MAINFRAME_NO_DEVICE      ICON    DISCARDABLE     "res\\NoDevice.ico"
+IDR_MAINFRAME_PT_NO_DEVICE   ICON    DISCARDABLE     "res\\ptnodev.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+#if RUN_AS_PTUNIT
+WK_VERSION(4, 4, 1, 529, "4.4.1.529\0", // @AUTO_UPDATE
+		   "PTUnit.exe\0",	// exe name
+		   "PTUnit apllication\0",	// product name
+		   "PTUnit application\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+#else
+WK_VERSION(4, 6, 3, 633, "4.6.3.633c\0", // @AUTO_UPDATE
+		   "ISDNUnit.exe\0",	// exe name
+		   "ISDNUnit application\0",	// product name
+		   "ISDNUnit application\0",	// product description
+		   "3.5\0",		// general product version
+		   "3.5\0"	// real version
+		   )
+
+#endif

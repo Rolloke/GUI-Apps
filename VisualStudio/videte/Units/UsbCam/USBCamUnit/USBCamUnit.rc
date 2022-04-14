@@ -1,0 +1,420 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\USBCamUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\USBCamUnit.ico"
+IDC_PAUSE               ICON    DISCARDABLE     "res\\idc_paus.ico"
+IDC_RECORDING           ICON    DISCARDABLE     "res\\idc_reco.ico"
+IDC_START               ICON    DISCARDABLE     "res\\START.ico"
+IDC_STOP                ICON    DISCARDABLE     "res\\idc_stop.ico"
+IDR_RECORDING           ICON    DISCARDABLE     "res\\idr_runi.ico"
+IDR_RUNNING             ICON    DISCARDABLE     "res\\idr_main.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_USBCAMUNIT_DIALOG DIALOGEX 0, 0, 425, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "USBCamUnit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Start",IDC_START,81,158,16,15,BS_ICON
+    PUSHBUTTON      "Pause",IDC_PAUSE,98,158,16,15,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Stop",IDC_STOP,115,158,16,15,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Stop",IDC_RECORDING,117,136,16,15,BS_ICON | BS_FLAT,
+                    WS_EX_DLGMODALFRAME
+    COMBOBOX        IDC_COMBO1,10,37,130,178,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Video Quelle",IDC_GRP_VIDEO_SOURCE,5,25,205,50
+    PUSHBUTTON      "Initialisieren",IDC_INIT_VIDEO_CAM,5,158,61,14
+    DEFPUSHBUTTON   "Eintellungen speichern",ID_APPLY_NOW,331,158,90,14
+    PUSHBUTTON      "Einstellungen...",IDC_BTN_SOURCE_PROPERTY,145,36,60,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Einstellungen...",IDC_BTN_ENCODER_PROPERTIES,145,88,60,
+                    14,WS_DISABLED
+    PUSHBUTTON      "Einstellungen...",IDC_BTN_RENDERER_PROPERTIES,145,103,
+                    60,14,WS_DISABLED
+    GROUPBOX        "Dekoder und Renderer",IDC_GRP_OTHERS,5,80,205,40
+    LTEXT           "Kein Dekoder",IDC_TXT_FILTER,10,91,130,8
+    CONTROL         "Farbe",IDC_CK_COLOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,215,160,46,10
+    CONTROL         "Video Renderer Anzeigen",IDC_CK_LAST_FILTER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,105,130,10
+    COMBOBOX        IDC_COMBO_VIDEO_TYPE,146,56,59,149,CBS_DROPDOWN | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Interpoliert",IDC_CK_HALFTONE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,269,160,49,10
+    CONTROL         "An",IDC_CK_MD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    138,30,10
+    PUSHBUTTON      "Einstellungen...",IDC_BTN_MD_PROPERTIES,145,136,60,14
+    GROUPBOX        "Bewegungserkennung",IDC_GRP_MD,5,125,205,30
+    COMBOBOX        IDC_COMBO_OUTPUTFORMAT,10,56,130,178,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Kamera %d:",IDC_TXT_CAMERA,5,11,135,8
+    CONTROL         "Aktiv",IDC_CK_ENABLE_CAM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,145,10,60,10
+    CONTROL         "",IDC_PICTURE,"Static",SS_WHITERECT | NOT WS_VISIBLE | 
+                    WS_BORDER,215,5,206,150
+END
+
+IDD_DLG_MD_CONFIG DIALOGEX 0, 0, 376, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bewegungserkennung-Einstellungen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,281,120,42,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,327,120,42,14
+    PUSHBUTTON      "Invertiere perm. Maske",IDC_INVERT_PERMANENT_MASK,282,
+                    30,87,14
+    PUSHBUTTON      "Lösche Masken",IDC_CLEAR_MASK,282,66,87,14
+    PUSHBUTTON      "Speichere Masken",IDC_SAVE_MASK,282,84,87,14
+    CONTROL         "",IDC_INLAY_WND,"Static",SS_WHITERECT | SS_SUNKEN | 
+                    WS_BORDER,6,12,131,91
+    CONTROL         "",IDC_DIFF_WND,"Static",SS_WHITERECT | SS_SUNKEN | 
+                    WS_BORDER,138,12,131,91
+    COMBOBOX        IDC_SELECT_CAMERA,282,12,87,108,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Lade Masken",IDC_LOAD_MASK,282,102,87,14
+    CONTROL         "Zeige Maske im Bild",IDC_HIDE_MASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,102,137,78,10
+    LTEXT           "Originalbild:",IDC_TITLE_INLAY,6,3,66,8
+    LTEXT           "Differenzbild:",IDC_TITLE_MASK,138,3,42,8
+    CONTROL         505,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,121,7,6
+    CONTROL         506,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE | 
+                    SS_SUNKEN,14,133,7,6
+    LTEXT           "Adaptive Maske",IDC_STATIC_AM,24,120,52,8
+    LTEXT           "Permanente Maske",IDC_STATIC_PM,24,132,62,8
+    GROUPBOX        "Legende",IDC_STATIC_LEGENDE,6,108,90,36
+    CONTROL         "Histogrammausgleich",IDC_HISTOGRAMM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,185,137,83,10
+    PUSHBUTTON      "Invertiere adap. Maske",IDC_INVERT_ADAPTIVE_MASK,282,48,
+                    87,14
+    COMBOBOX        IDC_SELECT_MASK_SENSITIVITY,219,123,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SELECT_ALARM_SENSITIVITY,219,109,48,108,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Empfindlichkeit der adaptiven Maske",
+                    IDC_STATIC_ALARM_SENSITIVITY,99,125,117,8
+    LTEXT           "Empfindlichkeit der MD",IDC_STATIC_MD_SENSITIVITY,99,
+                    112,117,8,0,WS_EX_RIGHT
+    CONTROL         "Tiefpass Filter",IDC_FILTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,273,138,93,10
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MFC-Anwendung USBCamUnit\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "USBCamUnit\0"
+            VALUE "LegalCopyright", "Copyright (C) 2003\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "USBCamUnit.EXE\0"
+            VALUE "ProductName", "Anwendung USBCamUnit\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_USBCAMUNIT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 140
+        VERTGUIDE, 145
+        VERTGUIDE, 205
+        VERTGUIDE, 210
+        VERTGUIDE, 215
+        VERTGUIDE, 415
+        VERTGUIDE, 421
+        HORZGUIDE, 5
+        HORZGUIDE, 15
+        HORZGUIDE, 25
+        HORZGUIDE, 43
+        HORZGUIDE, 62
+        HORZGUIDE, 75
+        HORZGUIDE, 80
+        HORZGUIDE, 95
+        HORZGUIDE, 110
+        HORZGUIDE, 120
+        HORZGUIDE, 125
+        HORZGUIDE, 143
+        HORZGUIDE, 155
+        HORZGUIDE, 165
+    END
+
+    IDD_DLG_MD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 369
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 142
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU DISCARDABLE 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "&Info über...",               ID_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Start",                      IDC_START
+        MENUITEM "Sto&p",                       IDC_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "&Einstellungen...",           ID_SETTINGS
+        MENUITEM "&Quelle...",                  IDC_BTN_SOURCE_PROPERTY
+        MENUITEM "E&ncoder...",                 IDC_BTN_ENCODER_PROPERTY
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_USBCAMUNIT_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x5559, 0x5659, 0x0020, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x5955, 0x5956, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x5559, 0x2056, 0x0039, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x5559, 0x2056, 0x3134, 0x0031, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x5559, 0x2056, 0x3132, 0x0031, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x4752, 0x2042, 0x0031, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 10, 0
+0x4752, 0x2042, 0x2034, 0x6962, 0x0074, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 10, 0
+0x4752, 0x2042, 0x2038, 0x6962, 0x0074, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x4752, 0x2042, 0x3635, 0x0035, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x4752, 0x2042, 0x3535, 0x0035, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 11, 0
+0x4752, 0x2042, 0x3432, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 11, 0
+0x4752, 0x2042, 0x3233, 0x6220, 0x7469, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 12, 0
+0x5241, 0x4247, 0x3320, 0x2032, 0x6962, 0x0074, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4c43, 0x524a, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4649, 0x3930, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x5043, 0x414c, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4a4d, 0x4750, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x5654, 0x4a4d, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4157, 0x454b, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4643, 0x4343, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x4a49, 0x4750, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x6c50, 0x6d75, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x764f, 0x7265, 0x616c, 0x0079, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x5451, 0x6f4d, 0x6976, 0x0065, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 7, 0
+0x5451, 0x7052, 0x617a, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x5451, 0x6d53, 0x0063, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x5451, 0x6c52, 0x0065, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 7, 0
+0x5451, 0x704a, 0x6765, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x7664, 0x6473, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x7664, 0x6468, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x7664, 0x6c73, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 12, 0
+0x504d, 0x4745, 0x5031, 0x6361, 0x656b, 0x0074, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 13, 0
+0x504d, 0x4745, 0x5031, 0x7961, 0x6f6c, 0x6461, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 10, 0
+0x6956, 0x6564, 0x506f, 0x726f, 0x0074, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x5056, 0x6956, 0x6564, 0x006f, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 6, 0
+0x5056, 0x4256, 0x0049, 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 5, 0
+0x3449, 0x3030, "\000" 
+    IDC_COMBO_VIDEO_TYPE, 0x403, 8, 0
+0x6e55, 0x6e6b, 0x776f, 0x006e, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_GREEN               BITMAP  DISCARDABLE     "green.bmp"
+IDB_RED                 BITMAP  DISCARDABLE     "red.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o über USBCamUnit..."
+    IDS_HIGH                "Hoch"
+    IDS_NORMAL              "Normal"
+    IDS_LOW                 "Niedrig"
+    IDS_OFF                 "Aus"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\USBCamUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,135 @@
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+23.07.2002 tkr - Das Consolen-Beispielprogramm NeroCmd in einer Windowsapplikation integriert. Alle
+				 Aufrufe der NeroAPI geschehen aus einem eigenen Thread heraus um das Programm
+				 Acdc.exe nicht zu blockieren. 
+29.07.2002 tkr - Den Thread umgebaut. Nun wird WK_Thread benutzt. CD_Info auslesen funktioniert.
+
+07.08.2002 tkr - Die Übergabe der Parameter Liste (für CDInfo, Brennen usw.) in ein CStringArray
+				 geändert. Dort können nun dynamisch die von der (noch nicht implementierten) CIPC
+				 übergebenen Parameter (CDName, Driveletter, Files, Directories usw.) eingetragen
+				 werden. 
+				 Änderung der PARAMETER Klasse. Alle Parameter-Übergaben in Funktionen mit zu
+				 übergebenden Parameter wurde von  "char**& argv)" nach "CStringArray& saParam"
+				 geändert.
+				 Gesamter Quellcode wurde dokumentiert.
+08.08.2002 tkr - Abfrage der installierten Brenn Software eingebaut. Es muss nun stets zu allererst
+				 nach der installierten Brennsoftware gefragt werden, bevor überhaupt ein Auslesen der
+				 CD oder das Brennen möglich ist. Es wird nach DirectCD, Nero und WinXP gecheckt.
+				 Dazu die Klasse "CProducer" eingefügt, in der die gesamt Checkroutine enthalten ist.
+12.08.2002 tkr - Schnittstelle zur CIPC integriert, neue Klassen:
+				 - CIPCBurnDataCarrier
+				 - CIPCServerControlACDC
+				 Erster Test mit neu erstelltem TestClient "DCClient" erfolgreich.
+13.08.2002 tkr - Alle Memoryleaks entfernt, die beim Beenden mittel OK oder Abbrechen auftraten.
+16.08.2002 tkr - Byte Allignment auf 1 gesetzt (kompatibel zur CIPC) und alle Nero spezifischen File
+				 mit #pragma auf Bty Allignment 1 gesetzt. Vollständiger Durchlauf (Verbinden, CDInfo
+				 holen, CD brennen, Verbindung trennen) funktioniert über die CIPC mit Testclient
+				 DCClient. Es müssen noch bestimmte Errors hochgemeldet werden, z.B. muss noch 
+				 unterschieden werden, ob kein Drive gefunden wurde oder nur kein Medium im Drive liegt.
+20.08.2002 tkr - Falls die NeroAPI.dll nicht gefunden wird, werden alle Laufwerke danach durchsucht.
+				 Alle Messages, die im MainDlg im Statusfensetr ausgegeben werden, werden nun
+				 threadsafe dorthin geschickt.
+21.08.2002 tkr - Es werden nicht mehr alle Laufwerke nach der neroAPI.dll durchsucht, sondern direkt
+				 auf den Nero Pfad in der Registry zugegriffen, denn dort steht unter 
+				 HKEY_LOCAL_MACHINE/Software/Ahead/Shared der Schlüssel NeroApi, dessen Inhalt, je 
+				 nach Installierter Nero Version ..\Nero.exe bzw ..\NeroApi.dll ist.
+21.08.2002 tkr - TODO: 
+			 OK	 1. die Nero eigenen Messages werden im Fenster nicht mehr ausgegeben. 
+			 OK	 2. Aktuelle Version stürtzt beim Beenden unter XP ab, wenn Nero 5.5.8.2 installiert ist.
+			 OK	 3. Error Meldungen müssen noch zum Client geschickt werden.
+			 OK	 4. Neues CIPCDrive muss noch eingebunden werden.
+			 OK	 5. Nero Version von Original CD noch checken, hier ist der Registry Eintrag bei NeroAPI
+				 anders, denn da steht nero.exe drin. Dieses muss nicht separat beachtet werden, da es
+				 nur bei dieser Version (5.5.5.1) vorkommt, bei den ganzen Update dateien nicht.
+12.09.2002 tkr - zu 1. Nero Messages werden wieder im Fenster ausgegeben.
+				 zu 2. Aktuelle Version stürzt nach "OK" Buttonklick nicht mehr ab. Ursache war der noch nicht 
+				 abgeschlossene Disconnect von der NeroAPI.dll
+13.09.2002 tkr - zu 4. CIPCDrive eingebunden, incl. Rückmeldung an den Client, wieviele MB`s frei bzw. belegt
+				 sind, welcher Medien Type gefunden wurde
+				 zu 5. Es wird stets die neuste Nero Version verkauft. Sofern es zum Remote Brennen kommt,
+				 dann auf dem Client Rechner die installierte Version checken.
+				 TODO: nochmal genau checken, ab Abfrage ob, und wenn ja welche Nero Version installiert ist
+20.09.2002 tkr - ACDC funktioniert soweit, dasss damit erfolgreich gebrannt werden kann. Ist mit
+				 Idip schon ausprobiert worden und funktioniert. Einige Kleinigkeiten (noch
+				 hochzumeldende Fehler, evtl. einstellbare Brenngeschwindigkeit, separater
+				 Aufruf von Erase/Brennen) müssen noch erledigt werden. Wichiter erstmal DTS.
+04.10.2002 UF  - ACDC erscheint jetzt wie jedes andere Programm im Systray.
+10.10.2002 TKR - Es wird nun stets der Brenner mit dem höchsten LW-Buchstaben benutzt. Somit
+				 wird bei vorhandem (oder mehreren) USB Brennern immer der zuletzt angesteckt
+				 gewählt.
+11.10.2002 TKR - Reagieren auf USB Brenner ist vorbereitet. Dll DeviceDetect wird verwendet.
+			 OK  TODO:
+				 - Es muss noch in OnDeviceChange() der USB Brenner integriert werden.
+15.10.2002 TKR - USB Brenner werden erkannt beim anstecken und abziehen.
+			   - Ist kein Brenner verfügbar, wird dieses erkannt. Nach anstecken USB-Brenner
+				 wird dieser erkannt und es kann bebrannt werden.
+			   - Gleich nach starten von ACDC wird das aktuelle Brennlaufwerk festgestellt.
+30.10.2002 TKR - Falls der Starter ACDC.exe abschießt, bzw. ACDC.exe wird beendet, ohne dass 
+				 NeroApiFree() aufgerufen wird, dann läuft der Process Imapi.exe immer noch
+				 im Hintergrund. Wenn Imapi.exe läuft und ACDC.exe wieder gestartet wird, dann
+				 kann die NeroAPI.dll nicht initialisiert werden. 
+				 Nun wird vor der Initialisierung nachgeschaut, ob Imapi.exe noch läuft. Wenn
+				 ja, wird dieser Prozess beendet, sodass die NeroAPI.dll anschließen korrekt
+				 initialisiert werden kann. Dazu die Funktion CNeroBurn::CheckImapi()
+07.11.2002 TKR - Der während des Brennens allocierte Speicher wird nun direkt nach dem Brennen
+				 wieder freigegeben. Dazu NeroCloseDevice (m_NeroDeviceHandle) auf der Funktion
+				 "NeroAPIFree()" entfernt, das das DeviceHandle zum Zeitpunkt des Aufrufs von
+				 "NeroAPIFree()" schon geschlossen wurde.
+08.11.2002 TKR - Bei nicht leeren CD-RW`s werden vom belegten Platz noch 5 MB abgezogen. Dient 
+				 als Sicherheitspuffer, da es häufiger vorkam, dass beim komplett Brennen einer 
+				 CD-RW die vorher berechnete gesamte Kapazität der CD-RW zu groß war. Die auf
+				 dieser Grundlage anschließend berechnete Anzahl der zu brennenden Bilder war 
+				 dann zu groß. Deshalb nun die Reserve von 5 MB.
+08.11.2002 TKR - Der während des Brennens allocierte Speicher wird nun in der Funktion 
+				 "CBurnContext::SetExtraWriteBuffer()" auf 5 MB gesetzt. In Abhängigkeit des zu
+				 Verfügung stehenden Ram`s wurde dieser Wert sonst von Nero selbst festgelegt.
+				 Diese automatische Festlegung belief sich auf 30 - 60 MB, was zuviel ist.
+20.11.2002 TKR - Brennen von DVD+R und DVD+RW Medien wird nun unterstützt. Je nach Kapazität des
+				 Mediums wird entschieden, ob eine DVD (zusätzlicher Parameter "--DVD") oder eine CD
+				 gebrannt werden soll. Die Berechnung der Kapazitäten wurde auf 64 Bit (ULONGLONG)
+				 umgestellt.
+22.11.2002 TKR - Wird während des Backups (Zwischenspeicherung und Brennen) ein USB CD/DVD Laufwerk 
+				 angeschlossen und erkannt, wird ACDC nicht mehr neu gestartet, wenn gerade ein Backup
+				 läuft.
+07.05.2003 TKR - Nero/ACDC zeigt nicht die korrekte CD/DVD Kapazität an, wenn "Alcohol" oder "CloneCD"
+				 installiert ist.
+08.05.2003 TKR - Dialog aufgeräumt, Buttons umbenannt, Prüfung der Nero Version geändert.
+28.05.2003 TKR - Da es eine neue NeroCmd (5.5.10.15) gibt und diese nicht vollkommen abwärts-
+			     kompatibel zur vorherigen Version ist (5.5.8.2), habe ich entsprechende Bereiche
+				 (IsOldNeroCmdVersion) angepasst. Hintergrund: ACDC baut auf NeroCmd 5.5.8.2 auf.
+20.06.2003 TKR - Die Prozentanzeige auf DVD brennen angepasst, da bei DVD`s 2 mal von 0% auf 100%
+			     gezählt wird. Einmal beim Brennen der Tracks und einmal beim Leadout schreiben.
+20.06.2003 TKR - Alle "CD" Texte in "medium" geändert.
+20.06.2003 TKR - Bei nicht freigeschalteter DVD-Option wird dieses nun ausgegeben (nur in ACDC).
+09.07.2003 TKR - In Abhängigkeit ob NeroAPI Version älter oder neuer als 5.5.9.10. ist, wird das
+			     Medium von NERO_MEDIUM_TYPE (alt) oder NERO_MEDIA_TYPE (neu) erkannt. Dazu neue
+				 Datei "CheckMediaType" angelegt. Sie enthält alle, von CBurnContext aus benötigten
+				 Dinge zum Erkennen des Mediums.
+28.08.2003 TKR - Beim OnIntiDlg im ACDCDlg wird nun zuerst gefragt, ob eine Brennsoftware
+				 installiert ist, bevor der NeroThead gestartet wird. 
+17.10.2003 TKR - Runtime Error eingebaut. Wird abgeschickt, wenn Nero nicht installiert oder die
+			     Version von Nero kleiner als 5.5.8.2 ist.
+30.10.2003 TKR - Error beim löschen einer RW. Keine korrekte weiterleitung an DVClient. Nun wird eine	
+				 Errormeldung an DVClient weitergeleitet und das backup korrekt beendet.
+15.01.2004 TKR - ACDC so angepasst, dass es auch mit Nero unter Win98 zusammenspielt. 
+			     Ist notwendig, damit mit dem Idip Receiver auch unter 98 gebrannt werden kann.
+			   - Erweiterung: RuntimeError wird gesendet, sofern ein CD-Rom Drive oder ein 
+			     nicht von Nero unterstütztes Laufwerk gefunden wird. (Ist für Receiver interessant)
+21.01.2004 TKR - RunTimeErros von "Vision" nach "Backup" als Errorquelle geändert. 
+16.11.2004 TKR - Das Pruefen eines Mediums schlug fehl, da vor ein paar Versionen eine kleine
+			     Aenderung gemacht wurde. (Laufwerksangabe in UpperCase). Dieses wurde wieder
+			     rueckgaengig gemacht.
+23.03.2005 TKR - ACDC an das DVD9 (double layer) format angepasst. Entsprechend Nero Dateien
+			     ausgetauscht und eingecheckt.
+30.05.2005 TKR - einige Aenderungen bei WK_Traces gemacht. Klappt nun auch bei Unicode.
+25.07.2005 TKR - Bugfix 885: Unter NT wird nun nicht mehr der RT Error gemeldet, dass Nero 
+				 nicht installiert wird. Ist DirectCD installiert, erscheint kein Error.
+				 Nur wenn weder Nero noch DirectCD installiert sind, erscheint ein RTE.
+06.09.2005 TKR - Bugfix 925: Bei beschriebenen DVD+RW`s war die Angabe der freien Kapazität
+				 immer zu groß (2 mal 4,7GB). Bei DVD+RW`s sind die Angabe der freien und
+				 der belegten Speicherkapazität immer 4,7 GB. Diese werden nun bei DVD+RW`s
+				 nicht mehr addiert.
+30.12.2005 TKR - Image Laufwerke werden nun bei der CD/DVD Laufwerksauflistung ignoriert.
+15.03.2006 TKR - Fehlerausgaben von NeroAPI jetzt wieder lesbar.
+18.04.2006 TKR - Bugfix 123: Der RTE, dass keine Brennsoftware (Nero) installiert ist, erscheint nicht mehr
+			     bei Receivern.

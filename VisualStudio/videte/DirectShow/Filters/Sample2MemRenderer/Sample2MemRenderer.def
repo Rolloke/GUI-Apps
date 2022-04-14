@@ -1,0 +1,8 @@
+
+LIBRARY        Sample2MemRenderer.ax
+EXPORTS
+               DllGetClassObject PRIVATE
+               DllCanUnloadNow PRIVATE
+               DllRegisterServer PRIVATE
+               DllUnregisterServer PRIVATE
+

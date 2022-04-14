@@ -1,0 +1,2385 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian (Russian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\IdipClient.ico"
+IDB_SMALL_STOP          ICON                    "res\\smalstop.ico"
+IDI_TURN180             ICON                    "res\\turn180.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SYNC_HOT            BITMAP                  "res\\sync_hot.bmp"
+IDB_IMAGES              BITMAP                  "res\\images.bmp"
+IDB_STATES              BITMAP                  "res\\states.bmp"
+IDB_HOT                 BITMAP                  "res\\hot.bmp"
+IDB_COLD                BITMAP                  "res\\cold.bmp"
+IDR_LIVE                BITMAP                  "res\\display.bmp"
+IDR_HTML                BITMAP                  "res\\html.bmp"
+IDB_ALARM               BITMAP                  "res\\alarm.bmp"
+IDR_TOOLBARMENU         BITMAP                  "res\\toolbarm.bmp"
+IDR_TEXT                BITMAP                  "res\\text.bmp"
+IDR_PLAY                BITMAP                  "res\\play.bmp"
+IDR_PLAY_DTS            BITMAP                  "res\\play_dts.bmp"
+IDR_DIB                 BITMAP                  "res\\dib.bmp"
+IDR_ALARM_LIST          BITMAP                  "res\\alarmlist.bmp"
+IDB_SMALL_STOP          BITMAP                  "res\\small_st.bmp"
+IDB_HTML_IMG            BITMAP                  "res\\HTMLimg.bmp"
+33100                   BITMAP                  "res\\eject.bmp"
+33104                   BITMAP                  "res\\playback.bmp"
+33109                   BITMAP                  "res\\ff.bmp"
+33108                   BITMAP                  "res\\playfwd.bmp"
+33103                   BITMAP                  "res\\rewind.bmp"
+33105                   BITMAP                  "res\\single_b.bmp"
+33107                   BITMAP                  "res\\single_f.bmp"
+33102                   BITMAP                  "res\\skipback.bmp"
+33110                   BITMAP                  "res\\skip_fwd.bmp"
+IDB_STOP                BITMAP                  "res\\stop.bmp"
+33776                   BITMAP                  "res\\search.bmp"
+33796                   BITMAP                  "res\\export.bmp"
+57607                   BITMAP                  "res\\print.bmp"
+33101                   BITMAP                  "res\\pos1.bmp"
+33111                   BITMAP                  "res\\end.bmp"
+32875                   BITMAP                  "res\\stationmap.bmp"
+32876                   BITMAP                  "res\\cameramap.bmp"
+IDB_LOGOS               BITMAP                  "res\\logos.bmp"
+IDB_CENTER              BITMAP                  "res\\center.bmp"
+IDB_TURN180             BITMAP                  "res\\turn180.bmp"
+IDB_DOME                BITMAP                  "res\\Dome.bmp"
+IDB_PTZ_IMAGES          BITMAP                  "res\\PTZimg.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "\r\n"
+    "#if !defined( AFX_RESOURCE_DLL ) || defined( AFX_TARG_RUS )\r\n"
+    "\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#endif\r\n"
+    "#include ""res\\IdipClient.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#include ""afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_LIVE TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_HTML TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_HTML_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_HTML_HOME
+    BUTTON      ID_HTML_PREV
+    BUTTON      ID_HTML_NEXT
+    SEPARATOR
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_TOOLBARMENU TOOLBAR  20, 20
+BEGIN
+    BUTTON      ID_CONNECT
+    BUTTON      ID_DISCONNECT
+    BUTTON      ID_VIEW_1_PLUS
+    BUTTON      ID_VIEW_1
+    BUTTON      ID_VIEW_2_2
+    BUTTON      ID_VIEW_3_3
+    BUTTON      ID_VIEW_4_4
+    BUTTON      ID_VIEW_FULLSCREEN
+    BUTTON      ID_VIEW_ORIGINAL
+    BUTTON      ID_VIDEO_SAVE_ALL
+    BUTTON      ID_VIDEO_SAVE_ALL_STOP
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SEQUENZE
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_HTML_PREV
+    BUTTON      ID_VIEW_DIALOGBAR
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_BUTTON_SYSTEM
+    BUTTON      ID_SYNC
+    BUTTON      ID_ARCHIV_BACKUP
+    BUTTON      ID_NEW_LOGIN
+    BUTTON      ID_OPTIONS
+    BUTTON      ID_AU_PROPERTIES
+    BUTTON      ID_EXIT_CLIENT
+    BUTTON      ID_EXPLORER
+    BUTTON      ID_LOG_VIEW
+    BUTTON      ID_PRODUCT_VIEW
+    BUTTON      ID_SHELL
+    BUTTON      ID_ERROR
+END
+
+IDR_TEXT TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_PLAY TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_POS1
+    BUTTON      ID_NAVIGATE_BACK
+    BUTTON      ID_NAVIGATE_PREV
+    BUTTON      ID_NAVIGATE_STOP
+    BUTTON      ID_NAVIGATE_NEXT
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_NAVIGATE_END
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_DIB TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_PLAY_DTS TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_POS1
+    BUTTON      ID_NAVIGATE_SKIP_BACK
+    BUTTON      ID_NAVIGATE_FAST_BACK
+    BUTTON      ID_NAVIGATE_BACK
+    BUTTON      ID_NAVIGATE_PREV
+    BUTTON      ID_NAVIGATE_STOP
+    BUTTON      ID_NAVIGATE_NEXT
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_NAVIGATE_FAST_FORWARD
+    BUTTON      ID_NAVIGATE_SKIP_FORWARD
+    BUTTON      ID_NAVIGATE_END
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+IDR_ALARM_LIST TOOLBAR  12, 12
+BEGIN
+    BUTTON      ID_NAVIGATE_FORWARD
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_CLOSE_WND_THIS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_LIVE MENU 
+BEGIN
+    POPUP "&Хост"
+    BEGIN
+        MENUITEM "Разъединить\tESC",               ID_DISCONNECT
+        MENUITEM "Кар&та Камер",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Загрузить установки камеры...",        ID_HOST_LOAD_SEQUENCE
+        MENUITEM "&Сохранить установки камеры...",    ID_HOST_SAVE_SEQUENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Установить Дату и &Время...", ID_HOST_DATETIME
+    END
+    POPUP "Детектор"
+    BEGIN
+        MENUITEM "Информация",             ID_INPUT_INFORMATION
+        MENUITEM "&Подтвердить",                 ID_INPUT_CONFIRM
+    END
+    POPUP "Камера"
+    BEGIN
+        MENUITEM "Оста&новить Прием ",            ID_VIDEO_STOP
+        MENUITEM "Сохранить",              ID_VIDEO_SAVE
+        MENUITEM "Сохранить как &Базовое изображение", ID_VIDEO_SAVE_REFERENCE
+        MENUITEM "&Показать Базовое изображение",        ID_VIDEO_SHOW_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Разрешение &Высокое\tCTRL+F8",    ID_VIDEO_FEIN
+        MENUITEM "Разрешение &Низкое\tCTRL+F8",    ID_VIDEO_GROB
+        MENUITEM SEPARATOR
+        MENUITEM "&Маска детектора движения\tCTRL+M",     ID_VIDEO_MASK
+        MENUITEM "&Установки...",           ID_VIDEO_CSB
+        MENUITEM "&Полноэкранный режим",      ID_VIDEO_FULLSCREEN
+        MENUITEM "&1:1 Дисплей",            ID_SMALL_ORIGINAL
+        MENUITEM "&Уменьшить\tF10",              ID_ZOOM_OUT
+    END
+    POPUP "&Реле"
+    BEGIN
+        MENUITEM "&Открыть",                     ID_RELAIS_OPEN
+        MENUITEM "&Закрыть",                  ID_RELAIS_CLOSE
+    END
+    POPUP "Пос&ледовательность"
+    BEGIN
+        MENUITEM "&Вкл/Выкл",                ID_SEQUENZE
+        MENUITEM SEPARATOR
+        MENUITEM "&1 Секунда",                  ID_SEQUENCE_1
+        MENUITEM "&2 Секунды",                 ID_SEQUENCE_2
+        MENUITEM "&3 Секунды",                 ID_SEQUENCE_3
+        MENUITEM "&4 Секунды",                 ID_SEQUENCE_4
+        MENUITEM "&5 Секунд",                 ID_SEQUENCE_5
+        MENUITEM "1&0 Секунд",                ID_SEQUENCE_10
+        MENUITEM "15 &Секунд",                ID_SEQUENCE_15
+        MENUITEM "20 &Секунд",                ID_SEQUENCE_20
+        MENUITEM "30 &Секунд",                ID_SEQUENCE_30
+    END
+    POPUP "&Поворот/Наклон/Трансфокатор"
+    BEGIN
+        MENUITEM "Поворот/&Наклон - Управление...", ID_VIDEO_PTZ
+        MENUITEM "&Конфигурирование поворотной камеры", ID_VIDEO_PTZ_CONFIG
+        MENUITEM SEPARATOR
+        MENUITEM "Порвоначальная позиция",              ID_VIDEO_PTZ_HOME
+        MENUITEM "Позиция &1",                 ID_VIDEO_PTZ_1
+        MENUITEM "Позиция &2",                 ID_VIDEO_PTZ_2
+        MENUITEM "Позиция &3",                 ID_VIDEO_PTZ_3
+        MENUITEM "Позиция &4",                 ID_VIDEO_PTZ_4
+        MENUITEM "Позиция &5",                 ID_VIDEO_PTZ_5
+        MENUITEM "Позиция &6",                 ID_VIDEO_PTZ_6
+        MENUITEM "Позиция &7",                 ID_VIDEO_PTZ_7
+        MENUITEM "Позиция &8",                 ID_VIDEO_PTZ_8
+        MENUITEM "Позиция &9",                 ID_VIDEO_PTZ_9
+    END
+    POPUP "Mic&o"
+    BEGIN
+        MENUITEM "25 Кадров в &Секунду",       ID_FPS_25_1
+        MENUITEM "12 Кадров в &Секунду",      ID_FPS_12_1
+        MENUITEM "6 &Кадров в Секунду",       ID_FPS_6_1
+        MENUITEM "4 Ка&дра в Секунду",       ID_FPS_4_1
+        MENUITEM "3 Кад&ра в Секунду",       ID_FPS_3_1
+        MENUITEM "2 Кадр&а в Секунду",       ID_FPS_2_1
+        MENUITEM SEPARATOR
+        MENUITEM "1 &Кадр в Секунду",         ID_FPS_1_1
+        MENUITEM "1 Кадр в &2 Секунды",       ID_FPS_1_2
+        MENUITEM "1 Кадр в &3 Секунды",       ID_FPS_1_3
+        MENUITEM "1 Кадр в &4 Секунды",       ID_FPS_1_4
+        MENUITEM "1 Кадр в &5 Секунд",       ID_FPS_1_5
+    END
+    POPUP "&Coco"
+    BEGIN
+        MENUITEM "1 &Кадр в Секунду",         ID_FPS_1_1
+        MENUITEM "3 &Кадра в Секунду",       ID_FPS_3_1
+        MENUITEM "6 &Кадров в Секунду",       ID_FPS_6_1
+        MENUITEM "9 &Кадров в Секунду",       ID_FPS_9_1
+        MENUITEM "1&2 Кадров в Секунду",      ID_FPS_12_1
+    END
+    POPUP "Tasha"
+    BEGIN
+        MENUITEM "1 &Кадр в Секунду",         ID_FPS_1_1
+        MENUITEM "&2 Изображения в Секунду",         ID_FPS_2_1
+        MENUITEM "3 &Кадра в Секунду",       ID_FPS_3_1
+        MENUITEM "&5 Изображений в Секунду",       ID_FPS_5_1
+        MENUITEM "1&2 Кадров в Секунду",      ID_FPS_12_1
+        MENUITEM "25 Изображений в Секунду",       ID_FPS_25_1
+    END
+    POPUP "&Изображения"
+    BEGIN
+        MENUITEM "&Получить изображения",           ID_VIDEO_START
+        MENUITEM "Информация",             ID_INFORMATION
+    END
+    POPUP "&Монитор"
+    BEGIN
+        MENUITEM "Эксклюзивный",                   ID_SHOWON_MONITOR_EXCLUSIVE
+        MENUITEM "Монитор &1",                  ID_SHOWON_MONITOR1
+        MENUITEM "Монитор &2",                  ID_SHOWON_MONITOR2
+    END
+    POPUP "HTML &Вид"
+    BEGIN
+        POPUP "&Перейти"
+        BEGIN
+            MENUITEM "&Домой",                 ID_HTML_HOME
+            MENUITEM "&Вперед",                   ID_HTML_NEXT
+            MENUITEM "&Назад",                     ID_HTML_PREV
+        END
+        POPUP "&Вид"
+        BEGIN
+            MENUITEM "Об&новить",              ID_VIEW_REFRESH
+            MENUITEM SEPARATOR
+            MENUITEM "Хосты ",             ID_VIEW_HOSTS
+            MENUITEM "&Камеры",                    ID_VIEW_CAMERAS
+            MENUITEM "&Реле",                     ID_VIEW_RELAIS
+            MENUITEM "Детектор",                     ID_VIEW_DETECTORS
+            MENUITEM SEPARATOR
+            MENUITEM "З&вуковая тревога",          ID_ALARM_SOUND
+        END
+        POPUP "&Редактировать"
+        BEGIN
+            MENUITEM "Редактировать &карту",           ID_EDIT_HTML_PAGE
+            MENUITEM "&Сохранить карту",            ID_HTML_SAVE
+            MENUITEM "&Добавить карту",           ID_HTML_NEW_PAGE
+            MENUITEM SEPARATOR
+            MENUITEM "&Параметры карты...",     ID_EDIT_HTML_MAP_PROPERTIES
+
+            MENUITEM "&Удалить карту",              ID_EDIT_CLEAR_MAP
+            MENUITEM SEPARATOR
+            MENUITEM "&Параметры связи", ID_EDIT_HTML_LINK_PROPERTIES
+
+            MENUITEM "Удалить с&вязь",               ID_EDIT_CLEAR
+        END
+    END
+    POPUP "&Уведомление"
+    BEGIN
+        MENUITEM "&Уведомление",                  ID_AU_START_PLAY
+        MENUITEM "&Интерком",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "Стоп",                      ID_AU_STOP_PLAY
+        MENUITEM SEPARATOR
+        MENUITEM "&Свойства...",           ID_AU_PROPERTIES
+    END
+    POPUP "&Прослушать в"
+    BEGIN
+        MENUITEM "&Прослушать в",                   ID_AU_START_REC
+        MENUITEM "Стоп",                      ID_AU_STOP_REC
+        MENUITEM SEPARATOR
+        MENUITEM "&Свойства...",           ID_AU_PROPERTIES
+    END
+    POPUP "Хост &nc"
+    BEGIN
+        MENUITEM "&Соединить",                  ID_CONNECT_HOST
+    END
+    POPUP "Новый"
+    BEGIN
+        MENUITEM "&Динамики  / Микрофоны",   ID_VIEW_MEDIAS
+    END
+    POPUP "Окно живого изображения"
+    BEGIN
+        MENUITEM "&Уменьшить\tF10",              ID_ZOOM_OUT
+        POPUP "&Закрыть"
+        BEGIN
+            MENUITEM "Закрыть &это окно", ID_CLOSE_WND_THIS
+            MENUITEM "Закрыть все &Окна живого изображения", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "Закрыть все &Окна проигрываемого изображения", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "Закрыть &все окна",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM "Сохранить",              ID_VIDEO_SAVE
+        POPUP "Базовое &изображение"
+        BEGIN
+            MENUITEM "Сохранить как &Базовое изображение", ID_VIDEO_SAVE_REFERENCE
+            MENUITEM "&Показать Базовое изображение",        ID_VIDEO_SHOW_REFERENCE
+        END
+        POPUP "Разрешение"
+        BEGIN
+            MENUITEM "Разрешение &Высокое\tCTRL+F8",    ID_VIDEO_FEIN
+            MENUITEM "Разрешение &Низкое\tCTRL+F8",    ID_VIDEO_GROB
+        END
+        MENUITEM SEPARATOR
+        POPUP "&Сохранить изобр. как"
+        BEGIN
+            MENUITEM "&HTML изображение и данные...",     ID_FILE_HTML
+            MENUITEM "&JPEG изображение...",               ID_FILE_JPG
+            MENUITEM "&BMP Изображение...",             ID_FILE_DIB
+        END
+        POPUP "&Печать"
+        BEGIN
+            MENUITEM "&Напечатать изображение...\tCtrl+P",    ID_FILE_PRINT
+            MENUITEM "Имя хоста",            ID_EDIT_STATION
+            MENUITEM "Заметки",               ID_EDIT_COMMENT
+            MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+            MENUITEM "&Параметры страницы...",         ID_FILE_PAGE_SETUP
+        END
+        MENUITEM "&Копировать\tCTRL+C",           ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        POPUP "Установки"
+        BEGIN
+            MENUITEM "&Маска детектора движения\tCTRL+M",     ID_VIDEO_MASK
+            MENUITEM "&Установки цвета", ID_VIDEO_CSB
+        END
+        MENUITEM "&Полноэкранный режим",      ID_VIEW_FULLSCREEN
+        POPUP "&Установки камеры"
+        BEGIN
+            MENUITEM "&Загрузить установки камеры...",        ID_HOST_LOAD_SEQUENCE
+            MENUITEM "&Сохранить установки камеры...",    ID_HOST_SAVE_SEQUENCE
+            MENUITEM SEPARATOR
+        END
+        MENUITEM SEPARATOR
+    END
+    POPUP "Вид объекта"
+    BEGIN
+        MENUITEM "Равномерно",                ID_OBJECTVIEW_EQUAL
+        MENUITEM "Переменно",                   ID_OBJECTVIEW_VARIABLE
+        MENUITEM "Простой вид",              ID_OBJECTVIEW_ONEVIEW
+        MENUITEM SEPARATOR
+        MENUITEM "Корпоративный логотип",                       ID_VIEW_OEMDIALOG
+    END
+    MENUITEM "Установки",               ID_EINSTELLUNGEN
+END
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Соединение"
+    BEGIN
+        MENUITEM "К &Удаленному Хосту...\tВВОД", ID_CONNECT
+        MENUITEM "&Локальный Хост\tCTRL+L",     ID_CONNECT_LOCAL
+        MENUITEM "Разъединить\tESC",               ID_DISCONNECT
+        MENUITEM "&Карта Соединений",                ID_CONNECT_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Конец сеанса...",                  ID_NEW_LOGIN
+        MENUITEM "Вы&ход\tAlt+F4",            ID_EXIT_CLIENT
+        MENUITEM SEPARATOR
+    END
+    MENUITEM "&Запрос...",                   ID_SEARCH
+    POPUP "&Файл "
+    BEGIN
+        POPUP "&Сохранить как"
+        BEGIN
+            MENUITEM "&HTML изображение и данные...",     ID_FILE_HTML
+            MENUITEM "&JPEG изображение...",               ID_FILE_JPG
+            MENUITEM "&BMP Изображение...",             ID_FILE_DIB
+        END
+        MENUITEM "Открыть...\tCtrl+O",          ID_FILE_OPEN
+        MENUITEM "&Копировать\tCTRL+C",           ID_EDIT_COPY
+        POPUP "&Печать"
+        BEGIN
+            MENUITEM "&Печать...\tCtrl+P",         ID_FILE_PRINT
+            MENUITEM "Имя хоста",            ID_EDIT_STATION
+            MENUITEM "Заметки",               ID_EDIT_COMMENT
+            MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+            MENUITEM "&Параметры страницы...",         ID_FILE_PAGE_SETUP
+        END
+    END
+    POPUP "&Вид"
+    BEGIN
+        MENUITEM "1 &плюс",                 ID_VIEW_1_PLUS
+        MENUITEM "1\tF8",                      ID_VIEW_1
+        MENUITEM "Вид квадрати&рования\tF8",            ID_VIEW_3_3
+        MENUITEM SEPARATOR
+        MENUITEM "&Полноэкранный режим",      ID_VIEW_FULLSCREEN
+        MENUITEM "Показать &заголовки",       ID_VIEW_TITLE_OF_SMALLWINDOWS
+
+        MENUITEM "1:1 &Дисплей\tCTRL+F9",   ID_VIEW_ORIGINAL
+        MENUITEM "&Дисплей цели",                 ID_VIEW_TARGET_DISPLAY
+        MENUITEM SEPARATOR
+        MENUITEM "Монитор &2",                  ID_VIEW_MONITOR2
+        MENUITEM SEPARATOR
+        MENUITEM "Меню",                       ID_VIEW_MENU
+        MENUITEM "Панель",            ID_VIEW_DIALOGBAR
+        MENUITEM "&Вид объекта",              ID_VIEW_OBJECT_VIEW
+    END
+    POPUP "Детектор"
+    BEGIN
+        MENUITEM "Информация",             ID_INPUT_INFORMATION
+        MENUITEM "&Подтвердить",                 ID_INPUT_CONFIRM
+    END
+    POPUP "Камера"
+    BEGIN
+        MENUITEM "&Уменьшить\tF10",              ID_ZOOM_OUT
+        MENUITEM "Сохранить &Все\tF3",        ID_VIDEO_SAVE_ALL
+        POPUP "Базовое &изображение"
+        BEGIN
+            MENUITEM "Сохранить как &Базовое изображение", ID_VIDEO_SAVE_REFERENCE
+            MENUITEM "&Показать Базовое изображение",        ID_VIDEO_SHOW_REFERENCE
+        END
+        MENUITEM "Кар&та Камер",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        POPUP "Разрешение"
+        BEGIN
+            MENUITEM "Разрешение &Высокое\tCTRL+F8",    ID_VIDEO_FEIN
+            MENUITEM "Разрешение &Низкое\tCTRL+F8",    ID_VIDEO_GROB
+        END
+        MENUITEM "&1:1 Дисплей\tCTRL+F9",   ID_VIEW_ORIGINAL
+        MENUITEM SEPARATOR
+        POPUP "Установки"
+        BEGIN
+            MENUITEM "&Маска детектора движения\tCTRL+M",     ID_VIDEO_MASK
+            MENUITEM "&Установки цвета", ID_VIDEO_CSB
+        END
+        POPUP "&Установки камеры"
+        BEGIN
+            MENUITEM "&Загрузить установки камеры...",        ID_HOST_LOAD_SEQUENCE
+            MENUITEM "&Сохранить установки камеры...",    ID_HOST_SAVE_SEQUENCE
+            MENUITEM SEPARATOR
+        END
+    END
+    POPUP "&Реле"
+    BEGIN
+        MENUITEM "&Открыть",                     ID_RELAIS_OPEN
+        MENUITEM "&Закрыть",                  ID_RELAIS_CLOSE
+    END
+    POPUP "Аудио"
+    BEGIN
+        MENUITEM "&Уведомление",                 ID_AU_START_PLAY
+        MENUITEM "&Интерком",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "&Прослушать в",                   ID_AU_START_REC
+        MENUITEM "Стоп",                      ID_AU_STOP_ANY
+        MENUITEM SEPARATOR
+        MENUITEM "&Свойства...",           ID_AU_PROPERTIES
+    END
+    POPUP "Архив"
+    BEGIN
+        MENUITEM "Очистить",                     ID_ARCHIV_EMPTY
+        MENUITEM "Удалить",                    ID_ARCHIV_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Запрос...\tCtrl+F",           ID_SEARCH
+        MENUITEM "Резервирование...\tCtrl+B",  ID_ARCHIV_BACKUP
+        MENUITEM "Си&нхронизированное ВоспроизведениеtCtrl+T", ID_SYNC
+        MENUITEM SEPARATOR
+        MENUITEM "Информация",      ID_DATABASE_INFO
+    END
+    POPUP "&Последовательность"
+    BEGIN
+        MENUITEM "Открыть\tCtrl+F5",            ID_SEQUENCE_OPEN
+        MENUITEM "Открыть &только\tAlt+F5",     ID_SEQUENCE_OPEN_SINGLE
+        POPUP "&Закрыть"
+        BEGIN
+            MENUITEM "Закрыть &это окно", ID_CLOSE_WND_THIS
+            MENUITEM "Закрыть все &Окна живого изображения", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "Закрыть все &Окна проигрываемого изображения", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "Закрыть &все окна",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM "Использовать тоже окно",    ID_SEQUENCE_OVER
+        MENUITEM "Просмотр &реального времени", ID_SEQUENCE_REALTIME
+        MENUITEM SEPARATOR
+        MENUITEM "Удалить", ID_DELETE
+    END
+    POPUP "С&истема"
+    BEGIN
+        MENUITEM "Установки...",           ID_OPTIONS
+        MENUITEM "&Интерфейс пользователя...",     ID_USER_INTERFACE
+        MENUITEM "&Создать карту соединений...",   ID_EDIT_CREATE_HTML_HOST_PAGE
+
+        MENUITEM "Соз&дать карту камер...",   ID_EDIT_CREATE_HTML_CAMERA_PAGE
+
+        MENUITEM SEPARATOR
+        MENUITEM "&Конфигурирование Системы...",        ID_BUTTON_SYSTEM
+        MENUITEM "Установить Дату и &Время...", ID_HOST_DATETIME
+        POPUP "Другие"
+        BEGIN
+            MENUITEM "Ошибки исполнения...",          ID_ERROR
+            MENUITEM "Вид ЛогФайлов...",                 ID_LOG_VIEW
+            MENUITEM "Донгл...",          ID_PRODUCT_VIEW
+            MENUITEM "Открыть проводник...",         ID_EXPLORER
+            MENUITEM "Защищенный Режим...", ID_SHELL
+            MENUITEM "&Нормальный Режим...",     ID_NON_SHELL
+            MENUITEM "&Обновление программы...",          ID_SOFTWARE_UPDATE
+            MENUITEM "&Код расширения...",           ID_EXTENSION_CODE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "О программе...",               ID_APP_ABOUT
+    END
+END
+
+IDR_MENU_ARCHIVE MENU 
+BEGIN
+    POPUP "Сервер"
+    BEGIN
+        MENUITEM "Разъединить\tESC",               ID_DISCONNECT
+        MENUITEM "Информация",      ID_DATABASE_INFO
+        MENUITEM "&Запрос...\tCtrl+F",           ID_SEARCH
+        MENUITEM "Резервирование...\tCtrl+B",  ID_ARCHIV_BACKUP
+    END
+    POPUP "Архив"
+    BEGIN
+        MENUITEM "Очистить",                     ID_ARCHIV_EMPTY
+        MENUITEM "Удалить",                    ID_ARCHIV_DELETE
+    END
+    POPUP "Последовательность"
+    BEGIN
+        MENUITEM "Открыть\tCtrl+F5",            ID_SEQUENCE_OPEN
+        MENUITEM "Открыть &только\tAlt+F5",     ID_SEQUENCE_OPEN_SINGLE
+        MENUITEM "Удалить", ID_DELETE
+    END
+    POPUP "ОкноПоказа "
+    BEGIN
+        MENUITEM "&Полный экран\tF9",               ID_VIDEO_FULLSCREEN
+        MENUITEM "&1:1 Дисплей",   ID_VIEW_ORIGINAL
+        MENUITEM "&Уменьшить\tF10",              ID_ZOOM_OUT
+        MENUITEM SEPARATOR
+        POPUP "&Сохранить как"
+        BEGIN
+            MENUITEM "&HTML изображение и данные...",     ID_FILE_HTML
+            MENUITEM "&JPEG изображение...",               ID_FILE_JPG
+            MENUITEM "&BMP Изображение...",             ID_FILE_DIB
+        END
+        MENUITEM "&Печать...\tCTRL+P",         ID_FILE_PRINT
+        MENUITEM "&Копировать\tCTRL+C",           ID_EDIT_COPY
+        MENUITEM "Заметки",               ID_EDIT_COMMENT
+        MENUITEM SEPARATOR
+        MENUITEM "1 &Изображение",                     ID_DISPLAY_1
+        MENUITEM "&4 Изображения",                   ID_DISPLAY_4
+        MENUITEM "9 &Изображений",                   ID_DISPLAY_9
+    END
+    POPUP "&Сохранить как"
+    BEGIN
+        MENUITEM "&HTML изображение и данные...",     ID_FILE_HTML
+        MENUITEM "&JPEG изображение...",               ID_FILE_JPG
+        MENUITEM "&BMP Изображение...",             ID_FILE_DIB
+    END
+    POPUP "DibОкно"
+    BEGIN
+        MENUITEM "&Полный экран\tF9",               ID_VIEW_FULLSCREEN
+        MENUITEM "&Печать...\tCTRL+P",         ID_FILE_PRINT
+    END
+    POPUP "Запрос"
+    BEGIN
+        MENUITEM "&Запрос...\tCtrl+F",           ID_SEARCH
+        MENUITEM "Выделение\tCtrl+R",     ID_SEARCH_RECTANGLE
+        MENUITEM "Очистить выделение\tCtrl+D", 
+                                                ID_SEARCH_RECTANGLE_DELETE
+    END
+    POPUP "Архив даты"
+    BEGIN
+        MENUITEM "Удалить",                    ID_DATE_SEQUENCES_DELETE
+    END
+    POPUP "Окно Воспроизведения"
+    BEGIN
+        MENUITEM "&Уменьшить\tF10",              ID_ZOOM_OUT
+        POPUP "&Закрыть"
+        BEGIN
+            MENUITEM "Закрыть &это окно", ID_CLOSE_WND_THIS
+            MENUITEM "Закрыть все &Окна живого изображения", ID_CLOSE_WND_LIVE_ALL
+            MENUITEM "Закрыть все &Окна проигрываемого изображения", 
+                                                    ID_CLOSE_WND_PLAY_ALL
+            MENUITEM "Закрыть &все окна",     ID_CLOSE_WND_ALL
+        END
+        MENUITEM SEPARATOR
+        POPUP "&Сохранить изобр. как"
+        BEGIN
+            MENUITEM "&HTML изображение и данные...",     ID_FILE_HTML
+            MENUITEM "&JPEG изображение...",               ID_FILE_JPG
+            MENUITEM "&BMP Изображение...",             ID_FILE_DIB
+        END
+        POPUP "&Печать"
+        BEGIN
+            MENUITEM "&Печать...\tCtrl+P",         ID_FILE_PRINT
+            MENUITEM "Имя хоста",            ID_EDIT_STATION
+            MENUITEM "Заметки",               ID_EDIT_COMMENT
+            MENUITEM "Пара&метры печати...",      ID_FILE_PRINT_SETUP
+            MENUITEM "Предвари&тельный просмотр",              ID_FILE_PRINT_PREVIEW
+        END
+        MENUITEM "&Копировать\tCTRL+C",           ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "&Полноэкранный режим",      ID_VIDEO_FULLSCREEN
+        MENUITEM "Использовать тоже окно",    ID_SEQUENCE_OVER
+        MENUITEM SEPARATOR
+        MENUITEM "1 &Изображение",                     ID_DISPLAY_1
+        MENUITEM "&4 Изображения",                   ID_DISPLAY_4
+        MENUITEM "9 &Изображений",                   ID_DISPLAY_9
+    END
+    POPUP "Список тревог"
+    BEGIN
+        MENUITEM "Об&новить",              ID_VIEW_REFRESH
+        MENUITEM SEPARATOR
+        MENUITEM "&Оптимизоровать ширину колонки",   ID_VIEW_OPTIMIZE_COLUMN_WIDTH
+
+        MENUITEM "По &названиям",                  ID_VIEW_OPTIMIZE_BY_HEADER
+        MENUITEM "По &содержимому",             ID_VIEW_OPTIMIZE_BY_CONTENT
+        MENUITEM "TODO!Ограничено шириной окна ", 
+                                                ID_VIEW_OPTIMIZE_TO_WND_WIDTH
+
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "B",            ID_ARCHIV_BACKUP,       VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_CLOSE_WND_THIS,      VIRTKEY, CONTROL, NOINVERT
+    VK_RETURN,      ID_CONNECT,             VIRTKEY, NOINVERT
+    "L",            ID_CONNECT_LOCAL,       VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_DATABASE_INFO,       VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_DELETE,              VIRTKEY, SHIFT, CONTROL, 
+                                                    NOINVERT
+    VK_ESCAPE,      ID_DISCONNECT,          VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_EXIT_CLIENT,         VIRTKEY, ALT, NOINVERT
+    "X",            ID_EXIT_CLIENT,         VIRTKEY, ALT, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_FILE_PAGE_SETUP,     VIRTKEY, CONTROL, ALT, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    VK_NEXT,        ID_NAVIGATE_BACK,       VIRTKEY, NOINVERT
+    VK_END,         ID_NAVIGATE_END,        VIRTKEY, NOINVERT
+    VK_PRIOR,       ID_NAVIGATE_FORWARD,    VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_NAVIGATE_NEXT,       VIRTKEY, NOINVERT
+    VK_HOME,        ID_NAVIGATE_POS1,       VIRTKEY, NOINVERT
+    VK_LEFT,        ID_NAVIGATE_PREV,       VIRTKEY, NOINVERT
+    VK_PAUSE,       ID_NAVIGATE_STOP,       VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "F",            ID_SEARCH,              VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_SEQUENCE_OPEN,       VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_SEQUENCE_REALTIME,   VIRTKEY, CONTROL, NOINVERT
+    VK_SPACE,       ID_SPACE,               VIRTKEY, NOINVERT
+    "T",            ID_SYNC,                VIRTKEY, CONTROL, NOINVERT
+    VK_F8,          ID_TOGGLE,              VIRTKEY, NOINVERT
+    VK_F8,          ID_TOGGLE_RESOLUTION,   VIRTKEY, CONTROL, NOINVERT
+    VK_F7,          ID_VIDEO_CSB,           VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_VIDEO_MASK,          VIRTKEY, CONTROL, NOINVERT
+    VK_F4,          ID_VIDEO_SAVE,          VIRTKEY, NOINVERT
+    VK_F3,          ID_VIDEO_SAVE_ALL_TOGGLE, VIRTKEY, NOINVERT
+    VK_F9,          ID_VIEW_FULLSCREEN,     VIRTKEY, NOINVERT
+    VK_F9,          ID_VIEW_ORIGINAL,       VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_VIEW_STATUS_BAR,     VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "I",            ID_VIEW_TITLE_IN_PICTURE, VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    "T",            ID_VIEW_TOOLBAR,        VIRTKEY, SHIFT, CONTROL, ALT, 
+                                                    NOINVERT
+    VK_F10,         ID_ZOOM_OUT,            VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_IDIP_CLIENT_DLG_BAR DIALOGEX 0, 0, 535, 60
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Лог",ID_NEW_LOGIN,5,7,22,20
+    PUSHBUTTON      "Соединить",ID_CONNECT,32,7,22,20
+    PUSHBUTTON      "Разъединить",ID_DISCONNECT,54,7,22,20
+    PUSHBUTTON      "sta",ID_CONNECT_MAP,83,7,22,20
+    PUSHBUTTON      "cam",ID_HOST_CAMERA_MAP,105,7,22,20
+    PUSHBUTTON      "1",ID_VIEW_1,134,7,22,20
+    PUSHBUTTON      "&3 x 3",ID_VIEW_3_3,156,7,22,20
+    PUSHBUTTON      "1 &Плюс",ID_VIEW_1_PLUS,178,7,22,20
+    PUSHBUTTON      "сохранить",ID_VIDEO_SAVE_ALL,208,7,22,20
+    PUSHBUTTON      "SH",ID_SEARCH,230,7,22,20
+    PUSHBUTTON      "Сохронизация",ID_SYNC,252,7,22,20
+    PUSHBUTTON      "Резервирование",ID_ARCHIV_BACKUP,279,7,22,20
+    PUSHBUTTON      "закрыть",ID_EXIT_CLIENT,5,33,22,20
+    PUSHBUTTON      "Извлечь",ID_NAVIGATE_EJECT,32,33,22,20
+    PUSHBUTTON      "Поз. 1",ID_NAVIGATE_POS1,54,33,22,20
+    PUSHBUTTON      "SkB",ID_NAVIGATE_SKIP_BACK,76,33,22,20
+    PUSHBUTTON      "FB",ID_NAVIGATE_FAST_BACK,98,33,22,20
+    PUSHBUTTON      "PB",ID_NAVIGATE_BACK,120,33,22,20
+    PUSHBUTTON      "SiB",ID_NAVIGATE_PREV,142,33,22,20
+    PUSHBUTTON      "SiF",ID_NAVIGATE_NEXT,164,33,22,20
+    PUSHBUTTON      "PF",ID_NAVIGATE_FORWARD,186,33,22,20
+    PUSHBUTTON      "FF",ID_NAVIGATE_FAST_FORWARD,208,33,22,20
+    PUSHBUTTON      "SkF",ID_NAVIGATE_SKIP_FORWARD,230,33,22,20
+    PUSHBUTTON      "Конец",ID_NAVIGATE_END,252,33,22,20
+    PUSHBUTTON      "PR",ID_FILE_PRINT,279,33,22,20
+    PUSHBUTTON      "1",ID_BUTTON_NUM1,307,1,16,15
+    PUSHBUTTON      "2",ID_BUTTON_NUM2,323,1,16,15
+    PUSHBUTTON      "3",ID_BUTTON_NUM3,339,1,16,15
+    PUSHBUTTON      "4",ID_BUTTON_NUM4,307,16,16,14
+    PUSHBUTTON      "5",ID_BUTTON_NUM5,323,16,16,14
+    PUSHBUTTON      "6",ID_BUTTON_NUM6,339,16,16,14
+    PUSHBUTTON      "7",ID_BUTTON_NUM7,307,30,16,14
+    PUSHBUTTON      "8",ID_BUTTON_NUM8,323,30,16,14
+    PUSHBUTTON      "9",ID_BUTTON_NUM9,339,30,16,14
+    PUSHBUTTON      "&0",ID_BUTTON_NUM0,307,44,16,14
+    PUSHBUTTON      "-/--",ID_BUTTON_NUMPLUS,323,44,16,14
+    CONTROL         "&D",ID_BUTTON_DOME,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,339,44,16,14
+    PUSHBUTTON      "&U",IDC_UP,377,7,16,15
+    PUSHBUTTON      "&R",IDC_RIGHT,394,23,16,15
+    PUSHBUTTON      "&D",IDC_DOWN,377,38,16,15
+    PUSHBUTTON      "&L",IDC_LEFT,360,23,16,15
+    PUSHBUTTON      "&H",IDC_CENTER,377,23,16,15
+    PUSHBUTTON      "O",IDC_IRISIN,415,1,16,15
+    PUSHBUTTON      "F",IDC_FOCUSOUT,431,1,16,15
+    PUSHBUTTON      "T",IDC_ZOOMIN,447,1,16,15
+    PUSHBUTTON      "C",IDC_IRISOUT,415,16,16,14
+    PUSHBUTTON      "N",IDC_FOCUSIN,431,16,16,14
+    PUSHBUTTON      "W",IDC_ZOOMOUT,447,16,16,14
+    CONTROL         "Aut.",IDC_IRIS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,415,30,16,14
+    CONTROL         "Aut.",IDC_FOCUS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,431,30,16,14
+    PUSHBUTTON      "Повернуть 180° ",IDC_TURN_180,447,30,16,14,BS_ICON
+    PUSHBUTTON      "Сохранить",IDC_PRESET,415,44,48,14
+    CONTROL         "",IDC_SPEED,"msctls_trackbar32",TBS_VERT | WS_TABSTOP,
+                    470,1,17,57,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Закрыть",IDC_CLOSE_DLG_BAR,523,1,11,11,BS_ICON
+    PUSHBUTTON      "",IDC_BTN_KB_LANG,518,47,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_ISDN_CHANNELS,518,35,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_SAVE_STATE,518,24,16,11,NOT WS_VISIBLE
+    PUSHBUTTON      "",IDC_BTN_SEQUENCE,518,13,16,11,NOT WS_VISIBLE
+END
+
+IDD_CSB DIALOGEX 0, 0, 190, 87
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Контрастность, Яркость, Насыщение "
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&Контрастность:",IDC_STATIC_CONTRAST,5,20,27,8
+    CONTROL         "Slider1",IDC_CONTRAST,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,14,141,20,WS_EX_TRANSPARENT
+    LTEXT           "&Яркость:",IDC_STATIC_BRIGHTNESS,5,44,31,8
+    CONTROL         "Движок 2",IDC_BRIGHTNESS,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,38,141,20,WS_EX_TRANSPARENT
+    LTEXT           "&Цвет:",IDC_STATIC_COLOR,5,68,21,8
+    CONTROL         "Slider1",IDC_COLOR,"msctls_trackbar32",TBS_TOP | 
+                    TBS_TOOLTIPS | WS_TABSTOP,44,62,141,20,WS_EX_TRANSPARENT
+    LTEXT           "Статичный",IDC_TXT_CAM_SERVER,5,5,180,8
+END
+
+IDD_PTZ_CONFIG DIALOGEX 0, 0, 170, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Конфигурирование поворотной камеры"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,113,42,50,14
+    PUSHBUTTON      "Левый",IDC_LEFT,7,24,15,15,BS_ICON
+    PUSHBUTTON      "Вверх",IDC_UP,24,7,15,15,BS_ICON
+    PUSHBUTTON      "Правый",IDC_RIGHT,41,24,15,15,BS_ICON
+    PUSHBUTTON      "Вниз",IDC_DOWN,24,41,15,15,BS_ICON
+    PUSHBUTTON      "ВОЗВРАТ",IDC_CONFIG_CENTER,63,7,36,14
+    PUSHBUTTON      "ESC",IDC_PROG,63,24,36,15
+END
+
+IDD_VIDEO_PTZ DIALOGEX 0, 0, 198, 81
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Управление Поворотом/Наклоном/Трансфокатором"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_PTZ_BTN_SWICTH1,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,5,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH2,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,23,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH3,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,41,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH4,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,6,60,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH5,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,5,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH6,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,23,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH7,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,41,90,14
+    CONTROL         "",IDC_PTZ_BTN_SWICTH8,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,102,60,90,14
+END
+
+IDD_SAVE_SEQUENZER DIALOGEX 0, 0, 186, 105
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Установки камеры"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&Имя:",IDC_STATIC_NAME,7,67,22,8
+    EDITTEXT        IDC_NAME,34,64,145,14,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_SEQUENCE,7,7,172,54,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,72,84,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,129,84,50,14
+    PUSHBUTTON      "Удалить",IDC_DELETE,7,84,50,14
+END
+
+IDD_CONNECTING DIALOG  0, 0, 148, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION
+CAPTION "Соединение с"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Отмена",IDCANCEL,91,35,50,14
+    LTEXT           "",IDC_HOST,7,7,134,8
+    CONTROL         "Progress1",IDC_PROGRESS_CONNECT,"msctls_progress32",
+                    WS_BORDER,7,18,134,14
+END
+
+IDD_INPUT_DEACTIVATION DIALOGEX 0, 0, 248, 175
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Временная деактивация детектора"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Название детектора",IDC_TXT_INPUT,7,7,234,8
+    CONTROL         "List1",IDC_LIST_DEACTIVATIONS,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,7,18,233,63
+    GROUPBOX        "Время начала / Дата начала",IDC_GRP_START,7,87,108,59
+    CONTROL         "DateTimePicker1",IDC_START_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,16,101,56,15
+    CONTROL         "DateTimePicker1",IDC_START_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,16,122,77,15
+    GROUPBOX        "Время конца / Дата конца",IDC_GRP_STOP,133,87,108,59
+    CONTROL         "DateTimePicker1",IDC_STOP_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,142,101,56,15
+    CONTROL         "DateTimePicker1",IDC_STOP_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,142,122,77,15
+    PUSHBUTTON      "Новый",IDC_BUTTON_NEW,7,154,50,14
+    PUSHBUTTON      "Удалить",IDC_BUTTON_DELETE,65,154,50,14
+    DEFPUSHBUTTON   "OK",IDOK,133,154,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,191,154,50,14
+END
+
+IDD_MD DIALOGEX 0, 0, 250, 154
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Видео",IDC_MD_INLAY,"Button",BS_OWNERDRAW | BS_NOTIFY | 
+                    BS_FLAT | WS_TABSTOP,5,5,176,144
+    PUSHBUTTON      "Удалить",IDC_MD_DEL,185,5,60,14
+    PUSHBUTTON      "Инвертировать",IDC_MD_INVERT,185,24,60,14
+    LTEXT           "Чувствительность:",IDC_MD_TXT_SENSITIVITY,186,45,59,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_MD_COMBO_SENSITIVITY_ALARM,185,55,60,86,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Адаптивная маска",IDC_MD_SHOW_ADAPTIVE,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,185,75,60,14
+    COMBOBOX        IDC_MD_COMBO_SENSITIVITY,185,90,60,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "OK",IDC_MD_OK,185,117,60,14
+    PUSHBUTTON      "Отмена",IDCANCEL,185,135,60,14
+END
+
+IDD_OPTIONS DIALOGEX 0, 0, 187, 103
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Установки"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,82,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,130,82,50,14
+    CONTROL         "&Первая камера при старте",IDC_RADIO_FIRST_CAM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,7,6,173,12
+    CONTROL         "&Все камеры при старте",IDC_RADIO_ALL_CAM,"Button",
+                    BS_AUTORADIOBUTTON,7,20,173,12
+    CONTROL         "Вид &1плюс при тревожных соединениях",
+                    IDC_CHECK_1PLUS_ALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,7,34,173,12
+    CONTROL         "&Полноэкранный вид при тревожных соединениях",IDC_CHECK_FULL_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,48,173,12
+    CONTROL         "А&удио Тревога",IDC_CHECK_AUDIBLE_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,62,173,12
+END
+
+IDD_EXTERNAL_FRAME DIALOGEX 0, 0, 166, 73
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | 
+    WS_CAPTION | WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+CAPTION "Монитор %d"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+IDD_AUDIO_PROPERTIES DIALOGEX 0, 0, 270, 169
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Установки Аудио"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Каналы:",IDC_TXT_AU_INPUT_CHANNELS,10,96,54,8
+    COMBOBOX        IDC_COMBO_AU_INPUT_CHANNELS,10,114,150,121,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_NAMED_INPUTS,70,94,190,121,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Левый",IDC_RD_AU_LEFT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,165,115,45,10
+    CONTROL         "Правый",IDC_RD_AU_RIGHT,"Button",BS_AUTORADIOBUTTON,215,
+                    115,45,10
+    GROUPBOX        "Аудио вход: %s",IDC_GRP_AU_INPUT,5,50,260,115,
+                    WS_GROUP
+    LTEXT           "Чувствительность:",IDC_TXT_AU_INPUT_SENSITIVITY,10,69,54,
+                    8
+    CONTROL         "Slider1",IDC_SLIDER_AU_INPUT_SENSITIVITY,
+                    "msctls_trackbar32",TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,
+                    70,63,190,20,WS_EX_TRANSPARENT
+    GROUPBOX        "Аудио Выход",IDC_GRP_AU_OUTPUT,5,5,260,40
+    LTEXT           "Громкость:",IDC_TXT_AU_OUTPUT_VOLUME,10,23,54,8
+    CONTROL         "Slider1",IDC_SLIDER_AU_OUTPUT_VOLUME,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,17,190,20,
+                    WS_EX_TRANSPARENT
+    CONTROL         "Slider1",IDC_SLIDER_AU_THRESHOLD,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,135,190,20,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Порог:",IDC_TXT_AU_THRESHOLD,10,141,54,8
+END
+
+IDD_HTML_MAP_PROPERTIES DIALOGEX 0, 0, 230, 111
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Параметры Карты"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Название Карты:",IDC_TXT_HM_TITLE,5,11,60,8
+    EDITTEXT        IDC_EDT_HM_TITLE,70,9,155,12,ES_AUTOHSCROLL
+    LTEXT           "Картинка:",IDC_TXT_HM_PICTURE_FILE,5,31,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_FILENAME,70,29,100,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Поиск",IDC_BTN_HM_PICTURE_FILENAME,175,29,50,12
+    LTEXT           "Размер Картинки:",IDC_TXT_HM_PICTURE_SIZE,5,71,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_SIZE,70,69,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    LTEXT           "Фактор приближения:",IDC_TXT_HM_ZOOM,5,91,60,8
+    EDITTEXT        IDC_EDT_HM_ZOOM,70,89,40,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,89,50,12
+    LTEXT           "Процент",IDC_TXT_HM_ZOOM_P,115,91,36,8
+    LTEXT           "Размер монитора:",IDC_TXT_HM_MONITOR_SIZE,5,51,60,8
+    EDITTEXT        IDC_EDT_HM_MONITOR_SIZE,70,49,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+END
+
+IDD_HTML_LINK_PROPERTIES DIALOGEX 0, 0, 230, 41
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Параметры связи"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Контекстная  помощь:",IDC_TXT_HL_INFO,5,8,163,8
+    EDITTEXT        IDC_EDT_HL_INFO,5,24,220,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,6,50,12
+END
+
+IDD_OEM_DLG DIALOGEX 0, 0, 133, 60
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Закрыть",IDC_CLOSE_DLG_BAR,1,1,11,11,BS_ICON
+    LTEXT           "23.04.2004",IDC_DATE,17,49,54,9,0,WS_EX_TRANSPARENT
+    LTEXT           "10:59:00",IDC_TIME,86,49,39,9,0,WS_EX_TRANSPARENT
+    CTEXT           "",IDC_TXT_PRODUCT,1,39,131,12
+END
+
+IDD_ALARM_LIST DIALOGEX 0, 0, 170, 107
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_ALARM,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,0,11,170,96
+    CONTROL         "Движение",IDC_CHECK_ACTIVITY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,1,45,10
+    CONTROL         "&1. Детектор",IDC_CHECK_1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,55,1,45,10
+    CONTROL         "&2. Детектор",IDC_CHECK_2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,1,45,10
+END
+
+IDD_FIELD DIALOGEX 0, 0, 72, 159
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBO_CAMERA,2,12,70,480,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_CAMERA,2,2,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_RESOLUTION,2,28,70,8,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+    EDITTEXT        IDC_DATE,2,38,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_TIME,2,48,70,8,ES_MULTILINE | ES_READONLY | NOT 
+                    WS_BORDER
+    EDITTEXT        IDC_COMPRESSION,2,57,70,8,ES_MULTILINE | ES_READONLY | 
+                    NOT WS_BORDER
+END
+
+IDD_DATABASE_INFO DIALOG  0, 0, 420, 164
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "Информация базы данных"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_ARCHIV_INFO_LISTE,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,0,0,419,164
+END
+
+IDD_QUERY_RESULT DIALOGEX 10, 10, 451, 178
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_THICKFRAME
+CAPTION "Результат запроса"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_RESULTS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,1,73,449,104
+    CONTROL         "Разъединение &t когда закончено",IDC_CHECK_DISCONNECT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,48,128,10
+    DEFPUSHBUTTON   "OK",IDOK,400,41,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,400,57,50,14
+    LTEXT           "Изображение найдено:",IDC_TXT_PICTURE,17,60,56,8
+    LTEXT           "-----------------",IDC_TXT_FOUND,90,60,35,8
+    CONTROL         "Анимировать1",IDC_ANIMATE_SEARCH,"SysAnimate32",
+                    ACS_TRANSPARENT | WS_TABSTOP,406,0,44,38
+    LTEXT           "Запрос по:",IDC_TXT_SEARCH_IN,5,30,40,8
+    LTEXT           "Время истекло:",IDC_TXT_ELAPSED,259,60,55,8
+    LTEXT           "00:00:00",IDC_ELAPSED,331,60,29,8
+    LTEXT           "Скопированные изображения:",IDC_TXT_COPIED,142,60,48,8
+    LTEXT           "-----------------",IDC_COPIED,207,60,35,8
+    LTEXT           "",IDC_EDIT_QUERY,5,1,395,24
+    LTEXT           "",IDC_EDIT_SEARCH_IN,50,30,345,8
+END
+
+IDD_COMMENT DIALOGEX 0, 0, 175, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Заметки"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_COMMENT,5,5,164,166,ES_MULTILINE | ES_WANTRETURN
+    DEFPUSHBUTTON   "OK",IDOK,64,183,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,119,183,50,14
+END
+
+IDD_STATION_NAME DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Имя хоста"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Определить локальный хост для печати изображений.\nНазвание будет вставлено при печати.",
+                    IDC_TXT_BANK,7,7,172,43
+    EDITTEXT        IDC_EDIT_NAME,7,55,172,14
+    DEFPUSHBUTTON   "OK",IDOK,69,74,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,129,74,50,14
+END
+
+IDD_QUERY DIALOGEX 20, 20, 344, 294
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_THICKFRAME
+CAPTION "Запрос"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "ПК - Дата и время",IDC_GROUP_TIME,12,186,152,99
+    CONTROL         "Дата:",IDC_CHECK_DATE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,200,46,13
+    CONTROL         "Собиратель времени и даты 2",IDC_PCDATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,80,200,80,13
+    CONTROL         "Время:",IDC_CHECK_EXACT_TIME,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,215,38,13
+    CONTROL         "Собиратель времени и даты 3",IDC_TIME_EXACT,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,80,215,61,13
+    CONTROL         "Время &для:",IDC_CHECK_TIME_FROM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,20,235,62,10
+    CONTROL         "Собиратель времени и даты 2",IDC_PCDATE_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,80,250,80,13
+    CONTROL         "Собиратель времени и даты 3",IDC_TIME_END,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,80,265,61,13
+    CONTROL         "В&се хосты и архивы",IDC_CHECK_ALL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,184,5,111,10
+    CONTROL         "Дерево1",IDC_SERVER_ARCHIVES,"SysTreeView32",
+                    TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | 
+                    WS_BORDER | WS_TABSTOP,185,20,154,225
+    CONTROL         "&Показать найденные изображения",IDC_CHECK_OPEN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,180,257,104,10
+    CONTROL         "&Копировать найденные изображения",IDC_CHECK_COPY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,180,271,104,10
+    DEFPUSHBUTTON   "Запрос",IDOK,289,255,50,14
+    PUSHBUTTON      "Закрыть",IDCANCEL,290,274,50,14
+    SCROLLBAR       IDC_SCROLLBAR_FIELDS,155,20,10,162,SBS_VERT
+    GROUPBOX        "Критерии запроса",IDC_GRP_FIELDS,5,5,169,285
+    LTEXT           "Дата:",IDC_PCDATEEND_TEXT,35,251,24,13,SS_CENTERIMAGE
+    LTEXT           "Время:",IDC_TIMEEND_TEXT,35,265,15,13,SS_CENTERIMAGE
+    CONTROL         "Поиск по зоне",IDC_SEARCHAREA,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,85,235,71,10
+END
+
+IDD_QUERY_FIELD_NUM DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Имя поля",IDC_TXT_FIELD,0,2,56,8
+    EDITTEXT        IDC_EDIT_VALUE,85,0,57,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_BACKUP DIALOGEX 0, 0, 376, 290
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION
+CAPTION "Резервирование"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Диск Резервирования",IDC_GRP_DRIVE,165,50,196,83
+    LTEXT           "&Назначение:",IDC_TXT_DESTINATION,175,65,41,8,0,
+                    WS_EX_TRANSPARENT
+    COMBOBOX        IDC_COMBO_DESTINATION,230,61,60,49,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Тип:",IDC_STATIC_TYPE,175,85,15,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Статичный",IDC_TXT_TYPE,225,85,72,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Свободный:",IDC_STATIC_FREE,175,100,12,8,0,WS_EX_TRANSPARENT
+    LTEXT           "000000",IDC_TXT_MB_FREE,225,100,25,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Мбайт",IDC_STATIC_MB,267,100,24,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Выделенный:",IDC_STATIC_SELECTED,175,115,39,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "000000",IDC_TXT_SELECTED_MB,225,115,25,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Мбайт",IDC_STATIC_MB2,267,115,24,8,0,WS_EX_TRANSPARENT
+    DEFPUSHBUTTON   "Старт",IDOK,202,259,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,256,259,50,14
+    GROUPBOX        "Резервирование",IDC_GRP_BACKUP,7,7,362,275
+    CONTROL         "Течение 2",IDC_PROGRESS_PROCESS,"msctls_progress32",
+                    WS_BORDER,175,220,175,14
+    LTEXT           "Уще сохранен:",IDC_TXT_SIZE,175,175,55,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0/0MB",IDC_SIZE_MB,245,175,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Оставшееся время:",IDC_TXT_TIME,175,205,58,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "неизвестно",IDC_TIME_S,245,205,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Скорость:",IDC_TXT_VELOCITY,175,190,55,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0 kB/s",IDC_VELOCITY_KBS,245,190,106,8,0,
+                    WS_EX_TRANSPARENT
+    PUSHBUTTON      "Закрыть",IDC_CLOSE,310,259,50,14
+    LTEXT           "Последовательности для сохранения:",IDC_STATIC_SEQUENCES,15,137,82,
+                    8,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Течение резервирования",IDC_STATIC_PROGRESS,164,143,196,
+                    103
+    LISTBOX         IDC_LIST_SEQUENCES,15,149,138,124,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Статус:",IDC_STATIC_STATE,175,160,23,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Еще не начат",IDC_TXT_STATE,245,160,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Название резервирования:",IDC_TXT_NAME,15,20,68,8,0,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT_BACKUP_NAME,87,18,202,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "CD/R",IDC_CDR,301,60,50,14
+    LTEXT           "Архивы для сохранения:",IDC_STATIC_ARCHIVE,15,39,69,8,0,
+                    WS_EX_TRANSPARENT
+    LISTBOX         IDC_LIST_ARCHIVES,15,50,138,83,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_BACKUP_NEW DIALOGEX 0, 0, 376, 297
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION
+CAPTION "Резервирование"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Название резервирования:",IDC_STATIC_NAME,15,20,68,8,0,
+                    WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT_BACKUP_NAME,87,18,275,14,ES_AUTOHSCROLL
+    LTEXT           "Архивы для сохранения:",IDC_STATIC_ARCHIVE,15,38,138,8,0,
+                    WS_EX_TRANSPARENT
+    LISTBOX         IDC_LIST_ARCHIVES,15,49,138,83,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL
+    COMBOBOX        IDC_COMBO_DESTINATION,175,54,175,49,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Проверка",IDC_CDR,175,73,50,14
+    LTEXT           "Статичный",IDC_TXT_TYPE,245,76,105,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Свободный:",IDC_STATIC_FREE,175,96,50,8,0,WS_EX_TRANSPARENT
+    RTEXT           "000000",IDC_TXT_MB_FREE,245,96,42,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Мбайт",IDC_STATIC_MB,295,96,55,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Выделенный:",IDC_STATIC_SELECTED,175,116,50,8,0,
+                    WS_EX_TRANSPARENT
+    RTEXT           "000000",IDC_TXT_SELECTED_MB,245,116,42,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Мбайт",IDC_STATIC_MB2,295,116,55,8,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Диск Резервирования",IDC_GRP_DRIVE,165,40,196,92
+    LTEXT           "Дата начала:",IDC_TXT_START_DATE,21,150,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "DateTimePicker1",IDC_START_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,92,148,55,15
+    LTEXT           "Время начала:",IDC_TXT_START_TIME,21,169,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "Собиратель времени и даты 2",IDC_START_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,92,167,55,15
+    LTEXT           "Дата конца:",IDC_TXT_END_DATE,21,188,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "Собиратель времени и даты 3",IDC_END_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,92,186,55,15
+    LTEXT           "Время конца:",IDC_TXT_END_TIME,21,207,66,8,0,
+                    WS_EX_TRANSPARENT
+    CONTROL         "Собиратель времени и даты 4",IDC_END_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP,92,205,55,15
+    PUSHBUTTON      "Рассчитать текущий размер",IDC_CALCULATE_SIZE,21,223,125,
+                    14
+    PUSHBUTTON      "Рассчитать максимальное окончание",IDC_CALCULATE_END,21,241,125,
+                    14
+    PUSHBUTTON      "Восстановить начальные значения",IDC_RESET_START_END,21,259,
+                    125,14
+    GROUPBOX        "Период резервирования",IDC_GROUP_BACKUP_SPAN,15,138,138,
+                    142
+    LTEXT           "Статус:",IDC_STATIC_STATE,175,155,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Еще не начат",IDC_TXT_STATE,242,155,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Уще сохранен:",IDC_TXT_SIZE,175,170,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0/0MB",IDC_SIZE_MB,246,170,106,8,0,WS_EX_TRANSPARENT
+    LTEXT           "Скорость:",IDC_TXT_VELOCITY,175,185,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "0 kB/s",IDC_VELOCITY_KBS,246,185,106,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Оставшееся время:",IDC_TXT_TIME,175,200,69,8,0,
+                    WS_EX_TRANSPARENT
+    LTEXT           "неизвестно",IDC_TIME_S,246,200,106,8,0,WS_EX_TRANSPARENT
+    CONTROL         "Течение 2",IDC_PROGRESS_PROCESS,"msctls_progress32",
+                    WS_BORDER,175,215,175,14
+    GROUPBOX        "Течение резервирования",IDC_STATIC_PROGRESS,165,138,196,
+                    103
+    DEFPUSHBUTTON   "Старт",IDOK,202,259,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,256,259,50,14
+    PUSHBUTTON      "Закрыть",IDC_CLOSE,310,259,50,14
+    GROUPBOX        "Резервирование",IDC_GRP_BACKUP,7,7,362,281,WS_GROUP
+END
+
+IDD_SELECT_BACKUP_DRIVE DIALOGEX 0, 0, 346, 185
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Определите диск резервирования:"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,232,165,50,14
+    LTEXT           "Пожалуйста, выберете диск для резервирования:",
+                    IDC_TXT0,7,7,223,12
+    CONTROL         "List1",IDC_LISTE,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,7,19,332,139
+    PUSHBUTTON      "Отмена",IDCANCEL,289,165,50,14
+END
+
+IDD_QUERY_FIELD_TIME DIALOGEX 0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Имя поля",IDC_TXT_FIELD,0,2,56,8
+    CONTROL         "DateTimePicker1",IDC_TIME,"SysDateTimePick32",
+                    DTS_UPDOWN | DTS_SHOWNONE | WS_TABSTOP | 0x8,82,0,60,14
+END
+
+IDD_QUERY_FIELD_DATE DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Имя поля",IDC_TXT_FIELD,0,2,56,8
+    CONTROL         "DateTimePicker1",IDC_DATE,"SysDateTimePick32",
+                    DTS_SHOWNONE | DTS_LONGDATEFORMAT | WS_TABSTOP,57,0,85,
+                    14
+END
+
+IDD_QUERY_FIELD_CHAR DIALOG  0, 0, 143, 14
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Имя поля",IDC_TXT_FIELD,0,2,56,8
+    EDITTEXT        IDC_EDIT_VALUE,69,0,73,14,ES_AUTOHSCROLL
+END
+
+IDD_NAVIGATION DIALOGEX 0, 0, 200, 12
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | TBS_NOTICKS | WS_TABSTOP,72,0,127,12
+    CONTROL         "00000/00000",IDC_NUMBER,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_GROUP,0,0,72,12
+END
+
+IDD_SUBSTITUTE DIALOGEX 0, 0, 5, 5
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "ПОКАЗАТЬ",IDC_SHOW_ANCESTOR,0,0,5,5
+END
+
+IDD_USER_INTERFACE DIALOGEX 0, 0, 270, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Интерфейс пользователя"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_UI_TREE,"SysTreeView32",TVS_NOSCROLL | WS_BORDER | 
+                    WS_TABSTOP,6,6,132,132
+    CONTROL         "Равномерно",IDC_UI_DIVMODE0,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,150,19,96,
+                    10
+    CONTROL         "Одиночный",IDC_UI_DIVMODE1,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,31,96,10
+    CONTROL         "Переменно",IDC_UI_DIVMODE2,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,43,96,10
+    CONTROL         "Всегда",IDC_UI_VISIBILITY0,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE | WS_GROUP,150,19,108,10
+    CONTROL         "Автоматически",IDC_UI_VISIBILITY1,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,150,31,108,10
+    CONTROL         "Никогда",IDC_UI_VISIBILITY2,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE,150,43,108,10
+    CONTROL         "Изначально Да",IDC_UI_VISIBILITY3,"Button",
+                    BS_AUTORADIOBUTTON,150,61,108,10
+    CONTROL         "Изначально Нет",IDC_UI_VISIBILITY4,"Button",
+                    BS_AUTORADIOBUTTON,150,73,108,10
+    GROUPBOX        "Показать:",IDC_UI_GROUP,144,6,120,114,WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,153,124,50,14,WS_GROUP
+    PUSHBUTTON      "Отмена",IDCANCEL,214,124,50,14
+    CONTROL         "Как список тревог",IDC_UI_AS_LIST,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,103,42,10
+    CONTROL         "Минимизирован",IDC_UI_MINIMIZED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,91,43,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_IDIP_CLIENT_DLG_BAR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 534
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_CSB, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 185
+        HORZGUIDE, 9
+        HORZGUIDE, 24
+        HORZGUIDE, 48
+        HORZGUIDE, 72
+    END
+
+    IDD_PTZ_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_VIDEO_PTZ, DIALOG
+    BEGIN
+        RIGHTMARGIN, 195
+        VERTGUIDE, 6
+        VERTGUIDE, 96
+        VERTGUIDE, 102
+        VERTGUIDE, 192
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+        HORZGUIDE, 48
+        HORZGUIDE, 67
+    END
+
+    IDD_SAVE_SEQUENZER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_CONNECTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 141
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_INPUT_DEACTIVATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 241
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_MD, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 245
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_AUDIO_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 64
+        VERTGUIDE, 70
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 5
+        HORZGUIDE, 27
+        HORZGUIDE, 45
+        HORZGUIDE, 50
+        HORZGUIDE, 73
+        HORZGUIDE, 100
+        HORZGUIDE, 120
+        HORZGUIDE, 145
+        HORZGUIDE, 165
+    END
+
+    IDD_HTML_MAP_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        BOTTOMMARGIN, 110
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 95
+    END
+
+    IDD_HTML_LINK_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 168
+        VERTGUIDE, 174
+        VERTGUIDE, 225
+        HORZGUIDE, 12
+        HORZGUIDE, 30
+    END
+
+    IDD_OEM_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 132
+        VERTGUIDE, 78
+        BOTTOMMARGIN, 59
+        HORZGUIDE, 41
+        HORZGUIDE, 51
+    END
+
+    IDD_ALARM_LIST, DIALOG
+    BEGIN
+        HORZGUIDE, 6
+        HORZGUIDE, 11
+    END
+
+    IDD_BACKUP, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 289
+    END
+
+    IDD_BACKUP_NEW, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 296
+    END
+
+    IDD_NAVIGATION, DIALOG
+    BEGIN
+        VERTGUIDE, 72
+    END
+
+    IDD_USER_INTERFACE, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 138
+        VERTGUIDE, 144
+        VERTGUIDE, 150
+        VERTGUIDE, 246
+        VERTGUIDE, 258
+        VERTGUIDE, 264
+        HORZGUIDE, 6
+        HORZGUIDE, 24
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 66
+        HORZGUIDE, 78
+        HORZGUIDE, 96
+        HORZGUIDE, 108
+        HORZGUIDE, 120
+        HORZGUIDE, 138
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_PANLEFT             CURSOR                  "res\\panleft.cur"
+IDC_PANRIGHT            CURSOR                  "res\\panright.cur"
+IDC_TILTUP              CURSOR                  "res\\tiltup.cur"
+IDC_TILTDOWN            CURSOR                  "res\\tiltdown.cur"
+IDC_ZOOMIN              CURSOR                  "res\\zoomin.cur"
+IDC_ZOOMOUT             CURSOR                  "res\\zoomout.cur"
+IDC_GLASS               CURSOR                  "res\\glass.cur"
+IDC_LEFTTOP             CURSOR                  "res\\lefttop.cur"
+IDC_RIGHTTOP            CURSOR                  "res\\righttop.cur"
+IDC_RIGHTBOTTOM         CURSOR                  "res\\rightbot.cur"
+IDC_LEFTBOTTOM          CURSOR                  "res\\leftbot.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 2110
+//
+
+NOSTATEMENT.HTM         2110                    "res\\nostatement.htm"
+BACK.GIF                2110                    "res\\back.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Idip Клиент"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Idip Клиент"
+    AFX_IDS_IDLEMESSAGE     "Готово"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_OPEN            "Открывает сохраненное единичное изображение"
+    ID_FILE_PRINT           "Печатает активное окно."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NON_SHELL            "Запускает систему в незащищенном 'Режиме Windows' "
+    ID_EXIT_CLIENT          "Выходит из приложения, разъединяет все соединения к хостам."
+    ID_HTML_NEW_PAGE        "Вставляет новую карту и соединение к новой карте."
+    ID_VIEW_OPTIMIZE_COLUMN_WIDTH 
+                            "Оптимизирует колонку в соответствии с длиной названия колонки и содержимым ."
+    ID_VIEW_OPTIMIZE_BY_CONTENT "Оптимизирует колонку в соответствии с содержимым."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DISCONNECT           "Разъединяет выделенное соединение."
+    ID_CONNECT              "Устанавливает соединение."
+    ID_CONNECT_LOCAL        "Устанавливает соединение с локальным хостом."
+    ID_NEW_LOGIN            "Разъединяет все хосты и вводит новый пользовательский логин "
+    ID_VIDEO_SAVE           "Сохраняет изображения этой камеры\nСохранить"
+    ID_INPUT_CONFIRM        "Подтверждает тревогу детектора."
+    ID_RELAIS_OPEN          "Открывает закрытое реле."
+    ID_RELAIS_CLOSE         "Закрывает открытое реле."
+    ID_VIDEO_2_2            "Показывает 2 на 2 изображения\nИзображения 2 x 2"
+    ID_VIDEO_3_3            "Показывает 3 на 3 изображения\nИзображения 3 x 3"
+    ID_VIDEO_4_4            "Показывает 4 на 4 изображения\nИзображения 4 x 4"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ZOOM_OUT             "Показывает изображение в оригинальном размере."
+    ID_SMALL_ORIGINAL       "Показывает изображение в оригинальном размере.\n1:1"
+    ID_VIDEO_FEIN           "Показывает изображение в высоком разрешении."
+    ID_VIDEO_GROB           "Показывает изображение в низком разрешении."
+    ID_VIDEO_SAVE_ALL_STOP  "Прекращает сохранение всех изображений от всех камер\nОстановить Все"
+    ID_VIDEO_MASK           "Изменяет постоянную маску детектора движения."
+    ID_VIEW_1_PLUS          "Показывает изображения в виде 1 плюс."
+    ID_HOST_1_PLUS          "Показывает изображения в режиме 1 плюс при тревогах\nПоказывать 1 плюс при тревогах"
+    ID_OPTIONS              "Показывает установки поведения программы."
+    ID_VIEW_TARGET_DISPLAY  "Переключает дисплей цели Вкл. или Выкл\nПереключить Дисплей цели Вкл. или Выкл."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHOWON_MONITOR1      "Показывает окно на мониторе 1."
+    ID_SHOWON_MONITOR2      "Показывает окно на мониторе 2."
+    ID_VIEW_HOSTS           "Показывает положение хоста на карте"
+    ID_VIEW_CAMERAS         "Показывает положение камер на карте"
+    ID_VIEW_RELAIS          "Показывает положение реле на карте"
+    ID_VIEW_DETECTORS       "Показывает положение детекторов на карте"
+    ID_ALARM_SOUND          "Переключает акустическую тревогу Вкл. или Выкл."
+    ID_VIEW_REFRESH         "Обновляет содержимое вида."
+    ID_VIEW_TITLE_OF_SMALLWINDOWS 
+                            "Показывает или скрывает заголовки картинок."
+    ID_AU_START_PLAY        "Начинает оповещение выбранного хоста(ов)"
+    ID_AU_START_REC         "Начинает слушать выбранный хост"
+    ID_AU_STOP_PLAY         "Прекращает оповещение"
+    ID_AU_STOP_REC          "Прекращает слушать выбранный хост"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_MONITOR2        "Показывает картинку на мониторе %d"
+    ID_SHOWON_REGARDLESS    "Нет предпочтительного монитора."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_FULLSCREEN      "Переключает полноэкранный режит Вкл. или Выкл. "
+    ID_VIDEO_STOP           "Закрывает окно выбранной камеры\nОтмена просмотра"
+    ID_VIDEO_SEQUENZER      "Определяет камеру для автоматического переключенияю\nАвтоматическое переключение камер"
+    ID_VIDEO_PTZ            "Управляет дополнительными функциями камеры"
+    ID_VIDEO_ALARM_SWITCH   "Переключает автоматическое переключение камер в случает тревоги Вкл/Выкл.\nТревожное переключение камер."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_ZOOMIN              "Приблизить"
+    IDC_ZOOMOUT             "Удалить"
+END
+
+STRINGTABLE 
+BEGIN
+    IDW_SYNC_DATE           "Данные для синхронизации\nДанные для синхронизации"
+    IDW_SYNC_TIME           "Время для синхронизации\nВремя для синхронизации"
+    IDW_SYNC_SLIDER         "Скорость воспроизведения каждой картинки (В пределах 10 мсек до 1сек)\nСкорость воспроизведения"
+    ID_SEQUENCE_PANE        "каждый %d s"
+    ID_SEQUENCE_TEXT        "Переключение:"
+    ID_DATABASE_TEXT        "Сохранить:"
+    ID_DATABASE_PANE        "невозможно"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HOST_SAVE_SEQUENCE   "Экспортирует текущие настройки переключения камеры в файл."
+    ID_HOST_LOAD_SEQUENCE   "Импортирует настройки переключения камеры из файла"
+    ID_VIDEO_PTZ_CONFIG     "Конфигурирует движение камеры и установки\nПоворот/Наклон/Трансфокатор"
+    ID_VIDEO_SAVE_ALL       "Сохраняет изображения всех камер."
+    ID_VIDEO_CB             "Управляет контрастностью, насыщением и яркостью изображения.\nКонтрастность/Насыщение/Яркость"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_2_3             "Показывает 2 на 23изображения\nИзображения 2 x 3"
+    ID_VIEW_1               "Показывает одно изображение."
+    ID_VIEW_2_2             "Показывает 2 на 2 изображения\n2 x 2"
+    ID_VIEW_3_2             "Показывает 3 на 2 изображения\n3 x 2"
+    ID_VIEW_3_3             "Показывает изображения в квадратированном виде\nВид квадратирования"
+    ID_VIEW_4_4             "Показывает 4 на 4 изображения\n4 x 4"
+    ID_HTML_PREV            "Назад\nНазад"
+    ID_HTML_NEXT            "Вперед\nВперед"
+    ID_HTML_HOME            "Домой\nДомой"
+    ID_INPUT_LAST           "Тревожные сообщения\nПоказывает все предыдущие принятые тревоги"
+    ID_SEQUENCE_1           "Переключение каждую секунду"
+    ID_SEQUENCE_2           "Переключение каждые 2 секунды"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REFERENCE_TITLE     "Базовое изображение %s из %s"
+    IDP_NOT_ALL_REFERENCE   "Все еще есть камеры без базовых изображений!\nВы действительно хотите выйти?"
+    IDS_TIME_SET            "Время установлено."
+    IDS_NO_REFERENCE        "Все еще нет базового изображения для этой камеры!"
+    IDS_REFERENCE_TITLE_FULL "Базовое изображение %s, %s из %s"
+    IDS_REFERENCE_TITLE_LIGHT "Базовое изображение %s "
+    IDS_VON                 "от"
+    IDS_BIS                 "до"
+    IDS_INPUT_DEACTIVATE    "Временная деактивация"
+    IDS_ALARM_SPAN_OFF_CONFIRM 
+                            "Период времени для временной деактивации процесса дозвона\nбыл успешно установлен."
+    IDS_PROGRESS            "Соединение в процессе"
+    IDS_PROGRESS_TEXT       "Соединение:"
+    IDS_ALARM_OFF           "Сременная деактивация процессов дозвона"
+    IDS_PROTOCOL            "Протокол"
+    IDS_ALARM_OFF2          "Пользователь %s изменил период времени на хосте %s для детектора %s:"
+    IDS_ALARM_OFF3          "от %s до %s"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "Вы не имеете действительного донгла для запуска этого программного обеспечения или ваш донгл неисправен.\nПожалуйста, проконсультируйтесь у вашего сервисного инженера. "
+    IDS_IMAGN               "Этот продукт содержит части кода изображений принадлежащей Imagine Software Solutions, Inc., (WWW.IMAGN.COM) и Pegasus Imaging Corporation, Tampa, FL, (WWW.PEGASUSIMAGING.COM)."
+    IDS_SEQUENCE_OFF        "Выкл."
+    IDP_NO_CONNECTION       "Соединение с удаленным хостом не может быть установлено."
+    IDS_LOCAL_SERVER        "Локальный хост"
+    IDS_OVERWRITE_REFERENCE "Уже существует базовое изображение для %s,вы хотите переписать существующее изображение?"
+    IDS_LOGO                "Корпоративный логотип"
+    IDS_POSSIBLE            "возможно"
+    IDS_STORING             "активно"
+    IDS_FPS                 "&Частота кадров"
+    IDS_PTZ                 "&Поворот/Наклон/Трансфокатор"
+    IDS_CAMERAS             "Камеры"
+    IDS_INPUT               "Детектор"
+    IDS_RELAY               "Реле"
+    IDP_NO_CONNECTION_LINK_MODUL 
+                            "Соединение к удаленному хосту не может быть установлено.\nМодуль связи не работает."
+    IDP_NO_CONNECTION_SERVER 
+                            "Соединение к удаленному хосту не может быть установлено.\nВыбранный сервер не работает."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_HTML                "Интернет документ"
+    IDC_TITLE_BTN           "Минимизировать или максимизировать это окно"
+    IDS_DIB                 "Растровый Файл"
+    IDS_FIELD_NAME          "Имя поля"
+    IDS_FIELD_VALUE         "Пустое поле"
+    IDS_PICTURE             "Камера: %d Дата: %s Время: %s Разрешение: %dx%d"
+    IDS_PICTURE_TABBED      "Камера:\t%d\nДата:\t%s\nВремя:\t%s\nРазрешение:\t%dx%d"
+    IDC_MENU_BTN            "Запрашивает контекстное меню"
+    IDC_CLOSE_VIEW          "Закрывает это окно"
+    IDS_CAMERA_NR           "Камера № %d"
+    IDP_NO_CONNECTION_INVALID_PERMISSION 
+                            "Вы не имеете уровня доступа для соединения с этим удаленным хостом."
+    IDS_ERROR_ON            "Возникла ошибка на удаленном хосте %s.\n%s"
+    IDC_MINIMIZE_SPLITTER   "Свернуть вид дерева."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION_RESET "Соединение с удаленным хостом не может быть установлено.\nВыбранный сервер только инициализируется."
+    IDP_NO_CONNECTION_MAX_CLIENT 
+                            "Соединение с удаленным хостом не может быть установлено.\nВыбранный сервер не принимает более соединений."
+    IDP_ERROR               "Хост %s послал следующее сообщение:\n%s."
+    IDP_NO_CONNECTION_UNKNOWN 
+                            "Соединение с удаленным хостом не может быть установлено."
+    IDS_DEFAULT_HTML_HEAD   "Ошибка: Страница не существует."
+    IDS_DEFAULT_HTML_TEXT   "Страницы для показа в данном контексте не существует.\nЭто может быть по следующим причинам:"
+    IDS_DEFAULT_HTML_1      "Не было инструкции определенной для этой тревоги или ее нет в настоящий момент. "
+    IDS_DEFAULT_HTML_2      "Не было передано инструкции для этой тревоги."
+    IDS_CONNECT             "для &Удаленного Хоста...\tВВОД"
+    IDS_ALARM               "Тревоги"
+    IDS_SAVE                "Сохранить"
+    IDS_LOAD                "Открыть"
+    IDS_MAX_FPS             "%d Кадры в секунду (макс.)"
+    IDS_NOTIFICATION_FROM   "Напоминание для %s получено: %s"
+    IDS_MAP                 "Карта соединений"
+    IDP_NO_HOST             "Хост %s не был найден в списке.\nПожалуйста, проверьте орфографию!"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SEQUENCE_3           "Переключение каждые 3 секунды"
+    ID_SEQUENCE_4           "Переключение каждые 4 секунды"
+    ID_SEQUENCE_5           "Переключение каждые 5 секунд"
+    ID_SEQUENCE_10          "Переключение каждые 10 секунд"
+    ID_SEQUENCE_15          "Переключение каждые 15 секунд"
+    ID_SEQUENCE_20          "Переключение каждые 20 секунд"
+    ID_SEQUENCE_30          "Переключение каждые 30 секунд"
+    ID_SEQUENZE             "Автоматическое переключение камер\nПереключение"
+    ID_CLOSE_WND_THIS       "Закрыть только текущее окно."
+    ID_SMALL_CONTEXT        "Контекстное меню\nКонтекстное меню"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CLOSE_WND_LIVE_ALL   "Закрыть все окна живого изображения."
+    ID_CLOSE_WND_PLAY_ALL   "Закрыть все окна воспроизводимого изображения."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ARCHIV_BACKUP        "Начинает процесс резервирования."
+    ID_CLOSE_WND_ALL        "Закрыть все окна."
+    ID_SEQUENCE_OPEN_SINGLE "Открывает выбранный архив и закрывает все остальные архивы."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NAVIGATE_BACK        "Обратное воспроизведение"
+    ID_NAVIGATE_PREV        "Покадровый шаг назад"
+    ID_NAVIGATE_NEXT        "Покадровый шаг вперед"
+    ID_NAVIGATE_FORWARD     "Прямое воспроизведение"
+    ID_NAVIGATE_FAST_FORWARD "Ускоренное прямое воспроизведение"
+    ID_NAVIGATE_SKIP_FORWARD "Перейти к следующему событию"
+    ID_NAVIGATE_END         "Перейти к последней картинке"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NAVIGATE_EJECT       "Закрывает текущее окно воспроизведения\nЗакрыть текущее окно воспроизведения"
+    ID_NAVIGATE_POS1        "Перейти к первой картинке"
+    ID_NAVIGATE_SKIP_BACK   "Перейти к предыдущему событию"
+    ID_NAVIGATE_FAST_BACK   "Ускоренное обратное воспроизведение"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIDEO_CSB            "Управляет контрастностью, насыщением и яркостью изображения."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CONNECTION_ANIMATION "Аудио тревога.\nАудио тревога"
+    ID_VIEW_ORIGINAL        "Показывает изображение в оригинальном размере.\n1:1"
+    ID_INPUT_INFORMATION    "Показывает дополнительную информацию выделенного детектора."
+    ID_VIDEO_SAVE_REFERENCE "Сохраняет текущее изображение выделенной камеры как базовое изображение."
+    ID_HOST_DATETIME        "Устанавливает дату и время удаленного хоста\nУстановить Дату и Время"
+    ID_HOST_FIRST_CAM       "Показывет изображение первой камеры при запуске\nПоказать первую камеру при запуске"
+    ID_HOST_ALL_CAMS        "Показывает изображения всех камер при запуске.\nПоказать все камеры при запуске. "
+    ID_CONNECT_MAP          "Показывает карту соединений."
+    ID_HOST_CAMERA_MAP      "Показывает карту положений камер."
+    ID_VIDEO_SHOW_REFERENCE "Показывает текущее базовое изображение."
+    ID_VIDEO_FULLSCREEN     "Полный экран\nПолный экран"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_RIGHT               "Правый"
+    IDC_DOWN                "Вниз"
+    IDC_FOCUSIN             "Фокус ближе"
+    IDC_FOCUSOUT            "Фокус дальше"
+    IDC_IRISIN              "Открыть диафрагму"
+    IDC_IRISOUT             "Закрыть диафрагму"
+    IDC_CENTER              "Домашняя позиция"
+    IDC_START_TIME          "Детектор будет деактивирован в выбранное время."
+    IDC_STOP_DATE           "Детектор будет активирован в выбранное время."
+    IDC_STOP_TIME           "Детектор будет активирован в выбранное время."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_LIST_DEACTIVATIONS  "Фактические периоды времени для деактивации этого детектора."
+    IDC_BUTTON_NEW          "Добавляет новый период времени к списку.\nМожет быть добавлен после."
+    IDC_BUTTON_DELETE       "Удалит выделенный период времени из списка."
+    IDC_SPEED               "Шаг"
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_CONNECTION_INVALID_SERIAL 
+                            "Соединение к удаленному хосту не может быть установлено.\nНеправельный номер лицензии."
+    IDP_NO_CONNECTION_INVALID_PASSWORD 
+                            "Соединение к удаленному хосту не может быть установлено.\nНеправельный пароль или PIN."
+    IDP_MASK_DENIED         "Вы не имеете уроня доступа\nдля изменения постоянной маски камеры %s."
+    IDS_PRESET              "Сохранить"
+    IDS_PRESET_CANCEL       "Отмена"
+    IDS_TREE_VIEWS          "Виды управляющих элементов"
+    IDS_MONITOR             "Монитор %d"
+    IDS_AUDIO               "Аудио"
+    IDS_PICTURE_FILETYPES   "Картинки"
+    IDS_LOAD_PICTURE_FILE   "Загрузить Картинки"
+    IDS_HOSTS               "Хосты "
+    IDS_HTML_EDIT_MODE      "*** режим редактирования ***"
+    IDS_DO_NOT_LEAVE_EMPTY  "Поле %s должно быть пустым!"
+    IDP_DELETE_HTML_MAP     "Вы действительно хотите\nудалить карту соединений\n%s?"
+    IDP_REPLACE_EXISTING_CAM_SWITCH 
+                            "Вы хотите заменить существующее\nпереключение камеры %s?"
+    IDS_HTML_LINK_NAMES_CHANGED 
+                            "Имена связей, помеченных красным были изменены.\nВы хотите сейчас сохранить эти изменения\n\nВыбетете 'нет', если вы хотите\nпроверить измененные связи перед сохранением."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_INVALID_HTML_ELEMENT 
+                            "Этот элемент неправильный. Он должен быть удален."
+    IDS_REJECT_ANNOUNCEMENT "Оповещение хоста было отвергнуто,\nпотому как хост уже делает оповещение."
+    IDS_NO_MEDIA_RECEIVE_CONFIRM 
+                            "Прослушивание Аудио блокировано!\n\nДолжно ли Аудио быть заново активировано?"
+    IDS_CONTROL_BAR         "Панель"
+    IDS_OBJECT_VIEW         "Вид объекта"
+    IDS_SHOW_AT_LEAST_ONE_WINDOW 
+                            "Покрайней мере одно окно должно быть изначально видимо."
+    IDS_START_IN_SHELL_MODE "Вы хотите запустить систему в защищенном режиме?"
+    IDS_CLOSE_APP_REQUEST   "Вы хотите закрыть программу сейчас?"
+    IDS_OFF                 "Выкл."
+    IDS_LOW                 "Низкое"
+    IDS_NORMAL              "Норма."
+    IDS_MEDIUM              "Средняя"
+    IDS_HIGH                "Высок."
+    IDS_RECTSEARCH          "Поиск по зоне"
+    IDS_RECTSEARCHEND       "без результатов"
+    IDS_AUX_OUT             "Переключить %d"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_SHOW_ADAPTIVE    "Показывает адаптивную маску."
+    IDC_PRESET              "Сохраняет текущие установки на позиции (Домой, 1-9) "
+    IDC_IRIS_AUTO           "Авто диафрагма"
+    IDC_FOCUS_AUTO          "Авто фокус"
+    IDC_TURN_180            "Поворот 180 градусов"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_AU_PROPERTIES        "Открывает диалог аудио свойств"
+    IDS_AU_AUTOMATIC_GAIN   "Автоматически"
+    ID_EDIT_HTML_PAGE       "Переключает режим редактирования карт Вкл. или Выкл."
+    ID_EDIT_CREATE_HTML_CAMERA_PAGE 
+                            "Создает карту камер для локального хоста."
+    ID_EDIT_CREATE_HTML_HOST_PAGE 
+                            "Создает карту для выбора внешних хостов"
+    ID_EDIT_HTML_MAP_PROPERTIES "Изменяет параметры карты"
+    ID_HTML_SAVE            "Сохраняет карту и выходит из режима редактирования\nСохранить карту"
+    ID_EDIT_HTML_LINK_PROPERTIES "Изменяет параметры связи"
+    ID_AU_STOP              "Закрывает аудио соединение"
+    ID_AU_START             "Начинает аудио соединение"
+    ID_AU_START_DUPLEX_PLAY "Запускает устройство Интерком"
+    ID_EDIT_CLEAR_MAP       "Удаляет выделенную карту"
+    ID_AU_STOP_ANY          "Закрывает текущее аудио соединение"
+    ID_CONNECT_HOST         "Соединяет с выбранным хостом"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHOWON_MONITOR_EXCLUSIVE 
+                            "Показывает только это единичное окно на текущем мониторе."
+    ID_VIEW_AUDIOS          "Показывает положения динамиков и микрофонов на карте."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_DRIVE_CD            "CD-ROM Диск"
+    IDS_BACKUP_NOT_STARTED  "Еще не начат"
+    IDS_BACKUP_RUNNING      "Записывание данных резервирования"
+    IDS_BACKUP_CANCELLED    "Отменен"
+    IDS_BACKUP_FINISHED     "Успешно завершен"
+    IDS_TITLE_BACKUP        "Резервирование из"
+    IDS_BACKUP_FAILED       "Ошибка, резервирование отменено"
+    IDP_BACKUP_INITIALIZE_FAILED 
+                            "Произошла ошибка в процессе инициализации резервирования."
+    IDP_BACKUP_COPY_FAILED  "Произошла ошибка в процессе резервирования"
+    IDS_COPY_ROV            "Копирование программного обеспечения чтения данных резервирования"
+    IDS_COPY_ROV_DONE       "Программного обеспечения чтения данных резервирования скопировано"
+    IDS_CDR_CHECK           "Проверка диска..."
+    IDS_ASK_CLOSE_CDR       "Закрыть вставленный CD/R?\nТолько закрытые CD/R's могут читаться стандартными CD - ROM - дисководами."
+    IDP_EJECT_DIRECTCD      "Удалить CD/R из дисковода!\nВы будете запрошены, как вы хотите обращаться с CD/R.\nВыберете запись:\nСтандартный CD для возможности использования во всех CD-ROM дисководах."
+    IDS_SEARCH_FROM         "Запрос от %s на %s"
+    IDS_DRIVE               "Диск"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_USEDAS              "использовать как"
+    IDS_USED                "Мбайтов использовано"
+    IDS_SIZE                "Размер в МБайтах"
+    IDS_TYP                 "Тип"
+    IDP_ASK_DELETE_ARCHIV   "Вы действительно хотите удалить архив резервирования\n'%s'?\nВсе изображения и данные будут потеряны!"
+    IDP_DELETE_SEQUENCE     "Вы действительно хотите удалить последовательность\n'%s'\nархива '%s' от %s\n на хосте '%s'?\n\nВсе изображения и данные будут потеряны!"
+    IDS_DBPROP_NR           "No."
+    IDS_DBPROP_FUELL        "Масштаб"
+    IDS_DBPROP_NAME         "имя архива"
+    IDS_DBPROP_TYP          "Тип"
+    IDS_DBPROP_MB           "Размер в МВ"
+    IDS_DBPROP_BENUTZT      "MB занято"
+    IDS_DBPROP_SIZE_GB      "Размер в GB"
+    IDS_DBPROP_USED_GB      "Использовано в GB"
+    IDS_READ_ERROR          "Данные изображения не могут быть прочитаны."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TIME                "Время"
+    IDS_ALARM_LIST_PRINT_TITLE "Тревоги Выкл. %s, день %s для камеры %s:"
+    IDS_ALARM_LIST_PRINT_PAGE "Страница %d/%d"
+    IDS_BACKUP_CALCULATING  "Расчитываются время и размеры."
+    IDP_BACKUP_ASK_FOR_CONTINUATION 
+                            "Вы хотите продолжить резервирование непрерывно?"
+    IDP_DELETE_DATE_SEQUENCES 
+                            "Вы действительно хотите удалить все последовательности в архиве\n'%s' от %s\nна хосте '%s'?\n\nВсе изображения и данные будут потеряны!"
+    IDP_FILE_OVERWRITE      "Файл %s уже существует.\nДолжен ли файл быть переписан?"
+    IDS_MEDIUM_CD_R         "CD-R носитель"
+    IDS_MEDIUM_CD_RW        "CD-RW носитель"
+    IDS_MEDIUM_DVD_ROM      "DVD-ROM носитель"
+    IDS_MEDIUM_DVD_RAM      "DVD-RAM носитель"
+    IDS_MEDIUM_DVD_R        "DVD-R носитель"
+    IDS_MEDIUM_DVD_RW       "DVD-RW носитель"
+    IDS_TEMP_BACKUP_RUNNING "Создать временные файлы"
+    IDP_DELETE_CDRW         "Вставленный носитель уже содержит файлы.\nПеред записью эти файлы будут удалены!\n\nВы действительно хотите удалить эти файлы?"
+    IDP_MULTISESSION_NOT_POSSIBLE 
+                            "Носитель не может быть записан программным обеспечением.\nПожалуйста, вставьте другой носитель."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NO_DISK             "Нет доступа к диску (ам) %s. \nВставьте диск! \nПовторите транзакцию!"
+    IDP_DISK_RO             "Диск защищен от записи или испорчен! \nУдалите защиту от записи и повторите транзакцию!"
+    IDP_NO_DISK_SPACE       "Недостаточно места доступно на диске %s. \nВставьте другой диск и повторите транзакцию!"
+    IDP_DISK_WRITTEN        "Данные были сохранены под именем %s."
+    IDS_DATABASE_INFO       "Информация базы данных"
+    IDS_OPEN                "Открыть"
+    IDS_JPEG                "JPEG изображения"
+    IDS_JPX                 "Изображения и данные"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_KTO_NR              "Номер счета"
+    IDS_ARCHIV_NR           "Номер архива"
+    IDS_KAMERA_NR           "Номер камеры"
+    IDS_REC_DATE            "ПК дата"
+    IDS_REC_TIME            "ПК время"
+    IDS_DTP_TIME            "Время ATM (банкомата)"
+    IDS_GA_NR               "Номер ATM (банкомата)"
+    IDS_TA_NR               "Номер транзакции"
+    IDS_BANKLEITZAHL        "Код банка"
+    IDS_VALUE               "Сумма"
+    IDS_CURRENCY            "Валюта"
+    IDS_STATION             "Имя хоста"
+    IDS_CAM_NAME            "Имя камеры"
+    IDS_DTP_DATE            "Дата ATM (банкомата)"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PICTURE_NR          "Номер изображения"
+    IDS_COMMENT             "Заметки"
+    IDS_ARCHIVE             "Архив"
+    IDS_STATION2            "Хост"
+    IDS_AND                 "И"
+    IDS_ALL_CAMERAS         "Все камеры"
+    IDS_RESOLUTION          "Разрешение"
+    IDP_DELETE_ARCHIV       "Вы действительно хотите удалить все последовательности в архиве\n'%s'\nна хосте '%s'?\n\nВсе изображения и данные будут потеряны!"
+    IDS_SUM                 "Всего"
+    IDS_TOOLTIP_ARCHIV      "Архив:\t%s\nИспользован:\t%d MБайт\nРазмер:\t%d МБайт"
+    IDS_TOOLTIP_DIB         "Изображение №:\t\t%d\nДата:\t\t%s\nВремя:\t\t%s\nРазрешение:\t%dx%d"
+    IDS_NO_BACKUP_3X        "Версия программного обеспечения %s не поддерживает этот тип резервирования!"
+    IDS_CANCEL_BACKUP       "Вы действительно хотите прервать процесс резервирования?"
+    IDS_DRIVE_FD            "Флоппи диск"
+    IDS_DRIVE_HD            "Локальный жесткий диск"
+    IDS_DRIVE_NET           "Сетевой диск"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CLEAN_RW            "Удаление RW носителя"
+    IDS_NO_MEDIUM_FOUND     "Носитель не найден"
+    IDS_MEDIUM_CD_ROM       "CD-ROM носитель"
+    IDS_DRIVE_DVD_RAM       "DVD-RAM диск"
+    IDS_WRITE_FAILED        "Файл %s не может быть записан.\nНоситель данных полон или доступен только для чтения."
+    IDS_BACKUP              "Резервирование"
+    IDS_BACKUP_REMOTE       "Резервирование на удаленный хост"
+    IDS_BACKUP_DRIVE_REMOTE "Диск резервирования (Удаленный хост)"
+    IDS_AUDIO_BUSY          "Аудио выход занят"
+    IDS_DBD_CSID            "ID Клиента"
+    IDS_DBD_FINM            "Имя"
+    IDS_DBD_LANM            "Фамилия"
+    IDS_DBD_PRID            "Номер события"
+    IDS_DBD_BXID            "Номер 'коробки'"
+    IDS_WAIT_FOR_IMAGE      "Система ожидает данных изображений."
+END
+
+STRINGTABLE 
+BEGIN
+    IDP_NOTHING_TO_BACKUP   "Нет ни последовательностей, ни архивов для сохранения!"
+    IDS_DATE                "Дата"
+    IDS_DATE_FORMAT         "%d.%m.%Y"
+    IDP_LOGIN_TIMEOUT       "Срок вашего пароля истек, введите пожалуйста новый пароль."
+    IDP_PASSWORD_LOCKED     "Вы пробовали более %d логинов.\nВаш доступ заблокирован на %d часов."
+    IDP_PASSWORD_WRONG      "Ваш пароль не был изменен.\n Вы должны изменить пароль!"
+    IDP_WRONG_PERMISSION    "Вы не имеете необходимого уровня доступа!"
+    IDS_LOGIN_FAILED        "Пользователь %s: Имя пользователя и/или пароль неверны, доступ запрещен"
+    IDS_USER_LOCKED         "Пользователь %s: Более %d неправельных попыток входа, доступ блокирован на %d часов"
+    IDS_PASSWORD_OLD        "Пользователь %s: Срок пароля истек"
+    IDP_LOGIN_FAILED        "Имя пользователя и/или пароль неверны!\nДоступ запрещен!"
+    IDS_SECOND_LOGIN        "2.Логин (вход)"
+    IDP_DISCONNECT_ALARM_CONNECTION 
+                            "Все еще есть тревожное соединение!\nВы действительно хотите разъединить это соединение?"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_SEARCH        "Поиск"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_NUMPLUS       "Двоичный вход"
+    ID_BUTTON_SYSTEM        "Открывает приложение для Конфигурирования Системы"
+    ID_BUTTON_DOME          "Положение камеры / Выбор камеры"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SYNC                 "Начинает или заканчивает синхронизированное по времени воспроизведение изображений."
+    ID_SEQUENCE_OVER        "Открывает любые дальнейшие последовательности в том же окне."
+    ID_SEQUENCE_REALTIME    "Если активно, последовательности показываются в реальном времени"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SEARCH               "Запрос для изображений."
+    ID_SEQUENCE_OPEN        "Открывает выделенные последовательности."
+    ID_ARCHIV_DELETE        "Удаляет архив"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DELETE               "Удаляет выделенные последовательности."
+    ID_EDIT_STATION         "Изменяет имя хоста."
+    ID_EDIT_COMMENT         "Создает комментарий для выхода на принтер."
+    ID_FILE_HTML            "Сохраняет текущее изображение на флоппи диск"
+    ID_FILE_JPG             "Сохраняет показанные картинки как JPEG."
+    ID_FILE_DIB             "Сохраняет показанные картинки как растровые (bitmap)."
+    ID_ARCHIV_EMPTY         "Очищает архив."
+    ID_DATABASE_INFO        "Показывает информацию о архиве."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_AUDIO                "Открывает аудио установки"
+    ID_VIEW_MENU            "Выключает основное меню. Включается через системное меню. "
+    ID_LOG_VIEW             "Открывает программу для просмотра лог файлов."
+    ID_EXPLORER             "Открывает Проводник Windows."
+    ID_PRODUCT_VIEW         "Показывает информацию о установленных модулях продукта."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SHELL                "Запускает систему в защищенном режиме"
+    ID_ERROR                "Показать ошибки выполнения."
+    ID_USER_INTERFACE       "Показывает установки интерфейса пользователя."
+    ID_EINSTELLUNGEN_BEWEGUNGSMASKE 
+                            "Изменяет постоянную маску детектора движения\nПостоянная маска"
+    ID_EINSTELLUNGEN_FARBEINSTELLUNGEN 
+                            "Управляет контрастностью, насыщением и яркостью изображения.\nКонтрастность/Насыщение/Яркость"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_UI_TREE             "Выберете окно"
+    IDC_UI_DIVMODE0         "Разделяет виды на равные по высоте."
+    IDC_UI_DIVMODE1         "Показывает только один активный вид, неактивные свернуты."
+    IDC_UI_DIVMODE2         "Разделяет виды на свободные по выбору высоты."
+    IDC_UI_VISIBILITY0      "Окно всегда видимо."
+    IDC_UI_VISIBILITY1      "Окно невидимо, когда оно пусто."
+    IDC_UI_VISIBILITY2      "Окно не будет показано."
+    IDC_UI_VISIBILITY3      "Окно изначально видимо."
+    IDC_UI_VISIBILITY4      "Окно изначально скрыто."
+    IDC_UI_MINIMIZED        "Окно показывается свернутым."
+    IDC_UI_AS_LIST          "Показывает список событий детектора."
+    IDC_MD_COMBO_SENSITIVITY 
+                            "Устанавливает чувствительность адаптивной маски."
+    IDC_MD_COMBO_SENSITIVITY_ALARM 
+                            "Устанавливает чувствительность детектора движения."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_DIALOGBAR       "Сворачивает или разворачивает панель."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_OBJECT_VIEW     "Сворачивает или разворачивает вид объекта."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_LEFT                "Левый"
+    IDC_UP                  "Высок."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_HM_MONITOR_SIZE "Показывает размер экрана в пикселях"
+    IDC_CLOSE_DLG_BAR       "Сворачивает это окно"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_MD_DEL              "Удаляет Маску"
+    IDC_MD_INVERT           "Инвертирует области маски детектора движения."
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_BTN_KB_LANG         "клавиатура план (F11)"
+    IDC_BTN_ISDN_CHANNELS   "ISDN B-Канал"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDT_HM_TITLE        "Пожалуйста, введите название карты"
+    IDC_EDT_HM_ZOOM         "Установить размер картинки согласно размеру экрана"
+    IDC_EDT_HM_PICTURE_FILENAME 
+                            "Введите название файла для фоновой картинки карты"
+    IDC_BTN_HM_PICTURE_FILENAME 
+                            "Выберете файл картинки"
+    IDC_EDT_HM_PICTURE_SIZE "Показывает размер картинки в пикселях"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "Созданные контейнеры памяти"
+    ID_INDICATOR_CAPS       "Изображения в очереди LiveWindowTread"
+    ID_INDICATOR_NUM        "Сбросить Статус"
+    ID_INDICATOR_SCRL       "Загрузка Процессора"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_OPTIMIZE_BY_HEADER 
+                            "Оптимизирует колонку в соответствии с длиной названия колонки."
+    ID_VIEW_OPTIMIZE_TO_WND_WIDTH 
+                            "Ограничение суммарной ширины таблицы суммарной шириной окна."
+    ID_SOFTWARE_UPDATE      "TODO!Installs a new software version"
+    ID_EXTENSION_CODE       "TODO!Enables additional functinality by inserting an extension code"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REQUEST_DISCONNECT  "Mochten Sie die Gegenstation '%s' trennen?"
+END
+
+#endif    // Russian (Russian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+
+#if !defined( AFX_RESOURCE_DLL ) || defined( AFX_TARG_RUS )
+
+#ifdef _WIN32
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#endif
+#include "res\IdipClient.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#include "afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

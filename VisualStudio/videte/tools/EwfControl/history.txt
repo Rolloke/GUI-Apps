@@ -1,0 +1,10 @@
+16.09.05 RKE - Anfang der EwfControl History.
+16.09.05 RKE - Speicherueberwachung implementiert. Die Daten werden jetzt nur ins Logfile geschrieben.
+19.09.05 RKE - Die Prozentuale Speicherbelegung des EWF wird jetzt unter DVRT\common\ "UsedPhysicalMemory" gespeichert.
+17.10.05 RKE - Bei Ueberschreitung von von 25 % Speicherverbrauch des EWF wird ein RuntimeError zum Rebooten gesendet.
+24.10.05 RKE - Unter DVRT\common\ REG_DWORD:"EwfRamThreshold" kann der Schwellwert (Standard = 25%) geaendert werden.
+			   DVRT\common\ "UsedPhysicalMemory" wird nicht mehr gespeichert.
+22.11.05 RKE - Bevor EWFControl aus dem Autorun-Zweig entfernt wird, wird jetzt nachgefragt.
+23.11.05 RKE - Bugfix 960: Das Programm laesst sich nicht mehr mehrfach starten.
+23.01.06 UF  - Meldung, wenn kein EWF da ist wird nicht mehr angezeigt.
+			   

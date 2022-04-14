@@ -1,0 +1,176 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Set Variable
+  Variable=INSTALLAUDIO
+  Value=1
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: Remark
+end
+item: Remark
+  Text=erst mal auf 95 und NT prüfen
+end
+item: Remark
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=5.0
+  Flags=00001000
+end
+item: Remark
+  Text=it's NT
+end
+item: Set Variable
+  Variable=INSTALLAUDIO
+  Value=0
+end
+item: End Block
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=4.0
+  Flags=00001001
+end
+item: Remark
+  Text=it's 95
+end
+item: Set Variable
+  Variable=INSTALLAUDIO
+  Value=0
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+  Text=----------- it's 98/ME2000/XP------------------
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=INSTALLAUDIO
+  Value=1
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=%MAINDIR%
+end
+item: Remark
+end
+item: Remark
+  Text=install the files
+end
+item: Install File
+  Source=d:\dv\AudioUnit.exe
+  Destination=%MAINDIR%\AudioUnit.exe
+  Flags=0000000010000010
+end
+item: Remark
+end
+item: Install File
+  Source=D:\dv\Dlls\CommonDirectShow.dll
+  Destination=%MAINDIR%\CommonDirectShow.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\dump.ax
+  Destination=%MAINDIR%\dump.ax
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\inftee.ax
+  Destination=%MAINDIR%\inftee.ax
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\mediasource.ax
+  Destination=%MAINDIR%\mediasource.ax
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\PushSource.ax
+  Destination=%MAINDIR%\PushSource.ax
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\Sample2MemRenderer.ax
+  Destination=%MAINDIR%\Sample2MemRenderer.ax
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\dv\Dlls\WaveSplitter.ax
+  Destination=%MAINDIR%\WaveSplitter.ax
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Remark
+  Text=register the filters
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\dump.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\inftee.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\mediasource.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\pushsource.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\sample2memrenderer.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=regsvr32.exe
+  Command Line=/s %MAINDIR%\wavesplitter.ax
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Remark
+end
+item: End Block
+end

@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AVCodecSample", "AVCodecSample.vcproj", "{A67DB851-7CF2-440E-92F2-1671A3CD81CE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		CanCheckoutShared = false
+		SolutionUniqueID = {B15C71C4-36F2-40AD-AD68-397D9C67F723}
+		SccProjectUniqueName1 = AVCodecSample.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A67DB851-7CF2-440E-92F2-1671A3CD81CE}.Debug.ActiveCfg = Debug|Win32
+		{A67DB851-7CF2-440E-92F2-1671A3CD81CE}.Debug.Build.0 = Debug|Win32
+		{A67DB851-7CF2-440E-92F2-1671A3CD81CE}.Release.ActiveCfg = Release|Win32
+		{A67DB851-7CF2-440E-92F2-1671A3CD81CE}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

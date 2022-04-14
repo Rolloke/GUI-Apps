@@ -1,0 +1,1 @@
+v:\bin\tools\MakeUpdateDisk.exe d:\install\vdr2pone 1 471

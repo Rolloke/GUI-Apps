@@ -1,0 +1,33 @@
+//
+// SDITEST.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#include "WK_Version.h"
+
+#ifdef _GARNY
+	GARNY_VERSION(12, 5, 15, 57, "12/05/99 , 15:57\0", // @AUTO_UPDATE
+		   "SDITest.exe\0",	// exe name
+		   "Video-Save SDITest\0",	// product name
+		   "Video-Save SDITest application\0",	// product description
+		   "3.1\0",		// general product version
+		   "3.100\0"	// real version
+		   )
+#else
+   WK_VERSION(12, 5, 15, 57, "12/05/99 , 15:57\0", // @AUTO_UPDATE
+		   "SDITest.exe\0",	// exe name
+		   "idip! SDITest\0",	// product name
+		   "Security SDITest application\0",	// product description
+		   "3.1\0",		// general product version
+		   "3.100\0"	// real version
+		   )
+#endif
+/////////////////////////////////////////////////////////////////////////////

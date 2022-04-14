@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tasha]
+"ErrorControl"=dword:00000001
+"Type"=dword:00000001
+"Start"=dword:00000001
+"Group"="Extended Base"

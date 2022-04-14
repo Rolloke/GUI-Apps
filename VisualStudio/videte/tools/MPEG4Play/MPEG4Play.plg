@@ -1,0 +1,74 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: MPEG4Play - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x407 /fo"Release/MPEG4Play.res" /d "NDEBUG" /d "_AFXDLL" "E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4Play.rc"" 
+Creating temporary file "C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP422.tmp" with contents
+[
+/nologo /Zp1 /MD /W4 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/MPEG4Play.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\mpeg4_work\home\17022004\MPEG4Play\MainFrm.cpp"
+"E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4Decoder.cpp"
+"E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4Play.cpp"
+"E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4PlayDoc.cpp"
+"E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4PlayView.cpp"
+]
+Creating command line "cl.exe @C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP422.tmp" 
+Creating temporary file "C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP423.tmp" with contents
+[
+/nologo /Zp1 /MD /W4 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/MPEG4Play.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\mpeg4_work\home\17022004\MPEG4Play\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP423.tmp" 
+Creating temporary file "C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP424.tmp" with contents
+[
+mp4spvd_PIV.lib vfw32.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/MPEG4Play.pdb" /machine:I386 /out:"Release/MPEG4Play.exe" 
+.\Release\MainFrm.obj
+.\Release\MPEG4Decoder.obj
+.\Release\MPEG4Play.obj
+.\Release\MPEG4PlayDoc.obj
+.\Release\MPEG4PlayView.obj
+.\Release\StdAfx.obj
+.\Release\MPEG4Play.res
+]
+Creating command line "link.exe @C:\DOKUME~1\ANDREA~1.HAG\LOKALE~1\Temp\RSP424.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+MainFrm.cpp
+MPEG4Decoder.cpp
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1623) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1627) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1648) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1652) : warning C4201: nonstandard extension used : nameless struct/union
+E:\mpeg4_work\home\17022004\MPEG4Play\MPEG4Decoder.cpp(258) : warning C4100: 'rectSrc' : unreferenced formal parameter
+MPEG4Play.cpp
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1623) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1627) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1648) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1652) : warning C4201: nonstandard extension used : nameless struct/union
+MPEG4PlayDoc.cpp
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1623) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1627) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1648) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1652) : warning C4201: nonstandard extension used : nameless struct/union
+MPEG4PlayView.cpp
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1623) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1627) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1648) : warning C4201: nonstandard extension used : nameless struct/union
+C:\msdev60\VC98\INCLUDE\mmsystem.h(1652) : warning C4201: nonstandard extension used : nameless struct/union
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+MPEG4Play.exe - 0 error(s), 17 warning(s)
+</pre>
+</body>
+</html>

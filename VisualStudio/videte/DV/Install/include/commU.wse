@@ -1,0 +1,121 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=*********** ISDN ***********************************
+end
+item: Check if File/Dir Exists
+  Pathname=%MAINDIR%\ISDNUnit.exe
+  Flags=00000101
+end
+item: Edit Registry
+  Total Keys=4
+  item: Key
+    Key=Software\DVRT\Isdnunit
+    New Value=0
+    Value Name=EnableKnockKnockBox
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Isdnunit
+    New Value=1
+    Value Name=NrBChannels
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Isdnunit2
+    New Value=0
+    Value Name=EnableKnockKnockBox
+    Root=2
+    Data Type=3
+  end
+  item: Key
+    Key=Software\DVRT\Isdnunit2
+    New Value=1
+    Value Name=NrBChannels
+    Root=2
+    Data Type=3
+  end
+end
+item: Edit Registry
+  Total Keys=2
+  item: Key
+    Key=Software\dvrt\SecurityLauncher\Modules
+    New Value=ISDNUnit.exe
+    Value Name=ISDNUnit
+    Root=2
+  end
+  item: Key
+    Key=Software\dvrt\SecurityLauncher\Modules
+    New Value=ISDNUnit.exe
+    Value Name=ISDNUnit2
+    Root=2
+  end
+end
+item: End Block
+end
+item: Install File
+  Source=d:\Dts\ISDNUnit.exe
+  Destination=%MAINDIR%\ISDNUnit.exe
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Remark
+  Text=*********** TCP/IP ***********************************
+end
+item: Check if File/Dir Exists
+  Pathname=%MAINDIR%\SocketUnit.exe
+  Flags=00000101
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\dvrt\SecurityLauncher\Modules
+  New Value=SocketUnit.exe
+  Value Name=SecuritySocketUnit
+  Root=2
+end
+item: End Block
+end
+item: Install File
+  Source=d:\Dts\SocketUnit.exe
+  Destination=%MAINDIR%\SocketUnit.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\dlls\netcommU.dll
+  Destination=%MAINDIR%\netcommU.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\NetUnit.exe
+  Destination=%MAINDIR%\NetUnit.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\Dts\dlls\NFCU.dll
+  Destination=%MAINDIR%\NFCU.dll
+  Flags=0000000000000010
+end
+item: Remark
+end

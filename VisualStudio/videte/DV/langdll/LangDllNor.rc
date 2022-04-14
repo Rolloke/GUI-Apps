@@ -1,0 +1,848 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\DVClient\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Norwegian (Norwegian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NOR)
+#ifdef _WIN32
+LANGUAGE LANG_NORWEGIAN, SUBLANG_NORWEGIAN_BOKMAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\DVClient\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NOR)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 20, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+#define WK_LANG_BLOCK "041404b0"
+#define WK_LANG_BLOCK_NUM 0x414
+    "#include ""res\\LangDll.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_OSD MENU DISCARDABLE 
+BEGIN
+    POPUP "TODO! View"
+    BEGIN
+        MENUITEM "TODO! >Fullscreen",                   IDOSD_VIEW_FULL
+        MENUITEM "TODO! >Square",                IDOSD_VIEW_XXX
+        MENUITEM "TODO! >1 plus",                     IDOSD_VIEW_1PX
+    END
+    POPUP "TODO! Camera"
+    BEGIN
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM1
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM2
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM3
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM4
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM5
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM6
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM7
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM8
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM9
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM10
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM11
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM12
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM13
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM14
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM15
+        MENUITEM "TODO! >Camera",                     IDOSD_CAM16
+    END
+    POPUP "TODO! Setup menu"
+    BEGIN
+        MENUITEM "TODO! >PIN: ____",           IDOSD_CONFIG_PIN
+    END
+    MENUITEM "TODO! Lock Display",               IDOSD_OPTION_LOCK
+END
+
+IDR_MENU_CONFIG MENU DISCARDABLE 
+BEGIN
+    POPUP "TODO! Colour Settings"
+    BEGIN
+        MENUITEM "TODO! >Brightness",                 IDOSD_COLOR_BRIGHTNESS
+        MENUITEM "TODO! >Contrast",                   IDOSD_COLOR_CONTRAST
+        MENUITEM "TODO! >Saturation",              IDOSD_COLOR_SATURATION
+    END
+    POPUP "TODO! Change Camera Title"
+    BEGIN
+        MENUITEM "TODO! Camera name: ________________", IDOSD_CHANGE_CAMNAME
+    END
+    POPUP "TODO! Camera Timers"
+    BEGIN
+        MENUITEM "TODO! >Mon: __:__-__:__",            IDOSD_TIMER_MO
+        MENUITEM "TODO! >Tue: __:__-__:__",            IDOSD_TIMER_TU
+        MENUITEM "TODO! >Wed: __:__-__:__",            IDOSD_TIMER_WE
+        MENUITEM "TODO! >Thu: __:__-__:__",            IDOSD_TIMER_TH
+        MENUITEM "TODO! >Fri: __:__-__:__",            IDOSD_TIMER_FR
+        MENUITEM "TODO! >Sat: __:__-__:__",            IDOSD_TIMER_SA
+        MENUITEM "TODO! >Sun: __:__-__:__",            IDOSD_TIMER_SU
+        MENUITEM "TODO! >Alarm Inputs",                     IDOSD_TIMER_ONOFF
+    END
+    POPUP "TODO! Camera Record Mode"
+    BEGIN
+        MENUITEM "TODO! >Mode",                      IDOSD_ALARM_MODE
+    END
+    POPUP "TODO! Activity Configuration"
+    BEGIN
+        MENUITEM "TODO! >Detection Sensitivity",            IDOSD_MD_ALARM_SENSITIVITY
+        MENUITEM "TODO! >Masking Sensitivity",         IDOSD_MD_MASK_SENSITIVITY
+        MENUITEM "TODO! >Change mask",               IDOSD_MD_DRAW_MASK
+    END
+    POPUP "TODO! Alarm configuration"
+    BEGIN
+        MENUITEM "TODO! >Alarm call at",             IDOSD_ALARM_CALL_EVENT
+        MENUITEM "TODO! >Dial no. 1",                     IDOSD_ALARM_CALLNUMBER1
+        MENUITEM "TODO! >Dial no. 2",                     IDOSD_ALARM_CALLNUMBER2
+        MENUITEM "TODO! >Dial no. 3",                     IDOSD_ALARM_CALLNUMBER3
+        MENUITEM "TODO! >Alarm output",               IDOSD_ALARM_OUTPUT_ON_OFF
+    END
+    POPUP "TODO! Sequencer"
+    BEGIN
+        MENUITEM "TODO! >Dwell time (s)",            IDOSD_SEQUENCER_DWELLTIME
+    END
+    POPUP "TODO! Images"
+    BEGIN
+        MENUITEM "TODO! >Export images",           IDOSD_ACTIVITY_BACKUP
+        MENUITEM "TODO! >Continue export",     IDOSD_MULTY_ACTIVITY_BACKUP
+        MENUITEM "TODO! >Export alarm images",      IDOSD_ALARM_BACKUP
+        MENUITEM "TODO! >Delete alarm images",        IDOSD_ALARM_DELETE
+        MENUITEM "TODO! >Show Suspicious images",   IDOSD_SUSPECT_SEARCH
+        MENUITEM "TODO! >Delete Suspicious images",    IDOSD_SUSPECT_DELETE
+    END
+    POPUP "TODO! Video outputs"
+    BEGIN
+        MENUITEM "TODO! >Output 1",                  IDOSD_VIDEO_OUT_MODE_PORT_1
+        MENUITEM "TODO! >Output 2",                  IDOSD_VIDEO_OUT_MODE_PORT_2
+        MENUITEM "TODO! >Output 3",                  IDOSD_VIDEO_OUT_MODE_PORT_3
+        MENUITEM "TODO! >Output 4",                  IDOSD_VIDEO_OUT_MODE_PORT_4
+    END
+    POPUP "TODO! Network"
+    BEGIN
+        MENUITEM "TODO! >IP: ___.___.___.___",        IDOSD_TCPIP
+        MENUITEM "TODO! >Subnetmask: ___.___.___.___", IDOSD_SUBNETMASK
+        MENUITEM "TODO! >Gateway:___.___.___.___",    IDOSD_GATEWAY
+        MENUITEM "TODO! >MSN: ___________",           IDOSD_ISDN_MSN
+        MENUITEM "TODO! >%s name:_______________",    IDOSD_NET_NAME
+    END
+    POPUP "TODO! System Date/Time"
+    BEGIN
+        MENUITEM "TODO! >Date: __.__.__",            IDOSD_CLOCK_DATE
+        MENUITEM "TODO! >Time: __:__:__",          IDOSD_CLOCK_TIME
+        MENUITEM "TODO! >Zone:",                      IDOSD_TIME_ZONE
+    END
+    POPUP "TODO! Printer Selection"
+    BEGIN
+        MENUITEM "TODO! No printer",                IDOSD_NO_PRINTER
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER1
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER2
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER3
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER4
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER5
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER6
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER7
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER8
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER9
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER10
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER11
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER12
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER13
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER14
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER15
+        MENUITEM "TODO! >Printer",                    IDOSD_PRINTER16
+    END
+    POPUP "TODO! Language Selection"
+    BEGIN
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE1
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE2
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE3
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE4
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE5
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE6
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE7
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE8
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE9
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE10
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE11
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE12
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE13
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE14
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE15
+        MENUITEM "TODO! >Language",                    IDOSD_LANGUAGE16
+    END
+    POPUP "TODO! Change PIN"
+    BEGIN
+        MENUITEM "TODO! >Operator",                   IDOSD_CHANGE_PIN_OPERATOR
+        MENUITEM "TODO! >Supervisor",              IDOSD_CHANGE_PIN_SUPERVISOR
+    END
+    POPUP "TODO! Other System Options"
+    BEGIN
+        MENUITEM "TODO! >Show Event Log",   IDOSD_OPTION_RTE
+        MENUITEM "TODO! >Target Display",        IDOSD_OPTION_TARGET_DISPLAY
+        MENUITEM "TODO! >Shut down System",          IDOSD_OPTION_EXIT
+        MENUITEM "TODO! >Software Update",             IDOSD_OPTION_UPDATE
+        MENUITEM "TODO! >Statistics",                  IDOSD_OPTION_STATISTIC
+        MENUITEM "TODO! >Audible alarm",          IDOSD_ACOUSTIC_ALARM
+        MENUITEM "TODO! >Alarm list",                 IDOSD_SHOW_ALARMLIST
+        MENUITEM "TODO! >Extension Code:____________", IDOSD_EXPANSION_CODE
+        MENUITEM "TODO! >Export System Settings", IDOSD_EXPORT_SETTINGS
+        MENUITEM "TODO! >Import System Settings", IDOSD_IMPORT_SETTINGS
+    END
+    MENUITEM "TODO! Exit Setup menu",       IDOSD_OPTION_END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "TODO! DVClient"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_PIN_SUCCESS         "TODO! PIN correct"
+    IDS_ON                  "TODO! On"
+    IDS_PIN_FAILED          "TODO! PIN failed"
+    IDS_PIN                 "TODO! PIN: ____"
+    IDS_SEARCH_DATE         "TODO! Search date: __.__.__"
+    IDS_SEARCH_TIME         "TODO! Search time: __:__"
+    IDS_SEARCH_ERROR        "TODO! Search error"
+    IDS_OFF                 "TODO! Off"
+    IDS_CAMERA              "TODO! Camera:"
+    IDS_OLD_PIN             "TODO! Current PIN: ____"
+    IDS_NEW_PIN             "TODO! New PIN: ____"
+    IDS_CONFIRM_PIN         "TODO! Confirm PIN: ____"
+    IDS_PIN_CHANGED         "TODO! PIN was changed"
+    IDS_SET_CLOCK_DATE_FAILED "TODO! Date not changed"
+    IDS_SET_CLOCK_TIME_FAILED "TODO! Time not changed"
+    IDS_SEARCH_START        "TODO! Searching..."
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_SET_CLOCK_DATE_SUCCESS "TODO! Date changed"
+    IDS_SET_CLOCK_TIME_SUCCESS "TODO! Time changed"
+    IDS_SET_TIMER_SUCCESS   "TODO! Timer changed"
+    IDS_SET_IP_SUCCESS      "TODO! IP-Address changed"
+    IDS_SET_IP_FAILED       "TODO! IP-Address not changed"
+    IDS_SET_MSN_SUCCESS     "TODO! MSN changed"
+    IDS_SET_MSN_FAILED      "TODO! MSN not changed"
+    IDS_SET_TIMER_FAILED    "TODO! Timer not changed"
+    IDS_MD                  "TODO! Activity Detection"
+    IDS_UVV                 "TODO! Alarm/Pre-alarm"
+    IDS_MD_SENSITIVITY_LOW  "TODO! Low"
+    IDS_MD_SENSITIVITY_NORMAL "TODO! Mid"
+    IDS_MD_SENSITIVITY_HIGH "TODO! High"
+    IDS_WAIT                "TODO! Please wait..."
+    IDS_NO_PICTURES         "TODO! No images for this camera"
+    IDS_QUERY               "TODO! Search for:\n"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "TODO! DVClient"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_REWIND       "TODO! Rewind"
+    IDC_BUTTON_PLAY         "TODO! Play forward"
+    IDC_BUTTON_PLAY_BACK    "TODO! Play backward"
+    IDC_BUTTON_STOP         "TODO! Finish playing"
+    IDC_BUTTON_FF           "TODO! Fast forward"
+    IDC_BUTTON_EJECT        "TODO! Close the play window of the active camera"
+    IDC_BUTTON_SKIP_BACK    "TODO! Jump to the previous event"
+    IDC_BUTTON_SINGLE_BACK  "TODO! Single step backward"
+    IDC_BUTTON_SINGLE_FORWARD "TODO! Single step forward"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_SEARCH       "TODO! Search"
+    IDC_BUTTON_SKIP_FORWARD "TODO! Jump to the next event"
+    IDC_BUTTON_EXPORT       "TODO! Export an image of the active camera to "
+    IDC_BUTTON_PRINT        "TODO! Print an image of the active camera on %s"
+    IDC_BUTTON_MINIMIZE     "TODO! Minimize panel in the lower right corner"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DISPLAY_CAMERA      "TODO! Active camera.....All camera specific values refer to this camera"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_OK           "TODO! Exit program"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DISPLAY_TIME        "TODO! Date and time"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_QUERY_FAILED        "TODO! No images found:\n"
+    IDS_SHUTDOWN            "TODO! Unit is shutting down..."
+    IDS_END_OPTION          "TODO! Exit Setup menu"
+    IDS_DATE                "TODO! Date:"
+    IDS_TIME                "TODO! Time:"
+    IDS_EXPORT_RUNNING      "TODO! Export in progress..."
+    IDS_EXPORT_SUCCESS      "TODO! Export successful"
+    IDS_EXPORT_FAILED       "TODO! Export failed"
+    IDS_PRINTJOB_RUNNING    "TODO! Print in progress..."
+    IDS_PRINTJOB_SUCCESS    "TODO! Printing successful"
+    IDS_PRINTJOB_FAILED     "TODO! Printing failed"
+    IDS_CAMNAME             "TODO! Camera name:"
+    IDS_CONNECT_ERROR       "TODO! No connection possible"
+    IDS_LOCKED              "TODO! Unit is locked"
+    IDS_RTE                 "TODO! Run-time Error %u from"
+    IDS_DELETE_ALARM        "TODO! Deleting current alarm..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DELETED_ALARM       "TODO! The images were deleted successfuly"
+    IDS_DELETED_ALARM2      "TODO! The images could not be deleted completly"
+    IDS_CONFIRM_RTE         "TODO! Event message confirmed"
+    IDS_DEFAULTPRINTER_SET  "TODO! Printer selection successful"
+    IDS_NO_CAMERA           "TODO! There is no camera connected"
+    IDS_BACKUP_RUNNING      "TODO! Export progress: %d %%\n\nEstimated time left: %s"
+    IDS_BACKUP_COMPLETE     "TODO! Export of alarm images successful."
+    IDS_DATE_FORMAT         "TODO! ddmmyy"
+    IDS_TIME_FORMAT_HHMMSS  "TODO! hhmmss"
+    IDS_TIMER_FORMAT        "TODO! hhmmhhmm"
+    IDS_HELP_INPUT_SEARCHDATE 
+                            "TODO! Enter search date and confirm it with the Enter key"
+    IDS_HELP_INPUT_SEARCHTIME 
+                            "TODO! Enter search time and confirm it with the Enter key"
+    IDS_HELP_INPUT_PIN      "TODO! Enter your current PIN"
+    IDS_HELP_INPUT_NEW_PIN  "TODO! Enter your new PIN"
+    IDS_HELP_INPUT_CONFIRM_PIN "TODO! Confirm your new PIN"
+    IDS_HELP_INPUT_TCPIP    "TODO! Enter TCP/IP adress and confirm it with the Enter key....You must restart the unit."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RTE_DEL             "TODO! Delete current Event message"
+    IDC_RTE_UP              "TODO! Jump to the next Event message"
+    IDC_RTE_DOWN            "TODO! Jump to the previous Event message"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RTE_CONFIRM         "TODO! Confirm current Event message"
+    IDC_RTE_OK              "TODO! Close Event message dialog"
+    IDC_RTE_DEL_ALL         "TODO! Delete all Event Logs"
+    IDC_RTE_PRINT           "TODO! Print all Event Logs"
+    IDC_CLOCK               "TODO! Start the input of the export time period"
+    IDC_STATIC_EXPORT       "TODO! Cam.:"
+    IDC_EXPORT_CAM1         "TODO! Please enter cameras to export images from"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_HELP_INPUT_MSN      "TODO! Enter MSN and confirm it with the Enter key"
+    IDS_HELP_INPUT_TIMER    "TODO! Enter the time period for the timer and confirm it with the Enter key"
+    IDS_HELP_INPUT_CLOCK_TIME 
+                            "TODO! Enter the current time and confirm it with the Enter key"
+    IDS_HELP_INPUT_CLOCK_DATE 
+                            "TODO! Enter the current date and confirm it with the Enter key"
+    IDS_HELP_INPUT_CAMERANAME "TODO! Enter the new camera name"
+    IDS_HELP_INPUT_OLD_PIN  "TODO! Enter your current PIN"
+    IDS_SET_SUBNETMASK_SUCCESS "TODO! Subnet mask set successfully"
+    IDS_SET_SUBNETMASK_FAILED "TODO! Failed to set subnet mask"
+    IDS_HELP_INPUT_SUBNETMASK 
+                            "TODO! Enter subnet mask and confirm it with the Enter key....You must restart the unit"
+    IDS_NO_PRINTER          "TODO! No printer"
+    IDS_DEFAULT_LANGUAGE_SET "TODO! Language selection successful"
+    IDS_BACKUP_FORMAT       "TODO! Please wait while the medium is being prepared to export images of camera %s.\nThis may take several minutes.\n\nElapsed time: %s"
+    IDS_BACKUP_FINALIZE     "TODO! Alarm images copied successful.\nFinishing export of images.\nThis may take several minutes.\n\nElapsed time: %s"
+    IDS_HELP_UPDATE_SYSTEM  "TODO! Insert the update disk into the floppy drive. After the update is finished the system will reboot automatically."
+    IDS_BACKUP_FORMAT_NOCDR "TODO! Found not empty medium in the recorder.\nThe images could not be exported."
+    IDS_BACKUP_FORMAT_ERROR "TODO! An error occurred while preparing the medium.\nThis process stopped.\nPlease replace the medium with another empty one and start export process again."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_CAM11             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM12             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM13             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM14             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM15             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM16             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_VIEW_FULL         "TODO! Full screen.....To change the view mode press arrow keys and confirm it with the Enter key"
+    IDOSD_VIEW_XXX          "TODO! Square mode.....To change the view mode press arrow keys and confirm it with the Enter key"
+    IDOSD_VIEW_1PX          "TODO! 1 plus view....To change the view mode press arrow keys and confirm it with the Enter key"
+    IDOSD_TIMER_MO          "TODO! Timer for monday.....To change the timer press Enter"
+    IDOSD_TIMER_TU          "TODO! Timer for tuesday.....To change the timer press Enter"
+    IDOSD_TIMER_WE          "TODO! Timer for wednesday.....To change the timer press Enter"
+    IDOSD_TIMER_TH          "TODO! Timer for thursday.....To change the timer press Enter"
+    IDOSD_TIMER_FR          "TODO! Timer for friday.....To change the timer press Enter"
+    IDOSD_TIMER_SA          "TODO! Timer for saturday.....To change the timer press Enter"
+    IDOSD_TIMER_SU          "TODO! Timer for sunday.....To change the timer press Enter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_CLOCK_DATE        "TODO! Current date.....To change the current date press Enter now"
+    IDOSD_CLOCK_TIME        "TODO! Current time.....To change the current time press Enter now"
+    IDOSD_ALARM_MODE        "TODO! Current recording mode.....To change the current recording mode press Enter. To switch between 'Alarm/Pre-alarm' mode or 'Activity detection' mode press arrow keys and confirm it with the Enter key. CAUTION! All previous images will be permanently erased when selecting this option."
+    IDOSD_TCPIP             "TODO! Current IP address.....To change the current IP address press Enter"
+    IDOSD_ISDN_MSN          "TODO! Current MSN.....To change the current MSN press Enter"
+    IDOSD_CHANGE_PIN_OPERATOR 
+                            "TODO! Change PIN"
+    IDOSD_CONFIG_PIN        "TODO! To enter the Setup menu press Enter and enter your PIN"
+    IDOSD_OPTION_END        "TODO! To leave the Setup menu press Enter now"
+    IDOSD_MD_MASK_SENSITIVITY 
+                            "TODO! Current mask sensitivity..... To change the current mask sensitivity press Enter now|To switch between mask sensitivity levels press arrow keys"
+    IDOSD_MD_ALARM_SENSITIVITY 
+                            "TODO! Current detection sensitivity..... To change the current detection sensitivity press Enter now|To switch between detection sensitivity levels press arrow keys"
+    IDOSD_OPTION_EXIT       "TODO! Press Enter to Shutdown the unit"
+    IDOSD_CHANGE_CAMNAME    "TODO! Current camera name.....To change the current camera name press Enter now"
+    IDOSD_OPTION_LOCK       "TODO! To Lock the display press Enter now"
+    IDOSD_OPTION_RTE        "TODO! To show the Event Log press Enter now"
+    IDOSD_ALARM_DELETE      "TODO! To delete the current alarm images press Enter now"
+    IDOSD_NO_PRINTER        "TODO! No printer.....To change the default printer press Enter now|Select the default printer with arrow keys"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_COLOR_BRIGHTNESS  "TODO! Current brightness.....To change the brightness press Enter now|To change the brightness press arrow keys"
+    IDOSD_COLOR_CONTRAST    "TODO! Current contrast....To change the contrast press Enter now|To change the contrast press arrow keys"
+    IDOSD_COLOR_SATURATION  "TODO! Current saturation.....To change the saturation press Enter now|To change the saturation press arrow keys"
+    IDOSD_CAM1              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM2              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM3              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM4              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM5              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM6              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM7              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM8              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM9              "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+    IDOSD_CAM10             "TODO! Current camera.....To change the current camera press arrow keys. Activate this camera by pressing Enter. All camera specific values refer to this active camera."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_PRINTER1          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER2          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER3          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER4          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER5          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER6          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER7          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER8          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER9          "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER10         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER11         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER12         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER13         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER14         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER15         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+    IDOSD_PRINTER16         "TODO! To change the default printer press Enter now|Select the default printer with arrow keys"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_LANGUAGE1         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE2         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE3         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE4         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_LANGUAGE5         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE6         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE7         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE8         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE9         "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE10        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE11        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE12        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE13        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE14        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE15        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+    IDOSD_LANGUAGE16        "TODO! To choose another language press Enter now|Select the default language with arrow keys"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_ALARM_BACKUP      "TODO! To export the current alarm images press Enter key"
+    IDOSD_SUSPECT_SEARCH    "TODO! To show the first suspicious image press Enter now"
+    IDOSD_SUSPECT_DELETE    "TODO! To delete all suspicious images press Enter now"
+    IDOSD_SUBNETMASK        "TODO! Current subnet mask....To change the subnet mask press Enter now"
+    IDOSD_ACTIVITY_BACKUP   "TODO! To start export of images please press Enter key"
+    IDOSD_OPTION_TARGET_DISPLAY 
+                            "TODO! Switch the target display on/off"
+    IDOSD_CHANGE_PIN_SUPERVISOR 
+                            "TODO! Change PIN"
+    IDOSD_TIMER_ONOFF       "TODO! Operational all the time or only during Camera Timers"
+    IDOSD_OPTION_UPDATE     "TODO! Start an Update from floppy disk"
+    IDOSD_TIME_ZONE         "TODO! To change your time zone press Enter now"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_OPTION_STATISTIC  "TODO! Displays a table of statistics"
+    IDOSD_NET_NAME          "TODO! Current %s name....To change the %s name, please press Enter now."
+    IDOSD_GATEWAY           "TODO! Current gateway address.....To change the current gateway address press Enter"
+    IDOSD_VIDEO_OUT_MODE_PORT_1 
+                            "TODO! View mode of the video output.....To change the view mode press Enter now|To switch between view modes press arrow keys"
+    IDOSD_VIDEO_OUT_MODE_PORT_2 
+                            "TODO! View mode of the video output.....To change the view mode press Enter now|To switch between view modes press arrow keys"
+    IDOSD_VIDEO_OUT_MODE_PORT_3 
+                            "TODO! View mode of the video output.....To change the view mode press Enter now|To switch between view modes press arrow keys"
+    IDOSD_VIDEO_OUT_MODE_PORT_4 
+                            "TODO! View mode of the video output.....To change the view mode press Enter now|To switch between view modes press arrow keys"
+    IDOSD_SEQUENCER_DWELLTIME 
+                            "TODO! Dwell time of monitor output for sequencer mode .....To change the dwell time press Enter now|To change the time press arrow keys"
+    IDOSD_ACOUSTIC_ALARM    "TODO! Audible alarm"
+    IDOSD_SHOW_ALARMLIST    "TODO! Show the alarm list for a specific date"
+    IDOSD_MD_DRAW_MASK      "TODO! Press the Enter key to change the permanent mask"
+    IDOSD_ALARM_OUTPUT_ON_OFF "TODO! Activate or deactivate the alarm output"
+    IDOSD_ALARM_CALLNUMBER1 "TODO! Current dialling number....to change the dialling number 1 press Enter now"
+    IDOSD_ALARM_CALLNUMBER2 "TODO! Current dialling number....to change the dialling number 2 press Enter now"
+    IDOSD_ALARM_CALLNUMBER3 "TODO! Current dialling number....to change the dialling number 3 press Enter now"
+    IDOSD_MULTY_ACTIVITY_BACKUP 
+                            "TODO! To continue the image export press Enter now"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_FINALIZE_ERROR 
+                            "TODO! An error occurred during completing export of images.\nPlease replace the medium with another empty one and start export process again"
+    IDS_BACKUP_FINALIZE_SUCCESS 
+                            "TODO! Export of images successfully completed.\nPlease remove the medium.\n"
+    IDS_NO_RECORD_FOUND     "TODO! There are no or no further images for this function\n"
+    IDS_BACKUP_CHECK_CD     "TODO! Please insert an empty medium into the recorder.\nIt may take several seconds to identify the medium.\nThe medium will be ejected after the export process.\n\nExport:\nfrom %s\nto   %s\n\nCamera:\n%s"
+    IDS_BACKUP_FORMATTED    "TODO! The media is successfully prepared to export.\nPlease wait..."
+    IDS_BACKUP_FAILED       "TODO! An error occurred during export process.\nPlease replace the medium with another one and start export process again."
+    IDS_BACKUP_COPYING      "TODO! Copying reader software.\nPlease wait..."
+    IDS_BACKUP_REMOUNT_FAILED 
+                            "TODO! The CD-R is not readable.\nPlease replace the CD-R with another empty one and start export process again"
+    IDS_HELP_INPUT_EXPORT_START 
+                            "TODO! Please enter start date and time, to export images from"
+    IDS_EXPORT_TIME_OK      "TODO! Date and time correct"
+    IDS_EXPORT_TIME_BAD     "TODO! Error in Date / Time format"
+    IDS_EXPORT_INPUT_STARTTIME "TODO! Input Start date / time"
+    IDS_EXPORT_INPUT_ENDTIME "TODO! Input End date / time"
+    IDS_EXPORT_STARTTIME_FORMAT "TODO! from: __.__.__ / __:__:__"
+    IDS_EXPORT_ENDTIME_FORMAT "TODO! to:   __.__.__ / __:__:__"
+    IDS_EXPORT_CAMERAS      "TODO! Please enter cameras"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EXPORT_CAMERAS_FORMAT "TODO! No.:__"
+    IDS_HELP_INPUT_EXPORT_END 
+                            "TODO! Please enter end date and time, to export images to"
+    IDS_HELP_INPUT_EXPORT_CAMERAS 
+                            "TODO! Please enter cameras, to export images from"
+    IDS_BACKUP_COMPLETE2    "TODO! Export of images successful"
+    IDS_IMAGE_MANIPULATED   "TODO! This image was manipulated, or it is damaged!"
+    IDS_BACKUP_DISC_FULL    "TODO! The inserted medium has no space left for another export.\nPlease replace the medium with another one and start export process again."
+    IDS_BACKUP_NO_EMPTY_CD  "TODO! The medium is not empty.\nPlease replace the medium with another empty one and start export process again."
+    IDS_VERSION             "TODO! Version"
+    IDS_HELP_SELECT_HOST    "TODO! Choose the %s from the %s list and confirm it with the Enter key"
+    IDS_BACKUP_NODATA       "TODO! no images available"
+    IDS_BACKUP_TOO_MANY_IMAGES 
+                            "TODO! There are too many images to export.\nPlease reduce the specified time period or the number of cameras."
+    IDS_BACKUP_NO_IMAGES_FOUND 
+                            "TODO! There are no images to export in the specified time period.\n"
+    IDS_BACKUP_FORMAT2      "TODO! Please wait while the medium is being prepared to export images.\nThis may take several minutes.\n\nElapsed time: %s"
+    IDS_BACKUP_FINALIZE2    "TODO! Images successfully copied.\nFinishing export of images.\nThis may take several minutes.\n\nElapsed time: %s"
+    IDS_READ_FAILED         "TODO! The image cannot be displayed."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_CHECK_CD2    "TODO! Please insert an empty medium into the recorder.\nIt may take several seconds to identify the medium.\nThe medium will be ejected after the export process.\n\nExport alarm images:\nfrom %s\nto   %s\n"
+    IDS_SEARCH_DATE_FAILED  "TODO! Invalid date"
+    IDS_SEARCH_TIME_FAILED  "TODO! Invalid time"
+    IDS_TIME_FORMAT_HHMM    "TODO! hhmm"
+    IDS_TIMER_ON            "TODO! Always active"
+    IDS_TIMER_OFF           "TODO! Timer active"
+    IDS_INPUT_DISK          "TODO! Insert disk %d"
+    IDS_UPDATE_SUCCESS      "TODO! Update successful"
+    IDS_UPDATE_RUNNING      "TODO! Update running..."
+    IDS_UPDATE_FAILED       "TODO! Copy failed"
+    IDS_UPDATE_WRONG_CRC    "TODO! Checksum wrong"
+    IDS_UPDATE_WRONG_DISK   "TODO! Wrong update disk"
+    IDS_UPDATE_DISKFAILED   "TODO! Floppy disk read error"
+    IDS_UPDATE_NO_UPDATE_DISK "TODO! No, or wrong update disk"
+    IDS_UPDATE_WRONG_OEM    "TODO! Wrong Oem-version"
+    IDS_UPDATE_WRONG_BUILD  "TODO! Wrong version number"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SET_TIME_ZONE_SUCCESS "TODO! Time zone changed"
+    IDS_SET_TIME_ZONE_FAILED "TODO! Time zone not changed"
+    IDS_HELP_SET_TIME_ZONE  "TODO! Input your time zone code. (Look at your documentation)"
+    IDS_STATISTIC_STARTTIME "TODO! Start time:"
+    IDS_STATISTIC_DURATION  "TODO! Days:"
+    IDS_STATISTIC_PICCOUNTER "TODO! Images:"
+    IDS_EXPORT_NO_CAMERA    "TODO! Error, no camera"
+    IDS_SET_LOCAL_HOST_NAME_SUCCESS "TODO! Name successfully changed"
+    IDS_SET_LOCAL_HOST_NAME_FAILED "TODO! Could not change name"
+    IDS_SELECT_HOST         "TODO! %s list"
+    IDS_HOSTLIST_EMPTY      "TODO! %s list is empty"
+    IDS_INVALID_SERIAL      "TODO! Invalid license number"
+    IDS_DISCONNECT          "TODO! Disconnect"
+    IDS_SET_GATEWAY_SUCCESS "TODO! Gateway address changed"
+    IDS_SET_GATEWAY_FAILED  "TODO! Gateway address not changed"
+    IDS_HELP_INPUT_GATEWAY  "TODO! Enter the gateway adress and confirm it with the Enter key....You must restart the unit."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VOUT_MODE_CLIENT    "TODO! Current camera"
+    IDS_VOUT_MODE_SEQUENCER "TODO! Sequencer"
+    IDS_VOUT_MODE_ACTIVITY  "TODO! Activity"
+    IDS_BACKUP_CALCULATE_SUCCESS_MAX 
+                            "TODO! Calculate end date/time successful.\nPress enter to use calculated end date and time to get optimal utilisation of mediums capacity.\n\nExport:\nfrom %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_SUCCESS 
+                            "TODO! Calculate end date/time successful.\nEnd date and time indicates newest image of selected cameras. Not enough images to get optimal utilisation of mediums capacity.\n\nMediums utilization: ca. %s %%\n\nExport:\nfrom %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT 
+                            "TODO! Please wait...\nCalculate optimal end date/time for image export."
+    IDS_BACKUP_CALCULATE_SUCCESS_MIN 
+                            "TODO! No images found behind selected start date/time. Please enter new start date/time, situated before the last selected."
+    IDS_BACKUP_CALCULATE_ERROR 
+                            "TODO! Calculate end date/time failed.\nPlease enter end date/time to export images from.\n\nExport:\nfrom %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_ERROR_PANEL "TODO! Calculate failed"
+    IDS_EXTEND              "TODO! Advanced..."
+    IDS_HELP_EXTEND         "TODO! Press Enter to edit the %s list, or to create new entries."
+    IDS_SET_ALARM_DIALING_NUMMER_SUCCESS "TODO! Dialling number set"
+    IDS_SET_ALARM_DIALING_NUMMER_FAILED "TODO! Dialling number not set"
+    IDS_FORMAT_IP           "TODO! :___.___.___.___"
+    IDS_FORMAT_TEL          "TODO! :________________"
+    IDS_BACKUP_INPUT_CAMERAS 
+                            "TODO! Please enter cameras, to export images from"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALARMLIST_CAM15     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_ACTIVITY  "TODO! Shows events from the activity detection in the alarm list"
+    IDC_ALARMLIST_EXTERN1   "TODO! Shows events from the first external alarm connector in the alarm list"
+    IDC_ALARMLIST_EXTERN2   "TODO! Shows events from the second external alarm connector in the alarm list."
+    IDC_ALARMLIST_IMAGE     "TODO! Shows the alarm image of the selected alarm"
+    IDC_ALARMLIST_UP2       "TODO! Shows the alarm list of the next day"
+    IDC_ALARMLIST_DOWN2     "TODO! Shows the alarm list of the previous day"
+    IDC_STATISTIC_OK        "TODO! Close statistics"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_HOSTS_DOWN_END      "TODO! Jump to the end of the %s list"
+    IDC_ALARMLIST_UP        "TODO! Shows the next page of the alarm list"
+    IDC_ALARMLIST_DOWN      "TODO! Shows the previous page of the alarm list"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_MD_DEL              "TODO! Deletes the permanent mask"
+    IDC_MD_INVERT           "TODO! Inverts the permanent mask"
+    IDC_MD_SHOW_ADAPTIVE    "TODO! Shows the adaptive mask in the image"
+    IDC_ALARMLIST_OK        "TODO! Close the alarm list"
+    ID_MD_OK                "TODO! Close the dialog"
+    IDC_HOSTS_OK            "TODO! Close the %s list dialog"
+    IDC_HOSTS_NEW           "TODO! Insert a new entry in the %s list"
+    IDC_HOSTS_DELETE        "TODO! Delete the selected %s list entry"
+    IDC_HOSTS_DISPLAY_NAME  "TODO! Name of the remote %s currently selected in the %s list...Click here, to edit this entry."
+    IDC_HOSTS_DISPLAY_IP    "TODO! IP address of the remote %s currently selected in the %s list...Click here, to edit this entry."
+    IDC_HOSTS_UP_START      "TODO! Jump to the start of the %s list."
+    IDC_HOSTS_UP            "TODO! Scroll to the next page of the %s list."
+    IDC_HOSTS_DOWN          "TODO! Scroll to the previous page of the %s list."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALARMLIST_PRINT     "TODO! Print the alarm list from the current selected day"
+    IDC_ALARMLIST_CAM0      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM1      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM2      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM3      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM4      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM5      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM6      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM7      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM8      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM9      "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM10     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM11     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM12     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM13     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+    IDC_ALARMLIST_CAM14     "TODO! Camera filter...If this filter is activated, events from this camera are shown in the alarm list."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_INPUT_START  "TODO! Please enter start date/time to export images from. Default start date and time indicate the first image of selected cameras."
+    IDS_BACKUP_MULTI        "TODO! There's more than one medium necessary to backup all images, because end date/time are younger than calculated. Please start backup with calculated end date/time first, then choose menu item 'Continue backup'. This second backup continues the first.\n\nExport: n\from %s\n\nCamera:\n%s"
+    IDS_ALARMCALL_EVENT_A   "TODO! A"
+    IDS_ALARMCALL_EVENT_A1  "TODO! A,Ext1"
+    IDS_ALARMCALL_EVENT_A2  "TODO! A,Ext2"
+    IDS_ALARMCALL_EVENT_A12 "TODO! A,Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_1   "TODO! Ext1"
+    IDS_ALARMCALL_EVENT_2   "TODO! Ext2"
+    IDS_ALARMCALL_EVENT_12  "TODO! Ext1,Ext2"
+    IDS_ALARMCALL_EVENT_OFF "TODO! Off"
+    IDS_EXPANSION_CODE_SUCCESS "TODO! Extension code necessary"
+    IDS_EXPANSION_CODE_FAILED "TODO! Extension code failed"
+    IDS_BACKUP_MULTI_IS_RUNNING 
+                            "TODO! Export continues directly after previous export.\n\nprevious export:\nfrom %s\nto %s\n\nContinuing export:\nfrom %s\n\nCamera:\n%s"
+    IDS_BACKUP_CALCULATE_WAIT_MULTI 
+                            "TODO! Export continues directly after previous export.\n\nprevious export:\nfrom %s\nto %s\n\nContinuing export:\nfrom %s\n\nCamera:\n%s\n\nPlease wait...\nCalculating optimal end date/time for image export."
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS 
+                            "TODO! Export continues directly after previous export.\n\nprevious export:\nfrom %s\nto %s\n\nContinuing export:\nfrom %s\n\nCamera:\n%s\n\nCalculate end date/time successful. Not enough images to get optimal utilisation of mediums capacity.\n\nMediums utilization: ca. %s %%"
+    IDS_BACKUP_CALCULATE_MULTI_SUCCESS_MAX 
+                            "TODO! Export continues directly after previous export.\n\nprevious export:\nfrom %s\nto %s\n\nContinuing export:\nfrom %s\n\nCamera:\n%s\n\nCalculate end date/time successful. Press enter to use calculated end date/time to get optimal utilisation of mediums capacity."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDOSD_ALARM_CALL_EVENT  "TODO! Defines which detector causes an alarm call. A = activity detection, 1 = first external detector, 2 = second external detector....Settings are stored for each camera."
+    IDOSD_EXPANSION_CODE    "TODO! To enter extension code press enter key."
+    IDOSD_EXPORT_SETTINGS   "TODO! Exports the system settings"
+    IDOSD_IMPORT_SETTINGS   "TODO! Imports the previous exported system settings"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_CALCULATE_MULTI_ERROR 
+                            "TODO! Export continues directly after previous export.\n\nprevious export:\nfrom %s\nto %s\n\nContinuing export:\nfrom %s\n\nCamera:\n%s.\n\nCalculate end date/time failed.\nPlease enter end date/time to export images from."
+    IDS_POWEROFF_PRESSED    "TODO! Shutdown system"
+    IDS_RESET_PRESSED       "TODO! Reboot system"
+    IDS_EXPORT_NO_IMAGES    "TODO! No images found"
+    IDS_BACKUP_REQUEST_MB_MAX 
+                            "TODO! No images found  between start date/time and end date/time. Please enter new end date/time.\nPress enter to use calculated end date/time to get optimal utilisation of mediums capacity.\n\nExport:\nfrom %s\n\nCamera:\n%s"
+    IDS_BACKUP_REQUEST_MB   "TODO! No images found  between start date/time and end date/time. Please enter new end date/time.\nCalculated end date/time indicates newest image of selected cameras. Not enough images to get optimal utilisation of mediums capacity.\n\nMediums utilization: ca. %s %%\n\nExport:\nfrom %s\n\nCamera:\n%s"
+    IDS_EXIT_ENTRY          "TODO! >Exit program"
+    IDS_YES                 "TODO! Yes"
+    IDS_NO                  "TODO! No"
+    IDS_CONFIRM_RECORDINGMODE_CHANGING 
+                            "TODO! Confirm the recording mode changing with the arrow and Enter keys....CAUTION! All previous images will be permanently erased when confirming with 'Yes'"
+    IDS_OK                  "TODO! OK"
+    IDS_CANCEL              "TODO! Cancel"
+    IDS_ERROR               "TODO! Error"
+    IDS_FILE_SYSTEM_ACCESS  "TODO! To get acces to the file system, administrator rights are required.\nPlease enter your PIN."
+    IDS_BACKUP_TITLE        "TODO! Export images"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_ACDC_ERASE_CDRW 
+                            "TODO! Detected medium is not empty.\nExport images is possible to empty mediums only. The medium has to be erased before image export.\nSelect menu item 'Erase medium: Yes' and press enter.\nThe medium will be automatically erased before image export starts."
+    IDS_BACKUP_ACDC_WAIT_ERASE_COMPLETE "TODO! Erasing medium: %d %%\n"
+    IDS_BACKUP_RUNNING_UP_ACDC 
+                            "TODO! Preparing image export.\n\nProgress: %d %%\n\nElapsed time: %s"
+    IDS_BACKUP_ACDC_START   "TODO! Please insert a medium into the recorder.\nIt may take several seconds to identify the medium.\nThe medium will be ejected after the export process."
+    IDS_ERASE_MEDIUM        "TODO! Erase medium"
+    IDS_HELP_INPUT_WAIT_FOR_MEDIUM 
+                            "TODO! Please insert a medium into the recorder."
+    IDS_HELP_INPUT_ERASE_MEDIUM 
+                            "TODO! Detected medium is not empty. Erase medium before image export?"
+    IDS_EXPORT_INPUT_WAIT_FOR_MEDIUM "TODO! Expecting disc"
+    IDS_EXPORT_INSERT_MEDIUM "TODO! Insert disc"
+    IDS_EXPORT_ERASE_MEDIUM "TODO! Medium detected"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BACKUP_ACDC_NOT_ERASED 
+                            "TODO! Export images requires an empty medium.\nPlease erase the medium or insert another medium."
+    IDS_FOUND_NEW_DEVICE    "TODO! Found new device: "
+    IDS_REMOVED_DEVICE      "TODO! Removed device: "
+    IDS_BACKUP_ERASE_EXTERN_MEDIUM 
+                            "TODO! Detected medium is not empty.\nTo use mediums full capacity it has to be erased before image export. If not erased image export will use mediums available free space only.\nMake your choice, select menu item and press enter."
+    IDS_BACKUP_EXTERN_MEDIUM_NOT_ERASED 
+                            "TODO! There is not enough space left on medium to export images.\nPlease erase medium or use another one."
+    IDS_BACKUP_ERASING_EXTERN_MEDIUM "TODO! Erasing extern medium\n\nTime: %s"
+    IDS_BACKUP_RUNNING_UP   "TODO! Export progress: %d %%\n\nTime: %s"
+    IDS_IMPORT_SUCCESS      "TODO! Import successful"
+    IDS_IMPORT_FAILED       "TODO! Import failed"
+    IDS_IMPORT_RUNNING      "TODO! Import in progress..."
+END
+
+#endif    // Norwegian (Norwegian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NOR)
+#ifdef _WIN32
+LANGUAGE 20, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#define WK_LANG_BLOCK "041404b0"
+#define WK_LANG_BLOCK_NUM 0x414
+#include "res\LangDll.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

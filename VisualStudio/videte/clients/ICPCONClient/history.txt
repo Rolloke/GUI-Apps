@@ -1,0 +1,5 @@
+10.03.04 GF	- Umstellung auf Unicode und VS_71
+10.03.03 UF - Bedienung geaendert, minimiert wird jetzt immer, egal wo die Maus ist, maximiert
+              nur bei Mausklick.
+18.02.03 UF - Byte Alignment auf 1 festgelegt
+18.02.03 RKE - Projekt angelegt

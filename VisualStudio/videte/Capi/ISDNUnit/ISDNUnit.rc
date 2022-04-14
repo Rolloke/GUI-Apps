@@ -1,0 +1,398 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ISDNUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ISDN_SETTINGS DIALOGEX 0, 0, 223, 121
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ISDN Einstellungen"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Anschluß",IDC_TXT_OWN_SETTINGS,9,7,118,49
+    LTEXT           "Eigene &Rufnummer:",IDC_TXT_OWN_NUMBER,13,15,104,8
+    EDITTEXT        IDC_RUFNUMMER,13,24,107,12,ES_AUTOHSCROLL
+    LTEXT           "Anzahl der &B-Kanäle:",IDC_TXT_NUM_B,13,41,69,8
+    EDITTEXT        IDC_B_CHANNEL,88,39,32,12,ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "Zwischen-Anrufer",IDC_TXT_KNOCK_SETTINGS,131,7,85,25
+    CONTROL         "&Zeige Dialog",IDC_ENABLE_KNOCK_BOX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,135,17,77,10
+    GROUPBOX        "Systembelastung",IDC_TXT_PROCESSOR_USAGE,131,35,85,58
+    CONTROL         "&hoch",IDC_USAGE_HIGH,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,135,50,77,10
+    CONTROL         "&mittel",IDC_USAGE_MEDIUM,"Button",BS_AUTORADIOBUTTON,
+                    135,63,77,10
+    CONTROL         "&gering",IDC_USAGE_LOW,"Button",BS_AUTORADIOBUTTON,135,
+                    76,77,10
+    GROUPBOX        "Protokolliere",IDC_TXT_TRACES,7,60,118,33
+    CONTROL         "gesendete Daten",IDC_TRACE_SEND,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,72,107,10
+    CONTROL         "empfangene Daten",IDC_TRACE_RECEIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,81,107,10
+    DEFPUSHBUTTON   "OK",IDOK,86,100,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,166,100,50,14
+    DEFPUSHBUTTON   "&Erweitert...",ID_ADVANCED_SETTINGS,7,100,50,14
+END
+
+IDD_ABOUTBOX DIALOGEX 34, 22, 241, 89
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ISDNUnit"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "ISDNUnit - ISDN Verbindungsmodul",IDC_TXT_MODULE_NAME,
+                    58,8,152,8
+    DEFPUSHBUTTON   "OK",IDOK,196,70,40,15,WS_GROUP
+    CONTROL         "",IDC_BIGICON,"Button",BS_OWNERDRAW | WS_DISABLED,3,3,
+                    38,40
+    LTEXT           "Verbindungsstatus:",IDC_STATIC_CONNECT_STATE,9,58,64,8
+    LTEXT           "Gegenstelle:",IDC_STATIC_REMOTE_STATION,9,67,64,8
+    LTEXT           "CLOSED",IDC_CONNECT_STATE,77,58,60,8
+    LTEXT           "unbekannt",IDC_REMOTE_STATION,77,67,102,8
+    LTEXT           "Zeit:",IDC_TXT_TIME,58,37,26,8
+    LTEXT           "...",IDC_TIME,89,37,41,8
+    LTEXT           "Stationsname:",IDC_TXT_HOSTNAME,9,48,64,8
+    LTEXT           "Nummer:",IDC_TXT_OWN_NUMBER,151,37,49,8
+    LTEXT           "XXX",IDC_STATIC_HOSTNAME,77,48,60,8
+    LTEXT           "XXX",IDC_STATIC_OWN_NUMBER,206,37,27,8,0,WS_EX_RIGHT
+    LTEXT           "Kanäle:",IDC_TXT_CHANNELS,151,48,49,8
+    LTEXT           "0",IDC_NUM_CHANNELS,212,48,21,8,0,WS_EX_RIGHT
+    LTEXT           "Version:",IDC_STATIC_VERSION,58,27,26,8
+    LTEXT           "3.5",IDC_TXT_VERSION,89,27,53,8
+    PUSHBUTTON      "QUIT",IDC_HIDDEN_QUIT,214,3,27,14
+    CONTROL         "",IDC_MSN_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    224,27,9,8
+    LTEXT           "TKA unterstützt MSN",IDC_TXT_MSN_SUUPPORT,151,27,67,8
+    LTEXT           "Kompressionsrate:",IDC_STATIC_COMPRESSIONRATE,9,77,64,8
+    RTEXT           "0",IDC_COMPRESSIONRATE,77,77,30,8
+    LTEXT           "%",IDC_STATIC_COMPRESSIONRATE2,112,77,15,8
+END
+
+IDD_KNOCK_KNOCK_BOX DIALOGEX 34, 22, 248, 102
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION ">>> ISDN Zwischen-Anrufer <<<"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "&Fenster Schließen",IDOK,3,85,242,14,WS_GROUP
+    GROUPBOX        "Zwischenanruf",IDC_TXT_KNOCK_GROUP,3,3,242,43
+    LTEXT           "Zeit:",IDC_TXT_KNOCK_TIME,10,13,66,8,0,WS_EX_RIGHT
+    LTEXT           "",IDC_KNOCK_TIME,85,13,150,8
+    LTEXT           "Nummer:",IDC_TXT_KNOCK_NUMBER,10,23,66,8,0,WS_EX_RIGHT
+    LTEXT           "",IDC_KNOCK_NUMBER,85,23,150,8
+    LTEXT           "Stations Name:",IDC_TXT_KNOCK_NAME,10,33,66,8,0,
+                    WS_EX_RIGHT
+    LTEXT           "",IDC_KNOCK_NAME,85,33,150,8
+    PUSHBUTTON      "Schließe &Verbindungen",IDC_CLOSE_ACTIVE_CONNECTION,3,
+                    64,115,14
+    LTEXT           "Aktuelle Verbindung:",IDC_TXT_CURRENT_CONNECTION,10,50,
+                    66,8
+    LTEXT           "",IDC_CURRENT_CONNECTION,85,50,150,8
+    PUSHBUTTON      "Schließe einen B-Kanal.",IDC_CLOSE_ONE_CHANNEL,130,64,
+                    115,14
+END
+
+IDD_ADVANCED_PT DIALOG  0, 0, 203, 159
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Erweiterte PTUnit Einstellungen"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,73,142,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,150,142,50,14
+    LTEXT           "ACHTUNG: Einstellungen auf dieser Seite können\n negative Auswirkungen auf die Funktionsfähigkeit haben !",
+                    IDC_TXT_ADVANCED_PT_WARNING,3,3,197,21
+    GROUPBOX        "HexDump",IDC_TXT_HEX_DUMP,3,27,97,37
+    CONTROL         "Send",IDC_DO_HEX_DUMP_SEND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,9,38,33,10
+    CONTROL         "Receive",IDC_DO_HEX_DUMP_RECEIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,9,50,43,10
+    GROUPBOX        "Bilddaten",IDC_PT_PICTURE,103,27,97,80
+    CONTROL         "Keine Bilddaten",IDC_PT_DISABLE_FRAME_GRABBING,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,116,39,65,10
+    CONTROL         "klein als mittel",IDC_PT_LOW_AS_MID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,116,51,59,10
+    GROUPBOX        "Verschiedenes",IDC_TXT_PT_MISC,3,70,97,37
+    CONTROL         "Kein Eprom schreiben",IDC_PT_DISABLE_EEP_WRITE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,9,80,85,10
+    LTEXT           "OK speichert die Einstellungen in PTUnit.cfg\nEin Neustart der PTUnit ist nicht nötig.\nKameraumschalten oder Verbindung neu aufbauen.",
+                    IDC_TXT_PT_ADVANCED_INFO,15,113,173,25
+    CONTROL         "protokolliere",IDC_PT_DO_TRACE_PICTURES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,116,64,54,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ISDN_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 216
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        TOPMARGIN, 3
+        HORZGUIDE, 85
+    END
+
+    IDD_KNOCK_KNOCK_BOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 245
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 99
+        HORZGUIDE, 71
+    END
+
+    IDD_ADVANCED_PT, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 200
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 156
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&Datei"
+    BEGIN
+        MENUITEM "&Info über...",               ID_ABOUT
+        MENUITEM "&Aktueller Zustand",          ID_SHOW_STATE
+        MENUITEM SEPARATOR
+        MENUITEM "&Verbindungen abbauen",       ID_CLOSE_ALL_ISDN_CONNECTIONS
+
+        MENUITEM "Einen B-Kanal abbauen",       ID_CLOSE_ONE_ISDN_CHANNEL
+        MENUITEM "2. B-Kanal öffnen",           ID_OPEN_SECOND_B_CHANNEL
+        MENUITEM SEPARATOR
+        MENUITEM "Be&enden",                    ID_CLOSE_MODUL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "ISDNUnit"
+    IDR_MAINFRAME_PT        "PTUnit"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ISDNUnit"
+    AFX_IDS_IDLEMESSAGE     "Drücken Sie F1, um Hilfe zu erhalten."
+    AFX_IDS_HELPMODEMESSAGE "Wählen Sie das Objekt, zu dem Sie Hilfe wünschen."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUT               "&Info über..."
+    IDS_SETTINGS            "&Einstellungen..."
+    IDS_CLOSE_ALL_ISDN_CONNECTIONS "&Verbindung beenden"
+    IDS_CE_USER_BUSY        "Der Teilnehmer ist besetzt."
+    IDS_CE_CALL_REJECTED    "Der Teilnehmer hat den Anruf zurückgewiesen."
+    IDS_CE_34XX             "Die Gegenstelle konnte nicht erreicht werden\noder die Verbindung wurde beendet."
+    IDS_ISDN_MODULE_CLOSING "Die ISDNUnit wird beendet!\n\nAlle noch offenen ISDN-Verbindungen werden getrennt."
+    IDS_CE_NO_USER_RESPONDING "Der Teilnehmer antwortet nicht."
+    IDS_CE_PROTOCOL_ERROR_LAYER_1 
+                            "Fehler beim Aufbau D-Kanal Ebene 1.\nÜberprüfen Sie die Verbindung zwischen ISDN-Karte und Anschluß."
+    IDS_CE_PROTOCOL_ERROR_LAYER_2 
+                            "Fehler beim Aufbau D-Kanal Ebene 2.\nKonflikte im Protokoll, z.B. bei Nebenstellenanlagen \nmit firmeneigenem D-Kanal-Protokoll.\nDer benutzte Anschluß der Nebenstellenanlage\ndarf nur mit dem D-Kanal-Protokoll der Telekom betrieben werden."
+    IDS_CE_PROTOCOL_ERROR_LAYER_3 
+                            "Fehler beim D-Kanal-Protokoll Ebene 3.\nDie D-Kanal-Protokolle des geladenen Capi-Treibers\nund des ISDN-Anschlusses müssen übereinstimmen."
+    IDS_CE_B1_PROTOCOL_NOT_SUPPORTED 
+                            "Das gewählte B-Kanal-Protokoll Ebene 1 wird nicht unterstützt."
+    IDS_CE_B2_PROTOCOL_NOT_SUPPORTED 
+                            "Das gewählte B-Kanal-Protokoll Ebene 2 wird nicht unterstützt."
+    IDS_CE_B3_PROTOCOL_NOT_SUPPORTED 
+                            "Das gewählte B-Kanal-Protokoll Ebene 3 wird nicht unterstützt."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CE_B1_PARAMS_NOT_SUPPORTED 
+                            "Die gewählten Parameter des B-Kanal-Protokolls Ebene 1 werden nicht unterstützt."
+    IDS_CE_B2_PARAMS_NOT_SUPPORTED 
+                            "Die gewählten Parameter des B-Kanal-Protokolls Ebene 2 werden nicht unterstützt."
+    IDS_CE_B3_PARAMS_NOT_SUPPORTED 
+                            "Die gewählten Parameter des B-Kanal-Protokolls Ebene 3 werden nicht unterstützt."
+    IDS_CE_B_PROTOCOL_COMBINATION_NOT_SUPPORTED 
+                            "Die gewählte Kombination der B-Kanal-Protokolle wird nicht unterstützt."
+    IDS_CONNECT_REQUEST_TIMEOUT 
+                            "Connect Request Timeout!\nDie Verbindung zu %s wird abgebaut."
+    IDS_UNIT_NOT_STARTED    "Die ISDN-Unit konnte nicht gestartet werden!\nVerbindungen über ISDN können nicht aufgebaut werden!"
+    IDS_TOO_MANY_APPL       "Zu viele Applikationen!"
+    IDS_CAPI_NOT_INSTALLED_1 
+                            "Die ISDN-Karte oder die ISDN-Treiber sind nicht ordnungsgemäß installiert"
+    IDS_CAPI_NOT_ENOUGH_MEMORY "Nicht genügend Speicher oder DOS-Speicher!"
+    IDS_CE_10XX             "Fehler bei CAPI_REGISTER!"
+    IDS_CE_11XX             "Fehler beim Message-Austausch mit CAPI!"
+    IDS_CE_20XX             "Fehler bei CAPI-Resourcen / Kodierungsproblem!"
+    IDS_CE_30XX             "Fehler bei angeforderten CAPI-Services!"
+    IDS_CE_33XX             "Fehler bei CAPI-Protokollen / Applikations-ID!"
+    IDS_CE_ANOTHER_APPLICATION_GOT_THE_CALL 
+                            "Der eingegangene Ruf wurde von einer anderen Applikation angenommen!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CE_NORMAL_CALL_CLEARING "Die Verbindung wurde normal beendet."
+    IDS_CE_NO_ANSWER_FROM_USER "Die Gegenstelle antwortet nicht."
+    IDS_CE_NUMBER_CHANGED   "Die Anschlußnummer hat sich geändert."
+    IDS_CE_NON_SELECTED_USER_CLEARING "Non selected user clearing."
+    IDS_CE_DESTINATION_OUT_OF_ORDER "Die Gegenstelle ist ausgefallen."
+    IDS_CE_INVALID_NUMBER_FORMAT 
+                            "Die angegebene Nummer hat kein gültiges Format."
+    IDS_CE_FACILITY_REJECTED 
+                            "Die angeforderten Eigenschaften der Verbindungs werden nicht unterstützt."
+    IDS_CE_RESPONSE_TO_STATUS_ENQUIRY "Response to status enquiry."
+    IDS_CE_NORMAL_UNSPECIFIED "Die Verbindung wurde getrennt."
+    IDS_CE_NO_CHANNEL_AVAILABLE 
+                            "Es ist keine Leitung bzw. kein B-Kanal verfügbar."
+    IDS_CE_NETWORK_OUT_OF_ORDER "Das Netzwerk ist außer Betrieb."
+    IDS_CE_TEMPORARY_FAILURE "Kurzzeitiger Netzausfall."
+    IDS_TT_PT_HEX_DUMP_SEND "Alle gesendeten Daten im PTUnit.log"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_TT_PT_HEX_DUMP_RECEIVE "Alle empfangenen Daten im PTUnit.log"
+    IDS_TT_PT_DISABLE_FRAME_GRABBING 
+                            "Gar keine Bilddaten, hilft bei DoHexDumpReceive."
+    IDS_TT_PT_LOW_AS_MID    "Kleine Auflösung als mittlere Auflösung."
+    IDS_TT_PT_DISABLE_EEP_WRITE 
+                            "Sperrt das permanente Speichern via PTConfig."
+    IDS_PROCTOCOL_ERROR_REMOTE_IST 
+                            "Protokoll Fehler, Anruf von einer ISDNUnit erhalten."
+    IDS_PROCTOCOL_ERROR_REMOTE_PTBOX 
+                            "Protokoll Fehler, Anruf von einer PTBox erhalten."
+    IDS_PROCTOCOL_ERROR_REMOTE_PTUNIT 
+                            "Protokoll Fehler, Anruf von einer PTUnit erhalten."
+    IDS_PROCTOCOL_ERROR_REMOTE_UNKNOWN 
+                            "Protokoll Fehler, Anruf von unbekanntem System erhalten."
+    IDS_NO_ROUTING          "Routing Verbindung fehlgeschlagen, das gerufende System ist  nicht als Router konfiguriert."
+    IDS_INVALID_PERMISSION_ACCESS_DENIED 
+                            "Keine Berechtigung, Zugriff verweigert."
+    IDS_STATE_TITLE_TRAILER " - Aktueller Zustand"
+    IDS_INCOMING_CALL       "Eingehender Anruf von %s."
+    IDS_OUTGOING_CALL       "Ausgehender Anruf zu %s."
+    IDS_CLOSE_OUTGOING_CALL "Schließe ausgehenden Anruf zu %s."
+    IDS_CLOSE_INCOMING_CALL "Schließe eingehenden Anruf von %s."
+    IDS_REJECT_INCOMING_CALL "Verweigere eingehenden Anruf von %s."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REJECT_OUTGOING_CALL "Verweigere ausgehenden Anruf zu %s."
+    IDS_NO_DEVICE_FOUND     ", kein Gerät gefunden"
+    IDS_ISDN_NOT_AVAILABLE  "ISDN ist nicht verfügbar"
+    IDS_EMPTY_HOST_NAME     "Gegenstationsname ist leer"
+    IDS_ISDN_BUSY           "ISDN ist belegt"
+    IDS_UNKNOWN             "Unbekannt"
+    IDS_WITHOUT_NUMBER      "Ohne Nummer"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif
+#include "res\ISDNUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

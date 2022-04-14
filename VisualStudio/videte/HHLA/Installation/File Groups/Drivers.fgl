@@ -1,0 +1,7 @@
+[TopDir]
+file0=D:\Project\Units\MiCo\MiCoSys\Bin\Micopci.sys
+
+[General]
+Type=FILELIST
+Version=1.00.000
+

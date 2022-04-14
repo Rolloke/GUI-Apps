@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MPEG4Play2", "MPEG4Play2.vcproj", "{3435DC71-5212-4C53-90C6-CF7C39B70F77}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/Project/Tools/MPEG4Play2\u0022,\u0020DCOCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {09A00D31-CD55-485C-B2F8-4E74F68265D8}
+		SccProjectUniqueName1 = MPEG4Play2.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{3435DC71-5212-4C53-90C6-CF7C39B70F77}.Debug.ActiveCfg = Debug|Win32
+		{3435DC71-5212-4C53-90C6-CF7C39B70F77}.Debug.Build.0 = Debug|Win32
+		{3435DC71-5212-4C53-90C6-CF7C39B70F77}.Release.ActiveCfg = Release|Win32
+		{3435DC71-5212-4C53-90C6-CF7C39B70F77}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

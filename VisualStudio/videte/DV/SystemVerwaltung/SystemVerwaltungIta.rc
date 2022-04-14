@@ -1,0 +1,756 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italian) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 16, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\SystemVerwaltung.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.ita\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.ita\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\SystemVerwaltung.ico"
+IDR_SYSTEMTYPE          ICON    DISCARDABLE     "res\\SVDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_IMAGES              BITMAP  DISCARDABLE     "res\\images.bmp"
+IDB_DOWN                BITMAP  DISCARDABLE     "res\\down.bmp"
+IDB_UP                  BITMAP  DISCARDABLE     "res\\Up.bmp"
+IDB_HOT                 BITMAP  DISCARDABLE     "res\\hot.bmp"
+IDB_ARCHIVE             BITMAP  DISCARDABLE     "res\\archive.bmp"
+IDB_DRIVES              BITMAP  DISCARDABLE     "res\\drives.bmp"
+IDB_COLD                BITMAP  DISCARDABLE     "res\\cold.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  20, 20
+BEGIN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_EDIT_CANCEL
+    BUTTON      ID_EDIT_SERVERINIT
+    SEPARATOR
+    BUTTON      ID_EDIT_NEW
+    BUTTON      ID_EDIT_DELETE
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "TODO! &File"
+    BEGIN
+        MENUITEM "TODO! &Save\tCTRL+S",          ID_FILE_SAVE
+        MENUITEM "TODO! &Undo\tESC",            ID_EDIT_CANCEL
+        MENUITEM "TODO! &Initialise\tSTRG+I",    ID_EDIT_SERVERINIT
+        MENUITEM "TODO! Save &as...",         ID_FILE_SAVE_AS
+        MENUITEM "TODO! &Open...",                  ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "TODO! &Exit\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "TODO! &Edit"
+    BEGIN
+        MENUITEM "TODO! &New\tStrg+N",                ID_EDIT_NEW
+        MENUITEM "TODO! &Delete\tShift+DEL",     ID_EDIT_DELETE
+    END
+    POPUP "TODO! &View"
+    BEGIN
+        MENUITEM "TODO! &Tooltips",                   ID_VIEW_TOOLTIPS
+    END
+    POPUP "TODO! &?"
+    BEGIN
+        MENUITEM "TODO! &About...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "I",            ID_EDIT_SERVERINIT,     VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_EDIT_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_DELETE,         VIRTKEY, SHIFT, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_HOSTLIST DIALOG DISCARDABLE  0, 0, 356, 236
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO! &Name:",IDC_STATIC_HOST_NAME,7,9,24,8
+    EDITTEXT        IDC_NAME_HOST,35,7,70,14,ES_AUTOHSCROLL
+    RTEXT           "TODO! N&umber/Address:",IDC_STATIC_NUMBER,109,10,64,8
+    EDITTEXT        IDC_ADDRESS_HOST,177,7,70,14,ES_AUTOHSCROLL
+    RTEXT           "TODO! &Type:",IDC_TXT_TYP,254,10,22,8
+    COMBOBOX        IDC_COMBO_TYPE_HOST,279,7,70,83,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "TODO! List2",IDC_LIST_HOST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,7,26,342,181
+    LTEXT           "TODO! Own &host name:",IDC_STATIC_OWN_NAME,7,217,80,8
+    EDITTEXT        IDC_STATIONS_NAME,89,215,174,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "TODO! Setup archives...",IDC_HOST_ARCHIVES,280,215,69,14
+END
+
+IDD_ISDN DIALOG DISCARDABLE  0, 0, 320, 132
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "TODO! &ISDN",IDC_STATIC_ISDN,5,7,308,118
+    CONTROL         "TODO! &On/Off",IDC_CHECK_ISDN,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,17,22,73,10
+    GROUPBOX        "TODO! Own call number",IDC_STATIC_REJECT,15,35,135,44,
+                    WS_GROUP
+    EDITTEXT        IDC_RUFNUMMER,34,60,104,12,ES_AUTOHSCROLL | WS_GROUP
+    GROUPBOX        "TODO! Number of B - channels",IDC_STATIC_B_CHANNELS,155,35,131,
+                    44,WS_GROUP
+    CONTROL         "TODO! &1 B - channel",IDC_RADIO_B1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,162,47,116,10
+    CONTROL         "TODO! &2 B - channel",IDC_RADIO_B2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,162,61,116,10
+    CONTROL         "TODO! Use &MSN",IDC_CHECK_MSN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,22,46,69,10
+    LTEXT           "TODO! &Prefix:",IDC_TXT_PREFIX,17,89,36,8
+    EDITTEXT        IDC_EDIT_PREFIX,63,86,31,14
+    LTEXT           "TODO! Minimum &length of call numbers which use prefix:",
+                    IDC_TXT_PREFIX_MINIMUM,17,109,149,8
+    EDITTEXT        IDC_EDIT_PREFIX_MINIMUM,173,106,31,14,ES_AUTOHSCROLL
+END
+
+IDD_SOCKET DIALOG DISCARDABLE  0, 0, 236, 103
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "TODO! TCP/IP",IDC_STATIC_SOCKET,7,7,222,89
+    CONTROL         "TODO! &On/Off",IDC_CHECK_SOCKET,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,17,22,76,10
+    GROUPBOX        "TODO! Expected Bitrate",IDC_TXT_EXTENDED_OPTIONS,15,39,205,
+                    50
+    CONTROL         "TODO! > &8 MBit",IDC_RADIO_8MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,23,54,42,10
+    CONTROL         "TODO! &4 MBit",IDC_RADIO_4MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,67,54,36,10
+    CONTROL         "TODO! 2 &MBit",IDC_RADIO_2MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,110,54,36,10
+    CONTROL         "TODO! 1 MBi&t",IDC_RADIO_1MBIT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,153,54,36,10
+    CONTROL         "TODO! &512 kBit",IDC_RADIO_512_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,24,67,42,10
+    CONTROL         "TODO! &256 kBit",IDC_RADIO_256_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,67,67,42,10
+    CONTROL         "TODO! &128 kBit",IDC_RADIO_128_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,110,67,42,10
+    CONTROL         "TODO! &64 kBit",IDC_RADIO_64_KB,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,153,67,38,10
+END
+
+IDD_APP DIALOG DISCARDABLE  0, 0, 209, 153
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "TODO! Automatic exit of applications",IDC_GRP_APP,5,5,
+                    199,64
+    LTEXT           "TODO! &Exit after (minutes)",IDC_TXT_AUTO_APP,15,35,110,8
+    LTEXT           "TODO! &Show confirmation (seconds)",IDC_TXT_CONF_APP,15,
+                    52,110,8
+    EDITTEXT        IDC_EDIT_AUTO_APP,133,32,61,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CONF_APP,133,50,61,14,ES_AUTOHSCROLL
+    CONTROL         "TODO! &On/Off",IDC_CHECK_APP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,18,110,10
+    GROUPBOX        "TODO! Automatic disconnect of connections",
+                    IDC_GRP_CONNECTION,5,78,199,70
+    CONTROL         "TODO! On/O&ff",IDC_CHECK_CONN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,94,110,10
+    LTEXT           "TODO! &Disconnect after (minutes):",IDC_TXT_AUTO_CONN,15,111,110,
+                    8
+    LTEXT           "TODO! Show con&firmation (seconds)",IDC_TXT_CONF_CONN,15,
+                    128,110,8
+    EDITTEXT        IDC_EDIT_AUTO_CONN,133,107,61,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CONF_CONN,133,125,61,14,ES_AUTOHSCROLL
+END
+
+IDD_ARCHIV DIALOG DISCARDABLE  0, 0, 377, 262
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "TODO! List2",IDC_ARCHIVE,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,8,7,362,175
+    GROUPBOX        "TODO! Properties:",IDC_GROUP_PROPERTIES,7,184,185,70
+    LTEXT           "TODO! Na&me:",IDC_STATIC_HOST_NAME,14,196,39,8
+    EDITTEXT        IDC_NAME_ARCHIV,57,193,129,14,ES_AUTOHSCROLL
+    LTEXT           "TODO! &Size:",IDC_STATIC_SIZE,14,216,38,8
+    EDITTEXT        IDC_EDIT_SIZE,57,214,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "TODO! in MByte",IDC_STATIC_MB,107,216,34,8
+    LTEXT           "TODO! For this archive maximally",IDC_STATIC_MAX,199,
+                    188,116,8
+    RTEXT           "TODO! 0000",IDC_STATIC_MAX_MB,199,204,50,8
+    LTEXT           "TODO! MB are available",IDC_STATIC_FREE,255,204,58,8
+    LTEXT           "TODO! Totaling",IDC_STATIC_WHOLE,201,224,62,8
+    LTEXT           "TODO! 000000000000",IDC_STATIC_USED_MB,201,240,50,8
+    LTEXT           "TODO! /",IDC_STATIC_SLASH,261,240,8,8
+    LTEXT           "TODO! 000000000000",IDC_STATIC_WHOLE_MB,273,240,50,8
+    LTEXT           "TODO! MB are used",IDC_TXT_USED,331,240,37,8
+END
+
+IDD_DRIVE DIALOG DISCARDABLE  0, 0, 345, 288
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "TODO! List2",IDC_DRIVES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    WS_BORDER | WS_GROUP | WS_TABSTOP,7,7,331,167
+    GROUPBOX        "TODO! Usage",IDC_GROUP_USE,7,180,113,101
+    CONTROL         "TODO! &Operating system",IDC_RADIO_SYSTEM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,17,197,98,10
+    CONTROL         "TODO! &No usage",IDC_RADIO_NORMAL,"Button",
+                    BS_AUTORADIOBUTTON,17,212,98,10
+    CONTROL         "TODO! &Storage",IDC_RADIO_DATABASE,"Button",
+                    BS_AUTORADIOBUTTON,17,227,98,10
+    CONTROL         "TODO! &Backup read && write",IDC_RADIO_BACKUP_WRITE_READ,
+                    "Button",BS_AUTORADIOBUTTON,17,242,98,10
+    CONTROL         "TODO! Backup &read",IDC_RADIO_BACKUP_READ,"Button",
+                    BS_AUTORADIOBUTTON,17,257,98,10
+    LTEXT           "TODO! Drive:",IDC_TXT_DRIVE,132,192,32,8
+    LTEXT           "TODO! 0:\\",IDC_STATIC_DRIVE,175,192,14,8
+    LTEXT           "TODO! Size &used:",IDC_TXT_USE,132,207,78,8
+    EDITTEXT        IDC_EDIT_USE,216,205,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "TODO! MByte",IDC_TXT_MB2,268,207,21,8
+    LTEXT           "TODO! Total size of storage drives:\n(without 20 MB reserved space / drive)",
+                    IDC_TXT_SIZE,132,244,124,17
+    LTEXT           "TODO! 0000000000",IDC_STATIC_DRIVES_MB,263,244,41,8
+    LTEXT           "TODO! MByte",IDC_TXT_MB,310,244,21,8
+    GROUPBOX        "TODO! Drive",IDC_GROUP_DRIVE,125,180,213,48
+    GROUPBOX        "TODO! Total sizes",IDC_GROUP_SIZE,125,233,213,48
+    LTEXT           "TODO! Total size of archives:",IDC_TXT_SIZE2,132,265,127,8
+    LTEXT           "TODO! MByte",IDC_TXT_MB3,310,265,21,8
+    LTEXT           "TODO! 0000000000",IDC_STATIC_ARCHIVS_MB,263,265,41,8
+    CONTROL         "TODO! &All",IDC_ALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    300,207,31,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_HOSTLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 349
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 229
+    END
+
+    IDD_ISDN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 125
+    END
+
+    IDD_SOCKET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_APP, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 204
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 148
+    END
+
+    IDD_ARCHIV, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 370
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 255
+    END
+
+    IDD_DRIVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 338
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 281
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "TODO! System Management"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_HOSTS               "TODO! Hosts"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "TODO! Close print preview mode\nCancel preview"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_DELETE_HOST_ARCHIV  "TODO! There are still archives for this host.\nShould all archives with images and data be deleted automatically?"
+    IDP_CREATE_NORMAL_ARCHIVE_FOR_HOST 
+                            "TODO! There is still no archive for images from normal connections for host %s.\nShould such an archive be created automatically?"
+    IDP_CREATE_SEARCH_ARCHIVE_FOR_HOST 
+                            "TODO! There is still no archive for images from queries for host %s.\nShould such an archive be created automatically?"
+    IDS_HOST_NORMAL_ARCHIVE "TODO! Normal"
+    IDS_HOST_SEARCH_ARCHIVE "TODO! Query"
+    IDP_NO_AUTOMATIC_ARCHIV "TODO! There is not enough space to create an %s archive for host %s!"
+    IDS_SAVE                "TODO! Save"
+    IDS_SETTINGS            "TODO! Settings"
+    IDS_OPEN                "TODO! Open"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_SEARCH_RESULT       "TODO! Query results"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_NEW                 "TODO! New"
+    IDS_NEWHOST             "TODO! New host"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDS_HOST                "TODO! Remote host"
+    IDS_NUMBER              "TODO! Call number"
+    IDS_ISDN1               "TODO! ISDN"
+    IDS_SOCKET              "TODO! TCP/IP"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "TODO! System Management"
+    AFX_IDS_IDLEMESSAGE     "TODO!  "
+    AFX_IDS_HELPMODEMESSAGE "TODO! Select the object where you need help."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "TODO! ER"
+    ID_INDICATOR_CAPS       "TODO! UF"
+    ID_INDICATOR_NUM        "TODO! NUM"
+    ID_INDICATOR_SCRL       "TODO! RF"
+    ID_INDICATOR_OVR        "TODO! OVR"
+    ID_INDICATOR_REC        "TODO! MA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "TODO! Creates a new document. \nNew"
+    ID_FILE_OPEN            "TODO! Opens present settings.\nOpen"
+    ID_FILE_CLOSE           "TODO! Closes the active document.\nClose"
+    ID_FILE_SAVE            "TODO! Save\nSaves all settings"
+    ID_FILE_SAVE_AS         "TODO! Saves the active settings under a new name.\nSave as"
+    ID_FILE_PAGE_SETUP      "TODO! Changes the printing options.\nPage Setup"
+    ID_FILE_PRINT_SETUP     "TODO! Changes the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "TODO! Prints the active document.\nPrinting"
+    ID_FILE_PRINT_PREVIEW   "TODO! Displays the entire cover page.\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "TODO! Info...\nShows Program Information, Number of Version an Copyright."
+    ID_APP_EXIT             "TODO! Exit System Management. Asks if the settings should be stored.\nExit"
+    ID_HELP_INDEX           "TODO! Opens the help function.\nHelp topics"
+    ID_HELP_FINDER          "TODO! Lists all help topics.\nHelp topics"
+    ID_HELP_USING           "TODO! Display instructions about how to use help\nHelp"
+    ID_CONTEXT_HELP         "TODO! Shows help for clicked buttons, menues or windows.\nHelp"
+    ID_HELP                 "TODO! Display help for current task or command\nHelp"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "TODO! Opens this document"
+    ID_FILE_MRU_FILE2       "TODO! Opens this document"
+    ID_FILE_MRU_FILE3       "TODO! Opens this document"
+    ID_FILE_MRU_FILE4       "TODO! Opens this document"
+    ID_FILE_MRU_FILE5       "TODO! Opens this document"
+    ID_FILE_MRU_FILE6       "TODO! Opens this document"
+    ID_FILE_MRU_FILE7       "TODO! Opens this document"
+    ID_FILE_MRU_FILE8       "TODO! Opens this document"
+    ID_FILE_MRU_FILE9       "TODO! Opens this document"
+    ID_FILE_MRU_FILE10      "TODO! Opens this document"
+    ID_FILE_MRU_FILE11      "TODO! Opens this document"
+    ID_FILE_MRU_FILE12      "TODO! Opens this document"
+    ID_FILE_MRU_FILE13      "TODO! Opens this document"
+    ID_FILE_MRU_FILE14      "TODO! Opens this document"
+    ID_FILE_MRU_FILE15      "TODO! Opens this document"
+    ID_FILE_MRU_FILE16      "TODO! Opens this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "TODO! Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "TODO! Switch back to the previous window pane\nPrevious pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "TODO! Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "TODO! Deletes the selection.\nDelete"
+    ID_EDIT_CLEAR_ALL       "TODO! Deletes all.\nDelete all"
+    ID_EDIT_COPY            "TODO! Copies the selection and puts it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "TODO! Removes the selection and put it on the clipboard\nCut"
+    ID_EDIT_FIND            "TODO! Find the specified text\nFind"
+    ID_EDIT_PASTE           "TODO! Inserts the contents of the clipboard.\nPaste"
+    ID_EDIT_REPEAT          "TODO! Repeats the alst action.\nRepeat"
+    ID_EDIT_REPLACE         "TODO! Replaces the specified text with different text.\nReplace"
+    ID_EDIT_SELECT_ALL      "TODO! Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "TODO! Undoes the last action.\nUndo"
+    ID_EDIT_REDO            "TODO! Redoes the previously undone action.\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "TODO! Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "TODO! Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "TODO! Changes the window size."
+    AFX_IDS_SCMOVE          "TODO! Change the window position"
+    AFX_IDS_SCMINIMIZE      "TODO! Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "TODO! Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "TODO! Switch to the previous document window"
+    AFX_IDS_SCPREVWINDOW    "TODO! Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "TODO! Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "TODO! Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "TODO! Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TYP                 "TODO! Type"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_HOST_ILLEGAL_ROUTING 
+                            "TODO! The entered routing address for %s is wrong.\nSingle addresses must be devided by #.\n\nIP addresses must have a tcp: in front.\n\nSMS addresses must have a sms: in front.\n\nB3 addresses must have a pres: in front."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "TODO! The dongle you use is not valid to start this software or the dongle is defect.\nPlease ask your service technician."
+    IDP_ACCESS_DENIED       "TODO! You are not authorized to modify the system settings.\nAccess denied!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NAME                "TODO! Name"
+    IDS_LOCAL_HOST          "TODO! Local host"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_SAVE_CHANGES        "TODO! Do you want to save the changes?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RESET_FAILED        "TODO! The initialising could not be executed!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_AUTOLOGOUT          "TODO! Auto Logout"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_NOAPPWITHOUTCONN    "TODO! If you want to exit the application automatically, you also have to activate the automatic disconnect of connections!"
+    IDP_APP_LT_CONF         "TODO! The time for automatic exit is less than the time for confirmation!"
+    IDP_CONN_LT_CONF        "TODO! The time for automatic disconnect is less than the time for confirmation!"
+    IDP_APP_LT_CONN         "TODO! The time for automatic exit is less than the time for automatic disconnect!"
+    IDP_NO_LOCAL_HOSTNAME   "TODO! Please enter a useful name for this host!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_NEW             "TODO! New\nCreates a new element"
+    ID_EDIT_DELETE          "TODO! Delete\nDeletes the selected element"
+    ID_EDIT_CANCEL          "TODO! Undo\nUndo the last changes "
+    ID_EDIT_SERVERINIT      "TODO! Initialise\nInitialises the system"
+    ID_VIEW_TOOLTIPS        "TODO! Tool Tips on/off"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ARCHIV              "TODO! Archive"
+    IDP_REGISTRY_IMPORT_WARNING 
+                            "TODO! You are importing settings from another system!\nThis may cause damage to this system or errors in functionality.\nDo you want to import the settings nevertheless?"
+    IDP_HOST_ILLEGAL_ADDRESS 
+                            "TODO! The entered address or calling number for %s contains invalid symbols!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_ARCHIV_SIZE_ZERO    "TODO! You must enter an archive size greater than 0 or check 'all'."
+    IDP_ARCHIV_SIZE_TO_BIG  "TODO! The entered size is greater than the maximum available size!\nThe maximum size will be used."
+    IDS_LOGIN_SUCCESFUL     "TODO! Login of %s successful"
+    IDS_LOGIN_DENIED        "TODO! Login of %s denied"
+    IDP_FIXED_ARCHIVES_ON_DRIVE 
+                            "TODO! This drive has fixed archives!\nYou must remove this assignment first to change the usage of the drive.\nThe usage was not changed!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DRIVES              "TODO! Drives"
+    IDS_ARCHIVES            "TODO! Archives"
+    IDS_NR                  "TODO! No"
+    IDS_SIZE_MB             "TODO! Size in MB"
+    IDS_ALARM_ARCHIV        "TODO! Alarm"
+    IDS_RING_ARCHIV         "TODO! Ring"
+    IDS_VORRING_ARCHIV      "TODO! Pre-ring"
+    IDS_NEW_ARCHIV          "TODO! New archive"
+    IDS_DRIVE               "TODO! Drive"
+    IDS_USEDAS              "TODO! Used as"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ARCHIVE             "TODO! List of entered archives.\nSelect an entry to edit it's data."
+    IDC_EDIT_SIZE           "TODO! Please specify the requested size of the archive."
+    IDC_COMBO_ALARM         "TODO! A pre-ring archive must be assigned to a alarm archive."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIONS_NAME       "TODO! Own host name.\nEnter a unique name."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DO_LISTEN           "TODO! Accept incomming calls"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_USED                "TODO! Used in MByte"
+    IDS_SIZE                "TODO! Size in MByte"
+    IDS_QUOTA               "TODO! To use in MB"
+    IDS_DRIVE_FD            "TODO! Floppy"
+    IDS_DRIVE_HD            "TODO! Local Drive"
+    IDS_DRIVE_NET           "TODO! Network drive"
+    IDS_DRIVE_CD            "TODO! CD-ROM Drive"
+    IDS_ALL                 "TODO! All"
+    IDS_USE_NORMAL          "TODO! No usage"
+    IDS_USE_DATABASE        "TODO! Storage"
+    IDS_USE_BACKUP_READ     "TODO! Read backup"
+    IDS_USE_BACKUP_WRITE_READ "TODO! Read and write backup"
+    IDS_USE_SYSTEM          "TODO! Operating system"
+    IDS_TOO_LESS_DATABASE_DRIVES 
+                            "TODO! There is not enough space for all archives!\nDecrease the size of one or more archives.\nThe usage of drive will be kept."
+    IDP_ARCHIVS_TOO_BIG     "TODO! The size of all archives exceeds the capacity of all drives.\nPlease decrease the size of one or more archives or provide more drives or increase the used sizes of drives."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ADDRESS_HOST        "TODO! Number or address of the host.\n\nTCP/IP:\nAll characters are allowed, pay attention to correct spelling.\nISDN and SMS:\nAll digits, blanks and / - ( ) are allowed.\n\nRouting:\nThe single hosts must be devided by a #.\nAn IP address must have prefix tcp:.\nA SMS number must have prefix sms:.\nA B3 address must have prefix pres:."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_AUTO_APP       "TODO! Applications will be automatically exited after this time if no user action occurs meanwhile.\n\nThis time must be greater or equal to the time for automatic disconnect."
+    IDC_EDIT_CONF_APP       "TODO! A confirmation request will be displayed for the entered last seconds,\nso that the user can prevent automatic exiting."
+    IDC_RADIO_512_KB        "TODO! Set the requested bit rate."
+    IDC_CHECK_APP           "TODO! Check this if applications providing a user interface should be exited after a given time without user activity meanwhile.\n(Safety turn off to prevent the system from unathorized input.)\nAny established connections will be closed too."
+    IDC_RADIO_256_KB        "TODO! Set the requested bit rate."
+    IDC_RADIO_128_KB        "TODO! Set the requested bit rate."
+    IDC_CHECK_CONN          "TODO! Check this if applications providing a connection should be disconnect after a given time without user activity meanwhile.\n(Safety disconnection to prevent the system from unnecessay connection charge.)"
+    IDC_RADIO_64_KB         "TODO! Set the requested bit rate."
+    IDC_EDIT_AUTO_CONN      "TODO! Connections will be closed after a given time without user activity (keyboard or mouse) meanwhile."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_CONF_CONN      "TODO! During the last seconds there will be a confirmation request\nso the user is able to prevent the automatic disconnect of the connection."
+    IDC_CHECK_MSN           "TODO! Displays if the telephone installation provides the called MSN or not.\nSome telephone installations do not provide the called MSN.\Then only 'Accept all incomming calls' can be used."
+    IDC_RADIO_B1            "TODO! Only one B-channel will be available for a connection."
+    IDC_RADIO_B2            "TODO! Up to two B-Channels will be available for a connection."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ALL                 "TODO! Check this if you want to use the whole disc space for this usage."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_DRIVES              "TODO! List of all existing drives.\nSelect an entry to edit its settings."
+    IDC_RADIO_SYSTEM        "TODO! Check this if the operating system is installed to this drive and this drive should not be used to store data and images."
+    IDC_RADIO_NORMAL        "TODO! Check this if the drive should not be used to store data and images."
+    IDC_RADIO_DATABASE      "TODO! Check this if the drive should be used to store data and images."
+    IDC_RADIO_BACKUP_WRITE_READ 
+                            "TODO! Check this if the drive should be used to write backup data and images.\nIt is possible to read data from this drive too.\nCD-R and CD-RW drives cannot be used for automatic backups."
+    IDC_RADIO_BACKUP_READ   "TODO! Check this if the drive should be used to read backup data and images."
+    IDC_EDIT_USE            "TODO! If the software shall not use the entire drive space for storing,\nenter the size to use."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_RUFNUMMER           "TODO! Enter the calling number to which calls shall be accepted."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_ARCHIVE_SIZE_ZERO   "TODO! You have not entered a size!"
+    IDP_CONFIG_DRIVE_FIRST  "TODO! You must enter an archive for storage\nbevor you are able to setup archives!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_DOUBLE_HOST         "TODO! The host %s is used multiple.\nHosts must have unique names!\nDelete the multiple entries!"
+    IDP_HOST_WITHOUT_NUMBER "TODO! The host %s does not have a phone number or address.\nPlease enter a phone number or address!"
+END
+
+#endif    // Italian (Italian) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE 16, 1
+#pragma code_page(1252)
+#endif
+#define WK_LANG_BLOCK "041004b0"
+#define WK_LANG_BLOCK_NUM 0x410
+#include "res\SystemVerwaltung.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.ita\afxres.rc"          // Standard components
+#include "l.ita\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

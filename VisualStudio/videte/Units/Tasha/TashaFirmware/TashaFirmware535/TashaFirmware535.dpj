@@ -1,0 +1,461 @@
+<?xml version="1.0"?>
+<visualdsp-project schema="16" name="TashaFirmware535" file="D:\PROJECT\Units\Tasha\TashaFirmware\TashaFirmware535\TashaFirmware535.dpj" generated="Mon Aug 30 10:27:02 2004" expanded="yes">
+	<!-- Project build target -->
+	<target>
+		<processor>ADSP-BF535</processor>
+		<extension>.dxe</extension>
+		<type>DSP executable file</type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="Release">
+		<configuration name="Debug">
+			<intermediate-dir>.\Debug</intermediate-dir>
+			<output-dir>.\Debug</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|AdditionalOptions>-D_BLACKFIN_ -D_HAWK_35_|1033>Check|Defines>CORE_CLK=300000000|Includes>..\BlackFin\include|1025>Check]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0|-I>..\BlackFin\include|-g>1|Additional options>-D_BLACKFIN_ -D_HAWK_35_]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0|-jcs2l+>Absolute Indirect|Additional options>-MDMONITOR_API ]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>SPI|-bID>2|-f>ASCII|-fID>0|-Width>8|-WidthID>0|-UseKernel>0|-l>Blackfin\ldr\535_spi.dxe]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|-Version>1.0|simcc Optimization>None]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[elfloader.exe  .\debug\tashafirmware535.dxe -b SPI -f ASCII -Width 8 -o .\Debug\TashaFirmware535.ldr -proc ADSP-BF535 -No2Kernel
+xcopy .\Debug\TashaFirmware535.ldr ..\..\TashaUnit /R /C /F /Y
+]]></post-build-command>
+		</configuration>
+		<configuration name="Release">
+			<intermediate-dir>.\Release</intermediate-dir>
+			<output-dir>.\Release</output-dir>
+			<tools>
+				<tool type="VCSE">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>1.0|AdditionalOptions>-D_BLACKFIN_ -D_HAWK_35_|Defines>CORE_CLK=300000000|Includes>..\BlackFin\include]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>1.0|-I>..\BlackFin\include|Additional options>-D_BLACKFIN_ -D_HAWK_35_]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>1.0|-jcs2l+>Absolute Indirect|-csync>1|Additional options>-MDMONITOR_API ]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[|-Version>1.0]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>1.0|-b>SPI|-bID>2|-f>ASCII|-fID>0|-Width>8|-WidthID>0|-UseKernel>0|-l>Blackfin\ldr\535_spi.dxe]]></option>
+				</tool>
+				<tool type="CompiledSimulator">
+					<option><![CDATA[|-Version>1.0|simcc Optimization>None]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+			<post-build-command><![CDATA[elfloader.exe  .\release\tashafirmware535.dxe -b SPI -f ASCII -Width 8 -o .\Release\TashaFirmware535.ldr -proc ADSP-BF535 -No2Kernel
+xcopy .\Release\TashaFirmware535.ldr ..\..\TashaUnit /R /C /F /Y
+xcopy .\Release\TashaFirmware535.ldr .\Bin /F /Y
+]]></post-build-command>
+		</configuration>
+	</configurations>
+	<!-- Project folders -->
+	<folders>
+		<folder name="Bin" ext=".ldr" expanded="yes">
+			<files>
+				<file name=".\Bin\TashaFirmware535.ldr">
+				</file>
+			</files>
+		</folder>
+		<folder name="Linker Files" ext=".ldf,.dlb" expanded="no">
+			<files>
+				<file name=".\TashaFirmware535.ldf">
+					<file-configurations>
+						<file-configuration name="Debug">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Debug</intermediate-dir>
+							<output-dir>.\Debug</output-dir>
+						</file-configuration>
+						<file-configuration name="Release">
+							<excluded-flag value="no"/>
+							<build-with-flag value="project"/>
+							<intermediate-dir>.\Release</intermediate-dir>
+							<output-dir>.\Release</output-dir>
+						</file-configuration>
+					</file-configurations>
+				</file>
+			</files>
+		</folder>
+		<folder name="Misc" expanded="yes">
+			<files>
+				<file name=".\History.txt">
+				</file>
+			</files>
+		</folder>
+		<folder name="Source Files" ext=".c,.cpp,.cxx,.asm,.dsp,.s" expanded="yes">
+			<folders>
+				<folder name="ASM-Files" ext=".asm" expanded="no">
+					<files>
+						<file name="..\BlackFin\asm\basicmon.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name="..\Include\cycles.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\Demux.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\EmulateEEProm.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\JumpUser.asm">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+					</files>
+				</folder>
+				<folder name="CPP-Files" ext=".cpp" expanded="no">
+					<files>
+						<file name=".\Altera.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\Boot533.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name="..\Include\CInt64.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\Crosspoint.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\EEProm.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\LED.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\MemoryDMA.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\SPICommunication.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\Sports.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\TashaFirmware535.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name="..\Include\TashaTimer.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+						<file name=".\Watchdog.cpp">
+							<file-configurations>
+								<file-configuration name="Debug">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Debug</intermediate-dir>
+									<output-dir>.\Debug</output-dir>
+								</file-configuration>
+								<file-configuration name="Release">
+									<excluded-flag value="no"/>
+									<build-with-flag value="project"/>
+									<intermediate-dir>.\Release</intermediate-dir>
+									<output-dir>.\Release</output-dir>
+								</file-configuration>
+							</file-configurations>
+						</file>
+					</files>
+				</folder>
+				<folder name="Header Files" ext=".h,.hpp,.hxx" expanded="no">
+					<files>
+						<file name=".\Altera.h">
+						</file>
+						<file name=".\Boot533.h">
+						</file>
+						<file name="..\Include\CInt64.h">
+						</file>
+						<file name=".\Crosspoint.h">
+						</file>
+						<file name=".\EEProm.h">
+						</file>
+						<file name="..\Include\helper.h">
+						</file>
+						<file name=".\LED.h">
+						</file>
+						<file name=".\MemoryDMA.h">
+						</file>
+						<file name=".\SharedMemoryDef.h">
+						</file>
+						<file name=".\SPICommunication.h">
+						</file>
+						<file name="..\Include\SpiDefs.h">
+						</file>
+						<file name=".\Sports.h">
+						</file>
+						<file name=".\TashaFirmware535.h">
+						</file>
+						<file name="..\Include\TashaTimer.h">
+						</file>
+						<file name="..\Include\TMMessages.h">
+						</file>
+						<file name=".\Watchdog.h">
+						</file>
+					</files>
+					<folders>
+						<folder name="AnalogDevice" expanded="no">
+							<files>
+								<file name="..\BlackFin\Include\basicmon.h">
+								</file>
+								<file name="C:\Programme\Developer\Analog Devices\VisualDSP\Blackfin\include\cdefBF535.h">
+								</file>
+								<file name="C:\Programme\Developer\Analog Devices\VisualDSP\Blackfin\include\cdefblackfin.h">
+								</file>
+								<file name="C:\Programme\Developer\Analog Devices\VisualDSP\Blackfin\include\defBF532.h">
+								</file>
+								<file name="C:\Programme\Developer\Analog Devices\VisualDSP\Blackfin\include\defBF535.h">
+								</file>
+								<file name="C:\Programme\Developer\Analog Devices\VisualDSP\Blackfin\include\sys\exception.h">
+								</file>
+							</files>
+						</folder>
+					</folders>
+				</folder>
+			</folders>
+		</folder>
+	</folders>
+	<!-- Custom data tables -->
+	<custom-data-tables>
+		<custom-data-table name="SCCPlugin">
+			<custom-data name="Scc_AddProject"><![CDATA[yes]]></custom-data>
+			<custom-data name="Scc_ProjectName"><![CDATA["$/Project/Units/Tasha/TashaFirmware/TashaFirmware535", RUJCAAAA]]></custom-data>
+			<custom-data name="Scc_ProjectPath"><![CDATA[\\FILE01\Software\VSS,]]></custom-data>
+			<custom-data name="Scc_Provider"><![CDATA[Microsoft Visual SourceSafe]]></custom-data>
+		</custom-data-table>
+	</custom-data-tables>
+</visualdsp-project>

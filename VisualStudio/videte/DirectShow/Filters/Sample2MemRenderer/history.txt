@@ -1,0 +1,5 @@
+13.02.04 GF  - Hier muss doch was stehen (Test)
+07.10.03 RKE - DirectShow Filter Sample2MemRenderer wurde in Idip und DTS aufgenommen
+			   Dies ist ein Filter, der die binären Daten aus einem MediaSample liefert.
+			   Dabei stellt dieser Filter die Scheduling Funktionen eines Renderers zur
+			   Verfuegung.

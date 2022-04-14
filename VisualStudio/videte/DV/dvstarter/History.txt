@@ -1,0 +1,339 @@
+History of DVStarter
+--------------------
+
+30.11.99
+		- Beginn des Projektes.
+		- Der DVStarter startet z.Z. folgende Programme und überwacht sie
+			- JaCobUnit.exe
+			- DVStorage.exe
+			- DVProcess.exe
+			- DVClient.exe
+
+01.12.99
+		- Softdongle implementiert.
+
+07.12.99
+		- WatchDog implementiert.
+		- RuntimeErrors werden nun in einem speziellen Dialog angezeigt.
+
+17.12.99
+		- Sind mehr als 16 Kameras in der Registry eingetragen, so wird versucht
+		  eine 2. JaCobUnit zu starten.
+
+23.12.99
+		- Ist unter \DVRT\DV der Eintrag DVSocket=1 gesetzt, so wird die SocketUnit
+		  gestartet.
+
+04.01.00
+		- Der Eintrag DVSocket unter \DVRT\DV ist obsolete, da nun automatisch
+		  überprüft wird, ob TCP instaliert ist.
+		- Sofern die Capi2032.dll geladen werden kann wird auch die ISDNUnit
+		  gestartet.
+
+14.01.00
+		- Die Information ob Netzwerk und/oder ISDN installiert sind, wird nun unter
+		  DV/DVStarter/Net= und DV/DVStarter/ISDN= abgelegt. DVClient paßt sein Menü dann
+		  automatisch an.
+
+04.02.00
+		- Der Starter kann nun auch als Shell gestartet werden.
+		  (DV\DVStarter\StartAsShell=1)
+15.02.00
+		- Es werden nur 8 Kameras pro JaCob benutzt, daher wird schon ab 9 Kameras
+		  die 2. JaCobUnit gestartet.
+
+29.02.00
+		- In der Shelloberfläche werden nun die folgenden Tastenkombinationen
+		  abgefangen:
+		  CTRL+ESC
+		  ALT+TAB
+		  ALT+ESC
+		  LWin+RWin
+		  CTRL+ALT+DEL (Nur unter Win9x)
+01.03.00
+		- Die Runtimeerrors werden nun, wie in der iST in der Datei rterrors.dat
+		  gesichert.
+31.05.00
+		- In ExitInstance wird nun, wenn nötig, vom Systemmodus in den Shellmodus gewechselt. 
+
+12.07.00
+		- Beim Start des DVStarters werden nun alle Laufwerke zusätzlich
+		  nach der Datei 'Bootex.txt' durchsucht und gelöscht. (Nur im Root)
+
+17.07.00
+		- Alles unter 'HKEY_LOCAL_MACHINE\SOFTWARE\\MicroSoft\\Windows\\CurrentVersion\\Run eingetragen ist.'
+		  wird nun ebenfalls gestartet.
+		- Die Datei c:\DV\UDFForm.exe wird in das PacketCD-verzeichnis verschoben
+
+03.08.00 
+		- Startreihenfolge geändert, erst Process, dann Storage
+
+07.08.00
+		- Zum Abfangen von Systemmessages wird nun DVHook.exe gestartet, sofern
+		  der Eintrag DVRT\DV\DVStarter Hook=1 gesetzt ist und der DV sich im
+		  Shellmode befindet.
+
+16.08.00
+		- Das Dektophintergrundbild wird nun ebenfalls durch das OEM-Logo ersetzt
+
+25.08.00
+		- Optional kann ein StartupInfo angezeigt werden, der darüber Auskunft gibt,
+		  welche Module geladen werden.
+
+26.09.00
+		- Ringmechanismuß für Runtimeerrors eingebaut (max MAX_RTE)
+
+20.10.00 TKR - Es wird geprüft, welches Programm zum backup genutzt wird. 
+			   Entweder PacketCD oder DirectCD. Bei DirectCD wird zusätzlich noch die
+			   installierte Version geprüft, da in dessen Abhängigkeit die Angaben
+			   zu DirectCD in der Registry nicht an selber Stelle stehen. 
+			   Da sich DirectCD bei Installation in das Autostart-Verzeichnis "Run" 
+			   in der Registry einträgt, wird es von dort nach "dv\dvclient" verschoben
+			   und immer nur bei Bedarf (Backup mit DirectCD) gestartet.
+
+23.10.00 - ML Diskettenupdate möglich. 
+
+24.11.00 - ML Santec-Bitmap mit ins Projekt aufgenommen.
+04.12.00 - ML Alle *.tmp Dateien im Temp- und Windows-Verzeichnis werden beim Start
+			  gelöscht.
+
+02.01.01 - ML Beim DTS-Empfänger wird nun nur noch die SocketUnit und der DVClient gestartet.
+		 - ML Im Nichtshellmodus erscheint das Programmicon nun im Tray.
+		
+07.02.01 - ML Die JaCob wird künftig, in ihrem EEProm, die Information ob ISDN
+			  und Netzwerk erlaubt sind über die Registrierung unter
+			  ...\JaCobUnit\Device1\Dongle\ISDN und
+			  ...\JaCobUnit\Device1\Dongle\Net zur Verfügung stellen.
+			  Der Starter startet ISDNUnit/SocketUnit nur wenn ISDN/TCP installiert
+			  und von der JaCobUnit freigeschaltet sind.
+			  (Erst mal deaktiviert, bis geklärt ist, wie die Dongleinformationen
+			   in das EEProm der JaCob gelangen sollen) 
+			  
+12.02.01 - ML Bugfix: Beim Receiver darf natürlich das EEProm der JaCob nicht ausgewertet
+		   werden, da ja keine JaCob vorhanden ist!
+
+21.02.01 - ML Das Starter-icon erscheint nun nur noch beim IP-Receiver im Systemtray.
+		      Beim Sender hingegen ist der Dialog im Nicht-Shell-Modus sichtbar. Dies
+			  ist für die Endabnahme nützlich, da die Software schneller Beendet werden
+			  kann. Im Shellmodus sollte der Starterdialog komplett unsichtbar sein.
+21.02.01 - UF Es wird jetzt eine zweite ISDN Unit unterstützt.
+28.02.01 - ML Nach dem Ändern der IP-Adresse oder der Subnetmask, wird der Rechner
+			  nicht nur runtergefahren, sondern rebootet
+20.03.01 - UF Der Störmelder ist wieder integriert, aus wenn die Software einmal
+			  gestartet ist. Dazu muss aber HKLM\Software\DVRT\DV\DVStarter\UsePiezo
+			  auf 1 gesetzt werden, sonst passiert nix.
+17.04.01 - ML WK_STAT_LOG("Piezo"...) wieder rausgenommen.
+19.04.01 - ML Beim IP-Receiver wurde versucht die ISDN-Unit zu starten.
+29.05.01 - ML Bugfix: ab Build 391 startet der Starter max nur eine Applikation nach.
+29.05.01 - ML Der Störmelder soll nun bei den folgenden nicht quittierten Störungen ansprechen.
+				- Eine Applikation läuft nicht
+				- Eine Kamera ist ausgefallen.
+				- Die Temperatur der JaCob überschreitet einen Maximalwert
+				- Ein Archive ist voll.
+05.06.01 - ML Es gibt einen neuen RTE (RTE_STORAGE), der gesendet wird, wenn die Datenbank eine
+			  gewisse Anzahl von Bildern nicht speichern konnte.
+		 - ML RTE_STORAGE schaltet ebenfalls den Störmelder ein.
+08.06.01 - ML Bugfix: Die Bedingung, die Prüft, ob eine Störmeldung quittiert wurde, oder nicht,
+		      war falsch
+		 
+17.07.01 - ML Der DVStarter protokolliert nun auf Wunsch regelmäßig die Speichernutzung des
+			  Systems. (Einschaltbar über DV\DVStarter\TraceMemoryInformation=1)
+10.09.01 - UF Der DVStarter unterstuetzt jetzt auch PowerOff unter Windows NT,
+			  wenn der Wert PowerdownAfterShutdown in der Registry auf 1 gesetzt ist,
+			  und wenn die Softex HAL.DLL installiert ist
+11.09.01 - ML Mit den Registry Einträgen DV\DVStarter\RebootIntervall und DV\DVStarter\ShutdownIntervall
+			  kann der DTS in Periodischen Intervallen automatisch Rebootet bzw. beendet werden. Die
+			  Intervallangaben erfolgen in Sekunden, wobei der Wert 0 diese Funktion deaktiviert.
+			  Diese Funktionalität ist nur für Testzwecke gedacht, um den BSE zu untersuchen.
+12.10.01 - GF Es wurde erst auf NetworkAllowed und dann auf IsReceiver überprüft
+			  Beim Receiver ist es aber völlig egal, ob die JaCob es erlaubt, da ja gar
+			  keine JaCob da ist, die es erlauben könnte 
+12.11.01 -TKR Mit Registry Entrag DV\DVClient\CDCapacity wird die Speicherkapazität eines CD-Rohling
+			  für das Backup auf 600 (mb) gesetzt. Dieser Wert wird im DVClient ausgewertet.
+			  Schlüssel wird nur angelegt, wenn er noch nicht vorhanden ist. Ist er schon vorhanden, 
+			  bleibt der enthaltene Wert bestehen.
+07.12.01 - ML Der DVClient wurde mit SW_MINIMIZED gestartet
+12.12.01 -TKR Der Check, welches Brennprogramm installiert wurde, wurde auf DirectCD Version 5 erweitert
+			  Die entsprechenden Funktionen InitRegForDirectCDVers5() 
+			  und MoveDirectCDVers5FromRunToDVRT() müssen noch mit Code gefüllt werden. Die
+			  Funktion CheckBackupProgram() wurde schon um die Abfrage nach Version 5 erweitert.
+
+29.01.02 - ML Der Starter sichert nun jeden Tag um 00:00 mit Hilfe von RDisk /S- die Registrierung
+			  Die Sicherung erfolgt nur unter Windows NT4!
+			  
+15.04.02 - ML Der DVStarter gibt nun alle 15 Minuten den noch verfügbaren freien physikalischen Speicher,
+			  sowie den freien Platz in der Auslagerungsdatei aus.
+
+16.04.02 - ML Alle 15 Minuten gibt der DVStarter nun den Speicherbedarf aller DTS-Module einzeln aus.
+			  zusätzlich zeigt er den Gesamtspeicherbedarf aller DTS-Module an.
+
+25.04.02 - ML Beim Start von DVStarter wird nun der Platten schreib-cache deaktiviert.
+			  Dies verhindert, das die Registrierung beschädigt wird, wenn NT den
+			  Rechner abschaltet, bevor die Festplatte den Writecache gesichert hat.
+			  Zu prüfen ist, ob es ausreicht den Schreibcache nur vor dem herunterfahren
+			  abzuschalten.
+
+02.05.02 - ML Bugfix: Nr. 495. Die PsApi.dll wird nun unter WinNT4/k/WinXP dynamisch geladen. Unter
+			  Win9x hingegen wird sie nicht verwendet.
+10.05.02 - ML Bugfix Nr. 498. Wird keine der 3 Gegenstationen bei einem Alarmanruf erreicht, so
+              erscheint nun eine Laufzeitfehlermeldung.
+
+13.05.02 - ML Bugfix: Nr. 500. Wenn das System nicht ordnungsgemäß heruntergefahren wurde. Wird
+		      beim nächsten Start eine entsprechende Laufzeitfehlermeldung angezeigt.
+15.05.02 - UF Bugfix Nr. 518 Bei jedem ordnungsgemaessem Herunterfahren aus der Shell wird jetzt
+			  rdisk ausgefuehrt.
+31.05.02 - ML Damit der Störmelder nicht angeht, müssen alle Kameraausfälle bestätigt werden.
+			  Ein evtl. vorhandener Eintrag, daß das Videosignal wieder vorhanden ist genügt nicht!
+03.06.02 - UF Bugfix Nr. 560 beim Herunterfahren aus dem Shell modus wurde RDISK nicht ausgefuehrt.
+
+06.08.02 - ML Der PCI-Bus wird nun nach JaCob und SaVicBoards durchsucht. Dafür ist die Klasse
+			  CBoards in HardwareInfo.dll zuständig. 
+12.08.02 - ML Ist eine SaVic im System und keine JaCob, so wird die Dongle-Information
+			  ob TCP/IP oder ISDN erlaubt sind, aus 'SaVicUnit\\Device1\\EEProm' entnommen.
+19.08.02 - ML Der Speicherverbrauch der Savic wird nun auch protokolliert.
+		 - ML Die ApplicationID der SavicUnit war falsch
+22.08.02 - ML Sofern eine JaCobUnit läuft, wird der WatchdogTimeout über 
+				'JaCobUnit\\Device1\\General", "WatchDogTimeout' gesetzt.
+			  Läuft eine SaVicUnit erfolgt dies über
+				'SaVicUnit\\Device1\\General", "WatchDogTimeout'
+28.08.02 - ML Unter WinNT5 wird der KeyHook.sys nun korrekt installiert und wieder deinstalliert.
+
+17.09.02 - ML Die Beschränkung, das JaCob und SaVic nicht gleichzeitig laufen dürfen ist
+			  nun aufgehoben.
+		 - ML Befindet sich eine JaCob UND eine SaVic im System, so wird die Dongleinformation
+			  aus dem EEProm der 1. JaCob genommen.
+		 - ML Die Watchdogtrigger/Störmelder-Events werden an die JaCobUnit UND an die SaVicUnit
+		      geschickt, 
+
+23.09.02 - RKE Die Hintergrundbitmap wird jetzt zentriert, nicht gestreckt und nicht gekachelt
+			  angezeigt. Die Hintergrundfarbe muß deshalb der Bitmapgrundfarbe entsprechen.
+			  Für die verschiedenen OEM-Versionen muß diese Farbe extra eingetragen werden:
+			  HKEY_CURRENT_USER\Control Panel\Colors -> z.B.: BackgroundOEM = "0 0 41" für DTS.
+		 - RKE Um den Dateizugriff und den Zugriff auf das System einzuschränken, wurden folgende
+			  Schlüssel angelegt:
+			  unter HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\:
+			  NoDrives:				Versteckt Laufwerke
+			  NoViewOnDrive:		Verwehrt den Zugriff zu Laufwerken
+			  NoDriveAutoRun:		Schaltet AutoRun Ab
+			  NoTrayContextMenu:	Schaltet das Kontextmenü für die kleinen Taskleistensymbole ab
+			  NoViewContextMenu:	Schaltet das Kontextmenü für den Explorer ab
+			  NoDeskTop:			Versteckt alle Desktop Symbole
+			  DisableTaskManager:	Disabled den Taskmanager
+			  unter HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\:
+			  DisableTaskMgr:		Disabled den Taskmanager
+
+26.09.02 - TKR Define TKR in StarterApp eingefügt. Alle Änderungen bez. Brennsoftware ACDC sind
+			   nur zugänglich, wenn TKR definiert ist. ACDC wird nur gestartet, wenn es in DV-Pfad
+			   vorhanden ist.
+			   - ACDC.exe wird nur versucht zu starten, wenn es im C:\\DV - Pfad vorhanden ist.
+
+07.09.02 - RKE Hintergrundeinstellungen werden auch für "HKEY_USERS\.DEFAULT\Control Panel\Desktop"
+			  eingestellt. Dadurch wird das Firmenlogo beim Start schon sichtbar.
+		 - RKE In dem Schlüssel "HKEY_CURRENT_USER\Software\Microsoft\Driver Signing" werden im
+			  Shellmode nur signierte Treiber zugelassen!
+10.09.02
+		 - ML Die Meldung "Es läuft weder JaCob noch Savic...der Watchdogzeit kann nicht gesetzt werden."
+		   entfernt. 
+11.11.02 - RKE 11:11 Uhr, die Setup Pfade für das Installieren neuer Treiber wurden geändert.
+			DriverCachePath, ServicePackSourcePath, SourcePath => C:\Windows\i386
+			InstallationSources => alle CD-Rom Laufwerke und alle Removeable Drives werden
+			bei WM_DEVICECHANGE neu initialisiert.
+05.06.02 - ML Von zwei auf vier SaVics erweitert
+11.12.02 - RKE BUGFIX DV-638 Warning Low Disk Space wird disabled (Explorer Policies), wenn
+			in den Shellmode gegangen wird.
+19.12.02 - ML BUGFIX DV-656 Bei der SaVic wurde zu Ansteuerung des Piezos der falsche 
+			  Event geöffnet (EV_JACOB_PIEZO anstatt EV_SAVIC_PIEZO)
+
+02.06.03 - GF	Bugfix: Zombies (Prozess ohne Fenster nach GP) wurden nicht erkannt
+13.06.03 - GF	CRTErrorDlg::Create() SetWindowPos(&CWnd::wndTopMost, 0, 0, 0, 0, SWP_NOSIZE|SWP_NOMOVE) hinzugefuegt
+24.06.03 - GF	Bugfix 744: Shellmode startete nicht bei Systemen mit Leerzeichen im Pfadnamen
+30.06.03 - UF Bugfix (r) bei videte IT im Windows NT Logo hinzugefuegt.
+01.07.03 GF	- Bugfix 753: Kein Start unter NT wegen "GetLongPathNameA not found in KERNEL32.dll
+				Damit ist der Bugfix 744 für IP-Receiver hinfällig und erneut zu fixen
+			- Bug 744 ist unter IP-Recievr nicht relevant
+12.08.03 GF	- CommUnit integriert
+26.10.03 GF	- In der Unicode-Version wird ISDN nicht gestartet, da z.Z. nicht Unicode-fähig
+28.10.04 RKE- Bug 817: KeyHook wird jetzt auch in UNICODE richtig in die Registry eingetragen.
+02.02.04 UF - Audiounit eingebaut.
+06.02.04 RKE- Endlich: einzelne Anwendungen koennen jetzt im DVStarter\Debug Zweig disabled werden.
+17.02.04 RKE- Bugfix 855 Beim Receicver wird die AudioUnit jetzt gestartet.
+05.04.04 ML - Über die HardwareInfo.dll wird nun auch nach Tashas gescannt, und falls vorhanden geladen.
+07.05.04 ML - BUGFIX DV3-023 Die ISDN wurde nur in der nicht Unicode version unterstützt.
+23.08.04 ML - Die Meldung 'Network (not) allowed by XXX' und 'ISDN (not) allowed by YYY' erfolgt nun
+			  lediglich einmal, anstatt alle 20 Sekunden!
+02.11.04 ML - Bugfix: Im Shellmode fährt das System runter, wenn nach dem Start als erstes die Return-
+			  Taste gedrückt wurde. (DVStarter hatte dann den Fokus)
+09.11.04 ML - Beim Start des DTS wird nun unter WindowsXP im Shellmodus geprüft, ob sich Festplatten
+		      im Rechner befinden, die noch nicht partitioniert sind. Ist dies der, so wird diese Platte
+		      automatisch mit einer primären Partition maximaler Größe partitioniert und anschließend mit
+		      NTFS formatiert.
+22.11.04 ML - Die Temperatur aller IDE-Festplatten werden nun alle 15 Minuten ausgelesen. Überschreitet 
+			  die Temperatur 50°C, so wird ein Laufzeitfehler angezeigt.
+06.12.04 ML - Das automatische Partitionieren/Formatieren von leeren Platten bis auf weiteres deaktiviert,
+			  da wir zwei Systeme hatten, bei denen die Partitionstabelle ungültig war.
+28.12.04 RKE- Windows Tempverzeichnis wird jetzt ueberprueft und ggf. angelegt.
+01.02.04 UF - Bugfix Störmelderelais Tasha fehlte.
+02.02.04 ML - Tasha-Watchdog wird nun vom DVStarter getriggert.
+21.03.05 ML - Die TashaUnit fehlte bislang bei den Prozessinformationen.
+07.04.05 ML - Der Plattencache der ersten Festplatte wird nun nicht mehr disabled.
+			  Wenn nötig läßt sich über DVRT\DV\DVStarter\DisableHDWriteCache=1 der Cache
+			  der ersten Platte weiterhin disablen.
+29.04.05 ML - Bugfix819: Ermittel die tatsächliche Kameranummer aus UNIT und übergebener Kameranummer.
+			  für Savic1...4, JaCob1...4 und Tasha1...4
+			- In OpenStockTransparent wird eine transparente Region erzeugt/geladen. Dies
+			  ist bei einigen Grafikkarten extrem langsam und bremst den ganzen Rechner aus. Deshalb
+			  wird nun anstatt des transparenten Schattens der Farbverlauf des Pannels (in grün)
+			  verwendet.
+18.05.05 ML - Die S.M.A.R.T-Parameter werden bei Programmstart, sowie alle Stunde ins
+			  Logfile geschrieben. Dabei werden die ersten 4 IDE-Platten - sofern vorhanden -
+			  geprüft. Ob SCSI, SATA, RAID, CF funktioniert muß noch geprüft werden!
+			- Wenn der S.M.A.R.T Status schlecht ist, wird nun ein Laufzeitfehler angezeigt.
+23.05.05 ML - Der DVStarter fragt nun alle 2 Sekunden über die Hardwareinfo.dll die Drehzahl 
+			  der drei Winbond-überwachten Lüfter ab. Unterschreitet einer der Lüfter die Mindestdrehzahl
+			  (Einstellbar über \DVRT\Common\Fan1RpmThreshold, \DVRT\Common\Fan2RpmThreshold,
+			   \DVRT\Common\Fan3RpmThreshold), so wird ein Laufzeitfehlerdialog (in englisch) angezeigt.
+			   Ein Treshold von -1 schaltet die Überwachung des entsprechenden Lüfters aus. (Derzeit Default)
+			   Falls der Winbond W83627 nicht im System gefunden wird, erfolgt natürlich keine Überwachung.
+		 ML -  S.M.A.R.T und FanControl bis zu Version DTS3.1 disabled.
+22.07.05 RKE- Nach Update wird fuer die Dhcp Faehigkeit der Computername und der DHCP-Service angepasst und rebootet.
+29.07.05 UF - Bugfix Jacob startet nicht mehr mit DTS. Der Starter darf die oemgui nicht laden,
+			  da sonst der DVDongle.dcf Dongle nicht geht.
+31.08.05 RKE- Bugfix 174: RuntimeError werden wieder empfangen.
+04.10.05 RKE- Bugfix 178: Start wird verhindert, wenn Idip schon läuft.
+15.10.05 UF - Bugfix DV Client startet nicht mehr.
+17.10.05 RKE- VideteCheckDisk wird bei XPE Image Rechnern immer gestartet.
+			  RuntimeError von EWF control zum Rebooten bei Speichermangel implementiert.
+29.11.05 ML - Der Startert ermittelt nun die Über die HardwareInfo.dll die Anzahl der im System verfügbaren
+			  Qs. Und startet ggf. die QUnit.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+25.01.06 RKE- Smart RTE aktiviert.
+              HealthControl kann gestartet werden.
+              Hdd Temperatur RTE aktiviert.
+              Smart und Hdd koennen auf mehr als 4 Platten erweitert werden (Registry: "MaxCheckedDrives")
+25.01.06 UF - Fensterhandle werden jetzt auch an hand des Process Handles gefunden!              
+06.02.06 UF - Bugfix Start und Beenden QUnit
+09.02.06 RKE- RTE fuer Festplattenausfall aktiviert. Piezoflag implementiert
+              WM_LANGUAGE_CHANGED wird jetzt an alle Applikationen weitergereicht.
+			  Folgende RTE´s werden jetzt gemeldet:
+			  - RTE_TEMPERATURE         // device temperature too high
+			  - RTE_FANCONTROL:		    // fan speed too low
+			  - RTE_SMART:				// HDD smart error
+			  - RTE_HARDWARE:			// Hardware device failure
+			  - RTE_CONFIGURATION:		// wrong configuration for storage
+			  - RTE_STORAGE:			// could not store data
+			  - RTE_EXTERNAL_DEVICE_FAILURE:// failure in ext device
+			  - RTE_COM_OPEN:			// failed to open com port
+			  - RTE_EWF_RAM_OVERFLOW:	// too low EWF ram
+			  - RTE_HARDDISK_FALURE:	// HDD failure (with page file will need reboot)
+
+14.02.06 ML - Smart an die geänderte Klasse in WK_Classes angepasst.
+27.03.06 RKE- Das Logdateienverzeichnis wird jetzt alle 15 Minuten ueberprueft und ggf. die aeltesten Logdateien geloescht.
+04.07.06 ML - Das gesamte Watchdoghandling für die Q fehlte bislang
+05.07.06 ML - WM_QUERY_ENDSESSION wird nun abgefangen und an DVClient zwecks PIN Abfrage weitergeleitet.
+31.07.06 TKR- Bugfix 230: ISDN und LAN werden nun fuer die Freischaltung beim ML ausgewertet.
+11.08.06 TKR- Bugfix 233: Faellt bei einem CF-Geraet eine HDD aus (egal ob die erste mit dem Page-File oder
+			  eine andere), wird ein Runtime Error angelegt. Im Falle des Ausfalls der ersten HDD (die mit
+			  dem Page-File) wird der Runtime Error erst nach dem Neustart des Systems (erfolgt automatisch)
+			  angezeigt.
+11.08.06 TKR- Bugfix 234: Sind alle HDDs als Speicherlaufwerk eingetragen und faellt eine HJDD aus, wird
+		      die Speicherung nun auf den verbliebenen HDDs fortgesetzt.

@@ -1,0 +1,146 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 66 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=200
+  Patch Memory=4096
+  FTP Cluster Size=20
+end
+item: Install File
+  Source=D:\DV\Dlls\cipc.dll
+  Destination=%MAINDIR%\cipc.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=d:\dv\Dlls\vimage.dll
+  Destination=%MAINDIR%\vimage.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=D:\dv\Dlls\ijl15.dll
+  Destination=%MAINDIR%\ijl15.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\dv\dlls\skins.dll
+  Destination=%MAINDIR%\skins.dll
+  Flags=0000000010000010
+end
+item: Install File
+  Source=d:\dv\dlls\DeviceDetect.dll
+  Destination=%MAINDIR%\DeviceDetect.dll
+  Flags=0000000010000010
+end
+item: Include Script
+  Pathname=D:\installation\Wise\dvrt\include\mp4dec.wse
+end
+item: Remark
+end
+item: Install File
+  Source=D:\DV\LogView.exe
+  Destination=%MAINDIR%\LogView.exe
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=LANG
+  Value=Deutsch
+end
+item: Install File
+  Source=D:\DV\Dlls\oemgui.dll
+  Destination=%MAINDIR%\oemgui.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Recherche.exe
+  Destination=%MAINDIR%\Recherche.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\SecurityLauncher.exe
+  Destination=%MAINDIR%\SecurityLauncher.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Vision.exe
+  Destination=%MAINDIR%\Vision.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Dbs.exe
+  Destination=%MAINDIR%\Dbs.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\SystemVerwaltung.exe
+  Destination=%MAINDIR%\SystemVerwaltung.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\DelRegDb.exe
+  Destination=%MAINDIR%\DelRegDb.exe
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=LANG
+  Value=U.S. English
+end
+item: Install File
+  Source=D:\DV\Enu\Dlls\oemgui.dll
+  Destination=%MAINDIR%\oemgui.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\Recherche.exe
+  Destination=%MAINDIR%\Recherche.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\SecurityLauncher.exe
+  Destination=%MAINDIR%\SecurityLauncher.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\Vision.exe
+  Destination=%MAINDIR%\Vision.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\Dbs.exe
+  Destination=%MAINDIR%\Dbs.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\SystemVerwaltung.exe
+  Destination=%MAINDIR%\SystemVerwaltung.exe
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\DV\Enu\DelRegDb.exe
+  Destination=%MAINDIR%\DelRegDb.exe
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+end

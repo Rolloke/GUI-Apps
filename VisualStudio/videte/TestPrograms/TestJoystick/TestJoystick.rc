@@ -1,0 +1,260 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\TestJoystick.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
+    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\TestJoystick.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Info über TestJoystick"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "TestJoystick Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2004",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_TESTJOYSTICK_DIALOG DIALOGEX 0, 0, 305, 225
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "TestJoystick"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER_Z_POS,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_VERT | TBS_BOTH | WS_TABSTOP,94,5,26,62
+    CONTROL         "Button 1",IDC_CK_BTN_1,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,3,54,10
+    CONTROL         "Button 2",IDC_CK_BTN_2,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,14,54,10
+    CONTROL         "Button 3",IDC_CK_BTN_3,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,25,54,10
+    CONTROL         "Button 4",IDC_CK_BTN_4,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,37,54,10
+    CONTROL         "Button 5",IDC_CK_BTN_5,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,49,54,10
+    CONTROL         "Button 6",IDC_CK_BTN_6,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,62,54,10
+    CONTROL         "Button 7",IDC_CK_BTN_7,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,73,54,10
+    CONTROL         "Button 8",IDC_CK_BTN_8,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,126,85,54,10
+    CONTROL         "",IDC_SLIDER_RZ_POS,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_VERT | TBS_BOTH | WS_TABSTOP,267,5,33,62
+    CONTROL         "",IDC_SLIDER_1_POS,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,34,67,86,25
+    CONTROL         "",IDC_SLIDER_2_POS,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_BOTH | WS_DISABLED | WS_TABSTOP,34,96,86,25
+    LTEXT           "pov1",IDC_TXT_POV1,192,63,54,8
+    LTEXT           "pov2",IDC_TXT_POV2,192,74,54,8
+    LTEXT           "pov3",IDC_TXT_POV3,192,86,54,8
+    LTEXT           "pov4",IDC_TXT_POV4,192,98,54,8
+    PUSHBUTTON      "Reset",IDC_BTN_RESET,125,113,55,14
+    EDITTEXT        IDC_EDT_DEBUGOUT,6,133,294,86,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "",IDC_BTN_CHOOSE_JOYSTICK,246,78,54,33
+    LTEXT           "",IDC_TXT_NAME,69,153,123,8
+    LTEXT           "",IDC_TXT_DESCR,69,163,231,24
+    CONTROL         "",IDC_XY_CTRL,"Static",SS_OWNERDRAW | SS_SUNKEN,34,5,60,
+                    57
+    CONTROL         "",IDC_XY_CTRLR,"Static",SS_OWNERDRAW | SS_SUNKEN,207,5,
+                    60,57
+    LTEXT           "X, Y",IDC_STATIC,6,15,14,8
+    LTEXT           "Slider2",IDC_STATIC,6,105,22,8
+    LTEXT           "Slider1",IDC_STATIC,6,74,22,8
+    LTEXT           "SliderZ",IDC_STATIC,6,38,22,8
+    LTEXT           "RX",IDC_STATIC,192,15,10,8
+    LTEXT           "RZ",IDC_STATIC,192,26,10,8
+    LTEXT           "RZ",IDC_STATIC,192,38,10,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Firmenname>"
+            VALUE "FileDescription", "TODO: <Dateibeschreibung>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "TestJoystick.exe"
+            VALUE "Copyright (C) 2004", "TODO: (c) <Firmenname>. Alle Rechte vorbehalten."
+            VALUE "OriginalFilename", "TestJoystick.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TESTJOYSTICK_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 34
+        VERTGUIDE, 120
+        VERTGUIDE, 126
+        VERTGUIDE, 180
+        VERTGUIDE, 186
+        VERTGUIDE, 192
+        VERTGUIDE, 246
+        VERTGUIDE, 300
+        HORZGUIDE, 5
+        HORZGUIDE, 19
+        HORZGUIDE, 30
+        HORZGUIDE, 42
+        HORZGUIDE, 54
+        HORZGUIDE, 67
+        HORZGUIDE, 78
+        HORZGUIDE, 90
+        HORZGUIDE, 102
+        HORZGUIDE, 113
+        HORZGUIDE, 121
+        HORZGUIDE, 133
+        HORZGUIDE, 219
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&Info über TestJoystick..."
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#include "res\TestJoystick.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
+#include "afxres.rc"         // Standardkomponenten
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

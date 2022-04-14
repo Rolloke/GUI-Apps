@@ -1,0 +1,1295 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME_IST       ICON    DISCARDABLE     "res\\VisionIST.ico"
+IDB_UP                  ICON    DISCARDABLE     "res\\up.ico"
+IDB_DOWN                ICON    DISCARDABLE     "res\\down.ico"
+IDB_CENTER              ICON    DISCARDABLE     "res\\center.ico"
+IDB_LEFT                ICON    DISCARDABLE     "res\\left.ico"
+IDB_RIGHT               ICON    DISCARDABLE     "res\\right.ico"
+IDB_SMALL_STOP          ICON    DISCARDABLE     "res\\smalstop.ico"
+IDI_TURN180             ICON    DISCARDABLE     "res\\turn180.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\Vision.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""          // Standard components\r\n"
+    "#include ""afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_IMAGES              BITMAP  DISCARDABLE     "res\\images.bmp"
+IDB_STATES              BITMAP  DISCARDABLE     "res\\states.bmp"
+IDB_HOT                 BITMAP  DISCARDABLE     "res\\hot.bmp"
+IDB_COLD                BITMAP  DISCARDABLE     "res\\cold.bmp"
+IDR_DISPLAY             BITMAP  DISCARDABLE     "res\\display.bmp"
+IDR_HTML                BITMAP  DISCARDABLE     "res\\html.bmp"
+IDB_ALARM               BITMAP  DISCARDABLE     "res\\alarm.bmp"
+IDR_MAINFRAME           BITMAP  DISCARDABLE     "res\\toolbar.bmp"
+IDR_TOOLBARMENU         BITMAP  DISCARDABLE     "res\\toolbarm.bmp"
+IDR_TEXT                BITMAP  DISCARDABLE     "res\\text.bmp"
+IDB_SMALL_STOP          BITMAP  DISCARDABLE     "res\\small_st.bmp"
+IDB_HTML_IMG            BITMAP  DISCARDABLE     "res\\HTMLimg.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_DISPLAY TOOLBAR DISCARDABLE  12, 12
+BEGIN
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_SMALL_CLOSE
+END
+
+IDR_HTML TOOLBAR DISCARDABLE  12, 12
+BEGIN
+    BUTTON      ID_HTML_SAVE
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_HTML_PREV
+    BUTTON      ID_HTML_NEXT
+    BUTTON      ID_SMALL_CLOSE
+END
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  20, 20
+BEGIN
+    BUTTON      ID_CONNECT
+    BUTTON      ID_DISCONNECT
+    SEPARATOR
+    BUTTON      ID_VIEW_1_PLUS
+    BUTTON      ID_VIEW_1
+    BUTTON      ID_VIEW_2_2
+    BUTTON      ID_VIEW_3_3
+    BUTTON      ID_VIEW_4_4
+    SEPARATOR
+    BUTTON      ID_VIEW_FULLSCREEN
+    BUTTON      ID_VIEW_ORIGINAL
+    SEPARATOR
+    BUTTON      ID_VIDEO_SAVE_ALL
+    BUTTON      ID_VIDEO_SAVE_ALL_STOP
+    BUTTON      ID_SEQUENZE
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_TOOLBARMENU TOOLBAR DISCARDABLE  20, 20
+BEGIN
+    BUTTON      ID_CONNECT
+    BUTTON      ID_DISCONNECT
+    BUTTON      ID_VIEW_1_PLUS
+    BUTTON      ID_VIEW_1
+    BUTTON      ID_VIEW_2_2
+    BUTTON      ID_VIEW_3_3
+    BUTTON      ID_VIEW_4_4
+    BUTTON      ID_VIEW_FULLSCREEN
+    BUTTON      ID_VIEW_ORIGINAL
+    BUTTON      ID_VIDEO_SAVE_ALL
+    BUTTON      ID_VIDEO_SAVE_ALL_STOP
+    BUTTON      ID_VIDEO_SAVE
+    BUTTON      ID_SEQUENZE
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_HTML_PREV
+END
+
+IDR_TEXT TOOLBAR DISCARDABLE  12, 12
+BEGIN
+    BUTTON      ID_SMALL_CONTEXT
+    BUTTON      ID_SMALL_CLOSE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU DISCARDABLE 
+BEGIN
+    POPUP "&Host"
+    BEGIN
+        MENUITEM "&Disconnect",                    ID_DISCONNECT
+        MENUITEM "Alarm &Camera Switching",    ID_VIDEO_ALARM_SWITCH
+        MENUITEM "Camera &Map",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Open Switching",      ID_HOST_LOAD_SEQUENCE
+        MENUITEM "&Save Switching",   ID_HOST_SAVE_SEQUENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Set Date and &Time...", ID_HOST_DATETIME
+    END
+    POPUP "&Detector"
+    BEGIN
+        MENUITEM "&Information...",             ID_INPUT_INFORMATION
+        MENUITEM "&Confirm",                 ID_INPUT_CONFIRM
+    END
+    POPUP "&Camera"
+    BEGIN
+        MENUITEM "S&top Reception",            ID_VIDEO_STOP
+        MENUITEM "&Save\tF4",              ID_VIDEO_SAVE
+        MENUITEM "Save as &Reference Image", ID_VIDEO_SAVE_REFERENCE
+        MENUITEM "Show Reference &Image",        ID_VIDEO_SHOW_REFERENCE
+        MENUITEM SEPARATOR
+        MENUITEM "Resolution &High\tCTRL+F8",    ID_VIDEO_FEIN
+        MENUITEM "Resolution &Low\tCTRL+F8",    ID_VIDEO_GROB
+        MENUITEM SEPARATOR
+        MENUITEM "&Activity mask\tCTRL+M",     ID_VIDEO_MASK
+        MENUITEM "S&ettings",           ID_VIDEO_CSB
+        MENUITEM "&Fullscreen\tF9",      ID_VIDEO_FULLSCREEN
+        MENUITEM "&1:1 Display",            ID_SMALL_ORIGINAL
+        MENUITEM "&Zoom out\tF10",              ID_ZOOM_OUT
+    END
+    POPUP "&Relays"
+    BEGIN
+        MENUITEM "&Open",                     ID_RELAIS_OPEN
+        MENUITEM "&Close",                  ID_RELAIS_CLOSE
+    END
+    POPUP "Se&quencer"
+    BEGIN
+        MENUITEM "&On/Off\tF7",                ID_SEQUENZE
+        MENUITEM SEPARATOR
+        MENUITEM "&1 Second",                  ID_SEQUENCE_1
+        MENUITEM "&2 Seconds",                 ID_SEQUENCE_2
+        MENUITEM "&3 Seconds",                 ID_SEQUENCE_3
+        MENUITEM "&4 Seconds",                 ID_SEQUENCE_4
+        MENUITEM "&5 Seconds",                 ID_SEQUENCE_5
+        MENUITEM "1&0 Seconds",                ID_SEQUENCE_10
+        MENUITEM "15 &Seconds",                ID_SEQUENCE_15
+        MENUITEM "20 Se&conds",                ID_SEQUENCE_20
+        MENUITEM "30 Sec&onds",                ID_SEQUENCE_30
+    END
+    POPUP "&Pan/Tilt/Zoom"
+    BEGIN
+        MENUITEM "Pan/&Tilt - &Control...", ID_VIDEO_SN
+        MENUITEM "Pan/Tilt Con&figuration...", ID_VIDEO_SN_CONFIG
+        MENUITEM SEPARATOR
+        MENUITEM "&Home Position",              ID_VIDEO_SN_HOME
+        MENUITEM "Position &1",                 ID_VIDEO_SN_1
+        MENUITEM "Position &2",                 ID_VIDEO_SN_2
+        MENUITEM "Position &3",                 ID_VIDEO_SN_3
+        MENUITEM "Position &4",                 ID_VIDEO_SN_4
+        MENUITEM "Position &5",                 ID_VIDEO_SN_5
+        MENUITEM "Position &6",                 ID_VIDEO_SN_6
+        MENUITEM "Position &7",                 ID_VIDEO_SN_7
+        MENUITEM "Position &8",                 ID_VIDEO_SN_8
+        MENUITEM "Position &9",                 ID_VIDEO_SN_9
+    END
+    POPUP "Mic&o"
+    BEGIN
+        MENUITEM "12 Frames pe&r Second",      ID_FPS_12_1
+        MENUITEM "6 &Frames per Second",       ID_FPS_6_1
+        MENUITEM "4 Fr&ames per Second",       ID_FPS_4_1
+        MENUITEM "3 Fra&mes per Second",       ID_FPS_3_1
+        MENUITEM "2 Fram&es per Second",       ID_FPS_2_1
+        MENUITEM SEPARATOR
+        MENUITEM "&1 Frame per Second",         ID_FPS_1_1
+        MENUITEM "1 Frame in &2 Seconds",       ID_FPS_1_2
+        MENUITEM "1 Frame in &3 Seconds",       ID_FPS_1_3
+        MENUITEM "1 Frame in &4 Seconds",       ID_FPS_1_4
+        MENUITEM "1 Frame in &5 Seconds",       ID_FPS_1_5
+    END
+    POPUP "&Coco"
+    BEGIN
+        MENUITEM "&1 Frame per Second",         ID_FPS_1_1
+        MENUITEM "&3 Frames per Second",       ID_FPS_3_1
+        MENUITEM "&6 Frames per Second",       ID_FPS_6_1
+        MENUITEM "&9 Frames per Second",       ID_FPS_9_1
+        MENUITEM "1&2 Frames per Second",      ID_FPS_12_1
+    END
+    POPUP "&Images"
+    BEGIN
+        MENUITEM "&Receive Images",           ID_VIDEO_START
+        MENUITEM "&Information...",             ID_INFORMATION
+    END
+    POPUP "&Monitor"
+    BEGIN
+        MENUITEM "E&xclusive",                   ID_SHOWON_MONITOR_EXCLUSIVE
+        MENUITEM "Monitor &1",                  ID_SHOWON_MONITOR1
+        MENUITEM "Monitor &2",                  ID_SHOWON_MONITOR2
+    END
+    POPUP "HTML &View"
+    BEGIN
+        POPUP "&Go to"
+        BEGIN
+            MENUITEM "&Home",                 ID_HTML_HOME
+            MENUITEM "&Forward",                   ID_HTML_NEXT
+            MENUITEM "&Back",                     ID_HTML_PREV
+        END
+        POPUP "&View"
+        BEGIN
+            MENUITEM "Re&fresh",              ID_VIEW_REFRESH
+            MENUITEM SEPARATOR
+            MENUITEM "&Hosts",             ID_VIEW_HOSTS
+            MENUITEM "&Cameras",                    ID_VIEW_CAMERAS
+            MENUITEM "&Relays",                     ID_VIEW_RELAIS
+            MENUITEM "&Detector",                     ID_VIEW_DETECTORS
+            MENUITEM SEPARATOR
+            MENUITEM "&Acoustical Alarm",          ID_ALARM_SOUND
+        END
+        POPUP "&Edit"
+        BEGIN
+            MENUITEM "Edit &map",           ID_EDIT_HTML_PAGE
+            MENUITEM "&Save map",            ID_HTML_SAVE
+            MENUITEM SEPARATOR
+            MENUITEM "&Properties of the map...",     ID_EDIT_HTML_MAP_PROPERTIES
+
+            MENUITEM "&Delete map",              ID_EDIT_CLEAR_MAP
+            MENUITEM SEPARATOR
+            MENUITEM "Properties of the &link...", ID_EDIT_HTML_LINK_PROPERTIES
+
+            MENUITEM "Delete l&ink",               ID_EDIT_CLEAR
+        END
+    END
+    POPUP "&Announcement"
+    BEGIN
+        MENUITEM "&Announcement",                  ID_AU_START_PLAY
+        MENUITEM "&Intercom",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "&Stop",                      ID_AU_STOP_PLAY
+        MENUITEM SEPARATOR
+        MENUITEM "&Properties...",           ID_AU_PROPERTIES
+    END
+    POPUP "&Listen in"
+    BEGIN
+        MENUITEM "&Listen in",                   ID_AU_START_REC
+        MENUITEM "&Stop",                      ID_AU_STOP_REC
+        MENUITEM SEPARATOR
+        MENUITEM "&Properties...",           ID_AU_PROPERTIES
+    END
+    POPUP "Host &nc"
+    BEGIN
+        MENUITEM "&Connect",                  ID_CONNECT_HOST
+    END
+    POPUP "New"
+    BEGIN
+        MENUITEM "&Loudspeaker / Microphones",   ID_VIEW_MEDIAS
+    END
+END
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&Connection"
+    BEGIN
+        MENUITEM "To &Remote Host...\tENTER", ID_CONNECT
+        MENUITEM "Create Connection &Map",   ID_EDIT_CREATE_HTML_HOST_PAGE
+
+        MENUITEM "&Connection Map",                ID_CONNECT_MAP
+        MENUITEM "&Disconnect\tESC",               ID_DISCONNECT
+        MENUITEM "&Local Host\tCTRL+L",     ID_CONNECT_LOCAL
+        MENUITEM SEPARATOR
+        MENUITEM "&Settings...",           ID_OPTIONS
+        MENUITEM "&New Login...",             ID_NEW_LOGIN
+        MENUITEM SEPARATOR
+        MENUITEM "Logout and &Terminate\tAlt+F4",            ID_APP_EXIT
+    END
+    POPUP "&Detector"
+    BEGIN
+        MENUITEM "&Information...",             ID_INPUT_INFORMATION
+        MENUITEM "&Confirm",                 ID_INPUT_CONFIRM
+    END
+    POPUP "&Camera"
+    BEGIN
+        MENUITEM "Save &All\tF3",        ID_VIDEO_SAVE_ALL
+        MENUITEM "Sto&p Save All\tF3",   ID_VIDEO_SAVE_ALL_STOP
+        MENUITEM "Save &Camera\tF4",       ID_VIDEO_SAVE
+        MENUITEM "Save as &Reference Image", ID_VIDEO_SAVE_REFERENCE
+        MENUITEM "&Show Reference Image",        ID_VIDEO_SHOW_REFERENCE
+        MENUITEM "Create Camera &Map",   ID_EDIT_CREATE_HTML_CAMERA_PAGE
+
+        MENUITEM "Ca&mera Map",                ID_HOST_CAMERA_MAP
+        MENUITEM SEPARATOR
+        MENUITEM "Resolution &High\tCTRL+F8",    ID_VIDEO_FEIN
+        MENUITEM "Resolution &Low\tCTRL+F8",    ID_VIDEO_GROB
+        MENUITEM "&1:1 Display\tCTRL+F9",   ID_VIEW_ORIGINAL
+        MENUITEM "Zoom &Out\tF10",              ID_ZOOM_OUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Settings...\tCTRL+F7",  ID_VIDEO_CSB
+        MENUITEM SEPARATOR
+        POPUP "&Camera Switching"
+        BEGIN
+            MENUITEM "&On/Off\tF7",                ID_SEQUENZE
+            MENUITEM "&Import Switching", ID_HOST_LOAD_SEQUENCE
+            MENUITEM "&Export Switching", ID_HOST_SAVE_SEQUENCE
+            MENUITEM SEPARATOR
+            MENUITEM "&1 Second",                  ID_SEQUENCE_1
+            MENUITEM "&2 Seconds",                 ID_SEQUENCE_2
+            MENUITEM "&3 Seconds",                 ID_SEQUENCE_3
+            MENUITEM "&4 Seconds",                 ID_SEQUENCE_4
+            MENUITEM "&5 Seconds",                 ID_SEQUENCE_5
+            MENUITEM "1&0 Seconds",                ID_SEQUENCE_10
+            MENUITEM "15 Se&conds",                ID_SEQUENCE_15
+            MENUITEM "20 Sec&onds",                ID_SEQUENCE_20
+            MENUITEM "30 Seco&nds",                ID_SEQUENCE_30
+        END
+        MENUITEM "A&larm Camera Switching",    ID_VIDEO_ALARM_SWITCH
+    END
+    POPUP "&Relais"
+    BEGIN
+        MENUITEM "O&pen",                     ID_RELAIS_OPEN
+        MENUITEM "&Close",                  ID_RELAIS_CLOSE
+    END
+    POPUP "Audio"
+    BEGIN
+        MENUITEM "&Announcement",                 ID_AU_START_PLAY
+        MENUITEM "&Intercom",              ID_AU_START_DUPLEX_PLAY
+        MENUITEM "&Listen in",                   ID_AU_START_REC
+        MENUITEM "&Stop",                      ID_AU_STOP_ANY
+        MENUITEM SEPARATOR
+        MENUITEM "&Properties...",           ID_AU_PROPERTIES
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "1 &plus",                 ID_VIEW_1_PLUS
+        MENUITEM "&1\tF8",                      ID_VIEW_1
+        MENUITEM "&2 x 2\tF8",                  ID_VIEW_2_2
+        MENUITEM "&3 x 3\tF8",                  ID_VIEW_3_3
+        MENUITEM "&4 x 4\tF8",                  ID_VIEW_4_4
+        MENUITEM SEPARATOR
+        MENUITEM "Sp&lit",                     ID_WINDOW_SPLIT
+        MENUITEM "&Fullscreen\tF9",      ID_VIEW_FULLSCREEN
+        MENUITEM "Show &titles",       ID_VIEW_TITLE_OF_SMALLWINDOWS
+
+        MENUITEM "1:1 &Display\tCTRL+F9",   ID_VIEW_ORIGINAL
+        MENUITEM "&Target display",                 ID_VIEW_TARGET_DISPLAY
+        MENUITEM SEPARATOR
+        MENUITEM "&Monitor 2",                  ID_VIEW_MONITOR2
+    END
+    POPUP "&?"
+    BEGIN
+        MENUITEM "Ab&out...",               ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "L",            ID_CONNECT_LOCAL,       VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_VIDEO_MASK,          VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CLEAR,          VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_ESCAPE,      ID_DISCONNECT,          VIRTKEY, NOINVERT
+    VK_F10,         ID_ZOOM_OUT,            VIRTKEY, NOINVERT
+    VK_F3,          ID_VIDEO_SAVE_ALL_TOGGLE, VIRTKEY, NOINVERT
+    VK_F4,          ID_VIDEO_SAVE,          VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F7,          ID_SEQUENZE,            VIRTKEY, NOINVERT
+    VK_F7,          ID_VIDEO_CSB,           VIRTKEY, CONTROL, NOINVERT
+    VK_F8,          ID_TOGGLE,              VIRTKEY, NOINVERT
+    VK_F8,          ID_TOGGLE_RESOLUTION,   VIRTKEY, CONTROL, NOINVERT
+    VK_F9,          ID_VIEW_FULLSCREEN,     VIRTKEY, NOINVERT
+    VK_F9,          ID_VIEW_ORIGINAL,       VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_CONNECT,             VIRTKEY, NOINVERT
+    VK_SPACE,       ID_SPACE,               VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CSB DIALOG DISCARDABLE  0, 0, 190, 76
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Contrast, Brightness, Saturation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Contrast:",IDC_STATIC_CONTRAST,5,22,27,8
+    CONTROL         "Slider1",IDC_CONTRAST,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | WS_TABSTOP,44,19,141,13
+    LTEXT           "&Brightness:",IDC_STATIC_BRIGHTNESS,5,38,31,8
+    CONTROL         "Slider2",IDC_BRIGHTNESS,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,44,36,141,13
+    LTEXT           "&Color:",IDC_STATIC_COLOR,5,55,21,8
+    CONTROL         "Slider1",IDC_COLOR,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | WS_TABSTOP,44,53,141,13
+    LTEXT           "Static",IDC_TXT_CAM_SERVER,5,5,180,8
+END
+
+IDD_SN_CONFIG DIALOG DISCARDABLE  0, 0, 170, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Pan/Tilt/Zoom Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,113,42,50,14
+    PUSHBUTTON      "Left",IDC_LEFT,7,24,15,15,BS_ICON
+    PUSHBUTTON      "Up",IDC_UP,24,7,15,15,BS_ICON
+    PUSHBUTTON      "Right",IDC_RIGHT,41,24,15,15,BS_ICON
+    PUSHBUTTON      "Down",IDC_DOWN,24,41,15,15,BS_ICON
+    PUSHBUTTON      "RETURN",IDC_CONFIG_CENTER,63,7,36,14
+    PUSHBUTTON      "ESC",IDC_PROG,63,24,36,15
+END
+
+IDD_VIDEO_SN DIALOG DISCARDABLE  0, 0, 165, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Pan/Tilt/Zoom Control"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Left",IDC_LEFT,5,22,15,15,BS_ICON
+    PUSHBUTTON      "Up",IDC_UP,22,5,15,15,BS_ICON
+    PUSHBUTTON      "Right",IDC_RIGHT,39,22,15,15,BS_ICON
+    PUSHBUTTON      "Down",IDC_DOWN,22,39,15,15,BS_ICON
+    PUSHBUTTON      "Center",IDC_CENTER,22,22,15,15,BS_ICON | NOT WS_VISIBLE
+    CONTROL         "Slider1",IDC_SPEED,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_TOP | NOT WS_VISIBLE | WS_TABSTOP,5,55,100,15
+    PUSHBUTTON      "O",IDC_IRISIN,60,5,15,15
+    PUSHBUTTON      "C",IDC_IRISOUT,60,22,15,15
+    CONTROL         "Aut.",IDC_IRIS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,60,39,15,15
+    PUSHBUTTON      "F",IDC_FOCUSOUT,77,5,15,15
+    PUSHBUTTON      "N",IDC_FOCUSIN,77,22,15,15
+    CONTROL         "Aut.",IDC_FOCUS_AUTO,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,77,39,15,15
+    PUSHBUTTON      "T",IDC_ZOOMIN,94,5,15,15
+    PUSHBUTTON      "W",IDC_ZOOMOUT,94,22,15,15
+    PUSHBUTTON      "Turn 180 degrees",IDC_TURN_180,94,39,15,15,BS_ICON
+    PUSHBUTTON      "1",IDC_POS_1,111,39,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "2",IDC_POS_2,128,39,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "3",IDC_POS_3,145,39,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "4",IDC_POS_4,111,22,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "5",IDC_POS_5,128,22,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "6",IDC_POS_6,145,22,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "7",IDC_POS_7,111,5,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "8",IDC_POS_8,128,5,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "9",IDC_POS_9,145,5,15,15,NOT WS_VISIBLE
+    PUSHBUTTON      "Save",IDC_PRESET,111,55,49,15,NOT WS_VISIBLE
+END
+
+IDD_SAVE_SEQUENZER DIALOG DISCARDABLE  0, 0, 186, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Camera Switching"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Name:",IDC_STATIC_NAME,7,67,22,8
+    EDITTEXT        IDC_NAME,34,64,145,14,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST_SEQUENCE,7,7,172,54,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,72,84,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,84,50,14
+    PUSHBUTTON      "&Delete",IDC_DELETE,7,84,50,14
+END
+
+IDD_CONNECTING DIALOG DISCARDABLE  0, 0, 148, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Connecting to"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,91,35,50,14
+    LTEXT           "",IDC_HOST,7,7,134,8
+    CONTROL         "Progress1",IDC_PROGRESS_CONNECT,"msctls_progress32",
+                    WS_BORDER,7,18,134,14
+END
+
+IDD_INPUT_DEACTIVATION DIALOG DISCARDABLE  0, 0, 248, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Temporary detector deactivation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Detector name",IDC_TXT_INPUT,7,7,234,8
+    CONTROL         "List1",IDC_LIST_DEACTIVATIONS,"SysListView32",
+                    LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | 
+                    WS_BORDER | WS_TABSTOP,7,18,233,63
+    GROUPBOX        "Start time / Start date",IDC_GRP_START,7,87,108,59
+    CONTROL         "DateTimePicker1",IDC_START_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,16,101,56,
+                    15
+    CONTROL         "DateTimePicker1",IDC_START_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | DTS_LONGDATEFORMAT | 
+                    WS_TABSTOP,16,122,77,15
+    GROUPBOX        "End time / End date",IDC_GRP_STOP,133,87,108,59
+    CONTROL         "DateTimePicker1",IDC_STOP_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,142,101,
+                    56,15
+    CONTROL         "DateTimePicker1",IDC_STOP_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | DTS_LONGDATEFORMAT | 
+                    WS_TABSTOP,142,122,77,15
+    PUSHBUTTON      "New",IDC_BUTTON_NEW,7,154,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DELETE,65,154,50,14
+    DEFPUSHBUTTON   "OK",IDOK,133,154,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,191,154,50,14
+END
+
+IDD_MD DIALOG DISCARDABLE  0, 0, 250, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "OK",IDC_MD_OK,185,117,60,14
+    CONTROL         "Video",IDC_MD_INLAY,"Button",BS_OWNERDRAW | BS_NOTIFY | 
+                    BS_FLAT | WS_TABSTOP,5,5,176,144
+    PUSHBUTTON      "Delete",IDC_MD_DEL,185,5,60,14
+    PUSHBUTTON      "Invert",IDC_MD_INVERT,185,24,60,14
+    PUSHBUTTON      "Cancel",IDCANCEL,185,135,60,14
+    CONTROL         "Adaptive mask",IDC_MD_SHOW_ADAPTIVE,"Button",
+                    BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,185,43,60,14
+END
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 163, 106
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,50,85,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,106,85,50,14
+    CONTROL         "&First Camera at start",IDC_RADIO_FIRST_CAM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,7,7,149,10
+    CONTROL         "&All Cameras at start",IDC_RADIO_ALL_CAM,"Button",
+                    BS_AUTORADIOBUTTON,7,21,149,10
+    CONTROL         "&1plus view at alarm connections",
+                    IDC_CHECK_1PLUS_ALARM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,35,149,10
+    CONTROL         "&Fullscreen at alarm connections",IDC_CHECK_FULL_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,49,149,10
+    CONTROL         "A&udible Alarm",IDC_CHECK_AUDIBLE_ALARM,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,63,149,10
+END
+
+IDD_EXTERNAL_FRAME DIALOGEX 0, 0, 166, 73
+STYLE WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_THICKFRAME
+EXSTYLE WS_EX_STATICEDGE
+CAPTION "Monitor %d"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+IDD_AUDIO_PROPERTIES DIALOGEX 0, 0, 270, 169
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Audio Settings"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Channels:",IDC_TXT_AU_INPUT_CHANNELS,10,96,54,8
+    COMBOBOX        IDC_COMBO_AU_INPUT_CHANNELS,10,114,150,121,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_NAMED_INPUTS,70,94,190,121,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Left",IDC_RD_AU_LEFT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,165,115,45,10
+    CONTROL         "Right",IDC_RD_AU_RIGHT,"Button",BS_AUTORADIOBUTTON,215,
+                    115,45,10
+    GROUPBOX        "Audio input: %s",IDC_GRP_AU_INPUT,5,50,260,115,
+                    WS_GROUP
+    LTEXT           "Sensitivity:",IDC_TXT_AU_INPUT_SENSITIVITY,10,69,54,
+                    8
+    CONTROL         "Slider1",IDC_SLIDER_AU_INPUT_SENSITIVITY,
+                    "msctls_trackbar32",TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,
+                    70,63,190,20,WS_EX_STATICEDGE
+    GROUPBOX        "Audio Output",IDC_GRP_AU_OUTPUT,5,5,260,40
+    LTEXT           "Volume:",IDC_TXT_AU_OUTPUT_VOLUME,10,23,54,8
+    CONTROL         "Slider1",IDC_SLIDER_AU_OUTPUT_VOLUME,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,17,190,20,
+                    WS_EX_STATICEDGE
+    CONTROL         "Slider1",IDC_SLIDER_AU_THRESHOLD,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,70,135,190,20,
+                    WS_EX_STATICEDGE
+    LTEXT           "Threshold:",IDC_TXT_AU_THRESHOLD,10,141,54,8
+END
+
+IDD_HTML_MAP_PROPERTIES DIALOG DISCARDABLE  0, 0, 230, 110
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Properties of the Map"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Title of the Map:",IDC_TXT_HM_TITLE,5,11,60,8
+    EDITTEXT        IDC_EDT_HM_TITLE,70,9,155,12,ES_AUTOHSCROLL
+    LTEXT           "Picture:",IDC_TXT_HM_PICTURE_FILE,5,31,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_FILENAME,70,29,100,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Search...",IDC_BTN_HM_PICTURE_FILENAME,175,29,50,12
+    LTEXT           "Picture Size:",IDC_TXT_HM_PICTURE_SIZE,5,71,60,8
+    EDITTEXT        IDC_EDT_HM_PICTURE_SIZE,70,69,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | WS_GROUP
+    LTEXT           "Zoom Factor:",IDC_TXT_HM_ZOOM,5,91,60,8
+    EDITTEXT        IDC_EDT_HM_ZOOM,70,89,40,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,89,50,12
+    LTEXT           "Percent",IDC_TXT_HM_ZOOM_P,115,91,36,8
+    LTEXT           "Screen Size:",IDC_TXT_HM_MONITOR_SIZE,5,51,60,8
+    EDITTEXT        IDC_EDT_HM_MONITOR_SIZE,70,49,155,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | WS_GROUP
+END
+
+IDD_HTML_LINK_PROPERTIES DIALOG DISCARDABLE  0, 0, 230, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Properties of the link"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Context help:",IDC_TXT_HL_INFO,5,11,60,8
+    EDITTEXT        IDC_EDT_HL_INFO,70,9,155,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "OK",IDOK,175,29,50,12
+END
+
+IDD_AUDIO_INPUT_PROP DIALOGEX 0, 0, 230, 50
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Audio Input"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_NAMED_INPUTS,5,4,220,121,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Slider1",IDC_SLIDER_AU_INPUT_SENSITIVITY,
+                    "msctls_trackbar32",TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,
+                    5,25,220,20,WS_EX_STATICEDGE
+END
+
+IDD_AUDIO_OUPUT_PROP DIALOGEX 0, 0, 230, 35
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Audio Output"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Slider1",IDC_SLIDER_AU_OUTPUT_VOLUME,"msctls_trackbar32",
+                    TBS_TOP | TBS_TOOLTIPS | WS_TABSTOP,5,10,220,20,
+                    WS_EX_STATICEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CSB, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 185
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 71
+    END
+
+    IDD_SN_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_VIDEO_SN, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 160
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 70
+    END
+
+    IDD_SAVE_SEQUENZER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+
+    IDD_CONNECTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 141
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_INPUT_DEACTIVATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 241
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 168
+    END
+
+    IDD_MD, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 245
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 156
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    IDD_AUDIO_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 64
+        VERTGUIDE, 70
+        VERTGUIDE, 160
+        VERTGUIDE, 165
+        VERTGUIDE, 170
+        VERTGUIDE, 260
+        VERTGUIDE, 265
+        HORZGUIDE, 5
+        HORZGUIDE, 27
+        HORZGUIDE, 45
+        HORZGUIDE, 50
+        HORZGUIDE, 73
+        HORZGUIDE, 100
+        HORZGUIDE, 120
+        HORZGUIDE, 145
+        HORZGUIDE, 165
+    END
+
+    IDD_HTML_MAP_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+        HORZGUIDE, 55
+        HORZGUIDE, 75
+        HORZGUIDE, 95
+    END
+
+    IDD_HTML_LINK_PROPERTIES, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 65
+        VERTGUIDE, 70
+        VERTGUIDE, 225
+        HORZGUIDE, 15
+        HORZGUIDE, 35
+    END
+
+    IDD_AUDIO_INPUT_PROP, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 225
+        HORZGUIDE, 10
+        HORZGUIDE, 35
+    END
+
+    IDD_AUDIO_OUPUT_PROP, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 225
+        HORZGUIDE, 20
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_PANLEFT             CURSOR  DISCARDABLE     "res\\panleft.cur"
+IDC_PANRIGHT            CURSOR  DISCARDABLE     "res\\panright.cur"
+IDC_TILTUP              CURSOR  DISCARDABLE     "res\\tiltup.cur"
+IDC_TILTDOWN            CURSOR  DISCARDABLE     "res\\tiltdown.cur"
+IDC_ZOOMIN              CURSOR  DISCARDABLE     "res\\zoomin.cur"
+IDC_ZOOMOUT             CURSOR  DISCARDABLE     "res\\zoomout.cur"
+IDC_GLASS               CURSOR  DISCARDABLE     "res\\glass.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 2110
+//
+
+NOSTATEMENT.HTM         2110    FIXED IMPURE    "res\\nostatement.htm"
+BACK.GIF                2110    FIXED IMPURE    "res\\back.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "iST Vision 4.0"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "Vision"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCROLL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_PAGE_SETUP      "Changes the printing options.\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print\nPrints the active image"
+    ID_FILE_PRINT_PREVIEW   "Displays the entire cover page.\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Shows program information, version number and copyright\nInfo..."
+    ID_APP_EXIT             "Exits the application, closes all connections to hosts.\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erases the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Removes the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Inserts the contents of the Clipboard.\nPaste"
+    ID_EDIT_REPEAT          "Repeats the last action.\nRepeat"
+    ID_EDIT_REPLACE         "Replaces the specified text with different text.\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undoes the last action.\nUndo"
+    ID_EDIT_REDO            "Redoes the previously undone action.\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_DISCONNECT           "Disconnects the selected connection\nDisconnect"
+    ID_CONNECT              "Establishes a connection\nConnect"
+    ID_CONNECT_LOCAL        "Establishes a connection to the local host\nLocal Host"
+    ID_NEW_LOGIN            "Logs in a new user, disconnects all connections\nNew Login"
+    ID_VIDEO_SAVE           "Saves images of this camera\nSave"
+    ID_RELAIS_OPEN          "Opens a closed relay\nOpen Relay"
+    ID_RELAIS_CLOSE         "Closes an opened relay\nClose Relay"
+    ID_VIDEO_2_2            "Shows 2 by 2 Images\n2 x 2 Images"
+    ID_VIDEO_3_3            "Shows 3 by 3 Images\n3 x 3 Images"
+    ID_VIDEO_4_4            "Shows 4 by 4 images\n4 x 4 images"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ZOOM_OUT             "Shows the image in original size\nZoom out"
+    ID_SMALL_ORIGINAL       "Shows the image in original size\n1:1"
+    ID_VIDEO_FEIN           "Shows image in a high resolution.\nHigh Resolution"
+    ID_VIDEO_GROB           "Shows the image in a low resolution.\nLow Resolution"
+    ID_VIDEO_SAVE_ALL_STOP  "Stops saving all images of all cameras\nStop All"
+    ID_VIDEO_MASK           "Modifies the permanent mask of the activity detection\nPermanent mask"
+    ID_VIEW_1_PLUS          "Toggles view mode 1 plus\n1 plus"
+    ID_HOST_1_PLUS          "Shows images in 1plus mode at alarms\nShow 1plus at alarms"
+    ID_OPTIONS              "Shows settings\nShows settings"
+    ID_VIEW_TARGET_DISPLAY  "Toggles the target display on or off\nToggles the target display on or off"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SHOWON_MONITOR1      "Shows this window on monitor 1."
+    ID_SHOWON_MONITOR2      "Shows this window on monitor 2."
+    ID_VIEW_HOSTS           "Shows the positions of the hosts on the map"
+    ID_VIEW_CAMERAS         "Shows the positions of the cameras on the map"
+    ID_VIEW_RELAIS          "Shows the positions of the relais on the map"
+    ID_VIEW_DETECTORS       "Shows the positions of the detectors on the map"
+    ID_ALARM_SOUND          "Switches the acoustical alarm signal on or off."
+    ID_VIEW_REFRESH         "Refreshes the content of the view"
+    ID_VIEW_TITLE_OF_SMALLWINDOWS 
+                            "Shows or hides the title of the pictures."
+    ID_AU_START_PLAY        "Starts the announcement to the selected host(s)"
+    ID_AU_START_REC         "Starts to listen in the selected host"
+    ID_AU_STOP_PLAY         "Stops the announcement"
+    ID_AU_STOP_REC          "Stops to listen in external host"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_MONITOR2        "Shows the pictures on monitor %d"
+    ID_SHOWON_REGARDLESS    "No monitor is preferred."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_FULLSCREEN      "Fullscreen\nFullscreen"
+    ID_VIDEO_SEQUENZER      "Defines cameras for the automatic switching.\nAutomatic camera switching"
+    ID_VIDEO_SN             "Controls camera movement and setting\nPan/Tilt/Zoom"
+    ID_VIDEO_ALARM_SWITCH   "Turns automatic camera switching in case of alarm on/off.\nAlarm camera switching"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIDEO_STOP           "Closes the window of the selected camera\nCancel Receiving"
+    ID_HOST_SAVE_SEQUENCE   "Exports the current camera switching settings in a file\nExport Switching"
+    ID_HOST_LOAD_SEQUENCE   "Imports camera switching settings from a file\nImport Switching"
+    ID_VIDEO_SN_CONFIG      "Configures camera moving and settings\nPan/Tilt/Zoom"
+    ID_VIDEO_SAVE_ALL       "Saves images of all cameras\nSave All"
+    ID_VIDEO_CB             "Controls contrast, saturation and brightness of the image.\nContrast/Saturation/Brightness"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_2_3             "Shows 2 by 3 images\n2 x 3"
+    ID_VIEW_1               "Shows 1 image\n1 x 1"
+    ID_VIEW_2_2             "Shows 2 by 2 images\n2 x 2"
+    ID_VIEW_3_2             "Shows 3 by 2 images\n3 x 2"
+    ID_VIEW_3_3             "Shows 3 by 3 Images\n3 x 3"
+    ID_VIEW_4_4             "Shows 4 by 4 Images\n4 x 4"
+    ID_HTML_PREV            "Back\nBack"
+    ID_HTML_NEXT            "Forward\nForward"
+    ID_HTML_HOME            "Home\nHome"
+    ID_INPUT_LAST           "Alarm messages\nShows all previous received alarms"
+    ID_SEQUENCE_1           "Switching every second"
+    ID_SEQUENCE_2           "Switching every 2 seconds"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_REFERENCE_TITLE     "Reference image %s from %s"
+    IDP_NOT_ALL_REFERENCE   "There are still cameras without a reference image!\nDo you really want to quit?"
+    IDS_TIME_SET            "The time was set."
+    IDS_NO_REFERENCE        "There is no reference image for this camera yet!"
+    IDS_REFERENCE_TITLE_FULL "Reference image %s, %s from %s"
+    IDS_REFERENCE_TITLE_LIGHT "Reference image %s"
+    IDS_VON                 "from"
+    IDS_BIS                 "till"
+    IDS_INPUT_DEACTIVATE    "&Temporary deactivation..."
+    IDS_ALARM_SPAN_OFF_CONFIRM 
+                            "The time periods for the temporary deactivation of call processes\nwere set successfully."
+    IDS_PROGRESS            "Connection progress"
+    IDS_PROGRESS_TEXT       "Connection:"
+    IDS_ALARM_OFF           "Temporary deactivation of call processes"
+    IDS_PROTOCOL            "Protocol"
+    IDS_ALARM_OFF2          "The user %s has changed the time periods on host %s for the detector %s:"
+    IDS_ALARM_OFF3          "from %s till %s"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SEQUENCE_PANE        "every %d s"
+    ID_SEQUENCE_TEXT        "Switch:"
+    ID_DATABASE_TEXT        "Save:"
+    ID_DATABASE_PANE        "not possible"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_INVALID_DONGLE      "You do not have a valid dongle to start this software, or your dongle is out of order.\nPlease ask your system administrator!"
+    IDS_IMAGN               "This product contains portions of imaging code owned by Imagine Software Solutions, Inc., (WWW.IMAGN.COM) and Pegasus Imaging Corporation, Tampa, FL, (WWW.PEGASUSIMAGING.COM)."
+    IDS_SEQUENCE_OFF        "off"
+    IDP_NO_CONNECTION       "A connection to remote host could not be established."
+    IDS_LOCAL_SERVER        "Local host"
+    IDS_OVERWRITE_REFERENCE "There is already a reference image for %s, do you want to overwrite the existing image?"
+    IDP_NO_CONNECTION_INVALID_PERMISSION 
+                            "You do not have the permission to connect with this remote host."
+    IDS_POSSIBLE            "possible"
+    IDS_STORING             "active"
+    IDS_FPS                 "&Frame Rate"
+    IDS_SN                  "&Pan/Tilt/Zoom"
+    IDS_CAMERAS             "Cameras"
+    IDS_INPUT               "Detector"
+    IDS_RELAY               "Relays"
+    IDP_NO_CONNECTION_LINK_MODUL 
+                            "A connection to remote host could not be established.\nThe link module does not run."
+    IDP_NO_CONNECTION_SERVER 
+                            "A connection to remote host could not be established.\nThe selected server does not run."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_NO_CONNECTION_RESET "A connection to remote host could not be established.\nThe selected server is just initializing."
+    IDP_NO_CONNECTION_MAX_CLIENT 
+                            "A connection to remote host could not be established.\nThe selected server does not accept any more connection."
+    IDP_ERROR               "The host %s sent the following message:\n%s."
+    IDP_NO_CONNECTION_UNKNOWN 
+                            "A connection to remote host could not be established."
+    IDS_DEFAULT_HTML_HEAD   "Error: Page does not exist"
+    IDS_DEFAULT_HTML_TEXT   "There is no page for this context to be shown.\nThis may have one of the following reasons:"
+    IDS_DEFAULT_HTML_1      "There was no instruction specified for this alarm or there is no instruction for this alarm."
+    IDS_DEFAULT_HTML_2      "There was no instruction transmitted for this alarm"
+    IDS_CONNECT             "to &Remote Host...\tENTER"
+    IDS_ALARM               "Alarms"
+    IDS_SAVE                "Save"
+    IDS_LOAD                "Open"
+    IDS_MAX_FPS             "%d Frames per second (max.)"
+    IDS_NOTIFICATION_FROM   "Notification from %s received: %s"
+    IDS_MAP                 "Connection map"
+    IDP_NO_HOST             "The host %s was not found in the list.\nPlease check for correct spelling!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SEQUENCE_3           "Switching every 3 seconds"
+    ID_SEQUENCE_4           "Switching every 4 seconds"
+    ID_SEQUENCE_5           "Switching every 5 seconds"
+    ID_SEQUENCE_10          "Switching every 10 seconds"
+    ID_SEQUENCE_15          "Switching every 15 seconds"
+    ID_SEQUENCE_20          "Switching every 20 seconds"
+    ID_SEQUENCE_30          "Switching every 30 seconds"
+    ID_SEQUENZE             "Automatic camera switching\nSwitching"
+    ID_SMALL_CLOSE          "Close window\nClose window"
+    ID_SMALL_CONTEXT        "Context menu\nContext menu"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIDEO_CSB            "Controls contrast, saturation and brightness of the image.\nContrast/Saturation/Brightness"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CONNECTION_ANIMATION "Audible alarm\nAudible alarm"
+    ID_VIEW_ORIGINAL        "Shows the image in original size\n1:1"
+    ID_INPUT_INFORMATION    "Shows additional information for the selected detector\nInformation"
+    ID_VIDEO_SAVE_REFERENCE "Saves the current image of the selected camera as reference image\nSave Reference Image"
+    ID_HOST_DATETIME        "Sets date and time of the remote host\nSet Date and Time"
+    ID_HOST_FIRST_CAM       "Shows an image of the first camera at start\nShow first camera at start"
+    ID_HOST_ALL_CAMS        "Shows images of all cameras at start\nShow all cameras at start"
+    ID_CONNECT_MAP          "Shows connection map\nMap"
+    ID_HOST_CAMERA_MAP      "Shows a map of the camera positions\nCamera Map"
+    ID_VIDEO_SHOW_REFERENCE "Shows the current reference image\nShow Reference Image"
+    ID_VIDEO_FULLSCREEN     "Fullscreen\nFullscreen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CENTER              "Home position"
+    IDC_FOCUSIN             "Focus near"
+    IDC_FOCUSOUT            "Focus far"
+    IDC_IRISIN              "Open iris"
+    IDC_IRISOUT             "Close iris"
+    IDC_START_TIME          "The detector will be deactivated at the chosen time."
+    IDC_STOP_DATE           "The detector will be activated at the chosen time."
+    IDC_STOP_TIME           "The detector will be activated at the chosen time."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LIST_DEACTIVATIONS  "The actual time periods for the deactivation of this detector."
+    IDC_BUTTON_NEW          "Adds a new time period to the list.\nIt can be edited afterwards."
+    IDC_BUTTON_DELETE       "Will remove the selected time period from the list."
+    IDC_SPEED               "Pace"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_NO_CONNECTION_INVALID_SERIAL 
+                            "A connection to remote host could not be established.\nInvalid license number."
+    IDP_NO_CONNECTION_INVALID_PASSWORD 
+                            "A connection to remote host could not be established.\nInvalid passwort or PIN."
+    IDP_MASK_DENIED         "You do not have the permission\nto change the permanent mask of camera %s."
+    IDS_PRESET              "Save"
+    IDS_PRESET_CANCEL       "Cancel"
+    IDS_MONITOR             "Monitor %d"
+    IDS_AUDIO               "Audio"
+    IDS_PICTURE_FILETYPES   "Pictures"
+    IDS_LOAD_PICTURE_FILE   "Load Pictures"
+    IDS_HOSTS               "Hosts"
+    IDS_HTML_EDIT_MODE      "*** edit mode ***"
+    IDS_DO_NOT_LEAVE_EMPTY  "The field %s must not be empty!"
+    IDP_DELETE_HTML_MAP     "Do you really want to delete the\nmap %s\n completely?"
+    IDP_REPLACE_EXISTING_CAM_SWITCH 
+                            "Do you want to replace the existing\ncamera switching %s?"
+    IDS_HTML_LINK_NAMES_CHANGED 
+                            "The names of the red marked links have been changed.\nDo you want to save the links immediately?\n\nAnswer with No, if you would like to check the changed links first."
+    IDS_INVALID_HTML_ELEMENT 
+                            "This element is invalid. It should be deleted."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_PRESET              "Saves the current settings to a position (Home, 1 - 9)"
+    IDC_IRIS_AUTO           "Auto iris"
+    IDC_FOCUS_AUTO          "Auto focus"
+    IDC_TURN_180            "Pan 180 degrees"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_ZOOMIN              "Zoom in"
+    IDC_ZOOMOUT             "Zoom out"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_AU_PROPERTIES        "Opens the audio properties dialog"
+    IDS_AU_AUTOMATIC_GAIN   "Automatic"
+    ID_EDIT_HTML_PAGE       "Switches the edit mode of the maps on or off"
+    ID_EDIT_CREATE_HTML_CAMERA_PAGE 
+                            "Creates a camera map for the local host"
+    ID_EDIT_CREATE_HTML_HOST_PAGE 
+                            "Creates a map to select external hosts"
+    ID_EDIT_HTML_MAP_PROPERTIES "Changes the properties of the map"
+    ID_HTML_SAVE            "Saves the map and exits the edit mode\nSave map"
+    ID_EDIT_HTML_LINK_PROPERTIES "Changes link properties"
+    ID_AU_STOP              "Closes the audio connection"
+    ID_AU_START             "Starts the audio connection"
+    ID_AU_START_DUPLEX_PLAY "Starts intercom device"
+    ID_EDIT_CLEAR_MAP       "Deletes selected map"
+    ID_AU_STOP_ANY          "Closes current audio connection"
+    ID_CONNECT_HOST         "Connects to selected host"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_SHOWON_MONITOR_EXCLUSIVE 
+                            "Shows only this window on the current monitor."
+    ID_VIEW_AUDIOS          "Shows the positions of the loudspeakers and microphones on the map"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_REJECT_ANNOUNCEMENT "The announcement to the host has been denied, because\nannother host already performs an announcement."
+    IDS_NO_MEDIA_RECEIVE_CONFIRM 
+                            "The audio output ist blocked!\n\nReactivate the audio ouput?"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\Vision.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"          // Standard components
+#include "afxprint.rc"        // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

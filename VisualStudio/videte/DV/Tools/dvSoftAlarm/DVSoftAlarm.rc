@@ -1,0 +1,249 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DVSoftAlarm.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DVSoftAlarm.ico"
+IDR_MAINFRAME1          ICON                    "res\\idr_main.ico"
+IDR_MAINFRAME2          ICON                    "res\\ico00001.ico"
+IDR_MAINFRAME3          ICON                    "res\\ico00002.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DVSOFTALARM_DIALOG DIALOGEX 0, 0, 344, 188
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DVSoftAlarm"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,289,166,50,14
+    GROUPBOX        "Aktivität",IDC_STATIC,6,5,333,43
+    GROUPBOX        "Extern 1 Alarm",IDC_STATIC,6,54,333,36
+    GROUPBOX        "Extern 2 Verdacht",IDC_STATIC,6,96,333,36
+    CONTROL         "1",IDC_CHECK_S1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,15,110,15,15
+    CONTROL         "2",IDC_CHECK_S2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,33,110,15,15
+    CONTROL         "3",IDC_CHECK_S3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,51,110,15,15
+    CONTROL         "4",IDC_CHECK_S4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,69,110,15,15
+    CONTROL         "5",IDC_CHECK_S5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,87,110,15,15
+    CONTROL         "6",IDC_CHECK_S6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,105,110,15,15
+    CONTROL         "7",IDC_CHECK_S7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,123,110,15,15
+    CONTROL         "8",IDC_CHECK_S8,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,141,110,15,15
+    CONTROL         "9",IDC_CHECK_S9,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,159,110,15,15
+    CONTROL         "10",IDC_CHECK_S10,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,177,110,15,15
+    CONTROL         "11",IDC_CHECK_S11,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,195,110,15,15
+    CONTROL         "12",IDC_CHECK_S12,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,213,110,15,15
+    CONTROL         "13",IDC_CHECK_S13,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,231,110,15,15
+    CONTROL         "14",IDC_CHECK_S14,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,249,110,15,15
+    CONTROL         "15",IDC_CHECK_S15,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,267,110,15,15
+    CONTROL         "16",IDC_CHECK_S16,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,285,110,15,15
+    CONTROL         "1",IDC_CHECK_A1,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,15,69,15,15
+    CONTROL         "2",IDC_CHECK_A2,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,33,69,15,15
+    CONTROL         "3",IDC_CHECK_A3,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,51,69,15,15
+    CONTROL         "4",IDC_CHECK_A4,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,69,69,15,15
+    CONTROL         "5",IDC_CHECK_A5,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,87,69,15,15
+    CONTROL         "6",IDC_CHECK_A6,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,105,69,15,15
+    CONTROL         "7",IDC_CHECK_A7,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,123,69,15,15
+    CONTROL         "8",IDC_CHECK_A8,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,141,69,15,15
+    CONTROL         "9",IDC_CHECK_A9,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | 
+                    WS_TABSTOP,159,69,15,15
+    CONTROL         "10",IDC_CHECK_A10,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,177,69,15,15
+    CONTROL         "11",IDC_CHECK_A11,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,195,69,15,15
+    CONTROL         "12",IDC_CHECK_A12,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,213,69,15,15
+    CONTROL         "13",IDC_CHECK_A13,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,231,69,15,15
+    CONTROL         "14",IDC_CHECK_A14,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,249,69,15,15
+    CONTROL         "15",IDC_CHECK_A15,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,267,69,15,15
+    CONTROL         "16",IDC_CHECK_A16,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,285,69,15,15
+    PUSHBUTTON      "1",IDC_BUTTON_MD1,15,22,15,15
+    PUSHBUTTON      "2",IDC_BUTTON_MD2,31,22,15,15
+    PUSHBUTTON      "3",IDC_BUTTON_MD3,47,22,15,15
+    PUSHBUTTON      "4",IDC_BUTTON_MD4,63,22,15,15
+    PUSHBUTTON      "5",IDC_BUTTON_MD5,79,22,15,15
+    PUSHBUTTON      "6",IDC_BUTTON_MD6,95,22,15,15
+    PUSHBUTTON      "7",IDC_BUTTON_MD7,111,22,15,15
+    PUSHBUTTON      "8",IDC_BUTTON_MD8,127,22,15,15
+    PUSHBUTTON      "9",IDC_BUTTON_MD9,143,22,15,15
+    PUSHBUTTON      "10",IDC_BUTTON_MD10,159,22,15,15
+    PUSHBUTTON      "11",IDC_BUTTON_MD11,175,22,15,15
+    PUSHBUTTON      "12",IDC_BUTTON_MD12,191,22,15,15
+    PUSHBUTTON      "13",IDC_BUTTON_MD13,207,22,15,15
+    PUSHBUTTON      "14",IDC_BUTTON_MD14,223,22,15,15
+    PUSHBUTTON      "15",IDC_BUTTON_MD15,239,22,15,15
+    PUSHBUTTON      "16",IDC_BUTTON_MD16,255,22,15,15
+    EDITTEXT        IDC_EDIT_X,287,15,18,14,ES_NUMBER
+    EDITTEXT        IDC_EDIT_Y,287,29,18,14,ES_NUMBER
+    LTEXT           "X:",IDC_STATIC,277,16,8,8
+    LTEXT           "Y:",IDC_STATIC,277,34,8,8
+    ICON            IDR_MAINFRAME,IDC_MYICON,6,160,21,20,NOT WS_VISIBLE | 
+                    WS_DISABLED
+    CONTROL         "Alle",IDC_CHECK_ALL_EXTERN,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,304,69,25,15
+    PUSHBUTTON      "Alle",IDC_BUTTON_ALL_MD,308,14,25,15
+    CONTROL         "Dauer",IDC_ICON_NERVES,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,308,29,25,15
+    PUSHBUTTON      "Senden",IDC_BUTTON_RTE,300,142,39,14
+    LTEXT           "WAI:",IDC_STATIC,6,145,17,8
+    EDITTEXT        IDC_EDT_WAI,25,142,15,14,ES_AUTOHSCROLL
+    LTEXT           "REL:",IDC_STATIC,45,145,16,8
+    EDITTEXT        IDC_EDT_REL,65,142,15,14,ES_AUTOHSCROLL
+    LTEXT           "RTE:",IDC_STATIC,85,145,18,8
+    EDITTEXT        IDC_EDT_RTE,105,142,15,14,ES_AUTOHSCROLL
+    LTEXT           "P1:",IDC_STATIC,125,145,12,8
+    EDITTEXT        IDC_EDT_PARAM1,140,142,25,14,ES_AUTOHSCROLL
+    LTEXT           "P2:",IDC_STATIC,170,145,12,8
+    EDITTEXT        IDC_EDT_PARAM2,185,142,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_TXT,215,142,80,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DVSOFTALARM_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 6
+        VERTGUIDE, 339
+        HORZGUIDE, 5
+        HORZGUIDE, 29
+        HORZGUIDE, 48
+        HORZGUIDE, 54
+        HORZGUIDE, 76
+        HORZGUIDE, 90
+        HORZGUIDE, 96
+        HORZGUIDE, 117
+        HORZGUIDE, 132
+        HORZGUIDE, 149
+        HORZGUIDE, 180
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DVSoftAlarm.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

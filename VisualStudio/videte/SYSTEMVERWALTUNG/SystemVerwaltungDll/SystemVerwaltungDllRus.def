@@ -1,0 +1,6 @@
+; SystemVerwaltungRus.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SystemVerwaltungRus"
+
+EXPORTS
+    ; Explicit exports can go here

@@ -1,0 +1,714 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\langdll\resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\langdll\\resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DVClient.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DVClient.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+IDR_ACCELERATOR_KEYBORD ACCELERATORS 
+BEGIN
+    VK_BACK,        IDC_BUTTON_BACKSPACE,   VIRTKEY, NOINVERT
+    VK_CAPITAL,     IDC_BUTTON_SHIFT,       VIRTKEY, NOINVERT
+    VK_SPACE,       IDC_BUTTON_SPACE,       VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PANEL DIALOG  0, 0, 331, 68
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "",IDC_DISPLAY_MENU1,6,2,154,15,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_CAMERA,160,2,41,15,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_MENU2,6,17,195,15,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_TIME,147,32,54,15,BS_FLAT
+    PUSHBUTTON      "",IDC_DISPLAY_TOOLTIP,6,32,141,15,BS_FLAT
+    PUSHBUTTON      "",IDC_BORDER1,3,0,200,49,BS_FLAT | WS_GROUP
+    CONTROL         "U",IDC_CROSS_UP,"Button",BS_OWNERDRAW | WS_TABSTOP,228,
+                    2,18,14
+    CONTROL         "L",IDC_CROSS_LEFT,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    210,16,18,14
+    CONTROL         "S",IDC_CROSS_SET,"Button",BS_OWNERDRAW | WS_TABSTOP,228,
+                    16,18,14
+    CONTROL         "R",IDC_CROSS_RIGHT,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    246,16,18,14
+    CONTROL         "D",IDC_CROSS_DOWN,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    228,30,18,14
+    CONTROL         "&1",IDC_BUTTON_NUM1,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    272,1,19,16
+    CONTROL         "&2",IDC_BUTTON_NUM2,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    292,1,19,16
+    CONTROL         "&3",IDC_BUTTON_NUM3,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    312,1,19,16
+    CONTROL         "_",IDC_BUTTON_MINIMIZE,"Button",BS_OWNERDRAW,228,50,20,
+                    18
+    CONTROL         "&4",IDC_BUTTON_NUM4,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    272,18,19,16
+    CONTROL         "&5",IDC_BUTTON_NUM5,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    292,18,19,16
+    CONTROL         "&6",IDC_BUTTON_NUM6,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    312,18,19,16
+    CONTROL         "&7",IDC_BUTTON_NUM7,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    272,35,19,16
+    CONTROL         "&8",IDC_BUTTON_NUM8,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    292,35,19,16
+    CONTROL         "&9",IDC_BUTTON_NUM9,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    312,35,19,16
+    CONTROL         "1..",IDC_BUTTON_NUMPLUS,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,292,52,19,16
+    CONTROL         "&C",IDC_BUTTON_CLEAR,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    312,52,19,16
+    CONTROL         "EJ",IDC_BUTTON_EJECT,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    3,50,20,18
+    CONTROL         "FB",IDC_BUTTON_REWIND,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,50,20,18
+    CONTROL         "SkB",IDC_BUTTON_SKIP_BACK,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,23,50,20,18
+    CONTROL         "PB",IDC_BUTTON_PLAY_BACK,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,63,50,20,18
+    CONTROL         "SiB",IDC_BUTTON_SINGLE_BACK,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,83,50,20,18
+    CONTROL         "SiF",IDC_BUTTON_SINGLE_FORWARD,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,103,50,20,18
+    CONTROL         "PF",IDC_BUTTON_PLAY,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    123,50,20,18
+    CONTROL         "SkF",IDC_BUTTON_SKIP_FORWARD,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,163,50,20,18
+    CONTROL         "FF",IDC_BUTTON_FF,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    143,50,20,18
+    CONTROL         "SH",IDC_BUTTON_SEARCH,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,183,50,20,18
+    CONTROL         "Power",IDC_BUTTON_OK,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    248,32,20,14
+    CONTROL         "&0",IDC_BUTTON_NUM0,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    272,52,19,16
+    CONTROL         "EX",IDC_BUTTON_EXPORT,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,208,50,20,18
+    CONTROL         "PR",IDC_BUTTON_PRINT,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    248,50,20,18
+END
+
+IDD_MINIMIZED DIALOG  0, 0, 40, 12
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         162,IDC_MINIMIZED,"Static",SS_BITMAP,0,0,32,20
+END
+
+IDD_KEYBOARD DIALOGEX 0, 0, 226, 78
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_TABSTOP,204,48,22,
+                    30
+    CONTROL         "&Q",IDC_BUTTON_Q,"Button",BS_OWNERDRAW | WS_TABSTOP,9,
+                    16,18,15
+    CONTROL         "&W",IDC_BUTTON_W,"Button",BS_OWNERDRAW | WS_TABSTOP,27,
+                    16,18,15
+    CONTROL         "&E",IDC_BUTTON_E,"Button",BS_OWNERDRAW | WS_TABSTOP,45,
+                    16,18,15
+    CONTROL         "&R",IDC_BUTTON_R,"Button",BS_OWNERDRAW | WS_TABSTOP,63,
+                    16,18,15
+    CONTROL         "&T",IDC_BUTTON_T,"Button",BS_OWNERDRAW | WS_TABSTOP,81,
+                    16,18,15
+    CONTROL         "&Z",IDC_BUTTON_Z,"Button",BS_OWNERDRAW | WS_TABSTOP,99,
+                    16,18,15
+    CONTROL         "&U",IDC_BUTTON_U,"Button",BS_OWNERDRAW | WS_TABSTOP,117,
+                    16,18,15
+    CONTROL         "&I",IDC_BUTTON_I,"Button",BS_OWNERDRAW | WS_TABSTOP,135,
+                    16,18,15
+    CONTROL         "&O",IDC_BUTTON_O,"Button",BS_OWNERDRAW | WS_TABSTOP,153,
+                    16,18,15
+    CONTROL         "&P",IDC_BUTTON_P,"Button",BS_OWNERDRAW | WS_TABSTOP,171,
+                    16,18,15
+    CONTROL         "&+",IDC_BUTTON_PLUS,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    208,16,18,15
+    CONTROL         "&A",IDC_BUTTON_A,"Button",BS_OWNERDRAW | WS_TABSTOP,18,
+                    32,18,15
+    CONTROL         "&S",IDC_BUTTON_S,"Button",BS_OWNERDRAW | WS_TABSTOP,36,
+                    32,18,15
+    CONTROL         "&D",IDC_BUTTON_D,"Button",BS_OWNERDRAW | WS_TABSTOP,54,
+                    32,18,15
+    CONTROL         "&F",IDC_BUTTON_F,"Button",BS_OWNERDRAW | WS_TABSTOP,72,
+                    32,18,15
+    CONTROL         "&G",IDC_BUTTON_G,"Button",BS_OWNERDRAW | WS_TABSTOP,90,
+                    32,18,15
+    CONTROL         "&H",IDC_BUTTON_H,"Button",BS_OWNERDRAW | WS_TABSTOP,108,
+                    32,18,15
+    CONTROL         "&J",IDC_BUTTON_J,"Button",BS_OWNERDRAW | WS_TABSTOP,126,
+                    32,18,15
+    CONTROL         "&K",IDC_BUTTON_K,"Button",BS_OWNERDRAW | WS_TABSTOP,144,
+                    32,18,15
+    CONTROL         "&L",IDC_BUTTON_L,"Button",BS_OWNERDRAW | WS_TABSTOP,162,
+                    32,18,15
+    CONTROL         "&Y",IDC_BUTTON_Y,"Button",BS_OWNERDRAW | WS_TABSTOP,24,
+                    48,18,15
+    CONTROL         "&X",IDC_BUTTON_X,"Button",BS_OWNERDRAW | WS_TABSTOP,42,
+                    48,18,15
+    CONTROL         "&C",IDC_BUTTON_C,"Button",BS_OWNERDRAW | WS_TABSTOP,60,
+                    48,18,15
+    CONTROL         "&V",IDC_BUTTON_V,"Button",BS_OWNERDRAW | WS_TABSTOP,78,
+                    48,18,15
+    CONTROL         "&B",IDC_BUTTON_B,"Button",BS_OWNERDRAW | WS_TABSTOP,96,
+                    48,18,15
+    CONTROL         "&N",IDC_BUTTON_N,"Button",BS_OWNERDRAW | WS_TABSTOP,114,
+                    48,18,15
+    CONTROL         "&M",IDC_BUTTON_M,"Button",BS_OWNERDRAW | WS_TABSTOP,132,
+                    48,18,15
+    CONTROL         "&1",IDC_BUTTON_1,"Button",BS_OWNERDRAW | WS_TABSTOP,0,0,
+                    18,15
+    CONTROL         "&2",IDC_BUTTON_2,"Button",BS_OWNERDRAW | WS_TABSTOP,18,
+                    0,18,15
+    CONTROL         "&3",IDC_BUTTON_3,"Button",BS_OWNERDRAW | WS_TABSTOP,36,
+                    0,18,15
+    CONTROL         "&4",IDC_BUTTON_4,"Button",BS_OWNERDRAW | WS_TABSTOP,54,
+                    0,18,15
+    CONTROL         "&5",IDC_BUTTON_5,"Button",BS_OWNERDRAW | WS_TABSTOP,72,
+                    0,18,15
+    CONTROL         "&6",IDC_BUTTON_6,"Button",BS_OWNERDRAW | WS_TABSTOP,90,
+                    0,18,15
+    CONTROL         "&7",IDC_BUTTON_7,"Button",BS_OWNERDRAW | WS_TABSTOP,108,
+                    0,18,15
+    CONTROL         "&8",IDC_BUTTON_8,"Button",BS_OWNERDRAW | WS_TABSTOP,126,
+                    0,18,15
+    CONTROL         "&9",IDC_BUTTON_9,"Button",BS_OWNERDRAW | WS_TABSTOP,144,
+                    0,18,15
+    CONTROL         "&0",IDC_BUTTON_0,"Button",BS_OWNERDRAW | WS_TABSTOP,162,
+                    0,18,15
+    CONTROL         "Back",IDC_BUTTON_BACKSPACE,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,202,0,24,15
+    CONTROL         "Shift",IDC_BUTTON_SHIFT,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,0,48,22,15
+    CONTROL         "& ",IDC_BUTTON_SPACE,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    48,63,102,15
+    CONTROL         "&-",IDC_BUTTON_MINUS,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    186,48,18,15
+    CONTROL         "&Ü",IDC_BUTTON_UE,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    189,16,18,15
+    CONTROL         "&Ö",IDC_BUTTON_OE,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    180,32,18,15
+    CONTROL         "&Ä",IDC_BUTTON_AE,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    198,32,18,15
+    CONTROL         "&;",IDC_BUTTON_SC1,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    150,48,18,15
+    CONTROL         "&:",IDC_BUTTON_SC2,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    168,48,18,15
+    CONTROL         "&^",IDC_BUTTON_SC3,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    180,0,18,15
+    CONTROL         "",IDC_BUTTON_KBLANG,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    0,63,22,15
+END
+
+IDD_RTE DIALOG  0, 0, 331, 102
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "TimeStamp",IDC_RTE_TIMESTAMP,5,2,305,14
+    CONTROL         "Display",IDC_RTE_DISPLAY,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,5,16,305,49
+    PUSHBUTTON      "Confirm",IDC_RTE_CONF_DISPLAY,5,66,305,14
+    CONTROL         "",IDC_RTE_BORDER,"Button",BS_OWNERDRAW | BS_FLAT,2,0,
+                    310,83
+    CONTROL         "Up",IDC_RTE_UP,"Button",BS_OWNERDRAW | WS_TABSTOP,314,2,
+                    16,28
+    CONTROL         "Down",IDC_RTE_DOWN,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    314,31,16,28
+    CONTROL         "Löschen",IDC_RTE_DEL,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    2,86,50,14
+    CONTROL         "Schließen",IDC_RTE_OK,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,262,86,50,14
+    CONTROL         "Quittieren",IDC_RTE_CONFIRM,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,210,86,50,14
+    CONTROL         "Alles löschen",IDC_RTE_DEL_ALL,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,54,86,50,14
+    CONTROL         "Drucken",IDC_RTE_PRINT,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,157,86,50,14
+END
+
+IDD_EXPORT DIALOGEX 0, 0, 268, 73
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_DISPLAY_EXPORT_FROM,"Button",BS_OWNERDRAW | 
+                    BS_FLAT | WS_TABSTOP,5,3,193,12
+    CONTROL         "",IDC_DISPLAY_EXPORT_TO,"Button",BS_OWNERDRAW | BS_FLAT | 
+                    WS_TABSTOP,5,15,193,12
+    CONTROL         "",IDC_BORDER_EXPORT,"Button",BS_OWNERDRAW | BS_FLAT | 
+                    WS_GROUP | WS_TABSTOP,3,2,198,28
+    CONTROL         "&1",IDC_BUTTON_NUM1,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    207,3,19,16
+    CONTROL         "&2",IDC_BUTTON_NUM2,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    227,3,19,16
+    CONTROL         "&3",IDC_BUTTON_NUM3,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    247,3,19,16
+    CONTROL         "&4",IDC_BUTTON_NUM4,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    207,20,19,16
+    CONTROL         "&5",IDC_BUTTON_NUM5,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    227,20,19,16
+    CONTROL         "&6",IDC_BUTTON_NUM6,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    247,20,19,16
+    CONTROL         "&7",IDC_BUTTON_NUM7,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    207,38,19,16
+    CONTROL         "&8",IDC_BUTTON_NUM8,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    227,38,19,16
+    CONTROL         "&9",IDC_BUTTON_NUM9,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    247,38,19,16
+    CONTROL         "&0",IDC_BUTTON_NUM0,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    207,54,19,16
+    CONTROL         "&C",IDC_BUTTON_CLEAR,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    247,54,19,16
+    CONTROL         "1",IDC_EXPORT_CAM1,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    33,33,21,9
+    CONTROL         "2",IDC_EXPORT_CAM2,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    54,33,21,9
+    CONTROL         "3",IDC_EXPORT_CAM3,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    75,33,21,9
+    CONTROL         "4",IDC_EXPORT_CAM4,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    96,33,21,9
+    CONTROL         "5",IDC_EXPORT_CAM5,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    117,33,21,9
+    CONTROL         "6",IDC_EXPORT_CAM6,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    138,33,21,9
+    CONTROL         "7",IDC_EXPORT_CAM7,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    159,33,21,9
+    CONTROL         "8",IDC_EXPORT_CAM8,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    180,33,21,9
+    CONTROL         "9",IDC_EXPORT_CAM9,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    33,45,21,9
+    CONTROL         "10",IDC_EXPORT_CAM10,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    54,45,21,9
+    CONTROL         "11",IDC_EXPORT_CAM11,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    75,45,21,9
+    CONTROL         "12",IDC_EXPORT_CAM12,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    96,45,21,9
+    CONTROL         "13",IDC_EXPORT_CAM13,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    117,45,21,9
+    CONTROL         "14",IDC_EXPORT_CAM14,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    138,45,21,9
+    CONTROL         "15",IDC_EXPORT_CAM15,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    159,45,21,9
+    CONTROL         "16",IDC_EXPORT_CAM16,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    180,45,21,9
+    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_TABSTOP,75,56,22,14
+    CONTROL         "X",IDCANCEL,"Button",BS_OWNERDRAW | WS_TABSTOP,99,56,22,
+                    14
+    PUSHBUTTON      "S",IDC_CLOCK,180,56,21,14
+    CONTROL         "Cam:",IDC_STATIC_EXPORT,"Button",BS_OWNERDRAW | BS_FLAT | 
+                    WS_TABSTOP,4,32,28,10,WS_EX_RIGHT
+END
+
+IDD_ALARMLIST_DIALOG DIALOGEX 0, 0, 150, 226
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_ALARMLIST_DISPLAY_TITLE,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_FLAT | WS_TABSTOP,2,5,119,13
+    CONTROL         "",IDC_ALARMLIST_DISPLAY_BORDER,"Button",BS_OWNERDRAW | 
+                    BS_FLAT | WS_TABSTOP,0,1,124,20,WS_EX_TRANSPARENT
+    CONTROL         "Up2",IDC_ALARMLIST_UP2,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,126,1,22,20
+    CONTROL         "Up",IDC_ALARMLIST_UP,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    126,27,22,20
+    LISTBOX         IDC_ALARMLIST_LIST,0,24,124,105,LBS_SORT | 
+                    LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | 
+                    LBS_NOINTEGRALHEIGHT | WS_TABSTOP
+    CONTROL         "1",IDC_ALARMLIST_CAM0,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,22,132,18,16
+    CONTROL         "2",IDC_ALARMLIST_CAM1,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,132,18,16
+    CONTROL         "3",IDC_ALARMLIST_CAM2,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,64,132,18,16
+    CONTROL         "4",IDC_ALARMLIST_CAM3,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,85,132,18,16
+    CONTROL         "5",IDC_ALARMLIST_CAM4,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,22,151,18,16
+    CONTROL         "6",IDC_ALARMLIST_CAM5,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,151,18,16
+    CONTROL         "7",IDC_ALARMLIST_CAM6,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,64,151,18,16
+    CONTROL         "8",IDC_ALARMLIST_CAM7,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,85,151,18,16
+    CONTROL         "9",IDC_ALARMLIST_CAM8,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,22,169,18,16
+    CONTROL         "10",IDC_ALARMLIST_CAM9,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,169,18,16
+    CONTROL         "11",IDC_ALARMLIST_CAM10,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,64,169,18,16
+    CONTROL         "12",IDC_ALARMLIST_CAM11,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,85,169,18,16
+    CONTROL         "13",IDC_ALARMLIST_CAM12,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,22,187,18,16
+    CONTROL         "14",IDC_ALARMLIST_CAM13,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,187,18,16
+    CONTROL         "15",IDC_ALARMLIST_CAM14,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,64,187,18,16
+    CONTROL         "16",IDC_ALARMLIST_CAM15,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,85,187,18,16
+    CONTROL         "A",IDC_ALARMLIST_ACTIVITY,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,22,205,18,16
+    CONTROL         "E1",IDC_ALARMLIST_EXTERN1,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,43,205,18,16
+    CONTROL         "E2",IDC_ALARMLIST_EXTERN2,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,64,205,18,16
+    CONTROL         "Down",IDC_ALARMLIST_DOWN,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,126,106,22,20
+    CONTROL         "Down2",IDC_ALARMLIST_DOWN2,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,126,130,22,20
+    CONTROL         "Image",IDC_ALARMLIST_IMAGE,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,126,155,22,20
+    CONTROL         "Drucken",IDC_ALARMLIST_PRINT,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,126,178,22,20
+    CONTROL         "OK",IDC_ALARMLIST_OK,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    126,203,22,20
+    CONTROL         "M",IDC_ALARMLIST_AUDIO,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,85,205,18,16
+END
+
+IDD_MD DIALOG  0, 0, 212, 153
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "OK",ID_MD_OK,"Button",BS_OWNERDRAW | WS_TABSTOP,185,126,
+                    24,22
+    CONTROL         "Video",IDC_MD_INLAY,"Button",BS_OWNERDRAW | BS_NOTIFY | 
+                    BS_FLAT | WS_TABSTOP,5,5,176,144
+    CONTROL         "Del",IDC_MD_DEL,"Button",BS_OWNERDRAW | WS_TABSTOP,184,
+                    5,24,22
+    CONTROL         "Invert",IDC_MD_INVERT,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,184,34,24,22
+    CONTROL         "Adaptive",IDC_MD_SHOW_ADAPTIVE,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,184,65,24,22
+END
+
+IDD_HOSTS DIALOG  0, 0, 259, 140
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "List1",IDC_HOSTS_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,1,27,231,92
+    CONTROL         "New",IDC_HOSTS_NEW,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    48,125,50,14
+    CONTROL         "Delete",IDC_HOSTS_DELETE,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,104,125,50,14
+    CONTROL         "OK",IDC_HOSTS_OK,"Button",BS_OWNERDRAW | WS_TABSTOP,160,
+                    125,50,14
+    PUSHBUTTON      "Name",IDC_HOSTS_DISPLAY_NAME,4,4,107,14,BS_NOTIFY | 
+                    BS_FLAT | WS_GROUP
+    CONTROL         "",IDC_HOSTS_FRAME_NAME,"Button",BS_OWNERDRAW | 
+                    BS_NOTIFY | BS_FLAT | WS_GROUP,1,1,113,20
+    PUSHBUTTON      "IP address",IDC_HOSTS_DISPLAY_IP,122,4,107,14,BS_NOTIFY | 
+                    BS_FLAT | WS_GROUP
+    CONTROL         "",IDC_HOSTS_FRAME_IP,"Button",BS_OWNERDRAW | BS_NOTIFY | 
+                    BS_FLAT | WS_GROUP,119,1,113,20
+    CONTROL         "Start",IDC_HOSTS_UP_START,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,236,27,22,20
+    CONTROL         "Up",IDC_HOSTS_UP,"Button",BS_OWNERDRAW | WS_TABSTOP,236,
+                    49,22,20
+    CONTROL         "Down",IDC_HOSTS_DOWN,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    236,77,22,20
+    CONTROL         "End",IDC_HOSTS_DOWN_END,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,236,99,22,20
+    CONTROL         "Tooltip",IDC_HOSTS_DISPLAY_TOOLTIP,"Button",
+                    BS_OWNERDRAW | BS_FLAT | NOT WS_VISIBLE | WS_TABSTOP,4,
+                    86,225,14
+    CONTROL         "",IDC_HOSTS_FRAME_TOOLTIP,"Button",BS_OWNERDRAW | 
+                    BS_FLAT | NOT WS_VISIBLE | WS_TABSTOP,1,83,231,20
+END
+
+IDD_INFO_DLG DIALOG  0, 0, 331, 110
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Feature",IDC_FEATURE,"Button",BS_OWNERDRAW | BS_RIGHT | 
+                    BS_TOP | BS_MULTILINE | WS_TABSTOP,6,7,116,81
+    CONTROL         "Feature Name",IDC_FEATURE_NAME,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | WS_TABSTOP,124,7,202,
+                    81
+    CONTROL         "",IDC_BORDER,"Button",BS_OWNERDRAW | BS_MULTILINE | 
+                    BS_FLAT | WS_DISABLED | WS_TABSTOP,3,3,325,86
+    DEFPUSHBUTTON   "OK",ID_INFO_OK,278,93,50,14
+END
+
+IDD_STATISTIC_DLG DIALOG  0, 0, 331, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Display",IDC_STATISTIC_DISPLAY,"Button",BS_OWNERDRAW | 
+                    BS_LEFT | BS_TOP | BS_MULTILINE | WS_TABSTOP,3,3,324,51
+    CONTROL         "",IDC_STATISTIC_BORDER,"Button",BS_OWNERDRAW | 
+                    BS_MULTILINE | BS_FLAT | WS_DISABLED | WS_TABSTOP,0,0,
+                    330,57
+    DEFPUSHBUTTON   "OK",IDC_STATISTIC_OK,279,60,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MINIMIZED, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 33
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 5
+    END
+
+    IDD_RTE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 95
+    END
+
+    IDD_EXPORT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 261
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_ALARMLIST_DIALOG, DIALOG
+    BEGIN
+        TOPMARGIN, 5
+    END
+
+    IDD_MD, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 207
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 148
+    END
+
+    IDD_HOSTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 258
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_INFO_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 328
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 107
+        HORZGUIDE, 7
+    END
+
+    IDD_STATISTIC_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_POWER               BITMAP                  "res\\power.bmp"
+IDB_RIGHT               BITMAP                  "res\\right.bmp"
+IDB_LEFT                BITMAP                  "res\\left.bmp"
+IDB_UP                  BITMAP                  "res\\up.bmp"
+IDB_DOWN                BITMAP                  "res\\down.bmp"
+IDB_ENTER               BITMAP                  "res\\enter.bmp"
+IDB_SEARCH              BITMAP                  "res\\search.bmp"
+IDB_MINIMIZED           BITMAP                  "res\\minimized.bmp"
+IDB_BACK2               BITMAP                  "res\\back2.bmp"
+IDB_FF2                 BITMAP                  "res\\ff2.bmp"
+IDB_PAUSE2              BITMAP                  "res\\pause2.bmp"
+IDB_PLAY2               BITMAP                  "res\\play2.bmp"
+IDB_REW2                BITMAP                  "res\\rew2.bmp"
+IDB_SINGLE_BACK2        BITMAP                  "res\\single_b2.bmp"
+IDB_SINGLE_FORWARD2     BITMAP                  "res\\single_f2.bmp"
+IDB_SKIP_BACK2          BITMAP                  "res\\skip_bac2.bmp"
+IDB_SKIP_FORWARD2       BITMAP                  "res\\skip_for2.bmp"
+IDB_STOP2               BITMAP                  "res\\stop2.bmp"
+IDB_EJECT2              BITMAP                  "res\\eject2.bmp"
+IDB_EXPORT              BITMAP                  "res\\export.bmp"
+IDB_PRINT               BITMAP                  "res\\print.bmp"
+IDB_POWER2              BITMAP                  "res\\power2.bmp"
+IDB_BACKSPACE           BITMAP                  "res\\backspace.bmp"
+IDB_SHIFT               BITMAP                  "res\\shift.bmp"
+IDB_ENTER2              BITMAP                  "res\\enter2.bmp"
+IDB_DEL                 BITMAP                  "res\\del.bmp"
+IDB_CONFIRM             BITMAP                  "res\\confirm.bmp"
+IDB_MINIMIZE            BITMAP                  "res\\minimize.bmp"
+IDB_MINIMIZE_AC         BITMAP                  "res\\minimize_ac.bmp"
+IDB_MINIMIZED_AC        BITMAP                  "res\\minimized_ac.bmp"
+IDB_SYMBOLS             BITMAP                  "res\\symbols.bmp"
+IDB_CLOCK               BITMAP                  "res\\clock.bmp"
+IDB_DEL_ALL             BITMAP                  "res\\del_all.bmp"
+IDB_ALARMLIST_ENTER     BITMAP                  "res\\alarmlistenter.bmp"
+IDB_ALARMLIST_UP        BITMAP                  "res\\alarmlistup.bmp"
+IDB_ALARMLIST_DOWN      BITMAP                  "res\\alarmlistdown.bmp"
+IDB_ALARMLIST_PRINT     BITMAP                  "res\\alarmlistprint.bmp"
+IDB_ALARMLIST_ACTIVITY  BITMAP                  "res\\alarmlistactivity.bmp"
+IDB_ALARMLIST_EXTERN1   BITMAP                  "res\\alarmlistextern1.bmp"
+IDB_ALARMLIST_EXTERN2   BITMAP                  "res\\alarmlistextern2.bmp"
+IDB_ALARMLIST_PLAY2     BITMAP                  "res\\alarmlistplay2.bmp"
+IDB_ALARMLIST_DOWN2     BITMAP                  "res\\alarmlistdown2.bmp"
+IDB_ALARMLIST_UP2       BITMAP                  "res\\alarmlistup2.bmp"
+IDB_INVERT              BITMAP                  "res\\invert.bmp"
+IDB_SHOW_ADAPTIVE       BITMAP                  "res\\adaptiveMask.bmp"
+IDB_NEW                 BITMAP                  "res\\new.bmp"
+IDB_DOWN_END            BITMAP                  "res\\down_end.bmp"
+IDB_UP_START            BITMAP                  "res\\up_start.bmp"
+IDB_MINIMIZE_PO         BITMAP                  "res\\minimize_po.bmp"
+IDB_MINIMIZED_PO        BITMAP                  "res\\minimized_po.bmp"
+IDB_ALARMLIST_AUDIO     BITMAP                  "res\\alarmlis.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_ARROW1              CURSOR                  "res\\arrow1.cur"
+IDC_ARROW2              CURSOR                  "res\\arrow2.cur"
+IDC_ARROW3              CURSOR                  "RES\\Arrow3.cur"
+IDC_GLASS               CURSOR                  "res\\glass.cur"
+IDC_ARROW4              CURSOR                  "res\\arrow4.cur"
+IDC_RECT                CURSOR                  "res\\rect.cur"
+IDC_PANLEFT             CURSOR                  "res\\panleft.cur"
+IDC_PANRIGHT            CURSOR                  "res\\panright.cur"
+IDC_TILTUP              CURSOR                  "res\\tiltup.cur"
+IDC_TILTDOWN            CURSOR                  "res\\tiltdown.cur"
+IDC_ZOOMIN              CURSOR                  "res\\zoomin.cur"
+IDC_ZOOMOUT             CURSOR                  "res\\zoomout.cur"
+IDC_LEFTTOP             CURSOR                  "res\\lefttop.cur"
+IDC_LEFTBOTTOM          CURSOR                  "res\\leftbot.cur"
+IDC_RIGHTBOTTOM         CURSOR                  "res\\rightbot.cur"
+IDC_RIGHTTOP            CURSOR                  "res\\righttop.cur"
+IDC_FOCUS_FAR           CURSOR                  "res\\focusf.cur"
+IDC_FOCUS_NEAR          CURSOR                  "res\\focusN.cur"
+IDC_FOCUS_AUTO          CURSOR                  "res\\focusA.cur"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DVClient.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

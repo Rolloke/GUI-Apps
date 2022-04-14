@@ -1,0 +1,61 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SystemVerwaltung", "SystemVerwaltung.vcproj", "{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D} = {8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SystemVerwaltungDll", "SystemVerwaltungDll\SystemVerwaltungDll.vcproj", "{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccProjectName0 = \u0022$/Project/SystemVerwaltung\u0022,\u0020ANTAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {CFB77A1F-EB56-49F3-ACCC-198D4B6E7C0A}
+		SccProjectUniqueName1 = SystemVerwaltung.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = SystemVerwaltungDll\\SystemVerwaltungDll.vcproj
+		SccLocalPath2 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection2 = SystemVerwaltungDll\\
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Chs = Chs
+		Debug = Debug
+		Enu = Enu
+		Ita = Ita
+		Release = Release
+		Rus = Rus
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Chs.ActiveCfg = Chs|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Debug.ActiveCfg = Debug|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Debug.Build.0 = Debug|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Enu.ActiveCfg = Enu|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Ita.ActiveCfg = Ita|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Release.ActiveCfg = Release|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Release.Build.0 = Release|Win32
+		{68AF51A0-CDC4-4712-AACB-D3DFA4B11D7A}.Rus.ActiveCfg = Rus|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Chs.ActiveCfg = Chs|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Chs.Build.0 = Chs|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Debug.ActiveCfg = Debug|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Debug.Build.0 = Debug|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Enu.ActiveCfg = Enu|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Enu.Build.0 = Enu|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Ita.ActiveCfg = Ita|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Ita.Build.0 = Ita|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Release.ActiveCfg = Release|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Release.Build.0 = Release|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Rus.ActiveCfg = Rus|Win32
+		{8AB3832D-A6F9-43FB-8A9D-D0801EE8849D}.Rus.Build.0 = Rus|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+/*
+@TOPIC{SRV_CONTROL_REQUEST_PIPE|ISDNUnit,SRV_CONTROL_REQUEST_PIPE}
+@ITEM CConnectionRecord in ExtraMemory
+@ITEM @BW{SPECIAL} id packing, in InputShm!
+@ITEM2 NORMAL @TAB "%d %d",		CIPCType, PipeId
+@ITEM2 ALARM  @TAB "%d %d %d",	CIPCType, PipeInputId, PipeOutputID
+
+CConnectiomRecord has a constructor from CIPCCmdRecord,,
+but not from CIPCExtraMemory. The data is partly stored in the dwXXX.
+
+@TOPIC{SRV_CONTROL_CONFIRM_PIPE|ISDNUnit,SRV_CONTROL_CONFIRM_PIPE}
+@ITEM dwParam1 = CIPCType
+@ITEM dwParam2 = wRequestIDOne | wAnswerIDOne
+@ITEM dwParam3 = wReqeustIDOne | wAnswerIDTwo
+@ITEM pExtraMem = CIPCFetchResult
+
+The SharedMemoryName in the FetchResult is the remotr hostName.
+
+
+@TOPIC{SRV_CONTROL_REQUEST_REMOVE_PIPE|ISDNUnit,SRV_CONTROL_REQUEST_REMOVE_PIPE}
+
+SRV_CONTROL_REQUEST_REMOVE_PIPE
+@ITEM dwCmd = SRV_CONTROL_REQ_REMOVE_PIPE
+@ITEM dwParam1 = localID
+@ITEM dwParam2 = remoteID (pipe to remove)
+
+*/

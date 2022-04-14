@@ -1,0 +1,95 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WkTranslator", "WkTranslator.vcproj", "{0ACEC451-3E49-4F20-A27A-F529D725D0D1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExtractResource", "ExtractResource\ExtractResource.vcproj", "{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InsertResource", "InsertResource\InsertResource.vcproj", "{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CheckResources", "CheckResources\CheckResources.vcproj", "{C74E1789-AFD0-461E-9500-5B645C935D1F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 5
+		SccProjectName0 = \u0022$/Project/Tools/WkTranslator\u0022,\u0020KXNAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {244D0976-5ECC-4594-9528-5BB4495BDB38}
+		SccProjectUniqueName1 = WkTranslator.vcproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = ExtractResource\\ExtractResource.vcproj
+		SccProjectName2 = \u0022$/Project/Tools/WkTranslator/ExtractResource\u0022,\u0020QKCCAAAA
+		SccLocalPath2 = ExtractResource
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = InsertResource\\InsertResource.vcproj
+		SccProjectName3 = \u0022$/Project/Tools/WkTranslator/InsertResource\u0022,\u0020ALCCAAAA
+		SccLocalPath3 = InsertResource
+		CanCheckoutShared = false
+		SccProjectUniqueName4 = CheckResources\\CheckResources.vcproj
+		SccProjectName4 = \u0022$/Project/Tools/WkTranslator/CheckResources\u0022,\u0020WFICAAAA
+		SccLocalPath4 = CheckResources
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		ChsDebug = ChsDebug
+		Debug = Debug
+		Enu = Enu
+		Release = Release
+		wktranslator = wktranslator
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.ChsDebug.ActiveCfg = ChsDebug|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.ChsDebug.Build.0 = ChsDebug|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Debug.ActiveCfg = Debug|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Debug.Build.0 = Debug|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Enu.ActiveCfg = Enu|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Enu.Build.0 = Enu|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Release.ActiveCfg = Release|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.Release.Build.0 = Release|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.wktranslator.ActiveCfg = wktranslator|Win32
+		{0ACEC451-3E49-4F20-A27A-F529D725D0D1}.wktranslator.Build.0 = wktranslator|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.ChsDebug.ActiveCfg = Debug|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.ChsDebug.Build.0 = Debug|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Debug.ActiveCfg = Debug|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Debug.Build.0 = Debug|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Enu.ActiveCfg = Release|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Enu.Build.0 = Release|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Release.ActiveCfg = Release|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.Release.Build.0 = Release|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.wktranslator.ActiveCfg = wktranslator|Win32
+		{F6FC3197-3189-4F7E-87D6-3E83A60FC8C9}.wktranslator.Build.0 = wktranslator|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.ChsDebug.ActiveCfg = Debug|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.ChsDebug.Build.0 = Debug|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Debug.ActiveCfg = Debug|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Debug.Build.0 = Debug|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Enu.ActiveCfg = Release|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Enu.Build.0 = Release|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Release.ActiveCfg = Release|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.Release.Build.0 = Release|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.wktranslator.ActiveCfg = wktranslator|Win32
+		{FB9167A9-F2A7-4A75-B55E-C227BCEB7F86}.wktranslator.Build.0 = wktranslator|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.ChsDebug.ActiveCfg = Debug|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.ChsDebug.Build.0 = Debug|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Debug.ActiveCfg = Debug|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Debug.Build.0 = Debug|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Enu.ActiveCfg = Release|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Enu.Build.0 = Release|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Release.ActiveCfg = Release|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.Release.Build.0 = Release|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.wktranslator.ActiveCfg = wktranslator|Win32
+		{C74E1789-AFD0-461E-9500-5B645C935D1F}.wktranslator.Build.0 = wktranslator|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

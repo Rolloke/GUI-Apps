@@ -1,0 +1,7 @@
+; SavicU.def : Declares the module parameters for the DLL.
+
+LIBRARY      "SavicU"
+DESCRIPTION  'Savic Unicode Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

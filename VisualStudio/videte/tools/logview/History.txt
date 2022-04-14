@@ -1,0 +1,98 @@
+History von LogView
+-------------------
+
+
+04.02.99
+	- Beginn des Projektes
+	- Laden von unverschlüsselten Logdateien möglich
+	- Auswahl der Logdateien über eine Combobox
+
+05.02.99
+	- Anhand der im Logfile vorhandenen CRLF's wird entschieden,
+	  ob die Log-Datei verschlüsselt ist oder nicht. Daher können
+	  sowohl verschlüsselte und unverschlüsselte Logdateien geladen
+	  werden.
+	- *.lgz-Dateien werden nun zuvor dekomprimiert.
+	- Beim schließen der Logdatei werden nun alle temporären Dateien
+	  gelöscht.
+
+09.02.99
+	- Sofern zu einem Logfile noch UP-Files gehören, werden diese
+	  ebenfalls geladen.
+
+15.02.99
+	- Das letzte lgz-file wurde nicht geladen.
+
+22.02.99
+	- Es wird nun nurnoch alle 5 Sekunden nach Änderungen im Logfile
+	  gescannt.
+	- Die Child-fenster werden nun in voller Größe dargestellt.
+
+25.02.99
+	- WK_VERSION fehlte.
+
+02.03.99
+	- Das unkomprimierte File wurde vor den lgz-Files geladen, es muß aber als
+	  letztes geladen werden.
+08.03.99
+	- Die Reihenfolge der *.lgz Dateien stimmte nicht. Nun werden die Dateien
+	  zunächst sortiert und erst dann geladen.
+07.04.99
+	- Es wird jetzt die gesamte ComboBox gelöscht und
+	  komplett wieder aufgebaut, das geht wesentlich schneller
+	  und laeuft auch noch auf P120.
+27.04.99
+	- zweite Instance bringt erste nach oben
+
+03.05.99
+	- Zweites Documenttemplate zum Anzeigen von Html-Files hinzugefügt.
+	- Aktuelle Selektion in der Combobox bleibt nun erhalten.
+	- Versuch das Contextmenü im HTML-View zu unterbinden gescheitert.
+
+04.05.99
+	- Contextmenü ist weg!!! CHtmlViewView::Create ruft AfxEnableControlContainer()
+	  auf! 
+07.05.99
+	- Es werden nun auch *.htm und nicht nur *.html-Dateien angezeigt.
+23.05.00
+	- Log-Dateien können jetzt aktualisiert werden (F5)
+15.06.00
+	- Bugfix: GP beim Start beseitigt
+	SetContainerInfo(IDR_xxx) darf nur verwendet werden, wenn auch wirklich das Menü
+	ineinander verschachtelt werden soll und es entsprechend Seperatoren aufweist!
+20.06.00 UF - neue DTS Version in English ohne Login und Dongle
+31.10.00 GF	SpecialReceiver Version eingebaut, umgeht das Login
+31.10.00 GF	Beim Refresh der Datei wird die Scroll-Position beibehalten
+23.11.00 GF	Bugfix: Undefiniertes Verhalten beim Login behoben (Stichwort: Byte-Allignment)
+20.03.01 GF	Combo-Boxen werden jetzt zusätzlich beim Öffnen aktualisiert
+12.10.01 TKR Bei Windows2000 gibt es beim Schließen eines Log-Files kein Abfragefenster mehr,
+			 ob gespeichert werden soll.
+28.11.02 GF	- Anpassung VS_70
+03.07.03 GF	- Unicode Version implementiert
+13.04.04 GF	- Bugfix: CLogViewView::OnDestroy() GP, wenn CRichEditView::OnDestroy() zuerst aufgerufen wird
+24.05.04 AH - Log-Dateien-ComboBox ist jetzt auch ueber F4 erreichbar.
+28.05.04 RKE- Resourcen für Logview Unicode ausgelagert. (Deu, Enu)
+29.10.04 RKE- Keyboardumschaltung ueber F11 in Logview eingebaut.
+02.03.05 RKE- Speichern der Logdateien auf ein anderes Medium eingebaut.
+			  Auswahl eines alternativen Log Pfades eingebaut.
+11.04.05 RKE- Folgende Features wurden implementiert:
+			  - Synchronisieren von mehreren geöffneten Logdateien (View/Sychronisieren)
+			    Auswahl der Zeit im Aktiven View in der Zeile in der der Cursor steht.
+			  - Auswahl der zusätzlichen gepackten Dateien beim Öffnen in einer Liste.
+			  - Weitersuchen in gepackten Dateien (F7)
+20.09.05 RKE- Folgende Features wurden implementiert bzw. verbessert.
+			  - Toolbar buttons fuer Synchronisation von Fenstern implementiert.
+			  - Tooltips für die Dialogbar.
+			  - Lesezeichen	fuer die LogViews.
+12.10.05 RKE- Folgende Features wurden implementiert bzw. verbessert.
+			  - Synchronisieren auch mit den ungeoeffneten komprimierten Dateien.
+			  - Zeitpunktsuche (sync) schneller (Bsearch)
+			  - Suchen in komprimierten im Thread (abbrechen moeglich).
+22.11.05 RKE- Russische Sprachressourcen uebersetzt.
+20.01.06 UF - Compilereinstellung tread wchar_t as build in eingeschaltet. CIPC und wkclasses geaendert.
+28.02.06 RKE- Löschen und Speichern von Protokolldateien implementiert.
+08.03.06 RKE- Logdateien koennen jetzt auch in Unicodeformat gelesen werden.
+13.03.06 RKE- Synchronisieren der Logdatei Zeiten war fehlerhaft.
+              Import von rterror.dat als Logdatei.
+14.03.06 RKE- Logdateien ohne share violation lesen. Mehrere Unicode Logdateien (+lgz) koennen gelesen werden.
+              Alle Tempdateien werden jetzt geloescht.

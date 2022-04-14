@@ -1,0 +1,136 @@
+History:
+	06.12.01 -----Statusbericht ------
+		- Folgende Kommandos zum Tashaboard implementiert:
+			DoRequestSetBrightness		-> funktionsfähig
+			OnConfirmSetBrightness		-> funktionsfähig
+			DoRequestSetContrast		-> funktionsfähig
+			OnConfirmSetContrast		-> funktionsfähig
+			DoRequestSetSaturation		-> funktionsfähig
+			OnConfirmSetSaturation		-> funktionsfähig
+			DoRequestGetBrightness		-> funktionsfähig
+			OnConfirmGetBrightness		-> funktionsfähig
+			DoRequestGetContrast		-> funktionsfähig
+			OnConfirmGetContrast		-> funktionsfähig
+			DoRequestGetSaturation		-> funktionsfähig
+			OnConfirmGetSaturation		-> funktionsfähig
+			DoRequestStartCapture		-> funktionsfähig
+			OnConfirmStartCapture		-> funktionsfähig
+			DoRequestStopCapture		-> funktionsfähig
+			OnConfirmStopCapture		-> funktionsfähig
+			DoRequestPauseCapture		-> funktionsfähig
+			OnConfirmPauseCapture		-> funktionsfähig
+			DoRequestResumeCapture		-> funktionsfähig
+			OnConfirmResumeCapture		-> funktionsfähig
+			DoRequestSetInputSource		-> Dummy
+			OnConfirmSetInputSource		-> Dummy
+			DoRequestGetInputSource		-> Dummy
+			OnConfirmGetInputSource		-> Dummy
+			DoRequestScanForCameras		-> Dummy
+			OnConfirmScanForCameras		-> Dummy
+			DoRequestSetRelayState		-> Dummy
+			OnConfirmSetRelayState		-> Dummy
+			DoRequestGetRelayState		-> Dummy
+			OnConfirmGetRelayState		-> Dummy
+			DoRequestGetAlarmState		-> Dummy
+			OnConfirmGetAlarmState		-> Dummy
+			DoRequestSetAlarmEdge		-> Dummy
+			OnConfirmSetAlarmEdge		-> Dummy
+			DoRequestGetAlarmEdge		-> Dummy
+			OnConfirmGetAlarmEdge		-> Dummy
+			OnReceiveNewCodecData		-> funktionsfähig
+			DoConfirmReceiveNewCodecData-> funktionsfähig
+
+		- CIPCInput und CIPCOutput verbindung zu DVProcess
+		  Es werden Bilder der Tasha im DTS angezeigt.
+
+
+		- Viele Details sind derzeit nicht implementiert, oder hardgecoded.
+	
+	14.12.01
+		- Die Tashafirmware gaukelt dem DTS nun ein 4 Kamerasystem vor. Es lassen sich
+		  für jede der 4 'Kameras' Helligkeit, Kontrast und Farbsättigung getrennt einstellen.
+		  Diese Einstellungen werden aber derzeit nicht in der Registrierung gesichert.
+		  Das I2C-Bus Handling des Trimedias scheint schnell genug zu sein um das Videofrontend
+		  bei jeder Umschaltung entsprechend zu konfigurieren.
+		- Die 5 stärksten Bewegungspunkte jeder Kamera werden dem DTS nun mitgeteilt und korrekt dargestellt.
+		
+	07.01.02
+		- 3 Wochen Dauertest mit I2C-Bus Zugriffen und simulierter Umschaltung perfekt bestanden!
+
+
+28.07.03
+	- Reaktivierung des Projektes zwecks Verwendung mit dem neuen Tasha Board basierent auf dem
+	  Blakfin BF535/BF533!
+	- Das Request/Confirm-Interface soll weitestgehend erhalten bleiben.
+	- An die Stelle der Messagechannels wird ein Callbacks/Shared-Memory mechanismuß treten.
+
+11.08.03
+	- Zeitdauer bis zum Ack des Blakfins: 140ys
+	- Zeitdauer bis zum Confirm des Blakfins: 380ys (Einschließlich der Ack-Zeit)
+
+11.09.03
+	- Interface zum Transfer der EPLD-Daten integriert.
+
+22.10.03
+	- Die TashUnit besitzt nun für jeden Channel einen Circularbuffer, der in der ISR
+	  mit Daten gefüllt wird. 
+	- Der 'ReadData'-Thread sucht die CircularBuffer nach Frames ab, und leitet
+	  diese dann weiter. Dadurch ist nun eine variable Framegröße möglich!
+
+27.11.03
+	- Aktueller Zwischenstand der Entwicklung:
+		- Folgende Dinge sind implementiert und funktionieren:
+			- TDM Übertragung der Bilddaten von den BF533 über die SPORTs zum BF535
+			- Demultiplexen des TDM-Datenstroms und Transfer über den PCI-Bus zur TashaUnit
+			- Die Datenpakete von den BF533er enthalten bislang die folgenden Dinge:
+				- ImageHeader
+				- Unkomprimierte YUV422 Bilddaten
+				- Differenzbild
+				- Adaptive Maske
+				- Permanente Maske.
+			- Transfer der EPLD-Daten zum Altera.
+			- Ansprechen des Alteras.
+			- Booten der BF533er über den SPI1 vom BF535
+			- Lesen und Schreiben des EEProms 
+			- Senden von Steuerkommandos an die BF533er über den SPI1
+					- Setzen/Abfragen der Helligkeit
+					- Setzen/Abfragen des Kontrastes
+					- Setzen/Abfragen der Farbsättigung
+					- Setzen/Abfragen der Parametrierung für die Bewegungserkennung.
+					- Übertragen der permanenten Maske zu den BF533er über den SPI1
+			- Darstellung des Livebildes einer/mehrerer Kameras mit 25fps/Kamera
+			- Darstellung des Differenzbildes einer/mehrerer Kameras mit 25fps/Kamera
+			- Darstellung der adaptiven und permanenten Maksken über dem Livebild einer/mehrerer Kameras.
+			- Zeichen und Löschen der permanenten Maske im Livebild und gleichzeitiger Übertragung der
+			  Änderungen über den SPI zum BF533.
+			- Speichern aller wichtigen Einstellungen in der Registry.
+			- Anbindung der TashaUnit über die CIPC an den DTS (Verkauft sich im Moment als SaVic)
+
+		- Folgende Dinge sind noch zu Implementieren, bzw. zu Ändern.
+			- Die CoreTimer-Interruptroutine durch eine Timerinterruptroutine niederer Príorität, da
+			  ansonsten die SPI-Kommunikation die SPORT-Übertragung stören kann.
+			- Weitere Fehlerbehandlungen und Meldungen (Auch von den BF533er)
+			- Der PPI muß nach einem Kameraausfall neu gestartet werden.
+			- Einbindung des MPEG4-Encoders
+			- Einbindung des Philips Frontends
+			- SlaveSelect über den Altera beim Booten der BF533
+			- SlaveSelect über den Altera bei der Kommunikation über den SPI
+			- Abfrage der Alarmeingänge über den Altera
+			- Setzten des Relais über den Altera.
+			- Enablen der Videoeingänge
+			- Schalten der analogen Videoausgänge
+			- Watchdog Funktionalität
+			- Dongle Funktionalität im EEProm
+			- Verschlüsselung der DSP-Programme.
+			- Prüfsumme der Datenpakete, die über den SPORT kommen.
+			- TashaUnit im SystemTray.
+			- Der Treiber (HACC.sys) durch Tasha.sys ersetzen. 
+			- Evtl. eigene ISR in Tash.sys implementieren. (Veringerte Latenzzeiten)
+			- Anpassung der PCI Vendor IDs im Boot-EEProm des BF535
+			- Auslagerung der CCodec-Klasse in eine seperate DLl (Tasha.dll)
+			- Schreiben eines Test und Prüfprogrammes für das Tasha-Board.
+
+
+
+		 
+

@@ -1,0 +1,104 @@
+Languages and their Abbreviations
+E.g.used for LangDll, InsertResource, ExtractResource
+
+*********************************************************************
+
+Used Language Abbreviations
+
+Primary
+Language	Sublanguage				Abbreviation	Implemented	Complete
+
+Chinese		Chinese (simplified)	chs				yes			no
+Czech		Czech					csy				no
+Dutch		Dutch (default)			nld				yes			no
+English		English (USA)			enu				yes			yes
+French		French (default)		fra				yes			no
+German		German (default)		without or deu	yes			yes
+Italian		Italian (default)		ita				yes			no
+Polish		Polish					plk				no
+Portuguese	Portuguese (default)	ptg				yes			no
+Russian		Russian (default)		rus				no			no
+Spanish		Spanish (default)		esp				yes			no
+Swedish		Swedish					sve				no
+Welsh		Welsh					wls				no
+
+*********************************************************************
+
+All Language Abbreviations
+
+Primary
+Language	Sublanguage				Abbreviation
+
+Chinese		Chinese (simplified)	chs
+Chinese		Chinese (traditional)	cht
+Czech		Czech					csy
+Danish		Danish					dan
+Dutch		Dutch (Belgian)			nlb
+Dutch		Dutch (default)			nld
+English		English (Australian)	ena
+English		English (Canadian)		enc
+English		English (New Zealand)	enz
+English		English (UK)			eng
+English		English (USA)			enu
+Finnish		Finnish					fin
+French		French (Belgian)		frb
+French		French (Canadian)		frc
+French		French (default)		fra
+French		French (Swiss)			frs
+German		German (Austrian)		dea
+German		German (default)		deu
+German		German (Swiss)			des
+Greek		Greek					ell
+Hungarian	Hungarian				hun
+Icelandic	Icelandic				isl
+Italian		Italian (default)		ita
+Italian		Italian (Swiss)			its
+Japanese	Japanese				jpn
+Korean		Korean					kor
+Norwegian	Norwegian (Bokmal)		nor
+Norwegian	Norwegian (Nynorsk)		non
+Polish		Polish					plk
+Portuguese	Portuguese (Brazilian)	ptb
+Portuguese	Portuguese (default)	ptg
+Russian		Russian (default)		rus
+Slovak		Slovak					sky
+Spanish		Spanish (default)		esp
+Spanish		Spanish (Mexican)		esm
+Spanish		Spanish (Modern)		esn
+Swedish		Swedish					sve
+Turkish		Turkish					trk
+Welsh		Welsh					wls
+
+*********************************************************************
+
+Codepage       ANSI Codepage ID  Codepage NLS Files  LCID 
+Czech                      1250  c_852.nls           0405 
+Danish                     1252  c_850.nls           0406 
+Dutch                      1252  c_850.nls           0413 
+English (Australia)        1252  c_850.nls           0C09 
+English (Britain)          1252  c_850.nls           0809 
+English (Canada)           1252  c_850.nls           1009 
+English (Ireland)          1252  c_850.nls           1809 
+English (New Zealand)      1252  c_850.nls           1409 
+English (South Africa)     1252  c_437.nls           1C09 
+English (US)               1252  c_437.nls           0409 
+Finnish                    1252  c_850.nls           040B 
+French                     1252  c_850.nls           040C 
+German                     1252  c_850.nls           0407 
+Greece                     1253  c_737.nls           0408 
+Hungarian                  1250  c_852.nls           040E 
+Italian                    1252  c_850.nls           0410 
+Norwegian                  1252  c_850.nls           0814 
+Polish                     1250  c_852.nls           0415 
+Portuguese(Portugal)       1252  c_850.nls           0816 
+Portuguese(Brazil)         1252  c_850.nls           0416 
+Russian                    1251  c_866.nls           0419 
+Spanish(Mexico)            1252  c_850.nls           080A 
+Spanish(Modern Sort)       1252  c_850.nls           0C0A 
+Spanish(Traditional Sort)  1252  c_850.nls           040A 
+Swedish                    1252  c_850.nls           041D 
+Turkey                     1254  c_857.nls           041F 
+Japanese                    932  c_932.nls           0411 
+Korean                      949  c_949.nls           0412 
+Chinese (PRC)               936  c_936.nls           0804 
+Chinese (Taiwan)            950  c_950.nls           0404 

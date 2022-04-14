@@ -1,0 +1,34 @@
+28.05.04 GF	- Bugfix: %-Zeichen als letztes Zeichen im Original wurde in CTranslateString::CheckFormatSpecifier
+					  immer mitz FALSE beantwortet, jegliche Uebersetzung wurde daher nicht akzeptiert
+04.05.04 GF	- Bugfix: Programm hängt beim Speichern, Endlosschleife, weill die CTime-Formate nicht als spezielle Formate erkannt wurden
+22.01.04 GF	- RUS (insbesondere in InsertResource) hinzugefügt
+13.01.04 GF	- Einlesen von Unicode-Glossaries gefixt, Unicode-Preambel wurde beim Zeilenweisen Einlesen mit eingelesen
+		 GF - 23.01.03 bis 13.01.04 FEHLT HIER NICHT ETWAS? Keine History trotz massiver Unicode-Umstellung!
+23.01.03 GF	- "Speichern als Glossary" speichert keine TODOs mehr
+05.12.02 GF	- Feature: Anzeige nur der TODOs, übrige Texte werden ausgeblendet
+			- Tooltips Enu Version überarbeitet
+20.11.01 UF Edit Replace Dialog hinzugefuegt
+18.05.01 GF	(Bugfix): Check-Data-Reihenfolge überarbeitet
+07.03.01 GF	Bugfix: GP bei Speichern mit Überprüfung der Übersetzung behoben
+26.01.01 GF	Weitere Sicherheitsüberprüfungen eingebaut:
+			- Führendes Sonderzeichen ">" muss auch in der Übersetzung enthalten sein
+			- Generelle Überprüfung der gesamten Übersetzung als Menübefehl implementiert
+				- Formatspecifier müssen in der Reihenfolge stimmen
+				- Führendes Sonderzeichen ">" muss bleiben
+				- Bei Überschreiten der maximalen Länge wird gewarnt
+				- TODO wird aufgerufen
+			- Generelle Überprüfung auf Fehler vor dem Speichern mit Sicherheitshinweis
+			- Überprüfung der maximalen Länge im Menü enfernt
+05.01.01 GF	Überprüfen der maximalen Länge (wie TODO) implementiert
+20.12.00 GF	Exe-Files in "Translator" umbenannt
+19.12.00 GF	- Feld 'Aktuelle Länge' im Übersetzungsdialog eingebaut
+			- Dateiname(Pfad) wird im Titel angezeigt
+18.12.00 GF	- Feld 'Länge maximal' im View eingebaut
+			- Bugfix: Texte mit Kommas wurden beim Glossary nicht korrekt erkannt
+15.12.00 GF	Maximale Länge und Kommentar eingebaut
+			- in Release nur über Accelerator Strg+Alt+E editierbar einzuschalten
+			  Anzeige über Menüpunkt (disabled)
+			- in Debug auch über den Menüpunkt direkt
+06.12.00 GF	Suchfunktion eingebaut
+06.12.00 GF	Format specifier (%s, %i, %x, ...) werden überprüft
+06.12.00 GF	Besser zu spät als gar nicht...

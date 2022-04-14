@@ -1,0 +1,256 @@
+24.04.06 UF - Bugfix Alarme mit Nr > 32 um 1 verzaehlt.
+19.04.06 UF - ACK wird jetzt bei Schneider Intercom korrekt gesendet.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+04.01.06 UF - Bugfixes PM 100 XML Protokoll. Lesebuffer zu klein, Alarmnummern falsch.
+30.12.05 UF - Bugfix SDI oeffnet nur 1. serielle Schnittstelle.
+29.12.05 UF - Implementierung Designa PM100 IP Alarm, Designa PM100 XML, Schneider Intercom.
+01.03.04 GF	- Umstellung Unicode und Anpassung VS_71
+13.10.03 GF	- Bugfix 583: NCT diva Protokoll GP 0x00415de5
+19.09.03 GF	- Debug-Optionen in Registry eingebaut
+28.08.03 GF	- NCT diva Warenwirtschaft für Release freigegeben
+27.08.03 GF	- Frei konfigurierbare Datenbankfelder implementiert
+19.08.03 GF	- Alte nicht mehr benötigte Funktionen auskommentiert
+15.07.03 GF	- Neues Protokoll implementiert (DEBUG): NCT diva Warenwirtschaft
+17.04.03
+	GF	- Neue Protokolle implementiert: TDSi Microlock und ACT
+31.01.03
+	GF	- Folgende Protokolle werden nicht länger unterstützt => rausgeschmissen
+			Rondo, Dialogbank, Depros, AVM_Customer
+14.11.02
+	GF	- Anpassung VS_70
+06.03.02
+	UF - Protokoll fuer serielle Barcode Scanner eingebaut.
+17.01.01
+	ML - Bugfix: Das SystemTray-menü klappt nun korrekt zu
+28.01.2000
+	GF	- CRecordLandauDtp getestet
+27.01.2000
+	GF	- CRecordLandauDtp is ready for test
+21.12.99
+	GF	- CRecordLandauDtp angefangen
+16.12.99
+	GF	- Bugfix: Close der WK_RS232 in die virtuellen Klassen verlagert,
+			da sonst GP in der virtuellen Funktion OnReceivedData() moeglich
+13.12.99
+	GF	- CSDIControlRecord Datum:
+			Jahrhundert in Abhaengigkeit vom gelieferten 2-stelligen Jahr
+19.10.99
+	UF  - PC 400/2000 Kontonummer 16 oder 10 stellig.
+13.10.99
+	UF  - DEPROS,CRecordDepros implementiert, nicht getestet
+
+31.08.99 >>> UpdateVersion um 16:08 <<<
+
+31.08.99 >>> UpdateVersion um 15:14 <<<
+
+31.08.99 >>> UpdateVersion um 12:42 <<<
+	GF	- CRecordDialogBank implementiert, nicht getestet
+
+30.08.99 >>> UpdateVersion um 10:38 <<<
+
+30.08.99 >>> UpdateVersion um 09:54 <<<
+	GF	- CRecordRondo hinzugefuegt
+			CRecordDepros, CRecordDialogBank angefangen
+
+27.08.99 >>> UpdateVersion um 14:19 <<<
+	GF	- CRecordAscom hinzugefuegt
+
+25.08.99 >>> UpdateVersion um 16:01 <<<
+	GF	- Bugfix RecordKebaPasador
+			Es wurden keine Alarme ausgelöst, stattdessen ERROR TimeDate wrong Len:13
+
+17.08.99 >>> UpdateVersion um 12:37 <<<
+
+17.08.99 >>> UpdateVersion um 11:42 <<<
+
+17.8.99 >>> UpdateVersion um 11:24 <<<
+
+17.8.99 >>> UpdateVersion um 11:14 <<<
+17.08.99 GF	AVM Kundentresor erweitert, jetzt werden drei Melder ausgeloest
+
+1.7.99 >>> UpdateVersion um 17:51 <<<
+01.07.99 GF	SNI DOS COM hinzugefuegt
+11.5.99 >>> UpdateVersion um 17:50 <<<
+	GF	- UpdateAlarm war falsch, begann bei 1 statt bei 0
+10.5.99 >>> UpdateVersion um 11:35 <<<
+	GF	- IBM StatusResponse geaendert auf die DTP-Werte,
+		  da der GA auf die bisherigen Werten nicht reagiert
+
+21.4.99 >>> UpdateVersion um 9:09 <<<
+
+24.2.99 >>> UpdateVersion um 9:14 <<<
+	GF	- Bugfix RuntimeError wird jetzt auch gesendet
+		- DoIndicateAlarm's jetzt mit CIPCFields im CSDIInput
+
+23.2.99 >>> UpdateVersion um 16:14 <<<
+
+23.2.99 >>> UpdateVersion um 16:08 <<<
+
+	GF	- Params entfernt
+23.2.99 >>> UpdateVersion um 15:59 <<<
+	GF	- Neues Protokoll SNI_IBM_EMU hinzugefuegt
+		- Test-Dialog entfernt
+		- Internen XModem-Test entfernt
+
+13.1.99 >>> UpdateVersion um 13:33 <<<
+	GF	- Bugfix Uebermittlund der Daten an Server erfolgt jetzt immer mit
+		  fuehrenden Nullen ausser bei GA-Kennzeichen
+
+5.1.99 >>> UpdateVersion um 13:00 <<<
+	GF	- Bugfix IBM m_bHeaderReverse war nicht initialisiert
+
+14.12.98 >>> UpdateVersion um 13:19 <<<
+	GF	- Bugfix SNI Statusanforderung wird jetzt erst am Ende des Datensatzes
+			beantwortet
+		- SNI bei GA, TAN und Betrag werden Leerzeichen getrimmt
+
+3.12.98 >>> UpdateVersion um 12:29 <<<
+	GF	- NCR_NEW hinzugefuegt, intern getestet
+		- Bugfix, Erkennung mehrerer konfigurierbarer Protokolle
+			keine Endlosschleife mehr (Unit hing sich auf)
+
+12.10.98 >>> UpdateVersion um 11:52 <<<
+	GF	- Erste Test erfolgreich
+			auch IBM
+
+2.10.98 >>> UpdateVersion um 13:09 <<<
+	GF	- Umbau auf WK_RS232 abgeschlossen, SDIControlRecord davon abgeleitet
+
+8.9.98 >>> UpdateVersion um 12:57 <<<
+	GF	- Bugfix alle SDIControlRecords
+			Beim Lesen von der RS232 von ASCII_NUL mit folgenden Zeichen
+			wurden diese komplett ignoriert - behoben
+
+1.9.98 >>> UpdateVersion um 11:15 <<<
+	GF	- Bugfix GermanParcel
+			- Trace-Ausgabe und STAT_PEAK bei Buffer-Overrun
+			- Ascii NUL abgefangen und STAT_PEAK
+		- "Unknown Event" beim ShutDown abgefangen
+
+29.7.98 >>> UpdateVersion um 11:20 <<<
+	GF	- IBM gibt die Einstellungen als Sample-String aus
+
+22.7.98 >>> UpdateVersion um 12:54 <<<
+	GF	- Bugfix: Bei ShutDown wird die Weiterbearbeitung von anderen
+		  Events abgeblockt, um irritierende Log-Traces zu vermeiden
+21.7.98 >>> UpdateVersion um 15:44 <<<
+	GF	- Bugfix: ShutDownEvent in CRS232 eingefuegt, um GP bei Reset zu vermeiden
+10.7.98 >>> UpdateVersion um 13:20 <<<
+	GF	- Bugfix: Beim Anlegen der SDIControlRecords wurden nicht alle Moeglichkeiten geprueft
+
+10.7.98 >>> UpdateVersion um 11:27 <<<
+	GF	- German Parcel getestet und OK
+		- TraceRS232Hex standardmessig FALSE
+
+8.7.98 >>> UpdateVersion um 17:12 <<<
+	GF	- Neue Protokolle GermanParcel und IBM hinzugefuegt und eingebunden,
+			aber NICHT getestet!!!
+
+8.7.98 >>> UpdateVersion um 11:54 <<<
+	GF	- KebaPasador ueberarbeitet, noch resistenter gegen fehlerhafte Daten
+
+7.7.98 >>> UpdateVersion um 19:04 <<<
+	GF	- KebaPasador ueberarbeitet, resistenter gegen fehlerhafte Daten
+
+6.7.98 >>> UpdateVersion um 13:08 <<<
+	GF	- Log-Ausgabe modifiziert
+
+6.7.98 >>> UpdateVersion um 12:31 <<<
+	GF	- Wahlmöglichkeit Pasador EC auch Track2 oder nur Track3 auswerten
+			Standart auf nur Track3 gesetzt
+		
+30.6.98 >>> UpdateVersion um 8:33 <<<
+	GF	- Auch unter NT koennen jetzt COM-Schnitstelle >9 geöffnet werden
+
+26.6.98 >>> UpdateVersion um 10:45 <<<
+	GF	- Wahlmöglichkeit Pasador EC auch Track2 oder nur Track3 auswerten
+		- Bei Auswertung von Track2: falls keine Kontonummer erkannt wurde,
+			wird auch Track3 ausgewertet
+		- Bugfix BLZ jetzt korrekt mit führenden Nullen
+
+25.6.98 >>> UpdateVersion um 15:55 <<<
+	GF	Neues Protokoll Keba Pasador hinzugefuegt und erfolgreich getestet
+
+8.6.98 >>> UpdateVersion um 11:08 <<<
+	GF	TraceiSTData, TraceRS232Hex und TraceRS232Ascii standardmaessig auf TRUE eingestellt
+	GF	Bugfix: XModem Protokoll bei fehlerhafter Uebertragung jetzt erfolgreich
+		(bereits seit Build 102 bzw. FileVersion 43)
+
+2.6.98 >>> UpdateVersion um 13:00 <<<
+	GF	NCR unterscheidet jetzt beim Startkommando zwei Alarme je nach der TAN (gleich oder neu)
+
+11.5.98 >>> UpdateVersion um 13:13 <<<
+	UF	ExceptionHandler in InitDebugger
+4.5.98 >>> UpdateVersion um 15:33 <<<
+
+4.5.98 >>> UpdateVersion um 15:32 <<<
+	GF	Bugfix ErrorTraces wegen nicht ueberschriebener virtueller Funktionen
+		Virtuelle Funktionen hinzugefuegt
+
+20.3.98 >>> UpdateVersion um 11:35 <<<
+	UF	CWK_Profile wegen NT
+
+17.2.98 >>> UpdateVersion um 12:22 <<<
+	GF	Bugfix Nach Reset wurden keine Eintraege in der Registry gefunden - behoben
+
+22.1.98 >>> UpdateVersion um 13:05 <<<
+	GF	Protokoll Keba hat sich geringfuegig geaendert
+
+13.1.98 >>> UpdateVersion um 12:27 <<<
+	GF	Bugfix Kommentar einlesen
+
+13.1.98 >>> UpdateVersion um 11:48 <<<
+	GF	Kommentar fuer ControlRecord hinzugefuegt
+
+23.12.97 >>> UpdateVersion um 10:06 <<<
+	GF	Bugfix
+
+23.12.97 >>> UpdateVersion um 9:11 <<<
+	GF	Bei Keba können zwischen XModem und ACK der Konfiguration undefinierte Zeichen kommen
+		Diese werden bis zu einer Höchstanzahl ignoriert
+
+22.12.97 >>> UpdateVersion um 13:01 <<<
+	GF	Bei Keba kommt zwischen XModem und ACK der Konfiguration ein Zeichen 0xf0
+		Dieses wird vorerst ignoriert; Klärung von Keba folgt
+
+19.12.97 >>> UpdateVersion um 17:00 <<<
+	GF	Bei XModem Transmitter wird CRC, wenn es nicht explizit gewollt ist, ignoriert
+
+18.12.97 >>> UpdateVersion um 14:08 <<<
+
+17.12.97 >>> UpdateVersion um 9:41 <<<
+	GEORG	Keba Konfiguration implementiert
+
+25.11.97 idip32deb.h --> WK_trace.h
+7.11.97 >>> UpdateVersion um 9:36 <<<
+	-	XModem komplett implementiert und getestet
+
+5.11.97 >>> UpdateVersion um 13:07 <<<
+	-	CRC-Mode bei XModem implementiert, muss aber noch getestet werden
+
+4.11.97 >>> UpdateVersion um 8:57 <<<
+	-	Unit unterstützt Keba PC2000 Datenschnittstelle
+	-	XModem-Protokoll implementiert (128- und 1024- Byte-Versionen)
+		CRC-Version wird noch nicht unterstützt, ist aber vorbereitet
+
+09/10/1997
+	-	History.txt angelegt
+	-	SM-Name:	Der SM-Name der einzelnen Inputgruppen setzt sich aus 
+					dem Standardnamen + der COM-Nr. zusammen (z.B. SDIUnitInput2)
+	-	Registry:	Einträge werden in folgender Form erwartet
+					[w+k...3.00]
+						[SDIUnit]
+							[COM1]
+								Typ = DWORD oder nicht vorhanden
+							[COM2]
+								Typ = DWORD oder nicht vorhanden
+							[COM3]
+							...
+	-	Unit unterstützt NCR, SNI, EngelMultipass
+	-	NCR Betatest mit ML Sicherheitstechnik ok
+		NCR: testweise eingeführte variable COM-Konfiguration wieder disabled
+	-	SDIUnit.cpp:	m_bTraceCommand ersetzt durch m_bTraceiSTData
+						m_bTraceData ersetzt durch m_bTraceRS232Data
+						m_bTraceDataAscii ersetzt durch m_bTraceRS232DataAscii
+						m_bEnableTestDlg nur noch über CFG-Datei setzen,
+							nicht mehr über Kommandozeile

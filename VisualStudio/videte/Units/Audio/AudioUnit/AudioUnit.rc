@@ -1,0 +1,349 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 7, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\AudioUnit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.deu\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AudioUnit.ico"
+IDR_RUNNING             ICON                    "res\\idr_main.ico"
+IDR_RECORDING           ICON                    "res\\idr_runi.ico"
+IDC_START               ICON                    "res\\START.ico"
+IDC_STOP                ICON                    "res\\idc_stop.ico"
+IDC_PAUSE               ICON                    "res\\idc_paus.ico"
+IDC_RECORDING           ICON                    "res\\idc_reco.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AUDIOUNIT_DIALOG DIALOGEX 0, 0, 330, 308
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Audio Unit"
+MENU IDR_DLG_MENU
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO1,10,19,220,178,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Sample Frequenz:",IDC_TXT_SAMP_FRQ,10,41,65,8
+    COMBOBOX        IDC_COMBO_FRQ,80,39,60,69,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "2 Bytes pro Sample",IDC_CK_2BYTES,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,151,40,79,10
+    LTEXT           "Qualität:",IDC_TXT_QUALITY,10,61,36,8
+    COMBOBOX        IDC_COMBO_QUALITY,55,59,175,146,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Länge einer Aufnahmesequenz (ms):",IDC_TXT_SEQUENCE,10,
+                    81,120,8
+    COMBOBOX        IDC_COMBO_SEQUENCE,180,79,50,69,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Schwellwert [%] :",IDC_TXT_THRESHOLD,10,101,60,8
+    EDITTEXT        IDC_EDT_THRESHOLD,75,99,40,12,ES_AUTOHSCROLL
+    CONTROL         "Slider1",IDC_SLIDER_THRESHOLD,"msctls_trackbar32",
+                    TBS_NOTICKS | WS_TABSTOP,117,98,116,15
+    LTEXT           "Halten [sec]:",IDC_TXT_HOLDTIME,10,121,50,8
+    EDITTEXT        IDC_EDT_HOLD_TIME,75,119,40,12,ES_AUTOHSCROLL
+    CONTROL         "Progress1",IDC_PRGR_REC_LEVEL,"msctls_progress32",
+                    WS_BORDER | 0x1,125,125,100,6
+    LTEXT           "Enkoder:",IDC_TXT_ENCODER,10,140,30,8
+    COMBOBOX        IDC_COMBO2,85,138,145,178,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Pegelanzeige",IDC_CK_RECORDING_LEVEL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,240,120,70,10
+    CONTROL         "List1",IDC_LIST_INPUT_PINS,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,240,17,80,35
+    CONTROL         "Stereo:",IDC_CK_STEREO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,240,60,70,10
+    CONTROL         "Linker Kanal",IDC_RD_LEFT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,240,75,70,10
+    CONTROL         "Rechter Kanal",IDC_RD_RIGHT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,240,85,70,10
+    CONTROL         "Alarm erzeugen",IDC_CK_GENERATE_ALARM,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,240,100,70,10
+    GROUPBOX        "Audio Quelle",IDC_GRP_SOURCE,5,5,320,155
+    CONTROL         "Mithören",IDC_CK_LISTEN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,180,48,10
+    PUSHBUTTON      "REC",IDC_PLAYING,60,178,16,15,BS_ICON | BS_FLAT | 
+                    WS_GROUP,WS_EX_DLGMODALFRAME
+    COMBOBOX        IDC_COMBO3,85,179,145,178,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO_AUDIO_DEVICE,235,202,85,178,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Audio Renderer",IDC_GRP_AUDIO_RENDERER,5,165,320,54
+    PUSHBUTTON      "Initialisieren",IDC_INIT_AUDIO_RECORD,10,238,70,14
+    PUSHBUTTON      "Start",IDC_START,85,238,16,15,BS_ICON
+    PUSHBUTTON      "Pause",IDC_PAUSE,102,238,16,15,BS_ICON | WS_DISABLED
+    PUSHBUTTON      "Stop",IDC_STOP,119,238,16,15,BS_ICON | WS_DISABLED
+    LTEXT           "Aufnahme:",IDC_TXT_RECORDING,168,241,35,8
+    PUSHBUTTON      "REC",IDC_RECORDING,210,238,16,15,BS_ICON | BS_FLAT | 
+                    WS_GROUP,WS_EX_DLGMODALFRAME
+    GROUPBOX        "Steuerung",IDC_GRP_CONTROL,5,225,230,35
+    DEFPUSHBUTTON   "Speichern",ID_APPLY_NOW,240,225,80,14
+    PUSHBUTTON      "Schließen",IDCANCEL,240,245,80,15
+    LISTBOX         IDC_LIST_FILTERS,10,265,215,40,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Bytes pro Sekunde (Schnitt):",IDC_TXT_BPSECOND,240,266,
+                    80,20
+    EDITTEXT        IDC_EDT_BYTES_PER_SECOND,240,286,80,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    CONTROL         "",IDC_GRP_EDGE1,"Static",SS_ETCHEDVERT,235,10,1,105
+    CONTROL         "",IDC_GRP_EDGE2,"Static",SS_ETCHEDHORZ,235,114,90,1
+    CONTROL         "Slider1",IDC_SLIDER_RECORDING_LEVEL,"msctls_trackbar32",
+                    TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_DISABLED | 
+                    WS_TABSTOP,310,53,10,60
+    LTEXT           "Samples:",IDC_TXT_SAMPLES,240,181,40,8
+    LTEXT           "0",IDC_TXT_NO_OF_SAMP,295,181,25,8
+    LTEXT           "",IDC_TXT_MEDIA_TYPE,10,202,220,8
+    CONTROL         "Progress1",IDC_PRGR_REC_LEVEL_PEAK,"msctls_progress32",
+                    WS_BORDER | 0x1,125,119,100,6
+    CONTROL         "Sample immer liefern",IDC_CK_DELIVER_ALWAYS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,240,139,80,10
+    CONTROL         "Slider1",IDC_SLIDER_VOLUME,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_DISABLED | WS_TABSTOP,235,192,85,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "context"
+    BEGIN
+        MENUITEM "In&fo...",                    ID_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Beenden",                    ID_APP_EXIT
+    END
+    POPUP "Erweitert"
+    BEGIN
+        MENUITEM "&AudioUnit...",               ID_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&Initialisieren",             IDC_INIT_AUDIO_RECORD
+        MENUITEM "&Start",                      IDC_START
+        MENUITEM "Sto&p",                       IDC_STOP
+        POPUP "&Einstellungen"
+        BEGIN
+            MENUITEM "Live &Source...",             IDC_BTN_AUDIO_DEVICE_PROPERTY
+
+            MENUITEM SEPARATOR
+            MENUITEM "Audio&quelle...",             IDC_BTN_SOURCE_PROPERTY
+            MENUITEM "Audio&wiedergabe...",         IDC_BTN_RENDERER_PROPERTY
+
+            MENUITEM "Audio&kompressor...",         IDC_BTN_ENCODER_PROPERTY
+            MENUITEM SEPARATOR
+            MENUITEM "&Lautstärke...",              ID_SETTINGS_VOLUME
+        END
+        POPUP "&Debug"
+        BEGIN
+            MENUITEM "ROT für GaphEdit &erzeugen",  ID_DBG_ADD_GRAPH_TO_ROT
+            MENUITEM "ROT e&ntfernen",              ID_DBG_REMOVE_GRAPH_TO_ROT
+
+            MENUITEM SEPARATOR
+            MENUITEM "Filter &freigeben",           ID_DBG_RELEASE_FILTERS
+        END
+    END
+END
+
+IDR_DLG_MENU MENU 
+BEGIN
+    MENUITEM "&Beenden",                    ID_APP_EXIT
+    POPUP "&Debug"
+    BEGIN
+        MENUITEM "ROT für GaphEdit &erzeugen",  ID_DBG_ADD_GRAPH_TO_ROT
+        MENUITEM "ROT e&ntfernen",              ID_DBG_REMOVE_GRAPH_TO_ROT
+        MENUITEM SEPARATOR
+        MENUITEM "Filter &freigeben",           ID_DBG_RELEASE_FILTERS
+    END
+    POPUP "&Einstellungen"
+    BEGIN
+        MENUITEM "Audio&quelle...",             IDC_BTN_SOURCE_PROPERTY
+        MENUITEM "&Kompressor...",              IDC_BTN_ENCODER_PROPERTY
+        MENUITEM "Audio&wiedergabe...",         IDC_BTN_RENDERER_PROPERTY
+        MENUITEM "Live &Source...",             IDC_BTN_AUDIO_DEVICE_PROPERTY
+
+        MENUITEM "&Lautstärke...",              ID_SETTINGS_VOLUME
+    END
+    POPUP "?"
+    BEGIN
+        MENUITEM "&Info...",                    ID_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_AUDIOUNIT_DIALOG, DIALOG
+    BEGIN
+        VERTGUIDE, 5
+        VERTGUIDE, 10
+        VERTGUIDE, 225
+        VERTGUIDE, 230
+        VERTGUIDE, 235
+        VERTGUIDE, 240
+        VERTGUIDE, 310
+        VERTGUIDE, 320
+        VERTGUIDE, 325
+        HORZGUIDE, 5
+        HORZGUIDE, 25
+        HORZGUIDE, 45
+        HORZGUIDE, 65
+        HORZGUIDE, 85
+        HORZGUIDE, 105
+        HORZGUIDE, 115
+        HORZGUIDE, 125
+        HORZGUIDE, 144
+        HORZGUIDE, 160
+        HORZGUIDE, 165
+        HORZGUIDE, 185
+        HORZGUIDE, 202
+        HORZGUIDE, 219
+        HORZGUIDE, 225
+        HORZGUIDE, 245
+        HORZGUIDE, 260
+        HORZGUIDE, 265
+        HORZGUIDE, 305
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_AUDIOUNIT_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_FRQ, 0x403, 5, 0
+0x3038, 0x3030, "\000" 
+    IDC_COMBO_FRQ, 0x403, 6, 0
+0x3131, 0x3230, 0x0035, 
+    IDC_COMBO_FRQ, 0x403, 6, 0
+0x3232, 0x3530, 0x0030, 
+    IDC_COMBO_FRQ, 0x403, 6, 0
+0x3434, 0x3031, 0x0030, 
+    IDC_COMBO_SEQUENCE, 0x403, 5, 0
+0x3236, 0x352c, "\000" 
+    IDC_COMBO_SEQUENCE, 0x403, 4, 0
+0x3231, 0x0035, 
+    IDC_COMBO_SEQUENCE, 0x403, 4, 0
+0x3532, 0x0030, 
+    IDC_COMBO_SEQUENCE, 0x403, 4, 0
+0x3035, 0x0030, 
+    IDC_COMBO_SEQUENCE, 0x403, 5, 0
+0x3031, 0x3030, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "Inf&o über AudioUnit..."
+    IDS_FT_MP3              "\nAudioUnit\nAudioUnit\nDateityp Mp3 (*.mp3)\n.mp3\nAudioUnit.File\nAudioUnitFile"
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE 7, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\AudioUnit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.deu\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,5 @@
+15.05.03 Konfigurationen für Unicode hinzugefügt, Codeänderungen für Ansi und Unicode eingefügt
+17.10.98 HD dsp konvertiert auf VC6.0
+17.11.97 BuildNotes test 2
+17.11.97 BuildNotes test 1
+17.11.97 History.txt begonnen

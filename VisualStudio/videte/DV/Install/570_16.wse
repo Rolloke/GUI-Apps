@@ -1,0 +1,88 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=VIMAX
+  Title French=Alarmcom VDR 400 Serie
+  Title German=570_16
+  Flags=00011000
+  Split=1420
+  Languages=0 0 0 0 65 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000000000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\Install\570_16\setup.exe
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=C:\Programme\Wise
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: Get System Information
+  Variable=SERPACK
+  Flags=00010010
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=5.1.2600
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=C:\Dv
+end
+item: Get System Information
+  Variable=DTS_VERSION
+  Pathname=%MAINDIR%\dvclient.exe
+  Flags=00000101
+end
+item: If/While Statement
+  Variable=DTS_VERSION
+  Value=2.0
+  Flags=00000110
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=570_16
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\DVRT\DV\Process
+  New Value=16
+  Value Name=NrOfCameras
+  Root=2
+  Data Type=3
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CMDLINE
+  Value=-auto
+  Flags=00000100
+end
+item: Execute Program
+  Pathname=%MAINDIR%\DVStarter.exe
+end
+item: End Block
+end
+item: Remark
+end

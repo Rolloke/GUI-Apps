@@ -1,0 +1,1 @@
+v:\bin\tools\MakeUpdateDisk.exe d:\install\vdr_isdn 1 473

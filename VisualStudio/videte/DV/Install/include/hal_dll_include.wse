@@ -1,0 +1,91 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=VIMAX
+  Title French=Alarmcom VDR 400 Serie
+  Title German=HAL DLL
+  Flags=00011000
+  Split=1420
+  Languages=0 0 0 0 65 0 0 0 0 0 0 0 0 0 0 0
+  Default Language=4
+  Copy Default=1
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000100000000010010110000000000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  EXE Filename=D:\project\dv\Install\hal_dll\setup.exe
+  FTP Cluster Size=20
+  Variable Name1=_WISE_
+  Variable Default1=D:\Apps\Wise
+  Variable Name2=_OEM_
+  Variable Default2=1
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Get System Information
+  Variable=WINVER
+  Flags=00000001
+end
+item: Get System Information
+  Variable=SERPACK
+  Flags=00010010
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=4.0.1381
+end
+item: If/While Statement
+  Variable=SERPACK
+  Value=4
+  Flags=00000111
+end
+item: Get System Information
+  Variable=HAL_VER
+  Pathname=%SYS%\hal.dll
+  Flags=00000101
+end
+item: If/While Statement
+  Variable=HAL_VER
+  Value=4.0.1381.4
+  Flags=00000001
+end
+item: Copy Local File
+  Source=%SYS%\hal.dll
+  Destination=%SYS%\hal.001
+  Flags=0000000001000010
+end
+item: Install File
+  Source=D:\project\dv\Install\hal.dll.softex.sp6a
+  Destination=%SYS%\hal.dll
+  Flags=0000000000000010
+end
+item: Install File
+  Source=D:\project\dv\Install\hal.dll.softex.sp5
+  Destination=%SYS%\hal.dll
+  Flags=0000000000000010
+end
+item: Edit Registry
+  Total Keys=1
+  Key=Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+  New Value=1
+  Value Name=PowerdownAfterShutdown
+  Root=2
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end

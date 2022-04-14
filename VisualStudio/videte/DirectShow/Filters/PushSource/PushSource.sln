@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PushSource", "PushSource.vcproj", "{9F85E9C6-3E08-433E-BEE3-37139D56A3AE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = PushSource.vcproj
+		SccProjectName0 = \u0022$/Project/DirectShow/Filters/PushSource\u0022,\u0020IAKCAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{9F85E9C6-3E08-433E-BEE3-37139D56A3AE}.Debug.ActiveCfg = Debug|Win32
+		{9F85E9C6-3E08-433E-BEE3-37139D56A3AE}.Debug.Build.0 = Debug|Win32
+		{9F85E9C6-3E08-433E-BEE3-37139D56A3AE}.Release.ActiveCfg = Release|Win32
+		{9F85E9C6-3E08-433E-BEE3-37139D56A3AE}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

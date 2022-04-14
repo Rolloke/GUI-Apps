@@ -1,0 +1,26 @@
+HKCR
+{
+	SmartDebug.Connect.1 = s 'Connect Class'
+	{
+		CLSID = s '{39AF036B-C89B-4462-8D63-F987278D488E}'
+	}
+	SmartDebug.Connect = s 'Connect Class'
+	{
+		CLSID = s '{39AF036B-C89B-4462-8D63-F987278D488E}'
+		CurVer = s 'SmartDebug.Connect.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove '{39AF036B-C89B-4462-8D63-F987278D488E}' = s 'Connect Class'
+		{
+			ProgID = s 'SmartDebug.Connect.1'
+			VersionIndependentProgID = s 'SmartDebug.Connect'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{137F19E2-B13B-46BF-8294-37714C05AAAF}'
+		}
+	}
+}

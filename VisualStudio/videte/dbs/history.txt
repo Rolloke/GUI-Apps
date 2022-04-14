@@ -1,0 +1,267 @@
+16.08.06 UF - Bugfix Berechung freier Plattenplatz DTS falsch.
+10.08.06 TKR- Faellt eine HDD aus, wurde im RTE vermisst, den Laufwerkstypen (Speicherlaufwerk) anzugeben.
+07.08.06 UF - Bugfix DBS als DVStorage Alarmlisten gehen wieder. Zwischenzeitlich
+              erstellte Alarmlsiten werden nicht korrekt gelesen!
+03.08.06 TKR- Kleiner Fehler in DBS behoben. Eswird nun korrekt m_dwDbdSize und nicht m_dwDbxSize im Falle
+			  von DTS .dat Dateien als Groessenangabe benutzt.
+03.08.06 TKR- Bugfix 237: Auslagerung auf CD/DVD: Die Endzeitberechnung lieferte falsche Ergebnisse, da nur
+			  die Groesse von .dbd und .dbx Dateien beruecksichtigt wurde. Es muessen aber auch .dat Dateien
+			  beruecksichtigt werden.
+01.08.06 UF - Bugfix Videodateien waren mit dbd anstelle dat auf CD/DVD DVStorage.
+31.07.06 UF - Bugfix Rechtecksuche DBS als DTS DVStorage bleibt stehen.
+04.07.06 UF - Bugfix Init read only von CD/DVD, dadurch startet der Client nicht.
+01.06.06 UF - Verdachtsbilder DTS sollten wieder gehen.
+31.05.06 UF - Bugfix DTS Format u.a. Dateiendung
+20.04.06 RKE- Bugfix 124: Removeable Drives werden jetzt aus der Liste gloescht, wenn sie nicht als
+			  Datenbanklaufwerk eingetragen sind, sie wurden vorher nur disabled.
+24.02.06 RKE- Fuer den Festplattenausfall werden jetzt alle Speicherlaufwerke und Netzwerklaufwerke mit
+			  Backupfunktion geprüft.
+			  Bei einem Fileerror im SaveThread oder im VerifyThread wird das Laufwerk nochmal
+			  zusaetzlich auf Verfuegbarkeit geprueft, bevor es als defekt bzw. nicht vorhanden erklaert
+			  wird und den Zustand "inaktiv" erhaelt.
+			  Ein als Speicherlaufwerk deklariertes Laufwerk wird als Festplattenausfall gemeldet, wenn es
+			  bei der Initialisierung (Neustart) nicht mehr vorhanden ist.
+27.02.06 RKE- Bugfix 87: Die Drive werden jetzt nicht mehr aus dem Drivearray removed, sondern
+			  in ein Stringarray mit removed drives eingefuegt und als disabled markiert.
+26.01.06 RKE- Wenn das ausgefallene Laufwerk ein Pagefile enthaelt, so wird ein Reboot erzwungen.
+			  Der Logpfad wird gelöscht, wenn das "Log"-drive nicht mehr vorhanden ist.
+24.01.06 RKE- Weiterer RuntimeError fuer Festplattenausfall implementiert.
+			  Anpassung fuer Archivgroessen bei Speicherverlust implementiert.
+			  Kann ueber Registry Key: "AutoAdaptToAvailableSpace" aktiviert werden.
+20.01.06 UF - An neue CIPC/WKClasses und wchat_t as build in angepasst.
+19.01.06 RKE- OnDeviceRemove(..) liefert Festplattenausfall: RuntimeError implementiert.
+			  Wenn Pagefile auf dieser Platte -> Reboot, wenn nicht Datenbankreset.
+29.12.05 UF - Die Dantenbankfelder werden jetzt in der Alarmliste mitgespeichert.
+20.12.05 UF - Löschen von Alarmlistensequencen wurde dem Client nicht angezeigt.
+18.12.05 UF - Bugfix Alarmliste, es wurde keine neue Sequenz angefangen und nach Start alles gelöscht.
+13.12.05 RKE-Bugfix 979: Backup.dbi enthaelt jetzt die CodePage zur Dekodierung der Namen.
+08.12.05 TKR- Bugfix 959: Ein Backup (automatisches und auf CD/DVD) wird bei folgendem Fehler
+		      nicht mehr abgebrochen: (Der Prozess kann nicht auf die Datei zugreifen,
+			  da sie von einem anderen Prozess verwendet wird). Stattdessen wird die betroffene
+			  nicht kopierbare Sequenz uebersprungen und mit der naechsten weitergemacht.
+10.11.05 UF - Bugfix Speicherung erfolgte in falsche Archive!
+19.10.05 TKR- Das automatische Backup ist nun auch fuer die letzten 24 Stunden Aufzeichnung moeglich.
+			  Es werden dann immer nur die letzten 24 Stunden auf das Backup Laufwerk kopiert.
+13.10.05 TKR- Bugfix 949: Das manuelle Löschen eines Backup Archivs geschah gleichzeitig wie
+			  das automatische Löschen des betroffenen Archivs aus einem Kontrollprozess
+			  heraus (ob die Datei physikalisch noch da sind). Dieser Fehler wurde behoben.
+30.09.05 TKR- Bugfix 942: Wenn ein Netzwerk Backup Laufwerk nicht mehr erreichbar ist, wird
+			  ein RTE gesendet. Ist das Laufwerk spaeter wieder da, wird erst nach erfolgreichem
+			  Backup eines Archives im Archiv-Baum des ididp Clients der Inhalt des Backup
+			  Laufwerks wieder angezeigt. Ein z.B. minuetiges nachschauen, ob das Netzwerk
+			  Laufwerl wieder da ist geschieht nicht, da das Netzwerk Timeout zu lange dauert.
+28.09.05 TKR- Bugfix 940: Ist das Backuplaufwerk (auotmatisches Backup) voll, wird nun ein
+			  RTE gemeldet, die nicht komplett kopierten Datei(en) gelöscht und die zusaetzlich
+			  benoetigten Datei (backup.dbi, sequence.dbf, xxxx.dbf) aktualisiert.
+27.09.05 RKE- Nicht verbundene Netzlaufwerke, die als Backuplaufwerke eingetragen sind,werden nun beim Start
+              des Datenbank automatisch verbunden, wenn sie noch nicht verbunden sind.
+              Die relevanten Netzwerkverbindungen wird im Betrieb zyklisch ueberberwacht.
+              Bei Fehlern wird ein RuntimeError gesendet.
+27.09.05 RKE- Deutsche und englische Ressourcen sind jetzt enthalten. Sie werden ueber InitVideteLocaleLanguage()
+              ausgewaehlt.
+20.09.05 TKR- Bugfix 938: Das Loeschen einer Sequenz nach einem autom. Backup wurde nicht konfirmiert.
+19.09.05 TKR- Bugfix 928: Die bei einem automatischen Backup angelegten Verzeichnisse der Art
+			  <dbb0001/arch0053> wurden nicht komplett geloescht. Das Hauptverzeichnis dbb0001
+			  verblieb auf dem Ziellaufwerk. Nun wird auch dieses, wie frueher, geloescht.
+25.07.05 UF - Protokoll der idip 3.0 entfernt.
+09.06.05 UF - Bugfix Verschieben Vorring --> Ring.
+07.06.05 UF - Das Verschieben der Vorringe erfolgt jetzt in einem anderen Thread,bisher Savethread.
+			  Das Verify erfolgt ebenfalls in einem anderen Thread, bisher Savethread.
+27.05.05 RKE- Bubblezaehler wird jetzt in der Statuszeile angezeigt.
+24.05.05 RKE- Bugfix 845: Bubbles werden jetzt mit InterlockIn/De/crement gezaehlt. Er verzaehlt sich nicht mehr.
+04.05.05 TKR- Bugfix 838: Rueckwaerts Abspielen bei Archiven mit Kameraauswahl Dropdown mit MPEG-4
+			  erzeugt keine fehlerhaften Bilder mehr.
+25.04.05 UF - Mehr traces wegen Field4 assign failed. WK_NEW eingeschaltet.
+21.04.05 UF - Bugfix Groeßenberechnung der Datei bei GOP's.
+18.04.05 UF - Der FPS Counter zeigt jetzt wieder alle FPS trotz GOP.
+13.04.05 UF - Die Datenbank speichert jetzt GOPs.
+08.04.05 UF - Sortierung der Bilder aus.
+08.04.05 UF - Compileroptimierungen auf P4 und Windows. GetAtFast bei allen Aufrufen.
+17.03.05 UF - Die Bilder werden jetzt vor dem Speichern nach Archiven sortiert.
+08.03.05 UF - Bugfix 787 keine Daten bei Readonly Version.
+07.02.05 UF - Schreiboptimierungen von codebase eingeschaltet.
+25.01.05 UF - Bugfix Deadlock beim Uebergang Vorring Alarm, wegen der Anzeige des
+	          Füllstandes der Alarmarchive.
+25.01.05 UF - Dbf Dateien werden jetzt nach einem Stromausfall besser repariert.
+21.01.05 UF - Bugfix DB Felder wurden vor dem Laden nicht gelöscht.
+			  Suchergebnisse werden nur noch mit Schalter getraced.
+			  Bugfix Reset bei Fehler bei Anlegen einer Datei.
+13.01.05 RKE- Bugfix 652, 688 Die Funktion SetCameraName war fehlerhaft.
+26.11.04 RKE- Bugfix 627: Die Cameramap fuer ein Archiv wird jetzt richtig ausgelesen und gespeichert. Beim Loeschen
+              eines Archivs wird jetzt auch die Cameramap geloescht.
+29.10.04 RKE- CodePage fuer die Unicodeconvertierung wird jetzt gesetzt. Beim Umschalten der Sprache zur Laufzeit
+              wird sie auch angepasst.
+              Convertierung der Datenbanktexte von Unicode in Ansi und umgekehrt wurde an einigen Stellen an den
+              Schnittstellen zu Ansi Datenbankfeldern ergaenzt.
+29.10.04 TKR- Rechtecksuche bleibt nicht mehr unvermittelt stehen.
+			  Suche mit Suchdialog ist nun auch mehrfach nacheinander innerhalb der
+			  selben Sequenz möglich.
+21.10.04 UF - Rechtecksuche idip wie DTS einfach mittels playbutton
+28.09.04 TKR- Das Rücksetzen von bIFrame = FALSE bei gemischten Archiven (Audio/Video)
+			  liefert beim Rückwärts Abspielen Geisterbilder. Deshalb auskommentiert.
+06.09.04 UF - Bugfix Kameraname doppelt in der Wiedergabeansicht idip.
+10.08.04 UF - Automatisch angelegte Archive sind jetzt 2% vom freien eingerichteten Platz, max 150MB min 15MB.
+06.08.04 UF - Bugfixing Sequence map, Start der Datenbank ist jetzt wieder schnell.
+25.06.04 UF - Bei jeder neuen Sequence wird dem Client jetzt die Info gegeben,
+			  wieviel Bilder in der vorigen Sequence sind.
+10.06.04 UF - Bugfix Nr. 318 Differenzbilder Referenzen werden beim Schneiden jetzt korrigiert.
+09.06.04 UF - Bugfix CD Brennen und wahrscheinlich anderes, UNICODE Umstellung fehlerhaft
+26.05.04 GF	- CQuery::CQuery Pointer pArchiv wurde nicht auf Gueltigkeit ueberprueft
+25.05.04 UF - Bugfix dynamische datenbankfelder zurueck zu ANSII, bis die Unicodesuche geht.
+18.05.04 UF - Alarmlisten vorbereitet.
+11.05.04 GF	- Bugfix 196: Archivnamen werden auf einem ANSI-System (4.x.x.xxx) nicht korrekt angezeigt
+05.05.04 UF - Bugfix CD-Start idipclient
+29.04.04 UF - Bugfix Schreiben und Lesen von Unicode Datenbankfeldern.
+17.03.04 UF - Bugfix GP beim Reset, Verify jetzt im Speicherthread
+16.03.04 UF - Bugfix Nr. 893 Werden dbf Dateien in einem alten Format mit der neuen Software
+			  beim Backup geschnitten, so koennen diese anschließend nicht mehr gelesen werden.
+16.03.04 UF - Bugfix Lesesoftware Zielpfad stimmt nicht.
+15.03.04 UF - Einbau Wechselfestplatten.
+08.03.04 GF	- Umstellung auf Unicode und VS_71 vorbereitet, C4.Lib Anpassung fehlt noch
+24.02.04 UF - Bugfix Referenzen Video / Audio werden beim Start gelesen.
+17.02.04 UF - Die FF und RW Referenzen wegen Video/Audio gemischt eingebaut.
+12.02.04 GF	- Die (nicht dokumentierte) Änderung vom 05.11.2003
+					OnRequestDataBaseConnection(const CConnectionRecord &c)
+					if ((c.GetOptions() & SCO_IS_DV) == 0)
+			  lässt keinen DTS-Receiver mehr an den lokalen DBS
+			  Vorerst auskommentiert
+10.02.04 RKE- ConfirmRecord liefert bei gemischten Archiven nur Audio oder nur Video auf Anfrage.
+22.01.04 TKR- Bugfix Nr. 786 DBS im RO-Modus löscht den von DBS angelegten Registryeintrag
+						 "DVRT" wieder, wenn zu Beginn keiner da war.
+21.01.04 UF - Bugfix Nr. 457 Beim Löschen eines Backuparchives wurde gleich das ganze Backup gelöscht.
+07.01.04 UF - Audiodaten werden jetzt auch fuer eine Station abgespeichert.
+06.01.04 TKR- Bugfix Nr. 695 AudioUnit (wie auch Recherche) wird im ReadOnly Modus von DBS
+			  gestartet. Beendet wird DBS und AudioUnit im RO-Modus von Recherche.
+			  Das Logfile "AudioUnitRO" wird auch von DBS wieder gelöscht.
+16.12.03 UF - Bugfix Nr. 683 beim Start wurde die Sequence.dbf Datei nicht mehr gelesen.
+15.12.03 UF - Bugfix Speicherung Audiodaten.
+11.12.03 UF - Verifythread eingebaut, es wird jetzt nach dem Start und einmal am Tag
+			  um 0:00 Uhr die gesamte Datenbank ueberprueft.
+10.11.03 UF - Die Datenbank speichert jetzt auch Audiodaten.
+06.11.03 UF - Bugfix Datenbankfelder
+13.10.03 GF	- Bugfix 584: Werden in der SV neue Datenbankfelder angelegt, erscheinen diese nach einer Initialisierung
+						  nicht in Recherche/Suchmaske
+27.08.03 GF	- Frei definierbare Datenbankfelder implementiert
+29.07.03 UF - Maximale Gueltigkeitsdauer, bzw. Speicherdauer von Daten implementiert.
+17.06.03 UF - Bugfix Absturz beim zu langen Scannen, aber erst ab Build 588
+10.06.03 GF	- Bugfix 471: CArchivs::m_pLastGetArchive wurde beim Löschen des betreffenden Archivs nicht wieder NULL gesetzt => GP
+06.06.03 UF - Beim Schliessen der Dateien alle 5 min wurden auch die Kameramaps gespeichert, das tut ja nicht not.
+26.05.03 UF - Wenn der Speicherthread fuer ein Bild laenger als 20s braucht wird der Datenbankserver
+			  jetzt beendet.
+16.05.03 UF - Flush in schliessen alle 5 minuten geaendert
+16.04.03 UF - Bugfix automatisches Anlegen von Archiven, wenn in der Registry irgendwie alte ID's stehen.
+07.04.03 UF - Bugfix Es wurde keine neue Sequence beim Uerbergang von Voralarm nach Ring angelegt.
+20.03.03 UF - Bugfix Nr. 379 Beim automatischen anlegen von Archiven entstehen sehr viele davon.
+17.03.03 UF - Bugfix Nr. 345 Suche nach Datum Uhrzeit ist nicht optimal
+13.03.03 GF	- Bugfix 337: Backup-CDs wurden nicht immer korrekt erkannt
+28.02.03 UF - Nr. 322 Deadlock beim automatischen Anlegen von Archiven
+26.02.03 UF - Bugfix Suche auf Differenzbildern
+05.02.03 UF - Bugfix Nr 314, Codebase Bibliothek auf Singlethread umgestellt.
+03.02.03 RKE- sscanf(..): Variablen, die kleiner als 4 Byte sind, werden durch 4-Byte große Argumente ersetzt
+			  und auf den gewuenschten Datentyp gecastet. Folgende Stellen waren betroffen:
+			  - CArchivs::ScanDatabaseDrive()
+			  - CArchivs::ScanBackupDrive()
+			  - CArchivs::ScanBackupDirectory()
+			  - CConverter::Convert()
+			  - CConverter::ConvertArchivDir()
+			  - CQuery::CQuery()
+			  - CSequence::Scan()
+			  - CSequence::ScanDbf()
+			  - CSequence::GetRecord()
+			  - CSequence::GetIFrameRecordNr()
+			  - CVDBSequenceMap::Load()
+			  -
+15.01.03 UF - Die idip Datenbank kann jetzt theoretisch auch unkomprimierte Savic Bilder speichern.
+03.10.02 UF - Bugfix die Kameranamen wurden auf dem Empfaenger nicht richtig gespeichert.
+09.09.02 UF - Bugfix Die Kameranamen wurden beim Backup nicht richtig mitgespeichert.
+03.09.02 UF - Bugfix Die Kameranamen wurden beim Beenden nicht richtig gespeichert und
+			  Dateien wurden nicht geschlossen.
+02.09.02 UF - Bugfix Nr 170 Keine Bank Datenfelder, wenn das passende Modul im Dongle nicht freigeschaltet ist.
+02.09.02 UF - Bugfix Nr 240 Suche nach Zeit korrigiert.
+28.08.02 UF - Bugfix Nr 221 und 223 Datenzugriffe beim Backup und Vorring Alarm
+23.08.02 UF - Bugfix Nr. 174 Kameranamen wurden beim Backup nicht mitgesichert
+13.08.02 UF - Bugfix GP beim Lesen von alten Backupdateien
+23.07.02 UF - Die idip Datenbank Speicherung optimiert. Kein GP mehr beim Reset.
+16.07.02 UF - Die idip Datenbank speichert jetzt nur noch in einem Thread.
+08.07.02 UF - Die idip Datenbank unterstuetzt jetzt auch Groessenberechnung fuer das Backup.
+			  und das Schneiden von Sequencen fuer das Backup.
+08.07.02 UF - Die idip Datenbank unterstuetzt jetzt auch die Abfrage der Daten ohne Bilder.
+04.02.02 UF - Die idip Datenbank schreibt die Bilddaten jetzt auch nicht fragmentiert.
+07.02.02 UF - Zweiter Bugfix Vorring-Ring
+31.01.02 UF - Bugfix Vorring-Ring, wenn der Ring voll ist, so wurde kein Platz fuer
+			  die Bilder aus dem Vorring geschaffen.
+30.11.01 UF - Bugfix: Beim Start und bei fehlenden DBD Dateien GP in Datenbank
+17.10.01 UF - Es werden jetzt auch Millisekunden mit abgespeichert.
+17.10.01 UF - Bugfix: Es wurde nicht zu einem I Frame gesprungen, wenn in Recherche
+			  mit dem Slider navigiert wird.
+15.03.01 UF - Bugfix Datenbankreset
+15.03.01 UF - Der Datenbankstart kann jetzt nicht mehr vom Launcher
+			  unterbrochen werden. Das Scannen erfolg in einem anderen
+			  Thread.
+26.02.01 - UD Bugfix automatisches Anlegen von Archiven
+22.02.01 - Die idip Datenbank legt jetzt automatisch Such, Normal
+		   und Alarmarchive für Gegenstationen an. Das gilt auch und
+		   vor allem für den DTS Empfänger.
+14.02.01 - Bugfix Division durch 0 beim Reparieren von dbf Dateien
+17.01.01 - UF Datenbankfelder für MD_X2 bis 5 angelegt.
+17.01.01 - ML Bugfix: Das SystemTray-menü klappt nun korrekt zu
+08.01.01 - ML DBS icon erscheint nun im Systemtray
+04.01.01 TKR- Suche über mehrere Daten (von einem Datum zu einem anderen) einschließlich
+			  Zeitpunktangabe möglich.
+16.11.00 GF	- Connect für SpecialReceiver erlaubt
+31.05.00 UF - Bugfix Backup Fehlermeldung
+24.03.00 UF - Vorringe sind jetzt auch für Ringarchive
+			  möglich.
+24.08.99 UF offene Dateien werden nach Systemstart überprüft
+			Bugfix Emergency Reset
+05.08.99 UF Bugfix - wenn bei der Konvertierung
+			eine Datei kein Bild enthält, dann wird diese gelöscht.
+2.8.99 >>> UpdateVersion um 9:55 <<<
+02.08.99 UF - neue Fehlermeldungen bei der Konvertierung
+			- Optimierung bei der Konvertierung ausgeschaltet
+1.7.99 >>> UpdateVersion um 13:50 <<<
+01.07.99 UF - mit jedem neuen Tag werden auch neue Sequencen angefangen.
+01.06.99 UF Bugfixes
+			- 60 Prozent Meldung korrigiert
+			- Such GP gefunden
+18.05.99 UF Bugfixes
+			- Suche indizieren der Resultate
+			- Archive, die Suchen sind auch als solche
+			  gekennzeichnet
+06.05.99 UF Bugfix Fenster war in shell oberfläche zu sehen
+03.05.99 UF Bugfix Konvertierung von 3.11 auf 4.0
+21.04.99 UF warnings beseitigt
+29.03.99 UF normal Archiv und Alarmarchiv jetzt auch für lokale
+			Station
+2.3.99 >>> UpdateVersion um 10:51 <<<
+	UF  Es werden nur noch erlaubte Archive
+	UF	Fuellstand Alarmarchive korrigiert
+22.2.99 >>> UpdateVersion um 18:34 <<<
+22.02.99
+	UF	Suche jetzt mit response
+		Suche von 3.x Clients moeglich
+15.02.99
+	UF Backup angefangen, eigener Thread
+	   und kopieren der Sequenzen
+29.12.98 >>> UpdateVersion um 12:38 <<<
+12.11.98
+	UF feste Laufwerkszuordnung
+	   Quotas auf den Laufwerken
+	UF neue Konvertierung , nur dbf
+05.11.98
+	UF Clustergroessen wieder beruecksichtigt, FAT, NTFS
+	UF Vorring und Alarmmechanismus
+04.11.98
+	UF 3.x -> 4.0 Konverter mit COldPictData
+26.10.98
+	UF Index Dateien mdx fuer Zeit und Datum
+19.10.98
+	UF Anzeige aller aktuellen Informationen
+	UF Anzeige von Bildern in Recherche nach altem Protokoll
+07.10.98
+	UF Speichern von Bildern nach altem Protokoll vom Server
+06.10.98
+	UF Thread Modell mit fester Zuordnung Archiv - Thread
+	UF Dateiformat Codebase mit Memofeldern
+04.10.98
+	UF Beginn neuer Datenbankserver

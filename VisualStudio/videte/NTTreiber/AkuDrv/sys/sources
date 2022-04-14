@@ -1,0 +1,9 @@
+# The sources for the Generic Port I/O device driver:
+
+TARGETNAME=akudrv
+TARGETPATH=$(BASEDIR)\lib
+TARGETTYPE=DRIVER
+
+INCLUDES=..\
+
+SOURCES=akudrv.c akudrv.rc

@@ -1,0 +1,17 @@
+Debug Anzeige von Arrays im Visual Studio:
+
+Die Werte eines Arrays werden im Debugfenster nur dann angezeigt, wenn man das Array mit einer festen Größe anlegt, z.B.:
+double DoubleArray[100];
+
+Wird das Array alloziert:
+double *DoubleArray = new double[100];
+So zeigt der Debugger nur die Adresse und den ersten Wert des Arrays an.
+
+Um auch diese Werte zu sehen, habe ich ein Plugin geschrieben:
+Es zeigt den Inhalt eines allocierten Arrays in einem definierbaren Bereich (z.B.: 0 - 100) an.
+Die Werte werden in eine Liste ausgegeben und können graphisch dargestellt oder als CSV in die Zwischenablage kopiert werden.
+Der Graph hat zwar nur eine rudimentäre Achsenbeschriftung, aber die Kurvenwerte können durch einen Mausklick auf die Kurve im einem Editfenster (Value n : 1.1234) angezeigt werden.
+
+Das Plugin habe ich unter O:\SoftwareDesignGroup\Entwicklungstools\SmartDebug\ abgelegt.
+
+Die Anzahl der Werte sollte nicht zu groß gewählt werden. Bei 10000 Werten wartet man schon ein paar Sekunden. Das scheint aber ein generelles Problem des VisualStudio zu sein, denn wenn man ein Array mit fester Größe mit 10000 Werten anlegt und im Debuggerfenster anzeigt, dauert es auch ein bisschen länger.

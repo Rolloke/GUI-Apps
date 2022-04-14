@@ -1,0 +1,49 @@
+History für CloneNT
+-------------------
+
+29.01.02
+	- CloneNT erzeugt aus einer laufenden WindowsNT4 (SP6) Version eine zweite
+	  kleine lauffähige WinNT4 Version (<14MByte) und trägt diese in die Boot.ini ein.
+	  Bei einem Bluescreen des System kann nun das Minimal WinNT4 gebootet werden.
+	  Dieses führt nun automatisch die Reparatur des DTS-Systems durch, indem die defekte
+	  Registrierung durch eine aktuelle, mit RDisk.exe erzeugte Registrierung ersetzt wird.
+	  Danach fährt das Minimal WinNT4 wieder herunter und das DTS-System sollte wieder
+	  funktionsfähig sein.
+	
+
+30.01.02
+	- CloneNT wird nun vom Setup aus gestartet.
+	- rdisk wird nicht mehr aus CloneNT heraus gestartet, sondern aus dem Setup programm. 
+
+04.02.02
+	- Dependency auf msvcp60.dll beseitigt
+
+05.02.02
+	- 'BSE Repair mode' in 'Recovery mode' geändert
+
+06.01.01
+	- Folgende Dateien aus der Fileliste entfernt.
+		- ntdos.sys
+		- afd.sys
+		- diskperf.sys
+		- i8042prt.sys <- Wird für Maus und Tastatur benötigt
+		- netdtect.sys
+		- null.sys
+		- ftdisk.sys
+		- fastfat.sys <- Wird für das Floppylaufwerk benötigt
+		- floppy.sys  <- Wird für das Floppylaufwerk benötigt
+		- sfloppy.sys
+		- ksecdd.sys
+		- atdisk.sys
+
+08.02.02
+	- Alle Default Bootmenüeinträge werden zunächst gelöscht, d.h. bei unseren Systemen
+	  ist das "Windows NT Workstation, Version 4.0" und
+	   		  "Windows NT Workstation, Version 4.0 [VGA-Modus]"
+	  dann durch zwei neue Bootmenü Einträge in die Boot.ini ersetzt.
+	  Dies sind: "Video mode" (Default Eintrag) und
+				 "Recovery mode" (BSE Reperatur)	  
+
+08.05.02
+	- Der Kommandozeilenparameter -rdisk bewirkt, daß nach dem klonen 'rdisk.exe /S-' gestartet wird.
+

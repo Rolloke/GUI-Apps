@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "CMon", "CMon.vjp", "{2A1D6760-27FF-11D5-86EB-004005A26A3B}"
+	ProjectSection(SourceCodeControl) = preProject
+		SccProjectName = \u0022$/Project/Java/CMon\u0022,\u0020ZAECAAAA
+		SccAuxPath = \\\\Merlin\\VSS\\VSS,
+		SccLocalPath = .
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {2A1D6760-27FF-11D5-86EB-004005A26A3B}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {2A1D6760-27FF-11D5-86EB-004005A26A3B}
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccProjectName = \u0022$/Project/Java/CMon\u0022,\u0020ZAECAAAA
+		SccAuxPath = \\\\Merlin\\VSS\\VSS,
+		SccLocalPath = .
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

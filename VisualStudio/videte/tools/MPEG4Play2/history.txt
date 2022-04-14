@@ -1,0 +1,4 @@
+30.04.04 AH - MPEG4Play2 angelegt.
+
+27.09.05 ML - An die aktuelle VImage.dll angepasst.
+			  Fileextension von mp4 auf m4v (raw Mpeg Video) geändert.
