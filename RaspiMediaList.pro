@@ -31,3 +31,4 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
+win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
