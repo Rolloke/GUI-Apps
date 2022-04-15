@@ -801,6 +801,26 @@ File content opened with double click</string>
         </item>
        </widget>
       </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tabulator width</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinTabulator">
+        <property name="toolTip">
+         <string>Tabulator width</string>
+        </property>
+        <property name="minimum">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <number>150</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>

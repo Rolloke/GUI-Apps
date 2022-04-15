@@ -105,7 +105,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->reset();
     connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
-
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::ResizeToContents);
@@ -131,34 +130,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupFilter);
     {
-        QStringList keys = QStyleFactory::keys();
-        ui->comboAppStyle->addItems(keys);
-        QString style = QApplication::style()->objectName();
-        auto index = std::find_if(keys.begin(), keys.end(), [style](const QString& key) { return key.compare(style, Qt::CaseInsensitive) == 0;} );
-        if (index != keys.end())
-        {
-            ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
-        }
-
-        LOAD_STR(fSettings, mStylePath, toString);
-        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
-        LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
-        ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
-        LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
-        LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckHiddenFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSymbolicLinks, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
-        LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
-        LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
-        LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
-        LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
-
-        setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
-        on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
-        on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
     }
     fSettings.endGroup();
 
@@ -281,6 +257,36 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
         LOAD_STR(fSettings, mExternalIconFiles, toString);
 
+        QStringList keys = QStyleFactory::keys();
+        ui->comboAppStyle->addItems(keys);
+        QString style = QApplication::style()->objectName();
+        auto index = std::find_if(keys.begin(), keys.end(), [style](const QString& key) { return key.compare(style, Qt::CaseInsensitive) == 0;} );
+        if (index != keys.end())
+        {
+            ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
+        }
+
+        LOAD_STR(fSettings, mStylePath, toString);
+        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
+        LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
+        ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
+        LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
+
+        setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
+        on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
+        on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
+
+        auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
+        LOAD_STR(fSettings, fTextTabStopWidth, toInt);
+        ui->textBrowser->setTabStopWidth(fTextTabStopWidth);
+        ui->spinTabulator->setValue(fTextTabStopWidth);
+
+
 #ifdef DOCKED_VIEWS
         QByteArray fWindowGeometry;
         LOAD_STR(fSettings, fWindowGeometry, toByteArray);
@@ -364,20 +370,11 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     {
-        STORE_STR(fSettings, mStylePath);
-        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
-        STORE_STR(fSettings, fUseSourceTreeCheckboxes);
-        STORE_PTR(fSettings, ui->ckExperimental, isChecked);
-        STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckHiddenFiles, isChecked);
         STORE_PTR(fSettings, ui->ckSymbolicLinks, isChecked);
         STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
         STORE_PTR(fSettings, ui->ckFiles, isChecked);
         STORE_PTR(fSettings, ui->ckDirectories, isChecked);
-        STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
-        STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
-        STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
-        STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
     }
     fSettings.endGroup();
 
@@ -414,6 +411,18 @@ MainWindow::~MainWindow()
         auto fWindowState = saveState();
         STORE_STR(fSettings, fWindowState);
         STORE_STR(fSettings, mDockedWidgetMinMaxButtons);
+
+        STORE_STR(fSettings, mStylePath);
+        bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
+        STORE_STR(fSettings, fUseSourceTreeCheckboxes);
+        STORE_PTR(fSettings, ui->ckExperimental, isChecked);
+        STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
+        STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
+        STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
+        auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
+        STORE_STR(fSettings, fTextTabStopWidth);
     }
     fSettings.endGroup();
 
@@ -1902,4 +1911,8 @@ void MainWindow::on_ckTypeConverter_stateChanged(int arg1)
     showDockedWidget(mBinaryValuesView.data(), !arg1);
 }
 
+void MainWindow::on_spinTabulator_valueChanged(int width)
+{
+    ui->textBrowser->setTabStopWidth(width);
+}
 
