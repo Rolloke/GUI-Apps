@@ -640,9 +640,9 @@ void MainWindow::createDockWindows()
     }
     addToolBar(Qt::TopToolBarArea, pTB);
 
-    pTB = new QToolBar(tr("File Flags"));
+    pTB = new QToolBar(tr("Settings"));
     pTB->setObjectName("fileflagtoolbar");
-    while ((layoutItem = ui->horizontalLayoutFlags->takeAt(0)) != 0)
+    while ((layoutItem = ui->verticalLayout_Settings->takeAt(0)) != 0)
     {
         pTB->addWidget(layoutItem->widget());
         delete layoutItem;
@@ -663,7 +663,7 @@ void MainWindow::createDockWindows()
     delete ui->topLayout;
     ui->topLayout = nullptr;
     ui->horizontalLayout = nullptr;
-    ui->horizontalLayoutFlags = nullptr;
+    ui->verticalLayout_Settings = nullptr;
     ui->horizontalLayoutFind = nullptr;
     ui->horizontalLayoutForTextBrowserHead = nullptr;
     ui->horizontalLayoutForTreeViewHead = nullptr;
