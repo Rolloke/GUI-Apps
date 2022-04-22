@@ -589,237 +589,251 @@ File content opened with double click</string>
         </item>
        </layout>
       </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayoutFlags">
-      <property name="topMargin">
-       <number>2</number>
-      </property>
-      <property name="bottomMargin">
-       <number>2</number>
-      </property>
       <item>
-       <widget class="QLabel" name="labelFileFlags">
-        <property name="text">
-         <string>File Flags:</string>
+       <layout class="QVBoxLayout" name="verticalLayout_Settings">
+        <property name="topMargin">
+         <number>2</number>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckSystemFiles">
-        <property name="toolTip">
-         <string>Show system files in git folder</string>
-        </property>
-        <property name="text">
-         <string>System Files</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckHiddenFiles">
-        <property name="minimumSize">
-         <size>
-          <width>160</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Show hidden files in git folder</string>
-        </property>
-        <property name="text">
-         <string>Hidden Files</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckSymbolicLinks">
-        <property name="toolTip">
-         <string>Show symbolic links in git folder</string>
-        </property>
-        <property name="text">
-         <string>Symbolic Links</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckDirectories">
-        <property name="toolTip">
-         <string>Show folders in git folder</string>
-        </property>
-        <property name="text">
-         <string>Directories</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckFiles">
-        <property name="toolTip">
-         <string>Show files in git folder</string>
-        </property>
-        <property name="text">
-         <string>Files</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelMisc">
-        <property name="text">
-         <string>Miscelaneous:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckRenderGraphicFile">
-        <property name="toolTip">
-         <string>Render graphics or HTML file in Graphics View</string>
-        </property>
-        <property name="text">
-         <string>Render File</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckFastFileSearch">
-        <property name="toolTip">
-         <string>Use fast file search function (fsrc)</string>
-        </property>
-        <property name="text">
-         <string>Fast file search</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckExperimental">
-        <property name="toolTip">
-         <string>Experimental functions</string>
-        </property>
-        <property name="text">
-         <string>Experimental</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckShowLineNumbers">
-        <property name="toolTip">
-         <string>Shows line numbers in text view</string>
-        </property>
-        <property name="text">
-         <string>Show line numbers</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="ckTypeConverter">
-        <property name="toolTip">
-         <string>Display Type Converter</string>
-        </property>
-        <property name="text">
-         <string>Type Converter</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboUserStyle">
-        <property name="toolTip">
-         <string>Select User defines Styles for App</string>
+        <property name="bottomMargin">
+         <number>2</number>
         </property>
         <item>
-         <property name="text">
-          <string>No Style</string>
-         </property>
+         <widget class="QLabel" name="labelFileFlags">
+          <property name="text">
+           <string>File Flags:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>User Style</string>
-         </property>
+         <widget class="QCheckBox" name="ckFiles">
+          <property name="toolTip">
+           <string>Show files in git folder</string>
+          </property>
+          <property name="text">
+           <string>Files</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>Dark Palette</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboAppStyle">
-        <property name="toolTip">
-         <string>Select Visual Style</string>
-        </property>
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboToolBarStyle">
-        <property name="toolTip">
-         <string>Select Toolbar Style</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>Icon</string>
-         </property>
+         <widget class="QCheckBox" name="ckSystemFiles">
+          <property name="toolTip">
+           <string>Show system files in git folder</string>
+          </property>
+          <property name="text">
+           <string>System Files</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>Text</string>
-         </property>
+         <widget class="QCheckBox" name="ckHiddenFiles">
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Show hidden files in git folder</string>
+          </property>
+          <property name="text">
+           <string>Hidden Files</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>Text beside Icon</string>
-         </property>
+         <widget class="QCheckBox" name="ckDirectories">
+          <property name="toolTip">
+           <string>Show folders in git folder</string>
+          </property>
+          <property name="text">
+           <string>Directories</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>Text under Icon</string>
-         </property>
+         <widget class="QCheckBox" name="ckSymbolicLinks">
+          <property name="toolTip">
+           <string>Show symbolic links in git folder</string>
+          </property>
+          <property name="text">
+           <string>Symbolic Links</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <property name="text">
-          <string>Follow System</string>
-         </property>
+         <widget class="QLabel" name="labelView">
+          <property name="text">
+           <string>View</string>
+          </property>
+         </widget>
         </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Tabulator width</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="spinTabulator">
-        <property name="toolTip">
-         <string>Tabulator width</string>
-        </property>
-        <property name="minimum">
-         <number>5</number>
-        </property>
-        <property name="maximum">
-         <number>150</number>
-        </property>
-       </widget>
+        <item>
+         <widget class="QComboBox" name="comboAppStyle">
+          <property name="toolTip">
+           <string>Select Visual Style</string>
+          </property>
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboUserStyle">
+          <property name="toolTip">
+           <string>Select User defines Styles for App</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No Style</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>User Style</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dark Palette</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboToolBarStyle">
+          <property name="toolTip">
+           <string>Select Toolbar Style</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text beside Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text under Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Follow System</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelEditor">
+          <property name="text">
+           <string>Editor / Viewer</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckRenderGraphicFile">
+          <property name="toolTip">
+           <string>Render graphics or HTML file in Graphics View</string>
+          </property>
+          <property name="text">
+           <string>Render File</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckShowLineNumbers">
+          <property name="toolTip">
+           <string>Shows line numbers in text view</string>
+          </property>
+          <property name="text">
+           <string>Show line numbers</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelMisc">
+          <property name="text">
+           <string>Miscelaneous:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckTypeConverter">
+          <property name="toolTip">
+           <string>Display Type Converter</string>
+          </property>
+          <property name="text">
+           <string>Type Converter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckFastFileSearch">
+          <property name="toolTip">
+           <string>Use fast file search function (fsrc)</string>
+          </property>
+          <property name="text">
+           <string>Fast file search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckExperimental">
+          <property name="toolTip">
+           <string>Experimental functions</string>
+          </property>
+          <property name="text">
+           <string>Experimental</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Tabulator width</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinTabulator">
+          <property name="toolTip">
+           <string>Tabulator width</string>
+          </property>
+          <property name="minimum">
+           <number>5</number>
+          </property>
+          <property name="maximum">
+           <number>150</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
