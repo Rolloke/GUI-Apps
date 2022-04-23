@@ -278,6 +278,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         "<body style='background-color:white;' ><img src='%1' alt='%2' width='90%' height='90%'></body>"
         "</html>").arg(logoUrl, mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString());
         mWebEngineView->page()->setHtml(iconpage);
+        ui->tableView->setFocus();
 #else
         ui->graphicsView->scene()->clear();
         const QUrl url(logoUrl);
@@ -589,7 +590,7 @@ void MainWindow::onReplyFinished()
 
 void MainWindow::show_media_player_error(QMediaPlayer::Error error)
 {
-    ui->statusBar->showMessage(tr("%1: %2").arg(static_cast<int>(error)).arg(mPlayer.errorString()));
+    ui->statusBar->showMessage(tr("Media error number: %1: %2").arg(static_cast<int>(error)).arg(mPlayer.errorString()));
 }
 
 void MainWindow::open_file(const QString& filename)
