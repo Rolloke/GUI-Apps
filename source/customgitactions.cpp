@@ -547,6 +547,16 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     set_tooltip(fParseBranch, tr("Parse command result for branch view"));
     fMenu.addAction(fParseBranch);
 
+    auto*fParseBlameText = fPostActionGroup.addAction(Cmd::toString(Cmd::ParseBlameText));
+    fParseBlameText->setEnabled(variable_cmd);
+    set_tooltip(fParseBlameText, tr("Parse command result for git blame"));
+    fMenu.addAction(fParseBlameText);
+
+    auto*fUpdateRootItemStatus = fPostActionGroup.addAction(Cmd::toString(Cmd::UpdateRootItemStatus));
+    fUpdateRootItemStatus->setEnabled(variable_cmd);
+    set_tooltip(fUpdateRootItemStatus, tr("Update repository status after command execution"));
+    fMenu.addAction(fUpdateRootItemStatus);
+
     for (auto& fItem : fPostActionGroup.actions())
     {
         fItem->setCheckable(true);
@@ -660,8 +670,10 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     {
         fMenu.removeAction(fDoNothing);
         fMenu.removeAction(fUpdateStatus);
+        fMenu.removeAction(fUpdateRootItemStatus);
         fMenu.removeAction(fParseHistory);
         fMenu.removeAction(fParseBranch);
+        fMenu.removeAction(fParseBlameText);
         fMenu.removeAction(fA_BranchCmd);
         fMenu.removeAction(fA_HistoryCmd);
         fMenu.removeAction(fA_ThreadCmd);

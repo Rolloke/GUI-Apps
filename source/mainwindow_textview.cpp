@@ -122,6 +122,7 @@ void MainWindow::on_btnCloseText_clicked()
                 return;
         }
     }
+    ui->textBrowser->reset();
     ui->textBrowser->setText("");
 
     if (ui->tableBinaryView->get_binary_data().size())

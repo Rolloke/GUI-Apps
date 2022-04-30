@@ -100,6 +100,8 @@ struct Cmd
         ParseHistoryText,
         ParseBranchListText,
         ParseStashListText,
+        ParseBlameText,
+        UpdateRootItemStatus,
     };
 
     typedef std::vector<eCmd> tVector;

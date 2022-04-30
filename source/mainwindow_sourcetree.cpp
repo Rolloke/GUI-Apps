@@ -655,7 +655,7 @@ void MainWindow::perform_custom_command()
             int result = callMessageBox(message_box_text, "", ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), false);
             if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
             {
-                if (handleInThread() && !mWorker.isBusy())
+                if (handleInThread())
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
                     mWorker.doWork(Work::ApplyGitCommand, QVariant(git_command));
@@ -686,28 +686,39 @@ void MainWindow::perform_custom_command()
         {
             QString fOption;
             git_command = tr(git_command.toStdString().c_str()).arg(fOption, "");
-//            QString result;
-//            execute(git_command, result);
-//            ui->textBrowser->setText(result);
         }
 
-        switch (variant_list[ActionList::Data::PostCmdAction].toUInt())
+        if (!(command_flags & ActionList::Flags::CallInThread))
         {
-            case Cmd::UpdateItemStatus:
-                updateTreeItemStatus(mContextMenuSourceTreeItem);
-                break;
-            case Cmd::ParseHistoryText:
-            {
-                QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
-                ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem), type.type());
-                ui->textBrowser->setPlainText("");
-#ifdef DOCKED_VIEWS
-                showDockedWidget(ui->treeHistory);
-#else
-                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
-            }   break;
+            perform_post_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type);
         }
+    }
+}
+
+void MainWindow::perform_post_action(uint post_cmd, git::Type& type)
+{
+    switch (post_cmd)
+    {
+    case Cmd::UpdateItemStatus:
+        updateTreeItemStatus(mContextMenuSourceTreeItem);
+        break;
+    case Cmd::UpdateRootItemStatus:
+        updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
+        break;
+    case Cmd::ParseHistoryText:
+    {
+        QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
+        ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem), type.type());
+        ui->textBrowser->setPlainText("");
+#ifdef DOCKED_VIEWS
+        showDockedWidget(ui->treeHistory);
+#else
+        mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
+#endif
+    }   break;
+    case Cmd::ParseBlameText:
+        ui->textBrowser->parse_blame(ui->textBrowser->toPlainText());
+        break;
     }
 }
 
