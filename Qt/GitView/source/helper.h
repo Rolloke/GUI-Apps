@@ -58,4 +58,18 @@ private:
 
 void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index=0);
 
+
+class ColorSelector
+{
+public:
+    ColorSelector(Qt::GlobalColor first_color = Qt::red);
+    QColor get_color_and_increment();
+    void   unapply_color(Qt::GlobalColor not_wanted);
+
+private:
+    Qt::GlobalColor          m_first_color;
+    Qt::GlobalColor          m_current_color;
+    QVector<Qt::GlobalColor> m_unapplied_color;
+};
+
 #endif // HELPER_H

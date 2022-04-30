@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QAction>
+
 #include <fstream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
@@ -292,4 +293,30 @@ void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_ind
         actions[action_index]->setEnabled(enabled);
     }
     widget->setEnabled(enabled);
+}
+
+
+ColorSelector::ColorSelector(Qt::GlobalColor first_color ) :
+    m_first_color(first_color),  m_current_color(first_color)
+{
+}
+
+QColor ColorSelector::get_color_and_increment()
+{
+    QColor color(m_current_color);
+    m_current_color = static_cast<Qt::GlobalColor>(m_current_color + 1);
+    while (m_unapplied_color.contains(m_current_color))
+    {
+        m_current_color = static_cast<Qt::GlobalColor>(m_current_color + 1);
+    }
+    if (m_current_color == Qt::transparent)
+    {
+        m_current_color = m_first_color;
+    }
+    return color;
+}
+
+void   ColorSelector::unapply_color(Qt::GlobalColor not_wanted)
+{
+    m_unapplied_color.append(not_wanted);
 }

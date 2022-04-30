@@ -65,6 +65,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mDockedWidgetMinMaxButtons(true)
     , ui(new Ui::MainWindow)
     , mWorker(this)
+    , mWorkerAction(nullptr)
     , mCurrentTask(Work::None)
     , mActions(this)
     , mConfigFileName(aConfigName)
@@ -785,7 +786,6 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
                     Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
                 }
                 work_result.setValue(result_string);
-
             }
             break;
         default:
@@ -840,6 +840,13 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
             if (aData.isValid() && aData.type() == QVariant::String)
             {
                 appendTextToBrowser(aData.toString());
+                if (mWorkerAction)
+                {
+                    const QVariantList variant_list  = mWorkerAction->data().toList();
+                    Type type;
+                    perform_post_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type);
+                    mWorkerAction = nullptr;
+                }
             } break;
         default:  break;
     }
@@ -903,7 +910,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     {
         fCommand = fGitCmd;
     }
-    if (handleInThread() && !mWorker.isBusy())
+    if (handleInThread())
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         mWorker.doWork(Work::ApplyGitCommand, QVariant(fCommand));
@@ -1021,7 +1028,9 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::Blame          , tr("Blame")      , Cmd::getCommand(Cmd::Blame))               , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::Blame, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Blame, Type::Folder, Flag::set, ActionList::Data::StatusFlagDisable);
+    mActions.setCustomCommandPostAction(Cmd::Blame, Cmd::ParseBlameText);
 
     connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
@@ -1038,7 +1047,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Restore, ActionList::Flags::History);
 
     connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
-    mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateItemStatus);
+    mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::Commit, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Commit, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
@@ -1328,8 +1337,9 @@ void MainWindow::clearTrees()
 bool MainWindow::handleInThread()
 {
     const QAction *fAction = qobject_cast<QAction *>(sender());
-    if (fAction)
+    if (fAction && !mWorker.isBusy())
     {
+        mWorkerAction = fAction;
         return (fAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::CallInThread) != 0;
     }
     return false;

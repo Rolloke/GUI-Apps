@@ -35,10 +35,13 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
 
+    void parse_blame(const QString& blame);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *e) override;
     void keyPressEvent(QKeyEvent *e) override;
+    bool event(QEvent *event) override;
 
 Q_SIGNALS:
     void textChanged(const QString &text);
@@ -62,19 +65,36 @@ private Q_SLOTS:
 
 
 private:
+    struct s_blame
+    {
+         QStringList text;
+         QColor  color;
+    };
+    struct s_blame_line
+    {
+        s_blame* blame_data { nullptr };
+    };
+
     QTextBlock firstVisibleBlock(int& diff);
     QRectF     blockBoundingRect(const QTextBlock &block) const;
     QPointF    contentOffset() const;
     int        lineNumberAreaWidth();
+    void       reset_blame();
 
 private:
-    QWidget *   m_line_number_area;
-    bool        m_show_line_numbers;
+    QWidget *               m_line_number_area;
+    bool                    m_show_line_numbers;
+    QMap<QString, s_blame>  m_blame_map;
+    QMap<int, s_blame_line> m_blame_start_line;
+    std::int32_t            m_blame_characters;
+
     ActionList *m_actions;
     bool        m_dark_mode;
     QSharedPointer<Highlighter> mHighlighter;
+
 #ifdef WEB_ENGINE
     PreviewPage * m_web_page;
+
 public:
     void set_page(PreviewPage*);
 #endif

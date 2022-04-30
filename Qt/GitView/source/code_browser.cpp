@@ -1,5 +1,6 @@
 #include "code_browser.h"
 #include "logger.h"
+#include "helper.h"
 
 #include <QPainter>
 #include <QTextBlock>
@@ -11,10 +12,12 @@
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
 #endif
+#include <QHoverEvent>
 
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
+  , m_blame_characters(0)
   , m_actions(nullptr)
   , m_dark_mode(false)
 {
@@ -49,6 +52,8 @@ int code_browser::lineNumberAreaWidth()
             max /= 10;
             ++digits;
         }
+
+        digits += m_blame_characters;
 
         int space = 3 + fontMetrics().charWidth("9", 0) * digits;
 
@@ -125,6 +130,27 @@ void code_browser::keyPressEvent(QKeyEvent *e)
      QTextBrowser::keyPressEvent(e);
 }
 
+bool code_browser::event(QEvent *event)
+{
+    if (event->type() == QEvent::HoverMove)
+    {
+        TRACE(Logger::trace, "HoverMove"); // **
+    }
+    else if (event->type() == QEvent::HoverEnter)
+    {
+        TRACE(Logger::trace, "HoverEnter");
+    }
+    else if (event->type() == QEvent::HoverLeave)
+    {
+        TRACE(Logger::trace, "HoverLeave");
+    }
+    else // event 69
+    {
+        TRACE(Logger::trace, "Event %d", event->type());
+    }
+    return QTextBrowser::event(event);
+}
+
 void code_browser::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
@@ -150,24 +176,55 @@ void code_browser::highlightCurrentLine()
 void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     const QPalette p = QApplication::palette(this);
-    const auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
+    auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
     const auto button_color = p.color(QPalette::Normal, QPalette::Button);
     QPainter painter(m_line_number_area);
-
     painter.fillRect(event->rect(), button_color);
-    int top = 0;
-    QTextBlock block = firstVisibleBlock(top);
-    int blockNumber = block.blockNumber();
 
-    QRectF block_rect = blockBoundingRect(block);
-    int bottom = top + qRound(block_rect.height());
+    int           top         = 0;
+    QTextBlock    block       = firstVisibleBlock(top);
+    int           blockNumber = block.blockNumber();
+    QRectF        block_rect  = blockBoundingRect(block);
+    int           bottom      = top + qRound(block_rect.height());
+    int           align       = m_blame_start_line.size() ? Qt::AlignLeft : Qt::AlignRight;
+    s_blame_line* current_blame { nullptr };
+    int           current_line = 0;
+
     while (block.isValid() && top <= event->rect().bottom())
     {
         if (block.isVisible() && bottom >= event->rect().top())
         {
-            QString number = QString::number(blockNumber + 1);
+            int line = blockNumber + 1;
+            QString number = QString::number(line);
+            if (m_blame_start_line.size() > 1)
+            {
+                if (m_blame_start_line.contains(line))
+                {
+                    current_blame = &m_blame_start_line[line];
+                    current_line  = 0;
+                    text_color    = current_blame->blame_data->color;
+                }
+                if (!current_blame)
+                {
+                    for (auto iter = m_blame_start_line.begin(); iter != m_blame_start_line.end(); ++iter)
+                    {
+                        if (iter.key() >= line)
+                        {
+                            iter--;
+                            current_blame = &iter.value();
+                            text_color    = current_blame->blame_data->color;
+                            break;
+                        }
+                    }
+                }
+                if (current_blame && current_line < current_blame->blame_data->text.size())
+                {
+                    number += ":";
+                    number += current_blame->blame_data->text[current_line++];
+                }
+            }
             painter.setPen(text_color);
-            painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), Qt::AlignRight, number);
+            painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), align, number);
         }
 
         block = block.next();
@@ -250,6 +307,7 @@ void code_browser::reset()
     }
     mHighlighter.reset(new Highlighter(document()));
     connect(mHighlighter.data(), SIGNAL(updateExtension(QString)), this, SLOT(call_updateExtension(QString)));
+    reset_blame();
 }
 
 const  QString& code_browser::currentLanguage() const
@@ -266,6 +324,78 @@ void code_browser::setLanguage(const QString& language)
     mHighlighter->setLanguage(language);
 }
 
+void code_browser::reset_blame()
+{
+    m_blame_map.clear();
+    m_blame_start_line.clear();
+    m_blame_characters = 0;
+}
+
+void code_browser::parse_blame(const QString &blame)
+{
+    s_blame*        old_blame           { nullptr };
+    int             current_line_number { 0 };
+    ColorSelector   color_selector;
+
+    setText("");
+    reset_blame();
+    color_selector.unapply_color(Qt::yellow);
+
+    QStringList lines = blame.split("\n");
+    for (QString &line : lines)
+    {
+        QStringList parts = line.split("\t");
+        if (parts.size() == 4)
+        {
+            int pos = parts[3].indexOf(')');
+            if (pos != -1)
+            {
+                current_line_number = parts[3].leftRef(pos).toInt();
+                append(parts[3].mid(pos+1));
+            }
+            if (!m_blame_map.contains(parts[0]))
+            {
+                auto& blame_entry = m_blame_map[parts[0]];
+                old_blame = &blame_entry;
+                blame_entry.text.append(parts[0]);
+                blame_entry.text.append(parts[1].mid(1));
+                QStringList date_time = parts[2].split(" ");
+                blame_entry.text.append(date_time[0]);
+                blame_entry.text.append(date_time[1]);
+                for (const auto& text : blame_entry.text)
+                {
+                    const auto length = text.size();
+                    if (length > m_blame_characters)
+                    {
+                        m_blame_characters = length;
+                    }
+                }
+                blame_entry.color  = color_selector.get_color_and_increment();
+                auto& line_entry = m_blame_start_line[current_line_number];
+                line_entry.blame_data = &blame_entry;
+            }
+            else
+            {
+                auto& blame_entry = m_blame_map[parts[0]];
+                if (&blame_entry != old_blame)
+                {
+                    auto& line_entry = m_blame_start_line[current_line_number];
+                    line_entry.blame_data = &blame_entry;
+                }
+                old_blame = &blame_entry;
+            }
+        }
+    }
+    if (m_blame_start_line.size() > 1)
+    {
+        ++m_blame_characters;
+    }
+    else
+    {
+        reset_blame();
+    }
+    go_to_line(1);
+}
 
 #ifdef WEB_ENGINE
 
@@ -300,6 +430,7 @@ void code_browser::own_text_changed()
         }
     }
 }
+// m_web_page->printToPdf()
 
 PreviewPage::PreviewPage(QObject *parent, QWebEngineView* view) : QWebEnginePage(parent)
 , m_type(type::html)

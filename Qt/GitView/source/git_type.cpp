@@ -63,7 +63,7 @@ Cmd::Cmd()
     mCommandMap[BranchListNotMerged]    = "git -C %1 branch --list --no-merged";
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
-    mCommandMap[Blame]                  = "git blame %1 %2";
+    mCommandMap[Blame]                  = "git blame -c %1 %2";
 
     mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, StashPush, History, StashShow, Separator, ExpandTreeItems, CollapseTreeItems  };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems};
@@ -92,6 +92,8 @@ QString Cmd::toString(const ePostAction anAction)
     case ParseHistoryText:      return QObject::tr("Parse History List Text");
     case ParseBranchListText:   return QObject::tr("Parse Branch List Text");
     case ParseStashListText:    return QObject::tr("Parse Stash List Text");
+    case ParseBlameText:        return QObject::tr("Parse Blame Text");
+    case UpdateRootItemStatus:  return QObject::tr("Update Repository Status");
     }
     return "";
 }
