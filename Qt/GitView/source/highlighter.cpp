@@ -243,7 +243,6 @@ Highlighter::Highlighter(QTextDocument *parent)
 
         load_default_language();
         load_language_list();
-        Q_EMIT updateExtension(mDefault);
     }
     mCurrentLanguage = mDefault;
 }

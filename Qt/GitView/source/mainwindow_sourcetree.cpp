@@ -717,8 +717,12 @@ void MainWindow::perform_post_action(uint post_cmd, git::Type& type)
 #endif
     }   break;
     case Cmd::ParseBlameText:
+    {
+        const QString   file_name = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        const QFileInfo file_info(file_name);
+        ui->textBrowser->setExtension(file_info.suffix().toLower());
         ui->textBrowser->parse_blame(ui->textBrowser->toPlainText());
-        break;
+    }   break;
     }
 }
 
@@ -728,13 +732,8 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
     QString cmd_add_on = variant_list[ActionList::Data::CmdAddOn].toString();
     if (cmd_add_on.size() )
     {
-        if ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
-        {
-            option += " ";
-            option += cmd_add_on;
-            option += " ";
-        }
-        if ((command_flags & ActionList::Flags::StashCmdOption) != 0 && type.is(Type::FileType) && !type.is(Type::Repository))
+        if (   ((command_flags & ActionList::Flags::DependsOnStaged) != 0 && type.is(Type::GitStaged))
+            || ((command_flags & ActionList::Flags::StashCmdOption) != 0 && type.is(Type::FileType) && !type.is(Type::Repository)))
         {
             option += " ";
             option += cmd_add_on;
