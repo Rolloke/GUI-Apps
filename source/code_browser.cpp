@@ -362,7 +362,8 @@ void code_browser::parse_blame(const QString &blame)
                 QStringList date_time = parts[2].split(" ");
                 blame_entry.text.append(date_time[0]);
                 blame_entry.text.append(date_time[1]);
-                for (const auto& text : blame_entry.text)
+                const auto& blame_entry_text = blame_entry.text;
+                for (const auto& text : blame_entry_text)
                 {
                     const auto length = text.size();
                     if (length > m_blame_characters)
