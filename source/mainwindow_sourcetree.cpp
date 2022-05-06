@@ -690,12 +690,12 @@ void MainWindow::perform_custom_command()
 
         if (!(command_flags & ActionList::Flags::CallInThread))
         {
-            perform_post_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type);
+            perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type);
         }
     }
 }
 
-void MainWindow::perform_post_action(uint post_cmd, git::Type& type)
+void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
 {
     switch (post_cmd)
     {

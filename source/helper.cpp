@@ -123,13 +123,29 @@ int getItemLevel(QTreeWidgetItem* aItem)
     return -fLevel;
 }
 
-QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem)
+QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function)
 {
     while (aItem && aTree.indexOfTopLevelItem(aItem) == -1)
     {
+        if (function)
+        {
+            function(aItem);
+        }
         aItem = aItem->parent();
     }
     return aItem;
+}
+
+QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name)
+{
+    for (int i=0; i<parent_item->childCount(); ++i)
+    {
+        if (parent_item->child(i)->text(column) == name)
+        {
+            return parent_item->child(i);
+        }
+    }
+    return nullptr;
 }
 
 bool containsPathAsChildren(QTreeWidgetItem*parent_item, int column, const QString& right_path)
@@ -137,25 +153,30 @@ bool containsPathAsChildren(QTreeWidgetItem*parent_item, int column, const QStri
     QStringList right_parts = right_path.split('/');
     for (const auto&file_name : right_parts)
     {
-        bool found = false;
-        for (int i=0; i<parent_item->childCount(); ++i)
+        parent_item = find_child_item(parent_item, column, file_name);
+        if (!parent_item)
         {
-            if (parent_item->child(i)->text(column) == file_name)
-            {
-                found = true;
-                parent_item = parent_item->child(i);
-                break;
-            }
-        }
-        if (!found)
-        {
-            parent_item = nullptr;
             break;
         }
     }
     return parent_item != nullptr;
 }
 
+QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const QStringList& path, int level)
+{
+    QTreeWidgetItem* new_child_item = find_child_item(parent_item, column, path[level]);
+    if (!new_child_item || level == path.size() -1)
+    {
+        new_child_item = new QTreeWidgetItem();
+        parent_item->addChild(new_child_item);
+        new_child_item->setText(column, path[level]);
+    }
+    if (++level < path.size())
+    {
+        return insert_as_tree(new_child_item, column, path, level);
+    }
+    return new_child_item;
+}
 
 int execute(const QString& command, QString& aResultText, bool hide)
 {

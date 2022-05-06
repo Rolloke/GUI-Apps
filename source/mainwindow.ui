@@ -799,7 +799,20 @@ File content opened with double click</string>
            <string>Use fast file search function (fsrc)</string>
           </property>
           <property name="text">
-           <string>Fast file search</string>
+           <string>Fast File Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckSearchResultsAsSearchTree">
+          <property name="toolTip">
+           <string>Store search results as a tree, not as single items</string>
+          </property>
+          <property name="text">
+           <string>Search Result as Tree</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
