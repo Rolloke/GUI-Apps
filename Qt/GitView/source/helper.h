@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTreeWidget>
 #include <string>
+#include <functional>
 
 
 
@@ -28,9 +29,13 @@ QString formatFileSize(quint64 aSize);
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);
-QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem);
+
+typedef std::function<void(QTreeWidgetItem*&)> tGTLIFunction;
+QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function = {});
 int getItemLevel(QTreeWidgetItem* aItem);
+QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name);
 bool containsPathAsChildren(QTreeWidgetItem*, int, const QString& );
+QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const QStringList&path, int level=0);
 
 enum error
 {

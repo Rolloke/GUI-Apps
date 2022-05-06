@@ -94,6 +94,7 @@ void MainWindow::on_btnStoreText_clicked()
             file.write(fString.c_str(), fString.size());
         }
         set_widget_and_action_enabled(ui->btnStoreText, false);
+        perform_post_cmd_action(Cmd::UpdateItemStatus);
     }
 }
 
