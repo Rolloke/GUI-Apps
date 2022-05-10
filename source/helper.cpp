@@ -98,9 +98,16 @@ void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
     for (const auto& fSelected : fList)
     {
         auto fParent = fSelected->parent();
-        if (fParent == 0) aTree.removeItemWidget(fSelected, 0);
-        else              fParent->removeChild(fSelected);
-        delete fSelected;
+        if (fParent)
+        {
+            fParent->removeChild(fSelected);
+            delete fSelected;
+        }
+        else if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), fSelected->text(0), true) == QMessageBox::Yes)
+        {
+            aTree.removeItemWidget(fSelected, 0);
+            delete fSelected;
+        }
     }
 }
 

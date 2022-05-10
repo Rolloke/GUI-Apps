@@ -124,7 +124,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
     ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
     ui->treeStash->setStyleSheet(style_sheet_treeview_lines);
+    ui->treeFindText->setStyleSheet(style_sheet_treeview_lines);
     ui->textBrowser->set_actions(&mActions);
+
+    ui->treeFindText->setContextMenuPolicy(Qt::CustomContextMenu);
+
 
     connect(ui->treeStash, SIGNAL(find_item(QString,QString)), ui->treeSource, SLOT(find_item(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
@@ -170,6 +174,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
@@ -451,6 +456,7 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
         STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
@@ -747,26 +753,10 @@ void MainWindow::keyPressEvent(QKeyEvent *aKey)
 {
     if (aKey->key() == Qt::Key_Delete)
     {
-        if (ui->treeSource->hasFocus())
+        auto theTree = focusedTreeWidget(false);
+        if (theTree)
         {
-            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource);
-            mContextMenuSourceTreeItem = nullptr;
-        }
-        if (ui->treeBranches->hasFocus())
-        {
-            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeBranches);
-        }
-        if (ui->treeHistory->hasFocus())
-        {
-            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeHistory);
-        }
-        if (ui->treeStash->hasFocus())
-        {
-            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeStash);
-        }
-        if (ui->treeFindText->hasFocus())
-        {
-            deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeFindText);
+            deleteSelectedTreeWidgetItem(*theTree);
         }
     }
 }
@@ -1162,6 +1152,10 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ClearTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::DeleteTreeItems      , tr("Delete selected tree items"), tr("Deletes all selected tree items in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(delete_tree_item()));
+    mActions.setFlags(Cmd::DeleteTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::DeleteTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1332,6 +1326,15 @@ void MainWindow::clearTrees()
     if (tree)
     {
         tree->clear();
+    }
+}
+
+void MainWindow::delete_tree_item()
+{
+    QTreeWidget * tree = focusedTreeWidget(false);
+    if (tree)
+    {
+        deleteSelectedTreeWidgetItem(*tree);
     }
 }
 
@@ -1956,6 +1959,13 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
         ui->treeSource->find_item(repository_root, file_path_part);
     }
+}
+
+void MainWindow::on_treeFindText_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu menu(this);
+    mActions.fillContextMenue(menu, Cmd::mContextMenuFindTextTree);
+    menu.exec(ui->treeFindText->mapToGlobal(pos));
 }
 
 void MainWindow::on_ckTypeConverter_stateChanged(int arg1)

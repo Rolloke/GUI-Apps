@@ -69,6 +69,7 @@ private Q_SLOTS:
     void on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
     void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeFindText_customContextMenuRequested(const QPoint &pos);
 
     void on_ckTypeConverter_stateChanged(int arg1);
 
@@ -91,6 +92,7 @@ private Q_SLOTS:
     void showOrHideTrees(bool checked);
 #endif
     void clearTrees();
+    void delete_tree_item();
 
     void perform_custom_command();
     void call_git_history_diff_command();
@@ -232,6 +234,7 @@ private:
     void     copy_file(copy command);
 
     QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
+
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

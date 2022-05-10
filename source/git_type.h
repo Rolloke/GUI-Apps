@@ -86,6 +86,7 @@ struct Cmd
         ZoomIn,
         ZoomOut,
         FitInView,
+        DeleteTreeItems,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
@@ -121,6 +122,7 @@ struct Cmd
     static tVector mContextMenuStashTree;
     static tVector mContextMenuGraphicsView;
     static tVector mContextMenuTextView;
+    static tVector mContextMenuFindTextTree;
     static std::vector<tVector> mToolbars;
 #ifdef DOCKED_VIEWS
     static std::vector<QString> mToolbarNames;
