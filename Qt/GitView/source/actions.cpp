@@ -118,7 +118,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::ZoomIn]                  = resource+"list-add.png";
     action_icons[Cmd::ZoomOut]                 = resource+"list-remove.png";
     action_icons[Cmd::FitInView]               = resource+"view-fullscreen.png";
-
+    action_icons[Cmd::DeleteTreeItems]         = resource+"edit-cut.png";
 
     for (const auto& icon_path: action_icons )
     {

@@ -513,6 +513,12 @@
               <property name="statusTip">
                <string/>
               </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
               <column>
                <property name="text">
                 <string>File</string>

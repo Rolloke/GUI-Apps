@@ -191,6 +191,7 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     case VariousListIndex::MenuHistoryTree:     return Cmd::mContextMenuHistoryTree;
     case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
     case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
+    case VariousListIndex::MenuFindTextTree:    return Cmd::mContextMenuFindTextTree;
     case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
     case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
     case VariousListIndex::Size:
@@ -215,6 +216,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     case VariousListIndex::MenuHistoryTree:     return tr("Context Menu History");
     case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
     case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
+    case VariousListIndex::MenuFindTextTree:    return tr("Context Menu Find Text");
     case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
     case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
     case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
