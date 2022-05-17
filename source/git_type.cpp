@@ -220,19 +220,19 @@ QString Type::getStates(bool extended) const
 
     if (extended)
     {
-        if      (is(SymLink))     states += name(SymLink)     + sep;
-        else if (is(Repository))  states += name(Repository)  + sep;
-        else if (is(File))        states += name(File)        + sep;
-        else if (is(Folder))      states += name(Folder)      + sep;
-        else if (is(Branch))      states += name(Branch)      + sep;
-        else if (is(Hidden))      states += name(Hidden)      + sep;
-        else if (is(WildCard))    states += name(WildCard)    + sep;
-        else if (is(RegExp))      states += name(RegExp)      + sep;
-        else if (is(Negation))    states += name(Negation)    + sep;
-        else if (is(Checked))     states += name(Checked)     + sep;
-        else if (is(Executeable)) states += name(Executeable) + sep;
-        else if (is(FolderForNavigation)) states += name(FolderForNavigation) + sep;
-        else if (is(IgnoreTypeStatus))    states += name(IgnoreTypeStatus) + sep;
+        if (is(SymLink))     states += name(SymLink)     + sep;
+        if (is(Repository))  states += name(Repository)  + sep;
+        if (is(File))        states += name(File)        + sep;
+        if (is(Folder))      states += name(Folder)      + sep;
+        if (is(Branch))      states += name(Branch)      + sep;
+        if (is(Hidden))      states += name(Hidden)      + sep;
+        if (is(WildCard))    states += name(WildCard)    + sep;
+        if (is(RegExp))      states += name(RegExp)      + sep;
+        if (is(Negation))    states += name(Negation)    + sep;
+        if (is(Checked))     states += name(Checked)     + sep;
+        if (is(Executeable)) states += name(Executeable) + sep;
+        if (is(FolderForNavigation)) states += name(FolderForNavigation) + sep;
+        if (is(IgnoreTypeStatus))    states += name(IgnoreTypeStatus) + sep;
     }
     return states;
 }
@@ -273,6 +273,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(None);
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);
+        RETURN_NAME(IncludeAll);
     }
     return "";
 }
