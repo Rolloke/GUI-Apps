@@ -90,6 +90,7 @@ private:
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
     QString getVariousListHeader(VariousListIndex::e aIndex);
     void set_tooltip(QAction*, const QString&);
+    git::Cmd::eCmd getCommand(int aRow);
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;

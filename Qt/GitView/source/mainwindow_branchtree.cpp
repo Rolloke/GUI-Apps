@@ -48,22 +48,14 @@ void MainWindow::call_git_branch_command()
                 ui->treeBranches->parseBranchListText(parse_text, top_item_path);
                 ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(parse_text);
-#ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeBranches);
-#else
-                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
             }   break;
             case Cmd::ParseBranchListText:
             {
                 ui->treeBranches->parseBranchListText(result_str, top_item_path);
                 ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(git_command);
-#ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeBranches);
-#else
-                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
             }    break;
             case Cmd::ParseHistoryText:
             {
@@ -72,11 +64,7 @@ void MainWindow::call_git_branch_command()
                 ui->treeHistory->parseGitLogHistoryText(result_str, items.size() ? QVariant(source_hook->indexFromItem(items[0])) : QVariant(branch_git_root_path), branch_item, Type::Branch);
                 ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(git_command);
-#ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeHistory);
-#else
-                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
             }    break;
         }
     }
@@ -89,4 +77,9 @@ void MainWindow::call_git_branch_command()
 void MainWindow::on_treeBranches_customContextMenuRequested(const QPoint &pos)
 {
     ui->treeBranches->on_customContextMenuRequested(mActions, pos);
+}
+
+void MainWindow::on_treeBranches_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    ui->treeBranches->on_itemDoubleClicked(mActions, item, column);
 }

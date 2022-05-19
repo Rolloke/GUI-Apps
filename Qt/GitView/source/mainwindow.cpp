@@ -370,9 +370,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 MainWindow::~MainWindow()
 {
     disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
-#ifdef DOCKED_VIEWS
     showDockedWidget(mBinaryValuesView.data(), true);
-#endif
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
@@ -684,26 +682,6 @@ void MainWindow::createDockWindows()
     ui->verticalLayoutForTreeView = nullptr;
 }
 
-void MainWindow::showDockedWidget(QWidget* widget, bool hide)
-{
-    QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
-    if (parent)
-    {
-        if (hide)
-        {
-            parent->setVisible(false);
-        }
-        else
-        {
-            if (!parent->isVisible())
-            {
-                parent->setVisible(true);
-            }
-            parent->raise();
-        }
-    }
-}
-
 void MainWindow::dockWidget_topLevelChanged(bool)
 {
     QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
@@ -737,6 +715,31 @@ void MainWindow::dockWidget_topLevelChanged(bool)
 }
 
 #endif
+
+void MainWindow::showDockedWidget(QWidget* widget, bool hide)
+{
+#ifdef DOCKED_VIEWS
+    QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
+    if (parent)
+    {
+        if (hide)
+        {
+            parent->setVisible(false);
+        }
+        else
+        {
+            if (!parent->isVisible())
+            {
+                parent->setVisible(true);
+            }
+            parent->raise();
+        }
+    }
+#else
+    mActions.getAction(Cmd::ShowHideTree)->setChecked(!hide);
+#endif
+
+}
 
 QString MainWindow::getConfigName() const
 {
@@ -1351,12 +1354,38 @@ bool MainWindow::handleInThread()
 
 void MainWindow::expand_tree_items()
 {
-    focusedTreeWidget()->expandAll();
+    QTreeWidget* ftw = focusedTreeWidget();
+    if (ftw)
+    {
+        /// NOTE: this is not performant for large trees
+//        auto selected = ftw->selectedItems();
+//        if (selected.size())
+//        {
+//            auto expand_item = [](QTreeWidgetItem*item) { item->setExpanded(true); };
+//            do_with_item_and_children(selected[0], expand_item, false);
+//        }
+//        else
+        {
+            ftw->expandAll();
+        }
+    }
 }
 
 void MainWindow::collapse_tree_items()
 {
-    focusedTreeWidget()->collapseAll();
+    QTreeWidget* ftw = focusedTreeWidget();
+    if (ftw)
+    {
+        auto selected = ftw->selectedItems();
+        if (selected.size())
+        {
+            selected[0]->setExpanded(false);
+        }
+        else
+        {
+            ftw->collapseAll();
+        }
+    }
 }
 
 QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
@@ -1642,9 +1671,7 @@ void MainWindow::find_in_text_view(find find_item)
     }
     if (found_text)
     {
-#ifdef DOCKED_VIEWS
         showDockedWidget(ui->textBrowser);
-#endif
     }
 }
 
@@ -1747,9 +1774,7 @@ void MainWindow::find_in_tree_views(find find_item)
                 }
                 ++i;
             }
-#ifdef DOCKED_VIEWS
             showDockedWidget(tree_view);
-#endif
         }
     }
 }
@@ -1911,9 +1936,7 @@ void MainWindow::find_text_in_files()
         }
         if (found_items.size() > 0)
         {
-#ifdef DOCKED_VIEWS
             showDockedWidget(ui->treeFindText);
-#endif
             ui->treeFindText->expandItem(new_tree_root_item);
         }
     }
@@ -1978,4 +2001,5 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
 {
     ui->textBrowser->setTabStopWidth(width);
 }
+
 

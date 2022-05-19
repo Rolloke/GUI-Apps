@@ -98,9 +98,8 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
     on_btnCloseText_clicked();
     ui->textBrowser->setExtension("");
     appendTextToBrowser(ui->treeHistory->clickItem(aItem, aColumn));
-#ifdef DOCKED_VIEWS
     showDockedWidget(ui->textBrowser);
-#endif
+
     const auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
     if (fItemData.type() == QVariant::ModelIndex)
     {

@@ -60,11 +60,7 @@ void MainWindow::call_git_stash_command()
             case Cmd::ParseStashListText:
             if (ui->treeStash->parseStashListText(result_str, top_item_path))
             {
-#ifdef DOCKED_VIEWS
                 showDockedWidget(ui->treeStash);
-#else
-                mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
             }
             break;
         }

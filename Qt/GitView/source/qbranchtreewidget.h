@@ -20,6 +20,7 @@ public:
     QString getSelectedBranch();
     void parseBranchListText(const QString& aBranchText, const QString& aGitRootPath);
     void on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos);
+    void on_itemDoubleClicked(const ActionList& aActionList, QTreeWidgetItem *item, int );
     void deleteSelectedItem();
 
     QModelIndex indexFromSelectedItem() const;

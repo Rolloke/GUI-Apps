@@ -300,9 +300,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         if (ui->graphicsView->render_file(file_path, file_extension))
         {
             updateSelectedLanguage(file_extension);
-#ifdef DOCKED_VIEWS
             showDockedWidget(ui->graphicsView);
-#endif
             return;
         }
     }
@@ -321,10 +319,8 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             ui->textBrowser->setExtension("bin");
             ui->tableBinaryView->set_binary_data(file.readAll());
-#ifdef DOCKED_VIEWS
             widget_to_be_shown = ui->tableBinaryView;
             showDockedWidget(mBinaryValuesView.data());
-#endif
         }
         else
         {
@@ -347,9 +343,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             cursor.select(QTextCursor::LineUnderCursor);
             ui->textBrowser->setTextCursor(cursor);
         }
-#ifdef DOCKED_VIEWS
         showDockedWidget(widget_to_be_shown);
-#endif
     }
 }
 
@@ -710,11 +704,7 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
         QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
         ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem), type.type());
         ui->textBrowser->setPlainText("");
-#ifdef DOCKED_VIEWS
         showDockedWidget(ui->treeHistory);
-#else
-        mActions.getAction(Cmd::ShowHideTree)->setChecked(true);
-#endif
     }   break;
     case Cmd::ParseBlameText:
     {

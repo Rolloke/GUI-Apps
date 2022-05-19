@@ -63,6 +63,7 @@ private Q_SLOTS:
     void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+    void on_treeBranches_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
     void on_treeStash_customContextMenuRequested(const QPoint &pos);
     void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
@@ -235,10 +236,10 @@ private:
 
     QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
 
+    void     showDockedWidget(QWidget* widget, bool hide=false);
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
-    void     showDockedWidget(QWidget* widget, bool hide=false);
     bool     mDockedWidgetMinMaxButtons;
 #endif
 

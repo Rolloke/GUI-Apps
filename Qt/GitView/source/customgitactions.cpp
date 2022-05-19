@@ -136,9 +136,10 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
     {
         uint fFlag = mActionList.getFlags(static_cast<Cmd::eCmd>(aItem.first), ActionList::Data::Flags);
         bool function_cmd = (fFlag & ActionList::Flags::FunctionCmd);
+        bool modified_cmd = (fFlag & ActionList::Flags::Modified);
         if (aRow == -1) aRow = mListModelActions->rowCount();
         mListModelActions->insertRows(aRow, 1, QModelIndex());
-        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::ID)        , aItem.first, Qt::DisplayRole);
+        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::ID)        , tr("%1").arg(aItem.first) + (modified_cmd ? " *" : ""), Qt::DisplayRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Command)   , fCommand, Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Name)      , fAction->toolTip(), Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Shortcut)  , fAction->shortcut().toString(), Qt::EditRole);
@@ -231,7 +232,7 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
     if (!mInitialize)
     {
         int fColumn = item->column();
-        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(item->row(), ActionsTable::ID)).toInt());
+        Cmd::eCmd fCmd = getCommand(item->row());
         auto* fAction = mActionList.getAction(fCmd);
         if (fAction)
         {
@@ -362,13 +363,19 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
     mInitialize = false;
 }
 
+git::Cmd::eCmd CustomGitActions::getCommand(int aRow)
+{
+    auto text = mListModelActions->data(mListModelActions->index(aRow, ActionsTable::ID)).toString();
+    return static_cast<Cmd::eCmd>(text.split(' ')[0].toInt());
+}
+
 void CustomGitActions::on_btnToLeft_clicked()
 {
     if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
     {
         int fIconRow   = ui->tableViewVarious->currentIndex().row();
         int fActionRow = ui->tableViewActions->currentIndex().row();
-        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, ActionsTable::ID)).toInt());
+        Cmd::eCmd fCmd = getCommand(fActionRow);
         QString fIconPath = mListModelVarious->data(mListModelVarious->index(fIconRow, VariousHeader::Icon), Qt::UserRole).toString();
         if (fIconPath.size())
         {
@@ -392,7 +399,7 @@ void CustomGitActions::on_btnToLeft_clicked()
 void CustomGitActions::on_btnToRight_clicked()
 {
     int fActionRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fActionRow, ActionsTable::ID)).toInt());
+    Cmd::eCmd fCmd = getCommand(fActionRow);
     auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
     int fSelected = static_cast<int>(fCmdVector.size()-1);
@@ -440,7 +447,7 @@ void CustomGitActions::on_btnAdd_clicked()
 void CustomGitActions::on_btnDelete_clicked()
 {
     int fRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, ActionsTable::ID)).toInt());
+    Cmd::eCmd fCmd = getCommand(fRow);
     if (fCmd != Cmd::Separator && !(mActionList.getFlags(fCmd) & ActionList::Flags::BuiltIn))
     {
         mListModelActions->removeRow(fRow);
@@ -517,7 +524,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     QMenu fMenu(this);
 
     int fRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd   = static_cast<Cmd::eCmd>(mListModelActions->data(mListModelActions->index(fRow, ActionsTable::ID)).toInt());
+    Cmd::eCmd fCmd   = getCommand(fRow);
     uint fFlags      = mActionList.getFlags(fCmd);
 
     fMenu.addAction(mActionList.getAction(fCmd));
@@ -757,8 +764,8 @@ ActionItemModel::ActionItemModel(int rows, int columns, QObject *parent) :
 Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
 {
     Qt::ItemFlags fFlags = QStandardItemModel::flags(aIndex);
-
-    Cmd::eCmd fCmd   = static_cast<Cmd::eCmd>(data(index(aIndex.row(), ActionsTable::ID)).toInt());
+    auto text = data(index(aIndex.row(), ActionsTable::ID)).toString();
+    Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(text.split(' ')[0].toInt());
 
     if (fCmd == Cmd::Separator)
     {
