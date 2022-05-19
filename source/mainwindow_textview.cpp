@@ -25,9 +25,7 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
         ui->textBrowser->setExtension(ext);
         ui->textBrowser->insertPlainText(aText + getLineFeed());
         ui->textBrowser->textCursor().movePosition(QTextCursor::End);
-    #ifdef DOCKED_VIEWS
         showDockedWidget(ui->textBrowser);
-    #endif
     }
 }
 
@@ -129,9 +127,7 @@ void MainWindow::on_btnCloseText_clicked()
     if (ui->tableBinaryView->get_binary_data().size())
     {
         ui->tableBinaryView->clear_binary_content();
-#ifdef DOCKED_VIEWS
         showDockedWidget(mBinaryValuesView.data(), true);
-#endif
     }
 
     set_widget_and_action_enabled(ui->btnStoreText, false);
@@ -151,10 +147,8 @@ void MainWindow::updateSelectedLanguage(const QString& language)
 #ifdef WEB_ENGINE
 void MainWindow::show_web_view(bool show)
 {
-#ifdef DOCKED_VIEWS
     QWidget* pView = (QWidget*)mWebEngineView.data();
     showDockedWidget(pView, !show);
-#endif
 }
 #endif
 

@@ -65,6 +65,13 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     mSelectedItem = nullptr;
 }
 
+void QBranchTreeWidget::on_itemDoubleClicked(const ActionList& aActionList, QTreeWidgetItem *item, int )
+{
+    mSelectedItem = item;
+    aActionList.getAction(Cmd::BranchCheckout)->trigger();
+    mSelectedItem = nullptr;
+}
+
 QString QBranchTreeWidget::getSelectedBranch()
 {
     QString fItem;

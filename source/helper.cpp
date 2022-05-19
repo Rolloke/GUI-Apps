@@ -143,6 +143,25 @@ QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, con
     return aItem;
 }
 
+void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf)
+{
+    auto count = aItem->childCount();
+    if (also_leaf || count)
+    {
+        function(aItem);
+    }
+
+    for (int i=0; i<count; ++i)
+    {
+        if (!also_leaf && aItem->child(i)->childCount() == 0)
+        {
+            continue;
+        }
+        do_with_item_and_children(aItem->child(i), function);
+    }
+}
+
+
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name)
 {
     for (int i=0; i<parent_item->childCount(); ++i)
