@@ -198,6 +198,7 @@ private:
     }; };
 
     void     keyPressEvent(QKeyEvent *) override;
+    void     mousePressEvent(QMouseEvent *event) override;
 
     QString  getConfigName() const;
 

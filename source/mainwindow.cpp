@@ -754,14 +754,35 @@ QString MainWindow::getConfigName() const
 
 void MainWindow::keyPressEvent(QKeyEvent *aKey)
 {
-    if (aKey->key() == Qt::Key_Delete)
+    switch (aKey->key())
     {
-        auto theTree = focusedTreeWidget(false);
-        if (theTree)
+    case Qt::Key_Delete:
+    {
+        auto* ftw = focusedTreeWidget(false);
+        if (ftw)
         {
-            deleteSelectedTreeWidgetItem(*theTree);
+            deleteSelectedTreeWidgetItem(*ftw);
         }
+    } break;
+    case Qt::Key_Escape:
+    {
+        auto* ftw =  focusedTreeWidget(true);
+        if (ftw)
+        {
+            auto selected = ftw->selectedItems();
+            if (selected.size())
+            {
+                selected[0]->setSelected(false);
+            }
+        }
+    }  break;
     }
+
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    QMainWindow::mousePressEvent(event);
 }
 
 QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
@@ -1358,13 +1379,13 @@ void MainWindow::expand_tree_items()
     if (ftw)
     {
         /// NOTE: this is not performant for large trees
-//        auto selected = ftw->selectedItems();
-//        if (selected.size())
-//        {
-//            auto expand_item = [](QTreeWidgetItem*item) { item->setExpanded(true); };
-//            do_with_item_and_children(selected[0], expand_item, false);
-//        }
-//        else
+        auto selected = ftw->selectedItems();
+        if (selected.size())
+        {
+            auto expand_item = [&](QTreeWidgetItem*item) { item->setExpanded(true); };
+            do_with_item_and_children(selected[0], expand_item, false);
+        }
+        else
         {
             ftw->expandAll();
         }
@@ -1379,7 +1400,8 @@ void MainWindow::collapse_tree_items()
         auto selected = ftw->selectedItems();
         if (selected.size())
         {
-            selected[0]->setExpanded(false);
+            auto expand_item = [&](QTreeWidgetItem*item) { item->setExpanded(false); };
+            do_with_item_and_children(selected[0], expand_item, false);
         }
         else
         {
