@@ -6,7 +6,6 @@
 
 #include <QTextBrowser>
 #include <QPlainTextEdit>
-
 #ifdef WEB_ENGINE
 #include <QWebEnginePage>
 class    QWebEngineView;
@@ -18,11 +17,13 @@ class code_browser : public QTextBrowser
     Q_OBJECT
 
     friend class LineNumberArea;
+    typedef QMap<int, QStringList*> pos_to_blame;
 public:
     code_browser(QWidget *parent = nullptr);
     virtual ~code_browser();
 
-    void lineNumberAreaPaintEvent(QPaintEvent *event);
+    void lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame&);
+    void lineNumberAreaHelpEvent(const QStringList&, const QPoint&);
     int  blockCount() const;
     int  current_line() const;
     void go_to_line(int);
@@ -82,7 +83,7 @@ private:
     void       reset_blame();
 
 private:
-    QWidget *               m_line_number_area;
+    QPointer<QWidget>       m_line_number_area;
     bool                    m_show_line_numbers;
     QMap<QString, s_blame>  m_blame_map;
     QMap<int, s_blame_line> m_blame_start_line;
@@ -106,19 +107,15 @@ public:
     LineNumberArea(code_browser *editor) : QWidget(editor), codeEditor(editor)
     {}
 
-    QSize sizeHint() const override
-    {
-        return QSize(codeEditor->lineNumberAreaWidth(), 0);
-    }
+    QSize sizeHint() const override;
 
 protected:
-    void paintEvent(QPaintEvent *event) override
-    {
-        codeEditor->lineNumberAreaPaintEvent(event);
-    }
+    void paintEvent(QPaintEvent *event)override;
+    bool event(QEvent *event) override;
 
 private:
     code_browser *codeEditor;
+    code_browser::pos_to_blame m_blame_position;
 };
 
 #ifdef WEB_ENGINE

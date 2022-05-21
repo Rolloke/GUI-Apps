@@ -157,7 +157,7 @@ void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& func
         {
             continue;
         }
-        do_with_item_and_children(aItem->child(i), function);
+        do_with_item_and_children(aItem->child(i), function, also_leaf);
     }
 }
 

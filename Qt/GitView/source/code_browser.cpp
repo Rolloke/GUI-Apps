@@ -8,11 +8,11 @@
 #include <QMenu>
 #include <QTextCursor>
 #include <QApplication>
+#include <QToolTip>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
 #endif
-#include <QHoverEvent>
 
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
@@ -28,6 +28,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
     updateLineNumberAreaWidth(blockCount());
     highlightCurrentLine();
 
+    m_line_number_area->setToolTip("init");
 #ifdef WEB_ENGINE
   m_web_page = nullptr;
   connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
@@ -170,70 +171,6 @@ void code_browser::highlightCurrentLine()
     setExtraSelections(extraSelections);
 }
 
-// NOTE: source for this solution, but a little bit modified
-// https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
-// https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
-void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event)
-{
-    const QPalette p = QApplication::palette(this);
-    auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
-    const auto button_color = p.color(QPalette::Normal, QPalette::Button);
-    QPainter painter(m_line_number_area);
-    painter.fillRect(event->rect(), button_color);
-
-    int           top         = 0;
-    QTextBlock    block       = firstVisibleBlock(top);
-    int           blockNumber = block.blockNumber();
-    QRectF        block_rect  = blockBoundingRect(block);
-    int           bottom      = top + qRound(block_rect.height());
-    int           align       = m_blame_start_line.size() ? Qt::AlignLeft : Qt::AlignRight;
-    s_blame_line* current_blame { nullptr };
-    int           current_line = 0;
-
-    while (block.isValid() && top <= event->rect().bottom())
-    {
-        if (block.isVisible() && bottom >= event->rect().top())
-        {
-            int line = blockNumber + 1;
-            QString number = QString::number(line);
-            if (m_blame_start_line.size() > 1)
-            {
-                if (m_blame_start_line.contains(line))
-                {
-                    current_blame = &m_blame_start_line[line];
-                    current_line  = 0;
-                    text_color    = current_blame->blame_data->color;
-                }
-                if (!current_blame)
-                {
-                    for (auto iter = m_blame_start_line.begin(); iter != m_blame_start_line.end(); ++iter)
-                    {
-                        if (iter.key() >= line)
-                        {
-                            iter--;
-                            current_blame = &iter.value();
-                            text_color    = current_blame->blame_data->color;
-                            break;
-                        }
-                    }
-                }
-                if (current_blame && current_line < current_blame->blame_data->text.size())
-                {
-                    number += ":";
-                    number += current_blame->blame_data->text[current_line++];
-                }
-            }
-            painter.setPen(text_color);
-            painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), align, number);
-        }
-
-        block = block.next();
-        top = bottom;
-        block_rect = blockBoundingRect(block);
-        bottom = top + qRound(block_rect.height());
-        ++blockNumber;
-    }
-}
 
 int code_browser::blockCount() const
 {
@@ -397,6 +334,123 @@ void code_browser::parse_blame(const QString &blame)
     }
     go_to_line(1);
 }
+
+QSize LineNumberArea::sizeHint() const
+{
+    return QSize(codeEditor->lineNumberAreaWidth(), 0);
+}
+
+void LineNumberArea::paintEvent(QPaintEvent *event)
+{
+    codeEditor->lineNumberAreaPaintEvent(event, m_blame_position);
+}
+// NOTE: source for this solution, but a little bit modified
+// https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
+// https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
+void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& blame_pos)
+{
+    const QPalette p = QApplication::palette(this);
+    auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
+    const auto button_color = p.color(QPalette::Normal, QPalette::Button);
+    QPainter painter(m_line_number_area);
+    painter.fillRect(event->rect(), button_color);
+
+    int           top         = 0;
+    QTextBlock    block       = firstVisibleBlock(top);
+    int           blockNumber = block.blockNumber();
+    QRectF        block_rect  = blockBoundingRect(block);
+    int           bottom      = top + qRound(block_rect.height());
+    int           align       = m_blame_start_line.size() ? Qt::AlignLeft : Qt::AlignRight;
+    s_blame_line* current_blame { nullptr };
+    int           current_line = 0;
+    blame_pos.clear();
+
+    while (block.isValid() && top <= event->rect().bottom())
+    {
+        if (block.isVisible() && bottom >= event->rect().top())
+        {
+            int line = blockNumber + 1;
+            QString number = QString::number(line);
+            if (m_blame_start_line.size() > 1)
+            {
+                if (m_blame_start_line.contains(line))
+                {
+                    current_blame = &m_blame_start_line[line];
+                    current_line  = 0;
+                    text_color    = current_blame->blame_data->color;
+                }
+                if (!current_blame)
+                {
+                    for (auto iter = m_blame_start_line.begin(); iter != m_blame_start_line.end(); ++iter)
+                    {
+                        if (iter.key() >= line)
+                        {
+                            iter--;
+                            current_blame = &iter.value();
+                            text_color    = current_blame->blame_data->color;
+                            break;
+                        }
+                    }
+                }
+                if (current_blame && current_line < current_blame->blame_data->text.size())
+                {
+                    if (current_line == 0)
+                    {
+                        blame_pos[top] = &current_blame->blame_data->text;
+                    }
+                    number += ":";
+                    number += current_blame->blame_data->text[current_line++];
+                }
+            }
+            painter.setPen(text_color);
+            painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), align, number);
+        }
+
+        block = block.next();
+        top = bottom;
+        block_rect = blockBoundingRect(block);
+        bottom = top + qRound(block_rect.height());
+        ++blockNumber;
+    }
+}
+
+bool LineNumberArea::event(QEvent *event)
+{
+    if (event->type() == QEvent::ToolTip)
+    {
+        QHelpEvent * he = dynamic_cast<QHelpEvent*>(event);
+        if (he)
+        {
+            QPoint pos = he->pos();
+            for (auto blame = m_blame_position.begin(); blame != m_blame_position.end(); ++blame)
+            {
+                if (blame.key() > pos.ry())
+                {
+                    if (blame != m_blame_position.begin()) blame--;
+                    codeEditor->lineNumberAreaHelpEvent(*blame.value(), mapToGlobal(pos));
+                    break;
+                }
+            }
+            return true;
+        }
+    }
+    return QWidget::event(event);
+}
+
+void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const QPoint& pos)
+{
+    static const QStringList prefix = { tr("commit:\t"), tr("author:\t"), tr("date:\t"), tr("time:\t") };
+    QString text;
+    int i=0;
+    for (const auto& line : text_list)
+    {
+        if (i < prefix.size()) text += prefix[i++];
+        text += line;
+        text += getLineFeed();
+    }
+    QToolTip::showText(pos, text, this);
+}
+
 
 #ifdef WEB_ENGINE
 
