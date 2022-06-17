@@ -274,6 +274,7 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(Checked);
         RETURN_NAME(Executeable);
         RETURN_NAME(IncludeAll);
+        RETURN_NAME(Consecutive);
     }
     return "";
 }

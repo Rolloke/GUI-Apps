@@ -167,6 +167,7 @@ struct Type
         GitMovedTo          = 0x02000000,
         IgnoreTypeStatus    = 0x04000000,
         IncludeAll          = 0x10000000,
+        Consecutive         = 0x20000000,
         AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo,
         FileType      = File|Folder|SymLink,
         FileFlag      = Hidden|Executeable

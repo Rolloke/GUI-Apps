@@ -331,6 +331,12 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             }
             else
             {
+                // TODO: codepage handling
+                // QString fromLatin1(), fromLocal8Bit(), fromUtf8(),
+                // QString toLatin1(),   toLocal8Bit(),   toUtf8()),
+                // QTextCodec *QTextCodec::codecForUtfText(const QByteArray &ba)
+                // QList<QByteArray> QTextCodec::availableCodecs()
+                // QString(file.readAll()).toLocal8Bit();
                 ui->textBrowser->setPlainText(file.readAll());
             }
         }

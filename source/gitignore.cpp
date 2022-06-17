@@ -66,7 +66,10 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
             }
             else if (fLine.contains("/**/"))
             {
-                // TODO: matches consecutive directories divided by '/**/' -> '/'
+                fType.add(Type::Folder);
+                fType.add(Type::RegExp);
+                fType.add(Type::Consecutive);
+                fLine = fLine.replace("/**/", "/(.*/|)");
             }
             if (fLine.endsWith('/'))
             {
@@ -98,7 +101,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 });
                 if (item != mIgnoreMap.end())
                 {
-                    auto fMessage = QObject::tr("\"%1\" not inserted from %2").arg(fLine, file.fileName());
+                    auto fMessage = QObject::tr("\"%1\": %3 not inserted from %2").arg(fLine, file.fileName(), fType.getStates(true));
                     TRACE(Logger::warning, fMessage.toStdString().c_str() );
                 }
                 else
@@ -136,37 +139,39 @@ void GitIgnore::removeIgnoreMapLevel(uint aMapLevel)
         }
     }
 }
-namespace  {
 
-bool compare(stringt2type_vector::const_iterator fItem, const std::string& fFileName)
+namespace
 {
-    if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
+    bool compare(stringt2type_vector::const_iterator fItem, const std::string& fFileName)
     {
-        QRegExp fRegEx(fItem->first.c_str());
-        fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
-        if (fRegEx.exactMatch(fFileName.c_str()))
+        if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
+        {
+            QRegExp fRegEx(fItem->first.c_str());
+            fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
+            if (fRegEx.exactMatch(fFileName.c_str()))
+            {
+                return true;
+            }
+        }
+        else if (fItem->first == fFileName)
         {
             return true;
         }
+        return false;
     }
-    else if (fItem->first == fFileName)
-    {
-        return true;
-    }
-    return false;
 }
 
-}
 bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 {
     const std::string& fFileName = aFileInfo.fileName().toStdString();
     stringt2type_vector ignored_entries;
     for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
     {
-        if (   !(fItem->second.is(Type::Folder) && fItem->second.is(Type::File))// not folder and file set and
-            && ((fItem->second.is(Type::Folder) && !aFileInfo.isDir())          // type folder required but is no folder or
+        if (   !(fItem->second.is(Type::Folder) && fItem->second.is(Type::File))// not folder and file set AND
+            && ((fItem->second.is(Type::Folder) && !aFileInfo.isDir())          // type folder required but is no folder OR
              || (fItem->second.is(Type::File)   && !aFileInfo.isFile())         // type file required but is no file
-             ||  fItem->second.is(Type::IncludeAll)))                           // ignore this
+             ||  fItem->second.is(Type::IncludeAll)
+             ||  fItem->second.is(Type::Consecutive)))                          // ignore this
         {
             continue;
         }
@@ -185,6 +190,13 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
             if (size > 1 && compare(fItem, path_parts[size-2].toStdString()))
             {
                 ignored_entries.clear();
+            }
+        }
+        else if (fItem->second.is(Type::Consecutive))
+        {
+            if (compare(fItem, aFileInfo.filePath().toStdString()))
+            {
+                ignored_entries.push_back(*fItem);
             }
         }
     }
