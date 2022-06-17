@@ -97,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
 , mFavoritesOpenPath(QDir::homePath())
 , mFindStartRow(0)
 , mShowIcon(true)
+, mChecked(eName)
 {
     ui->setupUi(this);
 
@@ -148,8 +149,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBoxSearchColumn->setCurrentIndex(eID);
     ui->tableView->setModel(mListModel);
-#ifdef WEB_ENGINE
+    for (int fSection = 0; fSection < eLast; ++fSection)
+    {
+        if (!mHiddenColumns.contains(fSection))
+        {
+            ui->tableView->horizontalHeader()->setSectionResizeMode(fSection , fSection == 0 ? QHeaderView::Stretch : QHeaderView::ResizeToContents);
+        }
+    }
+    ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
+#ifdef WEB_ENGINE
     mWebEngineView.reset(new QWebEngineView(this));
     // mWebEngineView->setContextMenuPolicy(Qt::NoContextMenu);
     QWebEnginePage* page = new QWebEnginePage(this);
@@ -197,6 +206,8 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, mOpenFileAtStart, toString);
+    LOAD_STR(fSettings, mChecked, toInt);
+    mListModel->setCheckedColumn(mChecked);
 
     fSettings.endGroup();
 
@@ -233,6 +244,7 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mShowIcon);
     STORE_STR(fSettings, mMediaPlayerCommand);
     STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
+    STORE_STR(fSettings, mChecked);
     if (!ui->actionLoadLastOpenedFileAtStart->isChecked())
     {
         mOpenFileAtStart.clear();
@@ -263,7 +275,7 @@ QString MainWindow::get_item_name(int row) const
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    if (index.column() == eName)
+    if (index.column() == mChecked)
     {
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
@@ -333,7 +345,7 @@ void MainWindow::on_checkBoxSelectAll_clicked(bool checked)
     const int table_rows = mListModel->rowCount();
     for (int current_row = 0; current_row < table_rows; ++current_row)
     {
-        mListModel->setData(mListModel->index(current_row, eName), checked, Qt::CheckStateRole);
+        mListModel->setData(mListModel->index(current_row, mChecked), checked, Qt::CheckStateRole);
     }
 }
 
@@ -349,10 +361,10 @@ void MainWindow::on_pushButtonSelect_clicked()
     {
         if (mListModel->data(mListModel->index(current_row, search_column)).toString().indexOf(select_text, 0, case_sens) != -1)
         {
-            bool checked = mListModel->data(mListModel->index(current_row, eName),  Qt::CheckStateRole).toBool();
-            mListModel->setData(mListModel->index(current_row, eName), !checked, Qt::CheckStateRole);
+            bool checked = mListModel->data(mListModel->index(current_row, mChecked),  Qt::CheckStateRole).toBool();
+            mListModel->setData(mListModel->index(current_row, mChecked), !checked, Qt::CheckStateRole);
         }
-        if (mListModel->data(mListModel->index(current_row, eName),  Qt::CheckStateRole).toBool())
+        if (mListModel->data(mListModel->index(current_row, mChecked),  Qt::CheckStateRole).toBool())
         {
             ++selected;
         }
@@ -411,7 +423,7 @@ void MainWindow::menu_file_save_as_favorites()
             const int table_rows = mListModel->rowCount();
             for (int current_row = 0; current_row < table_rows; ++current_row)
             {
-                if (mListModel->data(mListModel->index(current_row, eName), Qt::CheckStateRole).toBool())
+                if (mListModel->data(mListModel->index(current_row, mChecked), Qt::CheckStateRole).toBool())
                 {
                     QString line = tr("<favourite name=\"%1\" thumb=\"%2\">PlayMedia(&quot;%3&quot;)</favourite>\n").
                             arg(get_item_name(current_row),
@@ -457,7 +469,7 @@ void MainWindow::menu_file_update_favorites()
                     {
                         if (get_item_name(current_row).indexOf(select_text, 0, Qt::CaseSensitive) != -1)
                         {
-                            mListModel->setData(mListModel->index(current_row, eName), true, Qt::CheckStateRole);
+                            mListModel->setData(mListModel->index(current_row, mChecked), true, Qt::CheckStateRole);
                             break;
                         }
                     }
@@ -658,7 +670,7 @@ void MainWindow::open_file(const QString& filename)
                     mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), friendly_name);
                 }
                 // insert the checkbox and the media type
-                mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), true, Qt::CheckStateRole);
+                mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
                 mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), line.indexOf(is_radio) != -1 ? txt::radio : txt::tv);
                 read_url = true;
             }
@@ -749,17 +761,23 @@ QString getSettingsName(const QString& aItemName)
 }
 
 CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
-    QStandardItemModel(rows, columns, parent)
+    QStandardItemModel(rows, columns, parent),
+    mChecked(0)
 {
 }
 
 QVariant CheckboxItemModel::data(const QModelIndex &index, int role) const
 {
-    if (role == Qt::CheckStateRole && index.column() == eName)
+    if (role == Qt::CheckStateRole && index.column() == mChecked)
     {
         return QStandardItemModel::data(index, role).toBool() ? Qt::Checked : Qt::Unchecked;
     }
     return QStandardItemModel::data(index, role);
+}
+
+void CheckboxItemModel::setCheckedColumn(int checked)
+{
+    mChecked = checked;
 }
 
 int execute(const QString& command, QString& aResultText)
