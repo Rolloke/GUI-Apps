@@ -20,6 +20,9 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
+    void setCheckedColumn(int checked);
+private:
+    int mChecked;
 };
 
 namespace Ui {
@@ -87,6 +90,7 @@ private:
     QString             mDownloadFavoriteCommand;
     int                 mFindStartRow;
     bool                mShowIcon;
+    int                 mChecked;
 };
 
 #endif // MAINWINDOW_H
