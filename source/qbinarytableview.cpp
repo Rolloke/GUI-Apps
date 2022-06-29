@@ -142,12 +142,14 @@ int qbinarytableview::get_type() const
 void qbinarytableview::set_offset(int offset)
 {
     get_model()->m_start_offset = offset;
-    int first = rowAt(rect().top());
-    int last  = rowAt(rect().bottom());
-    for (int row = first; row < last; ++row)
-    {
-        update_complete_row(model()->index(row, 0));
-    }
+    update_rows();
+    // TODO: update only visible rows?
+//    int first = rowAt(rect().top());
+//    int last  = rowAt(rect().bottom());
+//    for (int row = first; row < last; ++row)
+//    {
+//        update_complete_row(model()->index(row, 0));
+//    }
 }
 
 int qbinarytableview::get_offset() const
@@ -237,7 +239,7 @@ bool qbinarytableview::is_binary(QFile& file)
 BinaryTableModel* qbinarytableview::get_model() const
 {
     auto * themodel = dynamic_cast<BinaryTableModel*>(model());
-    assert(themodel != 0);
+    assert(themodel != nullptr);
     return themodel;
 }
 
