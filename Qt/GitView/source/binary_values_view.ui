@@ -680,6 +680,9 @@
            <property name="toolTip">
             <string>Edit number of collumns shown in binary table view</string>
            </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
            <property name="maximum">
             <number>32</number>
            </property>
