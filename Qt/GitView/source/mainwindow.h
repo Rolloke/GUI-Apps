@@ -275,6 +275,8 @@ private:
     QStringList mHistoryFile;
     QString mStylePath;
     QString mExternalIconFiles;
+    QString mExternalFileOpenCmd;
+    QStringList mExternalFileOpenExt;
 
 };
 
