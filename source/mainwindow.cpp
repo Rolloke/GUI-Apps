@@ -73,6 +73,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mFontName("Courier")
     , mFileCopyMimeType("x-special/mate-copied-files")
     , mStylePath( "/opt/tools/git_view/style.qss")
+    #ifdef __linux__
+    , mExternalFileOpenCmd("xdg-open")
+    #else
+    , mExternalFileOpenCmd("")
+    #endif
+    , mExternalFileOpenExt({"pdf", "doc"})
 {
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
@@ -263,6 +269,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         }
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
         LOAD_STR(fSettings, mExternalIconFiles, toString);
+        LOAD_STR(fSettings, mExternalFileOpenCmd, toString);
+        QString fExternalFileOpenExt;
+        LOAD_STR(fSettings, fExternalFileOpenExt, toString);
+        if (fExternalFileOpenExt.size())
+        {
+            mExternalFileOpenExt = fExternalFileOpenExt.split(",");
+        }
 
         QStringList keys = QStyleFactory::keys();
         ui->comboAppStyle->addItems(keys);
@@ -412,6 +425,10 @@ MainWindow::~MainWindow()
 
         STORE_STR(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
+        STORE_STR(fSettings, mExternalFileOpenCmd);
+        QString fExternalFileOpenExt = mExternalFileOpenExt.join(",");
+        STORE_STR(fSettings, fExternalFileOpenExt);
+
         auto fWindowGeometry = saveGeometry();
         STORE_STR(fSettings, fWindowGeometry);
         auto fWindowState = saveState();

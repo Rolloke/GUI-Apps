@@ -22,11 +22,8 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
     bool fResult  = false;
     if (aParentItem)
     {
-        auto check_state = aParentItem->checkState(QSourceTreeWidget::Column::FileName);
-        if (!ui->treeSource->mUseSourceTreeCheckboxes)
-        {
-            check_state = Qt::Checked;
-        }
+        auto check_state = ui->treeSource->mUseSourceTreeCheckboxes ? aParentItem->checkState(QSourceTreeWidget::Column::FileName) : Qt::Checked;
+
         if (   check_state == Qt::Checked || check_state == Qt::PartiallyChecked
             || mCurrentTask == Work::InsertPathFromCommandString)
         {
@@ -294,6 +291,16 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     on_btnCloseText_clicked();
     const QFileInfo file_info(file_path);
     QString         file_extension = file_info.suffix().toLower();
+
+    if (mExternalFileOpenExt.contains(file_extension))
+    {
+        QString open_file_cmd = mExternalFileOpenCmd + " " + file_path;
+        int result = system(open_file_cmd.toStdString().c_str());
+        if (result == 0)
+        {
+            return;
+        }
+    }
 
     if (ui->ckRenderGraphicFile->isChecked())
     {
