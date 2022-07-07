@@ -295,6 +295,11 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     if (mExternalFileOpenExt.contains(file_extension))
     {
         QString open_file_cmd = mExternalFileOpenCmd + " " + file_path;
+        auto program_parameter = mExternalFileOpenExt.value(file_extension);
+        if (program_parameter.size())
+        {
+            open_file_cmd = program_parameter + " " + file_path;
+        }
         int result = system(open_file_cmd.toStdString().c_str());
         if (result == 0)
         {

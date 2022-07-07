@@ -66,7 +66,7 @@ Cmd::Cmd()
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
     mCommandMap[Blame]                  = "git blame -c %1 %2";
 
-    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, StashPush, History, StashShow, Separator, ExpandTreeItems, CollapseTreeItems  };
+    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, AddExternalFileOpenExt, DeleteExternalFileOpenExt, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, Commit, StashPush, History, StashShow, Separator, ExpandTreeItems, CollapseTreeItems };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };

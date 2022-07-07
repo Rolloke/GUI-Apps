@@ -78,7 +78,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     #else
     , mExternalFileOpenCmd("")
     #endif
-    , mExternalFileOpenExt({"pdf", "doc"})
 {
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
@@ -274,7 +273,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, fExternalFileOpenExt, toString);
         if (fExternalFileOpenExt.size())
         {
-            mExternalFileOpenExt = fExternalFileOpenExt.split(",");
+            auto extensions = fExternalFileOpenExt.split(",");
+            for (const auto&extension : extensions)
+            {
+                auto parts = extension.split(":");
+                mExternalFileOpenExt.insert(parts[0], parts.size() > 1 ? parts[1] : "");
+            }
         }
 
         QStringList keys = QStyleFactory::keys();
@@ -426,7 +430,18 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
         STORE_STR(fSettings, mExternalFileOpenCmd);
-        QString fExternalFileOpenExt = mExternalFileOpenExt.join(",");
+        QString fExternalFileOpenExt;
+        for (auto extension = mExternalFileOpenExt.constBegin(); extension != mExternalFileOpenExt.constEnd(); ++extension)
+        {
+            fExternalFileOpenExt += extension.key();
+            fExternalFileOpenExt += ":";
+            fExternalFileOpenExt += extension.value();
+            fExternalFileOpenExt += ",";
+        }
+        if (fExternalFileOpenExt.size())
+        {
+            fExternalFileOpenExt.remove(fExternalFileOpenExt.size()-1, 1);
+        }
         STORE_STR(fSettings, fExternalFileOpenExt);
 
         auto fWindowGeometry = saveGeometry();
@@ -1197,6 +1212,14 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::DeleteTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::DeleteTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::AddExternalFileOpenExt, tr("Set open external flag"), tr("Sets parameters to open files with this extension externally")), SIGNAL(triggered()), this, SLOT(add_file_open_extension()));
+    mActions.setFlags(Cmd::AddExternalFileOpenExt, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::AddExternalFileOpenExt, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::DeleteExternalFileOpenExt, tr("Remove open external flag"), tr("Removes open external parameters")), SIGNAL(triggered()), this, SLOT(delete_file_open_extension()));
+    mActions.setFlags(Cmd::DeleteExternalFileOpenExt, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::DeleteExternalFileOpenExt, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1379,6 +1402,27 @@ void MainWindow::delete_tree_item()
     }
 }
 
+void MainWindow::add_file_open_extension()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QFileInfo file_info(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
+        const QString   file_extension = file_info.suffix().toLower();
+        const QString   program_parameter;
+        // TODO: edit file open parameter
+        mExternalFileOpenExt[file_extension] = program_parameter;
+    }
+}
+
+void MainWindow::delete_file_open_extension()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QFileInfo file_info(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
+        const QString   file_extension = file_info.suffix().toLower();
+        mExternalFileOpenExt.remove(file_extension);
+    }
+}
 bool MainWindow::handleInThread()
 {
     const QAction *fAction = qobject_cast<QAction *>(sender());
