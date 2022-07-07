@@ -119,6 +119,8 @@ void ActionList::initActionIcons()
     action_icons[Cmd::ZoomOut]                 = resource+"list-remove.png";
     action_icons[Cmd::FitInView]               = resource+"view-fullscreen.png";
     action_icons[Cmd::DeleteTreeItems]         = resource+"edit-cut.png";
+    action_icons[Cmd::AddExternalFileOpenExt]  = resource+"gnome-mime-text.png";
+    action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
 
     for (const auto& icon_path: action_icons )
     {

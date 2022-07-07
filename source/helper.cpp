@@ -43,34 +43,33 @@ QString formatFileSize(quint64 aSize)
 {
     using namespace std;
 
-    static map<quint64, QString> fMap;
-    const quint64 fTeraExponent = 40;
-    const quint64 fGigaExponent = 30;
-    const quint64 fMegaExponent = 20;
-    const quint64 fKiloExponent = 10;
-    const quint64 fOne = 1;
-    const qint32 fThousandDigit = 3;
-    if (fMap.empty())
+    static map<quint64, QString> exponents;
+    const quint64 tera_exponent = 40;
+    const quint64 giga_exponent = 30;
+    const quint64 mega_exponent = 20;
+    const quint64 kilo_exponent = 10;
+    const quint64 one = 1;
+    const qint32 thousand_digit = 3;
+    if (exponents.empty())
     {
-        fMap[fOne << fTeraExponent] = "TB";
-        fMap[fOne << fGigaExponent] = "GB";
-        fMap[fOne << fMegaExponent] = "MB";
-        fMap[fOne << fKiloExponent] = "KB";
+        exponents[one << tera_exponent] = "TB";
+        exponents[one << giga_exponent] = "GB";
+        exponents[one << mega_exponent] = "MB";
+        exponents[one << kilo_exponent] = "KB";
     }
 
-    quint64 fExp = fTeraExponent;
-    for (auto fIt = fMap.rbegin(); fIt != fMap.rend(); ++fIt)
+    quint64 exponent = tera_exponent;
+    for (auto fIt = exponents.rbegin(); fIt != exponents.rend(); ++fIt)
     {
         if (aSize > fIt->first)
         {
-            QString fNumber;
-            QString fThousands = QString::number(static_cast<quint64>((aSize & (fIt->first-1))) >> (fExp - fKiloExponent));
-            while (fThousands.size() < fThousandDigit) fThousands = "0" + fThousands;
-            fNumber = QString::number(static_cast<quint64>(aSize >> fExp)) + "."
-                      + fThousands + " " + fIt->second;
-            return fNumber;
+            QString thousands = QString::number(static_cast<quint64>((aSize & (fIt->first-1))) >> (exponent - kilo_exponent));
+            while (thousands.size() < thousand_digit) thousands = "0" + thousands;
+            QString number = QString::number(static_cast<quint64>(aSize >> exponent)) + "."
+                      + thousands + " " + fIt->second;
+            return number;
         }
-        fExp -= fKiloExponent;
+        exponent -= kilo_exponent;
     }
     return QString::number(aSize) + " B";
 }

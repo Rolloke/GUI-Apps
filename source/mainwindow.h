@@ -94,6 +94,8 @@ private Q_SLOTS:
 #endif
     void clearTrees();
     void delete_tree_item();
+    void add_file_open_extension();
+    void delete_file_open_extension();
 
     void perform_custom_command();
     void call_git_history_diff_command();
@@ -276,7 +278,7 @@ private:
     QString mStylePath;
     QString mExternalIconFiles;
     QString mExternalFileOpenCmd;
-    QStringList mExternalFileOpenExt;
+    QMap<QString, QString> mExternalFileOpenExt;
 
 };
 

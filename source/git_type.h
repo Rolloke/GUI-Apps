@@ -87,6 +87,8 @@ struct Cmd
         ZoomOut,
         FitInView,
         DeleteTreeItems,
+        AddExternalFileOpenExt,
+        DeleteExternalFileOpenExt,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
