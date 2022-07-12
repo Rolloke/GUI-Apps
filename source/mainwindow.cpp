@@ -21,6 +21,7 @@
 #include <QStyleFactory>
 #include <QPalette>
 #include <QTextStream>
+#include <QInputDialog>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -1408,9 +1409,12 @@ void MainWindow::add_file_open_extension()
     {
         const QFileInfo file_info(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
         const QString   file_extension = file_info.suffix().toLower();
-        const QString   program_parameter;
-        // TODO: edit file open parameter
-        mExternalFileOpenExt[file_extension] = program_parameter;
+        bool ok = false;
+        const QString program_parameter = QInputDialog::getText(0, tr("Program parameter"), tr("Set open program for '%1' file extension\nLeave empty for default program '%2'").arg(file_extension, mExternalFileOpenCmd), QLineEdit::Normal, mExternalFileOpenExt.value(file_extension), &ok);
+        if (ok)
+        {
+            mExternalFileOpenExt[file_extension] = program_parameter;
+        }
     }
 }
 
