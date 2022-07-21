@@ -282,6 +282,21 @@ void MainWindow::removeGitSourceFolder()
 
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
+    if (item)
+    {
+        const Type fType(static_cast<Type::TypeFlags>(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        if (fType.is(Type::Folder))
+        {
+            bool expand = !item->isExpanded();
+            auto expand_item = [&](QTreeWidgetItem*the_item)
+            {
+                the_item->setExpanded(expand);
+            };
+            do_with_item_and_children(item, expand_item, false);
+            item->setExpanded(!expand);
+            return;
+        }
+    }
     const QString   file_name      = ui->treeSource->getItemFilePath(item);
     open_file(file_name, {});
 }

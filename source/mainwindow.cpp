@@ -1443,17 +1443,7 @@ void MainWindow::expand_tree_items()
     QTreeWidget* ftw = focusedTreeWidget();
     if (ftw)
     {
-        /// NOTE: this is not performant for large trees
-        auto selected = ftw->selectedItems();
-        if (selected.size())
-        {
-            auto expand_item = [&](QTreeWidgetItem*item) { item->setExpanded(true); };
-            do_with_item_and_children(selected[0], expand_item, false);
-        }
-        else
-        {
-            ftw->expandAll();
-        }
+        ftw->expandAll();
     }
 }
 
@@ -1462,16 +1452,7 @@ void MainWindow::collapse_tree_items()
     QTreeWidget* ftw = focusedTreeWidget();
     if (ftw)
     {
-        auto selected = ftw->selectedItems();
-        if (selected.size())
-        {
-            auto expand_item = [&](QTreeWidgetItem*item) { item->setExpanded(false); };
-            do_with_item_and_children(selected[0], expand_item, false);
-        }
-        else
-        {
-            ftw->collapseAll();
-        }
+        ftw->collapseAll();
     }
 }
 
