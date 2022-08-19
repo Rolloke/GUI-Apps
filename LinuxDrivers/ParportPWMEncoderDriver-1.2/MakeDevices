@@ -1,0 +1,59 @@
+#
+# MakeDevices - Create device nodes /dev/pwm? and /dev/encoder?
+#
+# Copyright (C) 2005-2007 Luke Cole, Joshua Bobruk
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of version 2 of the GNU General Public
+# License as published by the Free Software Foundation
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+#
+# @author  Luke Cole
+#          cole@lc.homedns.org
+#
+# @author  Joshua Bobruk
+#	   joshportlock@msn.com
+# 
+# @version
+#   $Id: MakeDevices,v 1.2 2007-04-05 03:33:49 cole Exp $
+#
+
+MAJOR=253
+
+mknod /dev/encoder0 c $MAJOR 0
+mknod /dev/encoder1 c $MAJOR 1
+mknod /dev/encoder2 c $MAJOR 2
+mknod /dev/encoder3 c $MAJOR 3
+mknod /dev/encoder4 c $MAJOR 4
+mknod /dev/encoder5 c $MAJOR 5
+mknod /dev/encoder6 c $MAJOR 6
+mknod /dev/encoder7 c $MAJOR 7
+
+mknod /dev/encoder8 c $MAJOR 8
+mknod /dev/encoder9 c $MAJOR 9
+mknod /dev/encoder10 c $MAJOR 10
+mknod /dev/encoder11 c $MAJOR 11
+mknod /dev/encoder12 c $MAJOR 12
+mknod /dev/encoder13 c $MAJOR 13
+mknod /dev/encoder14 c $MAJOR 14
+mknod /dev/encoder15 c $MAJOR 15
+
+PWMMAJOR=254
+
+mknod /dev/pwm0 c $PWMMAJOR 0
+mknod /dev/pwm1 c $PWMMAJOR 1
+mknod /dev/pwm2 c $PWMMAJOR 2
+mknod /dev/pwm3 c $PWMMAJOR 3
+mknod /dev/pwm4 c $PWMMAJOR 4
+mknod /dev/pwm5 c $PWMMAJOR 5
+mknod /dev/pwm6 c $PWMMAJOR 6
+mknod /dev/pwm7 c $PWMMAJOR 7

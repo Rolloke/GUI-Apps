@@ -1,0 +1,155 @@
+/*
+ * README - Readme file for the Parport PWM/Encoder Driver
+ *
+ * Copyright (C) 2005 Joshua Bobruk, Luke Cole
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of version 2 of the GNU General Public
+ * License as published by the Free Software Foundation
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ *
+ *
+ * @author  Joshua Bobruk
+ *	    joshportlock@msn.com
+ * 
+ * @author  Luke Cole
+ *          cole@lc.homedns.org
+ *          Dept of Systems Engineering,
+ *          Research School of Information Sciences and Engineering,
+ *          Australian National University,
+ *          Canberra, 0200, Australia.
+ *
+ * @version
+ *   $Id: README,v 1.3 2007-04-05 03:33:50 cole Exp $
+ */
+
+//=============================================================================
+
+/*
+ * Installation
+ */
+
+make
+make install (as root)
+
+Update the MakeDevice MAJOR variables with the determined character
+device MAJOR number (See dmesg)
+
+make MakeDevices
+
+//=============================================================================
+
+/*
+ * PWM:
+ */
+
+The lp_pwm module outputs pulse width modulation signals onto pins 2 to
+9 on the parallel port. The driver runs with interrupts at 1000Hz with
+each PWM cycle lasting for 0.01 seconds, allowing for 10 levels of
+control.
+
+When the module is inserted, syslog will give commands to create device
+nodes as /dev/pwm<n>.
+
+When used normally, input is sent to the device node as single a
+character between 0x00 and 0x7F.  This will be rounded and result in an
+output from level 0 (off) to level 10 (on).
+
+When the `lp_pwm_int_input' is used, one can send a string of digits to
+the device node from "0" to "10" to achieve the same result as above.
+
+In addition to these functions, reading from the device will produce one
+8-bit character containing the current power level (0 to 10) of that pwm
+device. Once the character has been read, the file connection will close
+at the module end. 
+
+Kernel Parameters for PWM:
+
+lp_pwm_debug : debug messages, default is 0 (no)
+lp_pwm_int_input : Use integers for input (0-10). Default is 0, to use
+                   chars (0x00 to 0x7f)
+
+//=============================================================================
+
+/*
+ * Encoders:
+ */
+
+The encoders are read from the parallel port status registers and map as
+follows:
+
+Register 0 : No Pin Mapped
+Register 1 : No Pin Mapped
+Register 2 : No Pin Mapped
+Register 3 : Mapped to Pin 15
+Register 4 : Mapped to Pin 13
+Register 5 : Mapped to Pin 12
+Register 6 : Mapped to Pin 10
+Register 7 : Mapped to Pin 11
+
+For each pin, a counter is kept of each falling edge from 5V to 0V and
+this value can be read by reading the device node /dev/encoder<n> where
+encoder7 would be mapped to pin 11.
+
+For the second parallel port, the registers will start at 16 to allow
+for 8 quadrature output devices.
+
+That rate of the output to this device node is initally set to 500ms,
+changed to 1ms upwards using the output_rate module parameter.
+
+The count will be returned as it counts upwards, and loop back to zero
+at 0xFFFF
+
+In addition to simply reading the number of falling edges that have
+occured, encoder pins can be said to be linked to give direction
+information.  The module assumes that any pins that are to be linked are
+placed on the same encoder wheel and are 90 degrees out of phase.  
+
+Encoders are linked with the module option:
+
+insmod lp_encoder.ko linked_encoders="7+5"
+
+where the string is formatted as "a+b;c+d;e+f" where a and b will be
+linked etc.
+
+After inserting the module, you'll see the fillowing in syslog which
+will give the /dev/ node to use to gain direction information. 
+
+Encoder links were found as follows:
+  7 -> 5 (use `mknod /dev/encoder15 c 252 15')
+
+The direction output is given at the same rate as the encoder count
+ouput, and returns the last observed direction of the encoder wheel.
+The output is 1 for one direction, -1 for the opposite direction, and 0
+for unknown.
+
+The module parameters are as follows:
+
+lp_encoder_debug : debug messages, default is 0 (no)
+lp_encoder_io_base : Base IO address for the parallel port. Defaults to
+		0x378. Accepts up to four io base ports, comma seperated.
+lp_encoder_output_rate : delay in ms to return data from cat /dev/encoder
+			(default 500ms)
+lp_encoder_linked_encoders :Strings containing encoder pins to be linked in the
+			    format "1+2;3+4" which would link 1 with 2 and 3
+			    with 4. Device nodes to access direction will be
+	                    given in syslog.
+
+For example,
+
+insmod lp_encoder.ko lp_encoder_io_base=0x370,0x378 lp_encoder_linked_encoders="","5+4" lp_encoder_int_output=1
+
+will use two parallel ports, one at port 0x370 and one at 0x378 with the
+first port having no quadrature links, and the second having a link
+between pins 4 and 5. Also, integer output is in effect. 
+
+//=============================================================================

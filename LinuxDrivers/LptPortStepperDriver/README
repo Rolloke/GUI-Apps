@@ -1,0 +1,184 @@
+/*
+ * README - Readme file LPT Stepper Motor kernel space driver
+ *
+ * Copyright (C) 2014 Rolf Kary-Ehlers
+ *
+ * This program is free software; you can redistribute it and/or modify it under the
+ * terms of version 2 of the GNU General Public License as published by the
+ * Free Software Foundation
+ *
+ * This program is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this
+ * program; if not, write to the Free Software Foundation,
+ * Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ *
+ *
+ * @author  Rolf Kary-Ehlers
+ *          Nicoline-Hensler-Str. 3B
+ *          24582 Bordesholm
+ *	        dr_kary@t-online.de
+ * 
+ *
+ * @version README,v 1.0 2014-07-20
+ */
+
+//========================================================================================
+
+/*
+ * Installation
+ */
+
+make
+sudo make install
+
+The installation process creates 4 devices
+  /dev/stepper0     ->  port: 278 hex
+  /dev/stepper1     ->  port: 378 hex
+  /dev/stepper2     ->  port: 3bc hex
+  /dev/stepper3     ->  port: 2bc hex
+
+/*
+ * Deinstallation
+ */
+
+sudo make uninstall
+
+//========================================================================================
+
+/*
+ * Stepper Controller:
+ */
+
+The device can be configured and controlled using the ioctl commands defined in 
+lpt_stepper.h applied to an opened device created by the installation process.
+See doxygen documentation in the header file.
+
+The initial configuration is that all pins are unconnected.
+
+The device can also be configured via the console with single commands:
+    echo "set x motor: UnipolarHalf" >> /dev/stepper1
+    echo "set x motor bits: 5 6 7 8" >> /dev/stepper1
+    
+or with a set of commands stored in a text file separated by line feeds
+    cat test.txt >> /dev/stepper1
+
+The device configuration can be shown using the command:
+    cat /dev/stepper1
+
+However the ioctl command interface is more complex. The console interface was used for
+the first tests of the driver implementation.
+
+The example configuration in the file "test.txt" controls three stepper motors in a 
+plotter, which was built from an Epson Stylus 84 and an Apple Style Writer II powered by
+an ATX Power supply.
+
+To control the stepper motors via console use the following commands:
+    # enable or switch on motors
+    echo "enable motors: 1"  >> /dev/stepper1
+
+    # move Pen to predefined pen position: Pen_down (Pen_up, Pen_down, [Pen_drill])
+    echo "move pen: 1" >> /dev/stepper1
+
+    # move to x and y position
+    echo "move to: 50, 100" >> /dev/stepper1
+
+    # line to x and y position
+    echo "line to: 100, 50" >> /dev/stepper1
+
+    # move Pen to predefined pen position: Pen_up (Pen_up, Pen_down, [Pen_drill])
+    echo "move pen: 0" >> /dev/stepper1
+
+    # disable or switch off motors
+    echo "enable motors: 0"  >> /dev/stepper1
+    
+The motor bits have to be assigned to the output pins using the bits of the LPTs
+data and control port
+    data:    output bits 1 to  8
+     bit number: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+     pin number: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+    control: output bits 9 to 12 (13 to 16 are not connected)
+     bit number: 9 |10 |11 |12 |13 |14 |15 |16
+     pin number: 1 |14 |16 |17 |nc |nc |nc |nc
+     inverted  : X | X |   | X |   |   |   |
+    
+The input bits may be assigned to the input pins using the bits of the LPTs
+status port
+    status:  input bits 4 to 8 (1 to 3 are not connected)
+     bit        1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+     pin       nc |nc |nc |15 |13 |12 |10 |11
+     inverted     |   |   |   |   |   |   | X
+
+To invert the polarity of an input or output bit use a negative sign for the bit number.
+If the bit number is zero, it is not connected.
+
+output example:
+set motor: x BipolarFull 
+# (BipolarFull, BipolarHalf, UnipolarFull, UnipolarHalf, TestPattern)
+set motor bits: x 1 2 0 0
+set enable motors bit: -12
+# (1 - 12)
+It is possible to control 5 motors with one LPT port using the motor type BipolarFull.
+
+input examples:
+set left end bit: 7
+set right end bit: 5
+set top end bit: 0
+set bottom end bit: 0
+set pen down bit: 8
+# (4 - 8)
+
+The driver can control 4 types of motors:
+    BipolarFull: a bipolar stepper motor in full step mode
+        bit0: output for bipolar driver of coil 1 of stepper motor
+        bit1: output for bipolar driver of coil 2 of stepper motor
+        bit2: [enables driver of coil 1 of bipolar stepper motor]
+        bit3: [enables driver of coil 2 of bipolar stepper motor]
+        optionally the "enable motors bit" enables the drivers of the stepper motor
+        
+    BipolarHalf: a bipolar stepper motor in half step mode
+        bit0: output for bipolar driver of coil 1 of stepper motor
+        bit1: output for bipolar driver of coil 2 of stepper motor
+        bit2: enables driver of coil 1 of bipolar stepper motor
+        bit3: enables driver of coil 2 of bipolar stepper motor
+        
+    UnipolarFull: a unipolar stepper motor in full step mode
+        bit0: output for driver of pin 1 of coil 1 of unipolar stepper motor
+        bit1: output for driver of pin 2 of coil 1 of unipolar stepper motor
+        bit2: output for driver of pin 1 of coil 2 of unipolar stepper motor
+        bit3: output for driver of pin 2 of coil 2 of unipolar stepper motor
+        both coils must have a common ground connection
+    
+    UnipolarHalf: a unipolar stepper motor in half step mode
+        bit0: output for driver of pin 1 of coil 1 of unipolar stepper motor
+        bit1: output for driver of pin 2 of coil 1 of unipolar stepper motor
+        bit2: output for driver of pin 1 of coil 2 of unipolar stepper motor
+        bit3: output for driver of pin 2 of coil 2 of unipolar stepper motor
+        both coils must have a common ground connection
+    
+    TestPattern: just a test pattern for an functional output test
+    
+The speed of the motors is controlled by a delay in micro seconds between a motor step:
+The predefined default value is 2000 micro seconds.
+Currently the y-direction value is not used and the x-direction is used for horizontal
+direction (x and y)
+    set delay: x 2000
+    set delay: y 2000
+    set delay: z 2000
+    
+To define a ramp for the stepper motor these values too 
+    set start delay: x 3000
+    set start delay: y 3000
+    set start delay: z 3000
+    set ramp steps: x 50
+    set ramp steps: y 50
+    set ramp steps: z 50
+
+The ramp generation is quite simple, but in this case from 333 Hz to 500 Hz
+it nearly linear.
+
+//=============================================================================

@@ -1,0 +1,10 @@
+*.ko
+*.o
+*.gz
+*.cmd
+*.*~
+*.mk
+*.symvers
+*.order
+LinuxDriverSamples/
+.tmp_versions/

@@ -1,0 +1,24 @@
+set motor: x UnipolarHalf
+set motor bits: x 5 6 7 8
+set motor: y BipolarFull
+set motor bits: y 1 2 0 0
+set motor: z BipolarHalf
+set motor bits: z 3 4 -9 -10
+set enable motors bit: -12
+set left end bit: 7
+set right end bit: 5
+set top end bit: 0
+set bottom end bit: 0
+set pen down bit: 8
+set delay: x 2000
+set delay: y 2000
+set delay: z 3000
+set start delay: x 2500
+set start delay: y 2500
+set start delay: z 4000
+set ramp steps: x 50
+set ramp steps: y 50
+set ramp steps: z 10
+set pen up position: 40
+set pen down position: 30
+set pen drill position: 20

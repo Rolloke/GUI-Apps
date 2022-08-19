@@ -4,10 +4,12 @@ Kikad/
 portaudio/
 CVS/
 *.aps
-*.bin
+*.log
+*.deb
 *.user.*
 OpenDDS/
 *.geany
+lazarus/
 #Qt/
 #!Qt/Widgets/
 #test
