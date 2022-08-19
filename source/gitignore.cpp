@@ -52,7 +52,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 fType.add(Type::Negation);
                 fLine.remove(0, 1);
             }
-            else if (fLine.startsWith("**/"))
+            if (fLine.startsWith("**/"))
             {
                 fType.add(Type::Folder);
                 fType.add(Type::File);

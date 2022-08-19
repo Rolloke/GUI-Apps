@@ -438,7 +438,7 @@ void Highlighter::load_language(QString language_name)
             }
 
 //            rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-            rule.pattern = QRegularExpression(QStringLiteral("\"[\\w\\d\\s\\(\\)\\*/#\\{\\}\\[\\]\\-\\+\\.\\\\^\"]*\""));
+            rule.pattern = QRegularExpression(QStringLiteral("\"[\\w\\d\\s\\(\\)\\*/#\\{\\}\\[\\];|\\-\\+\\.\\\\^\"]*\""));
             rule.format = language.mQuotationFormat;
             language.highlightingRules.append(rule);
 
