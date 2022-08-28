@@ -231,6 +231,7 @@ QString Type::getStates(bool extended) const
         if (is(Negation))    states += name(Negation)    + sep;
         if (is(Checked))     states += name(Checked)     + sep;
         if (is(Executeable)) states += name(Executeable) + sep;
+        if (is(Consecutive)) states += name(Consecutive) + sep;
         if (is(FolderForNavigation)) states += name(FolderForNavigation) + sep;
         if (is(IgnoreTypeStatus))    states += name(IgnoreTypeStatus) + sep;
     }
