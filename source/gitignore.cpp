@@ -47,31 +47,37 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
 
             Type fType(Type::None, fMapLevel);
 
-            if (fLine.startsWith('!'))
+            if (fLine.startsWith('!'))      // Negation
             {
                 fType.add(Type::Negation);
                 fLine.remove(0, 1);
             }
-            if (fLine.startsWith("**/"))
+            if (fLine.startsWith("**/"))    // name behind match files or folders in all directories
             {
                 fType.add(Type::Folder);
                 fType.add(Type::File);
                 fLine.remove(0, 3);
             }
-            else if (fLine.endsWith("/**"))
+            else if (fLine.endsWith("/**")) // folder name before matches all files inside
             {
                 fType.add(Type::Folder);
                 fType.add(Type::IncludeAll);
                 fLine.remove(fLine.size()-4, 3);
             }
-            else if (fLine.contains("/**/"))
+            else if (fLine.contains("/**/")) // matches consecutive folders e.g.: a/**/b a/b
             {
                 fType.add(Type::Folder);
                 fType.add(Type::RegExp);
                 fType.add(Type::Consecutive);
                 fLine = fLine.replace("/**/", "/(.*/|)");
             }
-            if (fLine.endsWith('/'))
+            if (fLine.contains("\\"))       // Trailing backslash disables control characters
+            {
+                fLine.replace("\\!", "!");  // use exclamation mark trailing a file or folder name
+                fLine.replace("\\#", "#");  // use # not as comment use within words
+                fLine.replace("\\ ", " ");  // use space within a word
+            }
+            if (fLine.endsWith('/'))        // markes a Folder
             {
                 fType.add(Type::Folder);
                 fLine.remove(fLine.size()-1, 1);
@@ -81,17 +87,17 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 fType.add(Type::File);
             }
 
-            if (   (fLine.contains('[') && fLine.contains(']'))
+            if (   (fLine.contains('[') && fLine.contains(']')) // identify regular expression
                 || (fLine.contains('{') && fLine.contains('}'))
                 || (fLine.contains('(') && fLine.contains(')'))
                 ||  fLine.contains('\\') )
             {
                 fType.add(Type::RegExp);
             }
-            else if (fLine.contains('*') || fLine.contains('?'))
+            else if (fLine.contains('*') || fLine.contains('?')) // identifiy wildcards
             {
                 fType.add(Type::WildCard);
-            }
+            }                                                    // otherwise use exact match
 
             if (fLine.size())
             {
