@@ -6,6 +6,10 @@
 
 #define INT(X) static_cast<int>(X)
 
+/// TODO: validate litle and big endian representation
+/// validate cursor representation
+/// validate order of data representation
+
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
     BinaryTableModel* ListModel = new BinaryTableModel(0, INT(BinaryTableModel::Table::Last), this);
@@ -171,14 +175,16 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
     auto& themodel = *get_model();
     if (array.size())
     {
-        for (int i=0; i<array.size(); ++i)
+        if (position + array.size() < themodel.m_binary_content.size())
         {
-            themodel.m_binary_content[position + i] = array[i];
+            for (int i=0; i<array.size(); ++i)
+            {
+                themodel.m_binary_content[position + i] = array[i];
+            }
+            int row = position / themodel.get_bytes_per_row();
+            update_complete_row(model()->index(row, 0));
+            Q_EMIT contentChanged();
         }
-
-        int row = position / themodel.get_bytes_per_row();
-        update_complete_row(model()->index(row, 0));
-        Q_EMIT contentChanged();
     }
     else
     {

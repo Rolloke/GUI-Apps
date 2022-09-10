@@ -481,7 +481,7 @@
       <widget class="QLabel" name="labelFloat">
        <property name="minimumSize">
         <size>
-         <width>80</width>
+         <width>50</width>
          <height>0</height>
         </size>
        </property>
@@ -505,7 +505,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="edtFloat"/>
+      <widget class="QLineEdit" name="edtFloat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="Line" name="lineFloatingPoint">
@@ -518,7 +525,7 @@
       <widget class="QLabel" name="labelDouble">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>50</width>
          <height>0</height>
         </size>
        </property>
@@ -542,7 +549,58 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="edtDouble"/>
+      <widget class="QLineEdit" name="edtDouble">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_25">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelBinary">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Binary</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_26">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBinary">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="edtBinary">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>4</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

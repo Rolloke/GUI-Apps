@@ -28,29 +28,29 @@ const char* CDisplayType::getNameOfType(eType aType)
 {
     switch (aType)
     {
-    case Char: return "signed char";
-    case UChar: return "unsigned char";
-    case Short: return "signed short";
-    case UShort: return "unsigned short";
-    case Long: return "signed long";
-    case ULong: return "unsigned long";
-    case LongLong: return "signed long long";
-    case ULongLong: return "unsigned long long";
-    case Float: return "float";
-    case Double: return "double";
-    case HEX2: return "HEX2";
-    case HEX4: return "HEX4";
-    case HEX8: return "HEX8";
-    case HEX16: return "HEX16";
-    case Ascii: return "ascii";
-    case Unicode: return "unicode";
-    case Binary: return "binary";
-    case AsciiLine: return "ascii_line";
-    case UnicodeLine: return "unicode_line";
-    case Matrix: return "matrix";
-    case Structure: return "structure";
+    case Char:            return "signed char";
+    case UChar:           return "unsigned char";
+    case Short:           return "signed short";
+    case UShort:          return "unsigned short";
+    case Long:            return "signed long";
+    case ULong:           return "unsigned long";
+    case LongLong:        return "signed long long";
+    case ULongLong:       return "unsigned long long";
+    case Float:           return "float";
+    case Double:          return "double";
+    case HEX2:            return "HEX2";
+    case HEX4:            return "HEX4";
+    case HEX8:            return "HEX8";
+    case HEX16:           return "HEX16";
+    case Ascii:           return "ascii";
+    case Unicode:         return "unicode";
+    case Binary:          return "binary";
+    case AsciiLine:       return "ascii_line";
+    case UnicodeLine:     return "unicode_line";
+    case Matrix:          return "matrix";
+    case Structure:       return "structure";
     case RepeatAttribute: return "repeat";
-    case BytesAttribute: return "bytes";
+    case BytesAttribute:  return "bytes";
     case InLineAttribute: return "inline";
     case FactorAttribute: return "factor";
     default: return "";
@@ -126,6 +126,7 @@ CDisplayType::type_map& CDisplayType::get_type_map()
         m_display[CDisplayType::HEX4]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
         m_display[CDisplayType::HEX8]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
         m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+        m_display[CDisplayType::Binary]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayBinary));
     }
     return m_display;
 }
@@ -447,7 +448,7 @@ bool CDisplayHEX16::Write(std::uint8_t*pData, const QString& sValue)const
     return bok;
 }
 
-#ifdef DISPLAY_BINARY
+
 
 CDisplayBinary::CDisplayBinary()
 {
@@ -458,50 +459,60 @@ CDisplayBinary::CDisplayBinary()
 
 QString CDisplayBinary::Display(const std::uint8_t*pData)const
 {
-   int i, j, k, n = m_nBytes*8;
-   std::uint8_t cMask;
-   QString str(_T('0'), n+m_nBytes);
-   LPTSTR psz = (LPTSTR)LPCTSTR(str);
-   for (i=0, k=0; i<m_nBytes; i++)
-   {
-       cMask = 0x80;
-       for (j=0; j<8; j++, cMask >>= 1, k++)
-       {
-           if (pData[i] & cMask)
-           {
-               psz[k] = _T('1');
-           }
-       }
-       psz[k++] = _T(' ');
-   }
-   return str;
-}
-
-int CDisplayBinary::Write(std::uint8_t*pData, const QString& sValue)const
-{
-    sValue.Replace(" "), _T("");
-    if (pData == 0) return sValue.GetLength()/8;
-    int i, j, k, n = sValue.GetLength();
+    const int bits = 8;
+    int i, j, k, n = m_nBytes * bits;
     std::uint8_t cMask;
-    LPCTSTR psz = LPCTSTR(sValue);
-    for (i=0, k=0; i<m_nBytes; i++)
+    QString str;
+    str.reserve(n+m_nBytes);
+    for (i=m_nBytes-1, k=0; i>=0; --i)
     {
         cMask = 0x80;
-        pData[i] = 0;
-        for (j=0; j<8; j++, cMask >>= 1, k++)
+        for (j=0; j<bits; ++j, cMask >>= 1, ++k)
         {
-            if (psz[k] == _T('1'))
-            {
-                pData[i] |= cMask;
-            }
-            //if (psz[k] == _T(' ')) k++;
-            if (k >= n) break;
+            str.append(pData[i] & cMask ? '1' : '0');
         }
-        if (k >= n) break;
+        str.append(' ');
     }
-    return i;
+    return str;
 }
-#endif
+
+bool CDisplayBinary::Write(std::uint8_t*pData, const QString& sValue) const
+{
+    const int bits = 8;
+    QString value(sValue);
+    value.replace(" ", "");
+    bool ret {false};
+    if (pData)
+    {
+        int i, j, char_n, size = value.size();
+        int rest  = size % bits;
+        int bytes = size / bits;
+        if (rest) bytes++;
+        int desired_size = bytes * bits;
+
+        for (; size<desired_size; ++size)
+        {
+            value = '0' + value;
+        }
+        std::uint8_t cMask;
+        for (i=m_nBytes-1, char_n=0; i>=0 && char_n<size; --i)
+        {
+            cMask = 0x80;
+            pData[i] = 0;
+            for (j=0; j<bits && char_n<size; j++, cMask >>= 1, ++char_n)
+            {
+                if (value[char_n] == '1')
+                {
+                    pData[i] |= cMask;
+                }
+            }
+            if (char_n >= size) break;
+        }
+        ret = true;
+    }
+    return ret;
+}
+
 
 #ifdef DISPLAY_STRINGS
 
