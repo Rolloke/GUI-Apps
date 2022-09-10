@@ -25,7 +25,11 @@ public:
     explicit binary_values_view(QWidget *parent = nullptr);
     ~binary_values_view();
 
+private:
+    std::uint32_t index(CDisplayType::eType type);
+    CDisplayType::eType type(std::uint32_t index);
 
+public:
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
     void status_message(const QString&, int);

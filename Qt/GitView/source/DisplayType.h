@@ -210,7 +210,6 @@ public:
    virtual bool    Write(std::uint8_t*pData, const QString& sValue) const;
 };
 
-#ifdef DISPLAY_BINARY
 class CDisplayBinary: public CDisplayType
 {
 public:
@@ -218,7 +217,6 @@ public:
    virtual QString Display(const std::uint8_t*pData) const;
    virtual bool    Write(std::uint8_t*pData, const QString& sValue) const;
 };
-#endif
 
 #ifdef DISPLAY_STRINGS
 class CDisplayAscii: public CDisplayType
