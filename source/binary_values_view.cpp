@@ -2,8 +2,6 @@
 #include "ui_binary_values_view.h"
 #include "DisplayType.h"
 
-/// TODO: validate litle and big endian representation
-/// validate binary representation of datatypes
 
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)
@@ -18,6 +16,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     else                                    ui->radioEndian1->setChecked(true);
 
     QString tooltip = ui->checkUnsignedByte->toolTip();
+    /// NOTE: insert the datatype checkboxes in the same order as datatypes in the m_display map
     m_Checkboxes.push_back(ui->checkSignedByte);
     m_Checkboxes.push_back(ui->checkUnsignedByte);
     m_Checkboxes.push_back(ui->checkSignedShort);
@@ -41,6 +40,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     }
 
     tooltip = ui->edtUnsignedByte->toolTip();
+    /// NOTE: insert the datatype edit fields in the same order as the datatype in the m_display map
     m_Edit.push_back(ui->edtSignedByte);
     m_Edit.push_back(ui->edtUnsignedByte);
     m_Edit.push_back(ui->edtSignedShort);
@@ -78,13 +78,13 @@ binary_values_view::~binary_values_view()
     delete ui;
 }
 
-std::uint32_t binary_values_view::index(CDisplayType::eType type)
+std::uint32_t binary_values_view::type2index(CDisplayType::eType type)
 {
     auto found = std::find_if(m_display.begin(), m_display.end(), [type](const auto& display) { return display.first == type; });
     return std::distance(m_display.begin(), found);
 }
 
-CDisplayType::eType binary_values_view::type(std::uint32_t index)
+CDisplayType::eType binary_values_view::index2type(std::uint32_t index)
 {
     if (index < m_display.size())
     {
@@ -101,17 +101,27 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
     QString text;
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(array.data());
     m_current_position = position;
+    const bool stand_alone_view = ui->checkStandAlone->isChecked();
+    const auto checked_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
+    const bool any_checked = (checked_box != m_Checkboxes.end());
 
-    if (!ui->checkStandAlone->isChecked())
+    if (!stand_alone_view)
     {
-        m_display[CDisplayType::Binary]->SetBytes(m_display[type(ui->comboType->currentIndex())]->GetByteLength());
+        ui->btnWriteValue->setEnabled(any_checked);
     }
+    int binary_length_index = ui->comboType->currentIndex();
+    if (any_checked)
+    {
+        binary_length_index = std::distance(m_Checkboxes.begin(), checked_box);
+    }
+    m_display[CDisplayType::Binary]->SetBytes(m_display[index2type(binary_length_index)]->GetByteLength());
 
     for (auto& display : m_display )
     {
-        if (ui->checkStandAlone->isChecked())
+        int index = type2index(display.first);
+        if (stand_alone_view)
         {
-            if (m_Checkboxes[index(display.first)]->isChecked())
+            if (m_Checkboxes[index]->isChecked())
             {
                 continue;
             }
@@ -131,7 +141,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         else
         {
             text.clear();
-            m_Checkboxes[index(display.first)]->setChecked(false);
+            m_Checkboxes[index]->setChecked(false);
         }
         switch (display.first)
         {
@@ -169,18 +179,19 @@ void binary_values_view::on_btnReadValue_clicked()
 
 void binary_values_view::on_btnWriteValue_clicked()
 {
-    auto box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
-    if (box != m_Checkboxes.end())
+    auto checked_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
+    if (checked_box != m_Checkboxes.end())
     {
-        int index = std::distance(m_Checkboxes.begin(), box);
+        int index = std::distance(m_Checkboxes.begin(), checked_box);
         QString text = m_Edit[index]->text();
         if (text.size())
         {
             QByteArray array;
-            auto the_type = type(index);
-            array.resize(m_display[the_type]->GetByteLength());
-            m_display[the_type]->Write(reinterpret_cast<std::uint8_t*>(array.data()), text);
+            auto type = index2type(index);
+            array.resize(m_display[type]->GetByteLength());
+            m_display[type]->Write(reinterpret_cast<std::uint8_t*>(array.data()), text);
             Q_EMIT set_value(array, m_current_position);
+            receive_value(array, 0);
         }
     }
 }
@@ -262,15 +273,20 @@ void binary_values_view::check_box_clicked(bool checked)
             if (i == index)
             {
                 m_Edit[i]->setReadOnly(!checked);
-                m_display[CDisplayType::Binary]->SetBytes(m_display[type(i)]->GetByteLength());
+                on_btnReadValue_clicked();
             }
             else
             {
-                m_Edit[i]->setText("");
                 m_Checkboxes[i]->setChecked(false);
                 m_Edit[i]->setReadOnly(true);
             }
         }
+    }
+
+    if (!ui->checkStandAlone->isChecked() && !checked)
+    {
+        on_btnReadValue_clicked();
+        ui->btnWriteValue->setEnabled(checked);
     }
 }
 
@@ -287,17 +303,17 @@ void binary_values_view::editing_finished()
 {
     if (ui->checkStandAlone->isChecked())
     {
-        auto box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
-        if (box != m_Checkboxes.end())
+        auto checked_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
+        if (checked_box != m_Checkboxes.end())
         {
-            int index = std::distance(m_Checkboxes.begin(), box);
+            int index = std::distance(m_Checkboxes.begin(), checked_box);
             QString text = m_Edit[index]->text();
             if (text.size())
             {
-                auto the_type = type(index);
+                auto type = index2type(index);
                 m_array.clear();
-                m_array.resize(m_display[the_type]->GetByteLength());
-                if (m_display[the_type]->Write(reinterpret_cast<std::uint8_t*>(m_array.data()), text))
+                m_array.resize(m_display[type]->GetByteLength());
+                if (m_display[type]->Write(reinterpret_cast<std::uint8_t*>(m_array.data()), text))
                 {
                     receive_value(m_array, 0);
                 }
@@ -305,7 +321,7 @@ void binary_values_view::editing_finished()
                 {
                     QByteArray empty;
                     receive_value(empty, 0);
-                    Q_EMIT status_message(tr("Wrong input value: %1 for type %2").arg(text, m_display[the_type]->Type()), 10);
+                    Q_EMIT status_message(tr("Wrong input value: %1 for type %2").arg(text, m_display[type]->Type()), 10);
                 }
             }
         }

@@ -4,7 +4,7 @@
 #include <QString>
 #include <map>
 #include <memory>
-
+#include <unordered_map>
 
 
 class CDisplayType
