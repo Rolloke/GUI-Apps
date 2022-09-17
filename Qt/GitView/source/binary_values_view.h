@@ -26,8 +26,8 @@ public:
     ~binary_values_view();
 
 private:
-    std::uint32_t index(CDisplayType::eType type);
-    CDisplayType::eType type(std::uint32_t index);
+    std::uint32_t type2index(CDisplayType::eType type);
+    CDisplayType::eType index2type(std::uint32_t index);
 
 public:
 Q_SIGNALS:
