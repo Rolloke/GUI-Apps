@@ -3,4 +3,5 @@
 Qt2dView::Qt2dView(QWidget *parent) :
     QWidget(parent)
 {
+// TODO: test this
 }
