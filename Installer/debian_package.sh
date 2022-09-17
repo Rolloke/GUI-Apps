@@ -42,6 +42,10 @@ cp "$QT_LIB/libQt5Xml.so.5" "$DESTINATION"
 cp "$QT_LIB/libQt5Svg.so.5" "$DESTINATION"
 cp "$QT_LIB/libQt5Widgets.so.5" "$DESTINATION"
 cp "$QT_LIB/libQt5XcbQpa.so.5" "$DESTINATION"
+cp "$QT_LIB/libicui18n.so.56" "$DESTINATION"
+cp "$QT_LIB/libicuuc.so.56" "$DESTINATION"
+cp "$QT_LIB/libicudata.so.56" "$DESTINATION"
+
 
 # copy qt plugins
 mkdir "$DESTINATION/plugins"
