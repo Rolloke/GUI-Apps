@@ -121,6 +121,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::DeleteTreeItems]         = resource+"edit-cut.png";
     action_icons[Cmd::AddExternalFileOpenExt]  = resource+"gnome-mime-text.png";
     action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
+    action_icons[Cmd::CloneTextBrowser]        = resource+"emblem-shared.png";
 
     for (const auto& icon_path: action_icons )
     {

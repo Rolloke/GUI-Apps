@@ -35,8 +35,8 @@ public:
     const QString& currentLanguage() const;
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
-
     void parse_blame(const QString& blame);
+    code_browser* clone();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

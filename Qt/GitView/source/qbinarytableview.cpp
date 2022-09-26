@@ -28,11 +28,27 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 
 }
 
-void qbinarytableview::update_rows()
+void qbinarytableview::update_rows(bool refresh_all)
 {
     auto& themodel = *get_model();
-    themodel.removeRows(0, themodel.rowCount());
-    themodel.insertRows(0, themodel.get_rows(), QModelIndex());
+    if (refresh_all)
+    {
+        themodel.removeRows(0, themodel.rowCount());
+        themodel.insertRows(0, themodel.get_rows(), QModelIndex());
+    }
+    else
+    {
+        int first = rowAt(rect().top());
+        int last  = rowAt(rect().bottom());
+        if (last == -1)
+        {
+            last = get_model()->rowCount();
+        }
+        for (int row = first; row < last; ++row)
+        {
+            update_complete_row(model()->index(row, 0));
+        }
+    }
 }
 
 void qbinarytableview::update_complete_row(const QModelIndex &index)
@@ -97,6 +113,58 @@ void qbinarytableview::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void qbinarytableview::mousePressEvent(QMouseEvent* event)
+{
+    bool call_press_event { true };
+    auto& themodel = *get_model();
+
+    const int bytes_per_row  = themodel.get_bytes_per_row();
+    const int column         = columnAt(event->x());
+    const int row            = rowAt(event->y());
+
+    float size = font().pixelSize();
+    if (size < 0)
+    {
+        size = font().pointSizeF();
+    }
+    int x_position = event->x();
+    for (int i=0; i<column;++i)
+    {
+        x_position -= columnWidth(i);
+    }
+    int char_position = static_cast<int>(x_position / size + 0.5);
+
+    int cursor = -1;
+    if (column == INT(BinaryTableModel::Table::Character))
+    {
+        cursor = char_position + row * bytes_per_row;
+    }
+    else if (column == INT(BinaryTableModel::Table::Typed))
+    {
+        int pos = themodel.get_typed_content(row).toString().leftRef(char_position).count(" ");
+        int bytes = pos * themodel.get_type()->GetByteLength();
+        cursor = row * bytes_per_row + bytes;
+    }
+
+    if (cursor >= 0 && cursor != themodel.m_byte_cursor)
+    {
+        /// NOTE: byte cursor position is not perfect, but OK
+        int old_row = themodel.m_byte_cursor / bytes_per_row;
+        themodel.m_byte_cursor = cursor;
+        update_complete_row(model()->index(old_row, 0));
+        if (old_row != row)
+        {
+            update_complete_row(model()->index(row, 0));
+        }
+        call_press_event = false;
+        change_cursor();
+    }
+    if (call_press_event)
+    {
+        QTableView::mousePressEvent(event);
+    }
+}
+
 void qbinarytableview::set_binary_data(const QByteArray &content)
 {
     auto& themodel = *get_model();
@@ -146,14 +214,7 @@ int qbinarytableview::get_type() const
 void qbinarytableview::set_offset(int offset)
 {
     get_model()->m_start_offset = offset;
-    update_rows();
-    // TODO: update only visible rows?
-//    int first = rowAt(rect().top());
-//    int last  = rowAt(rect().bottom());
-//    for (int row = first; row < last; ++row)
-//    {
-//        update_complete_row(model()->index(row, 0));
-//    }
+    update_rows(false);
 }
 
 int qbinarytableview::get_offset() const
@@ -353,8 +414,10 @@ QVariant BinaryTableModel::get_character_content(int row) const
         if (i == m_byte_cursor)
         {
             ascii_coded_line.append('[');
+            //ascii_coded_line.append("<font color=\"red\">");
             ascii_coded_line.append(character);
             ascii_coded_line.append(']');
+            //ascii_coded_line.append("</font>");
         }
         else
         {
