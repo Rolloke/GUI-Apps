@@ -14,6 +14,7 @@
 #include <QWebEngineView>
 #endif
 
+
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
@@ -70,6 +71,18 @@ void code_browser::set_show_line_numbers(bool show)
     m_line_number_area->setVisible(show);
 }
 
+code_browser* code_browser::clone()
+{
+    auto *cloned =  new code_browser(parentWidget());
+    cloned->reset();
+    //cloned->m_actions = m_actions;
+    cloned->m_show_line_numbers = m_show_line_numbers;
+    cloned->setFont(font());
+    cloned->setText(toPlainText());
+    cloned->mHighlighter->setLanguage(mHighlighter->currentLanguage());
+    return cloned;
+}
+
 void code_browser::updateLineNumberAreaWidth(int)
 {
     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
@@ -117,6 +130,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
     {
         QMenu *menu = createStandardContextMenu();
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
+        m_actions->getAction(git::Cmd::CloneTextBrowser)->setEnabled(!isReadOnly());
         menu->exec(event->globalPos());
         delete menu;
     }

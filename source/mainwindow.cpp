@@ -715,6 +715,34 @@ void MainWindow::createDockWindows()
     ui->verticalLayoutForTreeView = nullptr;
 }
 
+void MainWindow::clone_code_browser()
+{
+    QString file_name = ui->labelFilePath->text();
+    if (file_name.length())
+    {
+        QFileInfo info(file_name);
+        file_name = info.fileName();
+    }
+    else
+    {
+        file_name = "Cloned Editor";
+    }
+    QDockWidget *dock = new QDockWidget(file_name, this);
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName("textbrowser");
+    auto *docked_widget = ui->textBrowser->clone();
+    dock->setWidget(docked_widget);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    dock->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
+    if (parent)
+    {
+        tabifyDockWidget(parent, dock);
+    }
+    showDockedWidget(docked_widget);
+}
+
 void MainWindow::dockWidget_topLevelChanged(bool)
 {
     QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
@@ -746,6 +774,7 @@ void MainWindow::dockWidget_topLevelChanged(bool)
         }
     }
 }
+
 
 #endif
 
@@ -1260,6 +1289,9 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::FitInView, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.getAction(Cmd::FitInView)->setCheckable(true);
     mActions.setFlags(Cmd::FitInView, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::CloneTextBrowser, tr("Clone text view"), tr("Opens this file in a new window")), SIGNAL(triggered()), this, SLOT(clone_code_browser()));
+    mActions.setFlags(Cmd::CloneTextBrowser, ActionList::Flags::FunctionCmd, Flag::set);
 
     create_auto_cmd(ui->ckDirectories);
     create_auto_cmd(ui->ckFiles);

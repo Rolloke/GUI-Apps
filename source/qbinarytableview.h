@@ -28,6 +28,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void mousePressEvent(QMouseEvent* event) override;
 
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
@@ -45,7 +46,7 @@ public Q_SLOTS:
 
 private:
     BinaryTableModel* get_model() const;
-    void update_rows();
+    void update_rows(bool refresh_all=true);
     void update_complete_row(const QModelIndex &);
     void change_cursor();
 

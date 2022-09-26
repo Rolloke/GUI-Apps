@@ -89,6 +89,7 @@ private Q_SLOTS:
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
+    void clone_code_browser();
 #else
     void showOrHideTrees(bool checked);
 #endif
