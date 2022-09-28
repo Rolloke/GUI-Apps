@@ -511,7 +511,9 @@ void  MainWindow::call_git_commit()
         if (commit_message.getAutoStage())
         {
             getSelectedTreeItem();
-            applyGitCommandToFileTree(Cmd::getCommand(Cmd::Add));
+            mWorker.setOnceBusy();
+            mActions.getAction(Cmd::Add)->trigger();
+
             int result = execute(commit_command, result_str);
             if (result != NoError)
             {
