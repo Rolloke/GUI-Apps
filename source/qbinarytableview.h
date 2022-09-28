@@ -47,7 +47,7 @@ public Q_SLOTS:
 private:
     BinaryTableModel* get_model() const;
     void update_rows(bool refresh_all=true);
-    void update_complete_row(const QModelIndex &);
+    void update_complete_row(int row);
     void change_cursor();
 
     std::vector<double> mColumnWidth;

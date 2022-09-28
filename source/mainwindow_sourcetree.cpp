@@ -499,37 +499,40 @@ void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
 
 void  MainWindow::call_git_commit()
 {
-    CommitMessage fCommitMsg;
+    CommitMessage commit_message;
 
-    if (fCommitMsg.exec() == QDialog::Accepted)
+    if (commit_message.exec() == QDialog::Accepted)
     {
         on_btnCloseText_clicked();
-        const QString fMessageText = fCommitMsg.getMessageText();
-        const string  fCommand  = Cmd::getCommand(Cmd::Commit).toStdString();
-        const QString fCommitCommand = tr(fCommand.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), fMessageText);
-        if (fCommitMsg.getAutoStage())
+        const QString message_text   = commit_message.getMessageText();
+        string        command        = Cmd::getCommand(Cmd::Commit).toStdString();
+        const QString commit_command = tr(command.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), message_text);
+        QString result_str;
+        if (commit_message.getAutoStage())
         {
             getSelectedTreeItem();
             applyGitCommandToFileTree(Cmd::getCommand(Cmd::Add));
-            QString fResultStr;
-            int result = execute(fCommitCommand, fResultStr);
+            int result = execute(commit_command, result_str);
             if (result != NoError)
             {
-                fResultStr += tr("\nError %1 occurred").arg(result);
+                result_str += tr("\nError %1 occurred").arg(result);
             }
-            appendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
+            appendTextToBrowser(commit_command + getLineFeed() + result_str);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
         }
         else
         {
-            QString fResultStr;
-            int result = execute(fCommitCommand, fResultStr);
+            int result = execute(commit_command, result_str);
             if (result != NoError)
             {
-                fResultStr += tr("\nError %1 occurred").arg(result);
+                result_str += tr("\nError %1 occurred").arg(result);
             }
-            appendTextToBrowser(fCommitCommand + getLineFeed() + fResultStr);
+            appendTextToBrowser(commit_command + getLineFeed() + result_str);
             updateTreeItemStatus(mContextMenuSourceTreeItem);
+        }
+        if (commit_message.getAndPush())
+        {
+            mActions.getAction(Cmd::Push)->trigger();
         }
     }
 }

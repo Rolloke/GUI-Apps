@@ -17,6 +17,7 @@ public:
 
     QString getMessageText();
     bool    getAutoStage();
+    bool    getAndPush();
 private slots:
 
 private:

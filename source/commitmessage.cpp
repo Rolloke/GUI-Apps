@@ -23,3 +23,8 @@ bool    CommitMessage::getAutoStage()
 {
     return ui->ckAutoStage->isChecked();
 }
+
+bool    CommitMessage::getAndPush()
+{
+    return ui->ckCommitAndPush->isChecked();
+}
