@@ -7,8 +7,6 @@
 #define INT(X) static_cast<int>(X)
 
 /// TODO: validate litle and big endian representation
-/// validate cursor representation
-/// validate order of data representation
 
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
@@ -42,20 +40,20 @@ void qbinarytableview::update_rows(bool refresh_all)
         int last  = rowAt(rect().bottom());
         if (last == -1)
         {
-            last = get_model()->rowCount();
+            last = themodel.rowCount();
         }
         for (int row = first; row < last; ++row)
         {
-            update_complete_row(model()->index(row, 0));
+            update_complete_row(row);
         }
     }
 }
 
-void qbinarytableview::update_complete_row(const QModelIndex &index)
+void qbinarytableview::update_complete_row(int row)
 {
     for (int col=0; col<model()->columnCount(); ++col)
     {
-        update(model()->index(index.row(), col));
+        update(model()->index(row, col));
     }
 }
 
@@ -74,8 +72,8 @@ void qbinarytableview::resizeEvent(QResizeEvent *event)
 void qbinarytableview::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     get_model()->set_current_row(current.row());
-    update_complete_row(current);
-    update_complete_row(previous);
+    update_complete_row(current.row());
+    update_complete_row(previous.row());
     QTableView::currentChanged(current, previous);
 }
 
@@ -97,12 +95,12 @@ void qbinarytableview::keyPressEvent(QKeyEvent *event)
         auto index = currentIndex();
         if (row == index.row())
         {
-            update_complete_row(index);
+            update_complete_row(row);
         }
         else
         {
             int cursor = themodel.m_byte_cursor;
-            update_complete_row(index);
+            update_complete_row(index.row());
             setCurrentIndex(model()->index(row, 0));
             themodel.m_byte_cursor = cursor;
         }
@@ -151,10 +149,10 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
         /// NOTE: byte cursor position is not perfect, but OK
         int old_row = themodel.m_byte_cursor / bytes_per_row;
         themodel.m_byte_cursor = cursor;
-        update_complete_row(model()->index(old_row, 0));
+        update_complete_row(old_row);
         if (old_row != row)
         {
-            update_complete_row(model()->index(row, 0));
+            update_complete_row(row);
         }
         call_press_event = false;
         change_cursor();
@@ -243,7 +241,7 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
                 themodel.m_binary_content[position + i] = array[i];
             }
             int row = position / themodel.get_bytes_per_row();
-            update_complete_row(model()->index(row, 0));
+            update_complete_row(row);
             Q_EMIT contentChanged();
         }
     }
@@ -440,7 +438,11 @@ int BinaryTableModel::get_bytes_per_type() const
 
 int BinaryTableModel::get_bytes_per_row() const
 {
-    return get_bytes_per_type() * m_columns_per_row;
+    if (m_columns_per_row)
+    {
+        return get_bytes_per_type() * m_columns_per_row;
+    }
+    return 1;
 }
 
 CDisplayType* BinaryTableModel::get_type() const

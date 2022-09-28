@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>261</y>
+     <y>254</y>
      <width>161</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="statusTip">
@@ -56,6 +56,19 @@
    </property>
    <property name="text">
     <string>stage automatically</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="ckCommitAndPush">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>272</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>commit and push</string>
    </property>
   </widget>
  </widget>
