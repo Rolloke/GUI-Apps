@@ -17,7 +17,7 @@ void Worker::operate(int aWorkID, QVariant data)
 }
 
 WorkerThreadConnector::WorkerThreadConnector(QObject*aParent):
-    QObject(aParent)
+    QObject(aParent), mOnceBusy(false)
 {
     Worker*fWorker = new Worker;
     fWorker->moveToThread(&mWorkerThread);
@@ -50,8 +50,19 @@ void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
     Q_EMIT operate(aWorkID, data);
 }
 
+/// brief force next command executed synchroneously
+void WorkerThreadConnector::setOnceBusy()
+{
+    mOnceBusy = true;
+}
+
 bool WorkerThreadConnector::isBusy()
 {
+    if (mOnceBusy)
+    {
+        mOnceBusy = false;
+        return true;
+    }
     return mWorker->isBusy();
 }
 

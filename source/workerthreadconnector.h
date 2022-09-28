@@ -39,6 +39,7 @@ public:
     void setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc);
     void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
     bool isBusy();
+    void setOnceBusy();
 
 public Q_SLOTS:
     void doWork(int, const QVariant&);
@@ -48,6 +49,7 @@ Q_SIGNALS:
     void operate(int, QVariant);
 
 private:
+    bool    mOnceBusy;
     Worker* mWorker;
     QThread mWorkerThread;
     boost::function< void (int, const QVariant&) > mMessageFunction;
