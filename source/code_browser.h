@@ -25,7 +25,7 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame&);
     void lineNumberAreaHelpEvent(const QStringList&, const QPoint&);
     int  blockCount() const;
-    int  current_line() const;
+    int  current_line(QString*text = nullptr) const;
     void go_to_line(int);
 
     void set_actions(ActionList* list);

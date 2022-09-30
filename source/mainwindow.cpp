@@ -1293,6 +1293,9 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CloneTextBrowser, tr("Clone text view"), tr("Opens this file in a new window")), SIGNAL(triggered()), this, SLOT(clone_code_browser()));
     mActions.setFlags(Cmd::CloneTextBrowser, ActionList::Flags::FunctionCmd, Flag::set);
 
+    connect(mActions.createAction(Cmd::CreateBookMark, tr("Create Bookmark"), tr("Creates a Bookmark")), SIGNAL(triggered()), this, SLOT(createBookmark()));
+    mActions.setFlags(Cmd::CreateBookMark, ActionList::Flags::FunctionCmd, Flag::set);
+
     create_auto_cmd(ui->ckDirectories);
     create_auto_cmd(ui->ckFiles);
     create_auto_cmd(ui->ckHiddenFiles);
@@ -1882,6 +1885,23 @@ void MainWindow::find_in_tree_views(find find_item)
     }
 }
 
+QTreeWidgetItem* MainWindow::insert_file_path(QTreeWidgetItem* new_tree_root_item, const QString& current_file)
+{
+    QTreeWidgetItem* new_child_item { nullptr };
+    if (ui->ckSearchResultsAsSearchTree->isChecked())
+    {
+        QStringList tree_items = current_file.split("/");
+        new_child_item = insert_as_tree(new_tree_root_item, FindColumn::FilePath, tree_items);
+    }
+    else
+    {
+        new_child_item = new QTreeWidgetItem();
+        new_tree_root_item->addChild(new_child_item);
+        new_child_item->setText(FindColumn::FilePath, current_file);
+    }
+    return new_child_item;
+}
+
 void MainWindow::find_text_in_files()
 {
     const bool fast_search = ui->ckFastFileSearch->isChecked();
@@ -1977,18 +1997,7 @@ void MainWindow::find_text_in_files()
                     QStringList found_item_parts = found_item.split(':');
                     if (found_item_parts.size() >= 2 && found_item_parts[0].size() && found_item_parts[0][0] == 'L')
                     {
-                        QTreeWidgetItem* new_child_item {nullptr};
-                        if (ui->ckSearchResultsAsSearchTree->isChecked())
-                        {
-                            QStringList tree_items = current_file.split("/");
-                            new_child_item = insert_as_tree(new_tree_root_item, FindColumn::FilePath, tree_items);
-                        }
-                        else
-                        {
-                            new_child_item = new QTreeWidgetItem();
-                            new_tree_root_item->addChild(new_child_item);
-                            new_child_item->setText(FindColumn::FilePath, current_file);
-                        }
+                        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
                         found_item_parts[0][0] = ' ';
                         new_child_item->setText(FindColumn::Line, found_item_parts[0].trimmed());
                         QString found_text_line = found_item_parts[1];
@@ -2013,18 +2022,7 @@ void MainWindow::find_text_in_files()
                     if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, file_path.mid(search_path.size() + 1)))
                     {
                         QString current_file = file_path.mid(repository_root.size() + 1);
-                        QTreeWidgetItem* new_child_item {nullptr};
-                        if (ui->ckSearchResultsAsSearchTree->isChecked())
-                        {
-                            QStringList tree_items = current_file.split("/");
-                            new_child_item = insert_as_tree(new_tree_root_item, FindColumn::FilePath, tree_items);
-                        }
-                        else
-                        {
-                            new_child_item = new QTreeWidgetItem();
-                            new_tree_root_item->addChild(new_child_item);
-                            new_child_item->setText(FindColumn::FilePath, current_file);
-                        }
+                        QTreeWidgetItem* new_child_item  = insert_file_path(new_tree_root_item, current_file);
                         new_child_item->setText(FindColumn::Line, found_item_parts[FindColumn::Line].trimmed());
                         QString found_text_line = found_item_parts[FindColumn::FoundTextLine];
                         for (int i = FindColumn::FoundTextLine + 1; i<found_item_parts.size(); ++i)

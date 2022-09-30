@@ -260,11 +260,6 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
     }
 }
 
-void MainWindow::cancelCurrentWorkTask()
-{
-    mCurrentTask = Work::None;
-}
-
 void MainWindow::addGitSourceFolder()
 {
     const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select SourceFiles"));
@@ -931,5 +926,30 @@ void MainWindow::copy_file(copy command)
             // Set the mimedata
             clipboard->setMimeData(mime_data);
         }
+    }
+}
+
+void MainWindow::createBookmark()
+{
+    QString current_file= ui->labelFilePath->text();
+    if (current_file.size())
+    {
+        const QString book_mark = "Bookmarks";
+        QTreeWidgetItem* new_tree_root_item;
+        auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
+        if (list.size())
+        {
+            new_tree_root_item = list[0];
+        }
+        else
+        {
+            new_tree_root_item = new QTreeWidgetItem({book_mark, "", ""});
+            ui->treeFindText->addTopLevelItem(new_tree_root_item);
+        }
+
+        QString found_text_line;
+        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file.right(current_file.size()-1));
+        new_child_item->setText(FindColumn::Line, tr("%1").arg(ui->textBrowser->current_line(&found_text_line)));
+        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
     }
 }
