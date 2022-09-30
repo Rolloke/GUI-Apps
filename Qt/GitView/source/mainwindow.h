@@ -37,98 +37,55 @@ public:
     explicit MainWindow(const QString& aConfigName, QWidget *parent = 0);
     ~MainWindow();
 
-Q_SIGNALS:
-    void doWork(int, QVariant);
-
-private Q_SLOTS:
-    void cancelCurrentWorkTask();
-    void updateGitStatus();
-    void textBrowserChanged();
-
-    void on_btnStoreText_clicked();
-    void on_btnCloseText_clicked();
-
-    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
-    void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_treeSource_customContextMenuRequested(const QPoint &pos);
-    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-
-    void on_ckHideEmptyParent_clicked(bool checked);
-    void on_ckShortState_clicked(bool checked);
-    void on_comboShowItems_currentIndexChanged(int index);
-
-    void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
-    void on_treeHistory_customContextMenuRequested(const QPoint &pos);
-    void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-
-    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
-    void on_treeBranches_itemDoubleClicked(QTreeWidgetItem *item, int column);
-
-    void on_treeStash_customContextMenuRequested(const QPoint &pos);
-    void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-    void on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column);
-
-    void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
-    void on_treeFindText_customContextMenuRequested(const QPoint &pos);
-
-    void on_ckTypeConverter_stateChanged(int arg1);
-
-    void on_graphicsView_customContextMenuRequested(const QPoint &pos);
-
-    void on_btnFindNext_clicked();
-    void on_btnFindPrevious_clicked();
-    void on_btnFindAll_clicked();
-    void on_comboFindBox_currentIndexChanged(int index);
-    void combo_triggered();
-
-    void on_comboToolBarStyle_currentIndexChanged(int index);
-    void on_comboAppStyle_currentTextChanged(const QString &arg1);
-    void on_comboUserStyle_currentIndexChanged(int index);
-    void on_spinTabulator_valueChanged(int width);
-
-#ifdef DOCKED_VIEWS
-    void dockWidget_topLevelChanged(bool);
-    void clone_code_browser();
-#else
-    void showOrHideTrees(bool checked);
-#endif
-    void clearTrees();
-    void delete_tree_item();
-    void add_file_open_extension();
-    void delete_file_open_extension();
-
-    void perform_custom_command();
-    void call_git_history_diff_command();
-    void call_git_branch_command();
-    void call_git_stash_command();
-    int  call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
-    QString get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
-
-    void perform_post_cmd_action(uint post_cmd, const git::Type& type = {});
-    void invoke_git_merge_dialog();
-    void invoke_highlighter_dialog();
-    void performCustomGitActionSettings();
-    void call_git_commit();
-    void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
-    void expand_tree_items();
-    void collapse_tree_items();
-    void addGitSourceFolder();
-    void removeGitSourceFolder();
-    void gitview_about();
-    void deleteFileOrFolder();
-    void selectTextBrowserLanguage();
-    void killBackgroundThread();
-    void copyFileName();
-    void copyFilePath();
-
-public Q_SLOTS:
-    void initCustomAction(QAction* fAction);
-    void updateSelectedLanguage(const QString&);
-#ifdef WEB_ENGINE
-    void show_web_view(bool );
-#endif
 private:
+    QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
+
+    void     call_git_history_diff_command();
+    int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
+
+    QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
+    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {});
+
+    QString  getConfigName() const;
+
+    bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
+    void     insertSourceTree(const QDir& fSource, int fItem);
+
+    QDir     initDir(const QString& aDirPath, int aFilter=0);
+
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext="");
+    void     open_file(const QString& file_path, boost::optional<int> line_number);
+
+    QVariant handleWorker(int, const QVariant&);
+    void     handleMessage(int, QVariant);
+    bool     handleInThread();
+
+    void     updateTreeItemStatus(QTreeWidgetItem * aItem);
+    void     getSelectedTreeItem();
+
+    void     initContextMenuActions();
+    void     initMergeTools(bool read_new_items = false);
+
+    void     applyGitCommandToFileTree(const QString& aCommand);
+    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+
+    QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
+
+    enum class find { forward, backward, all };
+    void     find_function(find forward);
+    void     find_in_tree_views(find forward);
+    void     find_in_text_view(find forward);
+    void     find_text_in_files();
+    bool     getShowTypeResult(const git::Type& fType);
+
+    enum class copy { name, path, file };
+    void     copy_file(copy command);
+    QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    void     showDockedWidget(QWidget* widget, bool hide=false);
+
+
+    void     keyPressEvent(QKeyEvent *) override;
+    void     mousePressEvent(QMouseEvent *event) override;
 
     struct Work { enum e
     {
@@ -200,47 +157,94 @@ private:
 
     }; };
 
-    void     keyPressEvent(QKeyEvent *) override;
-    void     mousePressEvent(QMouseEvent *event) override;
+Q_SIGNALS:
+    void doWork(int, QVariant);
 
-    QString  getConfigName() const;
+private Q_SLOTS:
+    void updateGitStatus();
+    void textBrowserChanged();
 
-    bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
-    void     insertSourceTree(const QDir& fSource, int fItem);
+    void on_btnStoreText_clicked();
+    void on_btnCloseText_clicked();
 
-    QDir     initDir(const QString& aDirPath, int aFilter=0);
+    void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeSource_customContextMenuRequested(const QPoint &pos);
+    void on_treeSource_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
-    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext="");
-    void     open_file(const QString& file_path, boost::optional<int> line_number);
+    void on_ckHideEmptyParent_clicked(bool checked);
+    void on_ckShortState_clicked(bool checked);
+    void on_comboShowItems_currentIndexChanged(int index);
 
-    QVariant handleWorker(int, const QVariant&);
-    void     handleMessage(int, QVariant);
-    bool     handleInThread();
+    void on_treeHistory_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeHistory_customContextMenuRequested(const QPoint &pos);
+    void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
-    void     updateTreeItemStatus(QTreeWidgetItem * aItem);
-    void     getSelectedTreeItem();
+    void on_treeBranches_customContextMenuRequested(const QPoint &pos);
+    void on_treeBranches_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void     initContextMenuActions();
-    void     initMergeTools(bool read_new_items = false);
+    void on_treeStash_customContextMenuRequested(const QPoint &pos);
+    void on_treeStash_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void on_treeStash_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void     applyGitCommandToFileTree(const QString& aCommand);
-    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+    void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_treeFindText_customContextMenuRequested(const QPoint &pos);
 
-    QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
+    void on_ckTypeConverter_stateChanged(int arg1);
 
-    enum class find { forward, backward, all };
-    void     find_function(find forward);
-    void     find_in_tree_views(find forward);
-    void     find_in_text_view(find forward);
-    void     find_text_in_files();
-    bool     getShowTypeResult(const git::Type& fType);
+    void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
-    enum class copy { name, path, file };
-    void     copy_file(copy command);
+    void on_btnFindNext_clicked();
+    void on_btnFindPrevious_clicked();
+    void on_btnFindAll_clicked();
+    void on_comboFindBox_currentIndexChanged(int index);
+    void combo_triggered();
 
-    QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    void on_comboToolBarStyle_currentIndexChanged(int index);
+    void on_comboAppStyle_currentTextChanged(const QString &arg1);
+    void on_comboUserStyle_currentIndexChanged(int index);
+    void on_spinTabulator_valueChanged(int width);
 
-    void     showDockedWidget(QWidget* widget, bool hide=false);
+#ifdef DOCKED_VIEWS
+    void dockWidget_topLevelChanged(bool);
+    void clone_code_browser();
+#else
+    void showOrHideTrees(bool checked);
+#endif
+    void clearTrees();
+    void delete_tree_item();
+    void add_file_open_extension();
+    void delete_file_open_extension();
+
+    void perform_custom_command();
+    void call_git_branch_command();
+    void call_git_stash_command();
+
+    void invoke_git_merge_dialog();
+    void invoke_highlighter_dialog();
+    void performCustomGitActionSettings();
+    void call_git_commit();
+    void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
+    void expand_tree_items();
+    void collapse_tree_items();
+    void addGitSourceFolder();
+    void removeGitSourceFolder();
+    void gitview_about();
+    void deleteFileOrFolder();
+    void selectTextBrowserLanguage();
+    void killBackgroundThread();
+    void copyFileName();
+    void copyFilePath();
+    void createBookmark();
+
+public Q_SLOTS:
+    void initCustomAction(QAction* fAction);
+    void updateSelectedLanguage(const QString&);
+#ifdef WEB_ENGINE
+    void show_web_view(bool );
+#endif
+private:
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();

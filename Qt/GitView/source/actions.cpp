@@ -122,6 +122,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::AddExternalFileOpenExt]  = resource+"gnome-mime-text.png";
     action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
     action_icons[Cmd::CloneTextBrowser]        = resource+"emblem-shared.png";
+    action_icons[Cmd::CreateBookMark]          = resource+"non-starred.png";
 
     for (const auto& icon_path: action_icons )
     {

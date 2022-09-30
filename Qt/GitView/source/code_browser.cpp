@@ -222,11 +222,15 @@ QPointF code_browser::contentOffset() const
     return QPointF(horizontalScrollBar()->value(), verticalScrollBar()->value());
 }
 
-int code_browser::current_line() const
+int code_browser::current_line(QString *text) const
 {
     const auto selections = extraSelections();
     if (selections.size())
     {
+        if (text)
+        {
+            *text = selections.first().cursor.block().text();
+        }
         return selections.first().cursor.blockNumber()+1;
     }
     return 0;

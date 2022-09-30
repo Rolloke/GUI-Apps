@@ -90,6 +90,7 @@ struct Cmd
         AddExternalFileOpenExt,
         DeleteExternalFileOpenExt,
         CloneTextBrowser,
+        CreateBookMark,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

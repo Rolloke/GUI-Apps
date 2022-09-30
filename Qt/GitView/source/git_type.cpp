@@ -73,7 +73,7 @@ Cmd::Cmd()
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, BranchHistory, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ShowHideTree, ClearTreeItems, DeleteTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
-    mContextMenuTextView        = { CloneTextBrowser };
+    mContextMenuTextView        = { CloneTextBrowser, CreateBookMark };
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
