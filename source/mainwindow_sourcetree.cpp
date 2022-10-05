@@ -293,7 +293,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         }
     }
     const QString   file_name      = ui->treeSource->getItemFilePath(item);
-    open_file(file_name, {});
+    open_file(file_name);
 }
 
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
@@ -366,10 +366,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
         if (line_number)
         {
-            auto text_block = ui->textBrowser->document()->findBlockByLineNumber(*line_number - 1);
-            QTextCursor cursor(text_block);
-            cursor.select(QTextCursor::LineUnderCursor);
-            ui->textBrowser->setTextCursor(cursor);
+            ui->textBrowser->go_to_line(*line_number);
         }
         showDockedWidget(widget_to_be_shown);
     }

@@ -56,7 +56,6 @@
 #include <QRegularExpression>
 #include <string>
 #include <map>
-#include <boost/function.hpp>
 
 class QTextDocument;
 class QDomDocument;

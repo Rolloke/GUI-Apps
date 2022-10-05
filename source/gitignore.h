@@ -5,7 +5,6 @@
 
 #include <QDir>
 #include <map>
-#include <boost/optional.hpp>
 
 
 class GitIgnore
