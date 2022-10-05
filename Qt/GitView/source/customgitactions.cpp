@@ -519,66 +519,70 @@ void CustomGitActions::enableButtons(std::uint32_t aBtnFlag)
     ui->btnLoadIcons->setEnabled((aBtnFlag&Btn::Load)   != 0);
 }
 
+
 void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoint &pos)
 {
     QMenu fMenu(this);
 
-    int fRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd   = getCommand(fRow);
-    uint fFlags      = mActionList.getFlags(fCmd);
+    int row = ui->tableViewActions->currentIndex().row();
+    Cmd::eCmd cmd   = getCommand(row);
+    if (!mActionList.hasAction(cmd)) return;
 
-    fMenu.addAction(mActionList.getAction(fCmd));
+    uint flags      = mActionList.getFlags(cmd);
+
+
+    fMenu.addAction(mActionList.getAction(cmd));
     fMenu.addSeparator();
 
-    int fPostAction = mActionList.getCustomCommandPostAction(fCmd);
-    QActionGroup fPostActionGroup(this);
-    fPostActionGroup.setExclusive(true);
-    bool variable_cmd = (fFlags & ActionList::Flags::NotVariableGitCmd) == 0;
-    bool function_cmd = (fFlags & ActionList::Flags::FunctionCmd);
+    int post_action = mActionList.getCustomCommandPostAction(cmd);
+    QActionGroup post_action_group(this);
+    post_action_group.setExclusive(true);
+    bool variable_cmd = (flags & ActionList::Flags::NotVariableGitCmd) == 0;
+    bool function_cmd = (flags & ActionList::Flags::FunctionCmd);
 
-    auto *fDoNothing = fPostActionGroup.addAction(Cmd::toString(Cmd::DoNothing));
-    fDoNothing->setEnabled(variable_cmd);
-    set_tooltip(fDoNothing, tr("Do nothing after command execution"));
-    fMenu.addAction(fDoNothing);
+    auto *do_nothing = post_action_group.addAction(Cmd::toString(Cmd::DoNothing));
+    do_nothing->setEnabled(variable_cmd);
+    set_tooltip(do_nothing, tr("Do nothing after command execution"));
+    fMenu.addAction(do_nothing);
 
-    auto*fUpdateStatus = fPostActionGroup.addAction(Cmd::toString(Cmd::UpdateItemStatus));
-    fUpdateStatus->setEnabled(variable_cmd);
-    set_tooltip(fUpdateStatus, tr("Update item status after command execution"));
-    fMenu.addAction(fUpdateStatus);
+    auto*update_status = post_action_group.addAction(Cmd::toString(Cmd::UpdateItemStatus));
+    update_status->setEnabled(variable_cmd);
+    set_tooltip(update_status, tr("Update item status after command execution"));
+    fMenu.addAction(update_status);
 
-    auto*fParseHistory = fPostActionGroup.addAction(Cmd::toString(Cmd::ParseHistoryText));
-    fParseHistory->setEnabled(variable_cmd);
-    set_tooltip(fParseHistory, tr("Parse command result for history view"));
-    fMenu.addAction(fParseHistory);
+    auto*parse_history = post_action_group.addAction(Cmd::toString(Cmd::ParseHistoryText));
+    parse_history->setEnabled(variable_cmd);
+    set_tooltip(parse_history, tr("Parse command result for history view"));
+    fMenu.addAction(parse_history);
 
-    auto*fParseBranch = fPostActionGroup.addAction(Cmd::toString(Cmd::ParseBranchListText));
-    fParseBranch->setEnabled(variable_cmd);
-    set_tooltip(fParseBranch, tr("Parse command result for branch view"));
-    fMenu.addAction(fParseBranch);
+    auto*parse_branch = post_action_group.addAction(Cmd::toString(Cmd::ParseBranchListText));
+    parse_branch->setEnabled(variable_cmd);
+    set_tooltip(parse_branch, tr("Parse command result for branch view"));
+    fMenu.addAction(parse_branch);
 
-    auto*fParseBlameText = fPostActionGroup.addAction(Cmd::toString(Cmd::ParseBlameText));
-    fParseBlameText->setEnabled(variable_cmd);
-    set_tooltip(fParseBlameText, tr("Parse command result for git blame"));
-    fMenu.addAction(fParseBlameText);
+    auto*parse_blame_text = post_action_group.addAction(Cmd::toString(Cmd::ParseBlameText));
+    parse_blame_text->setEnabled(variable_cmd);
+    set_tooltip(parse_blame_text, tr("Parse command result for git blame"));
+    fMenu.addAction(parse_blame_text);
 
-    auto*fUpdateRootItemStatus = fPostActionGroup.addAction(Cmd::toString(Cmd::UpdateRootItemStatus));
-    fUpdateRootItemStatus->setEnabled(variable_cmd);
-    set_tooltip(fUpdateRootItemStatus, tr("Update repository status after command execution"));
-    fMenu.addAction(fUpdateRootItemStatus);
+    auto*update_root_item_status = post_action_group.addAction(Cmd::toString(Cmd::UpdateRootItemStatus));
+    update_root_item_status->setEnabled(variable_cmd);
+    set_tooltip(update_root_item_status, tr("Update repository status after command execution"));
+    fMenu.addAction(update_root_item_status);
 
-    for (auto& fItem : fPostActionGroup.actions())
+    for (auto& fItem : post_action_group.actions())
     {
         fItem->setCheckable(true);
     }
 
-    if (isBetween(fPostAction, 0, fPostActionGroup.actions().size()))
+    if (isBetween(post_action, 0, post_action_group.actions().size()))
     {
-        fPostActionGroup.actions().at(fPostAction)->setChecked(true);
+        post_action_group.actions().at(post_action)->setChecked(true);
     }
     std::vector<int> parse_action { Cmd::ParseHistoryText, Cmd::ParseBranchListText};
 
-    ulong fEnableFlag  = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagEnable);
-    ulong fDisableFlag = mActionList.getFlags(fCmd, ActionList::Data::StatusFlagDisable);
+    ulong fEnableFlag  = mActionList.getFlags(cmd, ActionList::Data::StatusFlagEnable);
+    ulong fDisableFlag = mActionList.getFlags(cmd, ActionList::Data::StatusFlagDisable);
 
     std::vector<Type::TypeFlags> fGitStatusArray =
     {
@@ -644,51 +648,52 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     fMenu.addSeparator();
 
     QAction* fA_Modified = nullptr;
-    if (fFlags & ActionList::Flags::BuiltIn && fFlags & ActionList::Flags::Modified)
+    if (flags & ActionList::Flags::BuiltIn && flags & ActionList::Flags::Modified)
     {
          fA_Modified = fMenu.addAction(tr("Reset modifications"));
          set_tooltip(fA_Modified, tr("After program restart all modifications of this command are removed"));
     }
 
-    bool custom_enabled = (fFlags & ActionList::Flags::Custom) || mExperimental;
+    bool custom_enabled = (flags & ActionList::Flags::Custom) || mExperimental;
     QAction* fA_BranchCmd  = fMenu.addAction(tr("Branch command"));
     fA_BranchCmd->setCheckable(true);
-    fA_BranchCmd->setChecked(fFlags & ActionList::Flags::Branch);
+    fA_BranchCmd->setChecked(flags & ActionList::Flags::Branch);
     fA_BranchCmd->setEnabled(custom_enabled);
     set_tooltip(fA_BranchCmd, tr("The git command is called in branch view context"));
 
     QAction* fA_HistoryCmd = fMenu.addAction(tr("History command"));
     fA_HistoryCmd->setCheckable(true);
-    fA_HistoryCmd->setChecked(fFlags & ActionList::Flags::History);
+    fA_HistoryCmd->setChecked(flags & ActionList::Flags::History);
     fA_HistoryCmd->setEnabled(custom_enabled);
     set_tooltip(fA_HistoryCmd, tr("The git command is called in history view context"));
 
     QAction* fA_StashCmd = fMenu.addAction(tr("Stash command"));
     fA_StashCmd->setCheckable(true);
-    fA_StashCmd->setChecked(fFlags & ActionList::Flags::Stash);
+    fA_StashCmd->setChecked(flags & ActionList::Flags::Stash);
     fA_StashCmd->setEnabled(custom_enabled);
     set_tooltip(fA_StashCmd, tr("The git command is called in stash view context"));
 
     QAction* fA_ThreadCmd  = fMenu.addAction(tr("Invoke command unattached"));
     fA_ThreadCmd->setCheckable(true);
-    fA_ThreadCmd->setChecked(fFlags & ActionList::Flags::CallInThread);
+    fA_ThreadCmd->setChecked(flags & ActionList::Flags::CallInThread);
     set_tooltip(fA_ThreadCmd, tr("The git command is called without blocking the program"));
 
     fMenu.addSeparator();
     if (function_cmd && !mExperimental)
     {
-        fMenu.removeAction(fDoNothing);
-        fMenu.removeAction(fUpdateStatus);
-        fMenu.removeAction(fUpdateRootItemStatus);
-        fMenu.removeAction(fParseHistory);
-        fMenu.removeAction(fParseBranch);
-        fMenu.removeAction(fParseBlameText);
+        fMenu.removeAction(do_nothing);
+        fMenu.removeAction(update_status);
+        fMenu.removeAction(update_root_item_status);
+        fMenu.removeAction(parse_history);
+        fMenu.removeAction(parse_branch);
+        fMenu.removeAction(parse_blame_text);
         fMenu.removeAction(fA_BranchCmd);
         fMenu.removeAction(fA_HistoryCmd);
         fMenu.removeAction(fA_ThreadCmd);
+        fMenu.removeAction(fA_StashCmd);
     }
     /// NOTE: a parsed command cannot be processed asynchronously
-    if (std::find(parse_action.begin(), parse_action.end(), fPostAction) != parse_action.end())
+    if (std::find(parse_action.begin(), parse_action.end(), post_action) != parse_action.end())
     {
         fMenu.removeAction(fA_ThreadCmd);
     }
@@ -699,53 +704,53 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     if (fSelected)
     {
         bool modified = false;
-        int fIndex =  fPostActionGroup.actions().indexOf(fSelected);
+        int fIndex =  post_action_group.actions().indexOf(fSelected);
         if (fIndex != -1)
         {
-            mActionList.setCustomCommandPostAction(fCmd, fIndex);
+            mActionList.setCustomCommandPostAction(cmd, fIndex);
             modified = true;
         }
         fIndex = fGitStatusEnableGroup.actions().indexOf(fSelected);
         if (fIndex != -1)
         {
-            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
+            mActionList.setFlags(cmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
             modified = true;
         }
         fIndex = fGitStatusDisableGroup.actions().indexOf(fSelected);
         if (fIndex != -1)
         {
-            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
+            mActionList.setFlags(cmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
             modified = true;
         }
         fIndex = fGitStatusEnableNotGroup.actions().indexOf(fSelected);
         if (fIndex != -1)
         {
-            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
-            mActionList.setFlags(fCmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
+            mActionList.setFlags(cmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagEnable);
+            mActionList.setFlags(cmd, fGitStatusArray[fIndex], fSelected->isChecked() ? Flag::set : Flag::remove, ActionList::Data::StatusFlagDisable);
             modified = true;
         }
         if (fA_Modified == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::Modified, Flag::remove);
+            mActionList.setFlags(cmd, ActionList::Flags::Modified, Flag::remove);
         }
         if (fA_BranchCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(cmd, ActionList::Flags::Branch, fA_BranchCmd->isChecked() ? Flag::set : Flag::remove);
             modified = true;
         }
         if (fA_StashCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::Stash, fA_StashCmd->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(cmd, ActionList::Flags::Stash, fA_StashCmd->isChecked() ? Flag::set : Flag::remove);
             modified = true;
         }
         if (fA_ThreadCmd == fSelected)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::CallInThread, fA_ThreadCmd->isChecked() ? Flag::set : Flag::remove);
+            mActionList.setFlags(cmd, ActionList::Flags::CallInThread, fA_ThreadCmd->isChecked() ? Flag::set : Flag::remove);
             modified = true;
         }
         if (modified)
         {
-            mActionList.setFlags(fCmd, ActionList::Flags::Modified, Flag::set);
+            mActionList.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
         }
     }
 }

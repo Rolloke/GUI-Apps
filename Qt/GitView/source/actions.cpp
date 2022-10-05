@@ -246,12 +246,20 @@ QAction* ActionList::getAction(Cmd::eCmd cmd) const
     return nullptr;
 }
 
+bool ActionList::hasAction(git::Cmd::eCmd aCmd) const
+{
+    return mActionList.count(aCmd) != 0;
+}
+
 void  ActionList::setCustomCommandMessageBoxText(Cmd::eCmd cmd, const QString& text)
 {
     QAction* action = getAction(cmd);
-    QVariantList variant_list = action->data().toList();
-    variant_list[Data::MsgBoxText] = QVariant(text);
-    action->setData(variant_list);
+    if (action)
+    {
+        QVariantList variant_list = action->data().toList();
+        variant_list[Data::MsgBoxText] = QVariant(text);
+        action->setData(variant_list);
+    }
 }
 
 QString ActionList::getCustomCommandMessageBoxText(Cmd::eCmd cmd) const
@@ -341,27 +349,27 @@ uint ActionList::getFlags(Cmd::eCmd cmd, Data::e data) const
 
 void ActionList::setDataVariant(Cmd::eCmd cmd, ActionList::Data::e data, const QVariant& variant)
 {
-    QAction* fAction = getAction(cmd);
-    if (fAction)
+    QAction* action = getAction(cmd);
+    if (action)
     {
-        QVariantList fVariantList = fAction->data().toList();
+        QVariantList variant_list = action->data().toList();
         if (data >= 0 && data < Data::ListSize)
         {
-            fVariantList[data] = variant;
+            variant_list[data] = variant;
         }
-        fAction->setData(fVariantList);
+        action->setData(variant_list);
     }
 }
 
 QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
 {
-    QAction* fAction = getAction(cmd);
-    if (fAction)
+    QAction* action = getAction(cmd);
+    if (action)
     {
-        QVariantList fVariantList = fAction->data().toList();
+        QVariantList variant_list = action->data().toList();
         if (data >= 0 && data < Data::ListSize)
         {
-            return fVariantList[data];
+            return variant_list[data];
         }
     }
     return QVariant();

@@ -59,7 +59,7 @@ int code_browser::lineNumberAreaWidth()
 
         int space = 3 + fontMetrics().charWidth("9", 0) * digits;
 
-        return space;
+        return space + 1;
     }
     return 0;
 }

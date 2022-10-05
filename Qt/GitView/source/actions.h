@@ -42,6 +42,7 @@ public:
     QAction* createAction(git::Cmd::eCmd aCmd, const QString& aName, const QString& aGitCommand="", QObject*aParent=nullptr);
     void     deleteAction(git::Cmd::eCmd aCmd);
     QAction* getAction(git::Cmd::eCmd aCmd) const;
+    bool     hasAction(git::Cmd::eCmd aCmd) const;
     void     setCustomCommandMessageBoxText(git::Cmd::eCmd aCmd, const QString& aText);
     QString  getCustomCommandMessageBoxText(git::Cmd::eCmd aCmd) const ;
     void     setCustomCommandPostAction(git::Cmd::eCmd aCmd, uint aAction);

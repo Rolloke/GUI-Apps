@@ -13,7 +13,7 @@ then
 
 else
 
-   scp $SOURCE $USER@$PI_ADDRESS:$DESTINATION
+   scp -r $SOURCE $USER@$PI_ADDRESS:$DESTINATION
 
 fi
 
