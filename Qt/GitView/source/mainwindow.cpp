@@ -2053,35 +2053,48 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
     {
         QString repository_root;
         QString file_path_part;
-        if (ui->ckSearchResultsAsSearchTree->isChecked())
+        if (item->childCount())
         {
-            QStringList list;
-            auto function = [&list] (QTreeWidgetItem *item)
+            bool expand = !item->isExpanded();
+            auto expand_item = [&](QTreeWidgetItem*the_item)
             {
-                list.append(item->text(0));
+                the_item->setExpanded(expand);
             };
-            QTreeWidgetItem *parent = getTopLevelItem(*ui->treeFindText, item, function);
-            if (parent)
-            {
-                repository_root = parent->text(FindColumn::FoundTextLine);
-                for (int i = list.size()-1; i>=0; --i)
-                {
-                    file_path_part += list[i];
-                    if (i != 0) file_path_part += "/";
-                }
-            }
+            do_with_item_and_children(item, expand_item, false);
+            item->setExpanded(!expand);
         }
         else
         {
-            QTreeWidgetItem *parent = item->parent();
-            if (parent)
+            if (ui->ckSearchResultsAsSearchTree->isChecked())
             {
-                repository_root = parent->text(FindColumn::FoundTextLine);
-                file_path_part  = item->text(FindColumn::FilePath);
+                QStringList list;
+                auto function = [&list] (QTreeWidgetItem *item)
+                {
+                    list.append(item->text(0));
+                };
+                QTreeWidgetItem *parent = getTopLevelItem(*ui->treeFindText, item, function);
+                if (parent)
+                {
+                    repository_root = parent->text(FindColumn::FoundTextLine);
+                    for (int i = list.size()-1; i>=0; --i)
+                    {
+                        file_path_part += list[i];
+                        if (i != 0) file_path_part += "/";
+                    }
+                }
             }
+            else
+            {
+                QTreeWidgetItem *parent = item->parent();
+                if (parent)
+                {
+                    repository_root = parent->text(FindColumn::FoundTextLine);
+                    file_path_part  = item->text(FindColumn::FilePath);
+                }
+            }
+            open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
+            ui->treeSource->find_item(repository_root, file_path_part);
         }
-        open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
-        ui->treeSource->find_item(repository_root, file_path_part);
     }
 }
 

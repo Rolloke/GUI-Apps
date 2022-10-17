@@ -63,12 +63,19 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
 
         aTree.addTopLevelItem(aParentItem);
         QDir fParent = aParentDir;
+        bool git_folder = true;
         while (!QDir(fParent.absolutePath() + QDir::separator() + Folder::GitRepository).exists())
         {
             fParent.cdUp();
+            git_folder = false;
             mGitIgnore.addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
             if (fParent.isRoot()) break;
         };
+        Type fType;
+        fType.translate(fIterator.fileInfo());
+        if (git_folder) fType.add(Type::GitFolder);
+        aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
+
 #if RELATIVE_GIT_PATH ==1
         if (!fParent.isRoot())
         {
