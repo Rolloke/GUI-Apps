@@ -5,6 +5,7 @@
 #include <QTreeWidget>
 #include <string>
 #include <functional>
+#include <QFile>
 
 
 
@@ -25,6 +26,7 @@
 QString getSettingsName(const QString& aItemName);
 
 QString formatFileSize(quint64 aSize);
+QString formatPermissions(const QFile::Permissions& permissions);
 
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);

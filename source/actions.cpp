@@ -123,6 +123,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
     action_icons[Cmd::CloneTextBrowser]        = resource+"emblem-shared.png";
     action_icons[Cmd::CreateBookMark]          = resource+"non-starred.png";
+    action_icons[Cmd::ShowInformation]         = resource+"dialog-information.png";
 
     for (const auto& icon_path: action_icons )
     {

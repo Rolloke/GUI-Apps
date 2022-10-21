@@ -72,8 +72,13 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
             if (fParent.isRoot()) break;
         };
         Type fType;
-        fType.translate(fIterator.fileInfo());
-        if (git_folder) fType.add(Type::GitFolder);
+        QFileInfo file_info (fParent.absolutePath());
+        fType.translate(file_info);
+        if (git_folder)
+        {
+            fType.add(Type::GitFolder);
+            fType.add(Type::Repository);
+        }
         aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
 
 #if RELATIVE_GIT_PATH ==1
