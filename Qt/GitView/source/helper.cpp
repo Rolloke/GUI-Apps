@@ -74,6 +74,24 @@ QString formatFileSize(quint64 aSize)
     return QString::number(aSize) + " B";
 }
 
+QString formatPermissions(const QFile::Permissions& permissions)
+{
+    QString text = "Owner: ";
+    if (permissions.testFlag(QFileDevice::ReadOwner))  text += "R";
+    if (permissions.testFlag(QFileDevice::WriteOwner)) text += "W";
+    if (permissions.testFlag(QFileDevice::ExeOwner))   text += "X";
+    text += ", User: ";
+    if (permissions.testFlag(QFileDevice::ReadUser))   text += "R";
+    if (permissions.testFlag(QFileDevice::WriteUser))  text += "W";
+    if (permissions.testFlag(QFileDevice::ExeUser))    text += "X";
+    text += ", Other: ";
+    if (permissions.testFlag(QFileDevice::ReadOther))  text += "R";
+    if (permissions.testFlag(QFileDevice::WriteOther)) text += "W";
+    if (permissions.testFlag(QFileDevice::ExeOther))   text += "X";
+
+    return text;
+}
+
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     auto fList = aTree.selectedItems();

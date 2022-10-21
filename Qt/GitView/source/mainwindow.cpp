@@ -60,7 +60,6 @@ constexpr char sShortcut[] = "Shortcut";
 constexpr char sModified[] = "Modified";
 } // namespace config
 
-
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
     , mDockedWidgetMinMaxButtons(true)
@@ -1296,6 +1295,12 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CreateBookMark, tr("Create Bookmark"), tr("Creates a Bookmark")), SIGNAL(triggered()), this, SLOT(createBookmark()));
     mActions.setFlags(Cmd::CreateBookMark, ActionList::Flags::FunctionCmd, Flag::set);
 
+    connect(mActions.createAction(Cmd::ShowInformation, tr("Show Information"), tr("Show information about selected item")), SIGNAL(triggered()), this, SLOT(showInformation()));
+    mActions.getAction(Cmd::ShowInformation)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_I));
+    mActions.setFlags(Cmd::ShowInformation, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::ShowInformation, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
+    add_action_to_widgets(mActions.getAction(Cmd::ShowInformation));
+
     create_auto_cmd(ui->ckDirectories);
     create_auto_cmd(ui->ckFiles);
     create_auto_cmd(ui->ckHiddenFiles);
@@ -1319,23 +1324,18 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnStoreText, resource + "text-x-patch.png", &new_id)->
-            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
+    create_auto_cmd(ui->btnStoreText, resource + "text-x-patch.png", &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnCloseText, "", &new_id)->
-            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
+    create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
     create_auto_cmd(ui->btnFindAll, resource + "edit-find.png", &new_id);
-    create_auto_cmd(ui->btnFindNext, resource + "go-next.png", &new_id)->
-            setShortcut(QKeySequence(Qt::Key_F3));
+    create_auto_cmd(ui->btnFindNext, resource + "go-next.png", &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, resource + "go-previous.png", &new_id)->
-            setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
+    create_auto_cmd(ui->btnFindPrevious, resource + "go-previous.png", &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboFindBox, resource + "edit-find.png", &new_id)->
-            setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+    create_auto_cmd(ui->comboFindBox, resource + "edit-find.png", &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
     create_auto_cmd(ui->comboShowItems);
@@ -1349,6 +1349,17 @@ void MainWindow::initContextMenuActions()
     {
         mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Flags::BuiltIn);
     }
+}
+
+void MainWindow::add_action_to_widgets(QAction * action)
+{
+    ui->textBrowser->addAction(action);
+    ui->treeSource->addAction(action);
+    ui->treeBranches->addAction(action);
+    ui->treeFindText->addAction(action);
+    ui->treeHistory->addAction(action);
+    ui->treeStash->addAction(action);
+    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 }
 
 QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, Cmd::eCmd *new_id)
@@ -1375,13 +1386,7 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, C
     {
         widget->addAction(action);
     }
-    ui->textBrowser->addAction(action);
-    ui->treeSource->addAction(action);
-    ui->treeBranches->addAction(action);
-    ui->treeFindText->addAction(action);
-    ui->treeHistory->addAction(action);
-    ui->treeStash->addAction(action);
-    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    add_action_to_widgets(action);
 
     if (button)
     {
@@ -2006,7 +2011,7 @@ void MainWindow::find_text_in_files()
                             found_text_line += ":";
                             found_text_line += found_item_parts[i];
                         }
-                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
+                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
                     }
                 }
             }
@@ -2030,7 +2035,7 @@ void MainWindow::find_text_in_files()
                             found_text_line += ":";
                             found_text_line += found_item_parts[i];
                         }
-                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
+                        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
                     }
                 }
             }

@@ -950,3 +950,59 @@ void MainWindow::createBookmark()
         new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
     }
 }
+
+void MainWindow::showInformation()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        QMessageBox message_box;
+        message_box.setParent(parentWidget());
+        const QString repository = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
+        const QString file_path  = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        QFileInfo file_info;
+        if (file_path.contains(repository))
+        {
+            file_info = file_path;
+        }
+        else
+        {
+            file_info = repository + QDir::separator() + file_path;
+        }
+        bool old = Type::mShort;
+        Type::mShort = false;
+        Type type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt());
+        type.translate(file_info);
+
+        message_box.setText(tr("Information about %1\n%2").arg(type.is(Type::Folder) ? Type::name(Type::Folder) : Type::name(Type::File),
+                                                               type.is(Type::Folder) ? file_info.completeBaseName() : file_info.fileName()));
+        QString states = type.getStates(true);
+        states.replace("|", " ");
+        QString information = tr("States:%1\n"
+            "\nSize: %2\n"
+            "\nCreated: %3"
+            "\nModified: %4"
+            "\nLast Access: %5"
+            "\nMetadata Access: %9\n"
+            "\nPermissions:\n%6\n"
+            "\nOwner: %7"
+            "\nGroup: %8"
+            ).arg(states,
+            formatFileSize(file_info.size()),
+            file_info.birthTime().isValid() ? file_info.birthTime().toString(Qt::SystemLocaleShortDate) : "n/a",
+            file_info.lastModified().toString(Qt::SystemLocaleShortDate),
+            file_info.lastRead().toString(Qt::SystemLocaleShortDate),
+            formatPermissions(file_info.permissions()),
+            file_info.owner(),
+            file_info.group(),
+            file_info.metadataChangeTime().isValid() ? file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate) : "n/a"
+            );
+        if (file_info.isSymLink())
+        {
+            information += tr("\nSymbolic link target:\n%1").arg(file_info.symLinkTarget());
+        }
+        message_box.setInformativeText(information);
+
+        Type::mShort = old;
+        message_box.exec();
+    }
+}
