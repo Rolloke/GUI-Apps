@@ -753,6 +753,30 @@ File content opened with double click</string>
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="comboTabPosition">
+          <item>
+           <property name="text">
+            <string>Top</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Botton</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Left</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="labelEditor">
           <property name="text">
            <string>Editor / Viewer</string>
