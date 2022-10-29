@@ -172,7 +172,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupGitCommands);
     {
-
         LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
@@ -295,6 +294,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
         ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->comboTabPosition, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
@@ -327,6 +327,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             restoreState(fWindowState);
         }
         showDockedWidget(ui->textBrowser);
+        on_comboTabPosition_currentIndexChanged(ui->comboTabPosition->currentIndex());
 #endif
     }
     fSettings.endGroup();
@@ -454,6 +455,7 @@ MainWindow::~MainWindow()
         bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
         STORE_STR(fSettings, fUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
+        STORE_PTR(fSettings, ui->comboTabPosition, currentIndex);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
@@ -554,6 +556,14 @@ void MainWindow::createDockWindows()
     setCentralWidget(ui->treeSource);
     ui->treeSource->setObjectName("sourceview");
 
+    setTabShape(QTabWidget::Rounded); // or QTabWidget::Triangular
+//    setDocumentMode(false);
+    setAnimated(true);
+    setDockNestingEnabled(true);
+//    setDockOptions(AllowTabbedDocks);
+//    setDockOptions(ForceTabbedDocks); // dock widgets cannot be placed next to each other in a dock area
+//    setDockOptions(VerticalTabs);
+//    setDockOptions(GroupedDragging);
     QDockWidget* dock;
     // text browser
     QDockWidget *first_tab;
@@ -2121,4 +2131,8 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
     ui->textBrowser->setTabStopWidth(width);
 }
 
+void MainWindow::on_comboTabPosition_currentIndexChanged(int index)
+{
+    setTabPosition(Qt::RightDockWidgetArea, static_cast<QTabWidget::TabPosition>(index));
+}
 

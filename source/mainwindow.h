@@ -206,6 +206,7 @@ private Q_SLOTS:
     void on_comboAppStyle_currentTextChanged(const QString &arg1);
     void on_comboUserStyle_currentIndexChanged(int index);
     void on_spinTabulator_valueChanged(int width);
+    void on_comboTabPosition_currentIndexChanged(int index);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
