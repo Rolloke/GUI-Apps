@@ -6,6 +6,7 @@
 #include <memory>
 #include <unordered_map>
 
+#define DISPLAY_STRINGS 1
 
 class CDisplayType
 {
@@ -22,24 +23,26 @@ public:
       ULongLong,    //  
       Float,        // 32 bit
       Double,       // 64 bit
-      HEX2,         //  8 bit
-      HEX4,         // 16 bit
-      HEX8,         // 32 bit
-      HEX16,        // 64 bit
+      HEX16,        //  8 bit
+      HEX32,        // 16 bit
+      HEX64,        // 32 bit
+      HEX128,       // 64 bit
       Ascii,        // ascii text
       Unicode,      // unicode text
       Binary,       // binary data
-      AsciiLine,    // ascii line
-      UnicodeLine,  // unicode line
-      Structure,    // Image position for structure
-      Matrix,       // Data Matrix  // TODO! define Datatype Matrix?
-      TreeViewData, // Data Tree    // TODO! define Datatype for Treeview?
-      RepeatAttribute,      // Image position for repeat attribute
-      InLineAttribute,      // Image position for inline attribute
-      FactorAttribute,      // Image position for factor attribute
-      BytesAttribute,       // Image position for bytes attribute
-      LastAttribute,
-      LastType=Structure             // last display type
+      FormatFile,
+
+//      AsciiLine,    // ascii line
+//      UnicodeLine,  // unicode line
+//      Structure,    // Image position for structure
+//      Matrix,       // Data Matrix  // TODO! define Datatype Matrix?
+//      TreeViewData, // Data Tree    // TODO! define Datatype for Treeview?
+//      RepeatAttribute,      // Image position for repeat attribute
+//      InLineAttribute,      // Image position for inline attribute
+//      FactorAttribute,      // Image position for factor attribute
+//      BytesAttribute,       // Image position for bytes attribute
+//      LastAttribute,
+      LastType=FormatFile             // last display type
     };
 
     typedef std::map<CDisplayType::eType, std::unique_ptr<CDisplayType>> type_map;
@@ -48,7 +51,7 @@ public:
 
    virtual      QString Display(const std::uint8_t*) const { return ""; }
    virtual      bool    Write(std::uint8_t*, const QString& ) const { return true; }
-   virtual      int    GetByteLength(std::uint8_t*pData=0) const;
+   virtual      size_t  GetByteLength(const std::uint8_t*pData=0) const;
    const char*         Type() const { return getNameOfType(mType); }
    static const char* getNameOfType(eType aType);
    static       eType getTypeOfName(const QString& aName);
@@ -92,8 +95,8 @@ protected:
        }
    }
 
-   int   m_nBytes;
-   eType mType;
+   size_t m_nBytes;
+   eType  mType;
    static bool m_different_endian;
    static type_map m_display;
 };
@@ -225,7 +228,7 @@ public:
    CDisplayAscii();
    virtual QString Display(const std::uint8_t*pData) const;
    virtual bool    Write(std::uint8_t*pData, const QString& sValue) const;
-   virtual int    GetByteLength(std::uint8_t*pData) const;
+   virtual size_t  GetByteLength(const std::uint8_t*pData) const;
 };
 
 class CDisplayUnicode: public CDisplayType
@@ -234,7 +237,7 @@ public:
    CDisplayUnicode();
    virtual QString Display(const std::uint8_t*pData) const;
    virtual bool    Write(std::uint8_t*pData, const QString& sValue) const;
-   virtual int    GetByteLength(std::uint8_t*pData) const;
+   virtual size_t  GetByteLength(const std::uint8_t*pData) const;
 };
 #endif
 

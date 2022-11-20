@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
+    <width>643</width>
     <height>270</height>
    </rect>
   </property>
@@ -765,24 +765,42 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnReadValue">
-       <property name="toolTip">
-        <string>Read values again</string>
-       </property>
-       <property name="text">
-        <string>Read Value</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnWriteValue">
-       <property name="toolTip">
-        <string>Store edited value to file</string>
-       </property>
-       <property name="text">
-        <string>Write Value</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="btnReadValue">
+           <property name="toolTip">
+            <string>Read values again</string>
+           </property>
+           <property name="text">
+            <string>Read Value</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnWriteValue">
+           <property name="toolTip">
+            <string>Store edited value to file</string>
+           </property>
+           <property name="text">
+            <string>Write Value</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnOpenTypeFile">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load format file for table view&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Open Type Format File...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

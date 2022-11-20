@@ -35,6 +35,7 @@ void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 typedef std::function<void(QTreeWidgetItem*&)> tGTLIFunction;
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function = {});
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf = true);
+void toggle_expand_item(QTreeWidgetItem* item);
 int getItemLevel(QTreeWidgetItem* aItem);
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name);
 bool containsPathAsChildren(QTreeWidgetItem*, int, const QString& );

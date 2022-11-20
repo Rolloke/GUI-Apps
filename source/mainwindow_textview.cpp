@@ -106,7 +106,7 @@ void MainWindow::on_btnCloseText_clicked()
     if (ui->btnStoreText->isEnabled() && ui->labelFilePath->text().length() > 0)
     {
         QMessageBox fSaveRequest;
-        fSaveRequest.setText(tr("The document has been modified."));
+        fSaveRequest.setText(tr("The document has been modified.\n\n%1").arg(ui->labelFilePath->text()));
         fSaveRequest.setInformativeText(tr("Do you want to save your changes?"));
         fSaveRequest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         fSaveRequest.setDefaultButton(QMessageBox::Save);
