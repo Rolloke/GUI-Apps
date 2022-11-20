@@ -282,18 +282,36 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
         const Type fType(static_cast<Type::TypeFlags>(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
         if (fType.is(Type::Folder))
         {
-            bool expand = !item->isExpanded();
-            auto expand_item = [&](QTreeWidgetItem*the_item)
-            {
-                the_item->setExpanded(expand);
-            };
-            do_with_item_and_children(item, expand_item, false);
-            item->setExpanded(!expand);
+            toggle_expand_item(item);
             return;
         }
     }
     const QString   file_name      = ui->treeSource->getItemFilePath(item);
     open_file(file_name);
+}
+
+void MainWindow::open_file_externally()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QString   file_name  = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        const QFileInfo file_info(file_name);
+        const QString   file_extension = file_info.suffix().toLower();
+        QString open_file_cmd = mExternalFileOpenCmd + " " + file_name;
+        if (mExternalFileOpenExt.contains(file_extension))
+        {
+            auto program_parameter = mExternalFileOpenExt.value(file_extension);
+            if (program_parameter.size())
+            {
+                open_file_cmd = program_parameter + " " + file_name;
+            }
+        }
+        int result = system(open_file_cmd.toStdString().c_str());
+        if (result != 0)
+        {
+            TRACE(Logger::warning, "could not open %s, error %d", file_name.toStdString().c_str(), result);
+        }
+    }
 }
 
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
@@ -353,7 +371,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             }
             else
             {
-                // TODO: codepage handling
+                /// TODO: codepage handling
                 // QString fromLatin1(), fromLocal8Bit(), fromUtf8(),
                 // QString toLatin1(),   toLocal8Bit(),   toUtf8()),
                 // QTextCodec *QTextCodec::codecForUtfText(const QByteArray &ba)

@@ -22,6 +22,7 @@
 #include <QPalette>
 #include <QTextStream>
 #include <QInputDialog>
+#include <QStaticText>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -59,6 +60,23 @@ constexpr char sIconPath[] = "IconPath";
 constexpr char sShortcut[] = "Shortcut";
 constexpr char sModified[] = "Modified";
 } // namespace config
+
+#include <string>
+void write_bin_file()
+{
+    std::ofstream stream;
+    stream.open("./testfile.bin", std::ios_base::binary);
+    std::string out_vector;
+    std::uint32_t size = 10;
+    stream.write((const char*)&size, sizeof(size));
+    for (uint i=0; i<size; ++i)
+    {
+        out_vector = QObject::tr("string %1").arg(i+1).toStdString();
+        std::uint32_t size_s = out_vector.size();
+        stream.write((const char*)&size_s, sizeof(size_s));
+        stream.write((const char*)out_vector.data(), size_s);
+    }
+}
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
@@ -98,6 +116,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     createDockWindows();
 #endif
 
+    // write_bin_file();
+
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
@@ -125,6 +145,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->setDragDropMode(QAbstractItemView::InternalMove);
     connect(ui->treeSource, SIGNAL(dropped_to_target(QTreeWidgetItem*,bool*)), this, SLOT(call_git_move_rename(QTreeWidgetItem*,bool*)));
 
+    ui->treeFindText->setContextMenuPolicy(Qt::CustomContextMenu);
+
     ui->treeSource->setStyleSheet(style_sheet_treeview_lines);
     ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
     ui->treeBranches->setStyleSheet(style_sheet_treeview_lines);
@@ -132,11 +154,22 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeFindText->setStyleSheet(style_sheet_treeview_lines);
     ui->textBrowser->set_actions(&mActions);
 
-    ui->treeFindText->setContextMenuPolicy(Qt::CustomContextMenu);
-
-
     connect(ui->treeStash, SIGNAL(find_item(QString,QString)), ui->treeSource, SLOT(find_item(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
+
+    /// add status labels
+    m_status_line_label = new QLabel("");
+    m_status_line_label->setToolTip("Line");
+    ui->statusBar->addPermanentWidget(m_status_line_label);
+    connect(ui->textBrowser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
+    connect(ui->tableBinaryView, &qbinarytableview::cursor_changed, [&] (int) { m_status_line_label->setText(""); });
+
+    m_status_column_label = new QLabel("");
+    m_status_column_label->setToolTip("Column/Position");
+    ui->statusBar->addPermanentWidget(m_status_column_label);
+    connect(ui->textBrowser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
+    connect(ui->tableBinaryView, SIGNAL(cursor_changed(int)), m_status_column_label, SLOT(setNum(int)));
+
 
     fSettings.beginGroup(config::sGroupFilter);
     {
@@ -268,6 +301,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
         LOAD_STR(fSettings, mExternalIconFiles, toString);
         LOAD_STR(fSettings, mExternalFileOpenCmd, toString);
+        QString fTypeFormatFilesLocation;
+        LOAD_STR(fSettings, fTypeFormatFilesLocation, toString);
+        mBinaryValuesView->m_type_format_files_location = fTypeFormatFilesLocation;
         QString fExternalFileOpenExt;
         LOAD_STR(fSettings, fExternalFileOpenExt, toString);
         if (fExternalFileOpenExt.size())
@@ -350,7 +386,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     initMergeTools(true);
 
-    auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str()); };
+    auto text2browser = [this](const string&text){ appendTextToBrowser(text.c_str(), true); };
     Logger::setTextToBrowserFunction(text2browser);
 
     mBinaryValuesView->set_table_type(ui->tableBinaryView->get_type());
@@ -362,6 +398,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(mBinaryValuesView.data(), SIGNAL(change_table_columns(int)), ui->tableBinaryView, SLOT(set_columns(int)));
     connect(mBinaryValuesView.data(), SIGNAL(change_table_offset(int)), ui->tableBinaryView, SLOT(set_offset(int)));
     connect(mBinaryValuesView.data(), SIGNAL(status_message(QString,int)), ui->statusBar, SLOT(showMessage(QString,int)));
+    connect(mBinaryValuesView.data(), SIGNAL(open_binary_format_file(QString,bool&)), ui->tableBinaryView, SLOT(open_binary_format_file(QString,bool&)));
 
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
@@ -387,6 +424,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    on_btnCloseText_clicked();
     disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
     showDockedWidget(mBinaryValuesView.data(), true);
 
@@ -431,6 +469,8 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
         STORE_STR(fSettings, mExternalFileOpenCmd);
+        QString fTypeFormatFilesLocation = mBinaryValuesView->m_type_format_files_location;
+        STORE_STR(fSettings, fTypeFormatFilesLocation);
         QString fExternalFileOpenExt;
         for (auto extension = mExternalFileOpenExt.constBegin(); extension != mExternalFileOpenExt.constEnd(); ++extension)
         {
@@ -635,6 +675,7 @@ void MainWindow::createDockWindows()
 
     // find tree
     dock = new QDockWidget(tr("Find Text in Files"), this);
+    ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
     ui->comboFindBox->addItem(dock->windowTitle());
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName("findview");
@@ -744,12 +785,21 @@ void MainWindow::clone_code_browser()
     addDockWidget(Qt::RightDockWidgetArea, dock);
     dock->setAttribute(Qt::WA_DeleteOnClose);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+#if 1
     QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
     if (parent)
     {
         tabifyDockWidget(parent, dock);
     }
+#else
+    /// TODO: set to 0, if this doc is closed
+    if (m_first_cloned)
+    {
+        tabifyDockWidget(m_first_cloned, dock);
+    }
+#endif
     showDockedWidget(docked_widget);
+    m_first_cloned = dock;
 }
 
 void MainWindow::dockWidget_topLevelChanged(bool)
@@ -783,8 +833,6 @@ void MainWindow::dockWidget_topLevelChanged(bool)
         }
     }
 }
-
-
 #endif
 
 void MainWindow::showDockedWidget(QWidget* widget, bool hide)
@@ -1259,6 +1307,10 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::DeleteExternalFileOpenExt, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::DeleteExternalFileOpenExt, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::OpenFileExternally, tr("Open file externally"), tr("Opens file externally")), SIGNAL(triggered()), this, SLOT(open_file_externally()));
+    mActions.setFlags(Cmd::OpenFileExternally, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::OpenFileExternally, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1340,7 +1392,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnFindAll, resource + "edit-find.png", &new_id);
+    create_auto_cmd(ui->btnFindX, resource + "edit-find.png", &new_id);
     create_auto_cmd(ui->btnFindNext, resource + "go-next.png", &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnFindPrevious, resource + "go-previous.png", &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
@@ -1480,6 +1532,7 @@ void MainWindow::delete_file_open_extension()
         mExternalFileOpenExt.remove(file_extension);
     }
 }
+
 bool MainWindow::handleInThread()
 {
     const QAction *fAction = qobject_cast<QAction *>(sender());
@@ -1650,20 +1703,30 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
 void MainWindow::on_comboFindBox_currentIndexChanged(int index)
 {
     auto find = static_cast<FindView>(index);
-    set_widget_and_action_enabled(ui->btnFindAll, find != FindView::Text && find != FindView::GoToLineInText);
+    if (find == FindView::Text)
+    {
+        ui->btnFindX->setText(tr("Replace"));
+        set_widget_and_action_enabled(ui->btnFindX, true);
+    }
+    else
+    {
+        ui->btnFindX->setText(tr("All"));
+        set_widget_and_action_enabled(ui->btnFindX, find != FindView::GoToLineInText);
+    }
     set_widget_and_action_enabled(ui->btnFindNext, find != FindView::FindTextInFiles);
     set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
     ui->ckFindWholeWord->setEnabled(!(find == FindView::FindTextInFiles && ui->ckFastFileSearch->isChecked()));
 
     switch(find)
     {
-    case FindView::Text:            ui->statusBar->showMessage(tr("Search in Text Editor")); break;
-    case FindView::GoToLineInText:  ui->statusBar->showMessage(tr("Go to line in Text Editor")); break;
-    case FindView::FindTextInFiles: ui->statusBar->showMessage(tr("Search for text in files under selected folder in Repository View")); break;
-    case FindView::Source:          ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
-    case FindView::History:         ui->statusBar->showMessage(tr("Search item in History View")); break;
-    case FindView::Branch:          ui->statusBar->showMessage(tr("Search item in Branch View")); break;
-    case FindView::Stash:           ui->statusBar->showMessage(tr("Search in Stash View")); break;
+    case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor")); break;
+    case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor")); break;
+    case FindView::FindTextInFiles:     ui->statusBar->showMessage(tr("Search for text in files under selected folder in Repository View")); break;
+    case FindView::FindTextInFilesView: ui->statusBar->showMessage(tr("Search for text in find results")); break;
+    case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
+    case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View")); break;
+    case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View")); break;
+    case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View")); break;
     }
 }
 
@@ -1687,10 +1750,11 @@ void MainWindow::combo_triggered()
         case FindView::Text:
             find_text = ui->textBrowser->textCursor().selectedText();
             break;
-        case FindView::History: tree_view = ui->treeHistory; break;
-        case FindView::Branch:  tree_view = ui->treeBranches; break;
-        case FindView::Stash:   tree_view = ui->treeStash; break;
-        case FindView::Source:  tree_view = ui->treeSource; break;
+        case FindView::History:             tree_view = ui->treeHistory; break;
+        case FindView::Branch:              tree_view = ui->treeBranches; break;
+        case FindView::Stash:               tree_view = ui->treeStash; break;
+        case FindView::Source:              tree_view = ui->treeSource; break;
+        case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::GoToLineInText:
         case FindView::FindTextInFiles:
             break;
@@ -1727,7 +1791,7 @@ void MainWindow::combo_triggered()
     }
 }
 
-MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
+MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0), mColumn(0)
 {
 }
 
@@ -1741,9 +1805,16 @@ void MainWindow::on_btnFindPrevious_clicked()
     find_function(find::backward);
 }
 
-void MainWindow::on_btnFindAll_clicked()
+void MainWindow::on_btnFindX_clicked()
 {
-    find_function(find::all);
+    if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
+    {
+        find_in_text_view(find::replace);
+    }
+    else
+    {
+        find_function(find::all);
+    }
 }
 
 void MainWindow::find_function(find find_item)
@@ -1769,7 +1840,12 @@ void MainWindow::find_function(find find_item)
 void MainWindow::find_in_text_view(find find_item)
 {
     Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
-    int                 find_flag   = find_item == find::forward ? 0 : QTextDocument::FindBackward;
+    int                 find_flag   = find_item == find::forward || find_item == find::replace ? 0 : QTextDocument::FindBackward;
+
+    if (ui->textBrowser->extraSelections().size() && find_item == find::replace)
+    {
+        ui->textBrowser->insertPlainText(ui->edtReplaceText->text());
+    }
 
     if (ui->ckFindCaseSensitive->isChecked())
     {
@@ -1801,10 +1877,11 @@ void MainWindow::find_in_tree_views(find find_item)
     QTreeWidget *tree_view {nullptr};
     switch (static_cast<FindView>(ui->comboFindBox->currentIndex()))
     {
-        case FindView::Source:  tree_view = ui->treeSource;   break;
-        case FindView::History: tree_view = ui->treeHistory;  break;
-        case FindView::Branch:  tree_view = ui->treeBranches; break;
-        case FindView::Stash:   tree_view = ui->treeStash;    break;
+        case FindView::Source:              tree_view = ui->treeSource;   break;
+        case FindView::History:             tree_view = ui->treeHistory;  break;
+        case FindView::Branch:              tree_view = ui->treeBranches; break;
+        case FindView::Stash:               tree_view = ui->treeStash;    break;
+        case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::Text: case FindView::FindTextInFiles:  break;
         case FindView::GoToLineInText: break;
     }
@@ -1842,12 +1919,17 @@ void MainWindow::find_in_tree_views(find find_item)
 
         auto& found_items = property.mItems;
 
-        if (tree_match_flag != property.mFlags || ui->edtFindText->isModified())
+        int column = tree_view->currentColumn();
+        if (column < 0) column = 0;
+        if (   tree_match_flag != property.mFlags
+            || column != property.mColumn
+            || ui->edtFindText->isModified())
         {
             tree_view->clearSelection();
-            found_items     = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag));
-            property.mFlags = tree_match_flag;
-            property.mIndex = 0;
+            found_items      = tree_view->findItems(text_to_find, static_cast<Qt::MatchFlag>(tree_match_flag), column);
+            property.mFlags  = tree_match_flag;
+            property.mIndex  = 0;
+            property.mColumn = column;
             ui->edtFindText->setModified(false);
         }
         else
@@ -2070,13 +2152,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         QString file_path_part;
         if (item->childCount())
         {
-            bool expand = !item->isExpanded();
-            auto expand_item = [&](QTreeWidgetItem*the_item)
-            {
-                the_item->setExpanded(expand);
-            };
-            do_with_item_and_children(item, expand_item, false);
-            item->setExpanded(!expand);
+            toggle_expand_item(item);
         }
         else
         {
@@ -2135,4 +2211,5 @@ void MainWindow::on_comboTabPosition_currentIndexChanged(int index)
 {
     setTabPosition(Qt::RightDockWidgetArea, static_cast<QTabWidget::TabPosition>(index));
 }
+
 

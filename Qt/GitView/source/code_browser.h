@@ -50,6 +50,8 @@ Q_SIGNALS:
     void updateRequest(const QRect &rect, int dy);
     void updateExtension(const QString&);
     void show_web_view(bool);
+    void line_changed(int);
+    void column_changed(int);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);

@@ -938,7 +938,14 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnFindAll">
+       <widget class="QLineEdit" name="edtFindText">
+        <property name="toolTip">
+         <string>Enter search expression or words</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindX">
         <property name="toolTip">
          <string>Search all </string>
         </property>
@@ -948,11 +955,7 @@ File content opened with double click</string>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="edtFindText">
-        <property name="toolTip">
-         <string>Enter search expression or words</string>
-        </property>
-       </widget>
+       <widget class="QLineEdit" name="edtReplaceText"/>
       </item>
       <item>
        <widget class="QLabel" name="label_space2">
