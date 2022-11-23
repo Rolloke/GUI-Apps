@@ -38,10 +38,10 @@ const char* CDisplayType::getNameOfType(eType aType)
     case ULongLong:       return "unsigned long long";
     case Float:           return "float";
     case Double:          return "double";
+    case HEX8:            return "HEX8";
     case HEX16:           return "HEX16";
     case HEX32:           return "HEX32";
     case HEX64:           return "HEX64";
-    case HEX128:          return "HEX128";
     case Ascii:           return "ascii";
     case Unicode:         return "unicode";
     case Binary:          return "binary";
@@ -99,22 +99,22 @@ CDisplayType::eType CDisplayType::getTypeOfName(const QString& aName)
 
 void CDisplayType::SetBytes(int n)
 {
-    if (!isSizeFixed())
+    if (isSizeVariable())
     {
         m_nBytes = n; 
     }
 }
 
-bool CDisplayType::isSizeFixed()
+bool CDisplayType::isSizeVariable()
 {
     switch (mType)
     {
     case Ascii: case Unicode: case Binary:
-        return false; 
+        return true;
         break;
     default: break;
     }
-    return true;
+    return false;
 }
 
 void CDisplayType::setDifferentEndian(bool de)
@@ -141,10 +141,10 @@ CDisplayType::type_map& CDisplayType::get_type_map()
         m_display[CDisplayType::ULongLong] = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayULongLong));
         m_display[CDisplayType::Float]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayFloat));
         m_display[CDisplayType::Double]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayDouble));
-        m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
-        m_display[CDisplayType::HEX32]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
-        m_display[CDisplayType::HEX64]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
-        m_display[CDisplayType::HEX128]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+        m_display[CDisplayType::HEX8]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
+        m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
+        m_display[CDisplayType::HEX32]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
+        m_display[CDisplayType::HEX64]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
         m_display[CDisplayType::Binary]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayBinary));
         m_display[CDisplayType::Ascii]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayAscii));
         m_display[CDisplayType::Unicode]   = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUnicode));
@@ -385,7 +385,7 @@ bool CDisplayDouble::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX2::CDisplayHEX2()
 {
    m_nBytes = sizeof(std::uint8_t);
-   mType = HEX16;
+   mType = HEX8;
 }
 
 QString CDisplayHEX2::Display(const std::uint8_t*pData)const
@@ -406,7 +406,7 @@ bool CDisplayHEX2::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX4::CDisplayHEX4()
 {
    m_nBytes = sizeof(std::uint16_t);
-   mType = HEX32;
+   mType = HEX16;
 }
 
 QString CDisplayHEX4::Display(const std::uint8_t*pData)const
@@ -428,7 +428,7 @@ bool CDisplayHEX4::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX8::CDisplayHEX8()
 {
    m_nBytes = sizeof(std::uint32_t);
-   mType = HEX64;
+   mType = HEX32;
 }
 
 QString CDisplayHEX8::Display(const std::uint8_t*pData)const
@@ -450,7 +450,7 @@ bool CDisplayHEX8::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX16::CDisplayHEX16()
 {
    m_nBytes = sizeof(std::uint64_t);
-   mType = HEX128;
+   mType = HEX64;
 }
 
 QString CDisplayHEX16::Display(const std::uint8_t*pData)const
@@ -545,23 +545,15 @@ CDisplayAscii::CDisplayAscii()
 
 QString CDisplayAscii::Display(const std::uint8_t*pData)const
 {
-    if (m_nBytes == 0)
-    {
-        size_t nLen = GetByteLength(pData);
-        QByteArray byte_array(reinterpret_cast<const char*>(pData), static_cast<int>(nLen));
-        return byte_array;
-    }
-    else
-    {
-        QByteArray byte_array(reinterpret_cast<const char*>(pData), static_cast<int>(m_nBytes));
-        return byte_array;
-    }
+    size_t length = GetByteLength(pData);
+    QByteArray byte_array(reinterpret_cast<const char*>(pData), static_cast<int>(length));
+    return byte_array;
 }
 
 size_t CDisplayAscii::GetByteLength(const std::uint8_t*pData) const
 {
-    size_t nLen = 0;
-    if (pData)
+    size_t nLen = m_nBytes;
+    if (pData && nLen == 0)
     {
         const char *fText = reinterpret_cast<const char *>(pData);
         const char *fEndline = strstr(fText, "\r\n");
@@ -607,23 +599,15 @@ CDisplayUnicode::CDisplayUnicode()
 
 QString CDisplayUnicode::Display(const std::uint8_t*pData)const
 {
-    if (m_nBytes == 0)
-    {
-        size_t nLen = GetByteLength(pData);
-        QString str(reinterpret_cast<const QChar*>(pData),  static_cast<int>(nLen));
-        return str;
-    }
-    else
-    {
-       QString str(reinterpret_cast<const QChar*>(pData),  static_cast<int>(m_nBytes/2));
-       return str;
-    }
+    size_t nLen = GetByteLength(pData);
+    QString str(reinterpret_cast<const QChar*>(pData),  static_cast<int>(nLen));
+    return str;
 }
 
 size_t CDisplayUnicode::GetByteLength(const std::uint8_t*pData) const
 {
-    size_t nLen = 0;
-    if (pData)
+    size_t nLen = m_nBytes / 2;
+    if (pData && nLen == 0)
     {
         const wchar_t *fText = reinterpret_cast<const wchar_t *>(pData);
         const wchar_t *fEndline = wcsstr(fText, L"\r\n");

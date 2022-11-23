@@ -117,7 +117,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
     int binary_length_index = ui->comboType->currentIndex();
     if (binary_length_index < 0)
     {
-        ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::HEX64));
+        ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::HEX32));
         binary_length_index = ui->comboType->currentIndex();
     }
     if (any_checked)
@@ -165,10 +165,10 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         case CDisplayType::ULong: ui->edtUnsignedLong->setText(text); break;
         case CDisplayType::LongLong: ui->edtSignedLongLong->setText(text); break;
         case CDisplayType::ULongLong: ui->edtUnsignedLongLong->setText(text); break;
-        case CDisplayType::HEX16: ui->edtHexByte->setText(text); break;
-        case CDisplayType::HEX32: ui->edtHexShort->setText(text); break;
-        case CDisplayType::HEX64: ui->edtHexLong->setText(text); break;
-        case CDisplayType::HEX128: ui->edtHexLongLong->setText(text); break;
+        case CDisplayType::HEX8: ui->edtHexByte->setText(text); break;
+        case CDisplayType::HEX16: ui->edtHexShort->setText(text); break;
+        case CDisplayType::HEX32: ui->edtHexLong->setText(text); break;
+        case CDisplayType::HEX64: ui->edtHexLongLong->setText(text); break;
         case CDisplayType::Float: ui->edtFloat->setText(text); break;
         case CDisplayType::Double: ui->edtDouble->setText(text); break;
         case CDisplayType::Binary: ui->edtBinary->setText(text); break;

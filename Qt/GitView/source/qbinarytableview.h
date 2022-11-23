@@ -11,11 +11,16 @@ class BinaryTableModel;
 
 struct DisplayValue
 {
+    struct r2i { enum { index, lenght }; };
+    enum { is_struct_member=-1, invalid_length = 0, default_length = 1 };
+
     QString name;
     CDisplayType* display = 0;
     std::optional<QJsonValue> array_length;
     std::vector<DisplayValue> member;
-    std::map<int, int>        m_td_row_to_member;
+    std::map<std::uint32_t, std::vector<std::uint32_t>> m_td_row_to_index;
+
+    int get_index(int row, int* length=nullptr) const;
 };
 
 
@@ -87,6 +92,7 @@ private:
     QVariant get_character_content(int row) const;
     QVariant get_typed_display_values(int row) const;
     bool     has_typed_display_values() const;
+
     int      get_rows() const;
     size_t   get_bytes_per_type() const;
     int      get_bytes_per_row() const;
@@ -95,12 +101,15 @@ private:
     int      increase_cursor();
     int      decrease_cursor();
     qbinarytableview* get_parent();
+
+    void     clear_typed_display();
     bool     insert_display_value(const QJsonValue&, std::vector<DisplayValue>* dv=0);
     void     update_typed_display_rows();
-    void     update_typed_display_value(const DisplayValue &value, int &offset, int length, int itdv);
-    QString  display_typed_value(const DisplayValue& value, int row) const;
-    QString  display_type(const DisplayValue& value, int row) const;
-    int      get_td_array_length(int itdv);
+    void     update_typed_display_value(DisplayValue &value, int &offset, int length, int itdv);
+    QString  display_typed_value(const DisplayValue& value, int row, int length) const;
+    QString  display_type(const DisplayValue& value, int row, int *length=nullptr) const;
+    int      get_td_array_length(const DisplayValue& value, int itdv, const std::vector<DisplayValue>& value_vector,
+                                 const std::vector<int>& index_vector, const std::vector<int>& offset_vector);
 
     QByteArray  m_binary_content;
     int         m_columns_per_row;

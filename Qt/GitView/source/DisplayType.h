@@ -23,10 +23,10 @@ public:
       ULongLong,    //  
       Float,        // 32 bit
       Double,       // 64 bit
-      HEX16,        //  8 bit
-      HEX32,        // 16 bit
-      HEX64,        // 32 bit
-      HEX128,       // 64 bit
+      HEX8,        //  8 bit
+      HEX16,        // 16 bit
+      HEX32,        // 32 bit
+      HEX64,       // 64 bit
       Ascii,        // ascii text
       Unicode,      // unicode text
       Binary,       // binary data
@@ -58,7 +58,7 @@ public:
    eType        getType() const { return mType; }
    void         CopyInverse(const std::uint8_t*pIn, std::uint8_t*pOut, int nSize) const;
    void         SetBytes(int n);
-   bool         isSizeFixed();
+   bool         isSizeVariable();
    static void  setDifferentEndian(bool de);
    static bool  getDifferentEndian();
    static type_map& get_type_map();
