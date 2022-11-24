@@ -96,6 +96,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     #else
     , mExternalFileOpenCmd("")
     #endif
+    , mWarnOpenFileSize(1024*1024) // 1MB
 {
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
@@ -298,6 +299,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             LOAD_STR(fSettings, fBinaryDisplayColumns, toInt);
             ui->tableBinaryView->set_columns(fBinaryDisplayColumns);
         }
+
+        LOAD_STR(fSettings, mWarnOpenFileSize, toULongLong);
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
         LOAD_STR(fSettings, mExternalIconFiles, toString);
         LOAD_STR(fSettings, mExternalFileOpenCmd, toString);
@@ -466,6 +469,7 @@ MainWindow::~MainWindow()
             STORE_STR(fSettings, fBinaryDisplayColumns);
         }
 
+        STORE_STR(fSettings, mWarnOpenFileSize);
         STORE_STR(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
         STORE_STR(fSettings, mExternalFileOpenCmd);

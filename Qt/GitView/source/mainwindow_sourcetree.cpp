@@ -346,6 +346,20 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     }
 
     QFile file(file_path);
+    QFileInfo info(file_path);
+    if (info.size() > mWarnOpenFileSize)
+    {
+        if (QMessageBox::warning(this,
+            tr("Open large file %1?").arg(info.baseName()),
+            tr("File size %1 is larger than\nwarning level size %2.\n"
+               "This could be time consuming").
+                arg(formatFileSize(info.size()), formatFileSize(mWarnOpenFileSize)),
+            QMessageBox::Yes, QMessageBox::No) == QMessageBox::No)
+        {
+            return;
+        }
+    }
+
     if (file.open(QIODevice::ReadOnly))
     {
         QWidget* widget_to_be_shown = ui->textBrowser;
