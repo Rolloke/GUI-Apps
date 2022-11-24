@@ -291,6 +291,7 @@ private:
     QString mExternalIconFiles;
     QString mExternalFileOpenCmd;
     QMap<QString, QString> mExternalFileOpenExt;
+    qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;
     QLabel *m_status_column_label;
 
