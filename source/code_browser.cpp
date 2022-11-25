@@ -183,6 +183,9 @@ void code_browser::highlightCurrentLine()
     }
 
     setExtraSelections(extraSelections);
+
+    Q_EMIT line_changed(selection.cursor.blockNumber()+1);
+    Q_EMIT column_changed(selection.cursor.columnNumber());
 }
 
 

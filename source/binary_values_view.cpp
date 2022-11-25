@@ -2,6 +2,8 @@
 #include "ui_binary_values_view.h"
 #include "DisplayType.h"
 
+#include <QFileDialog>
+
 
 binary_values_view::binary_values_view(QWidget *parent) :
     QDialog(parent)
@@ -65,10 +67,13 @@ binary_values_view::binary_values_view(QWidget *parent) :
     for (const auto& type : m_display)
     {
         if (type.first == CDisplayType::Binary) continue;
+        if (type.first == CDisplayType::Ascii) continue;
+        if (type.first == CDisplayType::Unicode) continue;
         ui->comboType->addItem(CDisplayType::getNameOfType(type.first));
     }
+    ui->comboType->addItem(CDisplayType::getNameOfType(CDisplayType::FormatFile));
 
-    connect(ui->comboType, SIGNAL(currentIndexChanged(int)), this, SLOT(table_type_changed(int)));
+    connect(ui->comboType, SIGNAL(currentIndexChanged(QString)), this, SLOT(table_type_changed(QString)));
     connect(ui->spinColumns, SIGNAL(valueChanged(int)), this, SLOT(table_columns_changed(int)));
     connect(ui->spinOffset, SIGNAL(valueChanged(int)), this, SLOT(table_offset_changed(int)));
 }
@@ -110,6 +115,11 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         ui->btnWriteValue->setEnabled(any_checked);
     }
     int binary_length_index = ui->comboType->currentIndex();
+    if (binary_length_index < 0)
+    {
+        ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::HEX32));
+        binary_length_index = ui->comboType->currentIndex();
+    }
     if (any_checked)
     {
         binary_length_index = std::distance(m_Checkboxes.begin(), checked_box);
@@ -119,13 +129,15 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
     for (auto& display : m_display )
     {
         int index = type2index(display.first);
+        if (!(index >=0 && index < m_Checkboxes.size())) break;
+
         if (stand_alone_view)
         {
             if (m_Checkboxes[index]->isChecked())
             {
                 continue;
             }
-            if (display.second->GetByteLength() == array.size())
+            if (static_cast<int>(display.second->GetByteLength()) == array.size())
             {
                 text = display.second->Display(buffer_pointer);
             }
@@ -134,7 +146,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
                 text.clear();
             }
         }
-        else if (position + display.second->GetByteLength() <= array.size())
+        else if (position + static_cast<int>(display.second->GetByteLength()) <= array.size())
         {
             text = display.second->Display(&buffer_pointer[position]);
         }
@@ -153,10 +165,10 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         case CDisplayType::ULong: ui->edtUnsignedLong->setText(text); break;
         case CDisplayType::LongLong: ui->edtSignedLongLong->setText(text); break;
         case CDisplayType::ULongLong: ui->edtUnsignedLongLong->setText(text); break;
-        case CDisplayType::HEX2: ui->edtHexByte->setText(text); break;
-        case CDisplayType::HEX4: ui->edtHexShort->setText(text); break;
-        case CDisplayType::HEX8: ui->edtHexLong->setText(text); break;
-        case CDisplayType::HEX16: ui->edtHexLongLong->setText(text); break;
+        case CDisplayType::HEX8: ui->edtHexByte->setText(text); break;
+        case CDisplayType::HEX16: ui->edtHexShort->setText(text); break;
+        case CDisplayType::HEX32: ui->edtHexLong->setText(text); break;
+        case CDisplayType::HEX64: ui->edtHexLongLong->setText(text); break;
         case CDisplayType::Float: ui->edtFloat->setText(text); break;
         case CDisplayType::Double: ui->edtDouble->setText(text); break;
         case CDisplayType::Binary: ui->edtBinary->setText(text); break;
@@ -221,9 +233,10 @@ void binary_values_view::set_table_type(int type)
     m_setting_table_property = false;
 }
 
-void binary_values_view::table_type_changed(int type)
+void binary_values_view::table_type_changed(QString type_name)
 {
-    if (!m_setting_table_property)
+    auto type = CDisplayType::getTypeOfName(type_name);
+    if (!m_setting_table_property && type != CDisplayType::Unknown)
     {
         Q_EMIT change_table_type(type);
     }
@@ -325,6 +338,28 @@ void binary_values_view::editing_finished()
                 }
             }
         }
+    }
+}
+
+void binary_values_view::on_btnOpenTypeFile_clicked()
+{
+    QString file_name = QFileDialog::getOpenFileName(this, tr("Open type format file for binary content"), m_type_format_files_location, "Type definition file (*.json)");
+    if (file_name.size())
+    {
+        QFileInfo file_info(file_name);
+        m_type_format_files_location = file_info.absolutePath();
+    }
+    bool opened = false;
+    Q_EMIT open_binary_format_file(file_name, opened);
+    if (opened)
+    {
+        m_current_combo_index = ui->comboType->currentIndex();
+        ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::FormatFile));
+    }
+    else if (m_current_combo_index.has_value())
+    {
+        ui->comboType->setCurrentIndex(m_current_combo_index.value());
+        m_current_combo_index.reset();
     }
 }
 

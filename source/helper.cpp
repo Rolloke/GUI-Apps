@@ -178,6 +178,16 @@ void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& func
     }
 }
 
+void toggle_expand_item(QTreeWidgetItem* item)
+{
+    bool expand = !item->isExpanded();
+    auto expand_item = [&](QTreeWidgetItem*the_item)
+    {
+        the_item->setExpanded(expand);
+    };
+    do_with_item_and_children(item, expand_item, false);
+    item->setExpanded(!expand);
+}
 
 QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const QString& name)
 {
