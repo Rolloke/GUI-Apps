@@ -10,6 +10,7 @@
 #include <windows.h>
 
 #endif
+
 #include <stdarg.h>
 #include <stdio.h>
 #include "logger.h"
@@ -131,7 +132,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             va_end (args);
 #endif
 #ifdef USE_WINDOWS_LOG
-            char fMessage[2048]="";
+            {
             va_list args;
             va_start (args, format);
             vsprintf(fMessage, format, args);
@@ -148,6 +149,7 @@ void Logger::printDebug (eSeverity aSeverity, const char * format, ... )
             LPSTR  fString[2] = { (LPSTR)fMessage, NULL };
             ReportEventA(hEventLog, fType, fCategory, fEventID, nullptr, 1, 0, (LPCSTR*)fString, nullptr);
 #endif
+            }
 #endif
         }
     }

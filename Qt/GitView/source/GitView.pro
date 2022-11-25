@@ -17,7 +17,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #DEFINES += NDEBUG
 
-
 TARGET = GitView
 TEMPLATE = app
 

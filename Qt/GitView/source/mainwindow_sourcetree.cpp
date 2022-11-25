@@ -982,19 +982,29 @@ void MainWindow::showInformation()
             "\nCreated: %3"
             "\nModified: %4"
             "\nLast Access: %5"
+#ifdef __linux__
             "\nMetadata Access: %9\n"
+#endif
             "\nPermissions:\n%6\n"
+#ifdef __linux__
             "\nOwner: %7"
             "\nGroup: %8"
+#endif
             ).arg(states,
             formatFileSize(file_info.size()),
+#ifdef __linux__
             file_info.birthTime().isValid() ? file_info.birthTime().toString(Qt::SystemLocaleShortDate) : "n/a",
+#else
+            "n/a",
+#endif
             file_info.lastModified().toString(Qt::SystemLocaleShortDate),
             file_info.lastRead().toString(Qt::SystemLocaleShortDate),
-            formatPermissions(file_info.permissions()),
-            file_info.owner(),
+            formatPermissions(file_info.permissions())
+#ifdef __linux__
+            , file_info.owner(),
             file_info.group(),
             file_info.metadataChangeTime().isValid() ? file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate) : "n/a"
+#endif
             );
         if (file_info.isSymLink())
         {
