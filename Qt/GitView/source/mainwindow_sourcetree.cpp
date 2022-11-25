@@ -977,9 +977,14 @@ void MainWindow::createBookmark()
         }
 
         QString found_text_line;
-        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file.right(current_file.size()-1));
+#ifdef __linux__
+        current_file = current_file.right(current_file.size()-1);
+#else
+        current_file.replace("\\", "/");
+#endif
+        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
         new_child_item->setText(FindColumn::Line, tr("%1").arg(ui->textBrowser->current_line(&found_text_line)));
-        new_child_item->setText(FindColumn::FoundTextLine, found_text_line);
+        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
     }
 }
 

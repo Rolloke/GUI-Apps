@@ -218,9 +218,9 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     }
     else if (column == INT(BinaryTableModel::Table::Typed))
     {
-        int pos = themodel.get_typed_content(row).toString().leftRef(char_position).count(" ");
-        int bytes = pos * themodel.get_type()->GetByteLength();
-        cursor = row * bytes_per_row + bytes;
+        int pos   = themodel.get_typed_content(row).toString().leftRef(char_position).count(" ");
+        int bytes = static_cast<int>(pos * themodel.get_type()->GetByteLength());
+        cursor    = row * bytes_per_row + bytes;
     }
 
     if (cursor >= 0 && cursor != themodel.m_byte_cursor)
@@ -570,7 +570,7 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     }
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
     const int bytes_per_row  = get_bytes_per_row();
-    const int bytes_per_type = get_bytes_per_type();
+    const int bytes_per_type = static_cast<int>(get_bytes_per_type());
     const bool is_hex_display = m_display_type >= CDisplayType::HEX8 && m_display_type <= CDisplayType::HEX64;
     const bool different_endian = CDisplayType::getDifferentEndian();
     if (is_hex_display)
@@ -646,7 +646,7 @@ int BinaryTableModel::get_td_array_length(const DisplayValue &value, int itdv, c
                     }
                     else
                     {
-                        int index = offset_vector.size() - (itdv - value_index);
+                        int index = static_cast<int>(offset_vector.size() - (itdv - value_index));
                         length = length_variable->display->Display(&buffer_pointer[offset_vector[index]]).toInt(&ok);
                         if (!ok) length = DisplayValue::invalid_length;
                     }
@@ -671,7 +671,7 @@ void BinaryTableModel::update_typed_display_rows()
     }
 
     int offset = 0;
-    for (size_t itdv = 0; itdv < m_td_values.size(); ++itdv)
+    for (int itdv = 0; itdv < static_cast<int>(m_td_values.size()); ++itdv)
     {
         auto& value = m_td_values[itdv];
         value.m_td_row_to_index.clear();    // cleanup row to index map
@@ -680,7 +680,7 @@ void BinaryTableModel::update_typed_display_rows()
         update_typed_display_value(value, offset, length, itdv);
     }
     m_td_offset.push_back(offset);
-    insertRows(0, m_td_index.size(), QModelIndex());
+    insertRows(0, static_cast<int>(m_td_index.size()), QModelIndex());
 }
 
 void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offset, int length, int itdv)
@@ -694,12 +694,12 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
         }
         else if (set_variable_display_type_length(value.display, length))
         {
-            value.m_td_row_to_index[m_td_index.size()] = { 0, static_cast<std::uint32_t>(length) };
+            value.m_td_row_to_index[static_cast<int>(m_td_index.size())] = { 0, static_cast<std::uint32_t>(length) };
             length = DisplayValue::default_length;
         }
         while (length > 0 && offset < m_binary_content.size())
         {
-            int byte_length = value.display->GetByteLength(&buffer_pointer[offset]) * std::min(length, m_columns_per_row);
+            int byte_length = static_cast<int>(value.display->GetByteLength(&buffer_pointer[offset]) * std::min(length, m_columns_per_row));
             m_td_index.push_back(itdv);
             m_td_offset.push_back(offset);
             offset += byte_length;
@@ -719,7 +719,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     int member_length = DisplayValue::default_length;
                     if (member)
                     {
-                        const std::uint32_t row = m_td_index.size();
+                        const std::uint32_t row = static_cast<std::uint32_t>(m_td_index.size());
                         structure.m_td_row_to_index[row] = {member};
                         member_length = get_td_array_length(structure.member[member], member, structure.member, {}, m_td_offset);
                         if (member_length > DisplayValue::default_length)
@@ -760,11 +760,11 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
     QString type_name;
     if (jval.isArray()) // array may have more parameter
     {                                     // name, type name, array length
-        value.name = jval[0].toString();  // variable name
-        type_name  = jval[1].toString();  // type name
+        value.name = jval.toArray()[0].toString();  // variable name
+        type_name  = jval.toArray()[1].toString();  // type name
         if (jval.toArray().count() > 2)
         {
-            value.array_length = jval[2]; // optional array length
+            value.array_length = jval.toArray()[2]; // optional array length
         }
     }
     else if (jval.isObject()) // object is a pair of variable name and type name
@@ -819,7 +819,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
         if (!is_variable_length_display_type && value.array_length.has_value())
         {
             const int next_offset = m_td_offset[row+1];
-            const int value_bytes = value.display->GetByteLength();
+            const int value_bytes = static_cast<int>(value.display->GetByteLength());
             int offset            = m_td_offset[row] + value_bytes;
             for (int i=1; i<m_columns_per_row && offset < next_offset; ++i)
             {
@@ -866,7 +866,7 @@ QString  BinaryTableModel::display_type(const DisplayValue& value, int row, int 
         if (length)
         {
             const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
-            *length = value.display->GetByteLength(&buffer_pointer[m_td_offset[row]]);
+            *length = static_cast<int>(value.display->GetByteLength(&buffer_pointer[m_td_offset[row]]));
         }
         return value.display->Type();
     }
@@ -943,7 +943,7 @@ int BinaryTableModel::get_bytes_per_row() const
 {
     if (m_columns_per_row)
     {
-        return get_bytes_per_type() * m_columns_per_row;
+        return static_cast<int>(get_bytes_per_type() * m_columns_per_row);
     }
     return 1;
 }
