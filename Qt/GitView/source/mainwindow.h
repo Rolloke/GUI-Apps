@@ -23,6 +23,7 @@ class MergeDialog;
 class QGraphicsItem;
 class QAbstractButton;
 class binary_values_view;
+class QLabel;
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
@@ -71,7 +72,7 @@ private:
 
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
-    enum class find { forward, backward, all };
+    enum class find { forward, backward, all, replace };
     void     find_function(find forward);
     void     find_in_tree_views(find forward);
     void     find_in_text_view(find forward);
@@ -83,7 +84,6 @@ private:
     QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
     void     showDockedWidget(QWidget* widget, bool hide=false);
-
 
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
@@ -134,6 +134,7 @@ private:
         History,
         Branch,
         Stash,
+        FindTextInFilesView,
         FindTextInFiles
     };
     struct FindColumn { enum e
@@ -198,7 +199,7 @@ private Q_SLOTS:
 
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
-    void on_btnFindAll_clicked();
+    void on_btnFindX_clicked();
     void on_comboFindBox_currentIndexChanged(int index);
     void combo_triggered();
 
@@ -218,6 +219,7 @@ private Q_SLOTS:
     void delete_tree_item();
     void add_file_open_extension();
     void delete_file_open_extension();
+    void open_file_externally();
 
     void perform_custom_command();
     void call_git_branch_command();
@@ -252,6 +254,7 @@ private:
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
     bool     mDockedWidgetMinMaxButtons;
+    QDockWidget*          m_first_cloned = nullptr;
 #endif
 
     Ui::MainWindow*       ui;
@@ -278,6 +281,7 @@ private:
         tree_find_properties();
         int                   mFlags;
         int                   mIndex;
+        int                   mColumn;
         QList<QTreeWidgetItem *> mItems;
     };
 
@@ -287,6 +291,9 @@ private:
     QString mExternalIconFiles;
     QString mExternalFileOpenCmd;
     QMap<QString, QString> mExternalFileOpenExt;
+    qint64  mWarnOpenFileSize;
+    QLabel *m_status_line_label;
+    QLabel *m_status_column_label;
 
 };
 

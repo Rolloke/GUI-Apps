@@ -120,6 +120,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::FitInView]               = resource+"view-fullscreen.png";
     action_icons[Cmd::DeleteTreeItems]         = resource+"edit-cut.png";
     action_icons[Cmd::AddExternalFileOpenExt]  = resource+"gnome-mime-text.png";
+    action_icons[Cmd::OpenFileExternally]      = resource+"x-office-document.png";
     action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
     action_icons[Cmd::CloneTextBrowser]        = resource+"emblem-shared.png";
     action_icons[Cmd::CreateBookMark]          = resource+"non-starred.png";

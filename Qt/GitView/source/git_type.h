@@ -92,6 +92,7 @@ struct Cmd
         CloneTextBrowser,
         CreateBookMark,
         ShowInformation,
+        OpenFileExternally,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

@@ -10,7 +10,7 @@ CDisplayType::CDisplayType()
    m_nBytes = 0;
 }
 
-int CDisplayType::GetByteLength(std::uint8_t*) const
+size_t CDisplayType::GetByteLength(const std::uint8_t*) const
 { 
     return m_nBytes; 
 }
@@ -38,21 +38,22 @@ const char* CDisplayType::getNameOfType(eType aType)
     case ULongLong:       return "unsigned long long";
     case Float:           return "float";
     case Double:          return "double";
-    case HEX2:            return "HEX2";
-    case HEX4:            return "HEX4";
     case HEX8:            return "HEX8";
     case HEX16:           return "HEX16";
+    case HEX32:           return "HEX32";
+    case HEX64:           return "HEX64";
     case Ascii:           return "ascii";
     case Unicode:         return "unicode";
     case Binary:          return "binary";
-    case AsciiLine:       return "ascii_line";
-    case UnicodeLine:     return "unicode_line";
-    case Matrix:          return "matrix";
-    case Structure:       return "structure";
-    case RepeatAttribute: return "repeat";
-    case BytesAttribute:  return "bytes";
-    case InLineAttribute: return "inline";
-    case FactorAttribute: return "factor";
+    case FormatFile:      return "Type Format File";
+//    case AsciiLine:       return "ascii_line";
+//    case UnicodeLine:     return "unicode_line";
+//    case Matrix:          return "matrix";
+//    case Structure:       return "structure";
+//    case RepeatAttribute: return "repeat";
+//    case BytesAttribute:  return "bytes";
+//    case InLineAttribute: return "inline";
+//    case FactorAttribute: return "factor";
     default: return "";
     }
 }
@@ -63,11 +64,29 @@ CDisplayType::eType CDisplayType::getTypeOfName(const QString& aName)
     static QMap<QString, eType> fTypes;
     if (fTypes.size() == 0)
     {
-        for (int i=0; i<=LastAttribute; i++)
+        for (int i=0; i<=FormatFile; i++)
         {
             fType = static_cast<eType>(i);
             fTypes.insert(getNameOfType(fType), fType);
         }
+        fTypes.insert("int8", Char);
+        fTypes.insert("uint8", UChar);
+        fTypes.insert("int16", Short);
+        fTypes.insert("uint16", UShort);
+        fTypes.insert("int32", Long);
+        fTypes.insert("uint32", ULong);
+        fTypes.insert("int64", LongLong);
+        fTypes.insert("uint64", ULongLong);
+        fTypes.insert("char", Char);
+        fTypes.insert("uchar", UChar);
+        fTypes.insert("short", Short);
+        fTypes.insert("ushort", UShort);
+        fTypes.insert("long", Long);
+        fTypes.insert("ulong", ULong);
+        fTypes.insert("longlong", LongLong);
+        fTypes.insert("ulonglong", ULongLong);
+        fTypes.insert("string", Ascii);
+        fTypes.insert("wstring", Unicode);
     }
     auto found_key = fTypes.find(aName);
     if (found_key != fTypes.end())
@@ -80,22 +99,22 @@ CDisplayType::eType CDisplayType::getTypeOfName(const QString& aName)
 
 void CDisplayType::SetBytes(int n)
 {
-    if (!isSizeFixed())
+    if (isSizeVariable())
     {
         m_nBytes = n; 
     }
 }
 
-bool CDisplayType::isSizeFixed()
+bool CDisplayType::isSizeVariable()
 {
     switch (mType)
     {
     case Ascii: case Unicode: case Binary:
-        return false; 
+        return true;
         break;
     default: break;
     }
-    return true;
+    return false;
 }
 
 void CDisplayType::setDifferentEndian(bool de)
@@ -122,11 +141,13 @@ CDisplayType::type_map& CDisplayType::get_type_map()
         m_display[CDisplayType::ULongLong] = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayULongLong));
         m_display[CDisplayType::Float]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayFloat));
         m_display[CDisplayType::Double]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayDouble));
-        m_display[CDisplayType::HEX2]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
-        m_display[CDisplayType::HEX4]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
-        m_display[CDisplayType::HEX8]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
-        m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+        m_display[CDisplayType::HEX8]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
+        m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
+        m_display[CDisplayType::HEX32]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
+        m_display[CDisplayType::HEX64]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
         m_display[CDisplayType::Binary]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayBinary));
+        m_display[CDisplayType::Ascii]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayAscii));
+        m_display[CDisplayType::Unicode]   = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUnicode));
     }
     return m_display;
 }
@@ -147,7 +168,7 @@ QString CDisplayType::toHexString(const std::uint8_t*pData) const
     }
     else
     {
-        for (int i=0; i < GetByteLength(); ++i)
+        for (int i=0; i < static_cast<int>(GetByteLength()); ++i)
         {
             text += QString("%1").arg(pData[i], 2, 16);
         }
@@ -364,7 +385,7 @@ bool CDisplayDouble::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX2::CDisplayHEX2()
 {
    m_nBytes = sizeof(std::uint8_t);
-   mType = HEX2;
+   mType = HEX8;
 }
 
 QString CDisplayHEX2::Display(const std::uint8_t*pData)const
@@ -385,7 +406,7 @@ bool CDisplayHEX2::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX4::CDisplayHEX4()
 {
    m_nBytes = sizeof(std::uint16_t);
-   mType = HEX4;
+   mType = HEX16;
 }
 
 QString CDisplayHEX4::Display(const std::uint8_t*pData)const
@@ -407,7 +428,7 @@ bool CDisplayHEX4::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX8::CDisplayHEX8()
 {
    m_nBytes = sizeof(std::uint32_t);
-   mType = HEX8;
+   mType = HEX32;
 }
 
 QString CDisplayHEX8::Display(const std::uint8_t*pData)const
@@ -429,7 +450,7 @@ bool CDisplayHEX8::Write(std::uint8_t*pData, const QString& sValue)const
 CDisplayHEX16::CDisplayHEX16()
 {
    m_nBytes = sizeof(std::uint64_t);
-   mType = HEX16;
+   mType = HEX64;
 }
 
 QString CDisplayHEX16::Display(const std::uint8_t*pData)const
@@ -524,41 +545,18 @@ CDisplayAscii::CDisplayAscii()
 
 QString CDisplayAscii::Display(const std::uint8_t*pData)const
 {
-    int i;
-    if (m_nBytes == 0)
-    {
-        size_t nLen = GetByteLength(pData);
-        QString str(reinterpret_cast<char*>(pData), static_cast<int>(nLen));
-        return str;
-    }
-    else
-    {
-        QString str;
-        LPTSTR pstr = str.GetBuffer(m_nBytes+1);
-        for (i=0; i<m_nBytes; i++)
-        {
-            if (pData[i])
-            {
-                pstr[i] = (_TCHAR)pData[i];
-            }
-            else
-            {
-                pstr[i] = _T('0');
-            }
-        }
-        pstr[i] = 0;
-        str.ReleaseBuffer();
-        return str;
-    }
+    size_t length = GetByteLength(pData);
+    QByteArray byte_array(reinterpret_cast<const char*>(pData), static_cast<int>(length));
+    return byte_array;
 }
 
-bool CDisplayAscii::GetByteLength(std::uint8_t*pData) const
+size_t CDisplayAscii::GetByteLength(const std::uint8_t*pData) const
 {
-    size_t nLen = 0;
-    if (pData)
+    size_t nLen = m_nBytes;
+    if (pData && nLen == 0)
     {
-        char *fText = reinterpret_cast<char *>(pData);
-        char *fEndline = strstr(fText, "\r\n");
+        const char *fText = reinterpret_cast<const char *>(pData);
+        const char *fEndline = strstr(fText, "\r\n");
         if (fEndline) nLen = 2;
         else
         {
@@ -582,15 +580,15 @@ bool CDisplayAscii::GetByteLength(std::uint8_t*pData) const
     return static_cast<int>(nLen);
 }
 
-bool CDisplayAscii::Write(std::uint8_t*pData, const QString& sValue)const
+bool CDisplayAscii::Write(std::uint8_t*pData, const QString& sValue) const
 {
-    if (pData == 0) return sValue.GetLength();
-    int i, n = min(m_nBytes, sValue.GetLength());
-    for (i=0; i<n; i++)
+    if (pData == 0) return false;
+    int i, n = std::min(static_cast<int>(m_nBytes), sValue.size());
+    for (i=0; i<n; ++i)
     {
-        pData[i] = (std::uint8_t)sValue[i];
+        pData[i] = sValue.at(i).cell();
     }
-    return n;
+    return n > 0;
 }
 
 CDisplayUnicode::CDisplayUnicode()
@@ -601,49 +599,18 @@ CDisplayUnicode::CDisplayUnicode()
 
 QString CDisplayUnicode::Display(const std::uint8_t*pData)const
 {
-    if (m_nBytes == 0)
-    {
-        int nLen = GetByteLength(pData);
-        QString str(reinterpret_cast<WCHAR*>(pData),  static_cast<int>(nLen));
-        return str;
-    }
-    else
-    {
-       QString str;
-       int i, n = m_nBytes/2;
-       LPTSTR pstr = str.GetBufferSetLength(n+1);
-       WORD *pwData = (WORD*)pData;
-       for (i=0; i<n; i++)
-       {
-          if (pwData[i])
-          {
-              if (m_different_endian)
-              {
-                  CopyInverse((std::uint8_t*)&pwData[i], (std::uint8_t*)&pstr[i], 2);
-              }
-              else
-              {
-                  pstr[i] = (_TCHAR)pwData[i];
-              }
-          }
-          else
-          {
-             pstr[i] = _T('0');
-          }
-       }
-       pstr[i] = 0;
-       str.ReleaseBuffer();
-       return str;
-    }
+    size_t nLen = GetByteLength(pData);
+    QString str(reinterpret_cast<const QChar*>(pData),  static_cast<int>(nLen));
+    return str;
 }
 
-int CDisplayUnicode::GetByteLength(std::uint8_t*pData) const
+size_t CDisplayUnicode::GetByteLength(const std::uint8_t*pData) const
 {
-    size_t nLen = 0;
-    if (pData)
+    size_t nLen = m_nBytes / 2;
+    if (pData && nLen == 0)
     {
-        WCHAR *fText = reinterpret_cast<WCHAR *>(pData);
-        WCHAR *fEndline = wcsstr(fText, L"\r\n");
+        const wchar_t *fText = reinterpret_cast<const wchar_t *>(pData);
+        const wchar_t *fEndline = wcsstr(fText, L"\r\n");
         if (fEndline) nLen = 2;
         else
         {
@@ -664,15 +631,15 @@ int CDisplayUnicode::GetByteLength(std::uint8_t*pData) const
             nLen = wcslen(fText);
         }
     }
-    return static_cast<int>(nLen*sizeof(WCHAR));
+    return static_cast<int>(nLen*sizeof(wchar_t));
 }
 
-int CDisplayUnicode::Write(std::uint8_t*pData, const QString& sValue)const
+bool CDisplayUnicode::Write(std::uint8_t*pData, const QString& sValue) const
 {
-    if (pData == 0) return sValue.GetLength()*2;
-    int i, n = min(m_nBytes/2, sValue.GetLength());
-    WORD *pwData = (WORD*)pData;
-    LPCTSTR pstr = sValue;
+    if (pData == 0) return false;
+    int i, n = std::min(static_cast<int>(m_nBytes/2), sValue.size());
+    wchar_t *pwData = (wchar_t*)pData;
+    const QChar* pstr = sValue.data();
     for (i=0; i<n; i++)
     {
         if (m_different_endian)
@@ -681,10 +648,10 @@ int CDisplayUnicode::Write(std::uint8_t*pData, const QString& sValue)const
         }
         else
         {
-            pwData[i] = pstr[i];
+            pwData[i] = pData[i];
         }
     }
-    return n * 2;
+    return n > 0;
 }
 #endif
 
