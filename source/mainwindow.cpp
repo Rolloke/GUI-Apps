@@ -2187,7 +2187,22 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
                     file_path_part  = item->text(FindColumn::FilePath);
                 }
             }
+#ifdef __linux__
             open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
+#else
+            open_file(file_path_part, item->text(FindColumn::Line).toInt());
+            for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
+            {
+                const QString text = ui->treeSource->topLevelItem(i)->text(0);
+                if (file_path_part.indexOf(text) == 0)
+                {
+                    repository_root = text;
+                    file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
+                    break;
+                }
+            }
+
+#endif
             ui->treeSource->find_item(repository_root, file_path_part);
         }
     }

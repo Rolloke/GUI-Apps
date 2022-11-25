@@ -7,6 +7,8 @@
 #include <QJsonValue>
 #include "DisplayType.h"
 
+#include <boost/optional/optional.hpp>
+
 class BinaryTableModel;
 
 struct DisplayValue
@@ -16,7 +18,7 @@ struct DisplayValue
 
     QString name;
     CDisplayType* display = 0;
-    std::optional<QJsonValue> array_length;
+    boost::optional<QJsonValue> array_length;
     std::vector<DisplayValue> member;
     std::map<std::uint32_t, std::vector<std::uint32_t>> m_td_row_to_index;
 

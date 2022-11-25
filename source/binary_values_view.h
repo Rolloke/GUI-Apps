@@ -9,6 +9,8 @@
 #include <map>
 #include <memory>
 
+#include <boost/optional/optional.hpp>
+
 #include "DisplayType.h"
 
 namespace Ui {
@@ -67,7 +69,7 @@ private:
     int                 m_current_position;
     QByteArray          m_array;
     bool                m_setting_table_property;
-    std::optional<int>  m_current_combo_index;
+    boost::optional<int>  m_current_combo_index;
 public:
     QString             m_type_format_files_location;
 };
