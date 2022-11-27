@@ -11,21 +11,6 @@
 
 class BinaryTableModel;
 
-struct DisplayValue
-{
-    struct r2i { enum { index, lenght }; };
-    enum { is_struct_member=-1, invalid_length = 0, default_length = 1 };
-
-    QString name;
-    CDisplayType* display = 0;
-    boost::optional<QJsonValue> array_length;
-    std::vector<DisplayValue> member;
-    std::map<std::uint32_t, std::vector<std::uint32_t>> m_td_row_to_index;
-
-    int get_index(int row, int* length=nullptr) const;
-};
-
-
 class qbinarytableview : public QTableView
 {
     friend class BinaryTableModel;
@@ -74,9 +59,27 @@ private:
 
 };
 
+
 class BinaryTableModel : public QStandardItemModel
 {
     friend class qbinarytableview;
+
+    struct DisplayValue
+    {
+        struct r2i { enum { index, lenght, array_index }; };
+        enum { is_struct_member=-1, invalid_length = 0, default_length = 1 };
+
+        QString name;
+        CDisplayType* display = 0;
+        boost::optional<QJsonValue> array_length;
+        std::vector<DisplayValue> member;
+        std::map<int, std::vector<int>> m_td_row_to_index;
+
+        int  get_index(int row, int* length=nullptr, int *array_index=nullptr) const;
+        void set_index(int row, int index);
+        void set_length(int row, int length);
+        void set_array_index(int row, int length);
+    };
 public:
     enum class Table
     {
@@ -105,6 +108,8 @@ private:
     qbinarytableview* get_parent();
 
     void     clear_typed_display();
+    bool     insert_binary_structs(QJsonObject &structs_obj);
+    bool     update_binary_struct_dependencies();
     bool     insert_display_value(const QJsonValue&, std::vector<DisplayValue>* dv=0);
     void     update_typed_display_rows();
     void     update_typed_display_value(DisplayValue &value, int &offset, int length, int itdv);
