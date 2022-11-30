@@ -7,6 +7,7 @@
 #include <QModelIndex>
 #include <QDirIterator>
 #include <QDateTime>
+#include <QMenu>
 #include <vector>
 
 
@@ -41,7 +42,7 @@ QTreeWidgetItem * QSourceTreeWidget::itemFromIndex(const QModelIndex &index) con
     return QTreeWidget::itemFromIndex(index);
 }
 
-quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem)
+quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem, QString do_not_ignore)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
 
@@ -99,7 +100,14 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
 
         const QFileInfo& fFileInfo = fIterator.fileInfo();
 
-        if (mGitIgnore.ignoreFile(fFileInfo)) continue;
+        if (do_not_ignore.size())
+        {
+            if (do_not_ignore != fFileInfo.fileName())
+            {
+                continue;
+            }
+        }
+        else if (mGitIgnore.ignoreFile(fFileInfo)) continue;
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
@@ -139,10 +147,23 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
     }
     while (fIterator.hasNext());
 
-
-    for (const auto& fMapLevel : fMapLevels)
+    if (fMapLevels.size())
     {
-        mGitIgnore.removeIgnoreMapLevel(fMapLevel);
+        GitIgnore *ignored = nullptr;
+        if (do_not_ignore.size() == 0)
+        {
+            auto found_ignore = mIgnoredInFolder.find(aParentDir.absolutePath());
+            if (found_ignore == mIgnoredInFolder.end())
+            {
+                GitIgnore newignore;
+                found_ignore = mIgnoredInFolder.insert(aParentDir.absolutePath(), newignore);
+            }
+            ignored = &found_ignore.value();
+        }
+        for (const auto& fMapLevel : fMapLevels)
+        {
+            mGitIgnore.removeIgnoreMapLevel(fMapLevel, ignored);
+        }
     }
 
     if (fTopLevelItem)
@@ -319,3 +340,22 @@ void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepa
     }
 }
 
+void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
+{
+    QString path = getItemFilePath(item);
+    const auto found_ignored = mIgnoredInFolder.find(path);
+    if (found_ignored != mIgnoredInFolder.end())
+    {
+        QMenu*submenu = menu.addMenu(tr("Insert Ignored Folder"));
+        const auto& themap = found_ignored->getIgnoreMap();
+        for (size_t index=0; index<themap.size(); ++index )
+        {
+            if (themap[index].second.is(Type::GitFolder)) continue;
+            if (themap[index].second.is(Type::FolderForNavigation)) continue;
+            QString do_not_ignore = themap[index].first.c_str();
+            QAction *action = submenu->addAction(do_not_ignore);
+            connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
+            { this->insertItem(path, *this, item, do_not_ignore); });
+        }
+    }
+}

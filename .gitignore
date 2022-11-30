@@ -12,5 +12,5 @@ OpenDDS/
 lazarus/
 #Qt/
 #!Qt/Widgets/
-#test
+test/
 
