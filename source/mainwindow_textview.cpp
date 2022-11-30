@@ -156,3 +156,33 @@ void MainWindow::invoke_highlighter_dialog()
 {
     Highlighter::Language::invokeHighlighterDlg();
 }
+
+void MainWindow::createBookmark()
+{
+    QString current_file= ui->labelFilePath->text();
+    if (current_file.size())
+    {
+        const QString book_mark = "Bookmarks";
+        QTreeWidgetItem* new_tree_root_item;
+        auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
+        if (list.size())
+        {
+            new_tree_root_item = list[0];
+        }
+        else
+        {
+            new_tree_root_item = new QTreeWidgetItem({book_mark, "", ""});
+            ui->treeFindText->addTopLevelItem(new_tree_root_item);
+        }
+
+        QString found_text_line;
+#ifdef __linux__
+        current_file = current_file.right(current_file.size()-1);
+#else
+        current_file.replace("\\", "/");
+#endif
+        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
+        new_child_item->setText(FindColumn::Line, tr("%1").arg(ui->textBrowser->current_line(&found_text_line)));
+        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
+    }
+}

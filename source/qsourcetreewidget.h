@@ -2,9 +2,8 @@
 #define QSOURCETREEWIDGET_H
 
 #include <QTreeWidget>
-
 #include "gitignore.h"
-
+#include <QString>
 class QDir;
 
 class QSourceTreeWidget : public QTreeWidget
@@ -29,12 +28,13 @@ public:
 
     explicit QSourceTreeWidget(QWidget *parent = nullptr);
 
-    quint64 insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem);
+    quint64  insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem, QString do_not_ignore = {});
     bool     iterateCheckItems(QTreeWidgetItem* aParentItem, git::stringt2typemap& aPathMap, const QString* aSourceDir=0);
     quint64  sizeOfCheckedItems(QTreeWidgetItem* aParentItem);
 
     QString  getItemFilePath(QTreeWidgetItem* item);
     QString  getItemTopDirPath(QTreeWidgetItem* item);
+    void     fillContextMenue(QMenu&, QTreeWidgetItem *item);
 
 public Q_SLOTS:
     void find_item(const QString& git_root, const QString& filepath);
@@ -51,6 +51,7 @@ private:
 public:
     bool mUseSourceTreeCheckboxes;
     GitIgnore             mGitIgnore;
+    QMap<QString, GitIgnore> mIgnoredInFolder;
 
 private:
 

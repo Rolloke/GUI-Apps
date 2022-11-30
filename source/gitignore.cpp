@@ -16,6 +16,11 @@ void GitIgnore::init()
     mIgnoreMap.push_back(string2typepair(Folder::GitRepository, Type(Type::GitFolder)));
 }
 
+const git::stringt2type_vector& GitIgnore::getIgnoreMap() const
+{
+    return mIgnoreMap;
+}
+
 void GitIgnore::clear()
 {
     mIgnoreMap.clear();
@@ -126,7 +131,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
     }
 }
 
-void GitIgnore::removeIgnoreMapLevel(uint aMapLevel)
+void GitIgnore::removeIgnoreMapLevel(uint aMapLevel, GitIgnore* ignored)
 {
     if (aMapLevel)
     {
@@ -139,6 +144,10 @@ void GitIgnore::removeIgnoreMapLevel(uint aMapLevel)
 
             if (fElem != mIgnoreMap.end())
             {
+                if (ignored && fElem->second.is(Type::Folder))
+                {
+                    ignored->mIgnoreMap.push_back(*fElem);
+                }
                 mIgnoreMap.erase(fElem);
             }
             else break;
