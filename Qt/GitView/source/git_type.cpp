@@ -8,7 +8,7 @@
 namespace git
 {
 
-const std::string resource = ":/resource/24X24/";
+const QString resource = ":/resource/24X24/";
 int2stringmap Cmd::mCommandMap;
 Cmd::tVector  Cmd::mContextMenuSourceTree;
 Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
@@ -335,7 +335,7 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
             }
             if (fType.is(Type::Repository))
             {
-                aFiles[fRelativePath.toStdString()] = fType;
+                aFiles[fRelativePath] = fType;
             }
             else
             {
@@ -350,14 +350,14 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
                         fType.translate(fFileInfo);
                         Type fDestinationType = fType;
                         fDestinationType.add(Type::GitMovedTo);
-                        aFiles[fFullPath.toStdString()] = fDestinationType;
+                        aFiles[fFullPath] = fDestinationType;
                         fType.add(Type::GitMovedFrom);
                         fFullPath = aSource + fPaths[0];
                     }
                 }
                 QFileInfo fFileInfo(fFullPath);
                 fType.translate(fFileInfo);
-                auto file_path = fFileInfo.filePath().toStdString();
+                auto file_path = fFileInfo.filePath();
                 if (fType.is(Type::Folder))
                 {
                     if (file_path.back() == '/')

@@ -150,10 +150,22 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
     if (fMapLevels.size())
     {
         GitIgnore *ignored = nullptr;
-        if (do_not_ignore.size() == 0)
+        if (do_not_ignore.size())
         {
             auto found_ignore = mIgnoredInFolder.find(aParentDir.absolutePath());
-            if (found_ignore == mIgnoredInFolder.end())
+            if (found_ignore != mIgnoredInFolder.end())
+            {
+                found_ignore.value().remove_entry(do_not_ignore);
+            }
+        }
+        else
+        {
+            auto found_ignore = mIgnoredInFolder.find(aParentDir.absolutePath());
+            if (found_ignore != mIgnoredInFolder.end())
+            {
+                found_ignore.value().clear();
+            }
+            else
             {
                 GitIgnore newignore;
                 found_ignore = mIgnoredInFolder.insert(aParentDir.absolutePath(), newignore);
@@ -186,7 +198,7 @@ bool QSourceTreeWidget::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2
         }
         const QString fSourcePath = aSourceDir ? *aSourceDir + "/" + item_text : item_text;
 
-        const auto fFoundType = aPathMap.find(fSourcePath.toStdString());
+        const auto fFoundType = aPathMap.find(fSourcePath);
         if (fFoundType != aPathMap.end())
         {
             if (mUseSourceTreeCheckboxes)
@@ -350,12 +362,16 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
         const auto& themap = found_ignored->getIgnoreMap();
         for (size_t index=0; index<themap.size(); ++index )
         {
-            if (themap[index].second.is(Type::GitFolder)) continue;
+            if (themap[index].second.is(Type::GitFolder))           continue;
             if (themap[index].second.is(Type::FolderForNavigation)) continue;
-            QString do_not_ignore = themap[index].first.c_str();
-            QAction *action = submenu->addAction(do_not_ignore);
-            connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
-            { this->insertItem(path, *this, item, do_not_ignore); });
+            QDir dir_check(path + "/" + themap[index].first);
+            if (dir_check.exists())
+            {
+                QString do_not_ignore = themap[index].first;
+                QAction *action = submenu->addAction(do_not_ignore);
+                connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
+                { this->insertItem(path, *this, item, do_not_ignore); });
+            }
         }
     }
 }
