@@ -61,22 +61,6 @@ constexpr char sShortcut[] = "Shortcut";
 constexpr char sModified[] = "Modified";
 } // namespace config
 
-#include <string>
-void write_bin_file()
-{
-    std::ofstream stream;
-    stream.open("./testfile.bin", std::ios_base::binary);
-    std::string out_vector;
-    std::uint32_t size = 10;
-    stream.write((const char*)&size, sizeof(size));
-    for (uint i=0; i<size; ++i)
-    {
-        out_vector = QObject::tr("string %1").arg(i+1).toStdString();
-        std::uint32_t size_s = out_vector.size();
-        stream.write((const char*)&size_s, sizeof(size_s));
-        stream.write((const char*)out_vector.data(), size_s);
-    }
-}
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
@@ -116,8 +100,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #ifdef DOCKED_VIEWS
     createDockWindows();
 #endif
-
-    // write_bin_file();
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
@@ -1428,7 +1410,7 @@ void MainWindow::add_action_to_widgets(QAction * action)
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 }
 
-QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, Cmd::eCmd *new_id)
+QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, Cmd::eCmd *new_id)
 {
     const auto comand_id = mActions.createNewID(Cmd::AutoCommand);
 
@@ -1475,7 +1457,7 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const string& icon_path, C
 
     if (icon_path.size())
     {
-        mActions.setIconPath(comand_id, icon_path.c_str());
+        mActions.setIconPath(comand_id, icon_path);
     }
     else
     {

@@ -211,7 +211,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
     {
         if (fItem.second.is(Type::GitDeleted) || fItem.second.is(Type::GitMovedFrom))
         {
-            mGitCommand = fItem.first.c_str();
+            mGitCommand = fItem.first;
             mCurrentTask = Work::InsertPathFromCommandString;
             QString fFilePath = "";
             iterateTreeItems(*ui->treeSource, &fFilePath, ui->treeSource->topLevelItem(item));
@@ -849,7 +849,17 @@ void MainWindow::deleteFileOrFolder()
         const Type fType(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt());
         if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) == QMessageBox::Yes)
         {
-            const bool result = QFile::remove(fItemPath);
+            bool result = false;
+            if (fType.is(Type::Folder))
+            {
+                QDir dir;
+                result = dir.rmdir(fItemPath);
+            }
+            else
+            {
+                result = QFile::remove(fItemPath);
+            }
+
             if (result)
             {
                 if (fType.is(Type::AllGitActions) && !fType.is(Type::GitUnTracked))

@@ -62,7 +62,7 @@ git::Cmd::eCmd ActionList::createNewID(git::Cmd::eCmd new_cmd) const
 
 void ActionList::initActionIcons()
 {
-    std::map<Cmd::eCmd, std::string> action_icons;
+    std::map<Cmd::eCmd, QString> action_icons;
     action_icons[Cmd::Add]                     = resource+"list-add.png";
     action_icons[Cmd::Unstage]                 = resource+"list-remove.png";
     action_icons[Cmd::ShowDifference]          = resource+"object-flip-horizontal.png";
@@ -128,7 +128,7 @@ void ActionList::initActionIcons()
 
     for (const auto& icon_path: action_icons )
     {
-        setIconPath(static_cast<Cmd::eCmd>(icon_path.first), icon_path.second.c_str());
+        setIconPath(static_cast<Cmd::eCmd>(icon_path.first), icon_path.second);
     }
 }
 

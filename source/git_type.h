@@ -14,7 +14,7 @@ typedef QMap<QString, bool> string2bool_map;
 
 namespace git
 {
-extern const std::string resource;
+extern const QString resource;
 
 typedef std::map<int, QString> int2stringmap;
 
@@ -211,11 +211,9 @@ extern const char FolderUp[];
 extern const char FolderSelf[];
 }
 
-
-
-typedef std::map<std::string, Type> stringt2typemap;
-typedef std::unordered_map<std::string, Type> stringt2type_umap;
-typedef std::pair<std::string, Type> string2typepair;
+typedef std::map<QString, Type> stringt2typemap;
+typedef std::unordered_map<QString, Type> stringt2type_umap;
+typedef std::pair<QString, Type> string2typepair;
 typedef std::vector< string2typepair > stringt2type_vector;
 
 void parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);

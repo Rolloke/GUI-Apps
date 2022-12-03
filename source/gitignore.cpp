@@ -27,6 +27,18 @@ void GitIgnore::clear()
     init();
 }
 
+void GitIgnore::remove_entry(const QString& entry)
+{
+    auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&entry](stringt2type_vector::const_reference it)
+    {
+        return entry == it.first;
+    });
+    if (item != mIgnoreMap.end())
+    {
+        mIgnoreMap.erase(item);
+    }
+}
+
 void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels)
 {
     QFile file(aParentDir.filePath(Folder::GitIgnoreFile));
@@ -108,7 +120,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
             {
                 auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&fLine, &fType](stringt2type_vector::const_reference it)
                 {
-                    return fLine.toStdString() == it.first && fType.type() == it.second.type();
+                    return fLine == it.first && fType.type() == it.second.type();
                 });
                 if (item != mIgnoreMap.end())
                 {
@@ -122,7 +134,7 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                         auto fMessage = QObject::tr("\"%1\": %3 inserted from %2").arg(fLine, file.fileName(), fType.getStates(true));
                         TRACE(Logger::debug, fMessage.toStdString().c_str() );
                     }
-                    auto pair = std::pair<const std::string, Type>(fLine.toStdString(), fType);
+                    auto pair = std::pair<const QString, Type>(fLine, fType);
                     mIgnoreMap.push_back(pair);
                 }
             }
@@ -157,13 +169,13 @@ void GitIgnore::removeIgnoreMapLevel(uint aMapLevel, GitIgnore* ignored)
 
 namespace
 {
-    bool compare(stringt2type_vector::const_iterator fItem, const std::string& fFileName)
+    bool compare(stringt2type_vector::const_iterator fItem, const QString& fFileName)
     {
         if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
         {
-            QRegExp fRegEx(fItem->first.c_str());
+            QRegExp fRegEx(fItem->first);
             fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
-            if (fRegEx.exactMatch(fFileName.c_str()))
+            if (fRegEx.exactMatch(fFileName))
             {
                 return true;
             }
@@ -178,7 +190,7 @@ namespace
 
 bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 {
-    const std::string& fFileName = aFileInfo.fileName().toStdString();
+    const QString& fFileName = aFileInfo.fileName();
     stringt2type_vector ignored_entries;
     for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
     {
@@ -202,14 +214,14 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
         {
             QStringList path_parts = aFileInfo.filePath().split('/');
             int size = path_parts.size();
-            if (size > 1 && compare(fItem, path_parts[size-2].toStdString()))
+            if (size > 1 && compare(fItem, path_parts[size-2]))
             {
                 ignored_entries.clear();
             }
         }
         else if (fItem->second.is(Type::Consecutive))
         {
-            if (compare(fItem, aFileInfo.filePath().toStdString()))
+            if (compare(fItem, aFileInfo.filePath()))
             {
                 ignored_entries.push_back(*fItem);
             }
@@ -219,15 +231,15 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
     if (   ignored_entries.size() > 2
         && Logger::isSeverityActive(Logger::debug))
     {
-        std::string str;
+        QString str;
         for (const auto& entry : ignored_entries)
         {
             str += entry.first;
             str += " -> ";
-            str += entry.second.getStates(true).toStdString();
+            str += entry.second.getStates(true);
             str += ", ";
         }
-        TRACE(Logger::debug, "ignored_entries: %d: %s", ignored_entries.size(), str.c_str());
+        TRACE(Logger::debug, "ignored_entries: %d: %s", ignored_entries.size(), str.toStdString().c_str());
     }
 
     if (ignored_entries.size() == 1)
@@ -246,7 +258,7 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
             {
                 if (Logger::isSeverityActive(Logger::debug))
                 {
-                    TRACE(Logger::debug, "!ignored_entry: %d: %s", std::distance(ignored_entries.begin(), entry), entry->first.c_str());
+                    TRACE(Logger::debug, "!ignored_entry: %d: %s", std::distance(ignored_entries.begin(), entry), entry->first.toStdString().c_str());
                 }
                 return false;
             }

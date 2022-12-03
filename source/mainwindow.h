@@ -81,7 +81,7 @@ private:
 
     enum class copy { name, path, file };
     void     copy_file(copy command);
-    QAction* create_auto_cmd(QWidget*, const std::string& icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
     void     showDockedWidget(QWidget* widget, bool hide=false);
 
