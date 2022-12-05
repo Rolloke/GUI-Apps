@@ -6,6 +6,7 @@ CVS/
 *.aps
 *.log
 *.deb
+*.bin
 *.user.*
 OpenDDS/
 *.geany

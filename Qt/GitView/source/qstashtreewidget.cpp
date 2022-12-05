@@ -1,6 +1,7 @@
 #include "qstashtreewidget.h"
 #include <QHeaderView>
 #include <QMenu>
+#include <QDir>
 #include <QFileInfo>
 
 #include "actions.h"
@@ -32,6 +33,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
         mInitialized = true;
     }
 
+    const QDir root_path(git_root_path);
     QStringList result_lines = branch_text.split('\n');
     int line_index = 0;
     bool items_inserted {false};
@@ -73,7 +75,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
                         {
                             QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
                             new_tree_root_item->addChild(new_child_item);
-                            new_child_item->setText(Column::Text, item_parts[0].trimmed());
+                            new_child_item->setText(Column::Text, root_path.relativeFilePath(item_parts[0].trimmed()));
                             new_child_item->setText(Column::Description, item_parts[1].trimmed());
                         }
                     }
