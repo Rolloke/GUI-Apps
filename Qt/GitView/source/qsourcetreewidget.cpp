@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QMenu>
 #include <vector>
+#include <set>
 
 
 using namespace std;
@@ -92,6 +93,7 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
     }
 
     mGitIgnore.addGitIgnoreToIgnoreMapLevel(aParentDir, fMapLevels);
+    std::set<QString> ignored_folders;
 
     quint64 fSizeOfFiles = 0;
     do
@@ -107,7 +109,14 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
                 continue;
             }
         }
-        else if (mGitIgnore.ignoreFile(fFileInfo)) continue;
+        else if (mGitIgnore.ignoreFile(fFileInfo))
+        {
+            if (fFileInfo.isDir())
+            {
+                ignored_folders.insert(fFileInfo.fileName());
+            }
+            continue;
+        }
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
@@ -175,6 +184,10 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         for (const auto& fMapLevel : fMapLevels)
         {
             mGitIgnore.removeIgnoreMapLevel(fMapLevel, ignored);
+        }
+        for (const auto&folder : ignored_folders)
+        {
+            ignored->add_folder(folder);
         }
     }
 

@@ -174,6 +174,10 @@ void code_browser::highlightCurrentLine()
 
     if (!isReadOnly())
     {
+        // QColor lineColor = QGuiApplication::palette().color(QPalette::Highlight);
+        // QPalette::Highlight
+        // QPalette::HighlightedText
+
         QColor lineColor = QColor(m_dark_mode ? Qt::darkYellow : Qt::yellow).lighter(m_dark_mode ? 0 : 160);
 
         selection.format.setBackground(lineColor);
@@ -370,7 +374,7 @@ void LineNumberArea::paintEvent(QPaintEvent *event)
 // https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
 void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& blame_pos)
 {
-    const QPalette p = QApplication::palette(this);
+    const QPalette p = QGuiApplication::palette();
     auto text_color = p.color(QPalette::Normal, QPalette::ButtonText);
     const auto button_color = p.color(QPalette::Normal, QPalette::Button);
     QPainter painter(m_line_number_area);

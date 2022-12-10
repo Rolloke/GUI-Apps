@@ -39,6 +39,21 @@ void GitIgnore::remove_entry(const QString& entry)
     }
 }
 
+void GitIgnore::add_folder(const QString&entry)
+{
+    auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&entry](stringt2type_vector::const_reference it)
+    {
+        return entry == it.first;
+    });
+    if (item == mIgnoreMap.end())
+    {
+        Type fType(Type::Folder);
+        auto pair = std::pair<const QString, Type>(entry, fType);
+        mIgnoreMap.push_back(pair);
+    }
+}
+
+
 void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector<int>& aMapLevels)
 {
     QFile file(aParentDir.filePath(Folder::GitIgnoreFile));
