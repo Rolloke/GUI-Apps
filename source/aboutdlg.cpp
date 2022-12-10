@@ -14,6 +14,7 @@ AboutDlg::AboutDlg(QWidget *parent) :
     QString based = ui->textBased_on->text();
     based += qVersion(); //QT_VERSION_STR;
     ui->textBased_on->setText(based);
+    ui->textVersion->setText(QApplication::applicationVersion());
 
     ui->textBuildDate->setText(__DATE__ + tr(", ") + __TIME__);
 }

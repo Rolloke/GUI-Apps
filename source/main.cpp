@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
     QApplication fApp(argc, argv);
     QApplication::setApplicationName("GitView");
-    QApplication::setApplicationVersion("1.2.0.1");
+    QApplication::setApplicationVersion("1.2.0.2");
 
     QCommandLineParser cmd_line;
     cmd_line.setApplicationDescription("Git repository viewer");

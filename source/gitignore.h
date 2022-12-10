@@ -17,6 +17,8 @@ public:
     void     removeIgnoreMapLevel(uint aLevel, GitIgnore *ignored=nullptr);
     bool     ignoreFile(const QFileInfo& aFileInfo);
     void     clear();
+
+    void     add_folder(const QString&entry);
     void     remove_entry(const QString&entry);
     const git::stringt2type_vector& getIgnoreMap()const;
 
