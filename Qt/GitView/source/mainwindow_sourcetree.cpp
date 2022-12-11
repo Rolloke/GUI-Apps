@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QClipboard>
 #include <QMimeData>
+#include <QTextCodec>
 
 using namespace std;
 using namespace git;
@@ -378,20 +379,42 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         }
         else
         {
-            ui->textBrowser->setExtension(file_extension);
-            if (ui->ckRenderGraphicFile->isChecked())
+            bool codec_selected = false;
+            if (ui->comboTextCodex->currentIndex())
             {
-                ui->textBrowser->setText(file.readAll());
+                // Umlaute windows-437, windows-850, windows-1252
+                auto name = ui->comboTextCodex->currentText().toStdString();
+                QByteArray codec(&name[0], name.size());
+                QTextCodec::setCodecForLocale(QTextCodec::codecForName(codec));
+                codec_selected = true;
             }
             else
             {
-                /// TODO: codepage handling
-                // QString fromLatin1(), fromLocal8Bit(), fromUtf8(),
-                // QString toLatin1(),   toLocal8Bit(),   toUtf8()),
-                // QTextCodec *QTextCodec::codecForUtfText(const QByteArray &ba)
-                // QList<QByteArray> QTextCodec::availableCodecs()
-                // QString(file.readAll()).toLocal8Bit();
-                ui->textBrowser->setPlainText(file.readAll());
+                QTextCodec::setCodecForLocale(nullptr);
+            }
+
+            ui->textBrowser->setExtension(file_extension);
+            if (ui->ckRenderGraphicFile->isChecked())
+            {
+                if (codec_selected)
+                {
+                    ui->textBrowser->setText(QString::fromLocal8Bit(file.readAll()));
+                }
+                else
+                {
+                    ui->textBrowser->setText(file.readAll());
+                }
+            }
+            else
+            {
+                if (codec_selected)
+                {
+                    ui->textBrowser->setPlainText(QString::fromLocal8Bit(file.readAll()));
+                }
+                else
+                {
+                    ui->textBrowser->setPlainText(file.readAll());
+                }
             }
         }
         set_widget_and_action_enabled(ui->btnStoreText, false);

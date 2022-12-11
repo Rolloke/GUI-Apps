@@ -23,6 +23,7 @@
 #include <QTextStream>
 #include <QInputDialog>
 #include <QStaticText>
+#include <QTextCodec>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -153,6 +154,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->textBrowser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
     connect(ui->tableBinaryView, SIGNAL(cursor_changed(int)), m_status_column_label, SLOT(setNum(int)));
 
+    auto codecs = QTextCodec::availableCodecs() ;
+    ui->comboTextCodex->addItem("Default Codec");
+    for (const auto& codec : codecs)
+    {
+        ui->comboTextCodex->addItem(codec);
+    }
 
     fSettings.beginGroup(config::sGroupFilter);
     {
