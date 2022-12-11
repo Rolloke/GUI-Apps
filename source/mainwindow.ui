@@ -784,6 +784,25 @@ File content opened with double click</string>
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="comboTextCodex">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Select codec for text file</string>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="ckRenderGraphicFile">
           <property name="toolTip">
            <string>Render graphics or HTML file in Graphics View</string>
