@@ -627,7 +627,7 @@ int BinaryTableModel::get_td_array_length(const DisplayValue &value, int itdv, c
 {
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
     int length = DisplayValue::default_length;
-    if (value.array_length.has_value())
+    if (value.array_length)
     {
         QJsonValue jv = value.array_length.value();
         switch (jv.type())
@@ -717,7 +717,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
             int byte_length = static_cast<int>(value.display->GetByteLength(&buffer_pointer[offset]) * std::min(length, m_columns_per_row));
             if (index >= 0)
             {
-                value.set_array_index(m_td_index.size(), index);
+                value.set_array_index(static_cast<int>(m_td_index.size()), index);
                 index += m_columns_per_row;
             }
             m_td_index.push_back(itdv);
@@ -895,7 +895,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
         {
             display_value = value.name + ": " + value.display->Display(&buffer_pointer[m_td_offset[row]]);
         }
-        if (!is_variable_length_display_type && value.array_length.has_value())
+        if (!is_variable_length_display_type && value.array_length)
         {
             const int next_offset = m_td_offset[row+1];
             const int value_bytes = static_cast<int>(value.display->GetByteLength());

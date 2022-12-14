@@ -290,6 +290,8 @@ private:
     QString mStylePath;
     QString mExternalIconFiles;
     QString mExternalFileOpenCmd;
+    QString mFindGrep;
+    QString mFindFsrc;
     QMap<QString, QString> mExternalFileOpenExt;
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;

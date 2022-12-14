@@ -360,7 +360,7 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
                 auto file_path = fFileInfo.filePath();
                 if (fType.is(Type::Folder))
                 {
-                    if (file_path.back() == '/')
+                    if (file_path.endsWith('/'))
                     {
                         file_path.resize(file_path.size()-1);
                     }

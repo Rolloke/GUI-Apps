@@ -124,7 +124,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
     {
         binary_length_index = std::distance(m_Checkboxes.begin(), checked_box);
     }
-    m_display[CDisplayType::Binary]->SetBytes(m_display[index2type(binary_length_index)]->GetByteLength());
+    m_display[CDisplayType::Binary]->SetBytes(static_cast<int>(m_display[index2type(binary_length_index)]->GetByteLength()));
 
     for (auto& display : m_display )
     {
@@ -200,7 +200,7 @@ void binary_values_view::on_btnWriteValue_clicked()
         {
             QByteArray array;
             auto type = index2type(index);
-            array.resize(m_display[type]->GetByteLength());
+            array.resize(static_cast<int>(m_display[type]->GetByteLength()));
             m_display[type]->Write(reinterpret_cast<std::uint8_t*>(array.data()), text);
             Q_EMIT set_value(array, m_current_position);
             receive_value(array, 0);
@@ -325,7 +325,7 @@ void binary_values_view::editing_finished()
             {
                 auto type = index2type(index);
                 m_array.clear();
-                m_array.resize(m_display[type]->GetByteLength());
+                m_array.resize(static_cast<int>(m_display[type]->GetByteLength()));
                 if (m_display[type]->Write(reinterpret_cast<std::uint8_t*>(m_array.data()), text))
                 {
                     receive_value(m_array, 0);
@@ -356,7 +356,7 @@ void binary_values_view::on_btnOpenTypeFile_clicked()
         m_current_combo_index = ui->comboType->currentIndex();
         ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::FormatFile));
     }
-    else if (m_current_combo_index.has_value())
+    else if (m_current_combo_index)
     {
         ui->comboType->setCurrentIndex(m_current_combo_index.value());
         m_current_combo_index.reset();

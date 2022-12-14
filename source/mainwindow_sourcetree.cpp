@@ -384,7 +384,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             {
                 // Umlaute windows-437, windows-850, windows-1252
                 auto name = ui->comboTextCodex->currentText().toStdString();
-                QByteArray codec(&name[0], name.size());
+                QByteArray codec(&name[0], static_cast<int>(name.size()));
                 QTextCodec::setCodecForLocale(QTextCodec::codecForName(codec));
                 codec_selected = true;
             }
