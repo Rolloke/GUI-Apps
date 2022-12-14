@@ -42,6 +42,7 @@ void convertToUnicode(const std::string& aSource, std::wstring& aDest)
 
 Logger::Logger(const char* fName)
 {
+    UNUSED(fName);
 #ifdef __linux__
     int fFlags = LOG_NDELAY | LOG_PID ;
     // Open syslog

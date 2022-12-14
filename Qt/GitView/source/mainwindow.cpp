@@ -81,6 +81,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     #else
     , mExternalFileOpenCmd("")
     #endif
+    , mFindGrep("grep")
+    , mFindFsrc("fsrc")
     , mWarnOpenFileSize(1024*1024) // 1MB
 {
     static const QString style_sheet_treeview_lines =
@@ -179,6 +181,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->comboFindBox, setCurrentIndex, currentIndex, toInt);
+        LOAD_STR(fSettings, mFindGrep, toString);
+        LOAD_STR(fSettings, mFindFsrc, toString);
     }
     fSettings.endGroup();
     on_comboFindBox_currentIndexChanged(ui->comboFindBox->currentIndex());
@@ -439,6 +443,8 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
         STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
         STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
+        STORE_STR(fSettings, mFindGrep);
+        STORE_STR(fSettings, mFindFsrc);
     }
     fSettings.endGroup();
 
@@ -2028,7 +2034,7 @@ void MainWindow::find_text_in_files()
         {   // E: regular expression
             options += " -r";
         }
-        find_command = tr("fsrc -d %1 %2 '%3'").arg(search_path, options, search_pattern );
+        find_command = tr("%1 -d %2 %3 '%4'").arg(mFindFsrc, search_path, options, search_pattern );
     }
     else
     {
@@ -2052,7 +2058,7 @@ void MainWindow::find_text_in_files()
         {   // w: whole word
             options += "w";
         }
-        find_command = tr("grep %1 '%2' '%3'").arg(options, search_pattern, search_path);
+        find_command = tr("%1 %2 '%3' '%4'").arg(mFindGrep, options, search_pattern, search_path);
     }
     int result = execute(find_command, find_result);
     if (result == 0)
@@ -2108,7 +2114,15 @@ void MainWindow::find_text_in_files()
                 QStringList found_item_parts = found_item.split(':');
                 if (found_item_parts.size() >= 2)
                 {
+#ifdef __linux__
                     QString file_path = found_item_parts[FindColumn::FilePath];
+#else
+                    found_item_parts[1] = found_item_parts[0] + ":" + found_item_parts[1];
+                    found_item_parts.erase(found_item_parts.begin());
+                    QString file_path = found_item_parts[FindColumn::FilePath];
+                    QFileInfo fi(file_path);
+                    file_path = fi.filePath();
+#endif
                     if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, file_path.mid(search_path.size() + 1)))
                     {
                         QString current_file = file_path.mid(repository_root.size() + 1);
@@ -2176,22 +2190,25 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
                     file_path_part  = item->text(FindColumn::FilePath);
                 }
             }
-#ifdef __linux__
-            open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
-#else
-            open_file(file_path_part, item->text(FindColumn::Line).toInt());
-            for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
+            if (repository_root.size())
             {
-                const QString text = ui->treeSource->topLevelItem(i)->text(0);
-                if (file_path_part.indexOf(text) == 0)
+                open_file(repository_root + "/" + file_path_part, item->text(FindColumn::Line).toInt());
+            }
+            else
+            {
+                open_file(file_path_part, item->text(FindColumn::Line).toInt());
+                for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
                 {
-                    repository_root = text;
-                    file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
-                    break;
+                    const QString text = ui->treeSource->topLevelItem(i)->text(0);
+                    if (file_path_part.indexOf(text) == 0)
+                    {
+                        repository_root = text;
+                        file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
+                        break;
+                    }
                 }
             }
 
-#endif
             ui->treeSource->find_item(repository_root, file_path_part);
         }
     }

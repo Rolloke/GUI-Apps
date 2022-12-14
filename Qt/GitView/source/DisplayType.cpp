@@ -161,7 +161,7 @@ QString CDisplayType::toHexString(const std::uint8_t*pData) const
     if (m_different_endian)
 #endif
     {
-        for (int i=GetByteLength()-1; i>=0; --i)
+        for (int i=static_cast<int>(GetByteLength()-1); i>=0; --i)
         {
             text += QString("%1").arg(pData[i], 2, 16);
         }
@@ -481,11 +481,11 @@ CDisplayBinary::CDisplayBinary()
 QString CDisplayBinary::Display(const std::uint8_t*pData)const
 {
     const int bits = 8;
-    int i, j, k, n = m_nBytes * bits;
+    int i, j, k, n = static_cast<int>(m_nBytes * bits);
     std::uint8_t cMask;
     QString str;
-    str.reserve(n+m_nBytes);
-    for (i=m_nBytes-1, k=0; i>=0; --i)
+    str.reserve(static_cast<int>(n+m_nBytes));
+    for (i=static_cast<int>(m_nBytes-1), k=0; i>=0; --i)
     {
         cMask = 0x80;
         for (j=0; j<bits; ++j, cMask >>= 1, ++k)
@@ -516,7 +516,7 @@ bool CDisplayBinary::Write(std::uint8_t*pData, const QString& sValue) const
             value = '0' + value;
         }
         std::uint8_t cMask;
-        for (i=m_nBytes-1, char_n=0; i>=0 && char_n<size; --i)
+        for (i=static_cast<int>(m_nBytes-1), char_n=0; i>=0 && char_n<size; --i)
         {
             cMask = 0x80;
             pData[i] = 0;
