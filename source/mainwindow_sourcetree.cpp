@@ -456,13 +456,13 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         ui->treeSource->fillContextMenue(menu, mContextMenuSourceTreeItem);
-        menu.exec( ui->treeSource->mapToGlobal(pos) );
+        menu.exec(ui->treeSource->mapToGlobal(pos) + menu_offset);
     }
     else
     {
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuEmptySourceTree);
-        menu.exec( ui->treeSource->mapToGlobal(pos) );
+        menu.exec(ui->treeSource->mapToGlobal(pos) + menu_offset);
     }
 }
 

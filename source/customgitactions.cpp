@@ -699,7 +699,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 
     set_tooltip(menu.addAction(tr("Cancel")), tr("Don't change command"));
 
-    QAction* selected_item = menu.exec(mapToGlobal(pos));
+    QAction* selected_item = menu.exec(mapToGlobal(pos) + menu_offset);
     if (selected_item)
     {
         bool modified = false;

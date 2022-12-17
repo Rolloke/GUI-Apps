@@ -60,7 +60,7 @@ void MainWindow::selectTextBrowserLanguage()
     }
 
     const QPoint point = ui->textBrowser->rect().topLeft();
-    auto* selection = menu.exec(ui->textBrowser->mapToGlobal(point));
+    auto* selection = menu.exec(ui->textBrowser->mapToGlobal(point) + menu_offset);
 
     const int index = actionlist.indexOf(selection);
     if (index != -1)

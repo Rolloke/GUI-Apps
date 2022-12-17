@@ -2232,7 +2232,7 @@ void MainWindow::on_treeFindText_customContextMenuRequested(const QPoint &pos)
 {
     QMenu menu(this);
     mActions.fillContextMenue(menu, Cmd::mContextMenuFindTextTree);
-    menu.exec(ui->treeFindText->mapToGlobal(pos));
+    menu.exec(ui->treeFindText->mapToGlobal(pos) + menu_offset);
 }
 
 void MainWindow::on_ckTypeConverter_stateChanged(int arg1)

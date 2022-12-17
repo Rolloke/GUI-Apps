@@ -60,7 +60,7 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
-    menu.exec(mapToGlobal(pos) );
+    menu.exec(mapToGlobal(pos) + menu_offset);
 
     mSelectedItem = nullptr;
 }

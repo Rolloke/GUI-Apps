@@ -1,5 +1,6 @@
 #include "graphics_view.h"
 #include "actions.h"
+#include "helper.h"
 #include "commit_graphics_item.h"
 #include <QMenu>
 
@@ -87,7 +88,7 @@ void graphics_view::on_customContextMenuRequested(const ActionList& aActionList,
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuGraphicsView);
     menu.addAction(tr("Cancel"));
-    menu.exec(mapToGlobal(pos));
+    menu.exec(mapToGlobal(pos)+ menu_offset);
 }
 
 void graphics_view::clear()
