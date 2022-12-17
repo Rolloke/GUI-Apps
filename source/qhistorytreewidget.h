@@ -31,6 +31,8 @@ public:
     bool            isSelectionFileDiffable();
 
 Q_SIGNALS:
+    void send_history(const QStringList& list);
+    void reset_history();
 
 public Q_SLOTS:
     void clear();

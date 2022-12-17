@@ -142,6 +142,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     connect(ui->treeStash, SIGNAL(find_item(QString,QString)), ui->treeSource, SLOT(find_item(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
+    connect(ui->treeHistory, SIGNAL(send_history(QStringList)), ui->graphicsView, SLOT(insert_history(QStringList)));
+    connect(ui->treeHistory, SIGNAL(reset_history()), ui->graphicsView, SLOT(clear()));
 
     /// add status labels
     m_status_line_label = new QLabel("");
@@ -785,7 +787,7 @@ void MainWindow::clone_code_browser()
     dock->setAttribute(Qt::WA_DeleteOnClose);
     connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
 #if 1
-    QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
+    QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->treeHistory->parent());
     if (parent)
     {
         tabifyDockWidget(parent, dock);
@@ -2174,6 +2176,12 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
                 if (parent)
                 {
                     repository_root = parent->text(FindColumn::FoundTextLine);
+#ifdef __linux__
+                    if (repository_root.isEmpty())
+                    {
+                        file_path_part = "/";
+                    }
+#endif
                     for (int i = list.size()-1; i>=0; --i)
                     {
                         file_path_part += list[i];
@@ -2187,7 +2195,13 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
                 if (parent)
                 {
                     repository_root = parent->text(FindColumn::FoundTextLine);
-                    file_path_part  = item->text(FindColumn::FilePath);
+#ifdef __linux__
+                    if (repository_root.isEmpty())
+                    {
+                        file_path_part = "/";
+                    }
+#endif
+                    file_path_part += item->text(FindColumn::FilePath);
                 }
             }
             if (repository_root.size())

@@ -133,10 +133,8 @@ void MainWindow::on_btnCloseText_clicked()
     set_widget_and_action_enabled(ui->btnStoreText, false);
 
     ui->labelFilePath->setText("");
+    /// TODO: do not clear, if history graphics
     ui->graphicsView->scene()->clear();
-
-    //ui->graphicsView->addItem2graphicsView(new commit_graphis_item());
-
 }
 
 void MainWindow::updateSelectedLanguage(const QString& language)

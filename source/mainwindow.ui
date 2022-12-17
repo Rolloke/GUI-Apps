@@ -580,6 +580,9 @@ File content opened with double click</string>
               <property name="statusTip">
                <string/>
               </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustIgnored</enum>
+              </property>
              </widget>
             </item>
             <item>

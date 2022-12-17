@@ -41,6 +41,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
     QMap<QString, QVariant> fAuthors;
 
     setVisible(true);
+    Q_EMIT reset_history();
 
     const int fTLI = topLevelItemCount()-1;
     int fListCount = 0;
@@ -65,6 +66,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
                 fNewHistoryLogItem->setData(History::Column::Commit, History::role(static_cast<History::Entry::e>(fRole)), QVariant(fItem[fRole]));
             }
             fNewHistoryLogItem->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(aType));
+//            Q_EMIT send_history(fItem);
         }
     }
 
