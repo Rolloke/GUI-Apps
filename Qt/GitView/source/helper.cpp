@@ -23,6 +23,8 @@
 #include <shellapi.h>
 #endif
 
+QPoint menu_offset(5, 0);
+
 QString getSettingsName(const QString& aItemName)
 {
     QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");

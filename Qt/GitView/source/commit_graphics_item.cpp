@@ -49,6 +49,11 @@ void commit_graphis_item::setFont(QFont *aFont)
     m_font  = aFont;
 }
 
+/// @brief parent hashes
+/// @note may be more than one, and refer to different commit hashes
+/// - the first parent refers to the dividing commit hash
+/// - the second parent refers to the previous commit hash
+/// - the commit of a parent pair is a uniting commit
 const QString &commit_graphis_item::get_parent_hash() const
 {
     return m_items[History::Entry::ParentHash];
@@ -59,6 +64,10 @@ const QString &commit_graphis_item::get_tree_hash() const
     return m_items[History::Entry::TreeHash];
 }
 
+/// @brief commit hash
+/// @note refer to a parent hash
+/// if the commit refers to a first parent of more parents this is a dividing commit
+/// if the commit refers to a second parent this is the previous unite commit
 const QString &commit_graphis_item::get_commit_hash() const
 {
     return m_items[History::Entry::CommitHash];

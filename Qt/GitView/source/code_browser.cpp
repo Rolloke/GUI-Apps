@@ -131,7 +131,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
         QMenu *menu = createStandardContextMenu();
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
         m_actions->getAction(git::Cmd::CloneTextBrowser)->setEnabled(!isReadOnly());
-        menu->exec(event->globalPos());
+        menu->exec(event->globalPos() + menu_offset);
         delete menu;
     }
     else

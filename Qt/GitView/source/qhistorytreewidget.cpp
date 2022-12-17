@@ -223,7 +223,7 @@ void QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos, const Act
     }
 
     actions.fillContextMenue(menu, Cmd::mContextMenuHistoryTree);
-    QAction* fAction = menu.exec(mapToGlobal(pos));
+    QAction* fAction = menu.exec(mapToGlobal(pos) + menu_offset);
     if (fAction && fAuthorsMenu)
     {
         int fIndex = fAuthorsMenu->actions().indexOf(fAction);
