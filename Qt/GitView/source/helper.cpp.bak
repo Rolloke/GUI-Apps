@@ -104,6 +104,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
             {
                 aTree.removeItemWidget(top_level_item, 0);
                 delete top_level_item;
+                break;
             }
         }
     }

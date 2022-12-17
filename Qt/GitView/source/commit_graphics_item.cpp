@@ -11,12 +11,10 @@ commit_graphis_item::commit_graphis_item()
     , m_font(0)
     , m_position(0, 0)
 {
-    auto * pen = new QPen(Qt::SolidLine);
-    pen->setColor(QColor(200,0,0));
-    setPen(pen);
+    m_pen = new QPen(Qt::SolidLine);
+    m_pen->setColor(QColor(200,0,0));
 
-    auto *font = new QFont("Courier", 12);
-    setFont(font);
+    m_font = new QFont("Courier", 12);
 }
 
 commit_graphis_item::~commit_graphis_item()
@@ -35,6 +33,63 @@ void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsIte
     QRectF rect(m_position, QSizeF(1000, 1000));
     if (m_font) painter->setFont(*m_font);
     if (m_pen) painter->setPen(*m_pen);
-    painter->drawText(rect, Qt::AlignLeft|Qt::AlignTop, m_items[History::Entry::SubjectAndBody].split("\n")[0], &m_bounding_rect);
+    painter->drawText(rect, Qt::AlignLeft|Qt::AlignTop, get_subject_and_body().split("\n")[0], &m_bounding_rect);
     painter->drawRoundedRect(m_bounding_rect, 2.5, 2.5);
+}
+
+void commit_graphis_item::setPen(QPen *aPen)
+{
+    delete m_pen;
+    m_pen   = aPen;
+}
+
+void commit_graphis_item::setFont(QFont *aFont)
+{
+    delete m_font;
+    m_font  = aFont;
+}
+
+const QString &commit_graphis_item::get_parent_hash() const
+{
+    return m_items[History::Entry::ParentHash];
+}
+
+const QString &commit_graphis_item::get_tree_hash() const
+{
+    return m_items[History::Entry::TreeHash];
+}
+
+const QString &commit_graphis_item::get_commit_hash() const
+{
+    return m_items[History::Entry::CommitHash];
+}
+
+const QString &commit_graphis_item::get_author() const
+{
+    return m_items[History::Entry::Author];
+}
+
+const QString &commit_graphis_item::get_author_date() const
+{
+    return m_items[History::Entry::AuthorDate];
+}
+
+const QString &commit_graphis_item::get_author_email() const
+{
+    return m_items[History::Entry::AuthoEmail];
+}
+
+const QString &commit_graphis_item::get_committer() const
+{
+    return m_items[History::Entry::Committer];
+}
+
+const QString &commit_graphis_item::get_committer_date() const
+{
+    return m_items[History::Entry::CommitterDate];
+}
+
+const QString &commit_graphis_item::get_subject_and_body() const
+{
+    return m_items[History::Entry::SubjectAndBody];
 }
