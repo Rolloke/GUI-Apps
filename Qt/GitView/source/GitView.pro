@@ -35,6 +35,7 @@ win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 SOURCES += main.cpp\
     binary_values_view.cpp \
     code_browser.cpp \
+    commit_graphics_item.cpp \
     highlighterdialog.cpp \
     mainwindow.cpp \
     helper.cpp \
@@ -67,6 +68,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     binary_values_view.h \
     code_browser.h \
+    commit_graphics_item.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
