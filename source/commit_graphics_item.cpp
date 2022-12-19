@@ -1,5 +1,7 @@
 #include "commit_graphics_item.h"
 #include "history.h"
+
+#include <QWidget>
 #include <QPen>
 #include <QFont>
 #include <QPainter>
@@ -12,7 +14,9 @@ commit_graphis_item::commit_graphis_item()
     , m_position(0, 0)
 {
     m_pen = new QPen(Qt::SolidLine);
-    m_pen->setColor(QColor(200,0,0));
+    m_pen->setColor(Qt::darkRed);
+    m_font_pen = new QPen(Qt::SolidLine);
+    m_font_pen->setColor(Qt::black);
 
     m_font = new QFont("Courier", 12);
 }
@@ -28,35 +32,65 @@ QRectF commit_graphis_item::boundingRect() const
     return m_bounding_rect;
 }
 
-void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/)
+void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     QRectF rect(m_position, QSizeF(1000, 1000));
     if (m_font) painter->setFont(*m_font);
-    if (m_pen) painter->setPen(*m_pen);
+    if (m_font_pen) painter->setPen(*m_font_pen);
     painter->drawText(rect, Qt::AlignLeft|Qt::AlignTop, get_subject_and_body().split("\n")[0], &m_bounding_rect);
+    if (m_font_pen) painter->setPen(*m_pen);
     painter->drawRoundedRect(m_bounding_rect, 2.5, 2.5);
+    for (int i=0; i<m_connections.size(); ++i)
+    {
+        m_connections[i]->paint(painter, option, widget);
+    }
 }
 
-void commit_graphis_item::setPen(QPen *aPen)
+void commit_graphis_item::set_pen(QPen *aPen)
 {
     delete m_pen;
     m_pen   = aPen;
 }
 
-void commit_graphis_item::setFont(QFont *aFont)
+void commit_graphis_item::set_font(QFont *aFont)
 {
     delete m_font;
     m_font  = aFont;
 }
+
+void commit_graphis_item::set_offset_pos(const QPointF &aOffset)
+{
+    m_position = aOffset;
+}
+
+const QPointF& commit_graphis_item::offset_pos() const
+{
+    return m_position;
+}
+
+void commit_graphis_item::set_history(const QStringList &items)
+{
+    m_items = items;
+    QImage device(1000, 1000, QImage::Format_Mono);
+    QPainter dummy(&device);
+    paint(&dummy, nullptr, nullptr);
+}
+
 
 /// @brief parent hashes
 /// @note may be more than one, and refer to different commit hashes
 /// - the first parent refers to the dividing commit hash
 /// - the second parent refers to the previous commit hash
 /// - the commit of a parent pair is a uniting commit
-const QString &commit_graphis_item::get_parent_hash() const
+QString commit_graphis_item::get_parent_hash(parent parent_index) const
 {
-    return m_items[History::Entry::ParentHash];
+    QStringList parents = m_items[History::Entry::ParentHash].split(" ");
+    int index = static_cast<int>(parent_index);
+    if (index < parents.size())
+    {
+        return parents[index];
+    }
+    return "";
 }
 
 const QString &commit_graphis_item::get_tree_hash() const
@@ -102,3 +136,54 @@ const QString &commit_graphis_item::get_subject_and_body() const
 {
     return m_items[History::Entry::SubjectAndBody];
 }
+
+const QList<poly_line_item*>& commit_graphis_item::get_connection() const
+{
+    return m_connections;
+}
+
+void commit_graphis_item::add_connection(poly_line_item* connection)
+{
+    m_connections.push_back(connection);
+}
+
+poly_line_item::poly_line_item() :
+    mpPen(0)
+{
+
+}
+
+poly_line_item::~poly_line_item()
+{
+
+}
+
+QRectF poly_line_item::boundingRect() const
+{
+    return mPolyLine.boundingRect();
+}
+
+void poly_line_item::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/)
+{
+    if (mpPen) painter->setPen(*mpPen);
+    painter->drawPolyline(mPolyLine);
+}
+
+void poly_line_item::connect(const QPointF& p1, const QPointF& p2, int add_points, qreal horz_offset)
+{
+    qreal top    = p1.y();
+    qreal bottom = p2.y();
+    if (top < bottom) std::swap(top, bottom);
+    mPolyLine.append(QPointF(p1.x(), top));
+    if (add_points == 1)
+    {
+        mPolyLine.append(QPointF(p1.x()-horz_offset, (top + bottom)*0.5));
+    }
+    else if (add_points > 1)
+    {
+        mPolyLine.append(QPointF(p1.x()-horz_offset, top - horz_offset));
+        mPolyLine.append(QPointF(p1.x()-horz_offset, bottom + horz_offset));
+    }
+    mPolyLine.append(QPointF(p2.x(), bottom));
+}
+
