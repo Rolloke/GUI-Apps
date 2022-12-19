@@ -338,6 +338,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
     if (ui->ckRenderGraphicFile->isChecked())
     {
+        ui->graphicsView->clear();
         if (ui->graphicsView->render_file(file_path, file_extension))
         {
             updateSelectedLanguage(file_extension);

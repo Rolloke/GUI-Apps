@@ -19,6 +19,7 @@ QHistoryTreeWidget::QHistoryTreeWidget(QWidget *parent): QTreeWidget(parent)
 void QHistoryTreeWidget::clear()
 {
     QTreeWidget::clear();
+    Q_EMIT reset_history();
 }
 
 
@@ -66,9 +67,10 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
                 fNewHistoryLogItem->setData(History::Column::Commit, History::role(static_cast<History::Entry::e>(fRole)), QVariant(fItem[fRole]));
             }
             fNewHistoryLogItem->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(aType));
-//            Q_EMIT send_history(fItem);
+            Q_EMIT send_history(fItem);
         }
     }
+    Q_EMIT send_history({});
 
     fNewHistoryItem->setData(History::Column::Commit, History::Role::VisibleAuthors, QVariant(fAuthors));
 }

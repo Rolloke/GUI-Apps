@@ -133,8 +133,11 @@ void MainWindow::on_btnCloseText_clicked()
     set_widget_and_action_enabled(ui->btnStoreText, false);
 
     ui->labelFilePath->setText("");
-    /// TODO: do not clear, if history graphics
-    ui->graphicsView->scene()->clear();
+
+    if (!ui->graphicsView->has_rendered_graphic())
+    {
+        ui->graphicsView->clear();
+    }
 }
 
 void MainWindow::updateSelectedLanguage(const QString& language)
