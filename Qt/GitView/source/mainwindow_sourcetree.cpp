@@ -6,6 +6,7 @@
 #include "mergedialog.h"
 #include "binary_values_view.h"
 
+#include <sstream>
 
 #include <QMenu>
 #include <QFileDialog>
@@ -1021,42 +1022,38 @@ void MainWindow::showInformation()
 
         message_box.setText(tr("Information about %1\n%2").arg(type.is(Type::Folder) ? Type::name(Type::Folder) : Type::name(Type::File),
                                                                type.is(Type::Folder) ? file_info.completeBaseName() : file_info.fileName()));
+
         QString states = type.getStates(true);
         states.replace("|", " ");
-        QString information = tr("States:%1\n"
-            "\nSize: %2\n"
-            "\nCreated: %3"
-            "\nModified: %4"
-            "\nLast Access: %5"
+        std::stringstream information;
+
+        information << "States: " << states.toStdString() << std::endl;
+        information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
 #ifdef __linux__
-            "\nMetadata Access: %9\n"
+        if (file_info.birthTime().isValid())
+        {
+            information << "\nCreated: " << file_info.birthTime().toString(Qt::SystemLocaleShortDate).toStdString();
+        }
 #endif
-            "\nPermissions:\n%6\n"
+        information << "\nModified: " << file_info.lastModified().toString(Qt::SystemLocaleShortDate).toStdString();
+        information << "\nLast Access: " << file_info.lastRead().toString(Qt::SystemLocaleShortDate).toStdString();
 #ifdef __linux__
-            "\nOwner: %7"
-            "\nGroup: %8"
+        if (file_info.metadataChangeTime().isValid())
+        {
+            information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate).toStdString();
+        }
 #endif
-            ).arg(states,
-            formatFileSize(file_info.size()),
+        information << "\nPermissions:\n" << formatPermissions(file_info.permissions()).toStdString() << std::endl;
 #ifdef __linux__
-            file_info.birthTime().isValid() ? file_info.birthTime().toString(Qt::SystemLocaleShortDate) : "n/a",
-#else
-            "n/a",
+        information << "\nOwner: " << file_info.owner().toStdString();
+        information << "\nGroup: " << file_info.group().toStdString();
 #endif
-            file_info.lastModified().toString(Qt::SystemLocaleShortDate),
-            file_info.lastRead().toString(Qt::SystemLocaleShortDate),
-            formatPermissions(file_info.permissions())
-#ifdef __linux__
-            , file_info.owner(),
-            file_info.group(),
-            file_info.metadataChangeTime().isValid() ? file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate) : "n/a"
-#endif
-            );
         if (file_info.isSymLink())
         {
-            information += tr("\nSymbolic link target:\n%1").arg(file_info.symLinkTarget());
+            information << "\nSymbolic link target:\n" << file_info.symLinkTarget().toStdString();
         }
-        message_box.setInformativeText(information);
+
+        message_box.setInformativeText(information.str().c_str());
 
         Type::mShort = old;
         message_box.exec();

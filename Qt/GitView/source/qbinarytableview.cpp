@@ -167,6 +167,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     const int row            = rowAt(event->y());
 
     QTableView::mousePressEvent(event);
+    if (row < 0) return;
 
     float size = font().pixelSize();
     if (size < 0)
@@ -691,13 +692,18 @@ void BinaryTableModel::update_typed_display_rows()
         value.m_td_row_to_index.clear();    // cleanup row to index map
         int length = get_td_array_length(value, itdv, m_td_values, m_td_index, m_td_offset);
         if (length == DisplayValue::invalid_length) break;
-        update_typed_display_value(value, offset, length, itdv);
+        std::vector<int> inserted_rows;
+        update_typed_display_value(value, offset, length, itdv, inserted_rows);
+        for (const auto& inserted_row: inserted_rows)
+        {
+            TRACE(Logger::info, "top inserted row: %d", inserted_row);
+        }
     }
     m_td_offset.push_back(offset);
     insertRows(0, static_cast<int>(m_td_index.size()), QModelIndex());
 }
 
-void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offset, int length, int itdv)
+void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offset, int length, int itdv, std::vector<int> &rows)
 {
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
     if (value.display)
@@ -744,7 +750,9 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     if (member)
                     {
                         const int row = static_cast<int>(m_td_index.size());
+                        /// TODO: update all substruct rows recursively within calling structs
                         structure.set_index(row, static_cast<int>(member));
+                        rows.push_back(row);
                         member_length = get_td_array_length(structure.member[member], member, structure.member, {}, m_td_offset);
                         if (member_length > DisplayValue::default_length)
                         {   // store length of member
@@ -756,7 +764,12 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     {   // variable display type length was set for correct offset
                         member_length = DisplayValue::is_struct_member;
                     }
-                    update_typed_display_value(structure.member[member], offset, member_length, itdv);
+                    std::vector<int> inserted_rows;
+                    update_typed_display_value(structure.member[member], offset, member_length, itdv, inserted_rows);
+                    for (const auto& inserted_row: inserted_rows)
+                    {
+                        structure.set_index(inserted_row, static_cast<int>(member));
+                    }
                 }
             }
         }
@@ -935,7 +948,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
 QVariant BinaryTableModel::get_typed_display_values(int row) const
 {
     QString display_value {"n/a"};
-    if (row < static_cast<int>(m_td_index.size()) && m_td_offset[row] <= m_binary_content.size())
+    if (row >= 0 && row < static_cast<int>(m_td_index.size()) && m_td_offset[row] <= m_binary_content.size())
     {
         const auto& value = m_td_values[m_td_index[row]];
         int length = 1;
