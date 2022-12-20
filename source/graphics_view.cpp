@@ -1,6 +1,7 @@
 #include "graphics_view.h"
 #include "actions.h"
 #include "helper.h"
+#include "history.h"
 #include "commit_graphics_item.h"
 #include <QMenu>
 #include <QPen>
@@ -21,6 +22,10 @@ graphics_view::graphics_view(QWidget *parent) :
   , mHistory(graphic::off)
 {
     setScene(new QGraphicsScene ());
+//    add_show_history_entry(git::History::Entry::ParentHash);
+//    add_show_history_entry(git::History::Entry::CommitHash);
+    add_show_history_entry(git::History::Entry::Committer);
+    add_show_history_entry(git::History::Entry::CommitterDate);
 }
 
 bool graphics_view::render_file(const QString& file_name, const QString& file_extension)
@@ -89,7 +94,7 @@ void graphics_view::on_customContextMenuRequested(const ActionList& aActionList,
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuGraphicsView);
     menu.addAction(tr("Cancel"));
-    menu.exec(mapToGlobal(pos)+ menu_offset);
+    menu.exec(mapToGlobal(pos) + menu_offset);
 }
 
 bool graphics_view::has_rendered_graphic()
@@ -115,39 +120,10 @@ void graphics_view::fit_inView(bool fit)
     QRectF bounding_rect;
     for (int i=0; i<items.size(); ++i)
     {
-        commit_graphis_item* cgi = dynamic_cast<commit_graphis_item*>(items[i]);
         bounding_rect = bounding_rect.united(items[i]->boundingRect());
         if (mHistory == graphic::set)
         {
-            QString parent_1 = cgi->get_parent_hash();
-            QString parent_2 = cgi->get_parent_hash(commit_graphis_item::parent::second);
-            for (int j=0; j<items.size(); ++j)
-            {
-                // TODO: validate hash connection
-                int diff = std::abs(i - j);
-                qreal offset = 10;
-                commit_graphis_item* cgi_ref = dynamic_cast<commit_graphis_item*>(items[j]);
-                if (parent_1 == cgi_ref->get_commit_hash())
-                {
-                    QPen* line_pen = new QPen(Qt::SolidLine);
-                    line_pen->setColor(QColor(0, 200,0));
-                    line_pen->setWidth(2);
-                    poly_line_item * poly_line = new poly_line_item;
-                    poly_line->setPen(line_pen);
-                    poly_line->connect(cgi->boundingRect().bottomLeft(), cgi_ref->boundingRect().topLeft(), diff, offset+diff*2);
-                    cgi_ref->add_connection(poly_line);
-                }
-                if (parent_2.size() && parent_2 == cgi_ref->get_commit_hash())
-                {
-                    QPen* line_pen = new QPen(Qt::SolidLine);
-                    line_pen->setWidth(2);
-                    line_pen->setColor(QColor(0, 0, 200));
-                    poly_line_item * poly_line = new poly_line_item;
-                    poly_line->setPen(line_pen);
-                    poly_line->connect(cgi->boundingRect().bottomLeft(), cgi_ref->boundingRect().topLeft(), diff, offset+diff*2);
-                    cgi_ref->add_connection(poly_line);
-                }
-            }
+            commit_graphis_item::create_connections(i, items);
         }
     }
     if (mHistory == graphic::set)
@@ -189,9 +165,26 @@ void graphics_view::insert_history(const QStringList & list)
 
         auto item = new commit_graphis_item();
         item->set_offset_pos(QPointF(50, size * (height + 10)));
+        item->m_show_entry = [this] (int show) { return m_show_history_entry.count(show) > 0; };
         item->set_history(list);
         addItem2graphicsView(item, false);
         mHistory = graphic::set;
     }
 }
+
+void graphics_view::add_show_history_entry(int entry)
+{
+    m_show_history_entry.insert(entry);
+}
+
+void graphics_view::remove_show_history_entry(int entry)
+{
+    m_show_history_entry.erase(entry);
+}
+
+const std::set<int>& graphics_view::get_show_history_entries() const
+{
+    return m_show_history_entry;
+}
+
 

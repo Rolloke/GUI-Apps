@@ -23,6 +23,7 @@ public:
     QVariant        determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem);
     QString         clickItem(QTreeWidgetItem *aItem, int aColumn);
     void            checkAuthorsIndex(int aIndex, bool aChecked);
+    void            setShowHistoryGraphically(bool show);
 
     const QString&  getSelectedHistoryHashItems();
     const QString&  getSelectedHistoryFile();
@@ -47,6 +48,7 @@ private:
     QString mHistoryHashItems;
     uint    mSelectedTopLevelItemType { 0 };
     bool    mInitialized { false };
+    bool    mShowHistoryGraphically;
 
 };
 

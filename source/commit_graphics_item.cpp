@@ -38,8 +38,23 @@ void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsIte
     if (m_font) painter->setFont(*m_font);
     if (m_font_pen) painter->setPen(*m_font_pen);
     painter->drawText(rect, Qt::AlignLeft|Qt::AlignTop, get_subject_and_body().split("\n")[0], &m_bounding_rect);
+    int text_height = m_bounding_rect.height();
+    QRectF bounding;
+    if (m_show_entry)
+    {
+        for (int entry = History::Entry::CommitHash; entry < History::Entry::NoOfEntries; ++ entry)
+        {
+            if (entry != History::Entry::SubjectAndBody && m_show_entry(entry))
+            {
+                rect.translate(QPointF(0, text_height));
+                painter->drawText(rect, Qt::AlignLeft|Qt::AlignTop, m_items[entry], &bounding);
+                m_bounding_rect = bounding.united(m_bounding_rect);
+            }
+        }
+    }
+    m_bounding_rect += QMargins(5, 1, 5, 1);
     if (m_font_pen) painter->setPen(*m_pen);
-    painter->drawRoundedRect(m_bounding_rect, 2.5, 2.5);
+    painter->drawRoundedRect(m_bounding_rect, 5, 5);
     for (int i=0; i<m_connections.size(); ++i)
     {
         m_connections[i]->paint(painter, option, widget);
@@ -76,12 +91,11 @@ void commit_graphis_item::set_history(const QStringList &items)
     paint(&dummy, nullptr, nullptr);
 }
 
-
 /// @brief parent hashes
 /// @note may be more than one, and refer to different commit hashes
-/// - the first parent refers to the dividing commit hash
-/// - the second parent refers to the previous commit hash
-/// - the commit of a parent pair is a uniting commit
+/// - one parent refers to the dividing commit hash
+/// - another parent refers to the previous commit hash
+/// - the commit of a parent pair is a uniting or merging commit
 QString commit_graphis_item::get_parent_hash(parent parent_index) const
 {
     QStringList parents = m_items[History::Entry::ParentHash].split(" ");
@@ -100,8 +114,8 @@ const QString &commit_graphis_item::get_tree_hash() const
 
 /// @brief commit hash
 /// @note refer to a parent hash
-/// if the commit refers to a first parent of more parents this is a dividing commit
-/// if the commit refers to a second parent this is the previous unite commit
+/// if the commit refers to one parent of more parents this is a dividing commit
+/// if the commit refers to the other parent this is the merging commit
 const QString &commit_graphis_item::get_commit_hash() const
 {
     return m_items[History::Entry::CommitHash];
@@ -147,15 +161,46 @@ void commit_graphis_item::add_connection(poly_line_item* connection)
     m_connections.push_back(connection);
 }
 
-poly_line_item::poly_line_item() :
-    mpPen(0)
+void commit_graphis_item::create_connections(int index, const QList<QGraphicsItem *> &items)
+{
+    commit_graphis_item* cgi = dynamic_cast<commit_graphis_item*>(items[index]);
+
+    QString parent_1 = cgi->get_parent_hash();
+    QString parent_2 = cgi->get_parent_hash(commit_graphis_item::parent::second);
+    for (int index_ref = 0; index_ref < items.size(); ++index_ref)
+    {
+        int diff = index - index_ref;
+        qreal offset = 10;
+        commit_graphis_item* cgi_ref = dynamic_cast<commit_graphis_item*>(items[index_ref]);
+
+        Qt::GlobalColor line_color { Qt::transparent };
+        if      (parent_1 == cgi_ref->get_commit_hash())                    { line_color = Qt::green;   }
+        else if (parent_2.size() && parent_2 == cgi_ref->get_commit_hash()) { line_color = Qt::blue;    }
+        else if (diff == 1)                                                 { line_color = Qt::magenta; }
+        if (line_color != Qt::transparent)
+        {
+            QPen* line_pen = new QPen(QBrush(line_color), 2, Qt::SolidLine);
+            poly_line_item * poly_line = new poly_line_item;
+            poly_line->setPen(line_pen);
+#if 1
+            poly_line->connect(cgi->boundingRect().bottomLeft(), cgi_ref->boundingRect().topLeft(), diff, offset+diff*3);
+#else
+            poly_line->connect(QPointF(cgi->boundingRect().left(), cgi->boundingRect().center().ry()),
+                               QPointF(cgi_ref->boundingRect().left(), cgi_ref->boundingRect().center().ry()), diff, offset+diff*2);
+#endif
+            cgi_ref->add_connection(poly_line);
+        }
+    }
+}
+
+poly_line_item::poly_line_item() : mpPen(0)
 {
 
 }
 
 poly_line_item::~poly_line_item()
 {
-
+    delete mpPen;
 }
 
 QRectF poly_line_item::boundingRect() const

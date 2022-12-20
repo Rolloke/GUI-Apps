@@ -869,6 +869,16 @@ File content opened with double click</string>
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="ckShowHistoryGraphically">
+          <property name="toolTip">
+           <string>Show history also in graphics view</string>
+          </property>
+          <property name="text">
+           <string>Show History graphically</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="ckExperimental">
           <property name="toolTip">
            <string>Experimental functions</string>
