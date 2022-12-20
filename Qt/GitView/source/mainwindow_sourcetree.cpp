@@ -792,6 +792,10 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
         ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem), type.type());
         ui->textBrowser->setPlainText("");
         showDockedWidget(ui->treeHistory);
+        if (ui->ckShowHistoryGraphically->isChecked())
+        {
+            showDockedWidget(ui->graphicsView);
+        }
     }   break;
     case Cmd::ParseBlameText:
     {

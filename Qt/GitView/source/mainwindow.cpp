@@ -331,6 +331,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboTabPosition, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
+        on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
@@ -499,6 +501,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboTabPosition, currentIndex);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
+        STORE_PTR(fSettings, ui->ckShowHistoryGraphically, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
@@ -2250,5 +2253,4 @@ void MainWindow::on_comboTabPosition_currentIndexChanged(int index)
 {
     setTabPosition(Qt::RightDockWidgetArea, static_cast<QTabWidget::TabPosition>(index));
 }
-
 

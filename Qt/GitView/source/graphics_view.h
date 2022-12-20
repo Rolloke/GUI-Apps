@@ -2,6 +2,7 @@
 #define GRAPHICS_VIEW_H
 
 #include <QGraphicsView>
+#include <set>
 
 class ActionList;
 class QGraphicsItem;
@@ -18,6 +19,10 @@ public:
     bool render_file(const QString& file_name, const QString& file_extension);
     bool has_rendered_graphic();
 
+    void add_show_history_entry(int entry);
+    void remove_show_history_entry(int entry);
+    const std::set<int>& get_show_history_entries() const;
+
 signals:
 
 public slots:
@@ -32,6 +37,7 @@ private:
     double mGraphicsScale;
     bool    mFitInView;
     graphic mHistory;
+    std::set<int> m_show_history_entry;
 };
 
 
