@@ -115,7 +115,7 @@ private:
     void     update_typed_display_value(DisplayValue &value, int &offset, int length, int itdv, std::vector<int> &rows);
     QString  display_typed_value(const DisplayValue& value, int row, int length) const;
     QString  display_type(const DisplayValue& value, int row, int *length=nullptr) const;
-    int      get_td_array_length(const DisplayValue& value, int itdv, const std::vector<DisplayValue>& value_vector,
+    int      get_typed_display_array_length(const DisplayValue& value, int itdv, const std::vector<DisplayValue>& value_vector,
                                  const std::vector<int>& index_vector, const std::vector<int>& offset_vector);
 
     QByteArray  m_binary_content;

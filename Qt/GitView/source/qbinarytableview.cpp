@@ -623,7 +623,7 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     return QVariant(line);
 }
 
-int BinaryTableModel::get_td_array_length(const DisplayValue &value, int itdv, const std::vector<DisplayValue> &value_vector,
+int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, int itdv, const std::vector<DisplayValue> &value_vector,
                                           const std::vector<int> &index_vector, const std::vector<int> &offset_vector)
 {
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
@@ -690,9 +690,9 @@ void BinaryTableModel::update_typed_display_rows()
     {
         auto& value = m_td_values[itdv];
         value.m_td_row_to_index.clear();    // cleanup row to index map
-        int length = get_td_array_length(value, itdv, m_td_values, m_td_index, m_td_offset);
+        int length = get_typed_display_array_length(value, itdv, m_td_values, m_td_index, m_td_offset);
         if (length == DisplayValue::invalid_length) break;
-        std::vector<int> inserted_rows;
+        std::vector<int> inserted_rows { -1 };
         update_typed_display_value(value, offset, length, itdv, inserted_rows);
         for (const auto& inserted_row: inserted_rows)
         {
@@ -750,10 +750,9 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     if (member)
                     {
                         const int row = static_cast<int>(m_td_index.size());
-                        /// TODO: update all substruct rows recursively within calling structs
                         structure.set_index(row, static_cast<int>(member));
                         rows.push_back(row);
-                        member_length = get_td_array_length(structure.member[member], member, structure.member, {}, m_td_offset);
+                        member_length = get_typed_display_array_length(structure.member[member], member, structure.member, {}, m_td_offset);
                         if (member_length > DisplayValue::default_length)
                         {   // store length of member
                             structure.set_length(row, member_length);
@@ -769,7 +768,11 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     for (const auto& inserted_row: inserted_rows)
                     {
                         structure.set_index(inserted_row, static_cast<int>(member));
+                        TRACE(Logger::info, "inserted row: %d for %d of %s", inserted_row, member, structure.name.toStdString().c_str());
                     }
+                    /// TODO: is this necessary?
+//                    if (rows.size() && rows[0] == -1) continue;
+//                    rows.insert(rows.end(), inserted_rows.begin(), inserted_rows.end());
                 }
             }
         }
