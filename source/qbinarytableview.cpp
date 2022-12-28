@@ -224,6 +224,9 @@ void qbinarytableview::set_binary_data(const QByteArray &content)
 {
     auto& themodel = *get_model();
     themodel.m_binary_content = content;
+    const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(themodel.m_binary_content.data());
+    CDisplayType::set_end_ptr(buffer_pointer + themodel.m_binary_content.size());
+
     update_rows();
     Q_EMIT publish_has_binary_content(true);
     Q_EMIT set_value(themodel.m_binary_content, 0);
@@ -239,6 +242,7 @@ void qbinarytableview::clear_binary_content()
     auto& themodel = *get_model();
     themodel.clear_typed_display();
     themodel.m_binary_content.clear();
+    CDisplayType::set_end_ptr(nullptr);
     Q_EMIT set_value(themodel.m_binary_content, 0);
     Q_EMIT publish_has_binary_content(false);
     themodel.m_start_offset = 0;
@@ -309,10 +313,19 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
                 auto file_keys = file_obj.keys();
                 for (auto& key : file_keys)
                 {
-                    TRACE(Logger::info, "- %s: %s", key.toStdString().c_str(), file_obj.take(key).toString().toStdString().c_str());
+                    //TRACE(Logger::info, "- %s: %s", key.toStdString().c_str(), file_obj.take(key).toString().toStdString().c_str());
                     if (key == "endian")
                     {
-                        /// TODO: set endianess
+                        QString endian = file_obj.take(key).toString();
+# if __BYTE_ORDER == __LITTLE_ENDIAN
+                        bool changed = CDisplayType::setDifferentEndian(endian == "big");
+#else
+                        bool changed = CDisplayType::setDifferentEndian(endian == "little");
+#endif
+                        if (changed)
+                        {
+                            Q_EMIT endian_changed();
+                        }
                     }
                 }
 
@@ -355,6 +368,11 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
         update_rows();
     }
     opened = file_parsing_ok;
+}
+
+void qbinarytableview::update_table()
+{
+    update_rows();
 }
 
 void qbinarytableview::change_cursor()
@@ -882,6 +900,7 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
     }
     else                                // unknown display type is a struct
     {
+        /// TODO: or a byte limit, to be implemented.
         value.display = 0;              // type is empty, name is stored
         auto stored_struct = m_td_structs.find(type_name);
         value.name   = type_name;

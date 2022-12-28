@@ -39,6 +39,7 @@ Q_SIGNALS:
     void change_table_columns(int columns);
     void change_table_offset(int offset);
     void open_binary_format_file(const QString& filename, bool &opened);
+    void endian_changed();
 
 public Q_SLOTS:
     void receive_value(const QByteArray& array, int position);
@@ -46,6 +47,7 @@ public Q_SLOTS:
     void set_table_type(int type);
     void set_table_columns(int columns);
     void set_table_offset(int offset);
+    void notify_endian_changed();
 
 private Q_SLOTS:
     void on_btnReadValue_clicked();
