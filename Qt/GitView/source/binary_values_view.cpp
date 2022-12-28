@@ -14,8 +14,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    if (CDisplayType::getDifferentEndian()) ui->radioEndian2->setChecked(true);
-    else                                    ui->radioEndian1->setChecked(true);
+    notify_endian_changed();
 
     QString tooltip = ui->checkUnsignedByte->toolTip();
     /// NOTE: insert the datatype checkboxes in the same order as datatypes in the m_display map
@@ -215,6 +214,7 @@ void binary_values_view::on_radioEndian1_clicked()
 #else
     CDisplayType::setDifferentEndian(true);
 #endif
+    Q_EMIT endian_changed();
 }
 
 void binary_values_view::on_radioEndian2_clicked()
@@ -224,6 +224,7 @@ void binary_values_view::on_radioEndian2_clicked()
 #else
     CDisplayType::setDifferentEndian(false);
 #endif
+    Q_EMIT endian_changed();
 }
 
 void binary_values_view::set_table_type(int type)
@@ -262,6 +263,12 @@ void binary_values_view::set_table_offset(int offset)
     m_setting_table_property = true;
     ui->spinOffset->setValue(offset);
     m_setting_table_property = false;
+}
+
+void binary_values_view::notify_endian_changed()
+{
+    if (CDisplayType::getDifferentEndian()) ui->radioEndian2->setChecked(true);
+    else                                    ui->radioEndian1->setChecked(true);
 }
 
 void binary_values_view::table_offset_changed(int offset)

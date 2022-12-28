@@ -353,7 +353,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>Save changed text to file</string>
+             <string>Save changes to file</string>
             </property>
             <property name="text">
              <string>Save</string>

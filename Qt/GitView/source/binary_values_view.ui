@@ -771,7 +771,7 @@
          <item>
           <widget class="QPushButton" name="btnReadValue">
            <property name="toolTip">
-            <string>Read values again</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read values again from binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Read Value</string>
@@ -781,7 +781,7 @@
          <item>
           <widget class="QPushButton" name="btnWriteValue">
            <property name="toolTip">
-            <string>Store edited value to file</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Store edited value to binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Write Value</string>

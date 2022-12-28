@@ -31,7 +31,7 @@ public:
       Unicode,      // unicode text
       Binary,       // binary data
       FormatFile,
-
+      ByteLimit,
 //      AsciiLine,    // ascii line
 //      UnicodeLine,  // unicode line
 //      Structure,    // Image position for structure
@@ -59,9 +59,11 @@ public:
    void         CopyInverse(const std::uint8_t*pIn, std::uint8_t*pOut, int nSize) const;
    void         SetBytes(int n);
    bool         isSizeVariable();
-   static void  setDifferentEndian(bool de);
+   void         limit_byte_length(size_t &length, const uint8_t *current_ptr) const;
+   static bool  setDifferentEndian(bool de);
    static bool  getDifferentEndian();
    static type_map& get_type_map();
+   static void  set_end_ptr(const uint8_t *ptr);
 protected:
 
    QString      toHexString(const std::uint8_t*pData) const;
@@ -99,6 +101,7 @@ protected:
    eType  mType;
    static bool m_different_endian;
    static type_map m_display;
+   static const std::uint8_t* m_end_ptr;
 };
 
 class CDisplayChar : public CDisplayType

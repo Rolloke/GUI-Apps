@@ -4,6 +4,7 @@
 
 bool CDisplayType::m_different_endian = false;
 CDisplayType::type_map CDisplayType::m_display;
+const std::uint8_t* CDisplayType::m_end_ptr = nullptr;
 
 CDisplayType::CDisplayType()
 {
@@ -87,6 +88,7 @@ CDisplayType::eType CDisplayType::getTypeOfName(const QString& aName)
         fTypes.insert("ulonglong", ULongLong);
         fTypes.insert("string", Ascii);
         fTypes.insert("wstring", Unicode);
+        fTypes.insert("byte limit", ByteLimit);
     }
     auto found_key = fTypes.find(aName);
     if (found_key != fTypes.end())
@@ -117,9 +119,11 @@ bool CDisplayType::isSizeVariable()
     return false;
 }
 
-void CDisplayType::setDifferentEndian(bool de)
+bool CDisplayType::setDifferentEndian(bool de)
 {
+    bool different = m_different_endian != de;
     m_different_endian = de;
+    return different;
 }
 
 bool CDisplayType::getDifferentEndian()
@@ -150,6 +154,11 @@ CDisplayType::type_map& CDisplayType::get_type_map()
         m_display[CDisplayType::Unicode]   = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUnicode));
     }
     return m_display;
+}
+
+void CDisplayType::set_end_ptr(const uint8_t *ptr)
+{
+    m_end_ptr = ptr;
 }
 
 QString CDisplayType::toHexString(const std::uint8_t*pData) const
@@ -543,9 +552,25 @@ CDisplayAscii::CDisplayAscii()
    mType = Ascii;
 }
 
+void CDisplayType::limit_byte_length(size_t& length, const std::uint8_t*current_ptr) const
+{
+    if (m_end_ptr)
+    {
+        auto availeable_bytes = std::distance(current_ptr, m_end_ptr);
+        if (availeable_bytes >= 0)
+        {
+            if (length > static_cast<size_t>(availeable_bytes))
+            {
+                length = availeable_bytes;
+            }
+        }
+    }
+}
+
 QString CDisplayAscii::Display(const std::uint8_t*pData)const
 {
     size_t length = GetByteLength(pData);
+    limit_byte_length(length, pData);
     QByteArray byte_array(reinterpret_cast<const char*>(pData), static_cast<int>(length));
     return byte_array;
 }
@@ -600,6 +625,7 @@ CDisplayUnicode::CDisplayUnicode()
 QString CDisplayUnicode::Display(const std::uint8_t*pData)const
 {
     size_t nLen = GetByteLength(pData);
+    limit_byte_length(nLen, pData);
     QString str(reinterpret_cast<const QChar*>(pData),  static_cast<int>(nLen));
     return str;
 }

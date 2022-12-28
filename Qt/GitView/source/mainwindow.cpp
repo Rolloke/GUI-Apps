@@ -394,11 +394,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mBinaryValuesView->set_table_offset(ui->tableBinaryView->get_offset());
 
     connect(ui->tableBinaryView, SIGNAL(offset_changed(int)), mBinaryValuesView.data(), SLOT(set_table_offset(int)));
+    connect(ui->tableBinaryView, SIGNAL(endian_changed()), mBinaryValuesView.data(), SLOT(notify_endian_changed()));
     connect(mBinaryValuesView.data(), SIGNAL(change_table_type(int)), ui->tableBinaryView, SLOT(set_type(int)));
     connect(mBinaryValuesView.data(), SIGNAL(change_table_columns(int)), ui->tableBinaryView, SLOT(set_columns(int)));
     connect(mBinaryValuesView.data(), SIGNAL(change_table_offset(int)), ui->tableBinaryView, SLOT(set_offset(int)));
     connect(mBinaryValuesView.data(), SIGNAL(status_message(QString,int)), ui->statusBar, SLOT(showMessage(QString,int)));
     connect(mBinaryValuesView.data(), SIGNAL(open_binary_format_file(QString,bool&)), ui->tableBinaryView, SLOT(open_binary_format_file(QString,bool&)));
+    connect(mBinaryValuesView.data(), SIGNAL(endian_changed()), ui->tableBinaryView, SLOT(update_table()));
 
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));

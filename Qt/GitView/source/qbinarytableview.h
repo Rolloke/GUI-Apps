@@ -41,6 +41,7 @@ Q_SIGNALS:
     void columns_changed(int);
     void offset_changed(int);
     void cursor_changed(int);
+    void endian_changed();
 
 public Q_SLOTS:
     void set_type(int);
@@ -48,6 +49,7 @@ public Q_SLOTS:
     void set_offset(int);
     void receive_value(const QByteArray& array, int position);
     void open_binary_format_file(const QString& filename, bool& opened);
+    void update_table();
 
 private:
     BinaryTableModel* get_model() const;
