@@ -68,14 +68,21 @@ class BinaryTableModel : public QStandardItemModel
 
     struct DisplayValue
     {
+        typedef std::map<int, std::vector<int>> map2intvector;
         struct r2i { enum { index, lenght, array_index }; };
-        enum { is_struct_member=-1, invalid_length = 0, default_length = 1 };
+        enum
+        {
+            byte_size_limit  = -2,
+            is_struct_member = -1,
+            invalid_length   =  0,
+            default_length   =  1
+        };
 
-        QString name;
-        CDisplayType* display = 0;
+        QString                     name;
+        CDisplayType*               display = 0;
         boost::optional<QJsonValue> array_length;
-        std::vector<DisplayValue> member;
-        std::map<int, std::vector<int>> m_td_row_to_index;
+        std::vector<DisplayValue>   member;
+        map2intvector               m_td_row_to_index;
 
         int  get_index(int row, int* length=nullptr, int *array_index=nullptr) const;
         void set_index(int row, int index);
@@ -120,12 +127,12 @@ private:
     int      get_typed_display_array_length(const DisplayValue& value, int itdv, const std::vector<DisplayValue>& value_vector,
                                  const std::vector<int>& index_vector, const std::vector<int>& offset_vector);
 
-    QByteArray  m_binary_content;
-    int         m_columns_per_row;
-    int         m_start_offset;
-    int         m_byte_cursor;
-    CDisplayType::eType m_display_type;
-    CDisplayType::type_map& m_display;
+    QByteArray                      m_binary_content;
+    int                             m_columns_per_row;
+    int                             m_start_offset;
+    int                             m_byte_cursor;
+    CDisplayType::eType             m_display_type;
+    CDisplayType::type_map&         m_display;
 
     std::vector<DisplayValue>       m_td_values;
     std::map<QString, DisplayValue> m_td_structs;

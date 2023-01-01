@@ -88,7 +88,6 @@ CDisplayType::eType CDisplayType::getTypeOfName(const QString& aName)
         fTypes.insert("ulonglong", ULongLong);
         fTypes.insert("string", Ascii);
         fTypes.insert("wstring", Unicode);
-        fTypes.insert("byte limit", ByteLimit);
     }
     auto found_key = fTypes.find(aName);
     if (found_key != fTypes.end())

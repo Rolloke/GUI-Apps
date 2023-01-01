@@ -62,6 +62,7 @@ private Q_SLOTS:
     void table_columns_changed(int columns);
     void table_offset_changed(int offset);
     void editing_finished();
+    void showLink(const QString& link_name);
 
 private:
     Ui::binary_values_view *ui;

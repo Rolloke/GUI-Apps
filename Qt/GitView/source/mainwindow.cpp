@@ -24,6 +24,7 @@
 #include <QInputDialog>
 #include <QStaticText>
 #include <QTextCodec>
+#include <QWhatsThis>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -1316,6 +1317,9 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::OpenFileExternally, tr("Open file externally"), tr("Opens file externally")), SIGNAL(triggered()), this, SLOT(open_file_externally()));
     mActions.setFlags(Cmd::OpenFileExternally, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::OpenFileExternally, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::WhatsThisHelp, tr("Whats this?"), tr("Whats this help")), &QAction::triggered, []() { QWhatsThis::enterWhatsThisMode(); } );
+    mActions.setFlags(Cmd::WhatsThisHelp, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);

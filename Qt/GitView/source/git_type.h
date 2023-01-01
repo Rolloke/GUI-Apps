@@ -93,6 +93,7 @@ struct Cmd
         CreateBookMark,
         ShowInformation,
         OpenFileExternally,
+        WhatsThisHelp,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

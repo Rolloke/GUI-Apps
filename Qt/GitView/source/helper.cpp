@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QAction>
+#include <QEvent>
+#include <QWhatsThisClickedEvent>
 
 #include <fstream>
 #include <sstream>
@@ -395,4 +397,20 @@ QColor ColorSelector::get_color_and_increment()
 void   ColorSelector::unapply_color(Qt::GlobalColor not_wanted)
 {
     m_unapplied_color.append(not_wanted);
+}
+
+LinkFilter::LinkFilter(QObject *parent) : QObject(parent)
+{
+
+}
+
+bool LinkFilter::eventFilter(QObject *, QEvent *event)
+{
+    if (event->type() == QEvent::WhatsThisClicked)
+    {
+        QWhatsThisClickedEvent* wtcEvent = static_cast<QWhatsThisClickedEvent*>(event);
+        Q_EMIT linkClicked(wtcEvent->href());
+        return true;
+    }
+    return false;
 }
