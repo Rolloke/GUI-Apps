@@ -756,6 +756,13 @@ File content opened with double click</string>
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Tabs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QComboBox" name="comboTabPosition">
           <item>
            <property name="text">
@@ -764,7 +771,7 @@ File content opened with double click</string>
           </item>
           <item>
            <property name="text">
-            <string>Botton</string>
+            <string>Bottom</string>
            </property>
           </item>
           <item>
@@ -802,6 +809,26 @@ File content opened with double click</string>
           </property>
           <property name="maxVisibleItems">
            <number>20</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelTabwidth">
+          <property name="text">
+           <string>Tabulator width</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinTabulator">
+          <property name="toolTip">
+           <string>Tabulator width</string>
+          </property>
+          <property name="minimum">
+           <number>5</number>
+          </property>
+          <property name="maximum">
+           <number>150</number>
           </property>
          </widget>
         </item>
@@ -885,26 +912,6 @@ File content opened with double click</string>
           </property>
           <property name="text">
            <string>Experimental</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Tabulator width</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="spinTabulator">
-          <property name="toolTip">
-           <string>Tabulator width</string>
-          </property>
-          <property name="minimum">
-           <number>5</number>
-          </property>
-          <property name="maximum">
-           <number>150</number>
           </property>
          </widget>
         </item>

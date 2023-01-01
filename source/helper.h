@@ -6,6 +6,8 @@
 #include <string>
 #include <functional>
 #include <QFile>
+#include <QObject>
+
 
 extern QPoint menu_offset;
 
@@ -80,5 +82,22 @@ private:
     Qt::GlobalColor          m_current_color;
     QVector<Qt::GlobalColor> m_unapplied_color;
 };
+
+class LinkFilter :public QObject
+{
+    Q_OBJECT
+public:
+    explicit LinkFilter(QObject* parent=0);
+
+Q_SIGNALS:
+    void linkClicked(const QString&);
+
+public Q_SLOTS:
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event);
+
+};
+
 
 #endif // HELPER_H

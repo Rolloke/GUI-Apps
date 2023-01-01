@@ -1,8 +1,10 @@
 #include "binary_values_view.h"
 #include "ui_binary_values_view.h"
 #include "DisplayType.h"
+#include "helper.h"
 
 #include <QFileDialog>
+#include <QClipboard>
 
 
 binary_values_view::binary_values_view(QWidget *parent) :
@@ -75,7 +77,51 @@ binary_values_view::binary_values_view(QWidget *parent) :
     connect(ui->comboType, SIGNAL(currentIndexChanged(QString)), this, SLOT(table_type_changed(QString)));
     connect(ui->spinColumns, SIGNAL(valueChanged(int)), this, SLOT(table_columns_changed(int)));
     connect(ui->spinOffset, SIGNAL(valueChanged(int)), this, SLOT(table_offset_changed(int)));
+
+    LinkFilter * filter = new LinkFilter(this);
+    installEventFilter(filter);
+    connect(filter, SIGNAL(linkClicked(QString)), this, SLOT(showLink(QString)));
+
+    ui->btnOpenTypeFile->setWhatsThis(""
+       "<pre>{\n"
+       "\"file\":{ // optional file parameter section\n"
+       "   \"description\": \"file description\",\n"
+       "      \"mime\"       : \"mymime\",\n"
+       "      \"extension\"  : \"ext\",\n"
+       "      \"endian\"     : \"big\"\n"
+       "    },\n"
+       "    \"content\":[ // content of file in an array\n"
+       "       {\"name\": \"long\"},                   // simple name and type\n"
+       "       [\"name\", \"float\", 8],               // float array with size 8\n"
+       "       {\"sizedouble\", \"int32\"},            // size variable for double array\n"
+       "       [\"darray\", \"double\", \"sizedouble\"], // variable double array\n"
+       "       {\"text string\": \"String\"},          // struct \"String\" see below\n"
+       "       {\"bytes\": \"uint32\"},                // simple name and type\n"
+       "       [\"some strings\", \"String\", \"#bytes\"]// strings with max bytes to read\n"
+       "    ],\n"
+       "    \"structs\":{ // optional structs section\n"
+       "       \"String\": [  // structure for strings, name is used like a type\n"
+       "          [\"length\", \"uint32\" ],           // length of string\n"
+       "          [\"text\", \"string\", \"length\"]     // variable length string type\n"
+       "       ]\n"
+       "    }\n"
+       "}\n"
+       "</pre>"
+       "<a href='btnOpenTypeFile'>Copy text</a>");
+
 }
+
+void binary_values_view::showLink(const QString& link_name)
+{
+    if (link_name == "btnOpenTypeFile")
+    {
+        QString text = ui->btnOpenTypeFile->whatsThis();
+        int start = text.indexOf("{");
+        int end   = text.lastIndexOf("}");
+        QApplication::clipboard()->setText(text.mid(start, end-start + 1));
+    }
+}
+
 
 binary_values_view::~binary_values_view()
 {
@@ -314,6 +360,7 @@ void binary_values_view::on_checkStandAlone_toggled(bool checked)
 {
     ui->btnReadValue->setEnabled(!checked);
     ui->btnWriteValue->setEnabled(!checked);
+    ui->btnOpenTypeFile->setEnabled(!checked);
     ui->comboType->setEnabled(!checked);
     ui->spinColumns->setEnabled(!checked);
     ui->spinOffset->setEnabled(!checked);

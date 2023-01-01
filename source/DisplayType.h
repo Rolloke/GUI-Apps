@@ -31,7 +31,6 @@ public:
       Unicode,      // unicode text
       Binary,       // binary data
       FormatFile,
-      ByteLimit,
 //      AsciiLine,    // ascii line
 //      UnicodeLine,  // unicode line
 //      Structure,    // Image position for structure

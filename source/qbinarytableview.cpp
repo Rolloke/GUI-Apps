@@ -63,7 +63,6 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
     double fItemWidth = 0;
     std::for_each(mColumnWidth.begin(), mColumnWidth.end()-1, [&fItemWidth](double fItem ) { fItemWidth += fItem; });
     mColumnWidth.back() = 1.0 - fItemWidth;
-
 }
 
 void qbinarytableview::update_rows(bool refresh_all)
@@ -657,6 +656,12 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
         case QJsonValue::String:            // length within data variable identified by name
         {
             QString name = jv.toString();
+            bool is_byte_size_limit = false;
+            if (name.indexOf('#') == 0)
+            {
+                is_byte_size_limit = true;
+                name.remove(0, 1);
+            }
             auto length_variable = std::find_if(value_vector.rbegin(), value_vector.rend(), [&](const DisplayValue& value)
             {
                return value.name.compare(name, Qt::CaseInsensitive) == 0;
@@ -684,6 +689,10 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
                         if (!ok) length = DisplayValue::invalid_length;
                     }
                 }
+            }
+            if (is_byte_size_limit && length > DisplayValue::default_length)
+            {
+                length = -length; // indicate byte size limit as negative length
             }
         }break;
         default:
@@ -724,9 +733,14 @@ void BinaryTableModel::update_typed_display_rows()
 void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offset, int length, int itdv, std::vector<int> &rows)
 {
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
+    const bool is_byte_size_limit = length <= DisplayValue::byte_size_limit;
     if (value.display)
     {
-        if (length == DisplayValue::is_struct_member)
+        if (is_byte_size_limit)
+        {
+            length = -length;
+        }
+        else if (length == DisplayValue::is_struct_member)
         {
             length = DisplayValue::default_length;
         }
@@ -747,7 +761,14 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
             m_td_index.push_back(itdv);
             m_td_offset.push_back(offset);
             offset += byte_length;
-            length -= m_columns_per_row;
+            if (is_byte_size_limit)
+            {
+                length -= m_columns_per_row * offset;
+            }
+            else
+            {
+                length -= m_columns_per_row;
+            }
         }
     }
     else
@@ -755,8 +776,14 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
         const auto struct_iter = m_td_structs.find(value.name);
         if (struct_iter != m_td_structs.end())
         {
+            int offset_limit = m_binary_content.size();
+            if (is_byte_size_limit)
+            {
+                length = -length;
+                offset_limit = offset + length;
+            }
             DisplayValue& structure = struct_iter->second;
-            for (int index = 0; index < length && offset < m_binary_content.size(); ++index)
+            for (int index = 0; index < length && offset < offset_limit; ++index)
             {
                 for (std::uint32_t member = 0; member < structure.member.size(); ++member)
                 {
