@@ -15,6 +15,8 @@
 
 using namespace git;
 
+/// TODO: mToolTips content als WhatsThisHelp
+
 CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
     QDialog(parent)
 ,   ui(new Ui::CustomGitActions)

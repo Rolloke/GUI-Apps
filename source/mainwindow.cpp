@@ -36,6 +36,9 @@
 
 #define RELATIVE_GIT_PATH 1
 
+/// TODO: langs.model.xml erweitern um *::* für cpp und h Dateien als Datentyp mit scope bzw. parent
+/// TODO: Beliebige Datei öffnen mit Basispfad aus Src-Treeview und Eintrag in Src-TreeView
+
 using namespace std;
 using namespace git;
 
