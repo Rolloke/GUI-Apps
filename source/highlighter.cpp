@@ -109,10 +109,10 @@ void Highlighter::Language::load(QSettings& fSettings)
     mKeywordFormat[type4].setForeground(Qt::darkMagenta);
     mKeywordFormat[type4].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[type5].setForeground(Qt::cyan);
+    mKeywordFormat[type5].setForeground(QColor("royalblue"));
     mKeywordFormat[type5].setFontWeight(QFont::Medium);
 
-    mKeywordFormat[type6].setForeground(Qt::green);
+    mKeywordFormat[type6].setForeground(QColor("seagreen"));
     mKeywordFormat[type6].setFontWeight(QFont::Medium);
 
     mKeywordFormat[type7].setForeground(Qt::darkGray);

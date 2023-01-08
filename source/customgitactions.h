@@ -77,9 +77,9 @@ private Q_SLOTS:
     void on_tableViewVarious_clicked(const QModelIndex &index);
     void enableButtons(std::uint32_t aBtnFlag);
     void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
-    void on_btnHelp_clicked(bool checked);
-
     void on_btnLoadIcons_clicked();
+
+    void on_btnHelp_clicked();
 
 private:
     void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");
@@ -99,7 +99,6 @@ private:
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
     QBitArray mMergeToolsState;
-    QMap<QWidget*, QString> mToolTips;
 };
 
 struct ActionsTable { enum e

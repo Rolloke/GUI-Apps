@@ -12,10 +12,9 @@
 #include <QComboBox>
 #include <QScrollBar>
 #include <QFileDialog>
+#include <QWhatsThis>
 
 using namespace git;
-
-/// TODO: mToolTips content als WhatsThisHelp
 
 CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
     QDialog(parent)
@@ -83,13 +82,6 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->btnMoveDown->setStyleSheet(button_enabled_style);
     ui->btnAdd->setStyleSheet(button_enabled_style);
     ui->btnDelete->setStyleSheet(button_enabled_style);
-
-    mToolTips.insert(ui->tableViewActions, ui->tableViewActions->toolTip());
-    ui->tableViewActions->setToolTip("");
-
-    mToolTips.insert(ui->tableViewVarious, ui->tableViewVarious->toolTip());
-    ui->tableViewVarious->setToolTip("");
-
 
     enableButtons(0);
     for (int i=0; i< VariousListIndex::Size; ++i)
@@ -806,14 +798,6 @@ Qt::ItemFlags VariousItemModel::flags(const QModelIndex &index) const
     return  fFlags;
 }
 
-void CustomGitActions::on_btnHelp_clicked(bool checked)
-{
-    for (auto tooltip = mToolTips.begin(); tooltip != mToolTips.end(); ++tooltip)
-    {
-        tooltip.key()->setToolTip(checked ? tooltip.value() : "");
-    }
-}
-
 
 void CustomGitActions::on_btnLoadIcons_clicked()
 {
@@ -823,5 +807,11 @@ void CustomGitActions::on_btnLoadIcons_clicked()
         mExternalIconFiles = fSourcePath + '/';
         initListIcons(VariousListIndex::ExternalIcons, mExternalIconFiles);
     }
+}
+
+
+void CustomGitActions::on_btnHelp_clicked()
+{
+    QWhatsThis::enterWhatsThisMode();
 }
 

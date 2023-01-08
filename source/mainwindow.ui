@@ -802,7 +802,8 @@ File content opened with double click</string>
            </size>
           </property>
           <property name="toolTip">
-           <string>Select codec for text file</string>
+           <string>Select code page for text file&lt;br&gt;
+Enter text to search</string>
           </property>
           <property name="editable">
            <bool>true</bool>

@@ -53,6 +53,7 @@ private:
     void     insertSourceTree(const QDir& fSource, int fItem);
 
     QDir     initDir(const QString& aDirPath, int aFilter=0);
+    void     initCodecCombo();
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext="");
     void     open_file(const QString& file_path, boost::optional<int> line_number = {});

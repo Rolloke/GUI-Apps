@@ -30,7 +30,46 @@
    <item>
     <widget class="QTableView" name="tableViewActions">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4 style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Displays application commands that can be edited here.&lt;/span&gt;&lt;/h4&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Add a new custom command with the '+' button &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git -C %1 &amp;lt;command&amp;gt; %2 &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;%1 represents the git repository &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;%2 [optional] may represent the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git &amp;lt;command&amp;gt; %1 %2 &lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;%1 is used for command options depending on case &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 4;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--staged for diff of staged file &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;%2 [optional] may represents the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Remove selected custom command with '-' button &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Assign a selected command to toolbar or context menu in right view with '--&amp;gt;' button &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all 'git' commands may be edited due to parameters or options &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all shortcuts may be edited &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A message box text may be edited or added &lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;'None' or empty defines that no message box is invoked &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The message box is invoked before execution of the git command &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A trailing ';' changes the MessageBox to an EditBox &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by 'reset modifications' in context menu &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of custom commands&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4&gt;Displays application commands that can be edited here.&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Add a new custom command with the &lt;img src=&quot;://resource/24X24/list-add.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;git -C %1 &amp;lt;command&amp;gt; %2 &lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;%1 represents the git repository &lt;/li&gt;
+&lt;li&gt;%2 [optional] may represent the the selected file or folder &lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;git &amp;lt;command&amp;gt; %1 %2 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;%1 is used for command options depending on case &lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;--staged for diff of staged file &lt;/li&gt;
+&lt;li&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;%2 [optional] may represents the the selected file or folder &lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
+&lt;li&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
+&lt;li&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;all 'git' commands may be edited due to parameters or options &lt;/li&gt;
+&lt;li&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;
+&lt;li&gt;all shortcuts may be edited &lt;/li&gt;
+&lt;li&gt;A message box text may be edited or added &lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;'None' or empty defines that no message box is invoked &lt;/li&gt;
+&lt;li&gt;The message box is invoked before execution of the git command &lt;/li&gt;
+&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;
+&lt;li&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;
+&lt;li&gt;A trailing ';' changes the MessageBox to an EditBox &lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by 'reset modifications' in context menu &lt;/li&gt;
+&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="cornerButtonEnabled">
       <bool>false</bool>
@@ -69,10 +108,14 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Enables or disables tooltip for tables</string>
+        <string>Activates Whats This Help</string>
        </property>
        <property name="text">
-        <string>?</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/dialog-question.png</normaloff>:/resource/24X24/dialog-question.png</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -234,6 +277,9 @@ Contextmenu entries or Toolbar entries</string>
         </size>
        </property>
        <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of application elements and controls&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="whatsThis">
         <string>&lt;html&gt;
   &lt;head/&gt;
   &lt;body&gt;&lt;h4&gt;Displays application elements and controls.&lt;/h4&gt;
@@ -248,12 +294,12 @@ Contextmenu entries or Toolbar entries</string>
       &lt;/li&gt;
       &lt;li&gt;Application Icons
           &lt;ul&gt;
-                &lt;li&gt;Assign a selected icon to a command selected  in left view with '&amp;lt;--' button&lt;/li&gt;
+                &lt;li&gt;Assign a selected icon to a command selected  in left view with &lt;img src=&quot;://resource/24X24/go-previous.png&quot; style=&quot;vertical-align:middle&quot;/&gt;  button&lt;/li&gt;
           &lt;ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Context menus and toolbars
           &lt;ul&gt;
-                &lt;li&gt;Remove a selected action with '&amp;lt;--' button&lt;/li&gt;
+                &lt;li&gt;Remove a selected action with &lt;img src=&quot;://resource/24X24/go-previous.png&quot; style=&quot;vertical-align:middle&quot;/&gt;  button&lt;/li&gt;
                 &lt;li&gt;Move a selected action with up and down buttons&lt;/li&gt;
           &lt;ul&gt;
       &lt;/li&gt;
