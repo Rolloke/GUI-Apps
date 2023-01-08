@@ -36,7 +36,6 @@
 
 #define RELATIVE_GIT_PATH 1
 
-/// TODO: langs.model.xml erweitern um *::* für cpp und h Dateien als Datentyp mit scope bzw. parent
 /// TODO: Beliebige Datei öffnen mit Basispfad aus Src-Treeview und Eintrag in Src-TreeView
 
 using namespace std;
@@ -162,12 +161,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->textBrowser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
     connect(ui->tableBinaryView, SIGNAL(cursor_changed(int)), m_status_column_label, SLOT(setNum(int)));
 
-    auto codecs = QTextCodec::availableCodecs() ;
-    ui->comboTextCodex->addItem("Default Codec");
-    for (const auto& codec : codecs)
-    {
-        ui->comboTextCodex->addItem(codec);
-    }
+    initCodecCombo();
 
     fSettings.beginGroup(config::sGroupFilter);
     {
@@ -1040,6 +1034,51 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
     return fDir;
 }
 
+void MainWindow::initCodecCombo()
+{
+    auto codecs = QTextCodec::availableCodecs();
+    QRegExp reg_ex_num ("([\\d]{1,6})");
+    QRegExp reg_ex_text("([a-zA-Z-]{1,})");
+    QMap<QString, QList<QString>> codec_map;
+    for (const auto& codec : codecs)
+    {
+        int pos = reg_ex_num.indexIn(codec);
+        if (pos != -1)
+        {
+            QString captured_num = reg_ex_num.capturedTexts().at(0);
+            QString captured_text;
+            pos = reg_ex_text.indexIn(codec);
+            if (pos != -1)
+            {
+                captured_text = reg_ex_text.capturedTexts().at(0);
+            }
+            if (captured_text.size() == 0)
+            {
+                captured_text = codec;
+            }
+            if (codec_map.contains(captured_num))
+            {
+                codec_map.find(captured_num).value().push_back(captured_text);
+            }
+            else
+            {
+                codec_map.insert(captured_num, {captured_text});
+            }
+        }
+    }
+    ui->comboTextCodex->addItem("Default Codec");
+    for (auto codec = codec_map.begin(); codec != codec_map.end(); ++codec)
+    {
+        auto& cp_val =  codec.value();
+        QString cp = cp_val.at(0) + codec.key();
+        for (int i=1; i<cp_val.size(); ++i)
+        {
+            cp += ", " + cp_val[i];
+        }
+        ui->comboTextCodex->addItem(cp);
+    }
+}
+
 
 //"%12"
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
@@ -1452,6 +1491,15 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
     }
     QAction* action  = mActions.createAction(comand_id, name, command, widget);
     mActions.setFlags(comand_id, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    if (icon_path.size())
+    {
+        mActions.setIconPath(comand_id, icon_path);
+    }
+    else
+    {
+        mActions.setIconPath(comand_id, ":/resource/24X24/window-close.png");
+    }
+    mActions.setFlags(comand_id, ActionList::Flags::FunctionCmd);
 
     if (new_id)
     {
@@ -1468,9 +1516,9 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
         if (button->isCheckable())
         {
             action->setCheckable(true);
-            if (button->isChecked()) action->setChecked(true);
-            connect(action, SIGNAL(triggered(bool)), button, SLOT(setChecked(bool)));
             connect(button, SIGNAL(clicked(bool)), action, SLOT(setChecked(bool)));
+            connect(action, SIGNAL(triggered(bool)), button, SLOT(setChecked(bool)));
+            action->setChecked(button->isChecked());
         }
         else
         {
@@ -1482,15 +1530,6 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
         connect(action, SIGNAL(triggered()), this, SLOT(combo_triggered()));
     }
 
-    if (icon_path.size())
-    {
-        mActions.setIconPath(comand_id, icon_path);
-    }
-    else
-    {
-        mActions.setIconPath(comand_id, ":/resource/24X24/window-close.png");
-    }
-    mActions.setFlags(comand_id, ActionList::Flags::FunctionCmd);
     return action;
 }
 

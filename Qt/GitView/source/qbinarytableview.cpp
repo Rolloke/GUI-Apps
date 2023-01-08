@@ -46,8 +46,6 @@ namespace
     }
 }
 
-/// TODO: validate litle and big endian representation
-
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
     BinaryTableModel* ListModel = new BinaryTableModel(0, INT(BinaryTableModel::Table::Last), this);
@@ -815,9 +813,11 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                         structure.set_index(inserted_row, static_cast<int>(member));
                         TRACE(Logger::info, "inserted row: %d for %d of %s", inserted_row, member, structure.name.toStdString().c_str());
                     }
-                    /// TODO: is this necessary?
-//                    if (rows.size() && rows[0] == -1) continue;
-//                    rows.insert(rows.end(), inserted_rows.begin(), inserted_rows.end());
+                    /// TODO: update also parent struct, if member is > 0
+                    if (member)
+                    {
+                        rows.insert(rows.end(), inserted_rows.begin(), inserted_rows.end());
+                    }
                 }
             }
         }
@@ -927,7 +927,6 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
     }
     else                                // unknown display type is a struct
     {
-        /// TODO: or a byte limit, to be implemented.
         value.display = 0;              // type is empty, name is stored
         auto stored_struct = m_td_structs.find(type_name);
         value.name   = type_name;
