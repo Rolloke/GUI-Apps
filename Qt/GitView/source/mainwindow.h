@@ -222,6 +222,7 @@ private Q_SLOTS:
     void add_file_open_extension();
     void delete_file_open_extension();
     void open_file_externally();
+    void force_add_item_to_git();
 
     void perform_custom_command();
     void call_git_branch_command();

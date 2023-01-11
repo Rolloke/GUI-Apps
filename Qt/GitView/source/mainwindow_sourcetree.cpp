@@ -316,6 +316,32 @@ void MainWindow::open_file_externally()
     }
 }
 
+void MainWindow::force_add_item_to_git()
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        const QString   file_name  = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+        const QFileInfo file_info(file_name);
+        /// TODO: prohibit browsing ability
+        const QString file_to_add = QFileDialog::getOpenFileName(this, tr("Force add item to git"), file_name);
+        if (file_to_add.length())
+        {
+            QFileInfo file_to_add_info(file_to_add);
+            QString item;
+            if (file_to_add_info.isDir())
+            {
+                item = file_info.dir().relativeFilePath(file_to_add);
+            }
+            else
+            {
+                item = file_to_add_info.fileName();
+            }
+            ui->treeSource->insertItem(file_info.absolutePath(), *ui->treeSource, mContextMenuSourceTreeItem, item);
+        }
+    }
+}
+
+
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
 {
     on_btnCloseText_clicked();
@@ -435,22 +461,43 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
 void MainWindow::updateGitStatus()
 {
+    QString   file_name;
+    if (mContextMenuSourceTreeItem)
+    {
+        file_name = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+    }
+    int selected_item = -1;
     vector<QString> fSourceDirs;
     for (int i = 0; i < ui->treeSource->topLevelItemCount(); ++i)
     {
         fSourceDirs.push_back(ui->treeSource->topLevelItem(i)->text(QSourceTreeWidget::Column::FileName));
+        if (file_name == fSourceDirs.back())
+        {
+            selected_item = i;
+        }
     }
-    ui->treeSource->clear();
 
-    qint64 fSize = 0;
-    for (uint i = 0; i < fSourceDirs.size(); ++i)
+    if (selected_item != -1)
     {
-        insertSourceTree(initDir(fSourceDirs[i]), i);
-        fSize += ui->treeSource->sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
+        auto item = ui->treeSource->topLevelItem(selected_item);
+        ui->treeSource->removeItemWidget(item, 0);
+        delete item;
+        insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
+    }
+    else
+    {
+        ui->treeSource->clear();
+
+        qint64 fSize = 0;
+        for (uint i = 0; i < fSourceDirs.size(); ++i)
+        {
+            insertSourceTree(initDir(fSourceDirs[i]), i);
+            fSize += ui->treeSource->sizeOfCheckedItems(ui->treeSource->topLevelItem(i));
+        }
+        ui->statusBar->showMessage(tr("Total selected bytes: ") + formatFileSize(fSize));
+        on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
     }
 
-    ui->statusBar->showMessage(tr("Total selected bytes: ") + formatFileSize(fSize));
-    on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
 }
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
