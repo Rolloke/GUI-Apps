@@ -62,6 +62,7 @@ struct Cmd
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
         AutoCommand=500,
+        RenderGraphics = AutoCommand+6,
         /// hint: this range is reserved for automatically created commands
         NonGitCommands = 1000,
         /// hint: add non git commands here
@@ -94,12 +95,13 @@ struct Cmd
         ShowInformation,
         OpenFileExternally,
         WhatsThisHelp,
+        ForceAddFileToGit,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
+        LastNonGitCommand = WhatsThisHelp,
         Invalid = -1,
-        Restore = Checkout,
-        RenderGraphics = AutoCommand+6
+        Restore = Checkout
     };
     enum ePostAction
     {

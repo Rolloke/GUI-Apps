@@ -1363,6 +1363,11 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::WhatsThisHelp, tr("Whats this?"), tr("Whats this help")), &QAction::triggered, []() { QWhatsThis::enterWhatsThisMode(); } );
     mActions.setFlags(Cmd::WhatsThisHelp, ActionList::Flags::FunctionCmd, Flag::set);
 
+    connect(mActions.createAction(Cmd::ForceAddFileToGit, tr("Force add to git"), tr("Adds items to git, that are not visible in repository tree")), SIGNAL(triggered()), this, SLOT(force_add_item_to_git()));
+    mActions.setFlags(Cmd::ForceAddFileToGit, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::ForceAddFileToGit, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::ForceAddFileToGit, Type::File, Flag::set, ActionList::Data::StatusFlagDisable);
+
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
