@@ -316,32 +316,6 @@ void MainWindow::open_file_externally()
     }
 }
 
-void MainWindow::force_add_item_to_git()
-{
-    if (mContextMenuSourceTreeItem)
-    {
-        const QString   file_name  = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
-        const QFileInfo file_info(file_name);
-        /// TODO: prohibit browsing ability
-        const QString file_to_add = QFileDialog::getOpenFileName(this, tr("Force add item to git"), file_name);
-        if (file_to_add.length())
-        {
-            QFileInfo file_to_add_info(file_to_add);
-            QString item;
-            if (file_to_add_info.isDir())
-            {
-                item = file_info.dir().relativeFilePath(file_to_add);
-            }
-            else
-            {
-                item = file_to_add_info.fileName();
-            }
-            ui->treeSource->insertItem(file_info.absolutePath(), *ui->treeSource, mContextMenuSourceTreeItem, item);
-        }
-    }
-}
-
-
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
 {
     on_btnCloseText_clicked();
