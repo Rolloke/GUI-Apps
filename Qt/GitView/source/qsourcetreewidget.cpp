@@ -371,7 +371,7 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
     const auto found_ignored = mIgnoredInFolder.find(path);
     if (found_ignored != mIgnoredInFolder.end())
     {
-        QMenu*submenu = menu.addMenu(tr("Insert Ignored Folder"));
+        QMenu*submenu = nullptr;
         const auto& themap = found_ignored->getIgnoreMap();
         for (size_t index=0; index<themap.size(); ++index )
         {
@@ -380,11 +380,47 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
             QDir dir_check(path + "/" + themap[index].first);
             if (dir_check.exists())
             {
+                if (!submenu)
+                {
+                    submenu = menu.addMenu(tr("Insert Ignored Folder"));
+                }
                 QString do_not_ignore = themap[index].first;
                 QAction *action = submenu->addAction(do_not_ignore);
                 connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
                 { this->insertItem(path, *this, item, do_not_ignore); });
             }
         }
+    }
+    {
+        QDirIterator iterator(path, QDirIterator::NoIteratorFlags);
+        QMenu*submenu = nullptr;
+        do
+        {
+            iterator.next();
+            const QFileInfo& file_info = iterator.fileInfo();
+            if (file_info.isDir()) continue;
+
+            bool found = false;
+            for (int i=0; i<item->childCount(); ++i)
+            {
+                if (item->child(i)->text(QSourceTreeWidget::Column::FileName) == file_info.fileName())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                if (!submenu)
+                {
+                    submenu = menu.addMenu(tr("Insert Ignored File"));
+                }
+                QString file = file_info.fileName();
+                QAction *action = submenu->addAction(file);
+                connect(action, &QAction::triggered, [this, path, item, file]( )
+                { this->insertItem(path, *this, item, file); });
+            }
+        }
+        while (iterator.hasNext());
     }
 }
