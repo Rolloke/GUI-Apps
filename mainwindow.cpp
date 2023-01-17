@@ -93,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
 , mPlayer(this)
 , mListModel(nullptr)
 , mCurrentRowIndex(-1)
+, mCurrentPlayIndex(-1)
 , mFileOpenPath(QDir::homePath())
 , mFavoritesOpenPath(QDir::homePath())
 , mFindStartRow(0)
@@ -170,6 +171,15 @@ MainWindow::MainWindow(QWidget *parent) :
 #else
     ui->graphicsView->setScene(new QGraphicsScene ());
 #endif
+
+    m_play_status = new QLabel("");
+    m_play_status->setToolTip("Play status");
+    ui->statusBar->addPermanentWidget(m_play_status);
+
+    m_play_name = new QLabel("");
+    m_play_name->setToolTip("Channel name");
+    ui->statusBar->addPermanentWidget(m_play_name);
+
     connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
     connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
@@ -204,6 +214,7 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mUploadFavoriteCommand, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
+    LOAD_STR(fSettings, mCurrentPlayIndex, toInt);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, mOpenFileAtStart, toString);
     LOAD_STR(fSettings, mChecked, toInt);
@@ -226,6 +237,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->actionLoadLastOpenedFileAtStart->setChecked(true);
         open_file(mOpenFileAtStart);
     }
+    select_index(mCurrentPlayIndex);
+    display_play_status();
+    m_play_name->setText(get_item_name(mCurrentPlayIndex));
 }
 
 MainWindow::~MainWindow()
@@ -243,6 +257,7 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mUploadFavoriteCommand);
     STORE_STR(fSettings, mShowIcon);
     STORE_STR(fSettings, mMediaPlayerCommand);
+    STORE_STR(fSettings, mCurrentPlayIndex);
     STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
     STORE_STR(fSettings, mChecked);
     if (!ui->actionLoadLastOpenedFileAtStart->isChecked())
@@ -270,7 +285,7 @@ QString MainWindow::getConfigName() const
 
 QString MainWindow::get_item_name(int row) const
 {
-    return mListModel->data(mListModel->index(row, eName)).toString();
+    return (row != -1) ? mListModel->data(mListModel->index(row, eName)).toString() : "";
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -310,6 +325,7 @@ void MainWindow::on_pushButtonStart_clicked()
 {
     if (mCurrentRowIndex != -1)
     {
+        mCurrentPlayIndex = mCurrentRowIndex;
         if (ui->actionOpenMediaPlayerOnDoubleclick->isChecked())
         {
             menu_edit_open_media_player();
@@ -322,13 +338,41 @@ void MainWindow::on_pushButtonStart_clicked()
                 mVideo.show();
             }
             mPlayer.play();
+            display_play_status();
+            m_play_name->setText(get_item_name(mCurrentPlayIndex));
         }
     }
 }
 
+void MainWindow::display_play_status()
+{
+    switch(mPlayer.state())
+    {
+    case QMediaPlayer::StoppedState:
+        m_play_status->setText(tr("Stopped"));
+        break;
+    case QMediaPlayer::PausedState:
+        m_play_status->setText(tr("Paused"));
+        break;
+    case QMediaPlayer::PlayingState:
+        m_play_status->setText(tr("Playing"));
+        break;
+    }
+    ui->pushButtonStart->setChecked(mPlayer.state() == QMediaPlayer::PlayingState);
+    ui->pushButtonPause->setChecked(mPlayer.state() == QMediaPlayer::PausedState);
+    ui->pushButtonStop->setChecked(mPlayer.state() == QMediaPlayer::StoppedState);
+}
+
+
 void MainWindow::on_sliderVolume_valueChanged(int value)
 {
     mPlayer.setVolume(value);
+}
+
+void MainWindow::on_pushButtonPause_clicked()
+{
+    mPlayer.pause();
+    display_play_status();
 }
 
 void MainWindow::on_pushButtonStop_clicked()
@@ -338,6 +382,7 @@ void MainWindow::on_pushButtonStop_clicked()
     {
         mVideo.hide();
     }
+    display_play_status();
 }
 
 void MainWindow::on_checkBoxSelectAll_clicked(bool checked)
@@ -384,10 +429,7 @@ void MainWindow::on_pushButtonFind_clicked()
     {
         if (mListModel->data(mListModel->index(current_row, search_column)).toString().indexOf(select_text, 0, case_sens) != -1)
         {
-            ui->tableView->selectRow(current_row);
-            const auto index = mListModel->index(current_row, eID);
-            ui->tableView->scrollTo(index);
-            on_tableView_clicked(index);
+            select_index(current_row);
             mFindStartRow = current_row + 1;
             if (mFindStartRow == table_rows)
             {
@@ -401,6 +443,18 @@ void MainWindow::on_pushButtonFind_clicked()
         mFindStartRow = 0;
     }
 }
+
+void MainWindow::select_index(int select)
+{
+    if (select != -1)
+    {
+        ui->tableView->selectRow(select);
+        const auto index = mListModel->index(select, eName);
+        ui->tableView->scrollTo(index);
+        on_tableView_clicked(index);
+    }
+}
+
 
 void MainWindow::on_lineEditSelection_textChanged(const QString &)
 {
@@ -808,3 +862,4 @@ int execute(const QString& command, QString& aResultText)
 
     return fResult;
 }
+
