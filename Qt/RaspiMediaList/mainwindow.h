@@ -8,6 +8,7 @@
 #include <QVideoWidget>
 #include <QNetworkAccessManager>
 #include <QStandardItemModel>
+#include <QLabel>
 
 
 class QModelIndex;
@@ -42,6 +43,8 @@ private:
     void open_file(const QString& file_name);
     QString getConfigName() const;
     QString get_item_name(int row) const;
+    void select_index(int select);
+    void display_play_status();
 
 private slots:
     void menu_file_open();
@@ -58,13 +61,14 @@ private slots:
     void menu_help_about();
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
-    void on_pushButtonSelect_clicked();
+    void on_checkBoxSelectAll_clicked(bool checked);
     void on_tableView_clicked(const QModelIndex &index);
     void onReplyFinished();
     void on_sliderVolume_valueChanged(int value);
     void on_pushButtonStart_clicked();
+    void on_pushButtonPause_clicked();
     void on_pushButtonStop_clicked();
-    void on_checkBoxSelectAll_clicked(bool checked);
+    void on_pushButtonSelect_clicked();
     void on_pushButtonFind_clicked();
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error);
@@ -76,9 +80,12 @@ private:
     QVideoWidget        mVideo;
     QMediaPlayer        mPlayer;
     CheckboxItemModel*  mListModel;
+    QLabel*             m_play_status;
+    QLabel*             m_play_name;
     QNetworkAccessManager mNetManager;
     QSharedPointer<QWebEngineView> mWebEngineView;
     int                 mCurrentRowIndex;
+    int                 mCurrentPlayIndex;
     QList<int>          mHiddenColumns;
     QString             mFileOpenPath;
     QString             mFavoritesOpenPath;

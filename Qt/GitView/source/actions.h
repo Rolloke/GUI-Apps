@@ -7,17 +7,18 @@
 #include <QPointer>
 
 class QToolBar;
+class QToolButton;
 class QAction;
 class QMenu;
 
 
 enum class Flag { remove, set, replace };
 
-class ActionList
+class ActionList : public QObject
 {
-
+    Q_OBJECT
 public:
-    struct Data   { enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, ListSize }; };
+    struct Data   { enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, MenuStrings, ListSize }; };
     struct Flags  { enum e { BuiltIn           = 0x0001, /// built in command
                              Modified          = 0x0002, /// modified built in command
                              Custom            = 0x0004, /// custom created command
@@ -31,9 +32,12 @@ public:
                              DiffCmd           = 0x0400, /// indicates git diff command
                              DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
                              StashCmdOption    = 0x1000, /// option for stash command
+                             MenuOption        = 0x2000, /// option selected by Toolbutton menu
                            }; };
 
-    typedef std::map<git::Cmd::eCmd,  QPointer<QAction>> tActionMap;
+    typedef std::map<git::Cmd::eCmd,  QPointer<QAction>>     tActionMap;
+    typedef std::map<git::Cmd::eCmd,  QPointer<QToolButton>> tToolButtonMap;
+    typedef std::map<git::Cmd::eCmd,  QPointer<QMenu>>       tMenuMap;
 
     explicit ActionList(QObject* aParent);
 
@@ -53,23 +57,33 @@ public:
     uint     getFlags(git::Cmd::eCmd aCmd, Data::e aData=Data::Flags) const;
     void     setCmdAddOn(git::Cmd::eCmd aCmd, const QString& aCmdAddOn);
     QString  getCmdAddOn(git::Cmd::eCmd aCmd) const;
+    QStringList getMenuStringList(git::Cmd::eCmd cmd) const;
+    void     setMenuStringList(git::Cmd::eCmd cmd, const QStringList& list);
 
     void     initActionIcons();
     git::Cmd::eCmd createNewID(git::Cmd::eCmd fNewCmd) const;
 
     void enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const;
-    void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems) const;
+    void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);
     void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
     const tActionMap& getList() const { return mActionList; }
 
     static const QString sNoCustomCommandMessageBox;
 
+private Q_SLOTS:
+    void select_action(QAction*action);
+
 private:
+    void initAction(git::Cmd::eCmd cmd, QAction* action);
     void setDataVariant(git::Cmd::eCmd aCmd, Data::e aData, const QVariant& aVariant);
     QVariant getDataVariant(git::Cmd::eCmd aCmd, Data::e aData) const;
 
-    tActionMap mActionList;
+    tActionMap     mActionList;
+    tToolButtonMap mToolButtonList;
+    tMenuMap       mMenuList;
     QObject*   mParent;
+
+
 };
 
 #endif // ACTIONS_H

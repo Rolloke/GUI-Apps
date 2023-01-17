@@ -852,6 +852,24 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
         option += ui->comboDiffTool->currentText();
         option += " ";
     }
+    if (command_flags & ActionList::Flags::MenuOption)
+    {
+        QStringList list = variant_list[ActionList::Data::MenuStrings].toStringList();
+        for (const QString & item : list)
+        {
+            if (item.indexOf("--") == 0)
+            {
+                option += " ";
+                option += item;
+                option += "=";
+            }
+            if (item.indexOf("*") == 0)
+            {
+                option += item.right(item.size()-1);
+                option += " ";
+            }
+        }
+    }
     return option;
 }
 

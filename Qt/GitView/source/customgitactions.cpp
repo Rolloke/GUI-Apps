@@ -12,6 +12,7 @@
 #include <QComboBox>
 #include <QScrollBar>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QWhatsThis>
 
 using namespace git;
@@ -691,6 +692,13 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         }
     }
 
+    QAction* edit_menu_string_list = nullptr;
+    if (!function_cmd)
+    {
+        edit_menu_string_list = menu.addAction(tr("Edit toolbar button menu"));
+        set_tooltip(edit_menu_string_list, tr("Edit or create toolbar button menu list for custom command"));
+    }
+
     set_tooltip(menu.addAction(tr("Cancel")), tr("Don't change command"));
 
     QAction* selected_item = menu.exec(mapToGlobal(pos) + menu_offset);
@@ -732,6 +740,22 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
             if (command.action == selected_item)
             {
                 mActionList.setFlags(cmd, command.flag, command.action->isChecked() ? Flag::set : Flag::remove);
+                modified = true;
+            }
+        }
+
+        if (edit_menu_string_list == selected_item)
+        {
+            bool ok;
+            QStringList list = mActionList.getMenuStringList(cmd);
+            QString text = QInputDialog::getText(0, tr("Edit menu for toolbar button"),
+                tr("Enter comma separated list for command option menu<br>"
+                   "(--option, o1,o2[,o3,..])<br>"
+                   "Mark default option with * like this: *o1"), QLineEdit::Normal, list.join(","), &ok);
+            if (ok)
+            {
+                if (text.size()) mActionList.setMenuStringList(cmd, text.split(","));
+                else             mActionList.setMenuStringList(cmd, {});
                 modified = true;
             }
         }

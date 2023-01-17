@@ -61,6 +61,7 @@ constexpr char sFlags[] = "Flags";
 constexpr char sFlagsEnabled[] = "FlagsEnabled";
 constexpr char sFlagsDisabled[] = "FlagsDisabled";
 constexpr char sIconPath[] = "IconPath";
+constexpr char sMenuStringList[] = "MenuStringList";
 constexpr char sShortcut[] = "Shortcut";
 constexpr char sModified[] = "Modified";
 } // namespace config
@@ -135,6 +136,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->treeSource, SIGNAL(dropped_to_target(QTreeWidgetItem*,bool*)), this, SLOT(call_git_move_rename(QTreeWidgetItem*,bool*)));
 
     ui->treeFindText->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeFindText->header()->setSectionResizeMode(FindColumn::FilePath, QHeaderView::ResizeToContents);
+    ui->treeFindText->header()->setSectionResizeMode(FindColumn::Line, QHeaderView::ResizeToContents);
+    ui->treeFindText->header()->setSectionResizeMode(FindColumn::FoundTextLine, QHeaderView::Stretch);
 
     ui->treeSource->setStyleSheet(style_sheet_treeview_lines);
     ui->treeHistory->setStyleSheet(style_sheet_treeview_lines);
@@ -237,6 +241,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
                 mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
                 mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
                 mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
+                QStringList string_list = fSettings.value(config::sMenuStringList).toStringList();
+                if (string_list.size() > 1) mActions.setMenuStringList(fCmd, string_list);
                 mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
                 mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
             }
@@ -563,6 +569,8 @@ MainWindow::~MainWindow()
                         fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
                         fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
                         fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
+                        QStringList list = mActions.getMenuStringList(fCmd);
+                        if (list.size() > 1) fSettings.setValue(config::sMenuStringList, list);
                     }
                 }
             }
@@ -1166,6 +1174,7 @@ void MainWindow::initContextMenuActions()
     mActions.setCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::ShowDifference, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffCmd|ActionList::Flags::DependsOnStaged, Flag::set);
+    mActions.setMenuStringList(Cmd::ShowDifference, {"--diff-algorithm", "patience", "minimal", "histogram", "*myers"});
 
     connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));

@@ -5,12 +5,13 @@
 #include <QAction>
 #include <QMenu>
 #include <QToolBar>
+#include <QToolButton>
 
 using namespace git;
 
 const QString ActionList::sNoCustomCommandMessageBox = "None";
 
-ActionList::ActionList(QObject* parent): mParent(parent)
+ActionList::ActionList(QObject* parent) : QObject(parent), mParent(parent)
 {
 
 }
@@ -29,6 +30,12 @@ QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QSt
     mActionList[cmd] = new_action;
     new_action->setStatusTip(git_command);
     new_action->setToolTip(name);
+    initAction(cmd, new_action);
+    return new_action;
+}
+
+void ActionList::initAction(git::Cmd::eCmd cmd, QAction* action)
+{
     QVariantList fList;
     fList.append(QVariant(sNoCustomCommandMessageBox));
     for (int i = Data::PostCmdAction; i<Data::ListSize; ++i)
@@ -36,8 +43,7 @@ QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QSt
         fList.append(QVariant());
     }
     fList[ActionList::Data::Cmd] = QVariant(cmd);
-    new_action->setData(fList);
-    return new_action;
+    action->setData(fList);
 }
 
 
@@ -204,7 +210,7 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
 
 }
 
-void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items) const
+void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
 {
     for (const auto& cmd : items)
     {
@@ -217,9 +223,67 @@ void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items) cons
             auto * action = getAction(cmd);
             if (action)
             {
-                tool_bar.addAction(action);
+                auto menu_list = getMenuStringList(cmd);
+                if (menu_list.count())
+                {
+                    QToolButton* tool_button = new QToolButton();
+                    mToolButtonList[cmd] = tool_button;
+                    tool_button->setPopupMode(QToolButton::MenuButtonPopup);
+                    connect(tool_button, SIGNAL(triggered(QAction*)), this, SLOT(select_action(QAction*)));
+                    tool_button->setDefaultAction(action);
+                    tool_button->setToolTip(action->toolTip());
+                    tool_bar.addWidget(tool_button);
+
+                    QMenu* sub_menu = new QMenu;
+                    mMenuList[cmd] = sub_menu;
+                    tool_button->setMenu(sub_menu);
+
+                    for (int index=0; index<menu_list.size(); ++index)
+                    {
+                        QString &item = menu_list[index];
+                        if (item.indexOf("--") == 0) continue; // the git option
+                        bool selected = item.indexOf("*") == 0;
+                        if (selected) item.remove(0, 1);
+                        QAction *sub_action = sub_menu->addAction(item);
+                        sub_action->setCheckable(true);
+                        sub_action->setChecked(selected);
+                    }
+                }
+                else
+                {
+                    tool_bar.addAction(action);
+                }
             }
         }
+    }
+}
+
+void ActionList::select_action(QAction* action)
+{
+    auto parent = action->parent();
+    auto found = std::find_if(mMenuList.begin(), mMenuList.end(), [parent] (const auto& item) { return parent == item.second; });
+    if (found != mMenuList.end())
+    {
+        auto cmd = found->first;
+        QMenu* menu = found->second;
+        auto list = menu->actions();
+        for (auto& item : list)
+        {
+            item->setChecked(item == action);
+        }
+
+        QStringList strings = getMenuStringList(cmd);
+        QString atext = action->text();
+        for (QString& string : strings)
+        {
+            if (string.indexOf("*") == 0) string.remove(0, 1);
+            if (string == atext)
+            {
+                string = "*" + string;
+            }
+        }
+        setFlags(cmd, Flags::MenuOption);
+        setMenuStringList(cmd, strings);
     }
 }
 
@@ -325,6 +389,22 @@ QString ActionList::getCmdAddOn(git::Cmd::eCmd cmd) const
     }
     return "";
 }
+
+void ActionList::setMenuStringList(git::Cmd::eCmd cmd, const QStringList& list)
+{
+    setDataVariant(cmd, Data::MenuStrings, list.size() ? list : QVariant(QVariant::Invalid));
+}
+
+QStringList ActionList::getMenuStringList(git::Cmd::eCmd cmd) const
+{
+    QVariant variant = getDataVariant(cmd, Data::MenuStrings);
+    if (variant.isValid())
+    {
+        return variant.toStringList();
+    }
+    return {};
+}
+
 
 void ActionList::setFlags(Cmd::eCmd cmd, uint flag, Flag set, Data::e data)
 {
