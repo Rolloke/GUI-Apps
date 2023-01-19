@@ -287,6 +287,14 @@ void ActionList::select_action(QAction* action)
     }
 }
 
+void ActionList::setToolButtonStyle(Qt::ToolButtonStyle toolButtonStyle)
+{
+    for (auto& tb : mToolButtonList)
+    {
+        tb.second->setToolButtonStyle(toolButtonStyle);
+    }
+}
+
 void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items) const
 {
     for (const auto& cmd : items)
@@ -301,7 +309,6 @@ void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items) const
         }
     }
 }
-
 
 QAction* ActionList::getAction(Cmd::eCmd cmd) const
 {
