@@ -67,6 +67,7 @@ public:
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);
     void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
     const tActionMap& getList() const { return mActionList; }
+    void setToolButtonStyle(Qt::ToolButtonStyle toolButtonStyle);
 
     static const QString sNoCustomCommandMessageBox;
 
@@ -82,8 +83,6 @@ private:
     tToolButtonMap mToolButtonList;
     tMenuMap       mMenuList;
     QObject*   mParent;
-
-
 };
 
 #endif // ACTIONS_H

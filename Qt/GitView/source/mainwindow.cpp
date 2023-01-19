@@ -1696,10 +1696,15 @@ void MainWindow::gitview_about()
     AboutDlg dlg(this);
     dlg.exec();
 }
-
 void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
 {
+#if 0
+    // for single toolbar
+    mToolBars[0]->setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
+#else
+    mActions.setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
     setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
+#endif
 }
 
 void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
