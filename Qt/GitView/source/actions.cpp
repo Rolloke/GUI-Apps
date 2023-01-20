@@ -232,21 +232,28 @@ void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
                     connect(tool_button, SIGNAL(triggered(QAction*)), this, SLOT(select_action(QAction*)));
                     tool_button->setDefaultAction(action);
                     tool_button->setToolTip(action->toolTip());
+                    connect(&tool_bar, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)), tool_button, SLOT(setToolButtonStyle(Qt::ToolButtonStyle)));
+                    tool_button->setToolButtonStyle(tool_bar.toolButtonStyle());
                     tool_bar.addWidget(tool_button);
 
                     QMenu* sub_menu = new QMenu;
                     mMenuList[cmd] = sub_menu;
                     tool_button->setMenu(sub_menu);
-
+                    QString option;
                     for (int index=0; index<menu_list.size(); ++index)
                     {
                         QString &item = menu_list[index];
-                        if (item.indexOf("--") == 0) continue; // the git option
+                        if (item.indexOf("--") == 0)
+                        {
+                            option = item; // the git option
+                            continue;
+                        }
                         bool selected = item.indexOf("*") == 0;
                         if (selected) item.remove(0, 1);
                         QAction *sub_action = sub_menu->addAction(item);
                         sub_action->setCheckable(true);
                         sub_action->setChecked(selected);
+                        sub_action->setStatusTip(option + "=" + item);
                     }
                 }
                 else
@@ -284,14 +291,6 @@ void ActionList::select_action(QAction* action)
         }
         setFlags(cmd, Flags::MenuOption);
         setMenuStringList(cmd, strings);
-    }
-}
-
-void ActionList::setToolButtonStyle(Qt::ToolButtonStyle toolButtonStyle)
-{
-    for (auto& tb : mToolButtonList)
-    {
-        tb.second->setToolButtonStyle(toolButtonStyle);
     }
 }
 
