@@ -1702,7 +1702,6 @@ void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
     // for single toolbar
     mToolBars[0]->setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
 #else
-    mActions.setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
     setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(index));
 #endif
 }
