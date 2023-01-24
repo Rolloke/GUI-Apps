@@ -267,29 +267,30 @@ void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
 
 void ActionList::select_action(QAction* action)
 {
-    auto parent = action->parent();
-    auto found = std::find_if(mMenuList.begin(), mMenuList.end(), [parent] (const auto& item) { return parent == item.second; });
+    const auto parent = action->parent();
+    const auto found = std::find_if(mMenuList.begin(), mMenuList.end(), [parent] (const auto& item) { return parent == item.second; });
     if (found != mMenuList.end())
     {
-        auto cmd = found->first;
-        QMenu* menu = found->second;
+        const auto cmd = found->first;
+        const bool action_is_checked = action->isChecked();
+        const QMenu* menu = found->second;
         auto list = menu->actions();
         for (auto& item : list)
         {
-            item->setChecked(item == action);
+            item->setChecked(item == action && action_is_checked);
         }
 
         QStringList strings = getMenuStringList(cmd);
-        QString atext = action->text();
+        QString action_text = action->text();
         for (QString& string : strings)
         {
             if (string.indexOf("*") == 0) string.remove(0, 1);
-            if (string == atext)
+            if (action_is_checked && string == action_text)
             {
                 string = "*" + string;
             }
         }
-        setFlags(cmd, Flags::MenuOption);
+        setFlags(cmd, Flags::MenuOption, action_is_checked ? Flag::set : Flag::remove);
         setMenuStringList(cmd, strings);
     }
 }
