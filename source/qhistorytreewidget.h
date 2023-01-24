@@ -38,7 +38,7 @@ Q_SIGNALS:
 public Q_SLOTS:
     void clear();
     void insertFileNames();
-    void insertFileNames(QTreeWidgetItem* aParent, int aChild);
+    void insertFileNames(QTreeWidgetItem* parent, int child, int second_child=-1);
 
 protected:
 

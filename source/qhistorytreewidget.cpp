@@ -180,6 +180,10 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
 
                 int fIndex = fLogItemParent->indexOfChild(fHistoryLogItem);
                 auto fNextItem = fLogItemParent->child(fIndex+1);
+                if (Type(mSelectedTopLevelItemType).is(Type::DiffCommit))
+                {
+                    fNextItem = nullptr;
+                }
                 if (fNextItem)
                 {
                     mHistoryHashItems.append(fNextItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
@@ -290,80 +294,123 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
 
 void QHistoryTreeWidget::insertFileNames()
 {
-    auto fSelected = selectedItems();
-    for (const auto& fItem : fSelected)
+    auto selected_items = selectedItems();
+    if (   selected_items.count() == 2
+        && getItemLevel(selected_items[0]) == Level::Log
+        && getItemLevel(selected_items[1]) == Level::Log)
     {
-        switch (static_cast<Level::e>(getItemLevel(fItem)))
+        QTreeWidgetItem* parent = selected_items[0]->parent();
+        int child1 = parent->indexOfChild(selected_items[0]);
+        int child2 = parent->indexOfChild(selected_items[1]);
+        if (abs(child1 - child2) > 1)
+        {
+            insertFileNames(parent, child1, child2);
+            return;
+        }
+    }
+
+    for (const auto& item : selected_items)
+    {
+        switch (static_cast<Level::e>(getItemLevel(item)))
         {
             case Level::Top:
             {
-                int fCount = fItem->childCount();
-                for (int fChild=0; fChild<(fCount-1); ++fChild)
+                int child_count = item->childCount();
+                for (int child=0; child<(child_count-1); ++child)
                 {
-                    insertFileNames(fItem, fChild);
+                    insertFileNames(item, child);
                 }
             }   break;
             case Level::Log:
             {
-                QTreeWidgetItem* fParent = fItem->parent();
-                insertFileNames(fParent, fParent->indexOfChild(fItem));
+                QTreeWidgetItem* parent = item->parent();
+                insertFileNames(parent, parent->indexOfChild(item));
             }   break;
             case Level::File: break;
         }
     }
 }
 
-void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* fParent, int fChild)
+void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int second_child)
 {
-    auto fChildItem    = fParent->child(fChild);
-    if (fChildItem && !fChildItem->isHidden())
+    auto child_item    = parent->child(child);
+    if (child_item && !child_item->isHidden())
     {
-        Type fType(fChildItem->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
-        if (!fChildItem->childCount() && !fType.is(Type::File))
+        bool diff_over_one_step = second_child == -1;
+        Type type(child_item->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
+        if ((!child_item->childCount() || !diff_over_one_step) && !type.is(Type::File))
         {
-            auto fNextItem = fParent->child(fChild + 1);
-            QString fGitCmd;
-            if (fNextItem)
+            if (diff_over_one_step)
             {
-                fGitCmd = tr("git diff --name-only %1 %2").
-                          arg(fNextItem->data( History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
-                              fChildItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+                second_child = child + 1;
+            }
+            auto second_item = parent->child(second_child);
+            QString git_cmd;
+            if (second_item)
+            {
+                git_cmd = tr("git diff --name-only %1 %2").
+                          arg(second_item->data( History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
+                              child_item-> data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
             else
             {
-                fGitCmd = tr("git diff --name-only %1").
-                          arg(fChildItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+                git_cmd = tr("git diff --name-only %1").
+                          arg(child_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
 
 
-            if (fType.is(Type::Branch))
+            if (type.is(Type::Branch))
             {   // FIXME: validate, if this is correct also for branch
-                fGitCmd += " -- ";
-                fGitCmd += fParent->text(History::Column::CommitDate);
+                git_cmd += " -- ";
+                git_cmd += parent->text(History::Column::CommitDate);
             }
             else
             {
-                fGitCmd += " -- ";
-                fGitCmd += fParent->text(History::Column::CommitDate);
+                git_cmd += " -- ";
+                git_cmd += parent->text(History::Column::CommitDate);
             }
 
-            QString fResultStr;
-            int fError = execute(fGitCmd, fResultStr);
-            if (!fError)
+            QString result_string;
+            int error = execute(git_cmd, result_string);
+            if (!error)
             {
-                fGitCmd = fGitCmd.replace("--name-only", "%1");
-                fChildItem->setData(History::Column::Commit, History::role(History::Entry::GitDiffCommand), fGitCmd);
-
-                auto fFiles = fResultStr.split("\n");
-                for (const auto& fFile : fFiles)
+                if (!diff_over_one_step)
                 {
-                    fChildItem->addChild(new QTreeWidgetItem({fFile}));
+                    QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_item->text(History::Column::Filename);
+                    QTreeWidgetItem* new_child_item = new QTreeWidgetItem({compared_items});
+                    parent->insertChild(child, new_child_item);
+                    for (int role_entry=0; role_entry < History::Entry::NoOfEntries; ++role_entry)
+                    {
+                        int role = History::role(static_cast<History::Entry::e>(role_entry));
+                        QString sep = (role_entry == History::Entry::CommitHash) ? " " : " <-> ";
+                        QString role_text = child_item->data(History::Column::Commit, role).toString() + sep +
+                                           second_item->data(History::Column::Commit, role).toString();
+                        new_child_item->setData(History::Column::Commit, role, QVariant(role_text));
+                    }
+                    Type type(Type::Folder);
+                    type.add(Type::DiffCommit);
+                    new_child_item->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(type.type()));
+
+                    child_item = new_child_item;
                 }
-                fChildItem->setData(History::Column::Commit, History::role(History::Entry::NoOfFiles), fFiles.count());
+                git_cmd = git_cmd.replace("--name-only", "%1");
+                int pos = git_cmd.indexOf(" -- ");
+                if (pos != -1)
+                {
+                    git_cmd = git_cmd.left(pos);
+                }
+                child_item->setData(History::Column::Commit, History::role(History::Entry::GitDiffCommand), git_cmd);
+
+                auto files = result_string.split("\n");
+                for (const auto& file_path : files)
+                {
+                    child_item->addChild(new QTreeWidgetItem({file_path}));
+                }
+                child_item->setData(History::Column::Commit, History::role(History::Entry::NoOfFiles), files.count());
             }
             else
             {
-                TRACE(Logger::to_browser, tr("error inserting filenames:\n%1\n%2\nerror number: %d").arg(fGitCmd, fResultStr).toStdString().c_str(), fError);
+                TRACE(Logger::to_browser, tr("error inserting filenames:\n%1\n%2\nerror number: %d").arg(git_cmd, result_string).toStdString().c_str(), error);
             }
         }
     }
