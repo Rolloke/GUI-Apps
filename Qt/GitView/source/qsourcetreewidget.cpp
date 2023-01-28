@@ -17,8 +17,10 @@ using namespace git;
 
 QSourceTreeWidget::QSourceTreeWidget(QWidget *parent) : QTreeWidget(parent)
   , mUseSourceTreeCheckboxes(false)
+  , m1stCompareItem(nullptr)
 {
-
+    viewport()->setMouseTracking(true);
+    viewport()->installEventFilter(this);
 }
 
 
@@ -222,7 +224,7 @@ bool QSourceTreeWidget::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2
             aParentItem->setText(Column::State, fState);
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
             fType.remove(Type::AllGitActions);
-            fType.add(static_cast<Type::TypeFlags>(fFoundType->second.type()));
+            fType.add(Type::type(fFoundType->second.type()));
             aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
             TRACE(Logger::info, "set state %s, %x of %s", fState.toStdString().c_str(), fFoundType->second.type(), fSourcePath.toStdString().c_str());
         }
@@ -365,62 +367,127 @@ void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepa
     }
 }
 
+void QSourceTreeWidget::start_compare_to()
+{
+    mCompareTo.setType(0);
+    auto seleted = selectedItems();
+    if (seleted.count() == 1)
+    {
+        m1stCompareItem = seleted[0];
+        const Type type(Type::type(m1stCompareItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        if      (type.is(Type::File))   mCompareTo.setType(Type::File);
+        else if (type.is(Type::Folder)) mCompareTo.setType(Type::Folder);
+        else m1stCompareItem = nullptr;
+    }
+}
+
+void QSourceTreeWidget::mouseMoveEvent(QMouseEvent * event)
+{
+    if (mCompareTo.type())
+    {
+        Qt::CursorShape cursor_shape { Qt::ForbiddenCursor };
+        QTreeWidgetItem * item = itemAt(event->pos());
+        if (item && item != m1stCompareItem)
+        {
+            const Type type(Type::type(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+            if (type.is(Type::type(mCompareTo.type())))
+            {
+                cursor_shape = Qt::BusyCursor;
+            }
+        }
+        setCursor(QCursor(cursor_shape));
+    }
+    else
+    {
+        QTreeView::mouseMoveEvent(event);
+    }
+}
+
+void QSourceTreeWidget::mousePressEvent(QMouseEvent * event)
+{
+    QTreeView::mousePressEvent(event);
+    if (mCompareTo.type())
+    {
+        unsetCursor();
+        auto seleted = selectedItems();
+        if (seleted.count() == 1 && seleted[0] != m1stCompareItem)
+        {
+            const Type type(Type::type(seleted[0]->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+            if (type.is(Type::type(mCompareTo.type())))
+            {
+                QString compare_item1 = getItemFilePath(m1stCompareItem);
+                QString compare_item2 = getItemFilePath(seleted[0]);
+                Q_EMIT(compare_items(compare_item1, compare_item2));
+            }
+        }
+        mCompareTo.setType(0);
+        m1stCompareItem = nullptr;
+    }
+}
+
 void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
 {
-    QString path = getItemFilePath(item);
-    const auto found_ignored = mIgnoredInFolder.find(path);
-    if (found_ignored != mIgnoredInFolder.end())
+    if (item)
     {
-        QMenu*submenu = nullptr;
-        const auto& themap = found_ignored->getIgnoreMap();
-        for (size_t index=0; index<themap.size(); ++index )
+        const Type type(Type::type(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        if (type.is(Type::Folder))
         {
-            if (themap[index].second.is(Type::GitFolder))           continue;
-            if (themap[index].second.is(Type::FolderForNavigation)) continue;
-            QDir dir_check(path + "/" + themap[index].first);
-            if (dir_check.exists())
+            QString path = getItemFilePath(item);
+            const auto found_ignored = mIgnoredInFolder.find(path);
+            if (found_ignored != mIgnoredInFolder.end())
             {
-                if (!submenu)
+                QMenu*submenu = nullptr;
+                const auto& themap = found_ignored->getIgnoreMap();
+                for (size_t index=0; index<themap.size(); ++index )
                 {
-                    submenu = menu.addMenu(tr("Insert Ignored Folder"));
+                    if (themap[index].second.is(Type::GitFolder))           continue;
+                    if (themap[index].second.is(Type::FolderForNavigation)) continue;
+                    QDir dir_check(path + "/" + themap[index].first);
+                    if (dir_check.exists())
+                    {
+                        if (!submenu)
+                        {
+                            submenu = menu.addMenu(tr("Insert Ignored Folder"));
+                        }
+                        QString do_not_ignore = themap[index].first;
+                        QAction *action = submenu->addAction(do_not_ignore);
+                        connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
+                        { this->insertItem(path, *this, item, do_not_ignore); });
+                    }
                 }
-                QString do_not_ignore = themap[index].first;
-                QAction *action = submenu->addAction(do_not_ignore);
-                connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
-                { this->insertItem(path, *this, item, do_not_ignore); });
             }
-        }
-    }
-    {
-        QDirIterator iterator(path, QDirIterator::NoIteratorFlags);
-        QMenu*submenu = nullptr;
-        do
-        {
-            iterator.next();
-            const QFileInfo& file_info = iterator.fileInfo();
-            if (file_info.isDir()) continue;
+            {
+                QDirIterator iterator(path, QDirIterator::NoIteratorFlags);
+                QMenu*submenu = nullptr;
+                do
+                {
+                    iterator.next();
+                    const QFileInfo& file_info = iterator.fileInfo();
+                    if (file_info.isDir()) continue;
 
-            bool found = false;
-            for (int i=0; i<item->childCount(); ++i)
-            {
-                if (item->child(i)->text(QSourceTreeWidget::Column::FileName) == file_info.fileName())
-                {
-                    found = true;
-                    break;
+                    bool found = false;
+                    for (int i=0; i<item->childCount(); ++i)
+                    {
+                        if (item->child(i)->text(QSourceTreeWidget::Column::FileName) == file_info.fileName())
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        if (!submenu)
+                        {
+                            submenu = menu.addMenu(tr("Insert Ignored File"));
+                        }
+                        QString file = file_info.fileName();
+                        QAction *action = submenu->addAction(file);
+                        connect(action, &QAction::triggered, [this, path, item, file]( )
+                        { this->insertItem(path, *this, item, file); });
+                    }
                 }
-            }
-            if (!found)
-            {
-                if (!submenu)
-                {
-                    submenu = menu.addMenu(tr("Insert Ignored File"));
-                }
-                QString file = file_info.fileName();
-                QAction *action = submenu->addAction(file);
-                connect(action, &QAction::triggered, [this, path, item, file]( )
-                { this->insertItem(path, *this, item, file); });
+                while (iterator.hasNext());
             }
         }
-        while (iterator.hasNext());
     }
 }

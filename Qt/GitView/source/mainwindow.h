@@ -244,6 +244,7 @@ private Q_SLOTS:
     void copyFilePath();
     void createBookmark();
     void showInformation();
+    void compare_items(QString& item1, QString& item2);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -294,6 +295,7 @@ private:
     QString mExternalFileOpenCmd;
     QString mFindGrep;
     QString mFindFsrc;
+    QString mCompare2Items;
     QMap<QString, QString> mExternalFileOpenExt;
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;

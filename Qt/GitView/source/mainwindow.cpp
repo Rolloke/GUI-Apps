@@ -36,7 +36,7 @@
 
 #define RELATIVE_GIT_PATH 1
 
-/// TODO: Beliebige Datei öffnen mit Basispfad aus Src-Treeview und Eintrag in Src-TreeView
+/// FIXME: State of Save button is sometimes dirty but file is not changed
 
 using namespace std;
 using namespace git;
@@ -87,6 +87,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     #endif
     , mFindGrep("grep")
     , mFindFsrc("fsrc")
+    , mCompare2Items("meld %1 %2")
     , mWarnOpenFileSize(1024*1024) // 1MB
 {
     static const QString style_sheet_treeview_lines =
@@ -134,6 +135,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->treeSource->setDropIndicatorShown(true);
     ui->treeSource->setDragDropMode(QAbstractItemView::InternalMove);
     connect(ui->treeSource, SIGNAL(dropped_to_target(QTreeWidgetItem*,bool*)), this, SLOT(call_git_move_rename(QTreeWidgetItem*,bool*)));
+    connect(ui->treeSource, SIGNAL(compare_items(QString&,QString&)), this, SLOT(compare_items(QString&,QString&)));
 
     ui->treeFindText->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->treeFindText->header()->setSectionResizeMode(FindColumn::FilePath, QHeaderView::ResizeToContents);
@@ -187,6 +189,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboFindBox, setCurrentIndex, currentIndex, toInt);
         LOAD_STR(fSettings, mFindGrep, toString);
         LOAD_STR(fSettings, mFindFsrc, toString);
+        LOAD_STR(fSettings, mCompare2Items, toString);
     }
     fSettings.endGroup();
     on_comboFindBox_currentIndexChanged(ui->comboFindBox->currentIndex());
@@ -455,6 +458,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
         STORE_STR(fSettings, mFindGrep);
         STORE_STR(fSettings, mFindFsrc);
+        STORE_STR(fSettings, mCompare2Items);
     }
     fSettings.endGroup();
 
@@ -1087,8 +1091,13 @@ void MainWindow::initCodecCombo()
     }
 }
 
+void MainWindow::compare_items(QString& item1, QString& item2)
+{
+    QString command = tr(mCompare2Items.toStdString().c_str()).arg(item1, item2);
+    QString result;
+    applyGitCommandToFilePath({}, command, result);
+}
 
-//"%12"
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
 {
     QString fCommand;
@@ -1369,8 +1378,13 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::OpenFileExternally, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::OpenFileExternally, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::WhatsThisHelp, tr("Whats this?"), tr("Whats this help")), &QAction::triggered, []() { QWhatsThis::enterWhatsThisMode(); } );
+    connect(mActions.createAction(Cmd::WhatsThisHelp, tr("Whats this?"), tr("Whats this help")), &QAction::triggered, []() { QWhatsThis::enterWhatsThisMode(); });
     mActions.setFlags(Cmd::WhatsThisHelp, ActionList::Flags::FunctionCmd, Flag::set);
+
+    connect(mActions.createAction(Cmd::CompareTo, tr("Compare to..."), tr("Start compare mode to select other file ore folder")), SIGNAL(triggered()), ui->treeSource, SLOT(start_compare_to()));
+    mActions.setFlags(Cmd::CompareTo, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::CompareTo, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::CompareTo, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);

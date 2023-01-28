@@ -132,6 +132,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::CreateBookMark]          = resource+"non-starred.png";
     action_icons[Cmd::ShowInformation]         = resource+"dialog-information.png";
     action_icons[Cmd::WhatsThisHelp]           = resource+"dialog-question.png";
+    action_icons[Cmd::CompareTo]               = resource+"object-flip-horizontal.png";
 
     for (const auto& icon_path: action_icons )
     {
@@ -157,9 +158,9 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
                 && (status_enabled  || status_disabled || status_not_enabled))
             {
                 Logger::printDebug(Logger::trace, "%s: e:%d|%d, d:%d|%d, ne:%d|%d", getAction(cmd)->text().toStdString().c_str(),
-                                   INT(status_enabled), type.is(static_cast<Type::TypeFlags>(status_enabled)),
-                                   INT(status_disabled), type.is(static_cast<Type::TypeFlags>(status_disabled)),
-                                   INT(status_not_enabled), type.is(static_cast<Type::TypeFlags>(status_not_enabled)));
+                                   INT(status_enabled), type.is(Type::type(status_enabled)),
+                                   INT(status_disabled), type.is(Type::type(status_disabled)),
+                                   INT(status_not_enabled), type.is(Type::type(status_not_enabled)));
             }
             if (type.type() & Type::File)
             {
