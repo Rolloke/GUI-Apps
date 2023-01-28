@@ -7,6 +7,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
+/// TODO: byte position change does not lead to correct row and column position when typed_display_values are shown
 #define INT(X) static_cast<int>(X)
 
 namespace

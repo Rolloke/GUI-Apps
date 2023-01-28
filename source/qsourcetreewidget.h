@@ -36,11 +36,14 @@ public:
     QString  getItemTopDirPath(QTreeWidgetItem* item);
     void     fillContextMenue(QMenu&, QTreeWidgetItem *item);
 
+
 public Q_SLOTS:
     void find_item(const QString& git_root, const QString& filepath);
+    void start_compare_to();
 
 signals:
     void dropped_to_target(QTreeWidgetItem* target, bool* rvalue);
+    void compare_items(QString &item1, QString& item2);
 
 protected:
     void dropEvent(QDropEvent *event) override;
@@ -48,10 +51,15 @@ protected:
 private:
     QTreeWidgetItem * itemFromIndex(const QModelIndex &index) const;
 
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+
 public:
-    bool mUseSourceTreeCheckboxes;
-    GitIgnore             mGitIgnore;
+    bool                     mUseSourceTreeCheckboxes;
+    GitIgnore                mGitIgnore;
     QMap<QString, GitIgnore> mIgnoredInFolder;
+    git::Type                mCompareTo;
+    QTreeWidgetItem*         m1stCompareItem;
 
 private:
 

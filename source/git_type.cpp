@@ -76,8 +76,8 @@ Cmd::Cmd()
     mContextMenuTextView        = { CloneTextBrowser, CreateBookMark };
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, BranchList, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, StashPop, Separator, WhatsThisHelp, CustomGitActionSettings});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
     mToolbarNames.push_back(QObject::tr("Git Commands"));
     mToolbarNames.push_back(QObject::tr("Control Commands"));
@@ -172,12 +172,12 @@ bool Type::mShort = false;
 
 void Type::add(TypeFlags aType)
 {
-    mType = static_cast<TypeFlags>(mType|aType);
+    mType = type(mType|aType);
 }
 
 void Type::remove(TypeFlags aType)
 {
-    mType = static_cast<TypeFlags>(mType&~aType);
+    mType = type(mType&~aType);
 }
 
 bool Type::is(TypeFlags aType) const
@@ -276,31 +276,37 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(Executeable);
         RETURN_NAME(IncludeAll);
         RETURN_NAME(Consecutive);
+        RETURN_NAME(DiffOf2Commits);
     }
     return "";
 }
 
+Type::TypeFlags Type::type(uint type)
+{
+    return static_cast<TypeFlags>(type);
+}
+
 QString Type::type_name() const
 {
-    return Type::name(static_cast<Type::TypeFlags>(Type::FileType&mType));
+    return Type::name(type(Type::FileType&mType));
 }
 
 void Type::translate(const QString& git_identifier)
 {
     if (git_identifier.contains('D'))  add(GitDeleted);
     if      (git_identifier[1]=='M')   add(GitModified);
-    else if (git_identifier[0]=='M')   add(static_cast<TypeFlags>(GitModified|GitStaged));
+    else if (git_identifier[0]=='M')   add(type(GitModified|GitStaged));
     if      (git_identifier[1]=='A')   add(GitAdded);
-    else if (git_identifier[0]=='A')   add(static_cast<TypeFlags>(GitAdded|GitStaged));
+    else if (git_identifier[0]=='A')   add(type(GitAdded|GitStaged));
     if      (git_identifier[1]=='R')   add(GitRenamed);
-    else if (git_identifier[0]=='R')   add(static_cast<TypeFlags>(GitRenamed|GitStaged));
-    if      (git_identifier=="DD")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both deleted
-    else if (git_identifier=="AU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, added by us
-    else if (git_identifier=="UD")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, deleted by them
-    else if (git_identifier=="UA")     add(static_cast<TypeFlags>(GitUnmerged|GitRemote)); // unmerged, added by them
-    else if (git_identifier=="DU")     add(static_cast<TypeFlags>(GitUnmerged|GitLocal));  // unmerged, deleted by us
-    else if (git_identifier=="AA")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both added
-    else if (git_identifier=="UU")     add(static_cast<TypeFlags>(GitUnmerged|GitBoth));   // unmerged, both modified
+    else if (git_identifier[0]=='R')   add(type(GitRenamed|GitStaged));
+    if      (git_identifier=="DD")     add(type(GitUnmerged|GitBoth));   // unmerged, both deleted
+    else if (git_identifier=="AU")     add(type(GitUnmerged|GitLocal));  // unmerged, added by us
+    else if (git_identifier=="UD")     add(type(GitUnmerged|GitRemote)); // unmerged, deleted by them
+    else if (git_identifier=="UA")     add(type(GitUnmerged|GitRemote)); // unmerged, added by them
+    else if (git_identifier=="DU")     add(type(GitUnmerged|GitLocal));  // unmerged, deleted by us
+    else if (git_identifier=="AA")     add(type(GitUnmerged|GitBoth));   // unmerged, both added
+    else if (git_identifier=="UU")     add(type(GitUnmerged|GitBoth));   // unmerged, both modified
     if (git_identifier.contains("?"))  add(GitUnTracked);
     if (git_identifier.contains("##")) add(Repository);
 

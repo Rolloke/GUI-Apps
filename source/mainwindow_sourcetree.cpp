@@ -281,7 +281,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
 {
     if (item)
     {
-        const Type fType(static_cast<Type::TypeFlags>(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        const Type fType(Type::type(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
         if (fType.is(Type::Folder))
         {
             toggle_expand_item(item);
@@ -533,7 +533,7 @@ void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column 
     if (item)
     {
         mContextMenuSourceTreeItem = item;
-        const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        const Type fType(Type::type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
         mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
         mActions.enableItemsByType(Cmd::mToolbars[0], fType);
         if (mMergeDialog)
@@ -645,8 +645,8 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
     if (mContextMenuSourceTreeItem)
     {
         bool      fOk {false};
-        const Type fType(static_cast<Type::TypeFlags>(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
-        const QString   fFileTypeName = Type::name(static_cast<Type::TypeFlags>(Type::FileType&fType.type()));
+        const Type fType(Type::type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
+        const QString   fFileTypeName = Type::name(Type::type(Type::FileType&fType.type()));
         const QFileInfo fPath(ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem));
 
         QString       fOldName = mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);

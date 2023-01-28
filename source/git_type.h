@@ -95,10 +95,11 @@ struct Cmd
         ShowInformation,
         OpenFileExternally,
         WhatsThisHelp,
+        CompareTo,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
-        LastNonGitCommand = WhatsThisHelp,
+        LastNonGitCommand = CompareTo,
         Invalid = -1,
         Restore = Checkout
     };
@@ -176,7 +177,7 @@ struct Type
         IgnoreTypeStatus    = 0x04000000,
         IncludeAll          = 0x10000000,
         Consecutive         = 0x20000000,
-        DiffCommit          = 0x40000000,
+        DiffOf2Commits      = 0x40000000,
         AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo,
         FileType      = File|Folder|SymLink,
         FileFlag      = Hidden|Executeable
@@ -196,6 +197,7 @@ struct Type
     QString type_name() const;
 
     static const char* name(TypeFlags aType);
+    static TypeFlags type(uint type);
 
     void translate(const QString& fIdentifier);
     void translate(const QFileInfo& fInfo);

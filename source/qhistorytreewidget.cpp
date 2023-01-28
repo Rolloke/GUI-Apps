@@ -180,7 +180,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
 
                 int fIndex = fLogItemParent->indexOfChild(fHistoryLogItem);
                 auto fNextItem = fLogItemParent->child(fIndex+1);
-                if (Type(mSelectedTopLevelItemType).is(Type::DiffCommit))
+                if (Type(mSelectedTopLevelItemType).is(Type::DiffOf2Commits))
                 {
                     fNextItem = nullptr;
                 }
@@ -388,7 +388,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                         new_child_item->setData(History::Column::Commit, role, QVariant(role_text));
                     }
                     Type type(Type::Folder);
-                    type.add(Type::DiffCommit);
+                    type.add(Type::DiffOf2Commits);
                     new_child_item->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(type.type()));
 
                     child_item = new_child_item;
