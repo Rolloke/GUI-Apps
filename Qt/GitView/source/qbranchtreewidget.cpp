@@ -24,7 +24,7 @@ QBranchTreeWidget::~QBranchTreeWidget()
 
 void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QString& aGitRootPath)
 {
-    QStringList fLines = aBranchText.split("\n");
+    const QStringList fLines = aBranchText.split("\n");
     QTreeWidgetItem* fNewBranchItem = nullptr;
     setVisible(true);
     for (const auto& fLine : fLines)
@@ -75,7 +75,7 @@ void QBranchTreeWidget::on_itemDoubleClicked(const ActionList& aActionList, QTre
 QString QBranchTreeWidget::getSelectedBranch()
 {
     QString fItem;
-    auto fSelectedList = selectedItems();
+    const auto fSelectedList = selectedItems();
     if (fSelectedList.size() > 1)
     {
         for (auto fSelectedItem : fSelectedList)

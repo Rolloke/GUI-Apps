@@ -331,7 +331,7 @@ QString QSourceTreeWidget::getItemTopDirPath(QTreeWidgetItem* aItem)
 void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepath)
 {
     selectionModel()->clearSelection();
-    QStringList items = filepath.split("/");
+    const QStringList items = filepath.split("/");
     auto list = findItems(git_root, Qt::MatchExactly);
     if (!list.empty() )
     {

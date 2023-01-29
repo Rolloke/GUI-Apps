@@ -114,7 +114,7 @@ QString  Cmd::toString(const tVector& aItems)
 
 Cmd::tVector Cmd::fromString(const QString& aString)
 {
-    QStringList fStrings = aString.split('|');
+    const QStringList fStrings = aString.split('|');
     tVector fItems;
     for (const auto& fItem: fStrings)
     {
