@@ -296,7 +296,7 @@ void Highlighter::load_language_list()
                 QString extensions = getValue(n.attributes().namedItem("ext"), QString(""), true);
                 if (extensions.count())
                 {
-                    auto list = extensions.split(" ");
+                    const auto list = extensions.split(" ");
                     for (auto& entry : list)
                     {
                         mExtensionToLanguage[entry] = name;

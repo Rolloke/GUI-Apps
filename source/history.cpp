@@ -8,7 +8,7 @@ void History::parse(const QString& aText, QVector<QStringList>& aList)
     const QString fLineSeparator  = "<tr>";
     const QString fEntrySeparator = "<td>";
 
-    QStringList fLines = aText.split(fLineSeparator);
+    const QStringList fLines = aText.split(fLineSeparator);
     for (const auto& fLine: fLines)
     {
         aList.append(fLine.split(fEntrySeparator));

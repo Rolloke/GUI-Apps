@@ -294,7 +294,7 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
 
 void QHistoryTreeWidget::insertFileNames()
 {
-    auto selected_items = selectedItems();
+    const auto selected_items = selectedItems();
     if (   selected_items.count() == 2
         && getItemLevel(selected_items[0]) == Level::Log
         && getItemLevel(selected_items[1]) == Level::Log)
@@ -374,7 +374,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
             int error = execute(git_cmd, result_string);
             if (!error)
             {
-                if (!diff_over_one_step)
+                if (!diff_over_one_step && second_item)
                 {
                     QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_item->text(History::Column::Filename);
                     QTreeWidgetItem* new_child_item = new QTreeWidgetItem({compared_items});
@@ -401,7 +401,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                 }
                 child_item->setData(History::Column::Commit, History::role(History::Entry::GitDiffCommand), git_cmd);
 
-                auto files = result_string.split("\n");
+                const auto files = result_string.split("\n");
                 for (const auto& file_path : files)
                 {
                     child_item->addChild(new QTreeWidgetItem({file_path}));

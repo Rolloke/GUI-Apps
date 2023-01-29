@@ -34,8 +34,8 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
     }
 
     const QDir root_path(git_root_path);
-    QStringList result_lines = branch_text.split('\n');
-    int line_index = 0;
+    const QStringList result_lines = branch_text.split('\n');
+    int  line_index = 0;
     bool items_inserted {false};
     for (const QString& line : result_lines)
     {
@@ -67,7 +67,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
                 result = execute(git_command, result_string);
                 if (result != -1)
                 {
-                    auto shown_items = result_string.split('\n');
+                    const auto shown_items = result_string.split('\n');
                     for (const QString& item : shown_items)
                     {
                         QStringList item_parts = item.split('|');

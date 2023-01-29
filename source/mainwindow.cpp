@@ -313,7 +313,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, fExternalFileOpenExt, toString);
         if (fExternalFileOpenExt.size())
         {
-            auto extensions = fExternalFileOpenExt.split(",");
+            const auto extensions = fExternalFileOpenExt.split(",");
             for (const auto&extension : extensions)
             {
                 auto parts = extension.split(":");
@@ -1006,7 +1006,7 @@ void MainWindow::killBackgroundThread()
 {
     QString pids;
     execute("pidof git", pids, true);
-    QStringList pidlist = pids.split(" ");
+    const QStringList pidlist = pids.split(" ");
     if (pidlist.size())
     {
         int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
@@ -1048,7 +1048,7 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::initCodecCombo()
 {
-    auto codecs = QTextCodec::availableCodecs();
+    const auto codecs = QTextCodec::availableCodecs();
     QRegExp reg_ex_num ("([\\d]{1,6})");
     QRegExp reg_ex_text("([a-zA-Z-]{1,})");
     QMap<QString, QList<QString>> codec_map;
@@ -2146,7 +2146,7 @@ void MainWindow::find_text_in_files()
         QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
         auto new_tree_root_item = new QTreeWidgetItem({tr("Search expression: %1").arg(search_pattern), "", repository_root});
         ui->treeFindText->addTopLevelItem(new_tree_root_item);
-        auto found_items = find_result.split('\n');
+        const auto found_items = find_result.split('\n');
 
         if (fast_search)
         {

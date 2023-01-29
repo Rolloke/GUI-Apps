@@ -98,7 +98,7 @@ QString formatPermissions(const QFile::Permissions& permissions)
 
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
-    auto fList = aTree.selectedItems();
+    const auto fList = aTree.selectedItems();
     for (const auto& fSelected : fList)
     {
         auto top_level_item = getTopLevelItem(aTree, fSelected);
@@ -115,7 +115,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
-    auto fList = aTree.selectedItems();
+    const auto fList = aTree.selectedItems();
     for (const auto& fSelected : fList)
     {
         auto fParent = fSelected->parent();
@@ -207,7 +207,7 @@ QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const 
 
 bool containsPathAsChildren(QTreeWidgetItem*parent_item, int column, const QString& right_path)
 {
-    QStringList right_parts = right_path.split('/');
+    const QStringList right_parts = right_path.split('/');
     for (const auto&file_name : right_parts)
     {
         parent_item = find_child_item(parent_item, column, file_name);

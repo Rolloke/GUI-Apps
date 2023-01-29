@@ -305,11 +305,11 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
         {
             if (doc.isObject())
             {
-                QJsonObject obj = doc.object();
-                auto file      = obj.take("file");
-                auto file_obj  = file.toObject();
-                auto file_keys = file_obj.keys();
-                for (auto& key : file_keys)
+                QJsonObject obj      = doc.object();
+                const auto file      = obj.take("file");
+                auto       file_obj  = file.toObject();
+                const auto file_keys = file_obj.keys();
+                for (const auto& key : file_keys)
                 {
                     //TRACE(Logger::info, "- %s: %s", key.toStdString().c_str(), file_obj.take(key).toString().toStdString().c_str());
                     if (key == "endian")
@@ -840,7 +840,7 @@ void BinaryTableModel::clear_typed_display()
 
 bool BinaryTableModel::insert_binary_structs(QJsonObject& structs_obj)
 {
-    auto keys = structs_obj.keys();
+    const auto keys = structs_obj.keys();
     for (const auto& key : keys)
     {
         DisplayValue display_value;
@@ -848,7 +848,7 @@ bool BinaryTableModel::insert_binary_structs(QJsonObject& structs_obj)
         const auto structs_children = structs_obj.take(key);
         if (structs_children.isArray())
         {
-            auto structs_children_array = structs_children.toArray();
+            const auto structs_children_array = structs_children.toArray();
             for (const auto& element : structs_children_array)
             {
                 if (!insert_display_value(element, &display_value.member))
@@ -901,14 +901,14 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
     }
     else if (jval.isObject()) // object is a pair of variable name and type name
     {
-        auto obj  = jval.toObject();
-        auto keys = obj.keys();
-        value.name  =  keys[0];           // variable name
+        auto       obj  = jval.toObject();
+        const auto keys = obj.keys();
+        value.name      =  keys[0];           // variable name
         type_name = obj.take(value.name).toString(); // type name
         if (obj.count() > 1)              // this is a syntax error
         {
             TRACE(Logger::to_browser, "Error: more than one variable:");
-            for (auto& key : keys)
+            for (const auto& key : keys)
             {
                 TRACE(Logger::to_browser, "- ", key.toStdString().c_str());
             }
