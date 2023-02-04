@@ -213,8 +213,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mToolbars[0], Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mToolbars[1], Cmd::fromString, Cmd::toString, toString);
+        /// TODO: read number of tool bars
+        for (std::uint32_t i=0; i<Cmd::mToolbars.size(); ++i)
+        {
+            auto& tool_bar = Cmd::mToolbars[i];
+            QString name = tr("Cmd__mToolbars_%1").arg(i);
+            LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
+        }
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
 
         initContextMenuActions();
@@ -544,8 +549,13 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mToolbars[0], Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mToolbars[1], Cmd::toString);
+        /// TODO: write number of tool bars
+        for (std::uint32_t i=0; i<Cmd::mToolbars.size(); ++i)
+        {
+            auto& tool_bar = Cmd::mToolbars[i];
+            QString name = tr("Cmd__mToolbars_%1").arg(i);
+            STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
+        }
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
 
         fSettings.beginWriteArray(config::sCommands);
@@ -1018,7 +1028,7 @@ void MainWindow::killBackgroundThread()
                 QString cmd_result;
                 execute(cmd.c_str(), cmd_result, true);
                 cmd += '\n';
-                appendTextToBrowser(cmd.c_str() + cmd_result, true);
+                appendTextToBrowser(cmd.c_str() + cmd_result);
             }
         }
     }
@@ -1095,10 +1105,10 @@ void MainWindow::compare_items(QString& item1, QString& item2)
 {
     QString command = tr(mCompare2Items.toStdString().c_str()).arg(item1, item2);
     QString result;
-    applyGitCommandToFilePath({}, command, result);
+    applyGitCommandToFilePath({}, command, result, true);
 }
 
-QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr)
+QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread)
 {
     QString fCommand;
     auto fPos = fGitCmd.indexOf(QRegExp("%[0-9]+"));
@@ -1110,7 +1120,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     {
         fCommand = fGitCmd;
     }
-    if (handleInThread())
+    if (handleInThread(force_thread))
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         mWorker.doWork(Work::ApplyGitCommand, QVariant(fCommand));
@@ -1192,6 +1202,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread|ActionList::Flags::DependsOnStaged, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread, Flag::set);
@@ -1228,8 +1239,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::History, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::Blame          , tr("Blame")      , Cmd::getCommand(Cmd::Blame))               , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread, Flag::set);
-    mActions.setFlags(Cmd::Blame, ActionList::Flags::NotVariableGitCmd, Flag::set);
+    mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread|ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Blame, Type::Folder, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setCustomCommandPostAction(Cmd::Blame, Cmd::ParseBlameText);
 
@@ -1331,7 +1341,7 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
     mActions.setFlags(Cmd::MoveOrRename, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::MoveOrRename, Type::GitUnTracked, Flag::set, ActionList::Data::StatusFlagDisable);
-    mActions.setFlags(Cmd::MoveOrRename, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::MoveOrRename, Type::Folder|Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::ExpandTreeItems      , tr("Expand Tree Items"), tr("Expands all tree item of focused tree")) , SIGNAL(triggered()), this, SLOT(expand_tree_items()));
     mActions.setFlags(Cmd::ExpandTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1383,8 +1393,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CompareTo, tr("Compare to..."), tr("Start compare mode to select other file ore folder")), SIGNAL(triggered()), ui->treeSource, SLOT(start_compare_to()));
     mActions.setFlags(Cmd::CompareTo, ActionList::Flags::FunctionCmd, Flag::set);
-    mActions.setFlags(Cmd::CompareTo, Type::File, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.setFlags(Cmd::CompareTo, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setFlags(Cmd::CompareTo, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1399,6 +1408,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::Delete, tr("Delete..."), tr("Delete file or folder")), SIGNAL(triggered()), this, SLOT(deleteFileOrFolder()));
     mActions.setFlags(Cmd::Delete, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::Delete, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::SelectTextBrowserLanguage, tr("Select Language..."), tr("Select language for text highlighting")), SIGNAL(triggered()), this, SLOT(selectTextBrowserLanguage()));
     mActions.setFlags(Cmd::SelectTextBrowserLanguage, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::SelectTextBrowserLanguage, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1608,7 +1618,7 @@ void MainWindow::delete_file_open_extension()
     }
 }
 
-bool MainWindow::handleInThread()
+bool MainWindow::handleInThread(bool force_thread)
 {
     const QAction *fAction = qobject_cast<QAction *>(sender());
     if (fAction && !mWorker.isBusy())
@@ -1616,7 +1626,7 @@ bool MainWindow::handleInThread()
         mWorkerAction = fAction;
         return (fAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::CallInThread) != 0;
     }
-    return false;
+    return force_thread && !mWorker.isBusy();
 }
 
 void MainWindow::expand_tree_items()

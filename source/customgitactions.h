@@ -22,6 +22,7 @@ class CustomGitActions : public QDialog
     {
         Icons,
         ExternalIcons,
+        MergeTool,
         MenuSrcTree,
         MenuEmptySrcTree,
         MenuGraphicView,
@@ -32,7 +33,6 @@ class CustomGitActions : public QDialog
         MenuFindTextTree,
         Toolbar1,
         Toolbar2,
-        MergeTool,
         Size,
         FirstCmds=MenuSrcTree,
         LastCmds=Toolbar2
@@ -91,6 +91,7 @@ private:
     QString getVariousListHeader(VariousListIndex::e aIndex);
     void set_tooltip(QAction*, const QString&);
     git::Cmd::eCmd getCommand(int aRow);
+    std::uint32_t get_toolbar_index(std::uint32_t offset, std::uint32_t index);
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;

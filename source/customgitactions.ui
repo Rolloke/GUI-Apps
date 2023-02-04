@@ -195,7 +195,7 @@
      <item>
       <widget class="QPushButton" name="btnAdd">
        <property name="toolTip">
-        <string>Add curstom git command entry</string>
+        <string>Add custom git command entry</string>
        </property>
        <property name="text">
         <string/>
@@ -209,7 +209,7 @@
      <item>
       <widget class="QPushButton" name="btnDelete">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove selected custom git command&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>Remove selected custom git command</string>
        </property>
        <property name="text">
         <string/>

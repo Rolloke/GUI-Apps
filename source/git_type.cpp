@@ -66,7 +66,7 @@ Cmd::Cmd()
     mCommandMap[BranchHistory]          = "git -C %1 log --pretty=format:\"%H<td>%T<td>%P<td>%B<td>%an<td>%ae<td>%ad<td>%cn<td>%ce<td>%cd<tr>\" %2";
     mCommandMap[Blame]                  = "git blame -c %1 %2";
 
-    mContextMenuSourceTree      = { Add, Unstage, Restore, Remove, Delete, MoveOrRename, CopyFileName, CopyFilePath, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, ShowShortStatus, ShowStatus, ShowInformation, Commit, StashPush, History, StashShow, Separator, ExpandTreeItems, CollapseTreeItems };
+    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
@@ -79,8 +79,8 @@ Cmd::Cmd()
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
     mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
-    mToolbarNames.push_back(QObject::tr("Git Commands"));
-    mToolbarNames.push_back(QObject::tr("Control Commands"));
+    mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
+    mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
 #endif
 }
 

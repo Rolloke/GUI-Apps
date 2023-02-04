@@ -200,7 +200,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
     QString result_string;
     applyGitCommandToFilePath(source_dir.path(), Cmd::getCommand(Cmd::GetStatusAll), result_string);
 
-    appendTextToBrowser(tr("Repository: ") + source_dir.path(), item == 0 ? false : true);
+    appendTextToBrowser(tr("Repository: ") + source_dir.path(), (item == 0 && ui->treeSource->topLevelItemCount() == 0) ? false : true);
     appendTextToBrowser(result_string, true);
     appendTextToBrowser("", true);
 
@@ -453,6 +453,7 @@ void MainWindow::updateGitStatus()
 
     if (selected_item != -1)
     {
+        on_btnCloseText_clicked();
         auto item = ui->treeSource->topLevelItem(selected_item);
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
@@ -1039,6 +1040,30 @@ void MainWindow::copy_file(copy command)
         }
     }
 }
+/*
+#include <type_traits>
+
+#define define_has_member(member_name)                                         \
+    template <typename T>                                                      \
+    class has_member_##member_name                                             \
+    {                                                                          \
+        typedef char yes_type;                                                 \
+        typedef long no_type;                                                  \
+        template <typename U> static yes_type test(decltype(&U::member_name)); \
+        template <typename U> static no_type  test(...);                       \
+    public:                                                                    \
+        static constexpr bool value = sizeof(test<T>(0)) == sizeof(yes_type);  \
+    }
+
+/// Shorthand for testing if "class_" has a member called "member_name"
+///
+/// @note "define_has_member(member_name)" must be used
+///       before calling "has_member(class_, member_name)"
+///
+#define has_member(class_, member_name)  has_member_##member_name<class_>::value
+
+define_has_member(birthTime);
+*/
 
 void MainWindow::showInformation()
 {
