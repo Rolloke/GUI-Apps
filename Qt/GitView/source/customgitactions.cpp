@@ -15,6 +15,8 @@
 #include <QInputDialog>
 #include <QWhatsThis>
 
+/// TODO: create and delete custom toolbars
+
 using namespace git;
 
 CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
@@ -188,15 +190,20 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
     case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
     case VariousListIndex::MenuFindTextTree:    return Cmd::mContextMenuFindTextTree;
-    case VariousListIndex::Toolbar1:            return Cmd::mToolbars[0];
-    case VariousListIndex::Toolbar2:            return Cmd::mToolbars[1];
-    case VariousListIndex::Size:
     case VariousListIndex::MergeTool:
     case VariousListIndex::Icons:
     case VariousListIndex::ExternalIcons:
         break;
+    default:
+        return Cmd::mToolbars[get_toolbar_index(VariousListIndex::Toolbar1, aIndex)];
     }
     return fDummy;
+}
+
+std::uint32_t CustomGitActions::get_toolbar_index(std::uint32_t offset, std::uint32_t index)
+{
+    index -= offset;
+    return (index < Cmd::mToolbars.size()) ? index : 0;
 }
 
 QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
@@ -213,10 +220,8 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
     case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
     case VariousListIndex::MenuFindTextTree:    return tr("Context Menu Find Text");
-    case VariousListIndex::Toolbar1:            return tr("Toolbar 1");
-    case VariousListIndex::Toolbar2:            return tr("Toolbar 2");
     case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
-    case VariousListIndex::Size: break;
+    default: return Cmd::mToolbarNames[get_toolbar_index(VariousListIndex::Toolbar1, aIndex)];
     }
     return "";
 }

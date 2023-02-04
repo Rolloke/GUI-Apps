@@ -417,7 +417,7 @@ void QSourceTreeWidget::mousePressEvent(QMouseEvent * event)
             {
                 QString compare_item1 = getItemFilePath(m1stCompareItem);
                 QString compare_item2 = getItemFilePath(seleted[0]);
-                Q_EMIT(compare_items(compare_item1, compare_item2));
+                Q_EMIT compare_items(compare_item1, compare_item2);
             }
         }
         mCompareTo.setType(0);

@@ -18,22 +18,32 @@ class ActionList : public QObject
 {
     Q_OBJECT
 public:
-    struct Data   { enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, MenuStrings, ListSize }; };
-    struct Flags  { enum e { BuiltIn           = 0x0001, /// built in command
-                             Modified          = 0x0002, /// modified built in command
-                             Custom            = 0x0004, /// custom created command
-                             Branch            = 0x0008, /// command for branch view
-                             History           = 0x0010, /// command for history view
-                             DiffOrMergeTool   = 0x0020, /// indicates diff or mergetool is used by git command
-                             CallInThread      = 0x0040, /// indicates that git command is called within thread context
-                             NotVariableGitCmd = 0x0080, /// indicates that the command is not a modifiable git command
-                             FunctionCmd       = 0x0100, /// command invokes a special destinct function
-                             Stash             = 0x0200, /// command for stash view
-                             DiffCmd           = 0x0400, /// indicates git diff command
-                             DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
-                             StashCmdOption    = 0x1000, /// option for stash command
-                             MenuOption        = 0x2000, /// option selected by Toolbutton menu
-                           }; };
+    struct Data
+    {
+        enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, MenuStrings, ListSize };
+        static const char* name(e _e);
+        static bool is_flag(e _e);
+
+    };
+    struct Flags
+    {
+        enum e { BuiltIn           = 0x0001, /// built in command
+                 Modified          = 0x0002, /// modified built in command
+                 Custom            = 0x0004, /// custom created command
+                 Branch            = 0x0008, /// command for branch view
+                 History           = 0x0010, /// command for history view
+                 DiffOrMergeTool   = 0x0020, /// indicates diff or mergetool is used by git command
+                 CallInThread      = 0x0040, /// indicates that git command is called within thread context
+                 NotVariableGitCmd = 0x0080, /// indicates that the command is not a modifiable git command
+                 FunctionCmd       = 0x0100, /// command invokes a special destinct function
+                 Stash             = 0x0200, /// command for stash view
+                 DiffCmd           = 0x0400, /// indicates git diff command
+                 DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
+                 StashCmdOption    = 0x1000, /// option for stash command
+                 MenuOption        = 0x2000, /// option selected by Toolbutton menu
+                           };
+        static const char* name(e _e);
+    };
 
     typedef std::map<git::Cmd::eCmd,  QPointer<QAction>>     tActionMap;
     typedef std::map<git::Cmd::eCmd,  QPointer<QToolButton>> tToolButtonMap;

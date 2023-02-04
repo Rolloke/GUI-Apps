@@ -14,12 +14,14 @@ extern QPoint menu_offset;
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
 #define STORE_STR(SETTING, ITEM)        SETTING.setValue(getSettingsName(#ITEM), ITEM)
-#define STORE_STRF(SETTING, ITEM, FUNC) SETTING.setValue(getSettingsName(#ITEM), FUNC(ITEM))
+#define STORE_STRFN(SETTING, ITEM, NAME, FUNC) SETTING.setValue(NAME, FUNC(ITEM))
+#define STORE_STRF(SETTING, ITEM, FUNC) STORE_STRFN(SETTING, ITEM, getSettingsName(#ITEM), FUNC)
 
 #define LOAD_PTR(SETTING, ITEM, SET, GET, CONVERT)  ITEM->SET(SETTING.value(getSettingsName(#ITEM), ITEM->GET()).CONVERT())
 #define LOAD_NP(SETTING, ITEM, SET, GET, CONVERT)   ITEM.SET(SETTING.value(getSettingsName(#ITEM), ITEM.GET()).CONVERT())
 #define LOAD_STR(SETTING, ITEM, CONVERT)            ITEM=SETTING.value(getSettingsName(#ITEM), ITEM).CONVERT()
-#define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(getSettingsName(#ITEM), QVariant(FUNC_IN(ITEM))).CONVERT());
+#define LOAD_STRFN(SETTING, ITEM, NAME, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(NAME, QVariant(FUNC_IN(ITEM))).CONVERT());
+#define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = LOAD_STRFN(SETTING, ITEM, getSettingsName(#ITEM), FUNC_OUT, FUNC_IN, CONVERT)
 
 #define INT(n) static_cast<qint32>(n)
 #define isBetween(VAL, MIN, MAX) (VAL >= MIN && VAL <= MAX)

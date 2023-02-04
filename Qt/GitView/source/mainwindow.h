@@ -60,7 +60,7 @@ private:
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
-    bool     handleInThread();
+    bool     handleInThread(bool force_thread=false);
 
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
@@ -69,7 +69,7 @@ private:
     void     initMergeTools(bool read_new_items = false);
 
     void     applyGitCommandToFileTree(const QString& aCommand);
-    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr);
+    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread=false);
 
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 

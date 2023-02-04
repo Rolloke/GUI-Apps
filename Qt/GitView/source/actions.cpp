@@ -247,6 +247,8 @@ void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
                         if (item.indexOf("--") == 0)
                         {
                             option = item; // the git option
+                            QAction *sub_action = sub_menu->addAction(item.right(item.size()-2));
+                            sub_action->setEnabled(false);
                             continue;
                         }
                         bool selected = item.indexOf("*") == 0;
@@ -416,23 +418,37 @@ QStringList ActionList::getMenuStringList(git::Cmd::eCmd cmd) const
 
 void ActionList::setFlags(Cmd::eCmd cmd, uint flag, Flag set, Data::e data)
 {
-    uint fFlags = getFlags(cmd, data);
-    switch (set)
+    if (Data::is_flag(data))
     {
-        case Flag::remove:  fFlags &= ~flag; break;
-        case Flag::set:     fFlags |=  flag; break;
-        case Flag::replace: fFlags  =  flag; break;
-    }
+        uint fFlags = getFlags(cmd, data);
+        switch (set)
+        {
+            case Flag::remove:  fFlags &= ~flag; break;
+            case Flag::set:     fFlags |=  flag; break;
+            case Flag::replace: fFlags  =  flag; break;
+        }
 
-    setDataVariant(cmd, data, QVariant(fFlags));
+        setDataVariant(cmd, data, QVariant(fFlags));
+    }
+    else
+    {
+        TRACE(Logger::to_browser, "ActionList::setFlags %s data is not a flag", Data::name(data));
+    }
 }
 
 uint ActionList::getFlags(Cmd::eCmd cmd, Data::e data) const
 {
-    QVariant fVariant = getDataVariant(cmd, data);
-    if (fVariant.isValid() && fVariant.canConvert<uint>())
+    if (Data::is_flag(data))
     {
-        return fVariant.toUInt();
+        QVariant fVariant = getDataVariant(cmd, data);
+        if (fVariant.isValid() && fVariant.canConvert<uint>())
+        {
+            return fVariant.toUInt();
+        }
+    }
+    else
+    {
+        TRACE(Logger::to_browser, "ActionList::getFlags %s data is not a flag", Data::name(data));
     }
     return 0;
 }
@@ -464,4 +480,55 @@ QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
         }
     }
     return QVariant();
+}
+
+#define RETURN_NAME(NAME) case NAME: return #NAME
+
+const char* ActionList::Data::name(e _e)
+{
+    switch (_e)
+    {
+    RETURN_NAME(MsgBoxText);
+    RETURN_NAME(PostCmdAction);
+    RETURN_NAME(IconPath);
+    RETURN_NAME(Flags);
+    RETURN_NAME(CmdAddOn);
+    RETURN_NAME(Cmd);
+    RETURN_NAME(StatusFlagEnable);
+    RETURN_NAME(StatusFlagDisable);
+    RETURN_NAME(MenuStrings);
+    RETURN_NAME(ListSize);
+    }
+    return "invalid";
+}
+
+bool ActionList::Data::is_flag(e _e)
+{
+    switch (_e)
+    {
+    case Flags: case StatusFlagEnable: case StatusFlagDisable: return true;
+    default: return false;
+    }
+}
+
+const char* ActionList::Flags::name(e _e)
+{
+    switch (_e)
+    {
+    RETURN_NAME(BuiltIn);
+    RETURN_NAME(Modified);
+    RETURN_NAME(Custom);
+    RETURN_NAME(Branch);
+    RETURN_NAME(History);
+    RETURN_NAME(DiffOrMergeTool);
+    RETURN_NAME(CallInThread);
+    RETURN_NAME(NotVariableGitCmd);
+    RETURN_NAME(FunctionCmd);
+    RETURN_NAME(Stash);
+    RETURN_NAME(DiffCmd);
+    RETURN_NAME(DependsOnStaged);
+    RETURN_NAME(StashCmdOption);
+    RETURN_NAME(MenuOption);
+    }
+    return "invalid";
 }
