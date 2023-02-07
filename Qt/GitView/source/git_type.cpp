@@ -95,7 +95,8 @@ QString Cmd::toString(const ePostAction anAction)
     case ParseBranchListText:   return QObject::tr("Parse Branch List Text");
     case ParseStashListText:    return QObject::tr("Parse Stash List Text");
     case ParseBlameText:        return QObject::tr("Parse Blame Text");
-    case UpdateRootItemStatus:  return QObject::tr("Update Repository Status");
+    case UpdateRootItemStatus:  return QObject::tr("Update Root Item Status");
+    case UpdateRepository:      return QObject::tr("Update Repository Status");
     }
     return "";
 }

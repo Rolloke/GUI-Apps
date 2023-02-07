@@ -1266,6 +1266,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
     mActions.setFlags(Cmd::Push, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateRepository);
     mActions.setFlags(Cmd::Pull, ActionList::Flags::CallInThread, Flag::set);
     mActions.setFlags(Cmd::Pull, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Fetch          , tr("Fetch"), Cmd::getCommand(Cmd::Fetch)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
@@ -1359,7 +1360,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::RemoveGitFolder, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::RemoveGitFolder, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateGitStatus()));
+    connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::UpdateGitStatus, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
@@ -1691,10 +1692,22 @@ void MainWindow::performCustomGitActionSettings()
         }
         mExternalIconFiles = edit_custom_git_actions.mExternalIconFiles;
     }
-    for (unsigned int i=0; i<mToolBars.size(); ++i)
+    for (unsigned int i=0; i<Cmd::mToolbars.size(); ++i)
     {
-        mToolBars[i]->clear();
-        mActions.fillToolbar(*mToolBars[i], Cmd::mToolbars[i]);
+        if (i < mToolBars.size())
+        {
+            mToolBars[i]->clear();
+            mActions.fillToolbar(*mToolBars[i], Cmd::mToolbars[i]);
+        }
+        else
+        {
+            QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
+            mToolBars.push_back(pTB);
+            mActions.fillToolbar(*mToolBars[i], Cmd::mToolbars[i]);
+            pTB->setObjectName(Cmd::mToolbarNames[i]);
+            pTB->setIconSize(QSize(24,24));
+            addToolBar(Qt::TopToolBarArea, pTB);
+        }
     }
 }
 

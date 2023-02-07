@@ -164,7 +164,7 @@ Q_SIGNALS:
     void doWork(int, QVariant);
 
 private Q_SLOTS:
-    void updateGitStatus();
+    void updateRepositoryStatus(bool append=false);
     void textBrowserChanged();
 
     void on_btnStoreText_clicked();

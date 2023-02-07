@@ -77,9 +77,10 @@ private Q_SLOTS:
     void on_tableViewVarious_clicked(const QModelIndex &index);
     void enableButtons(std::uint32_t aBtnFlag);
     void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
+    void on_tableViewVarious_customContextMenuRequested(const QPoint &pos);
     void on_btnLoadIcons_clicked();
-
     void on_btnHelp_clicked();
+
 
 private:
     void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");
@@ -89,7 +90,7 @@ private:
     const QString& iconCheck(bool check);
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
     QString getVariousListHeader(VariousListIndex::e aIndex);
-    void set_tooltip(QAction*, const QString&);
+    QAction *set_tooltip(QAction*, const QString&);
     git::Cmd::eCmd getCommand(int aRow);
     std::uint32_t get_toolbar_index(std::uint32_t offset, std::uint32_t index);
 
