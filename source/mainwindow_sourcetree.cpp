@@ -433,7 +433,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 }
 
 
-void MainWindow::updateGitStatus()
+void MainWindow::updateRepositoryStatus(bool append)
 {
     QString   file_name;
     if (mContextMenuSourceTreeItem)
@@ -453,7 +453,10 @@ void MainWindow::updateGitStatus()
 
     if (selected_item != -1)
     {
-        on_btnCloseText_clicked();
+        if (!append)
+        {
+            on_btnCloseText_clicked();
+        }
         auto item = ui->treeSource->topLevelItem(selected_item);
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
@@ -810,6 +813,10 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
         updateTreeItemStatus(mContextMenuSourceTreeItem);
         break;
     case Cmd::UpdateRootItemStatus:
+        mContextMenuSourceTreeItem = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem);
+        updateRepositoryStatus(true);
+        break;
+    case Cmd::UpdateRepository:
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
         break;
     case Cmd::ParseHistoryText:

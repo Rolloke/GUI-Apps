@@ -16,6 +16,7 @@
 #include <QWhatsThis>
 
 /// TODO: create and delete custom toolbars
+/// test it, index is not correct
 
 using namespace git;
 
@@ -78,6 +79,8 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->tableViewVarious->horizontalHeader()->setSectionResizeMode(VariousHeader::Icon, QHeaderView::Fixed);
     ui->tableViewVarious->horizontalHeader()->setSectionResizeMode(VariousHeader::Name, QHeaderView::Stretch);
 
+    ui->tableViewVarious->setContextMenuPolicy(Qt::CustomContextMenu);
+
     const QString button_enabled_style = "QPushButton:enabled { background-color:skyblue;}";
     ui->btnToLeft->setStyleSheet(button_enabled_style);
     ui->btnToRight->setStyleSheet(button_enabled_style);
@@ -87,7 +90,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->btnDelete->setStyleSheet(button_enabled_style);
 
     enableButtons(0);
-    for (int i=0; i< VariousListIndex::Size; ++i)
+    for (uint i=0; i< VariousListIndex::Toolbar1+Cmd::mToolbars.size(); ++i)
     {
         ui->comboBoxVarious->addItem(getVariousListHeader(static_cast<VariousListIndex::e>(i)));
     }
@@ -168,7 +171,7 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
         initListMergeTool();
         break;
     default:
-        if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::LastCmds))
+        if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::Toolbar1 + Cmd::mToolbarNames.size()))
         {
             ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
             initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
@@ -564,7 +567,8 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {Cmd::ParseHistoryText    , tr("Parse command result for history view")},
         {Cmd::ParseBranchListText , tr("Parse command result for branch view")},
         {Cmd::ParseBlameText      , tr("Parse command result for git blame")},
-        {Cmd::UpdateRootItemStatus, tr("Update repository status after command execution")}
+        {Cmd::UpdateRootItemStatus, tr("Update root item status after command execution")},
+        {Cmd::UpdateRepository    , tr("Update repository after command execution")}
     };
 
     for (auto& part : post_action_parts)
@@ -772,10 +776,11 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     }
 }
 
-void CustomGitActions::set_tooltip(QAction* action, const QString& tool_tip)
+QAction* CustomGitActions::set_tooltip(QAction* action, const QString& tool_tip)
 {
     action->setParent(this->parent());
     action->setStatusTip(tool_tip);
+    return action;
 }
 
 ActionItemModel::ActionItemModel(int rows, int columns, QObject *parent) :
@@ -827,7 +832,6 @@ Qt::ItemFlags VariousItemModel::flags(const QModelIndex &index) const
     return  fFlags;
 }
 
-
 void CustomGitActions::on_btnLoadIcons_clicked()
 {
     const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select Icon Files"), mExternalIconFiles);
@@ -838,9 +842,48 @@ void CustomGitActions::on_btnLoadIcons_clicked()
     }
 }
 
-
 void CustomGitActions::on_btnHelp_clicked()
 {
     QWhatsThis::enterWhatsThisMode();
+}
+
+void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu menu(this);
+
+    const QAction* create_toolbar = set_tooltip(menu.addAction(tr("Create Toolbar...")), tr("Create a custom toolbar"));
+    QAction* delete_toolbar {nullptr};
+    const int combo_index = ui->comboBoxVarious->currentIndex();
+    if (combo_index > VariousListIndex::Toolbar2)
+    {
+        delete_toolbar = menu.addAction(tr("Delete %1").arg(getVariousListHeader(static_cast<VariousListIndex::e>(combo_index))));
+        set_tooltip(delete_toolbar, tr("Delete selected custom toolbar"));
+    }
+    menu.addSeparator();
+    set_tooltip(menu.addAction(tr("Cancel")), tr("No Action"));
+
+    const QAction* selected_item = menu.exec(ui->tableViewVarious->mapToGlobal(pos) + menu_offset);
+    if (selected_item == create_toolbar)
+    {
+        bool ok {false};
+        const QString toolbar_name = QInputDialog::getText(0, create_toolbar->toolTip(),
+            tr("Enter name for a custom toolbar"), QLineEdit::Normal, tr("Toolbar Custom"), &ok);
+        if (ok)
+        {
+            Cmd::mToolbars.push_back({Cmd::Separator});
+            Cmd::mToolbarNames.push_back(toolbar_name);
+            ui->comboBoxVarious->addItem(toolbar_name);
+            ui->comboBoxVarious->setCurrentIndex(ui->comboBoxVarious->count() - 1);
+        }
+    }
+
+    if (selected_item == delete_toolbar)
+    {
+        int index = combo_index - VariousListIndex::Toolbar1;
+        ui->comboBoxVarious->removeItem(combo_index);
+        ui->comboBoxVarious->setCurrentIndex(ui->comboBoxVarious->count() - 1);
+        Cmd::mToolbars.erase(Cmd::mToolbars.begin()+index);
+        Cmd::mToolbarNames.erase(Cmd::mToolbarNames.begin()+index);
+    }
 }
 
