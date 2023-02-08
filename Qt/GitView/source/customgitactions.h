@@ -18,25 +18,34 @@ class CustomGitActions : public QDialog
 {
     Q_OBJECT
 
-    struct VariousListIndex { enum e
+    struct VariousListIndex
     {
-        Icons,
-        ExternalIcons,
-        MergeTool,
-        MenuSrcTree,
-        MenuEmptySrcTree,
-        MenuGraphicView,
-        MenuCodeBrowser,
-        MenuHistoryTree,
-        MenuBranchTree,
-        MenuStashTree,
-        MenuFindTextTree,
-        Toolbar1,
-        Toolbar2,
-        Size,
-        FirstCmds=MenuSrcTree,
-        LastCmds=Toolbar2
-    };};
+        enum e
+        {
+            Icons,
+            ExternalIcons,
+            MergeTool,
+            MenuSrcTree,
+            MenuEmptySrcTree,
+            MenuGraphicView,
+            MenuCodeBrowser,
+            MenuHistoryTree,
+            MenuBranchTree,
+            MenuStashTree,
+            MenuFindTextTree,
+            Toolbar1,
+            Toolbar2,
+            Size,
+            FirstCmds=MenuSrcTree,
+            FirstMenu=MenuSrcTree,
+            LastMenu=MenuFindTextTree,
+            LastCmds=Toolbar2
+        };
+        static bool isIcon(int);
+        static bool isMenu(int);
+        static bool isToolbar(int);
+        static bool isCustomToolbar(int);
+    };
     std::vector<double> mActionListColumnWidth;
 
     struct VariousHeader { enum e
@@ -63,7 +72,7 @@ protected:
 
 Q_SIGNALS:
     void initCustomAction(QAction* fAction);
-
+    void removeCustomToolBar(const QString&);
 private Q_SLOTS:
     void on_comboBoxVarious_currentIndexChanged(int index);
     void on_ActionTableListItemChanged ( QStandardItem * item );
@@ -92,7 +101,8 @@ private:
     QString getVariousListHeader(VariousListIndex::e aIndex);
     QAction *set_tooltip(QAction*, const QString&);
     git::Cmd::eCmd getCommand(int aRow);
-    std::uint32_t get_toolbar_index(std::uint32_t offset, std::uint32_t index);
+    std::uint32_t get_toolbar_index(std::uint32_t index) const;
+    std::uint32_t getVariousListSize() const;
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
