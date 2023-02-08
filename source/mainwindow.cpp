@@ -64,6 +64,8 @@ constexpr char sIconPath[] = "IconPath";
 constexpr char sMenuStringList[] = "MenuStringList";
 constexpr char sShortcut[] = "Shortcut";
 constexpr char sModified[] = "Modified";
+constexpr char Cmd__mToolbars[] = "Cmd__mToolbars_%1";
+constexpr char Cmd__mToolbarName[] = "Cmd__mToolbarName_%1";
 } // namespace config
 
 
@@ -213,11 +215,18 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-        /// TODO: read number of tool bars
-        for (std::uint32_t i=0; i<Cmd::mToolbars.size(); ++i)
+        uint fToolBars = Cmd::mToolbars.size();
+        LOAD_STR(fSettings, fToolBars, toInt);
+        for (std::uint32_t i=0; i<fToolBars; ++i)
         {
+            if (i >= Cmd::mToolbars.size())
+            {
+                Cmd::mToolbars.push_back({});
+                QString name = tr(config::Cmd__mToolbarName).arg(i);
+                Cmd::mToolbarNames.push_back(fSettings.value(name).toString());
+            }
             auto& tool_bar = Cmd::mToolbars[i];
-            QString name = tr("Cmd__mToolbars_%1").arg(i);
+            QString name = tr(config::Cmd__mToolbars).arg(i);
             LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
         }
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
@@ -263,14 +272,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
     {
-        const auto& fToolbar = Cmd::mToolbars[i];
-        QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
-        mToolBars.push_back(pTB);
-        mActions.fillToolbar(*pTB, fToolbar);
-        pTB->setObjectName(Cmd::mToolbarNames[i]);
-        pTB->setIconSize(QSize(24,24));
-        addToolBar(Qt::TopToolBarArea, pTB);
-        if (i==0) insertToolBarBreak(pTB);
+        addCmdToolBar(i);
     }
 #else
     for (const auto& fToolbar : Cmd::mToolbars)
@@ -549,12 +551,15 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-        /// TODO: write number of tool bars
-        for (std::uint32_t i=0; i<Cmd::mToolbars.size(); ++i)
+        uint fToolBars = Cmd::mToolbars.size();
+        STORE_STR(fSettings, fToolBars);
+        for (std::uint32_t i=0; i<fToolBars; ++i)
         {
             auto& tool_bar = Cmd::mToolbars[i];
-            QString name = tr("Cmd__mToolbars_%1").arg(i);
+            QString name = tr(config::Cmd__mToolbars).arg(i);
             STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
+            name = tr(config::Cmd__mToolbarName).arg(i);
+            fSettings.setValue(name, Cmd::mToolbarNames[i]);
         }
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
 
@@ -789,6 +794,32 @@ void MainWindow::createDockWindows()
     ui->verticalLayout_2 = nullptr;
     ui->verticalLayoutForTextBrowser = nullptr;
     ui->verticalLayoutForTreeView = nullptr;
+}
+
+void MainWindow::addCmdToolBar(int i)
+{
+    const auto& fToolbar = Cmd::mToolbars[i];
+    QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
+    mToolBars.push_back(pTB);
+    mActions.fillToolbar(*pTB, fToolbar);
+    pTB->setObjectName(Cmd::mToolbarNames[i]);
+    pTB->setIconSize(QSize(24,24));
+    addToolBar(Qt::TopToolBarArea, pTB);
+    if (i==0) insertToolBarBreak(pTB);
+}
+
+void MainWindow::removeCmdToolBar(const QString& toolbar_name)
+{
+    for (uint i=0; i<mToolBars.size(); ++i)
+    {
+        if (mToolBars[i]->windowTitle() == toolbar_name)
+        {
+            removeToolBar(mToolBars[i]);
+            delete mToolBars[i];
+            mToolBars.erase(mToolBars.begin()+i);
+            break;
+        }
+    }
 }
 
 void MainWindow::clone_code_browser()
@@ -1684,6 +1715,8 @@ void MainWindow::performCustomGitActionSettings()
     edit_custom_git_actions.mExternalIconFiles = mExternalIconFiles;
 
     connect(&edit_custom_git_actions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
+    connect(&edit_custom_git_actions, SIGNAL(removeCustomToolBar(QString)), this, SLOT(removeCmdToolBar(QString)));
+
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {
         if (edit_custom_git_actions.isMergeToolsChanged())
@@ -1692,7 +1725,8 @@ void MainWindow::performCustomGitActionSettings()
         }
         mExternalIconFiles = edit_custom_git_actions.mExternalIconFiles;
     }
-    for (unsigned int i=0; i<Cmd::mToolbars.size(); ++i)
+
+    for (unsigned int i=0; i < Cmd::mToolbars.size(); ++i)
     {
         if (i < mToolBars.size())
         {
@@ -1701,12 +1735,7 @@ void MainWindow::performCustomGitActionSettings()
         }
         else
         {
-            QToolBar*pTB = new QToolBar(Cmd::mToolbarNames[i]);
-            mToolBars.push_back(pTB);
-            mActions.fillToolbar(*mToolBars[i], Cmd::mToolbars[i]);
-            pTB->setObjectName(Cmd::mToolbarNames[i]);
-            pTB->setIconSize(QSize(24,24));
-            addToolBar(Qt::TopToolBarArea, pTB);
+            addCmdToolBar(i);
         }
     }
 }

@@ -249,6 +249,9 @@ private Q_SLOTS:
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
+#ifdef DOCKED_VIEWS
+    void removeCmdToolBar(const QString &toolbar_name);
+#endif
 #ifdef WEB_ENGINE
     void show_web_view(bool );
 #endif
@@ -256,6 +259,7 @@ private:
 
 #ifdef DOCKED_VIEWS
     void     createDockWindows();
+    void     addCmdToolBar(int i);
     bool     mDockedWidgetMinMaxButtons;
     QDockWidget*          m_first_cloned = nullptr;
 #endif

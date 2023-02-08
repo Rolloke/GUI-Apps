@@ -15,10 +15,30 @@
 #include <QInputDialog>
 #include <QWhatsThis>
 
-/// TODO: create and delete custom toolbars
-/// test it, index is not correct
+/// TODO: test create and delete custom toolbars
 
 using namespace git;
+
+
+bool CustomGitActions::VariousListIndex::isIcon(int index)
+{
+    return index == Icons || index == ExternalIcons;
+}
+
+bool CustomGitActions::VariousListIndex::isMenu(int index)
+{
+    return isBetween(index, FirstMenu, LastMenu);
+}
+
+bool CustomGitActions::VariousListIndex::isToolbar(int index)
+{
+    return index >= Toolbar1;
+}
+
+bool CustomGitActions::VariousListIndex::isCustomToolbar(int index)
+{
+    return index > Toolbar2;
+}
 
 CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
     QDialog(parent)
@@ -90,7 +110,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->btnDelete->setStyleSheet(button_enabled_style);
 
     enableButtons(0);
-    for (uint i=0; i< VariousListIndex::Toolbar1+Cmd::mToolbars.size(); ++i)
+    for (uint i = 0; i < getVariousListSize(); ++i)
     {
         ui->comboBoxVarious->addItem(getVariousListHeader(static_cast<VariousListIndex::e>(i)));
     }
@@ -171,7 +191,7 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
         initListMergeTool();
         break;
     default:
-        if (isBetween(fIndex, VariousListIndex::FirstCmds, VariousListIndex::Toolbar1 + Cmd::mToolbarNames.size()))
+        if (isBetween(fIndex, VariousListIndex::FirstCmds, getVariousListSize() - 1))
         {
             ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
             initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
@@ -198,15 +218,20 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     case VariousListIndex::ExternalIcons:
         break;
     default:
-        return Cmd::mToolbars[get_toolbar_index(VariousListIndex::Toolbar1, aIndex)];
+        return Cmd::mToolbars[get_toolbar_index(aIndex)];
     }
     return fDummy;
 }
 
-std::uint32_t CustomGitActions::get_toolbar_index(std::uint32_t offset, std::uint32_t index)
+std::uint32_t CustomGitActions::get_toolbar_index(std::uint32_t index) const
 {
-    index -= offset;
+    index -= VariousListIndex::Toolbar1;
     return (index < Cmd::mToolbars.size()) ? index : 0;
+}
+
+std::uint32_t CustomGitActions::getVariousListSize() const
+{
+    return VariousListIndex::Toolbar1 + Cmd::mToolbars.size();
 }
 
 QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
@@ -224,7 +249,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
     case VariousListIndex::MenuFindTextTree:    return tr("Context Menu Find Text");
     case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
-    default: return Cmd::mToolbarNames[get_toolbar_index(VariousListIndex::Toolbar1, aIndex)];
+    default: return Cmd::mToolbarNames[get_toolbar_index(aIndex)];
     }
     return "";
 }
@@ -374,7 +399,7 @@ git::Cmd::eCmd CustomGitActions::getCommand(int aRow)
 
 void CustomGitActions::on_btnToLeft_clicked()
 {
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
+    if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
     {
         int fIconRow   = ui->tableViewVarious->currentIndex().row();
         int fActionRow = ui->tableViewActions->currentIndex().row();
@@ -455,13 +480,13 @@ void CustomGitActions::on_btnDelete_clicked()
     {
         mListModelActions->removeRow(fRow);
         mActionList.deleteAction(fCmd);
-        for (int i = VariousListIndex::FirstCmds; i < VariousListIndex::Toolbar2; ++i)
+        for (uint i = VariousListIndex::FirstCmds; i < getVariousListSize(); ++i)
         {
             auto& fVector = getCmdVector(static_cast<VariousListIndex::e>(i));
             auto fFound = std::find_if(fVector.begin(), fVector.end(), [fCmd](Cmd::eCmd fI) {return fI == fCmd;});
             if (fFound != fVector.end() )
             {
-                if (i == ui->comboBoxVarious->currentIndex())
+                if (i == static_cast<uint>(ui->comboBoxVarious->currentIndex()))
                 {
                     on_comboBoxVarious_currentIndexChanged(i);
                     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(static_cast<int>(fVector.size()-1), ActionsTable::ID), QItemSelectionModel::Select);
@@ -475,7 +500,7 @@ void CustomGitActions::on_btnDelete_clicked()
 
 void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index */)
 {
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
+    if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
     {
         enableButtons(Btn::Add|Btn::Delete);
     }
@@ -488,7 +513,7 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 {
     ui->btnAdd->setEnabled(false);
-    if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Icons || ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons)
+    if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
     {
         enableButtons(Btn::Left|(ui->comboBoxVarious->currentIndex() == VariousListIndex::ExternalIcons ? Btn::Load : 0));
     }
@@ -854,7 +879,7 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
     const QAction* create_toolbar = set_tooltip(menu.addAction(tr("Create Toolbar...")), tr("Create a custom toolbar"));
     QAction* delete_toolbar {nullptr};
     const int combo_index = ui->comboBoxVarious->currentIndex();
-    if (combo_index > VariousListIndex::Toolbar2)
+    if (VariousListIndex::isCustomToolbar(combo_index))
     {
         delete_toolbar = menu.addAction(tr("Delete %1").arg(getVariousListHeader(static_cast<VariousListIndex::e>(combo_index))));
         set_tooltip(delete_toolbar, tr("Delete selected custom toolbar"));
@@ -877,11 +902,12 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
         }
     }
 
-    if (selected_item == delete_toolbar)
+    if (selected_item == delete_toolbar && VariousListIndex::isCustomToolbar(combo_index))
     {
-        int index = combo_index - VariousListIndex::Toolbar1;
+        int index = get_toolbar_index(combo_index);
         ui->comboBoxVarious->removeItem(combo_index);
         ui->comboBoxVarious->setCurrentIndex(ui->comboBoxVarious->count() - 1);
+        Q_EMIT removeCustomToolBar(Cmd::mToolbarNames[index]);
         Cmd::mToolbars.erase(Cmd::mToolbars.begin()+index);
         Cmd::mToolbarNames.erase(Cmd::mToolbarNames.begin()+index);
     }
