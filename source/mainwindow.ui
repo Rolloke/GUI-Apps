@@ -133,7 +133,7 @@
             </item>
             <item>
              <property name="text">
-              <string>Show unknown</string>
+              <string>Show untracked</string>
              </property>
             </item>
             <item>

@@ -45,6 +45,7 @@ class CustomGitActions : public QDialog
         static bool isMenu(int);
         static bool isToolbar(int);
         static bool isCustomToolbar(int);
+        static e    cast(int);
     };
     std::vector<double> mActionListColumnWidth;
 
