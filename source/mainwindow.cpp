@@ -1297,7 +1297,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
     mActions.setFlags(Cmd::Push, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateRepository);
+    mActions.setCustomCommandPostAction(Cmd::Pull, Cmd::UpdateRepository);
     mActions.setFlags(Cmd::Pull, ActionList::Flags::CallInThread, Flag::set);
     mActions.setFlags(Cmd::Pull, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Fetch          , tr("Fetch"), Cmd::getCommand(Cmd::Fetch)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
