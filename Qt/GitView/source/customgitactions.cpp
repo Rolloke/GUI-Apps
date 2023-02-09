@@ -40,6 +40,11 @@ bool CustomGitActions::VariousListIndex::isCustomToolbar(int index)
     return index > Toolbar2;
 }
 
+CustomGitActions::VariousListIndex::e CustomGitActions::VariousListIndex::cast(int index)
+{
+    return static_cast<CustomGitActions::VariousListIndex::e>(index);
+}
+
 CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
     QDialog(parent)
 ,   ui(new Ui::CustomGitActions)
@@ -112,7 +117,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     enableButtons(0);
     for (uint i = 0; i < getVariousListSize(); ++i)
     {
-        ui->comboBoxVarious->addItem(getVariousListHeader(static_cast<VariousListIndex::e>(i)));
+        ui->comboBoxVarious->addItem(getVariousListHeader(VariousListIndex::cast(i)));
     }
     on_comboBoxVarious_currentIndexChanged(VariousListIndex::Icons);
 }
@@ -176,7 +181,7 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
 void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
 {
     const auto icon_tooltip = tr("Apply selected icon in right view to selected command entry in left view");
-    auto fIndex = static_cast<VariousListIndex::e>(aIndex);
+    auto fIndex = VariousListIndex::cast(aIndex);
     switch (fIndex)
     {
     case VariousListIndex::Icons:
@@ -415,7 +420,7 @@ void CustomGitActions::on_btnToLeft_clicked()
     else
     {
         int fIconRow     = ui->tableViewVarious->currentIndex().row();
-        auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
+        auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
         fCmdVector.erase(fCmdVector.begin()+fIconRow);
         int fSelected = static_cast<int>(fCmdVector.size()-1);
         on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
@@ -428,7 +433,7 @@ void CustomGitActions::on_btnToRight_clicked()
 {
     int fActionRow = ui->tableViewActions->currentIndex().row();
     Cmd::eCmd fCmd = getCommand(fActionRow);
-    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
     fCmdVector.push_back(fCmd);
     int fSelected = static_cast<int>(fCmdVector.size()-1);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
@@ -440,7 +445,7 @@ void CustomGitActions::on_btnMoveUp_clicked()
 {
     int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow-1;
-    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fMovedRow, 0), QItemSelectionModel::Select);
@@ -451,7 +456,7 @@ void CustomGitActions::on_btnMoveDown_clicked()
 {
     int fRow      = ui->tableViewVarious->currentIndex().row();
     int fMovedRow = fRow+1;
-    auto& fCmdVector = getCmdVector(static_cast<VariousListIndex::e>(ui->comboBoxVarious->currentIndex()));
+    auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
     std::swap(fCmdVector[fRow], fCmdVector[fMovedRow]);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
     ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fMovedRow, 0), QItemSelectionModel::Select);
@@ -482,7 +487,7 @@ void CustomGitActions::on_btnDelete_clicked()
         mActionList.deleteAction(fCmd);
         for (uint i = VariousListIndex::FirstCmds; i < getVariousListSize(); ++i)
         {
-            auto& fVector = getCmdVector(static_cast<VariousListIndex::e>(i));
+            auto& fVector = getCmdVector(VariousListIndex::cast(i));
             auto fFound = std::find_if(fVector.begin(), fVector.end(), [fCmd](Cmd::eCmd fI) {return fI == fCmd;});
             if (fFound != fVector.end() )
             {
@@ -881,7 +886,7 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
     const int combo_index = ui->comboBoxVarious->currentIndex();
     if (VariousListIndex::isCustomToolbar(combo_index))
     {
-        delete_toolbar = menu.addAction(tr("Delete %1").arg(getVariousListHeader(static_cast<VariousListIndex::e>(combo_index))));
+        delete_toolbar = menu.addAction(tr("Delete %1").arg(getVariousListHeader(VariousListIndex::cast(combo_index))));
         set_tooltip(delete_toolbar, tr("Delete selected custom toolbar"));
     }
     menu.addSeparator();
