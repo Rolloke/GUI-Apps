@@ -596,6 +596,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {Cmd::UpdateItemStatus    , tr("Update item status after command execution")},
         {Cmd::ParseHistoryText    , tr("Parse command result for history view")},
         {Cmd::ParseBranchListText , tr("Parse command result for branch view")},
+        {Cmd::ParseStashListText  , tr("Parse command result for stash view")},
         {Cmd::ParseBlameText      , tr("Parse command result for git blame")},
         {Cmd::UpdateRootItemStatus, tr("Update root item status after command execution")},
         {Cmd::UpdateRepository    , tr("Update repository after command execution")}
