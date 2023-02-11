@@ -100,7 +100,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         aParentItem->setHidden(false);
                         fResult = true;
                         break;
-                    case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::DetermineGitMergeTools:
+                    case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::ApplyCommand: case Work::DetermineGitMergeTools: case Work::AsynchroneousCommand:
                         /// NOTE: not handled here
                         break;
 
@@ -114,30 +114,31 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     const Type fType(fVariant.toUInt());
                     switch (mCurrentTask)
                     {
-                        case Work::ApplyGitCommand:
-                        {
-                            fSource = "\"" + fSource + "\"";
-                            QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                            appendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
-                            fResult = fCmd.size() != 0;
-                        }   break;
-                        case Work::ShowAllFiles:
-                            aParentItem->setHidden(false);
-                            fResult = true;
-                            break;
-                        case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
-                        case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged:
-                            fResult = getShowTypeResult(fType);
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::ShowSelected:
-                            fResult = aParentItem->isSelected();
-                            aParentItem->setHidden(!fResult); // true means visible
-                            break;
-                        case Work::None: case Work::Last: case Work::DetermineGitMergeTools:
-                        case Work::InsertPathFromCommandString:
-                            /// NOTE: not handled here
-                            return false;
+                    case Work::ApplyGitCommand:
+                    case Work::ApplyCommand:
+                    {
+                        fSource = "\"" + fSource + "\"";
+                        QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
+                        appendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
+                        fResult = fCmd.size() != 0;
+                    }   break;
+                    case Work::ShowAllFiles:
+                        aParentItem->setHidden(false);
+                        fResult = true;
+                        break;
+                    case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
+                    case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged:
+                        fResult = getShowTypeResult(fType);
+                        aParentItem->setHidden(!fResult); // true means visible
+                        break;
+                    case Work::ShowSelected:
+                        fResult = aParentItem->isSelected();
+                        aParentItem->setHidden(!fResult); // true means visible
+                        break;
+                    case Work::None: case Work::Last: case Work::DetermineGitMergeTools:
+                    case Work::InsertPathFromCommandString: case Work::AsynchroneousCommand:
+                        /// NOTE: not handled here
+                        return false;
                     }
                 }
             }
@@ -186,10 +187,10 @@ bool MainWindow::getShowTypeResult(const Type& fType)
     case Work::ShowStaged:
         fResult = fType.is(Type::GitStaged);
         break;
-        case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::DetermineGitMergeTools:
-        case Work::ShowAllFiles: case Work::InsertPathFromCommandString: case Work::ShowSelected:
-            /// NOTE: not handled here
-            break;
+    case Work::None: case Work::Last: case Work::ApplyGitCommand: case Work::ApplyCommand: case Work::DetermineGitMergeTools:
+    case Work::ShowAllFiles: case Work::InsertPathFromCommandString: case Work::ShowSelected: case Work::AsynchroneousCommand:
+        /// NOTE: not handled here
+        break;
     }
     return fResult;
 }
@@ -565,10 +566,27 @@ void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
     {
         on_btnCloseText_clicked();
         mGitCommand = aCommand;
-        mCurrentTask = Work::ApplyGitCommand;
         QString fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
         QString ftlp = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
         fFilePath = fFilePath.mid(ftlp.length()+1);
+        if (mGitCommand.startsWith("git"))
+        {
+            mCurrentTask = Work::ApplyGitCommand;
+        }
+        else
+        {
+            mCurrentTask = Work::ApplyCommand;
+            bool path_pos = mGitCommand.contains("%2");
+            bool root_pos = mGitCommand.contains("%3");
+            if (root_pos)
+            {
+                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1", path_pos ? fFilePath : "", ftlp);
+            }
+            else if (path_pos)
+            {
+                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1", fFilePath);
+            }
+        }
         iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuSourceTreeItem);
         mGitCommand.clear();
         mCurrentTask = Work::None;
@@ -783,8 +801,11 @@ void MainWindow::perform_custom_command()
         }
         else if (mContextMenuSourceTreeItem)
         {
-            QString option = get_git_command_option(type, command_flags, variant_list);
-            git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
+            if (git_command.startsWith("git"))
+            {
+                QString option = get_git_command_option(type, command_flags, variant_list);
+                git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
+            }
 
             int fResult = callMessageBox(message_box_text, type.type_name(), mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName), type.is(Type::File));
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)

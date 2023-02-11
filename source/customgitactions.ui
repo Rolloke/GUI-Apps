@@ -43,7 +43,6 @@
 &lt;li&gt;%2 [optional] may represent the the selected file or folder &lt;/li&gt;
 &lt;/ul&gt;
 &lt;li&gt;git &amp;lt;command&amp;gt; %1 %2 &lt;/li&gt;
-&lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;%1 is used for command options depending on case &lt;/li&gt;
 &lt;ul&gt;
@@ -51,6 +50,15 @@
 &lt;li&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;
 &lt;/ul&gt;
 &lt;li&gt;%2 [optional] may represents the the selected file or folder &lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;custom_command [%1] [%2] [%3] &lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;%1 represents the selected file or folder &lt;/li&gt;
+&lt;li&gt;%2 represents the folder above&lt;/li&gt;
+&lt;li&gt;%3 represents the root folder of the repository&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;/ul&gt;
 &lt;/ul&gt;
 &lt;li&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
 &lt;li&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;

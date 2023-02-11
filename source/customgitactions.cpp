@@ -692,10 +692,11 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 
     QList<s_action_commands> action_commands =
     {
-        {ActionList::Flags::Branch      , tr("Branch command")           , tr("The git command is called in branch view context") },
-        {ActionList::Flags::History     , tr("History command")          , tr("The git command is called in history view context")},
-        {ActionList::Flags::Stash       , tr("Stash command")            , tr("The git command is called in stash view context")},
-        {ActionList::Flags::CallInThread, tr("Invoke command unattached"), tr("The git command is called without blocking the program")}
+        {ActionList::Flags::Branch       , tr("Branch command")           , tr("The git command is called in branch view context") },
+        {ActionList::Flags::History      , tr("History command")          , tr("The git command is called in history view context")},
+        {ActionList::Flags::Stash        , tr("Stash command")            , tr("The git command is called in stash view context")},
+        {ActionList::Flags::CallInThread , tr("Invoke command unattached"), tr("The git command is called without blocking the program")},
+        {ActionList::Flags::Asynchroneous, tr("Unattached instant output"), tr("The git command is called without blocking the program with instant output")}
     };
 
     bool custom_enabled = (flags & ActionList::Flags::Custom) || mExperimental;

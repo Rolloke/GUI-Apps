@@ -484,9 +484,9 @@ QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
 
 #define RETURN_NAME(NAME) case NAME: return #NAME
 
-const char* ActionList::Data::name(e _e)
+const char* ActionList::Data::name(e eData)
 {
-    switch (_e)
+    switch (eData)
     {
     RETURN_NAME(MsgBoxText);
     RETURN_NAME(PostCmdAction);
@@ -502,18 +502,18 @@ const char* ActionList::Data::name(e _e)
     return "invalid";
 }
 
-bool ActionList::Data::is_flag(e _e)
+bool ActionList::Data::is_flag(e eData)
 {
-    switch (_e)
+    switch (eData)
     {
     case Flags: case StatusFlagEnable: case StatusFlagDisable: return true;
     default: return false;
     }
 }
 
-const char* ActionList::Flags::name(e _e)
+const char* ActionList::Flags::name(e eFlag)
 {
-    switch (_e)
+    switch (eFlag)
     {
     RETURN_NAME(BuiltIn);
     RETURN_NAME(Modified);
@@ -529,6 +529,7 @@ const char* ActionList::Flags::name(e _e)
     RETURN_NAME(DependsOnStaged);
     RETURN_NAME(StashCmdOption);
     RETURN_NAME(MenuOption);
+    RETURN_NAME(Asynchroneous);
     }
     return "invalid";
 }

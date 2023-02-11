@@ -11,6 +11,7 @@
 #include <QTreeWidgetItem>
 #include <QSemaphore>
 #include <QTime>
+#include <QMutex>
 #include <boost/optional.hpp>
 
 
@@ -55,12 +56,13 @@ private:
     QDir     initDir(const QString& aDirPath, int aFilter=0);
     void     initCodecCombo();
 
-    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext="");
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
     void     open_file(const QString& file_path, boost::optional<int> line_number = {});
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
     bool     handleInThread(bool force_thread=false);
+    void     on_emit_temp_file_path(const QString& path);
 
     void     updateTreeItemStatus(QTreeWidgetItem * aItem);
     void     getSelectedTreeItem();
@@ -88,26 +90,32 @@ private:
 
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
+    void     timerEvent(QTimerEvent* event) override;
 
-    struct Work { enum e
+    struct Work
     {
-        None,
-        DetermineGitMergeTools,
-        ApplyGitCommand,
-        InsertPathFromCommandString,
-        ShowAllFiles,
-        ShowAllGitActions,
-        ShowModified,
-        ShowDeleted,
-        ShowAdded,
-        ShowUnknown,
-        ShowStaged,
-        ShowUnMerged,
-        ShowSelected,
-        // NOTE: further git items are added here
-        // show out of sync...
-        Last
-    }; };
+        enum e
+        {
+            None,
+            DetermineGitMergeTools,
+            ApplyGitCommand,
+            ApplyCommand,
+            AsynchroneousCommand,
+            InsertPathFromCommandString,
+            ShowAllFiles,
+            ShowAllGitActions,
+            ShowModified,
+            ShowDeleted,
+            ShowAdded,
+            ShowUnknown,
+            ShowStaged,
+            ShowUnMerged,
+            ShowSelected,
+            // NOTE: further git items are added here
+            // show out of sync...
+            Last
+        };
+    };
 
     enum class Message
     {
@@ -304,6 +312,10 @@ private:
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;
     QLabel *m_status_column_label;
+
+    QMutex  mTempFileMutex;
+    QString mTempFilePath;
+    QFile   mTempFile;
 
 };
 

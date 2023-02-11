@@ -91,6 +91,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mFindFsrc("fsrc")
     , mCompare2Items("meld %1 %2")
     , mWarnOpenFileSize(1024*1024) // 1MB
+    , m_status_line_label(nullptr)
+    , m_status_column_label(nullptr)
 {
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
@@ -117,6 +119,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+    startTimer(100);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
@@ -980,6 +983,17 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
                 work_result.setValue(result_string);
             }
             break;
+        case Work::AsynchroneousCommand:
+            if (aData.isValid() && aData.type() == QVariant::String)
+            {
+                QString result_string;
+                int result = execute(aData.toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+                if (result != NoError)
+                {
+                    Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
+                }
+            }
+        break;
         default:
             break;
     }
@@ -993,53 +1007,57 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
 
     switch(static_cast<Work::e>(aMsg))
     {
-        case Work::DetermineGitMergeTools:
-            if (aData.isValid() && aData.type() == QVariant::String)
+    case Work::DetermineGitMergeTools:
+        if (aData.isValid() && aData.type() == QVariant::String)
+        {
+            bool new_item_added = false;
+            auto result_list = aData.toString().split("\n");
+            for (auto&entry : result_list)
             {
-                bool new_item_added = false;
-                auto result_list = aData.toString().split("\n");
-                for (auto&entry : result_list)
+                if (entry.size() > 1) // text with two tabs marks an entry
                 {
-                    if (entry.size() > 1) // text with two tabs marks an entry
+                    if (entry[0] == '\t' && entry[1] == '\t')
                     {
-                        if (entry[0] == '\t' && entry[1] == '\t')
+                        entry = entry.trimmed();
+                        int pos = entry.indexOf(".");
+                        if (pos != -1)
                         {
-                            entry = entry.trimmed();
-                            int pos = entry.indexOf(".");
-                            if (pos != -1)
-                            {
-                                entry = entry.left(pos);
-                            }
-                            if (!mMergeTools.contains(entry))
-                            {
-                                mMergeTools[entry] = true;
-                                new_item_added = true;
-                            }
+                            entry = entry.left(pos);
+                        }
+                        if (!mMergeTools.contains(entry))
+                        {
+                            mMergeTools[entry] = true;
+                            new_item_added = true;
                         }
                     }
-                    if (entry.contains("not currently available"))
-                    {
-                        break;
-                    }
                 }
-                if (new_item_added)
+                if (entry.contains("not currently available"))
                 {
-                    initMergeTools();
+                    break;
                 }
             }
-            break;
-        case Work::ApplyGitCommand:
-            if (aData.isValid() && aData.type() == QVariant::String)
+            if (new_item_added)
             {
-                appendTextToBrowser(aData.toString());
-                if (mWorkerAction)
-                {
-                    const QVariantList variant_list  = mWorkerAction->data().toList();
-                    perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt());
-                    mWorkerAction = nullptr;
-                }
-            } break;
-        default:  break;
+                initMergeTools();
+            }
+        }
+        break;
+    case Work::ApplyGitCommand:
+        if (aData.isValid() && aData.type() == QVariant::String)
+        {
+            appendTextToBrowser(aData.toString());
+            if (mWorkerAction)
+            {
+                const QVariantList variant_list  = mWorkerAction->data().toList();
+                perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt());
+                mWorkerAction = nullptr;
+            }
+        } break;
+    case Work::AsynchroneousCommand:
+        mWorkerAction = nullptr;
+        break;
+
+    default:  break;
     }
 }
 
@@ -1154,7 +1172,12 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     if (handleInThread(force_thread))
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-        mWorker.doWork(Work::ApplyGitCommand, QVariant(fCommand));
+        Work::e work_command { mCurrentTask };
+        if (mWorkerAction && mWorkerAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
+        {
+            work_command = Work::AsynchroneousCommand;
+        }
+        mWorker.doWork(work_command, QVariant(fCommand));
     }
     else
     {
@@ -1309,6 +1332,7 @@ void MainWindow::initContextMenuActions()
     const QString stash_message = tr("Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::Stash          , tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Stash, stash_message);
+    mActions.setCustomCommandPostAction(Cmd::Stash, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::Stash, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::Stash, ActionList::Flags::Stash, Flag::set);
     connect(mActions.createAction(Cmd::StashShow      , tr("Show stash"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
@@ -1316,12 +1340,15 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::StashShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::StashPush,       tr("Stash push"),  Cmd::getCommand(Cmd::StashPush)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashPush, stash_message);
+    mActions.setCustomCommandPostAction(Cmd::StashPush, Cmd::UpdateRootItemStatus);
     mActions.setCmdAddOn(Cmd::StashPush, " -- ");
     mActions.setFlags(Cmd::StashPush, ActionList::Flags::StashCmdOption|ActionList::Flags::Stash, Flag::set);
     mActions.setFlags(Cmd::StashPush, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop))  ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    mActions.setCustomCommandPostAction(Cmd::StashPop, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::StashPop, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    mActions.setCustomCommandPostAction(Cmd::StashApply, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::StashApply, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
@@ -1370,6 +1397,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::BranchShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
+    mActions.setCustomCommandPostAction(Cmd::MoveOrRename, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
     mActions.setFlags(Cmd::MoveOrRename, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::MoveOrRename, Type::GitUnTracked, Flag::set, ActionList::Data::StatusFlagDisable);
@@ -1652,13 +1680,51 @@ void MainWindow::delete_file_open_extension()
 
 bool MainWindow::handleInThread(bool force_thread)
 {
-    const QAction *fAction = qobject_cast<QAction *>(sender());
-    if (fAction && !mWorker.isBusy())
+    const QAction *action = qobject_cast<QAction *>(sender());
+    if (action && !mWorker.isBusy())
     {
-        mWorkerAction = fAction;
-        return (fAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::CallInThread) != 0;
+        const uint flags = action->data().toList()[ActionList::Data::Flags].toUInt();
+        if ((flags & (ActionList::Flags::CallInThread|ActionList::Flags::Asynchroneous)) != 0)
+        {
+            mWorkerAction = action;
+            return true;
+        }
+        return false;
     }
     return force_thread && !mWorker.isBusy();
+}
+
+void MainWindow::on_emit_temp_file_path(const QString& path)
+{
+    QMutexLocker lock(&mTempFileMutex);
+    mTempFilePath = path;
+}
+
+void MainWindow::timerEvent(QTimerEvent * /* event */)
+{
+    if (mTempFile.isOpen())
+    {
+        QByteArray array = mTempFile.readLine();
+        appendTextToBrowser(array, true);
+        ui->textBrowser->moveCursor(QTextCursor::End);
+
+        QMutexLocker lock(&mTempFileMutex);
+        if (mTempFilePath.isEmpty())
+        {
+            lock.unlock();
+            mTempFile.close();
+        }
+    }
+    else
+    {
+        QMutexLocker lock(&mTempFileMutex);
+        if (mTempFilePath.size())
+        {
+            mTempFile.setFileName(mTempFilePath);
+            lock.unlock();
+            mTempFile.open(QFile::ReadOnly|QFile::ExistingOnly|QFile::Text);
+        }
+    }
 }
 
 void MainWindow::expand_tree_items()
