@@ -21,8 +21,8 @@ public:
     struct Data
     {
         enum e { MsgBoxText, PostCmdAction, IconPath, Flags, CmdAddOn, Cmd, StatusFlagEnable, StatusFlagDisable, MenuStrings, ListSize };
-        static const char* name(e _e);
-        static bool is_flag(e _e);
+        static const char* name(e eData);
+        static bool is_flag(e eData);
 
     };
     struct Flags
@@ -41,8 +41,9 @@ public:
                  DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
                  StashCmdOption    = 0x1000, /// option for stash command
                  MenuOption        = 0x2000, /// option selected by Toolbutton menu
-                           };
-        static const char* name(e _e);
+                 Asynchroneous     = 0x4000, /// CallInThread with asynchroneous answer
+                 };
+        static const char* name(e eFlag);
     };
 
     typedef std::map<git::Cmd::eCmd,  QPointer<QAction>>     tActionMap;

@@ -235,7 +235,13 @@ QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const 
     return new_child_item;
 }
 
-int execute(const QString& command, QString& aResultText, bool hide)
+/// @brief executes a system command and returns result string
+/// @param command the command to be executed
+/// @param aResultText result of the command
+/// @param hide hides the command console (only windows)
+/// @param emit_file_path emits the temp file path to gather result asynchroneously
+/// @returns success of command execution (0 = success, !0 = error)
+int execute(const QString& command, QString& aResultText, bool hide, boost::function<void (const QString &)> emit_file_path)
 {
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
     QString fTempResultFileNameAndPath = fTemp.path();
@@ -243,6 +249,11 @@ int execute(const QString& command, QString& aResultText, bool hide)
 #ifdef __linux__
     system_cmd += " 2>&1 ";
 #endif
+
+    if (emit_file_path)
+    {
+        emit_file_path(fTempResultFileNameAndPath);
+    }
 
 #ifdef USE_ShellExecute
     system_cmd = "/C " + system_cmd;
@@ -262,6 +273,13 @@ int execute(const QString& command, QString& aResultText, bool hide)
     }
 #endif
 #endif
+
+    if (emit_file_path)
+    {
+        usleep(150);
+        emit_file_path("");
+        return fResult;
+    }
 
     std::ostringstream fStringStream;
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());

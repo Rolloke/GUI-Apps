@@ -7,6 +7,7 @@
 #include <functional>
 #include <QFile>
 #include <QObject>
+#include <boost/function.hpp>
 
 
 extern QPoint menu_offset;
@@ -51,7 +52,7 @@ enum error
     NoError = 0
 };
 
-int execute(const QString& command, QString& aResultText, bool hide=false);
+int execute(const QString& command, QString& aResultText, bool hide=true, boost::function<void (const QString &)> emit_file_path = {});
 
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, bool aIsFile = true, bool aEditText=true);
