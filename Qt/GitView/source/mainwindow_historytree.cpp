@@ -58,7 +58,7 @@ void MainWindow::call_git_history_diff_command()
             }
             else
             {
-                applyGitCommandToFileTree(command);
+                applyCommandToFileTree(command);
             }
             if (variant_list[ActionList::Data::PostCmdAction].toUInt() == Cmd::UpdateItemStatus)
             {

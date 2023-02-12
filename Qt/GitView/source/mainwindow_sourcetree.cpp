@@ -560,14 +560,14 @@ void MainWindow::getSelectedTreeItem()
     }
 }
 
-void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
+void  MainWindow::applyCommandToFileTree(const QString& aCommand)
 {
     if (mContextMenuSourceTreeItem)
     {
         on_btnCloseText_clicked();
         mGitCommand = aCommand;
-        QString fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
-        QString ftlp = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
+        QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
+        const QString ftlp      = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
         fFilePath = fFilePath.mid(ftlp.length()+1);
         if (mGitCommand.startsWith("git"))
         {
@@ -576,13 +576,21 @@ void  MainWindow::applyGitCommandToFileTree(const QString& aCommand)
         else
         {
             mCurrentTask = Work::ApplyCommand;
-            bool path_pos = mGitCommand.contains("%2");
-            bool root_pos = mGitCommand.contains("%3");
-            if (root_pos)
+            bool path_contained   = mGitCommand.contains("%2");
+            bool set_current_path = mGitCommand.contains("#2");
+            bool root_contained   = mGitCommand.contains("%3");
+            if (set_current_path)
             {
-                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1", path_pos ? fFilePath : "", ftlp);
+                QDir::setCurrent(ftlp + "/" + fFilePath);
+                mGitCommand.replace("#2", "");
+                fFilePath.clear();
             }
-            else if (path_pos)
+            if (root_contained)
+            {
+                const auto path = path_contained ? fFilePath : "";
+                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1").arg(path).arg(ftlp);
+            }
+            else if (path_contained)
             {
                 mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1", fFilePath);
             }
@@ -810,7 +818,7 @@ void MainWindow::perform_custom_command()
             int fResult = callMessageBox(message_box_text, type.type_name(), mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName), type.is(Type::File));
             if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
             {
-                applyGitCommandToFileTree(git_command);
+                applyCommandToFileTree(git_command);
             }
         }
         else
@@ -953,7 +961,8 @@ void MainWindow::deleteFileOrFolder()
             if (fType.is(Type::Folder))
             {
                 QDir dir;
-                result = dir.rmdir(fItemPath);
+                dir.setPath(fItemPath);
+                result = dir.removeRecursively();
             }
             else
             {
