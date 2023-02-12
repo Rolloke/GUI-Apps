@@ -70,7 +70,7 @@ private:
     void     initContextMenuActions();
     void     initMergeTools(bool read_new_items = false);
 
-    void     applyGitCommandToFileTree(const QString& aCommand);
+    void     applyCommandToFileTree(const QString& aCommand);
     QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread=false);
 
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
