@@ -47,7 +47,7 @@ struct Cmd
         BranchListMerged,
         BranchListNotMerged,
         BranchCheckout,
-        BranchHistory,
+        DiffOfTwoBranches,
         CallMergeTool,
         StashShow,
         StashList,

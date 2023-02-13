@@ -27,10 +27,12 @@ public:
     QTreeWidgetItem * itemFromIndex(const QModelIndex &index) const;
 
 Q_SIGNALS:
+    void insertFileNames(QTreeWidgetItem* parent, int child, int second_child=-1);
 
 public Q_SLOTS:
 
    void clear();
+   void diff_of_two_branches();
 
 private:
     QTreeWidgetItem* mSelectedItem;

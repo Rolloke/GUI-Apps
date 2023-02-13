@@ -87,6 +87,8 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
     return items_inserted;
 }
 
+
+
 void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)
 {
     mSelectedItem = itemAt(pos);

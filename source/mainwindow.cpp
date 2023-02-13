@@ -158,6 +158,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), ui->textBrowser, SLOT(set_show_line_numbers(bool)));
     connect(ui->treeHistory, SIGNAL(send_history(QStringList)), ui->graphicsView, SLOT(insert_history(QStringList)));
     connect(ui->treeHistory, SIGNAL(reset_history()), ui->graphicsView, SLOT(clear()));
+    connect(ui->treeBranches, SIGNAL(insertFileNames(QTreeWidgetItem*,int,int)), ui->treeHistory, SLOT(insertFileNames(QTreeWidgetItem*,int,int)));
 
     /// add status labels
     m_status_line_label = new QLabel("");
@@ -1388,10 +1389,9 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchCheckout, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
-    connect(mActions.createAction(Cmd::BranchHistory, tr("History Branch"), Cmd::getCommand(Cmd::BranchHistory)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    mActions.setCustomCommandPostAction(Cmd::BranchHistory, Cmd::ParseHistoryText);
-    mActions.setFlags(Cmd::BranchHistory, ActionList::Flags::NotVariableGitCmd, Flag::set);
-    mActions.setFlags(Cmd::BranchHistory, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Diff between Branches"), Cmd::getCommand(Cmd::DiffOfTwoBranches)), SIGNAL(triggered()), ui->treeBranches, SLOT(diff_of_two_branches()));
+    mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
+    mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setFlags(Cmd::BranchShow, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
