@@ -336,7 +336,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
     auto child_item    = parent->child(child);
     if (child_item && !child_item->isHidden())
     {
-        bool diff_over_one_step = second_child == -1;
+        const bool diff_over_one_step = second_child == -1;
         Type type(child_item->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
         if ((!child_item->childCount() || !diff_over_one_step) && !type.is(Type::File))
         {
@@ -349,7 +349,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
             if (second_item)
             {
                 git_cmd = tr("git diff --name-only %1 %2").
-                          arg(second_item->data( History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
+                          arg(second_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
                               child_item-> data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
             else

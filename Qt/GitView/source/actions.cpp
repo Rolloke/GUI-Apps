@@ -103,7 +103,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::BranchDelete]            = resource+"edit-delete.png";
     action_icons[Cmd::BranchShow]              = resource+"preferences-system-privacy.png";
     action_icons[Cmd::BranchCheckout]          = resource+"emblem-default.png";
-    action_icons[Cmd::BranchHistory]           = resource+"document-open-recent.png";
+    action_icons[Cmd::DiffOfTwoBranches]       = resource+"document-open-recent.png";
     action_icons[Cmd::Show]                    = resource+"edit-find.png";
 
     action_icons[Cmd::ExpandTreeItems]         = resource+"svn-update.svg";
