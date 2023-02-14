@@ -56,6 +56,10 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 ,   mMergeToolsState(aMergeTools.size())
 {
     ui->setupUi(this);
+    QSizeF the_size = size();
+    the_size *= 1.5;
+    resize(the_size.width(), the_size.height());
+
     for (int i=0; i<mMergeTools.size(); ++i)
     {
         mMergeToolsState.setBit(i, (mMergeTools.begin() + i).value());
@@ -96,7 +100,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, ActionsTable::ID), QItemSelectionModel::SelectCurrent);
 
     const int various_width = ui->tableViewVarious->rect().width() - ui->tableViewVarious->verticalScrollBar()->sizeHint().width();
-    const int icon_width = INT(0.15 * various_width);
+    const int icon_width = INT(0.11 * various_width);
     mListModelVarious = new VariousItemModel(0, VariousHeader::Size, this);
     ui->tableViewVarious->setModel(mListModelVarious);
     ui->tableViewVarious->setColumnWidth(VariousHeader::Icon, icon_width);

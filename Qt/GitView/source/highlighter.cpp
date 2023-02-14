@@ -57,7 +57,7 @@
 #include <QSettings>
 #include <QDir>
 
-const QString Highlighter::mDefault {"git"};
+const QString Highlighter::mDefault {txt::git};
 
 namespace
 {
