@@ -100,6 +100,7 @@ private:
             DetermineGitMergeTools,
             ApplyGitCommand,
             ApplyCommand,
+            ApplyCommandRecursive,
             AsynchroneousCommand,
             InsertPathFromCommandString,
             ShowAllFiles,

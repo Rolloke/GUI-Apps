@@ -9,6 +9,15 @@
 #include <QObject>
 #include <boost/function.hpp>
 
+namespace txt
+{
+   extern const char git[];
+   extern const char New[];
+   extern const char currentpath_id[];
+   extern const char recursivecmd_id[];
+   extern const char invalid[];
+}
+
 
 extern QPoint menu_offset;
 

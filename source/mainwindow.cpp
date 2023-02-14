@@ -247,7 +247,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
                 auto* fAction = mActions.getAction(fCmd);
                 if (!fAction)
                 {
-                    fAction = mActions.createAction(fCmd, "new", "git");
+                    fAction = mActions.createAction(fCmd, txt::New, txt::git);
                 }
                 fAction->setText(fSettings.value(config::sName).toString());
                 fAction->setToolTip(fSettings.value(config::sName).toString());
@@ -971,32 +971,33 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
     switch(static_cast<Work::e>(aWork))
     {
-        case Work::DetermineGitMergeTools:
-        case Work::ApplyGitCommand:
-            if (aData.isValid() && aData.type() == QVariant::String)
+    case Work::DetermineGitMergeTools:
+    case Work::ApplyGitCommand:
+    case Work::ApplyCommand:
+        if (aData.isValid() && aData.type() == QVariant::String)
+        {
+            QString result_string;
+            int result = execute(aData.toString().toStdString().c_str(), result_string, true);
+            if (result != NoError)
             {
-                QString result_string;
-                int result = execute(aData.toString().toStdString().c_str(), result_string, true);
-                if (result != NoError)
-                {
-                    Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
-                }
-                work_result.setValue(result_string);
+                Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
             }
-            break;
-        case Work::AsynchroneousCommand:
-            if (aData.isValid() && aData.type() == QVariant::String)
-            {
-                QString result_string;
-                int result = execute(aData.toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
-                if (result != NoError)
-                {
-                    Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
-                }
-            }
+            work_result.setValue(result_string);
+        }
         break;
-        default:
-            break;
+    case Work::AsynchroneousCommand:
+        if (aData.isValid() && aData.type() == QVariant::String)
+        {
+            QString result_string;
+            int result = execute(aData.toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+            if (result != NoError)
+            {
+                Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
+            }
+        }
+        break;
+    default:
+        break;
     }
     return work_result;
 }
@@ -1044,6 +1045,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
         }
         break;
     case Work::ApplyGitCommand:
+    case Work::ApplyCommand:
         if (aData.isValid() && aData.type() == QVariant::String)
         {
             appendTextToBrowser(aData.toString());

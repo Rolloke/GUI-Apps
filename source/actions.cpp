@@ -499,7 +499,7 @@ const char* ActionList::Data::name(e eData)
     RETURN_NAME(MenuStrings);
     RETURN_NAME(ListSize);
     }
-    return "invalid";
+    return txt::invalid;
 }
 
 bool ActionList::Data::is_flag(e eData)
@@ -531,5 +531,5 @@ const char* ActionList::Flags::name(e eFlag)
     RETURN_NAME(MenuOption);
     RETURN_NAME(Asynchroneous);
     }
-    return "invalid";
+    return txt::invalid;
 }

@@ -58,7 +58,9 @@
 &lt;ul&gt;
 &lt;li&gt;%1 may represent the selected file or folder &lt;/li&gt;
 &lt;li&gt;%2 may represent the folder above selected file&lt;/li&gt;
-&lt;li&gt;#2 sets current working dir the folder above selected file&lt;/li&gt;
+&lt;li&gt;#2 sets current working dir to folder above selected file&lt;/li&gt;
+&lt;li&gt;#r executes command recursve for selected folder content&lt;br&gt;
+    &lt;b&gt;may lead to time consuming process&lt;/b&gt;&lt;/li&gt;
 &lt;li&gt;%3 may represent the root folder of the repository&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
@@ -252,7 +254,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>220</width>
+         <width>240</width>
          <height>0</height>
         </size>
        </property>
@@ -278,7 +280,7 @@ Contextmenu entries or Toolbar entries</string>
        </property>
        <property name="minimumSize">
         <size>
-         <width>220</width>
+         <width>240</width>
          <height>0</height>
         </size>
        </property>
@@ -345,7 +347,7 @@ Contextmenu entries or Toolbar entries</string>
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>240</width>
          <height>0</height>
         </size>
        </property>

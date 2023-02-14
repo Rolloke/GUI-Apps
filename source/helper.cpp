@@ -25,6 +25,16 @@
 #include <shellapi.h>
 #endif
 
+
+namespace txt
+{
+   const char git[]             = "git";
+   const char New[]             = "new";
+   const char currentpath_id[]  = "#2";
+   const char recursivecmd_id[] = "#r";
+   const char invalid[]         = "invalid";
+}
+
 QPoint menu_offset(5, 0);
 
 QString getSettingsName(const QString& aItemName)
