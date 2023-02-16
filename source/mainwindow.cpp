@@ -1157,7 +1157,9 @@ void MainWindow::compare_items(QString& item1, QString& item2)
 {
     QString command = tr(mCompare2Items.toStdString().c_str()).arg(item1, item2);
     QString result;
+    mCurrentTask = Work::ApplyCommand;
     applyGitCommandToFilePath({}, command, result, true);
+    mCurrentTask = Work::None;
 }
 
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread)
@@ -1706,9 +1708,18 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
 {
     if (mTempFile.isOpen())
     {
-        QByteArray array = mTempFile.readLine();
-        appendTextToBrowser(array, true);
-        ui->textBrowser->moveCursor(QTextCursor::End);
+        int size {0};
+        do
+        {
+            QByteArray array = mTempFile.readLine();
+            size = array.size();
+            if (size)
+            {
+                appendTextToBrowser(array, true);
+                ui->textBrowser->moveCursor(QTextCursor::End);
+            }
+        }
+        while (size > 0);
 
         QMutexLocker lock(&mTempFileMutex);
         if (mTempFilePath.isEmpty())
