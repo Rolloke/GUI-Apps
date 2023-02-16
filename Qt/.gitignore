@@ -5,3 +5,6 @@ MenuTest/
 build*/
 *.aps
 *.qm
+CMakeCache.txt
+CMakeFiles/
+.vscode/

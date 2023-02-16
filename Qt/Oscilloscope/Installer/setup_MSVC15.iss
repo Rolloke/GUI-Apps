@@ -9,7 +9,7 @@
 #define QtDllFolder "C:\Qt\5.9.9\msvc2017_64\bin"
 #define QtPluginFolder "C:\Qt\5.9.9\msvc2017_64\plugins"
 #define VisualStudio17="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE"
-
+                    
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -17,12 +17,12 @@
 AppId={{9A751E76-F6DC-4759-AED9-087BA26FF7EF}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-AppVerName={#MyAppName} {#MyAppVersion} based on Qt5 compiled for MSVC17
+AppVerName={#MyAppName} {#MyAppVersion} based on Qt5 compiled for MSVC15
 AppPublisher={#MyAppPublisher}
 AppComments="Audio Soundcard Oscilloscope"
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=./build_MSVC17/
+OutputDir=./build_MSVC15/
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes

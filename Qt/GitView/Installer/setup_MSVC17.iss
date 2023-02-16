@@ -60,7 +60,6 @@ Source: "{#QtDllFolder}/Qt5Positioning.dll"; DestDir: "{app}"; Flags: ignorevers
 Source: "{#VisualStudio17}\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#VisualStudio17}\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#VisualStudio17}\api-ms-win-crt-runtime-l1-1-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#QtPluginFolder}/audio/qtaudio_windows.dll"; DestDir: "{app}/plugins/audio"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/iconengines/qsvgicon.dll"; DestDir: "{app}/plugins/iconengines"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qwebp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion
 Source: "{#QtPluginFolder}/imageformats/qwbmp.dll"; DestDir: "{app}/plugins/imageformats"; Flags: ignoreversion

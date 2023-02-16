@@ -8,16 +8,17 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-unix:QMAKE_CXXFLAGS += -std=c++17
+TARGET = BackupTool
+TEMPLATE = app
 
+CONFIG += c++17
+unix:QMAKE_CXXFLAGS += -std=c++17
+unix:QMAKE_LFLAGS   = -fuse-ld=gold
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
-
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
-TARGET = BackupTool
-TEMPLATE = app
 
 
 SOURCES += main.cpp\
