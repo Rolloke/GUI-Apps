@@ -159,26 +159,39 @@ void CustomGitActions::resizeEvent(QResizeEvent *event)
 
 void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow)
 {
-    const QAction* fAction = aItem.second;
-    QString fCommand = fAction->statusTip();
-    if (fCommand.size())
+    const QAction* action = aItem.second;
+    QString command = action->statusTip();
+    if (command.size())
     {
-        uint fFlag = mActionList.getFlags(static_cast<Cmd::eCmd>(aItem.first), ActionList::Data::Flags);
-        bool function_cmd = (fFlag & ActionList::Flags::FunctionCmd);
-        bool modified_cmd = (fFlag & ActionList::Flags::Modified);
-        if (aRow == -1) aRow = mListModelActions->rowCount();
+        uint flag = mActionList.getFlags(static_cast<Cmd::eCmd>(aItem.first), ActionList::Data::Flags);
+        bool function_cmd = (flag & ActionList::Flags::FunctionCmd);
+        bool modified_cmd = (flag & ActionList::Flags::Modified);
+        if (aRow == -1)
+        {
+            int table_rows = mListModelActions->rowCount();
+            for (int current_row = 0; current_row < table_rows; ++current_row)
+            {
+                QString sid = mListModelActions->data(mListModelActions->index(current_row, ActionsTable::ID)).toString();
+                int id = atoi(sid.toStdString().c_str());
+                if (id > aItem.first)
+                {
+                    aRow = current_row;
+                    break;
+                }
+            }
+        }
         mListModelActions->insertRows(aRow, 1, QModelIndex());
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::ID)        , tr("%1").arg(aItem.first) + (modified_cmd ? " *" : ""), Qt::DisplayRole);
-        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Command)   , fCommand, Qt::EditRole);
-        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Name)      , fAction->toolTip(), Qt::EditRole);
-        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Shortcut)  , fAction->shortcut().toString(), Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Command)   , command, Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Name)      , action->toolTip(), Qt::EditRole);
+        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Shortcut)  , action->shortcut().toString(), Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::MsgBoxText), function_cmd ? "" : mActionList.getCustomCommandMessageBoxText(static_cast<Cmd::eCmd>(aItem.first)), Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Icon)      , QIcon(mActionList.getIconPath(static_cast<Cmd::eCmd>(aItem.first))), Qt::DecorationRole);
         ++aRow;
     }
     else
     {
-        TRACE(Logger::warning, "no command text for %s", fAction->toolTip().toStdString().c_str());
+        TRACE(Logger::warning, "no command text for %s", action->toolTip().toStdString().c_str());
     }
 }
 
@@ -469,15 +482,22 @@ void CustomGitActions::on_btnMoveDown_clicked()
 
 void CustomGitActions::on_btnAdd_clicked()
 {
-    auto  fCmd    = mActionList.createNewID(Cmd::CustomCommand);
-    auto* fAction = mActionList.createAction(fCmd, tr("command name"), "git ");
-    if (fAction)
+    auto  cmd    = mActionList.createNewID(Cmd::CustomCommand);
+    auto* action = mActionList.createAction(cmd, tr("command name"), "git ");
+    if (action)
     {
-        int fRow = -1;
-        mActionList.setIconPath(fCmd, "://resource/24X24/window-close.png");
-        insertCmdAction(*mActionList.getList().find(fCmd), fRow);
-        mActionList.setFlags(fCmd, ActionList::Flags::Custom);
-        Q_EMIT initCustomAction(fAction);
+        int row = -1;
+        mActionList.setIconPath(cmd, "://resource/24X24/window-close.png");
+        insertCmdAction(*mActionList.getList().find(cmd), row);
+        if (row != -1)
+        {
+            --row; // decrease, it was increased in insertCmdAction
+            ui->tableViewActions->selectRow(row);
+            const auto index = mListModelActions->index(row, ActionsTable::ID);
+            ui->tableViewActions->scrollTo(index);
+        }
+        mActionList.setFlags(cmd, ActionList::Flags::Custom);
+        Q_EMIT initCustomAction(action);
     }
 }
 
@@ -509,13 +529,18 @@ void CustomGitActions::on_btnDelete_clicked()
 
 void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index */)
 {
+    const int row = ui->tableViewActions->currentIndex().row();
+    const Cmd::eCmd cmd   = getCommand(row);
+    if (!mActionList.hasAction(cmd)) return;
+    const uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
+
     if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
     {
-        enableButtons(Btn::Add|Btn::Delete);
+        enableButtons(Btn::Add|button);
     }
     else
     {
-        enableButtons(Btn::Add|Btn::Delete|Btn::Right);
+        enableButtons(Btn::Add|button|Btn::Right);
     }
 }
 
