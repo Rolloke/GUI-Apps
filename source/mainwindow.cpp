@@ -25,6 +25,7 @@
 #include <QStaticText>
 #include <QTextCodec>
 #include <QWhatsThis>
+#include <QFontDatabase>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -79,7 +80,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mActions(this)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
-    , mFontName("Courier")
     , mFileCopyMimeType("x-special/mate-copied-files")
     , mStylePath( "/opt/tools/git_view/style.qss")
     #ifdef __linux__
@@ -198,7 +198,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, mCompare2Items, toString);
     }
     fSettings.endGroup();
-    on_comboFindBox_currentIndexChanged(ui->comboFindBox->currentIndex());
+
+    comboFindBoxIndexChanged(ui->comboFindBox->currentIndex());
 
     fSettings.beginGroup(config::sGroupLogging);
     {
@@ -293,13 +294,18 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, Type::mShort, toBool);
         ui->ckShortState->setChecked(Type::mShort);
         {
-            LOAD_STR(fSettings, mFontName, toString);
-            QFont font;
-            font.setFamily(mFontName);
-            font.setFixedPitch(true);
-            font.setPointSize(10);
-            ui->textBrowser->setFont(font);
-            ui->tableBinaryView->setFont(font);
+            QFontDatabase font_db;
+            auto fonts = font_db.families();
+            for (const auto& font : fonts)
+            {
+                ui->comboFontName->addItem(font);
+            }
+            ui->comboFontName->setCurrentIndex(ui->comboFontName->findText("Courier", Qt::MatchContains));
+            LOAD_PTR(fSettings, ui->comboFontName, setCurrentText, currentText, toString);
+            LOAD_PTR(fSettings, ui->spinFontSize, setValue, value, toInt);
+            connect(ui->comboFontName, SIGNAL(currentIndexChanged(int)), this, SLOT(setFontForViews(int)));
+            connect(ui->spinFontSize, SIGNAL(valueChanged(int)), this, SLOT(setFontForViews(int)));
+            setFontForViews(0);
         }
         {
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
@@ -340,6 +346,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         {
             ui->comboAppStyle->setCurrentIndex(std::distance(keys.begin(), index));
         }
+        connect(ui->comboAppStyle, SIGNAL(currentTextChanged(QString)), this, SLOT(comboAppStyleTextChanged(QString)));
 
         LOAD_STR(fSettings, mStylePath, toString);
         bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
@@ -356,7 +363,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
-        on_comboAppStyle_currentTextChanged(ui->comboAppStyle->currentText());
+        comboAppStyleTextChanged(ui->comboAppStyle->currentText());
         on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
 
         auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
@@ -381,7 +388,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             restoreState(fWindowState);
         }
         showDockedWidget(ui->textBrowser);
-        on_comboTabPosition_currentIndexChanged(ui->comboTabPosition->currentIndex());
+        connect(ui->comboTabPosition, SIGNAL(currentIndexChanged(int)), this, SLOT(comboTabPositionIndexChanged(int)));
+        comboTabPositionIndexChanged(ui->comboTabPosition->currentIndex());
 #endif
     }
     fSettings.endGroup();
@@ -479,7 +487,8 @@ MainWindow::~MainWindow()
     {
         STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
         STORE_STR(fSettings,  Type::mShort);
-        STORE_STR(fSettings, mFontName);
+        STORE_PTR(fSettings, ui->comboFontName, currentText);
+        STORE_PTR(fSettings, ui->spinFontSize, value);
         {
             bool fDifferentEndian = CDisplayType::getDifferentEndian();
             STORE_STR(fSettings, fDifferentEndian);
@@ -783,6 +792,7 @@ void MainWindow::createDockWindows()
     }
     addToolBar(Qt::BottomToolBarArea, pTB);
 
+    connect(ui->comboFindBox, SIGNAL(currentIndexChanged(int)), this, SLOT(comboFindBoxIndexChanged(int)));
     // - remove obsolete layout
     // NOTE: regard future layout items, if any
     delete ui->topLayout;
@@ -1851,7 +1861,7 @@ void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
 #endif
 }
 
-void MainWindow::on_comboAppStyle_currentTextChanged(const QString &style)
+void MainWindow::comboAppStyleTextChanged(const QString &style)
 {
     QApplication::setStyle(QStyleFactory::create(style));
 }
@@ -1910,7 +1920,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     }
 }
 
-void MainWindow::on_comboFindBox_currentIndexChanged(int index)
+void MainWindow::comboFindBoxIndexChanged(int index)
 {
     auto find = static_cast<FindView>(index);
     if (find == FindView::Text)
@@ -2455,8 +2465,17 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
     ui->textBrowser->setTabStopWidth(width);
 }
 
-void MainWindow::on_comboTabPosition_currentIndexChanged(int index)
+void MainWindow::comboTabPositionIndexChanged(int index)
 {
     setTabPosition(Qt::RightDockWidgetArea, static_cast<QTabWidget::TabPosition>(index));
 }
 
+void MainWindow::setFontForViews(int)
+{
+    QFont font;
+    font.setFamily(ui->comboFontName->currentText());
+    font.setFixedPitch(true);
+    font.setPointSize(ui->spinFontSize->value());
+    ui->textBrowser->setFont(font);
+    ui->tableBinaryView->setFont(font);
+}

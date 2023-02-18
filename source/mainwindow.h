@@ -87,7 +87,6 @@ private:
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
     void     showDockedWidget(QWidget* widget, bool hide=false);
-
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
@@ -211,14 +210,15 @@ private Q_SLOTS:
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
     void on_btnFindX_clicked();
-    void on_comboFindBox_currentIndexChanged(int index);
+    void comboFindBoxIndexChanged(int index);
     void combo_triggered();
 
     void on_comboToolBarStyle_currentIndexChanged(int index);
-    void on_comboAppStyle_currentTextChanged(const QString &arg1);
+    void comboAppStyleTextChanged(const QString &arg1);
     void on_comboUserStyle_currentIndexChanged(int index);
     void on_spinTabulator_valueChanged(int width);
-    void on_comboTabPosition_currentIndexChanged(int index);
+    void comboTabPositionIndexChanged(int index);
+    void setFontForViews(int);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -254,7 +254,6 @@ private Q_SLOTS:
     void createBookmark();
     void showInformation();
     void compare_items(QString& item1, QString& item2);
-
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
@@ -288,7 +287,6 @@ private:
     QSharedPointer<MarkdownProxy>  m_markdown_proxy;
 #endif
 
-    QString               mFontName;
     QString               mFileCopyMimeType;
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
