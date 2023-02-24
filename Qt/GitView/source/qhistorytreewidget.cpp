@@ -358,21 +358,22 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                           arg(child_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
 
-
             if (type.is(Type::Branch))
             {
-                /// FIXME: is this possible with "git diff --name-only %1 %2 -- repository_path" ?
                 QString file_name = parent->text(History::Column::Filename);
-                file_name.replace("git -C ", "");
-                int pos = file_name.indexOf(" ");
+                int pos = file_name.indexOf("branch");
                 if (pos != -1)
                 {
                     file_name = file_name.left(pos);
                 }
-                /// TODO: validate: remove all but {path} from file_name -> "git -C {path} [-a]"
-                /// TODO: validate: git diff --name-only <commit>…​<commit> [--] {path}
-                git_cmd += " -- ";
-                git_cmd += file_name;
+                git_cmd.replace("git ", file_name);
+                file_name.replace("git -C ", "");
+
+                QTreeWidgetItem* branch_diffs = new QTreeWidgetItem(QStringList("Branch Difference for " + file_name));
+                addTopLevelItem(branch_diffs);
+
+                parent = branch_diffs;
+                child = 0;  // insert at top position
             }
             else
             {
