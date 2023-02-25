@@ -451,9 +451,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (on_btnCloseText_clicked())
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
 MainWindow::~MainWindow()
 {
-    on_btnCloseText_clicked();
     disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
     showDockedWidget(mBinaryValuesView.data(), true);
 
