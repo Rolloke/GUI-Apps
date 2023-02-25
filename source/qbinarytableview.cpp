@@ -814,7 +814,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                         structure.set_index(inserted_row, static_cast<int>(member));
                         TRACE(Logger::info, "inserted row: %d for %d of %s", inserted_row, member, structure.name.toStdString().c_str());
                     }
-                    /// TODO: update also parent struct, if member is > 0
+                    /// TODO: check update also parent struct, if member is > 0
                     if (member)
                     {
                         rows.insert(rows.end(), inserted_rows.begin(), inserted_rows.end());

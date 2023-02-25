@@ -86,7 +86,6 @@ private:
     void     copy_file(copy command);
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
-    void     showDockedWidget(QWidget* widget, bool hide=false);
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
@@ -219,6 +218,8 @@ private Q_SLOTS:
     void on_spinTabulator_valueChanged(int width);
     void comboTabPositionIndexChanged(int index);
     void setFontForViews(int);
+
+    void showDockedWidget(QWidget* widget, bool hide=false);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
