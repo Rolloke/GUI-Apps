@@ -89,6 +89,7 @@ private:
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
+    void     closeEvent(QCloseEvent *event);
 
     struct Work
     {
@@ -175,7 +176,7 @@ private Q_SLOTS:
     void textBrowserChanged();
 
     void on_btnStoreText_clicked();
-    void on_btnCloseText_clicked();
+    bool on_btnCloseText_clicked();
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);

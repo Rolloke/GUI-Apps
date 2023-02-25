@@ -101,7 +101,7 @@ void MainWindow::textBrowserChanged()
     set_widget_and_action_enabled(ui->btnStoreText, true);
 }
 
-void MainWindow::on_btnCloseText_clicked()
+bool MainWindow::on_btnCloseText_clicked()
 {
     if (ui->btnStoreText->isEnabled() && ui->labelFilePath->text().length() > 0)
     {
@@ -112,13 +112,13 @@ void MainWindow::on_btnCloseText_clicked()
         fSaveRequest.setDefaultButton(QMessageBox::Save);
         switch (fSaveRequest.exec())
         {
-            case QMessageBox::Save:
-                on_btnStoreText_clicked();
-                break;
-            case QMessageBox::Discard:
-                break;
-            case QMessageBox::Cancel:
-                return;
+        case QMessageBox::Save:
+            on_btnStoreText_clicked();
+            break;
+        case QMessageBox::Discard:
+            break;
+        case QMessageBox::Cancel:
+            return false;
         }
     }
     ui->textBrowser->reset();
@@ -138,6 +138,8 @@ void MainWindow::on_btnCloseText_clicked()
     {
         ui->graphicsView->clear();
     }
+
+    return true; // can close app
 }
 
 void MainWindow::updateSelectedLanguage(const QString& language)
