@@ -20,8 +20,7 @@ void QHistoryTreeWidget::clear()
     QTreeWidget::clear();
 }
 
-
-void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType)
+void QHistoryTreeWidget::initialize()
 {
     if (!mInitialized)
     {
@@ -30,6 +29,11 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
         header()->setStretchLastSection(false);
         mInitialized = true;
     }
+}
+
+void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVariant& aData, const QString& aFileName, uint aType)
+{
+    initialize();
     QVector<QStringList> fList;
     History::parse(fText, fList);
 
@@ -331,9 +335,10 @@ void QHistoryTreeWidget::insertFileNames()
     }
 }
 
-void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int second_child)
+void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child, int second_child)
 {
-    auto child_item    = parent->child(child);
+    initialize();
+    auto child_item    = parent_item->child(child);
     if (child_item && !child_item->isHidden())
     {
         const bool diff_over_one_step = second_child == -1;
@@ -344,7 +349,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
             {
                 second_child = child + 1;
             }
-            auto second_item = parent->child(second_child);
+            auto second_item = parent_item->child(second_child);
             QString git_cmd;
             if (second_item)
             {
@@ -358,26 +363,37 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                           arg(child_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             }
 
-
             if (type.is(Type::Branch))
             {
-                /// FIXME: is this possible with "git diff --name-only %1 %2 -- repository_path" ?
-                QString file_name = parent->text(History::Column::Filename);
-                file_name.replace("git -C ", "");
-                int pos = file_name.indexOf(" ");
+                QString file_name = parent_item->text(History::Column::Filename);
+                int pos = file_name.indexOf("branch");
                 if (pos != -1)
                 {
                     file_name = file_name.left(pos);
                 }
-                /// TODO: validate: remove all but {path} from file_name -> "git -C {path} [-a]"
-                /// TODO: validate: git diff --name-only <commit>…​<commit> [--] {path}
-                git_cmd += " -- ";
-                git_cmd += file_name;
+                git_cmd.replace("git ", file_name);
+
+                file_name.replace("git -C ", "");
+                auto tree_columns = QStringList(tr("Branch difference for repository %1").arg(file_name));
+                QTreeWidgetItem* branch_diffs {nullptr};
+                auto list = findItems(tree_columns[0], Qt::MatchExactly);
+                if (list.size())
+                {
+                    branch_diffs = list[0];
+                    child = branch_diffs->childCount();
+                }
+                else
+                {
+                    branch_diffs = new QTreeWidgetItem(tree_columns);
+                    addTopLevelItem(branch_diffs);
+                    child = 0;  // insert at top position
+                }
+                parent_item = branch_diffs;
             }
             else
             {
                 git_cmd += " -- ";
-                git_cmd += parent->text(History::Column::Filename);
+                git_cmd += parent_item->text(History::Column::Filename);
             }
 
             QString result_string;
@@ -388,7 +404,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                 {
                     QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_item->text(History::Column::Filename);
                     QTreeWidgetItem* new_child_item = new QTreeWidgetItem({compared_items});
-                    parent->insertChild(child, new_child_item);
+                    parent_item->insertChild(child, new_child_item);
                     for (int role_entry=0; role_entry < History::Entry::NoOfEntries; ++role_entry)
                     {
                         int role = History::role(static_cast<History::Entry::e>(role_entry));
@@ -417,6 +433,11 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent, int child, int
                     child_item->addChild(new QTreeWidgetItem({file_path}));
                 }
                 child_item->setData(History::Column::Commit, History::role(History::Entry::NoOfFiles), files.count());
+                if (type.is(Type::Branch))
+                {
+                    expandAll();
+                    Q_EMIT show_me(this);
+                }
             }
             else
             {

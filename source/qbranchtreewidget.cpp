@@ -7,11 +7,6 @@
 
 using namespace git;
 
-/// FIXME: validate diffs between branches and their files
-/// git diff --name-only %1 %2 -> %1 branch 1 commit, %2 branch 2 commit
-/// TODO: diff branches: git diff branch1...branch2
-/// History::parse()
-
 QBranchTreeWidget::QBranchTreeWidget(QWidget *parent) : QTreeWidget(parent)
 , mSelectedItem(nullptr)
 {
@@ -89,7 +84,7 @@ void QBranchTreeWidget::diff_of_two_branches()
         QTreeWidgetItem* parent = selected[0]->parent();
         int child1 = parent->indexOfChild(selected[0]);
         int child2 = parent->indexOfChild(selected[1]);
-        if (abs(child1 - child2) > 1)
+        if (abs(child1 - child2))
         {
             Q_EMIT insertFileNames(parent, child1, child2);
         }
