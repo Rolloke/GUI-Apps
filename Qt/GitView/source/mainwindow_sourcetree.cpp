@@ -321,7 +321,7 @@ void MainWindow::open_file_externally()
     }
 }
 
-void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number)
+void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number, bool reopen_file)
 {
     on_btnCloseText_clicked();
     const QFileInfo file_info(file_path);
@@ -370,21 +370,44 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
     if (file.open(QIODevice::ReadOnly))
     {
-        QWidget* widget_to_be_shown = ui->textBrowser;
+        const bool is_binary_file = qbinarytableview::is_binary(file);
+        /// TODO: open file in extra textBrowser
+
+        /// TODO: new extra text browser
+        /// - check all for save status
+        /// - check all on_btnCloseText_clicked for ui->textBrowser calls, when Additional Editors
+
+        if (ui->comboOpenNewEditor->currentIndex() != AdditionalEditor::None && !is_binary_file)
+        {
+            showDockedWidget(ui->textBrowser);
+        }
+
+        code_browser * text_browser = get_active_text_browser(file_path);
+        if (!text_browser && !is_binary_file)
+        {
+            text_browser = create_new_text_browser(file_path);
+            reopen_file = true;
+        }
+
+        QWidget* widget_to_be_shown = text_browser;
         ui->labelFilePath->setText(file_path);
-        ui->textBrowser->reset();
+        if (text_browser)
+        {
+            text_browser->set_file_path(file_path);
+            text_browser->reset();
+        }
         if (file_extension == "txt" && file_path.contains("CMakeLists.txt"))
         {
             file_extension = "cmake";
         }
-        if (qbinarytableview::is_binary(file))
+        if (is_binary_file)
         {
-            ui->textBrowser->setExtension("bin");
+            updateSelectedLanguage(tr("binary"));
             ui->tableBinaryView->set_binary_data(file.readAll());
             widget_to_be_shown = ui->tableBinaryView;
             showDockedWidget(mBinaryValuesView.data());
         }
-        else
+        else if (reopen_file)
         {
             bool codec_selected = false;
             if (ui->comboTextCodex->currentIndex())
@@ -403,37 +426,40 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
                 QTextCodec::setCodecForLocale(nullptr);
             }
 
-            ui->textBrowser->setExtension(file_extension);
+            text_browser->setExtension(file_extension);
             if (ui->ckRenderGraphicFile->isChecked())
             {
                 if (codec_selected)
                 {
-                    ui->textBrowser->setText(QString::fromLocal8Bit(file.readAll()));
+                    text_browser->setText(QString::fromLocal8Bit(file.readAll()));
                 }
                 else
                 {
-                    ui->textBrowser->setText(file.readAll());
+                    text_browser->setText(file.readAll());
                 }
             }
             else
             {
                 if (codec_selected)
                 {
-                    ui->textBrowser->setPlainText(QString::fromLocal8Bit(file.readAll()));
+                    text_browser->setPlainText(QString::fromLocal8Bit(file.readAll()));
                 }
                 else
                 {
-                    ui->textBrowser->setPlainText(file.readAll());
+                    text_browser->setPlainText(file.readAll());
                 }
             }
+            text_browser->set_changed(false);
         }
-        set_widget_and_action_enabled(ui->btnStoreText, false);
 
-        if (line_number)
-        {
-            ui->textBrowser->go_to_line(*line_number);
-        }
         showDockedWidget(widget_to_be_shown);
+        if (text_browser)
+        {
+            if (line_number)
+            {
+                text_browser->go_to_line(*line_number);
+            }
+        }
     }
 }
 
@@ -460,7 +486,7 @@ void MainWindow::updateRepositoryStatus(bool append)
     {
         if (!append)
         {
-            on_btnCloseText_clicked();
+            on_btnCloseText_clicked(Editor::Viewer);
         }
         auto item = ui->treeSource->topLevelItem(selected_item);
         ui->treeSource->removeItemWidget(item, 0);
@@ -568,7 +594,7 @@ void  MainWindow::applyCommandToFileTree(const QString& aCommand)
 {
     if (mContextMenuSourceTreeItem)
     {
-        on_btnCloseText_clicked();
+        on_btnCloseText_clicked(Editor::Viewer);
         mGitCommand = aCommand;
         QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
         const QString ftlp      = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
@@ -617,7 +643,7 @@ void  MainWindow::call_git_commit()
 
     if (commit_message.exec() == QDialog::Accepted)
     {
-        on_btnCloseText_clicked();
+        on_btnCloseText_clicked(Editor::Viewer);
         const QString message_text   = commit_message.getMessageText();
         string        command        = Cmd::getCommand(Cmd::Commit).toStdString();
         const QString commit_command = tr(command.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), message_text);
@@ -789,7 +815,7 @@ void MainWindow::perform_custom_command()
 
         if (git_command.contains("-C %1"))
         {
-            on_btnCloseText_clicked();
+            on_btnCloseText_clicked(Editor::Viewer);
             QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
             QString cmd_option = get_git_command_option(type, command_flags, variant_list);
@@ -923,7 +949,7 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
 
 int MainWindow::call_git_command(QString git_command, const QString& argument1, const QString& argument2, QString&result_str, const QString& git_root_path)
 {
-    on_btnCloseText_clicked();
+    on_btnCloseText_clicked(Editor::Viewer);
 
     if (git_command.contains("-C %1"))
     {

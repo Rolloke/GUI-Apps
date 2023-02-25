@@ -25,6 +25,8 @@ class QGraphicsItem;
 class QAbstractButton;
 class binary_values_view;
 class QLabel;
+class code_browser;
+class QDockWidgetX;
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
@@ -57,7 +59,7 @@ private:
     void     initCodecCombo();
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
-    void     open_file(const QString& file_path, boost::optional<int> line_number = {});
+    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
 
     QVariant handleWorker(int, const QVariant&);
     void     handleMessage(int, QVariant);
@@ -81,15 +83,19 @@ private:
     void     find_in_text_view(find forward);
     void     find_text_in_files();
     bool     getShowTypeResult(const git::Type& fType);
+    code_browser* get_active_text_browser(const QString &file_path = {});
+    code_browser* create_new_text_browser(const QString &file_path);
 
     enum class copy { name, path, file };
     void     copy_file(copy command);
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
     void     showDockedWidget(QWidget* widget, bool hide=false);
+
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
+    void     closeEvent(QCloseEvent *event);
 
     struct Work
     {
@@ -167,6 +173,19 @@ private:
         Palette
 
     }; };
+    struct AdditionalEditor { enum e
+    {
+        None,
+        One,
+        OnNewFile
+    }; };
+    struct Editor { enum e
+    {
+        Viewer,
+        Active,
+        ActiveFromWidget,
+        All
+    }; };
 
 Q_SIGNALS:
     void doWork(int, QVariant);
@@ -175,8 +194,8 @@ private Q_SLOTS:
     void updateRepositoryStatus(bool append=false);
     void textBrowserChanged();
 
-    void on_btnStoreText_clicked();
-    void on_btnCloseText_clicked();
+    void on_btnStoreText_clicked(code_browser *text_browser=nullptr);
+    bool on_btnCloseText_clicked(Editor::e editor=Editor::Active);
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
@@ -219,10 +238,14 @@ private Q_SLOTS:
     void on_spinTabulator_valueChanged(int width);
     void comboTabPositionIndexChanged(int index);
     void setFontForViews(int);
+    void on_close_text_browser(QDockWidget *widget, bool &closed);
+    void remove_text_browser(code_browser *text_browser);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
+    QDockWidgetX *create_dock_widget(QWidget *widget, const QString &name, const QString &object_name, bool connect_dock=true);
     void clone_code_browser();
+    void on_DockWidgetActivated(QDockWidget *dockWidget);
 #else
     void showOrHideTrees(bool checked);
 #endif
@@ -311,7 +334,8 @@ private:
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;
     QLabel *m_status_column_label;
-
+    QList<code_browser*> m_textBrowser;
+    code_browser*        m_active_textBrowser;
     QMutex  mTempFileMutex;
     QString mTempFilePath;
     QFile   mTempFile;

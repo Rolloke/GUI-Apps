@@ -36,7 +36,12 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     void parse_blame(const QString& blame);
-    code_browser* clone();
+    void set_file_path(const QString& file_path);
+    const QString& get_file_path() const;
+    void set_changed(bool changed);
+    bool get_changed() const;
+
+    code_browser* clone(bool all_parameter=false, bool with_text=true);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -94,6 +99,8 @@ private:
     ActionList *m_actions;
     bool        m_dark_mode;
     QSharedPointer<Highlighter> mHighlighter;
+    QString                 m_FilePath;
+    bool                    m_FileChanged;
 
 #ifdef WEB_ENGINE
     PreviewPage * m_web_page;

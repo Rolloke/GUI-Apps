@@ -17,7 +17,6 @@
 #include <QSysInfo>
 #include <QMenu>
 #include <QToolBar>
-#include <QDockWidget>
 #include <QStyleFactory>
 #include <QPalette>
 #include <QTextStream>
@@ -119,6 +118,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
     connect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+    m_active_textBrowser = ui->textBrowser;
+    connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     startTimer(100);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -361,6 +362,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboOpenNewEditor, setCurrentIndex, currentIndex, toInt);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
@@ -450,9 +452,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (on_btnCloseText_clicked())
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
 MainWindow::~MainWindow()
 {
-    on_btnCloseText_clicked();
     disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
     showDockedWidget(mBinaryValuesView.data(), true);
 
@@ -535,6 +548,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
         auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
         STORE_STR(fSettings, fTextTabStopWidth);
     }
@@ -651,105 +665,58 @@ void MainWindow::createDockWindows()
     QDockWidget* dock;
     // text browser
     QDockWidget *first_tab;
-    dock = new QDockWidget(tr("Text Editor"), this);
+    dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), "textbrowser");
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem(tr("Go to line"));
     ui->comboFindBox->addItem("Repository View");
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("textbrowser");
     ui->verticalLayout_2->removeWidget(ui->textBrowser);
-    dock->setWidget(ui->textBrowser);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     first_tab = dock;
 
     // graphics view
-    dock = new QDockWidget(tr("Graphics View"), this);
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("graphicsviewer");
+    dock = create_dock_widget(ui->graphicsView, tr("Graphics View"), "graphicsviewer");
     ui->verticalLayout_2->removeWidget(ui->graphicsView);
-    dock->setWidget(ui->graphicsView);
     addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
     // binary table view
-    dock = new QDockWidget(tr("Binary View"), this);
-    // ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("binary_table_view");
+    dock = create_dock_widget(ui->tableBinaryView, tr("Binary View"), "binary_table_view");
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
-    dock->setWidget(ui->tableBinaryView);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
     // history tree
-    dock = new QDockWidget(tr("History View"), this);
+    dock = create_dock_widget(ui->treeHistory, tr("History View"), "historyview");
     ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("historyview");
     ui->verticalLayout->removeWidget(ui->treeHistory);
-    dock->setWidget(ui->treeHistory);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     first_tab = dock;
 
     // branch tree
-    dock = new QDockWidget(tr("Branch View"), this);
+    dock = create_dock_widget(ui->treeBranches, tr("Branch View"), "branchview");
     ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("branchview");
     ui->verticalLayout->removeWidget(ui->treeBranches);
-    dock->setWidget(ui->treeBranches);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
     // stash tree
-    dock = new QDockWidget(tr("Stash View"), this);
+    dock = create_dock_widget(ui->treeStash, tr("Stash View"), "stashview");
     ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("stashview");
     ui->verticalLayout->removeWidget(ui->treeStash);
-    dock->setWidget(ui->treeStash);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
     // find tree
-    dock = new QDockWidget(tr("Find Text in Files"), this);
+    dock = create_dock_widget(ui->treeFindText, tr("Find Text in Files"), "findview");
     ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
     ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("findview");
     ui->verticalLayout->removeWidget(ui->treeFindText);
-    dock->setWidget(ui->treeFindText);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
     tabifyDockWidget(first_tab, dock);
 
-    dock = new QDockWidget(tr("Binary Values"), this);
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("binaryview");
     mBinaryValuesView.reset(new binary_values_view(this));
-    dock->setWidget(mBinaryValuesView.data());
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), "binaryview");
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 
 #ifdef WEB_ENGINE
     // markdown view
-    dock = new QDockWidget(tr("Html && Markdown"), this);
-    // ui->comboFindBox->addItem(dock->windowTitle());
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("markdown_view");
     mWebEngineView.reset(new QWebEngineView(this));
-    ui->verticalLayout->removeWidget(mWebEngineView.data());
-    dock->setWidget(mWebEngineView.data());
-    addDockWidget(Qt::RightDockWidgetArea, dock);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    dock = create_dock_widget(mWebEngineView.data(), tr("Html && Markdown"), "markdown_view");
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 #endif
@@ -838,7 +805,8 @@ void MainWindow::removeCmdToolBar(const QString& toolbar_name)
 
 void MainWindow::clone_code_browser()
 {
-    QString file_name = ui->labelFilePath->text();
+    auto *docked_browser = get_active_text_browser()->clone();
+    QString file_name = get_active_text_browser()->get_file_path();
     if (file_name.length())
     {
         QFileInfo info(file_name);
@@ -848,14 +816,8 @@ void MainWindow::clone_code_browser()
     {
         file_name = "Cloned Editor";
     }
-    QDockWidget *dock = new QDockWidget(file_name, this);
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setObjectName("textbrowser");
-    auto *docked_widget = ui->textBrowser->clone();
-    dock->setWidget(docked_widget);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
+    QDockWidget*dock = create_dock_widget(docked_browser, file_name, "cloned_textbrowser", true);
     dock->setAttribute(Qt::WA_DeleteOnClose);
-    connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
 #if 1
     QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->treeHistory->parent());
     if (parent)
@@ -869,8 +831,22 @@ void MainWindow::clone_code_browser()
         tabifyDockWidget(m_first_cloned, dock);
     }
 #endif
-    showDockedWidget(docked_widget);
+    showDockedWidget(docked_browser);
     m_first_cloned = dock;
+}
+
+QDockWidgetX* MainWindow::create_dock_widget(QWidget* widget, const QString& name, const QString& object_name, bool connect_dock)
+{
+    QDockWidgetX* dock = new QDockWidgetX(name, this);
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setObjectName(object_name);
+    dock->setWidget(widget);
+    addDockWidget(Qt::RightDockWidgetArea, dock);
+    if (connect_dock)
+    {
+        connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
+    }
+    return dock;
 }
 
 void MainWindow::dockWidget_topLevelChanged(bool)
@@ -904,6 +880,30 @@ void MainWindow::dockWidget_topLevelChanged(bool)
         }
     }
 }
+
+void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
+{
+    if (dockWidget)
+    {
+        code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
+        if (textBrowser)
+        {
+            if (textBrowser != m_active_textBrowser)
+            {
+                connect(textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+                if (m_active_textBrowser)
+                {
+                    disconnect(m_active_textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+                }
+                m_active_textBrowser = textBrowser;
+            }
+            ui->labelFilePath->setText(textBrowser->get_file_path());
+            set_widget_and_action_enabled(ui->btnStoreText,textBrowser->get_changed());
+            // TODO: more things to update for textBrowser
+        }
+    }
+}
+
 #endif
 
 void MainWindow::showDockedWidget(QWidget* widget, bool hide)
@@ -928,7 +928,126 @@ void MainWindow::showDockedWidget(QWidget* widget, bool hide)
 #else
     mActions.getAction(Cmd::ShowHideTree)->setChecked(!hide);
 #endif
+}
 
+code_browser* MainWindow::get_active_text_browser(const QString& file_path)
+{
+    if (file_path.isEmpty())
+    {
+        for (code_browser* browser : m_textBrowser)
+        {
+            QDockWidgetX *dock = dynamic_cast<QDockWidgetX*>(browser->parent());
+            if (dock && (dock->isActiveWindow() || dock->is_closing()))
+            {
+                return browser;
+            }
+        }
+        return ui->textBrowser;
+    }
+    else
+    {
+        code_browser* browser_with_file_path = nullptr;
+        for (code_browser* browser : m_textBrowser)
+        {
+            if (browser->get_file_path() == file_path)
+            {
+                browser_with_file_path = browser;
+            }
+        }
+        if (! browser_with_file_path)
+        {
+            if (ui->textBrowser->get_file_path() == file_path)
+            {
+                browser_with_file_path = ui->textBrowser;
+            }
+        }
+        if (browser_with_file_path)
+        {
+            showDockedWidget(browser_with_file_path);
+        }
+        return browser_with_file_path;
+    }
+}
+
+code_browser* MainWindow::create_new_text_browser(const QString &file_path)
+{
+    bool set_filename = true;
+    switch (ui->comboOpenNewEditor->currentIndex())
+    {
+    case AdditionalEditor::None:
+        return ui->textBrowser;
+        break;
+    case AdditionalEditor::One:
+        set_filename = false;
+        if (m_textBrowser.size())
+        {
+            return m_textBrowser[0];
+        }
+        break;
+    case AdditionalEditor::OnNewFile:
+        break;
+    }
+
+    QString file_name;
+    if (file_path.length() && set_filename)
+    {
+        QFileInfo info(file_path);
+        file_name = info.fileName();
+    }
+    else
+    {
+        file_name = "Editor";
+    }
+
+    auto *docked_browser = get_active_text_browser()->clone(true, false);
+    m_textBrowser.push_back(docked_browser);
+    connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+    connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+    connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
+    connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
+    connect(docked_browser, &code_browser::textChanged, [this, docked_browser]() { m_markdown_proxy->setText(docked_browser->toPlainText()); });
+
+    docked_browser->setReadOnly(false);
+    QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, "new_textbrowser", true);
+    dock->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dock, SIGNAL(signal_close(QDockWidget*,bool&)), this, SLOT(on_close_text_browser(QDockWidget*,bool&)));
+    QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
+    if (parent)
+    {
+        tabifyDockWidget(parent, dock);
+    }
+
+    return docked_browser;
+}
+
+void MainWindow::on_close_text_browser(QDockWidget* widget, bool&closed)
+{
+    closed = on_btnCloseText_clicked(Editor::ActiveFromWidget);
+    if (closed)
+    {
+        remove_text_browser(dynamic_cast<code_browser*>(widget->widget()));
+    }
+}
+
+void MainWindow::remove_text_browser(code_browser *text_browser)
+{
+    auto found = std::find(m_textBrowser.begin(), m_textBrowser.end(), text_browser);
+    if (found != m_textBrowser.end())
+    {
+        disconnect(text_browser, SIGNAL(signal_close(QDockWidget*,bool&)), this, SLOT(on_close_text_browser(QDockWidget*,bool&)));
+        disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+        disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+        disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
+        disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
+        //disconnect(text_browser, &code_browser::textChanged);
+        m_textBrowser.erase(found);
+        if (m_active_textBrowser == text_browser)
+        {
+            disconnect(text_browser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+            m_active_textBrowser = nullptr;
+            showDockedWidget(ui->textBrowser);
+        }
+    }
 }
 
 QString MainWindow::getConfigName() const
@@ -1956,8 +2075,9 @@ void MainWindow::combo_triggered()
     const auto combofind_actions = ui->comboFindBox->actions();
     if (combofind_actions.size() && combofind_actions.first() == action)
     {
+        code_browser* text_browser = get_active_text_browser();
         FindView index = FindView::FindTextInFiles;
-        if      (ui->textBrowser->hasFocus())  index = FindView::Text;
+        if      (text_browser->hasFocus())  index = FindView::Text;
         else if (ui->treeHistory->hasFocus())  index = FindView::History;
         else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
         else if (ui->treeStash->hasFocus())    index = FindView::Stash;
@@ -1968,7 +2088,7 @@ void MainWindow::combo_triggered()
         switch (index)
         {
         case FindView::Text:
-            find_text = ui->textBrowser->textCursor().selectedText();
+            find_text = text_browser->textCursor().selectedText();
             break;
         case FindView::History:             tree_view = ui->treeHistory; break;
         case FindView::Branch:              tree_view = ui->treeBranches; break;
@@ -2045,7 +2165,7 @@ void MainWindow::find_function(find find_item)
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
     {
-        ui->textBrowser->go_to_line(ui->edtFindText->text().toInt());
+        get_active_text_browser()->go_to_line(ui->edtFindText->text().toInt());
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
     {
@@ -2062,9 +2182,11 @@ void MainWindow::find_in_text_view(find find_item)
     Qt::CaseSensitivity reg_ex_case = Qt::CaseInsensitive;
     int                 find_flag   = find_item == find::forward || find_item == find::replace ? 0 : QTextDocument::FindBackward;
 
-    if (ui->textBrowser->extraSelections().size() && find_item == find::replace)
+    code_browser* text_browser = get_active_text_browser();
+
+    if (text_browser->extraSelections().size() && find_item == find::replace)
     {
-        ui->textBrowser->insertPlainText(ui->edtReplaceText->text());
+        text_browser->insertPlainText(ui->edtReplaceText->text());
     }
 
     if (ui->ckFindCaseSensitive->isChecked())
@@ -2080,15 +2202,15 @@ void MainWindow::find_in_text_view(find find_item)
     bool found_text = false;
     if (ui->ckFindRegEx->isChecked())
     {
-        found_text = ui->textBrowser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
+        found_text = text_browser->find(QRegExp(ui->edtFindText->text(), reg_ex_case), static_cast<QTextDocument::FindFlag>(find_flag));
     }
     else
     {
-        found_text = ui->textBrowser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
+        found_text = text_browser->find(ui->edtFindText->text(), static_cast<QTextDocument::FindFlag>(find_flag));
     }
     if (found_text)
     {
-        showDockedWidget(ui->textBrowser);
+        showDockedWidget(text_browser);
     }
 }
 
