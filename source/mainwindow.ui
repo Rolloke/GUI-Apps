@@ -937,6 +937,25 @@ Enter text to search</string>
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="comboOpenNewEditor">
+          <item>
+           <property name="text">
+            <string>No additional Editor</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>One additional Editor</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>One Editor per File</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="ckRenderGraphicFile">
           <property name="toolTip">
            <string>Render graphics or HTML file in Graphics View</string>

@@ -21,6 +21,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_blame_characters(0)
   , m_actions(nullptr)
   , m_dark_mode(false)
+  , m_FileChanged(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -30,9 +31,9 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
     highlightCurrentLine();
 
     m_line_number_area->setToolTip("init");
+    connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
 #ifdef WEB_ENGINE
-  m_web_page = nullptr;
-  connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
+    m_web_page = nullptr;
 #endif
 }
 
@@ -71,15 +72,21 @@ void code_browser::set_show_line_numbers(bool show)
     m_line_number_area->setVisible(show);
 }
 
-code_browser* code_browser::clone()
+code_browser* code_browser::clone(bool all_parameter, bool with_text)
 {
     auto *cloned =  new code_browser(parentWidget());
     cloned->reset();
-    //cloned->m_actions = m_actions;
     cloned->m_show_line_numbers = m_show_line_numbers;
     cloned->setFont(font());
-    cloned->setText(toPlainText());
-    cloned->mHighlighter->setLanguage(mHighlighter->currentLanguage());
+    if (with_text)
+    {
+        cloned->setText(toPlainText());
+        cloned->mHighlighter->setLanguage(mHighlighter->currentLanguage());
+    }
+    if (all_parameter)
+    {
+        cloned->m_actions = m_actions;
+    }
     return cloned;
 }
 
@@ -286,6 +293,26 @@ void code_browser::setLanguage(const QString& language)
     mHighlighter->setLanguage(language);
 }
 
+void code_browser::set_file_path(const QString &file_path)
+{
+    m_FilePath = file_path;
+}
+
+const QString& code_browser::get_file_path() const
+{
+    return m_FilePath;
+}
+
+void code_browser::set_changed(bool changed)
+{
+    m_FileChanged = changed;
+}
+
+bool code_browser::get_changed() const
+{
+    return m_FileChanged;
+}
+
 void code_browser::reset_blame()
 {
     m_blame_map.clear();
@@ -475,17 +502,10 @@ void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const Q
     }
     QToolTip::showText(pos, text, this);
 }
-
-
-#ifdef WEB_ENGINE
-
-void code_browser::set_page(PreviewPage*page)
-{
-    m_web_page = page;
-}
-
 void code_browser::own_text_changed()
 {
+    m_FileChanged = true;
+#ifdef WEB_ENGINE
     if (m_web_page)
     {
         QString current_language = mHighlighter->currentLanguage();
@@ -509,7 +529,16 @@ void code_browser::own_text_changed()
             Q_EMIT show_web_view(false);
         }
     }
+#endif
 }
+
+
+#ifdef WEB_ENGINE
+void code_browser::set_page(PreviewPage*page)
+{
+    m_web_page = page;
+}
+
 // m_web_page->printToPdf()
 
 PreviewPage::PreviewPage(QObject *parent, QWebEngineView* view) : QWebEnginePage(parent)
