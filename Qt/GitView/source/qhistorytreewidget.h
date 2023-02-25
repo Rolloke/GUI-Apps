@@ -34,15 +34,17 @@ public:
 Q_SIGNALS:
     void send_history(const QStringList& list);
     void reset_history();
+    void show_me(QWidget* widget);
 
 public Q_SLOTS:
     void clear();
     void insertFileNames();
-    void insertFileNames(QTreeWidgetItem* parent, int child, int second_child=-1);
+    void insertFileNames(QTreeWidgetItem* parent_item, int child, int second_child=-1);
 
 protected:
 
 private:
+    void initialize();
 
     QString mHistoryFile;
     QString mHistoryHashItems;

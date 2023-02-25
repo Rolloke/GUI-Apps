@@ -90,8 +90,6 @@ private:
     void     copy_file(copy command);
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
     void     add_action_to_widgets(QAction * action);
-    void     showDockedWidget(QWidget* widget, bool hide=false);
-
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
@@ -240,6 +238,8 @@ private Q_SLOTS:
     void setFontForViews(int);
     void on_close_text_browser(QDockWidget *widget, bool &closed);
     void remove_text_browser(code_browser *text_browser);
+
+    void showDockedWidget(QWidget* widget, bool hide=false);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
