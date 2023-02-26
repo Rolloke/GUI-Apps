@@ -3,6 +3,7 @@
 
 #include <map>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <functional>
 
@@ -67,6 +68,12 @@ private:
 
 //#ifndef NDEBUG
 #define TRACE Logger::printDebug
+#define TRACEX(S, X)          \
+{                             \
+    std::stringstream stream; \
+    stream << X;              \
+    Logger::printDebug(S, stream.str().c_str());  \
+}
 //#else
 //#define TRACE //
 //#endif

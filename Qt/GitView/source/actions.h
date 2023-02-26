@@ -78,6 +78,9 @@ public:
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);
     void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
     const tActionMap& getList() const { return mActionList; }
+    QString check_location(const QString &file_location);
+    void setTheme(const QString& theme);
+    const QString& getTheme();
 
     static const QString sNoCustomCommandMessageBox;
 
@@ -89,10 +92,14 @@ private:
     void setDataVariant(git::Cmd::eCmd aCmd, Data::e aData, const QVariant& aVariant);
     QVariant getDataVariant(git::Cmd::eCmd aCmd, Data::e aData) const;
 
+    constexpr static char resource[] = ":/resource/24X24/";
+
     tActionMap     mActionList;
     tToolButtonMap mToolButtonList;
     tMenuMap       mMenuList;
-    QObject*   mParent;
+    QObject*       mParent;
+    QString        m_theme;
+    QString        m_icon_location;
 };
 
 #endif // ACTIONS_H
