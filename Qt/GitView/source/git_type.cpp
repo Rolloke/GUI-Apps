@@ -8,7 +8,6 @@
 namespace git
 {
 
-const QString resource = ":/resource/24X24/";
 int2stringmap Cmd::mCommandMap;
 Cmd::tVector  Cmd::mContextMenuSourceTree;
 Cmd::tVector  Cmd::mContextMenuEmptySourceTree;
