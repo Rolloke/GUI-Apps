@@ -14,7 +14,6 @@ typedef QMap<QString, bool> string2bool_map;
 
 namespace git
 {
-extern const QString resource;
 
 typedef std::map<int, QString> int2stringmap;
 
