@@ -238,6 +238,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
 
         initContextMenuActions();
+
+        QString fTheme;
+        LOAD_STR(fSettings, fTheme, toString);
+        mActions.setTheme(fTheme);
         mActions.initActionIcons();
 
         int fItemCount = fSettings.beginReadArray(config::sCommands);
@@ -587,6 +591,9 @@ MainWindow::~MainWindow()
             fSettings.setValue(name, Cmd::mToolbarNames[i]);
         }
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
+
+        const QString& fTheme = mActions.getTheme();
+        STORE_STR(fSettings, fTheme);
 
         fSettings.beginWriteArray(config::sCommands);
         {
@@ -1540,35 +1547,35 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckShortState);
     create_auto_cmd(ui->ckSymbolicLinks);
     create_auto_cmd(ui->ckSystemFiles);
-    create_auto_cmd(ui->ckRenderGraphicFile, resource + "applications-graphics.png");
+    create_auto_cmd(ui->ckRenderGraphicFile, mActions.check_location("applications-graphics.png"));
     create_auto_cmd(ui->ckHideEmptyParent);
-    create_auto_cmd(ui->ckFindCaseSensitive, resource + "applications-system.png");
-    create_auto_cmd(ui->ckFindRegEx,         resource + "applications-system.png");
-    create_auto_cmd(ui->ckFindWholeWord,     resource + "applications-system.png");
+    create_auto_cmd(ui->ckFindCaseSensitive, mActions.check_location("applications-system.png"));
+    create_auto_cmd(ui->ckFindRegEx,         mActions.check_location("applications-system.png"));
+    create_auto_cmd(ui->ckFindWholeWord,     mActions.check_location("applications-system.png"));
     create_auto_cmd(ui->ckExperimental);
     create_auto_cmd(ui->ckFastFileSearch);
-    create_auto_cmd(ui->ckTypeConverter, resource + "format-text-direction-rtl.png");
+    create_auto_cmd(ui->ckTypeConverter, mActions.check_location("format-text-direction-rtl.png"));
 
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->ckShowLineNumbers, resource + "x-office-document.png", &new_id);
+    create_auto_cmd(ui->ckShowLineNumbers, mActions.check_location("x-office-document.png"), &new_id);
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnStoreText, resource + "text-x-patch.png", &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
+    create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnFindX, resource + "edit-find.png", &new_id);
-    create_auto_cmd(ui->btnFindNext, resource + "go-next.png", &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
+    create_auto_cmd(ui->btnFindX, mActions.check_location("edit-find.png"), &new_id);
+    create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, resource + "go-previous.png", &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
+    create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboFindBox, resource + "edit-find.png", &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
+    create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
     create_auto_cmd(ui->comboShowItems);

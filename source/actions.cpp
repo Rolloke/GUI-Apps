@@ -6,6 +6,8 @@
 #include <QMenu>
 #include <QToolBar>
 #include <QToolButton>
+#include <QFileInfo>
+#include <QDirIterator>
 
 using namespace git;
 
@@ -65,78 +67,113 @@ git::Cmd::eCmd ActionList::createNewID(git::Cmd::eCmd new_cmd) const
     return Cmd::Invalid;
 }
 
+void ActionList::setTheme(const QString& theme)
+{
+    m_theme = theme;
+}
+
+const QString& ActionList::getTheme()
+{
+    return m_theme;
+}
 
 void ActionList::initActionIcons()
 {
-    std::map<Cmd::eCmd, QString> action_icons;
-    action_icons[Cmd::Add]                     = resource+"list-add.png";
-    action_icons[Cmd::Unstage]                 = resource+"list-remove.png";
-    action_icons[Cmd::ShowDifference]          = resource+"object-flip-horizontal.png";
-    action_icons[Cmd::CallDiffTool]            = resource+"distribute-graph-directed.svg";
-    action_icons[Cmd::CallMergeTool]           = resource+"application-x-addon.png";
-    action_icons[Cmd::InvokeGitMergeDialog]    = resource+"application-x-addon.png";
-    action_icons[Cmd::History]                 = resource+"document-open-recent.png";
-    action_icons[Cmd::ShowStatus]              = resource+"help-faq.png";
-    action_icons[Cmd::ShowShortStatus]         = resource+"dialog-question.png";
-    action_icons[Cmd::Remove]                  = resource+"user-trash.png";
-    action_icons[Cmd::Delete]                  = resource+"edit-delete.png";
-    action_icons[Cmd::Commit]                  = resource+"user-invisible.png";
-    action_icons[Cmd::MoveOrRename]            = resource+"format-text-direction-ltr.png";
-    action_icons[Cmd::Restore]                 = resource+"edit-redo-rtl.png";
-    action_icons[Cmd::Push]                    = resource+"view-sort-descending.png";
-    action_icons[Cmd::Pull]                    = resource+"view-sort-ascending.png";
-    action_icons[Cmd::Fetch]                   = resource+"go-jump.png";
-    action_icons[Cmd::Stash]                   = resource+"go-up.png";
-    action_icons[Cmd::StashPop]                = resource+"go-down.png";
-    action_icons[Cmd::StashPush]               = resource+"go-previous.png";
-    action_icons[Cmd::StashApply]              = resource+"go-next.png";
-    action_icons[Cmd::StashShow]               = resource+"edit-find.png";
-    action_icons[Cmd::StashClear]              = resource+"edit-delete.png";
-    action_icons[Cmd::StashDrop]               = resource+"user-trash.png";
-    action_icons[Cmd::StashList]               = resource+"text-x-log.png";
-    action_icons[Cmd::Blame]                   = resource+"emblem-urgent.png";
+#ifdef __linux__
+/// NOTE: availeable themes
+/// - Adwaita/24x24
+/// - hicolor/24x24
+/// - gnome/24x24
+/// - Tango/24x24
+/// - menta/24x24
+/// - mate/24x24
+/// Command to determine theme returns e.g. 'Mint-Y'
+/// gsettings get org.gnome.desktop.interface gtk-theme
 
-    action_icons[Cmd::BranchList]              = resource+"open-menu.png";
-    action_icons[Cmd::BranchListRemote]        = resource+"open-menu.png";
-    action_icons[Cmd::BranchListMerged]        = resource+"open-menu.png";
-    action_icons[Cmd::BranchListNotMerged]     = resource+"open-menu.png";
-    action_icons[Cmd::BranchDelete]            = resource+"edit-delete.png";
-    action_icons[Cmd::BranchShow]              = resource+"preferences-system-privacy.png";
-    action_icons[Cmd::BranchCheckout]          = resource+"emblem-default.png";
-    action_icons[Cmd::DiffOfTwoBranches]       = resource+"document-open-recent.png";
-    action_icons[Cmd::Show]                    = resource+"edit-find.png";
-
-    action_icons[Cmd::ExpandTreeItems]         = resource+"svn-update.svg";
-    action_icons[Cmd::CollapseTreeItems]       = resource+"svn-commit.svg";
-    action_icons[Cmd::AddGitSourceFolder]      = resource+"folder-open.png";
-    action_icons[Cmd::UpdateGitStatus]         = resource+"view-refresh.png";
-    action_icons[Cmd::ShowHideTree]            = resource+"code-class.svg";
-    action_icons[Cmd::ClearTreeItems]          = resource+"edit-clear.png";
-    action_icons[Cmd::CustomGitActionSettings] = resource+"preferences-system.png";
-    action_icons[Cmd::InsertHashFileNames]     = resource+"object-rotate-right.png";
-    action_icons[Cmd::About]                   = resource+"dialog-information.png";
-    action_icons[Cmd::SelectTextBrowserLanguage]= resource+"text-x-adasrc.svg";
-    action_icons[Cmd::InvokeHighlighterDialog] = resource+"emblem-system.png";
-    action_icons[Cmd::KillBackgroundThread]    = resource+"media-record.png";
-    action_icons[Cmd::CopyFileName]            = resource+"edit-copy.png";
-    action_icons[Cmd::CopyFilePath]            = resource+"edit-copy.png";
-    action_icons[Cmd::RemoveGitFolder]         = resource+"folder.png";
-    action_icons[Cmd::ZoomIn]                  = resource+"list-add.png";
-    action_icons[Cmd::ZoomOut]                 = resource+"list-remove.png";
-    action_icons[Cmd::FitInView]               = resource+"view-fullscreen.png";
-    action_icons[Cmd::DeleteTreeItems]         = resource+"edit-cut.png";
-    action_icons[Cmd::AddExternalFileOpenExt]  = resource+"gnome-mime-text.png";
-    action_icons[Cmd::OpenFileExternally]      = resource+"x-office-document.png";
-    action_icons[Cmd::DeleteExternalFileOpenExt] = resource+"window-close.png";
-    action_icons[Cmd::CloneTextBrowser]        = resource+"emblem-shared.png";
-    action_icons[Cmd::CreateBookMark]          = resource+"non-starred.png";
-    action_icons[Cmd::ShowInformation]         = resource+"dialog-information.png";
-    action_icons[Cmd::WhatsThisHelp]           = resource+"dialog-question.png";
-    action_icons[Cmd::CompareTo]               = resource+"object-flip-horizontal.png";
-
-    for (const auto& icon_path: action_icons )
+    if (!m_theme.isEmpty())
     {
-        setIconPath(static_cast<Cmd::eCmd>(icon_path.first), icon_path.second);
+        m_icon_location = "/usr/share/icons/" + m_theme;
+        QFileInfo info(m_icon_location);
+        if (info.exists())
+        {
+            TRACE(Logger::info, "using theme icons %s", m_icon_location.toStdString().c_str());
+        }
+        else
+        {
+            m_icon_location.clear();
+        }
+    }
+#endif
+
+    std::map<Cmd::eCmd, QString> action_icons;
+    action_icons[Cmd::Add]                     = "list-add.png";
+    action_icons[Cmd::Unstage]                 = "list-remove.png";
+    action_icons[Cmd::ShowDifference]          = "object-flip-horizontal.png";
+    action_icons[Cmd::CallDiffTool]            = "distribute-graph-directed.svg";
+    action_icons[Cmd::CallMergeTool]           = "application-x-addon.png";
+    action_icons[Cmd::InvokeGitMergeDialog]    = "application-x-addon.png";
+    action_icons[Cmd::History]                 = "document-open-recent.png";
+    action_icons[Cmd::ShowStatus]              = "help-faq.png";
+    action_icons[Cmd::ShowShortStatus]         = "dialog-question.png";
+    action_icons[Cmd::Remove]                  = "user-trash.png";
+    action_icons[Cmd::Delete]                  = "edit-delete.png";
+    action_icons[Cmd::Commit]                  = "user-invisible.png";
+    action_icons[Cmd::MoveOrRename]            = "format-text-direction-ltr.png";
+    action_icons[Cmd::Restore]                 = "edit-redo-rtl.png";
+    action_icons[Cmd::Push]                    = "view-sort-descending.png";
+    action_icons[Cmd::Pull]                    = "view-sort-ascending.png";
+    action_icons[Cmd::Fetch]                   = "go-jump.png";
+    action_icons[Cmd::Stash]                   = "go-up.png";
+    action_icons[Cmd::StashPop]                = "go-down.png";
+    action_icons[Cmd::StashPush]               = "go-previous.png";
+    action_icons[Cmd::StashApply]              = "go-next.png";
+    action_icons[Cmd::StashShow]               = "edit-find.png";
+    action_icons[Cmd::StashClear]              = "edit-delete.png";
+    action_icons[Cmd::StashDrop]               = "user-trash.png";
+    action_icons[Cmd::StashList]               = "text-x-log.png";
+    action_icons[Cmd::Blame]                   = "emblem-urgent.png";
+
+    action_icons[Cmd::BranchList]              = "open-menu.png";
+    action_icons[Cmd::BranchListRemote]        = "open-menu.png";
+    action_icons[Cmd::BranchListMerged]        = "open-menu.png";
+    action_icons[Cmd::BranchListNotMerged]     = "open-menu.png";
+    action_icons[Cmd::BranchDelete]            = "edit-delete.png";
+    action_icons[Cmd::BranchShow]              = "preferences-system-privacy.png";
+    action_icons[Cmd::BranchCheckout]          = "emblem-default.png";
+    action_icons[Cmd::DiffOfTwoBranches]       = "document-open-recent.png";
+    action_icons[Cmd::Show]                    = "edit-find.png";
+
+    action_icons[Cmd::ExpandTreeItems]         = "svn-update.svg";
+    action_icons[Cmd::CollapseTreeItems]       = "svn-commit.svg";
+    action_icons[Cmd::AddGitSourceFolder]      = "folder-open.png";
+    action_icons[Cmd::UpdateGitStatus]         = "view-refresh.png";
+    action_icons[Cmd::ShowHideTree]            = "code-class.svg";
+    action_icons[Cmd::ClearTreeItems]          = "edit-clear.png";
+    action_icons[Cmd::CustomGitActionSettings] = "preferences-system.png";
+    action_icons[Cmd::InsertHashFileNames]     = "object-rotate-right.png";
+    action_icons[Cmd::About]                   = "dialog-information.png";
+    action_icons[Cmd::SelectTextBrowserLanguage]= "text-x-adasrc.svg";
+    action_icons[Cmd::InvokeHighlighterDialog] = "emblem-system.png";
+    action_icons[Cmd::KillBackgroundThread]    = "media-record.png";
+    action_icons[Cmd::CopyFileName]            = "edit-copy.png";
+    action_icons[Cmd::CopyFilePath]            = "edit-copy.png";
+    action_icons[Cmd::RemoveGitFolder]         = "folder.png";
+    action_icons[Cmd::ZoomIn]                  = "list-add.png";
+    action_icons[Cmd::ZoomOut]                 = "list-remove.png";
+    action_icons[Cmd::FitInView]               = "view-fullscreen.png";
+    action_icons[Cmd::DeleteTreeItems]         = "edit-cut.png";
+    action_icons[Cmd::AddExternalFileOpenExt]  = "gnome-mime-text.png";
+    action_icons[Cmd::OpenFileExternally]      = "x-office-document.png";
+    action_icons[Cmd::DeleteExternalFileOpenExt] = "window-close.png";
+    action_icons[Cmd::CloneTextBrowser]        = "emblem-shared.png";
+    action_icons[Cmd::CreateBookMark]          = "non-starred.png";
+    action_icons[Cmd::ShowInformation]         = "dialog-information.png";
+    action_icons[Cmd::WhatsThisHelp]           = "dialog-question.png";
+    action_icons[Cmd::CompareTo]               = "object-flip-horizontal.png";
+
+    for (auto& icon_path: action_icons )
+    {
+        setIconPath(static_cast<Cmd::eCmd>(icon_path.first), check_location(icon_path.second));
     }
 }
 
@@ -480,6 +517,51 @@ QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
         }
     }
     return QVariant();
+}
+
+QString find_icon(const QString& path, const QString& file)
+{
+    QDirIterator iterator(QDir(path), QDirIterator::NoIteratorFlags);
+    do
+    {
+        iterator.next();
+        const QFileInfo& file_info = iterator.fileInfo();
+        auto name = file_info.fileName();
+        if (   file_info.isDir()
+            && name != Folder::FolderSelf
+            && name != Folder::FolderUp)
+        {
+            QString found = find_icon(path + "/" + name, file);
+            if (!found.isEmpty())
+            {
+                return found;
+            }
+        }
+        else if (file == name)
+        {
+            return file_info.filePath();
+        }
+
+    } while (iterator.hasNext());
+    return {};
+}
+
+QString ActionList::check_location(const QString &file_location)
+{
+    if (m_icon_location.isEmpty())
+    {
+        return resource + file_location;
+    }
+    else
+    {
+        auto found_icon = find_icon(m_icon_location, file_location);
+        if (found_icon.isEmpty())
+        {
+            TRACE(Logger::info, "%s not found in theme icons", file_location.toStdString().c_str());
+            return resource + file_location;
+        }
+        return found_icon;
+    }
 }
 
 #define RETURN_NAME(NAME) case NAME: return #NAME
