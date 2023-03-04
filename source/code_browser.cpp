@@ -21,7 +21,6 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_blame_characters(0)
   , m_actions(nullptr)
   , m_dark_mode(false)
-  , m_FileChanged(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -39,6 +38,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
 
 code_browser::~code_browser()
 {
+    Q_EMIT show_web_view(false);
 #ifdef WEB_ENGINE
     m_web_page = nullptr;
 #endif
@@ -85,7 +85,8 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
     }
     if (all_parameter)
     {
-        cloned->m_actions = m_actions;
+        cloned->m_actions  = m_actions;
+        cloned->m_web_page = m_web_page;
     }
     return cloned;
 }
@@ -293,26 +294,6 @@ void code_browser::setLanguage(const QString& language)
     mHighlighter->setLanguage(language);
 }
 
-void code_browser::set_file_path(const QString &file_path)
-{
-    m_FilePath = file_path;
-}
-
-const QString& code_browser::get_file_path() const
-{
-    return m_FilePath;
-}
-
-void code_browser::set_changed(bool changed)
-{
-    m_FileChanged = changed;
-}
-
-bool code_browser::get_changed() const
-{
-    return m_FileChanged;
-}
-
 void code_browser::reset_blame()
 {
     m_blame_map.clear();
@@ -502,8 +483,13 @@ void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const Q
     }
     QToolTip::showText(pos, text, this);
 }
+
 void code_browser::own_text_changed()
 {
+    if (m_active)
+    {
+        Q_EMIT text_of_active_changed();
+    }
     m_FileChanged = true;
 #ifdef WEB_ENGINE
     if (m_web_page)
@@ -521,7 +507,7 @@ void code_browser::own_text_changed()
         {
             m_web_page->set_type(PreviewPage::type::markdown);
             QString text = toPlainText();
-            emit textChanged(text);
+            Q_EMIT textChanged(text);
             Q_EMIT show_web_view(text.size() ? true : false);
         }
         else
@@ -531,7 +517,6 @@ void code_browser::own_text_changed()
     }
 #endif
 }
-
 
 #ifdef WEB_ENGINE
 void code_browser::set_page(PreviewPage*page)

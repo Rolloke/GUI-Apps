@@ -7,7 +7,6 @@
 #include <functional>
 #include <QFile>
 #include <QObject>
-#include <QDockWidget>
 #include <boost/function.hpp>
 
 namespace txt
@@ -110,25 +109,6 @@ public Q_SLOTS:
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
 
-};
-
-
-class QDockWidgetX: public QDockWidget
-{
-    Q_OBJECT
-public:
-    explicit QDockWidgetX(const QString &title, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
-    bool is_closing();
-Q_SIGNALS:
-    void signal_close(QDockWidget*, bool &close);
-public Q_SLOTS:
-
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    bool event(QEvent *event) override;
-
-private:
-    bool m_closing;
 };
 
 #endif // HELPER_H

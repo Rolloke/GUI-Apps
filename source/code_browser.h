@@ -3,6 +3,7 @@
 
 #include "actions.h"
 #include "highlighter.h"
+#include "editable.h"
 
 #include <QTextBrowser>
 #include <QPlainTextEdit>
@@ -12,7 +13,7 @@ class    QWebEngineView;
 class    PreviewPage;
 #endif
 
-class code_browser : public QTextBrowser
+class code_browser : public QTextBrowser, public Editable
 {
     Q_OBJECT
 
@@ -36,10 +37,6 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     void parse_blame(const QString& blame);
-    void set_file_path(const QString& file_path);
-    const QString& get_file_path() const;
-    void set_changed(bool changed);
-    bool get_changed() const;
 
     code_browser* clone(bool all_parameter=false, bool with_text=true);
 
@@ -57,6 +54,7 @@ Q_SIGNALS:
     void show_web_view(bool);
     void line_changed(int);
     void column_changed(int);
+    void text_of_active_changed();
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
@@ -99,8 +97,6 @@ private:
     ActionList *m_actions;
     bool        m_dark_mode;
     QSharedPointer<Highlighter> mHighlighter;
-    QString                 m_FilePath;
-    bool                    m_FileChanged;
 
 #ifdef WEB_ENGINE
     PreviewPage * m_web_page;
@@ -155,10 +151,12 @@ class MarkdownProxy : public QObject
 public:
     explicit MarkdownProxy(QObject *parent = nullptr) : QObject(parent) {}
 
-    void setText(const QString &text);
 
-signals:
+Q_SIGNALS:
     void textChanged(const QString &text);
+
+public Q_SLOTS:
+    void setText(const QString &text);
 
 private:
     QString m_text;

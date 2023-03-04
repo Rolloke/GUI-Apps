@@ -399,7 +399,11 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
             {
                 update_complete_row(list[0].row());
             }
-            Q_EMIT contentChanged();
+            m_FileChanged = true;
+            if (m_active)
+            {
+                Q_EMIT contentChanged();
+            }
         }
     }
     else

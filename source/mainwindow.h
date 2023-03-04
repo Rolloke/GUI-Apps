@@ -3,6 +3,7 @@
 
 #include "workerthreadconnector.h"
 #include "actions.h"
+#include "qdockwidgetx.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -26,7 +27,6 @@ class QAbstractButton;
 class binary_values_view;
 class QLabel;
 class code_browser;
-class QDockWidgetX;
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
@@ -83,8 +83,10 @@ private:
     void     find_in_text_view(find forward);
     void     find_text_in_files();
     bool     getShowTypeResult(const git::Type& fType);
-    code_browser* get_active_text_browser(const QString &file_path = {});
+    QWidget *get_active_editable_widget(const QString &file_path = {});
     code_browser* create_new_text_browser(const QString &file_path);
+    bool     send_close_to_editable_widget(QWidget *text_browser);
+    void     reset_text_browser(code_browser*text_browser);
 
     enum class copy { name, path, file };
     void     copy_file(copy command);
@@ -94,6 +96,9 @@ private:
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
     void     closeEvent(QCloseEvent *event);
+    const QString& get_file_path(QWidget*widget);
+    bool     get_changed(QWidget*widget);
+    bool     get_active(QWidget*widget);
 
     struct Work
     {
@@ -139,6 +144,7 @@ private:
         GitUnmerged,
         GitSelected
     };
+
     enum class FindView
     {
         Text,
@@ -150,6 +156,7 @@ private:
         FindTextInFilesView,
         FindTextInFiles
     };
+
     struct FindColumn { enum e
     {
         FilePath,
@@ -157,6 +164,7 @@ private:
         FoundTextLine,
         Size
     }; };
+
     struct HistoryFile { enum e
     {
         Content,
@@ -164,6 +172,7 @@ private:
         FilePath,
         Size
     }; };
+
     struct UserStyle { enum e
     {
         None,
@@ -171,19 +180,25 @@ private:
         Palette
 
     }; };
+
     struct AdditionalEditor { enum e
     {
         None,
         One,
         OnNewFile
     }; };
+
     struct Editor { enum e
     {
         Viewer,
         Active,
-        ActiveFromWidget,
+        CalledFromAction,
+        CalledFromWidget,
         All
     }; };
+
+    AdditionalEditor::e additional_editor();
+    bool close_editable_widgets(QWidget *&active_widget, Editor::e editor, bool &all_closed);
 
 Q_SIGNALS:
     void doWork(int, QVariant);
@@ -192,8 +207,8 @@ private Q_SLOTS:
     void updateRepositoryStatus(bool append=false);
     void textBrowserChanged();
 
-    void on_btnStoreText_clicked(code_browser *text_browser=nullptr);
-    bool on_btnCloseText_clicked(Editor::e editor=Editor::Active);
+    void btnStoreText_clicked();
+    bool btnCloseText_clicked(Editor::e editor=Editor::CalledFromAction);
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);
@@ -220,7 +235,7 @@ private Q_SLOTS:
     void on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeFindText_customContextMenuRequested(const QPoint &pos);
 
-    void on_ckTypeConverter_stateChanged(int arg1);
+    void on_ckTypeConverter_stateChanged(int active);
 
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
@@ -236,10 +251,11 @@ private Q_SLOTS:
     void on_spinTabulator_valueChanged(int width);
     void comboTabPositionIndexChanged(int index);
     void setFontForViews(int);
-    void on_close_text_browser(QDockWidget *widget, bool &closed);
-    void remove_text_browser(code_browser *text_browser);
+    void close_text_browser(QDockWidgetX *widget, bool &closed);
+    void remove_text_browser(QDockWidgetX *dock_widget);
 
-    void showDockedWidget(QWidget* widget, bool hide=false);
+    void showDockedWidget(QWidget* widget, bool show=true);
+    QList<QDockWidget *> get_dock_widget_of_name(QStringList names);
 
 #ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
@@ -277,6 +293,8 @@ private Q_SLOTS:
     void createBookmark();
     void showInformation();
     void compare_items(QString& item1, QString& item2);
+    void on_comboOpenNewEditor_currentIndexChanged(int index);
+
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
@@ -330,15 +348,26 @@ private:
     QString mFindGrep;
     QString mFindFsrc;
     QString mCompare2Items;
+    QString mActivViewObjectName;
     QMap<QString, QString> mExternalFileOpenExt;
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;
     QLabel *m_status_column_label;
-    QList<code_browser*> m_textBrowser;
-    code_browser*        m_active_textBrowser;
     QMutex  mTempFileMutex;
     QString mTempFilePath;
     QFile   mTempFile;
+
+    static constexpr char new_textbrowser[]    = "new_textbrowser";
+    static constexpr char textbrowser[]        = "textbrowser";
+    static constexpr char graphicsviewer[]     = "graphicsviewer";
+    static constexpr char binary_table_view[]  = "binary_table_view";
+    static constexpr char historyview[]        = "historyview";
+    static constexpr char branchview[]         = "branchview";
+    static constexpr char stashview[]          = "stashview";
+    static constexpr char findview[]           = "findview";
+    static constexpr char binaryview[]         = "binaryview";
+    static constexpr char markdown_view[]      = "markdown_view";
+    static constexpr char cloned_textbrowser[] = "cloned_textbrowser";
 
 };
 

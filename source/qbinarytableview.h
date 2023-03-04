@@ -6,12 +6,12 @@
 #include <QFile>
 #include <QJsonValue>
 #include "DisplayType.h"
-
+#include "editable.h"
 #include <boost/optional/optional.hpp>
 
 class BinaryTableModel;
 
-class qbinarytableview : public QTableView
+class qbinarytableview : public QTableView, public Editable
 {
     friend class BinaryTableModel;
     Q_OBJECT
@@ -58,7 +58,6 @@ private:
     void change_cursor();
 
     std::vector<double> mColumnWidth;
-
 };
 
 

@@ -323,7 +323,7 @@ void MainWindow::open_file_externally()
 
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number, bool reopen_file)
 {
-    on_btnCloseText_clicked();
+    btnCloseText_clicked(Editor::Active);
     const QFileInfo file_info(file_path);
     QString         file_extension = file_info.suffix().toLower();
 
@@ -371,18 +371,13 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     if (file.open(QIODevice::ReadOnly))
     {
         const bool is_binary_file = qbinarytableview::is_binary(file);
-        /// TODO: open file in extra textBrowser
 
-        /// TODO: new extra text browser
-        /// - check all for save status
-        /// - check all on_btnCloseText_clicked for ui->textBrowser calls, when Additional Editors
+//        if (additional_editor() == AdditionalEditor::One && !is_binary_file)
+//        {
+//            showDockedWidget(ui->textBrowser);
+//        }
 
-        if (ui->comboOpenNewEditor->currentIndex() != AdditionalEditor::None && !is_binary_file)
-        {
-            showDockedWidget(ui->textBrowser);
-        }
-
-        code_browser * text_browser = get_active_text_browser(file_path);
+        code_browser * text_browser = dynamic_cast<code_browser*>(get_active_editable_widget(file_path));
         if (!text_browser && !is_binary_file)
         {
             text_browser = create_new_text_browser(file_path);
@@ -391,7 +386,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
         QWidget* widget_to_be_shown = text_browser;
         ui->labelFilePath->setText(file_path);
-        if (text_browser)
+        if (text_browser && reopen_file)
         {
             text_browser->set_file_path(file_path);
             text_browser->reset();
@@ -404,10 +399,11 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         {
             updateSelectedLanguage(tr("binary"));
             ui->tableBinaryView->set_binary_data(file.readAll());
+            ui->tableBinaryView->set_file_path(file_path);
             widget_to_be_shown = ui->tableBinaryView;
             showDockedWidget(mBinaryValuesView.data());
         }
-        else if (reopen_file)
+        else if (reopen_file && text_browser)
         {
             bool codec_selected = false;
             if (ui->comboTextCodex->currentIndex())
@@ -453,6 +449,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         }
 
         showDockedWidget(widget_to_be_shown);
+
         if (text_browser)
         {
             if (line_number)
@@ -486,7 +483,7 @@ void MainWindow::updateRepositoryStatus(bool append)
     {
         if (!append)
         {
-            on_btnCloseText_clicked(Editor::Viewer);
+            btnCloseText_clicked(Editor::Viewer);
         }
         auto item = ui->treeSource->topLevelItem(selected_item);
         ui->treeSource->removeItemWidget(item, 0);
@@ -594,7 +591,7 @@ void  MainWindow::applyCommandToFileTree(const QString& aCommand)
 {
     if (mContextMenuSourceTreeItem)
     {
-        on_btnCloseText_clicked(Editor::Viewer);
+        btnCloseText_clicked(Editor::Viewer);
         mGitCommand = aCommand;
         QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
         const QString ftlp      = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
@@ -643,7 +640,7 @@ void  MainWindow::call_git_commit()
 
     if (commit_message.exec() == QDialog::Accepted)
     {
-        on_btnCloseText_clicked(Editor::Viewer);
+        btnCloseText_clicked(Editor::Viewer);
         const QString message_text   = commit_message.getMessageText();
         string        command        = Cmd::getCommand(Cmd::Commit).toStdString();
         const QString commit_command = tr(command.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), message_text);
@@ -815,7 +812,7 @@ void MainWindow::perform_custom_command()
 
         if (git_command.contains("-C %1"))
         {
-            on_btnCloseText_clicked(Editor::Viewer);
+            btnCloseText_clicked(Editor::Viewer);
             QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
             QString cmd_option = get_git_command_option(type, command_flags, variant_list);
@@ -938,7 +935,7 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
             }
             if (item.indexOf("*") == 0)
             {
-                option += item.right(item.size()-1);
+                option += item.rightRef(item.size()-1);
                 option += " ";
             }
         }
@@ -949,7 +946,7 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
 
 int MainWindow::call_git_command(QString git_command, const QString& argument1, const QString& argument2, QString&result_str, const QString& git_root_path)
 {
-    on_btnCloseText_clicked(Editor::Viewer);
+    btnCloseText_clicked(Editor::Viewer);
 
     if (git_command.contains("-C %1"))
     {
@@ -1113,30 +1110,6 @@ void MainWindow::copy_file(copy command)
         }
     }
 }
-/*
-#include <type_traits>
-
-#define define_has_member(member_name)                                         \
-    template <typename T>                                                      \
-    class has_member_##member_name                                             \
-    {                                                                          \
-        typedef char yes_type;                                                 \
-        typedef long no_type;                                                  \
-        template <typename U> static yes_type test(decltype(&U::member_name)); \
-        template <typename U> static no_type  test(...);                       \
-    public:                                                                    \
-        static constexpr bool value = sizeof(test<T>(0)) == sizeof(yes_type);  \
-    }
-
-/// Shorthand for testing if "class_" has a member called "member_name"
-///
-/// @note "define_has_member(member_name)" must be used
-///       before calling "has_member(class_, member_name)"
-///
-#define has_member(class_, member_name)  has_member_##member_name<class_>::value
-
-define_has_member(birthTime);
-*/
 
 void MainWindow::showInformation()
 {
@@ -1169,20 +1142,23 @@ void MainWindow::showInformation()
 
         information << "States: " << states.toStdString() << std::endl;
         information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
-#ifdef __linux__
+#if QT_DEPRECATED_SINCE(5, 10)
+        if (file_info.created().isValid())
+        {
+            information << "\nCreated: " << file_info.created().toString(Qt::SystemLocaleShortDate).toStdString();
+        }
+#else
         if (file_info.birthTime().isValid())
         {
             information << "\nCreated: " << file_info.birthTime().toString(Qt::SystemLocaleShortDate).toStdString();
         }
-#endif
-        information << "\nModified: " << file_info.lastModified().toString(Qt::SystemLocaleShortDate).toStdString();
-        information << "\nLast Access: " << file_info.lastRead().toString(Qt::SystemLocaleShortDate).toStdString();
-#ifdef __linux__
         if (file_info.metadataChangeTime().isValid())
         {
             information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate).toStdString();
         }
 #endif
+        information << "\nModified: " << file_info.lastModified().toString(Qt::SystemLocaleShortDate).toStdString();
+        information << "\nLast Access: " << file_info.lastRead().toString(Qt::SystemLocaleShortDate).toStdString();
         information << "\nPermissions:\n" << formatPermissions(file_info.permissions()).toStdString() << std::endl;
 #ifdef __linux__
         information << "\nOwner: " << file_info.owner().toStdString();
