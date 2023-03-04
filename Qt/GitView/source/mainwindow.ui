@@ -307,6 +307,39 @@ Shows file and folder tree of git repositories
            <number>0</number>
           </property>
           <item>
+           <widget class="QComboBox" name="comboOpenNewEditor">
+            <property name="toolTip">
+             <string>Open Editors (click What's this?)</string>
+            </property>
+            <property name="whatsThis">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Select additional open Editors.&lt;br&gt;
+Git or command results are always displayed in main editor.
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;No additional Editor:&lt;/b&gt; File text is also displayed in main editor&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;One additional Editor:&lt;/b&gt;File text is displayed in a separate editor&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;One Editor per File:&lt;/b&gt;Every file is displayed in a separate editor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>No additional Editor</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>One additional Editor</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>One Editor per File</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="labelHeader">
             <property name="maximumSize">
              <size>
@@ -934,25 +967,6 @@ Enter text to search</string>
           <property name="value">
            <number>10</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboOpenNewEditor">
-          <item>
-           <property name="text">
-            <string>No additional Editor</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>One additional Editor</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>One Editor per File</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>

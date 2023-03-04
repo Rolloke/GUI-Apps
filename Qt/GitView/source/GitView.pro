@@ -36,6 +36,7 @@ SOURCES += main.cpp\
     binary_values_view.cpp \
     code_browser.cpp \
     commit_graphics_item.cpp \
+    editable.cpp \
     highlighterdialog.cpp \
     mainwindow.cpp \
     helper.cpp \
@@ -45,6 +46,7 @@ SOURCES += main.cpp\
     mainwindow_sourcetree.cpp \
     mainwindow_stashtree.cpp \
     mainwindow_textview.cpp \
+    qdockwidgetx.cpp \
     qsourcetreewidget.cpp \
     workerthreadconnector.cpp \
     git_type.cpp \
@@ -69,9 +71,11 @@ HEADERS  += mainwindow.h \
     binary_values_view.h \
     code_browser.h \
     commit_graphics_item.h \
+    editable.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
+    qdockwidgetx.h \
     qsourcetreewidget.h \
     workerthreadconnector.h \
     git_type.h \

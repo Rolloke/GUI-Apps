@@ -20,7 +20,7 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
     {
         if (!append)
         {
-            on_btnCloseText_clicked(Editor::Viewer);
+            btnCloseText_clicked(Editor::Viewer);
         }
         ui->textBrowser->setExtension(ext);
         ui->textBrowser->insertPlainText(aText + getLineFeed());
@@ -71,89 +71,151 @@ void MainWindow::selectTextBrowserLanguage()
     }
 }
 
-bool MainWindow::on_btnCloseText_clicked(Editor::e editor)
+void MainWindow::reset_text_browser(code_browser* text_browser)
 {
-    code_browser* text_browser = get_active_text_browser();
-    if (ui->comboOpenNewEditor->currentIndex() != AdditionalEditor::None)
+    if (text_browser)
+    {
+        text_browser->setText("");
+        text_browser->set_file_path("");
+        text_browser->set_changed(false);
+        text_browser->reset();
+    }
+}
+
+bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e editor, bool& all_closed)
+{
+    /// TODO: implement close all
+    /// TODO: set next visible and editable text browser active
+    if (additional_editor() != AdditionalEditor::None)
     {
         switch (editor)
         {
         case Editor::Viewer:
-            ui->textBrowser->setText("");
-            return true;
-        case Editor::Active:
-            if (text_browser != ui->textBrowser)
+            reset_text_browser(ui->textBrowser);
+            return false;
+        case Editor::CalledFromAction:
+            send_close_to_editable_widget(dynamic_cast<code_browser*>(active_widget));
+            if (mActivViewObjectName == textbrowser)
             {
-                removeDockWidget(dynamic_cast<QDockWidget*>(text_browser->parent()));
+                reset_text_browser(ui->textBrowser);
+            }
+            if (mActivViewObjectName == binaryview)
+            {
                 return true;
             }
-            break;
+            return false;
+        case Editor::Active:
+            return true;
+//            if (additional_editor() != AdditionalEditor::OnNewFile)
+//            {
+//                send_close_to_editable_widget(dynamic_cast<code_browser*>(active_widget));
+//                return false;
+//            }
+//            break;
         case Editor::All:
-            if (ui->comboOpenNewEditor->currentIndex() == AdditionalEditor::OnNewFile)
+            if (additional_editor() == AdditionalEditor::OnNewFile)
             {
-                // TODO: close all
+                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+                for (QDockWidget* dock_widget : dock_widgets)
+                {
+                    code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+                    text_browser->set_active(false);
+                }
+                all_closed = true;
+                ui->tableBinaryView->set_active(false);
+                for (QDockWidget* dock_widget : dock_widgets)
+                {
+                    code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+                    text_browser->set_active(true);
+                    all_closed = send_close_to_editable_widget(text_browser);
+                    text_browser->set_active(false);
+                    if (!all_closed) break;
+                }
+                if (all_closed)
+                {
+                    if (ui->tableBinaryView->get_changed())
+                    {
+                        ui->tableBinaryView->set_active(true);
+                        active_widget = ui->tableBinaryView;
+                        return true;
+                    }
+                }
+                return false;
             }
             break;
-        case Editor::ActiveFromWidget:
+        case Editor::CalledFromWidget:
             break;
         }
     }
-
-    if (text_browser->get_changed() && text_browser->get_file_path().length() > 0)
-    {
-        QMessageBox fSaveRequest;
-        fSaveRequest.setText(tr("The document has been modified.\n\n%1").arg(ui->labelFilePath->text()));
-        fSaveRequest.setInformativeText(tr("Do you want to save your changes?"));
-        fSaveRequest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        fSaveRequest.setDefaultButton(QMessageBox::Save);
-        switch (fSaveRequest.exec())
-        {
-        case QMessageBox::Save:
-            on_btnStoreText_clicked(text_browser);
-            break;
-        case QMessageBox::Discard:
-            break;
-        case QMessageBox::Cancel:
-            return false; // do not close app
-        }
-    }
-
-    if (ui->comboOpenNewEditor->currentIndex() == AdditionalEditor::None)
-    {
-        text_browser->reset();
-        text_browser->setText("");
-    }
-
-    if (ui->tableBinaryView->get_binary_data().size())
-    {
-        ui->tableBinaryView->clear_binary_content();
-        showDockedWidget(mBinaryValuesView.data(), true);
-    }
-
-    set_widget_and_action_enabled(ui->btnStoreText, false);
-
-    ui->labelFilePath->setText("");
-
-    if (!ui->graphicsView->has_rendered_graphic())
-    {
-        ui->graphicsView->clear();
-    }
-
-    return true; // can close app
+    return true;
 }
 
-void MainWindow::on_btnStoreText_clicked(code_browser* text_browser)
+bool MainWindow::btnCloseText_clicked(Editor::e editor)
 {
-    if (!text_browser)
+    QWidget* active_widget = get_active_editable_widget();
+    bool all_closed = false;
+    if (close_editable_widgets(active_widget, editor, all_closed))
     {
-        text_browser = get_active_text_browser();
+        QString filepath = get_file_path(active_widget);
+        if (get_changed(active_widget) && filepath.length() > 0)
+        {
+            QMessageBox fSaveRequest;
+            fSaveRequest.setText(tr("The document has been modified.\n\n%1").arg(filepath));
+            fSaveRequest.setInformativeText(tr("Do you want to save your changes?"));
+            fSaveRequest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+            fSaveRequest.setDefaultButton(QMessageBox::Save);
+            switch (fSaveRequest.exec())
+            {
+            case QMessageBox::Save:
+                btnStoreText_clicked();
+                break;
+            case QMessageBox::Discard:
+                break;
+            case QMessageBox::Cancel:
+                return false; // do not close app
+            }
+        }
+
+        if (mActivViewObjectName == binaryview)
+        {
+            if (ui->tableBinaryView->get_binary_data().size())
+            {
+                ui->tableBinaryView->clear_binary_content();
+                showDockedWidget(mBinaryValuesView.data(), false);
+            }
+        }
+        else if (   additional_editor() == AdditionalEditor::None
+                 || additional_editor() == AdditionalEditor::One)
+        {
+            reset_text_browser(dynamic_cast<code_browser*>(active_widget));
+        }
+
+        if (mActivViewObjectName == graphicsviewer)
+        {
+            if (!ui->graphicsView->has_rendered_graphic())
+            {
+                ui->graphicsView->clear();
+            }
+        }
+
+        set_widget_and_action_enabled(ui->btnStoreText, false);
+        ui->labelFilePath->setText("");
+        return true; // can close app
     }
-    QString fFileName = text_browser->get_file_path();
-    if (fFileName.length() == 0)
+    return all_closed;
+}
+
+void MainWindow::btnStoreText_clicked()
+{
+    /// TODO: implement save all
+    QWidget* active_widget = get_active_editable_widget();
+    code_browser* text_browser = dynamic_cast<code_browser*>(active_widget);
+    QString file_name = get_file_path(active_widget);
+    if (file_name.length() == 0)
     {
-        fFileName = QFileDialog::getSaveFileName(this, tr("Save content of text editor"));
+        file_name = QFileDialog::getSaveFileName(this, tr("Save content of text editor"));
     }
-    QFile file(fFileName);
+    QFile file(file_name);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
         const auto & binary_data = ui->tableBinaryView->get_binary_data();
@@ -166,7 +228,7 @@ void MainWindow::on_btnStoreText_clicked(code_browser* text_browser)
             const string fString = text_browser->toPlainText().toStdString();
             file.write(fString.c_str(), fString.size());
         }
-        if (ui->comboOpenNewEditor->currentIndex() == AdditionalEditor::None)
+        if (additional_editor() == AdditionalEditor::None)
         {
             set_widget_and_action_enabled(ui->btnStoreText, false);
         }
@@ -189,7 +251,7 @@ void MainWindow::updateSelectedLanguage(const QString& language)
 void MainWindow::show_web_view(bool show)
 {
     QWidget* pView = (QWidget*)mWebEngineView.data();
-    showDockedWidget(pView, !show);
+    showDockedWidget(pView, show);
 }
 #endif
 

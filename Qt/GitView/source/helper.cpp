@@ -443,36 +443,4 @@ bool LinkFilter::eventFilter(QObject *, QEvent *event)
     return false;
 }
 
-QDockWidgetX::QDockWidgetX(const QString &title, QWidget *parent, Qt::WindowFlags flags)
-    : QDockWidget(title, parent, flags),
-      m_closing(false)
-{
 
-}
-
-void QDockWidgetX::closeEvent(QCloseEvent *event)
-{
-    bool close = true;
-    m_closing = true;
-    Q_EMIT signal_close(this, close);
-    m_closing = false;
-    if (close)
-    {
-        event->accept();
-    }
-    else
-    {
-        event->ignore();
-    }
-    QDockWidget::closeEvent(event);
-}
-
-bool QDockWidgetX::event(QEvent *event)
-{
-    return QDockWidget::event(event);
-}
-
-bool QDockWidgetX::is_closing()
-{
-    return m_closing;
-}
