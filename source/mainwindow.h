@@ -208,7 +208,9 @@ private Q_SLOTS:
     void textBrowserChanged();
 
     void btnStoreText_clicked();
+    void btnStoreAll_clicked();
     bool btnCloseText_clicked(Editor::e editor=Editor::CalledFromAction);
+    void btnCloseAll_clicked();
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
     void on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int column);

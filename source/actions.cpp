@@ -170,6 +170,8 @@ void ActionList::initActionIcons()
     action_icons[Cmd::ShowInformation]         = "dialog-information.png";
     action_icons[Cmd::WhatsThisHelp]           = "dialog-question.png";
     action_icons[Cmd::CompareTo]               = "object-flip-horizontal.png";
+    action_icons[Cmd::CloseAll]                = "window-close.png";
+    action_icons[Cmd::SaveAll]                 = "document-save.png";
 
     for (auto& icon_path: action_icons )
     {
