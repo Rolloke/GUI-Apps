@@ -372,6 +372,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboOpenNewEditor, setCurrentIndex, currentIndex, toInt);
+        on_comboOpenNewEditor_currentIndexChanged(0);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
@@ -941,6 +942,7 @@ void MainWindow::showDockedWidget(QWidget* widget, bool show)
             }
 
             parent->raise();
+            /// TODO: find out, if this is necessary
             on_DockWidgetActivated(parent);
         }
         else
@@ -1098,7 +1100,9 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     docked_browser->setReadOnly(false);
     QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, new_textbrowser, true);
     dock->setAttribute(Qt::WA_DeleteOnClose);
+    dock->set_object_names({new_textbrowser});
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
+    connect(dock, SIGNAL(signal_dock_widget_activated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
     if (parent)
     {
@@ -1685,6 +1689,9 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CompareTo, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CompareTo, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::CloseAll, tr("Close all"), tr("Closes all documents")), SIGNAL(triggered()), this, SLOT(btnCloseAll_clicked()));
+    connect(mActions.createAction(Cmd::SaveAll, tr("Save all"), tr("Saves all documents")), SIGNAL(triggered()), this, SLOT(btnStoreAll_clicked()));
+
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1762,8 +1769,10 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(Cmd::Separator);
 
     create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
+    mActions.getAction(new_id)->setText(tr("Store"));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
+    mActions.getAction(new_id)->setText(tr("Close"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
@@ -2715,6 +2724,9 @@ void MainWindow::setFontForViews(int)
 
 void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
 {
+    bool allfiles= additional_editor() == AdditionalEditor::OnNewFile;
+    mActions.getAction(Cmd::CloseAll)->setEnabled(allfiles);
+    mActions.getAction(Cmd::SaveAll)->setEnabled(allfiles);
     /// TODO: handle OpenNewEditor_currentIndexChanged
     /// - None
     /// - One

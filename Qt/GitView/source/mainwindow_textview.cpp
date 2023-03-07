@@ -84,8 +84,6 @@ void MainWindow::reset_text_browser(code_browser* text_browser)
 
 bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e editor, bool& all_closed)
 {
-    /// TODO: implement close all
-    /// TODO: set next visible and editable text browser active
     if (additional_editor() != AdditionalEditor::None)
     {
         switch (editor)
@@ -106,12 +104,6 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e edito
             return false;
         case Editor::Active:
             return true;
-//            if (additional_editor() != AdditionalEditor::OnNewFile)
-//            {
-//                send_close_to_editable_widget(dynamic_cast<code_browser*>(active_widget));
-//                return false;
-//            }
-//            break;
         case Editor::All:
             if (additional_editor() == AdditionalEditor::OnNewFile)
             {
@@ -148,6 +140,11 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e edito
         }
     }
     return true;
+}
+
+void MainWindow::btnCloseAll_clicked()
+{
+    btnCloseText_clicked(Editor::All);
 }
 
 bool MainWindow::btnCloseText_clicked(Editor::e editor)
@@ -205,11 +202,33 @@ bool MainWindow::btnCloseText_clicked(Editor::e editor)
     return all_closed;
 }
 
+void MainWindow::btnStoreAll_clicked()
+{
+    code_browser* active = nullptr;
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        if (text_browser->get_active()) active = text_browser;
+        text_browser->set_active(false);
+    }
+
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        text_browser->set_active(true);
+        btnStoreText_clicked();
+        text_browser->set_active(false);
+    }
+    if (active)
+    {
+        active->set_active(true);
+    }
+}
+
 void MainWindow::btnStoreText_clicked()
 {
-    /// TODO: implement save all
     QWidget* active_widget = get_active_editable_widget();
-    code_browser* text_browser = dynamic_cast<code_browser*>(active_widget);
     QString file_name = get_file_path(active_widget);
     if (file_name.length() == 0)
     {
@@ -218,20 +237,24 @@ void MainWindow::btnStoreText_clicked()
     QFile file(file_name);
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
-        const auto & binary_data = ui->tableBinaryView->get_binary_data();
-        if (binary_data.size())
-        {
-            file.write(binary_data);
-        }
-        else
+        code_browser* text_browser = dynamic_cast<code_browser*>(active_widget);
+        if (text_browser)
         {
             const string fString = text_browser->toPlainText().toStdString();
             file.write(fString.c_str(), fString.size());
+            text_browser->set_changed(false);
         }
-        if (additional_editor() == AdditionalEditor::None)
+        qbinarytableview* binary_table = dynamic_cast<qbinarytableview*>(active_widget);
+        if (binary_table)
         {
-            set_widget_and_action_enabled(ui->btnStoreText, false);
+            const auto & binary_data = ui->tableBinaryView->get_binary_data();
+            if (binary_data.size())
+            {
+                file.write(binary_data);
+            }
+            binary_table->set_changed(false);
         }
+        set_widget_and_action_enabled(ui->btnStoreText, false);
         perform_post_cmd_action(Cmd::UpdateItemStatus);
     }
 }

@@ -95,6 +95,8 @@ struct Cmd
         OpenFileExternally,
         WhatsThisHelp,
         CompareTo,
+        CloseAll,
+        SaveAll,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
