@@ -1970,7 +1970,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
         {
             mTempFile.setFileName(mTempFilePath);
             lock.unlock();
-            mTempFile.open(QFile::ReadOnly|QFile::ExistingOnly|QFile::Text);
+            mTempFile.open(QFile::ReadOnly|QFile::Text);
         }
     }
 }

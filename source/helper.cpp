@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QEvent>
 #include <QWhatsThisClickedEvent>
+#include <QThread>
 
 #include <fstream>
 #include <sstream>
@@ -286,7 +287,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
 
     if (emit_file_path)
     {
-        usleep(150);
+        QThread::msleep(150);
         emit_file_path("");
         return fResult;
     }
