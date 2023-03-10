@@ -2724,8 +2724,14 @@ void MainWindow::setFontForViews(int)
 
 void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
 {
-    bool allfiles= additional_editor() == AdditionalEditor::OnNewFile;
+    bool allfiles = additional_editor() == AdditionalEditor::OnNewFile;
     mActions.getAction(Cmd::CloseAll)->setEnabled(allfiles);
     mActions.getAction(Cmd::SaveAll)->setEnabled(allfiles);
+    QDockWidget*dock = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
+    if (dock)
+    {
+        bool only_viewer = additional_editor() != AdditionalEditor::None;
+        dock->setWindowTitle(only_viewer ? tr("Text Viewer") : tr("Text Viewer / Editor"));
+    }
 }
 
