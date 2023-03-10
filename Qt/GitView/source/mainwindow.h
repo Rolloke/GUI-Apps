@@ -252,6 +252,7 @@ private Q_SLOTS:
     void on_comboUserStyle_currentIndexChanged(int index);
     void on_spinTabulator_valueChanged(int width);
     void comboTabPositionIndexChanged(int index);
+    void on_comboOpenNewEditor_currentIndexChanged(int index);
     void setFontForViews(int);
     void close_text_browser(QDockWidgetX *widget, bool &closed);
     void remove_text_browser(QDockWidgetX *dock_widget);
@@ -295,7 +296,6 @@ private Q_SLOTS:
     void createBookmark();
     void showInformation();
     void compare_items(QString& item1, QString& item2);
-    void on_comboOpenNewEditor_currentIndexChanged(int index);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
