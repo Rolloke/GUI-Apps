@@ -118,7 +118,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
     QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
-    connect(ui->textBrowser, SIGNAL(text_of_active_changed()), this, SLOT(textBrowserChanged()));
+    connect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     ui->textBrowser->set_active(true);
     connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     startTimer(100);
@@ -476,7 +476,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 MainWindow::~MainWindow()
 {
-    disconnect(ui->textBrowser, SIGNAL(textChanged()), this, SLOT(textBrowserChanged()));
+    disconnect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     showDockedWidget(mBinaryValuesView.data(), false);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -942,8 +942,6 @@ void MainWindow::showDockedWidget(QWidget* widget, bool show)
             }
 
             parent->raise();
-            /// TODO: find out, if this is necessary
-            on_DockWidgetActivated(parent);
         }
         else
         {
@@ -1090,7 +1088,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     }
 
     auto *docked_browser = ui->textBrowser->clone(true, false);
-    connect(docked_browser, SIGNAL(text_of_active_changed()), this, SLOT(textBrowserChanged()));
+    connect(docked_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
@@ -1103,6 +1101,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     dock->set_object_names({new_textbrowser});
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
     connect(dock, SIGNAL(signal_dock_widget_activated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
+    connect(dock, SIGNAL(visibilityChanged(bool)), docked_browser, SLOT(change_visibility(bool)));
     QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
     if (parent)
     {
@@ -1142,12 +1141,13 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
     if (dock_widget && dock_widget->objectName() == new_textbrowser)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-        disconnect(text_browser, SIGNAL(text_of_active_changed()), this, SLOT(textBrowserChanged()));
+        disconnect(text_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
         disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(textChanged(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
+        disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
     }
 }
 
@@ -1769,7 +1769,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(Cmd::Separator);
 
     create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
-    mActions.getAction(new_id)->setText(tr("Store"));
+    mActions.getAction(new_id)->setText(tr("Save"));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
     mActions.getAction(new_id)->setText(tr("Close"));
@@ -2727,9 +2727,5 @@ void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
     bool allfiles= additional_editor() == AdditionalEditor::OnNewFile;
     mActions.getAction(Cmd::CloseAll)->setEnabled(allfiles);
     mActions.getAction(Cmd::SaveAll)->setEnabled(allfiles);
-    /// TODO: handle OpenNewEditor_currentIndexChanged
-    /// - None
-    /// - One
-    /// - OnNewFile
 }
 

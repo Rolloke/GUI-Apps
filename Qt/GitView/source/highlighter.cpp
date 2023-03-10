@@ -282,6 +282,16 @@ const QString& Highlighter::currentLanguage() const
     return mCurrentLanguage;
 }
 
+bool Highlighter::hasExtension(const QString &ext) const
+{
+    auto language = mExtensionToLanguage.find(ext);
+    if (language != mExtensionToLanguage.end())
+    {
+        return mCurrentLanguage == language.value();
+    }
+    return false;
+}
+
 
 void Highlighter::load_language_list()
 {

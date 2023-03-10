@@ -372,11 +372,6 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     {
         const bool is_binary_file = qbinarytableview::is_binary(file);
 
-//        if (additional_editor() == AdditionalEditor::One && !is_binary_file)
-//        {
-//            showDockedWidget(ui->textBrowser);
-//        }
-
         code_browser * text_browser = dynamic_cast<code_browser*>(get_active_editable_widget(file_path));
         if (!text_browser && !is_binary_file)
         {
@@ -386,15 +381,20 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
         QWidget* widget_to_be_shown = text_browser;
         ui->labelFilePath->setText(file_path);
-        if (text_browser && reopen_file)
-        {
-            text_browser->set_file_path(file_path);
-            text_browser->reset();
-        }
         if (file_extension == "txt" && file_path.contains("CMakeLists.txt"))
         {
             file_extension = "cmake";
         }
+
+        if (text_browser && reopen_file)
+        {
+            text_browser->set_file_path(file_path);
+            if (!text_browser->hasExtension(file_extension))
+            {
+                text_browser->reset();
+            }
+        }
+
         if (is_binary_file)
         {
             updateSelectedLanguage(tr("binary"));
@@ -421,8 +421,10 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             {
                 QTextCodec::setCodecForLocale(nullptr);
             }
-
-            text_browser->setExtension(file_extension);
+            if (!text_browser->hasExtension(file_extension))
+            {
+                text_browser->setExtension(file_extension);
+            }
             if (ui->ckRenderGraphicFile->isChecked())
             {
                 if (codec_selected)
@@ -446,6 +448,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
                 }
             }
             text_browser->set_changed(false);
+            textBrowserChanged(false);
         }
 
         showDockedWidget(widget_to_be_shown);
