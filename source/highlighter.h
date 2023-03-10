@@ -117,6 +117,7 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     const QString& currentLanguage() const;
+    bool hasExtension(const QString &ext) const;
     static const QStringList& getLanguages();
 
 

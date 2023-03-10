@@ -205,7 +205,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void updateRepositoryStatus(bool append=false);
-    void textBrowserChanged();
+    void textBrowserChanged(bool changed=false);
 
     void btnStoreText_clicked();
     void btnStoreAll_clicked();

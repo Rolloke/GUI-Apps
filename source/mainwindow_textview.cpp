@@ -260,9 +260,9 @@ void MainWindow::btnStoreText_clicked()
 }
 
 
-void MainWindow::textBrowserChanged()
+void MainWindow::textBrowserChanged(bool changed)
 {
-    set_widget_and_action_enabled(ui->btnStoreText, true);
+    set_widget_and_action_enabled(ui->btnStoreText, changed);
 }
 
 void MainWindow::updateSelectedLanguage(const QString& language)

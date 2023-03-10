@@ -72,6 +72,22 @@ void code_browser::set_show_line_numbers(bool show)
     m_line_number_area->setVisible(show);
 }
 
+void code_browser::change_visibility(bool visible)
+{
+    if (visible)
+    {
+        own_text_changed();
+    }
+    else
+    {
+        QString current_language = mHighlighter->currentLanguage();
+        if (current_language == "html" || current_language == "markdown")
+        {
+            Q_EMIT show_web_view(false);
+        }
+    }
+}
+
 code_browser* code_browser::clone(bool all_parameter, bool with_text)
 {
     auto *cloned =  new code_browser(parentWidget());
@@ -87,6 +103,7 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
     {
         cloned->m_actions  = m_actions;
         cloned->m_web_page = m_web_page;
+        cloned->setWhatsThis(whatsThis());
     }
     return cloned;
 }
@@ -289,6 +306,11 @@ void code_browser::setExtension(const QString &ext)
     mHighlighter->setExtension(ext);
 }
 
+bool code_browser::hasExtension(const QString& ext)
+{
+    return mHighlighter->hasExtension(ext);
+}
+
 void code_browser::setLanguage(const QString& language)
 {
     mHighlighter->setLanguage(language);
@@ -486,11 +508,11 @@ void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const Q
 
 void code_browser::own_text_changed()
 {
-    if (m_active)
+    m_FileChanged = document()->isModified();
+    if (m_active && m_FileChanged)
     {
-        Q_EMIT text_of_active_changed();
+        Q_EMIT text_of_active_changed(m_FileChanged);
     }
-    m_FileChanged = true;
 #ifdef WEB_ENGINE
     if (m_web_page)
     {

@@ -37,6 +37,7 @@ public:
     void setExtension(const QString& ext);
     void setLanguage(const QString& language);
     void parse_blame(const QString& blame);
+    bool hasExtension(const QString& ext);
 
     code_browser* clone(bool all_parameter=false, bool with_text=true);
 
@@ -54,10 +55,11 @@ Q_SIGNALS:
     void show_web_view(bool);
     void line_changed(int);
     void column_changed(int);
-    void text_of_active_changed();
+    void text_of_active_changed(bool);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
+    void change_visibility(bool visible);
 
 private Q_SLOTS:
     void updateLineNumberAreaWidth(int newBlockCount);
