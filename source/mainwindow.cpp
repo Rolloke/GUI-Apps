@@ -1068,11 +1068,11 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
 
 }
 
-bool MainWindow::send_close_to_editable_widget(QWidget*text_browser)
+bool MainWindow::send_close_to_editable_widget(QWidget*editable_widget)
 {
-    if (text_browser && text_browser != ui->textBrowser)
+    if (editable_widget && editable_widget != ui->textBrowser && editable_widget != ui->tableBinaryView)
     {
-        QDockWidgetX*dw = dynamic_cast<QDockWidgetX*>(text_browser->parent());
+        QDockWidgetX*dw = dynamic_cast<QDockWidgetX*>(editable_widget->parent());
         if (dw)
         {
             QAction* action = dw->toggleViewAction();
@@ -1081,7 +1081,7 @@ bool MainWindow::send_close_to_editable_widget(QWidget*text_browser)
             return dw->is_closing();
         }
     }
-    return false;
+    return true;
 }
 
 void MainWindow::close_text_browser(QDockWidgetX* widget, bool&closed)
