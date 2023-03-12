@@ -107,20 +107,18 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e edito
         case Editor::All:
             if (additional_editor() == AdditionalEditor::OnNewFile)
             {
-                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
-                    code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-                    text_browser->set_active(false);
+                    set_active(dock_widget->widget(), false);
                 }
                 all_closed = true;
-                ui->tableBinaryView->set_active(false);
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
-                    code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-                    text_browser->set_active(true);
-                    all_closed = send_close_to_editable_widget(text_browser);
-                    text_browser->set_active(false);
+                    QWidget* current_widget = dock_widget->widget();
+                    set_active(current_widget, true);
+                    all_closed = send_close_to_editable_widget(current_widget);
+                    set_active(current_widget, false);
                     if (!all_closed) break;
                 }
                 if (all_closed)
@@ -204,25 +202,25 @@ bool MainWindow::btnCloseText_clicked(Editor::e editor)
 
 void MainWindow::btnStoreAll_clicked()
 {
-    code_browser* active = nullptr;
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    QWidget* active_widget = nullptr;
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-        if (text_browser->get_active()) active = text_browser;
-        text_browser->set_active(false);
+        QWidget* current_widget = dock_widget->widget();
+        if (get_active(current_widget)) active_widget = current_widget;
+        set_active(current_widget, false);
     }
 
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-        text_browser->set_active(true);
+        QWidget* current_widget = dock_widget->widget();
+        set_active(current_widget, true);
         btnStoreText_clicked();
-        text_browser->set_active(false);
+        set_active(current_widget, false);
     }
-    if (active)
+    if (active_widget)
     {
-        active->set_active(true);
+        set_active(active_widget, true);
     }
 }
 

@@ -96,9 +96,6 @@ private:
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
     void     closeEvent(QCloseEvent *event);
-    const QString& get_file_path(QWidget*widget);
-    bool     get_changed(QWidget*widget);
-    bool     get_active(QWidget*widget);
 
     struct Work
     {

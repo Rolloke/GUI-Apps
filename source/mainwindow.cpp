@@ -128,7 +128,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::Language::load(fSettings);
     ui->textBrowser->reset();
     connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+#ifdef WEB_ENGINE
     connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+#endif
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::ResizeToContents);
@@ -443,7 +445,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     connect(mBinaryValuesView.data(), SIGNAL(set_value(QByteArray,int)), ui->tableBinaryView, SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(set_value(QByteArray,int)), mBinaryValuesView.data(), SLOT(receive_value(QByteArray,int)));
     connect(ui->tableBinaryView, SIGNAL(publish_has_binary_content(bool)), mBinaryValuesView.data(), SLOT(receive_external_data(bool)));
-    connect(ui->tableBinaryView, SIGNAL(contentChanged()), this, SLOT(textBrowserChanged()));
+    connect(ui->tableBinaryView, SIGNAL(contentChanged(bool)), this, SLOT(textBrowserChanged(bool)));
 
 #ifdef WEB_ENGINE
     mWebEngineView->setContextMenuPolicy(Qt::NoContextMenu);
@@ -902,18 +904,18 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
 {
     if (dockWidget)
     {
+//        TRACE(Logger::info, "on_DockWidgetActivated(%s:%s)", dockWidget->objectName().toStdString().c_str(), dockWidget->windowTitle().toStdString().c_str());
         code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
         if (textBrowser)
         {
             QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser});
-            for (QDockWidget* dock_widget : dock_widgets)
+            for (QDockWidget* current_widget : dock_widgets)
             {
-                code_browser* browser = dynamic_cast<code_browser*>(dock_widget->widget());
-                browser->set_active(false);
+                code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
+                browser->set_active(current_widget == dockWidget);
             }
             ui->labelFilePath->setText(textBrowser->get_file_path());
             set_widget_and_action_enabled(ui->btnStoreText, textBrowser->get_changed());
-            textBrowser->set_active(true);
         }
         mActivViewObjectName = dockWidget->objectName();
         bool bv_active = mActivViewObjectName == binaryview;
@@ -1009,52 +1011,6 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
     }
 }
 
-const QString& MainWindow::get_file_path(QWidget*widget)
-{
-    code_browser* text_browser = dynamic_cast<code_browser*>(widget);
-    if (text_browser)
-    {
-        return text_browser->get_file_path();
-    }
-    qbinarytableview* binary_view = dynamic_cast<qbinarytableview*>(widget);
-    if (binary_view)
-    {
-        return binary_view->get_file_path();
-    }
-    static const QString dummy {};
-    return dummy;
-}
-
-bool MainWindow::get_changed(QWidget*widget)
-{
-    code_browser* text_browser = dynamic_cast<code_browser*>(widget);
-    if (text_browser)
-    {
-        return text_browser->get_changed();
-    }
-    qbinarytableview* binary_view = dynamic_cast<qbinarytableview*>(widget);
-    if (binary_view)
-    {
-        return binary_view->get_changed();
-    }
-    return false;
-}
-
-bool MainWindow::get_active(QWidget*widget)
-{
-    code_browser* text_browser = dynamic_cast<code_browser*>(widget);
-    if (text_browser)
-    {
-        return text_browser->get_active();
-    }
-    qbinarytableview* binary_view = dynamic_cast<qbinarytableview*>(widget);
-    if (binary_view)
-    {
-        return binary_view->get_active();
-    }
-    return false;
-}
-
 code_browser* MainWindow::create_new_text_browser(const QString &file_path)
 {
     bool set_filename = true;
@@ -1090,15 +1046,16 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     auto *docked_browser = ui->textBrowser->clone(true, false);
     connect(docked_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
-    connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
     connect(docked_browser, SIGNAL(textChanged(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
+#ifdef WEB_ENGINE
+    connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+#endif
 
     docked_browser->setReadOnly(false);
     QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, new_textbrowser, true);
     dock->setAttribute(Qt::WA_DeleteOnClose);
-    dock->set_object_names({new_textbrowser});
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
     connect(dock, SIGNAL(signal_dock_widget_activated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     connect(dock, SIGNAL(visibilityChanged(bool)), docked_browser, SLOT(change_visibility(bool)));
@@ -1143,11 +1100,13 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         disconnect(text_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
         disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
-        disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(textChanged(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
+#ifdef WEB_ENGINE
+        disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+#endif
     }
 }
 

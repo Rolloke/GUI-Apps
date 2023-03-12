@@ -74,6 +74,7 @@ void code_browser::set_show_line_numbers(bool show)
 
 void code_browser::change_visibility(bool visible)
 {
+#ifdef WEB_ENGINE
     if (visible)
     {
         own_text_changed();
@@ -86,6 +87,7 @@ void code_browser::change_visibility(bool visible)
             Q_EMIT show_web_view(false);
         }
     }
+#endif
 }
 
 code_browser* code_browser::clone(bool all_parameter, bool with_text)

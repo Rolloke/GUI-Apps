@@ -36,7 +36,7 @@ protected:
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
     void publish_has_binary_content(bool );
-    void contentChanged();
+    void contentChanged(bool);
     void type_changed(int);
     void columns_changed(int);
     void offset_changed(int);
