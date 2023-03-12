@@ -1,4 +1,5 @@
 #include "qdockwidgetx.h"
+#include "editable.h"
 
 #include <QCloseEvent>
 
@@ -33,14 +34,9 @@ bool QDockWidgetX::is_closing()
     return m_closed;
 }
 
-void QDockWidgetX::set_object_names(const QStringList& names)
-{
-    m_object_names = names;
-}
-
 void QDockWidgetX::change_visibility(bool visible)
 {
-    if (visible && m_object_names.contains(objectName()))
+    if (visible && !get_active(widget()))
     {
         Q_EMIT signal_dock_widget_activated(this);
     }

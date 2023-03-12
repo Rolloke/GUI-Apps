@@ -1,6 +1,7 @@
 #ifndef EDITABLE_H
 #define EDITABLE_H
 #include <QString>
+#include <QWidget>
 
 class Editable
 {
@@ -20,5 +21,11 @@ protected:
     bool                    m_FileChanged;
     bool                    m_active;
 };
+
+
+const QString& get_file_path(QWidget*widget);
+bool           get_changed(QWidget*widget);
+bool           get_active(QWidget*widget);
+void           set_active(QWidget*widget, bool active);
 
 #endif // EDITABLE_H

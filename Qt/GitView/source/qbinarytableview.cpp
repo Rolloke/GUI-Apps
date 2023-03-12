@@ -402,7 +402,7 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
             m_FileChanged = true;
             if (m_active)
             {
-                Q_EMIT contentChanged();
+                Q_EMIT contentChanged(m_FileChanged);
             }
         }
     }

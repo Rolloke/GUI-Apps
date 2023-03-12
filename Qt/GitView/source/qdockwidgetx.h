@@ -9,7 +9,6 @@ class QDockWidgetX: public QDockWidget
 public:
     explicit QDockWidgetX(const QString &title, QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags());
     bool is_closing();
-    void set_object_names(const QStringList& names);
 
 Q_SIGNALS:
     void signal_close(QDockWidgetX*, bool &close);
@@ -22,7 +21,6 @@ protected:
 
 private:
     bool m_closed;
-    QStringList m_object_names;
 };
 
 
