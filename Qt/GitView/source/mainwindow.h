@@ -85,7 +85,7 @@ private:
     bool     getShowTypeResult(const git::Type& fType);
     QWidget *get_active_editable_widget(const QString &file_path = {});
     code_browser* create_new_text_browser(const QString &file_path);
-    bool     send_close_to_editable_widget(QWidget *text_browser);
+    bool     send_close_to_editable_widget(QWidget *editable_widget);
     void     reset_text_browser(code_browser*text_browser);
 
     enum class copy { name, path, file };
