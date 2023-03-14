@@ -191,7 +191,7 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
     }
     else
     {
-        TRACE(Logger::warning, "no command text for %s", action->toolTip().toStdString().c_str());
+        TRACEX(Logger::warning, "no command text for " << action->toolTip());
     }
 }
 

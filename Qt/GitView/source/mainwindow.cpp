@@ -461,7 +461,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     page->setWebChannel(channel);
 #endif
 
-    TRACE(Logger::info, "%s Started", windowTitle().toStdString().c_str());
+    TRACEX(Logger::info, windowTitle() << " Started");
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -904,7 +904,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
 {
     if (dockWidget)
     {
-//        TRACE(Logger::info, "on_DockWidgetActivated(%s:%s)", dockWidget->objectName().toStdString().c_str(), dockWidget->windowTitle().toStdString().c_str());
+        // TRACEX(Logger::info, "on_DockWidgetActivated("<< dockWidget->objectName() << ":" << dockWidget->windowTitle() << ")");
         code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
         if (textBrowser)
         {
@@ -2065,7 +2065,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         QFile f(mStylePath);
         if (!f.exists())
         {
-            TRACE(Logger::error, "Unable to set stylesheet, file %s not found\n", mStylePath.toStdString().c_str());
+            TRACEX(Logger::error, "Unable to set stylesheet, file " <<  mStylePath << " not found");
         }
         else
         {

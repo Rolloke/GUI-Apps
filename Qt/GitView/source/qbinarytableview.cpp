@@ -297,8 +297,7 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
         if (error.error != QJsonParseError::NoError)
         {
             QString what = error.errorString();
-            QString string = data.left(error.offset-1) + "<< " + what + "\n" + data.right(data.size()-error.offset+1);
-            TRACE(Logger::to_browser, string.toStdString().c_str());
+            TRACEX(Logger::to_browser, data.left(error.offset-1) + "<< " + what + "\n" + data.right(data.size()-error.offset+1));
         }
 
         if (!doc.isEmpty())
@@ -311,7 +310,7 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
                 const auto file_keys = file_obj.keys();
                 for (const auto& key : file_keys)
                 {
-                    //TRACE(Logger::info, "- %s: %s", key.toStdString().c_str(), file_obj.take(key).toString().toStdString().c_str());
+                    // TRACEX(Logger::info, "- "<< key << ": "<< file_obj.take(key).toString());
                     if (key == "endian")
                     {
                         QString endian = file_obj.take(key).toString();
@@ -699,7 +698,7 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
             }
         }break;
         default:
-            TRACE(Logger::to_browser, "Error: : not a valid QJsonValue::type %d", jv.type());
+            TRACEX(Logger::to_browser, "Error: : not a valid QJsonValue::type " << jv.type());
             break;
         }
     }
@@ -726,7 +725,7 @@ void BinaryTableModel::update_typed_display_rows()
         update_typed_display_value(value, offset, length, itdv, inserted_rows);
         for (const auto& inserted_row: inserted_rows)
         {
-            TRACE(Logger::info, "top inserted row: %d", inserted_row);
+            TRACEX(Logger::trace, "top inserted row: " << inserted_row);
         }
     }
     m_td_offset.push_back(offset);
@@ -816,7 +815,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     for (const auto& inserted_row: inserted_rows)
                     {
                         structure.set_index(inserted_row, static_cast<int>(member));
-                        TRACE(Logger::info, "inserted row: %d for %d of %s", inserted_row, member, structure.name.toStdString().c_str());
+                        TRACEX(Logger::info, "inserted row: "<< inserted_row << " for " << member << " of " << structure.name);
                     }
                     /// TODO: check update also parent struct, if member is > 0
                     if (member)
@@ -881,7 +880,7 @@ bool BinaryTableModel::update_binary_struct_dependencies()
             }
             else
             {
-                TRACE(Logger::to_browser, "Error: struct %s is not defined or has wrong name", struct_obj.second.name.toStdString().c_str());
+                TRACEX(Logger::to_browser, "Error: struct "<< struct_obj.second.name << " is not defined or has wrong name");
                 return false;
             }
         }
@@ -914,7 +913,7 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
             TRACE(Logger::to_browser, "Error: more than one variable:");
             for (const auto& key : keys)
             {
-                TRACE(Logger::to_browser, "- ", key.toStdString().c_str());
+                TRACEX(Logger::to_browser, "- " << key);
             }
             return false;
         }

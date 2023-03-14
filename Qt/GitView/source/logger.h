@@ -67,13 +67,22 @@ private:
 };
 
 //#ifndef NDEBUG
+class QString;
+std::ostream&  operator <<(std::ostream &stream,const QString &str);
+
+#ifndef TRACE
 #define TRACE Logger::printDebug
-#define TRACEX(S, X)          \
-{                             \
-    std::stringstream stream; \
-    stream << X;              \
-    Logger::printDebug(S, stream.str().c_str());  \
-}
+#endif
+
+#ifndef TRACEX
+#define TRACEX(S, X)                                \
+if (Logger::isSeverityActive(S))                    \
+{                                                   \
+    std::stringstream stream;                       \
+    stream << X;                                    \
+    Logger::printDebug(S, stream.str().c_str());    \
+};
+#endif
 //#else
 //#define TRACE //
 //#endif

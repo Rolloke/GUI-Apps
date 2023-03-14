@@ -226,7 +226,7 @@ bool QSourceTreeWidget::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2
             fType.remove(Type::AllGitActions);
             fType.add(Type::type(fFoundType->second.type()));
             aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
-            TRACE(Logger::info, "set state %s, %x of %s", fState.toStdString().c_str(), fFoundType->second.type(), fSourcePath.toStdString().c_str());
+            TRACEX(Logger::info, "set state " << fState << ", " << fFoundType->second.type() << " of " << fSourcePath);
         }
         else
         {

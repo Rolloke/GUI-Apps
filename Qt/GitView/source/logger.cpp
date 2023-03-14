@@ -14,6 +14,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "logger.h"
+#include <QString>
 
 using namespace std;
 
@@ -279,4 +280,10 @@ bool Logger::openStream(const std::string& aTitle, std::ofstream& aStream)
         aStream << "title=" << aTitle.c_str() << std::endl;
     }
     return fOpen;
+}
+
+std::ostream&  operator <<(std::ostream &stream,const QString &str)
+{
+   stream << str.toStdString();
+   return stream;
 }

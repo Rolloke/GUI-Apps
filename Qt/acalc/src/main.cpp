@@ -2,20 +2,73 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+
+#include <stdio.h>
+#include <sys/ioctl.h>
+#include <termios.h>
+#include <pthread.h>
+
 #include "carithmetic.h"
 
+#define KB_UP 91
+#define KB_DOWN 27
+#define KB_LEFT 10
+#define KB_RIGHT 28
+#define KB_ESCAPE 100
 
 using namespace std;
 
+int    calulate(const string& sArgument);
+void   print_help(const char *app_name);
+string parse_cmd_line(int argc, char *argv[]);
+void   start_filter_keys();
+
+bool fShow         = false;
+bool fScientific   = false;
+bool fFixed        = false;
+bool fHelp         = false;
+bool fShowEquation = false;
+bool fConsoleMode  = false;
+
+/// TODO: create history of successfull inputs
+/// TODO: evaluate cursor up down
+/// TODO: console mode with user equations
+/// - e.g.: deg2rad(x) = x*p/180
+/// TODO: console mode with variables?
+/// - m*x+b
+
 int main(int argc, char *argv[])
 {
+    string sArgument   = parse_cmd_line(argc, argv);
+    int fError = 0;
+    if (fConsoleMode)
+    {
+//        start_filter_keys();
+        cout << "Gleichung eingeben" << endl;
+        do
+        {
+            cout << ">> ";
+            cin >> sArgument;
+            cout << ">> ";
+            calulate(sArgument);
+        }
+        while (sArgument != "q");
+    }
+    else
+    {
+        fError = calulate(sArgument);
+        if (fError == IDE_AR_NOEQUATION)
+        {
+            print_help(argv[0]);
+        }
+    }
+
+    return fError;
+}
+
+string parse_cmd_line(int argc, char *argv[])
+{
     string sArgument   = "";
-    bool fShow         = false;
-    bool fScientific   = false;
-    bool fFixed        = false;
-    bool fHelp         = false;
-    bool fShowEquation = false;
-    int  fError        = IDE_AR_NOEQUATION;
 
     for (int i=1; i< argc; ++i)
     {
@@ -49,11 +102,21 @@ int main(int argc, char *argv[])
         {
             fShowEquation = true;
         }
+        else if (strcmp(argv[i], "--console") == 0)
+        {
+            fConsoleMode = true;
+        }
         else
         {
             sArgument += argv[i];
         }
     }
+    return sArgument;
+}
+
+int calulate(const string& sArgument)
+{
+    int  fError        = IDE_AR_NOEQUATION;
 
     if (sArgument.size())
     {
@@ -112,43 +175,115 @@ int main(int argc, char *argv[])
             cout << endl;
         }
     }
-    else
+    return fError;
+}
+
+void print_help(const char* app_name)
+{
+    cout << "Aufruf: " << app_name << ":" << endl;
+    cout << app_name << " \"Ausdruck\", z.B.: " << app_name << " \"2 * (3 + 4)\"" << endl;
+    cout << "Parameter:" << endl;
+    cout << "--scientific : Zeigt das Ergebnis mit exponenten Darstellung" << endl;
+    cout << "--fixed      : Zeigt das Ergebnis, wenn möglich ohne exponentielle Darstellung" << endl;
+    cout << "--show       : Zeigt den Berechnungsbaum" << endl;
+    cout << "--help       : Zeigt alle verfügbaren Funktionen und Konstanten an" << endl;
+    cout << "--equation   : Zeigt die Gleichung vor dem Ergebnis an"<< endl;
+    cout << "--grad       : Argument für trigonometrische Funktionen in Grad"<< endl;
+    cout << "--gon        : Argument für trigonometrische Funktionen in Neugrad"<< endl;
+    cout << "--console    : Konsolenmodus"<< endl;
+    if (fHelp)
     {
-        cout << "Aufruf: " << argv[0] << ":" << endl;
-        cout << argv[0] << " \"Ausdruck\", z.B.: " << argv[0] << " \"2 * (3 + 4)\"" << endl;
-        cout << "Parameter:" << endl;
-        cout << "--scientific : Zeigt das Ergebnis mit exponenten Darstellung" << endl;
-        cout << "--fixed      : Zeigt das Ergebnis, wenn möglich ohne exponentielle Darstellung" << endl;
-        cout << "--show       : Zeigt den Berechnungsbaum" << endl;
-        cout << "--help       : Zeigt alle verfügbaren Funktionen und Konstanten an" << endl;
-        cout << "--equation   : Zeigt die Gleichung vor dem Ergebnis an"<< endl;
-        cout << "--grad       : Argument für trigonometrische Funktionen in Grad"<< endl;
-        cout << "--gon        : Argument für trigonometrische Funktionen in Neugrad"<< endl;
-        if (fHelp)
+        cout << endl;
+        cout << "Unäre Funktionen:" << endl;
+        for (int i=0; CArithmetic::gm_UnaryFkt[i] != 0; ++i)
         {
-            cout << endl;
-            cout << "Unäre Funktionen:" << endl;
-            for (int i=0; CArithmetic::gm_UnaryFkt[i] != 0; ++i)
-            {
-                cout << CArithmetic::gm_UnaryFkt[i] << "(arg), " << endl;
-            }
-            cout << endl;
+            cout << CArithmetic::gm_UnaryFkt[i] << "(arg), " << endl;
+        }
+        cout << endl;
 
-            cout << "Binäre Functionen:" << endl;
-            for (int i=0; CArithmetic::gm_BinaryFkt[i] != 0; ++i)
-            {
-                cout << CArithmetic::gm_BinaryFkt[i] << "(arg1, arg2), " << endl;
-            }
-            cout << endl;
+        cout << "Binäre Functionen:" << endl;
+        for (int i=0; CArithmetic::gm_BinaryFkt[i] != 0; ++i)
+        {
+            cout << CArithmetic::gm_BinaryFkt[i] << "(arg1, arg2), " << endl;
+        }
+        cout << endl;
 
-            cout << setprecision(13);
-            cout << "Konstanten:" << endl;
-            for (int i=0; CArithmetic::gm_constants[i].name != 0; ++i)
+        cout << setprecision(13);
+        cout << "Konstanten:" << endl;
+        for (int i=0; CArithmetic::gm_constants[i].name != 0; ++i)
+        {
+            cout << CArithmetic::gm_constants[i].name << ", " << CArithmetic::gm_constants[i].Description << ": " << CArithmetic::gm_constants[i].value << endl;
+        }
+    }
+}
+
+
+bool kbhit()
+{
+    termios term;
+    tcgetattr(0, &term);
+
+    termios term2 = term;
+    term2.c_lflag &= ~ICANON;
+    tcsetattr(0, TCSANOW, &term2);
+
+    int byteswaiting;
+    ioctl(0, FIONREAD, &byteswaiting);
+
+    tcsetattr(0, TCSANOW, &term);
+
+    return byteswaiting > 0;
+}
+
+void* filter_keys(void*)
+{
+    char KB_code = 0;
+    while(KB_code != KB_ESCAPE)
+    {
+        if (kbhit())
+        {
+            KB_code = getc(stdin);
+            printf("KB_code = %i ",KB_code);
+
+            switch (KB_code)
             {
-                cout << CArithmetic::gm_constants[i].name << ", " << CArithmetic::gm_constants[i].Description << ": " << CArithmetic::gm_constants[i].value << endl;
+            case KB_LEFT:
+                cout << "left";
+                //Do something
+                break;
+
+            case KB_RIGHT:
+                cout << "right";
+                //Do something
+                break;
+
+            case KB_UP:
+                cout << "up";
+                //Do something
+                break;
+
+            case KB_DOWN:
+                cout << "down";
+                //Do something
+                break;
+
             }
         }
     }
+    return 0;
+}
 
-    return fError;
+void start_filter_keys()
+{
+    pthread_attr_t attr;
+    int result = pthread_attr_init(&attr);
+    if (result == 0)
+    {
+        pthread_t id = 0;
+        result = pthread_create(&id, &attr, &filter_keys, 0);
+        if (result == 0)
+        {
+            cout << "thread started " << id << endl;
+        }
+    }
 }

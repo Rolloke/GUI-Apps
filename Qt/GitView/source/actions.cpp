@@ -96,7 +96,7 @@ void ActionList::initActionIcons()
         QFileInfo info(m_icon_location);
         if (info.exists())
         {
-            TRACE(Logger::info, "using theme icons %s", m_icon_location.toStdString().c_str());
+            TRACEX(Logger::info, "using theme icons " << m_icon_location);
         }
         else
         {
@@ -471,7 +471,7 @@ void ActionList::setFlags(Cmd::eCmd cmd, uint flag, Flag set, Data::e data)
     }
     else
     {
-        TRACE(Logger::to_browser, "ActionList::setFlags %s data is not a flag", Data::name(data));
+        TRACEX(Logger::to_browser, "ActionList::setFlags "<< Data::name(data) << " data is not a flag");
     }
 }
 
@@ -487,7 +487,7 @@ uint ActionList::getFlags(Cmd::eCmd cmd, Data::e data) const
     }
     else
     {
-        TRACE(Logger::to_browser, "ActionList::getFlags %s data is not a flag", Data::name(data));
+        TRACEX(Logger::to_browser, "ActionList::getFlags " << Data::name(data) << " data is not a flag");
     }
     return 0;
 }
@@ -559,7 +559,7 @@ QString ActionList::check_location(const QString &file_location)
         auto found_icon = find_icon(m_icon_location, file_location);
         if (found_icon.isEmpty())
         {
-            TRACE(Logger::info, "%s not found in theme icons", file_location.toStdString().c_str());
+            TRACEX(Logger::info, file_location << " not found in theme icons");
             return resource + file_location;
         }
         return found_icon;
