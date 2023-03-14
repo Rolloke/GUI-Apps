@@ -374,7 +374,7 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
                 aFiles[file_path] = fType;
             }
 
-            TRACE(Logger::trace, "%s: %s: %x", fState.toStdString().c_str(), fRelativePath.toStdString().c_str(), fType.type());
+            TRACEX(Logger::trace, fState << ": " << fRelativePath << ": " << fType.type());
         }
     }
 }

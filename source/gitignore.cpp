@@ -139,15 +139,13 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
                 });
                 if (item != mIgnoreMap.end())
                 {
-                    auto fMessage = QObject::tr("\"%1\": %3 not inserted from %2").arg(fLine, file.fileName(), fType.getStates(true));
-                    TRACE(Logger::warning, fMessage.toStdString().c_str() );
+                    TRACEX(Logger::warning, "\"" << fLine << "\": " << fType.getStates(true) << " not inserted from " << file.fileName());
                 }
                 else
                 {
                     if (Logger::isSeverityActive(Logger::debug))
                     {
-                        auto fMessage = QObject::tr("\"%1\": %3 inserted from %2").arg(fLine, file.fileName(), fType.getStates(true));
-                        TRACE(Logger::debug, fMessage.toStdString().c_str() );
+                        TRACEX(Logger::debug, "\"" << fLine << "\": " << fType.getStates(true) << " not inserted from " << file.fileName());
                     }
                     auto pair = std::pair<const QString, Type>(fLine, fType);
                     mIgnoreMap.push_back(pair);
@@ -254,7 +252,7 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
             str += entry.second.getStates(true);
             str += ", ";
         }
-        TRACE(Logger::debug, "ignored_entries: %d: %s", ignored_entries.size(), str.toStdString().c_str());
+        TRACEX(Logger::debug, "ignored_entries: " << ignored_entries.size() << ": " << str);
     }
 
     if (ignored_entries.size() == 1)
@@ -273,7 +271,7 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
             {
                 if (Logger::isSeverityActive(Logger::debug))
                 {
-                    TRACE(Logger::debug, "!ignored_entry: %d: %s", std::distance(ignored_entries.begin(), entry), entry->first.toStdString().c_str());
+                    TRACEX(Logger::debug, "!ignored_entry: " << std::distance(ignored_entries.begin(), entry) << ": " << entry->first);
                 }
                 return false;
             }

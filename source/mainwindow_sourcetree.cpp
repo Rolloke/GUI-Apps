@@ -68,7 +68,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     const int fIndex = mGitCommand.indexOf(fSource);
                     if (fIndex != -1)
                     {
-                        TRACE(Logger::notice, "Found dir: %s: %d", fFileName.toStdString().c_str(), fCountOk);
+                        TRACEX(Logger::notice, "Found dir: "<<  fFileName<< ": " << fCountOk);
                         if (fCountOk == 0)
                         {
                             QStringList fChild;
@@ -148,7 +148,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
         }
         else
         {
-            TRACE(Logger::info, "Not copying unselected file %s", aParentItem->text(QSourceTreeWidget::Column::FileName).toStdString().c_str());
+            TRACEX(Logger::info, "Not copying unselected file %s" << aParentItem->text(QSourceTreeWidget::Column::FileName));
             fResult = true; // this is not an error
         }
     }
@@ -316,7 +316,7 @@ void MainWindow::open_file_externally()
         int result = system(open_file_cmd.toStdString().c_str());
         if (result != 0)
         {
-            TRACE(Logger::warning, "could not open %s, error %d", file_name.toStdString().c_str(), result);
+            TRACEX(Logger::warning, "could not open " << file_name << " error " << result);
         }
     }
 }

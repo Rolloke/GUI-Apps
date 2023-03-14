@@ -309,7 +309,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
 
     if (!fTemp.remove(fTemp.path()))
     {
-        TRACE(Logger::error, "Could not delete temporary file %s", fTempResultFileNameAndPath.toStdString().c_str());
+        TRACEX(Logger::error, "Could not delete temporary file " << fTempResultFileNameAndPath);
     }
 
     return fResult;
