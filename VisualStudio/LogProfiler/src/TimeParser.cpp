@@ -176,7 +176,7 @@ BOOL TimeParser::parseTimeString(const std::string& aTime)
     if (std::regex_search(aTime, fMatch, mRegularExpression))
     {
         int fGroupIndex = 0;
-        for (unsigned int i = 1; i < fMatch.size(); ++i, ++fGroupIndex)
+        for (unsigned int i = 1; i < fMatch.size() && fReturn; ++i, ++fGroupIndex)
         {
             fReturn = fReturn && fMatch[i].matched;
             fReturn = fReturn && convertItem(fGroupIndex, fMatch.str(i));
@@ -273,8 +273,10 @@ BOOL TimeParser::convertItem(int aItem, const std::string& aParam)
     case 'y': mYear = atoi(aParam.c_str()) + 2000;      break;  // Year, last two digits (00-99)
     case 'Y': mYear = atoi(aParam.c_str());             break;  // Year 2001
     case 'z': mHourTimzoneOffset = atoi(aParam.c_str()) / 100; break;// ISO 8601 offset from UTC in timezone (1 minute=1, 1 hour=100)
-    default:
-		TRACE(Logger::to_function, "TimeParser::convertItem failed at %c, %s", mGroupID[aItem], aParam.c_str());
+	case 'x': break;
+	case 'X': break;
+	default:
+		TRACE(Logger::to_function, "TimeParser::convertItem %d: %c -> %s failed", aItem, mGroupID[aItem], aParam.c_str());
 		fReturn = FALSE; 
 		break;
     }

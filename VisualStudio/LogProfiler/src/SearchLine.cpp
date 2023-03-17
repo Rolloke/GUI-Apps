@@ -41,7 +41,7 @@ int64_t SearchLine::searchLine(int64_t aTime)
 		{
 			if (fStartTime < fEndtime) // should be a sorted file
 			{
-				if (fStartTime < aTime || fEndtime > aTime)
+				if (fStartTime > aTime || fEndtime < aTime)
 				{
 					TRACE(Logger::to_function, "Not in File time");
 					return -1; 
