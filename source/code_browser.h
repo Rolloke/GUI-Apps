@@ -67,10 +67,7 @@ private Q_SLOTS:
     void updateLineNumberArea(const QRect &rect, int dy);
     void vertical_scroll_value(int );
     void call_updateExtension(const QString&);
-#ifdef WEB_ENGINE
     void own_text_changed();
-#endif
-
 
 private:
     struct s_blame

@@ -14,6 +14,7 @@
 #include <QWebEngineView>
 #endif
 
+/// TODO: Undo must unchange and set unmodified at the end
 
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
@@ -92,7 +93,7 @@ void code_browser::change_visibility(bool visible)
 
 code_browser* code_browser::clone(bool all_parameter, bool with_text)
 {
-    auto *cloned =  new code_browser(parentWidget());
+    auto *cloned =  new code_browser(dynamic_cast<QWidget*>(parent()->parent()));
     cloned->reset();
     cloned->m_show_line_numbers = m_show_line_numbers;
     cloned->setFont(font());
@@ -106,6 +107,8 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         cloned->m_actions  = m_actions;
         cloned->m_web_page = m_web_page;
         cloned->setWhatsThis(whatsThis());
+        cloned->setTabStopWidth(tabStopWidth());
+        cloned->set_dark_mode(m_dark_mode);
     }
     return cloned;
 }
@@ -155,6 +158,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
 {
     if (m_actions && git::Cmd::mContextMenuTextView.size())
     {
+        /// TODO: context menu does not enable undo / redo correctly for cloned text_browser
         QMenu *menu = createStandardContextMenu();
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
         m_actions->getAction(git::Cmd::CloneTextBrowser)->setEnabled(!isReadOnly());
@@ -524,6 +528,7 @@ void code_browser::own_text_changed()
             m_web_page->set_type(PreviewPage::type::html);
             QString text = toPlainText();
             m_web_page->setHtml(text);
+//            Q_EMIT textChanged(text);
             Q_EMIT show_web_view(text.size() ? true : false);
             setFocus();
         }
@@ -533,6 +538,7 @@ void code_browser::own_text_changed()
             QString text = toPlainText();
             Q_EMIT textChanged(text);
             Q_EMIT show_web_view(text.size() ? true : false);
+            setFocus();
         }
         else
         {
@@ -591,7 +597,9 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
 void MarkdownProxy::setText(const QString &text)
 {
     if (text == m_text)
+    {
         return;
+    }
     m_text = text;
     emit textChanged(m_text);
 }
