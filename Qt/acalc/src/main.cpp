@@ -7,23 +7,19 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #include "carithmetic.h"
-
-#define KB_UP 65
-#define KB_DOWN 66
-#define KB_LEFT 68
-#define KB_RIGHT 67
-#define KB_ESCAPE 27
-#define KB_ENTER 10
 
 using namespace std;
 
 int    calulate(const string& sArgument);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
-void   start_filter_keys();
-int    kbhit();
+
+void enableRawMode();
+string get_string();
+
 
 bool fShow         = false;
 bool fScientific   = false;
@@ -31,72 +27,20 @@ bool fFixed        = false;
 bool fHelp         = false;
 bool fShowEquation = false;
 bool fConsoleMode  = false;
+bool fRawMode      = false;
 
 /// TODO: create history of successfull inputs
-/// TODO: evaluate cursor up down
+/// TODO: evaluate up, down, left, right, home, end, back, delete
+/// TODO: clear input
+/// TODO: write input
+/// TODO: set cursor
 /// TODO: console mode with user equations
 /// - e.g.: deg2rad(x) = x*p/180
 /// TODO: console mode with variables?
 /// - m*x+b
 
-string get_string()
-{
-    std::string line;
-    int c = 0;
-    do
-    {
-        int character = kbhit();
-        if (character == 1)
-        {
-            c = getc(stdin);
-            if (c != KB_ENTER)
-            {
-                line += c;
-            }
-            //cout << "c : " << c << endl;
-            character = 0;
-        }
-        while (character)
-        {
-            c = getc(stdin);
-            //cout << "c = " << c << endl;
-            --character;
-        }
-    } while(c != KB_ENTER);
 
-    return line;
-}
 
-struct editorConfig {
-  struct termios orig_termios;
-};
-
-struct editorConfig E;
-
-#include <unistd.h>
-
-void die(const char*s)
-{
-    cout << s << endl;
-}
-void disableRawMode() {
-  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &E.orig_termios) == -1)
-    die("tcsetattr");
-}
-void enableRawMode() {
-  if (tcgetattr(STDIN_FILENO, &E.orig_termios) == -1) die("tcgetattr");
-  atexit(disableRawMode);
-  struct termios raw = E.orig_termios;
-  raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-  raw.c_oflag &= ~(OPOST);
-  raw.c_cflag |= (CS8);
-  raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-  raw.c_cc[VMIN] = 0;
-  raw.c_cc[VTIME] = 1;
-  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
-}
-
-#define CTRL_KEY(k) ((k) & 0x1f)
 
 int main(int argc, char *argv[])
 {
@@ -104,27 +48,29 @@ int main(int argc, char *argv[])
     int fError = 0;
     if (fConsoleMode)
     {
-        enableRawMode();
-//        start_filter_keys();
-        cout << "Gleichung eingeben" << endl;
+        if (fRawMode)
+        {
+            enableRawMode();
+        }
+        cout << "Gleichung eingeben\r\n";
         do
         {
             cout << ">> ";
-            fflush(stdout);
-            //sArgument = get_string();
-            while (1) {
-              char c = '\0';
-              if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
-              if (iscntrl(c)) {
-                printf("%d\r\n", c);
-              } else {
-                printf("%d ('%c')\r\n", c, c);
-              }
-              if (c == CTRL_KEY('q')) break;
+            if (fRawMode)
+            {
+                sArgument = get_string();
+                cout << " = ";
             }
-            //cin >> sArgument;
-            cout << ">> ";
+            else
+            {
+                cin >> sArgument;
+                cout << ">> ";
+            }
             calulate(sArgument);
+            if (fRawMode)
+            {
+                cout << "\r\n";
+            }
         }
         while (sArgument != "q");
     }
@@ -179,6 +125,10 @@ string parse_cmd_line(int argc, char *argv[])
         else if (strcmp(argv[i], "--console") == 0)
         {
             fConsoleMode = true;
+        }
+        else if (strcmp(argv[i], "--raw") == 0)
+        {
+            fRawMode = true;
         }
         else
         {
@@ -292,23 +242,143 @@ void print_help(const char* app_name)
 }
 
 
-int kbhit()
+// Functions for raw input mode
+
+#define KB_UP 65
+#define KB_DOWN 66
+#define KB_LEFT 68
+#define KB_RIGHT 67
+#define KB_ESCAPE 27
+#define KB_ENTER 13
+#define KB_BACK 127
+#define KB_INSERT 50
+#define KB_DELETE 51
+#define KB_HOME 72
+#define KB_END 70
+#define KB_PAGE_UP 53
+#define KB_PAGE_DOWN 54
+
+struct editorConfig {
+  struct termios orig_termios;
+};
+
+struct editorConfig E;
+
+
+void die(const char*s)
 {
-    termios term;
-    tcgetattr(0, &term);
-
-    termios term2 = term;
-    term2.c_lflag &= ~ICANON;
-    tcsetattr(0, TCSANOW, &term2);
-
-    int byteswaiting;
-    ioctl(0, FIONREAD, &byteswaiting);
-
-    tcsetattr(0, TCSANOW, &term);
-
-    return byteswaiting;
+    cout << s << "\r\n";
+}
+void disableRawMode()
+{
+  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &E.orig_termios) == -1)
+  {
+      die("tcsetattr");
+  }
 }
 
+void enableRawMode()
+{
+  if (tcgetattr(STDIN_FILENO, &E.orig_termios) == -1)
+  {
+      die("tcgetattr");
+  }
+
+  atexit(disableRawMode);
+  struct termios raw = E.orig_termios;
+  raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+  raw.c_oflag &= ~(OPOST);
+  raw.c_cflag |= (CS8);
+  raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+  raw.c_cc[VMIN] = 0;
+  raw.c_cc[VTIME] = 1;
+  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
+  {
+      die("tcsetattr");
+  }
+}
+
+#define CTRL_KEY(k) ((k) & 0x1f)
+
+string get_string()
+{
+    fflush(stdout);
+    string line;
+    bool escape = false;
+    int cursor = 0;
+    int history = -1;
+    while (1)
+    {
+        char c = '\0';
+        if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+        {
+            die("read");
+        }
+        if (c)
+        {
+            if (iscntrl(c))
+            {
+                if (c == KB_ENTER) break;
+                if (c == KB_BACK)
+                {
+                    printf("back\r\n");
+                    continue;
+                }
+                if (c == KB_ESCAPE)
+                {
+                    escape = true;
+                    continue;
+                }
+                printf("%d\r\n", c);
+            }
+            else if (escape)
+            {
+                switch (c)
+                {
+                case '[': continue;
+                case KB_UP:
+                    ++history;
+                    break;
+                case KB_DOWN:
+                    --history;
+                    break;
+                case KB_LEFT:
+                    if (cursor) --cursor;
+                    break;
+                case KB_RIGHT:
+                    if (cursor<line.size()) ++cursor;
+                    break;
+                case KB_HOME: cursor = 0;
+                    break;
+                case KB_END: cursor = line.size();
+                    break;
+                case KB_INSERT:    printf("insert\r\n");break;
+                case KB_DELETE:    printf("delete\r\n");break;
+                case KB_PAGE_UP:   printf("page up\r\n");break;
+                case KB_PAGE_DOWN: printf("page down\r\n");break;
+                case 126: case 127: break;
+                default:
+                    printf("e:%d\r\n", c);
+                    break;
+                }
+            }
+            else
+            {
+                line += c;
+                printf("%c", c);
+                fflush(stdout);
+            }
+        }
+        else
+        {
+            escape = false;
+        }
+    }
+    return line;
+}
+
+
+/*
 void* filter_keys(void*)
 {
     char KB_code = 0;
@@ -347,17 +417,31 @@ void* filter_keys(void*)
     return 0;
 }
 
-void start_filter_keys()
+string get_string()
 {
-    pthread_attr_t attr;
-    int result = pthread_attr_init(&attr);
-    if (result == 0)
+    std::string line;
+    int c = 0;
+    do
     {
-        pthread_t id = 0;
-        result = pthread_create(&id, &attr, &filter_keys, 0);
-        if (result == 0)
+        int character = kbhit();
+        if (character == 1)
         {
-            cout << "thread started " << id << endl;
+            c = getc(stdin);
+            if (c != KB_ENTER)
+            {
+                line += c;
+            }
+            //cout << "c : " << c << endl;
+            character = 0;
         }
-    }
+        while (character)
+        {
+            c = getc(stdin);
+            //cout << "c = " << c << endl;
+            --character;
+        }
+    } while(c != KB_ENTER);
+
+    return line;
 }
+*/

@@ -35,39 +35,45 @@ void MainWindow::selectTextBrowserLanguage()
     const auto& language_list = Highlighter::getLanguages();
     QMap<char, QMenu*> start_char_map;
     QList<QAction*> actionlist;
-    for (const QString& language : language_list)
-    {
-        char start_char = toupper(language.toStdString()[0]);
-        auto entry = start_char_map.find(start_char);
-        QMenu* submenu = nullptr;
-        if (entry != start_char_map.end())
-        {
-            submenu = entry.value();
-        }
-        else
-        {
-            submenu = new QMenu(tr("%1").arg(start_char));
-            menu.addMenu(submenu);
-            start_char_map[start_char] = submenu;
-        }
-        auto* action = submenu->addAction(language);
-        actionlist.append(action);
-        if (language == ui->textBrowser->currentLanguage())
-        {
-            action->setCheckable(true);
-            action->setChecked(true);
-        }
-    }
 
-    const QPoint point = ui->textBrowser->rect().topLeft();
-    auto* selection = menu.exec(ui->textBrowser->mapToGlobal(point) + menu_offset);
-
-    const int index = actionlist.indexOf(selection);
-    if (index != -1)
+    code_browser*text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+    if (text_browser)
     {
-        bool enabled = ui->btnStoreText->isEnabled();
-        ui->textBrowser->setLanguage(language_list[index]);
-        set_widget_and_action_enabled(ui->btnStoreText, enabled);
+        for (const QString& language : language_list)
+        {
+            char start_char = toupper(language.toStdString()[0]);
+            auto entry = start_char_map.find(start_char);
+            QMenu* submenu = nullptr;
+            if (entry != start_char_map.end())
+            {
+                submenu = entry.value();
+            }
+            else
+            {
+                submenu = new QMenu(tr("%1").arg(start_char));
+                menu.addMenu(submenu);
+                start_char_map[start_char] = submenu;
+            }
+            auto* action = submenu->addAction(language);
+            actionlist.append(action);
+
+            if (language == text_browser->currentLanguage())
+            {
+                action->setCheckable(true);
+                action->setChecked(true);
+            }
+        }
+
+        const QPoint point = text_browser->rect().topLeft();
+        auto* selection = menu.exec(text_browser->mapToGlobal(point) + menu_offset);
+
+        const int index = actionlist.indexOf(selection);
+        if (index != -1)
+        {
+            bool enabled = ui->btnStoreText->isEnabled();
+            text_browser->setLanguage(language_list[index]);
+            set_widget_and_action_enabled(text_browser, enabled);
+        }
     }
 }
 

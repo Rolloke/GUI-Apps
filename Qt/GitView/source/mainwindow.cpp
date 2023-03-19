@@ -916,6 +916,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
             }
             ui->labelFilePath->setText(textBrowser->get_file_path());
             set_widget_and_action_enabled(ui->btnStoreText, textBrowser->get_changed());
+            updateSelectedLanguage(textBrowser->currentLanguage());
         }
         mActivViewObjectName = dockWidget->objectName();
         bool bv_active = mActivViewObjectName == binaryview;
@@ -1043,7 +1044,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
         file_name = "Editor";
     }
 
-    auto *docked_browser = ui->textBrowser->clone(true, false);
+    auto *docked_browser =  ui->textBrowser->clone(true, false);
     connect(docked_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
@@ -2658,6 +2659,12 @@ void MainWindow::on_ckTypeConverter_stateChanged(int active)
 void MainWindow::on_spinTabulator_valueChanged(int width)
 {
     ui->textBrowser->setTabStopWidth(width);
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        text_browser->setTabStopWidth(width);
+    }
 }
 
 void MainWindow::comboTabPositionIndexChanged(int index)
