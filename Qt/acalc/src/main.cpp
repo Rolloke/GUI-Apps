@@ -10,11 +10,12 @@
 
 #include "carithmetic.h"
 
-#define KB_UP 91
-#define KB_DOWN 27
-#define KB_LEFT 10
-#define KB_RIGHT 28
-#define KB_ESCAPE 100
+#define KB_UP 65
+#define KB_DOWN 66
+#define KB_LEFT 68
+#define KB_RIGHT 67
+#define KB_ESCAPE 27
+#define KB_ENTER 10
 
 using namespace std;
 
@@ -22,6 +23,7 @@ int    calulate(const string& sArgument);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
 void   start_filter_keys();
+int    kbhit();
 
 bool fShow         = false;
 bool fScientific   = false;
@@ -37,18 +39,90 @@ bool fConsoleMode  = false;
 /// TODO: console mode with variables?
 /// - m*x+b
 
+string get_string()
+{
+    std::string line;
+    int c = 0;
+    do
+    {
+        int character = kbhit();
+        if (character == 1)
+        {
+            c = getc(stdin);
+            if (c != KB_ENTER)
+            {
+                line += c;
+            }
+            //cout << "c : " << c << endl;
+            character = 0;
+        }
+        while (character)
+        {
+            c = getc(stdin);
+            //cout << "c = " << c << endl;
+            --character;
+        }
+    } while(c != KB_ENTER);
+
+    return line;
+}
+
+struct editorConfig {
+  struct termios orig_termios;
+};
+
+struct editorConfig E;
+
+#include <unistd.h>
+
+void die(const char*s)
+{
+    cout << s << endl;
+}
+void disableRawMode() {
+  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &E.orig_termios) == -1)
+    die("tcsetattr");
+}
+void enableRawMode() {
+  if (tcgetattr(STDIN_FILENO, &E.orig_termios) == -1) die("tcgetattr");
+  atexit(disableRawMode);
+  struct termios raw = E.orig_termios;
+  raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+  raw.c_oflag &= ~(OPOST);
+  raw.c_cflag |= (CS8);
+  raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+  raw.c_cc[VMIN] = 0;
+  raw.c_cc[VTIME] = 1;
+  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) die("tcsetattr");
+}
+
+#define CTRL_KEY(k) ((k) & 0x1f)
+
 int main(int argc, char *argv[])
 {
     string sArgument   = parse_cmd_line(argc, argv);
     int fError = 0;
     if (fConsoleMode)
     {
+        enableRawMode();
 //        start_filter_keys();
         cout << "Gleichung eingeben" << endl;
         do
         {
             cout << ">> ";
-            cin >> sArgument;
+            fflush(stdout);
+            //sArgument = get_string();
+            while (1) {
+              char c = '\0';
+              if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
+              if (iscntrl(c)) {
+                printf("%d\r\n", c);
+              } else {
+                printf("%d ('%c')\r\n", c, c);
+              }
+              if (c == CTRL_KEY('q')) break;
+            }
+            //cin >> sArgument;
             cout << ">> ";
             calulate(sArgument);
         }
@@ -218,7 +292,7 @@ void print_help(const char* app_name)
 }
 
 
-bool kbhit()
+int kbhit()
 {
     termios term;
     tcgetattr(0, &term);
@@ -232,7 +306,7 @@ bool kbhit()
 
     tcsetattr(0, TCSANOW, &term);
 
-    return byteswaiting > 0;
+    return byteswaiting;
 }
 
 void* filter_keys(void*)
