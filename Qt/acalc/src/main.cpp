@@ -1,7 +1,7 @@
+#include <cstring>
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <cstring>
 
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -17,84 +17,79 @@ int    calulate(const string& sArgument);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
 
-void enableRawMode();
+/// raw mode functions
+void   enable_raw_mode();
 string get_string();
+bool   get_cursor_position(int *rows, int *cols);
+void   set_cursor_position(int row, int col);
 
 
-bool fShow         = false;
-bool fScientific   = false;
-bool fFixed        = false;
-bool fHelp         = false;
-bool fShowEquation = false;
-bool fConsoleMode  = false;
-bool fRawMode      = false;
+bool g_show          = false;
+bool g_scientific    = false;
+bool g_fixed         = false;
+bool g_help          = false;
+bool g_show_equation = false;
+bool g_console_mode  = false;
+bool g_xconsole_mode      = false;
 
 /// TODO: create history of successfull inputs
-/// TODO: evaluate up, down, left, right, home, end, back, delete
-/// TODO: clear input
-/// TODO: write input
-/// TODO: set cursor
+/// TODO: evaluate up, down, delete, insert
 /// TODO: console mode with user equations
 /// - e.g.: deg2rad(x) = x*p/180
 /// TODO: console mode with variables?
 /// - m*x+b
 
-
-
-
 int main(int argc, char *argv[])
 {
-    string sArgument   = parse_cmd_line(argc, argv);
-    int fError = 0;
-    if (fConsoleMode)
+    string argument = parse_cmd_line(argc, argv);
+
+    int error_code = 0;
+    if (g_console_mode)
     {
-        if (fRawMode)
+        cout << "Gleichung eingeben" << endl;
+        do
         {
-            enableRawMode();
+            cout << ">> ";
+            cin >> argument;
+            calulate(argument);
         }
+        while (argument != "q");
+    }
+    else if (g_xconsole_mode)
+    {
+        enable_raw_mode();
         cout << "Gleichung eingeben\r\n";
         do
         {
             cout << ">> ";
-            if (fRawMode)
-            {
-                sArgument = get_string();
-                cout << " = ";
-            }
-            else
-            {
-                cin >> sArgument;
-                cout << ">> ";
-            }
-            calulate(sArgument);
-            if (fRawMode)
-            {
-                cout << "\r\n";
-            }
+            argument = get_string();
+            cout << "\r\n>> ";
+            calulate(argument);
+            cout << "\r";
         }
-        while (sArgument != "q");
+        while (argument != "q");
     }
     else
     {
-        fError = calulate(sArgument);
-        if (fError == IDE_AR_NOEQUATION)
+        error_code = calulate(argument);
+        if (error_code == IDE_AR_NOEQUATION)
         {
             print_help(argv[0]);
         }
     }
 
-    return fError;
+    return error_code;
 }
 
 string parse_cmd_line(int argc, char *argv[])
 {
-    string sArgument   = "";
+    string argument   = "";
 
     for (int i=1; i< argc; ++i)
     {
         if (strcmp(argv[i], "--show") == 0)
         {
-            fShow = true;
+            g_show = true;
         }
         else if (strcmp(argv[i], "--grad") == 0)
         {
@@ -108,34 +103,34 @@ string parse_cmd_line(int argc, char *argv[])
         }
         else if (strcmp(argv[i], "--scientific") == 0)
         {
-            fScientific = true;
+            g_scientific = true;
         }
         else if (strcmp(argv[i], "--fixed") == 0)
         {
-            fFixed = true;
+            g_fixed = true;
         }
         else if (strcmp(argv[i], "--help") == 0)
         {
-            fHelp = true;
+            g_help = true;
         }
         else if (strcmp(argv[i], "--equation") == 0)
         {
-            fShowEquation = true;
+            g_show_equation = true;
         }
         else if (strcmp(argv[i], "--console") == 0)
         {
-            fConsoleMode = true;
+            g_console_mode = true;
         }
-        else if (strcmp(argv[i], "--raw") == 0)
+        else if (strcmp(argv[i], "--xconsole") == 0)
         {
-            fRawMode = true;
+            g_xconsole_mode = true;
         }
         else
         {
-            sArgument += argv[i];
+            argument += argv[i];
         }
     }
-    return sArgument;
+    return argument;
 }
 
 int calulate(const string& sArgument)
@@ -144,7 +139,7 @@ int calulate(const string& sArgument)
 
     if (sArgument.size())
     {
-        if (fShowEquation)
+        if (g_show_equation)
         {
             cout << sArgument << " = ";
         }
@@ -158,18 +153,18 @@ int calulate(const string& sArgument)
             if (fError == 0)
             {
                 cout << setprecision(13);
-                if (fScientific)
+                if (g_scientific)
                 {
                     cout << scientific;
                 }
-                else if (fFixed)
+                else if (g_fixed)
                 {
                     cout << fixed;
                 }
                 if (fResult.imag() != 0) cout << "complex" << fResult << endl;
                 else                     cout << fResult.real() << endl;
             }
-            if (fShow)
+            if (g_show)
             {
                 ar.show();
             }
@@ -215,7 +210,8 @@ void print_help(const char* app_name)
     cout << "--grad       : Argument für trigonometrische Funktionen in Grad"<< endl;
     cout << "--gon        : Argument für trigonometrische Funktionen in Neugrad"<< endl;
     cout << "--console    : Konsolenmodus"<< endl;
-    if (fHelp)
+    cout << "--xconsole   : Konsolenmodus mit verbesserter Eingabe"<< endl;
+    if (g_help)
     {
         cout << endl;
         cout << "Unäre Funktionen:" << endl;
@@ -277,7 +273,7 @@ void disableRawMode()
   }
 }
 
-void enableRawMode()
+void enable_raw_mode()
 {
   if (tcgetattr(STDIN_FILENO, &E.orig_termios) == -1)
   {
@@ -304,9 +300,14 @@ string get_string()
 {
     fflush(stdout);
     string line;
-    bool escape = false;
-    int cursor = 0;
-    int history = -1;
+    std::string escape;
+    int          start_row = 0;
+    int          start_col = 0;
+    unsigned int cursor    = 0;
+    int          history   = -1;
+
+    get_cursor_position(&start_row, &start_col);
+    escape.clear();
     while (1)
     {
         char c = '\0';
@@ -319,129 +320,145 @@ string get_string()
             if (iscntrl(c))
             {
                 if (c == KB_ENTER) break;
-                if (c == KB_BACK)
+                switch(c)
                 {
-                    printf("back\r\n");
-                    continue;
-                }
-                if (c == KB_ESCAPE)
+                case KB_BACK:
+                if (cursor)
                 {
-                    escape = true;
+                    escape += static_cast<char>(KB_ESCAPE);
+                    escape += '[';
+                    line.erase(--cursor, 1);
+                } break;
+                case KB_ESCAPE:
+                    escape += static_cast<char>(c);
                     continue;
+                default: printf("%d\r\n", c); break;
                 }
-                printf("%d\r\n", c);
             }
-            else if (escape)
+            if (escape.size())
             {
+                bool write_escape          = true;
+                int  additional_escape_cmd = 0;
                 switch (c)
                 {
-                case '[': continue;
-                case KB_UP:
+                case '[': escape += c;
+                    continue;
+                case KB_UP: /// TODO: KB_UP history
                     ++history;
+                    write_escape = false;
                     break;
-                case KB_DOWN:
+                case KB_DOWN: /// TODO: KB_DOWN history
                     --history;
+                    write_escape = false;
                     break;
                 case KB_LEFT:
                     if (cursor) --cursor;
+                    else write_escape = false;
                     break;
                 case KB_RIGHT:
                     if (cursor<line.size()) ++cursor;
+                    else write_escape = false;
                     break;
-                case KB_HOME: cursor = 0;
+                case KB_HOME:
+                {
+                    cursor = 0;
+                    int row = 0, col = 0;
+                    if (get_cursor_position(&row, &col))
+                    {
+                        set_cursor_position(row, start_col);
+                    }
+                    write_escape = false;
+                }   break;
+                case KB_END:
+                {
+                    cursor = line.size();
+                    int row = 0, col = 0;
+                    if (get_cursor_position(&row, &col))
+                    {
+                        set_cursor_position(row, start_col+cursor);
+                    }
+                    write_escape = false;
+                }   break;
+                case KB_INSERT: /// TODO: KB_INSERT
+                    write_escape = false;
                     break;
-                case KB_END: cursor = line.size();
+                case KB_DELETE: /// TODO: KB_DELETE
+                    write_escape = false;
                     break;
-                case KB_INSERT:    printf("insert\r\n");break;
-                case KB_DELETE:    printf("delete\r\n");break;
-                case KB_PAGE_UP:   printf("page up\r\n");break;
-                case KB_PAGE_DOWN: printf("page down\r\n");break;
-                case 126: case 127: break;
-                default:
+                case KB_BACK:
+                    c = KB_LEFT;
+                    additional_escape_cmd = 'K';
+                    break;
+                case KB_PAGE_UP: case KB_PAGE_DOWN: case 126: /// NOTE: ignore
+                    write_escape = false;
+                    break;
+                default:  /// NOTE: ignore, but show number
                     printf("e:%d\r\n", c);
+                    write_escape = false;
                     break;
                 }
+                if (write_escape)
+                {
+                    escape += c;
+                    write(STDOUT_FILENO, escape.c_str(), escape.size());
+                    if (additional_escape_cmd)
+                    {
+                        escape.back() = additional_escape_cmd;
+                        write(STDOUT_FILENO, escape.c_str(), escape.size());
+                    }
+                }
+                escape.clear();
             }
             else
             {
-                line += c;
+                int row = 0, col = 0;
+                line.insert(cursor, 1, c);
+                ++cursor;
+
                 printf("%c", c);
+                if (cursor != line.size())
+                {
+                    for (unsigned int i=cursor; i<line.size(); ++i)
+                    {
+                        printf("%c", line[i]);
+                    }
+                    get_cursor_position(&row, &col);
+                }
                 fflush(stdout);
+                if (row && col)
+                {
+                    set_cursor_position(row, col+1);
+                }
             }
         }
         else
         {
-            escape = false;
+            escape.clear();
         }
     }
     return line;
 }
 
-
-/*
-void* filter_keys(void*)
+void set_cursor_position(int row, int col)
 {
-    char KB_code = 0;
-    while(KB_code != KB_ESCAPE)
+    char sz[32];
+    sprintf(sz, "\x1b[%d;%dH", row, col);
+    write(STDOUT_FILENO, sz, strlen(sz));
+}
+
+bool get_cursor_position(int *rows, int *cols)
+{
+    char buf[32];
+    unsigned int i = 0;
+    if (write(STDOUT_FILENO, "\x1b[6n", 4) != 4) return false;
+    while (i < sizeof(buf) - 1)
     {
-        if (kbhit())
-        {
-            KB_code = getc(stdin);
-            printf("KB_code = %i ",KB_code);
-
-            switch (KB_code)
-            {
-            case KB_LEFT:
-                cout << "left";
-                //Do something
-                break;
-
-            case KB_RIGHT:
-                cout << "right";
-                //Do something
-                break;
-
-            case KB_UP:
-                cout << "up";
-                //Do something
-                break;
-
-            case KB_DOWN:
-                cout << "down";
-                //Do something
-                break;
-
-            }
-        }
+        if (read(STDIN_FILENO, &buf[i], 1) != 1) break;
+        if (buf[i] == 'R') break;
+        i++;
     }
-    return 0;
+    buf[i] = '\0';
+    if (buf[0] != '\x1b' || buf[1] != '[') return false;
+    if (sscanf(&buf[2], "%d;%d", rows, cols) != 2) return false;
+    return true;
 }
-
-string get_string()
-{
-    std::string line;
-    int c = 0;
-    do
-    {
-        int character = kbhit();
-        if (character == 1)
-        {
-            c = getc(stdin);
-            if (c != KB_ENTER)
-            {
-                line += c;
-            }
-            //cout << "c : " << c << endl;
-            character = 0;
-        }
-        while (character)
-        {
-            c = getc(stdin);
-            //cout << "c = " << c << endl;
-            --character;
-        }
-    } while(c != KB_ENTER);
-
-    return line;
-}
-*/
