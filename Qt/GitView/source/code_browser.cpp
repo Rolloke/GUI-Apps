@@ -14,8 +14,6 @@
 #include <QWebEngineView>
 #endif
 
-/// TODO: Undo must unchange and set unmodified at the end
-
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
@@ -76,14 +74,14 @@ void code_browser::set_show_line_numbers(bool show)
 void code_browser::change_visibility(bool visible)
 {
 #ifdef WEB_ENGINE
-    if (visible)
+    QString current_language = mHighlighter->currentLanguage();
+    if (current_language == "html" || current_language == "markdown")
     {
-        own_text_changed();
-    }
-    else
-    {
-        QString current_language = mHighlighter->currentLanguage();
-        if (current_language == "html" || current_language == "markdown")
+        if (visible)
+        {
+            own_text_changed();
+        }
+        else
         {
             Q_EMIT show_web_view(false);
         }
@@ -93,7 +91,7 @@ void code_browser::change_visibility(bool visible)
 
 code_browser* code_browser::clone(bool all_parameter, bool with_text)
 {
-    auto *cloned =  new code_browser(dynamic_cast<QWidget*>(parent()->parent()));
+    auto *cloned =  new code_browser(parentWidget());
     cloned->reset();
     cloned->m_show_line_numbers = m_show_line_numbers;
     cloned->setFont(font());
@@ -109,6 +107,10 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         cloned->setWhatsThis(whatsThis());
         cloned->setTabStopWidth(tabStopWidth());
         cloned->set_dark_mode(m_dark_mode);
+        cloned->setUndoRedoEnabled(isUndoRedoEnabled());
+
+        QMenu menu;
+        m_actions->fillContextMenue(menu, git::Cmd::mContextMenuTextView, cloned);
     }
     return cloned;
 }
@@ -158,7 +160,6 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
 {
     if (m_actions && git::Cmd::mContextMenuTextView.size())
     {
-        /// TODO: context menu does not enable undo / redo correctly for cloned text_browser
         QMenu *menu = createStandardContextMenu();
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
         m_actions->getAction(git::Cmd::CloneTextBrowser)->setEnabled(!isReadOnly());
@@ -528,7 +529,6 @@ void code_browser::own_text_changed()
             m_web_page->set_type(PreviewPage::type::html);
             QString text = toPlainText();
             m_web_page->setHtml(text);
-//            Q_EMIT textChanged(text);
             Q_EMIT show_web_view(text.size() ? true : false);
             setFocus();
         }
@@ -536,7 +536,7 @@ void code_browser::own_text_changed()
         {
             m_web_page->set_type(PreviewPage::type::markdown);
             QString text = toPlainText();
-            Q_EMIT textChanged(text);
+            Q_EMIT text_changed(text);
             Q_EMIT show_web_view(text.size() ? true : false);
             setFocus();
         }

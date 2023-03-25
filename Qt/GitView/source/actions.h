@@ -76,7 +76,7 @@ public:
 
     void enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const;
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);
-    void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems) const;
+    void fillContextMenue(QMenu& aMenu, const git::Cmd::tVector& aItems, QWidget *widget=0) const;
     const tActionMap& getList() const { return mActionList; }
     QString check_location(const QString &file_location);
     void setTheme(const QString& theme);

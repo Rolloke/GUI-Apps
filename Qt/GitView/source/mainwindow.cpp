@@ -454,7 +454,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->set_page(page);
 
     m_markdown_proxy.reset(new MarkdownProxy);
-    connect(ui->textBrowser, SIGNAL(textChanged(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
+    connect(ui->textBrowser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
 
     QWebChannel *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), m_markdown_proxy.data());
@@ -1049,7 +1049,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
-    connect(docked_browser, SIGNAL(textChanged(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
+    connect(docked_browser, SIGNAL(text_changed(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
 #ifdef WEB_ENGINE
     connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 #endif
@@ -1103,7 +1103,7 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
         disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
-        disconnect(text_browser, SIGNAL(textChanged(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
+        disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
 #ifdef WEB_ENGINE
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));

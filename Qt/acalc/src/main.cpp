@@ -1,5 +1,7 @@
 #include <cstring>
 #include <string>
+#include <vector>
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
 
@@ -16,6 +18,7 @@ using namespace std;
 int    calulate(const string& sArgument);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
+bool   compare_equation(const std::string& a1, const std::string& a2);
 
 /// raw mode functions
 void   enable_raw_mode();
@@ -23,17 +26,17 @@ string get_string();
 bool   get_cursor_position(int *rows, int *cols);
 void   set_cursor_position(int row, int col);
 
-
 bool g_show          = false;
 bool g_scientific    = false;
 bool g_fixed         = false;
 bool g_help          = false;
 bool g_show_equation = false;
 bool g_console_mode  = false;
-bool g_xconsole_mode      = false;
+bool g_xconsole_mode = false;
 
-/// TODO: create history of successfull inputs
-/// TODO: evaluate up, down, delete, insert
+vector<string> g_history;
+
+/// TODO: evaluate delete, insert
 /// TODO: console mode with user equations
 /// - e.g.: deg2rad(x) = x*p/180
 /// TODO: console mode with variables?
@@ -64,7 +67,12 @@ int main(int argc, char *argv[])
             cout << ">> ";
             argument = get_string();
             cout << "\r\n>> ";
-            calulate(argument);
+            if (   calulate(argument) == IDE_AR_OK
+                && find_if(g_history.begin(), g_history.end(), [argument](const auto& element)
+                   { return compare_equation(argument, element); }) == g_history.end())
+            {
+                g_history.push_back(argument);
+            }
             cout << "\r";
         }
         while (argument != "q");
@@ -237,6 +245,22 @@ void print_help(const char* app_name)
     }
 }
 
+bool allowed(int a)
+{
+    if (isdigit(a)) return false;
+    if (isspace(a)) return false;
+    return true;
+}
+
+bool compare_equation(const std::string& a1, const std::string& a2)
+{
+    string b1;
+    copy_if(a1.begin(), a1.end(),  back_inserter(b1), [](const auto e) { return allowed(e); });
+    string b2;
+    copy_if(a2.begin(), a2.end(),  back_inserter(b2), [](const auto e) { return allowed(e); });
+    return b1 == b2;
+}
+
 
 // Functions for raw input mode
 
@@ -296,6 +320,26 @@ void enable_raw_mode()
 
 #define CTRL_KEY(k) ((k) & 0x1f)
 
+void draw_line(int start, const string& line)
+{
+    for (unsigned int i=start; i<line.size(); ++i)
+    {
+        printf("%c", line[i]);
+    }
+    if (start == 0) fflush(stdout);
+}
+
+void clear_line(int start_row, int start_col, int length)
+{
+    set_cursor_position(start_row, start_col);
+    for (int i=0; i<length; ++i)
+    {
+        printf(" ");
+    }
+    fflush(stdout);
+}
+
+
 string get_string()
 {
     fflush(stdout);
@@ -343,12 +387,39 @@ string get_string()
                 {
                 case '[': escape += c;
                     continue;
-                case KB_UP: /// TODO: KB_UP history
-                    ++history;
+                case KB_UP:
+                    if (history < static_cast<int>(g_history.size()) - 1)
+                    {
+                        ++history;
+                        clear_line(start_row, start_col, line.size());
+                        line = g_history[history];
+                        set_cursor_position(start_row, start_col);
+                        draw_line(0, line);
+                        cursor = line.size();
+                        set_cursor_position(start_row, start_col+cursor);
+                    }
                     write_escape = false;
                     break;
-                case KB_DOWN: /// TODO: KB_DOWN history
-                    --history;
+                case KB_DOWN:
+                    if (history > 0)
+                    {
+                        --history;
+                        clear_line(start_row, start_col, line.size());
+                        line = g_history[history];
+                        set_cursor_position(start_row, start_col);
+                        draw_line(0, line);
+                        cursor = line.size();
+                        set_cursor_position(start_row, start_col+cursor);
+                    }
+                    else
+                    {
+                        history = -1;
+                        set_cursor_position(start_row, start_col);
+                        clear_line(start_row, start_col, line.size());
+                        line.clear();
+                        cursor = 0;
+                        set_cursor_position(start_row, start_col);
+                    }
                     write_escape = false;
                     break;
                 case KB_LEFT:
@@ -400,12 +471,13 @@ string get_string()
                 if (write_escape)
                 {
                     escape += c;
-                    write(STDOUT_FILENO, escape.c_str(), escape.size());
+                    ssize_t n = write(STDOUT_FILENO, escape.c_str(), escape.size());
                     if (additional_escape_cmd)
                     {
                         escape.back() = additional_escape_cmd;
-                        write(STDOUT_FILENO, escape.c_str(), escape.size());
+                        n = write(STDOUT_FILENO, escape.c_str(), escape.size());
                     }
+                    (void)(n);
                 }
                 escape.clear();
             }
@@ -418,10 +490,7 @@ string get_string()
                 printf("%c", c);
                 if (cursor != line.size())
                 {
-                    for (unsigned int i=cursor; i<line.size(); ++i)
-                    {
-                        printf("%c", line[i]);
-                    }
+                    draw_line(cursor, line);
                     get_cursor_position(&row, &col);
                 }
                 fflush(stdout);
@@ -443,7 +512,8 @@ void set_cursor_position(int row, int col)
 {
     char sz[32];
     sprintf(sz, "\x1b[%d;%dH", row, col);
-    write(STDOUT_FILENO, sz, strlen(sz));
+    ssize_t n =write(STDOUT_FILENO, sz, strlen(sz));
+    (void)(n);
 }
 
 bool get_cursor_position(int *rows, int *cols)
