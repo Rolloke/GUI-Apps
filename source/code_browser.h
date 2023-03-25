@@ -48,7 +48,7 @@ protected:
     bool event(QEvent *event) override;
 
 Q_SIGNALS:
-    void textChanged(const QString &text);
+    void text_changed(const QString &text);
     void blockCountChanged(int newBlockCount);
     void updateRequest(const QRect &rect, int dy);
     void updateExtension(const QString&);

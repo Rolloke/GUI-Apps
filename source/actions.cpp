@@ -337,7 +337,7 @@ void ActionList::select_action(QAction* action)
     }
 }
 
-void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items) const
+void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidget* widget) const
 {
     for (const auto& cmd : items)
     {
@@ -347,7 +347,9 @@ void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items) const
         }
         else
         {
-            menu.addAction(getAction(cmd));
+            auto* action = getAction(cmd);
+            menu.addAction(action);
+            if (widget) widget->addAction(action);
         }
     }
 }
