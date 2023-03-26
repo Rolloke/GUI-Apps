@@ -15,7 +15,7 @@
 
 using namespace std;
 
-int    calulate(const string& sArgument);
+int    calculate(const string& sArgument);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
 bool   compare_equation(const std::string& a1, const std::string& a2);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         {
             cout << ">> ";
             cin >> argument;
-            calulate(argument);
+            calculate(argument);
         }
         while (argument != "q");
     }
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
             cout << ">> ";
             argument = get_string();
             cout << "\r\n>> ";
-            if (   calulate(argument) == IDE_AR_OK
+            if (   calculate(argument) == IDE_AR_OK
                 && find_if(g_history.begin(), g_history.end(), [argument](const auto& element)
                    { return compare_equation(argument, element); }) == g_history.end())
             {
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        error_code = calulate(argument);
+        error_code = calculate(argument);
         if (error_code == IDE_AR_NOEQUATION)
         {
             print_help(argv[0]);
@@ -141,7 +141,7 @@ string parse_cmd_line(int argc, char *argv[])
     return argument;
 }
 
-int calulate(const string& sArgument)
+int calculate(const string& sArgument)
 {
     int  fError        = IDE_AR_NOEQUATION;
 
