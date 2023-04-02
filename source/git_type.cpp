@@ -62,7 +62,7 @@ Cmd::Cmd()
     mCommandMap[BranchListMerged]       = "git -C %1 branch --list --merged";
     mCommandMap[BranchListNotMerged]    = "git -C %1 branch --list --no-merged";
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
-    mCommandMap[DiffOfTwoBranches]      = "";
+    mCommandMap[DiffOfTwoBranches]      = " ";
     mCommandMap[Blame]                  = "git blame -c %1 %2";
 
     mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
@@ -76,7 +76,7 @@ Cmd::Cmd()
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
 #ifdef DOCKED_VIEWS
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));

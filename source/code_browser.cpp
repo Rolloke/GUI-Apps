@@ -103,7 +103,9 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
     if (all_parameter)
     {
         cloned->m_actions  = m_actions;
+#ifdef WEB_ENGINE
         cloned->m_web_page = m_web_page;
+#endif
         cloned->setWhatsThis(whatsThis());
         cloned->setTabStopWidth(tabStopWidth());
         cloned->set_dark_mode(m_dark_mode);

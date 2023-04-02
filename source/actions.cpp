@@ -172,6 +172,8 @@ void ActionList::initActionIcons()
     action_icons[Cmd::CompareTo]               = "object-flip-horizontal.png";
     action_icons[Cmd::CloseAll]                = "window-close.png";
     action_icons[Cmd::SaveAll]                 = "document-save.png";
+    action_icons[Cmd::CustomTestCommand]       = "window-close.png";
+    action_icons[Cmd::OpenFile]                = "gnome-mime-text.png";
 
     for (auto& icon_path: action_icons )
     {
