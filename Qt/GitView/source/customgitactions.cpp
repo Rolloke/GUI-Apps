@@ -141,6 +141,8 @@ bool CustomGitActions::isMergeToolsChanged()
 
 CustomGitActions::~CustomGitActions()
 {
+    QAction* action = mActionList.getAction(Cmd::CustomTestCommand);
+    action->setStatusTip("");
     delete ui;
 }
 
@@ -480,10 +482,10 @@ void CustomGitActions::on_btnMoveDown_clicked()
     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
 }
 
-void CustomGitActions::on_btnAdd_clicked()
+void CustomGitActions::on_btnAdd_clicked(const QString &command)
 {
     auto  cmd    = mActionList.createNewID(Cmd::CustomCommand);
-    auto* action = mActionList.createAction(cmd, tr("command name"), "git ");
+    auto* action = mActionList.createAction(cmd, tr("command name"), command);
     if (action)
     {
         int row = -1;
@@ -947,5 +949,19 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
         Cmd::mToolbars.erase(Cmd::mToolbars.begin()+index);
         Cmd::mToolbarNames.erase(Cmd::mToolbarNames.begin()+index);
     }
+}
+
+
+void CustomGitActions::on_btnExecute_clicked()
+{
+    QAction* action = mActionList.getAction(Cmd::CustomTestCommand);
+    action->setStatusTip(ui->edtCommand->text());
+    action->trigger();
+}
+
+
+void CustomGitActions::on_btnAddCommand_clicked()
+{
+    on_btnAdd_clicked(ui->edtCommand->text());
 }
 

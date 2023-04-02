@@ -293,6 +293,7 @@ private Q_SLOTS:
     void createBookmark();
     void showInformation();
     void compare_items(QString& item1, QString& item2);
+    void OpenFile();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);

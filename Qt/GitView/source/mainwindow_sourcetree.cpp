@@ -282,6 +282,15 @@ void MainWindow::removeGitSourceFolder()
     mContextMenuSourceTreeItem = nullptr;
 }
 
+void MainWindow::OpenFile()
+{
+    const QString fSourcePath = QFileDialog::getOpenFileName(this, tr("Select File to open"));
+    if (!fSourcePath.isEmpty())
+    {
+        open_file(fSourcePath);
+    }
+}
+
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
     if (item)

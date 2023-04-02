@@ -60,6 +60,7 @@ struct Cmd
         /// hint: add further git commands here
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
+        CustomTestCommand=499,
         AutoCommand=500,
         RenderGraphics = AutoCommand+6,
         /// hint: this range is reserved for automatically created commands
@@ -97,6 +98,7 @@ struct Cmd
         CompareTo,
         CloseAll,
         SaveAll,
+        OpenFile,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

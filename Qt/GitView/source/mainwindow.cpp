@@ -279,6 +279,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
                 if (string_list.size() > 1) mActions.setMenuStringList(fCmd, string_list);
                 mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
                 mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+                if (!fAction->shortcut().isEmpty())
+                {
+                    add_action_to_widgets(fAction);
+                }
             }
         }
         fSettings.endArray();
@@ -717,9 +721,9 @@ void MainWindow::createDockWindows()
     tabifyDockWidget(first_tab, dock);
 
     // find tree
-    dock = create_dock_widget(ui->treeFindText, tr("Find Text in Files"), findview);
+    dock = create_dock_widget(ui->treeFindText, tr("Found in Text Files"), findview);
     ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
-    ui->comboFindBox->addItem(dock->windowTitle());
+    ui->comboFindBox->addItem(tr("Text files below folder"));
     ui->verticalLayout->removeWidget(ui->treeFindText);
     tabifyDockWidget(first_tab, dock);
 
@@ -1049,8 +1053,8 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
-    connect(docked_browser, SIGNAL(text_changed(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
 #ifdef WEB_ENGINE
+    connect(docked_browser, SIGNAL(text_changed(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
     connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 #endif
 
@@ -1103,9 +1107,9 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
         disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
-        disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
 #ifdef WEB_ENGINE
+        disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 #endif
     }
@@ -1612,6 +1616,10 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::RemoveGitFolder, tr("Remove git source folder"), tr("Remove a git source folder from repository view")), SIGNAL(triggered()), this, SLOT(removeGitSourceFolder()));
     mActions.setFlags(Cmd::RemoveGitFolder, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::RemoveGitFolder, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::OpenFile, tr("Open File..."), tr("Open arbitrary file")) , SIGNAL(triggered()), this, SLOT(OpenFile()));
+    mActions.setFlags(Cmd::OpenFile, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::OpenFile, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1703,7 +1711,8 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::ShowInformation)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_I));
     mActions.setFlags(Cmd::ShowInformation, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ShowInformation, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
-    add_action_to_widgets(mActions.getAction(Cmd::ShowInformation));
+
+    connect(mActions.createAction(Cmd::CustomTestCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
     create_auto_cmd(ui->ckDirectories);
     create_auto_cmd(ui->ckFiles);
@@ -1753,7 +1762,8 @@ void MainWindow::initContextMenuActions()
 
     for (const auto& fAction : mActions.getList())
     {
-        mActions.setFlags(static_cast<Cmd::eCmd>(fAction.first), ActionList::Flags::BuiltIn);
+        auto cmd = static_cast<Cmd::eCmd>(fAction.first);
+        mActions.setFlags(cmd, ActionList::Flags::BuiltIn);
     }
 }
 
@@ -1766,6 +1776,11 @@ void MainWindow::add_action_to_widgets(QAction * action)
     ui->treeHistory->addAction(action);
     ui->treeStash->addAction(action);
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        dock_widget->widget()->addAction(action);
+    }
 }
 
 QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, Cmd::eCmd *new_id)

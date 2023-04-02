@@ -400,6 +400,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
             int error = execute(git_cmd, result_string);
             if (!error)
             {
+                TRACEX(Logger::to_browser, git_cmd);
                 if (!diff_over_one_step && second_item)
                 {
                     QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_item->text(History::Column::Filename);
