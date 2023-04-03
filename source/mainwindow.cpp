@@ -1619,6 +1619,9 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::OpenFile, tr("Open File..."), tr("Open arbitrary file")) , SIGNAL(triggered()), this, SLOT(OpenFile()));
     mActions.setFlags(Cmd::OpenFile, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::OpenFile, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::SaveAs, tr("Save File as..."), tr("Save file under alternative name")) , SIGNAL(triggered()), this, SLOT(SaveFileAs()));
+    mActions.setFlags(Cmd::SaveAs, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::SaveAs, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));

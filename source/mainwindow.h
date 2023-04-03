@@ -294,6 +294,7 @@ private Q_SLOTS:
     void showInformation();
     void compare_items(QString& item1, QString& item2);
     void OpenFile();
+    void SaveFileAs();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);

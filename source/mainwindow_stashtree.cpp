@@ -64,7 +64,10 @@ void MainWindow::call_git_stash_command()
             }
             break;
         }
-
+    }
+    else if (!isMessageBoxNo(result))
+    {
+        appendTextToBrowser(git_command + tr("Error %1 occurred").arg(result));
     }
 }
 

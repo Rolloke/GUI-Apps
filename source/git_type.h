@@ -99,6 +99,7 @@ struct Cmd
         CloseAll,
         SaveAll,
         OpenFile,
+        SaveAs,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

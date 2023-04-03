@@ -284,10 +284,24 @@ void MainWindow::removeGitSourceFolder()
 
 void MainWindow::OpenFile()
 {
-    const QString fSourcePath = QFileDialog::getOpenFileName(this, tr("Select File to open"));
+    const QString fSourcePath = QFileDialog::getOpenFileName(this, tr("Select file to open"));
     if (!fSourcePath.isEmpty())
     {
         open_file(fSourcePath);
+    }
+}
+
+void MainWindow::SaveFileAs()
+{
+    const QString fDestinationPath = QFileDialog::getSaveFileName(this, tr("Enter file new name"));
+    if (!fDestinationPath.isEmpty())
+    {
+        QWidget* active_widget = get_active_editable_widget();
+        if (set_file_path(active_widget, fDestinationPath))
+        {
+            btnStoreText_clicked();
+            on_DockWidgetActivated(dynamic_cast<QDockWidgetX*>(active_widget->parentWidget()));
+        }
     }
 }
 

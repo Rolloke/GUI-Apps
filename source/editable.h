@@ -22,7 +22,7 @@ protected:
     bool                    m_active;
 };
 
-
+bool           set_file_path(QWidget*widget, const QString& file_path);
 const QString& get_file_path(QWidget*widget);
 bool           get_changed(QWidget*widget);
 bool           get_active(QWidget*widget);
