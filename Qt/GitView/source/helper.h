@@ -65,6 +65,7 @@ int execute(const QString& command, QString& aResultText, bool hide=true, boost:
 
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true);
 int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, bool aIsFile = true, bool aEditText=true);
+bool isMessageBoxNo(int msg);
 
 const char* getLineFeed();
 

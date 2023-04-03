@@ -39,6 +39,23 @@ bool Editable::get_active() const
     return m_active;
 }
 
+bool set_file_path(QWidget *widget, const QString &file_path)
+{
+    code_browser* text_browser = dynamic_cast<code_browser*>(widget);
+    if (text_browser)
+    {
+        text_browser->set_file_path(file_path);
+        return true;
+    }
+    qbinarytableview* binary_view = dynamic_cast<qbinarytableview*>(widget);
+    if (binary_view)
+    {
+        binary_view->set_file_path(file_path);
+        return true;
+    }
+    return false;
+}
+
 const QString& get_file_path(QWidget*widget)
 {
     code_browser* text_browser = dynamic_cast<code_browser*>(widget);

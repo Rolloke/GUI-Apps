@@ -367,6 +367,11 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
     return QMessageBox::Yes;
 }
 
+bool isMessageBoxNo(int msg)
+{
+    return msg == QMessageBox::No || msg == QMessageBox::NoToAll;
+}
+
 const char* getLineFeed()
 {
 #ifdef __linux__

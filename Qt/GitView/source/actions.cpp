@@ -174,6 +174,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::SaveAll]                 = "document-save.png";
     action_icons[Cmd::CustomTestCommand]       = "window-close.png";
     action_icons[Cmd::OpenFile]                = "gnome-mime-text.png";
+    action_icons[Cmd::SaveAs]                  = "document-save.png";
 
     for (auto& icon_path: action_icons )
     {

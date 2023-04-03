@@ -72,7 +72,7 @@ void MainWindow::call_git_branch_command()
             }    break;
         }
     }
-    else
+    else if (!isMessageBoxNo(result))
     {
         appendTextToBrowser(git_command + tr("Error %1 occurred").arg(result));
     }
