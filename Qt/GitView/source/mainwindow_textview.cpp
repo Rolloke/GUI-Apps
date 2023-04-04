@@ -103,7 +103,9 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e edito
             {
                 reset_text_browser(ui->textBrowser);
             }
-            if (mActivViewObjectName == binaryview)
+            if (   mActivViewObjectName == binary_table_view
+                || mActivViewObjectName == binaryview
+                || mActivViewObjectName == graphicsviewer)
             {
                 return true;
             }
@@ -177,12 +179,14 @@ bool MainWindow::btnCloseText_clicked(Editor::e editor)
             }
         }
 
-        if (mActivViewObjectName == binaryview)
+        if (   mActivViewObjectName == binary_table_view
+            || mActivViewObjectName == binaryview)
         {
             if (ui->tableBinaryView->get_binary_data().size())
             {
                 ui->tableBinaryView->clear_binary_content();
                 showDockedWidget(mBinaryValuesView.data(), false);
+                showDockedWidget(ui->tableBinaryView);
             }
         }
         else if (   additional_editor() == AdditionalEditor::None
@@ -193,7 +197,7 @@ bool MainWindow::btnCloseText_clicked(Editor::e editor)
 
         if (mActivViewObjectName == graphicsviewer)
         {
-            if (!ui->graphicsView->has_rendered_graphic())
+            //if (!ui->graphicsView->has_rendered_graphic())
             {
                 ui->graphicsView->clear();
             }
@@ -224,6 +228,7 @@ void MainWindow::btnStoreAll_clicked()
         btnStoreText_clicked();
         set_active(current_widget, false);
     }
+
     if (active_widget)
     {
         set_active(active_widget, true);
