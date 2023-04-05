@@ -80,11 +80,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mActions(this)
     , mConfigFileName(aConfigName)
     , mContextMenuSourceTreeItem(nullptr)
-    , mFileCopyMimeType("x-special/mate-copied-files")
     , mStylePath( "/opt/tools/git_view/style.qss")
     #ifdef __linux__
+    , mFileCopyMimeType("x-special/mate-copied-files")
     , mExternalFileOpenCmd("xdg-open")
     #else
+    , mFileCopyMimeType("")
     , mExternalFileOpenCmd("")
     #endif
     , mFindGrep("grep")
@@ -1619,6 +1620,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::OpenFile, tr("Open File..."), tr("Open arbitrary file")) , SIGNAL(triggered()), this, SLOT(OpenFile()));
     mActions.setFlags(Cmd::OpenFile, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::OpenFile, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.getAction(Cmd::OpenFile)->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_O));
     connect(mActions.createAction(Cmd::SaveAs, tr("Save File as..."), tr("Save file under alternative name")) , SIGNAL(triggered()), this, SLOT(SaveFileAs()));
     mActions.setFlags(Cmd::SaveAs, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::SaveAs, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1692,6 +1694,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file and path"), tr("Copy file or folder and path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
     mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CopyFilePath, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.getAction(Cmd::CopyFilePath)->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C));
 
     connect(mActions.createAction(Cmd::ZoomIn, tr("Zoom in"), tr("Zoom in (make larger)")), SIGNAL(triggered()), ui->graphicsView, SLOT(zoomIn()));
     mActions.setFlags(Cmd::ZoomIn, ActionList::Flags::FunctionCmd, Flag::set);

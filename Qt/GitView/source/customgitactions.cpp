@@ -482,7 +482,12 @@ void CustomGitActions::on_btnMoveDown_clicked()
     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
 }
 
-void CustomGitActions::on_btnAdd_clicked(const QString &command)
+void CustomGitActions::on_btnAdd_clicked()
+{
+    add_command();
+}
+
+void CustomGitActions::add_command(const QString& command)
 {
     auto  cmd    = mActionList.createNewID(Cmd::CustomCommand);
     auto* action = mActionList.createAction(cmd, tr("command name"), command);
@@ -951,7 +956,6 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
     }
 }
 
-
 void CustomGitActions::on_btnExecute_clicked()
 {
     QAction* action = mActionList.getAction(Cmd::CustomTestCommand);
@@ -959,9 +963,8 @@ void CustomGitActions::on_btnExecute_clicked()
     action->trigger();
 }
 
-
 void CustomGitActions::on_btnAddCommand_clicked()
 {
-    on_btnAdd_clicked(ui->edtCommand->text());
+    add_command(ui->edtCommand->text());
 }
 

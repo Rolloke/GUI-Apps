@@ -153,6 +153,15 @@ void MainWindow::btnCloseAll_clicked()
     btnCloseText_clicked(Editor::All);
 }
 
+bool MainWindow::shall_save(Editor::e editor)
+{
+    if (editor == Editor::Active && additional_editor() == AdditionalEditor::OnNewFile)
+    {
+        return false;
+    }
+    return true;
+}
+
 bool MainWindow::btnCloseText_clicked(Editor::e editor)
 {
     QWidget* active_widget = get_active_editable_widget();
@@ -160,7 +169,7 @@ bool MainWindow::btnCloseText_clicked(Editor::e editor)
     if (close_editable_widgets(active_widget, editor, all_closed))
     {
         QString filepath = get_file_path(active_widget);
-        if (get_changed(active_widget) && filepath.length() > 0)
+        if (shall_save(editor) && get_changed(active_widget) && filepath.length() > 0)
         {
             QMessageBox fSaveRequest;
             fSaveRequest.setText(tr("The document has been modified.\n\n%1").arg(filepath));

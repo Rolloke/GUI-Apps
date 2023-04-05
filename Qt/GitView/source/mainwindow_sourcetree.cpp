@@ -1125,14 +1125,17 @@ void MainWindow::copy_file(copy command)
             QMimeData* mime_data = new QMimeData();
             // Copy path of file
             mime_data->setText(fileInfo.filePath());
-            // Copy file
-            auto url = QUrl::fromLocalFile(fileInfo.filePath());
-            mime_data->setUrls({ url });
-            // Copy file (mFileCopyMimeType may be edited in ini-file)
-            QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
-            mime_data->setData(mFileCopyMimeType, copied_files);
-            // Set the mimedata
-            clipboard->setMimeData(mime_data);
+            if (!mFileCopyMimeType.isEmpty())
+            {
+                // Copy file
+                auto url = QUrl::fromLocalFile(fileInfo.filePath());
+                mime_data->setUrls({ url });
+                // Copy file (mFileCopyMimeType may be edited in ini-file)
+                QByteArray copied_files = QByteArray("copy\n").append(url.toEncoded());
+                mime_data->setData(mFileCopyMimeType, copied_files);
+                // Set the mimedata
+                clipboard->setMimeData(mime_data);
+            }
         }
     }
 }
