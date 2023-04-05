@@ -42,60 +42,16 @@ public:
     ~MainWindow();
 
 private:
-    QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
-    void     call_git_history_diff_command();
-    int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
+    enum class find
+    {
+        forward, backward, all, replace
+    };
 
-    QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
-    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {});
-
-    QString  getConfigName() const;
-
-    bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
-    void     insertSourceTree(const QDir& fSource, int fItem);
-
-    QDir     initDir(const QString& aDirPath, int aFilter=0);
-    void     initCodecCombo();
-
-    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
-    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
-
-    QVariant handleWorker(int, const QVariant&);
-    void     handleMessage(int, QVariant);
-    bool     handleInThread(bool force_thread=false);
-    void     on_emit_temp_file_path(const QString& path);
-
-    void     updateTreeItemStatus(QTreeWidgetItem * aItem);
-    void     getSelectedTreeItem();
-
-    void     initContextMenuActions();
-    void     initMergeTools(bool read_new_items = false);
-
-    void     applyCommandToFileTree(const QString& aCommand);
-    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread=false);
-
-    QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
-
-    enum class find { forward, backward, all, replace };
-    void     find_function(find forward);
-    void     find_in_tree_views(find forward);
-    void     find_in_text_view(find forward);
-    void     find_text_in_files();
-    bool     getShowTypeResult(const git::Type& fType);
-    QWidget *get_active_editable_widget(const QString &file_path = {});
-    code_browser* create_new_text_browser(const QString &file_path);
-    bool     send_close_to_editable_widget(QWidget *editable_widget);
-    void     reset_text_browser(code_browser*text_browser);
-
-    enum class copy { name, path, file };
-    void     copy_file(copy command);
-    QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
-    void     add_action_to_widgets(QAction * action);
-    void     keyPressEvent(QKeyEvent *) override;
-    void     mousePressEvent(QMouseEvent *event) override;
-    void     timerEvent(QTimerEvent* event) override;
-    void     closeEvent(QCloseEvent *event);
+    enum class copy
+    {
+        name, path, file
+    };
 
     struct Work
     {
@@ -194,8 +150,64 @@ private:
         All
     }; };
 
+    QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
+
+    void     call_git_history_diff_command();
+    int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
+
+    QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
+    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {});
+
+    QString  getConfigName() const;
+
+    bool     iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir=0, QTreeWidgetItem* aParentItem=0);
+    void     insertSourceTree(const QDir& fSource, int fItem);
+
+    QDir     initDir(const QString& aDirPath, int aFilter=0);
+    void     initCodecCombo();
+
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
+    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
+
+    QVariant handleWorker(int, const QVariant&);
+    void     handleMessage(int, QVariant);
+    bool     handleInThread(bool force_thread=false);
+    void     on_emit_temp_file_path(const QString& path);
+
+    void     updateTreeItemStatus(QTreeWidgetItem * aItem);
+    void     getSelectedTreeItem();
+
+    void     initContextMenuActions();
+    void     initMergeTools(bool read_new_items = false);
+
+    void     applyCommandToFileTree(const QString& aCommand);
+    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread=false);
+
+    QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
+
+    void     find_function(find forward);
+    void     find_in_tree_views(find forward);
+    void     find_in_text_view(find forward);
+    void     find_text_in_files();
+
+    bool     getShowTypeResult(const git::Type& fType);
+    QWidget *get_active_editable_widget(const QString &file_path = {});
+    code_browser* create_new_text_browser(const QString &file_path);
+    bool     send_close_to_editable_widget(QWidget *editable_widget);
+    void     reset_text_browser(code_browser*text_browser);
+
+    void     copy_file(copy command);
+    QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    void     add_action_to_widgets(QAction * action);
+    void     keyPressEvent(QKeyEvent *) override;
+    void     mousePressEvent(QMouseEvent *event) override;
+    void     timerEvent(QTimerEvent* event) override;
+    void     closeEvent(QCloseEvent *event);
+
     AdditionalEditor::e additional_editor();
     bool close_editable_widgets(QWidget *&active_widget, Editor::e editor, bool &all_closed);
+    bool shall_save(Editor::e editor);
+
 
 Q_SIGNALS:
     void doWork(int, QVariant);
@@ -329,7 +341,6 @@ private:
     QSharedPointer<MarkdownProxy>  m_markdown_proxy;
 #endif
 
-    QString               mFileCopyMimeType;
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
     struct tree_find_properties
@@ -344,6 +355,7 @@ private:
     QMap <QString, tree_find_properties> mTreeFindProperties;
     QStringList mHistoryFile;
     QString mStylePath;
+    QString mFileCopyMimeType;
     QString mExternalIconFiles;
     QString mExternalFileOpenCmd;
     QString mFindGrep;

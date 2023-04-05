@@ -81,7 +81,7 @@ private Q_SLOTS:
     void on_btnToRight_clicked();
     void on_btnMoveUp_clicked();
     void on_btnMoveDown_clicked();
-    void on_btnAdd_clicked(const QString& command = "git ");
+    void on_btnAdd_clicked();
     void on_btnDelete_clicked();
     void on_tableViewActions_clicked(const QModelIndex &index);
     void on_tableViewVarious_clicked(const QModelIndex &index);
@@ -90,10 +90,7 @@ private Q_SLOTS:
     void on_tableViewVarious_customContextMenuRequested(const QPoint &pos);
     void on_btnLoadIcons_clicked();
     void on_btnHelp_clicked();
-
-
     void on_btnExecute_clicked();
-
     void on_btnAddCommand_clicked();
 
 private:
@@ -108,6 +105,7 @@ private:
     git::Cmd::eCmd getCommand(int aRow);
     std::uint32_t get_toolbar_index(std::uint32_t index) const;
     std::uint32_t getVariousListSize() const;
+    void add_command(const QString& command = "git ");
 
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
