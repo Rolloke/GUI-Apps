@@ -841,6 +841,7 @@ void MainWindow::clone_code_browser()
         }
         QDockWidget*dock = create_dock_widget(docked_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
     #if 1
         QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->treeHistory->parent());
         if (parent)
