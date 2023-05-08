@@ -1,6 +1,7 @@
 #include "qhistorytreewidget.h"
 #include <QHeaderView>
 #include <QMenu>
+#include <QActionGroup>
 #include "actions.h"
 #include "helper.h"
 #include "history.h"

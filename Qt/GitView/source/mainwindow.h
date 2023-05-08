@@ -202,7 +202,7 @@ private:
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
-    void     closeEvent(QCloseEvent *event);
+    void     closeEvent(QCloseEvent *event) override;
 
     AdditionalEditor::e additional_editor();
     bool close_editable_widgets(QWidget *&active_widget, Editor::e editor, bool &all_closed);

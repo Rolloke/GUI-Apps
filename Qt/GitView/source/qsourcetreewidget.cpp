@@ -122,7 +122,10 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
 
         QStringList fColumns;
         fColumns.append(fFileInfo.fileName());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#else
         fColumns.append(fFileInfo.lastModified().toString(Qt::SystemLocaleShortDate));
+#endif
         fColumns.append(formatFileSize(fFileInfo.size()));
         fColumns.append("");
 
@@ -359,7 +362,11 @@ void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepa
             auto* parent = found->parent();
             while (parent)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                parent->setExpanded(true);
+#else
                 setItemExpanded(parent, true);
+#endif
                 parent = parent->parent();
             }
             scrollToItem(found);

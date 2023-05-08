@@ -14,7 +14,10 @@
 #include <QMessageBox>
 #include <QClipboard>
 #include <QMimeData>
-#include <QTextCodec>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    #include <QtCore/QTextCodec>
+#else
+#endif
 
 using namespace std;
 using namespace git;
@@ -429,6 +432,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         else if (reopen_file && text_browser)
         {
             bool codec_selected = false;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             if (ui->comboTextCodex->currentIndex())
             {
                 // Umlaute windows-437, windows-850, windows-1252
@@ -444,6 +448,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             {
                 QTextCodec::setCodecForLocale(nullptr);
             }
+#endif
             if (!text_browser->hasExtension(file_extension))
             {
                 text_browser->setExtension(file_extension);
@@ -961,7 +966,7 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
             }
             if (item.indexOf("*") == 0)
             {
-                option += item.rightRef(item.size()-1);
+                option += item.right(item.size()-1);
                 option += " ";
             }
         }
@@ -1090,11 +1095,11 @@ void MainWindow::copy_file(copy command)
         QFileInfo fileInfo;
         if (fItemPath.contains(fTopItemPath))
         {
-            fileInfo = fItemPath;
+            fileInfo.setFile(fItemPath);
         }
         else
         {
-            fileInfo = fTopItemPath + QDir::separator() + fItemPath;
+            fileInfo.setFile(fTopItemPath + QDir::separator() + fItemPath);
         }
         QClipboard *clipboard = QApplication::clipboard();
 #if 0
@@ -1151,11 +1156,11 @@ void MainWindow::showInformation()
         QFileInfo file_info;
         if (file_path.contains(repository))
         {
-            file_info = file_path;
+            file_info.setFile(file_path);
         }
         else
         {
-            file_info = repository + QDir::separator() + file_path;
+            file_info.setFile(repository + QDir::separator() + file_path);
         }
         bool old = Type::mShort;
         Type::mShort = false;
@@ -1171,7 +1176,9 @@ void MainWindow::showInformation()
 
         information << "States: " << states.toStdString() << std::endl;
         information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
-#if QT_DEPRECATED_SINCE(5, 10)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
+#elif QT_DEPRECATED_SINCE(5, 10)
         if (file_info.created().isValid())
         {
             information << "\nCreated: " << file_info.created().toString(Qt::SystemLocaleShortDate).toStdString();
@@ -1186,8 +1193,11 @@ void MainWindow::showInformation()
             information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate).toStdString();
         }
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#else
         information << "\nModified: " << file_info.lastModified().toString(Qt::SystemLocaleShortDate).toStdString();
         information << "\nLast Access: " << file_info.lastRead().toString(Qt::SystemLocaleShortDate).toStdString();
+#endif
         information << "\nPermissions:\n" << formatPermissions(file_info.permissions()).toStdString() << std::endl;
 #ifdef __linux__
         information << "\nOwner: " << file_info.owner().toStdString();
