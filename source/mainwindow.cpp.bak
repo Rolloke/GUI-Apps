@@ -893,7 +893,7 @@ void MainWindow::dockWidget_topLevelChanged(bool)
     QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
     if (dw && mDockedWidgetMinMaxButtons)
     {
-        static Qt::WindowFlags oldDocWidgetFlags = static_cast<Qt::WindowFlags>(0);
+        static Qt::WindowFlags oldDocWidgetFlags = 0;
         if (dw->isFloating())
         {
             auto customized = Qt::CustomizeWindowHint |
@@ -1322,47 +1322,47 @@ void MainWindow::initCodecCombo()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #else
-    const auto codecs = QTextCodec::availableCodecs();
-    QRegExp reg_ex_num ("([\\d]{1,6})");
-    QRegExp reg_ex_text("([a-zA-Z-]{1,})");
-    QMap<QString, QList<QString>> codec_map;
-    for (const auto& codec : codecs)
-    {
-        int pos = reg_ex_num.indexIn(codec);
-        if (pos != -1)
-        {
-            QString captured_num = reg_ex_num.capturedTexts().at(0);
-            QString captured_text;
-            pos = reg_ex_text.indexIn(codec);
-            if (pos != -1)
-            {
-                captured_text = reg_ex_text.capturedTexts().at(0);
-            }
-            if (captured_text.size() == 0)
-            {
-                captured_text = codec;
-            }
-            if (codec_map.contains(captured_num))
-            {
-                codec_map.find(captured_num).value().push_back(captured_text);
-            }
-            else
-            {
-                codec_map.insert(captured_num, {captured_text});
-            }
-        }
-    }
-    ui->comboTextCodex->addItem("Default Codec");
-    for (auto codec = codec_map.begin(); codec != codec_map.end(); ++codec)
-    {
-        auto& cp_val =  codec.value();
-        QString cp = cp_val.at(0) + codec.key();
-        for (int i=1; i<cp_val.size(); ++i)
-        {
-            cp += ", " + cp_val[i];
-        }
-        ui->comboTextCodex->addItem(cp);
-    }
+//    const auto codecs = QTextCodec::availableCodecs();
+//    QRegExp reg_ex_num ("([\\d]{1,6})");
+//    QRegExp reg_ex_text("([a-zA-Z-]{1,})");
+//    QMap<QString, QList<QString>> codec_map;
+//    for (const auto& codec : codecs)
+//    {
+//        int pos = reg_ex_num.indexIn(codec);
+//        if (pos != -1)
+//        {
+//            QString captured_num = reg_ex_num.capturedTexts().at(0);
+//            QString captured_text;
+//            pos = reg_ex_text.indexIn(codec);
+//            if (pos != -1)
+//            {
+//                captured_text = reg_ex_text.capturedTexts().at(0);
+//            }
+//            if (captured_text.size() == 0)
+//            {
+//                captured_text = codec;
+//            }
+//            if (codec_map.contains(captured_num))
+//            {
+//                codec_map.find(captured_num).value().push_back(captured_text);
+//            }
+//            else
+//            {
+//                codec_map.insert(captured_num, {captured_text});
+//            }
+//        }
+//    }
+//    ui->comboTextCodex->addItem("Default Codec");
+//    for (auto codec = codec_map.begin(); codec != codec_map.end(); ++codec)
+//    {
+//        auto& cp_val =  codec.value();
+//        QString cp = cp_val.at(0) + codec.key();
+//        for (int i=1; i<cp_val.size(); ++i)
+//        {
+//            cp += ", " + cp_val[i];
+//        }
+//        ui->comboTextCodex->addItem(cp);
+//    }
 #endif
 }
 
@@ -1378,11 +1378,7 @@ void MainWindow::compare_items(QString& item1, QString& item2)
 QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread)
 {
     QString fCommand;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    auto fPos = fGitCmd.indexOf(QRegularExpression("%[0-9]+"));
-#else
     auto fPos = fGitCmd.indexOf(QRegExp("%[0-9]+"));
-#endif
     if (fPos != -1)
     {
         fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
@@ -1506,7 +1502,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
-    mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier| Qt::Key_F4));
+    mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F4));
     mActions.setFlags(Cmd::Unstage, Type::GitStaged|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
@@ -1630,7 +1626,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::ExpandTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::CollapseTreeItems    , tr("Collapse Tree Items"), tr("Collapses all tree item of focused tree")), SIGNAL(triggered()), this, SLOT(collapse_tree_items()));
     mActions.setFlags(Cmd::CollapseTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
-    mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F11));
+    mActions.getAction(Cmd::CollapseTreeItems)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F11));
     mActions.setFlags(Cmd::CollapseTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::AddGitSourceFolder   , tr("Add git source folder..."), tr("Add a git source folder to repository view")) , SIGNAL(triggered()), this, SLOT(addGitSourceFolder()));
@@ -1642,7 +1638,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::OpenFile, tr("Open File..."), tr("Open arbitrary file")) , SIGNAL(triggered()), this, SLOT(OpenFile()));
     mActions.setFlags(Cmd::OpenFile, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::OpenFile, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.getAction(Cmd::OpenFile)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_O));
+    mActions.getAction(Cmd::OpenFile)->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_O));
     connect(mActions.createAction(Cmd::SaveAs, tr("Save File as..."), tr("Save file under alternative name")) , SIGNAL(triggered()), this, SLOT(SaveFileAs()));
     mActions.setFlags(Cmd::SaveAs, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::SaveAs, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -1716,7 +1712,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CopyFilePath, tr("Copy file and path"), tr("Copy file or folder and path to clipboard")), SIGNAL(triggered()), this, SLOT(copyFilePath()));
     mActions.setFlags(Cmd::CopyFilePath, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CopyFilePath, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    mActions.getAction(Cmd::CopyFilePath)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::ShiftModifier | Qt::Key_C));
+    mActions.getAction(Cmd::CopyFilePath)->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C));
 
     connect(mActions.createAction(Cmd::ZoomIn, tr("Zoom in"), tr("Zoom in (make larger)")), SIGNAL(triggered()), ui->graphicsView, SLOT(zoomIn()));
     mActions.setFlags(Cmd::ZoomIn, ActionList::Flags::FunctionCmd, Flag::set);
@@ -1736,7 +1732,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CreateBookMark, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::ShowInformation, tr("Show Information"), tr("Show information about selected item")), SIGNAL(triggered()), this, SLOT(showInformation()));
-    mActions.getAction(Cmd::ShowInformation)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_I));
+    mActions.getAction(Cmd::ShowInformation)->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_I));
     mActions.setFlags(Cmd::ShowInformation, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ShowInformation, Type::File|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
@@ -1765,10 +1761,10 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_W));
+    create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_W));
     mActions.getAction(new_id)->setText(tr("Save"));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
+    create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_S));
     mActions.getAction(new_id)->setText(tr("Close"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
@@ -1776,9 +1772,9 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->btnFindX, mActions.check_location("edit-find.png"), &new_id);
     create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F3));
+    create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_F));
+    create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
     create_auto_cmd(ui->comboShowItems);
@@ -2369,11 +2365,7 @@ void MainWindow::find_in_tree_views(find find_item)
         }
         if (ui->ckFindRegEx->isChecked())
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            tree_match_flag = Qt::MatchRegularExpression;
-#else
             tree_match_flag = Qt::MatchRegExp;
-#endif
         }
         else if (text_to_find.contains('*') || text_to_find.contains('?'))
         {
@@ -2428,11 +2420,7 @@ void MainWindow::find_in_tree_views(find find_item)
         {
             for (auto& item : found_items)
             {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                item->setSelected(true);
-#else
                 tree_view->setItemSelected(item, true);
-#endif
             }
             ui->comboShowItems->setCurrentIndex(static_cast<int>(ComboShowItems::GitSelected));
             on_comboShowItems_currentIndexChanged(static_cast<int>(ComboShowItems::GitSelected));
@@ -2443,21 +2431,13 @@ void MainWindow::find_in_tree_views(find find_item)
             int i=0;
             for (auto& item : found_items)
             {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                item->setSelected(i == property.mIndex);
-#else
                 tree_view->setItemSelected(item, i == property.mIndex);
-#endif
                 if (i == property.mIndex)
                 {
                     auto* parent = item->parent();
                     while (parent)
                     {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                        parent->setExpanded(true);
-#else
                         tree_view->setItemExpanded(parent, true);
-#endif
                         parent = parent->parent();
                     }
                     tree_view->scrollToItem(item);
@@ -2729,7 +2709,6 @@ void MainWindow::on_ckTypeConverter_stateChanged(int active)
 
 void MainWindow::on_spinTabulator_valueChanged(int width)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     ui->textBrowser->setTabStopDistance(width);
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
@@ -2737,15 +2716,6 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         text_browser->setTabStopDistance(width);
     }
-#else
-    ui->textBrowser->setTabStopWidth(width);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
-    for (QDockWidget* dock_widget : dock_widgets)
-    {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-        text_browser->setTabStopWidth(width);
-    }
-#endif
 }
 
 void MainWindow::comboTabPositionIndexChanged(int index)

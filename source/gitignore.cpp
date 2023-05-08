@@ -186,12 +186,30 @@ namespace
     {
         if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            QRegularExpression reg_ex;
+            if ( fItem->second.is(Type::WildCard))
+            { // TODO: wildcard
+                if (reg_ex.match(fItem->first, 0).isValid())
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (reg_ex.match(fItem->first, 0).isValid())
+                {
+                    return true;
+                }
+            }
+#else
             QRegExp fRegEx(fItem->first);
             fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
             if (fRegEx.exactMatch(fFileName))
             {
                 return true;
             }
+#endif
         }
         else if (fItem->first == fFileName)
         {

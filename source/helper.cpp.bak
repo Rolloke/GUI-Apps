@@ -2,13 +2,7 @@
 #include "logger.h"
 #include "actions.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
-#include <QRandomGenerator>
-#else
-#include <QRegExp>
-#endif
-
 #include <QStringList>
 #include <QFile>
 #include <QDir>
@@ -46,20 +40,7 @@ QPoint menu_offset(5, 0);
 
 QString getSettingsName(const QString& aItemName)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
-    auto match = fRegEx.match(aItemName);
-    if (match.isValid())
-    {
-        const auto captured = match.capturedTexts();
-        QString fTemp = captured[0];
-        fTemp = fTemp.replace(":", "_");
-        fTemp = fTemp.replace("[", "_");
-        return fTemp;
-    }
-    else return aItemName;
-#else
-    QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {
@@ -70,7 +51,6 @@ QString getSettingsName(const QString& aItemName)
         return fTemp;
     }
     else return aItemName;
-#endif
 }
 
 
@@ -274,12 +254,7 @@ QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const 
 /// @returns success of command execution (0 = success, !0 = error)
 int execute(const QString& command, QString& aResultText, bool hide, boost::function<void (const QString &)> emit_file_path)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    static QRandomGenerator rg(123);
-    QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(rg.generate()) + "_result.tmp";
-#else
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
-#endif
     QString fTempResultFileNameAndPath = fTemp.path();
     QString system_cmd = command + " > " + fTempResultFileNameAndPath;
 #ifdef __linux__

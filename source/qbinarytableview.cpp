@@ -184,7 +184,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     {
         if (column == INT(BinaryTableModel::Table::Typed))
         {
-            auto string_left = themodel.get_typed_content(row).toString().leftRef(char_position);
+            auto string_left = themodel.get_typed_content(row).toString().left(char_position);
             int pos = string_left.count(" ");
             const auto& value = themodel.m_td_values[themodel.m_td_index[row]];
             int length = 0;
@@ -199,7 +199,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     }
     else if (column == INT(BinaryTableModel::Table::Typed))
     {
-        int pos   = themodel.get_typed_content(row).toString().leftRef(char_position).count(" ");
+        int pos   = themodel.get_typed_content(row).toString().left(char_position).count(" ");
         int bytes = static_cast<int>(pos * themodel.get_type()->GetByteLength());
         cursor    = row * bytes_per_row + bytes;
     }

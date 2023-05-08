@@ -1,4 +1,5 @@
 #include "history.h"
+#include  <QStringList>
 
 namespace git
 {
