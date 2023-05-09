@@ -2,6 +2,10 @@
 #include "logger.h"
 #include "helper.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#endif
+
 using namespace git;
 
 GitIgnore::GitIgnore()
@@ -190,7 +194,7 @@ namespace
             QRegularExpression reg_ex;
             if ( fItem->second.is(Type::WildCard))
             { // TODO: wildcard
-                if (reg_ex.match(fItem->first, 0).isValid())
+                if (reg_ex.match(QRegularExpression::wildcardToRegularExpression(fItem->first), 0).isValid())
                 {
                     return true;
                 }
