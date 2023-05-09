@@ -323,7 +323,6 @@ private:
     void     createDockWindows();
     void     addCmdToolBar(int i);
     bool     mDockedWidgetMinMaxButtons;
-    QDockWidget*          m_first_cloned = nullptr;
 #endif
 
     Ui::MainWindow*       ui;

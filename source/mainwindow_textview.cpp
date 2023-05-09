@@ -72,7 +72,7 @@ void MainWindow::selectTextBrowserLanguage()
         {
             bool enabled = ui->btnStoreText->isEnabled();
             text_browser->setLanguage(language_list[index]);
-            set_widget_and_action_enabled(text_browser, enabled);
+            set_widget_and_action_enabled(ui->btnStoreText, enabled);
         }
     }
 }

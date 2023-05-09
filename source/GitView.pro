@@ -8,10 +8,10 @@
 
 QT += core gui
 QT += xml
-#QT += svg
+QT += svg
 
-#QT += webenginewidgets webchannel
-#DEFINES += WEB_ENGINE=1
+QT += webenginewidgets webchannel
+DEFINES += WEB_ENGINE=1
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
