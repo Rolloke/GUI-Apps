@@ -310,6 +310,7 @@ void MainWindow::SaveFileAs()
 
 void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* column */ )
 {
+    m_tree_source_item_double_clicked = true;
     if (item)
     {
         const Type fType(Type::type(item->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
@@ -321,6 +322,7 @@ void MainWindow::on_treeSource_itemDoubleClicked(QTreeWidgetItem *item, int /* c
     }
     const QString   file_name      = ui->treeSource->getItemFilePath(item);
     open_file(file_name);
+    m_tree_source_item_double_clicked = false;
 }
 
 void MainWindow::open_file_externally()
