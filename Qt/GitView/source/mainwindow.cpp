@@ -98,6 +98,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mWarnOpenFileSize(1024*1024) // 1MB
     , m_status_line_label(nullptr)
     , m_status_column_label(nullptr)
+    , m_tree_source_item_double_clicked(false)
 {
     static const QString style_sheet_treeview_lines =
             "QTreeView::branch:has-siblings:!adjoins-item {"
@@ -925,9 +926,25 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
                 code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
                 browser->set_active(current_widget == dockWidget);
             }
-            ui->labelFilePath->setText(textBrowser->get_file_path());
-            set_widget_and_action_enabled(ui->btnStoreText, textBrowser->get_changed());
-            updateSelectedLanguage(textBrowser->currentLanguage());
+            if (!m_tree_source_item_double_clicked)
+            {
+                QString file_path_part = textBrowser->get_file_path();
+                ui->labelFilePath->setText(file_path_part);
+                set_widget_and_action_enabled(ui->btnStoreText, textBrowser->get_changed());
+                updateSelectedLanguage(textBrowser->currentLanguage());
+                QString repository_root;
+                for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
+                {
+                    const QString text = ui->treeSource->topLevelItem(i)->text(0);
+                    if (file_path_part.indexOf(text) == 0)
+                    {
+                        repository_root = text;
+                        file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
+                        break;
+                    }
+                }
+                ui->treeSource->find_item(repository_root, file_path_part);
+            }
         }
         mActivViewObjectName = dockWidget->objectName();
         bool bv_active = mActivViewObjectName == binaryview;

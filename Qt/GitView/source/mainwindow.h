@@ -368,6 +368,7 @@ private:
     QMutex  mTempFileMutex;
     QString mTempFilePath;
     QFile   mTempFile;
+    bool    m_tree_source_item_double_clicked = false;
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";
