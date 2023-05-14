@@ -269,14 +269,11 @@ private Q_SLOTS:
     void showDockedWidget(QWidget* widget, bool show=true);
     QList<QDockWidget *> get_dock_widget_of_name(QStringList names);
 
-#ifdef DOCKED_VIEWS
     void dockWidget_topLevelChanged(bool);
     QDockWidgetX *create_dock_widget(QWidget *widget, const QString &name, const QString &object_name, bool connect_dock=true);
     void clone_code_browser();
     void on_DockWidgetActivated(QDockWidget *dockWidget);
-#else
-    void showOrHideTrees(bool checked);
-#endif
+
     void clearTrees();
     void delete_tree_item();
     void add_file_open_extension();
@@ -311,19 +308,15 @@ private Q_SLOTS:
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
-#ifdef DOCKED_VIEWS
     void removeCmdToolBar(const QString &toolbar_name);
-#endif
 #ifdef WEB_ENGINE
     void show_web_view(bool );
 #endif
 private:
 
-#ifdef DOCKED_VIEWS
     void     createDockWindows();
     void     addCmdToolBar(int i);
     bool     mDockedWidgetMinMaxButtons;
-#endif
 
     Ui::MainWindow*       ui;
     QString               mGitCommand;

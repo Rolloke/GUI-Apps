@@ -18,9 +18,7 @@ Cmd::tVector  Cmd::mContextMenuGraphicsView;
 Cmd::tVector  Cmd::mContextMenuTextView;
 Cmd::tVector  Cmd::mContextMenuFindTextTree;
 std::vector<Cmd::tVector> Cmd::mToolbars;
-#ifdef DOCKED_VIEWS
 std::vector<QString> Cmd::mToolbarNames;
-#endif
 
 void operator++(Cmd::eCmd& cmd)
 {
@@ -76,11 +74,9 @@ Cmd::Cmd()
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ShowHideTree, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
-#ifdef DOCKED_VIEWS
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
-#endif
 }
 
 
