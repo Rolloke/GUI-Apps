@@ -7,8 +7,6 @@
 
 #include <QString>
 
-#define DOCKED_VIEWS 1
-
 class QFileInfo;
 typedef QMap<QString, bool> string2bool_map;
 
@@ -71,7 +69,7 @@ struct Cmd
         CollapseTreeItems,
         AddGitSourceFolder,
         UpdateGitStatus,
-        ShowHideTree,
+        ShowHideTree, /// TODO: find new usage for obsolete ID
         ClearTreeItems,
         CustomGitActionSettings,
         InsertHashFileNames,
@@ -138,9 +136,7 @@ struct Cmd
     static tVector mContextMenuTextView;
     static tVector mContextMenuFindTextTree;
     static std::vector<tVector> mToolbars;
-#ifdef DOCKED_VIEWS
     static std::vector<QString> mToolbarNames;
-#endif
 
 private:
     static int2stringmap mCommandMap;

@@ -41,7 +41,7 @@ using namespace boost::placeholders;
 
 #define RELATIVE_GIT_PATH 1
 
-/// FIXME: State of Save button is sometimes dirty but file is not changed
+
 
 using namespace std;
 using namespace git;
@@ -115,9 +115,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-open.png); }";
 
     ui->setupUi(this);
-#ifdef DOCKED_VIEWS
     createDockWindows();
-#endif
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
@@ -296,19 +294,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
 
-#ifdef DOCKED_VIEWS
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
     {
         addCmdToolBar(i);
     }
-#else
-    for (const auto& fToolbar : Cmd::mToolbars)
-    {
-        QToolBar*pTB = new QToolBar();
-        mActions.fillToolbar(*pTB, fToolbar);
-        ui->horizontalLayoutTool->addWidget(pTB);
-    }
-#endif
 
     fSettings.beginGroup(config::sGroupView);
     {
@@ -402,7 +391,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         ui->spinTabulator->setValue(fTextTabStopWidth);
 #endif
 
-#ifdef DOCKED_VIEWS
         QByteArray fWindowGeometry;
         LOAD_STR(fSettings, fWindowGeometry, toByteArray);
         QByteArray fWindowState;
@@ -420,7 +408,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         showDockedWidget(ui->textBrowser);
         connect(ui->comboTabPosition, SIGNAL(currentIndexChanged(int)), this, SLOT(comboTabPositionIndexChanged(int)));
         comboTabPositionIndexChanged(ui->comboTabPosition->currentIndex());
-#endif
     }
     fSettings.endGroup();
 
@@ -672,7 +659,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-#ifdef DOCKED_VIEWS
 void MainWindow::createDockWindows()
 {
     /// use initialized widgets from forms user interface
@@ -957,11 +943,8 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
     }
 }
 
-#endif
-
 void MainWindow::showDockedWidget(QWidget* widget, bool show)
 {
-#ifdef DOCKED_VIEWS
     QDockWidget* parent = dynamic_cast<QDockWidget*>(widget->parent());
     if (parent)
     {
@@ -979,9 +962,6 @@ void MainWindow::showDockedWidget(QWidget* widget, bool show)
             parent->setVisible(false);
         }
     }
-#else
-    mActions.getAction(Cmd::ShowHideTree)->setChecked(!hide);
-#endif
 }
 
 QList<QDockWidget *> MainWindow::get_dock_widget_of_name(QStringList names)
@@ -1093,6 +1073,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     {
         tabifyDockWidget(parent, dock);
     }
+    ui->comboOpenNewEditor->setEnabled(false);
     return docked_browser;
 
 }
@@ -1136,6 +1117,8 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 #endif
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+        ui->comboOpenNewEditor->setEnabled(dock_widgets.size() <= 1);
     }
 }
 
@@ -1420,56 +1403,6 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     return fCommand;
 }
 
-#ifndef DOCKED_VIEWS
-void MainWindow::showOrHideTrees(bool checked)
-{
-    if (checked)
-    {
-        int fTrees = 0;
-        if (ui->treeHistory->topLevelItemCount())
-        {
-            ui->treeHistory->setVisible(checked);
-            ++fTrees;
-        }
-        if (ui->treeBranches->topLevelItemCount())
-        {
-            ui->treeBranches->setVisible(checked);
-            ++fTrees;
-        }
-        if (ui->treeStash->topLevelItemCount())
-        {
-            ui->treeStash->setVisible(checked);
-            ++fTrees;
-        }
-        if (ui->treeFindText->topLevelItemCount())
-        {
-            ui->treeFindText->setVisible(checked);
-            ++fTrees;
-        }
-        checked = (fTrees != 0);
-    }
-    else
-    {
-        QTreeWidget* fFocused = focusedTreeWidget(false);
-        if (fFocused)
-        {
-            fFocused->setVisible(checked);
-        }
-        else
-        {
-            ui->treeHistory->setVisible(checked);
-            ui->treeBranches->setVisible(checked);
-            ui->treeStash->setVisible(checked);
-            ui->treeFindText->setVisible(checked);
-        }
-    }
-
-    ui->horizontalLayout->setStretch(0, 1);
-    ui->horizontalLayout->setStretch(1, checked ? 2 : 1);
-    mActions.getAction(Cmd::ShowHideTree)->setChecked(checked);
-}
-#endif
-
 void MainWindow::initContextMenuActions()
 {
     connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
@@ -1660,11 +1593,6 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::UpdateGitStatus, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-#ifndef DOCKED_VIEWS
-    connect(mActions.createAction(Cmd::ShowHideTree  , tr("Show/Hide tree"), tr("Shows or hides history or branches tree")) , SIGNAL(toggled(bool)), this, SLOT(showOrHideTrees(bool)));
-    mActions.getAction(Cmd::ShowHideTree)->setCheckable(true);
-    mActions.setFlags(Cmd::ShowHideTree, ActionList::Flags::FunctionCmd, Flag::set);
-#endif
     connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear all tree entries"), tr("Clears all tree entries in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(clearTrees()));
     mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ClearTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
