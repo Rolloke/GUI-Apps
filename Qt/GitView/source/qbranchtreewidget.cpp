@@ -99,12 +99,12 @@ void QBranchTreeWidget::select_branch(const QString &repository)
         if (top_item)
         {
             int index = top_item->text(Column::Text).indexOf(repository);
-            if (index != -1 && !top_item->isExpanded())
+            if (index != -1)
             {
                 top_item->setSelected(true);
                 expandItem(top_item);
             }
-            else if (top_item->isExpanded())
+            else
             {
                 top_item->setSelected(false);
                 collapseItem(top_item);
