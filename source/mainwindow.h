@@ -53,30 +53,27 @@ private:
         name, path, file
     };
 
-    struct Work
+    enum class Work
     {
-        enum e
-        {
-            None,
-            DetermineGitMergeTools,
-            ApplyGitCommand,
-            ApplyCommand,
-            ApplyCommandRecursive,
-            AsynchroneousCommand,
-            InsertPathFromCommandString,
-            ShowAllFiles,
-            ShowAllGitActions,
-            ShowModified,
-            ShowDeleted,
-            ShowAdded,
-            ShowUnknown,
-            ShowStaged,
-            ShowUnMerged,
-            ShowSelected,
-            // NOTE: further git items are added here
-            // show out of sync...
-            Last
-        };
+        None,
+        DetermineGitMergeTools,
+        ApplyGitCommand,
+        ApplyCommand,
+        ApplyCommandRecursive,
+        AsynchroneousCommand,
+        InsertPathFromCommandString,
+        ShowAllFiles,
+        ShowAllGitActions,
+        ShowModified,
+        ShowDeleted,
+        ShowAdded,
+        ShowUnknown,
+        ShowStaged,
+        ShowUnMerged,
+        ShowSelected,
+        // NOTE: further git items are added here
+        // show out of sync...
+        Last
     };
 
     enum class Message
@@ -134,21 +131,21 @@ private:
 
     }; };
 
-    struct AdditionalEditor { enum e
+    enum class AdditionalEditor
     {
         None,
         One,
         OnNewFile
-    }; };
+    };
 
-    struct Editor { enum e
+    enum class Editor
     {
         Viewer,
         Active,
         CalledFromAction,
         CalledFromWidget,
         All
-    }; };
+    };
 
     QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
@@ -204,9 +201,9 @@ private:
     void     timerEvent(QTimerEvent* event) override;
     void     closeEvent(QCloseEvent *event) override;
 
-    AdditionalEditor::e additional_editor();
-    bool close_editable_widgets(QWidget *&active_widget, Editor::e editor, bool &all_closed);
-    bool shall_save(Editor::e editor);
+    AdditionalEditor additional_editor();
+    bool close_editable_widgets(QWidget *&active_widget, Editor editor, bool &all_closed);
+    bool shall_save(Editor editor);
 
 
 Q_SIGNALS:
@@ -218,7 +215,7 @@ private Q_SLOTS:
 
     void btnStoreText_clicked();
     void btnStoreAll_clicked();
-    bool btnCloseText_clicked(Editor::e editor=Editor::CalledFromAction);
+    bool btnCloseText_clicked(Editor editor=Editor::CalledFromAction);
     void btnCloseAll_clicked();
 
     void on_treeSource_itemClicked(QTreeWidgetItem *item, int column);
@@ -322,7 +319,7 @@ private:
     QString               mGitCommand;
     WorkerThreadConnector mWorker;
     const QAction*        mWorkerAction;
-    Work::e               mCurrentTask;
+    Work                  mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
     QTreeWidgetItem*      mContextMenuSourceTreeItem;

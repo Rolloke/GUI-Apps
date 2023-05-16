@@ -982,9 +982,9 @@ QList<QDockWidget *> MainWindow::get_dock_widget_of_name(QStringList names)
     return dock_widgets;
 }
 
-MainWindow::AdditionalEditor::e MainWindow::additional_editor()
+MainWindow::AdditionalEditor MainWindow::additional_editor()
 {
-    return static_cast<AdditionalEditor::e>(ui->comboOpenNewEditor->currentIndex());
+    return static_cast<AdditionalEditor>(ui->comboOpenNewEditor->currentIndex());
 }
 
 QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
@@ -1170,7 +1170,7 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
 {
     QVariant work_result;
     Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
-    switch(static_cast<Work::e>(aWork))
+    switch(static_cast<Work>(aWork))
     {
     case Work::DetermineGitMergeTools:
     case Work::ApplyGitCommand:
@@ -1208,7 +1208,7 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
 
-    switch(static_cast<Work::e>(aMsg))
+    switch(static_cast<Work>(aMsg))
     {
     case Work::DetermineGitMergeTools:
         if (aData.isValid() && aData.type() == QVariant::String)
@@ -1385,12 +1385,12 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
     if (handleInThread(force_thread))
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-        Work::e work_command { mCurrentTask };
+        Work work_command { mCurrentTask };
         if (mWorkerAction && mWorkerAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
         {
             work_command = Work::AsynchroneousCommand;
         }
-        mWorker.doWork(work_command, QVariant(fCommand));
+        mWorker.doWork(INT(work_command), QVariant(fCommand));
     }
     else
     {
