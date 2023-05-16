@@ -1,0 +1,66 @@
+# open evcc at http://evcc.local:7070
+network:
+  schema: http
+  host: evcc.local # .local suffix announces the hostname on MDNS
+  port: 7070
+
+log: debug
+levels:
+  cache: error
+
+# unique installation id
+plant: 74800ab683ca51d741c28dd06a3d19d08a5e125ec701d90e2d59f1a83f3cbb11
+
+interval: 10s # control cycle interval
+
+meters:
+- type: template
+  template: huawei-dongle-powersensor 
+  id: 1  
+  host: 192.168.2.113  
+  port: 502  
+  usage: grid  
+  modbus: tcpip  
+  name: grid1
+- type: template
+  template: huawei-dongle-powersensor 
+  id: 1  
+  host: 192.168.2.113  
+  port: 502  
+  usage: pv  
+  modbus: tcpip  
+  name: pv2
+- type: template
+  template: huawei-dongle-powersensor 
+  id: 1  
+  host: 192.168.2.113  
+  port: 502  
+  usage: battery  
+  modbus: tcpip  
+  name: battery3
+
+chargers:
+- type: template
+  template: tasmota 
+  host: 192.168.2.190  
+  channel: 1  
+  standbypower: 15  
+  name: wallbox4
+
+loadpoints:
+- title: Verbraucher
+  charger: wallbox4
+  mode: pv
+  phases: 1
+  mincurrent: 6
+  maxcurrent: 16
+  resetOnDisconnect: false
+
+site:
+  title: Home
+  meters:
+    grid: grid1
+    pv:
+    - pv2
+    battery:
+    - battery3

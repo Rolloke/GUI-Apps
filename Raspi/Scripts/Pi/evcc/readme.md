@@ -1,0 +1,178 @@
+## Ansteuerbare Verbraucher für die PV Anlage
+
+### PV Dongle
+- Alpha ESS Storion SMILE
+- E3/DC
+- FENECON
+- Fronius Primo GEN24 Plus
+- Fronius Solar API V1
+- Fronius Symo GEN24 Plus
+- Huawei SUN2000 with SDongle & Power Sensor
+- Kostal Piko MP Plus
+- Kostal Piko, Piko BA
+- Kostal Plenticore Hybrid
+- LG ESS Home 8/10
+- OpenEMS
+- Powerdog
+- Qcells Q.HOME ESS HYB-G3
+- RCT Power
+- SENEC .Home
+- SMA Data Manager
+- SMA Smart Energy Hybrid-Wechselrichter
+- SMA Sunny Home Manager 2.0
+- SolarEdge Hybrid Inverter
+- SolarEdge Wechselrichter
+- Solarlog
+- SolarMax MAX.STORAGE / MAX.STORAGE Ultimate
+- Solarwatt EnergyManager, EnergyManager Pro
+- Solarwatt MyReserve
+- Solarwatt MyReserve Matrix (LAN oder PowerGateway)
+- Solax Hybrid X1/X3 G3/G4
+- Solax Hybrid-Wechselrichter (Cloud)
+- Sonnen sonnenBatterie
+- Sungrow SG Series Inverter
+- Sungrow SH Series Hybrid Inverter
+- Tesla Powerwall
+- VARTA pulse/ pulse neo/ element (PV nur verfügbar mit PV-Sensor)
+- Victron Energy
+- Hybridwechselrichter [Generische Unterstützung]
+
+### Fahrzeuge
+- Aiways
+- Audi Andere
+- Audi e-tron
+- BMW
+- Citroën
+- Dacia
+- DS
+- Fiat
+- Ford
+- Hyundai Bluelink
+- Jaguar
+- Kia Bluelink
+- Land Rover
+- Mini
+- Nissan Leaf
+- Nissan Leaf (pre 2019)
+- Opel
+- Peugeot
+- Porsche
+- PSA PSA Car Controller (flobz)
+- Renault
+- Seat Andere
+- Seat Cupra Born, My Cupra
+- Skoda Andere
+- Skoda Enyaq
+- Smart EQ
+- Tesla
+- Volkswagen We Connect (legacy)
+- Volkswagen We Connect ID
+- Volvo
+- Volvo (legacy)
+- evNotify [Generische Unterstützung]
+- Offline [Generische Unterstützung]
+- Open Vehicle Monitoring System [Generische Unterstützung]
+- Tronity [Generische Unterstützung]
+- NIU E-Scooter [Scooter]
+- Silence S01/S02 [Scooter]
+
+
+### Ladestationen / Schaltbare Steckdosen
+- ABB Terra AC
+- ABL eMH
+- Alfen Eve
+- Alphatec Wallbox Mini/ AW1eM
+- Audi Audi Wallbox pro (Beta)
+- Audi Wallbox plus (Beta)
+- Bender CC612/613
+- BMW i Wallbox
+- cFos PowerBrain
+- Compleo eBox
+- Cupra Charger Pro (Beta)
+- Dadapower Premium Wallbox
+- DaheimLaden Wallbox
+- DaheimLaden Wallbox (via ModbusTCP)
+- E.ON Drive eBox
+- E.ON Drive vBox
+- Easee Home
+- Ebee Wallbox
+- echarge cPH1
+- echarge cPH2, cPμ2
+- Elli Charger Connect (Beta)
+- Elli Charger Connect (Beta)
+- Elli Charger Pro (Beta)
+- EM2GO Pro Power/OCPP/ONC
+- Ensto Chago Wallbox
+- Etrel INCH
+- Etrel INCH Duo
+- EVBox Elvi
+- EVSE DIN
+- EVSE-WiFi
+- Fronius Wattpilot
+- Garo GLB, GLB+, LS4, LS4 compact
+- go-eCharger Gemini, HOME+, HOMEfix (V3)
+- go-eCharger HOME+, HOMEfix, Pro
+- HardyBarth cPH1
+- HardyBarth cPH2, cPμ2
+- Heidelberg Energy Control
+- Hesotec eSat, eBox
+- Innogy eBox
+- INRO Pantabox
+- Juice Charger Me
+- KEBA KeContact P20, P30, C/X Series
+- KSE wBX16
+- Mennekes Amedio, Amtron ChargeControl, Professional
+- Mennekes AMTRON XTRA, AMTRON PREMIUM
+- NRGKick Bluetooth
+- NRGKick Connect
+- OpenEVSE
+- openWB Pro
+- openWB series2
+- Optec Mobility One
+- Orbis Viaris Uni
+- PC Electric Garo
+- Phoenix CHARX
+- Phoenix EM-CP-PP-ETH (Modbus TCP)
+- Phoenix EV-ETH (Modbus TCP)
+- Phoenix EV-SER (Modbus RTU)
+- Porsche Mobile Charger Connect
+- Porsche Mobile Charger Plus
+- Pracht Alpha XT, XT+, Mono XT, Mono XT+, PNI
+- Schrack i-CHARGE CION
+- SENEC Wallbox pro
+- SENEC Wallbox pro s
+- Siemens Versicharge GEN3
+- Skoda iV Charger Connect (Beta)
+- Skoda iV Charger Connect+ (Beta)
+- SMA EV Charger
+- smartWB
+- Sonnen sonnenCharger
+- Stark in Strom Easy
+- TechniSat Technivolt
+- Tesla TWC3
+- TinkerForge WARP Charger Pro
+- TinkerForge WARP Charger Smart
+- Ubitricity Heinz
+- Vestel EVC04
+- Volkswagen ID. Charger Connect (Beta)
+- Volkswagen ID. Charger Pro (Beta)
+- Wallbe Eco, Pro
+- Wallbe Eco, Pro (mit Strommessgerät)
+- Wallbe Eco, Pro (vor ~2019)
+- Wallbe Eco, Pro (vor ~2019, mit Strommessgerät)
+- wallbox Pulsar Plus/ Commander 2/ Copper SB
+- Walther Werke Basic Evo Pro
+- Webasto Live
+- Webasto NEXT
+- Webasto Unite
+- Zaptec Go/Pro
+- EEBUS kompatible Wallbox [Generische Unterstützung]
+- OCPP 1.6J kompatible Wallbox mit Smart Charging Profil [Generische Unterstützung]
+- AVM FritzDECT [Schaltbare Steckdosen]
+- Homematic / Homematic IP [Schaltbare Steckdosen]
+- myStrom Switch [Schaltbare Steckdosen]
+- Shelly [Schaltbare Steckdosen]
+- Tasmota [Schaltbare Steckdosen]
+- TP-Link H-Series Smart Plug [Schaltbare Steckdosen]
+- TP-Link Tapo P-Series Smart Plug [Schaltbare Steckdosen]
+

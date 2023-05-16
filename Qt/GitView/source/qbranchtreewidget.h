@@ -33,6 +33,7 @@ public Q_SLOTS:
 
    void clear();
    void diff_of_two_branches();
+   void select_branch(const QString& repository);
 
 private:
     QTreeWidgetItem* mSelectedItem;

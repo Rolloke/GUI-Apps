@@ -598,6 +598,11 @@ void MainWindow::on_treeSource_itemClicked(QTreeWidgetItem *item, int /* column 
     if (item)
     {
         mContextMenuSourceTreeItem = item;
+        QTreeWidgetItem*top_item = getTopLevelItem(*ui->treeSource, item);
+        if (top_item)
+        {
+            ui->treeBranches->select_branch(top_item->text(QSourceTreeWidget::Column::FileName));
+        }
         const Type fType(Type::type(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt()));
         mActions.enableItemsByType(Cmd::mContextMenuSourceTree, fType);
         mActions.enableItemsByType(Cmd::mToolbars[0], fType);
@@ -731,7 +736,7 @@ void MainWindow::initMergeTools(bool read_new_items)
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(QSourceTreeWidget::Column::FileName);
-        mWorker.doWork(Work::DetermineGitMergeTools, QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
+        mWorker.doWork(INT(Work::DetermineGitMergeTools), QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
     }
 }
 
@@ -860,7 +865,7 @@ void MainWindow::perform_custom_command()
                 if (handleInThread())
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-                    mWorker.doWork(Work::ApplyGitCommand, QVariant(git_command));
+                    mWorker.doWork(INT(Work::ApplyGitCommand), QVariant(git_command));
                 }
                 else
                 {

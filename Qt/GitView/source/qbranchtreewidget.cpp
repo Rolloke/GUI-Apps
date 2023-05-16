@@ -91,6 +91,28 @@ void QBranchTreeWidget::diff_of_two_branches()
     }
 }
 
+void QBranchTreeWidget::select_branch(const QString &repository)
+{
+    for (int item = 0; item < topLevelItemCount(); ++item)
+    {
+        QTreeWidgetItem* top_item = topLevelItem(item);
+        if (top_item)
+        {
+            int index = top_item->text(Column::Text).indexOf(repository);
+            if (index != -1 && !top_item->isExpanded())
+            {
+                top_item->setSelected(true);
+                expandItem(top_item);
+            }
+            else if (top_item->isExpanded())
+            {
+                top_item->setSelected(false);
+                collapseItem(top_item);
+            }
+        }
+    }
+}
+
 void QBranchTreeWidget::on_itemDoubleClicked(const ActionList& aActionList, QTreeWidgetItem *item, int )
 {
     mSelectedItem = item;

@@ -88,7 +88,7 @@ void MainWindow::reset_text_browser(code_browser* text_browser)
     }
 }
 
-bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor::e editor, bool& all_closed)
+bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, bool& all_closed)
 {
     if (additional_editor() != AdditionalEditor::None)
     {
@@ -153,7 +153,7 @@ void MainWindow::btnCloseAll_clicked()
     btnCloseText_clicked(Editor::All);
 }
 
-bool MainWindow::shall_save(Editor::e editor)
+bool MainWindow::shall_save(Editor editor)
 {
     if (editor == Editor::Active && additional_editor() == AdditionalEditor::OnNewFile)
     {
@@ -162,7 +162,7 @@ bool MainWindow::shall_save(Editor::e editor)
     return true;
 }
 
-bool MainWindow::btnCloseText_clicked(Editor::e editor)
+bool MainWindow::btnCloseText_clicked(Editor editor)
 {
     QWidget* active_widget = get_active_editable_widget();
     bool all_closed = false;
