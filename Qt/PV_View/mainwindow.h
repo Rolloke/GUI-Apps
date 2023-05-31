@@ -28,18 +28,20 @@ public:
 
 private slots:
     void on_btnLoadYamlFile_clicked();
-    void on_btnReadValue_clicked();
     void readReady();
     void on_btnConnect_clicked();
     void onStateChanged(int state);
-
     void on_tableView_clicked(const QModelIndex &index);
+    void on_btnAddMeter_clicked();
+    void on_pushButton_clicked();
 
 private:
     QString getConfigName() const;
     bool load_yaml(const QString &filename);
     void create_modbus_device();
-    void readValue(const QString& name);
+    void readValue(const QString& name, int values=1);
+    void disconnect_modbus_device();
+    void add_meter_widgets();
     QModbusDataUnit::RegisterType get_type(const QString& name);
     int                           get_address(const QString& address, int n=-1);
     int                           get_entries(const QString& decode);

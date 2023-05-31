@@ -11,6 +11,12 @@
 #include <QLoggingCategory>
 #include <QSerialPort>
 #include <QStandardItemModel>
+#include <QProgressBar>
+#include <QProgressDialog>
+
+/// TODO: update all values automatically
+/// Combine readings of current
+
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
@@ -77,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    disconnect_modbus_device();
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     STORE_STR(fSettings, mDocumentFile);
@@ -125,7 +132,7 @@ bool MainWindow::load_yaml(const QString &filename)
             mListModel->setData(mListModel->index(current_row, eType, QModelIndex()), measurement.value().m_register.m_type);
             mListModel->setData(mListModel->index(current_row, eDecode, QModelIndex()), measurement.value().m_register.m_decode);
             mListModel->setData(mListModel->index(current_row, eScale, QModelIndex()), measurement.value().m_scale);
-            mListModel->setData(mListModel->index(current_row, eValue, QModelIndex()), measurement.value().m_value);
+            mListModel->setData(mListModel->index(current_row, eValue, QModelIndex()), "n/a");
             mListModel->setData(mListModel->index(current_row, eModel, QModelIndex()), measurement.value().m_model);
 
             current_row++;
@@ -188,6 +195,35 @@ void MainWindow::create_modbus_device()
     }
 }
 
+void MainWindow::disconnect_modbus_device()
+{
+    if (modbusDevice && modbusDevice->state() == QModbusDevice::ConnectedState)
+    {
+        modbusDevice->disconnectDevice();
+    }
+}
+
+void MainWindow::add_meter_widgets()
+{
+    QLabel* name = new QLabel(ui->textSelected->text());
+    ui->labelNames->addWidget(name);
+    QLabel* unit = new QLabel(ui->edtUnit->text());
+    unit->setAlignment(Qt::AlignHCenter);
+    ui->labelUnits->addWidget(unit);
+    QLabel* value = new QLabel(ui->textValue->text());
+    value->setAlignment(Qt::AlignHCenter);
+    ui->labelValues->addWidget(value);
+    QProgressBar* meter = new QProgressBar();
+    /// TODO: derive QProgressBar to modify text displayed
+    /// TODO: set stylesheet for Progressbar
+
+    double scale = ui->textScale->text().toDouble();
+    meter->setRange(ui->edtMinimum->text().toInt()/scale, ui->edtMaximum->text().toInt()/scale);
+    meter->setValue(ui->textValue->text().toDouble() / scale);
+    ui->labelMeter->addWidget(meter);
+}
+
+
 void MainWindow::onStateChanged(int state)
 {
     ui->btnConnect->setText(state == QModbusDevice::UnconnectedState ? tr("Connect") : tr("Disconnect"));
@@ -239,9 +275,15 @@ void MainWindow::on_btnConnect_clicked()
     }
 }
 
-void MainWindow::on_btnReadValue_clicked()
+void MainWindow::on_btnAddMeter_clicked()
 {
-    //ui->tableView->selectRow();
+    add_meter_widgets();
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -249,7 +291,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
     readValue(mListModel->data(mListModel->index(index.row(), static_cast<int>(eName))).toString());
 }
 
-void MainWindow::readValue(const QString& name)
+void MainWindow::readValue(const QString& name, int values)
 {
     if (modbusDevice)
     {
@@ -257,7 +299,7 @@ void MainWindow::readValue(const QString& name)
         statusBar()->clearMessage();
         auto readRequest = QModbusDataUnit(get_type(measurement.m_register.m_type),
                                            get_address(measurement.m_register.m_address, measurement.m_register.m_address.contains(";") ? 0 : -1),
-                                           get_entries(measurement.m_register.m_decode));
+                                           get_entries(measurement.m_register.m_decode)*values);
         if (auto *reply = modbusDevice->sendReadRequest(readRequest, ui->edtServerAddress->value()))
         {
             if (!reply->isFinished())
@@ -314,7 +356,11 @@ int MainWindow::get_address(const QString& address, int n)
 
 int MainWindow::get_entries(const QString& decode)
 {
-    if (decode.contains("32"))
+    if (decode.contains("char"))
+    {
+        return decode.mid(4).toInt()/sizeof(int16_t);
+    }
+    else if (decode.contains("32"))
     {
         return 2;
     }
@@ -334,15 +380,30 @@ void MainWindow::readReady()
             const QModbusDataUnit unit = reply->result();
             QVector<quint16> values;
             values.resize(unit.valueCount());
-            for (uint i = 0, j=unit.valueCount()-1; i < unit.valueCount(); i++, j--)
-            {
-                values[i] = unit.value(j);
-            }
             auto measurement = m_meter->m_rendered.m_measurements[m_pending_request];
-
-            double value = get_value(measurement, &values[0]);
-            mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
-            /// TODO: test it !!
+            if (measurement.m_register.m_decode.contains("char"))
+            {
+                for (uint i = 0; i < unit.valueCount(); i++)
+                {
+                    values[i] = unit.value(i);
+                }
+                char *value = reinterpret_cast<char*>(&values[0]);
+                mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+            }
+            else
+            {
+                for (uint i = 0, j=unit.valueCount()-1; i < unit.valueCount(); i++, j--)
+                {
+                    values[i] = unit.value(j);
+                }
+                double value = get_value(measurement, &values[0]);
+                mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+                ui->textSelected->setText(m_pending_request);
+                ui->textValue->setText(tr("%1").arg(value));
+                ui->textScale->setText(tr("%1").arg(measurement.m_scale));
+                ui->edtMinimum->setText(tr("%1").arg(value/2.5));
+                ui->edtMaximum->setText(tr("%1").arg(value*2.5));
+            }
 
         }
         else if (reply->error() == QModbusDevice::ProtocolError)
@@ -434,4 +495,5 @@ int to_parity(const QString& parity)
     else if (parity == "m") return  QSerialPort::MarkParity;
     return QSerialPort::UnknownParity;
 }
+
 

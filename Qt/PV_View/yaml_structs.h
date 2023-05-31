@@ -62,12 +62,11 @@ struct measured_register
 
 struct measured_value
 {
-    QString m_value;
     QString m_model;
     QString m_timeout;
     QString m_connectdelay;
     measured_register m_register;
-    double      m_scale = 0;
+    double      m_scale = 1;
 
     friend void operator >> (const YAML::Node& nodes, measured_value& _measured_value);
 };

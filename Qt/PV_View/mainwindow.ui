@@ -14,127 +14,506 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableView" name="tableView">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>611</width>
-      <height>471</height>
+      <x>10</x>
+      <y>0</y>
+      <width>781</width>
+      <height>551</height>
      </rect>
     </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::EditKeyPressed</set>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
     </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
-    <property name="sortingEnabled">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnLoadYamlFile">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>10</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Load Yaml...</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnReadValue">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>290</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Read Value</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="edtServerAddress">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>250</y>
-      <width>49</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimum">
+    <property name="currentIndex">
      <number>1</number>
     </property>
-    <property name="maximum">
-     <number>247</number>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_27">
-    <property name="geometry">
-     <rect>
-      <x>642</x>
-      <y>250</y>
-      <width>92</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="text">
-     <string>Server Address:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnConnect">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>130</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Connect</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="edtAddress">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>70</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>50</y>
-      <width>151</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Address or Port:</string>
-    </property>
+    <widget class="QWidget" name="tabTable">
+     <attribute name="title">
+      <string>Table</string>
+     </attribute>
+     <widget class="QTableView" name="tableView">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>611</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditKeyPressed</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLoadYamlFile">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>10</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Yaml...</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtAddress">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>70</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnConnect">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>130</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Connect</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelServerAddress">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>100</y>
+        <width>92</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Server Address:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="edtServerAddress">
+      <property name="geometry">
+       <rect>
+        <x>720</x>
+        <y>100</y>
+        <width>49</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>247</number>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnAddMeter">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>400</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add Meter</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelAddressOrPort">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>50</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Address or Port:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSelected">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>220</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Selected:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="textSelected">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>220</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>310</y>
+        <width>58</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Minimum:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtMinimum">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>310</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelMaximum">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>340</y>
+        <width>58</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Maximum:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtMaximum">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>340</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelUnit">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>370</y>
+        <width>58</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unit:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtUnit">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>370</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>430</y>
+        <width>151</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Remove Meter</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelValue">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>250</y>
+        <width>61</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Value:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="textValue">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>250</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelMaximum_2">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>280</y>
+        <width>58</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Scale:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="textScale">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>280</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabMeter">
+     <attribute name="title">
+      <string>Meter</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>747</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinAndMaxSize</enum>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,1,0,2">
+         <property name="spacing">
+          <number>5</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="labelNames">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelNameHeading">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="locale">
+              <locale language="English" country="UnitedStates"/>
+             </property>
+             <property name="text">
+              <string>Name</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="labelMeter">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelMeterHeading">
+             <property name="minimumSize">
+              <size>
+               <width>480</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>480</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="locale">
+              <locale language="English" country="UnitedStates"/>
+             </property>
+             <property name="text">
+              <string>Meter</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="labelValues">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelValueHeading">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="labelUnits">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelUnitHeading">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="locale">
+              <locale language="English" country="UnitedStates"/>
+             </property>
+             <property name="text">
+              <string>Unit</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnOK">
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
