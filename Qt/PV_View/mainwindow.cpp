@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "yaml_structs.h"
+#include "qprogressbarfloat.h"
+
 #include <boost/property_tree/json_parser.hpp>
 #include <string>
 #include <QFileDialog>
@@ -205,21 +207,24 @@ void MainWindow::disconnect_modbus_device()
 
 void MainWindow::add_meter_widgets()
 {
-    QLabel* name = new QLabel(ui->textSelected->text());
+    QLabel* name = new QLabel(ui->edtPrettyName->text());
+    name->setToolTip(ui->textSelected->text());
+    if (name->text().isEmpty())
+    {
+        name->setText(ui->textSelected->text());
+    }
     ui->labelNames->addWidget(name);
-    QLabel* unit = new QLabel(ui->edtUnit->text());
-    unit->setAlignment(Qt::AlignHCenter);
-    ui->labelUnits->addWidget(unit);
-    QLabel* value = new QLabel(ui->textValue->text());
-    value->setAlignment(Qt::AlignHCenter);
-    ui->labelValues->addWidget(value);
-    QProgressBar* meter = new QProgressBar();
-    /// TODO: derive QProgressBar to modify text displayed
-    /// TODO: set stylesheet for Progressbar
 
-    double scale = ui->textScale->text().toDouble();
-    meter->setRange(ui->edtMinimum->text().toInt()/scale, ui->edtMaximum->text().toInt()/scale);
-    meter->setValue(ui->textValue->text().toDouble() / scale);
+    QProgressBarFloat* meter = new QProgressBarFloat();
+
+    /// TODO: set stylesheet for Progressbar
+    /// TODO: remove button to remove entry
+
+    meter->setScale(ui->textScale->text().toDouble());
+    meter->setRange(ui->edtMinimum->text().toDouble(), ui->edtMaximum->text().toDouble());
+    meter->setValue(ui->textValue->text().toDouble());
+    meter->setUnit(ui->edtUnit->text());
+
     ui->labelMeter->addWidget(meter);
 }
 

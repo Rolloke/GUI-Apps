@@ -16,10 +16,12 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    qprogressbarfloat.cpp \
     yaml_structs.cpp
 
 HEADERS += \
     mainwindow.h \
+    qprogressbarfloat.h \
     yaml_structs.h
 
 FORMS += \
