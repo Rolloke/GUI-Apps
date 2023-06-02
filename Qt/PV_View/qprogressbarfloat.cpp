@@ -1,7 +1,7 @@
 #include "qprogressbarfloat.h"
 #include <cmath>
 
-QProgressBarFloat::QProgressBarFloat()
+QProgressBarFloat::QProgressBarFloat(QWidget *parent) : QProgressBar(parent)
 {
 
 }
@@ -38,7 +38,7 @@ void   QProgressBarFloat::setMinimum(double minimum)
 
 double QProgressBarFloat::minimum() const
 {
-    return QProgressBar::maximum() * m_scale;
+    return QProgressBar::minimum() * m_scale;
 }
 
 void   QProgressBarFloat::setMaximum(double maximum)
@@ -65,4 +65,9 @@ void QProgressBarFloat::setUnit(const QString &unit)
 {
     m_unit = unit;
     m_generate_text = (m_unit.size() > 0);
+}
+
+QString QProgressBarFloat::unit() const
+{
+    return m_unit;
 }

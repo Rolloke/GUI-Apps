@@ -6,7 +6,7 @@
 class QProgressBarFloat : public QProgressBar
 {
 public:
-    QProgressBarFloat();
+    explicit QProgressBarFloat(QWidget *parent = nullptr);
 
     double scale() const;
     void   setScale(double scale);
@@ -17,6 +17,7 @@ public:
     void   setMaximum(double maximum);
     double maximum() const;
     void   setUnit(const QString& unit);
+    QString unit() const;
 
     double value() const;
     void   setValue(double value);

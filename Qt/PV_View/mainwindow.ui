@@ -27,7 +27,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabTable">
      <attribute name="title">
@@ -256,19 +256,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>460</y>
-        <width>151</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Remove Meter</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="labelValue">
       <property name="geometry">
        <rect>
@@ -369,8 +356,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>747</width>
-        <height>51</height>
+        <width>766</width>
+        <height>74</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -381,9 +368,12 @@
         <enum>QLayout::SetMinAndMaxSize</enum>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,1,0">
          <property name="spacing">
           <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
          <item>
           <layout class="QVBoxLayout" name="labelNames">
@@ -455,17 +445,66 @@
            </item>
           </layout>
          </item>
+         <item>
+          <layout class="QVBoxLayout" name="labelCheck">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelSelect">
+             <property name="text">
+              <string>Select</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="btnOK">
-         <property name="locale">
-          <locale language="English" country="UnitedStates"/>
-         </property>
-         <property name="text">
-          <string>OK</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="btnStart">
+           <property name="locale">
+            <locale language="English" country="UnitedStates"/>
+           </property>
+           <property name="text">
+            <string>Start</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnStop">
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnRemove">
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnUp">
+           <property name="text">
+            <string>Up</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDown">
+           <property name="text">
+            <string>Down</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

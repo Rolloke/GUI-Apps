@@ -33,7 +33,11 @@ private slots:
     void onStateChanged(int state);
     void on_tableView_clicked(const QModelIndex &index);
     void on_btnAddMeter_clicked();
-    void on_pushButton_clicked();
+    void on_btnStart_clicked();
+    void on_btnStop_clicked();
+    void on_btnRemove_clicked();
+    void on_btnUp_clicked();
+    void on_btnDown_clicked();
 
 private:
     QString getConfigName() const;
@@ -41,7 +45,7 @@ private:
     void create_modbus_device();
     void readValue(const QString& name, int values=1);
     void disconnect_modbus_device();
-    void add_meter_widgets();
+    void add_meter_widgets(const QString &name, const QString &pretty_name, double scale, double minimum, double maximum, double value, const QString &unit);
     QModbusDataUnit::RegisterType get_type(const QString& name);
     int                           get_address(const QString& address, int n=-1);
     int                           get_entries(const QString& decode);

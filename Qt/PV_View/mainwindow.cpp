@@ -15,10 +15,16 @@
 #include <QStandardItemModel>
 #include <QProgressBar>
 #include <QProgressDialog>
+#include <QCheckBox>
 
 /// TODO: update all values automatically
 /// Combine readings of current
 
+namespace config
+{
+constexpr char sGroupMeter[]  = "Meter";
+constexpr char sMeasurement[] = "Measurement";
+}
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
@@ -79,6 +85,32 @@ MainWindow::MainWindow(QWidget *parent)
     LOAD_STR(fSettings, mDocumentFile, toString);
     LOAD_PTR(fSettings, ui->edtAddress, setText, text, toString);
     LOAD_PTR(fSettings, ui->edtServerAddress, setValue, value, toInt);
+    fSettings.beginGroup(config::sGroupMeter);
+    {
+        int fItemCount = fSettings.beginReadArray(config::sMeasurement);
+        {
+            for (int fItem = 0; fItem < fItemCount; ++fItem)
+            {
+                fSettings.setArrayIndex(fItem);
+                QString fName;
+                LOAD_STR(fSettings, fName, toString);
+                QString fPrettyName;
+                LOAD_STR(fSettings, fPrettyName, toString);
+
+                double fScale;
+                LOAD_STR(fSettings, fScale, toDouble);
+                double fMinimum;
+                LOAD_STR(fSettings, fMinimum, toDouble);
+                double fMaximum;
+                LOAD_STR(fSettings, fMaximum, toDouble);
+                QString fUnit;
+                LOAD_STR(fSettings, fUnit, toString);
+
+                add_meter_widgets(fName, fPrettyName, fScale, fMinimum, fMaximum, 0, fUnit);
+            }
+        }
+    }
+
 
     load_yaml(mDocumentFile);
 }
@@ -91,6 +123,39 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mDocumentFile);
     STORE_PTR(fSettings, ui->edtAddress, text);
     STORE_PTR(fSettings, ui->edtServerAddress, value);
+
+    fSettings.beginGroup(config::sGroupMeter);
+    {
+        fSettings.beginWriteArray(config::sMeasurement);
+        {
+            for (int i = 1; i < ui->labelNames->count(); ++i)
+            {
+                fSettings.setArrayIndex(i-1);
+                auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                if (namewidget)
+                {
+                    QString fName       = namewidget->toolTip();
+                    STORE_STR(fSettings, fName);
+                    QString fPrettyName = namewidget->text();
+                    STORE_STR(fSettings, fPrettyName);
+                }
+                auto progressbar = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
+                if (progressbar)
+                {
+                    double fScale   = progressbar->scale();
+                    STORE_STR(fSettings, fScale);
+                    double fMinimum = progressbar->minimum();
+                    STORE_STR(fSettings, fMinimum);
+                    double fMaximum = progressbar->maximum();
+                    STORE_STR(fSettings, fMaximum);
+                    QString fUnit   = progressbar->unit();
+                    STORE_STR(fSettings, fUnit);
+                }
+            }
+        }
+        fSettings.endArray();
+    }
+    fSettings.endGroup();
 
     delete ui;
 }
@@ -205,27 +270,43 @@ void MainWindow::disconnect_modbus_device()
     }
 }
 
-void MainWindow::add_meter_widgets()
+void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name,
+                                   double scale, double minimum, double maximum, double value,
+                                   const QString& unit)
 {
-    QLabel* name = new QLabel(ui->edtPrettyName->text());
-    name->setToolTip(ui->textSelected->text());
-    if (name->text().isEmpty())
+    QLabel* label_name = new QLabel(pretty_name, this);
+
+    label_name->setToolTip(name);
+    if (label_name->text().isEmpty())
     {
-        name->setText(ui->textSelected->text());
+        label_name->setText(name);
     }
-    ui->labelNames->addWidget(name);
 
-    QProgressBarFloat* meter = new QProgressBarFloat();
 
+    QProgressBarFloat* meter = new QProgressBarFloat(this);
     /// TODO: set stylesheet for Progressbar
-    /// TODO: remove button to remove entry
 
-    meter->setScale(ui->textScale->text().toDouble());
-    meter->setRange(ui->edtMinimum->text().toDouble(), ui->edtMaximum->text().toDouble());
-    meter->setValue(ui->textValue->text().toDouble());
-    meter->setUnit(ui->edtUnit->text());
+    meter->setScale(scale);
+    meter->setRange(minimum, maximum);
+    meter->setValue(value);
+    meter->setUnit(unit);
 
     ui->labelMeter->addWidget(meter);
+
+    label_name->setMinimumHeight(meter->height()-5);
+    ui->labelNames->addWidget(label_name);
+
+    auto checkbox = new QCheckBox(this);
+    checkbox->setMinimumHeight(meter->height()-5);
+    ui->labelCheck->addWidget(checkbox);
+}
+
+void MainWindow::on_btnAddMeter_clicked()
+{
+    add_meter_widgets(ui->textSelected->text(), ui->edtPrettyName->text(),
+        ui->textScale->text().toDouble(),
+        ui->edtMinimum->text().toDouble(), ui->edtMaximum->text().toDouble(),
+        ui->textValue->text().toDouble(), ui->edtUnit->text());
 }
 
 
@@ -278,17 +359,6 @@ void MainWindow::on_btnConnect_clicked()
     {
         modbusDevice->disconnectDevice();
     }
-}
-
-void MainWindow::on_btnAddMeter_clicked()
-{
-    add_meter_widgets();
-}
-
-
-void MainWindow::on_pushButton_clicked()
-{
-
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -402,14 +472,28 @@ void MainWindow::readReady()
                     values[i] = unit.value(j);
                 }
                 double value = get_value(measurement, &values[0]);
-                mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
-                ui->textSelected->setText(m_pending_request);
-                ui->textValue->setText(tr("%1").arg(value));
-                ui->textScale->setText(tr("%1").arg(measurement.m_scale));
-                ui->edtMinimum->setText(tr("%1").arg(value/2.5));
-                ui->edtMaximum->setText(tr("%1").arg(value*2.5));
+                if (ui->tabWidget->currentIndex() == 0)
+                {
+                    mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+                    ui->textSelected->setText(m_pending_request);
+                    ui->textValue->setText(tr("%1").arg(value));
+                    ui->textScale->setText(tr("%1").arg(measurement.m_scale));
+                    ui->edtMinimum->setText(tr("%1").arg(value/2.5));
+                    ui->edtMaximum->setText(tr("%1").arg(value*2.5));
+                }
+                for (int i = 1; i < ui->labelNames->count(); ++i)
+                {
+                    auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                    if (name && name->toolTip() == m_pending_request)
+                    {
+                        auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
+                        if (meter)
+                        {
+                            meter->setValue(value);
+                        }
+                    }
+                }
             }
-
         }
         else if (reply->error() == QModbusDevice::ProtocolError)
         {
@@ -501,4 +585,44 @@ int to_parity(const QString& parity)
     return QSerialPort::UnknownParity;
 }
 
+void MainWindow::on_btnStart_clicked()
+{
+
+}
+
+void MainWindow::on_btnStop_clicked()
+{
+
+}
+
+void MainWindow::on_btnRemove_clicked()
+{
+    for (int i = 1; i < ui->labelCheck->count(); ++i)
+    {
+        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        if (check &&check->isChecked())
+        {
+            ui->labelCheck->removeWidget(check);
+            delete check;
+            auto meter = ui->labelMeter->itemAt(i)->widget();
+            ui->labelMeter->removeWidget(meter);
+            delete meter;
+            auto name = ui->labelNames->itemAt(i)->widget();
+            ui->labelNames->removeWidget(name);
+            delete name;
+        }
+    }
+}
+
+
+void MainWindow::on_btnUp_clicked()
+{
+
+}
+
+
+void MainWindow::on_btnDown_clicked()
+{
+
+}
 
