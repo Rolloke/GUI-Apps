@@ -607,7 +607,11 @@ size_t CDisplayAscii::GetByteLength(const std::uint8_t*pData) const
 bool CDisplayAscii::Write(std::uint8_t*pData, const QString& sValue) const
 {
     if (pData == 0) return false;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    int i, n = std::min(static_cast<qsizetype>(m_nBytes), sValue.size());
+#else
     int i, n = std::min(static_cast<int>(m_nBytes), sValue.size());
+#endif
     for (i=0; i<n; ++i)
     {
         pData[i] = sValue.at(i).cell();
@@ -662,7 +666,11 @@ size_t CDisplayUnicode::GetByteLength(const std::uint8_t*pData) const
 bool CDisplayUnicode::Write(std::uint8_t*pData, const QString& sValue) const
 {
     if (pData == 0) return false;
-    int i, n = std::min(static_cast<int>(m_nBytes/2), sValue.size());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    int i, n = std::min(static_cast<qsizetype>(m_nBytes), sValue.size());
+#else
+    int i, n = std::min(static_cast<int>(m_nBytes), sValue.size());
+#endif
     wchar_t *pwData = (wchar_t*)pData;
     const QChar* pstr = sValue.data();
     for (i=0; i<n; i++)
