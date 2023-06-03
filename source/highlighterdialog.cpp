@@ -78,20 +78,23 @@ void HighlighterDialog::color_btn_clicked()
     QColorDialog dlg;
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->color_buttons->indexOf(button);
-    if (index > 0 && index <= mList.size())
+    if (index != -1)
     {
-        auto item = mList.begin() + index - 1;
-        text_char_format = &item.value();
-    }
-
-    if (text_char_format)
-    {
-        dlg.setCurrentColor(text_char_format->foreground().color());
-        if (dlg.exec() == QDialog::Accepted)
+        auto item = mList.begin();
+        while (--index > 0 && item != mList.end())
         {
-            text_char_format->setForeground(QBrush(dlg.selectedColor()));
-            button->setStyleSheet(tr("QPushButton {background-color: %1; color: %2;}").
-                arg(palette().color(QPalette::Normal, QPalette::Window).name(), dlg.selectedColor().name()));
+            ++item;
+        }
+        if (item != mList.end())
+        {
+            text_char_format = &item.value();
+            dlg.setCurrentColor(text_char_format->foreground().color());
+            if (dlg.exec() == QDialog::Accepted)
+            {
+                text_char_format->setForeground(QBrush(dlg.selectedColor()));
+                button->setStyleSheet(tr("QPushButton {background-color: %1; color: %2;}").
+                    arg(palette().color(QPalette::Normal, QPalette::Window).name(), dlg.selectedColor().name()));
+            }
         }
     }
 }
@@ -101,15 +104,20 @@ void HighlighterDialog::italic_btn_clicked(bool checked)
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->italic_buttons->indexOf(button);
-    if (index > 0 && index <= mList.size())
+    if (index != -1)
     {
-        auto item = mList.begin() + index  - 1;
-        text_char_format = &item.value();
-    }
-    if (text_char_format)
-    {
-        text_char_format->setFontItalic(checked);
-        ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
+        auto item = mList.begin();
+        int _index = index;
+        while (--index > 0 && item != mList.end())
+        {
+            ++item;
+        }
+        if (item != mList.end())
+        {
+            text_char_format = &item.value();
+            text_char_format->setFontItalic(checked);
+            ui->color_buttons->itemAt(_index)->widget()->setFont(text_char_format->font());
+        }
     }
 }
 
@@ -118,19 +126,24 @@ void HighlighterDialog::weigth_index_changed(int weight_index)
     auto *button = dynamic_cast<QWidget*>(sender());
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->weight_boxes->indexOf(button);
-    if (index > 0 && index <= mList.size())
+    if (index != -1)
     {
-        auto item = mList.begin() + index - 1;
-        text_char_format = &item.value();
-    }
-    if (text_char_format)
-    {
-        auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(index)->widget());
-        if (weight_box)
+        auto item = mList.begin();
+        int _index = index;
+        while (--index > 0 && item != mList.end())
         {
-            text_char_format->setFontWeight(weight_box->itemData(weight_index).toInt());
+            ++item;
         }
-        ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
+        if (item != mList.end())
+        {
+            text_char_format = &item.value();
+            auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(_index)->widget());
+            if (weight_box)
+            {
+                text_char_format->setFontWeight(weight_box->itemData(weight_index).toInt());
+            }
+            ui->color_buttons->itemAt(_index)->widget()->setFont(text_char_format->font());
+        }
     }
 }
 
