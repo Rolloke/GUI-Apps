@@ -1175,7 +1175,11 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
     case Work::DetermineGitMergeTools:
     case Work::ApplyGitCommand:
     case Work::ApplyCommand:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+#else
         if (aData.isValid() && aData.type() == QVariant::String)
+#endif
         {
             QString result_string;
             int result = execute(aData.toString().toStdString().c_str(), result_string, true);
@@ -1187,7 +1191,11 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
         }
         break;
     case Work::AsynchroneousCommand:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+#else
         if (aData.isValid() && aData.type() == QVariant::String)
+#endif
         {
             QString result_string;
             int result = execute(aData.toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
@@ -1211,7 +1219,11 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     switch(static_cast<Work>(aMsg))
     {
     case Work::DetermineGitMergeTools:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+#else
         if (aData.isValid() && aData.type() == QVariant::String)
+#endif
         {
             bool new_item_added = false;
             auto result_list = aData.toString().split("\n");
@@ -1247,7 +1259,11 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
         break;
     case Work::ApplyGitCommand:
     case Work::ApplyCommand:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+#else
         if (aData.isValid() && aData.type() == QVariant::String)
+#endif
         {
             appendTextToBrowser(aData.toString());
             if (mWorkerAction)
