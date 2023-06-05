@@ -45,19 +45,22 @@ private:
     void create_modbus_device();
     void readValue(const QString& name, int values=1);
     void disconnect_modbus_device();
-    void add_meter_widgets(const QString &name, const QString &pretty_name, double scale, double minimum, double maximum, double value, const QString &unit);
-    QModbusDataUnit::RegisterType get_type(const QString& name);
-    int                           get_address(const QString& address, int n=-1);
-    int                           get_entries(const QString& decode);
+    void add_meter_widgets(const QString &name, const QString &pretty_name, int values,
+                           double scale, double minimum, double maximum, double value,
+                           const QString &unit);
+    void read_meter_value();
+
     Ui::MainWindow *ui = nullptr;
     QStandardItemModel*  mListModel = nullptr;
     QList<int>           m_hidden_columns;
 
-    QModbusReply *lastRequest   = nullptr;
+    QModbusReply  *lastRequest   = nullptr;
     QModbusClient *modbusDevice = nullptr;
-    QString m_pending_request;
+    QString        m_pending_request;
+    bool           m_read_permanent = false;
+    int            m_read_index = 0;
 
-    QString              mDocumentFile;
+    QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;
 };
 #endif // MAINWINDOW_H

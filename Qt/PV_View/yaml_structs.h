@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QMap>
+#include <QModbusDataUnit>
 
 #include <yaml-cpp/yaml.h>
 
@@ -66,7 +67,7 @@ struct measured_value
     QString m_timeout;
     QString m_connectdelay;
     measured_register m_register;
-    double      m_scale = 1;
+    double  m_scale = 1;
 
     friend void operator >> (const YAML::Node& nodes, measured_value& _measured_value);
 };
@@ -81,7 +82,7 @@ struct s_render
 private:
     QString last_command;
     QString current_usage;
-    int         command = 0;
+    int     command = 0;
 
     void read_measurement(const YAML::Node& node, const QString& name);
     bool get_command();
@@ -92,15 +93,20 @@ private:
 
 struct meter
 {
-    QString m_template;
-    products    m_products;
-    parameters  m_parameters;
-    QString m_render_source;
-    s_render    m_rendered;
+    QString    m_template;
+    products   m_products;
+    parameters m_parameters;
+    QString    m_render_source;
+    s_render   m_rendered;
 
     friend void operator >> (const YAML::Node& node, meter& met);
 };
 
+double  get_value(const measured_value& value_param, quint16* address);
+size_t  get_value_size(const measured_value& value_param);
 
+QModbusDataUnit::RegisterType get_type(const QString& name);
+int     get_address(const QString& address, int n=-1);
+int     get_entries(const QString& decode);
 
 #endif // YAML_STRUCTS_H

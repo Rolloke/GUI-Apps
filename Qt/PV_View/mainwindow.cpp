@@ -17,9 +17,6 @@
 #include <QProgressDialog>
 #include <QCheckBox>
 
-/// TODO: update all values automatically
-/// Combine readings of current
-
 namespace config
 {
 constexpr char sGroupMeter[]  = "Meter";
@@ -38,7 +35,6 @@ constexpr char sMeasurement[] = "Measurement";
 
 QString getSettingsName(const QString& aItemName);
 QString to_string(QModbusPdu::ExceptionCode code);
-double  get_value(const measured_value& value_param, quint16* address);
 int     to_parity(const QString& parity);
 
 enum Table
@@ -56,7 +52,7 @@ enum ModbusConnection
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , mDocumentFile("/home/rolf/Downloads/evcc-master/templates/definition/meter/huawei-sun2000-dongle-powersensor.yaml")
+    , mDocumentFile("/home/rolf/.config/huawei-sun2000-dongle-powersensor.yaml")
 {
     ui->setupUi(this);
 
@@ -96,17 +92,19 @@ MainWindow::MainWindow(QWidget *parent)
                 LOAD_STR(fSettings, fName, toString);
                 QString fPrettyName;
                 LOAD_STR(fSettings, fPrettyName, toString);
+                QString fValues = "";
+                LOAD_STR(fSettings, fValues, toString);
 
-                double fScale;
+                double fScale = 0;
                 LOAD_STR(fSettings, fScale, toDouble);
-                double fMinimum;
+                double fMinimum = 0;
                 LOAD_STR(fSettings, fMinimum, toDouble);
-                double fMaximum;
+                double fMaximum = 0;
                 LOAD_STR(fSettings, fMaximum, toDouble);
                 QString fUnit;
                 LOAD_STR(fSettings, fUnit, toString);
 
-                add_meter_widgets(fName, fPrettyName, fScale, fMinimum, fMaximum, 0, fUnit);
+                add_meter_widgets(fName, fPrettyName, fValues.toInt(), fScale, fMinimum, fMaximum, 0, fUnit);
             }
         }
     }
@@ -138,6 +136,8 @@ MainWindow::~MainWindow()
                     STORE_STR(fSettings, fName);
                     QString fPrettyName = namewidget->text();
                     STORE_STR(fSettings, fPrettyName);
+                    QString fValues     = namewidget->whatsThis();
+                    STORE_STR(fSettings, fValues);
                 }
                 auto progressbar = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
                 if (progressbar)
@@ -270,13 +270,17 @@ void MainWindow::disconnect_modbus_device()
     }
 }
 
-void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name,
+void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name, int values,
                                    double scale, double minimum, double maximum, double value,
                                    const QString& unit)
 {
     QLabel* label_name = new QLabel(pretty_name, this);
 
     label_name->setToolTip(name);
+    if (values > 1)
+    {
+        label_name->setWhatsThis(tr("%1").arg(values));
+    }
     if (label_name->text().isEmpty())
     {
         label_name->setText(name);
@@ -301,12 +305,27 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
     ui->labelCheck->addWidget(checkbox);
 }
 
+void MainWindow::read_meter_value()
+{
+    if (m_read_permanent && m_read_index < ui->labelNames->count())
+    {
+        auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(m_read_index)->widget());
+        if (namewidget)
+        {
+            bool ok = false;
+            int n = namewidget->whatsThis().toInt(&ok);
+            if (!ok) n = 1;
+            readValue(namewidget->toolTip(), n);
+        }
+    }
+}
+
 void MainWindow::on_btnAddMeter_clicked()
 {
-    add_meter_widgets(ui->textSelected->text(), ui->edtPrettyName->text(),
+    add_meter_widgets(ui->textSelected->text(), ui->edtPrettyName->text(), ui->edtMultipleValues->text().toInt(),
         ui->textScale->text().toDouble(),
         ui->edtMinimum->text().toDouble(), ui->edtMaximum->text().toDouble(),
-        ui->textValue->text().toDouble(), ui->edtUnit->text());
+        ui->textValue->text().toDouble() ,ui->edtUnit->text());
 }
 
 
@@ -363,7 +382,7 @@ void MainWindow::on_btnConnect_clicked()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    readValue(mListModel->data(mListModel->index(index.row(), static_cast<int>(eName))).toString());
+    readValue(mListModel->data(mListModel->index(index.row(), static_cast<int>(eName))).toString(), ui->edtMultipleValues->text().toInt());
 }
 
 void MainWindow::readValue(const QString& name, int values)
@@ -379,6 +398,7 @@ void MainWindow::readValue(const QString& name, int values)
         {
             if (!reply->isFinished())
             {
+                statusBar()->showMessage(tr("Reading %2 of: %1").arg(name).arg(values));
                 m_pending_request = name;
                 connect(reply, &QModbusReply::finished, this, &MainWindow::readReady);
             }
@@ -391,57 +411,6 @@ void MainWindow::readValue(const QString& name, int values)
         {
             statusBar()->showMessage(tr("Read error: ") + modbusDevice->errorString(), 5000);
         }
-    }
-}
-
-QModbusDataUnit::RegisterType MainWindow::get_type(const QString& name)
-{
-    if (name.compare("holding", Qt::CaseInsensitive) == 0)
-    {
-        return QModbusDataUnit::HoldingRegisters;
-    }
-    else if (name.compare("discreteinputs", Qt::CaseInsensitive) == 0)
-    {
-        return QModbusDataUnit::DiscreteInputs;
-    }
-    else if (name.compare("coils", Qt::CaseInsensitive) == 0)
-    {
-        return QModbusDataUnit::Coils;
-    }
-    else if (name.compare("input", Qt::CaseInsensitive) == 0)
-    {
-        return QModbusDataUnit::InputRegisters;
-    }
-    return QModbusDataUnit::Invalid;
-}
-
-int MainWindow::get_address(const QString& address, int n)
-{
-    if (n >= 0)
-    {
-        QStringList list = address.split(";");
-        if (n < list.size())
-        {
-            int naddress = list[n].split(" ")[0].toInt();
-            return naddress;
-        }
-    }
-    return address.toInt();
-}
-
-int MainWindow::get_entries(const QString& decode)
-{
-    if (decode.contains("char"))
-    {
-        return decode.mid(4).toInt()/sizeof(int16_t);
-    }
-    else if (decode.contains("32"))
-    {
-        return 2;
-    }
-    else
-    {
-        return 1;
     }
 }
 
@@ -471,28 +440,41 @@ void MainWindow::readReady()
                 {
                     values[i] = unit.value(j);
                 }
-                double value = get_value(measurement, &values[0]);
-                if (ui->tabWidget->currentIndex() == 0)
+                const int value_size = get_value_size(measurement);
+                int no_of_values = values.size() / value_size;
+                for (int i_v=0, v=0; i_v < no_of_values; v += value_size, ++i_v)
                 {
-                    mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
-                    ui->textSelected->setText(m_pending_request);
-                    ui->textValue->setText(tr("%1").arg(value));
-                    ui->textScale->setText(tr("%1").arg(measurement.m_scale));
-                    ui->edtMinimum->setText(tr("%1").arg(value/2.5));
-                    ui->edtMaximum->setText(tr("%1").arg(value*2.5));
-                }
-                for (int i = 1; i < ui->labelNames->count(); ++i)
-                {
-                    auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
-                    if (name && name->toolTip() == m_pending_request)
+                    double value = get_value(measurement, &values[v]);
+                    if (ui->tabWidget->currentIndex() == 0)
                     {
-                        auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
-                        if (meter)
+                        mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row()+i_v, static_cast<int>(eValue)), value);
+                        ui->textSelected->setText(m_pending_request);
+                        ui->textValue->setText(tr("%1").arg(value));
+                        ui->textScale->setText(tr("%1").arg(measurement.m_scale));
+                        ui->edtMinimum->setText(tr("%1").arg(value/2.5));
+                        ui->edtMaximum->setText(tr("%1").arg(value*2.5));
+                    }
+                    for (int i = 1; i < ui->labelNames->count(); ++i)
+                    {
+                        auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                        if (name && name->toolTip() == m_pending_request)
                         {
-                            meter->setValue(value);
+                            auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i+i_v)->widget());
+                            if (meter)
+                            {
+                                meter->setValue(value);
+                            }
+                            break;
                         }
                     }
+                    ++m_read_index;
                 }
+                if (m_read_index >= ui->labelNames->count())
+                {
+                    m_read_index = 1;
+                }
+
+                read_meter_value();
             }
         }
         else if (reply->error() == QModbusDevice::ProtocolError)
@@ -500,41 +482,100 @@ void MainWindow::readReady()
             statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2: %3)").
                                      arg(reply->errorString()).
                                      arg(reply->rawResult().exceptionCode(), -1, 16).arg(to_string(reply->rawResult().exceptionCode())), 5000);
+            sleep(1);
+            read_meter_value();
         }
         else
         {
             statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
                                      arg(reply->errorString()).
                                      arg(reply->error(), -1, 16), 5000);
+            sleep(1);
+            read_meter_value();
         }
 
         reply->deleteLater();
     }
 }
 
-
-double get_value(const measured_value& value_param, quint16* address)
+void MainWindow::on_btnStart_clicked()
 {
-    if (value_param.m_register.m_decode.contains("32"))
+    if (ui->labelNames->count() > 1)
     {
-        if (value_param.m_register.m_decode.contains("u"))
+        m_read_permanent = true;
+        m_read_index     = 1;
+        read_meter_value();
+    }
+}
+
+void MainWindow::on_btnStop_clicked()
+{
+    m_read_permanent = false;
+    statusBar()->showMessage(tr("Stopped reading"));
+}
+
+void MainWindow::on_btnRemove_clicked()
+{
+    for (int i = 1; i < ui->labelCheck->count(); ++i)
+    {
+        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        if (check &&check->isChecked())
         {
-            return *reinterpret_cast<uint32_t*>(address) * value_param.m_scale;
-        }
-        else
-        {
-            return *reinterpret_cast<int32_t*>(address) * value_param.m_scale;
+            ui->labelCheck->removeWidget(check);
+            delete check;
+            auto meter = ui->labelMeter->itemAt(i)->widget();
+            ui->labelMeter->removeWidget(meter);
+            delete meter;
+            auto name = ui->labelNames->itemAt(i)->widget();
+            ui->labelNames->removeWidget(name);
+            delete name;
+            break;
         }
     }
-    else
+}
+
+void MainWindow::on_btnUp_clicked()
+{
+    for (int i = 2; i < ui->labelCheck->count(); ++i)
     {
-        if (value_param.m_register.m_decode.contains("u"))
+        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        if (check &&check->isChecked())
         {
-            return *reinterpret_cast<uint16_t*>(address) * value_param.m_scale;
+            QWidget* check = ui->labelCheck->itemAt(i)->widget();
+            ui->labelCheck->removeWidget(check);
+            ui->labelCheck->insertWidget(i-1, check);
+
+            QWidget* name = ui->labelNames->itemAt(i)->widget();
+            ui->labelNames->removeWidget(name);
+            ui->labelNames->insertWidget(i-1, name);
+
+            QWidget* meter = ui->labelMeter->itemAt(i)->widget();
+            ui->labelMeter->removeWidget(meter);
+            ui->labelMeter->insertWidget(i-1, meter);
+            break;
         }
-        else
+    }
+}
+
+void MainWindow::on_btnDown_clicked()
+{
+    for (int i = 1; i < ui->labelCheck->count()-1; ++i)
+    {
+        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        if (check &&check->isChecked())
         {
-            return *reinterpret_cast<int16_t*>(address) * value_param.m_scale;
+            QWidget* check = ui->labelCheck->itemAt(i)->widget();
+            ui->labelCheck->removeWidget(check);
+            ui->labelCheck->insertWidget(i+1, check);
+
+            QWidget* name = ui->labelNames->itemAt(i)->widget();
+            ui->labelNames->removeWidget(name);
+            ui->labelNames->insertWidget(i+1, name);
+
+            QWidget* meter = ui->labelMeter->itemAt(i)->widget();
+            ui->labelMeter->removeWidget(meter);
+            ui->labelMeter->insertWidget(i+1, meter);
+            break;
         }
     }
 }
@@ -584,45 +625,3 @@ int to_parity(const QString& parity)
     else if (parity == "m") return  QSerialPort::MarkParity;
     return QSerialPort::UnknownParity;
 }
-
-void MainWindow::on_btnStart_clicked()
-{
-
-}
-
-void MainWindow::on_btnStop_clicked()
-{
-
-}
-
-void MainWindow::on_btnRemove_clicked()
-{
-    for (int i = 1; i < ui->labelCheck->count(); ++i)
-    {
-        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
-        if (check &&check->isChecked())
-        {
-            ui->labelCheck->removeWidget(check);
-            delete check;
-            auto meter = ui->labelMeter->itemAt(i)->widget();
-            ui->labelMeter->removeWidget(meter);
-            delete meter;
-            auto name = ui->labelNames->itemAt(i)->widget();
-            ui->labelNames->removeWidget(name);
-            delete name;
-        }
-    }
-}
-
-
-void MainWindow::on_btnUp_clicked()
-{
-
-}
-
-
-void MainWindow::on_btnDown_clicked()
-{
-
-}
-

@@ -257,3 +257,98 @@ void operator >> (const YAML::Node& node, meter& _meter)
 }
 
 
+
+double get_value(const measured_value& value_param, quint16* address)
+{
+    if (value_param.m_register.m_decode.contains("32"))
+    {
+        if (value_param.m_register.m_decode.contains("u"))
+        {
+            return *reinterpret_cast<uint32_t*>(address) * value_param.m_scale;
+        }
+        else
+        {
+            return *reinterpret_cast<int32_t*>(address) * value_param.m_scale;
+        }
+    }
+    else
+    {
+        if (value_param.m_register.m_decode.contains("u"))
+        {
+            return *reinterpret_cast<uint16_t*>(address) * value_param.m_scale;
+        }
+        else
+        {
+            return *reinterpret_cast<int16_t*>(address) * value_param.m_scale;
+        }
+    }
+}
+
+size_t  get_value_size(const measured_value& value_param)
+{
+    if (value_param.m_register.m_decode.contains("32"))
+    {
+        return 2;
+    }
+    else if (value_param.m_register.m_decode.contains("16"))
+    {
+        return 1;
+    }
+    else if (value_param.m_register.m_decode.contains("char"))
+    {
+        return value_param.m_register.m_decode.mid(4).toInt() / 2;
+    }
+    return 0;
+}
+
+int get_address(const QString& address, int n)
+{
+    if (n >= 0)
+    {
+        QStringList list = address.split(";");
+        if (n < list.size())
+        {
+            int naddress = list[n].split(" ")[0].toInt();
+            return naddress;
+        }
+    }
+    return address.toInt();
+}
+
+int get_entries(const QString& decode)
+{
+    if (decode.contains("char"))
+    {
+        return decode.mid(4).toInt()/sizeof(int16_t);
+    }
+    else if (decode.contains("32"))
+    {
+        return 2;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+QModbusDataUnit::RegisterType get_type(const QString& name)
+{
+    if (name.compare("holding", Qt::CaseInsensitive) == 0)
+    {
+        return QModbusDataUnit::HoldingRegisters;
+    }
+    else if (name.compare("discreteinputs", Qt::CaseInsensitive) == 0)
+    {
+        return QModbusDataUnit::DiscreteInputs;
+    }
+    else if (name.compare("coils", Qt::CaseInsensitive) == 0)
+    {
+        return QModbusDataUnit::Coils;
+    }
+    else if (name.compare("input", Qt::CaseInsensitive) == 0)
+    {
+        return QModbusDataUnit::InputRegisters;
+    }
+    return QModbusDataUnit::Invalid;
+}
+

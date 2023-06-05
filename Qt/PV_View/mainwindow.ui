@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Photovoltaik Meter</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedKingdom"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -27,7 +30,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabTable">
      <attribute name="title">
@@ -133,7 +136,7 @@
       <property name="geometry">
        <rect>
         <x>620</x>
-        <y>430</y>
+        <y>460</y>
         <width>151</width>
         <height>24</height>
        </rect>
@@ -344,6 +347,32 @@
       </property>
       <property name="toolTip">
        <string>Pretty Name</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="edtMultipleValues">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>430</y>
+        <width>81</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelMultipeValues">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>430</y>
+        <width>58</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Anzahl:</string>
       </property>
      </widget>
     </widget>
