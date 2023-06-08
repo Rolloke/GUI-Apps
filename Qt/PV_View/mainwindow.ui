@@ -212,6 +212,9 @@
         <height>21</height>
        </rect>
       </property>
+      <property name="text">
+       <string>0</string>
+      </property>
      </widget>
      <widget class="QLabel" name="labelMaximum">
       <property name="geometry">
@@ -234,6 +237,9 @@
         <width>81</width>
         <height>21</height>
        </rect>
+      </property>
+      <property name="text">
+       <string>100</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelUnit">

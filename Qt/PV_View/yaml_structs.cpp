@@ -144,6 +144,7 @@ void operator >> (const YAML::Node& nodes, measured_register& _register)
             else
             {
                 nodes["address"] >> _register.m_address;
+                /// TODO: YAML::Comment("test it");
             }
         }
         else
@@ -317,17 +318,23 @@ int get_address(const QString& address, int n)
 
 int get_entries(const QString& decode)
 {
-    if (decode.contains("char"))
+    int pos;
+    if ((pos = decode.indexOf("char")) != -1)
     {
-        return decode.mid(4).toInt()/sizeof(int16_t);
+        return decode.mid(pos + 4).toInt()/sizeof(int16_t);
     }
-    else if (decode.contains("32"))
+    int factor = 1;
+    if ((pos = decode.indexOf("array")) != -1)
+    {
+        factor = decode.mid(pos + 5).toInt();
+    }
+    if (decode.contains("32"))
     {
         return 2;
     }
     else
     {
-        return 1;
+        return factor;
     }
 }
 

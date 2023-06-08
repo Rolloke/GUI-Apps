@@ -16,7 +16,10 @@
 #include <QProgressBar>
 #include <QProgressDialog>
 #include <QCheckBox>
+#include <QTimer>
 
+/// TODO: RW Values
+/// store in file
 namespace config
 {
 constexpr char sGroupMeter[]  = "Meter";
@@ -307,15 +310,25 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
 
 void MainWindow::read_meter_value()
 {
-    if (m_read_permanent && m_read_index < ui->labelNames->count())
+    if (m_read_permanent)
     {
-        auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(m_read_index)->widget());
-        if (namewidget)
+        if (ui->tabWidget->currentWidget() == ui->tabMeter && m_read_index < ui->labelNames->count())
         {
-            bool ok = false;
-            int n = namewidget->whatsThis().toInt(&ok);
-            if (!ok) n = 1;
-            readValue(namewidget->toolTip(), n);
+            auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(m_read_index)->widget());
+            if (namewidget)
+            {
+                bool ok = false;
+                int n = namewidget->whatsThis().toInt(&ok);
+                if (!ok) n = 1;
+                readValue(namewidget->toolTip(), n);
+            }
+        }
+        if (ui->tabWidget->currentWidget() == ui->tabTable && m_read_index < mListModel->rowCount())
+        {
+            auto current = mListModel->index(m_read_index, eName);
+            ui->tableView->selectionModel()->select(current, QItemSelectionModel::SelectCurrent);
+            ui->tableView->selectionModel()->setCurrentIndex(current, QItemSelectionModel::SelectCurrent);
+            readValue(mListModel->data(current).toString());
         }
     }
 }
@@ -425,73 +438,111 @@ void MainWindow::readReady()
             QVector<quint16> values;
             values.resize(unit.valueCount());
             auto measurement = m_meter->m_rendered.m_measurements[m_pending_request];
+            for (uint i = 0; i < unit.valueCount(); i++)
+            {
+                values[i] = unit.value(i);
+            }
             if (measurement.m_register.m_decode.contains("char"))
             {
-                for (uint i = 0; i < unit.valueCount(); i++)
-                {
-                    values[i] = unit.value(i);
-                }
                 char *value = reinterpret_cast<char*>(&values[0]);
                 mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+                ++m_read_index;
             }
             else
             {
-                for (uint i = 0, j=unit.valueCount()-1; i < unit.valueCount(); i++, j--)
-                {
-                    values[i] = unit.value(j);
-                }
                 const int value_size = get_value_size(measurement);
-                int no_of_values = values.size() / value_size;
+                int       no_of_values = values.size() / value_size;
+                int address = get_address(measurement.m_register.m_address);
                 for (int i_v=0, v=0; i_v < no_of_values; v += value_size, ++i_v)
                 {
-                    double value = get_value(measurement, &values[v]);
-                    if (ui->tabWidget->currentIndex() == 0)
+                    if (value_size > 1)
                     {
-                        mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row()+i_v, static_cast<int>(eValue)), value);
-                        ui->textSelected->setText(m_pending_request);
-                        ui->textValue->setText(tr("%1").arg(value));
-                        ui->textScale->setText(tr("%1").arg(measurement.m_scale));
-                        ui->edtMinimum->setText(tr("%1").arg(value/2.5));
-                        ui->edtMaximum->setText(tr("%1").arg(value*2.5));
+                        std::swap(values[v], values[v+1]);
                     }
-                    for (int i = 1; i < ui->labelNames->count(); ++i)
+                    double value = get_value(measurement, &values[v]);
+                    if (ui->tabWidget->currentWidget() == ui->tabTable)
                     {
-                        auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
-                        if (name && name->toolTip() == m_pending_request)
+                        for (int row = 0; row < mListModel->rowCount(); ++row)
                         {
-                            auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i+i_v)->widget());
-                            if (meter)
+                            auto i_name   = mListModel->index(row, static_cast<int>(eName));
+                            if (mListModel->data(i_name).toString() == m_pending_request)
                             {
-                                meter->setValue(value);
+                                auto i_value  = mListModel->index(row, static_cast<int>(eValue));
+                                mListModel->setData(i_value, value);
+                                if (i_v == 0)
+                                {
+                                    ui->textSelected->setText(m_pending_request);
+                                    ui->textValue->setText(tr("%1").arg(value));
+                                    ui->textScale->setText(tr("%1").arg(measurement.m_scale));
+                                }
+                                break;
                             }
-                            break;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 1; i < ui->labelNames->count(); ++i)
+                        {
+                            auto name = dynamic_cast<QLabel*>(ui->labelNames->itemAt(i)->widget());
+                            if (name && name->toolTip() == m_pending_request)
+                            {
+                                auto meter = dynamic_cast<QProgressBarFloat*>(ui->labelMeter->itemAt(i)->widget());
+                                if (meter)
+                                {
+                                    meter->setValue(value);
+                                }
+                                break;
+                            }
                         }
                     }
                     ++m_read_index;
+                    if (i_v < no_of_values)
+                    {
+                        address += value_size;
+                        auto found = std::find_if(m_meter->m_rendered.m_measurements.begin(), m_meter->m_rendered.m_measurements.end(), [address](const auto& item)
+                        {
+                            return get_address(item.m_register.m_address) == address;
+                        });
+                        if (found != m_meter->m_rendered.m_measurements.end())
+                        {
+                            m_pending_request = found.key();
+                            measurement = found.value();
+                        }
+                    }
                 }
+            }
+            if (ui->tabWidget->currentWidget() == ui->tabMeter)
+            {
                 if (m_read_index >= ui->labelNames->count())
                 {
                     m_read_index = 1;
                 }
-
-                read_meter_value();
             }
+            else
+            {
+                if (m_read_index >= mListModel->rowCount())
+                {
+                    m_read_index = 0;
+                }
+            }
+
+            QTimer::singleShot(200, [&] () { read_meter_value(); });
         }
         else if (reply->error() == QModbusDevice::ProtocolError)
         {
             statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2: %3)").
                                      arg(reply->errorString()).
                                      arg(reply->rawResult().exceptionCode(), -1, 16).arg(to_string(reply->rawResult().exceptionCode())), 5000);
-            sleep(1);
-            read_meter_value();
+
+            QTimer::singleShot(1000, [&] () { read_meter_value(); });
         }
         else
         {
             statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
                                      arg(reply->errorString()).
                                      arg(reply->error(), -1, 16), 5000);
-            sleep(1);
-            read_meter_value();
+
+            QTimer::singleShot(1000, [&] () { read_meter_value(); });
         }
 
         reply->deleteLater();
