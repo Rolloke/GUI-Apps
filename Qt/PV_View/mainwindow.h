@@ -25,6 +25,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void set_no_gui();
+    bool display_gui();
 
 private slots:
     void on_btnLoadYamlFile_clicked();
@@ -62,5 +64,6 @@ private:
 
     QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;
+    bool           m_gui_mode;
 };
 #endif // MAINWINDOW_H

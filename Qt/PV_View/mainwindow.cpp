@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , mDocumentFile("/home/rolf/.config/huawei-sun2000-dongle-powersensor.yaml")
+    , m_gui_mode(true)
 {
     ui->setupUi(this);
 
@@ -112,9 +113,19 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
-
     load_yaml(mDocumentFile);
 }
+
+void MainWindow::set_no_gui()
+{
+    m_gui_mode = false;
+}
+
+bool MainWindow::display_gui()
+{
+    return m_gui_mode;
+}
+
 
 MainWindow::~MainWindow()
 {
@@ -448,6 +459,10 @@ void MainWindow::readReady()
                 mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
                 ++m_read_index;
             }
+            else if (measurement.m_register.m_decode.contains("array"))
+            {
+                /// TODO: read array
+            }
             else
             {
                 const int value_size = get_value_size(measurement);
@@ -460,6 +475,15 @@ void MainWindow::readReady()
                         std::swap(values[v], values[v+1]);
                     }
                     double value = get_value(measurement, &values[v]);
+                    if (measurement.m_scale == 1)
+                    {
+                        /// TODO: evaluate also bits
+                        QString choice = m_meter->m_parameters.get_choice(get_request(m_pending_request, 1), static_cast<int>(value));
+                        if (!choice.isEmpty())
+                        {
+                            statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(choice));
+                        }
+                    }
                     if (ui->tabWidget->currentWidget() == ui->tabTable)
                     {
                         for (int row = 0; row < mListModel->rowCount(); ++row)
@@ -474,6 +498,7 @@ void MainWindow::readReady()
                                     ui->textSelected->setText(m_pending_request);
                                     ui->textValue->setText(tr("%1").arg(value));
                                     ui->textScale->setText(tr("%1").arg(measurement.m_scale));
+                                    ui->edtUnit->setText(tr("%1").arg(measurement.m_unit));
                                 }
                                 break;
                             }

@@ -163,6 +163,7 @@ void operator >> (const YAML::Node& nodes, measured_value& _measured_value)
     nodes["connectdelay"] >> _measured_value.m_connectdelay;
     nodes["register"]     >> _measured_value.m_register;
     nodes["scale"]        >> _measured_value.m_scale;
+    nodes["unit"]         >> _measured_value.m_unit;
 }
 
 void s_render::read_measurement(const YAML::Node& node, const QString& name)
@@ -336,6 +337,17 @@ int get_entries(const QString& decode)
     {
         return factor;
     }
+}
+
+QString get_request(const QString& request, int n)
+{
+    QStringList list = request.split(":");
+    if (n == -1) n=0;
+    if (n < list.size())
+    {
+        return list[n];
+    }
+    return request;
 }
 
 QModbusDataUnit::RegisterType get_type(const QString& name)

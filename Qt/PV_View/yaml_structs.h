@@ -68,6 +68,7 @@ struct measured_value
     QString m_connectdelay;
     measured_register m_register;
     double  m_scale = 1;
+    QString m_unit;
 
     friend void operator >> (const YAML::Node& nodes, measured_value& _measured_value);
 };
@@ -108,5 +109,6 @@ size_t  get_value_size(const measured_value& value_param);
 QModbusDataUnit::RegisterType get_type(const QString& name);
 int     get_address(const QString& address, int n=-1);
 int     get_entries(const QString& decode);
+QString get_request(const QString&request, int n=-1);
 
 #endif // YAML_STRUCTS_H
