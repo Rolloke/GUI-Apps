@@ -17,6 +17,7 @@
 #include <QProgressDialog>
 #include <QCheckBox>
 #include <QTimer>
+#include <QFile>
 
 /// TODO: RW Values
 /// store in file
@@ -56,7 +57,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , mDocumentFile("/home/rolf/.config/huawei-sun2000-dongle-powersensor.yaml")
-    , m_gui_mode(true)
 {
     ui->setupUi(this);
 
@@ -83,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     LOAD_STR(fSettings, mDocumentFile, toString);
+    LOAD_STR(fSettings, mConfigurationFileName, toString);
     LOAD_PTR(fSettings, ui->edtAddress, setText, text, toString);
     LOAD_PTR(fSettings, ui->edtServerAddress, setValue, value, toInt);
     fSettings.beginGroup(config::sGroupMeter);
@@ -133,6 +134,7 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     STORE_STR(fSettings, mDocumentFile);
+    STORE_STR(fSettings, mConfigurationFileName);
     STORE_PTR(fSettings, ui->edtAddress, text);
     STORE_PTR(fSettings, ui->edtServerAddress, value);
 
@@ -189,13 +191,11 @@ bool MainWindow::load_yaml(const QString &filename)
 {
     try
     {
-        YAML::Node           yaml_document;
-        yaml_document = YAML::LoadFile(filename.toStdString());
-
+        YAML::Node yaml_document = YAML::LoadFile(filename.toStdString());
         m_meter = std::make_unique<meter>();
         yaml_document >> *m_meter;
-        m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
 
+        m_meter->m_render_source = m_meter->m_render_source.replace("{{-", "command: ");
         YAML::Node rendered = YAML::Load(m_meter->m_render_source.toStdString());
         rendered >> m_meter->m_rendered;
 
@@ -315,15 +315,17 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
     ui->labelNames->addWidget(label_name);
 
     auto checkbox = new QCheckBox(this);
+    connect(checkbox, SIGNAL(clicked()), this, SLOT(btnCheckboxClicked()));
     checkbox->setMinimumHeight(meter->height()-5);
     ui->labelCheck->addWidget(checkbox);
 }
 
 void MainWindow::read_meter_value()
 {
-    if (m_read_permanent)
+    switch (m_read_permanent)
     {
-        if (ui->tabWidget->currentWidget() == ui->tabMeter && m_read_index < ui->labelNames->count())
+    case read::meter:
+        if (m_read_index < ui->labelNames->count())
         {
             auto namewidget = dynamic_cast<QLabel*>(ui->labelNames->itemAt(m_read_index)->widget());
             if (namewidget)
@@ -333,15 +335,23 @@ void MainWindow::read_meter_value()
                 if (!ok) n = 1;
                 readValue(namewidget->toolTip(), n);
             }
-        }
-        if (ui->tabWidget->currentWidget() == ui->tabTable && m_read_index < mListModel->rowCount())
+        } break;
+    case read::table:
+        if (m_read_index < mListModel->rowCount())
         {
             auto current = mListModel->index(m_read_index, eName);
             ui->tableView->selectionModel()->select(current, QItemSelectionModel::SelectCurrent);
             ui->tableView->selectionModel()->setCurrentIndex(current, QItemSelectionModel::SelectCurrent);
             readValue(mListModel->data(current).toString());
-        }
+        } break;
+    case read::control:
+        if (m_read_index < m_meter->m_rendered.m_measurements.count())
+        {
+            readValue(m_meter->m_rendered.m_measurements.keys()[m_read_index]);
+        } break;
+    default: break;
     }
+
 }
 
 void MainWindow::on_btnAddMeter_clicked()
@@ -366,7 +376,7 @@ void MainWindow::on_btnConnect_clicked()
         create_modbus_device();
     }
 
-    QLoggingCategory::setFilterRules("battery");
+    QLoggingCategory::setFilterRules("pv-module");
 
     statusBar()->clearMessage();
     if (modbusDevice->state() != QModbusDevice::ConnectedState)
@@ -453,15 +463,23 @@ void MainWindow::readReady()
             {
                 values[i] = unit.value(i);
             }
+            QString string_value;
             if (measurement.m_register.m_decode.contains("char"))
             {
                 char *value = reinterpret_cast<char*>(&values[0]);
                 mListModel->setData(mListModel->index(ui->tableView->selectionModel()->currentIndex().row(), static_cast<int>(eValue)), value);
+                string_value = value;
                 ++m_read_index;
             }
             else if (measurement.m_register.m_decode.contains("array"))
             {
-                /// TODO: read array
+                std::stringstream stream;
+                for (auto& v : values)
+                {
+                    stream << v << ",";
+                }
+                string_value = QString::fromStdString(stream.str());
+                ++m_read_index;
             }
             else
             {
@@ -477,14 +495,36 @@ void MainWindow::readReady()
                     double value = get_value(measurement, &values[v]);
                     if (measurement.m_scale == 1)
                     {
-                        /// TODO: evaluate also bits
-                        QString choice = m_meter->m_parameters.get_choice(get_request(m_pending_request, 1), static_cast<int>(value));
-                        if (!choice.isEmpty())
+                        const std::vector<QString>& choices = m_meter->m_parameters.get_choices(get_request(m_pending_request, 1));
+                        int no_of_choices = choices.size();
+                        if (no_of_choices)
                         {
-                            statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(choice));
+                            bool hex = -1 != choices[0].indexOf("0x");
+                            int ivalue = static_cast<int>(value);
+                            auto found =std::find_if(choices.begin(), choices.end(), [hex, ivalue](const QString&str)
+                            {
+                                bool ok = false;
+                                bool equal = ivalue == str.split(":")[0].toInt(&ok, hex? 16 : 10);
+                                return ok && equal;
+                            });
+                            if (found != choices.end())
+                            {
+                                string_value = *found;
+                            }
+                            else if (ivalue < 0)
+                            {
+                                string_value = choices[0];
+                            }
+                            else if (ivalue < static_cast<int>(choices.size()))
+                            {
+                                string_value = choices[ivalue];
+                            }
+                            statusBar()->showMessage(tr("%1 is %2").arg(m_pending_request).arg(string_value));
                         }
                     }
-                    if (ui->tabWidget->currentWidget() == ui->tabTable)
+                    switch (m_read_permanent)
+                    {
+                    case read::table: default:
                     {
                         for (int row = 0; row < mListModel->rowCount(); ++row)
                         {
@@ -503,8 +543,8 @@ void MainWindow::readReady()
                                 break;
                             }
                         }
-                    }
-                    else
+                    } break;
+                    case read::meter:
                     {
                         for (int i = 1; i < ui->labelNames->count(); ++i)
                         {
@@ -519,6 +559,13 @@ void MainWindow::readReady()
                                 break;
                             }
                         }
+                    } break;
+                    case read::control:
+                    {
+                        std::stringstream stream;
+                        stream << m_pending_request.toStdString() << ": " << value << std::endl;
+                        m_configuration_file.write(stream.str().c_str(), stream.str().size());
+                    } break;
                     }
                     ++m_read_index;
                     if (i_v < no_of_values)
@@ -536,19 +583,33 @@ void MainWindow::readReady()
                     }
                 }
             }
-            if (ui->tabWidget->currentWidget() == ui->tabMeter)
+            switch (m_read_permanent)
             {
+            case read::meter:
                 if (m_read_index >= ui->labelNames->count())
                 {
                     m_read_index = 1;
-                }
-            }
-            else
-            {
+                } break;
+            case read::table:
                 if (m_read_index >= mListModel->rowCount())
                 {
-                    m_read_index = 0;
+                    m_read_permanent = read::off;
+                } break;
+            case read::control:
+            {
+                if (string_value.size())
+                {
+                    std::stringstream stream;
+                    stream << m_pending_request.toStdString() << ": " << string_value.toStdString() << std::endl;
+                    m_configuration_file.write(stream.str().c_str(), stream.str().size());
                 }
+                if (m_read_index >= m_meter->m_rendered.m_measurements.count())
+                {
+                    m_read_permanent = read::off;
+                    m_configuration_file.close();
+                }
+            }  break;
+            default: break;
             }
 
             QTimer::singleShot(200, [&] () { read_meter_value(); });
@@ -578,7 +639,7 @@ void MainWindow::on_btnStart_clicked()
 {
     if (ui->labelNames->count() > 1)
     {
-        m_read_permanent = true;
+        m_read_permanent = read::meter;
         m_read_index     = 1;
         read_meter_value();
     }
@@ -586,10 +647,9 @@ void MainWindow::on_btnStart_clicked()
 
 void MainWindow::on_btnStop_clicked()
 {
-    m_read_permanent = false;
+    m_read_permanent = read::off;
     statusBar()->showMessage(tr("Stopped reading"));
 }
-
 void MainWindow::on_btnRemove_clicked()
 {
     for (int i = 1; i < ui->labelCheck->count(); ++i)
@@ -656,6 +716,66 @@ void MainWindow::on_btnDown_clicked()
     }
 }
 
+void MainWindow::on_btnReadConfig_clicked()
+{
+    if (m_read_permanent != read::control)
+    {
+        QString file = QFileDialog::getSaveFileName(this, tr("Save configuration"), QFileInfo(mConfigurationFileName).absolutePath(), tr("*.txt"));
+        if (file.size())
+        {
+            mConfigurationFileName = file;
+            m_configuration_file.setFileName(file);
+            m_configuration_file.open(QFile::WriteOnly);
+            m_read_permanent = read::control;
+            m_read_index     = 0;
+            read_meter_value();
+        }
+    }
+}
+
+void MainWindow::on_btnStartRead_clicked()
+{
+    if (m_read_permanent == read::off)
+    {
+        m_read_permanent = read::table;
+        m_read_index     = 0;
+        read_meter_value();
+    }
+}
+
+void MainWindow::on_btnStopRead_clicked()
+{
+    m_read_permanent = read::off;
+}
+
+void MainWindow::updateButtons()
+{
+    ui->btnStop->setEnabled(m_read_permanent != read::off);
+    ui->btnStart->setEnabled(m_read_permanent != read::meter);
+    ui->btnStopRead->setEnabled(m_read_permanent != read::off);
+    ui->btnStartRead->setEnabled(m_read_permanent != read::table);
+    ui->btnReadConfig->setEnabled(m_read_permanent != read::control);
+}
+
+
+void MainWindow::btnCheckboxClicked()
+{
+    bool one_checked = false;
+    for (int i = 1; i < ui->labelCheck->count()-1; ++i)
+    {
+        auto check = dynamic_cast<QCheckBox*>(ui->labelCheck->itemAt(i)->widget());
+        if (check->isChecked())
+        {
+            one_checked = true;
+            break;
+        }
+    }
+    ui->btnRemove->setChecked(one_checked);
+    ui->btnUp->setChecked(one_checked);
+    ui->btnDown->setChecked(one_checked);
+}
+
+
 #define CASE_RETURN(X) case X: return #X;
 QString to_string(QModbusPdu::ExceptionCode code)
 {
@@ -701,3 +821,5 @@ int to_parity(const QString& parity)
     else if (parity == "m") return  QSerialPort::MarkParity;
     return QSerialPort::UnknownParity;
 }
+
+

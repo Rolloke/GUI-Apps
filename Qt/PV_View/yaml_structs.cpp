@@ -76,6 +76,16 @@ QString parameters::get_choice(const QString& name, int n)
     return "";
 }
 
+const std::vector<QString>& parameters::get_choices(const QString& name)
+{
+    static std::vector<QString> dummy;
+    if (m_map.contains(name))
+    {
+        return m_map[name].m_choice.m_choice;
+    }
+    return dummy;
+}
+
 QString parameters::get_type(const QString& name)
 {
     if (m_map.contains(name))

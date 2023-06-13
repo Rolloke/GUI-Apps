@@ -5,6 +5,7 @@
 #include <yaml-cpp/yaml.h>
 #include <memory>
 #include <QModbusDataUnit>
+#include <QFile>
 
 class QModelIndex;
 class QStandardItemModel;
@@ -35,11 +36,16 @@ private slots:
     void onStateChanged(int state);
     void on_tableView_clicked(const QModelIndex &index);
     void on_btnAddMeter_clicked();
+    void on_btnStartRead_clicked();
+    void on_btnStopRead_clicked();
+
     void on_btnStart_clicked();
     void on_btnStop_clicked();
-    void on_btnRemove_clicked();
     void on_btnUp_clicked();
     void on_btnDown_clicked();
+    void on_btnRemove_clicked();
+    void btnCheckboxClicked();
+    void on_btnReadConfig_clicked();
 
 private:
     QString getConfigName() const;
@@ -51,6 +57,9 @@ private:
                            double scale, double minimum, double maximum, double value,
                            const QString &unit);
     void read_meter_value();
+    void updateButtons();
+
+    enum class read { off, table, meter, control };
 
     Ui::MainWindow *ui = nullptr;
     QStandardItemModel*  mListModel = nullptr;
@@ -59,11 +68,16 @@ private:
     QModbusReply  *lastRequest   = nullptr;
     QModbusClient *modbusDevice = nullptr;
     QString        m_pending_request;
-    bool           m_read_permanent = false;
+    read           m_read_permanent = read::off;
     int            m_read_index = 0;
 
     QString        mDocumentFile;
     std::unique_ptr<meter> m_meter;
-    bool           m_gui_mode;
+    bool           m_gui_mode = true;
+
+    QString        mConfigurationFileName;
+    QFile          m_configuration_file;
+
+
 };
 #endif // MAINWINDOW_H

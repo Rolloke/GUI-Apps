@@ -44,6 +44,7 @@ struct parameters
     friend void operator >> (const YAML::Node& nodes, parameters& s_parameters);
 
     QString get_choice(const QString& name, int n=0);
+    const std::vector<QString> &get_choices(const QString& name);
     QString get_type(const QString& name);
     QString get_default(const QString& name);
     bool    is_allinone(const QString& name);
