@@ -1604,6 +1604,10 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::SaveAs, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::SaveAs, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::ReplaceAll, tr("Replace All"), tr("Replace all found items")) , SIGNAL(triggered()), this, SLOT(FindReplaceAll()));
+    mActions.setFlags(Cmd::ReplaceAll, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::ReplaceAll, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2198,6 +2202,14 @@ MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
 {
 }
 
+void MainWindow::FindReplaceAll()
+{
+    while (ui->btnFindX->isEnabled())
+    {
+        find_function(find::replace);
+    }
+}
+
 void MainWindow::on_btnFindNext_clicked()
 {
     find_function(find::forward);
@@ -2292,6 +2304,7 @@ void MainWindow::find_in_text_view(find find_item)
         {
             showDockedWidget(text_browser);
         }
+        ui->btnFindX->setEnabled(found_text);
     }
 }
 

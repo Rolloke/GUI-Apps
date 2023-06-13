@@ -247,6 +247,7 @@ private Q_SLOTS:
 
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
+    void FindReplaceAll();
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
     void on_btnFindX_clicked();
