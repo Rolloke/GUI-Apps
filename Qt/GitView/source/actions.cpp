@@ -147,7 +147,6 @@ void ActionList::initActionIcons()
     action_icons[Cmd::CollapseTreeItems]       = "svn-commit.svg";
     action_icons[Cmd::AddGitSourceFolder]      = "folder-open.png";
     action_icons[Cmd::UpdateGitStatus]         = "view-refresh.png";
-    action_icons[Cmd::ShowHideTree]            = "code-class.svg";
     action_icons[Cmd::ClearTreeItems]          = "edit-clear.png";
     action_icons[Cmd::CustomGitActionSettings] = "preferences-system.png";
     action_icons[Cmd::InsertHashFileNames]     = "object-rotate-right.png";
@@ -175,7 +174,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::CustomTestCommand]       = "window-close.png";
     action_icons[Cmd::OpenFile]                = "gnome-mime-text.png";
     action_icons[Cmd::SaveAs]                  = "document-save.png";
-    action_icons[Cmd::ReplaceAll]              = "edit-find.png";
+    action_icons[Cmd::ReplaceAll]              = "edit-find-replace.png";
 
     for (auto& icon_path: action_icons )
     {

@@ -1496,14 +1496,14 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Commit, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::Push           , tr("Push"), Cmd::getCommand(Cmd::Push)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::Push, ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::Push, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Push, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Pull, Cmd::UpdateRepository);
-    mActions.setFlags(Cmd::Pull, ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::Pull, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Pull, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Fetch          , tr("Fetch"), Cmd::getCommand(Cmd::Fetch)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setFlags(Cmd::Fetch, ActionList::Flags::CallInThread, Flag::set);
+    mActions.setFlags(Cmd::Fetch, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Fetch, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Show, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -2491,7 +2491,7 @@ void MainWindow::find_text_in_files()
     }
     else
     {
-        ///"grep -rnHsI[oiEw] 'search_pattern' 'path'"
+        /// NOTE: grep -rnHsI[oiEw] 'search_pattern' 'path'
         /// r: recursive
         /// n: line number
         /// H: file name

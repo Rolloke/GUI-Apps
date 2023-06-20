@@ -598,12 +598,35 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>161</width>
+        <width>201</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>Read Configuration</string>
+       <string>Read Configuration Values</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelFilterForConfig">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filter:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="edtFilterForConfig">
+      <property name="geometry">
+       <rect>
+        <x>72</x>
+        <y>50</y>
+        <width>141</width>
+        <height>24</height>
+       </rect>
       </property>
      </widget>
     </widget>

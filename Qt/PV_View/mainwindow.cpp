@@ -345,9 +345,27 @@ void MainWindow::read_meter_value()
             readValue(mListModel->data(current).toString());
         } break;
     case read::control:
-        if (m_read_index < m_meter->m_rendered.m_measurements.count())
         {
-            readValue(m_meter->m_rendered.m_measurements.keys()[m_read_index]);
+            QStringList keys = m_meter->m_rendered.m_measurements.keys();
+            QString filter = ui->edtFilterForConfig->text();
+            if (filter.size())
+            {
+                for (; m_read_index < keys.size(); ++m_read_index)
+                {
+                    if (keys[m_read_index].contains(filter))
+                    {
+                        break;
+                    }
+                }
+            }
+            if (m_read_index < m_meter->m_rendered.m_measurements.count())
+            {
+                readValue(keys[m_read_index]);
+            }
+            else
+            {
+                m_read_permanent = read::off;
+            }
         } break;
     default: break;
     }
