@@ -67,7 +67,7 @@ Cmd::Cmd()
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
-    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ShowHideTree, ClearTreeItems, DeleteTreeItems };
+    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
     mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator, CloseAll, SaveAll, ReplaceAll, SaveAs };

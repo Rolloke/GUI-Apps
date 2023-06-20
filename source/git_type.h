@@ -69,7 +69,7 @@ struct Cmd
         CollapseTreeItems,
         AddGitSourceFolder,
         UpdateGitStatus,
-        ShowHideTree, /// TODO: find new usage for obsolete ID
+        ReplaceAll,
         ClearTreeItems,
         CustomGitActionSettings,
         InsertHashFileNames,
@@ -98,7 +98,6 @@ struct Cmd
         SaveAll,
         OpenFile,
         SaveAs,
-        ReplaceAll,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
