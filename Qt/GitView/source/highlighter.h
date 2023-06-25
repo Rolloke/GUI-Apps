@@ -75,7 +75,7 @@ private:
         QTextCharFormat format;
     };
 public:
-    enum
+    enum keys
     {
         instre1,
         instre2,
@@ -86,7 +86,14 @@ public:
         type5,
         type6,
         type7,
-        keyword_formats
+        keyword_formats,
+        numbers = keyword_formats,
+        single_line_comment,
+        multi_line_comment,
+        quotation,
+        function,
+        preprocessor,
+        all_formats
     };
 
     struct Language
@@ -97,6 +104,7 @@ public:
         static void convert(QTextCharFormat&, const QString&);
         static TextCharFormatMap getHighlightFormats();
         static void invokeHighlighterDlg();
+        QString get_pattern(const QTextCharFormat& format) const;
 
         QVector<HighlightingRule> highlightingRules;
 
@@ -119,6 +127,8 @@ public:
     const QString& currentLanguage() const;
     bool hasExtension(const QString &ext) const;
     static const QStringList& getLanguages();
+    QString get_current_language_pattern(const QTextCharFormat& format) const;
+    static const char *get_regex(keys key);
 
 
 protected:
@@ -128,7 +138,7 @@ private:
     void load_language_list();
     void load_language(QString fLanguage);
     void load_default_language();
-    const Language& get_language();
+    const Language& get_language() const ;
 
 Q_SIGNALS:
     void updateExtension(const QString&);

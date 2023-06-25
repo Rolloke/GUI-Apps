@@ -42,7 +42,6 @@ using namespace boost::placeholders;
 #define RELATIVE_GIT_PATH 1
 
 
-
 using namespace std;
 using namespace git;
 
@@ -1421,68 +1420,68 @@ QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QStr
 
 void MainWindow::initContextMenuActions()
 {
-    connect(mActions.createAction(Cmd::ShowDifference , tr("Show difference")   , Cmd::getCommand(Cmd::ShowDifference)) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::ShowDifference, tr("Show difference"), Cmd::getCommand(Cmd::ShowDifference), this) , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::ShowDifference)->setShortcut(QKeySequence(Qt::Key_F8));
     mActions.setCmdAddOn(Cmd::ShowDifference, "--cached ");
     mActions.setFlags(Cmd::ShowDifference, Type::GitModified|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::ShowDifference, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffCmd|ActionList::Flags::DependsOnStaged, Flag::set);
     mActions.setMenuStringList(Cmd::ShowDifference, {"--diff-algorithm", "patience", "minimal", "histogram", "*myers"});
 
-    connect(mActions.createAction(Cmd::CallDiffTool   , tr("Call diff tool...") , Cmd::getCommand(Cmd::CallDiffTool))   , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::CallDiffTool, tr("Call diff tool...") ,Cmd::getCommand(Cmd::CallDiffTool), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.getAction(Cmd::CallDiffTool)->setShortcut(QKeySequence(Qt::Key_F9));
     mActions.setCmdAddOn(Cmd::CallDiffTool, "--cached ");
     mActions.setFlags(Cmd::CallDiffTool, Type::GitModified, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread|ActionList::Flags::DependsOnStaged, Flag::set);
 
-    connect(mActions.createAction(Cmd::CallMergeTool   , tr("Call merge tool...") , Cmd::getCommand(Cmd::CallMergeTool)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::CallMergeTool, tr("Call merge tool..."), Cmd::getCommand(Cmd::CallMergeTool), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread, Flag::set);
 
-    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file (experimental, not working)")) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
+    connect(mActions.createAction(Cmd::InvokeGitMergeDialog , tr("Merge file..."), tr("Merge selected file (experimental, not working)"), this) , SIGNAL(triggered()), this, SLOT(invoke_git_merge_dialog()));
     mActions.setFlags(Cmd::InvokeGitMergeDialog, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::InvokeGitMergeDialog, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font")) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
+    connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font"), this) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
     mActions.setFlags(Cmd::InvokeHighlighterDialog, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::InvokeHighlighterDialog, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status")       , Cmd::getCommand(Cmd::ShowStatus))     , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status"), Cmd::getCommand(Cmd::ShowStatus), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::ShowStatus, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::ShowShortStatus , tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::ShowShortStatus , tr("Show short status") , Cmd::getCommand(Cmd::ShowShortStatus), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowShortStatus, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::ShowShortStatus, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.getAction(Cmd::ShowShortStatus)->setShortcut(QKeySequence(Qt::Key_F5));
 
-    connect(mActions.createAction(Cmd::Add             , tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add))            , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Add, tr("Add to git (stage)"), Cmd::getCommand(Cmd::Add), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Add)->setShortcut(QKeySequence(Qt::Key_F4));
     mActions.setFlags(Cmd::Add, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setFlags(Cmd::Add, Type::GitModified|Type::GitUnTracked|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::Unstage        , tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage))      , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Unstage, tr("Reset file (unstage)"), Cmd::getCommand(Cmd::Unstage), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Unstage, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Unstage)->setShortcut(QKeySequence(Qt::ShiftModifier| Qt::Key_F4));
     mActions.setFlags(Cmd::Unstage, Type::GitStaged|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::History        , tr("Show History")      , Cmd::getCommand(Cmd::History))        , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::History, tr("Show History"), Cmd::getCommand(Cmd::History), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::History, Cmd::ParseHistoryText);
     mActions.getAction(Cmd::History)->setShortcut(QKeySequence(Qt::Key_F10));
     mActions.setFlags(Cmd::History, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::Blame          , tr("Blame")      , Cmd::getCommand(Cmd::Blame))               , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Blame, tr("Blame"), Cmd::getCommand(Cmd::Blame), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Blame, ActionList::Flags::CallInThread|ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Blame, Type::Folder, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setCustomCommandPostAction(Cmd::Blame, Cmd::ParseBlameText);
 
-    connect(mActions.createAction(Cmd::Remove         , tr("Remove from git..."), Cmd::getCommand(Cmd::Remove))         , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Remove, tr("Remove from git..."), Cmd::getCommand(Cmd::Remove), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Remove, "Remove %1 from git repository;Do you want to remove \"%1\"?");
     mActions.setCustomCommandPostAction(Cmd::Remove, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::Remove, Type::GitUnTracked, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setFlags(Cmd::Remove, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::Restore         , tr("Restore changes..."), Cmd::getCommand(Cmd::Restore))       , SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Restore, tr("Restore changes..."), Cmd::getCommand(Cmd::Restore), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore %1 changes;Do you want to restore changes in \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
@@ -1490,91 +1489,91 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Restore, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setFlags(Cmd::Restore, ActionList::Flags::History);
 
-    connect(mActions.createAction(Cmd::Commit         , tr("Commit..."), Cmd::getCommand(Cmd::Commit)), SIGNAL(triggered()), this, SLOT(call_git_commit()));
+    connect(mActions.createAction(Cmd::Commit, tr("Commit..."), Cmd::getCommand(Cmd::Commit), this), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::Commit, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Commit, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::Push           , tr("Push"), Cmd::getCommand(Cmd::Push)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Push, tr("Push"), Cmd::getCommand(Cmd::Push), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Push, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Push, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::Pull           , tr("Pull"), Cmd::getCommand(Cmd::Pull)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Pull, tr("Pull"), Cmd::getCommand(Cmd::Pull), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::Pull, Cmd::UpdateRepository);
     mActions.setFlags(Cmd::Pull, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Pull, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::Fetch          , tr("Fetch"), Cmd::getCommand(Cmd::Fetch)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Fetch, tr("Fetch"), Cmd::getCommand(Cmd::Fetch), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Fetch, ActionList::Flags::Asynchroneous, Flag::set);
     mActions.setFlags(Cmd::Fetch, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show)), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Show           , tr("Show"), Cmd::getCommand(Cmd::Show), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Show, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     const QString stash_message = tr("Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
-    connect(mActions.createAction(Cmd::Stash          , tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::Stash, tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Stash, stash_message);
     mActions.setCustomCommandPostAction(Cmd::Stash, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::Stash, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::Stash, ActionList::Flags::Stash, Flag::set);
-    connect(mActions.createAction(Cmd::StashShow      , tr("Show stash"),  Cmd::getCommand(Cmd::StashShow)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::StashShow, tr("Show stash"),  Cmd::getCommand(Cmd::StashShow), this),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::StashShow, ActionList::Flags::Stash, Flag::set);
     mActions.setFlags(Cmd::StashShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashPush,       tr("Stash push"),  Cmd::getCommand(Cmd::StashPush)),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    connect(mActions.createAction(Cmd::StashPush, tr("Stash push"),  Cmd::getCommand(Cmd::StashPush), this),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashPush, stash_message);
     mActions.setCustomCommandPostAction(Cmd::StashPush, Cmd::UpdateRootItemStatus);
     mActions.setCmdAddOn(Cmd::StashPush, " -- ");
     mActions.setFlags(Cmd::StashPush, ActionList::Flags::StashCmdOption|ActionList::Flags::Stash, Flag::set);
     mActions.setFlags(Cmd::StashPush, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashPop       , tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop))  ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashPop, tr("Stash pop"),   Cmd::getCommand(Cmd::StashPop), this)  ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandPostAction(Cmd::StashPop, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::StashPop, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashApply     , tr("Stash apply"), Cmd::getCommand(Cmd::StashApply)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashApply, tr("Stash apply"), Cmd::getCommand(Cmd::StashApply), this),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandPostAction(Cmd::StashApply, Cmd::UpdateRootItemStatus);
     mActions.setFlags(Cmd::StashApply, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashDrop      , tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop)) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashDrop, tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop), this) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
     mActions.setFlags(Cmd::StashDrop, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashClear     , tr("Stash clear"), Cmd::getCommand(Cmd::StashClear)), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashClear, tr("Stash clear"), Cmd::getCommand(Cmd::StashClear), this), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashClear, "Remove all stash entries;Do you whant to remove all stash entries of repository:\n\"%1\"?");
     mActions.setFlags(Cmd::StashClear, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::StashList      , tr("List stashes"),Cmd::getCommand(Cmd::StashList)),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
+    connect(mActions.createAction(Cmd::StashList, tr("List stashes"),Cmd::getCommand(Cmd::StashList), this),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandPostAction(Cmd::StashList, Cmd::ParseStashListText);
     mActions.setFlags(Cmd::StashList, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::BranchList     , tr("List Branches"), Cmd::getCommand(Cmd::BranchList)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchList, tr("List Branches"), Cmd::getCommand(Cmd::BranchList), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchList, Cmd::ParseBranchListText);
     mActions.setFlags(Cmd::BranchList, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchList, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::BranchListRemote, tr("List remote Branches"), Cmd::getCommand(Cmd::BranchListRemote)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchListRemote, tr("List remote Branches"), Cmd::getCommand(Cmd::BranchListRemote), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListRemote, Cmd::ParseBranchListText);
     mActions.setFlags(Cmd::BranchListRemote, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchListRemote, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::BranchListMerged, tr("List merged Branches"), Cmd::getCommand(Cmd::BranchListMerged)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchListMerged, tr("List merged Branches"), Cmd::getCommand(Cmd::BranchListMerged), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListMerged, Cmd::ParseBranchListText);
     mActions.setFlags(Cmd::BranchListMerged, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchListMerged, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::BranchListNotMerged, tr("List not merged Branches"), Cmd::getCommand(Cmd::BranchListNotMerged)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchListNotMerged, tr("List not merged Branches"), Cmd::getCommand(Cmd::BranchListNotMerged), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandPostAction(Cmd::BranchListNotMerged, Cmd::ParseBranchListText);
     mActions.setFlags(Cmd::BranchListNotMerged, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchListNotMerged, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, tr("Delete %1 from git;Do you want to delete \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::BranchDelete, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchDelete, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchDelete, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::BranchCheckout, tr("Checkout Branch"), Cmd::getCommand(Cmd::BranchCheckout)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchCheckout, tr("Checkout Branch"), Cmd::getCommand(Cmd::BranchCheckout), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?;"));
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchCheckout, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
-    connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Diff between Branches"), Cmd::getCommand(Cmd::DiffOfTwoBranches)), SIGNAL(triggered()), ui->treeBranches, SLOT(diff_of_two_branches()));
+    connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Diff between Branches"), Cmd::getCommand(Cmd::DiffOfTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(diff_of_two_branches()));
     mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
-    connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow)), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setFlags(Cmd::BranchShow, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename)), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
+    connect(mActions.createAction(Cmd::MoveOrRename   , tr("Move / Rename..."), Cmd::getCommand(Cmd::MoveOrRename), this), SIGNAL(triggered()), this, SLOT(call_git_move_rename()));
     mActions.setCustomCommandPostAction(Cmd::MoveOrRename, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::MoveOrRename)->setShortcut(QKeySequence(Qt::Key_F2));
     mActions.setFlags(Cmd::MoveOrRename, ActionList::Flags::NotVariableGitCmd, Flag::set);
@@ -1608,6 +1607,15 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::ReplaceAll, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ReplaceAll, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::EditToUpper, tr("To Upper."), tr("Modify selected text to upper case"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditToUpper, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditToUpper, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditToLower, tr("To Lower"), tr("Modify selected text to lower case"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditToLower, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditToLower, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditToggleComment, tr("Comment / uncomment"), tr("Comment or uncomment selected text lines"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditToggleComment, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditToggleComment, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2204,6 +2212,12 @@ MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
 
 void MainWindow::FindReplaceAll()
 {
+    /// TODO: invoke with own commands for to_lower, to_upper, toggle_comment
+//    code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+//    if (text_browser)
+//    {
+//        text_browser->changeSelection(selection::toggle_comment);
+//    }
     while (ui->btnFindX->isEnabled())
     {
         find_function(find::replace);

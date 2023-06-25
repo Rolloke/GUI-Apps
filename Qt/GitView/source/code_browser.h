@@ -13,6 +13,14 @@ class    QWebEngineView;
 class    PreviewPage;
 #endif
 
+enum class selection
+{
+    toggle_comment,
+    to_upper,
+    to_lower,
+    unknown=-1
+};
+
 class code_browser : public QTextBrowser, public Editable
 {
     Q_OBJECT
@@ -38,6 +46,7 @@ public:
     void setLanguage(const QString& language);
     void parse_blame(const QString& blame);
     bool hasExtension(const QString& ext);
+    void changeSelection(selection command);
 
     code_browser* clone(bool all_parameter=false, bool with_text=true);
 
