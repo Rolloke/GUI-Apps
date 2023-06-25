@@ -4,6 +4,7 @@
 
 #include <QPainter>
 #include <QTextBlock>
+#include <QTextDocumentFragment>
 #include <QScrollBar>
 #include <QMenu>
 #include <QTextCursor>
@@ -330,6 +331,74 @@ bool code_browser::hasExtension(const QString& ext)
 void code_browser::setLanguage(const QString& language)
 {
     mHighlighter->setLanguage(language);
+}
+
+void code_browser::changeSelection(selection command)
+{
+    auto text_cursor = textCursor();
+    if (text_cursor.hasSelection())
+    {
+        QString text;
+        switch (command)
+        {
+        case selection::to_lower:
+            text = text_cursor.selectedText().toLower();
+            break;
+        case selection::to_upper:
+            text = text_cursor.selectedText().toUpper();
+            break;
+        case selection::toggle_comment:
+        {
+            text = text_cursor.selection().toPlainText();
+            QStringList lines = text.split("\n");
+            text.clear();
+            const int no_of_lines = lines.size();
+            if (no_of_lines)
+            {
+                QString pattern = mHighlighter->get_current_language_pattern(Highlighter::Language::mSingleLineCommentFormat);
+                QString regex   = Highlighter::get_regex(Highlighter::single_line_comment);
+                pattern = pattern.left(pattern.indexOf(regex));
+                if (pattern.size())
+                {
+                    if (pattern == lines[0].left(pattern.size())) // uncomment
+                    {
+                        int nline = 0;
+                        for (const QString& line : lines)
+                        {
+                            text += pattern == line.left(pattern.size()) ? line.mid(pattern.size()) : line;
+                            if (++nline == no_of_lines && line.size() == 0)
+                            {
+                                break;
+                            }
+                            text += "\n";
+                        }
+                    }
+                    else // comment
+                    {
+                        int nline = 0;
+                        for (const QString&line : lines)
+                        {
+                            text += pattern + line;
+                            if (++nline == no_of_lines && line.size() == 0)
+                            {
+                                break;
+                            }
+                            text += "\n";
+                        }
+                    }
+                }                
+            }
+         }  break;
+
+        default:
+            text.clear();
+            break;
+        }
+        if (text.size())
+        {
+            insertPlainText(text);
+        }
+    }
 }
 
 void code_browser::reset_blame()

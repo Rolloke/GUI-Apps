@@ -77,6 +77,28 @@ void MainWindow::selectTextBrowserLanguage()
     }
 }
 
+void MainWindow::modify_text()
+{
+    using namespace git;
+    code_browser*text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+    if (text_browser)
+    {
+        const QAction*     action       = qobject_cast<QAction *>(sender());
+        const QVariantList variant_list = action->data().toList();
+        const Cmd::eCmd    id           = static_cast<Cmd::eCmd>(variant_list[ActionList::Data::Cmd].toUInt());
+        selection sel {selection::unknown};
+        switch (id)
+        {
+        case Cmd::EditToUpper:       sel = selection::to_upper; break;
+        case Cmd::EditToLower:       sel = selection::to_lower; break;
+        case Cmd::EditToggleComment: sel = selection::toggle_comment; break;
+        default:
+            break;
+        }
+        text_browser->changeSelection(sel);
+    }
+}
+
 void MainWindow::reset_text_browser(code_browser* text_browser)
 {
     if (text_browser)

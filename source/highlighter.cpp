@@ -69,6 +69,7 @@ QMap<QString, QString>  Highlighter::mExtensionToLanguage;
 QSharedPointer<QDomDocument> Highlighter::mDoc;
 QStringList Highlighter::mLanguageNames;
 
+
 QTextCharFormat Highlighter::Language::mKeywordFormat[Highlighter::keyword_formats];
 QTextCharFormat Highlighter::Language::mNumbersFormat;
 QTextCharFormat Highlighter::Language::mSingleLineCommentFormat;
@@ -292,6 +293,26 @@ bool Highlighter::hasExtension(const QString &ext) const
     return false;
 }
 
+QString Highlighter::get_current_language_pattern(const QTextCharFormat& format) const
+{
+    return get_language().get_pattern(format);
+}
+
+const char* Highlighter::get_regex(keys key)
+{
+    switch (key)
+    {
+    case single_line_comment: return "[^\n]*";
+    case multi_line_comment: return "";
+    case instre1: case instre2:
+    case type1: case type2: case type3: case type4:
+    case type5: case type6: case type7:
+        return "\\b(?:%1)\\b";
+    case function: return "\\b[0-9\\+\\-\\.]+\\b";
+    case quotation: return "\".*\"";
+    default: return "";
+    }
+}
 
 void Highlighter::load_language_list()
 {
@@ -419,7 +440,7 @@ void Highlighter::load_language(QString language_name)
                         {
                             if (character == ' ') character = '|';
                         }
-                        QString pattern = tr("\\b(?:%1)\\b").arg(keys);
+                        QString pattern = tr(get_regex(type1)).arg(keys);
                         rule.pattern = QRegularExpression(pattern);
                         rule.format = language.mKeywordFormat[k];
                         language.highlightingRules.append(rule);
@@ -431,7 +452,7 @@ void Highlighter::load_language(QString language_name)
             QString commentLine  = getValue(language_node.attributes().namedItem("commentLine"), QString(""), true);
             if (commentLine.size())
             {
-                commentLine += "[^\n]*";
+                commentLine += get_regex(single_line_comment);
                 rule.pattern = QRegularExpression(commentLine);
                 rule.format = language.mSingleLineCommentFormat;
                 language.highlightingRules.append(rule);
@@ -447,7 +468,6 @@ void Highlighter::load_language(QString language_name)
                 language.commentEndExpression = QRegularExpression(commentEnd);
             }
 
-//            rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
             rule.pattern = QRegularExpression(QStringLiteral("\"[\\w\\d\\s\\(\\)\\*/#\\{\\}\\[\\];|\\-\\+\\.\\\\^\"]*\""));
             rule.format = language.mQuotationFormat;
             language.highlightingRules.append(rule);
@@ -462,15 +482,17 @@ void Highlighter::load_default_language()
     HighlightingRule rule;
     Language language;
 
-    rule.pattern = QRegularExpression(QStringLiteral("\\b[0-9\\+\\-\\.]+\\b"));
+    rule.pattern = QRegularExpression(get_regex(function));
     rule.format = language.mNumbersFormat;
     language.highlightingRules.append(rule);
 
-    rule.pattern = QRegularExpression(QStringLiteral("#.*"));
+    QString sl_pattern = "#";
+    sl_pattern += get_regex(single_line_comment);
+    rule.pattern = QRegularExpression(sl_pattern);
     rule.format = language.mSingleLineCommentFormat;
     language.highlightingRules.append(rule);
 
-    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    rule.pattern = QRegularExpression(get_regex(quotation));
     rule.format = language.mQuotationFormat;
     language.highlightingRules.append(rule);
 
@@ -506,7 +528,7 @@ void Highlighter::load_default_language()
     mLanguages[mDefault] = language;
 }
 
-const Highlighter::Language& Highlighter::get_language()
+const Highlighter::Language& Highlighter::get_language()const
 {
     const auto found_language = mLanguages.find(mCurrentLanguage);
     if (found_language != mLanguages.end())
@@ -514,6 +536,18 @@ const Highlighter::Language& Highlighter::get_language()
         return found_language.value();
     }
     return mLanguages[mDefault];
+}
+
+QString Highlighter::Language::get_pattern(const QTextCharFormat& format) const
+{
+    for (const auto& rule : highlightingRules)
+    {
+        if (rule.format == format)
+        {
+            return rule.pattern.pattern();
+        }
+    }
+    return "";
 }
 
 void Highlighter::highlightBlock(const QString &text)

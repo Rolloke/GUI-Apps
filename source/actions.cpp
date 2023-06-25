@@ -24,7 +24,7 @@ ActionList::~ActionList()
 
 QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QString& git_command, QObject* parent)
 {
-    if (parent == nullptr)
+    if (!parent)
     {
         parent = mParent;
     }
@@ -33,6 +33,11 @@ QAction * ActionList::createAction(Cmd::eCmd cmd, const QString& name, const QSt
     new_action->setStatusTip(git_command);
     new_action->setToolTip(name);
     initAction(cmd, new_action);
+    QWidget* parent_widget = dynamic_cast<QWidget*>(parent);
+    if (parent_widget)
+    {
+        parent_widget->addAction(new_action);
+    }
     return new_action;
 }
 
@@ -175,6 +180,9 @@ void ActionList::initActionIcons()
     action_icons[Cmd::OpenFile]                = "gnome-mime-text.png";
     action_icons[Cmd::SaveAs]                  = "document-save.png";
     action_icons[Cmd::ReplaceAll]              = "edit-find-replace.png";
+    action_icons[Cmd::EditToUpper]             = "window-close.png";
+    action_icons[Cmd::EditToLower]             = "window-close.png";
+    action_icons[Cmd::EditToggleComment]       = "window-close.png";
 
     for (auto& icon_path: action_icons )
     {
