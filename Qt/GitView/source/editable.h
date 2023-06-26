@@ -2,6 +2,7 @@
 #define EDITABLE_H
 #include <QString>
 #include <QWidget>
+#include <QDateTime>
 
 class Editable
 {
@@ -13,13 +14,16 @@ public:
     const QString& get_file_path() const;
     void set_changed(bool changed);
     bool get_changed() const;
-    void set_active(bool active);
+    bool set_active(bool active);
     bool get_active() const;
+    bool is_modified();
+    void update_modified();
 
 protected:
     QString                 m_FilePath;
     bool                    m_FileChanged;
     bool                    m_active;
+    QDateTime               m_last_modified;
 };
 
 bool           set_file_path(QWidget*widget, const QString& file_path);

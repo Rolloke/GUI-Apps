@@ -303,6 +303,7 @@ private Q_SLOTS:
     void OpenFile();
     void SaveFileAs();
     void modify_text();
+    void check_reload(code_browser*);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);

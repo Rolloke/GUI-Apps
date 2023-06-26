@@ -187,6 +187,14 @@ void code_browser::keyPressEvent(QKeyEvent *e)
      QTextBrowser::keyPressEvent(e);
 }
 
+void code_browser::focusInEvent(QFocusEvent *)
+{
+    if (is_modified())
+    {
+        Q_EMIT check_reload(this);
+    }
+}
+
 bool code_browser::event(QEvent *event)
 {
     if (event->type() == QEvent::HoverMove)
@@ -341,55 +349,10 @@ void code_browser::changeSelection(selection command)
         QString text;
         switch (command)
         {
-        case selection::to_lower:
-            text = text_cursor.selectedText().toLower();
-            break;
-        case selection::to_upper:
-            text = text_cursor.selectedText().toUpper();
-            break;
-        case selection::toggle_comment:
-        {
-            text = text_cursor.selection().toPlainText();
-            QStringList lines = text.split("\n");
-            text.clear();
-            const int no_of_lines = lines.size();
-            if (no_of_lines)
-            {
-                QString pattern = mHighlighter->get_current_language_pattern(Highlighter::Language::mSingleLineCommentFormat);
-                QString regex   = Highlighter::get_regex(Highlighter::single_line_comment);
-                pattern = pattern.left(pattern.indexOf(regex));
-                if (pattern.size())
-                {
-                    if (pattern == lines[0].left(pattern.size())) // uncomment
-                    {
-                        int nline = 0;
-                        for (const QString& line : lines)
-                        {
-                            text += pattern == line.left(pattern.size()) ? line.mid(pattern.size()) : line;
-                            if (++nline == no_of_lines && line.size() == 0)
-                            {
-                                break;
-                            }
-                            text += "\n";
-                        }
-                    }
-                    else // comment
-                    {
-                        int nline = 0;
-                        for (const QString&line : lines)
-                        {
-                            text += pattern + line;
-                            if (++nline == no_of_lines && line.size() == 0)
-                            {
-                                break;
-                            }
-                            text += "\n";
-                        }
-                    }
-                }                
-            }
-         }  break;
-
+        case selection::to_lower:       text = text_cursor.selectedText().toLower(); break;
+        case selection::to_upper:       text = text_cursor.selectedText().toUpper(); break;
+        case selection::toggle_comment: text = comment_uncomment_selection();        break;
+            /// TODO: implement to_camel_case and to_snake_case
         default:
             text.clear();
             break;
@@ -399,6 +362,50 @@ void code_browser::changeSelection(selection command)
             insertPlainText(text);
         }
     }
+}
+
+QString code_browser::comment_uncomment_selection()
+{
+    QString text = textCursor().selection().toPlainText();
+    QStringList lines = text.split("\n");
+    text.clear();
+    const int no_of_lines = lines.size();
+    if (no_of_lines)
+    {
+        QString pattern = mHighlighter->get_current_language_pattern(Highlighter::Language::mSingleLineCommentFormat);
+        QString regex   = Highlighter::get_regex(Highlighter::single_line_comment);
+        pattern = pattern.left(pattern.indexOf(regex));
+        if (pattern.size())
+        {
+            if (pattern == lines[0].left(pattern.size())) // uncomment
+            {
+                int nline = 0;
+                for (const QString& line : lines)
+                {
+                    text += pattern == line.left(pattern.size()) ? line.mid(pattern.size()) : line;
+                    if (++nline == no_of_lines && line.size() == 0)
+                    {
+                        break;
+                    }
+                    text += "\n";
+                }
+            }
+            else // comment
+            {
+                int nline = 0;
+                for (const QString&line : lines)
+                {
+                    text += pattern + line;
+                    if (++nline == no_of_lines && line.size() == 0)
+                    {
+                        break;
+                    }
+                    text += "\n";
+                }
+            }
+        }
+    }
+    return text;
 }
 
 void code_browser::reset_blame()
