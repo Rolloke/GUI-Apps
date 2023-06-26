@@ -55,6 +55,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent *e) override;
     void keyPressEvent(QKeyEvent *e) override;
     bool event(QEvent *event) override;
+    void focusInEvent(QFocusEvent *) override;
 
 Q_SIGNALS:
     void text_changed(const QString &text);
@@ -65,6 +66,7 @@ Q_SIGNALS:
     void line_changed(int);
     void column_changed(int);
     void text_of_active_changed(bool);
+    void check_reload(code_browser*);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
@@ -94,6 +96,7 @@ private:
     QPointF    contentOffset() const;
     int        lineNumberAreaWidth();
     void       reset_blame();
+    QString    comment_uncomment_selection();
 
 private:
     QPointer<QWidget>       m_line_number_area;

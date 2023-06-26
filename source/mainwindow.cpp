@@ -909,7 +909,10 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
             for (QDockWidget* current_widget : dock_widgets)
             {
                 code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
-                browser->set_active(current_widget == dockWidget);
+                if (browser->set_active(current_widget == dockWidget))
+                {
+                    check_reload(browser);
+                }
             }
             if (!m_tree_source_item_double_clicked)
             {
@@ -1054,6 +1057,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     auto *docked_browser =  ui->textBrowser->clone(true, false);
     connect(docked_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     connect(docked_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+    connect(docked_browser, SIGNAL(check_reload(code_browser*)), this, SLOT(check_reload(code_browser*)));
     connect(docked_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
 #ifdef WEB_ENGINE
@@ -1109,6 +1113,7 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         disconnect(text_browser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
         disconnect(text_browser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
+        disconnect(text_browser, SIGNAL(check_reload(code_browser*)), this, SLOT(check_reload(code_browser*)));
         disconnect(text_browser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
         disconnect(text_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
