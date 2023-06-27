@@ -101,14 +101,13 @@ void MainWindow::modify_text()
 
 void MainWindow::check_reload(code_browser *browser)
 {
-    if (browser->is_modified()
-        && callMessageBox(tr("Reload file?;File %1%2 has changed"), "", browser->get_file_path()) == QMessageBox::Yes)
-    {
-        open_file(browser->get_file_path(), browser->current_line());
-    }
-    else
+    if (browser->is_modified())
     {
         browser->update_modified();
+        if (callMessageBox(tr("Reload file%1?;File %1%2 has changed"), "", browser->get_file_path()) == QMessageBox::Yes)
+        {
+            open_file(browser->get_file_path(), browser->current_line());
+        }
     }
 }
 
