@@ -1621,6 +1621,12 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::EditToggleComment, tr("Comment / uncomment"), tr("Comment or uncomment selected text lines"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
     mActions.setFlags(Cmd::EditToggleComment, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::EditToggleComment, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditToSnakeCase, tr("To Snake Case"), tr("Modify selected text to snake_case"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditToSnakeCase, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditToSnakeCase, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditToCamelCase, tr("To Camel Case"), tr("Modify selected text to CameCase"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditToCamelCase, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditToCamelCase, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2217,12 +2223,6 @@ MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
 
 void MainWindow::FindReplaceAll()
 {
-    /// TODO: invoke with own commands for to_lower, to_upper, toggle_comment
-//    code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
-//    if (text_browser)
-//    {
-//        text_browser->changeSelection(selection::toggle_comment);
-//    }
     while (ui->btnFindX->isEnabled())
     {
         find_function(find::replace);

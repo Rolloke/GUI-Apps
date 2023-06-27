@@ -64,6 +64,7 @@ struct Cmd
         /// hint: this range is reserved for automatically created commands
         NonGitCommands = 1000,
         /// hint: add non git commands here
+        Submenu   = NonGitCommands-1,
         Separator = NonGitCommands,
         ExpandTreeItems,
         CollapseTreeItems,
@@ -101,6 +102,8 @@ struct Cmd
         EditToUpper,
         EditToLower,
         EditToggleComment,
+        EditToSnakeCase,
+        EditToCamelCase,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

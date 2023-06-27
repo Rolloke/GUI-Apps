@@ -89,9 +89,11 @@ void MainWindow::modify_text()
         selection sel {selection::unknown};
         switch (id)
         {
-        case Cmd::EditToUpper:       sel = selection::to_upper; break;
-        case Cmd::EditToLower:       sel = selection::to_lower; break;
+        case Cmd::EditToUpper:       sel = selection::to_upper;       break;
+        case Cmd::EditToLower:       sel = selection::to_lower;       break;
         case Cmd::EditToggleComment: sel = selection::toggle_comment; break;
+        case Cmd::EditToSnakeCase:   sel = selection::to_snake_case;  break;
+        case Cmd::EditToCamelCase:   sel = selection::to_camel_case;  break;
         default:
             break;
         }
