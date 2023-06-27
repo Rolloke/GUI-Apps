@@ -349,10 +349,11 @@ void code_browser::changeSelection(selection command)
         QString text;
         switch (command)
         {
-        case selection::to_lower:       text = text_cursor.selectedText().toLower(); break;
-        case selection::to_upper:       text = text_cursor.selectedText().toUpper(); break;
-        case selection::toggle_comment: text = comment_uncomment_selection();        break;
-            /// TODO: implement to_camel_case and to_snake_case
+        case selection::to_lower:       text = text_cursor.selectedText().toLower();    break;
+        case selection::to_upper:       text = text_cursor.selectedText().toUpper();    break;
+        case selection::toggle_comment: text = comment_uncomment_selection();           break;
+        case selection::to_snake_case:  text = toSnakeCase(text_cursor.selectedText()); break;
+        case selection::to_camel_case:  text = toCamelCase(text_cursor.selectedText()); break;
         default:
             text.clear();
             break;
@@ -407,6 +408,72 @@ QString code_browser::comment_uncomment_selection()
     }
     return text;
 }
+
+bool is_whole_word(const QString& text)
+{
+    QRegExp regex("([A-Za-z][A-Za-z0-9_]+)");
+    if (regex.indexIn(text) != -1)
+    {
+        QString captured = regex.capturedTexts().at(0);
+        return (text == captured);
+    }
+    return false;
+}
+
+QString code_browser::toCamelCase(const QString& text)
+{
+    if (is_whole_word(text))
+    {
+        QString result;
+        int n = text.size();
+        for (int i=0; i<n; ++i)
+        {
+            if (i==0 && text[i].isLetter())
+            {
+                result += text[i].toUpper();
+            }
+            else if (text[i] == '_' && i < n-1)
+            {
+                result += text[++i].toUpper();
+            }
+            else
+            {
+                result += text[i];
+            }
+        }
+        return result;
+    }
+    return {};
+}
+
+QString code_browser::toSnakeCase(const QString& text)
+{
+    if (is_whole_word(text))
+    {
+        auto ll = std::locale();
+        QString result;
+        int n = text.size();
+        for (int i=0; i<n; ++i)
+        {
+            if (i==0)
+            {
+                result += text[i].toLower();
+            }
+            else if (text[i].isUpper())
+            {
+                result += '_';
+                result += text[i].toLower();
+            }
+            else
+            {
+                result += text[i];
+            }
+        }
+        return result;
+    }
+    return {};
+}
+
 
 void code_browser::reset_blame()
 {

@@ -18,6 +18,8 @@ enum class selection
     toggle_comment,
     to_upper,
     to_lower,
+    to_snake_case,
+    to_camel_case,
     unknown=-1
 };
 
@@ -97,6 +99,8 @@ private:
     int        lineNumberAreaWidth();
     void       reset_blame();
     QString    comment_uncomment_selection();
+    static QString    toCamelCase(const QString&text);
+    static QString    toSnakeCase(const QString& text);
 
 private:
     QPointer<QWidget>       m_line_number_area;
