@@ -92,6 +92,7 @@ private Q_SLOTS:
     void on_btnHelp_clicked();
     void on_btnExecute_clicked();
     void on_btnAddCommand_clicked();
+    void on_btnFind_clicked();
 
 private:
     void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");
@@ -114,6 +115,7 @@ private:
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
     QBitArray mMergeToolsState;
+    int       mSearchRowStart;
 };
 
 struct ActionsTable { enum e
