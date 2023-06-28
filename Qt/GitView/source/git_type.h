@@ -55,7 +55,7 @@ struct Cmd
         StashPush,
         Blame,
 
-        /// hint: add further git commands here
+        /// hint: add further git commands before
         CustomCommand=50,
         /// hint: this range is reserved for custom git commands
         CustomTestCommand=499,
@@ -63,8 +63,8 @@ struct Cmd
         RenderGraphics = AutoCommand+6,
         /// hint: this range is reserved for automatically created commands
         NonGitCommands = 1000,
-        /// hint: add non git commands here
-        Submenu   = NonGitCommands-1,
+        /// hint: a submenu goes to the next separator
+        Submenu   = NonGitCommands+1000,
         Separator = NonGitCommands,
         ExpandTreeItems,
         CollapseTreeItems,
@@ -104,10 +104,12 @@ struct Cmd
         EditToggleComment,
         EditToSnakeCase,
         EditToCamelCase,
+
+        /// hint: add non git commands before
+        LastNonGitCommand = EditToCamelCase,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
-        LastNonGitCommand = CompareTo,
         Invalid = -1,
         Restore = Checkout
     };

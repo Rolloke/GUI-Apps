@@ -54,6 +54,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 ,   mListModelVarious(nullptr)
 ,   mInitialize(false)
 ,   mMergeToolsState(aMergeTools.size())
+,   mSearchRowStart(-1)
 {
     ui->setupUi(this);
     QSizeF the_size = size();
@@ -94,7 +95,12 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     }
     mListModelActions->insertRows(fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Separator, Qt::DisplayRole);
-    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
+    mListModelActions->setData(mListModelActions->index(fRow++, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
+
+    /// TODO: implement submenu
+//    mListModelActions->insertRows(fRow, 1, QModelIndex());
+//    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Submenu, Qt::DisplayRole);
+//    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("-- Sub menu --"), Qt::DisplayRole);
 
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, ActionsTable::ID), QItemSelectionModel::SelectCurrent);
@@ -549,6 +555,7 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
     {
         enableButtons(Btn::Add|button|Btn::Right);
     }
+    mSearchRowStart = row;
 }
 
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
@@ -966,5 +973,25 @@ void CustomGitActions::on_btnExecute_clicked()
 void CustomGitActions::on_btnAddCommand_clicked()
 {
     add_command(ui->edtCommand->text());
+}
+
+void CustomGitActions::on_btnFind_clicked()
+{
+    QString text = ui->edtCommand->text();
+    const int rows = mListModelVarious->rowCount();
+    const int start = mSearchRowStart != -1 ? mSearchRowStart : 0;
+    mSearchRowStart = -1;
+    /// TODO: retrieve header tab pressed for search comlumn
+    for (int row = start; row < rows; ++row)
+    {
+        if (mListModelActions->data(mListModelActions->index(row, ActionsTable::Name)).toString().contains(text, Qt::CaseInsensitive))
+        {
+            ui->tableViewActions->selectRow(row);
+            const auto index = mListModelActions->index(row, ActionsTable::ID);
+            ui->tableViewActions->scrollTo(index);
+            mSearchRowStart = row+1;
+            break;
+        }
+    }
 }
 

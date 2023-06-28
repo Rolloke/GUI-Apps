@@ -121,6 +121,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btnFind">
+         <property name="toolTip">
+          <string>Find in command table</string>
+         </property>
+         <property name="text">
+          <string>Find</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btnAddCommand">
          <property name="toolTip">
           <string>Add command to command table</string>
