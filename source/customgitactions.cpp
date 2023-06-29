@@ -54,6 +54,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 ,   mListModelVarious(nullptr)
 ,   mInitialize(false)
 ,   mMergeToolsState(aMergeTools.size())
+,   mSearchColumn(ActionsTable::Name)
 ,   mSearchRowStart(-1)
 {
     ui->setupUi(this);
@@ -96,6 +97,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     mListModelActions->insertRows(fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Separator, Qt::DisplayRole);
     mListModelActions->setData(mListModelActions->index(fRow++, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
+    connect(ui->tableViewActions->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(on_tableViewActions_header_clicked(int)));
 
     /// TODO: implement submenu
 //    mListModelActions->insertRows(fRow, 1, QModelIndex());
@@ -558,6 +560,21 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
     mSearchRowStart = row;
 }
 
+void CustomGitActions::on_tableViewActions_header_clicked(int index )
+{
+    mSearchColumn = index;
+    switch (mSearchColumn)
+    {
+    case ActionsTable::Name: case ActionsTable::Command: case ActionsTable::MsgBoxText: case ActionsTable::Shortcut:
+        break;
+    default:
+    {
+        mSearchColumn = ActionsTable::Name;
+        //ui->tableViewActions->horizontalHeader()->seindex.siblingAtColumn(mSearchColumn));
+    }   break;
+    }
+}
+
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 {
     ui->btnAdd->setEnabled(false);
@@ -984,7 +1001,7 @@ void CustomGitActions::on_btnFind_clicked()
     /// TODO: retrieve header tab pressed for search comlumn
     for (int row = start; row < rows; ++row)
     {
-        if (mListModelActions->data(mListModelActions->index(row, ActionsTable::Name)).toString().contains(text, Qt::CaseInsensitive))
+        if (mListModelActions->data(mListModelActions->index(row, mSearchColumn)).toString().contains(text, Qt::CaseInsensitive))
         {
             ui->tableViewActions->selectRow(row);
             const auto index = mListModelActions->index(row, ActionsTable::ID);

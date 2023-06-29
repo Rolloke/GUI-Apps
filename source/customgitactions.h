@@ -84,6 +84,7 @@ private Q_SLOTS:
     void on_btnAdd_clicked();
     void on_btnDelete_clicked();
     void on_tableViewActions_clicked(const QModelIndex &index);
+    void on_tableViewActions_header_clicked(int index);
     void on_tableViewVarious_clicked(const QModelIndex &index);
     void enableButtons(std::uint32_t aBtnFlag);
     void on_tableViewActions_customContextMenuRequested(const QPoint &pos);
@@ -115,6 +116,7 @@ private:
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
     QBitArray mMergeToolsState;
+    int       mSearchColumn;
     int       mSearchRowStart;
 };
 
