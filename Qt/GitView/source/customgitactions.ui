@@ -106,7 +106,7 @@
        <item>
         <widget class="QPushButton" name="btnExecute">
          <property name="toolTip">
-          <string>Execute command</string>
+          <string>Execute the command line for testing purpose</string>
          </property>
          <property name="text">
           <string>Execute</string>

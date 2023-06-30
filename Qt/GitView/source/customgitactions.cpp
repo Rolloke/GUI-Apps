@@ -75,7 +75,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 
     double fItemWidth = 0;
     std::for_each(mActionListColumnWidth.begin(), mActionListColumnWidth.end()-1, [&fItemWidth](double fItem ) { fItemWidth += fItem; });
-    mActionListColumnWidth.back() = 1.0 - fItemWidth;
+    mActionListColumnWidth.back() = 1.0 - fItemWidth - 0.005;
 
     mListModelActions = new ActionItemModel(0, ActionsTable::Last, this);
     connect(mListModelActions, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(on_ActionTableListItemChanged(QStandardItem*)));
@@ -96,13 +96,13 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     }
     mListModelActions->insertRows(fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Separator, Qt::DisplayRole);
-    mListModelActions->setData(mListModelActions->index(fRow++, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
+    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
     connect(ui->tableViewActions->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(on_tableViewActions_header_clicked(int)));
 
-    /// TODO: implement submenu
-//    mListModelActions->insertRows(fRow, 1, QModelIndex());
-//    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Submenu, Qt::DisplayRole);
-//    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("-- Sub menu --"), Qt::DisplayRole);
+    mListModelActions->insertRows(++fRow, 1, QModelIndex());
+    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Submenu, Qt::DisplayRole);
+    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Command), tr("Insert submenu:"), Qt::DisplayRole);
+    mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("sub menu name"), Qt::DisplayRole);
 
     mInitialize = false;
     ui->tableViewActions->selectionModel()->setCurrentIndex(mListModelActions->index(0, ActionsTable::ID), QItemSelectionModel::SelectCurrent);
@@ -433,38 +433,50 @@ void CustomGitActions::on_btnToLeft_clicked()
 {
     if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
     {
-        int fIconRow   = ui->tableViewVarious->currentIndex().row();
-        int fActionRow = ui->tableViewActions->currentIndex().row();
-        Cmd::eCmd fCmd = getCommand(fActionRow);
-        QString fIconPath = mListModelVarious->data(mListModelVarious->index(fIconRow, VariousHeader::Icon), Qt::UserRole).toString();
-        if (fIconPath.size())
+        int icon_row   = ui->tableViewVarious->currentIndex().row();
+        int action_row = ui->tableViewActions->currentIndex().row();
+        Cmd::eCmd cmd = getCommand(action_row);
+        QString icon_path = mListModelVarious->data(mListModelVarious->index(icon_row, VariousHeader::Icon), Qt::UserRole).toString();
+        if (icon_path.size())
         {
-            mListModelActions->setData(mListModelActions->index(fActionRow, ActionsTable::Icon), QIcon(fIconPath), Qt::DecorationRole);
-            mActionList.setIconPath(fCmd, fIconPath);
-            mActionList.setFlags(fCmd, ActionList::Flags::Modified, Flag::set);
+            mListModelActions->setData(mListModelActions->index(action_row, ActionsTable::Icon), QIcon(icon_path), Qt::DecorationRole);
+            mActionList.setIconPath(cmd, icon_path);
+            mActionList.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
         }
     }
     else
     {
-        int fIconRow     = ui->tableViewVarious->currentIndex().row();
-        auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
-        fCmdVector.erase(fCmdVector.begin()+fIconRow);
-        int fSelected = static_cast<int>(fCmdVector.size()-1);
+        int icon_row     = ui->tableViewVarious->currentIndex().row();
+        auto& cmd_vector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
+        Cmd::eCmd cmd = cmd_vector[icon_row];
+        if (cmd >= Cmd::Submenu)
+        {
+            mActionList.deleteAction(cmd);
+        }
+        cmd_vector.erase(cmd_vector.begin()+icon_row);
+        int selected = static_cast<int>(cmd_vector.size()-1);
         on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
-        ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fSelected, ActionsTable::ID), QItemSelectionModel::Select);
+        ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(selected, ActionsTable::ID), QItemSelectionModel::Select);
         on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
     }
 }
 
 void CustomGitActions::on_btnToRight_clicked()
 {
-    int fActionRow = ui->tableViewActions->currentIndex().row();
-    Cmd::eCmd fCmd = getCommand(fActionRow);
-    auto& fCmdVector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
-    fCmdVector.push_back(fCmd);
-    int fSelected = static_cast<int>(fCmdVector.size()-1);
+    int action_row = ui->tableViewActions->currentIndex().row();
+    Cmd::eCmd cmd = getCommand(action_row);
+    if (cmd == Cmd::Submenu)
+    {
+        cmd = mActionList.createNewID(static_cast<Cmd::eCmd>(cmd + 1));
+        QString name = mListModelActions->data(mListModelActions->index(action_row, ActionsTable::Name)).toString();
+        mActionList.createAction(cmd, name, name);
+        mActionList.setFlags(cmd, ActionList::Flags::Modified|ActionList::Flags::SubMenu, Flag::set);
+    }
+    auto& cmd_vector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
+    cmd_vector.push_back(cmd);
+    int selected = static_cast<int>(cmd_vector.size()-1);
     on_comboBoxVarious_currentIndexChanged(ui->comboBoxVarious->currentIndex());
-    ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(fSelected, 0), QItemSelectionModel::Select);
+    ui->tableViewVarious->selectionModel()->setCurrentIndex(mListModelVarious->index(selected, 0), QItemSelectionModel::Select);
     on_tableViewVarious_clicked(ui->tableViewVarious->selectionModel()->currentIndex());
 }
 
@@ -546,18 +558,20 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
 {
     const int row = ui->tableViewActions->currentIndex().row();
     const Cmd::eCmd cmd   = getCommand(row);
-    if (!mActionList.hasAction(cmd)) return;
-    const uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
+    if (mActionList.hasAction(cmd) || cmd == Cmd::Separator || cmd == Cmd::Submenu)
+    {
+        const uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
 
-    if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
-    {
-        enableButtons(Btn::Add|button);
+        if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
+        {
+            enableButtons(Btn::Add|button);
+        }
+        else
+        {
+            enableButtons(Btn::Add|button|Btn::Right);
+        }
     }
-    else
-    {
-        enableButtons(Btn::Add|button|Btn::Right);
-    }
-    mSearchRowStart = row;
+        mSearchRowStart = row;
 }
 
 void CustomGitActions::on_tableViewActions_header_clicked(int index )
@@ -998,7 +1012,6 @@ void CustomGitActions::on_btnFind_clicked()
     const int rows = mListModelVarious->rowCount();
     const int start = mSearchRowStart != -1 ? mSearchRowStart : 0;
     mSearchRowStart = -1;
-    /// TODO: retrieve header tab pressed for search comlumn
     for (int row = start; row < rows; ++row)
     {
         if (mListModelActions->data(mListModelActions->index(row, mSearchColumn)).toString().contains(text, Qt::CaseInsensitive))

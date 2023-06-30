@@ -64,7 +64,7 @@ void ActionList::deleteAction(git::Cmd::eCmd cmd)
 
 git::Cmd::eCmd ActionList::createNewID(git::Cmd::eCmd new_cmd) const
 {
-    for (; new_cmd < Cmd::NonGitCommands; ++new_cmd)
+    for ( ; ; ++new_cmd)
     {
         if (mActionList.count(new_cmd)) continue;
         return static_cast<Cmd::eCmd>(new_cmd);
@@ -352,16 +352,30 @@ void ActionList::select_action(QAction* action)
 
 void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidget* widget) const
 {
+    QMenu* sub_menu = nullptr;
     for (const auto& cmd : items)
     {
         if (cmd == Cmd::Separator)
         {
-            menu.addSeparator();
+            if (sub_menu)
+            {
+                sub_menu = nullptr;
+            }
+            else
+            {
+                menu.addSeparator();
+            }
+        }
+        else if (cmd >= Cmd::Submenu)
+        {
+            auto* action = getAction(cmd);
+            sub_menu =  menu.addMenu(action->text());
         }
         else
         {
             auto* action = getAction(cmd);
-            menu.addAction(action);
+            if (sub_menu) sub_menu->addAction(action);
+            else menu.addAction(action);
             if (widget) widget->addAction(action);
         }
     }
@@ -629,6 +643,7 @@ const char* ActionList::Flags::name(e eFlag)
     RETURN_NAME(StashCmdOption);
     RETURN_NAME(MenuOption);
     RETURN_NAME(Asynchroneous);
+    RETURN_NAME(SubMenu);
     }
     return txt::invalid;
 }
