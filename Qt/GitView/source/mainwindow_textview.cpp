@@ -184,6 +184,19 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
     return true;
 }
 
+void MainWindow::set_show_line_numbers(bool show)
+{
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        if (browser)
+        {
+            browser->set_show_line_numbers(show);
+        }
+    }
+}
+
 void MainWindow::btnCloseAll_clicked()
 {
     btnCloseText_clicked(Editor::All);

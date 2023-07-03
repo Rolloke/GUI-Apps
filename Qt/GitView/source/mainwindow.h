@@ -305,6 +305,7 @@ private Q_SLOTS:
     void SaveFileAs();
     void modify_text();
     void check_reload(code_browser*);
+    void set_show_line_numbers(bool);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
