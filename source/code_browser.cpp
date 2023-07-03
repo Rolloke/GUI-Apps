@@ -15,6 +15,8 @@
 #include <QWebEngineView>
 #endif
 
+/// TODO: update changed button on ctrl Z
+
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
