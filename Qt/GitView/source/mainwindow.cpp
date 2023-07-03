@@ -301,8 +301,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.beginGroup(config::sGroupView);
     {
         LOAD_PTR(fSettings, ui->ckHideEmptyParent, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckHideEmptyParent);
         LOAD_STR(fSettings, Type::mShort, toBool);
         ui->ckShortState->setChecked(Type::mShort);
+        update_widget_states(ui->ckShortState);
         {
             QFontDatabase font_db;
             auto fonts = font_db.families();
@@ -363,10 +365,14 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
         ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
         LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckExperimental);
         LOAD_PTR(fSettings, ui->comboTabPosition, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckShowLineNumbers);
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckRenderGraphicFile);
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckShowHistoryGraphically);
         on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
@@ -464,6 +470,20 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #endif
 
     TRACEX(Logger::info, windowTitle() << " Started");
+}
+
+void MainWindow::update_widget_states(QWidget *widget)
+{
+    auto list = widget->actions();
+    if (list.count())
+    {
+        const QAbstractButton*button  = dynamic_cast<QAbstractButton*>(widget);
+        // const QComboBox*      combobox= dynamic_cast<QComboBox*>(widget);
+        if (button && button->isCheckable())
+        {
+            list[0]->setChecked(button->isChecked());
+        }
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

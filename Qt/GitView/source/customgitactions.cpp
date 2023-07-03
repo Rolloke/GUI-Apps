@@ -97,7 +97,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     mListModelActions->insertRows(fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Separator, Qt::DisplayRole);
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::Name), tr("-- Separator --"), Qt::DisplayRole);
-    connect(ui->tableViewActions->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(on_tableViewActions_header_clicked(int)));
+    connect(ui->tableViewActions->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(tableViewActions_header_clicked(int)));
 
     mListModelActions->insertRows(++fRow, 1, QModelIndex());
     mListModelActions->setData(mListModelActions->index(fRow, ActionsTable::ID)  , git::Cmd::Submenu, Qt::DisplayRole);
@@ -574,7 +574,7 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
         mSearchRowStart = row;
 }
 
-void CustomGitActions::on_tableViewActions_header_clicked(int index )
+void CustomGitActions::tableViewActions_header_clicked(int index )
 {
     mSearchColumn = index;
     switch (mSearchColumn)

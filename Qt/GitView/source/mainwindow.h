@@ -204,6 +204,7 @@ private:
     AdditionalEditor additional_editor();
     bool close_editable_widgets(QWidget *&active_widget, Editor editor, bool &all_closed);
     bool shall_save(Editor editor);
+    void update_widget_states(QWidget *widget);
 
 
 Q_SIGNALS:
