@@ -352,30 +352,36 @@ void MainWindow::invoke_highlighter_dialog()
 
 void MainWindow::createBookmark()
 {
-    QString current_file= ui->labelFilePath->text();
-    if (current_file.size())
+    code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+    if (text_browser)
     {
-        const QString book_mark = "Bookmarks";
-        QTreeWidgetItem* new_tree_root_item;
-        auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
-        if (list.size())
+        QString current_file= text_browser->get_file_path();
+        if (current_file.size())
         {
-            new_tree_root_item = list[0];
-        }
-        else
-        {
-            new_tree_root_item = new QTreeWidgetItem({book_mark, "", ""});
-            ui->treeFindText->addTopLevelItem(new_tree_root_item);
-        }
+            const QString book_mark = "Bookmarks";
+            QTreeWidgetItem* new_tree_root_item;
+            auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
+            if (list.size())
+            {
+                new_tree_root_item = list[0];
+            }
+            else
+            {
+                new_tree_root_item = new QTreeWidgetItem({book_mark, "", ""});
+                ui->treeFindText->addTopLevelItem(new_tree_root_item);
+            }
 
-        QString found_text_line;
-#ifdef __linux__
-        current_file = current_file.right(current_file.size()-1);
-#else
-        current_file.replace("\\", "/");
-#endif
-        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
-        new_child_item->setText(FindColumn::Line, tr("%1").arg(ui->textBrowser->current_line(&found_text_line)));
-        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
+            QString found_text_line;
+    #ifdef __linux__
+            current_file = current_file.right(current_file.size()-1);
+    #else
+            current_file.replace("\\", "/");
+    #endif
+            QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
+            new_child_item->setText(FindColumn::Line, tr("%1").arg(text_browser->current_line(&found_text_line)));
+            new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
+            showDockedWidget(ui->treeFindText);
+            ui->treeFindText->expandItem(new_tree_root_item);
+        }
     }
 }
