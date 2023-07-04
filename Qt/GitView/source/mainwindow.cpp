@@ -2094,10 +2094,16 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     switch (index)
     {
     case UserStyle::None:
+    {
         setStyleSheet("");
         QApplication::setPalette(QGuiApplication::palette());
-        ui->textBrowser->set_dark_mode(false);
-        break;
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+        for (QDockWidget* dock_widget : dock_widgets)
+        {
+            code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+            text_browser->set_dark_mode(false);
+        }
+    } break;
     case UserStyle::User:
     {
         /// TODO: find a good dark style
@@ -2111,7 +2117,12 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             setStyleSheet(ts.readAll());
-            ui->textBrowser->set_dark_mode(true);
+            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+            for (QDockWidget* dock_widget : dock_widgets)
+            {
+                code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+                text_browser->set_dark_mode(true);
+            }
         }
         break;
     }
@@ -2137,7 +2148,12 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         palette.setColor(QPalette::Mid, button_color.lighter(100));    // Between Button and Dark.
         palette.setColor(QPalette::Dark, button_color.lighter(150));   // Darker than Button.
         QApplication::setPalette(palette);
-        ui->textBrowser->set_dark_mode(true);
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+        for (QDockWidget* dock_widget : dock_widgets)
+        {
+            code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+            text_browser->set_dark_mode(true);
+        }
         break;
     }
     }
@@ -2733,23 +2749,16 @@ void MainWindow::on_ckTypeConverter_stateChanged(int active)
 
 void MainWindow::on_spinTabulator_valueChanged(int width)
 {
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    ui->textBrowser->setTabStopDistance(width);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
-    for (QDockWidget* dock_widget : dock_widgets)
-    {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         text_browser->setTabStopDistance(width);
-    }
 #else
-    ui->textBrowser->setTabStopWidth(width);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
-    for (QDockWidget* dock_widget : dock_widgets)
-    {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
         text_browser->setTabStopWidth(width);
-    }
 #endif
+    }
 }
 
 void MainWindow::comboTabPositionIndexChanged(int index)
