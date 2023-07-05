@@ -364,6 +364,11 @@ private:
     QString mTempFilePath;
     QFile   mTempFile;
     bool    m_tree_source_item_double_clicked = false;
+    QString mBranchHasSiblingsNotAdjoins;
+    QString mBranchHasSiblingsAdjoins;
+    QString mBranchHasChildrenNotHasSiblingsAdjoins;
+    QString mBranchClosedHasChildrenHasSibling;
+    QString mBranchOpenHasChildrenHasSibling;
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";

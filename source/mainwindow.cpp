@@ -98,20 +98,19 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , m_status_line_label(nullptr)
     , m_status_column_label(nullptr)
     , m_tree_source_item_double_clicked(false)
+    , mBranchHasSiblingsNotAdjoins(":/resource/24X24/stylesheet-vline.png")
+    , mBranchHasSiblingsAdjoins(":/resource/24X24/stylesheet-branch-more.png")
+    , mBranchHasChildrenNotHasSiblingsAdjoins(":/resource/24X24/stylesheet-branch-end.png")
+    , mBranchClosedHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-closed.png")
+    , mBranchOpenHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-open.png")
 {
-    static const QString style_sheet_treeview_lines =
-            "QTreeView::branch:has-siblings:!adjoins-item {"
-            "    border-image: url(:/resource/24X24/stylesheet-vline.png) 0; }"
-            "QTreeView::branch:has-siblings:adjoins-item {"
-            "    border-image: url(:/resource/24X24/stylesheet-branch-more.png) 0; }"
-            "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
-            "    border-image: url(:/resource/24X24/stylesheet-branch-end.png) 0; }"
-            "QTreeView::branch:has-children:!has-siblings:closed,"
-            "QTreeView::branch:closed:has-children:has-siblings { "
-            "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-closed.png); }"
-            "QTreeView::branch:open:has-children:!has-siblings,"
-            "QTreeView::branch:open:has-children:has-siblings  { "
-            "    border-image: none; image: url(:/resource/24X24/stylesheet-branch-open.png); }";
+    /// x-special/mate-copied-files
+    /// x-special/mate-clipboard
+    /// x-special/nautilus-copied-files
+    /// x-special/nautilus-clipboard
+    /// x-special/gnome-copied-files
+    /// x-special/gnome-clipboard
+    /// use-legacy-clipboard
 
     ui->setupUi(this);
     createDockWindows();
@@ -127,6 +126,36 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     startTimer(100);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
+
+
+    fSettings.beginGroup(config::sGroupView);
+    {
+        LOAD_STR(fSettings, mBranchHasSiblingsNotAdjoins, toString);
+        LOAD_STR(fSettings, mBranchHasSiblingsAdjoins, toString);
+        LOAD_STR(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins, toString);
+        LOAD_STR(fSettings, mBranchClosedHasChildrenHasSibling, toString);
+        LOAD_STR(fSettings, mBranchOpenHasChildrenHasSibling, toString);
+    }
+    fSettings.endGroup();
+
+    static const QString style_sheet_treeview_lines = tr(
+            "QTreeView::branch:has-siblings:!adjoins-item {"
+            "    border-image: url(%1) 0; }"
+            "QTreeView::branch:has-siblings:adjoins-item {"
+            "    border-image: url(%2) 0; }"
+            "QTreeView::branch:!has-children:!has-siblings:adjoins-item {"
+            "    border-image: url(%3) 0; }"
+            "QTreeView::branch:has-children:!has-siblings:closed,"
+            "QTreeView::branch:closed:has-children:has-siblings { "
+            "    border-image: none; image: url(%4); }"
+            "QTreeView::branch:open:has-children:!has-siblings,"
+            "QTreeView::branch:open:has-children:has-siblings  { "
+            "    border-image: none; image: url(%5); "
+            "}").arg(mBranchHasSiblingsNotAdjoins,
+                     mBranchHasSiblingsAdjoins,
+                     mBranchHasChildrenNotHasSiblingsAdjoins,
+                     mBranchClosedHasChildrenHasSibling,
+                     mBranchOpenHasChildrenHasSibling);
 
     Highlighter::Language::load(fSettings);
     ui->textBrowser->reset();
@@ -532,6 +561,12 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupView);
     {
+        STORE_STR(fSettings, mBranchHasSiblingsNotAdjoins);
+        STORE_STR(fSettings, mBranchHasSiblingsAdjoins);
+        STORE_STR(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins);
+        STORE_STR(fSettings, mBranchClosedHasChildrenHasSibling);
+        STORE_STR(fSettings, mBranchOpenHasChildrenHasSibling);
+
         STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
         STORE_STR(fSettings,  Type::mShort);
         STORE_PTR(fSettings, ui->comboFontName, currentText);
