@@ -42,7 +42,7 @@ public:
                  StashCmdOption    = 0x1000, /// option for stash command
                  MenuOption        = 0x2000, /// option selected by Toolbutton menu
                  Asynchroneous     = 0x4000, /// CallInThread with asynchroneous answer
-                 SubMenu           = 0x8000, /// this cmd is a sub menu
+                 NoHide            = 0x8000, /// dont hide command window
                  };
         static const char* name(e eFlag);
     };

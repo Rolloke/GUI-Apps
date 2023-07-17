@@ -821,6 +821,7 @@ void MainWindow::perform_custom_command()
     const QAction     *action        = qobject_cast<QAction *>(sender());
     const QVariantList variant_list  = action->data().toList();
     const uint         command_flags = variant_list[ActionList::Data::Flags].toUInt();
+    const bool         hide          = command_flags&ActionList::Flags::NoHide ? false : true;
 
     QString git_command = action->statusTip();
 
@@ -869,7 +870,7 @@ void MainWindow::perform_custom_command()
                 }
                 else
                 {
-                    result = execute(git_command, result_str);
+                    result = execute(git_command, result_str, hide);
                     if (result != NoError)
                     {
                         result_str += tr("\nError %1 occurred").arg(result);
