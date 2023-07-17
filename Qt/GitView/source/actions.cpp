@@ -643,7 +643,7 @@ const char* ActionList::Flags::name(e eFlag)
     RETURN_NAME(StashCmdOption);
     RETURN_NAME(MenuOption);
     RETURN_NAME(Asynchroneous);
-    RETURN_NAME(SubMenu);
+    RETURN_NAME(NoHide);
     }
     return txt::invalid;
 }

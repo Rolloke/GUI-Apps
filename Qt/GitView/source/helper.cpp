@@ -26,10 +26,11 @@
 #include <map>
 
 #ifndef __linux__
-//#define USE_ShellExecute 1
+#define USE_ShellExecute 1
 #include <windows.h>
-
-#include <shellapi.h>
+#include <processthreadsapi.h>
+#include <stdlib.h>
+//#include <shellapi.h>
 #endif
 
 
@@ -266,6 +267,40 @@ QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const 
     return new_child_item;
 }
 
+#ifdef USE_ShellExecute
+int win_system(const char *command, bool hide)
+{
+    // Windows has a system() function which works, but it opens a command prompt window.
+    unsigned long       ret_val {0};
+    PROCESS_INFORMATION process_info = {0};
+    STARTUPINFOA        startup_info = {0};
+
+    std::string tmp_command = "/c ";
+    tmp_command += command;
+
+    startup_info.cb = sizeof(STARTUPINFOA);
+    size_t cmd_exe_path_size = 0;
+    char* cmd_exe_path_ptr =nullptr;
+    _dupenv_s(&cmd_exe_path_ptr, &cmd_exe_path_size, "COMSPEC");
+    _flushall();  // required for Windows system() calls, probably a good idea here too
+
+    if (CreateProcessA(cmd_exe_path_ptr, (LPSTR)tmp_command.c_str(), NULL, NULL, 0, hide ? CREATE_NO_WINDOW:0, NULL, NULL, &startup_info, &process_info))
+    {
+        WaitForSingleObject(process_info.hProcess, INFINITE);
+        GetExitCodeProcess(process_info.hProcess, &ret_val);
+        CloseHandle(process_info.hProcess);
+        CloseHandle(process_info.hThread);
+    }
+    else
+    {
+        ret_val = GetLastError();
+    }
+
+    free(cmd_exe_path_ptr);
+    return(ret_val);
+}
+#endif
+
 /// @brief executes a system command and returns result string
 /// @param command the command to be executed
 /// @param aResultText result of the command
@@ -292,10 +327,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     }
 
 #ifdef USE_ShellExecute
-    system_cmd = "/C " + system_cmd;
-    int instance = reinterpret_cast<std::uint64_t>(ShellExecuteA(0, "open", "cmd.exe", system_cmd.toStdString().c_str(), 0, hide ? SW_HIDE: SW_SHOWNORMAL));
-    TRACE(Logger::error, "GitView", "Execute result %d", instance);
-    int fResult = NoError;
+    auto fResult = win_system(system_cmd.toStdString().c_str(), hide);
 #else
     auto fResult = system(system_cmd.toStdString().c_str());
 
@@ -321,16 +353,17 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
     fStringStream << fFile.rdbuf();
     std::string fStreamString = fStringStream.str();
-    boost::algorithm::trim_right(fStreamString);
     if (fResult != NoError)
     {
-        fStringStream << QObject::tr("Error occurred executing command: ").toStdString() << fResult;
+        fStreamString += QObject::tr("\nError occurred executing command: %1").arg(fResult).toStdString();
         if (fResult == ErrorNumberInErrno)
         {
-            fStringStream << QObject::tr("Error number : ").toStdString() << errno;
+            fStreamString += QObject::tr("\nError number : %1").arg((int)errno).toStdString();
         }
     }
+    boost::algorithm::trim_right(fStreamString);
     aResultText = fStreamString.c_str();
+
 
     if (!fTemp.remove(fTemp.path()))
     {

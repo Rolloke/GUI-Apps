@@ -470,7 +470,7 @@ void CustomGitActions::on_btnToRight_clicked()
         cmd = mActionList.createNewID(static_cast<Cmd::eCmd>(cmd + 1));
         QString name = mListModelActions->data(mListModelActions->index(action_row, ActionsTable::Name)).toString();
         mActionList.createAction(cmd, name, name);
-        mActionList.setFlags(cmd, ActionList::Flags::Modified|ActionList::Flags::SubMenu, Flag::set);
+        mActionList.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
     }
     auto& cmd_vector = getCmdVector(VariousListIndex::cast(ui->comboBoxVarious->currentIndex()));
     cmd_vector.push_back(cmd);
