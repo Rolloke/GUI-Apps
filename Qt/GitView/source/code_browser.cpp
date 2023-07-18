@@ -15,8 +15,6 @@
 #include <QWebEngineView>
 #endif
 
-/// TODO: update changed button on ctrl Z
-
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
@@ -189,12 +187,13 @@ void code_browser::keyPressEvent(QKeyEvent *e)
      QTextBrowser::keyPressEvent(e);
 }
 
-void code_browser::focusInEvent(QFocusEvent *)
+void code_browser::focusInEvent(QFocusEvent *fie)
 {
     if (is_modified())
     {
         Q_EMIT check_reload(this);
     }
+    QTextBrowser::focusInEvent(fie);
 }
 
 bool code_browser::event(QEvent *event)
@@ -670,7 +669,7 @@ void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const Q
 void code_browser::own_text_changed()
 {
     m_FileChanged = document()->isModified();
-    if (m_active && m_FileChanged)
+    if (m_active)
     {
         Q_EMIT text_of_active_changed(m_FileChanged);
     }
