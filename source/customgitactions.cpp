@@ -15,10 +15,7 @@
 #include <QInputDialog>
 #include <QWhatsThis>
 
-/// TODO: test create and delete custom toolbars
-
 using namespace git;
-
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)
 {
@@ -770,7 +767,10 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {ActionList::Flags::History      , tr("History command")          , tr("The git command is called in history view context")},
         {ActionList::Flags::Stash        , tr("Stash command")            , tr("The git command is called in stash view context")},
         {ActionList::Flags::CallInThread , tr("Invoke command unattached"), tr("The git command is called without blocking the program")},
-        {ActionList::Flags::Asynchroneous, tr("Unattached instant output"), tr("The git command is called without blocking the program with instant output")}
+        {ActionList::Flags::Asynchroneous, tr("Unattached instant output"), tr("The git command is called without blocking the program with instant output")},
+    #ifndef __linux__
+        {ActionList::Flags::NoHide       , tr("Dont hide command window") , tr("The command window is not hidden to allow password input")},
+    #endif
     };
 
     bool custom_enabled = (flags & ActionList::Flags::Custom) || mExperimental;

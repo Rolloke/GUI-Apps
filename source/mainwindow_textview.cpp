@@ -309,6 +309,7 @@ void MainWindow::btnStoreText_clicked()
         {
             const string fString = text_browser->toPlainText().toStdString();
             file.write(fString.c_str(), fString.size());
+            file.close();
             text_browser->set_changed(false);
         }
         qbinarytableview* binary_table = dynamic_cast<qbinarytableview*>(active_widget);
@@ -319,6 +320,7 @@ void MainWindow::btnStoreText_clicked()
             {
                 file.write(binary_data);
             }
+            file.close();
             binary_table->set_changed(false);
         }
         set_widget_and_action_enabled(ui->btnStoreText, false);
