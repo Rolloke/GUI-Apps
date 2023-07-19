@@ -16,6 +16,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QClipboard>
+#include <QItemSelection>
+#include <QKeyEvent>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -39,6 +41,7 @@
 QString getSettingsName(const QString& aItemName);
 int execute(const QString& command, QString& aResultText);
 
+/// TODO: download kodi file from internet site
 
 namespace config
 {
@@ -72,6 +75,13 @@ const QString download_favorite_cmd = QObject::tr(
             "Edit upload favorite command:\n"
             "- scp user@address:/path/favorites.xml %1\n"
             "- %1 Placeholder for favorites file name\n");
+
+const QStringList media_player_cmd_line =
+{
+    QObject::tr("Arguments:"),
+    QObject::tr("-f <file>, --file=<file> open kodi file"),
+    QObject::tr("--help show this help")
+};
 
 const QString version          = QObject::tr("1.0.0.1");
 }
@@ -122,9 +132,10 @@ MainWindow::MainWindow(QWidget *parent) :
             pos = arguments[n].indexOf(arg_help);
             if (pos != -1)
             {
-                std::cout << "Arguments:" << std::endl;
-                std::cout << "-f <file>, --file=<file> open kodi file" << std::endl;
-                std::cout << "--help show this help" << std::endl;
+                for (const auto& line : txt::media_player_cmd_line)
+                {
+                    std::cout << line.toStdString() << std::endl;
+                }
                 exit(0);
             }
         }
@@ -136,7 +147,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
-    mHiddenColumns = {eURL, eLogo, eFriendlyName };
+    mHiddenColumns = { eURL, eLogo, eFriendlyName };
     QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Group"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
     mListModel = new CheckboxItemModel(0, eLast, this);
     for (int fSection = 0; fSection < eLast; ++fSection)
@@ -158,6 +169,7 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
+    connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), this, SLOT(table_selectionChanged(const QItemSelection&,const QItemSelection&)));
 
 #ifdef WEB_ENGINE
     mWebEngineView.reset(new QWebEngineView(this));
@@ -242,6 +254,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_play_name->setText(get_item_name(mCurrentPlayIndex));
 }
 
+
 MainWindow::~MainWindow()
 {
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -270,6 +283,20 @@ MainWindow::~MainWindow()
 
     mPlayer.stop();
     delete ui;
+}
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    int  key = event->key();
+    switch (key)
+    {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+        on_pushButtonStart_clicked();
+        break;
+    }
+    QMainWindow::keyPressEvent(event);
 }
 
 QString MainWindow::getConfigName() const
@@ -444,6 +471,15 @@ void MainWindow::on_pushButtonFind_clicked()
     }
 }
 
+void MainWindow::table_selectionChanged(const QItemSelection & selected, const QItemSelection & )
+{
+    const auto & indexes = selected.indexes();
+    if (indexes.size())
+    {
+        on_tableView_clicked(indexes[0]);
+    }
+}
+
 void MainWindow::select_index(int select)
 {
     if (select != -1)
@@ -547,8 +583,7 @@ void MainWindow::menu_file_open()
 
 void MainWindow::menu_help_about()
 {
-    QMessageBox::about(this, windowTitle(),
-         tr("About Kodi media list viewer and editor\n"
+    QString message = tr("About Kodi media list viewer and editor\n"
             "\n"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
             "\n"
@@ -557,7 +592,15 @@ void MainWindow::menu_help_about()
             "Author:\t\tRolf Kary Ehlers\n"
             "Version:\t\t%4\n"
             "License:\t\tGNU GPL Version 2\n"
-            "Email:\t\trolf-kary-ehlers@t-online.de\n").arg(qVersion(), __DATE__, __TIME__, txt::version));
+            "Email:\t\trolf-kary-ehlers@t-online.de\n"
+            "\nCommand Line "
+            ).arg(qVersion(), __DATE__, __TIME__, txt::version);
+    for (const auto& line : txt::media_player_cmd_line)
+    {
+        message += line;
+        message += "\n";
+    }
+    QMessageBox::about(this, windowTitle(), message);
 }
 
 void MainWindow::menu_help_info()
@@ -862,4 +905,6 @@ int execute(const QString& command, QString& aResultText)
 
     return fResult;
 }
+
+
 

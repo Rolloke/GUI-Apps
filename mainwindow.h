@@ -46,6 +46,7 @@ private:
     QString get_item_name(int row) const;
     void select_index(int select);
     void display_play_status();
+    void keyPressEvent(QKeyEvent *) override;
 
 private slots:
     void menu_file_open();
