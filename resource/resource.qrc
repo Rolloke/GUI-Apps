@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/36x36">
+        <file>preferences-desktop-screensaver.png</file>
+        <file>applications-multimedia.png</file>
+    </qresource>
+</RCC>
