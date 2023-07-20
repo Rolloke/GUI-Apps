@@ -108,9 +108,11 @@ MainWindow::MainWindow(QWidget *parent) :
 , mFavoritesOpenPath(QDir::homePath())
 , mFindStartRow(0)
 , mShowIcon(true)
-, mChecked(eName)
+, mChecked(eID)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":/36x36/applications-multimedia.png"));
 
     const QString arg_file = "--file=";
     const QString arg_help = "--help";
