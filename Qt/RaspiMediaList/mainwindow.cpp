@@ -53,13 +53,13 @@ namespace txt
 const QString radio            = QObject::tr("Radio");
 const QString tv               = QObject::tr("TV");
 const QString open_media_list  = QObject::tr("Open Kodi raw media List");
-const QString media_list       = QObject::tr("Media List (*.txt *.*)");
+const QString media_list       = QObject::tr("Media List (*.m3u);;Text File (*.txt);;All Files (*.*)");
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
 const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
 const QString upload_kodi_fav  = QObject::tr("Upload favorites to Raspi");
 const QString update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
-const QString kodi_favorites   = QObject::tr("Favorites (*.xml *.*)");
+const QString kodi_favorites   = QObject::tr("Favorites (*.xml);;All Files (*.*)");
 
 const QString media_player_cmd = QObject::tr(
             "Edit media player command:\n"
@@ -79,7 +79,8 @@ const QString download_favorite_cmd = QObject::tr(
 const QStringList media_player_cmd_line =
 {
     QObject::tr("Arguments:"),
-    QObject::tr("-f <file>, --file=<file> open kodi file"),
+    QObject::tr("-f <file>, --file=<file>"),
+    QObject::tr("   open kodi m3u media file at start"),
     QObject::tr("--help show this help")
 };
 
@@ -254,6 +255,13 @@ MainWindow::MainWindow(QWidget *parent) :
     select_index(mCurrentPlayIndex);
     display_play_status();
     m_play_name->setText(get_item_name(mCurrentPlayIndex));
+
+
+//    const QUrl url("https://github.com/jnk22/kodinerds-iptv/blob/master/iptv/kodi/kodi.m3u");
+//    QNetworkRequest request(url);
+//    QNetworkReply* reply = mNetManager.get(request);
+//    connect(reply, SIGNAL(finished()), this, SLOT(onDownloadFiniseh()));
+
 }
 
 
@@ -543,7 +551,10 @@ void MainWindow::menu_file_update_favorites()
         {
             on_checkBoxSelectAll_clicked(false);
 
-            const QString tag = "<favourite name=\"";
+            const QString tag        = "<favourite name=\"";
+            const QString thumb_tag  = "thumb=\"";
+            const QString media_tag  = "PlayMedia(&quot;";
+            const QString plugin_tag = "plugin://";
 
             while (!file.atEnd())
             {
@@ -552,18 +563,47 @@ void MainWindow::menu_file_update_favorites()
                 int start = line.indexOf(tag);
                 if (start != -1)
                 {
-                    start += tag.size();
-                    int end = line.indexOf('\"', start + 1);
                     const int table_rows = mListModel->rowCount();
 
+                    start += tag.size();
+                    int end = line.indexOf('\"', start + 1);
                     QString select_text = line.mid(start, end - start);
+
+                    bool found_table_entry = false;
                     for (int current_row = 0; current_row < table_rows; ++current_row)
                     {
                         if (get_item_name(current_row).indexOf(select_text, 0, Qt::CaseSensitive) != -1)
                         {
                             mListModel->setData(mListModel->index(current_row, mChecked), true, Qt::CheckStateRole);
+                            found_table_entry = true;
                             break;
                         }
+                    }
+
+                    if (!found_table_entry) // save non streaming TV favorites
+                    {
+                        start = line.indexOf(thumb_tag); // extract image url
+                        start += thumb_tag.size();
+                        end = line.indexOf('\"', start + 1);
+                        QString image_url = line.mid(start, end - start);
+
+                        start = line.indexOf(media_tag); // extract media url
+                        start += media_tag.size();
+                        end = line.indexOf("&quot;", start + 1);
+                        QString media_url = line.mid(start, end - start);
+
+                        start = line.indexOf(plugin_tag); // extract Plugin
+                        start += media_tag.size();
+                        end = line.indexOf("/", start + 1);
+                        QString plugin_txt = "non streaming: " + line.mid(start, end - start);
+
+                        int current_row = table_rows;
+                        mListModel->insertRows(current_row, 1, QModelIndex());
+                        mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), select_text);
+                        mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_url);
+                        mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), image_url);
+                        mListModel->setData(mListModel->index(current_row, eGroup, QModelIndex()), plugin_txt);
+                        mListModel->setData(mListModel->index(current_row, mChecked), true, Qt::CheckStateRole);
                     }
                 }
             };
@@ -586,7 +626,7 @@ void MainWindow::menu_file_open()
 void MainWindow::menu_help_about()
 {
     QString message = tr("About Kodi media list viewer and editor\n"
-            "\n"
+            "Store tv channels from m3u files as favorites within raspberry kodi\n"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
             "\n"
             "Based on Qt:\t%1\n"
@@ -662,6 +702,28 @@ void MainWindow::menu_option_media_player_command()
     if (text.size())
     {
         mMediaPlayerCommand = text;
+    }
+}
+
+void  MainWindow::onDownloadFiniseh()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+    if (reply)
+    {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            const int available = reply->bytesAvailable();
+            if (available > 0)
+            {
+                const QByteArray data(reply->readAll());
+                QFile file("/home/rolf/mediadatei.txt");
+                if (file.open(QIODevice::WriteOnly))
+                {
+                    file.write(data);
+                }
+            }
+        }
     }
 }
 

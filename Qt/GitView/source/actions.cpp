@@ -137,6 +137,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::StashDrop]               = "user-trash.png";
     action_icons[Cmd::StashList]               = "text-x-log.png";
     action_icons[Cmd::Blame]                   = "emblem-urgent.png";
+    action_icons[Cmd::Clone]                   = "icons8-clone-30.png";
 
     action_icons[Cmd::BranchList]              = "open-menu.png";
     action_icons[Cmd::BranchListRemote]        = "open-menu.png";

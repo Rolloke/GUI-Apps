@@ -8,8 +8,8 @@ QT += core gui
 QT += xml
 QT += multimedia
 QT += multimediawidgets
-QT += webenginewidgets webchannel
-DEFINES += WEB_ENGINE=1
+#QT += webenginewidgets webchannel
+#DEFINES += WEB_ENGINE=1
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

@@ -714,6 +714,32 @@ void  MainWindow::call_git_commit()
     }
 }
 
+void MainWindow::call_git_clone()
+{
+    const QAction *action        = qobject_cast<QAction *>(sender());
+    const QString  git_command   = action->statusTip();
+    const QString  clone_title   = tr("Clone git Repository");
+    const QString  git_source    = QInputDialog::getText(this, clone_title, tr("Enter git repository address:"));
+    const QString  base_name     = QFileInfo(git_source).baseName();
+    const QString  initial_dir   = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
+    const QString  destination   = QFileDialog::getExistingDirectory(this, tr("Select destination for repository \"%1\"").arg(base_name), initial_dir);
+    const QString  clone_command = tr(git_command.toStdString().c_str()).arg(git_source);
+
+    QDir::setCurrent(destination);
+
+    QString result_str;
+    int result = execute(clone_command, result_str);
+    if (result != NoError)
+    {
+        result_str += tr("\nError %1 occurred").arg(result);
+    }
+    appendTextToBrowser(clone_command + getLineFeed() + result_str);
+    if (result == NoError)
+    {
+        insertSourceTree(initDir(destination+ "/" + base_name), ui->treeSource->topLevelItemCount()+1);
+    }
+}
+
 void MainWindow::initMergeTools(bool read_new_items)
 {
     if (mMergeTools.size())
@@ -816,6 +842,22 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
     }
 }
 
+void MainWindow::check_set_current_path(QString & git_command)
+{
+    if (mContextMenuSourceTreeItem)
+    {
+        bool set_current_path = git_command.contains(txt::currentpath_id);
+        if (set_current_path)
+        {
+            QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
+            const QString ftlp      = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
+            fFilePath = fFilePath.mid(ftlp.length()+1);
+
+            QDir::setCurrent(ftlp + "/" + fFilePath);
+            git_command.replace(txt::currentpath_id, "");
+        }
+    }
+}
 void MainWindow::perform_custom_command()
 {
     const QAction     *action        = qobject_cast<QAction *>(sender());
@@ -863,6 +905,7 @@ void MainWindow::perform_custom_command()
             int result = callMessageBox(message_box_text, "", ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), false);
             if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
             {
+                check_set_current_path(git_command);
                 if (handleInThread())
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);

@@ -1554,6 +1554,9 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Commit, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::Commit, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
+    connect(mActions.createAction(Cmd::Clone, tr("Clone"), Cmd::getCommand(Cmd::Clone), this), SIGNAL(triggered()), this, SLOT(call_git_clone()));
+    mActions.setFlags(Cmd::Clone, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::Push, tr("Push"), Cmd::getCommand(Cmd::Push), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setFlags(Cmd::Push, ActionList::Flags::NoHide, Flag::set);
     mActions.setFlags(Cmd::Push, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
