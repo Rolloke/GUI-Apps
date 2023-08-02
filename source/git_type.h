@@ -54,6 +54,7 @@ struct Cmd
         StashApply,
         StashPush,
         Blame,
+        Clone,
 
         /// hint: add further git commands before
         CustomCommand=50,

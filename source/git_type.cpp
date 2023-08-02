@@ -62,6 +62,7 @@ Cmd::Cmd()
     mCommandMap[BranchCheckout]         = "git -C %1 checkout %2";
     mCommandMap[DiffOfTwoBranches]      = " ";
     mCommandMap[Blame]                  = "git blame -c %1 %2";
+    mCommandMap[Clone]                  = "git clone -v %1";
 
     mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };

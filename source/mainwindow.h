@@ -205,6 +205,7 @@ private:
     bool close_editable_widgets(QWidget *&active_widget, Editor editor, bool &all_closed);
     bool shall_save(Editor editor);
     void update_widget_states(QWidget *widget);
+    void check_set_current_path(QString &git_command);
 
 
 Q_SIGNALS:
@@ -287,6 +288,7 @@ private Q_SLOTS:
     void invoke_highlighter_dialog();
     void performCustomGitActionSettings();
     void call_git_commit();
+    void call_git_clone();
     void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
     void expand_tree_items();
     void collapse_tree_items();

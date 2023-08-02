@@ -112,5 +112,6 @@
         <file>resource/3rdparty/markdown.css</file>
         <file>resource/3rdparty/marked.js</file>
         <file>resource/24X24/edit-find-replace.png</file>
+        <file>resource/24X24/icons8-clone-30.png</file>
     </qresource>
 </RCC>
