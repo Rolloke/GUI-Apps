@@ -16,10 +16,14 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 
 #Qt
-find_package(Qt5Core)
-find_package(Qt5Widgets)
-find_package(Qt5Network)
-find_package(Qt5OpenGL)
+set(Qt5Core_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Core")
+set(Qt5Widgets_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Widgets")
+set(Qt5Network_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Network")
+set(Qt5OpenGL_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5OpenGL")
+#find_package(Qt5Core)
+#find_package(Qt5Widgets)
+#find_package(Qt5Network)
+#find_package(Qt5OpenGL)
 
 if(WIN32)
 set(QTMAIN_LIBRARIES optimized qtmain debug  qtmaind)
