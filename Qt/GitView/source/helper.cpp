@@ -373,10 +373,10 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     return fResult;
 }
 
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, bool aIsFile)
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, bool aIsFile, bool aEditText)
 {
     QString file_name(fFileName);
-    return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, false);
+    return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, aEditText);
 }
 
 int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, bool aIsFile, bool aEditText)
@@ -406,7 +406,7 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
             if (ok && !text.isEmpty())
             {
                 aFileName = text;
-                return QMessageBox::Yes;
+                return QMessageBox::Apply|QMessageBox::Yes;
             }
             return QMessageBox::No;
         }
