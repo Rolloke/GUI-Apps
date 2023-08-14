@@ -929,10 +929,14 @@ void MainWindow::perform_custom_command()
                 QString option = get_git_command_option(type, command_flags, variant_list);
                 git_command = tr(git_command.toStdString().c_str()).arg(option, "%1");
             }
-
-            int fResult = callMessageBox(message_box_text, type.type_name(), mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName), type.is(Type::File));
-            if (fResult == QMessageBox::Yes || fResult == QMessageBox::YesToAll)
+            QString name = mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
+            int fResult = callMessageBox(message_box_text, type.type_name(), name, type.is(Type::File));
+            if (fResult & (QMessageBox::Yes |QMessageBox::YesToAll))
             {
+                if (fResult & QMessageBox::Apply)
+                {
+                    git_command = git_command.arg(name);
+                }
                 applyCommandToFileTree(git_command);
             }
         }
