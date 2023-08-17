@@ -1348,7 +1348,7 @@ void MainWindow::killBackgroundThread()
     if (pidlist.size())
     {
         int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
-        if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+        if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
         {
             for (const QString &pid : pidlist)
             {

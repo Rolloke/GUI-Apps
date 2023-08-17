@@ -136,7 +136,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
         auto top_level_item = getTopLevelItem(aTree, fSelected);
         if (top_level_item)
         {
-            if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), top_level_item->text(0), true) == QMessageBox::Yes)
+            if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), top_level_item->text(0), true) & QMessageBox::Yes)
             {
                 aTree.removeItemWidget(top_level_item, 0);
                 delete top_level_item;
@@ -156,7 +156,7 @@ void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
             fParent->removeChild(fSelected);
             delete fSelected;
         }
-        else if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), fSelected->text(0), true) == QMessageBox::Yes)
+        else if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), fSelected->text(0), true) & QMessageBox::Yes)
         {
             aTree.removeItemWidget(fSelected, 0);
             delete fSelected;

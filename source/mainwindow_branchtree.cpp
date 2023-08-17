@@ -25,7 +25,7 @@ void MainWindow::call_git_branch_command()
 
     int result = callMessageBox(message_box_text, "branch", branch_item);
     QString result_str;
-    if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+    if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
     {
         result = call_git_command(git_command, top_item_path, branch_item, result_str);
     }
