@@ -903,7 +903,7 @@ void MainWindow::perform_custom_command()
             }
 
             int result = callMessageBox(message_box_text, "", ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), false);
-            if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+            if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 check_set_current_path(git_command);
                 if (handleInThread())
@@ -931,7 +931,7 @@ void MainWindow::perform_custom_command()
             }
             QString name = mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
             int fResult = callMessageBox(message_box_text, type.type_name(), name, type.is(Type::File));
-            if (fResult & (QMessageBox::Yes |QMessageBox::YesToAll))
+            if (fResult & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 if (fResult & QMessageBox::Apply)
                 {
@@ -1074,7 +1074,7 @@ void MainWindow::deleteFileOrFolder()
     {
         const QString fItemPath     = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
         const Type fType(mContextMenuSourceTreeItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter).toUInt());
-        if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) == QMessageBox::Yes)
+        if (callMessageBox(tr("Delete %1"), fType.type_name(), fItemPath) & QMessageBox::Yes)
         {
             bool result = false;
             if (fType.is(Type::Folder))

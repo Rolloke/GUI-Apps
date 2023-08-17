@@ -3,12 +3,9 @@
 #include "yaml_structs.h"
 #include "qprogressbarfloat.h"
 
-#include <boost/property_tree/json_parser.hpp>
 #include <string>
 #include <QFileDialog>
 #include <QSettings>
-#include <QModbusTcpClient>
-#include <QModbusRtuSerialMaster>
 #include <QUrl>
 #include <QLoggingCategory>
 #include <QSerialPort>
@@ -18,6 +15,19 @@
 #include <QCheckBox>
 #include <QTimer>
 #include <QFile>
+
+#if SERIALBUS == 1
+
+#include <QModbusTcpClient>
+#include <QModbusRtuSerialMaster>
+
+#else
+
+#include <boost/bind/bind.hpp>
+#include <boost/chrono.hpp>
+using boost::asio::ip::tcp;
+
+#endif
 
 /// TODO: RW Values
 /// store in file
@@ -38,8 +48,11 @@ constexpr char sMeasurement[] = "Measurement";
 #define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = FUNC_OUT(fSettings.value(getSettingsName(#ITEM), QVariant(FUNC_IN(ITEM))).CONVERT());
 
 QString getSettingsName(const QString& aItemName);
-QString to_string(QModbusPdu::ExceptionCode code);
 int     to_parity(const QString& parity);
+
+#if SERIALBUS == 1
+QString to_string(QModbusPdu::ExceptionCode code);
+#endif
 
 enum Table
 {
@@ -53,12 +66,16 @@ enum ModbusConnection
 };
 
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+  #if SERIALBUS == 0
+  , m_socket(m_io_service)
+  #endif
+  , ui(new Ui::MainWindow)
     , mDocumentFile("/home/rolf/.config/huawei-sun2000-dongle-powersensor.yaml")
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":/48x48/go-home.png"));
 
     QStringList fSectionNames = { tr("Name"), tr("Address"), tr("Type"), tr("Decode"), tr("Scale"), tr("Value"), tr("Model")};
     mListModel = new QStandardItemModel(0, eLast, this);
@@ -115,7 +132,25 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     load_yaml(mDocumentFile);
+#if 1
+    startTimer(10);
+#else
+    connect( &m_thread, &QThread::started, this, &MainWindow::process);
+    m_thread.start();
+#endif
+
 }
+
+#if SERIALBUS == 0
+void MainWindow::timerEvent(QTimerEvent *)
+{
+    m_io_service.run_one();
+}
+void MainWindow::process()
+{
+    m_io_service.run();
+}
+#endif
 
 void MainWindow::set_no_gui()
 {
@@ -173,6 +208,8 @@ MainWindow::~MainWindow()
     }
     fSettings.endGroup();
 
+//    m_thread.quit();
+//    m_thread.wait();
     delete ui;
 }
 
@@ -243,6 +280,7 @@ void MainWindow::on_btnLoadYamlFile_clicked()
 
 void MainWindow::create_modbus_device()
 {
+#if SERIALBUS == 1
     if (modbusDevice)
     {
         modbusDevice->disconnectDevice();
@@ -274,14 +312,41 @@ void MainWindow::create_modbus_device()
     {
         connect(modbusDevice, &QModbusClient::stateChanged, this, &MainWindow::onStateChanged);
     }
+#else
+    QStringList host = ui->edtAddress->text().split(":");
+    if (host.size() > 1)
+    {
+        using namespace  boost::asio::ip;
+
+        tcp::endpoint end_point(address::from_string(host[0].toStdString()), std::atoi(host[1].toStdString().c_str()));
+        boost::system::error_code ec;
+        m_socket.connect(end_point, ec);
+        if (ec)
+        {
+            ui->btnConnect->setText(tr("Connect"));
+            ui->statusbar->showMessage(tr("Connection error %1").arg(ec.message().c_str()));
+        }
+        else
+        {
+            ui->btnConnect->setText(tr("Disconnect"));
+            ui->statusbar->showMessage(tr("Connected to %1").arg(ui->edtAddress->text()));
+        }
+    }
+
+#endif
 }
 
 void MainWindow::disconnect_modbus_device()
 {
+#if SERIALBUS == 1
     if (modbusDevice && modbusDevice->state() == QModbusDevice::ConnectedState)
     {
         modbusDevice->disconnectDevice();
     }
+#else
+    ui->btnConnect->setText(tr("Connect"));
+    m_socket.close();
+#endif
 }
 
 void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_name, int values,
@@ -308,11 +373,19 @@ void MainWindow::add_meter_widgets(const QString& name, const QString& pretty_na
     meter->setRange(minimum, maximum);
     meter->setValue(value);
     meter->setUnit(unit);
+    meter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    meter->setSizeIncrement(1, 0);
+//    "{ border: 1px solid black; text-align: top; padding: 1px; border-top-left-radius: 7px; border-bottom-left-radius: 7px; "
+//    "background: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fff, stop: 0.4999 #eee, stop: 0.5 #ddd, stop: 1 #eee ); width: 15px;}"
+//        "QProgressBar::chunk { background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #0000ff, stop: 1 #ff0000 ); border-top-left-radius: 7px;border-bottom-left-radius: 7px; border: 1px solid black;}");
 
-    ui->labelMeter->addWidget(meter);
+    ui->labelMeter->addWidget(meter, 1);
+    ui->labelMeter->setStretchFactor(meter, 1);
 
     label_name->setMinimumHeight(meter->height()-5);
+    label_name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     ui->labelNames->addWidget(label_name);
+    ui->labelNames->setStretchFactor(label_name, 0);
 
     auto checkbox = new QCheckBox(this);
     connect(checkbox, SIGNAL(clicked()), this, SLOT(btnCheckboxClicked()));
@@ -380,21 +453,22 @@ void MainWindow::on_btnAddMeter_clicked()
         ui->textValue->text().toDouble() ,ui->edtUnit->text());
 }
 
-
+#if SERIALBUS == 1
 void MainWindow::onStateChanged(int state)
 {
     ui->btnConnect->setText(state == QModbusDevice::UnconnectedState ? tr("Connect") : tr("Disconnect"));
 }
-
+#endif
 
 void MainWindow::on_btnConnect_clicked()
 {
+    QLoggingCategory::setFilterRules("pv-module");
+
+#if SERIALBUS == 1
     if (!modbusDevice)
     {
         create_modbus_device();
     }
-
-    QLoggingCategory::setFilterRules("pv-module");
 
     statusBar()->clearMessage();
     if (modbusDevice->state() != QModbusDevice::ConnectedState)
@@ -430,6 +504,17 @@ void MainWindow::on_btnConnect_clicked()
     {
         modbusDevice->disconnectDevice();
     }
+#else
+    if (m_socket.is_open())
+    {
+        disconnect_modbus_device();
+    }
+    else
+    {
+        create_modbus_device();
+    }
+
+#endif
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
@@ -439,6 +524,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
 void MainWindow::readValue(const QString& name, int values)
 {
+#if SERIALBUS == 1
     if (modbusDevice)
     {
         auto measurement = m_meter->m_rendered.m_measurements[name];
@@ -446,6 +532,7 @@ void MainWindow::readValue(const QString& name, int values)
         auto readRequest = QModbusDataUnit(get_type(measurement.m_register.m_type),
                                            get_address(measurement.m_register.m_address, measurement.m_register.m_address.contains(";") ? 0 : -1),
                                            get_entries(measurement.m_register.m_decode)*values);
+
         if (auto *reply = modbusDevice->sendReadRequest(readRequest, ui->edtServerAddress->value()))
         {
             if (!reply->isFinished())
@@ -464,8 +551,39 @@ void MainWindow::readValue(const QString& name, int values)
             statusBar()->showMessage(tr("Read error: ") + modbusDevice->errorString(), 5000);
         }
     }
+#else
+    if (m_socket.is_open())
+    {
+        auto measurement = m_meter->m_rendered.m_measurements[name];
+        statusBar()->clearMessage();
+        uint8_t slave = 1;
+        uint16_t register_address = get_address(measurement.m_register.m_address, measurement.m_register.m_address.contains(";") ? 0 : -1);
+        mothbus::tcp_master<boost::asio::ip::tcp::socket> client(m_socket);
+        int bytes = get_entries(measurement.m_register.m_decode)*2*values;
+        std::vector<mothbus::byte> singleRegister(bytes);
+        boost::system::error_code ec = client.read_registers(slave, register_address, singleRegister);
+        if (ec.failed())
+        {
+            ui->statusbar->showMessage(tr("read form modbus failed: %1").arg(ec.message().c_str()));
+        }
+        else
+        {
+            m_pending_request = name;
+            QVector<quint16> values;
+            values.resize(singleRegister.size()/2);
+            for (int i=0, j=0; i<values.size(); ++i, j+=2)
+            {
+                values[i] = (gsl::to_integer<uint16_t>(singleRegister[j]) << 8) + gsl::to_integer<uint16_t>(singleRegister[j+1]);
+            }
+            readReady(values);
+        }
+
+        singleRegister.clear();
+    }
+#endif
 }
 
+#if SERIALBUS == 1
 void MainWindow::readReady()
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
@@ -476,11 +594,19 @@ void MainWindow::readReady()
             const QModbusDataUnit unit = reply->result();
             QVector<quint16> values;
             values.resize(unit.valueCount());
-            auto measurement = m_meter->m_rendered.m_measurements[m_pending_request];
             for (uint i = 0; i < unit.valueCount(); i++)
             {
                 values[i] = unit.value(i);
             }
+#else
+void MainWindow::readReady(QVector<quint16>& values)
+{
+    if (1)
+    {
+        if (1)
+        {
+#endif
+            auto measurement = m_meter->m_rendered.m_measurements[m_pending_request];
             QString string_value;
             if (measurement.m_register.m_decode.contains("char"))
             {
@@ -632,6 +758,7 @@ void MainWindow::readReady()
 
             QTimer::singleShot(200, [&] () { read_meter_value(); });
         }
+#if SERIALBUS == 1
         else if (reply->error() == QModbusDevice::ProtocolError)
         {
             statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2: %3)").
@@ -648,8 +775,10 @@ void MainWindow::readReady()
 
             QTimer::singleShot(1000, [&] () { read_meter_value(); });
         }
-
         reply->deleteLater();
+#else
+
+#endif
     }
 }
 
@@ -794,6 +923,7 @@ void MainWindow::btnCheckboxClicked()
 }
 
 
+#if SERIALBUS == 1
 #define CASE_RETURN(X) case X: return #X;
 QString to_string(QModbusPdu::ExceptionCode code)
 {
@@ -813,7 +943,9 @@ QString to_string(QModbusPdu::ExceptionCode code)
     }
     return "Invalid code";
 }
+#else
 
+#endif
 QString getSettingsName(const QString& aItemName)
 {
     QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
@@ -840,4 +972,30 @@ int to_parity(const QString& parity)
     return QSerialPort::UnknownParity;
 }
 
+
+
+void MainWindow::on_btnTest_clicked()
+{
+//    using boost::asio::ip::tcp;
+//    std::string host = "192.168.2.113"; //ui->edtAddress->text().toStdString();
+//    boost::asio::io_service io_service;
+//    tcp::resolver resolver(io_service);
+//    tcp::socket socket(io_service);
+//    boost::asio::connect(socket, resolver.resolve(tcp::resolver::query{host, "502"}));
+
+//    // mothbus reads from server
+
+//    uint8_t slave = 1;
+//    uint16_t register_address = 37022;
+//    mothbus::tcp_master<tcp::socket> client(socket);
+//    std::array<mothbus::byte, 2> singleRegister;
+//    client.read_registers(slave, register_address, singleRegister);
+
+//    // output value
+//    uint16_t value = (gsl::to_integer<uint16_t>(singleRegister[0]) << 8) + gsl::to_integer<uint16_t>(singleRegister[1]);
+//    sleep(1);
+
+//    ui->statusbar->showMessage(tr("read valus: %1").arg(value));
+
+}
 

@@ -6,11 +6,18 @@
 #include <memory>
 #include <QModbusDataUnit>
 #include <QFile>
+#include <QThread>
 
+#if SERIALBUS == 1
 class QModelIndex;
-class QStandardItemModel;
 class QModbusClient;
 class QModbusReply;
+#else
+#include <boost/asio.hpp>
+#include <mothbus/adu/tcp.h>
+#endif
+
+class QStandardItemModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,12 +35,19 @@ public:
     ~MainWindow();
     void set_no_gui();
     bool display_gui();
+#if SERIALBUS == 0
+    void timerEvent(QTimerEvent *event);
+#endif
 
 private slots:
     void on_btnLoadYamlFile_clicked();
-    void readReady();
     void on_btnConnect_clicked();
+#if SERIALBUS == 1
+    void readReady();
     void onStateChanged(int state);
+#else
+    void readReady(QVector<quint16> &values);
+#endif
     void on_tableView_clicked(const QModelIndex &index);
     void on_btnAddMeter_clicked();
     void on_btnStartRead_clicked();
@@ -46,18 +60,31 @@ private slots:
     void on_btnRemove_clicked();
     void btnCheckboxClicked();
     void on_btnReadConfig_clicked();
+    void on_btnTest_clicked();
 
 private:
     QString getConfigName() const;
     bool load_yaml(const QString &filename);
-    void create_modbus_device();
+
     void readValue(const QString& name, int values=1);
-    void disconnect_modbus_device();
     void add_meter_widgets(const QString &name, const QString &pretty_name, int values,
                            double scale, double minimum, double maximum, double value,
                            const QString &unit);
     void read_meter_value();
     void updateButtons();
+
+    void create_modbus_device();
+    void disconnect_modbus_device();
+
+#if SERIALBUS == 1
+    QModbusReply  *lastRequest   = nullptr;
+    QModbusClient *modbusDevice = nullptr;
+#else
+    void process();
+    QThread                 m_thread;
+    boost::asio::io_service m_io_service;
+    boost::asio::ip::tcp::socket  m_socket;
+#endif
 
     enum class read { off, table, meter, control };
 
@@ -65,8 +92,6 @@ private:
     QStandardItemModel*  mListModel = nullptr;
     QList<int>           m_hidden_columns;
 
-    QModbusReply  *lastRequest   = nullptr;
-    QModbusClient *modbusDevice = nullptr;
     QString        m_pending_request;
     read           m_read_permanent = read::off;
     int            m_read_index = 0;

@@ -1,4 +1,8 @@
-QT += core gui serialbus serialport
+QT += core gui serialport
+
+DEFINES += SERIALBUS=1
+QT += serialbus
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -27,6 +31,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+INCLUDEPATH += /home/rolf/testproject/mothbus/include
+
 unix:!macx:!symbian: LIBS += -lyaml-cpp
 #-L/home/rolf/testproject/yaml-cpp-yaml-cpp-0.6.0
 
@@ -34,3 +40,6 @@ unix:!macx:!symbian: LIBS += -lyaml-cpp
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource/resource.qrc

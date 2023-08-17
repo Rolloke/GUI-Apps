@@ -27,7 +27,7 @@ void MainWindow::call_git_history_diff_command()
     const uint    command_flags       = variant_list[ActionList::Data::Flags].toUInt();
 
     int result = callMessageBox(variant_list[ActionList::Data::MsgBoxText].toString(), tr("history"), history_file);
-    if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+    if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
     {
         QString path;
         if (type.is(Type::Branch) && mContextMenuSourceTreeItem)

@@ -48,7 +48,7 @@ void MainWindow::call_git_stash_command()
 
     QString result_str;
     int result = callMessageBox(message_box_text, "stash", stash);
-    if (result == QMessageBox::Yes || result == QMessageBox::YesToAll)
+    if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
     {
         result = call_git_command(git_command, argument1, argument2, result_str, git_root_path);
     }

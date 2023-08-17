@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/48x48">
+        <file>go-home.png</file>
+        <file>weather-clear.png</file>
+        <file>weather-few-clouds.png</file>
+        <file>weather-showers.png</file>
+        <file>weather-showers-scattered.png</file>
+    </qresource>
+</RCC>
