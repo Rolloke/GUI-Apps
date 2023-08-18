@@ -220,7 +220,7 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
         initListMergeTool();
         break;
     default:
-        if (isBetween(fIndex, VariousListIndex::FirstCmds, getVariousListSize() - 1))
+        if (isBetween(static_cast<std::uint32_t>(fIndex), VariousListIndex::FirstCmds, getVariousListSize() - 1))
         {
             ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
             initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
@@ -260,7 +260,7 @@ std::uint32_t CustomGitActions::get_toolbar_index(std::uint32_t index) const
 
 std::uint32_t CustomGitActions::getVariousListSize() const
 {
-    return VariousListIndex::Toolbar1 + Cmd::mToolbars.size();
+    return static_cast<std::uint32_t>(VariousListIndex::Toolbar1 + Cmd::mToolbars.size());
 }
 
 QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)

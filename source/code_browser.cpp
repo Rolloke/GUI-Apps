@@ -90,6 +90,8 @@ void code_browser::change_visibility(bool visible)
             Q_EMIT show_web_view(false);
         }
     }
+#else
+    UNUSED(visible);
 #endif
 }
 

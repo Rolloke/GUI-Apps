@@ -1986,6 +1986,10 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
             size = array.size();
             if (size)
             {
+                if (array[size-1] == '\n')
+                {
+                    array[size-1] = 0;
+                }
                 appendTextToBrowser(array, true);
                 ui->textBrowser->moveCursor(QTextCursor::End);
             }
