@@ -9,6 +9,7 @@
 #include <QNetworkAccessManager>
 #include <QStandardItemModel>
 #include <QLabel>
+#include <QMap>
 
 
 class QModelIndex;
@@ -76,6 +77,7 @@ private slots:
     void show_media_player_error(QMediaPlayer::Error error);
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
     void onDownloadFiniseh();
+    void metaDataChanged(const QString&key, const QVariant&value);
 
 private:
 
@@ -99,6 +101,7 @@ private:
     QString             mOpenFileCmdLine;
     QString             mUploadFavoriteCommand;
     QString             mDownloadFavoriteCommand;
+    QMap<QString, QVariant> mCurrentMetainfo;
     int                 mFindStartRow;
     bool                mShowIcon;
     int                 mChecked;

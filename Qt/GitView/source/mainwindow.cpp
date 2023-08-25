@@ -51,7 +51,7 @@ constexpr char sGroupFilter[] = "Filter";
 constexpr char sGroupView[] = "View";
 constexpr char sGroupPaths[] = "Paths";
 constexpr char sSourcePath[] = "Source";
-constexpr char sUncheckedPath[] = "Unchecked";
+//constexpr char sUncheckedPath[] = "Unchecked";
 constexpr char sGroupLogging[] = "Logging";
 constexpr char sGroupGitCommands[] = "GitCommands";
 constexpr char sGroupFind[] = "Find";
@@ -67,7 +67,7 @@ constexpr char sFlagsDisabled[] = "FlagsDisabled";
 constexpr char sIconPath[] = "IconPath";
 constexpr char sMenuStringList[] = "MenuStringList";
 constexpr char sShortcut[] = "Shortcut";
-constexpr char sModified[] = "Modified";
+//constexpr char sModified[] = "Modified";
 constexpr char Cmd__mToolbars[] = "Cmd__mToolbars_%1";
 constexpr char Cmd__mToolbarName[] = "Cmd__mToolbarName_%1";
 } // namespace config
