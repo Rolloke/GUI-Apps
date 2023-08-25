@@ -375,6 +375,8 @@ void MainWindow::on_pushButtonStart_clicked()
                 mVideo.show();
             }
             mPlayer.play();
+            connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
+
             display_play_status();
             m_play_name->setText(get_item_name(mCurrentPlayIndex));
         }
@@ -649,19 +651,50 @@ void MainWindow::menu_help_info()
 {
     if (mCurrentRowIndex != -1)
     {
-        QMessageBox::about(this, windowTitle(),
-        tr("Information about selected item\n"
+        QString info = tr("Information about selected item\n"
            "\n"
-           "Name:\t%1\n"
-           "Web:\t%2\n"
-           "Pretty name:\t%3\n"
-           "Media URL:\t%4\n"
-           "Thumb:\t%5\n").arg(
+           "- Name:\t%1\n"
+           "- Web:\t%2\n"
+           "- Pretty name:\t%3\n"
+           "- Media URL:\t%4\n"
+           "- Thumb:\t%5\n").arg(
            mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
-           mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString()));
+           mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
+
+        info += tr("\nMeta Info:\n");
+        for (auto metainfo = mCurrentMetainfo.begin(); metainfo != mCurrentMetainfo.end(); ++metainfo)
+        {
+            const auto& value = metainfo.value();
+            info += "- ";
+            info += metainfo.key();
+            info += ": ";
+            switch(value.type())
+            {
+            case QVariant::String:
+                info += value.toString();
+                break;
+            case QVariant::StringList:
+                for (auto& string : value.toStringList())
+                {
+                    info += string;
+                    info += ", ";
+                }
+                break;
+            case QVariant::Int:
+                info += QString::number(value.toInt());
+                break;
+            case QVariant::UInt:
+                info += QString::number(value.toUInt());
+                break;
+            default:
+                break;
+            }
+            info += "\n";
+        }
+        QMessageBox::about(this, windowTitle(), info);
     }
 }
 
@@ -905,6 +938,21 @@ void MainWindow::menu_option_edit_download_command()
     }
 }
 
+void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
+{
+    if (value.isValid())
+    {
+        QString message = key;
+        message += ": ";
+        if (value.type() == QVariant::String && key.contains("title", Qt::CaseInsensitive))
+        {
+            message += value.toString();
+            ui->statusBar->showMessage(message);
+        }
+    }
+    mCurrentMetainfo[key] = value;
+
+}
 
 QString getSettingsName(const QString& aItemName)
 {
@@ -969,6 +1017,5 @@ int execute(const QString& command, QString& aResultText)
 
     return fResult;
 }
-
 
 
