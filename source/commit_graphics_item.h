@@ -31,7 +31,7 @@ public:
     static void create_connections(int index, const QList<QGraphicsItem *> &items);
 
     QRectF boundingRect() const override;
-    void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void   paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     std::function<bool (int)> m_show_entry;
 
