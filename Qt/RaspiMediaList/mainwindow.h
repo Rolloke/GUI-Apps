@@ -65,7 +65,7 @@ private slots:
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
     void on_checkBoxSelectAll_clicked(bool checked);
-    void on_tableView_clicked(const QModelIndex &index);
+    void on_tableView_clicked(const QModelIndex &index, bool called_by_function=false);
     void onReplyFinished();
     void on_sliderVolume_valueChanged(int value);
     void on_pushButtonStart_clicked();
