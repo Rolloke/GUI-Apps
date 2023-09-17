@@ -325,9 +325,9 @@ QString MainWindow::get_item_name(int row) const
     return (row != -1) ? mListModel->data(mListModel->index(row, eName)).toString() : "";
 }
 
-void MainWindow::on_tableView_clicked(const QModelIndex &index)
+void MainWindow::on_tableView_clicked(const QModelIndex &index, bool called_by_function)
 {
-    if (index.column() == mChecked)
+    if (index.column() == mChecked && !called_by_function)
     {
         mListModel->setData(index, !mListModel->data(index, Qt::CheckStateRole).toBool(), Qt::CheckStateRole);
     }
@@ -488,7 +488,7 @@ void MainWindow::table_selectionChanged(const QItemSelection & selected, const Q
     const auto & indexes = selected.indexes();
     if (indexes.size())
     {
-        on_tableView_clicked(indexes[0]);
+        on_tableView_clicked(indexes[0], true);
     }
 }
 
@@ -499,7 +499,7 @@ void MainWindow::select_index(int select)
         ui->tableView->selectRow(select);
         const auto index = mListModel->index(select, eName);
         ui->tableView->scrollTo(index);
-        on_tableView_clicked(index);
+        on_tableView_clicked(index, true);
     }
 }
 
