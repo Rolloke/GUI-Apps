@@ -904,6 +904,10 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
     {
         fFlags &= ~Qt::ItemIsEditable;
     }
+    else if (fCmd == Cmd::Submenu && aIndex.column() != ActionsTable::Name)
+    {
+        fFlags &= ~Qt::ItemIsEditable;
+    }
     else
     {
         switch (static_cast<ActionsTable::e>(aIndex.column()))
