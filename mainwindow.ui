@@ -326,6 +326,7 @@
     <addaction name="actionMedia_player"/>
     <addaction name="actionOpenMediaPlayerOnDoubleclick"/>
     <addaction name="actionLoadLastOpenedFileAtStart"/>
+    <addaction name="actionShowTrayIconAndInfo"/>
     <addaction name="actionEdit_Upload_Command"/>
     <addaction name="actionEdit_Download_Command"/>
    </widget>
@@ -480,6 +481,23 @@
    </property>
    <property name="statusTip">
     <string>Download favorites from Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionShowTrayIconAndInfo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Tray Icon and Info</string>
+   </property>
+   <property name="toolTip">
+    <string>Show tray icon and information about title in tray tooltip</string>
+   </property>
+   <property name="statusTip">
+    <string>Show tray icon and information about title in tray tooltip</string>
    </property>
   </action>
  </widget>
