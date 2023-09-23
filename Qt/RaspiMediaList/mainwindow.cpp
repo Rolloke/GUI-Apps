@@ -18,6 +18,7 @@
 #include <QClipboard>
 #include <QItemSelection>
 #include <QKeyEvent>
+#include <QSystemTrayIcon>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -195,6 +196,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_play_name->setToolTip("Channel name");
     ui->statusBar->addPermanentWidget(m_play_name);
 
+
     connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
     connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
@@ -209,6 +211,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionMedia_player, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
     connect(ui->actionEdit_Upload_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_upload_command()));
     connect(ui->actionEdit_Download_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_command()));
+    connect(ui->actionShowTrayIconAndInfo, SIGNAL(toggled(bool)), SLOT(menu_option_show_tray_icon(bool)));
 
     connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
@@ -231,11 +234,14 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
     LOAD_STR(fSettings, mCurrentPlayIndex, toInt);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->actionShowTrayIconAndInfo, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, mOpenFileAtStart, toString);
     LOAD_STR(fSettings, mChecked, toInt);
     mListModel->setCheckedColumn(mChecked);
 
     fSettings.endGroup();
+
+    menu_option_show_tray_icon(ui->actionShowTrayIconAndInfo->isChecked());
 
     ui->sliderVolume->setEnabled(!ui->actionOpenMediaPlayerOnDoubleclick->isChecked());
 
@@ -282,6 +288,7 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mMediaPlayerCommand);
     STORE_STR(fSettings, mCurrentPlayIndex);
     STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
+    STORE_PTR(fSettings, ui->actionShowTrayIconAndInfo, isChecked);
     STORE_STR(fSettings, mChecked);
     if (!ui->actionLoadLastOpenedFileAtStart->isChecked())
     {
@@ -938,6 +945,19 @@ void MainWindow::menu_option_edit_download_command()
     }
 }
 
+void MainWindow::menu_option_show_tray_icon(bool show)
+{
+    if (!m_tray_message && show)
+    {
+        m_tray_message = new QSystemTrayIcon(QIcon(":/36x36/applications-multimedia.png"), this);
+    }
+    if (m_tray_message)
+    {
+        m_tray_message->setVisible(show);
+    }
+}
+
+
 void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 {
     if (value.isValid())
@@ -948,6 +968,10 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
         {
             message += value.toString();
             ui->statusBar->showMessage(message);
+            if (m_tray_message && m_tray_message->isVisible())
+            {
+                m_tray_message->showMessage(key, value.toString());
+            }
         }
     }
     mCurrentMetainfo[key] = value;

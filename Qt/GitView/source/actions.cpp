@@ -569,11 +569,16 @@ QString find_icon(const QString& path, const QString& file)
                 return found;
             }
         }
-        else if (file == name)
+        else if (   file_info.isFile())
         {
-            return file_info.filePath();
+            auto base_name = file_info.baseName();
+            auto suffix = file_info.suffix();
+            if (    file.contains(base_name, Qt::CaseInsensitive)
+                 && (suffix.contains("svg",  Qt::CaseInsensitive) || suffix.contains("png",  Qt::CaseInsensitive)))
+            {
+                return file_info.filePath();
+            }
         }
-
     } while (iterator.hasNext());
     return {};
 }

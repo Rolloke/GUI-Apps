@@ -15,6 +15,7 @@
 class QModelIndex;
 class QWebEngineView;
 class QItemSelection;
+class QSystemTrayIcon;
 
 class CheckboxItemModel : public QStandardItemModel
 {
@@ -61,6 +62,7 @@ private slots:
     void menu_option_media_player_command();
     void menu_option_edit_upload_command();
     void menu_option_edit_download_command();
+    void menu_option_show_tray_icon(bool show);
     void menu_help_about();
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
@@ -86,12 +88,13 @@ private:
     QVideoWidget        mVideo;
     QMediaPlayer        mPlayer;
     CheckboxItemModel*  mListModel;
-    QLabel*             m_play_status;
-    QLabel*             m_play_name;
+    QLabel*             m_play_status {nullptr};
+    QLabel*             m_play_name {nullptr};
+    QSystemTrayIcon*    m_tray_message {nullptr};
     QNetworkAccessManager mNetManager;
     QSharedPointer<QWebEngineView> mWebEngineView;
-    int                 mCurrentRowIndex;
-    int                 mCurrentPlayIndex;
+    int                 mCurrentRowIndex {0};
+    int                 mCurrentPlayIndex {0};
     QList<int>          mHiddenColumns;
     QString             mFileOpenPath;
     QString             mFavoritesOpenPath;
@@ -102,9 +105,9 @@ private:
     QString             mUploadFavoriteCommand;
     QString             mDownloadFavoriteCommand;
     QMap<QString, QVariant> mCurrentMetainfo;
-    int                 mFindStartRow;
-    bool                mShowIcon;
-    int                 mChecked;
+    int                 mFindStartRow {0};
+    bool                mShowIcon {false};
+    int                 mChecked {0};
 };
 
 #endif // MAINWINDOW_H
