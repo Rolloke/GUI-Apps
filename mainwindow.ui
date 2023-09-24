@@ -434,10 +434,10 @@
     <string>Open media player</string>
    </property>
    <property name="toolTip">
-    <string>Open media player with start</string>
+    <string>Open median player with start button or doubleclick</string>
    </property>
    <property name="statusTip">
-    <string>Open median player with start btton or doubleclick</string>
+    <string>Open median player with start button or doubleclick</string>
    </property>
   </action>
   <action name="actionLoadLastOpenedFileAtStart">
@@ -455,16 +455,22 @@
    <property name="text">
     <string>Edit Upload Command...</string>
    </property>
+   <property name="toolTip">
+    <string>Edit the command to upload favorites to Raspi Kodi</string>
+   </property>
    <property name="statusTip">
-    <string>Edit the command to upload faorites to Raspi Kodi</string>
+    <string>Edit the command to upload favorites to Raspi Kodi</string>
    </property>
   </action>
   <action name="actionEdit_Download_Command">
    <property name="text">
     <string>Edit Download Command...</string>
    </property>
+   <property name="toolTip">
+    <string>Edit the command to download favorites to Raspi Kodi</string>
+   </property>
    <property name="statusTip">
-    <string>Edit the command to upload faorites from Raspi Kodi</string>
+    <string>Edit the command to download favorites to Raspi Kodi</string>
    </property>
   </action>
   <action name="actionUpload_favorites">

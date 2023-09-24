@@ -25,6 +25,13 @@
 #include <QWebEnginePage>
 #endif
 
+#ifdef _WIN32
+#include <windows.h>
+#include <processthreadsapi.h>
+#include <stdlib.h>
+#endif
+
+
 #include <fstream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
@@ -262,12 +269,12 @@ MainWindow::MainWindow(QWidget *parent) :
     display_play_status();
     m_play_name->setText(get_item_name(mCurrentPlayIndex));
 
-
-//    const QUrl url("https://github.com/jnk22/kodinerds-iptv/blob/master/iptv/kodi/kodi.m3u");
-//    QNetworkRequest request(url);
-//    QNetworkReply* reply = mNetManager.get(request);
-//    connect(reply, SIGNAL(finished()), this, SLOT(onDownloadFiniseh()));
-
+#ifdef TEST_DOWNLOAD_KODI_FILE
+    const QUrl url("https://github.com/jnk22/kodinerds-iptv/blob/master/iptv/kodi/kodi.m3u");
+    QNetworkRequest request(url);
+    QNetworkReply* reply = mNetManager.get(request);
+    connect(reply, SIGNAL(finished()), this, SLOT(onDownloadFiniseh()));
+#endif
 }
 
 
@@ -725,14 +732,25 @@ void MainWindow::menu_edit_copy_thumb()
 
 void MainWindow::menu_edit_open_media_player()
 {
-    if (mCurrentRowIndex != -1 && mMediaPlayerCommand.size())
+    if (mCurrentRowIndex != -1)
     {
-        QString command = tr(mMediaPlayerCommand.toStdString().c_str()).arg(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString());
-        int result = system(command.toStdString().c_str());
-        if (result != 0)
+        if (mMediaPlayerCommand.size())
         {
-            ui->statusBar->showMessage(QString(strerror(errno)));
+            QString command = tr(mMediaPlayerCommand.toStdString().c_str()).arg(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString());
+            int result = system(command.toStdString().c_str());
+            if (result != 0)
+            {
+                ui->statusBar->showMessage(QString(strerror(errno)));
+            }
         }
+        else
+        {
+            ui->statusBar->showMessage(tr("No media Player command defined, define under \"Options/Media Player...\""));
+        }
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Select a list entry first"));
     }
 }
 
@@ -745,10 +763,10 @@ void MainWindow::menu_option_media_player_command()
     }
 }
 
+#ifdef TEST_DOWNLOAD_KODI_FILE
 void  MainWindow::onDownloadFiniseh()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-
     if (reply)
     {
         if (reply->error() == QNetworkReply::NoError)
@@ -766,6 +784,7 @@ void  MainWindow::onDownloadFiniseh()
         }
     }
 }
+#endif
 
 void MainWindow::onReplyFinished()
 {
@@ -957,7 +976,6 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     }
 }
 
-
 void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 {
     if (value.isValid())
@@ -1013,16 +1031,57 @@ void CheckboxItemModel::setCheckedColumn(int checked)
     mChecked = checked;
 }
 
+#ifdef _WIN32
+int win_system(const char *command, bool hide)
+{
+    // Windows has a system() function which works, but it opens a command prompt window.
+    unsigned long       ret_val {0};
+    PROCESS_INFORMATION process_info = {0};
+    STARTUPINFOA        startup_info = {0};
+
+    std::string tmp_command = "/c ";
+    tmp_command += command;
+
+    startup_info.cb = sizeof(STARTUPINFOA);
+    size_t cmd_exe_path_size = 0;
+    char* cmd_exe_path_ptr =nullptr;
+    _dupenv_s(&cmd_exe_path_ptr, &cmd_exe_path_size, "COMSPEC");
+    _flushall();  // required for Windows system() calls, probably a good idea here too
+
+    if (CreateProcessA(cmd_exe_path_ptr, (LPSTR)tmp_command.c_str(), NULL, NULL, 0, hide ? CREATE_NO_WINDOW:0, NULL, NULL, &startup_info, &process_info))
+    {
+        WaitForSingleObject(process_info.hProcess, INFINITE);
+        GetExitCodeProcess(process_info.hProcess, &ret_val);
+        CloseHandle(process_info.hProcess);
+        CloseHandle(process_info.hThread);
+    }
+    else
+    {
+        ret_val = GetLastError();
+    }
+
+    free(cmd_exe_path_ptr);
+    return(ret_val);
+}
+#endif
+
 int execute(const QString& command, QString& aResultText)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    static QRandomGenerator rg(123);
+    QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(rg.generate()) + "_result.tmp";
+#else
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(qrand()) + "_result.tmp";
+#endif
     QString fTempResultFileNameAndPath = fTemp.path();
     QString system_cmd = command + " > " + fTempResultFileNameAndPath;
 #ifdef __linux__
     system_cmd += " 2>&1 ";
-#endif
-
     auto fResult = system(system_cmd.toStdString().c_str());
+#endif
+#ifdef _WIN32
+    auto fResult = win_system(system_cmd.toStdString().c_str(), true);
+#endif
 
     std::ostringstream fStringStream;
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
@@ -1039,7 +1098,6 @@ int execute(const QString& command, QString& aResultText)
     }
     aResultText = fStreamString.c_str();
 
+    fTemp.remove(fTemp.path());
     return fResult;
 }
-
-

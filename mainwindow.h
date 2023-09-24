@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QMap>
 
+// #define TEST_DOWNLOAD_KODI_FILE
 
 class QModelIndex;
 class QWebEngineView;
@@ -78,9 +79,10 @@ private slots:
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error);
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
-    void onDownloadFiniseh();
     void metaDataChanged(const QString&key, const QVariant&value);
-
+#ifdef TEST_DOWNLOAD_KODI_FILE
+    void onDownloadFiniseh();
+#endif
 private:
 
     Ui::MainWindow *    ui;
