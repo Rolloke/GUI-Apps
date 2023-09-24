@@ -25,12 +25,10 @@
 
 #include <map>
 
-#ifndef __linux__
-#define USE_ShellExecute 1
+#ifdef _WIN32
 #include <windows.h>
 #include <processthreadsapi.h>
 #include <stdlib.h>
-//#include <shellapi.h>
 #endif
 
 
@@ -267,7 +265,7 @@ QTreeWidgetItem* insert_as_tree(QTreeWidgetItem* parent_item, int column, const 
     return new_child_item;
 }
 
-#ifdef USE_ShellExecute
+#ifdef _WIN32
 int win_system(const char *command, bool hide)
 {
     // Windows has a system() function which works, but it opens a command prompt window.
@@ -326,7 +324,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
         emit_file_path(fTempResultFileNameAndPath);
     }
 
-#ifdef USE_ShellExecute
+#ifdef _WIN32
     auto fResult = win_system(system_cmd.toStdString().c_str(), hide);
 #else
     auto fResult = system(system_cmd.toStdString().c_str());
