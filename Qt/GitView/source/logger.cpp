@@ -3,9 +3,8 @@
  #include <syslog.h>
 #endif
 
-#ifdef WIN32
-
-//#define USE_WINDOWS_LOG
+#ifdef _WIN32
+//#define USE_WINDOWS_LOG 1
 #define USE_OUTPUT_DEBUG_STRING 1
 #include <windows.h>
 
