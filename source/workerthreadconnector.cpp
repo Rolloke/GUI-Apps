@@ -17,7 +17,7 @@ void Worker::operate(int aWorkID, QVariant data)
 }
 
 WorkerThreadConnector::WorkerThreadConnector(QObject*aParent):
-    QObject(aParent), mOnceBusy(false)
+    QObject(aParent), mOnceBusy(false), mAppendToBatch(false)
 {
     Worker*fWorker = new Worker;
     fWorker->moveToThread(&mWorkerThread);
@@ -36,7 +36,6 @@ WorkerThreadConnector::~WorkerThreadConnector()
     mWorkerThread.wait();
 }
 
-
 void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc)
 {
     if (mWorker)
@@ -47,6 +46,13 @@ void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (i
 
 void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
 {
+    if (isBusy() && appendToBatch())
+    {
+        mBatch.append(QPair<int, QVariant>(aWorkID, data));
+        return;
+    }
+
+    mCurrentCmdName = data.toString();
     Q_EMIT operate(aWorkID, data);
 }
 
@@ -54,6 +60,25 @@ void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
 void WorkerThreadConnector::setOnceBusy()
 {
     mOnceBusy = true;
+}
+
+void WorkerThreadConnector::setAppendToBatch(bool append)
+{
+    mAppendToBatch = append;
+    if (!appendToBatch())
+    {
+        mBatch.clear();
+    }
+}
+
+const QString & WorkerThreadConnector::getCurrentCmdName()
+{
+    return mCurrentCmdName;
+}
+
+bool WorkerThreadConnector::appendToBatch()
+{
+    return mAppendToBatch;
 }
 
 bool WorkerThreadConnector::isBusy()
@@ -80,8 +105,16 @@ void WorkerThreadConnector::setMessageFunction(const boost::function< void (int,
 
 void WorkerThreadConnector::receiveMessage(int aMsg, QVariant aData)
 {
+    mCurrentCmdName.clear();
     if (mMessageFunction)
     {
         mMessageFunction(aMsg, aData);
+    }
+    if (appendToBatch() && mBatch.size())
+    {
+        auto& element = mBatch.front();
+        mCurrentCmdName = element.second.toString();
+        Q_EMIT operate(element.first, element.second);
+        mBatch.pop_front();
     }
 }

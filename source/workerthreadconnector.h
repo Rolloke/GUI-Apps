@@ -40,6 +40,8 @@ public:
     void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
     bool isBusy();
     void setOnceBusy();
+    void setAppendToBatch(bool append);
+    const QString& getCurrentCmdName();
 
 public Q_SLOTS:
     void doWork(int, const QVariant&);
@@ -49,10 +51,14 @@ Q_SIGNALS:
     void operate(int, QVariant);
 
 private:
+    bool    appendToBatch();
     bool    mOnceBusy;
     Worker* mWorker;
     QThread mWorkerThread;
+    QString mCurrentCmdName;
     boost::function< void (int, const QVariant&) > mMessageFunction;
+    bool    mAppendToBatch;
+    QList<QPair<int,QVariant>> mBatch;
 };
 
 #endif // WORKERTHREADCONNECTOR_H
