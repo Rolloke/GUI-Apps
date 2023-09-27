@@ -403,6 +403,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowHistoryGraphically);
         on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
+        LOAD_PTR(fSettings, ui->ckAppendToBatch, setChecked, isChecked, toBool);
+        on_ckAppendToBatch_clicked(ui->ckAppendToBatch->isChecked());
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
@@ -614,6 +616,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->ckShowHistoryGraphically, isChecked);
+        STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
@@ -1343,22 +1346,34 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
 void MainWindow::killBackgroundThread()
 {
     QString pids;
-    execute("pidof git", pids, true);
-    const QStringList pidlist = pids.split(" ");
-    if (pidlist.size())
+    QStringList commands = mWorker.getCurrentCmdName().split(" ");
+    if (commands.size())
     {
-        int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
-        if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
+        execute(tr("pidof %1").arg(commands[0]), pids, true);
+        const QStringList pidlist = pids.split(" ");
+        if (pidlist.size())
         {
-            for (const QString &pid : pidlist)
+            int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
+            if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
-                string cmd = "kill " + pid.toStdString();
-                QString cmd_result;
-                execute(cmd.c_str(), cmd_result, true);
-                cmd += '\n';
-                appendTextToBrowser(cmd.c_str() + cmd_result);
+                for (const QString &pid : pidlist)
+                {
+                    string cmd = "kill " + pid.toStdString();
+                    QString cmd_result;
+                    execute(cmd.c_str(), cmd_result, true);
+                    cmd += '\n';
+                    appendTextToBrowser(cmd.c_str() + cmd_result);
+                }
             }
         }
+        else
+        {
+            appendTextToBrowser(tr("no pids found for %1").arg(commands[0]));
+        }
+    }
+    else
+    {
+        appendTextToBrowser(tr("no command found: %1").arg(mWorker.getCurrentCmdName()));
     }
 }
 
@@ -1789,6 +1804,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckExperimental);
     create_auto_cmd(ui->ckFastFileSearch);
     create_auto_cmd(ui->ckTypeConverter, mActions.check_location("format-text-direction-rtl.png"));
+    create_auto_cmd(ui->ckAppendToBatch);
 
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
@@ -2835,5 +2851,10 @@ void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
         bool only_viewer = additional_editor() != AdditionalEditor::None;
         dock->setWindowTitle(only_viewer ? tr("Text Viewer") : tr("Text Viewer / Editor"));
     }
+}
+
+void MainWindow::on_ckAppendToBatch_clicked(bool checked)
+{
+    mWorker.setAppendToBatch(checked);
 }
 

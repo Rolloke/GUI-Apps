@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>600</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1120,6 +1120,16 @@ Git or command results are always displayed in main editor.
           </property>
           <property name="text">
            <string>Experimental</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckAppendToBatch">
+          <property name="statusTip">
+           <string>Append background command to batch list, if busy</string>
+          </property>
+          <property name="text">
+           <string>Append to Batch</string>
           </property>
          </widget>
         </item>

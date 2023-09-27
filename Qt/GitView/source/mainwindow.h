@@ -309,6 +309,8 @@ private Q_SLOTS:
     void check_reload(code_browser*);
     void set_show_line_numbers(bool);
 
+    void on_ckAppendToBatch_clicked(bool checked);
+
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
