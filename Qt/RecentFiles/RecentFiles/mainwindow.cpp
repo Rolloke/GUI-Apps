@@ -47,6 +47,18 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->comboBoxSearchColumn->setCurrentIndex(ePath);
     ui->tableView->setModel(mListModel);
+    for (int fSection = 0; fSection < eLast; ++fSection)
+    {
+        QHeaderView::ResizeMode resize;
+        switch (fSection)
+        {
+        case eFile: resize = QHeaderView::Stretch;          break;
+        case ePath: resize = QHeaderView::Fixed;      break;
+        default:    resize = QHeaderView::ResizeToContents; break;
+        }
+        ui->tableView->horizontalHeader()->setSectionResizeMode(resize);
+    }
+    ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
     if (fResult)
     {
