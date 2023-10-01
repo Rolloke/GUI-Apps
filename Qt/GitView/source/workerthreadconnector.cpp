@@ -5,14 +5,14 @@ Worker::Worker(): mIsBusy(false)
 {
 }
 
-void Worker::operate(int aWorkID, QVariant data)
+void Worker::operate(QVariant data)
 {
     if (mWorkerFunction)
     {
         mIsBusy = true;
         QThread::msleep(1);
-        QVariant result = mWorkerFunction(aWorkID, data);
-        Q_EMIT sendMessage(aWorkID, result);
+        QVariant result = mWorkerFunction(data);
+        Q_EMIT sendMessage(result);
         mIsBusy = false;
     }
 }
@@ -23,8 +23,8 @@ WorkerThreadConnector::WorkerThreadConnector(QObject*aParent):
     Worker*fWorker = new Worker;
     fWorker->moveToThread(&mWorkerThread);
     connect(&mWorkerThread, SIGNAL(finished()), fWorker, SLOT(deleteLater()));
-    connect(this, SIGNAL(operate(int, QVariant)), fWorker, SLOT(operate(int, QVariant)));
-    connect(fWorker, SIGNAL(sendMessage(int, QVariant)), this, SLOT(receiveMessage(int, QVariant)));
+    connect(this, SIGNAL(operate(QVariant)), fWorker, SLOT(operate(QVariant)));
+    connect(fWorker, SIGNAL(sendMessage(QVariant)), this, SLOT(receiveMessage(QVariant)));
 
     mWorker = fWorker;
     mWorkerThread.start();
@@ -37,7 +37,7 @@ WorkerThreadConnector::~WorkerThreadConnector()
     mWorkerThread.wait();
 }
 
-void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc)
+void WorkerThreadConnector::setWorkerFunction(const boost::function<QVariant (const QVariant&) >& aFunc)
 {
     if (mWorker)
     {
@@ -45,18 +45,28 @@ void WorkerThreadConnector::setWorkerFunction(const boost::function< QVariant (i
     }
 }
 
-void WorkerThreadConnector::doWork(int aWorkID, const QVariant& data)
+void WorkerThreadConnector::doWork(const QVariant& data)
 {
-    if (isBusy() && appendToBatch())
+    if (data.isValid())
     {
-        TRACEX(Logger::to_browser, "append \"" << data.toMap()[command].toString() << "\" to background batch");
-        mBatch.append(QPair<int, QVariant>(aWorkID, data));
-        return;
-    }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (aData.typeId() == QMetaType::Map)
+#else
+        if (data.type() == QVariant::Map)
+#endif
+        {
+            if (isBusy() && appendToBatch())
+            {
+                TRACEX(Logger::to_browser, "append \"" << data.toMap()[Worker::command].toString() << "\" to background batch");
+                mBatch.append(data);
+                return;
+            }
 
-    mCurrentCmdName = data.toMap()[command].toString();
-    TRACEX(Logger::to_browser, "running \"" << mCurrentCmdName << "\" in background");
-    Q_EMIT operate(aWorkID, data);
+            mCurrentCmdName = data.toMap()[Worker::command].toString();
+            TRACEX(Logger::to_browser, "running \"" << mCurrentCmdName << "\" in background");
+            Q_EMIT operate(data);
+        }
+    }
 }
 
 /// brief force next command executed synchroneously
@@ -81,12 +91,25 @@ const QString & WorkerThreadConnector::getCurrentCmdName()
 
 QString WorkerThreadConnector::getBatchToolTip()
 {
-    QString tool_tip = mCurrentCmdName;
-//    tool_tip += "\n";
-//    for (const auto & batch : mBatch)
-//    {
-//        batch.second
-//    }
+    QString tool_tip = tr("Background commands:\n");
+    if (mCurrentCmdName.isEmpty() && mBatch.size() == 0)
+    {
+        tool_tip += tr("none");
+    }
+    else
+    {
+        tool_tip += tr("currently running: %1\n").arg(mCurrentCmdName);
+        if (mBatch.size())
+        {
+            tool_tip += "Batch list:\n";
+            for (const auto & batch : mBatch)
+            {
+                tool_tip += "- ";
+                tool_tip += batch.toMap()[Worker::command].toString();
+                tool_tip += "\n";
+            }
+        }
+    }
     return tool_tip;
 }
 
@@ -106,28 +129,23 @@ bool WorkerThreadConnector::isBusy()
 }
 
 
-void WorkerThreadConnector::sendMessage(int aMsg, QVariant aData)
-{
-    Q_EMIT mWorker->sendMessage(aMsg, aData);
-}
-
-void WorkerThreadConnector::setMessageFunction(const boost::function< void (int, QVariant) >& aFunc)
+void WorkerThreadConnector::setMessageFunction(const boost::function<void (QVariant)> &aFunc)
 {
     mMessageFunction = aFunc;
 }
 
-void WorkerThreadConnector::receiveMessage(int aMsg, QVariant aData)
+void WorkerThreadConnector::receiveMessage(QVariant aData)
 {
     mCurrentCmdName.clear();
     if (mMessageFunction)
     {
-        mMessageFunction(aMsg, aData);
+        mMessageFunction(aData);
     }
     if (mBatch.size())
     {
-        auto& element = mBatch.front();
-        mCurrentCmdName = element.second.toMap()[command].toString();
-        Q_EMIT operate(element.first, element.second);
+        auto& batch_command = mBatch.front();
+        mCurrentCmdName = batch_command.toMap()[Worker::command].toString();
+        Q_EMIT operate(batch_command);
         mBatch.pop_front();
     }
 }

@@ -769,8 +769,9 @@ void MainWindow::initMergeTools(bool read_new_items)
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(QSourceTreeWidget::Column::FileName);
         QVariantMap workmap;
-        workmap.insert(WorkerThreadConnector::command, tr("git -C %1 difftool --tool-help").arg(first_git_repo));
-        mWorker.doWork(INT(Work::DetermineGitMergeTools), QVariant(workmap));
+        workmap.insert(Worker::command, tr("git -C %1 difftool --tool-help").arg(first_git_repo));
+        workmap.insert(Worker::work, INT(Work::DetermineGitMergeTools));
+        mWorker.doWork(QVariant(workmap));
     }
 }
 
@@ -918,10 +919,11 @@ void MainWindow::perform_custom_command()
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
                     QVariantMap workmap;
-                    workmap.insert(WorkerThreadConnector::command, git_command);
-                    workmap.insert(WorkerThreadConnector::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
-                    workmap.insert(WorkerThreadConnector::flags  , variant_list[ActionList::Data::Flags].toUInt());
-                    mWorker.doWork(INT(Work::ApplyGitCommand), QVariant(workmap));
+                    workmap.insert(Worker::command, git_command);
+                    workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
+                    workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
+                    workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
+                    mWorker.doWork(QVariant(workmap));
                 }
                 else
                 {
