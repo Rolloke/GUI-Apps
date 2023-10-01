@@ -116,9 +116,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
-    mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1, _2));
-    QObject::connect(this, SIGNAL(doWork(int,QVariant)), &mWorker, SLOT(doWork(int,QVariant)));
-    mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1, _2));
+    mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
+    QObject::connect(this, SIGNAL(doWork(QVariant)), &mWorker, SLOT(doWork(QVariant)));
+    mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1));
     connect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     ui->textBrowser->set_active(true);
     connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
@@ -1227,73 +1227,66 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     QMainWindow::mousePressEvent(event);
 }
 
-QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
+QVariant MainWindow::handleWorker(const QVariant& aData)
 {
     QVariant work_result;
-    Logger::printDebug(Logger::trace, "handleWorker(%d): %x", aWork, QThread::currentThreadId());
-    switch(static_cast<Work>(aWork))
+    Logger::printDebug(Logger::trace, "handleWorker: %x, %s", QThread::currentThreadId(), aData.typeName());
+    if (aData.isValid())
     {
-    case Work::DetermineGitMergeTools:
-    case Work::ApplyGitCommand:
-    case Work::ApplyCommand:
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::Map)
-#else
-        if (aData.isValid() && aData.type() == QVariant::Map)
-#endif
+        auto data_map = aData.toMap();
+        switch(static_cast<Work>(data_map[Worker::work].toInt()))
+        {
+        case Work::DetermineGitMergeTools:
+        case Work::ApplyGitCommand:
+        case Work::ApplyCommand:
         {
             QString result_string;
-            auto data_map = aData.toMap();
-            int result = execute(data_map[WorkerThreadConnector::command].toString().toStdString().c_str(), result_string, true);
+            int result = execute(data_map[Worker::command].toString().toStdString().c_str(), result_string, true);
             if (result != NoError)
             {
                 Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
             }
-            data_map[WorkerThreadConnector::result] = result_string;
+            data_map[Worker::result] = result_string;
             work_result.setValue(data_map);
-        }
-        break;
-    case Work::AsynchroneousCommand:
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::Map)
-#else
-        if (aData.isValid() && aData.type() == QVariant::Map)
-#endif
+        } break;
+        case Work::AsynchroneousCommand:
         {
             QString result_string;
-            auto data_map = aData.toMap();
-            int result = execute(data_map[WorkerThreadConnector::command].toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+            int result = execute(data_map[Worker::command].toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
             if (result != NoError)
             {
                 Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
             }
-            data_map[WorkerThreadConnector::result] = result_string;
+            data_map[Worker::result] = result_string;
             work_result.setValue(data_map);
+        } break;
+        default:
+            work_result.setValue(data_map);
+            break;
         }
-        break;
-    default:
-        break;
     }
     return work_result;
 }
 
-void MainWindow::handleMessage(int aMsg, QVariant aData)
+void MainWindow::handleMessage(QVariant aData)
 {
-    Logger::printDebug(Logger::trace, "handleMessage(%d): %x, %s", aMsg, QThread::currentThreadId(), aData.typeName());
+    Logger::printDebug(Logger::trace, "handleMessage(): %x, %s", QThread::currentThreadId(), aData.typeName());
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
+    mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
 
-    switch(static_cast<Work>(aMsg))
-    {
-    case Work::DetermineGitMergeTools:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::Map)
+    if (aData.isValid() && aData.typeId() == QMetaType::Map)
 #else
-        if (aData.isValid() && aData.type() == QVariant::Map)
+    if (aData.isValid() && aData.type() == QVariant::Map)
 #endif
+    {
+        auto data_map = aData.toMap();
+        switch(static_cast<Work>(data_map[Worker::work].toInt()))
         {
-            auto data_map = aData.toMap();
+        case Work::DetermineGitMergeTools:
+        {
             bool new_item_added = false;
-            auto result_list = data_map[WorkerThreadConnector::result].toString().split("\n");
+            auto result_list = data_map[Worker::result].toString().split("\n");
             for (auto&entry : result_list)
             {
                 if (entry.size() > 1) // text with two tabs marks an entry
@@ -1322,24 +1315,19 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
             {
                 initMergeTools();
             }
-        }
-        break;
-    case Work::ApplyGitCommand:
-    case Work::ApplyCommand:
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::Map)
-#else
-        if (aData.isValid() && aData.type() == QVariant::Map)
-#endif
-        {
-            auto data_map = aData.toMap();
-            appendTextToBrowser(data_map[WorkerThreadConnector::result].toString(), true);
-            perform_post_cmd_action(data_map[WorkerThreadConnector::action].toUInt());
         } break;
-    case Work::AsynchroneousCommand:
-        break;
+        case Work::ApplyGitCommand:
+        case Work::ApplyCommand:
+        {
+            appendTextToBrowser(data_map[Worker::command].toString());
+            appendTextToBrowser(data_map[Worker::result].toString(), true);
+            perform_post_cmd_action(data_map[Worker::action].toUInt());
+        } break;
+        case Work::AsynchroneousCommand:
+            break;
 
-    default:  break;
+        default:  break;
+        }
     }
 }
 
@@ -1350,7 +1338,8 @@ void MainWindow::killBackgroundThread()
     if (commands.size())
     {
         execute(tr("pidof %1").arg(commands[0]), pids, true);
-        const QStringList pidlist = pids.split(" ");
+        QStringList pidlist;
+        pidlist = pids.split(" ");
         if (pidlist.size())
         {
             int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
@@ -1484,10 +1473,11 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             work_command = Work::AsynchroneousCommand;
         }
         QVariantMap workmap;
-        workmap.insert(WorkerThreadConnector::command, command);
-        workmap.insert(WorkerThreadConnector::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
-        workmap.insert(WorkerThreadConnector::flags, variant_list[ActionList::Data::Flags].toUInt());
-        mWorker.doWork(INT(work_command), QVariant(workmap));
+        workmap.insert(Worker::command, command);
+        workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
+        workmap.insert(Worker::flags, variant_list[ActionList::Data::Flags].toUInt());
+        workmap.insert(Worker::work, INT(work_command));
+        mWorker.doWork(QVariant(workmap));
         mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
         command.clear();
     }

@@ -166,8 +166,8 @@ private:
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
 
-    QVariant handleWorker(int, const QVariant&);
-    void     handleMessage(int, QVariant);
+    QVariant handleWorker(const QVariant&);
+    void     handleMessage(QVariant);
     bool     handleInThread(bool force_thread=false);
     void     on_emit_temp_file_path(const QString& path);
 
@@ -209,7 +209,7 @@ private:
 
 
 Q_SIGNALS:
-    void doWork(int, QVariant);
+    void doWork(QVariant);
 
 private Q_SLOTS:
     void updateRepositoryStatus(bool append=false);

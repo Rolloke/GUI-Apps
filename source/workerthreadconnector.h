@@ -11,19 +11,25 @@ class Worker : public QObject
     Q_OBJECT
 
 public:
+    static constexpr char command[] = "command";
+    static constexpr char result[]  = "result";
+    static constexpr char action[]  = "action";
+    static constexpr char flags[]   = "flags";
+    static constexpr char work[]    = "work";
+
     Worker();
     friend class WorkerThreadConnector;
     bool isBusy() { return mIsBusy; }
 
 
 Q_SIGNALS:
-    void sendMessage(int, QVariant);
+    void sendMessage(QVariant);
 
 public Q_SLOTS:
-    void operate(int aInt, QVariant);
+    void operate(QVariant);
 
 private:
-    std::function< QVariant (int, QVariant) > mWorkerFunction;
+    std::function< QVariant (QVariant)> mWorkerFunction;
     volatile bool mIsBusy;
 };
 
@@ -32,17 +38,11 @@ class WorkerThreadConnector : public QObject
 {
     Q_OBJECT
 public:
-    static constexpr char command[] = "command";
-    static constexpr char result[]  = "result";
-    static constexpr char action[]  = "action";
-    static constexpr char flags[]   = "flags";
-
     WorkerThreadConnector(QObject*aParent);
     virtual ~WorkerThreadConnector();
 
-    void sendMessage(int, QVariant);
-    void setWorkerFunction(const boost::function< QVariant (int, const QVariant&) >& aFunc);
-    void setMessageFunction(const boost::function< void (int, QVariant) >& aFunc);
+    void setWorkerFunction(const boost::function< QVariant (const QVariant&) >& aFunc);
+    void setMessageFunction(const boost::function< void (QVariant) >& aFunc);
     bool isBusy();
     void setOnceBusy();
     void setAppendToBatch(bool append);
@@ -50,11 +50,11 @@ public:
     QString        getBatchToolTip();
 
 public Q_SLOTS:
-    void doWork(int, const QVariant&);
-    void receiveMessage(int, QVariant);
+    void doWork(const QVariant&);
+    void receiveMessage(QVariant);
 
 Q_SIGNALS:
-    void operate(int, QVariant);
+    void operate(QVariant);
 
 private:
     bool    appendToBatch();
@@ -62,9 +62,9 @@ private:
     Worker* mWorker;
     QThread mWorkerThread;
     QString mCurrentCmdName;
-    boost::function< void (int, const QVariant&) > mMessageFunction;
+    boost::function< void (const QVariant&) > mMessageFunction;
     bool    mAppendToBatch;
-    QList<QPair<int,QVariant>> mBatch;
+    QList<QVariant> mBatch;
 };
 
 #endif // WORKERTHREADCONNECTOR_H
