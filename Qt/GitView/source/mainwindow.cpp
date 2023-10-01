@@ -259,7 +259,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-        uint fToolBars = Cmd::mToolbars.size();
+        size_t fToolBars = Cmd::mToolbars.size();
         LOAD_STR(fSettings, fToolBars, toInt);
         for (std::uint32_t i=0; i<fToolBars; ++i)
         {
@@ -653,7 +653,7 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-        uint fToolBars = Cmd::mToolbars.size();
+        size_t fToolBars = Cmd::mToolbars.size();
         STORE_STR(fSettings, fToolBars);
         for (std::uint32_t i=0; i<fToolBars; ++i)
         {
@@ -1803,7 +1803,6 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckExperimental);
     create_auto_cmd(ui->ckFastFileSearch);
     create_auto_cmd(ui->ckTypeConverter, mActions.check_location("format-text-direction-rtl.png"));
-    create_auto_cmd(ui->ckAppendToBatch);
 
     Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
@@ -1829,12 +1828,23 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
-    create_auto_cmd(ui->comboShowItems);
-
     if (Cmd::mContextMenuTextView.empty())
     {
         Cmd::mContextMenuTextView = contextmenu_text_view;
     }
+
+    create_auto_cmd(ui->ckAppendToBatch);
+    create_auto_cmd(ui->ckShowHistoryGraphically);
+
+    create_auto_cmd(ui->comboShowItems);
+    create_auto_cmd(ui->comboFontName);
+    create_auto_cmd(ui->comboAppStyle);
+    create_auto_cmd(ui->comboDiffTool);
+    create_auto_cmd(ui->comboOpenNewEditor);
+    create_auto_cmd(ui->comboTabPosition);
+    create_auto_cmd(ui->comboTextCodex);
+    create_auto_cmd(ui->comboToolBarStyle);
+    create_auto_cmd(ui->comboUserStyle);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1863,15 +1873,28 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
 {
     const auto comand_id = mActions.createNewID(Cmd::AutoCommand);
 
-    const QAbstractButton*button  = dynamic_cast<QAbstractButton*>(widget);
-    const QComboBox*      combobox= dynamic_cast<QComboBox*>(widget);
-    QString               name    = button != 0 ? button->text() : "";
-    QString               command = widget != 0 ? widget->toolTip() : "";
+    QAbstractButton*      button   = dynamic_cast<QAbstractButton*>(widget);
+    QComboBox*            combobox = dynamic_cast<QComboBox*>(widget);
+    QString               name     = button != 0 ? button->text() : "";
+    QString               command  = widget != 0 ? widget->toolTip() : "";
     if (combobox)
     {
         name    = combobox->toolTip();
         command = combobox->statusTip();
+        if  (command.isEmpty())
+        {
+            combobox->setStatusTip(name);
+            command = name;
+        }
     }
+    if (button)
+    {
+        if (command.isEmpty())
+        {
+            command = button->statusTip();
+        }
+    }
+
     QAction* action  = mActions.createAction(comand_id, name, command, widget);
     mActions.setFlags(comand_id, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     if (icon_path.size())

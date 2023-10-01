@@ -87,7 +87,8 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 
     mInitialize = true;
     int fRow = 0;
-    for (const auto& fItem : mActionList.getList())
+    const auto& action_list =  mActionList.getList();
+    for (const auto& fItem : action_list)
     {
         insertCmdAction(fItem, fRow);
     }
@@ -198,7 +199,7 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
     }
     else
     {
-        TRACEX(Logger::warning, "no command text for " << action->toolTip());
+        TRACEX(Logger::warning, "Warnig: no command text for " << action->toolTip() << " id: " << aItem.first);
     }
 }
 

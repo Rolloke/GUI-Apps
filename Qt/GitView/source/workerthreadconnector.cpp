@@ -66,6 +66,10 @@ void WorkerThreadConnector::doWork(const QVariant& data)
             TRACEX(Logger::to_browser, "running \"" << mCurrentCmdName << "\" in background");
             Q_EMIT operate(data);
         }
+        else
+        {
+            TRACEX(Logger::to_browser, "Error, " __FUNCTION__ << " data type is wrong");
+        }
     }
 }
 

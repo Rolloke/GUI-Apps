@@ -902,6 +902,9 @@ Shows binary file content opened with double click
         </item>
         <item>
          <widget class="QComboBox" name="comboTabPosition">
+          <property name="toolTip">
+           <string>Select position of view tabs</string>
+          </property>
           <item>
            <property name="text">
             <string>Top</string>
@@ -1025,6 +1028,9 @@ Git or command results are always displayed in main editor.
             <height>16777215</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Choose an equidistant font for the editor</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -1106,6 +1112,9 @@ Git or command results are always displayed in main editor.
         <item>
          <widget class="QCheckBox" name="ckShowHistoryGraphically">
           <property name="toolTip">
+           <string>Show history also in graphics view</string>
+          </property>
+          <property name="statusTip">
            <string>Show history also in graphics view</string>
           </property>
           <property name="text">
