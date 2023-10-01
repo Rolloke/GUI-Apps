@@ -24,7 +24,7 @@ using namespace git;
 
 bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString* aSourceDir, QTreeWidgetItem* aParentItem)
 {
-    bool fResult  = false;
+    bool result  = false;
     if (aParentItem)
     {
         auto check_state = ui->treeSource->mUseSourceTreeCheckboxes ? aParentItem->checkState(QSourceTreeWidget::Column::FileName) : Qt::Checked;
@@ -33,50 +33,53 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             || mCurrentTask == Work::InsertPathFromCommandString)
         {
             const QVariant& fIsDir = aParentItem->data(QSourceTreeWidget::Column::FileName, QSourceTreeWidget::Role::isDirectory);
-            QString fFileName = aParentItem->text(QSourceTreeWidget::Column::FileName);
-            QString fSource;
-            QString fResultStr;
-            if (!fFileName.startsWith(QDir::separator()) && !aSourceDir->isEmpty())
+            QString fileName = aParentItem->text(QSourceTreeWidget::Column::FileName);
+            QString source;
+            QString result_str;
+            if (!fileName.startsWith(QDir::separator()) && !aSourceDir->isEmpty())
             {
-                fFileName =  QDir::separator() + fFileName;
+                fileName =  QDir::separator() + fileName;
             }
-            fSource      = *aSourceDir + fFileName;
+            source      = *aSourceDir + fileName;
 
             if (fIsDir.toBool())
             {
-                Type fType;
+                Type type;
                 const QVariant fVariant = aParentItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter);
                 if (fVariant.isValid())
                 {
-                    fType = Type(fVariant.toUInt());
+                    type = Type(fVariant.toUInt());
                 }
 
                 if (  (mCurrentTask == Work::ApplyGitCommand || mCurrentTask == Work::ApplyCommand)
                     && check_state == Qt::Checked)
                 {
-                    const QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                    appendTextToBrowser(fCmd + getLineFeed() + fResultStr + getLineFeed(), true);
+                    const QString cmd = applyGitCommandToFilePath(source, mGitCommand, result_str);
+                    if (!cmd.isEmpty())
+                    {
+                        appendTextToBrowser(cmd + getLineFeed() + result_str + getLineFeed(), true);
+                    }
                     return false;
                 }
-                int fCountOk = 0;
-                for (int fChildItem=0; fChildItem < aParentItem->childCount(); ++fChildItem)
+                int count_ok = 0;
+                for (int childI_iem=0; childI_iem < aParentItem->childCount(); ++childI_iem)
                 {
-                    fResult = iterateTreeItems(aSourceTree, &fSource, aParentItem->child(fChildItem));
-                    if (fResult) ++fCountOk;
+                    result = iterateTreeItems(aSourceTree, &source, aParentItem->child(childI_iem));
+                    if (result) ++count_ok;
                 }
                 switch (mCurrentTask)
                 {
                 case Work::InsertPathFromCommandString:
                 {
-                    const int fIndex = mGitCommand.indexOf(fSource);
-                    if (fIndex != -1)
+                    const int index = mGitCommand.indexOf(source);
+                    if (index != -1)
                     {
-                        TRACEX(Logger::notice, "Found dir: "<<  fFileName<< ": " << fCountOk);
-                        if (fCountOk == 0)
+                        TRACEX(Logger::notice, "Found dir: "<<  fileName<< ": " << count_ok);
+                        if (count_ok == 0)
                         {
-                            QStringList fChild;
-                            fChild.append(mGitCommand.mid(fSource.size() + 1));
-                            aParentItem->addChild(new QTreeWidgetItem(fChild));
+                            QStringList child;
+                            child.append(mGitCommand.mid(source.size() + 1));
+                            aParentItem->addChild(new QTreeWidgetItem(child));
                         }
                         return 1;
                     }
@@ -87,12 +90,12 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 {
                     if (ui->ckHideEmptyParent->isChecked())
                     {
-                        fResult = getShowTypeResult(fType);
-                        if (fResult == false)
+                        result = getShowTypeResult(type);
+                        if (result == false)
                         {
-                            fResult = fCountOk != 0;
+                            result = count_ok != 0;
                         }
-                        aParentItem->setHidden(!fResult); // true means visible
+                        aParentItem->setHidden(!result); // true means visible
                     }
                     else
                     {
@@ -101,7 +104,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                 }   break;
                 case Work::ShowAllFiles:
                     aParentItem->setHidden(false);
-                    fResult = true;
+                    result = true;
                     break;
                 case Work::None: case Work::Last:
                 case Work::ApplyGitCommand: case Work::ApplyCommand: case Work::ApplyCommandRecursive:
@@ -113,33 +116,36 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
             }
             else
             {
-                const QVariant fVariant = aParentItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter);
-                if (fVariant.isValid())
+                const QVariant variant = aParentItem->data(QSourceTreeWidget::Column::State, QSourceTreeWidget::Role::Filter);
+                if (variant.isValid())
                 {
-                    const Type fType(fVariant.toUInt());
+                    const Type type(variant.toUInt());
                     switch (mCurrentTask)
                     {
                     case Work::ApplyGitCommand:
                     case Work::ApplyCommand:
                     case Work::ApplyCommandRecursive:
                     {
-                        fSource = "\"" + fSource + "\"";
-                        QString fCmd = applyGitCommandToFilePath(fSource, mGitCommand, fResultStr);
-                        appendTextToBrowser(fCmd + getLineFeed() + fResultStr, true);
-                        fResult = fCmd.size() != 0;
+                        source = "\"" + source + "\"";
+                        QString cmd = applyGitCommandToFilePath(source, mGitCommand, result_str);
+                        if (!cmd.isEmpty())
+                        {
+                            appendTextToBrowser(cmd + getLineFeed() + result_str, true);
+                        }
+                        result = cmd.size() != 0;
                     }   break;
                     case Work::ShowAllFiles:
                         aParentItem->setHidden(false);
-                        fResult = true;
+                        result = true;
                         break;
                     case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
                     case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged:
-                        fResult = getShowTypeResult(fType);
-                        aParentItem->setHidden(!fResult); // true means visible
+                        result = getShowTypeResult(type);
+                        aParentItem->setHidden(!result); // true means visible
                         break;
                     case Work::ShowSelected:
-                        fResult = aParentItem->isSelected();
-                        aParentItem->setHidden(!fResult); // true means visible
+                        result = aParentItem->isSelected();
+                        aParentItem->setHidden(!result); // true means visible
                         break;
                     case Work::None: case Work::Last: case Work::DetermineGitMergeTools:
                     case Work::InsertPathFromCommandString: case Work::AsynchroneousCommand:
@@ -152,19 +158,19 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
         else
         {
             TRACEX(Logger::info, "Not copying unselected file %s" << aParentItem->text(QSourceTreeWidget::Column::FileName));
-            fResult = true; // this is not an error
+            result = true; // this is not an error
         }
     }
     else
     {
-        fResult = true;
+        result = true;
         for (int fIndex = 0; fIndex < aSourceTree.topLevelItemCount(); ++fIndex)
         {
-            const QString fSourceDir("");
-            fResult &= iterateTreeItems(aSourceTree, &fSourceDir, aSourceTree.topLevelItem(fIndex));
+            const QString source_dir("");
+            result &= iterateTreeItems(aSourceTree, &source_dir, aSourceTree.topLevelItem(fIndex));
         }
     }
-    return fResult;
+    return result;
 }
 
 bool MainWindow::getShowTypeResult(const Type& fType)
@@ -762,7 +768,9 @@ void MainWindow::initMergeTools(bool read_new_items)
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(QSourceTreeWidget::Column::FileName);
-        mWorker.doWork(INT(Work::DetermineGitMergeTools), QVariant(tr("git -C %1 difftool --tool-help").arg(first_git_repo)));
+        QVariantMap workmap;
+        workmap.insert(WorkerThreadConnector::command, tr("git -C %1 difftool --tool-help").arg(first_git_repo));
+        mWorker.doWork(INT(Work::DetermineGitMergeTools), QVariant(workmap));
     }
 }
 
@@ -909,7 +917,11 @@ void MainWindow::perform_custom_command()
                 if (handleInThread())
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-                    mWorker.doWork(INT(Work::ApplyGitCommand), QVariant(git_command));
+                    QVariantMap workmap;
+                    workmap.insert(WorkerThreadConnector::command, git_command);
+                    workmap.insert(WorkerThreadConnector::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
+                    workmap.insert(WorkerThreadConnector::flags  , variant_list[ActionList::Data::Flags].toUInt());
+                    mWorker.doWork(INT(Work::ApplyGitCommand), QVariant(workmap));
                 }
                 else
                 {

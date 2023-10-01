@@ -178,7 +178,7 @@ private:
     void     initMergeTools(bool read_new_items = false);
 
     void     applyCommandToFileTree(const QString& aCommand);
-    QString  applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread=false);
+    QString  applyGitCommandToFilePath(const QString& a_source, const QString& a_git_cmd, QString& a_result_str, bool force_thread=false);
 
     QTreeWidget* focusedTreeWidget(bool aAlsoSource=true);
 
@@ -327,7 +327,6 @@ private:
     Ui::MainWindow*       ui;
     QString               mGitCommand;
     WorkerThreadConnector mWorker;
-    const QAction*        mWorkerAction;
     Work                  mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
