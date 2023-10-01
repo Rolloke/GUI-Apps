@@ -78,7 +78,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mDockedWidgetMinMaxButtons(true)
     , ui(new Ui::MainWindow)
     , mWorker(this)
-    , mWorkerAction(nullptr)
     , mCurrentTask(Work::None)
     , mActions(this)
     , mConfigFileName(aConfigName)
@@ -1238,33 +1237,38 @@ QVariant MainWindow::handleWorker(int aWork, const QVariant& aData)
     case Work::ApplyGitCommand:
     case Work::ApplyCommand:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+        if (aData.isValid() && aData.typeId() == QMetaType::Map)
 #else
-        if (aData.isValid() && aData.type() == QVariant::String)
+        if (aData.isValid() && aData.type() == QVariant::Map)
 #endif
         {
             QString result_string;
-            int result = execute(aData.toString().toStdString().c_str(), result_string, true);
+            auto data_map = aData.toMap();
+            int result = execute(data_map[WorkerThreadConnector::command].toString().toStdString().c_str(), result_string, true);
             if (result != NoError)
             {
                 Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
             }
-            work_result.setValue(result_string);
+            data_map[WorkerThreadConnector::result] = result_string;
+            work_result.setValue(data_map);
         }
         break;
     case Work::AsynchroneousCommand:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+        if (aData.isValid() && aData.typeId() == QMetaType::Map)
 #else
-        if (aData.isValid() && aData.type() == QVariant::String)
+        if (aData.isValid() && aData.type() == QVariant::Map)
 #endif
         {
             QString result_string;
-            int result = execute(aData.toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+            auto data_map = aData.toMap();
+            int result = execute(data_map[WorkerThreadConnector::command].toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
             if (result != NoError)
             {
                 Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
             }
+            data_map[WorkerThreadConnector::result] = result_string;
+            work_result.setValue(data_map);
         }
         break;
     default:
@@ -1282,13 +1286,14 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     {
     case Work::DetermineGitMergeTools:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+        if (aData.isValid() && aData.typeId() == QMetaType::Map)
 #else
-        if (aData.isValid() && aData.type() == QVariant::String)
+        if (aData.isValid() && aData.type() == QVariant::Map)
 #endif
         {
+            auto data_map = aData.toMap();
             bool new_item_added = false;
-            auto result_list = aData.toString().split("\n");
+            auto result_list = data_map[WorkerThreadConnector::result].toString().split("\n");
             for (auto&entry : result_list)
             {
                 if (entry.size() > 1) // text with two tabs marks an entry
@@ -1322,21 +1327,16 @@ void MainWindow::handleMessage(int aMsg, QVariant aData)
     case Work::ApplyGitCommand:
     case Work::ApplyCommand:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.isValid() && aData.typeId() == QMetaType::QString)
+        if (aData.isValid() && aData.typeId() == QMetaType::Map)
 #else
-        if (aData.isValid() && aData.type() == QVariant::String)
+        if (aData.isValid() && aData.type() == QVariant::Map)
 #endif
         {
-            appendTextToBrowser(aData.toString());
-            if (mWorkerAction)
-            {
-                const QVariantList variant_list  = mWorkerAction->data().toList();
-                perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt());
-                mWorkerAction = nullptr;
-            }
+            auto data_map = aData.toMap();
+            appendTextToBrowser(data_map[WorkerThreadConnector::result].toString(), true);
+            perform_post_cmd_action(data_map[WorkerThreadConnector::action].toUInt());
         } break;
     case Work::AsynchroneousCommand:
-        mWorkerAction = nullptr;
         break;
 
     default:  break;
@@ -1456,41 +1456,50 @@ void MainWindow::compare_items(QString& item1, QString& item2)
     mCurrentTask = Work::None;
 }
 
-QString MainWindow::applyGitCommandToFilePath(const QString& fSource, const QString& fGitCmd, QString& aResultStr, bool force_thread)
+QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QString& a_git_cmd, QString& a_result_str, bool force_thread)
 {
-    QString fCommand;
+    QString command;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     auto fPos = fGitCmd.indexOf(QRegularExpression("%[0-9]+"));
 #else
-    auto fPos = fGitCmd.indexOf(QRegExp("%[0-9]+"));
+    auto fPos = a_git_cmd.indexOf(QRegExp("%[0-9]+"));
 #endif
     if (fPos != -1)
     {
-        fCommand = QObject::tr(fGitCmd.toStdString().c_str()).arg(fSource);
+        command = QObject::tr(a_git_cmd.toStdString().c_str()).arg(a_source);
     }
     else
     {
-        fCommand = fGitCmd;
+        command = a_git_cmd;
     }
     if (handleInThread(force_thread))
     {
         mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
+
+        auto *action = qobject_cast<QAction *>(sender());
+        const QVariantList variant_list = action->data().toList();
         Work work_command { mCurrentTask };
-        if (mWorkerAction && mWorkerAction->data().toList()[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
+        if (variant_list[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
         {
             work_command = Work::AsynchroneousCommand;
         }
-        mWorker.doWork(INT(work_command), QVariant(fCommand));
+        QVariantMap workmap;
+        workmap.insert(WorkerThreadConnector::command, command);
+        workmap.insert(WorkerThreadConnector::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
+        workmap.insert(WorkerThreadConnector::flags, variant_list[ActionList::Data::Flags].toUInt());
+        mWorker.doWork(INT(work_command), QVariant(workmap));
+        mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
+        command.clear();
     }
     else
     {
-        int result = execute(fCommand, aResultStr);
+        int result = execute(command, a_result_str);
         if (result != NoError)
         {
-            aResultStr += tr("\nError %1 occurred").arg(result);
+            a_result_str += tr("\nError %1 occurred").arg(result);
         }
     }
-    return fCommand;
+    return command;
 }
 
 void MainWindow::initContextMenuActions()
@@ -1972,12 +1981,11 @@ void MainWindow::delete_file_open_extension()
 bool MainWindow::handleInThread(bool force_thread)
 {
     const QAction *action = qobject_cast<QAction *>(sender());
-    if (action && !mWorker.isBusy())
+    if (action && (!mWorker.isBusy() || ui->ckAppendToBatch->isChecked()))
     {
         const uint flags = action->data().toList()[ActionList::Data::Flags].toUInt();
         if ((flags & (ActionList::Flags::CallInThread|ActionList::Flags::Asynchroneous)) != 0)
         {
-            mWorkerAction = action;
             return true;
         }
         return false;

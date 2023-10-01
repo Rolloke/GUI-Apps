@@ -32,6 +32,11 @@ class WorkerThreadConnector : public QObject
 {
     Q_OBJECT
 public:
+    static constexpr char command[] = "command";
+    static constexpr char result[]  = "result";
+    static constexpr char action[]  = "action";
+    static constexpr char flags[]   = "flags";
+
     WorkerThreadConnector(QObject*aParent);
     virtual ~WorkerThreadConnector();
 
@@ -42,6 +47,7 @@ public:
     void setOnceBusy();
     void setAppendToBatch(bool append);
     const QString& getCurrentCmdName();
+    QString        getBatchToolTip();
 
 public Q_SLOTS:
     void doWork(int, const QVariant&);
