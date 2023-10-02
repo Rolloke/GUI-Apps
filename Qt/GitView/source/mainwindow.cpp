@@ -259,7 +259,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
         LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-        size_t fToolBars = Cmd::mToolbars.size();
+        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
         LOAD_STR(fSettings, fToolBars, toInt);
         for (std::uint32_t i=0; i<fToolBars; ++i)
         {
@@ -653,7 +653,7 @@ MainWindow::~MainWindow()
         STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
         STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-        size_t fToolBars = Cmd::mToolbars.size();
+        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
         STORE_STR(fSettings, fToolBars);
         for (std::uint32_t i=0; i<fToolBars; ++i)
         {
@@ -1342,7 +1342,16 @@ void MainWindow::killBackgroundThread()
         pidlist = pids.split(" ");
         if (pidlist.size())
         {
-            int result = callMessageBox(tr("Do you really whant to kill the git processes \"%1\"?"), pids, "", pidlist.size() == 1);
+            int msgbox_buttons = to_all;
+            if (pidlist.size() == 1)
+            {
+                msgbox_buttons = to_one;
+            }
+            if (mWorker.hasBatchList())
+            {
+                msgbox_buttons = to_all_or_one;
+            }
+            int result = callMessageBox(tr("Do you really whant to kill all background processes \"%1\"?"), pids, "", msgbox_buttons);
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 for (const QString &pid : pidlist)
@@ -1352,6 +1361,10 @@ void MainWindow::killBackgroundThread()
                     execute(cmd.c_str(), cmd_result, true);
                     cmd += '\n';
                     appendTextToBrowser(cmd.c_str() + cmd_result);
+                }
+                if (result & QMessageBox::YesToAll)
+                {
+                    mWorker.clearBatchList();
                 }
             }
         }

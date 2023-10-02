@@ -63,8 +63,15 @@ enum error
 
 int execute(const QString& command, QString& aResultText, bool hide=true, boost::function<void (const QString &)> emit_file_path = {});
 
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", bool aIsFile = true, bool aEditText=true);
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, bool aIsFile = true, bool aEditText=true);
+enum msg_box_buttons
+{
+    to_all = false,
+    to_one = true,
+    to_all_or_one = 2
+};
+
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", int aIsFile = true, bool aEditText=true);
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, int aIsFile = true, bool aEditText=true);
 bool isMessageBoxNo(int msg);
 
 const char* getLineFeed();

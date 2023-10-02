@@ -371,13 +371,13 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     return fResult;
 }
 
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, bool aIsFile, bool aEditText)
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, int aIsFile, bool aEditText)
 {
     QString file_name(fFileName);
     return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, aEditText);
 }
 
-int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, bool aIsFile, bool aEditText)
+int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, int aIsFile, bool aEditText)
 {
     if (aMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
@@ -413,9 +413,26 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
             QMessageBox fRequestMessage;
             fRequestMessage.setText(message_text);
             fRequestMessage.setInformativeText(informative_text);
+            QMessageBox::StandardButtons standard_buttons = QMessageBox::NoButton;
+            QMessageBox::StandardButton  default_button   = QMessageBox::NoButton;
+            switch (aIsFile)
+            {
+            case to_one:
+                standard_buttons = QMessageBox::Yes | QMessageBox::No;
+                default_button   = QMessageBox::Yes;
+                break;
+            case to_all:
+                standard_buttons = QMessageBox::YesToAll | QMessageBox::NoToAll;
+                default_button   = QMessageBox::YesToAll;
+                break;
+            case to_all_or_one:
+                standard_buttons = QMessageBox::YesToAll |QMessageBox::Yes | QMessageBox::No;
+                default_button   = QMessageBox::Yes;
+                break;
+            }
 
-            fRequestMessage.setStandardButtons(aIsFile ? QMessageBox::Yes | QMessageBox::No : QMessageBox::YesToAll | QMessageBox::NoToAll);
-            fRequestMessage.setDefaultButton(  aIsFile ? QMessageBox::Yes : QMessageBox::YesToAll);
+            fRequestMessage.setStandardButtons(standard_buttons);
+            fRequestMessage.setDefaultButton(default_button);
 
             return fRequestMessage.exec();
         }
