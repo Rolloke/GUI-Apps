@@ -48,6 +48,8 @@ public:
     void setAppendToBatch(bool append);
     const QString& getCurrentCmdName();
     QString        getBatchToolTip();
+    bool hasBatchList();
+    void clearBatchList();
 
 public Q_SLOTS:
     void doWork(const QVariant&);

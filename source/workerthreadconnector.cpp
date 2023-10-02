@@ -68,7 +68,7 @@ void WorkerThreadConnector::doWork(const QVariant& data)
         }
         else
         {
-            TRACEX(Logger::to_browser, "Error, " __FUNCTION__ << " data type is wrong");
+            TRACEX(Logger::to_browser, "Error, " << __FUNCTION__ << " data type is wrong");
         }
     }
 }
@@ -115,6 +115,16 @@ QString WorkerThreadConnector::getBatchToolTip()
         }
     }
     return tool_tip;
+}
+
+void WorkerThreadConnector::clearBatchList()
+{
+    mBatch.clear();
+}
+
+bool WorkerThreadConnector::hasBatchList()
+{
+    return mBatch.size() > 0;
 }
 
 bool WorkerThreadConnector::appendToBatch()
