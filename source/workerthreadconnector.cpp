@@ -106,7 +106,8 @@ QString WorkerThreadConnector::getBatchToolTip()
         if (mBatch.size())
         {
             tool_tip += "Batch list:\n";
-            for (const auto & batch : mBatch)
+            const auto &batch_list = mBatch;
+            for (const auto & batch : batch_list)
             {
                 tool_tip += "- ";
                 tool_tip += batch.toMap()[Worker::command].toString();

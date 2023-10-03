@@ -42,6 +42,8 @@ QString getSettingsName(const QString& aItemName);
 QString formatFileSize(quint64 aSize);
 QString formatPermissions(const QFile::Permissions& permissions);
 
+QString get_word_at_position(const QString& sentence, int pos);
+
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);

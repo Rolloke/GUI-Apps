@@ -126,6 +126,25 @@ QString formatPermissions(const QFile::Permissions& permissions)
     return text;
 }
 
+QString get_word_at_position(const QString& sentence, int pos)
+{
+    for (; pos > 0; --pos)
+    {
+        if (sentence[pos] == ' ')
+        {
+            ++pos;
+            break;
+        }
+    }
+    int end = sentence.indexOf(' ', pos);
+    if (end == -1) end = sentence.size();
+    if (pos >= 0 && (end - pos) > 1)
+    {
+        return sentence.mid(pos, end-pos);
+    }
+    return sentence;
+}
+
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     const auto fList = aTree.selectedItems();
