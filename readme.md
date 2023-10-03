@@ -30,7 +30,7 @@ Arduino projects and libraries
 Eagle projects
 
 ### Java
-Java testsprograms
+Java testprograms
 ### Qt
 Qt programs
 
@@ -49,7 +49,7 @@ Qt programs
 Raspi shell scripts and python scripts
 
 ### VisualStudio
-MS-Visual Studo projects
+MS-Visual Studio projects
 
 - AnalyseMapFile
 - AnyFileViewer

@@ -25,6 +25,7 @@
 #include <QWhatsThis>
 #include <QFontDatabase>
 
+/// TODO: include for Qt 6 here
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #else
 #include <QTextCodec>
@@ -1273,12 +1274,7 @@ void MainWindow::handleMessage(QVariant aData)
     Logger::printDebug(Logger::trace, "handleMessage(): %x, %s", QThread::currentThreadId(), aData.typeName());
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
     mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    if (aData.isValid() && aData.typeId() == QMetaType::Map)
-#else
-    if (aData.isValid() && aData.type() == QVariant::Map)
-#endif
+    if (aData.isValid())
     {
         auto data_map = aData.toMap();
         switch(static_cast<Work>(data_map[Worker::work].toInt()))
@@ -1338,8 +1334,7 @@ void MainWindow::killBackgroundThread()
     if (commands.size())
     {
         execute(tr("pidof %1").arg(commands[0]), pids, true);
-        QStringList pidlist;
-        pidlist = pids.split(" ");
+        const QStringList pidlist = pids.split(" ");
         if (pidlist.size())
         {
             int msgbox_buttons = to_all;
@@ -1351,7 +1346,10 @@ void MainWindow::killBackgroundThread()
             {
                 msgbox_buttons = to_all_or_one;
             }
-            int result = callMessageBox(tr("Do you really whant to kill all background processes \"%1\"?"), pids, "", msgbox_buttons);
+            int result = callMessageBox(
+                tr("Do you really whant to kill all background processes \"%1\"?;%1\n"
+                   "Yes kills process ID: %2\n"
+                   "Yes To All empties also batch list"), pids, mWorker.getBatchToolTip(), msgbox_buttons);
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 for (const QString &pid : pidlist)
@@ -1403,6 +1401,7 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::initCodecCombo()
 {
+    /// TODO: create code for Qt 6 here
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #else
     const auto codecs = QTextCodec::availableCodecs();
@@ -2302,8 +2301,14 @@ void MainWindow::combo_triggered()
         switch (index)
         {
         case FindView::Text:
-            find_text = text_browser->textCursor().selectedText();
-            break;
+        {
+            const auto & cursor = text_browser->textCursor();
+            find_text = cursor.selectedText();
+            if (find_text.isEmpty())
+            {
+                find_text = get_word_at_position(cursor.block().text(), cursor.positionInBlock());
+            }
+        }   break;
         case FindView::History:             tree_view = ui->treeHistory; break;
         case FindView::Branch:              tree_view = ui->treeBranches; break;
         case FindView::Stash:               tree_view = ui->treeStash; break;
