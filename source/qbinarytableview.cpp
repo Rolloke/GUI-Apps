@@ -161,9 +161,13 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     auto& themodel = *get_model();
 
     const int bytes_per_row  = themodel.get_bytes_per_row();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const int column         = columnAt(event->position().x());
+    const int row            = rowAt(event->position().y());
+#else
     const int column         = columnAt(event->x());
     const int row            = rowAt(event->y());
-
+#endif
     QTableView::mousePressEvent(event);
     if (row < 0) return;
 
@@ -172,7 +176,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     {
         size = font().pointSizeF();
     }
-    int x_position = event->x();
+    int x_position = column;
     for (int i=0; i<column;++i)
     {
         x_position -= columnWidth(i);

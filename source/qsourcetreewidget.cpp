@@ -26,7 +26,11 @@ QSourceTreeWidget::QSourceTreeWidget(QWidget *parent) : QTreeWidget(parent)
 
 void QSourceTreeWidget::dropEvent(QDropEvent *event)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QModelIndex droppedIndex = indexAt( event->position().toPoint() );
+#else
     QModelIndex droppedIndex = indexAt( event->pos() );
+#endif
 
     if(droppedIndex.isValid())
     {

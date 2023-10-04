@@ -61,7 +61,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 
     for (int i=0; i<mMergeTools.size(); ++i)
     {
-        mMergeToolsState.setBit(i, (mMergeTools.begin() + i).value());
+        mMergeToolsState.setBit(i, std::next(mMergeTools.begin(), i).value());
     }
 
     QStringList fColumnName  = { tr("ID"), tr("Icon"), tr("Command or status text"), tr("Name"), tr("Shortcut"), tr("Message box text")};
@@ -136,7 +136,7 @@ bool CustomGitActions::isMergeToolsChanged()
 {
     for (int i=0; i<mMergeTools.size(); ++i)
     {
-        if (mMergeToolsState.at(i) != (mMergeTools.begin() + i).value())
+        if (mMergeToolsState.at(i) != std::next(mMergeTools.begin(), i).value())
         {
             return true;
         }
@@ -599,7 +599,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
         enableButtons(0);
         if (index.column() == 0 && index.row() >= 0 && index.row() < mMergeTools.size())
         {
-            auto currentItem = mMergeTools.begin() + index.row();
+            auto currentItem = std::next(mMergeTools.begin(), index.row());
             currentItem.value() = !currentItem.value();
             mListModelVarious->setData(index, QIcon(iconCheck(currentItem.value())), Qt::DecorationRole);
         }

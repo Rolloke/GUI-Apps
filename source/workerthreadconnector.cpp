@@ -50,7 +50,7 @@ void WorkerThreadConnector::doWork(const QVariant& data)
     if (data.isValid())
     {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (aData.typeId() == QMetaType::Map)
+        if (data.typeId() == QMetaType::QVariantMap)
 #else
         if (data.type() == QVariant::Map)
 #endif

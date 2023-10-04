@@ -101,7 +101,11 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
     showDockedWidget(ui->textBrowser);
 
     const auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if (fItemData.typeId() == QMetaType::QModelIndex)
+#else
     if (fItemData.type() == QVariant::ModelIndex)
+#endif
     {
         QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);
         mContextMenuSourceTreeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
