@@ -96,12 +96,16 @@ void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
         if (fItem && getItemLevel(fItem) == Level::Top)
         {
             auto fItemData = fItem->data(History::Column::Commit, History::Role::VisibleAuthors);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (fItemData.typeId() == QMetaType::QVariantMap)
+#else
             if (fItemData.type() == QVariant::Map)
+#endif
             {
                 auto fMap = fItemData.toMap();
                 if (aIndex < fMap.size())
                 {
-                    auto fMapItem = fMap.begin()+aIndex;
+                    auto fMapItem = std::next(fMap.begin(), aIndex);
                     fMap[fMapItem.key()] = aChecked;
                 }
                 else
@@ -213,6 +217,30 @@ void QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos, const Act
     fPostActionGroup.setExclusive(false);
     if (fItemData.isValid())
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        switch (fItemData.typeId())
+        {
+            case QMetaType::QModelIndex:
+            {
+                QTreeWidgetHook* fSourceHook = reinterpret_cast<QTreeWidgetHook*>(this);
+                *context_menu_source_treeItem = fSourceHook->itemFromIndex(fItemData.toModelIndex());
+            }   break;
+            case QMetaType::QVariantMap:
+            {
+                auto fMap = fItemData.toMap();
+                for (auto fMapItem = fMap.begin(); fMapItem != fMap.end(); ++fMapItem)
+                {
+                    QAction* fAction = fPostActionGroup.addAction(fMapItem.key());
+                    fAction->setCheckable(true);
+                    fAction->setChecked(fMapItem.value().toBool());
+                }
+                fPostActionGroup.addAction(tr("Enable all"));
+                fPostActionGroup.addAction(tr("Disable all"));
+            }   break;
+            default:
+                break;
+        }
+#else
         switch (fItemData.type())
         {
             case QVariant::ModelIndex:
@@ -235,6 +263,7 @@ void QHistoryTreeWidget::customContextMenuRequested(const QPoint &pos, const Act
             default:
                 break;
         }
+#endif
     }
 
     QMenu menu(this);

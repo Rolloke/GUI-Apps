@@ -471,7 +471,12 @@ QString ActionList::getCmdAddOn(git::Cmd::eCmd cmd) const
 
 void ActionList::setMenuStringList(git::Cmd::eCmd cmd, const QStringList& list)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const auto unknown = QVariant();
+    setDataVariant(cmd, Data::MenuStrings, list.size() ? list : unknown);
+#else
     setDataVariant(cmd, Data::MenuStrings, list.size() ? list : QVariant(QVariant::Invalid));
+#endif
 }
 
 QStringList ActionList::getMenuStringList(git::Cmd::eCmd cmd) const

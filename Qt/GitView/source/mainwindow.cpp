@@ -26,6 +26,7 @@
 #include <QFontDatabase>
 
 /// TODO: include for Qt 6 here
+/// TODO: test all qt6 things
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #else
 #include <QTextCodec>
@@ -336,6 +337,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         update_widget_states(ui->ckShortState);
         {
             QFontDatabase font_db;
+            //QFontDatabase::families();
             auto fonts = font_db.families();
             for (const auto& font : fonts)
             {
@@ -1461,7 +1463,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
 {
     QString command;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    auto fPos = fGitCmd.indexOf(QRegularExpression("%[0-9]+"));
+    auto fPos = a_git_cmd.indexOf(QRegularExpression("%[0-9]+"));
 #else
     auto fPos = a_git_cmd.indexOf(QRegExp("%[0-9]+"));
 #endif

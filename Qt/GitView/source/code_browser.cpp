@@ -414,12 +414,22 @@ QString code_browser::comment_uncomment_selection()
 
 bool is_whole_word(const QString& text)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    auto match = fRegEx.match(text);
+    if (match.isValid())
+    {
+        const auto captured = match.capturedTexts().at(0);
+        return  (text == captured);
+    }
+#else
     QRegExp regex("([A-Za-z][A-Za-z0-9_]+)");
     if (regex.indexIn(text) != -1)
     {
         QString captured = regex.capturedTexts().at(0);
         return (text == captured);
     }
+#endif
     return false;
 }
 

@@ -80,11 +80,7 @@ void HighlighterDialog::color_btn_clicked()
     int index = ui->color_buttons->indexOf(button);
     if (index != -1)
     {
-        auto item = mList.begin();
-        while (--index > 0 && item != mList.end())
-        {
-            ++item;
-        }
+        auto item = std::next(mList.begin(), index);
         if (item != mList.end())
         {
             text_char_format = &item.value();
@@ -106,17 +102,12 @@ void HighlighterDialog::italic_btn_clicked(bool checked)
     int index = ui->italic_buttons->indexOf(button);
     if (index != -1)
     {
-        auto item = mList.begin();
-        int _index = index;
-        while (--index > 0 && item != mList.end())
-        {
-            ++item;
-        }
+        auto item = std::next(mList.begin(), index);
         if (item != mList.end())
         {
             text_char_format = &item.value();
             text_char_format->setFontItalic(checked);
-            ui->color_buttons->itemAt(_index)->widget()->setFont(text_char_format->font());
+            ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
         }
     }
 }
@@ -128,21 +119,16 @@ void HighlighterDialog::weigth_index_changed(int weight_index)
     int index = ui->weight_boxes->indexOf(button);
     if (index != -1)
     {
-        auto item = mList.begin();
-        int _index = index;
-        while (--index > 0 && item != mList.end())
-        {
-            ++item;
-        }
+        auto item = std::next(mList.begin(), index);
         if (item != mList.end())
         {
             text_char_format = &item.value();
-            auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(_index)->widget());
+            auto* weight_box = dynamic_cast<QComboBox*>(ui->weight_boxes->itemAt(index)->widget());
             if (weight_box)
             {
                 text_char_format->setFontWeight(weight_box->itemData(weight_index).toInt());
             }
-            ui->color_buttons->itemAt(_index)->widget()->setFont(text_char_format->font());
+            ui->color_buttons->itemAt(index)->widget()->setFont(text_char_format->font());
         }
     }
 }
