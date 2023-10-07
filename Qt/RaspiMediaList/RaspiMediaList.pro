@@ -35,3 +35,5 @@ win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 RESOURCES += \
     resource/resource.qrc
+
+TRANSLATIONS    = RaspiMediaList_de.ts
