@@ -988,6 +988,7 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
             ui->statusBar->showMessage(message);
             if (m_tray_message && m_tray_message->isVisible())
             {
+                m_tray_message->setToolTip("<b>" + key + ":</b><br>" + value.toString());
                 m_tray_message->showMessage(key, value.toString());
             }
         }
