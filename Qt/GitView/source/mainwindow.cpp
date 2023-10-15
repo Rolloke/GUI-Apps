@@ -24,6 +24,7 @@
 #include <QStaticText>
 #include <QWhatsThis>
 #include <QFontDatabase>
+#include <QFileDialog>
 
 /// TODO: include for Qt 6 here
 /// TODO: test all qt6 things
@@ -2249,6 +2250,23 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         }
         break;
     }
+    case UserStyle::LoadStyle:
+    {
+        QString style_file = QFileDialog::getOpenFileName(this, tr("Select style for app"), "", tr("Style File (*.qss);;All Files (*.*)"));
+        QFile f(style_file);
+        if (!f.exists())
+        {
+            TRACEX(Logger::error, "Unable to set stylesheet, file " <<  mStylePath << " not found");
+            ui->comboUserStyle->setCurrentIndex(0);
+            on_comboUserStyle_currentIndexChanged(0);
+        }
+        else
+        {
+            f.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&f);
+            setStyleSheet(ts.readAll());
+        }
+    } break;
     }
 }
 

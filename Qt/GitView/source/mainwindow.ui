@@ -859,6 +859,11 @@ Shows binary file content opened with double click
             <string>Dark Palette</string>
            </property>
           </item>
+          <item>
+           <property name="text">
+            <string>Load Style...</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
