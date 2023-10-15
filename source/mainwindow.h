@@ -127,8 +127,8 @@ private:
     {
         None,
         User,
-        Palette
-
+        Palette,
+        LoadStyle
     }; };
 
     enum class AdditionalEditor
