@@ -367,6 +367,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, mFileCopyMimeType, toString);
         LOAD_STR(fSettings, mExternalIconFiles, toString);
         LOAD_STR(fSettings, mExternalFileOpenCmd, toString);
+        LOAD_STR(fSettings, mDefaultSourcePath, toString);
         QString fTypeFormatFilesLocation;
         LOAD_STR(fSettings, fTypeFormatFilesLocation, toString);
         mBinaryValuesView->m_type_format_files_location = fTypeFormatFilesLocation;
@@ -589,6 +590,7 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
         STORE_STR(fSettings, mExternalFileOpenCmd);
+        STORE_STR(fSettings, mDefaultSourcePath);
         QString fTypeFormatFilesLocation = mBinaryValuesView->m_type_format_files_location;
         STORE_STR(fSettings, fTypeFormatFilesLocation);
         QString fExternalFileOpenExt;
@@ -1332,13 +1334,11 @@ void MainWindow::handleMessage(QVariant aData)
 
 void MainWindow::killBackgroundThread()
 {
-    QString pids;
     QStringList commands = mWorker.getCurrentCmdName().split(" ");
     if (commands.size())
     {
-        execute(tr("pidof %1").arg(commands[0]), pids, true);
-        const QStringList pidlist = pids.split(" ");
-        if (pidlist.size())
+        QStringList pidlist;
+        if (get_pid_list(commands[0], pidlist))
         {
             int msgbox_buttons = to_all;
             if (pidlist.size() == 1)
@@ -1352,16 +1352,20 @@ void MainWindow::killBackgroundThread()
             int result = callMessageBox(
                 tr("Do you really whant to kill all background processes \"%1\"?;%1\n"
                    "Yes kills process ID: %2\n"
-                   "Yes To All empties also batch list"), pids, mWorker.getBatchToolTip(), msgbox_buttons);
+                   "Yes To All empties also batch list"), pidlist.join(" "), mWorker.getBatchToolTip(), msgbox_buttons);
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 for (const QString &pid : pidlist)
                 {
+#ifdef __linux__
                     string cmd = "kill " + pid.toStdString();
+#else
+                    string cmd = "taskkill " + pid.toStdString();
+#endif
                     QString cmd_result;
                     execute(cmd.c_str(), cmd_result, true);
                     cmd += '\n';
-                    appendTextToBrowser(cmd.c_str() + cmd_result);
+                    appendTextToBrowser(cmd.c_str() + cmd_result, true);
                 }
                 if (result & QMessageBox::YesToAll)
                 {

@@ -278,9 +278,11 @@ void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)
 
 void MainWindow::addGitSourceFolder()
 {
-    const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select SourceFiles"));
+    const QString fSourcePath = QFileDialog::getExistingDirectory(this, tr("Select SourceFiles"), mDefaultSourcePath);
     if (fSourcePath.size() > 1)
     {
+        QFileInfo info(fSourcePath);
+        mDefaultSourcePath = info.absolutePath();
         insertSourceTree(initDir(fSourcePath), ui->treeSource->topLevelItemCount()+1);
     }
 }
@@ -727,8 +729,7 @@ void MainWindow::call_git_clone()
     const QString  clone_title   = tr("Clone git Repository");
     const QString  git_source    = QInputDialog::getText(this, clone_title, tr("Enter git repository address:"));
     const QString  base_name     = QFileInfo(git_source).baseName();
-    const QString  initial_dir   = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
-    const QString  destination   = QFileDialog::getExistingDirectory(this, tr("Select destination for repository \"%1\"").arg(base_name), initial_dir);
+    const QString  destination   = QFileDialog::getExistingDirectory(this, tr("Select destination for repository \"%1\"").arg(base_name), mDefaultSourcePath);
     const QString  clone_command = tr(git_command.toStdString().c_str()).arg(git_source);
 
     QDir::setCurrent(destination);
