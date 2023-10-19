@@ -44,6 +44,9 @@ QString formatPermissions(const QFile::Permissions& permissions);
 
 QString get_word_at_position(const QString& sentence, int pos);
 
+bool get_pid_list(const QString& name, QStringList& pid_list);
+
+
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);

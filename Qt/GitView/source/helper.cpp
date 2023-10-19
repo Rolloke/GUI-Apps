@@ -145,6 +145,69 @@ QString get_word_at_position(const QString& sentence, int pos)
     return sentence;
 }
 
+bool get_pid_list(const QString& name, QStringList& pid_list)
+{
+    QString pids;
+#ifdef __linux__
+    QStringList parts = name.split("/");
+    QString  process_name = parts.last();
+    if (execute(QObject::tr("pidof %1").arg(process_name), pids, true) == 0 && pids.size() > 1)
+    {
+        pid_list =  pids.split(" ");
+    }
+    else if (execute("ps -e | tail -n 20", pids, true) == 0 && pids.size() > 1)
+    {
+        QStringList lines = pids.split("\n");
+        for (int i = lines.size() - 1; i>0; --i)
+        {
+            if (lines[i].contains(process_name))
+            {
+                QString line = lines[i].trimmed();
+                line = line.split(" ")[0];
+                pid_list.append(line);
+                if (execute(QObject::tr("pgrep -P %1").arg(line), pids, true) == 0 && pids.size() > 1)
+                {
+                    pid_list.append(pids.split("\n"));
+                }
+            }
+        }
+    }
+#else
+    /// TODO: do the same for windows
+    // const char *procname
+//    HANDLE hSnapshot;
+//      PROCESSENTRY32 pe;
+//      int pid = 0;
+//      BOOL hResult;
+
+//      // snapshot of all processes in the system
+//      hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+//      if (INVALID_HANDLE_VALUE == hSnapshot) return 0;
+
+//      // initializing size: needed for using Process32First
+//      pe.dwSize = sizeof(PROCESSENTRY32);
+
+//      // info about first process encountered in a system snapshot
+//      hResult = Process32First(hSnapshot, &pe);
+
+//      // retrieve information about the processes
+//      // and exit if unsuccessful
+//      while (hResult) {
+//        // if we find the process: return process ID
+//        if (strcmp(procname, pe.szExeFile) == 0) {
+//          pid = pe.th32ProcessID;
+//          break;
+//        }
+//        hResult = Process32Next(hSnapshot, &pe);
+//      }
+
+//      // closes an open handle (CreateToolhelp32Snapshot)
+//      CloseHandle(hSnapshot);
+//      return pid;
+#endif
+    return pid_list.size() > 0;
+}
+
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     const auto fList = aTree.selectedItems();

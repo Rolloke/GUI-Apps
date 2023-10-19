@@ -359,6 +359,7 @@ private:
     QString mFindFsrc;
     QString mCompare2Items;
     QString mActivViewObjectName;
+    QString mDefaultSourcePath;
     QMap<QString, QString> mExternalFileOpenExt;
     qint64  mWarnOpenFileSize;
     QLabel *m_status_line_label;
