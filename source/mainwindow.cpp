@@ -1771,7 +1771,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::SelectTextBrowserLanguage, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::SelectTextBrowserLanguage, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Running Background Activity..."), tr("You may try to kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
+    connect(mActions.createAction(Cmd::KillBackgroundThread, tr("Background Activity..."), tr("You may try to kill git action running in background")), SIGNAL(triggered()), this, SLOT(killBackgroundThread()));
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(false);
     mActions.setFlags(Cmd::KillBackgroundThread, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::KillBackgroundThread, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);

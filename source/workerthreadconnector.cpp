@@ -95,14 +95,13 @@ const QString & WorkerThreadConnector::getCurrentCmdName()
 
 QString WorkerThreadConnector::getBatchToolTip()
 {
-    QString tool_tip = tr("Background commands:\n");
+    QString tool_tip = tr("Background commands");
     if (mCurrentCmdName.isEmpty() && mBatch.size() == 0)
     {
-        tool_tip += tr("none");
     }
     else
     {
-        tool_tip += tr("currently running: %1\n").arg(mCurrentCmdName);
+        tool_tip += tr("\n:currently running: %1\n").arg(mCurrentCmdName);
         if (mBatch.size())
         {
             tool_tip += "Batch list:\n";
