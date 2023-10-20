@@ -306,6 +306,12 @@ MainWindow::~MainWindow()
     fSettings.endGroup();
 
     mPlayer.stop();
+    if (m_tray_message)
+    {
+        QMenu * menu = m_tray_message->contextMenu();
+        m_tray_message->setContextMenu(nullptr);
+        delete menu;
+    }
     delete ui;
 }
 
@@ -641,22 +647,23 @@ void MainWindow::menu_file_open()
 
 void MainWindow::menu_help_about()
 {
-    QString message = tr("About Kodi media list viewer and editor\n"
-            "Store tv channels from m3u files as favorites within raspberry kodi\n"
-            "The program is provided AS IS with NO WARRANTY OF ANY KIND\n"
-            "\n"
-            "Based on Qt:\t%1\n"
-            "Built on:\t\t%2, %3\n"
-            "Author:\t\tRolf Kary Ehlers\n"
-            "Version:\t\t%4\n"
-            "License:\t\tGNU GPL Version 2\n"
-            "Email:\t\trolf-kary-ehlers@t-online.de\n"
-            "\nCommand Line "
+    QString message = tr("<h3>About Kodi media list viewer and editor</h3><br><br>"
+            "Store tv channels from m3u files as favorites within raspberry kodi<br>"
+            "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
+            "<br>"
+            "<li>Based on Qt:\t%1</li>"
+            "<li>Built on:\t\t%2, %3</li>"
+            "<li>Author:\t\tRolf Kary Ehlers</li>"
+            "<li>Version:\t\t%4</li>"
+            "<li>License:\t\tGNU GPL Version 2</li>"
+            "<li>Email:\t\trolf-kary-ehlers@t-online.de</li>"
+            "</ul>"
+            "<br>Command Line "
             ).arg(qVersion(), __DATE__, __TIME__, txt::version);
     for (const auto& line : txt::media_player_cmd_line)
     {
         message += line;
-        message += "\n";
+        message += "<br>";
     }
     QMessageBox::about(this, windowTitle(), message);
 }
@@ -665,24 +672,24 @@ void MainWindow::menu_help_info()
 {
     if (mCurrentRowIndex != -1)
     {
-        QString info = tr("Information about selected item\n"
-           "\n"
-           "- Name:\t%1\n"
-           "- Web:\t%2\n"
-           "- Pretty name:\t%3\n"
-           "- Media URL:\t%4\n"
-           "- Thumb:\t%5\n").arg(
+        QString info = tr("<h3>Information about selected item</h3><br>"
+          "<ul>"
+           "<li>Name:\t%1</li>"
+           "<li>Web:\t%2</li>"
+           "<li>Pretty name:\t%3</li>"
+           "<li>Media URL:\t%4</li>"
+           "<li>Thumb:\t%5</li></ul>").arg(
            mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
 
-        info += tr("\nMeta Info:\n");
+        info += tr("<br>Meta Info:<br><ul>");
         for (auto metainfo = mCurrentMetainfo.begin(); metainfo != mCurrentMetainfo.end(); ++metainfo)
         {
             const auto& value = metainfo.value();
-            info += "- ";
+            info += "<li>";
             info += metainfo.key();
             info += ": ";
             switch(value.type())
@@ -706,10 +713,25 @@ void MainWindow::menu_help_info()
             default:
                 break;
             }
-            info += "\n";
+            info += "</li>";
         }
+        info += "</ul>";
         QMessageBox::about(this, windowTitle(), info);
     }
+}
+
+void MainWindow::traymenu_hide_window()
+{
+    setWindowFlags(Qt::SubWindow);
+    // TODO: do not close this window with about... or info...
+}
+
+void MainWindow::traymenu_show_window()
+{
+    Qt::WindowFlags flag = windowFlags();
+    flag &= ~Qt::SubWindow;
+    setWindowFlags(flag);
+    show();
 }
 
 void MainWindow::menu_edit_copy_url()
@@ -969,6 +991,16 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     if (!m_tray_message && show)
     {
         m_tray_message = new QSystemTrayIcon(QIcon(":/36x36/applications-multimedia.png"), this);
+        QMenu*menu = new QMenu;
+        QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
+        action = menu->addAction(tr("Hide %1").arg(windowTitle()));
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
+        menu->addSeparator();
+        menu->addAction(ui->actionAbout);
+        menu->addAction(ui->actionInfo);
+
+        m_tray_message->setContextMenu(menu);
     }
     if (m_tray_message)
     {

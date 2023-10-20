@@ -80,6 +80,8 @@ private slots:
     void show_media_player_error(QMediaPlayer::Error error);
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
     void metaDataChanged(const QString&key, const QVariant&value);
+    void traymenu_hide_window();
+    void traymenu_show_window();
 #ifdef TEST_DOWNLOAD_KODI_FILE
     void onDownloadFiniseh();
 #endif
