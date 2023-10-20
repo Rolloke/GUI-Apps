@@ -2022,7 +2022,7 @@ bool MainWindow::handleInThread(bool force_thread)
         }
         return false;
     }
-    return force_thread && !mWorker.isBusy();
+    return force_thread && !mWorker.isBusy() && action;
 }
 
 void MainWindow::on_emit_temp_file_path(const QString& path)
