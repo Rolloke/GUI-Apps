@@ -347,6 +347,11 @@ void code_browser::setLanguage(const QString& language)
 void code_browser::changeSelection(selection command)
 {
     auto text_cursor = textCursor();
+    if (!text_cursor.hasSelection())
+    {
+        text_cursor.select(QTextCursor::WordUnderCursor);
+    }
+
     if (text_cursor.hasSelection())
     {
         QString text;
@@ -358,11 +363,13 @@ void code_browser::changeSelection(selection command)
         case selection::to_snake_case:  text = toSnakeCase(text_cursor.selectedText()); break;
         case selection::to_camel_case:  text = toCamelCase(text_cursor.selectedText()); break;
         default:
+
             text.clear();
             break;
         }
         if (text.size())
         {
+            text_cursor.removeSelectedText();
             insertPlainText(text);
         }
     }
@@ -412,26 +419,6 @@ QString code_browser::comment_uncomment_selection()
     return text;
 }
 
-bool is_whole_word(const QString& text)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
-    auto match = fRegEx.match(text);
-    if (match.isValid())
-    {
-        const auto captured = match.capturedTexts().at(0);
-        return  (text == captured);
-    }
-#else
-    QRegExp regex("([A-Za-z][A-Za-z0-9_]+)");
-    if (regex.indexIn(text) != -1)
-    {
-        QString captured = regex.capturedTexts().at(0);
-        return (text == captured);
-    }
-#endif
-    return false;
-}
 
 QString code_browser::toCamelCase(const QString& text)
 {
