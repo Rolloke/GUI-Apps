@@ -2,5 +2,7 @@
     <qresource prefix="/36x36">
         <file>preferences-desktop-screensaver.png</file>
         <file>applications-multimedia.png</file>
+        <file>applications-multimedia.ico</file>
+        <file>video-x-generic.png</file>
     </qresource>
 </RCC>

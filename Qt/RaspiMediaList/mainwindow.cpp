@@ -121,7 +121,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef __linux__
     setWindowIcon(QIcon(":/36x36/applications-multimedia.png"));
+#else
+    setWindowIcon(QIcon(":/36x36/applications-multimedia.ico"));
+#endif
 
     const QString arg_file = "--file=";
     const QString arg_help = "--help";
@@ -389,13 +393,19 @@ void MainWindow::on_pushButtonStart_clicked()
         }
         else
         {
+            disconnect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
+            disconnect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
             if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
             {
                 mVideo.show();
             }
             mPlayer.play();
-            connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
+            if (mPlayer.isMetaDataAvailable())
+            {
+                connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
+                connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
+            }
 
             display_play_status();
             m_play_name->setText(get_item_name(mCurrentPlayIndex));
@@ -990,7 +1000,15 @@ void MainWindow::menu_option_show_tray_icon(bool show)
 {
     if (!m_tray_message && show)
     {
+#ifdef __linux__
         m_tray_message = new QSystemTrayIcon(QIcon(":/36x36/applications-multimedia.png"), this);
+#else
+        QIcon icon(":/36x36/applications-multimedia.ico");
+        if (!icon.isNull())
+        {
+            m_tray_message = new QSystemTrayIcon(icon, this);
+        }
+#endif
         QMenu*menu = new QMenu;
         QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
@@ -1005,6 +1023,15 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     if (m_tray_message)
     {
         m_tray_message->setVisible(show);
+    }
+}
+
+
+void MainWindow::metaDataAvailableChanged(bool changed)
+{
+    if (changed)
+    {
+
     }
 }
 

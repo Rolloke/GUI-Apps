@@ -44,6 +44,8 @@ QString formatPermissions(const QFile::Permissions& permissions);
 
 QString get_word_at_position(const QString& sentence, int pos);
 
+bool is_whole_word(const QString& text);
+
 bool get_pid_list(const QString& name, QStringList& pid_list);
 
 
