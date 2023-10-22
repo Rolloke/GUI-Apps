@@ -37,3 +37,5 @@ RESOURCES += \
     resource/resource.qrc
 
 TRANSLATIONS    = RaspiMediaList_de.ts
+
+RC_ICONS = :/36x36/applications-multimedia.ico

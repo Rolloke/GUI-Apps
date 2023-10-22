@@ -124,7 +124,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef __linux__
     setWindowIcon(QIcon(":/36x36/applications-multimedia.png"));
 #else
-    setWindowIcon(QIcon(":/36x36/applications-multimedia.ico"));
+    setWindowIcon(QIcon(":/36x36/applications-multimedia16.png"));
 #endif
 
     const QString arg_file = "--file=";
@@ -1003,7 +1003,7 @@ void MainWindow::menu_option_show_tray_icon(bool show)
 #ifdef __linux__
         m_tray_message = new QSystemTrayIcon(QIcon(":/36x36/applications-multimedia.png"), this);
 #else
-        QIcon icon(":/36x36/applications-multimedia.ico");
+        QIcon icon(":/36x36/applications-multimedia16.png");
         if (!icon.isNull())
         {
             m_tray_message = new QSystemTrayIcon(icon, this);
@@ -1023,6 +1023,8 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     if (m_tray_message)
     {
         m_tray_message->setVisible(show);
+        m_tray_message->setToolTip("Raspi Kodi");
+        m_tray_message->showMessage("Title", "Raspi Kodi");
     }
 }
 
