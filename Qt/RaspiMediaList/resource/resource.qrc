@@ -4,5 +4,6 @@
         <file>applications-multimedia.png</file>
         <file>applications-multimedia.ico</file>
         <file>video-x-generic.png</file>
+        <file>applications-multimedia16.png</file>
     </qresource>
 </RCC>
