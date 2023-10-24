@@ -122,9 +122,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 #ifdef __linux__
-    setWindowIcon(QIcon(":/36x36/applications-multimedia.png"));
+    setWindowIcon(QIcon(":/applications-multimedia.png"));
 #else
-    setWindowIcon(QIcon(":/36x36/applications-multimedia16.png"));
+    setWindowIcon(QIcon(":/applications-multimedia16.png"));
 #endif
 
     const QString arg_file = "--file=";
@@ -1001,21 +1001,15 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     if (!m_tray_message && show)
     {
 #ifdef __linux__
-        m_tray_message = new QSystemTrayIcon(QIcon(":/36x36/applications-multimedia.png"), this);
+        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.png"), this);
 #else
-        QIcon icon(":/36x36/applications-multimedia16.png");
-        if (!icon.isNull())
-        {
-            m_tray_message = new QSystemTrayIcon(icon, this);
-        }
+        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia16.ico"), this);
 #endif
         QMenu*menu = new QMenu;
         QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
         action = menu->addAction(tr("Hide %1").arg(windowTitle()));
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
-        menu->addSeparator();
-        menu->addAction(ui->actionAbout);
         menu->addAction(ui->actionInfo);
 
         m_tray_message->setContextMenu(menu);
