@@ -14,8 +14,8 @@
    <string>Raspi Kodi Media List</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>resource/applications-multimedia.ico</normaloff>resource/applications-multimedia.ico</iconset>
+   <iconset resource="resource/resource.qrc">
+    <normaloff>:/applications-multimedia.png</normaloff>:/applications-multimedia.png</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -508,6 +508,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
