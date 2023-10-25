@@ -302,6 +302,7 @@
     <addaction name="actionRead_favorites"/>
     <addaction name="actionSave_as_favorites"/>
     <addaction name="actionUpload_favorites"/>
+    <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -504,6 +505,17 @@
    </property>
    <property name="statusTip">
     <string>Show tray icon and information about title in tray tooltip</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close Program</string>
+   </property>
+   <property name="statusTip">
+    <string>Close Program</string>
    </property>
   </action>
  </widget>

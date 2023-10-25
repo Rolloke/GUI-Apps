@@ -226,6 +226,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
+    connect(ui->actionClose, SIGNAL(triggered(bool)), SLOT(close()));
 
     ui->sliderVolume->setMinimum(0);
     ui->sliderVolume->setMaximum(100);
@@ -401,11 +402,8 @@ void MainWindow::on_pushButtonStart_clicked()
                 mVideo.show();
             }
             mPlayer.play();
-            if (mPlayer.isMetaDataAvailable())
-            {
-                connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
-                connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
-            }
+            connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
+            connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
 
             display_play_status();
             m_play_name->setText(get_item_name(mCurrentPlayIndex));
@@ -1010,7 +1008,7 @@ void MainWindow::menu_option_show_tray_icon(bool show)
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
         action = menu->addAction(tr("Hide %1").arg(windowTitle()));
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
-        menu->addAction(ui->actionInfo);
+        menu->addAction(ui->actionClose);
 
         m_tray_message->setContextMenu(menu);
     }
