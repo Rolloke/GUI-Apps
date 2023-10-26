@@ -13,9 +13,15 @@ namespace txt
 {
    extern const char git[];
    extern const char New[];
-   extern const char currentpath_id[];
-   extern const char recursivecmd_id[];
    extern const char invalid[];
+
+   extern const char set_currentpath[];
+   extern const char cmd_recursive[];
+   extern const char root_path[];
+   extern const char relative_path[];
+   extern const char file_name[];
+   extern const char file_ext[];
+   extern const char file_basename[];
 }
 
 
