@@ -639,42 +639,59 @@ void  MainWindow::applyCommandToFileTree(const QString& aCommand)
     {
         btnCloseText_clicked(Editor::Viewer);
         mGitCommand = aCommand;
-        QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
-        const QString ftlp      = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
-        fFilePath = fFilePath.mid(ftlp.length()+1);
+        QString       parent_path = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
         if (mGitCommand.startsWith(txt::git))
         {
             mCurrentTask = Work::ApplyGitCommand;
         }
         else
         {
+            const QString ftlp = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
+            QString  file_path = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+            const QFileInfo info(file_path);
+            file_path = file_path.mid(ftlp.length()+1);
+
             mCurrentTask = Work::ApplyCommand;
-            bool path_contained   = mGitCommand.contains("%2");
-            bool set_current_path = mGitCommand.contains(txt::currentpath_id);
-            bool cmd_is_recursive = mGitCommand.contains(txt::recursivecmd_id);
-            bool root_contained   = mGitCommand.contains("%3");
+            bool set_current_path = mGitCommand.contains(txt::set_currentpath);
+            bool cmd_is_recursive = mGitCommand.contains(txt::cmd_recursive);
+            if (mGitCommand.contains("%1"))
+            {
+                mGitCommand.replace("%1", file_path);
+            }
+            if (mGitCommand.contains(txt::root_path))
+            {
+                mGitCommand.replace(txt::root_path, ftlp);
+            }
+            if (mGitCommand.contains(txt::file_basename))
+            {
+                mGitCommand.replace(txt::file_basename, info.baseName());
+            }
+            if (mGitCommand.contains(txt::file_name))
+            {
+                mGitCommand.replace(txt::file_name, info.fileName());
+            }
+            if (mGitCommand.contains(txt::file_ext))
+            {
+                mGitCommand.replace(txt::file_ext, info.suffix());
+            }
+            if (mGitCommand.contains(txt::relative_path))
+            {
+                mGitCommand.replace(txt::relative_path, file_path);
+            }
+
             if (set_current_path)
             {
-                QDir::setCurrent(ftlp + "/" + fFilePath);
-                mGitCommand.replace(txt::currentpath_id, "");
-                fFilePath.clear();
+                QDir::setCurrent(ftlp + "/" + file_path);
+                mGitCommand.replace(txt::set_currentpath, "");
+                file_path.clear();
             }
             if (cmd_is_recursive)
             {
-                mGitCommand.replace(txt::recursivecmd_id, "");
+                mGitCommand.replace(txt::cmd_recursive, "");
                 mCurrentTask = Work::ApplyCommandRecursive;
             }
-            if (root_contained)
-            {
-                const auto path = path_contained ? fFilePath : "";
-                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1").arg(path).arg(ftlp);
-            }
-            else if (path_contained)
-            {
-                mGitCommand = tr(mGitCommand.toStdString().c_str()).arg("%1", fFilePath);
-            }
         }
-        iterateTreeItems(*ui->treeSource, &fFilePath, mContextMenuSourceTreeItem);
+        iterateTreeItems(*ui->treeSource, &parent_path, mContextMenuSourceTreeItem);
         mGitCommand.clear();
         mCurrentTask = Work::None;
     }
@@ -856,7 +873,7 @@ void MainWindow::check_set_current_path(QString & git_command)
 {
     if (mContextMenuSourceTreeItem)
     {
-        bool set_current_path = git_command.contains(txt::currentpath_id);
+        bool set_current_path = git_command.contains(txt::set_currentpath);
         if (set_current_path)
         {
             QString       fFilePath = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
@@ -864,7 +881,7 @@ void MainWindow::check_set_current_path(QString & git_command)
             fFilePath = fFilePath.mid(ftlp.length()+1);
 
             QDir::setCurrent(ftlp + "/" + fFilePath);
-            git_command.replace(txt::currentpath_id, "");
+            git_command.replace(txt::set_currentpath, "");
         }
     }
 }

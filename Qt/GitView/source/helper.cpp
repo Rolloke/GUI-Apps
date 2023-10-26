@@ -36,9 +36,15 @@ namespace txt
 {
    const char git[]             = "git";
    const char New[]             = "new";
-   const char currentpath_id[]  = "#2";
-   const char recursivecmd_id[] = "#r";
    const char invalid[]         = "invalid";
+
+   const char set_currentpath[] = "{cd}";
+   const char cmd_recursive[]   = "{rec}";
+   const char root_path[]       = "{root}";
+   const char relative_path[]   = "{rel_path}";
+   const char file_name[]       = "{name}";
+   const char file_ext[]        = "{extension}";
+   const char file_basename[]   = "{basename}";
 }
 
 QPoint menu_offset(5, 0);
