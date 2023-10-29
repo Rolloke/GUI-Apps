@@ -228,6 +228,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
     connect(ui->actionClose, SIGNAL(triggered(bool)), SLOT(close()));
 
+#ifdef _WIN32
+    connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
+    connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
+#endif
+    connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
+
     ui->sliderVolume->setMinimum(0);
     ui->sliderVolume->setMaximum(100);
     ui->sliderVolume->setTickPosition(QSlider::TicksBothSides);
@@ -394,16 +400,12 @@ void MainWindow::on_pushButtonStart_clicked()
         }
         else
         {
-            disconnect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
-            disconnect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
             if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
             {
                 mVideo.show();
             }
             mPlayer.play();
-            connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
-            connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
 
             display_play_status();
             m_play_name->setText(get_item_name(mCurrentPlayIndex));
@@ -1022,14 +1024,28 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     }
 }
 
-
+#ifdef _WIN32
 void MainWindow::metaDataAvailableChanged(bool changed)
 {
     if (changed)
     {
-
+        QStringList list = mPlayer.availableMetaData();
+        for (const auto &key : list)
+        {
+            metaDataChanged(key, mPlayer.metaData(key));
+        }
     }
 }
+
+void MainWindow::metaDataChanged()
+{
+    QStringList list = mPlayer.availableMetaData();
+    for (const auto &key : list)
+    {
+        metaDataChanged(key, mPlayer.metaData(key));
+    }
+}
+#endif
 
 void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 {

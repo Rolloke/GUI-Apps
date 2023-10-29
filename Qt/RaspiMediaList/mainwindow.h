@@ -79,7 +79,10 @@ private slots:
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error);
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
+#ifdef _WIN32
     void metaDataAvailableChanged(bool changed);
+    void metaDataChanged();
+#endif
     void metaDataChanged(const QString&key, const QVariant&value);
     void traymenu_hide_window();
     void traymenu_show_window();
