@@ -658,14 +658,15 @@ void MainWindow::menu_help_about()
     QString message = tr("<h3>About Kodi media list viewer and editor</h3><br><br>"
             "Store tv channels from m3u files as favorites within raspberry kodi<br>"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
-            "<br>"
-            "<li>Based on Qt:\t%1</li>"
-            "<li>Built on:\t\t%2, %3</li>"
-            "<li>Author:\t\tRolf Kary Ehlers</li>"
-            "<li>Version:\t\t%4</li>"
-            "<li>License:\t\tGNU GPL Version 2</li>"
-            "<li>Email:\t\trolf-kary-ehlers@t-online.de</li>"
-            "</ul>"
+             "<table>"
+             "<tr><td>Based on Qt</td><td>: %1</td></tr>"
+             "<tr><td>Built on</td><td>: %2, %3</td></tr>"
+             "<tr><td>Author</td><td>: Rolf Kary Ehlers</td></tr>"
+             "<tr><td>Version</td><td>: %4</td></tr>"
+             "<tr><td>License</td><td>: GNU GPL Version 2</td></tr>"
+             "<tr><td>Email</td><td>: rolf-kary-ehlers@t-online.de</td></tr>"
+             "</table>"
+             "<br>"
             "<br>Command Line "
             ).arg(qVersion(), __DATE__, __TIME__, txt::version);
     for (const auto& line : txt::media_player_cmd_line)
@@ -680,26 +681,27 @@ void MainWindow::menu_help_info()
 {
     if (mCurrentRowIndex != -1)
     {
-        QString info = tr("<h3>Information about selected item</h3><br>"
-          "<ul>"
-           "<li>Name:\t%1</li>"
-           "<li>Web:\t%2</li>"
-           "<li>Pretty name:\t%3</li>"
-           "<li>Media URL:\t%4</li>"
-           "<li>Thumb:\t%5</li></ul>").arg(
+        QString info = tr("<h3>Information about selected item</h3><h4>Stream Information:</h4>"
+          "<table>"
+           "<tr><td>Name</td><td>: %1</td></tr>"
+           "<tr><td>Web</td><td>: %2</td></tr>"
+           "<tr><td>Pretty name</td><td>: %3</td></tr>"
+           "<tr><td>Media URL</td><td>: %4</td></tr>"
+           "<tr><td>Thumb</td><td>: %5</td></tr>"
+           "</table>").arg(
            mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eFriendlyName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
 
-        info += tr("<br>Meta Info:<br><ul>");
+        info += tr("<h4>Meta Info:</h4><table>");
         for (auto metainfo = mCurrentMetainfo.begin(); metainfo != mCurrentMetainfo.end(); ++metainfo)
         {
             const auto& value = metainfo.value();
-            info += "<li>";
+            info += "<tr><td>";
             info += metainfo.key();
-            info += ": ";
+            info += "</td><td>: ";
             switch(value.type())
             {
             case QVariant::String:
@@ -721,9 +723,9 @@ void MainWindow::menu_help_info()
             default:
                 break;
             }
-            info += "</li>";
+            info += "</td></tr>";
         }
-        info += "</ul>";
+        info += "</table>";
         QMessageBox::about(this, windowTitle(), info);
     }
 }

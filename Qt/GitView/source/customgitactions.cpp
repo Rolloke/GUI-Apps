@@ -696,7 +696,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     {
         Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
         Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote,
-        Type::Folder, Type::IgnoreTypeStatus
+        Type::Folder, Type::File, Type::IgnoreTypeStatus
     };
 
     menu.addSeparator();
