@@ -53,10 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
         switch (fSection)
         {
         case eFile: resize = QHeaderView::Stretch;          break;
-        case ePath: resize = QHeaderView::Fixed;      break;
+        //case ePath: resize = QHeaderView::Fixed;        break;
         default:    resize = QHeaderView::ResizeToContents; break;
         }
-        ui->tableView->horizontalHeader()->setSectionResizeMode(resize);
+        ui->tableView->horizontalHeader()->setSectionResizeMode(fSection, resize);
     }
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
