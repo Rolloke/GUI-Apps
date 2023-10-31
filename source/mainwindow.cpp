@@ -29,6 +29,7 @@
 /// TODO: include for Qt 6 here
 /// TODO: test all qt6 things
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QStringConverter>
 #else
 #include <QTextCodec>
 #endif
@@ -1410,6 +1411,12 @@ void MainWindow::initCodecCombo()
 {
     /// TODO: create code for Qt 6 here
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    ui->comboTextCodex->addItem("Default Codec");
+    QStringEncoder sc;
+    for (int codec=0; codec < QStringConverter::LastEncoding; ++codec)
+    {
+        ui->comboTextCodex->addItem(sc.nameForEncoding(static_cast<QStringConverter::Encoding>(codec)));
+    }
 #else
     const auto codecs = QTextCodec::availableCodecs();
     QRegExp reg_ex_num ("([\\d]{1,6})");

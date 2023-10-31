@@ -406,8 +406,12 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
 
     if (file.open(QIODevice::ReadOnly))
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        std::optional<QStringConverter::Encoding> encoding;
+        const bool is_binary_file = qbinarytableview::is_binary(file, encoding);
+#else
         const bool is_binary_file = qbinarytableview::is_binary(file);
-
+#endif
         code_browser * text_browser = dynamic_cast<code_browser*>(get_active_editable_widget(file_path));
         if (!text_browser && !is_binary_file)
         {
@@ -441,8 +445,55 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         }
         else if (reopen_file && text_browser)
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (encoding.has_value())
+            {
+                QStringDecoder decode_string;
+                TRACEX(Logger::to_browser, "opened file has enncoding" << decode_string.nameForEncoding(encoding.value()));
+            }
+            if (!text_browser->hasExtension(file_extension))
+            {
+                text_browser->setExtension(file_extension);
+            }
+            if (ui->ckRenderGraphicFile->isChecked())
+            {
+                if (encoding.has_value())
+                {
+                    QStringDecoder decode_string(encoding.value());
+                    if (file_extension.contains("md", Qt::CaseInsensitive))
+                    {
+                        text_browser->setMarkdown(decode_string(file.readAll()));
+                    }
+                    else
+                    {
+                        text_browser->setText(decode_string(file.readAll()));
+                    }
+                    text_browser->set_encoding(encoding);
+                }
+                else if (file_extension.compare("md", Qt::CaseInsensitive) == 0)
+                {
+                    text_browser->setMarkdown(file.readAll());
+                }
+                else
+                {
+                    text_browser->setText(file.readAll());
+                }
+            }
+            else
+            {
+                if (encoding.has_value())
+                {
+                    QStringDecoder decode_string(encoding.value());
+                    text_browser->setPlainText(decode_string(file.readAll()));
+                    text_browser->set_encoding(encoding);
+                }
+                else
+                {
+                    text_browser->setPlainText(file.readAll());
+                }
+            }
+#else
             bool codec_selected = false;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             if (ui->comboTextCodex->currentIndex())
             {
                 // Umlaute windows-437, windows-850, windows-1252
@@ -458,7 +509,6 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             {
                 QTextCodec::setCodecForLocale(nullptr);
             }
-#endif
             if (!text_browser->hasExtension(file_extension))
             {
                 text_browser->setExtension(file_extension);
@@ -485,6 +535,8 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
                     text_browser->setPlainText(file.readAll());
                 }
             }
+#endif
+
             text_browser->set_changed(false);
             textBrowserChanged(false);
         }

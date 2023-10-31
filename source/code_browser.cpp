@@ -245,7 +245,6 @@ void code_browser::highlightCurrentLine()
     Q_EMIT column_changed(selection.cursor.columnNumber());
 }
 
-
 int code_browser::blockCount() const
 {
     return document()->blockCount();
@@ -548,6 +547,18 @@ void code_browser::parse_blame(const QString &blame)
     }
     go_to_line(1);
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void code_browser::set_encoding(const std::optional<QStringConverter::Encoding>& encoding)
+{
+    m_encoding = encoding;
+}
+
+std::optional<QStringConverter::Encoding> code_browser::get_encoding()
+{
+    return m_encoding;
+}
+#endif
 
 QSize LineNumberArea::sizeHint() const
 {

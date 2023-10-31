@@ -8,6 +8,9 @@
 #include "DisplayType.h"
 #include "editable.h"
 #include <boost/optional/optional.hpp>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QStringConverter>
+#endif
 
 class BinaryTableModel;
 
@@ -25,7 +28,11 @@ public:
     int  get_columns() const;
     int  get_offset() const;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    static bool is_binary(QFile& file, std::optional<QStringConverter::Encoding>& encoding);
+#else
     static bool is_binary(QFile& file);
+#endif
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

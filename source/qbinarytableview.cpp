@@ -1,5 +1,6 @@
 #include "qbinarytableview.h"
 #include "logger.h"
+#include "helper.h"
 #include <assert.h>
 #include <QScrollBar>
 #include <QKeyEvent>
@@ -8,7 +9,6 @@
 #include <QJsonObject>
 
 /// TODO: byte position change does not lead to correct row and column position when typed_display_values are shown
-#define INT(X) static_cast<int>(X)
 
 namespace
 {
@@ -181,7 +181,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     {
         x_position -= columnWidth(i);
     }
-    int char_position = static_cast<int>(x_position / size + 0.5);
+    int char_position = INT(x_position / size + 0.5);
 
     int cursor = -1;
     if (themodel.has_typed_display_values())
@@ -204,7 +204,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     else if (column == INT(BinaryTableModel::Table::Typed))
     {
         int pos   = themodel.get_typed_content(row).toString().left(char_position).count(" ");
-        int bytes = static_cast<int>(pos * themodel.get_type()->GetByteLength());
+        int bytes = INT(pos * themodel.get_type()->GetByteLength());
         cursor    = row * bytes_per_row + bytes;
     }
 
@@ -270,7 +270,7 @@ void qbinarytableview::set_type(int type)
 
 int qbinarytableview::get_type() const
 {
-    return static_cast<int>(get_model()->m_display_type);
+    return INT(get_model()->m_display_type);
 }
 
 void qbinarytableview::set_offset(int offset)
@@ -415,6 +415,29 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
     }
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+bool qbinarytableview::is_binary(QFile& file, std::optional<QStringConverter::Encoding>& encoding)
+{
+    bool binary = false;
+    unsigned char buffer[16];
+    auto read_bytes = file.peek(reinterpret_cast<char*>(&buffer[0]), sizeof(buffer));
+
+    QStringDecoder decoder;
+    encoding = decoder.encodingForData(QByteArrayView(buffer, read_bytes));
+    if (!encoding.has_value())
+    {
+        for (qint64 i=0; i<read_bytes; ++i)
+        {
+            if ( !isascii(buffer[i]))
+            {
+                binary = true;
+                break;
+            }
+        }
+    }
+    return binary;
+}
+#else
 bool qbinarytableview::is_binary(QFile& file)
 {
     bool binary = false;
@@ -463,7 +486,7 @@ bool qbinarytableview::is_binary(QFile& file)
     }
     return binary;
 }
-
+#endif
 // model section
 
 /// brief returns the member index for structs
@@ -608,7 +631,7 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     }
     const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
     const int bytes_per_row  = get_bytes_per_row();
-    const int bytes_per_type = static_cast<int>(get_bytes_per_type());
+    const int bytes_per_type = INT(get_bytes_per_type());
     const bool is_hex_display = m_display_type >= CDisplayType::HEX8 && m_display_type <= CDisplayType::HEX64;
     const bool different_endian = CDisplayType::getDifferentEndian();
     if (is_hex_display)
@@ -657,7 +680,7 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
         switch (jv.type())
         {
         case QJsonValue::Type::Double:      // fixed lenght within value
-            length = static_cast<int>(jv.toDouble());
+            length = INT(jv.toDouble());
             break;
         case QJsonValue::String:            // length within data variable identified by name
         {
@@ -675,7 +698,7 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
             if (length_variable != value_vector.rend())
             {
                 size_t value_index = std::distance(value_vector.rend()-1, length_variable);
-                if (static_cast<int>(value_index) < itdv && length_variable->display)
+                if (INT(value_index) < itdv && length_variable->display)
                 {
                     bool ok = false;
                     if (index_vector.size())
@@ -690,7 +713,7 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
                     }
                     else
                     {
-                        int index = static_cast<int>(offset_vector.size() - (itdv - value_index));
+                        int index = INT(offset_vector.size() - (itdv - value_index));
                         length = length_variable->display->Display(&buffer_pointer[offset_vector[index]]).toInt(&ok);
                         if (!ok) length = DisplayValue::invalid_length;
                     }
@@ -719,7 +742,7 @@ void BinaryTableModel::update_typed_display_rows()
     }
 
     int offset = 0;
-    for (int itdv = 0; itdv < static_cast<int>(m_td_values.size()); ++itdv)
+    for (int itdv = 0; itdv < INT(m_td_values.size()); ++itdv)
     {
         auto& value = m_td_values[itdv];
         value.m_td_row_to_index.clear();    // cleanup row to index map
@@ -733,7 +756,7 @@ void BinaryTableModel::update_typed_display_rows()
         }
     }
     m_td_offset.push_back(offset);
-    insertRows(0, static_cast<int>(m_td_index.size()), QModelIndex());
+    insertRows(0, INT(m_td_index.size()), QModelIndex());
 }
 
 void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offset, int length, int itdv, std::vector<int> &rows)
@@ -752,16 +775,16 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
         }
         else if (set_variable_display_type_length(value.display, length))
         {
-            value.set_length(static_cast<int>(m_td_index.size()), length);
+            value.set_length(INT(m_td_index.size()), length);
             length = DisplayValue::default_length;
         }
         int index = length > 1 ? 0 : -1;
         while (length > 0 && offset < m_binary_content.size())
         {
-            int byte_length = static_cast<int>(value.display->GetByteLength(&buffer_pointer[offset]) * std::min(length, m_columns_per_row));
+            int byte_length = INT(value.display->GetByteLength(&buffer_pointer[offset]) * std::min(length, m_columns_per_row));
             if (index >= 0)
             {
-                value.set_array_index(static_cast<int>(m_td_index.size()), index);
+                value.set_array_index(INT(m_td_index.size()), index);
                 index += m_columns_per_row;
             }
             m_td_index.push_back(itdv);
@@ -795,13 +818,13 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                 {
                     if (length > 1)
                     {
-                        structure.set_array_index(static_cast<int>(m_td_index.size()), index);
+                        structure.set_array_index(INT(m_td_index.size()), index);
                     }
                     int member_length = DisplayValue::default_length;
                     if (member)
                     {
-                        const int row = static_cast<int>(m_td_index.size());
-                        structure.set_index(row, static_cast<int>(member));
+                        const int row = INT(m_td_index.size());
+                        structure.set_index(row, INT(member));
                         rows.push_back(row);
                         member_length = get_typed_display_array_length(structure.member[member], member, structure.member, {}, m_td_offset);
                         if (member_length > DisplayValue::default_length)
@@ -818,7 +841,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                     update_typed_display_value(structure.member[member], offset, member_length, itdv, inserted_rows);
                     for (const auto& inserted_row: inserted_rows)
                     {
-                        structure.set_index(inserted_row, static_cast<int>(member));
+                        structure.set_index(inserted_row, INT(member));
                         TRACEX(Logger::info, "inserted row: "<< inserted_row << " for " << member << " of " << structure.name);
                     }
                     /// TODO: check update also parent struct, if member is > 0
@@ -967,7 +990,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
         if (!is_variable_length_display_type && value.array_length)
         {
             const int next_offset = m_td_offset[row+1];
-            const int value_bytes = static_cast<int>(value.display->GetByteLength());
+            const int value_bytes = INT(value.display->GetByteLength());
             int offset            = m_td_offset[row] + value_bytes;
             for (int i=1; i<m_columns_per_row && offset < next_offset; ++i)
             {
@@ -985,7 +1008,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
             int length = 1;
             int array_index = -1;
             int index = structure.get_index(row, &length, &array_index);
-            if (index < static_cast<int>(structure.member.size()))
+            if (index < INT(structure.member.size()))
             {
                 if (array_index >= 0)
                 {
@@ -1004,7 +1027,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
 QVariant BinaryTableModel::get_typed_display_values(int row) const
 {
     QString display_value {"n/a"};
-    if (row >= 0 && row < static_cast<int>(m_td_index.size()) && m_td_offset[row] <= m_binary_content.size())
+    if (row >= 0 && row < INT(m_td_index.size()) && m_td_offset[row] <= m_binary_content.size())
     {
         const auto& value = m_td_values[m_td_index[row]];
         int length = 1;
@@ -1021,7 +1044,7 @@ QString  BinaryTableModel::display_type(const DisplayValue& value, int row, int 
         if (length)
         {
             const std::uint8_t* buffer_pointer = reinterpret_cast<const std::uint8_t*>(m_binary_content.data());
-            *length = static_cast<int>(value.display->GetByteLength(&buffer_pointer[m_td_offset[row]]));
+            *length = INT(value.display->GetByteLength(&buffer_pointer[m_td_offset[row]]));
         }
         return value.display->Type();
     }
@@ -1032,7 +1055,7 @@ QString  BinaryTableModel::display_type(const DisplayValue& value, int row, int 
         {
             const DisplayValue& structure = struct_iter->second;
             int index = structure.get_index(row);
-            if (index < static_cast<int>(structure.member.size()))
+            if (index < INT(structure.member.size()))
             {
                 return display_type(structure.member[index], row, length);
             }
@@ -1098,7 +1121,7 @@ int BinaryTableModel::get_bytes_per_row() const
 {
     if (m_columns_per_row)
     {
-        return static_cast<int>(get_bytes_per_type() * m_columns_per_row);
+        return INT(get_bytes_per_type() * m_columns_per_row);
     }
     return 1;
 }
