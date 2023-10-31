@@ -307,8 +307,28 @@ void MainWindow::btnStoreText_clicked()
         code_browser* text_browser = dynamic_cast<code_browser*>(active_widget);
         if (text_browser)
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            auto encoding = text_browser->get_encoding();
+            if (ui->comboTextCodex->currentIndex())
+            {
+                auto current = ui->comboTextCodex->currentText();
+                QStringEncoder decode_string;
+                encoding =  decode_string.encodingForName(current.toStdString().c_str());
+            }
+            if (encoding.has_value())
+            {
+                QStringEncoder encode_string(encoding.value());
+                file.write(encode_string(text_browser->toPlainText()));
+            }
+            else
+            {
+                const string fString = text_browser->toPlainText().toStdString();
+                file.write(fString.c_str(), fString.size());
+            }
+#else
             const string fString = text_browser->toPlainText().toStdString();
             file.write(fString.c_str(), fString.size());
+#endif
             file.close();
             text_browser->set_changed(false);
         }

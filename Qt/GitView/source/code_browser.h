@@ -112,6 +112,13 @@ private:
     ActionList *m_actions;
     bool        m_dark_mode;
     QSharedPointer<Highlighter> mHighlighter;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+public:
+    void set_encoding(const std::optional<QStringConverter::Encoding>& encoding);
+    std::optional<QStringConverter::Encoding> get_encoding();
+private:
+    std::optional<QStringConverter::Encoding> m_encoding;
+#endif
 
 #ifdef WEB_ENGINE
     PreviewPage * m_web_page;
