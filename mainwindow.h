@@ -43,6 +43,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
 private:
     void open_file(const QString& file_name);
     QString getConfigName() const;
@@ -50,6 +51,9 @@ private:
     void select_index(int select);
     void display_play_status();
     void keyPressEvent(QKeyEvent *) override;
+    void changeEvent(QEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void add_button_to_menue(QMenu*menu, QPushButton* button);
 
 private slots:
     void menu_file_open();
