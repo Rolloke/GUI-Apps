@@ -340,6 +340,27 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     QMainWindow::keyPressEvent(event);
 }
 
+void MainWindow::changeEvent(QEvent *event)
+{
+    QMainWindow::changeEvent(event);
+    if(event->type() == QEvent::WindowStateChange)
+    {
+//        if(isMinimized())
+//        {
+//            hide();
+//        }
+    }
+}
+
+
+void MainWindow::closeEvent(QCloseEvent * /* event */)
+{
+    //if (m_tray_message->isVisible())
+    {
+//        event->ignore();
+    }
+}
+
 QString MainWindow::getConfigName() const
 {
     QString sConfigFileName = windowTitle();
@@ -353,7 +374,7 @@ QString MainWindow::getConfigName() const
 
 QString MainWindow::get_item_name(int row) const
 {
-    return (row != -1) ? mListModel->data(mListModel->index(row, eName)).toString() : "";
+    return (row != -1 && row < mListModel->rowCount()) ? mListModel->data(mListModel->index(row, eName)).toString() : "";
 }
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index, bool called_by_function)
@@ -660,13 +681,13 @@ void MainWindow::menu_help_about()
     QString message = tr("<h3>About Kodi media list viewer and editor</h3><br><br>"
             "Store tv channels from m3u files as favorites within raspberry kodi<br>"
             "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
-             "<table>"
-             "<tr><td>Based on Qt</td><td>: %1</td></tr>"
-             "<tr><td>Built on</td><td>: %2, %3</td></tr>"
-             "<tr><td>Author</td><td>: Rolf Kary Ehlers</td></tr>"
-             "<tr><td>Version</td><td>: %4</td></tr>"
-             "<tr><td>License</td><td>: GNU GPL Version 2</td></tr>"
-             "<tr><td>Email</td><td>: rolf-kary-ehlers@t-online.de</td></tr>"
+             "<table cellSpacing=\"0\" cellPadding=\"4\" >"
+             "<tr><td>Based on Qt</td><td>%1</td></tr>"
+             "<tr><td>Built on</td><td>%2, %3</td></tr>"
+             "<tr><td>Author</td><td>Rolf Kary Ehlers</td></tr>"
+             "<tr><td>Version</td><td>%4</td></tr>"
+             "<tr><td>License</td><td>GNU GPL Version 2</td></tr>"
+             "<tr><td>Email</td><td>rolf-kary-ehlers@t-online.de</td></tr>"
              "</table>"
              "<br>"
             "<br>Command Line "
@@ -684,12 +705,12 @@ void MainWindow::menu_help_info()
     if (mCurrentRowIndex != -1)
     {
         QString info = tr("<h3>Information about selected item</h3><h4>Stream Information:</h4>"
-          "<table>"
-           "<tr><td>Name</td><td>: %1</td></tr>"
-           "<tr><td>Web</td><td>: %2</td></tr>"
-           "<tr><td>Pretty name</td><td>: %3</td></tr>"
-           "<tr><td>Media URL</td><td>: %4</td></tr>"
-           "<tr><td>Thumb</td><td>: %5</td></tr>"
+          "<table cellSpacing=\"0\" cellPadding=\"4\" style=\"white-space:nowrap;width:100%\" >"
+           "<tr white-space: nowrap;><td>Name</td><td>%1</td></tr>"
+           "<tr><td>Web</td><td>%2</td></tr>"
+           "<tr><td>Pretty name</td><td>%3</td></tr>"
+           "<tr><td>Media URL</td><td>%4</td></tr>"
+           "<tr><td>Thumb</td><td>%5</td></tr>"
            "</table>").arg(
            mListModel->data(mListModel->index(mCurrentRowIndex, eName)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eID)).toString(),
@@ -697,13 +718,13 @@ void MainWindow::menu_help_info()
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
 
-        info += tr("<h4>Meta Info:</h4><table>");
+        info += tr("<h4>Meta Info:</h4><table cellSpacing=\"0\" cellPadding=\"4\" style=\"white-space:nowrap;width:100%\">");
         for (auto metainfo = mCurrentMetainfo.begin(); metainfo != mCurrentMetainfo.end(); ++metainfo)
         {
             const auto& value = metainfo.value();
             info += "<tr><td>";
             info += metainfo.key();
-            info += "</td><td>: ";
+            info += "</td><td>";
             switch(value.type())
             {
             case QVariant::String:
@@ -734,15 +755,11 @@ void MainWindow::menu_help_info()
 
 void MainWindow::traymenu_hide_window()
 {
-    setWindowFlags(Qt::SubWindow);
-    // TODO: do not close this window with about... or info...
+    hide();
 }
 
 void MainWindow::traymenu_show_window()
 {
-    Qt::WindowFlags flag = windowFlags();
-    flag &= ~Qt::SubWindow;
-    setWindowFlags(flag);
     show();
 }
 
@@ -998,6 +1015,15 @@ void MainWindow::menu_option_edit_download_command()
     }
 }
 
+void MainWindow::add_button_to_menue(QMenu*menu, QPushButton* button)
+{
+    QAction* action = menu->addAction(button->text());
+    action->setParent(this);
+    action->setStatusTip(button->toolTip());
+    addAction(action);
+    QObject::connect(action, SIGNAL(triggered()), button, SLOT(click()));
+}
+
 void MainWindow::menu_option_show_tray_icon(bool show)
 {
     if (!m_tray_message && show)
@@ -1012,6 +1038,24 @@ void MainWindow::menu_option_show_tray_icon(bool show)
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
         action = menu->addAction(tr("Hide %1").arg(windowTitle()));
         connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
+        menu->addSeparator();
+        action = menu->addAction(tr("Next source"));
+        connect(action, &QAction::triggered, [&]()
+        {
+            ui->tableView->selectRow(mCurrentPlayIndex+1);
+            m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex+1));
+            ui->pushButtonStart->click();
+        });
+        action = menu->addAction(tr("Previous source"));
+        connect(action, &QAction::triggered, [&]()
+        {
+            ui->tableView->selectRow(mCurrentPlayIndex-1);
+            m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex-1));
+            ui->pushButtonStart->click();
+        });
+        add_button_to_menue(menu, ui->pushButtonStart);
+        add_button_to_menue(menu, ui->pushButtonStop);
+        menu->addSeparator();
         menu->addAction(ui->actionClose);
 
         m_tray_message->setContextMenu(menu);
@@ -1059,7 +1103,7 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
             ui->statusBar->showMessage(message);
             if (m_tray_message && m_tray_message->isVisible())
             {
-                m_tray_message->setToolTip("<b>" + key + ":</b><br>" + value.toString());
+                m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
                 m_tray_message->showMessage(key, value.toString());
             }
         }
