@@ -215,7 +215,7 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
                                    INT(status_disabled), type.is(Type::type(status_disabled)),
                                    INT(status_not_enabled), type.is(Type::type(status_not_enabled)));
             }
-            if (type.type() & Type::File)
+            if (type.is(Type::File))
             {
                 status_not_enabled &= ~Type::Folder;
                 if (status_not_enabled)
@@ -236,19 +236,22 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
                     }
                 }
             }
-            else if (type.type() & Type::Folder)
+            else if (type.is(Type::Folder))
             {
-                if (status_not_enabled & Type::Folder)
+                if (status_not_enabled & (Type::Folder|Type::Repository))
                 {
                     enabled = true;
                 }
                 else
                 {
-                    if ((status_enabled & Type::Folder) == 0)
+                    status_enabled  &= ~Type::AllGitActions;
+                    status_disabled &= ~Type::AllGitActions;
+                    status_disabled &= ~Type::Folder;
+                    if (status_enabled && (type.type() & status_enabled) == 0)
                     {
                         enabled = false;
                     }
-                    else if (status_disabled & Type::Folder)
+                    else if (status_disabled && (type.type() & status_enabled) != 0)
                     {
                         enabled = false;
                     }

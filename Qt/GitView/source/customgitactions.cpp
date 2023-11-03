@@ -696,7 +696,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     {
         Type::GitAdded, Type::GitModified, Type::GitStaged, Type::GitDeleted,
         Type::GitUnTracked, Type::GitUnmerged, Type::GitLocal, Type::GitRemote,
-        Type::Folder, Type::File, Type::IgnoreTypeStatus
+        Type::Folder, Type::File, Type::Repository, Type::IgnoreTypeStatus
     };
 
     menu.addSeparator();
@@ -733,24 +733,24 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
             action->setChecked(enabled && !disabled);
             if (git_status == Type::IgnoreTypeStatus)
             {
-                set_tooltip(action, tr("Ignore git file type status"));
+                set_tooltip(action, tr("Ignore file type status"));
                 continue;
             }
             else
             {
-                set_tooltip(action, tr("Enable command if this git status is set"));
+                set_tooltip(action, tr("Enable command if this status is set"));
             }
             action = git_status_disable_group.addAction(Type::name(git_status));
             git_status_disable_menu->addAction(action);
             action->setCheckable(true);
             action->setChecked(!enabled && disabled);
-            set_tooltip(action, tr("Disable command if this git status is set"));
+            set_tooltip(action, tr("Disable command if this status is set"));
 
             action = git_status_enable_not_group.addAction(Type::name(git_status));
             git_status_enable_not_menu->addAction(action);
             action->setCheckable(true);
             action->setChecked(enabled && disabled);
-            set_tooltip(action, tr("Enable command if this git status is not set"));
+            set_tooltip(action, tr("Enable command if this status is not set"));
         }
     }
     menu.addSeparator();
