@@ -1,0 +1,25 @@
+{
+    "file":{
+        "mime":"mymime",
+        "extension":"jpg",
+        "endian": "*"
+    },
+    "content":[
+        {"struct size": "uint32"},
+        ["motion data", "MotionData", "struct size"]
+    ],
+    "structs":{
+         "MotionData": [
+              ["rotation", "Rotation"],
+              ["shift", "Shift"]
+         ],
+         "Rotation": [
+              {"heading": "float"},
+              {"roll": "float"},
+              {"pitch": "float"}
+         ],
+         "Shift": [
+              {"heave": "float"}
+         ]
+    }
+}
