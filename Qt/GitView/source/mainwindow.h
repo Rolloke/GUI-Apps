@@ -30,6 +30,8 @@ class code_browser;
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
+#else
+class QTextBrowser;
 #endif
 
 class MainWindow : public QMainWindow
@@ -315,9 +317,8 @@ public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
     void removeCmdToolBar(const QString &toolbar_name);
-#ifdef WEB_ENGINE
     void show_web_view(bool );
-#endif
+
 private:
 
     void     createDockWindows();
@@ -336,6 +337,8 @@ private:
 #ifdef WEB_ENGINE
     QSharedPointer<QWebEngineView> mWebEngineView;
     QSharedPointer<MarkdownProxy>  m_markdown_proxy;
+#else
+    QSharedPointer<QTextBrowser> mTextRenderView;
 #endif
 
     string2bool_map       mMergeTools;

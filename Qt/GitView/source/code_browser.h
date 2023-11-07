@@ -125,6 +125,10 @@ private:
 
 public:
     void set_page(PreviewPage*);
+#else
+    QTextBrowser* m_preview;
+public:
+    void set_page(QTextBrowser*);
 #endif
 };
 

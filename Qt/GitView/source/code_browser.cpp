@@ -33,6 +33,8 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
     connect(this, SIGNAL(textChanged()), this, SLOT(own_text_changed()));
 #ifdef WEB_ENGINE
     m_web_page = nullptr;
+#else
+    m_preview = nullptr;
 #endif
 }
 
@@ -41,6 +43,8 @@ code_browser::~code_browser()
     Q_EMIT show_web_view(false);
 #ifdef WEB_ENGINE
     m_web_page = nullptr;
+#else
+    m_preview = nullptr;
 #endif
 }
 
@@ -77,7 +81,6 @@ void code_browser::set_show_line_numbers(bool show)
 
 void code_browser::change_visibility(bool visible)
 {
-#ifdef WEB_ENGINE
     QString current_language = mHighlighter->currentLanguage();
     if (current_language == "html" || current_language == "markdown")
     {
@@ -90,9 +93,6 @@ void code_browser::change_visibility(bool visible)
             Q_EMIT show_web_view(false);
         }
     }
-#else
-    UNUSED(visible);
-#endif
 }
 
 code_browser* code_browser::clone(bool all_parameter, bool with_text)
@@ -111,6 +111,8 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         cloned->m_actions  = m_actions;
 #ifdef WEB_ENGINE
         cloned->m_web_page = m_web_page;
+#else
+        cloned->m_preview = m_preview;
 #endif
         cloned->setWhatsThis(whatsThis());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -708,6 +710,31 @@ void code_browser::own_text_changed()
             Q_EMIT show_web_view(false);
         }
     }
+#else
+    if (m_preview)
+    {
+        QString current_language = mHighlighter->currentLanguage();
+        if (current_language == "html")
+        {
+            QString text = toPlainText();
+            m_preview->setHtml(text);
+            Q_EMIT show_web_view(text.size() ? true : false);
+            setFocus();
+        }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        else if (current_language == "markdown")
+        {
+            QString text = toPlainText();
+            m_preview->setMarkdown(text);
+            Q_EMIT show_web_view(text.size() ? true : false);
+            setFocus();
+        }
+#endif
+        else
+        {
+            Q_EMIT show_web_view(false);
+        }
+    }
 #endif
 }
 
@@ -767,4 +794,9 @@ void MarkdownProxy::setText(const QString &text)
     emit textChanged(m_text);
 }
 
+#else
+void code_browser::set_page(QTextBrowser *page)
+{
+    m_preview = page;
+}
 #endif
