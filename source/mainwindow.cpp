@@ -38,6 +38,8 @@
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebChannel>
+#else
+#include <QTextBrowser>
 #endif
 
 #include <boost/bind/bind.hpp>
@@ -163,9 +165,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     Highlighter::Language::load(fSettings);
     ui->textBrowser->reset();
     connect(ui->textBrowser, SIGNAL(updateExtension(QString)), this, SLOT(updateSelectedLanguage(QString)));
-#ifdef WEB_ENGINE
     connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
-#endif
+
     ui->treeSource->header()->setSortIndicator(QSourceTreeWidget::Column::FileName, Qt::AscendingOrder);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::FileName, QHeaderView::Stretch);
     ui->treeSource->header()->setSectionResizeMode(QSourceTreeWidget::Column::DateTime, QHeaderView::ResizeToContents);
@@ -503,6 +504,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     QWebChannel *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), m_markdown_proxy.data());
     page->setWebChannel(channel);
+#else
+    connect(ui->textBrowser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+    ui->textBrowser->set_page(mTextRenderView.data());
 #endif
 
     TRACEX(Logger::info, windowTitle() << " Started");
@@ -801,6 +805,12 @@ void MainWindow::createDockWindows()
     // markdown view
     mWebEngineView.reset(new QWebEngineView(this));
     dock = create_dock_widget(mWebEngineView.data(), tr("Html && Markdown"), markdown_view);
+    tabifyDockWidget(first_tab, dock);
+    dock->setVisible(false);
+#else
+    mTextRenderView.reset(new QTextBrowser(this));
+    dock = create_dock_widget(mTextRenderView.data(), tr("Html && Markdown"), markdown_view);
+    mTextRenderView->setReadOnly(true);
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 #endif
@@ -1126,8 +1136,10 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
 #ifdef WEB_ENGINE
     connect(docked_browser, SIGNAL(text_changed(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
-    connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+#else
+    /// TODO: connect
 #endif
+    connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 
     docked_browser->setReadOnly(false);
     QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, new_textbrowser, true);
@@ -1183,8 +1195,10 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
 #ifdef WEB_ENGINE
         disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
-        disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+#else
+        /// TODO: disconnect
 #endif
+        disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
         ui->comboOpenNewEditor->setEnabled(dock_widgets.size() <= 1);
     }
