@@ -1,0 +1,13 @@
+{
+    "file":{
+        "mime":"mymime",
+        "extension":"*",
+        "endian": "*"
+    },
+    "content":[
+        {"first" : "double"},
+        ["second", "double"],
+        {"third" : "double"},
+        {"forth" : "double"}
+    ]
+}

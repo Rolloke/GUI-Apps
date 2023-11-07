@@ -1,0 +1,28 @@
+{
+    "file":{
+        "mime":"mymime",
+        "extension":"jpg",
+        "endian": "big"
+    },
+    "content":[
+        ["first", "uint32"],
+        {"second": "float"},
+        ["third" , "double", 3],
+        ["size of array", "uint32"],
+        ["float array", "float", "size of array"],
+        ["forth", "int32"],
+        ["motion data", "MotionData"]
+    ],
+    "structs":{
+         "MotionData": [
+              ["heading", "float"],
+              ["heave", "float"],
+              ["roll", "float"],
+              ["pitch", "float"]
+         ],
+         "NavigationData": [
+              ["latitude", "double"],
+              ["longitude", "double"]
+         ]
+    }
+}
