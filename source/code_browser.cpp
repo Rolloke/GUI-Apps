@@ -721,7 +721,7 @@ void code_browser::own_text_changed()
             Q_EMIT show_web_view(text.size() ? true : false);
             setFocus();
         }
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         else if (current_language == "markdown")
         {
             QString text = toPlainText();
