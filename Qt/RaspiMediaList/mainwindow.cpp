@@ -1027,7 +1027,7 @@ void MainWindow::menu_option_show_tray_icon(bool show)
 #ifdef __linux__
         m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.png"), this);
 #else
-        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia16.ico"), this);
+        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.ico"), this);
 #endif
         QMenu*menu = new QMenu;
         QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
@@ -1099,7 +1099,11 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
             ui->statusBar->showMessage(message);
             if (m_tray_message && m_tray_message->isVisible())
             {
+#ifdef __linux__
                 m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+#else
+                m_tray_message->setToolTip(tr("Source: %1\n%2: %3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+#endif
                 m_tray_message->showMessage(key, value.toString());
             }
         }
