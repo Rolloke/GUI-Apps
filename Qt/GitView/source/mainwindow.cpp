@@ -1195,10 +1195,9 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         disconnect(dock_widget, SIGNAL(visibilityChanged(bool)), text_browser, SLOT(change_visibility(bool)));
 #ifdef WEB_ENGINE
         disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
-#else
-        /// TODO: disconnect
 #endif
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
+        show_web_view(false);
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
         ui->comboOpenNewEditor->setEnabled(dock_widgets.size() <= 1);
     }

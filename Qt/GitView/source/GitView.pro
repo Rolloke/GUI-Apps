@@ -9,15 +9,13 @@
 QT += core gui
 QT += xml
 QT += svg
+greaterThan(QT_MAJOR_VERSION, 5): QT += svgwidgets
 
 QT += webenginewidgets webchannel
 DEFINES += WEB_ENGINE=1
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
-
-#DEFINES += NDEBUG
-#DEFINES -= BOOST_HAS_TRIVIAL_MOVE_ASSIGN
 
 TARGET = GitView
 TEMPLATE = app
@@ -109,7 +107,7 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += resource.qrc
 RC_FILE = resource/resource.rc
+win32:RC_ICONS = :/resource/logo@2x.ico
 
 TRANSLATIONS    = GitView_de.ts
 
-#RC_ICONS = :/resource/logo@2x.ico
