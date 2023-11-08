@@ -121,11 +121,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-#ifdef __linux__
     setWindowIcon(QIcon(":/applications-multimedia.png"));
-#else
-    setWindowIcon(QIcon(":/applications-multimedia16.png"));
-#endif
 
     const QString arg_file = "--file=";
     const QString arg_help = "--help";
@@ -718,7 +714,7 @@ void MainWindow::menu_help_info()
            mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString(),
            mListModel->data(mListModel->index(mCurrentRowIndex, eLogo)).toString());
 
-        info += tr("<h4>Meta Info:</h4><table cellSpacing=\"0\" cellPadding=\"4\" style=\"white-space:nowrap;width:100%\">");
+        info += tr("<h4>Meta Information:</h4><table cellSpacing=\"0\" cellPadding=\"4\" style=\"white-space:nowrap;width:100%\">");
         for (auto metainfo = mCurrentMetainfo.begin(); metainfo != mCurrentMetainfo.end(); ++metainfo)
         {
             const auto& value = metainfo.value();
