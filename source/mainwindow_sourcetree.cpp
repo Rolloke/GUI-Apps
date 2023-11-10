@@ -460,6 +460,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
                 if (encoding.has_value())
                 {
                     QStringDecoder decode_string(encoding.value());
+                    text_browser->set_do_preview(false);
                     if (file_extension.contains("md", Qt::CaseInsensitive))
                     {
                         text_browser->setMarkdown(decode_string(file.readAll()));
@@ -481,6 +482,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             }
             else
             {
+                text_browser->set_do_preview(true);
                 if (encoding.has_value())
                 {
                     QStringDecoder decode_string(encoding.value());
@@ -515,6 +517,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             }
             if (ui->ckRenderGraphicFile->isChecked())
             {
+                text_browser->set_do_preview(false);
                 if (codec_selected)
                 {
                     text_browser->setText(QString::fromLocal8Bit(file.readAll()));
@@ -526,6 +529,7 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
             }
             else
             {
+                text_browser->set_do_preview(true);
                 if (codec_selected)
                 {
                     text_browser->setPlainText(QString::fromLocal8Bit(file.readAll()));

@@ -21,6 +21,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_blame_characters(0)
   , m_actions(nullptr)
   , m_dark_mode(false)
+  , m_do_preview(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
@@ -313,6 +314,11 @@ void code_browser::set_actions(ActionList *list)
 void code_browser::set_dark_mode(bool dark)
 {
     m_dark_mode = dark;
+}
+
+void code_browser::set_do_preview(bool preview)
+{
+    m_do_preview = preview;
 }
 
 void code_browser::reset()
@@ -686,7 +692,7 @@ void code_browser::own_text_changed()
         Q_EMIT text_of_active_changed(m_FileChanged);
     }
 #ifdef WEB_ENGINE
-    if (m_web_page)
+    if (m_web_page && m_do_preview)
     {
         QString current_language = mHighlighter->currentLanguage();
         if (current_language == "html")
@@ -710,8 +716,12 @@ void code_browser::own_text_changed()
             Q_EMIT show_web_view(false);
         }
     }
+    else
+    {
+        Q_EMIT show_web_view(false);
+    }
 #else
-    if (m_preview)
+    if (m_preview && m_do_preview)
     {
         QString current_language = mHighlighter->currentLanguage();
         if (current_language == "html")
@@ -734,6 +744,10 @@ void code_browser::own_text_changed()
         {
             Q_EMIT show_web_view(false);
         }
+    }
+    else
+    {
+        Q_EMIT show_web_view(false);
     }
 #endif
 }
