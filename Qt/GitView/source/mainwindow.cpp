@@ -1196,6 +1196,7 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
 #ifdef WEB_ENGINE
         disconnect(text_browser, SIGNAL(text_changed(QString)), m_markdown_proxy.data(), SLOT(setText(QString)));
 #endif
+        show_web_view(false);
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         show_web_view(false);
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
