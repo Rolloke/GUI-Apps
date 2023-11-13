@@ -98,6 +98,7 @@ QString WorkerThreadConnector::getBatchToolTip()
     QString tool_tip = tr("Background commands");
     if (mCurrentCmdName.isEmpty() && mBatch.size() == 0)
     {
+        tool_tip += tr(": none");
     }
     else
     {
@@ -150,16 +151,24 @@ void WorkerThreadConnector::setMessageFunction(const boost::function<void (QVari
 
 void WorkerThreadConnector::receiveMessage(QVariant aData)
 {
-    mCurrentCmdName.clear();
+    QVariant batch_command;
+    if (mBatch.size())
+    {
+        batch_command = mBatch.front();
+        mCurrentCmdName = batch_command.toMap()[Worker::command].toString();
+        mBatch.pop_front();
+        mOnceBusy = mBatch.size() == 0;
+    }
+    else
+    {
+        mCurrentCmdName.clear();
+    }
     if (mMessageFunction)
     {
         mMessageFunction(aData);
     }
-    if (mBatch.size())
+    if (batch_command.isValid() && !batch_command.isNull())
     {
-        auto& batch_command = mBatch.front();
-        mCurrentCmdName = batch_command.toMap()[Worker::command].toString();
         Q_EMIT operate(batch_command);
-        mBatch.pop_front();
     }
 }

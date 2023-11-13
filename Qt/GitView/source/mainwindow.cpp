@@ -1291,9 +1291,9 @@ QVariant MainWindow::handleWorker(const QVariant& aData)
 
 void MainWindow::handleMessage(QVariant aData)
 {
-    Logger::printDebug(Logger::trace, "handleMessage(): %x, %s", QThread::currentThreadId(), aData.typeName());
     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
     mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
+    Logger::printDebug(Logger::trace, "handleMessage(): %x, %s", QThread::currentThreadId(), aData.typeName());
     if (aData.isValid())
     {
         auto data_map = aData.toMap();
@@ -1335,9 +1335,10 @@ void MainWindow::handleMessage(QVariant aData)
         case Work::ApplyGitCommand:
         case Work::ApplyCommand:
         {
-            appendTextToBrowser(data_map[Worker::command].toString());
+            auto cmd_action = data_map[Worker::action].toUInt();
+            appendTextToBrowser(data_map[Worker::command].toString(), cmd_action == 0);
             appendTextToBrowser(data_map[Worker::result].toString(), true);
-            perform_post_cmd_action(data_map[Worker::action].toUInt());
+            perform_post_cmd_action(cmd_action);
         } break;
         case Work::AsynchroneousCommand:
             break;
