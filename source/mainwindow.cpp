@@ -26,7 +26,6 @@
 #include <QFontDatabase>
 #include <QFileDialog>
 
-/// TODO: include for Qt 6 here
 /// TODO: test all qt6 things
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>
@@ -421,7 +420,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
         on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
         auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
         LOAD_STR(fSettings, fTextTabStopWidth, toInt);
         ui->textBrowser->setTabStopDistance(fTextTabStopWidth);
@@ -631,7 +630,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
         auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
 #else
         auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
@@ -2532,7 +2531,7 @@ void MainWindow::find_in_tree_views(find find_item)
         }
         if (ui->ckFindRegEx->isChecked())
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
             tree_match_flag = Qt::MatchRegularExpression;
 #else
             tree_match_flag = Qt::MatchRegExp;
@@ -2591,7 +2590,7 @@ void MainWindow::find_in_tree_views(find find_item)
         {
             for (auto& item : found_items)
             {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
                 item->setSelected(true);
 #else
                 tree_view->setItemSelected(item, true);
@@ -2606,7 +2605,7 @@ void MainWindow::find_in_tree_views(find find_item)
             int i=0;
             for (auto& item : found_items)
             {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
                 item->setSelected(i == property.mIndex);
 #else
                 tree_view->setItemSelected(item, i == property.mIndex);
@@ -2616,7 +2615,7 @@ void MainWindow::find_in_tree_views(find find_item)
                     auto* parent = item->parent();
                     while (parent)
                     {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
                         parent->setExpanded(true);
 #else
                         tree_view->setItemExpanded(parent, true);
@@ -2896,7 +2895,7 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         text_browser->setTabStopDistance(width);
 #else
         text_browser->setTabStopWidth(width);
