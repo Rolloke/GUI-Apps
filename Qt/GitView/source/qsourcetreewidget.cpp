@@ -366,7 +366,7 @@ void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepa
             auto* parent = found->parent();
             while (parent)
             {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
                 parent->setExpanded(true);
 #else
                 setItemExpanded(parent, true);

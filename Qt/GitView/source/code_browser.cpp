@@ -116,7 +116,7 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         cloned->m_preview = m_preview;
 #endif
         cloned->setWhatsThis(whatsThis());
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         cloned->setTabStopDistance(tabStopDistance());
 #else
         cloned->setTabStopWidth(tabStopWidth());
