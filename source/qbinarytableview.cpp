@@ -493,6 +493,8 @@ bool qbinarytableview::is_binary(QFile& file)
 /// @param row member index is determined for this row
 /// @param [length] optional display type length for this row
 /// @note the length is only returned, if available and wanted
+/// @param [array_index] optional display type array_index for this row
+/// @note the array_index is only returned, if available and wanted
 /// @returns index for this row
 int BinaryTableModel::DisplayValue::get_index(int row, int *length, int *array_index) const
 {
@@ -531,14 +533,11 @@ void BinaryTableModel::DisplayValue::set_length(int row, int length)
     auto member_index =  m_td_row_to_index.find(row);
     if (member_index != m_td_row_to_index.end())
     {
-        if (r2i::lenght < member_index->second.size())
+        if (r2i::lenght >= member_index->second.size())
         {
-            member_index->second[r2i::lenght] = length;
+            member_index->second.resize(r2i::lenght+1, 0);
         }
-        else
-        {
-            member_index->second.push_back(length);
-        }
+        member_index->second[r2i::lenght] = length;
     }
     else
     {
@@ -551,19 +550,11 @@ void BinaryTableModel::DisplayValue::set_array_index(int row, int array_index)
     auto member_index =  m_td_row_to_index.find(row);
     if (member_index != m_td_row_to_index.end())
     {
-        if (r2i::array_index < member_index->second.size())
+        if (r2i::array_index >= member_index->second.size())
         {
-            member_index->second[r2i::array_index] = array_index;
+            member_index->second.resize(r2i::array_index+1, 0);
         }
-        else if (r2i::array_index == member_index->second.size())
-        {
-            member_index->second.push_back(array_index);
-        }
-        else
-        {
-            member_index->second.push_back(0);
-            member_index->second.push_back(array_index);
-        }
+        member_index->second[r2i::array_index] = array_index;
     }
     else
     {
@@ -844,7 +835,7 @@ void BinaryTableModel::update_typed_display_value(DisplayValue& value, int &offs
                         structure.set_index(inserted_row, INT(member));
                         TRACEX(Logger::info, "inserted row: "<< inserted_row << " for " << member << " of " << structure.name);
                     }
-                    /// TODO: check update also parent struct, if member is > 0
+                    /// NOTE: check update also parent struct, if member is > 0
                     if (member)
                     {
                         rows.insert(rows.end(), inserted_rows.begin(), inserted_rows.end());
