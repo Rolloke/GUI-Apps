@@ -19,6 +19,10 @@
 #include <QItemSelection>
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
+#include <QMediaMetaData>
+
+/// TODO: find qt-version for this
+/// #include <QPlaylistFileParser>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -229,6 +233,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 #endif
     connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
+
+//     QPlaylistFileParser parser;
 
     ui->sliderVolume->setMinimum(0);
     ui->sliderVolume->setMaximum(100);
@@ -1093,7 +1099,8 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
     {
         QString message = key;
         message += ": ";
-        if (value.type() == QVariant::String && key.contains("title", Qt::CaseInsensitive))
+
+        if (value.type() == QVariant::String && key.contains(QMediaMetaData::Title, Qt::CaseInsensitive))
         {
             message += value.toString();
             ui->statusBar->showMessage(message);

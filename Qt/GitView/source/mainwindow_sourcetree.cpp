@@ -340,19 +340,19 @@ void MainWindow::open_file_externally()
         const QString   file_name  = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
         const QFileInfo file_info(file_name);
         const QString   file_extension = file_info.suffix().toLower();
-        QString open_file_cmd = mExternalFileOpenCmd + " " + file_name;
+        QString open_file_cmd = mExternalFileOpenCmd + " \"" + file_name + "\"";
         if (mExternalFileOpenExt.contains(file_extension))
         {
             auto program_parameter = mExternalFileOpenExt.value(file_extension);
             if (program_parameter.size())
             {
-                open_file_cmd = program_parameter + " " + file_name;
+                open_file_cmd = program_parameter + " \"" + file_name + "\"";
             }
         }
         int result = system(open_file_cmd.toStdString().c_str());
         if (result != 0)
         {
-            TRACEX(Logger::warning, "could not open " << file_name << " error " << result);
+            TRACEX(Logger::to_browser, "could not open " << open_file_cmd << " error " << result);
         }
     }
 }
@@ -369,10 +369,14 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
         auto program_parameter = mExternalFileOpenExt.value(file_extension);
         if (program_parameter.size())
         {
-            open_file_cmd = program_parameter + " " + file_path;
+            open_file_cmd = program_parameter + " \"" + file_path + "\"";
         }
         int result = system(open_file_cmd.toStdString().c_str());
-        if (result == 0)
+        if (result != 0)
+        {
+            TRACEX(Logger::to_browser, "could not open " << open_file_cmd << " error " << result);
+        }
+        else
         {
             return;
         }
@@ -1355,5 +1359,22 @@ void MainWindow::showInformation()
 
         Type::mShort = old;
         message_box.exec();
+    }
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasUrls())
+    {
+        event->acceptProposedAction();
+    }
+}
+
+void MainWindow::dropEvent(QDropEvent *even)
+{
+    foreach (const QUrl &url, even->mimeData()->urls())
+    {
+        QString fileName = url.toLocalFile();
+        open_file(fileName);
     }
 }

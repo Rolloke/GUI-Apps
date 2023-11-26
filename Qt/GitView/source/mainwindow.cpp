@@ -93,7 +93,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mExternalFileOpenCmd("xdg-open")
     #else
     , mFileCopyMimeType("")
-    , mExternalFileOpenCmd("")
+    , mExternalFileOpenCmd("start")
     #endif
     , mFindGrep("grep")
     , mFindFsrc("fsrc")
