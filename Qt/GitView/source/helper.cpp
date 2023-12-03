@@ -454,7 +454,27 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
         emit_file_path("");
         return fResult;
     }
-
+#if 1
+    QFile file(fTempResultFileNameAndPath);
+    if (file.open(QIODevice::ReadOnly))
+    {
+        aResultText = file.readAll();
+        if (aResultText.indexOf("\r") != -1)
+        {
+            aResultText.replace("\r", "");
+        }
+        if (fResult != NoError)
+        {
+            aResultText += QObject::tr("\nError occurred executing command: %1").arg(fResult);
+            if (fResult == ErrorNumberInErrno)
+            {
+                aResultText += QObject::tr("\nError number : %1").arg((int)errno);
+                aResultText += QObject::tr("%1").arg(std::strerror(errno));
+            }
+        }
+        file.close();
+    }
+#else
     std::ostringstream fStringStream;
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
     fStringStream << fFile.rdbuf();
@@ -469,7 +489,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     }
     boost::algorithm::trim_right(fStreamString);
     aResultText = fStreamString.c_str();
-
+#endif
 
     if (!fTemp.remove(fTemp.path()))
     {

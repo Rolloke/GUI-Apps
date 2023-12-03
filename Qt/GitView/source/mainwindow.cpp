@@ -420,7 +420,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
         on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
         LOAD_STR(fSettings, fTextTabStopWidth, toInt);
         ui->textBrowser->setTabStopDistance(fTextTabStopWidth);
@@ -630,7 +630,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
 #else
         auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
