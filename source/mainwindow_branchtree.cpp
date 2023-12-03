@@ -44,7 +44,7 @@ void MainWindow::call_git_branch_command()
                 {
                     result_str += tr("\nError %1 occurred").arg(result);
                 }
-                QString parse_text = git_command + getLineFeed() + result_str + getLineFeed();
+                QString parse_text = git_command + "\n" + result_str + "\n";
                 ui->treeBranches->parseBranchListText(parse_text, top_item_path);
                 ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(parse_text);
