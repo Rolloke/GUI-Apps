@@ -250,7 +250,6 @@ private Q_SLOTS:
     void on_treeFindText_customContextMenuRequested(const QPoint &pos);
 
     void on_ckTypeConverter_stateChanged(int active);
-
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
     void FindReplaceAll();
