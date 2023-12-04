@@ -124,6 +124,10 @@ QString formatPermissions(const QFile::Permissions& permissions)
     if (permissions.testFlag(QFileDevice::ReadUser))   text += "R";
     if (permissions.testFlag(QFileDevice::WriteUser))  text += "W";
     if (permissions.testFlag(QFileDevice::ExeUser))    text += "X";
+    text += ", Group: ";
+    if (permissions.testFlag(QFileDevice::ReadGroup))  text += "R";
+    if (permissions.testFlag(QFileDevice::WriteGroup)) text += "W";
+    if (permissions.testFlag(QFileDevice::ExeGroup))   text += "X";
     text += ", Other: ";
     if (permissions.testFlag(QFileDevice::ReadOther))  text += "R";
     if (permissions.testFlag(QFileDevice::WriteOther)) text += "W";
