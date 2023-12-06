@@ -86,7 +86,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mCurrentTask(Work::None)
     , mActions(this)
     , mConfigFileName(aConfigName)
-    , mContextMenuSourceTreeItem(nullptr)
     , mStylePath( "/opt/tools/git_view/style.qss")
     #ifdef __linux__
     , mFileCopyMimeType("x-special/mate-copied-files")
@@ -99,9 +98,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mFindFsrc("fsrc")
     , mCompare2Items("meld %1 %2")
     , mWarnOpenFileSize(1024*1024) // 1MB
-    , m_status_line_label(nullptr)
-    , m_status_column_label(nullptr)
-    , m_tree_source_item_double_clicked(false)
     , mBranchHasSiblingsNotAdjoins(":/resource/24X24/stylesheet-vline.png")
     , mBranchHasSiblingsAdjoins(":/resource/24X24/stylesheet-branch-more.png")
     , mBranchHasChildrenNotHasSiblingsAdjoins(":/resource/24X24/stylesheet-branch-end.png")
@@ -2050,11 +2046,16 @@ void MainWindow::on_emit_temp_file_path(const QString& path)
 {
     QMutexLocker lock(&mTempFileMutex);
     mTempFilePath = path;
+    if (path.isEmpty())
+    {
+        mDeleteTempFile = true;
+    }
 }
 
 void MainWindow::timerEvent(QTimerEvent * /* event */)
 {
-    if (mTempFile.isOpen())
+    bool temp_file_is_open = mTempFile.isOpen();
+    if (temp_file_is_open)
     {
         int size {0};
         do
@@ -2074,13 +2075,16 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
         while (size > 0);
 
         QMutexLocker lock(&mTempFileMutex);
-        if (mTempFilePath.isEmpty())
+        if (mTempFilePath.isEmpty() || mDeleteTempFile)
         {
+            mDeleteTempFile = false;
             lock.unlock();
             mTempFile.close();
+            temp_file_is_open = false;
         }
     }
-    else
+
+    if (!temp_file_is_open)
     {
         QMutexLocker lock(&mTempFileMutex);
         if (mTempFilePath.size())
