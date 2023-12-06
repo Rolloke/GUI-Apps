@@ -332,7 +332,7 @@ private:
     Work                  mCurrentTask;
     ActionList            mActions;
     QString               mConfigFileName;
-    QTreeWidgetItem*      mContextMenuSourceTreeItem;
+    QTreeWidgetItem*      mContextMenuSourceTreeItem { nullptr };
     QSharedPointer<MergeDialog> mMergeDialog;
     QSharedPointer<binary_values_view> mBinaryValuesView;
 #ifdef WEB_ENGINE
@@ -366,12 +366,13 @@ private:
     QString mDefaultSourcePath;
     QMap<QString, QString> mExternalFileOpenExt;
     qint64  mWarnOpenFileSize;
-    QLabel *m_status_line_label;
-    QLabel *m_status_column_label;
+    QLabel *m_status_line_label { nullptr };
+    QLabel *m_status_column_label { nullptr };
     QMutex  mTempFileMutex;
     QString mTempFilePath;
     QFile   mTempFile;
-    bool    m_tree_source_item_double_clicked = false;
+    bool    mDeleteTempFile { false };
+    bool    m_tree_source_item_double_clicked { false };
     QString mBranchHasSiblingsNotAdjoins;
     QString mBranchHasSiblingsAdjoins;
     QString mBranchHasChildrenNotHasSiblingsAdjoins;
