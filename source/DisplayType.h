@@ -23,13 +23,13 @@ public:
       ULongLong,    //  
       Float,        // 32 bit
       Double,       // 64 bit
-      HEX8,        //  8 bit
+      HEX8,         //  8 bit
       HEX16,        // 16 bit
       HEX32,        // 32 bit
-      HEX64,       // 64 bit
+      HEX64,        // 64 bit
+      Binary,       // binary data
       Ascii,        // ascii text
       Unicode,      // unicode text
-      Binary,       // binary data
       FormatFile,
 //      AsciiLine,    // ascii line
 //      UnicodeLine,  // unicode line
