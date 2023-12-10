@@ -144,10 +144,10 @@ CDisplayType::type_map& CDisplayType::get_type_map()
         m_display[CDisplayType::ULongLong] = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayULongLong));
         m_display[CDisplayType::Float]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayFloat));
         m_display[CDisplayType::Double]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayDouble));
-        m_display[CDisplayType::HEX8]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
+        m_display[CDisplayType::HEX8]      = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX2));
         m_display[CDisplayType::HEX16]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX4));
         m_display[CDisplayType::HEX32]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX8));
-        m_display[CDisplayType::HEX64]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
+        m_display[CDisplayType::HEX64]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayHEX16));
         m_display[CDisplayType::Binary]    = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayBinary));
         m_display[CDisplayType::Ascii]     = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayAscii));
         m_display[CDisplayType::Unicode]   = std::unique_ptr<CDisplayType>(reinterpret_cast<CDisplayType*>(new CDisplayUnicode));

@@ -35,6 +35,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     m_Checkboxes.push_back(ui->checkHexLong);
     m_Checkboxes.push_back(ui->checkHexLongLong);
     m_Checkboxes.push_back(ui->checkBinary);
+    m_Checkboxes.push_back(ui->checkChar);
 
     for (auto& checkbox : m_Checkboxes)
     {
@@ -59,6 +60,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     m_Edit.push_back(ui->edtHexLong);
     m_Edit.push_back(ui->edtHexLongLong);
     m_Edit.push_back(ui->edtBinary);
+    m_Edit.push_back(ui->edtChar);
 
     for (auto& edit : m_Edit)
     {
@@ -139,7 +141,7 @@ CDisplayType::eType binary_values_view::index2type(std::uint32_t index)
     if (index < m_display.size())
     {
         auto display = m_display.begin();
-        for (std::uint32_t i=0; i<index; ++i, ++display) ;
+        std::advance(display, index);
         return display->first;
     }
     return CDisplayType::Unknown;
@@ -173,8 +175,8 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
 
     for (auto& display : m_display )
     {
-        int index = type2index(display.first);
-        if (!(index >=0 && index < m_Checkboxes.size())) break;
+        auto index = type2index(display.first);
+        if (index >= static_cast<std::uint32_t>(m_Checkboxes.size())) continue;
 
         if (stand_alone_view)
         {
@@ -217,6 +219,7 @@ void binary_values_view::receive_value(const QByteArray &array, int position)
         case CDisplayType::Float: ui->edtFloat->setText(text); break;
         case CDisplayType::Double: ui->edtDouble->setText(text); break;
         case CDisplayType::Binary: ui->edtBinary->setText(text); break;
+        case CDisplayType::Ascii: ui->edtChar->setText(text); break;
         default:
             break;
         }
@@ -328,12 +331,28 @@ void binary_values_view::table_offset_changed(int offset)
 void binary_values_view::check_box_clicked(bool checked)
 {
     auto found_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [&] (auto &checkbox)
-    { return checkbox == sender(); } );
+    {
+        return checkbox == sender();
+    } );
 
     if (found_box != m_Checkboxes.end())
     {
         ui->btnWriteValue->setEnabled(checked);
         int index = std::distance(m_Checkboxes.begin(), found_box);
+        if (checked)
+        {
+            auto type = index2type(index);
+            switch (type)
+            {
+            case CDisplayType::Ascii:
+            case CDisplayType::Char:
+            case CDisplayType::UChar:
+            case CDisplayType::HEX8:
+                m_display[CDisplayType::Ascii]->SetBytes(1);
+                break;
+            default: break;
+            }
+        }
         for (int i=0; i<m_Checkboxes.size(); ++i)
         {
             if (i == index)
@@ -370,7 +389,10 @@ void binary_values_view::editing_finished()
 {
     if (ui->checkStandAlone->isChecked())
     {
-        auto checked_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox) { return checkbox->isChecked();} );
+        auto checked_box = std::find_if(m_Checkboxes.begin(), m_Checkboxes.end(), [] (auto &checkbox)
+        {
+            return checkbox->isChecked();
+        } );
         if (checked_box != m_Checkboxes.end())
         {
             int index = std::distance(m_Checkboxes.begin(), checked_box);

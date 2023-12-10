@@ -170,7 +170,7 @@
         <locale language="English" country="UnitedStates"/>
        </property>
        <property name="text">
-        <string>Character</string>
+        <string>Byte</string>
        </property>
       </widget>
      </item>
@@ -477,6 +477,50 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayoutFloatingPoint">
+     <item>
+      <widget class="QLabel" name="labelChar">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Char</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_27">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkChar">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="edtChar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_28">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="labelFloat">
        <property name="minimumSize">
