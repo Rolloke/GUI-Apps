@@ -9,6 +9,12 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
+
 
 using namespace std;
 using namespace git;
@@ -23,7 +29,26 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
             btnCloseText_clicked(Editor::Viewer);
         }
         ui->textBrowser->setExtension(ext);
-        ui->textBrowser->insertPlainText(aText + getLineFeed());
+        if (aText.contains(static_cast<char>(27))
+        #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                || aText.contains(static_cast<char>(0))
+        #endif
+                )
+        {
+            QString clean_text = aText;
+            clean_text.replace("\033", "");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            clean_text.replace(QRegularExpression("\[[0-9]*m"), "");
+#else
+            clean_text.replace(QRegExp("\[[0-9]*m"), "");
+#endif
+            clean_text.replace(static_cast<char>(0), ' ');
+            ui->textBrowser->insertPlainText(clean_text+ getLineFeed());
+        }
+        else
+        {
+            ui->textBrowser->insertPlainText(aText + getLineFeed());
+        }
         ui->textBrowser->textCursor().movePosition(QTextCursor::End);
         showDockedWidget(ui->textBrowser);
     }
