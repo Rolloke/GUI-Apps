@@ -325,7 +325,7 @@ void Highlighter::load_language_list()
             {
                 QString name       = getValue(n.attributes().namedItem("name"), QString(""), true);
                 QString extensions = getValue(n.attributes().namedItem("ext"), QString(""), true);
-                if (extensions.count())
+                if (extensions.size())
                 {
                     const auto list = extensions.split(" ");
                     for (auto& entry : list)
@@ -333,7 +333,7 @@ void Highlighter::load_language_list()
                         mExtensionToLanguage[entry] = name;
                     }
                 }
-                if (name.count())
+                if (name.size())
                 {
                     mExtensionToLanguage[name] = name;
                     mLanguageNames.push_back(name);
@@ -522,6 +522,10 @@ void Highlighter::load_default_language()
 
     rule.pattern = QRegularExpression(QStringLiteral("\\b(?:clean|gc|fsck|reflog|filter-branch|instaweb|archive|bundle|daemon|update-server-info|cat-file|check-ignore|checkout-index|commit-tree|count-objects|diff-index|for-each-ref|hash-object|ls-files|ls-tree|merge-base|read-tree|rev-list|rev-parse|show-ref|symbolic-ref|update-index|update-ref|verify-pack|write-tree)\\b"));
     rule.format = language.mKeywordFormat[type4];
+    language.highlightingRules.append(rule);
+
+    rule.pattern = QRegularExpression(QStringLiteral("\\[.*\\]"));
+    rule.format = language.mKeywordFormat[type5];
     language.highlightingRules.append(rule);
 
     mLanguageNames.push_back(mDefault);
