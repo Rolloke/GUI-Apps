@@ -118,6 +118,7 @@ public:
         static QTextCharFormat mQuotationFormat;
         static QTextCharFormat mFunctionFormat;
         static QTextCharFormat mPreprocessorFormat;
+        static QColor          mSelectedLineBackground;
     };
 
     Highlighter(QTextDocument *parent = 0);

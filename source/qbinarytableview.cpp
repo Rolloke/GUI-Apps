@@ -650,6 +650,8 @@ QVariant BinaryTableModel::get_typed_content(int row) const
                 part.insert(0, '[');
                 part.append(']');
             }
+            /// TODO: show parts of the string with different colors
+            /// label->setText(R"**(<span style="background-color:red;">00</span>-<span style="background-color:blue;">01</span>-02-03-04-05)**");
         }
         line += part;
         line += " ";

@@ -4,11 +4,11 @@
 #include <functional>
 
 class poly_line_item;
-class commit_graphis_item : public QGraphicsItem
+class commit_graphics_item : public QGraphicsItem
 {
 public:
-    commit_graphis_item();
-    virtual ~commit_graphis_item();
+    commit_graphics_item();
+    virtual ~commit_graphics_item();
     enum class parent { first, second };
 
     void set_history(const QStringList& items);

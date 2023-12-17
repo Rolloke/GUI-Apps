@@ -8,7 +8,7 @@
 
 using namespace git;
 
-commit_graphis_item::commit_graphis_item()
+commit_graphics_item::commit_graphics_item()
     : m_pen(0)
     , m_font(0)
     , m_position(0, 0)
@@ -21,18 +21,18 @@ commit_graphis_item::commit_graphis_item()
     m_font = new QFont("Courier", 12);
 }
 
-commit_graphis_item::~commit_graphis_item()
+commit_graphics_item::~commit_graphics_item()
 {
     delete m_pen;
     delete m_font;
 }
 
-QRectF commit_graphis_item::boundingRect() const
+QRectF commit_graphics_item::boundingRect() const
 {
     return m_bounding_rect;
 }
 
-void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void commit_graphics_item::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     QRectF rect(m_position, QSizeF(1000, 1000));
     if (m_font) painter->setFont(*m_font);
@@ -61,29 +61,29 @@ void commit_graphis_item::paint(QPainter *painter, const QStyleOptionGraphicsIte
     }
 }
 
-void commit_graphis_item::set_pen(QPen *aPen)
+void commit_graphics_item::set_pen(QPen *aPen)
 {
     delete m_pen;
     m_pen   = aPen;
 }
 
-void commit_graphis_item::set_font(QFont *aFont)
+void commit_graphics_item::set_font(QFont *aFont)
 {
     delete m_font;
     m_font  = aFont;
 }
 
-void commit_graphis_item::set_offset_pos(const QPointF &aOffset)
+void commit_graphics_item::set_offset_pos(const QPointF &aOffset)
 {
     m_position = aOffset;
 }
 
-const QPointF& commit_graphis_item::offset_pos() const
+const QPointF& commit_graphics_item::offset_pos() const
 {
     return m_position;
 }
 
-void commit_graphis_item::set_history(const QStringList &items)
+void commit_graphics_item::set_history(const QStringList &items)
 {
     m_items = items;
     QImage device(1000, 1000, QImage::Format_Mono);
@@ -96,7 +96,7 @@ void commit_graphis_item::set_history(const QStringList &items)
 /// - one parent refers to the dividing commit hash
 /// - another parent refers to the previous commit hash
 /// - the commit of a parent pair is a uniting or merging commit
-QString commit_graphis_item::get_parent_hash(parent parent_index) const
+QString commit_graphics_item::get_parent_hash(parent parent_index) const
 {
     QStringList parents = m_items[History::Entry::ParentHash].split(" ");
     int index = static_cast<int>(parent_index);
@@ -107,7 +107,7 @@ QString commit_graphis_item::get_parent_hash(parent parent_index) const
     return "";
 }
 
-const QString &commit_graphis_item::get_tree_hash() const
+const QString &commit_graphics_item::get_tree_hash() const
 {
     return m_items[History::Entry::TreeHash];
 }
@@ -116,62 +116,62 @@ const QString &commit_graphis_item::get_tree_hash() const
 /// @note refer to a parent hash
 /// if the commit refers to one parent of more parents this is a dividing commit
 /// if the commit refers to the other parent this is the merging commit
-const QString &commit_graphis_item::get_commit_hash() const
+const QString &commit_graphics_item::get_commit_hash() const
 {
     return m_items[History::Entry::CommitHash];
 }
 
-const QString &commit_graphis_item::get_author() const
+const QString &commit_graphics_item::get_author() const
 {
     return m_items[History::Entry::Author];
 }
 
-const QString &commit_graphis_item::get_author_date() const
+const QString &commit_graphics_item::get_author_date() const
 {
     return m_items[History::Entry::AuthorDate];
 }
 
-const QString &commit_graphis_item::get_author_email() const
+const QString &commit_graphics_item::get_author_email() const
 {
     return m_items[History::Entry::AuthoEmail];
 }
 
-const QString &commit_graphis_item::get_committer() const
+const QString &commit_graphics_item::get_committer() const
 {
     return m_items[History::Entry::Committer];
 }
 
-const QString &commit_graphis_item::get_committer_date() const
+const QString &commit_graphics_item::get_committer_date() const
 {
     return m_items[History::Entry::CommitterDate];
 }
 
-const QString &commit_graphis_item::get_subject_and_body() const
+const QString &commit_graphics_item::get_subject_and_body() const
 {
     return m_items[History::Entry::SubjectAndBody];
 }
 
-const QList<poly_line_item*>& commit_graphis_item::get_connection() const
+const QList<poly_line_item*>& commit_graphics_item::get_connection() const
 {
     return m_connections;
 }
 
-void commit_graphis_item::add_connection(poly_line_item* connection)
+void commit_graphics_item::add_connection(poly_line_item* connection)
 {
     m_connections.push_back(connection);
 }
 
-void commit_graphis_item::create_connections(int index, const QList<QGraphicsItem *> &items)
+void commit_graphics_item::create_connections(int index, const QList<QGraphicsItem *> &items)
 {
-    commit_graphis_item* cgi = dynamic_cast<commit_graphis_item*>(items[index]);
+    commit_graphics_item* cgi = dynamic_cast<commit_graphics_item*>(items[index]);
 
     QString parent_1 = cgi->get_parent_hash();
-    QString parent_2 = cgi->get_parent_hash(commit_graphis_item::parent::second);
+    QString parent_2 = cgi->get_parent_hash(commit_graphics_item::parent::second);
     for (int index_ref = 0; index_ref < items.size(); ++index_ref)
     {
         int diff = index - index_ref;
         qreal offset = 10;
-        commit_graphis_item* cgi_ref = dynamic_cast<commit_graphis_item*>(items[index_ref]);
+        commit_graphics_item* cgi_ref = dynamic_cast<commit_graphics_item*>(items[index_ref]);
 
         Qt::GlobalColor line_color { Qt::transparent };
         if      (parent_1 == cgi_ref->get_commit_hash())                    { line_color = Qt::green;   }
