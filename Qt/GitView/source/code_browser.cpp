@@ -20,7 +20,6 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_show_line_numbers(false)
   , m_blame_characters(0)
   , m_actions(nullptr)
-  , m_dark_mode(false)
   , m_do_preview(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
@@ -121,7 +120,6 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
 #else
         cloned->setTabStopWidth(tabStopWidth());
 #endif        
-        cloned->set_dark_mode(m_dark_mode);
         cloned->setUndoRedoEnabled(isUndoRedoEnabled());
 
         QMenu menu;
@@ -230,13 +228,7 @@ void code_browser::highlightCurrentLine()
 
     if (!isReadOnly())
     {
-        // QColor lineColor = QGuiApplication::palette().color(QPalette::Highlight);
-        // QPalette::Highlight
-        // QPalette::HighlightedText
-
-        QColor lineColor = QColor(m_dark_mode ? Qt::darkYellow : Qt::yellow).lighter(m_dark_mode ? 0 : 160);
-
-        selection.format.setBackground(lineColor);
+        selection.format.setBackground(Highlighter::Language::mSelectedLineBackground);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor.clearSelection();
         extraSelections.append(selection);
@@ -309,11 +301,6 @@ void code_browser::go_to_line(int line)
 void code_browser::set_actions(ActionList *list)
 {
     m_actions = list;
-}
-
-void code_browser::set_dark_mode(bool dark)
-{
-    m_dark_mode = dark;
 }
 
 void code_browser::set_do_preview(bool preview)

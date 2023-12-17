@@ -24,10 +24,13 @@ private slots:
     void italic_btn_clicked(bool checked);
     void weigth_index_changed(int weight);
     void on_btnOK_clicked();
+    void on_btnSelectedLineBackgroundColor_clicked();
+    void on_btnCancel_clicked();
 
 private:
     Ui::HighlighterDialog *ui;
     TextCharFormatMap mList;
+    QColor mSelectedLineBackground;
 };
 
 #endif // HIGHLIGHTERDIALOG_H

@@ -40,7 +40,6 @@ public:
     void go_to_line(int);
 
     void set_actions(ActionList* list);
-    void set_dark_mode(bool );
     void set_do_preview(bool preview);
 
     void reset();
@@ -111,7 +110,6 @@ private:
     std::int32_t            m_blame_characters;
 
     ActionList *m_actions;
-    bool        m_dark_mode;
     bool        m_do_preview;
     QSharedPointer<Highlighter> mHighlighter;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

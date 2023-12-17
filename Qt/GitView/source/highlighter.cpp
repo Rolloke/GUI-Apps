@@ -62,6 +62,7 @@ const QString Highlighter::mDefault {txt::git};
 namespace
 {
     constexpr char groupHighlighter[] = "Highlighter";
+    constexpr char groupHighlighterDark[] = "HighlighterDark";
 }
 
 QMap<QString, Highlighter::Language> Highlighter::mLanguages;
@@ -77,6 +78,7 @@ QTextCharFormat Highlighter::Language::mMultiLineCommentFormat;
 QTextCharFormat Highlighter::Language::mQuotationFormat;
 QTextCharFormat Highlighter::Language::mFunctionFormat;
 QTextCharFormat Highlighter::Language::mPreprocessorFormat;
+QColor          Highlighter::Language::mSelectedLineBackground = Qt::yellow;
 
 QMap<QString, int>  Highlighter::mKeywordMap;
 
@@ -140,7 +142,7 @@ void Highlighter::Language::load(QSettings& fSettings)
     ADD_MAP_ENTRY(mKeywordMap, type6);
     ADD_MAP_ENTRY(mKeywordMap, type7);
 
-    fSettings.beginGroup(groupHighlighter);
+    fSettings.beginGroup(ColorSelector::is_dark_mode() ? groupHighlighterDark : groupHighlighter);
     LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
     LOAD_FORMAT(fSettings, mMultiLineCommentFormat);
     LOAD_FORMAT(fSettings, mKeywordFormat[instre1]);
@@ -156,13 +158,14 @@ void Highlighter::Language::load(QSettings& fSettings)
     LOAD_FORMAT(fSettings, mNumbersFormat);
     LOAD_FORMAT(fSettings, mPreprocessorFormat);
     LOAD_FORMAT(fSettings, mQuotationFormat);
+    LOAD_NP(    fSettings, mSelectedLineBackground, setNamedColor, name, toString);
     fSettings.endGroup();
 }
 
 
 void Highlighter::Language::store( QSettings& fSettings)
 {
-    fSettings.beginGroup(groupHighlighter);
+    fSettings.beginGroup(ColorSelector::is_dark_mode() ? groupHighlighterDark : groupHighlighter);
     STORE_STRF(fSettings, mSingleLineCommentFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mMultiLineCommentFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[instre1], Highlighter::Language::to_string);
@@ -178,6 +181,8 @@ void Highlighter::Language::store( QSettings& fSettings)
     STORE_STRF(fSettings, mNumbersFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mPreprocessorFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mQuotationFormat, Highlighter::Language::to_string);
+    STORE_NP(  fSettings, mSelectedLineBackground, name);
+
     fSettings.endGroup();
 }
 

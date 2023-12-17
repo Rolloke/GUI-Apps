@@ -8,6 +8,7 @@
 #include "aboutdlg.h"
 #include "mergedialog.h"
 #include "binary_values_view.h"
+#include "palettecolorselector.h"
 
 #include <QDateTime>
 #include <QAction>
@@ -411,6 +412,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboOpenNewEditor, setCurrentIndex, currentIndex, toInt);
         on_comboOpenNewEditor_currentIndexChanged(0);
+        QString fDarkPaletteColors;
+        LOAD_STR(fSettings, fDarkPaletteColors, toString);
+        PaletteColorSelector::init_dark_palette();
+        if (!fDarkPaletteColors.isEmpty())
+        {
+            PaletteColorSelector::set_dark_palette_colors(fDarkPaletteColors);
+        }
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
@@ -504,6 +512,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->textBrowser->set_page(mTextRenderView.data());
 #endif
 
+    m_initializing_elements = false;
     TRACEX(Logger::info, windowTitle() << " Started");
 }
 
@@ -626,6 +635,9 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
+        QString fDarkPaletteColors = PaletteColorSelector::get_dark_palette_colors();
+        STORE_STR(fSettings, fDarkPaletteColors);
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
 #else
@@ -2219,13 +2231,8 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     case UserStyle::None:
     {
         setStyleSheet("");
-        QApplication::setPalette(QGuiApplication::palette());
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
-        for (QDockWidget* dock_widget : dock_widgets)
-        {
-            code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-            text_browser->set_dark_mode(false);
-        }
+        QApplication::setPalette(PaletteColorSelector::get_default_palette());
+        ColorSelector::set_dark_mode(false);
     } break;
     case UserStyle::User:
     {
@@ -2240,42 +2247,31 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             setStyleSheet(ts.readAll());
-            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
-            for (QDockWidget* dock_widget : dock_widgets)
-            {
-                code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-                text_browser->set_dark_mode(true);
-            }
+            ColorSelector::set_dark_mode(true);
         }
         break;
     }
     case UserStyle::Palette:
     {
-        const auto button_color = QColor(53, 53, 53);
-        QPalette palette = QGuiApplication::palette();
-        palette.setColor(QPalette::Window, button_color);
-        palette.setColor(QPalette::WindowText, Qt::white);
-        palette.setColor(QPalette::Base, QColor(25, 25, 25));
-        palette.setColor(QPalette::AlternateBase, button_color);
-        palette.setColor(QPalette::ToolTipBase, Qt::black);
-        palette.setColor(QPalette::ToolTipText, Qt::white);
-        palette.setColor(QPalette::Text, Qt::white);
-        palette.setColor(QPalette::ButtonText, Qt::white);
-        palette.setColor(QPalette::BrightText, Qt::red);
-        palette.setColor(QPalette::Link, QColor(42, 130, 218));
-        palette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-        palette.setColor(QPalette::HighlightedText, Qt::black);
-        palette.setColor(QPalette::Button, button_color);              // invert normal behavour
-        palette.setColor(QPalette::Light, button_color.darker(50));    // Lighter than Button color
-        palette.setColor(QPalette::Midlight, button_color.lighter(50));// Between Button and Light.
-        palette.setColor(QPalette::Mid, button_color.lighter(100));    // Between Button and Dark.
-        palette.setColor(QPalette::Dark, button_color.lighter(150));   // Darker than Button.
-        QApplication::setPalette(palette);
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
-        for (QDockWidget* dock_widget : dock_widgets)
+        PaletteColorSelector dlg;
+        if (!m_initializing_elements)
         {
-            code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-            text_browser->set_dark_mode(true);
+            if (dlg.exec() == QDialog::Accepted)
+            {
+                QApplication::setPalette(dlg.get_palette());
+                ColorSelector::set_dark_mode(true);
+            }
+            else
+            {
+                ui->comboUserStyle->setCurrentIndex(0);
+                on_comboUserStyle_currentIndexChanged(0);
+                return;
+            }
+        }
+        else
+        {
+            QApplication::setPalette(dlg.get_palette());
+            ColorSelector::set_dark_mode(true);
         }
         break;
     }
@@ -2297,6 +2293,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         }
     } break;
     }
+    Highlighter::Language::mSelectedLineBackground = ColorSelector::is_dark_mode() ? Qt::darkYellow : Qt::yellow;
 }
 
 void MainWindow::comboFindBoxIndexChanged(int index)

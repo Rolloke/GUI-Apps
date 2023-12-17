@@ -46,6 +46,7 @@ SOURCES += main.cpp\
     mainwindow_sourcetree.cpp \
     mainwindow_stashtree.cpp \
     mainwindow_textview.cpp \
+    palettecolorselector.cpp \
     qdockwidgetx.cpp \
     qsourcetreewidget.cpp \
     workerthreadconnector.cpp \
@@ -75,6 +76,7 @@ HEADERS  += mainwindow.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
+    palettecolorselector.h \
     qdockwidgetx.h \
     qsourcetreewidget.h \
     workerthreadconnector.h \
@@ -103,7 +105,8 @@ FORMS    += mainwindow.ui \
     customgitactions.ui \
     aboutdlg.ui \
     highlighterdialog.ui \
-    mergedialog.ui
+    mergedialog.ui \
+    palettecolorselector.ui
 
 RESOURCES += resource.qrc
 RC_FILE = resource/resource.rc
