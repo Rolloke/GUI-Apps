@@ -201,9 +201,9 @@ QMAKE_LFLAGS_RELEASE QMAKE_LFLAGS_APP QMAKE_LFLAGS_SHLIB QMAKE_LFLAGS_SONAME QMA
             <Keywords name="instre1">break default func interface select case defer Go map Struct chan else Goto package Switch const fallthrough if range Type continue for import return Var</Keywords>
             <Keywords name="instre2">main Println Printf len</Keywords>
             <Keywords name="type1">int8 int16 int32 int64 uint8 uint16 uint32 uint64 float32 float64 complex64 complex128 byte rune uint int uintptr</Keywords>
-            <Keywords name="type2">\+ - \* / == != && || % ! &lt; &gt; &lt;= &gt;=</Keywords>
-            <Keywords name="type3"></Keywords>
-            <Keywords name="type4"></Keywords>
+            <Keywords name="type2">\+\+ \+= --  &lt;= &gt;=</Keywords>
+            <!-- <Keywords name="type3">- \+ \* / = % ! &lt; &gt;</Keywords> -->
+            <Keywords name="type3">== /= -= != :=</Keywords>
             <Keywords name="numbers">\b[0-9eE\-\+\.]+\b</Keywords> 
             <Keywords name="function">\b[A-Za-z0-9_]+(?=\()</Keywords> 
             <Keywords name="preprocessor"></Keywords>
