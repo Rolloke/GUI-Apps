@@ -634,6 +634,8 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     int start = row * bytes_per_row + m_start_offset;
     int end   = m_binary_content.size() - bytes_per_type;
     QString line;
+    QString begin_mark = "["; //<span style=\"background-color:red;\">";
+    QString end_mark   = "]"; //"</span>";
     for (int i=0; i<m_columns_per_row && start <=end; ++i)
     {
         QString part = thetype.Display(&buffer_pointer[start]);
@@ -642,13 +644,14 @@ QVariant BinaryTableModel::get_typed_content(int row) const
             if (is_hex_display)
             {
                 int offset = (m_byte_cursor - start) * 2;
-                part.insert(offset, '[');
-                part.insert(offset+3, ']');
+                part.insert(offset, begin_mark);
+                part.insert(offset+begin_mark.size() + 2, end_mark);
             }
             else
             {
-                part.insert(0, '[');
-                part.append(']');
+                part.insert(0, begin_mark);
+                part.append(end_mark);
+
             }
             /// TODO: show parts of the string with different colors
             /// label->setText(R"**(<span style="background-color:red;">00</span>-<span style="background-color:blue;">01</span>-02-03-04-05)**");
