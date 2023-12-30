@@ -90,9 +90,11 @@ PaletteColorSelector::PaletteColorSelector(QWidget *parent) :
              m_other_color[color_role] = color_background;
              tooltip = "Used as the foreground color for QToolTip and QWhatsThis.\n"
                       "Tool tips use the Inactive color group of QPalette, because tool tips are not active windows."; break;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         case QPalette::PlaceholderText: text = "Placeholder Text";   color_text       = color_role;
             tooltip = "Used as the placeholder color for various text input widgets.\n"
                       "This enum value has been introduced in Qt 5.12"; break;
+#endif
         case QPalette::NoRole: continue; break;
         }
 
@@ -137,6 +139,9 @@ void PaletteColorSelector::init_dark_palette()
     m_dark_palette.setColor(QPalette::Midlight, button_color.lighter(50));// Between Button and Light.
     m_dark_palette.setColor(QPalette::Mid, button_color.lighter(100));    // Between Button and Dark.
     m_dark_palette.setColor(QPalette::Dark, button_color.lighter(150));   // Darker than Button.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    m_dark_palette.setColor(QPalette::PlaceholderText, button_color.lighter(150));
+#endif
 }
 
 const QPalette& PaletteColorSelector::get_default_palette()
