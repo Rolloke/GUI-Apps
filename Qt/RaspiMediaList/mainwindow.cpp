@@ -20,6 +20,7 @@
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include <QMediaMetaData>
+#include <QRandomGenerator>
 
 /// TODO: find qt-version for this
 /// #include <QPlaylistFileParser>
