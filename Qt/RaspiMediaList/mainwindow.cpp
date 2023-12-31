@@ -20,7 +20,11 @@
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include <QMediaMetaData>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
 #include <QRandomGenerator>
+#endif
 
 /// TODO: find qt-version for this
 /// #include <QPlaylistFileParser>
@@ -439,7 +443,8 @@ void MainWindow::on_pushButtonStart_clicked()
 
 void MainWindow::display_play_status()
 {
-    switch(mPlayer.state())
+    auto state = mPlayer.state();
+    switch(state)
     {
     case QMediaPlayer::StoppedState:
         m_play_status->setText(tr("Stopped"));
@@ -451,9 +456,9 @@ void MainWindow::display_play_status()
         m_play_status->setText(tr("Playing"));
         break;
     }
-    ui->pushButtonStart->setChecked(mPlayer.state() == QMediaPlayer::PlayingState);
-    ui->pushButtonPause->setChecked(mPlayer.state() == QMediaPlayer::PausedState);
-    ui->pushButtonStop->setChecked(mPlayer.state() == QMediaPlayer::StoppedState);
+    ui->pushButtonStart->setChecked(state == QMediaPlayer::PlayingState);
+    ui->pushButtonPause->setChecked(state == QMediaPlayer::PausedState);
+    ui->pushButtonStop->setChecked(state == QMediaPlayer::StoppedState);
 }
 
 
@@ -1122,6 +1127,19 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 
 QString getSettingsName(const QString& aItemName)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    auto match = fRegEx.match(aItemName);
+    if (match.isValid())
+    {
+        const auto captured = match.capturedTexts();
+        QString fTemp = captured[0];
+        fTemp = fTemp.replace(":", "_");
+        fTemp = fTemp.replace("[", "_");
+        return fTemp;
+    }
+    else return aItemName;
+#else
     QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
@@ -1133,6 +1151,7 @@ QString getSettingsName(const QString& aItemName)
         return fTemp;
     }
     else return aItemName;
+#endif
 }
 
 CheckboxItemModel::CheckboxItemModel(int rows, int columns, QObject *parent):
