@@ -123,7 +123,7 @@ void graphics_view::fit_inView(bool fit)
         bounding_rect = bounding_rect.united(items[i]->boundingRect());
         if (mHistory == graphic::set)
         {
-            commit_graphis_item::create_connections(i, items);
+            commit_graphics_item::create_connections(i, items);
         }
     }
     if (mHistory == graphic::set)
@@ -163,7 +163,7 @@ void graphics_view::insert_history(const QStringList & list)
              height = items[size-1]->boundingRect().height();
         }
 
-        auto item = new commit_graphis_item();
+        auto item = new commit_graphics_item();
         item->set_offset_pos(QPointF(50, size * (height + 10)));
         item->m_show_entry = [this] (int show) { return m_show_history_entry.count(show) > 0; };
         item->set_history(list);

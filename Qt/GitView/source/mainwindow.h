@@ -378,6 +378,7 @@ private:
     QString mBranchHasChildrenNotHasSiblingsAdjoins;
     QString mBranchClosedHasChildrenHasSibling;
     QString mBranchOpenHasChildrenHasSibling;
+    bool    m_initializing_elements { true };
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";

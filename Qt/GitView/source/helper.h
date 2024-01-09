@@ -110,10 +110,14 @@ public:
     QColor get_color_and_increment();
     void   unapply_color(Qt::GlobalColor not_wanted);
 
+    static void   set_dark_mode(bool dark);
+    static bool   is_dark_mode();
+
 private:
     Qt::GlobalColor          m_first_color;
     Qt::GlobalColor          m_current_color;
     QVector<Qt::GlobalColor> m_unapplied_color;
+    static bool              m_dark_mode;
 };
 
 class LinkFilter :public QObject

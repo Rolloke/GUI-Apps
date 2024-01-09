@@ -65,6 +65,9 @@ HighlighterDialog::HighlighterDialog(QWidget *parent, const TextCharFormatMap& t
         ui->weight_boxes->addWidget(weight_box);
         ui->italic_buttons->addWidget(italic_check_btn);
     }
+    mSelectedLineBackground = Highlighter::Language::mSelectedLineBackground;
+    ui->btnSelectedLineBackgroundColor->setStyleSheet(tr("QPushButton {background-color: %1;}").
+        arg(mSelectedLineBackground.name()));
 }
 
 HighlighterDialog::~HighlighterDialog()
@@ -135,5 +138,26 @@ void HighlighterDialog::weigth_index_changed(int weight_index)
 
 void HighlighterDialog::on_btnOK_clicked()
 {
+    Highlighter::Language::mSelectedLineBackground = mSelectedLineBackground;
     accept();
 }
+
+void HighlighterDialog::on_btnCancel_clicked()
+{
+    close();
+}
+
+void HighlighterDialog::on_btnSelectedLineBackgroundColor_clicked()
+{
+    QColorDialog dlg;
+
+    dlg.setCurrentColor(mSelectedLineBackground);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        mSelectedLineBackground = dlg.selectedColor();
+        ui->btnSelectedLineBackgroundColor->setStyleSheet(tr("QPushButton {background-color: %1;}").
+            arg(mSelectedLineBackground.name()));
+    }
+}
+
+

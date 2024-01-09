@@ -185,7 +185,7 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
     {
         pid_list =  pids.split(" ");
     }
-    else if (execute("ps -e | tail -n 20", pids, true) == 0 && pids.size() > 1)
+    else if (execute("ps -e | tail -n 30", pids, true) == 0 && pids.size() > 1)
     {
         QStringList lines = pids.split("\n");
         for (int i = lines.size() - 1; i>0; --i)
@@ -636,6 +636,18 @@ QColor ColorSelector::get_color_and_increment()
 void   ColorSelector::unapply_color(Qt::GlobalColor not_wanted)
 {
     m_unapplied_color.append(not_wanted);
+}
+
+bool ColorSelector::m_dark_mode = false;
+
+void ColorSelector::set_dark_mode(bool dark)
+{
+    m_dark_mode = dark;
+}
+
+bool ColorSelector::is_dark_mode()
+{
+    return m_dark_mode;
 }
 
 LinkFilter::LinkFilter(QObject *parent) : QObject(parent)
