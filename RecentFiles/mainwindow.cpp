@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QDir>
 #include <QUrl>
+#include <QFileInfo>
 #include <QStandardItemModel>
 #include <QAbstractItemModel>
 #include <QDesktopServices>
@@ -60,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
+    int some_files_do_not_exist = 0;
     if (fResult)
     {
         int fRow = 0;
@@ -70,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
             for (; !fElement.isNull(); fElement = fElement.nextSibling())
             {
                 std::vector<std::string> fFile = SplitPath(fElement.attributes().namedItem("href").nodeValue().toStdString());
+                QFileInfo info((fFile[ePath] + "/" + fFile[eFile]).c_str());
                 mListModel->insertRows(fRow, 1, QModelIndex());
                 mListModel->setData(mListModel->index(fRow, eFile, QModelIndex()), QString(fFile[eFile].c_str()));
                 mListModel->setData(mListModel->index(fRow, ePath, QModelIndex()), QString(fFile[ePath].c_str()));
@@ -79,9 +82,18 @@ MainWindow::MainWindow(QWidget *parent) :
                 mListModel->setData(mListModel->index(fRow, eVisited, QModelIndex()), toDate(fElement.attributes().namedItem("visited").nodeValue()));
                 mListModel->setData(mListModel->index(fRow, eLast, QModelIndex()), fElement.attributes().namedItem("href").nodeValue());
                 fElement.setNodeValue(QString::number(fRow));
+                if (!info.exists())
+                {
+                    ui->tableView->selectionModel()->select(mListModel->index(fRow, eFile), QItemSelectionModel::Select);
+                    ++some_files_do_not_exist;
+                }
                 ++fRow;
             }
         }
+    }
+    if (some_files_do_not_exist)
+    {
+        ui->statusBar->showMessage(tr("%1 file of the do not exist and have been removed, save list").arg(some_files_do_not_exist));
     }
 }
 
@@ -238,7 +250,7 @@ void MainWindow::on_pushButtonDeleteSelected_clicked()
 
     ui->tableView->clearSelection();
 
-    for (auto item : fNodelist)
+    for (const auto& item : fNodelist)
     {
         item.parentNode().removeChild(item);
     }
