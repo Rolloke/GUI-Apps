@@ -186,6 +186,8 @@ void ActionList::initActionIcons()
     action_icons[Cmd::EditToggleComment]       = "window-close.png";
     action_icons[Cmd::EditToSnakeCase]         = "window-close.png";
     action_icons[Cmd::EditToCamelCase]         = "window-close.png";
+    action_icons[Cmd::EditTabIndent]           = "window-close.png";
+    action_icons[Cmd::EditTabOutdent]          = "window-close.png";
 
     for (auto& icon_path: action_icons )
     {

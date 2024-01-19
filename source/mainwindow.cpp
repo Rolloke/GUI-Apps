@@ -65,6 +65,7 @@ constexpr char sCommands[] = "Commands";
 constexpr char sCommand[] = "Command";
 constexpr char sID[] = "ID";
 constexpr char sName[] = "Name";
+constexpr char sTooltip[] = "Tooltip";
 constexpr char sCustomMessageBoxText[] = "MessageBoxText";
 constexpr char sCustomCommandPostAction[] = "PostAction";
 constexpr char sFlags[] = "Flags";
@@ -295,7 +296,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
                     fAction = mActions.createAction(fCmd, txt::New, txt::git);
                 }
                 fAction->setText(fSettings.value(config::sName).toString());
-                fAction->setToolTip(fSettings.value(config::sName).toString());
+                fAction->setToolTip(fSettings.value(config::sTooltip).toString());
                 fAction->setStatusTip(fSettings.value(config::sCommand).toString());
                 fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
                 uint fFlags = fSettings.value(config::sFlags).toUInt();
@@ -424,17 +425,10 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
         on_comboUserStyle_currentIndexChanged(ui->comboUserStyle->currentIndex());
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
-        LOAD_STR(fSettings, fTextTabStopWidth, toInt);
-        ui->textBrowser->setTabStopDistance(fTextTabStopWidth);
-        ui->spinTabulator->setValue(fTextTabStopWidth);
-#else
-        auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
-        LOAD_STR(fSettings, fTextTabStopWidth, toInt);
-        ui->textBrowser->setTabStopWidth(fTextTabStopWidth);
-        ui->spinTabulator->setValue(fTextTabStopWidth);
-#endif
+        auto fTextTabStopCharacters = ui->textBrowser->getTabstopCharacters();
+        LOAD_STR(fSettings, fTextTabStopCharacters, toInt);
+        ui->textBrowser->setTabstopCharacters(fTextTabStopCharacters);
+        ui->spinTabulator->setValue(fTextTabStopCharacters);
 
         QByteArray fWindowGeometry;
         LOAD_STR(fSettings, fWindowGeometry, toByteArray);
@@ -637,13 +631,8 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
         QString fDarkPaletteColors = PaletteColorSelector::get_dark_palette_colors();
         STORE_STR(fSettings, fDarkPaletteColors);
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        auto fTextTabStopWidth = ui->textBrowser->tabStopDistance();
-#else
-        auto fTextTabStopWidth = ui->textBrowser->tabStopWidth();
-#endif
-        STORE_STR(fSettings, fTextTabStopWidth);
+        auto fTextTabStopCharacters = ui->textBrowser->getTabstopCharacters();
+        STORE_STR(fSettings, fTextTabStopCharacters);
     }
     fSettings.endGroup();
 
@@ -702,7 +691,8 @@ MainWindow::~MainWindow()
                     {
                         fSettings.setArrayIndex(fIndex++);
                         fSettings.setValue(config::sID, fItem.first);
-                        fSettings.setValue(config::sName, fAction->toolTip());
+                        fSettings.setValue(config::sName, fAction->text());
+                        fSettings.setValue(config::sTooltip, fAction->toolTip());
                         fSettings.setValue(config::sCommand, fCommand);
                         fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
                         fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
@@ -1747,6 +1737,12 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::EditToCamelCase, tr("To Camel Case"), tr("Modify selected text to CameCase"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
     mActions.setFlags(Cmd::EditToCamelCase, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::EditToCamelCase, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditTabIndent, tr("Tab Indent"), tr("Indent selected text by Tab"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditTabIndent, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditTabIndent, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::EditTabOutdent, tr("Tab Outdent"), tr("Outdent selected text by Tab"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
+    mActions.setFlags(Cmd::EditTabOutdent, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::EditTabOutdent, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2896,11 +2892,7 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        text_browser->setTabStopDistance(width);
-#else
-        text_browser->setTabStopWidth(width);
-#endif
+        text_browser->setTabstopCharacters(width);
     }
 }
 

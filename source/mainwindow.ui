@@ -1005,13 +1005,13 @@ Git or command results are always displayed in main editor.
         <item>
          <widget class="QSpinBox" name="spinTabulator">
           <property name="toolTip">
-           <string>Tabulator width</string>
+           <string>Tabulator width in characters</string>
           </property>
           <property name="minimum">
-           <number>5</number>
+           <number>1</number>
           </property>
           <property name="maximum">
-           <number>150</number>
+           <number>30</number>
           </property>
          </widget>
         </item>

@@ -20,6 +20,8 @@ enum class selection
     to_lower,
     to_snake_case,
     to_camel_case,
+    tab_indent,
+    tab_outdent,
     unknown=-1
 };
 
@@ -49,6 +51,8 @@ public:
     void parse_blame(const QString& blame);
     bool hasExtension(const QString& ext);
     void changeSelection(selection command);
+    void setTabstopCharacters(int characters);
+    int  getTabstopCharacters();
 
     code_browser* clone(bool all_parameter=false, bool with_text=true);
 
@@ -98,7 +102,7 @@ private:
     QPointF    contentOffset() const;
     int        lineNumberAreaWidth();
     void       reset_blame();
-    QString    comment_uncomment_selection();
+    QString    change_start_of_selection(selection how_to);
     static QString    toCamelCase(const QString&text);
     static QString    toSnakeCase(const QString& text);
 
@@ -108,6 +112,7 @@ private:
     QMap<QString, s_blame>  m_blame_map;
     QMap<int, s_blame_line> m_blame_start_line;
     std::int32_t            m_blame_characters;
+    QString                 m_indent = "    ";
 
     ActionList *m_actions;
     bool        m_do_preview;
