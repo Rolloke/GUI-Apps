@@ -81,6 +81,7 @@ void HighlighterDialog::color_btn_clicked()
     QColorDialog dlg;
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->color_buttons->indexOf(button);
+    if (index > 0) index--;
     if (index != -1)
     {
         auto item = std::next(mList.begin(), index);

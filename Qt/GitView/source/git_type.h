@@ -105,9 +105,11 @@ struct Cmd
         EditToggleComment,
         EditToSnakeCase,
         EditToCamelCase,
+        EditTabIndent,
+        EditTabOutdent,
 
         /// hint: add non git commands before
-        LastNonGitCommand = EditToCamelCase,
+        LastNonGitCommand = EditTabOutdent,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

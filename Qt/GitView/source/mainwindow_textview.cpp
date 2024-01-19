@@ -119,6 +119,8 @@ void MainWindow::modify_text()
         case Cmd::EditToggleComment: sel = selection::toggle_comment; break;
         case Cmd::EditToSnakeCase:   sel = selection::to_snake_case;  break;
         case Cmd::EditToCamelCase:   sel = selection::to_camel_case;  break;
+        case Cmd::EditTabIndent:     sel = selection::tab_indent;     break;
+        case Cmd::EditTabOutdent:    sel = selection::tab_outdent;    break;
         default:
             break;
         }
