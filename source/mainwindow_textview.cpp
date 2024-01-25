@@ -38,9 +38,9 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
             QString clean_text = aText;
             clean_text.replace("\033", "");
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            clean_text.replace(QRegularExpression("\[[0-9]*m"), "");
+            clean_text.replace(QRegularExpression("\\[[0-9]{1,2}m"), "");
 #else
-            clean_text.replace(QRegExp("\[[0-9]*m"), "");
+            clean_text.replace(QRegExp("\\[[0-9]{1,2}m"), "");
 #endif
             clean_text.replace(static_cast<char>(0), ' ');
             ui->textBrowser->insertPlainText(clean_text+ getLineFeed());

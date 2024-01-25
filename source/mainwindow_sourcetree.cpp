@@ -697,7 +697,10 @@ void  MainWindow::applyCommandToFileTree(const QString& aCommand)
 {
     if (mContextMenuSourceTreeItem)
     {
-        btnCloseText_clicked(Editor::Viewer);
+        if (!handleInThread())
+        {
+            btnCloseText_clicked(Editor::Viewer);
+        }
         mGitCommand = aCommand;
         QString       parent_path = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem->parent());
         if (mGitCommand.startsWith(txt::git))
@@ -980,7 +983,11 @@ void MainWindow::perform_custom_command()
 
         if (git_command.contains("-C %1"))
         {
-            btnCloseText_clicked(Editor::Viewer);
+            bool handle_in_thread = handleInThread();
+            if (!handle_in_thread)
+            {
+                btnCloseText_clicked(Editor::Viewer);
+            }
             QString result_str;
             git_command = tr(git_command.toStdString().c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
             QString cmd_option = get_git_command_option(type, command_flags, variant_list);
@@ -993,7 +1000,7 @@ void MainWindow::perform_custom_command()
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 check_set_current_path(git_command);
-                if (handleInThread())
+                if (handle_in_thread)
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
                     QVariantMap workmap;

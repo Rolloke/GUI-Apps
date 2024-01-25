@@ -374,7 +374,11 @@ void code_browser::changeSelection(selection command)
 void code_browser::setTabstopCharacters(int characters)
 {
     const QFontMetricsF metrix(font());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    float size = metrix.maxWidth();
+#else
     float size = metrix.width(" ");
+#endif
     if (size < 0)
     {
         size = font().pixelSize();
@@ -395,7 +399,11 @@ void code_browser::setTabstopCharacters(int characters)
 int code_browser::getTabstopCharacters()
 {
     const QFontMetricsF metrix(font());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    float size = metrix.maxWidth();
+#else
     float size = metrix.width(" ");
+#endif
     if (size < 0)
     {
         size = font().pixelSize();
