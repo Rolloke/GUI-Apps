@@ -84,6 +84,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="btnSelectedLineBackgroundColor">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Selected Line Background Color</string>
          </property>
