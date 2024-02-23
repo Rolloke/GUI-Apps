@@ -1009,6 +1009,11 @@ void MainWindow::perform_custom_command()
                     workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
                     workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
                     mWorker.doWork(QVariant(workmap));
+                    mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
+                    if (ui->ckOutput2secondTextView && mBackgroundTextView)
+                    {
+                        showDockedWidget(mBackgroundTextView.get());
+                    }
                 }
                 else
                 {
@@ -1332,7 +1337,7 @@ void MainWindow::showInformation()
         information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
-#elif QT_DEPRECATED_SINCE(5, 10)
+#elif  QT_DEPRECATED_SINCE(5, 10)
         if (file_info.created().isValid())
         {
             information << "\nCreated: " << file_info.created().toString(Qt::SystemLocaleShortDate).toStdString();

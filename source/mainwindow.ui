@@ -1150,6 +1150,16 @@ Git or command results are always displayed in main editor.
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="ckOutput2secondTextView">
+          <property name="statusTip">
+           <string>Show background command output in additional text view</string>
+          </property>
+          <property name="text">
+           <string>Additional Batch View</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>

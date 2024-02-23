@@ -76,7 +76,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
     }
     ui->comboType->addItem(CDisplayType::getNameOfType(CDisplayType::FormatFile));
 
-    connect(ui->comboType, SIGNAL(currentIndexChanged(QString)), this, SLOT(table_type_changed(QString)));
+    connect(ui->comboType, SIGNAL(currentTextChanged(QString)), this, SLOT(table_type_changed(QString)));
     connect(ui->spinColumns, SIGNAL(valueChanged(int)), this, SLOT(table_columns_changed(int)));
     connect(ui->spinOffset, SIGNAL(valueChanged(int)), this, SLOT(table_offset_changed(int)));
 

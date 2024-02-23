@@ -165,7 +165,7 @@ private:
     QDir     initDir(const QString& aDirPath, int aFilter=0);
     void     initCodecCombo();
 
-    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {});
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true);
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
 
     QVariant handleWorker(const QVariant&);
@@ -191,7 +191,7 @@ private:
 
     bool     getShowTypeResult(const git::Type& fType);
     QWidget *get_active_editable_widget(const QString &file_path = {});
-    code_browser* create_new_text_browser(const QString &file_path);
+    code_browser* create_new_text_browser(const QString &file_path, const QString &name = {});
     bool     send_close_to_editable_widget(QWidget *editable_widget);
     void     reset_text_browser(code_browser*text_browser);
 
@@ -311,7 +311,6 @@ private Q_SLOTS:
     void modify_text();
     void check_reload(code_browser*);
     void set_show_line_numbers(bool);
-
     void on_ckAppendToBatch_clicked(bool checked);
 
 public Q_SLOTS:
@@ -341,6 +340,7 @@ private:
 #else
     QSharedPointer<QTextBrowser> mTextRenderView;
 #endif
+    QSharedPointer<code_browser> mBackgroundTextView;
 
     string2bool_map       mMergeTools;
     std::vector<QToolBar*> mToolBars;
@@ -391,6 +391,7 @@ private:
     static constexpr char binaryview[]         = "binaryview";
     static constexpr char markdown_view[]      = "markdown_view";
     static constexpr char cloned_textbrowser[] = "cloned_textbrowser";
+    static constexpr char background_textbrowser[] = "background_textbrowser";
 
 };
 

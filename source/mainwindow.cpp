@@ -801,12 +801,12 @@ void MainWindow::createDockWindows()
 #ifdef WEB_ENGINE
     // markdown view
     mWebEngineView.reset(new QWebEngineView(this));
-    dock = create_dock_widget(mWebEngineView.data(), tr("Html && Markdown"), markdown_view);
+    dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), markdown_view);
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 #else
     mTextRenderView.reset(new QTextBrowser(this));
-    dock = create_dock_widget(mTextRenderView.data(), tr("Html && Markdown"), markdown_view);
+    dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view);
     mTextRenderView->setReadOnly(true);
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
@@ -976,7 +976,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
         code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
         if (textBrowser)
         {
-            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser});
+            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser, background_textbrowser });
             for (QDockWidget* current_widget : dock_widgets)
             {
                 code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
@@ -1064,7 +1064,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
 {
     if (file_path.isEmpty())
     {
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binaryview});
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binaryview, background_textbrowser});
         for (QDockWidget* dock_widget : dock_widgets)
         {
             if (get_active(dock_widget->widget()))
@@ -1093,7 +1093,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
     }
 }
 
-code_browser* MainWindow::create_new_text_browser(const QString &file_path)
+code_browser* MainWindow::create_new_text_browser(const QString &file_path, const QString &name)
 {
     bool set_filename = true;
     switch (additional_editor())
@@ -1119,6 +1119,10 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path)
     {
         QFileInfo info(file_path);
         file_name = info.fileName();
+    }
+    else if (name.length())
+    {
+        file_name = name;
     }
     else
     {
@@ -1517,6 +1521,10 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
         workmap.insert(Worker::work, INT(work_command));
         mWorker.doWork(QVariant(workmap));
         mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
+        if (ui->ckOutput2secondTextView && mBackgroundTextView)
+        {
+            showDockedWidget(mBackgroundTextView.get());
+        }
         command.clear();
     }
     else
@@ -2076,8 +2084,49 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                 {
                     array[size-1] = 0;
                 }
-                appendTextToBrowser(array, true);
-                ui->textBrowser->moveCursor(QTextCursor::End);
+                if (ui->ckOutput2secondTextView && !mBackgroundTextView)
+                {
+                    // backgound process output text view
+                    mBackgroundTextView.reset(create_new_text_browser("", tr("Background process view")));
+                    QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.get()->parent());
+                    dock->setObjectName(background_textbrowser);
+                    dock->setAttribute(Qt::WA_DeleteOnClose, false);
+                    mBackgroundTextView->setReadOnly(true);
+                }
+                if (mBackgroundTextView)
+                {
+                    const QString& aText = array;
+                    if (aText.contains(static_cast<char>(27))
+                    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                            || aText.contains(static_cast<char>(0))
+                    #endif
+                            )
+                    {
+                        QString clean_text = array;
+                        clean_text.replace("\033", "");
+            #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                        clean_text.replace(QRegularExpression("\\[[0-9]{1,2}m"), "");
+            #else
+                        clean_text.replace(QRegExp("\\[[0-9]{1,2}m"), "");
+            #endif
+                        clean_text.replace(static_cast<char>(0), ' ');
+                        mBackgroundTextView->insertPlainText(clean_text+ getLineFeed());
+                    }
+                    else
+                    {
+                        mBackgroundTextView->insertPlainText(aText + getLineFeed());
+                    }
+                    if (!mBackgroundTextView->isVisible())
+                    {
+                        mBackgroundTextView->textCursor().movePosition(QTextCursor::End);
+                        showDockedWidget(mBackgroundTextView.get());
+                    }
+                }
+                else
+                {
+                    appendTextToBrowser(array, true, "", false);
+                    ui->textBrowser->moveCursor(QTextCursor::End);
+                }
             }
         }
         while (size > 0);
@@ -2934,4 +2983,5 @@ void MainWindow::on_ckAppendToBatch_clicked(bool checked)
 {
     mWorker.setAppendToBatch(checked);
 }
+
 
