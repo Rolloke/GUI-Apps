@@ -20,7 +20,7 @@ using namespace std;
 using namespace git;
 
 
-void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QString ext)
+void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QString ext, bool show)
 {
     if (aText.size())
     {
@@ -50,7 +50,10 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
             ui->textBrowser->insertPlainText(aText + getLineFeed());
         }
         ui->textBrowser->textCursor().movePosition(QTextCursor::End);
-        showDockedWidget(ui->textBrowser);
+        if (show)
+        {
+            showDockedWidget(ui->textBrowser);
+        }
     }
 }
 
@@ -286,6 +289,10 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
             {
                 ui->graphicsView->clear();
             }
+        }
+        if (mActivViewObjectName == background_textbrowser )
+        {
+            mBackgroundTextView->setText("");
         }
 
         set_widget_and_action_enabled(ui->btnStoreText, false);
