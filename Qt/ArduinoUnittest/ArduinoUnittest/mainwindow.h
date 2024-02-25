@@ -58,9 +58,8 @@ public:
 
 private:
     void digitalWrite(const std::vector<int>& aPins, int aValue);
-
-    std::vector<int>  getButtonPin(const QLineEdit& aLineEdit, int aNo, int& aValue) const;
-
+    std::vector<int>  getButtonPin(const QLineEdit& aLineEdit, int& aValue) const;
+    void stopArduino();
 
 
 public Q_SLOTS:
@@ -80,27 +79,13 @@ private Q_SLOTS:
     void on_btnDoTest_clicked();
     void on_btnClearText_clicked();
     void on_btnSendText_clicked();
-
-    void on_btnEscape_released();
-    void on_btnEscape_pressed();
-    void on_btnRight_pressed();
-    void on_btnRight_released();
-    void on_btnClear_pressed();
-    void on_btnClear_released();
-    void on_btnUp_pressed();
-    void on_btnUp_released();
-    void on_btnEnter_pressed();
-    void on_btnEnter_released();
-    void on_btnDown_pressed();
-    void on_btnDown_released();
-    void on_btnLeft_pressed();
-    void on_btnLeft_released();
     void on_bntSendFile_clicked();
-    void on_btnF1_pressed();
-    void on_btnF1_released();
-    void on_btnF2_pressed();
-    void on_btnF2_released();
+
+    void on_btnReleased();
+    void on_btnPressed();
+    void on_textChanged(const QString&str);
     void on_btnLogicAnalyzer_clicked(bool checked);
+    void on_comboArduinoCurrentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -110,11 +95,18 @@ private:
     LiquidCrystal* mLiquidCrystal;
     LogicAnalyser  mLogicAnalyser;
     std::unique_ptr<ArduinoWorker>  mWorker;
+    QList<QPushButton*> m_buttons;
+    QList<QLineEdit*>   m_edits;
     bool mUseWorkerThread;
+    QList<QStringList> mArduinoList;
+    QTimer*            mLoopTimer = nullptr;
+    QTimer*            mOneSecondTimer = nullptr;
+    QTimer*            mSetPinsTimer = nullptr;
 
     static MainWindow* gmThis;
-    static tPinAccess gmStaticPinAccess;
     QMutex mPinMutex;
+    static tPinAccess gmStaticPinAccess;
+    bool              mPinsSet = false;
 };
 
 #endif // MAINWINDOW_H

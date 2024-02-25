@@ -66,8 +66,10 @@ enum eInterruptMode
 };
 
 #define LED_BUILTIN 13
-
 void doTest();
+
+class Ui_MainWindow;
+void initialize(Ui_MainWindow *ui);
 
 void setup();
 void loop();
@@ -113,6 +115,8 @@ void          shiftOut(int dataPin, int clockPin, int bitOrder, unsigned char va
 int  digitalPinToInterrupt(int aPin);
 void attachInterrupt(int aInterrupt, InterrupFunction aFunction, int aInterruptMode);
 void detachInterrupt(int aInterrupt);
+void interrupts();
+void noInterrupts();
 
 bool isAlphaNumeric(int aChar);
 bool isAlpha(int aChar);

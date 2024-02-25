@@ -15,6 +15,8 @@ class ArduinoWorker : public QThread
 
 public:
     ArduinoWorker(QObject *parent = Q_NULLPTR);
+    virtual ~ArduinoWorker();
+
     void setLoopFunction(LoopFunction aLoop);
     void stop();
     void setChanged();

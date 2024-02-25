@@ -19,8 +19,6 @@ void delayMicroseconds(unsigned int aTime_us)
     QThread::usleep(aTime_us);
 }
 
-
-
 const char* nameof_pintype(int aPintype)
 {
     switch (aPintype)
@@ -89,6 +87,16 @@ int  digitalPinToInterrupt(int aPin)
      return aPin;
 }
 
+void interrupts()
+{
+
+}
+
+void noInterrupts()
+{
+
+}
+
 int  getFirstAnalogPin()
 {
     return MainWindow::getFirstAnalogPin();
@@ -96,12 +104,12 @@ int  getFirstAnalogPin()
 
 void attachInterrupt(int /* aInterrupt */, InterrupFunction /* aFunction */, int /* aInterruptMode */)
 {
-    // todo!
+    // TODO: implement
 }
 
 void detachInterrupt(int /* aInterrupt */)
 {
-    // todo!
+    // TODO: implement
 }
 
 bool isAlphaNumeric(int aChar)

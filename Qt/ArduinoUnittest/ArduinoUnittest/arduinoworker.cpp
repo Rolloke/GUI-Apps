@@ -4,6 +4,11 @@ ArduinoWorker::ArduinoWorker(QObject *parent) : QThread(parent), mRun(true), mCh
 {
 }
 
+ArduinoWorker::~ArduinoWorker()
+{
+    stop();
+    wait();
+}
 
 void ArduinoWorker::stop()
 {

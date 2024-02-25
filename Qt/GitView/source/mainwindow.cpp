@@ -706,8 +706,8 @@ MainWindow::~MainWindow()
                     }
                 }
             }
+            fSettings.endArray();
         }
-        fSettings.endArray();
     }
     fSettings.endGroup();
 

@@ -20,6 +20,14 @@
 #include <QFileInfo>
 #include <QMutexLocker>
 
+namespace config
+{
+constexpr char sListArduinos[] = "Arduinos";
+constexpr char sArduinoName[] = "ArduinoName";
+constexpr char sArduinoPins[] = "ArduinoPins";
+
+}
+
 #define STORE_PTR(SETTING, ITEM, FUNC) SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
 #define STORE_STR(SETTING, ITEM)       SETTING.setValue(getSettingsName(#ITEM), ITEM)
@@ -58,24 +66,82 @@ MainWindow::MainWindow(QWidget *parent)
     QSettings fSettings("config.ini", QSettings::NativeFormat);
 
     mArduinoTime = new QTime;
+    m_edits.append(ui->EditEsc);
+    m_edits.append(ui->EditUp);
+    m_edits.append(ui->EditF1);
+    m_edits.append(ui->EditRight);
+    m_edits.append(ui->EditEnter);
+    m_edits.append(ui->EditLeft);
+    m_edits.append(ui->EditClear);
+    m_edits.append(ui->EditDown);
+    m_edits.append(ui->EditF2);
 
-    QString fArduinoName = "AtMega328";
-    LOAD_PTR(fSettings, ui->editEscUpF1, setText, text, toString);
-    LOAD_PTR(fSettings, ui->editRightEnterLeft, setText, text, toString);
-    LOAD_PTR(fSettings, ui->editClearDownF2, setText, text, toString);
+    m_buttons.append(ui->BtnEscape);
+    m_buttons.append(ui->BtnUp);
+    m_buttons.append(ui->BtnF1);
+    m_buttons.append(ui->BtnRight);
+    m_buttons.append(ui->BtnEnter);
+    m_buttons.append(ui->BtnLeft);
+    m_buttons.append(ui->BtnClear);
+    m_buttons.append(ui->BtnDown);
+    m_buttons.append(ui->BtnF2);
 
-    LOAD_PTR(fSettings, ui->btnEscape, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnUp, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnRight, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnEnter, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnLeft, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnClear, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnDown, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnF1, setText, text, toString);
-    LOAD_PTR(fSettings, ui->btnF2, setText, text, toString);
+    for (auto& button : m_buttons)
+    {
+        connect(button, SIGNAL(pressed()), this, SLOT(on_btnPressed()));
+        connect(button, SIGNAL(released()), this, SLOT(on_btnReleased()));
+    }
+
+    ui->comboArduino->addItem("AtMega328");
+    ui->comboArduino->addItem("AtMega2560");
+    mArduinoList.push_back({ "D0 Rx", "D1 Tx", "D2 Int0", "D3~ Int1", "D4", "D5~", "D6~", "D7", "D8", "D9", "D10~ SS", "D11~ MOSI", "D12 MISO", "D13 SCK", "A0", "A1", "A2", "A3", "A4 SDA", "A5 SCL"});
+    mArduinoList.push_back({ "D0 Rx0", "D1 Tx0", "D2~ Int0", "D3~ Int1", "D4~", "D5~", "D6~", "D7~", "D8~", "D9~",
+                                    "D10~", "D11~", "D12~", "D13~", "D14 Tx3", "D15 Rx3", "D16 Tx2", "D17 Rx2", "D18 Tx1 Int2", "D19 Rx1 Int3",
+                                    "D20 SDA Int4", "D21 SCL Int5", "D22", "D23", "D24", "D25", "D26", "D27", "D28", "D29",
+                                    "D30", "D31", "D32", "D33", "D34", "D35", "D36", "D37", "D38", "D39",
+                                    "D40", "D41", "D42", "D43", "D44", "D45", "D46", "D47", "D48", "D49",
+                                    "D50", "D51", "D52", "D53",
+                                    "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15"});
+
+    {
+        int fItemCount = fSettings.beginReadArray(config::sListArduinos);
+        for (int fItem = 0; fItem < fItemCount; ++fItem)
+        {
+            fSettings.setArrayIndex(fItem);
+            QString name = fSettings.value(config::sArduinoName).toString();
+            if (ui->comboArduino->findText(name) == -1)
+            {
+                ui->comboArduino->addItem(name);
+                QString pinlist =  fSettings.value(config::sArduinoPins).toString();
+                mArduinoList.push_back(pinlist.split(","));
+            }
+        }
+        fSettings.endArray();
+    }
+    ui->comboArduino->setCurrentIndex(0);
+    QString fArduinoName = ui->comboArduino->currentText();
+    ui->comboArduino->setCurrentIndex(-1);
+
+    LOAD_PTR(fSettings, ui->BtnEscape, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnUp, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnRight, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnEnter, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnLeft, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnClear, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnDown, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnF1, setText, text, toString);
+    LOAD_PTR(fSettings, ui->BtnF2, setText, text, toString);
+
     LOAD_STR(fSettings, fArduinoName, toString);
     LOAD_STR(fSettings, mUseWorkerThread, toBool);
 
+
+    QString tool_tip = ui->EditEsc->toolTip();
+    for (int i=0; i<m_edits.size(); ++i)
+    {
+        connect(m_edits[i], SIGNAL(textChanged(QString)), this, SLOT(on_textChanged(QString)));
+        m_edits[i]->setToolTip(tr(tool_tip.toStdString().c_str()).arg(m_buttons[i]->text()));
+    }
 
     mListModel = new QStandardItemModel(0, eLast, this);
     mListModel->setHeaderData(ePinNo   , Qt::Horizontal, tr("Pin"));
@@ -84,78 +150,126 @@ MainWindow::MainWindow(QWidget *parent)
     mListModel->setHeaderData(eValue   , Qt::Horizontal, tr("Value"));
     ui->tableView->setModel(mListModel);
 
-    QStringList fPinsAtMega328  = { "D0 Rx", "D1 Tx", "D2 Int0", "D3~ Int1", "D4", "D5~", "D6~", "D7", "D8", "D9", "D10~ SS", "D11~ MOSI", "D12 MISO", "D13 SCK", "A0", "A1", "A2", "A3", "A4 SDA", "A5 SCL"};
-    QStringList fPinsAtMega2560 = { "D0 Rx0", "D1 Tx0", "D2~ Int0", "D3~ Int1", "D4~", "D5~", "D6~", "D7~", "D8~", "D9~",
-                                    "D10~", "D11~", "D12~", "D13~", "D14 Tx3", "D15 Rx3", "D16 Tx2", "D17 Rx2", "D18 Tx1 Int2", "D19 Rx1 Int3",
-                                    "D20 SDA Int4", "D21 SCL Int5", "D22", "D23", "D24", "D25", "D26", "D27", "D28", "D29",
-                                    "D30", "D31", "D32", "D33", "D34", "D35", "D36", "D37", "D38", "D39",
-                                    "D40", "D41", "D42", "D43", "D44", "D45", "D46", "D47", "D48", "D49",
-                                    "D50", "D51", "D52", "D53",
-                                    "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15"};
+    connect(ui->comboArduino, SIGNAL(currentIndexChanged(int)), this, SLOT(on_comboArduinoCurrentIndexChanged(int)));
+    int index = ui->comboArduino->findText(fArduinoName);
+    ui->comboArduino->setCurrentIndex(index);
 
-    QStringList* fPins = &fPinsAtMega328;
-    if (fArduinoName == "AtMega2560")
-    {
-        fPins = &fPinsAtMega2560;
-    }
-    setWindowTitle(fArduinoName);
-
-    mFirstAnalogPin = fPins->indexOf("A0");
-    int fRow = 0;
-    for (auto &fPin : *fPins)
-    {
-        mListModel->insertRows(fRow, 1, QModelIndex());
-        mListModel->setData(mListModel->index(fRow, ePinIndex, QModelIndex()), QString::number(fRow));
-        mListModel->setData(mListModel->index(fRow, ePinNo, QModelIndex()), fPin);
-        mListModel->setData(mListModel->index(fRow, ePinType, QModelIndex()), "");
-        QString fValue = fSettings.value(fPin, "0").toString();
-        mListModel->setData(mListModel->index(fRow, eValue, QModelIndex()), fValue);
-        mListModel->setData(mListModel->index(fRow, eRange, QModelIndex()), "1");
-        ++fRow;
-    }
+    LOAD_PTR(fSettings, ui->EditEsc, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditUp, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditF1, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditRight, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditEnter, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditLeft, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditClear, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditDown, setText, text, toString);
+    LOAD_PTR(fSettings, ui->EditF2, setText, text, toString);
 
     ui->tableView->setColumnWidth(ePinIndex,  30);
     ui->tableView->setColumnWidth(ePinNo   ,  85);
     ui->tableView->setColumnWidth(ePinType , 100);
-    ui->tableView->setColumnWidth(eValue   ,  68);
+    ui->tableView->setColumnWidth(eValue   ,  60);
 
     QObject::connect(&Serial, SIGNAL(sendText(QString)), this, SLOT(printToSeriaDisplay(QString)));
 
-    QTimer::singleShot(5, this, SLOT(on_Setup()));
+    initialize(ui);
     gmThis = this;
 }
 
 MainWindow::~MainWindow()
 {
+    stopArduino();
+
+    QSettings fSettings("config.ini", QSettings::NativeFormat);
+    STORE_PTR(fSettings, ui->EditEsc, text);
+    STORE_PTR(fSettings, ui->EditUp, text);
+    STORE_PTR(fSettings, ui->EditF1, text);
+    STORE_PTR(fSettings, ui->EditRight, text);
+    STORE_PTR(fSettings, ui->EditEnter, text);
+    STORE_PTR(fSettings, ui->EditLeft, text);
+    STORE_PTR(fSettings, ui->EditClear, text);
+    STORE_PTR(fSettings, ui->EditDown, text);
+    STORE_PTR(fSettings, ui->EditF2, text);
+
+    STORE_PTR(fSettings, ui->BtnEscape, text);
+    STORE_PTR(fSettings, ui->BtnUp, text);
+    STORE_PTR(fSettings, ui->BtnRight, text);
+    STORE_PTR(fSettings, ui->BtnEnter, text);
+    STORE_PTR(fSettings, ui->BtnLeft, text);
+    STORE_PTR(fSettings, ui->BtnClear, text);
+    STORE_PTR(fSettings, ui->BtnDown, text);
+    STORE_PTR(fSettings, ui->BtnF1, text);
+    STORE_PTR(fSettings, ui->BtnF2, text);
+    QString fArduinoName = ui->comboArduino->currentText();
+    STORE_STR(fSettings, fArduinoName);
+    STORE_STR(fSettings, mUseWorkerThread);
+
+    fSettings.beginWriteArray(config::sListArduinos);
     {
-        QMutexLocker fLock(&mPinMutex);
-        gmStaticPinAccess.clear();
+        int fIndex = 0;
+        for (int i=0; i < mArduinoList.size(); ++i)
+        {
+            fSettings.setArrayIndex(fIndex++);
+            fSettings.setValue(config::sArduinoName, ui->comboArduino->itemText(i));
+            fSettings.setValue(config::sArduinoPins, mArduinoList[i].join(","));
+        }
+        fSettings.endArray();
+    }
+
+    delete mArduinoTime;
+    delete ui;
+}
+
+void MainWindow::stopArduino()
+{
+    if (mSetPinsTimer)
+    {
+        mSetPinsTimer->stop();
+        disconnect(mSetPinsTimer, SIGNAL(timeout()), this, SLOT(setPins()));
+        delete mSetPinsTimer;
+        mSetPinsTimer = nullptr;
+    }
+    if (mLoopTimer)
+    {
+        mLoopTimer->stop();
+        connect(mLoopTimer, SIGNAL(timeout()), this, SLOT(on_Loop()));
+        delete mLoopTimer;
+        mLoopTimer = nullptr;
+    }
+    if (mOneSecondTimer)
+    {
+        mOneSecondTimer->stop();
+        connect(mOneSecondTimer, SIGNAL(timeout()), this, SLOT(on_OneSecond()));
+        delete mOneSecondTimer;
+        mOneSecondTimer = nullptr;
     }
     if (mWorker)
     {
         mWorker->stop();
         mWorker->wait();
     }
-    QSettings fSettings("config.ini", QSettings::NativeFormat);
-    STORE_PTR(fSettings, ui->editEscUpF1, text);
-    STORE_PTR(fSettings, ui->editRightEnterLeft, text);
-    STORE_PTR(fSettings, ui->editClearDownF2, text);
+    mPinsSet = false;
+}
 
-    STORE_PTR(fSettings, ui->btnEscape, text);
-    STORE_PTR(fSettings, ui->btnUp, text);
-    STORE_PTR(fSettings, ui->btnRight, text);
-    STORE_PTR(fSettings, ui->btnEnter, text);
-    STORE_PTR(fSettings, ui->btnLeft, text);
-    STORE_PTR(fSettings, ui->btnClear, text);
-    STORE_PTR(fSettings, ui->btnDown, text);
-    STORE_PTR(fSettings, ui->btnF1, text);
-    STORE_PTR(fSettings, ui->btnF2, text);
-    QString fArduinoName = windowTitle();
-    STORE_STR(fSettings, fArduinoName);
-    STORE_STR(fSettings, mUseWorkerThread);
-
-    delete mArduinoTime;
-    delete ui;
+void MainWindow::on_comboArduinoCurrentIndexChanged(int index)
+{
+    if (index >= 0 && index < mArduinoList.size())
+    {
+        auto& fPins = mArduinoList[index];
+        mFirstAnalogPin = fPins.indexOf("A0");
+        mListModel->removeRows(0, mListModel->rowCount());
+        int fRow = 0;
+        for (const auto &fPin : fPins)
+        {
+            mListModel->insertRows(fRow, 1, QModelIndex());
+            mListModel->setData(mListModel->index(fRow, ePinIndex, QModelIndex()), QString::number(fRow));
+            mListModel->setData(mListModel->index(fRow, ePinNo, QModelIndex()), fPin);
+            mListModel->setData(mListModel->index(fRow, ePinType, QModelIndex()), "");
+            mListModel->setData(mListModel->index(fRow, eValue, QModelIndex()), "0");
+            mListModel->setData(mListModel->index(fRow, eRange, QModelIndex()), "1");
+            ++fRow;
+        }
+        QTimer::singleShot(5, this, SLOT(on_Setup()));
+    }
 }
 
 void MainWindow::sendSerialText(const QString& aText)
@@ -180,19 +294,23 @@ int  MainWindow::elapsed()
 
 void MainWindow::setPins()
 {
-    QMutexLocker fLock(&mPinMutex);
-    for (auto fPA : gmStaticPinAccess)
+    if (!mPinsSet)
     {
-        setPin(fPA);
+        QMutexLocker fLock(&mPinMutex);
+        for (const auto& fPA : gmStaticPinAccess)
+        {
+            setPin(fPA);
+        }
     }
-    gmStaticPinAccess.clear();
+    mPinsSet = true;
 }
 
 
 void MainWindow::on_Setup()
 {
+    stopArduino();
     setPins();
-    mArduinoTime->start();
+    mArduinoTime->restart();
     setup();
 
     if (mUseWorkerThread)
@@ -200,26 +318,25 @@ void MainWindow::on_Setup()
         mWorker.reset(new ArduinoWorker(this));
     }
 
-    QTimer *timer;
     if (mWorker)
     {
         connect(mWorker.get(), SIGNAL(updateLiquidCrystal()), this, SLOT(updateLiquidCrystal()));
         mWorker->setLoopFunction(boost::bind(&MainWindow::on_Loop, this));
         mWorker->start();
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(setPins()));
-        timer->start(1);
+        mSetPinsTimer = new QTimer(this);
+        connect(mSetPinsTimer, SIGNAL(timeout()), this, SLOT(setPins()));
+        mSetPinsTimer->start(1);
     }
     else
     {
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(on_Loop()));
-        timer->start(10);
+        mLoopTimer = new QTimer(this);
+        connect(mLoopTimer, SIGNAL(timeout()), this, SLOT(on_Loop()));
+        mLoopTimer->start(10);
     }
 
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(on_OneSecond()));
-    timer->start(1000);
+    mOneSecondTimer = new QTimer(this);
+    connect(mOneSecondTimer, SIGNAL(timeout()), this, SLOT(on_OneSecond()));
+    mOneSecondTimer->start(1000);
 }
 
 void MainWindow::on_Loop()
@@ -395,8 +512,6 @@ bool MainWindow::isPinSelected(int aPin)
     return true;
 }
 
-// TODO: use vector for thread delegation
-// std::vector<int> fFunction = { ePinMode, aPin, aType };
 void MainWindow::pinMode(int aPin, int aType)
 {
     if (gmThis)
@@ -619,23 +734,18 @@ int MainWindow::getFirstAnalogPin()
 }
 
 
-std::vector<int>  MainWindow::getButtonPin(const QLineEdit& aLineEdit, int aNo, int& aValue) const
+std::vector<int>  MainWindow::getButtonPin(const QLineEdit& aLineEdit, int& aValue) const
 {
     std::vector<int> fPins;
-    QStringList fList = aLineEdit.text().split(':');
-    int fSize = fList.size();
     bool bNegative = false;
-    if (aNo < fSize && fList[aNo].length() > 0)
+    QStringList fPinList = aLineEdit.text().split(',');
+    for (auto fPinVal : fPinList)
     {
-        QStringList fPinList = fList[aNo].split(',');
-        for (auto fPinVal : fPinList)
+        fPins.push_back(fPinVal.toInt());
+        if (*fPins.rbegin() < 0)
         {
-            fPins.push_back(fPinVal.toInt());
-            if (*fPins.rbegin() < 0)
-            {
-                *fPins.rbegin() = -(*fPins.rbegin());
-                bNegative = true;
-            }
+            *fPins.rbegin() = -(*fPins.rbegin());
+            bNegative = true;
         }
     }
     if (bNegative)
@@ -646,121 +756,46 @@ std::vector<int>  MainWindow::getButtonPin(const QLineEdit& aLineEdit, int aNo, 
     return fPins;
 }
 
-
-void MainWindow::on_btnEscape_pressed()
+void MainWindow::on_textChanged(const QString& str)
 {
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editEscUpF1, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnEscape_released()
-{
-    int fValue = 0;
-    std::vector<int>fPins = getButtonPin(*ui->editEscUpF1, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnUp_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editEscUpF1, 1, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnUp_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editEscUpF1, 1, fValue);
-    digitalWrite(fPins, fValue);
+    auto *edit = dynamic_cast<QLineEdit*>(sender());
+    int index = m_edits.indexOf(edit);
+    if (index >= 0 && index < m_buttons.size())
+    {
+        bool ok = false;
+        QStringList pins = str.split(",");
+        if (pins.size())
+        {
+            int pin = abs(pins[0].toInt(&ok));
+            ok = ok && pin >= 0 && pin < mListModel->rowCount();
+        }
+        m_buttons[index]->setEnabled(ok);
+    }
 }
 
-void MainWindow::on_btnF1_pressed()
+
+void MainWindow::on_btnPressed()
 {
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editEscUpF1, 2, fValue);
-    digitalWrite(fPins, fValue);
+    auto *button = dynamic_cast<QPushButton*>(sender());
+    int index = m_buttons.indexOf(button);
+    if (index >= 0 && index < m_edits.size())
+    {
+        int fValue = 1;
+        std::vector<int> fPins = getButtonPin(*m_edits[index], fValue);
+        digitalWrite(fPins, fValue);
+    }
 }
 
-void MainWindow::on_btnF1_released()
+void MainWindow::on_btnReleased()
 {
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editEscUpF1, 2, fValue);
-    digitalWrite(fPins, fValue);
-}
-
-void MainWindow::on_btnRight_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnRight_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-
-void MainWindow::on_btnEnter_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 1, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnEnter_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 1, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnLeft_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 2, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnLeft_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editRightEnterLeft, 2, fValue);
-    digitalWrite(fPins, fValue);
-}
-
-void MainWindow::on_btnClear_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnClear_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 0, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnDown_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 1, fValue);
-    digitalWrite(fPins, fValue);
-}
-void MainWindow::on_btnDown_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 1, fValue);
-    digitalWrite(fPins, fValue);
-}
-
-void MainWindow::on_btnF2_pressed()
-{
-    int fValue = 1;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 2, fValue);
-    digitalWrite(fPins, fValue);
-}
-
-void MainWindow::on_btnF2_released()
-{
-    int fValue = 0;
-    std::vector<int> fPins = getButtonPin(*ui->editClearDownF2, 2, fValue);
-    digitalWrite(fPins, fValue);
+    auto *button = dynamic_cast<QPushButton*>(sender());
+    int index = m_buttons.indexOf(button);
+    if (index >= 0 && index < m_edits.size())
+    {
+        int fValue = 0;
+        std::vector<int> fPins = getButtonPin(*m_edits[index], fValue);
+        digitalWrite(fPins, fValue);
+    }
 }
 
 void MainWindow::setLiquidCrystal(LiquidCrystal *aLCD)
