@@ -5,6 +5,8 @@
 #include <QStandardItemModel>
 #include <QFile>
 #include <QJsonValue>
+#include <QItemDelegate>
+
 #include "DisplayType.h"
 #include "editable.h"
 #include <boost/optional/optional.hpp>
@@ -13,6 +15,7 @@
 #endif
 
 class BinaryTableModel;
+class QReadonlyEditItemDelegate;
 
 class qbinarytableview : public QTableView, public Editable
 {
@@ -20,6 +23,7 @@ class qbinarytableview : public QTableView, public Editable
     Q_OBJECT
 public:
     explicit qbinarytableview(QWidget *parent = nullptr);
+    virtual ~qbinarytableview();
 
     void set_binary_data(const QByteArray& content);
     const QByteArray& get_binary_data() const;
@@ -39,6 +43,8 @@ protected:
     void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
     void keyPressEvent(QKeyEvent *event) override;
     void mousePressEvent(QMouseEvent* event) override;
+    bool edit(const QModelIndex &index, EditTrigger trigger, QEvent *event) override;
+
 
 Q_SIGNALS:
     void set_value(const QByteArray& array, int position);
@@ -65,6 +71,7 @@ private:
     void change_cursor();
 
     std::vector<double> mColumnWidth;
+    QReadonlyEditItemDelegate* m_item_delegate;
 };
 
 
@@ -120,7 +127,7 @@ private:
     void     set_current_row(int row);
     int      increase_cursor();
     int      decrease_cursor();
-    qbinarytableview* get_parent();
+    qbinarytableview* get_parent() const;
 
     void     clear_typed_display();
     bool     insert_binary_structs(QJsonObject &structs_obj);
@@ -144,6 +151,24 @@ private:
     std::map<QString, DisplayValue> m_td_structs;
     std::vector<int>                m_td_offset;
     std::vector<int>                m_td_index;
+};
+
+class QReadonlyEditItemDelegate : public QItemDelegate
+{
+    Q_OBJECT
+
+public:
+
+    explicit QReadonlyEditItemDelegate(QObject *parent = 0);
+
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index);
+    void setEditorData(QWidget *editor, const QModelIndex &index);
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index);
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,     const QModelIndex &index);
+
+signals:
+
+private:
 };
 
 #endif // QBINARYTABLEVIEW_H

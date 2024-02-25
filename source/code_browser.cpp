@@ -15,6 +15,9 @@
 #include <QWebEngineView>
 #endif
 
+/// TODO: evaluate clicks on markup or html links
+/// also in codebrowser, when WEB_ENGINE is not available
+
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
   , m_show_line_numbers(false)
@@ -832,6 +835,8 @@ void PreviewPage::load_markdown_page()
 {
     m_web_enginge_view->setUrl(QUrl("qrc:/resource/index.html"));
 }
+
+/// TODO: evaluate clicks on markup or html links and open, when possible
 
 bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType, bool)
 {
