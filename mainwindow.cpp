@@ -24,6 +24,7 @@
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
 #include <QRandomGenerator>
+#include <QAudioOutput>
 #endif
 
 /// TODO: find qt-version for this
@@ -163,6 +164,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QFileInfo info(filename);
     QString settings_file_name = info.baseName();
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    auto* audioOutput = new QAudioOutput;
+    mPlayer.setAudioOutput(audioOutput);
+#endif
     mPlayer.setVideoOutput(&mVideo);
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
@@ -428,7 +433,11 @@ void MainWindow::on_pushButtonStart_clicked()
         }
         else
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            mPlayer.setSource(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
+#else
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
+#endif
             if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).toString() == txt::tv)
             {
                 mVideo.show();
@@ -443,7 +452,11 @@ void MainWindow::on_pushButtonStart_clicked()
 
 void MainWindow::display_play_status()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    auto state = mPlayer.playbackState();
+#else
     auto state = mPlayer.state();
+#endif
     switch(state)
     {
     case QMediaPlayer::StoppedState:
@@ -464,7 +477,11 @@ void MainWindow::display_play_status()
 
 void MainWindow::on_sliderVolume_valueChanged(int value)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    mPlayer.audioOutput()->setVolume(value);
+#else
     mPlayer.setVolume(value);
+#endif
 }
 
 void MainWindow::on_pushButtonPause_clicked()
@@ -733,6 +750,30 @@ void MainWindow::menu_help_info()
             info += "<tr><td>";
             info += metainfo.key();
             info += "</td><td>";
+#if  QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            switch(value.typeId())
+            {
+            case QMetaType::QString:
+                info += value.toString();
+                break;
+            case QMetaType::QStringList:
+                for (auto& string : value.toStringList())
+                {
+                    info += string;
+                    info += ", ";
+                }
+                break;
+            case QMetaType::Int:
+                info += QString::number(value.toInt());
+                break;
+            case QMetaType::UInt:
+                info += QString::number(value.toUInt());
+                break;
+            default:
+                info += tr("typeid: %1").arg(value.typeId());
+                break;
+            }
+#else
             switch(value.type())
             {
             case QVariant::String:
@@ -754,6 +795,7 @@ void MainWindow::menu_help_info()
             default:
                 break;
             }
+#endif
             info += "</td></tr>";
         }
         info += "</table>";
@@ -1106,7 +1148,11 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
         QString message = key;
         message += ": ";
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (value.typeId() == QMetaType::QString && key.contains(QMediaMetaData::metaDataKeyToString(QMediaMetaData::Title), Qt::CaseInsensitive))
+#else
         if (value.type() == QVariant::String && key.contains(QMediaMetaData::Title, Qt::CaseInsensitive))
+#endif
         {
             message += value.toString();
             ui->statusBar->showMessage(message);
