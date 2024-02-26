@@ -1012,7 +1012,7 @@ void MainWindow::perform_custom_command()
                     mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
                     if (ui->ckOutput2secondTextView && mBackgroundTextView)
                     {
-                        showDockedWidget(mBackgroundTextView.get());
+                        showDockedWidget(mBackgroundTextView.data());
                     }
                 }
                 else
