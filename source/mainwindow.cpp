@@ -2099,32 +2099,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                     }
                     if (mBackgroundTextView)
                     {
-                        const QString& aText = array;
-                        if (aText.contains(static_cast<char>(27))
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                                || aText.contains(static_cast<char>(0))
-#endif
-                                )
-                        {
-                            QString clean_text = array;
-                            clean_text.replace("\033", "");
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                            clean_text.replace(QRegularExpression("\\[[0-9]{1,2}m"), "");
-#else
-                            clean_text.replace(QRegExp("\\[[0-9]{1,2}m"), "");
-#endif
-                            clean_text.replace(static_cast<char>(0), ' ');
-                            mBackgroundTextView->insertPlainText(clean_text+ getLineFeed());
-                        }
-                        else
-                        {
-                            mBackgroundTextView->insertPlainText(aText + getLineFeed());
-                        }
-                        if (!mBackgroundTextView->isVisible())
-                        {
-                            showDockedWidget(mBackgroundTextView.data());
-                        }
-                        mBackgroundTextView->textCursor().movePosition(QTextCursor::End);
+                        appendTextToBrowser(array, true, "", !mBackgroundTextView->isVisible(), true);
                         mBackgroundTextView->moveCursor(QTextCursor::End);
                     }
                 }

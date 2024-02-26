@@ -165,7 +165,7 @@ private:
     QDir     initDir(const QString& aDirPath, int aFilter=0);
     void     initCodecCombo();
 
-    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true);
+    void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true, bool use_second_view=false);
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
 
     QVariant handleWorker(const QVariant&);
