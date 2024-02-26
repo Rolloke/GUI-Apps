@@ -185,7 +185,16 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     if (row < 0) return;
 
     const QFontMetricsF metrix(font());
-    float size = metrix.width("X");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    float size = metrix.boundingRect("#").width();
+#else
+    float size = metrix.width(" ");
+#endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    int x_position = event->position().x();
+#else
+    int x_position = event->x();
+#endif
     if (size < 0)
     {
         size = font().pixelSize();
@@ -194,7 +203,6 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     {
         size = font().pointSizeF();
     }
-    int x_position = event->x();
     for (int i=0; i<column;++i)
     {
         x_position -= columnWidth(i);

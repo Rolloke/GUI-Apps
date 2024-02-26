@@ -406,6 +406,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowHistoryGraphically);
         on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
+        LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckAppendToBatch, setChecked, isChecked, toBool);
         on_ckAppendToBatch_clicked(ui->ckAppendToBatch->isChecked());
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
@@ -624,6 +625,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->ckShowHistoryGraphically, isChecked);
+        STORE_PTR(fSettings, ui->ckOutput2secondTextView, isChecked);
         STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
@@ -1521,7 +1523,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
         workmap.insert(Worker::work, INT(work_command));
         mWorker.doWork(QVariant(workmap));
         mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
-        if (ui->ckOutput2secondTextView && mBackgroundTextView)
+        if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
         {
             showDockedWidget(mBackgroundTextView.data());
         }
@@ -2084,7 +2086,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                 {
                     array[size-1] = 0;
                 }
-                if (ui->ckOutput2secondTextView)
+                if (ui->ckOutput2secondTextView->isChecked())
                 {
                     if (!mBackgroundTextView)
                     {
@@ -2120,9 +2122,10 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                         }
                         if (!mBackgroundTextView->isVisible())
                         {
-                            mBackgroundTextView->textCursor().movePosition(QTextCursor::End);
                             showDockedWidget(mBackgroundTextView.data());
                         }
+                        mBackgroundTextView->textCursor().movePosition(QTextCursor::End);
+                        mBackgroundTextView->moveCursor(QTextCursor::End);
                     }
                 }
                 else
