@@ -1523,7 +1523,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
         mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
         if (ui->ckOutput2secondTextView && mBackgroundTextView)
         {
-            showDockedWidget(mBackgroundTextView.get());
+            showDockedWidget(mBackgroundTextView.data());
         }
         command.clear();
     }
@@ -2090,7 +2090,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                     {
                         // backgound process output text view
                         mBackgroundTextView.reset(create_new_text_browser("", tr("Background process view")));
-                        QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.get()->parent());
+                        QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
                         dock->setObjectName(background_textbrowser);
                         dock->setAttribute(Qt::WA_DeleteOnClose, false);
                         mBackgroundTextView->setReadOnly(true);
@@ -2121,7 +2121,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                         if (!mBackgroundTextView->isVisible())
                         {
                             mBackgroundTextView->textCursor().movePosition(QTextCursor::End);
-                            showDockedWidget(mBackgroundTextView.get());
+                            showDockedWidget(mBackgroundTextView.data());
                         }
                     }
                 }
