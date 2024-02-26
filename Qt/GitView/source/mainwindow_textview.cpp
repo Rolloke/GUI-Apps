@@ -20,15 +20,16 @@ using namespace std;
 using namespace git;
 
 
-void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QString ext, bool show)
+void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QString ext, bool show, bool use_second_view)
 {
     if (aText.size())
     {
-        if (!append)
+        if (!append && !use_second_view)
         {
             btnCloseText_clicked(Editor::Viewer);
         }
-        ui->textBrowser->setExtension(ext);
+        auto* browser = use_second_view ? mBackgroundTextView.data() : ui->textBrowser;
+        browser->setExtension(ext);
         if (aText.contains(static_cast<char>(27))
         #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 || aText.contains(static_cast<char>(0))
@@ -43,16 +44,16 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
             clean_text.replace(QRegExp("\\[[0-9]{1,2}m"), "");
 #endif
             clean_text.replace(static_cast<char>(0), ' ');
-            ui->textBrowser->insertPlainText(clean_text+ getLineFeed());
+            browser->insertPlainText(clean_text+ getLineFeed());
         }
         else
         {
-            ui->textBrowser->insertPlainText(aText + getLineFeed());
+            browser->insertPlainText(aText + getLineFeed());
         }
-        ui->textBrowser->textCursor().movePosition(QTextCursor::End);
+        browser->textCursor().movePosition(QTextCursor::End);
         if (show)
         {
-            showDockedWidget(ui->textBrowser);
+            showDockedWidget(browser);
         }
     }
 }

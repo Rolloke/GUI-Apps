@@ -637,6 +637,19 @@ void MainWindow::on_btnStoreCommand_clicked()
 
 QString getSettingsName(const QString& aItemName)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    auto match = fRegEx.match(aItemName);
+    if (match.isValid())
+    {
+        const auto captured = match.capturedTexts();
+        QString fTemp = captured[0];
+        fTemp = fTemp.replace(":", "_");
+        fTemp = fTemp.replace("[", "_");
+        return fTemp;
+    }
+    else return aItemName;
+#else
     QRegExp fRegEx("([A-Z][A-Za-z_]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
@@ -644,6 +657,7 @@ QString getSettingsName(const QString& aItemName)
         return fRegEx.capturedTexts()[0];
     }
     else return aItemName;
+#endif
 }
 
 void MainWindow::initializeConfigurationPage()

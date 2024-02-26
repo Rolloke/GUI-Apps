@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QStringList>
-
+#include <strstream>
 class PinType
 {
 public:

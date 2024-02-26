@@ -10,7 +10,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-unix:QMAKE_CXXFLAGS += -std=c++14
+unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
