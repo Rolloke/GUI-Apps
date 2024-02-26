@@ -66,7 +66,7 @@ int code_browser::lineNumberAreaWidth()
         digits += m_blame_characters;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        int space = 3 + fontMetrics().maxWidth() * digits;
+        int space = 3 + fontMetrics().boundingRect("9").width() * digits;
 #else
         int space = 3 + fontMetrics().charWidth("9", 0) * digits;
 #endif
@@ -376,11 +376,10 @@ void code_browser::changeSelection(selection command)
 
 void code_browser::setTabstopCharacters(int characters)
 {
-    const QFontMetricsF metrix(font());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    float size = metrix.maxWidth();
+    float size = fontMetrics().boundingRect("#").width();
 #else
-    float size = metrix.width(" ");
+    float size = fontMetrics().width(" ");
 #endif
     if (size < 0)
     {
@@ -401,9 +400,8 @@ void code_browser::setTabstopCharacters(int characters)
 
 int code_browser::getTabstopCharacters()
 {
-    const QFontMetricsF metrix(font());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    float size = metrix.maxWidth();
+    float size = fontMetrics().boundingRect("#").width();
 #else
     float size = metrix.width(" ");
 #endif
