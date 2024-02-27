@@ -403,7 +403,7 @@ int code_browser::getTabstopCharacters()
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
     float size = fontMetrics().boundingRect("#").width();
 #else
-    float size = metrix.width(" ");
+    float size = fontMetrics().width(" ");
 #endif
     if (size < 0)
     {

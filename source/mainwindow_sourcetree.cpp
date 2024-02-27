@@ -1335,6 +1335,7 @@ void MainWindow::showInformation()
 
         information << "States: " << states.toStdString() << std::endl;
         information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
+        /// TODO: fix depricated issues
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #elif  QT_DEPRECATED_SINCE(5, 10)
