@@ -461,7 +461,10 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
                 const auto files = result_string.split("\n");
                 for (const auto& file_path : files)
                 {
-                    child_item->addChild(new QTreeWidgetItem({file_path}));
+                    if (file_path.size())
+                    {
+                        child_item->addChild(new QTreeWidgetItem({file_path}));
+                    }
                 }
                 child_item->setData(History::Column::Commit, History::role(History::Entry::NoOfFiles), files.count());
                 if (type.is(Type::Branch))

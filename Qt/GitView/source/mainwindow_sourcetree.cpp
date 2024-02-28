@@ -1335,28 +1335,46 @@ void MainWindow::showInformation()
 
         information << "States: " << states.toStdString() << std::endl;
         information << "Size: " << formatFileSize(file_info.size()).toStdString() << std::endl;
-        /// TODO: fix depricated issues
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-
-#elif  QT_DEPRECATED_SINCE(5, 10)
-        if (file_info.created().isValid())
-        {
-            information << "\nCreated: " << file_info.created().toString(Qt::SystemLocaleShortDate).toStdString();
-        }
-#else
+#if QT_DEPRECATED_SINCE(5, 15)
+        auto dateformat = "dd.MM.yyyy hh:mm:ss";
         if (file_info.birthTime().isValid())
         {
-            information << "\nCreated: " << file_info.birthTime().toString(Qt::SystemLocaleShortDate).toStdString();
+            information << "\nCreated: " << file_info.birthTime().toString(dateformat).toStdString();
         }
         if (file_info.metadataChangeTime().isValid())
         {
-            information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(Qt::SystemLocaleShortDate).toStdString();
+            information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(dateformat).toStdString();
         }
-#endif
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (file_info.lastModified().isValid())
+        {
+            information << "\nModified: " << file_info.lastModified().toString(dateformat).toStdString();
+        }
+        if (file_info.lastRead().isValid())
+        {
+            information << "\nLast Access: " << file_info.lastRead().toString(dateformat).toStdString();
+        }
 #else
-        information << "\nModified: " << file_info.lastModified().toString(Qt::SystemLocaleShortDate).toStdString();
-        information << "\nLast Access: " << file_info.lastRead().toString(Qt::SystemLocaleShortDate).toStdString();
+        auto dateformat = Qt::SystemLocaleShortDate;
+        if (file_info.created().isValid())
+        {
+            information << "\nCreated: " << file_info.created().toString(dateformat).toStdString();
+        }
+        if (file_info.birthTime().isValid())
+        {
+            information << "\nCreated: " << file_info.birthTime().toString(dateformat).toStdString();
+        }
+        if (file_info.metadataChangeTime().isValid())
+        {
+            information << "\nMetadata Access: " << file_info.metadataChangeTime().toString(dateformat).toStdString();
+        }
+        if (file_info.lastModified().isValid())
+        {
+            information << "\nModified: " << file_info.lastModified().toString(dateformat).toStdString();
+        }
+        if (file_info.lastRead().isValid())
+        {
+            information << "\nLast Access: " << file_info.lastRead().toString(dateformat).toStdString();
+        }
 #endif
         information << "\nPermissions:\n" << formatPermissions(file_info.permissions()).toStdString() << std::endl;
 #ifdef __linux__
