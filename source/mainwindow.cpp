@@ -943,7 +943,7 @@ void MainWindow::dockWidget_topLevelChanged(bool)
     QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
     if (dw && mDockedWidgetMinMaxButtons)
     {
-        static Qt::WindowFlags oldDocWidgetFlags = static_cast<Qt::WindowFlags>(0);
+        static Qt::WindowFlags oldDocWidgetFlags = Qt::Widget;
         if (dw->isFloating())
         {
             auto customized = Qt::CustomizeWindowHint |
@@ -2400,6 +2400,7 @@ void MainWindow::combo_triggered()
         {
             ui->edtFindText->setText(find_text);
             ui->edtFindText->setModified(true);
+            ui->edtFindText->setFocus();
         }
         else
         {
