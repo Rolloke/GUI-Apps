@@ -856,6 +856,7 @@ void MainWindow::initMergeTools(bool read_new_items)
     }
 }
 
+/// TODO: if not a git file rename or move in file system
 void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was_dropped)
 {
     getSelectedTreeItem();
