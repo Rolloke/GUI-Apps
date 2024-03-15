@@ -943,7 +943,7 @@ void MainWindow::dockWidget_topLevelChanged(bool)
     QDockWidget* dw = dynamic_cast<QDockWidget*>(QObject::sender());
     if (dw && mDockedWidgetMinMaxButtons)
     {
-        static Qt::WindowFlags oldDocWidgetFlags = static_cast<Qt::WindowFlags>(0);
+        static Qt::WindowFlags oldDocWidgetFlags = Qt::Widget;
         if (dw->isFloating())
         {
             auto customized = Qt::CustomizeWindowHint |
@@ -978,7 +978,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
         code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
         if (textBrowser)
         {
-            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser, background_textbrowser });
+            QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, background_textbrowser });
             for (QDockWidget* current_widget : dock_widgets)
             {
                 code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
@@ -1162,7 +1162,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
 
 bool MainWindow::send_close_to_editable_widget(QWidget*editable_widget)
 {
-    if (editable_widget && editable_widget != ui->textBrowser && editable_widget != ui->tableBinaryView)
+    if (editable_widget && editable_widget != ui->textBrowser && editable_widget != ui->tableBinaryView  && editable_widget != mBackgroundTextView.data() )
     {
         QDockWidgetX*dw = dynamic_cast<QDockWidgetX*>(editable_widget->parent());
         if (dw)
@@ -2091,7 +2091,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                     if (!mBackgroundTextView)
                     {
                         // backgound process output text view
-                        mBackgroundTextView.reset(create_new_text_browser("", tr("Background process view")));
+                        mBackgroundTextView.reset(create_new_text_browser("", tr("Background process Log")));
                         QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
                         dock->setObjectName(background_textbrowser);
                         dock->setAttribute(Qt::WA_DeleteOnClose, false);
@@ -2400,6 +2400,7 @@ void MainWindow::combo_triggered()
         {
             ui->edtFindText->setText(find_text);
             ui->edtFindText->setModified(true);
+            ui->edtFindText->setFocus();
         }
         else
         {

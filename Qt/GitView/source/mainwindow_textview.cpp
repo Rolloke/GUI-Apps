@@ -172,7 +172,8 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
             }
             if (   mActivViewObjectName == binary_table_view
                 || mActivViewObjectName == binaryview
-                || mActivViewObjectName == graphicsviewer)
+                || mActivViewObjectName == graphicsviewer
+                || mActivViewObjectName == background_textbrowser )
             {
                 return true;
             }
@@ -284,18 +285,17 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
             reset_text_browser(dynamic_cast<code_browser*>(active_widget));
         }
 
-        if (mActivViewObjectName == graphicsviewer)
+        if (editor == Editor::CalledFromAction)
         {
-            //if (!ui->graphicsView->has_rendered_graphic())
+            if (mActivViewObjectName == graphicsviewer)
             {
                 ui->graphicsView->clear();
             }
+            if (mActivViewObjectName == background_textbrowser)
+            {
+                mBackgroundTextView->setText("");
+            }
         }
-        if (mActivViewObjectName == background_textbrowser )
-        {
-            mBackgroundTextView->setText("");
-        }
-
         set_widget_and_action_enabled(ui->btnStoreText, false);
         ui->labelFilePath->setText("");
         return true; // can close app
