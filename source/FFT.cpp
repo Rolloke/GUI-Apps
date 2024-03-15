@@ -3,7 +3,11 @@
 #include "main.h"
 
 #include <cmath>
+#ifdef __SSE2__
+  #include <emmintrin.h>
+#endif
 
+#define USE_SIMD 0
 
 namespace
 {
@@ -82,53 +86,56 @@ void calcImaginary(const std::complex<double>*pdFourier, std::vector<double>& aD
     }
 }
 
-#if 1
-
-void calcAmplitude(const std::complex<double>* pdFourier, std::vector<double>& aDest)
-{
-    for (unsigned int j=0; j<aDest.size(); ++j)
-    {
-        aDest[j] = abs(pdFourier[j]);
-    }
-}
-
-#else
-
-void calcAmplitudeF(const float*pdIn, std::vector<double>& aDest)
-{
-    const complex<float>*pdFourier = reinterpret_cast<const complex<float>* >(pdIn);
-    for (unsigned int j=0; j<aDest.size(); ++j)
-    {
-        //p[j].y =(LONG)_hypot(pdFourier[j].real(), pdFourier[j].imag());
-        aDest[j] = static_cast<LONG>(abs(pdFourier[j]));
-    }
-}
-
-void calcAmplitude(const float*pdFourier, std::vector<double>&p, int n)
+#ifdef __SSE2__
+void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
 {
     int j, k;
     __m128 a, b;
-    static const __m128 r = { 0.5f, 0.5f, 0.5f, 0.5f };
+    static const float fac = 10.0f;
+    static const __m128 r = { fac, fac, fac, fac };
     for (k=-1, j=-1; j < n; )
     {
-        a.m128_f32[0] = pdFourier[++k];
-        b.m128_f32[0] = pdFourier[++k];
-        a.m128_f32[1] = pdFourier[++k];
-        b.m128_f32[1] = pdFourier[++k];
-        a.m128_f32[2] = pdFourier[++k];
-        b.m128_f32[2] = pdFourier[++k];
-        a.m128_f32[3] = pdFourier[++k];
-        b.m128_f32[3] = pdFourier[++k];
+        a[0] = pdFourier[++k];
+        b[0] = pdFourier[++k];
+        a[1] = pdFourier[++k];
+        b[1] = pdFourier[++k];
+        a[2] = pdFourier[++k];
+        b[2] = pdFourier[++k];
+        a[3] = pdFourier[++k];
+        b[3] = pdFourier[++k];
         a = _mm_mul_ps(a, a);
         b = _mm_mul_ps(b, b);
         b = _mm_add_ps(a, b);
         a = _mm_sqrt_ps(b);
-        b = _mm_add_ps(a, r);
-        p[++j] = (LONG)(float)b.m128_f32[0];
-        p[++j] = (LONG)(float)b.m128_f32[1];
-        p[++j] = (LONG)(float)b.m128_f32[2];
-        p[++j] = (LONG)(float)b.m128_f32[3];
+        b = _mm_mul_ps(a, r);
+        p[++j] = (double)(float)b[0];
+        p[++j] = (double)(float)b[1];
+        p[++j] = (double)(float)b[2];
+        p[++j] = (double)(float)b[3];
     }
 }
-
 #endif
+
+void calcAmplitude(const std::complex<double>* pdFourier, std::vector<double>& aDest)
+{
+#if __SSE2__ && USE_SIMD
+    calcAmplitude(reinterpret_cast<const double*>(pdFourier), aDest, aDest.size() / 4);
+#else
+    for (unsigned int j=0; j<aDest.size(); ++j)
+    {
+        aDest[j] = abs(pdFourier[j]);
+    }
+#endif
+}
+#if 0
+void calcAmplitudeF(const float*pdIn, std::vector<double>& aDest)
+{
+    const std::complex<float>*pdFourier = reinterpret_cast<const std::complex<float>* >(pdIn);
+    for (unsigned int j=0; j<aDest.size(); ++j)
+    {
+        //p[j].y =(LONG)_hypot(pdFourier[j].real(), pdFourier[j].imag());
+        aDest[j] = static_cast<double>(abs(pdFourier[j]));
+    }
+}
+#endif
+
