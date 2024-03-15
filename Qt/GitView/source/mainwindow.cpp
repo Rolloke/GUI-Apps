@@ -896,6 +896,8 @@ void MainWindow::removeCmdToolBar(const QString& toolbar_name)
     }
 }
 
+/// TODO: A clone Textbrowser does not work properly regarding find and some other functionalities
+// maybe split view may work better
 void MainWindow::clone_code_browser()
 {
     code_browser *active_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
