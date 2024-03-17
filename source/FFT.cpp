@@ -3,11 +3,9 @@
 #include "main.h"
 
 #include <cmath>
-#ifdef __SSE2__
-  #include <emmintrin.h>
-#endif
 
-#define USE_SIMD 0
+#include "simd.h"
+
 
 namespace
 {
@@ -86,9 +84,11 @@ void calcImaginary(const std::complex<double>*pdFourier, std::vector<double>& aD
     }
 }
 
-#ifdef __SSE2__
+#if __SSE2__ && USE_SIMD
+__attribute__((noinline))
 void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
 {
+#if 0
     int j, k;
     __m128 a, b;
     static const float fac = 10.0f;
@@ -113,13 +113,39 @@ void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
         p[++j] = (double)(float)b[2];
         p[++j] = (double)(float)b[3];
     }
+#else
+
+//     __m512 m_var = _mm512_set1_ps(1.0f);
+
+    typedef float myfloat;
+    SimdVar<myfloat, double> a, b;
+    const float fac = 10.0f;
+    const SimdVar<myfloat, double> r(fac);
+    const int step = r.elements();
+    const int step_2 = step * 2;
+    for (int j=0; j < n; j+=step)
+    {
+        a.set(pdFourier, SimdVar<myfloat, double>::even);
+        b.set(pdFourier, SimdVar<myfloat, double>::odd);
+
+        a.hypot(a, b);
+        b = a * r;
+
+        p[j  ] = static_cast<double>(b[0]);
+        p[j+1] = static_cast<double>(b[1]);
+        p[j+2] = static_cast<double>(b[2]);
+        p[j+3] = static_cast<double>(b[3]);
+
+        pdFourier += step_2;
+    }
+#endif
 }
 #endif
 
 void calcAmplitude(const std::complex<double>* pdFourier, std::vector<double>& aDest)
 {
 #if __SSE2__ && USE_SIMD
-    calcAmplitude(reinterpret_cast<const double*>(pdFourier), aDest, aDest.size() / 4);
+    calcAmplitude(reinterpret_cast<const double*>(pdFourier), aDest, aDest.size());
 #else
     for (unsigned int j=0; j<aDest.size(); ++j)
     {
