@@ -332,7 +332,7 @@ namespace Algorithmics
                     return r;
                 }
                 return dummy();
-            };
+            }
 
             /*!
             \brief subtracts a vector from this vector, and saves result in calling object
@@ -369,7 +369,7 @@ namespace Algorithmics
                     r[i] = v[i] * val;
                 }
                 return r;
-            };
+            }
 
             /*!
             \brief multiplies each element of a multi dimensional vector with a value
