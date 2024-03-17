@@ -26,6 +26,7 @@
 #include <QWhatsThis>
 #include <QFontDatabase>
 #include <QFileDialog>
+#include <QSplitter>
 
 /// TODO: test all qt6 things
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -896,14 +897,48 @@ void MainWindow::removeCmdToolBar(const QString& toolbar_name)
     }
 }
 
-/// TODO: A clone Textbrowser does not work properly regarding find and some other functionalities
-// maybe split view may work better
 void MainWindow::clone_code_browser()
 {
     code_browser *active_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
     if (active_browser)
     {
-        code_browser*docked_browser = active_browser->clone();
+#if 1
+        /// TODO: test splited view
+        /// Splitted View
+        /// o   Dupliziert als gleicher Editor?
+        /// o   Scrollen synchronisierbar
+        /// o   auch mit verschiedenen Dateien zum vergleichen
+        ///     §  (drag and drop)?
+        ///     §  Focusbasiert durch doppelclick
+        ///     §  Diff anzeige
+        auto* dock = dynamic_cast<QDockWidget*>(active_browser->parent());
+        if (dock)
+        {
+            code_browser* cloned_browser = active_browser->clone();
+            QSplitter* splitter = new QSplitter(dock);
+            dock->setWidget(splitter);
+            splitter->addWidget(active_browser);
+            splitter->addWidget(cloned_browser);
+            active_browser->show();
+            cloned_browser->show();
+            showDockedWidget(splitter);
+        }
+        else
+        {
+            auto* splitter = dynamic_cast<QSplitter*>(active_browser->parent());
+            if (splitter)
+            {
+                auto* dock = dynamic_cast<QDockWidget*>(splitter->parent());
+                if (dock)
+                {
+                    dock->setWidget(splitter->widget(0));
+                    splitter->widget(0)->setParent(dock);
+                    delete splitter;
+                }
+            }
+        }
+#else
+        code_browser* cloned_browser = active_browser->clone();
         QString file_name = active_browser->get_file_path();
         if (file_name.length())
         {
@@ -914,7 +949,7 @@ void MainWindow::clone_code_browser()
         {
             file_name = "Cloned Editor";
         }
-        QDockWidget*dock = create_dock_widget(docked_browser, file_name, cloned_textbrowser, true);
+        QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
         QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->treeHistory->parent());
@@ -922,7 +957,8 @@ void MainWindow::clone_code_browser()
         {
             tabifyDockWidget(parent, dock);
         }
-        showDockedWidget(docked_browser);
+        showDockedWidget(cloned_browser);
+#endif
     }
 }
 
@@ -972,6 +1008,17 @@ void MainWindow::dockWidget_topLevelChanged(bool)
     }
 }
 
+QWidget* MainWindow::get_widget(QDockWidget*dock)
+{
+    QWidget* child_widget = dock->widget();
+    QSplitter* splitter = dynamic_cast<QSplitter*>(child_widget);
+    if (splitter && splitter->count())
+    {
+        child_widget = splitter->widget(0);
+    }
+    return child_widget;
+}
+
 void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
 {
     if (dockWidget)
@@ -983,8 +1030,8 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
             QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, background_textbrowser });
             for (QDockWidget* current_widget : dock_widgets)
             {
-                code_browser* browser = dynamic_cast<code_browser*>(current_widget->widget());
-                if (browser->set_active(current_widget == dockWidget))
+                code_browser* browser = dynamic_cast<code_browser*>(get_widget(current_widget));
+                if (browser && browser->set_active(current_widget == dockWidget))
                 {
                     check_reload(browser);
                 }
@@ -1071,9 +1118,10 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binaryview, background_textbrowser});
         for (QDockWidget* dock_widget : dock_widgets)
         {
-            if (get_active(dock_widget->widget()))
+            auto* widget = get_widget(dock_widget);
+            if (get_active(widget))
             {
-                return dock_widget->widget();
+                return widget;
             }
         }
         return ui->textBrowser;
@@ -1084,9 +1132,10 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser, binaryview});
         for (QDockWidget* dock_widget : dock_widgets)
         {
-            if (get_file_path(dock_widget->widget()) == file_path)
+            auto* widget = get_widget(dock_widget);
+            if (get_file_path(widget) == file_path)
             {
-                editable_with_file_path = dock_widget->widget();
+                editable_with_file_path = widget;
             }
         }
         if (editable_with_file_path)
@@ -1111,7 +1160,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
         QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
         if (dock_widgets.size())
         {
-            return dynamic_cast<code_browser*>(dock_widgets[0]->widget());
+            return dynamic_cast<code_browser*>(get_widget(dock_widgets[0]));
         }
     }   break;
     case AdditionalEditor::OnNewFile:
@@ -1832,7 +1881,7 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(Cmd::FitInView)->setCheckable(true);
     mActions.setFlags(Cmd::FitInView, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::CloneTextBrowser, tr("Clone text view"), tr("Opens this file in a new window")), SIGNAL(triggered()), this, SLOT(clone_code_browser()));
+    connect(mActions.createAction(Cmd::CloneTextBrowser, tr("Split view"), tr("Splits view into two views and vice versa")), SIGNAL(triggered()), this, SLOT(clone_code_browser()));
     mActions.setFlags(Cmd::CloneTextBrowser, ActionList::Flags::FunctionCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::CreateBookMark, tr("Create Bookmark"), tr("Creates a Bookmark")), SIGNAL(triggered()), this, SLOT(createBookmark()));
@@ -1901,6 +1950,8 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboTextCodex);
     create_auto_cmd(ui->comboToolBarStyle);
     create_auto_cmd(ui->comboUserStyle);
+    create_auto_cmd(ui->ckAppendToBatch);
+    create_auto_cmd(ui->ckOutput2secondTextView);
 
     for (const auto& fAction : mActions.getList())
     {
@@ -1921,7 +1972,7 @@ void MainWindow::add_action_to_widgets(QAction * action)
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        dock_widget->widget()->addAction(action);
+        get_widget(dock_widget)->addAction(action);
     }
 }
 
@@ -2924,7 +2975,7 @@ void MainWindow::on_spinTabulator_valueChanged(int width)
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
         text_browser->setTabstopCharacters(width);
     }
 }
@@ -2945,7 +2996,7 @@ void MainWindow::setFontForViews(int)
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        code_browser* text_browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
         text_browser->setFont(font);
     }
 }

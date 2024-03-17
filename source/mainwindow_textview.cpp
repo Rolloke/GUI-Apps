@@ -186,12 +186,12 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
                 QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
-                    set_active(dock_widget->widget(), false);
+                    set_active(get_widget(dock_widget), false);
                 }
                 all_closed = true;
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
-                    QWidget* current_widget = dock_widget->widget();
+                    QWidget* current_widget = get_widget(dock_widget);
                     set_active(current_widget, true);
                     all_closed = send_close_to_editable_widget(current_widget);
                     set_active(current_widget, false);
@@ -221,7 +221,7 @@ void MainWindow::set_show_line_numbers(bool show)
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        code_browser* browser = dynamic_cast<code_browser*>(dock_widget->widget());
+        code_browser* browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
         if (browser)
         {
             browser->set_show_line_numbers(show);
@@ -309,14 +309,14 @@ void MainWindow::btnStoreAll_clicked()
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        QWidget* current_widget = dock_widget->widget();
+        QWidget* current_widget = get_widget(dock_widget);
         if (get_active(current_widget)) active_widget = current_widget;
         set_active(current_widget, false);
     }
 
     for (QDockWidget* dock_widget : dock_widgets)
     {
-        QWidget* current_widget = dock_widget->widget();
+        QWidget* current_widget = get_widget(dock_widget);
         set_active(current_widget, true);
         btnStoreText_clicked();
         set_active(current_widget, false);
