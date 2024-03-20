@@ -105,8 +105,7 @@ private:
         History,
         Branch,
         Stash,
-        FindTextInFilesView,
-        FindTextInFiles
+        FindTextInFilesView
     };
 
     struct FindColumn { enum e
@@ -255,7 +254,6 @@ private Q_SLOTS:
     void FindReplaceAll();
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
-    void on_btnFindX_clicked();
     void comboFindBoxIndexChanged(int index);
     void combo_triggered();
 
@@ -312,6 +310,10 @@ private Q_SLOTS:
     void check_reload(code_browser*);
     void set_show_line_numbers(bool);
     void on_ckAppendToBatch_clicked(bool checked);
+
+    void on_btnFindAll_clicked();
+
+    void on_btnFindReplace_clicked();
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
