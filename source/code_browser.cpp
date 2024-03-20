@@ -202,6 +202,11 @@ void code_browser::focusInEvent(QFocusEvent *fie)
     QTextBrowser::focusInEvent(fie);
 }
 
+void code_browser::dropEvent(QDropEvent *de)
+{
+    QTextBrowser::dropEvent(de);
+}
+
 bool code_browser::event(QEvent *event)
 {
     if (event->type() == QEvent::HoverMove)
