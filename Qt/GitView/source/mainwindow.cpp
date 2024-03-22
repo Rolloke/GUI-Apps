@@ -792,7 +792,6 @@ void MainWindow::createDockWindows()
     // find tree
     dock = create_dock_widget(ui->treeFindText, tr("Found in Text Files"), findview);
     ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
-    ui->comboFindBox->addItem(tr("Text files below folder"));
     ui->verticalLayout->removeWidget(ui->treeFindText);
     tabifyDockWidget(first_tab, dock);
 
@@ -915,6 +914,7 @@ void MainWindow::clone_code_browser()
         if (dock)
         {
             code_browser* cloned_browser = active_browser->clone();
+            cloned_browser->setAcceptDrops(true);
             QSplitter* splitter = new QSplitter(dock);
             dock->setWidget(splitter);
             splitter->addWidget(active_browser);
@@ -1024,7 +1024,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
     if (dockWidget)
     {
         // TRACEX(Logger::info, "on_DockWidgetActivated("<< dockWidget->objectName() << ":" << dockWidget->windowTitle() << ")");
-        code_browser* textBrowser = dynamic_cast<code_browser*>(dockWidget->widget());
+        code_browser* textBrowser = dynamic_cast<code_browser*>(get_widget(dockWidget));
         if (textBrowser)
         {
             QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, background_textbrowser });
@@ -1925,18 +1925,13 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->btnFindX, mActions.check_location("edit-find.png"), &new_id);
+    create_auto_cmd(ui->btnFindAll, mActions.check_location("edit-find.png"), &new_id);
     create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
-
-    if (Cmd::mContextMenuTextView.empty())
-    {
-        Cmd::mContextMenuTextView = contextmenu_text_view;
-    }
 
     create_auto_cmd(ui->ckAppendToBatch);
     create_auto_cmd(ui->ckShowHistoryGraphically);
@@ -1952,6 +1947,13 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboUserStyle);
     create_auto_cmd(ui->ckAppendToBatch);
     create_auto_cmd(ui->ckOutput2secondTextView);
+    create_auto_cmd(ui->btnFindReplace, mActions.check_location("edit-find-replace.png"), &new_id);
+    contextmenu_text_view.push_back(new_id);
+
+    if (Cmd::mContextMenuTextView.empty())
+    {
+        Cmd::mContextMenuTextView = contextmenu_text_view;
+    }
 
     for (const auto& fAction : mActions.getList())
     {
@@ -2380,25 +2382,19 @@ void MainWindow::comboFindBoxIndexChanged(int index)
     auto find = static_cast<FindView>(index);
     if (find == FindView::Text)
     {
-        ui->btnFindX->setText(tr("Replace"));
-        ui->btnFindX->setToolTip(tr("Replace expression"));
-        set_widget_and_action_enabled(ui->btnFindX, true);
+        set_widget_and_action_enabled(ui->btnFindAll, true);
     }
     else
     {
-        ui->btnFindX->setText(tr("All"));
-        ui->btnFindX->setToolTip(tr("Search expression in all files of selected folder"));
-        set_widget_and_action_enabled(ui->btnFindX, find != FindView::GoToLineInText);
+        set_widget_and_action_enabled(ui->btnFindReplace, find != FindView::GoToLineInText);
     }
-    set_widget_and_action_enabled(ui->btnFindNext, find != FindView::FindTextInFiles);
-    set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::FindTextInFiles && find != FindView::GoToLineInText);
-    ui->ckFindWholeWord->setEnabled(!(find == FindView::FindTextInFiles && ui->ckFastFileSearch->isChecked()));
+    set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::GoToLineInText);
+    ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
 
     switch(find)
     {
     case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor")); break;
     case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor")); break;
-    case FindView::FindTextInFiles:     ui->statusBar->showMessage(tr("Search for text in files under selected folder in Repository View")); break;
     case FindView::FindTextInFilesView: ui->statusBar->showMessage(tr("Search for text in find results")); break;
     case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
     case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View")); break;
@@ -2414,7 +2410,7 @@ void MainWindow::combo_triggered()
     if (combofind_actions.size() && combofind_actions.first() == action)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
-        FindView index = FindView::FindTextInFiles;
+        FindView index = FindView::GoToLineInText;
         if      (text_browser && text_browser->hasFocus()) index = FindView::Text;
         else if (ui->treeHistory->hasFocus())  index = FindView::History;
         else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
@@ -2440,7 +2436,6 @@ void MainWindow::combo_triggered()
         case FindView::Source:              tree_view = ui->treeSource; break;
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::GoToLineInText:
-        case FindView::FindTextInFiles:
             break;
         }
 
@@ -2482,7 +2477,7 @@ MainWindow::tree_find_properties::tree_find_properties() : mFlags(-1), mIndex(0)
 
 void MainWindow::FindReplaceAll()
 {
-    while (ui->btnFindX->isEnabled())
+    while (ui->btnFindReplace->isEnabled())
     {
         find_function(find::replace);
     }
@@ -2498,23 +2493,31 @@ void MainWindow::on_btnFindPrevious_clicked()
     find_function(find::backward);
 }
 
-void MainWindow::on_btnFindX_clicked()
+void MainWindow::on_btnFindAll_clicked()
+{
+    find_function(find::all);
+}
+
+void MainWindow::on_btnFindReplace_clicked()
 {
     if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
     {
         find_in_text_view(find::replace);
     }
-    else
-    {
-        find_function(find::all);
-    }
 }
 
 void MainWindow::find_function(find find_item)
 {
-    if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
+    if (   ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
     {
-        find_in_text_view(find_item);
+        if (find_item == find::all && mContextMenuSourceTreeItem)
+        {
+            find_text_in_files();
+        }
+        else
+        {
+            find_in_text_view(find_item);
+        }
     }
     else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
     {
@@ -2523,10 +2526,6 @@ void MainWindow::find_function(find find_item)
         {
             text_browser->go_to_line(ui->edtFindText->text().toInt());
         }
-    }
-    else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::FindTextInFiles) && mContextMenuSourceTreeItem)
-    {
-        find_text_in_files();
     }
     else
     {
@@ -2582,7 +2581,7 @@ void MainWindow::find_in_text_view(find find_item)
         {
             showDockedWidget(text_browser);
         }
-        ui->btnFindX->setEnabled(found_text);
+        ui->btnFindReplace->setEnabled(found_text);
     }
 }
 
@@ -2596,7 +2595,7 @@ void MainWindow::find_in_tree_views(find find_item)
         case FindView::Branch:              tree_view = ui->treeBranches; break;
         case FindView::Stash:               tree_view = ui->treeStash;    break;
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
-        case FindView::Text: case FindView::FindTextInFiles:  break;
+        case FindView::Text: break;
         case FindView::GoToLineInText: break;
     }
 
@@ -2795,9 +2794,22 @@ void MainWindow::find_text_in_files()
     if (result == 0)
     {
         QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
-        auto new_tree_root_item = new QTreeWidgetItem({tr("Search expression: %1").arg(search_pattern), "", repository_root});
+        QStringList strings =  {tr("Search expression: %1").arg(search_pattern), "", repository_root};
+        auto new_tree_root_item    = find_child_item(ui->treeFindText->invisibleRootItem(), 0, strings[0]);
+        auto repository_root_item  = find_child_item(ui->treeFindText->invisibleRootItem(), 2, strings[2]);
+        if (!new_tree_root_item || !repository_root_item)
+        {
+            new_tree_root_item = new QTreeWidgetItem(strings);
+        }
         ui->treeFindText->addTopLevelItem(new_tree_root_item);
         const auto found_items = find_result.split('\n');
+        const QFileInfo info_search_path(search_path);
+        QTreeWidgetItem *search_path_item = mContextMenuSourceTreeItem;
+        if (info_search_path.isFile() && search_path_item)
+        {
+            search_path      = info_search_path.absolutePath();
+            search_path_item = search_path_item->parent();
+        }
 
         if (fast_search)
         {
@@ -2809,7 +2821,7 @@ void MainWindow::find_text_in_files()
                 if (pos != -1)
                 {
                     current_file = found_item.mid(pos + file_id.size());
-                    if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, current_file.mid(search_path.size() + 1)))
+                    if (containsPathAsChildren(search_path_item, QSourceTreeWidget::Column::FileName, current_file.mid(search_path.size() + 1)))
                     {
                         current_file = current_file.mid(repository_root.size() + 1);
                     }
@@ -2847,6 +2859,7 @@ void MainWindow::find_text_in_files()
                 {
 #ifdef __linux__
                     QString file_path = found_item_parts[FindColumn::FilePath];
+
 #else
                     found_item_parts[1] = found_item_parts[0] + ":" + found_item_parts[1];
                     found_item_parts.erase(found_item_parts.begin());
@@ -2854,7 +2867,7 @@ void MainWindow::find_text_in_files()
                     QFileInfo fi(file_path);
                     file_path = fi.filePath();
 #endif
-                    if (containsPathAsChildren(mContextMenuSourceTreeItem, QSourceTreeWidget::Column::FileName, file_path.mid(search_path.size() + 1)))
+                    if (containsPathAsChildren(search_path_item, QSourceTreeWidget::Column::FileName, file_path.mid(search_path.size() + 1)))
                     {
                         QString current_file = file_path.mid(repository_root.size() + 1);
                         QTreeWidgetItem* new_child_item  = insert_file_path(new_tree_root_item, current_file);
