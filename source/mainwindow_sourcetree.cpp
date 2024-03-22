@@ -1404,7 +1404,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 
 void MainWindow::dropEvent(QDropEvent *even)
 {
-    foreach (const QUrl &url, even->mimeData()->urls())
+    for (const QUrl &url : even->mimeData()->urls())
     {
         QString fileName = url.toLocalFile();
         open_file(fileName);

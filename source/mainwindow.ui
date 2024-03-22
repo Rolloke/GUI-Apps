@@ -1229,12 +1229,22 @@ Git or command results are always displayed in main editor.
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnFindX">
+       <widget class="QPushButton" name="btnFindAll">
         <property name="toolTip">
-         <string>Search all </string>
+         <string>Search all occurrences of expression in all files of selected folder or in selected file</string>
         </property>
         <property name="text">
          <string>All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindReplace">
+        <property name="toolTip">
+         <string>Replace expression</string>
+        </property>
+        <property name="text">
+         <string>Replace</string>
         </property>
        </widget>
       </item>
