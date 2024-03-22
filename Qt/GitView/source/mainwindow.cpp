@@ -2144,7 +2144,7 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
                     if (!mBackgroundTextView)
                     {
                         // backgound process output text view
-                        mBackgroundTextView.reset(create_new_text_browser("", tr("Background process Log")));
+                        mBackgroundTextView.reset(create_new_text_browser("", tr("Background Log")));
                         QDockWidgetX* dock = dynamic_cast<QDockWidgetX*>(mBackgroundTextView.data()->parent());
                         dock->setObjectName(background_textbrowser);
                         dock->setAttribute(Qt::WA_DeleteOnClose, false);
