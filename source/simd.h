@@ -79,9 +79,9 @@ public:
         return m_var[__n];
     }
 
-    size_t elements() const
+    constexpr size_t elements() const
     {
-        return sizeof(m_var) / sizeof(type);
+        return  sizeof(m_var) / sizeof(type);
     }
 
     static void add(const SimdVar& a, const SimdVar& b, SimdVar& r)
@@ -213,10 +213,21 @@ public:
 
     void set(in_out_type value)
     {
-        m_var = _mm_set1_ps(value);
+	    if constexpr(std::is_same<type, float>::value)
+        {
+           m_var = _mm_set1_ps(static_cast<type>(value));
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+           m_var = _mm_set1_pd(static_cast<type>(value));
+        }
+        else if constexpr(std::is_same<type, int>::value)
+        {
+           m_var = _mm_set1_pi(static_cast<type>(value));
+        }
     }
 
-    void set(const in_out_type* values)
+    void set(const type* values)
     {
         m_var = _mm_load1_ps(values);
     }
@@ -259,8 +270,7 @@ public:
 
     void operator+=(const SimdVar& a)
     {
-        SimdVar& r =*this;
-        r.add(r, a);
+        add(*this, a);
     }
 
     void subtract(const SimdVar& a, const SimdVar& b)
@@ -270,8 +280,7 @@ public:
 
     void operator-=(const SimdVar& a)
     {
-        SimdVar& r =*this;
-        r.subtract(r, a);
+        subtract(*this, a);
     }
 
     void multiply(const SimdVar& a, const SimdVar& b)
@@ -281,8 +290,7 @@ public:
 
     void operator*=(const SimdVar& a)
     {
-        SimdVar& r =*this;
-        r.multiply(r, a);
+        multiply(*this, a);
     }
 
     void divide(const SimdVar& a, const SimdVar& b)
@@ -292,8 +300,7 @@ public:
 
     void operator/=(const SimdVar& a)
     {
-        SimdVar& r =*this;
-        r.divide(r, a);
+        divide(*this, a);
     }
 
     void muladd(const SimdVar& a, const SimdVar& b, const SimdVar& c)
