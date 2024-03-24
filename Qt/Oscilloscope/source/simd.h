@@ -20,6 +20,7 @@
 #endif
 #endif
 
+#include <type_traits>
 /// https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html
 ///
 #ifndef SIMD_H
@@ -181,13 +182,16 @@ private:
 
 #include <emmintrin.h>
 #include <immintrin.h>
+struct order
+{
+    static constexpr int even[] = { 0, 2, 4, 6 };
+    static constexpr int odd[]  = { 1, 3, 5, 7 };
+};
 
 template <class type=float, class in_out_type=type>
 class SimdVar
 {
 public:
-    static constexpr int even[] = { 0, 2, 4, 6 };
-    static constexpr int odd[]  = { 1, 3, 5, 7 };
     SimdVar(bool set_zero = false)
     {
         if (set_zero)
@@ -215,57 +219,154 @@ public:
     {
 	    if constexpr(std::is_same<type, float>::value)
         {
-           m_var = _mm_set1_ps(static_cast<type>(value));
+           m_var.s = _mm_set1_ps(static_cast<type>(value));
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-           m_var = _mm_set1_pd(static_cast<type>(value));
+           m_var.d = _mm_set1_pd(static_cast<type>(value));
         }
-        else if constexpr(std::is_same<type, int>::value)
+        else if constexpr(std::is_same<type, int32_t>::value)
         {
-           m_var = _mm_set1_pi(static_cast<type>(value));
+           m_var.i = _mm_set1_epi32(static_cast<type>(value));
         }
     }
 
     void set(const type* values)
     {
-        m_var = _mm_load1_ps(values);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_load1_ps(values);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_load1_pd(values);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.d = _mm_loadu_si32(values);
+        }
     }
 
-    void set(const in_out_type* values, const int* order)
+    void set(const in_out_type* values, const int32_t* order)
     {
-        m_var = _mm_set_ps(
-                static_cast<type>(values[order[0]]),
-                static_cast<type>(values[order[1]]),
-                static_cast<type>(values[order[2]]),
-                static_cast<type>(values[order[3]]));
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_set_ps(
+                    static_cast<type>(values[order[0]]),
+                    static_cast<type>(values[order[1]]),
+                    static_cast<type>(values[order[2]]),
+                    static_cast<type>(values[order[3]]));
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_set_pd(
+                    static_cast<type>(values[order[0]]),
+                    static_cast<type>(values[order[1]]));
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_set_epi32(
+                    static_cast<type>(values[order[0]]),
+                    static_cast<type>(values[order[1]]),
+                    static_cast<type>(values[order[2]]),
+                    static_cast<type>(values[order[3]]));
+        }
     }
 
     void get(in_out_type* values)
     {
-//        __m128 _mm_castpd_ps (__m128d a)
-//        __m128i _mm_castpd_si128 (__m128d a)
-//        __m128d _mm_castps_pd (__m128 a)
-//        __m128i _mm_castps_si128 (__m128 a)
-//        __m128d _mm_castsi128_pd (__m128i a)
-//        __m128 _mm_castsi128_ps (__m128i a)
-        _mm_store1_ps(values, m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            if constexpr(std::is_same<in_out_type, float>::value)
+            {
+                 _mm_store1_ps(values, m_var.s);
+            }
+            else
+            {
+                for (size_t i=0; i<elements(); ++i)
+                {
+                    values[i] = static_cast<in_out_type>((*this)[i]);
+                }
+            }
+
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            if constexpr(std::is_same<in_out_type, double>::value)
+            {
+                _mm_store1_pd(values, m_var.d);
+            }
+            else
+            {
+                for (size_t i=0; i<elements(); ++i)
+                {
+                    values[i] = static_cast<in_out_type>((*this)[i]);
+                }
+            }
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            if constexpr(std::is_same<in_out_type, int32_t>::value)
+            {
+                _mm_storeu_si32(values, m_var.i);
+            }
+            else
+            {
+                for (size_t i=0; i<elements(); ++i)
+                {
+                    values[i] = static_cast<in_out_type>((*this)[i]);
+                }
+            }
+        }
     }
 
-    type & operator[](size_t __n)
+    constexpr type & operator[](size_t __n)
     {
-        return m_var[__n];
+        if constexpr(std::is_same<type, float>::value)
+        {
+            return m_var.s[__n];
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            return m_var.d[__n];
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            return reinterpret_cast<int32_t*>(&m_var.i[0])[__n];
+        }
     }
 
-    size_t elements() const
+    constexpr size_t elements() const
     {
-        return sizeof(m_var) / sizeof(type);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            return sizeof(m_var.s) / sizeof(type);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            return sizeof(m_var.d) / sizeof(type);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            return sizeof(m_var.i) / sizeof(type);
+        }
     }
 
 
     void add(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_add_ps(a.m_var,  b.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_add_ps(a.m_var.s,  b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_add_pd(a.m_var.d,  b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_add_epi32(a.m_var.i,  b.m_var.i);
+        }
     }
 
     void operator+=(const SimdVar& a)
@@ -275,7 +376,18 @@ public:
 
     void subtract(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_sub_ps(a.m_var,  b.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_sub_ps(a.m_var.s,  b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_sub_pd(a.m_var.d,  b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_sub_epi32(a.m_var.i,  b.m_var.i);
+        }
     }
 
     void operator-=(const SimdVar& a)
@@ -285,7 +397,18 @@ public:
 
     void multiply(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_mul_ps(a.m_var,  b.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_mul_ps(a.m_var.s,  b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_mul_pd(a.m_var.d,  b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_mul_epi32(a.m_var.i,  b.m_var.i);
+        }
     }
 
     void operator*=(const SimdVar& a)
@@ -295,7 +418,18 @@ public:
 
     void divide(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_div_ps(a.m_var,  b.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_div_ps(a.m_var.s,  b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_div_pd(a.m_var.d,  b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.s = _mm_div_(a.m_var.i,  b.m_var.i);
+        }
     }
 
     void operator/=(const SimdVar& a)
@@ -305,22 +439,66 @@ public:
 
     void muladd(const SimdVar& a, const SimdVar& b, const SimdVar& c)
     {
-        m_var = _mm_fmadd_ps(a.m_var, b.m_var, c.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_fmadd_pd(a.m_var.d, b.m_var.d, c.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
+        }
     }
 
     void rcp(const SimdVar& a)
     {
-        m_var = _mm_rcp_ps(a.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_rcp_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+//            m_var.d = _mm_rcp_(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+//            m_var.i = _mm_rcp_ps(a.m_var.i);
+        }
     }
 
     void sqrt(const SimdVar& a)
     {
-        m_var = _mm_sqrt_ps(a.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_sqrt_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_sqrt_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+//            m_var.i = _mm_sqrt_ps(a.m_var.i);
+        }
     }
 
     void rsqrt(const SimdVar& a)
     {
-        m_var = _mm_rsqrt_ps(a.m_var);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_rsqrt_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            //m_var.d = _mm_rsqrt_ps(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_rsqrt_ps(a.m_var.i);
+        }
     }
 
     void hypot(const SimdVar& a, const SimdVar& b)
@@ -332,57 +510,178 @@ public:
 
     void gt(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmpgt_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmpgt_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmpgt_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_cmpgt_epi32_mask(a.m_var.i, b.m_var.i);
+        }
     }
 
     void ge(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmpge_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmpge_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmpge_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.s = _mm_cmpge_epi32_mask(a.m_var.s, b.m_var.s);
+        }
     }
 
     void lt(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmplt_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmplt_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmplt_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_cmplt_epi32_mask(a.m_var.i, b.m_var.i);
+        }
     }
 
     void le(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmple_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmple_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmple_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_cmple_epi32_mask(a.m_var.s, b.m_var.s);
+        }
     }
 
     void eq(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmpeq_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmpeq_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmpeq_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_cmpeq_epi32_mask(a.m_var.i, b.m_var.i);
+        }
     }
 
     void neq(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_cmpneq_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_cmpneq_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_cmpneq_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
+        }
     }
 
     void and_(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_and_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_and_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_and_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_and_si128(a.m_var.i, b.m_var.i);
+        }
     }
 
     void or_(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_or_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_or_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_or_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_or_si128(a.m_var.i, b.m_var.i);
+        }
     }
 
     void xor_(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_xor_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_xor_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_xor_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_xor_si128(a.m_var.i, b.m_var.i);
+        }
     }
 
     void min(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_min_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_min_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_min_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_min_epi32(a.m_var.i, b.m_var.i);
+        }
     }
 
     void max(const SimdVar& a, const SimdVar& b)
     {
-        m_var = _mm_max_ps(a, b);
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_max_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_max_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_max_epi32(a.m_var.i, b.m_var.i);
+        }
     }
 
 /// friends
@@ -415,7 +714,13 @@ public:
     }
 
 private:
-    __m128 m_var;
+    union var
+    {
+        __m128  s;
+        __m128d d;
+        __m128i i;
+    } m_var;
+
 };
 
 #endif

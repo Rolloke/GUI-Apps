@@ -125,17 +125,11 @@ void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
     const int step_2 = step * 2;
     for (int j=0; j < n; j+=step)
     {
-        a.set(pdFourier, SimdVar<myfloat, double>::even);
-        b.set(pdFourier, SimdVar<myfloat, double>::odd);
-
+        a.set(pdFourier, order::even);
+        b.set(pdFourier, order::odd);
         a.hypot(a, b);
         b = a * r;
-
-        p[j  ] = static_cast<double>(b[0]);
-        p[j+1] = static_cast<double>(b[1]);
-        p[j+2] = static_cast<double>(b[2]);
-        p[j+3] = static_cast<double>(b[3]);
-
+        b.get(&p[j]);
         pdFourier += step_2;
     }
 #endif
