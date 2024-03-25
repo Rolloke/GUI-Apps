@@ -84,8 +84,9 @@ void calcImaginary(const std::complex<double>*pdFourier, std::vector<double>& aD
     }
 }
 
+//#include <immintrin.h>
+
 #if __SSE2__ && USE_SIMD
-__attribute__((noinline))
 void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
 {
 #if 0
@@ -115,18 +116,21 @@ void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
     }
 #else
 
-//     __m512 m_var = _mm512_set1_ps(1.0f);
+//     __m512d m_var = _mm512_set1_pd(1.0);
+
+//     _mm512_store_pd(&p[0], m_var);
 
     typedef float myfloat;
-    SimdVar<myfloat, double> a, b;
+    SimdVar<myfloat> a, b;
     const float fac = 10.0f;
-    const SimdVar<myfloat, double> r(fac);
+    const SimdVar<myfloat> r(fac);
     const int step = r.elements();
     const int step_2 = step * 2;
+    Order order;
     for (int j=0; j < n; j+=step)
     {
-        a.set(pdFourier, order::even);
-        b.set(pdFourier, order::odd);
+        a.set(pdFourier, order.even);
+        b.set(pdFourier, order.odd);
         a.hypot(a, b);
         b = a * r;
         b.get(&p[j]);

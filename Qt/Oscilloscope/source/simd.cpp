@@ -1,6 +1,17 @@
 #include "simd.h"
 
 
+void limit(std::vector<int>& order_array, int the_limit)
+{
+    for (auto& index : order_array)
+    {
+        if (index >= the_limit)
+        {
+            index = the_limit-1;
+        }
+    }
+}
+
 #if __AVX2__ && USE_SIMD == AVX2
 
 #endif
