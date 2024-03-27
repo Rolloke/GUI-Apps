@@ -93,7 +93,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, float>::value)
                 {
-                    m_var.s = _mm512_load1_ps(values);
+                    m_var.s = _mm512_load_ps(values);
                 }
                 else
                 {
@@ -104,7 +104,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, double>::value)
                 {
-                    m_var.d = _mm512_load1_pd(values);
+                    m_var.d =  _mm512_load_pd(values);
                 }
                 else
                 {
@@ -115,7 +115,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
-                    m_var.i = _mm512_loadu_si32(values);
+                    m_var.i = _mm512_loadu_epi32(values);
                 }
                 else
                 {
@@ -138,37 +138,24 @@ public:
         if constexpr(std::is_same<type, float>::value)
         {
             m_var.s = _mm512_set_ps(
-                    static_cast<type>(values[order[0]]),
-                    static_cast<type>(values[order[1]]),
-                    static_cast<type>(values[order[2]]),
-                    static_cast<type>(values[order[3]]),
-                    static_cast<type>(values[order[4]]),
-                    static_cast<type>(values[order[5]]),
-                    static_cast<type>(values[order[6]]),
-                    static_cast<type>(values[order[7]]),
-                    static_cast<type>(values[order[8]]),
-                    static_cast<type>(values[order[9]]),
-                    static_cast<type>(values[order[10]]),
-                    static_cast<type>(values[order[11]]),
-                    static_cast<type>(values[order[12]]),
-                    static_cast<type>(values[order[13]]),
-                    static_cast<type>(values[order[14]]),
-                    static_cast<type>(values[order[15]])
-                    );
+                    static_cast<type>(values[order[0]]), static_cast<type>(values[order[1]]), static_cast<type>(values[order[2]]), static_cast<type>(values[order[3]]),
+                    static_cast<type>(values[order[4]]), static_cast<type>(values[order[5]]), static_cast<type>(values[order[6]]), static_cast<type>(values[order[7]]),
+                    static_cast<type>(values[order[8]]), static_cast<type>(values[order[9]]), static_cast<type>(values[order[10]]), static_cast<type>(values[order[11]]),
+                    static_cast<type>(values[order[12]]), static_cast<type>(values[order[13]]), static_cast<type>(values[order[14]]),static_cast<type>(values[order[15]]));
         }
         else if constexpr(std::is_same<type, double>::value)
         {
             m_var.d = _mm512_set_pd(
-                    static_cast<type>(values[order[0]]),
-                    static_cast<type>(values[order[1]]));
+                    static_cast<type>(values[order[0]]), static_cast<type>(values[order[1]]), static_cast<type>(values[order[2]]), static_cast<type>(values[order[3]]),
+                    static_cast<type>(values[order[4]]), static_cast<type>(values[order[5]]), static_cast<type>(values[order[6]]), static_cast<type>(values[order[7]]));
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
             m_var.i = _mm512_set_epi32(
-                    static_cast<type>(values[order[0]]),
-                    static_cast<type>(values[order[1]]),
-                    static_cast<type>(values[order[2]]),
-                    static_cast<type>(values[order[3]]));
+                        static_cast<type>(values[order[0]]), static_cast<type>(values[order[1]]), static_cast<type>(values[order[2]]), static_cast<type>(values[order[3]]),
+                        static_cast<type>(values[order[4]]), static_cast<type>(values[order[5]]), static_cast<type>(values[order[6]]), static_cast<type>(values[order[7]]),
+                        static_cast<type>(values[order[8]]), static_cast<type>(values[order[9]]), static_cast<type>(values[order[10]]), static_cast<type>(values[order[11]]),
+                        static_cast<type>(values[order[12]]), static_cast<type>(values[order[13]]), static_cast<type>(values[order[14]]), static_cast<type>(values[order[15]]));
         }
     }
 
@@ -181,7 +168,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, float>::value)
                 {
-                    _mm512_store1_ps(values, m_var.s);
+                    _mm512_store_ps(values, m_var.s);
                 }
                 else
                 {
@@ -192,7 +179,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, double>::value)
                 {
-                    _mm512_store1_pd(values, m_var.d);
+                    _mm512_store_pd(values, m_var.d);
                 }
                 else
                 {
@@ -203,7 +190,7 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
-                    _mm512_storeu_si32(values, m_var.i);
+                    _mm512_storeu_epi32(values, m_var.i);
                 }
                 else
                 {
@@ -228,7 +215,7 @@ public:
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            return m_var.d[__n];
+            return reinterpret_cast<double*>(&m_var.s[0])[__n];
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
@@ -357,11 +344,11 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_rcp_ps(a.m_var.s);
+            m_var.s = _mm512_rcp28_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-//            m_var.d = _mm512_rcp_(a.m_var.d);
+            m_var.d = _mm512_rcp14_pd(a.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
@@ -389,11 +376,11 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_rsqrt_ps(a.m_var.s);
+            m_var.s = _mm512_rsqrt28_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            //m_var.d = _mm512_rsqrt_ps(a.m_var.d);
+            m_var.d = _mm512_rsqrt14_pd(a.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
@@ -411,7 +398,7 @@ public:
         sqrt(a*a + b*b);
 #endif
     }
-
+#if compare
     void gt(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
@@ -507,7 +494,7 @@ public:
             m_var.i = _mm512_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
         }
     }
-
+#endif
     void and_(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
@@ -520,7 +507,7 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_and_si128(a.m_var.i, b.m_var.i);
+            m_var.i = _mm512_and_epi32(a.m_var.i, b.m_var.i);
         }
     }
 
@@ -536,7 +523,7 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_or_si128(a.m_var.i, b.m_var.i);
+            m_var.i = _mm512_or_epi32(a.m_var.i, b.m_var.i);
         }
     }
 
@@ -552,7 +539,7 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_xor_si128(a.m_var.i, b.m_var.i);
+            m_var.i = _mm512_xor_epi32(a.m_var.i, b.m_var.i);
         }
     }
 
@@ -996,7 +983,7 @@ public:
 
     void hypot(const SimdVar& a, const SimdVar& b)
     {
-#if 1
+#if 0
         SimdVar r;
         r.muladd(a, a, b*b);
         sqrt(r);
