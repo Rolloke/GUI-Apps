@@ -16,14 +16,14 @@ greaterThan(QT_MAJOR_VERSION, 4):TARGET = OscilloscopeQt5
 TEMPLATE = app
 
 unix:QMAKE_CXXFLAGS += -std=c++17
-#unix:QMAKE_CXXFLAGS += -msse4.1
-unix:QMAKE_CXXFLAGS += -mavx2
-unix:QMAKE_CXXFLAGS += -Wpsabi
+#unix:QMAKE_CXXFLAGS += -Wpsabi
 #unix:QMAKE_CXXFLAGS += -mfma
-unix:QMAKE_CXXFLAGS +=-march=native
+#unix:QMAKE_CXXFLAGS +=-march=native
 #unix:QMAKE_CXXFLAGS +=-inline-forceinline
 #unix:QMAKE_CXXFLAGS +=-fgnu89-inline
-#unix:QMAKE_CXXFLAGS +=-axSSE2
+unix:QMAKE_CXXFLAGS +=-mavx2
+#unix:QMAKE_CXXFLAGS +=-mavx512f
+#unix:QMAKE_CXXFLAGS +=-msse4.1
 
 # -std=c++11 -O3 -Ofast -m64 -pthread -march=native -Wl,--no-as-needed -funroll-loops -ffinite-math-only -fPIC -Wno-unused-result -Wno-deprecated -Wno-deprecated-gpu-targets -mavx512bw"
 
@@ -34,8 +34,8 @@ unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 unix:QMAKE_CFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 
-#DEFINES +=__SSE2__
-unix:DEFINES +=__AVX2__
+#unix:DEFINES +=__SSE2__
+#unix:DEFINES +=__AVX2__
 
 #unix:DEFINES +=__cplusplus=201703L
 # define trigger processing:
@@ -48,7 +48,7 @@ DEFINES += TRIGGER_PROCESSING=1
 greaterThan(QT_MAJOR_VERSION, 4): DEFINES += _USE_QT_AUDIO=1
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     scopeview.cpp \
     qaudiorecord.cpp \
     Channel.cpp \
