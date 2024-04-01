@@ -18,16 +18,18 @@ TEMPLATE = app
 unix:QMAKE_CXXFLAGS += -std=c++17
 #unix:QMAKE_CXXFLAGS += -Wpsabi
 #unix:QMAKE_CXXFLAGS += -mfma
-#unix:QMAKE_CXXFLAGS +=-march=native
+unix:QMAKE_CXXFLAGS +=-march=native
 #unix:QMAKE_CXXFLAGS +=-inline-forceinline
 #unix:QMAKE_CXXFLAGS +=-fgnu89-inline
 unix:QMAKE_CXXFLAGS +=-mavx2
+unix:QMAKE_CXXFLAGS +=-msse4.1
+
 #unix:QMAKE_CXXFLAGS +=-mavx512f
-#unix:QMAKE_CXXFLAGS +=-msse4.1
+#unix:QMAKE_CXXFLAGS +=-mavx512vl
 
 # -std=c++11 -O3 -Ofast -m64 -pthread -march=native -Wl,--no-as-needed -funroll-loops -ffinite-math-only -fPIC -Wno-unused-result -Wno-deprecated -Wno-deprecated-gpu-targets -mavx512bw"
 
-QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_AVX2
+#QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_AVX2
 
 unix:QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
