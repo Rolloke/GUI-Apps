@@ -2755,6 +2755,8 @@ void MainWindow::find_text_in_files()
         ///  --piped               Enable piped output
         ///  -q [ --quiet ]        only print status
         ///  -r [ --regex ]        Regex search (slower)
+
+        QFileInfo info(search_path);
         QString options = "--no-piped";
         if (!ui->ckFindCaseSensitive->isChecked())
         {   /// i: ignore case
@@ -2764,7 +2766,14 @@ void MainWindow::find_text_in_files()
         {   /// E: regular expression
             options += " -r";
         }
-        find_command = tr("%1 -d %2 %3 '%4'").arg(mFindFsrc, search_path, options, search_pattern );
+        if (info.isFile())
+        {
+            find_command = tr("%1 -d %2 -g %3 %4 '%5'").arg(mFindFsrc, info.absolutePath(), info.fileName(), options, search_pattern);
+        }
+        else
+        {
+            find_command = tr("%1 -d %2 %3 '%4'").arg(mFindFsrc, search_path, options, search_pattern );
+        }
     }
     else
     {
