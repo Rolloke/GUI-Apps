@@ -771,6 +771,18 @@ void MainWindow::createDockWindows()
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
     tabifyDockWidget(first_tab, dock);
 
+#ifdef WEB_ENGINE
+    // markdown view
+    mWebEngineView.reset(new QWebEngineView(this));
+    dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
+    dock->setVisible(false);
+#else
+    mTextRenderView.reset(new QTextBrowser(this));
+    dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
+    mTextRenderView->setReadOnly(true);
+    dock->setVisible(false);
+#endif
+
     // history tree
     dock = create_dock_widget(ui->treeHistory, tr("History View"), historyview);
     ui->comboFindBox->addItem(dock->windowTitle());
@@ -799,20 +811,6 @@ void MainWindow::createDockWindows()
     dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), binaryview);
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
-
-#ifdef WEB_ENGINE
-    // markdown view
-    mWebEngineView.reset(new QWebEngineView(this));
-    dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), markdown_view);
-    tabifyDockWidget(first_tab, dock);
-    dock->setVisible(false);
-#else
-    mTextRenderView.reset(new QTextBrowser(this));
-    dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view);
-    mTextRenderView->setReadOnly(true);
-    tabifyDockWidget(first_tab, dock);
-    dock->setVisible(false);
-#endif
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
@@ -901,7 +899,7 @@ void MainWindow::clone_code_browser()
     code_browser *active_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
     if (active_browser)
     {
-#if 1
+#if 0
         /// TODO: test splited view
         /// Splitted View
         /// o   Dupliziert als gleicher Editor?
@@ -952,7 +950,7 @@ void MainWindow::clone_code_browser()
         QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
-        QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->treeHistory->parent());
+        QDockWidget* parent = dynamic_cast<QDockWidget*>(get_splitter_tab_first()->parent());
         if (parent)
         {
             tabifyDockWidget(parent, dock);
@@ -962,13 +960,14 @@ void MainWindow::clone_code_browser()
     }
 }
 
-QDockWidgetX* MainWindow::create_dock_widget(QWidget* widget, const QString& name, const QString& object_name, bool connect_dock)
+QDockWidgetX* MainWindow::create_dock_widget(QWidget* widget, const QString& name, const QString& object_name, bool connect_dock, Qt::Orientation orientation)
 {
     QDockWidgetX* dock = new QDockWidgetX(name, this);
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setObjectName(object_name);
     dock->setWidget(widget);
-    addDockWidget(Qt::RightDockWidgetArea, dock);
+    addDockWidget(Qt::RightDockWidgetArea, dock, orientation);
+
     if (connect_dock)
     {
         connect(dock, SIGNAL(topLevelChanged(bool)), this, SLOT(dockWidget_topLevelChanged(bool)));
@@ -1109,6 +1108,15 @@ QList<QDockWidget *> MainWindow::get_dock_widget_of_name(QStringList names)
 MainWindow::AdditionalEditor MainWindow::additional_editor()
 {
     return static_cast<AdditionalEditor>(ui->comboOpenNewEditor->currentIndex());
+}
+
+QWidget *MainWindow::get_splitter_tab_first()
+{
+#ifdef WEB_ENGINE
+    return mWebEngineView.data();
+#else
+    return mTextRenderView.data();
+#endif
 }
 
 QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
