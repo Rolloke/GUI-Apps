@@ -193,6 +193,7 @@ private:
     code_browser* create_new_text_browser(const QString &file_path, const QString &name = {});
     bool     send_close_to_editable_widget(QWidget *editable_widget);
     void     reset_text_browser(code_browser*text_browser);
+    QWidget *get_splitter_tab_first();
 
     void     copy_file(copy command);
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
@@ -271,7 +272,7 @@ private Q_SLOTS:
     QList<QDockWidget *> get_dock_widget_of_name(QStringList names);
 
     void dockWidget_topLevelChanged(bool);
-    QDockWidgetX *create_dock_widget(QWidget *widget, const QString &name, const QString &object_name, bool connect_dock=true);
+    QDockWidgetX *create_dock_widget(QWidget *widget, const QString &name, const QString &object_name, bool connect_dock=true, Qt::Orientation orientation=Qt::Vertical);
     void clone_code_browser();
     void on_DockWidgetActivated(QDockWidget *dockWidget);
 
