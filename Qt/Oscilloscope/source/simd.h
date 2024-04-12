@@ -1,23 +1,22 @@
-#define AVX512 6
-#define AVX2 5
-#define AVX  4
-#define SSE3 3
-#define SSE2 2
-#define SSE  1
+#define SIMD512 3
+#define SIMD256 2
+#define SIMD128 1
 
-//#define USE_SIMD SSE2
+/// TODO:
+/// SSE3
+/// SSSE3
+/// SSE4.1
+/// SSE4.2
+
+#define USE_SIMD SIMD256
 
 #ifndef USE_SIMD
-#if __AVX2__
-#define USE_SIMD AVX2
-#elif __AVX__
-#define USE_SIMD AVX
-#elif __SSE3__
-#define USE_SIMD SSE3
-#elif __SSE2__
-#define USE_SIMD SSE2
-#else
-#define USE_SIMD SSE
+#if __AVX512F__
+#define USE_SIMD SIMD512
+#elif __AVX2__ || __AVX__
+#define USE_SIMD SIMD256
+#elif __SSE__ || __SSE2__ || __SSE3__ || __SSE4_1__ || __SSE4_2__
+#define USE_SIMD SIMD128
 #endif
 #endif
 
@@ -31,8 +30,9 @@
 
 void limit(std::vector<int>& order_array, int the_limit);
 
-#if __AVX2__ && USE_SIMD == AVX512
+// AVX512_FP16
 
+#if USE_SIMD == SIMD512
 
 #include <immintrin.h>
 struct Order
@@ -337,19 +337,19 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            //m_var.i = _mm512_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
+            //m_var.i = _mm512_madd_(a.m_var.s, b.m_var.s, c.m_var.s);
         }
     }
 
-    void rcp(const SimdVar& a)
+    void invert(const SimdVar& a)
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_rcp28_ps(a.m_var.s);
+            m_var.s = _mm512_rcp_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_rcp14_pd(a.m_var.d);
+            m_var.d = _mm512_rcp_pd(a.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
@@ -377,7 +377,7 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_rsqrt28_ps(a.m_var.s);
+            m_var.s = _mm512_rsqrt14_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
@@ -391,28 +391,98 @@ public:
 
     void hypot(const SimdVar& a, const SimdVar& b)
     {
-#if 1
         SimdVar r;
         r.muladd(a, a, b*b);
         sqrt(r);
-#else
-        sqrt(a*a + b*b);
-#endif
     }
-#if compare
+
+    void min(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm512_min_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm512_min_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm512_min_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void max(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm512_max_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm512_max_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm512_max_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void round(const SimdVar& a, int scale = _MM_FROUND_TO_NEAREST_INT)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm512_roundscale_ps(a.m_var.s, scale);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm512_roundscale_pd(a.m_var.s, scale);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+//            m_var.i = _mm512_rcp_ps(a.m_var.i);
+        }
+    }
+
+    void ceil(const SimdVar& a)
+    {
+        return round(a, _MM_FROUND_TO_POS_INF);
+    }
+
+    void floor(const SimdVar& a)
+    {
+        return round(a, _MM_FROUND_TO_NEG_INF);
+    }
+
+    void abs(const SimdVar& a, int scale = _MM_FROUND_TO_NEAREST_INT)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm512_abs_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm512_abs_pd(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm512_abs_epi32(a.m_var.i);
+        }
+    }
+
     void gt(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmpgt_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_GT_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmpgt_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_GT_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_cmpgt_epi32_mask(a.m_var.i, b.m_var.i);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_GT_OS);
         }
     }
 
@@ -420,15 +490,15 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmpge_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_GE_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmpge_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_GE_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.s = _mm512_cmpge_epi32_mask(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_GE_OS);
         }
     }
 
@@ -436,15 +506,15 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmplt_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_LT_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmplt_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_LT_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_cmplt_epi32_mask(a.m_var.i, b.m_var.i);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_LT_OS);
         }
     }
 
@@ -452,15 +522,15 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmple_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_LE_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmple_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_LE_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_cmple_epi32_mask(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_LE_OS);
         }
     }
 
@@ -468,15 +538,15 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmpeq_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_EQ_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmpeq_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_EQ_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_cmpeq_epi32_mask(a.m_var.i, b.m_var.i);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_EQ_OS);
         }
     }
 
@@ -484,18 +554,20 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm512_cmpneq_ps(a.m_var.s, b.m_var.s);
+            m_var.m16 = _mm512_cmp_ps_mask(a.m_var.s, b.m_var.s, _CMP_NEQ_OS);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm512_cmpneq_pd(a.m_var.d, b.m_var.d);
+            m_var.m8 = _mm512_cmp_pd_mask(a.m_var.s, b.m_var.s, _CMP_NEQ_OS);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm512_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
+            m_var.m16 = _mm512_cmp_epi32_mask(a.m_var.i, b.m_var.i, _CMP_NEQ_OS);
         }
     }
-#endif
+
+
+#if __AVX512DQ__
     void and_(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
@@ -543,38 +615,7 @@ public:
             m_var.i = _mm512_xor_epi32(a.m_var.i, b.m_var.i);
         }
     }
-
-    void min(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm512_min_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm512_min_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm512_min_epi32(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void max(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm512_max_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm512_max_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm512_max_epi32(a.m_var.i, b.m_var.i);
-        }
-    }
+#endif
 
 /// friends
     friend SimdVar operator+(const SimdVar& a, const SimdVar& b)
@@ -611,12 +652,14 @@ private:
         __m512  s;
         __m512d d;
         __m512i i;
+        __mmask8 m8;
+        __mmask16 m16;
     } m_var;
 
 };
 #endif
 
-#if __AVX2__ && USE_SIMD == AVX2
+#if  USE_SIMD == SIMD256
 
 #include <immintrin.h>
 struct Order
@@ -700,7 +743,11 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
+#if __AVX512F__ && __AVX512VL__
                     m_var.i = _mm256_loadu_epi32(values);
+#else
+                    limit = elements();
+#endif
                 }
                 else
                 {
@@ -770,11 +817,11 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
+#if __AVX512F__ && __AVX512VL__
                     _mm256_storeu_epi32(values, m_var.i);
-                }
-                else
-                {
+#else
                     limit = elements();
+#endif
                 }
             }
         }
@@ -832,7 +879,11 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __AVX2__
             m_var.i = _mm256_add_epi32(a.m_var.i,  b.m_var.i);
+#else
+            //
+#endif
         }
     }
 
@@ -853,7 +904,11 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __AVX2__
             m_var.i = _mm256_sub_epi32(a.m_var.i,  b.m_var.i);
+#else
+            //
+#endif
         }
     }
 
@@ -874,7 +929,11 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __AVX2__
             m_var.i = _mm256_mul_epi32(a.m_var.i,  b.m_var.i);
+#else
+            //
+#endif
         }
     }
 
@@ -895,7 +954,7 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            //m_var.s = _mm256_div_(a.m_var.i,  b.m_var.i);
+            m_var.i = _mm256_div_epu32(a.m_var.i,  b.m_var.i);
         }
     }
 
@@ -906,6 +965,7 @@ public:
 
     void muladd(const SimdVar& a, const SimdVar& b, const SimdVar& c)
     {
+#if __FMA__
         if constexpr(std::is_same<type, float>::value)
         {
             m_var.s = _mm256_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
@@ -916,15 +976,18 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            //m_var.i = _mm256_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
+            add(a * b, c);
         }
+#else
+        add(a * b, c);
+#endif
     }
 
-    void rcp(const SimdVar& a)
+    void invert(const SimdVar& a)
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm256_rcp28_ps(a.m_var.s);
+            m_var.s = _mm256_rcp_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
@@ -948,7 +1011,7 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-//            m_var.i = _mm256_sqrt_ps(a.m_var.i);
+            //m_var.i = _mm256_sqrt_ps(a.m_var.i);
         }
     }
 
@@ -956,7 +1019,7 @@ public:
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm256_rsqrt28_ps(a.m_var.s);
+            m_var.s = _mm256_rsqrt_ps(a.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
@@ -970,157 +1033,13 @@ public:
 
     void hypot(const SimdVar& a, const SimdVar& b)
     {
-#if 1
+#if __FMA__
         SimdVar r;
-        r.muladd(a, a, b*b);
+        r.muladd(a, a, b * b);
         sqrt(r);
 #else
-        sqrt(a*a + b*b);
+        sqrt(a * a + b * b);
 #endif
-    }
-#if compare
-    void gt(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmpgt_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmpgt_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_cmpgt_epi32_mask(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void ge(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmpge_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmpge_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.s = _mm256_cmpge_epi32_mask(a.m_var.s, b.m_var.s);
-        }
-    }
-
-    void lt(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmplt_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmplt_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_cmplt_epi32_mask(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void le(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmple_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmple_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_cmple_epi32_mask(a.m_var.s, b.m_var.s);
-        }
-    }
-
-    void eq(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmpeq_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmpeq_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_cmpeq_epi32_mask(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void neq(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_cmpneq_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_cmpneq_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
-        }
-    }
-#endif
-    void and_(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_and_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_and_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_and_epi32(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void or_(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_or_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_or_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_or_epi32(a.m_var.i, b.m_var.i);
-        }
-    }
-
-    void xor_(const SimdVar& a, const SimdVar& b)
-    {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm256_xor_ps(a.m_var.s, b.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm256_xor_pd(a.m_var.d, b.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            m_var.i = _mm256_xor_epi32(a.m_var.i, b.m_var.i);
-        }
     }
 
     void min(const SimdVar& a, const SimdVar& b)
@@ -1135,7 +1054,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __AVX2__
             m_var.i = _mm256_min_epi32(a.m_var.i, b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1151,7 +1073,206 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __AVX2__
             m_var.i = _mm256_max_epi32(a.m_var.i, b.m_var.i);
+#else
+#endif
+        }
+    }
+
+    void round(const SimdVar& a, int scale = (_MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC))
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_round_ps(a.m_var.s, scale);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_round_pd(a.m_var.d, scale);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+//            m_var.i = _mm256_rcp_ps(a.m_var.i);
+        }
+    }
+
+    void ceil(const SimdVar& a)
+    {
+        return round(a, (_MM_FROUND_TO_POS_INF |_MM_FROUND_NO_EXC));
+    }
+
+    void floor(const SimdVar& a)
+    {
+        return round(a, (_MM_FROUND_TO_NEG_INF |_MM_FROUND_NO_EXC));
+    }
+
+    void abs(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            //m_var.s = _mm256_abs(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            //m_var.d = _mm256_(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+#if __AVX2__
+            m_var.i = _mm256_abs_epi32(a.m_var.i);
+#else
+
+#endif
+        }
+    }
+
+    void gt(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_GT_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.d, b.m_var.d, _CMP_GT_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_cmpgt_epi32_mask(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void ge(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_GE_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.s, b.m_var.s, _CMP_GE_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.s = _mm256_cmpge_epi32_mask(a.m_var.s, b.m_var.s);
+        }
+    }
+
+    void lt(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_LT_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.s, b.m_var.s, _CMP_LT_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_cmplt_epi32_mask(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void le(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_LE_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.s, b.m_var.s, _CMP_LE_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_cmple_epi32_mask(a.m_var.s, b.m_var.s);
+        }
+    }
+
+    void eq(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_EQ_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.s, b.m_var.s, _CMP_EQ_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_cmpeq_epi32_mask(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void neq(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_cmp_ps(a.m_var.s, b.m_var.s, _CMP_NEQ_OS);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_cmp_pd(a.m_var.s, b.m_var.s, _CMP_NEQ_OS);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void and_(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_and_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_and_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm256_and_si256(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void or_(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_or_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_or_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+#if __AVX512F__ && __AVX512VL__
+            m_var.i = _mm256_or_epi32(a.m_var.i, b.m_var.i);
+#else
+#endif
+        }
+    }
+
+    void xor_(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_xor_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_xor_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+#if __AVX512F__ && __AVX512VL__
+            m_var.i = _mm256_xor_epi32(a.m_var.i, b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1196,15 +1317,9 @@ private:
 
 #endif
 
-#if __AVX__ && USE_SIMD == AVX
 
-#endif
 
-#if __SSE3__  && USE_SIMD == SSE3
-
-#endif
-
-#if __SSE2__ && USE_SIMD == SSE2
+#if USE_SIMD == SIMD128
 
 #include <emmintrin.h>
 #include <immintrin.h>
@@ -1254,7 +1369,11 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
            m_var.i = _mm_set1_epi32(static_cast<type>(value));
+#else
+
+#endif
         }
     }
 
@@ -1289,7 +1408,11 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
+#if __SSE2__
                     m_var.i = _mm_loadu_si32(values);
+#else
+                    limit = elements();
+#endif
                 }
                 else
                 {
@@ -1325,11 +1448,15 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_set_epi32(
                     static_cast<type>(values[order[0]]),
                     static_cast<type>(values[order[1]]),
                     static_cast<type>(values[order[2]]),
                     static_cast<type>(values[order[3]]));
+#else
+
+#endif
         }
     }
 
@@ -1364,7 +1491,11 @@ public:
             {
                 if constexpr(std::is_same<in_out_type, int32_t>::value)
                 {
+#if __SSE2__
                     _mm_storeu_si32(values, m_var.i);
+#else
+                    limit = elements();
+#endif
                 }
                 else
                 {
@@ -1426,7 +1557,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_add_epi32(a.m_var.i,  b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1447,7 +1581,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_sub_epi32(a.m_var.i,  b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1468,7 +1605,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE4_1__
             m_var.i = _mm_mul_epi32(a.m_var.i,  b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1500,21 +1640,10 @@ public:
 
     void muladd(const SimdVar& a, const SimdVar& b, const SimdVar& c)
     {
-        if constexpr(std::is_same<type, float>::value)
-        {
-            m_var.s = _mm_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
-        }
-        else if constexpr(std::is_same<type, double>::value)
-        {
-            m_var.d = _mm_fmadd_pd(a.m_var.d, b.m_var.d, c.m_var.d);
-        }
-        else if constexpr(std::is_same<type, int32_t>::value)
-        {
-            //m_var.i = _mm_fmadd_ps(a.m_var.s, b.m_var.s, c.m_var.s);
-        }
+        add(a * b, c);
     }
 
-    void rcp(const SimdVar& a)
+    void invert(const SimdVar& a)
     {
         if constexpr(std::is_same<type, float>::value)
         {
@@ -1564,15 +1693,100 @@ public:
 
     void hypot(const SimdVar& a, const SimdVar& b)
     {
-#if 0
-        SimdVar r;
-        r.muladd(a, a, b*b);
-        sqrt(r);
-#else
         sqrt(a*a + b*b);
-#endif
     }
 
+    void min(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_min_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_min_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_min_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void max(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_max_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_max_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            m_var.i = _mm_max_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+#if __SSE4_1__
+    //! \brief round
+    //! \param a
+    //! \param rounding, see below, default  round to nearest
+    //! (_MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC) // round to nearest, and suppress exceptions
+    //! (_MM_FROUND_TO_NEG_INF |_MM_FROUND_NO_EXC)     // round down, and suppress exceptions
+    //! (_MM_FROUND_TO_POS_INF |_MM_FROUND_NO_EXC)     // round up, and suppress exceptions
+    //! (_MM_FROUND_TO_ZERO |_MM_FROUND_NO_EXC)        // truncate, and suppress exceptions
+    //! _MM_FROUND_CUR_DIRECTION                       // use MXCSR.RC; see _MM_SET_ROUNDING_MODE
+    void round(const SimdVar& a, int rounding = (_MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC))
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_round_ps(a.m_var.s, rounding);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_round_pd(a.m_var.d, rounding);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_floor_pd(a.m_var.i);
+        }
+    }
+
+    void ceil(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_ceil_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_ceil_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_ceil_ps(a.m_var.i);
+        }
+    }
+
+    void floor(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_floor_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_floor_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_floor_pd(a.m_var.i);
+        }
+    }
+#endif
+
+#if __SSE2__
     void gt(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
@@ -1668,6 +1882,7 @@ public:
             m_var.i = _mm_cmpneq_epi32_mask(a.m_var.i, b.m_var.i);
         }
     }
+#endif
 
     void and_(const SimdVar& a, const SimdVar& b)
     {
@@ -1681,7 +1896,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_and_si128(a.m_var.i, b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1697,7 +1915,10 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_or_si128(a.m_var.i, b.m_var.i);
+#else
+#endif
         }
     }
 
@@ -1713,43 +1934,88 @@ public:
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
+#if __SSE2__
             m_var.i = _mm_xor_si128(a.m_var.i, b.m_var.i);
+#else
+#endif
         }
     }
 
-    void min(const SimdVar& a, const SimdVar& b)
+#if __SSE3__
+    //! \brief add_adjacent_pairs
+    //! stores in self (r)
+    //!  r[0] = a[0] + a[1]
+    //!  r[1] = a[2] + a[3]
+    //!  r[2] = b[0] + b[1]
+    //!  r[3] = b[2] + b[3]
+    //! \param a
+    //! \param b
+    void add_adjacent_pairs(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm_min_ps(a.m_var.s, b.m_var.s);
+            m_var.s = _mm_hadd_ps(a.m_var.s, b.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm_min_pd(a.m_var.d, b.m_var.d);
+            m_var.d = _mm_hadd_pd(a.m_var.d, b.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm_min_epi32(a.m_var.i, b.m_var.i);
+            m_var.i = _mm_hadd_epi32(a.m_var.i, b.m_var.i);
         }
     }
 
-    void max(const SimdVar& a, const SimdVar& b)
+    //! \brief sub_adjacent_pairs
+    //! stores in self (r)
+    //!  r[0] = a[0] - a[1]
+    //!  r[1] = a[2] - a[3]
+    //!  r[2] = b[0] - b[1]
+    //!  r[3] = b[2] - b[3]
+    //! \param a
+    //! \param b
+    void sub_adjacent_pairs(const SimdVar& a, const SimdVar& b)
     {
         if constexpr(std::is_same<type, float>::value)
         {
-            m_var.s = _mm_max_ps(a.m_var.s, b.m_var.s);
+            m_var.s = _mm_hsub_ps(a.m_var.s, b.m_var.s);
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm_max_pd(a.m_var.d, b.m_var.d);
+            m_var.d = _mm_hsub_pd(a.m_var.d, b.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
-            m_var.i = _mm_max_epi32(a.m_var.i, b.m_var.i);
+            m_var.i = _mm_hsub_epi32(a.m_var.i, b.m_var.i);
         }
     }
 
-/// friends
+    //! \brief add_sub_adjacent_pairs
+    //! stores in self (r)
+    //!  r[0] = a[0] - a[1]
+    //!  r[1] = a[2] + a[3]
+    //!  r[2] = b[0] - b[1]
+    //!  r[3] = b[2] + b[3]
+    //! \param a
+    //! \param b
+    void add_sub_adjacent_pairs(const SimdVar& a, const SimdVar& b)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_addsub_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_addsub_pd(a.m_var.d, b.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_addsub_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+#endif
+
+    /// friends
     friend SimdVar operator+(const SimdVar& a, const SimdVar& b)
     {
         SimdVar r;
