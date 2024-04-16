@@ -8,7 +8,7 @@
 /// SSE4.1
 /// SSE4.2
 
-#define USE_SIMD SIMD256
+#define USE_SIMD SIMD128
 
 #ifndef USE_SIMD
 #if __AVX512F__
@@ -425,6 +425,22 @@ public:
         else if constexpr(std::is_same<type, int32_t>::value)
         {
             m_var.i = _mm512_max_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void sin(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm512_sin_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm512_sin_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_ceil_ps(a.m_var.i);
         }
     }
 
@@ -1080,6 +1096,22 @@ public:
         }
     }
 
+    void sin(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_sin_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_256cos_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_ceil_ps(a.m_var.i);
+        }
+    }
+
     void round(const SimdVar& a, int scale = (_MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC))
     {
         if constexpr(std::is_same<type, float>::value)
@@ -1725,6 +1757,22 @@ public:
         else if constexpr(std::is_same<type, int32_t>::value)
         {
             m_var.i = _mm_max_epi32(a.m_var.i, b.m_var.i);
+        }
+    }
+
+    void sin(const SimdVar& a)
+    {
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm_sin_ps(a.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm_sin_pd(a.m_var.d);
+        }
+        else if constexpr(std::is_same<type, int32_t>::value)
+        {
+            //m_var.i = _mm_ceil_ps(a.m_var.i);
         }
     }
 
