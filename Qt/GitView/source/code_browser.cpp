@@ -10,6 +10,7 @@
 #include <QTextCursor>
 #include <QApplication>
 #include <QToolTip>
+#include <QDockWidget>
 
 #ifdef WEB_ENGINE
 #include <QWebEngineView>
@@ -198,6 +199,11 @@ void code_browser::focusInEvent(QFocusEvent *fie)
     if (is_modified())
     {
         Q_EMIT check_reload(this);
+    }
+    QDockWidget * dw = dynamic_cast<QDockWidget*>(parent());
+    if (dw)
+    {
+        Q_EMIT send_focused(dw);
     }
     QTextBrowser::focusInEvent(fie);
 }

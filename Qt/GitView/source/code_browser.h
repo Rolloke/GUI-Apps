@@ -13,6 +13,8 @@ class    QWebEngineView;
 class    PreviewPage;
 #endif
 
+class QDockWidget;
+
 enum class selection
 {
     toggle_comment,
@@ -74,6 +76,7 @@ Q_SIGNALS:
     void column_changed(int);
     void text_of_active_changed(bool);
     void check_reload(code_browser*);
+    void send_focused(QDockWidget *);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);

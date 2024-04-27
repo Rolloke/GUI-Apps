@@ -1,6 +1,7 @@
 #!/bin/bash
 # monitor GPIO pin X for shutdown signal
 # export GPIO pin X and set to input with pull-up
+# start this script in /storage/.config/autostart.sh
 
 # monitored shutdown pin for on/off switch
 PIN_BTN_SHUTDOWN=3
@@ -60,10 +61,7 @@ while [ true ] ; do
          /opt/vc/bin/tvservice -o
       else
          LED_STATE=1
-         vcgencmd display_power 1
-         /opt/vc/bin/tvservice -p
-         /bin/chvt 6
-         /bin/chvt 7
+         shutdown -r now
       fi
       echo "$LED_STATE" > /sys/class/gpio/gpio$PIN_LED_STATE/value
    fi
