@@ -120,6 +120,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
+
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
     QObject::connect(this, SIGNAL(doWork(QVariant)), &mWorker, SLOT(doWork(QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1));
@@ -752,7 +753,7 @@ void MainWindow::createDockWindows()
 //    setDockOptions(GroupedDragging);
     QDockWidget* dock;
     // text browser
-    QDockWidget *first_tab;
+    QDockWidget *first_tab = nullptr;
     dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), textbrowser);
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem(tr("Go to line"));
@@ -771,17 +772,21 @@ void MainWindow::createDockWindows()
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
     tabifyDockWidget(first_tab, dock);
 
+    auto tabbars = findChildren<QTabBar*>();
+    tabbars.at(tabbars.count()-1)->setAccessibleName(tr("Left"));
+
 #ifdef WEB_ENGINE
     // markdown view
     mWebEngineView.reset(new QWebEngineView(this));
     dock = create_dock_widget(mWebEngineView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
-    dock->setVisible(false);
 #else
     mTextRenderView.reset(new QTextBrowser(this));
     dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
     mTextRenderView->setReadOnly(true);
-    dock->setVisible(false);
 #endif
+
+
+    dock->setVisible(false);
 
     // history tree
     dock = create_dock_widget(ui->treeHistory, tr("History View"), historyview);
@@ -811,6 +816,21 @@ void MainWindow::createDockWindows()
     dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), binaryview);
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
+
+    tabbars = findChildren<QTabBar*>();
+    if (tabbars.count() > 1)
+    {
+        tabbars.at(1)->setAccessibleName(tr("Bottom"));
+    }
+    if (tabbars.count() > 2)
+    {
+        tabbars.at(2)->setAccessibleName(tr("Right"));
+    }
+    QString s;
+    for (const auto &tabbar : tabbars)
+    {
+        s = tabbar->accessibleName();
+    }
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
@@ -899,44 +919,6 @@ void MainWindow::clone_code_browser()
     code_browser *active_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
     if (active_browser)
     {
-#if 0
-        /// TODO: test splited view
-        /// Splitted View
-        /// o   Dupliziert als gleicher Editor?
-        /// o   Scrollen synchronisierbar
-        /// o   auch mit verschiedenen Dateien zum vergleichen
-        ///     §  (drag and drop)?
-        ///     §  Focusbasiert durch doppelclick
-        ///     §  Diff anzeige
-        auto* dock = dynamic_cast<QDockWidget*>(active_browser->parent());
-        if (dock)
-        {
-            code_browser* cloned_browser = active_browser->clone();
-            cloned_browser->setAcceptDrops(true);
-            QSplitter* splitter = new QSplitter(dock);
-            dock->setWidget(splitter);
-            splitter->addWidget(active_browser);
-            splitter->addWidget(cloned_browser);
-            active_browser->show();
-            cloned_browser->show();
-            showDockedWidget(splitter);
-        }
-        else
-        {
-            auto* splitter = dynamic_cast<QSplitter*>(active_browser->parent());
-            if (splitter)
-            {
-                auto* dock = dynamic_cast<QDockWidget*>(splitter->parent());
-                if (dock)
-                {
-                    dock->setWidget(splitter->widget(0));
-                    splitter->widget(0)->setParent(dock);
-                    delete splitter;
-                }
-            }
-        }
-#else
-        code_browser* cloned_browser = active_browser->clone();
         QString file_name = active_browser->get_file_path();
         if (file_name.length())
         {
@@ -947,16 +929,26 @@ void MainWindow::clone_code_browser()
         {
             file_name = "Cloned Editor";
         }
+        /// TODO: test splited view
+        /// Splitted View
+        /// o   Dupliziert als gleicher Editor?
+        /// o   Scrollen synchronisierbar
+        /// o   auch mit verschiedenen Dateien zum vergleichen
+        ///     §  (drag and drop)?
+        ///     §  Focusbasiert durch doppelclick
+        ///     §  Diff anzeige
+        code_browser* cloned_browser = active_browser->clone();
         QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
         dock->setAttribute(Qt::WA_DeleteOnClose);
         connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
-        QDockWidget* parent = dynamic_cast<QDockWidget*>(get_splitter_tab_first()->parent());
+//        cloned_browser->setReadOnly(false);
+//        QObject::connect(active_browser, SIGNAL(text_changed(QString)), cloned_browser, SLOT(setPlainText(QString)));
+        QDockWidget* parent = get_first_dock_tab(FirstTab::web_view);
         if (parent)
         {
             tabifyDockWidget(parent, dock);
         }
         showDockedWidget(cloned_browser);
-#endif
     }
 }
 
@@ -1110,13 +1102,22 @@ MainWindow::AdditionalEditor MainWindow::additional_editor()
     return static_cast<AdditionalEditor>(ui->comboOpenNewEditor->currentIndex());
 }
 
-QWidget *MainWindow::get_splitter_tab_first()
+QDockWidget *MainWindow::get_first_dock_tab(FirstTab::e number)
 {
+    QObject* widget = nullptr;
+    switch (number)
+    {
+    case FirstTab::text_view: widget = ui->textBrowser->parent(); break;
+    case FirstTab::web_view:
 #ifdef WEB_ENGINE
-    return mWebEngineView.data();
+        widget = mWebEngineView.data()->parent();
 #else
-    return mTextRenderView.data();
+        widget = mTextRenderView.data()->parent();
 #endif
+        break;
+    case FirstTab::tree_view: widget = ui->treeHistory->parent();
+    }
+    return dynamic_cast<QDockWidget*>(widget);
 }
 
 QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
@@ -1204,12 +1205,13 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
     connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 
     docked_browser->setReadOnly(false);
+    connect(docked_browser, SIGNAL(send_focused(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     QDockWidgetX*dock = create_dock_widget(docked_browser, file_name, new_textbrowser, true);
     dock->setAttribute(Qt::WA_DeleteOnClose);
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_text_browser(QDockWidgetX*,bool&)));
     connect(dock, SIGNAL(signal_dock_widget_activated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
     connect(dock, SIGNAL(visibilityChanged(bool)), docked_browser, SLOT(change_visibility(bool)));
-    QDockWidget* parent = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
+    QDockWidget* parent = get_first_dock_tab(FirstTab::text_view);
     if (parent)
     {
         tabifyDockWidget(parent, dock);

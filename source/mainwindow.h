@@ -147,6 +147,12 @@ private:
         CalledFromWidget,
         All
     };
+    struct FirstTab { enum e
+    {
+        text_view,
+        web_view,
+        tree_view
+    }; };
 
     QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
@@ -193,7 +199,7 @@ private:
     code_browser* create_new_text_browser(const QString &file_path, const QString &name = {});
     bool     send_close_to_editable_widget(QWidget *editable_widget);
     void     reset_text_browser(code_browser*text_browser);
-    QWidget *get_splitter_tab_first();
+    QDockWidget *get_first_dock_tab(FirstTab::e number=FirstTab::web_view);
 
     void     copy_file(copy command);
     QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
