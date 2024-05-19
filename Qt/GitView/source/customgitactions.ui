@@ -35,70 +35,7 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of custom commands&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="whatsThis">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4&gt;Displays application commands that can be edited here.&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Add a new custom command with the &lt;img src=&quot;://resource/24X24/list-add.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Optional parameters are marked with square brackets e.g. [%2]&lt;/li&gt;
-&lt;li&gt;The parameters order is fixed for git commands&lt;/li&gt;
-&lt;li&gt;git -C %1 &amp;lt;command&amp;gt; [%2] &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;b&gt;%1&lt;/b&gt; represents the git repository &lt;/li&gt;
-&lt;li&gt;&lt;b&gt;%2&lt;/b&gt; may represent the the selected file or folder &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;git &amp;lt;command&amp;gt; %1 [%2] &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;b&gt;%1&lt;/b&gt; is used for command options depending on case &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;--staged for diff of staged file &lt;/li&gt;
-&lt;li&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;&lt;b&gt;%2&lt;/b&gt;  may represent the the selected file or folder &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;The parameters order is arbitrary for custom commands&lt;/li&gt;
-&lt;li&gt;custom_command %1 %2 {cd} {rec} {root} {rel_path} {name} {extension} {basename}
-&lt;br&gt;&lt;i&gt;the order of the arguments is arbitrary&lt;br&gt;all arguments are optional&lt;/i&gt;&lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;b&gt;%1&lt;/b&gt; may represent the selected file or folder &lt;/li&gt;
-&lt;li&gt;&lt;b&gt;%2&lt;/b&gt; may represent the folder above selected file&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{cd}&lt;/b&gt; sets current working dir to folder above selected file&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{rec}&lt;/b&gt; executes command recursve for selected folder content&lt;br&gt;
-    &lt;i&gt;may lead to time consuming process&lt;/i&gt;&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{root}&lt;/b&gt; may represent the root folder of the repository&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{rel_path}&lt;/b&gt; may represent the relative path from root folder of the repository&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{name}&lt;/b&gt; may represent the file or leaf folder name of selection&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{extension}&lt;/b&gt; may the extension of the file of selection&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;{basename}&lt;/b&gt; may rpresent the file name without extension of selection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/ul&gt;
-&lt;li&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
-&lt;li&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button&lt;br&gt;You may insert:&lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Command&lt;/li&gt;
-&lt;li&gt;Separator&lt;/li&gt;
-&lt;li&gt;Sub menu entry&lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Edit name in &lt;b&gt;Name&lt;/b&gt; column&lt;/li&gt;
-&lt;li&gt;Insert the sub menu into context menu and move it to desired position&lt;/li&gt;
-&lt;li&gt;The folowing entries until next separator or sub menu are included here&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/ul&gt;
-&lt;li&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;all 'git' commands may be edited due to parameters or options &lt;/li&gt;
-&lt;li&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;
-&lt;li&gt;all shortcuts may be edited &lt;/li&gt;
-&lt;li&gt;A message box text may be edited or added &lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;'None' or empty defines that no message box is invoked &lt;/li&gt;
-&lt;li&gt;The message box is invoked before execution of the git command &lt;/li&gt;
-&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;
-&lt;li&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;
-&lt;li&gt;A trailing ';' changes the MessageBox to an EditBox &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by 'reset modifications' in context menu &lt;/li&gt;
-&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4 style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Displays application commands that can be edited here.&lt;/span&gt;&lt;/h4&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Add a new custom command with the &lt;img src=&quot;://resource/24X24/list-add.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Optional parameters are marked with square brackets e.g. [%2]&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameters order is fixed for git commands&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git -C %1 &amp;lt;command&amp;gt; [%2] &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; represents the git repository &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git &amp;lt;command&amp;gt; %1 [%2] &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is used for command options depending on case &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 4;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--staged for diff of staged file &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameters order is arbitrary for custom commands&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;custom_command %1 %2 {cd} {rec} {root} {rel_path} {name} {extension} {basename} &lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;the order of the arguments is arbitrary&lt;br/&gt;all arguments are optional&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; may represent the selected file or folder &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the folder above selected file&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{cd}&lt;/span&gt; sets current working dir to folder above selected file&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{rec}&lt;/span&gt; executes command recursve for selected folder content&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;may lead to time consuming process&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{root}&lt;/span&gt; may represent the root folder of the repository&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{rel_path}&lt;/span&gt; may represent the relative path from root folder of the repository&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{name}&lt;/span&gt; may represent the file or leaf folder name of selection&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{extension}&lt;/span&gt; may the extension of the file of selection&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{basename}&lt;/span&gt; may rpresent the file name without extension of selection&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button&lt;br/&gt;You may insert:&lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Command&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Separator&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sub menu entry&lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Edit name in &lt;span style=&quot; font-weight:600;&quot;&gt;Name&lt;/span&gt; column&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the sub menu into context menu and move it to desired position&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The folowing entries until next separator or sub menu are included here&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all 'git' commands may be edited due to parameters or options &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all shortcuts may be edited, use &lt;img src=&quot;:/resource/24X24/gnome-app-install-star.png&quot; style=&quot;vertical-align:middle&quot;/&gt;button and press desired shortcut keys &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A message box text may be edited or added &lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;'None' or empty defines that no message box is invoked &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The message box is invoked before execution of the git command &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A trailing ';' changes the MessageBox to an EditBox &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by 'reset modifications' in context menu &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="cornerButtonEnabled">
         <bool>false</bool>
@@ -191,6 +128,29 @@
        <property name="icon">
         <iconset resource="resource.qrc">
          <normaloff>:/resource/24X24/dialog-question.png</normaloff>:/resource/24X24/dialog-question.png</iconset>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnKey">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Activates Key Shortcut mode</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/gnome-app-install-star.png</normaloff>:/resource/24X24/gnome-app-install-star.png</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>
