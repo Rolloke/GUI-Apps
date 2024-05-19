@@ -115,18 +115,10 @@ void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
         p[++j] = (double)(float)b[3];
     }
 #else
+//    _may_i_use_cpu_feature(0);
+//    __cpufeature(1);
+//    _mm_cpufeature(2);
 
-//     __m512d m_var = _mm512_set1_pd(1.0);
-
-//     _mm512_store_pd(&p[0], m_var);
-//    if (_may_i_use_cpu_feature(_FEATURE_AVX512F))
-//    {
-//        printf("yo");
-//    }
-
-
-
-    //__attribute__((target(avx512f)))
     typedef float myfloat;
     SimdVar<myfloat> a, b;
     const float fac = 10.0f;

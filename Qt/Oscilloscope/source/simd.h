@@ -2,13 +2,15 @@
 #define SIMD256 2
 #define SIMD128 1
 
+#define TEST 0
+
 /// TODO:
 /// SSE3
 /// SSSE3
 /// SSE4.1
 /// SSE4.2
 
-#define USE_SIMD SIMD128
+#define USE_SIMD SIMD256
 
 #ifndef USE_SIMD
 #if __AVX512F__
@@ -37,8 +39,8 @@ void limit(std::vector<int>& order_array, int the_limit);
 #include <immintrin.h>
 struct Order
 {
-    std::vector<int> even = { 0, 2, 4, 6,  8, 10, 12, 14,  16, 18, 20, 22,  24, 26, 28, 30 };
-    std::vector<int> odd  = { 1, 3, 5, 7,  9, 11, 13, 15,  17, 19, 21, 23,  25, 27, 29, 31 };
+    std::vector<int> even = { 1, 3, 5, 7,  9, 11, 13, 15,  17, 19, 21, 23,  25, 27, 29, 31 };
+    std::vector<int> odd  = { 0, 2, 4, 6,  8, 10, 12, 14,  16, 18, 20, 22,  24, 26, 28, 30 };
 };
 
 template <class type=float>
@@ -680,8 +682,8 @@ private:
 #include <immintrin.h>
 struct Order
 {
-    std::vector<int> even = { 0, 2, 4, 6,  8, 10, 12, 14 };
-    std::vector<int> odd  = { 1, 3, 5, 7,  9, 11, 13, 15 };
+    std::vector<int> even = { 1, 3, 5, 7,  9, 11, 13, 15 };
+    std::vector<int> odd  = { 0, 2, 4, 6,  8, 10, 12, 14 };
 };
 
 template <class type=float>
@@ -729,7 +731,7 @@ public:
     }
 
     template <class in_out_type>
-    void set(const type* values, size_t limit = 0)
+    void set(const in_out_type* values, size_t limit = 0)
     {
         if (limit == 0)
         {
@@ -1049,7 +1051,16 @@ public:
 
     void hypot(const SimdVar& a, const SimdVar& b)
     {
-#if __FMA__
+#if TEST
+        if constexpr(std::is_same<type, float>::value)
+        {
+            m_var.s = _mm256_hypot_ps(a.m_var.s, b.m_var.s);
+        }
+        else if constexpr(std::is_same<type, double>::value)
+        {
+            m_var.d = _mm256_hypot_pd(a.m_var.d, b.m_var.d);
+        }
+#elif __FMA__
         SimdVar r;
         r.muladd(a, a, b * b);
         sqrt(r);
@@ -1095,7 +1106,7 @@ public:
 #endif
         }
     }
-
+#if TEST
     void sin(const SimdVar& a)
     {
         if constexpr(std::is_same<type, float>::value)
@@ -1104,14 +1115,14 @@ public:
         }
         else if constexpr(std::is_same<type, double>::value)
         {
-            m_var.d = _mm_256cos_pd(a.m_var.d);
+            m_var.d = _mm_256sin_pd(a.m_var.d);
         }
         else if constexpr(std::is_same<type, int32_t>::value)
         {
             //m_var.i = _mm_ceil_ps(a.m_var.i);
         }
     }
-
+#endif
     void round(const SimdVar& a, int scale = (_MM_FROUND_TO_NEAREST_INT |_MM_FROUND_NO_EXC))
     {
         if constexpr(std::is_same<type, float>::value)
@@ -1357,8 +1368,8 @@ private:
 #include <immintrin.h>
 struct Order
 {
-    std::vector<int> even = { 0, 2, 4, 6 };
-    std::vector<int> odd  = { 1, 3, 5, 7 };
+    std::vector<int> even = { 1, 3, 5, 7 };
+    std::vector<int> odd  = { 0, 2, 4, 6 };
 };
 
 template <class type=float>

@@ -36,8 +36,11 @@ bool QDockWidgetX::is_closing()
 
 void QDockWidgetX::change_visibility(bool visible)
 {
-    if (visible && !get_active(widget()))
+    if(!get_active(widget()))
     {
-        Q_EMIT signal_dock_widget_activated(this);
+        if (visible)
+        {
+            Q_EMIT signal_dock_widget_activated(this);
+        }
     }
 }
