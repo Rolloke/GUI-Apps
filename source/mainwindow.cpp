@@ -27,8 +27,13 @@
 #include <QFontDatabase>
 #include <QFileDialog>
 #include <QSplitter>
+#include <QActionGroup>
 
 /// TODO: test all qt6 things
+/// TODO: fix hide window commands
+/// TODO: implement shortcut key generation by dialog that detects keys pressed
+/// or find a solution with copilot
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>
 #else
@@ -414,6 +419,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
+        ui->comboOpenNewEditor->setCurrentIndex(INT(AdditionalEditor::OnNewFile));
         LOAD_PTR(fSettings, ui->comboOpenNewEditor, setCurrentIndex, currentIndex, toInt);
         on_comboOpenNewEditor_currentIndexChanged(0);
         QString fDarkPaletteColors;
@@ -511,6 +517,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     m_initializing_elements = false;
     TRACEX(Logger::info, windowTitle() << " Started");
+
 }
 
 void MainWindow::update_widget_states(QWidget *widget)
@@ -772,8 +779,6 @@ void MainWindow::createDockWindows()
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
     tabifyDockWidget(first_tab, dock);
 
-    auto tabbars = findChildren<QTabBar*>();
-    tabbars.at(tabbars.count()-1)->setAccessibleName(tr("Left"));
 
 #ifdef WEB_ENGINE
     // markdown view
@@ -817,20 +822,9 @@ void MainWindow::createDockWindows()
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 
-    tabbars = findChildren<QTabBar*>();
-    if (tabbars.count() > 1)
-    {
-        tabbars.at(1)->setAccessibleName(tr("Bottom"));
-    }
-    if (tabbars.count() > 2)
-    {
-        tabbars.at(2)->setAccessibleName(tr("Right"));
-    }
-    QString s;
-    for (const auto &tabbar : tabbars)
-    {
-        s = tabbar->accessibleName();
-    }
+    mDockAreaNames.append(tr("Left"));
+    mDockAreaNames.append(tr("Right"));
+    mDockAreaNames.append(tr("Bottom"));
 
     QLayoutItem *layoutItem {nullptr};
     QToolBar* pTB {nullptr};
@@ -1852,6 +1846,7 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::CustomGitActionSettings, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.getAction(Cmd::CustomGitActionSettings)->setShortcut(QKeySequence(Qt::Key_F12));
     connect(mActions.createAction(Cmd::InsertHashFileNames  , tr("Insert File Name List"), tr("Inserts file names that differ from previous hash")), SIGNAL(triggered()), ui->treeHistory, SLOT(insertFileNames()));
     mActions.setFlags(Cmd::InsertHashFileNames, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::InsertHashFileNames, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -3049,6 +3044,61 @@ void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
 void MainWindow::on_ckAppendToBatch_clicked(bool checked)
 {
     mWorker.setAppendToBatch(checked);
+}
+
+void MainWindow::move_active_window_to(FirstTab::e tab, QDockWidget* dock)
+{
+    QDockWidget* parent = get_first_dock_tab(tab);
+    if (parent)
+    {
+        tabifyDockWidget(parent, dock);
+    }
+}
+
+void MainWindow::contextMenuEvent(QContextMenuEvent *event)
+{
+#if 1
+    /// TODO: Test move active window (name) to
+    QDockWidget* dock = nullptr;
+    auto focus = focusWidget();
+    QList<QDockWidget *> dock_widgets = findChildren<QDockWidget *>();
+    for (auto dock_widget = dock_widgets.begin(); dock_widget != dock_widgets.end(); ++dock_widget)
+    {
+        auto* widget = get_widget(*dock_widget);
+        if (focus == widget)
+        {
+            dock = *dock_widget;
+            break;
+        }
+    }
+
+    QMenu *menu = createPopupMenu();
+    QActionGroup move_tab(this);
+
+    if (dock != nullptr &&
+        dock != get_first_dock_tab(FirstTab::text_view) &&
+        dock != get_first_dock_tab(FirstTab::tree_view) &&
+        dock != get_first_dock_tab(FirstTab::web_view))
+    {
+        QMenu*sub_menu = menu->addMenu(tr("Move %1 to").arg(dock->windowTitle()));
+        for (const auto &name : mDockAreaNames)
+        {
+            QAction* action = sub_menu->addAction(name);
+            move_tab.addAction(action);
+        }
+    }
+    QAction* selected = menu->exec(event->globalPos());
+    int index = move_tab.actions().indexOf(selected);
+    if (index != -1)
+    {
+        move_active_window_to(static_cast<FirstTab::e>(index), dock);
+    }
+
+    delete menu;
+#else
+    QMainWindow::contextMenuEvent(event);
+#endif
+
 }
 
 

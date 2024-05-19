@@ -144,6 +144,10 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
 
         Type fType;
         fType.translate(fFileInfo);
+        if (do_not_ignore.size())
+        {
+            fType.add(Type::GitIgnore);
+        }
 
         fItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
 

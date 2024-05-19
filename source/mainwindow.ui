@@ -1075,6 +1075,9 @@ Git or command results are always displayed in main editor.
           <property name="text">
            <string>Show line numbers</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -1148,6 +1151,9 @@ Git or command results are always displayed in main editor.
           <property name="text">
            <string>Append to Batch</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -1157,6 +1163,9 @@ Git or command results are always displayed in main editor.
           </property>
           <property name="text">
            <string>Additional Batch View</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

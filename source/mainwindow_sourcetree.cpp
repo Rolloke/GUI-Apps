@@ -890,20 +890,38 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
 
         if (fOk && !fNewName.isEmpty())
         {
-            const string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString().c_str();
-            const QString fNewGitName = "\"" + fNewName + "\"";
             QString     fCommand;
             bool        fMoved = false;
-            if (fNewGitName.contains("/"))
+            if (fType.is(Type::GitUnTracked) || fType.is(Type::GitIgnore))
             {
-                fMoved   = true;
-                fOldName = "\"" + fPath.filePath() + "\"";
-                fCommand = tr(fFormatCmd.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), fOldName, fNewGitName);
+                if (fNewName.contains("/"))
+                {
+                    const QString fNewRenamed = "\"" + fNewName + "\"";
+                    fMoved   = true;
+                    fOldName = "\"" + fPath.filePath() + "\"";
+                    fCommand = tr("mv %1 %2").arg(fOldName, fNewRenamed);
+                }
+                else
+                {
+                    fOldName = "\"" + fOldName + "\"";
+                    fCommand  = tr("mv \"%1/%2\" \"%1/%3\"").arg(fPath.absolutePath(),fOldName, fNewName);
+                }
             }
             else
             {
-                fOldName = "\"" + fOldName + "\"";
-                fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath(), fOldName, fNewGitName);
+                const string fFormatCmd = Cmd::getCommand(Cmd::MoveOrRename).toStdString();
+                const QString fNewRenamed = "\"" + fNewName + "\"";
+                if (fNewRenamed.contains("/"))
+                {
+                    fMoved   = true;
+                    fOldName = "\"" + fPath.filePath() + "\"";
+                    fCommand = tr(fFormatCmd.c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), fOldName, fNewRenamed);
+                }
+                else
+                {
+                    fOldName = "\"" + fOldName + "\"";
+                    fCommand  = tr(fFormatCmd.c_str()).arg(fPath.absolutePath(), fOldName, fNewRenamed);
+                }
             }
 
             QString fResultStr;
@@ -1410,3 +1428,4 @@ void MainWindow::dropEvent(QDropEvent *even)
         open_file(fileName);
     }
 }
+

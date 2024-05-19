@@ -210,6 +210,7 @@ private:
     void     closeEvent(QCloseEvent *event) override;
     void     dragEnterEvent(QDragEnterEvent *event);
     void     dropEvent(QDropEvent *even);
+    void     contextMenuEvent(QContextMenuEvent *event) override;
 
     AdditionalEditor additional_editor();
     bool close_editable_widgets(QWidget *&active_widget, Editor editor, bool &all_closed);
@@ -271,8 +272,6 @@ private Q_SLOTS:
     void comboTabPositionIndexChanged(int index);
     void on_comboOpenNewEditor_currentIndexChanged(int index);
     void setFontForViews(int);
-    void close_text_browser(QDockWidgetX *widget, bool &closed);
-    void remove_text_browser(QDockWidgetX *dock_widget);
 
     void showDockedWidget(QWidget* widget, bool show=true);
     QList<QDockWidget *> get_dock_widget_of_name(QStringList names);
@@ -280,6 +279,8 @@ private Q_SLOTS:
     void dockWidget_topLevelChanged(bool);
     QDockWidgetX *create_dock_widget(QWidget *widget, const QString &name, const QString &object_name, bool connect_dock=true, Qt::Orientation orientation=Qt::Vertical);
     void clone_code_browser();
+    void close_text_browser(QDockWidgetX *widget, bool &closed);
+    void remove_text_browser(QDockWidgetX *dock_widget);
     void on_DockWidgetActivated(QDockWidget *dockWidget);
 
     void clearTrees();
@@ -291,13 +292,13 @@ private Q_SLOTS:
     void perform_custom_command();
     void call_git_branch_command();
     void call_git_stash_command();
+    void call_git_commit();
+    void call_git_clone();
+    void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
 
     void invoke_git_merge_dialog();
     void invoke_highlighter_dialog();
     void performCustomGitActionSettings();
-    void call_git_commit();
-    void call_git_clone();
-    void call_git_move_rename(QTreeWidgetItem* dropped_target=0, bool *was_dropped = nullptr);
     void expand_tree_items();
     void collapse_tree_items();
     void addGitSourceFolder();
@@ -317,10 +318,9 @@ private Q_SLOTS:
     void check_reload(code_browser*);
     void set_show_line_numbers(bool);
     void on_ckAppendToBatch_clicked(bool checked);
-
     void on_btnFindAll_clicked();
-
     void on_btnFindReplace_clicked();
+    void move_active_window_to(FirstTab::e tab, QDockWidget *dock);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
@@ -389,6 +389,7 @@ private:
     QString mBranchClosedHasChildrenHasSibling;
     QString mBranchOpenHasChildrenHasSibling;
     bool    m_initializing_elements { true };
+    QStringList mDockAreaNames;
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";

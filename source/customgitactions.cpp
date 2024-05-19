@@ -15,6 +15,7 @@
 #include <QInputDialog>
 #include <QWhatsThis>
 
+/// TODO: implement custom List for Textparamters
 using namespace git;
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)
