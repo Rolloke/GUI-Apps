@@ -58,7 +58,7 @@ class CustomGitActions : public QDialog
 
     struct Btn {enum e
     {
-        Add=1, Delete=2, Up=4, Down=8, Right=16, Left=32, Load=64
+        Add=1, Delete=2, Up=4, Down=8, Right=16, Left=32, Load=64, KeyShortcut=128
     }; };
 
 public:
@@ -69,7 +69,9 @@ public:
     QString mExternalIconFiles;
 
 protected:
-    void resizeEvent(QResizeEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
 Q_SIGNALS:
     void initCustomAction(QAction* fAction);

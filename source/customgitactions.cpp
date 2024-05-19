@@ -14,6 +14,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QWhatsThis>
+#include <QKeyEvent>
 
 /// TODO: implement custom List for Textparamters
 using namespace git;
@@ -124,6 +125,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     ui->btnMoveDown->setStyleSheet(button_enabled_style);
     ui->btnAdd->setStyleSheet(button_enabled_style);
     ui->btnDelete->setStyleSheet(button_enabled_style);
+    ui->btnKey->setStyleSheet(button_enabled_style);
 
     enableButtons(0);
     for (uint i = 0; i < getVariousListSize(); ++i)
@@ -165,6 +167,55 @@ void CustomGitActions::resizeEvent(QResizeEvent *event)
         ui->tableViewActions->setColumnWidth(fColumn, INT(mActionListColumnWidth[fColumn]*fWidth));
     }
 }
+
+void CustomGitActions::keyPressEvent(QKeyEvent *event)
+{
+    if (ui->btnKey->isChecked())
+    {
+        const auto key  = event->key();
+        if (key == Qt::Key_Escape) return;
+        if (key == Qt::Key_Return) return;
+    }
+    QDialog::keyPressEvent(event);
+}
+
+void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
+{
+    if (ui->btnKey->isChecked())
+    {
+        const auto mods = event->modifiers();
+        const auto key  = event->key();
+
+        std::vector<int> keylist;
+        if (mods & Qt::ShiftModifier) keylist.push_back(Qt::SHIFT);
+        if (mods & Qt::ControlModifier) keylist.push_back(Qt::CTRL);
+        if (mods & Qt::AltModifier) keylist.push_back(Qt::ALT);
+        if (mods & Qt::MetaModifier) keylist.push_back(Qt::META);
+        keylist.push_back(key);
+
+        QSharedPointer<QKeySequence> sequence;
+        switch (keylist.size())
+        {
+        case 1: sequence.reset(new QKeySequence(keylist[0])); break;
+        case 2: sequence.reset(new QKeySequence(keylist[0], keylist[1])); break;
+        case 3: sequence.reset(new QKeySequence(keylist[0], keylist[1], keylist[2])); break;
+        case 4: sequence.reset(new QKeySequence(keylist[0], keylist[1], keylist[2], keylist[3])); break;
+        }
+
+        QString shortcut = sequence->toString(QKeySequence::NativeText);
+        shortcut.replace(",", "");
+
+        const int action_row = ui->tableViewActions->currentIndex().row();
+        /// TODO: warn, if double entry is applied
+        mListModelActions->setData(mListModelActions->index(action_row, ActionsTable::Shortcut), shortcut, Qt::DisplayRole);
+        ui->btnKey->setChecked(false);
+
+        if (key == Qt::Key_Escape) return;
+        if (key == Qt::Key_Return) return;
+    }
+    QDialog::keyReleaseEvent(event);
+}
+
 
 void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow)
 {
@@ -559,7 +610,11 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
     const Cmd::eCmd cmd   = getCommand(row);
     if (mActionList.hasAction(cmd) || cmd == Cmd::Separator || cmd == Cmd::Submenu)
     {
-        const uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
+        uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
+        if (cmd != Cmd::Separator && cmd != Cmd::Submenu)
+        {
+            button |= Btn::KeyShortcut;
+        }
 
         if (VariousListIndex::isIcon(ui->comboBoxVarious->currentIndex()))
         {
@@ -616,13 +671,14 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 
 void CustomGitActions::enableButtons(std::uint32_t aBtnFlag)
 {
-    ui->btnAdd->setEnabled(      (aBtnFlag&Btn::Add)    != 0);
-    ui->btnDelete->setEnabled(   (aBtnFlag&Btn::Delete) != 0);
-    ui->btnMoveUp->setEnabled(   (aBtnFlag&Btn::Up)     != 0);
-    ui->btnMoveDown->setEnabled( (aBtnFlag&Btn::Down)   != 0);
-    ui->btnToRight->setEnabled(  (aBtnFlag&Btn::Right)  != 0);
-    ui->btnToLeft->setEnabled(   (aBtnFlag&Btn::Left)   != 0);
-    ui->btnLoadIcons->setEnabled((aBtnFlag&Btn::Load)   != 0);
+    ui->btnAdd->setEnabled(      (aBtnFlag&Btn::Add)           != 0);
+    ui->btnDelete->setEnabled(   (aBtnFlag&Btn::Delete)        != 0);
+    ui->btnMoveUp->setEnabled(   (aBtnFlag&Btn::Up)            != 0);
+    ui->btnMoveDown->setEnabled( (aBtnFlag&Btn::Down)          != 0);
+    ui->btnToRight->setEnabled(  (aBtnFlag&Btn::Right)         != 0);
+    ui->btnToLeft->setEnabled(   (aBtnFlag&Btn::Left)          != 0);
+    ui->btnLoadIcons->setEnabled((aBtnFlag&Btn::Load)          != 0);
+    ui->btnKey->setEnabled(      (aBtnFlag&Btn::KeyShortcut)   != 0);
 }
 namespace
 {
