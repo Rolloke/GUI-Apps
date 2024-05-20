@@ -212,10 +212,10 @@ void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
         const int rows = mListModelVarious->rowCount();
         for (int row = 0; row < rows; ++row)
         {
-            if (mListModelActions->data(mListModelActions->index(row, ActionsTable::Shortcut)).toString().contains(shortcut, Qt::CaseInsensitive))
+            if (QString::compare(mListModelActions->data(mListModelActions->index(row, ActionsTable::Shortcut)).toString(), shortcut, Qt::CaseInsensitive) == 0)
             {
                 insert = false;
-                QMessageBox::information(this, tr("Shortcut Key"), tr("Double entry: %1").arg(shortcut), QMessageBox::Ok);
+                QMessageBox::information(this, tr("Shortcut Key"), tr("Double entry: %1 for ID %2 in row %3").arg(shortcut).arg(getCommand(row)).arg(row+1), QMessageBox::Ok);
                 break;
             }
         }
