@@ -15,6 +15,7 @@
 #include <QInputDialog>
 #include <QWhatsThis>
 #include <QKeyEvent>
+#include <QMessageBox>
 
 /// TODO: implement custom List for Textparamters
 using namespace git;
@@ -78,6 +79,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
 
     mListModelActions = new ActionItemModel(0, ActionsTable::Last, this);
     connect(mListModelActions, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(on_ActionTableListItemChanged(QStandardItem*)));
+
 
     ui->tableViewActions->setModel(mListModelActions);
     ui->tableViewActions->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -204,12 +206,34 @@ void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
 
         QString shortcut = sequence->toString(QKeySequence::NativeText);
         shortcut.replace(",", "");
+        shortcut.replace(" ", "");
 
-        const int action_row = ui->tableViewActions->currentIndex().row();
-        /// TODO: warn, if double entry is applied
-        mListModelActions->setData(mListModelActions->index(action_row, ActionsTable::Shortcut), shortcut, Qt::DisplayRole);
+        bool insert = true;
+        const int rows = mListModelVarious->rowCount();
+        for (int row = 0; row < rows; ++row)
+        {
+            if (mListModelActions->data(mListModelActions->index(row, ActionsTable::Shortcut)).toString().contains(shortcut, Qt::CaseInsensitive))
+            {
+                insert = false;
+                QMessageBox::information(this, tr("Shortcut Key"), tr("Double entry: %1").arg(shortcut), QMessageBox::Ok);
+                break;
+            }
+        }
+        if (insert)
+        {
+            if (QMessageBox::question(this, tr("Shortcut Key"), tr("Insert: %1").arg(shortcut), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes) == QMessageBox::No)
+            {
+                insert = false;
+            }
+        }
+        if (insert)
+        {
+            const int action_row = ui->tableViewActions->currentIndex().row();
+            mListModelActions->setData(mListModelActions->index(action_row, ActionsTable::Shortcut), shortcut, Qt::DisplayRole);
+            mActionList.setFlags(getCommand(action_row), ActionList::Flags::Modified);
+        }
+
         ui->btnKey->setChecked(false);
-
         if (key == Qt::Key_Escape) return;
         if (key == Qt::Key_Return) return;
     }
