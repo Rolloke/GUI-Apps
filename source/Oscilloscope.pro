@@ -21,7 +21,8 @@ unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CXXFLAGS +=-march=native
 #unix:QMAKE_CXXFLAGS +=-inline-forceinline
 #unix:QMAKE_CXXFLAGS +=-fgnu89-inline
-unix:QMAKE_CXXFLAGS +=-mavx2
+#unix:QMAKE_CXXFLAGS +=-mavx
+unix:QMAKE_CXXFLAGS +=-msse
 unix:QMAKE_CXXFLAGS +=-msse4.1
 
 #unix:QMAKE_CXXFLAGS +=-mavx512f
