@@ -160,9 +160,13 @@ void setup()
 
     gSettings.setTimerFunction(&onTimerAlarm);
     gSettings.setAlarmFunction(&onAlarm);
-    gSettings.setMeasureCurrentPins(vddPulsePin, measureCurrentPin);
+#if MeasureTemperatureSensor
     gSettings.setMeasureTemperaturePin(measureTemperturePin);
+#endif
+#if MeasureElectricPower
+    gSettings.setMeasureCurrentPins(vddPulsePin, measureCurrentPin);
     gSettings.setMeasureVoltagePin(measureVoltagePin);
+#endif
 
     LCD_BEGIN
 
@@ -223,7 +227,9 @@ void triggerAlarmButton(uint8_t aState, uint8_t )
     if (gMelody.isPlaying())
     {
         gMelody.stopMelody();
+#if MeasureElectricPower
         gSettings.enableVDD(gSettings.isVDDenabled());
+#endif
     }
     else
     {
@@ -356,6 +362,19 @@ void PrintLCD_Time()
     case SettingStates::SetMeasurementsActive:
         fLine2 += gSettings.getActiveMeasurements();
         break;
+#if MeasureHumidityAndTemperatureSensor
+    case SettingStates::MeasureTemperatureH:
+        fLine2 += String(gSettings.getTemperatureHValue(), (unsigned char)1);
+        fLine2 += " ";
+        fLine2 += SettingStates::degreeC;
+        fLine2 += "C";
+        break;
+    case SettingStates::MeasureHumidity:
+        fLine2 += String(gSettings.getHumidityValue(), (unsigned char)1);
+        fLine2 += " %";
+        break;
+#endif
+#if MeasureElectricPower == 1
     case SettingStates::MeasureCurrent:
         fLine2 += String(gSettings.getUSBCurrentValue_mA(), (unsigned char)1);
         fLine2 += " mA";
@@ -364,7 +383,6 @@ void PrintLCD_Time()
         fLine2 += String(gSettings.getUSBVoltageValue_V(), (unsigned char)1);
         fLine2 += " V";
         break;
-#if MeasureElectricPower == 1
     case SettingStates::MeasurePower:
     {
         fLine2 += String(gSettings.getUSBPowerValue_W(), (unsigned char)1);
@@ -385,12 +403,14 @@ void PrintLCD_Time()
 #endif
     }   break;
 #endif
+#if MeasureTemperatureSensor == 1
     case SettingStates::MeasureTemperature:
         fLine2 += String(gSettings.getTemperatureValue(), (unsigned char)1);
         fLine2 += " ";
         fLine2 += SettingStates::degreeC;
         fLine2 += "C";
         break;
+#endif
     case SettingStates::SetAlarmMelody:
     case SettingStates::SetContrast:
     case SettingStates::SetLightLow:
@@ -438,7 +458,9 @@ void onTimerAlarm()
     case 4: gMelody.setTones(gTones5); break;
 #endif
     }
+#if MeasureElectricPower
     gSettings.enableVDD(false);
+#endif
     gMelody.startMelody();
 }
 
@@ -451,6 +473,7 @@ void onAlarm()
     }
     else
     {
+#if MeasureTemperatureSensor
         int8_t fAlarm = gSettings.getTemperatureAlarmActive();
         if (fAlarm > 0)
         {
@@ -464,7 +487,11 @@ void onAlarm()
         {
             return;
         }
+#endif
+        return;
     }
+#if MeasureElectricPower
     gSettings.enableVDD(false);
+#endif
     gMelody.startMelody();
 }

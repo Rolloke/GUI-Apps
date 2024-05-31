@@ -7,6 +7,7 @@ const int vddPulsePin     =  3;
 const int measureCurrentPin = A0;
 const int measureTemperturePin = A1;
 const int measureVoltagePin = A3;
+const int measureHumidityAndTemperaturePin = 3;
 
 #ifdef LCD_PRINT
 #include <LiquidCrystal.h>

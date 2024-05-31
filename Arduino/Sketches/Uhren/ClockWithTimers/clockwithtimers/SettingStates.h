@@ -7,22 +7,37 @@
 #include <TimeAlarms.h>
 
 
-#define NO_OF_TONES 4
+#define NO_OF_TONES 1
 
 #define SELECT 0    // select language EN or DE
 #define EN     1    // only english
 #define DE     2    // only german
 
 #define LanguageSelection SELECT
-#define MeasureElectricPower 1
+#define MeasureElectricPower 0
 #define MeasureElectricWork 1
 #define AlarmButtonModeForUSB 1
+#define MeasureTemperatureSensor 0
+#define MeasureHumidityAndTemperatureSensor 1
+
+#if MeasureHumidityAndTemperatureSensor
+#include <Bonezegei_DHT11.h>
+#endif
 
 class SettingStates
 {
 public:
-    enum state  { Time, Date, Timer, Timers=NO_OF_TONES, MeasureTemperature=Timer+Timers, MeasureVoltage, MeasureCurrent,
+    enum state  { Time, Date, Timer, Timers=NO_OF_TONES,
+#if MeasureTemperatureSensor
+                  MeasureTemperature=Timer+Timers,
+#endif
+#if MeasureHumidityAndTemperatureSensor
+                  MeasureHumidity,
+                  MeasureTemperatureH,
+#endif
 #if MeasureElectricPower
+                  MeasureVoltage,
+                  MeasureCurrent,
                   MeasurePower,
 #endif
                   SetTime, SetDate, SetYear, SetContrast, SetLightLow, SetLightHigh, SetOnLightTime,
@@ -31,13 +46,31 @@ public:
 #endif
                   SetMeasurementsActive, StoreTime,
                   SetAlarm, SetAlarmMode, SetAlarmDay, SetAlarmMelody,
+#if MeasureHumidityAndTemperatureSensor  && MeasureElectricPower
+                  FirstMeasurementState = MeasureHumidity,
+                  LastMeasurementState  = MeasurePower,
+                  LastState             = MeasurePower,
+#elif MeasureTemperatureSensor && MeasureElectricPower
                   FirstMeasurementState = MeasureTemperature,
-#if MeasureElectricPower == 1
+                  LastMeasurementState  = MeasurePower,
+                  LastState             = MeasurePower,
+#else
+#if  MeasureElectricPower
+                  FirstMeasurementState = MeasureVoltage,
                   LastState             = MeasurePower,
                   LastMeasurementState  = MeasurePower,
+#elif MeasureTemperatureSensor
+                  FirstMeasurementState = MeasureTemperature,
+                  LastState             = MeasureTemperature,
+                  LastMeasurementState  = MeasureTemperature,
+#elif MeasureHumidityAndTemperatureSensor
+                  FirstMeasurementState = MeasureHumidity,
+                  LastState             = MeasureTemperatureH,
+                  LastMeasurementState  = MeasureTemperatureH,
 #else
-                  LastState             = MeasureCurrent,
-                  LastMeasurementState  = MeasureCurrent,
+                  LastState             = SetAlarmMelody,
+                  LastMeasurementState  = SetAlarmMelody,
+#endif
 #endif
                   LastSettingsState     = SetMeasurementsActive,
                   LastSetAlarmState     = SetAlarmDay
@@ -46,7 +79,8 @@ public:
     enum button { Mode=0, Hour=1, Minute=2, AlarmBtn=3, buttons=4, Plus=Hour, Minus=Minute, Start=AlarmBtn, Stop=AlarmBtn, DateTime = AlarmBtn, ClearAll=10};
     enum alarm_mode  { Once, Daily, Weekly, FirstAlarmMode=Once, LastAlarmMode=Weekly };
     enum consts      { Active = 0x80, LED_Bit = 0x40, COUNTER_BITS=0x3f, Disabled=0xff, MinTemperature=-40, MaxTemperature=125, MaxAnalogValue = 1023,
-                       MeasureVoltageActive=1, MeasureCurrentActive=2, MeasureTemperatureActive=4};
+                       MeasureVoltageActive=1, MeasureCurrentActive=2,
+                       MeasureTemperatureActive=4};
     enum calibrate   { Off, CalibrateCurrent, CalibrateTemperature, SetLowerTemperature, SetUpperTemperature, CalibrateVoltage, ResetCalibrationValue, ResetWorkValue};
     
     static const char degreeC = 0xDF;  // ° character for LCD
@@ -58,10 +92,6 @@ public:
     void    setTimerFunction(OnTick_t aF);
     void    setTonePin(uint8_t aPin);
     void    setBlinkMode(uint8_t aMode);
-    void    setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin);
-    void    setMeasureTemperaturePin(uint8_t aAnalogInPin);
-    void    setMeasureVoltagePin(uint8_t aAnalogInPin);
-
     bool    isButtonPressed(button aBtn) const;
     uint8_t getButtonState(button aBtn) const;
     String  getStateName() ;
@@ -87,8 +117,6 @@ public:
     bool    isStateAvailable() const;
     bool    isMeasurementActive() const;
     bool    isMeasurementState(state) const;
-    bool    isVDDenabled() const;
-    bool    enableVDD(bool on);
 
     int     onTimerAlarm();
     int     getSeconds() const;
@@ -96,15 +124,32 @@ public:
     int     getHours() const;
     int     getAlarmMelody() const;
     int     getContrast() const;
+#if MeasureHumidityAndTemperatureSensor
+    void    setHumitditySensorPin(uint8_t aInPin);
+    float   getHumidityValue();
+    float   getTemperatureHValue() ;
+#endif
+
+#if MeasureElectricPower
+    bool    isVDDenabled() const;
+    bool    enableVDD(bool on);
+    void    setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin);
+    void    setMeasureVoltagePin(uint8_t aAnalogInPin);
     float   getUSBCurrentValue_mA() const;
     float   getUSBVoltageValue_V() const;
     float   getUSBPowerValue_W() const;
+    void    handleMeasureVoltageState();
+    void    handleMeasureCurrrentState();
 #if MeasureElectricWork ==1
     float   getUSBWorkValue_Ws() const;
 #endif
+#endif
+#if MeasureTemperatureSensor
+    void    setMeasureTemperaturePin(uint8_t aAnalogInPin);
     float   getTemperatureValue() const;
     int8_t  getTemperatureAlarmActive() const;
-
+    void handleMeasureTemperatureState();
+#endif
     void stopTimer(int aIndex, time_t aTimerStartTime=dtINVALID_TIME);
     void triggerButton(button aButton, uint8_t aState);
     void onTrigger();
@@ -131,10 +176,6 @@ private:
     void handleTimeState();
     void handleDateState();
     void handleTimerState();
-    void handleMeasureCurrrentState();
-    void handleMeasureTemperatureState();
-    void handleMeasureVoltageState();
-
     void handleActivateTimer();
     void handleActivateAlarm();
     int  getTimerIndex() const;
@@ -163,21 +204,29 @@ private:
 
     uint8_t mButtonState[buttons];
     uint8_t mTonePin;
+#if MeasureHumidityAndTemperatureSensor
+    Bonezegei_DHT11 mTemperatureHumiditySensor;
+#endif
+#if MeasureElectricPower
     uint8_t mVddPulsePin;
     uint8_t mMeasureCurrentInPin;
-    uint8_t mMeasureTemperatureInPin;
     uint8_t mMeasureVoltageInPin;
-    int8_t  mModeBlink;
-    int8_t  mModeLight;
-    uint8_t mAlarmMelody;
     uint16_t mReadAnalogCurrent;
     uint16_t mReadAnalogVoltage;
+    bool     mVDDswitchedOn;
 #if MeasureElectricWork ==1
     float    mUSB_Work;
 #endif
+#endif
+    uint8_t mModeBlink;
+    int8_t  mModeLight;
+    uint8_t mAlarmMelody;
     unsigned long mLastTickTime;
     bool    mAlarmActive;
+#if MeasureTemperatureSensor
+    uint8_t mMeasureTemperatureInPin;
     int8_t  mTemperatureAlarmActive;
+#endif
     bool    mTimeChanged;
     bool    mSettingsChanged;
     bool    mDisplayChanged;
@@ -192,14 +241,17 @@ private:
     OnTick_t mTimerFunction;
     OnTick_t mAlarmFunction;
     String   mTimerName;
-    bool     mVDDswitchedOn;
     // stored in EEPROM
-    long     mCalibrateCurrentValue;
+    uint8_t  mContrast;
+#if MeasureTemperatureSensor
     long     mCalibrateTemperatureValue;
-    long     mCalibrateVoltageValue;
     int16_t  mLowerTemperatureTreshold;
     int16_t  mUpperTemperatureTreshold;
-    uint8_t  mContrast;
+#endif
+#if MeasureElectricPower
+    long     mCalibrateCurrentValue;
+    long     mCalibrateVoltageValue;
+#endif
     uint8_t  mLightLow;
     uint8_t  mLightHigh;
     uint8_t  mLanguage;

@@ -15,10 +15,11 @@
 
 using namespace std;
 
-int    calculate(const string& sArgument);
+int    calculate(const string& sArgument, CArithmetic &ar);
 void   print_help(const char *app_name);
 string parse_cmd_line(int argc, char *argv[]);
 bool   compare_equation(const std::string& a1, const std::string& a2);
+string check_argument(string &argument);
 
 /// raw mode functions
 void   enable_raw_mode();
@@ -44,7 +45,7 @@ vector<string> g_history;
 
 int main(int argc, char *argv[])
 {
-    string argument = parse_cmd_line(argc, argv);
+    string argument = parse_cmd_line(argc-1, argv+1);
 
     int error_code = 0;
     if (g_console_mode)
@@ -54,12 +55,14 @@ int main(int argc, char *argv[])
         {
             cout << ">> ";
             cin >> argument;
-            calculate(argument);
+            CArithmetic ar;
+            calculate(argument, ar);
         }
         while (argument != "q");
     }
     else if (g_xconsole_mode)
     {
+        CArithmetic* ar = new CArithmetic();
         enable_raw_mode();
         cout << "Gleichung eingeben\r\n";
         do
@@ -67,7 +70,9 @@ int main(int argc, char *argv[])
             cout << ">> ";
             argument = get_string();
             cout << "\r\n>> ";
-            if (   calculate(argument) == IDE_AR_OK
+            string equation = check_argument(argument);
+
+            if (   calculate(argument, *ar) == IDE_AR_OK
                 && find_if(g_history.begin(), g_history.end(), [argument](const auto& element)
                    { return compare_equation(argument, element); }) == g_history.end())
             {
@@ -79,7 +84,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        error_code = calculate(argument);
+        CArithmetic ar;
+        error_code = calculate(argument, ar);
         if (error_code == IDE_AR_NOEQUATION)
         {
             print_help(argv[0]);
@@ -89,11 +95,23 @@ int main(int argc, char *argv[])
     return error_code;
 }
 
+string check_argument(string& argument)
+{
+    int pos = argument.find("=");
+    if (pos != -1)
+    {
+        string equ = argument.substr(0, pos++);
+        argument = argument.substr(pos, argument.length() - pos);
+        return equ;
+    }
+    return "";
+}
+
 string parse_cmd_line(int argc, char *argv[])
 {
     string argument   = "";
 
-    for (int i=1; i< argc; ++i)
+    for (int i=0; i< argc; ++i)
     {
         if (strcmp(argv[i], "--show") == 0)
         {
@@ -141,7 +159,7 @@ string parse_cmd_line(int argc, char *argv[])
     return argument;
 }
 
-int calculate(const string& sArgument)
+int calculate(const string& sArgument, CArithmetic& ar)
 {
     int  fError        = IDE_AR_NOEQUATION;
 
@@ -151,7 +169,6 @@ int calculate(const string& sArgument)
         {
             cout << sArgument << " = ";
         }
-        CArithmetic ar;
         sError fErrorPos = ar.setEquation(sArgument.c_str());
         fError = ar.getError();
         if (fError == 0)

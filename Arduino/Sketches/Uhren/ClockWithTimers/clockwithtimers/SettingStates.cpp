@@ -5,6 +5,7 @@
 #include <TimeAlarms.h>
 #include <EEPROM.h>
 
+
 const char  gEEPROMid[]        = "ClockVar1.6";
 const float gAnalogCalibration = SettingStates::MaxAnalogValue * 10.0f;
 
@@ -23,21 +24,26 @@ const float gAnalogCalibration = SettingStates::MaxAnalogValue * 10.0f;
 // \brief constructor
 SettingStates::SettingStates()
     : mTonePin(0)
+    #if MeasureElectricPower
     , mVddPulsePin(0)
     , mMeasureCurrentInPin(0)
-    , mMeasureTemperatureInPin(0)
     , mMeasureVoltageInPin(0)
-    , mModeBlink(Active)
-    , mModeLight(0)
-    , mAlarmMelody(0)
     , mReadAnalogCurrent(0)
     , mReadAnalogVoltage(0)
+    , mVDDswitchedOn(false)
     #if MeasureElectricWork ==1
     , mUSB_Work(0)
     #endif
+    #endif
+    , mModeBlink(Active)
+    , mModeLight(0)
+    , mAlarmMelody(0)
     , mLastTickTime(0)
     , mAlarmActive(false)
+    #if MeasureTemperatureSensor
+    , mMeasureTemperatureInPin(0)
     , mTemperatureAlarmActive(0)
+    #endif
     , mTimeChanged(false)
     , mSettingsChanged(false)
     , mDisplayChanged(true)
@@ -48,13 +54,16 @@ SettingStates::SettingStates()
     , mAlarmID(dtINVALID_ALARM_ID)
     , mTimerFunction(0)
     , mAlarmFunction(0)
-    , mVDDswitchedOn(false)
+    , mContrast(128)
+    #if MeasureElectricPower
     , mCalibrateCurrentValue(MaxAnalogValue*10)
-    , mCalibrateTemperatureValue(MaxAnalogValue*10)
     , mCalibrateVoltageValue(MaxAnalogValue*10)
+    #endif
+    #if MeasureTemperatureSensor
+    , mCalibrateTemperatureValue(MaxAnalogValue*10)
     , mLowerTemperatureTreshold(0)
     , mUpperTemperatureTreshold(100)
-    , mContrast(128)
+    #endif
     , mLightLow(64)
     , mLightHigh(200)
     , mLanguage(EN)
@@ -85,7 +94,7 @@ SettingStates::SettingStates()
     if (i==len)
     {
         len = getEEPROMsize();
-        char *fBlock = (char*) &mCalibrateCurrentValue;
+        char *fBlock = (char*) &mContrast;
         for (int j=0; j<len; ++j, ++i)
         {
             fBlock[j] = EEPROM.read(i);
@@ -108,25 +117,13 @@ void SettingStates::setTonePin(uint8_t aPin)
     mTonePin = aPin;
 }
 
-void SettingStates::setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin)
-{
-    mVddPulsePin = aVddPin;
-    pinMode(mVddPulsePin, OUTPUT);
-    mMeasureCurrentInPin = aAnalogInPin;
-    pinMode(mMeasureCurrentInPin, INPUT);
-}
-
+#if MeasureTemperatureSensor
 void SettingStates::setMeasureTemperaturePin(uint8_t aAnalogInPin)
 {
     mMeasureTemperatureInPin = aAnalogInPin;
     pinMode(mMeasureTemperatureInPin, INPUT);
 }
-
-void SettingStates::setMeasureVoltagePin(uint8_t aAnalogInPin)
-{
-    mMeasureVoltageInPin = aAnalogInPin;
-    pinMode(mMeasureVoltageInPin, INPUT);
-}
+#endif
 
 void SettingStates::setBlinkMode(uint8_t aMode)
 {
@@ -154,7 +151,7 @@ void SettingStates::tick(unsigned long fNow)
         mLastTickTime = fNow + TICK_INTERVAL_MS;
         onTrigger();
         mDisplayChanged = true;
-
+#if MeasureTemperatureSensor
         if (mMeasureTemperatureInPin && mCalibration == Off)
         {
             const float fTemperature = getTemperatureValue();
@@ -186,7 +183,7 @@ void SettingStates::tick(unsigned long fNow)
                 }
             }
         }
-
+#endif
         if (mModeBlink & Active)
         {
             mModeBlink ^= LED_Bit;
@@ -212,10 +209,12 @@ void SettingStates::onTrigger()
     {
     case Time:               handleTimeState();               break;
     case Date:               handleDateState();               break;
+#if MeasureTemperatureSensor
     case MeasureTemperature: handleMeasureTemperatureState(); break;
+#endif
+#if MeasureElectricPower
     case MeasureCurrent:     handleMeasureCurrrentState();    break;
     case MeasureVoltage:
-#if MeasureElectricPower
     case MeasurePower:
         handleMeasureVoltageState();
         handleMeasureCurrrentState();
@@ -256,10 +255,16 @@ String SettingStates::getStateName()
         {
         case Time:          return F("Time");
         case Date:          return F("Date");
-        case MeasureCurrent:return F("USB-Current");
+#if MeasureHumidityAndTemperatureSensor
+        case MeasureHumidity: return  F("Humidity");
+        case MeasureTemperatureH: return F("Temperature");
+#endif
+#if MeasureTemperatureSensor
         case MeasureTemperature:return F("Temperature");
-        case MeasureVoltage:return F("USB-Voltage");
+#endif
 #if MeasureElectricPower == 1
+        case MeasureCurrent:return F("USB-Current");
+        case MeasureVoltage:return F("USB-Voltage");
         case MeasurePower:  return F("USB-Power");
 #endif
         case SetTime:       return F("Set Time");
@@ -301,10 +306,16 @@ String SettingStates::getStateName()
         {
         case Time:          return F("Uhrzeit");
         case Date:          return F("Datum");
-        case MeasureCurrent:return F("USB-Strom");
+#if MeasureHumidityAndTemperatureSensor
+        case MeasureHumidity: return  F("Luftfeuchtigkeit");
+        case MeasureTemperatureH: return F("Temperatur");
+#endif
+#if MeasureTemperatureSensor
         case MeasureTemperature:return F("Temperatur");
-        case MeasureVoltage:return F("USB-Spannung");
+#endif
 #if MeasureElectricPower == 1
+        case MeasureVoltage:return F("USB-Spannung");
+        case MeasureCurrent:return F("USB-Strom");
         case MeasurePower:  return F("USB-Leistung");
 #endif
         case SetTime:       return F("Uhrzeit stellen");
@@ -500,6 +511,55 @@ int SettingStates::getContrast() const
     return mContrast;
 }
 
+#if MeasureHumidityAndTemperatureSensor
+void  SettingStates::setHumitditySensorPin(uint8_t aInPin)
+{
+    mTemperatureHumiditySensor._pin = aInPin;
+    mTemperatureHumiditySensor.begin();
+}
+
+float SettingStates::getHumidityValue()
+{
+    if (mTemperatureHumiditySensor.getData())
+    {
+        return mTemperatureHumiditySensor.getHumidity();
+    }
+    return 0;
+}
+
+float SettingStates::getTemperatureHValue()
+{
+    if (mTemperatureHumiditySensor.getData())
+    {
+        return mTemperatureHumiditySensor.getTemperature();
+    }
+    return 0;
+}
+#endif
+
+#if MeasureElectricPower
+bool SettingStates::isVDDenabled() const
+{
+    return mVDDswitchedOn;
+}
+
+bool SettingStates::enableVDD(bool on)
+{
+    if (mVddPulsePin)
+    {
+        if (on)
+        {
+            tone(mVddPulsePin, 5000);
+        }
+        else
+        {
+            noTone(mVddPulsePin);
+        }
+        return on;
+    }
+    return false;
+}
+
 float SettingStates::getUSBCurrentValue_mA() const
 {
     const float fFactor = gAnalogCalibration / mCalibrateCurrentValue;
@@ -517,13 +577,88 @@ float SettingStates::getUSBPowerValue_W() const
     return getUSBVoltageValue_V() * getUSBCurrentValue_mA() * 0.001;
 }
 
+void SettingStates::setMeasureCurrentPins(uint8_t aVddPin, uint8_t aAnalogInPin)
+{
+    mVddPulsePin = aVddPin;
+    pinMode(mVddPulsePin, OUTPUT);
+    mMeasureCurrentInPin = aAnalogInPin;
+    pinMode(mMeasureCurrentInPin, INPUT);
+}
+
+void SettingStates::setMeasureVoltagePin(uint8_t aAnalogInPin)
+{
+    mMeasureVoltageInPin = aAnalogInPin;
+    pinMode(mMeasureVoltageInPin, INPUT);
+}
+
+void SettingStates::handleMeasureCurrrentState()
+{
+    handleModeInTimeStates();
+    switch (mCalibration)
+    {
+    case CalibrateCurrent: handleCalibration(mCalibrateCurrentValue); break;
+    case ResetCalibrationValue:
+        if (getButtonState(AlarmBtn) == Button::released)
+        {
+            mCalibrateCurrentValue = MaxAnalogValue*10;
+        }
+        break;
+#if MeasureElectricWork ==1
+    case ResetWorkValue:
+        if (getButtonState(AlarmBtn) == Button::released)
+        {
+            mUSB_Work = 0;
+            mCalibration = Off;
+        }
+        break;
+#endif
+    }
+    if (mActiveFlag & MeasureCurrentActive)
+    {
+        mReadAnalogCurrent = analogRead(mMeasureCurrentInPin);
+#if MeasureElectricWork ==1
+        float work = getUSBPowerValue_W() * TICK_INTERVAL_MS * 0.001;
+        mUSB_Work += work;
+#endif
+    }
+    else
+    {
+        mReadAnalogCurrent = 0;
+    }
+}
+
+void SettingStates::handleMeasureVoltageState()
+{
+    switch (mCalibration)
+    {
+    case CalibrateVoltage: handleCalibration(mCalibrateVoltageValue); break;
+    case ResetCalibrationValue:
+        if (getButtonState(AlarmBtn) == Button::released)
+        {
+            mCalibrateVoltageValue = MaxAnalogValue*10;
+        }
+        break;
+    }
+    if (mActiveFlag & MeasureVoltageActive)
+    {
+        mReadAnalogVoltage = analogRead(mMeasureVoltageInPin);
+    }
+    else
+    {
+        mReadAnalogVoltage = 0;
+    }
+}
+
 #if MeasureElectricWork ==1
 float SettingStates::getUSBWorkValue_Ws() const
 {
     return mUSB_Work;
 }
 #endif
+#endif
 
+
+#if MeasureTemperatureSensor
 float SettingStates::getTemperatureValue() const
 {
     const int16_t fValueTable[] =
@@ -563,12 +698,11 @@ float SettingStates::getTemperatureValue() const
        43,
        38
     };
-
     switch (mCalibration)
     {
+    case ResetCalibrationValue:
     case SetLowerTemperature: return mLowerTemperatureTreshold;
     case SetUpperTemperature: return mUpperTemperatureTreshold;
-    case ResetCalibrationValue:
     case CalibrateTemperature:
     default:
         {
@@ -595,12 +729,11 @@ float SettingStates::getTemperatureValue() const
     return -100;
 }
 
-
 int8_t SettingStates::getTemperatureAlarmActive() const
 {
     return mTemperatureAlarmActive;
 }
-
+#endif
 bool SettingStates::isButtonPressed(button aBtn) const
 {
     return (mButtonState[aBtn] & (Button::pressed | Button::delayed | Button::repeated)) != 0;
@@ -643,22 +776,27 @@ void SettingStates::playAlarm()
         mAlarmFunction();
     }
 }
+
 void SettingStates::handleEnterState(state new_state)
 {
+    (void) new_state;
+#if MeasureElectricPower
     if (isMeasurementState(new_state)
         && ((mActiveFlag & MeasureCurrentActive) != 0
         && analogRead(mMeasureCurrentInPin) != 0) )
     {
         mVDDswitchedOn = enableVDD(true);
     }
+#endif
 }
 
 void SettingStates::handleExitState(state old_state)
 {
     if ( isMeasurementState(old_state) && !isMeasurementState(mState))
     {
+#if MeasureElectricPower
         mVDDswitchedOn = enableVDD(false);
-
+#endif
         if (mCalibration != Off)
         {
             storeToEEPROM();
@@ -746,7 +884,7 @@ void SettingStates::handleDateState()
     handleModeInTimeStates();
 }
 
-
+#if MeasureTemperatureSensor
 void SettingStates::handleMeasureTemperatureState()
 {
     handleModeInTimeStates();
@@ -763,64 +901,7 @@ void SettingStates::handleMeasureTemperatureState()
         break;
     }
 }
-
-void SettingStates::handleMeasureCurrrentState()
-{
-    handleModeInTimeStates();
-    switch (mCalibration)
-    {
-    case CalibrateCurrent: handleCalibration(mCalibrateCurrentValue); break;
-    case ResetCalibrationValue:
-        if (getButtonState(AlarmBtn) == Button::released)
-        {
-            mCalibrateCurrentValue = MaxAnalogValue*10;
-        }
-        break;
-#if MeasureElectricWork ==1
-    case ResetWorkValue:
-        if (getButtonState(AlarmBtn) == Button::released)
-        {
-            mUSB_Work = 0;
-            mCalibration = Off;
-        }
-        break;
 #endif
-    }
-    if (mActiveFlag & MeasureCurrentActive)
-    {
-        mReadAnalogCurrent = analogRead(mMeasureCurrentInPin);
-#if MeasureElectricWork ==1
-        float work = getUSBPowerValue_W() * TICK_INTERVAL_MS * 0.001;
-        mUSB_Work += work;
-#endif
-    }
-    else
-    {
-        mReadAnalogCurrent = 0;
-    }
-}
-
-void SettingStates::handleMeasureVoltageState()
-{
-    switch (mCalibration)
-    {
-    case CalibrateVoltage: handleCalibration(mCalibrateVoltageValue); break;
-    case ResetCalibrationValue:
-        if (getButtonState(AlarmBtn) == Button::released)
-        {
-            mCalibrateVoltageValue = MaxAnalogValue*10;
-        }
-        break;
-    }
-    if (mActiveFlag & MeasureVoltageActive)
-    {
-        mReadAnalogVoltage = analogRead(mMeasureVoltageInPin);
-    }
-    else
-    {
-        mReadAnalogVoltage = 0;
-    }
-}
 
 void SettingStates::handleTimerState()
 {
@@ -895,6 +976,7 @@ void SettingStates::handleModeInTimeStates()
     }
     else if (getButtonState(Mode) == Button::delayed)
     {
+#if MeasureTemperatureSensor
         if (mState == MeasureTemperature)
         {
             switch (mCalibration)
@@ -908,7 +990,10 @@ void SettingStates::handleModeInTimeStates()
                 break;
             }
         }
-        else if (mState == MeasureCurrent || mState == MeasureVoltage)
+        else
+#endif
+#if MeasureElectricPower == 1
+        if (mState == MeasureCurrent || mState == MeasureVoltage)
         {
             switch (mCalibration)
             {
@@ -917,13 +1002,12 @@ void SettingStates::handleModeInTimeStates()
             case CalibrateVoltage:      mCalibration = ResetCalibrationValue; break;
             }
         }
-#if MeasureElectricPower == 1
         else if (mState == MeasurePower)
         {
             mCalibration = ResetWorkValue;
         }
-#endif
         else
+#endif
         {
             mState = SetTime;
             if (!RTC.read(mTime))
@@ -1222,7 +1306,7 @@ void SettingStates::storeToEEPROM() const
     if (i==len)
     {
         len = getEEPROMsize();
-        char *fBlock = (char*) &mCalibrateCurrentValue;
+        char *fBlock = (char*) &mContrast;
         for (int j=0; j<len; ++j, ++i)
         {
             EEPROM.write(i, fBlock[j]);
@@ -1259,10 +1343,12 @@ bool SettingStates::isStateAvailable() const
 {
     switch (mState)
     {
-    case MeasureCurrent:     return isMeasurementActive() && analogRead(mMeasureCurrentInPin) != 0;
+#if MeasureTemperatureSensor == 1
     case MeasureTemperature: return isMeasurementActive() && analogRead(mMeasureTemperatureInPin) != 1023;
-    case MeasureVoltage:     return isMeasurementActive();
+#endif
 #if MeasureElectricPower == 1
+    case MeasureCurrent:     return isMeasurementActive() && analogRead(mMeasureCurrentInPin) != 0;
+    case MeasureVoltage:     return isMeasurementActive();
     case MeasurePower:       return isMeasurementActive() && analogRead(mMeasureCurrentInPin) != 0;
 #endif
     default: return true;
@@ -1273,37 +1359,18 @@ bool SettingStates::isMeasurementActive() const
 {
     switch (mState)
     {
-    case MeasureCurrent:     return (mActiveFlag & MeasureCurrentActive) != 0;
+#if MeasureTemperatureSensor == 1
     case MeasureTemperature: return (mActiveFlag & MeasureTemperatureActive) != 0;
-    case MeasureVoltage:     return (mActiveFlag & MeasureVoltageActive) != 0;
+#endif
 #if MeasureElectricPower == 1
+    case MeasureCurrent:     return (mActiveFlag & MeasureCurrentActive) != 0;
+    case MeasureVoltage:     return (mActiveFlag & MeasureVoltageActive) != 0;
     case MeasurePower:       return (mActiveFlag & MeasureCurrentActive) != 0 && (mActiveFlag & MeasureVoltageActive) != 0;
 #endif
     default: return true;
     }
 }
 
-bool SettingStates::isVDDenabled() const
-{
-    return mVDDswitchedOn;
-}
-
-bool SettingStates::enableVDD(bool on)
-{
-    if (mVddPulsePin)
-    {
-        if (on)
-        {
-            tone(mVddPulsePin, 5000);
-        }
-        else
-        {
-            noTone(mVddPulsePin);
-        }
-        return on;
-    }
-    return false;
-}
 
 #if AlarmButtonModeForUSB == 1
 bool SettingStates::isMeasurementState(state test_state) const

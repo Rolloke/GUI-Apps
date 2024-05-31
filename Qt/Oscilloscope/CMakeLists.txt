@@ -8,17 +8,22 @@ set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++0x )
 endif(UNIX)
 
 
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-#set(QT_SEARCH_PATH, "/opt/Qt5.12.11/5.12.11/gcc_64/lib/cmake")
+set(Qt5Core_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Core")
+set(Qt5Widgets_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Widgets")
+set(Qt5Xml_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Xml")
+set(Qt5Gui_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Gui")
+set(Qt5Multimedia_DIR "/opt/Qt5.12.11/5.12.11/gcc_64/bin/cmake/Qt5Multimedia")
 
-find_package(Qt5Core)
-find_package(Qt5Widgets)
-find_package(Qt5Xml)
-find_package(Qt5Gui)
-find_package(Qt5Multimedia)
+#find_package(Qt5Core)
+#find_package(Qt5Widgets)
+#find_package(Qt5Xml)
+#find_package(Qt5Gui)
+#find_package(Qt5Multimedia)
 
 
 #if(WIN32)

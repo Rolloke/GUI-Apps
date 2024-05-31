@@ -1,6 +1,6 @@
 QT += core gui serialport
 
-DEFINES += SERIALBUS=1
+DEFINES += SERIALBUS=0
 QT += serialbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
