@@ -47,6 +47,7 @@ public:
     typedef std::map<CDisplayType::eType, std::unique_ptr<CDisplayType>> type_map;
 
    CDisplayType();
+   virtual ~CDisplayType() {}
 
    virtual      QString Display(const std::uint8_t*) const { return ""; }
    virtual      bool    Write(std::uint8_t*, const QString& ) const { return true; }

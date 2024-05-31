@@ -290,6 +290,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_STR(fSettings, fTheme, toString);
         mActions.setTheme(fTheme);
         mActions.initActionIcons();
+        LOAD_STR(fSettings, mInitOnlyCustomCommands, toBool);
 
         int fItemCount = fSettings.beginReadArray(config::sCommands);
         {
@@ -298,7 +299,14 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
                 fSettings.setArrayIndex(fItem);
                 Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
                 auto* fAction = mActions.getAction(fCmd);
-                if (!fAction)
+                if (fAction)
+                {
+                    if (mInitOnlyCustomCommands)
+                    {
+                        continue;
+                    }
+                }
+                else
                 {
                     fAction = mActions.createAction(fCmd, txt::New, txt::git);
                 }
@@ -408,6 +416,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboTabPosition, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowLineNumbers);
+        set_show_line_numbers(ui->ckShowLineNumbers->isChecked());
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         update_widget_states(ui->ckRenderGraphicFile);
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
@@ -682,6 +691,8 @@ MainWindow::~MainWindow()
             fSettings.setValue(name, Cmd::mToolbarNames[i]);
         }
         STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
+        mInitOnlyCustomCommands = false;
+        STORE_STR(fSettings, mInitOnlyCustomCommands);
 
         const QString& fTheme = mActions.getTheme();
         STORE_STR(fSettings, fTheme);
