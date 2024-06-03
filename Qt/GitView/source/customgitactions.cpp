@@ -186,13 +186,10 @@ void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
     if (ui->btnKey->isChecked())
     {
         const auto mods = event->modifiers();
-        const auto key  = event->key();
+        auto key  = event->key();
 
         std::vector<int> keylist;
-        if (mods & Qt::ShiftModifier) keylist.push_back(Qt::SHIFT);
-        if (mods & Qt::ControlModifier) keylist.push_back(Qt::CTRL);
-        if (mods & Qt::AltModifier) keylist.push_back(Qt::ALT);
-        if (mods & Qt::MetaModifier) keylist.push_back(Qt::META);
+        if (mods & Qt::KeyboardModifierMask) keylist.push_back(mods);
         keylist.push_back(key);
 
         QSharedPointer<QKeySequence> sequence;
@@ -208,25 +205,7 @@ void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
         shortcut.replace(",", "");
         shortcut.replace(" ", "");
 
-        bool insert = true;
-        const int rows = mListModelVarious->rowCount();
-        for (int row = 0; row < rows; ++row)
-        {
-            if (QString::compare(mListModelActions->data(mListModelActions->index(row, ActionsTable::Shortcut)).toString(), shortcut, Qt::CaseInsensitive) == 0)
-            {
-                insert = false;
-                QMessageBox::information(this, tr("Shortcut Key"), tr("Double entry: %1 for ID %2 in row %3").arg(shortcut).arg(getCommand(row)).arg(row+1), QMessageBox::Ok);
-                break;
-            }
-        }
-        if (insert)
-        {
-            if (QMessageBox::question(this, tr("Shortcut Key"), tr("Insert: %1").arg(shortcut), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes) == QMessageBox::No)
-            {
-                insert = false;
-            }
-        }
-        if (insert)
+        if (QMessageBox::question(this, tr("Shortcut Key"), tr("Insert: %1").arg(shortcut), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
         {
             const int action_row = ui->tableViewActions->currentIndex().row();
             mListModelActions->setData(mListModelActions->index(action_row, ActionsTable::Shortcut), shortcut, Qt::DisplayRole);
@@ -371,6 +350,7 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
         if (fAction)
         {
             QString fText = item->text();
+
             uint fFlag = 0;
             switch (static_cast<ActionsTable::e>(fColumn))
             {
@@ -1001,6 +981,7 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
             case ActionsTable::MsgBoxText:
             {
                 auto variant     = data(index(aIndex.row(), ActionsTable::MsgBoxText));
+                /// TODO: verify this condition to edit message box text
                 if (variant.isValid() && variant.toString().size() == 0)
                 {
                     fFlags &= ~Qt::ItemIsEditable;
@@ -1010,6 +991,31 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
         }
     }
     return  fFlags;
+}
+
+bool ActionItemModel::setData(const QModelIndex &index_, const QVariant &value, int role)
+{
+    switch (static_cast<ActionsTable::e>(index_.column()))
+    {
+    case ActionsTable::Shortcut:
+    {
+        auto text = value.toString();
+        if (text.size())
+        {
+            for (int row = 0; row<rowCount(); ++row)
+            {
+                if (data(index(row, index_.column())).toString().compare(text, Qt::CaseInsensitive) == 0)
+                {
+                    auto command = data(index(row, ActionsTable::Name)).toString();
+                    QMessageBox::warning(nullptr, tr("Shortcut Key"), tr("Double Shortcut Entry: \"%1\" for Command ID %3 with Name \"%2\"").arg(text).arg(command).arg(row+1), QMessageBox::Ok);
+                    return false;
+                }
+            }
+        }
+    } break;
+    default: break;
+    }
+    return QStandardItemModel::setData(index_, value, role);
 }
 
 VariousItemModel::VariousItemModel(int rows, int columns, QObject *parent) :
@@ -1110,4 +1116,7 @@ void CustomGitActions::on_btnFind_clicked()
         }
     }
 }
+
+
+
 
