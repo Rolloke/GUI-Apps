@@ -133,6 +133,7 @@ public:
     ActionItemModel(int rows, int columns, QObject *parent = Q_NULLPTR);
 
     Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
 };
 
 class VariousItemModel : public QStandardItemModel
