@@ -21,12 +21,14 @@ unix:QMAKE_CXXFLAGS += -std=c++17
 unix:QMAKE_CXXFLAGS +=-march=native
 #unix:QMAKE_CXXFLAGS +=-inline-forceinline
 #unix:QMAKE_CXXFLAGS +=-fgnu89-inline
-#unix:QMAKE_CXXFLAGS +=-mavx
+unix:QMAKE_CXXFLAGS +=-mavx2
+unix:QMAKE_CXXFLAGS +=-mavx
 unix:QMAKE_CXXFLAGS +=-msse
-unix:QMAKE_CXXFLAGS +=-msse4.1
+#unix:QMAKE_CXXFLAGS +=-msse4.1
 
 #unix:QMAKE_CXXFLAGS +=-mavx512f
 #unix:QMAKE_CXXFLAGS +=-mavx512vl
+#unix:QMAKE_CXXFLAGS +=-maxv512dq
 
 # -std=c++11 -O3 -Ofast -m64 -pthread -march=native -Wl,--no-as-needed -funroll-loops -ffinite-math-only -fPIC -Wno-unused-result -Wno-deprecated -Wno-deprecated-gpu-targets -mavx512bw"
 
