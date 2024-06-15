@@ -31,8 +31,6 @@
 
 /// TODO: test all qt6 things
 /// TODO: fix hide window commands
-/// TODO: implement shortcut key generation by dialog that detects keys pressed
-/// or find a solution with copilot
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>
