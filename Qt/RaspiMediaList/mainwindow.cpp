@@ -75,24 +75,34 @@ const QString media_list       = QObject::tr("Media List (*.m3u);;Text File (*.t
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
 const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
+const QString store_downloaded_kodi_raw = QObject::tr("Store downloaded kodi raw file");
 const QString upload_kodi_fav  = QObject::tr("Upload favorites to Raspi");
 const QString update_kodi_fav  = QObject::tr("Load favorites for update media list check states");
 const QString kodi_favorites   = QObject::tr("Favorites (*.xml);;All Files (*.*)");
+const QString kodi_raw_files   = QObject::tr("Kodi Raw File (*.m3u);;All Files (*.*)");
 
 const QString media_player_cmd = QObject::tr(
-            "Edit media player command:\n"
-            "- path_to_media_player %1\n"
-            "- %1 Placeholder for URL\n");
+            "<h3>Edit media player command</h3>"
+            "<pre>path_to_media_player %1</pre>"
+            "<p>%1 Placeholder for URL<p>");
 
 const QString upload_favorite_cmd = QObject::tr(
-            "Edit upload favorite command:\n"
-            "- scp %1 user@address:/path/favorites.xml\n"
-            "- %1 Placeholder for favorites file name\n");
+            "<h3>Edit upload favorite command</h3>"
+            "<pre>scp %1 user@address:/path/favorites.xml</pre>"
+            "<p>%1 Placeholder for favorites file name</p>");
 
 const QString download_favorite_cmd = QObject::tr(
-            "Edit upload favorite command:\n"
-            "- scp user@address:/path/favorites.xml %1\n"
-            "- %1 Placeholder for favorites file name\n");
+            "<h3>Edit download favorite command</h3>"
+            "<pre>scp user@address:/path/favorites.xml %1</pre>"
+            "<p>%1 Placeholder for favorites file name</p>");
+
+const QString download_kodi_raw_file = QObject::tr(
+            "<h3>Edit download kodi raw file path</h3>"
+///            "<p>Find in <a href=\"https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi\">Kodinerds</a></p>"
+            "<p>Find in page Kodinerds: <b>https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi</b><br>"
+            "Select kodi_xxx.m3u file, click on button Raw and copy the internet address</p>"
+            "<pre>path to kodi raw file internet address</pre>"
+            );
 
 const QStringList media_player_cmd_line =
 {
@@ -169,7 +179,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mPlayer.setAudioOutput(audioOutput);
 #endif
     mPlayer.setVideoOutput(&mVideo);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    connect(&mPlayer, SIGNAL(errorOccurred(QMediaPlayer::Error,QString)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
+#else
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
+#endif
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     mHiddenColumns = { eURL, eLogo, eFriendlyName };
@@ -223,6 +237,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
     connect(ui->actionUpload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_upload_favorites()));
     connect(ui->actionDownload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_download_favorites()));
+    connect(ui->actionDownload_Kodi_Raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_download_kodi_raw_file()));
 
     connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
     connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
@@ -233,6 +248,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionEdit_Upload_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_upload_command()));
     connect(ui->actionEdit_Download_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_command()));
     connect(ui->actionShowTrayIconAndInfo, SIGNAL(toggled(bool)), SLOT(menu_option_show_tray_icon(bool)));
+    connect(ui->actionEdit_Download_Path_for_m3u_Files, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_m3u_file()));
 
     connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
@@ -242,8 +258,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
+#else
     connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
-
+#endif
 //     QPlaylistFileParser parser;
 
     ui->sliderVolume->setMinimum(0);
@@ -259,6 +278,7 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mFileOpenPath, toString);
     LOAD_STR(fSettings, mFavoritesOpenPath, toString);
     LOAD_STR(fSettings, mDownloadFavoriteCommand, toString);
+    LOAD_STR(fSettings, mDownloadKodiRawFilePath, toString);
     LOAD_STR(fSettings, mUploadFavoriteCommand, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
@@ -292,12 +312,7 @@ MainWindow::MainWindow(QWidget *parent) :
     display_play_status();
     m_play_name->setText(get_item_name(mCurrentPlayIndex));
 
-#ifdef TEST_DOWNLOAD_KODI_FILE
-    const QUrl url("https://github.com/jnk22/kodinerds-iptv/blob/master/iptv/kodi/kodi.m3u");
-    QNetworkRequest request(url);
-    QNetworkReply* reply = mNetManager.get(request);
-    connect(reply, SIGNAL(finished()), this, SLOT(onDownloadFiniseh()));
-#endif
+    update_command_states();
 }
 
 
@@ -313,6 +328,7 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mFileOpenPath);
     STORE_STR(fSettings, mFavoritesOpenPath);
     STORE_STR(fSettings, mDownloadFavoriteCommand);
+    STORE_STR(fSettings, mDownloadKodiRawFilePath);
     STORE_STR(fSettings, mUploadFavoriteCommand);
     STORE_STR(fSettings, mShowIcon);
     STORE_STR(fSettings, mMediaPlayerCommand);
@@ -857,26 +873,25 @@ void MainWindow::menu_edit_open_media_player()
 
 void MainWindow::menu_option_media_player_command()
 {
-    QString text = QInputDialog::getText(this, windowTitle(), txt::media_player_cmd, QLineEdit::Normal, mMediaPlayerCommand);
+    const QString text = QInputDialog::getText(this, windowTitle(), txt::media_player_cmd, QLineEdit::Normal, mMediaPlayerCommand);
     if (text.size())
     {
         mMediaPlayerCommand = text;
     }
 }
 
-#ifdef TEST_DOWNLOAD_KODI_FILE
-void  MainWindow::onDownloadFiniseh()
+void  MainWindow::onDownloadFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    if (reply)
+    if (reply && reply->error() == QNetworkReply::NoError)
     {
-        if (reply->error() == QNetworkReply::NoError)
+        if (reply->bytesAvailable() > 0)
         {
-            const int available = reply->bytesAvailable();
-            if (available > 0)
+            const QByteArray data(reply->readAll());
+            const QString filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_raw, mFavoritesOpenPath, txt::kodi_raw_files);
+            if (filename.size())
             {
-                const QByteArray data(reply->readAll());
-                QFile file("/home/rolf/mediadatei.txt");
+                QFile file(filename);
                 if (file.open(QIODevice::WriteOnly))
                 {
                     file.write(data);
@@ -885,7 +900,6 @@ void  MainWindow::onDownloadFiniseh()
         }
     }
 }
-#endif
 
 void MainWindow::onReplyFinished()
 {
@@ -921,9 +935,9 @@ void MainWindow::onReplyFinished()
     }
 }
 
-void MainWindow::show_media_player_error(QMediaPlayer::Error error)
+void MainWindow::show_media_player_error(QMediaPlayer::Error error, const QString &sError)
 {
-    ui->statusBar->showMessage(tr("Media error number: %1: %2").arg(static_cast<int>(error)).arg(mPlayer.errorString()));
+    ui->statusBar->showMessage(tr("Media error number: %1: %2").arg(static_cast<int>(error)).arg(sError.size() ? sError : mPlayer.errorString()));
 }
 
 void MainWindow::open_file(const QString& filename)
@@ -1053,6 +1067,22 @@ void MainWindow::menu_option_edit_upload_command()
     if (text.size())
     {
         mUploadFavoriteCommand = text;
+        update_command_states();
+    }
+}
+
+void MainWindow::menu_file_download_kodi_raw_file()
+{
+    if (mDownloadKodiRawFilePath.size())
+    {
+        const QUrl url(mDownloadKodiRawFilePath);
+        QNetworkRequest request(url);
+        QNetworkReply* reply = mNetManager.get(request);
+        connect(reply, SIGNAL(finished()), this, SLOT(onDownloadFinished()));
+    }
+    else
+    {
+        ui->statusBar->showMessage(tr("Define download path for kodi raw file"));
     }
 }
 
@@ -1062,6 +1092,17 @@ void MainWindow::menu_option_edit_download_command()
     if (text.size())
     {
         mDownloadFavoriteCommand = text;
+        update_command_states();
+    }
+}
+
+void MainWindow::menu_option_edit_download_m3u_file()
+{
+    QString text = QInputDialog::getText(this, windowTitle(), txt::download_kodi_raw_file, QLineEdit::Normal, mDownloadKodiRawFilePath);
+    if (text.size())
+    {
+        mDownloadKodiRawFilePath = text;
+        update_command_states();
     }
 }
 
@@ -1072,6 +1113,13 @@ void MainWindow::add_button_to_menue(QMenu*menu, QPushButton* button)
     action->setStatusTip(button->toolTip());
     addAction(action);
     QObject::connect(action, SIGNAL(triggered()), button, SLOT(click()));
+}
+
+void MainWindow::update_command_states()
+{
+    ui->actionDownload_favorites->setEnabled(mDownloadFavoriteCommand.size() != 0);
+    ui->actionUpload_favorites->setEnabled(mUploadFavoriteCommand.size() != 0);
+    ui->actionDownload_Kodi_Raw_list->setEnabled(mDownloadKodiRawFilePath.size() != 0);
 }
 
 void MainWindow::menu_option_show_tray_icon(bool show)
@@ -1130,15 +1178,34 @@ void MainWindow::metaDataAvailableChanged(bool changed)
         }
     }
 }
-
 void MainWindow::metaDataChanged()
 {
+    /// TODO: get all information like in metaDataChanged(const QString &key, const QVariant & value) from Qt5
     QStringList list = mPlayer.availableMetaData();
     for (const auto &key : list)
     {
         metaDataChanged(key, mPlayer.metaData(key));
     }
 }
+#else
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+void MainWindow::metaDataChanged()
+{
+    /// TODO: get all information like in metaDataChanged(const QString &key, const QVariant & value) from Qt5
+    QList<QMediaMetaData>  tracks = mPlayer.audioTracks();
+    tracks.append(mPlayer.videoTracks());
+    tracks.append(mPlayer.subtitleTracks());
+    tracks.append(mPlayer.metaData());
+    for (const auto &track : tracks)
+    {
+        for (const auto &key : track.keys())
+        {
+            metaDataChanged(track.stringValue(key), track.value(key));
+        }
+    }
+}
+#endif
 #endif
 
 void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
@@ -1168,7 +1235,11 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
         }
     }
     mCurrentMetainfo[key] = value;
+}
 
+bool  MainWindow::event(QEvent*e)
+{
+    return QMainWindow::event(e);
 }
 
 QString getSettingsName(const QString& aItemName)
@@ -1290,3 +1361,4 @@ int execute(const QString& command, QString& aResultText)
     fTemp.remove(fTemp.path());
     return fResult;
 }
+
