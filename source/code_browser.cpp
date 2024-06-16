@@ -16,8 +16,6 @@
 #include <QWebEngineView>
 #endif
 
-/// TODO: evaluate clicks on markup or html links
-/// also in codebrowser, when WEB_ENGINE is not available
 
 code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_line_number_area(new LineNumberArea(this))
@@ -845,17 +843,32 @@ void PreviewPage::load_markdown_page()
     m_web_enginge_view->setUrl(QUrl("qrc:/resource/index.html"));
 }
 
-/// TODO: evaluate clicks on markup or html links and open, when possible
-
-bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType, bool)
+bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame)
 {
+    /// TODO: evaluate clicks on markup or html links
+    /// also in codebrowser, when WEB_ENGINE is not available
+    (void)(type);
+    (void)(isMainFrame);
+    const QString& path = url.path();
     if (m_type == type::html)
     {
         return true;
     }
-    else if (m_type == type::markdown && url.scheme() == QString("qrc")) // Only allow qrc:/index.html.
+    else if (m_type == type::markdown && url.scheme() == QString("qrc") && path.indexOf("resource/index.html") != -1) // Only allow qrc:/index.html.
     {
         return true;
+    }
+    else if (type == NavigationTypeLinkClicked && url.scheme().indexOf("http") != -1)
+    {
+        /// TODO: make load html work
+        load(url);
+        m_web_enginge_view->load(url);
+        return true;
+    }
+    else if (type == NavigationTypeLinkClicked && url.scheme().indexOf("mailto") != -1)
+    {
+        /// TODO: handle mailto
+        return false;
     }
     else
     {

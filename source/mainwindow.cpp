@@ -30,7 +30,7 @@
 #include <QActionGroup>
 
 /// TODO: test all qt6 things
-/// TODO: fix hide window commands
+/// FIXME: fix hide window commands
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>

@@ -981,7 +981,7 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
             case ActionsTable::MsgBoxText:
             {
                 auto variant     = data(index(aIndex.row(), ActionsTable::MsgBoxText));
-                /// TODO: verify this condition to edit message box text
+                /// FIXME: verify this condition to edit message box text
                 /// at least custom commands should be editable
                 if (variant.isValid() && variant.toString().size() == 0)
                 {
