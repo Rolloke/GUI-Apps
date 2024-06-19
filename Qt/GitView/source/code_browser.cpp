@@ -1,6 +1,7 @@
 #include "code_browser.h"
 #include "logger.h"
 #include "helper.h"
+#include "mainwindow.h"
 
 #include <QPainter>
 #include <QTextBlock>
@@ -198,10 +199,11 @@ void code_browser::focusInEvent(QFocusEvent *fie)
     {
         Q_EMIT check_reload(this);
     }
-    QDockWidget * dw = dynamic_cast<QDockWidget*>(parent());
-    if (dw)
+    QWidget* focused =  focusWidget();
+    QDockWidget * dock_widget = dynamic_cast<QDockWidget*>(parent());
+    if (dock_widget && dock_widget != focused && this != focused)
     {
-        Q_EMIT send_focused(dw);
+        Q_EMIT send_focused(dock_widget);
     }
     QTextBrowser::focusInEvent(fie);
 }
@@ -845,8 +847,7 @@ void PreviewPage::load_markdown_page()
 
 bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame)
 {
-    /// TODO: evaluate clicks on markup or html links
-    /// also in codebrowser, when WEB_ENGINE is not available
+    /// TODO: evaluate clicks on markup or html links also in codebrowser, when WEB_ENGINE is not available
     (void)(type);
     (void)(isMainFrame);
     const QString& path = url.path();
@@ -858,16 +859,14 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
     {
         return true;
     }
-    else if (type == NavigationTypeLinkClicked && url.scheme().indexOf("http") != -1)
+    else if (type == NavigationTypeLinkClicked && (url.scheme().indexOf("http") != -1 ||url.scheme().indexOf("mailto") != -1))
     {
-        /// TODO: make load html work
-        load(url);
-        m_web_enginge_view->load(url);
-        return true;
-    }
-    else if (type == NavigationTypeLinkClicked && url.scheme().indexOf("mailto") != -1)
-    {
-        /// TODO: handle mailto
+        MainWindow* main_window = dynamic_cast<MainWindow*>(parent());
+        QString command = (main_window) ? main_window->get_external_file_open_cmd() : "xdg-open";
+        QString result;
+        command += " ";
+        command += url.toString();
+        execute(command, result);
         return false;
     }
     else

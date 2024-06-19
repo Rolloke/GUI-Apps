@@ -561,7 +561,6 @@ void MainWindow::open_file(const QString& file_path, boost::optional<int> line_n
     }
 }
 
-
 void MainWindow::updateRepositoryStatus(bool append)
 {
     QString   file_name;
@@ -593,6 +592,23 @@ void MainWindow::updateRepositoryStatus(bool append)
     }
     else
     {
+        if (file_name.size())
+        {
+            QFileInfo info(file_name);
+            if (info.isFile())
+            {
+                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+                for (QDockWidget* dock_widget : dock_widgets)
+                {
+                    code_browser* cb = dynamic_cast<code_browser*>(get_widget(dock_widget));
+                    if (cb && cb->get_file_path() == file_name)
+                    {
+                        open_file(file_name, {}, true);
+                        return;
+                    }
+                }
+            }
+        }
         ui->treeSource->clear();
 
         qint64 fSize = 0;
@@ -604,7 +620,6 @@ void MainWindow::updateRepositoryStatus(bool append)
         ui->statusBar->showMessage(tr("Total selected bytes: ") + formatFileSize(fSize));
         on_comboShowItems_currentIndexChanged(ui->comboShowItems->currentIndex());
     }
-
 }
 
 void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
