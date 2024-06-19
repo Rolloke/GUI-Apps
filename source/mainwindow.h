@@ -43,6 +43,8 @@ public:
     explicit MainWindow(const QString& aConfigName, QWidget *parent = 0);
     ~MainWindow();
 
+    const QString& get_external_file_open_cmd() const { return mExternalFileOpenCmd; }
+
 private:
 
     enum class find
@@ -171,7 +173,7 @@ private:
     void     initCodecCombo();
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true, bool use_second_view=false);
-    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = true);
+    void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false);
 
     QVariant handleWorker(const QVariant&);
     void     handleMessage(QVariant);

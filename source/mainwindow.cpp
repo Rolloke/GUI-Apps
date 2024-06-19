@@ -1818,11 +1818,11 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::EditTabOutdent, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::EditTabOutdent, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update git status"), tr("Updates the git status of the selected source folder")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
+    connect(mActions.createAction(Cmd::UpdateGitStatus, tr("Update"), tr("Updates the git status of all or the selected source folder or reloads the selected file")), SIGNAL(triggered()), this, SLOT(updateRepositoryStatus()));
     mActions.setFlags(Cmd::UpdateGitStatus, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::UpdateGitStatus, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::ClearTreeItems       , tr("Clear all tree entries"), tr("Clears all tree entries in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(clearTrees()));
+    connect(mActions.createAction(Cmd::ClearTreeItems, tr("Clear all tree entries"), tr("Clears all tree entries in focused tree except repository tree")), SIGNAL(triggered()), this, SLOT(clearTrees()));
     mActions.setFlags(Cmd::ClearTreeItems, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ClearTreeItems, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
@@ -3074,7 +3074,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
     for (auto dock_widget = dock_widgets.begin(); dock_widget != dock_widgets.end(); ++dock_widget)
     {
         auto* widget = get_widget(*dock_widget);
-        if (focus == widget)
+        if (focus == widget || focus == *dock_widget)
         {
             dock = *dock_widget;
             break;
@@ -3089,7 +3089,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
         dock != get_first_dock_tab(FirstTab::tree_view) &&
         dock != get_first_dock_tab(FirstTab::web_view))
     {
-        QMenu*sub_menu = menu->addMenu(tr("Move %1 to").arg(dock->windowTitle()));
+        QMenu*sub_menu = menu->addMenu(tr("Move [ %1 ] to").arg(dock->windowTitle()));
         for (const auto &name : mDockAreaNames)
         {
             QAction* action = sub_menu->addAction(name);
