@@ -508,6 +508,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 #ifdef WEB_ENGINE
     mWebEngineView->setContextMenuPolicy(Qt::NoContextMenu);
     PreviewPage* page = new PreviewPage(this, mWebEngineView.data());
+    connect(page, SIGNAL(open_link(QString)), this, SLOT(open_external_link(QString)));
+
     mWebEngineView->setPage(page);
     ui->textBrowser->set_page(page);
 
@@ -796,6 +798,7 @@ void MainWindow::createDockWindows()
 #else
     mTextRenderView.reset(new QTextBrowser(this));
     dock = create_dock_widget(mTextRenderView.data(), tr("Html and Markdown"), markdown_view, true, Qt::Horizontal);
+    mTextRenderView->setOpenExternalLinks(true);
     mTextRenderView->setReadOnly(true);
 #endif
 
@@ -932,7 +935,7 @@ void MainWindow::clone_code_browser()
         {
             file_name = "Cloned Editor";
         }
-        /// TODO: test splited view
+        /// TODO: test splited view and implement new features
         /// Splitted View
         /// o   Dupliziert als gleicher Editor?
         /// o   Scrollen synchronisierbar
@@ -3062,6 +3065,15 @@ void MainWindow::move_active_window_to(FirstTab::e tab, QDockWidget* dock)
     {
         tabifyDockWidget(parent, dock);
     }
+}
+
+void MainWindow::open_external_link(const QString& link)
+{
+    QString command = mExternalFileOpenCmd;
+    QString result;
+    command += " ";
+    command += link;
+    execute(command, result);
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)

@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "qinputdialogex.h"
+
 #include <iostream>
 #include <QFile>
 #include <QDir>
@@ -25,6 +27,7 @@
 #include <QRegularExpression>
 #include <QRandomGenerator>
 #include <QAudioOutput>
+#include <QMediaFormat>
 #endif
 
 /// TODO: find qt-version for this
@@ -450,6 +453,7 @@ void MainWindow::on_pushButtonStart_clicked()
         else
         {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            mCurrentMetainfo.clear();
             mPlayer.setSource(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
 #else
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
@@ -782,11 +786,23 @@ void MainWindow::menu_help_info()
             case QMetaType::Int:
                 info += QString::number(value.toInt());
                 break;
+            case 65574:
+                info += QMediaFormat::fileFormatName(value.value<QMediaFormat::FileFormat>());
+                break;
+            case QMetaType::LongLong:
+                info += QString::number(value.toLongLong());
+                break;
             case QMetaType::UInt:
                 info += QString::number(value.toUInt());
                 break;
+            case QMetaType::QUrl:
+                info += value.toUrl().toString();
+                break;
+//            case QMetaType::QByteArray:
+//                info += value.toByteArray().toStdString();
+//                break;
             default:
-                info += tr("typeid: %1").arg(value.typeId());
+                info += tr("typeid: %1, %2").arg(value.typeId()).arg(value.typeName());
                 break;
             }
 #else
@@ -1098,12 +1114,23 @@ void MainWindow::menu_option_edit_download_command()
 
 void MainWindow::menu_option_edit_download_m3u_file()
 {
-    QString text = QInputDialog::getText(this, windowTitle(), txt::download_kodi_raw_file, QLineEdit::Normal, mDownloadKodiRawFilePath);
-    if (text.size())
+    QInputDialogEx dlg(this);
+    dlg.setInputMode(QInputDialog::TextInput);
+    dlg.setLabelText(txt::download_kodi_raw_file);
+    dlg.setTextValue(mDownloadKodiRawFilePath);
+    dlg.setWindowTitle(windowTitle());
+    if (dlg.exec() == QDialog::Accepted)
     {
-        mDownloadKodiRawFilePath = text;
+        mDownloadKodiRawFilePath = dlg.textValue();
         update_command_states();
     }
+
+//    QString text = QInputDialog::getText(this, windowTitle(), txt::download_kodi_raw_file, QLineEdit::Normal, mDownloadKodiRawFilePath);
+//    if (text.size())
+//    {
+//        mDownloadKodiRawFilePath = text;
+//        update_command_states();
+//    }
 }
 
 void MainWindow::add_button_to_menue(QMenu*menu, QPushButton* button)
@@ -1201,9 +1228,10 @@ void MainWindow::metaDataChanged()
     {
         for (const auto &key : track.keys())
         {
-            metaDataChanged(track.stringValue(key), track.value(key));
+            metaDataChanged(QMediaMetaData::metaDataKeyToString(key), track.value(key));
         }
     }
+
 }
 #endif
 #endif
