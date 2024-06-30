@@ -43,8 +43,6 @@ public:
     explicit MainWindow(const QString& aConfigName, QWidget *parent = 0);
     ~MainWindow();
 
-    const QString& get_external_file_open_cmd() const { return mExternalFileOpenCmd; }
-
 private:
 
     enum class find
@@ -323,6 +321,7 @@ private Q_SLOTS:
     void on_btnFindAll_clicked();
     void on_btnFindReplace_clicked();
     void move_active_window_to(FirstTab::e tab, QDockWidget *dock);
+    void open_external_link(const QString& link);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);

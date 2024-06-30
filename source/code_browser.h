@@ -77,6 +77,7 @@ Q_SIGNALS:
     void text_of_active_changed(bool);
     void check_reload(code_browser*);
     void send_focused(QDockWidget *);
+    void open_link(const QString &text);
 
 public Q_SLOTS:
     void set_show_line_numbers(bool);
@@ -173,6 +174,9 @@ public:
 
 protected:
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame) override;
+
+Q_SIGNALS:
+    void open_link(const QString &text);
 
 private:
     type m_type;

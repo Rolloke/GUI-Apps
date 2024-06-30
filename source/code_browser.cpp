@@ -847,7 +847,6 @@ void PreviewPage::load_markdown_page()
 
 bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame)
 {
-    /// TODO: evaluate clicks on markup or html links also in codebrowser, when WEB_ENGINE is not available
     (void)(type);
     (void)(isMainFrame);
     const QString& path = url.path();
@@ -861,12 +860,7 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
     }
     else if (type == NavigationTypeLinkClicked && (url.scheme().indexOf("http") != -1 ||url.scheme().indexOf("mailto") != -1))
     {
-        MainWindow* main_window = dynamic_cast<MainWindow*>(parent());
-        QString command = (main_window) ? main_window->get_external_file_open_cmd() : "xdg-open";
-        QString result;
-        command += " ";
-        command += url.toString();
-        execute(command, result);
+        Q_EMIT open_link(url.toString());
         return false;
     }
     else

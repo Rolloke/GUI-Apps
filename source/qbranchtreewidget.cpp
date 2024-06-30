@@ -76,6 +76,10 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     mSelectedItem = nullptr;
 }
 
+/// TODO: test diff two branches
+/// TODO: implement merge two branches
+/// also remote branches
+/// drag and drop?
 void QBranchTreeWidget::diff_of_two_branches()
 {
     const auto selected = selectedItems();
