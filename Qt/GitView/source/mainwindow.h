@@ -105,7 +105,8 @@ private:
         History,
         Branch,
         Stash,
-        FindTextInFilesView
+        FindTextInFilesView,
+        ExecuteCommand
     };
 
     struct FindColumn { enum e

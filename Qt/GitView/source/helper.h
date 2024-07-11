@@ -136,4 +136,17 @@ protected:
 
 };
 
+
+template <typename T, typename ... Tn>
+constexpr bool is_equal(T a, Tn... b)
+{
+    return ( ( a ==  b)  || ... );
+}
+
+template <typename T, typename ... Tn>
+constexpr bool is_in_range(T min, T max, Tn... num)
+{
+    return ( ( min <= num && num <= max)  && ... );
+}
+
 #endif // HELPER_H

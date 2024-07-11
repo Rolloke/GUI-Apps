@@ -834,6 +834,8 @@ void MainWindow::createDockWindows()
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 
+    ui->comboFindBox->addItem(tr("Execute Git Command"));
+
     mDockAreaNames.append(tr("Left"));
     mDockAreaNames.append(tr("Right"));
     mDockAreaNames.append(tr("Bottom"));
@@ -2394,18 +2396,28 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     Highlighter::Language::mSelectedLineBackground = ColorSelector::is_dark_mode() ? Qt::darkYellow : Qt::yellow;
 }
 
+
 void MainWindow::comboFindBoxIndexChanged(int index)
 {
-    auto find = static_cast<FindView>(index);
+    FindView find = static_cast<FindView>(index);
     if (find == FindView::Text)
     {
+        ui->btnFindAll->setText(tr("All"));
         set_widget_and_action_enabled(ui->btnFindAll, true);
+        set_widget_and_action_enabled(ui->btnFindReplace, true);
+    }
+    else if (find == FindView::ExecuteCommand )
+    {
+        ui->btnFindAll->setText(tr("Execute"));
+        set_widget_and_action_enabled(ui->btnFindAll, true);
+        set_widget_and_action_enabled(ui->btnFindReplace, false);
     }
     else
     {
         set_widget_and_action_enabled(ui->btnFindReplace, find != FindView::GoToLineInText);
     }
-    set_widget_and_action_enabled(ui->btnFindPrevious, find != FindView::GoToLineInText);
+    set_widget_and_action_enabled(ui->btnFindNext, !is_equal(find, FindView::ExecuteCommand));
+    set_widget_and_action_enabled(ui->btnFindPrevious, !is_equal(find, FindView::GoToLineInText, FindView::ExecuteCommand));
     ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
 
     switch(find)
@@ -2417,6 +2429,7 @@ void MainWindow::comboFindBoxIndexChanged(int index)
     case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View")); break;
     case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View")); break;
     case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View")); break;
+    case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); break;
     }
 }
 
@@ -2453,6 +2466,7 @@ void MainWindow::combo_triggered()
         case FindView::Source:              tree_view = ui->treeSource; break;
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::GoToLineInText:
+        case FindView::ExecuteCommand:
             break;
         }
 
@@ -2512,7 +2526,16 @@ void MainWindow::on_btnFindPrevious_clicked()
 
 void MainWindow::on_btnFindAll_clicked()
 {
-    find_function(find::all);
+    if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::Text))
+    {
+        find_function(find::all);
+    }
+    else
+    {
+        QAction* action = mActions.getAction(Cmd::CustomTestCommand);
+        action->setStatusTip(ui->edtFindText->text());
+        action->trigger();
+    }
 }
 
 void MainWindow::on_btnFindReplace_clicked()
@@ -2614,6 +2637,7 @@ void MainWindow::find_in_tree_views(find find_item)
         case FindView::FindTextInFilesView: tree_view = ui->treeFindText; break;
         case FindView::Text: break;
         case FindView::GoToLineInText: break;
+        case FindView::ExecuteCommand: break;
     }
 
     if (tree_view)
