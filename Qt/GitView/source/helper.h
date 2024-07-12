@@ -40,8 +40,6 @@ extern QPoint menu_offset;
 #define LOAD_STRF(SETTING, ITEM, FUNC_OUT, FUNC_IN, CONVERT) ITEM = LOAD_STRFN(SETTING, ITEM, getSettingsName(#ITEM), FUNC_OUT, FUNC_IN, CONVERT)
 
 #define INT(n) static_cast<qint32>(n)
-#define isBetween(VAL, MIN, MAX) (VAL >= MIN && VAL <= MAX)
-
 
 QString getSettingsName(const QString& aItemName);
 
@@ -136,13 +134,42 @@ protected:
 
 };
 
-
+/// \brief variadic count_equal
+/// \param a comparison parameter
+/// \param b variadic parameter(s)
+/// \return number of b(s) equal two a
+/// \note may used as XOR with multiple arguments
 template <typename T, typename ... Tn>
-constexpr bool is_equal(T a, Tn... b)
+constexpr int count_equal(T a, Tn... b)
 {
-    return ( ( a ==  b)  || ... );
+    return ( ( a ==  b) + ... );
 }
 
+/// \brief variadic is_any_equal_to
+/// \param a comparison parameter
+/// \param b variadic parameter(s)
+/// \return true, if any of b(s) are equal two a
+template <typename T, typename ... Tn>
+constexpr bool is_any_equal_to(T a, Tn... b)
+{
+    return ( ( a ==  b) || ... );
+}
+
+/// \brief variadic are_all_equal_to
+/// \param a comparison parameter
+/// \param b variadic parameter(s)
+/// \return true, if all of b(s) are equal two a
+template <typename T, typename ... Tn>
+constexpr bool are_all_equal_to(T a, Tn... b)
+{
+    return ( ( a ==  b) && ... );
+}
+
+/// \brief variadic is_in_range
+/// \param min minimum for all parameters
+/// \param max maximum for all parameters
+/// \param num variadic parameter(s)
+/// \return true, if all of num(s) are within range
 template <typename T, typename ... Tn>
 constexpr bool is_in_range(T min, T max, Tn... num)
 {

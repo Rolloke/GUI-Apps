@@ -539,7 +539,7 @@ void ActionList::setDataVariant(Cmd::eCmd cmd, ActionList::Data::e data, const Q
     if (action)
     {
         QVariantList variant_list = action->data().toList();
-        if (data >= 0 && data < Data::ListSize)
+        if (is_in_range(0, Data::ListSize-1, data))
         {
             variant_list[data] = variant;
         }
@@ -553,7 +553,7 @@ QVariant ActionList::getDataVariant(Cmd::eCmd cmd, Data::e data) const
     if (action)
     {
         QVariantList variant_list = action->data().toList();
-        if (data >= 0 && data < Data::ListSize)
+        if (is_in_range(0, Data::ListSize-1, data))
         {
             return variant_list[data];
         }

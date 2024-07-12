@@ -85,7 +85,7 @@ void code_browser::set_show_line_numbers(bool show)
 void code_browser::change_visibility(bool visible)
 {
     QString current_language = mHighlighter->currentLanguage();
-    if (current_language == "html" || current_language == "markdown")
+    if (is_any_equal_to(current_language, "html", "markdown"))
     {
         if (visible)
         {
@@ -847,7 +847,6 @@ void PreviewPage::load_markdown_page()
 
 bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType type, bool isMainFrame)
 {
-    (void)(type);
     (void)(isMainFrame);
     const QString& path = url.path();
     if (m_type == type::html)

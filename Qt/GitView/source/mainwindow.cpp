@@ -83,7 +83,6 @@ constexpr char Cmd__mToolbars[] = "Cmd__mToolbars_%1";
 constexpr char Cmd__mToolbarName[] = "Cmd__mToolbarName_%1";
 } // namespace config
 
-
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     : QMainWindow(parent)
     , mDockedWidgetMinMaxButtons(true)
@@ -117,6 +116,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     /// x-special/gnome-copied-files
     /// x-special/gnome-clipboard
     /// use-legacy-clipboard
+
 
     ui->setupUi(this);
     createDockWindows();
@@ -1231,7 +1231,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
 
 bool MainWindow::send_close_to_editable_widget(QWidget*editable_widget)
 {
-    if (editable_widget && editable_widget != ui->textBrowser && editable_widget != ui->tableBinaryView  && editable_widget != mBackgroundTextView.data() )
+    if (editable_widget && !is_any_equal_to(editable_widget, ui->textBrowser, ui->tableBinaryView, mBackgroundTextView.data()) )
     {
         QDockWidgetX*dw = dynamic_cast<QDockWidgetX*>(editable_widget->parent());
         if (dw)
@@ -2399,38 +2399,39 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
 
 void MainWindow::comboFindBoxIndexChanged(int index)
 {
-    FindView find = static_cast<FindView>(index);
-    if (find == FindView::Text)
+    enum eflag
     {
-        ui->btnFindAll->setText(tr("All"));
-        set_widget_and_action_enabled(ui->btnFindAll, true);
-        set_widget_and_action_enabled(ui->btnFindReplace, true);
-    }
-    else if (find == FindView::ExecuteCommand )
+       Next=1, Previous=2, AllExe=4, Replace=8
+    };
+
+    FindView find = static_cast<FindView>(index);
+    if (find == FindView::ExecuteCommand )
     {
         ui->btnFindAll->setText(tr("Execute"));
-        set_widget_and_action_enabled(ui->btnFindAll, true);
-        set_widget_and_action_enabled(ui->btnFindReplace, false);
     }
     else
     {
-        set_widget_and_action_enabled(ui->btnFindReplace, find != FindView::GoToLineInText);
+        ui->btnFindAll->setText(tr("All"));
     }
-    set_widget_and_action_enabled(ui->btnFindNext, !is_equal(find, FindView::ExecuteCommand));
-    set_widget_and_action_enabled(ui->btnFindPrevious, !is_equal(find, FindView::GoToLineInText, FindView::ExecuteCommand));
-    ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
 
+    ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
+    uint32_t flags = 0;
     switch(find)
     {
-    case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor")); break;
-    case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor")); break;
-    case FindView::FindTextInFilesView: ui->statusBar->showMessage(tr("Search for text in find results")); break;
-    case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View")); break;
-    case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View")); break;
-    case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View")); break;
-    case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View")); break;
-    case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); break;
+    case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor"));                       flags = Next|Previous|AllExe|Replace; break;
+    case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor"));                   flags = Next; break;
+    case FindView::FindTextInFilesView: ui->statusBar->showMessage(tr("Search for text in find results"));             flags = Next|Previous;  break;
+    case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View"));  flags = Next|Previous|AllExe; break;
+    case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View"));                 flags = Next|Previous; break;
+    case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View"));                  flags = Next|Previous; break;
+    case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View"));                        flags = Next|Previous; break;
+    case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); flags = AllExe; break;
     }
+
+    set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? true : false);
+    set_widget_and_action_enabled(ui->btnFindPrevious, flags & Previous ? true : false);
+    set_widget_and_action_enabled(ui->btnFindAll,      flags & AllExe   ? true : false);
+    set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? true : false);
 }
 
 void MainWindow::combo_triggered()

@@ -27,7 +27,7 @@ bool CustomGitActions::VariousListIndex::isIcon(int index)
 
 bool CustomGitActions::VariousListIndex::isMenu(int index)
 {
-    return isBetween(index, FirstMenu, LastMenu);
+    return is_in_range(FirstMenu, LastMenu, index);
 }
 
 bool CustomGitActions::VariousListIndex::isToolbar(int index)
@@ -175,8 +175,7 @@ void CustomGitActions::keyPressEvent(QKeyEvent *event)
     if (ui->btnKey->isChecked())
     {
         const auto key  = event->key();
-        if (key == Qt::Key_Escape) return;
-        if (key == Qt::Key_Return) return;
+        if (is_any_equal_to(key, Qt::Key_Escape, Qt::Key_Return)) return;
     }
     QDialog::keyPressEvent(event);
 }
@@ -213,8 +212,7 @@ void CustomGitActions::keyReleaseEvent(QKeyEvent *event)
         }
 
         ui->btnKey->setChecked(false);
-        if (key == Qt::Key_Escape) return;
-        if (key == Qt::Key_Return) return;
+        if (is_any_equal_to(key, Qt::Key_Escape, Qt::Key_Return)) return;
     }
     QDialog::keyReleaseEvent(event);
 }
@@ -276,7 +274,7 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
         initListMergeTool();
         break;
     default:
-        if (isBetween(static_cast<std::uint32_t>(fIndex), VariousListIndex::FirstCmds, getVariousListSize() - 1))
+        if (is_in_range(INT(VariousListIndex::FirstCmds), INT(getVariousListSize() - 1), INT(fIndex)))
         {
             ui->btnToLeft->setToolTip(tr("Remove selected item from %1").arg(getVariousListHeader(fIndex)));
             initMenuList(getCmdVector(fIndex), getVariousListHeader(fIndex));
@@ -612,10 +610,11 @@ void CustomGitActions::on_tableViewActions_clicked(const QModelIndex & /* index 
 {
     const int row = ui->tableViewActions->currentIndex().row();
     const Cmd::eCmd cmd   = getCommand(row);
-    if (mActionList.hasAction(cmd) || cmd == Cmd::Separator || cmd == Cmd::Submenu)
+    const bool separator_or_submenu = is_any_equal_to(cmd, Cmd::Separator, Cmd::Submenu);
+    if (mActionList.hasAction(cmd) || separator_or_submenu)
     {
         uint button = mActionList.getFlags(cmd) & ActionList::Flags::Custom ? Btn::Delete : 0;
-        if (cmd != Cmd::Separator && cmd != Cmd::Submenu)
+        if (!separator_or_submenu)
         {
             button |= Btn::KeyShortcut;
         }
@@ -657,7 +656,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
     else if (ui->comboBoxVarious->currentIndex() == VariousListIndex::MergeTool)
     {
         enableButtons(0);
-        if (index.column() == 0 && index.row() >= 0 && index.row() < mMergeTools.size())
+        if (index.column() == 0 && is_in_range(0, INT(mMergeTools.size()-1), index.row()))
         {
             auto currentItem = std::next(mMergeTools.begin(), index.row());
             currentItem.value() = !currentItem.value();
@@ -744,7 +743,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         part.action->setCheckable(true);
     }
 
-    if (isBetween(post_action, 0, post_action_group.actions().size()))
+    if (is_in_range(0, INT(post_action_group.actions().size() - 1), post_action))
     {
         post_action_group.actions().at(post_action)->setChecked(true);
     }
