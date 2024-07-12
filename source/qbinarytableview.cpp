@@ -1087,7 +1087,7 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
 QVariant BinaryTableModel::get_typed_display_values(int row) const
 {
     QString display_value {"n/a"};
-    if (row >= 0 && row < INT(m_td_index.size()) && m_td_offset[row] <= m_binary_content.size())
+    if (is_in_range(0, INT(m_td_index.size()-1), row) && m_td_offset[row] <= m_binary_content.size())
     {
         const auto& value = m_td_values[m_td_index[row]];
         int length = 1;

@@ -1,4 +1,5 @@
 #include "qradiobuttongroup.h"
+#include "helper.h"
 #include <QChildEvent>
 #include <QRadioButton>
 
@@ -26,7 +27,7 @@ void QRadioButtonGroup::childEvent ( QChildEvent * event )
 
 void QRadioButtonGroup::setCurrentIndex(int anIndex)
 {
-    if (anIndex >= 0 && anIndex < children().size())
+    if (is_in_range(0, INT(children().size()-1), anIndex))
     {
         QAbstractButton* fRB = qobject_cast<QAbstractButton*>(children().at(anIndex));
         if (fRB)

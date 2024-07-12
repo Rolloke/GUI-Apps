@@ -29,7 +29,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
     {
         auto check_state = ui->treeSource->mUseSourceTreeCheckboxes ? aParentItem->checkState(QSourceTreeWidget::Column::FileName) : Qt::Checked;
 
-        if (   check_state == Qt::Checked || check_state == Qt::PartiallyChecked
+        if ( is_any_equal_to(check_state, Qt::Checked, Qt::PartiallyChecked)
             || mCurrentTask == Work::InsertPathFromCommandString)
         {
             const QVariant& fIsDir = aParentItem->data(QSourceTreeWidget::Column::FileName, QSourceTreeWidget::Role::isDirectory);
@@ -51,7 +51,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     type = Type(fVariant.toUInt());
                 }
 
-                if (  (mCurrentTask == Work::ApplyGitCommand || mCurrentTask == Work::ApplyCommand)
+                if (  is_any_equal_to(mCurrentTask, Work::ApplyGitCommand, Work::ApplyCommand)
                     && check_state == Qt::Checked)
                 {
                     const QString cmd = applyGitCommandToFilePath(source, mGitCommand, result_str);
