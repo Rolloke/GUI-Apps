@@ -138,11 +138,21 @@ protected:
 /// \param a comparison parameter
 /// \param b variadic parameter(s)
 /// \return number of b(s) equal two a
-/// \note may used as XOR with multiple arguments
 template <typename T, typename ... Tn>
 constexpr int count_equal(T a, Tn... b)
 {
-    return ( ( a ==  b) + ... );
+    return ( ( a == b ) + ... );
+}
+
+/// \brief variadic is_exclusive_one_equal_to
+/// \note use as xor for all b(s) XOR(b1, ..., bn) = is_exclusive_one_equal_to(true, b1, ..., bn);
+/// \param a comparison parameter
+/// \param b variadic parameter(s)
+/// \return true, if only one of the b(s) is equal to a
+template <typename T, typename ... Tn>
+constexpr bool is_exclusive_one_equal_to(T a, Tn... b)
+{
+    return ( ( a == b ) + ... ) == 1;
 }
 
 /// \brief variadic is_any_equal_to
@@ -152,7 +162,7 @@ constexpr int count_equal(T a, Tn... b)
 template <typename T, typename ... Tn>
 constexpr bool is_any_equal_to(T a, Tn... b)
 {
-    return ( ( a ==  b) || ... );
+    return ( ( a == b ) || ... );
 }
 
 /// \brief variadic are_all_equal_to
@@ -162,7 +172,7 @@ constexpr bool is_any_equal_to(T a, Tn... b)
 template <typename T, typename ... Tn>
 constexpr bool are_all_equal_to(T a, Tn... b)
 {
-    return ( ( a ==  b) && ... );
+    return ( ( a == b ) && ... );
 }
 
 /// \brief variadic is_in_range
