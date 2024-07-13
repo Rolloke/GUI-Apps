@@ -3127,7 +3127,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
         dock != get_first_dock_tab(FirstTab::web_view))
     {
         QMenu*sub_menu = menu->addMenu(tr("Move [ %1 ] to").arg(dock->windowTitle()));
-        for (const auto &name : mDockAreaNames)
+        for (const auto &name : qAsConst(mDockAreaNames))
         {
             QAction* action = sub_menu->addAction(name);
             move_tab.addAction(action);

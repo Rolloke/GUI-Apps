@@ -469,7 +469,7 @@ QString code_browser::change_start_of_selection(selection how_to)
             if (    how_to == selection::tab_outdent
                 || (how_to == selection::toggle_comment && pattern == lines[0].left(pattern.size()))) // uncomment
             {
-                for (const QString& line : lines)
+                for (const QString& line : qAsConst(lines))
                 {
                     text += pattern == line.left(pattern.size()) ? line.mid(pattern.size()) : line;
                     if (++nline == no_of_lines && line.size() == 0) break;
@@ -478,7 +478,7 @@ QString code_browser::change_start_of_selection(selection how_to)
             }
             else // comment
             {
-                for (const QString&line : lines)
+                for (const QString& line : qAsConst(lines))
                 {
                     text += pattern + line;
                     if (++nline == no_of_lines && line.size() == 0) break;
@@ -563,7 +563,7 @@ void code_browser::parse_blame(const QString &blame)
     color_selector.unapply_color(Qt::yellow);
 
     QStringList lines = blame.split("\n");
-    for (QString &line : lines)
+    for (const QString &line : qAsConst(lines))
     {
         QStringList parts = line.split("\t");
         if (parts.size() == 4)

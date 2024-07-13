@@ -15,7 +15,7 @@
 #endif
 
 class BinaryTableModel;
-class QReadonlyEditItemDelegate;
+//class QReadonlyEditItemDelegate;
 
 class qbinarytableview : public QTableView, public Editable
 {
@@ -71,7 +71,7 @@ private:
     void change_cursor();
 
     std::vector<double> mColumnWidth;
-    QReadonlyEditItemDelegate* m_item_delegate;
+    //QReadonlyEditItemDelegate* m_item_delegate;
 };
 
 
@@ -153,6 +153,7 @@ private:
     std::vector<int>                m_td_index;
 };
 
+/*
 class QReadonlyEditItemDelegate : public QItemDelegate
 {
     Q_OBJECT
@@ -161,14 +162,14 @@ public:
 
     explicit QReadonlyEditItemDelegate(QObject *parent = 0);
 
-    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index);
-    void setEditorData(QWidget *editor, const QModelIndex &index);
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index);
-    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,     const QModelIndex &index);
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+    void setEditorData(QWidget *editor, const QModelIndex &index) override;
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) override;
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,     const QModelIndex &index) override;
 
 signals:
 
 private:
 };
-
+*/
 #endif // QBINARYTABLEVIEW_H
