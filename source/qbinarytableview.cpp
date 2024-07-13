@@ -52,7 +52,7 @@ namespace
 
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
-    m_item_delegate = new QReadonlyEditItemDelegate();
+//    m_item_delegate = new QReadonlyEditItemDelegate();
     BinaryTableModel* ListModel = new BinaryTableModel(0, INT(BinaryTableModel::Table::Last), this);
     QStringList fSectionNames = {  tr("Typed"), tr("Character") };
     mColumnWidth   = { 0.6, 0 };
@@ -74,7 +74,7 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 
 qbinarytableview::~qbinarytableview()
 {
-    delete m_item_delegate;
+    //delete m_item_delegate;
 }
 
 void qbinarytableview::update_rows(bool refresh_all)
@@ -1237,6 +1237,7 @@ qbinarytableview* BinaryTableModel::get_parent() const
     return theparent;
 }
 
+/*
 QReadonlyEditItemDelegate::QReadonlyEditItemDelegate(QObject *parent) : QItemDelegate(parent)
 {
 
@@ -1271,3 +1272,4 @@ void QReadonlyEditItemDelegate::updateEditorGeometry(QWidget *editor, const QSty
     editor->setGeometry(option.rect);
 }
 
+*/
