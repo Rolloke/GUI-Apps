@@ -426,6 +426,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
+        LOAD_PTR(fSettings, ui->comboWordWrap, setCurrentIndex, currentIndex, toInt);
         ui->comboOpenNewEditor->setCurrentIndex(INT(AdditionalEditor::OnNewFile));
         LOAD_PTR(fSettings, ui->comboOpenNewEditor, setCurrentIndex, currentIndex, toInt);
         on_comboOpenNewEditor_currentIndexChanged(0);
@@ -444,6 +445,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         auto fTextTabStopCharacters = ui->textBrowser->getTabstopCharacters();
         LOAD_STR(fSettings, fTextTabStopCharacters, toInt);
         ui->textBrowser->setTabstopCharacters(fTextTabStopCharacters);
+        ui->textBrowser->setWordWrapMode(static_cast<QTextOption::WrapMode>(ui->comboWordWrap->currentIndex()));
         ui->spinTabulator->setValue(fTextTabStopCharacters);
 
         QByteArray fWindowGeometry;
@@ -648,6 +650,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
+        STORE_PTR(fSettings, ui->comboWordWrap, currentIndex);
         STORE_PTR(fSettings, ui->comboOpenNewEditor, currentIndex);
         QString fDarkPaletteColors = PaletteColorSelector::get_dark_palette_colors();
         STORE_STR(fSettings, fDarkPaletteColors);
@@ -1968,6 +1971,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckOutput2secondTextView);
     create_auto_cmd(ui->btnFindReplace, mActions.check_location("edit-find-replace.png"), &new_id);
     contextmenu_text_view.push_back(new_id);
+    create_auto_cmd(ui->comboWordWrap);
 
     if (Cmd::mContextMenuTextView.empty())
     {
@@ -3049,6 +3053,17 @@ void MainWindow::comboTabPositionIndexChanged(int index)
     setTabPosition(Qt::RightDockWidgetArea, static_cast<QTabWidget::TabPosition>(index));
 }
 
+void MainWindow::on_comboWordWrap_currentIndexChanged(int index)
+{
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    for (QDockWidget* dock_widget : dock_widgets)
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
+        text_browser->setWordWrapMode(static_cast<QTextOption::WrapMode>(index));
+    }
+}
+
+
 void MainWindow::setFontForViews(int)
 {
     QFont font;
@@ -3146,5 +3161,4 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 #endif
 
 }
-
 

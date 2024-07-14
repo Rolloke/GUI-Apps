@@ -324,6 +324,8 @@ private Q_SLOTS:
     void move_active_window_to(FirstTab::e tab, QDockWidget *dock);
     void open_external_link(const QString& link);
 
+    void on_comboWordWrap_currentIndexChanged(int index);
+
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);

@@ -963,6 +963,38 @@ Enter text to search</string>
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="comboWordWrap">
+          <property name="toolTip">
+           <string>Select word wrap</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Word wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Manual wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Wrap anywhere</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>At boundary or anywhere</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
          <widget class="QComboBox" name="comboOpenNewEditor">
           <property name="toolTip">
            <string>Open Editors (click What's this?)</string>
