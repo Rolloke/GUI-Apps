@@ -124,6 +124,7 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
         cloned->setTabStopWidth(tabStopWidth());
 #endif        
         cloned->setUndoRedoEnabled(isUndoRedoEnabled());
+        cloned->setWordWrapMode(wordWrapMode());
 
         QMenu menu;
         m_actions->fillContextMenue(menu, git::Cmd::mContextMenuTextView, cloned);
@@ -258,7 +259,7 @@ int code_browser::blockCount() const
 {
     return document()->blockCount();
 }
-
+/// TODO: set blocks visible or invisible to wrap or unwrap text
 QTextBlock code_browser::firstVisibleBlock(int& diff)
 {
     QPointF content_offset = contentOffset();
