@@ -41,6 +41,7 @@ void QDockWidgetX::change_visibility(bool visible)
         if (visible)
         {
             Q_EMIT signal_dock_widget_activated(this);
+            m_closed = !visible;
         }
     }
 }
