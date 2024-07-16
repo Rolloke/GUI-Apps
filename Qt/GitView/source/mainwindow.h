@@ -283,6 +283,7 @@ private Q_SLOTS:
     void close_text_browser(QDockWidgetX *widget, bool &closed);
     void remove_text_browser(QDockWidgetX *dock_widget);
     void on_DockWidgetActivated(QDockWidget *dockWidget);
+    void close_tree_view(QDockWidgetX *widget, bool &closed);
 
     void clearTrees();
     void delete_tree_item();

@@ -776,6 +776,7 @@ void MainWindow::createDockWindows()
     // text browser
     QDockWidget *first_tab = nullptr;
     dock = create_dock_widget(ui->textBrowser, tr("Text View/Editor"), textbrowser);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem(tr("Go to line"));
     ui->comboFindBox->addItem("Repository View");
@@ -784,12 +785,14 @@ void MainWindow::createDockWindows()
 
     // graphics view
     dock = create_dock_widget(ui->graphicsView, tr("Graphics View"), graphicsviewer);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->verticalLayout_2->removeWidget(ui->graphicsView);
     addDockWidget(Qt::RightDockWidgetArea, dock);
     tabifyDockWidget(first_tab, dock);
 
     // binary table view
     dock = create_dock_widget(ui->tableBinaryView, tr("Binary View"), binary_table_view);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->verticalLayout->removeWidget(ui->tableBinaryView);
     tabifyDockWidget(first_tab, dock);
 
@@ -804,36 +807,42 @@ void MainWindow::createDockWindows()
     mTextRenderView->setOpenExternalLinks(true);
     mTextRenderView->setReadOnly(true);
 #endif
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
 
 
     dock->setVisible(false);
 
     // history tree
     dock = create_dock_widget(ui->treeHistory, tr("History View"), historyview);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeHistory);
     first_tab = dock;
 
     // branch tree
     dock = create_dock_widget(ui->treeBranches, tr("Branch View"), branchview);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeBranches);
     tabifyDockWidget(first_tab, dock);
 
     // stash tree
     dock = create_dock_widget(ui->treeStash, tr("Stash View"), stashview);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->verticalLayout->removeWidget(ui->treeStash);
     tabifyDockWidget(first_tab, dock);
 
     // find tree
     dock = create_dock_widget(ui->treeFindText, tr("Found in Text Files"), findview);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle() + tr(" View"));
     ui->verticalLayout->removeWidget(ui->treeFindText);
     tabifyDockWidget(first_tab, dock);
 
     mBinaryValuesView.reset(new binary_values_view(this));
     dock = create_dock_widget(mBinaryValuesView.data(), tr("Binary Values"), binaryview);
+    connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     tabifyDockWidget(first_tab, dock);
     dock->setVisible(false);
 
@@ -1256,6 +1265,12 @@ void MainWindow::close_text_browser(QDockWidgetX* widget, bool&closed)
         remove_text_browser(widget);
     }
 }
+
+void MainWindow::close_tree_view(QDockWidgetX *widget, bool &closed)
+{
+    closed = widget->isVisible();
+}
+
 
 void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
 {
