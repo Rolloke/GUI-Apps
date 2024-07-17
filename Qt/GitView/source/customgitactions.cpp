@@ -961,6 +961,12 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
     auto text = data(index(aIndex.row(), ActionsTable::ID)).toString();
     Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(text.split(' ')[0].toInt());
 
+    uint cmd_flags = 0;
+    CustomGitActions *cga = dynamic_cast<CustomGitActions*>(parent());
+    if (cga)
+    {
+        cmd_flags = cga->mActionList.getFlags(fCmd);
+    }
     if (fCmd == Cmd::Separator)
     {
         fFlags &= ~Qt::ItemIsEditable;
@@ -979,10 +985,7 @@ Qt::ItemFlags ActionItemModel::flags(const QModelIndex &aIndex) const
                 break;
             case ActionsTable::MsgBoxText:
             {
-                auto variant     = data(index(aIndex.row(), ActionsTable::MsgBoxText));
-                /// FIXME: verify this condition to edit message box text
-                /// at least custom commands should be editable
-                if (variant.isValid() && variant.toString().size() == 0)
+                if (cmd_flags & ActionList::Flags::FunctionCmd)
                 {
                     fFlags &= ~Qt::ItemIsEditable;
                 }
