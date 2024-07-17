@@ -61,6 +61,8 @@ class CustomGitActions : public QDialog
         Add=1, Delete=2, Up=4, Down=8, Right=16, Left=32, Load=64, KeyShortcut=128
     }; };
 
+    friend class ActionItemModel;
+
 public:
     explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent = 0);
     ~CustomGitActions();
