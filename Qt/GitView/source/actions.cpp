@@ -72,6 +72,16 @@ git::Cmd::eCmd ActionList::createNewID(git::Cmd::eCmd new_cmd) const
     return Cmd::Invalid;
 }
 
+git::Cmd::eCmd ActionList::findID(const QAction* action) const
+{
+    auto found = std::find_if(mActionList.begin(), mActionList.end(), [action](auto& item) { return item.second.data() == action;});
+    if (found != mActionList.end())
+    {
+        return found->first;
+    }
+    return git::Cmd::Invalid;
+}
+
 void ActionList::setTheme(const QString& theme)
 {
     m_theme = theme;

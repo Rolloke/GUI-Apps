@@ -731,7 +731,8 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
         {Cmd::ParseStashListText  , tr("Parse command result for stash view")},
         {Cmd::ParseBlameText      , tr("Parse command result for git blame")},
         {Cmd::UpdateRootItemStatus, tr("Update root item status after command execution")},
-        {Cmd::UpdateRepository    , tr("Update repository after command execution")}
+        {Cmd::UpdateRepository    , tr("Update repository after command execution")},
+        {Cmd::UpdateStash         , tr("Update stash list stash command execution")}
     };
 
     for (auto& part : post_action_parts)
