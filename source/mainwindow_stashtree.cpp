@@ -57,10 +57,18 @@ void MainWindow::call_git_stash_command()
     {
         switch (post_action_cmd)
         {
-            case Cmd::ParseStashListText:
+        case Cmd::ParseStashListText:
             if (ui->treeStash->parseStashListText(result_str, top_item_path))
             {
                 showDockedWidget(ui->treeStash);
+            }
+            break;
+        case Cmd::UpdateStash:
+        case Cmd::UpdateRootItemStatus:
+            if (mActions.findID(action) != git::Cmd::StashList)
+            {
+                ui->treeStash->clear();
+                mActions.getAction(git::Cmd::StashList)->trigger();
             }
             break;
         }

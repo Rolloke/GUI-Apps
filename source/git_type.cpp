@@ -93,6 +93,7 @@ QString Cmd::toString(const ePostAction anAction)
     case ParseBlameText:        return QObject::tr("Parse Blame Text");
     case UpdateRootItemStatus:  return QObject::tr("Update Root Item Status");
     case UpdateRepository:      return QObject::tr("Update Repository Status");
+    case UpdateStash:           return QObject::tr("Update Stash Status");
     }
     return "";
 }

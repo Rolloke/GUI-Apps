@@ -74,6 +74,7 @@ public:
 
     void     initActionIcons();
     git::Cmd::eCmd createNewID(git::Cmd::eCmd fNewCmd) const;
+    git::Cmd::eCmd findID(const QAction *action) const;
 
     void enableItemsByType(const git::Cmd::tVector& aItems, const git::Type& aType) const;
     void fillToolbar(QToolBar& aMenu, const git::Cmd::tVector& aItems);

@@ -1742,9 +1742,11 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::StashDrop, tr("Stash drop"),  Cmd::getCommand(Cmd::StashDrop), this) ,  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashDrop, "Drop stash entry;Do you whant to drop stash entry of repository:\n\"%1\"?");
     mActions.setFlags(Cmd::StashDrop, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setCustomCommandPostAction(Cmd::StashDrop, Cmd::UpdateStash);
     connect(mActions.createAction(Cmd::StashClear, tr("Stash clear"), Cmd::getCommand(Cmd::StashClear), this), SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::StashClear, "Remove all stash entries;Do you whant to remove all stash entries of repository:\n\"%1\"?");
     mActions.setFlags(Cmd::StashClear, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.setCustomCommandPostAction(Cmd::StashClear, Cmd::UpdateStash);
     connect(mActions.createAction(Cmd::StashList, tr("List stashes"),Cmd::getCommand(Cmd::StashList), this),  SIGNAL(triggered()), this, SLOT(call_git_stash_command()));
     mActions.setCustomCommandPostAction(Cmd::StashList, Cmd::ParseStashListText);
     mActions.setFlags(Cmd::StashList, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
