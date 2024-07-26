@@ -161,7 +161,7 @@ private:
     int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
 
     QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
-    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {});
+    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid);
 
     QString  getConfigName() const;
 

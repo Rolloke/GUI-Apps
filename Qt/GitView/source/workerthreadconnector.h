@@ -11,6 +11,7 @@ class Worker : public QObject
     Q_OBJECT
 
 public:
+    static constexpr char command_id[] = "commandid";
     static constexpr char command[] = "command";
     static constexpr char result[]  = "result";
     static constexpr char action[]  = "action";

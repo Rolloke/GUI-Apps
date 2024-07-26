@@ -55,6 +55,7 @@ void MainWindow::call_git_stash_command()
 
     if (result == NoError)
     {
+        auto cmd_id = mActions.findID(action);
         switch (post_action_cmd)
         {
         case Cmd::ParseStashListText:
@@ -64,12 +65,11 @@ void MainWindow::call_git_stash_command()
             }
             break;
         case Cmd::UpdateStash:
+            perform_post_cmd_action(post_action_cmd, {}, cmd_id);
+            break;
         case Cmd::UpdateRootItemStatus:
-            if (mActions.findID(action) != git::Cmd::StashList)
-            {
-                ui->treeStash->clear();
-                mActions.getAction(git::Cmd::StashList)->trigger();
-            }
+            perform_post_cmd_action(Cmd::UpdateStash, {}, cmd_id);
+            perform_post_cmd_action(post_action_cmd, {}, cmd_id);
             break;
         }
     }

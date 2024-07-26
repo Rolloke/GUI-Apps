@@ -75,7 +75,7 @@ Cmd::Cmd()
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
     mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashPop, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
 }
