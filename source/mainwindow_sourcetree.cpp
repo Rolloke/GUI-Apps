@@ -589,6 +589,13 @@ void MainWindow::updateRepositoryStatus(bool append)
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
         insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
+        /// TODO: find out, if this realy works
+        QList<QTreeWidgetItem*> found = ui->treeSource->findItems(fSourceDirs[selected_item], Qt::MatchExactly);
+        if (found.size())
+        {
+            mContextMenuSourceTreeItem = found[0];
+            ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
+        }
     }
     else
     {
@@ -1037,6 +1044,7 @@ void MainWindow::perform_custom_command()
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
                     QVariantMap workmap;
+                    workmap.insert(Worker::command_id, mActions.findID(action));
                     workmap.insert(Worker::command, git_command);
                     workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
                     workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
@@ -1085,12 +1093,12 @@ void MainWindow::perform_custom_command()
 
         if (!(command_flags & ActionList::Flags::CallInThread))
         {
-            perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type);
+            perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type, mActions.findID(action));
         }
     }
 }
 
-void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
+void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, Cmd::eCmd cmd)
 {
     switch (post_cmd)
     {
@@ -1122,6 +1130,13 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type)
         ui->textBrowser->setExtension(file_info.suffix().toLower());
         ui->textBrowser->parse_blame(ui->textBrowser->toPlainText());
     }   break;
+    case Cmd::UpdateStash:
+        if (cmd != git::Cmd::StashList)
+        {
+            ui->treeStash->clear();
+            mActions.getAction(git::Cmd::StashList)->trigger();
+        }
+        break;
     }
 }
 

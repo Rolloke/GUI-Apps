@@ -1427,7 +1427,7 @@ void MainWindow::handleMessage(QVariant aData)
             auto cmd_action = data_map[Worker::action].toUInt();
             appendTextToBrowser(data_map[Worker::command].toString(), cmd_action == 0);
             appendTextToBrowser(data_map[Worker::result].toString(), true);
-            perform_post_cmd_action(cmd_action);
+            perform_post_cmd_action(cmd_action, {}, static_cast<git::Cmd::eCmd>(data_map[Worker::command_id].toInt()));
         } break;
         case Work::AsynchroneousCommand:
             break;
@@ -1603,6 +1603,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             work_command = Work::AsynchroneousCommand;
         }
         QVariantMap workmap;
+        workmap.insert(Worker::command_id, INT(mActions.findID(action)));
         workmap.insert(Worker::command, command);
         workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
         workmap.insert(Worker::flags, variant_list[ActionList::Data::Flags].toUInt());
@@ -1721,7 +1722,7 @@ void MainWindow::initContextMenuActions()
     const QString stash_message = tr("Stash all entries;Do you whant to stash all entries of repository:\n\"%1\"?");
     connect(mActions.createAction(Cmd::Stash, tr("Stash"),       Cmd::getCommand(Cmd::Stash))    ,  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandMessageBoxText(Cmd::Stash, stash_message);
-    mActions.setCustomCommandPostAction(Cmd::Stash, Cmd::UpdateRootItemStatus);
+    mActions.setCustomCommandPostAction(Cmd::Stash, Cmd::UpdateStash);
     mActions.setFlags(Cmd::Stash, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::Stash, ActionList::Flags::Stash, Flag::set);
     connect(mActions.createAction(Cmd::StashShow, tr("Show stash"),  Cmd::getCommand(Cmd::StashShow), this),  SIGNAL(triggered()), this, SLOT(perform_custom_command()));
