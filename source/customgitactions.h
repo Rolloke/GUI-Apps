@@ -78,6 +78,9 @@ protected:
 Q_SIGNALS:
     void initCustomAction(QAction* fAction);
     void removeCustomToolBar(const QString&);
+    void store_commands_to(const QString&);
+    void read_commands_from(const QString&);
+
 private Q_SLOTS:
     void on_comboBoxVarious_currentIndexChanged(int index);
     void on_ActionTableListItemChanged ( QStandardItem * item );
@@ -98,6 +101,8 @@ private Q_SLOTS:
     void on_btnAddCommand_clicked();
     void on_btnFind_clicked();
     void tableViewActions_header_clicked(int index);
+    void on_btnStoreCustom_clicked();
+    void on_btnLoadCustom_clicked();
 
 private:
     void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");

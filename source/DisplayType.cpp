@@ -196,7 +196,7 @@ CDisplayChar::CDisplayChar()
 
 QString CDisplayChar::Display(const std::uint8_t*pData)const
 {
-   return QString("%1").arg(static_cast<int>(*reinterpret_cast<const char*>(pData)));
+    return CDisplayType::toString<std::int8_t>(pData);
 }
 
 bool CDisplayChar::Write(std::uint8_t*pData, const QString& sValue) const
@@ -214,7 +214,7 @@ CDisplayUChar::CDisplayUChar()
 
 QString CDisplayUChar::Display(const std::uint8_t*pData)const
 {
-   return QString("%1").arg(*pData);
+    return CDisplayType::toString<std::uint8_t>(pData);
 }
 
 bool CDisplayUChar::Write(std::uint8_t*pData, const QString& sValue) const

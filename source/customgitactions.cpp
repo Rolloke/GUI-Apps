@@ -1121,6 +1121,22 @@ void CustomGitActions::on_btnFind_clicked()
     }
 }
 
+void CustomGitActions::on_btnStoreCustom_clicked()
+{
+    const QString fSourcePath = QFileDialog::getSaveFileName(this, tr("Store custom commands"));
+    if (fSourcePath.size() > 1)
+    {
+        emit store_commands_to(fSourcePath);
+    }
+}
 
 
+void CustomGitActions::on_btnLoadCustom_clicked()
+{
+    const QString fSourcePath = QFileDialog::getOpenFileName(this, tr("Load custom commands"));
+    if (fSourcePath.size() > 1)
+    {
+        emit read_commands_from(fSourcePath);
+    }
+}
 

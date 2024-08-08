@@ -116,7 +116,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     /// x-special/gnome-clipboard
     /// use-legacy-clipboard
 
-
     ui->setupUi(this);
     createDockWindows();
 
@@ -132,7 +131,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     startTimer(100);
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
-
 
     fSettings.beginGroup(config::sGroupView);
     {
@@ -257,83 +255,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
-    {
-        LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
-        LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
-        LOAD_STR(fSettings, fToolBars, toInt);
-        for (std::uint32_t i=0; i<fToolBars; ++i)
-        {
-            if (i >= Cmd::mToolbars.size())
-            {
-                Cmd::mToolbars.push_back({});
-                QString name = tr(config::Cmd__mToolbarName).arg(i);
-                Cmd::mToolbarNames.push_back(fSettings.value(name).toString());
-            }
-            auto& tool_bar = Cmd::mToolbars[i];
-            QString name = tr(config::Cmd__mToolbars).arg(i);
-            LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
-        }
-        LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
-
-        initContextMenuActions();
-
-        QString fTheme;
-        LOAD_STR(fSettings, fTheme, toString);
-        mActions.setTheme(fTheme);
-        mActions.initActionIcons();
-        LOAD_STR(fSettings, mInitOnlyCustomCommands, toBool);
-
-        int fItemCount = fSettings.beginReadArray(config::sCommands);
-        {
-            for (int fItem = 0; fItem < fItemCount; ++fItem)
-            {
-                fSettings.setArrayIndex(fItem);
-                Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
-                auto* fAction = mActions.getAction(fCmd);
-                if (fAction)
-                {
-                    if (mInitOnlyCustomCommands)
-                    {
-                        continue;
-                    }
-                }
-                else
-                {
-                    fAction = mActions.createAction(fCmd, txt::New, txt::git);
-                }
-                fAction->setText(fSettings.value(config::sName).toString());
-                fAction->setToolTip(fSettings.value(config::sTooltip).toString());
-                fAction->setStatusTip(fSettings.value(config::sCommand).toString());
-                fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
-                uint fFlags = fSettings.value(config::sFlags).toUInt();
-                if (fFlags & ActionList::Flags::Custom)
-                {
-                    connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-                }
-                mActions.setFlags(fCmd, fFlags, Flag::replace);
-                mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
-                mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
-                mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
-                QStringList string_list = fSettings.value(config::sMenuStringList).toStringList();
-                if (string_list.size() > 1) mActions.setMenuStringList(fCmd, string_list);
-                mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
-                mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
-                if (!fAction->shortcut().isEmpty())
-                {
-                    add_action_to_widgets(fAction);
-                }
-            }
-        }
-        fSettings.endArray();
-    }
+    read_commands(fSettings);
     fSettings.endGroup();
-
 
     for (uint i=0; i < Cmd::mToolbars.size(); ++i)
     {
@@ -674,65 +597,7 @@ MainWindow::~MainWindow()
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
-    {
-        STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
-        STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
-        STORE_STR(fSettings, fToolBars);
-        for (std::uint32_t i=0; i<fToolBars; ++i)
-        {
-            auto& tool_bar = Cmd::mToolbars[i];
-            QString name = tr(config::Cmd__mToolbars).arg(i);
-            STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
-            name = tr(config::Cmd__mToolbarName).arg(i);
-            fSettings.setValue(name, Cmd::mToolbarNames[i]);
-        }
-        STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
-        mInitOnlyCustomCommands = false;
-        STORE_STR(fSettings, mInitOnlyCustomCommands);
-
-        const QString& fTheme = mActions.getTheme();
-        STORE_STR(fSettings, fTheme);
-
-        fSettings.beginWriteArray(config::sCommands);
-        {
-            int fIndex = 0;
-
-            for (const auto& fItem : mActions.getList())
-            {
-                const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
-
-                if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
-                {
-                    const QAction* fAction = fItem.second;
-                    QString fCommand = fAction->statusTip();
-                    if (fCommand.size())
-                    {
-                        fSettings.setArrayIndex(fIndex++);
-                        fSettings.setValue(config::sID, fItem.first);
-                        fSettings.setValue(config::sName, fAction->text());
-                        fSettings.setValue(config::sTooltip, fAction->toolTip());
-                        fSettings.setValue(config::sCommand, fCommand);
-                        fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
-                        fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
-                        fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
-                        fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
-                        fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
-                        fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
-                        fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
-                        QStringList list = mActions.getMenuStringList(fCmd);
-                        if (list.size() > 1) fSettings.setValue(config::sMenuStringList, list);
-                    }
-                }
-            }
-            fSettings.endArray();
-        }
-    }
+    store_commands(fSettings);
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupLogging);
@@ -745,6 +610,161 @@ MainWindow::~MainWindow()
     fSettings.endGroup();
 
     delete ui;
+}
+
+void MainWindow::read_commands(QSettings& fSettings)
+{
+    LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
+    LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
+    uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
+    LOAD_STR(fSettings, fToolBars, toInt);
+    for (std::uint32_t i=0; i<fToolBars; ++i)
+    {
+        if (i >= Cmd::mToolbars.size())
+        {
+            Cmd::mToolbars.push_back({});
+            QString name = tr(config::Cmd__mToolbarName).arg(i);
+            Cmd::mToolbarNames.push_back(fSettings.value(name).toString());
+        }
+        auto& tool_bar = Cmd::mToolbars[i];
+        QString name = tr(config::Cmd__mToolbars).arg(i);
+        LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
+    }
+    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
+
+    initContextMenuActions();
+
+    QString fTheme;
+    LOAD_STR(fSettings, fTheme, toString);
+    mActions.setTheme(fTheme);
+    mActions.initActionIcons();
+    LOAD_STR(fSettings, mInitOnlyCustomCommands, toBool);
+
+    int fItemCount = fSettings.beginReadArray(config::sCommands);
+
+    for (int fItem = 0; fItem < fItemCount; ++fItem)
+    {
+        fSettings.setArrayIndex(fItem);
+        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
+        auto* fAction = mActions.getAction(fCmd);
+        if (fAction)
+        {
+            if (mInitOnlyCustomCommands)
+            {
+                continue;
+            }
+        }
+        else
+        {
+            fAction = mActions.createAction(fCmd, txt::New, txt::git);
+        }
+        fAction->setText(fSettings.value(config::sName).toString());
+        fAction->setToolTip(fSettings.value(config::sTooltip).toString());
+        fAction->setStatusTip(fSettings.value(config::sCommand).toString());
+        fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
+        uint fFlags = fSettings.value(config::sFlags).toUInt();
+        if (fFlags & ActionList::Flags::Custom)
+        {
+            connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+        }
+        mActions.setFlags(fCmd, fFlags, Flag::replace);
+        mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
+        mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
+        mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
+        QStringList string_list = fSettings.value(config::sMenuStringList).toStringList();
+        if (string_list.size() > 1) mActions.setMenuStringList(fCmd, string_list);
+        mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
+        mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+        if (!fAction->shortcut().isEmpty())
+        {
+            add_action_to_widgets(fAction);
+        }
+    }
+    fSettings.endArray();
+}
+
+void MainWindow::store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd>& commands)
+{
+    STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
+    STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
+    uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
+    STORE_STR(fSettings, fToolBars);
+    for (std::uint32_t i=0; i<fToolBars; ++i)
+    {
+        auto& tool_bar = Cmd::mToolbars[i];
+        QString name = tr(config::Cmd__mToolbars).arg(i);
+        STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
+        name = tr(config::Cmd__mToolbarName).arg(i);
+        fSettings.setValue(name, Cmd::mToolbarNames[i]);
+    }
+    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
+    mInitOnlyCustomCommands = false;
+    STORE_STR(fSettings, mInitOnlyCustomCommands);
+
+    const QString& fTheme = mActions.getTheme();
+    STORE_STR(fSettings, fTheme);
+
+    fSettings.beginWriteArray(config::sCommands);
+    int fIndex = 0;
+
+    for (const auto& fItem : mActions.getList())
+    {
+        const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
+        if (commands.size())
+        {
+            if (commands.size() == 2 && commands[0] < commands[1])
+            {
+                if (!is_in_range(commands[0], commands[1], fCmd)) continue;
+            }
+            else if (!commands.contains(fCmd)) continue;
+        }
+
+        if (mActions.getFlags(fCmd) & ActionList::Flags::Modified)
+        {
+            const QAction* fAction = fItem.second;
+            QString fCommand = fAction->statusTip();
+            if (fCommand.size())
+            {
+                fSettings.setArrayIndex(fIndex++);
+                fSettings.setValue(config::sID, fItem.first);
+                fSettings.setValue(config::sName, fAction->text());
+                fSettings.setValue(config::sTooltip, fAction->toolTip());
+                fSettings.setValue(config::sCommand, fCommand);
+                fSettings.setValue(config::sShortcut, fAction->shortcut().toString());
+                fSettings.setValue(config::sCustomMessageBoxText, mActions.getCustomCommandMessageBoxText(fCmd));
+                fSettings.setValue(config::sCustomCommandPostAction, mActions.getCustomCommandPostAction(fCmd));
+                fSettings.setValue(config::sFlags, mActions.getFlags(fCmd));
+                fSettings.setValue(config::sFlagsEnabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagEnable));
+                fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
+                fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
+                QStringList list = mActions.getMenuStringList(fCmd);
+                if (list.size() > 1) fSettings.setValue(config::sMenuStringList, list);
+            }
+        }
+    }
+    fSettings.endArray();
+}
+
+void MainWindow::read_custom_commands(const QString &file_name)
+{
+    QSettings settings(file_name, QSettings::NativeFormat);
+    read_commands(settings);
+}
+
+void MainWindow::store_custom_commands(const QString& file_name)
+{
+    QSettings settings(file_name, QSettings::NativeFormat);
+    store_commands(settings, {git::Cmd::CustomCommand, git::Cmd::CustomTestCommand} );
 }
 
 void MainWindow::createDockWindows()
@@ -2284,6 +2304,8 @@ void MainWindow::performCustomGitActionSettings()
 
     connect(&edit_custom_git_actions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
     connect(&edit_custom_git_actions, SIGNAL(removeCustomToolBar(QString)), this, SLOT(removeCmdToolBar(QString)));
+    connect(&edit_custom_git_actions, SIGNAL(read_commands_from(QString)), this, SLOT(read_custom_commands(QString)));
+    connect(&edit_custom_git_actions, SIGNAL(store_commands_to(QString)), this, SLOT(store_custom_commands(QString)));
 
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {
@@ -3136,7 +3158,6 @@ void MainWindow::open_external_link(const QString& link)
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
 #if 1
-    /// TODO: Test move active window (name) to
     QDockWidget* dock = nullptr;
     auto focus = focusWidget();
     QList<QDockWidget *> dock_widgets = findChildren<QDockWidget *>();
