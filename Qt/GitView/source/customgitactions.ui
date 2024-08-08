@@ -159,6 +159,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnLoadIcons">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="toolTip">
         <string>Open external icon folder</string>
        </property>
@@ -168,6 +174,40 @@
        <property name="icon">
         <iconset resource="resource.qrc">
          <normaloff>:/resource/24X24/folder-open.png</normaloff>:/resource/24X24/folder-open.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnStoreCustom">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/document-save.png</normaloff>:/resource/24X24/document-save.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnLoadCustom">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="resource.qrc">
+         <normaloff>:/resource/24X24/gnome-mime-text.png</normaloff>:/resource/24X24/gnome-mime-text.png</iconset>
        </property>
       </widget>
      </item>

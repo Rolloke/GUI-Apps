@@ -186,4 +186,29 @@ constexpr bool is_in_range(T min, T max, Tn... num)
     return ( ( min <= num && num <= max)  && ... );
 }
 
+template <typename T>
+constexpr T vmin(T a, T b)
+{
+    return std::min(a, b);
+}
+
+template <typename T, typename ... Tn>
+constexpr T vmin(T a, T b, Tn&&... args)
+{
+    return (a < b) ? vmin(a, std::forward<Tn>(args)...) : vmin(b, std::forward<Tn>(args)...);
+}
+
+template <typename T, typename _Compare>
+constexpr T value_of(_Compare comp, T a, T b)
+{
+    return comp(a, b) ? a : b;
+}
+
+template <typename T, typename _Compare, typename ... Tn>
+constexpr T value_of(_Compare comp, T a, T b, Tn&&... args)
+{
+    return (comp(a, b)) ? value_of(comp, a, std::forward<Tn>(args)...) : value_of(comp, b, std::forward<Tn>(args)...);
+}
+
+
 #endif // HELPER_H

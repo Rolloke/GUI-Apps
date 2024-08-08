@@ -27,6 +27,7 @@ class QAbstractButton;
 class binary_values_view;
 class QLabel;
 class code_browser;
+class QSettings;
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
@@ -272,6 +273,7 @@ private Q_SLOTS:
     void on_spinTabulator_valueChanged(int width);
     void comboTabPositionIndexChanged(int index);
     void on_comboOpenNewEditor_currentIndexChanged(int index);
+    void on_comboWordWrap_currentIndexChanged(int index);
     void setFontForViews(int);
 
     void showDockedWidget(QWidget* widget, bool show=true);
@@ -325,16 +327,19 @@ private Q_SLOTS:
     void move_active_window_to(FirstTab::e tab, QDockWidget *dock);
     void open_external_link(const QString& link);
 
-    void on_comboWordWrap_currentIndexChanged(int index);
 
 public Q_SLOTS:
     void initCustomAction(QAction* fAction);
     void updateSelectedLanguage(const QString&);
     void removeCmdToolBar(const QString &toolbar_name);
     void show_web_view(bool );
+    void read_custom_commands(const QString& file_name);
+    void store_custom_commands(const QString &file_name);
 
 private:
 
+    void read_commands(QSettings& fSettings);
+    void store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd> &commands = {});
     void     createDockWindows();
     void     addCmdToolBar(int i);
     QWidget* get_widget(QDockWidget*dock);
