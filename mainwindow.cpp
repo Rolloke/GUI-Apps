@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "qinputdialogex.h"
 
 #include <iostream>
 #include <QFile>
@@ -100,9 +99,7 @@ const QString download_favorite_cmd = QObject::tr(
             "<p>%1 Placeholder for favorites file name</p>");
 
 const QString download_kodi_raw_file = QObject::tr(
-            "<h3>Edit download kodi raw file path</h3>"
-///            "<p>Find in <a href=\"https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi\">Kodinerds</a></p>"
-            "<p>Find in page Kodinerds: <b>https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi</b><br>"
+            "<h3>Edit download file path for kodi raw files (m3u)</h3>"
             "Select kodi_xxx.m3u file, click on button Raw and copy the internet address</p>"
             "<pre>path to kodi raw file internet address</pre>"
             );
@@ -234,7 +231,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_play_name->setToolTip("Channel name");
     ui->statusBar->addPermanentWidget(m_play_name);
 
-
     connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
     connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
     connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
@@ -314,6 +310,8 @@ MainWindow::MainWindow(QWidget *parent) :
     select_index(mCurrentPlayIndex);
     display_play_status();
     m_play_name->setText(get_item_name(mCurrentPlayIndex));
+
+    ui->labelLinkToKodinerd->setOpenExternalLinks(true);
 
     update_command_states();
 }
@@ -1114,7 +1112,7 @@ void MainWindow::menu_option_edit_download_command()
 
 void MainWindow::menu_option_edit_download_m3u_file()
 {
-    QInputDialogEx dlg(this);
+    QInputDialog dlg(this);
     dlg.setInputMode(QInputDialog::TextInput);
     dlg.setLabelText(txt::download_kodi_raw_file);
     dlg.setTextValue(mDownloadKodiRawFilePath);
@@ -1124,13 +1122,6 @@ void MainWindow::menu_option_edit_download_m3u_file()
         mDownloadKodiRawFilePath = dlg.textValue();
         update_command_states();
     }
-
-//    QString text = QInputDialog::getText(this, windowTitle(), txt::download_kodi_raw_file, QLineEdit::Normal, mDownloadKodiRawFilePath);
-//    if (text.size())
-//    {
-//        mDownloadKodiRawFilePath = text;
-//        update_command_states();
-//    }
 }
 
 void MainWindow::add_button_to_menue(QMenu*menu, QPushButton* button)
