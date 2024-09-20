@@ -14,7 +14,7 @@
    <string>Raspi Kodi Media List</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resource/resource.qrc">
+   <iconset>
     <normaloff>:/applications-multimedia.png</normaloff>:/applications-multimedia.png</iconset>
   </property>
   <property name="locale">
@@ -281,6 +281,16 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="labelLinkToKodinerd">
+          <property name="toolTip">
+           <string>Open github page &lt;b&gt;Kodinerds&lt;/b&gt; to find raw url to download raw m3u-file for radio or tv station lists</string>
+          </property>
+          <property name="text">
+           <string>&lt;p&gt; Open &lt;a href=&quot;https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi&quot;&gt;Kodinerds &lt;/a&gt;&lt;/p&gt;</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -530,6 +540,9 @@
    <property name="text">
     <string>Edit Download Path for m3u Files ..</string>
    </property>
+   <property name="statusTip">
+    <string>Edit the path to the m3u-file download location</string>
+   </property>
   </action>
   <action name="actionDownload_Kodi_Raw_list">
    <property name="text">
@@ -541,8 +554,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resource/resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -27,11 +27,9 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-        qinputdialogex.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    qinputdialogex.h
+HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
