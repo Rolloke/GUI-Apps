@@ -18,6 +18,7 @@
 #include <QMessageBox>
 
 /// TODO: implement custom List for Textparamters
+/// std::map<name, parameter>
 using namespace git;
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)

@@ -8,7 +8,6 @@
 using namespace std;
 using namespace git;
 
-
 void MainWindow::call_git_branch_command()
 {
     const QAction*     action               = qobject_cast<QAction *>(sender());
