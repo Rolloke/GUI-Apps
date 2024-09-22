@@ -329,7 +329,7 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
 void QHistoryTreeWidget::insertFileNames()
 {
     const auto selected_items = selectedItems();
-    if (   selected_items.count() == 2
+    if (   selected_items.count() == History::Diff::two_commits
         && getItemLevel(selected_items[0]) == Level::Log
         && getItemLevel(selected_items[1]) == Level::Log)
     {
@@ -371,7 +371,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
     auto child_item    = parent_item->child(child);
     if (child_item && !child_item->isHidden())
     {
-        const bool diff_over_one_step = second_child == -1;
+        const bool diff_over_one_step = second_child == History::Diff::to_next_commit;
         Type type(child_item->data(History::Column::Commit, History::role(History::Entry::Type)).toUInt());
         if ((!child_item->childCount() || !diff_over_one_step) && !type.is(Type::File))
         {
@@ -379,7 +379,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
             {
                 second_child = child + 1;
             }
-            auto second_item = parent_item->child(second_child);
+            QTreeWidgetItem* second_item = (second_child == History::Diff::to_current) ? nullptr : parent_item->child(second_child);
             QString git_cmd;
             if (second_item)
             {
@@ -431,17 +431,18 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
             if (!error)
             {
                 TRACEX(Logger::to_browser, git_cmd);
-                if (!diff_over_one_step && second_item)
+                if (!diff_over_one_step)
                 {
-                    QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_item->text(History::Column::Filename);
+                    QString second_name = second_item != 0 ? second_item->text(History::Column::Filename) : "current";
+                    QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_name;
                     QTreeWidgetItem* new_child_item = new QTreeWidgetItem({compared_items});
                     parent_item->insertChild(child, new_child_item);
                     for (int role_entry=0; role_entry < History::Entry::NoOfEntries; ++role_entry)
                     {
                         int role = History::role(static_cast<History::Entry::e>(role_entry));
                         QString sep = (role_entry == History::Entry::CommitHash) ? " " : " <-> ";
-                        QString role_text = child_item->data(History::Column::Commit, role).toString() + sep +
-                                           second_item->data(History::Column::Commit, role).toString();
+                        QString role_text = child_item->data(History::Column::Commit, role).toString() +
+                                           (second_item ? (sep + second_item->data(History::Column::Commit, role).toString()) : "");
                         new_child_item->setData(History::Column::Commit, role, QVariant(role_text));
                     }
                     Type type(Type::Folder);

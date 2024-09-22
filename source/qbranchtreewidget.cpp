@@ -70,13 +70,13 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
-    aActionList.getAction(Cmd::DiffOfTwoBranches)->setEnabled(selectedItems().count() == 2);
+    aActionList.getAction(Cmd::DiffOfTwoBranches)->setEnabled(is_any_equal_to(selectedItems().count(), 1, 2));
     menu.exec(mapToGlobal(pos) + menu_offset);
 
     mSelectedItem = nullptr;
 }
 
-/// TODO: test diff two branches
+/// TODO: implement merge branch to current branch
 /// TODO: implement merge two branches
 /// also remote branches
 /// drag and drop?
@@ -92,6 +92,12 @@ void QBranchTreeWidget::diff_of_two_branches()
         {
             Q_EMIT insertFileNames(parent, child1, child2);
         }
+    }
+    if (selected.count() == 1)
+    {
+        QTreeWidgetItem* parent = selected[0]->parent();
+        int child1 = parent->indexOfChild(selected[0]);
+        Q_EMIT insertFileNames(parent, child1, History::Diff::to_current);
     }
 }
 

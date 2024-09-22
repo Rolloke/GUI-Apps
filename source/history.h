@@ -62,6 +62,12 @@ struct History
         GitDiffCommand
     }; };
 
+    struct Diff { enum e
+    {
+        two_commits = 2,
+        to_next_commit = -1,
+        to_current = -2
+    }; };
     static int role(Entry::e aEntry);
     static const char* name(Entry::e aEntry);
     static void parse(const QString& aText, QVector<QStringList>& aList);
