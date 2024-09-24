@@ -19,6 +19,9 @@
 
 /// TODO: implement custom List for Textparamters
 /// std::map<name, parameter>
+/// TODO: Show Parameter of a Command without execution in Lineedit Execute
+/// Make this dialog modal to select item in source tree
+
 using namespace git;
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)
