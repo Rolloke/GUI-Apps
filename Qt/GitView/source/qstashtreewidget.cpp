@@ -63,7 +63,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
             if (new_tree_root_item)
             {
                 items_inserted = true;
-                git_command = tr("git -C %1 stash show %2").arg(git_root_path, stash_no);
+                git_command = tr("git -C %1 stash show --name-only %2").arg(git_root_path, stash_no);
                 result = execute(git_command, result_string);
                 if (result != -1)
                 {
@@ -71,12 +71,15 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
                     for (const QString& item : shown_items)
                     {
                         QStringList item_parts = item.split('|');
-                        if (item_parts.size() >= 2)
+                        if (item_parts.size() > 0 && item_parts[0].size() > 0)
                         {
                             QTreeWidgetItem* new_child_item = new QTreeWidgetItem();
                             new_tree_root_item->addChild(new_child_item);
                             new_child_item->setText(Column::Text, root_path.relativeFilePath(item_parts[0].trimmed()));
-                            new_child_item->setText(Column::Description, item_parts[1].trimmed());
+                            if (item_parts.size() > 1)
+                            {
+                                new_child_item->setText(Column::Description, item_parts[1].trimmed());
+                            }
                         }
                     }
                 }
