@@ -343,6 +343,7 @@ private:
     void     createDockWindows();
     void     addCmdToolBar(int i);
     QWidget* get_widget(QDockWidget*dock);
+    void init_miscelaneous_items(bool load=true);
     bool     mDockedWidgetMinMaxButtons;
 
     Ui::MainWindow*       ui;
@@ -362,7 +363,8 @@ private:
 #endif
     QSharedPointer<code_browser> mBackgroundTextView;
 
-    string2bool_map       mMergeTools;
+    string2bool_map         mMergeTools;
+    string2miscelaneous_map mMiscelaneousItems;
     std::vector<QToolBar*> mToolBars;
     struct tree_find_properties
     {

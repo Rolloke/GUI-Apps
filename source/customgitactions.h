@@ -25,6 +25,7 @@ class CustomGitActions : public QDialog
             Icons,
             ExternalIcons,
             MergeTool,
+            Miscelaneous,
             MenuSrcTree,
             MenuEmptySrcTree,
             MenuGraphicView,
@@ -64,11 +65,13 @@ class CustomGitActions : public QDialog
     friend class ActionItemModel;
 
 public:
-    explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent = 0);
+    explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, string2miscelaneous_map &aMiscItems, QWidget *parent = 0);
     ~CustomGitActions();
     bool isMergeToolsChanged();
+    bool isMiscelaneousItemChanged();
     bool mExperimental;
     QString mExternalIconFiles;
+    void display_command_text(const QString& cmd);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -97,7 +100,6 @@ private Q_SLOTS:
     void on_tableViewVarious_customContextMenuRequested(const QPoint &pos);
     void on_btnLoadIcons_clicked();
     void on_btnHelp_clicked();
-    void on_btnExecute_clicked();
     void on_btnAddCommand_clicked();
     void on_btnFind_clicked();
     void tableViewActions_header_clicked(int index);
@@ -107,9 +109,11 @@ private Q_SLOTS:
 private:
     void initListIcons(VariousListIndex::e aIndex, QString fPath = ":/resource/24X24/");
     void initListMergeTool();
+    void initListMiscelaneous();
     void initMenuList(const git::Cmd::tVector& aItems, const QString& aHeader);
     void insertCmdAction(ActionList::tActionMap::const_reference aItem, int & aRow);
     const QString& iconCheck(bool check);
+    QString iconValueType(const QVariant &variant, bool use_text);
     git::Cmd::tVector& getCmdVector(VariousListIndex::e aIndex);
     QString getVariousListHeader(VariousListIndex::e aIndex);
     QAction *set_tooltip(QAction*, const QString&);
@@ -121,9 +125,11 @@ private:
     Ui::CustomGitActions *ui;
     ActionList& mActionList;
     string2bool_map& mMergeTools;
+    string2miscelaneous_map& mMiscelaneousItems;
     QAbstractItemModel* mListModelActions;
     QAbstractItemModel* mListModelVarious;
     bool mInitialize;
+    bool mIsMiscelaneousItemChanged;
     QBitArray mMergeToolsState;
     int       mSearchColumn;
     int       mSearchRowStart;

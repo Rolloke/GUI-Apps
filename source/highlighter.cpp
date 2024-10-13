@@ -396,6 +396,7 @@ void Highlighter::Language::invokeHighlighterDlg()
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type5]);
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type6]);
         SET_FRIENDLY_NAME_MAP_ITEM(list, mKeywordFormat[type7]);
+        mLanguages.clear();
     }
 }
 
