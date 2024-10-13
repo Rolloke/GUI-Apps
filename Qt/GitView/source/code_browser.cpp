@@ -380,8 +380,9 @@ void code_browser::changeSelection(selection command)
         }
         if (text.size())
         {
-            text_cursor.removeSelectedText();
-            insertPlainText(text);
+            text_cursor.beginEditBlock();
+            text_cursor.insertText(text);
+            text_cursor.endEditBlock();
         }
     }
 }

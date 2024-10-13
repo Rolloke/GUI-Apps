@@ -93,6 +93,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mStylePath( "/opt/tools/git_view/style.qss")
     #ifdef __linux__
     , mFileCopyMimeType("x-special/mate-copied-files")
+    /// x-special/mate-copied-files
+    /// x-special/mate-clipboard
+    /// x-special/nautilus-copied-files
+    /// x-special/nautilus-clipboard
+    /// x-special/gnome-copied-files
+    /// x-special/gnome-clipboard
+    /// use-legacy-clipboard
     , mExternalFileOpenCmd("xdg-open")
     #else
     , mFileCopyMimeType("")
@@ -108,19 +115,12 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mBranchClosedHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-closed.png")
     , mBranchOpenHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-open.png")
 {
-    /// x-special/mate-copied-files
-    /// x-special/mate-clipboard
-    /// x-special/nautilus-copied-files
-    /// x-special/nautilus-clipboard
-    /// x-special/gnome-copied-files
-    /// x-special/gnome-clipboard
-    /// use-legacy-clipboard
+    init_miscelaneous_items();
 
     ui->setupUi(this);
     createDockWindows();
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
-
 
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
     QObject::connect(this, SIGNAL(doWork(QVariant)), &mWorker, SLOT(doWork(QVariant)));
@@ -503,9 +503,9 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
         STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
         STORE_PTR(fSettings, ui->comboFindBox, currentIndex);
-        STORE_STR(fSettings, mFindGrep);
-        STORE_STR(fSettings, mFindFsrc);
-        STORE_STR(fSettings, mCompare2Items);
+        STORE_STR_IF(fSettings, mFindGrep);
+        STORE_STR_IF(fSettings, mFindFsrc);
+        STORE_STR_IF(fSettings, mCompare2Items);
     }
     fSettings.endGroup();
 
@@ -513,11 +513,11 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupView);
     {
-        STORE_STR(fSettings, mBranchHasSiblingsNotAdjoins);
-        STORE_STR(fSettings, mBranchHasSiblingsAdjoins);
-        STORE_STR(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins);
-        STORE_STR(fSettings, mBranchClosedHasChildrenHasSibling);
-        STORE_STR(fSettings, mBranchOpenHasChildrenHasSibling);
+        STORE_STR_IF(fSettings, mBranchHasSiblingsNotAdjoins);
+        STORE_STR_IF(fSettings, mBranchHasSiblingsAdjoins);
+        STORE_STR_IF(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins);
+        STORE_STR_IF(fSettings, mBranchClosedHasChildrenHasSibling);
+        STORE_STR_IF(fSettings, mBranchOpenHasChildrenHasSibling);
 
         STORE_PTR(fSettings, ui->ckHideEmptyParent, isChecked);
         STORE_STR(fSettings,  Type::mShort);
@@ -532,10 +532,10 @@ MainWindow::~MainWindow()
             STORE_STR(fSettings, fBinaryDisplayColumns);
         }
 
-        STORE_STR(fSettings, mWarnOpenFileSize);
-        STORE_STR(fSettings, mFileCopyMimeType);
+        if (mWarnOpenFileSize) STORE_STR(fSettings, mWarnOpenFileSize);
+        STORE_STR_IF(fSettings, mFileCopyMimeType);
         STORE_STR(fSettings, mExternalIconFiles);
-        STORE_STR(fSettings, mExternalFileOpenCmd);
+        STORE_STR_IF(fSettings, mExternalFileOpenCmd);
         STORE_STR(fSettings, mDefaultSourcePath);
         QString fTypeFormatFilesLocation = mBinaryValuesView->m_type_format_files_location;
         STORE_STR(fSettings, fTypeFormatFilesLocation);
@@ -559,7 +559,7 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings, fWindowState);
         STORE_STR(fSettings, mDockedWidgetMinMaxButtons);
 
-        STORE_STR(fSettings, mStylePath);
+        STORE_STR_IF(fSettings, mStylePath);
         bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
         STORE_STR(fSettings, fUseSourceTreeCheckboxes);
         STORE_PTR(fSettings, ui->ckExperimental, isChecked);
@@ -827,8 +827,6 @@ void MainWindow::createDockWindows()
     mTextRenderView->setReadOnly(true);
 #endif
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
-
-
     dock->setVisible(false);
 
     // history tree
@@ -1047,6 +1045,58 @@ QWidget* MainWindow::get_widget(QDockWidget*dock)
         child_widget = splitter->widget(0);
     }
     return child_widget;
+}
+
+void MainWindow::init_miscelaneous_items(bool load)
+{
+    /// TODO: implement Severity as Textparamters
+    /// * SeverHlp=_fsc____acewnidt
+    /// * Severity=1000000000000000
+
+    constexpr char compare_2_items[]                                = "Compare two Items";
+    constexpr char find_grep[]                                      = "Path of tool: grep";
+    constexpr char find_fsrc[]                                      = "Path of tool: fsrc";
+    constexpr char external_file_open_cmd[]                         = "System command open files";
+    constexpr char file_copy_mime_type[]                            = "Mime type for file copy";
+    constexpr char style_path[]                                     = "Path to style qss file";
+    constexpr char warn_open_file_fize[]                            = "Warn size for open file (bytes)";
+    constexpr char branch_has_siblings_not_adjoins[]                = "Icon: HasSiblingsNotAdjoins";
+    constexpr char branch_has_siblings_adjoins[]                    = "Icon: HasSiblingsAdjoins";
+    constexpr char branch_has_children_not_has_siblings_adjoins[]   = "Icon: HasChildrenNotHasSiblingsAdjoins";
+    constexpr char branch_closed_has_children_has_sibling[]         = "Icon: ClosedHasChildrenHasSibling";
+    constexpr char branch_open_has_children_has_sibling[]           = "Icon: OpenHasChildrenHasSibling";
+
+    if (load)
+    {
+        mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
+        mMiscelaneousItems[find_grep]                                    = QVariant(mFindGrep);
+        mMiscelaneousItems[find_fsrc]                                    = QVariant(mFindFsrc);
+        mMiscelaneousItems[external_file_open_cmd]                       = QVariant(mExternalFileOpenCmd);
+        mMiscelaneousItems[file_copy_mime_type]                          = QVariant(mFileCopyMimeType);
+        mMiscelaneousItems[style_path]                                   = QVariant(mStylePath);
+        mMiscelaneousItems[warn_open_file_fize]                          = QVariant(mWarnOpenFileSize);
+        mMiscelaneousItems[branch_has_siblings_not_adjoins]              = QVariant(mBranchHasSiblingsNotAdjoins);
+        mMiscelaneousItems[branch_has_siblings_adjoins]                  = QVariant(mBranchHasSiblingsAdjoins);
+        mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
+        mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
+        mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
+    }
+    else
+    {
+        mCompare2Items                          = mMiscelaneousItems[compare_2_items].toString();
+        mFindGrep                               = mMiscelaneousItems[find_grep].toString();
+        mFindFsrc                               = mMiscelaneousItems[find_fsrc].toString();
+        mExternalFileOpenCmd                    = mMiscelaneousItems[external_file_open_cmd].toString();
+        mFileCopyMimeType                       = mMiscelaneousItems[file_copy_mime_type].toString();
+        mStylePath                              = mMiscelaneousItems[style_path].toString();
+        mWarnOpenFileSize                       = mMiscelaneousItems[warn_open_file_fize].toLongLong();
+        mBranchHasSiblingsNotAdjoins            = mMiscelaneousItems[branch_has_siblings_not_adjoins].toString();
+        mBranchHasSiblingsAdjoins               = mMiscelaneousItems[branch_has_siblings_adjoins].toString();
+        mBranchHasChildrenNotHasSiblingsAdjoins = mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins].toString();
+        mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
+        mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
+    }
+
 }
 
 void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
@@ -2298,7 +2348,7 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 
 void MainWindow::performCustomGitActionSettings()
 {
-    CustomGitActions edit_custom_git_actions(mActions, mMergeTools, this);
+    CustomGitActions edit_custom_git_actions(mActions, mMergeTools, mMiscelaneousItems, this);
     edit_custom_git_actions.mExperimental = ui->ckExperimental->isChecked();
     edit_custom_git_actions.mExternalIconFiles = mExternalIconFiles;
 
@@ -2307,6 +2357,9 @@ void MainWindow::performCustomGitActionSettings()
     connect(&edit_custom_git_actions, SIGNAL(read_commands_from(QString)), this, SLOT(read_custom_commands(QString)));
     connect(&edit_custom_git_actions, SIGNAL(store_commands_to(QString)), this, SLOT(store_custom_commands(QString)));
 
+    auto null_function  = g_test_command_only;
+    g_test_command_only = boost::bind(&CustomGitActions::display_command_text, &edit_custom_git_actions, _1);
+
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {
         if (edit_custom_git_actions.isMergeToolsChanged())
@@ -2314,6 +2367,11 @@ void MainWindow::performCustomGitActionSettings()
             initMergeTools();
         }
         mExternalIconFiles = edit_custom_git_actions.mExternalIconFiles;
+
+        if (edit_custom_git_actions.isMiscelaneousItemChanged())
+        {
+            init_miscelaneous_items(false);
+        }
     }
 
     for (unsigned int i=0; i < Cmd::mToolbars.size(); ++i)
@@ -2328,6 +2386,8 @@ void MainWindow::performCustomGitActionSettings()
             addCmdToolBar(i);
         }
     }
+
+    swap(g_test_command_only, null_function);
 }
 
 void MainWindow::invoke_git_merge_dialog()
@@ -2379,7 +2439,6 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     } break;
     case UserStyle::User:
     {
-        /// TODO: find a good dark style
         QFile f(mStylePath);
         if (!f.exists())
         {

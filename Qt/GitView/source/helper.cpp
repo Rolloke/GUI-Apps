@@ -411,6 +411,8 @@ int win_system(const char *command, bool hide)
 }
 #endif
 
+boost::function<void (const QString &)> g_test_command_only;
+
 /// @brief executes a system command and returns result string
 /// @param command the command to be executed
 /// @param aResultText result of the command
@@ -419,6 +421,13 @@ int win_system(const char *command, bool hide)
 /// @returns success of command execution (0 = success, !0 = error)
 int execute(const QString& command, QString& aResultText, bool hide, boost::function<void (const QString &)> emit_file_path)
 {
+    if (g_test_command_only)
+    {
+        g_test_command_only(command);
+        aResultText = " -> Testing command only!";
+        return -1;
+    }
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     static QRandomGenerator rg(123);
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(rg.generate()) + "_result.tmp";
@@ -435,6 +444,7 @@ int execute(const QString& command, QString& aResultText, bool hide, boost::func
     {
         emit_file_path(fTempResultFileNameAndPath);
     }
+
 
 #ifdef _WIN32
     auto fResult = win_system(system_cmd.toStdString().c_str(), hide);

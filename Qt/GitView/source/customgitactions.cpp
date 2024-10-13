@@ -17,9 +17,10 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 
-/// TODO: implement custom List for Textparamters
-/// std::map<name, parameter>
-/// TODO: Show Parameter of a Command without execution in Lineedit Execute
+
+
+/// TODO: Show Parameter of a Command in Lineedit Execute without execution
+/// Function execute with signal slot mechanism to redirect command text
 /// Make this dialog modal to select item in source tree
 
 using namespace git;
@@ -49,14 +50,16 @@ CustomGitActions::VariousListIndex::e CustomGitActions::VariousListIndex::cast(i
     return static_cast<CustomGitActions::VariousListIndex::e>(index);
 }
 
-CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, QWidget *parent) :
+CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, string2miscelaneous_map&aMiscItems, QWidget *parent) :
     QDialog(parent)
 ,   ui(new Ui::CustomGitActions)
 ,   mActionList(aList)
 ,   mMergeTools(aMergeTools)
+,   mMiscelaneousItems(aMiscItems)
 ,   mListModelActions(nullptr)
 ,   mListModelVarious(nullptr)
 ,   mInitialize(false)
+,   mIsMiscelaneousItemChanged(false)
 ,   mMergeToolsState(aMergeTools.size())
 ,   mSearchColumn(ActionsTable::Name)
 ,   mSearchRowStart(-1)
@@ -72,7 +75,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     }
 
     QStringList fColumnName  = { tr("ID"), tr("Icon"), tr("Command or status text"), tr("Name"), tr("Shortcut"), tr("Message box text")};
-    mActionListColumnWidth   = {  0.055  ,    0.055  ,      0.25    ,    0.25   ,      0.1      ,        0.25           };
+    mActionListColumnWidth   = {  0.055  ,    0.055  ,             0.25            ,    0.25   ,      0.1      ,        0.25           };
 
     assert(fColumnName.size()            == ActionsTable::Last);
     assert(mActionListColumnWidth.size() == ActionsTable::Last);
@@ -151,6 +154,11 @@ bool CustomGitActions::isMergeToolsChanged()
         }
     }
     return false;
+}
+
+bool CustomGitActions::isMiscelaneousItemChanged()
+{
+    return mIsMiscelaneousItemChanged;
 }
 
 
@@ -277,6 +285,9 @@ void CustomGitActions::on_comboBoxVarious_currentIndexChanged(int aIndex)
     case VariousListIndex::MergeTool:
         initListMergeTool();
         break;
+    case VariousListIndex::Miscelaneous:
+        initListMiscelaneous();
+        break;
     default:
         if (is_in_range(INT(VariousListIndex::FirstCmds), INT(getVariousListSize() - 1), INT(fIndex)))
         {
@@ -301,6 +312,7 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
     case VariousListIndex::MenuFindTextTree:    return Cmd::mContextMenuFindTextTree;
     case VariousListIndex::MergeTool:
+    case VariousListIndex::Miscelaneous:
     case VariousListIndex::Icons:
     case VariousListIndex::ExternalIcons:
         break;
@@ -336,6 +348,7 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
     case VariousListIndex::MenuFindTextTree:    return tr("Context Menu Find Text");
     case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
+    case VariousListIndex::Miscelaneous:        return tr("Miscelaneous settings");
     default: return Cmd::mToolbarNames[get_toolbar_index(aIndex)];
     }
     return "";
@@ -435,6 +448,33 @@ const QString& CustomGitActions::iconCheck(bool check)
     return check ? enabled : disabled;
 }
 
+QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
+{
+    static const QString text_edit   { ":/resource/24X24/text-x-log.png" };
+    static const QString number_edit { ":/resource/24X24/emblem-generic.png" };
+    static const QString invalid     { ":/resource/24X24/dialog-error.png" };
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    switch (variant.typeId())
+#else
+    switch (variant.type())
+#endif
+    {
+    case QVariant::String:
+    {
+        if (use_text)
+        {
+            return variant.toString();
+        }
+        return text_edit;
+    }
+    case QVariant::Int:
+    case QVariant::LongLong: return number_edit;
+    default:break;
+    }
+    return invalid;
+}
+
 void CustomGitActions::initListMergeTool()
 {
     mInitialize = true;
@@ -447,6 +487,24 @@ void CustomGitActions::initListMergeTool()
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
         mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(iconCheck(name.value())), Qt::DecorationRole);
         mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), name.key(), Qt::EditRole);
+        ++fRow;
+    }
+    mInitialize = false;
+}
+
+void CustomGitActions::initListMiscelaneous()
+{
+    mInitialize = true;
+    mListModelVarious->setHeaderData(VariousHeader::Icon, Qt::Horizontal, tr("Edit"));
+    mListModelVarious->setHeaderData(VariousHeader::Name, Qt::Horizontal, tr("Miscelaneous item"));
+    mListModelVarious->removeRows(0, mListModelVarious->rowCount());
+    int fRow = 0;
+    for (auto item = mMiscelaneousItems.begin(); item != mMiscelaneousItems.end(); ++item)
+    {
+        mListModelVarious->insertRows(fRow, 1, QModelIndex());
+
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(iconValueType(item.value(), item.key().indexOf("Icon:") != -1)), Qt::DecorationRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), item.key(), Qt::EditRole);
         ++fRow;
     }
     mInitialize = false;
@@ -665,6 +723,46 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
             auto currentItem = std::next(mMergeTools.begin(), index.row());
             currentItem.value() = !currentItem.value();
             mListModelVarious->setData(index, QIcon(iconCheck(currentItem.value())), Qt::DecorationRole);
+        }
+    }
+    else if (ui->comboBoxVarious->currentIndex() == VariousListIndex::Miscelaneous)
+    {
+        enableButtons(0);
+        if (index.column() == 0 && is_in_range(0, INT(mMiscelaneousItems.size()-1), index.row()))
+        {
+            auto currentItem = std::next(mMiscelaneousItems.begin(), index.row());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            switch(currentItem.value().typeId())
+#else
+            switch(currentItem.value().type())
+#endif
+            {
+            case QVariant::String:
+            {
+                bool ok;
+                QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
+                if (ok)
+                {
+                    currentItem.value() = QVariant(text);
+                    mIsMiscelaneousItemChanged =true;
+                }
+            }break;
+            case QVariant::LongLong:
+            {
+                bool ok = false;
+                QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
+                if (ok)
+                {
+                    auto value = QVariant(text.toLongLong(&ok));
+                    if (ok)
+                    {
+                        currentItem.value() = value;
+                        mIsMiscelaneousItemChanged =true;
+                    }
+                }
+            }break;
+            default:break;
+            }
         }
     }
     else
@@ -1094,13 +1192,6 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
     }
 }
 
-void CustomGitActions::on_btnExecute_clicked()
-{
-    QAction* action = mActionList.getAction(Cmd::CustomTestCommand);
-    action->setStatusTip(ui->edtCommand->text());
-    action->trigger();
-}
-
 void CustomGitActions::on_btnAddCommand_clicked()
 {
     add_command(ui->edtCommand->text());
@@ -1143,4 +1234,10 @@ void CustomGitActions::on_btnLoadCustom_clicked()
         emit read_commands_from(fSourcePath);
     }
 }
+
+void CustomGitActions::display_command_text(const QString& cmd)
+{
+    ui->edtCommand->setText(cmd);
+}
+
 

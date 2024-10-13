@@ -30,6 +30,7 @@ extern QPoint menu_offset;
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
 #define STORE_STR(SETTING, ITEM)        SETTING.setValue(getSettingsName(#ITEM), ITEM)
+#define STORE_STR_IF(SETTING, ITEM) if (ITEM.size())    SETTING.setValue(getSettingsName(#ITEM), ITEM);
 #define STORE_STRFN(SETTING, ITEM, NAME, FUNC) SETTING.setValue(NAME, FUNC(ITEM))
 #define STORE_STRF(SETTING, ITEM, FUNC) STORE_STRFN(SETTING, ITEM, getSettingsName(#ITEM), FUNC)
 
@@ -71,6 +72,8 @@ enum error
     ErrorNumberInErrno = -1,
     NoError = 0
 };
+
+extern boost::function<void (const QString &)> g_test_command_only;
 
 int execute(const QString& command, QString& aResultText, bool hide=true, boost::function<void (const QString &)> emit_file_path = {});
 

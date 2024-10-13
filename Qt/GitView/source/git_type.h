@@ -6,9 +6,11 @@
 #include <unordered_map>
 
 #include <QString>
+#include <QVariant>
 
 class QFileInfo;
 typedef QMap<QString, bool> string2bool_map;
+typedef QMap<QString, QVariant> string2miscelaneous_map;
 
 namespace git
 {
