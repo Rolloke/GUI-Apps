@@ -178,6 +178,27 @@ bool Logger::isSeverityActive(eSeverity aSeverity)
     return (aSeverity & mSeverity) != 0;
 }
 
+const char *Logger::getName(eSeverity aSeverity)
+{
+    switch (aSeverity)
+    {
+    case trace:       return "Trace";
+    case debug:       return "Debug";
+    case info:        return "Info";
+    case notice:      return "Notice";
+    case warning:     return "Warning";
+    case error:       return "Error";
+    case critical:    return "Critical";
+    case alert:       return "Alert";
+    case emergency:   return "Emergency";
+    case to_console:  return "Log to console";
+    case to_syslog:   return "Log to syslog";
+    case to_function: return "Log to function";
+    case to_browser:  return "Log to browser";
+    default: return "Invalid";
+    }
+}
+
 void Logger::setLogFunction(const tLogfunction& aLogFunc)
 {
     setSeverity(to_function, static_cast<bool>(aLogFunc));

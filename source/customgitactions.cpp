@@ -746,7 +746,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                     currentItem.value() = QVariant(text);
                     mIsMiscelaneousItemChanged =true;
                 }
-            }break;
+            } break;
             case QVariant::LongLong:
             {
                 bool ok = false;
@@ -760,7 +760,30 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                         mIsMiscelaneousItemChanged =true;
                     }
                 }
-            }break;
+            } break;
+            case QVariant::Map:
+            {
+                QMenu menu(this);
+                QActionGroup severity_group(this);
+                severity_group.setExclusive(false);
+                QMap<QString,QVariant> severity_map = currentItem.value().toMap();
+                for (auto severity = severity_map.begin(); severity != severity_map.end(); ++severity)
+                {
+                    auto action = severity_group.addAction(severity.key());
+                    action->setCheckable(true);
+                    action->setChecked(severity.value().toBool());
+                    menu.addAction(action);
+                }
+                if (menu.exec(ui->tableViewVarious->mapToGlobal(ui->tableViewVarious->rect().center())))
+                {
+                    mIsMiscelaneousItemChanged =true;
+                }
+                for (const QAction* action : severity_group.actions())
+                {
+                    severity_map[action->text()] = QVariant(action->isChecked());
+                }
+                currentItem.value() = severity_map;
+            } break;
             default:break;
             }
         }

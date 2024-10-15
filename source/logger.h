@@ -34,6 +34,7 @@ public:
     static void setSeverity(std::uint32_t aFlag, bool aSet);
     static std::uint32_t getSeverity();
     static bool isSeverityActive(eSeverity aSeverity);
+    static const char* getName(eSeverity aSeverity);
     static void printDebug (eSeverity aSeverity, const char * format, ... );
 	static void setLogFunction(const tLogfunction& aFunc);
     static void setTextToBrowserFunction(const tLogfunction& aFunc);
