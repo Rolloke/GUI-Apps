@@ -115,8 +115,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     , mBranchClosedHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-closed.png")
     , mBranchOpenHasChildrenHasSibling(":/resource/24X24/stylesheet-branch-open.png")
 {
-    init_miscelaneous_items();
-
     ui->setupUi(this);
     createDockWindows();
 
@@ -450,7 +448,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     m_initializing_elements = false;
     TRACEX(Logger::info, windowTitle() << " Started");
-
+    init_miscelaneous_items();
 }
 
 void MainWindow::update_widget_states(QWidget *widget)
@@ -602,7 +600,7 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupLogging);
     {
-        QString fSeverHlp = "_fsc____acewnidt";
+        QString fSeverHlp = "_fscb___acewnidt";
         STORE_STR(fSettings, fSeverHlp);
         QString fSeverity = QString::number(Logger::getSeverity(), 2);
         STORE_STR(fSettings, fSeverity);
@@ -1060,6 +1058,7 @@ void MainWindow::init_miscelaneous_items(bool load)
     constexpr char file_copy_mime_type[]                            = "Mime type for file copy";
     constexpr char style_path[]                                     = "Path to style qss file";
     constexpr char warn_open_file_fize[]                            = "Warn size for open file (bytes)";
+    constexpr char log_severity[]                                   = "Logging Severity";
     constexpr char branch_has_siblings_not_adjoins[]                = "Icon: HasSiblingsNotAdjoins";
     constexpr char branch_has_siblings_adjoins[]                    = "Icon: HasSiblingsAdjoins";
     constexpr char branch_has_children_not_has_siblings_adjoins[]   = "Icon: HasChildrenNotHasSiblingsAdjoins";
@@ -1068,6 +1067,13 @@ void MainWindow::init_miscelaneous_items(bool load)
 
     if (load)
     {
+        std::uint32_t severity = Logger::getSeverity();
+        QMap<QString,QVariant> severity_map;
+        for (std::uint32_t bit=1; (bit & 0x0ffff); bit <<= 1)
+        {
+            severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))] = QVariant((severity & bit) != 0 ? true : false);
+        }
+        mMiscelaneousItems[log_severity]                                 = QVariant(severity_map);
         mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
         mMiscelaneousItems[find_grep]                                    = QVariant(mFindGrep);
         mMiscelaneousItems[find_fsrc]                                    = QVariant(mFindFsrc);
@@ -1080,9 +1086,16 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
+
     }
     else
     {
+        QMap<QString,QVariant> severity_map = mMiscelaneousItems[log_severity].toMap();
+        Logger::setSeverity(0xffff, false);
+        for (std::uint32_t bit = 1; (bit & 0xffff); bit <<= 1)
+        {
+            Logger::setSeverity(bit, severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))].toBool());
+        }
         mCompare2Items                          = mMiscelaneousItems[compare_2_items].toString();
         mFindGrep                               = mMiscelaneousItems[find_grep].toString();
         mFindFsrc                               = mMiscelaneousItems[find_fsrc].toString();
