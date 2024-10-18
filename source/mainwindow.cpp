@@ -200,13 +200,13 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     /// add status labels
     m_status_line_label = new QLabel("");
-    m_status_line_label->setToolTip("Line");
+    m_status_line_label->setToolTip(tr("Line"));
     ui->statusBar->addPermanentWidget(m_status_line_label);
     connect(ui->textBrowser, SIGNAL(line_changed(int)), m_status_line_label, SLOT(setNum(int)));
     connect(ui->tableBinaryView, &qbinarytableview::cursor_changed, [&] (int) { m_status_line_label->setText(""); });
 
     m_status_column_label = new QLabel("");
-    m_status_column_label->setToolTip("Column/Position");
+    m_status_column_label->setToolTip(tr("Column/Position"));
     ui->statusBar->addPermanentWidget(m_status_column_label);
     connect(ui->textBrowser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
     connect(ui->tableBinaryView, SIGNAL(cursor_changed(int)), m_status_column_label, SLOT(setNum(int)));
@@ -796,7 +796,7 @@ void MainWindow::createDockWindows()
     connect(dock, SIGNAL(signal_close(QDockWidgetX*,bool&)), this, SLOT(close_tree_view(QDockWidgetX*,bool&)));
     ui->comboFindBox->addItem(dock->windowTitle());
     ui->comboFindBox->addItem(tr("Go to line"));
-    ui->comboFindBox->addItem("Repository View");
+    ui->comboFindBox->addItem(tr("Repository View"));
     ui->verticalLayout_2->removeWidget(ui->textBrowser);
     first_tab = dock;
 
@@ -1047,23 +1047,21 @@ QWidget* MainWindow::get_widget(QDockWidget*dock)
 
 void MainWindow::init_miscelaneous_items(bool load)
 {
-    /// TODO: implement Severity as Textparamters
-    /// * SeverHlp=_fsc____acewnidt
-    /// * Severity=1000000000000000
+    static const QString compare_2_items                                = tr("Compare two Items");
+    static const QString find_grep                                      = tr("Path of tool: grep");
+    static const QString find_fsrc                                      = tr("Path of tool: fsrc");
+    static const QString external_file_open_cmd                         = tr("System command open files");
+    static const QString file_copy_mime_type                            = tr("Mime type for file copy");
+    static const QString style_path                                     = tr("Path to style qss file");
+    static const QString warn_open_file_fize                            = tr("Warn size for open file (bytes)");
+    static const QString log_severity                                   = tr("Logging Severity");
+    static const QString branch_has_siblings_not_adjoins                = tr("Icon: HasSiblingsNotAdjoins");
+    static const QString branch_has_siblings_adjoins                    = tr("Icon: HasSiblingsAdjoins");
+    static const QString branch_has_children_not_has_siblings_adjoins   = tr("Icon: HasChildrenNotHasSiblingsAdjoins");
+    static const QString branch_closed_has_children_has_sibling         = tr("Icon: ClosedHasChildrenHasSibling");
+    static const QString branch_open_has_children_has_sibling           = tr("Icon: OpenHasChildrenHasSibling");
 
-    constexpr char compare_2_items[]                                = "Compare two Items";
-    constexpr char find_grep[]                                      = "Path of tool: grep";
-    constexpr char find_fsrc[]                                      = "Path of tool: fsrc";
-    constexpr char external_file_open_cmd[]                         = "System command open files";
-    constexpr char file_copy_mime_type[]                            = "Mime type for file copy";
-    constexpr char style_path[]                                     = "Path to style qss file";
-    constexpr char warn_open_file_fize[]                            = "Warn size for open file (bytes)";
-    constexpr char log_severity[]                                   = "Logging Severity";
-    constexpr char branch_has_siblings_not_adjoins[]                = "Icon: HasSiblingsNotAdjoins";
-    constexpr char branch_has_siblings_adjoins[]                    = "Icon: HasSiblingsAdjoins";
-    constexpr char branch_has_children_not_has_siblings_adjoins[]   = "Icon: HasChildrenNotHasSiblingsAdjoins";
-    constexpr char branch_closed_has_children_has_sibling[]         = "Icon: ClosedHasChildrenHasSibling";
-    constexpr char branch_open_has_children_has_sibling[]           = "Icon: OpenHasChildrenHasSibling";
+    static const QString invalid_severity                               = Logger::getName(Logger::invalid);
 
     if (load)
     {
@@ -1073,6 +1071,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         {
             severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))] = QVariant((severity & bit) != 0 ? true : false);
         }
+        severity_map.remove(invalid_severity);
         mMiscelaneousItems[log_severity]                                 = QVariant(severity_map);
         mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
         mMiscelaneousItems[find_grep]                                    = QVariant(mFindGrep);
@@ -1086,7 +1085,6 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
-
     }
     else
     {
@@ -1096,6 +1094,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         {
             Logger::setSeverity(bit, severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))].toBool());
         }
+        severity_map.remove(invalid_severity);
         mCompare2Items                          = mMiscelaneousItems[compare_2_items].toString();
         mFindGrep                               = mMiscelaneousItems[find_grep].toString();
         mFindFsrc                               = mMiscelaneousItems[find_fsrc].toString();
@@ -1109,7 +1108,6 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
     }
-
 }
 
 void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
@@ -1427,6 +1425,10 @@ QVariant MainWindow::handleWorker(const QVariant& aData)
     if (aData.isValid())
     {
         auto data_map = aData.toMap();
+        if (data_map.contains(Worker::repository))
+        {
+            QDir::setCurrent(data_map[Worker::repository].toString());
+        }
         switch(static_cast<Work>(data_map[Worker::work].toInt()))
         {
         case Work::DetermineGitMergeTools:
@@ -1686,6 +1688,10 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             work_command = Work::AsynchroneousCommand;
         }
         QVariantMap workmap;
+        if (mContextMenuSourceTreeItem)
+        {
+            workmap.insert(Worker::repository, ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
+        }
         workmap.insert(Worker::command_id, INT(mActions.findID(action)));
         workmap.insert(Worker::command, command);
         workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());

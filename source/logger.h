@@ -25,6 +25,7 @@ public:
         critical    = 0x0040,
         alert       = 0x0080,
         emergency   = 0x0100,
+        invalid     = 0x0200,
         to_console  = 0x1000,
         to_syslog   = 0x2000,
         to_function = 0x4000,

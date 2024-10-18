@@ -1028,15 +1028,16 @@ void MainWindow::perform_custom_command()
             {
                 btnCloseText_clicked(Editor::Viewer);
             }
+            QString repository = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
             QString result_str;
-            git_command = tr(git_command.toStdString().c_str()).arg(ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
+            git_command = tr(git_command.toStdString().c_str()).arg(repository);
             QString cmd_option = get_git_command_option(type, command_flags, variant_list);
             if (cmd_option.size())
             {
                 git_command += cmd_option;
             }
 
-            int result = callMessageBox(message_box_text, "", ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem), false);
+            int result = callMessageBox(message_box_text, "", repository, false);
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
                 check_set_current_path(git_command);
@@ -1044,6 +1045,7 @@ void MainWindow::perform_custom_command()
                 {
                     mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
                     QVariantMap workmap;
+                    workmap.insert(Worker::repository, repository);
                     workmap.insert(Worker::command_id, mActions.findID(action));
                     workmap.insert(Worker::command, git_command);
                     workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
