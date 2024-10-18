@@ -9,7 +9,6 @@
 #include "logger.h"
 
 using namespace git;
-/// TODO: Test update tree after stash command
 
 QStashTreeWidget::QStashTreeWidget(QWidget *parent): QTreeWidget(parent)
 {

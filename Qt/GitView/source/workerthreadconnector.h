@@ -12,11 +12,12 @@ class Worker : public QObject
 
 public:
     static constexpr char command_id[] = "commandid";
-    static constexpr char command[] = "command";
-    static constexpr char result[]  = "result";
-    static constexpr char action[]  = "action";
-    static constexpr char flags[]   = "flags";
-    static constexpr char work[]    = "work";
+    static constexpr char command[]    = "command";
+    static constexpr char result[]     = "result";
+    static constexpr char action[]     = "action";
+    static constexpr char flags[]      = "flags";
+    static constexpr char work[]       = "work";
+    static constexpr char repository[] = "repository";
 
     Worker();
     friend class WorkerThreadConnector;
