@@ -4,7 +4,11 @@
 #include <QThread>
 #include <QVariant>
 
+#ifdef USE_BOOST
 #include <boost/function.hpp>
+#else
+#include <functional>
+#endif
 
 class Worker : public QObject
 {
@@ -43,8 +47,13 @@ public:
     WorkerThreadConnector(QObject*aParent);
     virtual ~WorkerThreadConnector();
 
+#ifdef USE_BOOST
     void setWorkerFunction(const boost::function< QVariant (const QVariant&) >& aFunc);
     void setMessageFunction(const boost::function< void (QVariant) >& aFunc);
+#else
+    void setWorkerFunction(const std::function< QVariant (const QVariant&) >& aFunc);
+    void setMessageFunction(const std::function< void (QVariant) >& aFunc);
+#endif
     bool isBusy();
     void setOnceBusy();
     void setAppendToBatch(bool append);
@@ -66,7 +75,11 @@ private:
     Worker* mWorker;
     QThread mWorkerThread;
     QString mCurrentCmdName;
+#ifdef USE_BOOST
     boost::function< void (const QVariant&) > mMessageFunction;
+#else
+    std::function< void (const QVariant&) > mMessageFunction;
+#endif
     bool    mAppendToBatch;
     QList<QVariant> mBatch;
 };

@@ -14,6 +14,7 @@ greaterThan(QT_MAJOR_VERSION, 5): QT += svgwidgets
 QT += webenginewidgets webchannel
 DEFINES += WEB_ENGINE=1
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 
@@ -30,7 +31,8 @@ unix:QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
-win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
+#win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
+#DEFINES += USE_BOOST=1
 
 SOURCES += main.cpp\
     binary_values_view.cpp \

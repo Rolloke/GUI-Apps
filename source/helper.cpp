@@ -21,7 +21,13 @@
 
 #include <fstream>
 #include <sstream>
+#ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
+#else
+/// what
+#include <cstring>
+#include <algorithm>
+#endif
 
 #include <map>
 
@@ -411,7 +417,11 @@ int win_system(const char *command, bool hide)
 }
 #endif
 
+#ifdef USE_BOOST
 boost::function<void (const QString &)> g_test_command_only;
+#else
+std::function<void (const QString &)> g_test_command_only;
+#endif
 
 /// @brief executes a system command and returns result string
 /// @param command the command to be executed
@@ -419,7 +429,11 @@ boost::function<void (const QString &)> g_test_command_only;
 /// @param hide hides the command console (only windows)
 /// @param emit_file_path emits the temp file path to gather result asynchroneously
 /// @returns success of command execution (0 = success, !0 = error)
+#ifdef USE_BOOST
 int execute(const QString& command, QString& aResultText, bool hide, boost::function<void (const QString &)> emit_file_path)
+#else
+int execute(const QString& command, QString& aResultText, bool hide, std::function<void (const QString &)> emit_file_path)
+#endif
 {
     if (g_test_command_only)
     {

@@ -92,6 +92,16 @@ const QString& ActionList::getTheme()
     return m_theme;
 }
 
+void ActionList::setIconLocation(const QString &icons)
+{
+    m_icon_location = icons;
+}
+
+const QString &ActionList::getIconLocation()
+{
+    return m_icon_location;
+}
+
 void ActionList::initActionIcons()
 {
 #ifdef __linux__
@@ -104,19 +114,18 @@ void ActionList::initActionIcons()
 /// - mate/24x24
 /// Command to determine theme returns e.g. 'Mint-Y'
 /// gsettings get org.gnome.desktop.interface gtk-theme
-
     if (!m_theme.isEmpty())
     {
         m_icon_location = "/usr/share/icons/" + m_theme;
-        QFileInfo info(m_icon_location);
-        if (info.exists())
-        {
-            TRACEX(Logger::info, "using theme icons " << m_icon_location);
-        }
-        else
-        {
-            m_icon_location.clear();
-        }
+    }
+    QFileInfo info(m_icon_location);
+    if (info.exists())
+    {
+        TRACEX(Logger::info, "using theme icons " << m_icon_location);
+    }
+    else
+    {
+        m_icon_location.clear();
     }
 #endif
 

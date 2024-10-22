@@ -29,8 +29,6 @@
 #include <QSplitter>
 #include <QActionGroup>
 
-/// TODO: test all qt6 things
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>
 #else
@@ -45,8 +43,12 @@
 #include <QTextBrowser>
 #endif
 
+#ifdef USE_BOOST
 #include <boost/bind/bind.hpp>
 using namespace boost::placeholders;
+#else
+using namespace std::placeholders;
+#endif
 
 #define RELATIVE_GIT_PATH 1
 
@@ -120,9 +122,14 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     setWindowIcon(QIcon(":/resource/logo@2x.png"));
 
+#ifdef USE_BOOST
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
-    QObject::connect(this, SIGNAL(doWork(QVariant)), &mWorker, SLOT(doWork(QVariant)));
     mWorker.setMessageFunction(boost::bind(&MainWindow::handleMessage, this, _1));
+#else
+    mWorker.setWorkerFunction(std::bind(&MainWindow::handleWorker, this, _1));
+    mWorker.setMessageFunction(std::bind(&MainWindow::handleMessage, this, _1));
+#endif
+    QObject::connect(this, SIGNAL(doWork(QVariant)), &mWorker, SLOT(doWork(QVariant)));
     connect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     ui->textBrowser->set_active(true);
     connect(this, SIGNAL(tabifiedDockWidgetActivated(QDockWidget*)), this, SLOT(on_DockWidgetActivated(QDockWidget*)));
@@ -1060,6 +1067,10 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString branch_has_children_not_has_siblings_adjoins   = tr("Icon: HasChildrenNotHasSiblingsAdjoins");
     static const QString branch_closed_has_children_has_sibling         = tr("Icon: ClosedHasChildrenHasSibling");
     static const QString branch_open_has_children_has_sibling           = tr("Icon: OpenHasChildrenHasSibling");
+#ifdef __linux__
+    static const QString linux_theme                                    = tr("Linux theme name");
+    static const QString linux_icon_path                                = tr("Linux icon path");
+#endif
 
     static const QString invalid_severity                               = Logger::getName(Logger::invalid);
 
@@ -1085,6 +1096,10 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
+#ifdef __linux__
+        mMiscelaneousItems[linux_theme]                                  = QVariant(mActions.getTheme());
+        mMiscelaneousItems[linux_icon_path]                              = QVariant(mActions.getIconLocation());
+#endif
     }
     else
     {
@@ -1107,6 +1122,10 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchHasChildrenNotHasSiblingsAdjoins = mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins].toString();
         mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
+#ifdef __linux__
+        mActions.setTheme(mMiscelaneousItems[linux_theme].toString());
+        mActions.setIconLocation(mMiscelaneousItems[linux_icon_path].toString());
+#endif
     }
 }
 
@@ -1447,7 +1466,11 @@ QVariant MainWindow::handleWorker(const QVariant& aData)
         case Work::AsynchroneousCommand:
         {
             QString result_string;
+#ifdef USE_BOOST
             int result = execute(data_map[Worker::command].toString().toStdString().c_str(), result_string, true, boost::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+#else
+            int result = execute(data_map[Worker::command].toString().toStdString().c_str(), result_string, true, std::bind(&MainWindow::on_emit_temp_file_path, this, _1));
+#endif
             if (result != NoError)
             {
                 Logger::printDebug(Logger::error, "execute error (%d): %s", result, result_string.toStdString().c_str());
@@ -2377,7 +2400,11 @@ void MainWindow::performCustomGitActionSettings()
     connect(&edit_custom_git_actions, SIGNAL(store_commands_to(QString)), this, SLOT(store_custom_commands(QString)));
 
     auto null_function  = g_test_command_only;
+#ifdef USE_BOOST
     g_test_command_only = boost::bind(&CustomGitActions::display_command_text, &edit_custom_git_actions, _1);
+#else
+    g_test_command_only = std::bind(&CustomGitActions::display_command_text, &edit_custom_git_actions, _1);
+#endif
 
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {

@@ -80,6 +80,15 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 /// TODO: implement merge two branches
 /// also remote branches
 /// drag and drop?
+/// git merge --no-commit --edit -F <file> <commit1> [<commit2>]
+/// --no-commit: -> nicht committen
+/// --edit     : -> merge tool aufrufen?
+/// -s <strategy> --strategy=<strategy> (ours obsolete, theirs, ort, recursive
+/// -X <strategy-option>
+/// --stat -n, --no-stat Show a diffstat at the end of the merge. The diffstat is also controlled by the configuration option merge.stat.
+/// --no-verify
+/// merge.guitool -g --gui
+/// git mergetool -F <file> <commit>
 void QBranchTreeWidget::diff_of_two_branches()
 {
     const auto selected = selectedItems();

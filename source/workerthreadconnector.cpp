@@ -37,7 +37,11 @@ WorkerThreadConnector::~WorkerThreadConnector()
     mWorkerThread.wait();
 }
 
+#ifdef USE_BOOST
 void WorkerThreadConnector::setWorkerFunction(const boost::function<QVariant (const QVariant&) >& aFunc)
+#else
+void WorkerThreadConnector::setWorkerFunction(const std::function<QVariant (const QVariant&) >& aFunc)
+#endif
 {
     if (mWorker)
     {
@@ -144,7 +148,11 @@ bool WorkerThreadConnector::isBusy()
 }
 
 
+#ifdef USE_BOOST
 void WorkerThreadConnector::setMessageFunction(const boost::function<void (QVariant)> &aFunc)
+#else
+void WorkerThreadConnector::setMessageFunction(const std::function<void (QVariant)> &aFunc)
+#endif
 {
     mMessageFunction = aFunc;
 }
