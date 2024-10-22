@@ -9,7 +9,11 @@
 
 #include "DisplayType.h"
 #include "editable.h"
+#ifdef USE_BOOST
 #include <boost/optional/optional.hpp>
+#else
+#include <optional>
+#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringConverter>
 #endif
@@ -93,7 +97,11 @@ class BinaryTableModel : public QStandardItemModel
 
         QString                     name;
         CDisplayType*               display = 0;
+#ifdef USE_BOOST
         boost::optional<QJsonValue> array_length;
+#else
+        std::optional<QJsonValue> array_length;
+#endif
         std::vector<DisplayValue>   member;
         map2intvector               m_td_row_to_index;
 

@@ -7,7 +7,11 @@
 #include <functional>
 #include <QFile>
 #include <QObject>
+#ifdef USE_BOOST
 #include <boost/function.hpp>
+#else
+#include <functional>
+#endif
 
 namespace txt
 {
@@ -73,9 +77,15 @@ enum error
     NoError = 0
 };
 
+#ifdef USE_BOOST
 extern boost::function<void (const QString &)> g_test_command_only;
-
 int execute(const QString& command, QString& aResultText, bool hide=true, boost::function<void (const QString &)> emit_file_path = {});
+#else
+extern std::function<void (const QString &)> g_test_command_only;
+int execute(const QString& command, QString& aResultText, bool hide=true, std::function<void (const QString &)> emit_file_path = {});
+#endif
+
+
 
 enum msg_box_buttons
 {

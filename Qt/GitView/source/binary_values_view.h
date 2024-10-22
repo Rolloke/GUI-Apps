@@ -9,7 +9,11 @@
 #include <map>
 #include <memory>
 
+#ifdef USE_BOOST
 #include <boost/optional/optional.hpp>
+#else
+#include <optional>
+#endif
 
 #include "DisplayType.h"
 
@@ -72,7 +76,11 @@ private:
     int                 m_current_position;
     QByteArray          m_array;
     bool                m_setting_table_property;
+#ifdef USE_BOOST
     boost::optional<int>  m_current_combo_index;
+#else
+    std::optional<int>  m_current_combo_index;
+#endif
 public:
     QString             m_type_format_files_location;
 };

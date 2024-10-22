@@ -357,7 +357,11 @@ void MainWindow::open_file_externally()
     }
 }
 
+#ifdef USE_BOOST
 void MainWindow::open_file(const QString& file_path, boost::optional<int> line_number, bool reopen_file)
+#else
+void MainWindow::open_file(const QString& file_path, std::optional<int> line_number, bool reopen_file)
+#endif
 {
     btnCloseText_clicked(Editor::Active);
     const QFileInfo file_info(file_path);

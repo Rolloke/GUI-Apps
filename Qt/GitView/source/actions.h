@@ -83,6 +83,8 @@ public:
     QString check_location(const QString &file_location);
     void setTheme(const QString& theme);
     const QString& getTheme();
+    void setIconLocation(const QString& icons);
+    const QString& getIconLocation();
 
     static const QString sNoCustomCommandMessageBox;
 

@@ -436,11 +436,6 @@ int code_browser::getTabstopCharacters()
 
 QString code_browser::change_start_of_selection(selection how_to)
 {
-    /// TODO: try to change text within block
-    /// or select block again
-//    int start = textCursor().selectionStart();
-//    int end = textCursor().selectionEnd();
-//    TRACEX(Logger::info, "start: " << start << ", " << end );
     QString text = textCursor().selection().toPlainText();
     QStringList lines = text.split("\n");
     text.clear();

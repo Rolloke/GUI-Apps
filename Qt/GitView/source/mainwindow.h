@@ -13,8 +13,11 @@
 #include <QSemaphore>
 #include <QTime>
 #include <QMutex>
+#ifdef USE_BOOST
 #include <boost/optional.hpp>
-
+#else
+#include <optional>
+#endif
 
 namespace Ui
 {
@@ -173,7 +176,11 @@ private:
     void     initCodecCombo();
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true, bool use_second_view=false);
+#ifdef USE_BOOST
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false);
+#else
+    void     open_file(const QString& file_path, std::optional<int> line_number = {}, bool reopen_file = false);
+#endif
 
     QVariant handleWorker(const QVariant&);
     void     handleMessage(QVariant);
