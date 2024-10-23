@@ -217,8 +217,8 @@ private:
     void     mousePressEvent(QMouseEvent *event) override;
     void     timerEvent(QTimerEvent* event) override;
     void     closeEvent(QCloseEvent *event) override;
-    void     dragEnterEvent(QDragEnterEvent *event);
-    void     dropEvent(QDropEvent *even);
+    void     dragEnterEvent(QDragEnterEvent *event) override;
+    void     dropEvent(QDropEvent *even) override;
     void     contextMenuEvent(QContextMenuEvent *event) override;
 
     AdditionalEditor additional_editor();

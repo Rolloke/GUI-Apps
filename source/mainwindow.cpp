@@ -104,7 +104,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     /// use-legacy-clipboard
     , mExternalFileOpenCmd("xdg-open")
     #else
-    , mFileCopyMimeType("")
+    , mFileCopyMimeType("text/plain")
+    /// https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/aa359736(v=vs.85)
     , mExternalFileOpenCmd("start")
     #endif
     , mFindGrep("grep")
