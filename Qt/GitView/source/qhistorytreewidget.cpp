@@ -167,6 +167,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
                     {
                         mHistoryFile = fParentHistoryItem->data(History::Column::CommitDate, Qt::DisplayRole).toString();
                     }
+                    std::sort(fSelectedIndexes.begin(), fSelectedIndexes.end());
                     for (auto fIndex = fSelectedIndexes.rbegin(); fIndex != fSelectedIndexes.rend(); ++fIndex)
                     {
                         QTreeWidgetItem* fItem = itemFromIndex(*fIndex);
