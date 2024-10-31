@@ -216,7 +216,7 @@ void ActionList::initActionIcons()
 
 void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Type& type) const
 {
-    for (const auto& cmd : items)
+    for (const auto& cmd : std::as_const(items))
     {
         if (cmd != Cmd::Separator)
         {
@@ -290,7 +290,7 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
 
 void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
 {
-    for (const auto& cmd : items)
+    for (const auto& cmd : std::as_const(items))
     {
         if (cmd == Cmd::Separator)
         {
@@ -378,7 +378,7 @@ void ActionList::select_action(QAction* action)
 void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidget* widget) const
 {
     QMenu* sub_menu = nullptr;
-    for (const auto& cmd : items)
+    for (const auto& cmd : std::as_const(items))
     {
         if (cmd == Cmd::Separator)
         {

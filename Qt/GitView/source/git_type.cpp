@@ -323,7 +323,7 @@ void parseGitStatus(const QString& aSource, const QString& aStatus, stringt2type
 {
     const auto fLines = aStatus.split("\n");
 
-    for (const QString& fLine : fLines)
+    for (const QString& fLine : std::as_const(fLines))
     {
         const int     fStateSize = 2;
         const QString fState = fLine.left(fStateSize);

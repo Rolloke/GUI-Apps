@@ -280,7 +280,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
             QFontDatabase font_db;
             //QFontDatabase::families();
             auto fonts = font_db.families();
-            for (const auto& font : fonts)
+            for (const auto& font : std::as_const(fonts))
             {
                 ui->comboFontName->addItem(font);
             }
@@ -316,7 +316,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         if (fExternalFileOpenExt.size())
         {
             const auto extensions = fExternalFileOpenExt.split(",");
-            for (const auto&extension : extensions)
+            for (const auto&extension : std::as_const(extensions))
             {
                 auto parts = extension.split(":");
                 mExternalFileOpenExt.insert(parts[0], parts.size() > 1 ? parts[1] : "");
@@ -723,7 +723,7 @@ void MainWindow::store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd
     fSettings.beginWriteArray(config::sCommands);
     int fIndex = 0;
 
-    for (const auto& fItem : mActions.getList())
+    for (const auto& fItem : std::as_const(mActions.getList()))
     {
         const Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fItem.first);
         if (commands.size())
@@ -1070,7 +1070,7 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString branch_open_has_children_has_sibling           = tr("Icon: OpenHasChildrenHasSibling");
 #ifdef __linux__
     static const QString linux_theme                                    = tr("Linux theme name");
-    static const QString linux_icon_path                                = tr("Linux icon path");
+//    static const QString linux_icon_path                                = tr("Linux icon path");
 #endif
 
     static const QString invalid_severity                               = Logger::getName(Logger::invalid);
@@ -1099,7 +1099,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
 #ifdef __linux__
         mMiscelaneousItems[linux_theme]                                  = QVariant(mActions.getTheme());
-        mMiscelaneousItems[linux_icon_path]                              = QVariant(mActions.getIconLocation());
+//        mMiscelaneousItems[linux_icon_path]                              = QVariant(mActions.getIconLocation());
 #endif
     }
     else
@@ -1125,7 +1125,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
 #ifdef __linux__
         mActions.setTheme(mMiscelaneousItems[linux_theme].toString());
-        mActions.setIconLocation(mMiscelaneousItems[linux_icon_path].toString());
+//        mActions.setIconLocation(mMiscelaneousItems[linux_icon_path].toString());
 #endif
     }
 }
@@ -1569,7 +1569,7 @@ void MainWindow::killBackgroundThread()
                    "Yes To All empties also batch list"), pidlist.join(" "), mWorker.getBatchToolTip(), msgbox_buttons);
             if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
             {
-                for (const QString &pid : pidlist)
+                for (const QString &pid : std::as_const(pidlist))
                 {
 #ifdef __linux__
                     string cmd = "kill " + pid.toStdString();
@@ -1635,7 +1635,7 @@ void MainWindow::initCodecCombo()
     QRegExp reg_ex_num ("([\\d]{1,6})");
     QRegExp reg_ex_text("([a-zA-Z-]{1,})");
     QMap<QString, QList<QString>> codec_map;
-    for (const auto& codec : codecs)
+    for (const auto& codec : std::as_const(codecs))
     {
         int pos = reg_ex_num.indexIn(codec);
         if (pos != -1)
@@ -2108,7 +2108,7 @@ void MainWindow::initContextMenuActions()
         Cmd::mContextMenuTextView = contextmenu_text_view;
     }
 
-    for (const auto& fAction : mActions.getList())
+    for (const auto& fAction : std::as_const(mActions.getList()))
     {
         auto cmd = static_cast<Cmd::eCmd>(fAction.first);
         mActions.setFlags(cmd, ActionList::Flags::BuiltIn);
@@ -2125,7 +2125,7 @@ void MainWindow::add_action_to_widgets(QAction * action)
     ui->treeStash->addAction(action);
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
-    for (QDockWidget* dock_widget : dock_widgets)
+    for (QDockWidget* dock_widget : std::as_const(dock_widgets))
     {
         get_widget(dock_widget)->addAction(action);
     }
@@ -3015,7 +3015,7 @@ void MainWindow::find_text_in_files()
         {
             const QString file_id = "file://";
             QString current_file;
-            for (const QString& found_item : found_items)
+            for (const QString& found_item : std::as_const(found_items))
             {
                 int pos = found_item.indexOf(file_id);
                 if (pos != -1)
@@ -3052,7 +3052,7 @@ void MainWindow::find_text_in_files()
         }
         else
         {
-            for (const QString& found_item : found_items)
+            for (const QString& found_item : std::as_const(found_items))
             {
                 QStringList found_item_parts = found_item.split(':');
                 if (found_item_parts.size() >= 2)
@@ -3286,7 +3286,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
         dock != get_first_dock_tab(FirstTab::web_view))
     {
         QMenu*sub_menu = menu->addMenu(tr("Move [ %1 ] to").arg(dock->windowTitle()));
-        for (const auto &name : qAsConst(mDockAreaNames))
+        for (const auto &name : std::as_const(mDockAreaNames))
         {
             QAction* action = sub_menu->addAction(name);
             move_tab.addAction(action);

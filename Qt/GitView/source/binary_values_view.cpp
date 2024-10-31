@@ -67,7 +67,7 @@ binary_values_view::binary_values_view(QWidget *parent) :
         edit->setToolTip(tooltip);
         connect(edit, SIGNAL(editingFinished()), this, SLOT(editing_finished()));
     }
-    for (const auto& type : m_display)
+    for (const auto& type : std::as_const(m_display))
     {
         if (type.first == CDisplayType::Binary) continue;
         if (type.first == CDisplayType::Ascii) continue;

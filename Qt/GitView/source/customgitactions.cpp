@@ -99,7 +99,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     mInitialize = true;
     int fRow = 0;
     const auto& action_list =  mActionList.getList();
-    for (const auto& fItem : action_list)
+    for (const auto& fItem : std::as_const(action_list))
     {
         insertCmdAction(fItem, fRow);
     }
@@ -424,7 +424,7 @@ void CustomGitActions::initListIcons(VariousListIndex::e aIndex, QString aPath)
         remove_item("..");
 
         int fRow = 0;
-        for (const auto& fItem : fList)
+        for (const auto& fItem : std::as_const(fList))
         {
             mListModelVarious->insertRows(fRow, 1, QModelIndex());
             mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(aPath + fItem), Qt::DecorationRole);
@@ -998,12 +998,12 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
     menu.addSeparator();
     if (function_cmd && !mExperimental)
     {
-        for (const auto&part : post_action_parts)
+        for (const auto&part : std::as_const(post_action_parts))
         {
             menu.removeAction(part.action);
         }
         post_action_parts.clear();
-        for (const auto& command : action_commands )
+        for (const auto& command : std::as_const(action_commands ))
         {
             menu.removeAction(command.action);
         }

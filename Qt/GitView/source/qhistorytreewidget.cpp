@@ -344,7 +344,7 @@ void QHistoryTreeWidget::insertFileNames()
         }
     }
 
-    for (const auto& item : selected_items)
+    for (const auto& item : std::as_const(selected_items))
     {
         switch (static_cast<Level::e>(getItemLevel(item)))
         {
@@ -461,7 +461,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
                 child_item->setData(History::Column::Commit, History::role(History::Entry::GitDiffCommand), git_cmd);
 
                 const auto files = result_string.split("\n");
-                for (const auto& file_path : files)
+                for (const auto& file_path : std::as_const(files))
                 {
                     if (file_path.size())
                     {

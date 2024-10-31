@@ -223,7 +223,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
 
     ui->treeSource->insertItem(source_dir, *ui->treeSource, nullptr);
 
-    for (const auto& fItem : check_map)
+    for (const auto& fItem : std::as_const(check_map))
     {
         if (fItem.second.is(Type::GitDeleted) || fItem.second.is(Type::GitMovedFrom))
         {
@@ -1169,7 +1169,7 @@ QString MainWindow::get_git_command_option(const Type& type, uint command_flags,
     if (command_flags & ActionList::Flags::MenuOption)
     {
         const QStringList list = variant_list[ActionList::Data::MenuStrings].toStringList();
-        for (const QString & item : list)
+        for (const QString & item : std::as_const(list))
         {
             if (item.indexOf("--") == 0)
             {

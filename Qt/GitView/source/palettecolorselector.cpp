@@ -153,7 +153,7 @@ void PaletteColorSelector::set_dark_palette_colors(const QString& colors)
 {
     QStringList palette_colors = colors.split(",");
     int color_role = 0;
-    for (const auto& color_name : palette_colors)
+    for (const auto& color_name : std::as_const(palette_colors))
     {
         m_dark_palette.setColor(static_cast<QPalette::ColorRole>(color_role), QColor(color_name));
     }

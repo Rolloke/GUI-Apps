@@ -92,11 +92,10 @@ private slots:
 #else
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    void metaDataChanged();
+    void metaDataChanged(bool delayed = false);
 #endif
 
 #endif
-
     void metaDataChanged(const QString&key, const QVariant&value);
     void traymenu_hide_window();
     void traymenu_show_window();

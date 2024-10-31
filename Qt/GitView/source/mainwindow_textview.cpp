@@ -68,7 +68,7 @@ void MainWindow::selectTextBrowserLanguage()
     code_browser*text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
     if (text_browser)
     {
-        for (const QString& language : language_list)
+        for (const QString& language : std::as_const(language_list))
         {
             char start_char = toupper(language.toStdString()[0]);
             auto entry = start_char_map.find(start_char);

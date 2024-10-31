@@ -21,6 +21,7 @@
 #include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include <QMediaMetaData>
+#include <QTimer>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
@@ -1208,9 +1209,15 @@ void MainWindow::metaDataChanged()
 #else
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-void MainWindow::metaDataChanged()
+void MainWindow::metaDataChanged(bool delayed)
 {
-    /// TODO: get all information like in metaDataChanged(const QString &key, const QVariant & value) from Qt5
+    /// NOTE: this delay is necessary to retrieve the meta data informations
+    /// the information is not available at the time the slot metaDataChanged is invoked
+    if (!delayed)
+    {
+        QTimer::singleShot(1000, [this](){ metaDataChanged(true); });
+        return ;
+    }
     QList<QMediaMetaData>  tracks = mPlayer.audioTracks();
     tracks.append(mPlayer.videoTracks());
     tracks.append(mPlayer.subtitleTracks());
@@ -1222,7 +1229,6 @@ void MainWindow::metaDataChanged()
             metaDataChanged(QMediaMetaData::metaDataKeyToString(key), track.value(key));
         }
     }
-
 }
 #endif
 #endif
