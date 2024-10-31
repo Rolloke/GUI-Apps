@@ -471,7 +471,7 @@ QString code_browser::change_start_of_selection(selection how_to)
             if (    how_to == selection::tab_outdent
                 || (how_to == selection::toggle_comment && pattern == lines[0].left(pattern.size()))) // uncomment
             {
-                for (const QString& line : qAsConst(lines))
+                for (const QString& line : std::as_const(lines))
                 {
                     text += pattern == line.left(pattern.size()) ? line.mid(pattern.size()) : line;
                     if (++nline == no_of_lines && line.size() == 0) break;
@@ -480,7 +480,7 @@ QString code_browser::change_start_of_selection(selection how_to)
             }
             else // comment
             {
-                for (const QString& line : qAsConst(lines))
+                for (const QString& line : std::as_const(lines))
                 {
                     text += pattern + line;
                     if (++nline == no_of_lines && line.size() == 0) break;
@@ -565,7 +565,7 @@ void code_browser::parse_blame(const QString &blame)
     color_selector.unapply_color(Qt::yellow);
 
     QStringList lines = blame.split("\n");
-    for (const QString &line : qAsConst(lines))
+    for (const QString &line : std::as_const(lines))
     {
         QStringList parts = line.split("\t");
         if (parts.size() == 4)
@@ -586,7 +586,7 @@ void code_browser::parse_blame(const QString &blame)
                 blame_entry.text.append(date_time[0]);
                 blame_entry.text.append(date_time[1]);
                 const auto& blame_entry_text = blame_entry.text;
-                for (const auto& text : blame_entry_text)
+                for (const auto& text : std::as_const(blame_entry_text))
                 {
                     const auto length = text.size();
                     if (length > m_blame_characters)
@@ -740,7 +740,7 @@ void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const Q
     static const QStringList prefix = { tr("commit:\t"), tr("author:\t"), tr("date:\t"), tr("time:\t") };
     QString text;
     int i=0;
-    for (const auto& line : text_list)
+    for (const auto& line : std::as_const(text_list))
     {
         if (i < prefix.size()) text += prefix[i++];
         text += line;

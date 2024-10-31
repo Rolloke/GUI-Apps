@@ -194,11 +194,11 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
             }
             ignored = &found_ignore.value();
         }
-        for (const auto& fMapLevel : fMapLevels)
+        for (const auto& fMapLevel : std::as_const(fMapLevels))
         {
             mGitIgnore.removeIgnoreMapLevel(fMapLevel, ignored);
         }
-        for (const auto&folder : ignored_folders)
+        for (const auto&folder : std::as_const(ignored_folders))
         {
             ignored->add_folder(folder);
         }
@@ -347,7 +347,7 @@ void QSourceTreeWidget::find_item(const QString& git_root, const QString& filepa
     if (!list.empty() )
     {
         auto* found = list[0];
-        for (const QString& item : items)
+        for (const QString& item : std::as_const(items))
         {
             int32_t i;
             if (found != nullptr)

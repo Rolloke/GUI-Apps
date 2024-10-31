@@ -351,7 +351,7 @@ void qbinarytableview::open_binary_format_file(const QString& filename, bool &op
                 const auto file      = obj.take("file");
                 auto       file_obj  = file.toObject();
                 const auto file_keys = file_obj.keys();
-                for (const auto& key : file_keys)
+                for (const auto& key : std::as_const(file_keys))
                 {
                     // TRACEX(Logger::info, "- "<< key << ": "<< file_obj.take(key).toString());
                     if (key == "endian")
@@ -931,7 +931,7 @@ void BinaryTableModel::clear_typed_display()
 bool BinaryTableModel::insert_binary_structs(QJsonObject& structs_obj)
 {
     const auto keys = structs_obj.keys();
-    for (const auto& key : keys)
+    for (const auto& key : std::as_const(keys))
     {
         DisplayValue display_value;
         display_value.name = key;
@@ -939,7 +939,7 @@ bool BinaryTableModel::insert_binary_structs(QJsonObject& structs_obj)
         if (structs_children.isArray())
         {
             const auto structs_children_array = structs_children.toArray();
-            for (const auto& element : structs_children_array)
+            for (const auto& element : std::as_const(structs_children_array))
             {
                 if (!insert_display_value(element, &display_value.member))
                 {
@@ -998,7 +998,7 @@ bool  BinaryTableModel::insert_display_value(const QJsonValue& jval, std::vector
         if (obj.count() > 1)              // this is a syntax error
         {
             TRACE(Logger::to_browser, "Error: more than one variable:");
-            for (const auto& key : keys)
+            for (const auto& key : std::as_const(keys))
             {
                 TRACEX(Logger::to_browser, "- " << key);
             }

@@ -550,7 +550,7 @@ const Highlighter::Language& Highlighter::get_language()const
 
 QString Highlighter::Language::get_pattern(const QTextCharFormat& format) const
 {
-    for (const auto& rule : highlightingRules)
+    for (const auto& rule : std::as_const(highlightingRules))
     {
         if (rule.format == format)
         {
@@ -563,7 +563,7 @@ QString Highlighter::Language::get_pattern(const QTextCharFormat& format) const
 void Highlighter::highlightBlock(const QString &text)
 {
     const Language& language = get_language();
-    for (const HighlightingRule &rule : language.highlightingRules)
+    for (const HighlightingRule &rule : std::as_const(language.highlightingRules))
     {
         QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
         while (matchIterator.hasNext())

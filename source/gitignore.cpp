@@ -271,7 +271,7 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
         && Logger::isSeverityActive(Logger::debug))
     {
         QString str;
-        for (const auto& entry : ignored_entries)
+        for (const auto& entry : std::as_const(ignored_entries))
         {
             str += entry.first;
             str += " -> ";

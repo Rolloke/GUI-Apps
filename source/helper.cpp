@@ -247,7 +247,7 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     const auto fList = aTree.selectedItems();
-    for (const auto& fSelected : fList)
+    for (const auto& fSelected : std::as_const(fList))
     {
         auto top_level_item = getTopLevelItem(aTree, fSelected);
         if (top_level_item)
@@ -264,7 +264,7 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree)
 {
     const auto fList = aTree.selectedItems();
-    for (const auto& fSelected : fList)
+    for (const auto& fSelected : std::as_const(fList))
     {
         auto fParent = fSelected->parent();
         if (fParent)
@@ -356,7 +356,7 @@ QTreeWidgetItem* find_child_item(QTreeWidgetItem*parent_item, int column, const 
 bool containsPathAsChildren(QTreeWidgetItem*parent_item, int column, const QString& right_path)
 {
     const QStringList right_parts = right_path.split('/');
-    for (const auto&file_name : right_parts)
+    for (const auto&file_name : std::as_const(right_parts))
     {
         parent_item = find_child_item(parent_item, column, file_name);
         if (!parent_item)

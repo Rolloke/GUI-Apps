@@ -36,7 +36,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
     const QStringList result_lines = branch_text.split('\n');
     int  line_index = 0;
     bool items_inserted {false};
-    for (const QString& line : result_lines)
+    for (const QString& line : std::as_const(result_lines))
     {
         if (++line_index == 1) continue; // first line contains git command
         auto pos = line.indexOf("stash");
@@ -67,7 +67,7 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
                 if (result != -1)
                 {
                     const auto shown_items = result_string.split('\n');
-                    for (const QString& item : shown_items)
+                    for (const QString& item : std::as_const(shown_items))
                     {
                         QStringList item_parts = item.split('|');
                         if (item_parts.size() > 0 && item_parts[0].size() > 0)

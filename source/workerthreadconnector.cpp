@@ -111,7 +111,7 @@ QString WorkerThreadConnector::getBatchToolTip()
         {
             tool_tip += "Batch list:\n";
             const auto &batch_list = mBatch;
-            for (const auto & batch : batch_list)
+            for (const auto & batch : std::as_const(batch_list))
             {
                 tool_tip += "- ";
                 tool_tip += batch.toMap()[Worker::command].toString();

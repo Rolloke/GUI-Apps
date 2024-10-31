@@ -24,12 +24,12 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QS
     const QStringList branch_lines = aBranchText.split("\n");
     QTreeWidgetItem* new_branch_item = nullptr;
     setVisible(true);
-    for (const QString& branch_line : branch_lines)
+    for (const QString& branch_line : std::as_const(branch_lines))
     {
         if (new_branch_item == nullptr)
         {
             auto found_item = findItems(branch_line, Qt::MatchFixedString|Qt::MatchCaseSensitive, Column::Text);
-            for (const auto& item : found_item)
+            for (const auto& item : std::as_const(found_item))
             {
                 auto* removed = takeTopLevelItem(indexOfTopLevelItem(item));
                 delete removed;
@@ -51,7 +51,7 @@ void QBranchTreeWidget::parseBranchListText(const QString& aBranchText, const QS
             const QStringList result_lines = result.split("<td>");
             int role = 0;
             const int column = History::Column::Commit;
-            for (const auto& result_line : result_lines)
+            for (const auto& result_line : std::as_const(result_lines))
             {
                 new_child_item->setData(column, role++, QVariant(result_line));
             }
