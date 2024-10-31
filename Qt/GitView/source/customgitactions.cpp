@@ -456,9 +456,21 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     switch (variant.typeId())
+    {
+    case QMetaType::Type::QString:// QVariant::String:
+    {
+        if (use_text)
+        {
+            return variant.toString();
+        }
+        return text_edit;
+    }
+    case QMetaType::Type::Int:
+    case QMetaType::Type::LongLong: return number_edit;
+    default:break;
+    }
 #else
     switch (variant.type())
-#endif
     {
     case QVariant::String:
     {
@@ -472,6 +484,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     case QVariant::LongLong: return number_edit;
     default:break;
     }
+#endif
     return invalid;
 }
 
@@ -737,7 +750,11 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
             switch(currentItem.value().type())
 #endif
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            case QMetaType::Type::QString:
+#else
             case QVariant::String:
+#endif
             {
                 bool ok;
                 QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
@@ -747,7 +764,11 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                     mIsMiscelaneousItemChanged =true;
                 }
             } break;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            case QMetaType::Type::LongLong:
+#else
             case QVariant::LongLong:
+#endif
             {
                 bool ok = false;
                 QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
@@ -761,7 +782,11 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                     }
                 }
             } break;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            case QMetaType::Type::QVariantMap:
+#else
             case QVariant::Map:
+#endif
             {
                 QMenu menu(this);
                 QActionGroup severity_group(this);
