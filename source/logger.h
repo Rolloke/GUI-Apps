@@ -39,7 +39,7 @@ public:
     static void printDebug (eSeverity aSeverity, const char * format, ... );
 	static void setLogFunction(const tLogfunction& aFunc);
     static void setTextToBrowserFunction(const tLogfunction& aFunc);
-    template <class Type >
+/*    template <class Type >
     static void printCurve(const std::vector<Type>& fX, const std::vector<Type>& fY, const std::string& aTitle)
     {
         std::ofstream fOutput;
@@ -52,6 +52,7 @@ public:
             }
         }
     }
+*/
 private:
 #ifdef __linux__
     static int convertSeverityToSyslogPriority(const std::uint32_t aFlag);
