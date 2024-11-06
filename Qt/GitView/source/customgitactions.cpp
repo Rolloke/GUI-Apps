@@ -789,25 +789,37 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 #endif
             {
                 QMenu menu(this);
-                QActionGroup severity_group(this);
-                severity_group.setExclusive(false);
-                QMap<QString,QVariant> severity_map = currentItem.value().toMap();
-                for (auto severity = severity_map.begin(); severity != severity_map.end(); ++severity)
+                QMap<QString,QVariant> checkable_items_map = currentItem.value().toMap();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                bool is_bool = checkable_items_map.begin().value().typeId() == QMetaType::Type::Bool;
+#else
+                bool is_bool = checkable_items_map.begin().value().type() == QVariant::Bool;
+#endif
+                QActionGroup checkable_items_group(this);
+                checkable_items_group.setExclusive(!is_bool);
+                for (auto checkable = checkable_items_map.begin(); checkable != checkable_items_map.end(); ++checkable)
                 {
-                    auto action = severity_group.addAction(severity.key());
+                    auto action = checkable_items_group.addAction(checkable.key());
                     action->setCheckable(true);
-                    action->setChecked(severity.value().toBool());
+                    action->setChecked(checkable.value().toBool());
                     menu.addAction(action);
                 }
                 if (menu.exec(ui->tableViewVarious->mapToGlobal(ui->tableViewVarious->rect().center())))
                 {
                     mIsMiscelaneousItemChanged =true;
                 }
-                for (const QAction* action : severity_group.actions())
+                for (const QAction* action : checkable_items_group.actions())
                 {
-                    severity_map[action->text()] = QVariant(action->isChecked());
+                    if (is_bool)
+                    {
+                        checkable_items_map[action->text()] = QVariant(action->isChecked());
+                    }
+                    else
+                    {
+                        checkable_items_map[action->text()] = QVariant(static_cast<int>(action->isChecked()));
+                    }
                 }
-                currentItem.value() = severity_map;
+                currentItem.value() = checkable_items_map;
             } break;
             default:break;
             }
