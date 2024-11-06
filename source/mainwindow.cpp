@@ -261,6 +261,38 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
+    {
+        LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
+        LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
+        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
+        LOAD_STR(fSettings, fToolBars, toInt);
+        for (std::uint32_t i=0; i<fToolBars; ++i)
+        {
+            if (i >= Cmd::mToolbars.size())
+            {
+                Cmd::mToolbars.push_back({});
+                QString name = tr(config::Cmd__mToolbarName).arg(i);
+                Cmd::mToolbarNames.push_back(fSettings.value(name).toString());
+            }
+            auto& tool_bar = Cmd::mToolbars[i];
+            QString name = tr(config::Cmd__mToolbars).arg(i);
+            LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
+        }
+        LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
+
+        initContextMenuActions();
+
+        QString fTheme;
+        LOAD_STR(fSettings, fTheme, toString);
+        mActions.setTheme(fTheme);
+        mActions.initActionIcons();
+        LOAD_STR(fSettings, mInitOnlyCustomCommands, toBool);
+    }
     read_commands(fSettings);
     fSettings.endGroup();
 
@@ -603,6 +635,31 @@ MainWindow::~MainWindow()
     fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupGitCommands);
+    {
+        STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
+        STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
+        uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
+        STORE_STR(fSettings, fToolBars);
+        for (std::uint32_t i=0; i<fToolBars; ++i)
+        {
+            auto& tool_bar = Cmd::mToolbars[i];
+            QString name = tr(config::Cmd__mToolbars).arg(i);
+            STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
+            name = tr(config::Cmd__mToolbarName).arg(i);
+            fSettings.setValue(name, Cmd::mToolbarNames[i]);
+        }
+        STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
+        mInitOnlyCustomCommands = false;
+        STORE_STR(fSettings, mInitOnlyCustomCommands);
+
+        const QString& fTheme = mActions.getTheme();
+        STORE_STR(fSettings, fTheme);
+    }
     store_commands(fSettings);
     fSettings.endGroup();
 
@@ -620,37 +677,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::read_commands(QSettings& fSettings)
 {
-    LOAD_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::fromString, Cmd::toString, toString);
-    LOAD_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::fromString, Cmd::toString, toString);
-    uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
-    LOAD_STR(fSettings, fToolBars, toInt);
-    for (std::uint32_t i=0; i<fToolBars; ++i)
-    {
-        if (i >= Cmd::mToolbars.size())
-        {
-            Cmd::mToolbars.push_back({});
-            QString name = tr(config::Cmd__mToolbarName).arg(i);
-            Cmd::mToolbarNames.push_back(fSettings.value(name).toString());
-        }
-        auto& tool_bar = Cmd::mToolbars[i];
-        QString name = tr(config::Cmd__mToolbars).arg(i);
-        LOAD_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::fromString, Cmd::toString, toString);
-    }
-    LOAD_STRF(fSettings, mMergeTools, Cmd::fromStringMT, Cmd::toStringMT, toString);
-
-    initContextMenuActions();
-
-    QString fTheme;
-    LOAD_STR(fSettings, fTheme, toString);
-    mActions.setTheme(fTheme);
-    mActions.initActionIcons();
-    LOAD_STR(fSettings, mInitOnlyCustomCommands, toBool);
-
     int fItemCount = fSettings.beginReadArray(config::sCommands);
 
     for (int fItem = 0; fItem < fItemCount; ++fItem)
@@ -696,30 +722,6 @@ void MainWindow::read_commands(QSettings& fSettings)
 
 void MainWindow::store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd>& commands)
 {
-    STORE_STRF(fSettings, Cmd::mContextMenuSourceTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuEmptySourceTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuHistoryTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuBranchTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuStashTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuFindTextTree, Cmd::toString);
-    STORE_STRF(fSettings, Cmd::mContextMenuTextView, Cmd::toString);
-    uint fToolBars = static_cast<uint>(Cmd::mToolbars.size());
-    STORE_STR(fSettings, fToolBars);
-    for (std::uint32_t i=0; i<fToolBars; ++i)
-    {
-        auto& tool_bar = Cmd::mToolbars[i];
-        QString name = tr(config::Cmd__mToolbars).arg(i);
-        STORE_STRFN(fSettings, tool_bar, name.toStdString().c_str(), Cmd::toString);
-        name = tr(config::Cmd__mToolbarName).arg(i);
-        fSettings.setValue(name, Cmd::mToolbarNames[i]);
-    }
-    STORE_STRF(fSettings, mMergeTools, Cmd::toStringMT);
-    mInitOnlyCustomCommands = false;
-    STORE_STR(fSettings, mInitOnlyCustomCommands);
-
-    const QString& fTheme = mActions.getTheme();
-    STORE_STR(fSettings, fTheme);
-
     fSettings.beginWriteArray(config::sCommands);
     int fIndex = 0;
 
@@ -1098,7 +1100,18 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
 #ifdef __linux__
-        mMiscelaneousItems[linux_theme]                                  = QVariant(mActions.getTheme());
+        QMap<QString,QVariant> themes_map;
+        QDirIterator iter("/usr/share/icons", {"*"}, QDir::AllEntries);
+        for (; iter.hasNext(); iter.next())
+        {
+            QFileInfo sub(iter.filePath()+ "/24x24");
+            if (sub.exists())
+            {
+                themes_map[iter.fileName()+ "/24x24"] = QVariant(static_cast<int>(0));
+            }
+        }
+        themes_map[""] = QVariant(static_cast<int>(0));
+        mMiscelaneousItems[linux_theme] = themes_map;
 //        mMiscelaneousItems[linux_icon_path]                              = QVariant(mActions.getIconLocation());
 #endif
     }
@@ -1124,7 +1137,14 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
 #ifdef __linux__
-        mActions.setTheme(mMiscelaneousItems[linux_theme].toString());
+        QMap<QString,QVariant> themes_map = mMiscelaneousItems[linux_theme].toMap();
+        for (auto theme = themes_map.begin(); theme != themes_map.end(); ++theme)
+        {
+            if (theme.value().toBool())
+            {
+                mActions.setTheme(theme.key());
+            }
+        }
 //        mActions.setIconLocation(mMiscelaneousItems[linux_icon_path].toString());
 #endif
     }
