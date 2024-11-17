@@ -86,15 +86,9 @@ private slots:
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
 
-#ifdef _WIN32
-    void metaDataAvailableChanged(bool changed);
-    void metaDataChanged();
-#else
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     void metaDataChanged(bool delayed = false);
-#endif
-
 #endif
     void metaDataChanged(const QString&key, const QVariant&value);
     void traymenu_hide_window();
