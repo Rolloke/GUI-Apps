@@ -453,6 +453,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     static const QString text_edit   { ":/resource/24X24/text-x-log.png" };
     static const QString number_edit { ":/resource/24X24/emblem-generic.png" };
     static const QString invalid     { ":/resource/24X24/dialog-error.png" };
+    static const QString menu_icon   { ":/resource/24X24/open-menu.png" };
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     switch (variant.typeId())
@@ -465,6 +466,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
         }
         return text_edit;
     }
+    case QMetaType::Type::QVariantMap: return menu_icon;
     case QMetaType::Type::Int:
     case QMetaType::Type::LongLong: return number_edit;
     default:break;
@@ -480,6 +482,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
         }
         return text_edit;
     }
+    case QVariant::Map:  return menu_icon;
     case QVariant::Int:
     case QVariant::LongLong: return number_edit;
     default:break;
