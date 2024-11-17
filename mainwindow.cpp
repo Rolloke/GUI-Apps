@@ -47,7 +47,7 @@
 
 #include <fstream>
 #include <sstream>
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
 
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
@@ -254,11 +254,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
     connect(ui->actionClose, SIGNAL(triggered(bool)), SLOT(close()));
 
-#ifdef _WIN32
-    connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
-    connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
-#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 #else
     connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
@@ -497,7 +494,7 @@ void MainWindow::display_play_status()
 void MainWindow::on_sliderVolume_valueChanged(int value)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    mPlayer.audioOutput()->setVolume(value);
+    mPlayer.audioOutput()->setVolume(value/100.0f);
 #else
     mPlayer.setVolume(value);
 #endif
@@ -1185,28 +1182,7 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     }
 }
 
-#ifdef _WIN32
-void MainWindow::metaDataAvailableChanged(bool changed)
-{
-    if (changed)
-    {
-        QStringList list = mPlayer.availableMetaData();
-        for (const auto &key : list)
-        {
-            metaDataChanged(key, mPlayer.metaData(key));
-        }
-    }
-}
-void MainWindow::metaDataChanged()
-{
-    /// TODO: get all information like in metaDataChanged(const QString &key, const QVariant & value) from Qt5
-    QStringList list = mPlayer.availableMetaData();
-    for (const auto &key : list)
-    {
-        metaDataChanged(key, mPlayer.metaData(key));
-    }
-}
-#else
+
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 void MainWindow::metaDataChanged(bool delayed)
@@ -1231,7 +1207,7 @@ void MainWindow::metaDataChanged(bool delayed)
     }
 }
 #endif
-#endif
+
 
 void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 {
@@ -1372,7 +1348,7 @@ int execute(const QString& command, QString& aResultText)
     std::ifstream fFile(fTempResultFileNameAndPath.toStdString());
     fStringStream << fFile.rdbuf();
     std::string fStreamString = fStringStream.str();
-    boost::algorithm::trim_right(fStreamString);
+//    boost::algorithm::trim_right(fStreamString);
     if (fResult != NoError)
     {
         fStringStream << QObject::tr("Error occurred executing command: ").toStdString() << fResult;
