@@ -57,6 +57,7 @@ private:
 
 private slots:
     void menu_file_open();
+    void menu_folder_open();
     void menu_file_save_as_favorites();
     void menu_file_update_favorites();
     void menu_file_upload_favorites();
@@ -110,6 +111,7 @@ private:
     int                 mCurrentPlayIndex {0};
     QList<int>          mHiddenColumns;
     QString             mFileOpenPath;
+    QString             mOpenFolderPath;
     QString             mFavoritesOpenPath;
     QString             mMediaPlayerCommand;
 
