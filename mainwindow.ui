@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>912</width>
-    <height>523</height>
+    <height>529</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@
         <item>
          <widget class="QTableView" name="tableView">
           <property name="editTriggers">
-           <set>QAbstractItemView::EditTrigger::EditKeyPressed</set>
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
@@ -196,7 +196,7 @@
              <number>100</number>
             </property>
             <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -306,7 +306,7 @@
      <x>0</x>
      <y>0</y>
      <width>912</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -314,6 +314,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Kodi_raw_list"/>
+    <addaction name="actionOpen_Folder"/>
     <addaction name="actionDownload_Kodi_Raw_list"/>
     <addaction name="actionDownload_favorites"/>
     <addaction name="actionRead_favorites"/>
@@ -553,6 +554,14 @@
    </property>
    <property name="statusTip">
     <string>Downloads Kodi Raw m3u file, specify path under options</string>
+   </property>
+  </action>
+  <action name="actionOpen_Folder">
+   <property name="text">
+    <string>Open Folder...</string>
+   </property>
+   <property name="statusTip">
+    <string>Open folder with fedia files</string>
    </property>
   </action>
  </widget>
