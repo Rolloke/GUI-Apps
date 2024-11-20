@@ -77,6 +77,13 @@ const QString tv               = QObject::tr("TV");
 const QString open_media_list  = QObject::tr("Open Kodi raw media List");
 const QString open_folder      = QObject::tr("Open folder with media files");
 const QString media_list       = QObject::tr("Media List (*.m3u);;Text File (*.txt);;All Files (*.*)");
+const QStringList media_picture_endings = {"*.jpg", "*.png"};
+const QStringList media_audio_endings   = {
+    "*.mp3", "*.wav", "*.wma", "*.m4a", "*.m4b", "*.m4p", "*.mpg", "*.flac" "*.ogg", "*.oga", "*.mogg",
+    "*.3gp", "*.aa", "*.aac", "*.aax", "*.act", "*.aiff", "*.alac", "*.amr", "*.ape", "*.au", "*.awb",
+    "*.dss", "*.dvf", "*.gsm", "*.iklax", "*.ivs", "*.mmf", "*.movpkg", "*.mpc", "*.msv", "*.nmf", "*.opus",
+    "*.ra", "*.rm", "*.raw", "*.rf64", "*.sln", "*.tta", "*.voc", "*.vox", "*.wv", "*.webm", "*.8svx", "*.cda"};
+const QString prefix_file      = "file://";
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
 const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
@@ -137,7 +144,7 @@ MainWindow::MainWindow(QWidget *parent) :
 , mCurrentRowIndex(-1)
 , mCurrentPlayIndex(-1)
 , mFileOpenPath(QDir::homePath())
-, mOpenFolderPath(QDir::homePath())
+, mFileOpenFolderPath(QDir::homePath())
 , mFavoritesOpenPath(QDir::homePath())
 , mFindStartRow(0)
 , mShowIcon(true)
@@ -175,8 +182,6 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         }
     }
-    QFileInfo info(filename);
-    QString settings_file_name = info.baseName();
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     auto* audioOutput = new QAudioOutput;
@@ -188,6 +193,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #else
     connect(&mPlayer, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(show_media_player_error(QMediaPlayer::Error)));
 #endif
+
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     mHiddenColumns = { eURL, eLogo, eFriendlyName };
@@ -272,19 +278,26 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sliderVolume->setTickInterval(10);
     ui->sliderVolume->setSingleStep(1);
 
-    fSettings.beginGroup(config::sGroupSettings + settings_file_name);
+    QFileInfo info(filename);
+    if (!info.exists())
+    {
+        filename.clear();
+        info.setFile("");
+    }
+
+    fSettings.beginGroup(config::sGroupSettings + info.baseName());
 
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
-    LOAD_STR(fSettings, mFileOpenPath, toString);
-    LOAD_STR(fSettings, mOpenFolderPath, toString);
     LOAD_STR(fSettings, mFavoritesOpenPath, toString);
+    LOAD_STR(fSettings, mFileOpenFolderPath, toString);
     LOAD_STR(fSettings, mDownloadFavoriteCommand, toString);
     LOAD_STR(fSettings, mDownloadKodiRawFilePath, toString);
     LOAD_STR(fSettings, mUploadFavoriteCommand, toString);
     LOAD_STR(fSettings, mShowIcon, toBool);
     LOAD_STR(fSettings, mMediaPlayerCommand, toString);
     LOAD_STR(fSettings, mCurrentPlayIndex, toInt);
+    LOAD_STR(fSettings, mFileOpenPath, toString);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
     LOAD_PTR(fSettings, ui->actionShowTrayIconAndInfo, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, mOpenFileAtStart, toString);
@@ -330,7 +343,7 @@ MainWindow::~MainWindow()
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
-    STORE_STR(fSettings, mOpenFolderPath);
+    STORE_STR(fSettings, mFileOpenFolderPath);
     STORE_STR(fSettings, mFavoritesOpenPath);
     STORE_STR(fSettings, mDownloadFavoriteCommand);
     STORE_STR(fSettings, mDownloadKodiRawFilePath);
@@ -725,15 +738,16 @@ void MainWindow::menu_file_open()
 
 void MainWindow::menu_folder_open()
 {
-    QString foldername = QFileDialog::getExistingDirectory(this, txt::open_folder, mOpenFolderPath, QFileDialog::ShowDirsOnly);
+    QString foldername = QFileDialog::getExistingDirectory(this, txt::open_folder, mFileOpenFolderPath, QFileDialog::ShowDirsOnly);
     if (foldername.size())
     {
-        mOpenFolderPath = foldername;
+        disconnect(&mPlayer, SIGNAL(mediaChanged(QMediaContent)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
+        mFileOpenFolderPath = foldername;
         int current_row = 0;
         mCurrentMetainfo.clear();
         mListModel->removeRows(0, mListModel->rowCount());
 
-        QDirIterator picture_iter(foldername, {"*.jpg", "*.png"} , QDir::Files);
+        QDirIterator picture_iter(foldername, txt::media_picture_endings , QDir::Files);
         QString picture;
         picture_iter.next();
         qint64 picture_size = 0;
@@ -747,49 +761,14 @@ void MainWindow::menu_folder_open()
             picture_iter.next();
         }
 
-        QDirIterator media_iter(  foldername, {"*.mp3", "*.wav", "*.wma", "*.m4a", "*.m4b", "*.m4p",
-                                               "*.mpg", "*.flac" "*.ogg", "*.oga", "*.mogg"} , QDir::Files);
-/*
-.3gp 		Multimedia container format can contain proprietary formats as AMR, AMR-WB or AMR-WB+, but also some open formats
-.aa 	Audible (Amazon) 	A low-bitrate audiobook container format with DRM, containing audio encoded as either MP3 or the ACELP speech codec.
-.aac 		The Advanced Audio Coding format is based on the MPEG-2 and MPEG-4 standards. AAC files are usually ADTS or ADIF containers.
-.aax 	Audible (Amazon) 	An Audiobook format, which is a variable-bitrate (allowing high quality) M4B file encrypted with DRM. MPB contains AAC or ALAC encoded audio in an MPEG-4 container. (More details below.)
-.act 		ACT is a lossy ADPCM 8 kbit/s compressed audio format recorded by most Chinese MP3 and MP4 players with a recording function, and voice recorders
-.aiff 	Apple 	A standard uncompressed CD-quality, audio file format used by Apple. Established 3 years prior to Microsoft's uncompressed version wav.
-.alac 	Apple 	An audio coding format developed by Apple Inc. for lossless data compression of digital music.
-.amr 		AMR-NB audio, used primarily for speech.
-.ape 	Matthew T. Ashland 	Monkey's Audio lossless audio compression format.
-.au 	Sun Microsystems 	The standard audio file format used by Sun, Unix and Java. The audio in au files can be PCM or compressed with the μ-law, a-law or G.729 codecs.
-.awb 		AMR-WB audio, used primarily for speech, same as the ITU-T's G.722.2 specification.
-.dss 	Olympus 	DSS files are an Olympus proprietary format. DSS files use a high compression rate, which reduces the file size and allows files to be copied and transferred quickly.[6] It allows additional data to be held in the file header.
-.dvf 	Sony 	A Sony proprietary format for compressed voice files; commonly used by Sony dictation recorders.
-.gsm 		Designed for telephony use in Europe, GSM is used to store telephone voice messages and conversations. With a bitrate of 13 kbit/s, GSM files can compress and encode audio at telephone quality.[7] Note that WAV files can also be encoded with the GSM codec.
-.iklax 	iKlax 	An iKlax Media proprietary format, the iKlax format is a multi-track digital audio format allowing various actions on musical data, for instance on mixing and volumes arrangements.
-.ivs 	3D Solar UK Ltd 	A proprietary version with DRM developed by 3D Solar UK Ltd for use in music downloaded from their Tronme Music Store and interactive music and video player.
-.mmf 	Yamaha, Samsung 	A Samsung audio format that is used in ringtones. Developed by Yamaha (SMAF stands for "Synthetic music Mobile Application Format", and is a multimedia data format invented by the Yamaha Corporation, .mmf file format).
-.movpkg 	Apple 	An Apple audio format primarily used for Lossless and Hi-Res audio files through Apple Music. Also used for storing Apple TV videos.
-.mpc 		Musepack or MPC (formerly known as MPEGplus, MPEG+ or MP+) is an open source lossy audio codec, specifically optimized for transparent compression of stereo audio at bitrates of 160–180 kbit/s.
-.msv 	Sony 	A Sony proprietary format for Memory Stick compressed voice files.
-.nmf 	NICE 	NICE Media Player audio file
-.opus 	Internet Engineering Task Force 	A lossy audio compression format developed by the Internet Engineering Task Force (IETF) and made especially suitable for interactive real-time applications over the Internet. As an open format standardised through RFC 6716, a reference implementation is provided under the 3-clause BSD license.
-.ra, .rm 	RealNetworks 	A RealAudio format designed for streaming audio over the Internet. The .ra format allows files to be stored in a self-contained fashion on a computer, with all of the audio data contained inside the file itself.
-.raw 		A raw file can contain audio in any format but is usually used with PCM audio data. It is rarely used except for technical tests.
-.rf64 		One successor to the Wav format, overcoming the 4GiB size limitation.
-.sln 		Signed Linear PCM format used by Asterisk. Prior to v.10 the standard formats were 16-bit Signed Linear PCM sampled at 8 kHz and at 16 kHz. With v.10 many more sampling rates were added.[9]
-.tta 		The True Audio, real-time lossless audio codec.
-.voc 	Creative Technology 	The file format consists of a 26-byte header and a series of subsequent data blocks containing the audio information
-.vox 		The vox format most commonly uses the Dialogic ADPCM (Adaptive Differential Pulse Code Modulation) codec. Similar to other ADPCM formats, it compresses to 4-bits. Vox format files are similar to wave files except that the vox files contain no information about the file itself so the codec sample rate and number of channels must first be specified in order to play a vox file.
-.wv 		Format for wavpack files.
-.webm 		Royalty-free format created for HTML video.
-.8svx 	Electronic Arts 	The IFF-8SVX format for 8-bit sound samples, created by Electronic Arts in 1984 at the birth of the Amiga.
-.cda
-*/
+        QDirIterator media_iter(  foldername, txt::media_audio_endings , QDir::Files);
+
         int timeout = 1000;
         do
         {
             media_iter.next();
             mListModel->insertRows(current_row, 1, QModelIndex());
-            QString media_file = "file://" + media_iter.filePath();
+            QString media_file = txt::prefix_file + media_iter.filePath();
             mPlayer.setMedia(QUrl(media_file));
             QTimer timer;
             QEventLoop loop;
@@ -819,6 +798,10 @@ void MainWindow::menu_folder_open()
                 {
                     mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AlbumTitle].toString());
                 }
+                else if (mCurrentMetainfo.contains(QMediaMetaData::AlbumArtist))
+                {
+                    mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AlbumArtist].toString());
+                }
                 if (mCurrentMetainfo.contains(QMediaMetaData::AudioCodec))
                 {
                     mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AudioCodec].toString());
@@ -832,14 +815,21 @@ void MainWindow::menu_folder_open()
                 mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), "media");
                 mListModel->setData(mListModel->index(current_row, eGroup, QModelIndex()), "group");
             }
+
             disconnect(&mPlayer, &QMediaPlayer::mediaStatusChanged, &loop, &QEventLoop::quit);
-            disconnect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit );
+            disconnect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+
             mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_file);
             mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
-            mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), "file://" + picture);
+            mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), txt::prefix_file + picture);
             ++current_row;
         }
         while (media_iter.hasNext());
+        if (current_row)
+        {
+            connect(&mPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
+            on_tableView_clicked(mListModel->index(0, 0));
+        }
     }
 
 }
@@ -1346,7 +1336,7 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         if (value.typeId() == QMetaType::QString && key.contains(QMediaMetaData::metaDataKeyToString(QMediaMetaData::Title), Qt::CaseInsensitive))
 #else
-        if (value.type() == QVariant::String && key.contains(QMediaMetaData::Title, Qt::CaseInsensitive))
+        if (value.type() == QVariant::String && (key.contains(QMediaMetaData::Title, Qt::CaseInsensitive) || key.contains("album", Qt::CaseInsensitive) ))
 #endif
         {
             message += value.toString();
@@ -1363,6 +1353,26 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
         }
     }
     mCurrentMetainfo[key] = value;
+}
+
+void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
+{
+    switch (status)
+    {
+    case QMediaPlayer::UnknownMediaStatus:
+    case QMediaPlayer::NoMedia:
+    case QMediaPlayer::LoadingMedia:
+    case QMediaPlayer::LoadedMedia:
+    case QMediaPlayer::StalledMedia:
+    case QMediaPlayer::BufferingMedia:
+    case QMediaPlayer::BufferedMedia:
+        break;
+    case QMediaPlayer::InvalidMedia:
+        break;
+    case QMediaPlayer::EndOfMedia:
+        on_pushButtonStop_clicked();
+        break;
+    }
 }
 
 bool  MainWindow::event(QEvent*e)
@@ -1488,5 +1498,29 @@ int execute(const QString& command, QString& aResultText)
 
     fTemp.remove(fTemp.path());
     return fResult;
+}
+
+
+void MainWindow::on_pushButtonNext_pressed()
+{
+
+}
+
+
+void MainWindow::on_pushButtonNext_released()
+{
+
+}
+
+
+void MainWindow::on_pushButtonPrevious_pressed()
+{
+
+}
+
+
+void MainWindow::on_pushButtonPrevious_released()
+{
+
 }
 

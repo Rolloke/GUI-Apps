@@ -86,7 +86,7 @@ private slots:
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
-
+    void media_status_changed(const QMediaPlayer::MediaStatus& status);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     void metaDataChanged(bool delayed = false);
@@ -95,6 +95,15 @@ private slots:
     void traymenu_hide_window();
     void traymenu_show_window();
     void onDownloadFinished();
+
+    void on_pushButtonNext_pressed();
+
+    void on_pushButtonNext_released();
+
+    void on_pushButtonPrevious_pressed();
+
+    void on_pushButtonPrevious_released();
+
 private:
 
     Ui::MainWindow *    ui;
@@ -111,10 +120,9 @@ private:
     int                 mCurrentPlayIndex {0};
     QList<int>          mHiddenColumns;
     QString             mFileOpenPath;
-    QString             mOpenFolderPath;
+    QString             mFileOpenFolderPath;
     QString             mFavoritesOpenPath;
     QString             mMediaPlayerCommand;
-
     QString             mOpenFileAtStart;
     QString             mOpenFileCmdLine;
     QString             mUploadFavoriteCommand;
