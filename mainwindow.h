@@ -102,7 +102,7 @@ private slots:
     void onDownloadFinished();
     bool set_media_info_to_item(int row);
     void generate_media_file_tray_message();
-
+    void update_duration_info();
 
 private:
 
