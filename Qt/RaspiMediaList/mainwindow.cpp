@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "logger.h"
 
 #include <iostream>
 #include <QFile>
@@ -72,6 +73,8 @@ constexpr char sGroupSettings[] = "Settings";
 
 namespace txt
 {
+constexpr char sGroupLogging[] = "Logging";
+
 const QString radio            = QObject::tr("Radio");
 const QString tv               = QObject::tr("TV");
 const QString open_media_list  = QObject::tr("Open Kodi raw media List");
@@ -84,6 +87,8 @@ const QStringList media_audio_endings   = {
     "*.dss", "*.dvf", "*.gsm", "*.iklax", "*.ivs", "*.mmf", "*.movpkg", "*.mpc", "*.msv", "*.nmf", "*.opus",
     "*.ra", "*.rm", "*.raw", "*.rf64", "*.sln", "*.tta", "*.voc", "*.vox", "*.wv", "*.webm", "*.8svx", "*.cda"};
 const QString prefix_file      = "file://";
+
+const QString duration = QObject::tr("Duration (m:s)");
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
 const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
@@ -135,6 +140,23 @@ enum error
     ErrorNumberInErrno = -1,
     NoError = 0
 };
+
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+
+QString get_key(const QMediaMetaData::Key& key)
+{
+    return QMediaMetaData::metaDataKeyToString(key);
+}
+
+#else
+
+QString get_key(const QString& key)
+{
+    return key;
+}
+
+#endif
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent)
@@ -195,6 +217,16 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
+
+    fSettings.beginGroup(txt::sGroupLogging);
+    {
+        QString fSeverity;
+        LOAD_STR(fSettings, fSeverity, toString);
+        uint32_t fSeverityValue = fSeverity.toLong(0, 2);
+        Logger::setSeverity(0xffff, false);
+        Logger::setSeverity(fSeverityValue, true);
+    }
+    fSettings.endGroup();
 
     mHiddenColumns = { eURL, eLogo, eFriendlyName };
     QStringList fSectionNames = { tr("Name"), tr("ID"), tr("Group"), tr("URL"), tr("Logo"), tr("Friendly Name"), tr("Medium")};
@@ -265,7 +297,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionClose, SIGNAL(triggered(bool)), SLOT(close()));
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    connect(&mPlayer, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(metaDataAvailableChanged(bool)));
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
 #else
     connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
@@ -338,6 +369,15 @@ MainWindow::~MainWindow()
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
     QFileInfo info(mOpenFileCmdLine);
+
+    fSettings.beginGroup(txt::sGroupLogging);
+    {
+        QString fSeverHlp = "_fscb___acewnidt";
+        STORE_STR(fSettings, fSeverHlp);
+        QString fSeverity = QString::number(Logger::getSeverity(), 2);
+        STORE_STR(fSettings, fSeverity);
+    }
+    fSettings.endGroup();
 
     fSettings.beginGroup(config::sGroupSettings + info.baseName());
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
@@ -467,8 +507,8 @@ void MainWindow::on_pushButtonStart_clicked()
         }
         else
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             mCurrentMetainfo.clear();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             mPlayer.setSource(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
 #else
             mPlayer.setMedia(QUrl(mListModel->data(mListModel->index(mCurrentRowIndex, eURL)).toString()));
@@ -591,6 +631,39 @@ void MainWindow::on_pushButtonFind_clicked()
     if (current_row == table_rows)
     {
         mFindStartRow = 0;
+    }
+}
+
+void MainWindow::on_pushButtonNext_pressed()
+{
+}
+
+void MainWindow::on_pushButtonNext_released()
+{
+    if (m_media_folder_mode)
+    {
+        if (mCurrentRowIndex < mListModel->rowCount())
+        {
+            select_index(mCurrentRowIndex+1);
+            on_pushButtonStart_clicked();
+        }
+    }
+}
+
+void MainWindow::on_pushButtonPrevious_pressed()
+{
+
+}
+
+void MainWindow::on_pushButtonPrevious_released()
+{
+    if (m_media_folder_mode)
+    {
+        if (mCurrentRowIndex > 0)
+        {
+            select_index(mCurrentRowIndex-1);
+            on_pushButtonStart_clicked();
+        }
     }
 }
 
@@ -741,7 +814,8 @@ void MainWindow::menu_folder_open()
     QString foldername = QFileDialog::getExistingDirectory(this, txt::open_folder, mFileOpenFolderPath, QFileDialog::ShowDirsOnly);
     if (foldername.size())
     {
-        disconnect(&mPlayer, SIGNAL(mediaChanged(QMediaContent)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
+        disconnect(&mPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
+
         mFileOpenFolderPath = foldername;
         int current_row = 0;
         mCurrentMetainfo.clear();
@@ -769,6 +843,13 @@ void MainWindow::menu_folder_open()
             media_iter.next();
             mListModel->insertRows(current_row, 1, QModelIndex());
             QString media_file = txt::prefix_file + media_iter.filePath();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            Q_UNUSED(timeout);
+            mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), media_iter.fileName());
+            mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_file);
+            mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
+            mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), txt::prefix_file + picture);
+#else
             mPlayer.setMedia(QUrl(media_file));
             QTimer timer;
             QEventLoop loop;
@@ -782,29 +863,9 @@ void MainWindow::menu_folder_open()
             }
             if(timeout && timer.isActive())
             {
-                if (mCurrentMetainfo.contains(QMediaMetaData::Genre))
+                if (!set_media_info_to_item(current_row))
                 {
-                    mListModel->setData(mListModel->index(current_row, eGroup, QModelIndex()), mCurrentMetainfo[QMediaMetaData::Genre].toString());
-                }
-                if (mCurrentMetainfo.contains(QMediaMetaData::Title))
-                {
-                    mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), mCurrentMetainfo[QMediaMetaData::Title].toString());
-                }
-                else
-                {
-                    mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), media_iter.fileName());
-                }
-                if (mCurrentMetainfo.contains(QMediaMetaData::AlbumTitle))
-                {
-                    mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AlbumTitle].toString());
-                }
-                else if (mCurrentMetainfo.contains(QMediaMetaData::AlbumArtist))
-                {
-                    mListModel->setData(mListModel->index(current_row, eFriendlyName, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AlbumArtist].toString());
-                }
-                if (mCurrentMetainfo.contains(QMediaMetaData::AudioCodec))
-                {
-                    mListModel->setData(mListModel->index(current_row, eMedia, QModelIndex()), mCurrentMetainfo[QMediaMetaData::AudioCodec].toString());
+                    mListModel->setData(mListModel->index(row, eName, QModelIndex()), media_iter.fileName());
                 }
             }
             else
@@ -818,21 +879,25 @@ void MainWindow::menu_folder_open()
 
             disconnect(&mPlayer, &QMediaPlayer::mediaStatusChanged, &loop, &QEventLoop::quit);
             disconnect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-
             mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_file);
             mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
             mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), txt::prefix_file + picture);
+#endif
+
             ++current_row;
         }
         while (media_iter.hasNext());
         if (current_row)
         {
             connect(&mPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
-            on_tableView_clicked(mListModel->index(0, 0));
+            select_index(0);
+            on_pushButtonStart_clicked();
         }
+        m_media_folder_mode = true;
+        update_command_states();
     }
-
 }
+
 
 void MainWindow::menu_help_about()
 {
@@ -883,7 +948,7 @@ void MainWindow::menu_help_info()
             info += "<tr><td>";
             info += metainfo.key();
             info += "</td><td>";
-#if  QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             switch(value.typeId())
             {
             case QMetaType::QString:
@@ -1030,6 +1095,68 @@ void  MainWindow::onDownloadFinished()
     }
 }
 
+bool MainWindow::set_media_info_to_item(int row)
+{
+    bool result = true;
+    if (mCurrentMetainfo.contains(get_key(QMediaMetaData::Genre)))
+    {
+        mListModel->setData(mListModel->index(row, eGroup, QModelIndex()), mCurrentMetainfo[get_key(QMediaMetaData::Genre)].toString());
+    }
+    else
+    {
+        mListModel->setData(mListModel->index(row, eGroup, QModelIndex()), "group");
+    }
+    if (mCurrentMetainfo.contains(get_key(QMediaMetaData::Title)))
+    {
+        mListModel->setData(mListModel->index(row, eName, QModelIndex()), mCurrentMetainfo[get_key(QMediaMetaData::Title)].toString());
+    }
+    else
+    {
+        result = false;
+    }
+    if (mCurrentMetainfo.contains(get_key(QMediaMetaData::AlbumTitle)))
+    {
+        mListModel->setData(mListModel->index(row, eFriendlyName, QModelIndex()), mCurrentMetainfo[get_key(QMediaMetaData::AlbumTitle)].toString());
+    }
+    else if (mCurrentMetainfo.contains(get_key(QMediaMetaData::AlbumArtist)))
+    {
+        mListModel->setData(mListModel->index(row, eFriendlyName, QModelIndex()), mCurrentMetainfo[get_key(QMediaMetaData::AlbumArtist)].toString());
+    }
+    if (mCurrentMetainfo.contains(get_key(QMediaMetaData::AudioCodec)))
+    {
+        mListModel->setData(mListModel->index(row, eMedia, QModelIndex()), mCurrentMetainfo[get_key(QMediaMetaData::AudioCodec)].toString());
+    }
+    return result;
+}
+
+void MainWindow::generate_media_file_tray_message()
+{
+    if (m_tray_message && m_tray_message->isVisible())
+    {
+        QString message;
+        QString key = get_key(QMediaMetaData::AlbumTitle);
+        if (mCurrentMetainfo.contains(key))
+        {
+            message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+        }
+        key = get_key(QMediaMetaData::AlbumArtist);
+        if (mCurrentMetainfo.contains(key))
+        {
+            message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+        }
+        key = get_key(QMediaMetaData::Title);
+        if (mCurrentMetainfo.contains(key))
+        {
+            QString status = key + ": " + mCurrentMetainfo[key].toString();
+            message += status + "\n";
+            ui->statusBar->showMessage(status);
+        }
+        message += txt::duration + ": " + mCurrentMetainfo[txt::duration].toString();
+        m_tray_message->setToolTip(message);
+        m_tray_message->showMessage(tr("Information"), message);
+    }
+}
+
 void MainWindow::onReplyFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -1144,6 +1271,7 @@ void MainWindow::open_file(const QString& filename)
         // remove the last row at the end
         mListModel->removeRows(current_row, 1);
         ui->checkBoxSelectAll->setChecked(true);
+        m_media_folder_mode = false;
     }
 
     for (auto& column : mHiddenColumns)
@@ -1253,6 +1381,38 @@ void MainWindow::update_command_states()
     ui->actionDownload_favorites->setEnabled(mDownloadFavoriteCommand.size() != 0);
     ui->actionUpload_favorites->setEnabled(mUploadFavoriteCommand.size() != 0);
     ui->actionDownload_Kodi_Raw_list->setEnabled(mDownloadKodiRawFilePath.size() != 0);
+    ui->pushButtonNext->setEnabled(m_media_folder_mode);
+    ui->pushButtonPrevious->setEnabled(m_media_folder_mode);
+    ui->actionRepeat_Playlist->setEnabled(m_media_folder_mode);
+    ui->actionShuffle->setEnabled(m_media_folder_mode);
+}
+
+void MainWindow::handle_end_of_media()
+{
+    if (m_media_folder_mode)
+    {
+        if (ui->actionShuffle->isChecked())
+        {
+            /// TODO: implement shuffle
+        }
+        else
+        {
+            if (mCurrentRowIndex < mListModel->rowCount())
+            {
+                select_index(mCurrentRowIndex+1);
+                on_pushButtonStart_clicked();
+            }
+            else if (ui->actionRepeat_Playlist->isChecked())
+            {
+                select_index(0);
+                on_pushButtonStart_clicked();
+            }
+            else
+            {
+                on_pushButtonStop_clicked();
+            }
+        }
+    }
 }
 
 void MainWindow::menu_option_show_tray_icon(bool show)
@@ -1308,9 +1468,11 @@ void MainWindow::metaDataChanged(bool delayed)
     /// the information is not available at the time the slot metaDataChanged is invoked
     if (!delayed)
     {
-        QTimer::singleShot(1000, [this](){ metaDataChanged(true); });
+        QTimer::singleShot(600, [this](){ metaDataChanged(true); });
         return ;
     }
+    //QMetaDataReaderControl;
+
     QList<QMediaMetaData>  tracks = mPlayer.audioTracks();
     tracks.append(mPlayer.videoTracks());
     tracks.append(mPlayer.subtitleTracks());
@@ -1322,6 +1484,18 @@ void MainWindow::metaDataChanged(bool delayed)
             metaDataChanged(QMediaMetaData::metaDataKeyToString(key), track.value(key));
         }
     }
+    if (m_media_folder_mode)
+    {
+        long seconds = mPlayer.duration() / 1000;
+        long minutes = seconds / 60;
+        seconds = seconds - minutes * 60;
+        mCurrentMetainfo[txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
+        if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).isNull())
+        {
+            set_media_info_to_item(mCurrentRowIndex);
+        }
+        generate_media_file_tray_message();
+    }
 }
 #endif
 
@@ -1330,36 +1504,47 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 {
     if (value.isValid())
     {
+        mCurrentMetainfo[key] = value;
+
         QString message = key;
         message += ": ";
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        if (value.typeId() == QMetaType::QString && key.contains(QMediaMetaData::metaDataKeyToString(QMediaMetaData::Title), Qt::CaseInsensitive))
-#else
-        if (value.type() == QVariant::String && (key.contains(QMediaMetaData::Title, Qt::CaseInsensitive) || key.contains("album", Qt::CaseInsensitive) ))
-#endif
+        if (m_media_folder_mode)
         {
-            message += value.toString();
-            ui->statusBar->showMessage(message);
-            if (m_tray_message && m_tray_message->isVisible())
-            {
-#ifdef __linux__
-                m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+            generate_media_file_tray_message();
+        }
+        else
+        {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if (value.typeId() == QMetaType::QString && key.contains(QMediaMetaData::metaDataKeyToString(QMediaMetaData::Title), Qt::CaseInsensitive))
 #else
-                m_tray_message->setToolTip(tr("Source: %1\n%2: %3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+            if (value.type() == QVariant::String && (key.contains(QMediaMetaData::Title, Qt::CaseInsensitive)))
 #endif
-                m_tray_message->showMessage(key, value.toString());
+            {
+                message += value.toString();
+                ui->statusBar->showMessage(message);
+                if (m_tray_message && m_tray_message->isVisible())
+                {
+#ifdef __linux__
+                    m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+#else
+                    m_tray_message->setToolTip(tr("Source: %1\n%2: %3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+#endif
+                    m_tray_message->showMessage(key, value.toString());
+                }
             }
         }
     }
-    mCurrentMetainfo[key] = value;
 }
 
 void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
 {
+    TRACEX(Logger::info, "media_status_changed" << status);
     switch (status)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#else
     case QMediaPlayer::UnknownMediaStatus:
+#endif
     case QMediaPlayer::NoMedia:
     case QMediaPlayer::LoadingMedia:
     case QMediaPlayer::LoadedMedia:
@@ -1370,7 +1555,7 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
     case QMediaPlayer::InvalidMedia:
         break;
     case QMediaPlayer::EndOfMedia:
-        on_pushButtonStop_clicked();
+        handle_end_of_media();
         break;
     }
 }
@@ -1501,26 +1686,4 @@ int execute(const QString& command, QString& aResultText)
 }
 
 
-void MainWindow::on_pushButtonNext_pressed()
-{
-
-}
-
-
-void MainWindow::on_pushButtonNext_released()
-{
-
-}
-
-
-void MainWindow::on_pushButtonPrevious_pressed()
-{
-
-}
-
-
-void MainWindow::on_pushButtonPrevious_released()
-{
-
-}
 

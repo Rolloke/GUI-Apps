@@ -54,6 +54,7 @@ private:
     void closeEvent(QCloseEvent *event) override;
     void add_button_to_menue(QMenu*menu, QPushButton* button);
     void update_command_states();
+    void handle_end_of_media();
 
 private slots:
     void menu_file_open();
@@ -83,6 +84,10 @@ private slots:
     void on_pushButtonStop_clicked();
     void on_pushButtonSelect_clicked();
     void on_pushButtonFind_clicked();
+    void on_pushButtonNext_pressed();
+    void on_pushButtonNext_released();
+    void on_pushButtonPrevious_pressed();
+    void on_pushButtonPrevious_released();
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
@@ -95,14 +100,9 @@ private slots:
     void traymenu_hide_window();
     void traymenu_show_window();
     void onDownloadFinished();
+    bool set_media_info_to_item(int row);
+    void generate_media_file_tray_message();
 
-    void on_pushButtonNext_pressed();
-
-    void on_pushButtonNext_released();
-
-    void on_pushButtonPrevious_pressed();
-
-    void on_pushButtonPrevious_released();
 
 private:
 
@@ -132,6 +132,7 @@ private:
     int                 mFindStartRow {0};
     bool                mShowIcon {false};
     int                 mChecked {0};
+    bool                m_media_folder_mode {false};
 };
 
 #endif // MAINWINDOW_H
