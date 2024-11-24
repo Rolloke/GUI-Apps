@@ -150,21 +150,21 @@
             <item>
              <widget class="QPushButton" name="pushButtonPause">
               <property name="text">
-               <string>Pause</string>
+               <string>|| ||</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonPrevious">
               <property name="text">
-               <string>Previous</string>
+               <string>|&lt;&lt;</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonNext">
               <property name="text">
-               <string>Next</string>
+               <string>&gt;&gt;|</string>
               </property>
              </widget>
             </item>
@@ -320,7 +320,7 @@
      <x>0</x>
      <y>0</y>
      <width>912</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -360,6 +360,10 @@
     <addaction name="actionOpenMediaPlayerOnDoubleclick"/>
     <addaction name="actionLoadLastOpenedFileAtStart"/>
     <addaction name="actionShowTrayIconAndInfo"/>
+    <addaction name="separator"/>
+    <addaction name="actionRepeat_Playlist"/>
+    <addaction name="actionShuffle"/>
+    <addaction name="separator"/>
     <addaction name="actionEdit_Upload_Command"/>
     <addaction name="actionEdit_Download_Command"/>
     <addaction name="actionEdit_Download_Path_for_m3u_Files"/>
@@ -576,6 +580,28 @@
    </property>
    <property name="statusTip">
     <string>Open folder with fedia files</string>
+   </property>
+  </action>
+  <action name="actionRepeat_Playlist">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Repeat Playlist</string>
+   </property>
+  </action>
+  <action name="actionShuffle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Shuffle </string>
    </property>
   </action>
  </widget>
