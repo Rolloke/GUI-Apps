@@ -843,6 +843,10 @@ void MainWindow::menu_folder_open()
             media_iter.next();
             mListModel->insertRows(current_row, 1, QModelIndex());
             QString media_file = txt::prefix_file + media_iter.filePath();
+            mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), media_iter.fileName());
+            mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
+            mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_file);
+            mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), txt::prefix_file + picture);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             Q_UNUSED(timeout);
             mListModel->setData(mListModel->index(current_row, eName, QModelIndex()), media_iter.fileName());
@@ -863,10 +867,7 @@ void MainWindow::menu_folder_open()
             }
             if(timeout && timer.isActive())
             {
-                if (!set_media_info_to_item(current_row))
-                {
-                    mListModel->setData(mListModel->index(row, eName, QModelIndex()), media_iter.fileName());
-                }
+                set_media_info_to_item(current_row);
             }
             else
             {
@@ -879,16 +880,18 @@ void MainWindow::menu_folder_open()
 
             disconnect(&mPlayer, &QMediaPlayer::mediaStatusChanged, &loop, &QEventLoop::quit);
             disconnect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-            mListModel->setData(mListModel->index(current_row, eURL, QModelIndex()), media_file);
-            mListModel->setData(mListModel->index(current_row, mChecked, QModelIndex()), true, Qt::CheckStateRole);
-            mListModel->setData(mListModel->index(current_row, eLogo, QModelIndex()), txt::prefix_file + picture);
 #endif
 
             ++current_row;
         }
         while (media_iter.hasNext());
+
         if (current_row)
         {
+            for (auto& column : mHiddenColumns)
+            {
+                ui->tableView->setColumnHidden(column, true);
+            }
             connect(&mPlayer, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(media_status_changed(QMediaPlayer::MediaStatus)));
             select_index(0);
             on_pushButtonStart_clicked();
@@ -1155,6 +1158,14 @@ void MainWindow::generate_media_file_tray_message()
         m_tray_message->setToolTip(message);
         m_tray_message->showMessage(tr("Information"), message);
     }
+}
+
+void MainWindow::update_duration_info()
+{
+    long seconds = mPlayer.duration() / 1000;
+    long minutes = seconds / 60;
+    seconds = seconds - minutes * 60;
+    mCurrentMetainfo[txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
 }
 
 void MainWindow::onReplyFinished()
@@ -1471,8 +1482,10 @@ void MainWindow::metaDataChanged(bool delayed)
         QTimer::singleShot(600, [this](){ metaDataChanged(true); });
         return ;
     }
+
     //QMetaDataReaderControl;
 
+    TRACEX(Logger::info, "metaDataChanged: " << delayed);
     QList<QMediaMetaData>  tracks = mPlayer.audioTracks();
     tracks.append(mPlayer.videoTracks());
     tracks.append(mPlayer.subtitleTracks());
@@ -1486,14 +1499,11 @@ void MainWindow::metaDataChanged(bool delayed)
     }
     if (m_media_folder_mode)
     {
-        long seconds = mPlayer.duration() / 1000;
-        long minutes = seconds / 60;
-        seconds = seconds - minutes * 60;
-        mCurrentMetainfo[txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
         if (mListModel->data(mListModel->index(mCurrentRowIndex, eMedia)).isNull())
         {
             set_media_info_to_item(mCurrentRowIndex);
         }
+        update_duration_info();
         generate_media_file_tray_message();
     }
 }
@@ -1508,11 +1518,7 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
 
         QString message = key;
         message += ": ";
-        if (m_media_folder_mode)
-        {
-            generate_media_file_tray_message();
-        }
-        else
+        if (!m_media_folder_mode)
         {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             if (value.typeId() == QMetaType::QString && key.contains(QMediaMetaData::metaDataKeyToString(QMediaMetaData::Title), Qt::CaseInsensitive))
@@ -1541,18 +1547,32 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
     TRACEX(Logger::info, "media_status_changed" << status);
     switch (status)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     case QMediaPlayer::UnknownMediaStatus:
 #endif
     case QMediaPlayer::NoMedia:
+        break;
     case QMediaPlayer::LoadingMedia:
+        break;
     case QMediaPlayer::LoadedMedia:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        metaDataChanged(true);
+#endif
+        break;
     case QMediaPlayer::StalledMedia:
+        break;
     case QMediaPlayer::BufferingMedia:
+        break;
     case QMediaPlayer::BufferedMedia:
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        metaDataChanged(true);
+#else
+        update_duration_info();
+        generate_media_file_tray_message();
+#endif
         break;
     case QMediaPlayer::InvalidMedia:
+        ui->statusBar->showMessage("Invalid media");
         break;
     case QMediaPlayer::EndOfMedia:
         handle_end_of_media();
