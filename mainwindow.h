@@ -43,6 +43,8 @@ public:
 
 protected:
     bool  event(QEvent*) override;
+    void timerEvent(QTimerEvent*);
+
 private:
     void open_file(const QString& file_name);
     QString getConfigName() const;
@@ -102,7 +104,7 @@ private slots:
     void onDownloadFinished();
     bool set_media_info_to_item(int row);
     void generate_media_file_tray_message();
-    void update_duration_info();
+    void update_duration_info(bool position);
 
 private:
 
@@ -133,6 +135,7 @@ private:
     bool                mShowIcon {false};
     int                 mChecked {0};
     bool                m_media_folder_mode {false};
+    int                 mTimerID {0};
 };
 
 #endif // MAINWINDOW_H

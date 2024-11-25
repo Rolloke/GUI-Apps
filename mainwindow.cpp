@@ -89,6 +89,7 @@ const QStringList media_audio_endings   = {
 const QString prefix_file      = "file://";
 
 const QString duration = QObject::tr("Duration (m:s)");
+const QString position = QObject::tr("Position (m:s)");
 
 const QString store_kodi_fav   = QObject::tr("Store media list as favorites for Raspi");
 const QString store_downloaded_kodi_fav = QObject::tr("Store downloaded favorites from Raspi");
@@ -520,7 +521,10 @@ void MainWindow::on_pushButtonStart_clicked()
             mPlayer.play();
 
             display_play_status();
-            m_play_name->setText(get_item_name(mCurrentPlayIndex));
+            if (!m_media_folder_mode)
+            {
+                m_play_name->setText(get_item_name(mCurrentPlayIndex));
+            }
         }
     }
 }
@@ -536,12 +540,26 @@ void MainWindow::display_play_status()
     {
     case QMediaPlayer::StoppedState:
         m_play_status->setText(tr("Stopped"));
+        if (mTimerID)
+        {
+            killTimer(mTimerID);
+            mTimerID = 0;
+        }
         break;
     case QMediaPlayer::PausedState:
         m_play_status->setText(tr("Paused"));
+        if (mTimerID)
+        {
+            killTimer(mTimerID);
+            mTimerID = 0;
+        }
         break;
     case QMediaPlayer::PlayingState:
         m_play_status->setText(tr("Playing"));
+        if (m_media_folder_mode)
+        {
+            mTimerID = startTimer(1000);
+        }
         break;
     }
     ui->pushButtonStart->setChecked(state == QMediaPlayer::PlayingState);
@@ -1160,12 +1178,12 @@ void MainWindow::generate_media_file_tray_message()
     }
 }
 
-void MainWindow::update_duration_info()
+void MainWindow::update_duration_info(bool position)
 {
-    long seconds = mPlayer.duration() / 1000;
+    long seconds = position ? mPlayer.position() / 1000 : mPlayer.duration() / 1000;
     long minutes = seconds / 60;
     seconds = seconds - minutes * 60;
-    mCurrentMetainfo[txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
+    mCurrentMetainfo[position ? txt::position : txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
 }
 
 void MainWindow::onReplyFinished()
@@ -1567,7 +1585,7 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         metaDataChanged(true);
 #else
-        update_duration_info();
+        update_duration_info(false);
         generate_media_file_tray_message();
 #endif
         break;
@@ -1583,6 +1601,15 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
 bool  MainWindow::event(QEvent*e)
 {
     return QMainWindow::event(e);
+}
+
+void MainWindow::timerEvent(QTimerEvent *evt)
+{
+    (void)(evt);
+    update_duration_info(false);
+    update_duration_info(true);
+
+    m_play_name->setText(mCurrentMetainfo[txt::position].toString() + " of " + mCurrentMetainfo[txt::duration].toString());
 }
 
 QString getSettingsName(const QString& aItemName)
