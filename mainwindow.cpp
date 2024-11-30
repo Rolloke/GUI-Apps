@@ -906,6 +906,7 @@ void MainWindow::menu_folder_open()
 
         if (current_row)
         {
+            m_media_folder_mode = true;
             for (auto& column : mHiddenColumns)
             {
                 ui->tableView->setColumnHidden(column, true);
@@ -914,7 +915,6 @@ void MainWindow::menu_folder_open()
             select_index(0);
             on_pushButtonStart_clicked();
         }
-        m_media_folder_mode = true;
         update_command_states();
     }
 }
@@ -1156,14 +1156,24 @@ void MainWindow::generate_media_file_tray_message()
     {
         QString message;
         QString key = get_key(QMediaMetaData::AlbumTitle);
-        if (mCurrentMetainfo.contains(key))
+        for (const auto& media_key : {QMediaMetaData::AlbumTitle, QMediaMetaData::Description})
         {
-            message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+            key = get_key(media_key);
+            if (mCurrentMetainfo.contains(key))
+            {
+                message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+            }
         }
-        key = get_key(QMediaMetaData::AlbumArtist);
-        if (mCurrentMetainfo.contains(key))
+        for (const auto& media_key : {QMediaMetaData::AlbumArtist, QMediaMetaData::ContributingArtist,
+                                      QMediaMetaData::Author     , QMediaMetaData::Publisher,
+                                      QMediaMetaData::Composer   , QMediaMetaData::LeadPerformer})
         {
-            message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+            key = get_key(media_key);
+            if (mCurrentMetainfo.contains(key))
+            {
+                message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+                break;
+            }
         }
         key = get_key(QMediaMetaData::Title);
         if (mCurrentMetainfo.contains(key))
@@ -1183,7 +1193,9 @@ void MainWindow::update_duration_info(bool position)
     long seconds = position ? mPlayer.position() / 1000 : mPlayer.duration() / 1000;
     long minutes = seconds / 60;
     seconds = seconds - minutes * 60;
-    mCurrentMetainfo[position ? txt::position : txt::duration] = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
+    QString time = tr("%1:%2").arg(minutes).arg((double)seconds, 2);
+    time.replace(" ", "0");
+    mCurrentMetainfo[position ? txt::position : txt::duration] = time;
 }
 
 void MainWindow::onReplyFinished()
@@ -1521,7 +1533,7 @@ void MainWindow::metaDataChanged(bool delayed)
         {
             set_media_info_to_item(mCurrentRowIndex);
         }
-        update_duration_info();
+        update_duration_info(false);
         generate_media_file_tray_message();
     }
 }
@@ -1574,7 +1586,7 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
         break;
     case QMediaPlayer::LoadedMedia:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        metaDataChanged(true);
+        //metaDataChanged(true);
 #endif
         break;
     case QMediaPlayer::StalledMedia:
