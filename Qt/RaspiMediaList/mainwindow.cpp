@@ -86,8 +86,11 @@ const QStringList media_audio_endings   = {
     "*.3gp", "*.aa", "*.aac", "*.aax", "*.act", "*.aiff", "*.alac", "*.amr", "*.ape", "*.au", "*.awb",
     "*.dss", "*.dvf", "*.gsm", "*.iklax", "*.ivs", "*.mmf", "*.movpkg", "*.mpc", "*.msv", "*.nmf", "*.opus",
     "*.ra", "*.rm", "*.raw", "*.rf64", "*.sln", "*.tta", "*.voc", "*.vox", "*.wv", "*.webm", "*.8svx", "*.cda"};
+#ifdef __linux__
 const QString prefix_file      = "file://";
-
+#else
+const QString prefix_file      = "";
+#endif
 const QString duration = QObject::tr("Duration (m:s)");
 const QString position = QObject::tr("Position (m:s)");
 

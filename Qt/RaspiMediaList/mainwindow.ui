@@ -59,7 +59,7 @@
         <item>
          <widget class="QTableView" name="tableView">
           <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
+           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
@@ -210,7 +210,7 @@
              <number>100</number>
             </property>
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -320,7 +320,7 @@
      <x>0</x>
      <y>0</y>
      <width>912</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -579,7 +579,7 @@
     <string>Open Folder...</string>
    </property>
    <property name="statusTip">
-    <string>Open folder with fedia files</string>
+    <string>Open folder with media files</string>
    </property>
   </action>
   <action name="actionRepeat_Playlist">
