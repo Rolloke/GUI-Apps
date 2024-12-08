@@ -1118,6 +1118,13 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
     case Cmd::UpdateRepository:
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
         break;
+    case Cmd::UpdateRepositorySubFolder:
+        if (mContextMenuSourceTreeItem)
+        {
+             const QString path = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
+             ui->treeSource->insertItem(path, *ui->treeSource, mContextMenuSourceTreeItem, txt::no_double_entries);
+        }
+        break;
     case Cmd::ParseHistoryText:
     {
         QTreeWidgetHook*fSourceHook = reinterpret_cast<QTreeWidgetHook*>(ui->treeSource);

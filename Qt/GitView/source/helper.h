@@ -26,6 +26,8 @@ namespace txt
    extern const char file_name[];
    extern const char file_ext[];
    extern const char file_basename[];
+
+   extern const char no_double_entries[];
 }
 
 

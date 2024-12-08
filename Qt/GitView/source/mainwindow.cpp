@@ -3015,8 +3015,8 @@ void MainWindow::find_text_in_files()
     {
         QString repository_root = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem)->text(QSourceTreeWidget::Column::FileName);
         QStringList strings =  {tr("Search expression: %1").arg(search_pattern), "", repository_root};
-        auto new_tree_root_item    = find_child_item(ui->treeFindText->invisibleRootItem(), 0, strings[0]);
-        auto repository_root_item  = find_child_item(ui->treeFindText->invisibleRootItem(), 2, strings[2]);
+        auto new_tree_root_item    = find_child_item(ui->treeFindText->invisibleRootItem(), FindTextColumn::File, strings[0]);
+        auto repository_root_item  = find_child_item(ui->treeFindText->invisibleRootItem(), FindTextColumn::FoundText, strings[2]);
         if (!new_tree_root_item || !repository_root_item)
         {
             new_tree_root_item = new QTreeWidgetItem(strings);

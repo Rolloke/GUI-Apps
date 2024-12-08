@@ -32,7 +32,7 @@ void MainWindow::call_git_history_diff_command()
         QString path;
         if (type.is(Type::Branch) && mContextMenuSourceTreeItem)
         {
-            path =  mContextMenuSourceTreeItem->text(0);
+            path =  mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
             mContextMenuSourceTreeItem = nullptr;
         }
         if (mContextMenuSourceTreeItem)

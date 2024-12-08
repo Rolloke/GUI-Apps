@@ -44,6 +44,19 @@ bool QStashTreeWidget::parseStashListText(const QString& branch_text, const QStr
         {
             QTreeWidgetItem* new_tree_root_item = nullptr;
             QString stash_no = line.split(':')[0];
+            QList<QTreeWidgetItem*> list = findItems(stash_no, Qt::MatchExactly);
+            bool already_inserted = false;
+            for (QTreeWidgetItem* item :  list)
+            {
+                if (item->data(Column::Description, Role::GitRootPath).toString() == git_root_path)
+                {
+                    already_inserted = true;
+                }
+            }
+            if (already_inserted)
+            {
+                break;
+            }
             QString git_command = tr("git -C %1 show %2").arg(git_root_path, stash_no);
             QString result_string;
             int result = execute(git_command, result_string);

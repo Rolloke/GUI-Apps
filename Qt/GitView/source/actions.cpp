@@ -588,9 +588,7 @@ QString find_icon(const QString& path, const QString& file)
         iterator.next();
         const QFileInfo& file_info = iterator.fileInfo();
         auto name = file_info.fileName();
-        if (   file_info.isDir()
-            && name != Folder::FolderSelf
-            && name != Folder::FolderUp)
+        if (file_info.isDir() && !is_any_equal_to(name, Folder::FolderSelf, Folder::FolderUp))
         {
             QString found = find_icon(path + "/" + name, file);
             if (!found.isEmpty())

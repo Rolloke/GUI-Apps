@@ -49,6 +49,16 @@ QTreeWidgetItem * QSourceTreeWidget::itemFromIndex(const QModelIndex &index) con
     return QTreeWidget::itemFromIndex(index);
 }
 
+
+/// \brief QSourceTreeWidget::insertItem
+/// \param aParentDir parent folder for insertion of sub files or folders to tree
+/// \param aTree the tree widget to insert to
+/// \param aParentItem the parent tree item to insert to
+/// \param do_not_ignore text for special behaviour
+/// \note behaviour description
+///       - file or folder name to be inserted without git ignore rules
+///       - txt::no_double_entries to iterate through all files not inserted yet ignoring double entries
+/// \return total size of containing files
 quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem, QString do_not_ignore)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
@@ -110,7 +120,18 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
 
         if (do_not_ignore.size())
         {
-            if (do_not_ignore != fFileInfo.fileName())
+            if (do_not_ignore == txt::no_double_entries)
+            {
+                if (is_any_equal_to(fFileInfo.fileName(), Folder::FolderSelf, Folder::FolderUp))
+                {
+                    continue;
+                }
+                if (find_child_item(aParentItem, QSourceTreeWidget::Column::FileName, fFileInfo.fileName()))
+                {
+                    continue;
+                }
+            }
+            else if (do_not_ignore != fFileInfo.fileName())
             {
                 continue;
             }
