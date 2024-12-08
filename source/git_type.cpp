@@ -94,6 +94,7 @@ QString Cmd::toString(const ePostAction anAction)
     case UpdateRootItemStatus:  return QObject::tr("Update Root Item Status");
     case UpdateRepository:      return QObject::tr("Update Repository Status");
     case UpdateStash:           return QObject::tr("Update Stash Status");
+    case UpdateRepositorySubFolder: return QObject::tr("Update Repository Folder Status");
     }
     return "";
 }

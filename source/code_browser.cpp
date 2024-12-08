@@ -564,8 +564,6 @@ void code_browser::parse_blame(const QString &blame)
     reset_blame();
     color_selector.unapply_color(Qt::yellow);
 
-    /// TODO: prohibit double entries
-
     QStringList lines = blame.split("\n");
     for (const QString &line : std::as_const(lines))
     {

@@ -51,6 +51,8 @@ namespace txt
    const char file_name[]       = "{name}";
    const char file_ext[]        = "{extension}";
    const char file_basename[]   = "{basename}";
+
+   const char no_double_entries[] = "no_double_entries";
 }
 
 QPoint menu_offset(5, 0);

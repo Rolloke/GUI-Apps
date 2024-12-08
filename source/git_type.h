@@ -128,7 +128,8 @@ struct Cmd
         ParseBlameText,
         UpdateRootItemStatus,
         UpdateRepository,
-        UpdateStash
+        UpdateStash,
+        UpdateRepositorySubFolder
     };
 
     typedef std::vector<eCmd> tVector;

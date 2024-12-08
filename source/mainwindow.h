@@ -159,6 +159,14 @@ private:
         tree_view
     }; };
 
+    struct FindTextColumn { enum e
+    {
+        File,
+        Line,
+        FoundText,
+        Size
+    }; };
+
     QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
     void     call_git_history_diff_command();
