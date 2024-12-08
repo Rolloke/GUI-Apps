@@ -1165,6 +1165,7 @@ void MainWindow::generate_media_file_tray_message()
             if (mCurrentMetainfo.contains(key))
             {
                 message += key + ": " + mCurrentMetainfo[key].toString() + "\n";
+                break;
             }
         }
         for (const auto& media_key : {QMediaMetaData::AlbumArtist, QMediaMetaData::ContributingArtist,
