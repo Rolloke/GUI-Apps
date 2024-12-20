@@ -619,6 +619,11 @@ void MainWindow::updateRepositoryStatus(bool append)
                     }
                 }
             }
+            else
+            {
+                ui->treeSource->insertItem(file_name, *ui->treeSource, mContextMenuSourceTreeItem, txt::no_double_entries);
+                return;
+            }
         }
         ui->treeSource->clear();
 
