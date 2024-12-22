@@ -6,7 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <functional>
-
+#include <cstdint>
 
 class Logger
 {
