@@ -4,9 +4,17 @@
 #include <QMap>
 #include <vector>
 #include <unordered_map>
+#include <memory>
+#include <tuple>
 
 #include <QString>
 #include <QVariant>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
 
 class QFileInfo;
 typedef QMap<QString, bool> string2bool_map;
@@ -184,6 +192,7 @@ struct Type
         Hidden              = 0x00010000,
         Executeable         = 0x00020000,
         Branch              = 0x00040000,
+        Unused1             = 0x00080000,
         WildCard            = 0x00100000,
         Negation            = 0x00200000,
         RegExp              = 0x00400000,
@@ -191,9 +200,11 @@ struct Type
         GitMovedFrom        = 0x01000000,
         GitMovedTo          = 0x02000000,
         IgnoreTypeStatus    = 0x04000000,
+        Unused2             = 0x08000000,
         IncludeAll          = 0x10000000,
         Consecutive         = 0x20000000,
         DiffOf2Commits      = 0x40000000,
+        Unused3             = 0x80000000,
         AllGitActions = GitModified|GitDeleted|GitAdded|GitRenamed|GitUnTracked|GitUnmerged|GitStaged|GitMovedFrom|GitMovedTo,
         FileType      = File|Folder|SymLink,
         FileFlag      = Hidden|Executeable
@@ -234,7 +245,13 @@ extern const char FolderSelf[];
 
 typedef std::map<QString, Type> stringt2typemap;
 typedef std::unordered_map<QString, Type> stringt2type_umap;
-typedef std::pair<QString, Type> string2typepair;
+//typedef std::pair<QString, Type> string2typepair;
+enum  s2t { _string, _type, _regex };
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+typedef std::tuple<QString, Type, std::shared_ptr<QRegularExpression>> string2typepair;
+#else
+typedef std::tuple<QString, Type, std::shared_ptr<QRegExp>> string2typepair;
+#endif
 typedef std::vector< string2typepair > stringt2type_vector;
 
 void parseGitStatus(const QString& fSource, const QString& aStatus, git::stringt2typemap& aFiles);

@@ -5,6 +5,7 @@
 #include <map>
 #include <memory>
 #include <unordered_map>
+#include <cstdint>
 
 #define DISPLAY_STRINGS 1
 

@@ -276,6 +276,9 @@ const char* Type::name(TypeFlags aType)
         RETURN_NAME(IncludeAll);
         RETURN_NAME(Consecutive);
         RETURN_NAME(DiffOf2Commits);
+        RETURN_NAME(Unused1);
+        RETURN_NAME(Unused2);
+        RETURN_NAME(Unused3);
     }
     return "";
 }

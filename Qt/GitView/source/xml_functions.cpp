@@ -60,11 +60,13 @@ QDomNode findElement(const QDomNode& aParent, const QString & aName, bool aRecur
     for (int i=0; i<fNameList.size(); ++i)
     {
         bool bFound;
-        QString sattribute, svalue, ssearch(fNameList.at(i));
-        int nAttribute  = (int)aName.indexOf("#"); // attribute is recognized by '#'
+        QString sattribute;
+        QString svalue;
+        QString ssearch(fNameList.at(i));
+        int nAttribute  = static_cast<int>(aName.indexOf("#")); // attribute is recognized by '#'
         if (nAttribute != -1)
         {
-            int nEqual = (int)aName.indexOf("=");  // the value is separated by '='
+            int nEqual = static_cast<int>(aName.indexOf("="));  // the value is separated by '='
             if (nEqual != -1)
             {
                 sattribute = aName.mid(nAttribute+1, nEqual-nAttribute-1);
