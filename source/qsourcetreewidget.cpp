@@ -2,6 +2,7 @@
 #include "logger.h"
 #include "helper.h"
 #include "git_type.h"
+#include "thread_helper.h"
 
 #include <QDropEvent>
 #include <QModelIndex>
@@ -62,7 +63,7 @@ QTreeWidgetItem * QSourceTreeWidget::itemFromIndex(const QModelIndex &index) con
 quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem, QString do_not_ignore)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
-
+    /// TODO: analyse time consuming parts
     vector<int> fMapLevels;
 
     bool fTopLevelItem(false);
@@ -476,16 +477,16 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
                 const auto& themap = found_ignored->getIgnoreMap();
                 for (size_t index=0; index<themap.size(); ++index )
                 {
-                    if (themap[index].second.is(Type::GitFolder))           continue;
-                    if (themap[index].second.is(Type::FolderForNavigation)) continue;
-                    QDir dir_check(path + "/" + themap[index].first);
+                    if (std::get<_type>(themap[index]).is(Type::GitFolder))           continue;
+                    if (std::get<_type>(themap[index]).is(Type::FolderForNavigation)) continue;
+                    QDir dir_check(path + "/" + std::get<_string>(themap[index]));
                     if (dir_check.exists())
                     {
                         if (!submenu)
                         {
                             submenu = menu.addMenu(tr("Insert Ignored Folder"));
                         }
-                        QString do_not_ignore = themap[index].first;
+                        QString do_not_ignore = std::get<_string>(themap[index]);
                         QAction *action = submenu->addAction(do_not_ignore);
                         connect(action, &QAction::triggered, [this, path, item, do_not_ignore]( )
                         { this->insertItem(path, *this, item, do_not_ignore); });

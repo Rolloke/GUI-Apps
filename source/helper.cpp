@@ -4,9 +4,12 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
-#include <QRandomGenerator>
 #else
 #include <QRegExp>
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#include <QRandomGenerator>
 #endif
 
 #include <QStringList>
@@ -60,7 +63,7 @@ QPoint menu_offset(5, 0);
 QString getSettingsName(const QString& aItemName)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    static const QRegularExpression fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     auto match = fRegEx.match(aItemName);
     if (match.isValid())
     {
@@ -72,7 +75,7 @@ QString getSettingsName(const QString& aItemName)
     }
     else return aItemName;
 #else
-    QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
+    static const QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {
@@ -166,7 +169,7 @@ QString get_word_at_position(const QString& sentence, int pos)
 bool is_whole_word(const QString& text)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QRegularExpression fRegEx("([A-Za-z][A-Za-z0-9_]+)");
+    static const QRegularExpression fRegEx("([A-Za-z][A-Za-z0-9_]+)");
     auto match = fRegEx.match(text);
     if (match.isValid())
     {
@@ -174,7 +177,7 @@ bool is_whole_word(const QString& text)
         return  (captured.size() && text == captured[0]);
     }
 #else
-    QRegExp regex("([A-Za-z][A-Za-z0-9_]+)");
+    static const QRegExp regex("([A-Za-z][A-Za-z0-9_]+)");
     if (regex.indexIn(text) != -1)
     {
         const auto captured = regex.capturedTexts();
@@ -444,7 +447,8 @@ int execute(const QString& command, QString& aResultText, bool hide, std::functi
         return -1;
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+//QT_DEPRECATED_SINCE(5, 15)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     static QRandomGenerator rg(123);
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(rg.generate()) + "_result.tmp";
 #else

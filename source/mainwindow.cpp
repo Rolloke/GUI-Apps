@@ -1708,10 +1708,11 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
 {
     QString command;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    auto fPos = a_git_cmd.indexOf(QRegularExpression("%[0-9]+"));
+    const static auto regex_numbers = QRegularExpression("%[0-9]+");
 #else
-    auto fPos = a_git_cmd.indexOf(QRegExp("%[0-9]+"));
+    const static auto regex_numbers = QRegExp("%[0-9]+");
 #endif
+    auto fPos = a_git_cmd.indexOf(regex_numbers);
     if (fPos != -1)
     {
         command = QObject::tr(a_git_cmd.toStdString().c_str()).arg(a_source);

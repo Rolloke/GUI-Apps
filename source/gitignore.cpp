@@ -1,10 +1,8 @@
 #include "gitignore.h"
 #include "logger.h"
 #include "helper.h"
+#include <memory>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <QRegularExpression>
-#endif
 
 using namespace git;
 
@@ -15,9 +13,9 @@ GitIgnore::GitIgnore()
 
 void GitIgnore::init()
 {
-    mIgnoreMap.push_back(string2typepair(Folder::FolderSelf, Type(Type::Folder|Type::FolderForNavigation)));
-    mIgnoreMap.push_back(string2typepair(Folder::FolderUp, Type(Type::Folder|Type::FolderForNavigation)));
-    mIgnoreMap.push_back(string2typepair(Folder::GitRepository, Type(Type::GitFolder)));
+    mIgnoreMap.push_back(string2typepair(Folder::FolderSelf, Type(Type::Folder|Type::FolderForNavigation), nullptr));
+    mIgnoreMap.push_back(string2typepair(Folder::FolderUp, Type(Type::Folder|Type::FolderForNavigation), nullptr));
+    mIgnoreMap.push_back(string2typepair(Folder::GitRepository, Type(Type::GitFolder), nullptr));
 }
 
 const git::stringt2type_vector& GitIgnore::getIgnoreMap() const
@@ -35,7 +33,7 @@ void GitIgnore::remove_entry(const QString& entry)
 {
     auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&entry](stringt2type_vector::const_reference it)
     {
-        return entry == it.first;
+        return entry == std::get<_string>(it);
     });
     if (item != mIgnoreMap.end())
     {
@@ -47,13 +45,12 @@ void GitIgnore::add_folder(const QString&entry)
 {
     auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&entry](stringt2type_vector::const_reference it)
     {
-        return entry == it.first;
+        return entry == std::get<_string>(it);
     });
     if (item == mIgnoreMap.end())
     {
         Type fType(Type::Folder);
-        auto pair = std::pair<const QString, Type>(entry, fType);
-        mIgnoreMap.push_back(pair);
+        mIgnoreMap.push_back(string2typepair(entry, fType, nullptr));
     }
 }
 
@@ -64,95 +61,112 @@ void GitIgnore::addGitIgnoreToIgnoreMapLevel(const QDir& aParentDir, std::vector
 
     if (file.open(QIODevice::ReadOnly))
     {
-        int fMapLevel = std::max_element(mIgnoreMap.begin(), mIgnoreMap.end(), [] (stringt2typemap::const_reference fE1, stringt2typemap::const_reference fE2)
+        int fMapLevel = std::get<_type>(*std::max_element(mIgnoreMap.begin(), mIgnoreMap.end(), [] (auto fE1, auto fE2)
         {
-            return fE1.second.level() < fE2.second.level();
-        })->second.level() + 1;
+            return std::get<_type>(fE1).level() < std::get<_type>(fE2).level();
+        })).level() + 1;
 
         aMapLevels.push_back(fMapLevel);
         do
         {
-            QString fLine = file.readLine();
-            fLine.remove(getLineFeed());
-            if (fLine.startsWith('#'))  // ignore comment
+            QString line = file.readLine();
+            line.remove(getLineFeed());
+            if (line.startsWith('#'))  // ignore comment
             {
                 continue;
             }
-            fLine.remove(QChar::CarriageReturn);
-            fLine.remove(QChar::LineFeed);
+            line.remove(QChar::CarriageReturn);
+            line.remove(QChar::LineFeed);
 
-            Type fType(Type::None, fMapLevel);
+            Type type(Type::None, fMapLevel);
 
-            if (fLine.startsWith('!'))      // Negation
+            if (line.startsWith('!'))      // Negation
             {
-                fType.add(Type::Negation);
-                fLine.remove(0, 1);
+                type.add(Type::Negation);
+                line.remove(0, 1);
             }
-            if (fLine.startsWith("**/"))    // name behind match files or folders in all directories
+            if (line.startsWith("**/"))    // name behind match files or folders in all directories
             {
-                fType.add(Type::Folder);
-                fType.add(Type::File);
-                fLine.remove(0, 3);
+                type.add(Type::Folder);
+                type.add(Type::File);
+                line.remove(0, 3);
             }
-            else if (fLine.endsWith("/**")) // folder name before matches all files inside
+            else if (line.endsWith("/**")) // folder name before matches all files inside
             {
-                fType.add(Type::Folder);
-                fType.add(Type::IncludeAll);
-                fLine.remove(fLine.size()-4, 3);
+                type.add(Type::Folder);
+                type.add(Type::IncludeAll);
+                line.remove(line.size()-4, 3);
             }
-            else if (fLine.contains("/**/")) // matches consecutive folders e.g.: a/**/b a/b
+            else if (line.contains("/**/")) // matches consecutive folders e.g.: a/**/b a/b
             {
-                fType.add(Type::Folder);
-                fType.add(Type::RegExp);
-                fType.add(Type::Consecutive);
-                fLine = fLine.replace("/**/", "/(.*/|)");
+                type.add(Type::Folder);
+                type.add(Type::RegExp);
+                type.add(Type::Consecutive);
+                line = line.replace("/**/", "/(.*/|)");
             }
-            if (fLine.contains("\\"))       // Trailing backslash disables control characters
+            if (line.contains("\\"))       // Trailing backslash disables control characters
             {
-                fLine.replace("\\!", "!");  // use exclamation mark trailing a file or folder name
-                fLine.replace("\\#", "#");  // use # not as comment use within words
-                fLine.replace("\\ ", " ");  // use space within a word
+                line.replace("\\!", "!");  // use exclamation mark trailing a file or folder name
+                line.replace("\\#", "#");  // use # not as comment use within words
+                line.replace("\\ ", " ");  // use space within a word
             }
-            if (fLine.endsWith('/'))        // markes a Folder
+            if (line.endsWith('/'))        // markes a Folder
             {
-                fType.add(Type::Folder);
-                fLine.remove(fLine.size()-1, 1);
+                type.add(Type::Folder);
+                line.remove(line.size()-1, 1);
             }
             else
             {
-                fType.add(Type::File);
+                type.add(Type::File);
             }
 
-            if (   (fLine.contains('[') && fLine.contains(']')) // identify regular expression
-                || (fLine.contains('{') && fLine.contains('}'))
-                || (fLine.contains('(') && fLine.contains(')'))
-                ||  fLine.contains('\\') )
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            std::shared_ptr<QRegularExpression> regular_expr;
+#else
+            std::shared_ptr<QRegExp> regular_expr;
+#endif
+            if (   (line.contains('[') && line.contains(']')) // identify regular expression
+                || (line.contains('{') && line.contains('}'))
+                || (line.contains('(') && line.contains(')'))
+                ||  line.contains('\\')
+                ||  type.is(Type::RegExp))
             {
-                fType.add(Type::RegExp);
+                type.add(Type::RegExp);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                regular_expr = std::make_shared<QRegularExpression>(line);
+#else
+                regular_expr = std::make_shared<QRegExp>(line);
+                regular_expr->setPatternSyntax(QRegExp::RegExp);
+#endif
             }
-            else if (fLine.contains('*') || fLine.contains('?')) // identifiy wildcards
+            else if (line.contains('*') || line.contains('?')) // identifiy wildcards
             {
-                fType.add(Type::WildCard);
+                type.add(Type::WildCard);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                regular_expr = std::make_shared<QRegularExpression>(QRegularExpression::wildcardToRegularExpression(line));
+#else
+                regular_expr = std::make_shared<QRegExp>(line);
+                regular_expr->setPatternSyntax(QRegExp::Wildcard);
+#endif
             }                                                    // otherwise use exact match
 
-            if (fLine.size())
+            if (line.size())
             {
-                auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&fLine, &fType](stringt2type_vector::const_reference it)
+                auto item = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [&line, &type](stringt2type_vector::const_reference it)
                 {
-                    return fLine == it.first && fType.type() == it.second.type();
+                    return line == std::get<_string>(it) && type.type() == std::get<_type>(it).type();
                 });
                 if (item != mIgnoreMap.end())
                 {
-                    TRACEX(Logger::warning, "\"" << fLine << "\": " << fType.getStates(true) << " not inserted from " << file.fileName());
+                    TRACEX(Logger::warning, "\"" << line << "\": " << type.getStates(true) << " not inserted from " << file.fileName());
                 }
                 else
                 {
                     if (Logger::isSeverityActive(Logger::debug))
                     {
-                        TRACEX(Logger::debug, "\"" << fLine << "\": " << fType.getStates(true) << " not inserted from " << file.fileName());
+                        TRACEX(Logger::debug, "\"" << line << "\": " << type.getStates(true) << " not inserted from " << file.fileName());
                     }
-                    auto pair = std::pair<const QString, Type>(fLine, fType);
-                    mIgnoreMap.push_back(pair);
+                    mIgnoreMap.push_back(string2typepair(line, type, regular_expr));
                 }
             }
         }
@@ -166,14 +180,14 @@ void GitIgnore::removeIgnoreMapLevel(uint aMapLevel, GitIgnore* ignored)
     {
         for (;;)
         {
-            auto fElem = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [aMapLevel](stringt2typemap::const_reference fE)
+            auto fElem = std::find_if(mIgnoreMap.begin(), mIgnoreMap.end(), [aMapLevel](auto fE)
             {
-                return fE.second.level() == aMapLevel;
+                return std::get<_type>(fE).level() == aMapLevel;
             });
 
             if (fElem != mIgnoreMap.end())
             {
-                if (ignored && fElem->second.is(Type::Folder))
+                if (ignored && std::get<_type>(*fElem).is(Type::Folder))
                 {
                     ignored->mIgnoreMap.push_back(*fElem);
                 }
@@ -188,38 +202,25 @@ namespace
 {
     bool compare(stringt2type_vector::const_iterator fItem, const QString& fFileName)
     {
-        if (fItem->second.is(Type::WildCard) || fItem->second.is(Type::RegExp))
+        const auto &type= std::get<_type>(*fItem);
+        if (type.is(Type::WildCard) || type.is(Type::RegExp))
         {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            if ( fItem->second.is(Type::WildCard))
+            QRegularExpression &reg_ex = *std::get<_regex>(*fItem);
+            QRegularExpressionMatch match = reg_ex.match(fFileName, 0);
+            if (match.isValid() && match.hasMatch())
             {
-                QString wildcard = QRegularExpression::wildcardToRegularExpression(fItem->first);
-                QRegularExpression reg_ex(wildcard);
-                QRegularExpressionMatch match = reg_ex.match(fFileName, 0);
-                if (match.isValid() && match.hasMatch())
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                QRegularExpression reg_ex(fItem->first);
-                QRegularExpressionMatch match = reg_ex.match(fFileName, 0);
-                if (match.isValid() && match.hasMatch())
-                {
-                    return true;
-                }
+                return true;
             }
 #else
-            QRegExp fRegEx(fItem->first);
-            fRegEx.setPatternSyntax(fItem->second.is(Type::WildCard) ? QRegExp::Wildcard : QRegExp::RegExp);
+            QRegExp &fRegEx = *std::get<_regex>(*fItem);
             if (fRegEx.exactMatch(fFileName))
             {
                 return true;
             }
 #endif
         }
-        else if (fItem->first == fFileName)
+        else if (std::get<_string>(*fItem) == fFileName)
         {
             return true;
         }
@@ -233,11 +234,12 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
     stringt2type_vector ignored_entries;
     for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
     {
-        if (   !(fItem->second.is(Type::Folder) && fItem->second.is(Type::File))// not folder and file set AND
-            && ((fItem->second.is(Type::Folder) && !aFileInfo.isDir())          // type folder required but is no folder OR
-             || (fItem->second.is(Type::File)   && !aFileInfo.isFile())         // type file required but is no file
-             ||  fItem->second.is(Type::IncludeAll)
-             ||  fItem->second.is(Type::Consecutive)))                          // ignore this
+        const auto &type= std::get<_type>(*fItem);
+        if (   !(type.is(Type::Folder) && type.is(Type::File))// not folder and file set AND
+            && ((type.is(Type::Folder) && !aFileInfo.isDir())          // type folder required but is no folder OR
+            ||  (type.is(Type::File)   && !aFileInfo.isFile())         // type file required but is no file
+            ||   type.is(Type::IncludeAll)
+            ||   type.is(Type::Consecutive)))                          // ignore this
         {
             continue;
         }
@@ -249,7 +251,8 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 
     for (auto fItem = mIgnoreMap.begin(); fItem != mIgnoreMap.end(); ++fItem)
     {
-        if (fItem->second.is(Type::IncludeAll))
+        const auto &type= std::get<_type>(*fItem);
+        if (type.is(Type::IncludeAll))
         {
             QStringList path_parts = aFileInfo.filePath().split('/');
             int size = path_parts.size();
@@ -258,7 +261,7 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
                 ignored_entries.clear();
             }
         }
-        else if (fItem->second.is(Type::Consecutive))
+        else if (type.is(Type::Consecutive))
         {
             if (compare(fItem, aFileInfo.filePath()))
             {
@@ -273,9 +276,9 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
         QString str;
         for (const auto& entry : std::as_const(ignored_entries))
         {
-            str += entry.first;
+            str += std::get<_string>(entry);
             str += " -> ";
-            str += entry.second.getStates(true);
+            str += std::get<_type>(entry).getStates(true);
             str += ", ";
         }
         TRACEX(Logger::debug, "ignored_entries: " << ignored_entries.size() << ": " << str);
@@ -283,21 +286,21 @@ bool GitIgnore::ignoreFile(const QFileInfo& aFileInfo)
 
     if (ignored_entries.size() == 1)
     {
-        return !ignored_entries[0].second.is(Type::Negation);
+        return !std::get<_type>(ignored_entries[0]).is(Type::Negation);
     }
     else if (ignored_entries.size() > 1)
     {
-        if (ignored_entries[0].second.is(Type::FolderForNavigation))
+        if (std::get<_type>(ignored_entries[0]).is(Type::FolderForNavigation))
         {
             return true;
         }
         for (auto entry = ignored_entries.begin()+1; entry != ignored_entries.end(); ++entry)
         {
-            if (entry->second.is(Type::Negation))
+            if (std::get<_type>(*entry).is(Type::Negation))
             {
                 if (Logger::isSeverityActive(Logger::debug))
                 {
-                    TRACEX(Logger::debug, "!ignored_entry: " << std::distance(ignored_entries.begin(), entry) << ": " << entry->first);
+                    TRACEX(Logger::debug, "!ignored_entry: " << std::distance(ignored_entries.begin(), entry) << ": " << std::get<_string>(*entry));
                 }
                 return false;
             }
