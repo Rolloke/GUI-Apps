@@ -117,6 +117,7 @@ struct Cmd
         EditToCamelCase,
         EditTabIndent,
         EditTabOutdent,
+        EditToggleVisible,
 
         /// hint: add non git commands before
         LastNonGitCommand = EditTabOutdent,
@@ -245,7 +246,7 @@ extern const char FolderSelf[];
 
 typedef std::map<QString, Type> stringt2typemap;
 typedef std::unordered_map<QString, Type> stringt2type_umap;
-//typedef std::pair<QString, Type> string2typepair;
+
 enum  s2t { _string, _type, _regex };
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 typedef std::tuple<QString, Type, std::shared_ptr<QRegularExpression>> string2typepair;

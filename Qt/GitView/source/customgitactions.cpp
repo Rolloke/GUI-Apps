@@ -1172,6 +1172,13 @@ bool ActionItemModel::setData(const QModelIndex &index_, const QVariant &value, 
         auto text = value.toString();
         if (text.size())
         {
+            CustomGitActions *cga = dynamic_cast<CustomGitActions*>(parent());
+            if (cga && cga->mInitialize == false
+                && (text.compare("Del", Qt::CaseInsensitive) == 0 || text.compare("Esc", Qt::CaseInsensitive) == 0))
+            {
+                QMessageBox::warning(nullptr, tr("Shortcut Key"), tr("\"%1\" is used for internal commands").arg(text), QMessageBox::Ok);
+                return false;
+            }
             for (int row = 0; row<rowCount(); ++row)
             {
                 if (data(index(row, index_.column())).toString().compare(text, Qt::CaseInsensitive) == 0)

@@ -260,6 +260,7 @@ int code_browser::blockCount() const
     return document()->blockCount();
 }
 /// TODO: set blocks visible or invisible to wrap or unwrap text
+/// try set block invisible with command changeSelection(..) cmd::EditToggleVisible
 QTextBlock code_browser::firstVisibleBlock(int& diff)
 {
     QPointF content_offset = contentOffset();
