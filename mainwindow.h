@@ -78,7 +78,7 @@ private slots:
     void menu_help_info();
     void on_tableView_doubleClicked(const QModelIndex &index);
     void on_checkBoxSelectAll_clicked(bool checked);
-    void on_tableView_clicked(const QModelIndex &index, bool called_by_function=false);
+    void on_tableView_clicked(const QModelIndex &index);
     void onReplyFinished();
     void on_sliderVolume_valueChanged(int value);
     void on_pushButtonStart_clicked();
@@ -94,6 +94,7 @@ private slots:
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});
     void table_selectionChanged(const QItemSelection & selected, const QItemSelection &);
     void media_status_changed(const QMediaPlayer::MediaStatus& status);
+    void tableView_clicked(const QModelIndex &index, bool called_by_function=false);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     void metaDataChanged(bool delayed = false);
