@@ -25,6 +25,10 @@
 #include <QTimer>
 #include <QDirIterator>
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+#include <QRandomGenerator>
+#endif
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
 #include <QRandomGenerator>
@@ -467,7 +471,12 @@ QString MainWindow::get_item_name(int row) const
     return (row != -1 && row < mListModel->rowCount()) ? mListModel->data(mListModel->index(row, eName)).toString() : "";
 }
 
-void MainWindow::on_tableView_clicked(const QModelIndex &index, bool called_by_function)
+void MainWindow::on_tableView_clicked(const QModelIndex &index)
+{
+    tableView_clicked(index, false);
+}
+
+void MainWindow::tableView_clicked(const QModelIndex &index, bool called_by_function)
 {
     if (index.column() == mChecked && !called_by_function)
     {
@@ -693,7 +702,7 @@ void MainWindow::table_selectionChanged(const QItemSelection & selected, const Q
     const auto & indexes = selected.indexes();
     if (indexes.size())
     {
-        on_tableView_clicked(indexes[0], true);
+        tableView_clicked(indexes[0], true);
     }
 }
 
@@ -704,7 +713,7 @@ void MainWindow::select_index(int select)
         ui->tableView->selectRow(select);
         const auto index = mListModel->index(select, eName);
         ui->tableView->scrollTo(index);
-        on_tableView_clicked(index, true);
+        tableView_clicked(index, true);
     }
 }
 
@@ -740,6 +749,10 @@ void MainWindow::menu_file_save_as_favorites()
                 }
             }
             file.write("</favourites>\n");
+        }
+        else
+        {
+            TRACEX(Logger::error, "Could not save file \"" << filename << "\", " << file.errorString());
         }
     }
 }
@@ -815,6 +828,10 @@ void MainWindow::menu_file_update_favorites()
                 }
             };
             file.close();
+        }
+        else
+        {
+            TRACEX(Logger::error, "Could not save file \"" << filename << "\", " << file.errorString());
         }
     }
 }
@@ -1075,17 +1092,23 @@ void MainWindow::menu_edit_open_media_player()
             int result = system(command.toStdString().c_str());
             if (result != 0)
             {
-                ui->statusBar->showMessage(QString(strerror(errno)));
+                QString str (strerror(errno));
+                ui->statusBar->showMessage(str);
+                TRACEX(Logger::error, "Could not execute \"" << command << "\", " << str);
             }
         }
         else
         {
-            ui->statusBar->showMessage(tr("No media Player command defined, define under \"Options/Media Player...\""));
+            QString str = tr("No media Player command defined, define under \"Options/Media Player...\"");
+            ui->statusBar->showMessage(str);
+            TRACEX(Logger::error, str);
         }
     }
     else
     {
-        ui->statusBar->showMessage(tr("Select a list entry first"));
+        QString str = tr("Select a list entry first");
+        ui->statusBar->showMessage(str);
+        TRACEX(Logger::error, str);
     }
 }
 
@@ -1114,8 +1137,14 @@ void  MainWindow::onDownloadFinished()
                 {
                     file.write(data);
                 }
+                else
+                {
+                    TRACEX(Logger::error, "Could not save file \"" << filename << "\" from download, " << file.errorString());
+                }
             }
         }
+        disconnect(reply, SIGNAL(finished()), this, SLOT(onDownloadFinished()));
+        reply->deleteLater();
     }
 }
 
@@ -1222,17 +1251,30 @@ void MainWindow::onReplyFinished()
                 {
                     ui->graphicsView->fitInView(items[0], Qt::KeepAspectRatio);
                 }
+                else
+                {
+                    TRACEX(Logger::error, "No graphic items available");
+                }
+            }
+            else
+            {
+                TRACEX(Logger::error, "No bytes available" << available);
             }
         }
         else
         {
-            ui->statusBar->showMessage(tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString()));
+            QString txt = tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
+            ui->statusBar->showMessage(txt);
+            TRACEX(Logger::error, txt);
         }
+        disconnect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()));
         reply->deleteLater();
     }
     else
     {
-        ui->statusBar->showMessage(tr("Download failed. Check internet connection"));
+        QString txt = tr("Download failed. Check internet connection");
+        ui->statusBar->showMessage(txt);
+        TRACEX(Logger::error, txt);
     }
 }
 
@@ -1318,6 +1360,11 @@ void MainWindow::open_file(const QString& filename)
         ui->checkBoxSelectAll->setChecked(true);
         m_media_folder_mode = false;
     }
+    else
+    {
+        TRACEX(Logger::error, "Could not open file \"" << filename << "\", " << file.errorString());
+    }
+
 
     for (auto& column : mHiddenColumns)
     {
@@ -1713,7 +1760,7 @@ int win_system(const char *command, bool hide)
 
 int execute(const QString& command, QString& aResultText)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     static QRandomGenerator rg(123);
     QDir fTemp = QDir::tempPath() + "/cmd_" + QString::number(rg.generate()) + "_result.tmp";
 #else
@@ -1743,6 +1790,7 @@ int execute(const QString& command, QString& aResultText)
         }
     }
     aResultText = fStreamString.c_str();
+    TRACEX(Logger::notice, "execute command \"" << command << "\", reslut: " << aResultText);
 
     fTemp.remove(fTemp.path());
     return fResult;
