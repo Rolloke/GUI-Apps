@@ -63,7 +63,6 @@ QTreeWidgetItem * QSourceTreeWidget::itemFromIndex(const QModelIndex &index) con
 quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree, QTreeWidgetItem* aParentItem, QString do_not_ignore)
 {
     QDirIterator fIterator(aParentDir, QDirIterator::NoIteratorFlags);
-    /// TODO: analyse time consuming parts
     vector<int> fMapLevels;
 
     bool fTopLevelItem(false);
