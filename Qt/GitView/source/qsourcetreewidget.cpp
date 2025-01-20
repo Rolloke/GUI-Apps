@@ -2,7 +2,6 @@
 #include "logger.h"
 #include "helper.h"
 #include "git_type.h"
-#include "thread_helper.h"
 
 #include <QDropEvent>
 #include <QModelIndex>
