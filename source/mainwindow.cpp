@@ -307,6 +307,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         update_widget_states(ui->ckHideEmptyParent);
         LOAD_STR(fSettings, Type::mShort, toBool);
         ui->ckShortState->setChecked(Type::mShort);
+        ui->treeSource->header()->setSectionHidden(QSourceTreeWidget::Column::Size    , fSettings.value("SourceTreeWidgetColumnSize"    , ui->treeSource->header()->isSectionHidden(QSourceTreeWidget::Column::Size)).toBool());
+        ui->treeSource->header()->setSectionHidden(QSourceTreeWidget::Column::DateTime, fSettings.value("SourceTreeWidgetColumnDateTime", ui->treeSource->header()->isSectionHidden(QSourceTreeWidget::Column::DateTime)).toBool());
+
         update_widget_states(ui->ckShortState);
         {
             QFontDatabase font_db;
@@ -551,6 +554,9 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(config::sGroupView);
     {
+        fSettings.setValue("SourceTreeWidgetColumnSize"    , ui->treeSource->header()->isSectionHidden(QSourceTreeWidget::Column::Size    ));
+        fSettings.setValue("SourceTreeWidgetColumnDateTime", ui->treeSource->header()->isSectionHidden(QSourceTreeWidget::Column::DateTime));
+
         STORE_STR_IF(fSettings, mBranchHasSiblingsNotAdjoins);
         STORE_STR_IF(fSettings, mBranchHasSiblingsAdjoins);
         STORE_STR_IF(fSettings, mBranchHasChildrenNotHasSiblingsAdjoins);
@@ -756,7 +762,8 @@ void MainWindow::store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd
                 fSettings.setValue(config::sFlagsDisabled, mActions.getFlags(fCmd, ActionList::Data::StatusFlagDisable));
                 fSettings.setValue(config::sIconPath, mActions.getIconPath(fCmd));
                 QStringList list = mActions.getMenuStringList(fCmd);
-                if (list.size() > 1) fSettings.setValue(config::sMenuStringList, list);
+                if (list.empty()) list.append("");
+                fSettings.setValue(config::sMenuStringList, list);
             }
         }
     }
@@ -1064,6 +1071,8 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString file_copy_mime_type                            = tr("Mime type for file copy");
     static const QString style_path                                     = tr("Path to style qss file");
     static const QString warn_open_file_fize                            = tr("Warn size for open file (bytes)");
+    static const QString repository_tree_date                           = tr("Repository View Date");
+    static const QString repository_tree_size                           = tr("Repository View Size");
     static const QString log_severity                                   = tr("Logging Severity");
     static const QString branch_has_siblings_not_adjoins                = tr("Icon: HasSiblingsNotAdjoins");
     static const QString branch_has_siblings_adjoins                    = tr("Icon: HasSiblingsAdjoins");
@@ -1072,7 +1081,7 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString branch_open_has_children_has_sibling           = tr("Icon: OpenHasChildrenHasSibling");
 #ifdef __linux__
     static const QString linux_theme                                    = tr("Linux theme name");
-//    static const QString linux_icon_path                                = tr("Linux icon path");
+//    static const QString linux_icon_path                              = tr("Linux icon path");
 #endif
 
     static const QString invalid_severity                               = Logger::getName(Logger::invalid);
@@ -1099,6 +1108,9 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
+        mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
+        mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
+
 #ifdef __linux__
         QMap<QString,QVariant> themes_map;
         QDirIterator iter("/usr/share/icons", {"*"}, QDir::AllEntries);
@@ -1136,6 +1148,8 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchHasChildrenNotHasSiblingsAdjoins = mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins].toString();
         mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
+        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::DateTime, !mMiscelaneousItems[repository_tree_date].toBool());
+        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::Size,     !mMiscelaneousItems[repository_tree_size].toBool());
 #ifdef __linux__
         QMap<QString,QVariant> themes_map = mMiscelaneousItems[linux_theme].toMap();
         for (auto theme = themes_map.begin(); theme != themes_map.end(); ++theme)

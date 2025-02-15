@@ -469,6 +469,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     case QMetaType::Type::QVariantMap: return menu_icon;
     case QMetaType::Type::Int:
     case QMetaType::Type::LongLong: return number_edit;
+    case QMetaType::Type::Bool: return iconCheck(variant.toBool());
     default:break;
     }
 #else
@@ -485,6 +486,7 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     case QVariant::Map:  return menu_icon;
     case QVariant::Int:
     case QVariant::LongLong: return number_edit;
+    case QVariant::Bool: return iconCheck(variant.toBool());
     default:break;
     }
 #endif
@@ -825,6 +827,16 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                 currentItem.value() = checkable_items_map;
             } break;
             default:break;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            case QMetaType::Type::Bool:
+#else
+            case QVariant::Bool:
+#endif
+            {
+                currentItem.value() = QVariant(!currentItem.value().toBool());
+                mListModelVarious->setData(index, QIcon(iconCheck(currentItem.value().toBool())), Qt::DecorationRole);
+                mIsMiscelaneousItemChanged =true;
+            } break;
             }
         }
     }

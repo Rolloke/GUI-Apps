@@ -86,7 +86,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                     return 0;
                 } break;
                 case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowUnknown: case Work::ShowStaged: case Work::ShowUnMerged:
-                case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected:
+                case Work::ShowModified: case Work::ShowAllGitActions: case Work::ShowSelected: case Work::ShowIgnored:
                 {
                     if (ui->ckHideEmptyParent->isChecked())
                     {
@@ -139,7 +139,7 @@ bool MainWindow::iterateTreeItems(const QTreeWidget& aSourceTree, const QString*
                         result = true;
                         break;
                     case Work::ShowAllGitActions: case Work::ShowAdded: case Work::ShowDeleted: case Work::ShowModified:
-                    case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged:
+                    case Work::ShowUnknown: case Work::ShowUnMerged: case Work::ShowStaged: case Work::ShowIgnored:
                         result = getShowTypeResult(type);
                         aParentItem->setHidden(!result); // true means visible
                         break;
@@ -198,6 +198,9 @@ bool MainWindow::getShowTypeResult(const Type& fType)
         break;
     case Work::ShowStaged:
         fResult = fType.is(Type::GitStaged);
+        break;
+    case Work::ShowIgnored:
+        fResult = fType.is(Type::GitIgnored);
         break;
     case Work::ApplyGitCommand: case Work::ApplyCommand: case Work::ApplyCommandRecursive: case Work::AsynchroneousCommand:
     case Work::DetermineGitMergeTools: case Work::InsertPathFromCommandString:
@@ -687,6 +690,7 @@ void MainWindow::on_comboShowItems_currentIndexChanged(int index)
     case ComboShowItems::Gitstaged:     mCurrentTask = Work::ShowStaged;        break;
     case ComboShowItems::GitUnmerged:   mCurrentTask = Work::ShowUnMerged;      break;
     case ComboShowItems::GitSelected:   mCurrentTask = Work::ShowSelected;      break;
+    case ComboShowItems::GitIgnored:    mCurrentTask = Work::ShowIgnored;       break;
     }
     iterateTreeItems(*ui->treeSource);
     mCurrentTask = Work::None;
@@ -843,6 +847,7 @@ void MainWindow::call_git_clone()
     const QString  destination   = QFileDialog::getExistingDirectory(this, tr("Select destination for repository \"%1\"").arg(base_name), mDefaultSourcePath);
     const QString  clone_command = tr(git_command.toStdString().c_str()).arg(git_source);
 
+    /// TODO: handle command within thread.
     QDir::setCurrent(destination);
 
     QString result_str;
@@ -852,9 +857,15 @@ void MainWindow::call_git_clone()
         result_str += tr("\nError %1 occurred").arg(result);
     }
     appendTextToBrowser(clone_command + getLineFeed() + result_str);
-    if (result == NoError)
+
+    result_str = destination+ "/" + base_name;
+    if (!QFileInfo(result_str).exists())
     {
-        insertSourceTree(initDir(destination+ "/" + base_name), ui->treeSource->topLevelItemCount()+1);
+        result_str = destination+ "/" + git_source.mid(git_source.indexOf(":")+1);
+    }
+    if (result == NoError )
+    {
+        insertSourceTree(initDir(result_str), ui->treeSource->topLevelItemCount()+1);
     }
 }
 
@@ -922,7 +933,7 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
         {
             QString     fCommand;
             bool        fMoved = false;
-            if (fType.is(Type::GitUnTracked) || fType.is(Type::GitIgnore))
+            if (fType.is(Type::GitUnTracked) || fType.is(Type::GitIgnored))
             {
                 if (fNewName.contains("/"))
                 {

@@ -116,9 +116,10 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         fIterator.next();
 
         const QFileInfo& fFileInfo = fIterator.fileInfo();
-
+        bool ignored_type = false;
         if (do_not_ignore.size())
         {
+            ignored_type = true;
             if (do_not_ignore == txt::no_double_entries)
             {
                 if (is_any_equal_to(fFileInfo.fileName(), Folder::FolderSelf, Folder::FolderUp))
@@ -137,11 +138,15 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         }
         else if (mGitIgnore.ignoreFile(fFileInfo))
         {
+#if 0
+            ignored_type = true;
+#else
             if (fFileInfo.isDir())
             {
                 ignored_folders.insert(fFileInfo.fileName());
             }
             continue;
+#endif
         }
 
         QStringList fColumns;
@@ -161,12 +166,13 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         }
         fItem->setData(Column::FileName, Role::isDirectory, QVariant(fFileInfo.isDir()));
         fItem->setData(Column::DateTime, Role::DateTime, QVariant(fFileInfo.lastModified()));
+        fItem->setText(Column::DateTime, fFileInfo.lastModified().toString("dd.MM.yyyy hh:mm:ss"));
 
         Type fType;
         fType.translate(fFileInfo);
-        if (do_not_ignore.size())
+        if (ignored_type)
         {
-            fType.add(Type::GitIgnore);
+            fType.add(Type::GitIgnored);
         }
 
         fItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
@@ -264,7 +270,8 @@ bool QSourceTreeWidget::iterateCheckItems(QTreeWidgetItem* aParentItem, stringt2
             Type fType(aParentItem->data(Column::State, Role::Filter).toUInt());
             fType.remove(Type::AllGitActions);
             aParentItem->setData(Column::State, Role::Filter, QVariant(fType.type()));
-            aParentItem->setText(Column::State, "");
+            const QString fState = fType.getStates();
+            aParentItem->setText(Column::State, fState);
         }
         for (int fChild = 0; fChild < aParentItem->childCount(); ++fChild)
         {
