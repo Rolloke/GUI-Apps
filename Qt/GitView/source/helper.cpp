@@ -634,12 +634,15 @@ QTreeWidgetItem * QTreeWidgetHook::itemFromIndex(const QModelIndex &index) const
 
 void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index)
 {
-    auto actions = widget->actions();
-    if (action_index < actions.size())
+    if (widget)
     {
-        actions[action_index]->setEnabled(enabled);
+        auto actions = widget->actions();
+        if (action_index < actions.size())
+        {
+            actions[action_index]->setEnabled(enabled);
+        }
+        widget->setEnabled(enabled);
     }
-    widget->setEnabled(enabled);
 }
 
 

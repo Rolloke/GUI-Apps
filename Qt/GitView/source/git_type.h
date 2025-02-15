@@ -186,7 +186,7 @@ struct Type
         GitLocal            = 0x00000400,
         GitRemote           = 0x00000800,
         GitBoth             = GitLocal|GitRemote,
-        GitIgnore           = 0x00001000,
+        GitIgnored          = 0x00001000,
         GitFolder           = 0x00002000,
         Repository          = 0x00004000,
         Checked             = 0x00008000,

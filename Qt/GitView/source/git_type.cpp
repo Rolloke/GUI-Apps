@@ -65,7 +65,7 @@ Cmd::Cmd()
     mCommandMap[Clone]                  = "git clone -v %1";
 
     mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
-    mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
+    mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
@@ -212,6 +212,7 @@ QString Type::getStates(bool extended) const
     if (     is(GitLocal    ))  states += name(GitLocal)     + sep;
     if (     is(GitRemote   ))  states += name(GitRemote)    + sep;
     if (     is(GitBoth     ))  states += name(GitBoth)      + sep;
+    if (     is(GitIgnored  ))  states += name(GitIgnored)   + sep;
 
     if      (is(GitMovedFrom))  states += name(GitMovedFrom) + sep;
     else if (is(GitMovedTo  ))  states += name(GitMovedTo)   + sep;
@@ -219,20 +220,24 @@ QString Type::getStates(bool extended) const
 
     if (extended)
     {
-        if (is(SymLink))     states += name(SymLink)     + sep;
-        if (is(Repository))  states += name(Repository)  + sep;
-        if (is(File))        states += name(File)        + sep;
-        if (is(Folder))      states += name(Folder)      + sep;
-        if (is(Branch))      states += name(Branch)      + sep;
-        if (is(Hidden))      states += name(Hidden)      + sep;
-        if (is(WildCard))    states += name(WildCard)    + sep;
-        if (is(RegExp))      states += name(RegExp)      + sep;
-        if (is(Negation))    states += name(Negation)    + sep;
-        if (is(Checked))     states += name(Checked)     + sep;
-        if (is(Executeable)) states += name(Executeable) + sep;
-        if (is(Consecutive)) states += name(Consecutive) + sep;
+        if (is(SymLink))             states += name(SymLink)     + sep;
+        if (is(Repository))          states += name(Repository)  + sep;
+        if (is(File))                states += name(File)        + sep;
+        if (is(Folder))              states += name(Folder)      + sep;
+        if (is(Branch))              states += name(Branch)      + sep;
+        if (is(Hidden))              states += name(Hidden)      + sep;
+        if (is(WildCard))            states += name(WildCard)    + sep;
+        if (is(RegExp))              states += name(RegExp)      + sep;
+        if (is(Negation))            states += name(Negation)    + sep;
+        if (is(Checked))             states += name(Checked)     + sep;
+        if (is(Executeable))         states += name(Executeable) + sep;
+        if (is(Consecutive))         states += name(Consecutive) + sep;
         if (is(FolderForNavigation)) states += name(FolderForNavigation) + sep;
         if (is(IgnoreTypeStatus))    states += name(IgnoreTypeStatus) + sep;
+    }
+    if (states.size() == 1)
+    {
+        states.clear();
     }
     return states;
 }
@@ -253,7 +258,7 @@ const char* Type::name(TypeFlags aType)
         case GitRemote:    return mShort ? "Rem" : "Remote";
         case GitBoth:      return mShort ? "Bot" : "Both";
         case GitFolder:    return mShort ? "GFd" : "git folder";
-        case GitIgnore:    return mShort ? "GIg" : "git ignore";
+        case GitIgnored:   return mShort ? "Ign" : "Ignored";
         case GitMovedFrom: return mShort ? "MvF" : "MovedFrom";
         case GitMovedTo:   return mShort ? "MvT" : "MovedTo";
         case SymLink:      return mShort ? "SyL" : "symbolic link";

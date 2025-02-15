@@ -77,6 +77,7 @@ private:
         ShowStaged,
         ShowUnMerged,
         ShowSelected,
+        ShowIgnored,
         // NOTE: further git items are added here
         // show out of sync...
         Last
@@ -98,7 +99,8 @@ private:
         GitUnknown,
         Gitstaged,
         GitUnmerged,
-        GitSelected
+        GitSelected,
+        GitIgnored
     };
 
     enum class FindView

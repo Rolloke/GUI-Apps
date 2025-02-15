@@ -30,7 +30,7 @@
     <message>
         <location filename="aboutdlg.ui" line="65"/>
         <source>0.0.0.0</source>
-        <translation type="unfinished">0.0.0.0</translation>
+        <translation>0.0.0.0</translation>
     </message>
     <message>
         <location filename="aboutdlg.ui" line="78"/>
@@ -61,7 +61,7 @@
         <location filename="aboutdlg.ui" line="218"/>
         <source>Viewer for git repositories. Compiled with c++ 17</source>
         <oldsource>Viewer for git repositories. Based on Qt 5.6 with c++ 14</oldsource>
-        <translation type="unfinished">Betrachter für git Repositories. Programmiert mit Qt5.6 und c++17</translation>
+        <translation>Betrachter für git Repositories. Programmiert mit Qt5.6 und c++17</translation>
     </message>
     <message>
         <location filename="aboutdlg.ui" line="237"/>
@@ -72,17 +72,17 @@
         <location filename="aboutdlg.ui" line="250"/>
         <source>Built on:</source>
         <oldsource>Build on:</oldsource>
-        <translation type="unfinished">Erstellt am:</translation>
+        <translation>Erstellt am:</translation>
     </message>
     <message>
         <location filename="aboutdlg.ui" line="263"/>
         <source>Based on:</source>
-        <translation type="unfinished"></translation>
+        <translation>Basiert auf:</translation>
     </message>
     <message>
         <location filename="aboutdlg.ui" line="276"/>
         <source>Qt-Version </source>
-        <translation type="unfinished"></translation>
+        <translation>Qt-Version </translation>
     </message>
     <message>
         <location filename="aboutdlg.cpp" line="11"/>
@@ -96,16 +96,35 @@
     </message>
 </context>
 <context>
-    <name>BinaryTableModel</name>
+    <name>ActionItemModel</name>
     <message>
-        <location filename="qbinarytableview.cpp" line="961"/>
-        <source>[%1]: </source>
-        <translation type="unfinished"></translation>
+        <location filename="customgitactions.cpp" line="1179"/>
+        <location filename="customgitactions.cpp" line="1187"/>
+        <source>Shortcut Key</source>
+        <translation>Tastaturkürzel</translation>
     </message>
     <message>
-        <location filename="qbinarytableview.cpp" line="992"/>
+        <location filename="customgitactions.cpp" line="1179"/>
+        <source>&quot;%1&quot; is used for internal commands</source>
+        <translation>&quot;%1&quot; wird für intere Kommandos benutzt</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1187"/>
+        <source>Double Shortcut Entry: &quot;%1&quot; for Command ID %3 with Name &quot;%2&quot;</source>
+        <translation>Doppelter Tastenkürzeleintrag: &quot;%1&quot; für Kommando &quot;%2&quot; mit ID %3</translation>
+    </message>
+</context>
+<context>
+    <name>BinaryTableModel</name>
+    <message>
+        <location filename="qbinarytableview.cpp" line="1044"/>
+        <source>[%1]: </source>
+        <translation>[%1]: </translation>
+    </message>
+    <message>
+        <location filename="qbinarytableview.cpp" line="1075"/>
         <source>[%1]::</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1]::</translation>
     </message>
 </context>
 <context>
@@ -133,7 +152,7 @@
     <message>
         <location filename="commitmessage.ui" line="71"/>
         <source>commit and push</source>
-        <translation type="unfinished">Commit und Push</translation>
+        <translation>Commit und Push</translation>
     </message>
 </context>
 <context>
@@ -150,144 +169,81 @@
     <message>
         <location filename="customgitactions.ui" line="35"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of custom commands&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Liste mit Benutzerkommandos&lt;br/&gt;Klicke &amp;quot;Was-ist-das-Hilfe&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="customgitactions.ui" line="38"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4&gt;Displays application commands that can be edited here.&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Add a new custom command with the &lt;img src=&quot;://resource/24X24/list-add.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Optional parameters are marked with square brackets e.g. [%2]&lt;/li&gt;
-&lt;li&gt;The parameters order is fixed for git commands&lt;/li&gt;
-&lt;li&gt;git -C %1 &amp;lt;command&amp;gt; [%2] &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;%1 represents the git repository &lt;/li&gt;
-&lt;li&gt;%2 may represent the the selected file or folder &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;git &amp;lt;command&amp;gt; %1 [%2] &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;%1 is used for command options depending on case &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;--staged for diff of staged file &lt;/li&gt;
-&lt;li&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;%2  may represent the the selected file or folder &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;The parameters order is arbitrary for custom commands&lt;/li&gt;
-&lt;li&gt;custom_command [%1] [%2] [#2] [%3] &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;%1 may represent the selected file or folder &lt;/li&gt;
-&lt;li&gt;%2 may represent the folder above selected file&lt;/li&gt;
-&lt;li&gt;#2 sets current working dir to folder above selected file&lt;/li&gt;
-&lt;li&gt;#r executes command recursve for selected folder content&lt;br&gt;
-    &lt;b&gt;may lead to time consuming process&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;%3 may represent the root folder of the repository&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/ul&gt;
-&lt;li&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button &lt;/li&gt;
-&lt;li&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align:middle&quot;/&gt; button&lt;br&gt;You may insert:&lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Command&lt;/li&gt;
-&lt;li&gt;Separator&lt;/li&gt;
-&lt;li&gt;Sub menu entry&lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;Edit name in &lt;b&gt;Name&lt;/b&gt; column&lt;/li&gt;
-&lt;li&gt;Insert the sub menu into context menu and move it to desired position&lt;/li&gt;
-&lt;li&gt;The folowing entries until next separator or sub menu are included here&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/ul&gt;
-&lt;li&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;
-&lt;ul&gt;
-&lt;li&gt;all &apos;git&apos; commands may be edited due to parameters or options &lt;/li&gt;
-&lt;li&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;
-&lt;li&gt;all shortcuts may be edited &lt;/li&gt;
-&lt;li&gt;A message box text may be edited or added &lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;&apos;None&apos; or empty defines that no message box is invoked &lt;/li&gt;
-&lt;li&gt;The message box is invoked before execution of the git command &lt;/li&gt;
-&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;
-&lt;li&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;
-&lt;li&gt;A trailing &apos;;&apos; changes the MessageBox to an EditBox &lt;/li&gt;
-&lt;/ul&gt;
-&lt;li&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by &apos;reset modifications&apos; in context menu &lt;/li&gt;
-&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;h4 style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Displays application commands that can be edited here.&lt;/span&gt;&lt;/h4&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Add a new custom command with the &lt;img src=&quot;://resource/24X24/list-add.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Optional parameters are marked with square brackets e.g. [%2]&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameters order is fixed for git commands&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git -C %1 &amp;lt;command&amp;gt; [%2] &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; represents the git repository &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;git &amp;lt;command&amp;gt; %1 [%2] &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; is used for command options depending on case &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 4;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--staged for diff of staged file &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;--tool=&amp;lt;diff-tool&amp;gt; &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the the selected file or folder &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameters order is arbitrary for custom commands&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;custom_command %1 %2 {cd} {rec} {root} {rel_path} {name} {extension} {basename} &lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;the order of the arguments is arbitrary&lt;br/&gt;all arguments are optional&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt; may represent the selected file or folder &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;%2&lt;/span&gt; may represent the folder above selected file&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{cd}&lt;/span&gt; sets current working dir to folder above selected file&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{rec}&lt;/span&gt; executes command recursve for selected folder content&lt;br/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;may lead to time consuming process&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{root}&lt;/span&gt; may represent the root folder of the repository&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{rel_path}&lt;/span&gt; may represent the relative path from root folder of the repository&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{name}&lt;/span&gt; may represent the file or leaf folder name of selection&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{extension}&lt;/span&gt; may the extension of the file of selection&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;{basename}&lt;/span&gt; may rpresent the file name without extension of selection&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Remove selected custom command with &lt;img src=&quot;://resource/24X24/list-remove.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Assign a selected command to toolbar or context menu in right view with &lt;img src=&quot;://resource/24X24/go-next.png&quot; style=&quot;vertical-align: middle;&quot;/&gt; button&lt;br/&gt;You may insert:&lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Command&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Separator&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sub menu entry&lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 3;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Edit name in &lt;span style=&quot; font-weight:600;&quot;&gt;Name&lt;/span&gt; column&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Insert the sub menu into context menu and move it to desired position&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The folowing entries until next separator or sub menu are included here&lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Edit commands (custom or built in) by double click on table entry &lt;/li&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all &apos;git&apos; commands may be edited due to parameters or options &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all names may be edited (the name should represent the commands functionality) &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;all shortcuts may be edited, use &lt;img src=&quot;:/resource/24X24/gnome-app-install-star.png&quot; style=&quot;vertical-align:middle&quot;/&gt;button and press desired shortcut keys &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A message box text may be edited or added &lt;/li&gt;&lt;/ul&gt;&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&apos;None&apos; or empty defines that no message box is invoked &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The message box is invoked before execution of the git command &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Format: &lt;/span&gt;Heading [%1];Question [%1] &lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The parameter %1 is optional an displays the selected file or folder&lt;/li&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;A trailing &apos;;&apos; changes the MessageBox to an EditBox &lt;/li&gt;&lt;/ul&gt;&lt;li style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt;The correct functionality may be lost by editing&lt;br/&gt;however this can be repaired by &apos;reset modifications&apos; in context menu &lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="117"/>
-        <source>Execute the command line for testing purpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.ui" line="120"/>
-        <source>Execute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.ui" line="127"/>
+        <location filename="customgitactions.ui" line="59"/>
         <source>Enter command to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Gib Kommande zum Ausführen ein</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="134"/>
+        <location filename="customgitactions.ui" line="66"/>
         <source>Find in command table</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Kommando in der Tabelle</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="137"/>
+        <location filename="customgitactions.ui" line="69"/>
         <source>Find</source>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="144"/>
+        <location filename="customgitactions.ui" line="76"/>
         <source>Add command to command table</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge kommanto zur Tabelle hinzu</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="147"/>
+        <location filename="customgitactions.ui" line="79"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="181"/>
+        <location filename="customgitactions.ui" line="113"/>
         <source>Activates Whats This Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviert Was-ist-das-Hilfe</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="198"/>
+        <location filename="customgitactions.ui" line="136"/>
+        <source>Activates Key Shortcut mode</source>
+        <translation>Aktiviert Tastaturkürzel Eingabe</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.ui" line="159"/>
         <source>Open external icon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne externen Ordner für Icons</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="226"/>
+        <location filename="customgitactions.ui" line="221"/>
         <source>Add command to menue or toolbar</source>
         <translation>Kommando zur Menü Werkzeugleiste hinzufügen</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="240"/>
-        <location filename="customgitactions.ui" line="254"/>
+        <location filename="customgitactions.ui" line="235"/>
+        <location filename="customgitactions.ui" line="249"/>
         <source>Move selected menue or toolbar item</source>
         <translation>Gewählten Menüeintrag bewegen</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="268"/>
+        <location filename="customgitactions.ui" line="263"/>
         <source>Add custom git command entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Benutzer git Kommando hinzu</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="282"/>
+        <location filename="customgitactions.ui" line="277"/>
         <source>Remove selected custom git command</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche ausgewählten Benutzerkommandoeintrag</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="350"/>
+        <location filename="customgitactions.ui" line="345"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of application elements and controls&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Liste von Anwendungselementen und Kontrollelementen&lt;br/&gt;Klicke &amp;quot;Was-ist-das-Hilfe&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="353"/>
+        <location filename="customgitactions.ui" line="348"/>
         <source>&lt;html&gt;
   &lt;head/&gt;
   &lt;body&gt;&lt;h4&gt;Displays application elements and controls.&lt;/h4&gt;
@@ -314,6 +270,13 @@
       &lt;li&gt;Merge tools
           &lt;ul&gt;
                 &lt;li&gt;Enable or disable tool by left click on icon&lt;/li&gt;
+          &lt;ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Miscelaneous Items
+          &lt;ul&gt;
+                &lt;li&gt;Edit by left click on icon&lt;/li&gt;
+                &lt;li&gt;To restore text to default, remove text&lt;/li&gt;
+                &lt;li&gt;To restore number to default, enter 0&lt;/li&gt;
           &lt;ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -426,14 +389,14 @@
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selektiertes Benutzerkommando löschen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="customgitactions.ui" line="324"/>
+        <location filename="customgitactions.ui" line="319"/>
         <source>Select icons
 Contextmenu entries or Toolbar entries</source>
         <translation>Wähle Symbole
 Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="271"/>
+        <location filename="customgitactions.cpp" line="340"/>
         <source>Icons</source>
         <translation>Symbole</translation>
     </message>
@@ -534,13 +497,13 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Zeigt Symbole und Menüeinträge</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
+        <location filename="customgitactions.cpp" line="77"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
-        <location filename="customgitactions.cpp" line="400"/>
+        <location filename="customgitactions.cpp" line="77"/>
+        <location filename="customgitactions.cpp" line="532"/>
         <source>Icon</source>
         <translation>Symbol</translation>
     </message>
@@ -549,324 +512,383 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Kommando</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
-        <location filename="customgitactions.cpp" line="335"/>
+        <location filename="customgitactions.cpp" line="77"/>
+        <location filename="customgitactions.cpp" line="406"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
+        <location filename="customgitactions.cpp" line="77"/>
         <source>Shortcut</source>
         <translation>Tastenkürzel</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
+        <location filename="customgitactions.cpp" line="77"/>
         <source>Message box text</source>
         <translation>Meldungsdialogtext</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="67"/>
+        <location filename="customgitactions.cpp" line="77"/>
         <source>Command or status text</source>
         <translation>Kommando oder Statustext</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="97"/>
-        <location filename="customgitactions.cpp" line="417"/>
+        <location filename="customgitactions.cpp" line="108"/>
+        <location filename="customgitactions.cpp" line="549"/>
         <source>-- Separator --</source>
         <translation>--Trenner--</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="102"/>
+        <location filename="customgitactions.cpp" line="113"/>
         <source>Insert submenu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügen Untermenü ein</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="103"/>
+        <location filename="customgitactions.cpp" line="114"/>
         <source>sub menu name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name für Untermenü</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="192"/>
+        <location filename="customgitactions.cpp" line="219"/>
+        <source>Shortcut Key</source>
+        <translation>Tastaturkürzel</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="219"/>
+        <source>Insert: %1</source>
+        <translation>Füge %1 ein</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="257"/>
         <source>%1</source>
-        <translation type="unfinished">%1</translation>
+        <translation>%1</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="208"/>
+        <location filename="customgitactions.cpp" line="273"/>
         <source>Apply selected icon in right view to selected command entry in left view</source>
         <translation>Ausgewähles Symbol dem gewählten git Kommando zuweisen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="226"/>
+        <location filename="customgitactions.cpp" line="294"/>
         <source>Remove selected item from %1</source>
         <translation>Ausgewählten Eintrag von %1 entfernen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="272"/>
+        <location filename="customgitactions.cpp" line="341"/>
         <source>External Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Icons</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="273"/>
+        <location filename="customgitactions.cpp" line="342"/>
         <source>Context Menu Source</source>
         <translation>Kontextmenü für Quellcodebaumansincht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="274"/>
+        <location filename="customgitactions.cpp" line="343"/>
         <source>Context Menu Empty Source</source>
         <translation>Kontextmenü für leere Quellcodebaumansincht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="275"/>
+        <location filename="customgitactions.cpp" line="344"/>
         <source>Context Menu Graphics View</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextmenü für Graphikansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="276"/>
+        <location filename="customgitactions.cpp" line="345"/>
         <source>Context Menu Text View</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextmenü für Textansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="277"/>
+        <location filename="customgitactions.cpp" line="346"/>
         <source>Context Menu History</source>
         <translation>Kontextmenü für Hitorienbaumansincht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="278"/>
+        <location filename="customgitactions.cpp" line="347"/>
         <source>Context Menu Branch</source>
         <translation>Kontextmenü Quellcodezweigbaumansincht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="279"/>
+        <location filename="customgitactions.cpp" line="348"/>
         <source>Context Menu Stash</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextmenu für git Stash</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="280"/>
+        <location filename="customgitactions.cpp" line="349"/>
         <source>Context Menu Find Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextmenü Finde Text</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="281"/>
+        <location filename="customgitactions.cpp" line="350"/>
         <source>Merge or Diff Tool</source>
         <translation>Differenz bzw. Zusammenführungswerkzeug</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="368"/>
-        <source>&lt; empty &gt;</source>
-        <translation type="unfinished"></translation>
+        <location filename="customgitactions.cpp" line="351"/>
+        <source>Miscelaneous settings</source>
+        <translation>Verschiedene Einstellungen</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="383"/>
+        <location filename="customgitactions.cpp" line="439"/>
+        <source>&lt; empty &gt;</source>
+        <translation>&lt; leer &gt;</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="497"/>
         <source>Active</source>
         <translation>Aktiv</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="384"/>
+        <location filename="customgitactions.cpp" line="498"/>
         <source>Tools</source>
         <translation>Werkzeuge</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="511"/>
+        <location filename="customgitactions.cpp" line="514"/>
+        <location filename="customgitactions.cpp" line="763"/>
+        <location filename="customgitactions.cpp" line="777"/>
+        <source>Edit</source>
+        <translation>Ändern</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="515"/>
+        <source>Miscelaneous item</source>
+        <translation>Verschiedenes</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="643"/>
         <source>command name</source>
         <translation>Kommando Name</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="667"/>
+        <location filename="customgitactions.cpp" line="892"/>
         <source>Do nothing after command execution</source>
         <translation>Führt keine Aktion aus nach dem Kommando</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="668"/>
+        <location filename="customgitactions.cpp" line="893"/>
         <source>Update item status after command execution</source>
         <translation>Aktualisiere Zustand der gewählten Datei bzw. des gewählten Ordners</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="669"/>
+        <location filename="customgitactions.cpp" line="894"/>
         <source>Parse command result for history view</source>
-        <translation>Parse das Ergebnis für die Historienansicht</translation>
+        <translation>Parse das Ergebnis für die git Historienansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="670"/>
+        <location filename="customgitactions.cpp" line="895"/>
         <source>Parse command result for branch view</source>
-        <translation>Parse Ergebnis für die Zweigansicht</translation>
+        <translation>Parse Ergebnis für die git Zweigansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="671"/>
+        <location filename="customgitactions.cpp" line="896"/>
         <source>Parse command result for stash view</source>
-        <translation type="unfinished"></translation>
+        <translation>Parse Ergebnis für die git Stashansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="672"/>
+        <location filename="customgitactions.cpp" line="897"/>
         <source>Parse command result for git blame</source>
-        <translation type="unfinished"></translation>
+        <translation>Parse Ergebnis für die git Blameansicht</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="673"/>
+        <location filename="customgitactions.cpp" line="898"/>
         <source>Update root item status after command execution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="674"/>
+        <location filename="customgitactions.cpp" line="899"/>
         <source>Update repository after command execution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="715"/>
+        <location filename="customgitactions.cpp" line="900"/>
+        <source>Update stash list stash command execution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="901"/>
+        <source>Update repository sub folder after command execution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="942"/>
         <source>Enable for git status set</source>
         <translation>Für git Status aktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="716"/>
+        <location filename="customgitactions.cpp" line="943"/>
         <source>Disable for git status set</source>
         <translation>Für git Status deaktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="717"/>
+        <location filename="customgitactions.cpp" line="944"/>
         <source>Enable for git status not set</source>
         <translation>Für inaktiven git Status aktivieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="736"/>
-        <source>Ignore git file type status</source>
+        <location filename="customgitactions.cpp" line="963"/>
+        <source>Ignore file type status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="741"/>
-        <source>Enable command if this git status is set</source>
-        <translation>Aktiviere das Kommando für diesen git Status</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="747"/>
-        <source>Disable command if this git status is set</source>
-        <translation>Deaktiviere das Kommando für diesen git Status</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="753"/>
-        <source>Enable command if this git status is not set</source>
-        <translation>Aktiviere das Kommando, wenn dieser git Status nicht gesetzt ist</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="761"/>
-        <source>Reset modifications</source>
-        <translation>Änderungen verwerfen</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="762"/>
-        <source>After program restart all modifications of this command are removed</source>
-        <translation>Nach Neustart des Programms sind die Modifikationen dieses Kommandos entfernt</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="767"/>
-        <source>Branch command</source>
-        <translation>Quellcodezweig Kommando</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="767"/>
-        <source>The git command is called in branch view context</source>
-        <translation>Dieses git Kommando wird im Kontext der Zweigansicht aufgerufen</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="768"/>
-        <source>The git command is called in history view context</source>
-        <translation>Dieses git Kommando wird im Kontext der Historienansicht aufgerufen</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="769"/>
-        <source>Stash command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="769"/>
-        <source>The git command is called in stash view context</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="770"/>
-        <source>The git command is called without blocking the program</source>
-        <translation>Dieses git Kommando aufgerufen, ohne das Program zu blockieren</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="771"/>
-        <source>Unattached instant output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="771"/>
-        <source>The git command is called without blocking the program with instant output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="773"/>
-        <source>Dont hide command window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="773"/>
-        <source>The command window is not hidden to allow password input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="814"/>
-        <source>Edit toolbar button menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="815"/>
-        <source>Edit or create toolbar button menu list for custom command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="818"/>
-        <source>Don&apos;t change command</source>
-        <translation>Kommando nicht ändern</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="867"/>
-        <source>Edit menu for toolbar button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="868"/>
-        <source>Enter comma separated list for command option menu&lt;br&gt;(--option, o1,o2[,o3,..])&lt;br&gt;Mark default option with * like this: *o1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="948"/>
-        <source>Select Icon Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="965"/>
-        <source>Create Toolbar...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="965"/>
-        <source>Create a custom toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="970"/>
-        <source>Delete %1</source>
-        <translation type="unfinished">Lösche %1</translation>
-    </message>
-    <message>
-        <location filename="customgitactions.cpp" line="971"/>
-        <source>Delete selected custom toolbar</source>
+        <location filename="customgitactions.cpp" line="968"/>
+        <source>Enable command if this status is set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="customgitactions.cpp" line="974"/>
+        <source>Disable command if this status is set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="980"/>
+        <source>Enable command if this status is not set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1292"/>
+        <source>Store custom commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1302"/>
+        <source>Load custom commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable command if this git status is set</source>
+        <translation type="vanished">Aktiviere das Kommando für diesen git Status</translation>
+    </message>
+    <message>
+        <source>Disable command if this git status is set</source>
+        <translation type="vanished">Deaktiviere das Kommando für diesen git Status</translation>
+    </message>
+    <message>
+        <source>Enable command if this git status is not set</source>
+        <translation type="vanished">Aktiviere das Kommando, wenn dieser git Status nicht gesetzt ist</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="988"/>
+        <source>Reset modifications</source>
+        <translation>Änderungen verwerfen</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="989"/>
+        <source>After program restart all modifications of this command are removed</source>
+        <translation>Nach Neustart des Programms sind die Modifikationen dieses Kommandos entfernt</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="994"/>
+        <source>Branch command</source>
+        <translation>Quellcodezweig Kommando</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="994"/>
+        <source>The git command is called in branch view context</source>
+        <translation>Dieses git Kommando wird im Kontext der Zweigansicht aufgerufen</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="995"/>
+        <source>The git command is called in history view context</source>
+        <translation>Dieses git Kommando wird im Kontext der Historienansicht aufgerufen</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="996"/>
+        <source>Stash command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="996"/>
+        <source>The git command is called in stash view context</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="997"/>
+        <source>The git command is called without blocking the program</source>
+        <translation>Dieses git Kommando aufgerufen, ohne das Program zu blockieren</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="998"/>
+        <source>Unattached instant output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="998"/>
+        <source>The git command is called without blocking the program with instant output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1000"/>
+        <source>Dont hide command window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1000"/>
+        <source>The command window is not hidden to allow password input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1041"/>
+        <source>Edit toolbar button menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1042"/>
+        <source>Edit or create toolbar button menu list for custom command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1045"/>
+        <source>Don&apos;t change command</source>
+        <translation>Kommando nicht ändern</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1094"/>
+        <source>Edit menu for toolbar button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1095"/>
+        <source>Enter comma separated list for command option menu&lt;br&gt;(--option, o1,o2[,o3,..])&lt;br&gt;Mark default option with * like this: *o1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1212"/>
+        <source>Select Icon Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1229"/>
+        <source>Create Toolbar...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1229"/>
+        <source>Create a custom toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1234"/>
+        <source>Delete %1</source>
+        <translation type="unfinished">Lösche %1</translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1235"/>
+        <source>Delete selected custom toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="customgitactions.cpp" line="1238"/>
         <source>No Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="981"/>
+        <location filename="customgitactions.cpp" line="1245"/>
         <source>Enter name for a custom toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="981"/>
+        <location filename="customgitactions.cpp" line="1245"/>
         <source>Toolbar Custom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -875,7 +897,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Wird in Quellcodezweigansicht angewendet</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="768"/>
+        <location filename="customgitactions.cpp" line="995"/>
         <source>History command</source>
         <translation>Historienkommando</translation>
     </message>
@@ -884,7 +906,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Wird in Historienansicht angewendet</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="770"/>
+        <location filename="customgitactions.cpp" line="997"/>
         <source>Invoke command unattached</source>
         <translation>Rufe Kommando indirekt auf</translation>
     </message>
@@ -893,8 +915,8 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Aufrufen ohne zu blockieren</translation>
     </message>
     <message>
-        <location filename="customgitactions.cpp" line="818"/>
-        <location filename="customgitactions.cpp" line="974"/>
+        <location filename="customgitactions.cpp" line="1045"/>
+        <location filename="customgitactions.cpp" line="1238"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -902,7 +924,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
 <context>
     <name>Highlighter</name>
     <message>
-        <location filename="highlighter.cpp" line="203"/>
+        <location filename="highlighter.cpp" line="208"/>
         <source>%1,%2,%3</source>
         <translatorcomment>Meyers</translatorcomment>
         <translation>%1,%2,%3</translation>
@@ -922,26 +944,36 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
     <message>
         <location filename="highlighterdialog.ui" line="32"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="highlighterdialog.ui" line="52"/>
         <source>Style</source>
-        <translation type="unfinished">Schrift</translation>
+        <translation>Schrift</translation>
     </message>
     <message>
         <location filename="highlighterdialog.ui" line="72"/>
         <source>Weight</source>
-        <translation type="unfinished">Schriftstärke</translation>
+        <translation>Schriftstärke</translation>
     </message>
     <message>
-        <location filename="highlighterdialog.ui" line="89"/>
+        <location filename="highlighterdialog.ui" line="91"/>
+        <source>Selected Line Background Color</source>
+        <translation>Hintergrundfarbe der aktuellen Zeile</translation>
+    </message>
+    <message>
+        <location filename="highlighterdialog.ui" line="98"/>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="highlighterdialog.ui" line="108"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
         <location filename="highlighterdialog.cpp" line="25"/>
-        <location filename="highlighterdialog.cpp" line="91"/>
+        <location filename="highlighterdialog.cpp" line="95"/>
         <source>QPushButton {background-color: %1; color: %2;}</source>
         <translation>QPushButton {background-color: %1; color: %2;}</translation>
     </message>
@@ -951,6 +983,12 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation>kursiv</translation>
     </message>
     <message>
+        <location filename="highlighterdialog.cpp" line="69"/>
+        <location filename="highlighterdialog.cpp" line="159"/>
+        <source>QPushButton {background-color: %1;}</source>
+        <translation>QPushButton {background-color: %1;}</translation>
+    </message>
+    <message>
         <source>QPushButton {background-color: #FFFFFF; color: %1;}</source>
         <translation type="vanished">QPushButton {background-color: #FFFFFF; color: %1;}</translation>
     </message>
@@ -958,38 +996,38 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="14"/>
+        <location filename="mainwindow.ui" line="17"/>
         <source>Git View</source>
         <translation>Git View</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="104"/>
         <location filename="mainwindow.ui" line="107"/>
+        <location filename="mainwindow.ui" line="110"/>
         <source>Show files depending on git status</source>
         <translation>Zeigt Dateien abhängig vom git Status an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="111"/>
+        <location filename="mainwindow.ui" line="114"/>
         <source>Show all files</source>
         <translation>Alle anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="116"/>
+        <location filename="mainwindow.ui" line="119"/>
         <source>Show all git actions</source>
         <translation>Alle git Stati anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="121"/>
+        <location filename="mainwindow.ui" line="124"/>
         <source>Show modified</source>
         <translation>Nur modifizierte</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="126"/>
+        <location filename="mainwindow.ui" line="129"/>
         <source>Show added</source>
         <translation>Nur hinzugefügte</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="131"/>
+        <location filename="mainwindow.ui" line="134"/>
         <source>Show deleted</source>
         <translation>Nur entfernte</translation>
     </message>
@@ -998,53 +1036,53 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Nur unbekannte</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="141"/>
+        <location filename="mainwindow.ui" line="144"/>
         <source>Show staged</source>
         <translation>Nur staged</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="146"/>
+        <location filename="mainwindow.ui" line="149"/>
         <source>Show unmerged</source>
         <translation>Nur non merged</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="151"/>
+        <location filename="mainwindow.ui" line="154"/>
         <source>Show selected</source>
         <translation>Nur markierte</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="177"/>
+        <location filename="mainwindow.ui" line="185"/>
         <source>Hides parent tree item, if it does not contain entries</source>
         <translation>Versteckt leere Knoten der Baumansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="180"/>
+        <location filename="mainwindow.ui" line="188"/>
         <source>Hide empty Parent  </source>
         <translation>Leerknoten verstecken  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="196"/>
+        <location filename="mainwindow.ui" line="204"/>
         <source>Show short git status</source>
         <translation>Zeigt Kürzel des git Status an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="199"/>
+        <location filename="mainwindow.ui" line="207"/>
         <source>Short State  </source>
         <translation>Kürzel  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="206"/>
+        <location filename="mainwindow.ui" line="214"/>
         <source>Diff tool:  </source>
         <translation>Werkzeug:  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="219"/>
+        <location filename="mainwindow.ui" line="227"/>
         <source>Select diff or merge tool</source>
         <translation>Wähle Differenz bzw. Zusammenführungswerkzeug aus</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="222"/>
-        <location filename="mainwindow.ui" line="226"/>
+        <location filename="mainwindow.ui" line="230"/>
+        <location filename="mainwindow.ui" line="234"/>
         <source>Default</source>
         <translation>Standard</translation>
     </message>
@@ -1062,27 +1100,27 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Ansicht des git Repository</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="273"/>
+        <location filename="mainwindow.ui" line="281"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="278"/>
+        <location filename="mainwindow.ui" line="286"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="283"/>
+        <location filename="mainwindow.ui" line="291"/>
         <source>State</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="288"/>
+        <location filename="mainwindow.ui" line="296"/>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="323"/>
+        <location filename="mainwindow.ui" line="331"/>
         <source>File/Text:  </source>
         <translation>Datei/Text:  </translation>
     </message>
@@ -1091,12 +1129,12 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Zeigt Dateiname der geöffneten Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="349"/>
+        <location filename="mainwindow.ui" line="357"/>
         <source>Close file or text view</source>
         <translation>Schliesst Datei oder Textansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1833"/>
+        <location filename="mainwindow.cpp" line="2104"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -1105,17 +1143,17 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Änderungen der Textdatei speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1830"/>
+        <location filename="mainwindow.cpp" line="2101"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="419"/>
+        <location filename="mainwindow.ui" line="427"/>
         <source>Shows language for hilighting</source>
         <translation>Zeigt die Programmiersprache für Texthervorhebung an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="422"/>
+        <location filename="mainwindow.ui" line="430"/>
         <source> L:</source>
         <translation> Typ:</translation>
     </message>
@@ -1124,12 +1162,12 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Ansicht der git Historie</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="500"/>
+        <location filename="mainwindow.ui" line="508"/>
         <source>History</source>
         <translation>Historie</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="510"/>
+        <location filename="mainwindow.ui" line="518"/>
         <source>Author</source>
         <translation>Author</translation>
     </message>
@@ -1142,7 +1180,7 @@ Kontextmenüeinräge oder Werkzeugleisteneinträge</translation>
         <translation type="vanished">Asnicht für git Zweige</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="585"/>
+        <location filename="mainwindow.ui" line="593"/>
         <source>Branch</source>
         <translation>Codezweig</translation>
     </message>
@@ -1157,67 +1195,72 @@ Inhalt einer mit doppelklick geöffneten Datei an</translation>
         <translation type="vanished">Textansicht bzw. Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="750"/>
+        <location filename="mainwindow.ui" line="758"/>
         <source>File Flags:</source>
         <translation>Eigenschaften von Dateien:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="770"/>
+        <location filename="mainwindow.ui" line="778"/>
         <source>Show system files in git folder</source>
         <translation>Zeige Systemdateien an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="773"/>
+        <location filename="mainwindow.ui" line="781"/>
         <source>System Files</source>
         <translation>Systemdateien</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="792"/>
+        <location filename="mainwindow.ui" line="800"/>
         <source>Show hidden files in git folder</source>
         <translation>Zeige versteckte Dateien an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="795"/>
+        <location filename="mainwindow.ui" line="803"/>
         <source>Hidden Files</source>
         <translation>Versteckte Dateien</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="818"/>
+        <location filename="mainwindow.ui" line="826"/>
         <source>Show symbolic links in git folder</source>
         <translation>Zeige Dateiveknüpfungen an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="821"/>
+        <location filename="mainwindow.ui" line="829"/>
         <source>Symbolic Links</source>
         <translation>Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="805"/>
+        <location filename="mainwindow.ui" line="813"/>
         <source>Show folders in git folder</source>
         <translation>Zeige Ordner in git Ordner an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="808"/>
+        <location filename="mainwindow.ui" line="816"/>
         <source>Directories</source>
         <translation>Ordner</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="757"/>
+        <location filename="mainwindow.ui" line="765"/>
         <source>Show files in git folder</source>
-        <translation>Zeige Dateien ind git Ordner an</translation>
+        <translation>Zeige Dateien in git Ordner an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="136"/>
+        <location filename="mainwindow.ui" line="139"/>
         <source>Show untracked</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige untracked</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="156"/>
+        <location filename="mainwindow.ui" line="159"/>
         <source>Show stashed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige gestashte</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="164"/>
+        <source>Show ignored</source>
+        <translation>Ziege ignorierte</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="250"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows file and folder tree of git repositories
 &lt;ul&gt;
@@ -1237,12 +1280,12 @@ Shows file and folder tree of git repositories
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="393"/>
+        <location filename="mainwindow.ui" line="401"/>
         <source>Save changes to file</source>
-        <translation type="unfinished">Änderungen speichern</translation>
+        <translation>Änderungen speichern</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="477"/>
+        <location filename="mainwindow.ui" line="485"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows git history of files or folders
 &lt;ul&gt;
@@ -1260,13 +1303,13 @@ Shows git history of files or folders
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="505"/>
-        <location filename="mainwindow.ui" line="551"/>
+        <location filename="mainwindow.ui" line="513"/>
+        <location filename="mainwindow.ui" line="559"/>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="530"/>
+        <location filename="mainwindow.ui" line="538"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows git stashed of files or folders
 &lt;ul&gt;
@@ -1277,7 +1320,7 @@ Shows git stashed of files or folders
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="565"/>
+        <location filename="mainwindow.ui" line="573"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows git branches
 &lt;ul&gt;
@@ -1289,7 +1332,7 @@ Shows git branches
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="599"/>
+        <location filename="mainwindow.ui" line="607"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows found text items and according lines and files&lt;br&gt;
 Bookmarks are shown in the same way
@@ -1304,22 +1347,23 @@ Bookmarks are shown in the same way
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="619"/>
+        <location filename="mainwindow.ui" line="627"/>
         <source>File</source>
-        <translation type="unfinished">Datei</translation>
+        <translation>Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="624"/>
+        <location filename="mainwindow.ui" line="632"/>
+        <location filename="mainwindow.cpp" line="211"/>
         <source>Line</source>
-        <translation type="unfinished">Zeile</translation>
+        <translation>Zeile</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="629"/>
+        <location filename="mainwindow.ui" line="637"/>
         <source>Found Text Line</source>
-        <translation type="unfinished">Gefundene Textzeile</translation>
+        <translation>Gefundene Textzeile</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="659"/>
+        <location filename="mainwindow.ui" line="667"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows text of: 
 &lt;ul&gt;
@@ -1347,7 +1391,7 @@ The context menue allows:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="704"/>
+        <location filename="mainwindow.ui" line="712"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows graphics file content opened with double click
 &lt;ul&gt;
@@ -1357,7 +1401,7 @@ Shows graphics file content opened with double click
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="719"/>
+        <location filename="mainwindow.ui" line="727"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Shows binary file content opened with double click
 &lt;ul&gt;
@@ -1369,118 +1413,156 @@ Shows binary file content opened with double click
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="760"/>
+        <location filename="mainwindow.ui" line="768"/>
         <source>Files</source>
         <translation>Dateien</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="828"/>
+        <location filename="mainwindow.ui" line="836"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="835"/>
+        <location filename="mainwindow.ui" line="843"/>
         <source>Select Visual Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle visuellen Stil</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="845"/>
+        <location filename="mainwindow.ui" line="853"/>
         <source>Select User defines Styles for App</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle benutzerdefinierten Stil</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="849"/>
+        <location filename="mainwindow.ui" line="857"/>
         <source>No Style</source>
-        <translation type="unfinished">Kein Stil</translation>
+        <translation>Kein Stil</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="854"/>
+        <location filename="mainwindow.ui" line="862"/>
         <source>User Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="859"/>
-        <source>Dark Palette</source>
-        <translation type="unfinished">Dunkle Palette</translation>
+        <translation>Benutzerdefinierter Stil</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="867"/>
+        <source>Dark Palette</source>
+        <translation>Dunkle Palette</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="872"/>
+        <source>Load Style...</source>
+        <translation>Lade Stil</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="880"/>
         <source>Select Toolbar Style</source>
-        <translation type="unfinished">Wähle Stil für Werkzeugleiste</translation>
+        <translation>Wähle Stil für Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="871"/>
+        <location filename="mainwindow.ui" line="884"/>
         <source>Icon</source>
-        <translation type="unfinished">Symbol</translation>
+        <translation>Symbol</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="876"/>
+        <location filename="mainwindow.ui" line="889"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="881"/>
+        <location filename="mainwindow.ui" line="894"/>
         <source>Text beside Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="886"/>
-        <source>Text under Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="891"/>
-        <source>Follow System</source>
-        <translation type="unfinished">Systemeinstellung folgen</translation>
+        <translation>Text neben Symbol</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="899"/>
+        <source>Text under Icon</source>
+        <translation>Text unter Symbol</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="904"/>
+        <source>Follow System</source>
+        <translation>Wie Systemeinstellung</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="912"/>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiter</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="906"/>
+        <location filename="mainwindow.ui" line="919"/>
         <source>Select position of view tabs</source>
-        <translation type="unfinished">Wähle Tap-Position für die Baumansichten</translation>
+        <translation>Wähle Reiter-Position für die Baumansichten</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="910"/>
+        <location filename="mainwindow.ui" line="923"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="915"/>
+        <location filename="mainwindow.ui" line="928"/>
+        <location filename="mainwindow.cpp" line="885"/>
         <source>Bottom</source>
-        <translation type="unfinished">Unten</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="920"/>
-        <source>Left</source>
-        <translation type="unfinished">Links</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="925"/>
-        <source>Right</source>
-        <translation type="unfinished">Rechts</translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="933"/>
-        <source>Editor / Viewer</source>
-        <translation type="unfinished">Editor / Textansicht</translation>
+        <location filename="mainwindow.cpp" line="883"/>
+        <source>Left</source>
+        <translation>Links</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="938"/>
+        <location filename="mainwindow.cpp" line="884"/>
+        <source>Right</source>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="946"/>
+        <source>Editor / Viewer</source>
+        <translation>Editor / Textansicht</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="959"/>
         <source>Select code page for text file&lt;br&gt;
 Enter text to search</source>
-        <translation type="unfinished">Codepage für Textdatei auswählen&lt;br&gt;Geben Sie den zu suchenden Text ein</translation>
+        <translation>Codepage für Textdatei auswählen&lt;br&gt;Geben Sie den zu suchenden Text ein</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="960"/>
+        <location filename="mainwindow.ui" line="973"/>
+        <source>Select word wrap</source>
+        <translation>Zeilenumbruch</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="977"/>
+        <source>No wrap</source>
+        <translation>Kein Umbruch</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="982"/>
+        <source>Word wrap</source>
+        <translation>Wortumbruch</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="987"/>
+        <source>Manual wrap</source>
+        <translation>Manueller Umbruch</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="992"/>
+        <source>Wrap anywhere</source>
+        <translation>Beliebiger Umbruch</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="997"/>
+        <source>At boundary or anywhere</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1005"/>
         <source>Open Editors (click What&apos;s this?)</source>
-        <translation type="unfinished">Offene Editoren (Klick Hilfe für)</translation>
+        <translation>Offene Editoren (Klick Was-ist-das-Hilfe)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="963"/>
+        <location filename="mainwindow.ui" line="1008"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
 Select additional open Editors.&lt;br&gt;
 Git or command results are always displayed in main editor.
@@ -1493,210 +1575,228 @@ Git or command results are always displayed in main editor.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="975"/>
+        <location filename="mainwindow.ui" line="1020"/>
         <source>No additional Editor</source>
-        <translation type="unfinished">Kein Extra Editor</translation>
+        <translation>Kein Extra Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="980"/>
+        <location filename="mainwindow.ui" line="1025"/>
         <source>One additional Editor</source>
-        <translation type="unfinished">Ein Extra Editor</translation>
+        <translation>Ein Extra Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="985"/>
+        <location filename="mainwindow.ui" line="1030"/>
         <source>One Editor per File</source>
-        <translation type="unfinished">Ein Editor pro Datei</translation>
+        <translation>Ein Editor pro Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="993"/>
-        <location filename="mainwindow.ui" line="1000"/>
+        <location filename="mainwindow.ui" line="1038"/>
         <source>Tabulator width</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulatorweite</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1013"/>
+        <location filename="mainwindow.ui" line="1045"/>
+        <source>Tabulator width in characters</source>
+        <translation>Tabulator weite in Zeichen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1058"/>
         <source>Font parameter</source>
-        <translation type="unfinished">Schriftparameter</translation>
+        <translation>Schriftparameter</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1032"/>
+        <location filename="mainwindow.ui" line="1077"/>
         <source>Choose an equidistant font for the editor</source>
-        <translation type="unfinished">Wähle äquidistante Schriftart</translation>
+        <translation>Wähle äquidistante Schriftart</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1052"/>
+        <location filename="mainwindow.ui" line="1097"/>
         <source>Render graphics or HTML file in Graphics View</source>
-        <translation type="unfinished">Zeigt Bilder oder HTML graphisch an</translation>
+        <translation>Zeigt Bilder oder HTML graphisch an</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1055"/>
+        <location filename="mainwindow.ui" line="1100"/>
         <source>Render File</source>
-        <translation type="unfinished">Datei graphisch anzeigen</translation>
+        <translation>Datei graphisch anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1065"/>
+        <location filename="mainwindow.ui" line="1110"/>
         <source>Shows line numbers in text view</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigt Zeilennummern in der Textansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1068"/>
+        <location filename="mainwindow.ui" line="1113"/>
         <source>Show line numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilennummer anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1075"/>
+        <location filename="mainwindow.ui" line="1123"/>
         <source>Miscelaneous:</source>
-        <translation type="unfinished">Verschiedenes:</translation>
+        <translation>Verschiedenes:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1082"/>
+        <location filename="mainwindow.ui" line="1130"/>
         <source>Display Type Converter</source>
-        <translation type="unfinished">Zahlenformatkonverter</translation>
+        <translation>Zahlenformatkonverter</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1085"/>
+        <location filename="mainwindow.ui" line="1133"/>
         <source>Type Converter</source>
-        <translation type="unfinished"></translation>
+        <translation>Typkonverter</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1092"/>
+        <location filename="mainwindow.ui" line="1140"/>
         <source>Use fast file search function (fsrc)</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutze schnelle Suche (Elsamuco fsrc)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1095"/>
+        <location filename="mainwindow.ui" line="1143"/>
         <source>Fast File Search</source>
-        <translation type="unfinished">Schnelle Dateisuche</translation>
+        <translation>Schnelle Dateisuche</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1102"/>
+        <location filename="mainwindow.ui" line="1150"/>
         <source>Store search results as a tree, not as single items</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichert Suchergebnis als Baumansicht, nicht als einzelne Einträge</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1105"/>
+        <location filename="mainwindow.ui" line="1153"/>
         <source>Search Result as Tree</source>
-        <translation type="unfinished">Suchergebnis in Baumansicht</translation>
+        <translation>Suchergebnis als Baumansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1115"/>
-        <location filename="mainwindow.ui" line="1118"/>
+        <location filename="mainwindow.ui" line="1163"/>
+        <location filename="mainwindow.ui" line="1166"/>
         <source>Show history also in graphics view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1121"/>
+        <location filename="mainwindow.ui" line="1169"/>
         <source>Show History graphically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1128"/>
+        <location filename="mainwindow.ui" line="1176"/>
         <source>Experimental functions</source>
-        <translation type="unfinished">Experimentelle Funktionen</translation>
+        <translation>Experimentelle Funktionen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1131"/>
+        <location filename="mainwindow.ui" line="1179"/>
         <source>Experimental</source>
-        <translation type="unfinished">Experimentell</translation>
+        <translation>Experimentell</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1138"/>
+        <location filename="mainwindow.ui" line="1186"/>
         <source>Append background command to batch list, if busy</source>
-        <translation type="unfinished">Kommando im Hintergrund ausführen</translation>
+        <translation>Kommando im Hintergrund ausführen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1141"/>
+        <location filename="mainwindow.ui" line="1189"/>
         <source>Append to Batch</source>
-        <translation type="unfinished">Zu Stapel für Hintergrundausführung hinzufügen</translation>
+        <translation>Zu Stapel für Hintergrundausführung hinzufügen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1154"/>
+        <location filename="mainwindow.ui" line="1199"/>
+        <source>Show background command output in additional text view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1202"/>
+        <source>Additional Batch View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1218"/>
         <source>Find in </source>
         <translation>Suche in </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1176"/>
+        <location filename="mainwindow.ui" line="1240"/>
         <source>Select View for search function</source>
         <translation>Ansicht für Suchfunktion auswählen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1183"/>
+        <location filename="mainwindow.ui" line="1247"/>
         <source>Search backward</source>
         <translation>Rückwärts suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1186"/>
+        <location filename="mainwindow.ui" line="1250"/>
         <source>Previous</source>
         <translation>Rückwärts</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1199"/>
+        <location filename="mainwindow.ui" line="1263"/>
         <source>Search forward</source>
         <translation>Vorwärts suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1202"/>
+        <location filename="mainwindow.ui" line="1266"/>
         <source>Next</source>
         <translation>Vorwärts</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1209"/>
+        <location filename="mainwindow.ui" line="1273"/>
         <source>Enter search expression or words</source>
         <translation>Suchwort bzw. regulären Ausdruck eingeben</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1216"/>
+        <location filename="mainwindow.ui" line="1280"/>
+        <source>Search all occurrences of expression in all files of selected folder or in selected file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Search all </source>
-        <translation type="unfinished">Alle suchen</translation>
+        <translation type="obsolete">Alle suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1219"/>
-        <location filename="mainwindow.cpp" line="2266"/>
+        <location filename="mainwindow.ui" line="1283"/>
+        <location filename="mainwindow.cpp" line="2591"/>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1226"/>
+        <location filename="mainwindow.ui" line="1300"/>
         <source>Enter replace text</source>
-        <translation type="unfinished">Text zum Ersetzen eingeben</translation>
+        <translation>Text zum Ersetzen eingeben</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1240"/>
+        <location filename="mainwindow.ui" line="1314"/>
         <source>Search case sensitive</source>
         <translation>Beachte Groß- und Kleinschreibung</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1243"/>
+        <location filename="mainwindow.ui" line="1317"/>
         <source>Case Sensitive </source>
         <translation>Groß/kleinbuchstaben </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1250"/>
+        <location filename="mainwindow.ui" line="1324"/>
         <source>Search whole words</source>
         <translation>Suche ganzes Wort</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1253"/>
+        <location filename="mainwindow.ui" line="1327"/>
         <source>Whole Word </source>
         <translation>Ganzes Wort </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1260"/>
+        <location filename="mainwindow.ui" line="1334"/>
         <source>Search with regular expression</source>
         <translation>Suche mit regulären Ausdrücken</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1263"/>
+        <location filename="mainwindow.ui" line="1337"/>
         <source>Regular Expression </source>
         <translation>Reguläre Ausdrücke </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1274"/>
+        <location filename="mainwindow.ui" line="1348"/>
         <source>Select source folder...</source>
         <translation>Wähle git Repository aus...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1279"/>
+        <location filename="mainwindow.ui" line="1353"/>
         <source>Select Destination...</source>
         <translation>Wähle Ziel...</translation>
     </message>
@@ -1705,22 +1805,27 @@ Git or command results are always displayed in main editor.
         <translation type="vanished">Texteditor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="767"/>
+        <location filename="mainwindow.cpp" line="848"/>
         <source>History View</source>
         <translation>Historienansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="773"/>
+        <location filename="mainwindow.cpp" line="855"/>
         <source>Branch View</source>
-        <translation type="unfinished">Codezweigansicht</translation>
+        <translation>Codezweigansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="806"/>
+        <location filename="mainwindow.cpp" line="881"/>
+        <source>Execute Git Command</source>
+        <translation>Git Kommando ausführen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="889"/>
         <source>Git File View States</source>
         <translation>Git Textansichtwerkzeuge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="815"/>
+        <location filename="mainwindow.cpp" line="898"/>
         <source>Text Editor / Viewer Control</source>
         <translation>Test-editor / ansicht Werkzeuge</translation>
     </message>
@@ -1729,89 +1834,105 @@ Git or command results are always displayed in main editor.
         <translation type="vanished">Dateieigenschaften</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1173"/>
-        <location filename="mainwindow.cpp" line="833"/>
+        <location filename="mainwindow.ui" line="1237"/>
+        <location filename="mainwindow.cpp" line="916"/>
         <source>Find</source>
         <translation>Suche</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="217"/>
+        <location filename="mainwindow_sourcetree.cpp" line="220"/>
         <source>Repository: </source>
         <translation>Repository: </translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="281"/>
+        <location filename="mainwindow_sourcetree.cpp" line="284"/>
         <source>Select SourceFiles</source>
         <translation>Wähle git Repository</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="296"/>
+        <location filename="mainwindow_sourcetree.cpp" line="301"/>
         <source>Select file to open</source>
-        <translation type="unfinished">Wähle zu öffnende Datei</translation>
+        <translation>Wähle zu öffnende Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="305"/>
+        <location filename="mainwindow_sourcetree.cpp" line="310"/>
         <source>Enter file new name</source>
-        <translation type="unfinished">Neuen Namen eingeben</translation>
+        <translation>Neuen Namen eingeben</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="395"/>
+        <location filename="mainwindow_sourcetree.cpp" line="408"/>
         <source>Open large file %1?</source>
-        <translation type="unfinished">Große Datei %1 öffnen?</translation>
+        <translation>Große Datei %1 öffnen?</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="396"/>
+        <location filename="mainwindow_sourcetree.cpp" line="409"/>
         <source>File size %1 is larger than
 warning level size %2.
 This could be time consuming</source>
-        <translation type="unfinished">Dateigröße %1 ist größer als\nWarnungsgröße %2.\n</translation>
+        <translation>Dateigröße %1 ist größer als
+Warnungsgröße %2.
+Könnte etwas länger dauern</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="434"/>
+        <location filename="mainwindow_sourcetree.cpp" line="451"/>
         <source>binary</source>
-        <translation type="unfinished">Binär</translation>
+        <translation>Binär</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="542"/>
+        <location filename="mainwindow_sourcetree.cpp" line="639"/>
         <source>Total selected bytes: </source>
         <translation>Gesamt ausgewählte Bytes: </translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="727"/>
+        <location filename="mainwindow_sourcetree.cpp" line="844"/>
         <source>Clone git Repository</source>
-        <translation type="unfinished">Klone git Repository</translation>
+        <translation>Klone git Repository</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="728"/>
+        <location filename="mainwindow_sourcetree.cpp" line="845"/>
         <source>Enter git repository address:</source>
-        <translation type="unfinished">Git Repositoryadresse eingeben</translation>
+        <translation>Git Repositoryadresse eingeben:</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="731"/>
+        <location filename="mainwindow_sourcetree.cpp" line="847"/>
         <source>Select destination for repository &quot;%1&quot;</source>
-        <translation type="unfinished">Wähle Ziel für Repository \&quot;%1\&quot;</translation>
+        <translation>Wähle Ziel für Repository \&quot;%1\&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="804"/>
+        <location filename="mainwindow_sourcetree.cpp" line="927"/>
         <source>Enter a new name or destination for &quot;%1&quot;.
 To move the %3 insert the destination path before.
 To rename just modify the name.</source>
-        <translation type="unfinished">Neuen Namen bzw. Zielort für \&quot;%1\&quot; eingeben.\nUm %3 zu verschieben füge das Zielverzeichnis davor ein.\nFür Umbennenung muss nur der Name geändert werden.</translation>
+        <translation>Neuen Namen bzw. Zielort für \&quot;%1\&quot; eingeben.
+Um %3 zu verschieben füge das Zielverzeichnis davor ein.
+Für Umbennenung muss nur der Name geändert werden.</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="1122"/>
+        <location filename="mainwindow_sourcetree.cpp" line="943"/>
+        <source>mv %1 %2</source>
+        <translation>mv %1 %2</translation>
+    </message>
+    <message>
+        <location filename="mainwindow_sourcetree.cpp" line="948"/>
+        <source>mv &quot;%1/%2&quot; &quot;%1/%3&quot;</source>
+        <translation>mv &quot;%1/%2&quot; &quot;%1/%3&quot;</translation>
+    </message>
+    <message>
+        <location filename="mainwindow_sourcetree.cpp" line="1289"/>
         <source>Could not delete %1 %2
 </source>
-        <translation type="unfinished">Konnte %1 %2 nicht löschen</translation>
+        <translation>Konnte %1 %2 nicht löschen
+</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="1239"/>
+        <location filename="mainwindow_sourcetree.cpp" line="1406"/>
         <source>Information about %1
 %2</source>
-        <translation type="unfinished">Information über %1\n%2</translation>
+        <translation>Information über %1
+%2</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="302"/>
+        <location filename="mainwindow_textview.cpp" line="338"/>
         <source>Save content of text editor</source>
         <translation>Speichere Inhalt der Textansicht</translation>
     </message>
@@ -1820,44 +1941,46 @@ To rename just modify the name.</source>
         <translation type="vanished">Die Textdatei wurde geändert.</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="109"/>
+        <location filename="mainwindow_textview.cpp" line="141"/>
         <source>Reload file%1?;File %1%2 has changed</source>
-        <translation type="unfinished">Datei %1 neu laden?;Datei %1%2 wurde geändert</translation>
+        <translation>Datei %1 neu laden?;Datei %1%2 wurde geändert</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="224"/>
+        <location filename="mainwindow_textview.cpp" line="257"/>
         <source>The document has been modified.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Dokument wurde geändert.
+
+%1</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="225"/>
+        <location filename="mainwindow_textview.cpp" line="258"/>
         <source>Do you want to save your changes?</source>
         <translation>Möchten Sie die Änderungen speichern?</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="339"/>
+        <location filename="mainwindow_textview.cpp" line="395"/>
         <source> Type: </source>
         <translation> Typ: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1511"/>
+        <location filename="mainwindow.cpp" line="1773"/>
         <source>Show difference</source>
         <translation>Zeige Unterschiede an</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1518"/>
+        <location filename="mainwindow.cpp" line="1780"/>
         <source>Call diff tool...</source>
         <translation>Zeige Unterschiede extern an...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1786"/>
         <source>Call merge tool...</source>
         <translation>Rufe Zusammenführungswerkzeug auf...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1530"/>
+        <location filename="mainwindow.cpp" line="1792"/>
         <source>Merge file...</source>
         <translation>Führe Datei zusammen...</translation>
     </message>
@@ -1866,486 +1989,643 @@ To rename just modify the name.</source>
         <translation type="vanished">Führe Änderungen der ausgewählten Datei zusammen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="142"/>
+        <location filename="mainwindow.cpp" line="151"/>
         <source>QTreeView::branch:has-siblings:!adjoins-item {    border-image: url(%1) 0; }QTreeView::branch:has-siblings:adjoins-item {    border-image: url(%2) 0; }QTreeView::branch:!has-children:!has-siblings:adjoins-item {    border-image: url(%3) 0; }QTreeView::branch:has-children:!has-siblings:closed,QTreeView::branch:closed:has-children:has-siblings {     border-image: none; image: url(%4); }QTreeView::branch:open:has-children:!has-siblings,QTreeView::branch:open:has-children:has-siblings  {     border-image: none; image: url(%5); }</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="748"/>
+        <location filename="mainwindow.cpp" line="217"/>
+        <source>Column/Position</source>
+        <translation>Spalte/Position</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="812"/>
         <source>Text View/Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Textansicht/Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="750"/>
+        <location filename="mainwindow.cpp" line="815"/>
         <source>Go to line</source>
-        <translation type="unfinished">Gehe zu Zeile</translation>
+        <translation>Gehe zu Zeile</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="756"/>
+        <location filename="mainwindow.cpp" line="816"/>
+        <source>Repository View</source>
+        <translation>Repositoryansicht</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="821"/>
         <source>Graphics View</source>
-        <translation type="unfinished">Grafikansicht</translation>
+        <translation>Grafikansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="762"/>
+        <location filename="mainwindow.cpp" line="828"/>
         <source>Binary View</source>
-        <translation type="unfinished">Binär Ansicht</translation>
+        <translation>Binär Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="779"/>
+        <location filename="mainwindow.cpp" line="837"/>
+        <location filename="mainwindow.cpp" line="840"/>
+        <source>Html and Markdown</source>
+        <translation>Html und Markdown</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="862"/>
         <source>Stash View</source>
-        <translation type="unfinished"></translation>
+        <translation>Stashansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="785"/>
+        <location filename="mainwindow.cpp" line="869"/>
         <source>Found in Text Files</source>
-        <translation type="unfinished">Gefunden in Textdateien</translation>
+        <translation>Gefunden in Textdateien</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="786"/>
+        <location filename="mainwindow.cpp" line="871"/>
         <source> View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="787"/>
-        <source>Text files below folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="792"/>
+        <location filename="mainwindow.cpp" line="876"/>
         <source>Binary Values</source>
-        <translation type="unfinished">Binärwert</translation>
+        <translation>Binärwert</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="799"/>
         <source>Html &amp;&amp; Markdown</source>
-        <translation type="unfinished">HTML &amp;&amp; Markdown</translation>
+        <translation type="obsolete">HTML &amp;&amp; Markdown</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="824"/>
+        <location filename="mainwindow.cpp" line="907"/>
         <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>pidof %1</source>
+        <translation type="obsolete">Prozess ID von %1</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1067"/>
+        <source>Compare two Items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1338"/>
-        <source>pidof %1</source>
-        <translation type="unfinished">Prozess ID von %1</translation>
+        <location filename="mainwindow.cpp" line="1068"/>
+        <source>Path of tool: grep</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1352"/>
+        <location filename="mainwindow.cpp" line="1069"/>
+        <source>Path of tool: fsrc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1070"/>
+        <source>System command open files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1071"/>
+        <source>Mime type for file copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1072"/>
+        <source>Path to style qss file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1073"/>
+        <source>Warn size for open file (bytes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1074"/>
+        <source>Logging Severity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1075"/>
+        <source>Icon: HasSiblingsNotAdjoins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1076"/>
+        <source>Icon: HasSiblingsAdjoins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1077"/>
+        <source>Icon: HasChildrenNotHasSiblingsAdjoins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1078"/>
+        <source>Icon: ClosedHasChildrenHasSibling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1079"/>
+        <source>Icon: OpenHasChildrenHasSibling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1081"/>
+        <source>Linux theme name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1594"/>
         <source>Do you really whant to kill all background processes &quot;%1&quot;?;%1
 Yes kills process ID: %2
 Yes To All empties also batch list</source>
-        <translation type="unfinished">Soll der Hintergrundprozess \&quot;%1\&quot; abgebrochen werden?;%1\n</translation>
+        <translation>Soll der Hintergrundprozess \&quot;%1\&quot; abgebrochen werden?;%1
+Ja beendet den Prozess ID: %2
+Ja alle löscht die Stapelliste</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1373"/>
+        <location filename="mainwindow.cpp" line="1619"/>
         <source>no pids found for %1</source>
-        <translation type="unfinished">Keine Prozess ID gefunden für %1</translation>
+        <translation>Keine Prozess ID gefunden für %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1378"/>
+        <location filename="mainwindow.cpp" line="1624"/>
         <source>no command found: %1</source>
-        <translation type="unfinished">Kein Kommando gefunden: %1</translation>
+        <translation>Kein Kommando gefunden: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1503"/>
-        <location filename="mainwindow_branchtree.cpp" line="45"/>
+        <location filename="mainwindow.cpp" line="1765"/>
+        <location filename="mainwindow_branchtree.cpp" line="44"/>
         <location filename="mainwindow_historytree.cpp" line="55"/>
         <location filename="mainwindow_historytree.cpp" line="89"/>
-        <location filename="mainwindow_sourcetree.cpp" line="701"/>
-        <location filename="mainwindow_sourcetree.cpp" line="711"/>
-        <location filename="mainwindow_sourcetree.cpp" line="740"/>
-        <location filename="mainwindow_sourcetree.cpp" line="847"/>
-        <location filename="mainwindow_sourcetree.cpp" line="933"/>
+        <location filename="mainwindow_sourcetree.cpp" line="818"/>
+        <location filename="mainwindow_sourcetree.cpp" line="828"/>
+        <location filename="mainwindow_sourcetree.cpp" line="857"/>
+        <location filename="mainwindow_sourcetree.cpp" line="988"/>
+        <location filename="mainwindow_sourcetree.cpp" line="1086"/>
         <source>
 Error %1 occurred</source>
-        <translation type="unfinished">Fehler %1 ist aufgetreten</translation>
+        <translation>
+Fehler %1 ist aufgetreten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1530"/>
+        <location filename="mainwindow.cpp" line="1792"/>
         <source>Merge selected file (experimental, not working)</source>
         <translation>Führe gewählte Datei zusammen (experimentell)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1795"/>
         <source>Edit Highlighting...</source>
         <translation>Bearbeite Texthervorhebung...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1533"/>
+        <location filename="mainwindow.cpp" line="1795"/>
         <source>Edit highlighting color and font</source>
         <translation>Bearbeitet Farbe und Schrift der Hervorhebung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1537"/>
+        <location filename="mainwindow.cpp" line="1799"/>
         <source>Show status</source>
         <translation>Aktualisiere git Status</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1540"/>
+        <location filename="mainwindow.cpp" line="1802"/>
         <source>Show short status</source>
         <translation>Aktualisiere Kurzstatus</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1807"/>
         <source>Add to git (stage)</source>
         <translation>Zu git hinzufügen (stagen)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1551"/>
+        <location filename="mainwindow.cpp" line="1813"/>
         <source>Reset file (unstage)</source>
         <translation>Aus git entfernen (unstage)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1556"/>
+        <location filename="mainwindow.cpp" line="1818"/>
         <source>Show History</source>
         <translation>Historie anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1561"/>
+        <location filename="mainwindow.cpp" line="1823"/>
         <source>Blame</source>
-        <translation type="unfinished">Author zuordnen</translation>
+        <translation>Author zuordnen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1566"/>
+        <location filename="mainwindow.cpp" line="1828"/>
         <source>Remove from git...</source>
         <translation>Aus git enfernen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1572"/>
+        <location filename="mainwindow.cpp" line="1834"/>
         <source>Restore changes...</source>
         <translation>Änderungen rückgangig machen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1573"/>
+        <location filename="mainwindow.cpp" line="1835"/>
         <source>Restore %1 changes;Do you want to restore changes in &quot;%1&quot;?</source>
-        <translation type="unfinished">Wiederherstellen von %1 ;Sollen die Änderungen in \&quot;%1\&quot; rückgängig gemacht werden?</translation>
+        <translation>Wiederherstellen von %1 ;Sollen die Änderungen in \&quot;%1\&quot; rückgängig gemacht werden?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1601"/>
+        <location filename="mainwindow.cpp" line="1863"/>
         <source>Stash all entries;Do you whant to stash all entries of repository:
 &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1607"/>
+        <location filename="mainwindow.cpp" line="1869"/>
         <source>Show stash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1610"/>
+        <location filename="mainwindow.cpp" line="1872"/>
         <source>Stash push</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1619"/>
+        <location filename="mainwindow.cpp" line="1881"/>
         <source>Stash apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1622"/>
+        <location filename="mainwindow.cpp" line="1884"/>
         <source>Stash drop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1625"/>
+        <location filename="mainwindow.cpp" line="1888"/>
         <source>Stash clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1628"/>
+        <location filename="mainwindow.cpp" line="1892"/>
         <source>List stashes</source>
-        <translation type="unfinished">Stash auflisten</translation>
+        <translation>Stash auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1656"/>
+        <location filename="mainwindow.cpp" line="1920"/>
         <source>Checkout %1;Do you want to set &quot;%1&quot; active?;</source>
-        <translation type="unfinished">Aktiviere Zweig %1;Den Codezweig \&quot;%1\&quot; aktivieren?;</translation>
+        <translation>Aktiviere Zweig %1;Den Codezweig \&quot;%1\&quot; aktivieren?;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1660"/>
+        <location filename="mainwindow.cpp" line="1924"/>
         <source>Diff between Branches</source>
-        <translation type="unfinished">Unteschied zwischen Codezweigen</translation>
+        <translation>Unteschied zwischen Codezweigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1721"/>
-        <source>Clear all tree entries</source>
-        <translation type="unfinished">Alle Einträge löschen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1721"/>
-        <source>Clears all tree entries in focused tree except repository tree</source>
-        <translation type="unfinished">Löscht alle Einträge der aktiven Baumansicht außer im Repository Baum</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1725"/>
-        <source>Delete selected tree items</source>
-        <translation type="unfinished">Lösche Auswahl in Baumansicht</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1725"/>
-        <source>Deletes all selected tree items in focused tree except repository tree</source>
-        <translation type="unfinished">Löscht alle gewählten Einträge der Baumansicht</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1729"/>
-        <source>Set open external flag</source>
+        <location filename="mainwindow.cpp" line="1980"/>
+        <source>Tab Indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1729"/>
-        <source>Sets parameters to open files with this extension externally</source>
+        <location filename="mainwindow.cpp" line="1980"/>
+        <source>Indent selected text by Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
-        <source>Remove open external flag</source>
-        <translation type="unfinished">Extern öffen deaktivieren</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1733"/>
-        <source>Removes open external parameters</source>
-        <translation type="unfinished">Parameter für externes Öffen löschen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1737"/>
-        <source>Open file externally</source>
-        <translation type="unfinished">Datei mit externem Programm öffnen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1737"/>
-        <source>Opens file externally</source>
-        <translation type="unfinished">Öffnet Datei mit externem Programm</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1741"/>
-        <source>Whats this?</source>
+        <location filename="mainwindow.cpp" line="1983"/>
+        <source>Tab Outdent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1741"/>
-        <source>Whats this help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1744"/>
-        <source>Compare to...</source>
-        <translation type="unfinished">Vergleiche mit...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1744"/>
-        <source>Start compare mode to select other file ore folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1748"/>
-        <source>Close all</source>
-        <translation type="unfinished">Alle schließen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1748"/>
-        <source>Closes all documents</source>
-        <translation type="unfinished">Schließt alle Dokumente</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1749"/>
-        <source>Save all</source>
-        <translation type="unfinished">Alles speichern</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1749"/>
-        <source>Saves all documents</source>
-        <translation type="unfinished">Alle Dokumente speichern</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1769"/>
-        <source>Running Background Activity...</source>
-        <translation type="unfinished">Starte Hintergrund Aktivität...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1769"/>
-        <source>You may try to kill git action running in background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1774"/>
-        <source>Copy file name</source>
-        <translation type="unfinished">Kopiere Dateinamen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1774"/>
-        <source>Copy file name to clipboard</source>
-        <translation type="unfinished">Kopiere Dateinamen in die Zwischenablage</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1777"/>
-        <source>Copy file and path</source>
-        <translation type="unfinished">Kopiere Dateipfad</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1777"/>
-        <source>Copy file or folder and path to clipboard</source>
-        <translation type="unfinished">Kopiere Datei- bzw. Ordnerpfad in die Zwischenablage</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1782"/>
-        <source>Zoom in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1782"/>
-        <source>Zoom in (make larger)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1785"/>
-        <source>Zoom out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1785"/>
-        <source>Zoom out (make smaller)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1788"/>
-        <source>Fit in View</source>
-        <translation type="unfinished">Alles in der Ansicht anzeigen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1788"/>
-        <source>Fits Item in View, when opened</source>
-        <translation type="unfinished">Alles in der Ansicht anzeigen, wenn geöffnet wird</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1793"/>
-        <source>Clone text view</source>
-        <translation type="unfinished">Klone Textansicht</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1793"/>
-        <source>Opens this file in a new window</source>
-        <translation type="unfinished">Öffnet Datei in neuem Fenster</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1796"/>
-        <source>Create Bookmark</source>
-        <translation type="unfinished">Lesezeichen erstellen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1796"/>
-        <source>Creates a Bookmark</source>
-        <translation type="unfinished">Erstellt ein Lesezeichen</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1799"/>
-        <source>Show Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1799"/>
-        <source>Show information about selected item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1804"/>
-        <source>test command</source>
+        <location filename="mainwindow.cpp" line="1983"/>
+        <source>Outdent selected text by Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1987"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1987"/>
+        <source>Updates the git status of all or the selected source folder or reloads the selected file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1991"/>
+        <source>Clear all tree entries</source>
+        <translation type="unfinished">Alle Einträge löschen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1991"/>
+        <source>Clears all tree entries in focused tree except repository tree</source>
+        <translation type="unfinished">Löscht alle Einträge der aktiven Baumansicht außer im Repository Baum</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1995"/>
+        <source>Delete selected tree items</source>
+        <translation type="unfinished">Lösche Auswahl in Baumansicht</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1995"/>
+        <source>Deletes all selected tree items in focused tree except repository tree</source>
+        <translation type="unfinished">Löscht alle gewählten Einträge der Baumansicht</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1999"/>
+        <source>Set open external flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1999"/>
+        <source>Sets parameters to open files with this extension externally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2003"/>
+        <source>Remove open external flag</source>
+        <translation type="unfinished">Extern öffen deaktivieren</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2003"/>
+        <source>Removes open external parameters</source>
+        <translation type="unfinished">Parameter für externes Öffen löschen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2007"/>
+        <source>Open file externally</source>
+        <translation type="unfinished">Datei mit externem Programm öffnen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2007"/>
+        <source>Opens file externally</source>
+        <translation type="unfinished">Öffnet Datei mit externem Programm</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2011"/>
+        <source>Whats this?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2011"/>
+        <source>Whats this help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2014"/>
+        <source>Compare to...</source>
+        <translation type="unfinished">Vergleiche mit...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2014"/>
+        <source>Start compare mode to select other file ore folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2018"/>
+        <source>Close all</source>
+        <translation type="unfinished">Alle schließen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2018"/>
+        <source>Closes all documents</source>
+        <translation type="unfinished">Schließt alle Dokumente</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2019"/>
+        <source>Save all</source>
+        <translation type="unfinished">Alles speichern</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2019"/>
+        <source>Saves all documents</source>
+        <translation type="unfinished">Alle Dokumente speichern</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2064"/>
+        <source>Split view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2064"/>
+        <source>Splits view into two views and vice versa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2330"/>
+        <source>Background Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2557"/>
+        <source>Select style for app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2557"/>
+        <source>Style File (*.qss);;All Files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2587"/>
+        <source>Execute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="3316"/>
+        <source>Move [ %1 ] to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running Background Activity...</source>
+        <translation type="obsolete">Starte Hintergrund Aktivität...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2040"/>
+        <source>You may try to kill git action running in background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2040"/>
+        <source>Background Activity...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2045"/>
+        <source>Copy file name</source>
+        <translation type="unfinished">Kopiere Dateinamen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2045"/>
+        <source>Copy file name to clipboard</source>
+        <translation type="unfinished">Kopiere Dateinamen in die Zwischenablage</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2048"/>
+        <source>Copy file and path</source>
+        <translation type="unfinished">Kopiere Dateipfad</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2048"/>
+        <source>Copy file or folder and path to clipboard</source>
+        <translation type="unfinished">Kopiere Datei- bzw. Ordnerpfad in die Zwischenablage</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2053"/>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2053"/>
+        <source>Zoom in (make larger)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2056"/>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2056"/>
+        <source>Zoom out (make smaller)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2059"/>
+        <source>Fit in View</source>
+        <translation type="unfinished">Alles in der Ansicht anzeigen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2059"/>
+        <source>Fits Item in View, when opened</source>
+        <translation type="unfinished">Alles in der Ansicht anzeigen, wenn geöffnet wird</translation>
+    </message>
+    <message>
+        <source>Clone text view</source>
+        <translation type="obsolete">Klone Textansicht</translation>
+    </message>
+    <message>
+        <source>Opens this file in a new window</source>
+        <translation type="obsolete">Öffnet Datei in neuem Fenster</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2067"/>
+        <source>Create Bookmark</source>
+        <translation type="unfinished">Lesezeichen erstellen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2067"/>
+        <source>Creates a Bookmark</source>
+        <translation type="unfinished">Erstellt ein Lesezeichen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2070"/>
+        <source>Show Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2070"/>
+        <source>Show information about selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2075"/>
+        <source>test command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2263"/>
         <source>Program parameter</source>
         <translation type="unfinished">Programm Parameter</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1988"/>
+        <location filename="mainwindow.cpp" line="2264"/>
         <source>Set open program for &apos;%1&apos; file extension
 Leave empty for default program &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2260"/>
+        <location filename="mainwindow.ui" line="1293"/>
         <source>Replace</source>
         <translation type="unfinished">Ersetzen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2261"/>
+        <location filename="mainwindow.ui" line="1290"/>
         <source>Replace expression</source>
         <translation type="unfinished">Ersetzt Ausdruck</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2267"/>
         <source>Search expression in all files of selected folder</source>
-        <translation type="unfinished">Suche Ausdruck in allen Dateien des gewählten Ordners</translation>
+        <translation type="obsolete">Suche Ausdruck in allen Dateien des gewählten Ordners</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2276"/>
+        <location filename="mainwindow.cpp" line="2598"/>
         <source>Search in Text Editor</source>
         <translation type="unfinished">Suche im Text Editor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2277"/>
+        <location filename="mainwindow.cpp" line="2599"/>
         <source>Go to line in Text Editor</source>
         <translation type="unfinished">Gehe zu Zeile im Texteditor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2278"/>
         <source>Search for text in files under selected folder in Repository View</source>
-        <translation type="unfinished">Suche nach Text in Dateien unterhalb des gewählten Ordners in der Repository Ansicht</translation>
+        <translation type="obsolete">Suche nach Text in Dateien unterhalb des gewählten Ordners in der Repository Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2279"/>
+        <location filename="mainwindow.cpp" line="2600"/>
         <source>Search for text in find results</source>
         <translation type="unfinished">Suche nach Text in Suchergebnis Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2280"/>
+        <location filename="mainwindow.cpp" line="2601"/>
         <source>Search files or folders in Repository View</source>
         <translation type="unfinished">Suche Dateien oder Orner in der Repository Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2281"/>
+        <location filename="mainwindow.cpp" line="2602"/>
         <source>Search item in History View</source>
         <translation type="unfinished">Suche Text in Historienansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2282"/>
+        <location filename="mainwindow.cpp" line="2603"/>
         <source>Search item in Branch View</source>
         <translation type="unfinished">Suche Text ind Zweigansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2283"/>
+        <location filename="mainwindow.cpp" line="2604"/>
         <source>Search in Stash View</source>
         <translation type="unfinished">Suche in Stash Ansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2644"/>
+        <location filename="mainwindow.cpp" line="2605"/>
+        <source>Execute git command for selected Repository</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2990"/>
+        <source>%1 -d %2 -g %3 %4 &apos;%5&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2994"/>
         <source>%1 -d %2 %3 &apos;%4&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2668"/>
+        <location filename="mainwindow.cpp" line="3019"/>
         <source>%1 %2 &apos;%3&apos; &apos;%4&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2674"/>
+        <location filename="mainwindow.cpp" line="3025"/>
         <source>Search expression: %1</source>
         <translation type="unfinished">Such Asudruck: %1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2757"/>
+        <location filename="mainwindow.cpp" line="3122"/>
         <source>
 result error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2893"/>
+        <location filename="mainwindow.cpp" line="3265"/>
         <source>Text Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2893"/>
+        <location filename="mainwindow.cpp" line="3265"/>
         <source>Text Viewer / Editor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2354,43 +2634,43 @@ result error: %1</source>
         <translation type="vanished">Änderungen rückgängig;Möchten Sie die Änderungen in der Datei &quot;%1&quot; verwerfen?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1580"/>
+        <location filename="mainwindow.cpp" line="1842"/>
         <source>Commit...</source>
         <translation>Committen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1585"/>
+        <location filename="mainwindow.cpp" line="1847"/>
         <source>Clone</source>
         <translation type="unfinished">Klonen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1588"/>
+        <location filename="mainwindow.cpp" line="1850"/>
         <source>Push</source>
         <translation>Hochladen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1591"/>
+        <location filename="mainwindow.cpp" line="1853"/>
         <source>Pull</source>
         <translation>Herunerladen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1595"/>
+        <location filename="mainwindow.cpp" line="1857"/>
         <source>Fetch</source>
         <translation type="unfinished">Holen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1598"/>
+        <location filename="mainwindow.cpp" line="1860"/>
         <source>Show</source>
         <translation>Anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="546"/>
-        <location filename="mainwindow.cpp" line="1602"/>
+        <location filename="mainwindow.ui" line="554"/>
+        <location filename="mainwindow.cpp" line="1864"/>
         <source>Stash</source>
         <translation>In git Speicher verschieben</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="1878"/>
         <source>Stash pop</source>
         <translation>Aus git Speicher holen</translation>
     </message>
@@ -2399,37 +2679,37 @@ result error: %1</source>
         <translation type="vanished">git Speicher anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1896"/>
         <source>List Branches</source>
         <translation>Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1636"/>
+        <location filename="mainwindow.cpp" line="1900"/>
         <source>List remote Branches</source>
         <translation>Entfernte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1640"/>
+        <location filename="mainwindow.cpp" line="1904"/>
         <source>List merged Branches</source>
         <translation>Zusammengeführte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1644"/>
+        <location filename="mainwindow.cpp" line="1908"/>
         <source>List not merged Branches</source>
         <translation>Nicht zusammengeführte Quellcodezweige auflisten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1649"/>
+        <location filename="mainwindow.cpp" line="1913"/>
         <source>Delete Branch</source>
         <translation>Zweig löschen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1650"/>
+        <location filename="mainwindow.cpp" line="1914"/>
         <source>Delete %1 from git;Do you want to delete &quot;%1&quot;?</source>
         <translation>Lösche %1 aus git;Möchten sie &quot;%1&quot; aus git entfernen?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1655"/>
+        <location filename="mainwindow.cpp" line="1919"/>
         <source>Checkout Branch</source>
         <translation>Zweig auschecken</translation>
     </message>
@@ -2442,32 +2722,32 @@ result error: %1</source>
         <translation type="vanished">Historie des Zweiges</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1663"/>
+        <location filename="mainwindow.cpp" line="1927"/>
         <source>Show Branch</source>
         <translation>Zweig anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1667"/>
+        <location filename="mainwindow.cpp" line="1931"/>
         <source>Move / Rename...</source>
         <translation>Verschieben / Umbenennen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1674"/>
+        <location filename="mainwindow.cpp" line="1938"/>
         <source>Expand Tree Items</source>
         <translation>Baumansicht aufklappen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1674"/>
+        <location filename="mainwindow.cpp" line="1938"/>
         <source>Expands all tree item of focused tree</source>
         <translation>Klappt alle Zweige der Baumansicht auf</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1678"/>
+        <location filename="mainwindow.cpp" line="1942"/>
         <source>Collapse Tree Items</source>
         <translation>Zweige zuklappen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1678"/>
+        <location filename="mainwindow.cpp" line="1942"/>
         <source>Collapses all tree item of focused tree</source>
         <translation>Klappt alle Zweige der Baumansicht zusammen</translation>
     </message>
@@ -2484,114 +2764,112 @@ result error: %1</source>
         <translation type="vanished">Fügt ein git Repository hinzu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1683"/>
+        <location filename="mainwindow.cpp" line="1947"/>
         <source>Add git source folder...</source>
         <translation>git Repository hinzufügen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1683"/>
+        <location filename="mainwindow.cpp" line="1947"/>
         <source>Add a git source folder to repository view</source>
         <translation type="unfinished">Git Repository Ordner hinzufügen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1686"/>
+        <location filename="mainwindow.cpp" line="1950"/>
         <source>Remove git source folder</source>
         <translation type="unfinished">Git Repository Ordner schließen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1686"/>
+        <location filename="mainwindow.cpp" line="1950"/>
         <source>Remove a git source folder from repository view</source>
         <translation type="unfinished">Git Repo schließen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1689"/>
+        <location filename="mainwindow.cpp" line="1953"/>
         <source>Open File...</source>
         <translation type="unfinished">Datei öffnen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1689"/>
+        <location filename="mainwindow.cpp" line="1953"/>
         <source>Open arbitrary file</source>
         <translation type="unfinished">Beliebige Datei öffnen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1693"/>
+        <location filename="mainwindow.cpp" line="1957"/>
         <source>Save File as...</source>
         <translation type="unfinished">Speichern unter...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1693"/>
+        <location filename="mainwindow.cpp" line="1957"/>
         <source>Save file under alternative name</source>
         <translation type="unfinished">Speichern mit anderem Namen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1697"/>
+        <location filename="mainwindow.cpp" line="1961"/>
         <source>Replace All</source>
         <translation type="unfinished">Alles ersetzen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1697"/>
+        <location filename="mainwindow.cpp" line="1961"/>
         <source>Replace all found items</source>
         <translation type="unfinished">Ersetzt alles gefundenen Einträge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1701"/>
+        <location filename="mainwindow.cpp" line="1965"/>
         <source>To Upper.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1701"/>
+        <location filename="mainwindow.cpp" line="1965"/>
         <source>Modify selected text to upper case</source>
         <translation type="unfinished">Seletierten Text in Großbuchstaben ändern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1704"/>
+        <location filename="mainwindow.cpp" line="1968"/>
         <source>To Lower</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1704"/>
+        <location filename="mainwindow.cpp" line="1968"/>
         <source>Modify selected text to lower case</source>
         <translation type="unfinished">Seletierten Text in Kleinbuchstaben ändern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1707"/>
+        <location filename="mainwindow.cpp" line="1971"/>
         <source>Comment / uncomment</source>
         <translation type="unfinished">Kommentieren / Auskommentieren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1707"/>
+        <location filename="mainwindow.cpp" line="1971"/>
         <source>Comment or uncomment selected text lines</source>
         <translation type="unfinished">Wandelt Code in Komentar und umgekehrt</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1710"/>
+        <location filename="mainwindow.cpp" line="1974"/>
         <source>To Snake Case</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1710"/>
+        <location filename="mainwindow.cpp" line="1974"/>
         <source>Modify selected text to snake_case</source>
         <translation type="unfinished">Seletierten Text in snake_case ändern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1713"/>
+        <location filename="mainwindow.cpp" line="1977"/>
         <source>To Camel Case</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1713"/>
+        <location filename="mainwindow.cpp" line="1977"/>
         <source>Modify selected text to CameCase</source>
         <translation type="unfinished">Seletierten Text in CameCase ändern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1717"/>
         <source>Update git status</source>
-        <translation>git Status aktualisieren</translation>
+        <translation type="vanished">git Status aktualisieren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1717"/>
         <source>Updates the git status of the selected source folder</source>
-        <translation>Aktualisiert den git Status des ausgewählten Eintrags</translation>
+        <translation type="vanished">Aktualisiert den git Status des ausgewählten Eintrags</translation>
     </message>
     <message>
         <source>Show/Hide tree</source>
@@ -2610,52 +2888,52 @@ result error: %1</source>
         <translation type="vanished">Löscht alle Einträge der Baumansicht</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1751"/>
+        <location filename="mainwindow.cpp" line="2021"/>
         <source>Customize git actions...</source>
         <translation>Benutzer Kommandos bearbeiten...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1751"/>
+        <location filename="mainwindow.cpp" line="2021"/>
         <source>Edit custom git actions, menues and toolbars</source>
         <translation>Bearbeitet git Kommandos, Menüeintrage und Werkzeugleisteneinträge</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1754"/>
+        <location filename="mainwindow.cpp" line="2025"/>
         <source>Insert File Name List</source>
         <translation>Für Dateinameliste ein</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1754"/>
+        <location filename="mainwindow.cpp" line="2025"/>
         <source>Inserts file names that differ from previous hash</source>
         <translation>Fügt Dateinamen ein, die von dem vorzustand abweichen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1757"/>
+        <location filename="mainwindow.cpp" line="2028"/>
         <source>About...</source>
         <translation>Über...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1757"/>
+        <location filename="mainwindow.cpp" line="2028"/>
         <source>Information about GitView</source>
         <translation>Über GitView</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1761"/>
+        <location filename="mainwindow.cpp" line="2032"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1761"/>
+        <location filename="mainwindow.cpp" line="2032"/>
         <source>Delete file or folder</source>
         <translation>Lösche Datei bzw. Ordner</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1765"/>
+        <location filename="mainwindow.cpp" line="2036"/>
         <source>Select Language...</source>
         <translation>Wähle Sprache...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1765"/>
+        <location filename="mainwindow.cpp" line="2036"/>
         <source>Select language for text highlighting</source>
         <translation>Wähle Sprache für Texthervorhebung</translation>
     </message>
@@ -2668,7 +2946,7 @@ result error: %1</source>
         <translation type="vanished">git Kommando abbrechen</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="772"/>
+        <location filename="mainwindow_sourcetree.cpp" line="895"/>
         <source>git -C %1 difftool --tool-help</source>
         <translation>git -C %1 difftool --tool-help</translation>
     </message>
@@ -2685,7 +2963,7 @@ result error: %1</source>
         <translation type="vanished">Autoren</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="803"/>
+        <location filename="mainwindow_sourcetree.cpp" line="926"/>
         <source>Move or rename %1</source>
         <translation>Verschieben bzw. umbenennen %1</translation>
     </message>
@@ -2713,19 +2991,19 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
         <translation type="unfinished">git show %1:%2</translation>
     </message>
     <message>
-        <location filename="mainwindow_sourcetree.cpp" line="1091"/>
+        <location filename="mainwindow_sourcetree.cpp" line="1258"/>
         <source>Delete %1</source>
         <translation>Lösche %1</translation>
     </message>
     <message>
-        <location filename="mainwindow_textview.cpp" line="53"/>
-        <location filename="mainwindow_textview.cpp" line="383"/>
+        <location filename="mainwindow_textview.cpp" line="83"/>
+        <location filename="mainwindow_textview.cpp" line="442"/>
         <source>%1</source>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="mainwindow_branchtree.cpp" line="77"/>
-        <location filename="mainwindow_stashtree.cpp" line="70"/>
+        <location filename="mainwindow_branchtree.cpp" line="76"/>
+        <location filename="mainwindow_stashtree.cpp" line="78"/>
         <source>Error %1 occurred</source>
         <translation type="unfinished">Fehler %1 ist aufgetreten</translation>
     </message>
@@ -2816,6 +3094,105 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
     </message>
 </context>
 <context>
+    <name>PaletteColorSelector</name>
+    <message>
+        <location filename="palettecolorselector.ui" line="14"/>
+        <source>Settings for a user defined palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="22"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1 style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:600;&quot;&gt;Textbrowser&lt;/span&gt;&lt;/h1&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;containing some text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="41"/>
+        <source>Group Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="53"/>
+        <source>Radio Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="66"/>
+        <source>Check Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="78"/>
+        <source>Combobox element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="86"/>
+        <source>Text Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="120"/>
+        <source>Palette for Dark Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="138"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="145"/>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.ui" line="152"/>
+        <source>Save Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="101"/>
+        <source>%1</source>
+        <translation type="unfinished">%1</translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="109"/>
+        <source>QPushButton {background-color: %1; color: %2; }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="189"/>
+        <source>Color of %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="206"/>
+        <source>QPushButton {background-color: %1; color: %2 }</source>
+        <translation type="unfinished">QPushButton {background-color: %1; color: %2;} {1;?} {2 ?}</translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="210"/>
+        <source>QPushButton {background-color: %1; }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="217"/>
+        <source>QPushButton {background-color: %2; color: %1 }</source>
+        <translation type="unfinished">QPushButton {background-color: %1; color: %2;} {2;?} {1 ?}</translation>
+    </message>
+    <message>
+        <location filename="palettecolorselector.cpp" line="221"/>
+        <source>QPushButton {color: %1; }</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QBranchTreeWidget</name>
     <message>
         <location filename="qbranchtreewidget.cpp" line="48"/>
@@ -2826,46 +3203,46 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
 <context>
     <name>QHistoryTreeWidget</name>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="237"/>
-        <location filename="qhistorytreewidget.cpp" line="260"/>
-        <source>Enable all</source>
-        <translation type="unfinished">Alle anzeigen</translation>
-    </message>
-    <message>
         <location filename="qhistorytreewidget.cpp" line="238"/>
         <location filename="qhistorytreewidget.cpp" line="261"/>
+        <source>Enable all</source>
+        <translation>Alle anzeigen</translation>
+    </message>
+    <message>
+        <location filename="qhistorytreewidget.cpp" line="239"/>
+        <location filename="qhistorytreewidget.cpp" line="262"/>
         <source>Disable all</source>
-        <translation type="unfinished">Keinen anzeigen</translation>
+        <translation>Keinen anzeigen</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="273"/>
+        <location filename="qhistorytreewidget.cpp" line="274"/>
         <source>Authors</source>
-        <translation type="unfinished">Autoren</translation>
+        <translation>Autoren</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="304"/>
+        <location filename="qhistorytreewidget.cpp" line="305"/>
         <source>Files: %1</source>
         <translation>Dateien: %1</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="321"/>
+        <location filename="qhistorytreewidget.cpp" line="322"/>
         <source>Result failure no: %1</source>
         <translation>Ergebnisfehlernummer: %1</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="386"/>
+        <location filename="qhistorytreewidget.cpp" line="387"/>
         <source>git diff --name-only %1 %2</source>
         <translation>git diff --name-only %1 %2</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="392"/>
+        <location filename="qhistorytreewidget.cpp" line="393"/>
         <source>git diff --name-only %1</source>
         <translation>git diff --name-only %1</translation>
     </message>
     <message>
-        <location filename="qhistorytreewidget.cpp" line="407"/>
+        <location filename="qhistorytreewidget.cpp" line="408"/>
         <source>Branch difference for repository %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterschiede in Codezweigen des Reository: %1</translation>
     </message>
 </context>
 <context>
@@ -2929,6 +3306,16 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="git_type.cpp" line="96"/>
+        <source>Update Stash Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="git_type.cpp" line="97"/>
+        <source>Update Repository Folder Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&quot;%1&quot; not inserted from %2</source>
         <translation type="vanished">&quot;%1&quot; not inserted from %2</translation>
     </message>
@@ -2937,28 +3324,45 @@ Zum Umbenennen muss nur der Name geändert werden.</translation>
         <translation type="vanished">&quot;%1&quot; inserted from %2</translation>
     </message>
     <message>
-        <location filename="helper.cpp" line="156"/>
-        <location filename="helper.cpp" line="176"/>
+        <location filename="helper.cpp" line="195"/>
+        <source>pidof %1</source>
+        <translation>Prozess ID von %1</translation>
+    </message>
+    <message>
+        <location filename="helper.cpp" line="209"/>
+        <source>pgrep -P %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="helper.cpp" line="260"/>
+        <location filename="helper.cpp" line="280"/>
         <source>Delete %1 entry;%1</source>
         <translation>Lösche Eintrag %1; %1</translation>
     </message>
     <message>
-        <location filename="helper.cpp" line="156"/>
-        <location filename="helper.cpp" line="176"/>
+        <location filename="helper.cpp" line="260"/>
+        <location filename="helper.cpp" line="280"/>
         <source>Tree</source>
         <translation>Baum</translation>
     </message>
     <message>
-        <location filename="helper.cpp" line="375"/>
+        <location filename="helper.cpp" line="502"/>
+        <location filename="helper.cpp" line="518"/>
         <source>
 Error occurred executing command: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="helper.cpp" line="378"/>
+        <location filename="helper.cpp" line="505"/>
+        <location filename="helper.cpp" line="521"/>
         <source>
 Error number : %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="helper.cpp" line="506"/>
+        <source>%1</source>
+        <translation>%1</translation>
     </message>
     <message>
         <source>Error occurred executing command: </source>
@@ -2987,12 +3391,12 @@ Error number : %1</source>
 <context>
     <name>QSourceTreeWidget</name>
     <message>
-        <location filename="qsourcetreewidget.cpp" line="461"/>
+        <location filename="qsourcetreewidget.cpp" line="491"/>
         <source>Insert Ignored Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="qsourcetreewidget.cpp" line="492"/>
+        <location filename="qsourcetreewidget.cpp" line="522"/>
         <source>Insert Ignored File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3000,32 +3404,32 @@ Error number : %1</source>
 <context>
     <name>QStashTreeWidget</name>
     <message>
-        <location filename="qstashtreewidget.cpp" line="48"/>
+        <location filename="qstashtreewidget.cpp" line="60"/>
         <source>git -C %1 show %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="qstashtreewidget.cpp" line="66"/>
-        <source>git -C %1 stash show %2</source>
+        <location filename="qstashtreewidget.cpp" line="78"/>
+        <source>git -C %1 stash show --name-only %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WorkerThreadConnector</name>
     <message>
-        <location filename="workerthreadconnector.cpp" line="98"/>
-        <source>Background commands:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="workerthreadconnector.cpp" line="101"/>
-        <source>none</source>
+        <location filename="workerthreadconnector.cpp" line="102"/>
+        <source>Background commands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="workerthreadconnector.cpp" line="105"/>
-        <source>currently running: %1
+        <source>: none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="workerthreadconnector.cpp" line="109"/>
+        <source>
+:currently running: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3059,7 +3463,7 @@ Error number : %1</source>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="173"/>
-        <source>Character</source>
+        <source>Byte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3089,111 +3493,116 @@ Error number : %1</source>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="489"/>
-        <source>Float</source>
+        <source>Char</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="533"/>
-        <source>Double</source>
+        <source>Float</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="binary_values_view.ui" line="577"/>
+        <source>Double</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="binary_values_view.ui" line="621"/>
         <source>Binary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="631"/>
+        <location filename="binary_values_view.ui" line="675"/>
         <source>Endian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="643"/>
+        <location filename="binary_values_view.ui" line="687"/>
         <source>Select little endian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="646"/>
+        <location filename="binary_values_view.ui" line="690"/>
         <source>Little</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="659"/>
+        <location filename="binary_values_view.ui" line="703"/>
         <source>Select big endian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="662"/>
+        <location filename="binary_values_view.ui" line="706"/>
         <source>Big</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="677"/>
+        <location filename="binary_values_view.ui" line="721"/>
         <source>Check to edit local values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="680"/>
+        <location filename="binary_values_view.ui" line="724"/>
         <source>Local Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="711"/>
+        <location filename="binary_values_view.ui" line="755"/>
         <source>Binary View Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="732"/>
+        <location filename="binary_values_view.ui" line="776"/>
         <source>Choose data type for table view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="739"/>
+        <location filename="binary_values_view.ui" line="783"/>
         <source>Edit number of collumns shown in binary table view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="752"/>
+        <location filename="binary_values_view.ui" line="796"/>
         <source>Edit offset for first byte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="774"/>
+        <location filename="binary_values_view.ui" line="818"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Read values again from binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="777"/>
+        <location filename="binary_values_view.ui" line="821"/>
         <source>Read Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="784"/>
+        <location filename="binary_values_view.ui" line="828"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Store edited value to binary content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="787"/>
+        <location filename="binary_values_view.ui" line="831"/>
         <source>Write Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="796"/>
+        <location filename="binary_values_view.ui" line="840"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opens Json file with binary format description of the file content.&lt;br/&gt;Click &amp;quot;Whats This help&amp;quot; &lt;img src=&quot;://resource/24X24/dialog-question.png&quot; style=&quot;vertical-align:middle&quot;/&gt; to see file format&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.ui" line="799"/>
+        <location filename="binary_values_view.ui" line="843"/>
         <source>Open Type Format File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.cpp" line="391"/>
+        <location filename="binary_values_view.cpp" line="413"/>
         <source>Wrong input value: %1 for type %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="binary_values_view.cpp" line="400"/>
+        <location filename="binary_values_view.cpp" line="422"/>
         <source>Open type format file for binary content</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3201,22 +3610,22 @@ Error number : %1</source>
 <context>
     <name>code_browser</name>
     <message>
-        <location filename="code_browser.cpp" line="669"/>
+        <location filename="code_browser.cpp" line="741"/>
         <source>commit:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="code_browser.cpp" line="669"/>
+        <location filename="code_browser.cpp" line="741"/>
         <source>author:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="code_browser.cpp" line="669"/>
+        <location filename="code_browser.cpp" line="741"/>
         <source>date:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="code_browser.cpp" line="669"/>
+        <location filename="code_browser.cpp" line="741"/>
         <source>time:	</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3232,12 +3641,12 @@ Error number : %1</source>
 <context>
     <name>qbinarytableview</name>
     <message>
-        <location filename="qbinarytableview.cpp" line="53"/>
+        <location filename="qbinarytableview.cpp" line="57"/>
         <source>Typed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="qbinarytableview.cpp" line="53"/>
+        <location filename="qbinarytableview.cpp" line="57"/>
         <source>Character</source>
         <translation type="unfinished"></translation>
     </message>
