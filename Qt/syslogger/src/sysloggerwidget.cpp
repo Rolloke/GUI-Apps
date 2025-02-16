@@ -236,7 +236,11 @@ public:
         QString fText = index.model()->data(index).toString();
 
         QVariant background = index.data(Qt::BackgroundRole);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QVariant fTextColor = index.data(Qt::ForegroundRole);
+#else
         QVariant fTextColor = index.data(Qt::TextColorRole);
+#endif
 
         QColor fBackgroundColor = background.value<QBrush>().color();
 
@@ -284,7 +288,11 @@ public:
 
         painter->setPen(fTextColor.value<QColor>());
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        fText = painter->fontMetrics().elidedText(fText, Qt::ElideRight, fTextRect.width());
+#else
         fText = elidedText(painter->fontMetrics(), fTextRect.width(), Qt::ElideRight, fText);
+#endif
         painter->drawText(fTextRect, fText, option.displayAlignment);
 
     }
@@ -409,18 +417,30 @@ SysLoggerWidget::SysLoggerWidget()
 
     mLogTableView->setRowHeight(0, 200);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    mLogTableView->sortByColumn(0, Qt::AscendingOrder);
+#else
     mLogTableView->sortByColumn(0);
+#endif
 
     loadPersistentData();
 
 
     QString fIpRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression fIpRegex("^" + fIpRange
+                     + "\\." + fIpRange
+                     + "\\." + fIpRange
+                     + "\\." + fIpRange + "$");
+    QRegularExpressionValidator* fIpValidator = new QRegularExpressionValidator(fIpRegex, this);
+#else
     QRegExp fIpRegex("^" + fIpRange
         + "\\." + fIpRange
         + "\\." + fIpRange
         + "\\." + fIpRange + "$");
     QRegExpValidator* fIpValidator = new QRegExpValidator(fIpRegex, this);
+#endif
     mLineEditAddress->setValidator(fIpValidator);
 
 
@@ -616,7 +636,11 @@ void SysLoggerWidget::filterColumnChanged()
     mHideCheckBox->setEnabled(fIndex > 0);
     mFilterPatternComboBox->setEditText(mFilterSettings[fIndex].mPattern);
     mFilterSyntaxComboBox->setCurrentIndex(mFilterSettings[fIndex].mSyntax);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    mCaseSensitiveFilterCheckBox->setChecked(mFilterSettings[fIndex].mCaseSensitive);
+#else
     mCaseSensitiveFilterCheckBox->setChecked(mFilterSettings[fIndex].mCaseSensitive == Qt::CaseSensitive );
+#endif
     mHideCheckBox->setChecked(mFilterSettings[fIndex].mHide);
     mRestoreFilter = false;
 }
@@ -625,20 +649,48 @@ void SysLoggerWidget::filterRegExpChanged()
 {
     if(!mRestoreFilter)
     {
+        std::int32_t fIndex = mFilterColumnComboBox->currentIndex();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QRegularExpression::PatternOptions syntax = QRegularExpression::NoPatternOption;
+        switch (mFilterSyntaxComboBox->currentIndex())
+        {
+        case 0:
+            syntax = QRegularExpression::ExtendedPatternSyntaxOption;
+            mFilterSettings[fIndex].mWildcard = false;
+            break; // Regex
+        case 1:
+            syntax = QRegularExpression::ExtendedPatternSyntaxOption;
+            mFilterSettings[fIndex].mWildcard = true;
+            break; // wildcard
+        case 2: syntax = QRegularExpression::NoPatternOption; break; // string
+        }
+
+        mFilterSettings[fIndex].mCaseSensitive = mCaseSensitiveFilterCheckBox->isChecked();
+        if (!mFilterSettings[fIndex].mCaseSensitive)
+        {
+            syntax = static_cast<QRegularExpression::PatternOptions>(syntax | QRegularExpression::CaseInsensitiveOption);
+        }
+#else
         QRegExp::PatternSyntax syntax(static_cast<QRegExp::PatternSyntax>(mFilterSyntaxComboBox->currentIndex()));
-        Qt::CaseSensitivity fCaseSensitivity =
-                mCaseSensitiveFilterCheckBox->isChecked() ? Qt::CaseSensitive
-                                                           : Qt::CaseInsensitive;
+        Qt::CaseSensitivity fCaseSensitivity = mCaseSensitiveFilterCheckBox->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
+#endif
 
         bool fHide = mHideCheckBox->isChecked();
 
         QString fPattern = mFilterPatternComboBox->currentText();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (mFilterSettings[fIndex].mWildcard && fPattern.size())
+        {
+            fPattern = QRegularExpression::wildcardToRegularExpression(fPattern);
+        }
+        QRegularExpression fRegExp(fPattern, syntax);
+#else
         QRegExp fRegExp(fPattern, fCaseSensitivity, syntax);
-        std::int32_t fIndex = mFilterColumnComboBox->currentIndex();
-        mFilterSettings[fIndex].mPattern = fPattern;
         mFilterSettings[fIndex].mCaseSensitive = fCaseSensitivity;
+#endif
+        mFilterSettings[fIndex].mPattern = fPattern;
         mFilterSettings[fIndex].mHide = fHide;
-        mFilterSettings[fIndex].mSyntax =syntax;
+        mFilterSettings[fIndex].mSyntax = syntax;
 
         if(fIndex > 0)
         {
@@ -652,10 +704,15 @@ void SysLoggerWidget::filterRegExpChanged()
             }
         }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        mProxyModel[fIndex]->setFilterRegularExpression(fRegExp);
+        mFileLoggingProxyModel[fIndex]->setFilterRegularExpression(fRegExp);
+        mFindLoggingProxyModel[fIndex]->setFilterRegularExpression(fRegExp);
+#else
         mProxyModel[fIndex]->setFilterRegExp(fRegExp);
         mFileLoggingProxyModel[fIndex]->setFilterRegExp(fRegExp);
         mFindLoggingProxyModel[fIndex]->setFilterRegExp(fRegExp);
-
+#endif
 
         if(fIndex>0)
         {
@@ -1119,7 +1176,11 @@ void SysLoggerWidget::savePersitentData()
                 std::uint32_t fPatternSize = (*fIter).mPattern.length() + 1;
                 fFileStream.write(reinterpret_cast<char*>(&fPatternSize), sizeof(std::uint32_t));
                 fFileStream.write((*fIter).mPattern.toStdString().c_str(), fPatternSize);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(bool));
+#else
                 fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+#endif
                 fFileStream.write(reinterpret_cast<char*>(&(*fIter).mHide), sizeof(std::uint32_t));
                 fFileStream.write(reinterpret_cast<char*>(&(*fIter).mSyntax), sizeof(std::uint32_t));
             }
@@ -1129,7 +1190,11 @@ void SysLoggerWidget::savePersitentData()
             auto fIter = mHighlighterSettings.begin();
             for (; fIter != mHighlighterSettings.end(); ++fIter)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(bool));
+#else
                 fFileStream.write(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+#endif
                 fFileStream.write(reinterpret_cast<char*>(&(*fIter).mInvert), sizeof(std::uint32_t));
 
                 std::uint32_t fPatternSize = (*fIter).mPattern.length() + 1;
@@ -1161,7 +1226,11 @@ void SysLoggerWidget::loadPersistentData()
                 std::vector<char> fBuffer(fPatternSize);
                 fFileStream.read(reinterpret_cast<char*>(fBuffer.data()), fPatternSize);
                 (*fIter).mPattern = &fBuffer[0];
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(bool));
+#else
                 fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+#endif
                 fFileStream.read(reinterpret_cast<char*>(&(*fIter).mHide), sizeof(std::uint32_t));
                 fFileStream.read(reinterpret_cast<char*>(&(*fIter).mSyntax), sizeof(std::uint32_t));
             }
@@ -1171,7 +1240,11 @@ void SysLoggerWidget::loadPersistentData()
             auto fIter = mHighlighterSettings.begin();
             for (; fIter != mHighlighterSettings.end(); ++fIter)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(bool));
+#else
                 fFileStream.read(reinterpret_cast<char*>(&(*fIter).mCaseSensitive), sizeof(std::uint32_t));
+#endif
                 fFileStream.read(reinterpret_cast<char*>(&(*fIter).mInvert), sizeof(std::uint32_t));
 
                 std::uint32_t fPatternSize = 0;
@@ -1205,10 +1278,21 @@ void SysLoggerWidget::loadPersistentData()
                 mLogTableView->showColumn(i-1);
             }
         }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (fSettings.mWildcard && fPattern.size())
+        {
+            fPattern = QRegularExpression::wildcardToRegularExpression(fPattern);
+        }
+        QRegularExpression fRegExp(fPattern, fSettings.mSyntax);
+        mProxyModel[i]->setFilterRegularExpression(fRegExp);
+        mFileLoggingProxyModel[i]->setFilterRegularExpression(fRegExp);
+        mFindLoggingProxyModel[i]->setFilterRegularExpression(fRegExp);
+#else
         QRegExp fRegExp(fSettings.mPattern, fSettings.mCaseSensitive, fSettings.mSyntax);
         mProxyModel[i]->setFilterRegExp(fRegExp);
         mFileLoggingProxyModel[i]->setFilterRegExp(fRegExp);
         mFindLoggingProxyModel[i]->setFilterRegExp(fRegExp);
+#endif
 
         if(fPattern.length())
         {
@@ -1324,7 +1408,7 @@ void SysLoggerWidget::loadPlaybackFile_clicked(bool)
 void SysLoggerWidget::clearPlaybackFile_clicked(bool)
 {
     mPlaybackProgressSlider->setRange(0, 99);
-     mPlaybackProgressSlider->setValue(0);
+    mPlaybackProgressSlider->setValue(0);
     mPlaybackFileNameLineEdit->setText("");
     mPlaybackProgressLabel->setText("[0[0;0]0]");
     mPlaybackFileStream.close();

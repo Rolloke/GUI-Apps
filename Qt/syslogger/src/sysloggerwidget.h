@@ -20,21 +20,33 @@
 
 
 
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#endif
 
 
 struct FilterSettings
 {
     QString                    mPattern;
-    Qt::CaseSensitivity        mCaseSensitive;
     bool                       mHide;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression::PatternOptions mSyntax;
+    bool                       mCaseSensitive;
+    bool                       mWildcard;
+#else
     QRegExp::PatternSyntax     mSyntax;
-
+    Qt::CaseSensitivity        mCaseSensitive;
+#endif
     FilterSettings()
     : mPattern()
-    , mCaseSensitive(Qt::CaseInsensitive)
     , mHide(false)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    , mSyntax(QRegularExpression::NoPatternOption)
+    , mCaseSensitive(false)
+#else
     , mSyntax(QRegExp::RegExp)
+    , mCaseSensitive(Qt::CaseInsensitive)
+#endif
     {}
 };
 
