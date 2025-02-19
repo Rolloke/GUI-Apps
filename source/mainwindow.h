@@ -169,6 +169,13 @@ private:
         Size
     }; };
 
+    enum class OpenFileAs
+    {
+        Automatic,
+        Text,
+        Binary
+    };
+
     QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
     void     call_git_history_diff_command();

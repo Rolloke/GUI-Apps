@@ -231,6 +231,35 @@
             </item>
            </widget>
           </item>
+          <item>
+           <widget class="QLabel" name="labelOpenFile">
+            <property name="text">
+             <string> Open File: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboOpenFile">
+            <property name="toolTip">
+             <string>Select open file as text or binary</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Auto</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Text</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Binary</string>
+             </property>
+            </item>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
