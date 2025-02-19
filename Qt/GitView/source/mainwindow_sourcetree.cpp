@@ -419,10 +419,22 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
     {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         std::optional<QStringConverter::Encoding> encoding;
-        const bool is_binary_file = qbinarytableview::is_binary(file, encoding);
+        bool is_binary_file = qbinarytableview::is_binary(file, encoding);
 #else
-        const bool is_binary_file = qbinarytableview::is_binary(file);
+        bool is_binary_file = qbinarytableview::is_binary(file);
 #endif
+        switch (static_cast<OpenFileAs>(ui->comboOpenFile->currentIndex()))
+        {
+        case OpenFileAs::Text:
+            is_binary_file = false;
+            break;
+        case OpenFileAs::Binary:
+            is_binary_file = true;
+            break;
+        case OpenFileAs::Automatic:
+        default:
+            break;
+        }
         code_browser * text_browser = dynamic_cast<code_browser*>(get_active_editable_widget(file_path));
         if (!text_browser && !is_binary_file)
         {
