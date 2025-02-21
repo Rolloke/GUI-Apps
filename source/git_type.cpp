@@ -64,7 +64,7 @@ Cmd::Cmd()
     mCommandMap[Blame]                  = "git blame -c %1 %2";
     mCommandMap[Clone]                  = "git clone -v %1";
 
-    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
+    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, CompareTo, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
