@@ -1656,7 +1656,6 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::initCodecCombo()
 {
-    /// TODO: create code for Qt 6 here
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     ui->comboTextCodex->addItem("Default Codec");
     QStringEncoder sc;

@@ -138,7 +138,8 @@ struct Cmd
         UpdateRootItemStatus,
         UpdateRepository,
         UpdateStash,
-        UpdateRepositorySubFolder
+        UpdateRepositorySubFolder,
+        InsertRepository
     };
 
     typedef std::vector<eCmd> tVector;

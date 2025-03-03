@@ -32,7 +32,7 @@ unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-expansion-to-defined
 unix:QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
 #win32:INCLUDEPATH = E:/Programmierung/lib/boost_1_68_0
-#DEFINES += USE_BOOST=1
+DEFINES += USE_BOOST=1
 
 SOURCES += main.cpp\
     binary_values_view.cpp \

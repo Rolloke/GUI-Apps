@@ -859,7 +859,20 @@ void MainWindow::call_git_clone()
     const QString  destination   = QFileDialog::getExistingDirectory(this, tr("Select destination for repository \"%1\"").arg(base_name), mDefaultSourcePath);
     const QString  clone_command = tr(git_command.toStdString().c_str()).arg(git_source);
 
-    /// TODO: handle command within thread.
+
+#if 0   /// TODO: handle command within thread.
+
+    QVariantMap workmap;
+    workmap.insert(Worker::command, clone_command);
+    workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
+    workmap.insert(Worker::action , git::Cmd::InsertRepository);
+    QString insert_source_dir = destination+ "/" + base_name;
+    workmap.insert(Worker::result , insert_source_dir);
+    workmap.insert(Worker::repository, destination);
+    mWorker.doWork(QVariant(workmap));
+
+#else
+
     QDir::setCurrent(destination);
 
     QString result_str;
@@ -870,15 +883,17 @@ void MainWindow::call_git_clone()
     }
     appendTextToBrowser(clone_command + getLineFeed() + result_str);
 
-    result_str = destination+ "/" + base_name;
-    if (!QFileInfo(result_str).exists())
+    QString insert_source_dir = destination+ "/" + base_name;
+    if (!QFileInfo(insert_source_dir).exists())
     {
-        result_str = destination+ "/" + git_source.mid(git_source.indexOf(":")+1);
+        insert_source_dir = destination+ "/" + git_source.mid(git_source.indexOf(":")+1);
     }
+
     if (result == NoError )
     {
-        insertSourceTree(initDir(result_str), ui->treeSource->topLevelItemCount()+1);
+        insertSourceTree(initDir(insert_source_dir), ui->treeSource->topLevelItemCount()+1);
     }
+#endif
 }
 
 void MainWindow::initMergeTools(bool read_new_items)
