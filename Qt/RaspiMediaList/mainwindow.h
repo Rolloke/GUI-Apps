@@ -46,6 +46,7 @@ protected:
     void timerEvent(QTimerEvent*);
 
 private:
+    enum class meta { tracks, meta };
     void open_file(const QString& file_name);
     QString getConfigName() const;
     QString get_item_name(int row) const;
@@ -86,9 +87,7 @@ private slots:
     void on_pushButtonStop_clicked();
     void on_pushButtonSelect_clicked();
     void on_pushButtonFind_clicked();
-    void on_pushButtonNext_pressed();
     void on_pushButtonNext_released();
-    void on_pushButtonPrevious_pressed();
     void on_pushButtonPrevious_released();
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});
@@ -97,7 +96,8 @@ private slots:
     void tableView_clicked(const QModelIndex &index, bool called_by_function=false);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    void metaDataChanged(bool delayed = false);
+    void metaDataChanged();
+    void tracksChanged();
 #endif
     void metaDataChanged(const QString&key, const QVariant&value);
     void traymenu_hide_window();
@@ -108,6 +108,7 @@ private slots:
     void update_duration_info(bool position);
 
 private:
+    void call_metaDataChanged(meta what);
 
     Ui::MainWindow *    ui;
     QErrorMessage       mErrorMsgDlg;

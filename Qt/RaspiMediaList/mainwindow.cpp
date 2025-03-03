@@ -306,6 +306,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
+    connect(&mPlayer, SIGNAL(tracksChanged()), this, SLOT(tracksChanged()));
 #else
     connect(&mPlayer, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(metaDataChanged(QString,QVariant)));
 #endif
@@ -664,10 +665,6 @@ void MainWindow::on_pushButtonFind_clicked()
     }
 }
 
-void MainWindow::on_pushButtonNext_pressed()
-{
-}
-
 void MainWindow::on_pushButtonNext_released()
 {
     if (m_media_folder_mode)
@@ -678,11 +675,6 @@ void MainWindow::on_pushButtonNext_released()
             on_pushButtonStart_clicked();
         }
     }
-}
-
-void MainWindow::on_pushButtonPrevious_pressed()
-{
-
 }
 
 void MainWindow::on_pushButtonPrevious_released()
@@ -1551,26 +1543,39 @@ void MainWindow::menu_option_show_tray_icon(bool show)
     }
 }
 
-
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-void MainWindow::metaDataChanged(bool delayed)
+
+void MainWindow::metaDataChanged()
 {
+    TRACEX(Logger::info, "metaDataChanged: ");
     /// NOTE: this delay is necessary to retrieve the meta data informations
     /// the information is not available at the time the slot metaDataChanged is invoked
-    if (!delayed)
+    QTimer::singleShot(600, [this](){ call_metaDataChanged(meta::tracks); });
+
+}
+
+void MainWindow::tracksChanged()
+{
+    TRACEX(Logger::info, "tracksChanged: ");
+    call_metaDataChanged(meta::tracks);
+}
+
+void MainWindow::call_metaDataChanged(meta what)
+{
+    TRACEX(Logger::info, "metaDataChanged: " << (int)what);
+    QList<QMediaMetaData>  tracks;
+    switch(what)
     {
-        QTimer::singleShot(600, [this](){ metaDataChanged(true); });
-        return ;
+    case meta::tracks:
+        tracks.append(mPlayer.audioTracks());
+        tracks.append(mPlayer.videoTracks());
+        tracks.append(mPlayer.subtitleTracks());
+        break;
+    case meta::meta:
+        tracks.append(mPlayer.metaData());
+        break;
     }
 
-    //QMetaDataReaderControl;
-
-    TRACEX(Logger::info, "metaDataChanged: " << delayed);
-    QList<QMediaMetaData>  tracks = mPlayer.audioTracks();
-    tracks.append(mPlayer.videoTracks());
-    tracks.append(mPlayer.subtitleTracks());
-    tracks.append(mPlayer.metaData());
     for (const auto &track : tracks)
     {
         for (const auto &key : track.keys())
@@ -1588,6 +1593,7 @@ void MainWindow::metaDataChanged(bool delayed)
         generate_media_file_tray_message();
     }
 }
+
 #endif
 
 
@@ -1637,7 +1643,7 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
         break;
     case QMediaPlayer::LoadedMedia:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        //metaDataChanged(true);
+        //call_metaDataChanged(meta::tracks);
 #endif
         break;
     case QMediaPlayer::StalledMedia:
@@ -1646,7 +1652,7 @@ void MainWindow::media_status_changed(const QMediaPlayer::MediaStatus &status)
         break;
     case QMediaPlayer::BufferedMedia:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        metaDataChanged(true);
+        call_metaDataChanged(meta::tracks);
 #else
         update_duration_info(false);
         generate_media_file_tray_message();
