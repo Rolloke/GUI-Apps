@@ -2,6 +2,7 @@
 #include "actions.h"
 #include "helper.h"
 #include "history.h"
+#include "logger.h"
 
 #include <QMenu>
 
@@ -71,24 +72,12 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
     aActionList.getAction(Cmd::DiffOfTwoBranches)->setEnabled(is_any_equal_to(selectedItems().count(), 1, 2));
+    aActionList.getAction(Cmd::MergeTwoBranches)->setEnabled(is_any_equal_to(selectedItems().count(), 1));
     menu.exec(mapToGlobal(pos) + menu_offset);
 
     mSelectedItem = nullptr;
 }
 
-/// TODO: implement merge branch to current branch
-/// TODO: implement merge two branches
-/// also remote branches
-/// drag and drop?
-/// git merge --no-commit --edit -F <file> <commit1> [<commit2>]
-/// --no-commit: -> nicht committen
-/// --edit     : -> merge tool aufrufen?
-/// -s <strategy> --strategy=<strategy> (ours obsolete, theirs, ort, recursive
-/// -X <strategy-option>
-/// --stat -n, --no-stat Show a diffstat at the end of the merge. The diffstat is also controlled by the configuration option merge.stat.
-/// --no-verify
-/// merge.guitool -g --gui
-/// git mergetool -F <file> <commit>
 void QBranchTreeWidget::diff_of_two_branches()
 {
     const auto selected = selectedItems();
@@ -107,6 +96,22 @@ void QBranchTreeWidget::diff_of_two_branches()
         QTreeWidgetItem* parent = selected[0]->parent();
         int child1 = parent->indexOfChild(selected[0]);
         Q_EMIT insertFileNames(parent, child1, History::Diff::to_current);
+    }
+}
+
+void QBranchTreeWidget::merge_branch()
+{
+    const auto selected = selectedItems();
+    if (selected.count() == 1)
+    {
+        QString cmd = QString("git merge %1").arg(selected[0]->text(0));
+        QString result_str;
+        int result = execute(cmd, result_str);
+        if (result != NoError)
+        {
+            result_str += tr("\nError %1 occurred").arg(result);
+        }
+        TRACEX(Logger::to_browser, cmd + getLineFeed() + result_str);
     }
 }
 
