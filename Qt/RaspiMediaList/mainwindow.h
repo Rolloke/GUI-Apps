@@ -86,9 +86,8 @@ private slots:
     void on_pushButtonStop_clicked();
     void on_pushButtonSelect_clicked();
     void on_pushButtonFind_clicked();
-    void on_pushButtonNext_pressed();
     void on_pushButtonNext_released();
-    void on_pushButtonPrevious_pressed();
+
     void on_pushButtonPrevious_released();
     void on_lineEditSelection_textChanged(const QString &arg1);
     void show_media_player_error(QMediaPlayer::Error error, const QString& sError = {});

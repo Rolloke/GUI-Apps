@@ -4,6 +4,29 @@
 
 int main(int argc, char *argv[])
 {
+    int font_size = 0;
+    QString font_name;
+    for (int n = 1; n < argc; ++n)
+    {
+        if (strcmp(argv[n], "--font_size") == 0 && n < (argc - 1))
+        {
+            font_size = atoi(argv[n+1]);
+        }
+        else if (strcmp(argv[n], "--font_name") == 0 && n < (argc - 1))
+        {
+            font_name = QString(argv[n+1]);
+        }
+    }
+    if (font_size)
+    {
+        if (font_name.size() == 0)
+        {
+            font_name = "Ubuntu Regular";
+        }
+        QFont font(font_name);
+        font.setPointSizeF(font_size);
+        QApplication::setFont(font);
+    }
     QApplication a(argc, argv);
     QTranslator translator;
 
