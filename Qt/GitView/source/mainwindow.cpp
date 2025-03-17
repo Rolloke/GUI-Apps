@@ -1656,7 +1656,6 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::initCodecCombo()
 {
-    /// TODO: create code for Qt 6 here
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     ui->comboTextCodex->addItem("Default Codec");
     QStringEncoder sc;
@@ -1931,6 +1930,11 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Diff between Branches"), Cmd::getCommand(Cmd::DiffOfTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(diff_of_two_branches()));
     mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Merge Branch"), Cmd::getCommand(Cmd::MergeTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(merge_branch()));
+    mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
+    mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
     connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setFlags(Cmd::BranchShow, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchShow, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -3256,7 +3260,10 @@ void MainWindow::setFontForViews(int)
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
-        text_browser->setFont(font);
+        if (text_browser)
+        {
+            text_browser->setFont(font);
+        }
     }
 }
 

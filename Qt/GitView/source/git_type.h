@@ -65,6 +65,7 @@ struct Cmd
         StashPush,
         Blame,
         Clone,
+        MergeTwoBranches,
 
         /// hint: add further git commands before
         CustomCommand=50,
@@ -138,7 +139,8 @@ struct Cmd
         UpdateRootItemStatus,
         UpdateRepository,
         UpdateStash,
-        UpdateRepositorySubFolder
+        UpdateRepositorySubFolder,
+        InsertRepository
     };
 
     typedef std::vector<eCmd> tVector;

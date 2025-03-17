@@ -2,7 +2,7 @@
 ConsoleCpp/
 MenuTest/
 *.user
-build*/
+build/
 *.aps
 *.qm
 CMakeCache.txt

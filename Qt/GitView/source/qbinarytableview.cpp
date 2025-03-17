@@ -642,10 +642,15 @@ QVariant BinaryTableModel::data(const QModelIndex &index, int role) const
         const int vertical_width = get_parent()->verticalScrollBar()->sizeHint().width();
         const int fWidth = get_parent()->rect().width() - vertical_width;
         const auto column_width = get_parent()->mColumnWidth[index.column()] * fWidth;
-        QLinearGradient gradient(QPointF(0, 0), QPointF(column_width, 0));
-        gradient.setColorAt(0, QColor(Qt::green));
-        gradient.setColorAt(0.1, QColor(Qt::gray));
-        //gradient.setStops({ {0.1, QColor(Qt::green)}, {1.0, QColor(Qt::gray)} });
+        // QLinearGradient gradient(QPointF(0, 0), QPointF(column_width, 0));
+        // gradient.setColorAt(0, QColor(Qt::green));
+        // gradient.setColorAt(0.1, QColor(Qt::gray));
+        // //gradient.setStops({ {0.1, QColor(Qt::green)}, {1.0, QColor(Qt::gray)} });
+        QLinearGradient gradient;
+        gradient.setColorAt(0, QColor(Qt::lightGray));
+        gradient.setColorAt(column_width / (float)get_parent()->rect().width(), QColor(Qt::gray));
+        gradient.setColorAt(column_width / (float)get_parent()->rect().width(), QColor(Qt::gray));
+        gradient.setColorAt(1.0, QColor(Qt::lightGray));
         QBrush brush(gradient);
         return brush;
 #else
@@ -657,6 +662,14 @@ QVariant BinaryTableModel::data(const QModelIndex &index, int role) const
 #endif
     }
 #endif
+#if 0
+    if (role == Qt::FontRole)
+    {
+        QFont table_font("Ubuntu Mono");
+        return table_font;
+    }
+#endif
+
     // roles requested here
     //  6: FontRole
     //  7: TextAlignmentRole
