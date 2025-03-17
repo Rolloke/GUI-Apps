@@ -132,6 +132,10 @@ const QStringList media_player_cmd_line =
     QObject::tr("Arguments:"),
     QObject::tr("-f <file>, --file=<file>"),
     QObject::tr("   open kodi m3u media file at start"),
+    QObject::tr("--font_size <font_size>"),
+    QObject::tr("--font_name <font_name>"),
+    QObject::tr("   font size activates setting a font for application"),
+    QObject::tr("   font name is optional, default is \"Ubuntu Regular\""),
     QObject::tr("--help show this help")
 };
 
@@ -380,7 +384,7 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(txt::sGroupLogging);
     {
-        QString fSeverHlp = "_fscb___acewnidt";
+        QString fSeverHlp = "_bfsc_eacewnidt";
         STORE_STR(fSettings, fSeverHlp);
         QString fSeverity = QString::number(Logger::getSeverity(), 2);
         STORE_STR(fSettings, fSeverity);
@@ -576,7 +580,7 @@ void MainWindow::display_play_status()
     }
     ui->pushButtonStart->setChecked(state == QMediaPlayer::PlayingState);
     ui->pushButtonPause->setChecked(state == QMediaPlayer::PausedState);
-    ui->pushButtonStop->setChecked(state == QMediaPlayer::StoppedState);
+    ui->pushButtonStop->setChecked( state == QMediaPlayer::StoppedState);
 }
 
 
@@ -664,10 +668,6 @@ void MainWindow::on_pushButtonFind_clicked()
     }
 }
 
-void MainWindow::on_pushButtonNext_pressed()
-{
-}
-
 void MainWindow::on_pushButtonNext_released()
 {
     if (m_media_folder_mode)
@@ -678,11 +678,6 @@ void MainWindow::on_pushButtonNext_released()
             on_pushButtonStart_clicked();
         }
     }
-}
-
-void MainWindow::on_pushButtonPrevious_pressed()
-{
-
 }
 
 void MainWindow::on_pushButtonPrevious_released()
@@ -1560,7 +1555,7 @@ void MainWindow::metaDataChanged(bool delayed)
     /// the information is not available at the time the slot metaDataChanged is invoked
     if (!delayed)
     {
-        QTimer::singleShot(600, [this](){ metaDataChanged(true); });
+        QTimer::singleShot(2000, [this](){ metaDataChanged(true); });
         return ;
     }
 
