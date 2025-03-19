@@ -249,7 +249,7 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
     return pid_list.size() > 0;
 }
 
-void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
+void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree, const tGTLIFunction &function)
 {
     const auto fList = aTree.selectedItems();
     for (const auto& fSelected : std::as_const(fList))
@@ -259,6 +259,10 @@ void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree)
         {
             if (callMessageBox(QObject::tr("Delete %1 entry;%1"), QObject::tr("Tree"), top_level_item->text(0), true) & QMessageBox::Yes)
             {
+                if (function)
+                {
+                    function(top_level_item);
+                }
                 aTree.removeItemWidget(top_level_item, 0);
                 delete top_level_item;
             }

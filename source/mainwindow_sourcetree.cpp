@@ -292,7 +292,16 @@ void MainWindow::addGitSourceFolder()
 
 void MainWindow::removeGitSourceFolder()
 {
-    deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource);
+    auto close_all_subfiles = [&](auto item)
+    {
+        if (ui->ckCloseAllFilesOfRepository->isChecked())
+        {
+            mCloseFileFilter = item->text(QSourceTreeWidget::Column::FileName);
+            btnCloseText_clicked(Editor::All);
+            mCloseFileFilter.clear();
+        }
+    };
+    deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource, close_all_subfiles);
     mContextMenuSourceTreeItem = nullptr;
 }
 

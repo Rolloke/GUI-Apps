@@ -193,6 +193,13 @@ bool MainWindow::close_editable_widgets(QWidget*& active_widget, Editor editor, 
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
                     QWidget* current_widget = get_widget(dock_widget);
+                    if (mCloseFileFilter.size())
+                    {
+                        if (get_file_path(current_widget).indexOf(mCloseFileFilter) == -1)
+                        {
+                            continue;
+                        }
+                    }
                     set_active(current_widget, true);
                     all_closed = send_close_to_editable_widget(current_widget);
                     set_active(current_widget, false);

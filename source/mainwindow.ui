@@ -1230,6 +1230,16 @@ Git or command results are always displayed in main editor.
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="ckCloseAllFilesOfRepository">
+          <property name="statusTip">
+           <string>If checked, all files of the removed repository are closed</string>
+          </property>
+          <property name="text">
+           <string>Close all Repository Files</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
