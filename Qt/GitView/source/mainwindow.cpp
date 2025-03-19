@@ -383,6 +383,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowHistoryGraphically);
         on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
+        LOAD_PTR(fSettings, ui->ckCloseAllFilesOfRepository, setChecked, isChecked, toBool);
+        update_widget_states(ui->ckCloseAllFilesOfRepository);
         LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckAppendToBatch, setChecked, isChecked, toBool);
         on_ckAppendToBatch_clicked(ui->ckAppendToBatch->isChecked());
@@ -611,6 +613,7 @@ MainWindow::~MainWindow()
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_PTR(fSettings, ui->ckShowHistoryGraphically, isChecked);
+        STORE_PTR(fSettings, ui->ckCloseAllFilesOfRepository, isChecked);
         STORE_PTR(fSettings, ui->ckOutput2secondTextView, isChecked);
         STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
@@ -2141,6 +2144,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->btnFindReplace, mActions.check_location("edit-find-replace.png"), &new_id);
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->comboWordWrap);
+    create_auto_cmd(ui->ckCloseAllFilesOfRepository);
 
     if (Cmd::mContextMenuTextView.empty())
     {

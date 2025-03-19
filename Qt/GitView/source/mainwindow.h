@@ -427,6 +427,7 @@ private:
     bool    m_initializing_elements { true };
     QStringList mDockAreaNames;
     bool    mInitOnlyCustomCommands { false };
+    QString mCloseFileFilter;
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";

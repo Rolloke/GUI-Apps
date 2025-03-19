@@ -48,6 +48,8 @@ extern QPoint menu_offset;
 
 #define INT(n) static_cast<qint32>(n)
 
+typedef std::function<void(QTreeWidgetItem*&)> tGTLIFunction;
+
 QString getSettingsName(const QString& aItemName);
 
 QString formatFileSize(quint64 aSize);
@@ -60,11 +62,10 @@ bool is_whole_word(const QString& text);
 bool get_pid_list(const QString& name, QStringList& pid_list);
 
 
-void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree);
+void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree, const tGTLIFunction& function = {});
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 
-typedef std::function<void(QTreeWidgetItem*&)> tGTLIFunction;
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function = {});
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf = true);
 void toggle_expand_item(QTreeWidgetItem* item);
