@@ -2591,6 +2591,16 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
 
 void MainWindow::comboFindBoxIndexChanged(int index)
 {
+    static QString oldFindAllToolTip;
+    if (oldFindAllToolTip.isEmpty())
+    {
+        oldFindAllToolTip = ui->btnFindAll->toolTip();
+    }
+    static QString oldFindAllText;
+    if (oldFindAllText.isEmpty())
+    {
+        oldFindAllText = ui->btnFindAll->text();
+    }
     enum eflag
     {
        Next=1, Previous=2, AllExe=4, Replace=8
@@ -2600,10 +2610,14 @@ void MainWindow::comboFindBoxIndexChanged(int index)
     if (find == FindView::ExecuteCommand )
     {
         ui->btnFindAll->setText(tr("Execute"));
+        ui->edtFindText->setToolTip(tr("Insert git or bash command and hit \"Enter\" to execute"));
+        connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
     }
     else
     {
-        ui->btnFindAll->setText(tr("All"));
+        ui->edtFindText->setToolTip(oldFindAllToolTip);
+        ui->btnFindAll->setText(oldFindAllText);
+        disconnect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
     }
 
     ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
