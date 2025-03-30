@@ -430,6 +430,7 @@ void binary_values_view::on_btnOpenTypeFile_clicked()
     if (opened)
     {
         m_current_combo_index = ui->comboType->currentIndex();
+        ui->edtOpenFilePath->setText(file_name);
         ui->comboType->setCurrentText(CDisplayType::getNameOfType(CDisplayType::FormatFile));
     }
     else if (m_current_combo_index)

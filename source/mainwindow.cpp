@@ -1205,7 +1205,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
             }
         }
         mActivViewObjectName = dockWidget->objectName();
-        bool bv_active = mActivViewObjectName == binaryview;
+        bool bv_active = mActivViewObjectName == binary_table_view;
         ui->tableBinaryView->set_active(bv_active);
         if (bv_active)
         {
@@ -1281,7 +1281,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
 {
     if (file_path.isEmpty())
     {
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binaryview, background_textbrowser});
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, binary_table_view, background_textbrowser });
         for (QDockWidget* dock_widget : dock_widgets)
         {
             auto* widget = get_widget(dock_widget);
@@ -1295,7 +1295,7 @@ QWidget* MainWindow::get_active_editable_widget(const QString& file_path)
     else
     {
         QWidget* editable_with_file_path = nullptr;
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, textbrowser, binaryview});
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, textbrowser, binary_table_view });
         for (QDockWidget* dock_widget : dock_widgets)
         {
             auto* widget = get_widget(dock_widget);
@@ -1323,7 +1323,7 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
     case AdditionalEditor::One:
     {
         set_filename = false;
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
         if (dock_widgets.size())
         {
             return dynamic_cast<code_browser*>(get_widget(dock_widgets[0]));
@@ -1426,7 +1426,7 @@ void MainWindow::remove_text_browser(QDockWidgetX *dock_widget)
         show_web_view(false);
         disconnect(text_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
         show_web_view(false);
-        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+        QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
         ui->comboOpenNewEditor->setEnabled(dock_widgets.size() <= 1);
     }
 }
@@ -2167,7 +2167,7 @@ void MainWindow::add_action_to_widgets(QAction * action)
     ui->treeHistory->addAction(action);
     ui->treeStash->addAction(action);
     action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
     for (QDockWidget* dock_widget : std::as_const(dock_widgets))
     {
         get_widget(dock_widget)->addAction(action);
@@ -3242,7 +3242,7 @@ void MainWindow::on_ckTypeConverter_stateChanged(int active)
 
 void MainWindow::on_spinTabulator_valueChanged(int width)
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ textbrowser, new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
@@ -3257,7 +3257,7 @@ void MainWindow::comboTabPositionIndexChanged(int index)
 
 void MainWindow::on_comboWordWrap_currentIndexChanged(int index)
 {
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({textbrowser, new_textbrowser});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ textbrowser, new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
@@ -3274,7 +3274,7 @@ void MainWindow::setFontForViews(int)
     font.setPointSize(ui->spinFontSize->value());
     ui->textBrowser->setFont(font);
     ui->tableBinaryView->setFont(font);
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));

@@ -18,12 +18,18 @@
 #include <QStringConverter>
 #endif
 
+#define TEST_DELEGATE 1
+
 class BinaryTableModel;
-//class QReadonlyEditItemDelegate;
+
+#if TEST_DELEGATE
+class QReadonlyEditItemDelegate;
+#endif
 
 class qbinarytableview : public QTableView, public Editable
 {
     friend class BinaryTableModel;
+    friend class QReadonlyEditItemDelegate;
     Q_OBJECT
 public:
     explicit qbinarytableview(QWidget *parent = nullptr);
@@ -74,8 +80,18 @@ private:
     void update_complete_row(int row);
     void change_cursor();
 
+public:
+    static const QString begin_mark;
+    static const QString end_mark;
+    static const QString space;
+    static const QList<QStringList> m_section_names;
+
+private:
     std::vector<double> mColumnWidth;
-    //QReadonlyEditItemDelegate* m_item_delegate;
+
+#if TEST_DELEGATE
+    QReadonlyEditItemDelegate* m_item_delegate;
+#endif
 };
 
 
@@ -115,9 +131,16 @@ public:
     {
         Typed, Character, Last
     };
+    enum view_type
+    {
+        single_data_type,
+        type_format_file
+    };
+
     BinaryTableModel(int rows, int columns, qbinarytableview *parent = nullptr);
 
     ~BinaryTableModel();
+    void set_type_display_value_index(int row, int column);
 
 private:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -147,6 +170,7 @@ private:
     QString  display_type(const DisplayValue& value, int row, int *length=nullptr) const;
     int      get_typed_display_array_length(const DisplayValue& value, int itdv, const std::vector<DisplayValue>& value_vector,
                                  const std::vector<int>& index_vector, const std::vector<int>& offset_vector);
+    void     update_type_display_value_index();
 
     QByteArray                      m_binary_content;
     int                             m_columns_per_row;
@@ -159,9 +183,10 @@ private:
     std::map<QString, DisplayValue> m_td_structs;
     std::vector<int>                m_td_offset;
     std::vector<int>                m_td_index;
+    std::pair<int,int>              m_value_index;
 };
 
-/*
+#if TEST_DELEGATE
 class QReadonlyEditItemDelegate : public QItemDelegate
 {
     Q_OBJECT
@@ -170,14 +195,17 @@ public:
 
     explicit QReadonlyEditItemDelegate(QObject *parent = 0);
 
-    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) override;
-    void setEditorData(QWidget *editor, const QModelIndex &index) override;
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) override;
-    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,     const QModelIndex &index) override;
+    QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,     const QModelIndex &index) const  override;
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 signals:
 
 private:
 };
-*/
+#endif
+
 #endif // QBINARYTABLEVIEW_H

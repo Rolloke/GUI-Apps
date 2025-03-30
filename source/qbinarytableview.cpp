@@ -8,10 +8,8 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QLineEdit>
-
-/// TODO: byte position change does not lead to correct row and column position when typed_display_values are shown
-
-#define TEST_DELEGATE 0
+#include <QPainter>
+#include <QHeaderView>
 
 namespace
 {
@@ -50,20 +48,30 @@ namespace
     }
 }
 
+const QString qbinarytableview::begin_mark = "{";
+const QString qbinarytableview::end_mark   = "}";
+const QString qbinarytableview::space      = " ";
+
+const QList<QStringList> qbinarytableview::m_section_names =
+{
+    {  tr("Typed View")      , tr("Character View") },
+    {  tr("Content / Values"), tr("Data Type")      }
+};
+
+
 qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 {
-//    m_item_delegate = new QReadonlyEditItemDelegate();
     BinaryTableModel* ListModel = new BinaryTableModel(0, INT(BinaryTableModel::Table::Last), this);
-    QStringList fSectionNames = {  tr("Typed"), tr("Character") };
     mColumnWidth   = { 0.6, 0 };
 
     for (int fSection = 0; fSection < INT(BinaryTableModel::Table::Last); ++fSection)
     {
-        ListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
+        ListModel->setHeaderData(fSection, Qt::Horizontal, m_section_names[BinaryTableModel::single_data_type][fSection]);
     }
 
     setModel(ListModel);
 #if TEST_DELEGATE
+    m_item_delegate = new QReadonlyEditItemDelegate();
     setItemDelegate(m_item_delegate);
     setEditTriggers(QAbstractItemView::CurrentChanged);
 #endif
@@ -74,7 +82,9 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 
 qbinarytableview::~qbinarytableview()
 {
-    //delete m_item_delegate;
+#if TEST_DELEGATE
+    delete m_item_delegate;
+#endif
 }
 
 void qbinarytableview::update_rows(bool refresh_all)
@@ -169,6 +179,7 @@ void qbinarytableview::keyPressEvent(QKeyEvent *event)
     }
 }
 
+/// TODO: byte position change does not lead to correct row and column position when typed_display_values are shown
 void qbinarytableview::mousePressEvent(QMouseEvent* event)
 {
     auto& themodel = *get_model();
@@ -188,7 +199,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
     float size = metrix.boundingRect("#").width();
 #else
-    float size = metrix.width(" ");
+    float size = metrix.width(space);
 #endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     int x_position = event->position().x();
@@ -215,12 +226,14 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
         if (column == INT(BinaryTableModel::Table::Typed))
         {
             const auto string_left = themodel.get_typed_content(row).toString().left(char_position);
-            const int pos = string_left.count(" ");
+            const int pos = string_left.count(space);
             const auto& value = themodel.m_td_values[themodel.m_td_index[row]];
             int length = 0;
             themodel.display_type(value, row, &length);
-            const int bytes = pos * length;
+            const int column_index = (pos > 0) ? pos - 1: pos;
+            const int bytes = column_index * length;
             cursor = themodel.m_td_offset[row] + bytes;
+            themodel.set_type_display_value_index(row, column_index);
         }
     }
     else if (column == INT(BinaryTableModel::Table::Character))
@@ -229,7 +242,7 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
     }
     else if (column == INT(BinaryTableModel::Table::Typed))
     {
-        const int pos   = themodel.get_typed_content(row).toString().left(char_position).count(" ");
+        const int pos   = themodel.get_typed_content(row).toString().left(char_position).count(space);
         const int bytes = INT(pos * themodel.get_type()->GetByteLength());
         cursor    = row * bytes_per_row + bytes;
     }
@@ -250,14 +263,8 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
 
 bool qbinarytableview::edit(const QModelIndex &index, EditTrigger trigger, QEvent *event)
 {
-#if TEST_DELEGATE
-    // TODO: instantiate item delegate
     bool edit = QAbstractItemView::edit(index, trigger, event);
     return edit;
-#else
-    bool edit = QAbstractItemView::edit(index, trigger, event);
-    return edit;
-#endif
 }
 
 
@@ -303,7 +310,19 @@ int qbinarytableview::get_columns() const
 
 void qbinarytableview::set_type(int type)
 {
-    get_model()->m_display_type = static_cast<CDisplayType::eType>(type);
+    auto new_type = static_cast<CDisplayType::eType>(type);
+    if ((new_type == CDisplayType::FormatFile) != (get_model()->m_display_type == CDisplayType::FormatFile))
+    {
+        if (new_type == CDisplayType::FormatFile)
+        {
+            get_model()->setHorizontalHeaderLabels(m_section_names[BinaryTableModel::type_format_file]);
+        }
+        else
+        {
+            get_model()->setHorizontalHeaderLabels(m_section_names[BinaryTableModel::single_data_type]);
+        }
+    }
+    get_model()->m_display_type = new_type;
     update_rows();
 }
 
@@ -430,7 +449,7 @@ void qbinarytableview::receive_value(const QByteArray &array, int position)
     auto& themodel = *get_model();
     if (array.size())
     {
-        if (position + array.size() < themodel.m_binary_content.size())
+        if (position + array.size() <= themodel.m_binary_content.size())
         {
             for (int i=0; i<array.size(); ++i)
             {
@@ -616,12 +635,19 @@ BinaryTableModel::BinaryTableModel(int rows, int columns, qbinarytableview *pare
   , m_display_type(CDisplayType::HEX32)
   , m_display(CDisplayType::get_type_map())
 {
-
+    m_value_index.first  = -1;
+    m_value_index.second = -1;
 }
 
 BinaryTableModel::~BinaryTableModel()
 {
     TRACE(Logger::info, "BinaryTableModel::~BinaryTableModel()");
+}
+
+void BinaryTableModel::set_type_display_value_index(int row, int column)
+{
+    m_value_index.first  = row;
+    m_value_index.second = column;
 }
 
 QVariant BinaryTableModel::data(const QModelIndex &index, int role) const
@@ -634,41 +660,6 @@ QVariant BinaryTableModel::data(const QModelIndex &index, int role) const
         case INT(Table::Typed):     return get_typed_content(index.row()); break;
         }
     }
-    /// TODO test BackgroundRole
-#if 1
-    else if (role == Qt::BackgroundRole)
-    {
-#if 0
-        const int vertical_width = get_parent()->verticalScrollBar()->sizeHint().width();
-        const int fWidth = get_parent()->rect().width() - vertical_width;
-        const auto column_width = get_parent()->mColumnWidth[index.column()] * fWidth;
-        // QLinearGradient gradient(QPointF(0, 0), QPointF(column_width, 0));
-        // gradient.setColorAt(0, QColor(Qt::green));
-        // gradient.setColorAt(0.1, QColor(Qt::gray));
-        // //gradient.setStops({ {0.1, QColor(Qt::green)}, {1.0, QColor(Qt::gray)} });
-        QLinearGradient gradient;
-        gradient.setColorAt(0, QColor(Qt::lightGray));
-        gradient.setColorAt(column_width / (float)get_parent()->rect().width(), QColor(Qt::gray));
-        gradient.setColorAt(column_width / (float)get_parent()->rect().width(), QColor(Qt::gray));
-        gradient.setColorAt(1.0, QColor(Qt::lightGray));
-        QBrush brush(gradient);
-        return brush;
-#else
-        if (index.row() & 1)
-        {
-            QBrush brush(Qt::lightGray);
-            return brush;
-        }
-#endif
-    }
-#endif
-#if 0
-    if (role == Qt::FontRole)
-    {
-        QFont table_font("Ubuntu Mono");
-        return table_font;
-    }
-#endif
 
     // roles requested here
     //  6: FontRole
@@ -711,8 +702,6 @@ QVariant BinaryTableModel::get_typed_content(int row) const
     int start = row * bytes_per_row + m_start_offset;
     int end   = m_binary_content.size() - bytes_per_type;
     QString line;
-    QString begin_mark = "["; //<span style=\"background-color:red;\">";
-    QString end_mark   = "]"; //"</span>";
     for (int i=0; i<m_columns_per_row && start <=end; ++i)
     {
         QString part = thetype.Display(&buffer_pointer[start]);
@@ -721,20 +710,18 @@ QVariant BinaryTableModel::get_typed_content(int row) const
             if (is_hex_display)
             {
                 int offset = (m_byte_cursor - start) * 2;
-                part.insert(offset, begin_mark);
-                part.insert(offset+begin_mark.size() + 2, end_mark);
+                part.insert(offset, qbinarytableview::begin_mark);
+                part.insert(offset + qbinarytableview::begin_mark.size() + 2, qbinarytableview::end_mark);
             }
             else
             {
-                part.insert(0, begin_mark);
-                part.append(end_mark);
+                part.insert(0, qbinarytableview::begin_mark);
+                part.append(qbinarytableview::end_mark);
 
             }
-            /// TODO: show parts of the string with different colors
-            /// label->setText(R"**(<span style="background-color:red;">00</span>-<span style="background-color:blue;">01</span>-02-03-04-05)**");
         }
         line += part;
-        line += " ";
+        line += qbinarytableview::space;
         start += bytes_per_type;
     }
 
@@ -803,6 +790,29 @@ int BinaryTableModel::get_typed_display_array_length(const DisplayValue &value, 
         }
     }
     return length;
+}
+
+void BinaryTableModel::update_type_display_value_index()
+{
+    m_value_index.first = -1;
+    for (size_t row = 0; row < m_td_offset.size()-1; ++row)
+    {
+        if (is_in_range(m_td_offset[row], m_td_offset[row+1]-1, m_byte_cursor))
+        {
+            m_value_index.first  = row;
+            const int bytes_in_row = m_td_offset[row+1] - m_td_offset[row];
+            const int bytes_per_column = bytes_in_row / m_columns_per_row;
+            if (bytes_per_column)
+            {
+                m_value_index.second = (m_byte_cursor - m_td_offset[row]) / bytes_per_column;
+            }
+            else
+            {
+                m_value_index.second = 0;
+            }
+            break;
+        }
+    }
 }
 
 void BinaryTableModel::update_typed_display_rows()
@@ -1054,11 +1064,25 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
         value.get_index(row, nullptr, &array_index);
         if (array_index >= 0)
         {
-            display_value = value.name + tr("[%1]: ").arg(array_index) + value.display->Display(&buffer_pointer[m_td_offset[row]]);
+            if (m_value_index.first == row && m_value_index.second == 0)
+            {
+                display_value = value.name + tr("[%1]: ").arg(array_index) + qbinarytableview::begin_mark + value.display->Display(&buffer_pointer[m_td_offset[row]]) + qbinarytableview::end_mark;
+            }
+            else
+            {
+                display_value = value.name + tr("[%1]: ").arg(array_index) + value.display->Display(&buffer_pointer[m_td_offset[row]]);
+            }
         }
         else
         {
-            display_value = value.name + ": " + value.display->Display(&buffer_pointer[m_td_offset[row]]);
+            if (m_value_index.first == row && m_value_index.second == 0)
+            {
+                display_value = value.name + ": " + qbinarytableview::begin_mark + value.display->Display(&buffer_pointer[m_td_offset[row]]) + qbinarytableview::end_mark;
+            }
+            else
+            {
+                display_value = value.name + ": " + value.display->Display(&buffer_pointer[m_td_offset[row]]);
+            }
         }
         if (!is_variable_length_display_type && value.array_length)
         {
@@ -1067,7 +1091,14 @@ QString  BinaryTableModel::display_typed_value(const DisplayValue& value, int ro
             int offset            = m_td_offset[row] + value_bytes;
             for (int i=1; i<m_columns_per_row && offset < next_offset; ++i)
             {
-                display_value += " " + value.display->Display(&buffer_pointer[offset]);
+                if (m_value_index.first == row && m_value_index.second == i)
+                {
+                    display_value += qbinarytableview::space + qbinarytableview::begin_mark + value.display->Display(&buffer_pointer[offset]) + qbinarytableview::end_mark;
+                }
+                else
+                {
+                    display_value += qbinarytableview::space + value.display->Display(&buffer_pointer[offset]);
+                }
                 offset += value_bytes;
             }
         }
@@ -1159,16 +1190,15 @@ QVariant BinaryTableModel::get_character_content(int row) const
         if (i == m_byte_cursor)
         {
             ascii_coded_line.append('[');
-            //ascii_coded_line.append("<font color=\"red\">");
             ascii_coded_line.append(character);
             ascii_coded_line.append(']');
-            //ascii_coded_line.append("</font>");
         }
         else
         {
             ascii_coded_line.append(character);
         }
     }
+
     return QVariant(ascii_coded_line);
 }
 
@@ -1230,6 +1260,14 @@ int BinaryTableModel::increase_cursor()
         m_byte_cursor = 0;
     }
     get_parent()->change_cursor();
+    if (has_typed_display_values())
+    {
+        update_type_display_value_index();
+        if (m_value_index.first != -1)
+        {
+            return m_value_index.first;
+        }
+    }
     return m_byte_cursor / get_bytes_per_row();
 }
 
@@ -1240,6 +1278,14 @@ int BinaryTableModel::decrease_cursor()
         --m_byte_cursor;
     }
     get_parent()->change_cursor();
+    if (has_typed_display_values())
+    {
+        update_type_display_value_index();
+        if (m_value_index.first != -1)
+        {
+            return m_value_index.first;
+        }
+    }
     return m_byte_cursor / get_bytes_per_row();
 }
 
@@ -1250,39 +1296,88 @@ qbinarytableview* BinaryTableModel::get_parent() const
     return theparent;
 }
 
-/*
+#if TEST_DELEGATE
+
 QReadonlyEditItemDelegate::QReadonlyEditItemDelegate(QObject *parent) : QItemDelegate(parent)
 {
 
 }
 
-QWidget* QReadonlyEditItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index)
+QWidget* QReadonlyEditItemDelegate::createEditor(QWidget * /* parent */, const QStyleOptionViewItem & /* option */, const QModelIndex & /*index*/) const
 {
-    (void)(index);
-    auto * line_edit = new QLineEdit(parent);
-    line_edit->setFont(option.font);
-    line_edit->setReadOnly(true);
-    return line_edit;
+    // (void)(index);
+    // auto * line_edit = new QLineEdit(parent);
+    // line_edit->setFont(option.font);
+    // line_edit->setReadOnly(true);
+    // return line_edit;
+    return nullptr;
 }
 
-void QReadonlyEditItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
+void QReadonlyEditItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    QString value = index.model()->data(index, Qt::EditRole).toString();
-    auto *line_edit = static_cast<QLineEdit*>(editor);
-    line_edit->setText(value);
+    if (editor)
+    {
+        QString value = index.model()->data(index, Qt::DisplayRole).toString();
+        auto *line_edit = static_cast<QLineEdit*>(editor);
+        line_edit->setText(value);
+    }
 }
 
-void QReadonlyEditItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index)
+void QReadonlyEditItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QLineEdit* line_edit = static_cast<QLineEdit*>(editor);
-    QString value = line_edit->text();
-    model->setData(index, value, Qt::EditRole);
+    if (editor)
+    {
+        QLineEdit* line_edit = static_cast<QLineEdit*>(editor);
+        QString value = line_edit->text();
+        model->setData(index, value, Qt::EditRole);
+    }
 }
 
-void QReadonlyEditItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index)
+void QReadonlyEditItemDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    (void)(index);
-    editor->setGeometry(option.rect);
+    if (editor)
+    {
+        (void)(index);
+        editor->setGeometry(option.rect);
+    }
 }
 
-*/
+void QReadonlyEditItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    QString value = index.model()->data(index, Qt::DisplayRole).toString();
+    painter->setFont(option.font);
+    painter->setBackgroundMode(Qt::OpaqueMode);
+    painter->setBackground(option.backgroundBrush);
+
+    int start = value.indexOf(qbinarytableview::begin_mark);
+    if (start != -1) value.replace(qbinarytableview::begin_mark, "");
+    int end = value.indexOf(qbinarytableview::end_mark);
+    if (end != -1)  value.replace(qbinarytableview::end_mark, "");
+
+    if (start != -1 && end != -1)
+    {
+        QRect boundig_rect;
+        QRect part(option.rect);
+        if (start)
+        {
+            painter->drawText(option.rect, option.displayAlignment, value.left(start), &boundig_rect);
+            part.setLeft(boundig_rect.right());
+        }
+        painter->drawText(part, option.displayAlignment, value.mid(start, end-start), &boundig_rect);
+        part.setLeft(boundig_rect.right());
+        painter->drawText(part, option.displayAlignment, value.mid(end));
+        auto old_color = painter->pen().color();
+        painter->setPen(QColor(Qt::red));
+        painter->drawRect(boundig_rect);
+        painter->setPen(old_color);
+    }
+    else
+    {
+        QTextOption to;
+        to.setAlignment(option.displayAlignment);
+        painter->drawText(option.rect, value, to);
+    }
+}
+
+#endif
+
