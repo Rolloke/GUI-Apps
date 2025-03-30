@@ -314,7 +314,7 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
 void MainWindow::btnStoreAll_clicked()
 {
     QWidget* active_widget = nullptr;
-    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser, binary_table_view});
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser, binary_table_view });
     for (QDockWidget* dock_widget : dock_widgets)
     {
         QWidget* current_widget = get_widget(dock_widget);

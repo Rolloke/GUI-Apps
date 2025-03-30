@@ -632,7 +632,7 @@ void MainWindow::updateRepositoryStatus(bool append)
             QFileInfo info(file_name);
             if (info.isFile())
             {
-                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({new_textbrowser});
+                QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
                 for (QDockWidget* dock_widget : dock_widgets)
                 {
                     code_browser* cb = dynamic_cast<code_browser*>(get_widget(dock_widget));
