@@ -686,14 +686,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::read_commands(QSettings& fSettings)
 {
-    int fItemCount = fSettings.beginReadArray(config::sCommands);
+    int item_count = fSettings.beginReadArray(config::sCommands);
 
-    for (int fItem = 0; fItem < fItemCount; ++fItem)
+    for (int item = 0; item < item_count; ++item)
     {
-        fSettings.setArrayIndex(fItem);
-        Cmd::eCmd fCmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
-        auto* fAction = mActions.getAction(fCmd);
-        if (fAction)
+        fSettings.setArrayIndex(item);
+        Cmd::eCmd cmd = static_cast<Cmd::eCmd>(fSettings.value(config::sID).toUInt());
+        auto* action = mActions.getAction(cmd);
+        if (action)
         {
             if (mInitOnlyCustomCommands)
             {
@@ -702,28 +702,28 @@ void MainWindow::read_commands(QSettings& fSettings)
         }
         else
         {
-            fAction = mActions.createAction(fCmd, txt::New, txt::git);
+            action = mActions.createAction(cmd, txt::New, txt::git);
         }
-        fAction->setText(fSettings.value(config::sName).toString());
-        fAction->setToolTip(fSettings.value(config::sTooltip).toString());
-        fAction->setStatusTip(fSettings.value(config::sCommand).toString());
-        fAction->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
-        uint fFlags = fSettings.value(config::sFlags).toUInt();
-        if (fFlags & ActionList::Flags::Custom)
+        action->setText(fSettings.value(config::sName).toString());
+        action->setToolTip(fSettings.value(config::sTooltip).toString());
+        action->setStatusTip(fSettings.value(config::sCommand).toString());
+        action->setShortcut(QKeySequence(fSettings.value(config::sShortcut).toString()));
+        uint flags = fSettings.value(config::sFlags).toUInt();
+        if (flags & ActionList::Flags::Custom)
         {
-            connect(fAction, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+            connect(action, SIGNAL(triggered()), this, SLOT(perform_custom_command()));
         }
-        mActions.setFlags(fCmd, fFlags, Flag::replace);
-        mActions.setFlags(fCmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
-        mActions.setFlags(fCmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
-        mActions.setIconPath(fCmd, fSettings.value(config::sIconPath).toString());
+        mActions.setFlags(cmd, flags, Flag::replace);
+        mActions.setFlags(cmd, fSettings.value(config::sFlagsEnabled).toUInt(),  Flag::replace, ActionList::Data::StatusFlagEnable);
+        mActions.setFlags(cmd, fSettings.value(config::sFlagsDisabled).toUInt(), Flag::replace, ActionList::Data::StatusFlagDisable);
+        mActions.setIconPath(cmd, fSettings.value(config::sIconPath).toString());
         QStringList string_list = fSettings.value(config::sMenuStringList).toStringList();
-        if (string_list.size() > 1) mActions.setMenuStringList(fCmd, string_list);
-        mActions.setCustomCommandMessageBoxText(fCmd, fSettings.value(config::sCustomMessageBoxText).toString());
-        mActions.setCustomCommandPostAction(fCmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
-        if (!fAction->shortcut().isEmpty())
+        if (string_list.size() > 1) mActions.setMenuStringList(cmd, string_list);
+        mActions.setCustomCommandMessageBoxText(cmd, fSettings.value(config::sCustomMessageBoxText).toString());
+        mActions.setCustomCommandPostAction(cmd, fSettings.value(config::sCustomCommandPostAction).toUInt());
+        if (!action->shortcut().isEmpty())
         {
-            add_action_to_widgets(fAction);
+            add_action_to_widgets(action);
         }
     }
     fSettings.endArray();
@@ -1526,8 +1526,12 @@ QVariant MainWindow::handleWorker(const QVariant& aData)
 
 void MainWindow::handleMessage(QVariant aData)
 {
-    mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(mWorker.isBusy());
-    mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
+    auto* action = mActions.getAction(Cmd::KillBackgroundThread);
+    if (action)
+    {
+        action->setEnabled(mWorker.isBusy());
+        action->setToolTip(mWorker.getBatchToolTip());
+    }
     Logger::printDebug(Logger::trace, "handleMessage(): %x, %s", QThread::currentThreadId(), aData.typeName());
     if (aData.isValid())
     {
@@ -1739,32 +1743,36 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
     }
     if (handleInThread(force_thread))
     {
-        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
+        auto* kill_background_thread = mActions.getAction(Cmd::KillBackgroundThread);
+        if (kill_background_thread)
+        {
+            kill_background_thread->setEnabled(true);
 
-        auto *action = qobject_cast<QAction *>(sender());
-        const QVariantList variant_list = action->data().toList();
-        Work work_command { mCurrentTask };
-        if (variant_list[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
-        {
-            work_command = Work::AsynchroneousCommand;
+            auto *action = qobject_cast<QAction *>(sender());
+            const QVariantList variant_list = action->data().toList();
+            Work work_command { mCurrentTask };
+            if (variant_list[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
+            {
+                work_command = Work::AsynchroneousCommand;
+            }
+            QVariantMap workmap;
+            if (mContextMenuSourceTreeItem)
+            {
+                workmap.insert(Worker::repository, ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
+            }
+            workmap.insert(Worker::command_id, INT(mActions.findID(action)));
+            workmap.insert(Worker::command, command);
+            workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
+            workmap.insert(Worker::flags, variant_list[ActionList::Data::Flags].toUInt());
+            workmap.insert(Worker::work, INT(work_command));
+            mWorker.doWork(QVariant(workmap));
+            kill_background_thread->setToolTip(mWorker.getBatchToolTip());
+            if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
+            {
+                showDockedWidget(mBackgroundTextView.data());
+            }
+            command.clear();
         }
-        QVariantMap workmap;
-        if (mContextMenuSourceTreeItem)
-        {
-            workmap.insert(Worker::repository, ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
-        }
-        workmap.insert(Worker::command_id, INT(mActions.findID(action)));
-        workmap.insert(Worker::command, command);
-        workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
-        workmap.insert(Worker::flags, variant_list[ActionList::Data::Flags].toUInt());
-        workmap.insert(Worker::work, INT(work_command));
-        mWorker.doWork(QVariant(workmap));
-        mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
-        if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
-        {
-            showDockedWidget(mBackgroundTextView.data());
-        }
-        command.clear();
     }
     else
     {
@@ -2740,8 +2748,11 @@ void MainWindow::on_btnFindAll_clicked()
     else
     {
         QAction* action = mActions.getAction(Cmd::CustomTestCommand);
-        action->setStatusTip(ui->edtFindText->text());
-        action->trigger();
+        if (action)
+        {
+            action->setStatusTip(ui->edtFindText->text());
+            action->trigger();
+        }
     }
 }
 
@@ -3288,8 +3299,10 @@ void MainWindow::setFontForViews(int)
 void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
 {
     bool allfiles = additional_editor() == AdditionalEditor::OnNewFile;
-    mActions.getAction(Cmd::CloseAll)->setEnabled(allfiles);
-    mActions.getAction(Cmd::SaveAll)->setEnabled(allfiles);
+    auto*action = mActions.getAction(Cmd::CloseAll);
+    if (action) action->setEnabled(allfiles);
+    action = mActions.getAction(Cmd::SaveAll);
+    if (action) action->setEnabled(allfiles);
     QDockWidget*dock = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
     if (dock)
     {

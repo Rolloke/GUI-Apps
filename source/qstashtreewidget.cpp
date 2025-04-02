@@ -108,12 +108,18 @@ void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionLi
 {
     mSelectedItem = itemAt(pos);
 
-    aActionList.getAction(Cmd::StashClear)->setEnabled(getItemLevel(mSelectedItem) == 0);
-    aActionList.getAction(Cmd::StashDrop)->setEnabled(getItemLevel(mSelectedItem) == 0);
-    aActionList.getAction(Cmd::StashApply)->setEnabled(getItemLevel(mSelectedItem) == 0);
-    aActionList.getAction(Cmd::StashPop)->setEnabled(getItemLevel(mSelectedItem) == 0);
-    aActionList.getAction(Cmd::CallDiffTool)->setEnabled(getItemLevel(mSelectedItem) == 1);
-    aActionList.getAction(Cmd::ShowDifference)->setEnabled(getItemLevel(mSelectedItem) == 1);
+    auto* action = aActionList.getAction(Cmd::StashClear);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 0);
+    action = aActionList.getAction(Cmd::StashDrop);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 0);
+    action = aActionList.getAction(Cmd::StashApply);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 0);
+    action = aActionList.getAction(Cmd::StashPop);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 0);
+    action = aActionList.getAction(Cmd::CallDiffTool);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 1);
+    action = aActionList.getAction(Cmd::ShowDifference);
+    if (action) action->setEnabled(getItemLevel(mSelectedItem) == 1);
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuStashTree);

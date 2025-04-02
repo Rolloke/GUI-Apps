@@ -114,12 +114,15 @@ void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
     mActions.enableItemsByType(Cmd::mContextMenuHistoryTree, Type::None);
     if (!ui->treeHistory->isSelectionDiffable())
     {
-        mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
-        mActions.getAction(Cmd::ShowDifference)->setEnabled(false);
+        auto* action = mActions.getAction(Cmd::CallDiffTool);
+        if (action) action->setEnabled(false);
+        action = mActions.getAction(Cmd::ShowDifference);
+        if (action) action->setEnabled(false);
     }
     if (!ui->treeHistory->isSelectionFileDiffable())
     {
-        mActions.getAction(Cmd::CallDiffTool)->setEnabled(false);
+        auto*action =mActions.getAction(Cmd::CallDiffTool);
+        if (action) action->setEnabled(false);
     }
     if (mHistoryFile.size() == HistoryFile::Size)
     {

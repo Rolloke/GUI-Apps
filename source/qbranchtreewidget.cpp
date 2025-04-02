@@ -71,8 +71,10 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuBranchTree);
-    aActionList.getAction(Cmd::DiffOfTwoBranches)->setEnabled(is_any_equal_to(selectedItems().count(), 1, 2));
-    aActionList.getAction(Cmd::MergeTwoBranches)->setEnabled(is_any_equal_to(selectedItems().count(), 1));
+    auto* action = aActionList.getAction(Cmd::DiffOfTwoBranches);
+    if (action) action->setEnabled(is_any_equal_to(selectedItems().count(), 1, 2));
+    action = aActionList.getAction(Cmd::MergeTwoBranches);
+    if (action) action->setEnabled(is_any_equal_to(selectedItems().count(), 1));
     menu.exec(mapToGlobal(pos) + menu_offset);
 
     mSelectedItem = nullptr;
@@ -140,7 +142,8 @@ void QBranchTreeWidget::select_branch(const QString &repository)
 void QBranchTreeWidget::on_itemDoubleClicked(const ActionList& aActionList, QTreeWidgetItem *item, int )
 {
     mSelectedItem = item;
-    aActionList.getAction(Cmd::BranchCheckout)->trigger();
+    auto *action = aActionList.getAction(Cmd::BranchCheckout);
+    if (action) action->trigger();
     mSelectedItem = nullptr;
 }
 
