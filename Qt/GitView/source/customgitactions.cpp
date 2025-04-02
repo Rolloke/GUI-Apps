@@ -361,8 +361,8 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
     {
         int fColumn = item->column();
         Cmd::eCmd fCmd = getCommand(item->row());
-        auto* fAction = mActionList.getAction(fCmd);
-        if (fAction)
+        auto* action = mActionList.getAction(fCmd);
+        if (action)
         {
             QString fText = item->text();
 
@@ -374,7 +374,7 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                 case ActionsTable::Icon:
                    break;
                 case ActionsTable::Command:
-                    fAction->setStatusTip(fText);
+                    action->setStatusTip(fText);
                     fFlag = ActionList::Flags::Modified;
                    break;
                 case ActionsTable::MsgBoxText:
@@ -382,12 +382,12 @@ void CustomGitActions::on_ActionTableListItemChanged ( QStandardItem * item )
                     fFlag = ActionList::Flags::Modified;
                    break;
                 case ActionsTable::Name:
-                    fAction->setToolTip(fText);
-                    fAction->setText(fText);
+                    action->setToolTip(fText);
+                    action->setText(fText);
                     fFlag = ActionList::Flags::Modified;
                    break;
                 case ActionsTable::Shortcut:
-                    fAction->setShortcut(QKeySequence(fText));
+                    action->setShortcut(QKeySequence(fText));
                     fFlag = ActionList::Flags::Modified;
                    break;
             }
@@ -538,13 +538,13 @@ void CustomGitActions::initMenuList(const Cmd::tVector& aItems, const QString& a
     int fRow = 0;
     for (const auto& fCmd: aItems)
     {
-        const QAction* fAction = mActionList.getAction(fCmd);
+        const QAction* action = mActionList.getAction(fCmd);
 
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
-        if (fAction)
+        if (action)
         {
-            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), fAction->icon(), Qt::DecorationRole);
-            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), fAction->toolTip(), Qt::EditRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), action->icon(), Qt::DecorationRole);
+            mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), action->toolTip(), Qt::EditRole);
         }
         else
         {

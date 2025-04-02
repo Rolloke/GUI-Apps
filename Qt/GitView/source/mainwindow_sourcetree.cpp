@@ -831,7 +831,8 @@ void  MainWindow::call_git_commit()
         {
             getSelectedTreeItem();
             mWorker.setOnceBusy();
-            mActions.getAction(Cmd::Add)->trigger();
+            auto* action = mActions.getAction(Cmd::Add);
+            if (action) action->trigger();
 
             int result = execute(commit_command, result_str);
             if (result != NoError)
@@ -853,7 +854,8 @@ void  MainWindow::call_git_commit()
         }
         if (commit_message.getAndPush())
         {
-            mActions.getAction(Cmd::Push)->trigger();
+            auto* action = mActions.getAction(Cmd::Push);
+            if (action) action->trigger();
         }
     }
 }
@@ -925,7 +927,8 @@ void MainWindow::initMergeTools(bool read_new_items)
     }
     if (read_new_items && ui->treeSource->topLevelItemCount())
     {
-        mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
+        auto*action = mActions.getAction(Cmd::KillBackgroundThread);
+        if (action) action->setEnabled(true);
         QString first_git_repo =ui->treeSource->topLevelItem(0)->text(QSourceTreeWidget::Column::FileName);
         QVariantMap workmap;
         workmap.insert(Worker::command, tr("git -C %1 difftool --tool-help").arg(first_git_repo));
@@ -1007,7 +1010,8 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             {
                 if (fMoved)
                 {
-                    mActions.getAction(Cmd::UpdateGitStatus)->trigger();
+                    auto*action = mActions.getAction(Cmd::UpdateGitStatus);
+                    if (action)action->trigger();
                 }
                 else
                 {
@@ -1099,19 +1103,23 @@ void MainWindow::perform_custom_command()
                 check_set_current_path(git_command);
                 if (handle_in_thread)
                 {
-                    mActions.getAction(Cmd::KillBackgroundThread)->setEnabled(true);
-                    QVariantMap workmap;
-                    workmap.insert(Worker::repository, repository);
-                    workmap.insert(Worker::command_id, mActions.findID(action));
-                    workmap.insert(Worker::command, git_command);
-                    workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
-                    workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
-                    workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
-                    mWorker.doWork(QVariant(workmap));
-                    mActions.getAction(Cmd::KillBackgroundThread)->setToolTip(mWorker.getBatchToolTip());
-                    if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
+                    auto*action = mActions.getAction(Cmd::KillBackgroundThread);
+                    if (action)
                     {
-                        showDockedWidget(mBackgroundTextView.data());
+                        action->setEnabled(true);
+                        QVariantMap workmap;
+                        workmap.insert(Worker::repository, repository);
+                        workmap.insert(Worker::command_id, mActions.findID(action));
+                        workmap.insert(Worker::command, git_command);
+                        workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
+                        workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
+                        workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
+                        mWorker.doWork(QVariant(workmap));
+                        action->setToolTip(mWorker.getBatchToolTip());
+                        if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
+                        {
+                            showDockedWidget(mBackgroundTextView.data());
+                        }
                     }
                 }
                 else
@@ -1199,7 +1207,8 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
         if (cmd != git::Cmd::StashList)
         {
             ui->treeStash->clear();
-            mActions.getAction(git::Cmd::StashList)->trigger();
+            auto *action = mActions.getAction(git::Cmd::StashList);
+            if (action) action->trigger();
         }
         break;
     }

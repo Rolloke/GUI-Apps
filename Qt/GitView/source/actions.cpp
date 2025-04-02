@@ -278,7 +278,7 @@ void ActionList::enableItemsByType(const git::Cmd::tVector& items, const git::Ty
                     }
                 }
             }
-            auto action = getAction(cmd);
+            auto* action = getAction(cmd);
             if (action)
             {
                 action->setEnabled(enabled);
@@ -298,7 +298,7 @@ void ActionList::fillToolbar(QToolBar& tool_bar, const Cmd::tVector& items)
         }
         else
         {
-            auto * action = getAction(cmd);
+            auto* action = getAction(cmd);
             if (action)
             {
                 auto menu_list = getMenuStringList(cmd);
@@ -394,14 +394,17 @@ void ActionList::fillContextMenue(QMenu& menu, const Cmd::tVector& items, QWidge
         else if (cmd >= Cmd::Submenu)
         {
             auto* action = getAction(cmd);
-            sub_menu =  menu.addMenu(action->text());
+            if (action) sub_menu = menu.addMenu(action->text());
         }
         else
         {
             auto* action = getAction(cmd);
-            if (sub_menu) sub_menu->addAction(action);
-            else menu.addAction(action);
-            if (widget) widget->addAction(action);
+            if (action)
+            {
+                if (sub_menu) sub_menu->addAction(action);
+                else menu.addAction(action);
+                if (widget) widget->addAction(action);
+            }
         }
     }
 }
@@ -413,6 +416,7 @@ QAction* ActionList::getAction(Cmd::eCmd cmd) const
     {
         return item->second;
     }
+    TRACEX(static_cast<Logger::eSeverity>(Logger::warning|Logger::to_browser), "no action for command id " << cmd);
     return nullptr;
 }
 

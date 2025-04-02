@@ -90,7 +90,8 @@ void graphics_view::zoomOut()
 void graphics_view::on_customContextMenuRequested(const ActionList& aActionList, const QPoint &pos)
 {
     using namespace git;
-    aActionList.getAction(Cmd::FitInView)->setChecked(mFitInView);
+    auto* action = aActionList.getAction(Cmd::FitInView);
+    if (action) action->setChecked(mFitInView);
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuGraphicsView);
     menu.addAction(tr("Cancel"));
