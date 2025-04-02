@@ -1934,9 +1934,9 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
-    connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Merge Branch"), Cmd::getCommand(Cmd::MergeTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(merge_branch()));
-    mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
-    mActions.setFlags(Cmd::DiffOfTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::MergeTwoBranches, tr("Merge Branch"), Cmd::getCommand(Cmd::MergeTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(merge_branch()));
+    mActions.setFlags(Cmd::MergeTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
+    mActions.setFlags(Cmd::MergeTwoBranches, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::BranchShow, tr("Show Branch"), Cmd::getCommand(Cmd::BranchShow), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
     mActions.setFlags(Cmd::BranchShow, ActionList::Flags::NotVariableGitCmd, Flag::set);
