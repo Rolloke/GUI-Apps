@@ -157,6 +157,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::StashList]               = "text-x-log.png";
     action_icons[Cmd::Blame]                   = "emblem-urgent.png";
     action_icons[Cmd::Clone]                   = "icons8-clone-30.png";
+    action_icons[Cmd::MergeTwoBranches]        = "media-playlist-shuffle.png";
 
     action_icons[Cmd::BranchList]              = "open-menu.png";
     action_icons[Cmd::BranchListRemote]        = "open-menu.png";
@@ -416,7 +417,10 @@ QAction* ActionList::getAction(Cmd::eCmd cmd) const
     {
         return item->second;
     }
-    TRACEX(static_cast<Logger::eSeverity>(Logger::warning|Logger::to_browser), "no action for command id " << cmd);
+    if (!is_any_equal_to(cmd, Cmd::Submenu, Cmd::Separator))
+    {
+        TRACEX(static_cast<Logger::eSeverity>(Logger::warning|Logger::to_browser), "no action for command id " << cmd);
+    }
     return nullptr;
 }
 
