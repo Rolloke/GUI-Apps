@@ -63,12 +63,13 @@ Cmd::Cmd()
     mCommandMap[DiffOfTwoBranches]      = " ";
     mCommandMap[Blame]                  = "git blame -c %1 %2";
     mCommandMap[Clone]                  = "git clone -v %1";
+    mCommandMap[MergeTwoBranches]       = " ";
 
     mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, CompareTo, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
-    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
     mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator, CloseAll, SaveAll, ReplaceAll, SaveAs };

@@ -121,7 +121,7 @@ struct Cmd
         EditToggleVisible,
 
         /// hint: add non git commands before
-        LastNonGitCommand = EditTabOutdent,
+        LastNonGitCommand = EditToggleVisible,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,
