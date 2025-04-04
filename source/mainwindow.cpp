@@ -2153,6 +2153,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->comboWordWrap);
     create_auto_cmd(ui->ckCloseAllFilesOfRepository);
+    create_auto_cmd(ui->spinFontSize);
 
     if (Cmd::mContextMenuTextView.empty())
     {
@@ -2188,6 +2189,7 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
 
     QAbstractButton*      button   = dynamic_cast<QAbstractButton*>(widget);
     QComboBox*            combobox = dynamic_cast<QComboBox*>(widget);
+    QSpinBox*             spinbox  = dynamic_cast<QSpinBox*>(widget);
     QString               name     = button != 0 ? button->text() : "";
     QString               command  = widget != 0 ? widget->toolTip() : "";
     if (combobox)
@@ -2206,6 +2208,11 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
         {
             command = button->statusTip();
         }
+    }
+    if (spinbox)
+    {
+        name    = spinbox->toolTip() + tr(" up");
+        command = spinbox->statusTip();
     }
 
     QAction* action  = mActions.createAction(comand_id, name, command, widget);
@@ -2247,6 +2254,17 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
     if (combobox)
     {
         connect(action, SIGNAL(triggered()), this, SLOT(combo_triggered()));
+    }
+    if (spinbox)
+    {
+        connect(action, SIGNAL(triggered()), spinbox, SLOT(stepUp()));
+        /// NOTE: special for spin box are two actions
+        const auto comand_id2 = mActions.createNewID(Cmd::AutoCommand);
+        action  = mActions.createAction(comand_id2, spinbox->toolTip() + tr(" down"), command, widget);
+        mActions.setFlags(comand_id2, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+        mActions.setIconPath(comand_id2, ":/resource/24X24/window-close.png");
+        mActions.setFlags(comand_id2, ActionList::Flags::FunctionCmd);
+        connect(action, SIGNAL(triggered()), spinbox, SLOT(stepDown()));
     }
 
     return action;
@@ -2600,51 +2618,83 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
 void MainWindow::comboFindBoxIndexChanged(int index)
 {
     static QString oldFindAllToolTip;
+    static QString oldFindAllText;
+    static QMetaObject::Connection find_all_connected;
+    static QMetaObject::Connection find_next_connected;
+
     if (oldFindAllToolTip.isEmpty())
     {
         oldFindAllToolTip = ui->btnFindAll->toolTip();
     }
-    static QString oldFindAllText;
+
     if (oldFindAllText.isEmpty())
     {
         oldFindAllText = ui->btnFindAll->text();
     }
+
     enum eflag
     {
-       Next=1, Previous=2, AllExe=4, Replace=8
+       Next=1, Previous=2, All=4, Replace=8
     };
 
     FindView find = static_cast<FindView>(index);
     if (find == FindView::ExecuteCommand )
     {
         ui->btnFindAll->setText(tr("Execute"));
-        ui->edtFindText->setToolTip(tr("Insert git or bash command and hit \"Enter\" to execute"));
-        connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
+        ui->edtFindText->setToolTip(tr("Enter git or bash command and hit \"Return\" to execute"));
+        if (!find_all_connected)
+        {
+            find_all_connected = connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
+        }
+    }
+    else if (find == FindView::GoToLineInText )
+    {
+        ui->btnFindAll->setText(tr("Go"));
+        ui->edtFindText->setToolTip(tr("Enter line number and hit \"Return\" to go to line"));
+        if (!find_all_connected)
+        {
+            find_all_connected = connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
+        }
     }
     else
     {
+        if (find_all_connected)
+        {
+            disconnect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
+            find_all_connected = {};
+        }
+        if (!find_next_connected)
+        {
+            find_next_connected = connect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindNext, SLOT(click()));
+        }
         ui->edtFindText->setToolTip(oldFindAllToolTip);
         ui->btnFindAll->setText(oldFindAllText);
-        disconnect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindAll, SLOT(click()));
     }
+
+    if (ui->btnFindAll->text() != oldFindAllText && find_next_connected)
+    {
+        disconnect(ui->edtFindText, SIGNAL(returnPressed()), ui->btnFindNext, SLOT(click()));
+        find_next_connected = {};
+    }
+
 
     ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
     uint32_t flags = 0;
     switch(find)
     {
-    case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor"));                       flags = Next|Previous|AllExe|Replace; break;
-    case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor"));                   flags = Next; break;
+    case FindView::Text:                ui->statusBar->showMessage(tr("Search in Text Editor"));                       flags = Next|Previous|All|Replace; break;
+    case FindView::GoToLineInText:      ui->statusBar->showMessage(tr("Go to line in Text Editor"));                   flags = All; break;
     case FindView::FindTextInFilesView: ui->statusBar->showMessage(tr("Search for text in find results"));             flags = Next|Previous;  break;
-    case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View"));  flags = Next|Previous|AllExe; break;
+    case FindView::Source:              ui->statusBar->showMessage(tr("Search files or folders in Repository View"));  flags = Next|Previous|All; break;
     case FindView::History:             ui->statusBar->showMessage(tr("Search item in History View"));                 flags = Next|Previous; break;
     case FindView::Branch:              ui->statusBar->showMessage(tr("Search item in Branch View"));                  flags = Next|Previous; break;
     case FindView::Stash:               ui->statusBar->showMessage(tr("Search in Stash View"));                        flags = Next|Previous; break;
-    case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); flags = AllExe; break;
+    case FindView::ExecuteCommand:      ui->statusBar->showMessage(tr("Execute git command for selected Repository")); flags = All; break;
     }
 
     set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? true : false);
     set_widget_and_action_enabled(ui->btnFindPrevious, flags & Previous ? true : false);
-    set_widget_and_action_enabled(ui->btnFindAll,      flags & AllExe   ? true : false);
+    set_widget_and_action_enabled(ui->btnFindAll,      flags & All      ? true : false);
     set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? true : false);
 }
 
@@ -2745,6 +2795,14 @@ void MainWindow::on_btnFindAll_clicked()
     {
         find_function(find::all);
     }
+    else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+        if (text_browser)
+        {
+            text_browser->go_to_line(ui->edtFindText->text().toInt());
+        }
+    }
     else
     {
         QAction* action = mActions.getAction(Cmd::CustomTestCommand);
@@ -2775,14 +2833,6 @@ void MainWindow::find_function(find find_item)
         else
         {
             find_in_text_view(find_item);
-        }
-    }
-    else if (ui->comboFindBox->currentIndex() == static_cast<int>(FindView::GoToLineInText))
-    {
-        code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
-        if (text_browser)
-        {
-            text_browser->go_to_line(ui->edtFindText->text().toInt());
         }
     }
     else

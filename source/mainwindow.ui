@@ -1104,6 +1104,12 @@ Git or command results are always displayed in main editor.
         </item>
         <item>
          <widget class="QSpinBox" name="spinFontSize">
+          <property name="toolTip">
+           <string>Font size</string>
+          </property>
+          <property name="statusTip">
+           <string>Changes font size of all editors</string>
+          </property>
           <property name="minimum">
            <number>2</number>
           </property>
