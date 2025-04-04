@@ -48,9 +48,10 @@ namespace
     }
 }
 
-const QString qbinarytableview::begin_mark = "{";
-const QString qbinarytableview::end_mark   = "}";
-const QString qbinarytableview::space      = " ";
+const QString qbinarytableview::begin_mark  = "{";
+const QString qbinarytableview::end_mark    = "}";
+const QString qbinarytableview::space       = " ";
+const char    qbinarytableview::unprintable = '.';
 
 const QList<QStringList> qbinarytableview::m_section_names =
 {
@@ -1186,12 +1187,12 @@ QVariant BinaryTableModel::get_character_content(int row) const
     for (int i=start; i< end; ++i)
     {
         const std::uint8_t byte = m_binary_content[i];
-        const char character = (byte >= 32 && byte <= 127) ? byte : '.';
+        const char character = (byte >= 32 && byte <= 127) ? byte : qbinarytableview::unprintable;
         if (i == m_byte_cursor)
         {
-            ascii_coded_line.append('[');
+            ascii_coded_line.append(qbinarytableview::begin_mark);
             ascii_coded_line.append(character);
-            ascii_coded_line.append(']');
+            ascii_coded_line.append(qbinarytableview::end_mark);
         }
         else
         {

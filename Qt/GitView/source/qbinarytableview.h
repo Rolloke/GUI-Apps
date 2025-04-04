@@ -84,6 +84,7 @@ public:
     static const QString begin_mark;
     static const QString end_mark;
     static const QString space;
+    static const char    unprintable;
     static const QList<QStringList> m_section_names;
 
 private:
