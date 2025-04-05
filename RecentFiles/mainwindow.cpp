@@ -19,7 +19,7 @@ QString toDate(const QString &aDate);
 
 enum eTable
 {
-    eFile, ePath, eExtension, eAdded, eModified, eVisited, eLast
+    eFile, ePath, eExtension, eAdded, eModified, eVisited, eID, eLast
 };
 
 static const QString gRecentFilePath("/.local/share/recently-used.xbel");
@@ -33,18 +33,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QFile file(QDir::homePath() + gRecentFilePath);
 
-    bool fResult = false;
+    bool result = false;
     if (file.open(QIODevice::ReadOnly))
     {
-        fResult = mDoc.setContent(&file);
+        result = mDoc.setContent(&file);
         file.close();
     }
-    QStringList fSectionNames = { tr("File"), tr("Path"), tr("Type"), tr("added"), tr("modified"), tr("visited")};
+    QStringList section_names = { tr("File"), tr("Path"), tr("Type"), tr("added"), tr("modified"), tr("visited"), tr("ID")};
     mListModel = new QStandardItemModel(0, eLast, this);
-    for (int fSection = 0; fSection<eLast; ++fSection)
+    for (int fSection = 0; fSection < eLast; ++fSection)
     {
-        mListModel->setHeaderData(fSection, Qt::Horizontal, fSectionNames[fSection]);
-        ui->comboBoxSearchColumn->addItem(fSectionNames[fSection], fSection);
+        mListModel->setHeaderData(fSection, Qt::Horizontal, section_names[fSection]);
+        ui->comboBoxSearchColumn->addItem(section_names[fSection], fSection);
     }
     ui->comboBoxSearchColumn->setCurrentIndex(ePath);
     ui->tableView->setModel(mListModel);
@@ -62,32 +62,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->horizontalHeader()->setStretchLastSection(false);
 
     int some_files_do_not_exist = 0;
-    if (fResult)
+    if (result)
     {
-        int fRow = 0;
-        QDomNode fNode = mDoc.firstChild();
-        for (; !fNode.isNull(); fNode = fNode.nextSibling())
+        int row = 0;
+        QDomNode node = mDoc.firstChild();
+        for (; !node.isNull(); node = node.nextSibling())
         {
-            QDomNode fElement = findElement(fNode, "bookmark");
-            for (; !fElement.isNull(); fElement = fElement.nextSibling())
+            QDomNode element = findElement(node, "bookmark");
+            for (; !element.isNull(); element = element.nextSibling())
             {
-                std::vector<std::string> fFile = SplitPath(fElement.attributes().namedItem("href").nodeValue().toStdString());
-                QFileInfo info((fFile[ePath] + "/" + fFile[eFile]).c_str());
-                mListModel->insertRows(fRow, 1, QModelIndex());
-                mListModel->setData(mListModel->index(fRow, eFile, QModelIndex()), QString(fFile[eFile].c_str()));
-                mListModel->setData(mListModel->index(fRow, ePath, QModelIndex()), QString(fFile[ePath].c_str()));
-                mListModel->setData(mListModel->index(fRow, eExtension, QModelIndex()), QString(fFile[eExtension].c_str()));
-                mListModel->setData(mListModel->index(fRow, eAdded, QModelIndex()), toDate(fElement.attributes().namedItem("added").nodeValue()));
-                mListModel->setData(mListModel->index(fRow, eModified, QModelIndex()), toDate(fElement.attributes().namedItem("modified").nodeValue()));
-                mListModel->setData(mListModel->index(fRow, eVisited, QModelIndex()), toDate(fElement.attributes().namedItem("visited").nodeValue()));
-                mListModel->setData(mListModel->index(fRow, eLast, QModelIndex()), fElement.attributes().namedItem("href").nodeValue());
-                fElement.setNodeValue(QString::number(fRow));
+                std::vector<std::string> file_parts = SplitPath(element.attributes().namedItem("href").nodeValue().toStdString());
+                QFileInfo info((file_parts[ePath] + "/" + file_parts[eFile]).c_str());
+                mListModel->insertRows(row, 1, QModelIndex());
+                mListModel->setData(mListModel->index(row, eFile     ), QString(file_parts[eFile].c_str()));
+                mListModel->setData(mListModel->index(row, ePath     ), QString(file_parts[ePath].c_str()));
+                mListModel->setData(mListModel->index(row, eExtension), QString(file_parts[eExtension].c_str()));
+                mListModel->setData(mListModel->index(row, eAdded    ), toDate(element.attributes().namedItem("added").nodeValue()));
+                mListModel->setData(mListModel->index(row, eModified ), toDate(element.attributes().namedItem("modified").nodeValue()));
+                mListModel->setData(mListModel->index(row, eVisited  ), toDate(element.attributes().namedItem("visited").nodeValue()));
+                mListModel->setData(mListModel->index(row, eID       ), QVariant(row));
+                mListModel->setData(mListModel->index(row, eLast     ), element.attributes().namedItem("href").nodeValue());
+                element.setNodeValue(QString::number(row));
                 if (!info.exists())
                 {
-                    ui->tableView->selectionModel()->select(mListModel->index(fRow, eFile), QItemSelectionModel::Select);
+                    ui->tableView->selectionModel()->select(mListModel->index(row, eFile), QItemSelectionModel::Select);
                     ++some_files_do_not_exist;
                 }
-                ++fRow;
+                ++row;
             }
         }
     }
@@ -219,43 +220,45 @@ void MainWindow::on_pushButtonSave_clicked()
 
 void MainWindow::on_pushButtonDeleteSelected_clicked()
 {
-    QDomNode fElement;
-    QDomNode fNode = mDoc.firstChild();
-    for (; !fNode.isNull(); fNode = fNode.nextSibling())
+    QDomNode element;
+    QDomNode node = mDoc.firstChild();
+    for (; !node.isNull(); node = node.nextSibling())
     {
-        fElement = findElement(fNode, "bookmark");
-        if (!fElement.isNull())
+        element = findElement(node, "bookmark");
+        if (!element.isNull())
         {
             break;
         }
     }
-    std::vector<QDomNode> fNodelist;
-    std::vector<int>      fRowlist;
-    int fRow = 0;
+    std::vector<QDomNode> node_list;
+    std::vector<int>      row_list;
+    int row = 0;
     QModelIndexList indexes = ui->tableView->selectionModel()->selection().indexes();
     do
     {
-        fRow = fElement.nodeValue().toInt();
+        row = element.nodeValue().toInt();
         for (auto index : indexes)
         {
-            if (index.row() == fRow)
+            auto data = mListModel->data(mListModel->index(index.row(), static_cast<int>(eID)));
+            if (data.isValid() && data.toInt() == row)
             {
-                fNodelist.push_back(fElement);
-                fRowlist.push_back(fRow);
+                node_list.push_back(element);
+                row_list.push_back(index.row());
                 break;
             }
         }
+        if (indexes.size() == static_cast<int>(row_list.size())) break;
     }
-    while (!(fElement = fElement.nextSibling()).isNull());
+    while (!(element = element.nextSibling()).isNull());
 
     ui->tableView->clearSelection();
 
-    for (const auto& item : fNodelist)
+    for (const auto& item : node_list)
     {
         item.parentNode().removeChild(item);
     }
 
-    for (auto row = fRowlist.rbegin(); row != fRowlist.rend(); ++row)
+    for (auto row = row_list.rbegin(); row != row_list.rend(); ++row)
     {
         mListModel->removeRow(*row);
     }
