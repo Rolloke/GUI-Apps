@@ -2155,6 +2155,13 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->ckCloseAllFilesOfRepository);
     create_auto_cmd(ui->spinFontSize);
 
+    create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
+    mActions.getAction(new_id)->setToolTip(tr("Go to Line"));
+
+    create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
+    mActions.getAction(new_id)->setToolTip(tr("Execute"));
+
+
     if (Cmd::mContextMenuTextView.empty())
     {
         Cmd::mContextMenuTextView = contextmenu_text_view;
@@ -2702,11 +2709,19 @@ void MainWindow::combo_triggered()
 {
     const QAction* action = qobject_cast<QAction *>(sender());
     const auto combofind_actions = ui->comboFindBox->actions();
-    if (combofind_actions.size() && combofind_actions.first() == action)
+    if (combofind_actions.size() && combofind_actions.contains(action))
     {
         code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
-        FindView index = FindView::GoToLineInText;
-        if      (text_browser && text_browser->hasFocus()) index = FindView::Text;
+        FindView index = FindView::ExecuteCommand;
+        if      (text_browser && text_browser->hasFocus())
+        {
+            switch(combofind_actions.indexOf(action))
+            {
+            case 0: index = FindView::Text; break;
+            case 1: index = FindView::GoToLineInText; break;
+            case 2: index = FindView::ExecuteCommand; break;
+            }
+        }
         else if (ui->treeHistory->hasFocus())  index = FindView::History;
         else if (ui->treeBranches->hasFocus()) index = FindView::Branch;
         else if (ui->treeStash->hasFocus())    index = FindView::Stash;
@@ -2752,8 +2767,9 @@ void MainWindow::combo_triggered()
             ui->edtFindText->setFocus();
         }
     }
-    const auto combofind_show_items = ui->comboShowItems->actions();
-    if (combofind_show_items.size() && combofind_show_items.first() == action)
+
+    const auto combo_show_items_actions = ui->comboShowItems->actions();
+    if (combo_show_items_actions.size() && combo_show_items_actions.first() == action)
     {
         auto index = ui->comboShowItems->currentIndex();
         if (index < ui->comboShowItems->count()-1)
