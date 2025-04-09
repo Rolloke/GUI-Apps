@@ -32,6 +32,7 @@ struct History
     {
         CommitDate,
         Description,
+        CommitHash,
         Author,
         Commit,
         Filename = CommitDate
