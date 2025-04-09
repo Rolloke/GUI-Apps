@@ -516,8 +516,10 @@ Shows git history of files or folders
 &lt;li&gt;If root folder is selected, for all sub items files are inserted&lt;/li&gt;
 &lt;/ul&gt;
 &lt;li&gt;Click on &lt;b&gt;History&lt;/b&gt; column item to see commit informations&lt;/li&gt;
-&lt;li&gt;Click on &lt;b&gt;Description&lt;/b&gt; column item to see difference for all files within this commit&lt;/li&gt;
-&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;li&gt;Click on &lt;b&gt;Description&lt;/b&gt; column item to see a compact summary and file list&lt;/li&gt;
+&lt;li&gt;Click on &lt;b&gt;Commit Hash&lt;/b&gt; column item to see difference for all files within this commit&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;br&gt;Click on first row in root entry to select authors&lt;/li&gt;
+&lt;li&gt;Find uses the selected column for text search&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -535,6 +537,11 @@ Shows git history of files or folders
               <column>
                <property name="text">
                 <string>Description</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Commit Hash</string>
                </property>
               </column>
               <column>
