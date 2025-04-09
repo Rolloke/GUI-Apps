@@ -25,7 +25,9 @@ void QHistoryTreeWidget::initialize()
 {
     if (!mInitialized)
     {
-        header()->setSectionResizeMode(History::Column::CommitDate, QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(History::Column::CommitDate , QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(History::Column::CommitHash , QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(History::Column::Author     , QHeaderView::ResizeToContents);
         header()->setSectionResizeMode(History::Column::Description, QHeaderView::Stretch);
         header()->setStretchLastSection(false);
         mInitialized = true;
@@ -64,9 +66,10 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
         {
             QTreeWidgetItem* fNewHistoryLogItem = new QTreeWidgetItem();
             topLevelItem(fTLI)->addChild(fNewHistoryLogItem);
-            fNewHistoryLogItem->setText(History::Column::CommitDate, fItem[History::Entry::CommitterDate]);
+            fNewHistoryLogItem->setText(History::Column::CommitDate , fItem[History::Entry::CommitterDate]);
             fNewHistoryLogItem->setText(History::Column::Description, fItem[History::Entry::SubjectAndBody].split("\n")[0]);
-            fNewHistoryLogItem->setText(History::Column::Author, fItem[History::Entry::Author]);
+            fNewHistoryLogItem->setText(History::Column::CommitHash , fItem[History::Entry::CommitHash]);
+            fNewHistoryLogItem->setText(History::Column::Author     , fItem[History::Entry::Author]);
             fAuthors[fItem[History::Entry::Author]] = true;
             for (int fRole=0; fRole < History::Entry::NoOfEntries; ++fRole)
             {
@@ -290,7 +293,10 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
     int fLevel = getItemLevel(aItem);
     if (fLevel == Level::Log)
     {
-        if (aColumn == History::Column::CommitDate)
+        switch (aColumn)
+        {
+        case History::Column::CommitDate:
+        case History::Column::Author:
         {
             for (int fRole=History::Entry::CommitHash; fRole < History::Entry::NoOfEntries; ++fRole)
             {
@@ -305,10 +311,12 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
                 fText.append(tr("Files: %1").arg(fNoOfFiles.toInt()));
                 fText.append(getLineFeed());
             }
-        }
-        else
+        } break;
+        case History::Column::CommitHash:
+        case History::Column::Description:
         {
             QString fGitCmd = "git show ";
+            if (aColumn == History::Column::Description) fGitCmd += "--compact-summary ";
             fGitCmd.append(aItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
             QString fResultStr;
             int fResult = execute(fGitCmd, fResultStr);
@@ -321,6 +329,7 @@ QString QHistoryTreeWidget::clickItem(QTreeWidgetItem *aItem, int aColumn )
                 fText.append(getLineFeed());
                 fText.append(tr("Result failure no: %1").arg(fResult));
             }
+        } break;
         }
     }
     return fText;
