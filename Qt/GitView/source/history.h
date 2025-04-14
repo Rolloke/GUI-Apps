@@ -31,6 +31,7 @@ struct History
     struct Column { enum e
     {
         CommitDate,
+        CommitGraph,
         Description,
         CommitHash,
         Author,
@@ -58,9 +59,15 @@ struct History
         CommitterDate,
         NoOfEntries,
         ContextMenuItem=NoOfEntries,
-        NoOfFiles,
-        Type,
-        GitDiffCommand
+        /// NOTE: addition parameters
+        NoOfFiles,      // number of files in commit
+        Type,           // git type information
+        GitDiffCommand, // the git diff command for this history
+        /// NOTE: parameters for drawing a graph
+        ListIndex = CommitHash,
+        Parent1   = TreeHash,
+        Parent2   = ParentHash,
+        DrawItems = SubjectAndBody
     }; };
 
     struct Diff { enum e

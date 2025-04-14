@@ -121,7 +121,7 @@ class ColorSelector
 {
 public:
     ColorSelector(Qt::GlobalColor first_color = Qt::red);
-    QColor get_color_and_increment();
+    QColor get_color_and_increment(ulong *color_enum=nullptr);
     void   unapply_color(Qt::GlobalColor not_wanted);
 
     static void   set_dark_mode(bool dark);
@@ -150,7 +150,7 @@ protected:
 
 };
 
-#if 0
+#if 1
 /// \brief variadic count_equal
 /// \param a comparison parameter
 /// \param b variadic parameter(s)

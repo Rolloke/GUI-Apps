@@ -18,13 +18,9 @@
 #include <QStringConverter>
 #endif
 
-#define TEST_DELEGATE 1
 
 class BinaryTableModel;
-
-#if TEST_DELEGATE
 class QReadonlyEditItemDelegate;
-#endif
 
 class qbinarytableview : public QTableView, public Editable
 {
@@ -90,9 +86,7 @@ public:
 private:
     std::vector<double> mColumnWidth;
 
-#if TEST_DELEGATE
     QReadonlyEditItemDelegate* m_item_delegate;
-#endif
 };
 
 
@@ -187,7 +181,6 @@ private:
     std::pair<int,int>              m_value_index;
 };
 
-#if TEST_DELEGATE
 class QReadonlyEditItemDelegate : public QItemDelegate
 {
     Q_OBJECT
@@ -207,6 +200,5 @@ signals:
 
 private:
 };
-#endif
 
 #endif // QBINARYTABLEVIEW_H
