@@ -34,8 +34,6 @@ void QHistoryTreeWidget::initialize()
         header()->setSectionResizeMode(History::Column::Description, QHeaderView::Stretch);
         header()->setStretchLastSection(false);
 
-//        header()->setSectionHidden(History::Column::CommitHash, true);
-
         m_item_delegate = new QDrawGraphItemDelegate(this);
         setItemDelegate(m_item_delegate);
 
@@ -82,26 +80,13 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
                 fNewHistoryLogItem->setData(History::Column::Commit, History::role(static_cast<History::Entry::e>(fRole)), QVariant(fItem[fRole]));
             }
             fNewHistoryLogItem->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(aType));
-#if 0
-            int parent1;
-            int parent2;
-            entries.find_connected_to(list_index, parent1, parent2);
-            fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::ListIndex), QVariant(list_index));
-            fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::Parent1), QVariant(parent1));
-            if (parent2 != -1)
-            {
-                fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::Parent2)+1, QVariant(parent2));
-            }
 
-            std::cout << "Date" << fItem[History::Entry::CommitterDate] << ",\t" << parent1 << ", " << parent2 << ", " << list_index << std::endl;
-            /// TODO: set draw hints, if parents and index are greater than 2 and iterate thruog siblings to mark them
-#else
             auto draw_items = entries.get_connection_part(list_index);
             if (draw_items.size())
             {
                 fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::DrawItems), QVariant(draw_items));
             }
-#endif
+
             if (mShowHistoryGraphically)
             {
                 Q_EMIT send_history(fItem);
@@ -574,9 +559,6 @@ void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 {
     if (index.column() == History::Column::CommitGraph)
     {
-#if 0
-        QItemDelegate::paint(painter, option, index)
-#else
         /// NOTE: clear background
         QBrush brush = option.backgroundBrush;
         painter->setBrush(brush);
@@ -593,11 +575,12 @@ void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
             {
                 HistoryEntries::ConnectionUnion cu;
                 cu.connection_id = draw_item.toUInt();
-                QColor pen_color(static_cast<Qt::GlobalColor>(cu.connection.color));
 
+                QColor pen_color(static_cast<Qt::GlobalColor>(cu.connection.color));
                 QPen pen(pen_color);
                 pen.setWidth(m_pen_width);
                 painter->setPen(pen);
+
                 switch (cu.connection.type)
                 {
                 case HistoryEntries::Connection::start:
@@ -607,12 +590,11 @@ void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
                     drawLine(*painter, rect, cu.connection.level1, cu.connection.level2);
                     break;
                 case HistoryEntries::Connection::end:
-                    drawEnd(*painter, rect, cu.connection.level2);
+                    drawEnd(*painter, rect, cu.connection.level1);
                     break;
                 }
             }
         }
-#endif
     }
     else
     {
@@ -626,9 +608,13 @@ void QDrawGraphItemDelegate::drawStart(QPainter &painter, const QRect& rc, int l
     qreal p1y = rc.center().y();
     qreal p2x = getLevelPosition(rc, level);
     qreal p2y = rc.top();
-    qreal cpx = p2x;
-    qreal cpy = p1y;
+#if 1
+    qreal cpx = p2x + (p1x - p2x) * 0.25;
+    qreal cpy = p1y + (p2y - p1y) * 0.25;
     drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
+#else
+    painter.drawLine(p1x, p1y, p2x, p2y);
+#endif
 }
 
 void QDrawGraphItemDelegate::drawEnd(QPainter &painter, const QRect &rc, int level) const
@@ -637,9 +623,13 @@ void QDrawGraphItemDelegate::drawEnd(QPainter &painter, const QRect &rc, int lev
     qreal p1y = rc.bottom();
     qreal p2x = getLevelPosition(rc, 0);
     qreal p2y = rc.center().y();
-    qreal cpx = p1x;
-    qreal cpy = p2y;
+#if 1
+    qreal cpx = p1x + (p2x - p1x) * 0.25;
+    qreal cpy = p2y + (p1y - p2y) * 0.25;
     drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
+#else
+    painter.drawLine(p1x, p1y, p2x, p2y);
+#endif
 }
 
 void QDrawGraphItemDelegate::drawLine(QPainter &painter, const QRect& rc, int level1, int level2) const
@@ -674,6 +664,7 @@ void QDrawGraphItemDelegate::drawBezier(QPainter& painter, qreal p1x, qreal p1y,
 
 HistoryEntries::HistoryEntries(const QVector<QStringList> &items) : m_items(items)
 {
+    m_color.unapply_color(Qt::yellow);
     determine_parents();
     determine_connections();
 }
@@ -724,20 +715,47 @@ void HistoryEntries::determine_connections()
             create_connection(parent2, index);
         }
     }
+
+    /// reduce level at double connections
+    for (auto connection = m_item_connections.begin(); connection != m_item_connections.end(); ++connection)
+    {
+        auto& connection_vector = connection.value();
+        if (connection_vector.size() > 1 && reinterpret_cast<Connection*>(&connection_vector[0])->type == Connection::start)
+        {
+            auto pt00 = reinterpret_cast<ConnectionUnion*>(&connection_vector[0]);
+            auto pt01 = reinterpret_cast<ConnectionUnion*>(&connection_vector[1]);
+            if (pt00->connection.type == Connection::start && pt01->connection.type == Connection::end)
+            {
+                pt01->connection.level1--;
+                for (int i=2; i < connection_vector.size(); ++i)
+                {
+                    auto pt10 = reinterpret_cast<ConnectionUnion*>(&connection_vector[i]);
+                    pt10->connection.level1--;
+                }
+
+                auto connection_p_1    = connection;
+                ++connection_p_1;
+                auto & connection_vector_p_1 = connection_p_1.value();
+                for (int i=0; i < connection_vector_p_1.size(); ++i)
+                {
+                    auto pt10 = reinterpret_cast<ConnectionUnion*>(&connection_vector_p_1[i]);
+                    pt10->connection.level2--;
+                }
+            }
+        }
+    }
 }
 
 void HistoryEntries::create_connection(int parent, int index)
 {
     ulong color_enum;
-    m_color.get_color_and_increment(&color_enum);
-
     ulong             last_item_level = 0;
     Connection::eType type            = Connection::start;
     int               item            = index;
-
-    /// TODO: more rules for same ends and starts
-    /// TODO: one later level down after end of lower level
     ConnectionUnion   con_unit;
+
+    m_color.get_color_and_increment(&color_enum);
+
     for (; item > parent; --item)
     {
         auto&   connection_vector = m_item_connections[item];
@@ -753,7 +771,8 @@ void HistoryEntries::create_connection(int parent, int index)
         con_unit.connection.type   = type;
         if (con_unit.connection.type == Connection::start)
         {
-            con_unit.connection.level2 = std::max(static_cast<quint32>(connection_vector.size() + 1), next_item_level);
+            con_unit.connection.level1 = 0;
+            con_unit.connection.level2 = std::max(static_cast<quint32>(connection_vector.size()), next_item_level);
         }
         else // Connection::line
         {
@@ -767,19 +786,8 @@ void HistoryEntries::create_connection(int parent, int index)
     }
     auto& connection_vector    = m_item_connections[item];
     con_unit.connection.level1 = last_item_level;
+    con_unit.connection.level2 = 0;
     con_unit.connection.type   = Connection::end;
     connection_vector.push_back(con_unit.connection_id);
-    // if (connection_vector.size() > 1 && reinterpret_cast<Connection*>(&connection_vector[0])->type == Connection::start)
-    // {
-    //     reinterpret_cast<Connection*>(&connection_vector[1])->level2--;
-    //     auto& previous_connection_vector    = m_item_connections[item - 1];
-    //     reinterpret_cast<Connection*>(&previous_connection_vector[0])->level1--;
-    // }
 }
 
-
-void HistoryEntries::find_connected_to(int index, int &index_parent1, int &index_parent2)
-{
-    index_parent1 = m_parent1.value(m_items[index][History::Entry::CommitHash], -1);
-    index_parent2 = m_parent2.value(m_items[index][History::Entry::CommitHash], -1);
-}

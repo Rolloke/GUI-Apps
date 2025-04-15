@@ -85,13 +85,12 @@ private:
     void determine_parents();
     void determine_connections();
     void create_connection(int parent, int index);
-    void find_connected_to(int index, int& index_parent1, int& index_parent2);
 
     const QVector<QStringList>& m_items;
     QMap<QString, int>          m_parent1;
     QMap<QString, int>          m_parent2;
     QMap<int, QVector<quint32>> m_item_connections;
-    int                         m_diff = 2;
+    int                         m_diff = 1;
     ColorSelector               m_color;
 };
 
