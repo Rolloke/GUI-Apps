@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>912</width>
+    <height>529</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Raspi Kodi Media List</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource/resource.qrc">
+    <normaloff>:/applications-multimedia.png</normaloff>:/applications-multimedia.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_top">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <widget class="QTableView" name="tableView">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
+          <item>
+           <widget class="QGraphicsView" name="graphicsView">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>1</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>300</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Logo</string>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="pushButtonStart">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Starts Media Stream</string>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonPause">
+              <property name="text">
+               <string>|| ||</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonPrevious">
+              <property name="text">
+               <string>|&lt;&lt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonNext">
+              <property name="text">
+               <string>&gt;&gt;|</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonStop">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Stops Media Stream</string>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Stop</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="sliderVolume">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Adjusts volume of Media Stream</string>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_bottom">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <widget class="QComboBox" name="comboBoxSearchColumn">
+          <property name="toolTip">
+           <string>Select column for search</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditSelection">
+          <property name="toolTip">
+           <string>Enter search text for selection</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonFind">
+          <property name="toolTip">
+           <string>Find by text search</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Find</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonSelect">
+          <property name="toolTip">
+           <string>Select by text search</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Select</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCaseSensitive">
+          <property name="toolTip">
+           <string>Select or find case sensitive</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Case</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxSelectAll">
+          <property name="toolTip">
+           <string>Check or uncheck all in list</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>All</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelLinkToKodinerd">
+          <property name="toolTip">
+           <string>Open github page &lt;b&gt;Kodinerds&lt;/b&gt; to find raw url to download raw m3u-file for radio or tv station lists</string>
+          </property>
+          <property name="text">
+           <string>&lt;p&gt; Open &lt;a href=&quot;https://github.com/jnk22/kodinerds-iptv/tree/master/iptv/kodi&quot;&gt;Kodinerds &lt;/a&gt;&lt;/p&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>912</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_Kodi_raw_list"/>
+    <addaction name="actionOpen_Folder"/>
+    <addaction name="actionDownload_Kodi_Raw_list"/>
+    <addaction name="actionDownload_favorites"/>
+    <addaction name="actionRead_favorites"/>
+    <addaction name="actionSave_as_favorites"/>
+    <addaction name="actionUpload_favorites"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionInfo"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCopy_URL"/>
+    <addaction name="actionCopy_Thumb"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_Mediaplayer"/>
+   </widget>
+   <widget class="QMenu" name="menuOption">
+    <property name="title">
+     <string>Option</string>
+    </property>
+    <addaction name="actionMedia_player"/>
+    <addaction name="actionOpenMediaPlayerOnDoubleclick"/>
+    <addaction name="actionLoadLastOpenedFileAtStart"/>
+    <addaction name="actionShowTrayIconAndInfo"/>
+    <addaction name="separator"/>
+    <addaction name="actionRepeat_Playlist"/>
+    <addaction name="actionShuffle"/>
+    <addaction name="separator"/>
+    <addaction name="actionEdit_Upload_Command"/>
+    <addaction name="actionEdit_Download_Command"/>
+    <addaction name="actionEdit_Download_Path_for_m3u_Files"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuOption"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen_Kodi_raw_list">
+   <property name="text">
+    <string>Open Kodi raw list...</string>
+   </property>
+   <property name="statusTip">
+    <string>Open text list with kodi media sources</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave_as_favorites">
+   <property name="text">
+    <string>Save as Favorites</string>
+   </property>
+   <property name="statusTip">
+    <string>Store the lists checked items as favorites for Raspi Kodi</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionRead_favorites">
+   <property name="text">
+    <string>Read Favorites...</string>
+   </property>
+   <property name="toolTip">
+    <string>Update check states from favorites</string>
+   </property>
+   <property name="statusTip">
+    <string>Update check states from favorites</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About...</string>
+   </property>
+   <property name="statusTip">
+    <string>Show information about</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F1</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info...</string>
+   </property>
+   <property name="statusTip">
+    <string>Show information to selected item</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionCopy_URL">
+   <property name="text">
+    <string>Copy URL</string>
+   </property>
+   <property name="statusTip">
+    <string>Copy URL path to clipboard</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionCopy_Thumb">
+   <property name="text">
+    <string>Copy Thumb</string>
+   </property>
+   <property name="statusTip">
+    <string>Copy Thump path to clipboard</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+C</string>
+   </property>
+  </action>
+  <action name="actionMedia_player">
+   <property name="text">
+    <string>Media player...</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit path to media player command</string>
+   </property>
+  </action>
+  <action name="actionOpen_Mediaplayer">
+   <property name="text">
+    <string>Open Mediaplayer</string>
+   </property>
+   <property name="statusTip">
+    <string>Open Media Player</string>
+   </property>
+  </action>
+  <action name="actionOpenMediaPlayerOnDoubleclick">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Open media player</string>
+   </property>
+   <property name="iconText">
+    <string>Open media player</string>
+   </property>
+   <property name="toolTip">
+    <string>Open median player with start button or doubleclick</string>
+   </property>
+   <property name="statusTip">
+    <string>Open median player with start button or doubleclick</string>
+   </property>
+  </action>
+  <action name="actionLoadLastOpenedFileAtStart">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Load last opened file at start</string>
+   </property>
+   <property name="statusTip">
+    <string>Open current loaded kodi media list at program start</string>
+   </property>
+  </action>
+  <action name="actionEdit_Upload_Command">
+   <property name="text">
+    <string>Edit Upload Favorites Command...</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit the command to upload favorites to Raspi Kodi</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit the command to upload favorites to Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionEdit_Download_Command">
+   <property name="text">
+    <string>Edit Download Favorites Command...</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit the command to download favorites from Raspi Kodi</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit the command to download favorites from Raspi Kodi</string>
+   </property>
+  </action>
+  <action name="actionUpload_favorites">
+   <property name="text">
+    <string>Upload Favorites...</string>
+   </property>
+   <property name="statusTip">
+    <string>Upload favorites list to Raspi Kodi, specify command under options</string>
+   </property>
+  </action>
+  <action name="actionDownload_favorites">
+   <property name="text">
+    <string>Download Favorites...</string>
+   </property>
+   <property name="statusTip">
+    <string>Download favorites from Raspi Kodi, specify command under options</string>
+   </property>
+  </action>
+  <action name="actionShowTrayIconAndInfo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Tray Icon and Info</string>
+   </property>
+   <property name="toolTip">
+    <string>Show tray icon and information about title in tray tooltip</string>
+   </property>
+   <property name="statusTip">
+    <string>Show tray icon and information about title in tray tooltip</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close Program</string>
+   </property>
+   <property name="statusTip">
+    <string>Close Program</string>
+   </property>
+  </action>
+  <action name="actionEdit_Download_Path_for_m3u_Files">
+   <property name="text">
+    <string>Edit Download Path for m3u Files ..</string>
+   </property>
+   <property name="statusTip">
+    <string>Edit the path to the m3u-file download location</string>
+   </property>
+  </action>
+  <action name="actionDownload_Kodi_Raw_list">
+   <property name="text">
+    <string>Download Kodi Raw list</string>
+   </property>
+   <property name="statusTip">
+    <string>Downloads Kodi Raw m3u file, specify path under options</string>
+   </property>
+  </action>
+  <action name="actionOpen_Folder">
+   <property name="text">
+    <string>Open Folder...</string>
+   </property>
+   <property name="statusTip">
+    <string>Open folder with media files</string>
+   </property>
+  </action>
+  <action name="actionRepeat_Playlist">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Repeat Playlist</string>
+   </property>
+  </action>
+  <action name="actionShuffle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Shuffle </string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resource/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

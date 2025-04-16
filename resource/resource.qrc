@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>applications-multimedia16.ico</file>
+        <file>video-x-generic.png</file>
+        <file>preferences-desktop-screensaver.png</file>
+        <file>applications-multimedia16.png</file>
+        <file>applications-multimedia.png</file>
+        <file>applications-multimedia.ico</file>
+    </qresource>
+</RCC>
