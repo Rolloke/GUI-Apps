@@ -1,0 +1,17 @@
+{
+    "file":{
+        "mime":"mymime",
+        "extension":"*",
+        "endian": "*"
+    },
+    "content":[
+        {"strings" : "uint32"},
+        ["string", "String", "strings"]
+    ],
+    "structs":{
+         "String": [
+              ["length", "uint32" ],
+              ["text", "string", "length"]
+    ]
+    }
+}

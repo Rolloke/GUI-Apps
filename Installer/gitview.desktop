@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=GitView
+Comment=git-repository viewer
+Exec=/opt/tools/git_view/GitView
+Terminal=false
+Type=Application
+Icon=/opt/tools/git_view/logo@2x.png
+Categories=IDE;Development  
+StartupWMClass=GitView (1.2.0.1)
+MimeType=text
+Keywords=git  

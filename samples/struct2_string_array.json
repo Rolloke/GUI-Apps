@@ -1,0 +1,33 @@
+{
+    "file":{
+        "mime":"mymime",
+        "extension":"*",
+        "endian": "*"
+    },
+    "content":[
+        {"the content" : "Content"}
+    ],
+    "structs":{
+        "String": [
+            ["length", "uint32" ],
+            ["text", "string", "length"]
+        ],
+        "StringList": [
+            {"strings" : "uint32"},
+            ["string", "String", "strings"]
+        ],
+        "Content": [
+            {"strings" : "uint32"},
+            {"String1": "String"},
+            {"String2": "String"},
+            {"String3": "String"},
+            {"String4": "String"},
+            {"String5": "String"},
+            {"String6": "String"},
+            {"String7": "String"},
+            {"String8": "String"},
+            {"String9": "String"},
+            {"String10": "String"}
+        ]
+    }
+}

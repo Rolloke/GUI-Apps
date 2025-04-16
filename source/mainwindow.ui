@@ -1,0 +1,1446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Git View</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="Git" resource="resource.qrc">
+    <normaloff>:/resource/logo@2x.ico</normaloff>:/resource/logo@2x.ico</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>98</width>
+    <height>92</height>
+   </size>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>905</width>
+     <height>455</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="topLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutTool">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayoutForTreeView">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutForTreeViewHead">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="comboShowItems">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Show files depending on git status</string>
+            </property>
+            <property name="statusTip">
+             <string>Show files depending on git status</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Show all files</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show all git actions</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show modified</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show added</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show deleted</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show untracked</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show staged</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show unmerged</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show selected</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Show stashed</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_space1">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="ckHideEmptyParent">
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Hides parent tree item, if it does not contain entries</string>
+            </property>
+            <property name="text">
+             <string>Hide empty Parent  </string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="ckShortState">
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Show short git status</string>
+            </property>
+            <property name="text">
+             <string>Short State  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelDiffTool">
+            <property name="text">
+             <string>Diff tool:  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboDiffTool">
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Select diff or merge tool</string>
+            </property>
+            <property name="currentText">
+             <string>Default</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelOpenFile">
+            <property name="text">
+             <string> Open File: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboOpenFile">
+            <property name="toolTip">
+             <string>Select open file as text or binary</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Auto</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Text</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Binary</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QSourceTreeWidget" name="treeSource">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows file and folder tree of git repositories
+&lt;ul&gt;
+&lt;li&gt;Insert root git folder using &lt;b&gt;Add git source folder...&lt;/b&gt; &lt;img src=&quot;://resource/24X24/folder-open.png&quot; style=&quot;vertical-align:middle&quot;/&gt;&lt;/li&gt;
+&lt;li&gt;Clone root git folder using &lt;b&gt;Clone...&lt;/b&gt; &lt;img src=&quot;://resource/24X24/icons8-clone-30.png&quot; style=&quot;vertical-align:middle&quot;/&gt;&lt;/li&gt;
+&lt;li&gt;Remove root git folder using &lt;b&gt;Remove git source folder...&lt;/b&gt; &lt;img src=&quot;://resource/24X24/folder.png&quot; style=&quot;vertical-align:middle&quot;/&gt;&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Update git status&lt;/b&gt; renews all files and status&lt;img src=&quot;://resource/24X24/view-refresh.png&quot; style=&quot;vertical-align:middle&quot;/&gt;&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Show short status&lt;/b&gt; renews only status (F5)&lt;/li&gt;
+&lt;li&gt;Insert ignored files via context menue of the selected folder&lt;/li&gt;
+&lt;li&gt;Move git files or folders via drag and drop&lt;/li&gt;
+&lt;li&gt;Show only files with desired git status using combo box &lt;b&gt;Show all files&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Select first file (or folder) by right click, start &lt;b&gt;Compare to...&lt;/b&gt; and select second file to compare&lt;/li&gt;
+&lt;li&gt;Select file or folders and perform git actions&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::NoDragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::IgnoreAction</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="columnCount">
+           <number>4</number>
+          </property>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>State</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Size</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayoutForTextBrowser">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutForTextBrowserHead">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelHeader">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>File/Text:  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="labelFilePath">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnCloseText">
+            <property name="minimumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Close file or text view</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="resource.qrc">
+              <normaloff>:/resource/24X24/window-close.png</normaloff>:/resource/24X24/window-close.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnStoreText">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Save changes to file</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="resource.qrc">
+              <normaloff>:/resource/24X24/document-save.png</normaloff>:/resource/24X24/document-save.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelLanguage">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Shows language for hilighting</string>
+            </property>
+            <property name="text">
+             <string> L:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutHistoryAndText">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QHistoryTreeWidget" name="treeHistory">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows git history of files or folders
+&lt;ul&gt;
+&lt;li&gt;Insert all changed file names whith context menu entry&lt;/li&gt;
+&lt;ul &gt;
+&lt;li&gt;If one sub folder is selected, files are inserted regarding the difference to previous commit&lt;/li&gt;
+&lt;li&gt;If two sub folders are selected, files are inserted into a new subentry regarding the difference between the selected commits&lt;/li&gt;
+&lt;li&gt;If root folder is selected, for all sub items files are inserted&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li&gt;Click on &lt;b&gt;History&lt;/b&gt; column item to see commit informations&lt;/li&gt;
+&lt;li&gt;Click on &lt;b&gt;Description&lt;/b&gt; column item to see a compact summary and file list&lt;/li&gt;
+&lt;li&gt;Click on &lt;b&gt;Commit Hash&lt;/b&gt; column item to see difference for all files within this commit&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;br&gt;Click on first row in root entry to select authors&lt;/li&gt;
+&lt;li&gt;Find uses the selected column for text search&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>History</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Description</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Commit Hash</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Author</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QStashTreeWidget" name="treeStash">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows git stashed of files or folders
+&lt;ul&gt;
+&lt;li&gt;Click on &lt;b&gt;List Stashes&lt;/b&gt; to show stashes of repository&lt;img src=&quot;://resource/24X24/text-x-log.png&quot; style=&quot;vertical-align:middle&quot;/&gt;&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>Stash</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Description</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QBranchTreeWidget" name="treeBranches">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows git branches
+&lt;ul&gt;
+&lt;li&gt;Double click branch to checkout&lt;/li&gt;
+&lt;li&gt;Click &lt;b&gt;List Branches&lt;/b&gt; to show local branches of repository&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>Branch</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="treeFindText">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows found text items and according lines and files&lt;br&gt;
+Bookmarks are shown in the same way
+&lt;ul&gt;
+&lt;li&gt;Select &lt;b&gt;Text in Files below Folder&lt;/b&gt; in &lt;i&gt;Find in&lt;/i&gt; combo box&lt;/li&gt;
+&lt;li&gt;Enter search expression&lt;/li&gt;
+&lt;li&gt;Select folder to search in repository tree view&lt;/li&gt;
+&lt;li&gt;Click on All&lt;/li&gt;
+&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>File</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Line</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Found Text Line</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="code_browser" name="textBrowser">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows text of: 
+&lt;ul&gt;
+&lt;li&gt;git command results&lt;/li&gt;
+&lt;li&gt;file content opened with double click on file in repository tree&lt;/li&gt;
+&lt;li&gt;rendering of html can be enabled or disabled with &lt;b&gt;Render File&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+The command results and files may be shown in 3 modes
+&lt;ul&gt;
+&lt;li&gt;Command results and files in one editor&lt;/li&gt;
+&lt;li&gt;Command results in viewer and files in one additional editor&lt;/li&gt;
+&lt;li&gt;Command results in viewer and one additional editor per file (default)&lt;/li&gt;
+&lt;/ul&gt;
+The context menue allows:
+&lt;ul&gt;
+&lt;li&gt;to create bookmarks&lt;/li&gt;
+&lt;li&gt;to find and replace&lt;/li&gt;
+&lt;li&gt;show and hide line numbers&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Extra&lt;/b&gt; text operations&lt;/li&gt;
+&lt;li&gt;selection, copy and pase&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="undoRedoEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="graphics_view" name="graphicsView">
+              <property name="contextMenuPolicy">
+               <enum>Qt::CustomContextMenu</enum>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows graphics file content opened with double click
+&lt;ul&gt;
+&lt;li&gt;Right click shows context menu&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustIgnored</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="qbinarytableview" name="tableBinaryView">
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Shows binary file content opened with double click
+&lt;ul&gt;
+&lt;li&gt;Move byte wise with left or right cursor&lt;/li&gt;
+&lt;li&gt;Move row wise with up or down cursor&lt;/li&gt;
+&lt;li&gt;Select position with mouse cursor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhNone</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_Settings">
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelFileFlags">
+          <property name="text">
+           <string>File Flags:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckFiles">
+          <property name="toolTip">
+           <string>Show files in git folder</string>
+          </property>
+          <property name="text">
+           <string>Files</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckSystemFiles">
+          <property name="toolTip">
+           <string>Show system files in git folder</string>
+          </property>
+          <property name="text">
+           <string>System Files</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckHiddenFiles">
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Show hidden files in git folder</string>
+          </property>
+          <property name="text">
+           <string>Hidden Files</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckDirectories">
+          <property name="toolTip">
+           <string>Show folders in git folder</string>
+          </property>
+          <property name="text">
+           <string>Directories</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckSymbolicLinks">
+          <property name="toolTip">
+           <string>Show symbolic links in git folder</string>
+          </property>
+          <property name="text">
+           <string>Symbolic Links</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelView">
+          <property name="text">
+           <string>View</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboAppStyle">
+          <property name="toolTip">
+           <string>Select Visual Style</string>
+          </property>
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboUserStyle">
+          <property name="toolTip">
+           <string>Select User defines Styles for App</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No Style</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>User Style</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dark Palette</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Load Style...</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboToolBarStyle">
+          <property name="toolTip">
+           <string>Select Toolbar Style</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text beside Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Text under Icon</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Follow System</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Tabs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboTabPosition">
+          <property name="toolTip">
+           <string>Select position of view tabs</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Top</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bottom</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Left</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelEditor">
+          <property name="text">
+           <string>Editor / Viewer</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboTextCodex">
+          <property name="maximumSize">
+           <size>
+            <width>170</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Select code page for text file&lt;br&gt;
+Enter text to search</string>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboWordWrap">
+          <property name="toolTip">
+           <string>Select word wrap</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Word wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Manual wrap</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Wrap anywhere</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>At boundary or anywhere</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboOpenNewEditor">
+          <property name="toolTip">
+           <string>Open Editors (click What's this?)</string>
+          </property>
+          <property name="whatsThis">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+Select additional open Editors.&lt;br&gt;
+Git or command results are always displayed in main editor.
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;No additional Editor:&lt;/b&gt; File text is also displayed in main editor&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;One additional Editor:&lt;/b&gt;File text is displayed in a separate editor&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;One Editor per File:&lt;/b&gt;Every file is displayed in a separate editor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>No additional Editor</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>One additional Editor</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>One Editor per File</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelTabwidth">
+          <property name="text">
+           <string>Tabulator width</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinTabulator">
+          <property name="toolTip">
+           <string>Tabulator width in characters</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>30</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelFont">
+          <property name="text">
+           <string>Font parameter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboFontName">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>170</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Choose an equidistant font for the editor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinFontSize">
+          <property name="toolTip">
+           <string>Font size</string>
+          </property>
+          <property name="statusTip">
+           <string>Changes font size of all editors</string>
+          </property>
+          <property name="minimum">
+           <number>2</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckRenderGraphicFile">
+          <property name="toolTip">
+           <string>Render graphics or HTML file in Graphics View</string>
+          </property>
+          <property name="text">
+           <string>Render File</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckShowLineNumbers">
+          <property name="toolTip">
+           <string>Shows line numbers in text view</string>
+          </property>
+          <property name="text">
+           <string>Show line numbers</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelMisc">
+          <property name="text">
+           <string>Miscelaneous:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckTypeConverter">
+          <property name="toolTip">
+           <string>Display Type Converter</string>
+          </property>
+          <property name="text">
+           <string>Type Converter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckFastFileSearch">
+          <property name="toolTip">
+           <string>Use fast file search function (fsrc)</string>
+          </property>
+          <property name="text">
+           <string>Fast File Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckSearchResultsAsSearchTree">
+          <property name="toolTip">
+           <string>Store search results as a tree, not as single items</string>
+          </property>
+          <property name="text">
+           <string>Search Result as Tree</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckShowHistoryGraphically">
+          <property name="toolTip">
+           <string>Show history also in graphics view</string>
+          </property>
+          <property name="statusTip">
+           <string>Show history also in graphics view</string>
+          </property>
+          <property name="text">
+           <string>Show History graphically</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckExperimental">
+          <property name="toolTip">
+           <string>Experimental functions</string>
+          </property>
+          <property name="text">
+           <string>Experimental</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckAppendToBatch">
+          <property name="statusTip">
+           <string>Append background command to batch list, if busy</string>
+          </property>
+          <property name="text">
+           <string>Append to Batch</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckOutput2secondTextView">
+          <property name="statusTip">
+           <string>Show background command output in additional text view</string>
+          </property>
+          <property name="text">
+           <string>Additional Batch View</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ckCloseAllFilesOfRepository">
+          <property name="statusTip">
+           <string>If checked, all files of the removed repository are closed</string>
+          </property>
+          <property name="text">
+           <string>Close all Repository Files</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutFind">
+      <item>
+       <widget class="QLabel" name="label_find">
+        <property name="text">
+         <string>Find in </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboFindBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Find</string>
+        </property>
+        <property name="statusTip">
+         <string>Select View for search function</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindPrevious">
+        <property name="toolTip">
+         <string>Search backward</string>
+        </property>
+        <property name="text">
+         <string>Previous</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindNext">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Search forward</string>
+        </property>
+        <property name="text">
+         <string>Next</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtFindText">
+        <property name="toolTip">
+         <string>Enter search expression or words</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindAll">
+        <property name="toolTip">
+         <string>Search all occurrences of expression in all files of selected folder or in selected file</string>
+        </property>
+        <property name="text">
+         <string>All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFindReplace">
+        <property name="toolTip">
+         <string>Replace expression</string>
+        </property>
+        <property name="text">
+         <string>Replace</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtReplaceText">
+        <property name="toolTip">
+         <string>Enter replace text</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_space2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckFindCaseSensitive">
+        <property name="toolTip">
+         <string>Search case sensitive</string>
+        </property>
+        <property name="text">
+         <string>Case Sensitive </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckFindWholeWord">
+        <property name="toolTip">
+         <string>Search whole words</string>
+        </property>
+        <property name="text">
+         <string>Whole Word </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckFindRegEx">
+        <property name="toolTip">
+         <string>Search with regular expression</string>
+        </property>
+        <property name="text">
+         <string>Regular Expression </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionSelect_source_folder">
+   <property name="text">
+    <string>Select source folder...</string>
+   </property>
+  </action>
+  <action name="actionSelect_Destination">
+   <property name="text">
+    <string>Select Destination...</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QBranchTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qbranchtreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QHistoryTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qhistorytreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QStashTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qstashtreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>graphics_view</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">graphics_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>code_browser</class>
+   <extends>QTextBrowser</extends>
+   <header location="global">code_browser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSourceTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">qsourcetreewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qbinarytableview</class>
+   <extends>QTableView</extends>
+   <header location="global">qbinarytableview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
