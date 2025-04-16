@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Calibration</class>
+ <widget class="QDialog" name="Calibration">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>351</width>
+    <height>434</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Calibration</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <widget class="QComboBox" name="comboChannel">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>10</y>
+     <width>121</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Select the channel for calibration</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelChannel">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>57</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Channel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelLevel">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>100</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Level</string>
+   </property>
+  </widget>
+  <widget class="QDoubleLableWithUnit" name="textLevelMin">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>120</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelMin">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Minimum</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelMax">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>71</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Maximum</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelTotal">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>57</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Total</string>
+   </property>
+  </widget>
+  <widget class="QDoubleLableWithUnit" name="textLevelMax">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>140</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QDoubleLableWithUnit" name="textLevelTotal">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>160</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnApply">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>100</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Apply Scaling</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelOffset">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>57</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;U&lt;span style=&quot; vertical-align:sub;&quot;&gt;offset&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QDoubleLableWithUnit" name="textLevelOffset">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>200</y>
+     <width>81</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QGroupEditWithUnit" name="groupOffset">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>321</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="sizeIncrement">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="title">
+    <string>Scaling offset (Uso)</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <widget class="QLineEdit" name="edtOffset">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>0</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelOffsetUnit">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>0</y>
+      <width>31</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>V</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupEditWithUnit" name="groupScale">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>281</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Scaling factor (Fs)</string>
+   </property>
+   <widget class="QLineEdit" name="edtScale">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>0</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="labelLevel_RMS">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>41</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;U&lt;span style=&quot; vertical-align:sub;&quot;&gt;RMS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QDoubleLableWithUnit" name="textLevelTotal_RMS">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>180</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelDescription">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>331</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Calibration procedure for each channel:&lt;br /&gt;&lt;/span&gt;- Hint: Finalize Steps 1, 4, 5 with &amp;quot;Apply Scaling&amp;quot;&lt;span style=&quot; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/span&gt;- 1.: Reset scaling factor to 1.0 and offset to 0.0&lt;br /&gt;- 2.: Supply appropriate AC voltage (50 Hz) to selected&lt;br /&gt;  audio channel and measure U&lt;span style=&quot; vertical-align:sub;&quot;&gt;input &lt;/span&gt;with AC volt meter&lt;br /&gt;- 3.: Enter &amp;quot;Measured RMS&amp;quot; value&lt;br /&gt;  (Scaling Factor: F&lt;span style=&quot; vertical-align:sub;&quot;&gt;s&lt;/span&gt; = Measured&lt;span style=&quot; vertical-align:sub;&quot;&gt;RMS&lt;/span&gt; / U&lt;span style=&quot; vertical-align:sub;&quot;&gt;RMS&lt;/span&gt;)&lt;br /&gt;- 4.: Press &amp;quot;Set F&lt;span style=&quot; vertical-align:sub;&quot;&gt;S&lt;/span&gt;&amp;quot; button&lt;br /&gt;- 5.: Press &amp;quot;Set U&lt;span style=&quot; vertical-align:sub;&quot;&gt;SO&lt;br /&gt;    &lt;/span&gt;(Scaling Offset: U&lt;span style=&quot; vertical-align:sub;&quot;&gt;so&lt;/span&gt; = - U&lt;span style=&quot; vertical-align:sub;&quot;&gt;offset&lt;/span&gt;)&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCalcScalingFactor">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>140</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Set Fs</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSetScalingOffset">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>200</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Set Uso</string>
+   </property>
+  </widget>
+  <widget class="QGroupEditWithUnit" name="groupMeasuredRMS">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>163</y>
+     <width>121</width>
+     <height>38</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Measured RMS</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QLineEdit" name="edtMeasuredRMS">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>17</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelOffsetUnit_2">
+    <property name="geometry">
+     <rect>
+      <x>91</x>
+      <y>18</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>V</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnResetScalingAndOffset">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>120</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reset Scaling</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>120</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1.:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>180</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2.:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>140</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>4.:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>200</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>5.:</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QDoubleLableWithUnit</class>
+   <extends>QLabel</extends>
+   <header location="global">qdoublelablewithunit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QGroupEditWithUnit</class>
+   <extends>QGroupBox</extends>
+   <header location="global">qgroupeditwithunit.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

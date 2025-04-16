@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>692</width>
+    <height>483</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sound Card Oscilloscope</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/resource/Oscilloscope.svg</normaloff>:/resource/Oscilloscope.svg</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0">
+        <item>
+         <widget class="QLabel" name="labelVertical">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Vertical
+Channel</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboVerticalChannel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>100</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Select current channel to modify parameters</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="labelLevel">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Level
+/ Div</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelOffset">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Offset</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0">
+        <property name="spacing">
+         <number>1</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QSlider" name="vslideLevel">
+            <property name="toolTip">
+             <string>Adjust level per division of current channel</string>
+            </property>
+            <property name="pageStep">
+             <number>1</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSlider" name="vslideOffset">
+            <property name="toolTip">
+             <string>Adjust offset of current channel</string>
+            </property>
+            <property name="pageStep">
+             <number>1</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QDoubleLableWithUnit" name="labelLevelValue">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>V</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelOffsetValue">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>1</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkChannelVisible">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Hide or show current channel</string>
+          </property>
+          <property name="text">
+           <string>visible</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="pushAutoLevel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Set auto level detection for current channel</string>
+          </property>
+          <property name="text">
+           <string>Auto</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboVerticalChannelAmplification">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>93</width>
+            <height>22</height>
+           </size>
+          </property>
+          <property name="sizeIncrement">
+           <size>
+            <width>93</width>
+            <height>22</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>93</width>
+            <height>22</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Select current channel amplification</string>
+          </property>
+          <property name="statusTip">
+           <string>Select Probe</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="4">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelTrigger">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Trigger
+Channel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboTriggerChannel">
+        <property name="toolTip">
+         <string>Select trigger channel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelTriggerLevel">
+        <property name="text">
+         <string>Level</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="ledTriggerArmed">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>Trigger is armed</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="resource.qrc">
+              <normaloff>:/resource/circle_black.svg</normaloff>
+              <normalon>:/resource/circle_green.svg</normalon>
+              <disabledoff>:/resource/circle_grey.svg</disabledoff>
+              <disabledon>:/resource/circle_green.svg</disabledon>
+              <activeoff>:/resource/circle_black.svg</activeoff>
+              <activeon>:/resource/circle_green.svg</activeon>
+              <selectedoff>:/resource/circle_black.svg</selectedoff>
+              <selectedon>:/resource/circle_green.svg</selectedon>:/resource/circle_black.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ledTriggered">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>Triggered</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="resource.qrc">
+              <normaloff>:/resource/circle_black.svg</normaloff>
+              <normalon>:/resource/circle_red.svg</normalon>
+              <disabledoff>:/resource/circle_grey.svg</disabledoff>
+              <disabledon>:/resource/circle_red.svg</disabledon>
+              <activeoff>:/resource/circle_black.svg</activeoff>
+              <activeon>:/resource/circle_red.svg</activeon>
+              <selectedoff>:/resource/circle_black.svg</selectedoff>
+              <selectedon>:/resource/circle_red.svg</selectedon>:/resource/circle_black.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushTriggerEdge">
+            <property name="toolTip">
+             <string>Select trigger edge</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="resource.qrc">
+              <normaloff>:/resource/falling_edge.svg</normaloff>
+              <normalon>:/resource/rising_edge.svg</normalon>
+              <activeon>:/resource/rising_edge.svg</activeon>:/resource/falling_edge.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QSlider" name="vslideTriggerLevel">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>160</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Adjust trigger level</string>
+          </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QDoubleLableWithUnit" name="labelTriggerLevelValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>V</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushTrigger50Percent">
+        <property name="toolTip">
+         <string>set trigger level to 50 % of measured input level</string>
+        </property>
+        <property name="text">
+         <string>50 %</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QRadioButtonGroup" name="groupTrigger">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>92</width>
+          <height>101</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QPushButton" name="pushTriggerStop">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Freezes display to analyse data</string>
+         </property>
+         <property name="text">
+          <string>Stop</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushTriggerOff">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Switch off trigger</string>
+         </property>
+         <property name="text">
+          <string>Off</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushTriggerSingle">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>40</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Starts single shot trigger and stops, when triggered</string>
+         </property>
+         <property name="text">
+          <string>Single</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushTriggerAuto">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>60</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Triggers automatically and on trigger signal</string>
+         </property>
+         <property name="text">
+          <string>Auto</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushTriggerNormal">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>80</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="toolTip">
+          <string>Triggers only, if trigger signal is fired</string>
+         </property>
+         <property name="text">
+          <string>Normal</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushTriggerManual">
+        <property name="toolTip">
+         <string>Triggers once manually</string>
+        </property>
+        <property name="text">
+         <string>Manual</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0" rowspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="ScopeView" name="graphicsViewScope">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string comment="testdraw" extracomment="Draws time curves"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="FFT_View" name="graphicsViewFFT">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string comment="testdraw" extracomment="Draws FFT curves"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="ScopeView" name="graphicsViewZoom">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>1</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string comment="testdraw" extracomment="Draws FFT curves"/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="2" rowspan="2" colspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelHorizontal">
+        <property name="text">
+         <string>Horizontal</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelTime">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Time / Div</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="hslideTime">
+        <property name="toolTip">
+         <string>Adjust time per division</string>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleLableWithUnit" name="labelTimeValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>s</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelTriggerPosition">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Position</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="hslideTimePosition">
+        <property name="toolTip">
+         <string>Adjust time position of trigger point</string>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleLableWithUnit" name="labelTimePositionValue">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>s</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="pushAutoTime">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Set auto time detection</string>
+        </property>
+        <property name="text">
+         <string>Auto</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkShowZoom">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Show zoomed view</string>
+        </property>
+        <property name="text">
+         <string>Zoom</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkShowFFT">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Show FFT view</string>
+        </property>
+        <property name="text">
+         <string>FFT</string>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboFFT">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>Select FFT size for FFT view</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkFFT_Log">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Set logarithmic FFT view</string>
+        </property>
+        <property name="text">
+         <string>Log</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>692</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOscilloscope">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionAudioInputSettings"/>
+    <addaction name="actionAudioCalibrationSettings"/>
+    <addaction name="actionOscilloscopeSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionFunctions_Generator"/>
+   </widget>
+   <widget class="QMenu" name="menuBearbeiten">
+    <property name="title">
+     <string>Bearbeiten</string>
+    </property>
+    <addaction name="actionCopyToClipboard"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuBearbeiten"/>
+   <addaction name="menuOscilloscope"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAudioInputSettings">
+   <property name="text">
+    <string>Audio Settings...</string>
+   </property>
+  </action>
+  <action name="actionAudioCalibrationSettings">
+   <property name="text">
+    <string>Calibration...</string>
+   </property>
+  </action>
+  <action name="actionOscilloscopeSettings">
+   <property name="text">
+    <string>Oscilloscope...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionFunctions_Generator">
+   <property name="text">
+    <string>Functions Generator...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionCopyToClipboard">
+   <property name="text">
+    <string>Kopieren</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About...</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F1</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QDoubleLableWithUnit</class>
+   <extends>QLabel</extends>
+   <header location="global">qdoublelablewithunit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QRadioButtonGroup</class>
+   <extends>QGroupBox</extends>
+   <header location="global">qradiobuttongroup.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ScopeView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">scopeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FFT_View</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">fft_view.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>on_menu_action_triggered(QAction*)</slot>
+ </slots>
+</ui>

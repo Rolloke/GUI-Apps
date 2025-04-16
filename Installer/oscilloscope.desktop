@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Oscilloscope
+Comment=Audio-Soundcard-Oscillocope
+Exec=/opt/tools/oscilloscope/OscilloscopeQt5
+Terminal=false
+Type=Application
+Icon=/opt/tools/oscilloscope/Oscilloscope.svg
+Categories=AudioVideo;Audio;AudioVideoEditing;
+StartupWMClass=Oscope (1.1)
+MimeType=application/oscilloscope;audio/basic;audio/x-wav;
+Keywords=audio
+X-Desktop-File-Install-Version=0.26
