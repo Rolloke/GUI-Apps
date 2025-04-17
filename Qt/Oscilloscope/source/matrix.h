@@ -1936,7 +1936,11 @@ namespace Algorithmics
             void multiply(const matrix<T> &m, T value)
             {
                 this->resize(m.rows(), m.columns());
+#if __cplusplus < 201103L
                 std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), Helper::Transform::multiply_value<T>(value));
+#else
+                std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), [value](auto it) { return *it * value; });
+#endif
             }
 
             /*!
@@ -1978,7 +1982,11 @@ namespace Algorithmics
             void add(const matrix<T> &m, T value)
             {
                 this->resize(m.rows(), m.columns());
+#if __cplusplus < 201103L
                 std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), Helper::Transform::add_value<T>(value));
+#else
+                std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), [value](auto it) { return *it + value; });
+#endif
             }
 
             /*!
@@ -2010,7 +2018,11 @@ namespace Algorithmics
             {
                 this->resize(m.rows(), m.columns());
                 value = -value;
+#if __cplusplus < 201103L
                 std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), Helper::Transform::add_value<T>(value));
+#else
+                std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), [value](auto it) { return *it + value; });
+#endif
             }
 
             /*!
@@ -2044,7 +2056,11 @@ namespace Algorithmics
                 {
                     value = 1.0 / value;
                     this->resize(m.rows(), m.columns());
+#if __cplusplus < 201103L
                     std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), Helper::Transform::multiply_value<T>(value));
+#else
+                    std::transform(m.matrix_begin(), m.matrix_end(), this->matrix_begin(), [value](auto it) { return *it * value; });
+#endif
                 }
                 else
                 {

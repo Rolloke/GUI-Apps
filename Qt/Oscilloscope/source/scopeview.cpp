@@ -421,5 +421,5 @@ void ScopeView::wheelEvent ( QWheelEvent * event )
 {
     QGraphicsView::wheelEvent(event);
     QPointF fP = mapToScene(event->pos());
-    TRACE(Logger::info, "wheelEvent: %f, %f, delta: %d\n", fP.x(), fP.y(), event->delta());
+    TRACE(Logger::info, "wheelEvent: %f, %f, delta: %d\n", fP.x(), fP.y(), event->angleDelta());
 }

@@ -232,6 +232,7 @@ namespace Algorithmics
         {
         /// \example std::transform(src.begin(), src.end(), dest.begin(), multiply_value<T>(value));
 
+#if __cplusplus < 201103L
             /// \brief multiplies all elements of two vectors each by each, if left vector element is not zero
             template<class _Ty>
             struct multiply_if_not_zero : public std::binary_function<_Ty, _Ty, _Ty>
@@ -431,22 +432,6 @@ namespace Algorithmics
                     return floor(_Left);
                 }
             };
-            /// \brief adds a given gradient multiplied by the index to succeeding elements
-            template<class _Ty>
-            struct gradient : public std::unary_function<_Ty, _Ty> {
-                /// \brief constructor with argument initialization
-                /// \param factor gradient to increase succeeding values of the elements
-                gradient(_Ty factor=1) : _index(0), _factor(factor) {};
-                /// \brief retrieves index based gradient
-                /// \param _Left value of an element
-                /// \return index based gradient added to original value
-                _Ty operator()(const _Ty& _Left) {
-                    return _Left + _index++ * _factor;
-                }
-            private:
-                _Ty _index;
-                _Ty _factor;
-            };
 
             /// \brief compares an array element with a given value
             template<class _Ty>
@@ -464,8 +449,26 @@ namespace Algorithmics
                 }
                 _Ty mCmp;
             };
-        } // Transform
+#endif
+            /// \brief adds a given gradient multiplied by the index to succeeding elements
+            template<class _Ty>
+            struct gradient //: public std::unary_function<_Ty, _Ty>
+            {
+                /// \brief constructor with argument initialization
+                /// \param factor gradient to increase succeeding values of the elements
+                gradient(_Ty factor=1) : _index(0), _factor(factor) {};
+                /// \brief retrieves index based gradient
+                /// \param _Left value of an element
+                /// \return index based gradient added to original value
+                _Ty operator()(const _Ty& _Left) {
+                    return _Left + _index++ * _factor;
+                }
+            private:
+                _Ty _index;
+                _Ty _factor;
+            };
 
+        } // Transform
         /// ForEach classes to calculate a result from each value in an iteration using for_each
         namespace ForEach
         {
