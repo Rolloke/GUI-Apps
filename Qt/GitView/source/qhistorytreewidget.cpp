@@ -2,10 +2,8 @@
 #include <QHeaderView>
 #include <QMenu>
 #include <QActionGroup>
-#include <QPainter>
-#include <QPainterPath>
-#include <iostream>
 #include "actions.h"
+#include "helper.h"
 #include "history.h"
 #include "git_type.h"
 #include "logger.h"
