@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <functional>
-
+#include <cstdint>
 
 class Logger
 {

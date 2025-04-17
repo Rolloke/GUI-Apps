@@ -2,8 +2,10 @@
 #include <QHeaderView>
 #include <QMenu>
 #include <QActionGroup>
+#include <QPainter>
+#include <QPainterPath>
+#include <iostream>
 #include "actions.h"
-#include "helper.h"
 #include "history.h"
 #include "git_type.h"
 #include "logger.h"
@@ -27,9 +29,14 @@ void QHistoryTreeWidget::initialize()
     {
         header()->setSectionResizeMode(History::Column::CommitDate , QHeaderView::ResizeToContents);
         header()->setSectionResizeMode(History::Column::CommitHash , QHeaderView::ResizeToContents);
+        header()->setSectionResizeMode(History::Column::CommitGraph, QHeaderView::ResizeToContents);
         header()->setSectionResizeMode(History::Column::Author     , QHeaderView::ResizeToContents);
         header()->setSectionResizeMode(History::Column::Description, QHeaderView::Stretch);
         header()->setStretchLastSection(false);
+
+        m_item_delegate = new QDrawGraphItemDelegate(this);
+        setItemDelegate(m_item_delegate);
+
         mInitialized = true;
     }
 }
@@ -39,6 +46,8 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
     initialize();
     QVector<QStringList> fList;
     History::parse(fText, fList);
+
+    HistoryEntries entries(fList);
 
     QTreeWidgetItem* fNewHistoryItem = new QTreeWidgetItem(QStringList(aFileName));
     addTopLevelItem(fNewHistoryItem);
@@ -53,15 +62,10 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
     }
 
     const int fTLI = topLevelItemCount()-1;
-    int fListCount = 0;
+    int list_index = -1;
     for (auto& fItem : fList)
     {
-        int fLF = fItem[0].indexOf('\n');
-        if (fLF != -1)
-        {
-            fItem[0] = fItem[0].mid(fLF+1);
-        }
-        if (++fListCount == 1) continue; // ignore first item
+        if (++list_index == 0) continue; // ignore first item
         if (fItem.count() >= History::Entry::NoOfEntries)
         {
             QTreeWidgetItem* fNewHistoryLogItem = new QTreeWidgetItem();
@@ -76,12 +80,20 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
                 fNewHistoryLogItem->setData(History::Column::Commit, History::role(static_cast<History::Entry::e>(fRole)), QVariant(fItem[fRole]));
             }
             fNewHistoryLogItem->setData(History::Column::Commit, History::role(History::Entry::Type), QVariant(aType));
+
+            auto draw_items = entries.get_connection_part(list_index);
+            if (draw_items.size())
+            {
+                fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::DrawItems), QVariant(draw_items));
+            }
+
             if (mShowHistoryGraphically)
             {
                 Q_EMIT send_history(fItem);
             }
         }
     }
+
     if (mShowHistoryGraphically)
     {
         Q_EMIT send_history({});
@@ -531,4 +543,256 @@ bool QHistoryTreeWidget::isSelectionFileDiffable()
     return mHistoryFile.size() > 0;
 }
 
+
+
+QDrawGraphItemDelegate::QDrawGraphItemDelegate(QObject *parent) : QItemDelegate(parent)
+{
+
+}
+
+QWidget *QDrawGraphItemDelegate::createEditor(QWidget * /* parent */, const QStyleOptionViewItem & /* option */, const QModelIndex & /* index */) const
+{
+    return nullptr;
+}
+
+void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    if (index.column() == History::Column::CommitGraph)
+    {
+        /// NOTE: clear background
+        QBrush brush = option.backgroundBrush;
+        painter->setBrush(brush);
+        QColor color (Qt::GlobalColor::white);
+        painter->setPen(color);
+        painter->drawRect(option.rect);
+
+
+        auto rect = option.rect;
+        QVariant variant = index.model()->data(index, History::role(History::Entry::DrawItems));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        if (variant.isValid() && variant.typeId() == QMetaType::QVariantList)
+#else
+        if (variant.isValid() && variant.type() == QVariant::List)
+#endif
+        {
+            const auto& variant_list = variant.toList();
+            for (const auto& draw_item : variant_list)
+            {
+                HistoryEntries::ConnectionUnion cu;
+                cu.connection_id = draw_item.toUInt();
+
+                QColor pen_color(static_cast<Qt::GlobalColor>(cu.connection.color));
+                QPen pen(pen_color);
+                pen.setWidth(m_pen_width);
+                painter->setPen(pen);
+
+                switch (cu.connection.type)
+                {
+                case HistoryEntries::Connection::start:
+                    drawStart(*painter, rect, cu.connection.level2);
+                    break;
+                case HistoryEntries::Connection::line:
+                    drawLine(*painter, rect, cu.connection.level1, cu.connection.level2);
+                    break;
+                case HistoryEntries::Connection::end:
+                    drawEnd(*painter, rect, cu.connection.level1);
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        QItemDelegate::paint(painter, option, index);
+    }
+}
+
+void QDrawGraphItemDelegate::drawStart(QPainter &painter, const QRect& rc, int level) const
+{
+    qreal p1x = getLevelPosition(rc, 0);
+    qreal p1y = rc.center().y();
+    qreal p2x = getLevelPosition(rc, level);
+    qreal p2y = rc.top();
+#if 1
+    qreal cpx = p2x + (p1x - p2x) * 0.25;
+    qreal cpy = p1y + (p2y - p1y) * 0.25;
+    drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
+#else
+    painter.drawLine(p1x, p1y, p2x, p2y);
+#endif
+}
+
+void QDrawGraphItemDelegate::drawEnd(QPainter &painter, const QRect &rc, int level) const
+{
+    qreal p1x = getLevelPosition(rc, level);
+    qreal p1y = rc.bottom();
+    qreal p2x = getLevelPosition(rc, 0);
+    qreal p2y = rc.center().y();
+#if 1
+    qreal cpx = p1x + (p2x - p1x) * 0.25;
+    qreal cpy = p2y + (p1y - p2y) * 0.25;
+    drawBezier(painter, p1x, p1y, cpx, cpy, cpx, cpy, p2x, p2y);
+#else
+    painter.drawLine(p1x, p1y, p2x, p2y);
+#endif
+}
+
+void QDrawGraphItemDelegate::drawLine(QPainter &painter, const QRect& rc, int level1, int level2) const
+{
+    qreal p1x = getLevelPosition(rc, level1);
+    qreal p1y = rc.bottom();
+    qreal p2x = getLevelPosition(rc, level2);
+    qreal p2y = rc.top();
+    qreal pmy = rc.center().y();
+    drawBezier(painter, p1x, p1y, p1x, pmy, p2x, pmy, p2x, p2y);
+}
+
+qreal QDrawGraphItemDelegate::getLevelPosition(QRect rc, int level) const
+{
+    if (m_left_border)
+    {
+        return rc.left() + rc.width() * level * m_level_factor;
+    }
+    else
+    {
+        return rc.right() - rc.width() * level * m_level_factor;
+    }
+}
+
+void QDrawGraphItemDelegate::drawBezier(QPainter& painter, qreal p1x, qreal p1y, qreal cp1x, qreal cp1y, qreal cp2x, qreal cp2y, qreal p2x, qreal p2y)
+{
+    QPainterPath path;
+    path.moveTo(p1x, p1y);
+    path.cubicTo(cp1x, cp1y, cp2x, cp2y, p2x, p2y);
+    painter.drawPath(path);
+}
+
+HistoryEntries::HistoryEntries(const QVector<QStringList> &items) : m_items(items)
+{
+    m_color.unapply_color(Qt::yellow);
+    determine_parents();
+    determine_connections();
+}
+
+QList<QVariant> HistoryEntries::get_connection_part(int index) const
+{
+    if (m_item_connections.contains(index))
+    {
+        QList<QVariant> list;
+        for (const auto& item : m_item_connections[index])
+        {
+            list.push_back(item);
+        }
+        return list;
+    }
+    return {};
+}
+
+void HistoryEntries::determine_parents()
+{
+    int i = -1;
+    for (const auto& item :  m_items)
+    {
+        if (++i == 0) continue;
+        QStringList parents = item[History::Entry::ParentHash].split(" ");
+        m_parent1[parents[0]] = i;
+        if (parents.size() > 1)
+        {
+            m_parent2[parents[1]] = i;
+        }
+    }
+}
+
+void HistoryEntries::determine_connections()
+{
+    int index = -1;
+    for (const auto& item :  m_items)
+    {
+        if (++index == 0) continue;
+        int parent1 = m_parent1.value(item[History::Entry::CommitHash], -1);
+        if (parent1 != -1 && (index - parent1) > m_diff)
+        {
+            create_connection(parent1, index);
+        }
+        int parent2 = m_parent2.value(item[History::Entry::CommitHash], -1);
+        if (parent2 != -1 && (index - parent2) > m_diff)
+        {
+            create_connection(parent2, index);
+        }
+    }
+
+    /// reduce level at double connections
+    for (auto connection = m_item_connections.begin(); connection != m_item_connections.end(); ++connection)
+    {
+        auto& connection_vector = connection.value();
+        if (connection_vector.size() > 1 && reinterpret_cast<Connection*>(&connection_vector[0])->type == Connection::start)
+        {
+            auto pt00 = reinterpret_cast<ConnectionUnion*>(&connection_vector[0]);
+            auto pt01 = reinterpret_cast<ConnectionUnion*>(&connection_vector[1]);
+            if (pt00->connection.type == Connection::start && pt01->connection.type == Connection::end)
+            {
+                pt01->connection.level1--;
+                for (int i=2; i < connection_vector.size(); ++i)
+                {
+                    auto pt10 = reinterpret_cast<ConnectionUnion*>(&connection_vector[i]);
+                    pt10->connection.level1--;
+                }
+
+                auto connection_p_1    = connection;
+                ++connection_p_1;
+                auto & connection_vector_p_1 = connection_p_1.value();
+                for (int i=0; i < connection_vector_p_1.size(); ++i)
+                {
+                    auto pt10 = reinterpret_cast<ConnectionUnion*>(&connection_vector_p_1[i]);
+                    pt10->connection.level2--;
+                }
+            }
+        }
+    }
+}
+
+void HistoryEntries::create_connection(int parent, int index)
+{
+    ulong color_enum;
+    ulong             last_item_level = 0;
+    Connection::eType type            = Connection::start;
+    int               item            = index;
+    ConnectionUnion   con_unit;
+
+    m_color.get_color_and_increment(&color_enum);
+
+    for (; item > parent; --item)
+    {
+        auto&   connection_vector = m_item_connections[item];
+        quint32 next_item_level   = 1;
+        int     next_item         = item - 1;
+
+        if (m_item_connections.contains(next_item))
+        {
+            next_item_level = m_item_connections[next_item].size() + 1;
+        }
+
+        con_unit.connection.color  = color_enum;
+        con_unit.connection.type   = type;
+        if (con_unit.connection.type == Connection::start)
+        {
+            con_unit.connection.level1 = 0;
+            con_unit.connection.level2 = std::max(static_cast<quint32>(connection_vector.size()), next_item_level);
+        }
+        else // Connection::line
+        {
+            con_unit.connection.level1 = last_item_level;
+            con_unit.connection.level2 = next_item_level;
+        }
+        connection_vector.push_back(con_unit.connection_id);
+
+        last_item_level = con_unit.connection.level2;
+        type            = Connection::line;
+    }
+    auto& connection_vector    = m_item_connections[item];
+    con_unit.connection.level1 = last_item_level;
+    con_unit.connection.level2 = 0;
+    con_unit.connection.type   = Connection::end;
+    connection_vector.push_back(con_unit.connection_id);
+}
 

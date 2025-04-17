@@ -13,6 +13,15 @@ void History::parse(const QString& aText, QVector<QStringList>& aList)
     for (const auto& fLine: fLines)
     {
         aList.append(fLine.split(fEntrySeparator));
+        if (aList.last().count() < History::Entry::NoOfEntries)
+        {
+            aList.removeLast();
+        }
+        int fLF = aList.last()[0].indexOf('\n');
+        if (fLF != -1)
+        {
+            aList.last()[0] = aList.last()[0].mid(fLF+1);
+        }
     }
 }
 

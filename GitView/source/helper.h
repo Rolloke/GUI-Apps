@@ -121,7 +121,7 @@ class ColorSelector
 {
 public:
     ColorSelector(Qt::GlobalColor first_color = Qt::red);
-    QColor get_color_and_increment();
+    QColor get_color_and_increment(ulong *color_enum=nullptr);
     void   unapply_color(Qt::GlobalColor not_wanted);
 
     static void   set_dark_mode(bool dark);
@@ -150,6 +150,7 @@ protected:
 
 };
 
+#if 1
 /// \brief variadic count_equal
 /// \param a comparison parameter
 /// \param b variadic parameter(s)
@@ -225,6 +226,32 @@ constexpr T value_of(_Compare comp, T a, T b, Tn&&... args)
 {
     return (comp(a, b)) ? value_of(comp, a, std::forward<Tn>(args)...) : value_of(comp, b, std::forward<Tn>(args)...);
 }
+#else
 
+template <typename T, typename  Tn>
+constexpr bool is_any_equal_to(T a, Tn b)
+{
+    return ( ( a == b ) );
+}
+
+template <typename T, typename  T1, typename  T2>
+constexpr bool is_any_equal_to(T a, T1 b, T2 c)
+{
+    return ( ( a == b ) || (a == c) );
+}
+
+template <typename T, typename  T1, typename  T2, typename  T3>
+constexpr bool is_any_equal_to(T a, T1 b, T2 c, T3 d)
+{
+    return ( ( a == b ) || (a == c) || (a == d) );
+}
+
+template <typename T, typename  Tn>
+constexpr bool is_in_range(T min, T max, Tn num)
+{
+    return ( ( min <= num && num <= max)  );
+}
+
+#endif
 
 #endif // HELPER_H

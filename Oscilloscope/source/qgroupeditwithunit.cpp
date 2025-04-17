@@ -41,7 +41,7 @@ void QGroupEditWithUnit::wheelEvent( QWheelEvent* event )
     if (mPrefix.getPrefixChange() == UnitPrefix::wheel_change)
     {
         double fValue = value();
-        mPrefix.changePrefix(event->delta() > 0);
+        mPrefix.changePrefix(event->angleDelta().x() > 0);
         updateUnit();
         value(fValue);
     }
@@ -53,7 +53,7 @@ void QGroupEditWithUnit::paintEvent(QPaintEvent *)
 
      QStyleOptionFocusRect option;
      option.initFrom(this);
-     option.backgroundColor = palette().color(QPalette::Background);
+     option.backgroundColor = palette().color(QPalette::Window);
      if (mDrawFrame)
      {
         style()->drawPrimitive(QStyle::PE_FrameGroupBox, &option, &painter, this);

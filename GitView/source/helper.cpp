@@ -655,9 +655,13 @@ ColorSelector::ColorSelector(Qt::GlobalColor first_color ) :
 {
 }
 
-QColor ColorSelector::get_color_and_increment()
+QColor ColorSelector::get_color_and_increment(ulong* color_enum)
 {
     QColor color(m_current_color);
+    if (color_enum)
+    {
+        *color_enum = m_current_color;
+    }
     m_current_color = static_cast<Qt::GlobalColor>(m_current_color + 1);
     while (m_unapplied_color.contains(m_current_color))
     {

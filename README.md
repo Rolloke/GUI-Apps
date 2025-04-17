@@ -16,6 +16,6 @@ Supports upload to and download from raspberry kodi.
 Oscilloscope and function generator for selectable audio devices on sound card of a PC
 
 
-#### Warantie
+#### Warranty
 
 These programs are provided AS IS with NO WARRANTY OF ANY KIND

@@ -420,6 +420,6 @@ void ScopeView::onSelectRange(const QRectF& fSelectedRange)
 void ScopeView::wheelEvent ( QWheelEvent * event )
 {
     QGraphicsView::wheelEvent(event);
-    QPointF fP = mapToScene(event->pos());
-    TRACE(Logger::info, "wheelEvent: %f, %f, delta: %d\n", fP.x(), fP.y(), event->delta());
+    QPointF fP = mapToScene(QPoint(event->position().x(), event->position().y()));
+    TRACE(Logger::info, "wheelEvent: %f, %f, delta: %d, %d\n", fP.x(), fP.y(), event->angleDelta().x(), event->angleDelta().y());
 }

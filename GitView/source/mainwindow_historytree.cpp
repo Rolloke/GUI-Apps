@@ -95,10 +95,19 @@ void MainWindow::call_git_history_diff_command()
 
 void MainWindow::on_treeHistory_itemClicked(QTreeWidgetItem *aItem, int aColumn)
 {
+    // static QTreeWidgetItem *just_drawn_item = nullptr;
+    // static int              just_drawn_column = -1;
     btnCloseText_clicked(Editor::Viewer);
-    ui->textBrowser->setExtension("");
-    appendTextToBrowser(ui->treeHistory->clickItem(aItem, aColumn));
-    showDockedWidget(ui->textBrowser);
+
+    /// TODO: do not draw twice
+    //if (aItem != just_drawn_item && aColumn != just_drawn_column)
+    {
+        ui->textBrowser->setExtension("");
+        appendTextToBrowser(ui->treeHistory->clickItem(aItem, aColumn));
+        showDockedWidget(ui->textBrowser);
+        // just_drawn_item   = aItem;
+        // just_drawn_column = aColumn;
+    }
 
     const auto fItemData = ui->treeHistory->determineHistoryHashItems(ui->treeHistory->currentItem());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -172,7 +181,7 @@ void MainWindow::on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTr
 {
     if (current)
     {
-        on_treeHistory_itemClicked(current, 0);
+        on_treeHistory_itemClicked(current, ui->treeHistory->currentColumn());
     }
 }
 

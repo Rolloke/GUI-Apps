@@ -231,7 +231,7 @@ MainWindow::MainWindow(QApplication& aApp, QWidget *parent) :
         for (int fFFTorder=fFFTminOrder; fFFTorder<=fFFTmaxOrder; ++fFFTorder)
         {
             s.setNum(static_cast<ulong>(1<<fFFTorder));
-            ui->comboFFT->addItem(s, qVariantFromValue(fFFTorder));
+            ui->comboFFT->addItem(s, QVariant::fromValue(fFFTorder));
         }
         ui->comboFFT->setCurrentIndex(ui->comboFFT->findText(QString::number(fCurrentFFTOrder)));
         ui->checkFFT_Log->setChecked(getValue(findElement(fParameters, ui->checkFFT_Log->text()), 1));
@@ -412,8 +412,8 @@ void MainWindow::setProbeValues(const QList<double> &fProbes)
     for (double fValue : fProbes)
     {
         QString sProbe;
-        if (fValue >= 1.0) sProbe.sprintf("%.0f : 1", fValue);
-        else               sProbe.sprintf("1 : %.0f", 1 / fValue);
+        if (fValue >= 1.0) sProbe.asprintf("%.0f : 1", fValue);
+        else               sProbe.asprintf("1 : %.0f", 1 / fValue);
         ui->comboVerticalChannelAmplification->addItem(sProbe);
         ui->comboVerticalChannelAmplification->setItemData(index++, QVariant(fValue));
     }
@@ -851,18 +851,18 @@ void MainWindow::handleBufferChanged(int aStartPosition)
         if (fLastBuffersDelay > 0 && fLastBuffersDelay <  fBuffersDelay)
         {
             int fDifference = fBuffersDelay - fLastBuffersDelay;
-            transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), bind2nd(plus<int>(), fDifference));
+            transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), [fDifference](auto it) { return it + fDifference; });
             TRACE(Logger::debug, "Last: %d < %d, Difference: %d\n", fLastBuffersDelay, fBuffersDelay, fDifference);
         }
         else if (fLastBuffersDelay > fBuffersDelay)
         {
             int fDifference = fLastBuffersDelay - fBuffersDelay;
-            transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), bind2nd(minus<int>(), fDifference));
+            transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), [fDifference](auto it) { return it - fDifference; });
             TRACE(Logger::debug, "Last: %d > %d, Difference: %d\n", fLastBuffersDelay, fBuffersDelay, fDifference);
         }
 
         mBufferUpdate[fBuffer] = fBuffersDelay+1;
-        transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), bind2nd(minus<int>(), 1));
+        transform(mBufferUpdate.begin(), mBufferUpdate.end(), mBufferUpdate.begin(), [](auto it) { return it - 1; });
     }
     if (mTrigger.mType == TriggerType::Single)
     {
@@ -958,14 +958,14 @@ void MainWindow::onRedrawScopeView(bool aNewBuffer)
         else if (isDisplayTriggered() && fZero != mBufferUpdate.end())
         {
             int fPos       = fZero - mBufferUpdate.begin();
-            int fBuffers   = count_if(mBufferUpdate.begin(), mBufferUpdate.end(), bind2nd(greater<int>(), 0)) + 1;
+            int fBuffers   = count_if(mBufferUpdate.begin(), mBufferUpdate.end(), [](auto it) { return it > 0; }) + 1;
             fStartPosition = fPos * mAudioInput.getBufferSize();
 
             if (Logger::isSeverityActive(Logger::trace))
             {
                 TRACE(Logger::trace, "Update start (%d, %d), > 0: %d, < 0: %d, = 0: %d\n", fPos, fPos*mAudioInput.getBufferSize(), fBuffers,
-                      count_if(mBufferUpdate.begin(), mBufferUpdate.end(), bind2nd(less<int>(), 0)),
-                      count_if(mBufferUpdate.begin(), mBufferUpdate.end(), bind2nd(equal_to<int>(), 0)));
+                      count_if(mBufferUpdate.begin(), mBufferUpdate.end(), [](auto it) { return it < 0; }),
+                      count_if(mBufferUpdate.begin(), mBufferUpdate.end(), [](auto it) { return it == 0; }));
             }
 
             determineMinMaxLevel(fStartPosition, fStartPosition + mAudioInput.getBufferSize() * fBuffers);

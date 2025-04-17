@@ -536,6 +536,11 @@ Shows git history of files or folders
               </column>
               <column>
                <property name="text">
+                <string>Graph</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
                 <string>Description</string>
                </property>
               </column>

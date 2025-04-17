@@ -71,11 +71,11 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
     }
 
     setModel(ListModel);
-#if TEST_DELEGATE
+
     m_item_delegate = new QReadonlyEditItemDelegate();
     setItemDelegate(m_item_delegate);
     setEditTriggers(QAbstractItemView::CurrentChanged);
-#endif
+
     double fItemWidth = 0;
     std::for_each(mColumnWidth.begin(), mColumnWidth.end()-1, [&fItemWidth](double fItem ) { fItemWidth += fItem; });
     mColumnWidth.back() = 0.97 - fItemWidth;
@@ -83,9 +83,7 @@ qbinarytableview::qbinarytableview(QWidget *parent) : QTableView(parent)
 
 qbinarytableview::~qbinarytableview()
 {
-#if TEST_DELEGATE
     delete m_item_delegate;
-#endif
 }
 
 void qbinarytableview::update_rows(bool refresh_all)
@@ -676,9 +674,9 @@ QVariant BinaryTableModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags BinaryTableModel::flags( const QModelIndex &index) const
 {
      Qt::ItemFlags flags = QStandardItemModel::flags(index);
-#if TEST_DELEGATE == 0
-     flags &= ~Qt::ItemIsEditable;
-#endif
+// #if TEST_DELEGATE == 0
+//      flags &= ~Qt::ItemIsEditable;
+// #endif
      return flags;
 }
 
@@ -1297,7 +1295,6 @@ qbinarytableview* BinaryTableModel::get_parent() const
     return theparent;
 }
 
-#if TEST_DELEGATE
 
 QReadonlyEditItemDelegate::QReadonlyEditItemDelegate(QObject *parent) : QItemDelegate(parent)
 {
@@ -1379,6 +1376,3 @@ void QReadonlyEditItemDelegate::paint(QPainter *painter, const QStyleOptionViewI
         painter->drawText(option.rect, value, to);
     }
 }
-
-#endif
-

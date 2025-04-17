@@ -2707,7 +2707,7 @@ void MainWindow::comboFindBoxIndexChanged(int index)
 
 void MainWindow::combo_triggered()
 {
-    const QAction* action = qobject_cast<QAction *>(sender());
+    const auto action = qobject_cast<QAction *>(sender());
     const auto combofind_actions = ui->comboFindBox->actions();
     if (combofind_actions.size() && combofind_actions.contains(action))
     {
