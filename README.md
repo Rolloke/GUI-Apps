@@ -2,6 +2,7 @@
 This repository contains Qt Projects for several scopes
 
 ### GitView 
+
 App providing tools to work with git repositories.
 
 ### RaspiMediaList
@@ -15,6 +16,13 @@ Supports upload to and download from raspberry kodi.
 
 Oscilloscope and function generator for selectable audio devices on sound card of a PC
 
+### RecentFilesList
+
+Program to edit recent files list of Linux Ubuntu
+
+- Opens files from List
+- Removes entries from list
+- Stores changed entries into list 
 
 #### Warranty
 

@@ -9,9 +9,17 @@
 #include <QAbstractItemModel>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
 #include <vector>
 #include <string>
 #include <string.h>
+
+namespace txt
+{
+
+const QString version          = QObject::tr("1.0.0.2");
+
+}
 
 QDomNode findElement(const QDomNode& aParent, const QString & aName);
 std::vector<std::string> SplitPath(const std::string &path);
@@ -293,3 +301,22 @@ void MainWindow::on_pushButtonSelect_clicked()
         }
     }
 }
+
+void MainWindow::on_pushButtonAbout_clicked()
+{
+    QString message = tr("<h3>About Rescent Files list viewer and editor for linux</h3><br><br>"
+                         "View, open recent files or remove files from recent files list.<br>"
+                         "The program is provided AS IS with NO WARRANTY OF ANY KIND<br>"
+                         "<table cellSpacing=\"0\" cellPadding=\"4\" >"
+                         "<tr><td>Based on Qt</td><td>%1</td></tr>"
+                         "<tr><td>Built on</td><td>%2, %3</td></tr>"
+                         "<tr><td>Author</td><td>Rolf Kary Ehlers</td></tr>"
+                         "<tr><td>Version</td><td>%4</td></tr>"
+                         "<tr><td>License</td><td>GNU GPL Version 2</td></tr>"
+                         "<tr><td>Email</td><td>rolf-kary-ehlers@t-online.de</td></tr>"
+                         "</table>"
+                         ).arg(qVersion(), __DATE__, __TIME__, txt::version);
+    QMessageBox::about(this, windowTitle(), message);
+
+}
+
