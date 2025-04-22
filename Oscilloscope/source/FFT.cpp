@@ -86,35 +86,10 @@ void calcImaginary(const std::complex<double>*pdFourier, std::vector<double>& aD
 
 //#include <immintrin.h>
 
-#if __SSE2__ && USE_SIMD
+#if USE_SIMD != 0
 void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
 {
-#if 0
-    int j, k;
-    __m128 a, b;
-    static const float fac = 10.0f;
-    static const __m128 r = { fac, fac, fac, fac };
-    for (k=-1, j=-1; j < n; )
-    {
-        a[0] = pdFourier[++k];
-        b[0] = pdFourier[++k];
-        a[1] = pdFourier[++k];
-        b[1] = pdFourier[++k];
-        a[2] = pdFourier[++k];
-        b[2] = pdFourier[++k];
-        a[3] = pdFourier[++k];
-        b[3] = pdFourier[++k];
-        a = _mm_mul_ps(a, a);
-        b = _mm_mul_ps(b, b);
-        b = _mm_add_ps(a, b);
-        a = _mm_sqrt_ps(b);
-        b = _mm_mul_ps(a, r);
-        p[++j] = (double)(float)b[0];
-        p[++j] = (double)(float)b[1];
-        p[++j] = (double)(float)b[2];
-        p[++j] = (double)(float)b[3];
-    }
-#else
+/// TODO: test this
 //    _may_i_use_cpu_feature(0);
 //    __cpufeature(1);
 //    _mm_cpufeature(2);
@@ -135,13 +110,12 @@ void calcAmplitude(const double*pdFourier, std::vector<double>&p, int n)
         b.get(&p[j]);
         pdFourier += step_2;
     }
-#endif
 }
 #endif
 
 void calcAmplitude(const std::complex<double>* pdFourier, std::vector<double>& aDest)
 {
-#if __SSE2__ && USE_SIMD
+#if USE_SIMD != 0
     calcAmplitude(reinterpret_cast<const double*>(pdFourier), aDest, aDest.size());
 #else
     for (unsigned int j=0; j<aDest.size(); ++j)

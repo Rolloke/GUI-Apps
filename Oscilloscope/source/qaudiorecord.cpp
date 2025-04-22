@@ -2,7 +2,9 @@
 #include "xml_functions.h"
 #include "main.h"
 
-#include "boost/bind.hpp"
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 
 
 #if (_USE_QT_AUDIO == 1)

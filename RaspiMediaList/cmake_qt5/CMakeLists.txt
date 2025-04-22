@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 set(Qt5_SYSTEMWIDE /lib/qt5/bin)
 set(Qt5_LOCAL $ENV{HOME}/lib/qt5/bin)
@@ -39,28 +40,30 @@ set(HEADER
    ../mainwindow.h
    )
 set(SOURCE 
+   ../resource/resource.qrc
+   ../resource/resource.rc
    ../mainwindow.ui
    ../logger.cpp
    ../mainwindow.cpp
    ../main.cpp
    )
 
-qt_add_resources(RaspiMediaList RESOURCE
+qt5_add_resources(RaspiMediaList RESOURCE
     PREFIX ":/"
-    FILES 
-    ../resource/resource.qrc
-    ../resource/applications-multimedia.png 
+    FILES
+    ../resource/applications-multimedia.png
     ../resource/applications-multimedia16.png
-    ../preferences-desktop-screensaver.png
+    ../resource/preferences-desktop-screensaver.png
     ../resource/video-x-generic.png
-    ../applications-multimedia.ico
-    ../applications-multimedia16.ico
+    ../resource/applications-multimedia.ico
+    ../resource/applications-multimedia16.ico
 )
 
 add_executable(RaspiMediaList
     ${HEADER}
-    ${SOURCE}   
+    ${SOURCE}
 )
+
 
 target_link_libraries(RaspiMediaList PRIVATE Qt5::Core)
 target_link_libraries(RaspiMediaList PRIVATE Qt5::Widgets)

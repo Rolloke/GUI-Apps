@@ -7,8 +7,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 add_compile_definitions(-D_USE_QT_AUDIO=1)
+add_compile_definitions(-DTRIGGER_PROCESSING=1)
+
+# enable only flag available on your CPU
+set(CMAKE_CXX_FLAGS -march=native)
+set(CMAKE_CXX_FLAGS -msse)
+set(CMAKE_CXX_FLAGS -mavx)
+set(CMAKE_CXX_FLAGS -mavx2)
+#set(CMAKE_CXX_FLAGS -mavx512)
 
 set(Qt5_SYSTEMWIDE /lib/qt5/bin)
 set(Qt5_LOCAL $ENV{HOME}/lib/qt5/bin)
@@ -119,6 +128,7 @@ set(SOURCE
 )
 
 set(UIFILES
+   ../source/resource.qrc
    ../source/aboutdlg.ui
    ../source/calibration.ui        
    ../source/mainwindow.ui
@@ -130,13 +140,20 @@ set(UIFILES
 qt_add_resources(Oscilloscope RESOURCE
     PREFIX ":/"
     FILES 
-    ../source/resource.qrc
-    ../source/resource/applications-multimedia.png 
-    ../source/resource/applications-multimedia16.png
-    ../source/preferences-desktop-screensaver.png
-    ../source/resource/video-x-generic.png
-    ../source/applications-multimedia.ico
-    ../source/applications-multimedia16.ico
+    ..source/resource/circle_black.svg
+    ..source/resource/circle_blue.svg
+    ..source/resource/circle_green.svg
+    ..source/resource/circle_grey.svg
+    ..source/resource/circle_orange.svg
+    ..source/resource/circle_purple.svg
+    ..source/resource/circle_red.svg
+    ..source/resource/circle_yellow.svg
+    ..source/resource/falling_edge.svg
+    ..source/resource/Oscilloscope.ico
+    ..source/resource/Oscilloscope.svg
+    ..source/resource/resource.rc
+    ..source/resource/rising_edge.svg
+    ..source/resource/utilities-system-monitor.png
 )
 
 add_executable(Oscilloscope

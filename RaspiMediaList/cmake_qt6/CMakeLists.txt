@@ -4,6 +4,7 @@ project(RaspiMediaList, VERSION 1.0.0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED)
 
@@ -21,6 +22,8 @@ set(HEADER
    ../mainwindow.h
    )
 set(SOURCE 
+   ../resource/resource.qrc
+   ../resource/resource.rc
    ../mainwindow.ui
    ../logger.cpp
    ../mainwindow.cpp
@@ -30,13 +33,12 @@ set(SOURCE
 qt_add_resources(RaspiMediaList RESOURCE
     PREFIX ":/"
     FILES 
-    ../resource/resource.qrc
     ../resource/applications-multimedia.png 
     ../resource/applications-multimedia16.png
-    ../preferences-desktop-screensaver.png
+    ../resource/preferences-desktop-screensaver.png
     ../resource/video-x-generic.png
-    ../applications-multimedia.ico
-    ../applications-multimedia16.ico
+    ../resource/applications-multimedia.ico
+    ../resource/applications-multimedia16.ico
 )
 
 qt_add_executable(RaspiMediaList

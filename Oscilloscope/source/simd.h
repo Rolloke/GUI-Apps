@@ -10,15 +10,18 @@
 /// SSE4.1
 /// SSE4.2
 
-#define USE_SIMD SIMD256
+// #define USE_SIMD SIMD256
 
 #ifndef USE_SIMD
 #if __AVX512F__
-#define USE_SIMD SIMD512
+ #define USE_SIMD SIMD512
 #elif __AVX2__ || __AVX__
-#define USE_SIMD SIMD256
+ #define USE_SIMD SIMD256
 #elif __SSE__ || __SSE2__ || __SSE3__ || __SSE4_1__ || __SSE4_2__
-#define USE_SIMD SIMD128
+ #define USE_SIMD SIMD128
+#else 
+ #define USE_SIMD 0
+ #pragma message "do not use simd"
 #endif
 #endif
 
@@ -2115,7 +2118,7 @@ private:
 
 #endif
 
-#if __SSE__ && USE_SIMD == SSE
+#if USE_SIMD == 0
 
 #endif
 

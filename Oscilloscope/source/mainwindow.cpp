@@ -18,12 +18,15 @@
 #include <cmath>
 #include <algorithm>
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/lexical_cast.hpp>
 
+
+using namespace boost::placeholders;
 // NOTE _MSVC_STL_VERSION >= 141 has certain security functions regarding iterators compared to end()
 
 using namespace std;
+
 #define _USE_WORKERTHREAD_FOR_AUDIOBUFFER
 
 #if (_USE_QT_AUDIO != 1)
