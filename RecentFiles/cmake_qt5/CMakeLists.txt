@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
-project(RecentFileseList, VERSION 1.0.0.2 LANGUAGES CXX)
+project(RecentFilesList, VERSION 1.0.0.2 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -42,14 +42,14 @@ set(SOURCE
    ../main.cpp
    )
 
-add_executable(RecentFileseList
+add_executable(RecentFilesList
     ${HEADER}
     ${SOURCE}
 )
 
 
-target_link_libraries(RecentFileseList PRIVATE Qt5::Core)
-target_link_libraries(RecentFileseList PRIVATE Qt5::Widgets)
-target_link_libraries(RecentFileseList PRIVATE Qt5::Gui)
-target_link_libraries(RecentFileseList PRIVATE Qt5::Xml)
+target_link_libraries(RecentFilesList PRIVATE Qt5::Core)
+target_link_libraries(RecentFilesList PRIVATE Qt5::Widgets)
+target_link_libraries(RecentFilesList PRIVATE Qt5::Gui)
+target_link_libraries(RecentFilesList PRIVATE Qt5::Xml)
 

@@ -1732,6 +1732,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
 #else
     const static auto regex_numbers = QRegExp("%[0-9]+");
 #endif
+    auto *sender_action = qobject_cast<QAction *>(sender());
     auto fPos = a_git_cmd.indexOf(regex_numbers);
     if (fPos != -1)
     {
@@ -1748,8 +1749,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
         {
             kill_background_thread->setEnabled(true);
 
-            auto *action = qobject_cast<QAction *>(sender());
-            const QVariantList variant_list = action->data().toList();
+            const QVariantList variant_list = sender_action->data().toList();
             Work work_command { mCurrentTask };
             if (variant_list[ActionList::Data::Flags].toUInt() & ActionList::Flags::Asynchroneous)
             {
@@ -1760,7 +1760,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             {
                 workmap.insert(Worker::repository, ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem));
             }
-            workmap.insert(Worker::command_id, INT(mActions.findID(action)));
+            workmap.insert(Worker::command_id, INT(mActions.findID(sender_action)));
             workmap.insert(Worker::command, command);
             workmap.insert(Worker::action, variant_list[ActionList::Data::PostCmdAction].toUInt());
             workmap.insert(Worker::flags, variant_list[ActionList::Data::Flags].toUInt());
@@ -1776,6 +1776,13 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
     }
     else
     {
+        if (sender_action)
+        {
+            if (mActions.findID(sender_action) == git::Cmd::CustomTestCommand)
+            {
+                QDir::setCurrent(a_source);
+            }
+        }
         int result = execute(command, a_result_str);
         if (result != NoError)
         {

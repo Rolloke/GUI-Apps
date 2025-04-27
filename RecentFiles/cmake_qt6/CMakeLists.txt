@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(RecentFileseList, VERSION 1.0.0.1 LANGUAGES CXX)
+project(RecentFilesList, VERSION 1.0.0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -24,14 +24,14 @@ set(SOURCE
    ../main.cpp
    )
 
-qt_add_executable(RecentFileseList
+qt_add_executable(RecentFilesList
     ${HEADER}
     ${SOURCE}   
 )
 
-target_link_libraries(RecentFileseList PRIVATE Qt6::Core)
-target_link_libraries(RecentFileseList PRIVATE Qt6::Widgets)
-target_link_libraries(RecentFileseList PRIVATE Qt6::Gui)
-target_link_libraries(RecentFileseList PRIVATE Qt6::Xml)
+target_link_libraries(RecentFilesList PRIVATE Qt6::Core)
+target_link_libraries(RecentFilesList PRIVATE Qt6::Widgets)
+target_link_libraries(RecentFilesList PRIVATE Qt6::Gui)
+target_link_libraries(RecentFilesList PRIVATE Qt6::Xml)
 
 
