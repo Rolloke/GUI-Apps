@@ -13,6 +13,8 @@ class    QWebEngineView;
 class    PreviewPage;
 #endif
 
+#define TEXT_SECTION 1
+
 class QDockWidget;
 
 enum class selection
@@ -84,6 +86,7 @@ public Q_SLOTS:
     void change_visibility(bool visible);
 
 private Q_SLOTS:
+    void updatecontentsChange(int from, int charsRemoved, int charsAdded);
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &rect, int dy);
@@ -101,6 +104,14 @@ private:
     {
         s_blame* blame_data { nullptr };
     };
+#if TEXT_SECTION
+    struct s_text_section
+    {
+        int  level    = 0;
+        bool visible  = true;
+        int  end_line = 0;
+    };
+#endif
 
     QTextBlock firstVisibleBlock(int& diff);
     QRectF     blockBoundingRect(const QTextBlock &block) const;
@@ -110,7 +121,10 @@ private:
     QString    change_start_of_selection(selection how_to);
     static QString    toCamelCase(const QString&text);
     static QString    toSnakeCase(const QString& text);
-
+#if TEXT_SECTION
+    void       parse_sections(const QString& text);
+    void       set_sections_visible(bool visible);
+#endif
 private:
     QPointer<QWidget>       m_line_number_area;
     bool                    m_show_line_numbers;
@@ -118,6 +132,9 @@ private:
     QMap<int, s_blame_line> m_blame_start_line;
     std::int32_t            m_blame_characters;
     QString                 m_indent = "    ";
+#if TEXT_SECTION
+    std::map<int, s_text_section>   m_text_section_start;
+#endif
 
     ActionList *m_actions;
     bool        m_do_preview;
@@ -153,6 +170,7 @@ public:
 protected:
     void paintEvent(QPaintEvent *event)override;
     bool event(QEvent *event) override;
+    void mousePressEvent(QMouseEvent* me) override;
 
 private:
     code_browser *codeEditor;
