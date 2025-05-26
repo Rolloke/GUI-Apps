@@ -2432,6 +2432,14 @@ void MainWindow::expand_tree_items()
     {
         ftw->expandAll();
     }
+    else
+    {
+        code_browser*text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+        if (text_browser)
+        {
+            text_browser->set_sections_visible(true);
+        }
+    }
 }
 
 void MainWindow::collapse_tree_items()
@@ -2440,6 +2448,14 @@ void MainWindow::collapse_tree_items()
     if (ftw)
     {
         ftw->collapseAll();
+    }
+    else
+    {
+        code_browser*text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
+        if (text_browser)
+        {
+            text_browser->set_sections_visible(false);
+        }
     }
 }
 
@@ -2465,7 +2481,7 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
     {
         return ui->treeFindText;
     }
-    else if (aAlsoSource)
+    else if (aAlsoSource && ui->treeSource->hasFocus())
     {
         return ui->treeSource;
     }

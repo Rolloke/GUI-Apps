@@ -66,12 +66,10 @@ int code_browser::lineNumberAreaWidth()
 
         digits += m_blame_characters;
 
-#if TEXT_SECTION
         if (m_text_section_start.size())
         {
             digits += 2;
         }
-#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         int space = 3 + fontMetrics().boundingRect("9").width() * digits;
@@ -112,9 +110,7 @@ void code_browser::updatecontentsChange(int from, int charsRemoved, int charsAdd
     m_text_section_start.clear();
     if (from == 0 && charsRemoved == 0 && charsAdded > 0)
     {
-#if TEXT_SECTION
         parse_sections(toPlainText());
-#endif
     }
 }
 
@@ -568,7 +564,6 @@ QString code_browser::toSnakeCase(const QString& text)
     return {};
 }
 
-#if TEXT_SECTION
 void code_browser::parse_sections(const QString &text)
 {
     const QRegularExpression& start_section = mHighlighter->get_language().get_regex(Highlighter::startsection);
@@ -643,7 +638,6 @@ void code_browser::set_sections_visible(bool visible)
         m_line_number_area->update();
     }
 }
-#endif
 
 void code_browser::reset_blame()
 {
@@ -762,9 +756,7 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& bl
     int           current_line = 0;
     blame_pos.clear();
 
-#if TEXT_SECTION
     std::vector<s_text_section*> current_hide;
-#endif
     while (block.isValid() && top <= event->rect().bottom())
     {
         if (block.isVisible() && bottom >= event->rect().top())
@@ -802,7 +794,6 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& bl
                     number += current_blame->blame_data->text[current_line++];
                 }
             }
-#if TEXT_SECTION
             else if (m_text_section_start.size() > 0)
             {
                 if (m_text_section_start.count(line))
@@ -832,7 +823,7 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& bl
                     number += "  ";
                 }
             }
-#endif
+
             painter.setPen(text_color);
             painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), align, number);
         }
@@ -874,12 +865,10 @@ bool LineNumberArea::event(QEvent *event)
 
 void LineNumberArea::mousePressEvent(QMouseEvent *me)
 {
-/// TODO: parse start and stop section
 /// TODO: Jump to start or end of section
-/// TODO: hide and show all sections
-#if TEXT_SECTION
     QTextCursor cursor = codeEditor->cursorForPosition(me->pos());
     QTextBlock    block = cursor.block();
+    bool update = false;
     if (block.isValid() )
     {
         if (block.isVisible())
@@ -893,19 +882,29 @@ void LineNumberArea::mousePressEvent(QMouseEvent *me)
                 block = block.next();
                 for (++line; line <= section.end_line && block.isValid(); ++line)
                 {
+                    /// TODO: regard nested sections, but how?
+                    // auto nested_section = codeEditor->m_text_section_start.find(line);
+                    // if (nested_section != codeEditor->m_text_section_start.end() && nested_section->second.visible)
+                    // {
+
+                    // }
                     block.setVisible(section.visible);
                     block.setUserState(0);
                     block = block.next();
                 }
+                update = true;
             }
-            auto end_block = codeEditor->document()->end().previous();
-            codeEditor->document()->markContentsDirty(0, end_block.position());
-            codeEditor->viewport()->update();
-            codeEditor->m_line_number_area->update();
         }
         block = block.next();
     }
-#endif
+    if (update)
+    {
+        auto end_block = codeEditor->document()->end().previous();
+        codeEditor->document()->markContentsDirty(0, end_block.position());
+        codeEditor->viewport()->update();
+        codeEditor->m_line_number_area->update();
+    }
+
     QWidget::mousePressEvent(me);
 }
 
