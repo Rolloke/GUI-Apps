@@ -168,6 +168,7 @@ protected:
 private:
     code_browser *codeEditor;
     code_browser::pos_to_blame m_blame_position;
+    void regard_nested_section(const code_browser::s_text_section &section, QTextBlock &block, int &line);
 };
 
 #ifdef WEB_ENGINE

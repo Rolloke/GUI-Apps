@@ -863,6 +863,27 @@ bool LineNumberArea::event(QEvent *event)
     return QWidget::event(event);
 }
 
+void LineNumberArea::regard_nested_section(const code_browser::s_text_section &section, QTextBlock& block, int& line)
+{
+    (void)(block);
+    /// TODO: regard nested sections, but how?
+    /// here the nested section visibility is set to parent visibility
+    auto nested_section = codeEditor->m_text_section_start.find(line);
+    if (   nested_section != codeEditor->m_text_section_start.end()
+        //&& nested_section->second.visible != section.visible
+        )
+    {
+        nested_section->second.visible = section.visible;
+        // block.setVisible(section.visible);
+        // block = block.next();
+        // for (++line; line <= nested_section->second.end_line && block.isValid(); ++line)
+        // {
+        //     regard_nested_section(nested_section->second, block, line);
+        //     block = block.next();
+        // }
+    }
+}
+
 void LineNumberArea::mousePressEvent(QMouseEvent *me)
 {
 /// TODO: Jump to start or end of section
@@ -882,14 +903,8 @@ void LineNumberArea::mousePressEvent(QMouseEvent *me)
                 block = block.next();
                 for (++line; line <= section.end_line && block.isValid(); ++line)
                 {
-                    /// TODO: regard nested sections, but how?
-                    // auto nested_section = codeEditor->m_text_section_start.find(line);
-                    // if (nested_section != codeEditor->m_text_section_start.end() && nested_section->second.visible)
-                    // {
-
-                    // }
+                    regard_nested_section(section, block, line);
                     block.setVisible(section.visible);
-                    block.setUserState(0);
                     block = block.next();
                 }
                 update = true;
