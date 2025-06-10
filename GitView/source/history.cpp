@@ -17,10 +17,13 @@ void History::parse(const QString& aText, QVector<QStringList>& aList)
         {
             aList.removeLast();
         }
-        int fLF = aList.last()[0].indexOf('\n');
-        if (fLF != -1)
+        if (aList.count())
         {
-            aList.last()[0] = aList.last()[0].mid(fLF+1);
+            int fLF = aList.last()[0].indexOf('\n');
+            if (fLF != -1)
+            {
+                aList.last()[0] = aList.last()[0].mid(fLF+1);
+            }
         }
     }
 }
