@@ -29,7 +29,7 @@
 #include <QSplitter>
 #include <QActionGroup>
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
 #include <QStringConverter>
 #else
 #include <QTextCodec>
@@ -1663,7 +1663,7 @@ QDir MainWindow::initDir(const QString& aDirPath, int aFilter)
 
 void MainWindow::initCodecCombo()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
     ui->comboTextCodex->addItem("Default Codec");
     QStringEncoder sc;
     for (int codec=0; codec < QStringConverter::LastEncoding; ++codec)
@@ -1672,6 +1672,23 @@ void MainWindow::initCodecCombo()
     }
 #else
     const auto codecs = QTextCodec::availableCodecs();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const static auto reg_ex_num = QRegularExpression("([\\d]{1,6})");
+    const static auto reg_ex_text = QRegularExpression("([a-zA-Z-]{1,})");
+    QMap<QString, QList<QString>> codec_map;
+    for (const auto& codec : std::as_const(codecs))
+    {
+        auto match_num = reg_ex_num.match(codec);
+        if (match_num.hasMatch())
+        {
+            QString captured_num = match_num.captured();
+            QString captured_text;
+            auto match_text = reg_ex_text.match(codec);
+            if (match_text.hasMatch())
+            {
+                captured_text = match_text.captured();
+            }
+#else
     QRegExp reg_ex_num ("([\\d]{1,6})");
     QRegExp reg_ex_text("([a-zA-Z-]{1,})");
     QMap<QString, QList<QString>> codec_map;
@@ -1687,6 +1704,7 @@ void MainWindow::initCodecCombo()
             {
                 captured_text = reg_ex_text.capturedTexts().at(0);
             }
+#endif
             if (captured_text.size() == 0)
             {
                 captured_text = codec;
@@ -1990,6 +2008,11 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::ReplaceAll, tr("Replace All"), tr("Replace all found items")) , SIGNAL(triggered()), this, SLOT(FindReplaceAll()));
     mActions.setFlags(Cmd::ReplaceAll, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::ReplaceAll, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+
+    connect(mActions.createAction(Cmd::GoToLine, tr("Go to line"), tr("go to line given in edit field")) , SIGNAL(triggered()), this, SLOT(GoToLine()));
+    mActions.setFlags(Cmd::GoToLine, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::GoToLine, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    mActions.getAction(Cmd::GoToLine)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_L));
 
     connect(mActions.createAction(Cmd::EditToUpper, tr("To Upper."), tr("Modify selected text to upper case"), this), SIGNAL(triggered()), this, SLOT(modify_text()));
     mActions.setFlags(Cmd::EditToUpper, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2816,6 +2839,13 @@ void MainWindow::FindReplaceAll()
     {
         find_function(find::replace);
     }
+}
+
+void MainWindow::GoToLine()
+{
+    ui->comboFindBox->setCurrentIndex(static_cast<int>(FindView::GoToLineInText));
+    ui->edtFindText->selectAll();
+    ui->edtFindText->setFocus();
 }
 
 void MainWindow::on_btnFindNext_clicked()

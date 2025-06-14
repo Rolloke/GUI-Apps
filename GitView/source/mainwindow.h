@@ -286,6 +286,7 @@ private Q_SLOTS:
     void on_graphicsView_customContextMenuRequested(const QPoint &pos);
 
     void FindReplaceAll();
+    void GoToLine();
     void on_btnFindNext_clicked();
     void on_btnFindPrevious_clicked();
     void comboFindBoxIndexChanged(int index);

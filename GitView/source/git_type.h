@@ -119,6 +119,7 @@ struct Cmd
         EditTabIndent,
         EditTabOutdent,
         EditToggleVisible,
+        GoToLine,
 
         /// hint: add non git commands before
         LastNonGitCommand = EditToggleVisible,

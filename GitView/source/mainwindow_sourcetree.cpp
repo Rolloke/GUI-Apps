@@ -15,7 +15,11 @@
 #include <QClipboard>
 #include <QMimeData>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    #include <QtCore/QTextCodec>
+#else
+#endif
+
+#if CORE5COMPAT == 1
+#include <QTextCodec>
 #else
 #endif
 
@@ -477,7 +481,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
         }
         else if (reopen_file && text_browser)
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)  && CORE5COMPAT == 0
             if (encoding.has_value())
             {
                 QStringDecoder decode_string;

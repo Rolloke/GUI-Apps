@@ -11,6 +11,9 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QRegularExpression>
+#if CORE5COMPAT == 1
+#include <QTextCodec>
+#endif
 #else
 #include <QRegExp>
 #endif
@@ -350,7 +353,7 @@ void MainWindow::btnStoreText_clicked()
         code_browser* text_browser = dynamic_cast<code_browser*>(active_widget);
         if (text_browser)
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
             auto encoding = text_browser->get_encoding();
             if (ui->comboTextCodex->currentIndex())
             {
@@ -369,7 +372,23 @@ void MainWindow::btnStoreText_clicked()
                 file.write(fString.c_str(), fString.size());
             }
 #else
-            const string fString = text_browser->toPlainText().toStdString();
+            bool codec_selected = false;
+            if (ui->comboTextCodex->currentIndex())
+            {
+                // Umlaute windows-437, windows-850, windows-1252
+                auto current = ui->comboTextCodex->currentText();
+                int pos = current.indexOf(",");
+                if (pos == -1) pos = current.size();
+                auto name = current.left(pos).toStdString();
+                QByteArray codec(&name[0], static_cast<int>(name.size()));
+                QTextCodec::setCodecForLocale(QTextCodec::codecForName(codec));
+                codec_selected = true;
+            }
+            else
+            {
+                QTextCodec::setCodecForLocale(nullptr);
+            }
+            const string fString = codec_selected ? text_browser->toPlainText().toLocal8Bit().toStdString() : text_browser->toPlainText().toStdString();
             file.write(fString.c_str(), fString.size());
 #endif
             file.close();
