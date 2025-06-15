@@ -855,7 +855,23 @@ bool LineNumberArea::event(QEvent *event)
             }
             if (codeEditor->m_text_section_start.size())
             {
-                /// TODO: display section parameters
+                QTextCursor cursor = codeEditor->cursorForPosition(he->pos());
+                QTextBlock    block = cursor.block();
+                if (block.isValid() )
+                {
+                    if (block.isVisible())
+                    {
+                        int line = block.blockNumber() + 1;
+                        auto hide_section = codeEditor->m_text_section_start.find(line);
+                        if (hide_section != codeEditor->m_text_section_start.end())
+                        {
+                            code_browser::s_text_section &section = hide_section->second;
+                            std::stringstream text;
+                            text << "Code block parameters:\n- lines in section: " << (section.end_line - line) << "\n- indentation level: " << section.level;
+                            QToolTip::showText(mapToGlobal(pos), text.str().c_str(), this);
+                        }
+                    }
+                }
             }
             return true;
         }

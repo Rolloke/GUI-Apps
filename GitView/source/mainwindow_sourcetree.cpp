@@ -621,7 +621,6 @@ void MainWindow::updateRepositoryStatus(bool append)
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
         insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
-        /// TODO: find out, if this realy works
         QList<QTreeWidgetItem*> found = ui->treeSource->findItems(fSourceDirs[selected_item], Qt::MatchExactly);
         if (found.size())
         {

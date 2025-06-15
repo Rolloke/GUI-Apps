@@ -162,7 +162,7 @@ constexpr int count_equal(T a, Tn... b)
 }
 
 /// \brief variadic is_exclusive_one_equal_to
-/// \note use as xor for all b(s) XOR(b1, ..., bn) = is_exclusive_one_equal_to(true, b1, ..., bn);
+/// \note use as xor for all b(s) XOR(a, b1[, ..., bn]) = is_exclusive_one_equal_to(true, b1[, ..., bn]);
 /// \param a comparison parameter
 /// \param b variadic parameter(s)
 /// \return true, if only one of the b(s) is equal to a
