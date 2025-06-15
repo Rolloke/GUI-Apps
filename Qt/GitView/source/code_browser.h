@@ -45,6 +45,7 @@ public:
 
     void set_actions(ActionList* list);
     void set_do_preview(bool preview);
+    void set_sections_visible(bool visible);
 
     void reset();
     const QString& currentLanguage() const;
@@ -84,6 +85,7 @@ public Q_SLOTS:
     void change_visibility(bool visible);
 
 private Q_SLOTS:
+    void updatecontentsChange(int from, int charsRemoved, int charsAdded);
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &rect, int dy);
@@ -102,6 +104,13 @@ private:
         s_blame* blame_data { nullptr };
     };
 
+    struct s_text_section
+    {
+        int  level    = 0;
+        bool visible  = true;
+        int  end_line = 0;
+    };
+
     QTextBlock firstVisibleBlock(int& diff);
     QRectF     blockBoundingRect(const QTextBlock &block) const;
     QPointF    contentOffset() const;
@@ -110,6 +119,7 @@ private:
     QString    change_start_of_selection(selection how_to);
     static QString    toCamelCase(const QString&text);
     static QString    toSnakeCase(const QString& text);
+    void       parse_sections(const QString& text);
 
 private:
     QPointer<QWidget>       m_line_number_area;
@@ -118,7 +128,7 @@ private:
     QMap<int, s_blame_line> m_blame_start_line;
     std::int32_t            m_blame_characters;
     QString                 m_indent = "    ";
-
+    std::map<int, s_text_section>   m_text_section_start;
     ActionList *m_actions;
     bool        m_do_preview;
     QSharedPointer<Highlighter> mHighlighter;
@@ -153,10 +163,12 @@ public:
 protected:
     void paintEvent(QPaintEvent *event)override;
     bool event(QEvent *event) override;
+    void mousePressEvent(QMouseEvent* me) override;
 
 private:
     code_browser *codeEditor;
     code_browser::pos_to_blame m_blame_position;
+    void regard_nested_section(const code_browser::s_text_section &section, QTextBlock &block, int &line);
 };
 
 #ifdef WEB_ENGINE

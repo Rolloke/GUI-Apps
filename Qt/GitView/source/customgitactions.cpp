@@ -27,7 +27,7 @@ using namespace git;
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)
 {
-    return index == Icons || index == ExternalIcons;
+    return is_any_equal_to(index, Icons, ExternalIcons);
 }
 
 bool CustomGitActions::VariousListIndex::isMenu(int index)

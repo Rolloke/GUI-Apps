@@ -595,7 +595,7 @@ QString find_icon(const QString& path, const QString& file)
     {
         iterator.next();
         const QFileInfo& file_info = iterator.fileInfo();
-        auto name = file_info.fileName();
+        const auto& name = file_info.fileName();
         if (file_info.isDir() && !is_any_equal_to(name, Folder::FolderSelf, Folder::FolderUp))
         {
             QString found = find_icon(path + "/" + name, file);
@@ -606,8 +606,8 @@ QString find_icon(const QString& path, const QString& file)
         }
         else if (   file_info.isFile())
         {
-            auto base_name = file_info.baseName();
-            auto suffix = file_info.suffix();
+            const auto& base_name = file_info.baseName();
+            const auto& suffix = file_info.suffix();
             if (    file.contains(base_name, Qt::CaseInsensitive)
                  && (suffix.contains("svg",  Qt::CaseInsensitive) || suffix.contains("png",  Qt::CaseInsensitive)))
             {

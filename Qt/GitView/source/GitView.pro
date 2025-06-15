@@ -16,7 +16,9 @@ DEFINES += WEB_ENGINE=1
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-#greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
+
+greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
+DEFINES += CORE5COMPAT=1
 
 TARGET = GitView
 TEMPLATE = app

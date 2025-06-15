@@ -12,9 +12,8 @@ using namespace git;
 
 void MainWindow::on_treeHistory_customContextMenuRequested(const QPoint &pos)
 {
-    auto * old_item = mContextMenuSourceTreeItem;
-    ui->treeHistory->customContextMenuRequested(pos, mActions, &mContextMenuSourceTreeItem);
-    mContextMenuSourceTreeItem = old_item;
+    auto * temp_item = mContextMenuSourceTreeItem;
+    ui->treeHistory->customContextMenuRequested(pos, mActions, &temp_item);
 }
 
 void MainWindow::call_git_history_diff_command()

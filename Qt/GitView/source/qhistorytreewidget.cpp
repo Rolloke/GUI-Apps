@@ -2,8 +2,10 @@
 #include <QHeaderView>
 #include <QMenu>
 #include <QActionGroup>
+#include <QPainter>
+#include <QPainterPath>
+#include <iostream>
 #include "actions.h"
-#include "helper.h"
 #include "history.h"
 #include "git_type.h"
 #include "logger.h"
@@ -564,9 +566,14 @@ void QDrawGraphItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
         painter->setPen(color);
         painter->drawRect(option.rect);
 
+
         auto rect = option.rect;
         QVariant variant = index.model()->data(index, History::role(History::Entry::DrawItems));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         if (variant.isValid() && variant.typeId() == QMetaType::QVariantList)
+#else
+        if (variant.isValid() && variant.type() == QVariant::List)
+#endif
         {
             const auto& variant_list = variant.toList();
             for (const auto& draw_item : variant_list)

@@ -15,7 +15,11 @@
 #include <QClipboard>
 #include <QMimeData>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    #include <QtCore/QTextCodec>
+#else
+#endif
+
+#if CORE5COMPAT == 1
+#include <QTextCodec>
 #else
 #endif
 
@@ -477,7 +481,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
         }
         else if (reopen_file && text_browser)
         {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)  && CORE5COMPAT == 0
             if (encoding.has_value())
             {
                 QStringDecoder decode_string;
@@ -1103,19 +1107,19 @@ void MainWindow::perform_custom_command()
                 check_set_current_path(git_command);
                 if (handle_in_thread)
                 {
-                    auto*action = mActions.getAction(Cmd::KillBackgroundThread);
-                    if (action)
+                    auto*action_kbgcmd = mActions.getAction(Cmd::KillBackgroundThread);
+                    if (action_kbgcmd)
                     {
-                        action->setEnabled(true);
+                        action_kbgcmd->setEnabled(true);
                         QVariantMap workmap;
                         workmap.insert(Worker::repository, repository);
-                        workmap.insert(Worker::command_id, mActions.findID(action));
+                        workmap.insert(Worker::command_id, mActions.findID(action_kbgcmd));
                         workmap.insert(Worker::command, git_command);
                         workmap.insert(Worker::action , variant_list[ActionList::Data::PostCmdAction].toUInt());
                         workmap.insert(Worker::flags  , variant_list[ActionList::Data::Flags].toUInt());
                         workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
                         mWorker.doWork(QVariant(workmap));
-                        action->setToolTip(mWorker.getBatchToolTip());
+                        action_kbgcmd->setToolTip(mWorker.getBatchToolTip());
                         if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
                         {
                             showDockedWidget(mBackgroundTextView.data());

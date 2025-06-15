@@ -121,6 +121,12 @@ void Highlighter::Language::load(QSettings& fSettings)
     mKeywordFormat[type7].setForeground(Qt::darkGray);
     mKeywordFormat[type7].setFontWeight(QFont::Medium);
 
+    mKeywordFormat[startsection].setForeground(Qt::black);
+    mKeywordFormat[startsection].setFontWeight(QFont::Medium);
+
+    mKeywordFormat[stopsection].setForeground(Qt::black);
+    mKeywordFormat[stopsection].setFontWeight(QFont::Medium);
+
     mNumbersFormat.setForeground(Qt::blue);
     mNumbersFormat.setFontWeight(QFont::Medium);
 
@@ -141,6 +147,8 @@ void Highlighter::Language::load(QSettings& fSettings)
     ADD_MAP_ENTRY(mKeywordMap, type5);
     ADD_MAP_ENTRY(mKeywordMap, type6);
     ADD_MAP_ENTRY(mKeywordMap, type7);
+    ADD_MAP_ENTRY(mKeywordMap, startsection);
+    ADD_MAP_ENTRY(mKeywordMap, stopsection);
 
     fSettings.beginGroup(ColorSelector::is_dark_mode() ? groupHighlighterDark : groupHighlighter);
     LOAD_FORMAT(fSettings, mSingleLineCommentFormat);
@@ -154,6 +162,8 @@ void Highlighter::Language::load(QSettings& fSettings)
     LOAD_FORMAT(fSettings, mKeywordFormat[type5]);
     LOAD_FORMAT(fSettings, mKeywordFormat[type6]);
     LOAD_FORMAT(fSettings, mKeywordFormat[type7]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[startsection]);
+    LOAD_FORMAT(fSettings, mKeywordFormat[stopsection]);
     LOAD_FORMAT(fSettings, mFunctionFormat);
     LOAD_FORMAT(fSettings, mNumbersFormat);
     LOAD_FORMAT(fSettings, mPreprocessorFormat);
@@ -177,6 +187,8 @@ void Highlighter::Language::store( QSettings& fSettings)
     STORE_STRF(fSettings, mKeywordFormat[type5], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[type6], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mKeywordFormat[type7], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[startsection], Highlighter::Language::to_string);
+    STORE_STRF(fSettings, mKeywordFormat[stopsection], Highlighter::Language::to_string);
     STORE_STRF(fSettings, mFunctionFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mNumbersFormat, Highlighter::Language::to_string);
     STORE_STRF(fSettings, mPreprocessorFormat, Highlighter::Language::to_string);
@@ -313,6 +325,8 @@ const char* Highlighter::get_regex(keys key)
     case type1: case type2: case type3: case type4:
     case type5: case type6: case type7:
         return "\\b(?:%1)\\b";
+    case startsection: case stopsection:
+        return "%1";
     case function: return "\\b[0-9\\+\\-\\.]+\\b";
     case quotation: return "\".*\"";
     default: return "";
@@ -419,18 +433,21 @@ void Highlighter::load_language(QString language_name)
                     QString keys = getValue(n, QString(""));
                     if (name == "function" || name == "section")
                     {
+                        rule.key = Highlighter::function;
                         rule.pattern = QRegularExpression(keys);
                         rule.format = language.mFunctionFormat;
                         language.highlightingRules.append(rule);
                     }
                     else if (name == "preprocessor")
                     {
+                        rule.key = Highlighter::preprocessor;
                         rule.pattern = QRegularExpression(keys);
                         rule.format = language.mPreprocessorFormat;
                         language.highlightingRules.append(rule);
                     }
                     else if (name == "numbers")
                     {
+                        rule.key = Highlighter::numbers;
                         rule.pattern = QRegularExpression(keys);
                         rule.format = language.mNumbersFormat;
                         language.highlightingRules.append(rule);
@@ -446,7 +463,8 @@ void Highlighter::load_language(QString language_name)
                         {
                             if (character == ' ') character = '|';
                         }
-                        QString pattern = tr(get_regex(type1)).arg(keys);
+                        rule.key = static_cast<Highlighter::keys>(k);
+                        QString pattern = tr(get_regex(rule.key)).arg(keys);
                         rule.pattern = QRegularExpression(pattern);
                         rule.format = language.mKeywordFormat[k];
                         language.highlightingRules.append(rule);
@@ -548,16 +566,37 @@ const Highlighter::Language& Highlighter::get_language()const
     return mLanguages[mDefault];
 }
 
-QString Highlighter::Language::get_pattern(const QTextCharFormat& format) const
+QString Highlighter::Language::get_pattern(const QTextCharFormat &format) const
 {
+    const auto& regex = get_regex(format);
+    if (regex.isValid()) return regex.pattern();
+    return "";
+}
+
+const QRegularExpression& Highlighter::Language::get_regex(const QTextCharFormat &format) const
+{
+    static QRegularExpression dummy;
     for (const auto& rule : std::as_const(highlightingRules))
     {
         if (rule.format == format)
         {
-            return rule.pattern.pattern();
+            return rule.pattern;
         }
     }
-    return "";
+    return dummy;
+}
+
+const QRegularExpression& Highlighter::Language::get_regex(const keys key) const
+{
+    static QRegularExpression dummy;
+    for (const auto& rule : std::as_const(highlightingRules))
+    {
+        if (rule.key == key)
+        {
+            return rule.pattern;
+        }
+    }
+    return dummy;
 }
 
 void Highlighter::highlightBlock(const QString &text)

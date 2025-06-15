@@ -26,6 +26,7 @@ code_browser::code_browser(QWidget *parent): QTextBrowser(parent)
   , m_do_preview(false)
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
+    connect(document(), SIGNAL(contentsChange(int,int,int)), this, SLOT(updatecontentsChange(int,int,int)));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(vertical_scroll_value(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
@@ -65,6 +66,11 @@ int code_browser::lineNumberAreaWidth()
 
         digits += m_blame_characters;
 
+        if (m_text_section_start.size())
+        {
+            digits += 2;
+        }
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         int space = 3 + fontMetrics().boundingRect("9").width() * digits;
 #else
@@ -98,7 +104,17 @@ void code_browser::change_visibility(bool visible)
     }
 }
 
-code_browser* code_browser::clone(bool all_parameter, bool with_text)
+void code_browser::updatecontentsChange(int from, int charsRemoved, int charsAdded)
+{
+    set_sections_visible(true);
+    m_text_section_start.clear();
+    if (from == 0 && charsRemoved == 0 && charsAdded > 0)
+    {
+        parse_sections(toPlainText());
+    }
+}
+
+code_browser* code_browser::clone(bool all_parameter, bool with_text) 
 {
     auto *cloned =  new code_browser(parentWidget());
     cloned->reset();
@@ -131,6 +147,7 @@ code_browser* code_browser::clone(bool all_parameter, bool with_text)
     }
     return cloned;
 }
+
 
 void code_browser::updateLineNumberAreaWidth(int)
 {
@@ -260,8 +277,7 @@ int code_browser::blockCount() const
 {
     return document()->blockCount();
 }
-/// TODO: set blocks visible or invisible to wrap or unwrap text
-/// try set block invisible with command changeSelection(..) cmd::EditToggleVisible
+
 QTextBlock code_browser::firstVisibleBlock(int& diff)
 {
     QPointF content_offset = contentOffset();
@@ -548,6 +564,80 @@ QString code_browser::toSnakeCase(const QString& text)
     return {};
 }
 
+void code_browser::parse_sections(const QString &text)
+{
+    const QRegularExpression& start_section = mHighlighter->get_language().get_regex(Highlighter::startsection);
+    const QRegularExpression& stop_section  = mHighlighter->get_language().get_regex(Highlighter::stopsection);
+    if (start_section.isValid() && start_section.pattern().size() && stop_section.isValid() && stop_section.pattern().size())
+    {
+        QStringList lines = text.split("\n");
+        int level = 0;
+        int line_number = 1;
+        for (const QString &line : std::as_const(lines))
+        {
+            int start = line.indexOf(start_section);
+            int stop  = line.indexOf(stop_section);
+            if (start != -1)
+            {
+                auto& hide_section = m_text_section_start[line_number];
+                ++level;
+                hide_section.level = level;
+            }
+            if (stop != -1)
+            {
+                auto hide_section = std::find_if(m_text_section_start.begin(), m_text_section_start.end(), [level](const auto& section) { return (section.second.end_line == 0 && section.second.level == level); });
+                if (hide_section != m_text_section_start.end())
+                {
+                    --level;
+                    hide_section->second.end_line = line_number;
+                }
+            }
+            ++line_number;
+        }
+
+        for (auto section = m_text_section_start.begin(); section != m_text_section_start.end(); )
+        {
+            if (section->first == section->second.end_line)
+            {
+                section = m_text_section_start.erase(section);
+            }
+            else
+            {
+                ++section;
+            }
+        }
+    }
+}
+
+void code_browser::set_sections_visible(bool visible)
+{
+    bool update = false;
+    for (auto section_iter = m_text_section_start.begin(); section_iter != m_text_section_start.end(); ++section_iter)
+    {
+        if (section_iter->second.visible != visible)
+        {
+            update = true;
+            int line = section_iter->first;
+            QTextBlock block = document()->findBlockByLineNumber(line - 1);
+            s_text_section &section = section_iter->second;
+            section.visible = !section.visible;
+            block = block.next();
+            for (++line; line <= section.end_line && block.isValid(); ++line)
+            {
+                block.setVisible(section.visible);
+                block.setUserState(0);
+                block = block.next();
+            }
+        }
+    }
+    if (update)
+    {
+        auto end_block = document()->end().previous();
+        document()->markContentsDirty(0, end_block.position());
+        viewport()->update();
+        m_line_number_area->update();
+    }
+}
 
 void code_browser::reset_blame()
 {
@@ -644,6 +734,7 @@ void LineNumberArea::paintEvent(QPaintEvent *event)
 {
     codeEditor->lineNumberAreaPaintEvent(event, m_blame_position);
 }
+
 // NOTE: source for this solution, but a little bit modified
 // https://stackoverflow.com/questions/2443358/how-to-add-lines-numbers-to-qtextedit
 // https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
@@ -665,6 +756,7 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& bl
     int           current_line = 0;
     blame_pos.clear();
 
+    std::vector<s_text_section*> current_hide;
     while (block.isValid() && top <= event->rect().bottom())
     {
         if (block.isVisible() && bottom >= event->rect().top())
@@ -702,6 +794,36 @@ void code_browser::lineNumberAreaPaintEvent(QPaintEvent *event, pos_to_blame& bl
                     number += current_blame->blame_data->text[current_line++];
                 }
             }
+            else if (m_text_section_start.size() > 0)
+            {
+                if (m_text_section_start.count(line))
+                {
+                    current_hide.push_back(&m_text_section_start[line]);
+                    if (current_hide.back()->visible) number += " <";
+                    else
+                    {
+                        number += " #";
+                        current_hide.pop_back();
+                    }
+                }
+                else if (current_hide.size())
+                {
+                    if (current_hide.back()->end_line == line)
+                    {
+                        number += " >";
+                        current_hide.pop_back();
+                    }
+                    else
+                    {
+                        number += " |";
+                    }
+                }
+                else
+                {
+                    number += "  ";
+                }
+            }
+
             painter.setPen(text_color);
             painter.drawText(0, top, m_line_number_area->width(), fontMetrics().height(), align, number);
         }
@@ -731,10 +853,74 @@ bool LineNumberArea::event(QEvent *event)
                     break;
                 }
             }
+            if (codeEditor->m_text_section_start.size())
+            {
+                /// TODO: display section parameters
+            }
             return true;
         }
     }
     return QWidget::event(event);
+}
+
+void LineNumberArea::regard_nested_section(const code_browser::s_text_section &section, QTextBlock& block, int& line)
+{
+    (void)(block);
+    /// TODO: regard nested sections, but how?
+    /// here the nested section visibility is set to parent visibility
+    auto nested_section = codeEditor->m_text_section_start.find(line);
+    if (   nested_section != codeEditor->m_text_section_start.end()
+        //&& nested_section->second.visible != section.visible
+        )
+    {
+        nested_section->second.visible = section.visible;
+        // block.setVisible(section.visible);
+        // block = block.next();
+        // for (++line; line <= nested_section->second.end_line && block.isValid(); ++line)
+        // {
+        //     regard_nested_section(nested_section->second, block, line);
+        //     block = block.next();
+        // }
+    }
+}
+
+void LineNumberArea::mousePressEvent(QMouseEvent *me)
+{
+/// TODO: Jump to start or end of section
+    QTextCursor cursor = codeEditor->cursorForPosition(me->pos());
+    QTextBlock    block = cursor.block();
+    bool update = false;
+    if (block.isValid() )
+    {
+        if (block.isVisible())
+        {
+            int line = block.blockNumber() + 1;
+            auto hide_section = codeEditor->m_text_section_start.find(line);
+            if (hide_section != codeEditor->m_text_section_start.end())
+            {
+                code_browser::s_text_section &section = hide_section->second;
+                section.visible = !section.visible;
+                block = block.next();
+                for (++line; line <= section.end_line && block.isValid(); ++line)
+                {
+                    regard_nested_section(section, block, line);
+                    block.setVisible(section.visible);
+                    block = block.next();
+                }
+                update = true;
+            }
+        }
+        block = block.next();
+    }
+    if (update)
+    {
+        auto end_block = codeEditor->document()->end().previous();
+        codeEditor->document()->markContentsDirty(0, end_block.position());
+        codeEditor->viewport()->update();
+        codeEditor->m_line_number_area->update();
+    }
+
+    QWidget::mousePressEvent(me);
 }
 
 void code_browser::lineNumberAreaHelpEvent(const QStringList& text_list, const QPoint& pos)
@@ -833,6 +1019,8 @@ PreviewPage::PreviewPage(QObject *parent, QWebEngineView* view) : QWebEnginePage
 {
 
 }
+
+
 
 void PreviewPage::set_type(PreviewPage::type type)
 {

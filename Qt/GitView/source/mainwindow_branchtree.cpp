@@ -17,7 +17,7 @@ void MainWindow::call_git_branch_command()
     QString            branch_item          = ui->treeBranches->getSelectedBranch();
     QString            git_command          = action->statusTip();
     QString            top_item_path        = branch_git_root_path;
-    if (ui->treeSource->hasFocus())
+    if (ui->treeSource->hasFocus() && mContextMenuSourceTreeItem)
     {
         top_item_path = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
     }
