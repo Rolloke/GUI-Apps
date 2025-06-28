@@ -183,8 +183,3 @@ void MainWindow::on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTr
         on_treeHistory_itemClicked(current, ui->treeHistory->currentColumn());
     }
 }
-
-void MainWindow::on_ckShowHistoryGraphically_clicked(bool checked)
-{
-    ui->treeHistory->setShowHistoryGraphically(checked);
-}

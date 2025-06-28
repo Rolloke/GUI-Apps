@@ -22,10 +22,6 @@ graphics_view::graphics_view(QWidget *parent) :
   , mHistory(graphic::off)
 {
     setScene(new QGraphicsScene ());
-//    add_show_history_entry(git::History::Entry::ParentHash);
-//    add_show_history_entry(git::History::Entry::CommitHash);
-    add_show_history_entry(git::History::Entry::Committer);
-    add_show_history_entry(git::History::Entry::CommitterDate);
 }
 
 bool graphics_view::render_file(const QString& file_name, const QString& file_extension)
@@ -148,44 +144,5 @@ void graphics_view::fit_inView(bool fit)
     }
 }
 
-void graphics_view::insert_history(const QStringList & list)
-{
-    if (list.isEmpty())
-    {
-        fit_inView(mFitInView);
-    }
-    else
-    {
-        const auto items = scene()->items();
-        const int size = items.size();
-        int height { 0 };
-        if (size > 0)
-        {
-             height = items[size-1]->boundingRect().height();
-        }
-
-        auto item = new commit_graphics_item();
-        item->set_offset_pos(QPointF(50, size * (height + 10)));
-        item->m_show_entry = [this] (int show) { return m_show_history_entry.count(show) > 0; };
-        item->set_history(list);
-        addItem2graphicsView(item, false);
-        mHistory = graphic::set;
-    }
-}
-
-void graphics_view::add_show_history_entry(int entry)
-{
-    m_show_history_entry.insert(entry);
-}
-
-void graphics_view::remove_show_history_entry(int entry)
-{
-    m_show_history_entry.erase(entry);
-}
-
-const std::set<int>& graphics_view::get_show_history_entries() const
-{
-    return m_show_history_entry;
-}
 
 

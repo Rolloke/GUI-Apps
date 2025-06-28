@@ -19,10 +19,6 @@
 
 
 
-/// TODO: Show Parameter of a Command in Lineedit Execute without execution
-/// Function execute with signal slot mechanism to redirect command text
-/// Make this dialog modal to select item in source tree
-
 using namespace git;
 
 bool CustomGitActions::VariousListIndex::isIcon(int index)

@@ -884,6 +884,7 @@ void LineNumberArea::regard_nested_section(const code_browser::s_text_section &s
     (void)(block);
     /// TODO: regard nested sections, but how?
     /// here the nested section visibility is set to parent visibility
+    /// NOTE: if all are hidden, show all sections with level + 1
     auto nested_section = codeEditor->m_text_section_start.find(line);
     if (   nested_section != codeEditor->m_text_section_start.end()
         //&& nested_section->second.visible != section.visible

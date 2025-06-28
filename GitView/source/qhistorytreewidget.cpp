@@ -56,10 +56,6 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
     QMap<QString, QVariant> fAuthors;
 
     setVisible(true);
-    if (mShowHistoryGraphically)
-    {
-        Q_EMIT reset_history();
-    }
 
     const int fTLI = topLevelItemCount()-1;
     int list_index = -1;
@@ -87,16 +83,7 @@ void QHistoryTreeWidget::parseGitLogHistoryText(const QString& fText, const QVar
                 fNewHistoryLogItem->setData(History::Column::CommitGraph, History::role(History::Entry::DrawItems), QVariant(draw_items));
             }
 
-            if (mShowHistoryGraphically)
-            {
-                Q_EMIT send_history(fItem);
-            }
         }
-    }
-
-    if (mShowHistoryGraphically)
-    {
-        Q_EMIT send_history({});
     }
 
     fNewHistoryItem->setData(History::Column::Commit, History::Role::VisibleAuthors, QVariant(fAuthors));
@@ -146,11 +133,6 @@ void QHistoryTreeWidget::checkAuthorsIndex(int aIndex, bool aChecked)
             }
         }
     }
-}
-
-void QHistoryTreeWidget::setShowHistoryGraphically(bool show)
-{
-    mShowHistoryGraphically = show;
 }
 
 QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem)

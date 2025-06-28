@@ -19,10 +19,6 @@ public:
     bool render_file(const QString& file_name, const QString& file_extension);
     bool has_rendered_graphic();
 
-    void add_show_history_entry(int entry);
-    void remove_show_history_entry(int entry);
-    const std::set<int>& get_show_history_entries() const;
-
 signals:
 
 public slots:
@@ -31,7 +27,6 @@ public slots:
     void zoomOut();
     void fit_inView(bool);
     void updateView();
-    void insert_history(const QStringList&);
 
 private:
     double mGraphicsScale;

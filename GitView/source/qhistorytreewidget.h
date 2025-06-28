@@ -27,7 +27,6 @@ public:
     QVariant        determineHistoryHashItems(QTreeWidgetItem* fSelectedHistoryItem);
     QString         clickItem(QTreeWidgetItem *aItem, int aColumn);
     void            checkAuthorsIndex(int aIndex, bool aChecked);
-    void            setShowHistoryGraphically(bool show);
 
     const QString&  getSelectedHistoryHashItems();
     const QString&  getSelectedHistoryFile();
@@ -36,8 +35,6 @@ public:
     bool            isSelectionFileDiffable();
 
 Q_SIGNALS:
-    void send_history(const QStringList& list);
-    void reset_history();
     void show_me(QWidget* widget);
 
 public Q_SLOTS:
@@ -54,7 +51,6 @@ private:
     QString mHistoryHashItems;
     uint    mSelectedTopLevelItemType { 0 };
     bool    mInitialized { false };
-    bool    mShowHistoryGraphically;
 
     QDrawGraphItemDelegate* m_item_delegate;
 

@@ -15,6 +15,7 @@
 #include <QTextCodec>
 #endif
 #else
+#include <QTextCodec>
 #include <QRegExp>
 #endif
 
@@ -445,7 +446,7 @@ void MainWindow::createBookmark()
         QString current_file= text_browser->get_file_path();
         if (current_file.size())
         {
-            const QString book_mark = "Bookmarks";
+            const QString book_mark = tr("Bookmarks");
             QTreeWidgetItem* new_tree_root_item;
             auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
             if (list.size())

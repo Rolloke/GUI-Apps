@@ -270,7 +270,6 @@ private Q_SLOTS:
     void on_treeHistory_customContextMenuRequested(const QPoint &pos);
     void on_treeHistory_itemDoubleClicked(QTreeWidgetItem *item, int column);
     void on_treeHistory_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-    void on_ckShowHistoryGraphically_clicked(bool checked);
 
     void on_treeBranches_customContextMenuRequested(const QPoint &pos);
     void on_treeBranches_itemDoubleClicked(QTreeWidgetItem *item, int column);
@@ -360,6 +359,7 @@ public Q_SLOTS:
     void show_web_view(bool );
     void read_custom_commands(const QString& file_name);
     void store_custom_commands(const QString &file_name);
+    void store_settings();
 
 private:
 

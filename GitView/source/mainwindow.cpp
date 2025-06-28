@@ -382,7 +382,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         update_widget_states(ui->ckRenderGraphicFile);
         LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowHistoryGraphically);
-        on_ckShowHistoryGraphically_clicked(ui->ckShowHistoryGraphically->isChecked());
         LOAD_PTR(fSettings, ui->ckCloseAllFilesOfRepository, setChecked, isChecked, toBool);
         update_widget_states(ui->ckCloseAllFilesOfRepository);
         LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
@@ -527,6 +526,13 @@ MainWindow::~MainWindow()
     disconnect(ui->textBrowser, SIGNAL(text_of_active_changed(bool)), this, SLOT(textBrowserChanged(bool)));
     showDockedWidget(mBinaryValuesView.data(), false);
 
+    store_settings();
+
+    delete ui;
+}
+
+void MainWindow::store_settings()
+{
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
     fSettings.beginGroup(config::sGroupFilter);
     {
@@ -669,6 +675,7 @@ MainWindow::~MainWindow()
         const QString& fTheme = mActions.getTheme();
         STORE_STR(fSettings, fTheme);
     }
+
     store_commands(fSettings);
     fSettings.endGroup();
 
@@ -680,8 +687,6 @@ MainWindow::~MainWindow()
         STORE_STR(fSettings, fSeverity);
     }
     fSettings.endGroup();
-
-    delete ui;
 }
 
 void MainWindow::read_commands(QSettings& fSettings)

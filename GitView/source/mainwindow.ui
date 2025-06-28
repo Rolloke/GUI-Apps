@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1209</width>
+    <height>824</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -1201,14 +1201,20 @@ Git or command results are always displayed in main editor.
         </item>
         <item>
          <widget class="QCheckBox" name="ckShowHistoryGraphically">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="visible">
+           <bool>true</bool>
+          </property>
           <property name="toolTip">
-           <string>Show history also in graphics view</string>
+           <string>Not defined</string>
           </property>
           <property name="statusTip">
-           <string>Show history also in graphics view</string>
+           <string>not defined</string>
           </property>
           <property name="text">
-           <string>Show History graphically</string>
+           <string>TBD: use dummy entry</string>
           </property>
          </widget>
         </item>
