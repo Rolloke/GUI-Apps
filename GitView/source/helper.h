@@ -61,6 +61,7 @@ bool is_whole_word(const QString& text);
 
 bool get_pid_list(const QString& name, QStringList& pid_list);
 
+QString get_errno_text();
 
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree, const tGTLIFunction& function = {});
 void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);

@@ -22,22 +22,23 @@
 #include <QWhatsThisClickedEvent>
 #include <QThread>
 
-#include <fstream>
-#include <sstream>
 #ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
 #else
 /// what
 #include <cstring>
-#include <algorithm>
+//#include <algorithm>
 #endif
 
 #include <map>
 
 #ifdef _WIN32
-#include <windows.h>
-#include <processthreadsapi.h>
-#include <stdlib.h>
+  #include <windows.h>
+  #include <processthreadsapi.h>
+  #include <stdlib.h>
+#else
+  #include <fstream>
+  #include <sstream>
 #endif
 
 
@@ -188,10 +189,10 @@ bool is_whole_word(const QString& text)
 }
 bool get_pid_list(const QString& name, QStringList& pid_list)
 {
-    QString pids;
+    QString     pids;
+    QStringList parts        = name.split("/");
+    QString     process_name = parts.last();
 #ifdef __linux__
-    QStringList parts = name.split("/");
-    QString  process_name = parts.last();
     if (execute(QObject::tr("pidof %1").arg(process_name), pids, true) == 0 && pids.size() > 1)
     {
         pid_list =  pids.split(" ");
@@ -214,39 +215,43 @@ bool get_pid_list(const QString& name, QStringList& pid_list)
         }
     }
 #else
-    /// TODO: do the same for windows
-    // const char *procname
-//    HANDLE hSnapshot;
-//      PROCESSENTRY32 pe;
-//      int pid = 0;
-//      BOOL hResult;
-
-//      // snapshot of all processes in the system
-//      hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-//      if (INVALID_HANDLE_VALUE == hSnapshot) return 0;
-
-//      // initializing size: needed for using Process32First
-//      pe.dwSize = sizeof(PROCESSENTRY32);
-
-//      // info about first process encountered in a system snapshot
-//      hResult = Process32First(hSnapshot, &pe);
-
-//      // retrieve information about the processes
-//      // and exit if unsuccessful
-//      while (hResult) {
-//        // if we find the process: return process ID
-//        if (strcmp(procname, pe.szExeFile) == 0) {
-//          pid = pe.th32ProcessID;
-//          break;
-//        }
-//        hResult = Process32Next(hSnapshot, &pe);
-//      }
-
-//      // closes an open handle (CreateToolhelp32Snapshot)
-//      CloseHandle(hSnapshot);
-//      return pid;
+    if (execute("tasklist /APPS", pids, true) == 0 && pids.size() > 1)
+    {
+        QStringList lines = pids.split("\r\n");
+        for (int i = lines.size() - 1; i > 2; --i)
+        {
+            if (lines[i].contains(process_name, Qt::CaseInsensitive))
+            {
+                static const QRegularExpression fRegEx(" ([0-9]{1,}) ");
+                /// NOTE: output of tasklist
+                /// QString str = "SearchHost.exe (CortanaUI)                             9624       142.456 K MicrosoftWindows.Client.CBS_1000.26100.84.0_x64__c";
+                /// "([\w.]{1,} [\w\(\)\.]{1,}[ ]{1,})([\d]{1,9})[ ]{1,}([\d\.]{1,9})(.*)"
+                /// "([^\d]{1,})([\d]{1,})[^\d]{1,}([\d\.]{1,}) (.*)"
+                auto match = fRegEx.match(lines[i]);
+                if (match.isValid())
+                {
+                    const auto captured = match.capturedTexts();
+                    if (captured.count() == 2)
+                    {
+                        pid_list.append(captured[1]);
+                    }
+                }
+            }
+        }
+    }
 #endif
     return pid_list.size() > 0;
+}
+
+QString get_errno_text()
+{
+#ifdef __linux__
+    return QString(strerror(errno));
+#else
+    char error_text[MAXERRORLENGTH];
+    strerror_s(error_text, MAXERRORLENGTH, errno);
+    return QString(error_text);
+#endif
 }
 
 void deleteTopLevelItemOfSelectedTreeWidgetItem(QTreeWidget& aTree, const tGTLIFunction &function)
@@ -507,7 +512,7 @@ int execute(const QString& command, QString& aResultText, bool hide, std::functi
             if (fResult == ErrorNumberInErrno)
             {
                 aResultText += QObject::tr("\nError number : %1").arg((int)errno);
-                aResultText += QObject::tr("%1").arg(std::strerror(errno));
+                aResultText += QObject::tr("%1").arg(get_errno_text());
             }
         }
         file.close();
@@ -706,5 +711,3 @@ bool LinkFilter::eventFilter(QObject *, QEvent *event)
     }
     return false;
 }
-
-

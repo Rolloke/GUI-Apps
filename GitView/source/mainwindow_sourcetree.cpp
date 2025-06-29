@@ -1337,7 +1337,7 @@ void MainWindow::deleteFileOrFolder()
                 appendTextToBrowser(tr("Could not delete %1 %2\n").arg(fType.type_name(), fItemPath));
                 if (errno)
                 {
-                    appendTextToBrowser(strerror(errno), true);
+                    appendTextToBrowser(get_errno_text(), true);
                 }
             }
         }

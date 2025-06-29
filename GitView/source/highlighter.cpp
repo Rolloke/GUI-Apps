@@ -168,7 +168,11 @@ void Highlighter::Language::load(QSettings& fSettings)
     LOAD_FORMAT(fSettings, mNumbersFormat);
     LOAD_FORMAT(fSettings, mPreprocessorFormat);
     LOAD_FORMAT(fSettings, mQuotationFormat);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    LOAD_NP(    fSettings, mSelectedLineBackground, fromString, name, toString);
+#else
     LOAD_NP(    fSettings, mSelectedLineBackground, setNamedColor, name, toString);
+#endif
     fSettings.endGroup();
 }
 

@@ -798,7 +798,7 @@ void BinaryTableModel::update_type_display_value_index()
     {
         if (is_in_range(m_td_offset[row], m_td_offset[row+1]-1, m_byte_cursor))
         {
-            m_value_index.first  = row;
+            m_value_index.first  = static_cast<int>(row);
             const int bytes_in_row = m_td_offset[row+1] - m_td_offset[row];
             const int bytes_per_column = bytes_in_row / m_columns_per_row;
             if (bytes_per_column)
