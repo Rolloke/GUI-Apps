@@ -74,7 +74,8 @@ struct History
     {
         two_commits = 2,
         to_next_commit = -1,
-        to_current = -2
+        to_current = -2,
+        list_files_to_parent = -3
     }; };
     static int role(Entry::e aEntry);
     static const char* name(Entry::e aEntry);

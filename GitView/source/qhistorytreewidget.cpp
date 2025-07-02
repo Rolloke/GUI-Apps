@@ -356,13 +356,13 @@ void QHistoryTreeWidget::insertFileNames()
                 int child_count = item->childCount();
                 for (int child=0; child<(child_count-1); ++child)
                 {
-                    insertFileNames(item, child);
+                    insertFileNames(item, child, History::Diff::list_files_to_parent);
                 }
             }   break;
             case Level::Log:
             {
                 QTreeWidgetItem* parent = item->parent();
-                insertFileNames(parent, parent->indexOfChild(item));
+                insertFileNames(parent, parent->indexOfChild(item), History::Diff::list_files_to_parent);
             }   break;
             case Level::File: break;
         }
@@ -404,6 +404,12 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
                 git_cmd = tr("git diff --name-only %1 %2").
                           arg(second_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString(),
                               child_item-> data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+            }
+            else if (second_child == History::Diff::list_files_to_parent)
+            {
+                git_cmd = tr("git diff --name-only %1 %2").
+                          arg(child_item->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString()).
+                          arg(child_item->data(History::Column::Commit, History::role(History::Entry::ParentHash)).toString());
             }
             else
             {
@@ -449,7 +455,7 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
             if (!error)
             {
                 TRACEX(Logger::to_browser, git_cmd);
-                if (!diff_over_one_step)
+                if (!diff_over_one_step && second_child != History::Diff::list_files_to_parent)
                 {
                     QString second_name = second_item != 0 ? second_item->text(History::Column::Filename) : "current";
                     QString compared_items = child_item->text(History::Column::Filename) + " <-> " + second_name;
@@ -524,8 +530,6 @@ bool QHistoryTreeWidget::isSelectionFileDiffable()
 {
     return mHistoryFile.size() > 0;
 }
-
-
 
 QDrawGraphItemDelegate::QDrawGraphItemDelegate(QObject *parent) : QItemDelegate(parent)
 {
