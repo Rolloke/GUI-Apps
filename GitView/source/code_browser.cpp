@@ -879,31 +879,36 @@ bool LineNumberArea::event(QEvent *event)
     return QWidget::event(event);
 }
 
-void LineNumberArea::regard_nested_section(const code_browser::s_text_section &section, QTextBlock& block, int& line)
+void LineNumberArea::regard_nested_section(const code_browser::s_text_section &section, QTextBlock& block, int& line, int level)
 {
     (void)(block);
+    (void)(level);
     /// TODO: regard nested sections, but how?
     /// here the nested section visibility is set to parent visibility
     /// NOTE: if all are hidden, show all sections with level + 1
     auto nested_section = codeEditor->m_text_section_start.find(line);
-    if (   nested_section != codeEditor->m_text_section_start.end()
-        //&& nested_section->second.visible != section.visible
-        )
+    if (nested_section != codeEditor->m_text_section_start.end())
     {
+#if 1
         nested_section->second.visible = section.visible;
-        // block.setVisible(section.visible);
-        // block = block.next();
-        // for (++line; line <= nested_section->second.end_line && block.isValid(); ++line)
-        // {
-        //     regard_nested_section(nested_section->second, block, line);
-        //     block = block.next();
-        // }
+#else
+        if (nested_section->second.level == level)
+        {
+            nested_section->second.visible = section.visible;
+            block.setVisible(section.visible);
+            block = block.next();
+            for (++line; line <= nested_section->second.end_line && block.isValid(); ++line)
+            {
+                regard_nested_section(nested_section->second, block, line, level);
+                block = block.next();
+            }
+        }
+#endif
     }
 }
 
 void LineNumberArea::mousePressEvent(QMouseEvent *me)
 {
-/// TODO: Jump to start or end of section
     QTextCursor cursor = codeEditor->cursorForPosition(me->pos());
     QTextBlock    block = cursor.block();
     bool update = false;
@@ -916,15 +921,35 @@ void LineNumberArea::mousePressEvent(QMouseEvent *me)
             if (hide_section != codeEditor->m_text_section_start.end())
             {
                 code_browser::s_text_section &section = hide_section->second;
-                section.visible = !section.visible;
-                block = block.next();
-                for (++line; line <= section.end_line && block.isValid(); ++line)
+                if (me->button() == Qt::LeftButton)
                 {
-                    regard_nested_section(section, block, line);
-                    block.setVisible(section.visible);
+                    section.visible = !section.visible;
                     block = block.next();
+                    for (++line; line <= section.end_line && block.isValid(); ++line, block = block.next())
+                    {
+                        regard_nested_section(section, block, line, section.level + 1);
+                        block.setVisible(section.visible);
+                    }
+                    update = true;
                 }
-                update = true;
+                else if (me->button() == Qt::MiddleButton)
+                {
+                    codeEditor->go_to_line(section.end_line);
+                }
+            }
+            else
+            {
+                auto got_to_section = std::find_if(codeEditor->m_text_section_start.begin(), codeEditor->m_text_section_start.end(), [line](auto iter )
+                {
+                    return iter.second.end_line == line;
+                });
+                if (got_to_section != codeEditor->m_text_section_start.end())
+                {
+                    if (me->button() == Qt::MiddleButton)
+                    {
+                        codeEditor->go_to_line(got_to_section->first);
+                    }
+                }
             }
         }
         block = block.next();

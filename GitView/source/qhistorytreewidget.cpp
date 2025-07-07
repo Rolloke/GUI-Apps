@@ -369,6 +369,8 @@ void QHistoryTreeWidget::insertFileNames()
     }
 }
 
+/// TODO: diff of single file does not work correct in every case
+///       it sometimes shows only the file diff to nothing and not diff to previous version
 /// TODO: implement merge branch to current branch
 /// TODO: implement merge two branches
 /// also remote branches
