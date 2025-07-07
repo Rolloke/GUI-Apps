@@ -4,6 +4,7 @@
 #include <QTreeWidget>
 #include <QItemDelegate>
 #include <QMap>
+#include <QMouseEvent>
 #include "helper.h"
 
 class ActionList;
@@ -33,6 +34,7 @@ public:
     uint            getSelectedTopLevelType();
     bool            isSelectionDiffable();
     bool            isSelectionFileDiffable();
+    bool            isMouseButtonPressed(Qt::MouseButton button);
 
 Q_SIGNALS:
     void show_me(QWidget* widget);
@@ -43,6 +45,8 @@ public Q_SLOTS:
     void insertFileNames(QTreeWidgetItem* parent_item, int child, int second_child=-1);
 
 protected:
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     void initialize();
@@ -51,6 +55,7 @@ private:
     QString mHistoryHashItems;
     uint    mSelectedTopLevelItemType { 0 };
     bool    mInitialized { false };
+    int     mIsPressed { 0 };
 
     QDrawGraphItemDelegate* m_item_delegate;
 

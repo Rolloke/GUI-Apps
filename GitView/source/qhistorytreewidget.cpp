@@ -508,6 +508,20 @@ void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child
     }
 }
 
+void QHistoryTreeWidget::mousePressEvent(QMouseEvent *event)
+{
+    mIsPressed |= event->button();
+    QTreeWidget::mousePressEvent(event);
+}
+
+void QHistoryTreeWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    mIsPressed &= ~event->button();
+    QTreeWidget::mouseReleaseEvent(event);
+}
+
+
+
 const QString& QHistoryTreeWidget::getSelectedHistoryHashItems()
 {
     return mHistoryHashItems;
@@ -531,6 +545,11 @@ bool QHistoryTreeWidget::isSelectionDiffable()
 bool QHistoryTreeWidget::isSelectionFileDiffable()
 {
     return mHistoryFile.size() > 0;
+}
+
+bool QHistoryTreeWidget::isMouseButtonPressed(Qt::MouseButton button)
+{
+    return (mIsPressed & button) != 0;
 }
 
 QDrawGraphItemDelegate::QDrawGraphItemDelegate(QObject *parent) : QItemDelegate(parent)
