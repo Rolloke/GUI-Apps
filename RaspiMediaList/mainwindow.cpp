@@ -190,20 +190,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     const QString arg_file = "--file=";
     const QString arg_help = "--help";
-    QString filename;
+    QFileInfo filename_from_cmd_line;
     QStringList arguments = QCoreApplication::arguments();
     for (int n = 0; n < arguments.size(); ++n)
     {
         if (arguments[n] == "-f" && (n + 1) < arguments.size())
         {
-            filename = arguments[n+1];
+            filename_from_cmd_line.setFile(arguments[n+1]);
         }
         else
         {
             int pos = arguments[n].indexOf(arg_file);
             if (pos != -1)
             {
-                filename = arguments[n].mid(pos + arg_file.size());
+                filename_from_cmd_line.setFile(arguments[n].mid(pos + arg_file.size()));
             }
             pos = arguments[n].indexOf(arg_help);
             if (pos != -1)
@@ -215,6 +215,12 @@ MainWindow::MainWindow(QWidget *parent) :
                 exit(0);
             }
         }
+    }
+
+    /// NOTE: check if file from command line exists
+    if (!filename_from_cmd_line.exists())
+    {
+        filename_from_cmd_line.setFile("");
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -324,14 +330,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sliderVolume->setTickInterval(10);
     ui->sliderVolume->setSingleStep(1);
 
-    QFileInfo info(filename);
-    if (!info.exists())
-    {
-        filename.clear();
-        info.setFile("");
-    }
 
-    fSettings.beginGroup(config::sGroupSettings + info.baseName());
+    fSettings.beginGroup(config::sGroupSettings + filename_from_cmd_line.baseName());
 
     LOAD_PTR(fSettings, ui->comboBoxSearchColumn, setCurrentIndex, currentIndex, toInt);
     LOAD_PTR(fSettings, ui->sliderVolume, setValue, value, toInt);
@@ -356,9 +356,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->sliderVolume->setEnabled(!ui->actionOpenMediaPlayerOnDoubleclick->isChecked());
 
-    if (filename.size())
+    if (filename_from_cmd_line.exists()) /// NOTE: prefer filename from command line
     {
-        open_file(filename);
+        open_file(filename_from_cmd_line.absoluteFilePath());
         if (mOpenFileAtStart.size())
         {
             mOpenFileCmdLine = mOpenFileAtStart;
@@ -383,7 +383,7 @@ MainWindow::~MainWindow()
 {
     QSettings fSettings(getConfigName(), QSettings::NativeFormat);
 
-    QFileInfo info(mOpenFileCmdLine);
+    QFileInfo file_info(mOpenFileCmdLine);
 
     fSettings.beginGroup(txt::sGroupLogging);
     {
@@ -394,7 +394,7 @@ MainWindow::~MainWindow()
     }
     fSettings.endGroup();
 
-    fSettings.beginGroup(config::sGroupSettings + info.baseName());
+    fSettings.beginGroup(config::sGroupSettings + file_info.baseName());
     STORE_PTR(fSettings, ui->comboBoxSearchColumn, currentIndex);
     STORE_PTR(fSettings, ui->sliderVolume, value);
     STORE_STR(fSettings, mFileOpenPath);
@@ -1127,13 +1127,25 @@ void  MainWindow::onDownloadFinished()
         if (reply->bytesAvailable() > 0)
         {
             const QByteArray data(reply->readAll());
-            const QString filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_raw, mFavoritesOpenPath, txt::kodi_raw_files);
+            QString filename;
+            if (mOpenFileCmdLine.size() )
+            {
+                filename = mOpenFileCmdLine;
+            }
+            else
+            {
+                filename = QFileDialog::getSaveFileName(this, txt::store_downloaded_kodi_raw, mFavoritesOpenPath, txt::kodi_raw_files);
+            }
             if (filename.size())
             {
                 QFile file(filename);
                 if (file.open(QIODevice::WriteOnly))
                 {
                     file.write(data);
+                    file.close();
+
+                    ui->statusBar->showMessage( tr("Stored file from download to %1, reloaded").arg(filename));
+                    open_file(filename);
                 }
                 else
                 {
