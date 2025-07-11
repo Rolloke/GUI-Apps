@@ -12,16 +12,21 @@ set(CMAKE_AUTORCC ON)
 # you may use boost, but it is not necessary
 # add_compile_definitions(-DUSE_BOOST=1)
 
+# Set Path to your Qt6 cmake files, if necessary
+# set(Qt6_DIR path-to-cmake/Qt6)
+
 find_package(Qt6 REQUIRED)
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+# necessary?
+# find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Xml)
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
 
-qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES de en)
+# optional, may be activated
+# qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES de en)
 
 set(HEADER 
     ../source/aboutdlg.h
