@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(GitView, VERSION 1.0.0.1 LANGUAGES CXX)
 
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -9,24 +10,34 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-# you may use boost, but it is not necessary
-# add_compile_definitions(-DUSE_BOOST=1)
 
-# Set Path to your Qt6 cmake files, if necessary
-# set(Qt6_DIR path-to-cmake/Qt6)
+# if necessary set Qt6 path
+set(Qt6_DIR D:/.conan_short/69d6df/1/lib/cmake/Qt6)
 
-find_package(Qt6 REQUIRED)
+find_package(Qt6 REQUIRED )
 
 find_package(Qt6 REQUIRED COMPONENTS Core)
-# necessary?
-# find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 find_package(Qt6 REQUIRED COMPONENTS Xml)
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
 
-# optional, may be activated
-# qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES de en)
+# if available uncomment this, reguard also target_link_libraries section
+find_package(Qt6 REQUIRED COMPONENTS BuildInternals)
+find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
+qt_internal_project_setup()
+add_compile_definitions(CORE5COMPAT=1)
+
+# if avaliable uncomment this
+#find_package(Qt6 REQUIRED COMPONENTS webenginewidgets)
+#find_package(Qt6 REQUIRED COMPONENTS webchannel)
+#add_compile_definitions(WEB_ENGINE=1)
+
+# if needed use language support
+#qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES de en)
+
+# you may use boost, but it is not necessary
+# add_compile_definitions(-DUSE_BOOST=1)
 
 set(HEADER 
     ../source/aboutdlg.h
@@ -250,3 +261,5 @@ target_link_libraries(GitView PRIVATE Qt6::Gui)
 target_link_libraries(GitView PRIVATE Qt6::Xml)
 target_link_libraries(GitView PRIVATE Qt6::Svg)
 target_link_libraries(GitView PRIVATE Qt6::SvgWidgets)
+# if available uncomment this
+target_link_libraries(GitView PRIVATE Qt6::Core5Compat)
