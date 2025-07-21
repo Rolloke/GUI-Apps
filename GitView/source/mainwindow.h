@@ -120,7 +120,8 @@ private:
         FilePath,
         Line,
         FoundTextLine,
-        Size
+        Size,
+        RepositoryRoot=FoundTextLine
     }; };
 
     struct HistoryFile { enum e

@@ -8,10 +8,10 @@ class ActionList;
 class QBranchTreeWidget : public QTreeWidget
 {
     Q_OBJECT
-
+public:
     struct Column { enum e { Text }; };
     struct Role   { enum e { GitRootPath = 1 }; };
-public:
+
     QBranchTreeWidget(QWidget *parent = 0);
     ~QBranchTreeWidget();
 

@@ -10,13 +10,13 @@ class QStashTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 
+public:
     struct Column { enum e
         {
             Text,
             Description
         }; };
 
-public:
     struct Role   { enum e
         {
             Text = 0,

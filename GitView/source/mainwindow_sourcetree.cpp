@@ -298,12 +298,48 @@ void MainWindow::removeGitSourceFolder()
 {
     auto close_all_subfiles = [&](auto item)
     {
+        QString repo_path = item->text(QSourceTreeWidget::Column::FileName);
         if (ui->ckCloseAllFilesOfRepository->isChecked())
         {
-            mCloseFileFilter = item->text(QSourceTreeWidget::Column::FileName);
+            mCloseFileFilter = repo_path;
             btnCloseText_clicked(Editor::All);
             mCloseFileFilter.clear();
         }
+        /// NOTE: remove according branches and histories
+        /// branches and histories belong to the repository and use references of the repository tree
+        for (int i=0; i<ui->treeBranches->topLevelItemCount(); ++i)
+        {
+            if (ui->treeBranches->topLevelItem(i)->text(QBranchTreeWidget::Column::Text).contains(repo_path))
+            {
+                ui->treeBranches->takeTopLevelItem(i);
+                --i;
+            }
+        }
+        for (int i=0; i<ui->treeHistory->topLevelItemCount(); ++i)
+        {
+            if (ui->treeHistory->topLevelItem(i)->text(QBranchTreeWidget::Column::Text).contains(repo_path))
+            {
+                ui->treeHistory->takeTopLevelItem(i);
+                --i;
+            }
+        }
+        for (int i=0; i<ui->treeStash->topLevelItemCount(); ++i)
+        {
+            if (ui->treeStash->topLevelItem(i)->text(QStashTreeWidget::Column::Description).contains(repo_path))
+            {
+                ui->treeStash->takeTopLevelItem(i);
+                --i;
+            }
+        }
+        for (int i=0; i<ui->treeFindText->topLevelItemCount(); ++i)
+        {
+            if (ui->treeFindText->topLevelItem(i)->text(FindColumn::RepositoryRoot).contains(repo_path))
+            {
+                ui->treeFindText->takeTopLevelItem(i);
+                --i;
+            }
+        }
+
     };
     deleteTopLevelItemOfSelectedTreeWidgetItem(*ui->treeSource, close_all_subfiles);
     mContextMenuSourceTreeItem = nullptr;
