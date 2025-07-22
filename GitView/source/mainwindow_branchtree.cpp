@@ -64,11 +64,7 @@ void MainWindow::call_git_branch_command()
                 ui->textBrowser->setExtension("");
                 ui->textBrowser->setPlainText(git_command);
                 showDockedWidget(ui->treeHistory);
-                if (ui->ckShowHistoryGraphically->isChecked())
-                {
-                    showDockedWidget(ui->graphicsView);
-                }
-            }    break;
+            }   break;
         }
     }
     else if (!isMessageBoxNo(result))

@@ -60,6 +60,7 @@ public:
     QMap<QString, GitIgnore> mIgnoredInFolder;
     git::Type                mCompareTo;
     QTreeWidgetItem*         m1stCompareItem;
+    bool                     mInseredIgnoredFiles;
 
 private:
 

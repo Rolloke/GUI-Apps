@@ -51,6 +51,7 @@ namespace
 const QString qbinarytableview::begin_mark  = "{";
 const QString qbinarytableview::end_mark    = "}";
 const QString qbinarytableview::space       = " ";
+const QString qbinarytableview::hash        = "#";
 const char    qbinarytableview::unprintable = '.';
 
 const QList<QStringList> qbinarytableview::m_section_names =
@@ -196,14 +197,14 @@ void qbinarytableview::mousePressEvent(QMouseEvent* event)
 
     const QFontMetricsF metrix(font());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    float size = metrix.boundingRect("#").width();
+    auto size = metrix.boundingRect(hash).width();
 #else
-    float size = metrix.width(space);
+    auto size = metrix.width(hash);
 #endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    int x_position = event->position().x();
+    auto x_position = event->position().x();
 #else
-    int x_position = event->x();
+    auto x_position = event->x();
 #endif
     if (size < 0)
     {

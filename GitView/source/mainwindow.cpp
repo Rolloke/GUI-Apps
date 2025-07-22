@@ -229,6 +229,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckSystemFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
+        LOAD_PTR(fSettings, ui->ckIgnoredFiles, setChecked, isChecked, toBool);
     }
     fSettings.endGroup();
 
@@ -378,8 +379,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         set_show_line_numbers(ui->ckShowLineNumbers->isChecked());
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         update_widget_states(ui->ckRenderGraphicFile);
-        LOAD_PTR(fSettings, ui->ckShowHistoryGraphically, setChecked, isChecked, toBool);
-        update_widget_states(ui->ckShowHistoryGraphically);
         LOAD_PTR(fSettings, ui->ckCloseAllFilesOfRepository, setChecked, isChecked, toBool);
         update_widget_states(ui->ckCloseAllFilesOfRepository);
         LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
@@ -539,6 +538,7 @@ void MainWindow::store_settings()
         STORE_PTR(fSettings, ui->ckSystemFiles, isChecked);
         STORE_PTR(fSettings, ui->ckFiles, isChecked);
         STORE_PTR(fSettings, ui->ckDirectories, isChecked);
+        STORE_PTR(fSettings, ui->ckIgnoredFiles, isChecked);
     }
     fSettings.endGroup();
 
@@ -616,7 +616,6 @@ void MainWindow::store_settings()
         STORE_PTR(fSettings, ui->comboTabPosition, currentIndex);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
-        STORE_PTR(fSettings, ui->ckShowHistoryGraphically, isChecked);
         STORE_PTR(fSettings, ui->ckCloseAllFilesOfRepository, isChecked);
         STORE_PTR(fSettings, ui->ckOutput2secondTextView, isChecked);
         STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
@@ -2169,7 +2168,7 @@ void MainWindow::initContextMenuActions()
     contextmenu_text_view.push_back(new_id);
 
     create_auto_cmd(ui->ckAppendToBatch);
-    create_auto_cmd(ui->ckShowHistoryGraphically);
+    create_auto_cmd(ui->ckIgnoredFiles);
 
     create_auto_cmd(ui->comboShowItems);
     create_auto_cmd(ui->comboFontName);

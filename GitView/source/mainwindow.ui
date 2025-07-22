@@ -857,6 +857,25 @@ Shows binary file content opened with double click
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="ckIgnoredFiles">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="visible">
+           <bool>true</bool>
+          </property>
+          <property name="toolTip">
+           <string>Show ignored files</string>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Ignored files</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="ckSymbolicLinks">
           <property name="toolTip">
            <string>Show symbolic links in git folder</string>
@@ -1196,25 +1215,6 @@ Git or command results are always displayed in main editor.
           </property>
           <property name="checked">
            <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckShowHistoryGraphically">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="visible">
-           <bool>true</bool>
-          </property>
-          <property name="toolTip">
-           <string>Not defined</string>
-          </property>
-          <property name="statusTip">
-           <string>not defined</string>
-          </property>
-          <property name="text">
-           <string>TBD: use dummy entry</string>
           </property>
          </widget>
         </item>

@@ -18,6 +18,7 @@ using namespace git;
 QSourceTreeWidget::QSourceTreeWidget(QWidget *parent) : QTreeWidget(parent)
   , mUseSourceTreeCheckboxes(false)
   , m1stCompareItem(nullptr)
+  , mInseredIgnoredFiles(false)
 {
     viewport()->setMouseTracking(true);
     viewport()->installEventFilter(this);
@@ -138,15 +139,26 @@ quint64 QSourceTreeWidget::insertItem(const QDir& aParentDir, QTreeWidget& aTree
         }
         else if (mGitIgnore.ignoreFile(fFileInfo))
         {
-#if 0
-            ignored_type = true;
-#else
-            if (fFileInfo.isDir())
+            if (mInseredIgnoredFiles)   /// NOTE: insert also ignored files
             {
-                ignored_folders.insert(fFileInfo.fileName());
+                ignored_type = true;
+                if (fFileInfo.fileName() == Folder::FolderUp)
+                {
+                    continue;
+                }
+                if (fFileInfo.fileName() == Folder::FolderSelf)
+                {
+                    continue;
+                }
             }
-            continue;
-#endif
+            else                        /// NOTE: do not insert ignored files
+            {
+                if (fFileInfo.isDir())
+                {
+                    ignored_folders.insert(fFileInfo.fileName());
+                }
+                continue;
+            }
         }
 
         QStringList fColumns;

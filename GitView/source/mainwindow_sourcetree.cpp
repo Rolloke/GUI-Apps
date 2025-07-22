@@ -227,7 +227,7 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
 
     stringt2typemap check_map;
     parseGitStatus(source_dir.path() +  QDir::separator(), result_string, check_map);
-
+    ui->treeSource->mInseredIgnoredFiles = ui->ckIgnoredFiles->isChecked();
     ui->treeSource->insertItem(source_dir, *ui->treeSource, nullptr);
 
     for (const auto& fItem : std::as_const(check_map))
@@ -1230,10 +1230,6 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
         ui->treeHistory->parseGitLogHistoryText(ui->textBrowser->toPlainText(), fSourceHook->indexFromItem(mContextMenuSourceTreeItem), ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem), type.type());
         ui->textBrowser->setPlainText("");
         showDockedWidget(ui->treeHistory);
-        if (ui->ckShowHistoryGraphically->isChecked())
-        {
-            showDockedWidget(ui->graphicsView);
-        }
     }   break;
     case Cmd::ParseBlameText:
     {
