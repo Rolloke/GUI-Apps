@@ -201,8 +201,6 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     connect(ui->treeStash, SIGNAL(find_item(QString,QString)), ui->treeSource, SLOT(find_item(QString,QString)));
     connect(ui->ckShowLineNumbers, SIGNAL(toggled(bool)), this, SLOT(set_show_line_numbers(bool)));
-    connect(ui->treeHistory, SIGNAL(send_history(QStringList)), ui->graphicsView, SLOT(insert_history(QStringList)));
-    connect(ui->treeHistory, SIGNAL(reset_history()), ui->graphicsView, SLOT(clear()));
     connect(ui->treeHistory, SIGNAL(show_me(QWidget*)), this, SLOT(showDockedWidget(QWidget*)));
     connect(ui->treeBranches, SIGNAL(insertFileNames(QTreeWidgetItem*,int,int)), ui->treeHistory, SLOT(insertFileNames(QTreeWidgetItem*,int,int)));
 
