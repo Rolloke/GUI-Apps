@@ -20,18 +20,23 @@ void MainWindow::call_git_history_diff_command()
 {
     QString history_hash_items        = ui->treeHistory->getSelectedHistoryHashItems();
     const QString &history_file       = ui->treeHistory->getSelectedHistoryFile();
+    const QString &history_description= ui->treeHistory->getSelectedHistoryDescription();
     const QAction *action             = qobject_cast<QAction *>(sender());
     const Type    type(ui->treeHistory->getSelectedTopLevelType());
     const QVariantList variant_list   = action->data().toList();
     const uint    command_flags       = variant_list[ActionList::Data::Flags].toUInt();
+    QString selected_file_name        = mContextMenuSourceTreeItem ? mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName) : "";
+    QString message_file_name         = history_file;
+    if (message_file_name.isEmpty()) message_file_name = selected_file_name;
+    if (history_description.size())  message_file_name += " to commit (" + history_description + ")";
 
-    int result = callMessageBox(variant_list[ActionList::Data::MsgBoxText].toString(), tr("history"), history_file);
+    int result = callMessageBox(variant_list[ActionList::Data::MsgBoxText].toString(), tr("history"), message_file_name );
     if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
     {
         QString path;
         if (type.is(Type::Branch) && mContextMenuSourceTreeItem)
         {
-            path =  mContextMenuSourceTreeItem->text(QSourceTreeWidget::Column::FileName);
+            path =  selected_file_name;
             mContextMenuSourceTreeItem = nullptr;
         }
         if (mContextMenuSourceTreeItem)

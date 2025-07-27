@@ -1876,12 +1876,20 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::Remove, Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::Restore, tr("Restore changes..."), Cmd::getCommand(Cmd::Restore), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore %1 changes;Do you want to restore changes in \"%1\"?"));
+    mActions.setCustomCommandMessageBoxText(Cmd::Restore, tr("Restore %1 changes;Do you want to restore the changes in \"%1\"?"));
     mActions.setCustomCommandPostAction(Cmd::Restore, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::Restore)->setShortcut(QKeySequence(Qt::Key_F6));
     mActions.setFlags(Cmd::Restore, Type::GitModified|Type::Folder, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::Restore, Type::GitStaged, Flag::set, ActionList::Data::StatusFlagDisable);
     mActions.setFlags(Cmd::Restore, ActionList::Flags::History);
+
+    connect(mActions.createAction(Cmd::UndoCommitSoft, tr("Undo commit soft..."), Cmd::getCommand(Cmd::UndoCommitSoft), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::UndoCommitSoft, tr("Undo commit %1 and leave local changes;Do you want to undo the commit(s) in \"%1\"?"));
+    mActions.setFlags(Cmd::UndoCommitSoft, ActionList::Flags::History);
+
+    connect(mActions.createAction(Cmd::UndoCommitHard, tr("Undo commit hard..."), Cmd::getCommand(Cmd::UndoCommitHard), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::UndoCommitHard, tr("Undo commit %1 and overwrite local changes;Do you want to undo the commit(s) in \"%1\"?"));
+    mActions.setFlags(Cmd::UndoCommitHard, ActionList::Flags::History);
 
     connect(mActions.createAction(Cmd::Commit, tr("Commit..."), Cmd::getCommand(Cmd::Commit), this), SIGNAL(triggered()), this, SLOT(call_git_commit()));
     mActions.setCustomCommandPostAction(Cmd::Commit, Cmd::UpdateRootItemStatus);

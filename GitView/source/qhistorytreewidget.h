@@ -31,6 +31,7 @@ public:
 
     const QString&  getSelectedHistoryHashItems();
     const QString&  getSelectedHistoryFile();
+    const QString&  getSelectedHistoryDescription();
     uint            getSelectedTopLevelType();
     bool            isSelectionDiffable();
     bool            isSelectionFileDiffable();
@@ -53,6 +54,7 @@ private:
 
     QString mHistoryFile;
     QString mHistoryHashItems;
+    QString mHistoryDescription;
     uint    mSelectedTopLevelItemType { 0 };
     bool    mInitialized { false };
     int     mIsPressed { 0 };

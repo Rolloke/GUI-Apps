@@ -66,6 +66,8 @@ struct Cmd
         Blame,
         Clone,
         MergeTwoBranches,
+        UndoCommitSoft,
+        UndoCommitHard,
 
         /// hint: add further git commands before
         CustomCommand=50,

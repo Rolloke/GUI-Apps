@@ -140,6 +140,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
     QVariant fItemData;
     mHistoryHashItems.clear();
     mHistoryFile.clear();
+    mHistoryDescription.clear();
     mSelectedTopLevelItemType = 0;
     if (fSelectedHistoryItem)
     {
@@ -172,6 +173,7 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
                         {
                             mHistoryHashItems.append(fItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
                             mHistoryHashItems.append(" ");
+                            mHistoryDescription = fItem->data(History::Column::Commit, History::role(History::Entry::SubjectAndBody)).toString();
                         }
                     }
                 }
@@ -196,10 +198,12 @@ QVariant QHistoryTreeWidget::determineHistoryHashItems(QTreeWidgetItem* fSelecte
                     mHistoryHashItems.append(fNextItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
                     mHistoryHashItems.append(" ");
                     mHistoryHashItems.append(fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+                    mHistoryDescription = fNextItem->data(History::Column::Commit, History::role(History::Entry::SubjectAndBody)).toString();
                 }
                 else
                 {
                     mHistoryHashItems.append(fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::CommitHash)).toString());
+                    mHistoryDescription = fHistoryLogItem->data(History::Column::Commit, History::role(History::Entry::SubjectAndBody)).toString();
                 }
             }   break;
         }
@@ -532,6 +536,11 @@ const QString& QHistoryTreeWidget::getSelectedHistoryHashItems()
 const QString& QHistoryTreeWidget::getSelectedHistoryFile()
 {
     return mHistoryFile;
+}
+
+const QString &QHistoryTreeWidget::getSelectedHistoryDescription()
+{
+    return mHistoryDescription;
 }
 
 uint QHistoryTreeWidget::getSelectedTopLevelType()

@@ -158,6 +158,8 @@ void ActionList::initActionIcons()
     action_icons[Cmd::Blame]                   = "emblem-urgent.png";
     action_icons[Cmd::Clone]                   = "icons8-clone-30.png";
     action_icons[Cmd::MergeTwoBranches]        = "media-playlist-shuffle.png";
+    action_icons[Cmd::UndoCommitSoft]          = "edit-undo.png";
+    action_icons[Cmd::UndoCommitHard]          = "edit-undo.png";
 
     action_icons[Cmd::BranchList]              = "open-menu.png";
     action_icons[Cmd::BranchListRemote]        = "open-menu.png";
