@@ -14,13 +14,12 @@
 #include <QMessageBox>
 #include <QClipboard>
 #include <QMimeData>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#else
-#endif
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #if CORE5COMPAT == 1
 #include <QTextCodec>
+#endif
 #else
+#include <QTextCodec>
 #endif
 
 using namespace std;
@@ -1087,6 +1086,7 @@ void MainWindow::check_set_current_path(QString & git_command)
         }
     }
 }
+
 void MainWindow::perform_custom_command()
 {
     const QAction     *action        = qobject_cast<QAction *>(sender());

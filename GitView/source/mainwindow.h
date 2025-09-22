@@ -4,6 +4,7 @@
 #include "workerthreadconnector.h"
 #include "actions.h"
 #include "qdockwidgetx.h"
+#include "outputparser.h"
 
 #include <QMainWindow>
 #include <QDir>
@@ -19,6 +20,7 @@
 #include <optional>
 #endif
 
+
 namespace Ui
 {
 class MainWindow;
@@ -31,6 +33,8 @@ class binary_values_view;
 class QLabel;
 class code_browser;
 class QSettings;
+class ParseMessagePattern;
+
 #ifdef WEB_ENGINE
 class QWebEngineView;
 class MarkdownProxy;
@@ -46,6 +50,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(const QString& aConfigName, QWidget *parent = 0);
     ~MainWindow();
+
+    void set_app_path(const QString& path);
 
 private:
 
@@ -194,6 +200,7 @@ private:
     void     initCodecCombo();
 
     void     appendTextToBrowser(const QString& aText, bool append=false, const QString ext = {}, bool show=true, bool use_second_view=false);
+    void     parseTextForBookmarks(const QString& aText, const QString& viewer);
 #ifdef USE_BOOST
     void     open_file(const QString& file_path, boost::optional<int> line_number = {}, bool reopen_file = false);
 #else
@@ -327,6 +334,7 @@ private Q_SLOTS:
 
     void invoke_git_merge_dialog();
     void invoke_highlighter_dialog();
+    void invoke_output_parser_dialog();
     void performCustomGitActionSettings();
     void expand_tree_items();
     void collapse_tree_items();
@@ -338,7 +346,7 @@ private Q_SLOTS:
     void killBackgroundThread();
     void copyFileName();
     void copyFilePath();
-    void createBookmark();
+    void createBookmark(QString book_mark_root_name = tr("Bookmarks"), ParseMessagePattern *pmp = nullptr);
     void showInformation();
     void compare_items(QString& item1, QString& item2);
     void OpenFile();
@@ -366,6 +374,8 @@ private:
 
     void read_commands(QSettings& fSettings);
     void store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd> &commands = {});
+    void read_filter(QSettings& fSettings);
+    void store_filter(QSettings& fSettings);
     void     createDockWindows();
     void     addCmdToolBar(int i);
     QWidget* get_widget(QDockWidget*dock);
@@ -430,6 +440,13 @@ private:
     QStringList mDockAreaNames;
     bool    mInitOnlyCustomCommands { false };
     QString mCloseFileFilter;
+    QString mAppPath;
+    QList<QSharedPointer<ParseMessagePattern>> mMessagePatterns;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QList<QPair<QRegularExpression, QString>> mFilterPatterns;
+#else
+    QList<QPair<QRegExp, QString>> mFilterPatterns;
+#endif
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";

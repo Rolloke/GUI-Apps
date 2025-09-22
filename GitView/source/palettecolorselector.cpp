@@ -233,7 +233,6 @@ void PaletteColorSelector::on_btnCancel_clicked()
 
 void PaletteColorSelector::on_btnApply_clicked()
 {
-    /// TODO: request for restart application
     accept();
 }
 

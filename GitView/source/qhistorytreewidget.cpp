@@ -376,7 +376,6 @@ void QHistoryTreeWidget::insertFileNames()
 /// TODO: diff of single file does not work correct in every case
 ///       it sometimes shows only the file diff to nothing and not diff to previous version
 ///       this might be caused by the history extracted from the origin repostiory
-/// TODO: revert branch to a previous commit, or undo a commit
 /// TODO: implement merge branch to current branch
 /// TODO: implement merge two branches
 /// also remote branches

@@ -50,6 +50,7 @@ SOURCES += main.cpp\
     mainwindow_sourcetree.cpp \
     mainwindow_stashtree.cpp \
     mainwindow_textview.cpp \
+    outputparser.cpp \
     palettecolorselector.cpp \
     qdockwidgetx.cpp \
     qsourcetreewidget.cpp \
@@ -80,6 +81,7 @@ HEADERS  += mainwindow.h \
     helper.h \
     highlighterdialog.h \
     logger.h \
+    outputparser.h \
     palettecolorselector.h \
     qdockwidgetx.h \
     qsourcetreewidget.h \
@@ -110,6 +112,7 @@ FORMS    += mainwindow.ui \
     aboutdlg.ui \
     highlighterdialog.ui \
     mergedialog.ui \
+    outputparser.ui \
     palettecolorselector.ui
 
 RESOURCES += resource.qrc

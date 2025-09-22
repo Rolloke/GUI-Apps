@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
     }
 
     MainWindow fWindow(cmd_line.value(cmdline::Config));
+    fWindow.set_app_path(argv[0]);
 
     if (cmd_line.value(cmdline::Log2file).toInt())
     {

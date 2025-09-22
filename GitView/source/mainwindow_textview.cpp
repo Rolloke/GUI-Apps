@@ -33,32 +33,69 @@ void MainWindow::appendTextToBrowser(const QString& aText, bool append, const QS
             btnCloseText_clicked(Editor::Viewer);
         }
         auto* browser = use_second_view ? mBackgroundTextView.data() : ui->textBrowser;
+        QDockWidget* parent = dynamic_cast<QDockWidget*>(browser->parent());
+        const QString viewer =  parent ? parent->windowTitle() : "viewer";
         browser->setExtension(ext);
+
+        /// QRegularExpression("\\[[0-9]{1,2}m");
+        QString clean_text;
         if (aText.contains(static_cast<char>(27))
         #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 || aText.contains(static_cast<char>(0))
         #endif
                 )
         {
-            QString clean_text = aText;
+            clean_text = aText;
             clean_text.replace("\033", "");
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            const auto regex_one_or_two_numbers_m = QRegularExpression("\\[[0-9]{1,2}m");
-#else
-            const auto regex_one_or_two_numbers_m = QRegExp("\\[[0-9]{1,2}m");
-#endif
-            clean_text.replace(regex_one_or_two_numbers_m, "");
             clean_text.replace(static_cast<char>(0), ' ');
+        }
+        for (const auto& filter_pattern : mFilterPatterns)
+        {
+            bool clean_text_empty = clean_text.isEmpty();
+            if (   ( clean_text_empty && aText.contains(     filter_pattern.first))
+                || (!clean_text_empty && clean_text.contains(filter_pattern.first)))
+            {
+                if (clean_text_empty)
+                {
+                    clean_text = aText;
+                }
+                clean_text.replace(filter_pattern.first, filter_pattern.second);
+            }
+        }
+
+        if (clean_text.size())
+        {
+            parseTextForBookmarks(clean_text, viewer);
             browser->insertPlainText(clean_text+ getLineFeed());
         }
         else
         {
+            parseTextForBookmarks(aText, viewer);
             browser->insertPlainText(aText + getLineFeed());
         }
         browser->textCursor().movePosition(QTextCursor::End);
         if (show)
         {
             showDockedWidget(browser);
+        }
+    }
+}
+
+void MainWindow::parseTextForBookmarks(const QString &aText, const QString &viewer)
+{
+    QStringList lines;
+    for (const auto& message_pattern : mMessagePatterns)
+    {
+        if (lines.isEmpty())
+        {
+             lines = aText.split("\n");
+        }
+        for (const QString& line : lines)
+        {
+            if (message_pattern->parse(line))
+            {
+                createBookmark(viewer, message_pattern.get());
+            }
         }
     }
 }
@@ -438,38 +475,62 @@ void MainWindow::invoke_highlighter_dialog()
     Highlighter::Language::invokeHighlighterDlg();
 }
 
-void MainWindow::createBookmark()
+void MainWindow::invoke_output_parser_dialog()
+{
+    OutputParser dlg(mMessagePatterns, mFilterPatterns);
+    dlg.exec();
+}
+
+void MainWindow::createBookmark(QString book_mark_root_name, ParseMessagePattern* pmp)
 {
     code_browser* text_browser = dynamic_cast<code_browser*>(get_active_editable_widget());
-    if (text_browser)
+    QString current_file;
+    QString found_text_line;
+    int line = 0;
+    if (pmp)
     {
-        QString current_file= text_browser->get_file_path();
-        if (current_file.size())
+        current_file    = pmp->get_filename();
+        QFileInfo fileinfo(current_file);
+        if (fileinfo.exists())
         {
-            const QString book_mark = tr("Bookmarks");
-            QTreeWidgetItem* new_tree_root_item;
-            auto list = ui->treeFindText->findItems(book_mark, Qt::MatchExactly);
-            if (list.size())
-            {
-                new_tree_root_item = list[0];
-            }
-            else
-            {
-                new_tree_root_item = new QTreeWidgetItem({book_mark, "", ""});
-                ui->treeFindText->addTopLevelItem(new_tree_root_item);
-            }
-
-            QString found_text_line;
-    #ifdef __linux__
-            current_file = current_file.right(current_file.size()-1);
-    #else
-            current_file.replace("\\", "/");
-    #endif
-            QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
-            new_child_item->setText(FindColumn::Line, tr("%1").arg(text_browser->current_line(&found_text_line)));
-            new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
-            showDockedWidget(ui->treeFindText);
-            ui->treeFindText->expandItem(new_tree_root_item);
+            current_file = fileinfo.absoluteFilePath();
+            line            = pmp->get_line().toInt();
+            found_text_line = pmp->get_message_text();
         }
+        else
+        {
+            return;
+        }
+    }
+    else if (text_browser)
+    {
+        current_file = text_browser->get_file_path();
+        line = text_browser->current_line(&found_text_line);
+    }
+    if (current_file.size())
+    {
+        QTreeWidgetItem* new_tree_root_item;
+        auto list = ui->treeFindText->findItems(book_mark_root_name, Qt::MatchExactly);
+        if (list.size())
+        {
+            new_tree_root_item = list[0];
+        }
+        else
+        {
+            new_tree_root_item = new QTreeWidgetItem({book_mark_root_name, "", ""});
+            ui->treeFindText->addTopLevelItem(new_tree_root_item);
+        }
+
+#ifdef __linux__
+        current_file = current_file.right(current_file.size()-1);
+#else
+        current_file.replace("\\", "/");
+#endif
+        QTreeWidgetItem* new_child_item = insert_file_path(new_tree_root_item, current_file);
+
+        new_child_item->setText(FindColumn::Line, tr("%1").arg(line));
+        new_child_item->setText(FindColumn::FoundTextLine, found_text_line.trimmed());
+        showDockedWidget(ui->treeFindText);
+        ui->treeFindText->expandItem(new_tree_root_item);
     }
 }

@@ -69,25 +69,19 @@ QString getSettingsName(const QString& aItemName)
     if (match.isValid())
     {
         const auto captured = match.capturedTexts();
-        QString fTemp = captured[0];
-        fTemp = fTemp.replace(":", "_");
-        fTemp = fTemp.replace("[", "_");
-        return fTemp;
-    }
-    else return aItemName;
 #else
     static const QRegExp fRegEx("([A-Z][A-Za-z0-9:\[]+)");
     int fPos = fRegEx.indexIn(aItemName);
     if (fPos != -1 && fRegEx.captureCount())
     {
         const auto captured = fRegEx.capturedTexts();
+#endif
         QString fTemp = captured[0];
         fTemp = fTemp.replace(":", "_");
         fTemp = fTemp.replace("[", "_");
         return fTemp;
     }
     else return aItemName;
-#endif
 }
 
 

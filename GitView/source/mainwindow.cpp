@@ -80,6 +80,13 @@ constexpr char sIconPath[] = "IconPath";
 constexpr char sMenuStringList[] = "MenuStringList";
 constexpr char sShortcut[] = "Shortcut";
 //constexpr char sModified[] = "Modified";
+constexpr char sMessagePattern[] = "MessagePattern";
+constexpr char sFileNamePosition[] = "FilePosition";
+constexpr char sLinePosition[] = "LinePosition";
+constexpr char sMessageTextPosition[] = "MessageTextPosition";
+constexpr char sFilterPattern[] = "FilterPattern";
+constexpr char sSearch[] = "Search";
+constexpr char sReplace[] = "Replace";
 constexpr char Cmd__mToolbars[] = "Cmd__mToolbars_%1";
 constexpr char Cmd__mToolbarName[] = "Cmd__mToolbarName_%1";
 } // namespace config
@@ -230,6 +237,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckFiles, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckDirectories, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckIgnoredFiles, setChecked, isChecked, toBool);
+        read_filter(fSettings);
     }
     fSettings.endGroup();
 
@@ -492,6 +500,11 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     init_miscelaneous_items();
 }
 
+void MainWindow::set_app_path(const QString &path)
+{
+    mAppPath = path;
+}
+
 void MainWindow::update_widget_states(QWidget *widget)
 {
     auto list = widget->actions();
@@ -539,6 +552,7 @@ void MainWindow::store_settings()
         STORE_PTR(fSettings, ui->ckFiles, isChecked);
         STORE_PTR(fSettings, ui->ckDirectories, isChecked);
         STORE_PTR(fSettings, ui->ckIgnoredFiles, isChecked);
+        store_filter(fSettings);
     }
     fSettings.endGroup();
 
@@ -771,6 +785,62 @@ void MainWindow::store_commands(QSettings& fSettings, const QList<git::Cmd::eCmd
                 fSettings.setValue(config::sMenuStringList, list);
             }
         }
+    }
+    fSettings.endArray();
+}
+
+void MainWindow::read_filter(QSettings &fSettings)
+{
+    int item_count = fSettings.beginReadArray(config::sFilterPattern);
+    for (int item = 0; item < item_count; ++item)
+    {
+        fSettings.setArrayIndex(item);
+        {
+            QPair<QRegularExpression, QString> value;
+            value.first.setPattern(fSettings.value(config::sSearch).toString());
+            value.second = fSettings.value(config::sReplace).toString();
+            mFilterPatterns.append(value);
+        }
+    }
+    fSettings.endArray();
+
+    item_count = fSettings.beginReadArray(config::sMessagePattern);
+    for (int item = 0; item < item_count; ++item)
+    {
+        fSettings.setArrayIndex(item);
+        {
+            QSharedPointer<ParseMessagePattern> value(new ParseMessagePattern);
+            value->set_pattern(fSettings.value(config::sSearch).toString());
+            value->set_filename_position(fSettings.value(config::sFileNamePosition).toInt());
+            value->set_line_position(fSettings.value(config::sLinePosition).toInt());
+            value->set_message_text_position(fSettings.value(config::sMessageTextPosition).toInt());
+            mMessagePatterns.append(value);
+        }
+    }
+    fSettings.endArray();
+}
+
+void MainWindow::store_filter(QSettings &fSettings)
+{
+    fSettings.beginWriteArray(config::sFilterPattern);
+    int fIndex = 0;
+    for (const auto& pattern : mFilterPatterns)
+    {
+        fSettings.setArrayIndex(fIndex++);
+        fSettings.setValue(config::sSearch, pattern.first.pattern());
+        fSettings.setValue(config::sReplace, pattern.second);
+    }
+    fSettings.endArray();
+
+    fSettings.beginWriteArray(config::sMessagePattern);
+    fIndex = 0;
+    for (const auto& pattern : mMessagePatterns)
+    {
+        fSettings.setArrayIndex(fIndex++);
+        fSettings.setValue(config::sSearch, pattern->get_pattern());
+        fSettings.setValue(config::sFileNamePosition, pattern->get_filename_position());
+        fSettings.setValue(config::sLinePosition, pattern->get_line_position());
+        fSettings.setValue(config::sMessageTextPosition, pattern->get_message_text_position());
     }
     fSettings.endArray();
 }
@@ -1839,6 +1909,9 @@ void MainWindow::initContextMenuActions()
     connect(mActions.createAction(Cmd::InvokeHighlighterDialog, tr("Edit Highlighting..."), tr("Edit highlighting color and font"), this) , SIGNAL(triggered()), this, SLOT(invoke_highlighter_dialog()));
     mActions.setFlags(Cmd::InvokeHighlighterDialog, ActionList::Flags::FunctionCmd, Flag::set);
     mActions.setFlags(Cmd::InvokeHighlighterDialog, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
+    connect(mActions.createAction(Cmd::InvokeOutputParserDialog, tr("Edit Output Parser..."), tr("Edit output parser"), this) , SIGNAL(triggered()), this, SLOT(invoke_output_parser_dialog()));
+    mActions.setFlags(Cmd::InvokeOutputParserDialog, ActionList::Flags::FunctionCmd, Flag::set);
+    mActions.setFlags(Cmd::InvokeOutputParserDialog, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::ShowStatus      , tr("Show status"), Cmd::getCommand(Cmd::ShowStatus), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
     mActions.setCustomCommandPostAction(Cmd::ShowStatus, Cmd::UpdateItemStatus);
@@ -2641,6 +2714,13 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             {
                 QApplication::setPalette(dlg.get_palette());
                 ColorSelector::set_dark_mode(true);
+                /// TODO: request for restart application
+                QMessageBox request;
+                request.setText(tr("Restart Gitview"));
+                if (request.exec() == QMessageBox::Yes)
+                {
+
+                }
             }
             else
             {

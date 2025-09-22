@@ -122,9 +122,10 @@ struct Cmd
         EditTabOutdent,
         EditToggleVisible,
         GoToLine,
+        InvokeOutputParserDialog,
 
         /// hint: add non git commands before
-        LastNonGitCommand = EditToggleVisible,
+        LastNonGitCommand = InvokeOutputParserDialog,
         FirstGitCommand = GetStatusAll,
         LastGitCommand  = AutoCommand-1,
         LastAutoCommand = NonGitCommands-1,

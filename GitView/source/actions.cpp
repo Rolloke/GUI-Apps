@@ -180,7 +180,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::InsertHashFileNames]     = "object-rotate-right.png";
     action_icons[Cmd::About]                   = "dialog-information.png";
     action_icons[Cmd::SelectTextBrowserLanguage]= "text-x-adasrc.svg";
-    action_icons[Cmd::InvokeHighlighterDialog] = "emblem-system.png";
+    action_icons[Cmd::InvokeHighlighterDialog] = "applications-colors.png";
     action_icons[Cmd::KillBackgroundThread]    = "media-record.png";
     action_icons[Cmd::CopyFileName]            = "edit-copy.png";
     action_icons[Cmd::CopyFilePath]            = "edit-copy.png";
@@ -210,6 +210,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::EditToCamelCase]         = "window-close.png";
     action_icons[Cmd::EditTabIndent]           = "window-close.png";
     action_icons[Cmd::EditTabOutdent]          = "window-close.png";
+    action_icons[Cmd::InvokeOutputParserDialog] = "text-x-patch.png";
 
     for (auto& icon_path: action_icons )
     {
