@@ -59,7 +59,7 @@ class OutputParser;
 class OutputParser : public QDialog
 {
     Q_OBJECT
-    struct column { enum e { search=0, replace=1, file_name = 1, line = 2, message = 3 }; };
+    struct column { enum e { search=0, replace=1, file_name = 1, line = 2, message = 3, count}; };
 public:
     explicit OutputParser(QList<QSharedPointer<ParseMessagePattern>>&msg_pattern,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -69,6 +69,9 @@ public:
 #endif
                           QWidget *parent = nullptr);
     ~OutputParser();
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     void parseCurrentRecognitionPattern();
