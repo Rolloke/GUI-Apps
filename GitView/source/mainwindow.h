@@ -441,6 +441,8 @@ private:
     bool    mInitOnlyCustomCommands { false };
     QString mCloseFileFilter;
     QString mAppPath;
+    bool    mRestartApp { false };
+    bool    m_loading_repository{ false };
     QList<QSharedPointer<ParseMessagePattern>> mMessagePatterns;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QList<QPair<QRegularExpression, QString>> mFilterPatterns;

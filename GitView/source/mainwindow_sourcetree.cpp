@@ -216,6 +216,7 @@ bool MainWindow::getShowTypeResult(const Type& fType)
 
 void MainWindow::insertSourceTree(const QDir& source_dir, int item)
 {
+    m_loading_repository = true;
     ui->treeSource->mGitIgnore.clear();
     QString result_string;
     applyGitCommandToFilePath(source_dir.path(), Cmd::getCommand(Cmd::GetStatusAll), result_string);
@@ -243,6 +244,16 @@ void MainWindow::insertSourceTree(const QDir& source_dir, int item)
     }
 
     ui->treeSource->iterateCheckItems(ui->treeSource->topLevelItem(item), check_map);
+
+    auto action = mActions.getAction(Cmd::BranchList);
+    if (action && ui->treeSource->topLevelItemCount() > 0)
+    {
+        mContextMenuSourceTreeItem = ui->treeSource->topLevelItem(ui->treeSource->topLevelItemCount()-1);
+        ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
+        ui->treeSource->setFocus();
+        action->trigger();
+    }
+    m_loading_repository = false;
 }
 
 void MainWindow::updateTreeItemStatus(QTreeWidgetItem * aItem)

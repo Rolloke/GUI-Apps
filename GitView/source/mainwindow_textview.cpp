@@ -493,7 +493,7 @@ void MainWindow::createBookmark(QString book_mark_root_name, ParseMessagePattern
         QFileInfo fileinfo(current_file);
         if (fileinfo.exists())
         {
-            current_file = fileinfo.absoluteFilePath();
+            current_file    = fileinfo.absoluteFilePath();
             line            = pmp->get_line().toInt();
             found_text_line = pmp->get_message_text();
         }
@@ -507,6 +507,7 @@ void MainWindow::createBookmark(QString book_mark_root_name, ParseMessagePattern
         current_file = text_browser->get_file_path();
         line = text_browser->current_line(&found_text_line);
     }
+
     if (current_file.size())
     {
         QTreeWidgetItem* new_tree_root_item;

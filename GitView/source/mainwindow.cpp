@@ -58,37 +58,37 @@ using namespace git;
 
 namespace config
 {
-constexpr char sGroupFilter[] = "Filter";
-constexpr char sGroupView[] = "View";
-constexpr char sGroupPaths[] = "Paths";
-constexpr char sSourcePath[] = "Source";
+constexpr char sGroupFilter[]             = "Filter";
+constexpr char sGroupView[]               = "View";
+constexpr char sGroupPaths[]              = "Paths";
+constexpr char sSourcePath[]              = "Source";
 //constexpr char sUncheckedPath[] = "Unchecked";
-constexpr char sGroupLogging[] = "Logging";
-constexpr char sGroupGitCommands[] = "GitCommands";
-constexpr char sGroupFind[] = "Find";
-constexpr char sCommands[] = "Commands";
-constexpr char sCommand[] = "Command";
-constexpr char sID[] = "ID";
-constexpr char sName[] = "Name";
-constexpr char sTooltip[] = "Tooltip";
-constexpr char sCustomMessageBoxText[] = "MessageBoxText";
+constexpr char sGroupLogging[]            = "Logging";
+constexpr char sGroupGitCommands[]        = "GitCommands";
+constexpr char sGroupFind[]               = "Find";
+constexpr char sCommands[]                = "Commands";
+constexpr char sCommand[]                 = "Command";
+constexpr char sID[]                      = "ID";
+constexpr char sName[]                    = "Name";
+constexpr char sTooltip[]                 = "Tooltip";
+constexpr char sCustomMessageBoxText[]    = "MessageBoxText";
 constexpr char sCustomCommandPostAction[] = "PostAction";
-constexpr char sFlags[] = "Flags";
-constexpr char sFlagsEnabled[] = "FlagsEnabled";
-constexpr char sFlagsDisabled[] = "FlagsDisabled";
-constexpr char sIconPath[] = "IconPath";
-constexpr char sMenuStringList[] = "MenuStringList";
-constexpr char sShortcut[] = "Shortcut";
+constexpr char sFlags[]                   = "Flags";
+constexpr char sFlagsEnabled[]            = "FlagsEnabled";
+constexpr char sFlagsDisabled[]           = "FlagsDisabled";
+constexpr char sIconPath[]                = "IconPath";
+constexpr char sMenuStringList[]          = "MenuStringList";
+constexpr char sShortcut[]                = "Shortcut";
 //constexpr char sModified[] = "Modified";
-constexpr char sMessagePattern[] = "MessagePattern";
-constexpr char sFileNamePosition[] = "FilePosition";
-constexpr char sLinePosition[] = "LinePosition";
-constexpr char sMessageTextPosition[] = "MessageTextPosition";
-constexpr char sFilterPattern[] = "FilterPattern";
-constexpr char sSearch[] = "Search";
-constexpr char sReplace[] = "Replace";
-constexpr char Cmd__mToolbars[] = "Cmd__mToolbars_%1";
-constexpr char Cmd__mToolbarName[] = "Cmd__mToolbarName_%1";
+constexpr char sMessagePattern[]          = "MessagePattern";
+constexpr char sFileNamePosition[]        = "FilePosition";
+constexpr char sLinePosition[]            = "LinePosition";
+constexpr char sMessageTextPosition[]     = "MessageTextPosition";
+constexpr char sFilterPattern[]           = "FilterPattern";
+constexpr char sSearch[]                  = "Search";
+constexpr char sReplace[]                 = "Replace";
+constexpr char Cmd__mToolbars[]           = "Cmd__mToolbars_%1";
+constexpr char Cmd__mToolbarName[]        = "Cmd__mToolbarName_%1";
 } // namespace config
 
 MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
@@ -539,6 +539,18 @@ MainWindow::~MainWindow()
     store_settings();
 
     delete ui;
+
+    if (mRestartApp)
+    {
+        QString command;
+        QString result;
+#ifdef __linux__
+        command = "exec " + mAppPath + " &";
+#else
+        command = "start " + mAppPath;
+#endif
+        execute(command, result);
+    }
 }
 
 void MainWindow::store_settings()
@@ -796,7 +808,11 @@ void MainWindow::read_filter(QSettings &fSettings)
     {
         fSettings.setArrayIndex(item);
         {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             QPair<QRegularExpression, QString> value;
+#else
+            QPair<QRegExp, QString> value;
+#endif
             value.first.setPattern(fSettings.value(config::sSearch).toString());
             value.second = fSettings.value(config::sReplace).toString();
             mFilterPatterns.append(value);
@@ -1428,8 +1444,6 @@ code_browser* MainWindow::create_new_text_browser(const QString &file_path, cons
     connect(docked_browser, SIGNAL(column_changed(int)), m_status_column_label, SLOT(setNum(int)));
 #ifdef WEB_ENGINE
     connect(docked_browser, SIGNAL(text_changed(QString)),m_markdown_proxy.data(), SLOT(setText(QString)));
-#else
-    /// TODO: connect
 #endif
     connect(docked_browser, SIGNAL(show_web_view(bool)), this, SLOT(show_web_view(bool)));
 
@@ -2681,6 +2695,7 @@ void MainWindow::comboAppStyleTextChanged(const QString &style)
 
 void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
 {
+    bool restart_necessary = false;
     switch (index)
     {
     case UserStyle::None:
@@ -2702,6 +2717,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             QTextStream ts(&f);
             setStyleSheet(ts.readAll());
             ColorSelector::set_dark_mode(true);
+            restart_necessary = true;
         }
         break;
     }
@@ -2714,13 +2730,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             {
                 QApplication::setPalette(dlg.get_palette());
                 ColorSelector::set_dark_mode(true);
-                /// TODO: request for restart application
-                QMessageBox request;
-                request.setText(tr("Restart Gitview"));
-                if (request.exec() == QMessageBox::Yes)
-                {
-
-                }
+                restart_necessary = true;
             }
             else
             {
@@ -2751,10 +2761,22 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
             f.open(QFile::ReadOnly | QFile::Text);
             QTextStream ts(&f);
             setStyleSheet(ts.readAll());
+            restart_necessary = true;
         }
     } break;
     }
+
     Highlighter::Language::mSelectedLineBackground = ColorSelector::is_dark_mode() ? Qt::darkYellow : Qt::yellow;
+    if (restart_necessary)
+    {
+        QMessageBox request(QMessageBox::Question, windowTitle(), tr("Restart Gitview"), QMessageBox::Yes);
+        request.addButton(QMessageBox::No);
+        if (request.exec() == QMessageBox::Yes)
+        {
+            mRestartApp = true;
+            close();
+        }
+    }
 }
 
 

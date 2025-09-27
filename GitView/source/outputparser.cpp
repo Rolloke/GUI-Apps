@@ -125,7 +125,7 @@ OutputParser::OutputParser(
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QList<QPair<QRegularExpression, QString> > & filter_pattern,
 #else
-    QList<QPair<QRegEx, QString> > & filter_pattern,
+    QList<QPair<QRegExp, QString> > & filter_pattern,
 #endif
     QWidget *parent)
     : QDialog(parent)
@@ -278,7 +278,11 @@ void OutputParser::on_OutputParser_accepted()
     mFilterPatterns.clear();
     for (int index = 0; index < ui->tablePatternForReplacement->rowCount(); ++index)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         QPair<QRegularExpression, QString> value;
+#else
+        QPair<QRegExp, QString> value;
+#endif
         value.first.setPattern(ui->tablePatternForReplacement->item(index, column::search)->text());
         value.second = ui->tablePatternForReplacement->item(index, column::replace)->text();
         mFilterPatterns.append(value);
