@@ -166,6 +166,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::BranchListMerged]        = "open-menu.png";
     action_icons[Cmd::BranchListNotMerged]     = "open-menu.png";
     action_icons[Cmd::BranchDelete]            = "edit-delete.png";
+    action_icons[Cmd::BranchCreate]            = "applications-development.png";
     action_icons[Cmd::BranchShow]              = "preferences-system-privacy.png";
     action_icons[Cmd::BranchCheckout]          = "emblem-default.png";
     action_icons[Cmd::DiffOfTwoBranches]       = "document-open-recent.png";
@@ -688,6 +689,7 @@ const char* ActionList::Flags::name(e eFlag)
     RETURN_NAME(MenuOption);
     RETURN_NAME(Asynchroneous);
     RETURN_NAME(NoHide);
+    RETURN_NAME(UnusedCommand);
     }
     return txt::invalid;
 }

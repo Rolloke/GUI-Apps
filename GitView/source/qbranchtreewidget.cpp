@@ -147,16 +147,17 @@ void QBranchTreeWidget::on_itemDoubleClicked(const ActionList& aActionList, QTre
     mSelectedItem = nullptr;
 }
 
-QString QBranchTreeWidget::getSelectedBranch()
+QString QBranchTreeWidget::getSelectedBranch(const QString& separator)
 {
     QString fItem;
     const auto fSelectedList = selectedItems();
     if (fSelectedList.size() > 1)
     {
+        int i = 0;
         for (auto fSelectedItem : fSelectedList)
         {
             fItem += fSelectedItem->text(Column::Text).remove(0, 2);
-            fItem += " ";
+            if (++i < fSelectedList.size()) fItem += separator;
         }
     }
     else if (mSelectedItem)

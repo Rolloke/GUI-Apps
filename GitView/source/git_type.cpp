@@ -57,6 +57,7 @@ Cmd::Cmd()
 
     mCommandMap[BranchList]             = "git -C %1 branch --list";
     mCommandMap[BranchDelete]           = "git -C %1 branch --delete --force %2";
+    mCommandMap[BranchCreate]           = "git -C %1 branch --create --force %2";
     mCommandMap[BranchShow]             = "git -C %1 show %2";
     mCommandMap[BranchListRemote]       = "git -C %1 branch --list --remotes";
     mCommandMap[BranchListMerged]       = "git -C %1 branch --list --merged";
@@ -71,7 +72,7 @@ Cmd::Cmd()
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
     mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, UndoCommitSoft, UndoCommitHard, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
-    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCreate, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
     mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator, CloseAll, SaveAll, ReplaceAll, SaveAs };
@@ -159,6 +160,47 @@ string2bool_map Cmd::fromStringMT(const QString& aString)
 const QString& Cmd::getCommand(eCmd aCmd)
 {
     return mCommandMap[aCmd];
+}
+
+bool Cmd::isCommandUsed(eCmd cmd)
+{
+    {
+        const auto& tb = mContextMenuSourceTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuEmptySourceTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuHistoryTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuBranchTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuStashTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuGraphicsView;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuTextView;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    {
+        const auto& tb = mContextMenuFindTextTree;
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    for (const auto& tb : mToolbars)
+    {
+        if (std::find(tb.begin(), tb.end(), cmd) != tb.end()) return true;
+    }
+    return false;
 }
 
 Cmd mInstance;

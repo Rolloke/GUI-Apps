@@ -27,23 +27,26 @@ public:
     };
     struct Flags
     {
-        enum e { BuiltIn           = 0x0001, /// built in command
-                 Modified          = 0x0002, /// modified built in command
-                 Custom            = 0x0004, /// custom created command
-                 Branch            = 0x0008, /// command for branch view
-                 History           = 0x0010, /// command for history view
-                 DiffOrMergeTool   = 0x0020, /// indicates diff or mergetool is used by git command
-                 CallInThread      = 0x0040, /// indicates that git command is called within thread context
-                 NotVariableGitCmd = 0x0080, /// indicates that the command is not a modifiable git command
-                 FunctionCmd       = 0x0100, /// command invokes a special destinct function
-                 Stash             = 0x0200, /// command for stash view
-                 DiffCmd           = 0x0400, /// indicates git diff command
-                 DependsOnStaged   = 0x0800, /// option to indicate wether the command depends on state staged or not staged
-                 StashCmdOption    = 0x1000, /// option for stash command
-                 MenuOption        = 0x2000, /// option selected by Toolbutton menu
-                 Asynchroneous     = 0x4000, /// CallInThread with asynchroneous answer
-                 NoHide            = 0x8000, /// dont hide command window
-                 };
+        enum e
+        {
+            BuiltIn           = 0x00001, /// built in command
+            Modified          = 0x00002, /// modified built in command
+            Custom            = 0x00004, /// custom created command
+            Branch            = 0x00008, /// command for branch view
+            History           = 0x00010, /// command for history view
+            DiffOrMergeTool   = 0x00020, /// indicates diff or mergetool is used by git command
+            CallInThread      = 0x00040, /// indicates that git command is called within thread context
+            NotVariableGitCmd = 0x00080, /// indicates that the command is not a modifiable git command
+            FunctionCmd       = 0x00100, /// command invokes a special destinct function
+            Stash             = 0x00200, /// command for stash view
+            DiffCmd           = 0x00400, /// indicates git diff command
+            DependsOnStaged   = 0x00800, /// option to indicate wether the command depends on state staged or not staged
+            StashCmdOption    = 0x01000, /// option for stash command
+            MenuOption        = 0x02000, /// option selected by Toolbutton menu
+            Asynchroneous     = 0x04000, /// CallInThread with asynchroneous answer
+            NoHide            = 0x08000, /// dont hide command window
+            UnusedCommand     = 0x10000, /// Not used in any Menue or Toolbar
+        };
         static const char* name(e eFlag);
     };
 

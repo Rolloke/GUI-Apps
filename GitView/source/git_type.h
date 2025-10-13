@@ -68,6 +68,7 @@ struct Cmd
         MergeTwoBranches,
         UndoCommitSoft,
         UndoCommitHard,
+        BranchCreate,
 
         /// hint: add further git commands before
         CustomCommand=50,
@@ -150,6 +151,7 @@ struct Cmd
     typedef std::vector<eCmd> tVector;
 
     static const QString& getCommand(eCmd);
+    static bool     isCommandUsed(eCmd cmd);
 
     static QString toString(const ePostAction anAction);
     static QString toString(const tVector& aItems);

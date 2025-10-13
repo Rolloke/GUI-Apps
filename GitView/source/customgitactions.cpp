@@ -232,9 +232,13 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
     QString command = action->statusTip();
     if (command.size())
     {
-        uint flag = mActionList.getFlags(static_cast<Cmd::eCmd>(aItem.first), ActionList::Data::Flags);
+        auto cmd = static_cast<Cmd::eCmd>(aItem.first);
+        mActionList.setFlags(cmd, ActionList::Flags::UnusedCommand, Cmd::isCommandUsed(cmd) ? Flag::remove : Flag::set);
+        uint flag = mActionList.getFlags(cmd, ActionList::Data::Flags);
         bool function_cmd = (flag & ActionList::Flags::FunctionCmd);
-        bool modified_cmd = (flag & ActionList::Flags::Modified);
+        QString attribute = " ";
+        if (flag & ActionList::Flags::Modified)      attribute += "*";
+        if (flag & ActionList::Flags::UnusedCommand) attribute += "#";
         if (aRow == -1)
         {
             int table_rows = mListModelActions->rowCount();
@@ -250,7 +254,7 @@ void CustomGitActions::insertCmdAction(ActionList::tActionMap::const_reference a
             }
         }
         mListModelActions->insertRows(aRow, 1, QModelIndex());
-        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::ID)        , tr("%1").arg(aItem.first) + (modified_cmd ? " *" : ""), Qt::DisplayRole);
+        mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::ID)        , tr("%1").arg(aItem.first) + attribute, Qt::DisplayRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Command)   , command, Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Name)      , action->toolTip(), Qt::EditRole);
         mListModelActions->setData(mListModelActions->index(aRow, ActionsTable::Shortcut)  , action->shortcut().toString(), Qt::EditRole);

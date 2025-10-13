@@ -98,8 +98,8 @@ enum msg_box_buttons
     to_all_or_one = 2
 };
 
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", int aIsFile = true, bool aEditText=true);
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, int aIsFile = true, bool aEditText=true);
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName="", const QString& fFileName="", int aIsFile = true, bool aEditText=true, const QList<int>& sizes = {});
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, QString& fFileName, int aIsFile = true, bool aEditText=true, const QList<int>& sizes = {});
 bool isMessageBoxNo(int msg);
 
 const char* getLineFeed();

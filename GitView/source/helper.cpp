@@ -21,6 +21,8 @@
 #include <QEvent>
 #include <QWhatsThisClickedEvent>
 #include <QThread>
+#include <QSpacerItem>
+#include <QGridLayout>
 
 #ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
@@ -536,13 +538,13 @@ int execute(const QString& command, QString& aResultText, bool hide, std::functi
     return fResult;
 }
 
-int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, int aIsFile, bool aEditText)
+int callMessageBox(const QString& fMessageBoxText, const QString& fFileTypeName, const QString& fFileName, int aIsFile, bool aEditText, const QList<int> &sizes)
 {
     QString file_name(fFileName);
-    return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, aEditText);
+    return callMessageBox(fMessageBoxText, fFileTypeName, file_name, aIsFile, aEditText, sizes);
 }
 
-int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, int aIsFile, bool aEditText)
+int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName, QString& aFileName, int aIsFile, bool aEditText, const QList<int> &sizes)
 {
     if (aMessageBoxText != ActionList::sNoCustomCommandMessageBox)
     {
@@ -598,6 +600,12 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
 
             fRequestMessage.setStandardButtons(standard_buttons);
             fRequestMessage.setDefaultButton(default_button);
+
+            if (sizes.size() == 2)
+            {
+                QSpacerItem* horizontalSpacer = new QSpacerItem(sizes[0], 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+                QGridLayout* layout = (QGridLayout*)fRequestMessage.layout();
+                layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());            }
 
             return fRequestMessage.exec();
         }

@@ -14,7 +14,8 @@ void MainWindow::call_git_branch_command()
     const QVariantList variant_list         = action->data().toList();
     const QString&     message_box_text     = variant_list[ActionList::Data::MsgBoxText].toString();
     const QString&     branch_git_root_path = ui->treeBranches->getSelectedBranchGitRootPath();
-    QString            branch_item          = ui->treeBranches->getSelectedBranch();
+    const QString      branch_separator     = "<br>- ";
+    QString            branch_item          = ui->treeBranches->getSelectedBranch(branch_separator);
     QString            git_command          = action->statusTip();
     QString            top_item_path        = branch_git_root_path;
     if ((ui->treeSource->hasFocus() || m_loading_repository) && mContextMenuSourceTreeItem)
@@ -22,10 +23,11 @@ void MainWindow::call_git_branch_command()
         top_item_path = ui->treeSource->getItemTopDirPath(mContextMenuSourceTreeItem);
     }
 
-    int result = callMessageBox(message_box_text, "branch", branch_item);
+    int result = callMessageBox(message_box_text, "branch", branch_item, true, true, {400, 150});
     QString result_str;
     if (result & (QMessageBox::Yes|QMessageBox::YesToAll))
     {
+        branch_item = branch_item.replace(branch_separator, " ");
         result = call_git_command(git_command, top_item_path, branch_item, result_str);
     }
 

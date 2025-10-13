@@ -2050,7 +2050,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::BranchListNotMerged, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
 
     connect(mActions.createAction(Cmd::BranchDelete   , tr("Delete Branch"), Cmd::getCommand(Cmd::BranchDelete), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
-    mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, tr("Delete %1 from git;Do you want to delete \"%1\"?"));
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchDelete, tr("Delete %1 from git;Do you want to delete<br>- %1 ?"));
     mActions.setCustomCommandPostAction(Cmd::BranchDelete, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchDelete, ActionList::Flags::NotVariableGitCmd, Flag::set);
     mActions.setFlags(Cmd::BranchDelete, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
@@ -2059,6 +2059,11 @@ void MainWindow::initContextMenuActions()
     mActions.setCustomCommandMessageBoxText(Cmd::BranchCheckout, tr("Checkout %1;Do you want to set \"%1\" active?;"));
     mActions.setCustomCommandPostAction(Cmd::BranchCheckout, Cmd::UpdateItemStatus);
     mActions.setFlags(Cmd::BranchCheckout, ActionList::Flags::NotVariableGitCmd, Flag::set);
+
+    connect(mActions.createAction(Cmd::BranchCreate, tr("Create Branch"), Cmd::getCommand(Cmd::BranchCreate), this), SIGNAL(triggered()), this, SLOT(call_git_branch_command()));
+    mActions.setCustomCommandMessageBoxText(Cmd::BranchCreate, tr("Create Branch;Do you want to create branch?;"));
+    mActions.setCustomCommandPostAction(Cmd::BranchCreate, Cmd::UpdateItemStatus);
+    mActions.setFlags(Cmd::BranchCreate, ActionList::Flags::NotVariableGitCmd, Flag::set);
 
     connect(mActions.createAction(Cmd::DiffOfTwoBranches, tr("Diff between Branches"), Cmd::getCommand(Cmd::DiffOfTwoBranches), ui->treeBranches), SIGNAL(triggered()), ui->treeBranches, SLOT(diff_of_two_branches()));
     mActions.setFlags(Cmd::DiffOfTwoBranches, ActionList::Flags::NotVariableGitCmd, Flag::set);
