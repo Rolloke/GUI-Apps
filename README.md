@@ -4,6 +4,7 @@ This repository contains Qt Projects for several scopes
 ### GitView 
 
 App providing tools to work with git repositories.
+- merge tools
 
 ### RaspiMediaList
 
