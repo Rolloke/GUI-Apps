@@ -4,7 +4,21 @@ This repository contains Qt Projects for several scopes
 ### GitView 
 
 App providing tools to work with git repositories.
-- merge of things
+- displays at tree containing files and status of files
+  - visibility of the file may depend on status
+- editing text files
+- editing of binary files
+- search of text
+  - in single text
+  - in textfiles contained by a selected folder and subfolders
+  - in all tree views
+- preview of html and markdown files
+- shows difference of text files
+  - supports several diff and merge tools
+- shows history
+- shows stash list
+- shows blame
+
 
 ### RaspiMediaList
 

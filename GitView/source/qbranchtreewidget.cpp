@@ -74,7 +74,7 @@ void QBranchTreeWidget::on_customContextMenuRequested(const ActionList& aActionL
     auto* action = aActionList.getAction(Cmd::DiffOfTwoBranches);
     if (action) action->setEnabled(is_any_equal_to(selectedItems().count(), 1, 2));
     action = aActionList.getAction(Cmd::MergeTwoBranches);
-    if (action) action->setEnabled(is_any_equal_to(selectedItems().count(), 1));
+    if (action) action->setEnabled(selectedItems().count() == 1 && !selectedItems()[0]->text(Column::Text).contains("*") );
     menu.exec(mapToGlobal(pos) + menu_offset);
 
     mSelectedItem = nullptr;

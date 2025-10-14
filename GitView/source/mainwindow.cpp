@@ -1912,7 +1912,7 @@ void MainWindow::initContextMenuActions()
     mActions.setFlags(Cmd::CallDiffTool, ActionList::Flags::Stash|ActionList::Flags::History|ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread|ActionList::Flags::DependsOnStaged, Flag::set);
 
     connect(mActions.createAction(Cmd::CallMergeTool, tr("Call merge tool..."), Cmd::getCommand(Cmd::CallMergeTool), this), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
-    mActions.setCustomCommandPostAction(Cmd::Add, Cmd::UpdateItemStatus);
+    mActions.setCustomCommandPostAction(Cmd::CallMergeTool, Cmd::UpdateItemStatus);
     mActions.getAction(Cmd::CallMergeTool)->setShortcut(QKeySequence(Qt::Key_F7));
     mActions.setFlags(Cmd::CallMergeTool, Type::GitUnmerged, Flag::set, ActionList::Data::StatusFlagEnable);
     mActions.setFlags(Cmd::CallMergeTool, ActionList::Flags::DiffOrMergeTool|ActionList::Flags::DiffCmd|ActionList::Flags::CallInThread, Flag::set);
