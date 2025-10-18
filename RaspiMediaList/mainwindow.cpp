@@ -241,6 +241,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QString fSeverity;
         LOAD_STR(fSettings, fSeverity, toString);
         uint32_t fSeverityValue = fSeverity.toLong(0, 2);
+        Logger::setTextToBrowserFunction([this](const std::string& msg) { ui->statusBar->showMessage(msg.c_str()); } );
         Logger::setSeverity(0xffff, false);
         Logger::setSeverity(fSeverityValue, true);
     }
@@ -291,28 +292,28 @@ MainWindow::MainWindow(QWidget *parent) :
     m_play_name->setToolTip("Channel name");
     ui->statusBar->addPermanentWidget(m_play_name);
 
-    connect(ui->actionOpen_Kodi_raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
-    connect(ui->actionOpen_Folder, SIGNAL(triggered(bool)), SLOT(menu_folder_open()));
-    connect(ui->actionSave_as_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
-    connect(ui->actionRead_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
-    connect(ui->actionUpload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_upload_favorites()));
-    connect(ui->actionDownload_favorites, SIGNAL(triggered(bool)), SLOT(menu_file_download_favorites()));
-    connect(ui->actionDownload_Kodi_Raw_list, SIGNAL(triggered(bool)), SLOT(menu_file_download_kodi_raw_file()));
+    connect(ui->actionFileOpenKodiRawList, SIGNAL(triggered(bool)), SLOT(menu_file_open()));
+    connect(ui->actionFileOpenFolder, SIGNAL(triggered(bool)), SLOT(menu_folder_open()));
+    connect(ui->actionFileSaveAsFavorites, SIGNAL(triggered(bool)), SLOT(menu_file_save_as_favorites()));
+    connect(ui->actionFileReadFavorites, SIGNAL(triggered(bool)), SLOT(menu_file_update_favorites()));
+    connect(ui->actionFileUploadFavorites, SIGNAL(triggered(bool)), SLOT(menu_file_upload_favorites()));
+    connect(ui->actionFileDownloadFavorites, SIGNAL(triggered(bool)), SLOT(menu_file_download_favorites()));
+    connect(ui->actionFileDownloadKodiRawList, SIGNAL(triggered(bool)), SLOT(menu_file_download_kodi_raw_file()));
 
-    connect(ui->actionCopy_URL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
-    connect(ui->actionCopy_Thumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
-    connect(ui->actionOpen_Mediaplayer, SIGNAL(triggered(bool)), SLOT(menu_edit_open_media_player()));
+    connect(ui->actionEditCopyURL, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_url()));
+    connect(ui->actionEditCopyThumb, SIGNAL(triggered(bool)), SLOT(menu_edit_copy_thumb()));
+    connect(ui->actionEditOpenMediaplayer, SIGNAL(triggered(bool)), SLOT(menu_edit_open_media_player()));
     connect(ui->actionOpenMediaPlayerOnDoubleclick, &QAction::triggered, [&](bool checked) { ui->sliderVolume->setEnabled(!checked); });
 
-    connect(ui->actionMedia_player, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
-    connect(ui->actionEdit_Upload_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_upload_command()));
-    connect(ui->actionEdit_Download_Command, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_command()));
-    connect(ui->actionShowTrayIconAndInfo, SIGNAL(toggled(bool)), SLOT(menu_option_show_tray_icon(bool)));
-    connect(ui->actionEdit_Download_Path_for_m3u_Files, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_m3u_file()));
+    connect(ui->actionOptionMediaPlayer, SIGNAL(triggered(bool)), SLOT(menu_option_media_player_command()));
+    connect(ui->actionOptionEditUploadCommand, SIGNAL(triggered(bool)), SLOT(menu_option_edit_upload_command()));
+    connect(ui->actionOptionEditDownloadCommand, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_command()));
+    connect(ui->actionOptionShowTrayIconAndInfo, SIGNAL(toggled(bool)), SLOT(menu_option_show_tray_icon(bool)));
+    connect(ui->actionOptionEditDownloadPathForM3uFiles, SIGNAL(triggered(bool)), SLOT(menu_option_edit_download_m3u_file()));
 
-    connect(ui->actionAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
-    connect(ui->actionInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
-    connect(ui->actionClose, SIGNAL(triggered(bool)), SLOT(close()));
+    connect(ui->actionHelpAbout, SIGNAL(triggered(bool)), SLOT(menu_help_about()));
+    connect(ui->actionHelpInfo, SIGNAL(triggered(bool)), SLOT(menu_help_info()));
+    connect(ui->actionFileClose, SIGNAL(triggered(bool)), SLOT(close()));
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     connect(&mPlayer, SIGNAL(metaDataChanged()), this, SLOT(metaDataChanged()));
@@ -345,14 +346,14 @@ MainWindow::MainWindow(QWidget *parent) :
     LOAD_STR(fSettings, mCurrentPlayIndex, toInt);
     LOAD_STR(fSettings, mFileOpenPath, toString);
     LOAD_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, setChecked, isChecked, toBool);
-    LOAD_PTR(fSettings, ui->actionShowTrayIconAndInfo, setChecked, isChecked, toBool);
+    LOAD_PTR(fSettings, ui->actionOptionShowTrayIconAndInfo, setChecked, isChecked, toBool);
     LOAD_STR(fSettings, mOpenFileAtStart, toString);
     LOAD_STR(fSettings, mChecked, toInt);
     mListModel->setCheckedColumn(mChecked);
 
     fSettings.endGroup();
 
-    menu_option_show_tray_icon(ui->actionShowTrayIconAndInfo->isChecked());
+    menu_option_show_tray_icon(ui->actionOptionShowTrayIconAndInfo->isChecked());
 
     ui->sliderVolume->setEnabled(!ui->actionOpenMediaPlayerOnDoubleclick->isChecked());
 
@@ -366,7 +367,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     else if (mOpenFileAtStart.size())
     {
-        ui->actionLoadLastOpenedFileAtStart->setChecked(true);
+        ui->actionOptionLoadLastOpenedFileAtStart->setChecked(true);
         open_file(mOpenFileAtStart);
     }
     select_index(mCurrentPlayIndex);
@@ -387,7 +388,7 @@ MainWindow::~MainWindow()
 
     fSettings.beginGroup(txt::sGroupLogging);
     {
-        QString fSeverHlp = "_fscb___acewnidt";
+        QString fSeverHlp = "bfsc____acewnidt";
         STORE_STR(fSettings, fSeverHlp);
         QString fSeverity = QString::number(Logger::getSeverity(), 2);
         STORE_STR(fSettings, fSeverity);
@@ -407,9 +408,9 @@ MainWindow::~MainWindow()
     STORE_STR(fSettings, mMediaPlayerCommand);
     STORE_STR(fSettings, mCurrentPlayIndex);
     STORE_PTR(fSettings, ui->actionOpenMediaPlayerOnDoubleclick, isChecked);
-    STORE_PTR(fSettings, ui->actionShowTrayIconAndInfo, isChecked);
+    STORE_PTR(fSettings, ui->actionOptionShowTrayIconAndInfo, isChecked);
     STORE_STR(fSettings, mChecked);
-    if (!ui->actionLoadLastOpenedFileAtStart->isChecked())
+    if (!ui->actionOptionLoadLastOpenedFileAtStart->isChecked())
     {
         mOpenFileAtStart.clear();
     }
@@ -1480,20 +1481,20 @@ void MainWindow::add_button_to_menue(QMenu*menu, QPushButton* button)
 
 void MainWindow::update_command_states()
 {
-    ui->actionDownload_favorites->setEnabled(mDownloadFavoriteCommand.size() != 0);
-    ui->actionUpload_favorites->setEnabled(mUploadFavoriteCommand.size() != 0);
-    ui->actionDownload_Kodi_Raw_list->setEnabled(mDownloadKodiRawFilePath.size() != 0);
+    ui->actionFileDownloadFavorites->setEnabled(mDownloadFavoriteCommand.size() != 0);
+    ui->actionFileUploadFavorites->setEnabled(mUploadFavoriteCommand.size() != 0);
+    ui->actionFileDownloadKodiRawList->setEnabled(mDownloadKodiRawFilePath.size() != 0);
     ui->pushButtonNext->setEnabled(m_media_folder_mode);
     ui->pushButtonPrevious->setEnabled(m_media_folder_mode);
-    ui->actionRepeat_Playlist->setEnabled(m_media_folder_mode);
-    ui->actionShuffle->setEnabled(m_media_folder_mode);
+    ui->actionOptionRepeatPlaylist->setEnabled(m_media_folder_mode);
+    ui->actionOptionShuffle->setEnabled(m_media_folder_mode);
 }
 
 void MainWindow::handle_end_of_media()
 {
     if (m_media_folder_mode)
     {
-        if (ui->actionShuffle->isChecked())
+        if (ui->actionOptionShuffle->isChecked())
         {
             /// TODO: implement shuffle
         }
@@ -1504,7 +1505,7 @@ void MainWindow::handle_end_of_media()
                 select_index(mCurrentRowIndex+1);
                 on_pushButtonStart_clicked();
             }
-            else if (ui->actionRepeat_Playlist->isChecked())
+            else if (ui->actionOptionRepeatPlaylist->isChecked())
             {
                 select_index(0);
                 on_pushButtonStart_clicked();
@@ -1521,37 +1522,44 @@ void MainWindow::menu_option_show_tray_icon(bool show)
 {
     if (!m_tray_message && show)
     {
+        if (QSystemTrayIcon::isSystemTrayAvailable())
+        {
 #ifdef __linux__
-        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.png"), this);
+            m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.png"), this);
 #else
-        m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.ico"), this);
+            m_tray_message = new QSystemTrayIcon(QIcon(":/applications-multimedia.ico"), this);
 #endif
-        QMenu*menu = new QMenu;
-        QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
-        action = menu->addAction(tr("Hide %1").arg(windowTitle()));
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
-        menu->addSeparator();
-        action = menu->addAction(tr("Next source"));
-        connect(action, &QAction::triggered, [&]()
-        {
-            ui->tableView->selectRow(mCurrentPlayIndex+1);
-            m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex+1));
-            ui->pushButtonStart->click();
-        });
-        action = menu->addAction(tr("Previous source"));
-        connect(action, &QAction::triggered, [&]()
-        {
-            ui->tableView->selectRow(mCurrentPlayIndex-1);
-            m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex-1));
-            ui->pushButtonStart->click();
-        });
-        add_button_to_menue(menu, ui->pushButtonStart);
-        add_button_to_menue(menu, ui->pushButtonStop);
-        menu->addSeparator();
-        menu->addAction(ui->actionClose);
+            QMenu*menu = new QMenu;
+            QAction*action = menu->addAction(tr("Show %1").arg(windowTitle()));
+            connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_show_window()));
+            action = menu->addAction(tr("Hide %1").arg(windowTitle()));
+            connect(action, SIGNAL(triggered(bool)), this, SLOT(traymenu_hide_window()));
+            menu->addSeparator();
+            action = menu->addAction(tr("Next source"));
+            connect(action, &QAction::triggered, [&]()
+            {
+                ui->tableView->selectRow(mCurrentPlayIndex+1);
+                m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex+1));
+                ui->pushButtonStart->click();
+            });
+            action = menu->addAction(tr("Previous source"));
+            connect(action, &QAction::triggered, [&]()
+            {
+                ui->tableView->selectRow(mCurrentPlayIndex-1);
+                m_tray_message->showMessage(tr("Selected"), get_item_name(mCurrentPlayIndex-1));
+                ui->pushButtonStart->click();
+            });
+            add_button_to_menue(menu, ui->pushButtonStart);
+            add_button_to_menue(menu, ui->pushButtonStop);
+            menu->addSeparator();
+            menu->addAction(ui->actionFileClose);
 
-        m_tray_message->setContextMenu(menu);
+            m_tray_message->setContextMenu(menu);
+        }
+        else
+        {
+            TRACEX(static_cast<Logger::eSeverity>(Logger::error|Logger::to_browser), "System tray is not available on this system");
+        }
     }
     if (m_tray_message)
     {
@@ -1636,7 +1644,14 @@ void MainWindow::metaDataChanged(const QString &key, const QVariant & value)
                 if (m_tray_message && m_tray_message->isVisible())
                 {
 #ifdef __linux__
-                    m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+                    if (ui->actionOptionShowTooltipAsHTMLFormat->isChecked())
+                    {
+                        m_tray_message->setToolTip(tr("<b>Source:</b><br>%1<br><b>%2:</b><br>%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+                    }
+                    else
+                    {
+                        m_tray_message->setToolTip(tr("Source:\n%1\n%2:\n%3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
+                    }
 #else
                     m_tray_message->setToolTip(tr("Source: %1\n%2: %3").arg(get_item_name(mCurrentRowIndex), key, value.toString()));
 #endif

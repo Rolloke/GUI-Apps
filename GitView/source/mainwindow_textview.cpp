@@ -318,8 +318,7 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
             }
         }
 
-        if (   mActivViewObjectName == binary_table_view
-            || mActivViewObjectName == binaryview)
+        if (is_any_equal_to(mActivViewObjectName, binary_table_view, binaryview))
         {
             if (ui->tableBinaryView->get_binary_data().size())
             {
@@ -328,8 +327,7 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
                 showDockedWidget(ui->tableBinaryView);
             }
         }
-        else if (   additional_editor() == AdditionalEditor::None
-                 || additional_editor() == AdditionalEditor::One)
+        else if (is_any_equal_to(additional_editor(), AdditionalEditor::None, AdditionalEditor::One))
         {
             reset_text_browser(dynamic_cast<code_browser*>(active_widget));
         }
@@ -356,15 +354,20 @@ void MainWindow::btnStoreAll_clicked()
 {
     QWidget* active_widget = nullptr;
     QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    const QString& bf_path = get_file_path(mBinaryValuesView.data());
+    if (bf_path.size() && QFileInfo(bf_path).isFile())
+    {
+        dock_widgets.append(get_dock_widget_of_name({ binary_table_view }));
+    }
 
-    for (QDockWidget* dock_widget : dock_widgets)
+    for (QDockWidget* dock_widget : dock_widgets)   // find active widget first
     {
         QWidget* current_widget = get_widget(dock_widget);
         if (get_active(current_widget)) active_widget = current_widget;
         set_active(current_widget, false);
     }
 
-    for (QDockWidget* dock_widget : dock_widgets)
+    for (QDockWidget* dock_widget : dock_widgets)   // store temporarily activated widgets
     {
         QWidget* current_widget = get_widget(dock_widget);
         set_active(current_widget, true);
@@ -372,7 +375,7 @@ void MainWindow::btnStoreAll_clicked()
         set_active(current_widget, false);
     }
 
-    if (active_widget)
+    if (active_widget)                              // and set active again after storing
     {
         set_active(active_widget, true);
     }

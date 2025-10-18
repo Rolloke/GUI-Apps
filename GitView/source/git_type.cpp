@@ -82,6 +82,10 @@ Cmd::Cmd()
     mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, InvokeOutputParserDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
+
+    /// TODO: Reload all als Funktion implementieren
+    /// TODO: Submenues als Standard implementieren
+
 }
 
 

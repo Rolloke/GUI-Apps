@@ -29,6 +29,9 @@
 #include <QSplitter>
 #include <QActionGroup>
 
+
+/// TODO: Save All darf nur Text Editoren von Dateien speichern
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
 #include <QStringConverter>
 #else
