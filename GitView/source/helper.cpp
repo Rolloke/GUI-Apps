@@ -643,6 +643,17 @@ QTreeWidgetItem * QTreeWidgetHook::itemFromIndex(const QModelIndex &index) const
     return QTreeWidget::itemFromIndex(index);
 }
 
+QAbstractItemModelHook::QAbstractItemModelHook()
+{
+
+}
+
+QModelIndexList QAbstractItemModelHook::persistentIndexList() const
+{
+    return QAbstractItemModel::persistentIndexList();
+}
+
+
 void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index)
 {
     if (widget)

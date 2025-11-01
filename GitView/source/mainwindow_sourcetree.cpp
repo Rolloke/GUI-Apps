@@ -664,6 +664,9 @@ void MainWindow::updateRepositoryStatus(bool append)
             btnCloseText_clicked(Editor::Viewer);
         }
         auto item = ui->treeSource->topLevelItem(selected_item);
+
+        auto list = ui->treeSource->saveExpandedState();
+
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
         insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
@@ -673,6 +676,8 @@ void MainWindow::updateRepositoryStatus(bool append)
             mContextMenuSourceTreeItem = found[0];
             ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
         }
+
+        ui->treeSource->restoreExpandedState(list);
     }
     else
     {

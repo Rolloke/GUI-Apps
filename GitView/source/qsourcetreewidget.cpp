@@ -11,6 +11,29 @@
 #include <vector>
 #include <set>
 
+namespace
+{
+std::string toString(const QModelIndex& index)
+{
+    std::string parent = index.parent().isValid() ? toString(index.parent()) : "X";
+
+    char buf[512];
+    sprintf(buf, "%d:%d[%s]", index.row(), index.column(), parent.c_str());
+    return buf;
+}
+
+QModelIndex fromString(const std::string& string, QAbstractItemModel& model)
+{
+    int row, column;
+    char parent_str[512];
+    sscanf(string.c_str(), "%d:%d[%s]", &row, &column, parent_str);
+
+    QModelIndex parent = *parent_str == 'X' ? QModelIndex() : fromString(parent_str, model);
+
+    return model.index(row, column, parent);
+}
+
+}
 
 using namespace std;
 using namespace git;
@@ -22,6 +45,7 @@ QSourceTreeWidget::QSourceTreeWidget(QWidget *parent) : QTreeWidget(parent)
 {
     viewport()->setMouseTracking(true);
     viewport()->installEventFilter(this);
+
 }
 
 
@@ -545,3 +569,31 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
         }
     }
 }
+
+QStringList QSourceTreeWidget::saveExpandedState() const
+{
+    auto indices = reinterpret_cast<QAbstractItemModelHook*>(model())->persistentIndexList();
+
+    QStringList list;
+    for (const QModelIndex& index : indices)
+    {
+        if (isExpanded(index))
+        {
+            list << QString::fromStdString(toString(index));
+        }
+    }
+    return list;
+}
+
+void QSourceTreeWidget::restoreExpandedState(const QStringList& list)
+{
+    setUpdatesEnabled(false);
+
+    for (const QString& string : list)
+    {
+        QModelIndex index = fromString(string.toStdString(), *model());
+        setExpanded(index, true);
+    }
+
+    setUpdatesEnabled(true);
+};

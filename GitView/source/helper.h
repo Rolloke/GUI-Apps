@@ -115,6 +115,19 @@ public:
 private:
 };
 
+
+class QAbstractItemModelHook: public QAbstractItemModel
+{
+public:
+    QAbstractItemModelHook();
+
+    QModelIndexList persistentIndexList() const;
+
+private:
+};
+
+
+
 void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index=0);
 
 
