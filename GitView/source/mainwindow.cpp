@@ -1282,16 +1282,7 @@ void MainWindow::on_DockWidgetActivated(QDockWidget *dockWidget)
                 set_widget_and_action_enabled(ui->btnStoreText, textBrowser->get_changed());
                 updateSelectedLanguage(textBrowser->currentLanguage());
                 QString repository_root;
-                for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
-                {
-                    const QString text = ui->treeSource->topLevelItem(i)->text(0);
-                    if (file_path_part.indexOf(text) == 0)
-                    {
-                        repository_root = text;
-                        file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
-                        break;
-                    }
-                }
+                find_root_and_partial_path(*ui->treeSource, repository_root, file_path_part);
                 ui->treeSource->find_item(repository_root, file_path_part);
             }
         }
@@ -2489,7 +2480,7 @@ void MainWindow::on_emit_temp_file_path(const QString& path)
     }
 }
 
-void MainWindow::timerEvent(QTimerEvent * /* event */)
+void MainWindow::timerEvent(QTimerEvent *  event )
 {
     bool temp_file_is_open = mTempFile.isOpen();
     if (temp_file_is_open)
@@ -2550,6 +2541,28 @@ void MainWindow::timerEvent(QTimerEvent * /* event */)
             lock.unlock();
             mTempFile.open(QFile::ReadOnly|QFile::Text);
         }
+    }
+
+    int id = event->timerId();
+    if (mTimerTask.contains(id))
+    {
+        killTimer(event->timerId());
+        QVariantList& list = mTimerTask[id];
+        uint actual_cmd  = list.at(0).toUInt();
+        uint initial_cmd = list.at(1).toUInt();
+        if (initial_cmd == Cmd::MoveOrRename)
+        {
+            QString repository_root;
+            QString fOldName = list.at(2).toString();
+            QString fNewName = list.at(3).toString();
+            QTreeWidgetItem* item1 = find_root_and_partial_path(*ui->treeSource, repository_root, fOldName);
+            QTreeWidgetItem* item2 = find_root_and_partial_path(*ui->treeSource, repository_root, fNewName);
+            mContextMenuSourceTreeItem = item1 ? item1 : item2;
+            perform_post_cmd_action(static_cast<Cmd::eCmd>(actual_cmd));
+            ui->treeSource->find_item(repository_root, fOldName);
+            ui->treeSource->find_item(repository_root, fNewName);
+        }
+        mTimerTask.remove(id);
     }
 }
 
@@ -3460,16 +3473,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
             else
             {
                 open_file(file_path_part, item->text(FindColumn::Line).toInt(), false);
-                for (int i=0; i<ui->treeSource->topLevelItemCount(); ++i)
-                {
-                    const QString text = ui->treeSource->topLevelItem(i)->text(0);
-                    if (file_path_part.indexOf(text) == 0)
-                    {
-                        repository_root = text;
-                        file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
-                        break;
-                    }
-                }
+                find_root_and_partial_path(*ui->treeSource, repository_root, file_path_part);
             }
 
             ui->treeSource->find_item(repository_root, file_path_part);
