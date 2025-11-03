@@ -449,6 +449,7 @@ private:
 #else
     QList<QPair<QRegExp, QString>> mFilterPatterns;
 #endif
+    QMap<int, QVariantList> mTimerTask;
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";
