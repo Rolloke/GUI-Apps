@@ -36,9 +36,8 @@ public:
     QString  getItemTopDirPath(QTreeWidgetItem* item);
     void     fillContextMenue(QMenu&, QTreeWidgetItem *item);
 
-    QStringList saveExpandedState() const;
-    void restoreExpandedState(const QStringList& list);
-
+    QStringList saveExpandedState(QTreeWidgetItem* item=nullptr) const;
+    void restoreExpandedState(const QStringList& list, QTreeWidgetItem *item=nullptr);
 
 public Q_SLOTS:
     void find_item(const QString& git_root, const QString& filepath);
