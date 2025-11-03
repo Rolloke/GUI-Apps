@@ -665,19 +665,31 @@ void MainWindow::updateRepositoryStatus(bool append)
         }
         auto item = ui->treeSource->topLevelItem(selected_item);
 
+#if 1
         auto list = ui->treeSource->saveExpandedState();
+#else
+        auto list = ui->treeSource->saveExpandedState(item);
+#endif
 
         ui->treeSource->removeItemWidget(item, 0);
         delete item;
-        insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
-        QList<QTreeWidgetItem*> found = ui->treeSource->findItems(fSourceDirs[selected_item], Qt::MatchExactly);
-        if (found.size())
-        {
-            mContextMenuSourceTreeItem = found[0];
-            ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
-        }
 
+        mContextMenuSourceTreeItem = nullptr;
+        insertSourceTree(initDir(fSourceDirs[selected_item]), selected_item);
+        QList<QTreeWidgetItem*> found_items = ui->treeSource->findItems(fSourceDirs[selected_item], Qt::MatchExactly);
+        for (const auto&found_item : found_items)
+        {
+            if (found_item->text(QSourceTreeWidget::Column::FileName) == fSourceDirs[selected_item])
+            {
+                mContextMenuSourceTreeItem = found_item;
+                ui->treeSource->setCurrentItem(mContextMenuSourceTreeItem);
+            }
+        }
+#if 1
         ui->treeSource->restoreExpandedState(list);
+#else
+        ui->treeSource->restoreExpandedState(list, mContextMenuSourceTreeItem);
+#endif
     }
     else
     {
@@ -1015,7 +1027,7 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             }
         }
 
-        const QString fNewName = QInputDialog::getText(this,
+        QString fNewName = QInputDialog::getText(this,
                        tr("Move or rename %1").arg(fFileTypeName),
                        tr("Enter a new name or destination for \"%1\".\n"
                           "To move the %3 insert the destination path before.\n"
@@ -1064,8 +1076,21 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
             {
                 if (fMoved)
                 {
-                    auto*action = mActions.getAction(Cmd::UpdateGitStatus);
-                    if (action)action->trigger();
+#if 1
+                    mContextMenuSourceTreeItem = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem);
+                    updateRepositoryStatus();
+#else
+                    fOldName.replace("\"", "");
+                    QVariantList parameter;
+                    /// TODO: store state of tree to restore after reread repository
+                    /// store repository top level index
+                    parameter.append(QVariant(Cmd::UpdateRepository));
+                    parameter.append(QVariant(Cmd::MoveOrRename));
+                    parameter.append(QVariant(fOldName));
+                    parameter.append(QVariant(fNewName + "/" + fPath.fileName()));
+                    int id = startTimer(1000);
+                    mTimerTask[id] = parameter;
+#endif
                 }
                 else
                 {
@@ -1228,7 +1253,7 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
         break;
     case Cmd::UpdateRootItemStatus:
         mContextMenuSourceTreeItem = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem);
-        updateRepositoryStatus(true);
+        updateRepositoryStatus(cmd != Cmd::CloseAll);
         break;
     case Cmd::UpdateRepository:
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
