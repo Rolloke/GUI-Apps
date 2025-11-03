@@ -322,6 +322,21 @@ QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, con
     return aItem;
 }
 
+QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& repository_root, QString& file_path_part)
+{
+    for (int i=0; i<aTree.topLevelItemCount(); ++i)
+    {
+        const QString text = aTree.topLevelItem(i)->text(0);
+        if (file_path_part.indexOf(text) == 0)
+        {
+            repository_root = text;
+            file_path_part = file_path_part.right(file_path_part.size() - text.size() - 1);
+            return aTree.topLevelItem(i);
+        }
+    }
+    return nullptr;
+}
+
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf)
 {
     auto count = aItem->childCount();
