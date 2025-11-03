@@ -68,6 +68,7 @@ void deleteSelectedTreeWidgetItem(QTreeWidget& aTree);
 void deleteAllTreeWidgetItem(QTreeWidget& aTree);
 
 QTreeWidgetItem* getTopLevelItem(QTreeWidget& aTree, QTreeWidgetItem* aItem, const tGTLIFunction& function = {});
+QTreeWidgetItem* find_root_and_partial_path(QTreeWidget& aTree, QString& repository_root, QString& file_path_part);
 void do_with_item_and_children(QTreeWidgetItem* aItem, const tGTLIFunction& function, bool also_leaf = true);
 void toggle_expand_item(QTreeWidgetItem* item);
 int getItemLevel(QTreeWidgetItem* aItem);
