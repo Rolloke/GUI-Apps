@@ -17,7 +17,7 @@ void MainWindow::call_git_stash_command()
     const QVariantList variant_list     = action->data().toList();
     const QString&     message_box_text = variant_list[ActionList::Data::MsgBoxText].toString();
     const auto         action_flags     = variant_list[ActionList::Data::Flags].toUInt();
-    const auto         post_action_cmd  = variant_list[ActionList::Data::PostCmdAction].toUInt();
+    const auto         post_action_cmd  = static_cast<Cmd::ePostAction>(variant_list[ActionList::Data::PostCmdAction].toUInt());
     const QString&     stash_item       = ui->treeStash->getSelectedStashItem();
     const QString&     stash            = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::Text);
     const QString&     stash_root       = ui->treeStash->getStashTopItemText(QStashTreeWidget::Role::GitRootPath);
@@ -70,6 +70,16 @@ void MainWindow::call_git_stash_command()
         case Cmd::UpdateRootItemStatus:
             perform_post_cmd_action(Cmd::UpdateStash, {}, cmd_id);
             perform_post_cmd_action(post_action_cmd, {}, cmd_id);
+            break;
+        case Cmd::DoNothing:
+        case Cmd::UpdateItemStatus:
+        case Cmd::ParseHistoryText:
+        case Cmd::ParseBranchListText:
+        case Cmd::ParseBlameText:
+        case Cmd::UpdateRepository:
+        case Cmd::UpdateRepositorySubFolder:
+        case Cmd::InsertRepository:
+            /// NOTE: Nothing to do here
             break;
         }
     }

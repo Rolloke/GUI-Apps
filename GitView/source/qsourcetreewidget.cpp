@@ -570,29 +570,34 @@ void QSourceTreeWidget::fillContextMenue(QMenu &menu, QTreeWidgetItem *item)
     }
 }
 
-QStringList QSourceTreeWidget::saveExpandedState(QTreeWidgetItem *item) const
+QStringList QSourceTreeWidget::saveExpandedState(QTreeWidgetItem *item)
 {
     QStringList list;
     if (item)
     {
-        do_with_item_and_children(item, [&list](QTreeWidgetItem*&this_item)
+        do_with_item_and_children(item, [&list,this](QTreeWidgetItem*&this_item)
         {
             if (this_item->isExpanded())
             {
-                list.append(this_item->text(QSourceTreeWidget::Column::FileName));
+                QString str;
+                getTopLevelItem(*this, this_item, [&str](QTreeWidgetItem*&this_item)
+                {
+                    str = this_item->text(QSourceTreeWidget::Column::FileName) + "," + str;
+                });
+                list.append(str);
             }
         }, false);
     }
     else
     {
         auto indices = reinterpret_cast<QAbstractItemModelHook*>(model())->persistentIndexList();
-    for (const QModelIndex& index : indices)
-    {
-        if (isExpanded(index))
+        for (const QModelIndex& index : indices)
         {
-            list << QString::fromStdString(toString(index));
+            if (isExpanded(index))
+            {
+                list << QString::fromStdString(toString(index));
+            }
         }
-    }
     }
     return list;
 }
@@ -606,7 +611,6 @@ void QSourceTreeWidget::restoreExpandedState(const QStringList& list, QTreeWidge
     }
     else
     {
-
         for (const QString& string : list)
         {
             QModelIndex index = fromString(string.toStdString(), *model());

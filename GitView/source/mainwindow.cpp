@@ -30,8 +30,6 @@
 #include <QActionGroup>
 
 
-/// TODO: Save All darf nur Text Editoren von Dateien speichern
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
 #include <QStringConverter>
 #else
@@ -1654,7 +1652,7 @@ void MainWindow::handleMessage(QVariant aData)
         case Work::ApplyGitCommand:
         case Work::ApplyCommand:
         {
-            auto cmd_action = data_map[Worker::action].toUInt();
+            auto cmd_action = static_cast<Cmd::ePostAction>(data_map[Worker::action].toUInt());
             appendTextToBrowser(data_map[Worker::command].toString(), cmd_action == 0);
             appendTextToBrowser(data_map[Worker::result].toString(), true);
             perform_post_cmd_action(cmd_action, {}, static_cast<git::Cmd::eCmd>(data_map[Worker::command_id].toInt()));
@@ -2243,17 +2241,21 @@ void MainWindow::initContextMenuActions()
 
     create_auto_cmd(ui->ckShowLineNumbers, mActions.check_location("x-office-document.png"), &new_id);
     contextmenu_text_view.push_back(new_id);
-    contextmenu_text_view.push_back(Cmd::Separator);
 
+    contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubFiles, Cmd::OpenFile});
     create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_W));
     mActions.getAction(new_id)->setText(tr("Save"));
     contextmenu_text_view.push_back(new_id);
+    contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SaveAs, Cmd::SaveAll});
     create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
     mActions.getAction(new_id)->setText(tr("Close"));
     contextmenu_text_view.push_back(new_id);
-    contextmenu_text_view.push_back(Cmd::Separator);
+    contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::CloseAll});
 
+    contextmenu_text_view.push_back(Cmd::SubFind);
     create_auto_cmd(ui->btnFindAll, mActions.check_location("edit-find.png"), &new_id);
+    /// TODO: disable find all, if ui->edtFindText ist empty
+    contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F3));
@@ -2287,11 +2289,28 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
     mActions.getAction(new_id)->setToolTip(tr("Execute"));
 
+    contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubExtra, Cmd::EditToUpper, Cmd::EditToLower, Cmd::EditToggleComment, Cmd::EditToSnakeCase, Cmd::EditToCamelCase, Cmd::EditTabIndent, Cmd::EditTabOutdent });
 
-    if (Cmd::mContextMenuTextView.empty())
+    auto found_sub = std::find_if(Cmd::mContextMenuTextView.begin(), Cmd::mContextMenuTextView.end(), [](auto cmd) { return is_any_equal_to(cmd, Cmd::SubFind, Cmd::SubFiles, Cmd::SubExtra); });
+    if (found_sub == Cmd::mContextMenuTextView.end())
     {
-        Cmd::mContextMenuTextView = contextmenu_text_view;
+        Cmd::mContextMenuTextView.insert(Cmd::mContextMenuTextView.end(), contextmenu_text_view.begin(), contextmenu_text_view.end());
     }
+
+    auto cmd = Cmd::SubFiles;
+    QString name = Cmd::getCommand(cmd);
+    mActions.createAction(cmd, name, name);
+    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
+
+    cmd = Cmd::SubFind;
+    name = Cmd::getCommand(cmd);
+    mActions.createAction(cmd, name, name);
+    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
+
+    cmd = Cmd::SubExtra;
+    name = Cmd::getCommand(cmd);
+    mActions.createAction(cmd, name, name);
+    mActions.setFlags(cmd, ActionList::Flags::Modified, Flag::set);
 
     for (const auto& fAction : std::as_const(mActions.getList()))
     {
@@ -2548,20 +2567,9 @@ void MainWindow::timerEvent(QTimerEvent *  event )
     {
         killTimer(event->timerId());
         QVariantList& list = mTimerTask[id];
-        uint actual_cmd  = list.at(0).toUInt();
-        uint initial_cmd = list.at(1).toUInt();
-        if (initial_cmd == Cmd::MoveOrRename)
-        {
-            QString repository_root;
-            QString fOldName = list.at(2).toString();
-            QString fNewName = list.at(3).toString();
-            QTreeWidgetItem* item1 = find_root_and_partial_path(*ui->treeSource, repository_root, fOldName);
-            QTreeWidgetItem* item2 = find_root_and_partial_path(*ui->treeSource, repository_root, fNewName);
-            mContextMenuSourceTreeItem = item1 ? item1 : item2;
-            perform_post_cmd_action(static_cast<Cmd::eCmd>(actual_cmd));
-            ui->treeSource->find_item(repository_root, fOldName);
-            ui->treeSource->find_item(repository_root, fNewName);
-        }
+        uint post_cmd = list.at(0).toUInt();
+        Cmd::eCmd cmd = list.size() > 1 ? static_cast<Cmd::eCmd>(list.at(1).toUInt()) : Cmd::Invalid;
+        perform_post_cmd_action(static_cast<Cmd::ePostAction>(post_cmd), {}, cmd);
         mTimerTask.remove(id);
     }
 }

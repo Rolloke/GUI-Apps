@@ -68,24 +68,40 @@ Cmd::Cmd()
     mCommandMap[Clone]                  = "git clone -v %1";
     mCommandMap[MergeTwoBranches]       = " ";
 
-    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename, Separator, CompareTo, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally, Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History, Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
+    mCommandMap[SubFiles]               = QObject::tr("Files");
+    mCommandMap[SubFind]                = QObject::tr("Find");
+    mCommandMap[SubExtra]               = QObject::tr("Extra");
+
+    mContextMenuSourceTree      = { CopyFileName, CopyFilePath, Delete, Separator, Add, Unstage, Restore, Remove, MoveOrRename,
+                                    Separator, CompareTo, AddExternalFileOpenExt, DeleteExternalFileOpenExt, OpenFileExternally,
+                                    Separator, ShowDifference, CallDiffTool, CallMergeTool, Commit, StashPush, History,
+                                    Separator, StashShow, ShowShortStatus, ShowStatus, ShowInformation };
     mContextMenuEmptySourceTree = { AddGitSourceFolder, RemoveGitFolder, Clone, UpdateGitStatus, Separator, ExpandTreeItems, CollapseTreeItems };
 
-    mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, UndoCommitSoft, UndoCommitHard, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
-    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged, Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCreate, BranchCheckout, BranchDelete, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
-    mContextMenuStashTree       = { ShowDifference, CallDiffTool, Separator, StashPop, StashApply, StashDrop, StashClear, Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuHistoryTree     = { ShowDifference, CallDiffTool, InsertHashFileNames, Separator, Restore, UndoCommitSoft, UndoCommitHard,
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuBranchTree      = { BranchList, BranchListRemote, BranchListMerged, BranchListNotMerged,
+                                    Separator, BranchShow, DiffOfTwoBranches, MergeTwoBranches, BranchCreate, BranchCheckout, BranchDelete,
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
+    mContextMenuStashTree       = { ShowDifference, CallDiffTool,
+                                    Separator, StashPop, StashApply, StashDrop, StashClear,
+                                    Separator, ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
     mContextMenuGraphicsView    = { ZoomIn, ZoomOut, Separator, FitInView };
-    mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator, CloseAll, SaveAll, ReplaceAll, SaveAs };
+    mContextMenuTextView        = { CloneTextBrowser, CreateBookMark, Separator };
     mContextMenuFindTextTree    = { ExpandTreeItems, CollapseTreeItems, ClearTreeItems, DeleteTreeItems };
 
-    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove, Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame, Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
-    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus, Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, InvokeOutputParserDialog, RenderGraphics, Separator, Commit, Push, Pull, Fetch, Separator, Stash, StashList, Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
+    mToolbars.push_back({ Add, Unstage, Restore, MoveOrRename, Remove,
+                          Separator, ShowDifference, CallDiffTool, CallMergeTool, History, StashShow, Blame,
+                          Separator, ShowStatus, ShowShortStatus, About, KillBackgroundThread});
+    mToolbars.push_back({ AddGitSourceFolder, RemoveGitFolder, UpdateGitStatus,
+                          Separator, OpenFile, ClearTreeItems, ExpandTreeItems, CollapseTreeItems, SelectTextBrowserLanguage, InvokeHighlighterDialog, InvokeOutputParserDialog, RenderGraphics,
+                          Separator, Commit, Push, Pull, Fetch,
+                          Separator, Stash, StashList,
+                          Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
 
     /// TODO: Reload all als Funktion implementieren
-    /// TODO: Submenues als Standard implementieren
-
 }
 
 

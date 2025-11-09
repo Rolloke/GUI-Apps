@@ -639,7 +639,7 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
     }
 }
 
-void MainWindow::updateRepositoryStatus(bool append)
+void MainWindow::updateRepositoryStatus(bool clear_viewer)
 {
     QString   file_name;
     if (mContextMenuSourceTreeItem)
@@ -659,7 +659,7 @@ void MainWindow::updateRepositoryStatus(bool append)
 
     if (selected_item != -1)
     {
-        if (!append)
+        if (clear_viewer)
         {
             btnCloseText_clicked(Editor::Viewer);
         }
@@ -1077,17 +1077,10 @@ void MainWindow::call_git_move_rename(QTreeWidgetItem* dropped_target, bool *was
                 if (fMoved)
                 {
 #if 1
-                    mContextMenuSourceTreeItem = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem);
-                    updateRepositoryStatus();
+                    perform_post_cmd_action(Cmd::UpdateRootItemStatus);
 #else
-                    fOldName.replace("\"", "");
                     QVariantList parameter;
-                    /// TODO: store state of tree to restore after reread repository
-                    /// store repository top level index
-                    parameter.append(QVariant(Cmd::UpdateRepository));
-                    parameter.append(QVariant(Cmd::MoveOrRename));
-                    parameter.append(QVariant(fOldName));
-                    parameter.append(QVariant(fNewName + "/" + fPath.fileName()));
+                    parameter.append(QVariant(Cmd::UpdateRootItemStatus));
                     int id = startTimer(1000);
                     mTimerTask[id] = parameter;
 #endif
@@ -1239,12 +1232,12 @@ void MainWindow::perform_custom_command()
 
         if (!(command_flags & ActionList::Flags::CallInThread))
         {
-            perform_post_cmd_action(variant_list[ActionList::Data::PostCmdAction].toUInt(), type, mActions.findID(action));
+            perform_post_cmd_action(static_cast<Cmd::ePostAction>(variant_list[ActionList::Data::PostCmdAction].toUInt()), type, mActions.findID(action));
         }
     }
 }
 
-void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, Cmd::eCmd cmd)
+void MainWindow::perform_post_cmd_action(Cmd::ePostAction post_cmd, const git::Type& type, Cmd::eCmd cmd)
 {
     switch (post_cmd)
     {
@@ -1253,7 +1246,7 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
         break;
     case Cmd::UpdateRootItemStatus:
         mContextMenuSourceTreeItem = getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem);
-        updateRepositoryStatus(cmd != Cmd::CloseAll);
+        updateRepositoryStatus(cmd == Cmd::ClearView);
         break;
     case Cmd::UpdateRepository:
         updateTreeItemStatus(getTopLevelItem(*ui->treeSource, mContextMenuSourceTreeItem));
@@ -1286,6 +1279,11 @@ void MainWindow::perform_post_cmd_action(uint post_cmd, const git::Type& type, C
             auto *action = mActions.getAction(git::Cmd::StashList);
             if (action) action->trigger();
         }
+        break;
+    case Cmd::ParseBranchListText:
+    case Cmd::ParseStashListText:
+    case Cmd::InsertRepository:
+    case Cmd::DoNothing:
         break;
     }
 }

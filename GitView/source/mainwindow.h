@@ -183,13 +183,22 @@ private:
         Binary
     };
 
+    struct tree_find_properties
+    {
+        tree_find_properties();
+        int                   mFlags;
+        int                   mIndex;
+        int                   mColumn;
+        QList<QTreeWidgetItem *> mItems;
+    };
+
     QTreeWidgetItem* insert_file_path(QTreeWidgetItem* , const QString& );
 
     void     call_git_history_diff_command();
     int      call_git_command(QString, const QString&, const QString&, QString&, const QString& git_root_path={});
 
     QString  get_git_command_option(const git::Type& type, uint command_flags, const QVariantList& variant_list);
-    void     perform_post_cmd_action(uint post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid);
+    void     perform_post_cmd_action(git::Cmd::ePostAction post_cmd, const git::Type& type = {}, git::Cmd::eCmd cmd = git::Cmd::Invalid);
 
     QString  getConfigName() const;
 
@@ -257,7 +266,7 @@ Q_SIGNALS:
     void doWork(QVariant);
 
 private Q_SLOTS:
-    void updateRepositoryStatus(bool append=false);
+    void updateRepositoryStatus(bool clear_viewer=true);
     void textBrowserChanged(bool changed=false);
 
     void btnStoreText_clicked();
@@ -398,19 +407,9 @@ private:
     QSharedPointer<QTextBrowser> mTextRenderView;
 #endif
     QSharedPointer<code_browser> mBackgroundTextView;
-
     string2bool_map         mMergeTools;
     string2miscelaneous_map mMiscelaneousItems;
     std::vector<QToolBar*> mToolBars;
-    struct tree_find_properties
-    {
-        tree_find_properties();
-        int                   mFlags;
-        int                   mIndex;
-        int                   mColumn;
-        QList<QTreeWidgetItem *> mItems;
-    };
-
     QMap <QString, tree_find_properties> mTreeFindProperties;
     QStringList mHistoryFile;
     QString mStylePath;

@@ -80,6 +80,9 @@ struct Cmd
         NonGitCommands = 1000,
         /// hint: a submenu goes to the next separator
         Submenu   = NonGitCommands+1000,
+        SubFiles,
+        SubFind,
+        SubExtra,
         Separator = NonGitCommands,
         ExpandTreeItems,
         CollapseTreeItems,
@@ -124,6 +127,7 @@ struct Cmd
         EditToggleVisible,
         GoToLine,
         InvokeOutputParserDialog,
+        ClearView,
 
         /// hint: add non git commands before
         LastNonGitCommand = InvokeOutputParserDialog,
