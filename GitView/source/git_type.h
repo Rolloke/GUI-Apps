@@ -84,6 +84,7 @@ struct Cmd
         SubFind,
         SubExtra,
         Separator = NonGitCommands,
+
         ExpandTreeItems,
         CollapseTreeItems,
         AddGitSourceFolder,
@@ -128,6 +129,7 @@ struct Cmd
         GoToLine,
         InvokeOutputParserDialog,
         ClearView,
+        ReloadAll,
 
         /// hint: add non git commands before
         LastNonGitCommand = InvokeOutputParserDialog,

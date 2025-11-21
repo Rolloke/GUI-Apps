@@ -174,12 +174,12 @@ void MainWindow::modify_text()
     }
 }
 
-void MainWindow::check_reload(code_browser *browser)
+void MainWindow::check_reload(code_browser *browser, bool dont_ask_for_loading)
 {
     if (browser->is_modified())
     {
         browser->update_modified();
-        if (callMessageBox(tr("Reload file%1?;File %1%2 has changed"), "", browser->get_file_path()) & QMessageBox::Yes)
+        if (dont_ask_for_loading || callMessageBox(tr("Reload file%1?;File %1%2 has changed"), "", browser->get_file_path()) & QMessageBox::Yes)
         {
             open_file(browser->get_file_path(), browser->current_line(), true);
         }
@@ -378,6 +378,19 @@ void MainWindow::btnStoreAll_clicked()
     if (active_widget)                              // and set active again after storing
     {
         set_active(active_widget, true);
+    }
+}
+
+void MainWindow::btnReloadAll_clicked()
+{
+    QList<QDockWidget *> dock_widgets = get_dock_widget_of_name({ new_textbrowser });
+    for (QDockWidget* dock_widget : dock_widgets)   // store temporarily activated widgets
+    {
+        code_browser* text_browser = dynamic_cast<code_browser*>(get_widget(dock_widget));
+        if (text_browser)
+        {
+            check_reload(text_browser, true);
+        }
     }
 }
 

@@ -271,6 +271,7 @@ private Q_SLOTS:
 
     void btnStoreText_clicked();
     void btnStoreAll_clicked();
+    void btnReloadAll_clicked();
     bool btnCloseText_clicked(Editor editor=Editor::CalledFromAction);
     void btnCloseAll_clicked();
 
@@ -361,7 +362,7 @@ private Q_SLOTS:
     void OpenFile();
     void SaveFileAs();
     void modify_text();
-    void check_reload(code_browser*);
+    void check_reload(code_browser*, bool dont_ask_for_loading = false);
     void set_show_line_numbers(bool);
     void on_ckAppendToBatch_clicked(bool checked);
     void on_btnFindAll_clicked();

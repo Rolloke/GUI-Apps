@@ -212,6 +212,7 @@ void ActionList::initActionIcons()
     action_icons[Cmd::EditTabIndent]           = "window-close.png";
     action_icons[Cmd::EditTabOutdent]          = "window-close.png";
     action_icons[Cmd::InvokeOutputParserDialog] = "text-x-patch.png";
+    action_icons[Cmd::ReloadAll]               = "document-revert.png";
 
     for (auto& icon_path: action_icons )
     {

@@ -2163,6 +2163,7 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CloseAll, tr("Close all"), tr("Closes all documents")), SIGNAL(triggered()), this, SLOT(btnCloseAll_clicked()));
     connect(mActions.createAction(Cmd::SaveAll, tr("Save all"), tr("Saves all documents")), SIGNAL(triggered()), this, SLOT(btnStoreAll_clicked()));
+    connect(mActions.createAction(Cmd::ReloadAll, tr("Reload all"), tr("Reloads all documents")), SIGNAL(triggered()), this, SLOT(btnReloadAll_clicked()));
 
     connect(mActions.createAction(Cmd::CustomGitActionSettings, tr("Customize git actions..."), tr("Edit custom git actions, menues and toolbars")), SIGNAL(triggered()), this, SLOT(performCustomGitActionSettings()));
     mActions.setFlags(Cmd::CustomGitActionSettings, ActionList::Flags::FunctionCmd, Flag::set);
@@ -2247,10 +2248,11 @@ void MainWindow::initContextMenuActions()
     mActions.getAction(new_id)->setText(tr("Save"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SaveAs, Cmd::SaveAll});
-    create_auto_cmd(ui->btnCloseText, "", &new_id)->                             setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
+    create_auto_cmd(ui->btnCloseText, "", &new_id)->                                           setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
     mActions.getAction(new_id)->setText(tr("Close"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::CloseAll});
+    contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::ReloadAll});
 
     contextmenu_text_view.push_back(Cmd::SubFind);
     create_auto_cmd(ui->btnFindAll, mActions.check_location("edit-find.png"), &new_id);
@@ -3553,6 +3555,8 @@ void MainWindow::on_comboOpenNewEditor_currentIndexChanged(int )
     auto*action = mActions.getAction(Cmd::CloseAll);
     if (action) action->setEnabled(allfiles);
     action = mActions.getAction(Cmd::SaveAll);
+    if (action) action->setEnabled(allfiles);
+    action = mActions.getAction(Cmd::ReloadAll);
     if (action) action->setEnabled(allfiles);
     QDockWidget*dock = dynamic_cast<QDockWidget*>(ui->textBrowser->parent());
     if (dock)
