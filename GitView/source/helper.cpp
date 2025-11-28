@@ -23,6 +23,8 @@
 #include <QThread>
 #include <QSpacerItem>
 #include <QGridLayout>
+#include <QGuiApplication>
+#include <QWindow>
 
 #ifdef USE_BOOST
 #include <boost/algorithm/string.hpp>
@@ -61,7 +63,6 @@ namespace txt
    const char no_double_entries[] = "no_double_entries";
 }
 
-QPoint menu_offset(5, 0);
 
 QString getSettingsName(const QString& aItemName)
 {
@@ -620,8 +621,9 @@ int callMessageBox(const QString& aMessageBoxText, const QString& aFileTypeName,
             {
                 QSpacerItem* horizontalSpacer = new QSpacerItem(sizes[0], 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
                 QGridLayout* layout = (QGridLayout*)fRequestMessage.layout();
-                layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());            }
-
+                layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+            }
+            ensure_dialog_on_same_screen(&fRequestMessage);
             return fRequestMessage.exec();
         }
     }
@@ -738,4 +740,73 @@ bool LinkFilter::eventFilter(QObject *, QEvent *event)
         return true;
     }
     return false;
+}
+
+void ensure_dialog_on_same_screen(QWidget *widget, QWidget *reference)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    // 1️⃣ Get the screen from the reference widget
+    QScreen *screen = nullptr;
+    if (!reference)
+    {
+        screen = QGuiApplication::topLevelWindows().first()->screen();
+    }
+    else if (reference->windowHandle())
+    {
+        screen = reference->windowHandle()->screen();
+    }
+
+    // 2️⃣ Fallback: use the screen under the mouse
+    if (!screen)
+    {
+        screen = QGuiApplication::screenAt(QCursor::pos());
+    }
+
+
+    // 3️⃣ If we still have no screen (unlikely), use primary
+    if (!screen)
+    {
+        screen = QGuiApplication::primaryScreen();
+    }
+    if (screen && !screen->availableGeometry().contains(widget->rect().center()))
+    {
+        auto dlg = reinterpret_cast<QDialog*>(widget);
+        if (dlg)
+        {
+            // 4️⃣ Ensure the dialog is a top‑level window
+            dlg->setWindowFlag(Qt::Window);           // make sure it has a native window
+            dlg->windowHandle()->setScreen(screen);   // Qt 6 API – forces screen
+        }
+        // 5️⃣ Center the dialog in that screen (optional)
+        QRect geom = screen->availableGeometry(); // excludes taskbar, etc.
+        widget->move(geom.center() - widget->rect().center());
+    }
+#else
+    (void)(widget);
+    (void)(reference);
+#endif
+}
+
+QPoint check_screen_position(QPoint pos, bool add_offset, QWidget* map_to_global)
+{
+    QPoint menu_offset(5, 0);
+    if (map_to_global)
+    {
+        pos = map_to_global->mapToGlobal(pos);
+    }
+    if (add_offset)
+    {
+        pos += menu_offset;
+    }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    auto screen = QGuiApplication::screenAt(pos);
+    if (screen)
+    {
+        if (!screen->availableGeometry().contains(pos))
+        {
+            pos = screen->availableGeometry().center();
+        }
+    }
+#endif
+    return pos;
 }

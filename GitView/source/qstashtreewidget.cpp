@@ -123,7 +123,7 @@ void QStashTreeWidget::on_customContextMenuRequested(const ActionList& aActionLi
 
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuStashTree);
-    menu.exec(mapToGlobal(pos) + menu_offset);
+    menu.exec(check_screen_position(pos, true, this));
 }
 
 void QStashTreeWidget::on_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem * /* previous */)

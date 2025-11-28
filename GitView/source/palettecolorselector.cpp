@@ -1,5 +1,6 @@
 #include "palettecolorselector.h"
 #include "ui_palettecolorselector.h"
+#include "helper.h"
 
 #include <QPalette>
 #include <QColorDialog>
@@ -188,6 +189,7 @@ void PaletteColorSelector::color_btn_clicked()
         auto palette_color = static_cast<QPalette::ColorRole>(index);
         dlg.setWindowTitle(tr("Color of %1").arg(button->text()));
         dlg.setCurrentColor(m_palette.color(palette_color));
+        ensure_dialog_on_same_screen(&dlg, this);
         if (dlg.exec() == QDialog::Accepted)
         {
             QString other_color;

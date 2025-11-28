@@ -67,6 +67,7 @@ set(HEADER
     ../source/qstashtreewidget.h
     ../source/workerthreadconnector.h
     ../source/xml_functions.h
+    ../source/outputparser.h
    )
 
 set(SOURCE 
@@ -105,6 +106,7 @@ set(SOURCE
     ../source/qstashtreewidget.cpp
     ../source/workerthreadconnector.cpp
     ../source/xml_functions.cpp
+    ../source/outputparser.cpp
    )
 
 set(UIFILES
@@ -117,6 +119,7 @@ set(UIFILES
     ../source/mainwindow.ui
     ../source/mergedialog.ui
     ../source/palettecolorselector.ui
+    ../source/outputparser.ui
    )
 
 qt_add_resources(GitView RESOURCE

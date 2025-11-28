@@ -1,6 +1,7 @@
 #include "highlighterdialog.h"
 #include "highlighter.h"
 #include "ui_highlighterdialog.h"
+#include "helper.h"
 
 #include <QPushButton>
 #include <QCheckBox>
@@ -78,7 +79,7 @@ HighlighterDialog::~HighlighterDialog()
 void HighlighterDialog::color_btn_clicked()
 {
     auto *button = dynamic_cast<QWidget*>(sender());
-    QColorDialog dlg;
+    QColorDialog dlg(this);
     QTextCharFormat* text_char_format { nullptr };
     int index = ui->color_buttons->indexOf(button);
     if (index > 0) index--;
@@ -89,6 +90,7 @@ void HighlighterDialog::color_btn_clicked()
         {
             text_char_format = &item.value();
             dlg.setCurrentColor(text_char_format->foreground().color());
+            ensure_dialog_on_same_screen(&dlg, this);
             if (dlg.exec() == QDialog::Accepted)
             {
                 text_char_format->setForeground(QBrush(dlg.selectedColor()));
@@ -153,6 +155,7 @@ void HighlighterDialog::on_btnSelectedLineBackgroundColor_clicked()
     QColorDialog dlg;
 
     dlg.setCurrentColor(mSelectedLineBackground);
+    ensure_dialog_on_same_screen(&dlg, this);
     if (dlg.exec() == QDialog::Accepted)
     {
         mSelectedLineBackground = dlg.selectedColor();

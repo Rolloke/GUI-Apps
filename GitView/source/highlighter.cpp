@@ -396,6 +396,7 @@ TextCharFormatMap  Highlighter::Language::getHighlightFormats()
 void Highlighter::Language::invokeHighlighterDlg()
 {
     HighlighterDialog dlg(nullptr, getHighlightFormats());
+    ensure_dialog_on_same_screen(&dlg);
     if (dlg.exec() == QDialog::Accepted)
     {
         const auto list = dlg.getTextFormatMap();

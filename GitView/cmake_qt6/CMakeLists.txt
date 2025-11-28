@@ -12,7 +12,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # if necessary set Qt6 path
-set(Qt6_DIR D:/.conan_short/69d6df/1/lib/cmake/Qt6)
+#set(Qt6_DIR D:/.conan_short/69d6df/1/lib/cmake/Qt6)
 
 find_package(Qt6 REQUIRED )
 
@@ -22,10 +22,10 @@ find_package(Qt6 REQUIRED COMPONENTS Xml)
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
 
-# if available uncomment this, reguard also target_link_libraries section
+# if not available comment this out, reguard also target_link_libraries section
 find_package(Qt6 REQUIRED COMPONENTS BuildInternals)
 find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
-qt_internal_project_setup()
+#qt_internal_project_setup()
 add_compile_definitions(CORE5COMPAT=1)
 
 # if avaliable uncomment this
@@ -69,6 +69,7 @@ set(HEADER
     ../source/qstashtreewidget.h
     ../source/workerthreadconnector.h
     ../source/xml_functions.h
+    ../source/outputparser.h
    )
 
 set(SOURCE 
@@ -107,6 +108,7 @@ set(SOURCE
     ../source/qstashtreewidget.cpp
     ../source/workerthreadconnector.cpp
     ../source/xml_functions.cpp
+    ../source/outputparser.cpp
    )
 
 set(UIFILES
@@ -119,6 +121,7 @@ set(UIFILES
     ../source/mainwindow.ui
     ../source/mergedialog.ui
     ../source/palettecolorselector.ui
+    ../source/outputparser.ui
    )
 
 qt_add_resources(GitView RESOURCE

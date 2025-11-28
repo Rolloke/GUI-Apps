@@ -91,7 +91,7 @@ void graphics_view::on_customContextMenuRequested(const ActionList& aActionList,
     QMenu menu(this);
     aActionList.fillContextMenue(menu, Cmd::mContextMenuGraphicsView);
     menu.addAction(tr("Cancel"));
-    menu.exec(mapToGlobal(pos) + menu_offset);
+    menu.exec(check_screen_position(pos, true, this));
 }
 
 bool graphics_view::has_rendered_graphic()

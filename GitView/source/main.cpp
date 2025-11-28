@@ -13,11 +13,11 @@ namespace cmdline
 
 int main(int argc, char *argv[])
 {
-    QFileInfo fFile(argv[0]);
-    std::string fTitle = fFile.baseName().toStdString();
-    Logger fLogger(fTitle.c_str());
+    QFileInfo file_info(argv[0]);
+    std::string program_title = file_info.baseName().toStdString();
+    Logger fLogger(program_title.c_str());
 
-    QApplication fApp(argc, argv);
+    QApplication app(argc, argv);
     QApplication::setApplicationName("GitView");
     QApplication::setApplicationVersion("1.2.0.2");
 
@@ -30,36 +30,36 @@ int main(int argc, char *argv[])
 
     // For debugging purpose: --lang=../../source/GitView_de.qm
     cmd_line.addOption({{"lang", cmdline::Language}, QObject::tr("Language."), "language"});
-    cmd_line.parse(fApp.arguments());
-    cmd_line.process(fApp);
+    cmd_line.parse(app.arguments());
+    cmd_line.process(app);
 
     FILE* logfile = 0;
 
     QTranslator translator;
-    bool loaded = translator.load(QLocale(), QLatin1String(fTitle.c_str()), QLatin1String("_"), QLatin1String(":/i18n"));
+    bool loaded = translator.load(QLocale(), QLatin1String(program_title.c_str()), QLatin1String("_"), QLatin1String(":/i18n"));
     if (cmd_line.value(cmdline::Language).size())
     {
         loaded = translator.load(cmd_line.value(cmdline::Language));
     }
     if (loaded)
     {
-        fApp.installTranslator(&translator);
+        app.installTranslator(&translator);
     }
 
-    MainWindow fWindow(cmd_line.value(cmdline::Config));
-    fWindow.set_app_path(argv[0]);
+    MainWindow window(cmd_line.value(cmdline::Config));
+    window.set_app_path(argv[0]);
 
     if (cmd_line.value(cmdline::Log2file).toInt())
     {
-        std::string filename = fTitle +  ".log";
+        std::string filename = program_title +  ".log";
         logfile = fopen(filename.c_str(), "a+t");
         auto log_function = [logfile](const std::string&text){ fprintf(logfile, "%s\n", text.c_str()); };
 
         fLogger.setLogFunction(log_function);
     }
 
-    fWindow.show();
-    auto return_value = fApp.exec();
+    window.show();
+    auto return_value = app.exec();
     if (logfile)
     {
         fclose(logfile);

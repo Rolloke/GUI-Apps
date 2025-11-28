@@ -31,8 +31,6 @@ namespace txt
 }
 
 
-extern QPoint menu_offset;
-
 #define STORE_PTR(SETTING, ITEM, FUNC)  SETTING.setValue(getSettingsName(#ITEM), ITEM->FUNC())
 #define STORE_NP(SETTING, ITEM, FUNC)   SETTING.setValue(getSettingsName(#ITEM), ITEM.FUNC())
 #define STORE_STR(SETTING, ITEM)        SETTING.setValue(getSettingsName(#ITEM), ITEM)
@@ -127,9 +125,10 @@ public:
 private:
 };
 
-
-
 void set_widget_and_action_enabled(QWidget* widget, bool enabled, int action_index=0);
+
+void ensure_dialog_on_same_screen(QWidget *widget, QWidget *reference=nullptr);
+QPoint check_screen_position(QPoint pos, bool add_offset=false, QWidget *map_to_global=nullptr);
 
 
 class ColorSelector
@@ -164,6 +163,7 @@ protected:
     bool eventFilter(QObject *watched, QEvent *event);
 
 };
+
 
 #if 1
 /// \brief variadic count_equal

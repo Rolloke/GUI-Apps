@@ -2657,6 +2657,7 @@ void MainWindow::performCustomGitActionSettings()
     g_test_command_only = std::bind(&CustomGitActions::display_command_text, &edit_custom_git_actions, _1);
 #endif
 
+    ensure_dialog_on_same_screen(&edit_custom_git_actions, this);
     if (edit_custom_git_actions.exec() == QDialog::Accepted)
     {
         if (edit_custom_git_actions.isMergeToolsChanged())
@@ -2707,6 +2708,7 @@ void MainWindow::on_graphicsView_customContextMenuRequested(const QPoint &pos)
 void MainWindow::gitview_about()
 {
     AboutDlg dlg(this);
+    ensure_dialog_on_same_screen(&dlg);
     dlg.exec();
 }
 void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
@@ -2757,6 +2759,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         PaletteColorSelector dlg;
         if (!m_initializing_elements)
         {
+            ensure_dialog_on_same_screen(&dlg);
             if (dlg.exec() == QDialog::Accepted)
             {
                 QApplication::setPalette(dlg.get_palette());
@@ -2802,6 +2805,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
     {
         QMessageBox request(QMessageBox::Question, windowTitle(), tr("Restart Gitview"), QMessageBox::Yes);
         request.addButton(QMessageBox::No);
+        ensure_dialog_on_same_screen(&request);
         if (request.exec() == QMessageBox::Yes)
         {
             mRestartApp = true;
@@ -3495,7 +3499,7 @@ void MainWindow::on_treeFindText_customContextMenuRequested(const QPoint &pos)
 {
     QMenu menu(this);
     mActions.fillContextMenue(menu, Cmd::mContextMenuFindTextTree);
-    menu.exec(ui->treeFindText->mapToGlobal(pos) + menu_offset);
+    menu.exec(check_screen_position(pos, true, ui->treeFindText));
 }
 
 void MainWindow::on_ckTypeConverter_stateChanged(int active)
@@ -3620,7 +3624,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
             move_tab.addAction(action);
         }
     }
-    QAction* selected = menu->exec(event->globalPos());
+    QAction* selected = menu->exec(check_screen_position(event->globalPos()));
     int index = move_tab.actions().indexOf(selected);
     if (index != -1)
     {

@@ -136,7 +136,7 @@ void MainWindow::selectTextBrowserLanguage()
         }
 
         const QPoint point = text_browser->rect().topLeft();
-        auto* selection = menu.exec(text_browser->mapToGlobal(point) + menu_offset);
+        auto* selection = menu.exec(check_screen_position(point, true, text_browser));
 
         const int index = actionlist.indexOf(selection);
         if (index != -1)
@@ -301,12 +301,13 @@ bool MainWindow::btnCloseText_clicked(Editor editor)
         QString filepath = get_file_path(active_widget);
         if (shall_save(editor) && get_changed(active_widget) && filepath.length() > 0)
         {
-            QMessageBox fSaveRequest;
-            fSaveRequest.setText(tr("The document has been modified.\n\n%1").arg(filepath));
-            fSaveRequest.setInformativeText(tr("Do you want to save your changes?"));
-            fSaveRequest.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-            fSaveRequest.setDefaultButton(QMessageBox::Save);
-            switch (fSaveRequest.exec())
+            QMessageBox save_request;
+            save_request.setText(tr("The document has been modified.\n\n%1").arg(filepath));
+            save_request.setInformativeText(tr("Do you want to save your changes?"));
+            save_request.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+            save_request.setDefaultButton(QMessageBox::Save);
+            ensure_dialog_on_same_screen(&save_request, this);
+            switch (save_request.exec())
             {
             case QMessageBox::Save:
                 btnStoreText_clicked();
@@ -495,6 +496,7 @@ void MainWindow::invoke_highlighter_dialog()
 void MainWindow::invoke_output_parser_dialog()
 {
     OutputParser dlg(mMessagePatterns, mFilterPatterns);
+    ensure_dialog_on_same_screen(&dlg, this);
     dlg.exec();
 }
 

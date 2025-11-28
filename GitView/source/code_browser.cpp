@@ -198,7 +198,7 @@ void code_browser::contextMenuEvent(QContextMenuEvent *event)
         m_actions->fillContextMenue(*menu, git::Cmd::mContextMenuTextView);
         auto* action = m_actions->getAction(git::Cmd::CloneTextBrowser);
         if (action) action->setEnabled(!isReadOnly());
-        menu->exec(event->globalPos() + menu_offset);
+        menu->exec(check_screen_position(event->globalPos(), true));
         delete menu;
     }
     else

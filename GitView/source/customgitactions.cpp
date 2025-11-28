@@ -809,7 +809,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                     action->setChecked(checkable.value().toBool());
                     menu.addAction(action);
                 }
-                if (menu.exec(ui->tableViewVarious->mapToGlobal(ui->tableViewVarious->rect().center())))
+                if (menu.exec(check_screen_position(ui->tableViewVarious->rect().center(), false, ui->tableViewVarious)))
                 {
                     mIsMiscelaneousItemChanged =true;
                 }
@@ -1056,7 +1056,7 @@ void CustomGitActions::on_tableViewActions_customContextMenuRequested(const QPoi
 
     set_tooltip(menu.addAction(tr("Cancel")), tr("Don't change command"));
 
-    QAction* selected_item = menu.exec(mapToGlobal(pos) + menu_offset);
+    QAction* selected_item = menu.exec(check_screen_position(pos, true, this));
     if (selected_item)
     {
         bool modified = false;
@@ -1249,7 +1249,7 @@ void CustomGitActions::on_tableViewVarious_customContextMenuRequested(const QPoi
     menu.addSeparator();
     set_tooltip(menu.addAction(tr("Cancel")), tr("No Action"));
 
-    const QAction* selected_item = menu.exec(ui->tableViewVarious->mapToGlobal(pos) + menu_offset);
+    const QAction* selected_item = menu.exec(check_screen_position(pos, true, ui->tableViewVarious));
     if (selected_item == create_toolbar)
     {
         bool ok {false};

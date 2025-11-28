@@ -736,13 +736,13 @@ void MainWindow::on_treeSource_customContextMenuRequested(const QPoint &pos)
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuSourceTree);
         ui->treeSource->fillContextMenue(menu, mContextMenuSourceTreeItem);
-        menu.exec(ui->treeSource->mapToGlobal(pos) + menu_offset);
+        menu.exec(check_screen_position(pos, true, ui->treeSource));
     }
     else
     {
         QMenu menu(this);
         mActions.fillContextMenue(menu, Cmd::mContextMenuEmptySourceTree);
-        menu.exec(ui->treeSource->mapToGlobal(pos) + menu_offset);
+        menu.exec(check_screen_position(pos, true, ui->treeSource));
     }
 }
 
@@ -885,7 +885,7 @@ void  MainWindow::applyCommandToFileTree(const QString& aCommand)
 void  MainWindow::call_git_commit()
 {
     CommitMessage commit_message;
-
+    ensure_dialog_on_same_screen(&commit_message, this);
     if (commit_message.exec() == QDialog::Accepted)
     {
         btnCloseText_clicked(Editor::Viewer);
@@ -1585,6 +1585,7 @@ void MainWindow::showInformation()
         message_box.setInformativeText(information.str().c_str());
 
         Type::mShort = old;
+        ensure_dialog_on_same_screen(&message_box, this);
         message_box.exec();
     }
 }
