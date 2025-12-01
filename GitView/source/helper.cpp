@@ -745,41 +745,53 @@ bool LinkFilter::eventFilter(QObject *, QEvent *event)
 void ensure_dialog_on_same_screen(QWidget *widget, QWidget *reference)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    // 1️⃣ Get the screen from the reference widget
+    QString from;
     QScreen *screen = nullptr;
     if (!reference)
     {
+        reference = dynamic_cast<QWidget*>(widget->parent());
+        from = "parent";
+    }
+    if (!reference)
+    {
         screen = QGuiApplication::topLevelWindows().first()->screen();
+        from = "topLevelWindows first screen";
     }
     else if (reference->windowHandle())
     {
         screen = reference->windowHandle()->screen();
+        from = "reference windowHandle screen";
     }
 
-    // 2️⃣ Fallback: use the screen under the mouse
     if (!screen)
     {
         screen = QGuiApplication::screenAt(QCursor::pos());
+        from = "screenAt QCursor pos";
     }
 
-
-    // 3️⃣ If we still have no screen (unlikely), use primary
     if (!screen)
     {
         screen = QGuiApplication::primaryScreen();
+        from = "primaryScreen";
     }
-    if (screen && !screen->availableGeometry().contains(widget->rect().center()))
+    if (screen)
     {
-        auto dlg = reinterpret_cast<QDialog*>(widget);
-        if (dlg)
-        {
-            // 4️⃣ Ensure the dialog is a top‑level window
-            dlg->setWindowFlag(Qt::Window);           // make sure it has a native window
-            dlg->windowHandle()->setScreen(screen);   // Qt 6 API – forces screen
-        }
-        // 5️⃣ Center the dialog in that screen (optional)
         QRect geom = screen->availableGeometry(); // excludes taskbar, etc.
-        widget->move(geom.center() - widget->rect().center());
+        if (!geom.contains(widget->rect().center()))
+        {
+#if 0
+            auto dlg = reinterpret_cast<QDialog*>(widget);
+            if (dlg)
+            {
+                // 4️⃣ Ensure the dialog is a top‑level window
+                dlg->setWindowFlag(Qt::Window);           // make sure it has a native window
+                dlg->windowHandle()->setScreen(screen);   // Qt 6 API – forces screen
+            }
+#endif
+            QPoint move_pt = geom.center() - widget->rect().center();
+            TRACEX(Logger::debug, "move widget by (" << move_pt.x() << ", " << move_pt.y() << " from " << from);
+            widget->move(move_pt);
+        }
     }
 #else
     (void)(widget);
@@ -799,12 +811,31 @@ QPoint check_screen_position(QPoint pos, bool add_offset, QWidget* map_to_global
         pos += menu_offset;
     }
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    auto screen = QGuiApplication::screenAt(pos);
+    QString from;
+    QScreen *screen = nullptr;
+    if (!map_to_global)
+    {
+        screen = QGuiApplication::topLevelWindows().first()->screen();
+        from = "topLevelWindows first screen";
+    }
+    else if (map_to_global->windowHandle())
+    {
+        screen = map_to_global->windowHandle()->screen();
+        from = "map_to_global windowHandle screen";
+    }
+
+    if (!screen)
+    {
+        screen = QGuiApplication::screenAt(QCursor::pos());
+        from = "screenAt QCursor pos (" +  QString::number(QCursor::pos().x()) + ", " + QString::number(QCursor::pos().y()) + ")";
+    }
+
     if (screen)
     {
         if (!screen->availableGeometry().contains(pos))
         {
             pos = screen->availableGeometry().center();
+            TRACEX(Logger::debug, "corrected position to (" << pos.x() << ", " << pos.y() << " from " << from);
         }
     }
 #endif

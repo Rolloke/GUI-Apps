@@ -607,7 +607,8 @@ void QSourceTreeWidget::restoreExpandedState(const QStringList& list, QTreeWidge
     setUpdatesEnabled(false);
     if (item)
     {
-        /// TODO: implement restore from name list
+        /// NOTE: unused now because persistentIndexList works fine
+        /// implement restore from name list
     }
     else
     {

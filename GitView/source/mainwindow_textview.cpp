@@ -490,7 +490,7 @@ void MainWindow::show_web_view(bool show)
 
 void MainWindow::invoke_highlighter_dialog()
 {
-    Highlighter::Language::invokeHighlighterDlg();
+    Highlighter::Language::invokeHighlighterDlg(this);
 }
 
 void MainWindow::invoke_output_parser_dialog()

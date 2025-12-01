@@ -393,10 +393,10 @@ TextCharFormatMap  Highlighter::Language::getHighlightFormats()
     return list;
 }
 
-void Highlighter::Language::invokeHighlighterDlg()
+void Highlighter::Language::invokeHighlighterDlg(QWidget*parent)
 {
     HighlighterDialog dlg(nullptr, getHighlightFormats());
-    ensure_dialog_on_same_screen(&dlg);
+    ensure_dialog_on_same_screen(&dlg, parent);
     if (dlg.exec() == QDialog::Accepted)
     {
         const auto list = dlg.getTextFormatMap();

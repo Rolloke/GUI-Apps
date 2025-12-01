@@ -1334,6 +1334,9 @@ Git or command results are always displayed in main editor.
       </item>
       <item>
        <widget class="QPushButton" name="btnFindAll">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="toolTip">
          <string>Search all occurrences of expression in all files of selected folder or in selected file</string>
         </property>

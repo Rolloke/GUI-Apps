@@ -2256,7 +2256,6 @@ void MainWindow::initContextMenuActions()
 
     contextmenu_text_view.push_back(Cmd::SubFind);
     create_auto_cmd(ui->btnFindAll, mActions.check_location("edit-find.png"), &new_id);
-    /// TODO: disable find all, if ui->edtFindText ist empty
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
@@ -2708,7 +2707,7 @@ void MainWindow::on_graphicsView_customContextMenuRequested(const QPoint &pos)
 void MainWindow::gitview_about()
 {
     AboutDlg dlg(this);
-    ensure_dialog_on_same_screen(&dlg);
+    ensure_dialog_on_same_screen(&dlg, this);
     dlg.exec();
 }
 void MainWindow::on_comboToolBarStyle_currentIndexChanged(int index)
@@ -2759,7 +2758,7 @@ void MainWindow::on_comboUserStyle_currentIndexChanged(int index)
         PaletteColorSelector dlg;
         if (!m_initializing_elements)
         {
-            ensure_dialog_on_same_screen(&dlg);
+            ensure_dialog_on_same_screen(&dlg, this);
             if (dlg.exec() == QDialog::Accepted)
             {
                 QApplication::setPalette(dlg.get_palette());
@@ -2894,7 +2893,7 @@ void MainWindow::comboFindBoxIndexChanged(int index)
 
     set_widget_and_action_enabled(ui->btnFindNext,     flags & Next     ? true : false);
     set_widget_and_action_enabled(ui->btnFindPrevious, flags & Previous ? true : false);
-    set_widget_and_action_enabled(ui->btnFindAll,      flags & All      ? true : false);
+    set_widget_and_action_enabled(ui->btnFindAll,      flags & All      ? (ui->edtFindText->text().size() > 0) : false);
     set_widget_and_action_enabled(ui->btnFindReplace,  flags & Replace  ? true : false);
 }
 
@@ -3028,6 +3027,11 @@ void MainWindow::on_btnFindAll_clicked()
             action->trigger();
         }
     }
+}
+
+void MainWindow::on_edtFindText_textChanged(const QString &arg)
+{
+    ui->btnFindAll->setEnabled(arg.size() > 0);
 }
 
 void MainWindow::on_btnFindReplace_clicked()

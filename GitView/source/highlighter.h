@@ -106,7 +106,7 @@ public:
         static QString to_string(const QTextCharFormat&);
         static void convert(QTextCharFormat&, const QString&);
         static TextCharFormatMap getHighlightFormats();
-        static void invokeHighlighterDlg();
+        static void invokeHighlighterDlg(QWidget *parent);
         QString get_pattern(const QTextCharFormat& format) const;
         const QRegularExpression &get_regex(const QTextCharFormat& format) const;
         const QRegularExpression &get_regex(const keys key) const;

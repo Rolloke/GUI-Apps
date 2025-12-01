@@ -100,8 +100,6 @@ Cmd::Cmd()
                           Separator, BranchList, WhatsThisHelp, CustomGitActionSettings});
     mToolbarNames.push_back(QObject::tr("Toolbar Git Commands"));
     mToolbarNames.push_back(QObject::tr("Toolbar Control Commands"));
-
-    /// TODO: Reload all als Funktion implementieren
 }
 
 

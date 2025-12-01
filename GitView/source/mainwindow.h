@@ -365,10 +365,12 @@ private Q_SLOTS:
     void check_reload(code_browser*, bool dont_ask_for_loading = false);
     void set_show_line_numbers(bool);
     void on_ckAppendToBatch_clicked(bool checked);
+    void on_edtFindText_textChanged(const QString &arg1);
     void on_btnFindAll_clicked();
     void on_btnFindReplace_clicked();
     void move_active_window_to(FirstTab::e tab, QDockWidget *dock);
     void open_external_link(const QString& link);
+
 
 
 public Q_SLOTS:
