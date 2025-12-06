@@ -602,11 +602,33 @@ void MainWindow::open_file(const QString& file_path, std::optional<int> line_num
                 text_browser->set_do_preview(false);
                 if (codec_selected)
                 {
-                    text_browser->setText(QString::fromLocal8Bit(file.readAll()));
+                    if (file_extension.contains("md", Qt::CaseInsensitive))
+                    {
+                        text_browser->setMarkdown(QString::fromLocal8Bit(file.readAll()));
+                    }
+                    else if (file_extension.contains("htm", Qt::CaseInsensitive))
+                    {
+                        text_browser->setHtml(QString::fromLocal8Bit(file.readAll()));
+                    }
+                    else
+                    {
+                        text_browser->setText(QString::fromLocal8Bit(file.readAll()));
+                    }
                 }
                 else
                 {
-                    text_browser->setText(file.readAll());
+                    if (file_extension.contains("md", Qt::CaseInsensitive))
+                    {
+                        text_browser->setMarkdown(file.readAll());
+                    }
+                    else if (file_extension.contains("htm", Qt::CaseInsensitive))
+                    {
+                        text_browser->setHtml(file.readAll());
+                    }
+                    else
+                    {
+                        text_browser->setText(file.readAll());
+                    }
                 }
             }
             else
