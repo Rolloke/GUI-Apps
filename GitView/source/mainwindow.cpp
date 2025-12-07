@@ -28,6 +28,7 @@
 #include <QFileDialog>
 #include <QSplitter>
 #include <QActionGroup>
+#include <QSystemTrayIcon>
 
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && CORE5COMPAT == 0
@@ -129,7 +130,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
     ui->setupUi(this);
     createDockWindows();
 
-    setWindowIcon(QIcon(":/resource/logo@2x.png"));
+    auto icon = QIcon(":/resource/logo@2x.png");
+    setWindowIcon(icon);
+    mSystemTrayMessage = new QSystemTrayIcon(icon, this);
 
 #ifdef USE_BOOST
     mWorker.setWorkerFunction(boost::bind(&MainWindow::handleWorker, this, _1));
@@ -407,6 +410,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         {
             PaletteColorSelector::set_dark_palette_colors(fDarkPaletteColors);
         }
+        LOAD_PTR(fSettings, mSystemTrayMessage, setVisible, isVisible, toBool);
 
         setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(ui->comboToolBarStyle->currentIndex()));
         comboAppStyleTextChanged(ui->comboAppStyle->currentText());
@@ -655,6 +659,8 @@ void MainWindow::store_settings()
         STORE_STR(fSettings, fDarkPaletteColors);
         auto fTextTabStopCharacters = ui->textBrowser->getTabstopCharacters();
         STORE_STR(fSettings, fTextTabStopCharacters);
+        STORE_PTR(fSettings, mSystemTrayMessage, isVisible);
+
     }
     fSettings.endGroup();
 
@@ -1165,6 +1171,7 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString warn_open_file_fize                            = tr("Warn size for open file (bytes)");
     static const QString repository_tree_date                           = tr("Repository View Date");
     static const QString repository_tree_size                           = tr("Repository View Size");
+    static const QString system_tray_messages                           = tr("Show Messages in Systemtray");
     static const QString log_severity                                   = tr("Logging Severity");
     static const QString branch_has_siblings_not_adjoins                = tr("Icon: HasSiblingsNotAdjoins");
     static const QString branch_has_siblings_adjoins                    = tr("Icon: HasSiblingsAdjoins");
@@ -1202,6 +1209,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
         mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
         mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
+        mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
 
 #ifdef __linux__
         QMap<QString,QVariant> themes_map;
@@ -1242,6 +1250,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
         ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::DateTime, !mMiscelaneousItems[repository_tree_date].toBool());
         ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::Size,     !mMiscelaneousItems[repository_tree_size].toBool());
+        mSystemTrayMessage->setVisible(mMiscelaneousItems[system_tray_messages].toBool());
 #ifdef __linux__
         QMap<QString,QVariant> themes_map = mMiscelaneousItems[linux_theme].toMap();
         for (auto theme = themes_map.begin(); theme != themes_map.end(); ++theme)
@@ -1614,6 +1623,12 @@ void MainWindow::handleMessage(QVariant aData)
     if (aData.isValid())
     {
         auto data_map = aData.toMap();
+        QString message = tr("command: %1").arg(data_map[Worker::command].toString());
+        if (data_map.contains(Worker::repository))
+        {
+            message += tr("\nRepository: %1").arg(data_map[Worker::repository].toString());
+        }
+        mSystemTrayMessage->showMessage(tr("Backgound command finished"), message, QSystemTrayIcon::Information, 5000);
         switch(static_cast<Work>(data_map[Worker::work].toInt()))
         {
         case Work::DetermineGitMergeTools:

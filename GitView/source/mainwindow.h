@@ -34,6 +34,7 @@ class QLabel;
 class code_browser;
 class QSettings;
 class ParseMessagePattern;
+class QSystemTrayIcon;
 
 #ifdef WEB_ENGINE
 class QWebEngineView;
@@ -452,6 +453,7 @@ private:
     QList<QPair<QRegExp, QString>> mFilterPatterns;
 #endif
     QMap<int, QVariantList> mTimerTask;
+    QSystemTrayIcon*    mSystemTrayMessage {nullptr};
 
     static constexpr char new_textbrowser[]    = "new_textbrowser";
     static constexpr char textbrowser[]        = "textbrowser";
