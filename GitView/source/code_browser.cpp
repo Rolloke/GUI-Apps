@@ -220,7 +220,8 @@ void code_browser::focusInEvent(QFocusEvent *fie)
     }
     QWidget* focused =  focusWidget();
     QDockWidget * dock_widget = dynamic_cast<QDockWidget*>(parent());
-    if (dock_widget && dock_widget != focused && this != focused)
+    // if (dock_widget) TRACEX(Logger::info, "focusInEvent("<< dock_widget->objectName() << ":" << dock_widget->windowTitle() << ")");
+    if (dock_widget && (dock_widget != focused || this != focused))
     {
         Q_EMIT send_focused(dock_widget);
     }
