@@ -1085,7 +1085,6 @@ void MainWindow::clone_code_browser()
         /// o   Scrollen synchronisierbar
         /// o   auch mit verschiedenen Dateien zum vergleichen
         ///     §  (drag and drop)?
-        ///     §  Focusbasiert durch doppelclick
         ///     §  Diff anzeige
         code_browser* cloned_browser = active_browser->clone();
         QDockWidget*dock = create_dock_widget(cloned_browser, file_name, cloned_textbrowser, true);
@@ -3616,12 +3615,11 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
 #if 1
     QDockWidget* dock = nullptr;
-    auto focus = focusWidget();
     QList<QDockWidget *> dock_widgets = findChildren<QDockWidget *>();
     for (auto dock_widget = dock_widgets.begin(); dock_widget != dock_widgets.end(); ++dock_widget)
     {
         auto* widget = get_widget(*dock_widget);
-        if (focus == widget || focus == *dock_widget)
+        if (get_active(widget))
         {
             dock = *dock_widget;
             break;

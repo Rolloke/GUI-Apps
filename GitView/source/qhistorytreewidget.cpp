@@ -373,7 +373,7 @@ void QHistoryTreeWidget::insertFileNames()
     }
 }
 
-/// TODO: diff of single file does not work correct in every case
+/// NOTE: diff of single file does not work correct in every case
 ///       it sometimes shows only the file diff to nothing and not diff to previous version
 ///       this might be caused by the history extracted from the origin repostiory
 /// TODO: test merge branch to current branch
@@ -388,6 +388,7 @@ void QHistoryTreeWidget::insertFileNames()
 /// --no-verify
 /// merge.guitool -g --gui
 /// git mergetool -F <file> <commit>
+/// git merge abort
 
 void QHistoryTreeWidget::insertFileNames(QTreeWidgetItem* parent_item, int child, int second_child)
 {
