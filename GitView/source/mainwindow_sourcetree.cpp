@@ -309,7 +309,7 @@ void MainWindow::removeGitSourceFolder()
     auto close_all_subfiles = [&](auto item)
     {
         QString repo_path = item->text(QSourceTreeWidget::Column::FileName);
-        if (ui->ckCloseAllFilesOfRepository->isChecked())
+        if (mCloseAllFilesOfRepository)
         {
             mCloseFileFilter = repo_path;
             btnCloseText_clicked(Editor::All);

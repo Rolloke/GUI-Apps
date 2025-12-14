@@ -61,6 +61,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btnAddCommand">
+         <property name="toolTip">
+          <string>Add command to command table</string>
+         </property>
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btnFind">
          <property name="toolTip">
           <string>Find in command table</string>
@@ -71,12 +81,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnAddCommand">
-         <property name="toolTip">
-          <string>Add command to command table</string>
+        <widget class="QLabel" name="labelFindColumn">
+         <property name="statusTip">
+          <string>Shows search column</string>
          </property>
          <property name="text">
-          <string>Add</string>
+          <string/>
          </property>
         </widget>
        </item>

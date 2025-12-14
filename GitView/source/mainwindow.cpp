@@ -391,8 +391,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         set_show_line_numbers(ui->ckShowLineNumbers->isChecked());
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         update_widget_states(ui->ckRenderGraphicFile);
-        LOAD_PTR(fSettings, ui->ckCloseAllFilesOfRepository, setChecked, isChecked, toBool);
-        update_widget_states(ui->ckCloseAllFilesOfRepository);
+        LOAD_STR(fSettings, mCloseAllFilesOfRepository, toBool);
         LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckAppendToBatch, setChecked, isChecked, toBool);
         on_ckAppendToBatch_clicked(ui->ckAppendToBatch->isChecked());
@@ -647,7 +646,7 @@ void MainWindow::store_settings()
         STORE_PTR(fSettings, ui->comboTabPosition, currentIndex);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
-        STORE_PTR(fSettings, ui->ckCloseAllFilesOfRepository, isChecked);
+        STORE_STR(fSettings, mCloseAllFilesOfRepository);
         STORE_PTR(fSettings, ui->ckOutput2secondTextView, isChecked);
         STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
@@ -1171,6 +1170,7 @@ void MainWindow::init_miscelaneous_items(bool load)
     static const QString repository_tree_date                           = tr("Repository View Date");
     static const QString repository_tree_size                           = tr("Repository View Size");
     static const QString system_tray_messages                           = tr("Show Messages in Systemtray");
+    static const QString close_all_files_of_repository                  = tr("Close all Files of Repository");
     static const QString log_severity                                   = tr("Logging Severity");
     static const QString branch_has_siblings_not_adjoins                = tr("Icon: HasSiblingsNotAdjoins");
     static const QString branch_has_siblings_adjoins                    = tr("Icon: HasSiblingsAdjoins");
@@ -1209,6 +1209,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
         mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
         mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
+        mMiscelaneousItems[close_all_files_of_repository]                = QVariant(mCloseAllFilesOfRepository);
 
 #ifdef __linux__
         QMap<QString,QVariant> themes_map;
@@ -1250,6 +1251,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::DateTime, !mMiscelaneousItems[repository_tree_date].toBool());
         ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::Size,     !mMiscelaneousItems[repository_tree_size].toBool());
         mSystemTrayMessage->setVisible(mMiscelaneousItems[system_tray_messages].toBool());
+        mCloseAllFilesOfRepository              =  mMiscelaneousItems[close_all_files_of_repository].toBool();
 #ifdef __linux__
         QMap<QString,QVariant> themes_map = mMiscelaneousItems[linux_theme].toMap();
         for (auto theme = themes_map.begin(); theme != themes_map.end(); ++theme)
@@ -2295,7 +2297,7 @@ void MainWindow::initContextMenuActions()
     create_auto_cmd(ui->btnFindReplace, mActions.check_location("edit-find-replace.png"), &new_id);
     contextmenu_text_view.push_back(new_id);
     create_auto_cmd(ui->comboWordWrap);
-    create_auto_cmd(ui->ckCloseAllFilesOfRepository);
+    create_auto_cmd(ui->ckSearchResultsAsSearchTree);
     create_auto_cmd(ui->spinFontSize);
 
     create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));

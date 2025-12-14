@@ -91,6 +91,7 @@ CustomGitActions::CustomGitActions(ActionList& aList, string2bool_map&aMergeTool
     {
         mListModelActions->setHeaderData(fColumn, Qt::Horizontal, fColumnName[fColumn], Qt::DisplayRole);
     }
+    tableViewActions_header_clicked(mSearchColumn);
 
     mInitialize = true;
     int fRow = 0;
@@ -303,6 +304,11 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     static Cmd::tVector fDummy;
     switch (aIndex)
     {
+    case VariousListIndex::Icons:
+    case VariousListIndex::ExternalIcons:
+    case VariousListIndex::MergeTool:
+    case VariousListIndex::Miscelaneous:
+        break;
     case VariousListIndex::MenuSrcTree:         return Cmd::mContextMenuSourceTree;
     case VariousListIndex::MenuEmptySrcTree:    return Cmd::mContextMenuEmptySourceTree;
     case VariousListIndex::MenuGraphicView:     return Cmd::mContextMenuGraphicsView;
@@ -311,11 +317,7 @@ Cmd::tVector& CustomGitActions::getCmdVector(VariousListIndex::e aIndex)
     case VariousListIndex::MenuBranchTree:      return Cmd::mContextMenuBranchTree;
     case VariousListIndex::MenuStashTree:       return Cmd::mContextMenuStashTree;
     case VariousListIndex::MenuFindTextTree:    return Cmd::mContextMenuFindTextTree;
-    case VariousListIndex::MergeTool:
-    case VariousListIndex::Miscelaneous:
-    case VariousListIndex::Icons:
-    case VariousListIndex::ExternalIcons:
-        break;
+    case VariousListIndex::Toolbar1:
     default:
         return Cmd::mToolbars[get_toolbar_index(aIndex)];
     }
@@ -339,6 +341,8 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     {
     case VariousListIndex::Icons:               return tr("Icons");
     case VariousListIndex::ExternalIcons:       return tr("External Icons");
+    case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
+    case VariousListIndex::Miscelaneous:        return tr("Miscelaneous settings");
     case VariousListIndex::MenuSrcTree:         return tr("Context Menu Source");
     case VariousListIndex::MenuEmptySrcTree:    return tr("Context Menu Empty Source");
     case VariousListIndex::MenuGraphicView:     return tr("Context Menu Graphics View");
@@ -347,8 +351,6 @@ QString CustomGitActions::getVariousListHeader(VariousListIndex::e aIndex)
     case VariousListIndex::MenuBranchTree:      return tr("Context Menu Branch");
     case VariousListIndex::MenuStashTree:       return tr("Context Menu Stash");
     case VariousListIndex::MenuFindTextTree:    return tr("Context Menu Find Text");
-    case VariousListIndex::MergeTool:           return tr("Merge or Diff Tool");
-    case VariousListIndex::Miscelaneous:        return tr("Miscelaneous settings");
     default: return Cmd::mToolbarNames[get_toolbar_index(aIndex)];
     }
     return "";
@@ -716,14 +718,15 @@ void CustomGitActions::tableViewActions_header_clicked(int index )
     mSearchColumn = index;
     switch (mSearchColumn)
     {
-    case ActionsTable::Name: case ActionsTable::Command: case ActionsTable::MsgBoxText: case ActionsTable::Shortcut:
+    case ActionsTable::Name: case ActionsTable::Command: case ActionsTable::MsgBoxText: case ActionsTable::Shortcut: case ActionsTable::ID:
         break;
     default:
     {
         mSearchColumn = ActionsTable::Name;
-        //ui->tableViewActions->horizontalHeader()->seindex.siblingAtColumn(mSearchColumn));
     }   break;
     }
+    ui->labelFindColumn->setText(tr("in ") + mListModelActions->headerData(mSearchColumn, Qt::Horizontal, Qt::DisplayRole).toString());
+    mSearchRowStart = -1;
 }
 
 void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
