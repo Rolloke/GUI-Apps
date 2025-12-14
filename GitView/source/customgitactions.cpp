@@ -523,8 +523,8 @@ void CustomGitActions::initListMiscelaneous()
     {
         mListModelVarious->insertRows(fRow, 1, QModelIndex());
 
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(iconValueType(item.value(), item.key().indexOf("Icon:") != -1)), Qt::DecorationRole);
-        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), item.key(), Qt::EditRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Icon, QModelIndex()), QIcon(iconValueType(item->second, item->first.indexOf("Icon:") != -1)), Qt::DecorationRole);
+        mListModelVarious->setData(mListModelVarious->index(fRow, VariousHeader::Name, QModelIndex()), item->first, Qt::EditRole);
         ++fRow;
     }
     mInitialize = false;
@@ -753,9 +753,9 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
         {
             auto currentItem = std::next(mMiscelaneousItems.begin(), index.row());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            switch(currentItem.value().typeId())
+            switch(currentItem->second.typeId())
 #else
-            switch(currentItem.value().type())
+            switch(currentItem->second.type())
 #endif
             {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -765,10 +765,10 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 #endif
             {
                 bool ok;
-                QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
+                QString text = QInputDialog::getText(0, tr("Edit"), currentItem->first, QLineEdit::Normal, currentItem->second.toString(), &ok);
                 if (ok)
                 {
-                    currentItem.value() = QVariant(text);
+                    currentItem->second = QVariant(text);
                     mIsMiscelaneousItemChanged =true;
                 }
             } break;
@@ -779,13 +779,13 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 #endif
             {
                 bool ok = false;
-                QString text = QInputDialog::getText(0, tr("Edit"), currentItem.key(), QLineEdit::Normal, currentItem.value().toString(), &ok);
+                QString text = QInputDialog::getText(0, tr("Edit"), currentItem->first, QLineEdit::Normal, currentItem->second.toString(), &ok);
                 if (ok)
                 {
                     auto value = QVariant(text.toLongLong(&ok));
                     if (ok)
                     {
-                        currentItem.value() = value;
+                        currentItem->second = value;
                         mIsMiscelaneousItemChanged =true;
                     }
                 }
@@ -797,7 +797,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 #endif
             {
                 QMenu menu(this);
-                QMap<QString,QVariant> checkable_items_map = currentItem.value().toMap();
+                QMap<QString,QVariant> checkable_items_map = currentItem->second.toMap();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 bool is_bool = checkable_items_map.begin().value().typeId() == QMetaType::Type::Bool;
 #else
@@ -827,7 +827,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
                         checkable_items_map[action->text()] = QVariant(static_cast<int>(action->isChecked()));
                     }
                 }
-                currentItem.value() = checkable_items_map;
+                currentItem->second = checkable_items_map;
             } break;
             default:break;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -836,8 +836,8 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
             case QVariant::Bool:
 #endif
             {
-                currentItem.value() = QVariant(!currentItem.value().toBool());
-                mListModelVarious->setData(index, QIcon(iconCheck(currentItem.value().toBool())), Qt::DecorationRole);
+                currentItem->second = QVariant(!currentItem->second.toBool());
+                mListModelVarious->setData(index, QIcon(iconCheck(currentItem->second.toBool())), Qt::DecorationRole);
                 mIsMiscelaneousItemChanged =true;
             } break;
             }

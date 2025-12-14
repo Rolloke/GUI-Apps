@@ -828,7 +828,7 @@ Shows binary file content opened with double click
          <widget class="QCheckBox" name="ckHiddenFiles">
           <property name="minimumSize">
            <size>
-            <width>160</width>
+            <width>0</width>
             <height>0</height>
            </size>
           </property>
@@ -1192,65 +1192,6 @@ Git or command results are always displayed in main editor.
           </property>
           <property name="text">
            <string>Type Converter</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckFastFileSearch">
-          <property name="toolTip">
-           <string>Use fast file search function (fsrc)</string>
-          </property>
-          <property name="text">
-           <string>Fast File Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckSearchResultsAsSearchTree">
-          <property name="toolTip">
-           <string>Store search results as a tree, not as single items</string>
-          </property>
-          <property name="text">
-           <string>Search Result as Tree</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckExperimental">
-          <property name="toolTip">
-           <string>Experimental functions</string>
-          </property>
-          <property name="text">
-           <string>Experimental</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckAppendToBatch">
-          <property name="statusTip">
-           <string>Append background command to batch list, if busy</string>
-          </property>
-          <property name="text">
-           <string>Append to Batch</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ckOutput2secondTextView">
-          <property name="statusTip">
-           <string>Show background command output in additional text view</string>
-          </property>
-          <property name="text">
-           <string>Additional Batch View</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
           </property>
          </widget>
         </item>

@@ -247,8 +247,8 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
 
     fSettings.beginGroup(config::sGroupFind);
     {
-        LOAD_PTR(fSettings, ui->ckSearchResultsAsSearchTree, setChecked, isChecked, toBool);
-        LOAD_PTR(fSettings, ui->ckFastFileSearch, setChecked, isChecked, toBool);
+        LOAD_STR(fSettings, mSearchResultsAsSearchTree, toBool);
+        LOAD_STR(fSettings, mFastFileSearch, toBool);
         LOAD_PTR(fSettings, ui->ckFindCaseSensitive, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindRegEx, setChecked, isChecked, toBool);
         LOAD_PTR(fSettings, ui->ckFindWholeWord, setChecked, isChecked, toBool);
@@ -383,8 +383,7 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
         LOAD_STR(fSettings, fUseSourceTreeCheckboxes, toBool);
         ui->treeSource->mUseSourceTreeCheckboxes = fUseSourceTreeCheckboxes;
-        LOAD_PTR(fSettings, ui->ckExperimental, setChecked, isChecked, toBool);
-        update_widget_states(ui->ckExperimental);
+        LOAD_STR(fSettings, mExperimental, toBool);
         LOAD_PTR(fSettings, ui->comboTabPosition, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->ckShowLineNumbers, setChecked, isChecked, toBool);
         update_widget_states(ui->ckShowLineNumbers);
@@ -392,9 +391,9 @@ MainWindow::MainWindow(const QString& aConfigName, QWidget *parent)
         LOAD_PTR(fSettings, ui->ckRenderGraphicFile, setChecked, isChecked, toBool);
         update_widget_states(ui->ckRenderGraphicFile);
         LOAD_STR(fSettings, mCloseAllFilesOfRepository, toBool);
-        LOAD_PTR(fSettings, ui->ckOutput2secondTextView, setChecked, isChecked, toBool);
-        LOAD_PTR(fSettings, ui->ckAppendToBatch, setChecked, isChecked, toBool);
-        on_ckAppendToBatch_clicked(ui->ckAppendToBatch->isChecked());
+        LOAD_STR(fSettings, mOutput2secondTextView, toBool);
+        LOAD_STR(fSettings, mAppendToBatch, toBool);
+        mWorker.setAppendToBatch(mAppendToBatch);
         LOAD_PTR(fSettings, ui->comboToolBarStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboAppStyle, setCurrentIndex, currentIndex, toInt);
         LOAD_PTR(fSettings, ui->comboUserStyle, setCurrentIndex, currentIndex, toInt);
@@ -574,8 +573,8 @@ void MainWindow::store_settings()
 
     fSettings.beginGroup(config::sGroupFind);
     {
-        STORE_PTR(fSettings, ui->ckSearchResultsAsSearchTree, isChecked);
-        STORE_PTR(fSettings, ui->ckFastFileSearch, isChecked);
+        STORE_STR(fSettings, mSearchResultsAsSearchTree);
+        STORE_STR(fSettings, mFastFileSearch);
         STORE_PTR(fSettings, ui->ckFindCaseSensitive, isChecked);
         STORE_PTR(fSettings, ui->ckFindRegEx, isChecked);
         STORE_PTR(fSettings, ui->ckFindWholeWord, isChecked);
@@ -642,13 +641,13 @@ void MainWindow::store_settings()
         STORE_STR_IF(fSettings, mStylePath);
         bool fUseSourceTreeCheckboxes = ui->treeSource->mUseSourceTreeCheckboxes;
         STORE_STR(fSettings, fUseSourceTreeCheckboxes);
-        STORE_PTR(fSettings, ui->ckExperimental, isChecked);
+        STORE_STR(fSettings, mExperimental);
         STORE_PTR(fSettings, ui->comboTabPosition, currentIndex);
         STORE_PTR(fSettings, ui->ckShowLineNumbers, isChecked);
         STORE_PTR(fSettings, ui->ckRenderGraphicFile, isChecked);
         STORE_STR(fSettings, mCloseAllFilesOfRepository);
-        STORE_PTR(fSettings, ui->ckOutput2secondTextView, isChecked);
-        STORE_PTR(fSettings, ui->ckAppendToBatch, isChecked);
+        STORE_STR(fSettings, mOutput2secondTextView);
+        STORE_STR(fSettings, mAppendToBatch);
         STORE_PTR(fSettings, ui->comboToolBarStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboAppStyle, currentIndex);
         STORE_PTR(fSettings, ui->comboUserStyle, currentIndex);
@@ -1160,26 +1159,31 @@ QWidget* MainWindow::get_widget(QDockWidget*dock)
 
 void MainWindow::init_miscelaneous_items(bool load)
 {
-    static const QString compare_2_items                                = tr("Compare two Items");
+    static const QString compare_2_items                                = tr("Compare tool command");
     static const QString find_grep                                      = tr("Path of tool: grep");
     static const QString find_fsrc                                      = tr("Path of tool: fsrc");
+    static const QString fast_file_search                               = tr("Enable tool fsrc for fast file search");
+    static const QString search_results_as_tree                         = tr("Show search results as tree");
+    static const QString append_to_batch                                = tr("Append background command to batch");
+    static const QString output_2_second_view                           = tr("Send command output to second view");
     static const QString external_file_open_cmd                         = tr("System command open files");
-    static const QString file_copy_mime_type                            = tr("Mime type for file copy");
-    static const QString style_path                                     = tr("Path to style qss file");
+    static const QString file_copy_mime_type                            = tr("Edit mime type for file copy");
+    static const QString style_path                                     = tr("Edit path to style qss file");
     static const QString warn_open_file_fize                            = tr("Warn size for open file (bytes)");
-    static const QString repository_tree_date                           = tr("Repository View Date");
-    static const QString repository_tree_size                           = tr("Repository View Size");
-    static const QString system_tray_messages                           = tr("Show Messages in Systemtray");
-    static const QString close_all_files_of_repository                  = tr("Close all Files of Repository");
-    static const QString log_severity                                   = tr("Logging Severity");
+    static const QString repository_tree_date                           = tr("Show repository view date");
+    static const QString repository_tree_size                           = tr("Show repository view size");
+    static const QString system_tray_messages                           = tr("Show messages in Systemtray");
+    static const QString close_all_files_of_repository                  = tr("Close all files of repository");
+    static const QString experimental                                   = tr("Use experimental functions");
+    static const QString log_severity                                   = tr("Select logging severity");
     static const QString branch_has_siblings_not_adjoins                = tr("Icon: HasSiblingsNotAdjoins");
     static const QString branch_has_siblings_adjoins                    = tr("Icon: HasSiblingsAdjoins");
     static const QString branch_has_children_not_has_siblings_adjoins   = tr("Icon: HasChildrenNotHasSiblingsAdjoins");
     static const QString branch_closed_has_children_has_sibling         = tr("Icon: ClosedHasChildrenHasSibling");
     static const QString branch_open_has_children_has_sibling           = tr("Icon: OpenHasChildrenHasSibling");
 #ifdef __linux__
-    static const QString linux_theme                                    = tr("Linux theme name");
-//    static const QString linux_icon_path                              = tr("Linux icon path");
+    static const QString linux_theme                                    = tr("Edit linux theme name");
+//    static const QString linux_icon_path                              = tr("Edit linux icon path");
 #endif
 
     static const QString invalid_severity                               = Logger::getName(Logger::invalid);
@@ -1193,23 +1197,31 @@ void MainWindow::init_miscelaneous_items(bool load)
             severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))] = QVariant((severity & bit) != 0 ? true : false);
         }
         severity_map.remove(invalid_severity);
-        mMiscelaneousItems[log_severity]                                 = QVariant(severity_map);
-        mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
+
         mMiscelaneousItems[find_grep]                                    = QVariant(mFindGrep);
         mMiscelaneousItems[find_fsrc]                                    = QVariant(mFindFsrc);
-        mMiscelaneousItems[external_file_open_cmd]                       = QVariant(mExternalFileOpenCmd);
-        mMiscelaneousItems[file_copy_mime_type]                          = QVariant(mFileCopyMimeType);
-        mMiscelaneousItems[style_path]                                   = QVariant(mStylePath);
+        mMiscelaneousItems[fast_file_search]                             = QVariant(mFastFileSearch);
+        mMiscelaneousItems[search_results_as_tree]                       = QVariant(mSearchResultsAsSearchTree);
+        mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
+        mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
+        mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
+        mMiscelaneousItems[close_all_files_of_repository]                = QVariant(mCloseAllFilesOfRepository);
+        mMiscelaneousItems[append_to_batch]                              = QVariant(mAppendToBatch);
+        mMiscelaneousItems[output_2_second_view]                         = QVariant(mOutput2secondTextView);
+        mMiscelaneousItems[experimental]                                 = QVariant(mExperimental);
+
+        mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
         mMiscelaneousItems[warn_open_file_fize]                          = QVariant(mWarnOpenFileSize);
+
         mMiscelaneousItems[branch_has_siblings_not_adjoins]              = QVariant(mBranchHasSiblingsNotAdjoins);
         mMiscelaneousItems[branch_has_siblings_adjoins]                  = QVariant(mBranchHasSiblingsAdjoins);
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
-        mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
-        mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
-        mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
-        mMiscelaneousItems[close_all_files_of_repository]                = QVariant(mCloseAllFilesOfRepository);
+
+        mMiscelaneousItems[style_path]                                   = QVariant(mStylePath);
+        mMiscelaneousItems[external_file_open_cmd]                       = QVariant(mExternalFileOpenCmd);
+        mMiscelaneousItems[file_copy_mime_type]                          = QVariant(mFileCopyMimeType);
 
 #ifdef __linux__
         QMap<QString,QVariant> themes_map;
@@ -1226,6 +1238,7 @@ void MainWindow::init_miscelaneous_items(bool load)
         mMiscelaneousItems[linux_theme] = themes_map;
 //        mMiscelaneousItems[linux_icon_path]                              = QVariant(mActions.getIconLocation());
 #endif
+        mMiscelaneousItems[log_severity]                                 = QVariant(severity_map);
     }
     else
     {
@@ -1248,12 +1261,19 @@ void MainWindow::init_miscelaneous_items(bool load)
         mBranchHasChildrenNotHasSiblingsAdjoins = mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins].toString();
         mBranchClosedHasChildrenHasSibling      = mMiscelaneousItems[branch_closed_has_children_has_sibling].toString();
         mBranchOpenHasChildrenHasSibling        = mMiscelaneousItems[branch_open_has_children_has_sibling].toString();
-        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::DateTime, !mMiscelaneousItems[repository_tree_date].toBool());
-        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::Size,     !mMiscelaneousItems[repository_tree_size].toBool());
+        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::DateTime,
+                                                 !mMiscelaneousItems[repository_tree_date].toBool());
+        ui->treeSource->setColumnHidden(QSourceTreeWidget::Column::Size,
+                                                 !mMiscelaneousItems[repository_tree_size].toBool());
         mSystemTrayMessage->setVisible(mMiscelaneousItems[system_tray_messages].toBool());
-        mCloseAllFilesOfRepository              =  mMiscelaneousItems[close_all_files_of_repository].toBool();
+        mCloseAllFilesOfRepository              = mMiscelaneousItems[close_all_files_of_repository].toBool();
+        mExperimental                           = mMiscelaneousItems[experimental].toBool();
+        mFastFileSearch                         = mMiscelaneousItems[fast_file_search].toBool();
+        mAppendToBatch                          = mMiscelaneousItems[append_to_batch].toBool();
+        mOutput2secondTextView                  = mMiscelaneousItems[output_2_second_view].toBool();
+        mSearchResultsAsSearchTree              = mMiscelaneousItems[search_results_as_tree].toBool();
 #ifdef __linux__
-        QMap<QString,QVariant> themes_map = mMiscelaneousItems[linux_theme].toMap();
+        QMap<QString,QVariant> themes_map       = mMiscelaneousItems[linux_theme].toMap();
         for (auto theme = themes_map.begin(); theme != themes_map.end(); ++theme)
         {
             if (theme.value().toBool())
@@ -1879,7 +1899,7 @@ QString MainWindow::applyGitCommandToFilePath(const QString& a_source, const QSt
             workmap.insert(Worker::work, INT(work_command));
             mWorker.doWork(QVariant(workmap));
             kill_background_thread->setToolTip(mWorker.getBatchToolTip());
-            if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
+            if (mOutput2secondTextView && mBackgroundTextView)
             {
                 showDockedWidget(mBackgroundTextView.data());
             }
@@ -2237,73 +2257,77 @@ void MainWindow::initContextMenuActions()
 
     connect(mActions.createAction(Cmd::CustomTestCommand, tr("test command"), tr("")), SIGNAL(triggered()), this, SLOT(perform_custom_command()));
 
-    create_auto_cmd(ui->ckDirectories);
-    create_auto_cmd(ui->ckFiles);
-    create_auto_cmd(ui->ckHiddenFiles);
-    create_auto_cmd(ui->ckShortState);
-    create_auto_cmd(ui->ckSymbolicLinks);
-    create_auto_cmd(ui->ckSystemFiles);
-    create_auto_cmd(ui->ckRenderGraphicFile, mActions.check_location("applications-graphics.png"));
-    create_auto_cmd(ui->ckHideEmptyParent);
-    create_auto_cmd(ui->ckFindCaseSensitive, mActions.check_location("applications-system.png"));
-    create_auto_cmd(ui->ckFindRegEx,         mActions.check_location("applications-system.png"));
-    create_auto_cmd(ui->ckFindWholeWord,     mActions.check_location("applications-system.png"));
-    create_auto_cmd(ui->ckExperimental);
-    create_auto_cmd(ui->ckFastFileSearch);
-    create_auto_cmd(ui->ckTypeConverter, mActions.check_location("format-text-direction-rtl.png"));
+    Cmd::eCmd new_id = Cmd::AutoCommand;
+    create_auto_cmd(ui->ckDirectories, new_id);
+    create_auto_cmd(ui->ckFiles, new_id);
+    create_auto_cmd(ui->ckHiddenFiles, new_id);
+    create_auto_cmd(ui->ckShortState, new_id);
+    create_auto_cmd(ui->ckSymbolicLinks, new_id);
+    create_auto_cmd(ui->ckSystemFiles, new_id);
+    create_auto_cmd(ui->ckRenderGraphicFile, new_id, mActions.check_location("applications-graphics.png"));
+    create_auto_cmd(ui->ckHideEmptyParent, new_id);
+    create_auto_cmd(ui->ckFindCaseSensitive, new_id, mActions.check_location("applications-system.png"));
+    create_auto_cmd(ui->ckFindRegEx, new_id,         mActions.check_location("applications-system.png"));
+    create_auto_cmd(ui->ckFindWholeWord, new_id,     mActions.check_location("applications-system.png"));
+    /// NOTE: free ID 511
+    /// NOTE: free ID 512
+    new_id = static_cast<Cmd::eCmd>(new_id + 3);
+    create_auto_cmd(ui->ckTypeConverter, new_id, mActions.check_location("format-text-direction-rtl.png"));
 
-    Cmd::eCmd new_id = Cmd::Invalid;
     std::vector<Cmd::eCmd> contextmenu_text_view;
     contextmenu_text_view.push_back(Cmd::Separator);
 
-    create_auto_cmd(ui->ckShowLineNumbers, mActions.check_location("x-office-document.png"), &new_id);
+    create_auto_cmd(ui->ckShowLineNumbers, new_id, mActions.check_location("x-office-document.png"));
     contextmenu_text_view.push_back(new_id);
 
     contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubFiles, Cmd::OpenFile});
-    create_auto_cmd(ui->btnStoreText, mActions.check_location("text-x-patch.png"), &new_id)->  setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_W));
+    create_auto_cmd(ui->btnStoreText, new_id, mActions.check_location("text-x-patch.png"))->  setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_W));
     mActions.getAction(new_id)->setText(tr("Save"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SaveAs, Cmd::SaveAll});
-    create_auto_cmd(ui->btnCloseText, "", &new_id)->                                           setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
+    create_auto_cmd(ui->btnCloseText, new_id)->                                               setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_S));
     mActions.getAction(new_id)->setText(tr("Close"));
     contextmenu_text_view.push_back(new_id);
     contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::CloseAll});
     contextmenu_text_view.insert(contextmenu_text_view.end(), {Cmd::ReloadAll});
 
     contextmenu_text_view.push_back(Cmd::SubFind);
-    create_auto_cmd(ui->btnFindAll, mActions.check_location("edit-find.png"), &new_id);
+    create_auto_cmd(ui->btnFindAll, new_id, mActions.check_location("edit-find.png"));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindNext, mActions.check_location("go-next.png"), &new_id)->        setShortcut(QKeySequence(Qt::Key_F3));
+    create_auto_cmd(ui->btnFindNext, new_id, mActions.check_location("go-next.png"))->        setShortcut(QKeySequence(Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->btnFindPrevious, mActions.check_location("go-previous.png"), &new_id)->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F3));
+    create_auto_cmd(ui->btnFindPrevious, new_id, mActions.check_location("go-previous.png"))->setShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_F3));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboFindBox, mActions.check_location("edit-find.png"), &new_id)->     setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_F));
+    create_auto_cmd(ui->comboFindBox, new_id, mActions.check_location("edit-find.png"))->     setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_F));
     contextmenu_text_view.push_back(new_id);
 
-    create_auto_cmd(ui->ckAppendToBatch);
-    create_auto_cmd(ui->ckIgnoredFiles);
+    /// NOTE: free ID 521
+    new_id = static_cast<Cmd::eCmd>(new_id + 2);
+    create_auto_cmd(ui->ckIgnoredFiles, new_id);
 
-    create_auto_cmd(ui->comboShowItems);
-    create_auto_cmd(ui->comboFontName);
-    create_auto_cmd(ui->comboAppStyle);
-    create_auto_cmd(ui->comboDiffTool);
-    create_auto_cmd(ui->comboOpenNewEditor);
-    create_auto_cmd(ui->comboTabPosition);
-    create_auto_cmd(ui->comboTextCodex);
-    create_auto_cmd(ui->comboToolBarStyle);
-    create_auto_cmd(ui->comboUserStyle);
-    create_auto_cmd(ui->ckAppendToBatch);
-    create_auto_cmd(ui->ckOutput2secondTextView);
-    create_auto_cmd(ui->btnFindReplace, mActions.check_location("edit-find-replace.png"), &new_id);
+    create_auto_cmd(ui->comboShowItems, new_id);
+    create_auto_cmd(ui->comboFontName, new_id);
+    create_auto_cmd(ui->comboAppStyle, new_id);
+    create_auto_cmd(ui->comboDiffTool, new_id);
+    create_auto_cmd(ui->comboOpenNewEditor, new_id);
+    create_auto_cmd(ui->comboTabPosition, new_id);
+    create_auto_cmd(ui->comboTextCodex, new_id);
+    create_auto_cmd(ui->comboToolBarStyle, new_id);
+    create_auto_cmd(ui->comboUserStyle, new_id);
+    /// NOTE: free ID 532
+    /// NOTE: free ID 533
+    new_id = static_cast<Cmd::eCmd>(new_id + 3);
+    create_auto_cmd(ui->btnFindReplace, new_id, mActions.check_location("edit-find-replace.png"));
     contextmenu_text_view.push_back(new_id);
-    create_auto_cmd(ui->comboWordWrap);
-    create_auto_cmd(ui->ckSearchResultsAsSearchTree);
-    create_auto_cmd(ui->spinFontSize);
+    create_auto_cmd(ui->comboWordWrap, new_id);
+    /// NOTE: free ID 536
+    new_id = static_cast<Cmd::eCmd>(new_id + 2);
+    create_auto_cmd(ui->spinFontSize, new_id);
 
-    create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
+    create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_L));
     mActions.getAction(new_id)->setToolTip(tr("Go to Line"));
 
-    create_auto_cmd(ui->comboFindBox, "", &new_id)->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
+    create_auto_cmd(ui->comboFindBox, new_id, "")->setShortcut(QKeySequence(Qt::ControlModifier | Qt::AltModifier | Qt::Key_E));
     mActions.getAction(new_id)->setToolTip(tr("Execute"));
 
     contextmenu_text_view.insert(contextmenu_text_view.end(), { Cmd::SubExtra, Cmd::EditToUpper, Cmd::EditToLower, Cmd::EditToggleComment, Cmd::EditToSnakeCase, Cmd::EditToCamelCase, Cmd::EditTabIndent, Cmd::EditTabOutdent });
@@ -2352,9 +2376,9 @@ void MainWindow::add_action_to_widgets(QAction * action)
     }
 }
 
-QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, Cmd::eCmd *new_id)
+QAction* MainWindow::create_auto_cmd(QWidget *widget, Cmd::eCmd &new_id, const QString& icon_path)
 {
-    const auto comand_id = mActions.createNewID(Cmd::AutoCommand);
+    const auto comand_id = mActions.createNewID(new_id);
 
     QAbstractButton*      button   = dynamic_cast<QAbstractButton*>(widget);
     QComboBox*            combobox = dynamic_cast<QComboBox*>(widget);
@@ -2396,10 +2420,8 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
     }
     mActions.setFlags(comand_id, ActionList::Flags::FunctionCmd);
 
-    if (new_id)
-    {
-        *new_id = comand_id;
-    }
+    new_id = comand_id;
+
     if (widget)
     {
         widget->addAction(action);
@@ -2428,7 +2450,7 @@ QAction* MainWindow::create_auto_cmd(QWidget *widget, const QString& icon_path, 
     {
         connect(action, SIGNAL(triggered()), spinbox, SLOT(stepUp()));
         /// NOTE: special for spin box are two actions
-        const auto comand_id2 = mActions.createNewID(Cmd::AutoCommand);
+        const auto comand_id2 = mActions.createNewID(new_id);
         action  = mActions.createAction(comand_id2, spinbox->toolTip() + tr(" down"), command, widget);
         mActions.setFlags(comand_id2, Type::IgnoreTypeStatus, Flag::set, ActionList::Data::StatusFlagEnable);
         mActions.setIconPath(comand_id2, ":/resource/24X24/window-close.png");
@@ -2494,7 +2516,7 @@ void MainWindow::delete_file_open_extension()
 bool MainWindow::handleInThread(bool force_thread)
 {
     const QAction *action = qobject_cast<QAction *>(sender());
-    if (action && (!mWorker.isBusy() || ui->ckAppendToBatch->isChecked()))
+    if (action && (!mWorker.isBusy() || mAppendToBatch))
     {
         const uint flags = action->data().toList()[ActionList::Data::Flags].toUInt();
         if ((flags & (ActionList::Flags::CallInThread|ActionList::Flags::Asynchroneous)) != 0)
@@ -2532,7 +2554,7 @@ void MainWindow::timerEvent(QTimerEvent *  event )
                 {
                     array[size-1] = 0;
                 }
-                if (ui->ckOutput2secondTextView->isChecked())
+                if (mOutput2secondTextView)
                 {
                     if (!mBackgroundTextView)
                     {
@@ -2657,7 +2679,7 @@ QTreeWidget* MainWindow::focusedTreeWidget(bool aAlsoSource)
 void MainWindow::performCustomGitActionSettings()
 {
     CustomGitActions edit_custom_git_actions(mActions, mMergeTools, mMiscelaneousItems, this);
-    edit_custom_git_actions.mExperimental = ui->ckExperimental->isChecked();
+    edit_custom_git_actions.mExperimental = mExperimental;
     edit_custom_git_actions.mExternalIconFiles = mExternalIconFiles;
 
     connect(&edit_custom_git_actions, SIGNAL(initCustomAction(QAction*)), this, SLOT(initCustomAction(QAction*)));
@@ -2893,7 +2915,7 @@ void MainWindow::comboFindBoxIndexChanged(int index)
     }
 
 
-    ui->ckFindWholeWord->setEnabled(!(ui->ckFastFileSearch->isChecked()));
+    ui->ckFindWholeWord->setEnabled(!mFastFileSearch);
     uint32_t flags = 0;
     switch(find)
     {
@@ -3259,7 +3281,7 @@ void MainWindow::find_in_tree_views(find find_item)
 QTreeWidgetItem* MainWindow::insert_file_path(QTreeWidgetItem* new_tree_root_item, const QString& current_file)
 {
     QTreeWidgetItem* new_child_item { nullptr };
-    if (ui->ckSearchResultsAsSearchTree->isChecked())
+    if (mSearchResultsAsSearchTree)
     {
         QStringList tree_items = current_file.split("/");
         new_child_item = insert_as_tree(new_tree_root_item, FindColumn::FilePath, tree_items);
@@ -3275,7 +3297,7 @@ QTreeWidgetItem* MainWindow::insert_file_path(QTreeWidgetItem* new_tree_root_ite
 
 void MainWindow::find_text_in_files()
 {
-    const bool fast_search = ui->ckFastFileSearch->isChecked();
+    const bool fast_search = mFastFileSearch;
     QString find_result;
     QString find_command;
     QString search_path    = ui->treeSource->getItemFilePath(mContextMenuSourceTreeItem);
@@ -3461,7 +3483,7 @@ void MainWindow::on_treeFindText_itemDoubleClicked(QTreeWidgetItem *item, int /*
         }
         else
         {
-            if (ui->ckSearchResultsAsSearchTree->isChecked())
+            if (mSearchResultsAsSearchTree)
             {
                 QStringList list;
                 auto function = [&list] (QTreeWidgetItem *item)

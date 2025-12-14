@@ -246,7 +246,7 @@ private:
     QDockWidget *get_first_dock_tab(FirstTab::e number=FirstTab::web_view);
 
     void     copy_file(copy command);
-    QAction* create_auto_cmd(QWidget*, const QString &icon_path="", git::Cmd::eCmd *new_id=nullptr);
+    QAction* create_auto_cmd(QWidget*, git::Cmd::eCmd &new_id, const QString &icon_path="");
     void     add_action_to_widgets(QAction * action);
     void     keyPressEvent(QKeyEvent *) override;
     void     mousePressEvent(QMouseEvent *event) override;
@@ -447,6 +447,11 @@ private:
     bool    mRestartApp { false };
     bool    m_loading_repository{ false };
     bool    mCloseAllFilesOfRepository { true };
+    bool    mExperimental { false };
+    bool    mFastFileSearch { false };
+    bool    mAppendToBatch { true };
+    bool    mOutput2secondTextView { true };
+    bool    mSearchResultsAsSearchTree { true };
     QList<QSharedPointer<ParseMessagePattern>> mMessagePatterns;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QList<QPair<QRegularExpression, QString>> mFilterPatterns;

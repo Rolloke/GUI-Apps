@@ -1211,7 +1211,7 @@ void MainWindow::perform_custom_command()
                         workmap.insert(Worker::work   , INT(Work::ApplyGitCommand));
                         mWorker.doWork(QVariant(workmap));
                         action_kbgcmd->setToolTip(mWorker.getBatchToolTip());
-                        if (ui->ckOutput2secondTextView->isChecked() && mBackgroundTextView)
+                        if (mOutput2secondTextView && mBackgroundTextView)
                         {
                             showDockedWidget(mBackgroundTextView.data());
                         }

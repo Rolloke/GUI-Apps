@@ -5,6 +5,24 @@
 #include <QObject>
 #include <QFileInfo>
 
+QVariant& string2miscelaneous_map::operator [](const QString& name)
+{
+    return item(*this, name);
+}
+
+QVariant& item(string2miscelaneous_map& map, const QString& name)
+{
+    for (auto& imap : map)
+    {
+        if (imap.first == name)
+        {
+            return imap.second;
+        }
+    }
+    map.push_back(qMakePair<QString, QVariant>(QString(name), QVariant()));
+    return map.back().second;
+}
+
 namespace git
 {
 
