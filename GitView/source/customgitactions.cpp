@@ -452,10 +452,11 @@ const QString& CustomGitActions::iconCheck(bool check)
 
 QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
 {
-    static const QString text_edit   { ":/resource/24X24/text-x-log.png" };
-    static const QString number_edit { ":/resource/24X24/emblem-generic.png" };
-    static const QString invalid     { ":/resource/24X24/dialog-error.png" };
-    static const QString menu_icon   { ":/resource/24X24/open-menu.png" };
+    static const QString text_edit    { ":/resource/24X24/text-x-log.png" };
+    static const QString number_edit  { ":/resource/24X24/emblem-generic.png" };
+    static const QString invalid      { ":/resource/24X24/dialog-error.png" };
+    static const QString menu_icon    { ":/resource/24X24/open-menu.png" };
+    static const QString caption_icon { ":/resource/24X24/folder.png" };
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     switch (variant.typeId())
@@ -472,7 +473,8 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     case QMetaType::Type::Int:
     case QMetaType::Type::LongLong: return number_edit;
     case QMetaType::Type::Bool: return iconCheck(variant.toBool());
-    default:break;
+    case QMetaType::Type::UnknownType: return caption_icon;
+    default: break;
     }
 #else
     switch (variant.type())
@@ -489,7 +491,8 @@ QString CustomGitActions::iconValueType(const QVariant& variant, bool use_text)
     case QVariant::Int:
     case QVariant::LongLong: return number_edit;
     case QVariant::Bool: return iconCheck(variant.toBool());
-    default:break;
+    case QVariant::Invalid: return caption_icon;
+    default: break;
     }
 #endif
     return invalid;
@@ -797,7 +800,7 @@ void CustomGitActions::on_tableViewVarious_clicked(const QModelIndex &index)
 #endif
             {
                 QMenu menu(this);
-                QMap<QString,QVariant> checkable_items_map = currentItem->second.toMap();
+                string2variant_map checkable_items_map = currentItem->second.toMap();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
                 bool is_bool = checkable_items_map.begin().value().typeId() == QMetaType::Type::Bool;
 #else
@@ -1220,6 +1223,29 @@ Qt::ItemFlags VariousItemModel::flags(const QModelIndex &index) const
     Qt::ItemFlags fFlags = QStandardItemModel::flags(index);
     fFlags &= ~Qt::ItemIsEditable;
     return  fFlags;
+}
+
+QVariant VariousItemModel::data(const QModelIndex& index, int role) const
+{
+    CustomGitActions* the_dlg = dynamic_cast<CustomGitActions*>(parent());
+    if (the_dlg)
+    {
+        if (role == Qt::FontRole && the_dlg->ui->comboBoxVarious->currentIndex() == CustomGitActions::VariousListIndex::Miscelaneous)
+        {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            if ((the_dlg->mMiscelaneousItems.begin() + index.row())->second.typeId() == QMetaType::Type::UnknownType)
+#else
+            if ((the_dlg->mMiscelaneousItems.begin() + index.row())->second.type() == QVariant::Invalid)
+#endif
+                {
+                QFont font = the_dlg->font();
+                font.setBold(true);
+                return font;
+            }
+        }
+    }
+
+    return QStandardItemModel::data(index, role);
 }
 
 void CustomGitActions::on_btnLoadIcons_clicked()

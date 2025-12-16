@@ -18,6 +18,7 @@
 
 class QFileInfo;
 typedef QMap<QString, bool> string2bool_map;
+typedef QMap<QString, QVariant> string2variant_map;
 
 class string2miscelaneous_map : public QList<QPair<QString, QVariant>>
 {

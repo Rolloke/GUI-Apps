@@ -63,6 +63,7 @@ class CustomGitActions : public QDialog
     }; };
 
     friend class ActionItemModel;
+    friend class VariousItemModel;
 
 public:
     explicit CustomGitActions(ActionList& aList, string2bool_map&aMergeTools, string2miscelaneous_map &aMiscItems, QWidget *parent = 0);
@@ -155,6 +156,7 @@ public:
     VariousItemModel(int rows, int columns, QObject *parent = Q_NULLPTR);
 
     Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 };
 
 #endif // CUSTOMGITACTIONS_H

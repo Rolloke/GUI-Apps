@@ -1191,40 +1191,41 @@ void MainWindow::init_miscelaneous_items(bool load)
     if (load)
     {
         std::uint32_t severity = Logger::getSeverity();
-        QMap<QString,QVariant> severity_map;
+        string2variant_map severity_map;
         for (std::uint32_t bit=1; (bit & 0x0ffff); bit <<= 1)
         {
             severity_map[Logger::getName(static_cast<Logger::eSeverity>(bit))] = QVariant((severity & bit) != 0 ? true : false);
         }
         severity_map.remove(invalid_severity);
 
+        mMiscelaneousItems[tr("Find words in text files")] = QVariant();
         mMiscelaneousItems[find_grep]                                    = QVariant(mFindGrep);
         mMiscelaneousItems[find_fsrc]                                    = QVariant(mFindFsrc);
         mMiscelaneousItems[fast_file_search]                             = QVariant(mFastFileSearch);
         mMiscelaneousItems[search_results_as_tree]                       = QVariant(mSearchResultsAsSearchTree);
+        mMiscelaneousItems[tr("Repository parameter")] = QVariant();
         mMiscelaneousItems[repository_tree_date]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::DateTime));
         mMiscelaneousItems[repository_tree_size]                         = QVariant(!ui->treeSource->isColumnHidden(QSourceTreeWidget::Column::Size));
-        mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
         mMiscelaneousItems[close_all_files_of_repository]                = QVariant(mCloseAllFilesOfRepository);
-        mMiscelaneousItems[append_to_batch]                              = QVariant(mAppendToBatch);
-        mMiscelaneousItems[output_2_second_view]                         = QVariant(mOutput2secondTextView);
-        mMiscelaneousItems[experimental]                                 = QVariant(mExperimental);
-
         mMiscelaneousItems[compare_2_items]                              = QVariant(mCompare2Items);
         mMiscelaneousItems[warn_open_file_fize]                          = QVariant(mWarnOpenFileSize);
-
+        mMiscelaneousItems[external_file_open_cmd]                       = QVariant(mExternalFileOpenCmd);
+        mMiscelaneousItems[file_copy_mime_type]                          = QVariant(mFileCopyMimeType);
+        mMiscelaneousItems[tr("Tree view icons")] = QVariant();
         mMiscelaneousItems[branch_has_siblings_not_adjoins]              = QVariant(mBranchHasSiblingsNotAdjoins);
         mMiscelaneousItems[branch_has_siblings_adjoins]                  = QVariant(mBranchHasSiblingsAdjoins);
         mMiscelaneousItems[branch_has_children_not_has_siblings_adjoins] = QVariant(mBranchHasChildrenNotHasSiblingsAdjoins);
         mMiscelaneousItems[branch_closed_has_children_has_sibling]       = QVariant(mBranchClosedHasChildrenHasSibling);
         mMiscelaneousItems[branch_open_has_children_has_sibling]         = QVariant(mBranchOpenHasChildrenHasSibling);
-
+        mMiscelaneousItems[tr("Miscelaneous parameter")] = QVariant();
+        mMiscelaneousItems[system_tray_messages]                         = QVariant(mSystemTrayMessage->isVisible());
+        mMiscelaneousItems[append_to_batch]                              = QVariant(mAppendToBatch);
+        mMiscelaneousItems[output_2_second_view]                         = QVariant(mOutput2secondTextView);
+        mMiscelaneousItems[experimental]                                 = QVariant(mExperimental);
         mMiscelaneousItems[style_path]                                   = QVariant(mStylePath);
-        mMiscelaneousItems[external_file_open_cmd]                       = QVariant(mExternalFileOpenCmd);
-        mMiscelaneousItems[file_copy_mime_type]                          = QVariant(mFileCopyMimeType);
 
 #ifdef __linux__
-        QMap<QString,QVariant> themes_map;
+        string2variant_map themes_map;
         QDirIterator iter("/usr/share/icons", {"*"}, QDir::AllEntries);
         for (; iter.hasNext(); iter.next())
         {
