@@ -4,9 +4,11 @@ This repository contains Qt Projects for several scopes
 ### GitView 
 
 App providing tools to work with git repositories.
-- displays at tree containing files and status of files
+- works with Qt5 and Qt6
+- displays a tree containing files and status of files
   - visibility of the file may depend on status
 - editing text files
+- preview of markdown and html
 - editing of binary files
 - search of text
   - in single text
@@ -15,9 +17,12 @@ App providing tools to work with git repositories.
 - preview of html and markdown files
 - shows difference of text files
   - supports several diff and merge tools
+  - difference between branches
+  - merge branches with external tools (meld, etc)
 - shows history
 - shows stash list
 - shows blame
+- shows branches
 
 
 ### RaspiMediaList
@@ -33,7 +38,7 @@ Kodi media list viewer and editor
 
 ### Oscilloscope 
 
-Oscilloscope and function generator for selectable audio devices on sound card of a PC
+Oscilloscope and function generator for selectable audio devices on sound card of a PC (Qt5)
 
 - Calibration of single channels regarding offset and amplification
 - Supports also probes with different amplification
